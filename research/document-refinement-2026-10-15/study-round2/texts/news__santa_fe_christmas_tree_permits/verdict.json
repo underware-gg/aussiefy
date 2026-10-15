@@ -1,0 +1,153 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "pre-fix-yarn": "A",
+    "current": "B",
+    "dinkum-3": "C"
+  },
+  "scores": {
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 3,
+      "tone": 5,
+      "flow": 5,
+      "variety": 4,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 3,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 5,
+      "flow": 5,
+      "variety": 4,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "pre-fix-yarn": {
+      "meaning": "\"Give us a ring for current hours\" narrows the original open-ended contact instruction to a phone call; the dates, prices and tag limits otherwise remain.",
+      "sense": "\"get first dibs\" accurately conveys priority for people unable to cut their own trees.",
+      "authenticity": "\"Chrissy tree\" and \"wildlife can find a feed\" are idiomatic Australian expressions in context.",
+      "register": "\"cos it matters\", \"first dibs\" and \"does the bush a good turn\" make the cumulative voice noticeably heavier than a light level 2.",
+      "tone": "\"there are no refunds\" and \"needs another tag\" keep the practical purchasing rules clear and serious.",
+      "flow": "\"So a 15-foot tree, for example, needs two tags\" is a smooth, helpful spoken explanation.",
+      "variety": "\"Chrissy tree\" recurs throughout nearly every section, a noticeable repeated device despite other varied idiom.",
+      "essence": "\"The permit system helps thin out thick stands of skinny little trees\" retains the distinctive forest-health explanation beyond the shopping instructions."
+    },
+    "current": {
+      "meaning": "\"from November 22 through December 20, 2024\" preserves even the source's apparently inconsistent year, while \"$10 and are non-refundable\" retains the purchase conditions.",
+      "sense": "\"needs an extra tag\" correctly expresses the additional permit requirement.",
+      "authenticity": "\"Chrissy tree permits go on sale\" is a natural Australian opening without forced idiom.",
+      "register": "\"thin out densely populated stands of small-diameter trees\" reflects mostly plain administrative prose after the opening, somewhat lighter than level 2.",
+      "tone": "\"Make sure you carefully read the overview and need-to-know information\" keeps the source's helpful official guidance.",
+      "flow": "\"Buying online through recreation.gov adds a $2.50 service fee\" reads directly and cleanly.",
+      "variety": "\"go on sale\", \"needs an extra tag\" and \"priority going to\" vary the plain conversational phrasing without repetitive tags.",
+      "essence": "\"Removing these trees in designated areas helps other trees grow larger\" keeps the conservation rationale and the original information structure."
+    },
+    "dinkum-3": {
+      "meaning": "\"there's an extra $2.50 service fee on top\" and \"a 15-foot (4.6 m) tree, say, needs two\" retain the costs and tag example with useful unit equivalents.",
+      "sense": "\"patches of feed for the wildlife\" appropriately renders areas providing forage.",
+      "authenticity": "\"have a proper read\" and \"get first dibs\" sound like natural Australian advice.",
+      "register": "\"just pop in\", \"heads up\" and \"does the bush a good turn\" make this a little more conversational than the light level-2 brief, though still controlled and clean.",
+      "tone": "\"Make sure you have a proper read of the overview and need-to-know info\" preserves the original's careful, helpful instruction.",
+      "flow": "\"Anything taller than 10 feet and/or wider than 5 inches needs an extra tag\" handles the technical limits in a readable spoken sentence.",
+      "variety": "\"Chrissie tree\" repeatedly supplies the Australian marker across headings and paragraphs, although the other expressions vary.",
+      "essence": "\"Local forest health experts pick the areas that'll benefit from thinning\" preserves the management rationale and role of expert selection."
+    }
+  },
+  "problems": {
+    "pre-fix-yarn": [
+      {
+        "quote": "Give us a ring for current hours",
+        "original": "Contact us for current hours.",
+        "severity": "minor",
+        "why": "Specifies a phone call where the original leaves the contact method open."
+      },
+      {
+        "quote": "Have a good read of the overview and the need-to-know info before you buy the permit, cos it matters",
+        "original": "It is important to carefully read the overview and need-to-know information prior to purchasing the permit.",
+        "severity": "major",
+        "why": "Together with the slang across the following sections, the voice is stronger than the requested light-touch level."
+      }
+    ],
+    "current": [
+      {
+        "quote": "Local forest health experts identify areas that benefit from thinning trees",
+        "original": "Local forest health experts identify areas that benefit from thinning trees",
+        "severity": "minor",
+        "why": "The largely unchanged administrative style leaves the requested light Australian retelling quite faint beyond the opening."
+      }
+    ],
+    "dinkum-3": [
+      {
+        "quote": "And cutting a Chrissie tree does the bush a good turn, too.",
+        "original": "Cutting a Christmas tree also improves forest health.",
+        "severity": "minor",
+        "why": "The cumulative conversational colour across the notice is a little stronger than level 2 requires."
+      }
+    ]
+  },
+  "summaries": {
+    "pre-fix-yarn": "A clear, complete practical retelling with natural local speech, but a heavier vernacular presence than requested and a small contact-method restriction.",
+    "current": "The most restrained and exact version, smoothly preserving every instruction but only faintly Australian after its first line.",
+    "dinkum-3": "A faithful, clear local retelling that keeps the practical instructions and conservation rationale; slightly more chatty than the brief."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "flow": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "variety": [
+      [
+        "current"
+      ],
+      [
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "essence": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "overall": [
+      [
+        "dinkum-3"
+      ],
+      [
+        "current"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+Rebuilt connecting prose around the technical claims, with hard bit, sorting out, look after and planned flamin' easy. Kept all headings, list markers, bold feature labels, template URLs and architecture image. Lookup confirmed flamin' as an intensifier; no declines.

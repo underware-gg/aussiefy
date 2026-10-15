@@ -47,7 +47,7 @@ new weights or add another binary to history. Before a future export, agree stor
 installation, then compare real toolkit queries as well as raw references. Do not turn the measured queries
 into training examples or remove failed references to make a gate pass.
 
-## Fresh Dinkum comparison: prepared, not run
+## Pinned Dinkum comparison and subsequent refinement
 
 [retelling-study.yaml](retelling-study.yaml) pins 20 original sources and their hashes, level/vulgarity/seed,
 explicit named document type, markup mode, Dinkum setting and unchanged historical anchor hashes. Named types
@@ -59,7 +59,9 @@ and retain accepted output and diagnostics in a local run directory. Compare `cu
 `pre-fix-yarn` with seeded blind `judge brief` packets under rubric 3; have a separate judge supply reports,
 then validate/read/tally them through the existing commands. A writer and judge may drive those CLI workflows
 as agents without a paid API, or use the live API with configured credentials. There is no Anthropic API key
-configured in this environment. Fresh writer output and independent judgement remain outstanding.
+configured at the original check. The subsequent [refinement study](../document-refinement-2026-10-15/FINDINGS.md)
+completed the fresh 20-text pass: meaning 4.95/5, register 2.00/5, all mechanical checks passing. Raw results
+and the following writer/contract-aware-evaluator refinement are retained there.
 
 The important comparison is whether the stronger verb/quote fidelity rules recover meaning while keeping the
 register regained in the earlier study. Tests, old verdicts and replayed submissions cannot answer that.
@@ -69,8 +71,8 @@ register regained in the earlier study. Tests, old verdicts and replayed submiss
 - **Custom starts bare.** Optional document behaviours are off; vocabulary, selected markup protection and
   dial limits still apply. Advanced list overrides replace lists exactly, and false/zero/empty values count.
 - **The docs use Swaggie / Dinkum / Dad.** General plus explicit Technical term protection gives them flavour
-  around preserved terms. Shared document state limits garnish; incomplete Markdown fragments do not acquire
-  sentence openers. Review whether the resulting density is right before a release.
+  around preserved terms. Shared document state limits garnish; subsequent refinement permits only leading
+  garnish in incomplete units at known source-sentence starts. Review the resulting density before release.
 - **Name aliases are explicit.** `grammar.yaml` contains the reviewed whole-phrase Christmas Trees aliases.
   Lint never infers those aliases from a word inside a person/place name. Sentence-initial name extraction
   remains an existing limitation.

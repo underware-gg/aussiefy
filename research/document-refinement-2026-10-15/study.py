@@ -29,6 +29,19 @@ from aussiefy.yarn import brief, dispatch_tool  # noqa: E402
 
 PLAN = ROOT / "research/maintenance-check-2026-10-15/retelling-study.yaml"
 RUN = HERE / "study"
+EVALUATION_PROTOCOL = 2
+CONTRACT_INSTRUCTIONS = """
+Additional experiment contract (protocol 2): apply evaluation_contract to every anonymous candidate.
+The level measures Australian vocabulary, idiomatic phrasing and cadence in eligible prose. Level 5 means
+broad Australian prose; performance and added garnish depend on the effective embellishment/document
+settings, not the level alone. Do not demand prohibited openings, insults, infixes or other garnish.
+Empty garnish does not prohibit idiomatic paraphrase within the original propositions. Judge that eligible
+body prose at the requested level; preserving facts does not justify leaving all connecting prose neutral.
+Do not penalise verbatim quotes, protected technical terms, markup or headings which the contract requires
+to remain exact. Bold prose labels are not automatically headings. Vulgarity is a cap, not a quota.
+Disabled behaviours remain disabled; nonzero profile probabilities are not exact output quotas.
+Keep the rubric's eight criteria and score each weakness once.
+"""
 
 
 def write(path: Path, value) -> None:
@@ -106,6 +119,7 @@ def prepare() -> None:
         ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(), "plan_sha256": digest(PLAN),
         "driver_sha256": digest(Path(__file__)),
         "run": RUN.name, "rubric_version": judge.Rubric.load().version,
+        "evaluation_protocol": EVALUATION_PROTOCOL,
         "engine_files": engine_snapshot(), "cases": manifest,
         "writer": "fresh Codex agent contexts using yarn tools; no historical candidates shown",
         "judge": "independent fresh Codex agent contexts; candidate names withheld"})
@@ -177,8 +191,13 @@ def packets() -> None:
                              level=item["policy"]["level"], vulgarity=item["policy"]["vulgarity"], seed=71 + index)
         frozen(d / "packet.json", encoded(packet.to_dict(rubric)))
         blind = RUN / "judge-blind" / f"{item['name']}.json"
+        payload = json.loads((d / "brief.json").read_text())["payload"]
         frozen(blind, encoded({
-            "rubric_version": rubric.version, "instructions": rubric.text(), "prompt": packet.prompt(),
+            "rubric_version": rubric.version, "evaluation_protocol": EVALUATION_PROTOCOL,
+            "evaluation_contract": {"document_config": payload["DOCUMENT_CONFIG"],
+                "profile_config": payload["PROFILE_CONFIG"], "embellishment": payload["EMBELLISHMENT"],
+                "markup": item["policy"]["markup"], "markup_rules": payload.get("MARKUP")},
+            "instructions": rubric.text() + "\n" + CONTRACT_INSTRUCTIONS, "prompt": packet.prompt(),
             "schema": packet.schema(rubric)}))
         bindings[item["name"]] = {**bound, "packet.json": digest(d / "packet.json"),
                                   "judge_packet": digest(blind)}
@@ -231,10 +250,13 @@ def collect() -> None:
                 RUN / "judge-blind" / f"{item['name']}.report.json")}
     write(RUN / "summary.json", {"status": "completed", "source_commit": data["source_commit"],
         "run": RUN.name,
+        "evaluation_protocol": data["evaluation_protocol"],
         "rubric_version": data["rubric_version"], "cases": len(verdicts), "tally": judge.tally(verdicts),
         "verification": checks,
         "limits": "One independent blind report per text; different current and historical writer contexts. "
-                  "This is a bounded comparison, not an isolated causal test of engine or model quality."})
+                  "This is a bounded comparison, not an isolated causal test of engine or model quality. "
+                  "Protocol 2 supplies the full effective contract; scores from earlier level/vulgarity-only "
+                  "packets are not directly comparable."})
     print(json.dumps(judge.tally(verdicts), indent=2))
 
 

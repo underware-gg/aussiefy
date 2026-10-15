@@ -32,6 +32,30 @@ def test_a_light_clean_guide_has_no_performing_or_swearing_advice(translator):
     assert "2026-10-11" not in full, "provenance belongs in the YAML's comments"
 
 
+@pytest.mark.parametrize("kind,config,vulgarity,expected", [
+    ("general", {}, 1, 1),
+    ("general", {"garnish": []}, 1, 0),
+    ("custom", {}, 1, 0),
+    ("news", {}, 1, 0),
+    ("official", {}, 1, 0),
+    ("custom", {"garnish": ["infix"]}, 1, 1),
+    ("custom", {"garnish": ["infix"], "profile": {"swearing": {"infix": 0}}}, 1, 0),
+    ("custom", {"garnish": ["infix"], "profile": {"swearing": {"infix": 0.3}}}, 1, 1),
+    ("general", {}, 0, 0),
+])
+def test_infix_advice_obeys_exact_behaviour_controls(kind, config, vulgarity, expected, translator):
+    from aussiefy.yarn import brief
+
+    args = dict(level=5, vulgarity=vulgarity, embellishment="dinkum", document_type=kind,
+                document_config=config, translator=translator)
+    guide = harness.guide(**args)
+    session = brief("The package works.", **args)
+    assert guide["voice"].startswith("Full Aussie:")
+    assert session.payload["LEVEL"] == 5
+    for text in (guide["craft"], session.system):
+        assert text.count("Swear inside the sentence") == expected
+
+
 def test_the_workflow_names_each_surfaces_tools_in_order():
     data = style_guide_data()
     for surface, plan in (("cli", "aussiefy plan"), ("mcp", "aussie_plan"), ("python", "(plan)")):

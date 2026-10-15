@@ -151,4 +151,6 @@ def guide(*, level: int | str = 5, vulgarity: int | str | None = None, embellish
     return {**eff.envelope(), **context.envelope(pol.embellishment),
             "embellishment": e.step, "embellishment_name": e.name, "embellishment_guidance": e.guidance,
             "voice": data.levels[eff.level], "language": data.language[eff.vulgarity],
-            "craft": data.craft_for(eff.level, eff.vulgarity, perform=e.perform, infix=e.takes("infix")), "workflow": data.workflow_for("python")}
+            "craft": data.craft_for(eff.level, eff.vulgarity, perform=e.perform,
+                                     infix=e.takes("infix") and eff.swearing.infix > 0),
+            "workflow": data.workflow_for("python")}

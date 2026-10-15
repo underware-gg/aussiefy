@@ -1,0 +1,152 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "pre-fix-yarn": "A",
+    "current": "B",
+    "dinkum-3": "C"
+  },
+  "scores": {
+    "pre-fix-yarn": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 2,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 5,
+      "sense": 4,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 5,
+      "flow": 5,
+      "variety": 4,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "pre-fix-yarn": {
+      "meaning": "\"`tgeTimestamp()` returns `1787148023`\" and \"Getting through verification didn't guarantee eligibility or an allocation\" preserve the exact status and eligibility caveat; prices, dates, links and notices remain intact.",
+      "sense": "\"take the sting out of sniping\" accurately conveys mitigating sniping without promising its elimination.",
+      "authenticity": "\"That one's done and dusted\" and \"have a squiz\" sound like natural Australian explanations.",
+      "register": "\"had a go\", \"kicked in\", \"Nah\" and \"Yep\" sustain a medium local voice while exact technical statements stay clear, matching level 3.",
+      "tone": "\"You can't put in a new bid\" and \"Nobody can tell you what future market prices will be\" keep the firm factual cautions under the conversational voice.",
+      "flow": "\"The minimum price for each period after that is whichever is higher\" explains the price rule fluently in spoken language.",
+      "variety": "\"up and running\", \"off the ground\", \"done and dusted\" and \"take the sting out\" vary the idiom across a long FAQ.",
+      "essence": "\"Claiming and general FOLD transferability are two separate things\" preserves a defining distinction, with the original FAQ, table, warnings and navigation structure intact."
+    },
+    "current": {
+      "meaning": "\"The minimum price for each subsequent period is the greater of the original floor price\" retains the exact auction rule, with all timings, eligibility limits and notices also preserved.",
+      "sense": "\"have a squiz\" correctly points the reader to further details, and \"longer-term on-chain liquidity off the ground\" appropriately conveys bootstrapping.",
+      "authenticity": "\"Here’s the rundown\" and \"Stick to\" are natural, unforced conversational choices.",
+      "register": "\"Participants submit bids through the official Uniswap CCA interface\" exemplifies largely unchanged formal exposition, with only scattered local markers, below the medium level-3 brief.",
+      "tone": "\"There’s no predicting future market prices\" keeps the unequivocal risk statement and factual explanatory tone.",
+      "flow": "\"The CCA distributes tokens as it goes, with a uniform price within each period\" is clear and smooth aloud.",
+      "variety": "\"rundown\", \"Nah\", \"Yep\" and \"have a squiz\" provide varied touches without an overused tag.",
+      "essence": "\"Getting through verification didn’t guarantee eligibility or an allocation\" and \"Claiming and general FOLD transferability are two separate actions\" preserve the central distinctions and caveats."
+    },
+    "dinkum-3": {
+      "meaning": "\"50% of proceeds were locked in for long-term on-chain liquidity support\" retains the proportion and purpose, while \"`tgeTimestamp()` returns `1787148023`\" preserves the exact active-status evidence.",
+      "sense": "\"take the wind out of sniping\" strains an idiom normally completed with sails; \"locked in\" is also slightly ambiguous for a commitment in a blockchain context.",
+      "authenticity": "\"gave long-term on-chain liquidity a leg-up\" and \"Bids that get up\" are credible Australian conversational usages.",
+      "register": "\"Nah, nah\", \"done and dusted\" and \"Not ever\" make the cumulative retelling slightly more emphatic and colloquial than a medium level 3, while staying within vulgarity 1.",
+      "tone": "\"You can't put in a new bid now\" and \"Nobody can tell you where future market prices will go\" retain the important cautions plainly.",
+      "flow": "\"For each following period, the minimum price is whichever's higher\" reads naturally while preserving the conditional comparison.",
+      "variety": "\"Nah, nah\", \"Not ever\" and \"only ever\" repeat emphatic add-ons that become noticeable, despite a good spread of other idioms.",
+      "essence": "\"Claiming and general FOLD transferability are two different things\" keeps the defining distinction, and \"## Important Information\" retains the legal-notice block and the FAQ's architecture."
+    }
+  },
+  "problems": {
+    "pre-fix-yarn": [],
+    "current": [
+      {
+        "quote": "The minimum price for each subsequent period is the greater of the original floor price or",
+        "original": "The minimum price for each subsequent period is the greater of the original floor price or",
+        "severity": "major",
+        "why": "Much of the body remains formal source-like exposition, leaving the requested medium Australian retelling thin despite occasional local phrases."
+      }
+    ],
+    "dinkum-3": [
+      {
+        "quote": "take the wind out of sniping",
+        "original": "mitigate sniping",
+        "severity": "minor",
+        "why": "An incomplete adaptation of take the wind out of someone's sails; the sense is recoverable but the expression strains."
+      },
+      {
+        "quote": "locked in",
+        "original": "committed",
+        "severity": "minor",
+        "why": "In a token FAQ this can suggest a technical lock on funds rather than simply a commitment."
+      },
+      {
+        "quote": "Nah, nah.",
+        "original": "No.",
+        "severity": "minor",
+        "why": "Together with added emphatic endings such as Not ever, this makes the voice a little heavier and more repetitive than the medium brief."
+      }
+    ]
+  },
+  "summaries": {
+    "pre-fix-yarn": "A complete, natural medium Australian retelling that handles the auction mechanics, eligibility, live status and safety notices without losing precision or structure.",
+    "current": "Exceptionally clear and precise, preserving the full FAQ, but only lightly retold relative to the requested medium Australian register.",
+    "dinkum-3": "A full and engaging Australian FAQ that preserves the mechanics and warnings, with slightly excessive emphasis and a couple of less exact idiomatic choices."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "flow": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "variety": [
+      [
+        "pre-fix-yarn",
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ],
+    "essence": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "overall": [
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "current"
+      ]
+    ]
+  }
+}

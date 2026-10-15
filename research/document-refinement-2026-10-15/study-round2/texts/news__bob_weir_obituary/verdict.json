@@ -1,0 +1,159 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "dinkum-3": "B",
+    "pre-fix-yarn": "C"
+  },
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 3,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 4,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "The cause, chronology and activities survive, including \"They didn't say what date Weir died.\" and the complete list of groups.",
+      "sense": "\"kept a hand in the Bay Area music scene\" and \"backing vocals\" retain the intended involvement and musical roles.",
+      "authenticity": "\"muso\" and \"tried his hand at a solo career\" are unobtrusive, natural Australian usage.",
+      "register": "\"American muso\" supplies only a light regional touch; much of the account remains close to neutral reporting for level 3.",
+      "tone": "\"announced he'd died with loved ones around him\" preserves the obituary's respectful sobriety.",
+      "flow": "\"Weir took up guitar at 13 and was drawn to the local bluegrass scene.\" reads cleanly, with shorter sentences easing the biographical detail.",
+      "variety": "\"Away from playing music\" and \"From the 1970s\" vary the transitions without a recurring catchphrase.",
+      "essence": "\"which the Library of Congress recognised as a national treasure in 1997\" preserves the detailed career retrospective and its landmarks."
+    },
+    "dinkum-3": {
+      "meaning": "Most detail is intact, but \"a fixture at every Grateful Dead gig\" turns a concert staple into a claim about every performance.",
+      "sense": "\"had a crack at everything from country rock to jam band\" uses the idiom in its ordinary exploratory sense.",
+      "authenticity": "\"with a stint at school in Colorado\" and \"a fair few other groups\" sound conversational and locally credible.",
+      "register": "\"had a crack\" and \"kept his hand in\" give a sustained moderate Australian voice without unnecessary swearing.",
+      "tone": "\"has died surrounded by loved ones\" sets a respectful frame that continues through the relaxed career account.",
+      "flow": "\"Off the stage, Weir also set up Tamalpais Research Institute\" makes an easy transition; the long group sentence remains readily speakable.",
+      "variety": "\"all sorts of groups\", \"a stint\" and \"getting behind several causes\" provide a varied idiomatic vocabulary.",
+      "essence": "\"the Grateful Dead anthem\" and \"co-owning the venue Sweetwater Music Hall\" keep both the public legacy and local involvement."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"a fixture at every Grateful Dead concert\" introduces an absolute, while \"helping people doing it tough\" broadens the specific poverty-relief cause.",
+      "sense": "\"had a crack at a solo career\" and \"a whole swag of other bands\" fit their respective senses of trying and numerous projects.",
+      "authenticity": "\"for yonks\" and \"picked up the guitar at 13\" are plausible spoken Australian English rather than fabricated slang.",
+      "register": "\"a whole swag\", \"fair few\" and \"old Grateful Dead mates\" sustain the moderate colloquial register requested.",
+      "tone": "\"The old Grateful Dead guitarist\" and \"for yonks\" make the remembrance slightly breezier, although it remains broadly respectful.",
+      "flow": "\"He picked up the guitar at 13 and found his way into the local bluegrass scene\" has a natural spoken rhythm.",
+      "variety": "\"own outfit\", \"long solo run\" and \"Away from the stage\" supply varied phrasing without an intrusive repeated tag.",
+      "essence": "\"the Tamalpais Research Institute\" and the detailed catalogue of groups preserve the obituary's expansive portrait."
+    }
+  },
+  "problems": {
+    "current": [
+      {
+        "quote": "American muso",
+        "original": "American musician",
+        "severity": "major",
+        "why": "The overall vernacular weight is noticeably light for level 3; this isolated regional term represents the broader under-retelling."
+      }
+    ],
+    "dinkum-3": [
+      {
+        "quote": "a fixture at every Grateful Dead gig",
+        "original": "a staple of Grateful Dead concerts",
+        "severity": "minor",
+        "why": "Every gig is an unsupported absolute; the original describes a commonly played song."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "a fixture at every Grateful Dead concert",
+        "original": "a staple of Grateful Dead concerts",
+        "severity": "minor",
+        "why": "The source does not establish that the song appeared at every concert."
+      },
+      {
+        "quote": "helping people doing it tough",
+        "original": "poverty relief",
+        "severity": "minor",
+        "why": "This can cover adversity beyond poverty and weakens the specificity of the advocacy."
+      },
+      {
+        "quote": "The old Grateful Dead guitarist",
+        "original": "The former guitarist and vocalist of the rock band Grateful Dead",
+        "severity": "minor",
+        "why": "Old sounds more offhand and potentially age-focused than former in this obituary."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "Accurate, restrained and fluent obituary; natural language but a lighter Aussie register than requested.",
+    "dinkum-3": "Best balance of respectful remembrance, readable vernacular and the requested weight; one small factual overstatement.",
+    "pre-fix-yarn": "Lively, largely faithful and natural, with a small loss of solemnity and precision."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ],
+    "flow": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "overall": [
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "current"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,159 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "dinkum-3": "B",
+    "pre-fix-yarn": "C"
+  },
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 1,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 4,
+      "register": 5,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 4,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"more than 20,000 Kurds\" and \"The proclamation was signed on October 6, 2026.\" retain the key figures, dates, attribution and civic recognition.",
+      "sense": "\"lobbed in the United States\" correctly means arrived, and \"keep its language, culture and traditions alive\" retains preservation.",
+      "authenticity": "\"now call Nashville home\" and \"what they've put into\" are natural conversational expressions.",
+      "register": "\"The proclamation also recognises the longstanding relationship\" remains formal institutional prose; one \"lobbed in\" is far short of level 5.",
+      "tone": "\"It honours what they've put into the city's cultural, social and economic development\" keeps the celebratory and respectful stance.",
+      "flow": "\"Many went on to settle in Nashville, Tennessee. Others set up communities\" is clear, balanced and easy to read aloud.",
+      "variety": "\"singles out\", \"points to\" and \"call Nashville home\" vary expressions without habitual tags.",
+      "essence": "\"led the official recognition of the anniversary, working with other councillors\" preserves the civic proclamation's shape and specific agency."
+    },
+    "dinkum-3": {
+      "meaning": "\"while the rest set up communities\" makes the destination split exhaustive, whereas the source says only others; the remaining dates and claims are retained.",
+      "sense": "\"puttin' down roots\" fits settlement and \"gives the Kurdish community a big rap\" fits praise.",
+      "authenticity": "\"got its mitts on\" and \"pitched in together\" are coherent colloquialisms, though repeated eye dialect such as \"everythin'\" feels performed.",
+      "register": "\"So get this\" and \"the first mob\" establish a sustained full-yarn register appropriate to level 5, without any need to exhaust the swear allowance.",
+      "tone": "\"a proper pat on the back\" and \"a big rap\" preserve the original's positive recognition in an informal celebratory voice.",
+      "flow": "\"has gone and officially marked\" sits inside a long opening sentence, making the first paragraph more cumbersome aloud than the rest.",
+      "variety": "\"puttin' down roots\", \"a big rap\", \"real hub\" and \"hand in glove\" give a broad idiomatic range.",
+      "essence": "\"The bloke behind it was Metropolitan Nashville Council member Mike Cortese\" preserves the named civic organiser as well as the community achievements."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"while others set up their own communities\" keeps the qualified destination account, and \"more than 20,000 Kurds\" retains the scale and source attribution.",
+      "sense": "\"got the official recognition of the anniversary up\" naturally conveys successfully organising it, while \"looks after District 4\" conveys representation.",
+      "authenticity": "\"first lot\", \"got its mitts on\" and \"proper hub\" are credible colloquial choices; the conspicuous \"culture 'n traditions\" spelling adds a staged touch.",
+      "register": "\"first mob\", \"lobbed in\" and \"got the official recognition of the anniversary up\" sustain the requested strong vernacular throughout.",
+      "tone": "\"how hard the Kurdish community's worked\" and \"a big wrap\" maintain the honouring of contributions and cultural preservation.",
+      "flow": "\"The city's turned into a proper hub for Kurdish culture and community life\" is readily speakable, and the longer paragraphs have clear joins.",
+      "variety": "\"Goin' by\", \"gives a shout-out\", \"proper hub\" and \"got the official recognition of the anniversary up\" vary the wording without a dominant catchphrase.",
+      "essence": "\"workin' alongside other councillors\" keeps the collaborative civic act, and the preserved final signature date completes the original structure."
+    }
+  },
+  "problems": {
+    "current": [
+      {
+        "quote": "The proclamation also recognises the longstanding relationship between the United States and Kurdistan.",
+        "original": "The proclamation also recognizes the longstanding relationship between the United States and Kurdistan",
+        "severity": "major",
+        "why": "The predominantly formal reporting, represented here, fails to reach the requested full pub-yarn register."
+      }
+    ],
+    "dinkum-3": [
+      {
+        "quote": "while the rest set up communities",
+        "original": "while others established communities",
+        "severity": "minor",
+        "why": "Rest asserts all remaining families followed this route, which the source does not establish."
+      },
+      {
+        "quote": "has gone and officially marked the 50th anniversary",
+        "original": "has officially recognized the 50th anniversary",
+        "severity": "minor",
+        "why": "The opening piles conversational framing into an already long sentence, weakening oral flow."
+      },
+      {
+        "quote": "everythin' they've chipped in",
+        "original": "their contributions",
+        "severity": "minor",
+        "why": "The pervasive dropped-ending spellings add a performed quality to otherwise natural speech."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "culture 'n traditions",
+        "original": "culture, and traditions",
+        "severity": "minor",
+        "why": "The recurring eye dialect makes an otherwise convincing oral voice look somewhat performed."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "Faithful, fluent and respectful, but with a very light retelling that misses the level-5 brief.",
+    "dinkum-3": "A spirited, respectful full yarn with good idiomatic range, a crowded opening and one small unsupported absolute.",
+    "pre-fix-yarn": "The best fit: complete, celebratory and strongly colloquial, with only a slight eye-dialect mannerism."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "flow": [
+      [
+        "current",
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "overall": [
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "current"
+      ]
+    ]
+  }
+}

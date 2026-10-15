@@ -1,0 +1,173 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "dinkum-3": "B",
+    "pre-fix-yarn": "C"
+  },
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 2,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 5,
+      "flow": 4,
+      "variety": 4,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 5,
+      "sense": 4,
+      "authenticity": 4,
+      "register": 5,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"1/4 percentage point to 3-3/4 to 4 per cent\" and \"unanimously voted\" preserve amounts and voting; the full directives, membership and meeting dates remain.",
+      "sense": "\"domestic spending held up\" retains resilience and \"After the discussion wrapped up\" correctly renders the conclusion of discussion.",
+      "authenticity": "\"After the discussion wrapped up\" and \"domestic spending held up\" are unforced expressions an Australian could naturally use.",
+      "register": "\"They also reaffirmed the FOMC's policy\" and \"It was agreed the Committee would meet next\" remain formal minutes with only a few conversational touches, well below level 4.",
+      "tone": "\"The Committee stressed its continuing resolve\" preserves the policy seriousness and certainty.",
+      "flow": "\"The vote also approved the statement below for release at 2:00 p.m.\" is clean and direct; splitting the introductory paragraph improves readability.",
+      "variety": "\"lift\", \"wrapped up\" and \"In line with\" supply unobtrusive variation without a habitual tag.",
+      "essence": "\"Notation Vote\" and the intact operational directive preserve the document's formal decision record, rather than reducing it to a policy summary."
+    },
+    "dinkum-3": {
+      "meaning": "\"until it's told otherwise\" and \"effective September 17, 2026\" preserve ongoing authority and effective dates; the financial operations and unanimous votes remain complete.",
+      "sense": "\"hardly budged\" correctly describes unchanged unemployment and \"dead set on hitting\" retains resolve rather than changing the policy goal.",
+      "authenticity": "\"at a solid clip\" and \"gave the nod\" are natural colloquial choices rather than stage accents.",
+      "register": "\"stuck by\", \"dead set\" and \"bump the interest rate paid on reserve balances up\" establish a substantial colloquial voice, though the closing notation section stays rather neutral for level 4.",
+      "tone": "\"made it plain it's still dead set on hitting its dual-mandate goals\" keeps the statement's firm policy intent under the informal language.",
+      "flow": "\"give a 1/4 percentage point increase in the primary credit rate the nod\" separates the idiom's parts awkwardly around technical detail.",
+      "variety": "\"gave the nod\" recurs as \"give a 1/4 percentage point increase in the primary credit rate the nod\", and \"wrapped up\" is used for both discussion and meeting; the repetition is noticeable but limited.",
+      "essence": "\"Voting against this action: None.\" and the retained directives preserve the record of decisions, authority and implementation."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"every member gave the nod\" and the intact \"per-counterparty limit of $160 billion per day\" retain unanimity and detailed operations; the statement, names and dates remain.",
+      "sense": "\"doubled down on the FOMC's policy\" adds intensification to reaffirming an existing policy; most terms otherwise preserve their intended sense.",
+      "authenticity": "\"done and dusted\" and \"put it in black and white\" fit local speech, but \"give the tick to\" is an awkward version of the usual idiom.",
+      "register": "\"What the Committee Did\", \"barely budged\" and \"the Committee would get together next\" sustain the strong vernacular frame requested at level 4.",
+      "tone": "\"To show they meant business on the dual-mandate goals\" keeps the firm policy commitment; the relaxed narration does not turn the decisions into a joke.",
+      "flow": "\"inflation was still sitting up high next to the Committee's 2 per cent goal\" is an awkward spatial comparison, though the operational sections remain clear.",
+      "variety": "\"gave the nod\", \"doubled down\", \"chugging along\", \"black and white\" and \"signed off\" provide broad idiomatic variety.",
+      "essence": "\"The same vote also signed off on the statement below\" and \"Notation Vote\" preserve the minutes' progression from policy discussion to implementation and formal approvals."
+    }
+  },
+  "problems": {
+    "current": [
+      {
+        "quote": "They also reaffirmed the FOMC's policy of keeping ample reserves in the banking system.",
+        "original": "reaffirmed the FOMC's policy of maintaining ample reserves in the banking system",
+        "severity": "major",
+        "why": "The narrative remains largely formal, missing the heavier vernacular requested at level 4."
+      }
+    ],
+    "dinkum-3": [
+      {
+        "quote": "give a 1/4 percentage point increase in the primary credit rate the nod",
+        "original": "approve a 1/4 percentage point increase in the primary credit rate",
+        "severity": "minor",
+        "why": "The long technical object makes the separated idiom cumbersome aloud."
+      },
+      {
+        "quote": "The meeting wrapped up",
+        "original": "The meeting adjourned",
+        "severity": "minor",
+        "why": "Wrapped up repeats the earlier discussion transition, alongside repeated nod phrasing, reducing variety."
+      },
+      {
+        "quote": "By notation vote completed on August 18, 2026,",
+        "original": "By notation vote completed on August 18, 2026,",
+        "severity": "minor",
+        "why": "The final narrative section drops back to unchanged formal prose, slightly lighter than the sustained level-4 brief."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "doubled down on",
+        "original": "reaffirmed",
+        "severity": "minor",
+        "why": "Doubled down suggests an intensified commitment beyond simply confirming an existing policy."
+      },
+      {
+        "quote": "give the tick to",
+        "original": "approve",
+        "severity": "minor",
+        "why": "The idiom sounds strained; give a tick to or give the tick of approval would be more natural."
+      },
+      {
+        "quote": "sitting up high next to the Committee's 2 per cent goal",
+        "original": "remained elevated relative to the Committee's 2 percent goal",
+        "severity": "minor",
+        "why": "The stacked spatial wording is cumbersome aloud and makes the comparison less direct."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "Very precise and readable minutes, with a markedly lighter voice than requested.",
+    "dinkum-3": "Accurate and idiomatic, with a good strong conversational frame; a few repeated or stretched idioms keep it from feeling wholly effortless.",
+    "pre-fix-yarn": "Meets the stronger voice most consistently and retains the record, but several idioms are less exact or natural than B."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "flow": [
+      [
+        "current"
+      ],
+      [
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "overall": [
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "current"
+      ]
+    ]
+  }
+}

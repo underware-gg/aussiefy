@@ -1,0 +1,171 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "dinkum-3": "B",
+    "pre-fix-yarn": "C"
+  },
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 4,
+      "register": 2,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 4,
+      "register": 5,
+      "tone": 5,
+      "flow": 4,
+      "variety": 4,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 4,
+      "authenticity": 3,
+      "register": 5,
+      "tone": 4,
+      "flow": 3,
+      "variety": 4,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"four of the twenty-one quadrilles\" and \"He may take up the call of the footlights\" retain the numbers and uncertainty alongside all the event details.",
+      "sense": "\"lob in New York\" means arrive and \"chipped in several old-time tunes\" preserves contributing music.",
+      "authenticity": "\"Tuesday night do\" and \"along with the missus\" are credible colloquial choices, though \"brand-spankin'-new\" feels rather showy in otherwise restrained prose.",
+      "register": "\"first big go\" offers a light adaptation; most narration such as \"The reports added that the hope\" remains far short of a level-5 pub yarn.",
+      "tone": "\"Mr. Ford exclaimed\" and the preserved enthusiastic reply retain the report's upbeat curiosity.",
+      "flow": "\"He was meant to be at the Tuesday night do. But the plans changed\" breaks the crowded original into easy spoken units.",
+      "variety": "\"catch on\", \"chipped in\" and \"lob in\" vary the idioms without a repeated verbal crutch.",
+      "essence": "\"help Henry Ford make square dances popular again\" preserves the connecting purpose of the Detroit and New York events."
+    },
+    "dinkum-3": {
+      "meaning": "\"he might just answer the call of the footlights\" retains the possible contract, and \"Word last night\" keeps the management report attributed.",
+      "sense": "\"first big crack at it\" and \"rock up at the Tuesday night do\" convey attempt and attendance correctly.",
+      "authenticity": "\"more people get keen on 'em\" sounds idiomatic, though the pervasive phonetic endings in \"bein' got ready for publishin'\" look performed.",
+      "register": "\"Now,\" and \"And the hope, so they reckon\" frame a sustained oral retelling suited to level 5; the permitted vulgarity need not be used.",
+      "tone": "\"Mr. Ford sang out\" keeps his spirited enthusiasm and the gently entertaining news character.",
+      "flow": "\"He was meant to rock up at the Tuesday night do as well. But the plans got changed\" gives the change of plan a clear, easy rhythm.",
+      "variety": "\"big crack\", \"rock up\" and \"front up\" provide variety, although dropped-g spellings recur conspicuously.",
+      "essence": "\"help Henry Ford along in makin' square dances popular again\" retains the historical report's purpose and colourful fiddler subplot."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"They reckon puttin' on this dance should help Henry Ford along with gettin' square dances goin' again\" softens a specific hope of renewed popularity into restarting the dances.",
+      "sense": "\"Mr. Ford fair shot back\" introduces a slightly defensive sense to the simple exclamation; most other idioms fit.",
+      "authenticity": "\"more punters'll get keen on 'em\" is plausible, but \"of them pieces that's bein' got ready to print\" feels like a deliberately constructed rustic voice.",
+      "register": "\"his first big crack at it'll be Tuesday night\" and \"Dunham'll lob\" sustain the strong yarn register without exceeding vulgarity 2.",
+      "tone": "\"fair shot back\" adds a little combativeness to the report, but the lively dance-revival character remains.",
+      "flow": "\"who's been stayin' as Mr. Ford's guest for a week\" begins a very long embedded sentence that buries the planned appearance.",
+      "variety": "\"big crack\", \"rock up\", \"lob\" and \"punters\" vary the vocabulary, though the phonetic ticks dominate the surface.",
+      "essence": "\"sign up for a vaudeville contract\" retains the distinctive detour from Ford's dance event into the fiddler's possible stage career."
+    }
+  },
+  "problems": {
+    "current": [
+      {
+        "quote": "The reports added that the hope in putting on the dance was to help Henry Ford make square dances popular again.",
+        "original": "It was added that in putting on this dance it was hoped to further Henry Ford's purpose in making square dances again popular.",
+        "severity": "major",
+        "why": "This neutral report style is representative of an adaptation much lighter than the requested full pub-yarn voice."
+      }
+    ],
+    "dinkum-3": [
+      {
+        "quote": "bein' got ready for publishin'",
+        "original": "now being prepared for publication",
+        "severity": "minor",
+        "why": "A sustained layer of phonetic spellings makes the voice feel performed and adds visual friction, despite otherwise plausible idioms."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "Mr. Ford fair shot back",
+        "original": "Mr. Ford exclaimed",
+        "severity": "minor",
+        "why": "The reply sounds defensive rather than simply enthusiastic."
+      },
+      {
+        "quote": "of them pieces that's bein' got ready to print",
+        "original": "of such pieces now being prepared for publication",
+        "severity": "major",
+        "why": "The conspicuously rustic grammar and eye dialect feel staged rather than naturally Australian."
+      },
+      {
+        "quote": "gettin' square dances goin' again",
+        "original": "making square dances again popular",
+        "severity": "minor",
+        "why": "Renewed activity is less specific than renewed popularity."
+      },
+      {
+        "quote": "\"Mellie\" Dunham, the champion fiddler of Maine, who's been stayin' as Mr. Ford's guest for a week,",
+        "original": "\"Mellie\" Dunham, the champion fiddler of Maine, who has been the guest of Mr. Ford for a week,",
+        "severity": "minor",
+        "why": "Keeping the extended embedded construction makes the colloquial sentence cumbersome aloud."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "Complete, very readable and accurate, but substantially too restrained for level 5.",
+    "dinkum-3": "The strongest full-yarn version: faithful and spirited, with some overworked eye dialect.",
+    "pre-fix-yarn": "Strong enough in register and broadly faithful, but strained grammar and a crowded sentence weaken the delivery."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ],
+    "flow": [
+      [
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ],
+    "variety": [
+      [
+        "current"
+      ],
+      [
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "overall": [
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "current"
+      ]
+    ]
+  }
+}

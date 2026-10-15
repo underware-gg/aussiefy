@@ -169,3 +169,17 @@ def test_writer_origin_metadata_is_bound_to_issued_packet(study):
     study.write(origin, {"kind": "changed"})
     with pytest.raises(ValueError, match="issued packet evidence changed"):
         study.check("case")
+
+
+def test_blind_evaluator_receives_complete_frozen_contract_without_candidate_key(study):
+    study.packets()
+    packet = json.loads((study.RUN / "judge-blind/case.json").read_text())
+    payload = json.loads((study.RUN / "texts/case/brief.json").read_text())["payload"]
+    assert packet["evaluation_protocol"] == study.manifest()["evaluation_protocol"] == 2
+    contract = packet["evaluation_contract"]
+    assert contract["document_config"] == payload["DOCUMENT_CONFIG"]
+    assert contract["profile_config"] == payload["PROFILE_CONFIG"]
+    assert contract["embellishment"] == payload["EMBELLISHMENT"]
+    assert contract["markup"] == "text" and contract["markup_rules"] is None
+    assert not {"key", "names", "labels"} & packet.keys()
+    assert "anchor-one" not in json.dumps(packet) and "anchor-two" not in json.dumps(packet)

@@ -9,6 +9,9 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Remove duplicated ungated infix advice from guide/yarn prompts; swear\-infix guidance now follows placement
+  permission'n the effective multiplier, including zero. Retain the first full retelling comparison and
+  add contract\-aware evaluation.
 - Preserve straight double\-quoted documents across paragraph breaks, matching curly quotes. Translation,
   lint, verification'n yarn submission now share that recognition while retaining ordinary dialect checks.
 - Refine documentation flavour with explicit publication controls, exact quoted examples'n neutral person

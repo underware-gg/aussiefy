@@ -99,7 +99,8 @@ The comparison uses the unchanged 20-case [pinned study](../maintenance-check-20
 Fresh writers receive original sources and current yarn briefs, not historical candidates. Separate fresh
 judge contexts receive key-free blind packets under rubric 3. The two historical anchors remain byte-pinned.
 Accepted submissions, diagnostics, reports, source/engine hashes and deterministic verification are retained.
-No scores from that fresh comparison are claimed until all outputs and reports are collected and validated.
+Round two is complete: meaning scored 4.95/5, register 2.00/5, and all 20 deterministic checks passed.
+[FINDINGS.md](FINDINGS.md) retains the poor register result, anchor comparison, methodology and limits.
 
 The local `study.py` driver prepares the frozen brief/source/policy and complete engine-file set, replays
 retained tool diagnostics and final acceptance through the canonical yarn session, then issues write-once
@@ -133,8 +134,25 @@ Recomputed briefs change only for FOMC. Its original writer read the new brief a
 submitted the text. The other 19 may carry forward only after exact brief comparison and fresh canonical
 tool execution under the newly frozen engine. Per-case writer-origin metadata records that lineage and is
 bound to the issued packets. These are reused fresh outputs from this study, not newly authored round-two
-texts. The independent blind comparison remains pending until round two is frozen and judged.
+texts. The independent blind comparison then completed against the frozen round-two engine.
 
 The quote-fix full gate exited 0: **1,836 passed / 2 expected local skips in 444.34s**. Ruff, publication
 freshness/links and provenance with actual wheel inspection passed. Golden outputs are unchanged.
 Independent design review converged cleanly, with 38 quote/study-integrity tests independently passing.
+
+## Controlled third refinement: voice and evaluation contract
+
+Both writers identified their own over-restraint: the settings permit idiomatic body paraphrase even with
+empty garnish. They are deliberately revisiting all 20 texts with the same dials and protections. Removing
+duplicated ungated infix advice fixes a separate configuration contradiction; the original gated advice
+remains. No higher flavour score is attributed to that correction before measurement.
+
+Research evaluation protocol 2 includes the effective document/profile/embellishment/markup contract in
+key-free packets, bound to their hashes. It clarifies broad eligible vocabulary versus optional performance.
+The rubric-three criterion definitions and historical anchors remain unchanged; scores across the old and
+new packet protocols are not directly comparable. Raw round-two reports are retained. A general production
+judge-context API remains separate work.
+
+The guidance/protocol slice's final full gate exited 0: **1,846 passed / 2 expected local skips in
+501.88s**. The final focused run passed 154 cases. Ruff, 40-output publication freshness/links and
+provenance with actual wheel inspection passed. Independent design review has no outstanding findings.

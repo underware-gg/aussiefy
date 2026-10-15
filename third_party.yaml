@@ -86,6 +86,16 @@ credits:
     expect:
       wordnet: WordNet 3.0
 first_party:
+- glob: research/document-refinement-2026-10-15/study-round2/manifest.json
+  reason: Project experiment settings, source paths and frozen input/engine/driver hashes; no copied source prose.
+- glob: research/document-refinement-2026-10-15/study-round2/packets-manifest.json
+  reason: Project evidence hashes binding immutable blind packets to accepted submissions and writer lineage.
+- glob: research/document-refinement-2026-10-15/study-round2/reports-manifest.json
+  reason: Project report hashes bound to the issued packet manifest.
+- glob: research/document-refinement-2026-10-15/study-round2/summary.json
+  reason: Project aggregate scores, counts and evidence hashes; source-bearing quotes remain in attributed per-case reports.
+- glob: research/document-refinement-2026-10-15/FINDINGS.md
+  reason: Project-authored analysis of independent comparison outcomes; source-bearing quotes remain in attributed per-case reports.
 - glob: research/document-refinement-2026-10-15/study/manifest.json
   reason: Project experiment settings, paths and frozen file hashes; no copied source prose.
 - glob: research/document-refinement-2026-10-15/study/round-outcome.json

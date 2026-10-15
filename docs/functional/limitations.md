@@ -24,10 +24,11 @@
   names, but sentence\-initial names can still escape extraction. Slot/inflection matching'n negation anchors
   fix the reproduced toolkit cases; they don't solve general negation or sense disambiguation. So anyway, for example,
   `not out of the question` can still offer refusal phrases. Review suggestions in their actual sentence.
-- **Fresh retelling quality scores are pendin'.** Current guidance, quote preservation'n toolkit fixes need
-  a new writer/independent\-judge pass against the historical Dinkum anchors. Offline tests'n replayed results
-  don't knock together a new register/fidelity score. The [maintenance study](../../research/maintenance-check-2026-10-15/README.md)
-  records measured results'n the prepared comparison.
+- **Mechanical acceptance doesn't kick off retelling quality.** The first fresh 20\-text blind comparison
+  scored meaning 4.95/5 but register 2.00/5: eligible prose was too restrained. All deterministic checks
+  passed. Mate, a further writer refinement uses the same controls'n supplies judges with the full document
+  contract. See [the findings](../../research/document-refinement-2026-10-15/FINDINGS.md) for raw results,
+  protocol limits'n the next round; no improved score is claimed before that round completes.
 - **The bundled embeddin' model lags the dictionary.** `aussiefy embedder status` reports the shipped model
   (aussie\-static 1.2.0\) as `stale` after the later research rounds; the next version is described in
   `training/README.md`. Anyway, the 2026\-10\-15 offline check passes 33/33 required references but retains 16 known

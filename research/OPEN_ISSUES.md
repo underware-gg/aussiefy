@@ -35,7 +35,10 @@ The data can't fix these without losing the right sense:
 
 The [2026-10-15 maintenance measurement](maintenance-check-2026-10-15/README.md) passes 33/33 required raw
 references with all 16 known failures retained. It separately captures real toolkit lookups and pins a fresh
-20-text Dinkum comparison. No new model weights or fresh writer/judge scores were produced.
+20-text Dinkum comparison. No new weights were produced. The subsequent
+[fresh retelling study](document-refinement-2026-10-15/FINDINGS.md) scored meaning 4.95/5 but register 2.00/5;
+all 20 deterministic checks passed. Stronger eligible-prose writing and contract-aware evaluation are the
+next controlled round; the raw weak-register result is retained.
 
 `aussiefy embedder status` reports aussie-static 1.2.0 as stale. It was trained before the fairdinkum, second-pass
 and third-pass rounds; their entries work through the engine and lookup triggers without it, but meaning-based lookup
