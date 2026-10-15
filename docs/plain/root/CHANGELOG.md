@@ -5,6 +5,9 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Lookup recognises filled pronoun slots, confines inflection to grammatical heads and excludes unrelated
+  model suggestions after a complete slot parse. Negated model matches need a shared content anchor.
+
 - Fix attributive praise escaping through predicate frames, capitalised determiners hiding compound guards,
   animal nouns being treated as people, and plural clothing conflicting with retained singular verbs.
   Frame vocabulary is editable in `grammar.yaml`; similarity fallback enforces zero-width exclusions.

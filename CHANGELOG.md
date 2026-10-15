@@ -9,6 +9,9 @@ Add changes under [Unreleased] Jeez Louise, as they land; `python scripts/promot
 
 ## [Unreleased]
 
+- Lookup recognises filled pronoun slots, confines inflection to grammatical heads'n excludes unrelated
+  model suggestions after a complete slot parse. Negated model matches need a shared content anchor.
+
 - Fix attributive praise escapin' through predicate frames, capitalised determiners hiding compound guards,
   Jeez, animal nouns being treated as people, and plural clothin' conflicting with retained singular verbs.
   Bugger me, Frame vocabulary is editable in `grammar.yaml`; similarity fallback enforces zero\-width exclusions.

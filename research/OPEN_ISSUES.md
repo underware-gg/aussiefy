@@ -28,9 +28,9 @@ The data can't fix these without losing the right sense:
 - **The moved-phrase check** (yarn.py `_moved`) aligns each planned spot with up to three nearby sentences, so a
   retelling that reuses the original's word next door can still be sent back. A tighter alignment (the one
   counterpart sentence) would close it. (third-pass design review)
-- **Lookup's meaning model** still returns weak cross-sense matches ("harmless" → "a bit red hot"); the negation
-  filter catches only opposites with a negation in them. Inflection matching gives an Aussie term in its other sense
-  where one exists ("shouted" → a shout, buying a round).
+- **Lookup's model still has semantic limitations.** Slot parsing, head-only inflection and conservative
+  negation anchors fix the reproduced bell/shouted/harmless toolkit errors. The underlying model remains
+  unchanged; see training references for remaining wrong-sense similarities.
 
 ## The bundled embedder
 
@@ -81,7 +81,6 @@ left:
 | A person swear can't tell a warm referent from any other ("every bastard" for refugees, "some bugger" for a hoped-for husband) | The worst remaining wrong senses in retellings | Needs a sentiment or referent signal the engine doesn't have |
 | No negative-polarity marker in triggers, so "didn't care about" can't reach give a stuff about | Restores a swap the round had to cut | A pattern-language change |
 | `^person` does nothing on a verb phrase; a guard can't end on a finite verb or hold part of a multi-word name; a noun-phrase trigger can't keep "a"; "three lots" isn't read as a count; a capital after "No" reads as a vocative | Each narrows a wrong sense the round could only part-fix (see DECISIONS) | Engine changes, one each |
-| Lookup doesn't match a slot to a pronoun ("give them a bell" misses give {obj} a bell) | Agents find the variants they reach for | Lookup change |
 | The round tool can't write `not_in` or a concept carrying existing entries | Rounds stop needing hand edits to concepts.yaml | Tooling |
 | Troppo's binding rules (a letter stays a letter, a hazard is never the joke) live in guidance prose, not data | They could be checked, not only asked for | Design call: without boxing troppo in |
 | Unit tests for lint's name fidelity (`_derived_from`, the exact forms set) beside the pass tests | The demonym rules are pinned where they live | Small |

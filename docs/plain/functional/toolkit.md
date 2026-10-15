@@ -72,3 +72,12 @@ Every surface takes the same parameters by the same names and defaults; `tests/f
 in step (see [DD-008](../../architecture/decisions/dd-008-one-toolkit-thin-surfaces.md)).
 
 Genre, English, embellishment and extended document controls are described in [translation controls](translation-controls.md). `lookup(short=True)` offers compact cards; `lint(suggest=False)` skips optional engine suggestions.
+
+## Lookup sense matching
+
+Lookup matches complete slang forms with grammatical slots, so “give them a bell” reaches the telephone
+sense. When such a complete parse identifies a sense, unrelated meaning-model suggestions are excluded.
+Inflection applies to a noun's head or a verb phrase's head verb, not every word of every frame: “shouted”
+does not become a drinks noun. Negated model queries also need a shared content anchor with the candidate
+meaning; “harmless” is not evidence for “not acceptable”. Conservative filtering may return no result rather
+than an unreliable suggestion. These checks do not make the meaning model a general word-sense classifier.
