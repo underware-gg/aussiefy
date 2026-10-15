@@ -5,6 +5,8 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Preserve concept metadata and hand edits when reapplying dictionary rounds; support explicit concept fixes, entryless guards and reviewed second senses.
+
 - Prevent adjacent-sentence reuse from producing yarn moved-phrase false warnings; keep broader fidelity alignment.
 - Read lint's drawl comparison from dictionary annotations, recognise known swaps in capitalised phrases and pin strict-preset/name behaviour.
 

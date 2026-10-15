@@ -9,6 +9,8 @@ Add changes under [Unreleased] Jeez Louise, as they land; `python scripts/promot
 
 ## [Unreleased]
 
+- Struth, Preserve concept metadata'n hand edits when reapplying dictionary rounds; support explicit concept fixes, entryless guards and reviewed second senses.
+
 - Stone the crows, Prevent adjacent\-sentence reuse from producing yarn moved\-phrase false warnings; keep broader fidelity alignment.
 - Bloody hell, Read lint's drawl comparison from dictionary annotations, recognise known swaps in capitalised phrases'n pin strict\-preset/name behaviour.
 

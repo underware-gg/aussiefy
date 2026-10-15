@@ -42,9 +42,9 @@ repository may want `vectors.f16` in Git LFS or as a release asset first.
 
 ## Tooling
 
-- A dictionary round can't write `not_in`, `person` or guard concepts, can't add a second sense with an existing
-  form, and rewrites its own section of `concepts.yaml` when re-applied (losing hand edits there). Every recent
-  round needed hand edits for these.
+- Dictionary rounds now retain metadata and existing concept records, support explicit `concept_fixes.yaml`
+  (including entryless guards), and accept a reviewed second sense with `allow_existing_form: true` plus an
+  additional concept. Explicit trigger fixes still apply on reapplication; dry runs show concept-fix intent.
 - Dialect-table candidate left over: "yield sign" → "give way sign".
 
 ## From the design review of the work since 5b385b4 (2026-10-14)
@@ -78,7 +78,6 @@ left:
 | A person swear can't tell a warm referent from any other ("every bastard" for refugees, "some bugger" for a hoped-for husband) | The worst remaining wrong senses in retellings | Needs a sentiment or referent signal the engine doesn't have |
 | No negative-polarity marker in triggers, so "didn't care about" can't reach give a stuff about | Restores a swap the round had to cut | A pattern-language change |
 | `^person` does nothing on a verb phrase; a guard can't end on a finite verb or hold part of a multi-word name; a noun-phrase trigger can't keep "a"; "three lots" isn't read as a count; a capital after "No" reads as a vocative | Each narrows a wrong sense the round could only part-fix (see DECISIONS) | Engine changes, one each |
-| The round tool can't write `not_in` or a concept carrying existing entries | Rounds stop needing hand edits to concepts.yaml | Tooling |
 | Troppo's binding rules (a letter stays a letter, a hazard is never the joke) live in guidance prose, not data | They could be checked, not only asked for | Design call: without boxing troppo in |
 | Narrowed senses are cloned triggers: REPLY_TO_THANKS copies NO_PROBLEM's, EMPHATIC_REFUSAL DISAGREE's, ONE_CIGARETTE, INSIDE_WORD and FAIR_AMOUNT theirs, and some entries' `replaces` repeat their concept's trigger with its exclusions (tea, quid, chuck, the oldies) | One place to fix a sense: a loader warning when a `replaces` or a concept repeats another's trigger with different exclusions, or a way for an entry to take a subset of a concept | A schema and loader change; found by the round's design review |
 | "It's fine" in answer to a question ("Is the weather nice? It's fine.") reaches NO_PROBLEM's and REPLY_TO_THANKS's reassurances | One wrong sense | Needs the previous sentence's speech act |
@@ -103,3 +102,7 @@ Harness follow-up: adjacent phrase reuse, drawl comparison from `reads_as`, dict
 phrases, bounded demonym derivation and all four strict presets now have focused regressions. The title/comma
 case already passed and is pinned. Strict presets suppress infixes at Deadset/Dinkum; Troppo or explicit
 behaviour overrides retain their documented freedom.
+
+Round follow-up: metadata/guard/second-sense and reapplication preservation are implemented and regression-tested.
+General comment-preserving YAML editing and a stricter variant-collision policy remain separate work; existing
+variant semantics were retained after comparing all eight historical round plans.

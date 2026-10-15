@@ -6,6 +6,7 @@ A round directory (research/<round>/) holds:
   concept_aliases.yaml       NEW concepts proposed twice under different names: {left: right}
   trigger_fixes.yaml         hand review of triggers: remove / add / intensity
   entry_fixes.yaml           hand repairs to entries, by id
+  concept_fixes.yaml         explicit concept metadata/trigger overrides and entryless guards, by id
   extra_entries.yaml         hand-written entries that belong to the round (they may use its new concepts)
 
 RoundConfig.load() reads the round; plan_round() is pure: from the round and a dictionary it says what would
@@ -15,9 +16,10 @@ itself an Aussie form (it would swap slang for slang), copies a reference query 
 the test) or already exists is dropped; every low-confidence accept ships gated. RoundPlan.write() writes the
 output file and the concepts (appended triggers in place, new concepts in a section of their own), but only after
 the result has loaded and validated in a scratch copy of the data directory. Planning sets aside the round's own
-earlier output, so re-applying the most recent round is a no-op. An earlier round can't be re-applied while a
-later one uses its concepts (base_dictionary fails loudly), and a trigger once appended to an existing concept
-stays until removed by hand.
+earlier output, so unchanged reapplication is a no-op. Replanning an earlier round while a
+later one uses its concepts requires those dependent entries to be set aside while planning. Previously written
+concept records retain hand edits; explicit concept_fixes replace only their named fields. A trigger appended
+to an existing concept stays unless explicitly replaced through concept_fixes.
 """
 
 from __future__ import annotations
@@ -25,7 +27,8 @@ from __future__ import annotations
 import re
 import shutil
 import tempfile
-from dataclasses import dataclass, field
+from copy import deepcopy
+from dataclasses import dataclass, field, fields
 from pathlib import Path
 from typing import Any
 
@@ -34,7 +37,7 @@ import yaml
 from .errors import UserError
 from .loader import _YAML_LOADER, DATA_DIR, load_dictionary, write_validated
 from .model import Dictionary
-from .schema import ENTRY_KEYS, SchemaError, parse_entry
+from .schema import Concept, ENTRY_KEYS, SchemaError, parse_concept, parse_entry
 from .terms import form_key
 
 
@@ -58,6 +61,7 @@ class RoundConfig:
     entry_fixes: dict[str, dict] = field(default_factory=dict)
     trigger_fixes: dict[str, Any] = field(default_factory=dict)
     extra_entries: list[dict] = field(default_factory=list)
+    concept_fixes: dict[str, dict] = field(default_factory=dict)
 
     @classmethod
     def load(cls, directory: str | Path) -> "RoundConfig":
@@ -79,6 +83,9 @@ class RoundConfig:
         config.entry_fixes = config._optional("entry_fixes.yaml", {})
         config.trigger_fixes = config._optional("trigger_fixes.yaml", {})
         config.extra_entries = config._optional("extra_entries.yaml", [])
+        fixes = d / "concept_fixes.yaml"
+        parsed = _yaml(fixes.read_text(encoding="utf-8")) if fixes.exists() else None
+        config.concept_fixes = {} if parsed is None else parsed
         return config
 
     def _optional(self, name: str, default: Any) -> Any:
@@ -106,6 +113,9 @@ class RoundPlan:
         n_trig = sum(len(v) for f in self.added_triggers.values() for v in f.values())
         lines = [f"{len(self.entries)} entries ({gated} gated), {len(self.new_concepts)} new concepts, {n_trig} "
                  f"triggers on {len(self.added_triggers)} existing concepts; {len(self.dropped)} dropped"]
+        if self.config.concept_fixes:
+            lines.append(f"{len(self.config.concept_fixes)} explicit concept fixes requested:")
+            lines += [f"  {cid}: {', '.join(sorted(patch))}" for cid, patch in self.config.concept_fixes.items()]
         lines += [f"  skipping {name}: doesn't parse" for name in self.unparsed]
         lines += ["  drop " + " ".join(map(str, x)) for x in self.dropped]
         if self.style_guide:
@@ -127,7 +137,7 @@ class RoundPlan:
     def _concepts_text(self, current: str) -> str:
         """concepts.yaml with this round's triggers appended in place and its new concepts in a section of their own."""
         c = self.config
-        lines = _split_section(current, c.marker)[0].split("\n")
+        lines = current.split("\n")
         for cid, frames in self.added_triggers.items():
             start = lines.index(f"{cid}:")
             end = next((i for i in range(start + 1, len(lines)) if re.match(r"^[A-Z][A-Z0-9_]*:\s*$", lines[i])),
@@ -141,12 +151,45 @@ class RoundPlan:
                     end += 1
                     continue
                 _append_to_flow_list(lines, fl, end, extra)
-        text = "\n".join(lines).rstrip("\n") + "\n"
-        if self.new_concepts:
-            text += f"\n{c.marker}research/{c.directory.name}) {'-' * 34}\n"
-            text += yaml.safe_dump(self.new_concepts, sort_keys=False, allow_unicode=True, width=110,
-                                   default_flow_style=None)
+        text = "\n".join(lines)
+        present = _yaml(text) or {}
+        missing = {cid: raw for cid, raw in self.new_concepts.items() if cid not in present}
+        if missing:
+            addition = yaml.safe_dump(missing, sort_keys=False, allow_unicode=True, width=110,
+                                      default_flow_style=None)
+            section = next((i for i, line in enumerate(lines) if line.startswith(c.marker)), None)
+            if section is None:
+                text = text.rstrip("\n") + f"\n\n{c.marker}research/{c.directory.name}) {'-' * 34}\n" + addition
+            else:
+                end = next((i for i in range(section + 1, len(lines)) if lines[i].startswith("# --- ")), len(lines))
+                text = "\n".join(lines[:end]).rstrip("\n") + "\n" + addition + "\n".join(lines[end:])
+        present.update(missing)
+        for cid in self.new_concepts:
+            existing = present[cid]
+            triggers = _fixed_triggers(existing.get("triggers") or {}, cid, c.trigger_fixes)
+            if triggers != (existing.get("triggers") or {}):
+                present[cid] = {**existing, "triggers": triggers}
+                text = _replace_concept(text, cid, present[cid])
+        for cid, patch in c.concept_fixes.items():
+            existing = present[cid]
+            merged = {**existing, **deepcopy(patch)}
+            if merged != existing:
+                text = _replace_concept(text, cid, merged)
         return text
+
+
+def _replace_concept(text: str, cid: str, raw: dict) -> str:
+    """An explicit fix rewrites only its record, retaining neighbouring records and section comments."""
+    root = yaml.compose(text, Loader=_YAML_LOADER)
+    key, value = next((key, value) for key, value in root.value if key.value == cid)
+    lines = text.splitlines(keepends=True)
+    start, end = key.start_mark.line, value.end_mark.line + bool(value.end_mark.column)
+    while end > start and (not lines[end - 1].strip() or lines[end - 1].startswith("#")):
+        end -= 1
+    rewritten = yaml.safe_dump({cid: raw}, sort_keys=False, allow_unicode=True, width=110,
+                               default_flow_style=None)
+    return "".join(lines[:start]) + rewritten + "".join(lines[end:])
+
 
 
 def _append_to_flow_list(lines: list[str], start: int, end: int, extra: str) -> None:
@@ -206,7 +249,8 @@ def plan_round(config: RoundConfig, d: Dictionary) -> RoundPlan:
     plan = RoundPlan(config, unparsed=list(config.unparsed))
     name = _concept_namer(config.aliases)
     forms = {form_key(f) for e in d.entries.values() for f in e.all_forms}   # grows as entries are accepted
-    _collect_new_concepts(plan, config.verdicts, d, name)   # first, so an entry may use one another verdict defines
+    _collect_new_concepts(plan, config.verdicts, d, name)   # an entry may use another verdict's concept
+    _prepare_concept_fixes(plan, d)
     plan.style_guide = [(v.get("candidate"), v.get("guidance")) for _, v in config.verdicts
                         if v.get("decision") == "style_guide"]
     _accept_entries(plan, config, d, name, forms)
@@ -237,24 +281,61 @@ def _trigger_rejection(phrase: str, forms: set[str], queries: set[str], own_form
     return None
 
 
+CONCEPT_KEYS = frozenset(f.name for f in fields(Concept)) - {"id"}
+
+
+def _concept_patch(raw: dict, where: str) -> dict:
+    if not isinstance(raw, dict) or set(raw) - CONCEPT_KEYS:
+        raise SchemaError(f"{where}: expected concept fields {', '.join(sorted(CONCEPT_KEYS))}")
+    return deepcopy(raw)
+
+
 def _collect_new_concepts(plan: RoundPlan, verdicts: list[tuple[str, dict]], d: Dictionary, name) -> None:
     for _, v in verdicts:
         nc = v.get("new_concept")
         if v.get("decision") in ("add_entry", "gate") and nc and nc.get("id") and name(nc["id"]) not in d.concepts:
-            cur = plan.new_concepts.setdefault(name(nc["id"]), {"description": nc.get("description"), "triggers": {}})
-            for frame, ps in (nc.get("triggers") or {}).items():
+            cid = name(nc["id"])
+            raw = _concept_patch({k: value for k, value in nc.items() if k != "id"}, f"new concept {cid}")
+            parse_concept(cid, raw)
+            cur = plan.new_concepts.setdefault(cid, {"description": "", "triggers": {}})
+            cur.update({k: value for k, value in raw.items() if k != "triggers"})
+            for frame, ps in (raw.get("triggers") or {}).items():
                 cur["triggers"].setdefault(frame, [])
                 cur["triggers"][frame] += [p for p in ps or () if p not in cur["triggers"][frame]]
+
+
+def _prepare_concept_fixes(plan: RoundPlan, d: Dictionary) -> None:
+    if not isinstance(plan.config.concept_fixes, dict):
+        raise SchemaError("concept_fixes.yaml: expected a mapping by concept id")
+    for cid, patch in plan.config.concept_fixes.items():
+        patch = _concept_patch(patch, f"concept_fixes.yaml {cid}")
+        if cid not in d.concepts:
+            raw = plan.new_concepts.setdefault(cid, {"description": "", "triggers": {}})
+            raw.update(patch)
+            raw["triggers"] = raw.get("triggers") or {}
+        else:
+            concept = d.concepts[cid]
+            raw = {f.name: getattr(concept, f.name) for f in fields(Concept) if f.name != "id"}
+            raw["triggers"] = {frame: list(patterns) for frame, patterns in concept.triggers.items()}
+            raw.update(patch)
+        parse_concept(cid, raw)
 
 
 def _accept_entries(plan: RoundPlan, config: RoundConfig, d: Dictionary, name, forms: set[str]) -> None:
     """The proposed entries, with fixes applied, minus any whose form or id is taken or whose concepts are unknown.
     Accepted forms are added to forms."""
     ids = set(d.entries)
+    meanings = {}
+    for entry in d.entries.values():
+        for form in entry.all_forms:
+            meanings.setdefault(form_key(form), set()).update(entry.concept)
     proposed = [(src, v, dict(v["entry"])) for src, v in config.verdicts
                 if v.get("decision") in ("add_entry", "gate") and v.get("entry")]
     proposed += [("extra_entries", {"decision": "add_entry"}, dict(e)) for e in config.extra_entries]
     for src, v, e in proposed:
+        allow_existing = v.get("allow_existing_form", e.pop("allow_existing_form", False))
+        if not isinstance(allow_existing, bool):
+            raise SchemaError(f"{src}: allow_existing_form must be a boolean")
         e["concept"] = list(dict.fromkeys(name(c) for c in e.get("concept") or ()))
         e.update(config.entry_fixes.get(e.get("id"), {}))
         if v.get("decision") == "gate" or v.get("confidence") == "low":   # a low-confidence accept ships gated
@@ -271,8 +352,10 @@ def _accept_entries(plan: RoundPlan, config: RoundConfig, d: Dictionary, name, f
         except SchemaError as exc:
             plan.dropped.append(("entry", e.get("id"), f"schema: {exc}", src))
             continue
-        key = form_key(e["form"])
-        if key in forms:
+        keys = {form_key(f) for f in [e["form"], *(e.get("variants") or ())]}
+        collisions = {form_key(e["form"])} & forms
+        if collisions and not (allow_existing and all(set(e.get("concept", ())) - meanings.get(k, set())
+                                                       for k in collisions)):
             plan.dropped.append(("entry", e.get("id"), "form already in the dictionary", src))
             continue
         if not e.get("concept") and e.get("type") != "garnish":   # garnish may carry no concept ("ya galah")
@@ -282,8 +365,9 @@ def _accept_entries(plan: RoundPlan, config: RoundConfig, d: Dictionary, name, f
         if unknown:
             plan.dropped.append(("entry", e["id"], f"unknown concept {unknown[0]}", src))
             continue
-        forms.add(key)
-        forms |= {form_key(x) for x in e.get("variants") or ()}
+        forms |= keys
+        for key in keys:
+            meanings.setdefault(key, set()).update(e.get("concept", ()))
         ids.add(e["id"])
         plan.entries.append(e)
 
@@ -333,7 +417,8 @@ def _guard_new_concept_triggers(plan: RoundPlan, forms: set[str], queries: set[s
 
 
 def _drop_unused_new_concepts(plan: RoundPlan) -> None:
-    for cid in [cid for cid in plan.new_concepts if not any(cid in e.get("concept", []) for e in plan.entries)]:
+    for cid in [cid for cid in plan.new_concepts if cid not in plan.config.concept_fixes
+                and not any(cid in e.get("concept", []) for e in plan.entries)]:
         plan.dropped.append(("concept", cid, "no accepted entry uses it", "-"))
         del plan.new_concepts[cid]
 
@@ -354,24 +439,41 @@ def _guard_replaces(plan: RoundPlan, forms: set[str], queries: set[str]) -> None
             e.pop("replaces", None)
 
 
+def _without_intensity(pattern: str) -> str:
+    return re.sub(r"@[1-5]$", "", pattern)
+
+
+def _fixed_triggers(triggers: dict, cid: str, fixes: dict, existing: dict | None = None) -> dict:
+    """Explicit review instructions applied to proposed or preserved triggers, without regenerating metadata."""
+    result = deepcopy(triggers)
+    for frame, patterns in (fixes.get("remove", {}).get(cid) or {}).items():
+        result[frame] = [p for p in result.get(frame, ())
+                         if p not in patterns and _without_intensity(p) not in patterns]
+    for frame, patterns in (fixes.get("add", {}).get(cid) or {}).items():
+        have = {form_key(p) for p in (existing or {}).get(frame, ())}
+        added = [p for p in patterns if form_key(p) not in have]
+        added_keys = {_without_intensity(p) for p in added}
+        result[frame] = added + [p for p in result.get(frame, ()) if _without_intensity(p) not in added_keys]
+    strength = fixes.get("intensity") or {}
+    for frame, patterns in result.items():
+        rewritten = []
+        for pattern in patterns:
+            base = _without_intensity(pattern)
+            intensity = strength.get(pattern, strength.get(base))
+            rewritten.append(f"{base}@{intensity}" if intensity is not None else pattern)
+        result[frame] = rewritten
+    return {frame: patterns for frame, patterns in result.items() if patterns}
+
+
 def _apply_trigger_fixes(plan: RoundPlan, tf: dict, d: Dictionary) -> None:
-    def target(cid):
-        return plan.new_concepts[cid]["triggers"] if cid in plan.new_concepts else plan.added_triggers.setdefault(cid, {})
-    for cid, frames in (tf.get("remove") or {}).items():
-        for frame, ps in frames.items():
-            t = target(cid)
-            t[frame] = [p for p in t.get(frame, []) if p not in ps]
-            if not t[frame]:
-                del t[frame]
-    for cid, frames in (tf.get("add") or {}).items():
-        for frame, ps in frames.items():
-            have = {form_key(x) for c in [d.concepts.get(cid)] if c for x in c.triggers.get(frame, ())}
-            ps = [p for p in ps if form_key(p) not in have]   # idempotent
-            target(cid).setdefault(frame, [])
-            target(cid)[frame] = ps + [p for p in target(cid)[frame] if p not in ps]
-    strength = tf.get("intensity") or {}
-    for t in [c["triggers"] for c in plan.new_concepts.values()] + list(plan.added_triggers.values()):
-        for frame, ps in t.items():
-            t[frame] = [f"{p}@{strength[p]}" if p in strength else p for p in ps]
-    for cid in [cid for cid, frames in plan.added_triggers.items() if not frames]:
-        del plan.added_triggers[cid]
+    for cid, concept in plan.new_concepts.items():
+        concept["triggers"] = _fixed_triggers(concept["triggers"], cid, tf)
+    targets = set(plan.added_triggers) | set(tf.get("remove") or {}) | set(tf.get("add") or {})
+    for cid in targets - plan.new_concepts.keys():
+        if cid not in d.concepts:
+            raise SchemaError(f"trigger_fixes.yaml: unknown concept {cid}")
+        fixed = _fixed_triggers(plan.added_triggers.get(cid, {}), cid, tf, d.concepts[cid].triggers)
+        if fixed:
+            plan.added_triggers[cid] = fixed
+        else:
+            plan.added_triggers.pop(cid, None)

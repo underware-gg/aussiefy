@@ -66,6 +66,33 @@ Crikey, see what it would add'n drop, and why; `--write` validates the result in
 dictionary. Each round's `README.md` Strewth, says how it was run'n how to repeat it, and, for a round applied this way,
 its `round.yaml` configures the apply.
 
+A new concept keeps all supported metadata (`description`, `triggers`, `person`, `neutral_person`, `not_in`).
+Optional `concept_fixes.yaml` maps concept IDs to explicitly reviewed field overrides. It can also define an
+entryless guard concept; an unused concept inferred from a rejected candidate is still discarded.
+
+```yaml
+TIRED:
+  not_in: [technical]
+ZZ_GUARD:
+  description: A reviewed guard with no output entry.
+  triggers: {np: [a reviewed guard phrase]}
+```
+
+Field overrides replace the named field, so `triggers` replaces the complete trigger mapping. They apply last,
+after `trigger_fixes.yaml`'s additions/removals/intensities, and the dry run lists their IDs and fields.
+
+Reapplication preserves previously written concept records'n their hand edits. Bugger me, new definitions are appended
+to the round's own section. Well, explicit trigger fixes update triggers while keeping other metadata; explicit
+concept fixes rewrite only affected records, whose internal formattin'/comments may change. Neighbouring
+records'n section comments remain intact. Well, Move an intentional change into a fix file rather than relyin'
+on edited verifier verdicts to overwrite a concept already written.
+
+A second reviewed sense may reuse an existing primary form when its verdict declares
+`allow_existing_form: true` and supplies at least one concept not already attached to that form. The same
+flag may sit on a hand-written `extra_entries.yaml` record. The default duplicate guard remains active;
+identical senses cannot bypass it. Existing variant handling is unchanged. Every write still validates the
+complete candidate dictionary in scratch before changing the real files.
+
 | Round | Summary |
 |---|---|
 | [gap-fill-2026-10-11](../../research/gap-fill-2026-10-11/README.md) | Words the engine left in plain English, retold by subagents and searched on the web, then verified and applied with `dev round` |
