@@ -1,0 +1,205 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 1,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 1,
+   "flow": 1,
+   "variety": 2,
+   "essence": 2
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every instruction kept: three gallons, strain through muslin, overflow pipe, ten-gallon tank, two pet cocks, notch settings. Additions (\"you'll blow your arse to kingdom come\", \"give you a hell of a whack\") are colour on the original's warnings.",
+   "sense": "Fits: \"under its own steam\", \"the more grunt you get\", \"topped up\", \"Once the engine's properly loosened up\" for limbered up.",
+   "authenticity": "Natural Aussie plain speech (\"make bloody sure\", \"dead sure\", \"beats hard water hands down\"), with a couple of stock lines bolted on (\"full stop\").",
+   "register": "Casual and clear but closer to level 3 than a level-5 yarn; long stretches are just plain paraphrase (\"The system holds about three gallons.\"). Swearing (\"bloody\", \"arse\", \"hell\") within level 2.",
+   "tone": "Still an instruction manual, with the cautions kept serious (\"don't you dare, under any circumstances\").",
+   "flow": "Reads smoothly: \"Keep pouring water in till you're dead sure the radiator and the cylinder water jackets are both full.\"",
+   "variety": "Varied, though \"'cause\" and \"properly\" repeat.",
+   "essence": "Plainly the 1919 Ford starting checklist, Q-and-A shape intact."
+  },
+  "engine": {
+   "meaning": "Critical errors: \"the gasoline tank may be rooted, knackered by openin' the pet cock\" turns draining into wrecking; \"How are Spark and Throttle Levers used, ya galah? Buggered if I know.\" and \"Beats me.\" undercut the instructions.",
+   "sense": "\"rooted, knackered\" for drained, \"stuffed, mate\" for full, \"a beaut plan\": several wrong senses.",
+   "authenticity": "Stage-Australian bolt-ons: \"Stone the flamin' crows\", \"Strewth\", \"Jeez Louise\", \"Oh, shit\", \"Fair fuckin' dinkum\", \"Well, I'll be buggered.\"; US \"gasoline\" and \"carburetor\" left.",
+   "register": "Heavy on exclamations but the body is the untouched original (\"Upon receipt of the car see that a supply of medium light, high-grade gas engine oil\"); swearing within level 2.",
+   "tone": "The careful manual is made flippant and ignorant: \"Buggered if I know.\", \"no matter what some drongo reckons\".",
+   "flow": "Broken joins: \"Well, During the first few days\", \"gasoline'n air\", \"Anyway, under the steering wheel\".",
+   "variety": "Leans on \"Anyway\", \"Well\", \"bloody\" and \"bugger\" fillers.",
+   "essence": "Under the noise the manual is there, but it no longer reads as instructions anyone could trust."
+  },
+  "yarn": {
+   "meaning": "Every instruction kept with numbers and cross-references; additions are colour on the original (\"it'll go up like a bonfire on cracker night\", \"that crank handle'll give your wrist a wallop\").",
+   "sense": "Exact: \"chock-a-block\" for full, \"bungs up the little tubes\", \"Soon as the car rocks up\" for upon receipt, \"goin' flat out\" for maximum speed.",
+   "authenticity": "A real Aussie mechanic's voice: \"get your mitts on\", \"be careful as\", \"quick smart\", \"suss out where they need to be\".",
+   "register": "A full level-5 yarn throughout, every section retold; swearing light (\"make bloody sure\", \"flamin' volatile\"), inside level 2.",
+   "tone": "Still a careful how-to under the yarn: \"And this is the big one: don't run the car under her own steam\".",
+   "flow": "Reads like it was written that way: \"Pour the oil in nice and slow till it runs out the top cock.\"",
+   "variety": "Very varied idiom, though \"she\"/\"her\" for the car and dropped-g forms recur a lot.",
+   "essence": "Unmistakably the Ford starting checklist, retold by a bush mechanic."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "Don't run the car under its own steam unless the water system's been filled, full stop.",
+    "original": "It is important that the car should not be run under its own power unless the water circulating system has been filled.",
+    "severity": "minor",
+    "why": "\"full stop\" is a stock emphasiser."
+   },
+   {
+    "quote": "The system holds about three gallons.",
+    "original": "The system will hold approximately three gallons.",
+    "severity": "minor",
+    "why": "Large plain stretches leave it lighter than the level-5 brief."
+   },
+   {
+    "quote": "gas engine oil",
+    "original": "gas engine oil",
+    "severity": "minor",
+    "why": "Keeps the US \"gas\" even after switching to petrol."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "the gasoline tank may be rooted, knackered by openin' the pet cock",
+    "original": "The gasoline tank may be drained by opening the pet cock",
+    "severity": "critical",
+    "why": "Says opening the cock wrecks the tank."
+   },
+   {
+    "quote": "How are Spark and Throttle Levers used, ya galah? Buggered if I know.",
+    "original": "How are Spark and Throttle Levers used?",
+    "severity": "critical",
+    "why": "Adds an insult and denies the knowledge the section then gives."
+   },
+   {
+    "quote": "Where should these levers be when starting the Engine? Beats me.",
+    "original": "Where should these levers be when starting the Engine?",
+    "severity": "major",
+    "why": "Same flippant non-answer."
+   },
+   {
+    "quote": "are stuffed, mate",
+    "original": "are full",
+    "severity": "major",
+    "why": "\"stuffed\" means broken or exhausted, not filled."
+   },
+   {
+    "quote": "Oh, shit, the left-hand lever",
+    "original": "The left-hand lever",
+    "severity": "major",
+    "why": "Oath bolted onto a plain instruction."
+   },
+   {
+    "quote": "What about Gasoline?",
+    "original": "What about Gasoline?",
+    "severity": "major",
+    "why": "US \"gasoline\" kept throughout; untranslated."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "the little breather hole in the petrol cap",
+    "original": "The small vent hole in the gasoline tank cap",
+    "severity": "minor",
+    "why": "\"breather\" also names the oil breather pipe; slight risk of confusion."
+   },
+   {
+    "quote": "the faster she runs and the more grunt ya get",
+    "original": "the faster the engine runs",
+    "severity": "minor",
+    "why": "\"she\"/\"her\" for the car is leaned on."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Accurate, natural and readable, but pitched lighter than level 5.",
+  "engine": "Rule-engine noise over an untranslated manual, with an outright mistranslation of draining the tank.",
+  "yarn": "A complete, natural level-5 retelling that stays a usable manual."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

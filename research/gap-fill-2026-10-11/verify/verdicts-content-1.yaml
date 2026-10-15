@@ -1,0 +1,2563 @@
+- decision: add_entry
+  candidate: a chinwag
+  entry:
+    id: have-a-chinwag
+    form: have a chinwag
+    variants:
+    - a chinwag
+    concept:
+    - CHAT
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: A long, friendly natter.
+    sources:
+    - https://www.wiktionary.com/wiki/chinwag
+    - https://www.visualthesaurus.com/cm/wordroutes/down-under-obama-has-a-chinwag/
+  new_concept: null
+  triggers_to_add:
+    CHAT:
+      vp:
+      - have a chat
+      - have a natter
+      - chew the fat
+      np:
+      - a chat
+      - a natter
+      - a chinwag
+  evidence: web
+  confidence: high
+  why: UK/IE/Aus/NZ, current; fixes the having-a-chinwag failure; second form for CHAT.
+- decision: add_entry
+  candidate: flat out
+  entry:
+    id: flat-out
+    form: flat out
+    variants: []
+    concept:
+    - BUSY
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: Busy as can be, no let-up.
+    sources:
+    - https://wordhistories.net/2021/11/29/flat-out-lizard-drinking/
+    - https://macquariedictionary.com.au/?p=11033
+  new_concept: null
+  triggers_to_add:
+    BUSY:
+      predicate_adj:
+      - run off {poss} feet
+      - rushed off {poss} feet
+      - snowed under
+      - swamped
+  evidence: web
+  confidence: high
+  why: Bare form of the existing simile, very common in Aus speech.
+- decision: add_entry
+  candidate: missus
+  entry:
+    id: the-missus
+    form: the missus
+    variants:
+    - missus
+    - '{poss} missus'
+    concept:
+    - NEW:WIFE
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces:
+    - the wife
+    - my wife
+    gloss: Informal for a man's wife or female partner.
+    sources:
+    - https://greensdictofslang.com/entry/vxhzbvq
+    - https://www.oxfordlearnersdictionaries.com/definition/english/missus
+  new_concept:
+    id: WIFE
+    description: A man's wife or female partner.
+    triggers:
+      np:
+      - wife
+      - the wife
+      - my wife
+      - his wife
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Very common in Aus (also UK); can sound blokey or dismissive, so keep to casual registers.
+- decision: add_entry
+  candidate: the oldies
+  entry:
+    id: the-oldies
+    form: the oldies
+    variants: []
+    concept:
+    - NEW:PARENTS
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces:
+    - my parents
+    - mum and dad
+    - the folks
+    gloss: One's mum and dad.
+    sources:
+    - https://pvt.fr/pvt-australie/dictionnaire-slang-australie
+    - https://www.deseret.com/2000/9/10/20679388/australian-slang/
+  new_concept:
+    id: PARENTS
+    description: One's parents.
+    triggers:
+      np:
+      - parents
+      - my parents
+      - the folks
+      - his parents
+      - her parents
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Common Aus colloquialism for one's parents; "the olds" is a close variant worth a separate check.
+- decision: merge
+  candidate: after all her hard yakka
+  into: 'WORK: hard yakka'
+  why: Existing form; the phrase around it is ad hoc. Fatigue noun has no Aussie swap.
+- decision: merge
+  candidate: at sparrow's
+  into: sparrow's fart entry (sparrows-fart)
+  why: Clipped variant of "at sparrow's fart"; listed as a variant there.
+- decision: merge
+  candidate: bawled his eyes out
+  into: 'CRY: bawl {poss} eyes out'
+  why: Already an existing CRY form.
+- decision: reject
+  candidate: a bit of a character
+  reason: not_aussie
+  why: General English euphemism for an eccentric; no Aussie content.
+- decision: reject
+  candidate: a bit of a weirdo
+  reason: not_lexical
+  why: Plain English with "a bit of a" hedge.
+- decision: add_entry
+  candidate: Bit stiff
+  entry:
+    id: stiff-unlucky
+    form: stiff
+    variants:
+    - a bit stiff
+    concept:
+    - NEW:UNLUCKY
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces:
+    - unlucky
+    - hard done by
+    gloss: Out of luck, hard done by.
+    sources:
+    - https://dictionary.dogonews.com/definitions/stiff
+    - https://www.dictionary.com/browse/stiff
+    seen_via: search_summary
+  new_concept:
+    id: UNLUCKY
+    description: Out of luck; hard done by.
+    triggers:
+      predicate_adj:
+      - unlucky
+      - out of luck
+      - hard done by
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Collins/Dictionary.com label "stiff" (unlucky) mainly Australian; "a bit stiff" is the everyday frame. Only swap "unlucky"
+    when predicated of a person or outcome.
+- decision: add_entry
+  candidate: Bored shitless
+  entry:
+    id: bored-shitless
+    form: bored shitless
+    variants: []
+    concept:
+    - NEW:BORED
+    frame: predicate_adj
+    intensity: 4
+    vulgarity: 2
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: Utterly bored.
+    sources:
+    - https://manofmany.com/lifestyle/advice/australian-slang-dictionary
+    - https://greensdictofslang.com/entry/yvel3ya
+  new_concept:
+    id: BORED
+    description: Bored, with nothing to do.
+    triggers:
+      predicate_adj:
+      - bored
+      - bored stiff
+      - bored to tears
+      - bored out of {poss} mind
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Not uniquely Aussie but very current here; web medium plus two agents.
+- decision: reject
+  candidate: a bucketload
+  reason: not_aussie
+  why: General informal English; RICH/MONEY forms cover the money gaps.
+- decision: reject
+  candidate: a bundle of nerves
+  reason: not_aussie
+  why: General English idiom.
+- decision: add_entry
+  candidate: ciggie
+  entry:
+    id: a-ciggie
+    form: a ciggie
+    variants:
+    - ciggie
+    concept:
+    - NEW:CIGARETTE
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces:
+    - a cigarette
+    gloss: A cigarette.
+    sources: []
+  new_concept:
+    id: CIGARETTE
+    description: A cigarette.
+    triggers:
+      np:
+      - a cigarette
+      - cigarette
+      - cigarettes
+      - a smoke
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Common Aus (and UK) diminutive; all three agents; web found only weak sources.
+- decision: add_entry
+  candidate: a cracker of a day
+  entry:
+    id: a-cracker-of-a-day
+    form: a cracker of a day
+    variants:
+    - a cracker of a day
+    concept:
+    - NEW:FINE_DAY
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces:
+    - a beautiful day
+    - a lovely day
+    - a fine day
+    - a gorgeous day
+    gloss: A beautiful, fine day.
+    sources:
+    - https://www.csu.edu.au/current-students/support/international-students/english-language-support/aussie-slang-words-and-phrases
+  new_concept:
+    id: FINE_DAY
+    description: A beautiful sunny day.
+    triggers:
+      np:
+      - a beautiful day
+      - a lovely day
+      - a fine day
+      - a gorgeous day
+      - a glorious day
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Charles Sturt slang page gives it; cracker = excellent (Aus/UK).
+- decision: gate
+  candidate: the do
+  entry:
+    id: a-do
+    form: a do
+    variants: []
+    concept:
+    - NEW:PARTY
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces:
+    - a party
+    - a function
+    gloss: A party or social function.
+    sources: []
+    status: gate
+    flags:
+    - not_aussie
+  new_concept:
+    id: PARTY
+    description: A party or social gathering.
+    triggers:
+      np:
+      - a party
+      - the party
+      - a function
+      - a get-together
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Genuine and current in Aus ("the work do") but general British/Commonwealth informal English, not Aussie-specific.
+- decision: reject
+  candidate: drenched
+  reason: not_lexical
+  why: Plain English; no Aussie form for wet.
+- decision: merge
+  candidate: a feed
+  into: 'EAT: have a feed'
+  why: '"A feed" (a meal) is the existing EAT form; add meal verbs as triggers.'
+  triggers_to_add:
+    EAT:
+      vp:
+      - have lunch
+      - have dinner
+      - grab a bite
+      - grab something to eat
+- decision: gate
+  candidate: a good sort
+  entry:
+    id: a-good-sort
+    form: a good sort
+    variants: []
+    concept:
+    - NEW:ATTRACTIVE
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: dated
+    region: []
+    replaces: []
+    gloss: A good-looking person (older use; also a decent person).
+    sources:
+    - https://boards.straightdope.com/t/a-good-sort/595647
+    - https://greensdictofslang.com/entry/muv4fki
+    status: gate
+    flags:
+    - dubious_meaning
+    - archaic
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: low
+  why: Two senses (attractive vs decent); looks sense is older and can read as sexist; web low.
+- decision: merge
+  candidate: had tea
+  into: tea entry (tea-evening-meal)
+  why: Same sense as "tea" (evening meal).
+- decision: gate
+  candidate: hairy
+  entry:
+    id: hairy-risky
+    form: hairy
+    variants: []
+    concept:
+    - NEW:DANGEROUS
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces:
+    - touch-and-go
+    - dicey
+    gloss: Risky, scary, touch-and-go.
+    sources:
+    - https://listserv.linguistlist.org/pipermail/ads-l/2008-July/082843.html
+    - https://www.vocafy.net/dictionary/en/hairy
+    status: gate
+    flags:
+    - not_aussie
+  new_concept:
+    id: DANGEROUS
+    description: Risky or dangerous.
+    triggers:
+      predicate_adj:
+      - risky
+      - dangerous
+      - touch-and-go
+      - scary
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: General informal English (British 1917), common in Aus but not Aussie-specific.
+- decision: reject
+  candidate: hopped the fence
+  reason: not_lexical
+  why: Plain English "hop/jump a fence"; no Aussie form for jump.
+- decision: reject
+  candidate: in a bad way
+  reason: not_aussie
+  why: General English, and means unwell/in poor shape rather than despondent.
+- decision: reject
+  candidate: jumped the fence
+  reason: not_lexical
+  why: Plain English.
+- decision: style_guide
+  candidate: loud as
+  guidance: '''ADJ as'' intensifier: Australians clip ''as ADJ as anything'' to ''ADJ as'' (loud as, slow as, bored as, wet
+    as, sweet as); use sparingly in yarn mode on plain predicate adjectives, never on adjectives already carrying an Aussie
+    form.'
+  why: Productive pattern, not a word swap.
+- decision: reject
+  candidate: mutt
+  reason: not_aussie
+  why: American/general; Aussie dog words are bitzer (mixed breed) or mongrel.
+- decision: reject
+  candidate: place
+  reason: not_lexical
+  why: Plain English; PLACE "the joint" exists.
+- decision: reject
+  candidate: pricey
+  reason: not_aussie
+  why: General informal English; "exy" is the Aussie form if attested elsewhere.
+- decision: reject
+  candidate: rough luck
+  reason: not_aussie
+  why: General English.
+- decision: gate
+  candidate: shack
+  entry:
+    id: shack-holiday
+    form: the shack
+    variants: []
+    concept:
+    - NEW:HOLIDAY_HOUSE
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region:
+    - tas
+    - sa
+    replaces:
+    - the holiday house
+    - our holiday house
+    - the beach house
+    gloss: A simple holiday house, often by the water.
+    sources:
+    - https://www.australiantraveller.com/tas/south-tasmania/tassie-shack-holiday-home
+    - https://www.urban.com.au/news/nostalgic-fibro-holiday-home-shacks-from-75000-plus
+    status: gate
+    flags:
+    - dubious_meaning
+    seen_via: search_summary
+  new_concept:
+    id: HOLIDAY_HOUSE
+    description: A holiday house or beach house.
+    triggers:
+      np:
+      - holiday house
+      - beach house
+      - holiday home
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Strong Tasmanian (and SA) usage for a holiday house, but regional and easily confused with plain "shack" (hovel). Only
+    fire for "holiday house".
+- decision: reject
+  candidate: sit tight
+  reason: not_aussie
+  why: General English.
+- decision: style_guide
+  candidate: slow as
+  guidance: '''ADJ as'' intensifier: Australians clip ''as ADJ as anything'' to ''ADJ as'' (loud as, slow as, bored as, wet
+    as, sweet as); use sparingly in yarn mode on plain predicate adjectives, never on adjectives already carrying an Aussie
+    form.'
+  why: Productive pattern, not a word swap.
+- decision: reject
+  candidate: smoke
+  reason: not_aussie
+  why: Plain English "a smoke"; covered by ciggie/durry under CIGARETTE (add "a smoke" as trigger).
+- decision: add_entry
+  candidate: Sparrow's fart
+  entry:
+    id: sparrows-fart
+    form: at sparrow's fart
+    variants:
+    - sparrow's fart
+    - at sparrow's
+    - sparrow's
+    concept:
+    - NEW:EARLY
+    frame: adv
+    intensity: 4
+    vulgarity: 1
+    incoherence: 4
+    register: current
+    region: []
+    replaces:
+    - at dawn
+    - at the crack of dawn
+    - first thing in the morning
+    - very early
+    gloss: At the crack of dawn.
+    sources:
+    - https://aussieenglish.com.au/?p=153775
+    - https://wordhistories.net/2026/03/02/sparrowfart/
+    - https://www.phrases.org.uk/idioms/sparrow-fart.html
+  new_concept:
+    id: EARLY
+    description: Very early in the morning.
+    triggers:
+      adv:
+      - at dawn
+      - at the crack of dawn
+      - very early
+      - first thing
+      - at daybreak
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: British dialect origin but strongly current in Aus; vulgarity 1.
+- decision: add_entry
+  candidate: a spunk
+  entry:
+    id: a-spunk
+    form: a spunk
+    variants: []
+    concept:
+    - NEW:ATTRACTIVE
+    frame: np
+    intensity: 3
+    vulgarity: 1
+    incoherence: 3
+    register: current
+    region: []
+    replaces:
+    - a good-looking person
+    - a looker
+    - a hottie
+    gloss: A good-looking person, any gender.
+    sources:
+    - https://lens.monash.edu/orright-you-spunkrats-heres-where-all-our-aussie-summertime-language-came-from-howard-manns-senior-lecturer-in-linguistics-monash-university/
+    - https://www.wiktionary.com/wiki/spunk
+  new_concept:
+    id: ATTRACTIVE
+    description: Good-looking, sexually attractive.
+    triggers:
+      predicate_adj:
+      - attractive
+      - good-looking
+      - handsome
+      - pretty
+      - hot
+      - gorgeous
+      np:
+      - an attractive person
+      - a good-looking bloke
+      - a hottie
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: 'Monash research: the spunk family is the most common Aussie way to say attractive. Vulgar in UK (semen), so Aus contexts
+    only.'
+- decision: add_entry
+  candidate: tea
+  entry:
+    id: tea-evening-meal
+    form: tea
+    variants: []
+    concept:
+    - NEW:DINNER
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces:
+    - dinner
+    - supper
+    - the evening meal
+    gloss: The evening meal.
+    sources:
+    - https://www.wikipedia.org/wiki/Teatime
+    - https://blog.englishteastore.com/2010/12/14/tea-traditions-australia
+    - https://lemmy.4d2.org/post/4357291/5789029
+  new_concept:
+    id: DINNER
+    description: The evening meal.
+    triggers:
+      np:
+      - dinner
+      - supper
+      - the evening meal
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Classic Aus usage (working-class, rural, older); clashes with TEA (cuppa) so only for the evening meal, never "a cup
+    of tea".
+- decision: reject
+  candidate: up with the sparrows
+  reason: wrong_sense
+  why: Means up very early (EARLY), not wide awake; the EARLY gap is covered by sparrow's fart.
+- decision: merge
+  candidate: a yarn
+  into: 'CHAT: have a yarn'
+  why: Existing CHAT form.
+- decision: reject
+  candidate: add or take away
+  reason: not_lexical
+  why: Gettysburg paraphrase, plain English.
+- decision: add_entry
+  candidate: a bad trot
+  entry:
+    id: a-bad-trot
+    form: a bad trot
+    variants:
+    - a rough trot
+    - a tough trot
+    concept:
+    - NEW:ROUGH_PATCH
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces:
+    - a rough patch
+    - a run of bad luck
+    - a bad run
+    - a bad patch
+    gloss: A run of bad luck.
+    sources:
+    - https://macquariedictionary.com.au/?p=11126
+    - https://greensdictofslang.com/entry/wqzopya
+    - https://aussieenglish.com.au/ae-882-aussie-slang-a-bad-trot
+  new_concept:
+    id: ROUGH_PATCH
+    description: A run of bad luck or hard times.
+    triggers:
+      np:
+      - a rough patch
+      - a run of bad luck
+      - a bad run
+      - a bad patch
+      - a lean spell
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Macquarie dates it to the 1940s; variants rough/tough trot. Usually "on a bad trot" or "had a bad trot".
+- decision: reject
+  candidate: battled it out
+  reason: not_lexical
+  why: Plain English.
+- decision: reject
+  candidate: big mouth
+  reason: not_aussie
+  why: General English; NOSY_PERSON/GOSSIP cover the gap.
+- decision: reject
+  candidate: a bit funny
+  reason: not_lexical
+  why: Plain English hedge.
+- decision: add_entry
+  candidate: a bit of a bullshitter
+  entry:
+    id: a-bullshitter
+    form: a bullshitter
+    variants:
+    - a bit of a bullshitter
+    concept:
+    - NEW:LIAR
+    frame: np
+    intensity: 3
+    vulgarity: 2
+    incoherence: 2
+    register: current
+    region: []
+    replaces:
+    - a liar
+    - an exaggerator
+    - a fibber
+    gloss: Someone who habitually spins lies or exaggerates.
+    sources: []
+  new_concept:
+    id: LIAR
+    description: A habitual liar or exaggerator.
+    triggers:
+      np:
+      - a liar
+      - a fibber
+      - a teller of tall tales
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Web kept "bullshitter" (Green's, Aus citations); very current in Aus. "a bit of a" is a hedge, not part of the form.
+- decision: style_guide
+  candidate: a bit of a strange one
+  guidance: '''a bit of a ...'' as a softening hedge before a noun (a bit of a worry, a bit of a character) is a common Aussie
+    understatement habit; style guide, not a swap.'
+  why: Hedge pattern, not lexical.
+- decision: reject
+  candidate: a bit strange
+  reason: not_lexical
+  why: Plain English.
+- decision: add_entry
+  candidate: bitzer
+  entry:
+    id: a-bitzer
+    form: a bitzer
+    variants:
+    - a bitser
+    concept:
+    - NEW:MIXED_BREED_DOG
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: current
+    region: []
+    replaces:
+    - a mongrel dog
+    - a mutt
+    - a mixed breed
+    - a crossbreed
+    gloss: A mixed-breed dog of no particular pedigree.
+    sources:
+    - https://en.wiktionary.com/wiki/bitzer
+    - https://greensdictofslang.com/entry/t2sttci
+    - https://waywordradio.org/bitza_1
+  new_concept:
+    id: MIXED_BREED_DOG
+    description: A dog of mixed or unknown breed.
+    triggers:
+      np:
+      - a mutt
+      - a mongrel dog
+      - a mixed breed
+      - a crossbreed
+      - a mixed-breed dog
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Aus/NZ; only for a mongrel or unremarkable dog, not "dog" in general. Avoid the person sense (offensive).
+- decision: merge
+  candidate: blowing a dog off its chain
+  into: '{subj} {be} blowing dogs off chains entry (blowing-a-dog-off-its-chain)'
+  why: Same idiom; canonical form recorded under the web candidate.
+- decision: style_guide
+  candidate: bored as
+  guidance: '''ADJ as'' intensifier: Australians clip ''as ADJ as anything'' to ''ADJ as'' (loud as, slow as, bored as, wet
+    as, sweet as); use sparingly in yarn mode on plain predicate adjectives, never on adjectives already carrying an Aussie
+    form.'
+  why: Productive pattern, not a word swap.
+- decision: reject
+  candidate: bored stiff
+  reason: not_aussie
+  why: General English (web rejected); BORED gets "bored shitless".
+- decision: gate
+  candidate: bulldust artist
+  entry:
+    id: a-bull-artist
+    form: a bull artist
+    variants: []
+    concept:
+    - NEW:LIAR
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: dated
+    region: []
+    replaces: []
+    gloss: A champion exaggerator or teller of tall tales.
+    sources:
+    - https://thekeenans.id.au/aussieslang.htm
+    - https://greensdictofslang.com/entry/kkqg26i
+    status: gate
+    flags:
+    - archaic
+    seen_via: search_summary
+  new_concept: null
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: low
+  why: '"Bulldust artist" itself is unattested (likely a coinage), but "bull artist" is in Aus slang glossaries; recorded
+    as gate.'
+- decision: reject
+  candidate: bullshit artist
+  reason: not_aussie
+  why: Documented use is American (web); "a bullshitter" and "a bull artist" cover LIAR.
+- decision: reject
+  candidate: chuffed
+  reason: not_aussie
+  why: Labelled British everywhere; HAPPY has stoked/rapt.
+- decision: reject
+  candidate: climbing the walls
+  reason: not_aussie
+  why: General English, and it means restless/stir-crazy more than bored.
+- decision: merge
+  candidate: completely stuffed
+  into: 'TIRED: stuffed'
+  why: Existing TIRED form; "completely" is an intensifier.
+  triggers_to_add:
+    TIRED:
+      predicate_adj:
+      - fatigued
+      - exhausted
+      - weary
+      - worn out
+      - done in
+- decision: reject
+  candidate: copped it
+  reason: wrong_sense
+  why: '"Cop it" means to cop the blame or punishment, not to be unlucky.'
+- decision: add_entry
+  candidate: Couldn't tell a porky
+  entry:
+    id: tell-porkies
+    form: tell porkies
+    variants:
+    - tell a porky
+    - telling porkies
+    concept:
+    - NEW:LIE
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces:
+    - tell lies
+    - tell a lie
+    - lie
+    gloss: Tell fibs.
+    sources:
+    - https://greensdictofslang.com/entry/zpa2phq
+    - https://www.oxfordlearnersdictionaries.com/definition/english/porky_1
+    - https://wordhistories.net/2022/05/03/porky-rhyming-slang/
+    seen_via: search_summary
+  new_concept:
+    id: LIE
+    description: Tell lies.
+    triggers:
+      vp:
+      - tell lies
+      - tell a lie
+      - lie
+      - fib
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Rhyming slang (pork pies = lies), British origin with Green's Australian citations; widely used in Aus.
+- decision: merge
+  candidate: a cracker
+  into: a cracker of a day entry (a-cracker-of-a-day)
+  why: For the beautiful-day gap; the general "excellent" sense of cracker is not this gap.
+- decision: reject
+  candidate: daylight robbery
+  reason: not_aussie
+  why: British/general English (web rejected).
+- decision: gate
+  candidate: dear
+  entry:
+    id: dear-expensive
+    form: dear
+    variants: []
+    concept:
+    - NEW:EXPENSIVE
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces: []
+    gloss: Costly.
+    sources: []
+    status: gate
+    flags:
+    - not_aussie
+  new_concept:
+    id: EXPENSIVE
+    description: Costly, overpriced.
+    triggers:
+      predicate_adj:
+      - expensive
+      - costly
+      - pricey
+      - overpriced
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Very current in Aus ("petrol's dear") but general British/Commonwealth English.
+- decision: reject
+  candidate: dinner
+  reason: not_lexical
+  why: Plain English (the gap word itself); see "tea".
+- decision: merge
+  candidate: doing it just as tough
+  into: 'STRUGGLE: do it tough'
+  why: Existing form.
+  triggers_to_add:
+    BROKE:
+      predicate_adj:
+      - impoverished
+      - destitute
+      - penniless
+      - hard up
+- decision: reject
+  candidate: dripping
+  reason: not_lexical
+  why: Plain English.
+- decision: reject
+  candidate: easy on the eye
+  reason: not_aussie
+  why: General English.
+- decision: gate
+  candidate: fella
+  entry:
+    id: her-fella
+    form: '{poss} fella'
+    variants: []
+    concept:
+    - NEW:HUSBAND
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: A woman's husband or partner.
+    sources: []
+    status: gate
+    flags:
+    - not_aussie
+    - dubious_meaning
+  new_concept:
+    id: HUSBAND
+    description: A woman's husband or male partner.
+    triggers:
+      np:
+      - husband
+      - her husband
+      - my husband
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: low
+  why: '"Her fella" for a partner is heard in Aus but is general UK/Irish informal; clashes with BOY "young fella" and FATHER
+    "old fella".'
+- decision: add_trigger
+  candidate: fuming
+  triggers_to_add:
+    ANGRY:
+      predicate_adj:
+      - irate
+      - enraged
+      - incensed
+  why: '"Fuming" is plain English and already an ANGRY trigger; the gaps (irate, enraged) should fire ANGRY.'
+- decision: reject
+  candidate: give it a once-over
+  reason: not_aussie
+  why: General English.
+- decision: add_entry
+  candidate: gives me the shits
+  entry:
+    id: give-the-shits
+    form: give {obj} the shits
+    variants:
+    - '{subj} {be} giving {obj} the shits'
+    concept:
+    - NEW:ANNOY
+    frame: vp
+    intensity: 4
+    vulgarity: 2
+    incoherence: 3
+    register: current
+    region: []
+    replaces:
+    - annoy {obj}
+    - irritate {obj}
+    - get on {poss} nerves
+    - drive {obj} up the wall
+    gloss: Really annoy or irritate someone.
+    sources: []
+  new_concept:
+    id: ANNOY
+    description: To annoy or irritate someone.
+    triggers:
+      vp:
+      - annoy {obj}
+      - irritate {obj}
+      - get on {poss} nerves
+      - drive {obj} up the wall
+      - bug {obj}
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Very common Aus expression (also "crack the shits" for getting annoyed); search shows only forum use, so evidence is
+    agents plus search.
+- decision: add_entry
+  candidate: a goss
+  entry:
+    id: a-goss
+    form: a goss
+    variants:
+    - the goss
+    - have a goss
+    concept:
+    - NEW:GOSSIP
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces:
+    - a gossip
+    - the latest gossip
+    gloss: A gossip session; the latest about people.
+    sources:
+    - https://en.wiktionary.com/wiki/goss
+    - https://www.macquariedictionary.com.au/?p=10949
+  new_concept:
+    id: GOSSIP
+    description: Gossip; talk about other people.
+    triggers:
+      np:
+      - gossip
+      - the gossip
+      - the latest
+      - rumours
+      - scuttlebutt
+      vp:
+      - have a gossip
+      - gossip
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Wiktionary marks it General Australian; "have a goss" is the common verb frame.
+- decision: merge
+  candidate: grab a feed
+  into: 'EAT: have a feed'
+  why: Same "a feed" form; "grab a feed" is a verb variant.
+- decision: merge
+  candidate: had a quiet yarn
+  into: 'CHAT: have a yarn'
+  why: Existing CHAT form.
+- decision: reject
+  candidate: hard work
+  reason: not_aussie
+  why: General English.
+- decision: add_entry
+  candidate: having a durry
+  entry:
+    id: a-durry
+    form: a durry
+    variants:
+    - a durrie
+    - have a durry
+    concept:
+    - NEW:CIGARETTE
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces:
+    - a cigarette
+    - a smoke
+    - a rollie
+    gloss: A cigarette, often a roll-your-own.
+    sources:
+    - https://www.wiktionary.com/wiki/durry
+    - https://greensdictofslang.com/entry/qjjdlrq
+    seen_via: search_summary
+  new_concept: null
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: high
+  why: Wiktionary and Green's label durry Australian/NZ.
+- decision: merge
+  candidate: having a kip
+  into: 'NAP: a kip'
+  why: Existing NAP form.
+  triggers_to_add:
+    NAP:
+      vp:
+      - doze
+      - dozing
+      - have a doze
+      - nap
+- decision: reject
+  candidate: heavy
+  reason: not_lexical
+  why: Racing/turf jargon for wet ground, not a general Aussie word for wet.
+- decision: reject
+  candidate: holiday house
+  reason: not_lexical
+  why: Plain English; see "shack".
+- decision: reject
+  candidate: I hopped a fence
+  reason: not_lexical
+  why: Sentence fragment, plain English.
+- decision: reject
+  candidate: into the wee hours
+  reason: not_aussie
+  why: General/Scottish English.
+- decision: reject
+  candidate: just round the corner
+  reason: not_lexical
+  why: Plain English.
+- decision: reject
+  candidate: a killing
+  reason: not_aussie
+  why: General English "make a killing".
+- decision: reject
+  candidate: leapt out of bed
+  reason: not_lexical
+  why: Plain English.
+- decision: reject
+  candidate: little girl
+  reason: not_lexical
+  why: Plain English; no Aussie word for girl.
+- decision: reject
+  candidate: a looker
+  reason: not_aussie
+  why: General English; ATTRACTIVE gets the spunk family.
+- decision: reject
+  candidate: mosey
+  reason: not_aussie
+  why: American.
+- decision: reject
+  candidate: Mum and Dad
+  reason: not_lexical
+  why: Plain English (Aus spelling only).
+- decision: reject
+  candidate: nice and comfy
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: no-one was home
+  reason: not_lexical
+  why: Sentence fragment.
+- decision: reject
+  candidate: off the face of the earth
+  reason: not_lexical
+  why: General English idiom.
+- decision: gate
+  candidate: on the bones of our arse
+  entry:
+    id: on-the-bones-of-arse
+    form: on the bones of {poss} arse
+    variants: []
+    concept:
+    - BROKE
+    frame: predicate_adj
+    intensity: 5
+    vulgarity: 2
+    incoherence: 4
+    register: current
+    region: []
+    replaces: []
+    gloss: Flat broke, with nothing left.
+    sources:
+    - https://en.fmyly.com/article/how-do-you-say-poor-in-british-slang/
+    status: gate
+    flags:
+    - not_aussie
+    seen_via: search_summary
+  new_concept: null
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: low
+  why: Known Aus/UK crude idiom, but web found no dictionary attestation (only content-farm sources).
+- decision: reject
+  candidate: once she'd polished it off
+  reason: not_aussie
+  why: General English "polish off"; EAT_IT_ALL "scoff the lot" exists.
+- decision: reject
+  candidate: over it
+  reason: not_aussie
+  why: General English and means fed up, not bored.
+- decision: gate
+  candidate: packing death
+  entry:
+    id: packing-death
+    form: packing death
+    variants: []
+    concept:
+    - SCARED
+    frame: predicate_adj
+    intensity: 5
+    vulgarity: 0
+    incoherence: 4
+    register: current
+    region: []
+    replaces:
+    - terrified
+    - petrified
+    - scared to death
+    gloss: Terrified.
+    sources: []
+    status: gate
+    flags:
+    - dubious_meaning
+  new_concept: null
+  triggers_to_add:
+    SCARED:
+      predicate_adj:
+      - petrified
+      - terrified
+  evidence: agents_only
+  confidence: low
+  why: I believe it is genuine Aus ("packing it/death/shit"), but two searches found no attestation; gate until a source turns
+    up.
+- decision: reject
+  candidate: a pain
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: piped up
+  reason: wrong_sense
+  why: Means spoke up, not cried out; plain English.
+- decision: reject
+  candidate: the place round the corner
+  reason: not_lexical
+  why: Plain English; no Aussie form for nearby.
+- decision: reject
+  candidate: red as a beetroot
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: room
+  reason: not_lexical
+  why: Plain English.
+- decision: reject
+  candidate: rude
+  reason: not_lexical
+  why: Plain English.
+- decision: style_guide
+  candidate: seemed a bit funny
+  guidance: '''a bit'' as an understatement hedge before adjectives (a bit funny, a bit off) is a common Aussie habit; style
+    guide, not a swap.'
+  why: Hedge, not lexical.
+- decision: gate
+  candidate: shame job
+  entry:
+    id: shame-job
+    form: a shame job
+    variants: []
+    concept:
+    - NEW:EMBARRASSING
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: current
+    region: []
+    replaces: []
+    gloss: An embarrassing situation.
+    sources:
+    - https://ewave-atlas.org/sentences/3903
+    - https://blog.linguisten.de/post/105433923749/ae-speakers-the-concept-of-shame
+    status: gate
+    flags:
+    - dubious_meaning
+    seen_via: search_summary
+  new_concept:
+    id: EMBARRASSING
+    description: Embarrassing; causing embarrassment.
+    triggers:
+      predicate_adj:
+      - embarrassing
+      - so embarrassing
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: low
+  why: Aboriginal English (shame = public embarrassment); search confirms AAE "shame" but not the fixed phrase. Culturally
+    specific; avoid in general translation.
+- decision: reject
+  candidate: short with
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: a slog
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: snowed under
+  reason: not_aussie
+  why: General English (web rejected); add as BUSY trigger (see flat out).
+- decision: reject
+  candidate: sodden
+  reason: not_lexical
+  why: Plain English.
+- decision: reject
+  candidate: sorted it
+  reason: not_lexical
+  why: Plain English, wrong gap (agree).
+- decision: reject
+  candidate: spin a yarn
+  reason: wrong_sense
+  why: Means tell a (tall) story, not lie outright; general English.
+- decision: add_entry
+  candidate: spunky
+  entry:
+    id: spunky
+    form: spunky
+    variants: []
+    concept:
+    - NEW:ATTRACTIVE
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 1
+    incoherence: 3
+    register: current
+    region: []
+    replaces:
+    - good-looking
+    - attractive
+    - hot
+    - handsome
+    gloss: Good-looking, sexy.
+    sources:
+    - https://www.oxfordlearnersdictionaries.com/definition/english/spunky
+    - https://lens.monash.edu/orright-you-spunkrats-heres-where-all-our-aussie-summertime-language-came-from-howard-manns-senior-lecturer-in-linguistics-monash-university/
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Oxford Learner's marks the attractive sense Australian; elsewhere means plucky.
+- decision: reject
+  candidate: stiff cheddar
+  reason: unattested
+  why: Search finds it only as a British variant of "hard cheese"; Aussie "stiff" kept instead.
+- decision: add_entry
+  candidate: suss
+  entry:
+    id: suss-suspicious
+    form: suss
+    variants:
+    - sus
+    concept:
+    - NEW:SUSPICIOUS
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces:
+    - suspicious
+    - fishy
+    - shady
+    gloss: Dodgy-looking, not quite right.
+    sources:
+    - https://kaikki.org/dictionary/English/meaning/s/su/suss.html
+    - https://ruk.ca/comment/3414
+  new_concept:
+    id: SUSPICIOUS
+    description: Suspicious; not quite right.
+    triggers:
+      predicate_adj:
+      - suspicious
+      - fishy
+      - shady
+      - a bit off
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Clipped "suspicious"; UK/Aus/NZ, very current. Only for shady oddness, not plain "strange".
+- decision: reject
+  candidate: teeny
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: thrash
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: till all hours
+  reason: not_aussie
+  why: General English.
+- decision: gate
+  candidate: trouble and strife
+  entry:
+    id: trouble-and-strife
+    form: the trouble and strife
+    variants: []
+    concept:
+    - NEW:WIFE
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: dated
+    region: []
+    replaces: []
+    gloss: The wife (rhyming slang).
+    sources:
+    - https://greensdictofslang.com/entry/rs4zika
+    - https://www.diqt.net/en/words/2050972
+    status: gate
+    flags:
+    - not_aussie
+    - archaic
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Cockney origin, used jokily in Aus; dated, level 5 only.
+- decision: add_entry
+  candidate: up themselves
+  entry:
+    id: up-yourself
+    form: '{subj} {be} up {poss}self'
+    variants: []
+    concept:
+    - NEW:ARROGANT
+    frame: clause
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces:
+    - '{subj} {be} stuck-up'
+    - '{subj} {be} full of {poss}self'
+    - '{subj} {be} conceited'
+    gloss: Stuck-up, full of yourself.
+    sources:
+    - https://kangaeroo.com/2010/11/03/up-yourself-up-someone/
+    seen_via: search_summary
+  new_concept:
+    id: ARROGANT
+    description: Conceited, stuck-up, thinks too highly of themselves.
+    triggers:
+      predicate_adj:
+      - arrogant
+      - conceited
+      - big-headed
+      - stuck-up
+      - vain
+      - full of {poss}self
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: 'Aus glossary entry for "up yourself"; also British. Not rude in the sense of impolite: do not use for the "rude" gap.'
+- decision: reject
+  candidate: was a bit off with her
+  reason: not_aussie
+  why: General British/Commonwealth "off with someone"; sentence fragment.
+- decision: reject
+  candidate: went over the fence
+  reason: not_lexical
+  why: Plain English.
+- decision: reject
+  candidate: were a rowdy lot
+  reason: not_lexical
+  why: Plain English fragment.
+- decision: style_guide
+  candidate: wet as
+  guidance: '''ADJ as'' intensifier: Australians clip ''as ADJ as anything'' to ''ADJ as'' (loud as, slow as, bored as, wet
+    as, sweet as); use sparingly in yarn mode on plain predicate adjectives, never on adjectives already carrying an Aussie
+    form.'
+  why: Productive pattern, not a word swap.
+- decision: reject
+  candidate: the wife
+  reason: not_lexical
+  why: Plain English; WIFE gets "the missus".
+- decision: reject
+  candidate: worried sick
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: wringing wet
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: young'un
+  reason: not_aussie
+  why: British/US dialect, not Aussie.
+- decision: add_entry
+  candidate: '{subj} {have} a face like a wet week'
+  entry:
+    id: face-like-a-wet-week
+    form: '{subj} {have} a face like a wet week'
+    variants: []
+    concept:
+    - SAD
+    frame: clause
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: dated
+    region: []
+    replaces:
+    - looked glum
+    - looked dejected
+    - looked miserable
+    - looked down in the mouth
+    - looks glum
+    - looks dejected
+    gloss: Look thoroughly glum.
+    sources:
+    - https://greensdictofslang.com/entry/qacz4ha
+  new_concept: null
+  triggers_to_add:
+    SAD:
+      predicate_adj:
+      - despondent
+      - dejected
+      - downcast
+      - glum
+      - down in the mouth
+  evidence: web
+  confidence: medium
+  why: Green's lists it as Australian with Aus literary citations; describes appearance, so best for "looked glum/dejected".
+- decision: add_entry
+  candidate: arc up
+  entry:
+    id: arc-up
+    form: arc up
+    variants:
+    - arc up at {obj}
+    concept:
+    - LOSE_TEMPER
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces:
+    - flare up
+    - blow up
+    - get angry
+    gloss: Flare up angrily.
+    sources:
+    - https://en.wiktionary.com/wiki/arc_up
+    - https://www.macquariedictionary.com.au/arcing-up/
+    - https://greensdictofslang.com/entry/yggdwia
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Macquarie/Wiktionary/Green's; especially Victoria.
+- decision: add_entry
+  candidate: bags
+  entry:
+    id: bags-claim
+    form: bags {np}
+    variants:
+    - bags I {np}
+    concept:
+    - NEW:CLAIM
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces:
+    - dibs on {np}
+    - call dibs on {np}
+    - I call {np}
+    gloss: Claim something first ("I bags the front seat").
+    sources:
+    - https://www.wiktionary.com/wiki/bags
+    - https://www.writerscentre.com.au/blog/qa-bags-dibs-and-calling-shotgun/
+  new_concept:
+    id: CLAIM
+    description: Claim something first (dibs).
+    triggers:
+      vp:
+      - dibs on {np}
+      - call dibs on {np}
+      - claim {np} first
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Aus/NZ/Ireland, playful/childish register.
+- decision: add_entry
+  candidate: biffo
+  entry:
+    id: biffo
+    form: a bit of biffo
+    variants:
+    - biffo
+    - a biffo
+    concept:
+    - FIGHT
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: current
+    region: []
+    replaces:
+    - a punch-up
+    - a brawl
+    - fisticuffs
+    gloss: Punch-ups, physical fighting.
+    sources:
+    - https://en.wiktionary.com/wiki/biffo
+    - https://greensdictofslang.com/entry/uq4enqq
+    - https://platform.aussieenglish.com.au/blog/ae-999-aussie-slang-biffo
+  new_concept: null
+  triggers_to_add:
+    FIGHT:
+      np:
+      - a brawl
+      - a punch-up
+      - a scuffle
+      - an argument
+      - a row
+      - a quarrel
+  evidence: web
+  confidence: high
+  why: Aus/NZ, footy commentary staple.
+- decision: add_entry
+  candidate: '{subj} {be} blowing dogs off chains'
+  entry:
+    id: blowing-a-dog-off-its-chain
+    form: '{subj} {be} blowing a dog off its chain'
+    variants:
+    - '{subj} {be} blowing dogs off chains'
+    concept:
+    - NEW:WINDY
+    frame: clause
+    intensity: 5
+    vulgarity: 0
+    incoherence: 4
+    register: current
+    region: []
+    replaces:
+    - '{subj} {be} blowing a gale'
+    - '{subj} {be} very windy'
+    - '{subj} {be} blowing hard'
+    gloss: The wind is ferocious.
+    sources:
+    - https://weatherzone.com.au/news/dry-as-a-dead-dingos-your-favourite-aussie-weather-phrases/534944
+    - https://phrases.org.uk/bulletin_board/52/messages/55.html
+  new_concept:
+    id: WINDY
+    description: Very windy weather.
+    triggers:
+      predicate_adj:
+      - windy
+      - very windy
+      - gusty
+      - blowing a gale
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Aus/NZ weather idiom (Weatherzone); a direct search found nothing more, so medium.
+- decision: gate
+  candidate: cheesed off
+  entry:
+    id: cheesed-off
+    form: cheesed off
+    variants: []
+    concept:
+    - FED_UP
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: dated
+    region: []
+    replaces: []
+    gloss: Fed up and irritated.
+    sources:
+    - https://www.macquariedictionary.com.au/?p=11012
+    - https://icis-2014.m.asnevents.com.au/information/page/53
+    status: gate
+    flags:
+    - not_aussie
+    - archaic
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: British slang, dated; used in Aus but not Aussie-specific.
+- decision: add_entry
+  candidate: chuck a bombie
+  entry:
+    id: chuck-a-bombie
+    form: chuck a bombie
+    variants:
+    - do a bomb
+    - chuck a bomb
+    concept:
+    - NEW:BOMB_DIVE
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: current
+    region: []
+    replaces:
+    - do a cannonball
+    - dive-bomb
+    - cannonball into the pool
+    gloss: Jump into water tucked up for a big splash.
+    sources:
+    - https://www.macquariedictionary.com.au/?p=11070
+  new_concept:
+    id: BOMB_DIVE
+    description: Jump into water in a tucked cannonball.
+    triggers:
+      vp:
+      - do a cannonball
+      - cannonball
+      - dive-bomb
+      - do a dive bomb
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Macquarie; water context only.
+- decision: add_entry
+  candidate: chuck a mickey
+  entry:
+    id: chuck-a-micky
+    form: chuck a micky
+    variants:
+    - chuck a mickey
+    concept:
+    - LOSE_TEMPER
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: current
+    region: []
+    replaces: []
+    gloss: Throw a tantrum.
+    sources:
+    - https://blog.oup.com.au/?p=3928
+    - https://macquariedictionary.com.au/?p=10941
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: OUP Australia blog and Macquarie; part of the "chuck a ..." family.
+- decision: add_entry
+  candidate: a counter lunch
+  entry:
+    id: a-counter-lunch
+    form: a counter lunch
+    variants:
+    - a counter meal
+    concept:
+    - NEW:PUB_MEAL
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: dated
+    region: []
+    replaces:
+    - a pub lunch
+    - a pub meal
+    - a bistro meal
+    gloss: A cheap, hearty pub meal.
+    sources:
+    - https://grantourismotravels.com/the-renaissance-of-the-great-australian-pub-counter-meal/
+    - https://www.ipswichfirst.com.au/counter-meals-are-they-a-thing-of-the-past
+  new_concept:
+    id: PUB_MEAL
+    description: A meal at the pub.
+    triggers:
+      np:
+      - a pub lunch
+      - a pub meal
+      - a pub dinner
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Classic Aus pub term; pub context only.
+- decision: add_entry
+  candidate: crook on
+  entry:
+    id: crook-on
+    form: '{subj} {be} crook on {obj}'
+    variants:
+    - '{subj} {be} crook at {obj}'
+    concept:
+    - ANGRY
+    frame: clause
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: dated
+    region: []
+    replaces:
+    - '{subj} {be} angry with {obj}'
+    - '{subj} {be} cross with {obj}'
+    - '{subj} {be} mad at {obj}'
+    gloss: Angry with someone.
+    sources:
+    - https://www.inyourpocket.com/australia/goldcoast/articles/australian-english-glossary
+    - https://www.wiktionary.com/wiki/crook
+    - https://www.macquariedictionary.com.au/catching-a-crook/
+    seen_via: search_summary
+  new_concept: null
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Wiktionary gives "crook at/about" (angry) as Aus/NZ; Macquarie gives go crook on = scold. "Crook on" is a spoken variant.
+- decision: add_entry
+  candidate: a doof
+  entry:
+    id: a-bush-doof
+    form: a bush doof
+    variants:
+    - a doof
+    concept:
+    - NEW:RAVE
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: current
+    region: []
+    replaces:
+    - a rave
+    - an outdoor rave
+    - a bush rave
+    gloss: An outdoor electronic dance party, often in the bush.
+    sources:
+    - https://en.wikipedia.org/wiki/Doof_(disambiguation)
+    - https://kaweah.freedombox.rocks/kiwix/wiktionary_en_all_maxi_2023-04/doof
+  new_concept:
+    id: RAVE
+    description: A rave or outdoor dance party.
+    triggers:
+      np:
+      - a rave
+      - an outdoor rave
+      - a dance party
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: 'Narrow sense: rave, not any party.'
+- decision: add_entry
+  candidate: earbash {obj}
+  entry:
+    id: earbash
+    form: earbash {obj}
+    variants:
+    - give {obj} an earbashing
+    concept:
+    - TALK_ON
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces:
+    - talk {poss} ear off
+    - talk at {obj}
+    gloss: Talk at someone non-stop.
+    sources:
+    - https://slll.cass.anu.edu.au/centres/andc/meanings-origins/e
+    - https://greensdictofslang.com/entry/k63cu4y
+  new_concept: null
+  triggers_to_add:
+    TALK_ON:
+      vp:
+      - talk {poss} ear off
+      - talk at length
+      - go on and on
+      - natter on
+  evidence: web
+  confidence: high
+  why: 'ANDC: since the 1940s.'
+- decision: add_entry
+  candidate: full as a state school
+  entry:
+    id: full-as-a-state-school
+    form: full as a state school
+    variants: []
+    concept:
+    - DRUNK
+    frame: predicate_adj
+    intensity: 5
+    vulgarity: 0
+    incoherence: 5
+    register: dated
+    region: []
+    replaces: []
+    gloss: Extremely drunk.
+    sources:
+    - https://greensdictofslang.com/entry/wtdg3di
+  new_concept: null
+  triggers_to_add:
+    DRUNK:
+      predicate_adj:
+      - inebriated
+      - intoxicated
+      - plastered
+      - tipsy
+  evidence: web
+  confidence: medium
+  why: '"Full as a ..." family; Green''s cites Beckett.'
+- decision: add_entry
+  candidate: a furphy
+  entry:
+    id: a-furphy
+    form: a furphy
+    variants: []
+    concept:
+    - NEW:FALSE_RUMOUR
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: current
+    region: []
+    replaces:
+    - a false rumour
+    - an unfounded rumour
+    - a baseless rumour
+    - a myth
+    gloss: A rumour or tall story passed off as fact.
+    sources:
+    - https://en.wikipedia.org/wiki/Furphy
+    - https://en.wiktionary.com/wiki/furphy
+  new_concept:
+    id: FALSE_RUMOUR
+    description: An untrue rumour.
+    triggers:
+      np:
+      - a false rumour
+      - an unfounded rumour
+      - a baseless rumour
+      - a false story
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: WWI water-cart origin. Only for an untrue rumour, never gossip in general or a deliberate lie.
+- decision: reject
+  candidate: a gasbag
+  reason: not_aussie
+  why: General Commonwealth/US slang; no Aussie colour (TALK_ON has rabbit on, earbash).
+- decision: add_entry
+  candidate: goodo
+  entry:
+    id: goodo
+    form: goodo
+    variants:
+    - good-oh
+    concept:
+    - AFFIRM
+    frame: interjection
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: dated
+    region: []
+    replaces:
+    - all right then
+    - okay then
+    - good, that's settled
+    gloss: Righto, good, that's settled.
+    sources:
+    - https://greensdictofslang.com/entry/o5rhdpy
+    - https://www.wiktionary.com/wiki/goodo
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Aus/NZ, older speakers; still heard.
+- decision: add_entry
+  candidate: a hoon
+  entry:
+    id: a-hoon
+    form: a hoon
+    variants: []
+    concept:
+    - NEW:HOON
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces:
+    - a hooligan
+    - a lout
+    - a reckless driver
+    - a boy racer
+    gloss: A lout, especially a loud, reckless driver.
+    sources:
+    - https://en.wikipedia.org/wiki/Hoon
+    - https://slll.cass.anu.edu.au/files/andc/Word%20of%20the%20Month%20July%202015.pdf
+    - https://en.wiktionary.com/wiki/hoon
+  new_concept:
+    id: HOON
+    description: A hooligan or reckless show-off driver.
+    triggers:
+      np:
+      - a hooligan
+      - a lout
+      - a reckless driver
+      - a boy racer
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Aus; official "anti-hoon laws". Also verb "hoon around". Only for louts/cars, not plain "noisy".
+- decision: add_entry
+  candidate: little lunch
+  entry:
+    id: little-lunch
+    form: little lunch
+    variants: []
+    concept:
+    - NEW:RECESS
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces:
+    - recess
+    - morning recess
+    - the morning break at school
+    gloss: The morning snack break at primary school.
+    sources:
+    - https://childmags.com.au/5-reasons-we-love-little-lunch/
+    - https://actf.com.au/news/10185/hey-it-s-almost-time-for-little-lunch
+  new_concept:
+    id: RECESS
+    description: The mid-morning school break.
+    triggers:
+      np:
+      - recess
+      - morning recess
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Macquarie (via Wikipedia); school context only; regional (others say recess or morning tea), state split unverified.
+- decision: add_entry
+  candidate: make a good quid
+  entry:
+    id: make-a-good-quid
+    form: make a good quid
+    variants:
+    - turn a quid
+    concept:
+    - NEW:EARN_WELL
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces:
+    - earn a lot
+    - make good money
+    - earn good money
+    - do well for {poss}self
+    gloss: Earn good money.
+    sources:
+    - https://boards.straightdope.com/t/quid-anyone/194090
+    - https://greensdictofslang.com/entry/jsrihyi
+  new_concept:
+    id: EARN_WELL
+    description: Earn good money.
+    triggers:
+      vp:
+      - earn a lot
+      - make good money
+      - earn good money
+      - make a lot of money
+  triggers_to_add:
+    RICH:
+      predicate_adj:
+      - rolling in money
+      - made of money
+      np:
+      - a heap of money
+      - a pile of cash
+  evidence: web
+  confidence: medium
+  why: Quid survives as a loose word for money; means earning well, not being wealthy, so not RICH.
+- decision: add_entry
+  candidate: muck around
+  entry:
+    id: muck-around
+    form: muck around
+    variants:
+    - muck about
+    - mucking around
+    concept:
+    - NEW:FOOL_AROUND
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces:
+    - fool around
+    - mess about
+    - mess around
+    - kid around
+    - horse around
+    gloss: Fool about, not be serious.
+    sources:
+    - https://www.wiktionary.com/wiki/muck_up
+    - https://www.oxfordlearnersdictionaries.com/definition/english/muck-around
+  new_concept:
+    id: FOOL_AROUND
+    description: Fool about; not be serious.
+    triggers:
+      vp:
+      - fool around
+      - mess about
+      - mess around
+      - kid around
+      - horse around
+      - play the fool
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: 'Wiktionary: British/Australian; "just mucking around" = only joking.'
+- decision: add_entry
+  candidate: off with the fairies
+  entry:
+    id: off-with-the-fairies
+    form: off with the fairies
+    variants:
+    - away with the fairies
+    - off with the pixies
+    concept:
+    - NEW:DAYDREAMY
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces:
+    - absent-minded
+    - in a world of {poss} own
+    - daydreaming
+    - spacey
+    - miles away
+    gloss: Daydreaming, away in your own world.
+    sources:
+    - https://aussieenglish.com.au/?p=150557
+  new_concept:
+    id: DAYDREAMY
+    description: Vague or daydreaming, not paying attention.
+    triggers:
+      predicate_adj:
+      - absent-minded
+      - distracted
+      - daydreaming
+      - spacey
+      - miles away
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Aus variant of British "away with the fairies"; dreamy, not crazy.
+- decision: add_entry
+  candidate: perv on {obj}
+  entry:
+    id: perv-on
+    form: perv on {obj}
+    variants:
+    - have a perv at {obj}
+    concept:
+    - NEW:OGLE
+    frame: vp
+    intensity: 3
+    vulgarity: 1
+    incoherence: 3
+    register: current
+    region: []
+    replaces:
+    - ogle {obj}
+    - leer at {obj}
+    - check {obj} out
+    gloss: Ogle someone (or jokingly have a good look).
+    sources:
+    - https://www.oxfordlearnersdictionaries.com/definition/english/perv_1
+    - https://www.wiktionary.com/wiki/perv
+  new_concept:
+    id: OGLE
+    description: Ogle or leer at someone.
+    triggers:
+      vp:
+      - ogle {obj}
+      - leer at {obj}
+      - eye {obj} up
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: 'Oxford labels the verb Aus/NZ. Sexual overtone: never a plain substitute for "watch".'
+- decision: gate
+  candidate: pull the other one
+  entry:
+    id: pull-the-other-one
+    form: pull the other one
+    variants: []
+    concept:
+    - REALLY_Q
+    frame: interjection
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces:
+    - come off it
+    - yeah right
+    - I don't believe you
+    gloss: I don't believe you.
+    sources:
+    - https://en.wiktionary.org/wiki/my_arse
+    - https://waywordradio.org/idioms-for-expressing-doubt/
+    status: gate
+    flags:
+    - not_aussie
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: British origin; used in Aus but not distinctive. REALLY_Q already exists.
+- decision: add_entry
+  candidate: rough as bags
+  entry:
+    id: rough-as-bags
+    form: rough as bags
+    variants: []
+    concept:
+    - NEW:UNCOUTH
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: current
+    region: []
+    replaces:
+    - uncouth
+    - crude
+    - coarse
+    - ill-mannered
+    - rough around the edges
+    gloss: Crude and unpolished.
+    sources:
+    - https://greensdictofslang.com/entry/j45brmy
+    - https://www.funtrivia.com/trivia-quiz/Humanities/Aussie-Lingo-98647.html
+  new_concept:
+    id: UNCOUTH
+    description: Crude, rough, unpolished in manners or finish.
+    triggers:
+      predicate_adj:
+      - uncouth
+      - crude
+      - coarse
+      - ill-mannered
+      - rough around the edges
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Aus/NZ (Green's). "Rough as guts" likely too but unconfirmed.
+- decision: add_entry
+  candidate: shickered
+  entry:
+    id: shickered
+    form: shickered
+    variants: []
+    concept:
+    - DRUNK
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: dated
+    region: []
+    replaces: []
+    gloss: Drunk.
+    sources:
+    - https://greensdictofslang.com/entry/cgqa7ra
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: From Yiddish shicker; old-timer flavour, level 5.
+- decision: add_entry
+  candidate: '{subj} {be} {poss} shout'
+  entry:
+    id: your-shout
+    form: '{subj} {be} {poss} shout'
+    variants:
+    - shout {obj} {np}
+    concept:
+    - NEW:SHOUT
+    frame: clause
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces:
+    - '{subj} {be} {poss} round'
+    - '{subj} {be} {poss} treat'
+    - '{subj} {be} on {obj}'
+    gloss: It's someone's turn to pay or treat.
+    sources:
+    - https://en.wikipedia.org/wiki/Round_of_drinks
+    - https://en.wiktionary.com/wiki/shout
+    - https://greensdictofslang.com/entry/o6v3rgi
+  new_concept:
+    id: SHOUT
+    description: Pay for others; buy a round or treat.
+    triggers:
+      clause:
+      - '{subj} {be} {poss} round'
+      - '{subj} {be} {poss} treat'
+      vp:
+      - buy a round
+      - treat {obj} to {np}
+      - pay for {obj}
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Wiktionary UK/Aus/NZ, far more common in Aus. Also the verb "shout {obj} {np}". "Generous" only where it means paying.
+- decision: add_entry
+  candidate: a spunkrat
+  entry:
+    id: a-spunkrat
+    form: a spunkrat
+    variants: []
+    concept:
+    - NEW:ATTRACTIVE
+    frame: np
+    intensity: 3
+    vulgarity: 1
+    incoherence: 4
+    register: current
+    region: []
+    replaces:
+    - a hottie
+    - a good-looking person
+    gloss: An attractive person (jokey).
+    sources:
+    - https://lens.monash.edu/orright-you-spunkrats-heres-where-all-our-aussie-summertime-language-came-from-howard-manns-senior-lecturer-in-linguistics-monash-university/
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: 'Monash (Manns): playful, often as address.'
+- decision: add_entry
+  candidate: stir the possum
+  entry:
+    id: stir-the-possum
+    form: stir the possum
+    variants: []
+    concept:
+    - NEW:STIR
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: current
+    region: []
+    replaces:
+    - stir up trouble
+    - cause a fuss
+    - rock the boat
+    - make waves
+    gloss: Deliberately stir up trouble or debate.
+    sources:
+    - https://macquariedictionary.com.au/?p=11032
+    - https://wordhistories.net/2024/06/25/stir-the-possum/
+  new_concept:
+    id: STIR
+    description: Deliberately stir up trouble or controversy.
+    triggers:
+      vp:
+      - stir up trouble
+      - cause a fuss
+      - rock the boat
+      - make waves
+      - provoke {obj}
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Macquarie, recorded since the late 1800s.
+- decision: add_entry
+  candidate: suss {obj} out
+  entry:
+    id: suss-out
+    form: suss {obj} out
+    variants: []
+    concept:
+    - NEW:CHECK_OUT
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces:
+    - figure {obj} out
+    - check {obj} out
+    - size {obj} up
+    - work {obj} out
+    gloss: Check something out; work out what's going on.
+    sources:
+    - https://en.wiktionary.com/wiki/suss
+    - https://www.wordnik.com/words/suss
+  new_concept:
+    id: CHECK_OUT
+    description: Investigate, size up, figure out.
+    triggers:
+      vp:
+      - figure {obj} out
+      - check {obj} out
+      - size {obj} up
+      - look into {np}
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: UK/Aus/NZ, very current.
+- decision: add_entry
+  candidate: '{subj} {have} tickets on {reflexive}'
+  entry:
+    id: tickets-on-yourself
+    form: '{subj} {have} tickets on {poss}self'
+    variants: []
+    concept:
+    - NEW:ARROGANT
+    frame: clause
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: dated
+    region: []
+    replaces:
+    - '{subj} {be} conceited'
+    - '{subj} {be} big-headed'
+    - '{subj} {be} full of {poss}self'
+    gloss: Think too highly of yourself.
+    sources:
+    - https://slll.cass.anu.edu.au/centres/andc/meanings-origins/t
+    - https://aussieenglish.com.au/?p=124458
+    - https://greensdictofslang.com/entry/lz6clga
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: ANDC records it from 1904; tied to tall-poppy culture. Slot changed from {reflexive} to the {poss}self convention used
+    by existing forms.
+- decision: add_entry
+  candidate: unco
+  entry:
+    id: unco
+    form: unco
+    variants: []
+    concept:
+    - NEW:CLUMSY
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: current
+    region: []
+    replaces:
+    - clumsy
+    - uncoordinated
+    - awkward
+    - bumbling
+    gloss: Clumsy, poorly coordinated.
+    sources:
+    - https://www.macquariedictionary.com.au/?p=11104
+    - https://www.wiktionary.com/wiki/unco
+  new_concept:
+    id: CLUMSY
+    description: Clumsy, badly coordinated.
+    triggers:
+      predicate_adj:
+      - clumsy
+      - uncoordinated
+      - bumbling
+      - all thumbs
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Aus/NZ, playground origin (Macquarie).
+- decision: add_entry
+  candidate: a willy-willy
+  entry:
+    id: a-willy-willy
+    form: a willy-willy
+    variants: []
+    concept:
+    - NEW:WHIRLWIND
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: current
+    region: []
+    replaces:
+    - a dust devil
+    - a whirlwind
+    - a dust storm
+    gloss: A small dust whirlwind.
+    sources:
+    - https://dictionary.com/browse/willy-willy
+    - https://wordnik.com/words/willy%20willy
+  new_concept:
+    id: WHIRLWIND
+    description: A dust devil or small whirlwind.
+    triggers:
+      np:
+      - a dust devil
+      - a whirlwind
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: 'Aus, probably Aboriginal origin; inland/northern. Narrow sense: not plain "windy".'

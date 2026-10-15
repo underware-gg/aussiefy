@@ -1,0 +1,61 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {"evidence": "Every technical point kept: the definition, the four-step sign-in flow, three purposes, storage limits (\"usually in the hundreds\", \"usually 4KB\"), performance cost, the Set-Cookie examples. \"Storage APIs can store a fair bit more data\" keeps larger amounts.", "score": 5},
+        "sense": {"evidence": "Terms fit: \"have a squiz at what they mean for privacy and security\", \"a fair bit more data\", \"if you've got heaps of cookies set\", \"to work out whether\".", "score": 5},
+        "authenticity": {"evidence": "Natural Australian tech writing: \"personalised\", \"analysing\", \"Here's how a basic user sign-in system works\". Nothing forced.", "score": 5},
+        "register": {"evidence": "A light level-2 touch (\"squiz\", \"heaps\", \"a fair bit\") on clear docs prose; no swearing.", "score": 5},
+        "tone": {"evidence": "Stays a clear MDN explainer.", "score": 5},
+        "flow": {"evidence": "Reads smoothly: \"After getting an HTTP request, a server can send one or more ... headers with the response, and each one sets a separate cookie.\"", "score": 5},
+        "variety": {"evidence": "Little slang, none repeated.", "score": 5},
+        "essence": {"evidence": "Unmistakably the MDN cookies article, code blocks and links intact.", "score": 5}
+      },
+      "problems": [
+        {"quote": "shopping cart contents", "original": "shopping cart contents", "severity": "minor", "why": "US cart kept; trolley would be the Australian word, though cart is common online."}
+      ],
+      "summary": "Faithful, natural and at the asked weight."
+    },
+    "B": {
+      "scores": {
+        "meaning": {"evidence": "Text mostly verbatim, but HTTP cookies are renamed biscuits in places (\"also known as a web bickie or browser bickie\", \"the contents of HTTP bickies\", \"A bikkie is set by specifying a name-value pair\"), which misnames the technical term readers need.", "score": 3},
+        "sense": {"evidence": "\"bickie\" is the Aussie word for an edible biscuit, not for an HTTP cookie; the technical term takes the wrong sense throughout.", "score": 1},
+        "authenticity": {"evidence": "Mechanical, inconsistent swaps: \"bickies\", \"bikkies\" and \"cookies\" alternate in one paragraph, and a sentence starts lowercase (\"bickies are mainly used for three purposes\"). US \"personalized\" left in.", "score": 1},
+        "register": {"evidence": "Apart from bickie and \"heaps\", untranslated; under level 2, and the swaps that are there are wrong.", "score": 2},
+        "tone": {"evidence": "The explainer tone is undercut by turning the subject into biscuits: \"a web bickie or browser bickie\".", "score": 3},
+        "flow": {"evidence": "Jarring: \"The browser may store bikkies, create new cookies, modify existing ones\"; \"bickies are mainly used\".", "score": 2},
+        "variety": {"evidence": "One swap repeated about ten times in two spellings.", "score": 1},
+        "essence": {"evidence": "Recognisably the MDN article, but the core term is muddled.", "score": 3}
+      },
+      "problems": [
+        {"quote": "also known as a web bickie or browser bickie", "original": "also known as a web cookie or browser cookie", "severity": "critical", "why": "HTTP cookie is a fixed technical term; bickie is a food word and misleads readers."},
+        {"quote": "The browser may store bikkies, create new cookies", "original": "The browser may store cookies, create new cookies", "severity": "major", "why": "Inconsistent spelling and term within one sentence."},
+        {"quote": "bickies are mainly used for three purposes", "original": "Cookies are mainly used for three purposes", "severity": "minor", "why": "Lowercase sentence start; mechanical substitution."}
+      ],
+      "summary": "A wrong-sense swap of the article's core technical term, on otherwise untranslated text."
+    },
+    "C": {
+      "scores": {
+        "meaning": {"evidence": "All points kept; \"Recording and analysing what users get up to\" for user behavior and \"out of the box\" for by default are fair recasts; \"shopping trolley contents\" localises.", "score": 5},
+        "sense": {"evidence": "Terms fit: \"it still reckons the user is signed in\", \"Browsers are generally capped at\", \"drag down performance\", \"what users get up to\".", "score": 5},
+        "authenticity": {"evidence": "Natural Australian: \"shopping trolley\", \"heads to a different page\", \"run through best practice\".", "score": 5},
+        "register": {"evidence": "Light level-2 touch (\"reckons\", \"trolley\", \"get up to\"); no swearing.", "score": 5},
+        "tone": {"evidence": "Clear explainer tone kept.", "score": 5},
+        "flow": {"evidence": "Reads smoothly: \"Cookies get sent with every request, so they can drag down performance\".", "score": 5},
+        "variety": {"evidence": "Varied; \"have a look\" / \"look at\" in one sentence (\"we'll have a look at the main uses ... and look at what they mean\").", "score": 5},
+        "essence": {"evidence": "Unmistakably the MDN cookies article.", "score": 5}
+      },
+      "problems": [
+        {"quote": "we'll have a look at the main uses of cookies, run through best practice for using them, and look at what they mean", "original": "we will explore the main uses of cookies, explain best practices for using them, and look at their privacy and security implications", "severity": "minor", "why": "Look repeated within one sentence."}
+      ],
+      "summary": "Faithful, natural and well localised; level with A."
+    }
+  },
+  "rankings": {
+    "tone": [["A", "C"], ["B"]],
+    "flow": [["A", "C"], ["B"]],
+    "variety": [["A", "C"], ["B"]],
+    "essence": [["A", "C"], ["B"]],
+    "overall": [["A", "C"], ["B"]]
+  }
+}

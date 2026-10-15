@@ -1,0 +1,330 @@
+{
+ "candidates": {
+  "A": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every point kept, code and links intact: \"rustc would get it wrong and generate a trait object vtable with a null pointer\", \"it can be grounds for\", \"(as is par for the course with UB)\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"every man and his dog\" for everyone, \"No worries\", \"par for the course\", \"Heaps of people pitched in\", \"give us a hand\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Natural Aussie tech-blog voice: \"Haven't got it yet? No worries\", \"If you're keen to give us a hand\".",
+     "score": 5
+    },
+    "register": {
+     "evidence": "Chatty and Aussie throughout (\"Good news: the Rust team's just put out\"), a touch restrained for level 4; no swearing, within the dial.",
+     "score": 4
+    },
+    "tone": {
+     "evidence": "Keeps the friendly, precise release-note tone; the technical warning stays clear: \"That ends up as undefined behaviour in the\\nemitted code.\"",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads smoothly: \"Back in Rust 1.98.0, in some cases, rustc would get it wrong\".",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Varied: \"Good news\", \"No worries\", \"par for the course\", \"have a go at\", \"pitched in\", \"the lot of you\".",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Unmistakably the Rust point-release post.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "Rust's a programming language that's giving every man and his dog what they need to build",
+     "original": "Rust is a programming language that is empowering everyone to build",
+     "severity": "minor",
+     "why": "Slightly wordy recasting of the tagline."
+    }
+   ],
+   "summary": "A natural, faithful and precise Aussie retelling, a shade light for level 4."
+  },
+  "B": {
+   "scores": {
+    "meaning": {
+     "evidence": "All points kept, but the tagline changes \"efficient\" to \"software that's reliable and runs like a bloody dream\", and \"any old weird effects at all\" loosens \"arbitrary effects\".",
+     "score": 4
+    },
+    "sense": {
+     "evidence": "Mostly fits (\"stuff up a trait object vtable\", \"code it spits out\", \"fair game for\"), though \"runs like a bloody dream\" overclaims \"efficient\" and \"UB, the mongrel\" strains.",
+     "score": 4
+    },
+    "authenticity": {
+     "evidence": "Largely natural, with some forced touches: \"the lot of youse\" is stagey in a project blog, \"already got an older version of Rust in through rustup\" is awkward.",
+     "score": 4
+    },
+    "register": {
+     "evidence": "Level-4 Aussie with dad-level swearing: \"runs like a bloody dream\", \"(as you'd expect with UB, the mongrel)\".",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "The cheerful release tone mostly holds, though \"the mongrel\" and \"youse\" push it toward pub banter in a technical note.",
+     "score": 4
+    },
+    "flow": {
+     "evidence": "Mostly smooth, with one clunky join: \"If you've already got an older version of Rust in through rustup\".",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "Varied: \"pushed out\", \"a leg-up\", \"grabbing\", \"sorts out\", \"stuff up\", \"spits out\", \"trip over\".",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Clearly the release note retold.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "runs like a bloody dream",
+     "original": "reliable and efficient software",
+     "severity": "minor",
+     "why": "Overstates \"efficient\" into a performance boast."
+    },
+    {
+     "quote": "the lot of youse",
+     "original": "all of you",
+     "severity": "minor",
+     "why": "\"Youse\" is a broad, stagey choice for a project's thank-you."
+    },
+    {
+     "quote": "already got an older version of Rust in through rustup",
+     "original": "If you have a previous version of Rust installed via rustup",
+     "severity": "minor",
+     "why": "Awkward phrasing."
+    },
+    {
+     "quote": "as you'd expect with UB, the mongrel",
+     "original": "as is typical for UB",
+     "severity": "minor",
+     "why": "\"Mongrel\" strains as a tag on undefined behaviour."
+    }
+   ],
+   "summary": "Lively and Aussie at the right level, with a few forced or overclaiming touches."
+  },
+  "C": {
+   "scores": {
+    "meaning": {
+     "evidence": "The original verbatim apart from two swaps, so nothing is lost: \"rustc would incorrectly generate a trait object vtable\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "The lone idiom fits: \"empowering every man and his dog\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Too little Aussie to judge; the one idiom sits oddly in corporate prose: \"is empowering every man and his dog\".",
+     "score": 3
+    },
+    "register": {
+     "evidence": "Essentially untranslated for level 4: \"If you have a previous version of Rust installed via rustup\".",
+     "score": 1
+    },
+    "tone": {
+     "evidence": "The original tone is untouched.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads as the original does, with a jarring \"empowering every man and his dog\".",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "One idiom in the whole text.",
+     "score": 1
+    },
+    "essence": {
+     "evidence": "Unmistakably the original, since it is the original.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "If you have a previous version of Rust installed via rustup",
+     "original": "If you have a previous version of Rust installed via rustup",
+     "severity": "major",
+     "why": "Left untranslated; far below level 4."
+    },
+    {
+     "quote": "empowering every man and his dog",
+     "original": "empowering everyone",
+     "severity": "minor",
+     "why": "Lone idiom bolted onto corporate phrasing."
+    }
+   ],
+   "summary": "Virtually the original, with one idiom dropped in."
+  },
+  "D": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every point kept: \"rustc would wrongly generate a trait object vtable with a null pointer\", \"(as is usual for UB)\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "The few terms fit: \"every man and his dog\", \"give us a hand\", \"Heaps of people pitched in\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "What there is is natural: \"If you haven't got it yet, you can [get `rustup`][rustup] from the right page\".",
+     "score": 5
+    },
+    "register": {
+     "evidence": "Light touch only, far under level 4: \"That leads to undefined behaviour in the\\nemitted code.\"",
+     "score": 2
+    },
+    "tone": {
+     "evidence": "Release-note tone intact.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Smooth throughout.",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Little slang to vary.",
+     "score": 3
+    },
+    "essence": {
+     "evidence": "Clearly the release note.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "In Rust 1.98.0, in some cases, rustc would wrongly generate a trait object vtable",
+     "original": "In Rust 1.98.0, in some circumstances, rustc would incorrectly generate a trait object vtable",
+     "severity": "minor",
+     "why": "Representative of lightly edited stretches that keep it well under level 4."
+    }
+   ],
+   "summary": "Faithful and natural, but closer to level 2 than 4."
+  },
+  "E": {
+   "scores": {
+    "meaning": {
+     "evidence": "All facts kept with reactive colour (\"That's it. That's the whole job.\", \"Nothing where something ought to be\"), but \"Solid stuff, and quick with it.\" adds an evaluative claim, and \"for anyone who's been living under a rock\" adds a jab.",
+     "score": 4
+    },
+    "sense": {
+     "evidence": "Terms fit: \"No dramas\", \"Here's the go\", \"get it flamin' wrong\", \"par for the course\", \"have a crack at\", \"give us a yell\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Sounds like a real Aussie dev talking: \"rustc would get it flamin' wrong\", \"you'd be lucky if that's all\".",
+     "score": 5
+    },
+    "register": {
+     "evidence": "Full level-4 voice (\"You'll like this one.\") with dad-level swearing: \"the unpredictable bugger\".",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "The warning about undefined behaviour still lands (\"you'd be lucky if that's all\"), but the opener's \"living under a rock\" is a bit cheeky for project notes.",
+     "score": 4
+    },
+    "flow": {
+     "evidence": "Mostly smooth, though the asides stack up: \"Heaps of people pitched in to make Rust 1.98.1, the whole crew. We couldn't have done it without the lot of you, so cheers. [Thanks!]\".",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "Varied openers and tags: \"You'll like this one.\", \"Now,\", \"So what's the fuss?\", \"Here's the go.\", \"No dramas\".",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Unmistakably the release note retold.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "Solid stuff, and quick with it.",
+     "original": "",
+     "severity": "minor",
+     "why": "An added evaluative claim not in the original."
+    },
+    {
+     "quote": "for anyone who's been living under a rock",
+     "original": "",
+     "severity": "minor",
+     "why": "A cheeky jab at readers the original does not make."
+    },
+    {
+     "quote": "so cheers. [Thanks!]",
+     "original": "We couldn't have done it without all of you. [Thanks!]",
+     "severity": "minor",
+     "why": "\"Cheers\" right before \"Thanks!\" doubles up."
+    }
+   ],
+   "summary": "The fullest, most authentic level-4 voice; a few asides overreach."
+  }
+ },
+ "rankings": {
+  "tone": [
+   [
+    "A",
+    "C",
+    "D"
+   ],
+   [
+    "E",
+    "B"
+   ]
+  ],
+  "flow": [
+   [
+    "A",
+    "D"
+   ],
+   [
+    "E",
+    "B"
+   ],
+   [
+    "C"
+   ]
+  ],
+  "variety": [
+   [
+    "E",
+    "A",
+    "B"
+   ],
+   [
+    "D"
+   ],
+   [
+    "C"
+   ]
+  ],
+  "essence": [
+   [
+    "A",
+    "B",
+    "D",
+    "E"
+   ],
+   [
+    "C"
+   ]
+  ],
+  "overall": [
+   [
+    "E",
+    "A"
+   ],
+   [
+    "B"
+   ],
+   [
+    "D"
+   ],
+   [
+    "C"
+   ]
+  ]
+ }
+}

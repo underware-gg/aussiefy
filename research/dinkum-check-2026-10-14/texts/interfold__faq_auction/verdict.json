@@ -1,0 +1,177 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "yarn-dinkum": "A",
+  "dinkum-4": "B",
+  "dinkum-3": "C"
+ },
+ "scores": {
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "dinkum-4": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn-dinkum": {
+   "meaning": "Every point, figure and timestamp survives: \"Auction 2 was kept to **2% of total FOLD supply** on purpose\", \"Nobody can tell you what future market prices will be.\" Legal notices and links are kept word for word. No new claims.",
+   "sense": "Terms fit their technical context: \"help get deeper, longer-term on-chain liquidity off the ground\" for bootstrap, \"take the sting out of sniping\" for mitigate, \"still up for grabs in the final period\" for remain available, \"have a squiz at\" for see.",
+   "authenticity": "Natural, conversational Australian: \"That one's done and dusted.\", \"Yep. Participants had to get identity verification done\", \"have a squiz at\". Nothing stage-Australian, though most lines are just plain informal English rather than distinctively Aussie.",
+   "register": "Light for a level 3: the slang is a sprinkle (\"had a go\", \"done and dusted\", \"up for grabs\", \"Nah.\", \"Yep.\", \"have a squiz at\"), and long stretches like the CCA bullets and the claiming section read as plain informal English. No swearing, within vulgarity 1.",
+   "tone": "Stays an informative, cautious FAQ; the safety warnings stay firm: \"Interfold team members and moderators will never ask for your seed phrase\" and the disclaimers are untouched. \"Nah.\" opens the price answer casually but does not undercut it.",
+   "flow": "Reads smoothly: \"The CCA hands tokens out bit by bit and sets one price for everyone within each period.\" No pile-ups or clunky joins.",
+   "variety": "Varied choices across sections (\"kicked in\", \"chipped in\", \"wrapped up\", \"switched on\", \"have a squiz at\", \"Have a read of\"); \"switched on\" recurs a few times but that tracks the original's repeated \"enabled\".",
+   "essence": "Unmistakably the same FAQ: same structure, table, callouts, legal notices, with a friendlier voice: \"Claiming and general FOLD transferability are two separate things.\""
+  },
+  "dinkum-4": {
+   "meaning": "All facts kept: \"It kicked off with a floor that matched the clearing price of the first FOLD Auction.\", \"Nobody can tell you what market prices will do down the track.\" Notices lightly rephrased (\"The auction floor isn't any projection\") without changing meaning.",
+   "sense": "Terms fit: \"before they had a crack at it\" for take part, \"down the track\" for future, \"Any tokens not handed out earlier are still up for grabs\". \"It also backed long-term on-chain liquidity.\" fits supported.",
+   "authenticity": "Natural: \"That first auction's done and dusted.\", \"had a crack at it\", \"down the track\". \"Nah, nah.\" is a little odd as an Aussie form (locals say \"Nah\" or \"Nah, yeah, nah\") but passable as emphatic.",
+   "register": "Light for level 3, similar to a level 2: a few terms (\"had a go\", \"done and dusted\", \"had a crack at it\", \"Nah, nah.\", \"Yep.\", \"down the track\") over largely plain informal English. No swearing.",
+   "tone": "Informative and careful throughout; safety list kept firm: \"Anyone asking you to pay for support.\" Disclaimers kept formal.",
+   "flow": "Smooth: \"It's designed to cut down gas competition, make sniping harder, and let clearing prices settle through people taking part in the auction.\" No clunky joins.",
+   "variety": "Reasonable spread (\"kicked off\", \"wrapped up\", \"switched on\", \"done and dusted\", \"had a crack at it\", \"down the track\"); a few verbs like \"get through\" repeat (\"got through the required verification process\", \"get through identity verification\", \"Getting through verification\").",
+   "essence": "Same FAQ, same shape and content, friendlier voice: \"Claiming and general FOLD transferability are two separate things.\""
+  },
+  "dinkum-3": {
+   "meaning": "Every fact survives: \"We kept Auction 2 to **2% of total FOLD supply** on purpose\", \"From Unix timestamp **`1787148000`** on, anyone could call the `tge()` function\". Additions are colour: \"Not ever.\" on the never-ask warning. \"were locked in for\" slightly firms up \"committed to\".",
+   "sense": "Terms fit: \"Bids that get up within a period\" (Aussie 'get up' = succeed) for successful bids, \"take the wind out of sniping\", \"gave long-term on-chain liquidity a leg-up\", \"find their own level\". \"locked in\" for committed is a slight stretch toward a technical lock.",
+   "authenticity": "The most Australian ear: \"Bids that get up\", \"didn't guarantee you eligibility or an allocation, mind.\", \"spreading FOLD round\", \"That one's all done and dusted.\" Mostly natural; \"mind\" leans British-ish but is used by Australians too.",
+   "register": "Closest to level 3: steady, conversational Aussie colour through the body (\"got in on the auction\", \"a leg-up\", \"get up\", \"jumping in\", \"Nah, nah.\", \"mind\") while keeping the legal notices formal. No swearing.",
+   "tone": "Keeps the informative FAQ tone and firm safety warnings; the \"We\" voice and \"Not ever.\" make it chattier but not flippant: \"Interfold team members and moderators will never ask for your seed phrase, private key, wallet backup, or access to your wallet. Not ever.\"",
+   "flow": "Reads like natural prose; sentences are merged sensibly: \"It was small on purpose, just **2% of total FOLD supply**, and it started off with a floor that matched the clearing price of the first FOLD Auction.\"",
+   "variety": "Wide range with little repetition: \"get FOLD into more hands\", \"a leg-up\", \"take the wind out of sniping\", \"find their own level\", \"jumping in\", \"check out\", \"mind\".",
+   "essence": "Unmistakably the same FAQ, structure and notices intact, retold in a friendly house voice: \"Think of Auction 2 as a limited step for spreading FOLD round\"."
+  }
+ },
+ "problems": {
+  "yarn-dinkum": [
+   {
+    "quote": "It also chipped in for long-term on-chain liquidity.",
+    "original": "It also supported long-term on-chain liquidity.",
+    "severity": "minor",
+    "why": "\"Chipped in\" suggests a small contribution, slightly undercutting \"50% of proceeds\"."
+   },
+   {
+    "quote": "Nah. The auction worked out allocations",
+    "original": "No. The auction determined allocations",
+    "severity": "minor",
+    "why": "A bare \"Nah.\" is a touch offhand for a price-disclaimer answer, though it fits the casual voice."
+   }
+  ],
+  "dinkum-4": [
+   {
+    "quote": "Nah, nah.",
+    "original": "No.",
+    "severity": "minor",
+    "why": "Doubled \"nah\" reads a bit odd and flippant for a price disclaimer; a single \"Nah\" or plain \"No\" sits better."
+   },
+   {
+    "quote": "Accounts pretending to be someone they're not.",
+    "original": "Impersonator accounts.",
+    "severity": "minor",
+    "why": "Fine, but wordier than the original with nothing Aussie gained."
+   }
+  ],
+  "dinkum-3": [
+   {
+    "quote": "**50% of proceeds were locked in for long-term on-chain liquidity support.**",
+    "original": "**50% of proceeds were committed to long-term on-chain liquidity support.**",
+    "severity": "minor",
+    "why": "\"Locked in\" can read as a technical token or liquidity lock in crypto, a slightly stronger claim than \"committed\"."
+   },
+   {
+    "quote": "Getting through verification didn't guarantee you eligibility or an allocation, mind.",
+    "original": "Completing verification did not guarantee eligibility or an allocation.",
+    "severity": "minor",
+    "why": "Tag \"mind\" leans British; fine but a weaker choice than an Aussie tag."
+   },
+   {
+    "quote": "Nah, nah.",
+    "original": "No.",
+    "severity": "minor",
+    "why": "Doubled \"nah\" is a bit odd and offhand for a price-disclaimer answer."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn-dinkum": "A faithful, smooth, lightly Aussie FAQ; natural where it uses slang but on the light side of level 3.",
+  "dinkum-4": "Faithful and smooth with natural light slang, roughly level 2 in weight; nearly indistinguishable from A, with a slightly odd \"Nah, nah.\"",
+  "dinkum-3": "The fullest and most natural level-3 retelling: faithful, smooth, varied, with only small quibbles."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn-dinkum",
+    "dinkum-4",
+    "dinkum-3"
+   ]
+  ],
+  "flow": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "yarn-dinkum",
+    "dinkum-4"
+   ]
+  ],
+  "variety": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-4"
+   ]
+  ],
+  "essence": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "yarn-dinkum",
+    "dinkum-4"
+   ]
+  ],
+  "overall": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-4"
+   ]
+  ]
+ }
+}

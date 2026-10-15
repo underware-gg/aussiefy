@@ -1,0 +1,158 @@
+# Audit of existing entries flagged by agent C (gap-fill 2026-10-11).
+# Evidence came through the search tool's summaries (direct page fetches are blocked): seen_via: search_summary.
+# `change` gives proposed field values for the entry in aussiefy/data/entries/*.yaml, or "none".
+
+- decision: audit
+  entry_id: full-as-a-goog
+  change:
+    register: dated
+    notes: >-
+      Australian since at least the 1920s (a 1927 Qld newspaper). The main recorded sense is very drunk; "stuffed with
+      food" is the other. Old-timer flavour: younger speakers say "maggoted" or "smashed".
+  why: >-
+    Genuine, with both concepts right (FULL, DRUNK), but it now reads as an older speaker's simile, the same tier as
+    "full as a boot". Marking it dated keeps it for yarns without putting it in everyday output.
+  sources: ["https://wordhistories.net/2021/01/09/full-as-goog/", "https://www.berlitz.com/blog/australian-slang-words-phrases-expressions-insults"]
+  seen_via: search_summary
+
+- decision: audit
+  entry_id: ropeable
+  change:
+    variants: [ropable]
+  why: >-
+    Not dated or rural. Macquarie's blog says it is still going strong, and Oxford Learner's and Merriam-Webster list it as
+    current Australian/NZ informal. Only the common spelling variant "ropable" is missing.
+  sources: ["https://www.macquariedictionary.com.au/being-ropeable-is-an-australian-tradition/", "https://www.oxfordlearnersdictionaries.com/us/definition/english/ropeable"]
+  seen_via: search_summary
+
+- decision: audit
+  entry_id: a-brass-razoo
+  change:
+    notes: >-
+      Negative contexts only ("haven't got a brass razoo", "not worth a brass razoo"); a jocular, old-fashioned ring but
+      still used in the press.
+  why: >-
+    Still current in fixed negative phrases (ANDC cites a 2015 Daily Telegraph use). No register change is needed, but the
+    negative-only restriction must be explicit so it never appears in a positive sentence.
+  sources: ["https://slll.cass.anu.edu.au/centres/andc/australian-words-r", "https://en.wikipedia.org/wiki/Brass_razoo"]
+  seen_via: search_summary
+
+- decision: audit
+  entry_id: not-the-full-quid
+  change:
+    notes: Aus/NZ; means not very bright or a bit odd. Predicative only ("he's not the full quid").
+  why: >-
+    Current, and listed as Aus/NZ informal by Oxford Learner's and Green's. It sounds a bit older but isn't dated enough to
+    restrict. The note only records the frame limit.
+  sources: ["https://www.oxfordlearnersdictionaries.com/definition/english/quid", "https://greensdictofslang.com/entry/fl5bebi"]
+  seen_via: search_summary
+
+- decision: audit
+  entry_id: rapt
+  change:
+    frame: predicate_adj
+    notes: >-
+      Australian (from "enraptured"). Peak use was the 1980s-90s; still common, a little older-sounding than "stoked".
+      Often spelt "wrapped". Predicative only ("I'm rapt", "rapt with it"); before a noun it reads as general English
+      "engrossed" ("rapt attention").
+  why: >-
+    Current, so no register change. Attributive use is wrong-sense, so the frame should be predicative only.
+  sources: ["https://greensdictofslang.com/entry/v2tzthq", "https://www.vu.edu.au/about-vu/news-events/study-space/australian-slang-dictionary"]
+  seen_via: search_summary
+
+- decision: audit
+  entry_id: stoked
+  change:
+    frame: predicate_adj
+    notes: >-
+      Surf slang shared with the US (earliest Wiktionary quote is Australian surfing, 1964). Fully current in Australia
+      and probably the commonest word for "thrilled". Predicative ("stoked with it", "stoked to hear").
+  why: >-
+    Current and right for HAPPY. US currency doesn't make it non-Australian here. "A stoked kid" is unidiomatic, hence
+    predicate_adj.
+  sources: ["https://en.wiktionary.org/wiki/stoked", "https://www.medibank.com.au/livebetter/gday-mate-making-sense-of-australian-slang/"]
+  seen_via: search_summary
+
+- decision: audit
+  entry_id: hooroo
+  change: none
+  why: >-
+    Already register dated (interjection in phrases.yaml, and say-hooroo in idioms.yaml). That's correct: it's affectionate
+    and old-fashioned, still heard from older and rural speakers.
+  sources: []
+  seen_via: own_knowledge
+
+- decision: audit
+  entry_id: cactus
+  change:
+    notes: >-
+      Of machines and things ("the ute's cactus"), not tired people. Older-sounding; Macquarie's blog thinks it may be
+      fading, but it is still widely understood.
+  why: >-
+    The BROKEN sense is right and well attested (Macquarie, Wiktionary). Most sources limit it to objects; Macquarie
+    suggests it is dying out, but I still hear it, so a note rather than a register change.
+  sources: ["https://www.macquariedictionary.com.au/were-totally-cactus/", "https://www.allearsenglish.com/?p=50437"]
+  seen_via: search_summary
+
+- decision: audit
+  entry_id: rooted
+  change:
+    notes: >-
+      "Root" is Australian slang for sex, so "rooted" (exhausted; broken) is impolite: vulgarity 2 is right. Never use
+      "root" for US "root for (a team)"; Australians say "barrack for". "Get rooted" is a rude brush-off, a different sense.
+  why: >-
+    The senses (TIRED, BROKEN) and vulgarity 2 are correct. The note guards against the sexual sense leaking in through
+    US "root for".
+  sources: []
+  seen_via: own_knowledge
+
+- decision: audit
+  entry_id: pissed
+  change:
+    vulgarity: 2
+    notes: >-
+      In Australia "pissed" means drunk, never angry; angry is "pissed off" (already an ANGRY trigger). Don't let US "pissed"
+      (angry) in the input fire DRUNK.
+  why: >-
+    The sense is right. The brief's scale puts piss-words at 2, and the dictionary's own "piss" (ALCOHOL) is 2, so 1 is
+    inconsistent. The note covers the US/Aus sense clash.
+  sources: []
+  seen_via: own_knowledge
+
+- decision: audit
+  entry_id: sook
+  change:
+    weight: 0.5
+    notes: >-
+      A crybaby or sulker, someone soft who gets upset easily (also "sooky"). Not quite a habitual complainer: for that,
+      "whinger" is the better fit.
+  why: >-
+    Sense-restricted. Dictionaries centre on crybaby, coward or sulker; "complainer" is a secondary gloss. Lower its weight
+    under COMPLAINER so "whinger" leads.
+  sources: ["https://en.wiktionary.org/wiki/sook", "https://www.oxfordlearnersdictionaries.com/definition/english/sook"]
+  seen_via: search_summary
+
+- decision: audit
+  entry_id: have-a-sook
+  change: none
+  why: Correct for CRY. "Have a sook" is crying or sulking like a baby, and the existing gloss says that.
+  sources: ["https://en.wiktionary.org/wiki/sook"]
+  seen_via: search_summary
+
+- decision: audit
+  entry_id: stickybeak
+  change: none
+  why: >-
+    Correct for NOSY_PERSON (and the gloss already mentions "have a stickybeak"). It doesn't mean a gossip, which is why it
+    was rejected for the gossip gap.
+  sources: []
+  seen_via: own_knowledge
+
+- decision: audit
+  entry_id: sheila
+  change: none
+  why: >-
+    Already dated, weight 0.5, incoherence 5, with a note that many hear it as dismissive. That's right. It must never
+    stand in for "girl".
+  sources: []
+  seen_via: own_knowledge

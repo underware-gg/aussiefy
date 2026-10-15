@@ -1,0 +1,62 @@
+Pull up a stool. The name Kubernetes comes from the Greek for helmsman or pilot, the bloke steering the boat.
+And K8s? That's just the lazy way of writing it: count the eight letters between the "K" and the "s" and Bob's
+your uncle. Google open sourced the Kubernetes project in 2014. Kubernetes rolls
+[over 15 years of Google's experience](/blog/2015/04/borg-predecessor-to-kubernetes/) running
+production workloads at scale in with the pick of the ideas and practices from the community. Not a bad pedigree.
+
+## Why you need Kubernetes and what it can do {#why-you-need-kubernetes-and-what-can-it-do}
+
+Containers are a top way to pack up and run your applications. Trouble is, in a production
+environment someone's got to keep an eye on the containers that run the applications and
+make sure there's no downtime. Say a container carks it at three in the morning: another
+container's got to fire up in its place. Wouldn't it be a whole lot easier if a system sorted that out for you?
+
+Well, that's where Kubernetes comes charging in to the rescue! Kubernetes hands you a framework
+to run distributed systems that cop a hit and keep going. It looks after scaling and failover for
+your application, gives you deployment patterns, and the rest of the box and dice. For example: Kubernetes
+can run a canary deployment for your system without breaking a sweat.
+
+Here's what's in the kit:
+
+* **Service discovery and load balancing**
+  Kubernetes can expose a container using a DNS name or its own IP address.
+  If a container's copping heaps of traffic, Kubernetes can load balance and spread
+  the network traffic round, like a publican putting another barman on when the pub fills up, so the deployment stays steady.
+* **Storage orchestration**
+  Kubernetes lets you automatically mount whatever storage system takes your fancy, whether that's
+  local storage, public cloud providers, and more.
+* **Automated rollouts and rollbacks**
+  You tell Kubernetes the desired state for your deployed containers,
+  and it'll nudge the actual state over to the desired state at a controlled rate. No mad rush.
+  For example, you can automate Kubernetes to create new containers for your
+  deployment, turf out existing containers and hand all their resources over to the new container.
+* **Automatic bin packing**
+  You give Kubernetes a cluster of nodes it can use to run containerized tasks.
+  You tell Kubernetes how much CPU and memory (RAM) each container needs. Then Kubernetes fits
+  containers onto your nodes like a dad packing the boot for the Chrissie holidays, so you get the most out of your resources.
+* **Self-healing**
+  Kubernetes restarts containers that fail, replaces containers, kills off containers that won't
+  answer your user-defined health check, and keeps them hidden from clients until they're
+  good and ready to serve.
+* **Secret and configuration management**
+  Kubernetes lets you store and look after the sensitive stuff, like passwords, OAuth tokens,
+  and SSH keys. You can deploy and update secrets and application configuration without
+  rebuilding your container images, and without leaving secrets lying round for all and sundry in your stack configuration.
+* **Batch execution**
+  As well as services, Kubernetes can manage your batch and CI workloads, swapping out containers that fail, if you want it to.
+* **Horizontal scaling**
+  Scale your application up and down with a simple command, with a UI, or automatically, going off CPU usage.
+* **IPv4/IPv6 dual-stack**
+  Dishes out IPv4 and IPv6 addresses to Pods and Services.
+* **Designed for extensibility**
+  Add features to your Kubernetes cluster without having to muck about with upstream source code.
+
+## What Kubernetes is not
+
+Now, don't get the wrong idea: Kubernetes isn't your traditional, all-in, does-the-lot PaaS (Platform as a Service) system.
+Because Kubernetes works at the container level, not down at the hardware level,
+it gives you some generally handy features common to PaaS offerings, like
+deployment, scaling and load balancing, and lets users plug in their own logging, monitoring,
+and alerting solutions. But Kubernetes isn't one great lump of a thing, it isn't monolithic, and these default solutions
+are optional and pluggable. Take 'em or leave 'em. Kubernetes supplies the building blocks for building developer
+platforms, but leaves the choice and flexibility with the user where it counts.

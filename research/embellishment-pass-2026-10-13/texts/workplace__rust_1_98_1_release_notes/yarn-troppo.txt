@@ -1,0 +1,30 @@
+You'll like this one. The Rust team's gone and put out a new point release of Rust, 1.98.1. Rust, for anyone who's been living under a rock, is a programming language that's giving every man and his dog the power to build reliable and efficient software. Solid stuff, and quick with it.
+
+Now, if you've already got an older version of Rust on your machine through rustup, getting Rust 1.98.1 is as easy as:
+
+```
+rustup update stable
+```
+
+That's it. That's the whole job. And if you haven't got it yet? No dramas, you can [get `rustup`][rustup] from the right page on our website.
+
+[rustup]: https://www.rust-lang.org/install.html
+
+## What's in 1.98.1
+
+So what's the fuss? Rust 1.98.1 fixes a [miscompilation in vtable generation](https://github.com/rust-lang/rust/issues/161441).
+
+Here's the go. Back in Rust 1.98.0, in some cases, rustc would get it flamin' wrong and generate a trait object vtable with a null pointer
+where a function pointer should be. Nothing where something ought to be, and that ends up as undefined behaviour in the
+emitted code. Sometimes it might 'just' cause segfaults when that null
+pointer gets loaded, and you'd be lucky if that's all, cos it can be grounds for
+arbitrary effects as well (as is par for the course with UB, the unpredictable bugger).
+
+If you're keen to give us a hand by testing future releases, you could have a crack at
+using the beta (`rustup default beta`) and nightly (`rustup default nightly`) channels locally and in your CI. And please, give us a yell and
+[report](https://github.com/rust-lang/rust/issues/new/choose) any bugs you
+happen to run into!
+
+### Contributors to 1.98.1
+
+Heaps of people pitched in to make Rust 1.98.1, the whole crew. We couldn't have done it without the lot of you, so cheers. [Thanks!](https://thanks.rust-lang.org/rust/1.98.1/)

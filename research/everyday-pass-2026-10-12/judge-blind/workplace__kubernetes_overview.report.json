@@ -1,0 +1,220 @@
+{
+ "candidates": {
+  "A": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every feature and claim survives in order. \"at a whopping scale\" mildly overstates \"at scale\". \"make sure nothing ever falls over\" is a fair rendering of \"no downtime\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit the technical sense: \"carks it\", \"cop a hit and keep going\" (resilient), \"turf the old ones\", \"knocks off containers that won't answer\", \"doesn't let on to clients they exist\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Natural Aussie tech chat: \"Wouldn't it be a bloody sight easier\", \"whatever storage system takes your fancy\", \"without mucking about with the upstream source code\".",
+     "score": 5
+    },
+    "register": {
+     "evidence": "A solid level 4 throughout, including the bullet list, with swearing at a dad-level \"bloody\".",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "The explanatory, upbeat docs tone is kept as friendly chat.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads smoothly, though \"Kubernetes isn't your traditional, all-in, everything-in-the-box PaaS\" stacks synonyms a little.",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "Varied: carks it, fire up, cop a hit, no worries, slammed, takes your fancy, clip, turf, bang for your buck, stash, dishing out, mucking about.",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Unmistakably the Kubernetes overview, structure and anchors intact.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "at a whopping scale",
+     "original": "at scale",
+     "severity": "minor",
+     "why": "A mild overstatement."
+    },
+    {
+     "quote": "all-in, everything-in-the-box PaaS",
+     "original": "all-inclusive PaaS",
+     "severity": "minor",
+     "why": "Stacked near-synonyms."
+    }
+   ],
+   "summary": "A natural, accurate and consistently level-4 retelling of the docs."
+  },
+  "B": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every point survives. \"A toolbox, not a flat-pack house, basically.\" and \"like a good Tetris player\" are colour hung off the original. \"at a pace you control\" for \"at a controlled rate\" is fine.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"carks it\", \"bounce back when something breaks\", \"without breaking a sweat\", \"leaving your secrets lying about\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Natural, though \"Pull up a stool.\" is a stock yarn opener for a docs page.",
+     "score": 4
+    },
+    "register": {
+     "evidence": "Level 4 throughout, with no swearing (allowed but not needed).",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "Friendly explanatory tone kept.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Smooth: \"Kubernetes then packs the containers onto your nodes like a good Tetris player, so you get the most out of your resources.\"",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Varied: mob, carks it, fire up, without breaking a sweat, slammed, brand-spankin'-new, lying about, wiggle room.",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Clearly the Kubernetes overview, with a pithy closing summary.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "Pull up a stool.",
+     "original": "",
+     "severity": "minor",
+     "why": "A stock pub-yarn opener, bolted onto technical docs."
+    },
+    {
+     "quote": "Wouldn't it be easier if some system just sorted that out for you, ay?",
+     "original": "Wouldn't it be easier if this behavior was handled by a system?",
+     "severity": "minor",
+     "why": "The tag \"ay\" on a rhetorical question is a little forced."
+    }
+   ],
+   "summary": "Very close to A: natural and accurate, with a couple of stock touches."
+  },
+  "C": {
+   "scores": {
+    "meaning": {
+     "evidence": "Content mostly verbatim, but \"run containerized yakka\" muddles \"tasks\", and the inserted exclamations add nothing true.",
+     "score": 4
+    },
+    "sense": {
+     "evidence": "\"containerized yakka\" uses \"yakka\" (hard work) for a computing task, which is the wrong sense. \"practices from the mob\" is vague for \"the community\".",
+     "score": 2
+    },
+    "authenticity": {
+     "evidence": "Stage-Australian tags bolted onto docs prose: \"Crikey, Google open sourced\", \"Bloody hell, Kubernetes provides you with a framework\", \"this behaviour was handled by a system, mate?\". The US spelling \"containerized\" is left in.",
+     "score": 1
+    },
+    "register": {
+     "evidence": "Mostly untranslated docs with sprinkles of swearing, well below level 4. \"bloody\" stays within dad level, but it is used as filler.",
+     "score": 2
+    },
+    "tone": {
+     "evidence": "Clear technical tone undercut by random exclamations: \"Bloody hell, Kubernetes provides\".",
+     "score": 2
+    },
+    "flow": {
+     "evidence": "Jarring joins: \"'s', ay. Crikey, Google\", and \"brand-spankin'-new\" twice in one sentence.",
+     "score": 2
+    },
+    "variety": {
+     "evidence": "Repeats \"bloody\" (three times) and \"brand-spankin'-new\" (twice).",
+     "score": 2
+    },
+    "essence": {
+     "evidence": "Recognisably the docs, since it is mostly untouched, but cluttered.",
+     "score": 4
+    }
+   },
+   "problems": [
+    {
+     "quote": "run containerized yakka",
+     "original": "run containerized tasks",
+     "severity": "major",
+     "why": "\"Yakka\" means hard work, not a computing task, and the US spelling remains."
+    },
+    {
+     "quote": "Crikey, Google open sourced the",
+     "original": "Google open sourced the",
+     "severity": "major",
+     "why": "A bolted-on exclamation."
+    },
+    {
+     "quote": "Bloody hell, Kubernetes provides you with a framework",
+     "original": "Kubernetes provides you with a framework",
+     "severity": "major",
+     "why": "A random oath in technical prose."
+    },
+    {
+     "quote": "adopt all their resources to the brand-spankin'-new container",
+     "original": "adopt all their resources to the new container",
+     "severity": "minor",
+     "why": "A repeated tag."
+    }
+   ],
+   "summary": "A mechanical pass: mostly untranslated docs with oaths and tags dropped in."
+  }
+ },
+ "rankings": {
+  "tone": [
+   [
+    "A",
+    "B"
+   ],
+   [
+    "C"
+   ]
+  ],
+  "flow": [
+   [
+    "B"
+   ],
+   [
+    "A"
+   ],
+   [
+    "C"
+   ]
+  ],
+  "variety": [
+   [
+    "A",
+    "B"
+   ],
+   [
+    "C"
+   ]
+  ],
+  "essence": [
+   [
+    "A",
+    "B"
+   ],
+   [
+    "C"
+   ]
+  ],
+  "overall": [
+   [
+    "A"
+   ],
+   [
+    "B"
+   ],
+   [
+    "C"
+   ]
+  ]
+ }
+}

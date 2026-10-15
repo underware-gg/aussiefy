@@ -1,0 +1,61 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {"evidence": "The release is reproduced almost verbatim, so every fact survives: \"one of three F-5 fighter jets\", \"from 10 a.m. to 1 p.m. EDT\", \"Saturday, Nov. 7, and Sunday, Nov. 8\".", "score": 5},
+        "sense": {"evidence": "The one slang swap misfires: \"connect the agency with the punters, technologies, and organisations\" turns the people who drive space leadership into customers or gamblers.", "score": 3},
+        "authenticity": {"evidence": "Apart from spelling (\"organisations\", \"honour\") and \"punters\", it is unchanged US press-release prose: \"NASA team members will engage with fans at the agency’s Experience Zone\".", "score": 2},
+        "register": {"evidence": "Far under level 4: effectively untranslated, e.g. \"NASA’s Inspiration Tour convenes academic, industry, and public sector stakeholders\".", "score": 1},
+        "tone": {"evidence": "The upbeat promotional tone is the original's, unchanged.", "score": 5},
+        "flow": {"evidence": "Reads as the original release; \"the punters, technologies, and organisations\" is the only jolt.", "score": 4},
+        "variety": {"evidence": "A single slang term, \"punters\".", "score": 1},
+        "essence": {"evidence": "It is the release, unretold.", "score": 4}
+      },
+      "problems": [
+        {"quote": "connect the agency with the punters, technologies, and organisations", "original": "connect the agency with the people, technologies, and organizations", "severity": "major", "why": "\"punters\" (customers, gamblers) is the wrong sense for the people who drive American space leadership."},
+        {"quote": "NASA team members will engage with fans at the agency’s Experience Zone", "original": "NASA team members will engage with fans at the agency’s Experience Zone", "severity": "major", "why": "Text left untranslated; far under a level-4 brief."}
+      ],
+      "summary": "The original release with spelling changes and one wrong-sense \"punters\"; not a level-4 retelling."
+    },
+    "B": {
+      "scores": {
+        "meaning": {"evidence": "All facts kept: \"one of three F-5 fighter jets\", \"from 10 a.m. to 1 p.m. EDT\", \"Saturday, Nov. 7, and Sunday, Nov. 8\", \"250th birthday\". Added asides are colour: \"Not a bad way to start the footy, eh?\", \"wraps up with a bang\".", "score": 5},
+        "sense": {"evidence": "Most terms fit: \"at the stick of\", \"having a yarn with the fans\", \"have a crack at some interactive games\", \"happy snaps\", \"public sector mob\", \"shindig\". \"start the footy\" stretches \"footy\" to American football, which Australians would call gridiron.", "score": 4},
+        "authenticity": {"evidence": "Mostly natural (\"grab a few happy snaps with a bloody big inflatable SLS\"), but \"is gonna be at the stick\" is American, and the tag \"Not a bad way to start the footy, eh?\" is a stock aside.", "score": 4},
+        "register": {"evidence": "A full level-4 retelling of a press release, with dad-level \"bloody big\"; on brief.", "score": 5},
+        "tone": {"evidence": "Keeps the upbeat, promotional energy, now matey: \"the multi-day, family-friendly shindig will show off the next-generation aircraft\".", "score": 5},
+        "flow": {"evidence": "Reads smoothly: \"With stops right across the country, NASA's Inspiration Tour rounds up the academic, industry and public sector mob to hook the agency up with the people\".", "score": 5},
+        "variety": {"evidence": "Varied: \"at the stick\", \"footy\", \"having a yarn\", \"Punters\", \"have a crack\", \"happy snaps\", \"mob\", \"hook ... up\", \"shindig\", \"getting about\".", "score": 5},
+        "essence": {"evidence": "Unmistakably the NASA flyover announcement, all four paragraphs in order.", "score": 5}
+      },
+      "problems": [
+        {"quote": "Not a bad way to start the footy, eh?", "original": "", "severity": "minor", "why": "Stock aside; \"footy\" to Australians means AFL or league, not NFL."},
+        {"quote": "is gonna be at the stick", "original": "will pilot", "severity": "minor", "why": "\"gonna\" reads American rather than Australian."}
+      ],
+      "summary": "A lively, faithful level-4 retelling of the release; a stock \"footy, eh?\" aside and an American \"gonna\"."
+    },
+    "C": {
+      "scores": {
+        "meaning": {"evidence": "All facts kept, with a gloss: \"NASA Administrator Jared Isaacman, the agency's top boss\", \"from 10am to 1pm EDT\", \"Saturday 7 November and Sunday 8 November\". The \"gridiron game\" gloss is helpful colour.", "score": 5},
+        "sense": {"evidence": "Terms fit: \"at the controls\", \"having a yarn with fans\", \"have a crack at hands-on games\", \"a big blow-up SLS\", \"gridiron game\", \"getting about\".", "score": 5},
+        "authenticity": {"evidence": "Natural Australian newsroom English: \"New York Jets v Cleveland Browns gridiron game\", \"snap photos with a big blow-up SLS (Space Launch System) rocket\".", "score": 5},
+        "register": {"evidence": "Lighter than level 4: a well-localised news piece with a few touches (\"having a yarn\", \"have a crack\", \"blow-up\") rather than a matey retelling; the last two paragraphs are close to plain prose.", "score": 3},
+        "tone": {"evidence": "Keeps the promotional tone: \"show off the next-generation aircraft, spacecraft, driverless vehicles and technologies\".", "score": 5},
+        "flow": {"evidence": "Smooth; the restructured first sentence reads well.", "score": 5},
+        "variety": {"evidence": "Some range: \"top boss\", \"having a yarn\", \"have a crack\", \"blow-up\", \"players\", \"getting about\".", "score": 4},
+        "essence": {"evidence": "Clearly the NASA release, localised.", "score": 5}
+      },
+      "problems": [
+        {"quote": "With stops right around the country, NASA's Inspiration Tour gets academics, industry and public sector players together", "original": "With stops across the nation, NASA’s Inspiration Tour convenes academic, industry, and public sector stakeholders", "severity": "minor", "why": "Close to plain prose; overall the piece is lighter than level 4."}
+      ],
+      "summary": "A natural, well-localised Australian news version; good but lighter than the level-4 brief."
+    }
+  },
+  "rankings": {
+    "tone": [["A", "B", "C"]],
+    "flow": [["B", "C"], ["A"]],
+    "variety": [["B"], ["C"], ["A"]],
+    "essence": [["B", "C"], ["A"]],
+    "overall": [["B"], ["C"], ["A"]]
+  }
+}

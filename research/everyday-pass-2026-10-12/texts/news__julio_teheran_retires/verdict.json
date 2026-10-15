@@ -1,0 +1,159 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 5,
+   "flow": 5,
+   "variety": 1,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 4,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every fact and stat survives: \"an 81-82 record, with a 3.85 ERA, 1.223 WHIP and 1,260 strikeouts in 1,470.2 innings\", the five clubs, the 2014 and 2016 selections, the Mexican league seasons.",
+   "sense": "Terms fit: \"hanging up the boots\" for retiring, \"pulled from a scheduled start\" for scratched, \"with a crook shoulder\" for a shoulder injury, \"had stints with\".",
+   "authenticity": "Natural Australian sports-desk phrasing: \"hanging up the boots\", \"a crook shoulder\", \"put together an 81-82 record\".",
+   "register": "A light level-2 touch on a news brief, with no swearing: the facts read straight, with a few local turns of phrase.",
+   "tone": "Stays a neutral news report throughout.",
+   "flow": "Reads well, though \"announced on Monday that he's hanging up the boots, at the age of 35\" has an awkward comma and mixes the present tense into a past-tense report.",
+   "variety": "Limited slang, as the level suits, with no repetition: \"hanging up the boots\", \"The call\", \"crook\", \"stints\".",
+   "essence": "Unmistakably the same short retirement report."
+  },
+  "engine": {
+   "meaning": "Identical to the original, so every fact survives: \"announced his retirement from baseball on Monday, at the age of 35\".",
+   "sense": "No Aussie terms are introduced, so none takes a wrong sense.",
+   "authenticity": "There is no Australian voice at all, and US wire phrasing is left as is: \"he was scratched from a scheduled start\", \"compiled a 81-82 record\".",
+   "register": "Left completely untranslated; the text matches the original word for word.",
+   "tone": "The neutral news tone is the original's own.",
+   "flow": "Reads as the original does: \"He made his MLB debut with the Braves in 2011 at the age of 20 and spent his first nine seasons with the team\".",
+   "variety": "No slang at all, so nothing is varied.",
+   "essence": "It is the original."
+  },
+  "yarn": {
+   "meaning": "All facts and stats survive. \"Not a bad innings, all up.\" is a reaction to the career totals, not a new fact.",
+   "sense": "Terms fit: \"has hung up the boots\", \"called it a day\", \"a crook shoulder\", \"stuck with them for his first nine seasons\", \"getting picked as an All-Star\".",
+   "authenticity": "Sounds like an Australian sports writer: \"Before he called it a day\", \"Not a bad innings, all up.\"",
+   "register": "Light level-2 colour over a straight news brief, with no swearing.",
+   "tone": "Neutral news reporting, except that the aside \"Not a bad innings, all up.\" adds a touch of editorial warmth the original doesn't have.",
+   "flow": "Smooth: \"Before he called it a day, Teherán had helped Team Colombia to a 3-1 win over Team Panama at the WBC.\"",
+   "variety": "Varied for its length: \"hung up the boots\", \"The call\", \"called it a day\", \"crook\", \"stints\", \"stuck with them\", \"all up\".",
+   "essence": "Clearly the same retirement report, with the same order and facts."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "announced on Monday that he's hanging up the boots, at the age of 35",
+    "original": "announced his retirement from baseball on Monday, at the age of 35",
+    "severity": "minor",
+    "why": "Present-tense \"he's\" in a past-tense report, and the comma leaves \"at the age of 35\" dangling."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Julio Teherán, a two-time Major League Baseball All-Star, announced his retirement from baseball on Monday, at the age of 35.",
+    "original": "Julio Teherán, a two-time Major League Baseball All-Star, announced his retirement from baseball on Monday, at the age of 35.",
+    "severity": "critical",
+    "why": "The whole text is untranslated; the brief asked for level-2 Australian English."
+   },
+   {
+    "quote": "compiled a 81-82 record",
+    "original": "compiled a 81-82 record",
+    "severity": "minor",
+    "why": "Keeps the original's \"a 81\" article error."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Not a bad innings, all up.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added editorial comment in a news brief. The cricket idiom also sits awkwardly right after a literal baseball \"innings\" figure."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Accurate, light and natural; a clean level-2 news brief.",
+  "engine": "An unchanged copy of the original: faithful but not a translation at all.",
+  "yarn": "Accurate and the most natural and varied, with one added aside that nudges a straight news brief toward comment."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "engine"
+   ],
+   [
+    "yarn"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "engine"
+   ],
+   [
+    "unharnessed"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "engine",
+    "yarn"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,205 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 2,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 1,
+   "flow": 1,
+   "variety": 2,
+   "essence": 2
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every fact kept: Tuesday night, the ads for couples, the book of dances, twenty-one quadrilles to four, Mellie Dunham's change of plans, Tex Rickard and Madison Square Garden.",
+   "sense": "Mostly exact (\"big crack at\", \"put the word out in the papers\", \"the Tuesday night do\", \"his missus\"), but \"Mr. Ford fired up\" reads as got angry rather than exclaimed.",
+   "authenticity": "Natural on the whole (\"chipping in a few old-time tunes\", \"standardise the bloody things\"), with US \"folks\" left.",
+   "register": "A clear Aussie retelling but closer to level 3 than a level-5 yarn; much is light paraphrase (\"It was also said that putting on this dance was meant to help Henry Ford's push\"). Swearing within level 2.",
+   "tone": "Keeps the light news item, told conversationally (\"Right, so Henry Ford's first big crack\").",
+   "flow": "Long, over-packed sentence for Mellie Dunham (\"chipping in a few old-time tunes for the Ford 'Americana' collection of those pieces that's being got ready for publishing\").",
+   "variety": "Varied, little repetition.",
+   "essence": "Plainly the AP item about Ford's square-dance campaign."
+  },
+  "engine": {
+   "meaning": "\"he'll be crook management of Tex Rickard\" garbles who will manage him, and \"Dec. Crikey, 13\" breaks the dateline; the rest is the original verbatim.",
+   "sense": "\"crook management\" (crook = sick or dodgy), \"Far out, but plans were changed\", \"front up\" barely fits.",
+   "authenticity": "Stage-Australian bolt-ons: \"Crikey\", \"Bloody hell\", \"Fair fuckin' dinkum\", \"Oh, shit\", \"Streeeeewth.\"",
+   "register": "Exclamations sprinkled on untranslated news prose (\"to form a nucleus for the party\"); swearing within level 2 but no real retelling.",
+   "tone": "Ford's quote and the news item become random cursing: \"Fair fuckin' dinkum, what we're tryin' to do\".",
+   "flow": "Broken: \"DETROIT, Dec. Crikey, 13 (AP)\", \"was to 'ave appeared\".",
+   "variety": "The same handful of exclamations.",
+   "essence": "The item is there underneath but buried in noise."
+  },
+  "yarn": {
+   "meaning": "All facts kept; additions hang off the original: \"so the rest have someone to follow\" explains nucleus, \"Twenty-one down to four.\" reacts to the selection, \"Not bad for a grandpa with a fiddle, ay?\" reacts to the vaudeville offer.",
+   "sense": "Exact: \"gettin' 'em all done the same way\" for standardize, \"whacked an ad in the paper\", \"the Tuesday night do\", \"front up\".",
+   "authenticity": "A natural yarn voice (\"got it into his noggin\", \"quick as a whip\", \"shindig\"), with US \"folks\" and \"ay?\" for eh.",
+   "register": "A full level-5 retelling of every paragraph; swearing light (\"that bloody great shindig\"), inside level 2.",
+   "tone": "Keeps the light, slightly amused news story, now as a yarn.",
+   "flow": "Reads naturally aloud: \"Story goes, Henry Ford, the motor car bloke, has got it into his noggin\".",
+   "variety": "Varied throughout: \"crack at it\", \"scrapin' away\", \"bright lights\", \"shindig\".",
+   "essence": "Unmistakably the Ford square-dance story, retold."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "Mr. Ford fired up",
+    "original": "Mr. Ford exclaimed",
+    "severity": "minor",
+    "why": "\"fired up\" suggests anger."
+   },
+   {
+    "quote": "get folks keener on 'em",
+    "original": "encourage their popularity",
+    "severity": "minor",
+    "why": "\"folks\" is American."
+   },
+   {
+    "quote": "the Ford \"Americana\" collection of those pieces that's being got ready for publishing",
+    "original": "the Ford \"Americana\" of such pieces now being prepared for publication",
+    "severity": "minor",
+    "why": "Clunky clause."
+   },
+   {
+    "quote": "It was also said that putting on this dance was meant to help",
+    "original": "It was added that in putting on this dance it was hoped to further",
+    "severity": "minor",
+    "why": "Plain paraphrase; lighter than level 5."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "DETROIT, Dec. Crikey, 13 (AP)",
+    "original": "DETROIT, Dec. 13 (AP)",
+    "severity": "major",
+    "why": "Exclamation inserted into the dateline."
+   },
+   {
+    "quote": "he'll be crook management of Tex Rickard",
+    "original": "he will be under the management of Tex Rickard",
+    "severity": "critical",
+    "why": "Garbles the fact that Rickard will manage him."
+   },
+   {
+    "quote": "Fair fuckin' dinkum, what we're tryin' to do",
+    "original": "What we are trying to do",
+    "severity": "major",
+    "why": "Oath bolted onto Ford's quote."
+   },
+   {
+    "quote": "Streeeeewth.",
+    "original": "",
+    "severity": "major",
+    "why": "Bolted-on exclamation."
+   },
+   {
+    "quote": "to form a nucleus for the party",
+    "original": "to form a nucleus for the party",
+    "severity": "major",
+    "why": "Mostly untranslated for level 5."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Even Henry knows nobody's learnin' the lot.",
+    "original": "four will be selected to simplify their teaching",
+    "severity": "minor",
+    "why": "Puts a view in Ford's head; close to colour but edges toward an invented claim."
+   },
+   {
+    "quote": "more folks take 'em up",
+    "original": "encourage their popularity",
+    "severity": "minor",
+    "why": "\"folks\" is American."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Accurate and readable, but pitched lighter than the level-5 brief.",
+  "engine": "Rule-engine noise on an untranslated item, with a garbled key fact.",
+  "yarn": "A lively, faithful level-5 yarn with apt asides."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

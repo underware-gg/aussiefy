@@ -1,0 +1,173 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "yarn": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 2,
+   "register": 2,
+   "tone": 4,
+   "flow": 2,
+   "variety": 2,
+   "essence": 4
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "All steps and code kept: the _projects_ directory, the commands, _main.rs_, Listing 1-1, `.\\main` on Windows. The link label is altered to \"[“Troubleshootin'”][troubleshooting]\", which changes visible link text but not the target.",
+   "sense": "Little slang to carry sense; \"make a brand-spankin'-new source file\" overstates \"a new source file\" but fits.",
+   "authenticity": "Eye dialect bolted onto the original prose: \"makin' a directory to store yer Rust code\", \"a _projects_ directory'n a directory\", \"compile'n run the file\". No Australian idiom, just dropped letters.",
+   "register": "Far lighter than level 5: the prose is the original's with dropped g's, e.g. \"Rust files always end with the _.rs_ extension.\" No swearing.",
+   "tone": "The friendly tutorial tone survives, cluttered by spellings inside technical lines: \"Regardless of your operatin' system\".",
+   "flow": "Clunky contractions: \"the _main.rs_ file ya just created'n enter the code\", \"enter the followin' commands to compile'n run the file\".",
+   "variety": "Leans on \"yer\", \"ya\" and \"'n\" throughout.",
+   "essence": "Recognisably the Rust book page, as it is mostly the original."
+  },
+  "yarn": {
+   "meaning": "Every step and code block kept: the _projects_ directory, the commands, _main.rs_, the underscore convention, `.\\main` on Windows, the troubleshooting pointer.",
+   "sense": "Terms fit: \"Rust couldn’t care less where your code lives\", \"punch in the code\", \"have a squiz back at the [“Troubleshooting”]\", \"good on ya!\", \"welcome aboard!\".",
+   "authenticity": "Natural: \"You’ll kick off by making a directory\", \"head back to your terminal window\", \"we reckon you should make a _projects_ directory\".",
+   "register": "A friendly middle weight, nearer level 3 than the full level 5: many lines stay plain, such as \"Open a terminal and enter the following commands\". No swearing.",
+   "tone": "Keeps the warm, encouraging tutorial tone: \"That makes you a Rust programmer—welcome aboard!\"",
+   "flow": "Reads like it was written that way: \"So, use _hello_world.rs_, not _helloworld.rs_.\"",
+   "variety": "Varied: \"kick off\", \"couldn’t care less\", \"punch in\", \"head back\", \"have a squiz\", \"good on ya\".",
+   "essence": "Unmistakably the Rust book page, retold."
+  },
+  "unharnessed": {
+   "meaning": "Every step and code block kept. \"we reckon you make a _projects_ directory\" drops the \"should\" of the suggestion; additions like \"you bloody legend!\" are colour on the congratulations.",
+   "sense": "Mostly fits: \"Rust couldn't give a toss where your code lives\", \"the done thing is to stick an underscore between 'em\", \"Fire up a terminal\", \"ways to get a hand\". \"chuck in this\" for entering commands strains a little.",
+   "authenticity": "Sounds like an Aussie dev talking: \"First up\", \"the done thing\", \"good on ya, you bloody legend!\". \"we reckon you make a _projects_ directory\" is ungrammatical.",
+   "register": "A full, broad voice through the prose, close to level 5, with \"bloody\" and \"give a toss\" well within uncle-bob.",
+   "tone": "Keeps the encouraging tutorial tone, amplified: \"Welcome aboard, mate!\"",
+   "flow": "Reads well, with one broken join: \"we reckon you\nmake a _projects_ directory\".",
+   "variety": "Varied overall (\"Fire up\", \"the done thing\", \"get a hand\", \"legend\"), though \"punch in\" and \"chuck in\" each appear twice.",
+   "essence": "Unmistakably the Rust book page, retold."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "compile'n run the file",
+    "original": "compile and run the file",
+    "severity": "minor",
+    "why": "Eye dialect is the only change in most lines and clutters a technical instruction."
+   },
+   {
+    "quote": "[“Troubleshootin'”][troubleshooting]",
+    "original": "[“Troubleshooting”][troubleshooting]",
+    "severity": "minor",
+    "why": "Alters the visible title of a cross-referenced section."
+   },
+   {
+    "quote": "Rust files always end with\nthe _.rs_ extension.",
+    "original": "Rust files always end with\nthe _.rs_ extension.",
+    "severity": "major",
+    "why": "Largely untranslated against a level-5 brief."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Open a terminal and enter the following commands",
+    "original": "Open a terminal and enter the following commands",
+    "severity": "minor",
+    "why": "Several lines left plain; lighter than level 5."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "we reckon you\nmake a _projects_ directory",
+    "original": "we suggest making a _projects_ directory",
+    "severity": "minor",
+    "why": "Missing \"should\"; reads as broken grammar."
+   },
+   {
+    "quote": "chuck in this:",
+    "original": "enter this:",
+    "severity": "minor",
+    "why": "\"chuck in\" for typing commands strains, and repeats."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "The original with dropped g's and \"yer\" bolted on; far lighter than the brief and clunky.",
+  "yarn": "Natural, faithful and warm, at a middle weight rather than the level 5 asked.",
+  "unharnessed": "The fullest, most voiced telling at the brief's weight, with a grammar slip and some repetition."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,155 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "dinkum-4": "A",
+  "yarn-dinkum": "B",
+  "dinkum-3": "C"
+ },
+ "scores": {
+  "dinkum-4": {
+   "meaning": 5,
+   "sense": 3,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "dinkum-4": {
+   "meaning": "All points kept: \"pile extra work on your agency’s web team\", \"checked off by the FedRAMP Joint Authorization Board\", \"one simple static file server or service, not dozens\", \"where you only pay for what you use\".",
+   "sense": "Most terms fit (\"get the tick from stakeholders\", \"dead easy\", \"fewer weak spots\"), but \"Fair go, it shouldn’t be like that.\" misuses fair go, which is a plea for fairness or protest rather than a lead-in to a statement of how things ought to be.",
+   "authenticity": "Natural in the body (\"The hardest bit\", \"get the tick\", \"dead easy\"), but the bolted-on \"Fair go\" opener reads as a stock phrase.",
+   "register": "Light for level 3: few terms beyond \"the hardest bit\", \"Fair go\", \"get the tick\", \"dead easy\", \"headaches\"; most reads as plain marketing English. No swearing.",
+   "tone": "Keeps the upbeat, helpful pitch: \"so you can put your know-how into your content\".",
+   "flow": "Smooth, though \"Steering clear of a traditional CMS means steering clear of headaches\" repeats by design and reads fine.",
+   "variety": "Modest and unrepeated: \"the hardest bit\", \"Fair go\", \"get the tick\", \"weak spots\", \"dead easy\".",
+   "essence": "Unmistakably the same product page, headings and structure intact."
+  },
+  "yarn-dinkum": {
+   "meaning": "All points kept: \"put your agency’s web team under the pump\", \"verified by the FedRAMP Joint Authorization Board\", \"Production-level static sites generally need one simple static file server or service, not dozens\".",
+   "sense": "Each term fits: \"The hard yakka\" for the hardest part, \"under the pump\" for extra strain, \"easy as\" for easy signoff, \"a fair few things going for them\".",
+   "authenticity": "Natural Australian: \"looks dead simple\", \"The hard yakka usually isn’t writing the content\", \"is easy as\". \"flamin’ easy\" is a little hearty for a government page but still idiomatic.",
+   "register": "Right at level 3: regular, unforced slang (\"hard yakka\", \"under the pump\", \"easy as\", \"a fair few\", \"flamin’\") with one mild level-1 intensifier, within the vulgarity dial.",
+   "tone": "Keeps the confident, friendly pitch: \"and doing it properly, so you can put your know-how into your content\".",
+   "flow": "Reads smoothly: \"Steer clear of a traditional CMS and you steer clear of headaches\".",
+   "variety": "Varied: \"dead simple\", \"hard yakka\", \"that lot\", \"under the pump\", \"out of the blue\", \"easy as\", \"a fair few\", \"flamin’\".",
+   "essence": "The same product page with its structure, headings and arguments intact."
+  },
+  "dinkum-3": {
+   "meaning": "All points kept, with small colour: \"without any fuss\" added to the S3 point, and \"we know what we're doing\" for expertly.",
+   "sense": "Terms fit: \"the hard yakka usually isn't writing the content\", \"is no drama\", \"load up your agency’s web team even more\".",
+   "authenticity": "Natural: \"Thing is, the hard yakka\", \"is no drama\", \"dead easy\". Nothing forced.",
+   "register": "A little under level 3: \"hard yakka\", \"no drama\", \"dead easy\", \"Thing is\", \"a fair bit\", with long plain stretches (\"A production-level static site generally needs one simple static file server or service, not dozens.\").",
+   "tone": "Keeps the upbeat pitch; \"we know what we're doing\" is slightly more boastful than \"expertly managing\" but in keeping.",
+   "flow": "Smooth; \"And through Pages you can make use of scaling services like Amazon S3 without any fuss, where you only pay for what you use\" is a slightly overloaded sentence.",
+   "variety": "Varied and unrepeated: \"Thing is\", \"hard yakka\", \"no drama\", \"a fair bit\", \"dead easy\", \"without any fuss\".",
+   "essence": "The same product page, retold."
+  }
+ },
+ "problems": {
+  "dinkum-4": [
+   {
+    "quote": "Fair go, it shouldn’t be like that.",
+    "original": "It shouldn’t be that way.",
+    "severity": "major",
+    "why": "Fair go is a plea for fairness or a protest; tacked onto this line it reads as bolted-on and strains its sense."
+   },
+   {
+    "quote": "Static websites have a few things going for them:",
+    "original": "There are several advantages to static websites:",
+    "severity": "minor",
+    "why": "Much of the text is plain English, lighter than the level-3 brief."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "It’s flamin’ easy to host static website files on Pages.",
+    "original": "It’s very easy to host static website files on Pages.",
+    "severity": "minor",
+    "why": "Flamin’ is slightly heavy for agency marketing copy, though within the dial."
+   }
+  ],
+  "dinkum-3": [
+   {
+    "quote": "without any fuss, where you only pay for what you use",
+    "original": "where you pay only for what you use",
+    "severity": "minor",
+    "why": "The added aside makes the sentence clunky and detaches the where clause from S3."
+   }
+  ]
+ },
+ "summaries": {
+  "dinkum-4": "Accurate and smooth, light on slang, with one misfired Fair go.",
+  "yarn-dinkum": "The best-weighted version: natural level-3 slang that keeps the product pitch intact.",
+  "dinkum-3": "Natural and accurate, a shade lighter than B."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "dinkum-4",
+    "yarn-dinkum",
+    "dinkum-3"
+   ]
+  ],
+  "flow": [
+   [
+    "dinkum-4",
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-3"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-dinkum",
+    "dinkum-3"
+   ],
+   [
+    "dinkum-4"
+   ]
+  ],
+  "essence": [
+   [
+    "dinkum-4",
+    "yarn-dinkum",
+    "dinkum-3"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-3"
+   ],
+   [
+    "dinkum-4"
+   ]
+  ]
+ }
+}

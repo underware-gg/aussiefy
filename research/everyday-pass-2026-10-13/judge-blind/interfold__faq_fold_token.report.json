@@ -1,0 +1,59 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {"evidence": "All technical content kept exactly: the three functions, the `BondingRegistry` exit queue, timestamps `1787148000` and `1787148023`, the four setup steps, operator-only bonding, the cold wallet or Safe. Rewordings keep sense: \"FOLD keeps the economic side of the network ticking over.\", \"That would water down accountability\".", "score": 5},
+        "sense": {"evidence": "Terms fit: \"anyone keen to operate a ciphernode\", \"all three hang together\" for interlocked, \"operator-only, on purpose\", \"If you need a hand\".", "score": 5},
+        "authenticity": {"evidence": "Light, natural Australian usage that fits documentation: \"ticking over\", \"keen\", \"misbehaviour\"; nothing bolted on.", "score": 5},
+        "register": {"evidence": "A light level-2 touch suited to docs, clean: \"keen\", \"ticking over\", \"hang together\", \"On top of that\", \"If you need a hand\".", "score": 5},
+        "tone": {"evidence": "Stays a clear, neutral technical FAQ: \"Every FOLD that is bonded to a ciphernode is capital at risk for the operator that runs it.\"", "score": 5},
+        "flow": {"evidence": "Reads smoothly: \"FOLD has three main jobs, and all three hang together: ciphernode bonding, protocol incentives, and governance.\"", "score": 5},
+        "variety": {"evidence": "Several different touches, none repeated, though sparse: \"keen\", \"ticking over\", \"hang together\", \"water down\", \"a hand\".", "score": 4},
+        "essence": {"evidence": "Unmistakably the same FAQ, structure and code intact.", "score": 5}
+      },
+      "problems": [],
+      "summary": "A light, natural, accurate pass that suits a technical FAQ; nothing lost."
+    },
+    "B": {
+      "scores": {
+        "meaning": {"evidence": "All facts and code kept: \"Once that transaction went through, FOLD became generally transferable.\", the four steps, \"capital on the line for the operator who runs it\".", "score": 5},
+        "sense": {"evidence": "Terms fit: \"a cut of the fees\", \"To be in the running for committee selection\", \"switch on general transferability\", \"water down accountability\". \"It may also cop penalties\" fits, if casual.", "score": 5},
+        "authenticity": {"evidence": "Natural Australian phrasing (\"have a look at\", \"jump into the designated Telegram group\"); \"cop penalties\" is a little casual for docs but sounds right.", "score": 4},
+        "register": {"evidence": "Level-2 weight, clean: \"keen\", \"cop\", \"a cut\", \"in the running\", \"jump into\", \"If you need a hand\".", "score": 5},
+        "tone": {"evidence": "Still a technical FAQ, a shade more casual: \"It may also cop penalties for provable misbehaviour\".", "score": 4},
+        "flow": {"evidence": "Reads smoothly: \"No. The Interfold's bonding model is operator-only, and that's on purpose.\"", "score": 5},
+        "variety": {"evidence": "Varied throughout with no repeats: \"keen\", \"have a look at\", \"underpins\", \"cop\", \"a cut\", \"switched on\", \"in the running\", \"on the line\", \"jump into\".", "score": 5},
+        "essence": {"evidence": "The same FAQ, headings and code untouched.", "score": 5}
+      },
+      "problems": [
+        {"quote": "It may also cop penalties for provable", "original": "It may also be subject to penalties for provable", "severity": "minor", "why": "\"Cop\" is a touch casual for formal penalty terms in docs."}
+      ],
+      "summary": "Accurate, varied and natural; a shade more casual than A in places."
+    },
+    "C": {
+      "scores": {
+        "meaning": {"evidence": "The original verbatim apart from one line, so all facts survive: \"The bonding model of the Interfold is deliberately operator-only.\"", "score": 5},
+        "sense": {"evidence": "The only change, \"Nah, nah.\" for \"No.\", strains: doubled it sounds like a childish taunt rather than a plain no.", "score": 3},
+        "authenticity": {"evidence": "One bolted-on interjection in untouched American prose: \"Nah, nah. The bonding model\"; US spellings left: \"misbehavior\", \"fulfill\".", "score": 2},
+        "register": {"evidence": "Largely untranslated: \"FOLD supports the economic operation of the network.\" and the rest as written.", "score": 2},
+        "tone": {"evidence": "Original tone intact except the jarring \"Nah, nah.\" in a technical answer.", "score": 4},
+        "flow": {"evidence": "Original prose reads well; \"Nah, nah. The bonding model of the Interfold is deliberately operator-only.\" is a clunky join.", "score": 4},
+        "variety": {"evidence": "A single Aussie touch: \"Nah, nah.\"", "score": 1},
+        "essence": {"evidence": "It is the original FAQ.", "score": 5}
+      },
+      "problems": [
+        {"quote": "Nah, nah.", "original": "No.", "severity": "major", "why": "Doubled \"nah\" reads as a taunt; stagey and out of tone for docs."},
+        {"quote": "misbehavior or for failure to fulfill", "original": "misbehavior or for failure to fulfill", "severity": "minor", "why": "US spellings left in."},
+        {"quote": "FOLD supports the economic operation of the network.", "original": "FOLD supports the economic operation of the network.", "severity": "major", "why": "Representative: text left largely untranslated against the brief."}
+      ],
+      "summary": "The original with one stagey interjection; too light and US spelling kept."
+    }
+  },
+  "rankings": {
+    "tone": [["A"], ["B"], ["C"]],
+    "flow": [["A", "B"], ["C"]],
+    "variety": [["B"], ["A"], ["C"]],
+    "essence": [["A", "B", "C"]],
+    "overall": [["A", "B"], ["C"]]
+  }
+}

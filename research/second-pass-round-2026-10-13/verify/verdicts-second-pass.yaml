@@ -1,0 +1,384 @@
+# Verdicts for the second-pass round, one per added entry, in the format of the everyday round's verify/BRIEF.md.
+# Written by hand from the second pass's findings and harvest: glosses and triggers in our own words, sources are
+# open references. DECISIONS.md lists every candidate considered, including the ones skipped or already covered.
+# `evidence: own` means own knowledge of a common term, checked against the cited Wiktionary page.
+
+# --- keen ------------------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: keen
+  entry:
+    id: keen
+    form: keen
+    concept: [NEW:EAGER]
+    frame: predicate_adj
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: Eager, up for it; with "to" (keen to help) or "for" (keen for a swim), or alone (you keen?).
+    sources: [https://en.wiktionary.org/wiki/keen]
+  new_concept:
+    id: EAGER
+    description: Eager to do or have something (of a person); "keen" is the everyday Australian word.
+    triggers:
+      predicate_adj: [eager ^person]
+  evidence: own
+  confidence: high
+  why: The predicate only, so "her eager eyes" and "an eager student" keep their adjective.
+
+- decision: add_entry
+  candidate: keen as mustard
+  entry:
+    id: keen-as-mustard
+    form: keen as mustard
+    concept: [NEW:VERY_EAGER]
+    frame: predicate_adj
+    intensity: 5
+    incoherence: 3
+    register: current
+    gloss: Very eager indeed, raring to go.
+    sources: [https://en.wiktionary.org/wiki/keen_as_mustard]
+  new_concept:
+    id: VERY_EAGER
+    description: Very eager, raring to go (of a person). Apart from EAGER, so a plain "eager" isn't overstated.
+    triggers:
+      predicate_adj: ["very eager ^person", "really eager ^person", "extremely eager ^person",
+                      "raring to go ^person"]
+  evidence: own
+  confidence: high
+  why: Shared with British English but a stock Aussie simile; its own concept, so only strong eagerness takes it.
+
+- decision: add_entry
+  candidate: keen on
+  entry:
+    id: keen-on
+    form: keen on
+    concept: [NEW:KEEN_ON]
+    frame: predicate_adj
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: Enthusiastic about something, into it (keen on footy, not keen on the idea).
+    sources: [https://en.wiktionary.org/wiki/keen]
+  new_concept:
+    id: KEEN_ON
+    description: Enthusiastic about a thing or an idea, into it. Not "fond of", which can be said of a person
+      with no romance in it (and "keen on her" has some).
+    triggers:
+      predicate_adj: [enthusiastic about]
+  evidence: own
+  confidence: high
+  why: Not "fond of" (keen on a person is romantic) or "care for" (to look after someone).
+
+# --- meant to, the odd, a fair bit -----------------------------------------------------------------------------
+- decision: add_entry
+  candidate: meant to
+  entry:
+    id: meant-to
+    form: meant to
+    concept: [NEW:SUPPOSED_TO]
+    frame: predicate_adj
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: Supposed to, expected to (you're meant to wait here; it's meant to rain); also reputed to.
+    sources: [https://en.wiktionary.org/wiki/meant_to]
+  new_concept:
+    id: SUPPOSED_TO
+    description: Supposed to, expected or obliged to ("you're supposed to wait"), or reputed to.
+    triggers:
+      predicate_adj: [supposed to]
+  evidence: own
+  confidence: high
+  why: The Aussie default for "supposed to" in every one of its senses; "supposed" without "to" isn't caught.
+
+- decision: add_entry
+  candidate: the odd
+  entry:
+    id: the-odd
+    form: the odd
+    concept: [NEW:OCCASIONAL]
+    frame: adj
+    intensity: 2
+    incoherence: 1
+    register: current
+    gloss: An occasional one here and there (the odd shower, the odd beer).
+    sources: [https://en.wiktionary.org/wiki/odd]
+  new_concept:
+    id: OCCASIONAL
+    description: Occasional, one here and there ("the occasional beer").
+    triggers:
+      adj: [the occasional]
+  evidence: own
+  confidence: high
+  why: Only "the occasional", since "an occasional contributor" is a role and "the odd contributor" would read as strange.
+
+- decision: add_entry
+  candidate: a fair bit
+  entry:
+    id: a-fair-bit
+    form: a fair bit
+    concept: [NEW:QUITE_A_LOT]
+    frame: np
+    intensity: 2
+    incoherence: 1
+    register: current
+    plural: a fair bit
+    gloss: Quite a lot, a sizeable amount (it took a fair bit of doing).
+    sources: [https://en.wiktionary.org/wiki/a_fair_bit]
+  new_concept:
+    id: QUITE_A_LOT
+    description: Quite a lot, a fair amount (a middling quantity, not a huge one).
+    triggers:
+      np: [quite a lot, quite a bit, a fair amount]
+      adv: [quite a lot, quite a bit, considerably ^adj]
+  evidence: own
+  confidence: high
+  why: The middling amount only; A_LOT's "tons" and "a great deal" keep heaps and the rest.
+
+# --- easy as, done and dusted, het up, knocked for six ---------------------------------------------------------
+- decision: add_entry
+  candidate: easy as
+  entry:
+    id: easy-as
+    form: easy as
+    concept: [NEW:DEAD_EASY]
+    frame: predicate_adj
+    intensity: 4
+    incoherence: 2
+    register: current
+    gloss: Very easy; the comparison ("easy as pie") left off, which is the point.
+  new_concept:
+    id: DEAD_EASY
+    description: Very easy, no trouble at all (as a predicate, with nothing after it).
+    triggers:
+      predicate_adj: ["very easy !=to|for", "really easy !=to|for", "easy as pie",
+                      "a piece of cake"]
+  evidence: own
+  confidence: high
+  why: The truncated simile can't take a complement, so "very easy to use" and "easy for you" are blocked.
+
+- decision: add_entry
+  candidate: done and dusted
+  entry:
+    id: done-and-dusted
+    form: done and dusted
+    concept: [NEW:ALL_DONE]
+    frame: predicate_adj
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Finished and settled, nothing left to do.
+    sources: [https://en.wiktionary.org/wiki/done_and_dusted]
+  new_concept:
+    id: ALL_DONE
+    description: Completely finished and settled (a job, a deal, a match).
+    triggers:
+      predicate_adj: ["all done !=for|with|up", "over and done with", "all finished !=with", "completely finished !=with"]
+  evidence: own
+  confidence: high
+  why: Not "all done for" (doomed), "done with" someone (fed up) or "all done up" (dressed up).
+
+- decision: add_entry
+  candidate: het up
+  entry:
+    id: het-up
+    form: het up
+    variants: [all het up]
+    concept: [NEW:WORKED_UP]
+    frame: predicate_adj
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Agitated, worked up, in a lather.
+    sources: [https://en.wiktionary.org/wiki/het_up]
+  new_concept:
+    id: WORKED_UP
+    description: Agitated, worked up (of a person).
+    triggers:
+      predicate_adj: [worked up ^person, all worked up]
+  evidence: own
+  confidence: medium
+  why: Commonwealth rather than only Australian, but the Aussie choice over "worked up"; "worked up a sweat" isn't a predicate.
+
+- decision: add_entry
+  candidate: knocked for six
+  entry:
+    id: knocked-for-six
+    form: knocked for six
+    concept: [NEW:STAGGERED]
+    frame: predicate_adj
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Badly shaken, bowled over by a blow or bad news (from cricket, a ball hit out of the ground).
+    sources: [https://en.wiktionary.org/wiki/knock_for_six]
+  new_concept:
+    id: STAGGERED
+    description: Badly shaken, thrown off balance by a blow or bad news (of a person).
+    triggers:
+      predicate_adj: [thrown for a loop, floored ^person, knocked sideways ^person]
+  evidence: own
+  confidence: medium
+  why: Not "devastated" (DISAPPOINTED has it, and a devastated town isn't knocked for six) or "shattered" (tired, in Australia).
+
+- decision: add_entry
+  candidate: knock for six
+  entry:
+    id: knock-for-six
+    form: knock {obj} for six
+    concept: [NEW:STAGGER_SOMEONE]
+    frame: vp
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Shake someone badly, bowl them over (the news knocked her for six).
+    sources: [https://en.wiktionary.org/wiki/knock_for_six]
+  new_concept:
+    id: STAGGER_SOMEONE
+    description: Shake someone badly, throw them off balance (of news or a blow).
+    triggers:
+      vp: ["throw {obj} for a loop", "knock {obj} sideways"]
+  evidence: own
+  confidence: medium
+  why: The American idiom it answers; not "hit {obj} hard", which is often a literal blow.
+
+# --- things ----------------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: fridge
+  entry:
+    id: fridge
+    form: fridge
+    concept: [NEW:FRIDGE]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: A refrigerator; nobody in Australia says the long word.
+    sources: [https://en.wiktionary.org/wiki/fridge]
+  new_concept:
+    id: FRIDGE
+    description: A refrigerator (the appliance, not a refrigerated truck or rail car).
+    triggers:
+      np: ["refrigerator !=car|cars|truck|trucks|van|vans|ship|ships"]
+  evidence: own
+  confidence: high
+  why: The appliance only; a refrigerator car or truck is a refrigerated one.
+
+- decision: add_entry
+  candidate: happy snap
+  entry:
+    id: a-happy-snap
+    form: a happy snap
+    concept: [HAPPY_SNAP]   # concept written by hand in concepts.yaml ("people and things"), for its not_in
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: A casual photo, a holiday snap.
+    sources: [https://en.wiktionary.org/wiki/happy_snap]
+  evidence: own
+  confidence: medium
+  why: A snapshot is often figurative ("a snapshot of the economy"), so "of" is blocked and docs, news and official prose are left alone.
+
+- decision: add_entry
+  candidate: on the blower
+  entry:
+    id: get-on-the-blower
+    form: get on the blower
+    concept: [NEW:GET_ON_THE_PHONE]
+    frame: vp
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Pick up the phone and call someone.
+    sources: [https://en.wiktionary.org/wiki/blower]
+  new_concept:
+    id: GET_ON_THE_PHONE
+    description: Get on the phone, ring someone up.
+    triggers:
+      vp: [get on the phone]
+  evidence: own
+  confidence: medium
+  why: Only the verb phrase; a bare "on the phone" also names where something is ("the app on the phone").
+
+- decision: add_entry
+  candidate: go off (food)
+  entry:
+    id: go-off-food
+    form: go off
+    concept: [NEW:GO_OFF_FOOD]
+    frame: vp
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: Of food, turn bad (the milk's gone off).
+    sources: [https://en.wiktionary.org/wiki/go_off]
+  new_concept:
+    id: GO_OFF_FOOD
+    description: Of food, spoil or turn bad. Not "go bad" or "turn sour", which things and relations do too.
+    triggers:
+      vp: [go rancid, go mouldy, go moldy, spoil quickly, spoil easily]
+  evidence: own
+  confidence: medium
+  why: Food-only phrasings; "the deal went bad" would become "went off", which means went ahead or blew up.
+
+- decision: add_entry
+  candidate: lair
+  entry:
+    id: a-lair
+    form: a lair
+    concept: [BOASTER]
+    frame: np
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: A flashy, loud show-off, all style and swagger.
+    sources: [https://en.wiktionary.org/wiki/lair]
+  evidence: own
+  confidence: medium
+  why: BOASTER's show-off and braggart; a lair is the dressed-up, swaggering kind. Only the noun with its article.
+
+# --- reference only --------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: wouldn't it (rot your socks)
+  entry:
+    id: wouldnt-it-rot-your-socks
+    form: wouldn't it rot your socks
+    variants: [wouldn't it]
+    concept: [NEW:EXASPERATION]
+    frame: interjection
+    intensity: 4
+    incoherence: 5
+    register: dated
+    gloss: An exclamation of exasperation at bad luck or a raw deal (wouldn't it!).
+  new_concept:
+    id: EXASPERATION
+    description: Exasperation at bad luck (lookup only). "Can you beat that" is also a challenge to beat a record.
+    triggers:
+      interjection: [well wouldn't that just rot your socks off]
+  evidence: own
+  confidence: medium
+  why: Reference only; "can you beat that?" is also a literal challenge, so no plain trigger is safe.
+
+- decision: add_entry
+  candidate: gridiron
+  entry:
+    id: gridiron
+    form: gridiron
+    concept: [NEW:GRIDIRON]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    plural: gridiron
+    gloss: American football, so called to keep it apart from the codes Australians mean by football.
+    sources: [https://en.wiktionary.org/wiki/gridiron]
+  new_concept:
+    id: GRIDIRON
+    description: American football (the game). A bare "football" is left alone, since it is a different game in
+      every country.
+    triggers:
+      np: [American football]
+  evidence: own
+  confidence: high
+  why: Only "American football" (the dialect table skips it, reading the capital as a name); a bare football is ambiguous.

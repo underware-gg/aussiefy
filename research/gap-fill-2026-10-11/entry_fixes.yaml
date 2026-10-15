@@ -1,0 +1,47 @@
+# Hand repairs to verified entries, by id, applied by `aussiefy dev round` before the schema check.
+chuck-a-mental:
+  flags: [dubious_meaning]
+  notes: "Gated: 'mental' can read as mocking mental illness; prefer 'chuck a wobbly' / 'chuck a berko'."
+g-tag-but:
+  status: gate
+  flags: [dubious_meaning]
+  notes: "Gated: sentence-final 'but' needs a contrast with the sentence before, which the engine can't check."
+g-tag-hey:
+  status: gate
+  flags: [dubious_meaning]
+  notes: "Gated: low confidence; sources document the tag only generally, not as Australian."
+g-yeah-no:
+  status: gate
+  flags: [dubious_meaning]
+  notes: "Gated: 'yeah, no' signals (polite) disagreement, so as a free opener it can change what's said."
+g-tag-legend:
+  status: gate
+  flags: [dubious_meaning]
+  notes: "Gated: praise; tagged on an insult or bad news it reads wrong, and the engine can't tell."
+# replaces lists that would fire in the wrong sense (reviewed after the first apply)
+spunky: {replaces: [good-looking, attractive, handsome]}          # not "hot": temperature
+tell-porkies: {replaces: [tell lies, tell a lie]}                  # not bare "lie": "lie down"
+a-goss: {replaces: [the latest gossip]}                            # "a gossip" is the person, not the news
+a-durry: {replaces: [a cigarette, a smoke]}                        # "a rollie" is itself slang
+unco: {replaces: [clumsy, uncoordinated, bumbling]}                # not "awkward": "an awkward silence"
+perv-on: {replaces: ['ogle {obj}', 'leer at {obj}']}               # not "check out": suss out owns it
+suss-suspicious: {replaces: [suspicious]}                          # fishy/shady belong to DODGY
+a-willy-willy: {replaces: [a dust devil, a whirlwind]}             # a dust storm is something else
+a-furphy: {replaces: [a false rumour, an unfounded rumour, a baseless rumour]}   # not "a myth": too broad
+your-shout: {replaces: ['{subj} {be} {poss} round', '{subj} {be} {poss} treat']} # "{be} on {obj}" too broad
+# glosses that used "great" for excellent: "great" also means big ("a great war"), and lookup compares queries
+# with glosses, so a big-sense query was pulled to these (found in the 1.2.0 release checks)
+deadly: {gloss: "Excellent (Aboriginal English compliment)."}
+how-good-is-that: {gloss: "Rhetorical \"isn't that wonderful?\".", variants: []}
+# variants that match far more than the expression (found by the yarn-mode lint on the 2026-10-11 retellings):
+# "how good?" matched any "how ... ?" question, and a bare "sparrow's" any sparrow
+sparrows-fart: {variants: ["sparrow's fart"]}
+# ungated after the classics round's audit: Wiktionary marks "work back" as Australian (verify/verdicts-*.yaml)
+work-back: {status: active, flags: []}
+# "a fair bit" is already Aussie (the craft guide recommends it): not a phrase to replace (2026-10-12)
+a-fair-whack: {replaces: [quite a lot, a fair amount, a lot of money]}
+# "skull" is also the bone: as a spelling of skol it took lookups for the head (2026-10-12)
+skol: {variants: ['scull {obj}']}
+# level is how hard to follow, not how rude (level and vulgarity are orthogonal; 2026-10-12)
+bugger-damn: {incoherence: 1}
+no-wukkas: {incoherence: 3}

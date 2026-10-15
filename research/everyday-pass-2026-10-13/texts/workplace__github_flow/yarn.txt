@@ -1,0 +1,32 @@
+## Introduction
+
+GitHub flow is a lightweight, branch-based workflow. GitHub flow is handy for every man and his dog, not just developers. For example, here at GitHub, we use GitHub flow for our [site policy](https://github.com/github/site-policy), [documentation](https://github.com/github/docs), and [roadmap](https://github.com/github/roadmap).
+
+## Prerequisites
+
+To follow GitHub flow, you'll need a GitHub account and a repository. To find out how to create an account, see [Creating an account on GitHub](/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). For how to create a repository, see [Quickstart for repositories](/en/repositories/creating-and-managing-repositories/quickstart-for-repositories). If you're after an existing repository to contribute to, see [Finding ways to contribute to open source on GitHub](/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github).
+
+## Following GitHub flow
+
+> \[!TIP]
+> You can do every step of GitHub flow through the GitHub web interface, command line and [GitHub CLI](https://cli.github.com), or [GitHub Desktop](/en/desktop). For more on the tools you can use to connect to GitHub, see [Connecting to GitHub](/en/get-started/using-github/connecting-to-github).
+
+### Create a branch
+
+Create a branch in your repository. A short branch name that says what it's for lets your collaborators get a quick squiz at work in progress. For example, `increase-test-timeout` or `add-code-of-conduct`. For more info, see [Managing branches within your repository](/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository).
+
+By creating a branch, you get a space to work in without mucking up the default branch. You also give collaborators a chance to review your work.
+
+### Make changes
+
+On your branch, make whatever changes you're after to the repository. For more info, see [Creating new files](/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](/en/repositories/working-with-files/managing-files/editing-files), [Renaming a file](/en/repositories/working-with-files/managing-files/renaming-a-file), [Moving a file to a new location](/en/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location), or [Deleting files in a repository](/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository).
+
+Your branch is a safe place to make changes. If you stuff something up, you can revert your changes or push more changes to fix the mistake. Your changes won't end up on the default branch until you merge your branch.
+
+Commit and push your changes to your branch. Give each commit a message that says what it does, to help you and future contributors work out what changes the commit holds. For example, `fix typo` or `increase rate limit`.
+
+Ideally, each commit holds one self-contained, complete change. That makes it easy to revert your changes if you decide to go a different way. For example, if you want to rename a variable and add some tests, put the variable rename in one commit and the tests in another commit. Later, if you want to keep the tests but revert the variable rename, you can revert the specific commit that held the variable rename. If you put the variable rename and the tests in the same commit, or spread the variable rename across multiple commits, you'd spend more effort reverting your changes.
+
+By committing and pushing your changes, you back up your work to remote storage. That means you can get at your work from any device. It also means your collaborators can see your work, answer questions, and make suggestions or contributions.
+
+Keep making, committing and pushing changes to your branch until you're ready to ask for feedback.

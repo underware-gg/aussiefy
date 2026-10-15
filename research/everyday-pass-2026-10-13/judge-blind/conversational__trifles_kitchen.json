@@ -1,0 +1,678 @@
+{
+ "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as rude, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+ "prompt": "BRIEF: level 4, vulgarity 1\n\nORIGINAL:\nSHERIFF: Nothing here but kitchen things.\n\n(_The_ COUNTY ATTORNEY, _after again looking around the kitchen, opens the door of a cupboard closet. He gets up on a chair and looks on a shelf. Pulls his hand away, sticky_.)\n\nCOUNTY ATTORNEY: Here's a nice mess.\n\n(_The women draw nearer_.)\n\nMRS PETERS: (_to the other woman_) Oh, her fruit; it did freeze, (_to the_ LAWYER) She worried about that when it turned so cold. She said the fire'd go out and her jars would break.\n\nSHERIFF: Well, can you beat the women! Held for murder and worryin' about her preserves.\n\nCOUNTY ATTORNEY: I guess before we're through she may have something more serious than preserves to worry about.\n\nHALE: Well, women are used to worrying over trifles.\n\n(_The two women move a little closer together_.)\n\nCOUNTY ATTORNEY: (_with the gallantry of a young politician_) And yet, for all their worries, what would we do without the ladies? (_the women do not unbend. He goes to the sink, takes a dipperful of water from the pail and pouring it into a basin, washes his hands. Starts to wipe them on the roller-towel, turns it for a cleaner place_) Dirty towels! (_kicks his foot against the pans under the sink_) Not much of a housekeeper, would you say, ladies?\n\nMRS HALE: (_stiffly_) There's a great deal of work to be done on a farm.\n\nCOUNTY ATTORNEY: To be sure. And yet (_with a little bow to her_) I know there are some Dickson county farmhouses which do not have such roller towels. (_He gives it a pull to expose its length again_.)\n\nMRS HALE: Those towels get dirty awful quick. Men's hands aren't always as clean as they might be.\n\nCOUNTY ATTORNEY: Ah, loyal to your sex, I see. But you and Mrs Wright were neighbors. I suppose you were friends, too.\n\nMRS HALE: (_shaking her head_) I've not seen much of her of late years. I've not been in this house--it's more than a year.\n\nCOUNTY ATTORNEY: And why was that? You didn't like her?\n\nMRS HALE: I liked her all well enough. Farmers' wives have their hands full, Mr Henderson. And then--\n\nCOUNTY ATTORNEY: Yes--?\n\nMRS HALE: (_looking about_) It never seemed a very cheerful place.\n\nCOUNTY ATTORNEY: No--it's not cheerful. I shouldn't say she had the homemaking instinct.\n\nMRS HALE: Well, I don't know as Wright had, either.\n\nCOUNTY ATTORNEY: You mean that they didn't get on very well?\n\nMRS HALE: No, I don't mean anything. But I don't think a place'd be any cheerfuller for John Wright's being in it.\n\nCOUNTY ATTORNEY: I'd like to talk more of that a little later. I want to get the lay of things upstairs now. (_He goes to the left, where three steps lead to a stair door_.)\n\nSHERIFF: I suppose anything Mrs Peters does'll be all right. She was to take in some clothes for her, you know, and a few little things. We left in such a hurry yesterday.\n\nCOUNTY ATTORNEY: Yes, but I would like to see what you take, Mrs Peters, and keep an eye out for anything that might be of use to us.\n\nMRS PETERS: Yes, Mr Henderson.\n\n(_The women listen to the men's steps on the stairs, then look about the kitchen_.)\n\nMRS HALE: I'd hate to have men coming into my kitchen, snooping around and criticising.\n\n(_She arranges the pans under sink which the_ LAWYER _had shoved out of place_.)\n\nMRS PETERS: Of course it's no more than their duty.\n\nMRS HALE: Duty's all right, but I guess that deputy sheriff that came out to make the fire might have got a little of this on. (_gives the roller towel a pull_) Wish I'd thought of that sooner. Seems mean to talk about her for not having things slicked up when she had to come away in such a hurry.\n\nCANDIDATE A:\nSHERIFF: Sweet bugger-all here but kitchen things.\n\n(_The_ COUNTY ATTORNEY, _after again looking around the kitchen, opens the door of a cupboard closet. Crikey, he gets up on a chair and looks on a shelf. Pulls his hand away, sticky_.)\n\nCOUNTY ATTORNEY: Here's a beaut mess.\n\n(_The women draw nearer_.)\n\nMRS PETERS: (_to the other woman_) Oh, her fruit; it did freeze, (_to the_ LAWYER) She worried about that when it turned so cold. She said the fire'd go out and her jars would break.\n\nSHERIFF: Well, can you beat the women! Held for murder and worryin' about her preserves.\n\nCOUNTY ATTORNEY: I guess before we're through she may have something more serious than preserves to worry about.\n\nAnyway, HALE: Well, women are used to worrying over trifles.\n\n(_The two women move a little closer together_.)\n\nCOUNTY ATTORNEY: (_with the gallantry of a young politician_) And yet, for all their worries, what would we do without the ladies? (_the women don't unbend. He goes to the sink, takes a dipperful of water from the pail and pouring it into a basin, washes his mitts. Starts to wipe them on the roller-towel, turns it for a cleaner place_) Dirty towels! (_kicks his foot against the pans under the sink_) bugger all of a housekeeper, would you say, ladies, mate?\n\nAnyway, MRS HALE: (_stiffly_) There's heaps of work to be done on a farm.\n\nCOUNTY ATTORNEY: To be sure. And yet (_with a little bow to her_) I know there are some Dickson county farmhouses which do not have such roller towels. (_He gives it a pull to expose its length again_.)\n\nMRS HALE: Those towels get grotty bloody awful quick. Men's mitts aren't always as clean as they might be.\n\nCOUNTY ATTORNEY: Ah, loyal to your sex, I see, ay. But you and Mrs Wright were neighbours. I suppose you were mates, too.\n\nMRS HALE: (_shaking her head_) I've not seen much of her of late years. Anyway, I've not been in this house--it's more than a year.\n\nCOUNTY ATTORNEY: And why was that? You didn't like her?\n\nMRS HALE: I liked her all well enough. Farmers' wives have their hands full, Mr Henderson. And then--\n\nCOUNTY ATTORNEY: Yes--?\n\nMRS HALE: (_looking about_) It never seemed a very cheerful place.\n\nCOUNTY ATTORNEY: No--it's not cheerful. I shouldn't say she had the homemaking instinct.\n\nMRS HALE: Well, I dunno as Wright had, either.\n\nCOUNTY ATTORNEY: You mean that they didn't get on properly well?\n\nBugger me, MRS HALE: Yeah, but nah, I don't mean anything. But I don't reckon a place'd be any cheerfuller for John Wright's being in it.\n\nCOUNTY ATTORNEY: I'd like to talk more of that a little later. I want to get the lay of things upstairs now. (_He goes to the left, where three steps lead to a stair door_.)\n\nSHERIFF: I reckon anything Mrs Peters does'll be all right. She was to take in some clothes for her, you know, and a few little things. Now, we left in such a hurry yesterday.\n\nCOUNTY ATTORNEY: Righto, but I would like to see what you take, Mrs Peters, and keep an eye out for anything that might be of use to us.\n\nMRS PETERS: Yeah, Mr Henderson.\n\n(_The women listen to the men's steps on the stairs, then look about the kitchen_.)\n\nMRS HALE: I'd hate to have blokes coming into my bloody kitchen, stickybeaking around and criticising.\n\n(_She arranges the pans under sink which the_ LAWYER _had shoved out of place_.)\n\nMRS PETERS: Of course it's no more than their duty.\n\nMRS HALE: Duty's all right, but I guess that deputy sheriff that came out to make the fire might have got a little of this on. (_gives the roller towel a pull_) Wish I'd thought of that sooner. Anyway, seems mean to talk about her for not having things slicked up when she had to come away in such a hurry.\n\nCANDIDATE B:\nSHERIFF: Sweet bugger-all here but kitchen stuff.\n\n(_The_ COUNTY ATTORNEY, _after another squiz round the kitchen, opens the door of a cupboard. He gets up on a chair and looks on a shelf. Pulls his hand away, sticky_.)\n\nCOUNTY ATTORNEY: Here's a beaut mess.\n\n(_The women draw nearer_.)\n\nMRS PETERS: (_to the other woman_) Oh, her fruit; it did freeze, (_to the_ LAWYER) She was worried about that when it turned so cold. She said the fire'd go out and her jars would crack.\n\nSHERIFF: Well, wouldn't it! Locked up for murder and fretting over her preserves.\n\nCOUNTY ATTORNEY: I'd say before we're done she might have something a fair bit heavier than preserves to worry about.\n\nHALE: Well, women are used to worrying over trifles.\n\n(_The two women move a little closer together_.)\n\nCOUNTY ATTORNEY: (_with all the charm of a young pollie_) And yet, for all their worries, where would we be without the ladies? (_the women don't thaw. He goes to the sink, takes a dipperful of water from the bucket and, pouring it into a basin, washes his mitts. Starts to wipe them on the roller towel, turns it for a cleaner bit_) Grotty towels! (_kicks his foot against the pans under the sink_) Not much chop as a housekeeper, would you say, ladies?\n\nMRS HALE: (_stiffly_) There's heaps of work to be done on a farm.\n\nCOUNTY ATTORNEY: Fair enough. And yet (_with a little bow to her_) I know there are a few Dickson county farmhouses that don't have roller towels like these. (_He gives it a pull to show its length again_.)\n\nMRS HALE: Those towels get filthy awful quick. Men's mitts aren't always as clean as they could be.\n\nCOUNTY ATTORNEY: Ah, sticking up for your own, I see. But you and Mrs Wright were neighbours. I s'pose you were mates, too.\n\nMRS HALE: (_shaking her head_) I've not seen much of her these last few years. I've not been in this house--it's more than a year.\n\nCOUNTY ATTORNEY: And why was that? You didn't like her?\n\nMRS HALE: I liked her well enough. Farmers' wives have their hands full, Mr Henderson. And then--\n\nCOUNTY ATTORNEY: Yes--?\n\nMRS HALE: (_looking about_) It never seemed a very cheery sort of place.\n\nCOUNTY ATTORNEY: No--it's not cheery. I wouldn't say she had much of a knack for homemaking.\n\nMRS HALE: Well, I dunno that Wright had, either.\n\nCOUNTY ATTORNEY: You mean they didn't get on too well?\n\nMRS HALE: Yeah, but nah, I don't mean anything. But I don't reckon a place'd be any cheerier for John Wright being in it.\n\nCOUNTY ATTORNEY: I'd like to have a yarn about that a bit later. I want to get the lay of the land upstairs now. (_He goes to the left, where three steps lead to a stair door_.)\n\nSHERIFF: I s'pose anything Mrs Peters does'll be right. She was to take in some clothes for her, you know, and a few little things. We left in such a flamin' hurry yesterday.\n\nCOUNTY ATTORNEY: Righto, but I'd like to see what you take, Mrs Peters, and keep an eye out for anything that might be some use to us.\n\nMRS PETERS: Yeah, Mr Henderson.\n\n(_The women listen to the men's steps on the stairs, then look about the kitchen_.)\n\nMRS HALE: I'd hate to have blokes coming into my kitchen, stickybeaking around and picking holes in everything.\n\n(_She straightens the pans under the sink that the_ LAWYER _had shoved out of place_.)\n\nMRS PETERS: Of course it's no more than their duty.\n\nMRS HALE: Duty's all well and good, but I reckon that deputy sheriff who came out to make the fire might've got a bit of this on. (_gives the roller towel a pull_) Wish I'd thought of that sooner. Seems a bit mean to have a go at her for not having things spick and span when she had to clear out in such a hurry.\n\nCANDIDATE C:\nSHERIFF: Nothin' here but kitchen gear.\n\n(_The_ COUNTY ATTORNEY, _after another squiz round the kitchen, opens the door of a cupboard. He hops up on a chair and has a look on a shelf. Pulls his hand back, all sticky_.)\n\nCOUNTY ATTORNEY: Well, here's a bloody mess.\n\n(_The women edge closer_.)\n\nMRS PETERS: (_to the other woman_) Oh, her fruit; it did freeze, (_to the_ LAWYER) She was fretting about that when it turned so cold. Reckoned the fire'd go out and her jars'd crack.\n\nSHERIFF: Well, wouldn't it rot your socks, women! Locked up for murder and she's carryin' on about her jam.\n\nCOUNTY ATTORNEY: I reckon by the time we're done she might have something a bit more serious than jam to worry about.\n\nHALE: Ah well, women are always fussin' over trifles.\n\n(_The two women move in a little closer together_.)\n\nCOUNTY ATTORNEY: (_laying on the charm like a young pollie_) And yet, for all their fussing, where would we be without the ladies, eh? (_the women don't give an inch. He goes over to the sink, scoops a dipperful of water out of the bucket, tips it into a basin and washes his hands. Goes to dry them on the roller towel, turns it round for a cleaner bit_) Filthy towels! (_kicks the pans under the sink_) Not much chop as a housekeeper, would you say, ladies?\n\nMRS HALE: (_stiffly_) There's a fair whack of work to be done on a farm.\n\nCOUNTY ATTORNEY: No doubt. And yet (_with a little bow to her_) I know there are a few Dickson county farmhouses that don't have roller towels like this. (_He gives it a tug to show the length of it again_.)\n\nMRS HALE: Those towels get grubby awful quick. Blokes' hands aren't always as clean as they could be.\n\nCOUNTY ATTORNEY: Ah, sticking up for the sisterhood, I see. But you and Mrs Wright were neighbours. I suppose you were mates, too.\n\nMRS HALE: (_shaking her head_) I haven't seen much of her these last few years. I haven't been in this house--it's more than a year.\n\nCOUNTY ATTORNEY: And why's that? You didn't like her?\n\nMRS HALE: I liked her well enough. Farmers' wives have their hands full, Mr Henderson. And then--\n\nCOUNTY ATTORNEY: Yes--?\n\nMRS HALE: (_looking round_) It never seemed a very cheery sort of place.\n\nCOUNTY ATTORNEY: No--it's not cheery. I wouldn't say she had much of a knack for homemaking.\n\nMRS HALE: Well, I don't know as Wright had either.\n\nCOUNTY ATTORNEY: You mean they didn't get on too well?\n\nMRS HALE: No, I don't mean anything. But I don't reckon a place'd be any cheerier for having John Wright in it.\n\nCOUNTY ATTORNEY: I'd like to have a yarn about that a bit later. I want to get the lie of the land upstairs now. (_He heads left, where three steps lead up to a stair door_.)\n\nSHERIFF: I s'pose whatever Mrs Peters does'll be right. She was gonna take some clothes in for her, you know, and a few little bits and pieces. We cleared out in such a rush yesterday.\n\nCOUNTY ATTORNEY: Yes, but I'd like to see what you take, Mrs Peters, and keep an eye out for anything that might come in handy for us.\n\nMRS PETERS: Yes, Mr Henderson.\n\n(_The women listen to the men's boots on the stairs, then look round the kitchen_.)\n\nMRS HALE: I'd hate to have blokes traipsing into my kitchen, sticking their noses in and bagging everything.\n\n(_She straightens up the pans under the sink that the_ LAWYER _had shoved out of place_.)\n\nMRS PETERS: Course, it's only their job.\n\nMRS HALE: Job's fair enough, but I reckon that deputy sheriff who came out to light the fire might've put a bit of this muck on it himself. (_gives the roller towel a tug_) Wish I'd thought of that earlier. Seems a bit rough, bagging her for not having the place spick and span when she had to clear out in such a hurry.",
+ "schema": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "object",
+    "properties": {
+     "A": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "B": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "C": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "A",
+     "B",
+     "C"
+    ],
+    "additionalProperties": false
+   },
+   "rankings": {
+    "type": "object",
+    "properties": {
+     "tone": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "flow": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "variety": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "essence": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "overall": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "tone",
+     "flow",
+     "variety",
+     "essence",
+     "overall"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "required": [
+   "candidates",
+   "rankings"
+  ],
+  "additionalProperties": false
+ }
+}

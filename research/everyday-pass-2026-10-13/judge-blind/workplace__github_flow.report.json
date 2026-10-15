@@ -1,0 +1,63 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {"evidence": "Every point survives: the uses at GitHub, prerequisites and links, the tip, branch naming examples, the safety of a branch, descriptive commits, the rename-and-tests example (\"put the variable rename in one commit and the tests in another\"), backup to remote storage, and \"Keep making, committing and pushing changes\". Link texts are left intact.", "score": 5},
+        "sense": {"evidence": "\"knock over every step\", \"hook up to GitHub\", \"what's cooking at a glance\", \"without stuffing up the default branch\", \"run their eye over your work\", \"bin the variable rename\" all fit. \"you'll be busting your arse a lot harder\" carries \"spend more effort\".", "score": 5},
+        "authenticity": {"evidence": "Sounds like an Aussie dev explaining it: \"If you cock something up, you can revert your changes or push more changes to fix the stuff-up.\", \"That makes it dead easy to revert\". \"And it's not just for the developers, mate\" is a slightly stock tag.", "score": 5},
+        "register": {"evidence": "Full level-5 voice with uncle-bob vulgarity used once or twice (\"cock something up\", \"busting your arse\"), within limit, while keeping the docs usable.", "score": 5},
+        "tone": {"evidence": "Still helpful documentation, just told by a mate: \"Your branch is a safe spot to muck around with changes.\"", "score": 5},
+        "flow": {"evidence": "Reads well: \"Making a branch gives you your own patch to work in without stuffing up the default branch.\"", "score": 5},
+        "variety": {"evidence": "\"no-fuss\", \"have a go\", \"lowdown\", \"track down\", \"chip in\", \"knock over\", \"hook up\", \"what's cooking\", \"patch\", \"stuffing up\", \"run their eye over\", \"muck around\", \"cock something up\", \"bin\", \"shove\", \"smear\", \"busting your arse\"; \"stuff\" appears twice.", "score": 5},
+        "essence": {"evidence": "Unmistakably the GitHub flow page, structure, links and examples intact.", "score": 5}
+      },
+      "problems": [
+        {"quote": "And it's not just for the developers, mate, it's handy for everyone.", "original": "The GitHub flow is useful for everyone, not just developers.", "severity": "minor", "why": "\"mate\" tag is a slightly stock touch."}
+      ],
+      "summary": "A vivid, natural level-5 retelling of the docs that keeps every instruction and leaves links intact."
+    },
+    "B": {
+      "scores": {
+        "meaning": {"evidence": "Every point survives, including the commit example (\"put the variable rename in one commit and the tests in another commit\") and remote backup.", "score": 5},
+        "sense": {"evidence": "\"every man and his dog\" for everyone, \"get a quick squiz at work in progress\", \"without mucking up the default branch\", \"If you stuff something up\" fit.", "score": 5},
+        "authenticity": {"evidence": "Natural where it changes: \"If you're after an existing repository to contribute to\", \"make whatever changes you're after\". \"every man and his dog\" is a little stock.", "score": 4},
+        "register": {"evidence": "Much of it reads as lightly edited docs (\"By committing and pushing your changes, you back up your work to remote storage.\"), with a few touches; closer to level 2-3 than the level-5 brief, and no use of the allowed vulgarity.", "score": 2},
+        "tone": {"evidence": "Helpful documentation tone intact.", "score": 5},
+        "flow": {"evidence": "Smooth throughout: \"Your changes won't end up on the default branch until you merge your branch.\"", "score": 5},
+        "variety": {"evidence": "\"handy\", \"every man and his dog\", \"you're after\" twice, \"squiz\", \"mucking up\", \"stuff something up\", \"get at\"; sparse but not repetitive.", "score": 4},
+        "essence": {"evidence": "Clearly the GitHub flow page, barely retold.", "score": 4}
+      },
+      "problems": [
+        {"quote": "If you put the variable rename and the tests in the same commit, or spread the variable rename across multiple commits, you'd spend more effort reverting your changes.", "original": "If you put the variable rename and tests in the same commit or spread the variable rename across multiple commits, you would spend more effort reverting your changes.", "severity": "major", "why": "Large stretches stay close to the original, far lighter than the level-5 brief."}
+      ],
+      "summary": "Clean and faithful but only lightly Aussie for a level-5 brief."
+    },
+    "C": {
+      "scores": {
+        "meaning": {"evidence": "Content is the original, but link texts that name real pages are altered (\"[Creating brand-spankin'-new files]\", \"[Moving a file to a brand-spankin'-new location]\", \"[Findin' ways to contribute to open source on GitHub]\"), and \"until yer ready\" says \"your\" for \"you're\".", "score": 3},
+        "sense": {"evidence": "\"to see ongoing work at a squiz\" misuses \"squiz\" (you have a squiz; \"at a glance\" is the idiom); \"brand-spankin'-new files\" for \"new files\" overloads a page title; \"until yer ready\" is wrong.", "score": 2},
+        "authenticity": {"evidence": "Stage drawl on untouched prose: \"By committin''n pushin' yer changes, you back up yer work to remote storage.\", \"Ya can complete all steps of GitHub flow\".", "score": 1},
+        "register": {"evidence": "Mostly the original words (\"Ideally, each commit contains an isolated, complete change. This makes it easy to revert your changes\") with spelling drawl; well under level 5.", "score": 2},
+        "tone": {"evidence": "The documentation tone survives under the apostrophes, though page titles turned to slang look careless.", "score": 4},
+        "flow": {"evidence": "Broken bits: \"committin''n pushin'\", \"one commit'n the tests\", \"ya would spend more effort\", \"until yer ready\"; and inconsistent \"your\"/\"yer\".", "score": 1},
+        "variety": {"evidence": "Leans on \"ya\"/\"yer\" and \"brand-spankin'-new\" twice; little else.", "score": 1},
+        "essence": {"evidence": "Recognisably the page, but not retold.", "score": 3}
+      },
+      "problems": [
+        {"quote": "[Creating brand-spankin'-new files]", "original": "[Creating new files]", "severity": "major", "why": "Changes the title of a linked page."},
+        {"quote": "to see ongoing work at a squiz", "original": "to see ongoing work at a glance", "severity": "major", "why": "\"at a squiz\" isn't an idiom; \"squiz\" is a look you have."},
+        {"quote": "By committin''n pushin' yer changes", "original": "By committing and pushing your changes", "severity": "major", "why": "Broken apostrophe pile-up."},
+        {"quote": "until yer ready to ask for feedback", "original": "until you are ready to ask for feedback", "severity": "minor", "why": "\"yer\" is \"your\", not \"you're\"."},
+        {"quote": "Ideally, each commit contains an isolated, complete change. This makes it easy to revert your changes if you decide to take a different approach.", "original": "Ideally, each commit contains an isolated, complete change. This makes it easy to revert your changes if you decide to take a different approach.", "severity": "major", "why": "Largely untranslated for a level-5 brief."}
+      ],
+      "summary": "Drawl spellings on an untouched text, with altered link titles and a misused \"squiz\"."
+    }
+  },
+  "rankings": {
+    "tone": [["A", "B"], ["C"]],
+    "flow": [["A", "B"], ["C"]],
+    "variety": [["A"], ["B"], ["C"]],
+    "essence": [["A"], ["B"], ["C"]],
+    "overall": [["A"], ["B"], ["C"]]
+  }
+}

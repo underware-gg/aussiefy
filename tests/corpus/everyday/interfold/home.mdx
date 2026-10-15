@@ -1,0 +1,154 @@
+---
+title: 'The Interfold'
+description:
+  'The Interfold is an open-source protocol for Encrypted Execution Environments (E3). Independent
+  parties get a shared, verifiable result from private inputs.'
+---
+
+import {
+  Accent,
+  Decrypt,
+  Flow,
+  Hero,
+  LinkCard,
+  LinkCards,
+  Reveal,
+  SectionHead,
+  Stats,
+  Terminal,
+  ThresholdRing,
+} from '@/components/ui'
+
+<Hero
+  eyebrow='Encrypted Execution Environments'
+  title={
+    <>
+      Shared results from{' '}
+      <Accent>
+        <Decrypt text='private inputs' />
+      </Accent>
+      .
+    </>
+  }
+  lead='The Interfold is an open-source protocol for confidential coordination. Independent parties encrypt their inputs, a committee of ciphernodes runs the computation, and only the verified output is decrypted.'
+  primary={{ label: 'Start building', href: '/build/quick-start' }}
+  secondary={[
+    { label: 'Run a ciphernode', href: '/operate' },
+    { label: 'Learn the protocol', href: '/learn' },
+  ]}
+  visual={<ThresholdRing n={9} t={4} variant='dark' />}
+/>
+
+<SectionHead kicker='Choose a path' title='What do you want to do?'>
+  Each path starts with a short overview and continues to step-by-step procedures.
+</SectionHead>
+
+<LinkCards min={250}>
+  <LinkCard title='Learn' href='/learn' icon='book' tag='Concepts'>
+    What an E3 is, how the architecture fits together, and the cryptography that protects the
+    inputs.
+  </LinkCard>
+  <LinkCard title='Build' href='/build/quick-start' icon='build' tag='Developers'>
+    Install the CLI, make a project from the template, and write an E3 program with its contracts
+    and client.
+  </LinkCard>
+  <LinkCard title='Run a ciphernode' href='/operate' icon='node' tag='Operators'>
+    Set up a node, bond FOLD, get tickets, and serve on committees. Upgrade, migrate, and exit
+    safely.
+  </LinkCard>
+  <LinkCard title='Reference' href='/reference/cli' icon='terminal' tag='Lookup'>
+    CLI commands, node configuration, contract addresses, and a glossary of protocol terms.
+  </LinkCard>
+</LinkCards>
+
+<Reveal>
+  <SectionHead kicker='How it works' title='One E3, from request to result'>
+    The Interfold contract records each E3 as it moves through its stages. Ciphernodes act at each
+    stage and publish proofs on-chain.
+  </SectionHead>
+
+<Flow
+  label='E3 stages'
+  steps={[
+    { label: 'Requested', icon: 'contract', sub: 'A requester pays the fee and asks for an E3.' },
+    {
+      label: 'CommitteeFinalized',
+      icon: 'network',
+      sub: 'Sortition selects a committee of ciphernodes.',
+    },
+    {
+      label: 'KeyPublished',
+      icon: 'key',
+      sub: 'The committee runs DKG and publishes one public key.',
+    },
+    {
+      label: 'CiphertextReady',
+      icon: 'chip',
+      sub: 'The program runs over the encrypted inputs. The encrypted output goes on-chain.',
+    },
+    {
+      label: 'Complete',
+      icon: 'shield',
+      sub: 'T + 1 key shares decrypt the output, and a proof confirms it.',
+    },
+  ]}
+/>
+
+</Reveal>
+
+<Reveal>
+  <SectionHead kicker='Committees' title='Security comes from the committee'>
+    No single ciphernode can decrypt. The protocol supports three committee sizes. Decryption needs
+    T + 1 key shares.
+  </SectionHead>
+
+<Stats
+  items={[
+    { value: '3', label: 'minimum', hint: 'N = 3, T = 1. The smallest committee.' },
+    { value: '9', label: 'micro', hint: 'N = 9, T = 4.' },
+    { value: '19', label: 'small', hint: 'N = 19, T = 9. Higher assurance.' },
+  ]}
+/>
+
+</Reveal>
+
+<Reveal>
+  <SectionHead kicker='Quick start' title='A working E3 in four commands'>
+    The template starts a local chain, local ciphernodes, the servers, and a web client. See the
+    [Quick Start](/build/quick-start) for prerequisites.
+  </SectionHead>
+
+<Terminal
+  title='~/code'
+  lines={[
+    '# Install interfoldup, then the interfold CLI',
+    '$ curl -fsSL https://raw.githubusercontent.com/theinterfold/interfold/main/install | bash',
+    '$ interfoldup install',
+    '# Make a project from the default template and start everything',
+    '$ interfold init my-first-e3',
+    '$ cd my-first-e3 && pnpm dev:all',
+    '# The client is at http://localhost:3000',
+  ]}
+/>
+
+</Reveal>
+
+<Reveal>
+  <SectionHead kicker='Go deeper' title='Inside the protocol' />
+
+<LinkCards>
+  <LinkCard title='E3 lifecycle' href='/learn/e3-lifecycle' icon='flow'>
+    Each stage, the events it emits, and what happens when a stage times out.
+  </LinkCard>
+  <LinkCard title='Cryptography' href='/learn/cryptography' icon='lock'>
+    Threshold BFV, zero-knowledge proofs, and the circuits that tie them together.
+  </LinkCard>
+  <LinkCard title='Sortition' href='/internals/sortition' icon='ticket'>
+    How the protocol selects a committee from ticket balances.
+  </LinkCard>
+  <LinkCard title='CRISP' href='/CRISP/introduction' icon='vote'>
+    A complete E3 application for private voting.
+  </LinkCard>
+</LinkCards>
+
+</Reveal>

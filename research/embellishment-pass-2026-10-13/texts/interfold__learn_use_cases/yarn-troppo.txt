@@ -1,0 +1,100 @@
+---
+title: 'Use Cases'
+description:
+  'Tasks that fit an E3, how CRISP uses the Interfold for private voting, and the limits to check
+  before you design an E3 program.'
+---
+
+import { LinkCards, LinkCard } from '@/components/ui'
+
+# Use Cases
+
+Now, this one's a ripper, if yer the sort who likes to know what a tool's good for before ya buy the whole kit. This page goes through
+the jobs an E3 is made for, and the limits that come along for the ride. It's for developers tryin' to suss out whether the
+Interfold's the right fit for their application. And at the end ya can hold yer own job up against a working example,
+and against the checks in [Limits to check](#limits-to-check), and see how it stacks up.
+
+## What fits an E3
+
+So when's an E3 the go? When yer job ticks these boxes:
+
+- A few independent parties each chip in inputs, and those inputs have to stay private. No peekin'.
+- The application's after one result out of the whole lot, and that result's fine to be out in public.
+- The result's a computation BFV is good at, like a sum, a count, or a tally. Countin' heads, basically.
+- Ya can't trust any one operator to sit on everyone's inputs. Nobody gets to be the bloke holdin' the keys to the shed.
+- The application can hang about while the E3 works through its stages. An E3's no drive-through: there's no real-time result.
+
+## Private voting (CRISP)
+
+Here's the poster child. CRISP (Coercion-Resistant Impartial Selection Protocol) is the reference application, and
+it lives in `examples/CRISP`. It's a full E3 program for secret ballots, start to finish, and it actually works. Here's
+how each bit of it goes:
+
+| Part of the E3    | What CRISP does                                                                             |
+| ----------------- | ------------------------------------------------------------------------------------------- |
+| Request           | The CRISP command-line tool requests one E3 for every votin' round. One round, one E3.      |
+| Inputs            | Every voter encrypts their ballot right there in the browser, under the committee key.      |
+| Input proof       | The client generates a Noir proof that the ballot is valid. `CRISPProgram.sol` verifies it. |
+| Data availability | The ciphertext bytes get shipped off to Avail. The program checks the VectorX receipt.      |
+| Secure process    | An OpenVM program tots up the encrypted ballots into an encrypted tally.                    |
+| Output            | The committee decrypts the tally, nothin' else. Every ballot on its own stays locked up.    |
+
+And CRISP brings its own gear: its own contracts, Noir circuits, a Rust coordination server, and a React client. The
+whole box and dice. Start with the [CRISP introduction](/CRISP/introduction), then follow [Setup](/CRISP/setup) to
+get it up and runnin'.
+
+## Sealed-bid auctions and private markets
+
+Picture an auction where every bidder's bid is encrypted, and the only thing that ever gets decrypted is who
+won. That's right up the E3 model's alley. Where it bites is the computation. The template and CRISP only ever use
+homomorphic addition, and that's it. Anything fancier costs more and chews through the limited noise budget of the
+BFV parameter set, and once that budget's gone, it's gone.
+
+So before ya build an auction, make dead sure yer secure process can get to the result inside that budget. There's
+a sneakier way round it, too: decrypt an aggregate, like the number of bids at each price level, and let the contract
+work out the result from the aggregate. Ya give away the aggregate that way, yeah, but the individual bids stay
+under wraps.
+
+## Aggregate statistics over private data
+
+Say ya've got a few organisations that want a total, a count, or a histogram over records they're not about to
+share with each other. Fair enough, too. Each organisation encrypts its own values, the secure process adds 'em up,
+and the only thing that gets decrypted is the aggregate. It's the same addition the default template does, which
+just sums every input. Nothin' new to learn.
+
+## Limits to check
+
+Righto, before ya go designin' an E3 program, run yer eye over these. Every one of 'em can bite:
+
+- **The output is public.** The plaintext output goes on-chain for all to see. And with only a handful of inputs,
+  that can give away one person's value: a tally with one vote in it, say, and everyone knows how that one voted.
+  Where it matters, the program must enforce a minimum input count, or other rules.
+- **The committee is the trust boundary.** If T + 1 committee members collude, they can decrypt any ciphertext
+  under the committee key. Simple as that. A bigger committee raises T. On mainnet, though, `Small` (T = 9) is the
+  only one ya can request at launch.
+- **Inputs need validation.** The E3 program's the bouncer: it decides which inputs get in. Without an input
+  proof on the door, a malformed ciphertext can stuff up the result, or stop the E3 dead.
+- **Time matters.** Committee setup, the input window, computation, and decryption each get a deadline, and the
+  clock's tickin'. The [E3 lifecycle](/learn/e3-lifecycle) page has the values.
+- **Costs grow with the committee.** The fee pays for the committee's work, and it climbs with N. Bigger committee,
+  bigger bill. Use `getE3Quote` to get the fee before ya request, so there's no nasty surprise.
+
+## Data protection
+
+The design can give an application a decent leg up on data-protection goals. No single operator ever holds a
+plaintext input, and the committee only decrypts the output. But don't kid yerself: the design doesn't, on its own,
+make an application compliant with a regulation. That assessment's on the application owner, full stop.
+
+## Next steps
+
+<LinkCards min={230}>
+  <LinkCard title='CRISP' href='/CRISP/introduction' icon='vote' tag='Example'>
+    The whole private voting application, from circuits to client.
+  </LinkCard>
+  <LinkCard title='Quick Start' href='/build/quick-start' icon='rocket' tag='Build'>
+    Make a project from the template and run a complete E3 on yer own computer.
+  </LinkCard>
+  <LinkCard title='Best practices' href='/build/best-practices' icon='shield' tag='Build'>
+    The design rules for secure E3 programs.
+  </LinkCard>
+</LinkCards>

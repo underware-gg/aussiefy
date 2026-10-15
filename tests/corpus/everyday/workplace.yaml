@@ -1,0 +1,311 @@
+# Everyday register: workplace, business and technical source texts kept in everyday/workplace/.
+# Every text here is under a licence that lets us redistribute it (public domain, CC0, CC BY,
+# CC BY-SA, MIT, Apache 2.0). Each is a verbatim excerpt from `start` of the source to `end`; only
+# whitespace was touched (trailing spaces stripped, runs of blank lines collapsed). Markdown sources
+# are kept as Markdown, hard line wraps included. `.txt` files were extracted from HTML with
+# aussiefy.scrape.ingest.html_to_text. `words` counts whitespace-separated tokens containing
+# a letter or digit, as in classics/manifest.yaml.
+
+- file: rust_book_hello_world.md
+  title: 'The Rust Programming Language, 1.2 "Hello, World!" (Project Directory Setup to first run)'
+  genre: tech-docs
+  register: getting-started tutorial
+  tone: friendly, encouraging
+  url: https://raw.githubusercontent.com/rust-lang/book/main/src/ch01-02-hello-world.md
+  author: Steve Klabnik, Carol Nichols, Chris Krycho and the Rust community (rust-lang/book)
+  licence: MIT OR Apache-2.0
+  licence_evidence: >-
+    rust-lang/book COPYRIGHT: "This repository is licensed under the Apache License, Version 2.0 ...
+    or the MIT license ..., at your option." LICENSE-MIT and LICENSE-APACHE at the repo root.
+  redistribution_licence: MIT
+  permission_notice: See the full MIT permission notice in README.md.
+  copyright_notice: Copyright (c) 2010 The Rust Project Developers
+  retrieved: 2026-10-12
+  words: 298
+  excerpt: 'From "### Project Directory Setup" to "That makes you a Rust programmer—welcome!" (repo commit 1500248d8).'
+  notes: >-
+    Shell, cmd, PowerShell and Rust code blocks, inline code, and mdBook markup (<Listing> tags,
+    HTML anchor comments, a [troubleshooting] reference link whose target is outside the excerpt)
+    that the translator must leave alone. US spelling ("favorite" sits just before the excerpt).
+
+- file: kubernetes_overview.md
+  title: 'Kubernetes documentation, Concepts: "Overview"'
+  genre: tech-docs
+  register: concept explainer
+  tone: confident, lightly promotional
+  url: https://raw.githubusercontent.com/kubernetes/website/main/content/en/docs/concepts/overview/_index.md
+  author: The Kubernetes Authors (kubernetes/website)
+  licence: CC-BY-4.0
+  licence_evidence: >-
+    kubernetes/website LICENSE is the Creative Commons Attribution 4.0 International licence text;
+    kubernetes.io page footers state documentation is distributed under CC BY 4.0.
+  licence_url: https://creativecommons.org/licenses/by/4.0/
+  retrieved: 2026-10-12
+  words: 564
+  excerpt: 'From "The name Kubernetes originates" to "where it is important." (repo commit 8de2c27d2).'
+  notes: >-
+    Bulleted feature list with bold lead-ins, a Hugo heading anchor ({#...}), a site-relative link.
+    US spelling: behavior, containerized. Jargon-heavy (PaaS, failover, canary deployment).
+
+- file: github_flow.md
+  title: 'GitHub Docs: "GitHub flow" (Introduction to Following GitHub flow: Make changes)'
+  genre: tech-docs
+  register: how-to guide
+  tone: plain, instructional
+  url: https://docs.github.com/api/article/body?pathname=/en/get-started/using-github/github-flow
+  author: GitHub, Inc. (github/docs)
+  licence: CC-BY-4.0
+  licence_evidence: >-
+    github/docs README: "This project is dual-licensed under: Creative Commons Attribution 4.0 - for
+    documentation and content in the assets, content, and data folders (see LICENSE)"; LICENSE is
+    the CC BY 4.0 text (code is MIT under LICENSE-CODE).
+  licence_url: https://creativecommons.org/licenses/by/4.0/
+  retrieved: 2026-10-12
+  words: 476
+  excerpt: 'From "## Introduction" to "until you are ready to ask for feedback."'
+  notes: >-
+    Taken from the GitHub Docs article API, which returns the rendered Markdown (the raw source in
+    content/get-started/using-github/github-flow.md is full of Liquid {% data %} variables and
+    AUTOTITLE placeholders). Includes two "> \[!TIP]" callouts, inline code (branch names, commit
+    messages) and many /en/ links.
+
+- file: mdn_http_cookies.md
+  title: 'MDN Web Docs: "Using HTTP cookies" (opening sections)'
+  genre: tech-docs
+  register: reference guide
+  tone: neutral, explanatory
+  url: https://raw.githubusercontent.com/mdn/content/main/files/en-us/web/http/guides/cookies/index.md
+  author: Mozilla Contributors (mdn/content)
+  licence: CC-BY-SA-2.5
+  licence_evidence: >-
+    mdn/content LICENSE.md: "License for all prose content: All prose content is available under
+    (CC-BY-SA 2.5)." Code samples there are CC0.
+  licence_url: https://creativecommons.org/licenses/by-sa/2.5/
+  retrieved: 2026-10-12
+  words: 568
+  excerpt: 'From "A **cookie**" to the closing fence of the second http code block ("[page content]") (repo commit 9a3fb53).'
+  notes: >-
+    Numbered list, bullets, a "> [!NOTE]" callout, a KumaScript macro ({{HTTPHeader("Set-Cookie")}}),
+    an image link and two http code blocks. US spelling: personalized, analyzing, behavior;
+    "shopping cart". Chosen over MDN's Learn pages, whose prose is British (shop, adverts).
+
+- file: black_readme.md
+  title: 'Black, "The Uncompromising Code Formatter": README (intro to Usage)'
+  genre: readme
+  register: project README
+  tone: upbeat, opinionated, a bit cheeky
+  url: https://raw.githubusercontent.com/psf/black/main/README.md
+  author: Łukasz Langa and the Black contributors (psf/black)
+  licence: MIT
+  licence_evidence: 'psf/black LICENSE: "The MIT License (MIT) Copyright (c) 2018 Łukasz Langa"; README badge "License: MIT".'
+  redistribution_licence: MIT
+  permission_notice: See the full MIT permission notice in README.md.
+  copyright_notice: Copyright (c) 2018 Łukasz Langa
+  retrieved: 2026-10-12
+  words: 304
+  excerpt: 'From "> “Any color you like.”" to "If you''re feeling confident, use `--fast`." (repo commit 11cff1312).'
+  notes: >-
+    Markdown with a quote, horizontal rules, sh code blocks and inline commands (pip install black,
+    --fast). "color" in the epigraph. The badge HTML above the excerpt was left out.
+
+- file: rust_1_98_1_release_notes.md
+  title: 'Rust Blog: "Announcing Rust 1.98.1" (2026-09-03)'
+  genre: release-notes
+  register: point-release announcement
+  tone: brisk, matter-of-fact, grateful
+  url: https://raw.githubusercontent.com/rust-lang/blog.rust-lang.org/main/content/Rust-1.98.1.md
+  author: The Rust Release Team
+  licence: MIT OR Apache-2.0
+  licence_evidence: >-
+    rust-lang/blog.rust-lang.org README: "Like everything in Rust, the blog is licensed MIT/Apache
+    2.0. See the two LICENSE-* files for more details."
+  redistribution_licence: MIT
+  permission_notice: See the full MIT permission notice in README.md.
+  copyright_notice: No separate copyright line in the pinned upstream LICENSE-MIT; credited to The Rust Release Team.
+  retrieved: 2026-10-12
+  words: 203
+  excerpt: 'Whole post body after the TOML front matter, "The Rust team has published" to "[Thanks!](https://thanks.rust-lang.org/rust/1.98.1/)" (repo commit 09b4994).'
+  notes: >-
+    Code fence (rustup update stable), inline commands, a reference-style link definition, and
+    terms such as "miscompilation", "vtable", "UB" and "segfaults" that should survive translation.
+
+- file: github_terms_account_terms.md
+  title: 'GitHub Terms of Service, "B. Account Terms" (short version through 3. Account Requirements)'
+  genre: terms-of-service
+  register: plain-language terms of service
+  tone: firm, legalistic but friendly in places
+  url: https://raw.githubusercontent.com/github/site-policy/main/Policies/github-terms/github-terms-of-service.md
+  author: GitHub, Inc. (github/site-policy)
+  licence: CC0-1.0
+  licence_evidence: >-
+    github/site-policy LICENSE.md is the CC0 1.0 Universal dedication; ToS section G.3 "License to
+    GitHub Policies" says "This Agreement is licensed under this Creative Commons Zero license".
+  licence_url: https://creativecommons.org/publicdomain/zero/1.0/
+  retrieved: 2026-10-12
+  words: 630
+  excerpt: 'From "## B. Account Terms" to "please see our [Export Controls policy](/site-policy/other-site-policies/github-and-trade-controls)." (repo commit b9578b5).'
+  notes: >-
+    Italic "Short version" summary followed by the binding terms. US legal framing (United States
+    law, Specially Designated National, export control). "while we are thrilled to see brilliant
+    young coders" gives a lighter moment to play with.
+
+- file: github_gifts_policy.md
+  title: 'GitHub Gifts and Entertainment Policy (examples, process, consequences)'
+  genre: policy
+  register: internal workplace policy
+  tone: stern underneath, jokey on top (emoji, "FINES and JAIL", Yoda)
+  url: https://raw.githubusercontent.com/github/site-policy/main/Policies/github-company-policies/github-gifts-and-entertainment-policy.md
+  author: GitHub, Inc. (github/site-policy)
+  licence: CC0-1.0
+  licence_evidence: github/site-policy LICENSE.md is the CC0 1.0 Universal dedication.
+  licence_url: https://creativecommons.org/publicdomain/zero/1.0/
+  retrieved: 2026-10-12
+  words: 553
+  excerpt: 'From "## Examples of acceptable and unacceptable gifts" to "it’s the trying that counts." (repo commit b9578b5).'
+  notes: >-
+    Emoji-laden bullet lists, a numbered process with nested bullets, dollar amounts ($50, $150).
+    Very American: congresspeople, Disneyland, bleacher tickets, "futbol", expense report, swag.
+
+- file: tts_travel_comp_time.md
+  title: 'TTS Handbook, "Compensation for working extra hours": travel comp time section'
+  genre: policy
+  register: HR policy
+  tone: dry, procedural
+  url: https://raw.githubusercontent.com/GSA-TTS/handbook/main/pages/travel-and-leave/overtime.md
+  author: Technology Transformation Services, U.S. General Services Administration
+  licence: Public domain (US government work); CC0-1.0 worldwide
+  licence_evidence: >-
+    GSA-TTS/handbook LICENSE.md: "As a work of the United States Government, this project is in the
+    public domain within the United States. Additionally, we waive copyright and related rights in
+    the work worldwide through the CC0 1.0 Universal public domain dedication."
+  licence_url: https://creativecommons.org/publicdomain/zero/1.0/
+  retrieved: 2026-10-12
+  words: 295
+  excerpt: 'From "## Travel comp time, for everyone" to "any unused travel comp time will be forfeited." (repo commit c220f93).'
+  notes: >-
+    Federal HR jargon (TDY, Concur, pay periods, Timekeeper), "comp time", links to OPM fact sheets
+    and a Google Drive deck, a bulleted log checklist. Avoids the earlier sections, which use
+    Liquid {% page %} link tags.
+
+- file: tts_welcome_letter.md
+  title: 'TTS Handbook, "Welcome to TTS" (welcome letter for new staff)'
+  genre: onboarding
+  register: onboarding welcome letter
+  tone: warm, inspirational
+  url: https://raw.githubusercontent.com/GSA-TTS/handbook/main/pages/getting-started/welcome-letter.md
+  author: Technology Transformation Services, U.S. General Services Administration
+  licence: Public domain (US government work); CC0-1.0 worldwide
+  licence_evidence: >-
+    GSA-TTS/handbook LICENSE.md: public domain within the United States, plus the CC0 1.0 Universal
+    dedication worldwide.
+  licence_url: https://creativecommons.org/publicdomain/zero/1.0/
+  retrieved: 2026-10-12
+  words: 239
+  excerpt: 'Whole letter after the front matter, "You’ve just joined" to "member of the TTS team." (repo commit c220f93).'
+  notes: >-
+    Stands in for an onboarding email: the letter new hires get on day one. All prose, corporate
+    uplift ("unprecedented opportunity", "nitty gritty reality", "user-centered"), hard-wrapped.
+
+- file: login_gov_common_scams.md
+  title: 'Login.gov Help Center: "What are some common scams?"'
+  genre: help-page
+  register: customer-service help article
+  tone: cautionary, reassuring, direct
+  url: https://raw.githubusercontent.com/18F/identity-site/main/content/_help/fraud-concerns/common-scams._en.md
+  author: Login.gov, Technology Transformation Services, U.S. General Services Administration
+  licence: Public domain (US government work); CC0-1.0 worldwide
+  licence_evidence: >-
+    18F/identity-site LICENSE.md: "As a work of the United States government, this project is in
+    the public domain within the United States. Additionally, we waive copyright and related rights
+    in the work worldwide through the CC0 1.0 Universal public domain dedication."
+  licence_url: https://creativecommons.org/publicdomain/zero/1.0/
+  retrieved: 2026-10-12
+  words: 329
+  excerpt: 'From "Scammers are constantly" to "Report suspicious profiles on social media to the social media platform." (repo commit 7fd306d).'
+  notes: >-
+    Repeating "How to protect yourself" lists under H2/H3 headings. US references: Social Security
+    numbers, tax return, .gov URLs, gift cards. The "Related articles" links at the end were left out.
+
+- file: cloud_gov_pages_why.md
+  title: 'cloud.gov Pages documentation: "Why Use Pages?"'
+  genre: marketing
+  register: product pitch / benefits page
+  tone: upbeat, persuasive
+  url: https://raw.githubusercontent.com/cloud-gov/cg-site/main/_pages/pages/documentation/why-use-pages.md
+  author: cloud.gov, Technology Transformation Services, U.S. General Services Administration
+  licence: Public domain (US government work); CC0-1.0 worldwide
+  licence_evidence: >-
+    cloud-gov/cg-site LICENSE.md: public domain within the United States, plus the CC0 1.0
+    Universal dedication worldwide.
+  licence_url: https://creativecommons.org/publicdomain/zero/1.0/
+  retrieved: 2026-10-12
+  words: 424
+  excerpt: 'From "If you’re a program manager" to "display data from a separate server." (end of the "Fully customizable" bullet; repo commit 536b459).'
+  notes: >-
+    Marketing copy for a government web-hosting product: "It shouldn’t be that way.", bold-led
+    benefit bullets, a FedRAMP claim. Keeps one Markdown image link with a Jekyll {{site.baseurl}}
+    variable, verbatim from source; the translator should leave it alone.
+
+- file: nara_technical_writer_editor_job.txt
+  title: 'USAJOBS announcement DE-12632064-25-SW: Technical Writer-Editor, Office of the Federal Register, National Archives and Records Administration'
+  genre: job-ad
+  register: federal job posting
+  tone: formal, bureaucratic, rule-bound
+  url: https://www.usajobs.gov/job/822293500
+  author: National Archives and Records Administration (Office of the Federal Register)
+  licence: Public domain (US government work, 17 U.S.C. 105)
+  licence_evidence: >-
+    The announcement is written and published by a federal agency (NARA) on USAJOBS, the US Office
+    of Personnel Management's federal jobs site; works of the US government are not subject to
+    copyright under 17 U.S.C. 105.
+  retrieved: 2026-10-12
+  words: 651
+  excerpt: 'From "The following are the duties of this position" to "flexible work schedules, per Agency policy." (Duties, Requirements, Qualifications, Additional information).'
+  notes: >-
+    Plain text extracted from the page HTML with html_to_text. The announcement closed in
+    December 2024 but the page is still public. Section headings come out as bare lines.
+    US federal hiring jargon: GS-09/GS-12, Selective Service, Form I-9 (printed "Form i-9"),
+    semester hours, LL.B./J.D., telework, bargaining unit (AFGE Council 260). No personal data.
+
+- file: fomc_minutes_policy_actions.txt
+  title: 'Minutes of the Federal Open Market Committee, September 15–16, 2026: "Committee Policy Actions"'
+  genre: minutes
+  register: official meeting minutes
+  tone: formal, measured, procedural
+  url: https://www.federalreserve.gov/monetarypolicy/fomcminutes20260916.htm
+  author: Board of Governors of the Federal Reserve System / Federal Open Market Committee
+  licence: Public domain (US government work)
+  licence_evidence: >-
+    federalreserve.gov Website Policies (https://www.federalreserve.gov/disclaimer.htm), under
+    "Copyright/trademark": "Unless otherwise indicated, information on Board's website is in the
+    public domain and may be copied and distributed without permission. Please cite to the Board as
+    the source of the information."
+  retrieved: 2026-10-12
+  words: 616
+  excerpt: 'From "Committee Policy Actions" to "approved the minutes of the Committee meeting held on July 28–29, 2026."'
+  notes: >-
+    Plain text extracted from HTML with html_to_text. Votes, a quoted policy directive and statement,
+    and adjournment and notation-vote lines. Names only public officials in their voting role.
+    Footnote marker "2" fused to "2026.2" (a superscript in the HTML), kept as extracted. US terms:
+    federal funds rate, Treasury bills, "percent". Fractions written 3-3/4.
+
+- file: wikipedia_stand_up_meeting.txt
+  title: 'Wikipedia: "Stand-up meeting" (lead through In Scrum)'
+  genre: encyclopedic
+  register: plain encyclopedic explainer
+  tone: neutral, descriptive
+  url: https://en.wikipedia.org/w/index.php?title=Stand-up_meeting&oldid=1379255050
+  author: Wikipedia contributors
+  licence: CC-BY-SA-4.0
+  licence_evidence: >-
+    Page footer: "Text is available under the Creative Commons Attribution-ShareAlike 4.0 License;
+    additional terms may apply." Revision 1379255050 (wgRevisionId on the fetched page).
+  licence_url: https://creativecommons.org/licenses/by-sa/4.0/
+  retrieved: 2026-10-12
+  words: 550
+  excerpt: 'From "A stand-up meeting (STUM[1])" to "These questions were removed from the 2020 Scrum Guide."'
+  notes: >-
+    Plain text extracted from the HTML at https://en.wikipedia.org/wiki/Stand-up_meeting with
+    html_to_text. Citation markers ([1], [7] ...) and the section headings ("Notable examples",
+    "Software development", "In Scrum") are kept as bare lines, and the Scrum questions as separate
+    paragraphs. Mixed spelling: "10 am", "timeboxed", "rollcall".

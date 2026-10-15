@@ -1,0 +1,175 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 3,
+   "authenticity": 1,
+   "register": 1,
+   "tone": 4,
+   "flow": 2,
+   "variety": 2,
+   "essence": 3
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 3,
+   "tone": 5,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every fact survives: the Tuesday dance, the advertising for couples, the book of dances, \"Out of the twenty-one quadrilles ... they'll pick four\", Dunham's change of plans, Tex Rickard and the Madison Square Garden barn dance. But Ford's quoted words are altered with a swear (\"standardise the bloody things\"), putting language in his mouth.",
+   "sense": "\"first big crack at\", \"put the word out in the papers\", \"the Tuesday night do\", \"his missus\", \"the call of the bright lights\" fit. \"Mr. Ford fired up\" for \"exclaimed\" leans toward getting angry; \"folks\" is American.",
+   "authenticity": "Natural yarn voice: \"Right, so Henry Ford's first big crack at this campaign of his, the one he's already told everyone about\", \"chipping in a few old-time tunes\", \"Word last night was he'll be managed by Tex Rickard\". \"get folks keener on 'em\" uses American \"folks\".",
+   "register": "Full level-5 retelling as a yarn (\"Right, so\", \"the Tuesday night do\", \"make 'em easier to teach\"), with vulgarity well within the uncle-bob limit (one \"bloody\").",
+   "tone": "Keeps the wire story's light, faintly amused tone, now told as a yarn; Ford's enthusiasm (\"Come back? They're here!\") stays.",
+   "flow": "Mostly smooth; the long Dunham sentence gets heavy (\"for the Ford \"Americana\" collection of those pieces that's being got ready for publishing, was meant to turn up at the Tuesday night do\").",
+   "variety": "\"big crack\", \"put the word out\", \"reckoned\", \"fired up\", \"bloody things\", \"chipping in\", \"do\", \"missus\", \"bright lights\", \"Word last night\", \"push\".",
+   "essence": "Unmistakably the 1925 AP item: Ford's square-dance crusade and the fiddler lured toward vaudeville."
+  },
+  "engine": {
+   "meaning": "Facts survive as the text is nearly the original, but \"whether he dead reckoned the old-fashioned steps would come back\" garbles \"really thought\".",
+   "sense": "\"dead reckoned\" is a navigation term and cannot mean \"really thought\"; \"front up in New York\" and \"the missus\" fit.",
+   "authenticity": "Apostrophes and a couple of terms on untouched prose: \"Now, we simply are fallin' back in line.\", \"was to 'ave appeared at the Tuesday night affair\", \"simplify their teachin' and encourage their popularity\".",
+   "register": "The opening paragraph and most of the rest is the original verbatim (\"Henry Ford's first large venture in his already announced campaign\"), far lighter than level 5.",
+   "tone": "The news tone survives, mostly untouched.",
+   "flow": "Odd joins: \"Now, we simply are fallin' back in line.\", \"was to 'ave appeared\", \"he dead reckoned\".",
+   "variety": "Little beyond dropped g's, \"dead reckoned\", \"the missus\", \"front up\" and \"brand-spankin'-new\".",
+   "essence": "Recognisably the item but barely retold."
+  },
+  "yarn": {
+   "meaning": "Every fact is kept, and Ford's quotation is preserved word for word (\"We simply are falling back in line.\"). \"four will be picked out to make them easier to teach and help them catch on\" carries the selection and its purpose.",
+   "sense": "\"first big crack\", \"come off on Tuesday night\", \"the core of the do\", \"chipping in\", \"his missus\", \"help them catch on\" fit. \"was meant to turn out for the Tuesday night dance\" is fine.",
+   "authenticity": "Natural where it changes: \"will come off on Tuesday night\", \"chipping in several old-time tunes\", \"brand-spankin'-new Madison Square Garden\". No stock phrases bolted on.",
+   "register": "A light-to-mid retelling: the frame stays newsy (\"It was reported last night that he'll be under the management of Tex Rickard\") and the quote is untouched; well short of a level-5 pub yarn. No swearing.",
+   "tone": "Keeps the wire story's tone and Ford's enthusiasm intact.",
+   "flow": "Reads smoothly: \"But plans changed, and \"Grandpa Mellie,\" with his missus, is on his way tonight to New York\". \"It was added that putting on the dance was hoped to further\" is slightly stiff.",
+   "variety": "\"big crack\", \"push\", \"come off\", \"do\", \"make a comeback\", \"catch on\", \"chipping in\", \"got ready\", \"missus\", \"brand-spankin'-new\".",
+   "essence": "Unmistakably the AP item, with Ford's own words left as he said them."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "standardise the bloody things",
+    "original": "to standardize them",
+    "severity": "major",
+    "why": "A swear inserted into Henry Ford's direct quotation changes what he is reported to have said."
+   },
+   {
+    "quote": "Mr. Ford fired up:",
+    "original": "Mr. Ford exclaimed:",
+    "severity": "minor",
+    "why": "\"fired up\" suggests anger or agitation more than an enthusiastic exclamation."
+   },
+   {
+    "quote": "get folks keener on 'em",
+    "original": "encourage their popularity",
+    "severity": "minor",
+    "why": "\"folks\" is American."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "whether he dead reckoned the old-fashioned steps would come back",
+    "original": "whether he really thought the old-fashioned steps would come back",
+    "severity": "major",
+    "why": "\"dead reckoning\" is navigation; not an intensified \"reckon\". Wrong sense."
+   },
+   {
+    "quote": "Now, we simply are fallin' back in line.",
+    "original": "We simply are falling back in line.",
+    "severity": "minor",
+    "why": "Filler and drawl dropped into Ford's quote without retelling it."
+   },
+   {
+    "quote": "Henry Ford's first large venture in his already announced campaign to teach the American public the old-fashioned square dances will be on Tuesday night",
+    "original": "Henry Ford's first large venture in his already announced campaign to teach the American public the old-fashioned square dances will be on Tuesday night",
+    "severity": "major",
+    "why": "Largely untranslated for a level-5 brief."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "It was reported last night that he'll be under the management of Tex Rickard",
+    "original": "It was reported last night that he will be under the management of Tex Rickard",
+    "severity": "minor",
+    "why": "Much of the frame stays in news register, lighter than the level-5 brief."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A lively level-5 yarn that keeps every fact, marred by a swear put into Ford's quote.",
+  "engine": "The original barely touched, with drawl apostrophes and a wrong-sense \"dead reckoned\".",
+  "yarn": "Faithful and natural, respecting Ford's quotation, but told well short of level 5."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,201 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "unharnessed": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 2,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 3,
+   "flow": 2,
+   "variety": 2,
+   "essence": 3
+  },
+  "unharnessed": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "Several facts changed: national forests become \"national bush\" (\"Six national bush surround Yellowstone National Park\"), the wilderness question becomes \"Does Yellowstone include a federally designated bush?\", Congress becomes \"Parliament House\", and park staff become \"750 punters\". A reader would misunderstand the forest/wilderness answers.",
+   "sense": "Wrong senses: \"national bush\" for national forest, \"federally designated bush\" for wilderness, \"punters\" for employees, \"Parliament House\" for the US Congress. \"before you lob\" and \"summer is flat chat\" fit.",
+   "authenticity": "Engine-like swaps that no Australian would write (\"Six national bush surround\"), stock tags (\"Nah, nah.\", \"Not on your nelly.\"), and US forms left in (\"through fall\", \"lines at the entrance gates\", \"formalized\").",
+   "register": "Mostly untranslated apart from scattered swaps; far lighter than level 4 across most answers (the name history, Continental Divide and Mt Washburn sections are verbatim).",
+   "tone": "The FAQ's helpful tone mostly holds, but \"Not on your nelly.\" makes a factual answer flippant.",
+   "flow": "Ungrammatical joins: \"national bush by the Department of Agriculture\", \"Six national bush surround\", \"before you lob.\"",
+   "variety": "\"bush\" is used three times for different things; otherwise little slang to vary.",
+   "essence": "Recognisably the Yellowstone FAQ, but the forest and wilderness answers no longer make sense."
+  },
+  "unharnessed": {
+   "meaning": "All facts kept (lodges, entrance pass, name history, park sizes, staff numbers, Eagle Peak, the Divide, Mt Washburn, wilderness). Small shifts: \"usually pulls the biggest crowds\" for often has the most, and an invented idiom, \"cold enough to freeze the bits off a brass monkey\", as colour.",
+   "sense": "Terms fit: \"rock up\", \"summer's flat out\", \"through the roadworks\", \"track maintenance\", \"bloody competitive\". The brass-monkey line strains: the saying is about freezing weather, and the bits are a muddle.",
+   "authenticity": "Mostly natural (\"wherever people have pulled over to gawk at the wildlife\", \"hasn't got round to doing anything about it\"), but \"Get your booking in early, mate!\" and \"have a ripper of a visit\" are stock, and the brass monkey is garbled.",
+   "register": "A full level-4 retelling throughout, with \"bloody competitive\" inside vulgarity 1.",
+   "tone": "Friendly, informative FAQ kept; \"Congress still hasn't got round to doing anything about it\" adds a slight editorial jab.",
+   "flow": "Reads smoothly: \"They said \"Mi tse a-da-zi,\" which literally means \"Rock Yellow River.\"\" ; \"There's six national forests\" is colloquial but fine aloud.",
+   "variety": "Varied: \"rock up\", \"flat out\", \"gawk\", \"ripper\", \"kick off\", \"heaps\", \"Nope\", \"of the lot\".",
+   "essence": "Unmistakably the Yellowstone FAQ, every Q&A in place."
+  },
+  "yarn": {
+   "meaning": "All facts kept, with small additions: \"the lower 48, the contiguous United States\" and \"cold enough to knock the wind right out of you\", both colour. \"Jobs are hotly contested\" keeps very competitive.",
+   "sense": "Every term fits: \"before you lob in\", \"summer is flat chat\", \"through the roadworks\", \"track maintenance\", \"hasn't got round to acting\".",
+   "authenticity": "Natural throughout; one American form, \"wherever folks have pulled over\", and \"the lower 48\" is an Americanism.",
+   "register": "Lighter than B; long stretches are plain English (\"In theory, when rain or snow falls on the west side\"), closer to level 3 than 4. No swearing, within vulgarity 1.",
+   "tone": "Keeps the helpful FAQ tone, including \"Please be patient and enjoy your visit.\"",
+   "flow": "Reads smoothly; \"the biggest national park in the lower 48, the contiguous United States\" is a little doubled.",
+   "variety": "Varied: \"lob in\", \"flat chat\", \"gawk\", \"kick off\", \"heaps\", \"Nah\".",
+   "essence": "Unmistakably the Yellowstone FAQ."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "What's the difference between a national park and a national bush?",
+    "original": "What is the difference between a national park and a national forest?",
+    "severity": "critical",
+    "why": "National forest is a US land category; bush is the wrong sense and destroys the answer."
+   },
+   {
+    "quote": "Does Yellowstone include a federally designated bush?",
+    "original": "Does Yellowstone include a federally designated wilderness?",
+    "severity": "critical",
+    "why": "Wilderness is a legal designation; bush changes the question."
+   },
+   {
+    "quote": "but Parliament House hasn't acted on the recommendation",
+    "original": "but Congress has not acted on the recommendation",
+    "severity": "critical",
+    "why": "Moves a US Congress decision to an Australian building; factually wrong."
+   },
+   {
+    "quote": "Approximately 750 punters work for the National Park Service",
+    "original": "Approximately 750 people work for the National Park Service",
+    "severity": "major",
+    "why": "Punters are customers or gamblers, not employees."
+   },
+   {
+    "quote": "Not on your nelly.",
+    "original": "No.",
+    "severity": "minor",
+    "why": "Stock, jokey answer to a factual question."
+   },
+   {
+    "quote": "All are open from late spring through fall",
+    "original": "All are open from late spring through fall",
+    "severity": "minor",
+    "why": "US fall left in; representative of the untranslated bulk."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "cold enough to freeze the bits off a brass monkey",
+    "original": "dangerously cold",
+    "severity": "minor",
+    "why": "A garbled form of the saying, and a jokey tag on a safety warning."
+   },
+   {
+    "quote": "Get your booking in early, mate!",
+    "original": "Be sure to make a reservation early!",
+    "severity": "minor",
+    "why": "Stock mate tag."
+   },
+   {
+    "quote": "Great Smoky Mountains National Park usually pulls the biggest crowds.",
+    "original": "Great Smoky Mountains National Park often has the most.",
+    "severity": "minor",
+    "why": "Often becomes usually; a small change of claim."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "wherever folks have pulled over",
+    "original": "at roadside wildlife sightings",
+    "severity": "minor",
+    "why": "Folks reads American."
+   },
+   {
+    "quote": "in the lower 48, the contiguous United States",
+    "original": "in the contiguous United States",
+    "severity": "minor",
+    "why": "Adds an Americanism and doubles the phrase."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "Mechanical wrong-sense swaps that change facts, on an otherwise untranslated FAQ.",
+  "unharnessed": "Faithful, lively and at the asked level; a couple of stock or garbled flourishes.",
+  "yarn": "Faithful and natural, a shade lighter than the brief; close with B."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

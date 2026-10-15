@@ -1,0 +1,201 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "engine": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 4,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 3,
+   "flow": 4,
+   "variety": 5,
+   "essence": 4
+  },
+  "engine": {
+   "meaning": 2,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 2,
+   "flow": 1,
+   "variety": 1,
+   "essence": 2
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "All facts survive (10 am, Privy Council, PMBOK quote, agile/scrum/Kanban, same time and place, not a status update, token, 5-15 minutes, XP/scrum names, 2017 questions removed in 2020). Most additions are colour, but \"your typical status meeting, where half the room's nodding off\" adds a claim, and \"what they're going to have a crack at\" loses the idea of commitments.",
+   "sense": "Terms fit: \"sort out the curly or slow-going problems\", \"rock up\", \"follow-up yarns\", \"deep-and-meaningfuls\", \"how they're tracking\", \"got the chop\".",
+   "authenticity": "Sounds Australian (\"nobody waits around for the stragglers\", \"big long natters\"), though the opener \"Pull up a stool. Actually, don't.\" and \"if it's good enough for the King's advisers, it's good enough for your lot\" are set-piece gags.",
+   "register": "Level 4 throughout, no swearing.",
+   "tone": "The encyclopedic explanation becomes a stand-up routine: \"Sore feet keep it short.\", \"half the room's nodding off\", \"the lot of 'em leg it back to their desks\". More gags than the voice change needs.",
+   "flow": "Reads well, but the added one-liners at paragraph ends (\"Save the deep-and-meaningfuls for later.\") interrupt the explanation.",
+   "variety": "Varied: \"have a crack\", \"headache\", \"curly\", \"rock up\", \"stragglers\", \"yarns\", \"proper mess\", \"heaps\", \"chuck in\", \"deep-and-meaningfuls\", \"belts through\", \"natters\", \"got the chop\".",
+   "essence": "Recognisably the Wikipedia article, but the added jokes and the \"In other words\" gloss shift it from reference to banter."
+  },
+  "engine": {
+   "meaning": "Key terms are garbled: \"sprint goal\" becomes \"belt goal\" and \"leg it goal\", \"resolve difficult issues\" becomes \"swear blind difficult issues\", \"people\" becomes \"battlers\".",
+   "sense": "Many wrong senses: \"swear blind\" for resolve, \"battlers\" for people, \"belt goal\" and \"leg it goal\" for sprint goal.",
+   "authenticity": "Stage-Australian tags on untouched text: \"Tell ya what, the meeting should usually occur\", \"'daily stand-up', mate\", \"sprint goal, ay?\".",
+   "register": "No swearing problems, but the text is mostly the original with a few tags and swaps, far lighter than level 4.",
+   "tone": "The neutral article is disrupted by nonsense and tags, even inside the Scrum Guide questions.",
+   "flow": "Broken: \"to coordinate efforts to swear blind difficult or time-consuming issues\", \"meet the leg it goal?\".",
+   "variety": "A handful of swaps and tags, with \"belt\" repeated.",
+   "essence": "The structure is the article's, but its central Scrum term is mangled."
+  },
+  "unharnessed": {
+   "meaning": "Every point survives, including \"make commitments to each other\", the token, 5-15 minutes, the three 2017 questions verbatim and their removal in 2020.",
+   "sense": "Terms fit: \"hear about any strife coming up\", \"knock over the tricky or time-chewing problems\", \"turn into a right mess\", \"no rabbiting on\", \"got the flick\".",
+   "authenticity": "A natural Aussie explainer: \"any software development process going\", \"having their say\", \"what they reckon they'll be working on till the next one\".",
+   "register": "Level 4 throughout, no swearing needed.",
+   "tone": "Keeps the informative article tone under the slang; additions like \"no rabbiting on\" hang off the original.",
+   "flow": "Reads smoothly; \"follow-up chats\" repeats once but unobtrusively.",
+   "variety": "Varied: \"strife\", \"knock over\", \"time-chewing\", \"handy\", \"turn up\", \"a yarn\", \"right mess\", \"know-how\", \"chuck in\", \"rabbiting on\", \"yakking\", \"got the flick\".",
+   "essence": "Unmistakably the Wikipedia article, retold."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "That's a much more hands-on aim than your typical status meeting, where half the room's nodding off.",
+    "original": "a much more active intention than the typical status meeting",
+    "severity": "minor",
+    "why": "Adds a claim about status meetings that the article does not make."
+   },
+   {
+    "quote": "so everyone can tell their teammates what they're going to have a crack at",
+    "original": "to make commitments to team members",
+    "severity": "minor",
+    "why": "Softens \"commitments\" to plans."
+   },
+   {
+    "quote": "Pull up a stool. Actually, don't.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added gag opener; changes the article's neutral start."
+   },
+   {
+    "quote": "Each of 'em belts through their bit, then the lot of 'em leg it back to their desks.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added scene, repeated \"'em\"; colour that lightens the tone further."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "meet the leg it goal",
+    "original": "meet the sprint goal",
+    "severity": "critical",
+    "why": "The Scrum \"sprint goal\" is garbled inside a quoted guide question (also \"belt goal\")."
+   },
+   {
+    "quote": "to coordinate efforts to swear blind difficult or time-consuming issues",
+    "original": "to coordinate efforts to resolve difficult or time-consuming issues",
+    "severity": "major",
+    "why": "\"swear blind\" (insist) used for \"resolve\"; ungrammatical."
+   },
+   {
+    "quote": "to remind battlers to keep the meeting short",
+    "original": "to remind people to keep the meeting short",
+    "severity": "major",
+    "why": "\"battlers\" means strugglers, not people in general."
+   },
+   {
+    "quote": "Tell ya what, the meeting should usually occur",
+    "original": "The meeting should usually occur",
+    "severity": "minor",
+    "why": "Bolted-on tag."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "to get follow-up chats going",
+    "original": "to promote follow-up conversation",
+    "severity": "minor",
+    "why": "\"follow-up chats\" used twice in consecutive sentences."
+   },
+   {
+    "quote": "any deep-dive yakking about what's in the way",
+    "original": "any in-depth discussions about impediments",
+    "severity": "minor",
+    "why": "\"deep-dive\" is corporate jargon beside the slang; slight clash."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A lively, varied level-4 retelling that keeps the facts but piles on gags beyond what the article's tone supports.",
+  "engine": "A broken word-swap pass that mangles the Scrum terminology.",
+  "unharnessed": "A faithful, natural, varied level-4 retelling that keeps the article's tone."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

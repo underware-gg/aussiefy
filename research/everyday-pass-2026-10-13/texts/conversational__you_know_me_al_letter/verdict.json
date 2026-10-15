@@ -1,0 +1,179 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 2,
+   "register": 3,
+   "tone": 3,
+   "flow": 2,
+   "variety": 2,
+   "essence": 4
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every point survives: the sale, the old man's speech, finishing second, Doyle scouting, the Grand Rapids games, \"Flynn misjuging that fly ball\", the promise to come home. \"it come as a shock\" for \"a surprise\" is a fair shift.",
+   "sense": "Terms fit: \"I'm not big-noting meself\" for boasting, \"running the eye over me\", \"having a squiz at me\", \"when I was on song\" for when I was right, \"not all up meself\" for swelled up, \"happy as Larry\" for perfectly satisfied.",
+   "authenticity": "Sounds like a real Australian bush-league pitcher writing home: \"Say g'day to all the boys\", \"nothing like that was on the cards\", \"never had a hope against me\". The salutation \"MATE AL\" is a touch forced.",
+   "register": "A steady middle weight, Jack's voice Aussie throughout without piling on; no swearing, within dad level.",
+   "tone": "Keeps Jack's artless self-satisfied boasting while denying it: \"you know I'm not big-noting meself when I say that Al\".",
+   "flow": "Reads like it was written that way, the original's run-on letter voice kept: \"So I says I'd do me best and I thanked him for how I been treated in Terre Haute.\"",
+   "variety": "Varied: \"Fair dinkum\", \"on the cards\", \"guts\", \"big-noting\", \"happy as Larry\", \"on song\", \"a squiz\", \"up meself\". \"mate\" recurs as the salutation, sign-off and greetings.",
+   "essence": "Unmistakably Lardner's letter, misspellings kept: \"appresiated\", \"that serious\", \"they excepted it\"."
+  },
+  "engine": {
+   "meaning": "The story survives as most of it is verbatim, but a line is tacked on: \"Your mate, JACK. Well, I'll be buggered.\" \"I will make bloody good\" also shifts the promise into bluster.",
+   "sense": "Mostly fits (\"not skiting\", \"won't have sweet bugger-all on you\"), but \"the old bloke\" for the manager loses \"the old man\" as the boss, and \"not to be spooked of the high buildings\" strains.",
+   "authenticity": "Swear words bolted onto otherwise unaltered prose: \"all you bloody good old pals down home\", \"I will make bloody good\", \"this bloody big league business\", and the tag \"Well, I'll be buggered.\"",
+   "register": "Largely the original (\"FRIEND AL: Well, Al old pal\", \"I will be perfectly satisfied\") with \"bloody\" and \"bugger\" scattered heavier than a level-3 telling needs.",
+   "tone": "Jack's innocence wobbles under the oaths: \"there won't be bugger all to it\", and the closing exclamation reads like someone else talking.",
+   "flow": "Clunky where words were swapped in: \"won't be bugger all to it\", \"I will make bloody good\", \"Your mate, JACK. Well, I'll be buggered.\"",
+   "variety": "Leans on \"bloody\" (four times) and \"bugger\".",
+   "essence": "Recognisably the original letter, misspellings kept: \"Flynn misjuging that fly ball\"."
+  },
+  "yarn": {
+   "meaning": "All points kept: the sale, the advice, the record, the scouting, the games, the homecoming. \"gobsmacked\" is colour on \"dum\".",
+   "sense": "Terms fit: \"won't be a patch on you\" for won't have nothing on you, \"never had Buckley's against me\", \"not skiting\", \"giving me the once-over\", \"not all up myself\". \"the fair go I got\" for the treatment strains slightly.",
+   "authenticity": "Natural: \"it'll be dead easy\", \"happy as Larry\", \"spooked by the high buildings\". A couple of stacked spots: \"just dum, gobsmacked, couldn't say a word\".",
+   "register": "A light-to-middle weight that suits level 3, Jack's grammar kept and Aussie dropped in where it fits; no swearing.",
+   "tone": "Keeps the naive boasting: \"you know I am not skiting when I say that Al\".",
+   "flow": "Reads smoothly apart from the stacked \"dum, gobsmacked,\".",
+   "variety": "Varied: \"gobsmacked\", \"dead easy\", \"a patch on\", \"fair go\", \"skiting\", \"Buckley's\", \"happy as Larry\", \"beaut\".",
+   "essence": "Unmistakably the original, misspellings kept: \"they excepted it\", \"I beat them twice in that serious.\""
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "MATE AL:",
+    "original": "FRIEND AL:",
+    "severity": "minor",
+    "why": "An odd salutation; \"mate\" is spoken, not a letter heading."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Your mate, JACK. Well, I'll be buggered.",
+    "original": "Your pal, JACK.",
+    "severity": "major",
+    "why": "A stock exclamation added after the signature; nothing in the letter calls for it."
+   },
+   {
+    "quote": "all you bloody good old pals down home",
+    "original": "all you good old pals down home",
+    "severity": "major",
+    "why": "\"bloody\" stuffed into a warm line where it carries nothing."
+   },
+   {
+    "quote": "I will make bloody good",
+    "original": "I will make good",
+    "severity": "minor",
+    "why": "Breaks the set phrase \"make good\"."
+   },
+   {
+    "quote": "not to be spooked of the high buildings",
+    "original": "not to be scared of the high buildings",
+    "severity": "minor",
+    "why": "\"spooked of\" is ungrammatical; it is \"spooked by\"."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "I was just dum, gobsmacked, couldn't say a word",
+    "original": "I was just dum and couldn't say a word",
+    "severity": "minor",
+    "why": "Stacks a synonym onto the misspelled \"dum\"."
+   },
+   {
+    "quote": "the fair go I got in Terre Haute",
+    "original": "the treatment I got in Terre Haute",
+    "severity": "minor",
+    "why": "\"fair go\" is fair treatment as a principle; as \"the treatment I got\" it strains."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A natural, faithful retelling in Jack's voice, with the misspellings and the boasting intact.",
+  "engine": "Mostly the original with \"bloody\" and \"bugger\" sprinkled in and an oath tacked on the end.",
+  "yarn": "Faithful and natural at the right weight, with a couple of small strains."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,108 @@
+# The judge's rubric: how an LLM judge scores Aussie translations of one original, blind.
+#
+# Every candidate gets every criterion, scored 1-5 against the anchors (2 and 4 sit between them), with the
+# evidence written BEFORE the score. Criteria marked `compare` are also ranked across the candidates, best
+# first in tiers (candidates the judge can't separate share a tier), and every judgement ends with an
+# overall ranking. Problems are listed with a verbatim quote, so
+# each one can be checked and found again. Change a criterion's wording or anchors and bump `version`: a
+# verdict records the version it was judged under, and verdicts under different versions don't compare.
+
+# 3 (2026-10-14): only "as rude" became "as vulgar" in register's question (the project's Terms), so version 2
+# and 3 verdicts measure the same thing
+version: 3
+
+instructions: |
+  You are judging translations of one English original into Australian English vernacular. The candidates
+  are anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a
+  person. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light
+  touch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,
+  bastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse
+  for being longer, or for using more slang than the brief asks for.
+
+  Each criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against
+  the brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely
+  untranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.
+  The change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that
+  reacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and
+  counts against meaning.
+
+  For each candidate and each criterion, write the evidence first: what you saw, quoting the candidate
+  verbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list
+  the candidate's specific problems, each with a verbatim quote from the candidate, the original passage it
+  renders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning
+  that matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a
+  weaker choice), and why. A problem that runs through the whole text is listed once, with one
+  representative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,
+  best first, each tier the candidates you can't separate (most tiers hold one).
+
+criteria:
+  - id: meaning
+    question: 'Does it say everything the original says, and nothing that changes it?'
+    anchors:
+      1: 'Events, facts or claims lost or changed; a reader would come away with a different story.'
+      3: 'The gist survives, but some details are lost, changed or invented.'
+      5: 'Every point survives; additions are colour that hangs off something in the original.'
+  - id: sense
+    question: 'Does every Aussie term carry the original''s sense in its context?'
+    anchors:
+      1: 'Several terms took the wrong sense ("the latest version" as gossip, "terrible" as rude).'
+      3: 'One or two terms took the wrong sense, or strain to fit.'
+      5: 'Every term fits its context exactly.'
+  - id: authenticity
+    question: 'Would an Australian hear the Aussie it uses as natural, not a tourist''s pastiche (however much or little there is)?'
+    anchors:
+      1: 'Stage-Australian; stock phrases bolted on; US or British forms left in.'
+      3: 'Mostly natural, with some stock or forced lines.'
+      5: 'Sounds like a real Australian talking; idiom used the way locals use it.'
+  - id: register
+    question: 'Is it as Aussie, and as vulgar, as the brief asked, no more and no less?'
+    anchors:
+      1: 'Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).'
+      3: 'Somewhat off: noticeably heavier or lighter than asked.'
+      5: 'Exactly the weight the brief asked for.'
+  - id: tone
+    compare: true
+    question: 'Does it keep the original''s tone under the slang (solemn stays solemn, a joke stays a joke)?'
+    anchors:
+      1: 'The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).'
+      3: 'The tone wobbles in places.'
+      5: 'The original''s tone comes through whole.'
+  - id: flow
+    compare: true
+    question: 'Does it read smoothly aloud, without pile-ups, clunky joins or repetition?'
+    anchors:
+      1: 'Hard to read; stacked synonyms, broken grammar, jarring joins.'
+      3: 'Readable, with some clunky stretches.'
+      5: 'Reads like it was written that way.'
+  - id: variety
+    compare: true
+    question: 'Does it vary its slang, openers and tags, rather than leaning on a few?'
+    anchors:
+      1: 'The same few terms or tics over and over.'
+      3: 'Some repetition a reader would notice.'
+      5: 'Varied throughout, with nothing leaned on.'
+  - id: essence
+    compare: true
+    question: 'Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character?'
+    anchors:
+      1: 'Could be a different text; what made the original distinctive is gone.'
+      3: 'Recognisably the original, but flattened.'
+      5: 'Unmistakably the original, retold.'
+
+# The unharnessed reference retelling's brief (judge.unharnessed_prompt): a model retelling from instinct, no
+# toolkit, so the judge has something to measure the harness against. Not part of the rubric's version.
+unharnessed:
+  system: >-
+    You retell English texts in Australian English vernacular, from memory and instinct: no dictionary, no
+    tools. Keep every event, fact and line of the original.
+  levels:
+    1: "a light touch: the odd Aussie word, otherwise plain"
+    2: lightly Aussie
+    3: a local's everyday Aussie
+    4: broad Aussie, with colour
+    5: a full pub yarn
+  vulgarity:
+    0: no swearing at all
+    1: mild swearing only (bloody, bugger, bastard)
+    2: swearing up to piss, arse and fuck
+    3: anything goes, the c-word included

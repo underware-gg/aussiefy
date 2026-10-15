@@ -1,0 +1,156 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "yarn-dinkum": "A",
+  "dinkum-3": "B",
+  "dinkum-4": "C"
+ },
+ "scores": {
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "dinkum-4": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn-dinkum": {
+   "meaning": "All rules kept: TDY over 12 hours, Concur authorisation, no salary/schedule limits, travel ends at hotel or home, departure time zone, log items, 26 pay periods, forfeiture on leaving GSA.",
+   "sense": "\"Have a squiz\", \"if you're after more detail\", \"got in\" for flights arriving all fit; \"we reckon it's worth keeping a log\" softens a recommendation but keeps the sense.",
+   "authenticity": "Mostly natural, but \"there are no limits on earning travel comp time either way\" and \"The hours go on elapsed time\" are a bit off.",
+   "register": "A light level-2 touch: \"Have a squiz\", \"we reckon\", \"Got questions?\". No swearing.",
+   "tone": "Keeps the helpful HR-guide tone; \"we reckon it's worth keeping a log\" is a touch casual for official advice.",
+   "flow": "Some clunky joins: \"is gone too: it's forfeited\" repeats itself; \"either way\" dangles.",
+   "variety": "No term leaned on.",
+   "essence": "Clearly the original guidance."
+  },
+  "dinkum-3": {
+   "meaning": "Everything kept, e.g. \"Anyone can earn travel comp time: there are no limits based on salary level or schedule type.\" and \"any travel comp time you haven't used is forfeited too.\"",
+   "sense": "\"put in for\", \"have a squiz\", \"Give your Timekeeper or an HR Specialist at your agency a shout\", \"took off and landed\" all fit.",
+   "authenticity": "Sounds natural throughout: \"If you've been approved to travel for work and the travel happens outside regular working hours, you can put in for travel comp time.\"",
+   "register": "Exactly level 2: plain guidance with \"put in for\", \"have a squiz\", \"a shout\". No swearing.",
+   "tone": "Helpful and businesslike, as the original.",
+   "flow": "Reads as if written that way.",
+   "variety": "Varied, nothing repeated.",
+   "essence": "Unmistakably the original."
+  },
+  "dinkum-4": {
+   "meaning": "Everything kept; \"There's no cap on earning travel comp time based on your salary level or schedule type.\"",
+   "sense": "\"no cap\", \"Have a squiz\", \"sing out to your Timekeeper\" all fit.",
+   "authenticity": "Natural: \"If you've got questions, sing out to your Timekeeper or an HR Specialist at your agency.\"; \"the time zone where you left from\" is slightly off.",
+   "register": "Light level 2 touch, close to the original wording elsewhere. No swearing.",
+   "tone": "Tone intact.",
+   "flow": "Mostly smooth; \"Use the time zone where you left from to work out the elapsed time.\" is a little clumsy.",
+   "variety": "No repetition.",
+   "essence": "Clearly the original."
+  }
+ },
+ "problems": {
+  "yarn-dinkum": [
+   {
+    "quote": "any travel comp time you haven't used is gone too: it's forfeited.",
+    "original": "any unused travel comp time will be forfeited.",
+    "severity": "minor",
+    "why": "Redundant restatement."
+   },
+   {
+    "quote": "there are no limits on earning travel comp time either way.",
+    "original": "There are no limitations for earning travel comp time based on salary level or schedule type.",
+    "severity": "minor",
+    "why": "Either way dangles after the reordered sentence."
+   },
+   {
+    "quote": "To get your travel time right, we reckon it's worth keeping a log of:",
+    "original": "To accurately report travel time, we recommend keeping a log of:",
+    "severity": "minor",
+    "why": "Softens an official recommendation."
+   }
+  ],
+  "dinkum-3": [],
+  "dinkum-4": [
+   {
+    "quote": "Use the time zone where you left from to work out the elapsed time.",
+    "original": "Use the time zone at departure to calculate elapsed time.",
+    "severity": "minor",
+    "why": "Where ... from is a clumsy double preposition."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn-dinkum": "Accurate and light, with a few slack joins.",
+  "dinkum-3": "Clean, natural and exactly on brief.",
+  "dinkum-4": "Accurate and natural, a hair behind B."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "dinkum-3",
+    "dinkum-4"
+   ],
+   [
+    "yarn-dinkum"
+   ]
+  ],
+  "flow": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "dinkum-4"
+   ],
+   [
+    "yarn-dinkum"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-dinkum",
+    "dinkum-3",
+    "dinkum-4"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn-dinkum",
+    "dinkum-3",
+    "dinkum-4"
+   ]
+  ],
+  "overall": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "dinkum-4"
+   ],
+   [
+    "yarn-dinkum"
+   ]
+  ]
+ }
+}

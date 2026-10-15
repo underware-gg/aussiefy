@@ -1,0 +1,63 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {"evidence": "The original nearly verbatim, so every rule and example survives: the $150 threshold, \"you'll need approval (each time) from Legal in writing\", the lists, the Tokyo Olympics and the suitcase of Euros, \"it’s the trying that counts.\"", "score": 5},
+        "sense": {"evidence": "\"your mate’s daughter\" fits; \"accept an informal pressie\" strains in a compliance process, where \"gift\" is the term of art.", "score": 4},
+        "authenticity": {"evidence": "Swaps dropped into untouched American text, spelled two ways: \"an informal pressie\" then \"any prezzies you receive\"; US forms left: \"A futbol ⚽️ autographed\", \"Bleacher-type tickets\".", "score": 2},
+        "register": {"evidence": "Largely untranslated, lighter than level 2: only \"mate’s\", \"pressie\" and \"prezzies\" change.", "score": 2},
+        "tone": {"evidence": "The original's breezy-but-serious policy voice is intact: \"FINES and JAIL. Not necessarily just for GitHub, either.\"", "score": 5},
+        "flow": {"evidence": "Reads as the original, but the spelling switch from \"pressie\" to \"prezzies\" jars.", "score": 4},
+        "variety": {"evidence": "Only \"mate’s\" and the gift swap, the latter in two spellings.", "score": 2},
+        "essence": {"evidence": "It is the original policy, emoji lists and Yoda line kept.", "score": 5}
+      },
+      "problems": [
+        {"quote": "any prezzies you receive", "original": "any gifts you receive", "severity": "major", "why": "Spelled \"pressie\" a paragraph earlier; inconsistent, and slangy in a compliance rule."},
+        {"quote": "A futbol ⚽️ autographed by a famous player", "original": "A futbol ⚽️ autographed by a famous player", "severity": "minor", "why": "Left as is; Australians would say a soccer ball, signed."},
+        {"quote": "You should always ask them what their policies permit and prohibit.", "original": "You should always ask them what their policies permit and prohibit.", "severity": "major", "why": "Representative: the text is left largely untranslated."}
+      ],
+      "summary": "The original with a couple of inconsistent swaps; too light and US forms left."
+    },
+    "B": {
+      "scores": {
+        "meaning": {"evidence": "Every rule and example kept: \"many U.S. congresspeople won't let you shout them dinner\", the lists, the $150 approvals and reports, \"You might cop a few years in jail yourself\".", "score": 5},
+        "sense": {"evidence": "Terms fit exactly: \"shout them dinner\" for take out and pay, \"General admission tickets\" for bleacher-type, \"a posh private school\", \"supplier\", \"expense claim\", \"cop a few years in jail\".", "score": 5},
+        "authenticity": {"evidence": "Natural Australian workplace English: \"run it past Legal\", \"put in your expense claim\", \"worth heaps\". \"small potatoes\" is American.", "score": 4},
+        "register": {"evidence": "A light level-2 touch suited to a policy, clean: \"shout\", \"mate’s\", \"heaps\", \"posh\", \"pressie\", \"cop\".", "score": 5},
+        "tone": {"evidence": "Keeps the friendly-but-firm policy voice and its jokes: \"(ok, maybe stickers)\", \"Yoda notwithstanding, it’s the trying that counts.\"", "score": 5},
+        "flow": {"evidence": "Reads smoothly: \"getting your mate’s daughter a job as an intern might not seem like a big deal to you, but it might be worth heaps to them.\"", "score": 5},
+        "variety": {"evidence": "Varied, nothing leaned on: \"shout\", \"small potatoes\", \"heaps\", \"posh\", \"pressie\", \"cop\".", "score": 4},
+        "essence": {"evidence": "Unmistakably the same gifts policy with its emoji lists and Consequences punchline.", "score": 5}
+      },
+      "problems": [
+        {"quote": "some things might seem like small potatoes to you", "original": "certain things might seem trivial", "severity": "minor", "why": "\"Small potatoes\" is an American idiom."}
+      ],
+      "summary": "An accurate, natural light-touch localisation; \"shout them dinner\" and \"expense claim\" are just right."
+    },
+    "C": {
+      "scores": {
+        "meaning": {"evidence": "All rules and examples kept: \"won't let you take them out for dinner and pick up the bill\", \"GitHub ends up shouting a potential customer and his family first class flights to Japan\", the $150 rules.", "score": 5},
+        "sense": {"evidence": "Terms fit: \"getting your mate's daughter a gig as an intern\", \"Cheap-seats tickets\" for bleacher-type, \"shouting a potential customer\", \"worth heaps\".", "score": 5},
+        "authenticity": {"evidence": "Mostly natural Australian (\"shouting\", \"posh\", \"heaps\"), with two Americanisms: \"small potatoes\" and \"doing a few years in the slammer\".", "score": 4},
+        "register": {"evidence": "Light level-2 touch, clean: \"mate's\", \"gig\", \"heaps\", \"posh\", \"shouting\", \"slammer\".", "score": 5},
+        "tone": {"evidence": "Keeps the policy's playful firmness: \"(all right, maybe stickers)\", \"FINES and JAIL.\"", "score": 5},
+        "flow": {"evidence": "Smooth on the whole, with a couple of clunks: \"Cheap-seats tickets to a sporting event\", \"Note the recipient and the purpose of the gift in the notes\".", "score": 4},
+        "variety": {"evidence": "Varied: \"small potatoes\", \"gig\", \"heaps\", \"posh\", \"cheap seats\", \"shouting\", \"slammer\".", "score": 4},
+        "essence": {"evidence": "Clearly the same policy, lists and Yoda line intact.", "score": 5}
+      },
+      "problems": [
+        {"quote": "doing a few years in the slammer", "original": "spend a few years in jail", "severity": "minor", "why": "\"Slammer\" is more American than Australian."},
+        {"quote": "some things might seem like small potatoes", "original": "certain things might seem trivial", "severity": "minor", "why": "American idiom."},
+        {"quote": "Note the recipient and the purpose of the gift in the notes", "original": "Indicate the recipient and the purpose of the gift in the notes", "severity": "minor", "why": "\"Note ... in the notes\" repeats."}
+      ],
+      "summary": "Accurate and natural with a good \"shouting\"; a couple of Americanisms and small clunks."
+    }
+  },
+  "rankings": {
+    "tone": [["A", "B", "C"]],
+    "flow": [["B"], ["A", "C"]],
+    "variety": [["B", "C"], ["A"]],
+    "essence": [["A", "B", "C"]],
+    "overall": [["B"], ["C"], ["A"]]
+  }
+}

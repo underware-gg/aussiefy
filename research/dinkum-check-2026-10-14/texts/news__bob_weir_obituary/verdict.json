@@ -1,0 +1,163 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "dinkum-4": "A",
+  "yarn-dinkum": "B",
+  "dinkum-3": "C"
+ },
+ "scores": {
+  "dinkum-4": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn-dinkum": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "dinkum-4": {
+   "meaning": "Every fact survives: \"died with his loved ones around him\", \"They didn't say what day Weir died\", \"a song the Library of Congress named a national treasure in 1997\". The one shift is \"had a crack at a solo career\", which makes the long solo career sound tentative.",
+   "sense": "Terms fit: \"muso\", \"old Grateful Dead mates\", \"kept his hand in on the Bay Area music scene\". \"had a crack at a solo career\" strains against a career the original calls long.",
+   "authenticity": "Natural, understated Australian: \"a fixture at Grateful Dead gigs\", \"with a stint at school in Colorado\", \"took up the guitar at 13\". Nothing bolted on.",
+   "register": "Lighter than level 3: the slang is sparse (\"muso\", \"mates\", \"had a crack\", \"kept his hand in\") and much reads as plain news English, e.g. \"Weir played rhythm guitar and sang for the band for decades.\" No swearing, which suits an obituary.",
+   "tone": "Stays a respectful obituary throughout: \"announced he'd died with his loved ones around him\".",
+   "flow": "Reads smoothly: \"Weir took up the guitar at 13 and found his way into the local bluegrass scene\". \"they covered the lot\" is a slightly abrupt join.",
+   "variety": "Small but unrepeated set: \"muso\", \"mates\", \"a stint\", \"had a crack\", \"covered the lot\", \"kept his hand in\". \"musos\" appears twice.",
+   "essence": "Clearly the same obituary with the same shape and the full list of bands: \"Kingfish, Bobby and the Midnites, RatDog\"."
+  },
+  "yarn-dinkum": {
+   "meaning": "Facts kept: \"They didn't say what day he died\", \"an online platform for live shows\", \"helping people doing it tough\". Small shifts: \"a fair few of their songs\" for \"some\", and \"a fixture at every Grateful Dead concert\".",
+   "sense": "Mostly exact: \"for yonks\", \"a whole swag of other bands\", \"helping people doing it tough\" for poverty relief. \"The old Grateful Dead guitarist\" can read as aged rather than former, and \"had a crack at a solo career\" undersells it.",
+   "authenticity": "Sounds like a local: \"for yonks\", \"a whole swag of other bands\", \"their own outfit\", \"He'd stayed a regular on the Bay Area music scene\".",
+   "register": "Closest to level 3: steady slang (\"yonks\", \"a fair few\", \"whole swag\", \"doing it tough\", \"outfit\") without becoming a yarn, and no swearing at a solemn moment.",
+   "tone": "Respectful throughout: \"let everyone know he'd died with his loved ones around him\". \"for yonks\" is a touch breezy for an obituary but not jarring.",
+   "flow": "Reads well aloud: \"which is where he first came across Jerry Garcia playing the banjo\". No pile-ups.",
+   "variety": "The widest spread of the three: \"yonks\", \"a fair few\", \"solo run\", \"outfit\", \"whole swag\", \"doing it tough\", \"a regular\".",
+   "essence": "Unmistakably the same obituary, retold: \"and that band grew into the Grateful Dead\"."
+  },
+  "dinkum-3": {
+   "meaning": "Every point survives: \"has died surrounded by loved ones, his family announced on Saturday\", \"They didn't say what date he died\", \"which the Library of Congress named a national treasure in 1997\".",
+   "sense": "Terms fit: \"muso\", \"went out on his own\", \"had a crack at everything from country rock\", \"kept his hand in on the Bay Area music scene, too\".",
+   "authenticity": "Natural and unforced: \"a fixture at every Grateful Dead gig\", \"grew up round the San Francisco Bay Area\", \"played in a fair few other groups\".",
+   "register": "Light for level 3: \"muso\", \"a fair few\", \"had a crack\", \"kept his hand in\", with much plain news English such as \"He played rhythm guitar and sang for the band for decades.\"",
+   "tone": "Keeps the obituary's dignity, opening in news style: \"Bob Weir, the American muso and songwriter, has died surrounded by loved ones\".",
+   "flow": "Smooth and well restructured: \"For decades Weir played rhythm guitar and sang with American psychedelic rock band the Grateful Dead\".",
+   "variety": "Modest but unrepeated: \"muso\", \"bandmates\", \"a stint\", \"went out on his own\", \"a fair few\", \"had a crack\", \"kept his hand in\".",
+   "essence": "Unmistakably the same obituary: \"and that grew into the Grateful Dead\"."
+  }
+ },
+ "problems": {
+  "dinkum-4": [
+   {
+    "quote": "had a crack at a solo career",
+    "original": "He also explored a solo career",
+    "severity": "minor",
+    "why": "Having a crack implies a tentative attempt, which undersells a long solo career the original stresses."
+   },
+   {
+    "quote": "Weir played rhythm guitar and sang for the band for decades.",
+    "original": "Weir played rhythm guitar, and sang for the group, for decades.",
+    "severity": "minor",
+    "why": "Long stretches are left as plain news English, lighter than a level-3 brief."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "a fair few of their songs",
+    "original": "also wrote some of their songs",
+    "severity": "minor",
+    "why": "A fair few inflates some."
+   },
+   {
+    "quote": "The old Grateful Dead guitarist and singer was 78.",
+    "original": "The former guitarist and vocalist of the rock band Grateful Dead was 78.",
+    "severity": "minor",
+    "why": "Old can read as elderly next to his age; former was meant."
+   },
+   {
+    "quote": "had a crack at a solo career",
+    "original": "He also explored a solo career",
+    "severity": "minor",
+    "why": "Implies a tentative attempt at a career the original calls long."
+   }
+  ],
+  "dinkum-3": [
+   {
+    "quote": "He played rhythm guitar and sang for the band for decades.",
+    "original": "Weir played rhythm guitar, and sang for the group, for decades.",
+    "severity": "minor",
+    "why": "Much of the text is plain English, lighter than the level-3 brief."
+   }
+  ]
+ },
+ "summaries": {
+  "dinkum-4": "Accurate, natural and respectful, but closer to level 2 than the level 3 asked.",
+  "yarn-dinkum": "The best-weighted retelling: steady, natural level-3 slang that keeps the obituary's dignity.",
+  "dinkum-3": "Accurate, smooth and respectful, but under the level-3 weight."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "dinkum-4",
+    "yarn-dinkum",
+    "dinkum-3"
+   ]
+  ],
+  "flow": [
+   [
+    "dinkum-4",
+    "yarn-dinkum",
+    "dinkum-3"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-4",
+    "dinkum-3"
+   ]
+  ],
+  "essence": [
+   [
+    "dinkum-4",
+    "yarn-dinkum",
+    "dinkum-3"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-4",
+    "dinkum-3"
+   ]
+  ]
+ }
+}

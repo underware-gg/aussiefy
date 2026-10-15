@@ -1,0 +1,181 @@
+# Hand review of the triggers the verifiers proposed, applied by `aussiefy dev round` after the guards.
+# Plural literals ("cowards", "vagrants") aren't seen as plural, so the singular entry replaced them ("make a
+# gutless wonder of us all"). A bare singular noun matches both numbers and inflects the entry; the plural
+# literal goes. Where the bare noun has another sense the plural just goes: steer (verb), wildfire ("spread like
+# wildfire"), corral (verb); ranch keeps a lookahead for "ranch dressing".
+remove:
+  SWAGMAN:
+    np:
+    - a tramp
+    - hobos
+    - vagrants
+    - drifters
+    - itinerant workers
+    - hoboes
+  MOTHER:
+    np:
+    - my mom
+    - his mom
+    - her mom
+  GRANDMOTHER:
+    np:
+    - my grandmother
+    - his grandmother
+    - her grandmother
+  HORSE:
+    np:
+    - his horse
+    - her horse
+    - my horse
+    - their horse
+  GIRLFRIEND:
+    np:
+    - his girlfriend
+    - my girlfriend
+    - a girlfriend
+  SQUATTER_GRAZIER:
+    np:
+    - cattle barons
+  WILDFIRE:
+    np:
+    - wildfires
+    - the wildfires
+    - forest fires
+    - brush fires
+    - brushfires
+  DROVER:
+    np:
+    - cattle drivers
+    - trail drivers
+  SELECTION_BLOCK:
+    np:
+    - homestead claims
+  STOCKYARD:
+    np:
+    - corrals
+  RAINFOREST:
+    np:
+    - rainforests
+  BULLOCK:
+    np:
+    - steers
+  RIVER_FLAT:
+    np:
+    - the bottomlands
+    - bottomlands
+  GOANNA:
+    np:
+    - monitor lizards
+  COWARD:
+    np:
+    - cowards
+  POLICE_OFFICER:
+    np:
+    - police officers
+    - policemen
+  DINGO:
+    np:
+    - wild dogs
+  STOCKWHIP:
+    np:
+    - bullwhips
+  SHEOAK:
+    np:
+    - casuarinas
+  STATION:
+    np:
+    - ranches
+  NEWCOMER:
+    np:
+    - newcomers
+  WILD_HORSE:
+    np:
+    - feral horses
+  GAMBLER:
+    np:
+    - gamblers
+  STOCKMAN:
+    np:
+    - ranch hands
+    - cowhands
+add:
+  HORSE:
+    np:
+    - horse !around|about|race|races|racing|riding|sense|play|power|trade|trading|box|float|shoe|shoes
+  GIRLFRIEND:
+    np:
+    - girlfriend
+  COOLIBAH:
+    np:
+    - a eucalyptus by the water
+    - a eucalypt by the water
+    - a gum tree by the waterhole
+  COLONIAL_MOUNTED_POLICE:
+    np:
+    - the mounted police
+    - the colonial police
+  HOME_PLACE:
+    np:
+    - '{poss} humble abode'
+  SQUATTER_GRAZIER:
+    np:
+    - cattle baron
+  SWAGMAN:
+    np:
+    - hobo
+    - vagrant
+    - drifter
+    - itinerant worker
+  WILDFIRE:
+    np:
+    - forest fire
+    - brush fire
+    - brushfire
+  DROVER:
+    np:
+    - cattle driver
+    - trail driver
+  SELECTION_BLOCK:
+    np:
+    - homestead claim
+  RAINFOREST:
+    np:
+    - rainforest
+  RIVER_FLAT:
+    np:
+    - bottomland
+  GOANNA:
+    np:
+    - monitor lizard
+  COWARD:
+    np:
+    - coward
+  POLICE_OFFICER:
+    np:
+    - police officer
+    - policeman
+  DINGO:
+    np:
+    - wild dog
+  STOCKWHIP:
+    np:
+    - bullwhip
+  SHEOAK:
+    np:
+    - casuarina
+  STATION:
+    np:
+    - ranch !dressing|style|slider|sliders|house|hand|hands
+  NEWCOMER:
+    np:
+    - newcomer
+  WILD_HORSE:
+    np:
+    - feral horse
+  GAMBLER:
+    np:
+    - gambler
+  STOCKMAN:
+    np:
+    - ranch hand
+    - cowhand

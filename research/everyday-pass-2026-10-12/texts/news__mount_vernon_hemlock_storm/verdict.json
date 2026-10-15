@@ -1,0 +1,167 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "unharnessed": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 2,
+   "tone": 5,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 3,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 4,
+   "flow": 4,
+   "variety": 1,
+   "essence": 4
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "All facts kept: 227-year-old hemlock, \"planted back in 1791\", \"gusts of reportedly up to 70 mph (about 110 km/h)\", 1789-1797 terms, the whisky barrel gift, Clinton no relation to Bill, VP 1805-1812, Jackson's magnolia and the Pioneer Cabin sequoia. \"It was blowing dogs off chains, by all accounts.\" and \"It's been a rough trot for America's historic trees lately.\" are colour on the gusts and the list of fallen trees.",
+   "sense": "Terms fit: \"carted off to be preserved\", \"a pressie from New York Governor George Clinton\", \"it lobbed in a whisky barrel\", \"a rough trot\", \"Washington's own place\".",
+   "authenticity": "Natural Aussie news-yarn voice: \"So get this.\", \"blowing dogs off chains\", \"of all things\", \"And no, the New York governor's no relation\".",
+   "register": "A clear level-3 voice, perhaps a touch above with \"So get this.\" and \"blowing dogs off chains\"; no swearing, inside vulgarity 1.",
+   "tone": "Keeps the light human-interest news tone; the Clinton aside stays a wry note.",
+   "flow": "Reads smoothly: \"It was a pressie from New York Governor George Clinton, and it lobbed in a whisky barrel, of all things.\"",
+   "variety": "Varied: \"carted off\", \"blowing dogs off chains\", \"pressie\", \"lobbed\", \"rough trot\".",
+   "essence": "Unmistakably the Mount Vernon hemlock story, retold."
+  },
+  "unharnessed": {
+   "meaning": "Every fact kept and nothing added: \"227-year-old tree\", \"planted in 1791\", \"70 mph (about 110 kph)\", \"1789–1797\", the whisky barrel, Clinton's vice-presidency \"between 1805–1812\", Jackson's magnolia and the sequoia.",
+   "sense": "The few changes fit: \"taken out a 227-year-old tree\", \"got knocked over\", \"no relation to\", \"to come down lately\".",
+   "authenticity": "What Aussie there is sounds natural (\"has taken out\", \"the Canadian hemlock's been collected\"), but it is mostly neutral news English.",
+   "register": "Level 3 asked, but this is close to plain English with contractions; hardly any Australian idiom.",
+   "tone": "Keeps the straight news tone.",
+   "flow": "Reads cleanly: \"Other historic US trees to come down lately include seventh President Andrew Jackson's southern magnolia\".",
+   "variety": "Little slang to vary; what is there is plain (\"taken out\", \"knocked over\").",
+   "essence": "Clearly the original news item."
+  },
+  "engine": {
+   "meaning": "The original verbatim apart from \"as a pressie\" and \"Bugger me,\", so every fact survives.",
+   "sense": "\"pressie\" fits, but \"Bugger me,\" as a lead-in to \"the New York governor is not related\" takes a sense of astonishment the plain fact does not carry.",
+   "authenticity": "The one interjection is bolted on (\"Bugger me, the New York governor is not related\"), and US news forms are left (\"claimed a 227-year-old tree\", \"officials overseeing the Mount Vernon estate indicated\").",
+   "register": "Level 3 asked; the text is essentially untranslated (\"Mount Vernon was Washington's personal estate, where he conducted most of his two presidential terms\").",
+   "tone": "Straight news tone kept except the jarring \"Bugger me,\".",
+   "flow": "Reads as the original, with a jolt at \"Bugger me, the New York governor is not related\".",
+   "variety": "Only two Aussie touches in the whole text (\"pressie\", \"Bugger me\").",
+   "essence": "Recognisably the original because it is the original, with a stray exclamation."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "It was blowing dogs off chains, by all accounts.",
+    "original": "",
+    "severity": "minor",
+    "why": "Colour that slightly heightens a level-3 news brief."
+   },
+   {
+    "quote": "So get this.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added opener nudges the register a little above level 3."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "Friday's big winter storm across the north-east of the United States has taken out a 227-year-old tree",
+    "original": "Friday's major winter storm over the northeastern United States claimed a 227-year-old tree",
+    "severity": "major",
+    "why": "Representative of a text barely moved toward Australian English; well under level 3."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Bugger me, the New York governor is not related",
+    "original": "The New York governor is not related",
+    "severity": "major",
+    "why": "Exclamation bolted onto a plain fact; jars in a news item."
+   },
+   {
+    "quote": "officials overseeing the Mount Vernon estate indicated",
+    "original": "officials overseeing the Mount Vernon estate indicated",
+    "severity": "major",
+    "why": "Text left untranslated against a level-3 brief."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "Faithful, natural and lively level-3 news retelling, perhaps a shade above the brief.",
+  "unharnessed": "Faithful and clean, but too light: close to plain English for a level-3 brief.",
+  "engine": "Essentially the original with one 'pressie' and a bolted-on 'Bugger me'; far under level 3."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

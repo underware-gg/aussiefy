@@ -1,0 +1,247 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "yarn-troppo": "A",
+  "dinkum-3": "B",
+  "engine": "C",
+  "unharnessed": "D",
+  "yarn-dinkum": "E"
+ },
+ "scores": {
+  "yarn-troppo": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 3,
+   "flow": 4,
+   "variety": 5,
+   "essence": 4
+  },
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 3,
+   "register": 2,
+   "tone": 5,
+   "flow": 5,
+   "variety": 1,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  },
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn-troppo": {
+   "meaning": "All the technical points survive, but with added claims: \"(usually 4KB, which isn't much)\", \"on a slow mobile data connection out the back of beyond\", \"it forgets you the second you've gone\", and \"Nine times out of ten\" overstates \"Typically\".",
+   "sense": "Terms mostly fit (\"suss out\", \"the session ID gets binned\", \"the modern storage APIs are the go\"), but \"Nine times out of ten\" puts a figure on \"Typically\" and \"cookies got lumbered with general client-side data storage\" adds a judgement.",
+   "authenticity": "Mostly natural idiom (\"have a squiz\", \"earn their keep\", \"suss out\"), with a few bolted-on lines: \"isn't the sort you dunk in your cuppa\", \"out the back of beyond\", \"(chocolate and strawberry, no less)\".",
+   "register": "Heavier than level 2 for a reference page: \"dunk in your cuppa\", \"suss out\", \"binned\", \"lumbered\", \"out the back of beyond\", \"whip up\", \"fiddle with\". Closer to level 3-4. No swearing.",
+   "tone": "A neutral reference doc becomes jokey and chatty: \"Now, a **cookie** ... isn't the sort you dunk in your cuppa.\" and \"as if to say \\\"still me, still signed in.\\\"\" The information is clear, but the tone shifts.",
+   "flow": "Lively, with some padded joins: \"which matters, cos left to its own devices the HTTP protocol is\", \"Cookies get sent along with every single request\".",
+   "variety": "Widely varied: \"squiz\", \"suss out\", \"binned\", \"earn their keep\", \"lumbered\", \"the go\", \"headaches\", \"stash away\".",
+   "essence": "Recognisably the MDN page, but the jokes (\"dunk in your cuppa\", \"no less\") make it read as a chatty explainer rather than reference."
+  },
+  "dinkum-3": {
+   "meaning": "Every technical point is kept: \"the session ID gets deleted and the user's shown a generic version of the page\", \"Browsers generally cap the number of cookies per domain\".",
+   "sense": "Terms fit: \"hang onto cookies\", \"to say it reckons the user's still signed in\", \"the modern storage APIs are the go\", \"have a squiz\".",
+   "authenticity": "Natural Australian technical prose: \"These days the modern storage APIs are the go\", \"Storage APIs can hold way more data.\"",
+   "register": "A light, steady touch, right for level 2: \"cos\", \"reckons\", \"the go\", \"squiz\", \"heaps\". No swearing.",
+   "tone": "Stays a clear, neutral reference, lightly warmed: \"Here's how a basic user sign-in system goes:\"",
+   "flow": "Smooth: \"Once it's got an HTTP request, a server can send one or more {{HTTPHeader(\\\"Set-Cookie\\\")}} headers back with the response\".",
+   "variety": "Varied but light: \"hang onto\", \"cos\", \"reckons\", \"the go\", \"squiz\", \"heaps\", \"way more\".",
+   "essence": "Unmistakably the MDN page, retold."
+  },
+  "engine": {
+   "meaning": "The original almost verbatim, so everything is there: \"Cookies enable web applications to store limited amounts of data and remember state information\".",
+   "sense": "The one swap fits: \"especially if you have heaps of cookies set\".",
+   "authenticity": "Untouched US technical prose, with US spellings left: \"issue a personalized or generic response as appropriate\", \"sends the user a personalized version\".",
+   "register": "Largely untranslated: \"heaps\" and two spellings (\"analysing\", \"behaviour\") are the only changes.",
+   "tone": "The neutral reference tone is intact: \"The following describes a basic user sign-in system:\"",
+   "flow": "Reads as the original.",
+   "variety": "One term: \"heaps\".",
+   "essence": "It is the original page."
+  },
+  "unharnessed": {
+   "meaning": "Every point is kept: \"Browsers are generally capped at a maximum number of cookies per domain\", \"the session ID gets deleted\".",
+   "sense": "Terms fit: \"shopping trolley contents\", \"it still reckons the user is signed in\", \"drag down performance\". \"out of the box\" fairly carries \"by default\".",
+   "authenticity": "Natural Australian English: \"shopping trolley\", \"Here's how a basic user sign-in system works\". \"out of the box\" is general, not Australian.",
+   "register": "A shade light for level 2: \"reckons\", \"trolley\", \"drag down\", \"run through\"; little else.",
+   "tone": "Stays a clear reference: \"These days modern storage APIs are recommended instead\".",
+   "flow": "Smooth: \"They're built with storage in mind, never send data to the server\".",
+   "variety": "Sparse slang, little to vary: \"reckons\", \"trolley\", \"drag down\".",
+   "essence": "Unmistakably the MDN page."
+  },
+  "yarn-dinkum": {
+   "meaning": "Every point is kept: \"Storage APIs can hold a lot more data.\", \"the session ID gets deleted\".",
+   "sense": "Terms fit: \"have a squiz at the main uses\", \"modern storage APIs are the go\", \"it still reckons the user is signed in\", \"heaps of cookies\".",
+   "authenticity": "Natural Australian technical prose: \"These days modern storage APIs are the go\". The \"**Personalization**\" heading keeps US spelling beside \"personalised\" in the body.",
+   "register": "A light touch, right for level 2: \"squiz\", \"the go\", \"reckons\", \"heaps\". No swearing.",
+   "tone": "Stays a clear reference: \"Here's how a basic user sign-in system goes:\"",
+   "flow": "Smooth: \"Once it's received an HTTP request, a server can send one or more {{HTTPHeader(\\\"Set-Cookie\\\")}} headers back\".",
+   "variety": "Varied but light: \"squiz\", \"the go\", \"reckons\", \"heaps\", \"a couple of cookies\".",
+   "essence": "Unmistakably the MDN page."
+  }
+ },
+ "problems": {
+  "yarn-troppo": [
+   {
+    "quote": "isn't the sort you dunk in your cuppa",
+    "original": "",
+    "severity": "minor",
+    "why": "Added joke; colour, but out of place in a reference doc at level 2."
+   },
+   {
+    "quote": "on a slow mobile data connection out the back of beyond",
+    "original": "on slow mobile data connections",
+    "severity": "minor",
+    "why": "Adds a remote-location claim the original doesn't make."
+   },
+   {
+    "quote": "Nine times out of ten, the server reads what's in the HTTP cookies",
+    "original": "Typically, the server will use the contents of HTTP cookies",
+    "severity": "minor",
+    "why": "Puts a frequency on 'typically'."
+   },
+   {
+    "quote": "(usually 4KB, which isn't much)",
+    "original": "(usually 4KB)",
+    "severity": "minor",
+    "why": "Added judgement."
+   }
+  ],
+  "dinkum-3": [
+   {
+    "quote": "what's in the shopping cart",
+    "original": "shopping cart contents",
+    "severity": "minor",
+    "why": "Australians say shopping trolley; a small missed localisation."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "issue a personalized or generic response as appropriate",
+    "original": "issue a personalized or generic response as appropriate",
+    "severity": "major",
+    "why": "Left untranslated, US spelling included; well under the brief."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "out of the box, the HTTP protocol is",
+    "original": "by default the HTTP protocol is",
+    "severity": "minor",
+    "why": "A generic idiom, not Australian; adds nothing to the localisation."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "- **Personalization**: User preferences like display language and UI theme.",
+    "original": "- **Personalization**: User preferences such as display language and UI theme.",
+    "severity": "minor",
+    "why": "US spelling left in the heading while the body uses 'personalised'."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn-troppo": "Accurate and lively, but too heavy and jokey for a level-2 reference page.",
+  "dinkum-3": "Clear, natural and on-brief.",
+  "engine": "The original with one swap and a couple of spellings.",
+  "unharnessed": "Faithful and natural, slightly light on Aussie.",
+  "yarn-dinkum": "Clear, natural and on-brief."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "dinkum-3",
+    "engine",
+    "unharnessed",
+    "yarn-dinkum"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "flow": [
+   [
+    "dinkum-3",
+    "engine",
+    "unharnessed",
+    "yarn-dinkum"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-troppo"
+   ],
+   [
+    "dinkum-3",
+    "yarn-dinkum"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "dinkum-3",
+    "engine",
+    "unharnessed",
+    "yarn-dinkum"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "overall": [
+   [
+    "dinkum-3",
+    "yarn-dinkum"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn-troppo"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

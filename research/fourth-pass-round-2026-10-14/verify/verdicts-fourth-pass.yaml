@@ -1,0 +1,487 @@
+# Verdicts for the fourth-pass round, one per added entry, in the format of the everyday round's verify/BRIEF.md.
+# Written by hand from the fourth pass's findings and the yarn agents' notes: glosses and triggers in our own words,
+# sources are open references. DECISIONS.md lists every candidate considered, including the ones skipped or already
+# covered, and the hand edits (cop, the oldies, a fair whack, crook, the dialect table).
+# `evidence: own` means own knowledge of a common term, checked against the cited Wiktionary page where there is one
+# (a HEAD request with the User-Agent aussiefy-research/0.1; nothing was taken from the pages).
+
+# --- talk and calling out ----------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: give us a hoy
+  entry:
+    id: give-a-hoy
+    form: give {obj} a hoy
+    concept: [CALL_OUT]
+    frame: vp
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Call out to someone, or get in touch (when you're back, say).
+    sources: [https://en.wiktionary.org/wiki/hoy]
+  evidence: own
+  confidence: medium
+  why: CALL_OUT's "give {obj} a shout" carries its person, so the form fits; its bare "holler" and "yell out" have
+    no object, and the form refuses them. Not "a shout" alone (a round of drinks).
+
+- decision: add_entry
+  candidate: the drum (the information)
+  entry:
+    id: the-drum
+    form: the drum
+    concept: [THE_REAL_STORY]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: The information, the word on what's going on (tell us what's what).
+    sources: [https://en.wiktionary.org/wiki/drum]
+  evidence: own
+  confidence: medium
+  why: Beside the good oil and the dinkum oil on THE_REAL_STORY (the lowdown, the inside story). Lookup of "the
+    drum" found only noggin.
+
+- decision: add_entry
+  candidate: that's yer lot
+  entry:
+    id: thats-your-lot
+    form: that's your lot
+    concept: [NEW:THATS_ALL]
+    frame: interjection
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: That's all there is, there's no more (said at the end of a list or a share-out).
+    sources: [https://en.wiktionary.org/wiki/that%27s_your_lot]
+  new_concept:
+    id: THATS_ALL
+    description: Saying there is nothing more, at the end of a list or a share-out.
+    triggers:
+      interjection: [that's all, that is all, that's all there is]
+  evidence: own
+  confidence: medium
+  why: As an interjection it fires only on a clause of its own ("That's all."), not "that's all I know". Shared
+    with British English; the everyday Australian close (the drawl gives "yer lot").
+
+- decision: add_entry
+  candidate: go for yer life
+  entry:
+    id: go-for-your-life
+    form: go for your life
+    concept: [NEW:GO_AHEAD]
+    frame: interjection
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Go ahead, help yourself, you're welcome to it.
+    sources: [https://en.wiktionary.org/wiki/go_for_your_life]
+  new_concept:
+    id: GO_AHEAD
+    description: Giving someone the go-ahead or the run of something ("go ahead", "help yourself").
+    triggers:
+      interjection: [go ahead, help yourself, be my guest, feel free]
+  evidence: own
+  confidence: high
+  why: Only a clause of its own; "Go ahead and click Save" and "help yourself to a plate" aren't caught.
+
+# --- judgement and certainty ----------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: sure as eggs
+  entry:
+    id: sure-as-eggs
+    form: sure as eggs
+    concept: [NEW:SURE_AS_CAN_BE]
+    frame: adv
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: As sure as can be, without a doubt (sure as eggs, he'll be late).
+    sources: [https://en.wiktionary.org/wiki/sure_as_eggs]
+  new_concept:
+    id: SURE_AS_CAN_BE
+    description: Certainly, without a doubt, as a sentence adverb ("as sure as can be, he was late").
+    triggers:
+      adv: [as sure as can be, sure as can be, as sure as anything, sure as anything]
+  evidence: own
+  confidence: medium
+  why: Not "definitely" or "certainly" (inside a verb phrase "sure as eggs" breaks the grammar, "it will sure as
+    eggs rain"); only the sentence adverbs it replaces word for word.
+
+- decision: add_entry
+  candidate: the go ("X is the go")
+  entry:
+    id: the-go
+    form: the go
+    concept: [NEW:WAY_TO_GO]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: The thing to do, the best plan (an early start is the go).
+  new_concept:
+    id: WAY_TO_GO
+    description: The best thing to do or choose ("booking ahead is the way to go").
+    triggers:
+      np: ['the way to go !=to|home|there|back|from|in|on|about|out|is|for|into|up|down|over|through|when|if|and|now|forward|ahead|around|across|by|with|after|before|but|was|will|would|can|could']
+  evidence: own
+  confidence: medium
+  why: Only "the way to go" ending its clause; "the way to go home" is a route, and "a long way to go" has no "the".
+
+- decision: add_entry
+  candidate: a curly one
+  entry:
+    id: a-curly-one
+    form: a curly one
+    variants: [a curly question]
+    concept: [NEW:TRICKY_QUESTION]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: A hard question or problem, one that's tricky to answer.
+    sources: [https://en.wiktionary.org/wiki/curly]
+  new_concept:
+    id: TRICKY_QUESTION
+    description: A hard question to answer.
+    triggers:
+      np: [a tricky question, a tough question, a difficult question, a hard question, a tricky one]
+  evidence: own
+  confidence: medium
+  why: Questions only; "a tricky problem" is often technical, and "a curly problem" isn't the usual phrasing.
+
+- decision: add_entry
+  candidate: come good
+  entry:
+    id: come-good
+    form: come good
+    concept: [NEW:TURN_OUT_FINE]
+    frame: vp
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Turn out all right in the end, or recover (it'll come good; he came good after a slow start).
+    sources: [https://en.wiktionary.org/wiki/come_good]
+  new_concept:
+    id: TURN_OUT_FINE
+    description: Turn out all right in the end.
+    triggers:
+      vp: [turn out fine, turn out all right, turn out alright, turn out okay, work out fine, work out all right,
+           work out okay]
+  evidence: own
+  confidence: high
+  why: The intransitive phrases only; not "turn out" (a crowd) or "work out" (exercise, a sum).
+
+# --- money and work --------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: sting (overcharge)
+  entry:
+    id: sting-overcharge
+    form: sting {np}
+    concept: [NEW:OVERCHARGE]
+    frame: vp
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Charge someone too much (forty dollars for parking, say).
+    sources: [https://en.wiktionary.org/wiki/sting]
+  new_concept:
+    id: OVERCHARGE
+    description: Charge someone too much.
+    triggers:
+      vp: ['overcharge {np}']
+  evidence: own
+  confidence: medium
+  why: Overcharge has only this sense; with its object after it. Shared with British English, and everyday in
+    Australian news ("stung at the bowser").
+
+- decision: add_entry
+  candidate: go halves
+  entry:
+    id: go-halves
+    form: go halves
+    concept: [NEW:SPLIT_COST]
+    frame: vp
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Share the cost equally between two (on a pizza, say).
+    sources: [https://en.wiktionary.org/wiki/go_halves]
+  new_concept:
+    id: SPLIT_COST
+    description: Share a cost equally.
+    triggers:
+      vp: ['go fifty-fifty', 'split the bill fifty-fifty', 'split the cost fifty-fifty', 'split the costs fifty-fifty']
+  evidence: own
+  confidence: high
+  why: Not "split the cost of the car" (go halves takes "on", not "of").
+
+- decision: add_entry
+  candidate: down tools
+  entry:
+    id: down-tools
+    form: down tools
+    concept: [NEW:STOP_WORK]
+    frame: vp
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Stop work, often all at once as a protest or a strike (the crew downed tools).
+    sources: [https://en.wiktionary.org/wiki/down_tools]
+  new_concept:
+    id: STOP_WORK
+    description: Stop working, especially together as a protest.
+    triggers:
+      vp: ['stop work !=on|at|in', 'walk off the job', 'go on strike']
+  evidence: own
+  confidence: medium
+  why: Not "stop work on the project" (a pause). Shared with British English; current in Australian union talk.
+
+- decision: add_entry
+  candidate: over the line (got it done)
+  entry:
+    id: get-over-the-line
+    form: get {obj} over the line
+    concept: [NEW:FINISH_LINE]
+    frame: vp
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Get something finished or passed, just in time or just enough (we got it over the line).
+    sources: [https://en.wiktionary.org/wiki/get_over_the_line]
+  new_concept:
+    id: FINISH_LINE
+    description: Get something finished or through (a deal, a bill, a project).
+    triggers:
+      vp: ['get {obj} across the finish line', 'get {obj} over the finish line', 'get {obj} across the line']
+  evidence: own
+  confidence: medium
+  why: With its object a pronoun or a name, as the form carries it.
+
+# --- time and pace ----------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: down the track (in future)
+  entry:
+    id: down-the-track
+    form: down the track
+    concept: [NEW:LATER_ON]
+    frame: adv
+    intensity: 2
+    incoherence: 2
+    register: current
+    gloss: At some later time (we'll sort that out down the track).
+    sources: [https://en.wiktionary.org/wiki/down_the_track]
+  new_concept:
+    id: LATER_ON
+    description: At some point in the future.
+    triggers:
+      adv: [further down the road, somewhere down the road, later down the road, further down the line,
+            somewhere down the line, later down the line, at some point in the future]
+  evidence: own
+  confidence: high
+  why: The figurative phrases; not "down the road" (a place, "she lives down the road") or "in the future".
+
+- decision: add_entry
+  candidate: longer than a wet week
+  entry:
+    id: take-longer-than-a-wet-week
+    form: take longer than a wet week
+    concept: [NEW:TAKE_FOREVER]
+    frame: vp
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Take a very long, dreary time (the meeting took longer than a wet week).
+  new_concept:
+    id: TAKE_FOREVER
+    description: Take a very long time.
+    triggers:
+      vp: [take forever, take ages]
+  evidence: own
+  confidence: medium
+  why: Its sibling "a face as long as a wet week" is in the dictionary; "take forever" and "take ages" read the same
+    after it ("took forever to load" -> "took longer than a wet week to load").
+
+# --- people, places, things -----------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: the mob (a group, an outfit)
+  entry:
+    id: that-mob
+    form: that mob
+    concept: [NEW:THAT_CROWD]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: That lot, that bunch of people or that outfit (I wouldn't trust that mob).
+    sources: [https://en.wiktionary.org/wiki/mob]
+  new_concept:
+    id: THAT_CROWD
+    description: A particular group of people or an outfit, pointed at ("that crowd").
+    triggers:
+      np: [that crowd, this crowd]
+  evidence: own
+  confidence: medium
+  why: Not "that outfit" (clothes) or "that lot" (land); mob's own entry is a community (NATION). No "this
+    mob" variant, since a kept "that" would go before it ("that this mob").
+
+- decision: add_entry
+  candidate: red cordial ("like a kid on red cordial")
+  entry:
+    id: like-a-kid-on-red-cordial
+    form: like a kid on red cordial
+    concept: [NEW:HYPER]
+    frame: predicate_adj
+    intensity: 4
+    incoherence: 4
+    register: current
+    gloss: Wildly overexcited and unable to sit still (from the sugary drink kids get at parties).
+  new_concept:
+    id: HYPER
+    description: Overexcited, unable to keep still (of a person).
+    triggers:
+      predicate_adj: [bouncing off the walls, hyper ^person]
+  evidence: own
+  confidence: medium
+  why: Of a person only; not "hyperactive" (a diagnosis).
+
+- decision: add_entry
+  candidate: run the ruler over
+  entry:
+    id: run-the-ruler-over
+    form: run the ruler over {np}
+    variants: ['run the ruler over {obj}']
+    concept: [NEW:ONCE_OVER]
+    frame: vp
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Look something or someone over carefully to judge it (the new players, a used car).
+  new_concept:
+    id: ONCE_OVER
+    description: Look over carefully, to check or judge.
+    triggers:
+      vp: ['give {np} the once-over', 'cast an eye over {np}', 'look {obj} over']
+  evidence: own
+  confidence: medium
+  why: Not CHECK_OUT's size up and check out, which suss out has; these are the looking-over phrases.
+
+- decision: add_entry
+  candidate: stay out of its road
+  entry:
+    id: get-out-of-the-road
+    form: get out of the road
+    concept: [NEW:GET_OUT_OF_THE_WAY]
+    frame: vp
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Move aside, get clear (get out of the road, there's a truck coming).
+  new_concept:
+    id: GET_OUT_OF_THE_WAY
+    description: Move out of someone's path.
+    triggers:
+      vp: [get out of the way]
+  evidence: own
+  confidence: medium
+  why: The phrase as said; "get the paperwork out of the way" (done with) has the object between and isn't caught.
+
+- decision: add_entry
+  candidate: a gong (award)
+  entry:
+    id: a-gong
+    form: a gong
+    concept: [MEDAL_AWARD]   # concept written by hand in concepts.yaml (for its not_in: the industrial award)
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: A medal or an award, often an honour (in the Australia Day honours list).
+    sources: [https://en.wiktionary.org/wiki/gong]
+  evidence: own
+  confidence: medium
+  why: Out of official and technical prose, where an award is a pay agreement or a contract.
+
+# --- reference only (lookup) ------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: lurgy
+  entry:
+    id: the-lurgy
+    form: the lurgy
+    concept: [NEW:MINOR_BUG]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Some minor illness doing the rounds (half the office has it).
+    sources: [https://en.wiktionary.org/wiki/lurgy]
+  new_concept:
+    id: MINOR_BUG
+    description: A minor illness going around (lookup only); "a bug" is mostly software, and "a virus" can be grave.
+    triggers:
+      np: [a minor unnamed illness going around the office]
+  evidence: own
+  confidence: medium
+  why: Reference only; no plain word for it is safe to swap.
+
+- decision: add_entry
+  candidate: grunt (power)
+  entry:
+    id: grunt-power
+    form: grunt
+    concept: [NEW:ENGINE_POWER]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Pulling power, of an engine or a machine (a truck with plenty of it).
+    sources: [https://en.wiktionary.org/wiki/grunt]
+  new_concept:
+    id: ENGINE_POWER
+    description: An engine's pulling power (lookup only); "power" and "horsepower" have too many other senses and
+      numbers.
+    triggers:
+      np: [the pulling power of an engine under the bonnet]
+  evidence: own
+  confidence: medium
+  why: Reference only; "power" is political and electrical too, and "200 horsepower" is a figure.
+
+- decision: add_entry
+  candidate: sausage sizzle
+  entry:
+    id: a-sausage-sizzle
+    form: a sausage sizzle
+    concept: [NEW:SAUSAGE_SIZZLE]
+    frame: np
+    intensity: 2
+    incoherence: 2
+    register: current
+    gloss: A barbecue of sausages in bread, sold to raise money (at a school, a club, a polling booth).
+    sources: [https://en.wiktionary.org/wiki/sausage_sizzle]
+  new_concept:
+    id: SAUSAGE_SIZZLE
+    description: A fundraising barbecue of sausages in bread (lookup only); there is no plain English name for it.
+    triggers:
+      np: [a fundraising barbecue selling sausages in slices of bread]
+  evidence: own
+  confidence: high
+  why: Reference only; no American or British name to swap.
+
+- decision: add_entry
+  candidate: not want a bar of
+  entry:
+    id: not-have-a-bar-of
+    form: not have a bar of {np}
+    concept: [NEW:WANT_NO_PART_OF]
+    frame: vp
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Refuse to have anything to do with something (she wanted no part of it).
+  new_concept:
+    id: WANT_NO_PART_OF
+    description: Refuse to have anything to do with something (lookup only).
+    triggers:
+      vp: ['refuse to have anything at all to do with {np}']
+  evidence: own
+  confidence: medium
+  why: Reference only; "have anything to do with" is also a question ("does it have anything to do with the
+    weather?"), where the swap would be wrong.

@@ -1,0 +1,230 @@
+{
+ "candidates": {
+  "A": {
+   "scores": {
+    "meaning": {
+     "evidence": "All technical points kept: the five fit properties, CRISP's parts, homomorphic addition only, the aggregate workaround, T + 1 collusion, `Small` (T = 9), `getE3Quote`, the compliance caveat. Asides (\"so don't hold your breath\", \"nobody gets a squiz at anyone else's books\") hang off the original.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Mostly exact (\"right up the E3's alley\", \"it eats into the BFV parameter set's noise budget, which isn't bottomless\", \"what it'll set ya back\"), but \"The result is a sum BFV handles well: say a total, a count or a tally\" narrows computation to sum, and \"a bunch of totals\" loosens aggregate.",
+     "score": 4
+    },
+    "authenticity": {
+     "evidence": "Natural on the whole (\"the whole kit\", \"knock together an auction\", \"give an application a leg-up\"), with one stock opener: \"Strewth, where do I start?\"",
+     "score": 4
+    },
+    "register": {
+     "evidence": "A full level-5 retelling of the prose while keeping code, links and the table intact; no swearing needed, within level 2.",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "Still accurate developer docs, cautions kept serious (\"make dead sure your secure process can work out the result inside that budget\").",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads smoothly: \"The catch is the maths. The template and CRISP only use homomorphic addition.\"",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Varied: \"yakka\", \"chip in\", \"sit tight\", \"under wraps\", \"Run your eye over\", \"Whip up a project\".",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Unmistakably the Interfold use-cases page, structure and components intact.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "Strewth, where do I start?",
+     "original": "",
+     "severity": "minor",
+     "why": "Stock opener bolted onto the intro."
+    },
+    {
+     "quote": "The result is a sum BFV handles well: say a total, a count or a tally.",
+     "original": "The result is a computation that BFV supports well, for example a sum, a count, or a tally.",
+     "severity": "minor",
+     "why": "Narrows \"computation\" to \"sum\" and makes the list read oddly."
+    },
+    {
+     "quote": "A design can also decrypt a bunch of totals instead",
+     "original": "A design can also decrypt an aggregate",
+     "severity": "minor",
+     "why": "\"totals\" is looser than aggregate."
+    }
+   ],
+   "summary": "A natural, accurate level-5 retelling that keeps the technical content safe."
+  },
+  "B": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every point kept, including the table rows; colour like \"that won't leave you up the creek without a paddle\" hangs off best practices.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Mostly exact (\"it's no skin off anyone's nose if that result is public\", \"Where it comes unstuck is the computation\", \"the committee's graft\"), but the table swaps technical verbs: \"Every voter locks up a ballot\" for encrypts, \"puts in for one E3\" for requests.",
+     "score": 4
+    },
+    "authenticity": {
+     "evidence": "Sounds like a real Aussie dev: \"Righto\", \"the whole box and dice\", \"chews through the limited noise budget\", \"Each mob encrypts\".",
+     "score": 5
+    },
+    "register": {
+     "evidence": "Full level 5, even in the table, while code and links stay intact; no swearing, within level 2.",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "Still careful technical docs under the yarn: \"That assessment's on the app owner, full stop.\"",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads naturally: \"Bidders put in encrypted bids, and only the result of the auction gets decrypted.\"",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Wide range: \"hang about\", \"whips up\", \"legit\", \"shipped off\", \"graft\", \"bumps up T\".",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Plainly the same page, retold.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "Every voter locks up a ballot in the browser under the committee key.",
+     "original": "Each voter encrypts a ballot in the browser under the committee key.",
+     "severity": "minor",
+     "why": "\"locks up\" blurs a precise technical term."
+    },
+    {
+     "quote": "Every single ballot stays locked up tight.",
+     "original": "Individual ballots stay encrypted.",
+     "severity": "minor",
+     "why": "Same blurring of \"encrypted\"."
+    }
+   ],
+   "summary": "The fullest level-5 retelling, natural and accurate, with slight blurring of technical verbs in the table."
+  },
+  "C": {
+   "scores": {
+    "meaning": {
+     "evidence": "Facts survive because the text is mostly untouched, but insults and oaths are added (\"ya mug\", \"Faaaaaark me.\") and \"bloody hard yakkas\" misstates the tasks.",
+     "score": 3
+    },
+    "sense": {
+     "evidence": "\"yakka\" (hard work) used as a count noun for tasks: \"bloody hard yakkas\", \"An E3 fits a yakka\".",
+     "score": 2
+    },
+    "authenticity": {
+     "evidence": "Stage-Australian bolt-ons: \"Fair dinkum, it's for developers\", \"Mate, Bidders submit\", \"Jeez, only the aggregate\", \"Faaaaaark me.\"",
+     "score": 1
+    },
+    "register": {
+     "evidence": "Fillers sprinkled on untranslated docs (\"No single operator is acceptable as the custodian of the inputs.\"); swearing within level 2 but no real retelling.",
+     "score": 2
+    },
+    "tone": {
+     "evidence": "Technical docs undercut by abuse: \"with the checks in [Limits to check](#limits-to-check), ya mug.\"",
+     "score": 1
+    },
+    "flow": {
+     "evidence": "Broken joins: \"Mate, Bidders submit\", \"Anyway, other\", \"each 'ave a\".",
+     "score": 1
+    },
+    "variety": {
+     "evidence": "\"Anyway\", \"yakka\" and exclamations over and over.",
+     "score": 1
+    },
+    "essence": {
+     "evidence": "The page is recognisable underneath, but flattened by noise.",
+     "score": 3
+    }
+   },
+   "problems": [
+    {
+     "quote": "bloody hard yakkas",
+     "original": "tasks",
+     "severity": "major",
+     "why": "\"yakka\" is uncountable hard work; wrong sense and form."
+    },
+    {
+     "quote": "ya mug.",
+     "original": "",
+     "severity": "major",
+     "why": "Insult to the reader."
+    },
+    {
+     "quote": "Faaaaaark me.",
+     "original": "",
+     "severity": "major",
+     "why": "Bolted-on oath on a link card."
+    },
+    {
+     "quote": "Mate, Bidders submit encrypted bids",
+     "original": "Bidders submit encrypted bids",
+     "severity": "major",
+     "why": "Broken join from a filler."
+    },
+    {
+     "quote": "No single operator is acceptable as the custodian of the inputs.",
+     "original": "No single operator is acceptable as the custodian of the inputs.",
+     "severity": "major",
+     "why": "Mostly untranslated for level 5."
+    }
+   ],
+   "summary": "Untranslated docs with fillers, an insult and a mangled \"yakka\" bolted on."
+  }
+ },
+ "rankings": {
+  "tone": [
+   [
+    "A",
+    "B"
+   ],
+   [
+    "C"
+   ]
+  ],
+  "flow": [
+   [
+    "A",
+    "B"
+   ],
+   [
+    "C"
+   ]
+  ],
+  "variety": [
+   [
+    "A",
+    "B"
+   ],
+   [
+    "C"
+   ]
+  ],
+  "essence": [
+   [
+    "A",
+    "B"
+   ],
+   [
+    "C"
+   ]
+  ],
+  "overall": [
+   [
+    "B"
+   ],
+   [
+    "A"
+   ],
+   [
+    "C"
+   ]
+  ]
+ }
+}

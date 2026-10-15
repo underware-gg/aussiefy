@@ -1,0 +1,203 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 1,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 2,
+   "flow": 1,
+   "variety": 1,
+   "essence": 3
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every step, path, command and code block is intact, and the technical claims are unchanged. \"the operator panics and spits the dummy\" is colour on \"panics\". \"the whole lot\" and \"Bewdy.\" are reactions.",
+   "sense": "Terms fit their technical sense: \"knocked over the Quick Start\", \"ferries ciphertexts\", \"fires them off\", \"can't have a squiz at them\", \"waves through every receipt\", \"If the test falls over\".",
+   "authenticity": "Natural Aussie dev voice: \"no dramas\", \"punch in 5 and 3\", \"It's got no idea what the computation actually does\". \"Bewdy.\" is a little stock.",
+   "register": "Level 4 across the prose while leaving the code alone. A few passages stay close to the original (\"The program server ... calls `fhe_processor` and sends the encrypted result back\"). Swearing: none.",
+   "tone": "Stays a clear, friendly tutorial. The jokes never obscure an instruction.",
+   "flow": "Reads smoothly: \"In `program/src/lib.rs`, swap the `fhe_processor` function out for this version\".",
+   "variety": "Varied: knocked over, ferries, lugs, fires off, dishes out, squiz, no dramas, track down, punch in, bewdy, stashes, waves through, spits the dummy, fiddle with. \"Have a look at\" appears twice.",
+   "essence": "Unmistakably the Hello World tutorial, with its structure, MDX components and code untouched."
+  },
+  "engine": {
+   "meaning": "Code is intact, but the prose breaks technical meaning. \"two paddocks\" stands for two fields. \"the sweet bugger-all ciphertext\" stands for the zero ciphertext. \"2 × (a + b) must be maggoted than 100\" makes the constraint unreadable. \"reckons their sum\" stands for \"expects their sum\".",
+   "sense": "Several terms take the wrong sense: \"paddocks\" (a farm field) for struct fields, \"sweet bugger-all\" (nothing at all) for a zero value, \"maggoted\" (drunk) for \"less\", \"reckons\" for a test's expectation, \"a source knock together\" for a source build.",
+   "authenticity": "Bolted-on tags: \"Strewth, you need the `my-first-e3` project\", \"Bugger me, change the expected value\", and \"Well,\", \"Now,\" and \"Anyway,\" at the start of sentences. US \"serialized\" is left in.",
+   "register": "Mostly untranslated docs with misplaced slang dropped in, well under level 4. The swearing is dad level but used as filler.",
+   "tone": "The instructional clarity is undercut by exclamations: \"Bugger me, change the expected value from 5 to 10\".",
+   "flow": "Jarring: \"must be maggoted than 100\", \"for a source knock together\", with \"Well,\" and \"Now,\" as repeated sentence openers.",
+   "variety": "Leans on \"Well,\" (five times), \"Now,\" (four times), \"Anyway,\" and \"brand-spankin'-new\" (twice).",
+   "essence": "The structure and code survive, but key explanations are garbled."
+  },
+  "yarn": {
+   "meaning": "Every step, path and code block is intact. Additions are colour or clarification: \"or it'll wrap round on ya\", \"Sixteen. Too easy.\", \"the delivery crew\". \"Like counting votes in a sealed box\" is an analogy that is loose but harmless. \"(the code kind, not paddocks)\" is a strange aside.",
+   "sense": "Terms fit: \"tinker\", \"knocked over the Quick Start\", \"lugs ciphertexts\", \"Bump the expected value\", \"knows sweet bugger-all about what the computation does\", \"falls in a heap\".",
+   "authenticity": "Natural, confident Aussie voice: \"Righto\", \"Too easy.\", \"Heads up\". The paddocks aside, which jokes about a mistranslation the reader never saw, reads oddly.",
+   "register": "A full level 4 in the prose, with code untouched. Swearing is a dad-level \"sweet bugger-all\".",
+   "tone": "A friendly tutorial whose instructions stay clear. The wrap-round warning is even clarified.",
+   "flow": "Smooth, and it joins short sentences well: \"The coordination server publishes the encrypted result, and the committee decrypts it.\"",
+   "variety": "Highly varied: righto, tinker, spits out, delivery crew, lugs, carts off, peek, wrap round on ya, bump, hunt down, baked in, too easy, sweet bugger-all, falls in a heap.",
+   "essence": "Unmistakably the tutorial, retold with personality."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "The results step shows `2 × (5 + 3) = 16`. Bewdy.",
+    "original": "The results step shows `2 × (5 + 3) = 16`.",
+    "severity": "minor",
+    "why": "A stock tag, slightly bolted on."
+   },
+   {
+    "quote": "Have a look at\n  [Compute provider]",
+    "original": "See\n  [Compute provider]",
+    "severity": "minor",
+    "why": "\"Have a look at\" repeats in two adjacent sections."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "2 × (a + b) must be maggoted than 100",
+    "original": "For this tutorial, 2 × (a + b) must be less than 100.",
+    "severity": "critical",
+    "why": "\"Maggoted\" (drunk) replaces \"less\", so the key numeric constraint is unreadable."
+   },
+   {
+    "quote": "`FHEProcessorInput` has two paddocks.",
+    "original": "`FHEProcessorInput` has two fields.",
+    "severity": "critical",
+    "why": "Struct fields become farm paddocks."
+   },
+   {
+    "quote": "makes the sweet bugger-all ciphertext, the start value",
+    "original": "`Ciphertext::zero` makes the zero ciphertext, the start value.",
+    "severity": "critical",
+    "why": "\"Sweet bugger-all\" (nothing) misdescribes the zero ciphertext."
+   },
+   {
+    "quote": "It encrypts 1 and 2 and reckons\ntheir sum.",
+    "original": "It encrypts 1 and 2 and expects\ntheir sum.",
+    "severity": "major",
+    "why": "\"Reckons\" (opines) is the wrong sense for a test's expectation."
+   },
+   {
+    "quote": "for a source knock together",
+    "original": "for a source build",
+    "severity": "major",
+    "why": "Broken phrase."
+   },
+   {
+    "quote": "Bugger me, change the\nexpected value from 5 to 10:",
+    "original": "Change the\nexpected value from 5 to 10:",
+    "severity": "major",
+    "why": "An oath bolted onto an instruction."
+   },
+   {
+    "quote": "Well, if `pnpm dev:all` runs",
+    "original": "If `pnpm dev:all` runs",
+    "severity": "minor",
+    "why": "A filler opener, repeated throughout."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "(the code kind, not paddocks)",
+    "original": "`FHEProcessorInput` has two fields.",
+    "severity": "minor",
+    "why": "An odd aside that jokes about a confusion the reader never had."
+   },
+   {
+    "quote": "Like counting votes in a sealed box.",
+    "original": "",
+    "severity": "minor",
+    "why": "A loose analogy: sealed-box votes are opened before counting."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A clean, accurate, natural level-4 retelling that leaves every bit of code untouched.",
+  "engine": "A broken mechanical pass: several technical terms swapped for wrong-sense slang, and filler tags.",
+  "yarn": "A lively, accurate level-4 retelling with strong variety. Two asides are slightly odd."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

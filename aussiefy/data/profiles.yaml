@@ -1,0 +1,81 @@
+# Level profiles. The engine has no level logic of its own; everything a level
+# does is read from here.
+#
+# substitution: probability that a detected span is rewritten, by the class of
+#               the entry chosen (lexical = one word, phrase = short multiword,
+#               idiom = predicate/vp/clause frames or anything longer than 3 words)
+# frames:       entry frames eligible at this level
+# vulgarity:    the level's default: the strongest entry vulgarity allowed (0 nan .. 3 tradie). A caller's
+#               vulgarity wins in either direction; no level defaults to 3.
+# registers:    current | dated | archaic. Archaic entries are also gated by flag.
+# garnish:      per-sentence probability of each garnish placement
+# max_garnish:  per-text limits
+# garnish_gap:  sentences that must pass before the same placement repeats (1 = never adjacent)
+# stack:        probability of stacking a second idiom onto a descriptive slot
+# phonetic:     multiplier on each phonetic rule's own probability
+# stretch:      [min, max] vowel repeats for stretched swears
+
+policy:
+  embedder: ngram
+  similarity_threshold: 0.72
+
+# Swearing, by vulgarity (0 nan .. 3 tradie): how often the swearing comes, whatever the level. Level (below)
+# is how intensively the text is Aussified; vulgarity is how vulgar it may be. The only link between the two
+# dials is each level's default vulgarity.
+#   exclaim: per-sentence probability of a sweary opener, aside, tag or tail (garnish with vulgarity > 0)
+#   closer:  probability the text ends on a sweary closer (otherwise the level's own, clean, closer)
+#   infix:   multiplier on the swear infixes' own probabilities (phonetic.yaml rules with vulgarity > 0:
+#            "a bloody great stoush", "abso-fuckin-lutely")
+#   lean:    weight on swears when a swap has clean and swearing options (1: no preference)
+swearing:
+  0: {exclaim: 0, closer: 0, infix: 0, lean: 1.0}
+  1: {exclaim: 0.06, closer: 0.12, infix: 0.5, lean: 1.0}
+  2: {exclaim: 0.14, closer: 0.3, infix: 1.5, lean: 1.2}
+  3: {exclaim: 0.2, closer: 0.4, infix: 1.8, lean: 2.0}
+
+base:
+  frames: [np, adj, adv, interjection]
+  registers: [current]
+  garnish: {opener: 0, tag: 0, closer: 0}
+  max_garnish: {opener: 2, tag: 2, closer: 1}
+  garnish_gap: 1
+  garnish_per_sentence: 1   # one connective, opener or tag per sentence; keeps the swears from piling up
+  # Opt-in (--rewrite): sentences the dictionary barely touched and that read as formal go whole to the
+  # LLM, to be said in Aussie drawl at this level. Planned dictionary phrases must survive the rewrite.
+  # A sentence is difficult when it keeps min_formal_words Latinate words the dictionary didn't touch
+  # (proposition, consecrated, devotion), or keeps any while coverage is at most max_coverage.
+  rewrite: {min_level: 3, min_words: 6, min_formal_words: 2, max_coverage: 0.1, formal_length: 7}
+  stack: 0
+  phonetic: 0
+  stretch: [3, 5]
+
+levels:
+  1:
+    substitution: {lexical: 0.3, phrase: 0.0, idiom: 0.0}
+    frames: [np, adj, interjection]
+    vulgarity: 0
+  2:
+    substitution: {lexical: 0.55, phrase: 0.5, idiom: 0.0}
+    frames: [np, adj, adv, interjection, imperative]
+    vulgarity: 0
+  3:
+    substitution: {lexical: 0.7, phrase: 0.7, idiom: 0.6}
+    frames: [np, adj, adv, interjection, imperative, predicate_adj, vp, clause]
+    vulgarity: 1
+  4:
+    substitution: {lexical: 0.85, phrase: 0.85, idiom: 0.9}
+    frames: [np, adj, adv, interjection, imperative, predicate_adj, vp, clause]
+    vulgarity: 1
+    garnish: {connective: 0.2, opener: 0.2, tag: 0.3, tail: 0.3, closer: 0}
+    phonetic: 0.5
+    max_garnish: {opener: 1, tag: 2, tail: 1, closer: 0}
+  5:
+    substitution: {lexical: 1.0, phrase: 1.0, idiom: 1.0}
+    frames: [np, adj, adv, interjection, imperative, predicate_adj, vp, clause]
+    vulgarity: 2
+    registers: [current, dated]
+    garnish: {connective: 0.4, opener: 0.45, tag: 0.5, aside: 0.3, tail: 0.6, riff: 0.5, closer: 1.0}
+    max_garnish: {connective: 6, opener: 3, tag: 3, aside: 4, tail: 2, riff: 2, closer: 1}
+    stack: 0.35
+    phonetic: 1.0
+    stretch: [3, 6]

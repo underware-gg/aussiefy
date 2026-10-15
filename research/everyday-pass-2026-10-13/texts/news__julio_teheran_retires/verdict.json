@@ -1,0 +1,157 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 3,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 3,
+   "register": 1,
+   "tone": 5,
+   "flow": 4,
+   "variety": 1,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every fact survives: two-time All-Star, Monday, age 35, the shoulder, Colombia's \"3-1 win over Team Panama\", thirteen years, all five clubs, 2011 debut at 20, 2014 and 2016 selections, \"an 81-82 record, with a 3.85 ERA, 1.223 WHIP and 1,260 strikeouts in 1,470.2 innings\", the Mexican seasons.",
+   "sense": "\"with a crook shoulder\" and \"he also had stints with\" fit, but \"he's hanging up the boots\" strains: boots belong to football codes, not baseball.",
+   "authenticity": "Natural Australian sports-desk phrasing: \"The call came two days after he was pulled from a scheduled start\", \"picking up All-Star selections\"; only the boots idiom misfires.",
+   "register": "A light level-2 touch, clean: \"hanging up the boots\", \"crook shoulder\", \"stints\".",
+   "tone": "Stays a straight news report: \"Teherán had helped Team Colombia to a 3-1 win over Team Panama in the WBC before announcing his retirement.\"",
+   "flow": "Smooth, with one awkward tense shift: \"announced on Monday that he's hanging up the boots, at the age of 35.\"",
+   "variety": "Different touches each paragraph: \"hanging up the boots\", \"crook\", \"stints\", \"picking up\", \"put together\".",
+   "essence": "Plainly the same retirement news item."
+  },
+  "engine": {
+   "meaning": "The original verbatim, so every fact is present: \"Over his MLB career, Teherán compiled a 81-82 record\".",
+   "sense": "No Australian terms, so none misfire.",
+   "authenticity": "Nothing Australian; US sports usage left as is: \"he was scratched from a scheduled start\".",
+   "register": "Wholly untranslated: \"announced his retirement from baseball on Monday\" and every other sentence unchanged.",
+   "tone": "The original news tone, unchanged.",
+   "flow": "Reads as the original news copy, with its \"a 81-82 record\" slip.",
+   "variety": "No slang at all.",
+   "essence": "It is the original report."
+  },
+  "yarn": {
+   "meaning": "All facts kept: \"called time on his baseball career on Monday, at the age of 35\", the shoulder injury, the Panama win, the five clubs, the stats (correcting to \"an 81-82 record\"), the Mexican seasons.",
+   "sense": "Every term fits: \"called time on his baseball career\", \"he was pulled from a scheduled start\", \"spent his first nine seasons with the club\", \"picking up All-Star selections\".",
+   "authenticity": "Reads like an Australian news report: \"called time on\", \"with the club\", \"at the 2026 World Baseball Classic\".",
+   "register": "Very light: the Australian is confined to \"called time on\", \"the club\" and a few idiomatic rewordings; at the low edge of level 2.",
+   "tone": "A straight news report, as the original.",
+   "flow": "Smooth: \"Teherán had a thirteen-year MLB career, mostly with the Atlanta Braves, though he also played for the Los Angeles Angels\".",
+   "variety": "Few touches, each different: \"called time\", \"pulled\", \"the club\", \"picking up\", \"put together\".",
+   "essence": "Plainly the same news item."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "he's hanging up the boots",
+    "original": "announced his retirement from baseball",
+    "severity": "major",
+    "why": "Football idiom applied to a baseball pitcher; an Australian would notice the mismatch."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "announced his retirement from baseball on Monday",
+    "original": "announced his retirement from baseball on Monday",
+    "severity": "critical",
+    "why": "The whole text is returned untranslated."
+   },
+   {
+    "quote": "he was scratched from a scheduled start",
+    "original": "he was scratched from a scheduled start",
+    "severity": "minor",
+    "why": "US idiom left in."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "spent his first nine seasons with the club",
+    "original": "spent his first nine seasons with the team",
+    "severity": "minor",
+    "why": "Representative of a very light touch; at the bottom of the level-2 brief."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Accurate and natural, with a good \"crook shoulder\", but a football idiom misapplied to baseball.",
+  "engine": "The original unchanged; nothing Australian.",
+  "yarn": "A clean, natural Australian news rewrite with apt idiom; very light but well judged."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "engine",
+    "yarn"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed",
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "engine",
+    "yarn"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

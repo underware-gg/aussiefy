@@ -1,0 +1,2409 @@
+# Verifier 3 of 3, classics round 2026-10-11: one decision per candidate in candidates-3.yaml.
+- decision: add_entry
+  candidate: swag
+  entry:
+    id: a-swag
+    form: a swag
+    variants: []
+    concept:
+    - NEW:BEDROLL
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: A bedroll with your belongings rolled up inside; now also a canvas camping bedroll.
+    sources:
+    - https://en.wiktionary.org/wiki/swag
+  new_concept:
+    id: BEDROLL
+    description: A bedroll, with one's belongings rolled inside it.
+    triggers:
+      np:
+      - a bedroll
+      - bedroll
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Iconic and still current for the camping bedroll; "a swag of" (= a lot) is a separate sense not covered here.
+- decision: add_entry
+  candidate: billabong
+  entry:
+    id: a-billabong
+    form: a billabong
+    variants: []
+    concept:
+    - NEW:WATERHOLE
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: A waterhole, especially a pool cut off in an old river bend.
+    sources:
+    - https://en.wiktionary.org/wiki/billabong
+  new_concept:
+    id: WATERHOLE
+    description: A waterhole, especially a pool left in a dry or dead river channel.
+    triggers:
+      np:
+      - a waterhole
+      - waterhole
+      - an oxbow lake
+      - oxbow lake
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Current Australian English (not slang); seed item.
+- decision: add_entry
+  candidate: jumbuck
+  entry:
+    id: a-jumbuck
+    form: a jumbuck
+    variants: []
+    concept:
+    - NEW:SHEEP
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: dated
+    region: []
+    replaces: []
+    gloss: A sheep (old bush word).
+    sources:
+    - https://en.wiktionary.org/wiki/jumbuck
+  new_concept:
+    id: SHEEP
+    description: A sheep.
+    triggers:
+      np:
+      - a sheep
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Seed; dated bush word. Trigger only "a sheep" (not bare "sheep", which hits "black sheep", "like sheep").
+- decision: add_entry
+  candidate: waltzing Matilda
+  entry:
+    id: go-waltzing-matilda
+    form: go waltzing Matilda
+    variants: []
+    concept:
+    - NEW:TRAMP_ROADS
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: dated
+    region: []
+    replaces: []
+    gloss: Tramp the roads on foot with your swag on your back.
+    sources:
+    - https://en.wiktionary.org/wiki/waltz_Matilda
+  new_concept:
+    id: TRAMP_ROADS
+    description: Travel the roads on foot carrying all one owns.
+    triggers:
+      vp:
+      - tramp the roads
+      - tramp the country roads
+      - travel the roads on foot
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Seed; dated; narrow triggers only.
+- decision: add_trigger
+  candidate: the bush
+  triggers_to_add:
+    FOREST:
+      np:
+      - the backcountry
+      - the backwoods
+  why: Existing entry the-bush (FOREST) covers it; the classic "country away from towns" sense needs these extra
+    triggers. "the outback" left out (itself Aussie).
+- decision: add_entry
+  candidate: clobber
+  entry:
+    id: clobber-clothes
+    form: clobber
+    variants: []
+    concept:
+    - NEW:CLOTHES
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: dated
+    region: []
+    replaces: []
+    gloss: Clothes, one's gear.
+    sources:
+    - https://en.wiktionary.org/wiki/clobber
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: CLOTHES
+    description: Clothes; what one is wearing.
+    triggers:
+      np:
+      - clothes !line|lines|peg|pegs|horse|hanger|hangers|basket|baskets|dryer|dryers|shop|shops|store|stores|brush|rack|racks
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Aus/UK slang, dated but still heard. The trigger excludes clothes-line, clothes-peg and so on. THRASH already
+    has "clobber {obj}" as a trigger (the hitting sense); that is a different frame.
+- decision: add_entry
+  candidate: dam
+  entry:
+    id: a-dam-farm
+    form: a dam
+    variants: []
+    concept:
+    - NEW:FARM_DAM
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: 'A farm dam: the pond itself, not just the wall.'
+    sources:
+    - https://en.wiktionary.org/wiki/dam
+  new_concept:
+    id: FARM_DAM
+    description: A farm pond or stock pond (an Australian "dam").
+    triggers:
+      np:
+      - a farm pond
+      - a stock pond
+      - the farm pond
+      - the stock pond
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: 'Aus/SA sense: the water body. Triggers avoid "reservoir" (city reservoirs).'
+- decision: add_entry
+  candidate: mob
+  entry:
+    id: a-mob-of
+    form: a mob of {np}
+    variants: []
+    concept:
+    - NEW:HERD_OF
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: 'A mob of (sheep, cattle, roos, people): a herd, flock or crowd.'
+    sources:
+    - https://en.wiktionary.org/wiki/mob
+    - https://slll.cass.anu.edu.au/centres/andc/australian-words-m
+  new_concept:
+    id: HERD_OF
+    description: A herd, flock or crowd of animals or people.
+    triggers:
+      np:
+      - a herd of {np}
+      - a flock of {np}
+      - a crowd of {np}
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Existing entry "mob" only covers NATION (Aboriginal English "one's people"). The herd or crowd sense is everyday
+    Australian, so it gets a separate form with an "of {np}" slot (its key differs from "mob").
+  audit: 'mob (NATION): fine as is, but it is the only sense; the herd/crowd sense goes in as a-mob-of. Keep NATION
+    gated to respectful use (Aboriginal English).'
+- decision: reject
+  candidate: stringybark
+  reason: not_lexical
+  why: Eucalypt species name; no plain-English equivalent.
+- decision: add_entry
+  candidate: track
+  entry:
+    id: a-walking-track
+    form: a walking track
+    variants: []
+    concept:
+    - NEW:WALKING_TRACK
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces: []
+    gloss: A bush walking track (where Americans say "trail").
+    sources:
+    - https://en.wiktionary.org/wiki/track
+    - https://en.wikivoyage.org/wiki/Australian_English
+  new_concept:
+    id: WALKING_TRACK
+    description: A walking or hiking trail.
+    triggers:
+      np:
+      - a hiking trail
+      - a walking trail
+      - a hiking path
+      - a nature trail
+      - the hiking trail
+      - the walking trail
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Australians say "walking track" or "bush track" for a hiking trail. Bare "trail" and "track" are too broad
+    to trigger; "on the track" (swagging) is not covered.
+- decision: style_guide
+  candidate: -ee days
+  guidance: 'Dennis eye-dialect: Saturdee, Sundee, Mondee. Only for a period larrikin voice at level 5, and sparingly.'
+  why: Spelling pattern, not a swap.
+- decision: style_guide
+  candidate: all right (tag)
+  guidance: Laconic confirming tag after a flat statement ("It's dry, all right."); understatement, not a word swap.
+  why: General English tag; belongs in the voice guide.
+- decision: reject
+  candidate: ar
+  reason: not_lexical
+  why: A spelling of "ah"/"aw"; tone carries the meaning.
+- decision: reject
+  candidate: baccy
+  reason: not_aussie
+  why: 'General British/Commonwealth slang for tobacco (Wiktionary: no regional label); no Aussie flavour.'
+- decision: add_entry
+  candidate: back the barrow
+  entry:
+    id: back-the-barrow
+    form: back {poss} barrow in
+    variants: []
+    concept:
+    - NEW:BUTT_IN
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: archaic
+    region: []
+    replaces: []
+    gloss: Barge in where you are not wanted (Dennis).
+    sources:
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: BUTT_IN
+    description: Intervene in someone's affairs uninvited.
+    triggers:
+      vp:
+      - butt in
+      - stick {poss} oar in
+      - put {poss} oar in
+      - poke {poss} nose in
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: 'Dennis larrikin slang, archaic: high incoherence.'
+- decision: reject
+  candidate: bark kitchen
+  reason: not_lexical
+  why: Historical bush building; no plain-English phrase to swap.
+- decision: reject
+  candidate: bear
+  reason: wrong_sense
+  why: '"Native bear" = koala is archaic; turning "koala" into "bear" would mislead a modern reader.'
+- decision: reject
+  candidate: better again
+  reason: not_lexical
+  why: LLM-only phrasing; plain English with no Aussie lexical content.
+- decision: reject
+  candidate: a bit later
+  reason: not_lexical
+  why: Plain English.
+- decision: reject
+  candidate: bit of skirt
+  reason: offensive
+  why: Objectifying term for a woman (also British).
+- decision: reject
+  candidate: blessed
+  reason: not_aussie
+  why: Ironic euphemistic intensifier shared with British English; archaic.
+- decision: merge
+  candidate: bloke
+  into: bloke
+  why: Existing entry bloke (MAN) has the sense; "dude" not added as a trigger (vocative "dude" would misfire).
+- decision: merge
+  candidate: bloody big
+  into: 'VERY: bloody'
+  why: The "bloody" intensifier exists; "bloody great" also under HUGE.
+- decision: reject
+  candidate: the bloody thing
+  reason: not_lexical
+  why: Plain phrase plus the existing VERY "bloody".
+- decision: add_entry
+  candidate: blow-ins
+  entry:
+    id: a-blow-in
+    form: a blow-in
+    variants: []
+    concept:
+    - NEW:NEWCOMER
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    gloss: A newcomer to a place or community.
+    sources:
+    - https://en.wiktionary.org/wiki/blow-in
+  new_concept:
+    id: NEWCOMER
+    description: A newcomer to a place or community.
+    triggers:
+      np:
+      - a newcomer
+      - newcomers
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Aus/Irish, current. "an outsider" left out (betting sense).
+- decision: merge
+  candidate: bonzer
+  into: bonza
+  why: Existing entry bonza (EXCELLENT) already has the variant "bonzer".
+- decision: add_entry
+  candidate: boshter
+  entry:
+    id: boshter
+    form: boshter
+    variants: []
+    concept:
+    - EXCELLENT
+    frame: adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: archaic
+    region: []
+    replaces: []
+    gloss: First-rate (old larrikin slang).
+    sources:
+    - https://en.wiktionary.org/wiki/boshter
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Dennis glossary groups it with bonzer/bosker; Wiktionary marks it obsolete AU slang.
+- decision: add_entry
+  candidate: breast up to
+  entry:
+    id: breast-up-to
+    form: breast up to {obj}
+    variants: []
+    concept:
+    - NEW:ACCOST
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: archaic
+    region: []
+    replaces: []
+    gloss: Walk straight up to someone and speak to them.
+    sources:
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: ACCOST
+    description: Walk up to someone and speak to them.
+    triggers:
+      vp:
+      - walk up to {obj}
+      - march up to {obj}
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: 'Dennis glossary: to accost. Archaic.'
+- decision: add_entry
+  candidate: brums
+  entry:
+    id: brums
+    form: brums
+    variants: []
+    concept:
+    - NEW:TRINKETS
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: archaic
+    region: []
+    replaces: []
+    gloss: Cheap, flashy trinkets (Dennis).
+    sources:
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: TRINKETS
+    description: Cheap, flashy trinkets or jewellery.
+    triggers:
+      np:
+      - cheap trinkets
+      - tacky jewellery
+      - tacky jewelry
+      - cheap jewellery
+      - gaudy trinkets
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Dennis glossary (from Brummagem); archaic.
+- decision: merge
+  candidate: Bugger all ya can do about it
+  into: 'NOTHING: bugger all'
+  why: Existing form; the rest is ordinary phrasing.
+- decision: add_entry
+  candidate: bush horse
+  entry:
+    id: a-brumby
+    form: a brumby
+    variants: []
+    concept:
+    - NEW:WILD_HORSE
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: A wild horse running free in the bush.
+    sources:
+    - https://en.wiktionary.org/wiki/brumby
+  new_concept:
+    id: WILD_HORSE
+    description: A wild or feral horse.
+    triggers:
+      np:
+      - a wild horse
+      - wild horses !couldn't|could|wouldn't|would|won't|will|can't|cannot
+      - a feral horse
+      - feral horses
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: '"Bush horse" is dated; brumby is the current Australian word for it. The trigger excludes "wild horses couldn''t/wouldn''t".'
+- decision: reject
+  candidate: call it quits
+  reason: not_aussie
+  why: General English, and already a QUIT trigger.
+- decision: reject
+  candidate: catch (a horse)
+  reason: not_lexical
+  why: Plain English verb use.
+- decision: reject
+  candidate: chat
+  reason: not_aussie
+  why: The British "chat up" sense; bare "chat" reads as "converse" today, so no safe swap.
+- decision: reject
+  candidate: cheque
+  reason: not_lexical
+  why: A shearer's end-of-job pay; a modern reader would read a bank cheque. No safe swap.
+- decision: add_entry
+  candidate: chiack
+  entry:
+    id: chiack
+    form: chiack
+    variants: []
+    concept:
+    - MOCK
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: dated
+    region: []
+    replaces: []
+    gloss: Tease or rib someone with cheeky banter.
+    sources:
+    - https://en.wiktionary.org/wiki/chiack
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Aus/NZ/UK; dated. "chiack him" for "tease him".
+- decision: reject
+  candidate: chuck up
+  reason: wrong_sense
+  why: Dennis "give up"; today "chuck up" means vomit, so it would mislead.
+- decision: add_entry
+  candidate: cliner
+  entry:
+    id: a-cliner
+    form: a cliner
+    variants: []
+    concept:
+    - NEW:GIRLFRIEND
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: archaic
+    region: []
+    replaces: []
+    gloss: A young woman; a bloke's sweetheart (Dennis).
+    sources:
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: GIRLFRIEND
+    description: A man's girlfriend or sweetheart.
+    triggers:
+      np:
+      - his girlfriend
+      - my girlfriend
+      - a girlfriend
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Dennis glossary; archaic. Triggers are possessive or indefinite only (bare "girlfriends" also means female
+    friends).
+- decision: reject
+  candidate: come round
+  reason: not_aussie
+  why: General English "visit".
+- decision: add_entry
+  candidate: coot
+  entry:
+    id: an-old-coot
+    form: an old coot
+    variants: []
+    concept:
+    - OLD_MAN
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces:
+    - an old fool
+    - a silly old fool
+    gloss: A foolish or odd old fellow.
+    sources:
+    - https://en.wiktionary.org/wiki/coot
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Shared with British English, but common in Australia ("silly old coot").
+- decision: add_entry
+  candidate: cop it sweet
+  entry:
+    id: cop-it-sweet
+    form: cop it sweet
+    variants: []
+    concept:
+    - NEW:TAKE_IT
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    gloss: Take a setback or punishment without complaining.
+    sources:
+    - https://www.dictionary.com/browse/cop-
+    - https://greensdictofslang.com/entry/mhhwrni
+  new_concept:
+    id: TAKE_IT
+    description: Accept a setback or punishment without complaint.
+    triggers:
+      vp:
+      - take it on the chin
+      - accept it without complaint
+      - accept it without complaining
+      - grin and bear it
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Distinctly Australian. The search summary gives the sense "accept a penalty without complaint", with a second
+    sense "have good luck".
+- decision: add_entry
+  candidate: couldn't be buggered
+  entry:
+    id: couldnt-be-buggered
+    form: '{subj} couldn''t be buggered'
+    variants: []
+    concept:
+    - NEW:CANT_BE_BOTHERED
+    frame: clause
+    intensity: 3
+    vulgarity: 1
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: Couldn't be bothered, said with feeling.
+    sources:
+    - https://wordhistories.net/2022/09/20/imbuggerance-indifference/
+    - https://en.wiktionary.org/wiki/buggered
+  new_concept:
+    id: CANT_BE_BOTHERED
+    description: Unwilling to make the effort.
+    triggers:
+      clause:
+      - '{subj} couldn''t be bothered'
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Common Aus/UK; LLM-proposed, with sources found by search. Past tense only, to match its trigger.
+- decision: add_entry
+  candidate: crack a boo
+  entry:
+    id: never-cracked-a-boo
+    form: '{subj} never cracked a boo'
+    variants: []
+    concept:
+    - NEW:KEEP_MUM
+    frame: clause
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: archaic
+    region: []
+    replaces: []
+    gloss: 'Never let on: said nothing and showed no feeling.'
+    sources:
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: KEEP_MUM
+    description: 'Give nothing away: not reveal a secret or show feeling.'
+    triggers:
+      clause:
+      - '{subj} never let on'
+      - '{subj} didn''t let on'
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: 'Dennis glossary: divulge a secret or betray emotion; nearly always negative. Archaic. Clause triggers carry
+    the negation, so the meaning is kept.'
+- decision: reject
+  candidate: crafty buggers
+  reason: not_lexical
+  why: Ad-hoc phrasing.
+- decision: merge
+  candidate: crook (bad, dishonest)
+  into: 'SICK: crook'
+  why: The form "crook" exists (SICK; also ANGRY "crook on"), so a second entry would be dropped as a duplicate.
+  audit: 'crook: add the current "bad, no good, dishonest" sense ("a crook deal", "that crook mob", "things are
+    crook") by hand, e.g. concept DODGY or AWFUL, attributive/predicative.'
+- decision: reject
+  candidate: cuddle
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: cushy
+  reason: not_aussie
+  why: 'General informal English (Wiktionary: no regional label).'
+- decision: merge
+  candidate: dead easy
+  into: 'VERY: dead'
+  why: The "dead" intensifier exists.
+- decision: add_entry
+  candidate: deener
+  entry:
+    id: a-deener
+    form: a deener
+    variants: []
+    concept:
+    - NEW:SHILLING
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: archaic
+    region: []
+    replaces: []
+    gloss: A shilling (old slang).
+    sources:
+    - https://en.wiktionary.org/wiki/deener
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: SHILLING
+    description: A shilling coin.
+    triggers:
+      np:
+      - a shilling
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: AU slang; archaic.
+- decision: add_entry
+  candidate: didn't give a stuff
+  entry:
+    id: give-a-stuff-about
+    form: give a stuff about
+    variants: []
+    concept:
+    - CARE_ABOUT
+    frame: vp
+    intensity: 3
+    vulgarity: 1
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    gloss: 'Care at all (used in the negative: "didn''t give a stuff about").'
+    sources:
+    - https://en.wiktionary.org/wiki/give_a_stuff
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: 'Wiktionary: UK/Australian, chiefly negative. Same pattern as the existing "give two hoots about".'
+- decision: merge
+  candidate: dinkum
+  into: dinkum
+  why: Existing entry (GENUINE, dated); "fair dinkum" also exists.
+- decision: reject
+  candidate: dirt
+  reason: not_lexical
+  why: Bare "dirt" has too many senses for a trigger; archaic sense.
+- decision: reject
+  candidate: dishes out
+  reason: not_aussie
+  why: General English.
+- decision: add_entry
+  candidate: do a get
+  entry:
+    id: do-a-get
+    form: do a get
+    variants: []
+    concept:
+    - RUN_OFF
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: archaic
+    region: []
+    replaces: []
+    gloss: Clear off in a hurry (Dennis).
+    sources:
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Dennis glossary; archaic.
+- decision: add_entry
+  candidate: do one's dash
+  entry:
+    id: done-ones-dash
+    form: '{subj} {have} done {poss} dash'
+    variants: []
+    concept:
+    - NEW:BLOWN_CHANCE
+    frame: clause
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    gloss: Have used up your chances; be finished.
+    sources:
+    - https://greensdictofslang.com/entry/anvc2qa
+    - https://slll.cass.anu.edu.au/centres/andc/australian-words-d
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: BLOWN_CHANCE
+    description: Have used up or lost one's chance; be finished.
+    triggers:
+      clause:
+      - '{subj} {have} blown {poss} chance'
+      - '{subj} {have} blown it'
+      - '{subj} {have} missed {poss} chance'
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: high
+  why: Australian, still heard ("I've done my dash").
+- decision: merge
+  candidate: do the toff
+  into: toff
+  why: Same word as the toff candidate (np); the verb phrase is a one-off use.
+- decision: reject
+  candidate: doesn't know what to do with himself
+  reason: not_lexical
+  why: Plain English.
+- decision: reject
+  candidate: don't you bloody dare
+  reason: not_lexical
+  why: Plain phrase with the existing "bloody" infix.
+- decision: add_entry
+  candidate: dot
+  entry:
+    id: dot-one
+    form: dot {obj} one
+    variants: []
+    concept:
+    - NEW:PUNCH
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    gloss: Punch someone.
+    sources:
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: PUNCH
+    description: Punch someone.
+    triggers:
+      vp:
+      - punch {obj}
+      - sock {obj}
+      - thump {obj}
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Dennis glossary "dot in the eye"; "dot him one" still heard in Aus/UK.
+- decision: add_entry
+  candidate: dray
+  entry:
+    id: a-dray
+    form: a dray
+    variants: []
+    concept:
+    - NEW:DRAY
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: dated
+    region: []
+    replaces: []
+    gloss: A heavy low cart pulled by horses or bullocks.
+    sources:
+    - https://en.wiktionary.org/wiki/dray
+  new_concept:
+    id: DRAY
+    description: A heavy horse- or bullock-drawn cart.
+    triggers:
+      np:
+      - a horse-drawn cart
+      - a bullock cart
+      - an ox cart
+      - an oxcart
+      - a farm cart
+      - a hay cart
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Historical, shared with British English; useful in period retellings. Triggers avoid bare "cart" (shopping
+    cart, golf cart).
+- decision: style_guide
+  candidate: dropped -g
+  guidance: Write -ing as -in' in casual speech (keepin', goin'); already the engine's drawl habit. For dialogue,
+    not narration at low levels.
+  why: Spelling pattern.
+- decision: style_guide
+  candidate: dropped h
+  guidance: Dennis drops initial h ('ere, 'eart). Reads Cockney rather than modern Australian, so only in a pastiche
+    of Dennis.
+  why: Spelling pattern.
+- decision: reject
+  candidate: dyin' to
+  reason: not_aussie
+  why: General colloquial English.
+- decision: reject
+  candidate: eyes out on stalks
+  reason: not_aussie
+  why: General British idiom; LLM-only.
+- decision: add_entry
+  candidate: fair cow
+  entry:
+    id: a-fair-cow
+    form: a fair cow
+    variants: []
+    concept:
+    - NUISANCE
+    frame: np
+    intensity: 3
+    vulgarity: 1
+    incoherence: 4
+    register: dated
+    region: []
+    replaces:
+    - a real pain
+    - a total nightmare
+    gloss: Something or someone thoroughly rotten.
+    sources:
+    - https://greensdictofslang.com/entry/ktkmxmi
+    - https://www.merriam-webster.com/dictionary/fair%20cow
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept: null
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: high
+  why: Aus/NZ; dated. Said of people it can read as insulting (especially to women).
+- decision: reject
+  candidate: fair thing
+  reason: not_lexical
+  why: No clear plain trigger; "fair enough" and "fair go" already cover the sense.
+- decision: reject
+  candidate: fall for
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: fire in yer belly
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: fit like a glove
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: flat (dupe)
+  reason: not_aussie
+  why: Old British cant for a dupe; collides with "flat" (apartment, level).
+- decision: style_guide
+  candidate: me for my
+  guidance: Use "me" for "my" in broad dialogue ("me mate", "me ute"); a drawl habit for levels 4-5.
+  why: Grammar pattern.
+- decision: reject
+  candidate: fright of his life
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: fuckin'
+  reason: not_aussie
+  why: A general English intensifier; the swearing policy covers it, not a dictionary entry.
+- decision: merge
+  candidate: furphy
+  into: a-furphy
+  why: Existing entry (FALSE_RUMOUR) has the right sense; "a myth" and "fake news" not added as triggers (wrong
+    senses).
+- decision: reject
+  candidate: gear
+  reason: not_lexical
+  why: Bare "gear" has too many senses for a trigger; see "get yer gear off".
+- decision: add_entry
+  candidate: get yer gear off
+  entry:
+    id: get-your-gear-off
+    form: get {poss} gear off
+    variants: []
+    concept:
+    - NEW:UNDRESS
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: Take your clothes off.
+    sources:
+    - https://en.wiktionary.org/wiki/gear
+  new_concept:
+    id: UNDRESS
+    description: Take off one's clothes.
+    triggers:
+      vp:
+      - undress
+      - get undressed
+      - take off {poss} clothes
+      - take {poss} clothes off
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Common Aus/UK colloquial ("get your gear off"); two LLM retellings proposed it, and I am confident of it.
+- decision: merge
+  candidate: gets her gear off
+  into: get yer gear off
+  why: Same expression, inflected.
+- decision: reject
+  candidate: the glassy eye
+  reason: wrong_sense
+  why: Dennis "cold disdainful stare"; today "glassy eyes" means dazed or drunk.
+- decision: reject
+  candidate: go way back
+  reason: not_aussie
+  why: General English.
+- decision: style_guide
+  candidate: goes
+  guidance: Quotative "goes" ("so he goes, '...'") in a broad yarn voice; not a swap.
+  why: Discourse habit.
+- decision: reject
+  candidate: gone to Queensland droving
+  reason: not_lexical
+  why: A famous quotation, not an idiom.
+- decision: reject
+  candidate: got a clue
+  reason: not_aussie
+  why: General colloquial English.
+- decision: style_guide
+  candidate: the great Australian adjective
+  guidance: Liberal, unmalicious 'bloody' between adjective and noun ('them bloody little possums'); Lawson's '(adjective)'.
+    Already the VERY 'bloody' entry; style note on placement.
+  why: Discourse habit.
+- decision: add_entry
+  candidate: gully
+  entry:
+    id: a-gully
+    form: a gully
+    variants: []
+    concept:
+    - NEW:GULLY
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces: []
+    gloss: A narrow valley or ravine worn by water.
+    sources:
+    - https://en.wiktionary.org/wiki/gully
+  new_concept:
+    id: GULLY
+    description: A ravine or narrow water-worn valley.
+    triggers:
+      np:
+      - a ravine
+      - the ravine
+      - a narrow valley
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: General English, but the everyday Australian word for it.
+- decision: reject
+  candidate: had it comin'
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: handies
+  reason: wrong_sense
+  why: Dennis "holding hands"; today "handies" reads as sexual slang.
+- decision: add_entry
+  candidate: hard case
+  entry:
+    id: a-hard-case
+    form: a hard case
+    variants: []
+    concept:
+    - RASCAL
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: dated
+    region: []
+    replaces:
+    - a real character
+    - quite a character
+    - a bit of a character
+    gloss: A droll, amusing character who is a bit of a rogue.
+    sources:
+    - https://en.wiktionary.org/wiki/hard_case
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Wiktionary labels it NZ; also Australian, dated (Dennis).
+- decision: merge
+  candidate: have a squiz
+  into: a-squiz
+  why: LOOK "a squiz" already gives "have a squiz".
+- decision: reject
+  candidate: head 'em
+  reason: not_lexical
+  why: Two-up; no plain-English phrase to swap.
+- decision: reject
+  candidate: hell's bells
+  reason: not_aussie
+  why: 'General English exclamation (Wiktionary: no regional label).'
+- decision: merge
+  candidate: hidings
+  into: 'THRASH: give {obj} a hiding'
+  why: Existing form.
+- decision: reject
+  candidate: holy wars
+  reason: not_lexical
+  why: Apparently a one-off comic oath of Dennis's, not established.
+- decision: reject
+  candidate: hop scrub
+  reason: not_lexical
+  why: Plant name; no plain equivalent.
+- decision: reject
+  candidate: how d'ya figure
+  reason: not_aussie
+  why: American in origin.
+- decision: gate
+  candidate: how things were travellin'
+  entry:
+    id: how-ya-travellin
+    form: how ya travellin'
+    variants: []
+    concept:
+    - HOW_ARE_YOU
+    frame: interjection
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    gloss: How are you getting on?
+    sources:
+    - https://en.wikivoyage.org/wiki/Australian_English
+    flags:
+    - dubious_meaning
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: low
+  why: '"How are you travelling?" = how are you getting on is Australian, but my search found only "how ya goin''"
+    attested. Gated.'
+- decision: style_guide
+  candidate: I reckon
+  guidance: '"I reckon" as a hedge or opinion marker; THINK already maps think to reckon.'
+  why: Hedge.
+- decision: add_entry
+  candidate: imshi
+  entry:
+    id: imshi
+    form: imshi
+    variants:
+    - imshee
+    concept:
+    - GO_AWAY
+    frame: imperative
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: archaic
+    region: []
+    replaces: []
+    gloss: Clear off! (soldiers' Arabic from WWI).
+    sources:
+    - https://en.wiktionary.org/wiki/imshee
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Diggers' WWI slang; archaic.
+- decision: reject
+  candidate: in me day
+  reason: not_lexical
+  why: Plain phrase plus the "me" for "my" habit.
+- decision: reject
+  candidate: innocent as they come
+  reason: not_lexical
+  why: Plain English.
+- decision: style_guide
+  candidate: Irish-Australian vowel spellings
+  guidance: Rudd's Irish-Australian spellings (rooned, cruke, bedad, ye) mark a period Irish-Catholic farming voice;
+    character dialogue only.
+  why: Spelling pattern.
+- decision: style_guide
+  candidate: ironic nothing
+  guidance: Ironic "nothing" after praise means "and how!" ("a bonzer feed, nothing!"); dated, for a period voice.
+  why: Discourse habit.
+- decision: gate
+  candidate: the joes
+  entry:
+    id: the-joes
+    form: the joes
+    variants: []
+    concept:
+    - SAD
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: archaic
+    region: []
+    replaces: []
+    gloss: Low spirits; the blues (Dennis).
+    sources:
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+    flags:
+    - archaic
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: No safe plain-English trigger; kept for the yarn-mode lookup only. "the blues" is a music genre too, so replaces
+    is empty.
+- decision: reject
+  candidate: kangaroo dog
+  reason: not_lexical
+  why: A breed name; "a hound" is too broad for a trigger.
+- decision: reject
+  candidate: keeps his trap shut
+  reason: not_aussie
+  why: General English.
+- decision: add_entry
+  candidate: kid stakes
+  entry:
+    id: kid-stakes
+    form: kid stakes
+    variants:
+    - kidstakes
+    concept:
+    - NEW:CHILDS_PLAY
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: dated
+    region: []
+    replaces: []
+    gloss: Kids' stuff; child's play, or mere pretence.
+    sources:
+    - https://www.macquariedictionary.com.au/?p=10990
+    - https://greensdictofslang.com/entry/5dsgtha
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: CHILDS_PLAY
+    description: Something trivial; kids' stuff.
+    triggers:
+      np:
+      - child's play
+      - kids' stuff
+      - kid stuff
+      - kiddie stuff
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: high
+  why: Aus/NZ, from the 1910s; dated. Also spelt "kidstakes".
+- decision: merge
+  candidate: kip
+  into: a-kip
+  why: The two-up paddle sense has no plain-English trigger; the existing NAP sense stays as it is.
+- decision: add_entry
+  candidate: knock-down
+  entry:
+    id: give-a-knock-down
+    form: give {obj} a knock-down to {np}
+    variants: []
+    concept:
+    - NEW:INTRODUCE
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: dated
+    region: []
+    replaces: []
+    gloss: Introduce someone to someone (Dennis).
+    sources:
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: INTRODUCE
+    description: Introduce one person to another.
+    triggers:
+      vp:
+      - introduce {obj} to {np}
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: 'Dennis glossary: a formal introduction. Dated.'
+- decision: reject
+  candidate: knocks her up
+  reason: wrong_sense
+  why: '"Knock up" = make hastily, but it reads as "make pregnant" (US and Aus); FOUND already has "knock together".'
+- decision: reject
+  candidate: lark
+  reason: not_aussie
+  why: Shared British English.
+- decision: reject
+  candidate: lettin' on / let on
+  reason: not_aussie
+  why: General English; its negated form is a trigger of KEEP_MUM (crack a boo).
+- decision: reject
+  candidate: like blazes
+  reason: not_aussie
+  why: Shared British/US.
+- decision: add_entry
+  candidate: lob
+  entry:
+    id: lob
+    form: lob
+    variants: []
+    concept:
+    - ARRIVE
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    gloss: Turn up, arrive ("lobbed in about ten").
+    sources:
+    - https://en.wiktionary.org/wiki/lob
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: 'Wiktionary: AU informal, to arrive.'
+- decision: reject
+  candidate: the lot of 'em
+  reason: not_lexical
+  why: Plain phrase.
+- decision: reject
+  candidate: mafeesh
+  reason: not_lexical
+  why: WWI Arabic "finished"; "that's it" and "it's over" are too broad to trigger, and there is no concept.
+- decision: reject
+  candidate: makin' out / make out
+  reason: wrong_sense
+  why: '"Make out" = pretend collides with the US "kiss"; general English anyway.'
+- decision: reject
+  candidate: the man from Snowy River
+  reason: not_lexical
+  why: Proper name.
+- decision: reject
+  candidate: maul
+  reason: not_lexical
+  why: General English verb (handle roughly); the amorous sense is archaic, with no safe trigger.
+- decision: add_entry
+  candidate: mix it
+  entry:
+    id: mix-it
+    form: mix it
+    variants: []
+    concept:
+    - NEW:COME_TO_BLOWS
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    gloss: Get stuck into a fight.
+    sources:
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: COME_TO_BLOWS
+    description: Start or get into a fist fight.
+    triggers:
+      vp:
+      - come to blows
+      - trade blows
+      - get into a fistfight
+      - get into a fist fight
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Dennis glossary; "mix it" (with someone) still heard in Aus/UK.
+- decision: add_entry
+  candidate: mooch
+  entry:
+    id: mooch-around
+    form: mooch around
+    variants: []
+    concept:
+    - WALK_WEARILY
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces:
+    - wander around aimlessly
+    - mope around
+    - hang around aimlessly
+    gloss: Wander about aimlessly.
+    sources:
+    - https://en.wiktionary.org/wiki/mooch
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Shared with British English, common in Aus; not the US "cadge" sense.
+- decision: merge
+  candidate: mug
+  into: mug
+  why: Existing entry (IDIOT).
+- decision: add_entry
+  candidate: mum
+  entry:
+    id: mum
+    form: mum
+    variants: []
+    concept:
+    - NEW:MOTHER
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces: []
+    gloss: Mother (Aus/UK spelling of "mom").
+    sources:
+    - https://en.wiktionary.org/wiki/mum
+  new_concept:
+    id: MOTHER
+    description: One's mother (informal).
+    triggers:
+      np:
+      - mom
+      - mommy
+      - momma
+      - my mom
+      - his mom
+      - her mom
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: high
+  why: 'A localisation: "mom" is American. Triggers are the US forms only; "mother" stays as it is.'
+- decision: add_entry
+  candidate: nan
+  entry:
+    id: nan
+    form: nan
+    variants: []
+    concept:
+    - NEW:GRANDMOTHER
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces: []
+    gloss: Grandmother.
+    sources:
+    - https://en.wiktionary.org/wiki/nan
+  new_concept:
+    id: GRANDMOTHER
+    description: One's grandmother.
+    triggers:
+      np:
+      - grandma
+      - grandmother
+      - my grandmother
+      - his grandmother
+      - her grandmother
+      - granny !flat|flats|smith|smiths|knot|knots
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: The usual Australian word.
+- decision: reject
+  candidate: native
+  reason: wrong_sense
+  why: Paterson's "natives" (Australian-born whites); today it reads as Aboriginal people, so avoid it.
+- decision: gate
+  candidate: never would've picked it
+  entry:
+    id: never-have-picked-it
+    form: '{subj} would never have picked it'
+    variants: []
+    concept:
+    - NEW:GUESS_RIGHT
+    frame: clause
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: Would never have guessed it.
+    sources: []
+    flags:
+    - dubious_meaning
+  new_concept:
+    id: GUESS_RIGHT
+    description: Guess or foresee something.
+    triggers:
+      clause:
+      - '{subj} would never have guessed'
+      - '{subj} never would have guessed'
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: low
+  why: I believe "pick" = guess or predict is Aus/NZ usage, but my search did not confirm it. Gated.
+- decision: gate
+  candidate: nick over
+  entry:
+    id: nick-over
+    form: nick over
+    variants: []
+    concept:
+    - NEW:POP_OVER
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    gloss: Pop over somewhere quickly.
+    sources:
+    - https://en.wiktionary.org/wiki/nick_off
+    flags:
+    - dubious_meaning
+  new_concept:
+    id: POP_OVER
+    description: Go somewhere briefly and quickly.
+    triggers:
+      vp:
+      - pop over
+      - pop round
+      - nip over
+      - nip round
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: low
+  why: LLM-only. "Nick over/down/out" (= go quickly) is Aussie, but only "nick off" is attested in the sources I
+    read. Gated.
+- decision: merge
+  candidate: nipper
+  into: nipper
+  why: Existing entry (CHILD).
+- decision: style_guide
+  candidate: no use fretting
+  guidance: Stoic bush dismissal of worry ("No use fretting."); short, flat, uncomplaining.
+  why: Voice habit.
+- decision: style_guide
+  candidate: nonstandard past forms
+  guidance: 'Bush grammar for characters: "I''ve rode", "comed off". Use rarely, only in a character''s dialogue.'
+  why: Grammar pattern.
+- decision: style_guide
+  candidate: not gush or make a fuss
+  guidance: Understate feeling; show care through practical acts (cooking, tidying), not effusive words.
+  why: Voice habit.
+- decision: add_trigger
+  candidate: nothin' but talk
+  triggers_to_add:
+    ALL_TALK:
+      predicate_adj:
+      - nothing but talk
+  why: Plain phrase; ALL_TALK forms (all piss and wind, all froth and no beer) should fire for it.
+- decision: add_entry
+  candidate: the office
+  entry:
+    id: give-the-office
+    form: give {obj} the office
+    variants: []
+    concept:
+    - NEW:TIP_OFF
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: archaic
+    region: []
+    replaces: []
+    gloss: Give someone the wink, a warning or a hint (Dennis "the orfis").
+    sources:
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: TIP_OFF
+    description: Give someone a warning, hint or signal.
+    triggers:
+      vp:
+      - tip {obj} off
+      - give {obj} a tip-off
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Dennis glossary; archaic, shared with old British slang. Bare "the office" is never a trigger.
+- decision: reject
+  candidate: the old Wolf
+  reason: not_lexical
+  why: Plain phrase.
+- decision: reject
+  candidate: on spec
+  reason: not_aussie
+  why: Shared British/general English.
+- decision: reject
+  candidate: or what?
+  reason: not_aussie
+  why: General English tag.
+- decision: reject
+  candidate: pack it in
+  reason: not_aussie
+  why: General British; QUIT has "chuck it in".
+- decision: gate
+  candidate: peb
+  entry:
+    id: a-peb
+    form: a peb
+    variants: []
+    concept:
+    - HOON
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: archaic
+    region: []
+    replaces: []
+    gloss: A flash young tough; a larrikin (Dennis).
+    sources:
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+    flags:
+    - archaic
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: low
+  why: Dennis glossary only; archaic. Gated.
+- decision: add_entry
+  candidate: the pip
+  entry:
+    id: give-the-pip
+    form: give {obj} the pip
+    variants: []
+    concept:
+    - ANNOY
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: dated
+    region: []
+    replaces: []
+    gloss: Get on someone's nerves.
+    sources:
+    - https://en.wiktionary.org/wiki/pip
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Dennis has "the pip" = a fit of the blues; "give someone the pip" (annoy) is the form still heard in Aus/UK.
+    Dated.
+- decision: add_entry
+  candidate: playin' up
+  entry:
+    id: play-up
+    form: play up
+    variants: []
+    concept:
+    - NEW:PLAY_UP
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: Misbehave (of kids), or act up (of a car or a knee).
+    sources:
+    - https://en.wiktionary.org/wiki/play_up
+  new_concept:
+    id: PLAY_UP
+    description: Misbehave, or malfunction.
+    triggers:
+      vp:
+      - act up
+      - misbehave
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: British/Aus idiom, very common in Australia.
+- decision: reject
+  candidate: pocketed the lot
+  reason: not_lexical
+  why: Plain phrase.
+- decision: merge
+  candidate: poor little bugger
+  into: the-poor-bugger (slice 2, concept UNLUCKY_PERSON)
+  triggers_to_add:
+    UNLUCKY_PERSON:
+      np:
+      - the poor thing
+      - the poor little thing
+  why: Slice 2 adds the same form; my two sympathetic triggers go onto its concept (all take "the", so a vocative
+    "you poor thing" is left alone).
+- decision: add_entry
+  candidate: prad
+  entry:
+    id: prad
+    form: prad
+    variants: []
+    concept:
+    - NEW:HORSE
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: archaic
+    region: []
+    replaces: []
+    gloss: A horse (old slang).
+    sources:
+    - https://en.wiktionary.org/wiki/prad
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: HORSE
+    description: A horse.
+    triggers:
+      np:
+      - his horse
+      - her horse
+      - my horse
+      - their horse
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: UK/Aus/NZ dated slang; archaic now. Triggers are possessive only, to avoid "eat a horse", "dark horse" and
+    "hold your horses".
+- decision: merge
+  candidate: pull a swifty
+  into: 'TRICK: a swifty'
+  why: Existing form; "pull a fast one" already fires TRICK.
+  audit: 'TEASE has the form "{subj} {be} pulling a swifty": wrong sense. A swifty is a deception, not a joke or
+    a leg-pull. Move it to TRICK (or a DECEIVE vp) with triggers like "pull a fast one".'
+- decision: add_entry
+  candidate: punter
+  entry:
+    id: a-punter
+    form: a punter
+    variants: []
+    concept:
+    - NEW:GAMBLER
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces: []
+    gloss: Someone who bets, especially on the horses.
+    sources:
+    - https://en.wiktionary.org/wiki/punter
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: GAMBLER
+    description: Someone who bets.
+    triggers:
+      np:
+      - a gambler
+      - a bettor
+      - gamblers
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Current Aus/UK. PEOPLE already has "punters" (ordinary people); this is the betting sense.
+- decision: reject
+  candidate: put the bite on
+  reason: not_aussie
+  why: Wiktionary gives general slang (extort, demand money); US in origin.
+- decision: reject
+  candidate: puttin' on her voice
+  reason: not_lexical
+  why: Plain phrase.
+- decision: merge
+  candidate: quid
+  into: quid
+  why: Existing entry (DOLLAR); EARN_WELL has "make a good quid".
+- decision: reject
+  candidate: ready to roll
+  reason: not_aussie
+  why: General colloquial.
+- decision: merge
+  candidate: reckons
+  into: 'THINK: reckon'
+  why: Existing form.
+- decision: reject
+  candidate: riders
+  reason: not_lexical
+  why: Roofing timbers; no plain swap.
+- decision: merge
+  candidate: rocks up
+  into: 'ARRIVE: rock up'
+  why: Existing form.
+- decision: add_entry
+  candidate: rouse on
+  entry:
+    id: rouse-on
+    form: rouse on {obj}
+    variants: []
+    concept:
+    - SCOLD
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    gloss: Tell someone off.
+    sources:
+    - https://en.wiktionary.org/wiki/rouse
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: 'Wiktionary: Aus/NZ informal.'
+- decision: reject
+  candidate: run the rabbit
+  reason: not_lexical
+  why: Fetching beer from the pub in a jug; archaic, with no plain trigger.
+- decision: reject
+  candidate: school
+  reason: not_lexical
+  why: Bare "school" can never be a trigger; "two-up school" has no plain equivalent.
+- decision: add_entry
+  candidate: scrub
+  entry:
+    id: the-scrub
+    form: the scrub
+    variants: []
+    concept:
+    - NEW:SCRUB
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces: []
+    gloss: Dense, scrubby low bush.
+    sources:
+    - https://en.wiktionary.org/wiki/scrub
+  new_concept:
+    id: SCRUB
+    description: Dense low vegetation; rough scrubby country.
+    triggers:
+      np:
+      - the undergrowth
+      - thick brush
+      - brushland
+      - scrubland
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: General English, but the everyday Australian word for it. "the brush" left out (hairbrush, paintbrush).
+- decision: merge
+  candidate: seen and done as past
+  into: nonstandard past forms
+  why: The same grammar pattern ("I seen", "she give me"); one style-guide line covers both.
+- decision: add_entry
+  candidate: shanty
+  entry:
+    id: a-shanty
+    form: a shanty
+    variants: []
+    concept:
+    - NEW:BUSH_PUB
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: dated
+    region: []
+    replaces: []
+    gloss: A rough bush grog shop or unlicensed pub.
+    sources:
+    - https://en.wiktionary.org/wiki/shanty
+    - https://archive.org/details/lawsonwhilethebillyboils
+  new_concept:
+    id: BUSH_PUB
+    description: A rough, often unlicensed roadside bar.
+    triggers:
+      np:
+      - an unlicensed bar
+      - an unlicensed pub
+      - a roadside tavern
+      - a roadside bar
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Aus/NZ; dated.
+- decision: reject
+  candidate: shearer
+  reason: not_lexical
+  why: Standard English occupation word; nothing to swap.
+- decision: merge
+  candidate: shickered
+  into: shickered
+  why: Existing entry (DRUNK, dated).
+- decision: reject
+  candidate: shook on it
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: short cut
+  reason: not_aussie
+  why: General English.
+- decision: add_entry
+  candidate: sing out
+  entry:
+    id: sing-out
+    form: sing out
+    variants: []
+    concept:
+    - NEW:SING_OUT
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: Give a yell; let someone know ("sing out if you need anything").
+    sources:
+    - https://en.wiktionary.org/wiki/sing_out
+  new_concept:
+    id: SING_OUT
+    description: Call out, or let someone know.
+    triggers:
+      vp:
+      - give {obj} a shout
+      - give {obj} a holler
+      - yell out
+      - holler
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: General English in origin, but strongly current in Australia. "singing out for rain" fits too.
+- decision: add_entry
+  candidate: skite
+  entry:
+    id: skite
+    form: skite
+    variants: []
+    concept:
+    - NEW:BOAST
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    gloss: Brag, big-note yourself.
+    sources:
+    - https://en.wiktionary.org/wiki/skite
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: BOAST
+    description: Brag or show off verbally.
+    triggers:
+      vp:
+      - brag
+      - blow {poss} own trumpet
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Aus/NZ/Ireland. Bare "boast" left out ("the hotel boasts a pool").
+- decision: add_entry
+  candidate: sledgin'
+  entry:
+    id: sledge
+    form: sledge {obj}
+    variants: []
+    concept:
+    - NEW:TAUNT
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: Hurl insults at an opponent to rattle them.
+    sources:
+    - https://en.wiktionary.org/wiki/sledge
+  new_concept:
+    id: TAUNT
+    description: Taunt or trash-talk an opponent.
+    triggers:
+      vp:
+      - taunt {obj}
+      - trash-talk {obj}
+      - trash talk {obj}
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Australian cricket term, now general.
+- decision: add_entry
+  candidate: smooge
+  entry:
+    id: smoodge
+    form: smoodge
+    variants:
+    - smooge
+    concept:
+    - NEW:CANOODLE
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 4
+    register: dated
+    region: []
+    replaces: []
+    gloss: Kiss and cuddle; sweet-talk.
+    sources:
+    - https://en.wiktionary.org/wiki/smoodge
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept:
+    id: CANOODLE
+    description: Kiss and cuddle.
+    triggers:
+      vp:
+      - canoodle
+      - kiss and cuddle
+      - cuddle up
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: 'Aus slang (Wiktionary: dated for the canoodle sense); Dennis spells it "smooge".'
+- decision: add_entry
+  candidate: snake-headed
+  entry:
+    id: snake-headed
+    form: snake-headed
+    variants: []
+    concept:
+    - ANGRY
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 5
+    register: archaic
+    region: []
+    replaces: []
+    gloss: Riled and spiteful (Dennis).
+    sources:
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Dennis glossary; archaic, so it only fires at levels that allow archaic.
+- decision: reject
+  candidate: so get this
+  reason: not_lexical
+  why: General colloquial opener.
+- decision: style_guide
+  candidate: solid as
+  guidance: Truncated "ADJ as" intensifier ("solid as", "sweet as"), Aus/NZ; use sparingly at levels 3+.
+  why: Pattern, not a word swap.
+- decision: reject
+  candidate: specs
+  reason: not_aussie
+  why: General British colloquial; bare "glasses" is ambiguous anyway.
+- decision: merge
+  candidate: spruikin'
+  into: spruik (slice 2, concept PROMOTE)
+  why: 'Slice 2 adds "spruik {obj}" (Wiktionary: Australia) with the triggers I would have given.'
+- decision: merge
+  candidate: squiz
+  into: a-squiz
+  why: Existing entry (LOOK).
+- decision: add_entry
+  candidate: stirrin' me up
+  entry:
+    id: stirring-obj
+    form: '{subj} {be} stirrin'' {obj}'
+    variants: []
+    concept:
+    - TEASE
+    frame: clause
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: Deliberately winding someone up.
+    sources:
+    - https://greensdictofslang.com/entry/vb2g3cy
+  new_concept: null
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: 'Green''s: Australian "stir" = tease, provoke. TEASE already has "{subj} {be} winding {obj} up" as a trigger.'
+- decision: add_entry
+  candidate: stockman
+  entry:
+    id: a-stockman
+    form: a stockman
+    variants: []
+    concept:
+    - NEW:STOCKMAN
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces: []
+    gloss: A man who works cattle on a station.
+    sources:
+    - https://en.wiktionary.org/wiki/stockman
+  new_concept:
+    id: STOCKMAN
+    description: A ranch hand who works cattle.
+    triggers:
+      np:
+      - a ranch hand
+      - a cattle hand
+      - a cowhand
+      - ranch hands
+      - cowhands
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Current Australian. "cowboy" left out (it also means a dodgy tradesman).
+- decision: merge
+  candidate: stoush
+  into: a-stoush
+  why: The noun "a stoush" (FIGHT) and "stoush" (WAR) exist, so a verb entry with the same key would be dropped.
+  audit: 'stoush: the Dennis verb sense "stoush (someone)" = punch, thrash is missing; consider a vp sense under
+    THRASH or PUNCH by hand.'
+- decision: merge
+  candidate: strewth
+  into: strewth
+  why: Existing entries (strewth, g-strewth); "Gorstrooth" is a period spelling, not worth a variant.
+- decision: reject
+  candidate: strike
+  reason: not_lexical
+  why: '"Strike" = arrive at is dated; the bare verb is far too ambiguous to trigger.'
+- decision: add_trigger
+  candidate: strips off
+  triggers_to_add:
+    UNDRESS:
+      vp:
+      - strip off
+  why: Plain British/Aus phrase; it should fire UNDRESS ("get {poss} gear off").
+- decision: reject
+  candidate: a sunburnt country
+  reason: not_lexical
+  why: A quotation (Mackellar), not lexical.
+- decision: reject
+  candidate: the sweetest in the barrow
+  reason: not_lexical
+  why: One-off image.
+- decision: reject
+  candidate: takin' their sweet bloody time
+  reason: not_lexical
+  why: General idiom with the existing "bloody" infix.
+- decision: reject
+  candidate: talks up
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: tells him straight
+  reason: not_aussie
+  why: General English.
+- decision: style_guide
+  candidate: them as demonstrative
+  guidance: '"Them" for "those" in broad dialogue ("them bloody possums"); levels 4-5, characters only.'
+  why: Grammar pattern.
+- decision: reject
+  candidate: there's the catch
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: thing is
+  reason: not_aussie
+  why: General English discourse marker.
+- decision: reject
+  candidate: throws his place together
+  reason: not_lexical
+  why: FOUND already has "throw together" / "knock together".
+- decision: reject
+  candidate: till all hours
+  reason: not_aussie
+  why: General English.
+- decision: gate
+  candidate: toff
+  entry:
+    id: a-toff
+    form: a toff
+    variants: []
+    concept:
+    - NEW:POSH_PERSON
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: dated
+    region: []
+    replaces: []
+    gloss: A posh, upper-class type.
+    sources:
+    - https://en.wiktionary.org/wiki/toff
+    - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+    flags:
+    - not_aussie
+  new_concept:
+    id: POSH_PERSON
+    description: A posh, upper-class person.
+    triggers:
+      np:
+      - a posh gentleman
+      - a posh gent
+      - an upper-class gentleman
+      - an upper-class gent
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: British in origin (Wiktionary UK/Irish), long used in Australia but no longer distinctive. Gated not_aussie.
+- decision: reject
+  candidate: tony
+  reason: not_aussie
+  why: 'Wiktionary: North American informal ("stylish").'
+- decision: reject
+  candidate: top off
+  reason: wrong_sense
+  why: Dennis "knock down"; today "top off" means fill up (and "top oneself" is suicide).
+- decision: reject
+  candidate: tote
+  reason: not_lexical
+  why: The totalisator (now the TAB); no plain swap.
+- decision: reject
+  candidate: a treat
+  reason: not_aussie
+  why: Shared British, and it collides with the noun "a treat".
+- decision: reject
+  candidate: turn down
+  reason: not_lexical
+  why: General English.
+- decision: reject
+  candidate: up the country
+  reason: not_lexical
+  why: A directional usage; "in the country" is too ambiguous to trigger, and FOREST "bush" covers the sense.
+- decision: reject
+  candidate: up to scratch
+  reason: not_aussie
+  why: General English.
+- decision: add_entry
+  candidate: verandah
+  entry:
+    id: verandah
+    form: verandah
+    variants: []
+    concept:
+    - NEW:VERANDAH
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces: []
+    gloss: The roofed open platform along a house.
+    sources:
+    - https://en.wiktionary.org/wiki/verandah
+  new_concept:
+    id: VERANDAH
+    description: A porch or veranda.
+    triggers:
+      np:
+      - porch
+      - front porch
+      - veranda
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: 'Wiktionary: Aus/NZ spelling; "porch" reads American.'
+- decision: reject
+  candidate: wallaroo
+  reason: not_lexical
+  why: Animal name; no plain equivalent.
+- decision: style_guide
+  candidate: '..., we do (reduplicative tag)'
+  guidance: Emphatic tag that repeats subject and auxiliary at the end ("We want rain, we do."); dated rural voice.
+  why: Discourse habit.
+- decision: style_guide
+  candidate: weak vowels
+  guidance: Dennis-style reduced vowels (jist, git, fer, yer, ole); yer/fer fit levels 4-5, the rest is period pastiche
+    only.
+  why: Spelling pattern.
+- decision: reject
+  candidate: where she's off to
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: whipped up
+  reason: not_aussie
+  why: General English.
+- decision: reject
+  candidate: white box
+  reason: not_lexical
+  why: Eucalypt species name.
+- decision: reject
+  candidate: the wide brown land
+  reason: not_lexical
+  why: A quotation (Mackellar), not lexical.
+- decision: merge
+  candidate: wolfs down
+  into: 'GOBBLE: scoff'
+  why: '"wolf it down" is already a GOBBLE trigger.'
+- decision: add_entry
+  candidate: woodheap
+  entry:
+    id: the-woodheap
+    form: the woodheap
+    variants:
+    - the wood-heap
+    concept:
+    - NEW:WOODPILE
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces: []
+    gloss: The household pile of chopped firewood.
+    sources:
+    - https://archive.org/details/lawsonwhilethebillyboils
+    - https://en.wiktionary.org/wiki/woodpile
+  new_concept:
+    id: WOODPILE
+    description: A pile of firewood.
+    triggers:
+      np:
+      - the woodpile
+      - a woodpile
+      - the wood pile
+      - the pile of firewood
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Lawson uses it; still the usual word in rural Australia, though web dictionaries list only "woodpile".
+- decision: merge
+  candidate: workin' back
+  into: 'WORK_LATE: work back'
+  why: Existing form.
+  audit: work back is gated, but Wiktionary marks it Australian idiomatic (work overtime) and it is everyday office
+    talk; consider un-gating.
+- decision: reject
+  candidate: yakkin'
+  reason: not_aussie
+  why: '"Yak" (chatter) is general slang, American in origin.'
+- decision: style_guide
+  candidate: yod and schwa respellings
+  guidance: Dennis respellings (crool, choon, forchin, sorter); period pastiche only, except "sorta".
+  why: Spelling pattern.
+- decision: style_guide
+  candidate: zero relative pronoun
+  guidance: Dropping a subject relative ("there's none can ride like me"); a dated bush-grammar habit for characters.
+  why: Grammar pattern.

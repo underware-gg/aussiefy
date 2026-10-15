@@ -1,0 +1,324 @@
+{
+ "candidates": {
+  "A": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every point survives, commands and links intact: \"you shouldn't expect big formatting changes down the track\", \"If you're feeling confident, use `--fast`.\"",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "\"fiddly bits\", \"Have a squiz\", \"get cracking\", \"down the track\" fit; \"no-nonsense\" is a little softer than \"uncompromising\", which is the project's point.",
+     "score": 4
+    },
+    "authenticity": {
+     "evidence": "Natural Australian English in a README voice: \"grab one of the PyInstaller-built standalone executables\", \"brainpower for the stuff that actually matters\".",
+     "score": 5
+    },
+    "register": {
+     "evidence": "A light level 2 touch: \"squiz\", \"get cracking\", \"down the track\", otherwise plain. No swearing.",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "Stays a confident, practical README: \"Black makes code review quicker by producing the smallest diffs possible.\"",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads smoothly: \"After a while the formatting stops being something you notice, and you can focus on the content instead.\"",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Varied, though a reader sees \"have a look\" and \"Have a squiz\" doing the same job; \"fiddly bits\", \"grab\", \"get cracking\", \"down the track\".",
+     "score": 4
+    },
+    "essence": {
+     "evidence": "Unmistakably the Black README, with its \"Any colour you like.\" motto.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "the no-nonsense Python code formatter",
+     "original": "the uncompromising Python code formatter",
+     "severity": "minor",
+     "why": "Softens the project's defining word."
+    }
+   ],
+   "summary": "Light, natural and faithful; right on the brief."
+  },
+  "B": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every point survives: \"Now that we're stable, don't go expecting big formatting changes down the track.\"; \"One more thing:\" is colour.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "\"the Python code formatter that won't budge\" catches \"uncompromising\"; \"Heaps of projects\", \"the full rundown\", \"have a squiz\" fit.",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Sounds like an Australian developer writing: \"Want to format Jupyter Notebooks as well?\", \"just grab one of the PyInstaller-built standalone executables\".",
+     "score": 5
+    },
+    "register": {
+     "evidence": "Light level 2 touch, a shade chattier than A: \"won't budge\", \"Heaps\", \"squiz\", \"don't go expecting\". No swearing.",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "Keeps the confident, practical README tone: \"If you're feeling confident, use `--fast`.\"",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads like it was written that way: \"After a while you stop even noticing the formatting, and you can get on with the content instead.\"",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Varied with nothing leaned on: \"won't budge\", \"fiddly bits\", \"get cracking\", \"Heaps\", \"down the track\", \"rundown\", \"squiz\".",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Unmistakably the Black README; \"won't budge\" keeps its uncompromising character.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "_Black_ is the Python code formatter that won't budge.",
+     "original": "_Black_ is the uncompromising Python code formatter.",
+     "severity": "minor",
+     "why": "Good fit, though it moves the project's tagline word out of its usual slot."
+    }
+   ],
+   "summary": "Natural, faithful and varied; the best of the set."
+  },
+  "C": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every point survives: \"Black checks that the reformatted code still produces a valid AST\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "\"heaps of projects\", \"have a squiz\", \"get cracking\" fit; \"Now that we've gone stable\" strains (projects \"become\" stable, \"gone\" suggests a switch), and \"no-nonsense\" softens \"uncompromising\".",
+     "score": 4
+    },
+    "authenticity": {
+     "evidence": "Natural Australian English: \"grab one of the PyInstaller-built standalone executables\", \"down the track\".",
+     "score": 5
+    },
+    "register": {
+     "evidence": "Light level 2 touch: \"heaps\", \"squiz\", \"get cracking\", \"down the track\". No swearing.",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "Keeps the practical README tone throughout.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Mostly smooth, but \"After a while the formatting stops getting noticed\" is a clumsy passive.",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "Varied enough: \"fiddly bits\", \"grab\", \"get cracking\", \"heaps\", \"squiz\".",
+     "score": 4
+    },
+    "essence": {
+     "evidence": "Unmistakably the Black README.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "After a while the formatting stops getting noticed",
+     "original": "Formatting becomes transparent after a while",
+     "severity": "minor",
+     "why": "Clumsy passive."
+    },
+    {
+     "quote": "Now that we've gone stable",
+     "original": "Now that we have become stable",
+     "severity": "minor",
+     "why": "'Gone stable' is an odd fit."
+    }
+   ],
+   "summary": "Light and faithful, a little less polished than A."
+  },
+  "D": {
+   "scores": {
+    "meaning": {
+     "evidence": "The steps survive, but \"Sign up for it\" implies a subscription, and \"Less to wade through, less to argue about.\" adds a claim the original does not make; \"Easy as.\" is colour.",
+     "score": 4
+    },
+    "sense": {
+     "evidence": "Several terms strain: \"won't take no for an answer\" means pushy, not uncompromising; \"churning out the smallest diffs possible\" suggests mass output where the point is minimal change; \"Sign up for it\" for \"By using it\".",
+     "score": 3
+    },
+    "authenticity": {
+     "evidence": "Plenty of natural idiom (\"banging on at you\", \"won't play ball\", \"Feeling game?\"), but packed so densely it starts to read as a showcase: \"a stack more info\", \"the nitty-gritty\", \"Easy as.\"",
+     "score": 4
+    },
+    "register": {
+     "evidence": "Heavier than a level 2: idioms in almost every sentence (\"hand over the reins\", \"get stuck into\", \"shake-ups\", \"Feeling game?\") plus added tags. No swearing.",
+     "score": 3
+    },
+    "tone": {
+     "evidence": "Still a README, but the stream of quips (\"Easy as.\", \"Less to wade through, less to argue about.\") makes it breezier than the original's crisp confidence.",
+     "score": 4
+    },
+    "flow": {
+     "evidence": "Readable, but the density of idiom piles up: \"Sign up for it and you're agreeing to hand over the reins on all the fiddly little bits of hand-formatting.\"",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "Very varied: \"banging on\", \"get stuck into\", \"won't play ball\", \"a stack more\", \"shake-ups\", \"nitty-gritty\".",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Recognisably the Black README, but \"won't take no for an answer\" turns principled rigidity into pushiness.",
+     "score": 4
+    }
+   },
+   "problems": [
+    {
+     "quote": "the Python code formatter that won't take no for an answer",
+     "original": "the uncompromising Python code formatter",
+     "severity": "major",
+     "why": "Wrong sense: pushy insistence rather than refusal to compromise on style."
+    },
+    {
+     "quote": "churning out the smallest diffs possible",
+     "original": "producing the smallest diffs possible",
+     "severity": "minor",
+     "why": "'Churning out' implies volume and carelessness, against the point."
+    },
+    {
+     "quote": "Sign up for it",
+     "original": "By using it",
+     "severity": "minor",
+     "why": "Implies a subscription."
+    },
+    {
+     "quote": "Less to wade through, less to argue about.",
+     "original": "",
+     "severity": "minor",
+     "why": "Added claim."
+    },
+    {
+     "quote": "Easy as.",
+     "original": "",
+     "severity": "minor",
+     "why": "Tag bolted on; part of the over-weighting."
+    }
+   ],
+   "summary": "Colourful and varied but over the brief, with several terms in the wrong sense."
+  },
+  "E": {
+   "scores": {
+    "meaning": {
+     "evidence": "The original word for word: \"By using it, you agree to cede control over minutiae of hand-formatting.\"",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "No Aussie terms to misfire; only the spelling in \"Any colour you like.\" changes.",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Plain international English with no Australian voice at all: \"Further information can be found in our docs\".",
+     "score": 3
+    },
+    "register": {
+     "evidence": "Untranslated apart from \"colour\"; nowhere near a level 2 light touch.",
+     "score": 1
+    },
+    "tone": {
+     "evidence": "The original's tone kept whole.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads as the original does.",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "No slang at all to vary.",
+     "score": 1
+    },
+    "essence": {
+     "evidence": "Unmistakably the original, untouched.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "_Black_ is the uncompromising Python code formatter. By using it, you agree to cede",
+     "original": "_Black_ is the uncompromising Python code formatter. By using it, you agree to cede",
+     "severity": "critical",
+     "why": "Left untranslated; the brief is not attempted."
+    }
+   ],
+   "summary": "The original with one spelling change; fails the brief."
+  }
+ },
+ "rankings": {
+  "tone": [
+   [
+    "A",
+    "B",
+    "C",
+    "E"
+   ],
+   [
+    "D"
+   ]
+  ],
+  "flow": [
+   [
+    "A",
+    "B",
+    "E"
+   ],
+   [
+    "C",
+    "D"
+   ]
+  ],
+  "variety": [
+   [
+    "B",
+    "D"
+   ],
+   [
+    "A",
+    "C"
+   ],
+   [
+    "E"
+   ]
+  ],
+  "essence": [
+   [
+    "A",
+    "B",
+    "C",
+    "E"
+   ],
+   [
+    "D"
+   ]
+  ],
+  "overall": [
+   [
+    "B"
+   ],
+   [
+    "A"
+   ],
+   [
+    "C"
+   ],
+   [
+    "D"
+   ],
+   [
+    "E"
+   ]
+  ]
+ }
+}

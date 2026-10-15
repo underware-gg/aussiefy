@@ -1,0 +1,205 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "unharnessed": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 4,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 3,
+   "flow": 2,
+   "variety": 1,
+   "essence": 3
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 4,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "The facts survive since most text is the original, but \"punters's mitts\" turns \"people's hands\" into customers' hands, and \"When thick tucker are cooked\" muddles the sentence.",
+   "sense": "\"punters\" means customers or gamblers, not people in general; \"tucker\" is swapped for \"food\" mechanically, giving \"When thick tucker are cooked\" and \"does not make tucker 'radioactive'\".",
+   "authenticity": "Stage-Australian: \"Bloody hell, the microwaves are reflected\" and \"Bugger me, Super-heated water\" are bolted on; \"tucker\" is dropped in word for word.",
+   "register": "Largely untranslated (\"Users should closely follow the precautions and recommendations\"); the Aussie is a few swaps and two interjections, well short of level 3. Swearing within vulgarity 1.",
+   "tone": "The interjections (\"Bloody hell,\", \"Bugger me,\") make a sober safety notice sound flippant in places.",
+   "flow": "Clunky joins: \"When thick tucker are cooked\", \"punters's mitts\", \"Bugger me, Super-heated water\".",
+   "variety": "Leans almost entirely on \"tucker\", repeated eight or so times.",
+   "essence": "Recognisably the FDA notice, because it is mostly the notice."
+  },
+  "unharnessed": {
+   "meaning": "Every point survives, from the magnetron to the heating-time advice: \"Putting stuff like instant coffee or sugar in before you heat it cuts that risk right down.\"",
+   "sense": "Terms fit: \"bounce around the metal insides\", \"knock the goodness out of food\", \"alfoil\", \"you might wreck the oven\".",
+   "authenticity": "Sounds like a real Australian explaining it: \"Fact is, food done in the microwave might hang on to more of its vitamins\", \"alfoil\". \"Folks should stick closely\" leans American.",
+   "register": "Right weight for level 3: plain casual Australian with a steady few terms (\"tucker\", \"veggies\", \"jiggle about\", \"alfoil\"), no pub-yarn excess. No swearing, allowed under vulgarity 1.",
+   "tone": "Keeps the calm, informative tone and the seriousness of the scalding warning (\"nasty skin burns and scalds\").",
+   "flow": "Reads smoothly: \"They bounce around the metal insides of the oven till the food soaks them up.\"",
+   "variety": "Reasonably varied, though \"stuff\" recurs (\"other stuff\", \"thick stuff\", \"stuff like instant coffee\").",
+   "essence": "Unmistakably the FDA explainer and warning, retold."
+  },
+  "yarn": {
+   "meaning": "All facts survive. Additions are mostly colour (\"Nothing glowing on your plate, promise\", \"so watch your mitts\"), but \"you could end up cooking the oven too\" stretches \"possibly damaging the oven\" into a joke.",
+   "sense": "Mostly exact (\"knock the goodness out\", \"easier on the power bill\"). \"cooking the oven\" for damaging it strains.",
+   "authenticity": "Natural Australian voice: \"a flamin' great eruption\", \"a cuppa in your face instead of in your gob\". \"quiet as a mouse\" is generic rather than Aussie.",
+   "register": "Around level 3 to 4: added asides and a jokey close make it a touch heavier than level 3 asks. \"flamin'\" is within vulgarity 1.",
+   "tone": "Mostly keeps the informative tone, but the quips on the scalding section (\"That's how you end up with a cuppa in your face instead of in your gob\") lighten a serious warning a little.",
+   "flow": "Reads well aloud; the added opener \"Now, ya might've wondered how the microwave actually does it.\" is a natural lead-in.",
+   "variety": "Varied: \"tucker\", \"jiggling\", \"the whole box\", \"mitts\", \"quiet as a mouse\", \"flamin' great\", \"cuppa\", \"gob\".",
+   "essence": "Clearly the FDA explainer, retold with personality."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "Bloody hell, the microwaves are reflected",
+    "original": "The microwaves are reflected",
+    "severity": "major",
+    "why": "Interjection bolted onto a technical sentence."
+   },
+   {
+    "quote": "When thick tucker are cooked",
+    "original": "When thick foods are cooked",
+    "severity": "major",
+    "why": "Word swap breaks agreement; \"tucker\" is a mass noun."
+   },
+   {
+    "quote": "around punters's mitts and faces",
+    "original": "around people's hands and faces",
+    "severity": "major",
+    "why": "\"punters\" means customers or gamblers, and \"punters's\" is broken grammar."
+   },
+   {
+    "quote": "Bugger me, Super-heated water",
+    "original": "Super-heated water",
+    "severity": "major",
+    "why": "Interjection bolted on, with the capital left in."
+   },
+   {
+    "quote": "does not make tucker “radioactive”",
+    "original": "does not make food “radioactive”",
+    "severity": "minor",
+    "why": "\"tucker\" substituted mechanically and repeated throughout."
+   },
+   {
+    "quote": "Users should closely follow the precautions and recommendations provided in the microwave oven instruction manuals",
+    "original": "Users should closely follow the precautions and recommendations provided in the microwave oven instruction manuals",
+    "severity": "major",
+    "why": "Large parts left untranslated."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "Folks should stick closely to the precautions",
+    "original": "Users should closely follow the precautions",
+    "severity": "minor",
+    "why": "\"Folks\" leans American."
+   },
+   {
+    "quote": "When you're cooking thick stuff",
+    "original": "When thick foods are cooked",
+    "severity": "minor",
+    "why": "\"stuff\" is leaned on a few times."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "you could end up cooking the oven too",
+    "original": "possibly damaging the oven",
+    "severity": "minor",
+    "why": "Turns damage into a joke and blurs the warning."
+   },
+   {
+    "quote": "That's how you end up with a cuppa in your face instead of in your gob.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added quip lightens a warning about serious scalds."
+   },
+   {
+    "quote": "It just sits there, quiet as a mouse.",
+    "original": "",
+    "severity": "minor",
+    "why": "Generic simile rather than Australian idiom."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "Mostly untranslated, with \"tucker\" swapped in mechanically and swears bolted on.",
+  "unharnessed": "Faithful, natural and pitched right at level 3.",
+  "yarn": "Lively and accurate, a touch heavier and jokier than the brief and the warning ask."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

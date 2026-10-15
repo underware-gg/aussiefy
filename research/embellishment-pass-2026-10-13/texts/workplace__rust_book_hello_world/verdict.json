@@ -1,0 +1,263 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn-dinkum": "A",
+  "yarn-troppo": "B",
+  "unharnessed": "C",
+  "yarn-deadset": "D",
+  "engine": "E"
+ },
+ "scores": {
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn-troppo": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 4
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn-deadset": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 3,
+   "variety": 2,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 5,
+   "flow": 2,
+   "variety": 1,
+   "essence": 4
+  }
+ },
+ "evidence": {
+  "yarn-dinkum": {
+   "meaning": "Every instruction and all code, markup and links intact: the _projects_ suggestion, both command sets, the underscore convention (\"So it’s _hello_world.rs_, not _helloworld.rs_\"), `.\\main` on Windows, the Troubleshooting pointer, the welcome.",
+   "sense": "Terms fit: \"Rust couldn’t care less\", \"chuckin’ all yer projects in there\", \"punch in\" for typing commands, \"the usual go\" for convention, \"have a squiz\", \"get a hand\", \"good on ya!\".",
+   "authenticity": "Natural: \"Righto, first thing ya do\", \"Got more than one word in yer filename?\", \"welcome to the club!\".",
+   "register": "Aussie throughout in a friendly spoken voice, but no swearing and no yarning asides: a confident level 4 rather than 5.",
+   "tone": "Keeps the tutorial's warm, encouraging tone: \"If `Hello, world!` came up, good on ya!\"",
+   "flow": "Reads like it was written that way: \"Save it and head back to yer terminal window\".",
+   "variety": "Good: \"Righto\", \"fire up\", \"punch in\" (three times), \"chuckin’\", \"stick\", \"squiz\", \"good on ya\".",
+   "essence": "Unmistakably the Rust book's Hello World section."
+  },
+  "yarn-troppo": {
+   "meaning": "Every instruction and all code kept. Asides hang off the original: \"could be under the house with the redbacks for all it cares\", \"which looks like a sneeze\", \"cos Windows always has to be different\", \"First round’s on you.\" Colour, not new facts.",
+   "sense": "\"doesn’t give a flyin’ toss\" for 'doesn't matter', \"whack an underscore\", \"nip back\", \"No dramas.\", \"Easy as.\" all fit.",
+   "authenticity": "Mostly natural (\"the usual go\", \"No dramas. Have a squiz back\"), but \"Strewth, where do I start?\" and \"Fair dinkum.\" are stock tags.",
+   "register": "A full level-5 yarn with swearing inside the dial: \"ya poor bugger\", \"every bloody one of ’em\", \"a flyin’ toss\".",
+   "tone": "Stays warm and encouraging, but the cheek leans past the tutorial's even voice (\"And if yer stuck with Windows CMD, ya poor bugger\"); still friendly.",
+   "flow": "Lively and readable; \"Strewth, where do I start? With a directory, that’s where: somewhere to keep yer Rust code.\" is a clunky opening, and short tags (\"Fair dinkum.\") interrupt.",
+   "variety": "Wide range: \"fire up\", \"punch in\", \"whack\", \"crack open\", \"nip back\", \"No dramas\", \"Easy as\", \"squiz\", \"redbacks\".",
+   "essence": "Recognisably the tutorial, steps intact, retold with jokes; its plain helpfulness is a little crowded."
+  },
+  "unharnessed": {
+   "meaning": "All instructions and code intact; \"Welcome aboard, mate!\" keeps the welcome.",
+   "sense": "\"couldn't give a toss\", \"punch in\", \"chuck in this\" for entering commands, \"the done thing\", \"have a squiz\", \"you bloody legend\" fit; \"chuck in\" for typing commands strains slightly.",
+   "authenticity": "Mostly natural; \"we reckon you make a _projects_ directory\" is an awkward construction (reckon you should).",
+   "register": "Light-to-moderate Aussie, mostly standard \"you\" and the book's own sentences (\"Next, make a new source file and call it _main.rs_.\"); \"bloody legend\" the only swear. About level 3.",
+   "tone": "Tutorial tone kept, warm close: \"good on ya, you bloody legend!\"",
+   "flow": "Smooth, but the parallel \"chuck in this:\" lines repeat stiffly.",
+   "variety": "Some range: \"First up\", \"give a toss\", \"punch in\", \"chuck in\", \"done thing\", \"squiz\"; \"chuck in this\" twice.",
+   "essence": "Unmistakably the original."
+  },
+  "yarn-deadset": {
+   "meaning": "All instructions and code intact; \"Say, use _hello_world.rs_, not _helloworld.rs_.\"",
+   "sense": "\"doesn’t give a toss\", \"the usual go\", \"have a squiz\", \"good on ya\" fit.",
+   "authenticity": "Natural but thin; \"Say, use\" is slightly American.",
+   "register": "Moderate: ya/yer and a few terms on the book's sentences; no swearing beyond \"toss\". About level 3.",
+   "tone": "The tutorial's tone intact: \"That makes ya a Rust programmer—welcome!\"",
+   "flow": "Readable but \"punch in\" in nearly every instruction makes it drone.",
+   "variety": "\"punch in\" leaned on (\"punch in these commands\", \"punch in this\", \"punch in this\", \"punch in the code\", \"punch in these\", \"punch in the command\").",
+   "essence": "Unmistakably the original."
+  },
+  "engine": {
+   "meaning": "The original near-verbatim; nothing lost.",
+   "sense": "Only g-drops and \"yer\"; nothing to misfit.",
+   "authenticity": "Contractions inserted mechanically: \"directory'n a directory\", \"created'n enter\", \"compile'n run\"; otherwise the book's American prose.",
+   "register": "Largely untranslated: \"Regardless of your operatin' system\", \"refer back to the\". Far below level 5.",
+   "tone": "The tutorial's tone kept, being the tutorial.",
+   "flow": "The 'n joins and mixed \"yer\"/\"your\" (\"go back to your terminal window\") jar.",
+   "variety": "Only \"yer\", \"ya\", g-drops and 'n.",
+   "essence": "The original, nicked by odd contractions."
+  }
+ },
+ "problems": {
+  "yarn-dinkum": [
+   {
+    "quote": "punch in these\ncommands",
+    "original": "enter the following\ncommands",
+    "severity": "minor",
+    "why": "'Punch in' repeated a few times."
+   }
+  ],
+  "yarn-troppo": [
+   {
+    "quote": "Strewth, where do I start?",
+    "original": "You’ll start by making a directory",
+    "severity": "minor",
+    "why": "Stock exclamation and a clunky opening."
+   },
+   {
+    "quote": "Fair dinkum.",
+    "original": "",
+    "severity": "minor",
+    "why": "Bolted-on tag."
+   },
+   {
+    "quote": "And if yer stuck with Windows CMD, ya poor bugger, it’s this:",
+    "original": "For Windows CMD, enter this:",
+    "severity": "minor",
+    "why": "A jab at Windows users the neutral tutorial doesn't make."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "we reckon you\nmake a _projects_ directory",
+    "original": "we suggest making a _projects_ directory",
+    "severity": "minor",
+    "why": "Ungrammatical; 'we reckon you should make'."
+   },
+   {
+    "quote": "For Windows CMD, chuck in this:",
+    "original": "For Windows CMD, enter this:",
+    "severity": "minor",
+    "why": "'Chuck in' for typing commands is a slight strain."
+   }
+  ],
+  "yarn-deadset": [
+   {
+    "quote": "For Windows CMD, punch in this:",
+    "original": "For Windows CMD, enter this:",
+    "severity": "major",
+    "why": "'Punch in' repeated six times across the text."
+   },
+   {
+    "quote": "Say, use",
+    "original": "For example, use",
+    "severity": "minor",
+    "why": "'Say,' as 'for example' reads American."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "to compile'n run the file",
+    "original": "to compile and run the file",
+    "severity": "major",
+    "why": "Mechanical 'n contraction, not natural Australian."
+   },
+   {
+    "quote": "Regardless of your operatin' system",
+    "original": "Regardless of your operating system",
+    "severity": "major",
+    "why": "Left untranslated with a lone g-drop; far below the brief."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn-dinkum": "A natural, friendly Aussie tutorial that keeps every instruction and all code; a notch under full level 5.",
+  "yarn-troppo": "The full level-5 yarn, varied and faithful, with a few stock tags and extra cheek.",
+  "unharnessed": "A lightly Aussie, accurate tutorial; under the level-5 brief.",
+  "yarn-deadset": "Accurate and natural but light, and leans hard on 'punch in'.",
+  "engine": "The original with mechanical g-drops and 'n contractions; far off the brief."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn-dinkum",
+    "unharnessed",
+    "yarn-deadset",
+    "engine"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "yarn-troppo",
+    "unharnessed"
+   ],
+   [
+    "yarn-deadset"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-troppo"
+   ],
+   [
+    "yarn-dinkum",
+    "unharnessed"
+   ],
+   [
+    "yarn-deadset"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn-dinkum",
+    "unharnessed",
+    "yarn-deadset"
+   ],
+   [
+    "yarn-troppo",
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn-troppo",
+    "yarn-dinkum"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn-deadset"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,312 @@
+{
+ "candidates": {
+  "A": {
+   "scores": {
+    "meaning": {
+     "evidence": "All the technical points survive, but with added claims: \"(usually 4KB, which isn't much)\", \"on a slow mobile data connection out the back of beyond\", \"it forgets you the second you've gone\", and \"Nine times out of ten\" overstates \"Typically\".",
+     "score": 4
+    },
+    "sense": {
+     "evidence": "Terms mostly fit (\"suss out\", \"the session ID gets binned\", \"the modern storage APIs are the go\"), but \"Nine times out of ten\" puts a figure on \"Typically\" and \"cookies got lumbered with general client-side data storage\" adds a judgement.",
+     "score": 4
+    },
+    "authenticity": {
+     "evidence": "Mostly natural idiom (\"have a squiz\", \"earn their keep\", \"suss out\"), with a few bolted-on lines: \"isn't the sort you dunk in your cuppa\", \"out the back of beyond\", \"(chocolate and strawberry, no less)\".",
+     "score": 4
+    },
+    "register": {
+     "evidence": "Heavier than level 2 for a reference page: \"dunk in your cuppa\", \"suss out\", \"binned\", \"lumbered\", \"out the back of beyond\", \"whip up\", \"fiddle with\". Closer to level 3-4. No swearing.",
+     "score": 3
+    },
+    "tone": {
+     "evidence": "A neutral reference doc becomes jokey and chatty: \"Now, a **cookie** ... isn't the sort you dunk in your cuppa.\" and \"as if to say \\\"still me, still signed in.\\\"\" The information is clear, but the tone shifts.",
+     "score": 3
+    },
+    "flow": {
+     "evidence": "Lively, with some padded joins: \"which matters, cos left to its own devices the HTTP protocol is\", \"Cookies get sent along with every single request\".",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "Widely varied: \"squiz\", \"suss out\", \"binned\", \"earn their keep\", \"lumbered\", \"the go\", \"headaches\", \"stash away\".",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Recognisably the MDN page, but the jokes (\"dunk in your cuppa\", \"no less\") make it read as a chatty explainer rather than reference.",
+     "score": 4
+    }
+   },
+   "problems": [
+    {
+     "quote": "isn't the sort you dunk in your cuppa",
+     "original": "",
+     "severity": "minor",
+     "why": "Added joke; colour, but out of place in a reference doc at level 2."
+    },
+    {
+     "quote": "on a slow mobile data connection out the back of beyond",
+     "original": "on slow mobile data connections",
+     "severity": "minor",
+     "why": "Adds a remote-location claim the original doesn't make."
+    },
+    {
+     "quote": "Nine times out of ten, the server reads what's in the HTTP cookies",
+     "original": "Typically, the server will use the contents of HTTP cookies",
+     "severity": "minor",
+     "why": "Puts a frequency on 'typically'."
+    },
+    {
+     "quote": "(usually 4KB, which isn't much)",
+     "original": "(usually 4KB)",
+     "severity": "minor",
+     "why": "Added judgement."
+    }
+   ],
+   "summary": "Accurate and lively, but too heavy and jokey for a level-2 reference page."
+  },
+  "B": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every technical point is kept: \"the session ID gets deleted and the user's shown a generic version of the page\", \"Browsers generally cap the number of cookies per domain\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"hang onto cookies\", \"to say it reckons the user's still signed in\", \"the modern storage APIs are the go\", \"have a squiz\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Natural Australian technical prose: \"These days the modern storage APIs are the go\", \"Storage APIs can hold way more data.\"",
+     "score": 5
+    },
+    "register": {
+     "evidence": "A light, steady touch, right for level 2: \"cos\", \"reckons\", \"the go\", \"squiz\", \"heaps\". No swearing.",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "Stays a clear, neutral reference, lightly warmed: \"Here's how a basic user sign-in system goes:\"",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Smooth: \"Once it's got an HTTP request, a server can send one or more {{HTTPHeader(\\\"Set-Cookie\\\")}} headers back with the response\".",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Varied but light: \"hang onto\", \"cos\", \"reckons\", \"the go\", \"squiz\", \"heaps\", \"way more\".",
+     "score": 4
+    },
+    "essence": {
+     "evidence": "Unmistakably the MDN page, retold.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "what's in the shopping cart",
+     "original": "shopping cart contents",
+     "severity": "minor",
+     "why": "Australians say shopping trolley; a small missed localisation."
+    }
+   ],
+   "summary": "Clear, natural and on-brief."
+  },
+  "C": {
+   "scores": {
+    "meaning": {
+     "evidence": "The original almost verbatim, so everything is there: \"Cookies enable web applications to store limited amounts of data and remember state information\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "The one swap fits: \"especially if you have heaps of cookies set\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Untouched US technical prose, with US spellings left: \"issue a personalized or generic response as appropriate\", \"sends the user a personalized version\".",
+     "score": 3
+    },
+    "register": {
+     "evidence": "Largely untranslated: \"heaps\" and two spellings (\"analysing\", \"behaviour\") are the only changes.",
+     "score": 2
+    },
+    "tone": {
+     "evidence": "The neutral reference tone is intact: \"The following describes a basic user sign-in system:\"",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads as the original.",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "One term: \"heaps\".",
+     "score": 1
+    },
+    "essence": {
+     "evidence": "It is the original page.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "issue a personalized or generic response as appropriate",
+     "original": "issue a personalized or generic response as appropriate",
+     "severity": "major",
+     "why": "Left untranslated, US spelling included; well under the brief."
+    }
+   ],
+   "summary": "The original with one swap and a couple of spellings."
+  },
+  "D": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every point is kept: \"Browsers are generally capped at a maximum number of cookies per domain\", \"the session ID gets deleted\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"shopping trolley contents\", \"it still reckons the user is signed in\", \"drag down performance\". \"out of the box\" fairly carries \"by default\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Natural Australian English: \"shopping trolley\", \"Here's how a basic user sign-in system works\". \"out of the box\" is general, not Australian.",
+     "score": 5
+    },
+    "register": {
+     "evidence": "A shade light for level 2: \"reckons\", \"trolley\", \"drag down\", \"run through\"; little else.",
+     "score": 4
+    },
+    "tone": {
+     "evidence": "Stays a clear reference: \"These days modern storage APIs are recommended instead\".",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Smooth: \"They're built with storage in mind, never send data to the server\".",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Sparse slang, little to vary: \"reckons\", \"trolley\", \"drag down\".",
+     "score": 3
+    },
+    "essence": {
+     "evidence": "Unmistakably the MDN page.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "out of the box, the HTTP protocol is",
+     "original": "by default the HTTP protocol is",
+     "severity": "minor",
+     "why": "A generic idiom, not Australian; adds nothing to the localisation."
+    }
+   ],
+   "summary": "Faithful and natural, slightly light on Aussie."
+  },
+  "E": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every point is kept: \"Storage APIs can hold a lot more data.\", \"the session ID gets deleted\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"have a squiz at the main uses\", \"modern storage APIs are the go\", \"it still reckons the user is signed in\", \"heaps of cookies\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Natural Australian technical prose: \"These days modern storage APIs are the go\". The \"**Personalization**\" heading keeps US spelling beside \"personalised\" in the body.",
+     "score": 5
+    },
+    "register": {
+     "evidence": "A light touch, right for level 2: \"squiz\", \"the go\", \"reckons\", \"heaps\". No swearing.",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "Stays a clear reference: \"Here's how a basic user sign-in system goes:\"",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Smooth: \"Once it's received an HTTP request, a server can send one or more {{HTTPHeader(\\\"Set-Cookie\\\")}} headers back\".",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Varied but light: \"squiz\", \"the go\", \"reckons\", \"heaps\", \"a couple of cookies\".",
+     "score": 4
+    },
+    "essence": {
+     "evidence": "Unmistakably the MDN page.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "- **Personalization**: User preferences like display language and UI theme.",
+     "original": "- **Personalization**: User preferences such as display language and UI theme.",
+     "severity": "minor",
+     "why": "US spelling left in the heading while the body uses 'personalised'."
+    }
+   ],
+   "summary": "Clear, natural and on-brief."
+  }
+ },
+ "rankings": {
+  "tone": [
+   [
+    "B",
+    "C",
+    "D",
+    "E"
+   ],
+   [
+    "A"
+   ]
+  ],
+  "flow": [
+   [
+    "B",
+    "C",
+    "D",
+    "E"
+   ],
+   [
+    "A"
+   ]
+  ],
+  "variety": [
+   [
+    "A"
+   ],
+   [
+    "B",
+    "E"
+   ],
+   [
+    "D"
+   ],
+   [
+    "C"
+   ]
+  ],
+  "essence": [
+   [
+    "B",
+    "C",
+    "D",
+    "E"
+   ],
+   [
+    "A"
+   ]
+  ],
+  "overall": [
+   [
+    "B",
+    "E"
+   ],
+   [
+    "D"
+   ],
+   [
+    "A"
+   ],
+   [
+    "C"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,177 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "engine": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 1,
+   "tone": 3,
+   "flow": 4,
+   "variety": 2,
+   "essence": 4
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Every point survives: the digital-government opportunity, talented colleagues, the culture, partnering across government, strategic and practical, open and iterative delivery, asking for feedback, thanks. \"doing work that really gets you fired up\" shifts \"inspiring work\" from work that inspires to work that excites the newcomer.",
+   "sense": "Terms mostly fit: \"a ripper bunch of people\", \"We're dead set on working in an open, iterative and user-centred way\", \"please sing out if you see any way we can do better\", \"We’re stoked to have you on board\". \"We're out not only to lead the way\" strains a little for \"We strive\".",
+   "authenticity": "Natural Australian workplace warmth: \"drag our government into the digital age\", \"they care heaps\". \"keeps us keen as mustard\" is a stock simile.",
+   "register": "Level 3: a warm Aussie retelling that keeps the letter's shape; \"bloody talented\" sits within vulgarity 1.",
+   "tone": "Keeps the upbeat welcome-letter tone throughout.",
+   "flow": "Reads smoothly; \"We're out not only to lead the way in technology, but to show\" is a little stiff.",
+   "variety": "Varied: \"ripper\", \"fired up\", \"keen as mustard\", \"heaps\", \"top partner\", \"dead set on\", \"sing out\", \"stoked\", \"on board\".",
+   "essence": "Unmistakably the TTS welcome letter."
+  },
+  "engine": {
+   "meaning": "Every point survives because the text is the original almost word for word.",
+   "sense": "Wrong-sense swaps: \"a remarkable group of punters\" (punters are customers, gamblers or the general public, not colleagues); \"our bloody organisation\" reads as exasperation, not emphasis.",
+   "authenticity": "Mechanical swaps in untouched US corporate prose: \"a remarkable group of punters doing inspiring work\", \"a bloody great partner\", \"We aim to make our bloody organisation as agile\".",
+   "register": "Far under level 3: the original verbatim apart from \"punters\", \"dead set on\", two \"bloody\" and \"organisation\".",
+   "tone": "Mostly the original tone, but \"our bloody organisation\" introduces an exasperated note into a welcome letter.",
+   "flow": "Reads like the original; the inserted \"bloody\" jars: \"make our bloody organisation as agile and user-centric\".",
+   "variety": "Little Aussie; \"bloody\" used twice of four swaps.",
+   "essence": "Recognisably the original letter."
+  },
+  "unharnessed": {
+   "meaning": "Every point survives. \"we try to show off the modern, collaborative, diverse culture\" shifts \"exemplify\" (model) toward flaunting.",
+   "sense": "Terms fit: \"a ripper bunch of people\", \"keeps us fired up\", \"top-notch partner\", \"give us a yell\", \"stoked to have you\". \"show off\" strains slightly for \"exemplify\".",
+   "authenticity": "Natural Australian welcome: \"drag our government into the digital age\", \"doing seriously inspiring work\", \"So give us a yell if you see any way we can do better.\"",
+   "register": "Level 3: warm and Aussie without going over; \"bloody talented\" within vulgarity 1.",
+   "tone": "Keeps the upbeat welcome tone throughout.",
+   "flow": "Reads smoothly: \"Being able to work well with colleagues across government is crucial to us making a difference.\"",
+   "variety": "Varied: \"ripper\", \"seriously\", \"fired up\", \"top-notch\", \"nimble\", \"give us a yell\", \"stoked\".",
+   "essence": "Unmistakably the TTS welcome letter."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "keeps us keen as mustard about the work we do",
+    "original": "keeps us excited about the work we do",
+    "severity": "minor",
+    "why": "Stock simile that reads a touch put-on."
+   },
+   {
+    "quote": "doing work that really gets you fired up",
+    "original": "doing inspiring work",
+    "severity": "minor",
+    "why": "Shifts 'inspiring' from describing the work to describing the reader's feelings."
+   },
+   {
+    "quote": "We're out not only to lead the way in technology",
+    "original": "We strive not only to lead the way in technology",
+    "severity": "minor",
+    "why": "'We're out to' is slightly awkward here."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "a remarkable group of punters",
+    "original": "a remarkable group of people",
+    "severity": "major",
+    "why": "'Punters' means customers, gamblers or the public; wrong sense for new colleagues."
+   },
+   {
+    "quote": "We aim to make our bloody organisation as agile",
+    "original": "We aim to make our organization as agile",
+    "severity": "major",
+    "why": "'Our bloody organisation' sounds exasperated with the organisation; wrong tone for a welcome."
+   },
+   {
+    "quote": "We have an unprecedented opportunity to bring our government into the digital\nage and transform the way it works.",
+    "original": "We have an unprecedented opportunity to bring our government into the digital\nage and transform the way it works.",
+    "severity": "major",
+    "why": "Left untranslated, as is nearly all the text; far under the level-3 brief."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "we try to show off the modern, collaborative, diverse culture",
+    "original": "to exemplify the modern, collaborative, diverse culture",
+    "severity": "minor",
+    "why": "'Show off' suggests flaunting rather than modelling the culture."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A warm, natural level-3 Aussie welcome that keeps every point; a stock simile or two.",
+  "engine": "The original letter with a few mechanical swaps, two of them wrong-sense; essentially untranslated.",
+  "unharnessed": "A warm, natural level-3 Aussie welcome that keeps every point; one slightly off verb."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

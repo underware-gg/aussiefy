@@ -1,0 +1,197 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 2,
+   "authenticity": 2,
+   "register": 2,
+   "tone": 3,
+   "flow": 2,
+   "variety": 2,
+   "essence": 4
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every beat survives: \"We had about $6,000 and figured we'd double it in two months\", the ad kept whole, \"a five-dollar note and a cigar couldn't fix\", \"same cottage, same sunflowers, same roosters perched on the washtub\". Nothing invented.",
+   "sense": "Terms fit: \"the most harmless bit of a lurk\" for graft, \"a building society mortgage\", \"given away them ideas of realism\" (give up), \"strife with the coppers\", \"an old mate of mine\". \"flogging themselves on overtime\" for working overtime fits.",
+   "authenticity": "Reads like a local spinning it: \"having a good hard squiz at the city by-laws\", \"come sniffing round our agency\", \"fitted our ad pretty bloody well\", \"the liniment he always got sloshed on\". Only \"realizes\" in the quoted ad is left US.",
+   "register": "A steady middle weight, Aussie in most lines but not piled on: \"there's a quid to be made in marriage agencies\", \"where's the sheila?\". One \"bloody\", within dad level.",
+   "tone": "Keeps Jeff's mock-learned con-man swagger: \"So far, so pernicious\", \"hereditaments and appurtenances set out in the catalogue and writ of errors\".",
+   "flow": "Smooth throughout: \"It was only sixty miles to the little town where she lived, so I hopped on the I. C. and there she was\".",
+   "variety": "Varied slang, though \"caper\" recurs: \"marriage agency caper\", \"a caper like ours\", \"a marriage caper with no marrying in it\"; \"lurk\" twice.",
+   "essence": "Unmistakably O. Henry's Jeff Peters, retold: \"When they flog a heap of watered stock on Wall Street, d'you expect to find a mermaid in it?\""
+  },
+  "engine": {
+   "meaning": "Mostly the original verbatim, so the story survives, but the ad is altered: \"possessing $3,000 dosh\", \"invest dosh with judgment\", and \"she looked a goer\" shifts what Jeff says of Mrs. Trotter.",
+   "sense": "Several swaps take the wrong sense: \"she looked a goer\" for feasible reads as sexually keen; \"$3,000 dosh\" puts slang into a formal ad; \"No objection to elderly bloke\" in the ad. \"staying back for 'em\" for working overtime fits.",
+   "authenticity": "Stock words bolted onto unaltered American prose: \"reconstructing his bloody mind\", \"investigate our bloody agency\", \"Bloody hell, we had about $6,000\". Original forms left: \"said I\", \"the police\".",
+   "register": "Largely untranslated (\"As I have told you before,\" said Jeff Peters, \"I never had much confidence\"), while \"bloody\" is sprinkled five times, heavier swearing than the light Aussie around it suggests.",
+   "tone": "The wit is intact where the original is kept, but the bolted-on oaths jar: \"too bloody much\", \"as bloody big as the little end of a wagon tongue\".",
+   "flow": "Clunky joins where words were swapped in: \"Bloody hell, we had about $6,000\", \"possessing $3,000 dosh\".",
+   "variety": "Leans on \"bloody\" and \"dosh\": \"there's dosh in matrimonial agencies\", \"$3,000 dosh\", \"invest dosh\".",
+   "essence": "Recognisably the original since most is verbatim: \"So far, so pernicious,\" says I."
+  },
+  "yarn": {
+   "meaning": "All points kept: \"We had about $6,000 and we were counting on doubling it in two months\", \"a five-dollar note and a cigar couldn't square\", \"the same roosters standing on the washtub\". \"So far, so wicked\" loses the pun on \"so far, so good\" but not the sense.",
+   "sense": "Terms fit: \"offsiders\" for coeducators, \"the most innocent sort of swifty\", \"shonky raids on the letter of the law\", \"fitted our ad a treat\", \"staying back for 'em\".",
+   "authenticity": "Mostly natural: \"having a bit of a rethink\", \"sniff round our agency\", \"his missus\". A few forced touches: the opener \"So get this.\" and the constant \"ya\".",
+   "register": "A middle weight, as asked: \"there's dosh in marriage agencies\", \"a bit too bloody much\"; one \"bloody\".",
+   "tone": "Keeps the con-man's mock formality: \"with or without the beauty, hereditaments and appurtenances set out in the catalogue and writ of errors\".",
+   "flow": "Reads well, though the added \"So get this.\" is an abrupt start and \"ya\" recurs: \"would ya expect\", \"could ya hope\".",
+   "variety": "Good range, but \"caper\" four times: \"marriage agency caper\", \"a caper like ours\", \"to work this caper\", \"a marriage caper\".",
+   "essence": "Clearly the original: \"When they flog heaps of watered stock on Wall Street, would ya expect to find a mermaid in it?\""
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "a marriage caper with no marrying in it",
+    "original": "a matrimonial scheme that had no matrimony in it",
+    "severity": "minor",
+    "why": "\"caper\" is leaned on, three times for the scheme."
+   },
+   {
+    "quote": "as she realizes that the solid virtues",
+    "original": "as she realizes that the solid virtues",
+    "severity": "minor",
+    "why": "US spelling left in the quoted ad."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "she looked a goer and praiseworthy to the eye",
+    "original": "she looked feasible and praiseworthy to the eye",
+    "severity": "major",
+    "why": "\"a goer\" said of a woman reads as sexually willing, not workable."
+   },
+   {
+    "quote": "possessing $3,000 dosh",
+    "original": "possessing $3,000 cash",
+    "severity": "major",
+    "why": "Slang inside a formal newspaper ad, and the ad is meant to read as written."
+   },
+   {
+    "quote": "reconstructing his bloody mind",
+    "original": "reconstructing his mind",
+    "severity": "major",
+    "why": "\"bloody\" stuffed into lines that carry no heat; five of them in all."
+   },
+   {
+    "quote": "Bloody hell, we had about $6,000",
+    "original": "We had about $6,000",
+    "severity": "minor",
+    "why": "An exclamation with nothing to react to."
+   },
+   {
+    "quote": "\"As I have told you before,\" said Jeff Peters, \"I never had much confidence in the perfidiousness of woman.",
+    "original": "\"As I have told you before,\" said Jeff Peters, \"I never had much confidence in the perfidiousness of woman.",
+    "severity": "major",
+    "why": "Most of the text is left untranslated."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "'So far, so wicked,'",
+    "original": "'So far, so pernicious,'",
+    "severity": "minor",
+    "why": "Loses the play on \"so far, so good\" that \"pernicious\" carried."
+   },
+   {
+    "quote": "So get this.",
+    "original": "",
+    "severity": "minor",
+    "why": "A bolted-on yarn opener before a text that already opens in dialogue."
+   },
+   {
+    "quote": "to work this caper",
+    "original": "to work this scheme",
+    "severity": "minor",
+    "why": "\"caper\" leaned on four times."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A natural, well-weighted retelling that keeps every point and the voice; slight leaning on \"caper\".",
+  "engine": "Mostly the original with \"bloody\" and \"dosh\" dropped in, some in the wrong place; \"a goer\" takes the wrong sense.",
+  "yarn": "A natural, faithful retelling at the right weight; a stock opener, some \"ya\" and \"caper\" repetition, and the \"pernicious\" pun lost."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,50 @@
+# Using aussiefy from an agent
+
+Language models write good Australian English when they have genuine source material and a check. aussiefy
+gives an agent both, through the same six operations (lookup, lint, guide, plan, translate, verify) on every surface.
+The operations themselves are described in the [toolkit reference](../functional/toolkit.md).
+
+The workflow is the same everywhere: establish the **brief** and dials, read the **guide**, get the engine's
+**plan**, write the text with **lookups**, **lint** and fix it, then **deliver**. Run `aussiefy guide` for
+the current craft guidance, which is filtered to the level and vulgarity. The plan's `note` explains how to
+use its phrases and suggestions without forcing a wrong sense.
+
+## In Claude Code: the skill
+
+[skills/aussiefy/SKILL.md](../../../skills/aussiefy/SKILL.md) walks an agent through that workflow using the CLI.
+In this repository it is already linked into `.claude/skills/`. To use it anywhere, install aussiefy, then copy
+the `skills/aussiefy/` folder to `~/.claude/skills/aussiefy/`.
+
+## In any MCP-capable agent: the MCP server
+
+```sh
+pip install "aussiefy[mcp] @ git+https://github.com/underware-gg/aussiefy@dev"
+claude mcp add aussiefy -- aussiefy-mcp     # Claude Code; other clients run `aussiefy-mcp` over stdio
+```
+
+The tools are `aussie_lookup`, `aussie_lint`, `aussie_guide`, `aussie_plan` and `aussie_translate`, and the
+server's instructions tell the agent the workflow.
+
+## In your own Claude API agent
+
+- To have aussiefy run the whole loop, call `aussiefy.yarn(text, level=5)` (see
+  [using Claude to polish or retell](llm-modes.md)).
+- To run the loop yourself, import the loop's parts from the module (`aussiefy.yarn` on the package is the
+  function):
+
+  ```python
+  from aussiefy.yarn import brief, dispatch_tool, tool_definitions
+
+  tools = tool_definitions()               # lookup, lint and submit, for the Messages API
+  session = brief(text, level=5)           # the system prompt (session.system) and first message (session.payload)
+  result, accepted = dispatch_tool(session, name, args)   # answer one tool call; accepted only for a valid submit
+  ```
+
+## From a shell
+
+```sh
+aussiefy guide -l 5
+aussiefy plan -l 5 < story.txt
+aussiefy lookup -l 5 "very busy"
+aussiefy lint -l 5 --original story.txt < draft.txt   # exit 1 means there are issues
+```

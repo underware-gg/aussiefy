@@ -1,0 +1,352 @@
+{
+ "candidates": {
+  "A": {
+   "scores": {
+    "meaning": {
+     "evidence": "Mostly the original verbatim, but the last answer is changed: \"Does Yellowstone include a federally designated bush?\" and \"Parliament House hasn't acted on the recommendation\" swap wilderness for bush and Congress for an Australian building.",
+     "score": 2
+    },
+    "sense": {
+     "evidence": "Several wrong-sense swaps: \"federally designated bush\" (a legal wilderness category is not \"bush\"), \"Parliament House\" for Congress, \"Not on your nelly\" for a plain \"No.\" \"summer is flat chat\" strains for \"busy\".",
+     "score": 2
+    },
+    "authenticity": {
+     "evidence": "Stock tokens dropped into American prose: \"before you lob\", \"Nah, nah.\", \"Not on your nelly.\"; \"purchasing your pass\" and \"lines at the entrance gates\" left in.",
+     "score": 2
+    },
+    "register": {
+     "evidence": "Largely untranslated, with a handful of swapped words (\"make a booking early\", \"visitor centres\"); far under level 4.",
+     "score": 1
+    },
+    "tone": {
+     "evidence": "The friendly informational tone mostly survives because the text is mostly untouched, but \"Not on your nelly.\" makes a factual answer flippant.",
+     "score": 4
+    },
+    "flow": {
+     "evidence": "Reads like the original except where words are swapped in: \"Be sure to make a booking early!\" under \"Do I need a reservation\", \"before you lob\" mid-formal sentence.",
+     "score": 3
+    },
+    "variety": {
+     "evidence": "Too little Aussie to vary; \"Nah, nah.\" and \"Not on your nelly.\" are the only touches beyond spellings.",
+     "score": 2
+    },
+    "essence": {
+     "evidence": "Still the Yellowstone FAQ, unchanged for most of its length, but the last answer no longer makes sense.",
+     "score": 3
+    }
+   },
+   "problems": [
+    {
+     "quote": "Does Yellowstone include a federally designated bush?",
+     "original": "Does Yellowstone include a federally designated wilderness?",
+     "severity": "critical",
+     "why": "\"Wilderness\" is a legal designation; \"bush\" makes the question meaningless."
+    },
+    {
+     "quote": "Parliament House hasn't acted on the recommendation",
+     "original": "Congress has not acted on the recommendation",
+     "severity": "critical",
+     "why": "Moves a US federal decision to the Australian Parliament."
+    },
+    {
+     "quote": "Not on your nelly.",
+     "original": "No.",
+     "severity": "major",
+     "why": "Emphatic refusal idiom for a factual no; wrong register."
+    },
+    {
+     "quote": "summer is flat chat",
+     "original": "summer is busy",
+     "severity": "minor",
+     "why": "\"Flat chat\" fits people being busy, strains for a season."
+    },
+    {
+     "quote": "Save time at entrance stations by purchasing your pass online before you lob.",
+     "original": "Save time at entrance stations by purchasing your pass online before you arrive.",
+     "severity": "minor",
+     "why": "One slang word dropped into formal prose; mostly untranslated."
+    }
+   ],
+   "summary": "A rule-engine pass: barely translated, and its two big swaps (bush, Parliament House) break the last answer."
+  },
+  "B": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every fact survives, with colour hung off the original: \"anywhere a bison's wandered up to the road and every car's pulled over for a squiz\", \"Lewis and Clark had a bob each way\", \"Pipped at the post.\" \"look but don't touch\" overstates \"unimpaired\", and \"Only the northern half\" shifts \"part\".",
+     "score": 4
+    },
+    "sense": {
+     "evidence": "Terms fit: \"had a bob each way\" for using both names, \"the whole box and dice\", \"Not a bad gong, that.\" for the UN designation, \"the pollies in Congress\". \"look but don't touch\" strains for a preservation mandate.",
+     "score": 4
+    },
+    "authenticity": {
+     "evidence": "Sounds like a real Australian guide: \"Do yourself a favour\", \"you'll skip a fair bit of mucking about\", \"Now, this one's a ripper.\"",
+     "score": 5
+    },
+    "register": {
+     "evidence": "A full level-4 retelling; no swearing, which vulgarity 1 allows.",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "Keeps the FAQ's friendly, helpful tone while chattier: \"Please be patient and enjoy your visit. It's worth the wait, I reckon.\" \"dangerously cold\" is kept straight.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads aloud smoothly: \"After that, folks just kept saying it till it was official\".",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Varied slang and openers (\"lob\", \"flat chat\", \"squiz\", \"box and dice\", \"gong\", \"pollies\"); \"get this\" comes twice (\"So get this\", \"And get this\") and \"squiz\" twice.",
+     "score": 4
+    },
+    "essence": {
+     "evidence": "Unmistakably the Yellowstone FAQ, question by question, retold as a guide's chat.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "look but don't touch",
+     "original": "The National Park Service is mandated to preserve resources unimpaired",
+     "severity": "minor",
+     "why": "Overstates the mandate; visitors use parks."
+    },
+    {
+     "quote": "Only the northern half of the original volcano's still standing",
+     "original": "Only the northern part of the original volcano is still visible.",
+     "severity": "minor",
+     "why": "\"half\" is not in the original."
+    },
+    {
+     "quote": "And get this:",
+     "original": "",
+     "severity": "minor",
+     "why": "Repeats \"So get this\" from the opening answer."
+    }
+   ],
+   "summary": "A lively, natural level-4 retelling that keeps every fact; the best of the set."
+  },
+  "C": {
+   "scores": {
+    "meaning": {
+     "evidence": "All facts survive. Additions are colour: \"cold enough to freeze the bits off a brass monkey\", \"have a ripper of a visit\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"rock up\", \"flat out\", \"gawk at the wildlife\", \"track maintenance\", \"bloody competitive\". \"have a ripper of a visit\" is a slight strain.",
+     "score": 4
+    },
+    "authenticity": {
+     "evidence": "Natural: \"Congress still hasn't got round to doing anything about it\", \"kick off their careers\". The brass-monkey line is stock.",
+     "score": 4
+    },
+    "register": {
+     "evidence": "About level 3 to 4: much is plain Australian English (\"Ask at the visitor centres about what's been spotted lately\"), with one \"bloody\", within vulgarity 1.",
+     "score": 4
+    },
+    "tone": {
+     "evidence": "Friendly and informative; the brass-monkey joke lightens a safety warning slightly (\"dangerously cold – cold enough to freeze the bits off a brass monkey\").",
+     "score": 4
+    },
+    "flow": {
+     "evidence": "Smooth throughout: \"Over time the name got locked in\"",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Varied enough (\"rock up\", \"gawk\", \"heaps\", \"kick off\", \"bloody\") with no tics.",
+     "score": 4
+    },
+    "essence": {
+     "evidence": "Clearly the FAQ, retold in an Australian voice.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "cold enough to freeze the bits off a brass monkey",
+     "original": "dangerously cold",
+     "severity": "minor",
+     "why": "Stock idiom that lightens a safety warning."
+    },
+    {
+     "quote": "have a ripper of a visit",
+     "original": "Please be patient and enjoy your visit.",
+     "severity": "minor",
+     "why": "Forced; drops the plea to be patient's politeness."
+    }
+   ],
+   "summary": "Clean, natural and faithful, a little lighter than level 4, with one jokey line on a warning."
+  },
+  "D": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every fact survives; it adds accurate metric conversions (\"13 million acres, or about 5.3 million hectares\", \"11,358 feet (3,462 metres)\"), a localisation rather than a change. \"the number of people coming for a bit of fun outdoors\" loosens \"recreational visitors\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Mostly exact (\"lob\", \"flat chat\", \"have a geek\", \"dead competitive\"), but \"book your car in\" reads as booking a car service, and \"the lower 48\" is a US term.",
+     "score": 4
+    },
+    "authenticity": {
+     "evidence": "Natural Australian voice: \"That'd be Eagle Peak\", \"Best not: swimming isn't recommended\", \"Pop into a visitor centre\". \"the lower 48 of the United States\" is American.",
+     "score": 4
+    },
+    "register": {
+     "evidence": "Close to level 4, Aussie throughout but measured; no swearing.",
+     "score": 4
+    },
+    "tone": {
+     "evidence": "Friendly and helpful throughout, warnings kept straight: \"Best not: swimming isn't recommended\".",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Mostly smooth; the run of hectare brackets in one answer is a little heavy (\"(at 2.2 million acres, or about 890,000 hectares)\").",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "Good range: \"lob\", \"flat chat\", \"squiz\", \"geek\", \"dead competitive\", \"heaps\".",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Unmistakably the FAQ, retold for an Australian reader down to the metric units.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "you don't need to book your car in",
+     "original": "Vehicle reservations are not required",
+     "severity": "minor",
+     "why": "\"Book your car in\" usually means a service booking."
+    },
+    {
+     "quote": "the lower 48 of the United States",
+     "original": "the contiguous United States",
+     "severity": "minor",
+     "why": "American idiom in an Australian voice."
+    }
+   ],
+   "summary": "Natural and faithful, thoughtfully localised with metric units; a little short of B's life."
+  },
+  "E": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every fact survives with almost no additions: \"Over time the name stuck, official-like\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "All terms fit: \"before you lob\", \"flat chat\", \"roadworks\", \"hotly contested\", \"Yeah, nah.\"",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Natural where it changes things (\"Get your booking in early!\"); \"official-like\" is a little stagey.",
+     "score": 4
+    },
+    "register": {
+     "evidence": "Light: level 2 to 3, many answers near the original (\"Park rangers work in education, resource management, law enforcement\").",
+     "score": 3
+    },
+    "tone": {
+     "evidence": "The friendly informational tone is whole: \"Please be patient and enjoy your visit.\"",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads smoothly.",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Little slang to vary; \"Nah, nah.\" and \"Yeah, nah.\" plus \"lob\" and \"flat chat\".",
+     "score": 3
+    },
+    "essence": {
+     "evidence": "Unmistakably the FAQ.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "Park rangers work in education, resource management, law enforcement, emergency medical services, and backcountry operations.",
+     "original": "Park rangers work in education, resource management, law enforcement, emergency medical services, and backcountry operations.",
+     "severity": "minor",
+     "why": "Much left as is; lighter than the level-4 brief."
+    },
+    {
+     "quote": "official-like",
+     "original": "formalized",
+     "severity": "minor",
+     "why": "Slightly stagey."
+    }
+   ],
+   "summary": "Faithful and natural but lighter than level 4."
+  }
+ },
+ "rankings": {
+  "tone": [
+   [
+    "B",
+    "D",
+    "E"
+   ],
+   [
+    "C"
+   ],
+   [
+    "A"
+   ]
+  ],
+  "flow": [
+   [
+    "B",
+    "C",
+    "E"
+   ],
+   [
+    "D"
+   ],
+   [
+    "A"
+   ]
+  ],
+  "variety": [
+   [
+    "B",
+    "D"
+   ],
+   [
+    "C"
+   ],
+   [
+    "E"
+   ],
+   [
+    "A"
+   ]
+  ],
+  "essence": [
+   [
+    "B",
+    "C",
+    "D",
+    "E"
+   ],
+   [
+    "A"
+   ]
+  ],
+  "overall": [
+   [
+    "B"
+   ],
+   [
+    "D",
+    "C"
+   ],
+   [
+    "E"
+   ],
+   [
+    "A"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,177 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "unharnessed": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 3,
+   "authenticity": 2,
+   "register": 2,
+   "tone": 5,
+   "flow": 4,
+   "variety": 2,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Every point kept: the 1.98.1 point release, `rustup update stable`, the vtable miscompilation with a null pointer, UB, segfaults \"but it can also open the door to arbitrary effects\", the beta and nightly channels, the bug-report link, thanks to contributors.",
+   "sense": "Terms fit: \"empowering every man and his dog\" for everyone, \"give us a hand\", \"any bugs you might run into\", \"Heaps of people pitched in\".",
+   "authenticity": "Mostly natural (\"every man and his dog\", \"pitched in\"), though \"a brand-spankin'-new point release\" is an American stock phrase.",
+   "register": "Lighter than level 4: a handful of touches (\"brand-spankin'-new\", \"every man and his dog\", \"Heaps\") on otherwise lightly reworded release notes, e.g. \"rustc would wrongly generate a trait object vtable\".",
+   "tone": "Keeps the friendly, informative release-note voice: \"We couldn't have done it without all of you.\"",
+   "flow": "Reads smoothly: \"Sometimes this may 'just' cause segfaults when the null pointer gets loaded, but it can also open the door to arbitrary effects\".",
+   "variety": "Several distinct touches, none repeated: \"put out\", \"brand-spankin'-new\", \"every man and his dog\", \"give us a hand\", \"run into\", \"Heaps\", \"pitched in\".",
+   "essence": "Plainly the same Rust point-release announcement, code blocks and links intact."
+  },
+  "unharnessed": {
+   "meaning": "All points kept: the point release, the rustup command, the null-pointer vtable bug and UB, segfaults, beta and nightly testing, bug reports, thanks. Additions are colour hanging off the original: \"runs like a bloody dream\" for efficient, \"(as you'd expect with UB, the mongrel)\".",
+   "sense": "Most terms fit (\"giving everyone a leg-up\", \"rustc would go and stuff up a trait object vtable\", \"the code it spits out\", \"bugs you might trip over\"), but \"it's also fair game for any old weird effects\" strains: fair game means a legitimate target, not something that can happen.",
+   "authenticity": "Sounds like an Australian dev talking: \"go and stuff up\", \"the lot of youse\", \"Heaps of people pitched in to put Rust 1.98.1 together\".",
+   "register": "Level-4 throughout with dad-level swearing: \"runs like a bloody dream\", \"the mongrel\", \"the lot of youse\".",
+   "tone": "The friendly release-note tone survives, though the bug explanation gets jokier than the original: \"(as you'd expect with UB, the mongrel)\".",
+   "flow": "Mostly smooth; one clunky stretch: \"but it's also fair game for any old weird effects at all\".",
+   "variety": "Wide range, nothing leaned on: \"pushed out\", \"leg-up\", \"grabbing\", \"sorts out\", \"stuff up\", \"spits out\", \"mongrel\", \"lend us a hand\", \"trip over\", \"youse\".",
+   "essence": "Clearly the same announcement, code and links unchanged."
+  },
+  "engine": {
+   "meaning": "Almost the original verbatim, so every point survives: \"rustc would incorrectly generate a trait object vtable with a null pointer\".",
+   "sense": "\"every man and his dog\" fits, but \"Many punters came together to create Rust 1.98.1\" uses punters (customers, gamblers, the public) for contributors.",
+   "authenticity": "Three phrases pasted onto untouched text: \"a brand-spankin'-new point release\" (American), \"every man and his dog\", \"punters\".",
+   "register": "Largely untranslated against a level-4 brief: \"In some cases this may 'just' cause segfaults due to the null pointer being loaded\".",
+   "tone": "The original tone is intact.",
+   "flow": "Reads as the original, with the pasted \"brand-spankin'-new\" a bit jarring beside \"has published\".",
+   "variety": "Only three touches: \"brand-spankin'-new\", \"every man and his dog\", \"punters\".",
+   "essence": "It is the original announcement."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "a brand-spankin'-new point release",
+    "original": "a new point release",
+    "severity": "minor",
+    "why": "American stock phrase rather than Australian."
+   },
+   {
+    "quote": "rustc would wrongly generate a trait object vtable",
+    "original": "rustc would incorrectly generate a trait object vtable",
+    "severity": "minor",
+    "why": "Representative of the technical body staying plain, under the level-4 brief."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "it's also fair game for any old weird effects at all",
+    "original": "it is possible for it to be justification for arbitrary effects",
+    "severity": "minor",
+    "why": "\"Fair game\" strains the sense, and the line is wordy."
+   },
+   {
+    "quote": "runs like a bloody dream",
+    "original": "efficient",
+    "severity": "minor",
+    "why": "Loose rendering of \"efficient\"; colour rather than an exact match."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Many punters came together to create Rust 1.98.1.",
+    "original": "Many people came together to create Rust 1.98.1.",
+    "severity": "major",
+    "why": "Punters are customers or the public, not contributors; wrong sense."
+   },
+   {
+    "quote": "In some cases this may 'just' cause segfaults due to the null",
+    "original": "In some cases this may 'just' cause segfaults due to the null",
+    "severity": "major",
+    "why": "Representative: the text is left largely untranslated."
+   },
+   {
+    "quote": "brand-spankin'-new",
+    "original": "new",
+    "severity": "minor",
+    "why": "American stock phrase."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "Clear, accurate and natural, but lighter than the level-4 brief.",
+  "unharnessed": "A lively level-4 retelling that keeps all the technical content; one strained idiom.",
+  "engine": "The original with three pasted phrases, one in the wrong sense; far too light."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "engine"
+   ],
+   [
+    "unharnessed"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed",
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed",
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,1245 @@
+- term: dunno
+  key: dunno
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: NEW:DUNNO
+    frame: garnish:aside
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://www.goodreads.com/author_blog_posts/5923084-series-glossary?tab=author
+    confidence: medium
+    notes: General informal English. Pairs with the existing asides 'search me' and 'beats me'. Only a light source
+      found.
+    meaning: '''I don''t know'' (also a trailing shrug)'
+  gaps:
+  - I don't know
+  - filler:thinking
+  - not sure
+  - thinking_fillers
+  - who knows
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - hesitation
+  - hesitation
+  - '''I don''t know'' (also a trailing shrug)'
+  examples:
+  - '''Dunno, you know what he''s like.'''
+  - Dunno, I s'pose it's end of financial year or somethin'.
+  - Dunno, I s'pose it's end of financial year or something.
+- term: eh
+  key: eh
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: NEW:TAG_EH
+    frame: garnish:tag
+    register: current
+    region:
+    - qld
+    - rural
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://languagelog.ldc.upenn.edu/nll/?p=119
+    - https://en.wikipedia.org/wiki/Eh
+    confidence: medium
+    notes: The garnish already has 'ay' (same tag, different spelling). Language Log quotes an observer linking
+      it to rural Queensland, and Avis recorded it in Australian English. Also common in NZ and Canada.
+    meaning: confirmation-seeking or emphatic tag, 'isn't it?' or 'right?'
+  gaps:
+  - don't you think
+  - eh
+  - filler:sentence_final_tag
+  - isn't it
+  - right?
+  - sentence_final_tags
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - tag seeking agreement
+  - tag
+  - tag
+  - tag
+  examples:
+  - Trev's a generous bugger like that, eh?
+  - That's a fair whack, eh?
+  - That's a fair whack, eh?
+- term: Hey
+  key: hey
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: NEW:TAG_EH
+    frame: garnish:tag
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://www.wiktionary.com/wiki/hey
+    confidence: low
+    notes: Wiktionary documents tag 'hey' generally, with no Australian label, and Collins labels the tag South
+      African. It is very common in everyday Australian speech (also 'thanks, hey'), but I found no source that
+      labels it Australian. Keep it, but don't overuse it.
+    meaning: sentence-final tag adding emphasis or asking for agreement
+  gaps:
+  - (sentence-final) hey
+  - eh
+  - filler:opener
+  - isn't it
+  - openers
+  - right?
+  - sentence_final_tags
+  frames:
+  - garnish
+  - interjection
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - discourse opener
+  - tag seeking agreement
+  - greeting / opener
+  - tag seeking agreement
+  examples:
+  - Hey, it's Sam.
+  - Hey, it's Sam.
+- term: a motza
+  key: motza
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: RICH
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://dictionary.com/browse/motser
+    - https://greensdictofslang.com/entry/kzfzcvi
+    - https://www.wordnik.com/words/motza
+    confidence: high
+    notes: Also spelt motser or motzer. Probably from Yiddish. Fixes the 'a heap of money' known failure ('made
+      a motza', 'won a motza').
+    meaning: a very large sum of money, often a win
+  gaps:
+  - a fortune
+  - a heap of money
+  - a lot of money
+  - a pile of cash
+  - intensifiers
+  frames:
+  - garnish
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - emphasis on amount
+  - lots of money
+  - a lot of money
+  - a very large sum of money, often a win
+  examples:
+  - Apparently he made a motza sellin' his business.
+  - Apparently he made a motza selling his business.
+- term: a bit
+  key: bit
+  in_dictionary: null
+  support: 3
+  agents:
+  - B
+  - C
+  web:
+    concept: NEW:HEDGE
+    frame: adv
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://lens.monash.edu/discourse-markers-when-saying-a-bit-can-mean-a-lot/
+    confidence: high
+    notes: 'Monash research (Burridge and colleagues) finds Australians use ''a bit'' so much it gets criticised.
+      It softens both complaints and praise, which fits the ''don''t whinge'' norm. Often deadpan understatement:
+      ''a bit warm'' at 45 degrees.'
+    meaning: softening hedge, 'somewhat'
+  gaps:
+  - a little
+  - filler:hedge
+  - hedges
+  - kind of
+  - portion
+  - rather
+  - somewhat
+  - sort of
+  frames:
+  - garnish
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - softener
+  - part
+  - softening
+  - part
+  examples:
+  - And the bedroom window sticks a bit, so you've gotta give it a shove.
+- term: but (sentence-final)
+  key: but (sentence-final)
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:connective
+  - filler:sentence_final_tag
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - A boat, but?
+  - A boat, but?
+  - A boat, but?
+- term: good call
+  key: good call
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:agreement
+  - smart
+  frames:
+  - adj
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - smart
+  - astute
+  examples:
+  - Yeah, good call.
+- term: I reckon
+  key: i reckon
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - C
+  web:
+    concept: THINK
+    frame: garnish:aside
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://www.inyourpocket.com/australia/sydney/articles/australian-slang-a-survival-glossary
+    confidence: high
+    notes: '''Reckon'' is already in THINK as a verb. This is the free-floating aside/tag use (''..., I reckon.''
+      or ''I reckon, ...''). The glossary calls it a sure sign you''re talking to an Australian.'
+    meaning: thinking or hedging filler, 'I think'
+  gaps:
+  - I guess
+  - I suppose
+  - I think
+  - probably
+  - thinking_fillers
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - hedge/thinking
+  - hesitation / vagueness
+  - hesitation
+  - thinking or hedging filler, 'I think'
+  examples:
+  - About twenty bucks for a burger, I reckon.
+- term: I s'pose
+  key: i s'pose
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:hedge
+  - filler:thinking
+  - hedges
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - softening
+  - softening
+  - softening
+  examples:
+  - I s'pose it's end of financial year or something.
+  - Copped the rough end of the pineapple a bit, I s'pose.
+  - Bit of rough luck, I s'pose.
+- term: Look
+  key: look
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:opener
+  - openers
+  frames:
+  - garnish
+  - interjection
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - opener
+  examples:
+  - Look, I can't talk long, I'm on my break.
+  - Look, I'll be fair dinkum with ya.
+  - Look, I've gotta go, my boss is waving at me.
+- term: Mind you
+  key: mind you
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - connectives
+  - filler:connective
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - topic shift / discourse linkers
+  - linkers
+  examples:
+  - Mind you, his brother turned up
+  - Mind you, his brother turned up
+  - Mind you, his brother turned up, and he's a bit of a pain in the arse.
+- term: Nah, nah
+  key: nah, nah
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:disagreement
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - Nah, nah, I won't.
+  - Nah, nah, me lips are sealed.
+  - '"Nah, nah, I won''t.'
+- term: or something
+  key: or something
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - C
+  web:
+    concept: NEW:GENERAL_EXTENDER
+    frame: garnish:tail
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://assets.cambridge.org/97811088/37231/excerpt/9781108837231_excerpt.pdf
+    confidence: medium
+    notes: General English. Also 'or whatever'.
+    meaning: vague tail hedging the precise detail
+  gaps:
+  - filler:hedge
+  - or so
+  - or thereabouts
+  - roughly
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings:
+  - vague tail hedging the precise detail
+  examples:
+  - end of financial year or something.
+  - Dunno, I s'pose it's end of financial year or something.
+- term: or whatever
+  key: or whatever
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:hedge
+  - thinking_fillers
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - hesitation
+  - hesitation / vagueness
+  examples:
+  - just a suggestion or whatever.
+  - just a suggestion or whatever.
+  - Not a whinge, just a suggestion or whatever.
+- term: What else?
+  key: what else
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:thinking
+  - thinking_fillers
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - filler
+  - hesitation
+  examples:
+  - What else? Bins go out Wednesday night.
+  - What else... Bins go out Wednesdy night.
+  - What else?
+- term: will ya?
+  key: will ya
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:sentence_final_tag
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - Chuck us the tongs, will ya?
+  - Pass us the tongs, will ya?
+  - Pass us the tongs, will ya?
+- term: you know
+  key: you know
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - C
+  web:
+    concept: NEW:TAG_YOU_KNOW
+    frame: garnish:tag
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://research-repository.uwa.edu.au/en/publications/utterance-final-tags-in-aboriginal-and-non-aboriginal-english/
+    confidence: high
+    notes: The UWA study (Fraiese, Rodríguez Louro, Collard) found utterance-final 'you know' to be the most common
+      tag in both Australian English and Aboriginal English. Render it as 'ya know'. General English, so it's mostly
+      a rhythm device.
+    meaning: tag checking the listener is with you
+  gaps:
+  - (sentence-final filler)
+  - filler:thinking
+  - right
+  - thinking_fillers
+  - you know
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - filler
+  - hesitation
+  - tag checking the listener is with you
+  examples:
+  - Not falling over, but, you know, happy.
+  - Not falling over, but, you know, happy.
+  - Not falling over, but, you know, happy.
+- term: aren't they? / haven't ya?
+  key: aren't they? / haven't ya
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - sentence_final_tags
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - tag
+  - tag
+  examples:
+  - You've been here longer than me, haven't ya?
+  - You've been here longer than me, haven't ya?
+- term: but
+  key: but
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: NEW:TAG_BUT
+    frame: garnish:tag
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://www.jbe-platform.com/content/books/9789027289407-veaw.g39.19mul
+    - https://ewave-atlas.org/valuesets/59-211
+    - https://kengrace.substack.com/p/but-where-does-yours-go
+    confidence: high
+    notes: Mulder, Thompson and Penry Williams (2009) show final 'but' is a fully developed particle in Australian
+      English that marks contrast and signals Australianness. eWAVE rates it neither pervasive nor rare. Only attach
+      it to a clause that contrasts with the one before. Impressionistically stronger in Qld and among working-class
+      speakers.
+    meaning: sentence-final 'though', leaving a contrast hanging
+  gaps:
+  - (sentence-final) but
+  - however
+  - mind you
+  - sentence_final_tags
+  - though
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - tag seeking agreement
+  - tag
+  - tag
+  - sentence-final 'though', leaving a contrast hanging
+  examples: []
+- term: a fair whack
+  key: fair whack
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - expensive
+  - filler:intensifier
+  frames:
+  - garnish
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - costly
+  examples:
+  - That's a fair whack, isn't it?
+- term: goes (quotative)
+  key: goes (quotative)
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - filler:other
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - and he just goes, 'Climbing fences at night's dangerous, you know.'
+  - She goes, 'Why's it take so bloody long?'
+- term: haven't ya?
+  key: haven't ya
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - filler:sentence_final_tag
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - You've been here longer than me, haven't ya?
+  - You've been here longer than me, haven't ya?
+- term: I dunno
+  key: i dunno
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - filler:thinking
+  - thinking_fillers
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - hesitation
+  examples:
+  - I dunno, I s'pose it's end of financial year or something.
+- term: like
+  key: like
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: NEW:FILLER_LIKE
+    frame: garnish:aside
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://lens.monash.edu/2022/09/14/1385080
+    - https://research-repository.uwa.edu.au/en/publications/quotatives-across-time-west-australian-english-then-and-now/
+    confidence: medium
+    notes: Not specifically Australian. ICE-Aus corpus work shows it across ages and occupations, and Rodríguez
+      Louro shows quotative 'be like' has overtaken 'say' in Perth. Use sparingly; it reads young.
+    meaning: filler or focus marker mid-sentence
+  gaps:
+  - (filler)
+  - sort of
+  - thinking_fillers
+  - um
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - hesitation / vagueness
+  - hesitation
+  - hesitation
+  - hesitation
+  examples: []
+- term: Listen
+  key: listen
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:opener
+  - openers
+  frames:
+  - garnish
+  - interjection
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - opener
+  examples:
+  - Listen, can't yak for long, I'm on me smoko.
+  - Listen, I can't talk for long, I'm on my smoko.
+- term: pretty much
+  key: pretty much
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - filler:hedge
+  - hedges
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - softening
+  - softening
+  - softening
+  examples:
+  - That's pretty much the whole story.
+  - That's pretty much the whole story.
+- term: Right, so
+  key: right, so
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - filler:opener
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - Right, so you wanna hear about the worst night of my life?
+  - Right, so you wanna hear about the worst night of my life?
+- term: Right, so / Righto
+  key: right, so / righto
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - openers
+  frames:
+  - interjection
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - opener
+  - opener
+  examples:
+  - Right, so you wanna hear about the worst night of my life? Righto. Sit down.
+  - Righto.
+- term: shocking
+  key: shocking
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - filler:intensifier
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - Sandra's a shocking gossip
+  - Sandra's a shocking gossip, and if she hears I said it, the whole suburb'll know by Tuesday.
+- term: sorta
+  key: sorta
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - hedges
+  - thinking_fillers
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - softener
+  - hesitation / vagueness
+  - softening
+  - softening
+  examples: []
+- term: sorta / sort of
+  key: sorta / sort of
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:hedge
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - sorta quiet and a bit off
+  - Well, sorta.
+- term: That's my two bob's worth
+  key: that's two bob's worth
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - filler:closer
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - Anyway. That's my two bob's worth.
+  - That's my two bob's worth.
+- term: Yeah, nah / Nah, yeah
+  key: yeah, nah / nah, yeah
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - agreement_disagreement_fillers
+  frames:
+  - interjection
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - agree-then-disagree / disagree-then-agree
+  - agree-then-disagree markers
+  examples:
+  - Yeah, nah, I'm not saying he's a bad coach.
+  - Yeah, nah, I'm not saying he's a bad coach.
+- term: Yeah, so
+  key: yeah, so
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - filler:opener
+  - filler:thinking
+  - openers
+  frames:
+  - garnish
+  - interjection
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - opener
+  examples:
+  - Yeah, so, a few things.
+  - Yeah, so, a few things.
+- term: and everything
+  key: and everything
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:GENERAL_EXTENDER
+    frame: garnish:tail
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://assets.cambridge.org/97811088/37231/excerpt/9781108837231_excerpt.pdf
+    confidence: medium
+    notes: Cheshire's (British) data rank it among the most grammaticalised extenders. Similar to the existing 'the
+      whole box 'n dice' tails, but lighter.
+    meaning: vague emphatic tail, 'the works'
+  gaps:
+  - and all
+  - and so on
+  - the whole lot
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - vague emphatic tail, 'the works'
+  examples: []
+- term: and stuff
+  key: and stuff
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:GENERAL_EXTENDER
+    frame: garnish:tail
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://assets.cambridge.org/97811088/37231/excerpt/9781108837231_excerpt.pdf
+    - https://ldaca.edu.au/resources/general-resources/case-studies/masters-research-project
+    confidence: medium
+    notes: Overstreet and Yule's excerpt includes an Australian example. General English.
+    meaning: vague tail meaning 'and the like'
+  gaps:
+  - and so on
+  - and things
+  - et cetera
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - vague tail meaning 'and the like'
+  examples: []
+- term: and that
+  key: and that
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:GENERAL_EXTENDER
+    frame: garnish:tail
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://bridges.monash.edu/articles/conference_contribution/The_use_and_functions_of_general_extenders_in_contemporary_Australian_English/4239305
+    - https://ldaca.edu.au/resources/general-resources/case-studies/masters-research-project
+    confidence: medium
+    notes: 'General extenders are studied for Australian English (Monash ALS 2016 paper; LDaCA Sydney study: varies
+      by age, gender and class). The British study of ''and that'' finds it working-class marked. I could not see
+      the Australian papers'' frequency figures.'
+    meaning: vague tail meaning 'and so on'
+  gaps:
+  - and so on
+  - and things like that
+  - et cetera
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - vague tail meaning 'and so on'
+  examples: []
+- term: my arse
+  key: arse
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:DISBELIEF
+    frame: garnish:closer
+    register: current
+    region: []
+    vulgarity: 2
+    incoherence: 2
+    sources:
+    - https://en.wiktionary.org/wiki/my_arse
+    confidence: high
+    notes: Wiktionary labels it British/Irish/Commonwealth. Usually comes after the echoed phrase. Impolite.
+    meaning: rubbish, I don't believe a word
+  gaps:
+  - I don't believe it
+  - no way
+  - nonsense
+  - yeah right
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - rubbish, I don't believe a word
+  examples: []
+- term: fair call
+  key: fair call
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: REASONABLE
+    frame: garnish:closer
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://aussieenglish.com.au/like-native-fair-call
+    confidence: medium
+    notes: Concedes a point, a near-synonym of 'fair enough' (already in REASONABLE). Also 'that's a fair call'.
+    meaning: that's a reasonable point, fair enough
+  gaps:
+  - fair point
+  - good point
+  - that's reasonable
+  - you're right
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - that's a reasonable point, fair enough
+  examples: []
+- term: far out
+  key: far out
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: SURPRISE
+    frame: garnish:opener
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://kvia.com/entertainment/cnn-style/2024/08/20/australian-slang-terms-every-visitor-should-know/
+    - https://aussieenglish.com.au/ep014-aussie-english-expression-far-out/
+    confidence: high
+    notes: 'Unlike the US hippie sense (''cool''), Australians use it for frustration or being impressed. Playful
+      variant: ''far out, Brussel sprout''. A clean SURPRISE opener.'
+    meaning: exclamation of exasperation or amazement
+  gaps:
+  - for heaven's sake
+  - good grief
+  - unbelievable
+  - wow
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - exclamation of exasperation or amazement
+  examples: []
+- term: good on ya
+  key: good on ya
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:WELL_DONE
+    frame: garnish:closer
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://www.babbel.com/en/magazine/21-essential-australian-expressions
+    - https://languagehat.com/good-on-you/
+    confidence: high
+    notes: Stress on 'on' ('good ONya'). Also written 'onya'. Can be sarcastic. Also used in the UK and NZ, but
+      far more strongly Australian.
+    meaning: well done, good for you
+  gaps:
+  - bravo
+  - good for you
+  - nice one
+  - well done
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - well done, good for you
+  examples: []
+- term: hang on
+  key: hang on
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:WAIT
+    frame: garnish:opener
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://notoneoffbritishisms.com/2012/02/16/hang-on/
+    confidence: medium
+    notes: The blog notes the OED's first citation for the 'wait' sense is a 1941 Australian slang dictionary. It's
+      now seen as British too. As an opener it signals objection.
+    meaning: wait a sec (also an objecting opener)
+  gaps:
+  - hold on
+  - just a minute
+  - wait
+  - wait a minute
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - wait a sec (also an objecting opener)
+  examples: []
+- term: how good is that?
+  key: how good is that
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: GREAT_EXCLAIM
+    frame: garnish:closer
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://www.freitag.de/autoren/julica-jungehuelsing/der-kohlenhaendler
+    - https://www.hachette.co.uk/titles/peter-van-onselen/how-good-is-scott-morrison/9780733645747/
+    confidence: medium
+    notes: Strongly linked to Scott Morrison and often used in mocking imitation of him. Also the shortened 'How
+      good!'. Gives a political flavour; use sparingly.
+    meaning: rhetorical 'isn't that great?'
+  gaps:
+  - how great
+  - isn't that great
+  - wonderful
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - rhetorical 'isn't that great?'
+  examples: []
+- term: tell him he's dreamin'
+  key: tell him he's dreamin'
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: DISAGREE
+    frame: garnish:closer
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://theconversation.com/straight-to-the-pool-room-a-love-letter-to-the-castle-on-its-25th-anniversary-176361
+    - https://www.nfsa.gov.au/collection/item/castle-fathers-day
+    - https://www.screenaustralia.gov.au/sa/Screen-News/2015/10-11-The-Castle-top-10-quotes
+    confidence: high
+    notes: 'From The Castle (1997), now everyday vernacular. Direct form: ''You''re dreamin''''. Best after an unreasonable
+      price or request.'
+    meaning: no way, that's unrealistic (especially about a price or demand)
+  gaps:
+  - no way
+  - not a chance
+  - unrealistic
+  - you must be joking
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - no way, that's unrealistic (especially about a price or demand)
+  examples: []
+- term: unna
+  key: unna
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:TAG_EH
+    frame: garnish:tag
+    register: current
+    region:
+    - aboriginal_english
+    - wa
+    vulgarity: 0
+    incoherence: 5
+    sources:
+    - https://ewave-atlas.org/valuesets/61-165
+    - https://www.uwa.edu.au/news/article/2021/july/10-ways-aboriginal-australians-made-english-their-own
+    confidence: high
+    notes: Aboriginal English, widely used in WA and also in the NT, Qld and NSW. It establishes shared knowledge.
+      Gate it strictly; don't put it in a generic speaker's mouth.
+    meaning: tag inviting agreement, 'isn't it?' or 'you know?'
+  gaps:
+  - eh
+  - isn't it
+  - right?
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - tag inviting agreement, 'isn't it?' or 'you know?'
+  examples: []
+- term: what a bummer
+  key: what a bummer
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:COMMISERATE
+    frame: garnish:aside
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://aussieenglish.com.au/ep019-aussie-expressions-when-hearing-bad-news
+    confidence: medium
+    notes: American in origin but standard in Australia. The same source lists 'Bugger!' and 'That sucks!'.
+    meaning: that's disappointing (reacting to bad news)
+  gaps:
+  - oh no
+  - that's a shame
+  - too bad
+  - what a pity
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - that's disappointing (reacting to bad news)
+  examples: []
+- term: yeah, no
+  key: yeah, no
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:YEAH_NO
+    frame: garnish:opener
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://www.ingentaconnect.com/content/routledg/cajl/2002/00000022/00000002/art00001
+    - https://blog.oup.com/2019/03/where-phrase-yeah-no-come-from/
+    confidence: high
+    notes: 'Burridge and Florey (2002) studied ''yeah-no'' in Australian English: it agrees, hedges or saves face,
+      and can lead back to a topic. ''Yeah, nah'' and ''nah, yeah'' are already in DISAGREE and AGREE; ''yeah, no''
+      is the discourse-marker version and works as an opener.'
+    meaning: agree with or acknowledge what was said, then add your own point (or soften a no)
+  gaps:
+  - (agreeing preface)
+  - (softened disagreement)
+  - I mean
+  - right
+  - well
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - agree with or acknowledge what was said, then add your own point (or soften a no)
+  examples: []

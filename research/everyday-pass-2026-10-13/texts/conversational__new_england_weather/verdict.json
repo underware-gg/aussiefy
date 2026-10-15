@@ -1,0 +1,179 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "unharnessed": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 4
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 3,
+   "authenticity": 3,
+   "register": 2,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Every beat survives: the apprentices, the 136 kinds of weather, the Centennial collector, the poets, Old Probabilities' forecast, the umbrella, the lightning and the thunder. Only addition is a framing opener, \"Now, you might've heard this one.\", which adds no fact. \"a pollie had been there\" localises the Congressman joke without changing it.",
+   "sense": "\"knocked the foreigners for six\" fits astounded; \"blow-ins\" is exactly casual visitors; \"knock off a lot of poets\" keeps the kill; \"always flat out at its work\" for attending strictly to business is a fair stretch; \"heaps of it\" fits plenty.",
+   "authenticity": "Natural, unforced Aussie: \"I dunno who makes that, but I reckon\", \"fair enough too, he's earned it\", \"Yep, one of the brightest gems\". Nothing stage-Australian. The opener \"Now, you might've heard this one.\" is a slightly stock yarn tag.",
+   "register": "A light level-2 seasoning on Twain's text: \"reckon\", \"bloke\", \"blow-ins\", \"pollie\", \"heaps\", \"chucked away\". No swearing, as vulgarity 0 asks.",
+   "tone": "The deadpan tall-tale humour comes through: \"weather to give to the poor\", \"then see his tail drop\", \"with his head in the ash-barrel\".",
+   "flow": "Reads aloud smoothly, with paragraphing that follows the beats; contractions like \"The weather's always up to something there\" read naturally.",
+   "variety": "Different terms throughout, none repeated: \"dunno\", \"flat out\", \"cooking up\", \"knocked the foreigners for six\", \"owned up\", \"blow-ins\", \"ticks off\", \"pollie\".",
+   "essence": "Unmistakably Twain's speech, retold lightly; the catalogue \"weather to hire out; weather to sell; to deposit\" and the forecast parody kept whole."
+  },
+  "unharnessed": {
+   "meaning": "All beats kept, with some paraphrase: \"muck about and learn the trade\" for experiment, \"to bank\" for deposit, \"a proper grand parade\". Nothing invented of substance.",
+   "sense": "Mostly fits: \"flabbergasted the foreigners\", \"blow-ins\", \"hasn't got a clue\". But \"muck about\" makes the apprentices' experimenting into idle fooling, and \"I reverently reckon\" strains: reckon is too casual to sit with reverently.",
+   "authenticity": "Generally natural (\"chews it over\", \"knock off a lot of poets\"), but \"Strewth, what awful thunder you've got here!\" puts an Aussie oath in the mouth of a stranger to New England, and \"I reverently reckon\" sounds forced.",
+   "register": "A light level-2 touch, \"bloke\", \"blow-ins\", \"Strewth\", \"chucked away\", with no swearing.",
+   "tone": "Keeps the deadpan comedy: \"then watch his tail drop\", \"with his head in the ash-barrel\".",
+   "flow": "One long block like the original, but it reads smoothly; modern rewordings such as \"inside twenty-four hours\" and \"today's weather's\" are easy aloud.",
+   "variety": "\"reckon\" twice in the first two sentences (\"I reverently reckon\", \"but I reckon it must be\"); otherwise varied.",
+   "essence": "Recognisably the speech, though modernising (\"a decent product\", \"twenty-four hours\", \"a proper grand parade\") wears off some of Twain's period flavour."
+  },
+  "engine": {
+   "meaning": "Essentially the original verbatim; all points present. \"cannot, too right, know\" garbles of course but the claim survives.",
+   "sense": "\"bloke\", \"heaps of it\" and \"a pollie had been there\" fit, but \"cannot, too right, know how the natives feel\" uses too right (emphatic agreement) for of course, which is the wrong sense.",
+   "authenticity": "So little Aussie that what is there stands out, and the \"too right\" splice is something an Australian would wince at; the rest is Twain's American English untouched.",
+   "register": "Largely untranslated: only \"bloke\", \"favourable\", \"too right\", \"heaps\" and \"pollie\" change. Lighter than a level-2 brief.",
+   "tone": "The original tone is intact because the text is intact: \"with his head in the ash-barrel\".",
+   "flow": "Reads as Twain except the jolt at \"and cannot, too right, know how the natives feel about spring\".",
+   "variety": "Too few terms to repeat; each of \"bloke\", \"heaps\", \"pollie\" used once.",
+   "essence": "Unmistakably the original, being nearly the original."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "Now, you might've heard this one.",
+    "original": "",
+    "severity": "minor",
+    "why": "An added yarn opener that renders nothing; a stock framing tag."
+   },
+   {
+    "quote": "always flat out at its work",
+    "original": "always attending strictly to business",
+    "severity": "minor",
+    "why": "Flat out means very busy, which loses the joke of the weather as a punctilious tradesman attending strictly to business."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "I reverently reckon",
+    "original": "I reverently believe",
+    "severity": "minor",
+    "why": "Reckon clashes with reverently and repeats in the next sentence."
+   },
+   {
+    "quote": "Strewth, what awful thunder you've got here!",
+    "original": "“Why, what awful thunder you have here!”",
+    "severity": "minor",
+    "why": "The speakers are strangers visiting New England; giving them an Aussie oath is odd."
+   },
+   {
+    "quote": "muck about and learn the trade",
+    "original": "experiment and learn how",
+    "severity": "minor",
+    "why": "Muck about implies aimless fooling rather than experimenting."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "cannot, too right, know how the natives feel about spring",
+    "original": "cannot, of course, know how the natives feel about spring",
+    "severity": "major",
+    "why": "Too right is an emphatic yes, not a parenthetical of course; it breaks the sentence."
+   },
+   {
+    "quote": "the Maker who made us all makes everything in New England but the weather",
+    "original": "the Maker who made us all makes everything in New England but the weather",
+    "severity": "major",
+    "why": "Representative of the whole text being left untranslated, well under a level-2 brief."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A faithful, natural light Aussie retelling of Twain at the asked weight; the best of the three.",
+  "unharnessed": "A sound light retelling, a touch more modernised than A, with a couple of forced choices.",
+  "engine": "Mostly untranslated, with one wrong-sense insertion; faithful but under the brief."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "engine"
+   ],
+   [
+    "unharnessed"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed",
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "engine"
+   ],
+   [
+    "unharnessed"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

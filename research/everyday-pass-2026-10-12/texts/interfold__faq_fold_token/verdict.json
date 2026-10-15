@@ -1,0 +1,167 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "unharnessed": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 4,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 5,
+   "flow": 5,
+   "variety": 1,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "All technical facts, code identifiers, timestamps, links and the MDX components survive intact. A few small shifts: \"bond FOLD so they can be picked for network duties\" turns eligibility into selection, \"the official [Telegram group]\" for \"designated\", and \"Done and dusted.\" is added after the timestamp.",
+   "sense": "Terms fit their technical context: \"keeps the economic side of the network ticking over\", \"cop penalties\", \"get a cut of the fees\", \"permissionless: no-one has to give you the nod\", \"capital the operator who runs it has on the line\".",
+   "authenticity": "Natural, relaxed Australian docs voice: \"have a squiz at\", \"anyone keen to run a ciphernode\", \"If you need a hand, jump into\".",
+   "register": "A light level-2 touch on technical docs, with no swearing; the frontmatter, code and components are untouched. \"Nah.\" is the most casual it gets.",
+   "tone": "Keeps the clear, informative FAQ tone while sounding friendlier: \"Nah. The Interfold's bonding model is operator-only, and that's on purpose.\"",
+   "flow": "Reads naturally: \"That way, the people responsible for running things are the ones with their money on the line.\"",
+   "variety": "Varied with no tic: \"runs through\", \"three lots\", \"squiz\", \"ticking over\", \"tied in together\", \"cop\", \"cut\", \"Done and dusted\", \"the nod\", \"water down\".",
+   "essence": "Unmistakably the FOLD token FAQ, with every section, question and component in place."
+  },
+  "unharnessed": {
+   "meaning": "Every fact, identifier, timestamp and link survives with precise wording: \"Bonded FOLD may be subject to protocol-defined withdrawal periods\", \"bond FOLD to become eligible for network duties\", \"the designated [Telegram group]\".",
+   "sense": "Terms fit: \"anyone keen to run a ciphernode\", \"all three hang together\", \"cop penalties for provable misbehaviour\", \"get a cut of the fees\", \"in the running\", \"water down\".",
+   "authenticity": "Natural where it changes things, with no forced lines: \"If you need a hand, jump into the designated [Telegram group]\".",
+   "register": "Clean and light, but a shade lighter than level 2 asks: many sentences stay in the source's formal wording (\"These mechanisms line up operational responsibility with economic accountability\", \"Provision cloud-based or personal hardware\").",
+   "tone": "Keeps the precise, informative docs tone throughout.",
+   "flow": "Smooth; it keeps the original's line wrapping and reads cleanly: \"Every FOLD bonded to a ciphernode is capital on the line for the operator who runs it.\"",
+   "variety": "A modest range (\"keen\", \"hang together\", \"cop\", \"cut\", \"on top of that\", \"switched on\", \"in the running\", \"water down\"), as suits the light touch.",
+   "essence": "Clearly the same FAQ, with all sections and markup intact."
+  },
+  "engine": {
+   "meaning": "Identical to the original, so nothing is lost: \"Bonded FOLD may be subject to protocol-defined withdrawal periods.\"",
+   "sense": "No Aussie terms are introduced, so none takes a wrong sense.",
+   "authenticity": "There is no Australian voice, and US forms are left in: \"misbehavior\", \"fulfill\".",
+   "register": "Completely untranslated; the text matches the original word for word.",
+   "tone": "The original's docs tone, unchanged.",
+   "flow": "Reads as the original does: \"Operating a ciphernode is designed to be permissionless.\"",
+   "variety": "No slang at all.",
+   "essence": "It is the original."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "so they can be picked for network duties",
+    "original": "to become eligible for network duties",
+    "severity": "minor",
+    "why": "Bonding makes a node eligible; selection is a separate step (sortition), which the doc itself explains later."
+   },
+   {
+    "quote": "the official [Telegram group]",
+    "original": "the designated [Telegram group]",
+    "severity": "minor",
+    "why": "\"official\" is a slightly stronger claim than \"designated\"."
+   },
+   {
+    "quote": "Done and dusted.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added colour in technical docs; harmless, but it adds nothing."
+   },
+   {
+    "quote": "Nah.",
+    "original": "No.",
+    "severity": "minor",
+    "why": "A little casual for a docs FAQ answer, though within level 2."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "These mechanisms line up operational\nresponsibility with economic accountability.",
+    "original": "These mechanisms align operational\nresponsibility with economic accountability.",
+    "severity": "minor",
+    "why": "Representative of formal source phrasing kept largely as is; a touch under the level-2 brief."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "It may also be subject to penalties for provable\nmisbehavior or for failure to fulfill assigned responsibilities.",
+    "original": "It may also be subject to penalties for provable\nmisbehavior or for failure to fulfill assigned responsibilities.",
+    "severity": "critical",
+    "why": "The whole text is untranslated, with US spellings (misbehavior, fulfill) kept; the brief asked for level-2 Australian English."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "Natural, friendly level-2 docs that keep all the technical content and markup intact; a few small shifts in precision.",
+  "unharnessed": "Precise and natural with a lighter touch; technically the most exact, slightly under the brief's level.",
+  "engine": "An unchanged copy of the original: accurate, but not a translation."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed",
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed",
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed",
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

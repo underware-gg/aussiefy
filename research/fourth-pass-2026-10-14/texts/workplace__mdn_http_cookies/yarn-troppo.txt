@@ -1,0 +1,51 @@
+Now, a **cookie** (also known as a web cookie or browser cookie) isn't the sort you dunk in your cuppa. It's a small bit of data a server sends off to a user's web browser. The browser can store cookies, whip up new ones, fiddle with the ones it's already got, and send them back to the same server with later requests. Cookies let web applications hang onto a limited amount of data and remember state information, which matters, cos left to its own devices the HTTP protocol is [stateless](/en-US/docs/Web/HTTP/Guides/Overview#http_is_stateless_but_not_sessionless): it forgets you the second you've gone.
+
+In this article we'll have a squiz at what cookies mostly get used for, run through best practice for using them, and get into what they mean for your privacy and security.
+
+## What cookies are used for
+
+Nine times out of ten, the server reads what's in the HTTP cookies to suss out whether different requests are coming from the same browser/user, and then sends back a personalised or a generic response to suit. Here's how a basic user sign-in system plays out:
+
+1. The user sends their sign-in credentials off to the server, say by filling in and submitting a form.
+2. If the credentials check out, the server updates the UI to show the user's signed in, and responds with a cookie holding a session ID that keeps track of their sign-in status on the browser.
+3. Later on, the user wanders off to a different page on the same site. Along with that request, the browser sends the cookie with the session ID, as if to say "still me, still signed in."
+4. The server checks the session ID and, if it's still valid, serves the user up a personalised version of the new page. If it's not valid, the session ID gets binned and the user's shown a generic version of the page (or maybe an "access denied" message and asked to sign in all over again).
+
+![visual representation of the above sign-in system description](/shared-assets/images/diagrams/http/cookies/cookie-basic-example.png)
+
+Cookies mostly earn their keep in three ways:
+
+- **Session management**: User sign-in status, shopping cart contents, game scores, or any other details about the user's session the server's got to remember.
+- **Personalization**: User preferences, like the display language and the UI theme.
+- **Tracking**: Recording and analysing what users get up to.
+
+### Data storage
+
+Back in the early days of the web, when there was nothing else going, cookies got lumbered with general client-side data storage. These days the modern storage APIs are the go, for example the [Web Storage API](/en-US/docs/Web/API/Web_Storage_API) (`localStorage` and `sessionStorage`) and [IndexedDB](/en-US/docs/Web/API/IndexedDB_API).
+
+They're built for storage from the ground up, they never send data to the server, and they don't come with the other headaches you get using cookies for storage:
+
+- Browsers are generally capped at a maximum number of cookies per domain (it varies by browser, usually in the hundreds), and a maximum size per cookie (usually 4KB, which isn't much). Storage APIs can hold a fair bit more data.
+- Cookies get sent along with every single request, so they can drag performance down (for example on a slow mobile data connection out the back of beyond), especially if you've got heaps of cookies set.
+
+> [!NOTE]
+> Want to have a look at the stored cookies (and any other storage a web page is using)? You can use the [Storage Inspector](https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/index.html) in Firefox Developer Tools, or the [Application panel](https://developer.chrome.com/docs/devtools/progressive-web-apps) in Chrome Developer Tools.
+
+## Creating, removing, and updating cookies
+
+Once a server's got an HTTP request, it can send one or more {{HTTPHeader("Set-Cookie")}} headers back with the response, and every one of them sets its own separate cookie. You set a cookie by giving it a name-value pair, like so:
+
+```http
+Set-Cookie: <cookie-name>=<cookie-value>
+```
+
+And here's an HTTP response telling the browser on the other end to stash away a couple of cookies (chocolate and strawberry, no less):
+
+```http
+HTTP/2.0 200 OK
+Content-Type: text/html
+Set-Cookie: yummy_cookie=chocolate
+Set-Cookie: tasty_cookie=strawberry
+
+[page content]
+```

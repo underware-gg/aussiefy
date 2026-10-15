@@ -1,0 +1,177 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 2,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 5,
+   "flow": 4,
+   "variety": 2,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 2,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every step, file path, code block and number kept; prose additions are colour: \"the operator panics and spits the dummy\", \"Bewdy.\", \"no dramas\", \"the whole lot\". \"Check your inputs\" for Validate inputs is a slight softening.",
+   "sense": "Terms fit: \"already knocked over the [Quick Start]\", \"If the test falls over\", \"waves through every receipt\", \"punch in 5 and 3\", \"Find which file to fiddle with\". \"can't have a squiz at them\" carries cannot see.",
+   "authenticity": "Reads like an Aussie dev writing docs: \"ferries ciphertexts over to this function and lugs its result across\", \"It's got no idea what the computation actually does.\" One US form, \"has gotta be less than 100\", and \"Bewdy.\" is a touch tacked on.",
+   "register": "A steady level-4 voice across the prose, leaving code and labels untouched; no swearing beyond what vulgarity 1 allows (none used).",
+   "tone": "Stays a clear tutorial; the asides (\"no dramas\", \"spits the dummy\") lighten it without making instructions unclear.",
+   "flow": "Reads smoothly: \"Once the input window shuts, the coordination server ... fires them off to the program server\". \"Have a look at\" appears twice near the end.",
+   "variety": "Varied: \"tweaks\", \"knocked over\", \"ferries\", \"lugs\", \"dishes out\", \"squiz\", \"falls over\", \"track down\", \"stashes\", \"waves through\", \"spits the dummy\".",
+   "essence": "Unmistakably the Hello World tutorial, every step in order, in a matey voice."
+  },
+  "engine": {
+   "meaning": "The original nearly verbatim, so facts survive; but \"See [Installation](/build/installation#install-the-cli) for a source knock together.\" garbles a source build.",
+   "sense": "\"for a source knock together\" uses knock together (assemble roughly) as a noun for a build, which doesn't fit; \"brand-spankin'-new ciphertext\" carries new.",
+   "authenticity": "\"brand-spankin'-new\" is more American than Australian and is used twice; \"a source knock together\" is not English. Otherwise US forms like \"serializes\" left in.",
+   "register": "Largely untranslated: apart from contractions, only \"brand-spankin'-new\" (twice) and \"knock together\". Far under level 4.",
+   "tone": "The neutral tutorial tone is intact because the text is: \"If `pnpm dev:all` runs, press `Ctrl+C` in its terminal.\"",
+   "flow": "Reads as the original except the broken \"for a source knock together\".",
+   "variety": "Of its two phrases, one is repeated (\"a brand-spankin'-new ciphertext\", \"a brand-spankin'-new local chain\").",
+   "essence": "Unmistakably the tutorial, being nearly the original."
+  },
+  "yarn": {
+   "meaning": "Every step and detail kept; \"untouched\" for with no changes, \"ferries ciphertexts to this function and carts its result off to the committee\".",
+   "sense": "Every term fits its context: \"ferries\", \"carts its result off\", \"It's got no idea what the computation does\".",
+   "authenticity": "What Aussie there is sounds natural (\"It's got no idea\", \"untouched\"), with US \"serialized\" left.",
+   "register": "Light: mostly contractions plus \"ferries\", \"carts\" and \"It's got no idea\". Well under level 4.",
+   "tone": "Clear tutorial tone throughout.",
+   "flow": "Reads smoothly: \"By the end, your E3 returns 2 × (a + b) instead of a + b, and you'll know which files hold the computation\".",
+   "variety": "Little slang, none repeated.",
+   "essence": "Unmistakably the tutorial."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "2 × (a + b) has gotta be less than 100",
+    "original": "2 × (a + b) must be less than 100",
+    "severity": "minor",
+    "why": "Gotta reads American."
+   },
+   {
+    "quote": "Bewdy.",
+    "original": "",
+    "severity": "minor",
+    "why": "An added tag that renders nothing; a little bolted on."
+   },
+   {
+    "quote": "Check your inputs and verify proofs",
+    "original": "Validate inputs and verify proofs",
+    "severity": "minor",
+    "why": "Validate is the technical term; check is looser."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "for a source knock together",
+    "original": "for a source build",
+    "severity": "major",
+    "why": "Wrong sense and ungrammatical; obscures a technical instruction."
+   },
+   {
+    "quote": "returns a brand-spankin'-new ciphertext",
+    "original": "returns a new ciphertext",
+    "severity": "minor",
+    "why": "American-flavoured, repeated later for the local chain."
+   },
+   {
+    "quote": "This tutorial changes the FHE computation in the default template and runs the E3 again.",
+    "original": "This tutorial changes the FHE computation in the default template and runs the E3 again.",
+    "severity": "major",
+    "why": "Representative of the text left untranslated against a level-4 brief."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "The template requests E3s with the `insecure-512` parameter set.",
+    "original": "The template requests E3s with the `insecure-512` parameter set.",
+    "severity": "major",
+    "why": "Representative of long stretches left as the original, well under a level-4 brief."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A natural, level-4 retelling of the tutorial that keeps every technical detail; the best.",
+  "engine": "Essentially untranslated, with two misfiring insertions.",
+  "yarn": "Clean and faithful but much lighter than the brief."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "engine",
+    "yarn"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

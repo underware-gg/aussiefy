@@ -1,0 +1,49 @@
+# Flagged entries. They stay in the dictionary so a re-scrape recognises them and
+# does not reintroduce them. Status `omit` never fires; `gate` fires only when
+# every flag is unlocked by policy (--unlock).
+
+- id: thatll-do-pig
+  form: that'll do, pig
+  concept: [AGREE]
+  frame: interjection
+  status: omit
+  flags: [not_aussie]
+  sources: ["https://learnconversations.com/funny-aussie-old-sayings-and-phrases/"]
+  notes: A line from the film Babe, set on an American-style farm. Not an Australian saying.
+  gloss: Well done (film quotation).
+- id: cruisin-for-a-bruisin
+  form: cruisin' for a bruisin'
+  concept: [ANGRY]
+  frame: predicate_adj
+  status: omit
+  flags: [not_aussie]
+  sources: ["https://learnconversations.com/funny-aussie-old-sayings-and-phrases/"]
+  notes: American slang.
+  gloss: Asking for trouble.
+- id: that-dog-wont-hunt
+  form: that dog won't hunt
+  concept: [DISAGREE]
+  frame: interjection
+  status: omit
+  flags: [not_aussie]
+  sources: ["https://learnconversations.com/funny-aussie-old-sayings-and-phrases/"]
+  notes: US Southern idiom.
+  gloss: That argument doesn't work.
+- id: all-hat-and-no-cattle
+  form: all hat and no cattle
+  concept: [ALL_TALK]
+  frame: predicate_adj
+  intensity: 3
+  incoherence: 4
+  status: gate
+  flags: [not_aussie]
+  notes: Texan in origin. It appears in the project brief's sample output; unlock with --unlock not_aussie.
+  gloss: All show, no substance.
+- id: shrimp-on-the-barbie
+  form: throw another shrimp on the barbie
+  concept: [GREETING]
+  frame: interjection
+  status: omit
+  flags: [not_aussie, dubious_meaning]
+  notes: From a 1980s tourism advertisement aimed at Americans; Australians say prawn.
+  gloss: Come on over (advertising line).

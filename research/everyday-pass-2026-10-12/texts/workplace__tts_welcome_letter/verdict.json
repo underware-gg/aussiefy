@@ -1,0 +1,195 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "engine": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 1,
+   "tone": 3,
+   "flow": 3,
+   "variety": 1,
+   "essence": 3
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Every point survives, including the strategic/practical balance and the open, iterative, user-centred commitment (\"takes it a step at a time, and is built around the people who'll use it\"). \"doing work that'll fair knock your socks off\" shifts \"inspiring\" toward \"astonishing\".",
+   "sense": "Mostly exact (\"fired up\", \"top-notch\", \"give us a yell\", \"delivering the goods\"). \"fair knock your socks off\" for \"inspiring\" strains a little; \"give a stuff\" is usually heard in the negative.",
+   "authenticity": "Sounds like an Australian manager writing: \"a cracker of a crew\", \"makes or breaks\", \"We're stoked to have you\".",
+   "register": "Heavier than level 3: an added \"G'day, and welcome aboard\", and nearly every line retold in slang (\"cracker of a crew\", \"fair knock your socks off\", \"give a stuff\"). \"give a stuff\" is mild, within vulgarity 1.",
+   "tone": "Keeps the warm, upbeat welcome; a touch more matey than the original's polished tone.",
+   "flow": "Reads smoothly, though \"a modern, pitch-in-together, all-sorts-welcome culture\" is a hyphenated pile-up.",
+   "variety": "Varied: \"cracker\", \"fired up\", \"give a stuff\", \"top-notch\", \"makes or breaks\", \"dead set\", \"give us a yell\", \"stoked\".",
+   "essence": "Unmistakably the TTS welcome letter, retold."
+  },
+  "engine": {
+   "meaning": "The original almost verbatim. \"a remarkable group of battlers\" recasts talented staff as people doing it tough.",
+   "sense": "\"battlers\" takes the wrong sense for skilled colleagues; \"bloody great partner\" and \"our bloody organisation\" put an intensifier where none fits.",
+   "authenticity": "The Aussie is bolted on: \"our bloody organisation\", \"dead set on\" dropped into formal prose; US \"user-centered\" left in.",
+   "register": "Almost entirely untranslated, well below level 3; \"bloody\" is within vulgarity 1 but it is most of the Aussie there is.",
+   "tone": "\"our bloody organisation\" sounds exasperated in a warm welcome.",
+   "flow": "Stiff where the swaps land: \"We are dead set on working in an open, iterative and user-centered way\".",
+   "variety": "Leans on \"bloody\" twice and little else.",
+   "essence": "Recognisably the letter, because it is the letter."
+  },
+  "unharnessed": {
+   "meaning": "Every point survives, close to the original: \"We're committed to working in an open, iterative and user-centred way, with a strong focus on delivery.\"",
+   "sense": "Mostly exact (\"ripper bunch\", \"fired up\", \"top-notch\", \"give us a yell\"). \"show off the modern, collaborative, diverse culture\" for \"exemplify\" strains: showing off implies boasting.",
+   "authenticity": "Natural: \"a ripper bunch of people\", \"We're stoked to have you on the TTS team\". \"bloody talented\" sits well.",
+   "register": "Right weight for level 3: retold in a relaxed Australian voice with a steady few terms, the formal bones kept. \"bloody\" is within vulgarity 1.",
+   "tone": "Keeps the warm, upbeat, professional welcome.",
+   "flow": "Reads smoothly, like it was written that way.",
+   "variety": "Varied for its length: \"ripper\", \"seriously\", \"fired up\", \"bloody\", \"top-notch\", \"nimble\", \"give us a yell\", \"stoked\".",
+   "essence": "Unmistakably the original letter, retold."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "G'day, and welcome aboard.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added greeting; colour, but pushes the weight past level 3."
+   },
+   {
+    "quote": "doing work that'll fair knock your socks off",
+    "original": "doing inspiring work",
+    "severity": "minor",
+    "why": "\"knock your socks off\" means astonishing rather than inspiring."
+   },
+   {
+    "quote": "a modern, pitch-in-together, all-sorts-welcome culture",
+    "original": "the modern, collaborative, diverse culture",
+    "severity": "minor",
+    "why": "Hyphenated compounds pile up."
+   },
+   {
+    "quote": "they genuinely give a stuff about making a difference",
+    "original": "they care deeply about making a difference",
+    "severity": "minor",
+    "why": "\"give a stuff\" is usually negative (\"couldn't give a stuff\"); a little forced in the positive."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "a remarkable group of battlers",
+    "original": "a remarkable group of people",
+    "severity": "major",
+    "why": "\"battlers\" means people doing it tough, not talented colleagues."
+   },
+   {
+    "quote": "We aim to make our bloody organisation",
+    "original": "We aim to make our organization",
+    "severity": "major",
+    "why": "Intensifier bolted on; sounds exasperated in a welcome letter."
+   },
+   {
+    "quote": "being a bloody great partner",
+    "original": "being a great partner",
+    "severity": "minor",
+    "why": "Intensifier bolted on."
+   },
+   {
+    "quote": "We have an unprecedented opportunity to bring our government into the digital",
+    "original": "We have an unprecedented opportunity to bring our government into the digital",
+    "severity": "major",
+    "why": "Text left largely untranslated."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "we try to show\noff the modern, collaborative, diverse culture",
+    "original": "to exemplify the modern, collaborative, diverse culture",
+    "severity": "minor",
+    "why": "\"show off\" implies boasting; \"exemplify\" means model it."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "Lively and natural, heavier than level 3 asks.",
+  "engine": "Essentially untranslated, with a few bolted-on swaps that take the wrong sense.",
+  "unharnessed": "Natural, faithful and pitched right at level 3."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,155 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 4
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 4
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 3,
+   "register": 1,
+   "tone": 5,
+   "flow": 5,
+   "variety": 1,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every point and every command and link survives. \"determinism\" is kept. \"no-nonsense\" softens \"uncompromising\" slightly, though that word is part of Black's identity.",
+   "sense": "Terms fit: \"the fiddly bits of hand-formatting\", \"Have a squiz at the PyCon 2019 talk\", \"get cracking\", \"down the track\".",
+   "authenticity": "Natural Australian tech-writing voice: \"You'll save time and brainpower for the stuff that actually matters.\"",
+   "register": "A light level-2 touch (squiz, get cracking, grab, down the track) on a README, with no swearing.",
+   "tone": "The README's confident, slightly cheeky tone survives: \"If you're feeling confident, use `--fast`.\"",
+   "flow": "Reads smoothly: \"After a while the formatting stops being something you notice\".",
+   "variety": "Varied for its weight: squiz, get cracking, grab, plenty, down the track, have a look.",
+   "essence": "Unmistakably the Black README. \"no-nonsense\" for \"uncompromising\" softens its signature adjective a touch."
+  },
+  "yarn": {
+   "meaning": "All the points survive. \"the same result every time\" glosses \"determinism\" well. \"focus on what the code actually does\" narrows \"the content\" slightly.",
+   "sense": "Terms fit: \"Have a squiz\", \"get cracking\", \"heaps of projects\", \"down the track\".",
+   "authenticity": "Natural: \"You'll save time and brainpower for the stuff that actually matters.\"",
+   "register": "A light level-2 touch, with no swearing.",
+   "tone": "Confident and friendly, as the original is.",
+   "flow": "Smooth, and the reordered \"If running it as a script doesn't work, you can run _Black_ as a package\" reads better.",
+   "variety": "Varied: squiz, get cracking, grab, heaps, down the track, check out.",
+   "essence": "Clearly the Black README, with the same softening of \"uncompromising\" as A."
+  },
+  "engine": {
+   "meaning": "Verbatim, so every point survives.",
+   "sense": "The only change is \"colour\", which is right.",
+   "authenticity": "No Aussie to speak of, only the spelling \"colour\". What it says is natural English, but there is nothing Australian to judge.",
+   "register": "Untranslated apart from one spelling, well short of level 2.",
+   "tone": "Tone intact because it is unchanged.",
+   "flow": "Reads as the original.",
+   "variety": "No slang at all.",
+   "essence": "It is the original."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "_Black_ is the no-nonsense Python code formatter.",
+    "original": "_Black_ is the uncompromising Python code formatter.",
+    "severity": "minor",
+    "why": "\"Uncompromising\" is Black's tagline. \"No-nonsense\" softens it."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "_Black_ is the no-nonsense Python code formatter.",
+    "original": "_Black_ is the uncompromising Python code formatter.",
+    "severity": "minor",
+    "why": "It softens Black's signature adjective."
+   },
+   {
+    "quote": "can focus on what the code actually does",
+    "original": "you can focus on the content instead",
+    "severity": "minor",
+    "why": "A slight narrowing of \"content\"."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "_Black_ is the uncompromising Python code formatter. By using it, you agree to cede",
+    "original": "_Black_ is the uncompromising Python code formatter. By using it, you agree to cede",
+    "severity": "major",
+    "why": "Left untranslated. Representative of the whole text, which ignores the level-2 brief."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A clean, faithful, natural level-2 localisation of the README.",
+  "yarn": "Practically level with A: a faithful, natural, light localisation.",
+  "engine": "Untranslated except for \"colour\"."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn",
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed",
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "engine"
+   ],
+   [
+    "unharnessed",
+    "yarn"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

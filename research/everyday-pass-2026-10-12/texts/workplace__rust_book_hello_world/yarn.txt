@@ -1,0 +1,62 @@
+### Project Directory Setup
+
+First up, you'll knock together a directory to keep yer Rust code in. Rust couldn't give a toss where yer code lives, but for the exercises and projects in this book, we reckon you make a _projects_ directory in yer home directory and keep all yer projects in there. Nice and tidy.
+
+Fire up a terminal and punch in these commands to make a _projects_ directory, and a directory for the "Hello, world!" project inside the _projects_ directory.
+
+For Linux, macOS, and PowerShell on Windows, bung in this:
+
+```console
+$ mkdir ~/projects
+$ cd ~/projects
+$ mkdir hello_world
+$ cd hello_world
+```
+
+For Windows CMD, it's this one:
+
+```cmd
+> mkdir "%USERPROFILE%\projects"
+> cd /d "%USERPROFILE%\projects"
+> mkdir hello_world
+> cd hello_world
+```
+
+<!-- Old headings. Do not remove or links may break. -->
+<a id="writing-and-running-a-rust-program"></a>
+
+### Rust Program Basics
+
+Next, whip up a brand-spankin'-new source file and call it _main.rs_. Rust files always finish with the _.rs_ extension. If ya want more than one word in yer filename, the done thing is to stick an underscore between 'em. So it's _hello_world.rs_, not _helloworld.rs_, which just looks like some bugger's leanin' on the keyboard.
+
+Now open up that _main.rs_ file ya just made and type in the code in Listing 1-1.
+
+<Listing number="1-1" file-name="main.rs" caption="A program that prints `Hello, world!`">
+
+```rust
+fn main() {
+    println!("Hello, world!");
+}
+```
+
+</Listing>
+
+Save the file and duck back to yer terminal window in the _~/projects/hello_world_ directory. On Linux or macOS, punch in these commands to compile the file and give it a run:
+
+```console
+$ rustc main.rs
+$ ./main
+Hello, world!
+```
+
+On Windows, ya type the command `.\main` instead of `./main`:
+
+```powershell
+> rustc main.rs
+> .\main
+Hello, world!
+```
+
+Doesn't matter what operatin' system you're on, the string `Hello, world!` should pop up in the terminal. If it doesn't show, have a squiz back at the [“Troubleshooting”][troubleshooting]<!-- ignore --> bit of the Installation section for ways to get yerself some help.
+
+If `Hello, world!` did print, good on ya! You've officially written a Rust program. That makes ya a Rust programmer. Welcome aboard, mate, kettle's on.

@@ -1,0 +1,177 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "dinkum-4": "A",
+  "dinkum-3": "B",
+  "yarn-dinkum": "C"
+ },
+ "scores": {
+  "dinkum-4": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "dinkum-3": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn-dinkum": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 4,
+   "variety": 3,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "dinkum-4": {
+   "meaning": "Every term and condition survives with its force: \"a human has to create your Account\", \"we hold you responsible for whatever gets done on or through that Organization\", \"You can keep no more than one free machine account on top of your free Personal Account.\", the SDN and export-control bullets. Nothing invented.",
+   "sense": "Terms fit their legal context: \"Keeping your Account secure is your job.\", \"is up to you\" for optional, \"no worries\" for \"that's fine\", \"it's on you to comply\", \"have a squiz at our\".",
+   "authenticity": "Natural Australian plain speech: \"We're stoked to see bright young coders get keen\", \"no worries\", \"have a squiz\". \"at the end of the day\" is a generic stock phrase.",
+   "register": "About right for level 3: legal text made conversational with a sprinkling of Aussie (\"stoked\", \"no worries\", \"have a squiz\") rather than a yarn. No swearing, within vulgarity 1.",
+   "tone": "Keeps the firm but friendly terms-of-service tone: \"If we find out about any User under the age of 13, we'll [terminate that User’s Account immediately]\".",
+   "flow": "Reads like it was written that way: \"Anything else we ask for, like your real name, is up to you, unless you're accepting these terms on behalf of a legal entity\".",
+   "variety": "Varied for a light brief: \"your job\", \"up to you\", \"go for\", \"no worries\", \"stoked\", \"get keen\", \"it's on you\", \"have a squiz\".",
+   "essence": "Unmistakably GitHub's Account Terms, with headings, short version and bullets intact."
+  },
+  "dinkum-3": {
+   "meaning": "Mostly faithful, but a couple of legal points are softened: \"we reckon you're responsible for whatever gets done on or through that Organization\" turns GitHub's position into an opinion, and \"An Organization can have a few owners\" narrows \"multiple owners\".",
+   "sense": "Most terms fit (\"Your Account is your lookout\", \"get at the Organization's data\", \"all good\", \"have a squiz\"), but \"we reckon you're responsible\" weakens a legal determination, and \"No Accounts signed up by \"bots\" or other automated means, ta.\" uses \"ta\" (thanks) as a cheeky sign-off to a prohibition.",
+   "authenticity": "Genuinely Australian voice: \"Your Account is your lookout\", \"switched-on young coders\", \"all good\", \"have a squiz\". \"Look, we're stoked\" is natural; \", ta.\" is a little forced.",
+   "register": "A shade heavier than level 3: \"Look, we're stoked\", \"what it gets up to\", \", ta.\", \"For the full story\". No swearing.",
+   "tone": "Mostly the firm-friendly tone, but the prohibition on bots goes flippant: \"No Accounts signed up by \"bots\" or other automated means, ta.\"",
+   "flow": "Reads conversationally; a few joins are bumpy: \"you keep the final say on admin control over your Personal Account and whatever Content's in it\", \"There's only a few simple rules\".",
+   "variety": "Varied: \"your lookout\", \"the final say\", \"sort out\", \"get at\", \"what it gets up to\", \"all good\", \"switched-on\", \"shared round\", \"caught by\", \"have a squiz\".",
+   "essence": "Clearly GitHub's Account Terms, structure and links intact."
+  },
+  "yarn-dinkum": {
+   "meaning": "Mostly faithful, much of it verbatim; one softening: \"we reckon you're responsible for whatever's done on or through that Organization\".",
+   "sense": "Terms mostly fit (\"Keeping your Account secure is on you, too.\", \"that's no worries\", \"have a squiz\"), but \"we reckon you're responsible\" weakens a legal determination.",
+   "authenticity": "What Aussie there is sounds natural (\"stoked\", \"no worries\", \"have a squiz\"), but it sits unevenly against untouched legalese: \"One person or legal entity may maintain no more than one free Account (if you want to run a machine account as well, that's no worries\".",
+   "register": "Lighter than level 3: whole bullets are left as the original (\"You may not use GitHub in violation of export control or sanctions laws of the United States or any other applicable jurisdiction.\", \"Your login may only be used by one person\").",
+   "tone": "Keeps the firm terms-of-service tone throughout: \"If we find out about any User under the age of 13, we'll [terminate that User’s Account immediately]\".",
+   "flow": "Readable, but switches between legal \"may maintain\" and chat (\"that's no worries\") in the same sentence; \"that's no worries\" is itself a slightly awkward construction.",
+   "variety": "Few terms, and they are the same set as elsewhere: \"the final say\", \"sort out\", \"reckon\", \"no worries\", \"stoked\", \"have a squiz\".",
+   "essence": "Unmistakably GitHub's Account Terms, structure intact."
+  }
+ },
+ "problems": {
+  "dinkum-4": [
+   {
+    "quote": "at the end of the day",
+    "original": "ultimately",
+    "severity": "minor",
+    "why": "Generic stock phrase rather than Australian idiom."
+   }
+  ],
+  "dinkum-3": [
+   {
+    "quote": "we reckon you're responsible",
+    "original": "we consider you responsible",
+    "severity": "major",
+    "why": "\"reckon\" makes a binding legal position sound like a casual opinion."
+   },
+   {
+    "quote": "No Accounts signed up by \"bots\" or other automated means, ta.",
+    "original": "Accounts registered by \"bots\" or other automated methods are not permitted.",
+    "severity": "minor",
+    "why": "\"ta\" turns a prohibition into a flippant aside."
+   },
+   {
+    "quote": "An Organization can have a few owners",
+    "original": "An Organization may have multiple owners",
+    "severity": "minor",
+    "why": "\"a few\" narrows \"multiple\"."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "we reckon you're responsible",
+    "original": "we consider you responsible",
+    "severity": "major",
+    "why": "\"reckon\" makes a binding legal position sound like a casual opinion."
+   },
+   {
+    "quote": "You may not use GitHub in violation of export control or sanctions laws of the United States or any other applicable jurisdiction.",
+    "original": "You may not use GitHub in violation of export control or sanctions laws of the United States or any other applicable jurisdiction.",
+    "severity": "minor",
+    "why": "Whole bullets left untranslated; lighter than level 3."
+   },
+   {
+    "quote": "that's no worries",
+    "original": "that's fine",
+    "severity": "minor",
+    "why": "Awkward construction; \"no worries\" doesn't take \"that's\" naturally."
+   }
+  ]
+ },
+ "summaries": {
+  "dinkum-4": "Faithful, smooth and at the right level-3 weight, with legal force kept; the best of the three.",
+  "dinkum-3": "The most colourful and varied, a little heavier than level 3, but softens legal force with \"we reckon\" and a flippant \"ta\".",
+  "yarn-dinkum": "Faithful but the lightest and most uneven, with untouched legalese beside occasional slang and a softened \"we reckon\"."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "dinkum-4",
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-3"
+   ]
+  ],
+  "flow": [
+   [
+    "dinkum-4"
+   ],
+   [
+    "dinkum-3",
+    "yarn-dinkum"
+   ]
+  ],
+  "variety": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "dinkum-4"
+   ],
+   [
+    "yarn-dinkum"
+   ]
+  ],
+  "essence": [
+   [
+    "dinkum-4",
+    "dinkum-3",
+    "yarn-dinkum"
+   ]
+  ],
+  "overall": [
+   [
+    "dinkum-4"
+   ],
+   [
+    "dinkum-3"
+   ],
+   [
+    "yarn-dinkum"
+   ]
+  ]
+ }
+}

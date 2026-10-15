@@ -1,0 +1,285 @@
+# Everyday register: NEWS AND PUBLIC INFORMATION (news reports, press releases, weather
+# forecasts, public notices, sports reports, community news, obituaries of public figures).
+# Source texts for testing the translator; every file here is in the public domain (US federal
+# government work, or published before 1929) or under a Creative Commons Attribution licence.
+#
+# words: whitespace-split count of the saved file (Python str.split).
+# Texts are verbatim, curly quotes and dashes kept as published. Changes are whitespace only (one
+# blank line between blocks, no hard wrapping), plus removal of page furniture (nav, share buttons,
+# bylines, source lists, contact blocks, agency boilerplate), noted per item.
+# Copyrighted or unclear full texts are local only: see news-remote.yaml.
+# Kieran has file: null here pending Australian redistribution review.
+
+- file: news/nashville_kurdish_community_anniversary.txt
+  title: Nashville honors 50 Years of Kurdish community in the United States
+  genre: community-news
+  register: neutral
+  tone: warm, civic, matter-of-fact
+  url: https://www.voanews.com/a/nashville-honors-50-years-of-kurdish-community-in-the-united-states/8209670.html
+  author: Najab Balay, Voice of America (translated from VOA Kurdi)
+  licence: public domain (US federal government work, Voice of America)
+  licence_evidence: >-
+    https://www.voanews.com/p/5338.html (VOA terms of use): "All text, audio and video material
+    produced exclusively by the Voice of America is in the public domain." The story is VOA's own
+    (byline Najab Balay; "translated from the original VOA Kurdi article"); no wire credit.
+  retrieved: 2026-10-12
+  words: 212
+  excerpt: >-
+    Whole article body, from "The Metropolitan Council of Nashville" to "signed on October 6,
+    2026." Omits the headline, byline and the editor's note about translation.
+  notes: >-
+    Short local-government news item: "Metropolitan Council", "council member ... District 4",
+    "proclamation", "southeastern U.S. state of Tennessee". Credit VOA when reused.
+
+- file: news/boston_area_forecast_discussion.txt
+  title: Area Forecast Discussion, NWS Boston/Norton MA, 252 PM EDT Mon Oct 12 2026
+  genre: weather
+  register: formal
+  tone: dry, technical, with a flash of forecaster humour ("the 'S word' just yet (snow)")
+  url: https://forecast.weather.gov/product.php?site=NWS&issuedby=BOX&product=AFD&format=txt&version=1&glossary=0
+  author: National Weather Service, Boston/Norton MA forecast office (NOAA)
+  licence: public domain (US federal government work)
+  licence_evidence: >-
+    https://www.weather.gov/disclaimer: "The information on National Weather Service (NWS) Web
+    pages are in the public domain, unless specifically noted otherwise, and may be used without
+    charge for any lawful purpose".
+  retrieved: 2026-10-12
+  words: 637
+  excerpt: >-
+    The .DISCUSSION section's KEY MESSAGE 2 and KEY MESSAGE 3, from "KEY MESSAGE 2...Isolated
+    shower possible Wednesday" to "may drop into the upper 20s." Omits the header, "What has
+    changed", the key-message list, KEY MESSAGE 1, and the aviation and marine sections.
+  notes: >-
+    The product URL always serves the latest issuance, so it will have moved on; the issuance used
+    here is archived at https://mesonet.agron.iastate.edu/wx/afos/p.php?pil=AFDBOX&e=202610121852
+    (checked). The 69-column hard wrapping was joined into paragraphs (whitespace only). Kept as
+    issued: "mph", Fahrenheit highs ("in the 70s"), "fall", "925mb temperatures +17- 18C", NWS
+    shorthand (LLJ, CAA, RH, ECMWF, GFS), "0.60\"" for inches, and the backtick apostrophes
+    ("won`t", "can`t", "It`s") that NWS text products use.
+
+- file: news/yellowstone_fishing_restrictions_lifted.txt
+  title: 'Update: Yellowstone lifts remaining fishing restrictions for Firehole, Madison and Gibbon rivers'
+  genre: notice
+  register: formal
+  tone: dry, official, with a polite request to anglers at the end
+  url: https://www.nps.gov/yell/learn/news/26015.htm
+  author: Yellowstone National Park, National Park Service (US Department of the Interior)
+  licence: public domain (US federal government work)
+  licence_evidence: >-
+    https://www.nps.gov/aboutus/disclaimer.htm: "material created by the National Park Service and
+    presented on this website, unless otherwise indicated, is generally considered in the public
+    domain." No other notice on the page.
+  retrieved: 2026-10-12
+  words: 375
+  excerpt: >-
+    The two most recent updates on the page: the Sept. 4 update (from "MAMMOTH HOT SPRINGS, Wyo. –
+    Effective Friday, Sept. 4") and the Aug. 28 update with its two headings, ending "if
+    conditions worsen." Omits the earlier July and August updates further down the page.
+  notes: >-
+    Park-notice prose: "anglers", "tributaries", "68 degrees Fahrenheit (20 degrees Celsius)",
+    "2 p.m. to sunrise", "Do not play hooked trout to exhaustion." US date style ("Sept. 4",
+    "Aug. 28").
+
+- file: news/usgs_low_level_survey_flights.txt
+  title: 'Media Alert: Low-level Flights to Image Geology over Eastern California'
+  genre: press-release
+  register: formal
+  tone: dry, reassuring public notice
+  url: https://www.usgs.gov/news/state-news-release/media-alert-low-level-flights-image-geology-over-eastern-california
+  author: U.S. Geological Survey (US Department of the Interior)
+  licence: public domain (US federal government work)
+  licence_evidence: >-
+    https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits:
+    "USGS-authored or produced data and information are considered to be in the U.S. Public
+    Domain." The release carries no other notice.
+  retrieved: 2026-10-12
+  words: 549
+  excerpt: >-
+    From the dateline "RESTON, Va. – Low-level airplane flights" to "on the USGS ScienceBase
+    website." Omits the headline and subhead.
+  notes: >-
+    Notice to residents about low-flying helicopters, with quotes from a USGS coordinator and the
+    California State Geologist (public officials). Feet with metres in brackets ("660 feet (200
+    meters)"), "Calif.", "counties", "FAA", "daylight hours only". A long list of mineral names.
+
+- file: news/nasa_nfl_flyover.txt
+  title: NASA to Conduct Flyover, Engage NFL Fans at MetLife Stadium
+  genre: press-release
+  register: neutral
+  tone: upbeat, promotional
+  url: https://www.nasa.gov/news-release/nasa-to-conduct-flyover-engage-nfl-fans-at-metlife-stadium/
+  author: NASA
+  licence: public domain (US federal government work)
+  licence_evidence: >-
+    https://www.nasa.gov/nasa-brand-center/images-and-media/: "NASA content ... generally are not
+    subject to copyright in the United States." and "News outlets, schools, and text-book authors
+    may use NASA content without needing explicit permission ... NASA should be acknowledged as the
+    source of the material."
+  retrieved: 2026-10-12
+  words: 199
+  excerpt: >-
+    The release body from "As part of the agency's Inspiration Tour flyover" to "transportation in
+    air and space." Omits the third paragraph (media-interview arrangements with a press officer's
+    email and phone number) and the trailing "For more information" links and contact block.
+  notes: >-
+    Dense with Americanisms: NFL, "New York Jets vs. Cleveland Browns game", "kick off", "Tailgate
+    Zone", "F-5 fighter jets", "family-friendly", "EDT", "America's historic 250th anniversary".
+    NASA Administrator Jared Isaacman is a public official. Acknowledge NASA when reused.
+
+- file: news/santa_fe_christmas_tree_permits.txt
+  title: Christmas tree permits available from the Santa Fe National Forest for the upcoming holiday season
+  genre: notice
+  register: neutral
+  tone: helpful, practical, seasonal
+  url: https://www.fs.usda.gov/r03/santafe/newsroom/releases/christmas-tree-permits-available-santa-fe-national-forest-upcoming
+  author: Santa Fe National Forest, USDA Forest Service
+  licence: public domain (US federal government work, 17 U.S.C. 105)
+  licence_evidence: >-
+    Official USDA Forest Service news release on fs.usda.gov ("An official website of the United
+    States government"), no copyright notice on the page. The USDA site policy page
+    (https://www.usda.gov/policies-and-links) refused our fetch (403); a search snippet of it reads
+    that most of the USDA site is public domain and may be freely copied. Status rests on 17 U.S.C.
+    105 (works of federal employees).
+  retrieved: 2026-10-12
+  words: 339
+  excerpt: >-
+    From "Christmas tree permits will be available to purchase online" to "provide forage for
+    wildlife." Omits the headline and subhead, the "For more information" list of link titles, the
+    "About the Forest Service" boilerplate and the equal-opportunity line.
+  notes: >-
+    Everyday public notice: "Fourth graders", "Every Kid Outdoors pass", "5 inches in diameter and
+    10 feet in height", "a 15-foot tree", "$10", "district offices", "Recreation.gov". The page's
+    own slip "December 20, 2024" (for 2025) is kept verbatim.
+
+- file: news/bob_weir_obituary.txt
+  title: Grateful Dead rhythm guitarist Bob Weir dies, aged 78
+  genre: obituary
+  register: neutral
+  tone: respectful, informative
+  url: https://en.wikinews.org/wiki/Grateful_Dead_rhythm_guitarist_Bob_Weir_dies,_aged_78
+  author: Wikinews contributors
+  licence: CC BY 4.0
+  licence_evidence: >-
+    Page footer on the article: "All text created after December 16, 2024 is available under the
+    terms of the Creative Commons Attribution 4.0 License unless otherwise specified." The article
+    is dated Thursday, January 15, 2026. Attribute to Wikinews.
+  licence_url: https://creativecommons.org/licenses/by/4.0/
+  retrieved: 2026-10-12
+  words: 386
+  excerpt: >-
+    From "On Saturday, the family of American musician" to "in Mill Valley, California." Omits the
+    final sentence naming his surviving wife and daughters, the related-news links and the sources
+    list.
+  notes: >-
+    Obituary of a public figure. American music vocabulary (rhythm guitar, bluegrass, "jam band",
+    "Bay Area"), US date style ("October 16, 1947"). Wikinews mostly uses US spelling here.
+
+- file: news/julio_teheran_retires.txt
+  title: Former Major League Baseball pitcher Julio Teherán retires
+  genre: sport
+  register: neutral
+  tone: brisk, factual
+  url: https://en.wikinews.org/wiki/Former_Major_League_Baseball_pitcher_Julio_Teher%C3%A1n_retires
+  author: Wikinews contributors
+  licence: CC BY 4.0
+  licence_evidence: >-
+    Page footer on the article: "All text created after December 16, 2024 is available under the
+    terms of the Creative Commons Attribution 4.0 License unless otherwise specified." The article
+    is dated Wednesday, March 11, 2026. Attribute to Wikinews.
+  licence_url: https://creativecommons.org/licenses/by/4.0/
+  retrieved: 2026-10-12
+  words: 164
+  excerpt: Whole article body, from "Julio Teherán, a two-time" to "Mexican Baseball League." Omits the sources list.
+  notes: >-
+    Short but packed with baseball jargon and stats: All-Star, "scratched from a scheduled start",
+    MLB debut, "81-82 record, with a 3.85 ERA, 1.223 WHIP, and 1,260 strikeouts in 1,470.2
+    innings", team names.
+
+- file: news/mount_vernon_hemlock_storm.txt
+  title: Winter storm fells US President George Washington's tree at Mount Vernon estate, Virginia
+  genre: news
+  register: neutral
+  tone: light, curious
+  url: https://en.wikinews.org/wiki/Winter_storm_fells_US_President_George_Washington%27s_tree_at_Mount_Vernon_estate,_Virginia
+  author: Wikinews contributors
+  licence: CC BY 2.5
+  licence_evidence: >-
+    The article page states: "The text of this article is licensed under the terms of the Creative
+    Commons Attribution 2.5 License". Dated Wednesday, March 7, 2018. Attribute to Wikinews.
+  licence_url: https://creativecommons.org/licenses/by/2.5/
+  retrieved: 2026-10-12
+  words: 198
+  excerpt: Whole article body, from "Friday's major winter storm" to "cut into the trunk." Omits the sources list.
+  notes: >-
+    Weather-driven news with US history: "70 mph (about 110 kph)", "the 42nd President Bill
+    Clinton", "car-sized tunnel". Spelling is mixed as published (mostly US, but
+    "whisky barrel").
+
+- file: null
+  remote: babe_ruth_comeback_1927
+  redistribution: Australian status unconfirmed; keep the full excerpt local.
+  status: copyright
+  title: Sports of the Times (John Kieran on Babe Ruth's 60th home run)
+  genre: sport
+  register: casual
+  tone: exuberant, wisecracking sports column
+  url: https://en.wikisource.org/wiki/The_New_York_Times/1927/10/2/Sports_of_the_Times
+  author: John Kieran, The New York Times
+  licence: public domain (US; published 1927)
+  licence_evidence: >-
+    Wikisource page: "Published in the Sunday, October 2, 1927, issue of The New York Times." and
+    licence tag "PD-US": "This work is in the public domain in the United States because it was
+    published before January 1, 1931." (The 1927 copyright notice in the column has expired.)
+  retrieved: 2026-10-12
+  words: 473
+  excerpt: >-
+    From "As a matter of fact, there was never even a good imitation" to "over the come-back
+    trail." Omits the opening paragraph and the quoted verse ("A Query.") that precedes it, and the
+    closing verse section ("And in Conclusion."). The column's run-in subheads ("No Answer Needed.",
+    "The Heavy Firing.", "A Change in Tune.") are kept as their own lines.
+  notes: >-
+    1920s American sports slang: "rooters", "circuit clouts", "took the cover off the siege gun",
+    "barred from the diamond", "over the hill", "right as rain", "come-back". Not US-federal: PD by
+    age.
+
+- file: news/ford_square_dance_1925.txt
+  title: Ford Hires Big Hall for Old-Time Dance
+  genre: news
+  register: neutral
+  tone: light, whimsical
+  url: https://en.wikisource.org/wiki/The_New_York_Times/1925/12/14/Ford_Hires_Big_Hall_for_Old-Time_Dance
+  author: The Associated Press, in The New York Times
+  licence: public domain (US; published 1925)
+  licence_evidence: >-
+    Wikisource transcription of The New York Times for December 14, 1925 (page title "The New York
+    Times/1925/12/14/..."; dateline "DETROIT, Dec. 13 (AP)"). The page shows no licence template;
+    the status follows from publication in 1925, before 1929, so any US copyright has expired.
+  retrieved: 2026-10-12
+  words: 277
+  excerpt: Whole article, from "DETROIT, Dec. 13 (AP)." to "square dances again popular."
+  notes: >-
+    Henry Ford's campaign to revive square dancing; "Mellie" Dunham, a famous fiddler of the day,
+    and promoter Tex Rickard are public figures. "vaudeville contract", "heed the call of the
+    footlights", "barn dance", "Madison Square Garden", US spelling "standardize".
+
+- file: news/wilbur_crafts_obituary_1922.txt
+  title: Dr. Wilbur F. Crafts Crusader, Dies at 73
+  genre: obituary
+  register: formal
+  tone: grave, measured, faintly wry
+  url: https://en.wikisource.org/wiki/The_New_York_Times/1922/12/28/Dr._Wilbur_F._Crafts_Crusader,_Dies_at_73
+  author: The New York Times
+  licence: public domain (US; published 1922)
+  licence_evidence: >-
+    Wikisource transcription, headed "December 28, 1922", from The New York Times. The page shows
+    no licence template; the status follows from publication in 1922, before 1929, so any US
+    copyright has expired.
+  retrieved: 2026-10-12
+  words: 405
+  excerpt: >-
+    The obituary body from the dateline "WASHINGTON, Dec. 27." to "objects of his tireless
+    reforming zeal." Omits the stacked headline decks.
+  notes: >-
+    Obituary of a public figure (prohibition campaigner and lobbyist). Period US vocabulary:
+    "congressional lobbies", "Sunday baseball", "joy rides", "screen vampires", "close dancing",
+    "the Dempsey-Carpentier bout", "Me." and "R. I." state abbreviations.

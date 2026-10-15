@@ -1,0 +1,1338 @@
+- decision: add_entry
+  candidate: chemists
+  entry:
+    id: chemist-shop
+    form: a chemist
+    variants: []
+    concept:
+    - NEW:PHARMACY
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: The shop that fills prescriptions and sells medicines; the usual Australian word for a pharmacy.
+    sources:
+    - https://en.wiktionary.org/wiki/chemist
+  new_concept:
+    id: PHARMACY
+    description: A retail pharmacy (the shop, not the academic field).
+    triggers:
+      np:
+      - drugstore
+      - drug store
+      - pharmacy !school|schools|degree|degrees|student|students|technician|technicians|benefits|board|course|courses|faculty|studies|practice|law|program|programs|programme
+      - retail pharmacy
+      - community pharmacy
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: high
+  why: Chemist is the everyday Aussie word for the shop; must not catch pharmacy as a field of study, the profession or the
+    PBS ('pharmacy degree', 'Pharmaceutical Benefits'), nor 'chemist' the scientist going the other way.
+- decision: add_entry
+  candidate: chucked away everything with
+  entry:
+    id: chuck-out
+    form: chuck out {obj}
+    variants: []
+    concept:
+    - NEW:DISCARD
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Throw something away or out as rubbish.
+    sources: []
+  new_concept:
+    id: DISCARD
+    description: Throw something away; get rid of it as rubbish.
+    triggers:
+      vp:
+      - throw away {obj}
+      - throw {obj} away
+      - discard {obj}
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: high
+  why: Everyday Aussie 'chuck out/chuck away'. Not on DISMISS (that's breaking up / getting rid of people); 'throw out a case/idea'
+    still reads fine as 'chuck out'. Must not catch 'throw' alone (THROW has 'chuck').
+- decision: style_guide
+  candidate: cos
+  guidance: In casual speech write 'cos' (not US ''cause' or 'cuz') for because.
+  why: Too frequent and context-dependent for a word swap; a register choice.
+  triggers_to_add: {}
+- decision: style_guide
+  candidate: go Crikey
+  guidance: Quotative 'go/goes' to introduce speech or an exclamation ('and he goes, Crikey!').
+  why: Discourse habit, not a word swap; Crikey itself is already in the dictionary.
+  triggers_to_add: {}
+- decision: add_entry
+  candidate: mickey Sayin' this
+  entry:
+    id: taking-the-mickey
+    form: '{subj} {be} takin'' the mickey'
+    variants:
+    - '{subj} {be} taking the mickey'
+    - '{subj} {be} takin'' the micky'
+    concept:
+    - TEASE
+    frame: clause
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Kidding or teasing; the clean version of taking the piss.
+    sources:
+    - https://platform.aussieenglish.com.au/blog/ae-1406-expression-take-the-mickey
+    - https://en.wikipedia.org/wiki/Taking_the_piss
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Used widely in Aus as a clean alternative to 'taking the piss'; clause frame on TEASE only, so it won't fire on 'Mickey'
+    the name.
+- decision: style_guide
+  candidate: mightn't be keen on
+  guidance: 'Use the contraction ''mightn''t'' (and ''keen on'' for ''like/want'') in casual speech: ''you mightn''t be keen
+    on it''.'
+  why: '''Mightn''t'' is common in Aus speech and rare in the US, but it''s a contraction habit, not a lexical swap.'
+  triggers_to_add: {}
+- decision: add_entry
+  candidate: sloshed
+  entry:
+    id: sloshed
+    form: sloshed
+    variants: []
+    concept:
+    - DRUNK
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Drunk, in a cheerful, slightly sloppy way.
+    sources:
+    - https://en.wiktionary.org/wiki/sloshed
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Common Aus/UK colloquial for drunk, not yet among DRUNK's forms; fits only the drunk sense, and as a form it won't
+    fire on liquid 'sloshing'.
+- decision: add_entry
+  candidate: southerlies
+  entry:
+    id: southerly
+    form: a southerly
+    variants: []
+    concept:
+    - NEW:SOUTH_WIND
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: A wind from the south; in southern Aus, often the one that brings a cool change.
+    sources:
+    - http://www.bom.gov.au/
+  new_concept:
+    id: SOUTH_WIND
+    description: A wind blowing from the south.
+    triggers:
+      np:
+      - a south wind
+      - south winds
+      - a southerly wind
+      - southerly winds
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Aussie forecasts use 'southerly' as a noun. Must not catch 'south' as a direction or 'Southern'; COOL_CHANGE keeps
+    'a sudden southerly wind' through the longer match. Not in the harvest's sense of US southward winds, but harmless there.
+- decision: add_entry
+  candidate: taking the piss
+  entry:
+    id: taking-the-piss
+    form: '{subj} {be} taking the piss'
+    variants: []
+    concept:
+    - TEASE
+    frame: clause
+    intensity: 3
+    vulgarity: 2
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Only joking; having someone on.
+    sources:
+    - https://en.wikipedia.org/wiki/Taking_the_piss
+    - https://aussieenglish.com.au/ae-373-expression-take-the-piss
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Common Aussie for kidding (MOCK has the transitive 'take the piss out of {obj}'). Must not catch urinating ('taking
+    a piss'); TEASE's clause triggers are about joking, so they're safe.
+- decision: add_entry
+  candidate: that sort of carry-on
+  entry:
+    id: carry-on-fuss
+    form: a carry-on
+    variants: []
+    concept:
+    - NEW:FUSS
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: A fuss or a display of silly or excessive behaviour.
+    sources:
+    - https://en.wiktionary.org/wiki/carry-on
+  new_concept:
+    id: FUSS
+    description: A fuss, commotion or silly behaviour (noun).
+    triggers:
+      np:
+      - a commotion
+      - a to-do
+      - a kerfuffle
+      - such a fuss
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Aus/UK noun 'carry-on'. Must not catch carry-on luggage (US 'a carry-on bag'), so the form is the fuss noun only and
+    no trigger is 'carry-on'; OVERREACT keeps 'make a fuss'.
+- decision: style_guide
+  candidate: the odd shower
+  guidance: Use 'the odd X' for occasional or scattered things ('the odd shower', 'the odd roo on the road').
+  why: Pattern over any noun; also British, but very Aussie in weather and everyday talk.
+  triggers_to_add: {}
+- decision: add_entry
+  candidate: walkers
+  entry:
+    id: bushwalker
+    form: a bushwalker
+    variants: []
+    concept:
+    - NEW:HIKER
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Someone who goes walking on tracks through the bush or national parks; an Aussie hiker.
+    sources:
+    - https://www.sbs.com.au/language/indonesian/id/podcast-episode/47-lets-go-bushwalking-adv/0v3d3wn05
+  new_concept:
+    id: HIKER
+    description: A person who hikes on foot in natural areas.
+    triggers:
+      np:
+      - hiker
+      - trekker
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Bushwalking is the standard Aussie term for hiking. Must not catch 'hitchhiker' or 'price hike'; 'backpacker' in Aus
+    usually means a budget traveller, so maybe drop that trigger if precision is the priority.
+- decision: gate
+  candidate: a bit of ticker
+  entry:
+    id: ticker-courage
+    form: ticker
+    variants: []
+    concept:
+    - NEW:GUTS_COURAGE
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    replaces: []
+    gloss: Courage and fighting heart, especially in sport.
+    sources:
+    - https://en.wiktionary.org/wiki/ticker
+    status: gate
+    flags:
+    - dubious_meaning
+  new_concept:
+    id: GUTS_COURAGE
+    description: Courage, grit, fighting spirit (noun).
+    triggers:
+      np:
+      - grit
+      - fighting spirit
+      - plenty of heart
+      - the courage !of|to
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Aus sports-talk sense of "ticker" (the existing entry is only the heart organ); my searches did not find a dictionary
+    page for the courage sense, so gated. Must not catch "courage of his convictions" or "the nerve" (cheek, as in "had the
+    nerve to").
+- decision: add_entry
+  candidate: Bung em
+  entry:
+    id: bung-in
+    form: bung {obj} in
+    variants: []
+    concept:
+    - NEW:PUT_IN_CASUAL
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Casually put or chuck something into something (an oven, a pot, the car).
+    sources:
+    - https://en.wiktionary.org/wiki/bung
+  new_concept:
+    id: PUT_IN_CASUAL
+    description: Casually put something in (pop it in, stick it in).
+    triggers:
+      vp:
+      - pop {obj} in
+      - pop {obj} into
+      - stick {obj} in
+      - toss {obj} in
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Very common Aus kitchen verb. Never trigger on bare "put" (put up with, put off, put a question). "Pop in" with no
+    object (visit) must not fire.
+- decision: add_entry
+  candidate: chock-a-block
+  entry:
+    id: chock-a-block
+    form: chock-a-block
+    variants: []
+    concept:
+    - CROWDED
+    frame: predicate_adj
+    intensity: 4
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Crammed full, with no room left.
+    sources:
+    - https://en.wiktionary.org/wiki/chock-a-block
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Full form of the existing "chockers"; both agent kinds produced it. Uses CROWDED's existing triggers, which already
+    exclude "packed up/away".
+- decision: gate
+  candidate: chopped-up block
+  entry:
+    id: block-of-chocolate
+    form: a block of chocolate
+    variants:
+    - a block of choccy
+    concept:
+    - NEW:CHOCOLATE_BLOCK
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: A full-size slab of chocolate broken into squares (as opposed to a single-serve bar).
+    sources:
+    - https://en.wiktionary.org/wiki/block
+    status: gate
+    flags:
+    - dubious_meaning
+  new_concept:
+    id: CHOCOLATE_BLOCK
+    description: A large slab of chocolate.
+    triggers:
+      np:
+      - a bar of chocolate
+      - a large chocolate bar
+      - a slab of chocolate
+      - a family-size chocolate bar
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: low
+  why: Aussies say "a block of chocolate" for the big slab, but "a chocolate bar" in Aus is a single-serve Mars-type bar,
+    so only the slab frames trigger. Gated because the slab/bar split depends on context.
+- decision: add_entry
+  candidate: clapped-out dunny
+  entry:
+    id: clapped-out
+    form: clapped-out
+    variants: []
+    concept:
+    - NEW:WORN_OUT_THING
+    frame: adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Worn out and barely working, said of machines, cars and fittings.
+    sources:
+    - https://en.wiktionary.org/wiki/clapped-out
+  new_concept:
+    id: WORN_OUT_THING
+    description: 'Of a machine or thing: worn out, beaten up, barely working.'
+    triggers:
+      adj:
+      - beat-up
+      - beaten-up
+      - broken-down !by
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Standard Aus (and British) for an old car or appliance. Kept off "worn-out", which TIRED uses for people, and off "run-down"
+    meaning ill; attributive only.
+- decision: add_entry
+  candidate: have a lie-down
+  entry:
+    id: have-a-lie-down
+    form: have a lie-down
+    variants: []
+    concept:
+    - NEW:LIE_DOWN_REST
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Go and rest on a bed or couch for a bit, not necessarily to sleep.
+    sources:
+    - https://en.wiktionary.org/wiki/lie-down
+  new_concept:
+    id: LIE_DOWN_REST
+    description: Lie down for a rest.
+    triggers:
+      vp:
+      - go and lie down
+      - go lie down
+      - lie down for a while
+      - lie down for a bit
+      - take a lie-down
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: 'Classic Aus ("have a Bex and a good lie-down"). Never trigger bare "lie down": lightning and bear guides say "lie
+    down flat", which is not a rest.'
+- decision: add_entry
+  candidate: ice bricks
+  entry:
+    id: ice-brick
+    form: an ice brick
+    variants: []
+    concept:
+    - NEW:ICE_BRICK
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: A sealed plastic block you freeze and put in the esky to keep things cold.
+    sources:
+    - https://michellecooper-writer.com/blog/2017/11/australianisms-in-dr-huxleys-bequest/
+  new_concept:
+    id: ICE_BRICK
+    description: A reusable freezer block for a cooler.
+    triggers:
+      np:
+      - gel pack
+      - gel packs
+      - freezer pack
+      - freezer packs
+      - cooler pack
+      - cooler packs
+      - freezer block
+      - freezer blocks
+      - blue ice
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Aussie word for the esky block. Deliberately not triggered by "ice pack" (also the thing you put on an injury) or "cold
+    pack" (medical).
+- decision: add_trigger
+  candidate: it goes on the barbie
+  triggers_to_add:
+    BARBECUE:
+      np:
+      - the outdoor grill
+      - an outdoor grill
+      - a gas grill
+      - the gas grill
+      - a charcoal grill
+      - the charcoal grill
+      - the backyard grill
+      - a barbecue grill
+      - the barbecue grill
+  why: US "grill" is an Aussie barbie, but in Australia "the grill" alone is the oven element (under the grill), so only add
+    the unambiguous outdoor/gas/charcoal frames.
+- decision: add_entry
+  candidate: some poor mug
+  entry:
+    id: some-poor-mug
+    form: some poor mug
+    variants: []
+    concept:
+    - NEW:SUCKER
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Some gullible person who can be talked into a bad deal.
+    sources:
+    - https://en.wiktionary.org/wiki/mug
+  new_concept:
+    id: SUCKER
+    description: A gullible person; a dupe (some poor sucker).
+    triggers:
+      np:
+      - some poor sucker
+      - some sucker
+      - some poor sap
+      - some poor fool
+      - some patsy
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: '"Mug" for a dupe is long-standing Aus (mug punter). Triggers are the "some (poor) sucker" frames only, so the lollipop
+    "sucker" and "sucker punch" stay untouched.'
+- decision: gate
+  candidate: sozzled
+  entry:
+    id: sozzled
+    form: sozzled
+    variants: []
+    concept:
+    - DRUNK
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: dated
+    replaces: []
+    gloss: Fairly drunk; a jokey, slightly old-fashioned word.
+    sources:
+    - https://en.wiktionary.org/wiki/sozzled
+    status: gate
+    flags:
+    - not_aussie
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Understood and used in Australia but British in origin and not distinctly Aussie; DRUNK already has many stronger Aus
+    forms.
+- decision: add_entry
+  candidate: staying out of strife
+  entry:
+    id: stay-out-of-strife
+    form: stay out of strife
+    variants: []
+    concept:
+    - NEW:STAY_OUT_OF_TROUBLE
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Keep yourself out of trouble or danger.
+    sources:
+    - https://en.wiktionary.org/wiki/strife
+  new_concept:
+    id: STAY_OUT_OF_TROUBLE
+    description: Avoid getting into trouble.
+    triggers:
+      vp:
+      - stay out of trouble
+      - keep out of trouble
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: high
+  why: Builds on the existing "in strife"; both agent kinds used it. Only fires on the fixed "stay/keep out of trouble", not
+    on "trouble" alone (engine trouble, troubleshooting).
+- decision: add_entry
+  candidate: veg
+  entry:
+    id: fruit-and-veg
+    form: fruit and veg
+    variants: []
+    concept:
+    - NEW:FRUIT_AND_VEG
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Fresh fruit and vegetables, as one everyday phrase.
+    sources:
+    - https://en.wiktionary.org/wiki/veg
+  new_concept:
+    id: FRUIT_AND_VEG
+    description: Fresh fruit and vegetables; produce.
+    triggers:
+      np:
+      - fruits and vegetables
+      - fruit and vegetables
+      - fresh produce
+      - the produce section
+      - the produce aisle
+      - produce department
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: high
+  why: The fixed Aus collocation (greengrocer signs, ads). Never trigger bare "produce" (the verb, or "farm produce" in a
+    different register); bare "veg" alone is not added.
+- decision: gate
+  candidate: a bit rough bagging
+  entry:
+    id: a-bit-rough
+    form: a bit rough
+    variants: []
+    concept:
+    - OUT_OF_LINE
+    frame: predicate_adj
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Harsh or unfair on someone.
+    sources: []
+    status: gate
+    flags:
+    - dubious_meaning
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Aussie "that's a bit rough" = unfair/harsh. Gated because "rough" also means unwell, poor quality or approximate, and
+    is shared with Britain; should fire only via OUT_OF_LINE "unfair", never for "rough draft" or "feeling rough".
+- decision: add_entry
+  candidate: anyone uses marg
+  entry:
+    id: marg
+    form: marg
+    variants: []
+    concept:
+    - NEW:MARGARINE
+    frame: np
+    intensity: 1
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Margarine, the everyday table spread.
+    sources:
+    - https://www.dictionary.com/browse/Marg
+  new_concept:
+    id: MARGARINE
+    description: Margarine.
+    triggers:
+      np:
+      - margarine
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Everyday Aussie clipping ("butter or marg"). Mass noun. Trigger only margarine; never "margarita".
+- decision: add_entry
+  candidate: as offsiders
+  entry:
+    id: offsider
+    form: an offsider
+    variants: []
+    concept:
+    - NEW:SIDEKICK
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    replaces: []
+    gloss: A helper, deputy or right-hand person who works alongside someone.
+    sources:
+    - https://www.australiangeographic.com.au/history-culture/2018/04/oz-words-offsider/
+    - https://en.wikipedia.org/wiki/Offsider
+  new_concept:
+    id: SIDEKICK
+    description: A helper or deputy who works alongside someone.
+    triggers:
+      np:
+      - sidekick
+      - side-kick
+      - right-hand man
+      - right-hand woman
+      - offsider
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Genuine Aus/NZ (bullocky's helper, 1879). Triggers only sidekick/right-hand man; never bare "assistant" (assistant
+    professor, digital assistant) or "partner" (the harvest misused it for "coeducator").
+- decision: gate
+  candidate: beak
+  entry:
+    id: the-beak
+    form: the beak
+    variants: []
+    concept:
+    - NEW:MAGISTRATE
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 4
+    register: dated
+    replaces: []
+    gloss: A magistrate or judge in a lower court.
+    sources:
+    - https://greensdictofslang.com/
+    status: gate
+    flags:
+    - archaic
+    - not_aussie
+  new_concept:
+    id: MAGISTRATE
+    description: A magistrate presiding in court.
+    triggers:
+      np:
+      - the magistrate
+      - the magistrates
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: low
+  why: British criminal slang also used in Australia; dated. Only the courtroom sense ("up before the magistrate"); never
+    "beak" of a bird or "justice of the peace" generally.
+- decision: add_entry
+  candidate: Bushwalking
+  entry:
+    id: bushwalking
+    form: bushwalking
+    variants: []
+    concept:
+    - NEW:HIKING
+    frame: np
+    intensity: 1
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Walking for recreation along tracks in natural country.
+    sources: []
+  new_concept:
+    id: HIKING
+    description: Recreational walking in natural country.
+    triggers:
+      np:
+      - hiking !trail|trails|path|paths
+      vp:
+      - go hiking
+      - went hiking
+      - going hiking
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: high
+  why: Distinctly Australian for hiking. Must not catch "price hike" or "hike" verb of prices; "hiking trail" already goes
+    to WALKING_TRACK so excluded here.
+- decision: add_entry
+  candidate: coppers
+  entry:
+    id: copper
+    form: a copper
+    variants: []
+    concept:
+    - POLICE_OFFICER
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces:
+    - cop
+    gloss: A police officer.
+    sources:
+    - https://www.oxfordlearnersdictionaries.com/definition/english/copper_2
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Current in Australia ("the coppers") though shared with Britain. Must not catch copper the metal (form only; triggers
+    are police officer/policeman/cop).
+- decision: gate
+  candidate: in the hip pocket
+  entry:
+    id: hip-pocket
+    form: the hip pocket
+    variants: []
+    concept:
+    - NEW:HOUSEHOLD_BUDGET
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Your own money and household budget, as hit by prices or taxes.
+    sources:
+    - https://slll.cass.anu.edu.au/centres/andc/australian-words-h
+    - https://www.oup.com.au/__data/assets/pdf_file/0028/88741/WotM_September_2016.pdf
+    status: gate
+    flags:
+    - dubious_meaning
+  new_concept:
+    id: HOUSEHOLD_BUDGET
+    description: Personal or household finances.
+    triggers:
+      np:
+      - the household budget
+      - household budgets
+      - the family budget
+      - household finances
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: 'Genuine (ANDC: hip-pocket nerve). Harvest used it for "economic development", which is wrong; only personal finances.
+    Never "economy" or "economically".'
+- decision: gate
+  candidate: mightn't twig
+  entry:
+    id: twig
+    form: twig to {np}
+    variants: []
+    concept:
+    - NEW:CATCH_ON
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    replaces: []
+    gloss: Suddenly realise what is going on.
+    sources:
+    - https://www.oxfordlearnersdictionaries.com/definition/english/twig_2
+    status: gate
+    flags:
+    - not_aussie
+  new_concept:
+    id: CATCH_ON
+    description: Realise what is happening.
+    triggers:
+      vp:
+      - catch on to {np}
+      - cotton on to {np}
+      - wise up to {np}
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: low
+  why: Used in Australia but British in origin and getting dated. Only "catch on to/cotton on to"; never bare "realise" (realise
+    a dream) or "catch on" meaning become popular.
+- decision: add_entry
+  candidate: musos
+  entry:
+    id: muso
+    form: a muso
+    variants: []
+    concept:
+    - NEW:MUSICIAN
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: A musician, especially one who plays gigs.
+    sources:
+    - https://greensdictofslang.com/entry/a7uefay
+    - https://www.wiktionary.com/wiki/muso
+  new_concept:
+    id: MUSICIAN
+    description: A musician.
+    triggers:
+      np:
+      - musician
+      - a musician
+      - local musicians
+      - session musician
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Common Aussie clipping. Must not catch "music", "musical" or "musician" inside a formal title.
+- decision: add_trigger
+  candidate: reckon by the time
+  triggers_to_add: {}
+  why: '"I guess (that) X" -> "I reckon X"; reckon already exists. Exclusions keep "guess what", "guess the answer" and "guess
+    right" out; only the opinion use.'
+- decision: add_entry
+  candidate: stickybeaking about
+  entry:
+    id: stickybeak-around
+    form: stickybeak around
+    variants: []
+    concept:
+    - NEW:SNOOP
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: To nose about in things that are none of your business.
+    sources:
+    - https://wordhistories.net/2022/06/12/stickybeak/
+    - https://www.oxfordlearnersdictionaries.com/definition/english/stickybeak
+  new_concept:
+    id: SNOOP
+    description: Pry or snoop into others' business.
+    triggers:
+      vp:
+      - snoop around ^person
+      - snoop about ^person
+      - nose around ^person
+      - nose about ^person
+      - pry into other people's business
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Verb use of the existing noun stickybeak (Aus/NZ). Only of nosy prying by people; must not catch "poke around" meaning
+    explore code or a menu, so that is not a trigger.
+- decision: add_entry
+  candidate: whack it
+  entry:
+    id: whack-in-the-oven
+    form: whack {obj} in the oven
+    variants:
+    - bung {obj} in the oven
+    concept:
+    - NEW:PUT_IN_OVEN
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Pop something into the oven, casually.
+    sources: []
+  new_concept:
+    id: PUT_IN_OVEN
+    description: Put food into the oven (recipe instruction).
+    triggers:
+      vp:
+      - put {obj} in the oven
+      - place {obj} in the oven
+      - pop {obj} in the oven
+      - transfer {obj} to the oven
+      - place {obj} into the oven
+      - put {obj} into the oven
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Casual Aus "whack/bung it in" for put; deliberately limited to the oven frame so it never catches "put in effort",
+    "place an order" or "put your trust in". (bung is a verb variant, not spelling; split it into its own entry if variants
+    must be spelling-only.)
+- decision: add_entry
+  candidate: big-noting meself
+  entry:
+    id: big-note-oneself
+    form: big-note {poss}self
+    variants: []
+    concept:
+    - BOAST
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    replaces:
+    - boast about {poss}self
+    - brag about {poss}self
+    - talk {poss}self up
+    - blow {poss} own trumpet
+    gloss: Talk yourself up; make out you are more important or accomplished than you are.
+    sources:
+    - https://www.wiktionary.com/wiki/big-note
+    - https://greensdictofslang.com/entry/rgc2gua
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Distinctly Aus/NZ; the reflexive verb complements the existing noun big-noter. Only reflexive boasting; must not catch
+    "boast" meaning "to have" (the hotel boasts a pool).
+- decision: add_entry
+  candidate: bunged
+  entry:
+    id: bunged-up
+    form: bunged up
+    variants: []
+    concept:
+    - NEW:CLOGGED
+    frame: predicate_adj
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Blocked or clogged so nothing gets through.
+    sources: []
+  new_concept:
+    id: CLOGGED
+    description: Physically blocked or clogged (pipe, drain, vent, nose).
+    triggers:
+      predicate_adj:
+      - clogged
+      - clogged up
+      - plugged up
+      - blocked up
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Aus/UK colloquial for clogged (nose, vent, drain). Must not catch "blocked" (accounts, roads, shots) or "stuffed up"
+    meaning botched.
+- decision: add_entry
+  candidate: caper
+  entry:
+    id: caper-racket
+    form: a caper
+    variants: []
+    concept:
+    - RACKET
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    replaces:
+    - a racket
+    - a little scheme
+    - a money-making scheme
+    - a get-rich-quick scheme
+    gloss: A scheme, racket or line of activity, often a bit shady or tongue-in-cheek.
+    sources:
+    - https://greensdictofslang.com/entry/dcbq4fy
+    - https://www.dictionary.com/browse/caper
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Aus/Commonwealth "caper" = a scheme or line of business ("the marriage agency caper"). Must not catch formal "scheme"
+    (pension, superannuation, colour, rhyme scheme) or a heist film "caper".
+- decision: add_entry
+  candidate: feed of it
+  entry:
+    id: a-feed
+    form: a feed
+    variants: []
+    concept:
+    - NEW:MEAL
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: A meal, usually a good filling one.
+    sources:
+    - https://greensdictofslang.com/entry/iwnqday
+  new_concept:
+    id: MEAL
+    description: A (good, filling) meal, as a countable noun.
+    triggers:
+      np:
+      - a good meal
+      - a hearty meal
+      - a decent meal
+      - a square meal
+      - a big meal
+      - a filling meal
+      - a quick meal !plan|plans|kit|kits|prep|deal|deals
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Noun use of the existing "have a feed"; triggers limited to qualified "a ... meal" so it never catches "bone meal",
+    "meal plan", "meal ticket", "meal kit" or "piecemeal".
+- decision: add_trigger
+  candidate: gives a big rap to
+  triggers_to_add:
+    PRAISE:
+      vp:
+      - commend {obj}
+      - heap praise on {obj}
+      - speak glowingly of {obj}
+  why: '"give {obj} a big wrap" (Aus spelling) already exists; widen triggers. Avoid bare "praise" (praise the Lord) and "pay
+    tribute to" (said of the dead) and "highlight".'
+- decision: add_entry
+  candidate: got the flick
+  entry:
+    id: get-the-flick
+    form: get the flick
+    variants: []
+    concept:
+    - NEW:GET_DUMPED
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Be dumped, rejected or let go, from a job, a relationship or a line-up.
+    sources:
+    - https://greensdictofslang.com/entry/cd3brka
+  new_concept:
+    id: GET_DUMPED
+    description: Be dumped, rejected or sacked (passive of DISMISS).
+    triggers:
+      vp:
+      - get dumped
+      - got dumped
+      - get ditched
+      - got ditched
+      - get the boot !camp|camps
+      - get the elbow
+      - get the push
+      - get the sack
+      - got the sack
+      - get sacked
+      - got sacked
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Passive counterpart of existing "give {obj} the flick". Keep to people/things being dumped; must not catch "removed"
+    (surgery, stains, data) or "fired up"/"fired at".
+- decision: add_entry
+  candidate: nous
+  entry:
+    id: nous
+    form: nous
+    variants: []
+    concept:
+    - NEW:COMMON_SENSE
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    replaces: []
+    gloss: Practical good sense and know-how; savvy.
+    sources: []
+  new_concept:
+    id: COMMON_SENSE
+    description: Practical good sense, savvy (as a mass noun).
+    triggers:
+      np:
+      - common sense !approach|approaches|solution|solutions|reform|reforms|measure|measures|rule|rules|policy|policies|test|view|thing
+      - gumption
+      - horse sense
+      - street smarts
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: 'British in origin but the everyday Aus choice (rhymes with "house"). Mass noun only: excludes "common sense" as a
+    modifier and adjectival "savvy"; must not catch "sense" alone or philosophical "nous".'
+- decision: add_trigger
+  candidate: tracks
+  triggers_to_add:
+    WALKING_TRACK:
+      np:
+      - a hiking track
+      - a bushwalking trail
+      - a mountain trail
+      - a forest trail
+      - a backcountry trail
+      - a park trail
+      - the park trails
+      - hiking trails
+      - walking trails
+  why: Existing "a walking track" should fire for more hiking-trail phrasings; bare "trail" deliberately excluded (paper trail,
+    campaign trail, on the trail of).
+- candidate: meant
+  decision: style_guide
+  guidance: Prefer "meant to" over "supposed to" ("I was meant to leave it") -- the usual Australian/British choice.
+  why: A grammatical preference, not a slang term; a global swap is fine but not as a dictionary entry.
+  triggers_to_add: {}
+- candidate: a doddle
+  decision: gate
+  entry:
+    id: a-doddle
+    form: a doddle
+    variants: []
+    concept:
+    - CHILDS_PLAY
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces:
+    - a breeze
+    - a cinch
+    gloss: Something that takes no effort at all.
+    sources: []
+  new_concept: null
+  triggers_to_add: {}
+  flags:
+  - not_aussie
+  evidence: agents_only
+  confidence: medium
+  why: Understood and used in Australia but chiefly British; "kid stakes" or "a piece of piss" are the more Aussie picks.
+    Must not fire on "easy" as an adjective, only on easy-task nouns.
+- candidate: alfoil shouldn't go
+  decision: add_entry
+  entry:
+    id: alfoil
+    form: alfoil
+    variants: []
+    concept:
+    - NEW:FOIL
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Kitchen aluminium foil; a former brand name now used generically.
+    sources:
+    - https://search.ipaustralia.gov.au/trademarks/search/view/2443598/details
+  new_concept:
+    id: FOIL
+    description: Aluminium foil for cooking and wrapping food.
+    triggers:
+      np:
+      - aluminum foil
+      - aluminium foil
+      - tin foil
+      - tinfoil
+      - kitchen foil
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: high
+  why: Everyday Australian word for kitchen foil (genericised Comalco brand). Must not catch bare "foil" (fencing, "foil a
+    plan", a dramatic foil) or "foil" in packaging/industrial contexts such as "foil balloons" -- only the full foil phrases.
+- candidate: choc
+  decision: add_entry
+  entry:
+    id: choc-chips
+    form: choc chips
+    variants:
+    - choc bits
+    concept:
+    - NEW:CHOC_CHIPS
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Little drops of chocolate for baking.
+    sources: []
+  new_concept:
+    id: CHOC_CHIPS
+    description: Chocolate chips/morsels used in baking.
+    triggers:
+      np:
+      - chocolate chips
+      - chocolate morsels
+      - chocolate chip
+      - chocolate pieces
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: high
+  why: '"Choc" clipping is the normal Aussie recipe/packaging form (choc chip, choc bits, choc-top). Only for baking chips;
+    bare "chocolate" already goes to CHOCOLATE/choccy.'
+- candidate: cleared out
+  decision: add_entry
+  entry:
+    id: clear-out
+    form: clear out
+    variants: []
+    concept:
+    - LEAVE
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces:
+    - leave in a hurry
+    gloss: Leave a place, usually quickly or for good.
+    sources: []
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Long-standing Aussie/British informal "leave, decamp". Form only; must not be produced for transitive "clear out the
+    garage/a cupboard" (emptying), and no trigger on bare "left".
+- candidate: meself
+  decision: style_guide
+  guidance: At higher drawl levels "me" for "my" and "meself" for "myself" ("all up meself") are fine in dialogue and yarns,
+    never in instructions or formal text.
+  why: A pronoun habit shared with Irish/British vernacular, not a word swap the engine should place.
+  triggers_to_add: {}
+- candidate: there's a few stinkers
+  decision: add_entry
+  entry:
+    id: a-stinker-bad
+    form: a stinker
+    variants: []
+    concept:
+    - AWFUL
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces:
+    - a bad one
+    - a dud
+    gloss: Something very poor or unpleasant (a joke, a match, a cold).
+    sources: []
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Distinct from the existing hot-day "a stinker" (HOT_WEATHER). Only as a noun for a bad thing; AWFUL triggers are predicate_adj,
+    so it needs the np replaces ("a bad one") and must not catch "bad" alone or describe people.
+- candidate: trap shut about
+  decision: add_entry
+  entry:
+    id: keep-trap-shut
+    form: keep {poss} trap shut
+    variants: []
+    concept:
+    - NEW:KEEP_QUIET
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Keep quiet; not speak up or blab.
+    sources: []
+  new_concept:
+    id: KEEP_QUIET
+    description: Keep quiet about something; refrain from speaking.
+    triggers:
+      vp:
+      - keep {poss} mouth shut
+      - hold {poss} tongue
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: '"Trap" for mouth is common Aussie/British; KEEP_MUM is about not letting on, and SHUT_UP is imperative, so a vp concept
+    fits. Must not catch "keep quiet" as a noise instruction in procedures ("keep quiet near bears") -- consider gating that
+    trigger to ^person dialogue.'

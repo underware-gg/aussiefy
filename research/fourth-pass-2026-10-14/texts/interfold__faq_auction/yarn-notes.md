@@ -1,0 +1,12 @@
+## dinkum
+- Accepted on the first submit. Both planned phrases right sense and kept: "Nah, nah." (answering "Did the auction determine the price...?") and "Yep." ("Was KYC required?").
+- The MDX handling was clear. I left the front matter, imports, components and props, the whole table, headings, link text and targets, and inline code untouched, and Aussified only prose and callout bodies. The brief doesn't say whether a table cell's prose (e.g. "50% of proceeds dedicated to...") or link text counts as prose or as "table layout" / link. I left both verbatim to be safe.
+- Lint suggestions wrong sense: "four lots" (groups) -> "heaps" (A_LOT); "Nothing in this communication is legal ... advice" -> "bugger all" (NOTHING), wrong sense and wrong register for a legal notice; "one price for everyone" -> "every man and his dog". "a go" -> "a crack" was fine and I took it once to vary.
+- Lookups: "for sure" returned "clear out" (leave) among the right ones (defo, too right); "small" returned only words for children plus "a middy"; "scam", "fake" and "afterwards" were empty. "dodgy" was good (dodgy, shonky, suss).
+- 58 difficult sentences, almost all because of terms of art (transferability, eligibility, liquidity, verification), which the official genre says to keep. They're noise here; the engine could skip terms the genre keeps.
+## troppo
+- Accepted on the first submit. Kept "Nah, nah" and "Yep", plus "the good oil", "the whole box and dice", "done and dusted", "up for grabs", "suss", "a shonk", "dreamin'", "shut up shop", "the nitty-gritty".
+- OPENINGS: "No word of a lie," and "(start with a line of dialogue)" don't fit an FAQ, and "Here's one for ya." promises a story. I opened with "Here's the good oil." and dropped a "Pull up a stool." I'd first written: official docs shouldn't be framed as a pub.
+- Lookup wrong sense: "the drum" (the information, "give us the drum") returned "noggin". "horse has bolted" was empty, though "That horse has bolted" is common Australian.
+- Lint suggestions wrong sense: "That horse has bolted" -> "shoot through" (RUN_OFF), which breaks the idiom; "No ID, no go." -> "no bloody way / yeah, nah" (DISAGREE/DENY); "built on Uniswap infrastructure" -> "knock together" (put together roughly), wrong for infrastructure.
+- How troppo and official fit together: the colour went on reactions after the facts ("Homework first.", "If it looks suss, it probably is.", "Anyone who does is a shonk."). The safety list and the legal notices stayed straight, since "a hazard is never the joke" covers scams too.

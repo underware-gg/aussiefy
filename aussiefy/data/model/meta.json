@@ -1,0 +1,209 @@
+{
+ "name": "aussie-static",
+ "version": "1.2.0",
+ "dims": 256,
+ "rows": 29893,
+ "unk_token": "[UNK]",
+ "added_tokens": [
+  "bloke's",
+  "buckley's",
+  "bugger's",
+  "couldn't",
+  "day's",
+  "dingo's",
+  "dog's",
+  "donkey's",
+  "fish's",
+  "g'day",
+  "how's",
+  "law's",
+  "macca's",
+  "n't",
+  "pommy's",
+  "rat's",
+  "robber's",
+  "she'll",
+  "shearer's",
+  "sideways'n",
+  "sparrow's",
+  "that's",
+  "welder's",
+  "witch's",
+  "wouldn't",
+  "you're"
+ ],
+ "lookup_threshold": 0.5,
+ "gaps_confident": 0.6,
+ "dictionary_sha256": "d9d7a42b59baf7e5b06425558ffa8da6017a2f43e815c397f8a124d3a5cfcac1",
+ "vectors_sha256": "c43adab96572058bb1c106fc448f6ebf56e9a1f9406360b462cd6874e16273ac",
+ "vocab_sha256": "9fe80d0dca7829bce0490b8f4004f417fe7b230fb275802e64087ba7cc3dc5eb",
+ "trained": "2026-10-11",
+ "about": "scripts/train_embedder.py from training/recipe.yaml; report: training/reports/1.2.0.json",
+ "recipe": {
+  "name": "aussie-static",
+  "base": {
+   "model": "sentence-transformers/all-MiniLM-L6-v2",
+   "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+  },
+  "seed": 13,
+  "holdout": 0.2,
+  "sources": {
+   "dictionary": true,
+   "opposites": "training/opposites.yaml",
+   "extra_pairs": [],
+   "wordnet": {
+    "enabled": true,
+    "senses": 1,
+    "per_trigger": 6,
+    "forms_per_concept": 2,
+    "exclude": "training/gap_benchmark.yaml"
+   }
+  },
+  "gap_benchmark": "training/gap_benchmark.yaml",
+  "reference": "training/reference.yaml",
+  "pairs": {
+   "placeholders": {
+    "poss": "their",
+    "subj": "",
+    "obj": "them",
+    "refl": "themselves"
+   },
+   "sense_forms_per_concept": 4,
+   "sense_targets": [
+    "forms",
+    "glosses",
+    "description"
+   ],
+   "opposite_anchors_per_concept": 6,
+   "opposite_forms_per_concept": 4,
+   "opposite_targets": [
+    "forms",
+    "glosses",
+    "description"
+   ]
+  },
+  "finetune": {
+   "epochs": 4,
+   "lr": 5e-05,
+   "batch": 64,
+   "warmup": 0.1,
+   "sense_margin": 0.5,
+   "opposite_margin": 0.75
+  },
+  "distil": {
+   "pca_dims": 256,
+   "dictionary_vocabulary": true,
+   "sif_coefficient": 0.0001
+  },
+  "static_tune": {
+   "epochs": 4,
+   "lr": 0.05,
+   "batch": 256,
+   "blend": 0.7
+  },
+  "cutoffs": {
+   "lookup": 0.5,
+   "gaps": 0.6
+  }
+ },
+ "recipe_sha256": "099a736840dd3bc94588fab916ba4d2af226fdb0e8c72f0287e98fbb696ad4de",
+ "reference_sha256": "346f2a10e11737866089ec8a48d18b18eb12c86a0eedf936ba06ce9f9ca510d5",
+ "opposites_sha256": "d2bea4d42574ce98dc094ac8152d015660ae5933afe13eae69efc9be0563f4f4",
+ "gap_benchmark_sha256": "61f55db88404f3383deebde6998b7b0bf977b7397878ced3233a6e8f338e86e9",
+ "wordnet": "WordNet 3.0",
+ "script_sha256": "80c270355fb8e68c8f36682dcafa16cf7ed6fb07038e3a8fad67cb31c0cbb91a",
+ "git": {
+  "commit": "bd018cf9c9e0d54db307a24ed1f2f42b0f287eeb",
+  "dirty": false
+ },
+ "toolchain": {
+  "python": "3.13.16",
+  "torch": "2.14.1",
+  "sentence-transformers": "6.1.0",
+  "transformers": "5.3.0",
+  "model2vec": "0.9.0",
+  "tokenizers": "0.22.2",
+  "safetensors": "0.8.0",
+  "datasets": "5.1.0",
+  "nltk": "3.10.3",
+  "accelerate": "1.15.0",
+  "scikit-learn": "1.9.1",
+  "numpy": "2.5.3",
+  "huggingface_hub": "1.33.0"
+ },
+ "training_data": {
+  "entries": 624,
+  "pairs": 8703,
+  "wrong_sense_pairs": 748,
+  "opposite_pairs": 3129
+ },
+ "evaluation": {
+  "n-gram": {
+   "gloss->form": 0.152,
+   "gloss->concept's forms": 0.208,
+   "form->concept": 0.128,
+   "opposites offered": 0.035,
+   "gap right@1": 0.047,
+   "gap filled right": 0.023,
+   "gap filled wrong": 0.047,
+   "everyday filled": 0.038,
+   "reference": "20/29"
+  },
+  "stock MiniLM": {
+   "gloss->form": 0.2,
+   "gloss->concept's forms": 0.312,
+   "form->concept": 0.216,
+   "opposites offered": 0.132,
+   "gap right@1": 0.349,
+   "gap filled right": 0.256,
+   "gap filled wrong": 0.14,
+   "everyday filled": 0.038,
+   "reference": "23/29"
+  },
+  "stock MiniLM, static": {
+   "gloss->form": 0.112,
+   "gloss->concept's forms": 0.224,
+   "form->concept": 0.088,
+   "opposites offered": 0.184,
+   "gap right@1": 0.302,
+   "gap filled right": 0.116,
+   "gap filled wrong": 0.163,
+   "everyday filled": 0.0,
+   "reference": "19/29"
+  },
+  "Aussie MiniLM": {
+   "gloss->form": 0.288,
+   "gloss->concept's forms": 0.624,
+   "form->concept": 0.32,
+   "opposites offered": 0.026,
+   "gap right@1": 0.605,
+   "gap filled right": 0.302,
+   "gap filled wrong": 0.023,
+   "everyday filled": 0.077,
+   "reference": "25/29"
+  },
+  "Aussie static, distilled only": {
+   "gloss->form": 0.144,
+   "gloss->concept's forms": 0.344,
+   "form->concept": 0.176,
+   "opposites offered": 0.158,
+   "gap right@1": 0.419,
+   "gap filled right": 0.256,
+   "gap filled wrong": 0.093,
+   "everyday filled": 0.077,
+   "reference": "22/29"
+  },
+  "Aussie static, tuned": {
+   "gloss->form": 0.264,
+   "gloss->concept's forms": 0.624,
+   "form->concept": 0.336,
+   "opposites offered": 0.088,
+   "gap right@1": 0.372,
+   "gap filled right": 0.233,
+   "gap filled wrong": 0.093,
+   "everyday filled": 0.038,
+   "reference": "27/29"
+  }
+ },
+ "reference": "29/29"
+}

@@ -1,0 +1,1070 @@
+{
+ "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as rude, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+ "prompt": "BRIEF: level 5, vulgarity 2\n\nORIGINAL:\n### Project Directory Setup\n\nYou’ll start by making a directory to store your Rust code. It doesn’t matter\nto Rust where your code lives, but for the exercises and projects in this book,\nwe suggest making a _projects_ directory in your home directory and keeping all\nyour projects there.\n\nOpen a terminal and enter the following commands to make a _projects_ directory\nand a directory for the “Hello, world!” project within the _projects_ directory.\n\nFor Linux, macOS, and PowerShell on Windows, enter this:\n\n```console\n$ mkdir ~/projects\n$ cd ~/projects\n$ mkdir hello_world\n$ cd hello_world\n```\n\nFor Windows CMD, enter this:\n\n```cmd\n> mkdir \"%USERPROFILE%\\projects\"\n> cd /d \"%USERPROFILE%\\projects\"\n> mkdir hello_world\n> cd hello_world\n```\n\n<!-- Old headings. Do not remove or links may break. -->\n<a id=\"writing-and-running-a-rust-program\"></a>\n\n### Rust Program Basics\n\nNext, make a new source file and call it _main.rs_. Rust files always end with\nthe _.rs_ extension. If you’re using more than one word in your filename, the\nconvention is to use an underscore to separate them. For example, use\n_hello_world.rs_ rather than _helloworld.rs_.\n\nNow open the _main.rs_ file you just created and enter the code in Listing 1-1.\n\n<Listing number=\"1-1\" file-name=\"main.rs\" caption=\"A program that prints `Hello, world!`\">\n\n```rust\nfn main() {\n    println!(\"Hello, world!\");\n}\n```\n\n</Listing>\n\nSave the file and go back to your terminal window in the\n_~/projects/hello_world_ directory. On Linux or macOS, enter the following\ncommands to compile and run the file:\n\n```console\n$ rustc main.rs\n$ ./main\nHello, world!\n```\n\nOn Windows, enter the command `.\\main` instead of `./main`:\n\n```powershell\n> rustc main.rs\n> .\\main\nHello, world!\n```\n\nRegardless of your operating system, the string `Hello, world!` should print to\nthe terminal. If you don’t see this output, refer back to the\n[“Troubleshooting”][troubleshooting]<!-- ignore --> part of the Installation\nsection for ways to get help.\n\nIf `Hello, world!` did print, congratulations! You’ve officially written a Rust\nprogram. That makes you a Rust programmer—welcome!\n\nCANDIDATE A:\n### Project Directory Setup\n\nRighto, first thing ya do is make a directory to keep yer Rust code in. Rust couldn’t care less\nwhere yer code ends up, but for the exercises and projects in this book,\nwe reckon you’re best off makin’ a _projects_ directory in yer home directory and chuckin’ all\nyer projects in there.\n\nSo fire up a terminal and punch in these commands, which make a _projects_ directory\nand, inside that, a directory for the “Hello, world!” project.\n\nOn Linux, macOS, and PowerShell on Windows, it’s this:\n\n```console\n$ mkdir ~/projects\n$ cd ~/projects\n$ mkdir hello_world\n$ cd hello_world\n```\n\nOn Windows CMD, it’s this instead:\n\n```cmd\n> mkdir \"%USERPROFILE%\\projects\"\n> cd /d \"%USERPROFILE%\\projects\"\n> mkdir hello_world\n> cd hello_world\n```\n\n<!-- Old headings. Do not remove or links may break. -->\n<a id=\"writing-and-running-a-rust-program\"></a>\n\n### Rust Program Basics\n\nNext up, make a new source file and call it _main.rs_. Rust files always end in\nthe _.rs_ extension. Got more than one word in yer filename? Then the\nusual go is to stick an underscore between ’em. So it’s\n_hello_world.rs_, not _helloworld.rs_.\n\nNow open up that _main.rs_ file ya just made and punch in the code from Listing 1-1.\n\n<Listing number=\"1-1\" file-name=\"main.rs\" caption=\"A program that prints `Hello, world!`\">\n\n```rust\nfn main() {\n    println!(\"Hello, world!\");\n}\n```\n\n</Listing>\n\nSave it and head back to yer terminal window in the\n_~/projects/hello_world_ directory. On Linux or macOS, punch in these\ncommands to compile and run the file:\n\n```console\n$ rustc main.rs\n$ ./main\nHello, world!\n```\n\nOn Windows, it’s `.\\main` instead of `./main`:\n\n```powershell\n> rustc main.rs\n> .\\main\nHello, world!\n```\n\nWhatever operating system yer on, the string `Hello, world!` should come up in\nthe terminal. If ya don’t get that output, have a squiz back at the\n[“Troubleshooting”][troubleshooting]<!-- ignore --> part of the Installation\nsection for where to get a hand.\n\nIf `Hello, world!` came up, good on ya! You’ve officially written a Rust\nprogram, which makes ya a Rust programmer—welcome to the club!\n\nCANDIDATE B:\n### Project Directory Setup\n\nStrewth, where do I start? With a directory, that’s where: somewhere to keep yer Rust code. Now, Rust doesn’t give a flyin’ toss\nwhere yer code lives, could be under the house with the redbacks for all it cares, but for the exercises and projects in this book,\nwe reckon ya make a _projects_ directory in yer home directory and keep all\nyer projects in there, nice and tidy, so ya know where the lot is.\n\nSo fire up a terminal and punch in these commands. They make a _projects_ directory,\nthen a directory for the “Hello, world!” project inside it. Easy as.\n\nIf yer on Linux, macOS, or PowerShell on Windows, it’s this lot:\n\n```console\n$ mkdir ~/projects\n$ cd ~/projects\n$ mkdir hello_world\n$ cd hello_world\n```\n\nAnd if yer stuck with Windows CMD, ya poor bugger, it’s this:\n\n```cmd\n> mkdir \"%USERPROFILE%\\projects\"\n> cd /d \"%USERPROFILE%\\projects\"\n> mkdir hello_world\n> cd hello_world\n```\n\n<!-- Old headings. Do not remove or links may break. -->\n<a id=\"writing-and-running-a-rust-program\"></a>\n\n### Rust Program Basics\n\nNext up, ya make a new source file and call it _main.rs_. Rust files always end in\nthe _.rs_ extension, every bloody one of ’em. Got more than one word in yer filename? Then the\nusual go is to whack an underscore between ’em so they don’t run together. So it’s\n_hello_world.rs_, not _helloworld.rs_, which looks like a sneeze.\n\nNow crack open that _main.rs_ file ya just made and punch in the code from Listing 1-1. Here it is, all three lines of it:\n\n<Listing number=\"1-1\" file-name=\"main.rs\" caption=\"A program that prints `Hello, world!`\">\n\n```rust\nfn main() {\n    println!(\"Hello, world!\");\n}\n```\n\n</Listing>\n\nSave it, then nip back to yer terminal window in the\n_~/projects/hello_world_ directory. On Linux or macOS, punch in these\ncommands to compile and run the file:\n\n```console\n$ rustc main.rs\n$ ./main\nHello, world!\n```\n\nOn Windows, mind, it’s `.\\main` instead of `./main`, cos Windows always has to be different:\n\n```powershell\n> rustc main.rs\n> .\\main\nHello, world!\n```\n\nDoesn’t matter what operating system yer on, the string `Hello, world!` should pop up in\nthe terminal. And if ya don’t get that output? No dramas. Have a squiz back at the\n[“Troubleshooting”][troubleshooting]<!-- ignore --> part of the Installation\nsection for where to get a hand.\n\nBut if `Hello, world!` did come up? Well, good on ya, mate! You’ve officially written a Rust\nprogram. Fair dinkum. That makes ya a Rust programmer—welcome to the club! First round’s on you.\n\nCANDIDATE C:\n### Project Directory Setup\n\nFirst up, you'll make a directory to keep your Rust code in. Rust couldn't give a toss where\nyour code lives, but for the exercises and projects in this book, we reckon you\nmake a _projects_ directory in your home directory and keep all your projects in\nthere.\n\nFire up a terminal and punch in the following commands to make a _projects_\ndirectory and a directory for the “Hello, world!” project inside the _projects_\ndirectory.\n\nFor Linux, macOS, and PowerShell on Windows, chuck in this:\n\n```console\n$ mkdir ~/projects\n$ cd ~/projects\n$ mkdir hello_world\n$ cd hello_world\n```\n\nFor Windows CMD, chuck in this:\n\n```cmd\n> mkdir \"%USERPROFILE%\\projects\"\n> cd /d \"%USERPROFILE%\\projects\"\n> mkdir hello_world\n> cd hello_world\n```\n\n<!-- Old headings. Do not remove or links may break. -->\n<a id=\"writing-and-running-a-rust-program\"></a>\n\n### Rust Program Basics\n\nNext, make a new source file and call it _main.rs_. Rust files always end in\nthe _.rs_ extension. If you've got more than one word in your filename, the\ndone thing is to stick an underscore between 'em. For example, go with\n_hello_world.rs_, not _helloworld.rs_.\n\nNow open up the _main.rs_ file you just made and type in the code in Listing 1-1.\n\n<Listing number=\"1-1\" file-name=\"main.rs\" caption=\"A program that prints `Hello, world!`\">\n\n```rust\nfn main() {\n    println!(\"Hello, world!\");\n}\n```\n\n</Listing>\n\nSave the file and head back to your terminal window in the\n_~/projects/hello_world_ directory. On Linux or macOS, punch in the following\ncommands to compile and run the file:\n\n```console\n$ rustc main.rs\n$ ./main\nHello, world!\n```\n\nOn Windows, type the command `.\\main` instead of `./main`:\n\n```powershell\n> rustc main.rs\n> .\\main\nHello, world!\n```\n\nWhatever operating system you're on, the string `Hello, world!` should print to\nthe terminal. If you don't see that output, have a squiz back at the\n[“Troubleshooting”][troubleshooting]<!-- ignore --> part of the Installation\nsection for ways to get a hand.\n\nIf `Hello, world!` did print, good on ya, you bloody legend! You've officially written a Rust\nprogram. That makes you a Rust programmer. Welcome aboard, mate!\n\nCANDIDATE D:\n### Project Directory Setup\n\nFirst up, ya make a directory to keep yer Rust code in. Rust doesn’t give a toss\nwhere yer code lives, but for the exercises and projects in this book,\nwe reckon ya should make a _projects_ directory in yer home directory and keep all\nyer projects in there.\n\nOpen a terminal and punch in these commands to make a _projects_ directory\nand a directory for the “Hello, world!” project inside the _projects_ directory.\n\nFor Linux, macOS, and PowerShell on Windows, punch in this:\n\n```console\n$ mkdir ~/projects\n$ cd ~/projects\n$ mkdir hello_world\n$ cd hello_world\n```\n\nFor Windows CMD, punch in this:\n\n```cmd\n> mkdir \"%USERPROFILE%\\projects\"\n> cd /d \"%USERPROFILE%\\projects\"\n> mkdir hello_world\n> cd hello_world\n```\n\n<!-- Old headings. Do not remove or links may break. -->\n<a id=\"writing-and-running-a-rust-program\"></a>\n\n### Rust Program Basics\n\nNext, make a new source file and call it _main.rs_. Rust files always end in\nthe _.rs_ extension. If yer usin’ more than one word in yer filename, the\nusual go is an underscore to split ’em up. Say, use\n_hello_world.rs_, not _helloworld.rs_.\n\nNow open the _main.rs_ file ya just made and punch in the code in Listing 1-1.\n\n<Listing number=\"1-1\" file-name=\"main.rs\" caption=\"A program that prints `Hello, world!`\">\n\n```rust\nfn main() {\n    println!(\"Hello, world!\");\n}\n```\n\n</Listing>\n\nSave the file and head back to yer terminal window in the\n_~/projects/hello_world_ directory. On Linux or macOS, punch in these\ncommands to compile and run the file:\n\n```console\n$ rustc main.rs\n$ ./main\nHello, world!\n```\n\nOn Windows, punch in the command `.\\main` instead of `./main`:\n\n```powershell\n> rustc main.rs\n> .\\main\nHello, world!\n```\n\nWhatever operating system yer on, the string `Hello, world!` should print to\nthe terminal. If ya don’t see this output, have a squiz back at the\n[“Troubleshooting”][troubleshooting]<!-- ignore --> part of the Installation\nsection for ways to get a hand.\n\nIf `Hello, world!` did print, good on ya! You’ve officially written a Rust\nprogram. That makes ya a Rust programmer—welcome!\n\nCANDIDATE E:\n### Project Directory Setup\n\nYou’ll start by makin' a directory to store yer Rust code. It doesn’t matter\nto Rust where yer code lives, but for the exercises and projects in this book,\nwe suggest makin' a _projects_ directory in yer home directory and keepin' all\nyer projects there.\n\nOpen a terminal and enter the following commands to make a _projects_ directory'n a directory for the “Hello, world!” project within the _projects_ directory.\n\nFor Linux, macOS, and PowerShell on Windows, enter this:\n\n```console\n$ mkdir ~/projects\n$ cd ~/projects\n$ mkdir hello_world\n$ cd hello_world\n```\n\nFor Windows CMD, enter this:\n\n```cmd\n> mkdir \"%USERPROFILE%\\projects\"\n> cd /d \"%USERPROFILE%\\projects\"\n> mkdir hello_world\n> cd hello_world\n```\n\n<!-- Old headings. Do not remove or links may break. -->\n<a id=\"writing-and-running-a-rust-program\"></a>\n\n### Rust Program Basics\n\nNext, make a new source file and call it _main.rs_. Rust files always end with\nthe _.rs_ extension. If yer using more than one word in yer filename, the\nconvention is to use an underscore to separate them. For example, use\n_hello_world.rs_ rather than _helloworld.rs_.\n\nNow open the _main.rs_ file ya just created'n enter the code in Listing 1-1.\n\n<Listing number=\"1-1\" file-name=\"main.rs\" caption=\"A program that prints `Hello, world!`\">\n\n```rust\nfn main() {\n    println!(\"Hello, world!\");\n}\n```\n\n</Listing>\n\nSave the file and go back to your terminal window in the\n_~/projects/hello_world_ directory. On Linux or macOS, enter the followin'\ncommands to compile'n run the file:\n\n```console\n$ rustc main.rs\n$ ./main\nHello, world!\n```\n\nOn Windows, enter the command `.\\main` instead of `./main`:\n\n```powershell\n> rustc main.rs\n> .\\main\nHello, world!\n```\n\nRegardless of your operatin' system, the string `Hello, world!` should print to\nthe terminal. If you don’t see this output, refer back to the\n[“Troubleshooting”][troubleshooting]<!-- ignore --> part of the Installation\nsection for ways to get help.\n\nIf `Hello, world!` did print, congratulations! You’ve officially written a Rust\nprogram. That makes ya a Rust programmer—welcome!",
+ "schema": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "object",
+    "properties": {
+     "A": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "B": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "C": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "D": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "E": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "A",
+     "B",
+     "C",
+     "D",
+     "E"
+    ],
+    "additionalProperties": false
+   },
+   "rankings": {
+    "type": "object",
+    "properties": {
+     "tone": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "flow": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "variety": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "essence": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "overall": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "tone",
+     "flow",
+     "variety",
+     "essence",
+     "overall"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "required": [
+   "candidates",
+   "rankings"
+  ],
+  "additionalProperties": false
+ }
+}

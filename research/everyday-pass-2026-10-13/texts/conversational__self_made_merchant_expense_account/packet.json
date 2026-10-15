@@ -1,0 +1,692 @@
+{
+ "rubric_version": 2,
+ "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as rude, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+ "prompt": "BRIEF: level 3, vulgarity 1\n\nORIGINAL:\nCHICAGO, May 4, 189-\n\n_Dear Pierrepont:_ The cashier has just handed me your expense account for the month, and it fairly makes a fellow hump-shouldered to look it over. When I told you that I wished you to get a liberal education, I didn't mean that I wanted to buy Cambridge. Of course the bills won't break me, but they will break you unless you are very, very careful.\n\nI have noticed for the last two years that your accounts have been growing heavier every month, but I haven't seen any signs of your taking honors to justify the increased operating expenses; and that is bad business--a good deal like feeding his weight in corn to a scalawag steer that won't fat up.\n\nI haven't said anything about this before, as I trusted a good deal to your native common-sense to keep you from making a fool of yourself in the way that some of these young fellows who haven't had to work for it do. But because I have sat tight, I don't want you to get it into your head that the old man's rich, and that he can stand it, because he won't stand it after you leave college. The sooner you adjust your spending to what your earning capacity will be, the easier they will find it to live together.\n\nThe only sure way that a man can get rich quick is to have it given to him or to inherit it. You are not going to get rich that way--at least, not until after you have proved your ability to hold a pretty important position with the firm; and, of course, there is just one place from which a man can start for that position with Graham & Co. It doesn't make any difference whether he is the son of the old man or of the cellar boss--that place is the bottom. And the bottom in the office end of this business is a seat at the mailing-desk, with eight dollars every Saturday night.\n\nI can't hand out any ready-made success to you. It would do you no good, and it would do the house harm. There is plenty of room at the top here, but there is no elevator in the building. Starting, as you do, with a good education, you should be able to climb quicker than the fellow who hasn't got it; but there's going to be a time when you begin at the factory when you won't be able to lick stamps so fast as the other boys at the desk. Yet the man who hasn't licked stamps isn't fit to write letters. Naturally, that is the time when knowing whether the pie comes before the ice-cream, and how to run an automobile isn't going to be of any real use to you.\n\nI simply mention these things because I am afraid your ideas as to the basis on which you are coming with the house have swelled up a little in the East. I can give you a start, but after that you will have to dynamite your way to the front by yourself. It is all with the man. If you gave some fellows a talent wrapped in a napkin to start with in business, they would swap the talent for a gold brick and lose the napkin; and there are others that you could start out with just a napkin, who would set up with it in the dry-goods business in a small way, and then coax the other fellow's talent into it.\n\nI have pride enough to believe that you have the right sort of stuff in you, but I want to see some of it come out. You will never make a good merchant of yourself by reversing the order in which the Lord decreed that we should proceed--learning the spending before the earning end of business. Pay day is always a month off for the spend-thrift, and he is never able to realize more than sixty cents on any dollar that comes to him. But a dollar is worth one hundred and six cents to a good business man, and he never spends the dollar. It's the man who keeps saving up and expenses down that buys an interest in the concern. That is where you are going to find yourself weak if your expense accounts don't lie; and they generally don't lie in that particular way, though Baron Munchausen was the first traveling man, and my drummers' bills still show his influence.\n\nCANDIDATE A:\nCHICAGO, May 4, 189-\n\n_Dear Pierrepont:_ The cashier has just handed me your expense account for the month, and it fairly makes a fellow hump-shouldered to look it over. When I told you that I wished you to get a liberal education, I didn't mean that I wanted to buy Cambridge. Of course the bills won't break me, but they will break you unless you are very, dead careful.\n\nI have noticed for the last two years that your accounts have been growing heavier every month, but I haven't seen any signs of your taking honours to justify the increased operating expenses; and that is bad business--a bloody good deal like feeding his weight in corn to a scalawag steer that won't fat up.\n\nI haven't said anything about this before, as I trusted a good deal to your native common-sense to keep you from making a mug of yourself in the way that some of these young blokes who haven't had to work for it do. But because I have sat tight, I don't want you to get it into your head that the old man's rich, and that he can stand it, because he won't stand it after you leave uni. The sooner you adjust your spending to what your earning capacity will be, the easier they will find it to live together.\n\nThe only sure way that a bloke can get rich quick is to have it given to him or to inherit it. You are not going to get rich that way--at least, not until after you have proved your ability to hold a pretty important position with the firm; and, of course, there is just one place from which a bloke can start for that position with Graham & Co. It doesn't make any difference whether he is the son of the old bloke or of the cellar boss--that place is the bottom. And the bottom in the office end of this business is a seat at the mailing-desk, with eight quid every Saturday night.\n\nI can't hand out any ready-made success to you. It would do you no good, and it would do the house harm. There is plenty of room at the top here, but there is no lift in the building. Starting, as you do, with a beaut education, you should be able to climb quicker than the bloke who hasn't got it; but there's going to be a time when you begin at the factory when you won't be able to lick stamps so fast as the other young fellas at the desk. Yet the bloke who hasn't licked stamps isn't fit to write letters. Naturally, that is the time when knowing whether the pie comes before the ice-cream, and how to run an automobile isn't going to be of any real use to you.\n\nBloody hell, I simply mention these things because I am scared stiff your ideas as to the basis on which you are coming with the house have swelled up a little in the East. I can give you a start, but after that you will have to dynamite your way to the front by yourself. It is all with the bloke. If you gave some fellows a talent wrapped in a napkin to start with in business, they would swap the talent for a gold brick and lose the napkin; and there are others that you could start out with just a napkin, who would set up with it in the dry-goods business in a small way, and then coax the other bloke's talent into it.\n\nI have pride enough to believe that you have the right sort of stuff in you, but I want to see some of it come out. You will never make a good merchant of yourself by reversing the order in which the Lord decreed that we should proceed--learning the spending before the earning end of business. Pay day is always a month off for the spend-thrift, and he is never able to realise more than sixty cents on any quid that comes to him. But a quid is worth one hundred and six cents to a beaut business man, and he never spends the dollar. It's the bloke who keeps saving up and expenses down that buys an interest in the concern. That is where you are going to find yourself weak if your expense accounts don't lie; and they generally don't lie in that particular way, though Baron Munchausen was the first travelling bloke, and my drummers' bills still show his influence.\n\nCANDIDATE B:\nCHICAGO, May 4, 189-\n\n_Dear Pierrepont:_ The cashier's just handed me your expense account for the month, and it fair makes a bloke go round-shouldered just looking it over. When I told you I wanted you to get a liberal education, I didn't mean I wanted to buy Cambridge. Course, the bills won't break me, but they'll break you unless you're dead careful.\n\nI've noticed for the last two years your accounts have been getting heavier every month, but I haven't seen a skerrick of you taking honours to justify the extra running costs; and that's bloody bad business, a fair bit like feeding a no-hoper steer his own weight in corn when he won't fatten up.\n\nI haven't said anything about it before, cos I trusted a fair bit to your native nous to stop you making a mug of yourself the way some of these young blokes who've never had to work for it do. But just cos I've sat tight, don't go getting it into your noggin that the old man's rolling in it and can wear it, cos he won't wear it once you've left uni. The sooner you cut your spending to fit what you'll be earning, the easier the two of them will find it to live together.\n\nThe only sure way a bloke can get rich quick is to have it handed to him or to inherit it. You're not getting rich that way, not till you've shown you can hold down a pretty important job with the firm; and, of course, there's just one place a bloke can start from for that job at Graham & Co. Makes no difference whether he's the old man's son or the cellar boss's: that place is the bottom. And the bottom in the office end of this business is a seat at the mailing-desk, with eight quid every Saturday night.\n\nI can't hand you any ready-made success. It'd do you no good, and it'd do the house harm. There's heaps of room at the top here, but there's no lift in the building. Starting out, as you are, with a beaut education, you ought to climb quicker than a fella without one; but there'll come a time, when you start at the factory, when you can't lick stamps as fast as the other young fellas at the desk. And the bloke who hasn't licked stamps isn't fit to write letters. That's the time, naturally, when knowing whether the pie comes before the ice-cream, and how to drive a motor car, won't be a lot of use to you.\n\nI only mention all this cos I'm afraid your ideas about the terms you're coming into the house on have got a bit swelled up back East. I can give you a start, but after that you'll have to blast your own way to the front. It's all up to the bloke. Give some fellas a talent wrapped in a napkin to start in business with, and they'd swap the talent for a dud gold brick and lose the napkin too; and there's others you could start off with nothing but the napkin, who'd set up in the drapery game in a small way with it, and then talk the other bloke's talent into it.\n\nI'm proud enough to reckon you've got the right stuff in you, but I want to see some of it come out. You'll never make a decent merchant of yourself by turning round the order the Lord laid down for us, learning the spending end of business before the earning end. Pay day's always a month off for a big spender, and he can never get more than sixty cents out of any quid that comes his way. But a quid's worth a hundred and six cents to a good businessman, and he never spends the quid. It's the bloke who keeps his savings up and his expenses down who buys a share in the concern. That's where you'll find yourself weak if your expense accounts aren't telling porkies; and they don't generally tell porkies that particular way, though Baron Munchausen was the first travelling salesman, and my commercial travellers' bills still show his influence.\n\nCANDIDATE C:\nCHICAGO, May 4, 189-\n\n_Dear Pierrepont:_ The cashier's just handed me your expense account for the month, and it's enough to make a bloke go round-shouldered just looking at it. When I said I wanted you to get a liberal education, I didn't mean I wanted to buy Cambridge outright. Course, the bills won't send me broke, but they'll send you broke unless you're very, very careful.\n\nI've noticed for the last two years your accounts have been getting heavier every month, but I haven't seen any sign of you taking honours to make up for the extra running costs; and that's bad business, a lot like feeding a mongrel steer that won't fatten up its own weight in corn.\n\nI haven't said anything about it before, since I was banking a fair bit on your own common sense to stop you making a galah of yourself the way some of these young blokes who've never had to work for it do. But just because I've kept me mouth shut, don't go getting it into your head that the old man's loaded and can wear it, because he won't wear it once you're out of college. The sooner you match your spending to what you'll actually be earning, the easier the two of them will find it to get along.\n\nThe only sure-fire way a man gets rich quick is to have it handed to him or to inherit it. You're not getting rich that way, not till you've proved you can hold down a pretty important job with the firm, anyway; and of course there's only one spot a man can start from to get to that job with Graham & Co. Doesn't matter whether he's the old man's son or the cellar boss's son: that spot's the bottom. And the bottom on the office side of this business is a seat at the mailing desk, with eight dollars every Saturday night.\n\nI can't hand you success ready-made. It'd do you no good, and it'd do the firm harm. There's plenty of room at the top here, but there's no lift in the building. Starting off, like you are, with a good education, you ought to be able to climb quicker than the bloke who hasn't got one; but there'll come a time when you start at the works when you won't be able to lick stamps as fast as the other lads at the desk. Still, the man who's never licked stamps isn't fit to write letters. Naturally, that's when knowing whether the pie comes before the ice-cream, and how to drive a motor car, won't be a scrap of real use to you.\n\nI'm only bringing this stuff up because I'm afraid your ideas about the terms you're coming into the firm on have got a bit puffed up out East. I can give you a start, but after that you'll have to blast your own way to the front. It's all down to the man. If you gave some blokes a talent wrapped in a napkin to start out in business with, they'd swap the talent for a gold brick and lose the napkin; and there's others you could start off with just the napkin, who'd set up with it in the drapery trade in a small way, and then sweet-talk the other bloke's talent into it.\n\nI've got enough pride to reckon you've got the right stuff in you, but I want to see some of it come out. You'll never make a decent merchant of yourself by doing things backwards from the way the Lord laid down, learning the spending end of business before the earning end. Payday's always a month off for the spendthrift, and he never gets more than sixty cents out of any dollar that comes his way. But a dollar's worth a hundred and six cents to a good businessman, and he never spends the dollar. It's the bloke who keeps his savings up and his expenses down who buys a share in the business. That's where you're going to come up short if your expense accounts aren't telling porkies; and they don't usually tell porkies in that particular direction, though Baron Munchausen was the first travelling salesman, and my reps' bills still show his influence.",
+ "schema": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "object",
+    "properties": {
+     "A": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "B": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "C": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "A",
+     "B",
+     "C"
+    ],
+    "additionalProperties": false
+   },
+   "rankings": {
+    "type": "object",
+    "properties": {
+     "tone": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "flow": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "variety": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "essence": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "overall": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "tone",
+     "flow",
+     "variety",
+     "essence",
+     "overall"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "required": [
+   "candidates",
+   "rankings"
+  ],
+  "additionalProperties": false
+ },
+ "original": "CHICAGO, May 4, 189-\n\n_Dear Pierrepont:_ The cashier has just handed me your expense account for the month, and it fairly makes a fellow hump-shouldered to look it over. When I told you that I wished you to get a liberal education, I didn't mean that I wanted to buy Cambridge. Of course the bills won't break me, but they will break you unless you are very, very careful.\n\nI have noticed for the last two years that your accounts have been growing heavier every month, but I haven't seen any signs of your taking honors to justify the increased operating expenses; and that is bad business--a good deal like feeding his weight in corn to a scalawag steer that won't fat up.\n\nI haven't said anything about this before, as I trusted a good deal to your native common-sense to keep you from making a fool of yourself in the way that some of these young fellows who haven't had to work for it do. But because I have sat tight, I don't want you to get it into your head that the old man's rich, and that he can stand it, because he won't stand it after you leave college. The sooner you adjust your spending to what your earning capacity will be, the easier they will find it to live together.\n\nThe only sure way that a man can get rich quick is to have it given to him or to inherit it. You are not going to get rich that way--at least, not until after you have proved your ability to hold a pretty important position with the firm; and, of course, there is just one place from which a man can start for that position with Graham & Co. It doesn't make any difference whether he is the son of the old man or of the cellar boss--that place is the bottom. And the bottom in the office end of this business is a seat at the mailing-desk, with eight dollars every Saturday night.\n\nI can't hand out any ready-made success to you. It would do you no good, and it would do the house harm. There is plenty of room at the top here, but there is no elevator in the building. Starting, as you do, with a good education, you should be able to climb quicker than the fellow who hasn't got it; but there's going to be a time when you begin at the factory when you won't be able to lick stamps so fast as the other boys at the desk. Yet the man who hasn't licked stamps isn't fit to write letters. Naturally, that is the time when knowing whether the pie comes before the ice-cream, and how to run an automobile isn't going to be of any real use to you.\n\nI simply mention these things because I am afraid your ideas as to the basis on which you are coming with the house have swelled up a little in the East. I can give you a start, but after that you will have to dynamite your way to the front by yourself. It is all with the man. If you gave some fellows a talent wrapped in a napkin to start with in business, they would swap the talent for a gold brick and lose the napkin; and there are others that you could start out with just a napkin, who would set up with it in the dry-goods business in a small way, and then coax the other fellow's talent into it.\n\nI have pride enough to believe that you have the right sort of stuff in you, but I want to see some of it come out. You will never make a good merchant of yourself by reversing the order in which the Lord decreed that we should proceed--learning the spending before the earning end of business. Pay day is always a month off for the spend-thrift, and he is never able to realize more than sixty cents on any dollar that comes to him. But a dollar is worth one hundred and six cents to a good business man, and he never spends the dollar. It's the man who keeps saving up and expenses down that buys an interest in the concern. That is where you are going to find yourself weak if your expense accounts don't lie; and they generally don't lie in that particular way, though Baron Munchausen was the first traveling man, and my drummers' bills still show his influence.\n",
+ "level": 3,
+ "vulgarity": 1,
+ "candidates": {
+  "A": "CHICAGO, May 4, 189-\n\n_Dear Pierrepont:_ The cashier has just handed me your expense account for the month, and it fairly makes a fellow hump-shouldered to look it over. When I told you that I wished you to get a liberal education, I didn't mean that I wanted to buy Cambridge. Of course the bills won't break me, but they will break you unless you are very, dead careful.\n\nI have noticed for the last two years that your accounts have been growing heavier every month, but I haven't seen any signs of your taking honours to justify the increased operating expenses; and that is bad business--a bloody good deal like feeding his weight in corn to a scalawag steer that won't fat up.\n\nI haven't said anything about this before, as I trusted a good deal to your native common-sense to keep you from making a mug of yourself in the way that some of these young blokes who haven't had to work for it do. But because I have sat tight, I don't want you to get it into your head that the old man's rich, and that he can stand it, because he won't stand it after you leave uni. The sooner you adjust your spending to what your earning capacity will be, the easier they will find it to live together.\n\nThe only sure way that a bloke can get rich quick is to have it given to him or to inherit it. You are not going to get rich that way--at least, not until after you have proved your ability to hold a pretty important position with the firm; and, of course, there is just one place from which a bloke can start for that position with Graham & Co. It doesn't make any difference whether he is the son of the old bloke or of the cellar boss--that place is the bottom. And the bottom in the office end of this business is a seat at the mailing-desk, with eight quid every Saturday night.\n\nI can't hand out any ready-made success to you. It would do you no good, and it would do the house harm. There is plenty of room at the top here, but there is no lift in the building. Starting, as you do, with a beaut education, you should be able to climb quicker than the bloke who hasn't got it; but there's going to be a time when you begin at the factory when you won't be able to lick stamps so fast as the other young fellas at the desk. Yet the bloke who hasn't licked stamps isn't fit to write letters. Naturally, that is the time when knowing whether the pie comes before the ice-cream, and how to run an automobile isn't going to be of any real use to you.\n\nBloody hell, I simply mention these things because I am scared stiff your ideas as to the basis on which you are coming with the house have swelled up a little in the East. I can give you a start, but after that you will have to dynamite your way to the front by yourself. It is all with the bloke. If you gave some fellows a talent wrapped in a napkin to start with in business, they would swap the talent for a gold brick and lose the napkin; and there are others that you could start out with just a napkin, who would set up with it in the dry-goods business in a small way, and then coax the other bloke's talent into it.\n\nI have pride enough to believe that you have the right sort of stuff in you, but I want to see some of it come out. You will never make a good merchant of yourself by reversing the order in which the Lord decreed that we should proceed--learning the spending before the earning end of business. Pay day is always a month off for the spend-thrift, and he is never able to realise more than sixty cents on any quid that comes to him. But a quid is worth one hundred and six cents to a beaut business man, and he never spends the dollar. It's the bloke who keeps saving up and expenses down that buys an interest in the concern. That is where you are going to find yourself weak if your expense accounts don't lie; and they generally don't lie in that particular way, though Baron Munchausen was the first travelling bloke, and my drummers' bills still show his influence.\n",
+  "B": "CHICAGO, May 4, 189-\n\n_Dear Pierrepont:_ The cashier's just handed me your expense account for the month, and it fair makes a bloke go round-shouldered just looking it over. When I told you I wanted you to get a liberal education, I didn't mean I wanted to buy Cambridge. Course, the bills won't break me, but they'll break you unless you're dead careful.\n\nI've noticed for the last two years your accounts have been getting heavier every month, but I haven't seen a skerrick of you taking honours to justify the extra running costs; and that's bloody bad business, a fair bit like feeding a no-hoper steer his own weight in corn when he won't fatten up.\n\nI haven't said anything about it before, cos I trusted a fair bit to your native nous to stop you making a mug of yourself the way some of these young blokes who've never had to work for it do. But just cos I've sat tight, don't go getting it into your noggin that the old man's rolling in it and can wear it, cos he won't wear it once you've left uni. The sooner you cut your spending to fit what you'll be earning, the easier the two of them will find it to live together.\n\nThe only sure way a bloke can get rich quick is to have it handed to him or to inherit it. You're not getting rich that way, not till you've shown you can hold down a pretty important job with the firm; and, of course, there's just one place a bloke can start from for that job at Graham & Co. Makes no difference whether he's the old man's son or the cellar boss's: that place is the bottom. And the bottom in the office end of this business is a seat at the mailing-desk, with eight quid every Saturday night.\n\nI can't hand you any ready-made success. It'd do you no good, and it'd do the house harm. There's heaps of room at the top here, but there's no lift in the building. Starting out, as you are, with a beaut education, you ought to climb quicker than a fella without one; but there'll come a time, when you start at the factory, when you can't lick stamps as fast as the other young fellas at the desk. And the bloke who hasn't licked stamps isn't fit to write letters. That's the time, naturally, when knowing whether the pie comes before the ice-cream, and how to drive a motor car, won't be a lot of use to you.\n\nI only mention all this cos I'm afraid your ideas about the terms you're coming into the house on have got a bit swelled up back East. I can give you a start, but after that you'll have to blast your own way to the front. It's all up to the bloke. Give some fellas a talent wrapped in a napkin to start in business with, and they'd swap the talent for a dud gold brick and lose the napkin too; and there's others you could start off with nothing but the napkin, who'd set up in the drapery game in a small way with it, and then talk the other bloke's talent into it.\n\nI'm proud enough to reckon you've got the right stuff in you, but I want to see some of it come out. You'll never make a decent merchant of yourself by turning round the order the Lord laid down for us, learning the spending end of business before the earning end. Pay day's always a month off for a big spender, and he can never get more than sixty cents out of any quid that comes his way. But a quid's worth a hundred and six cents to a good businessman, and he never spends the quid. It's the bloke who keeps his savings up and his expenses down who buys a share in the concern. That's where you'll find yourself weak if your expense accounts aren't telling porkies; and they don't generally tell porkies that particular way, though Baron Munchausen was the first travelling salesman, and my commercial travellers' bills still show his influence.\n",
+  "C": "CHICAGO, May 4, 189-\n\n_Dear Pierrepont:_ The cashier's just handed me your expense account for the month, and it's enough to make a bloke go round-shouldered just looking at it. When I said I wanted you to get a liberal education, I didn't mean I wanted to buy Cambridge outright. Course, the bills won't send me broke, but they'll send you broke unless you're very, very careful.\n\nI've noticed for the last two years your accounts have been getting heavier every month, but I haven't seen any sign of you taking honours to make up for the extra running costs; and that's bad business, a lot like feeding a mongrel steer that won't fatten up its own weight in corn.\n\nI haven't said anything about it before, since I was banking a fair bit on your own common sense to stop you making a galah of yourself the way some of these young blokes who've never had to work for it do. But just because I've kept me mouth shut, don't go getting it into your head that the old man's loaded and can wear it, because he won't wear it once you're out of college. The sooner you match your spending to what you'll actually be earning, the easier the two of them will find it to get along.\n\nThe only sure-fire way a man gets rich quick is to have it handed to him or to inherit it. You're not getting rich that way, not till you've proved you can hold down a pretty important job with the firm, anyway; and of course there's only one spot a man can start from to get to that job with Graham & Co. Doesn't matter whether he's the old man's son or the cellar boss's son: that spot's the bottom. And the bottom on the office side of this business is a seat at the mailing desk, with eight dollars every Saturday night.\n\nI can't hand you success ready-made. It'd do you no good, and it'd do the firm harm. There's plenty of room at the top here, but there's no lift in the building. Starting off, like you are, with a good education, you ought to be able to climb quicker than the bloke who hasn't got one; but there'll come a time when you start at the works when you won't be able to lick stamps as fast as the other lads at the desk. Still, the man who's never licked stamps isn't fit to write letters. Naturally, that's when knowing whether the pie comes before the ice-cream, and how to drive a motor car, won't be a scrap of real use to you.\n\nI'm only bringing this stuff up because I'm afraid your ideas about the terms you're coming into the firm on have got a bit puffed up out East. I can give you a start, but after that you'll have to blast your own way to the front. It's all down to the man. If you gave some blokes a talent wrapped in a napkin to start out in business with, they'd swap the talent for a gold brick and lose the napkin; and there's others you could start off with just the napkin, who'd set up with it in the drapery trade in a small way, and then sweet-talk the other bloke's talent into it.\n\nI've got enough pride to reckon you've got the right stuff in you, but I want to see some of it come out. You'll never make a decent merchant of yourself by doing things backwards from the way the Lord laid down, learning the spending end of business before the earning end. Payday's always a month off for the spendthrift, and he never gets more than sixty cents out of any dollar that comes his way. But a dollar's worth a hundred and six cents to a good businessman, and he never spends the dollar. It's the bloke who keeps his savings up and his expenses down who buys a share in the business. That's where you're going to come up short if your expense accounts aren't telling porkies; and they don't usually tell porkies in that particular direction, though Baron Munchausen was the first travelling salesman, and my reps' bills still show his influence.\n"
+ },
+ "key": {
+  "A": "engine",
+  "B": "yarn",
+  "C": "unharnessed"
+ }
+}

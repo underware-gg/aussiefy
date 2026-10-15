@@ -1,0 +1,173 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 4,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 3,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 3,
+   "flow": 1,
+   "variety": 1,
+   "essence": 4
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "All facts kept: the Sept. 4 lifting, July 15 closures, Aug. 28 partial restrictions, the 68°F (20°C) threshold, sunrise till 2 p.m., the angler guidance. \"which can cook the fish and kill 'em\" is colour on \"lethal to fish\".",
+   "sense": "Mostly fits: \"getting the flick\" for lifted, \"wet a line\", \"quick smart\", \"till the poor bugger's buggered\" for to exhaustion, \"let 'em get their breath back\". \"Fair go, fish in the coolest part of the day\" strains: \"fair go\" pleads for fairness, not as a plain \"please\".",
+   "authenticity": "Sounds like a real Australian ranger talking: \"Staff'll keep an eye on the water temps\", \"Don't muck about playing a hooked trout\", \"Doing the right thing protects the park's fisheries\".",
+   "register": "A full, broad voice through every paragraph, as level 5 asks, with \"bugger\" well within uncle-bob.",
+   "tone": "Keeps the notice's care for the fish, though the angler plea gets a cheeky edge: \"till the poor bugger's buggered\".",
+   "flow": "Reads smoothly: \"Anglers can wet a line on these rivers, plus most of the park's other rivers, creeks and lakes, every day from sunrise to sunset\".",
+   "variety": "Varied: \"the flick\", \"wet a line\", \"wound back\", \"cook the fish\", \"quick smart\", \"muck about\", \"get their breath back\". \"keep an eye on the water temps\" repeats, as the original repeats.",
+   "essence": "Unmistakably the park notice and its update, structure kept."
+  },
+  "yarn": {
+   "meaning": "All facts kept, with dates put in Australian order: \"From Friday 4 September\", \"first shut to fishing altogether on 15 July\", \"from sunup till 2pm each day\". \"it might save them having to ban fishing\" shifts the park's own voice to a third party, but the point survives.",
+   "sense": "Terms fit: \"wound back to partial restrictions\", \"as conditions picked up\", \"quick smart\", \"till it's done in\", \"get their wind back\", \"Doing your bit\".",
+   "authenticity": "Natural Australian English throughout: \"sunup to sundown\", \"so fishing's back on for part of the day\", \"all the creeks that feed them\".",
+   "register": "Clearly Aussie but measured, nearer level 3 than the level 5 asked: \"Park staff will keep an eye on water temperatures.\" No swearing.",
+   "tone": "Keeps the notice's practical concern whole: \"Handle fish gently and keep them in the water as much as you can\".",
+   "flow": "Reads like it was written that way: \"Cooler weather and water, plus rain in the current forecast, mean the full closures can come off.\"",
+   "variety": "Varied: \"wound back\", \"picked up\", \"go back in\", \"come off\", \"quick smart\", \"done in\", \"get their wind back\".",
+   "essence": "Clearly the original notice and update."
+  },
+  "engine": {
+   "meaning": "All facts kept, as the text is mostly the original: \"Effective Friday, Sept. 4, the remaining fishing restrictions on the Firehole, Madison and Gibbon (downstream of Norris Campground) rivers and all associated tributaries will be lifted\".",
+   "sense": "The few changes are fillers and contractions with no sense to carry: \"Mate,\", \"Mind ya,\", \"rivers'n all associated tributaries\".",
+   "authenticity": "Stock fillers bolted onto unaltered bureaucratic prose: \"Mate, full fishing closures on these rivers were initially implemented July 15\", \"Anyway, Staff will continue to monitor\", \"Water temperatures 'ave cooled at night\". \"'ave\" is Cockney.",
+   "register": "Largely untranslated against a level-5 brief: \"Temporary restrictions or closures may be implemented depending on condition assessments.\"",
+   "tone": "The fillers make an official notice sound offhand: \"Mind ya, Update: Yellowstone lifts full closures\".",
+   "flow": "Jarring joins: \"Mind ya, Update:\", \"Now, Staff will continue\", \"as possible'n let them recover\".",
+   "variety": "Leans on sentence-opening fillers and \"'n\": \"Now,\", \"Well,\", \"Anyway,\", \"Now, don't\".",
+   "essence": "Recognisably the original notice, cluttered."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "Fair go, fish in the coolest part of the day",
+    "original": "Please fish during the coolest times of day",
+    "severity": "minor",
+    "why": "\"Fair go\" is an appeal to fairness and reads oddly as \"please\"."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "it might save them having to ban fishing",
+    "original": "may prevent the need to prohibit fishing",
+    "severity": "minor",
+    "why": "The notice speaks for the park; \"them\" makes the ban someone else's."
+   },
+   {
+    "quote": "Park staff will keep an eye on water temperatures.",
+    "original": "Staff will continue to monitor the water temperatures.",
+    "severity": "minor",
+    "why": "A measured telling, lighter than level 5."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Mind ya, Update: Yellowstone lifts full closures for Firehole, Madison and Gibbon rivers",
+    "original": "Update: Yellowstone lifts full closures for Firehole, Madison and Gibbon rivers",
+    "severity": "major",
+    "why": "A filler stuck onto a headline breaks it."
+   },
+   {
+    "quote": "Water temperatures 'ave cooled at night",
+    "original": "Water temperatures have cooled at night",
+    "severity": "major",
+    "why": "H-dropping is Cockney, not Australian."
+   },
+   {
+    "quote": "Mate, full fishing closures on these rivers were initially implemented July 15",
+    "original": "Full fishing closures on these rivers were initially implemented July 15",
+    "severity": "major",
+    "why": "A stock \"Mate,\" bolted onto untouched official prose."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A full-voiced, natural, faithful retelling at the brief's weight; one strained \"fair go\".",
+  "yarn": "A natural, faithful local retelling with the tone intact, lighter than the level-5 brief.",
+  "engine": "The original with stock fillers and eye dialect bolted on; far lighter than the brief and jarring."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

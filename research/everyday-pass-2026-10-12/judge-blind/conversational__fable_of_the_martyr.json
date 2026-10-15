@@ -1,0 +1,678 @@
+{
+ "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as rude, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+ "prompt": "BRIEF: level 4, vulgarity 1\n\nORIGINAL:\nOnce in a Country Town there was a Man with a Weak Back.\n\nHe could put a Grindstone into a Farm Wagon if any one wanted to bet him the Segars, but every time he lifted an Ax, something caught him right in the Spine and he had to go into the House and lie down. So his Wife took Boarders and did the Cooking herself.\n\nHe was willing to divide the Labor, however; so he did the Marketing. Only, when he had bought the Victuals, he would squat on a Shoe-Box with the Basket between his Legs and say that he couldn't see what Congress wuz thinkin' of.\n\nHe had certain Theories in regard to the Alaskan Boundary and he was against any Anglo-American Alliance becuz Uncle Sam could take care of himself at any Turn in the Road, comin' right down to it, and the American People wuz superior to any other Naytionality in every Way, Shape, Manner and Form, as fur as that's concerned. Then his Wife would have to send Word for him to come on with the Groceries so she could get Dinner.\n\nNearly Everybody Sympathized with her, because she had to put up with such a big Hulk of a no-account Husband. She was looked upon as a Martyr.\n\nOne Day the Husband was Sunstruck, being too Lazy to move into the Shade, and next Day he Passed Away without an Effort. The Widow gave him the best Funeral of the Year and then put all the Money she could rake and scrape into a Marble Shaft marked \"At Rest.\"\n\nA good many People said she was Better Off without him, and it was certainly a Good Riddance of Bad Rubbish.\n\nThey hoped that if she ever Married again she'd pick out Somebody that wuzn't afraid to Work, and had Gumption enough to pound Sand into a Rat-Hole.\n\nThere was General Satisfaction when she became the Wife of Mr. Gladden, who owned the General Store. He built a new House, hired a Girl and had the Washing sent out. She could go into the Store and pick out Anything she wanted, and he took her riding in his new Runabout every Evening.\n\nConsequently, she was very Miserable, thinking of the Jewel she had lost.\n\nMORAL: _If the Woman thinks he's All Right, you keep on your own Side of the Fence._\n\nCANDIDATE A:\nEver hear the one about the bloke with the crook back?\n\nOnce, out in some little country town, there was this bloke with a weak back. Now, he could chuck a grindstone up into a farm wagon if anyone wanted to bet him the cigars on it, no worries. But every time he picked up an axe, something grabbed him right in the spine and he had to go inside and have a lie-down. Funny, that. So his missus took in boarders and did all the cooking herself.\n\nMind you, he was happy to split the work, fair's fair, so he did the shopping. Only, once he'd bought the tucker, he'd plonk himself down on a shoe box with the basket between his knees and carry on about how he couldn't see what the pollies in Congress were bloody well thinkin' of.\n\nHe had theories about the Alaskan boundary, too, and he was dead against any Anglo-American alliance, 'cause Uncle Sam could look after himself at any turn in the road, when you come right down to it, and the Yanks were better than every other mob on earth in every way, shape, manner and form, as far as he was concerned. And on he'd go, flappin' his gums, till the poor woman had to send word for him to hurry up with the groceries so she could get the tea on.\n\nJust about every man and his dog felt sorry for her, stuck with a great big lump of a no-hoper like that. Folks had her down as a proper martyr.\n\nWell, one day the husband got sunstruck, bein' too bone idle to shift into the shade, and next day he carked it without breakin' a sweat. Last thing he ever did without tryin', I s'pose. The widow gave him the best funeral of the year, then scraped together every bit of dosh she could lay her hands on and stuck it into a marble headstone that said \"At Rest.\" Fair enough, too. He'd had plenty of practice.\n\nHeaps of people said she was better off without him, and it was defo good riddance to bad rubbish.\n\nThey hoped that if she ever got hitched again she'd pick some bugger who wasn't scared of a bit of hard yakka, and had the gumption to pound sand down a rat hole.\n\nSo the whole town was pretty chuffed when she married Mr. Gladden, who owned the general store. He built a brand-spankin'-new house, hired a girl to help out and sent the washing out. She could wander into the shop and pick out anything she liked, and every evening he took her for a spin in his new runabout.\n\nSo of course she was down in the dumps, with a face like a wet week, pining for the gem she'd lost.\n\nMORAL: _If the missus reckons he's all right, you stay on your own side of the fence._\n\nCANDIDATE B:\nOnce, out in a little country town, there was this bloke with a crook back.\n\nMind you, he could chuck a grindstone up into a farm wagon if anyone wanted to bet him the cigars, but every time he picked up an axe, something grabbed him right in the spine and he had to go inside and have a lie-down. So his missus took in boarders and did all the cooking herself.\n\nFair's fair, though, he was happy to split the work, so he did the shopping. Only, once he'd bought the tucker, he'd park himself on a shoe-box with the basket between his knees and carry on about how he couldn't for the life of him work out what Congress was bloody thinkin'.\n\nHe had his theories about the Alaskan boundary, and he was dead against any Anglo-American alliance, 'cos Uncle Sam could look after himself at any bend in the road, when you get right down to it, and the American people were better than every other nation going in every way, shape, manner and form, as far as that goes. Then his missus would have to send word for him to get a move on with the groceries so she could get dinner on.\n\nJust about the whole town felt for her, stuck as she was with a great useless lump of a husband. Everyone reckoned she was a martyr.\n\nThen one day the husband copped sunstroke, being too bone-idle to shift into the shade, and the next day he carked it without lifting a finger. The widow gave him the best send-off of the year, then scraped together every last zack she could and stuck it into a marble column with \"At Rest\" carved on it.\n\nPlenty of folks reckoned she was better off without the lazy bugger, and it was a bloody good riddance of bad rubbish.\n\nThey hoped if she ever got hitched again she'd pick a bloke who wasn't scared of hard yakka and had enough nous to pound sand down a rat-hole.\n\nSo everyone was pretty chuffed when she married Mr Gladden, who owned the general store. He built her a new house, got a girl in to help, and had the washing sent out. She could wander into the store and grab whatever took her fancy, and every evening he took her for a spin in his new runabout.\n\nSo naturally she was miserable as sin, pining for the treasure she'd lost.\n\nMORAL: _If the sheila reckons he's all right, you stay on your own side of the fence._\n\nCANDIDATE C:\nOnce in a Country Town there was a Man with a Weak Back.\n\nHe could put a Grindstone into a Farm Wagon if any one wanted to bet him the Segars, but every time he lifted an Ax, something caught him right in the Spine and he had to go into the House and lie down. So his Wife took Boarders and did the Cooking herself.\n\nMind you, he was willing to divide the Labor, however; so he did the Marketing. Only, when he had bought the Victuals, he would squat on a Shoe-Box with the Basket between his Legs and say that he couldn't see what Parliament House wuz thinkin' of.\n\nNow, he had certain Theories in regard to the Alaskan Boundary and he was against any Anglo-American Alliance becuz Uncle Sam could take care of himself at any Turn in the Road, comin' right down to it, and the American punters wuz superior to any other Naytionality in every Way, Shape, Manner and Form, as fur as that's concerned. Then his Wife would have to send Word for him to come on with the Groceries so she could get tea.\n\nNearly Everybody Sympathized with her, because she had to put up with such a bloody big Hulk of a no-account Husband. Well, she was looked upon as a Martyr.\n\nOne Day the Husband was Sunstruck, being too Lazy to move into the Shade, and next Day he carked it without an Effort. The Widow gave him the best Funeral of the Year and then put all the dosh she could rake and scrape into a Marble Shaft marked \"At Rest.\"\n\nA beaut many battlers said she was Better Off without him, and it was defo a Good Riddance of Bad Rubbish.\n\nNow, they hoped that if she ever Married again she'd pick out some bugger that wuzn't afraid to Work, and had Gumption enough to pound Sand into a Rat-Hole.\n\nThere was General Satisfaction when she became the Wife of Mr. Gladden, who owned the General Store. Struth, he built a brand-spankin'-new House, hired a Girl and had the Washing sent out. She could go into the Store and pick out Anything she wanted, and he took her riding in his new Runabout every Evening.\n\nMind you, Consequently, she was down in the dumps, thinking of the Jewel she had lost.\n\nMORAL: _If the Woman reckons he's All Right, you keep on your own Side of the Fence._",
+ "schema": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "object",
+    "properties": {
+     "A": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "B": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "C": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "A",
+     "B",
+     "C"
+    ],
+    "additionalProperties": false
+   },
+   "rankings": {
+    "type": "object",
+    "properties": {
+     "tone": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "flow": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "variety": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "essence": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "overall": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "tone",
+     "flow",
+     "variety",
+     "essence",
+     "overall"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "required": [
+   "candidates",
+   "rankings"
+  ],
+  "additionalProperties": false
+ }
+}

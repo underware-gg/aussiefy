@@ -1,0 +1,146 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 4,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 3,
+   "register": 1,
+   "tone": 5,
+   "flow": 5,
+   "variety": 1,
+   "essence": 4
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "All technical content intact: \"`pip install black`\", \"It needs Python 3.10+ to run\", \"`pip install \\\"black[jupyter]\\\"`\", the AST safety check and \"use `--fast`\". \"the no-nonsense Python code formatter\" softens \"uncompromising\", the tool's defining claim.",
+   "sense": "Terms fit: \"the fiddly bits of hand-formatting\", \"Have a squiz at the [PyCon 2019 talk]\", \"To get cracking straight away\", \"down the track\", \"grab one of the PyInstaller-built standalone executables\". \"no-nonsense\" is close to but not quite \"uncompromising\".",
+   "authenticity": "Natural Australian dev-speak: \"You'll save time and brainpower for the stuff that actually matters.\", \"you shouldn't expect big formatting changes down the track\".",
+   "register": "Level 2: a light, casual rewording with a few touches (\"squiz\", \"get cracking\", \"down the track\"); code and links untouched; no swearing.",
+   "tone": "Keeps the confident, opinionated README voice, though \"no-nonsense\" is milder than \"uncompromising\".",
+   "flow": "Reads naturally: \"After a while the formatting stops being something you notice, and you can focus on the content instead.\"",
+   "variety": "No repetition: \"fiddly bits\", \"brainpower\", \"squiz\", \"grab\", \"get cracking\", \"plenty of\", \"down the track\", \"have a look\".",
+   "essence": "Clearly the Black README, structure and claims kept."
+  },
+  "yarn": {
+   "meaning": "Everything kept, including the tagline \"the uncompromising Python code formatter\", the install commands, the AST check and \"use `--fast`\".",
+   "sense": "Terms fit: \"the fiddly bits of hand-formatting\", \"heaps of projects\", \"down the track\", \"have a squiz at [The Black Code Style]\".",
+   "authenticity": "Natural: \"After a while you stop noticing the formatting\", \"Black is already [successfully used] ... by heaps of projects, small and big\".",
+   "register": "Level 2: light, with \"heaps\", \"squiz\", \"down the track\"; no swearing.",
+   "tone": "The confident README voice is intact, tagline included: \"_Black_ is the uncompromising Python code formatter.\"",
+   "flow": "Smooth: \"Now that we're stable, you shouldn't expect big formatting changes down the track.\"",
+   "variety": "Light and unrepeated: \"fiddly bits\", \"brainpower\", \"get going\", \"heaps\", \"down the track\", \"squiz\".",
+   "essence": "Unmistakably the Black README, lightly localised."
+  },
+  "engine": {
+   "meaning": "The original verbatim, so nothing lost: \"_Black_ is the uncompromising Python code formatter.\"",
+   "sense": "The only change is \"Any colour you like.\"; nothing takes a wrong sense.",
+   "authenticity": "There is no Australian in it to judge beyond the spelling \"colour\"; the prose is the original: \"you agree to cede control over minutiae of hand-formatting\".",
+   "register": "Untranslated: \"Further information can be found in our docs\", \"you should not expect large formatting changes in the future\". Well under level 2.",
+   "tone": "The original's tone, unchanged.",
+   "flow": "Reads as the original README does.",
+   "variety": "No slang at all to vary.",
+   "essence": "It is the original, unretold."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "_Black_ is the no-nonsense Python code formatter.",
+    "original": "_Black_ is the uncompromising Python code formatter.",
+    "severity": "minor",
+    "why": "\"uncompromising\" is Black's signature tagline; \"no-nonsense\" softens it."
+   }
+  ],
+  "yarn": [],
+  "engine": [
+   {
+    "quote": "you agree to cede control over minutiae of hand-formatting",
+    "original": "you agree to cede control over minutiae of hand-formatting",
+    "severity": "major",
+    "why": "The whole text is left untranslated apart from one spelling; under the level-2 brief."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A natural, light-touch README that keeps all technical detail; softens the \"uncompromising\" tagline.",
+  "yarn": "A faithful, natural light-touch README that keeps the tagline and every technical detail.",
+  "engine": "The original with only \"colour\" respelt; no translation."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "engine"
+   ],
+   [
+    "unharnessed"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn",
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

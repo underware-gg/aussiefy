@@ -1,0 +1,157 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "unharnessed": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 2,
+   "tone": 5,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 2,
+   "tone": 5,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 3,
+   "register": 1,
+   "tone": 4,
+   "flow": 4,
+   "variety": 1,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Every fact survives: the 227-year-old hemlock planted in 1791, \"gusts reportedly up to 70 mph (about 110 km/h)\", the whisky barrel, \"no relation to the 42nd President Bill Clinton\", Jackson's magnolia and the Pioneer Cabin sequoia.",
+   "sense": "The few changes fit: \"knocked over on Friday by gusts\", \"Other historic US trees to come down lately\", \"km/h\" for the Australian unit.",
+   "authenticity": "What it says is natural Australian news English (\"the people running the Mount Vernon estate\", \"no relation to\"), but almost nothing in it is distinctively Australian.",
+   "register": "Far lighter than level 3: it is a plain-English rewrite with hardly a local word, such as \"Mount Vernon was Washington's own estate, where he worked through most of his two terms\".",
+   "tone": "Keeps the straight news tone: \"According to Mount Vernon officials, the hemlock is the best documented tree on the estate.\"",
+   "flow": "Reads smoothly, the original's awkward first sentence untangled: \"on Mount Vernon, the Virginia estate of the first US President George Washington\".",
+   "variety": "Too little slang to vary; nothing is repeated either.",
+   "essence": "Unmistakably the original news brief."
+  },
+  "unharnessed": {
+   "meaning": "Every fact survives: \"taken out a 227-year-old tree at Mount Vernon\", the 1791 planting, the 70 mph gusts, the whisky barrel gift, the Vice Presidency 1805–1812, the other fallen trees.",
+   "sense": "Terms fit: \"has taken out a 227-year-old tree\", \"got knocked over\", \"no relation to the 42nd President\", \"to come down lately\".",
+   "authenticity": "Natural, the way an Australian reporter talking would put it: \"the hemlock's the best documented tree on the estate\", \"where he ran most of his two terms\".",
+   "register": "Light, a little Aussie in the verbs and contractions, but lighter than level 3 asks: \"According to Mount Vernon officials\" and most lines stay plain.",
+   "tone": "Keeps the news tone with a conversational lift: \"famous for the car-sized tunnel cut through its trunk\".",
+   "flow": "Reads smoothly: \"sent as a gift by New York Governor George Clinton and delivered in a whisky barrel\".",
+   "variety": "Few slang terms to vary, none repeated.",
+   "essence": "Clearly the original news brief."
+  },
+  "engine": {
+   "meaning": "All facts kept, the text verbatim but for one word: \"sent by New York Governor George Clinton as a pressie delivered in a whisky barrel\".",
+   "sense": "\"a pressie\" for an 18th-century governor's gift strains in a news report; otherwise untouched.",
+   "authenticity": "A single slang word bolted onto the original's US prose: \"the gusts reportedly up to 70 mph (about 110 kph)\", \"the United States's Vice President\".",
+   "register": "Essentially untranslated against a level-3 brief: \"Friday's major winter storm over the northeastern United States claimed a 227-year-old tree\".",
+   "tone": "The news tone is the original's, with \"a pressie\" a small jar.",
+   "flow": "The original's own awkward phrasing kept: \"on the estate of the first US President George Washington, Mount Vernon, in Virginia\".",
+   "variety": "One slang word in the whole text.",
+   "essence": "It is the original."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "Mount Vernon was Washington's own estate, where he worked through most of his two terms as president",
+    "original": "Mount Vernon was Washington's personal estate, where he conducted most of his two presidential terms",
+    "severity": "major",
+    "why": "Rewritten in plain English with almost no Australian flavour; well short of level 3."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "the hemlock's the best documented tree on the estate",
+    "original": "the hemlock is the best documented tree at the estate",
+    "severity": "major",
+    "why": "Contractions and a couple of verbs carry nearly all the Australian flavour; lighter than level 3."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "as a pressie delivered in a whisky barrel",
+    "original": "as a gift delivered in a whisky barrel",
+    "severity": "minor",
+    "why": "Kiddish \"pressie\" in a historical news line; the only change."
+   },
+   {
+    "quote": "Friday's major winter storm over the northeastern United States claimed a 227-year-old tree",
+    "original": "Friday's major winter storm over the northeastern United States claimed a 227-year-old tree",
+    "severity": "major",
+    "why": "Left untranslated."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A clean, faithful plain-English rewrite that barely sounds Australian.",
+  "unharnessed": "A faithful, natural retelling with a light Aussie lift, still under the brief's weight.",
+  "engine": "The original with one word changed."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed",
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

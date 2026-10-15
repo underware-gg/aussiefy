@@ -1,0 +1,185 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 2,
+   "sense": 1,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 4,
+   "flow": 3,
+   "variety": 2,
+   "essence": 4
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every rule kept: human-created accounts, \"13 or over\", a valid email, one free Account, machine accounts, one login per person, export controls and SDNs. One softening: \"we reckon you're responsible for whatever gets done on or through that Organization\" makes a legal position sound like an opinion.",
+   "sense": "Terms mostly fit: \"the final say on admin control\", \"the one ultimately on the hook\", \"It's on you to keep your Account secure\", \"We're stoked\". \"we reckon you're responsible\" strains for 'we consider you responsible'.",
+   "authenticity": "Natural plain-speaking Aussie: \"you've gotta be 13 or over\", \"getting fired up about learning to program\", \"have a look at our\".",
+   "register": "A light level-3 touch, perhaps on the lighter side: mostly plain English (\"A paid Organization can only give access to as many Personal Accounts as your subscription allows\") with a few idioms; no swearing.",
+   "tone": "Keeps the friendly-but-binding terms-of-service tone.",
+   "flow": "Reads cleanly: \"You and only you are responsible for your Account and anything that happens while you're signed in to it or using it.\"",
+   "variety": "Leans on \"you've gotta\" (four times) and \"it's on you\"; little else.",
+   "essence": "Clearly GitHub's account terms, structure and links intact."
+  },
+  "yarn": {
+   "meaning": "All rules kept, with links and the SDN reference. Small shifts: \"a working email address\" for 'valid', and \"wears the blame for what it does\" is a touch more negative than 'is responsible for its actions'.",
+   "sense": "Mostly exact: \"on the hook\", \"automated yakka\", \"no worries\", \"have a squiz\", \"shut that User's Account down straight away\". \"beaut young coders\" is a slightly odd use of 'beaut' for people.",
+   "authenticity": "Natural Aussie: \"Keeping your Account secure is your job\", \"at the end of the day the owner of the Account is the one responsible\", \"no sharing one login around a group of people\".",
+   "register": "Level-3 weight: idiom through the text (\"yakka\", \"squiz\", \"no worries\") without turning terms into a yarn; no swearing.",
+   "tone": "Friendly but still binding: \"You can't use GitHub in breach of the export control or sanctions laws\".",
+   "flow": "Reads naturally: \"We do allow machine accounts, though:\".",
+   "variety": "Varied: \"on the hook\", \"wears the blame\", \"yakka\", \"no worries\", \"stoked\", \"squiz\", \"it's on you\".",
+   "essence": "Unmistakably GitHub's account terms, retold."
+  },
+  "engine": {
+   "meaning": "Mostly the original verbatim, but swaps change meaning: \"a single login may not be shared by multiple battlers\" and \"if you are or are stuffed on behalf of a [Specially Designated National (SDN)]\" (for 'working on behalf of') turn a sanctions rule into nonsense.",
+   "sense": "Wrong senses: \"stuffed\" for 'working', \"multiple battlers\" (battler = someone doing it tough) for 'multiple people', \"beaut young coders\".",
+   "authenticity": "Isolated swapped words in unchanged legal prose (\"automated yakka\", \"at the end of the day responsible\"), not a voice.",
+   "register": "Level 3 asked; the text is essentially untranslated (\"You must provide a valid email address in order to complete the signup process\").",
+   "tone": "Legal tone kept where untouched; the swaps make it momentarily silly.",
+   "flow": "Reads as the original, with jolts at \"are stuffed on behalf of\" and \"the owner of the Account is at the end of the day responsible\".",
+   "variety": "Only a handful of swapped words (\"yakka\", \"beaut\", \"battlers\", \"stuffed\").",
+   "essence": "Recognisably the original terms, since they are mostly unchanged."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "we reckon you're responsible for whatever gets done on or through that Organization",
+    "original": "we consider you responsible for the actions that are performed on or through that Organization",
+    "severity": "major",
+    "why": "'Reckon' makes a binding term sound like a guess."
+   },
+   {
+    "quote": "You've gotta be a human to create an Account.",
+    "original": "You must be a human to create an Account.",
+    "severity": "minor",
+    "why": "'You've gotta' is leaned on across the rules."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "gives a working email address, and wears the blame for what it does",
+    "original": "provides a valid email address, and is responsible for its actions",
+    "severity": "minor",
+    "why": "'Wears the blame' implies fault rather than responsibility."
+   },
+   {
+    "quote": "We're stoked to see beaut young coders",
+    "original": "we are thrilled to see brilliant young coders",
+    "severity": "minor",
+    "why": "'Beaut' for people is a slightly awkward fit."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "if you are or are stuffed on behalf of",
+    "original": "if you are or are working on behalf of",
+    "severity": "critical",
+    "why": "'Stuffed' replaces 'working'; the sanctions rule becomes nonsense."
+   },
+   {
+    "quote": "shared by multiple battlers",
+    "original": "shared by multiple people",
+    "severity": "major",
+    "why": "A battler is a struggler, not a person in general."
+   },
+   {
+    "quote": "You must provide a valid email address in order to complete the signup process.",
+    "original": "You must provide a valid email address in order to complete the signup process.",
+    "severity": "major",
+    "why": "Left untranslated across almost the whole text."
+   },
+   {
+    "quote": "the owner of the Account is at the end of the day responsible",
+    "original": "the owner of the Account is ultimately responsible",
+    "severity": "minor",
+    "why": "Idiom jammed mid-clause."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Clear, faithful plain-English terms with a light Aussie touch; 'we reckon' softens a legal point.",
+  "yarn": "Faithful, natural level-3 version with varied idiom; a couple of small strains.",
+  "engine": "Essentially untranslated legal text with a few wrong-sense swaps, one of which garbles the sanctions rule."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,32 @@
+## Introduction
+
+Picture this: a workflow so light ya could carry it home in yer back pocket. That's GitHub flow, mate, and it's built round branches. And it's not just for the developers either: it's handy for every man and his dog. Here at GitHub we use GitHub flow ourselves, for our [site policy](https://github.com/github/site-policy), [documentation](https://github.com/github/docs), and [roadmap](https://github.com/github/roadmap). Eatin' their own cookin', they are.
+
+## Prerequisites
+
+Now, to follow GitHub flow ya need two things: a GitHub account and a repository. That's the whole shoppin' list. No account yet? The good oil's in [Creating an account on GitHub](/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). No repository? Have a squiz at [Quickstart for repositories](/en/repositories/creating-and-managing-repositories/quickstart-for-repositories). And if ya'd rather find an existin' repository to chip in on, there's [Finding ways to contribute to open source on GitHub](/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github).
+
+## Following GitHub flow
+
+> \[!TIP]
+> Ya can knock over every single step of GitHub flow in the GitHub web interface, on the command line and [GitHub CLI](https://cli.github.com), or in [GitHub Desktop](/en/desktop). Take yer pick. There's more on the tools ya can use to connect to GitHub in [Connecting to GitHub](/en/get-started/using-github/connecting-to-github).
+
+### Create a branch
+
+Step one, ya create a branch in yer repository. Give it a short name that says what it's for, so yer collaborators can see what's goin' on at a glance, no need to go diggin'. Somethin' like `increase-test-timeout`, or `add-code-of-conduct`. There's more in [Managing branches within your repository](/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository).
+
+Here's the beauty of it. A branch is yer own little paddock to work in, and the default branch doesn't get touched. Plus yer collaborators get a chance to run their eye over yer work.
+
+### Make changes
+
+So, on yer branch, go for yer life: make whatever changes ya like to the repository. For the how-to, see [Creating new files](/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](/en/repositories/working-with-files/managing-files/editing-files), [Renaming a file](/en/repositories/working-with-files/managing-files/renaming-a-file), [Moving a file to a new location](/en/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location), or [Deleting files in a repository](/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository).
+
+Yer branch is a safe spot to muck about. Stuff somethin' up? No dramas: revert yer changes, or push a few more changes to fix the stuff-up. Nothin' lands on the default branch till ya merge yer branch, and not a second before.
+
+Commit and push yer changes to yer branch as ya go. And give every commit a message that says what it does, so you and whoever comes along after ya can work out what's in it without playin' detective. `fix typo`, say, or `increase rate limit`. Short and sweet.
+
+Now here's the trick. Best case, every commit's one change, on its own and finished. Then if ya decide to go a different way, revertin' yer changes is dead easy. Say ya want to rename a variable and add some tests. The variable rename goes in one commit, the tests go in another commit. Later on ya reckon the tests can stay but the variable rename's gotta go? Too easy: ya revert the one commit with the variable rename in it, and Bob's yer uncle. But lump the variable rename and the tests in together, or smear the variable rename across a few commits, and yer in for heaps more work revertin' yer changes. Ask me how I know.
+
+And every time ya commit and push, yer work's backed up to remote storage. So ya can get at it from any device, home, work, wherever. It also means yer collaborators can see yer work, answer questions, and chuck in suggestions or contributions.
+
+Then ya just keep goin': make, commit, push, on yer branch, over and over, till yer ready to ask for feedback.

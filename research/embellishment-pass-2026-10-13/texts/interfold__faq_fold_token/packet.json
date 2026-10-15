@@ -1,0 +1,1088 @@
+{
+ "rubric_version": 2,
+ "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as rude, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+ "prompt": "BRIEF: level 2, vulgarity 0\n\nORIGINAL:\n---\ntitle: 'FOLD Token'\ndescription:\n  'Frequently asked questions about the FOLD token: its purpose, its utility, and its role in the\n  Interfold network.'\n---\n\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# FOLD Token\n\nThis FAQ explains what FOLD does in the Interfold network. It is for token holders and for people\nwho want to operate a ciphernode. The questions are in three groups: the role of FOLD,\ntransferability, and ciphernode operation. For supply and allocation data, see\n[FOLD Tokenomics](/tokenomics).\n\n## The role of FOLD\n\n### What role does FOLD play in the Interfold network?\n\nThe Interfold is a distributed network for confidential coordination. Applications request Encrypted\nExecution Environments (E3s). Ciphernodes coordinate and secure each computation.\n\nFOLD supports the economic operation of the network.\n\n### What is the utility of the FOLD token?\n\nFOLD has three main functions, and the three functions are interlocked: ciphernode bonding, protocol\nincentives, and governance.\n\n**Ciphernode bonding.** Ciphernode operators bond FOLD to become eligible for network duties. Bonded\nFOLD stays in the `BondingRegistry` contract. When the bond owner (the wallet that funds the bond)\nunbonds it, the FOLD waits in an exit queue before the bond owner can claim it. Bonded FOLD may be\nsubject to protocol-defined withdrawal periods. It may also be subject to penalties for provable\nmisbehavior or for failure to fulfill assigned responsibilities. These mechanisms align operational\nresponsibility with economic accountability.\n\n**Protocol incentives.** Ciphernode operators receive a share of the fees of completed E3s. In\naddition, they may receive FOLD incentives for successfully completing protocol-defined duties as\nmembers of an E3 committee.\n\n**Governance.** FOLD is expected to support governance participation through the Interfold DAO.\nGovernance may include decisions about network parameters, protocol upgrades, and treasury\nadministration. Governance processes may include secret-ballot mechanisms that the Interfold network\npowers. For the current voting rules, see [Governance](/governance).\n\n## Transferability\n\n### When did FOLD become generally transferable?\n\nGeneral FOLD transferability could be enabled at or after Aug 19 at **14:00 UTC (10 AM ET)**.\n\nAt or after Unix timestamp **`1787148000`**, anyone could call the `tge()` function on the FOLD\ncontract to enable general transferability. When that transaction executed, FOLD became generally\ntransferable.\n\nThat transaction ran on Aug 19, 2026 at 14:00:23 UTC. `tgeTimestamp()` on the FOLD contract returns\n`1787148023`, so FOLD is generally transferable now.\n\nGeneral FOLD transferability and Network Alpha are distinct milestones in the broader Interfold\nlaunch sequence. For more information, see [FOLD Transferability](/faq/transferability).\n\n## Ciphernode operation\n\n### How can I use FOLD to operate a ciphernode?\n\nOperating a ciphernode is designed to be permissionless. The setup has four parts:\n\n1. Provision cloud-based or personal hardware.\n2. Run the ciphernode software.\n3. Bond FOLD to the ciphernode.\n4. Complete on-chain registration.\n\nWhen the ciphernode is registered, it can participate in E3 committees when the protocol rules\nselect it. To be active for committee selection, a registered ciphernode also needs a minimum ticket\nbalance. See [Tickets and sortition](/operate/tickets-and-sortition).\n\nFor current setup requirements, bonding instructions, and operator documentation, see\n[Ciphernode Operators](/operate) and [Registration and bonding](/operate/registration).\n\n### Can I delegate my FOLD to a ciphernode operator?\n\nNo. The bonding model of the Interfold is deliberately operator-only. Every FOLD that is bonded to a\nciphernode is capital at risk for the operator that runs it.\n\nDelegated capital would let operators run partially-owned ciphernodes. That would dilute\naccountability and weaken the economic security guarantees of the network.\n\nIn the `BondingRegistry` contract, each ciphernode has one bond owner, and only the bond owner can\nbond FOLD to it. The operator sets the bond owner. The bond owner can be the operator address or a\nseparate wallet, for example a cold wallet or a Safe.\n\n## Support\n\nIf you need support, join the designated [Telegram group](https://t.me/enclave_e3).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    Total supply, allocation by category, and the unlock schedule.\n  </LinkCard>\n  <LinkCard\n    title='Registration and bonding'\n    href='/operate/registration'\n    icon='node'\n    tag='Operators'\n  >\n    Bond FOLD, get tickets, and register a ciphernode.\n  </LinkCard>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n</LinkCards>\n\nCANDIDATE A:\n---\ntitle: 'FOLD Token'\ndescription:\n  'Frequently asked questions about the FOLD token: its purpose, its utility, and its role in the\n  Interfold network.'\n---\n\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# FOLD Token\n\nThis FAQ runs through what FOLD does in the Interfold network. It's written for token holders, and\nfor anyone keen to run a ciphernode. The questions fall into three groups: the role of FOLD,\ntransferability, and ciphernode operation. If you're after supply and allocation data, see\n[FOLD Tokenomics](/tokenomics).\n\n## The role of FOLD\n\n### What role does FOLD play in the Interfold network?\n\nThe Interfold is a distributed network for confidential coordination. Applications ask for Encrypted\nExecution Environments (E3s), and ciphernodes coordinate and secure each computation.\n\nFOLD is what keeps the economic side of the network ticking over.\n\n### What is the utility of the FOLD token?\n\nFOLD does three main jobs, and they all hang together: ciphernode bonding, protocol incentives, and\ngovernance.\n\n**Ciphernode bonding.** Ciphernode operators bond FOLD so they're eligible for network duties. Bonded\nFOLD sits in the `BondingRegistry` contract. When the bond owner (the wallet that funds the bond)\nunbonds it, the FOLD waits its turn in an exit queue before the bond owner can claim it. Bonded FOLD\nmay be subject to protocol-defined withdrawal periods. It can also cop penalties for provable\nmisbehaviour, or for not pulling its weight on assigned responsibilities. Put together, these\nmechanisms tie operational responsibility to economic accountability.\n\n**Protocol incentives.** Ciphernode operators get a share of the fees from completed E3s. On top of\nthat, they may pick up FOLD incentives for successfully completing protocol-defined duties as members\nof an E3 committee.\n\n**Governance.** FOLD is expected to back governance participation through the Interfold DAO.\nGovernance might cover decisions on network parameters, protocol upgrades, and treasury\nadministration, and its processes may include secret-ballot mechanisms that the Interfold network\nitself powers. For the current voting rules, see [Governance](/governance).\n\n## Transferability\n\n### When did FOLD become generally transferable?\n\nGeneral FOLD transferability could be switched on at or after Aug 19 at **14:00 UTC (10 AM ET)**.\n\nFrom Unix timestamp **`1787148000`** on, anyone could call the `tge()` function on the FOLD\ncontract to switch on general transferability. Once that transaction went through, FOLD was\ngenerally transferable.\n\nAs it turned out, that transaction ran on Aug 19, 2026 at 14:00:23 UTC. `tgeTimestamp()` on the FOLD\ncontract returns `1787148023`, so FOLD is generally transferable now.\n\nMind you, general FOLD transferability and Network Alpha are two separate milestones in the wider\nInterfold launch sequence. For more on that, see [FOLD Transferability](/faq/transferability).\n\n## Ciphernode operation\n\n### How can I use FOLD to operate a ciphernode?\n\nRunning a ciphernode is meant to be permissionless. There are four parts to the setup:\n\n1. Provision cloud-based or personal hardware.\n2. Run the ciphernode software.\n3. Bond FOLD to the ciphernode.\n4. Complete on-chain registration.\n\nOnce your ciphernode's registered, it can take part in E3 committees whenever the protocol rules pick\nit. To be active for committee selection, though, a registered ciphernode also needs a minimum ticket\nbalance. See [Tickets and sortition](/operate/tickets-and-sortition).\n\nFor the current setup requirements, bonding instructions and operator documentation, have a squiz at\n[Ciphernode Operators](/operate) and [Registration and bonding](/operate/registration).\n\n### Can I delegate my FOLD to a ciphernode operator?\n\nNah, nah. The Interfold's bonding model is operator-only, and that's on purpose. Every FOLD bonded to\na ciphernode is capital at risk for the operator that runs it.\n\nDelegated capital would let operators run part-owned ciphernodes, which would water down\naccountability and weaken the network's economic security guarantees.\n\nIn the `BondingRegistry` contract, each ciphernode has one bond owner, and only the bond owner can\nbond FOLD to it. The operator sets the bond owner. The bond owner can be the operator address or a\nseparate wallet, say a cold wallet or a Safe.\n\n## Support\n\nIf you need a hand, jump into the designated [Telegram group](https://t.me/enclave_e3).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    Total supply, allocation by category, and the unlock schedule.\n  </LinkCard>\n  <LinkCard\n    title='Registration and bonding'\n    href='/operate/registration'\n    icon='node'\n    tag='Operators'\n  >\n    Bond FOLD, get tickets, and register a ciphernode.\n  </LinkCard>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n</LinkCards>\n\nCANDIDATE B:\n---\ntitle: 'FOLD Token'\ndescription:\n  'Frequently asked questions about the FOLD token: its purpose, its utility, and its role in the\n  Interfold network.'\n---\n\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# FOLD Token\n\nHere's the lowdown on what FOLD actually does in the Interfold network. This one's for the token\nholders, and for anyone who fancies running a ciphernode of their own. The questions come in three\nlots: the role of FOLD, transferability, and ciphernode operation. And if it's the supply and\nallocation numbers you're after, they live over at [FOLD Tokenomics](/tokenomics).\n\n## The role of FOLD\n\n### What role does FOLD play in the Interfold network?\n\nSo, the Interfold. It's a distributed network for confidential coordination. Applications sing out\nfor Encrypted Execution Environments (E3s), and the ciphernodes are the ones doing the yakka:\ncoordinating and securing every computation.\n\nAnd FOLD? FOLD is the money side of it, what keeps the whole network's economics ticking over.\n\n### What is the utility of the FOLD token?\n\nFOLD's got three main jobs, and they're all tangled up in each other: ciphernode bonding, protocol\nincentives, and governance.\n\n**Ciphernode bonding.** Ciphernode operators bond FOLD to get eligible for network duties. Think of it\nas putting your money where your mouth is. Bonded FOLD sits in the `BondingRegistry` contract. When the\nbond owner (the wallet that funds the bond) unbonds it, the FOLD doesn't just walk out the door: it\nlines up in an exit queue before the bond owner can claim it. Bonded FOLD may be subject to\nprotocol-defined withdrawal periods. And it can cop penalties too, for provable misbehaviour, or for\nnot pulling its weight on assigned responsibilities. Muck up, and it's your bond that pays. That's the\npoint of these mechanisms: they tie operational responsibility to economic accountability.\n\n**Protocol incentives.** Now the good bit. Ciphernode operators get a share of the fees from completed\nE3s. And on top of that, they may pick up FOLD incentives for successfully completing protocol-defined\nduties as members of an E3 committee. Do the work, get a cut.\n\n**Governance.** FOLD is expected to back governance participation through the Interfold DAO. That\ncould mean having a say on network parameters, protocol upgrades and treasury administration, the\nwhole box and dice. Governance processes may even include secret-ballot mechanisms that the Interfold\nnetwork powers itself, which is a neat trick when you think about it. For the current voting rules,\nsee [Governance](/governance).\n\n## Transferability\n\n### When did FOLD become generally transferable?\n\nGeneral FOLD transferability could be switched on at or after Aug 19 at **14:00 UTC (10 AM ET)**.\n\nHere's how it worked: from Unix timestamp **`1787148000`** on, anyone at all could call the `tge()`\nfunction on the FOLD contract to switch on general transferability. First in, best dressed. Once that\ntransaction went through, FOLD was generally transferable.\n\nAnd someone was quick off the mark: that transaction ran on Aug 19, 2026 at 14:00:23 UTC, a whole 23\nseconds after the gates opened. `tgeTimestamp()` on the FOLD contract returns `1787148023`, so FOLD is\ngenerally transferable now.\n\nDon't get the two mixed up, mind: general FOLD transferability and Network Alpha are two separate\nmilestones in the wider Interfold launch sequence. For more on that, see\n[FOLD Transferability](/faq/transferability).\n\n## Ciphernode operation\n\n### How can I use FOLD to operate a ciphernode?\n\nRunning a ciphernode is meant to be permissionless: nobody's standing at the door with a clipboard.\nThere are four parts to the setup:\n\n1. Provision cloud-based or personal hardware.\n2. Run the ciphernode software.\n3. Bond FOLD to the ciphernode.\n4. Complete on-chain registration.\n\nOnce your ciphernode's registered, it can get a guernsey on E3 committees whenever the protocol rules\npick it. But to be active for committee selection, a registered ciphernode also needs a minimum ticket\nbalance. No ticket, no ride. See [Tickets and sortition](/operate/tickets-and-sortition).\n\nFor the current setup requirements, bonding instructions and operator documentation, have a squiz at\n[Ciphernode Operators](/operate) and [Registration and bonding](/operate/registration).\n\n### Can I delegate my FOLD to a ciphernode operator?\n\nNah, nah. The Interfold's bonding model is operator-only, and that's on purpose. Every FOLD bonded to\na ciphernode is the operator's own capital at risk, skin in the game for whoever runs it.\n\nLet delegated capital in and operators could run part-owned ciphernodes. That would water down\naccountability and weaken the network's economic security guarantees. Everyone's on the hook, so\nnobody is.\n\nIn the `BondingRegistry` contract, each ciphernode has one bond owner, and only the bond owner can\nbond FOLD to it. The operator picks the bond owner. The bond owner can be the operator address or a\nseparate wallet, say a cold wallet or a Safe.\n\n## Support\n\nStuck? Jump into the designated [Telegram group](https://t.me/enclave_e3) and sing out.\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    Total supply, allocation by category, and the unlock schedule.\n  </LinkCard>\n  <LinkCard\n    title='Registration and bonding'\n    href='/operate/registration'\n    icon='node'\n    tag='Operators'\n  >\n    Bond FOLD, get tickets, and register a ciphernode.\n  </LinkCard>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n</LinkCards>\n\nCANDIDATE C:\n---\ntitle: 'FOLD Token'\ndescription:\n  'Frequently asked questions about the FOLD token: its purpose, its utility, and its role in the\n  Interfold network.'\n---\n\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# FOLD Token\n\nThis FAQ explains what FOLD does in the Interfold network. It is for token holders and for people\nwho want to operate a ciphernode. The questions are in three groups: the role of FOLD,\ntransferability, and ciphernode operation. For supply and allocation data, see\n[FOLD Tokenomics](/tokenomics).\n\n## The role of FOLD\n\n### What role does FOLD play in the Interfold network?\n\nThe Interfold is a distributed network for confidential coordination. Applications request Encrypted\nExecution Environments (E3s). Ciphernodes coordinate and secure each computation.\n\nFOLD supports the economic operation of the network.\n\n### What is the utility of the FOLD token?\n\nFOLD has three main functions, and the three functions are interlocked: ciphernode bonding, protocol\nincentives, and governance.\n\n**Ciphernode bonding.** Ciphernode operators bond FOLD to become eligible for network duties. Bonded\nFOLD stays in the `BondingRegistry` contract. When the bond owner (the wallet that funds the bond)\nunbonds it, the FOLD waits in an exit queue before the bond owner can claim it. Bonded FOLD may be\nsubject to protocol-defined withdrawal periods. It may also be subject to penalties for provable\nmisbehavior or for failure to fulfill assigned responsibilities. These mechanisms align operational\nresponsibility with economic accountability.\n\n**Protocol incentives.** Ciphernode operators receive a share of the fees of completed E3s. In\naddition, they may receive FOLD incentives for successfully completing protocol-defined duties as\nmembers of an E3 committee.\n\n**Governance.** FOLD is expected to support governance participation through the Interfold DAO.\nGovernance may include decisions about network parameters, protocol upgrades, and treasury\nadministration. Governance processes may include secret-ballot mechanisms that the Interfold network\npowers. For the current voting rules, see [Governance](/governance).\n\n## Transferability\n\n### When did FOLD become generally transferable?\n\nGeneral FOLD transferability could be enabled at or after Aug 19 at **14:00 UTC (10 AM ET)**.\n\nAt or after Unix timestamp **`1787148000`**, anyone could call the `tge()` function on the FOLD\ncontract to enable general transferability. When that transaction executed, FOLD became generally\ntransferable.\n\nThat transaction ran on Aug 19, 2026 at 14:00:23 UTC. `tgeTimestamp()` on the FOLD contract returns\n`1787148023`, so FOLD is generally transferable now.\n\nGeneral FOLD transferability and Network Alpha are distinct milestones in the broader Interfold\nlaunch sequence. For more information, see [FOLD Transferability](/faq/transferability).\n\n## Ciphernode operation\n\n### How can I use FOLD to operate a ciphernode?\n\nOperating a ciphernode is designed to be permissionless. The setup has four parts:\n\n1. Provision cloud-based or personal hardware.\n2. Run the ciphernode software.\n3. Bond FOLD to the ciphernode.\n4. Complete on-chain registration.\n\nWhen the ciphernode is registered, it can participate in E3 committees when the protocol rules\nselect it. To be active for committee selection, a registered ciphernode also needs a minimum ticket\nbalance. See [Tickets and sortition](/operate/tickets-and-sortition).\n\nFor current setup requirements, bonding instructions, and operator documentation, see\n[Ciphernode Operators](/operate) and [Registration and bonding](/operate/registration).\n\n### Can I delegate my FOLD to a ciphernode operator?\n\nNah, nah. The bonding model of the Interfold is deliberately operator-only. Every FOLD that is bonded to a\nciphernode is capital at risk for the operator that runs it.\n\nDelegated capital would let operators run partially-owned ciphernodes. That would dilute\naccountability and weaken the economic security guarantees of the network.\n\nIn the `BondingRegistry` contract, each ciphernode has one bond owner, and only the bond owner can\nbond FOLD to it. The operator sets the bond owner. The bond owner can be the operator address or a\nseparate wallet, for example a cold wallet or a Safe.\n\n## Support\n\nIf you need support, join the designated [Telegram group](https://t.me/enclave_e3).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    Total supply, allocation by category, and the unlock schedule.\n  </LinkCard>\n  <LinkCard\n    title='Registration and bonding'\n    href='/operate/registration'\n    icon='node'\n    tag='Operators'\n  >\n    Bond FOLD, get tickets, and register a ciphernode.\n  </LinkCard>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n</LinkCards>\n\nCANDIDATE D:\n---\ntitle: 'FOLD Token'\ndescription:\n  'Frequently asked questions about the FOLD token: its purpose, its utility, and its role in the\n  Interfold network.'\n---\n\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# FOLD Token\n\nThis FAQ explains what FOLD does in the Interfold network. It's for token holders and for people\nwho want to run a ciphernode. The questions come in three groups: the role of FOLD,\ntransferability, and ciphernode operation. For supply and allocation data, see\n[FOLD Tokenomics](/tokenomics).\n\n## The role of FOLD\n\n### What role does FOLD play in the Interfold network?\n\nThe Interfold is a distributed network for confidential coordination. Applications request Encrypted\nExecution Environments (E3s). Ciphernodes coordinate and secure each computation.\n\nFOLD backs the economic running of the network.\n\n### What is the utility of the FOLD token?\n\nFOLD has three main jobs, and the three are locked together: ciphernode bonding, protocol\nincentives, and governance.\n\n**Ciphernode bonding.** Ciphernode operators bond FOLD to become eligible for network duties. Bonded\nFOLD stays in the `BondingRegistry` contract. When the bond owner (the wallet that funds the bond)\nunbonds it, the FOLD waits in an exit queue before the bond owner can claim it. Bonded FOLD may be\nsubject to protocol-defined withdrawal periods. It may also cop penalties for provable\nmisbehaviour or for not carrying out assigned responsibilities. These mechanisms line up operational\nresponsibility with economic accountability.\n\n**Protocol incentives.** Ciphernode operators get a share of the fees of completed E3s. On top of\nthat, they may get FOLD incentives for successfully completing protocol-defined duties as\nmembers of an E3 committee.\n\n**Governance.** FOLD is expected to support governance participation through the Interfold DAO.\nGovernance may cover decisions about network parameters, protocol upgrades, and treasury\nadministration. Governance processes may include secret-ballot mechanisms that the Interfold network\npowers. For the current voting rules, see [Governance](/governance).\n\n## Transferability\n\n### When did FOLD become generally transferable?\n\nGeneral FOLD transferability could be switched on at or after Aug 19 at **14:00 UTC (10 AM ET)**.\n\nAt or after Unix timestamp **`1787148000`**, anyone could call the `tge()` function on the FOLD\ncontract to enable general transferability. When that transaction went through, FOLD became generally\ntransferable.\n\nThat transaction ran on Aug 19, 2026 at 14:00:23 UTC. `tgeTimestamp()` on the FOLD contract returns\n`1787148023`, so FOLD is generally transferable now.\n\nGeneral FOLD transferability and Network Alpha are separate milestones in the wider Interfold\nlaunch sequence. For more info, see [FOLD Transferability](/faq/transferability).\n\n## Ciphernode operation\n\n### How can I use FOLD to operate a ciphernode?\n\nRunning a ciphernode is designed to be permissionless. The setup has four parts:\n\n1. Provision cloud-based or personal hardware.\n2. Run the ciphernode software.\n3. Bond FOLD to the ciphernode.\n4. Complete on-chain registration.\n\nOnce the ciphernode is registered, it can take part in E3 committees when the protocol rules\nselect it. To be active for committee selection, a registered ciphernode also needs a minimum ticket\nbalance. See [Tickets and sortition](/operate/tickets-and-sortition).\n\nFor current setup requirements, bonding instructions, and operator documentation, see\n[Ciphernode Operators](/operate) and [Registration and bonding](/operate/registration).\n\n### Can I delegate my FOLD to a ciphernode operator?\n\nNah, nah. The bonding model of the Interfold is operator-only on purpose. Every FOLD that's bonded to a\nciphernode is capital at risk for the operator that runs it.\n\nDelegated capital would let operators run part-owned ciphernodes. That would water down\naccountability and weaken the economic security guarantees of the network.\n\nIn the `BondingRegistry` contract, each ciphernode has one bond owner, and only the bond owner can\nbond FOLD to it. The operator sets the bond owner. The bond owner can be the operator address or a\nseparate wallet, for example a cold wallet or a Safe.\n\n## Support\n\nIf you need a hand, join the designated [Telegram group](https://t.me/enclave_e3).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    Total supply, allocation by category, and the unlock schedule.\n  </LinkCard>\n  <LinkCard\n    title='Registration and bonding'\n    href='/operate/registration'\n    icon='node'\n    tag='Operators'\n  >\n    Bond FOLD, get tickets, and register a ciphernode.\n  </LinkCard>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n</LinkCards>\n\nCANDIDATE E:\n---\ntitle: 'FOLD Token'\ndescription:\n  'Frequently asked questions about the FOLD token: its purpose, its utility, and its role in the\n  Interfold network.'\n---\n\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# FOLD Token\n\nThis FAQ explains what FOLD does in the Interfold network. It's for token holders and for anyone\nkeen to run a ciphernode. The questions fall into three groups: the role of FOLD,\ntransferability, and ciphernode operation. For supply and allocation figures, have a look at\n[FOLD Tokenomics](/tokenomics).\n\n## The role of FOLD\n\n### What role does FOLD play in the Interfold network?\n\nThe Interfold is a distributed network for confidential coordination. Applications ask for Encrypted\nExecution Environments (E3s). Ciphernodes coordinate and secure each computation.\n\nFOLD underpins the economic side of how the network runs.\n\n### What is the utility of the FOLD token?\n\nFOLD has three main jobs, and all three hang together: ciphernode bonding, protocol\nincentives, and governance.\n\n**Ciphernode bonding.** Ciphernode operators bond FOLD to become eligible for network duties. Bonded\nFOLD stays in the `BondingRegistry` contract. When the bond owner (the wallet that funds the bond)\nunbonds it, the FOLD sits in an exit queue before the bond owner can claim it. Bonded FOLD may be\nsubject to protocol-defined withdrawal periods. It may also cop penalties for provable\nmisbehaviour or for not carrying out assigned responsibilities. These mechanisms line up operational\nresponsibility with economic accountability.\n\n**Protocol incentives.** Ciphernode operators get a cut of the fees from completed E3s. On top of\nthat, they may get FOLD incentives for successfully finishing protocol-defined duties as\nmembers of an E3 committee.\n\n**Governance.** FOLD is expected to back governance participation through the Interfold DAO.\nGovernance may cover decisions about network parameters, protocol upgrades, and treasury\nadministration. Governance processes may include secret-ballot mechanisms powered by the Interfold\nnetwork. For the current voting rules, see [Governance](/governance).\n\n## Transferability\n\n### When did FOLD become generally transferable?\n\nGeneral FOLD transferability could be switched on at or after Aug 19 at **14:00 UTC (10 AM ET)**.\n\nAt or after Unix timestamp **`1787148000`**, anyone could call the `tge()` function on the FOLD\ncontract to switch on general transferability. Once that transaction went through, FOLD became generally\ntransferable.\n\nThat transaction ran on Aug 19, 2026 at 14:00:23 UTC. `tgeTimestamp()` on the FOLD contract returns\n`1787148023`, so FOLD is generally transferable now.\n\nGeneral FOLD transferability and Network Alpha are separate milestones in the wider Interfold\nlaunch sequence. For more info, see [FOLD Transferability](/faq/transferability).\n\n## Ciphernode operation\n\n### How can I use FOLD to operate a ciphernode?\n\nRunning a ciphernode is designed to be permissionless. The setup comes in four parts:\n\n1. Provision cloud-based or personal hardware.\n2. Run the ciphernode software.\n3. Bond FOLD to the ciphernode.\n4. Complete on-chain registration.\n\nOnce the ciphernode is registered, it can take part in E3 committees when the protocol rules\npick it. To be in the running for committee selection, a registered ciphernode also needs a minimum ticket\nbalance. See [Tickets and sortition](/operate/tickets-and-sortition).\n\nFor current setup requirements, bonding instructions, and operator documentation, see\n[Ciphernode Operators](/operate) and [Registration and bonding](/operate/registration).\n\n### Can I delegate my FOLD to a ciphernode operator?\n\nNo. The Interfold's bonding model is operator-only, and that's on purpose. Every FOLD bonded to a\nciphernode is capital on the line for the operator who runs it.\n\nDelegated capital would let operators run part-owned ciphernodes. That would water down\naccountability and weaken the network's economic security guarantees.\n\nIn the `BondingRegistry` contract, each ciphernode has one bond owner, and only the bond owner can\nbond FOLD to it. The operator sets the bond owner. The bond owner can be the operator address or a\nseparate wallet, for example a cold wallet or a Safe.\n\n## Support\n\nIf you need a hand, jump into the designated [Telegram group](https://t.me/enclave_e3).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    Total supply, allocation by category, and the unlock schedule.\n  </LinkCard>\n  <LinkCard\n    title='Registration and bonding'\n    href='/operate/registration'\n    icon='node'\n    tag='Operators'\n  >\n    Bond FOLD, get tickets, and register a ciphernode.\n  </LinkCard>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n</LinkCards>",
+ "schema": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "object",
+    "properties": {
+     "A": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "B": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "C": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "D": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "E": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "A",
+     "B",
+     "C",
+     "D",
+     "E"
+    ],
+    "additionalProperties": false
+   },
+   "rankings": {
+    "type": "object",
+    "properties": {
+     "tone": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "flow": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "variety": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "essence": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "overall": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "tone",
+     "flow",
+     "variety",
+     "essence",
+     "overall"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "required": [
+   "candidates",
+   "rankings"
+  ],
+  "additionalProperties": false
+ },
+ "original": "---\ntitle: 'FOLD Token'\ndescription:\n  'Frequently asked questions about the FOLD token: its purpose, its utility, and its role in the\n  Interfold network.'\n---\n\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# FOLD Token\n\nThis FAQ explains what FOLD does in the Interfold network. It is for token holders and for people\nwho want to operate a ciphernode. The questions are in three groups: the role of FOLD,\ntransferability, and ciphernode operation. For supply and allocation data, see\n[FOLD Tokenomics](/tokenomics).\n\n## The role of FOLD\n\n### What role does FOLD play in the Interfold network?\n\nThe Interfold is a distributed network for confidential coordination. Applications request Encrypted\nExecution Environments (E3s). Ciphernodes coordinate and secure each computation.\n\nFOLD supports the economic operation of the network.\n\n### What is the utility of the FOLD token?\n\nFOLD has three main functions, and the three functions are interlocked: ciphernode bonding, protocol\nincentives, and governance.\n\n**Ciphernode bonding.** Ciphernode operators bond FOLD to become eligible for network duties. Bonded\nFOLD stays in the `BondingRegistry` contract. When the bond owner (the wallet that funds the bond)\nunbonds it, the FOLD waits in an exit queue before the bond owner can claim it. Bonded FOLD may be\nsubject to protocol-defined withdrawal periods. It may also be subject to penalties for provable\nmisbehavior or for failure to fulfill assigned responsibilities. These mechanisms align operational\nresponsibility with economic accountability.\n\n**Protocol incentives.** Ciphernode operators receive a share of the fees of completed E3s. In\naddition, they may receive FOLD incentives for successfully completing protocol-defined duties as\nmembers of an E3 committee.\n\n**Governance.** FOLD is expected to support governance participation through the Interfold DAO.\nGovernance may include decisions about network parameters, protocol upgrades, and treasury\nadministration. Governance processes may include secret-ballot mechanisms that the Interfold network\npowers. For the current voting rules, see [Governance](/governance).\n\n## Transferability\n\n### When did FOLD become generally transferable?\n\nGeneral FOLD transferability could be enabled at or after Aug 19 at **14:00 UTC (10 AM ET)**.\n\nAt or after Unix timestamp **`1787148000`**, anyone could call the `tge()` function on the FOLD\ncontract to enable general transferability. When that transaction executed, FOLD became generally\ntransferable.\n\nThat transaction ran on Aug 19, 2026 at 14:00:23 UTC. `tgeTimestamp()` on the FOLD contract returns\n`1787148023`, so FOLD is generally transferable now.\n\nGeneral FOLD transferability and Network Alpha are distinct milestones in the broader Interfold\nlaunch sequence. For more information, see [FOLD Transferability](/faq/transferability).\n\n## Ciphernode operation\n\n### How can I use FOLD to operate a ciphernode?\n\nOperating a ciphernode is designed to be permissionless. The setup has four parts:\n\n1. Provision cloud-based or personal hardware.\n2. Run the ciphernode software.\n3. Bond FOLD to the ciphernode.\n4. Complete on-chain registration.\n\nWhen the ciphernode is registered, it can participate in E3 committees when the protocol rules\nselect it. To be active for committee selection, a registered ciphernode also needs a minimum ticket\nbalance. See [Tickets and sortition](/operate/tickets-and-sortition).\n\nFor current setup requirements, bonding instructions, and operator documentation, see\n[Ciphernode Operators](/operate) and [Registration and bonding](/operate/registration).\n\n### Can I delegate my FOLD to a ciphernode operator?\n\nNo. The bonding model of the Interfold is deliberately operator-only. Every FOLD that is bonded to a\nciphernode is capital at risk for the operator that runs it.\n\nDelegated capital would let operators run partially-owned ciphernodes. That would dilute\naccountability and weaken the economic security guarantees of the network.\n\nIn the `BondingRegistry` contract, each ciphernode has one bond owner, and only the bond owner can\nbond FOLD to it. The operator sets the bond owner. The bond owner can be the operator address or a\nseparate wallet, for example a cold wallet or a Safe.\n\n## Support\n\nIf you need support, join the designated [Telegram group](https://t.me/enclave_e3).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    Total supply, allocation by category, and the unlock schedule.\n  </LinkCard>\n  <LinkCard\n    title='Registration and bonding'\n    href='/operate/registration'\n    icon='node'\n    tag='Operators'\n  >\n    Bond FOLD, get tickets, and register a ciphernode.\n  </LinkCard>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n</LinkCards>\n",
+ "level": 2,
+ "vulgarity": 0,
+ "candidates": {
+  "A": "---\ntitle: 'FOLD Token'\ndescription:\n  'Frequently asked questions about the FOLD token: its purpose, its utility, and its role in the\n  Interfold network.'\n---\n\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# FOLD Token\n\nThis FAQ runs through what FOLD does in the Interfold network. It's written for token holders, and\nfor anyone keen to run a ciphernode. The questions fall into three groups: the role of FOLD,\ntransferability, and ciphernode operation. If you're after supply and allocation data, see\n[FOLD Tokenomics](/tokenomics).\n\n## The role of FOLD\n\n### What role does FOLD play in the Interfold network?\n\nThe Interfold is a distributed network for confidential coordination. Applications ask for Encrypted\nExecution Environments (E3s), and ciphernodes coordinate and secure each computation.\n\nFOLD is what keeps the economic side of the network ticking over.\n\n### What is the utility of the FOLD token?\n\nFOLD does three main jobs, and they all hang together: ciphernode bonding, protocol incentives, and\ngovernance.\n\n**Ciphernode bonding.** Ciphernode operators bond FOLD so they're eligible for network duties. Bonded\nFOLD sits in the `BondingRegistry` contract. When the bond owner (the wallet that funds the bond)\nunbonds it, the FOLD waits its turn in an exit queue before the bond owner can claim it. Bonded FOLD\nmay be subject to protocol-defined withdrawal periods. It can also cop penalties for provable\nmisbehaviour, or for not pulling its weight on assigned responsibilities. Put together, these\nmechanisms tie operational responsibility to economic accountability.\n\n**Protocol incentives.** Ciphernode operators get a share of the fees from completed E3s. On top of\nthat, they may pick up FOLD incentives for successfully completing protocol-defined duties as members\nof an E3 committee.\n\n**Governance.** FOLD is expected to back governance participation through the Interfold DAO.\nGovernance might cover decisions on network parameters, protocol upgrades, and treasury\nadministration, and its processes may include secret-ballot mechanisms that the Interfold network\nitself powers. For the current voting rules, see [Governance](/governance).\n\n## Transferability\n\n### When did FOLD become generally transferable?\n\nGeneral FOLD transferability could be switched on at or after Aug 19 at **14:00 UTC (10 AM ET)**.\n\nFrom Unix timestamp **`1787148000`** on, anyone could call the `tge()` function on the FOLD\ncontract to switch on general transferability. Once that transaction went through, FOLD was\ngenerally transferable.\n\nAs it turned out, that transaction ran on Aug 19, 2026 at 14:00:23 UTC. `tgeTimestamp()` on the FOLD\ncontract returns `1787148023`, so FOLD is generally transferable now.\n\nMind you, general FOLD transferability and Network Alpha are two separate milestones in the wider\nInterfold launch sequence. For more on that, see [FOLD Transferability](/faq/transferability).\n\n## Ciphernode operation\n\n### How can I use FOLD to operate a ciphernode?\n\nRunning a ciphernode is meant to be permissionless. There are four parts to the setup:\n\n1. Provision cloud-based or personal hardware.\n2. Run the ciphernode software.\n3. Bond FOLD to the ciphernode.\n4. Complete on-chain registration.\n\nOnce your ciphernode's registered, it can take part in E3 committees whenever the protocol rules pick\nit. To be active for committee selection, though, a registered ciphernode also needs a minimum ticket\nbalance. See [Tickets and sortition](/operate/tickets-and-sortition).\n\nFor the current setup requirements, bonding instructions and operator documentation, have a squiz at\n[Ciphernode Operators](/operate) and [Registration and bonding](/operate/registration).\n\n### Can I delegate my FOLD to a ciphernode operator?\n\nNah, nah. The Interfold's bonding model is operator-only, and that's on purpose. Every FOLD bonded to\na ciphernode is capital at risk for the operator that runs it.\n\nDelegated capital would let operators run part-owned ciphernodes, which would water down\naccountability and weaken the network's economic security guarantees.\n\nIn the `BondingRegistry` contract, each ciphernode has one bond owner, and only the bond owner can\nbond FOLD to it. The operator sets the bond owner. The bond owner can be the operator address or a\nseparate wallet, say a cold wallet or a Safe.\n\n## Support\n\nIf you need a hand, jump into the designated [Telegram group](https://t.me/enclave_e3).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    Total supply, allocation by category, and the unlock schedule.\n  </LinkCard>\n  <LinkCard\n    title='Registration and bonding'\n    href='/operate/registration'\n    icon='node'\n    tag='Operators'\n  >\n    Bond FOLD, get tickets, and register a ciphernode.\n  </LinkCard>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n</LinkCards>\n",
+  "B": "---\ntitle: 'FOLD Token'\ndescription:\n  'Frequently asked questions about the FOLD token: its purpose, its utility, and its role in the\n  Interfold network.'\n---\n\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# FOLD Token\n\nHere's the lowdown on what FOLD actually does in the Interfold network. This one's for the token\nholders, and for anyone who fancies running a ciphernode of their own. The questions come in three\nlots: the role of FOLD, transferability, and ciphernode operation. And if it's the supply and\nallocation numbers you're after, they live over at [FOLD Tokenomics](/tokenomics).\n\n## The role of FOLD\n\n### What role does FOLD play in the Interfold network?\n\nSo, the Interfold. It's a distributed network for confidential coordination. Applications sing out\nfor Encrypted Execution Environments (E3s), and the ciphernodes are the ones doing the yakka:\ncoordinating and securing every computation.\n\nAnd FOLD? FOLD is the money side of it, what keeps the whole network's economics ticking over.\n\n### What is the utility of the FOLD token?\n\nFOLD's got three main jobs, and they're all tangled up in each other: ciphernode bonding, protocol\nincentives, and governance.\n\n**Ciphernode bonding.** Ciphernode operators bond FOLD to get eligible for network duties. Think of it\nas putting your money where your mouth is. Bonded FOLD sits in the `BondingRegistry` contract. When the\nbond owner (the wallet that funds the bond) unbonds it, the FOLD doesn't just walk out the door: it\nlines up in an exit queue before the bond owner can claim it. Bonded FOLD may be subject to\nprotocol-defined withdrawal periods. And it can cop penalties too, for provable misbehaviour, or for\nnot pulling its weight on assigned responsibilities. Muck up, and it's your bond that pays. That's the\npoint of these mechanisms: they tie operational responsibility to economic accountability.\n\n**Protocol incentives.** Now the good bit. Ciphernode operators get a share of the fees from completed\nE3s. And on top of that, they may pick up FOLD incentives for successfully completing protocol-defined\nduties as members of an E3 committee. Do the work, get a cut.\n\n**Governance.** FOLD is expected to back governance participation through the Interfold DAO. That\ncould mean having a say on network parameters, protocol upgrades and treasury administration, the\nwhole box and dice. Governance processes may even include secret-ballot mechanisms that the Interfold\nnetwork powers itself, which is a neat trick when you think about it. For the current voting rules,\nsee [Governance](/governance).\n\n## Transferability\n\n### When did FOLD become generally transferable?\n\nGeneral FOLD transferability could be switched on at or after Aug 19 at **14:00 UTC (10 AM ET)**.\n\nHere's how it worked: from Unix timestamp **`1787148000`** on, anyone at all could call the `tge()`\nfunction on the FOLD contract to switch on general transferability. First in, best dressed. Once that\ntransaction went through, FOLD was generally transferable.\n\nAnd someone was quick off the mark: that transaction ran on Aug 19, 2026 at 14:00:23 UTC, a whole 23\nseconds after the gates opened. `tgeTimestamp()` on the FOLD contract returns `1787148023`, so FOLD is\ngenerally transferable now.\n\nDon't get the two mixed up, mind: general FOLD transferability and Network Alpha are two separate\nmilestones in the wider Interfold launch sequence. For more on that, see\n[FOLD Transferability](/faq/transferability).\n\n## Ciphernode operation\n\n### How can I use FOLD to operate a ciphernode?\n\nRunning a ciphernode is meant to be permissionless: nobody's standing at the door with a clipboard.\nThere are four parts to the setup:\n\n1. Provision cloud-based or personal hardware.\n2. Run the ciphernode software.\n3. Bond FOLD to the ciphernode.\n4. Complete on-chain registration.\n\nOnce your ciphernode's registered, it can get a guernsey on E3 committees whenever the protocol rules\npick it. But to be active for committee selection, a registered ciphernode also needs a minimum ticket\nbalance. No ticket, no ride. See [Tickets and sortition](/operate/tickets-and-sortition).\n\nFor the current setup requirements, bonding instructions and operator documentation, have a squiz at\n[Ciphernode Operators](/operate) and [Registration and bonding](/operate/registration).\n\n### Can I delegate my FOLD to a ciphernode operator?\n\nNah, nah. The Interfold's bonding model is operator-only, and that's on purpose. Every FOLD bonded to\na ciphernode is the operator's own capital at risk, skin in the game for whoever runs it.\n\nLet delegated capital in and operators could run part-owned ciphernodes. That would water down\naccountability and weaken the network's economic security guarantees. Everyone's on the hook, so\nnobody is.\n\nIn the `BondingRegistry` contract, each ciphernode has one bond owner, and only the bond owner can\nbond FOLD to it. The operator picks the bond owner. The bond owner can be the operator address or a\nseparate wallet, say a cold wallet or a Safe.\n\n## Support\n\nStuck? Jump into the designated [Telegram group](https://t.me/enclave_e3) and sing out.\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    Total supply, allocation by category, and the unlock schedule.\n  </LinkCard>\n  <LinkCard\n    title='Registration and bonding'\n    href='/operate/registration'\n    icon='node'\n    tag='Operators'\n  >\n    Bond FOLD, get tickets, and register a ciphernode.\n  </LinkCard>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n</LinkCards>\n",
+  "C": "---\ntitle: 'FOLD Token'\ndescription:\n  'Frequently asked questions about the FOLD token: its purpose, its utility, and its role in the\n  Interfold network.'\n---\n\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# FOLD Token\n\nThis FAQ explains what FOLD does in the Interfold network. It is for token holders and for people\nwho want to operate a ciphernode. The questions are in three groups: the role of FOLD,\ntransferability, and ciphernode operation. For supply and allocation data, see\n[FOLD Tokenomics](/tokenomics).\n\n## The role of FOLD\n\n### What role does FOLD play in the Interfold network?\n\nThe Interfold is a distributed network for confidential coordination. Applications request Encrypted\nExecution Environments (E3s). Ciphernodes coordinate and secure each computation.\n\nFOLD supports the economic operation of the network.\n\n### What is the utility of the FOLD token?\n\nFOLD has three main functions, and the three functions are interlocked: ciphernode bonding, protocol\nincentives, and governance.\n\n**Ciphernode bonding.** Ciphernode operators bond FOLD to become eligible for network duties. Bonded\nFOLD stays in the `BondingRegistry` contract. When the bond owner (the wallet that funds the bond)\nunbonds it, the FOLD waits in an exit queue before the bond owner can claim it. Bonded FOLD may be\nsubject to protocol-defined withdrawal periods. It may also be subject to penalties for provable\nmisbehavior or for failure to fulfill assigned responsibilities. These mechanisms align operational\nresponsibility with economic accountability.\n\n**Protocol incentives.** Ciphernode operators receive a share of the fees of completed E3s. In\naddition, they may receive FOLD incentives for successfully completing protocol-defined duties as\nmembers of an E3 committee.\n\n**Governance.** FOLD is expected to support governance participation through the Interfold DAO.\nGovernance may include decisions about network parameters, protocol upgrades, and treasury\nadministration. Governance processes may include secret-ballot mechanisms that the Interfold network\npowers. For the current voting rules, see [Governance](/governance).\n\n## Transferability\n\n### When did FOLD become generally transferable?\n\nGeneral FOLD transferability could be enabled at or after Aug 19 at **14:00 UTC (10 AM ET)**.\n\nAt or after Unix timestamp **`1787148000`**, anyone could call the `tge()` function on the FOLD\ncontract to enable general transferability. When that transaction executed, FOLD became generally\ntransferable.\n\nThat transaction ran on Aug 19, 2026 at 14:00:23 UTC. `tgeTimestamp()` on the FOLD contract returns\n`1787148023`, so FOLD is generally transferable now.\n\nGeneral FOLD transferability and Network Alpha are distinct milestones in the broader Interfold\nlaunch sequence. For more information, see [FOLD Transferability](/faq/transferability).\n\n## Ciphernode operation\n\n### How can I use FOLD to operate a ciphernode?\n\nOperating a ciphernode is designed to be permissionless. The setup has four parts:\n\n1. Provision cloud-based or personal hardware.\n2. Run the ciphernode software.\n3. Bond FOLD to the ciphernode.\n4. Complete on-chain registration.\n\nWhen the ciphernode is registered, it can participate in E3 committees when the protocol rules\nselect it. To be active for committee selection, a registered ciphernode also needs a minimum ticket\nbalance. See [Tickets and sortition](/operate/tickets-and-sortition).\n\nFor current setup requirements, bonding instructions, and operator documentation, see\n[Ciphernode Operators](/operate) and [Registration and bonding](/operate/registration).\n\n### Can I delegate my FOLD to a ciphernode operator?\n\nNah, nah. The bonding model of the Interfold is deliberately operator-only. Every FOLD that is bonded to a\nciphernode is capital at risk for the operator that runs it.\n\nDelegated capital would let operators run partially-owned ciphernodes. That would dilute\naccountability and weaken the economic security guarantees of the network.\n\nIn the `BondingRegistry` contract, each ciphernode has one bond owner, and only the bond owner can\nbond FOLD to it. The operator sets the bond owner. The bond owner can be the operator address or a\nseparate wallet, for example a cold wallet or a Safe.\n\n## Support\n\nIf you need support, join the designated [Telegram group](https://t.me/enclave_e3).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    Total supply, allocation by category, and the unlock schedule.\n  </LinkCard>\n  <LinkCard\n    title='Registration and bonding'\n    href='/operate/registration'\n    icon='node'\n    tag='Operators'\n  >\n    Bond FOLD, get tickets, and register a ciphernode.\n  </LinkCard>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n</LinkCards>\n",
+  "D": "---\ntitle: 'FOLD Token'\ndescription:\n  'Frequently asked questions about the FOLD token: its purpose, its utility, and its role in the\n  Interfold network.'\n---\n\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# FOLD Token\n\nThis FAQ explains what FOLD does in the Interfold network. It's for token holders and for people\nwho want to run a ciphernode. The questions come in three groups: the role of FOLD,\ntransferability, and ciphernode operation. For supply and allocation data, see\n[FOLD Tokenomics](/tokenomics).\n\n## The role of FOLD\n\n### What role does FOLD play in the Interfold network?\n\nThe Interfold is a distributed network for confidential coordination. Applications request Encrypted\nExecution Environments (E3s). Ciphernodes coordinate and secure each computation.\n\nFOLD backs the economic running of the network.\n\n### What is the utility of the FOLD token?\n\nFOLD has three main jobs, and the three are locked together: ciphernode bonding, protocol\nincentives, and governance.\n\n**Ciphernode bonding.** Ciphernode operators bond FOLD to become eligible for network duties. Bonded\nFOLD stays in the `BondingRegistry` contract. When the bond owner (the wallet that funds the bond)\nunbonds it, the FOLD waits in an exit queue before the bond owner can claim it. Bonded FOLD may be\nsubject to protocol-defined withdrawal periods. It may also cop penalties for provable\nmisbehaviour or for not carrying out assigned responsibilities. These mechanisms line up operational\nresponsibility with economic accountability.\n\n**Protocol incentives.** Ciphernode operators get a share of the fees of completed E3s. On top of\nthat, they may get FOLD incentives for successfully completing protocol-defined duties as\nmembers of an E3 committee.\n\n**Governance.** FOLD is expected to support governance participation through the Interfold DAO.\nGovernance may cover decisions about network parameters, protocol upgrades, and treasury\nadministration. Governance processes may include secret-ballot mechanisms that the Interfold network\npowers. For the current voting rules, see [Governance](/governance).\n\n## Transferability\n\n### When did FOLD become generally transferable?\n\nGeneral FOLD transferability could be switched on at or after Aug 19 at **14:00 UTC (10 AM ET)**.\n\nAt or after Unix timestamp **`1787148000`**, anyone could call the `tge()` function on the FOLD\ncontract to enable general transferability. When that transaction went through, FOLD became generally\ntransferable.\n\nThat transaction ran on Aug 19, 2026 at 14:00:23 UTC. `tgeTimestamp()` on the FOLD contract returns\n`1787148023`, so FOLD is generally transferable now.\n\nGeneral FOLD transferability and Network Alpha are separate milestones in the wider Interfold\nlaunch sequence. For more info, see [FOLD Transferability](/faq/transferability).\n\n## Ciphernode operation\n\n### How can I use FOLD to operate a ciphernode?\n\nRunning a ciphernode is designed to be permissionless. The setup has four parts:\n\n1. Provision cloud-based or personal hardware.\n2. Run the ciphernode software.\n3. Bond FOLD to the ciphernode.\n4. Complete on-chain registration.\n\nOnce the ciphernode is registered, it can take part in E3 committees when the protocol rules\nselect it. To be active for committee selection, a registered ciphernode also needs a minimum ticket\nbalance. See [Tickets and sortition](/operate/tickets-and-sortition).\n\nFor current setup requirements, bonding instructions, and operator documentation, see\n[Ciphernode Operators](/operate) and [Registration and bonding](/operate/registration).\n\n### Can I delegate my FOLD to a ciphernode operator?\n\nNah, nah. The bonding model of the Interfold is operator-only on purpose. Every FOLD that's bonded to a\nciphernode is capital at risk for the operator that runs it.\n\nDelegated capital would let operators run part-owned ciphernodes. That would water down\naccountability and weaken the economic security guarantees of the network.\n\nIn the `BondingRegistry` contract, each ciphernode has one bond owner, and only the bond owner can\nbond FOLD to it. The operator sets the bond owner. The bond owner can be the operator address or a\nseparate wallet, for example a cold wallet or a Safe.\n\n## Support\n\nIf you need a hand, join the designated [Telegram group](https://t.me/enclave_e3).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    Total supply, allocation by category, and the unlock schedule.\n  </LinkCard>\n  <LinkCard\n    title='Registration and bonding'\n    href='/operate/registration'\n    icon='node'\n    tag='Operators'\n  >\n    Bond FOLD, get tickets, and register a ciphernode.\n  </LinkCard>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n</LinkCards>\n",
+  "E": "---\ntitle: 'FOLD Token'\ndescription:\n  'Frequently asked questions about the FOLD token: its purpose, its utility, and its role in the\n  Interfold network.'\n---\n\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# FOLD Token\n\nThis FAQ explains what FOLD does in the Interfold network. It's for token holders and for anyone\nkeen to run a ciphernode. The questions fall into three groups: the role of FOLD,\ntransferability, and ciphernode operation. For supply and allocation figures, have a look at\n[FOLD Tokenomics](/tokenomics).\n\n## The role of FOLD\n\n### What role does FOLD play in the Interfold network?\n\nThe Interfold is a distributed network for confidential coordination. Applications ask for Encrypted\nExecution Environments (E3s). Ciphernodes coordinate and secure each computation.\n\nFOLD underpins the economic side of how the network runs.\n\n### What is the utility of the FOLD token?\n\nFOLD has three main jobs, and all three hang together: ciphernode bonding, protocol\nincentives, and governance.\n\n**Ciphernode bonding.** Ciphernode operators bond FOLD to become eligible for network duties. Bonded\nFOLD stays in the `BondingRegistry` contract. When the bond owner (the wallet that funds the bond)\nunbonds it, the FOLD sits in an exit queue before the bond owner can claim it. Bonded FOLD may be\nsubject to protocol-defined withdrawal periods. It may also cop penalties for provable\nmisbehaviour or for not carrying out assigned responsibilities. These mechanisms line up operational\nresponsibility with economic accountability.\n\n**Protocol incentives.** Ciphernode operators get a cut of the fees from completed E3s. On top of\nthat, they may get FOLD incentives for successfully finishing protocol-defined duties as\nmembers of an E3 committee.\n\n**Governance.** FOLD is expected to back governance participation through the Interfold DAO.\nGovernance may cover decisions about network parameters, protocol upgrades, and treasury\nadministration. Governance processes may include secret-ballot mechanisms powered by the Interfold\nnetwork. For the current voting rules, see [Governance](/governance).\n\n## Transferability\n\n### When did FOLD become generally transferable?\n\nGeneral FOLD transferability could be switched on at or after Aug 19 at **14:00 UTC (10 AM ET)**.\n\nAt or after Unix timestamp **`1787148000`**, anyone could call the `tge()` function on the FOLD\ncontract to switch on general transferability. Once that transaction went through, FOLD became generally\ntransferable.\n\nThat transaction ran on Aug 19, 2026 at 14:00:23 UTC. `tgeTimestamp()` on the FOLD contract returns\n`1787148023`, so FOLD is generally transferable now.\n\nGeneral FOLD transferability and Network Alpha are separate milestones in the wider Interfold\nlaunch sequence. For more info, see [FOLD Transferability](/faq/transferability).\n\n## Ciphernode operation\n\n### How can I use FOLD to operate a ciphernode?\n\nRunning a ciphernode is designed to be permissionless. The setup comes in four parts:\n\n1. Provision cloud-based or personal hardware.\n2. Run the ciphernode software.\n3. Bond FOLD to the ciphernode.\n4. Complete on-chain registration.\n\nOnce the ciphernode is registered, it can take part in E3 committees when the protocol rules\npick it. To be in the running for committee selection, a registered ciphernode also needs a minimum ticket\nbalance. See [Tickets and sortition](/operate/tickets-and-sortition).\n\nFor current setup requirements, bonding instructions, and operator documentation, see\n[Ciphernode Operators](/operate) and [Registration and bonding](/operate/registration).\n\n### Can I delegate my FOLD to a ciphernode operator?\n\nNo. The Interfold's bonding model is operator-only, and that's on purpose. Every FOLD bonded to a\nciphernode is capital on the line for the operator who runs it.\n\nDelegated capital would let operators run part-owned ciphernodes. That would water down\naccountability and weaken the network's economic security guarantees.\n\nIn the `BondingRegistry` contract, each ciphernode has one bond owner, and only the bond owner can\nbond FOLD to it. The operator sets the bond owner. The bond owner can be the operator address or a\nseparate wallet, for example a cold wallet or a Safe.\n\n## Support\n\nIf you need a hand, jump into the designated [Telegram group](https://t.me/enclave_e3).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    Total supply, allocation by category, and the unlock schedule.\n  </LinkCard>\n  <LinkCard\n    title='Registration and bonding'\n    href='/operate/registration'\n    icon='node'\n    tag='Operators'\n  >\n    Bond FOLD, get tickets, and register a ciphernode.\n  </LinkCard>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n</LinkCards>\n"
+ },
+ "key": {
+  "A": "yarn-dinkum",
+  "B": "yarn-troppo",
+  "C": "engine",
+  "D": "yarn-deadset",
+  "E": "unharnessed"
+ }
+}

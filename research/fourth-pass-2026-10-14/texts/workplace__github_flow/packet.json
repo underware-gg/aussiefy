@@ -1,0 +1,1088 @@
+{
+ "rubric_version": 3,
+ "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as vulgar, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+ "prompt": "BRIEF: level 5, vulgarity 2\n\nORIGINAL:\n## Introduction\n\nGitHub flow is a lightweight, branch-based workflow. The GitHub flow is useful for everyone, not just developers. For example, here at GitHub, we use GitHub flow for our [site policy](https://github.com/github/site-policy), [documentation](https://github.com/github/docs), and [roadmap](https://github.com/github/roadmap).\n\n## Prerequisites\n\nTo follow GitHub flow, you will need a GitHub account and a repository. For information on how to create an account, see [Creating an account on GitHub](/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). For information on how to create a repository, see [Quickstart for repositories](/en/repositories/creating-and-managing-repositories/quickstart-for-repositories). For information on how to find an existing repository to contribute to, see [Finding ways to contribute to open source on GitHub](/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github).\n\n## Following GitHub flow\n\n> \\[!TIP]\n> You can complete all steps of GitHub flow through the GitHub web interface, command line and [GitHub CLI](https://cli.github.com), or [GitHub Desktop](/en/desktop). For more information about the tools you can use to connect to GitHub, see [Connecting to GitHub](/en/get-started/using-github/connecting-to-github).\n\n### Create a branch\n\nCreate a branch in your repository. A short, descriptive branch name enables your collaborators to see ongoing work at a glance. For example, `increase-test-timeout` or `add-code-of-conduct`. For more information, see [Managing branches within your repository](/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository).\n\nBy creating a branch, you create a space to work without affecting the default branch. Additionally, you give collaborators a chance to review your work.\n\n### Make changes\n\nOn your branch, make any desired changes to the repository. For more information, see [Creating new files](/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](/en/repositories/working-with-files/managing-files/editing-files), [Renaming a file](/en/repositories/working-with-files/managing-files/renaming-a-file), [Moving a file to a new location](/en/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location), or [Deleting files in a repository](/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository).\n\nYour branch is a safe place to make changes. If you make a mistake, you can revert your changes or push additional changes to fix the mistake. Your changes will not end up on the default branch until you merge your branch.\n\nCommit and push your changes to your branch. Give each commit a descriptive message to help you and future contributors understand what changes the commit contains. For example, `fix typo` or `increase rate limit`.\n\nIdeally, each commit contains an isolated, complete change. This makes it easy to revert your changes if you decide to take a different approach. For example, if you want to rename a variable and add some tests, put the variable rename in one commit and the tests in another commit. Later, if you want to keep the tests but revert the variable rename, you can revert the specific commit that contained the variable rename. If you put the variable rename and tests in the same commit or spread the variable rename across multiple commits, you would spend more effort reverting your changes.\n\nBy committing and pushing your changes, you back up your work to remote storage. This means that you can access your work from any device. It also means that your collaborators can see your work, answer questions, and make suggestions or contributions.\n\nContinue to make, commit, and push changes to your branch until you are ready to ask for feedback.\n\nCANDIDATE A:\n## Introduction\n\nGitHub flow is a no-fuss, branch-based way of working. And it's not just for the developers, mate, it's handy for everyone. For example, here at GitHub we use GitHub flow for our [site policy](https://github.com/github/site-policy), [documentation](https://github.com/github/docs), and [roadmap](https://github.com/github/roadmap).\n\n## Prerequisites\n\nTo have a go at GitHub flow, you'll need a GitHub account and a repository. For the lowdown on setting up an account, see [Creating an account on GitHub](/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). For how to make a repository, see [Quickstart for repositories](/en/repositories/creating-and-managing-repositories/quickstart-for-repositories). For how to track down an existing repository to chip in on, see [Finding ways to contribute to open source on GitHub](/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github).\n\n## Following GitHub flow\n\n> \\[!TIP]\n> You can knock over every step of GitHub flow through the GitHub web interface, the command line and [GitHub CLI](https://cli.github.com), or [GitHub Desktop](/en/desktop). For more on the tools you can use to hook up to GitHub, see [Connecting to GitHub](/en/get-started/using-github/connecting-to-github).\n\n### Create a branch\n\nMake a branch in your repository. A short branch name that says what it's for lets your teammates see what's cooking at a glance. For example, `increase-test-timeout` or `add-code-of-conduct`. For more, see [Managing branches within your repository](/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository).\n\nMaking a branch gives you your own patch to work in without stuffing up the default branch. On top of that, it gives your teammates a chance to run their eye over your work.\n\n### Make changes\n\nOn your branch, make whatever changes you like to the repository. For more, see [Creating new files](/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](/en/repositories/working-with-files/managing-files/editing-files), [Renaming a file](/en/repositories/working-with-files/managing-files/renaming-a-file), [Moving a file to a new location](/en/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location), or [Deleting files in a repository](/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository).\n\nYour branch is a safe spot to muck around with changes. If you cock something up, you can revert your changes or push more changes to fix the stuff-up. None of your changes end up on the default branch till you merge your branch.\n\nCommit and push your changes to your branch. Give every commit a message that says what it does, so you and whoever comes along later can work out what's in it. For example, `fix typo` or `increase rate limit`.\n\nIdeally, every commit holds one self-contained, finished change. That makes it dead easy to revert your changes if you decide to go a different way. For example, say you wanna rename a variable and add some tests: put the variable rename in one commit and the tests in another. Later on, if you wanna keep the tests but bin the variable rename, you can just revert the one commit that had the rename in it. If you shove the rename and the tests in the same commit, or smear the rename across a bunch of commits, you'll be busting your arse a lot harder to revert your changes.\n\nCommitting and pushing your changes backs your work up to remote storage. That means you can get at your work from any device. It also means your teammates can see your work, answer questions, and throw in suggestions or contributions.\n\nKeep making, committing and pushing changes to your branch till you're ready to ask for feedback.\n\nCANDIDATE B:\n## Introduction\n\nGitHub flow is a lightweight, branch-based workflow. The GitHub flow is useful for every man and his dog, not just developers. For example, here at GitHub, we use GitHub flow for our [site policy](https://github.com/github/site-policy), [documentation](https://github.com/github/docs), and [roadmap](https://github.com/github/roadmap).\n\n## Prerequisites\n\nTo follow GitHub flow, you'll need a GitHub account and a repository. For information on how to create an account, see [Creating an account on GitHub](/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). For information on how to create a repository, see [Quickstart for repositories](/en/repositories/creating-and-managing-repositories/quickstart-for-repositories). For information on how to find an existing repository to contribute to, see [Finding ways to contribute to open source on GitHub](/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github).\n\n## Following GitHub flow\n\n> \\[!TIP]\n> Ya can complete all steps of GitHub flow through the GitHub web interface, command line and [GitHub CLI](https://cli.github.com), or [GitHub Desktop](/en/desktop). For more information about the tools you can use to connect to GitHub, see [Connecting to GitHub](/en/get-started/using-github/connecting-to-github).\n\n### Create a branch\n\nCreate a branch in yer repository. A short, descriptive branch name enables yer collaborators to see ongoing work at a glance. For example, `increase-test-timeout` or `add-code-of-conduct`. For more information, see [Managing branches within your repository](/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository).\n\nBy creating a branch, ya create a space to work without affectin' the default branch. Additionally, ya give collaborators a chance to review yer work.\n\n### Make changes\n\nOn yer branch, make any desired changes to the repository. For more information, see [Creating new files](/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](/en/repositories/working-with-files/managing-files/editing-files), [Renaming a file](/en/repositories/working-with-files/managing-files/renaming-a-file), [Moving a file to a new location](/en/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location), or [Deleting files in a repository](/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository).\n\nYour branch is a safe place to make changes. If you make a mistake, ya can revert your changes or push additional changes to fix the mistake. Yer changes won't end up on the default branch until ya merge yer branch.\n\nCommit and push yer changes to yer branch. Give each commit a descriptive message to help ya and future contributors understand what changes the commit contains. For example, `fix typo` or `increase rate limit`.\n\nIdeally, each commit contains an isolated, complete change. This makes it easy to revert your changes if you decide to take a different approach. For example, if ya wanna rename a variable and add some tests, put the variable rename in one commit'n the tests in another commit. Later, if ya want to keep the tests but revert the variable rename, ya can revert the specific commit that contained the variable rename. If ya put the variable rename and tests in the same commit or spread the variable rename across multiple commits, ya would spend more effort reverting yer changes.\n\nBy committin''n pushin' yer changes, you back up yer work to remote storage. This means that you can access yer work from any device. It also means that yer collaborators can see yer work, answer questions, and make suggestions or contributions.\n\nContinue to make, commit, and push changes to yer branch until yer ready to ask for feedback.\n\nCANDIDATE C:\n## Introduction\n\nGitHub flow is a lightweight, branch-based workflow. The GitHub flow's handy for every man and his dog, not just developers. For instance, here at GitHub, we use GitHub flow for our [site policy](https://github.com/github/site-policy), [documentation](https://github.com/github/docs), and [roadmap](https://github.com/github/roadmap).\n\n## Prerequisites\n\nTo follow GitHub flow, you'll need a GitHub account and a repository. For the drum on how to set up an account, see [Creating an account on GitHub](/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). For how to create a repository, have a squiz at [Quickstart for repositories](/en/repositories/creating-and-managing-repositories/quickstart-for-repositories). And for how to track down an existing repository to chip in on, see [Finding ways to contribute to open source on GitHub](/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github).\n\n## Following GitHub flow\n\n> \\[!TIP]\n> You can get through every step of GitHub flow in the GitHub web interface, the command line and [GitHub CLI](https://cli.github.com), or [GitHub Desktop](/en/desktop). For more on the tools you can use to hook up to GitHub, see [Connecting to GitHub](/en/get-started/using-github/connecting-to-github).\n\n### Create a branch\n\nCreate a branch in yer repository. A short branch name that says what it's for lets yer collaborators see what's on the go at a glance. For example, `increase-test-timeout` or `add-code-of-conduct`. For more on that, see [Managing branches within your repository](/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository).\n\nWhen ya create a branch, ya get a space to work in without mucking up the default branch. On top of that, ya give collaborators a chance to review yer work.\n\n### Make changes\n\nOn yer branch, make whatever changes ya like to the repository. For more on that, see [Creating new files](/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](/en/repositories/working-with-files/managing-files/editing-files), [Renaming a file](/en/repositories/working-with-files/managing-files/renaming-a-file), [Moving a file to a new location](/en/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location), or [Deleting files in a repository](/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository).\n\nYer branch is a safe spot to make changes. If ya stuff up, ya can revert yer changes or push more changes to fix the stuff-up. Yer changes won't land on the default branch till ya merge yer branch.\n\nCommit and push yer changes to yer branch. Give each commit a message that says what it does, so you and whoever comes along later can work out what changes the commit's got in it. For example, `fix typo` or `increase rate limit`.\n\nIdeally, each commit holds one self-contained, complete change. That makes it dead easy to revert yer changes if ya decide to go a different way. Say you're keen to rename a variable and add some tests: put the variable rename in one commit and the tests in another commit. Later on, if ya want to keep the tests but revert the variable rename, ya can revert just the commit that had the variable rename in it. If ya put the variable rename and the tests in the same commit, or spread the variable rename over a heap of commits, you'd be flat out for heaps longer revertin' yer changes.\n\nWhen ya commit and push yer changes, ya back up yer work to remote storage. That means ya can get at yer work from any device. It also means yer collaborators can see yer work, answer questions, and chuck in suggestions or contributions.\n\nKeep on makin', committin', and pushin' changes to yer branch till you're ready to ask for feedback.\n\nCANDIDATE D:\n## Introduction\n\nGitHub flow's a light, branch-based workflow, and it's handy for every man and his dog, not just developers. Here at GitHub, for instance, we use GitHub flow for our [site policy](https://github.com/github/site-policy), [documentation](https://github.com/github/docs), and [roadmap](https://github.com/github/roadmap).\n\n## Prerequisites\n\nTo follow GitHub flow, you'll need a GitHub account and a repository. If ya need the good oil on settin' up an account, have a squiz at [Creating an account on GitHub](/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). For how to create a repository, check out [Quickstart for repositories](/en/repositories/creating-and-managing-repositories/quickstart-for-repositories). And if yer after an existin' repository to chip in on, see [Finding ways to contribute to open source on GitHub](/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github).\n\n## Following GitHub flow\n\n> \\[!TIP]\n> Ya can do every step of GitHub flow in the GitHub web interface, on the command line and [GitHub CLI](https://cli.github.com), or in [GitHub Desktop](/en/desktop). There's more on the tools ya can use to connect to GitHub in [Connecting to GitHub](/en/get-started/using-github/connecting-to-github).\n\n### Create a branch\n\nFirst up, create a branch in yer repository. Give it a short name that says what it's for, and yer collaborators can tell what's goin' on at a glance: `increase-test-timeout`, say, or `add-code-of-conduct`. There's more in [Managing branches within your repository](/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository).\n\nA branch gives ya a space of yer own to work in without touchin' the default branch. And it gives collaborators a chance to run their eye over yer work, too.\n\n### Make changes\n\nOn yer branch, go ahead and make whatever changes ya like to the repository. For more, see [Creating new files](/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](/en/repositories/working-with-files/managing-files/editing-files), [Renaming a file](/en/repositories/working-with-files/managing-files/renaming-a-file), [Moving a file to a new location](/en/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location), or [Deleting files in a repository](/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository).\n\nYer branch is a safe spot to muck about with changes. Stuff something up and ya can revert yer changes, or push a few more changes to fix the stuff-up. Nothin' lands on the default branch till ya merge yer branch.\n\nCommit and push yer changes to yer branch as ya go. Give each commit a message that says what it does, so you and whoever comes along later can work out what's in it: `fix typo`, say, or `increase rate limit`.\n\nBest case, each commit's one change, on its own and finished. That way it's dead easy to revert yer changes if ya decide to go a different way. Say ya want to rename a variable and add some tests: put the variable rename in one commit and the tests in another commit. Then if ya end up keepin' the tests but want the variable rename gone, ya just revert the one commit that had the variable rename in it. Lump the variable rename and the tests in the same commit, or spread the variable rename over a few commits, and yer in for heaps more work revertin' yer changes.\n\nCommittin' and pushin' yer changes also backs yer work up to remote storage, so ya can get at it from any device. And it means yer collaborators can see yer work, answer questions, and chuck in suggestions or contributions.\n\nJust keep makin', committin', and pushin' changes to yer branch till yer ready to ask for feedback.\n\nCANDIDATE E:\n## Introduction\n\nOkay, so. GitHub flow is a lightweight, branch-based workflow, nothin' fancy. And it's not just for the developers, either: the GitHub flow's good for every man and his dog. Here at GitHub, for instance, we run our [site policy](https://github.com/github/site-policy), our [documentation](https://github.com/github/docs), and even our [roadmap](https://github.com/github/roadmap) on GitHub flow.\n\n## Prerequisites\n\nBefore ya kick off with GitHub flow, you'll need two things: a GitHub account and a repository. Haven't got an account? The drum on settin' one up is at [Creating an account on GitHub](/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). No repository yet? Have a squiz at [Quickstart for repositories](/en/repositories/creating-and-managing-repositories/quickstart-for-repositories). Reckon you'd rather pitch in on an existing repository? Then [Finding ways to contribute to open source on GitHub](/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github) is where ya wanna be.\n\n## Following GitHub flow\n\n> \\[!TIP]\n> You can knock over every single step of GitHub flow in the GitHub web interface, on the command line and [GitHub CLI](https://cli.github.com), or in [GitHub Desktop](/en/desktop), whatever takes yer fancy. For the full rundown on the tools you can use to hook up to GitHub, see [Connecting to GitHub](/en/get-started/using-github/connecting-to-github).\n\n### Create a branch\n\nFirst up, create a branch in yer repository. Give it a short name that says what it's about, and yer collaborators can tell what's on the go at a glance, no detective work needed. Somethin' like `increase-test-timeout` or `add-code-of-conduct`. For more on that, see [Managing branches within your repository](/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository).\n\nCreatin' a branch gives ya yer own patch to work in without touchin' the default branch. And as a bonus, it gives yer collaborators a chance to run their eye over yer work.\n\n### Make changes\n\nNow, on yer branch, go for yer life and make whatever changes ya like to the repository. For the how-to, see [Creating new files](/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](/en/repositories/working-with-files/managing-files/editing-files), [Renaming a file](/en/repositories/working-with-files/managing-files/renaming-a-file), [Moving a file to a new location](/en/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location), or [Deleting files in a repository](/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository).\n\nYer branch is a safe spot to muck around in. Stuff somethin' up? No worries: ya can revert yer changes, or push a few more changes to fix the stuff-up. None of yer changes'll get anywhere near the default branch till ya merge yer branch.\n\nCommit and push yer changes to yer branch. Give every commit a message that says what it does, so you and whoever rocks up later can suss out what changes are in that commit. Short and sweet does it: `fix typo` or `increase rate limit`.\n\nIdeally, each commit's one self-contained, complete change, nothin' else tagging along. That way, if ya change yer mind and go a different way, revertin' yer changes is a piece of piss. Say you're keen to rename a variable and add a few tests: chuck the variable rename in one commit and the tests in another commit. Down the track, if ya want to keep the tests but ditch the variable rename, ya just revert the one commit that had the variable rename in it. Bung the variable rename and the tests in the same commit, though, or smear the variable rename across a heap of commits, and you'll be workin' a whole lot harder to revert yer changes.\n\nEvery time ya commit and push yer changes, ya back up yer work to remote storage. So ya can get at yer work from any device ya like. It also means yer collaborators can see what you've been up to, answer questions, and throw in suggestions or contributions of their own.\n\nThen just keep on makin', committin', and pushin' changes to yer branch till you're ready to ask for feedback.",
+ "schema": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "object",
+    "properties": {
+     "A": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "B": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "C": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "D": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "E": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "A",
+     "B",
+     "C",
+     "D",
+     "E"
+    ],
+    "additionalProperties": false
+   },
+   "rankings": {
+    "type": "object",
+    "properties": {
+     "tone": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "flow": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "variety": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "essence": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "overall": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "tone",
+     "flow",
+     "variety",
+     "essence",
+     "overall"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "required": [
+   "candidates",
+   "rankings"
+  ],
+  "additionalProperties": false
+ },
+ "original": "## Introduction\n\nGitHub flow is a lightweight, branch-based workflow. The GitHub flow is useful for everyone, not just developers. For example, here at GitHub, we use GitHub flow for our [site policy](https://github.com/github/site-policy), [documentation](https://github.com/github/docs), and [roadmap](https://github.com/github/roadmap).\n\n## Prerequisites\n\nTo follow GitHub flow, you will need a GitHub account and a repository. For information on how to create an account, see [Creating an account on GitHub](/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). For information on how to create a repository, see [Quickstart for repositories](/en/repositories/creating-and-managing-repositories/quickstart-for-repositories). For information on how to find an existing repository to contribute to, see [Finding ways to contribute to open source on GitHub](/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github).\n\n## Following GitHub flow\n\n> \\[!TIP]\n> You can complete all steps of GitHub flow through the GitHub web interface, command line and [GitHub CLI](https://cli.github.com), or [GitHub Desktop](/en/desktop). For more information about the tools you can use to connect to GitHub, see [Connecting to GitHub](/en/get-started/using-github/connecting-to-github).\n\n### Create a branch\n\nCreate a branch in your repository. A short, descriptive branch name enables your collaborators to see ongoing work at a glance. For example, `increase-test-timeout` or `add-code-of-conduct`. For more information, see [Managing branches within your repository](/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository).\n\nBy creating a branch, you create a space to work without affecting the default branch. Additionally, you give collaborators a chance to review your work.\n\n### Make changes\n\nOn your branch, make any desired changes to the repository. For more information, see [Creating new files](/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](/en/repositories/working-with-files/managing-files/editing-files), [Renaming a file](/en/repositories/working-with-files/managing-files/renaming-a-file), [Moving a file to a new location](/en/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location), or [Deleting files in a repository](/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository).\n\nYour branch is a safe place to make changes. If you make a mistake, you can revert your changes or push additional changes to fix the mistake. Your changes will not end up on the default branch until you merge your branch.\n\nCommit and push your changes to your branch. Give each commit a descriptive message to help you and future contributors understand what changes the commit contains. For example, `fix typo` or `increase rate limit`.\n\nIdeally, each commit contains an isolated, complete change. This makes it easy to revert your changes if you decide to take a different approach. For example, if you want to rename a variable and add some tests, put the variable rename in one commit and the tests in another commit. Later, if you want to keep the tests but revert the variable rename, you can revert the specific commit that contained the variable rename. If you put the variable rename and tests in the same commit or spread the variable rename across multiple commits, you would spend more effort reverting your changes.\n\nBy committing and pushing your changes, you back up your work to remote storage. This means that you can access your work from any device. It also means that your collaborators can see your work, answer questions, and make suggestions or contributions.\n\nContinue to make, commit, and push changes to your branch until you are ready to ask for feedback.\n",
+ "level": 5,
+ "vulgarity": 2,
+ "candidates": {
+  "A": "## Introduction\n\nGitHub flow is a no-fuss, branch-based way of working. And it's not just for the developers, mate, it's handy for everyone. For example, here at GitHub we use GitHub flow for our [site policy](https://github.com/github/site-policy), [documentation](https://github.com/github/docs), and [roadmap](https://github.com/github/roadmap).\n\n## Prerequisites\n\nTo have a go at GitHub flow, you'll need a GitHub account and a repository. For the lowdown on setting up an account, see [Creating an account on GitHub](/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). For how to make a repository, see [Quickstart for repositories](/en/repositories/creating-and-managing-repositories/quickstart-for-repositories). For how to track down an existing repository to chip in on, see [Finding ways to contribute to open source on GitHub](/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github).\n\n## Following GitHub flow\n\n> \\[!TIP]\n> You can knock over every step of GitHub flow through the GitHub web interface, the command line and [GitHub CLI](https://cli.github.com), or [GitHub Desktop](/en/desktop). For more on the tools you can use to hook up to GitHub, see [Connecting to GitHub](/en/get-started/using-github/connecting-to-github).\n\n### Create a branch\n\nMake a branch in your repository. A short branch name that says what it's for lets your teammates see what's cooking at a glance. For example, `increase-test-timeout` or `add-code-of-conduct`. For more, see [Managing branches within your repository](/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository).\n\nMaking a branch gives you your own patch to work in without stuffing up the default branch. On top of that, it gives your teammates a chance to run their eye over your work.\n\n### Make changes\n\nOn your branch, make whatever changes you like to the repository. For more, see [Creating new files](/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](/en/repositories/working-with-files/managing-files/editing-files), [Renaming a file](/en/repositories/working-with-files/managing-files/renaming-a-file), [Moving a file to a new location](/en/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location), or [Deleting files in a repository](/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository).\n\nYour branch is a safe spot to muck around with changes. If you cock something up, you can revert your changes or push more changes to fix the stuff-up. None of your changes end up on the default branch till you merge your branch.\n\nCommit and push your changes to your branch. Give every commit a message that says what it does, so you and whoever comes along later can work out what's in it. For example, `fix typo` or `increase rate limit`.\n\nIdeally, every commit holds one self-contained, finished change. That makes it dead easy to revert your changes if you decide to go a different way. For example, say you wanna rename a variable and add some tests: put the variable rename in one commit and the tests in another. Later on, if you wanna keep the tests but bin the variable rename, you can just revert the one commit that had the rename in it. If you shove the rename and the tests in the same commit, or smear the rename across a bunch of commits, you'll be busting your arse a lot harder to revert your changes.\n\nCommitting and pushing your changes backs your work up to remote storage. That means you can get at your work from any device. It also means your teammates can see your work, answer questions, and throw in suggestions or contributions.\n\nKeep making, committing and pushing changes to your branch till you're ready to ask for feedback.\n",
+  "B": "## Introduction\n\nGitHub flow is a lightweight, branch-based workflow. The GitHub flow is useful for every man and his dog, not just developers. For example, here at GitHub, we use GitHub flow for our [site policy](https://github.com/github/site-policy), [documentation](https://github.com/github/docs), and [roadmap](https://github.com/github/roadmap).\n\n## Prerequisites\n\nTo follow GitHub flow, you'll need a GitHub account and a repository. For information on how to create an account, see [Creating an account on GitHub](/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). For information on how to create a repository, see [Quickstart for repositories](/en/repositories/creating-and-managing-repositories/quickstart-for-repositories). For information on how to find an existing repository to contribute to, see [Finding ways to contribute to open source on GitHub](/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github).\n\n## Following GitHub flow\n\n> \\[!TIP]\n> Ya can complete all steps of GitHub flow through the GitHub web interface, command line and [GitHub CLI](https://cli.github.com), or [GitHub Desktop](/en/desktop). For more information about the tools you can use to connect to GitHub, see [Connecting to GitHub](/en/get-started/using-github/connecting-to-github).\n\n### Create a branch\n\nCreate a branch in yer repository. A short, descriptive branch name enables yer collaborators to see ongoing work at a glance. For example, `increase-test-timeout` or `add-code-of-conduct`. For more information, see [Managing branches within your repository](/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository).\n\nBy creating a branch, ya create a space to work without affectin' the default branch. Additionally, ya give collaborators a chance to review yer work.\n\n### Make changes\n\nOn yer branch, make any desired changes to the repository. For more information, see [Creating new files](/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](/en/repositories/working-with-files/managing-files/editing-files), [Renaming a file](/en/repositories/working-with-files/managing-files/renaming-a-file), [Moving a file to a new location](/en/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location), or [Deleting files in a repository](/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository).\n\nYour branch is a safe place to make changes. If you make a mistake, ya can revert your changes or push additional changes to fix the mistake. Yer changes won't end up on the default branch until ya merge yer branch.\n\nCommit and push yer changes to yer branch. Give each commit a descriptive message to help ya and future contributors understand what changes the commit contains. For example, `fix typo` or `increase rate limit`.\n\nIdeally, each commit contains an isolated, complete change. This makes it easy to revert your changes if you decide to take a different approach. For example, if ya wanna rename a variable and add some tests, put the variable rename in one commit'n the tests in another commit. Later, if ya want to keep the tests but revert the variable rename, ya can revert the specific commit that contained the variable rename. If ya put the variable rename and tests in the same commit or spread the variable rename across multiple commits, ya would spend more effort reverting yer changes.\n\nBy committin''n pushin' yer changes, you back up yer work to remote storage. This means that you can access yer work from any device. It also means that yer collaborators can see yer work, answer questions, and make suggestions or contributions.\n\nContinue to make, commit, and push changes to yer branch until yer ready to ask for feedback.\n",
+  "C": "## Introduction\n\nGitHub flow is a lightweight, branch-based workflow. The GitHub flow's handy for every man and his dog, not just developers. For instance, here at GitHub, we use GitHub flow for our [site policy](https://github.com/github/site-policy), [documentation](https://github.com/github/docs), and [roadmap](https://github.com/github/roadmap).\n\n## Prerequisites\n\nTo follow GitHub flow, you'll need a GitHub account and a repository. For the drum on how to set up an account, see [Creating an account on GitHub](/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). For how to create a repository, have a squiz at [Quickstart for repositories](/en/repositories/creating-and-managing-repositories/quickstart-for-repositories). And for how to track down an existing repository to chip in on, see [Finding ways to contribute to open source on GitHub](/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github).\n\n## Following GitHub flow\n\n> \\[!TIP]\n> You can get through every step of GitHub flow in the GitHub web interface, the command line and [GitHub CLI](https://cli.github.com), or [GitHub Desktop](/en/desktop). For more on the tools you can use to hook up to GitHub, see [Connecting to GitHub](/en/get-started/using-github/connecting-to-github).\n\n### Create a branch\n\nCreate a branch in yer repository. A short branch name that says what it's for lets yer collaborators see what's on the go at a glance. For example, `increase-test-timeout` or `add-code-of-conduct`. For more on that, see [Managing branches within your repository](/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository).\n\nWhen ya create a branch, ya get a space to work in without mucking up the default branch. On top of that, ya give collaborators a chance to review yer work.\n\n### Make changes\n\nOn yer branch, make whatever changes ya like to the repository. For more on that, see [Creating new files](/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](/en/repositories/working-with-files/managing-files/editing-files), [Renaming a file](/en/repositories/working-with-files/managing-files/renaming-a-file), [Moving a file to a new location](/en/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location), or [Deleting files in a repository](/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository).\n\nYer branch is a safe spot to make changes. If ya stuff up, ya can revert yer changes or push more changes to fix the stuff-up. Yer changes won't land on the default branch till ya merge yer branch.\n\nCommit and push yer changes to yer branch. Give each commit a message that says what it does, so you and whoever comes along later can work out what changes the commit's got in it. For example, `fix typo` or `increase rate limit`.\n\nIdeally, each commit holds one self-contained, complete change. That makes it dead easy to revert yer changes if ya decide to go a different way. Say you're keen to rename a variable and add some tests: put the variable rename in one commit and the tests in another commit. Later on, if ya want to keep the tests but revert the variable rename, ya can revert just the commit that had the variable rename in it. If ya put the variable rename and the tests in the same commit, or spread the variable rename over a heap of commits, you'd be flat out for heaps longer revertin' yer changes.\n\nWhen ya commit and push yer changes, ya back up yer work to remote storage. That means ya can get at yer work from any device. It also means yer collaborators can see yer work, answer questions, and chuck in suggestions or contributions.\n\nKeep on makin', committin', and pushin' changes to yer branch till you're ready to ask for feedback.\n",
+  "D": "## Introduction\n\nGitHub flow's a light, branch-based workflow, and it's handy for every man and his dog, not just developers. Here at GitHub, for instance, we use GitHub flow for our [site policy](https://github.com/github/site-policy), [documentation](https://github.com/github/docs), and [roadmap](https://github.com/github/roadmap).\n\n## Prerequisites\n\nTo follow GitHub flow, you'll need a GitHub account and a repository. If ya need the good oil on settin' up an account, have a squiz at [Creating an account on GitHub](/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). For how to create a repository, check out [Quickstart for repositories](/en/repositories/creating-and-managing-repositories/quickstart-for-repositories). And if yer after an existin' repository to chip in on, see [Finding ways to contribute to open source on GitHub](/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github).\n\n## Following GitHub flow\n\n> \\[!TIP]\n> Ya can do every step of GitHub flow in the GitHub web interface, on the command line and [GitHub CLI](https://cli.github.com), or in [GitHub Desktop](/en/desktop). There's more on the tools ya can use to connect to GitHub in [Connecting to GitHub](/en/get-started/using-github/connecting-to-github).\n\n### Create a branch\n\nFirst up, create a branch in yer repository. Give it a short name that says what it's for, and yer collaborators can tell what's goin' on at a glance: `increase-test-timeout`, say, or `add-code-of-conduct`. There's more in [Managing branches within your repository](/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository).\n\nA branch gives ya a space of yer own to work in without touchin' the default branch. And it gives collaborators a chance to run their eye over yer work, too.\n\n### Make changes\n\nOn yer branch, go ahead and make whatever changes ya like to the repository. For more, see [Creating new files](/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](/en/repositories/working-with-files/managing-files/editing-files), [Renaming a file](/en/repositories/working-with-files/managing-files/renaming-a-file), [Moving a file to a new location](/en/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location), or [Deleting files in a repository](/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository).\n\nYer branch is a safe spot to muck about with changes. Stuff something up and ya can revert yer changes, or push a few more changes to fix the stuff-up. Nothin' lands on the default branch till ya merge yer branch.\n\nCommit and push yer changes to yer branch as ya go. Give each commit a message that says what it does, so you and whoever comes along later can work out what's in it: `fix typo`, say, or `increase rate limit`.\n\nBest case, each commit's one change, on its own and finished. That way it's dead easy to revert yer changes if ya decide to go a different way. Say ya want to rename a variable and add some tests: put the variable rename in one commit and the tests in another commit. Then if ya end up keepin' the tests but want the variable rename gone, ya just revert the one commit that had the variable rename in it. Lump the variable rename and the tests in the same commit, or spread the variable rename over a few commits, and yer in for heaps more work revertin' yer changes.\n\nCommittin' and pushin' yer changes also backs yer work up to remote storage, so ya can get at it from any device. And it means yer collaborators can see yer work, answer questions, and chuck in suggestions or contributions.\n\nJust keep makin', committin', and pushin' changes to yer branch till yer ready to ask for feedback.\n",
+  "E": "## Introduction\n\nOkay, so. GitHub flow is a lightweight, branch-based workflow, nothin' fancy. And it's not just for the developers, either: the GitHub flow's good for every man and his dog. Here at GitHub, for instance, we run our [site policy](https://github.com/github/site-policy), our [documentation](https://github.com/github/docs), and even our [roadmap](https://github.com/github/roadmap) on GitHub flow.\n\n## Prerequisites\n\nBefore ya kick off with GitHub flow, you'll need two things: a GitHub account and a repository. Haven't got an account? The drum on settin' one up is at [Creating an account on GitHub](/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). No repository yet? Have a squiz at [Quickstart for repositories](/en/repositories/creating-and-managing-repositories/quickstart-for-repositories). Reckon you'd rather pitch in on an existing repository? Then [Finding ways to contribute to open source on GitHub](/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github) is where ya wanna be.\n\n## Following GitHub flow\n\n> \\[!TIP]\n> You can knock over every single step of GitHub flow in the GitHub web interface, on the command line and [GitHub CLI](https://cli.github.com), or in [GitHub Desktop](/en/desktop), whatever takes yer fancy. For the full rundown on the tools you can use to hook up to GitHub, see [Connecting to GitHub](/en/get-started/using-github/connecting-to-github).\n\n### Create a branch\n\nFirst up, create a branch in yer repository. Give it a short name that says what it's about, and yer collaborators can tell what's on the go at a glance, no detective work needed. Somethin' like `increase-test-timeout` or `add-code-of-conduct`. For more on that, see [Managing branches within your repository](/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository).\n\nCreatin' a branch gives ya yer own patch to work in without touchin' the default branch. And as a bonus, it gives yer collaborators a chance to run their eye over yer work.\n\n### Make changes\n\nNow, on yer branch, go for yer life and make whatever changes ya like to the repository. For the how-to, see [Creating new files](/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](/en/repositories/working-with-files/managing-files/editing-files), [Renaming a file](/en/repositories/working-with-files/managing-files/renaming-a-file), [Moving a file to a new location](/en/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location), or [Deleting files in a repository](/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository).\n\nYer branch is a safe spot to muck around in. Stuff somethin' up? No worries: ya can revert yer changes, or push a few more changes to fix the stuff-up. None of yer changes'll get anywhere near the default branch till ya merge yer branch.\n\nCommit and push yer changes to yer branch. Give every commit a message that says what it does, so you and whoever rocks up later can suss out what changes are in that commit. Short and sweet does it: `fix typo` or `increase rate limit`.\n\nIdeally, each commit's one self-contained, complete change, nothin' else tagging along. That way, if ya change yer mind and go a different way, revertin' yer changes is a piece of piss. Say you're keen to rename a variable and add a few tests: chuck the variable rename in one commit and the tests in another commit. Down the track, if ya want to keep the tests but ditch the variable rename, ya just revert the one commit that had the variable rename in it. Bung the variable rename and the tests in the same commit, though, or smear the variable rename across a heap of commits, and you'll be workin' a whole lot harder to revert yer changes.\n\nEvery time ya commit and push yer changes, ya back up yer work to remote storage. So ya can get at yer work from any device ya like. It also means yer collaborators can see what you've been up to, answer questions, and throw in suggestions or contributions of their own.\n\nThen just keep on makin', committin', and pushin' changes to yer branch till you're ready to ask for feedback.\n"
+ },
+ "key": {
+  "A": "unharnessed",
+  "B": "engine",
+  "C": "yarn-dinkum",
+  "D": "dinkum-3",
+  "E": "yarn-troppo"
+ }
+}

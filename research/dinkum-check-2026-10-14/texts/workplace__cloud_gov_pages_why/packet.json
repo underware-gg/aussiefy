@@ -1,0 +1,692 @@
+{
+ "rubric_version": 3,
+ "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as vulgar, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+ "prompt": "BRIEF: level 3, vulgarity 1\n\nORIGINAL:\nIf you’re a program manager or a federal web developer you’ve probably been given a seemingly simple task: create a website as part of an initiative at your agency. The hardest part is often not crafting the content or designing the website, but getting the security and privacy compliance in order to launch and maintain the actual website. For that work, you might have to hire a contractor or put extra strain on your agency’s web team.\n\nIt shouldn’t be that way.\n\n## Why Pages?\n\nPages serves our fellow federal partners by expertly managing the backend and compliance work to launch and manage a website, allowing you to focus your expertise on your content.\n\n- **FedRAMP Certified Platform** Pages is hosted on cloud.gov, a platform with security and compliance verified by the FedRAMP Joint Authorization Board, which means you can trust that your site will be fast, reliable, and ready for unexpected surges in traffic.\n\n- **Easy previews and content approvals** Pages builds out draft updates to your site at a special preview URL. This enables your team to know their changes will show up correctly when pushed to the main site, and makes it easy to get signoff on content updates from stakeholders.\n\n[![Diagram of Pages architecture]({{site.baseurl}}/assets/images/pages/how-pages-works-diagram.png)]({{site.baseurl}}/assets/documents/how-pages-works-diagram.pdf)\n\n## Why static websites?\n\nPages generates static websites instead of using a more complex content management system (CMS) like Drupal or WordPress. There are several advantages to static websites:\n\n- **Less complexity and vulnerability:** Avoiding the use of a traditional CMS means avoiding problems like maintaining  server applications (no PHP or Apache / IIS) in addition to database scaling and redundancy. Production-level static sites generally require one simple static file server or service as opposed to dozens. This means that the whole website is easier to maintain and has fewer vulnerabilities.\n\n- **Update content without writing code:** Static websites often store content in simple text files that anyone on the team can edit. The GitHub editor enables any team member to complete basic edits to their text files regardless of their experience writing code.\n\n- **Easy to host and maintain:** It’s very easy to host static website files on Pages. You can easily take advantage of scaling services like Amazon S3 through Pages where you pay only for what you use.\n\n- **Fully customizable:** Designers and developers can customize static websites into whatever form they want without having to strip away CMS-provided features and defaults. Static sites can be used to build many different types of sites, from organization homepages or intranets to pre-generated web application program interfaces that display data from a separate server.\n\nCANDIDATE A:\nIf you’re a program manager or a federal web developer, chances are you’ve been handed a job that looks simple enough: make a website for some initiative at your agency. The hardest bit often isn't writing the content or designing the site, it's getting the security and privacy compliance sorted so you can launch the actual website and keep it running. For that, you might have to bring in a contractor or pile extra work on your agency’s web team.\n\nFair go, it shouldn’t be like that.\n\n## Why Pages?\n\nPages looks after our fellow federal partners by handling the backend and compliance work for launching and running a website, and doing it properly, so you can put your know-how into your content.\n\n- **FedRAMP Certified Platform** Pages is hosted on cloud.gov, a platform with its security and compliance checked off by the FedRAMP Joint Authorization Board, so you can count on your site being fast, reliable, and ready for any surprise rush of traffic.\n\n- **Easy previews and content approvals** Pages builds draft updates to your site at a special preview URL. That way your team knows their changes will come up right when they're pushed to the main site, and it's easy to get the tick from stakeholders on content updates.\n\n[![Diagram of Pages architecture]({{site.baseurl}}/assets/images/pages/how-pages-works-diagram.png)]({{site.baseurl}}/assets/documents/how-pages-works-diagram.pdf)\n\n## Why static websites?\n\nPages makes static websites rather than using a more complicated content management system (CMS) like Drupal or WordPress. Static websites have a few things going for them:\n\n- **Less complexity and vulnerability:** Steering clear of a traditional CMS means steering clear of headaches like looking after server applications (no PHP or Apache / IIS), on top of database scaling and redundancy. A production-level static site generally needs one simple static file server or service, not dozens. So the whole website's easier to look after and has fewer weak spots.\n\n- **Update content without writing code:** Static websites often keep their content in simple text files that anyone on the team can edit. The GitHub editor lets any team member make basic edits to their text files, however much or little code they've written.\n\n- **Easy to host and maintain:** Hosting static website files on Pages is dead easy. You can make the most of scaling services like Amazon S3 through Pages, where you only pay for what you use.\n\n- **Fully customizable:** Designers and developers can shape static websites into whatever form they like without having to strip out CMS-provided features and defaults. You can build all sorts of sites with static sites, from organisation homepages or intranets to pre-generated web application program interfaces that show data from a separate server.\n\nCANDIDATE B:\nIf you’re a program manager or a federal web developer, chances are you’ve been handed a job that looks dead simple: build a website as part of an initiative at your agency. The hard yakka usually isn’t writing the content or designing the site, though. It’s getting the security and privacy compliance sorted so you can actually launch the thing and keep it running. For that lot, you might have to get a contractor in or put your agency’s web team under the pump.\n\nIt shouldn’t be like that.\n\n## Why Pages?\n\nPages looks after our fellow federal partners by handling the backend and compliance work of launching and running a website, and doing it properly, so you can put your know-how into your content.\n\n- **FedRAMP Certified Platform** Pages is hosted on cloud.gov, a platform with security and compliance verified by the FedRAMP Joint Authorization Board, so you can count on your site being fast, reliable, and ready for whatever traffic rush comes out of the blue.\n\n- **Easy previews and content approvals** Pages builds your draft updates out at a special preview URL. That way your team knows their changes will come up right when they’re pushed to the main site, and getting signoff on content updates from stakeholders is easy as.\n\n[![Diagram of Pages architecture]({{site.baseurl}}/assets/images/pages/how-pages-works-diagram.png)]({{site.baseurl}}/assets/documents/how-pages-works-diagram.pdf)\n\n## Why static websites?\n\nPages generates static websites rather than using a more complicated content management system (CMS) like Drupal or WordPress. Static websites have a fair few things going for them:\n\n- **Less complexity and vulnerability:** Steer clear of a traditional CMS and you steer clear of headaches like keeping server applications running (no PHP or Apache / IIS), on top of database scaling and redundancy. Production-level static sites generally need one simple static file server or service, not dozens. So the whole website is easier to look after and has fewer vulnerabilities.\n\n- **Update content without writing code:** Static websites often keep their content in simple text files that anyone on the team can edit. With the GitHub editor, any team member can do basic edits to their text files, whether or not they’ve ever written a line of code.\n\n- **Easy to host and maintain:** It’s flamin’ easy to host static website files on Pages. Through Pages you can make the most of scaling services like Amazon S3, where you only pay for what you use.\n\n- **Fully customizable:** Designers and developers can customise static websites into whatever shape they like without having to rip out the features and defaults a CMS comes with. Static sites can be used to build all sorts of sites, from organisation homepages or intranets to pre-generated web application program interfaces that display data from a separate server.\n\nCANDIDATE C:\nIf you’re a program manager or a federal web developer, chances are you’ve been handed a job that looks simple enough: put together a website for an initiative at your agency. Thing is, the hard yakka usually isn't writing the content or designing the site. It's getting the security and privacy compliance sorted so you can launch the actual website and keep it running. For that, you might have to bring in a contractor or load up your agency’s web team even more.\n\nIt shouldn’t be like that.\n\n## Why Pages?\n\nPages is there for our fellow federal partners: we handle the backend and compliance work of launching and running a website, and we know what we're doing, so you can put your know-how into your content.\n\n- **FedRAMP Certified Platform** Pages is hosted on cloud.gov, a platform whose security and compliance have been checked by the FedRAMP Joint Authorization Board. So you can count on your site being fast, reliable, and ready for a surge in traffic you didn't see coming.\n\n- **Easy previews and content approvals** Pages builds your draft updates at a special preview URL. That way your team knows their changes will come out right once they're pushed to the main site, and getting signoff on content updates from stakeholders is no drama.\n\n[![Diagram of Pages architecture]({{site.baseurl}}/assets/images/pages/how-pages-works-diagram.png)]({{site.baseurl}}/assets/documents/how-pages-works-diagram.pdf)\n\n## Why static websites?\n\nPages generates static websites rather than running a more complicated content management system (CMS) like Drupal or WordPress. And static websites have a fair bit going for them:\n\n- **Less complexity and vulnerability:** Skip the traditional CMS and you skip the headaches that come with it, like maintaining server applications (no PHP or Apache / IIS), plus database scaling and redundancy. A production-level static site generally needs one simple static file server or service, not dozens. So the whole website's easier to look after and has fewer vulnerabilities.\n\n- **Update content without writing code:** Static websites often keep their content in simple text files that anyone on the team can edit. With the GitHub editor, any team member can make basic edits to their text files, whether or not they've ever written a line of code.\n\n- **Easy to host and maintain:** Hosting static website files on Pages is dead easy. And through Pages you can make use of scaling services like Amazon S3 without any fuss, where you only pay for what you use.\n\n- **Fully customisable:** Designers and developers can shape static websites into whatever they like, without having to strip out CMS-provided features and defaults first. You can build all sorts of sites with them, from organisation homepages or intranets to pre-generated web application program interfaces that display data from a separate server.",
+ "schema": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "object",
+    "properties": {
+     "A": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "B": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "C": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "A",
+     "B",
+     "C"
+    ],
+    "additionalProperties": false
+   },
+   "rankings": {
+    "type": "object",
+    "properties": {
+     "tone": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "flow": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "variety": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "essence": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "overall": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "tone",
+     "flow",
+     "variety",
+     "essence",
+     "overall"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "required": [
+   "candidates",
+   "rankings"
+  ],
+  "additionalProperties": false
+ },
+ "original": "If you’re a program manager or a federal web developer you’ve probably been given a seemingly simple task: create a website as part of an initiative at your agency. The hardest part is often not crafting the content or designing the website, but getting the security and privacy compliance in order to launch and maintain the actual website. For that work, you might have to hire a contractor or put extra strain on your agency’s web team.\n\nIt shouldn’t be that way.\n\n## Why Pages?\n\nPages serves our fellow federal partners by expertly managing the backend and compliance work to launch and manage a website, allowing you to focus your expertise on your content.\n\n- **FedRAMP Certified Platform** Pages is hosted on cloud.gov, a platform with security and compliance verified by the FedRAMP Joint Authorization Board, which means you can trust that your site will be fast, reliable, and ready for unexpected surges in traffic.\n\n- **Easy previews and content approvals** Pages builds out draft updates to your site at a special preview URL. This enables your team to know their changes will show up correctly when pushed to the main site, and makes it easy to get signoff on content updates from stakeholders.\n\n[![Diagram of Pages architecture]({{site.baseurl}}/assets/images/pages/how-pages-works-diagram.png)]({{site.baseurl}}/assets/documents/how-pages-works-diagram.pdf)\n\n## Why static websites?\n\nPages generates static websites instead of using a more complex content management system (CMS) like Drupal or WordPress. There are several advantages to static websites:\n\n- **Less complexity and vulnerability:** Avoiding the use of a traditional CMS means avoiding problems like maintaining  server applications (no PHP or Apache / IIS) in addition to database scaling and redundancy. Production-level static sites generally require one simple static file server or service as opposed to dozens. This means that the whole website is easier to maintain and has fewer vulnerabilities.\n\n- **Update content without writing code:** Static websites often store content in simple text files that anyone on the team can edit. The GitHub editor enables any team member to complete basic edits to their text files regardless of their experience writing code.\n\n- **Easy to host and maintain:** It’s very easy to host static website files on Pages. You can easily take advantage of scaling services like Amazon S3 through Pages where you pay only for what you use.\n\n- **Fully customizable:** Designers and developers can customize static websites into whatever form they want without having to strip away CMS-provided features and defaults. Static sites can be used to build many different types of sites, from organization homepages or intranets to pre-generated web application program interfaces that display data from a separate server.\n",
+ "level": 3,
+ "vulgarity": 1,
+ "candidates": {
+  "A": "If you’re a program manager or a federal web developer, chances are you’ve been handed a job that looks simple enough: make a website for some initiative at your agency. The hardest bit often isn't writing the content or designing the site, it's getting the security and privacy compliance sorted so you can launch the actual website and keep it running. For that, you might have to bring in a contractor or pile extra work on your agency’s web team.\n\nFair go, it shouldn’t be like that.\n\n## Why Pages?\n\nPages looks after our fellow federal partners by handling the backend and compliance work for launching and running a website, and doing it properly, so you can put your know-how into your content.\n\n- **FedRAMP Certified Platform** Pages is hosted on cloud.gov, a platform with its security and compliance checked off by the FedRAMP Joint Authorization Board, so you can count on your site being fast, reliable, and ready for any surprise rush of traffic.\n\n- **Easy previews and content approvals** Pages builds draft updates to your site at a special preview URL. That way your team knows their changes will come up right when they're pushed to the main site, and it's easy to get the tick from stakeholders on content updates.\n\n[![Diagram of Pages architecture]({{site.baseurl}}/assets/images/pages/how-pages-works-diagram.png)]({{site.baseurl}}/assets/documents/how-pages-works-diagram.pdf)\n\n## Why static websites?\n\nPages makes static websites rather than using a more complicated content management system (CMS) like Drupal or WordPress. Static websites have a few things going for them:\n\n- **Less complexity and vulnerability:** Steering clear of a traditional CMS means steering clear of headaches like looking after server applications (no PHP or Apache / IIS), on top of database scaling and redundancy. A production-level static site generally needs one simple static file server or service, not dozens. So the whole website's easier to look after and has fewer weak spots.\n\n- **Update content without writing code:** Static websites often keep their content in simple text files that anyone on the team can edit. The GitHub editor lets any team member make basic edits to their text files, however much or little code they've written.\n\n- **Easy to host and maintain:** Hosting static website files on Pages is dead easy. You can make the most of scaling services like Amazon S3 through Pages, where you only pay for what you use.\n\n- **Fully customizable:** Designers and developers can shape static websites into whatever form they like without having to strip out CMS-provided features and defaults. You can build all sorts of sites with static sites, from organisation homepages or intranets to pre-generated web application program interfaces that show data from a separate server.\n",
+  "B": "If you’re a program manager or a federal web developer, chances are you’ve been handed a job that looks dead simple: build a website as part of an initiative at your agency. The hard yakka usually isn’t writing the content or designing the site, though. It’s getting the security and privacy compliance sorted so you can actually launch the thing and keep it running. For that lot, you might have to get a contractor in or put your agency’s web team under the pump.\n\nIt shouldn’t be like that.\n\n## Why Pages?\n\nPages looks after our fellow federal partners by handling the backend and compliance work of launching and running a website, and doing it properly, so you can put your know-how into your content.\n\n- **FedRAMP Certified Platform** Pages is hosted on cloud.gov, a platform with security and compliance verified by the FedRAMP Joint Authorization Board, so you can count on your site being fast, reliable, and ready for whatever traffic rush comes out of the blue.\n\n- **Easy previews and content approvals** Pages builds your draft updates out at a special preview URL. That way your team knows their changes will come up right when they’re pushed to the main site, and getting signoff on content updates from stakeholders is easy as.\n\n[![Diagram of Pages architecture]({{site.baseurl}}/assets/images/pages/how-pages-works-diagram.png)]({{site.baseurl}}/assets/documents/how-pages-works-diagram.pdf)\n\n## Why static websites?\n\nPages generates static websites rather than using a more complicated content management system (CMS) like Drupal or WordPress. Static websites have a fair few things going for them:\n\n- **Less complexity and vulnerability:** Steer clear of a traditional CMS and you steer clear of headaches like keeping server applications running (no PHP or Apache / IIS), on top of database scaling and redundancy. Production-level static sites generally need one simple static file server or service, not dozens. So the whole website is easier to look after and has fewer vulnerabilities.\n\n- **Update content without writing code:** Static websites often keep their content in simple text files that anyone on the team can edit. With the GitHub editor, any team member can do basic edits to their text files, whether or not they’ve ever written a line of code.\n\n- **Easy to host and maintain:** It’s flamin’ easy to host static website files on Pages. Through Pages you can make the most of scaling services like Amazon S3, where you only pay for what you use.\n\n- **Fully customizable:** Designers and developers can customise static websites into whatever shape they like without having to rip out the features and defaults a CMS comes with. Static sites can be used to build all sorts of sites, from organisation homepages or intranets to pre-generated web application program interfaces that display data from a separate server.\n",
+  "C": "If you’re a program manager or a federal web developer, chances are you’ve been handed a job that looks simple enough: put together a website for an initiative at your agency. Thing is, the hard yakka usually isn't writing the content or designing the site. It's getting the security and privacy compliance sorted so you can launch the actual website and keep it running. For that, you might have to bring in a contractor or load up your agency’s web team even more.\n\nIt shouldn’t be like that.\n\n## Why Pages?\n\nPages is there for our fellow federal partners: we handle the backend and compliance work of launching and running a website, and we know what we're doing, so you can put your know-how into your content.\n\n- **FedRAMP Certified Platform** Pages is hosted on cloud.gov, a platform whose security and compliance have been checked by the FedRAMP Joint Authorization Board. So you can count on your site being fast, reliable, and ready for a surge in traffic you didn't see coming.\n\n- **Easy previews and content approvals** Pages builds your draft updates at a special preview URL. That way your team knows their changes will come out right once they're pushed to the main site, and getting signoff on content updates from stakeholders is no drama.\n\n[![Diagram of Pages architecture]({{site.baseurl}}/assets/images/pages/how-pages-works-diagram.png)]({{site.baseurl}}/assets/documents/how-pages-works-diagram.pdf)\n\n## Why static websites?\n\nPages generates static websites rather than running a more complicated content management system (CMS) like Drupal or WordPress. And static websites have a fair bit going for them:\n\n- **Less complexity and vulnerability:** Skip the traditional CMS and you skip the headaches that come with it, like maintaining server applications (no PHP or Apache / IIS), plus database scaling and redundancy. A production-level static site generally needs one simple static file server or service, not dozens. So the whole website's easier to look after and has fewer vulnerabilities.\n\n- **Update content without writing code:** Static websites often keep their content in simple text files that anyone on the team can edit. With the GitHub editor, any team member can make basic edits to their text files, whether or not they've ever written a line of code.\n\n- **Easy to host and maintain:** Hosting static website files on Pages is dead easy. And through Pages you can make use of scaling services like Amazon S3 without any fuss, where you only pay for what you use.\n\n- **Fully customisable:** Designers and developers can shape static websites into whatever they like, without having to strip out CMS-provided features and defaults first. You can build all sorts of sites with them, from organisation homepages or intranets to pre-generated web application program interfaces that display data from a separate server.\n"
+ },
+ "key": {
+  "A": "dinkum-4",
+  "B": "yarn-dinkum",
+  "C": "dinkum-3"
+ }
+}

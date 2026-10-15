@@ -1,0 +1,175 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "engine": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 4,
+   "flow": 4,
+   "variety": 2,
+   "essence": 4
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 3,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Every fact kept: the agencies, both quotes, the Pine Creek mine, the full mineral list, 660 ft/330 ft spacing, contractors, AS350 stinger, daylight only, counties, ScienceBase. Asides (\"Pretty much half the periodic table, really.\", \"so no need to duck for cover in the backyard\") react to the original.",
+   "sense": "Terms fit: \"pitching in on the nation's work\", \"dead passive\", \"signed off for low-level flying\", \"done by the book\", \"a chunk of eastern California\".",
+   "authenticity": "Sounds like an Australian explaining a press release: \"Heads up:\", \"got NRG Exploration USA Inc. and Woolpert in\", \"choppers\".",
+   "register": "Level 3 throughout, quotes included, without becoming a pub yarn; no swearing.",
+   "tone": "Informative and reassuring, as the release is; the change to a chatty voice is what the brief asks.",
+   "flow": "Reads smoothly: \"These science instruments are dead passive. They don't give off anything that's a risk to people, animals or plants.\"",
+   "variety": "Varied, though \"matter\" and \"dig up\" recur.",
+   "essence": "Unmistakably the USGS survey notice."
+  },
+  "engine": {
+   "meaning": "The original almost word for word, so nothing is lost (\"No photography or video data will be collected.\").",
+   "sense": "The two changes mostly fit (\"dead passive\"), but \"our bloody understanding\" is wrong in an official's quote.",
+   "authenticity": "What little Aussie there is is bolted on: \"materially improve our bloody understanding of the geology of California\".",
+   "register": "Essentially untranslated; only \"dead passive\", \"bloody\" and \"-ise/-metres\" spelling change. Far under level 3.",
+   "tone": "Official tone kept except the jarring \"bloody\" in the State Geologist's quote.",
+   "flow": "Reads as the original release; one clunk at \"our bloody understanding\".",
+   "variety": "Too little slang to vary; the one oath is the only colour.",
+   "essence": "Recognisably the original, marred only by the bolted-on oath in a quote."
+  },
+  "unharnessed": {
+   "meaning": "All facts kept accurately: \"the biggest historic producer of tungsten in the U.S.\", counties, flight spacing, daylight only.",
+   "sense": "Fits: \"above board under U.S. law\", \"sizing up the potential for geothermal energy\", \"pitching in\", \"takes in a chunk of eastern California\".",
+   "authenticity": "Natural, plain Aussie (\"choppers\", \"Teaming up\"), nothing forced.",
+   "register": "Lighter than level 3: much is close to the release, and the Lancaster quote is left untouched (\"Earth MRI datasets are a coordinated federal-state partnership\").",
+   "tone": "Informative public-notice tone kept.",
+   "flow": "Smooth, but the untouched Lancaster quote sits oddly beside the retold text.",
+   "variety": "Modest but varied: \"joint effort\", \"pitching in\", \"back up\", \"sizing up\".",
+   "essence": "Plainly the same notice."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "Pretty much half the periodic table, really.",
+    "original": "",
+    "severity": "minor",
+    "why": "Harmless aside; slightly flippant for a public notice."
+   },
+   {
+    "quote": "taking a picture of the rocks underneath",
+    "original": "to image geology",
+    "severity": "minor",
+    "why": "Could suggest photography, which the release later rules out; the later line clarifies."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "our bloody understanding",
+    "original": "our understanding",
+    "severity": "major",
+    "why": "Oath put in a government scientist's mouth; an Australian would wince."
+   },
+   {
+    "quote": "Low-level airplane flights will begin in early October",
+    "original": "Low-level airplane flights will begin in early October",
+    "severity": "critical",
+    "why": "Text left untranslated for a level-3 brief."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "\"Earth MRI datasets are a coordinated federal-state partnership to collect modern data in priority regions of the state",
+    "original": "\"Earth MRI datasets are a coordinated federal-state partnership to collect modern data in priority regions of the state",
+    "severity": "major",
+    "why": "A whole quote left untranslated."
+   },
+   {
+    "quote": "The aircraft will be flown by experienced pilots who are specially trained and approved for low-level flying.",
+    "original": "The aircraft will be flown by experienced pilots who are specially trained and approved for low-level flying.",
+    "severity": "minor",
+    "why": "Further stretches left as the original; lighter than the brief."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A complete, natural level-3 retelling of the release, with light, fitting asides.",
+  "engine": "The release almost untouched, with one jarring \"bloody\"; far under the brief.",
+  "unharnessed": "Accurate and natural but lighter than level 3, with one quote left as is."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

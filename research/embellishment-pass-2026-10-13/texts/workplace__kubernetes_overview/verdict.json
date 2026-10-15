@@ -1,0 +1,287 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn-troppo": "C",
+  "yarn-deadset": "D",
+  "yarn-dinkum": "E"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 5,
+   "flow": 5,
+   "variety": 1,
+   "essence": 5
+  },
+  "yarn-troppo": {
+   "meaning": 4,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 4
+  },
+  "yarn-deadset": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 4,
+   "variety": 3,
+   "essence": 5
+  },
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every feature and claim survives, with colour hanging off the original (\"the bloke at the wheel\", \"no worries\"). \"make sure nothing ever falls over\" renders \"no downtime\" fairly; \"doesn't let on to clients they exist till they're ready to serve\" is a loose but workable gloss of \"doesn't advertise them\".",
+   "sense": "Most terms fit (\"Say a container carks it\", \"turf the old ones\", \"Bolt features onto your Kubernetes cluster\"), but \"knocks off containers that won't answer\" can read as stealing or finishing work, and \"doesn't let on to clients they exist\" strains the technical sense of advertising to clients.",
+   "authenticity": "Natural Australian voice: \"Wouldn't it be a bloody sight easier\", \"cop a hit and keep going\", \"without mucking about with the upstream source code\", \"knocking up developer platforms\".",
+   "register": "Level 4 weight across prose and bullets (\"If a container's getting slammed with traffic\", \"stash and manage sensitive stuff\") without yarn asides; swearing within dad level (\"a bloody sight easier\").",
+   "tone": "The docs' upbeat explanatory tone survives: \"That's where Kubernetes rides in to save the day!\", \"Kubernetes gives you the building blocks\".",
+   "flow": "Reads smoothly: \"it'll shift the actual state over to that at a steady, controlled clip\". \"all-in, everything-in-the-box PaaS\" stacks a little.",
+   "variety": "Varied: \"carks it\", \"fire up\", \"slammed\", \"takes your fancy\", \"turf\", \"bang for your buck\", \"stash\", \"Dishing out\", \"Bolt\"; \"falls over\" recurs three times.",
+   "essence": "Unmistakably the Kubernetes overview, feature list and \"What Kubernetes is not\" intact, retold."
+  },
+  "engine": {
+   "meaning": "Identical to the original apart from \"behaviour\" and a couple of contractions (\"there's no downtime\", \"isn't monolithic\").",
+   "sense": "No Aussie terms to take a wrong sense; \"Kubernetes provides you with a framework to run distributed systems resiliently\" is the original.",
+   "authenticity": "No Aussie beyond spelling; US \"containerized\" is even left in (\"run containerized tasks\").",
+   "register": "Untranslated: \"Kubernetes combines\" and \"best-of-breed ideas and practices\" are verbatim. Far off a level 4 brief.",
+   "tone": "The docs tone is kept exactly: \"That's how Kubernetes comes to the rescue!\"",
+   "flow": "Reads as the original documentation: \"It takes care of scaling and failover for your application\".",
+   "variety": "No slang at all: \"Kubernetes provides you with:\"",
+   "essence": "It is the original: \"Kubernetes is not a traditional, all-inclusive PaaS\"."
+  },
+  "yarn-troppo": {
+   "meaning": "All features survive, but some additions go beyond colour: \"That's just what you get when you can't be bothered spelling it out\" invents a reason for K8s, \"Say a container carks it at three in the morning\" adds a detail, and \"so the deployment stays stable and nothing falls over\" doubles a claim. \"Out with the old, in with the new.\" and \"Both flavours.\" hang off the original.",
+   "sense": "Terms fit: \"getting hammered with traffic\", \"takes your fancy\", \"brings to the party\", \"good to go\", \"take 'em or leave 'em\".",
+   "authenticity": "Natural voice, with a nice local image (\"like a bloke packing the boot for a trip down the coast\"), but stock framing lines (\"Pull up a stool.\", \"Your call, mate.\") are bolted on.",
+   "register": "Heavier than level 4, a full yarn: \"Pull up a stool. So the name Kubernetes, right\", \"No half-baked containers on its watch.\", \"Now, don't go thinking Kubernetes is your traditional, all-in PaaS (Platform as a Service) system, cos it isn't.\" No swearing.",
+   "tone": "The explanatory, upbeat tone survives as a yarn, which the brief allows; \"Your call, mate.\" and \"No half-baked containers on its watch.\" lean jokey but not against the original.",
+   "flow": "Reads aloud naturally, though padded: \"Kubernetes lets you store and manage sensitive information, your passwords, OAuth tokens, and SSH keys and that.\"",
+   "variety": "Varied throughout: \"beaut\", \"carks it\", \"cop a hit\", \"without breaking a sweat\", \"brings to the party\", \"hammered\", \"take 'em or leave 'em\".",
+   "essence": "Recognisably the overview with its structure intact, though the asides shift it from documentation toward a pub explanation."
+  },
+  "yarn-deadset": {
+   "meaning": "Faithful: every feature survives, e.g. \"get rid of existing containers and hand all their resources over to the new container\".",
+   "sense": "The terms used fit: \"if a container carks it\", \"a beaut way to bundle\", \"the pick of the ideas\", \"isn't one big lump\".",
+   "authenticity": "Natural where Aussie, but much is plain docs English: \"You can describe the desired state for your deployed containers using Kubernetes, and it can change the actual state to the desired state at a controlled rate.\"",
+   "register": "Noticeably light for level 4: most bullets are near-verbatim (\"Add features to your Kubernetes cluster without changing upstream source code.\", \"Allocation of IPv4 and IPv6 addresses to Pods and Services.\").",
+   "tone": "The docs tone is kept: \"That's how Kubernetes comes to the rescue!\"",
+   "flow": "Reads smoothly, though \"to run distributed systems so they bounce back\" is a slightly awkward join.",
+   "variety": "Limited slang to vary: \"beaut\", \"carks it\", \"pick of the ideas\", \"one big lump\", \"room to move\".",
+   "essence": "Unmistakably the overview, lightly retold."
+  },
+  "yarn-dinkum": {
+   "meaning": "Every point survives: \"Say a container carks it: another container needs to start up.\", \"these default solutions are optional and pluggable\".",
+   "sense": "Terms fit: \"a beaut way to bundle\", \"chuck in the pick of the ideas\", \"good to go\", \"isn't one big lump, mind\".",
+   "authenticity": "Mostly natural (\"Thing is, in a production environment you've got to keep an eye on\"), but the opener \"Okay, so.\" is not an Aussie tic.",
+   "register": "Close to level 4 in the prose (\"no worries\", \"a fair bit more\"), lighter in the bullets (\"Allocation of IPv4 and IPv6 addresses to Pods and Services.\"). No swearing.",
+   "tone": "Upbeat explanatory tone kept: \"Well, that's where Kubernetes comes to the rescue!\"",
+   "flow": "Reads smoothly: \"Kubernetes sets you up with a framework for running distributed systems that bounce back when things go wrong.\"",
+   "variety": "Fairly varied (\"beaut\", \"carks it\", \"heaps of traffic\", \"good to go\", \"room to move\"), with \"Now,\" and \"Well,\" openers.",
+   "essence": "Unmistakably the overview, retold in a friendly voice."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "knocks off containers that won't",
+    "original": "kills containers that don't",
+    "severity": "minor",
+    "why": "\"Knock off\" also means steal or finish work; \"kills off\" would be clearer."
+   },
+   {
+    "quote": "doesn't let on to clients they exist till they're",
+    "original": "doesn't advertise them to clients until they",
+    "severity": "minor",
+    "why": "Loose rendering of a technical term (routing traffic), though the gist survives."
+   },
+   {
+    "quote": "all-in, everything-in-the-box PaaS",
+    "original": "all-inclusive PaaS",
+    "severity": "minor",
+    "why": "Two near-synonyms stacked."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Kubernetes combines",
+    "original": "Kubernetes combines",
+    "severity": "critical",
+    "why": "The whole text is left untranslated, missing the level 4 brief entirely."
+   },
+   {
+    "quote": "run containerized tasks",
+    "original": "run containerized tasks",
+    "severity": "minor",
+    "why": "US spelling left in while \"behaviour\" was changed."
+   }
+  ],
+  "yarn-troppo": [
+   {
+    "quote": "That's just what you get when you can't be bothered spelling it out",
+    "original": "K8s as an abbreviation results from counting the eight letters between the \"K\" and the \"s\".",
+    "severity": "minor",
+    "why": "Invents a motive; the original just explains the abbreviation."
+   },
+   {
+    "quote": "Say a container carks it at three in the morning",
+    "original": "For example, if a container goes down",
+    "severity": "minor",
+    "why": "Adds a detail not in the original."
+   },
+   {
+    "quote": "Pull up a stool.",
+    "original": "",
+    "severity": "minor",
+    "why": "Stock yarn framing; heavier than level 4."
+   },
+   {
+    "quote": "Your call, mate.",
+    "original": "",
+    "severity": "minor",
+    "why": "Tacked-on tag, beyond the brief's weight."
+   }
+  ],
+  "yarn-deadset": [
+   {
+    "quote": "Add features to your Kubernetes cluster without changing upstream source code.",
+    "original": "Add features to your Kubernetes cluster without changing upstream source code.",
+    "severity": "major",
+    "why": "Large parts left as the original, well under a level 4 brief."
+   },
+   {
+    "quote": "to run distributed systems so they bounce back",
+    "original": "to run distributed systems resiliently",
+    "severity": "minor",
+    "why": "Slightly awkward rendering."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "Okay, so.",
+    "original": "",
+    "severity": "minor",
+    "why": "Filler opener, not an Aussie tic."
+   },
+   {
+    "quote": "Allocation of IPv4 and IPv6 addresses to Pods and Services.",
+    "original": "Allocation of IPv4 and IPv6 addresses to Pods and Services.",
+    "severity": "minor",
+    "why": "Several bullets left verbatim, a shade lighter than the brief."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Natural, well weighted and faithful; a couple of slightly loose technical glosses.",
+  "engine": "The original with a spelling change; no Aussie retelling.",
+  "yarn-troppo": "Lively, natural and varied, but a full yarn heavier than asked, with a few invented details.",
+  "yarn-deadset": "Faithful and clean but too light for level 4.",
+  "yarn-dinkum": "Faithful, smooth and natural, slightly light in the bullets."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn-dinkum"
+   ],
+   [
+    "engine",
+    "yarn-deadset"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn-dinkum"
+   ],
+   [
+    "engine"
+   ],
+   [
+    "yarn-troppo",
+    "yarn-deadset"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-troppo"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "yarn-deadset"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn-dinkum"
+   ],
+   [
+    "yarn-deadset"
+   ],
+   [
+    "engine"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "yarn-troppo",
+    "yarn-deadset"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

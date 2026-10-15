@@ -1,0 +1,247 @@
+{
+ "ok": true,
+ "level": 5,
+ "level_name": "swaggie",
+ "vulgarity": 2,
+ "vulgarity_name": "uncle-bob",
+ "policy_warnings": [],
+ "counts": {
+  "critical": 0,
+  "major": 0,
+  "minor": 0
+ },
+ "problems": [
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "The application needs one result from all inputs, and the result can be public.",
+   "why": "left exactly as it was",
+   "sentence": 4
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "The result is a computation that BFV supports well, for example a sum, a count, or a tally.",
+   "why": "left exactly as it was",
+   "sentence": 5
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "No single operator is acceptable as the custodian of the inputs.",
+   "why": "left exactly as it was",
+   "sentence": 6
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "The application can wait for the E3 stages.",
+   "why": "left exactly as it was",
+   "sentence": 7
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "Part of the E3      What CRISP does                                                                              \n      ",
+   "why": "left exactly as it was",
+   "sentence": 11
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "Inputs              Each voter encrypts a ballot in the browser under the committee key.",
+   "why": "left exactly as it was",
+   "sentence": 12
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "Input proof         The client generates a Noir proof that the ballot is valid.",
+   "why": "left exactly as it was",
+   "sentence": 13
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "Data availability   The ciphertext bytes go to Avail.",
+   "why": "left exactly as it was",
+   "sentence": 15
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "The program checks the         receipt.",
+   "why": "left exactly as it was",
+   "sentence": 16
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "Secure process      An        program adds the encrypted ballots into an encrypted tally.",
+   "why": "left exactly as it was",
+   "sentence": 17
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "Output              The committee decrypts only the tally.",
+   "why": "left exactly as it was",
+   "sentence": 18
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "Start\nwith the [CRISP introduction                      , then follow [Setup                to run it.",
+   "why": "left exactly as it was",
+   "sentence": 21
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "This pattern matches the E3\nmodel.",
+   "why": "left exactly as it was",
+   "sentence": 23
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "The limit is the computation.",
+   "why": "left exactly as it was",
+   "sentence": 24
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "The template and CRISP use only homomorphic addition.",
+   "why": "left exactly as it was",
+   "sentence": 25
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "A design can also decrypt an aggregate, for example the number of bids at each price level.",
+   "why": "left exactly as it was",
+   "sentence": 28
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "This design reveals the aggregate, but\nnot the individual bids.",
+   "why": "left exactly as it was",
+   "sentence": 30
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "This pattern uses the same addition as the default template, which sums all inputs.",
+   "why": "left exactly as it was",
+   "sentence": 34
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "A small number of inputs can reveal\n  an individual value, for example a tally with one vote.",
+   "why": "left exactly as it was",
+   "sentence": 36
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "The program must enforce a minimum input\n  count or other rules where this matters.",
+   "why": "left exactly as it was",
+   "sentence": 37
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "**The committee is the trust boundary.** T + 1 committee members that collude can decrypt any\n  ciphertext under the com",
+   "why": "left exactly as it was",
+   "sentence": 38
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "A larger committee raises T.",
+   "why": "left exactly as it was",
+   "sentence": 39
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "On mainnet, only         (T = 9)\n  can be requested at launch.",
+   "why": "left exactly as it was",
+   "sentence": 40
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "**Inputs need validation.** The E3 program decides which inputs to accept.",
+   "why": "left exactly as it was",
+   "sentence": 41
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "Without an input proof,\n  a malformed ciphertext can corrupt the result or stop the E3.",
+   "why": "left exactly as it was",
+   "sentence": 42
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "The [E3 lifecycle                       page lists the values.",
+   "why": "left exactly as it was",
+   "sentence": 44
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "**Costs grow with the committee.** The fee pays for the committee work, and it grows with N.",
+   "why": "left exactly as it was",
+   "sentence": 45
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "The design can help an application meet data-protection goals.",
+   "why": "left exactly as it was",
+   "sentence": 47
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "No single operator holds a plaintext\ninput, and the committee decrypts only the output.",
+   "why": "left exactly as it was",
+   "sentence": 48
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "The application owner is responsible for that assessment.",
+   "why": "left exactly as it was",
+   "sentence": 50
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "The complete private voting application, from circuits to client.",
+   "why": "left exactly as it was",
+   "sentence": 51
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "Design rules for secure E3 programs.",
+   "why": "left exactly as it was",
+   "sentence": 53
+  }
+ ],
+ "metrics": {
+  "original_words": 769,
+  "translation_words": 781,
+  "sentences": 54,
+  "translation_sentences": 55,
+  "untouched_share": 0.59
+ },
+ "scope": "Deterministic checks: policy, spelling, facts, markup, sentence structure. Not judged: tone, flow, whether each swap took the right sense (use the judge for those)."
+}

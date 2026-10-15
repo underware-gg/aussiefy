@@ -1,0 +1,61 @@
+# Gap-filling benchmark: can the model put a plain-English word the dictionary doesn't know under the right
+# concept, without doing the same for everyday words? Scored the way `aussiefy gaps` scores (the word against
+# each concept's description, triggers and glosses; the nearest concept wins). Written before measuring (1.2.0).
+#
+#   fill       words no trigger or form covers, with the concept they belong to. They are kept out of every
+#              training source (scripts/train_embedder.py excludes them from the WordNet pairs), so this measures
+#              generalisation, not memory.
+#   no_fill    words no concept is about, which appear in no trigger, description or form (so `aussiefy gaps`
+#              would really score them); the model's best score for them should stay under the gaps cut-off.
+#              Fixed after the first measurement: the original list (going, home, back, time, ...) was made of words
+#              that sit inside trigger labels ("go home"), which gaps reports as "already a trigger" and never scores.
+# Words that later become triggers must move out of `fill` (a release checks this).
+
+fill:
+  gleeful: HAPPY
+  cheerful: HAPPY
+  sorrowful: SAD
+  melancholy: SAD
+  morose: SAD
+  wrathful: ANGRY
+  indignant: ANGRY
+  exasperated: ANGRY
+  fearful: SCARED
+  timid: SCARED
+  drowsy: TIRED
+  sleepy: TIRED
+  sozzled: DRUNK
+  affluent: RICH
+  prosperous: RICH
+  opulent: RICH
+  needy: POOR
+  starved: HUNGRY
+  unclean: DIRTY
+  soiled: DIRTY
+  mammoth: HUGE
+  foolish: STUPID
+  idiotic: STUPID
+  lethargic: LAZY
+  indolent: LAZY
+  slothful: LAZY
+  deceitful: DODGY
+  fraudulent: DODGY
+  ailing: SICK
+  feverish: SICK
+  apprehensive: NERVOUS
+  uneasy: NERVOUS
+  tense: NERVOUS
+  dehydrated: THIRSTY
+  chilly: FREEZING
+  frosty: FREEZING
+  icy: FREEZING
+  sweltering: SCORCHING
+  torrid: SCORCHING
+  pricy: EXPENSIVE
+  tedious: BORED
+  ungainly: CLUMSY
+  hapless: UNLUCKY
+
+no_fill: [table, window, pencil, yellow, tuesday, garden, kitchen, envelope, ladder, umbrella, wooden, plastic,
+          ceiling, bicycle, carpet, calendar, printer, orange, metal, copper, shelf, triangle, spreadsheet, cardboard,
+          staircase, lamp]

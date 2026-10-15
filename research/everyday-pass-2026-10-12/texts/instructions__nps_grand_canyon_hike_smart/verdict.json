@@ -1,0 +1,189 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 2,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 1,
+   "tone": 2,
+   "flow": 1,
+   "variety": 2,
+   "essence": 3
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every point kept: heat, altitude and terrain; salt stains as a sign of dehydration; the rangers' snacks; \"15F to 20F (9C-11C) degrees hotter in the sun\"; no walking \"between 10am and 4pm\"; \"Get going before sunrise and finish up late arvo\"; cotton holding water; heat exhaustion.",
+   "sense": "Terms fit: \"your water and your tucker\", \"you mightn't twig\", \"not running out of puff\" for avoiding fatigue, \"Have a spell somewhere near shade\", \"staying out of strife\" for avoiding hazards.",
+   "authenticity": "Natural Australian guidance: \"Bushwalking\", \"quick smart\", \"keep the tank full\", \"late arvo\". The heading \"Stay Hydrated and Energized\" keeps the US spelling.",
+   "register": "Level-3 touch on a safety guide: clear instructions with a steady layer of idiom and one \"bloody effective\", inside vulgarity 1.",
+   "tone": "Stays a friendly but serious safety notice: \"you still need to stay out of the direct sun in the hottest part of the day\".",
+   "flow": "Reads smoothly: \"Plan your day so you're not walking between 10am and 4pm. Have a spell somewhere near shade and water to dodge the worst of the heat.\"",
+   "variety": "Varied (\"twig\", \"out of puff\", \"strife\", \"spell\"), though \"you've gotta\"/\"you've got to\" recurs.",
+   "essence": "Clearly the park's hydration and heat guidance, all three sections intact."
+  },
+  "yarn": {
+   "meaning": "All points kept, including \"15F to 20F (9C-11C) hotter\", the 10am-4pm window, the predawn start, cotton and soaking a hat. \"white rings\" adds a small detail to 'rings'.",
+   "sense": "Mostly exact: \"come home in one piece\", \"a dead giveaway you're drying out\", \"ending up knackered\", \"full of beans\". \"a whole different kettle of fish\" strains for 'unique challenges', and \"punters\" for heat-sick hikers is a slight stretch.",
+   "authenticity": "Sounds like an Australian ranger: \"terrain that'll work you over properly\", \"Take a breather\", \"cotton's a ripper in the desert!\".",
+   "register": "Level 3: steady idiom without turning into a yarn; \"bloody hot\" is within vulgarity 1.",
+   "tone": "Keeps the serious-but-encouraging safety tone: \"Seasoned desert walkers know that when you walk is the single biggest thing in staying out of strife.\"",
+   "flow": "Reads naturally throughout: \"Stay on top of your water, your food and your rest, and you'll have a much better time of it out on the tracks.\"",
+   "variety": "Varied: \"kettle of fish\", \"dead giveaway\", \"knackered\", \"breather\", \"ripper\", \"full of beans\", \"punters\".",
+   "essence": "Unmistakably the park guidance, with every section and its warnings."
+  },
+  "engine": {
+   "meaning": "Mostly the original verbatim, but swaps break meaning: \"you might not realise how much fluid you're a few snags short of a barbie\" loses 'losing', and \"your body stays esky and more refreshed\" loses 'cooler'. Insults are added: \"ya flamin' mongrel\", \"ya old bastard\".",
+   "sense": "Terms take wrong senses: \"a few snags short of a barbie\" (means dim-witted) for 'losing', \"stays esky\" (a cooler box) for 'cooler', \"ya flamin' mongrel\" aimed at the reader.",
+   "authenticity": "Stage-Australian tags bolted onto park prose: \"ya flamin' mongrel\", \"ya old bastard\", \"Well, I'll be buggered.\" US forms remain (\"Hiking\", \"bandana\", \"energized\").",
+   "register": "Largely untranslated (\"Hiking in the Grand Canyon offers unique challenges due to the combination of ambient temperature, elevation\"), with insults that are wildly off a level-3 safety notice.",
+   "tone": "Abusing the reader (\"ya old bastard\") and \"Well, I'll be buggered.\" make a safety warning flippant.",
+   "flow": "Broken grammar: \"how much fluid you're a few snags short of a barbie\", \"your body stays esky and more refreshed\".",
+   "variety": "Leans on 'ya' insults and the odd swapped word (\"punters\", \"arvo\", \"ripper\").",
+   "essence": "Recognisably the park text because most of it is untouched, but the garbled lines and insults undercut it."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "Stay Hydrated and Energized",
+    "original": "Stay Hydrated and Energized",
+    "severity": "minor",
+    "why": "US spelling 'Energized' left in the heading."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Walking the Grand Canyon is a whole different kettle of fish",
+    "original": "Hiking in the Grand Canyon offers unique challenges",
+    "severity": "minor",
+    "why": "'Different kettle of fish' means a different matter, not quite 'challenging'."
+   },
+   {
+    "quote": "Most of the punters who end up needing emergency medical help",
+    "original": "Most of the people who need emergency medical help",
+    "severity": "minor",
+    "why": "'Punters' is slightly flippant for people needing emergency care."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "how much fluid you're a few snags short of a barbie",
+    "original": "how much fluid you're losing",
+    "severity": "critical",
+    "why": "Idiom for 'dim-witted' replaces 'losing'; the dehydration warning is lost."
+   },
+   {
+    "quote": "your body stays esky and more refreshed",
+    "original": "your body stays cooler and more refreshed",
+    "severity": "major",
+    "why": "'Esky' is a cooler box, not an adjective."
+   },
+   {
+    "quote": "even if you don’t feel thirsty, ya flamin' mongrel",
+    "original": "even if you don’t feel thirsty",
+    "severity": "major",
+    "why": "Insults the reader in a safety notice."
+   },
+   {
+    "quote": "take the time to soak your clothing and body, ya old bastard",
+    "original": "take the time to soak your clothing and body",
+    "severity": "major",
+    "why": "Added abuse; wrong register for a level-3 guide."
+   },
+   {
+    "quote": "Hiking in the Grand Canyon offers unique challenges due to the combination of ambient temperature",
+    "original": "Hiking in the Grand Canyon offers unique challenges due to the combination of ambient temperature",
+    "severity": "major",
+    "why": "Most of the text is left untranslated."
+   },
+   {
+    "quote": "Well, I'll be buggered.",
+    "original": "",
+    "severity": "minor",
+    "why": "Stock tag added at the end."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Natural, accurate level-3 safety guide in an easy Aussie voice.",
+  "yarn": "Natural, varied and faithful level-3 version; a couple of idioms strain slightly.",
+  "engine": "Mostly untranslated, with nonsense swaps that break the safety message and insults aimed at the reader."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

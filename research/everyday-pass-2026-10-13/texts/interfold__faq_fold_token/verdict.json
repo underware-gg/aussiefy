@@ -1,0 +1,158 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "unharnessed": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 3,
+   "authenticity": 2,
+   "register": 2,
+   "tone": 4,
+   "flow": 4,
+   "variety": 1,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "All technical content kept exactly: the three functions, the `BondingRegistry` exit queue, timestamps `1787148000` and `1787148023`, the four setup steps, operator-only bonding, the cold wallet or Safe. Rewordings keep sense: \"FOLD keeps the economic side of the network ticking over.\", \"That would water down accountability\".",
+   "sense": "Terms fit: \"anyone keen to operate a ciphernode\", \"all three hang together\" for interlocked, \"operator-only, on purpose\", \"If you need a hand\".",
+   "authenticity": "Light, natural Australian usage that fits documentation: \"ticking over\", \"keen\", \"misbehaviour\"; nothing bolted on.",
+   "register": "A light level-2 touch suited to docs, clean: \"keen\", \"ticking over\", \"hang together\", \"On top of that\", \"If you need a hand\".",
+   "tone": "Stays a clear, neutral technical FAQ: \"Every FOLD that is bonded to a ciphernode is capital at risk for the operator that runs it.\"",
+   "flow": "Reads smoothly: \"FOLD has three main jobs, and all three hang together: ciphernode bonding, protocol incentives, and governance.\"",
+   "variety": "Several different touches, none repeated, though sparse: \"keen\", \"ticking over\", \"hang together\", \"water down\", \"a hand\".",
+   "essence": "Unmistakably the same FAQ, structure and code intact."
+  },
+  "unharnessed": {
+   "meaning": "All facts and code kept: \"Once that transaction went through, FOLD became generally transferable.\", the four steps, \"capital on the line for the operator who runs it\".",
+   "sense": "Terms fit: \"a cut of the fees\", \"To be in the running for committee selection\", \"switch on general transferability\", \"water down accountability\". \"It may also cop penalties\" fits, if casual.",
+   "authenticity": "Natural Australian phrasing (\"have a look at\", \"jump into the designated Telegram group\"); \"cop penalties\" is a little casual for docs but sounds right.",
+   "register": "Level-2 weight, clean: \"keen\", \"cop\", \"a cut\", \"in the running\", \"jump into\", \"If you need a hand\".",
+   "tone": "Still a technical FAQ, a shade more casual: \"It may also cop penalties for provable misbehaviour\".",
+   "flow": "Reads smoothly: \"No. The Interfold's bonding model is operator-only, and that's on purpose.\"",
+   "variety": "Varied throughout with no repeats: \"keen\", \"have a look at\", \"underpins\", \"cop\", \"a cut\", \"switched on\", \"in the running\", \"on the line\", \"jump into\".",
+   "essence": "The same FAQ, headings and code untouched."
+  },
+  "engine": {
+   "meaning": "The original verbatim apart from one line, so all facts survive: \"The bonding model of the Interfold is deliberately operator-only.\"",
+   "sense": "The only change, \"Nah, nah.\" for \"No.\", strains: doubled it sounds like a childish taunt rather than a plain no.",
+   "authenticity": "One bolted-on interjection in untouched American prose: \"Nah, nah. The bonding model\"; US spellings left: \"misbehavior\", \"fulfill\".",
+   "register": "Largely untranslated: \"FOLD supports the economic operation of the network.\" and the rest as written.",
+   "tone": "Original tone intact except the jarring \"Nah, nah.\" in a technical answer.",
+   "flow": "Original prose reads well; \"Nah, nah. The bonding model of the Interfold is deliberately operator-only.\" is a clunky join.",
+   "variety": "A single Aussie touch: \"Nah, nah.\"",
+   "essence": "It is the original FAQ."
+  }
+ },
+ "problems": {
+  "yarn": [],
+  "unharnessed": [
+   {
+    "quote": "It may also cop penalties for provable",
+    "original": "It may also be subject to penalties for provable",
+    "severity": "minor",
+    "why": "\"Cop\" is a touch casual for formal penalty terms in docs."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Nah, nah.",
+    "original": "No.",
+    "severity": "major",
+    "why": "Doubled \"nah\" reads as a taunt; stagey and out of tone for docs."
+   },
+   {
+    "quote": "misbehavior or for failure to fulfill",
+    "original": "misbehavior or for failure to fulfill",
+    "severity": "minor",
+    "why": "US spellings left in."
+   },
+   {
+    "quote": "FOLD supports the economic operation of the network.",
+    "original": "FOLD supports the economic operation of the network.",
+    "severity": "major",
+    "why": "Representative: text left largely untranslated against the brief."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A light, natural, accurate pass that suits a technical FAQ; nothing lost.",
+  "unharnessed": "Accurate, varied and natural; a shade more casual than A in places.",
+  "engine": "The original with one stagey interjection; too light and US spelling kept."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed",
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

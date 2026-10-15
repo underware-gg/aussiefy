@@ -1,0 +1,287 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "yarn-troppo": "B",
+  "unharnessed": "C",
+  "dinkum-3": "D",
+  "yarn-dinkum": "E"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 2,
+   "sense": 2,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 4,
+   "flow": 3,
+   "variety": 2,
+   "essence": 3
+  },
+  "yarn-troppo": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 4,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "Mostly the original verbatim, but the last answer is changed: \"Does Yellowstone include a federally designated bush?\" and \"Parliament House hasn't acted on the recommendation\" swap wilderness for bush and Congress for an Australian building.",
+   "sense": "Several wrong-sense swaps: \"federally designated bush\" (a legal wilderness category is not \"bush\"), \"Parliament House\" for Congress, \"Not on your nelly\" for a plain \"No.\" \"summer is flat chat\" strains for \"busy\".",
+   "authenticity": "Stock tokens dropped into American prose: \"before you lob\", \"Nah, nah.\", \"Not on your nelly.\"; \"purchasing your pass\" and \"lines at the entrance gates\" left in.",
+   "register": "Largely untranslated, with a handful of swapped words (\"make a booking early\", \"visitor centres\"); far under level 4.",
+   "tone": "The friendly informational tone mostly survives because the text is mostly untouched, but \"Not on your nelly.\" makes a factual answer flippant.",
+   "flow": "Reads like the original except where words are swapped in: \"Be sure to make a booking early!\" under \"Do I need a reservation\", \"before you lob\" mid-formal sentence.",
+   "variety": "Too little Aussie to vary; \"Nah, nah.\" and \"Not on your nelly.\" are the only touches beyond spellings.",
+   "essence": "Still the Yellowstone FAQ, unchanged for most of its length, but the last answer no longer makes sense."
+  },
+  "yarn-troppo": {
+   "meaning": "Every fact survives, with colour hung off the original: \"anywhere a bison's wandered up to the road and every car's pulled over for a squiz\", \"Lewis and Clark had a bob each way\", \"Pipped at the post.\" \"look but don't touch\" overstates \"unimpaired\", and \"Only the northern half\" shifts \"part\".",
+   "sense": "Terms fit: \"had a bob each way\" for using both names, \"the whole box and dice\", \"Not a bad gong, that.\" for the UN designation, \"the pollies in Congress\". \"look but don't touch\" strains for a preservation mandate.",
+   "authenticity": "Sounds like a real Australian guide: \"Do yourself a favour\", \"you'll skip a fair bit of mucking about\", \"Now, this one's a ripper.\"",
+   "register": "A full level-4 retelling; no swearing, which vulgarity 1 allows.",
+   "tone": "Keeps the FAQ's friendly, helpful tone while chattier: \"Please be patient and enjoy your visit. It's worth the wait, I reckon.\" \"dangerously cold\" is kept straight.",
+   "flow": "Reads aloud smoothly: \"After that, folks just kept saying it till it was official\".",
+   "variety": "Varied slang and openers (\"lob\", \"flat chat\", \"squiz\", \"box and dice\", \"gong\", \"pollies\"); \"get this\" comes twice (\"So get this\", \"And get this\") and \"squiz\" twice.",
+   "essence": "Unmistakably the Yellowstone FAQ, question by question, retold as a guide's chat."
+  },
+  "unharnessed": {
+   "meaning": "All facts survive. Additions are colour: \"cold enough to freeze the bits off a brass monkey\", \"have a ripper of a visit\".",
+   "sense": "Terms fit: \"rock up\", \"flat out\", \"gawk at the wildlife\", \"track maintenance\", \"bloody competitive\". \"have a ripper of a visit\" is a slight strain.",
+   "authenticity": "Natural: \"Congress still hasn't got round to doing anything about it\", \"kick off their careers\". The brass-monkey line is stock.",
+   "register": "About level 3 to 4: much is plain Australian English (\"Ask at the visitor centres about what's been spotted lately\"), with one \"bloody\", within vulgarity 1.",
+   "tone": "Friendly and informative; the brass-monkey joke lightens a safety warning slightly (\"dangerously cold – cold enough to freeze the bits off a brass monkey\").",
+   "flow": "Smooth throughout: \"Over time the name got locked in\"",
+   "variety": "Varied enough (\"rock up\", \"gawk\", \"heaps\", \"kick off\", \"bloody\") with no tics.",
+   "essence": "Clearly the FAQ, retold in an Australian voice."
+  },
+  "dinkum-3": {
+   "meaning": "Every fact survives; it adds accurate metric conversions (\"13 million acres, or about 5.3 million hectares\", \"11,358 feet (3,462 metres)\"), a localisation rather than a change. \"the number of people coming for a bit of fun outdoors\" loosens \"recreational visitors\".",
+   "sense": "Mostly exact (\"lob\", \"flat chat\", \"have a geek\", \"dead competitive\"), but \"book your car in\" reads as booking a car service, and \"the lower 48\" is a US term.",
+   "authenticity": "Natural Australian voice: \"That'd be Eagle Peak\", \"Best not: swimming isn't recommended\", \"Pop into a visitor centre\". \"the lower 48 of the United States\" is American.",
+   "register": "Close to level 4, Aussie throughout but measured; no swearing.",
+   "tone": "Friendly and helpful throughout, warnings kept straight: \"Best not: swimming isn't recommended\".",
+   "flow": "Mostly smooth; the run of hectare brackets in one answer is a little heavy (\"(at 2.2 million acres, or about 890,000 hectares)\").",
+   "variety": "Good range: \"lob\", \"flat chat\", \"squiz\", \"geek\", \"dead competitive\", \"heaps\".",
+   "essence": "Unmistakably the FAQ, retold for an Australian reader down to the metric units."
+  },
+  "yarn-dinkum": {
+   "meaning": "Every fact survives with almost no additions: \"Over time the name stuck, official-like\".",
+   "sense": "All terms fit: \"before you lob\", \"flat chat\", \"roadworks\", \"hotly contested\", \"Yeah, nah.\"",
+   "authenticity": "Natural where it changes things (\"Get your booking in early!\"); \"official-like\" is a little stagey.",
+   "register": "Light: level 2 to 3, many answers near the original (\"Park rangers work in education, resource management, law enforcement\").",
+   "tone": "The friendly informational tone is whole: \"Please be patient and enjoy your visit.\"",
+   "flow": "Reads smoothly.",
+   "variety": "Little slang to vary; \"Nah, nah.\" and \"Yeah, nah.\" plus \"lob\" and \"flat chat\".",
+   "essence": "Unmistakably the FAQ."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "Does Yellowstone include a federally designated bush?",
+    "original": "Does Yellowstone include a federally designated wilderness?",
+    "severity": "critical",
+    "why": "\"Wilderness\" is a legal designation; \"bush\" makes the question meaningless."
+   },
+   {
+    "quote": "Parliament House hasn't acted on the recommendation",
+    "original": "Congress has not acted on the recommendation",
+    "severity": "critical",
+    "why": "Moves a US federal decision to the Australian Parliament."
+   },
+   {
+    "quote": "Not on your nelly.",
+    "original": "No.",
+    "severity": "major",
+    "why": "Emphatic refusal idiom for a factual no; wrong register."
+   },
+   {
+    "quote": "summer is flat chat",
+    "original": "summer is busy",
+    "severity": "minor",
+    "why": "\"Flat chat\" fits people being busy, strains for a season."
+   },
+   {
+    "quote": "Save time at entrance stations by purchasing your pass online before you lob.",
+    "original": "Save time at entrance stations by purchasing your pass online before you arrive.",
+    "severity": "minor",
+    "why": "One slang word dropped into formal prose; mostly untranslated."
+   }
+  ],
+  "yarn-troppo": [
+   {
+    "quote": "look but don't touch",
+    "original": "The National Park Service is mandated to preserve resources unimpaired",
+    "severity": "minor",
+    "why": "Overstates the mandate; visitors use parks."
+   },
+   {
+    "quote": "Only the northern half of the original volcano's still standing",
+    "original": "Only the northern part of the original volcano is still visible.",
+    "severity": "minor",
+    "why": "\"half\" is not in the original."
+   },
+   {
+    "quote": "And get this:",
+    "original": "",
+    "severity": "minor",
+    "why": "Repeats \"So get this\" from the opening answer."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "cold enough to freeze the bits off a brass monkey",
+    "original": "dangerously cold",
+    "severity": "minor",
+    "why": "Stock idiom that lightens a safety warning."
+   },
+   {
+    "quote": "have a ripper of a visit",
+    "original": "Please be patient and enjoy your visit.",
+    "severity": "minor",
+    "why": "Forced; drops the plea to be patient's politeness."
+   }
+  ],
+  "dinkum-3": [
+   {
+    "quote": "you don't need to book your car in",
+    "original": "Vehicle reservations are not required",
+    "severity": "minor",
+    "why": "\"Book your car in\" usually means a service booking."
+   },
+   {
+    "quote": "the lower 48 of the United States",
+    "original": "the contiguous United States",
+    "severity": "minor",
+    "why": "American idiom in an Australian voice."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "Park rangers work in education, resource management, law enforcement, emergency medical services, and backcountry operations.",
+    "original": "Park rangers work in education, resource management, law enforcement, emergency medical services, and backcountry operations.",
+    "severity": "minor",
+    "why": "Much left as is; lighter than the level-4 brief."
+   },
+   {
+    "quote": "official-like",
+    "original": "formalized",
+    "severity": "minor",
+    "why": "Slightly stagey."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "A rule-engine pass: barely translated, and its two big swaps (bush, Parliament House) break the last answer.",
+  "yarn-troppo": "A lively, natural level-4 retelling that keeps every fact; the best of the set.",
+  "unharnessed": "Clean, natural and faithful, a little lighter than level 4, with one jokey line on a warning.",
+  "dinkum-3": "Natural and faithful, thoughtfully localised with metric units; a little short of B's life.",
+  "yarn-dinkum": "Faithful and natural but lighter than level 4."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn-troppo",
+    "dinkum-3",
+    "yarn-dinkum"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn-troppo",
+    "unharnessed",
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-3"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-troppo",
+    "dinkum-3"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn-troppo",
+    "unharnessed",
+    "dinkum-3",
+    "yarn-dinkum"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn-troppo"
+   ],
+   [
+    "dinkum-3",
+    "unharnessed"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

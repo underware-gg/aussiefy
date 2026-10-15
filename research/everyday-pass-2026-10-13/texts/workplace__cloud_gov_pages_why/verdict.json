@@ -1,0 +1,183 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 1,
+   "tone": 4,
+   "flow": 3,
+   "variety": 1,
+   "essence": 4
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every point survives: the compliance burden, contractor or web team, FedRAMP JAB, preview URLs and signoff, static over CMS, no PHP or Apache / IIS, one file server not dozens, GitHub editor, Amazon S3 pay-for-use, customisation. \"knock up a website\" makes \"create\" sound a bit slapdash.",
+   "sense": "Mostly fits: \"getting the security and privacy compliance sorted\", \"compliance grunt work\", \"fewer weak spots\", \"dead easy\". \"get the tick-off on content updates\" strains: the idiom is the tick of approval, and \"tick-off\" suggests a telling-off. \"knock up a website\" also has an unwanted reading.",
+   "authenticity": "Natural Australian workplace voice: \"chances are you've been handed what looks like a simple job\", \"Static websites have a few things going for them\". \"tick-off\" is the one off idiom; \"Fully customizable\" keeps the US spelling.",
+   "register": "Level 3: a light, conversational Aussie retelling of the marketing page without becoming slangy; no swearing.",
+   "tone": "Keeps the helpful, persuasive government-product tone.",
+   "flow": "Reads smoothly; the doubled \"Steering clear of a traditional CMS means steering clear of headaches\" is a deliberate echo of the original.",
+   "variety": "Varied: \"knock up\", \"sorted\", \"grunt work\", \"know-how\", \"checked off\", \"tick-off\", \"headaches\", \"weak spots\", \"dead easy\".",
+   "essence": "Unmistakably the cloud.gov Pages explainer, headings and bullets intact."
+  },
+  "engine": {
+   "meaning": "Almost all of the original survives verbatim; two swaps distort it: \"Pages knocks together out draft updates\" and \"Static sites can be used to knock together many different types of sites\" suggest slapdash building.",
+   "sense": "Wrong-sense or strained swaps: \"knock together\" (cobble up roughly) for \"build\", twice; \"properly easy\" for \"very easy\".",
+   "authenticity": "Mechanical swaps into untouched US marketing prose: \"Pages knocks together out draft updates to your site\", \"It’s properly easy to host\".",
+   "register": "Far under level 3: the original verbatim apart from three swaps and \"organisation\".",
+   "tone": "Original tone kept, since the text is.",
+   "flow": "Broken where it changes anything: \"Pages knocks together out draft updates\".",
+   "variety": "Only \"knock together\" (twice) and \"properly\".",
+   "essence": "Recognisably the original page, barely changed."
+  },
+  "yarn": {
+   "meaning": "Every point survives, close to the original: \"the security and privacy compliance sorted so you can launch the actual website and keep it running\", \"one simple static file server or service, not dozens\".",
+   "sense": "Terms fit: \"get the tick of approval on content updates\", \"sorted\", \"know-how\", \"dead easy\", \"headaches\", \"pile extra load on\".",
+   "authenticity": "Natural Australian workplace English: \"chances are you’ve been handed what looks like a simple job\", \"Fully customisable\", \"organisation\".",
+   "register": "Level 3, on the light side: a natural Aussie register with a few idioms; stretches stay close to the original (\"So the whole website is easier to maintain and has fewer vulnerabilities.\").",
+   "tone": "Keeps the helpful, persuasive tone.",
+   "flow": "Reads smoothly.",
+   "variety": "Varied, nothing leaned on: \"sorted\", \"looks after\", \"know-how\", \"count on\", \"tick of approval\", \"steering clear\", \"dead easy\", \"make the most of\".",
+   "essence": "Unmistakably the original explainer."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "it's easy to get the tick-off on content updates from stakeholders",
+    "original": "makes it easy to get signoff on content updates from stakeholders",
+    "severity": "minor",
+    "why": "The Australian idiom is 'the tick of approval'; 'tick-off' reads like a reprimand."
+   },
+   {
+    "quote": "knock up a website",
+    "original": "create a website",
+    "severity": "minor",
+    "why": "'Knock up' (make quickly) is Australian, but suggests a rough job and has an unwanted second reading."
+   },
+   {
+    "quote": "**Fully customizable:**",
+    "original": "**Fully customizable:**",
+    "severity": "minor",
+    "why": "US spelling kept in the heading while 'organisation' is localised."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Pages knocks together out draft updates to your site",
+    "original": "Pages builds out draft updates to your site",
+    "severity": "major",
+    "why": "Broken grammar from a mechanical swap, and 'knock together' implies a rough job."
+   },
+   {
+    "quote": "Static sites can be used to knock together many different types of sites",
+    "original": "Static sites can be used to build many different types of sites",
+    "severity": "major",
+    "why": "'Knock together' undercuts the product claim by implying shoddy work."
+   },
+   {
+    "quote": "It’s properly easy to host static website files on Pages.",
+    "original": "It’s very easy to host static website files on Pages.",
+    "severity": "minor",
+    "why": "'Properly easy' is a forced intensifier."
+   },
+   {
+    "quote": "Pages serves our fellow federal partners by expertly managing the backend and compliance work",
+    "original": "Pages serves our fellow federal partners by expertly managing the backend and compliance work",
+    "severity": "major",
+    "why": "Left untranslated, as is nearly all the text; far under the level-3 brief."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "So the whole website is easier to maintain and has fewer vulnerabilities.",
+    "original": "This means that the whole website is easier to maintain and has fewer vulnerabilities.",
+    "severity": "minor",
+    "why": "Some stretches stay close to the original, so the Aussie is on the light side of level 3."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A natural light-Aussie retelling that keeps every point; one off idiom.",
+  "engine": "The original with three mechanical swaps, two of them wrong-sense; essentially untranslated.",
+  "yarn": "A natural, accurate light-Aussie retelling with idioms used correctly; a touch light."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

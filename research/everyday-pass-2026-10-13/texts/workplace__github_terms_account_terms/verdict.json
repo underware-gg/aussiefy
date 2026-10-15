@@ -1,0 +1,163 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 3,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 4,
+   "flow": 3,
+   "variety": 2,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every rule survives: a human must create the Account, 13 or over, one free Account plus one free machine account, one person per login, the sanctions bar. \"we reckon you're responsible for whatever gets done on or through that Organization\" softens a firm legal attribution into an opinion.",
+   "sense": "Most terms fit: \"the one ultimately on the hook for the machine's actions\", \"We're stoked to see bright young coders getting fired up\", \"It's on you to keep your Account secure\", \"get at certain GitHub services\". \"we reckon you're responsible\" strains: in terms of service \"consider\" is a legal stance, not a guess.",
+   "authenticity": "Natural Australian plain English: \"you keep the final say\", \"a bunch of people\", \"have a look at our [Export Controls policy]\". \"gotta\" is more American than Australian and is used four times: \"you've gotta be 13 or over\".",
+   "register": "A middle weight that suits level 3: casual and local in most sentences without becoming a yarn; no swearing.",
+   "tone": "Keeps the friendly-but-binding voice of the terms, with the one softened line: \"we reckon you're responsible\".",
+   "flow": "Reads smoothly: \"Any other info we ask for, like your real name, is optional\".",
+   "variety": "Varied (\"on the hook\", \"stoked\", \"fired up\", \"it's on you\"), but \"You've gotta\" opens line after line.",
+   "essence": "Unmistakably the GitHub Account Terms, structure and links intact."
+  },
+  "yarn": {
+   "meaning": "Every rule survives, firmly: \"we hold you responsible for anything done on or through that Organization\", \"You can keep no more than one free machine account on top of your free Personal Account\".",
+   "sense": "Terms fit: \"no worries\" for that's fine, \"We're stoked to see clever young coders\", \"at the end of the day the owner of the Account is responsible\", \"It's up to you to keep your Account secure\".",
+   "authenticity": "Natural Australian plain English: \"if you choose to control a machine account as well, no worries\", \"in breach of the export control or sanctions laws\".",
+   "register": "Light: mostly plain-English rewording with a few local touches (\"stoked\", \"no worries\", \"at the end of the day\"), lighter than level 3 asks.",
+   "tone": "Keeps the friendly but binding tone whole: \"If we find out about any User under the age of 13, we will [terminate that User’s Account immediately]\".",
+   "flow": "Reads like it was written that way: \"Any other information we ask for, like your real name, is optional\".",
+   "variety": "Little slang to vary; \"You have to\" and \"it's up to you\" recur.",
+   "essence": "Unmistakably the original terms."
+  },
+  "engine": {
+   "meaning": "All content kept, nearly verbatim: \"You must provide a valid email address in order to complete the signup process.\"",
+   "sense": "Two swaps strain: \"a single login may not be shared by multiple punters\" (punters are customers or gamblers, jarring in a rule about people sharing a login), \"beaut young coders\" for brilliant.",
+   "authenticity": "Three slang words bolted onto unaltered American legal prose: \"While we are thrilled to see beaut young coders\", \"at the end of the day responsible\", \"multiple punters\".",
+   "register": "Essentially untranslated against level 3: \"Subject to these Terms, you retain ultimate administrative control over your Personal Account\".",
+   "tone": "The legal tone is the original's, jarred by \"multiple punters\".",
+   "flow": "The slang sits awkwardly in formal syntax: \"the owner of the Account is at the end of the day responsible for the machine's actions\".",
+   "variety": "Three slang terms in the whole text.",
+   "essence": "It is the original."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "we reckon you're responsible for whatever gets done on or through that Organization",
+    "original": "we consider you responsible for the actions that are performed on or through that Organization",
+    "severity": "major",
+    "why": "\"reckon\" turns a binding legal position into a hunch."
+   },
+   {
+    "quote": "You've gotta be 13 or older.",
+    "original": "You must be age 13 or older.",
+    "severity": "minor",
+    "why": "\"gotta\" is an Americanism and repeats four times."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "You have to give us a valid email address to finish signing up.",
+    "original": "You must provide a valid email address in order to complete the signup process.",
+    "severity": "minor",
+    "why": "Mostly plain-English rewording; lighter than level 3."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "a single login may not be shared by multiple punters",
+    "original": "a single login may not be shared by multiple people",
+    "severity": "major",
+    "why": "\"punters\" is wrong in register and sense for people sharing a login."
+   },
+   {
+    "quote": "Subject to these Terms, you retain ultimate administrative control",
+    "original": "Subject to these Terms, you retain ultimate administrative control",
+    "severity": "major",
+    "why": "Left untranslated."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A natural, well-weighted plain-Aussie retelling of the terms; one \"reckon\" softens a legal point.",
+  "yarn": "Faithful and natural with the legal force intact, but lighter than the brief.",
+  "engine": "The original with three slang words dropped in, one of them wrong."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed",
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn",
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

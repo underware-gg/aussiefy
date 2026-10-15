@@ -1,0 +1,199 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "engine": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 3,
+   "register": 4,
+   "tone": 5,
+   "flow": 4,
+   "variety": 3,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 1,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 4,
+   "flow": 2,
+   "variety": 2,
+   "essence": 3
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "All figures and steps survive: \"more than 9,300 gallons\", \"a two-hour stretch\", \"after 10 minutes\", \"replaced at least every five years\", \"more than 180 showers\", \"60 loads of dishes\". Additions are colour on existing points: \"without you knowing a thing\", \"That's a bloody lot of water for a few drips.\"",
+   "sense": "Most terms fit: \"taps\" for faucets, \"cistern\", \"Suss out\", \"track down where the leak's coming from\", \"the folding stuff\" for money. \"If any colour rocks up in the bowl\" strains: \"rock up\" is for people arriving, not dye seeping.",
+   "authenticity": "Natural phrasing like \"Have a geek at your water use\" and \"get in a licensed plumber\", but \"dunny\" is leaned on until it reads as a gag: \"worn dunny flappers\", \"Dunny Leaks\", \"when the dunny's flushed\", \"fits your dunny model\".",
+   "register": "A level-4 weight for an instructions text: \"usual suspects\", \"gizmo\", \"Suss out\", \"the folding stuff\", one \"bloody\" within dad vulgarity. A shade light in the device section, which stays close to the original.",
+   "tone": "Stays practical and helpful under the slang; \"That's a bloody lot of water for a few drips.\" adds a matey note that suits the brief.",
+   "flow": "Reads smoothly: \"Check your water meter before and after a two-hour stretch when no water's being used. If the reading on it moves at all, you've most likely got a leak.\" Repetition of \"dunny\" is the main snag.",
+   "variety": "\"dunny\" appears seven or more times (\"Dunny Leaks\", \"the dunny's flushed\", \"your dunny flush\", \"your dunny model\"); otherwise a fair spread of terms.",
+   "essence": "Clearly the EPA leak guide: sections, tips and figures in order, from \"Here are some tips for finding leaks\" to the o-ring tip."
+  },
+  "engine": {
+   "meaning": "Mostly verbatim, so facts survive, but \"Give a stuff about the width of the flapper\" garbles the instruction to pay attention, and \"60 heaps of dishes\" muddles \"60 loads\".",
+   "sense": "Several wrong-sense swaps: \"Give a stuff about the width\" (an idiom used almost only negated, and crude), \"60 heaps of dishes in your dishwasher\" (heaps replacing loads), \"ensure a beaut seal\" (praise word for a technical spec), \"If the metre changes at all\" (the unit spelling for the device).",
+   "authenticity": "Insertions read as find-and-replace into formal US prose: \"Identify dunny leaks by placing a few drops of food colouring in the cistern. If any colour rocks up in the bowl\".",
+   "register": "Far lighter than level 4: most sentences are untranslated, e.g. \"WaterSense has developed a user guide to help consumers understand the benefits of installing leak detection and flow monitoring devices\".",
+   "tone": "The informational tone holds because the original is mostly kept, though \"Give a stuff about the width\" injects an odd crude note into a tip.",
+   "flow": "Formal prose broken by jarring swaps: \"to ensure a beaut seal and avoid leaks\", \"wash 60 heaps of dishes\".",
+   "variety": "A few swaps, with \"dunny\" repeated: \"dunny flappers\", \"Dunny Leaks\", \"the dunny is flushed\", \"your dunny model\".",
+   "essence": "Recognisably the guide because it is the guide, with blemishes rather than a retelling."
+  },
+  "unharnessed": {
+   "meaning": "All figures and steps kept: \"more than 9,300 gallons\", \"a two-hour stretch\", \"after 10 minutes\", \"at least every five years\", \"more than 180 showers\", \"60 loads through your dishwasher\". Small shift: \"Give the tap washers and pipe fittings a once-over\" for faucet gaskets.",
+   "sense": "Terms fit: \"a doddle to fix\", \"knock about 10 percent off your water bill\", \"clapped-out toilet flappers\", \"get stuck in\", \"get on the blower to\" a plumber. \"where the bugger's coming from\" fits the leak. \"weird water use\" is a little loose for irregular.",
+   "authenticity": "Sounds like a real Aussie handyman: \"Have a squiz at your water use\", \"Give the tap washers and pipe fittings a once-over\", \"Don't forget to turn the water off before you get stuck in!\" One bolt-on: \"That's enough water for more than 180 showers, strewth!\"",
+   "register": "Level-4 weight throughout without caricature, and dad vulgarity only: \"the bugger's coming from\".",
+   "tone": "Keeps the helpful, practical voice of a how-to while sounding matey: \"Swapping a flapper is a quick, easy fix that'll save you water and a bit of coin.\"",
+   "flow": "Mostly smooth; one tangled sentence: \"Plumber's tape, also called teflon tape, you can get at most hardware stores, it's easy to put on, and it can help keep leaks in check.\"",
+   "variety": "Wide spread: \"chew through\", \"chucking away\", \"doddle\", \"squiz\", \"Suss out\", \"once-over\", \"heads-up\", \"clapped-out\", \"gizmo\", \"get stuck in\", \"on the blower\". \"dunny\" used sparingly, \"toilet\" kept in headings.",
+   "essence": "Unmistakably the EPA guide retold: same sections and tips in order, from the meter check to \"replace the washer or \\\"o\\\" ring inside the showerhead\"."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "Dunny Leaks",
+    "original": "Toilet Leaks",
+    "severity": "major",
+    "why": "\"dunny\" is repeated throughout (heading, flappers, model), turning a useful word into a running gag; Australians say \"toilet\" for a cistern repair."
+   },
+   {
+    "quote": "If any colour rocks up in the bowl after 10 minutes",
+    "original": "If any color shows up in the bowl after 10 minutes",
+    "severity": "minor",
+    "why": "\"rock up\" means a person arriving; for dye it strains."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Give a stuff about the width of the flapper",
+    "original": "Pay attention to the width of the flapper",
+    "severity": "critical",
+    "why": "\"give a stuff\" means to care at all and is used negated; as an instruction it is wrong-sense and garbles the tip."
+   },
+   {
+    "quote": "wash 60 heaps of dishes in your dishwasher",
+    "original": "wash 60 loads of dishes in your dishwasher",
+    "severity": "major",
+    "why": "\"heaps\" substituted for \"loads\" in its counting sense; wrong sense."
+   },
+   {
+    "quote": "If the metre changes at all",
+    "original": "If the meter changes at all",
+    "severity": "major",
+    "why": "The measuring device is spelt \"meter\" in Australia too; \"metre\" is the unit. The previous sentence even says \"water meter\"."
+   },
+   {
+    "quote": "to ensure a beaut seal",
+    "original": "to ensure a good seal",
+    "severity": "minor",
+    "why": "\"beaut\" is praise, not a technical quality; strains."
+   },
+   {
+    "quote": "WaterSense has developed a user guide to help consumers understand the benefits",
+    "original": "WaterSense has developed a user guide to help consumers understand the benefits",
+    "severity": "major",
+    "why": "Most of the text is left untranslated, far under a level-4 brief."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "That's enough water for more than 180 showers, strewth!",
+    "original": "That's the amount of water needed to take more than 180 showers!",
+    "severity": "minor",
+    "why": "\"strewth\" tacked on the end is a stock exclamation."
+   },
+   {
+    "quote": "Plumber's tape, also called teflon tape, you can get at most hardware stores, it's easy to put on,",
+    "original": "Pipe tape, also called teflon tape, is available at most hardware stores, is easy to apply,",
+    "severity": "minor",
+    "why": "Fronted object plus comma splice makes a clunky sentence."
+   },
+   {
+    "quote": "a bit of coin",
+    "original": "save water and money",
+    "severity": "minor",
+    "why": "\"coin\" for money is more American slang than Australian."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A faithful, readable level-4 retelling of the guide, let down by leaning on \"dunny\" and one strained \"rocks up\".",
+  "engine": "Mostly the original with mechanical swaps, several of them wrong-sense (\"Give a stuff\", \"60 heaps\", \"metre\"); far too light for level 4.",
+  "unharnessed": "A natural, varied level-4 retelling that keeps every figure and step; only a stock \"strewth\" and one clunky sentence."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

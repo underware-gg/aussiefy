@@ -1,0 +1,678 @@
+{
+ "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as rude, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+ "prompt": "BRIEF: level 3, vulgarity 1\n\nORIGINAL:\nHiking in the Grand Canyon offers unique challenges due to the combination of ambient temperature, elevation, and the physical demands of the terrain. To ensure an enjoyable and safe hike, it's important to properly manage hydration and nutrition.\n\nStay Hydrated and Energized\n\nAs you hike—especially uphill and in direct sunlight—it's essential to stay hydrated. In the Grand Canyon’s hot, dry climate, sweat evaporates quickly, so you might not realize how much fluid you're losing. Watch for salt stains or rings on your clothing, a common sign of dehydration.\n\nTo maintain proper hydration, sip water regularly throughout your hike, even if you don’t feel thirsty. It’s just as important to replenish lost electrolytes by eating salty snacks, which help your body retain fluids and maintain balance. Wondering what inner canyon rangers pack in their day bags? Some of their favorite salty snacks include pretzels, Pringles, chips, and cheese crackers—tasty and trail-ready fuel for the journey!\n\nFuel Your Body for the Journey\nHiking in the Grand Canyon can be demanding, so be sure to eat enough to fuel your body. Eating regular snacks, including a mix of carbs, protein, and electrolytes, will help maintain energy levels. Drink and eat even if you're not feeling thirsty or hungry—your body may not always signal when it's time to refuel. Balancing hydration and nutrition is key to avoiding fatigue and ensuring your body functions at its best.\n\nBy staying proactive with hydration, nutrition, and rest, you'll help ensure a more enjoyable and rewarding experience on the trails.\n\nEven if you are eating and drinking correctly you still need to avoid hiking in direct sunlight during the hottest part of the day. Sun temperatures are 15F to 20F (9C-11C) degrees hotter than posted shade temperatures. And keep in mind, the farther into the canyon you go the hotter it gets!\n\nPlan your day so you are not hiking between the hours of 10am and 4pm. Take a break near shade and water to avoid the worst heat of day. Enjoy a predawn start and a late afternoon finish. Experienced desert hikers know that the timing of their hike is the most important factor in avoiding hazards. Most of the people who need emergency medical help in the canyon due to heat illness are hiking between 10 a.m. and 4 p.m.\n\nKEEP YOURSELF SOAKING WET TO STAY COOL.\n\nOne of the most effective ways to keep your body temperature in check while hiking in the Grand Canyon is by staying soaking wet. The intense heat, especially in the inner canyon, can rapidly increase your core body temperature, so it's essential to use every opportunity to cool down. Whenever you're near water—whether it’s a creek or water station—take the time to soak your clothing and body.\n\nWear clothing that holds water well (cotton is great in the desert!), and if possible, wear a hat or bandana that you can soak frequently. This is a simple yet effective way to stay cool and energized throughout the day. When hiking in the canyon, where temperatures can soar, take every opportunity to get wet as this will make your hike far more comfortable. By the end of the day, you'll feel the difference as your body stays cooler and more refreshed.\n\nRemember, staying soaking wet isn’t just about feeling better—it’s a critical tool to help you maintain your energy levels and avoid heat exhaustion, so don’t overlook this simple yet vital cooling strategy!\n\nCANDIDATE A:\nBushwalking in the Grand Canyon throws up some real challenges, what with the heat, the altitude and how hard the terrain is on your body. To make sure your walk's a good one and a safe one, you've gotta stay on top of your water and your tucker.\n\nStay Hydrated and Energized\n\nWhile you're walking, especially uphill and out in the full sun, you've got to keep your fluids up. In the Grand Canyon's hot, dry climate your sweat dries off quick smart, so you mightn't twig how much fluid you're losing. Keep an eye out for salt stains or rings on your clothes, a common sign you're getting dehydrated.\n\nTo stay properly hydrated, keep sipping water the whole way, even if you're not thirsty. It's just as important to top up the electrolytes you've lost by eating salty snacks, which help your body hang on to fluid and keep everything in balance. Wondering what the inner canyon rangers chuck in their day packs? Some of their favourite salty snacks are pretzels, Pringles, chips and cheese crackers: tasty tucker that's ready for the track!\n\nFuel Your Body for the Journey\nWalking in the Grand Canyon can take it out of you, so make sure you eat enough to keep the tank full. Having regular snacks, with a mix of carbs, protein and electrolytes, will keep your energy up. Drink and eat even if you're not feeling thirsty or hungry, because your body won't always let you know when it's time to refuel. Getting the balance right between water and food is the key to not running out of puff and keeping your body working at its best.\n\nIf you stay ahead of the game with water, food and rest, you'll have a much better, more rewarding time out on the tracks.\n\nEven if you're eating and drinking right, you still need to stay out of the direct sun in the hottest part of the day. It's 15F to 20F (9C-11C) degrees hotter in the sun than the posted shade temperatures. And keep in mind, the further down into the canyon you go, the hotter it gets!\n\nPlan your day so you're not walking between 10am and 4pm. Have a spell somewhere near shade and water to dodge the worst of the heat. Get going before sunrise and finish up late arvo. Seasoned desert walkers know the timing of their walk is the biggest thing in staying out of strife. Most of the people who need emergency medical help in the canyon for heat illness are walking between 10 a.m. and 4 p.m.\n\nKEEP YOURSELF SOAKING WET TO STAY COOL.\n\nOne of the best ways to keep your body temperature in check while you're walking in the Grand Canyon is to stay sopping wet. The fierce heat, especially in the inner canyon, can send your core temperature up in a hurry, so you've gotta grab every chance to cool down. Whenever you're near water, whether it's a creek or a water station, take the time to soak your clothes and yourself.\n\nWear clothes that hold water well (cotton's great in the desert!), and if you can, wear a hat or bandanna you can wet down often. It's a simple but bloody effective way to stay cool and keep your energy up all day. When you're walking in the canyon, where the temperature can go through the roof, take every chance to get wet, because it'll make your walk a whole lot more comfortable. By the end of the day you'll feel the difference, with your body staying cooler and fresher.\n\nRemember, staying soaking wet isn't just about feeling better. It's a critical tool to help keep your energy up and stop heat exhaustion, so don't skip this simple but vital way to cool down!\n\nCANDIDATE B:\nBushwalking in the Grand Canyon throws up its own challenges, thanks to the mix of air temperature, altitude and how hard the terrain is on your body. To keep your walk enjoyable and safe, you need to get your water and your tucker right.\n\nStay Hydrated and Energised\n\nAs you walk—especially uphill and in direct sun—it's essential to stay hydrated. In the Grand Canyon's hot, dry climate, sweat dries off quick smart, so you mightn't realise how much fluid you're losing. Keep an eye out for salt stains or rings on your clothes, a common sign of dehydration.\n\nTo stay properly hydrated, sip water regularly the whole way, even if you don't feel thirsty. It's just as important to top up the electrolytes you've lost by eating salty snacks, which help your body hang on to fluids and keep its balance. Wondering what the inner canyon rangers chuck in their day packs? Some of their favourite salty snacks are pretzels, Pringles, chips and cheese crackers—tasty, track-ready fuel for the trip.\n\nFuel Your Body for the Journey\nWalking in the Grand Canyon can be hard yakka, so make sure you eat enough to fuel your body. Regular snacks with a mix of carbs, protein and electrolytes will help keep your energy up. Drink and eat even if you're not feeling thirsty or hungry—your body won't always tell you when it's time to refuel. Getting the balance of water and food right is the key to avoiding fatigue and keeping your body working at its best.\n\nIf you stay on top of your water, food and rest, you'll help make your time on the tracks more enjoyable and more rewarding.\n\nEven if you're eating and drinking right, you still need to avoid walking in direct sun during the hottest part of the day. Sun temperatures are 15F to 20F (9C-11C) degrees hotter than the posted shade temperatures. And keep in mind, the further into the canyon you go, the hotter it gets.\n\nPlan your day so you're not walking between the hours of 10am and 4pm. Take a break near shade and water to avoid the worst heat of the day. Make an early start before sunup and finish late in the arvo. Experienced desert bushwalkers know that the timing of their walk is the most important factor in avoiding hazards. Most of the people who need emergency medical help in the canyon because of heat illness are walking between 10 a.m. and 4 p.m.\n\nKEEP YOURSELF SOAKING WET TO STAY COOL.\n\nOne of the best ways to keep your body temperature in check while bushwalking in the Grand Canyon is to stay soaking wet. The intense heat, especially in the inner canyon, can push your core body temperature up fast, so it's essential to take every chance you get to cool down. Whenever you're near water—whether it's a creek or a water station—take the time to soak your clothes and yourself.\n\nWear clothes that hold water well (cotton's a ripper in the desert), and if you can, wear a hat or bandanna you can soak often. It's a simple but effective way to stay cool and full of beans all day. When you're walking in the canyon, where temperatures can soar, take every chance to get wet, as it'll make your walk far more comfortable. By the end of the day you'll feel the difference, as your body stays cooler and fresher.\n\nRemember, staying soaking wet isn't just about feeling better—it's a critical tool to keep you going and avoid heat exhaustion, so don't overlook this simple but vital way of cooling down.\n\nCANDIDATE C:\nBushwalking in the Grand Canyon offers unique challenges due to the combination of ambient temperature, elevation, and the physical demands of the terrain. To ensure an enjoyable and safe hike, it's important to properly manage hydration and nutrition.\n\nStay Hydrated and Energized\n\nAs you hike—especially uphill and in direct sunlight—it's essential to stay hydrated. In the Grand Canyon’s hot, dry climate, sweat evaporates quickly, so you might not realise how much fluid you're losing. Watch for salt stains or rings on your clothing, a common sign of dehydration.\n\nTo maintain proper hydration, sip water regularly throughout your hike, even if you don’t feel thirsty. It’s just as important to replenish lost electrolytes by eating salty snacks, which help your body retain fluids and maintain balance. Wondering what inner canyon rangers pack in their day bags? Some of their favourite salty snacks include pretzels, Pringles, chips, and cheese crackers—tasty and trail-ready fuel for the journey!\n\nFuel Your Body for the Journey\nHiking in the Grand Canyon can be demanding, so be sure to eat enough to fuel your body. Eating regular snacks, including a mix of carbs, protein, and electrolytes, will help maintain energy levels. Drink and eat even if you're not feeling thirsty or hungry—your body may not always signal when it's time to refuel. Balancing hydration and nutrition is key to avoiding fatigue and ensuring your body functions at its best.\n\nBy staying proactive with hydration, nutrition, and rest, you'll help ensure a more enjoyable and rewarding experience on the trails.\n\nEven if you are eating and drinking correctly you still need to avoid hiking in direct sunlight during the hottest part of the day. Sun temperatures are 15F to 20F (9C-11C) degrees hotter than posted shade temperatures. And keep in mind, the farther into the canyon you go the hotter it gets!\n\nPlan your day so you are not bushwalking between the hours of 10am and 4pm. Take a break near shade and water to avoid the worst heat of day. Enjoy a predawn start and a late arvo finish. Experienced desert bushwalkers know that the timing of their hike is the most important factor in avoiding hazards. Most of the people who need emergency medical help in the canyon due to heat illness are bushwalking between 10 a.m. and 4 p.m.\n\nKEEP YOURSELF SOAKING WET TO STAY COOL.\n\nOne of the most effective ways to keep your body temperature in check while bushwalking in the Grand Canyon is by staying soaking wet. The intense heat, especially in the inner canyon, can rapidly increase your core body temperature, so it's essential to use every opportunity to cool down. Whenever you're near water—whether it’s a creek or water station—take the time to soak your clothing and body.\n\nWear clothing that holds water well (cotton is ripper in the desert!), and if possible, wear a hat or bandana that you can soak frequently. This is a simple yet effective way to stay cool and energized throughout the day. When hiking in the canyon, where temperatures can soar, take every opportunity to get wet as this will make your hike far more comfortable. By the end of the day, you'll feel the difference as your body stays esky and more refreshed.\n\nRemember, staying soaking wet isn’t just about feeling better—it’s a critical tool to help you maintain your energy levels and avoid heat exhaustion, so don’t overlook this simple yet vital cooling strategy!",
+ "schema": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "object",
+    "properties": {
+     "A": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "B": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "C": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "A",
+     "B",
+     "C"
+    ],
+    "additionalProperties": false
+   },
+   "rankings": {
+    "type": "object",
+    "properties": {
+     "tone": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "flow": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "variety": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "essence": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "overall": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "tone",
+     "flow",
+     "variety",
+     "essence",
+     "overall"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "required": [
+   "candidates",
+   "rankings"
+  ],
+  "additionalProperties": false
+ }
+}

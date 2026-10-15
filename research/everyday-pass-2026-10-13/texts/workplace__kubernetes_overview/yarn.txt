@@ -1,0 +1,62 @@
+The name Kubernetes comes from Greek, meaning helmsman or pilot. K8s as an abbreviation
+comes from counting the eight letters between the "K" and the "s". Google open sourced the
+Kubernetes project in 2014. Kubernetes mixes
+[over 15 years of Google's experience](/blog/2015/04/borg-predecessor-to-kubernetes/) running
+production workloads at scale with the pick of the ideas and practices from the community.
+
+## Why you need Kubernetes and what it can do {#why-you-need-kubernetes-and-what-can-it-do}
+
+Containers are a good way to bundle and run your applications. In a production
+environment, you've got to manage the containers that run the applications and
+make sure there's no downtime. For example, if a container carks it, another
+container needs to start. Wouldn't it be easier if a system took care of all that?
+
+That's where Kubernetes comes to the rescue. Kubernetes gives you a framework
+to run distributed systems so they can cop a hit and keep going. It takes care of scaling and failover for
+your application, provides deployment patterns, and a fair bit more. For example: Kubernetes
+can manage a canary deployment for your system, no worries.
+
+Kubernetes gives you:
+
+* **Service discovery and load balancing**
+  Kubernetes can expose a container using a DNS name or its own IP address.
+  If traffic to a container is high, Kubernetes can load balance and spread
+  the network traffic around so the deployment stays stable.
+* **Storage orchestration**
+  Kubernetes lets you automatically mount a storage system of your choice, such as
+  local storage, public cloud providers, and more.
+* **Automated rollouts and rollbacks**
+  You can describe the desired state for your deployed containers using Kubernetes,
+  and it can change the actual state to the desired state at a controlled rate.
+  For example, you can automate Kubernetes to create brand-spankin'-new containers for your
+  deployment, remove existing containers and adopt all their resources to the new container.
+* **Automatic bin packing**
+  You give Kubernetes a cluster of nodes that it can use to run containerised tasks.
+  You tell Kubernetes how much CPU and memory (RAM) each container needs. Kubernetes can fit
+  containers onto your nodes to get the most out of your resources.
+* **Self-healing**
+  Kubernetes restarts containers that fail, replaces containers, kills containers that don't
+  respond to your user-defined health check, and doesn't advertise them to clients until they're
+  ready to serve.
+* **Secret and configuration management**
+  Kubernetes lets you store and manage sensitive information, such as passwords, OAuth tokens,
+  and SSH keys. You can deploy and update secrets and application configuration without
+  rebuilding your container images, and without leaving secrets out in the open in your stack configuration.
+* **Batch execution**
+  As well as services, Kubernetes can manage your batch and CI workloads, replacing containers that fail, if you want.
+* **Horizontal scaling**
+  Scale your application up and down with a simple command, with a UI, or automatically based on CPU usage.
+* **IPv4/IPv6 dual-stack**
+  Allocation of IPv4 and IPv6 addresses to Pods and Services.
+* **Designed for extensibility**
+  Add features to your Kubernetes cluster without mucking about with upstream source code.
+
+## What Kubernetes is not
+
+Kubernetes isn't a traditional, all-in-one PaaS (Platform as a Service) system.
+Since Kubernetes works at the container level rather than at the hardware level,
+it provides some generally handy features common to PaaS offerings, such as
+deployment, scaling, load balancing, and lets users plug in their own logging, monitoring,
+and alerting solutions. But Kubernetes isn't monolithic, and these default solutions
+are optional and pluggable. Kubernetes provides the building blocks for building developer
+platforms, but leaves users their choice and flexibility where it counts.

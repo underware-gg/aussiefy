@@ -1,0 +1,61 @@
+Okay, so. The name Kubernetes comes from the Greek for helmsman or pilot. And K8s, the short form, is what you get when you count the eight letters between the "K" and the "s". Google open sourced the
+Kubernetes project back in 2014. What Kubernetes does is take
+[over 15 years of Google's experience](/blog/2015/04/borg-predecessor-to-kubernetes/) running
+production workloads at scale and chuck in the pick of the ideas and practices from the community.
+
+## Why you need Kubernetes and what it can do {#why-you-need-kubernetes-and-what-can-it-do}
+
+Containers are a beaut way to bundle and run your applications. Thing is, in a production
+environment you've got to keep an eye on the containers running those applications and
+make sure there's no downtime. Say a container carks it: another
+container needs to start up. Wouldn't it be a heap easier if a system handled that behaviour for you?
+
+Well, that's where Kubernetes comes to the rescue! Kubernetes sets you up with a framework
+for running distributed systems that bounce back when things go wrong. It sorts out scaling and failover for
+your application, gives you deployment patterns, and a fair bit more. For example: Kubernetes
+can handle a canary deployment for your system, no worries.
+
+Here's what Kubernetes gives you:
+
+* **Service discovery and load balancing**
+  Kubernetes can expose a container using a DNS name or its own IP address.
+  If there's heaps of traffic to a container, Kubernetes can load balance and spread
+  the network traffic around so the deployment stays stable.
+* **Storage orchestration**
+  Kubernetes lets you automatically mount whatever storage system you like, whether that's
+  local storage, public cloud providers, or more.
+* **Automated rollouts and rollbacks**
+  You describe the desired state for your deployed containers using Kubernetes,
+  and it'll shift the actual state over to the desired state at a controlled rate.
+  For example, you can automate Kubernetes to create new containers for your
+  deployment, get rid of the existing containers and hand all their resources over to the new container.
+* **Automatic bin packing**
+  You give Kubernetes a cluster of nodes it can use to run containerised tasks.
+  You tell Kubernetes how much CPU and memory (RAM) each container needs, and Kubernetes fits
+  the containers onto your nodes to get the most out of your resources.
+* **Self-healing**
+  Kubernetes restarts containers that fail, replaces containers, kills off containers that don't
+  answer your user-defined health check, and doesn't advertise them to clients till they're
+  good to go and ready to serve.
+* **Secret and configuration management**
+  Kubernetes lets you store and manage sensitive information, like passwords, OAuth tokens,
+  and SSH keys. You can deploy and update secrets and application configuration without
+  having to rebuild your container images, and without your secrets being exposed in your stack configuration.
+* **Batch execution**
+  On top of services, Kubernetes can manage your batch and CI workloads too, and replace containers that fail if you want it to.
+* **Horizontal scaling**
+  Scale your application up and down with a simple command, with a UI, or automatically going off CPU usage.
+* **IPv4/IPv6 dual-stack**
+  Allocation of IPv4 and IPv6 addresses to Pods and Services.
+* **Designed for extensibility**
+  Add features to your Kubernetes cluster without touching the upstream source code.
+
+## What Kubernetes is not
+
+Now, Kubernetes isn't your traditional, all-in PaaS (Platform as a Service) system.
+Because Kubernetes works at the container level rather than down at the hardware level,
+you do get some generally handy features common to PaaS offerings, like
+deployment, scaling and load balancing, and users can plug in their own logging, monitoring,
+and alerting solutions. But Kubernetes isn't one big lump, mind, and these default solutions
+are optional and pluggable. Kubernetes hands you the building blocks for building developer
+platforms, but leaves users their choice and room to move where it counts.

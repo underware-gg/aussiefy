@@ -1,0 +1,211 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 3,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 3,
+   "flow": 2,
+   "variety": 2,
+   "essence": 3
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every point survives: the accident, the cheap-blanket assumption, the tag, the guilt, the question, the advice to ring, the cost reasoning and the link. \"it'd cost them more to get it back in the post and put it back in the blanket pile than to just buy a new one\" keeps the reply's logic intact.",
+   "sense": "\"Pinched\", \"nicking\", \"felt rotten\", \"ring the airline\", \"Tell 'em\" all carry the right sense. \"hopped off\" for leaving the plane is fine. Nothing strains.",
+   "authenticity": "Reads natural: \"I wasn't fussed about keeping it\", \"Course, I felt rotten\", \"Odds are they'll tell you to keep it\". \"daft\" leans British but is common enough here.",
+   "register": "Fully retold but on the light side of level 3: mostly plain casual English with a handful of terms (\"Pinched\", \"fussed\", \"rotten\", \"ring\"). No swearing, which vulgarity 1 permits but does not require.",
+   "tone": "Keeps the sheepish, anxious tone of the asker (\"I just sort of panicked\") and the calm, practical tone of the reply.",
+   "flow": "Reads smoothly aloud: \"I had no idea I was meant to leave the blanket behind, so I scooped it up with all my gear and hopped off.\"",
+   "variety": "Varies its terms (\"Pinched\", \"nicking\", \"pinched\" again, \"rotten\", \"daft\", \"Odds are\"); \"pinched\" recurs but not noticeably.",
+   "essence": "Unmistakably the same forum question and helpful answer, with its shape and its link."
+  },
+  "engine": {
+   "meaning": "Mostly the original verbatim, but adds \"What should I do? Buggered if I know.\" which has the asker answer their own question, slightly changing the post.",
+   "sense": "\"I was reckoned to leave the blanket behind\" uses \"reckoned\" for \"supposed to\", which is the wrong sense. \"I felt a shocker\" strains: a shocker is something you have, not feel.",
+   "authenticity": "Swears are bolted on (\"my bloody other stuff\", \"Bloody hell, obviously\"); US forms left in (\"stolen it on accident\", \"receive it in the mail\").",
+   "register": "Most of the text, including the whole reply, is untranslated (\"To avoid any lingering feelings of guilt, you can call the airline\"). The Aussie that is there is a few swears, within vulgarity 1, but well below level 3.",
+   "tone": "The bolted-on \"Bloody hell, obviously\" and \"Buggered if I know\" make the earnest, embarrassed asker sound flippant in places.",
+   "flow": "\"I just grabbed it with my bloody other stuff\" breaks the noun phrase; \"Bloody hell, obviously, I will never do this again\" is a clunky join.",
+   "variety": "Leans on \"bloody\"/\"bugger\" forms (\"Buggered\", \"bloody\", \"bugger\", \"Bloody hell\") with little else.",
+   "essence": "Recognisably the original because it is mostly the original, but the inserted swears flatten the asker's worried character."
+  },
+  "yarn": {
+   "meaning": "All points survive, including the cost reasoning and the link. Additions are colour: \"Listen to this.\" and \"No dramas either way.\"",
+   "sense": "Mostly exact (\"travel caper\", \"went into a bit of a flap\", \"give the airline a ring\"). \"I felt a shocker\" strains, and \"off with the fairies\" for \"not fully alert\" is a slight stretch of the usual \"away with the fairies\".",
+   "authenticity": "Largely natural: \"No bugger said a word to me\", \"Odds are they'll tell you to keep it\". \"off with the fairies\" is a near-miss of the set phrase \"away with the fairies\".",
+   "register": "Right weight for level 3: a steady sprinkling (\"caper\", \"nicked\", \"flamin' guilty\", \"No dramas\") without turning into a pub yarn; \"No bugger\" and \"flamin'\" sit inside vulgarity 1.",
+   "tone": "Keeps the asker's embarrassed sincerity and the reply's reassurance; \"No dramas either way\" suits the reply.",
+   "flow": "Smooth on the whole; the opener \"Listen to this.\" sits a little oddly at the top of a forum post.",
+   "variety": "Varied: \"Nicked\", \"pinched\", \"caper\", \"flamin'\", \"a flap\", \"off with the fairies\", \"No dramas\".",
+   "essence": "Unmistakably the same post and answer, retold."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "Sorry if this is a daft question",
+    "original": "Sorry if this is a silly question",
+    "severity": "minor",
+    "why": "\"daft\" is more British than Australian; \"dumb\" or \"silly\" would sit more naturally."
+   },
+   {
+    "quote": "I'm pretty new to travelling in general.",
+    "original": "I'm very new to traveling in general.",
+    "severity": "minor",
+    "why": "Little Aussie colour in many lines; a touch light for a level-3 brief."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "What should I do? Buggered if I know.",
+    "original": "What should I do?",
+    "severity": "major",
+    "why": "Added line has the asker answer their own question, a jarring stock tag."
+   },
+   {
+    "quote": "I was reckoned to leave the blanket behind",
+    "original": "I was supposed to leave the blanket behind",
+    "severity": "major",
+    "why": "\"reckoned\" does not mean \"supposed\"; wrong sense and ungrammatical."
+   },
+   {
+    "quote": "I just grabbed it with my bloody other stuff",
+    "original": "I just grabbed it with my other stuff",
+    "severity": "major",
+    "why": "Intensifier dropped into the middle of a noun phrase; no Australian would say it this way."
+   },
+   {
+    "quote": "Bloody hell, obviously, I will never do this again",
+    "original": "Obviously, I will never do this again",
+    "severity": "minor",
+    "why": "Exclamation bolted onto a calm sentence."
+   },
+   {
+    "quote": "I felt a shocker about accidentally stealing the blanket",
+    "original": "I felt terrible about accidentally stealing the blanket",
+    "severity": "minor",
+    "why": "\"a shocker\" is something you have, not something you feel; strains."
+   },
+   {
+    "quote": "I had stolen it on accident",
+    "original": "I had stolen it on accident",
+    "severity": "major",
+    "why": "US \"on accident\" left in; Australians say \"by accident\"."
+   },
+   {
+    "quote": "To avoid any lingering feelings of guilt, you can call the airline",
+    "original": "To avoid any lingering feelings of guilt, you can call the airline",
+    "severity": "major",
+    "why": "The whole reply is left untranslated, including US \"mail\"."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "I felt a shocker about nicking the thing by accident",
+    "original": "I felt terrible about accidentally stealing the blanket",
+    "severity": "minor",
+    "why": "\"a shocker\" is something you have, not feel; strains."
+   },
+   {
+    "quote": "you were off with the fairies when you got off the plane",
+    "original": "you were not fully alert when you left the aircraft",
+    "severity": "minor",
+    "why": "The idiom is \"away with the fairies\"; \"off\" also echoes \"got off\" in the same line."
+   },
+   {
+    "quote": "Listen to this.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added opener reads like spoken yarn, slightly odd at the start of a written question."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Clean, faithful and natural, a little lighter than level 3 asks.",
+  "engine": "Largely untranslated, with swears bolted on in awkward places and a few wrong-sense swaps.",
+  "yarn": "Natural, varied and at the right weight; a couple of slightly bent idioms."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

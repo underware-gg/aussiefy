@@ -1,0 +1,36 @@
+# Gap inventory for the 2026-10-11 gap-fill round. What the engine can't Aussify yet:
+#   corpus_gaps.yaml   words it leaves plain in the public-domain reference texts (with their sentences)
+#   below              plain-English words and functions with no trigger at all (checked against the dictionary),
+#                      the reference set's known failures, and thin spots in the garnish
+# Words here have no real text to test against, so synthetic passages are written for them.
+
+states:          # predicate adjectives: "she was ___"
+  emotion: [irate, enraged, despondent, dejected, jubilant, elated, nervous, anxious, worried, jealous, embarrassed, bored]
+  fear_and_fatigue: [petrified, weary, fatigued]
+  money: [destitute, impoverished, expensive]
+  drink: [inebriated]
+  character: [generous, clever, smart, rude, annoying, boring, odd, strange, weird]
+  looks: [handsome, attractive, pretty, beautiful]
+  physical: [noisy, loud, dangerous, difficult, tiny, wet, soaked]
+  luck: [unlucky]
+weather_time_manner: [sunny, windy, early, late, slowly, nearby]
+people: [wife, husband, parents, girl, liar, gossip]
+places_and_things: [house, bedroom, door, chair, bowl, beach, party, cigarette, lunch, dinner, dog, shower]
+actions: [argue, lie (tell lies), joke, wake up, wait, watch, jump, cry (cried), gossip, tidy up]
+
+known_failures:   # from training/reference.yaml
+  - {query: having a chinwag, note: "CHAT has one entry; slang for chatting is thin"}
+  - {query: a heap of money, note: "RICH has no money-phrase triggers ('rolling in money', 'a pile of cash')"}
+  - {query: run off my feet, note: "BUSY; the idiom reads as running"}
+  - {query: wide awake, note: "no AWAKE concept"}
+
+fillers_and_discourse:   # the garnish has 13 openers, 9 tags, 7 closers, 5 connectives, 14 asides, 4 tails
+  sentence_final_tags: "eh, hey, but (sentence-final), and that, or something: none yet"
+  hedges: "sort of, kind of, pretty much, a bit: none yet"
+  openers: "look, listen, righto, yeah, nah: few non-exclamation openers"
+  connectives: "only anyway / well / now / so anyway / mate"
+  agreement_disagreement_fillers: "yeah nah, nah yeah, yeah no: check"
+  thinking_fillers: "I reckon, I s'pose, dunno, ya know: check"
+  intensifiers: "real, dead, heaps, well (adverb): partly covered"
+
+thin_concepts: "concepts with a single entry: see existing_forms.txt; e.g. CHAT, HASSLE, FED_UP, LAZY, LUCKY, WALK, TALK_ON"

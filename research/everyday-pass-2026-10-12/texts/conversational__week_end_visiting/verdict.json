@@ -1,0 +1,193 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "unharnessed": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 4,
+   "flow": 3,
+   "variety": 1,
+   "essence": 4
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Every beat survives: the house-party, \"Liberty Hall\", eight and eight-twenty, the creak, Lorna Doone, the 1902 mandolin photo, the barges, the sonnets, the Alps inscription kept verbatim, Emerson, \"Ten past nine, that's all!\", skipping the bath.",
+   "sense": "Mostly exact (\"have a squiz at the pictures\", \"dodgy-looking barges\", \"Bit of a scruffy-looking lot\"), but \"open it, ever so politely\" shifts \"modestly\" (discreetly) toward courtesy, and \"Not bad, I s'pose\" brings in a first-person narrator the second-person piece lacks.",
+   "authenticity": "Natural: \"Sleep in as long as you like\", \"kill a bit of time\", \"Oh, righto then!\". \"Some people _are_ like that. Too right they are.\" is a bolted-on tag.",
+   "register": "Light level-2 touches (\"brekkie\", \"beaut\", \"squiz\", \"dodgy\") on a plain modern retelling; no swearing.",
+   "tone": "The mock-solemn comedy of the anxious guest is intact: \"Never touch a sonnet before breakfast\", \"We'll read it just to spite 'em.\"",
+   "flow": "Reads smoothly; the added \"Too right they are.\" after the italic punchline flattens it.",
+   "variety": "Varied light slang with nothing leaned on: \"brekkie\", \"beaut\", \"squiz\", \"dodgy\", \"righto\", \"on the sly\", \"a wander round\".",
+   "essence": "Unmistakably the original sketch, retold."
+  },
+  "unharnessed": {
+   "meaning": "All points kept, including the inscription verbatim and \"Only ten past nine!\".",
+   "sense": "\"perfectly bonzer\" neatly replaces the American \"perfectly bully\"; \"open it a modest crack\", \"scruffy-looking mob\", \"dodgy-looking barges\" all fit.",
+   "authenticity": "Natural throughout; \"Scratch the bath as too noisy\" is a slightly awkward hybrid of slang and the original's construction.",
+   "register": "A light level-2 touch: \"bonzer\", \"mob\", \"dodgy\", \"righto\", \"Sleep in\"; no swearing.",
+   "tone": "The dry, self-mocking comedy comes through whole: \"Never touch a sonnet before breakfast\", \"We'll read it just out of spite.\"",
+   "flow": "Reads like it was written that way.",
+   "variety": "Modest but varied set; nothing repeated.",
+   "essence": "Unmistakably the original, lightly retold."
+  },
+  "engine": {
+   "meaning": "Content largely unchanged, but the quoted inscription is altered to \"To my beaut friends the Elbridges\", which changes a quoted document.",
+   "sense": "\"Too right, where there is a large house-party\" uses an emphatic agreement for \"Of course\" as a discourse opener; \"To my beaut friends\" inserts slang into a 1907 inscription.",
+   "authenticity": "Slang words dropped into untouched period prose: \"At what time is brekkie?\", \"Let's take a squiz\", with American \"perfectly bully\" left in.",
+   "register": "Largely untranslated: three or four swapped words in the original's text, lighter than level 2.",
+   "tone": "The original tone mostly survives because the text is unchanged, but \"To my beaut friends\" jars the joke about the inscription.",
+   "flow": "Original text reads well, but \"At what time is brekkie?\" and \"Too right, where there is\" are jarring joins.",
+   "variety": "Only \"Too right\", \"brekkie\", \"squiz\", \"beaut\" in the whole piece.",
+   "essence": "Recognisably the original, almost verbatim."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "Some people _are_ like that. Too right they are.",
+    "original": "Some people _are_ like that.",
+    "severity": "minor",
+    "why": "Bolted-on tag that steps on the punchline."
+   },
+   {
+    "quote": "Not bad, I s'pose.",
+    "original": "Fair enough, at that.",
+    "severity": "minor",
+    "why": "Introduces an \"I\" voice into a piece written in \"you\"."
+   },
+   {
+    "quote": "ever so politely",
+    "original": "modestly",
+    "severity": "minor",
+    "why": "\"modestly\" here means discreetly, not politely."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "Scratch the bath as too noisy.",
+    "original": "Eliminate the tub as too noisy.",
+    "severity": "minor",
+    "why": "\"Scratch ... as too noisy\" is an awkward join."
+   },
+   {
+    "quote": "a frightful mix-up",
+    "original": "a frightful misunderstanding",
+    "severity": "minor",
+    "why": "\"frightful\" left as British period diction; fine but less Aussie."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Too right, where there is a large house-party",
+    "original": "Of course, where there is a large house-party",
+    "severity": "major",
+    "why": "\"Too right\" is agreement, not a sentence opener meaning \"of course\"."
+   },
+   {
+    "quote": "To my beaut friends the Elbridges",
+    "original": "To my good friends the Elbridges",
+    "severity": "major",
+    "why": "Alters a quoted inscription and puts slang in a 1907 lady's hand."
+   },
+   {
+    "quote": "At what time is brekkie?",
+    "original": "At what time is breakfast?",
+    "severity": "minor",
+    "why": "Slang bolted onto stiff formal syntax."
+   },
+   {
+    "quote": "The sentiment in this attitude is perfectly bully",
+    "original": "The sentiment in this attitude is perfectly bully",
+    "severity": "major",
+    "why": "American \"bully\" left in; representative of the untranslated bulk."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A lively, natural level-2 retelling with good variety; a couple of small slips, including one bolted-on tag.",
+  "unharnessed": "Faithful and smooth, with well-chosen light Aussie touches; the closest fit to a level-2 brief.",
+  "engine": "A word-swap pass on the original that lands slang in the wrong places, including inside a quoted inscription."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

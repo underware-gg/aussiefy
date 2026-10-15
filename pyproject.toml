@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aussiefy"
+dynamic = ["version"]   # aussiefy.__version__, the one place it is written (scripts/promote.py prepare sets it)
+description = "Rewrite plain English as Australian slang, with level (1-5), vulgarity (0-3) and embellishment (0-2) controls."
+readme = "README.md"
+license = "MIT AND Apache-2.0"
+license-files = ["LICENSE", "LICENSES/*.txt", "THIRD_PARTY_NOTICES.md"]
+requires-python = ">=3.10"
+dependencies = ["PyYAML>=6", "markdown-it-py>=4,<5"]
+
+[project.optional-dependencies]
+# 0.120: the first SDK that takes every argument claude.create sends (fallbacks="default", output_config,
+# top-level cache_control)
+llm = ["anthropic>=0.120"]
+scrape = ["requests>=2.31", "beautifulsoup4>=4.12"]
+embeddings = ["sentence-transformers>=3"]
+mcp = ["mcp>=2"]
+# everything the suite needs to run without skips (promote.py fails a release on any other skip): mcp for the parity
+# tests, numpy for the model gate, the scrape extra for the scrape pipeline, tokenizers (pinned as in
+# training/requirements.txt) for tokeniser parity
+dev = ["pytest>=8", "ruff>=0.6", "mcp>=2", "numpy", "requests>=2.31", "beautifulsoup4>=4.12", "tokenizers==0.22.2",
+       "tomli>=2; python_version < '3.11'", "build>=1.2", "setuptools>=77", "wheel"]
+
+[project.scripts]
+aussiefy = "aussiefy.cli:main"
+aussiefy-mcp = "aussiefy.mcp_server:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "aussiefy.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["aussiefy*"]
+
+[tool.setuptools.package-data]
+aussiefy = ["data/*.yaml", "data/entries/*.yaml", "data/model/*", "data/pos/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+extend-exclude = ["build", "research"]
+
+[tool.ruff.lint]
+select = ["F"]   # pyflakes: unused and undefined names. Layout is left to the author.

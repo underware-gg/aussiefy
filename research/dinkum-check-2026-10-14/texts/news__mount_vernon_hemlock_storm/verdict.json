@@ -1,0 +1,169 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "dinkum-3": "A",
+  "dinkum-4": "B",
+  "yarn-dinkum": "C"
+ },
+ "scores": {
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "dinkum-4": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "dinkum-3": {
+   "meaning": "All facts kept: the 227-year-old hemlock, 1791, \"gusts of reportedly up to 70 mph (about 110 km/h)\", the whisky barrel, Clinton not related, VP 1805–1812, the magnolia and the sequoia. \"with bits set aside for special projects\" and \"delivered in a whisky barrel, no less\" are colour on original points.",
+   "sense": "Terms fit: \"got knocked flat on Friday by gusts\", \"Washington's own patch\", \"as a pressie\", \"It's not the only old US tree to come a gutser lately\" (a heavy fall, apt for a toppled tree). \"governments\" for administrations is a fair Aussie rendering.",
+   "authenticity": "Sounds like an Aussie telling the story: \"the Mount Vernon mob\", \"come a gutser\", \"pressie\", \"cos the first White House wasn't built yet\". \"So get this.\" is a slightly stock opener.",
+   "register": "Right at level 3: a steady sprinkle of Aussie through the piece (\"own patch\", \"mob\", \"pressie\", \"no less\", \"come a gutser\") without turning it into a pub yarn. No swearing.",
+   "tone": "Keeps the light, curious news-item tone, a touch chattier: \"And no, the New York governor's no relation to the 42nd President Bill Clinton\".",
+   "flow": "Smooth throughout: \"The hemlock went in back in 1791, and it got knocked flat on Friday by gusts of reportedly up to 70 mph (about 110 km/h).\"",
+   "variety": "Varied: \"taken out\", \"knocked flat\", \"patch\", \"mob\", \"pressie\", \"no less\", \"come a gutser\"; nothing repeated.",
+   "essence": "Unmistakably the same story of the fallen Mount Vernon hemlock and its history, retold: \"It was sent down by New York Governor George Clinton as a pressie, delivered in a whisky barrel, no less.\""
+  },
+  "dinkum-4": {
+   "meaning": "All facts kept: \"gathered up to be preserved and put towards special projects\", \"reportedly up to 70 mph (about 110 kph)\", the barrel, the Clinton note, the other fallen trees.",
+   "sense": "Mostly fits: \"own place\", \"as a pressie\", \"it rocked up in a whisky barrel\". \"the people running the Mount Vernon estate reckoned the Canadian hemlock had been gathered up\" makes a factual report sound like an opinion.",
+   "authenticity": "Natural where used: \"cos the first White House wasn't finished yet\", \"it rocked up in a whisky barrel\", \"no relation\". Nothing forced.",
+   "register": "A little light for level 3: a handful of terms (\"reckoned\", \"pressie\", \"rocked up\", \"cos\") over mostly plain retelling. No swearing.",
+   "tone": "Keeps the newsy, mildly curious tone: \"It's not the only bit of US history to come down lately, either.\"",
+   "flow": "Reads smoothly: \"The hemlock went in the ground in 1791 and came down in Friday's gusts, which were reportedly up to 70 mph (about 110 kph).\"",
+   "variety": "Modest range; \"come down\" and \"came down\" do double duty for falling (\"came down in Friday's gusts\", \"to come down lately\").",
+   "essence": "Clearly the same story with its distinctive whisky-barrel and Clinton details: \"it rocked up in a whisky barrel\"."
+  },
+  "yarn-dinkum": {
+   "meaning": "All facts kept, including \"used for special projects\", \"gusts reportedly up to 70 mph (about 110 kph)\", \"it turned up in a whisky barrel\", and the Clinton and other-trees details.",
+   "sense": "Terms fit: \"took out a 227-year-old tree\", \"the mob that runs the Mount Vernon estate\", \"It's not the only bit of US history to go over lately\".",
+   "authenticity": "Natural but sparse: \"the mob that runs\", \"cos the first White House wasn't finished yet\". Most lines are plain English (\"sent it as a present\").",
+   "register": "Light for level 3, closer to level 2: only a few markers (\"took out\", \"mob\", \"cos\", \"go over\") and \"present\" where an Aussie retelling would likely say pressie. No swearing.",
+   "tone": "Keeps the original news tone intact: \"The hemlock, planted back in 1791, came down on Friday in gusts reportedly up to 70 mph (about 110 kph).\"",
+   "flow": "Smooth: \"According to the Mount Vernon people, the hemlock is the best documented tree on the whole estate: New York Governor George Clinton sent it as a present, and it turned up in a whisky barrel.\"",
+   "variety": "Limited slang, and \"came down\" and \"come down\" repeat (\"came down on Friday\", \"has come down too\").",
+   "essence": "Clearly the original story, lightly retold: \"it turned up in a whisky barrel\"."
+  }
+ },
+ "problems": {
+  "dinkum-3": [
+   {
+    "quote": "So get this.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added stock opener; fine as colour but a little forced."
+   },
+   {
+    "quote": "According to the Mount Vernon mob",
+    "original": "According to Mount Vernon officials",
+    "severity": "minor",
+    "why": "\"Mob\" for estate officials is natural Aussie but a touch cheeky for officials."
+   }
+  ],
+  "dinkum-4": [
+   {
+    "quote": "the people running the Mount Vernon estate reckoned the Canadian hemlock had been gathered up",
+    "original": "officials overseeing the Mount Vernon estate indicated the Canadian hemlock has been collected",
+    "severity": "minor",
+    "why": "\"Reckoned\" implies an opinion or guess, not a report of a done thing."
+   },
+   {
+    "quote": "came down in Friday's gusts",
+    "original": "was toppled by the gusts",
+    "severity": "minor",
+    "why": "\"Come down\" is reused for the other trees, a little repetitive."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "New York Governor George Clinton sent it as a present",
+    "original": "sent by New York Governor George Clinton as a gift",
+    "severity": "minor",
+    "why": "Plain English left where the brief asks for more Aussie; shows the overall lightness."
+   },
+   {
+    "quote": "has come down too",
+    "original": "recently fallen",
+    "severity": "minor",
+    "why": "Repeats \"came down\" from the hemlock paragraph."
+   }
+  ]
+ },
+ "summaries": {
+  "dinkum-3": "The best-judged level-3 retelling: faithful, smooth, varied and genuinely Australian.",
+  "dinkum-4": "Faithful, smooth and natural, slightly lighter than level 3, with one strained \"reckoned\".",
+  "yarn-dinkum": "Accurate and smooth but under-translated for level 3, with few Aussie touches."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "dinkum-3",
+    "dinkum-4",
+    "yarn-dinkum"
+   ]
+  ],
+  "flow": [
+   [
+    "dinkum-3",
+    "dinkum-4",
+    "yarn-dinkum"
+   ]
+  ],
+  "variety": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "dinkum-4"
+   ],
+   [
+    "yarn-dinkum"
+   ]
+  ],
+  "essence": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "dinkum-4",
+    "yarn-dinkum"
+   ]
+  ],
+  "overall": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "dinkum-4"
+   ],
+   [
+    "yarn-dinkum"
+   ]
+  ]
+ }
+}

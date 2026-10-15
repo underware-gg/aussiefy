@@ -1,0 +1,61 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {"evidence": "Every ingredient, quantity, temperature and time kept: \"2 cups yellow or white self-raising corn meal\", \"Preheat the oven to 425°F\", \"25–30 minutes\", \"Let it cool for 5 minutes in the pan\". \"a solid, no-sugar kind of cornbread\" slightly shifts \"hearty\".", "score": 5},
+        "sense": {"evidence": "Terms fit the kitchen: \"easy as to make\", \"tea (dinner)\" for the evening meal, \"brekkie\", \"whack it in the oven\", \"a skewer poked into the centre\", \"full-cream milk\", \"tea towel\". \"solid\" for hearty strains a little.", "score": 4},
+        "authenticity": {"evidence": "Reads like an Australian recipe: \"It's easy as to make\", \"getting stuck into it\", \"pop it in the oven\", \"baking tin\", \"kept in the fridge\".", "score": 5},
+        "register": {"evidence": "A touch light for level 4: the method is mostly plain Australian recipe English (\"Beat the egg in the bowl. Stir in the buttermilk and oil.\") with slang mainly in the intro and a few verbs.", "score": 4},
+        "tone": {"evidence": "Stays a friendly, practical recipe: \"Go easy and don't overmix it.\"", "score": 5},
+        "flow": {"evidence": "Smooth throughout: \"If you're using a cast-iron frying pan, whack it in the oven to heat up.\"", "score": 5},
+        "variety": {"evidence": "Varied: \"easy as\", \"feed\", \"brekkie\", \"getting stuck into\", \"whack\", \"pop\", \"skewer\", \"tea towel\".", "score": 5},
+        "essence": {"evidence": "Clearly the Wikibooks cornbread recipe, intro, ingredients, equipment, method and notes in order.", "score": 5}
+      },
+      "problems": [
+        {"quote": "a solid, no-sugar kind of cornbread", "original": "a hearty, unsweetened variety of cornbread", "severity": "minor", "why": "\"solid\" can suggest dense or heavy rather than filling."}
+      ],
+      "summary": "A natural Australian recipe rewrite, faithful in every quantity; a little light on slang for level 4."
+    },
+    "B": {
+      "scores": {
+        "meaning": {"evidence": "Mostly verbatim, but \"lunch or tea (tea)\" garbles the original's \"dinner (supper)\" gloss into a meaningless repetition.", "score": 4},
+        "sense": {"evidence": "Swaps fit their sense (\"self-raising\", \"full-cream milk\", \"frying pan\", \"whack it in the oven\") except \"lunch or tea (tea)\", which loses the gloss.", "score": 4},
+        "authenticity": {"evidence": "Little Aussie and it sits in formal US recipe prose: \"If using cast-iron frying pan, whack it in the oven to heat.\"", "score": 2},
+        "register": {"evidence": "Far under level 4: most lines are the original, e.g. \"Southern Cornbread is a hearty, unsweetened variety of cornbread, widely served in the Southeastern United States.\"", "score": 1},
+        "tone": {"evidence": "The neutral recipe tone is kept because the text is largely unchanged.", "score": 5},
+        "flow": {"evidence": "Readable but with jolts: \"lunch or tea (tea)\" and \"If using cast-iron frying pan, whack it in the oven\".", "score": 3},
+        "variety": {"evidence": "Only spelling and product swaps plus one \"whack\".", "score": 2},
+        "essence": {"evidence": "It is the recipe, barely retold.", "score": 4}
+      },
+      "problems": [
+        {"quote": "lunch or tea (tea)", "original": "lunch or dinner (supper)", "severity": "major", "why": "Mechanical swap turns the gloss into a meaningless repetition."},
+        {"quote": "Southern Cornbread is a hearty, unsweetened variety of cornbread, widely served in the Southeastern United States.", "original": "Southern Cornbread is a hearty, unsweetened variety of cornbread, widely served in the Southeastern United States.", "severity": "major", "why": "Text left largely untranslated; far under a level-4 brief."},
+        {"quote": "If using cast-iron frying pan, whack it in the oven to heat.", "original": "If using cast-iron skillet, place it in the oven to heat.", "severity": "minor", "why": "Slang verb in clipped formal syntax reads oddly."}
+      ],
+      "summary": "Mostly the original with localised spellings and terms, one broken gloss; far too light for level 4."
+    },
+    "C": {
+      "scores": {
+        "meaning": {"evidence": "All quantities, temperatures and times intact: \"Crank the oven up to 425°F\", \"For an 8-inch frypan that can be 25–30 minutes\", \"Let it cool for 5 minutes in the pan\". \"for a few days\" and \"a few months\" for \"several\" is close enough.", "score": 5},
+        "sense": {"evidence": "Terms fit: \"a doddle to make\", \"dinner (tea, if you like)\", \"bung it in the oven\", \"Tip the batter into the frypan\", \"mix till it's just wet through\", \"to stop it drying out\".", "score": 5},
+        "authenticity": {"evidence": "Sounds like an Aussie cook: \"knock together a quick, simple feed\", \"give it a spray of non-stick\", \"Go easy and don't overmix the bugger.\"", "score": 5},
+        "register": {"evidence": "Level 4 weight carried through the method as well as the intro (\"Crank\", \"bung\", \"whack\", \"Tip\"), with dad-level \"the bugger\".", "score": 5},
+        "tone": {"evidence": "A friendly, practical recipe voice; the slang adds warmth without losing the instructions.", "score": 5},
+        "flow": {"evidence": "Smooth: \"If you're using a cast-iron frypan, bung it in the oven to heat up. Don't preheat any other kind of frypan or baking tin.\"", "score": 5},
+        "variety": {"evidence": "Varied: \"dished up\", \"doddle\", \"knock together\", \"feed\", \"brekkie\", \"getting stuck into\", \"Crank\", \"bung\", \"whack\", \"Tip\".", "score": 5},
+        "essence": {"evidence": "Unmistakably the cornbread recipe, every section kept.", "score": 5}
+      },
+      "problems": [
+        {"quote": "Go easy and don't overmix the bugger.", "original": "Take care not to overmix.", "severity": "minor", "why": "\"the bugger\" for batter is a little forced, though within the brief."}
+      ],
+      "summary": "A lively, faithful level-4 recipe that keeps every quantity and sounds like an Aussie kitchen."
+    }
+  },
+  "rankings": {
+    "tone": [["A", "C"], ["B"]],
+    "flow": [["A", "C"], ["B"]],
+    "variety": [["C"], ["A"], ["B"]],
+    "essence": [["A", "C"], ["B"]],
+    "overall": [["C"], ["A"], ["B"]]
+  }
+}

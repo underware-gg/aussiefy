@@ -1,0 +1,99 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {"evidence": "Every feature and claim survives, with colour hanging off the original (\"the bloke at the wheel\", \"no worries\"). \"make sure nothing ever falls over\" renders \"no downtime\" fairly; \"doesn't let on to clients they exist till they're ready to serve\" is a loose but workable gloss of \"doesn't advertise them\".", "score": 5},
+        "sense": {"evidence": "Most terms fit (\"Say a container carks it\", \"turf the old ones\", \"Bolt features onto your Kubernetes cluster\"), but \"knocks off containers that won't answer\" can read as stealing or finishing work, and \"doesn't let on to clients they exist\" strains the technical sense of advertising to clients.", "score": 4},
+        "authenticity": {"evidence": "Natural Australian voice: \"Wouldn't it be a bloody sight easier\", \"cop a hit and keep going\", \"without mucking about with the upstream source code\", \"knocking up developer platforms\".", "score": 5},
+        "register": {"evidence": "Level 4 weight across prose and bullets (\"If a container's getting slammed with traffic\", \"stash and manage sensitive stuff\") without yarn asides; swearing within dad level (\"a bloody sight easier\").", "score": 5},
+        "tone": {"evidence": "The docs' upbeat explanatory tone survives: \"That's where Kubernetes rides in to save the day!\", \"Kubernetes gives you the building blocks\".", "score": 5},
+        "flow": {"evidence": "Reads smoothly: \"it'll shift the actual state over to that at a steady, controlled clip\". \"all-in, everything-in-the-box PaaS\" stacks a little.", "score": 4},
+        "variety": {"evidence": "Varied: \"carks it\", \"fire up\", \"slammed\", \"takes your fancy\", \"turf\", \"bang for your buck\", \"stash\", \"Dishing out\", \"Bolt\"; \"falls over\" recurs three times.", "score": 4},
+        "essence": {"evidence": "Unmistakably the Kubernetes overview, feature list and \"What Kubernetes is not\" intact, retold.", "score": 5}
+      },
+      "problems": [
+        {"quote": "knocks off containers that won't", "original": "kills containers that don't", "severity": "minor", "why": "\"Knock off\" also means steal or finish work; \"kills off\" would be clearer."},
+        {"quote": "doesn't let on to clients they exist till they're", "original": "doesn't advertise them to clients until they", "severity": "minor", "why": "Loose rendering of a technical term (routing traffic), though the gist survives."},
+        {"quote": "all-in, everything-in-the-box PaaS", "original": "all-inclusive PaaS", "severity": "minor", "why": "Two near-synonyms stacked."}
+      ],
+      "summary": "Natural, well weighted and faithful; a couple of slightly loose technical glosses."
+    },
+    "B": {
+      "scores": {
+        "meaning": {"evidence": "Identical to the original apart from \"behaviour\" and a couple of contractions (\"there's no downtime\", \"isn't monolithic\").", "score": 5},
+        "sense": {"evidence": "No Aussie terms to take a wrong sense; \"Kubernetes provides you with a framework to run distributed systems resiliently\" is the original.", "score": 5},
+        "authenticity": {"evidence": "No Aussie beyond spelling; US \"containerized\" is even left in (\"run containerized tasks\").", "score": 2},
+        "register": {"evidence": "Untranslated: \"Kubernetes combines\" and \"best-of-breed ideas and practices\" are verbatim. Far off a level 4 brief.", "score": 1},
+        "tone": {"evidence": "The docs tone is kept exactly: \"That's how Kubernetes comes to the rescue!\"", "score": 5},
+        "flow": {"evidence": "Reads as the original documentation: \"It takes care of scaling and failover for your application\".", "score": 5},
+        "variety": {"evidence": "No slang at all: \"Kubernetes provides you with:\"", "score": 1},
+        "essence": {"evidence": "It is the original: \"Kubernetes is not a traditional, all-inclusive PaaS\".", "score": 5}
+      },
+      "problems": [
+        {"quote": "Kubernetes combines", "original": "Kubernetes combines", "severity": "critical", "why": "The whole text is left untranslated, missing the level 4 brief entirely."},
+        {"quote": "run containerized tasks", "original": "run containerized tasks", "severity": "minor", "why": "US spelling left in while \"behaviour\" was changed."}
+      ],
+      "summary": "The original with a spelling change; no Aussie retelling."
+    },
+    "C": {
+      "scores": {
+        "meaning": {"evidence": "All features survive, but some additions go beyond colour: \"That's just what you get when you can't be bothered spelling it out\" invents a reason for K8s, \"Say a container carks it at three in the morning\" adds a detail, and \"so the deployment stays stable and nothing falls over\" doubles a claim. \"Out with the old, in with the new.\" and \"Both flavours.\" hang off the original.", "score": 4},
+        "sense": {"evidence": "Terms fit: \"getting hammered with traffic\", \"takes your fancy\", \"brings to the party\", \"good to go\", \"take 'em or leave 'em\".", "score": 5},
+        "authenticity": {"evidence": "Natural voice, with a nice local image (\"like a bloke packing the boot for a trip down the coast\"), but stock framing lines (\"Pull up a stool.\", \"Your call, mate.\") are bolted on.", "score": 4},
+        "register": {"evidence": "Heavier than level 4, a full yarn: \"Pull up a stool. So the name Kubernetes, right\", \"No half-baked containers on its watch.\", \"Now, don't go thinking Kubernetes is your traditional, all-in PaaS (Platform as a Service) system, cos it isn't.\" No swearing.", "score": 3},
+        "tone": {"evidence": "The explanatory, upbeat tone survives as a yarn, which the brief allows; \"Your call, mate.\" and \"No half-baked containers on its watch.\" lean jokey but not against the original.", "score": 4},
+        "flow": {"evidence": "Reads aloud naturally, though padded: \"Kubernetes lets you store and manage sensitive information, your passwords, OAuth tokens, and SSH keys and that.\"", "score": 4},
+        "variety": {"evidence": "Varied throughout: \"beaut\", \"carks it\", \"cop a hit\", \"without breaking a sweat\", \"brings to the party\", \"hammered\", \"take 'em or leave 'em\".", "score": 5},
+        "essence": {"evidence": "Recognisably the overview with its structure intact, though the asides shift it from documentation toward a pub explanation.", "score": 4}
+      },
+      "problems": [
+        {"quote": "That's just what you get when you can't be bothered spelling it out", "original": "K8s as an abbreviation results from counting the eight letters between the \"K\" and the \"s\".", "severity": "minor", "why": "Invents a motive; the original just explains the abbreviation."},
+        {"quote": "Say a container carks it at three in the morning", "original": "For example, if a container goes down", "severity": "minor", "why": "Adds a detail not in the original."},
+        {"quote": "Pull up a stool.", "original": "", "severity": "minor", "why": "Stock yarn framing; heavier than level 4."},
+        {"quote": "Your call, mate.", "original": "", "severity": "minor", "why": "Tacked-on tag, beyond the brief's weight."}
+      ],
+      "summary": "Lively, natural and varied, but a full yarn heavier than asked, with a few invented details."
+    },
+    "D": {
+      "scores": {
+        "meaning": {"evidence": "Faithful: every feature survives, e.g. \"get rid of existing containers and hand all their resources over to the new container\".", "score": 5},
+        "sense": {"evidence": "The terms used fit: \"if a container carks it\", \"a beaut way to bundle\", \"the pick of the ideas\", \"isn't one big lump\".", "score": 5},
+        "authenticity": {"evidence": "Natural where Aussie, but much is plain docs English: \"You can describe the desired state for your deployed containers using Kubernetes, and it can change the actual state to the desired state at a controlled rate.\"", "score": 4},
+        "register": {"evidence": "Noticeably light for level 4: most bullets are near-verbatim (\"Add features to your Kubernetes cluster without changing upstream source code.\", \"Allocation of IPv4 and IPv6 addresses to Pods and Services.\").", "score": 3},
+        "tone": {"evidence": "The docs tone is kept: \"That's how Kubernetes comes to the rescue!\"", "score": 5},
+        "flow": {"evidence": "Reads smoothly, though \"to run distributed systems so they bounce back\" is a slightly awkward join.", "score": 4},
+        "variety": {"evidence": "Limited slang to vary: \"beaut\", \"carks it\", \"pick of the ideas\", \"one big lump\", \"room to move\".", "score": 3},
+        "essence": {"evidence": "Unmistakably the overview, lightly retold.", "score": 5}
+      },
+      "problems": [
+        {"quote": "Add features to your Kubernetes cluster without changing upstream source code.", "original": "Add features to your Kubernetes cluster without changing upstream source code.", "severity": "major", "why": "Large parts left as the original, well under a level 4 brief."},
+        {"quote": "to run distributed systems so they bounce back", "original": "to run distributed systems resiliently", "severity": "minor", "why": "Slightly awkward rendering."}
+      ],
+      "summary": "Faithful and clean but too light for level 4."
+    },
+    "E": {
+      "scores": {
+        "meaning": {"evidence": "Every point survives: \"Say a container carks it: another container needs to start up.\", \"these default solutions are optional and pluggable\".", "score": 5},
+        "sense": {"evidence": "Terms fit: \"a beaut way to bundle\", \"chuck in the pick of the ideas\", \"good to go\", \"isn't one big lump, mind\".", "score": 5},
+        "authenticity": {"evidence": "Mostly natural (\"Thing is, in a production environment you've got to keep an eye on\"), but the opener \"Okay, so.\" is not an Aussie tic.", "score": 4},
+        "register": {"evidence": "Close to level 4 in the prose (\"no worries\", \"a fair bit more\"), lighter in the bullets (\"Allocation of IPv4 and IPv6 addresses to Pods and Services.\"). No swearing.", "score": 4},
+        "tone": {"evidence": "Upbeat explanatory tone kept: \"Well, that's where Kubernetes comes to the rescue!\"", "score": 5},
+        "flow": {"evidence": "Reads smoothly: \"Kubernetes sets you up with a framework for running distributed systems that bounce back when things go wrong.\"", "score": 5},
+        "variety": {"evidence": "Fairly varied (\"beaut\", \"carks it\", \"heaps of traffic\", \"good to go\", \"room to move\"), with \"Now,\" and \"Well,\" openers.", "score": 4},
+        "essence": {"evidence": "Unmistakably the overview, retold in a friendly voice.", "score": 5}
+      },
+      "problems": [
+        {"quote": "Okay, so.", "original": "", "severity": "minor", "why": "Filler opener, not an Aussie tic."},
+        {"quote": "Allocation of IPv4 and IPv6 addresses to Pods and Services.", "original": "Allocation of IPv4 and IPv6 addresses to Pods and Services.", "severity": "minor", "why": "Several bullets left verbatim, a shade lighter than the brief."}
+      ],
+      "summary": "Faithful, smooth and natural, slightly light in the bullets."
+    }
+  },
+  "rankings": {
+    "tone": [["A", "E"], ["B", "D"], ["C"]],
+    "flow": [["A", "E"], ["B"], ["C", "D"]],
+    "variety": [["C"], ["A"], ["E"], ["D"], ["B"]],
+    "essence": [["A", "E"], ["D"], ["B"], ["C"]],
+    "overall": [["A"], ["E"], ["C", "D"], ["B"]]
+  }
+}

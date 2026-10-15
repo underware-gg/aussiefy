@@ -1,0 +1,678 @@
+{
+ "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as rude, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+ "prompt": "BRIEF: level 2, vulgarity 0\n\nORIGINAL:\nTake, for example, the matter of arising in the morning. Of course, where there is a large house-party the problem is a simple one, for you can always hear the others pattering about and brushing their teeth. You can regulate your own arising by the number of people who seem to be astir. But if you are the only guest there is apt to be a frightful misunderstanding.\n\n\"At what time is breakfast?\" you ask.\n\n\"Oh, any old time on Sundays,\" replies the hostess with a generous gesture. \"Sleep as late as you like. This is 'Liberty Hall.'\"\n\nThe sentiment in this attitude is perfectly bully, but there is nothing that you can really take hold of in it. It satisfies at the time, but in the morning there is a vagueness about it that is simply terrifying.\n\nLet us say that you awake at eight. You listen and hear no one stirring. Then, over on the cool pillow again until eight-twenty. Again up on the elbow, with head cocked on one side. There is a creak in the direction of the stairs. They may all be up and going down to breakfast! It is but the work of a moment, to bound out of bed and listen at the door. Perhaps open it modestly and peer out. Deathlike silence, broken only, as the phrase goes, by the ticking of the hall clock, and not a soul in sight. Probably they are late sleepers. Maybe eleven o'clock is their Sunday rising hour. Some people _are_ like that.\n\nShut the door and sit on the edge of the bed. More sleep is out of the question. Let's take a look at the pictures in the guest-room, just to pass the time. Here's one of Lorna Doone. How d'e do, Lorna? Here's a group--taken in 1902--showing your host in evening clothes, holding a mandolin. Probably a member of his college musical-club. Rather unkempt looking bunch, you _must_ say. Well, how about this one? An etching, showing suspicious-looking barges on what is probably the Thames. Fair enough, at that.\n\nBack to the door and listen again. Tick-tock-tick-tock. Probably, if you started your tub, you'd wake the whole house. Let's sit down on the edge of the bed again.\n\nHello, here are some books on the table. \"Fifty Famous Sonnets,\" illustrated by Maxfield Parrish. Never touch a sonnet before breakfast. \"My experiences in the Alps,\" by a woman mountain-climber who has written on the fly-leaf, \"To my good friends the Elbridges, in memory of many happy days together at Chamounix. October, 1907.\" That settles _that_. \"Essay on Compensation\" in limp leather, by R.W. Emerson, published by Houghton, Mifflin & Co. Oh, very well! You suppose they thought that would be over your head, did they? Well, we'll just show them! We'll read it just for spite. Opening, to the red ribbon:\n\n\"Of the like nature is that expectation of change which instantly follows the suspension of our voluntary activity. The terror of cloudless noon--\"\n\nBy the way, it must be nearly noon now! Ten minutes past nine, only! Well, the only thing to do is get dressed and go out and walk about the grounds. Eliminate the tub as too noisy. And so, very cautiously, almost clandestinely, you proceed to dress.\n\nCANDIDATE A:\nOkay, so take getting up in the morning, for example. Mind you, when there's a big house-party it's easy enough, because you can always hear the others padding about and brushing their teeth. You can time your own getting up by how many people seem to be up and about. But if you're the only guest, there's every chance of a terrible mix-up.\n\n\"What time's brekkie?\" you ask.\n\n\"Oh, any old time on Sundays,\" says the hostess with a generous wave. \"Sleep in as long as you like. This is 'Liberty Hall.'\"\n\nIt's a lovely thought, but there's nothing you can really hang your hat on. It's fine at the time, but come the morning it's so vague it's downright scary.\n\nSay you wake up at eight. You listen and can't hear anyone stirring. So it's back over on the cool pillow till eight-twenty. Then up on your elbow again, head cocked to one side. There's a creak over near the stairs. They might all be up and heading down to brekkie! It only takes a second to jump out of bed and listen at the door. Maybe open it a crack and have a peek. Dead quiet, broken only, as they say, by the ticking of the hall clock, and not a soul about. They're probably late sleepers. Maybe eleven o'clock is when they get up on a Sunday. Some people _are_ like that.\n\nShut the door and sit on the edge of the bed. No chance of more sleep now. Let's have a squiz at the pictures in the guest-room, just to pass the time. Here's one of Lorna Doone. How d'e do, Lorna? Here's a group--taken in 1902--showing your host in a dinner suit, holding a mandolin. Probably in his uni music club. Pretty scruffy-looking bunch, you _must_ say. Well, what about this one? An etching of some dodgy-looking barges on what's probably the Thames. Fair enough, I s'pose.\n\nBack to the door to listen again. Tick-tock-tick-tock. If you ran yourself a bath you'd probably wake the whole house. Better sit down on the edge of the bed again.\n\nHello, here are some books on the table. \"Fifty Famous Sonnets,\" illustrated by Maxfield Parrish. Never touch a sonnet before breakfast. \"My experiences in the Alps,\" by a woman mountain-climber who's written on the fly-leaf, \"To my good friends the Elbridges, in memory of many happy days together at Chamounix. October, 1907.\" Well, that settles _that_. \"Essay on Compensation\" in limp leather, by R.W. Emerson, published by Houghton, Mifflin & Co. Oh, righto then! Reckon they thought that'd be over your head, did they? Well, we'll show them! We'll read it just to spite them. Opening it at the red ribbon:\n\n\"Of the like nature is that expectation of change which instantly follows the suspension of our voluntary activity. The terror of cloudless noon--\"\n\nHang on, it must be nearly noon by now! Only ten past nine! Well, the only thing for it is to get dressed and go for a wander round the grounds. Forget the bath, too noisy. And so, very carefully, almost on the sly, you get dressed.\n\nCANDIDATE B:\nTake, for example, the business of getting up in the morning. Of course, where there's a big house-party it's an easy one, because you can always hear the others pattering about and brushing their teeth. You can time your own getting up by how many people seem to be stirring. But if you're the only guest, there's likely to be a frightful mix-up.\n\n\"What time's breakfast?\" you ask.\n\n\"Oh, whenever you like on Sundays,\" says the hostess with a generous wave. \"Sleep in as long as you like. This is 'Liberty Hall.'\"\n\nThe feeling behind it is perfectly bonzer, but there's nothing in it you can really get a grip on. It does the job at the time, but come morning there's a vagueness about it that's downright terrifying.\n\nSay you wake up at eight. You listen and hear no one moving. Then it's back onto the cool pillow until eight-twenty. Up on the elbow again, head cocked to one side. There's a creak over towards the stairs. They might all be up and heading down to breakfast! It's the work of a moment to leap out of bed and listen at the door. Maybe open it a modest crack and peer out. Deathly silence, broken only, as they say, by the ticking of the hall clock, and not a soul in sight. They're probably late sleepers. Maybe eleven o'clock is their Sunday getting-up time. Some people _are_ like that.\n\nShut the door and sit on the edge of the bed. Any more sleep is out of the question. Let's have a look at the pictures in the guest-room, just to pass the time. Here's one of Lorna Doone. How d'e do, Lorna? Here's a group--taken in 1902--showing your host in evening dress, holding a mandolin. Probably in his college musical club. Pretty scruffy-looking mob, you _have_ to say. Well, what about this one? An etching of some dodgy-looking barges on what's probably the Thames. Fair enough, then.\n\nBack to the door to listen again. Tick-tock-tick-tock. If you ran your bath you'd probably wake the whole house. Let's sit back down on the edge of the bed.\n\nHello, here are some books on the table. \"Fifty Famous Sonnets,\" illustrated by Maxfield Parrish. Never touch a sonnet before breakfast. \"My experiences in the Alps,\" by a lady mountain-climber who's written on the fly-leaf, \"To my good friends the Elbridges, in memory of many happy days together at Chamounix. October, 1907.\" That settles _that_. \"Essay on Compensation\" in limp leather, by R.W. Emerson, published by Houghton, Mifflin & Co. Oh, righto! So they reckoned that'd be over your head, did they? Well, we'll show them! We'll read it just out of spite. Opening it at the red ribbon:\n\n\"Of the like nature is that expectation of change which instantly follows the suspension of our voluntary activity. The terror of cloudless noon--\"\n\nBy the way, it must be nearly noon by now! Only ten past nine! Well, the only thing for it is to get dressed and go out for a wander round the grounds. Scratch the bath as too noisy. And so, very carefully, almost on the sly, you set about getting dressed.\n\nCANDIDATE C:\nTake, for example, the matter of arising in the morning. Too right, where there is a large house-party the problem is a simple one, for you can always hear the others pattering about and brushing their teeth. You can regulate your own arising by the number of people who seem to be astir. But if you are the only guest there is apt to be a frightful misunderstanding.\n\n\"At what time is brekkie?\" you ask.\n\n\"Oh, any old time on Sundays,\" replies the hostess with a generous gesture. \"Sleep as late as you like. This is 'Liberty Hall.'\"\n\nThe sentiment in this attitude is perfectly bully, but there is nothing that you can really take hold of in it. It satisfies at the time, but in the morning there is a vagueness about it that is simply terrifying.\n\nLet us say that you awake at eight. You listen and hear no one stirring. Then, over on the cool pillow again until eight-twenty. Again up on the elbow, with head cocked on one side. There is a creak in the direction of the stairs. They may all be up and going down to breakfast! It is but the work of a moment, to bound out of bed and listen at the door. Perhaps open it modestly and peer out. Deathlike silence, broken only, as the phrase goes, by the ticking of the hall clock, and not a soul in sight. Probably they are late sleepers. Maybe eleven o'clock is their Sunday rising hour. Some people _are_ like that.\n\nShut the door and sit on the edge of the bed. More sleep is out of the question. Let's take a squiz at the pictures in the guest-room, just to pass the time. Here's one of Lorna Doone. How d'e do, Lorna? Here's a group--taken in 1902--showing your host in evening clothes, holding a mandolin. Probably a member of his college musical-club. Rather unkempt looking bunch, you _must_ say. Well, how about this one? An etching, showing suspicious-looking barges on what is probably the Thames. Fair enough, at that.\n\nBack to the door and listen again. Tick-tock-tick-tock. Probably, if you started your tub, you'd wake the whole house. Let's sit down on the edge of the bed again.\n\nHello, here are some books on the table. \"Fifty Famous Sonnets,\" illustrated by Maxfield Parrish. Never touch a sonnet before breakfast. \"My experiences in the Alps,\" by a woman mountain-climber who has written on the fly-leaf, \"To my beaut friends the Elbridges, in memory of many happy days together at Chamounix. October, 1907.\" That settles _that_. \"Essay on Compensation\" in limp leather, by R.W. Emerson, published by Houghton, Mifflin & Co. Oh, very well! You suppose they thought that would be over your head, did they? Well, we'll just show them! We'll read it just for spite. Opening, to the red ribbon:\n\n\"Of the like nature is that expectation of change which instantly follows the suspension of our voluntary activity. The terror of cloudless noon--\"\n\nBy the way, it must be nearly noon now! Ten minutes past nine, only! Well, the only thing to do is get dressed and go out and walk about the grounds. Eliminate the tub as too noisy. And so, very cautiously, almost clandestinely, you proceed to dress.",
+ "schema": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "object",
+    "properties": {
+     "A": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "B": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "C": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "A",
+     "B",
+     "C"
+    ],
+    "additionalProperties": false
+   },
+   "rankings": {
+    "type": "object",
+    "properties": {
+     "tone": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "flow": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "variety": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "essence": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "overall": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "tone",
+     "flow",
+     "variety",
+     "essence",
+     "overall"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "required": [
+   "candidates",
+   "rankings"
+  ],
+  "additionalProperties": false
+ }
+}

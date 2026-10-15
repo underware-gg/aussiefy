@@ -1,0 +1,65 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {"evidence": "All decisions, rates, dates and votes kept; the quoted directive and statement left verbatim, as quotations should be. Small shifts: \"doubled down on the FOMC's policy\" for reaffirmed and \"still running too hot\" for elevated relative to the goal; \"a bit quicker\" for timelier.", "score": 4},
+        "sense": {"evidence": "Most fit: \"bump the target range ... up\", \"hadn't budged much\", \"dead set on hitting\", \"The meeting knocked off at 10:15 a.m.\", \"voted as one\". \"doubled down\" carries a risk-raising sense reaffirmed doesn't have.", "score": 4},
+        "authenticity": {"evidence": "Mostly natural Aussie (\"When the yakking wrapped up\", \"next get-together\", \"knocked off\"), with \"doubled down\" an Americanism and \"the whole lot of members\" a clunky stock phrase.", "score": 4},
+        "register": {"evidence": "A full level-4 retelling of the narrative, quotes untouched; \"Not a single bugger.\" is within vulgarity 1.", "score": 5},
+        "tone": {"evidence": "The formal minutes become a matey account, as a level-4 retelling should; the gravity of the rate decision survives (\"made it crystal clear it's still dead set on hitting its dual-mandate goals\").", "score": 4},
+        "flow": {"evidence": "Reads smoothly, though \"the whole lot of members agreed to bump the target range for the federal funds rate up 1/4 percentage point\" is a little awkward.", "score": 4},
+        "variety": {"evidence": "Varied: \"bump\", \"lift\", \"doubled down\", \"hadn't budged\", \"yakking\", \"sign off\", \"voted as one\", \"get-together\", \"knocked off\", \"thumbs-up\"; \"sign off\" twice.", "score": 5},
+        "essence": {"evidence": "Unmistakably the FOMC policy-actions minutes, structure and quoted texts intact.", "score": 5}
+      },
+      "problems": [
+        {"quote": "doubled down on the FOMC's policy", "original": "reaffirmed the FOMC's policy", "severity": "minor", "why": "Doubled down is American and implies escalation rather than restatement."},
+        {"quote": "the whole lot of members agreed", "original": "all members agreed", "severity": "minor", "why": "Clunky; reads as a forced swap."},
+        {"quote": "inflation was still running too hot", "original": "inflation remained elevated relative to the Committee's 2 percent goal", "severity": "minor", "why": "Slightly loses the explicit comparison to the goal, though it follows."}
+      ],
+      "summary": "A lively level-4 retelling that keeps every decision and leaves the quotes intact; the best."
+    },
+    "B": {
+      "scores": {
+        "meaning": {"evidence": "Mostly verbatim, but \"voted unanimously to give a 1 the nod/4 percentage point increase\" garbles the 1/4 point rise, and \"its continuing swear blind to achieve\" garbles resolve. A quoted statement is altered: \"said righto to the following statement\".", "score": 2},
+        "sense": {"evidence": "\"swear blind\" (insist something is true) used as a noun for resolve; \"give ... the nod\" spliced through a fraction; \"said righto\" inside an official quotation.", "score": 1},
+        "authenticity": {"evidence": "Mechanical splices no one would write: \"give a 1 the nod/4 percentage point increase\", \"its continuing swear blind\".", "score": 1},
+        "register": {"evidence": "Largely untranslated apart from three broken swaps; far under level 4.", "score": 1},
+        "tone": {"evidence": "Formal tone intact where untouched, broken by \"said righto\" in the Committee's own statement.", "score": 3},
+        "flow": {"evidence": "Broken: \"to give a 1 the nod/4 percentage point increase in the primary credit rate\".", "score": 2},
+        "variety": {"evidence": "Too few terms to repeat.", "score": 3},
+        "essence": {"evidence": "Recognisably the minutes, with the credit-rate line no longer readable.", "score": 4}
+      },
+      "problems": [
+        {"quote": "voted unanimously to give a 1 the nod/4 percentage point increase", "original": "voted unanimously to approve a 1/4 percentage point increase", "severity": "critical", "why": "Splits the fraction 1/4 and corrupts the rate change."},
+        {"quote": "underlined its continuing swear blind to achieve", "original": "underlined its continuing resolve to achieve", "severity": "major", "why": "Swear blind is a verb phrase meaning to insist; wrong sense and ungrammatical."},
+        {"quote": "said righto to the following statement", "original": "approved the following statement", "severity": "major", "why": "Alters text inside a quoted official statement."},
+        {"quote": "Members noted that the unemployment rate was largely unchanged", "original": "Members noted that the unemployment rate was largely unchanged", "severity": "major", "why": "Representative of the narrative left untranslated against a level-4 brief."}
+      ],
+      "summary": "Essentially untranslated, with broken swaps that corrupt a number and a quotation."
+    },
+    "C": {
+      "scores": {
+        "meaning": {"evidence": "All decisions, rates, dates and votes kept, quotes intact: \"lift the target range ... by 1/4 percentage point to 3-3/4 to 4 per cent\", \"the unemployment rate had barely shifted\", \"help get inflation back ... sooner\".", "score": 5},
+        "sense": {"evidence": "Every term fits: \"stuck with the FOMC's policy\", \"dead set on reaching\", \"Once the discussion wrapped up\", \"took in sign-off\".", "score": 5},
+        "authenticity": {"evidence": "Natural Australian business English: \"per cent\", \"dead set on\", \"wrapped up\". Nothing forced.", "score": 5},
+        "register": {"evidence": "Light for level 4: mostly plain rewording with a few touches (\"dead set\", \"wrapped up\", \"stuck with\").", "score": 3},
+        "tone": {"evidence": "Keeps the sober minutes tone throughout.", "score": 5},
+        "flow": {"evidence": "Reads smoothly: \"while inflation was still running above the Committee's 2 per cent goal\".", "score": 5},
+        "variety": {"evidence": "\"wrapped up\" twice (\"Once the discussion wrapped up\", \"The meeting wrapped up\"); otherwise little to repeat.", "score": 4},
+        "essence": {"evidence": "Unmistakably the FOMC minutes.", "score": 5}
+      },
+      "problems": [
+        {"quote": "The meeting wrapped up at 10:15 a.m.", "original": "The meeting adjourned at 10:15 a.m.", "severity": "minor", "why": "Repeats wrapped up from earlier."},
+        {"quote": "It was agreed that the Committee would next meet", "original": "It was agreed that the next meeting of the Committee would be held", "severity": "minor", "why": "Representative of how lightly the narrative is retold for a level-4 brief."}
+      ],
+      "summary": "Faithful and natural but lighter than the brief."
+    }
+  },
+  "rankings": {
+    "tone": [["C"], ["A"], ["B"]],
+    "flow": [["C"], ["A"], ["B"]],
+    "variety": [["A"], ["C"], ["B"]],
+    "essence": [["A", "C"], ["B"]],
+    "overall": [["A"], ["C"], ["B"]]
+  }
+}

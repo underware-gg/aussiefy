@@ -1,0 +1,30 @@
+The Rust team has put out a brand-spankin'-new point release of Rust, 1.98.1. Rust is a programming language that's empowering every man and his dog to build reliable and efficient software.
+
+If you've got a previous version of Rust installed via rustup, getting Rust 1.98.1 is as easy as:
+
+```
+rustup update stable
+```
+
+If you haven't got it already, you can [get `rustup`][rustup] from the right page on our website.
+
+[rustup]: https://www.rust-lang.org/install.html
+
+## What's in 1.98.1
+
+Rust 1.98.1 fixes a [miscompilation in vtable generation](https://github.com/rust-lang/rust/issues/161441).
+
+In Rust 1.98.0, in some circumstances, rustc would wrongly generate a trait object vtable with a null pointer
+where a function pointer should be. This leads to undefined behaviour in the
+emitted code. Sometimes this may 'just' cause segfaults when the null
+pointer gets loaded, but it can also open the door to
+arbitrary effects (as is typical for UB).
+
+If you'd like to give us a hand by testing future releases, you might think about
+using the beta (`rustup default beta`) and nightly (`rustup default nightly`) channels locally and in your CI. Please
+[report](https://github.com/rust-lang/rust/issues/new/choose) any bugs you
+might run into!
+
+### Contributors to 1.98.1
+
+Heaps of people pitched in to create Rust 1.98.1. We couldn't have done it without all of you. [Thanks!](https://thanks.rust-lang.org/rust/1.98.1/)

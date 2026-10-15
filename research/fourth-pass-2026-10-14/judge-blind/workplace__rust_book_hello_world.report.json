@@ -1,0 +1,320 @@
+{
+ "candidates": {
+  "A": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every step, command block and the closing welcome survive: \"So it’s\n_hello_world.rs_, not _helloworld.rs_.\" and \"You’ve officially written a Rust\nprogram, which makes ya a Rust programmer—welcome to the club!\"",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"Rust couldn’t care less\" for 'it doesn't matter to Rust', \"the\nusual go is\" for the convention, \"have a squiz\", \"where to get a hand\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Natural throughout: \"Righto, first thing ya do is make a directory\", \"good on ya!\"",
+     "score": 5
+    },
+    "register": {
+     "evidence": "Fully retold in casual Aussie but with no swearing and moderate slang; a shade under level 5, vulgarity 2.",
+     "score": 4
+    },
+    "tone": {
+     "evidence": "Keeps the friendly, encouraging tutorial voice.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads smoothly: \"Got more than one word in yer filename? Then the\nusual go is to stick an underscore between ’em.\"",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Leans on \"punch in\": \"punch in these commands\", \"punch in the code from Listing 1-1\", \"punch in these\ncommands\".",
+     "score": 3
+    },
+    "essence": {
+     "evidence": "Unmistakably the Rust book's first program, warmth intact.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "punch in the code from Listing 1-1",
+     "original": "enter the code in Listing 1-1",
+     "severity": "minor",
+     "why": "'punch in' used three times."
+    }
+   ],
+   "summary": "A natural, faithful tutorial in Aussie voice; leans on 'punch in' and stops short of the vulgarity allowed."
+  },
+  "B": {
+   "scores": {
+    "meaning": {
+     "evidence": "All steps survive; \"we reckon you\nmake a _projects_ directory\" keeps the suggestion.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"Rust couldn't give a toss where\nyour code lives\", \"the\ndone thing is to stick an underscore\", \"have a squiz back at\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Mostly natural, but \"chuck in this\" for typing commands is odd, and \"good on ya, you bloody legend!\" is a stock line.",
+     "score": 4
+    },
+    "register": {
+     "evidence": "Casual Aussie with mild swearing (\"you bloody legend\"); moderate density, a shade under level 5.",
+     "score": 4
+    },
+    "tone": {
+     "evidence": "Keeps the welcoming tutorial tone.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Mostly smooth; \"we reckon you\nmake a _projects_ directory\" is a clumsy suggestion (needs 'should').",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "Repeats \"chuck in this\" twice and \"punch in\" twice.",
+     "score": 3
+    },
+    "essence": {
+     "evidence": "Unmistakably the original.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "For Linux, macOS, and PowerShell on Windows, chuck in this:",
+     "original": "For Linux, macOS, and PowerShell on Windows, enter this:",
+     "severity": "minor",
+     "why": "'chuck in' for entering commands is unnatural and repeated for CMD."
+    },
+    {
+     "quote": "good on ya, you bloody legend!",
+     "original": "congratulations!",
+     "severity": "minor",
+     "why": "Stock phrase."
+    },
+    {
+     "quote": "we reckon you\nmake a _projects_ directory",
+     "original": "we suggest making a _projects_ directory",
+     "severity": "minor",
+     "why": "Clumsy grammar for a suggestion."
+    }
+   ],
+   "summary": "Natural and complete with a touch of swearing; some repetition and a stock closing line."
+  },
+  "C": {
+   "scores": {
+    "meaning": {
+     "evidence": "All steps and the welcome survive.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"bung this in\", \"duck back to yer terminal window\", \"have a squiz back at\", \"ways to get a hand\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Natural throughout: \"Rust couldn't care less where yer code lives\", \"good on ya!\"",
+     "score": 5
+    },
+    "register": {
+     "evidence": "Casual Aussie with moderate slang and no swearing; a shade under level 5, vulgarity 2.",
+     "score": 4
+    },
+    "tone": {
+     "evidence": "Keeps the friendly tutorial tone.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Mostly smooth; \"we reckon ya make a _projects_ directory\" is clumsy as a suggestion.",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "Reasonably varied (\"bung\", \"duck back\", \"punch in\", \"squiz\").",
+     "score": 4
+    },
+    "essence": {
+     "evidence": "Unmistakably the original.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "we reckon ya make a _projects_ directory",
+     "original": "we suggest making a _projects_ directory",
+     "severity": "minor",
+     "why": "Clumsy grammar for a suggestion."
+    }
+   ],
+   "summary": "Natural, faithful and varied; light on vulgarity for the brief."
+  },
+  "D": {
+   "scores": {
+    "meaning": {
+     "evidence": "Nothing is lost; it is the original with a few spelling changes.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "The few swaps (\"yer\", \"ya\") carry no sense problems.",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "The dialect is spliced in mechanically, with mixed forms: \"enter the followin'\ncommands to compile'n run the file\" next to \"go back to your terminal window\".",
+     "score": 2
+    },
+    "register": {
+     "evidence": "Effectively untranslated: \"Regardless of your operatin' system, the string `Hello, world!` should print to\nthe terminal.\"",
+     "score": 1
+    },
+    "tone": {
+     "evidence": "Keeps the original's tone, since it keeps the original.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Clunky splices: \"a directory for the “Hello, world!” project\" joined as \"directory'n a directory\", \"ya just created'n enter the code\".",
+     "score": 2
+    },
+    "variety": {
+     "evidence": "The same two or three edits throughout: dropped g, \"'n\", \"yer\".",
+     "score": 1
+    },
+    "essence": {
+     "evidence": "Unmistakably the original.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "compile'n run the file",
+     "original": "compile and run the file",
+     "severity": "major",
+     "why": "Forced contraction; representative of the mechanical edits."
+    },
+    {
+     "quote": "Regardless of your operatin' system",
+     "original": "Regardless of your operating system",
+     "severity": "major",
+     "why": "Left untranslated with only a dropped g; far under the brief."
+    }
+   ],
+   "summary": "The original with mechanical dialect spellings; not a retelling."
+  },
+  "E": {
+   "scores": {
+    "meaning": {
+     "evidence": "All steps survive; additions hang off the original: \"Three lines. That's the lot.\", \"which just looks like someone sat on the keyboard\", \"cos Windows always has to be different\", \"first round's on you\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"keep the whole box and dice in there\", \"don't spit the dummy\" for not panicking, \"Linux, macOS, and PowerShell on Windows mob\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Mostly natural (\"don't spit the dummy\", \"the whole box and dice\"), with a stock opener: \"Strewth, where do I start?\"",
+     "score": 4
+    },
+    "register": {
+     "evidence": "A full level-5 yarn, with mild swearing (\"doesn't give a toss\").",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "Keeps the welcoming warmth, but the jabs (\"cos Windows always has to be different\") add snark the tutorial doesn't have.",
+     "score": 4
+    },
+    "flow": {
+     "evidence": "Reads naturally: \"Rust files always end in the _.rs_ extension, no exceptions.\"",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Varied openers and slang: \"Righto\", \"So fire up a terminal\", \"crack open\", \"duck back\", \"have a squiz\".",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "The Rust book's first program, recognisably, but the jokes give it a cheekier character than the original's plain encouragement.",
+     "score": 4
+    }
+   },
+   "problems": [
+    {
+     "quote": "Strewth, where do I start?",
+     "original": "",
+     "severity": "minor",
+     "why": "Stock opener."
+    },
+    {
+     "quote": "cos Windows always has to be different",
+     "original": "",
+     "severity": "minor",
+     "why": "Adds a jab at Windows the original doesn't make."
+    }
+   ],
+   "summary": "The fullest, most varied yarn, with a stock opener and a few cheeky additions."
+  }
+ },
+ "rankings": {
+  "tone": [
+   [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   [
+    "E"
+   ]
+  ],
+  "flow": [
+   [
+    "A",
+    "E"
+   ],
+   [
+    "B",
+    "C"
+   ],
+   [
+    "D"
+   ]
+  ],
+  "variety": [
+   [
+    "E"
+   ],
+   [
+    "C"
+   ],
+   [
+    "A",
+    "B"
+   ],
+   [
+    "D"
+   ]
+  ],
+  "essence": [
+   [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   [
+    "E"
+   ]
+  ],
+  "overall": [
+   [
+    "E"
+   ],
+   [
+    "A",
+    "C"
+   ],
+   [
+    "B"
+   ],
+   [
+    "D"
+   ]
+  ]
+ }
+}

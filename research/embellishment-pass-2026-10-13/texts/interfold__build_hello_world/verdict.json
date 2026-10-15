@@ -1,0 +1,259 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn-troppo": "A",
+  "yarn-dinkum": "B",
+  "unharnessed": "C",
+  "yarn-deadset": "D",
+  "engine": "E"
+ },
+ "scores": {
+  "yarn-troppo": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 3,
+   "tone": 4,
+   "flow": 5,
+   "variety": 5,
+   "essence": 4
+  },
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn-deadset": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 2,
+   "tone": 5,
+   "flow": 4,
+   "variety": 2,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 5,
+   "flow": 5,
+   "variety": 1,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn-troppo": {
+   "meaning": "All steps, code and facts survive, but a few glosses shift the technical sense: \"The client locks up each number with the committee public key, encrypts it\" makes one step sound like two, and \"Cargo rebuilds the program server from scratch\" claims a full rebuild where the original says it compiles again. Asides like \"Like totting up a stack of sealed envelopes without opening a single one.\" and \"or you'll get some very odd answers\" hang off the original.",
+   "sense": "Most terms fit (\"knocked over the [Quick Start]\", \"don't spit the dummy\", \"every man and his dog\", \"Have a geek at\"), but \"like a bouncer who's knocked off for the night\" muddles its image: a bouncer who has knocked off isn't there to wave anyone through.",
+   "authenticity": "Sounds like an Australian dev talking: \"Righto, here's the go.\", \"give `Ctrl+C` a whack in its terminal\", \"Easy as.\", \"that's a yarn for another page\".",
+   "register": "Heavier than level 4, with frequent asides and jokes: \"Double the fun.\", \"It's still expecting 5, poor thing\", \"it'll be in for a shock now\", \"Not bad for a few lines of Rust.\" No swearing, within dad level.",
+   "tone": "The tutorial stays instructive, but the jokiness (\"instead of boring old a + b\", \"so if that's not you, off you pop\") pushes a precise reference toward banter.",
+   "flow": "Reads easily aloud: \"Everything else in the template's basically a delivery driver, ferrying ciphertexts to this function and carting its result off to the committee.\"",
+   "variety": "Varied throughout: \"knocked over\", \"off you pop\", \"humming away\", \"give `Ctrl+C` a whack\", \"spit the dummy\", \"every man and his dog\", \"Have a geek at\"; \"Track down this line\" twice is the template's own repetition.",
+   "essence": "Recognisably the Hello World tutorial with its steps and code intact, though the banter makes it feel more like a mate's walkthrough than reference docs."
+  },
+  "yarn-dinkum": {
+   "meaning": "Every step and fact survives: \"Bump the expected value from 5 to 10\", \"keep 2 × (a + b) under 100\", \"waves through every receipt on the local chain\". \"Job done.\" is colour.",
+   "sense": "Terms fit: \"getting a squiz at them\", \"punch in 5 and 3\", \"Have a geek at\", \"It hasn't got a clue what the computation does\".",
+   "authenticity": "Natural, if more general colloquial English than Australian: \"Heads up: this test needs a CLI\", \"carting its result off to the committee\".",
+   "register": "Lighter than level 4: friendly and casual but with few distinctly Aussie terms beyond \"squiz\" and \"Have a geek at\"; many lines plain (\"Cargo should print `test tests::test ... ok`.\").",
+   "tone": "Keeps the tutorial's clear, instructive tone in a friendlier voice: \"If the test fails, go back and check your `fhe_processor` against the code in the step before.\"",
+   "flow": "Reads smoothly: \"On the input step you'll see `Ready to compute: 2 × (5 + 3) = ?`, and on the results step, `2 × (5 + 3) = 16`. Job done.\"",
+   "variety": "Some range (\"fires them off\", \"carting\", \"squiz\", \"geek\", \"Heads up\"), limited by how little slang there is.",
+   "essence": "Unmistakably the tutorial, steps and reference sections intact."
+  },
+  "unharnessed": {
+   "meaning": "Every step survives; additions are colour: \"no dramas\", \"Bewdy.\", \"the operator panics and spits the dummy\". The LinkCard text \"Check your inputs and verify proofs\" keeps \"Validate inputs\".",
+   "sense": "Terms fit: \"already knocked over the [Quick Start]\", \"lugs its result across to the committee\", \"it can't have a squiz at them\", \"If the test falls over\", \"Find which file to fiddle with\".",
+   "authenticity": "Natural Australian throughout: \"The function doesn't need any new imports, no dramas.\", \"Bewdy.\", \"the operator panics and spits the dummy\".",
+   "register": "Level 4 weight: Aussie terms spread through prose and callouts (\"`ciphertexts` dishes out\", \"2 × (a + b) has gotta be less than 100\", \"stashes a commitment\") without yarn asides. No swearing.",
+   "tone": "Keeps the instructive tone: \"Any change to the program changes that identity, so compile and deploy again.\"",
+   "flow": "Reads smoothly: \"The rest of the template just ferries ciphertexts over to this function and lugs its result across to the committee.\"",
+   "variety": "Varied: \"knocked over\", \"ferries\", \"lugs\", \"dishes out\", \"squiz\", \"no dramas\", \"Bewdy\", \"spits the dummy\", \"stashes\"; \"Have a look at\" twice.",
+   "essence": "Unmistakably the tutorial, retold in an Aussie voice."
+  },
+  "yarn-deadset": {
+   "meaning": "Faithful: every step, number and caveat survives (\"For this tutorial, 2 × (a + b) has to be under 100.\").",
+   "sense": "The few colloquial terms fit: \"punch in 5 and 3\", \"track down this line\", \"It's got no idea what the computation does\".",
+   "authenticity": "Natural but barely Australian: \"The rest of the template ferries ciphertexts to this function and ferries its result on to the committee.\"",
+   "register": "Well under level 4: mostly plain English with contractions (\"This tutorial changes the FHE computation in the default template and runs the E3 again.\", \"See [Installation]\").",
+   "tone": "Keeps the tutorial's tone exactly: \"If the test fails, check your `fhe_processor` against the code in the step before.\"",
+   "flow": "Reads cleanly, though \"ferries ciphertexts to this function and ferries its result\" repeats a verb.",
+   "variety": "Very little slang to vary: \"punch in\", \"track down\", \"untouched\"; \"ferries\" twice in one sentence.",
+   "essence": "Unmistakably the tutorial, barely retold."
+  },
+  "engine": {
+   "meaning": "Identical to the original apart from a few contractions (\"it can't see them\", \"It doesn't know what the computation does\").",
+   "sense": "No Aussie terms, so none take a wrong sense: \"The function needs no new imports.\"",
+   "authenticity": "No Aussie voice at all, and US spelling left in: \"the serialized ciphertext\", \"`sum.to_bytes()` serializes the encrypted result\".",
+   "register": "Untranslated: \"This tutorial changes the FHE computation in the default template and runs the E3 again. It is for developers who have completed\" is the original word for word.",
+   "tone": "The original tone kept exactly: \"If `pnpm dev:all` runs, press `Ctrl+C` in its terminal.\"",
+   "flow": "Reads as the original documentation.",
+   "variety": "No slang at all: \"In `client/src/pages/steps/EnterInputs.tsx`, find this line:\"",
+   "essence": "It is the original tutorial."
+  }
+ },
+ "problems": {
+  "yarn-troppo": [
+   {
+    "quote": "The client locks up each number with the committee public key, encrypts it, and calls",
+    "original": "The client encrypts each number with the committee public key and calls",
+    "severity": "minor",
+    "why": "\"locks up\" and \"encrypts it\" read as two separate actions."
+   },
+   {
+    "quote": "so Cargo rebuilds the program server from scratch",
+    "original": "so Cargo compiles the program server again",
+    "severity": "minor",
+    "why": "\"From scratch\" overstates; a recompile is not necessarily a clean build."
+   },
+   {
+    "quote": "like a bouncer who's knocked off for the night",
+    "original": "which accepts every receipt on the local chain",
+    "severity": "minor",
+    "why": "Muddled image; an absent bouncer doesn't wave people through."
+   },
+   {
+    "quote": "It's still expecting 5, poor thing",
+    "original": "Change the expected value from 5 to 10",
+    "severity": "minor",
+    "why": "Banter beyond the level 4 weight, repeated across the text."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "Cargo should print `test tests::test ... ok`.",
+    "original": "Cargo prints `test tests::test ... ok`.",
+    "severity": "minor",
+    "why": "Plain casual English; much of the text is lighter than a level 4 brief."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "the operator panics and spits the dummy",
+    "original": "the operator panics",
+    "severity": "minor",
+    "why": "Doubles the technical term with an idiom; harmless but slightly redundant."
+   }
+  ],
+  "yarn-deadset": [
+   {
+    "quote": "This tutorial changes the FHE computation in the default template and runs the E3 again.",
+    "original": "This tutorial changes the FHE computation in the default template and runs the E3 again.",
+    "severity": "major",
+    "why": "Large parts left as the original, far under a level 4 brief."
+   },
+   {
+    "quote": "ferries ciphertexts to this function and ferries its result on",
+    "original": "move ciphertexts to this function and move its result",
+    "severity": "minor",
+    "why": "Repeated verb in one sentence."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "It is for\ndevelopers who have completed the [Quick Start](/build/quick-start).",
+    "original": "It is for developers who have completed the [Quick Start](/build/quick-start).",
+    "severity": "critical",
+    "why": "The text is left untranslated, missing the level 4 brief entirely."
+   },
+   {
+    "quote": "serialized ciphertext",
+    "original": "serialized ciphertext",
+    "severity": "minor",
+    "why": "US spelling left in."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn-troppo": "Natural, fluent and varied, but heavier than asked, with a few glosses that loosen technical precision.",
+  "yarn-dinkum": "Faithful, clean and friendly, but lighter on Australian voice than the brief asks.",
+  "unharnessed": "Faithful, natural and at the brief's weight; the best balance.",
+  "yarn-deadset": "Faithful but only lightly touched; well short of level 4.",
+  "engine": "The original with a few contractions; no Aussie retelling."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn-dinkum",
+    "unharnessed",
+    "yarn-deadset",
+    "engine"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn-troppo",
+    "yarn-dinkum",
+    "unharnessed",
+    "engine"
+   ],
+   [
+    "yarn-deadset"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-troppo",
+    "unharnessed"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "yarn-deadset"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn-dinkum",
+    "unharnessed",
+    "yarn-deadset",
+    "engine"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn-troppo",
+    "yarn-dinkum"
+   ],
+   [
+    "yarn-deadset"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

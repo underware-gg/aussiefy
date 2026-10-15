@@ -1,0 +1,63 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {"evidence": "Every step, file path, code block and number kept; prose additions are colour: \"the operator panics and spits the dummy\", \"Bewdy.\", \"no dramas\", \"the whole lot\". \"Check your inputs\" for Validate inputs is a slight softening.", "score": 5},
+        "sense": {"evidence": "Terms fit: \"already knocked over the [Quick Start]\", \"If the test falls over\", \"waves through every receipt\", \"punch in 5 and 3\", \"Find which file to fiddle with\". \"can't have a squiz at them\" carries cannot see.", "score": 5},
+        "authenticity": {"evidence": "Reads like an Aussie dev writing docs: \"ferries ciphertexts over to this function and lugs its result across\", \"It's got no idea what the computation actually does.\" One US form, \"has gotta be less than 100\", and \"Bewdy.\" is a touch tacked on.", "score": 4},
+        "register": {"evidence": "A steady level-4 voice across the prose, leaving code and labels untouched; no swearing beyond what vulgarity 1 allows (none used).", "score": 5},
+        "tone": {"evidence": "Stays a clear tutorial; the asides (\"no dramas\", \"spits the dummy\") lighten it without making instructions unclear.", "score": 5},
+        "flow": {"evidence": "Reads smoothly: \"Once the input window shuts, the coordination server ... fires them off to the program server\". \"Have a look at\" appears twice near the end.", "score": 5},
+        "variety": {"evidence": "Varied: \"tweaks\", \"knocked over\", \"ferries\", \"lugs\", \"dishes out\", \"squiz\", \"falls over\", \"track down\", \"stashes\", \"waves through\", \"spits the dummy\".", "score": 5},
+        "essence": {"evidence": "Unmistakably the Hello World tutorial, every step in order, in a matey voice.", "score": 5}
+      },
+      "problems": [
+        {"quote": "2 × (a + b) has gotta be less than 100", "original": "2 × (a + b) must be less than 100", "severity": "minor", "why": "Gotta reads American."},
+        {"quote": "Bewdy.", "original": "", "severity": "minor", "why": "An added tag that renders nothing; a little bolted on."},
+        {"quote": "Check your inputs and verify proofs", "original": "Validate inputs and verify proofs", "severity": "minor", "why": "Validate is the technical term; check is looser."}
+      ],
+      "summary": "A natural, level-4 retelling of the tutorial that keeps every technical detail; the best."
+    },
+    "B": {
+      "scores": {
+        "meaning": {"evidence": "The original nearly verbatim, so facts survive; but \"See [Installation](/build/installation#install-the-cli) for a source knock together.\" garbles a source build.", "score": 4},
+        "sense": {"evidence": "\"for a source knock together\" uses knock together (assemble roughly) as a noun for a build, which doesn't fit; \"brand-spankin'-new ciphertext\" carries new.", "score": 2},
+        "authenticity": {"evidence": "\"brand-spankin'-new\" is more American than Australian and is used twice; \"a source knock together\" is not English. Otherwise US forms like \"serializes\" left in.", "score": 2},
+        "register": {"evidence": "Largely untranslated: apart from contractions, only \"brand-spankin'-new\" (twice) and \"knock together\". Far under level 4.", "score": 1},
+        "tone": {"evidence": "The neutral tutorial tone is intact because the text is: \"If `pnpm dev:all` runs, press `Ctrl+C` in its terminal.\"", "score": 5},
+        "flow": {"evidence": "Reads as the original except the broken \"for a source knock together\".", "score": 4},
+        "variety": {"evidence": "Of its two phrases, one is repeated (\"a brand-spankin'-new ciphertext\", \"a brand-spankin'-new local chain\").", "score": 2},
+        "essence": {"evidence": "Unmistakably the tutorial, being nearly the original.", "score": 5}
+      },
+      "problems": [
+        {"quote": "for a source knock together", "original": "for a source build", "severity": "major", "why": "Wrong sense and ungrammatical; obscures a technical instruction."},
+        {"quote": "returns a brand-spankin'-new ciphertext", "original": "returns a new ciphertext", "severity": "minor", "why": "American-flavoured, repeated later for the local chain."},
+        {"quote": "This tutorial changes the FHE computation in the default template and runs the E3 again.", "original": "This tutorial changes the FHE computation in the default template and runs the E3 again.", "severity": "major", "why": "Representative of the text left untranslated against a level-4 brief."}
+      ],
+      "summary": "Essentially untranslated, with two misfiring insertions."
+    },
+    "C": {
+      "scores": {
+        "meaning": {"evidence": "Every step and detail kept; \"untouched\" for with no changes, \"ferries ciphertexts to this function and carts its result off to the committee\".", "score": 5},
+        "sense": {"evidence": "Every term fits its context: \"ferries\", \"carts its result off\", \"It's got no idea what the computation does\".", "score": 5},
+        "authenticity": {"evidence": "What Aussie there is sounds natural (\"It's got no idea\", \"untouched\"), with US \"serialized\" left.", "score": 4},
+        "register": {"evidence": "Light: mostly contractions plus \"ferries\", \"carts\" and \"It's got no idea\". Well under level 4.", "score": 2},
+        "tone": {"evidence": "Clear tutorial tone throughout.", "score": 5},
+        "flow": {"evidence": "Reads smoothly: \"By the end, your E3 returns 2 × (a + b) instead of a + b, and you'll know which files hold the computation\".", "score": 5},
+        "variety": {"evidence": "Little slang, none repeated.", "score": 4},
+        "essence": {"evidence": "Unmistakably the tutorial.", "score": 5}
+      },
+      "problems": [
+        {"quote": "The template requests E3s with the `insecure-512` parameter set.", "original": "The template requests E3s with the `insecure-512` parameter set.", "severity": "major", "why": "Representative of long stretches left as the original, well under a level-4 brief."}
+      ],
+      "summary": "Clean and faithful but much lighter than the brief."
+    }
+  },
+  "rankings": {
+    "tone": [["A", "B", "C"]],
+    "flow": [["A", "C"], ["B"]],
+    "variety": [["A"], ["C"], ["B"]],
+    "essence": [["A", "C"], ["B"]],
+    "overall": [["A"], ["C"], ["B"]]
+  }
+}

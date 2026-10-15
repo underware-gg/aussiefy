@@ -1,0 +1,96 @@
+---
+title: 'Use Cases'
+description:
+  'Tasks that fit an E3, how CRISP uses the Interfold for private voting, and the limits to check
+  before you design an E3 program.'
+---
+
+import { LinkCards, LinkCard } from '@/components/ui'
+
+# Use Cases
+
+This page runs through the jobs that suit an E3 and the limits that come with 'em. It's for developers
+who wanna know if the Interfold's the right fit for their application. At the end, ya can line yer job
+up against a working example and against the checks in [Limits to check](#limits-to-check).
+
+## What fits an E3
+
+An E3 suits a job that ticks these boxes:
+
+- A few independent parties chip in inputs that have to stay private.
+- The application needs one result out of all the inputs, and it's fine for the result to be public.
+- The result's a computation BFV handles well, say a sum, a count, or a tally.
+- No one operator is acceptable as the keeper of the inputs.
+- The application can hang about for the E3 stages. An E3 won't give ya a real-time result.
+
+## Private voting (CRISP)
+
+CRISP (Coercion-Resistant Impartial Selection Protocol) is the reference application, sittin' in
+`examples/CRISP`. It's a complete, working E3 program for secret ballots.
+
+| Part of the E3    | What CRISP does                                                                             |
+| ----------------- | ------------------------------------------------------------------------------------------- |
+| Request           | The CRISP command-line tool asks for one E3 for every voting round.                         |
+| Inputs            | Every voter encrypts a ballot in the browser under the committee key.                       |
+| Input proof       | The client cooks up a Noir proof that the ballot's valid. `CRISPProgram.sol` verifies it.   |
+| Data availability | The ciphertext bytes head off to Avail. The program checks the VectorX receipt.             |
+| Secure process    | An OpenVM program adds the encrypted ballots up into an encrypted tally.                    |
+| Output            | The committee decrypts the tally and nothin' else. Each ballot stays encrypted.             |
+
+CRISP's got its own contracts, Noir circuits, a Rust coordination server, and a React client. Kick off
+with the [CRISP introduction](/CRISP/introduction), then follow [Setup](/CRISP/setup) to get it runnin'.
+
+## Sealed-bid auctions and private markets
+
+Bidders put in encrypted bids, and only the auction result gets decrypted. That pattern lines up with
+the E3 model. Where ya hit the wall is the computation. The template and CRISP only use homomorphic
+addition. Other operations cost more and chew through the limited noise budget of the BFV parameter set.
+
+Before ya build an auction, make sure yer secure process can work out the result inside that budget.
+A design can also decrypt an aggregate, say the number of bids at each price level. The contract can
+then work out the result from the aggregate. That design gives away the aggregate, but not the
+individual bids.
+
+## Aggregate statistics over private data
+
+A few organisations can work out a total, a count, or a histogram over records they don't share with
+each other. Each organisation encrypts its values, and the secure process adds 'em up. Only the
+aggregate gets decrypted. This pattern uses the same addition as the default template, which sums all
+the inputs.
+
+## Limits to check
+
+Run yer eye over these limits before ya design an E3 program:
+
+- **The output is public.** The plaintext output goes on-chain. A handful of inputs can give away
+  one person's value, say a tally with one vote. The program must enforce a minimum input count or
+  other rules where this matters.
+- **The committee is the trust boundary.** T + 1 committee members who get in cahoots can decrypt
+  any ciphertext under the committee key. A bigger committee bumps up T. On mainnet, only `Small`
+  (T = 9) can be requested at launch.
+- **Inputs need validation.** The E3 program decides which inputs to take. Without an input proof,
+  a dodgy ciphertext can stuff up the result or stop the E3 dead.
+- **Time matters.** Committee setup, the input window, computation, and decryption each have a
+  deadline. The [E3 lifecycle](/learn/e3-lifecycle) page lists the values.
+- **Costs grow with the committee.** The fee covers the committee's work, and it goes up with N.
+  Use `getE3Quote` to get the fee before ya put in a request.
+
+## Data protection
+
+The design can give an application a hand with its data-protection goals. No one operator holds a
+plaintext input, and the committee decrypts only the output. The design doesn't, on its own, make an
+application compliant with a regulation. Sortin' out that assessment is the application owner's job.
+
+## Next steps
+
+<LinkCards min={230}>
+  <LinkCard title='CRISP' href='/CRISP/introduction' icon='vote' tag='Example'>
+    The whole private voting application, from circuits to client.
+  </LinkCard>
+  <LinkCard title='Quick Start' href='/build/quick-start' icon='rocket' tag='Build'>
+    Whip up a project from the template and run a complete E3 on yer own computer.
+  </LinkCard>
+  <LinkCard title='Best practices' href='/build/best-practices' icon='shield' tag='Build'>
+    Design rules for secure E3 programs.
+  </LinkCard>
+</LinkCards>

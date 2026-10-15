@@ -1,0 +1,151 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "unharnessed": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 3,
+   "register": 1,
+   "tone": 5,
+   "flow": 5,
+   "variety": 1,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "Verbatim apart from spelling (\"authorisation\", \"Travelling\"), so every rule survives.",
+   "sense": "No Aussie terms beyond spelling, and those are correct.",
+   "authenticity": "Correct Australian spelling, but no Australian voice at all. A US policy page as written.",
+   "register": "Untranslated except for spelling, well short of level 2.",
+   "tone": "The policy tone is intact.",
+   "flow": "Reads as the original.",
+   "variety": "No slang to vary.",
+   "essence": "It is the original."
+  },
+  "unharnessed": {
+   "meaning": "Every rule survives accurately, including the 12-hour TDY rule, departure time zone, 26 pay periods and forfeiture.",
+   "sense": "Plain-English swaps all fit: \"getting to and from work\", \"runs out\", \"took off and landed\", \"work out\".",
+   "authenticity": "Natural Australian workplace English, though with little that is specifically Aussie: \"Have a look at\", \"check out\", \"get in touch\".",
+   "register": "A very light touch, closer to level 1 than 2. It is mostly a plain-English rewrite with Australian spelling and only mild colloquialisms.",
+   "tone": "The clear HR policy tone is kept.",
+   "flow": "Smooth plain English.",
+   "variety": "Little slang to vary. \"work out\" appears three times.",
+   "essence": "Clearly the policy page."
+  },
+  "yarn": {
+   "meaning": "All rules survive. \"so use it or lose it\" is colour on the forfeiture rule. \"There's no cap on earning\" is accurate.",
+   "sense": "Terms fit: \"Have a squiz\", \"the nitty-gritty\", \"sing out to your Timekeeper\", \"spot on\", \"given the okay\".",
+   "authenticity": "Sounds like an Australian HR page with a friendly voice: \"If you've got questions, sing out to your Timekeeper\".",
+   "register": "A light level-2 touch, with clear rules and a handful of idioms. No swearing.",
+   "tone": "Friendly but still authoritative. \"gone for good, so use it or lose it\" keeps the warning firm.",
+   "flow": "Smooth: \"When you left the airport at the other end and got to your hotel\".",
+   "variety": "Varied: squiz, nitty-gritty, sing out, spot on, use it or lose it. \"work out\" appears twice.",
+   "essence": "Clearly the policy page, retold lightly."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "You may request travel comp time when you are approved to travel for work",
+    "original": "You may request travel comp time when you are approved to travel for work",
+    "severity": "major",
+    "why": "Left untranslated. Representative of the whole text, which ignores the level-2 brief."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "to work out the breakdown of their hours",
+    "original": "to determine the breakdown of your hours",
+    "severity": "minor",
+    "why": "\"Work out\" recurs three times. Also, \"their\" shifts from the original's second person."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "the leave is gone for good, so use it or lose it",
+    "original": "you will forfeit the leave",
+    "severity": "minor",
+    "why": "A slightly chatty addition, but it reinforces rather than changes the rule."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "Untranslated except for British/Australian spelling.",
+  "unharnessed": "An accurate plain-English localisation, a touch light for level 2.",
+  "yarn": "An accurate, natural, well-weighted level-2 localisation."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "engine",
+    "unharnessed",
+    "yarn"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "engine",
+    "unharnessed",
+    "yarn"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

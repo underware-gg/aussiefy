@@ -1,0 +1,514 @@
+# Verdicts for the third-pass round, one per added entry, in the format of the everyday round's verify/BRIEF.md.
+# Written by hand from the third pass's findings and harvest: glosses and triggers in our own words, sources are
+# open references. DECISIONS.md lists every candidate considered, including the ones skipped or already covered.
+# `evidence: own` means own knowledge of a common term, checked against the cited Wiktionary page where there is one.
+
+# --- calling things off, getting on with it --------------------------------------------------------------------
+- decision: add_entry
+  candidate: pull the pin on (cancel)
+  entry:
+    id: pull-the-pin-on
+    form: pull the pin on {np}
+    variants: ['pull the pin on {obj}']
+    concept: [NEW:CALL_OFF]
+    frame: vp
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Call something off, cancel it (they pulled the pin on the trip).
+    sources: [https://en.wiktionary.org/wiki/pull_the_pin]
+  new_concept:
+    id: CALL_OFF
+    description: Cancel a planned thing (a trip, a search, a deal), with the thing named after the verb.
+    triggers:
+      vp: ['call off {np}', 'call {obj} off']
+  evidence: own
+  confidence: medium
+  why: The cancel sense of pull the pin (QUIT keeps the quit sense); only with its object after it, so a passive
+    ("the match was called off") isn't caught and the grammar holds.
+
+- decision: add_entry
+  candidate: drag the chain
+  entry:
+    id: drag-the-chain
+    form: drag the chain
+    concept: [NEW:DRAG_FEET]
+    frame: vp
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Lag behind the rest, go slow on something that should be getting done (from the slowest shearer).
+    sources: [https://en.wiktionary.org/wiki/drag_the_chain]
+  new_concept:
+    id: DRAG_FEET
+    description: Go slow on something, lag behind the others.
+    triggers:
+      vp: ['drag {poss} feet', 'lag behind']
+  evidence: own
+  confidence: high
+  why: Both read the same after a swap ("dragging the chain on climate", "lagging behind the pack").
+
+- decision: add_entry
+  candidate: nut out
+  entry:
+    id: nut-out
+    form: nut out
+    concept: [NEW:NUT_OUT]
+    frame: vp
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Work out a problem or a plan by hard thinking (nut out a deal, nut out how it works).
+    sources: [https://en.wiktionary.org/wiki/nut_out]
+  new_concept:
+    id: NUT_OUT
+    description: Work out a solution or an agreement by thinking it through.
+    triggers:
+      vp: [figure out, hammer out, thrash out, puzzle out]
+  evidence: own
+  confidence: high
+  why: Not "work out" (exercise) or "figure {obj} out" (CHECK_OUT's suss out, sizing someone up).
+
+# --- talk ------------------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: give someone a ring / bell
+  entry:
+    id: give-a-ring
+    form: give {obj} a ring
+    variants: ['give {obj} a bell']
+    concept: [NEW:RING_UP]
+    frame: vp
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Phone someone (give us a ring).
+    sources: [https://en.wiktionary.org/wiki/give_someone_a_ring]
+  new_concept:
+    id: RING_UP
+    description: Phone someone, call them up.
+    triggers:
+      vp: ['give {obj} a call', 'give {obj} a phone call']
+  evidence: own
+  confidence: high
+  why: The phone call with its person named; "a call" alone is also a decision ("a tough call").
+
+- decision: add_entry
+  candidate: here's the go
+  entry:
+    id: heres-the-go
+    form: here's the go
+    concept: [NEW:HERES_THE_DEAL]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: This is how things stand, or what we'll do (here's the go, we leave at six).
+  new_concept:
+    id: HERES_THE_DEAL
+    description: Leading into the situation or the plan ("here's the deal").
+    triggers:
+      np: [here's the deal, here is the deal, here's the plan, here is the plan]
+  evidence: own
+  confidence: medium
+  why: The lead-in only; "the deal" and "the plan" alone have other senses.
+
+- decision: add_entry
+  candidate: what's the go
+  entry:
+    id: whats-the-go
+    form: what's the go
+    concept: [NEW:WHATS_THE_DEAL]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: What's happening, what's the plan or the story (what's the go with the car?).
+  new_concept:
+    id: WHATS_THE_DEAL
+    description: Asking what the situation or the plan is.
+    triggers:
+      np: ["what's the deal !=worth|for|between|on|size", "what is the deal !=worth|for|between|on|size",
+           "what's the plan !=for", "what is the plan !=for"]
+  evidence: own
+  confidence: medium
+  why: Not "what is the deal worth" (a business deal) or "the plan for the site" (a plan drawn up).
+
+- decision: add_entry
+  candidate: first in best dressed
+  entry:
+    id: first-in-best-dressed
+    form: first in, best dressed
+    concept: [NEW:FIRST_COME]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Whoever gets there first gets the pick.
+    sources: [https://en.wiktionary.org/wiki/first_in,_best_dressed]
+  new_concept:
+    id: FIRST_COME
+    description: First come, first served.
+    triggers:
+      np: ["first come, first served", "first-come, first-served", "first come first served"]
+  evidence: own
+  confidence: high
+  why: The plain saying it answers, word for word.
+
+# --- people ----------------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: workmate
+  entry:
+    id: workmate
+    form: workmate
+    concept: [NEW:COWORKER]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: Someone you work with.
+    sources: [https://en.wiktionary.org/wiki/workmate]
+  new_concept:
+    id: COWORKER
+    description: A person you work with (a coworker).
+    triggers:
+      np: [coworker, co-worker]
+  evidence: own
+  confidence: high
+  why: Not "colleague", which official prose uses of peers ("my colleague the senator").
+
+- decision: add_entry
+  candidate: fisho
+  entry:
+    id: fisho
+    form: fisho
+    concept: [FISHERMAN]   # concept written by hand in concepts.yaml (beside AMERICANS_GROUP), for its not_in
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    plural: fishos
+    gloss: Someone who fishes, for sport or a living.
+    sources: [https://en.wiktionary.org/wiki/fisho]
+  evidence: own
+  confidence: medium
+  why: The person who fishes; the fishmonger sense isn't triggered.
+
+- decision: add_entry
+  candidate: Yanks
+  entry:
+    id: yank
+    form: Yank
+    concept: [AMERICANS]   # concept written by hand in concepts.yaml (beside AMERICANS_GROUP), for its not_in
+    frame: np
+    intensity: 3
+    incoherence: 4
+    register: current
+    plural: Yanks
+    gloss: An American (any American, not only a northerner).
+    sources: [https://en.wiktionary.org/wiki/Yank]
+  evidence: own
+  confidence: medium
+  why: Only the plural noun ("American" is an adjective too); a guard holds the hyphenated groups (African
+    Americans, Asian Americans) and the concept keeps out of news, docs and official prose (by hand).
+
+- decision: add_entry
+  candidate: tragic (a fan)
+  entry:
+    id: a-tragic
+    form: tragic
+    concept: [NEW:DIEHARD_FAN]
+    frame: np
+    intensity: 4
+    incoherence: 3
+    register: current
+    plural: tragics
+    gloss: An obsessive fan (a footy tragic, a cricket tragic).
+    sources: [https://en.wiktionary.org/wiki/tragic]
+  new_concept:
+    id: DIEHARD_FAN
+    description: A die-hard, obsessive fan or supporter.
+    triggers:
+      np: [die-hard fan, diehard fan, die-hard supporter, diehard supporter]
+  evidence: own
+  confidence: medium
+  why: Only the die-hard kind; a plain fan isn't a tragic.
+
+# --- states and judgements -------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: cheap as chips
+  entry:
+    id: cheap-as-chips
+    form: cheap as chips
+    concept: [NEW:DIRT_CHEAP]
+    frame: predicate_adj
+    intensity: 4
+    incoherence: 2
+    register: current
+    gloss: Very cheap, a bargain.
+    sources: [https://en.wiktionary.org/wiki/cheap_as_chips]
+  new_concept:
+    id: DIRT_CHEAP
+    description: Very cheap to buy (of a thing). Not "very cheap" of a person, which is stingy.
+    triggers:
+      predicate_adj: [dirt cheap, dirt-cheap, very inexpensive, really inexpensive]
+  evidence: own
+  confidence: high
+  why: Phrasings said only of prices; "very cheap" can mean stingy ("he's very cheap").
+
+- decision: add_entry
+  candidate: on song
+  entry:
+    id: on-song
+    form: on song
+    concept: [NEW:IN_TOP_FORM]
+    frame: predicate_adj
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Playing or performing at their best (the team was on song).
+    sources: [https://en.wiktionary.org/wiki/on_song]
+  new_concept:
+    id: IN_TOP_FORM
+    description: Performing at a peak (a player, a side, a band).
+    triggers:
+      predicate_adj: [in top form, in fine form, in great form, on top form, in peak form]
+  evidence: own
+  confidence: medium
+  why: Not "in good form" (good manners, "it's not in good form"), nor a bare "in form".
+
+- decision: add_entry
+  candidate: streets ahead
+  entry:
+    id: streets-ahead
+    form: streets ahead of
+    concept: [NEW:FAR_BETTER]
+    frame: predicate_adj
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Far better than, way out in front of (streets ahead of the rest).
+    sources: [https://en.wiktionary.org/wiki/streets_ahead]
+  new_concept:
+    id: FAR_BETTER
+    description: Far better than, well ahead of (with what it is compared with after it).
+    triggers:
+      predicate_adj: [far superior to, vastly superior to, miles ahead of]
+  evidence: own
+  confidence: medium
+  why: Phrasings with their comparison after them, so "of" lands where "to" was; not "far ahead of" (a distance).
+
+- decision: add_entry
+  candidate: go pear-shaped
+  entry:
+    id: go-pear-shaped
+    form: go pear-shaped
+    concept: [NEW:GO_WRONG_BADLY]
+    frame: vp
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Go badly wrong, fall apart (of a plan or a night out).
+    sources: [https://en.wiktionary.org/wiki/go_pear-shaped]
+  new_concept:
+    id: GO_WRONG_BADLY
+    description: Of a plan or a situation, go badly wrong.
+    triggers:
+      vp: [go awry, go haywire, go badly wrong, go horribly wrong, go terribly wrong]
+  evidence: own
+  confidence: high
+  why: Not a bare "go wrong" ("you can't go wrong" isn't "you can't go pear-shaped").
+
+- decision: add_entry
+  candidate: a good innings
+  entry:
+    id: a-good-innings
+    form: have a good innings
+    concept: [NEW:GOOD_INNINGS]
+    frame: vp
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Have a long life (or career), said kindly of someone who has died or retired (from cricket).
+    sources: [https://en.wiktionary.org/wiki/innings]
+  new_concept:
+    id: GOOD_INNINGS
+    description: Live a long (and full) life.
+    triggers:
+      vp: [live a long and full life, live a long and happy life, live a long life, live a full and long life]
+  evidence: own
+  confidence: medium
+  why: The verb phrase, so "lived a long life" becomes "had a good innings"; a gentle phrase, fit for an obituary.
+
+# --- amounts ---------------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: all up (in total)
+  entry:
+    id: all-up
+    form: all up
+    concept: [NEW:IN_TOTAL]
+    frame: adv
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Altogether, in total (it cost fifty bucks all up).
+  new_concept:
+    id: IN_TOTAL
+    description: Altogether, counting everything (a sum or a count).
+    triggers:
+      adv: ["in total !=darkness|silence|control|contrast|disregard|agreement|chaos|confusion|secrecy|isolation|despair|awe|shock|disbelief|denial|ignorance|freedom|safety|comfort|war|eclipse|failure|charge|command|recall"]
+  evidence: own
+  confidence: medium
+  why: The sum only; "in total darkness" (complete) is blocked by the noun after it.
+
+- decision: add_entry
+  candidate: a fair few
+  entry:
+    id: a-fair-few
+    form: a fair few
+    concept: [NEW:QUITE_A_FEW]
+    frame: adj
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Quite a few, a sizeable number (a fair few people turned up).
+    sources: [https://en.wiktionary.org/wiki/a_fair_few]
+  new_concept:
+    id: QUITE_A_FEW
+    description: Quite a few, a sizeable number (before a plural noun).
+    triggers:
+      adj: [quite a few]
+  evidence: own
+  confidence: high
+  why: The partner of a fair bit (QUITE_A_LOT); before a noun, so "quite a few of them" is left alone.
+
+# --- things and places -----------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: brolly
+  entry:
+    id: brolly
+    form: brolly
+    concept: [NEW:UMBRELLA]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    plural: brollies
+    gloss: An umbrella.
+    sources: [https://en.wiktionary.org/wiki/brolly]
+  new_concept:
+    id: UMBRELLA
+    description: An umbrella for the rain or sun (not an umbrella organisation, term or policy).
+    triggers:
+      np: ["umbrella !=term|terms|organisation|organisations|organization|organizations|group|groups|body|bodies|policy|policies|insurance|fund|funds|company|companies|brand|brands|agreement|agreements|union|unions|of|for|stand|stands|movement|structure"]
+  evidence: own
+  confidence: high
+  why: The thing you carry; the figurative umbrella (a term, an organisation, "under the umbrella of") is blocked.
+
+- decision: add_entry
+  candidate: out bush
+  entry:
+    id: out-bush
+    form: out bush
+    concept: [NEW:OUT_BUSH]
+    frame: adv
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Out in the bush, away from the towns.
+    sources: [https://en.wiktionary.org/wiki/bush]
+  new_concept:
+    id: OUT_BUSH
+    description: Out in the country, far from towns (as a place phrase).
+    triggers:
+      adv: [out in the countryside, out in the sticks, out in the boondocks, in the boondocks, out in the backwoods]
+  evidence: own
+  confidence: medium
+  why: The place phrase whole; FOREST's bush keeps the noun.
+
+# --- tempers and kids ------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: chuck a tanty
+  entry:
+    id: chuck-a-tanty
+    form: chuck a tanty
+    concept: [NEW:THROW_TANTRUM]
+    frame: vp
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Throw a tantrum, have a childish fit of temper.
+    sources: [https://en.wiktionary.org/wiki/tanty]
+  new_concept:
+    id: THROW_TANTRUM
+    description: Throw a tantrum (a fit of temper, a child's or one like it). Apart from LOSE_TEMPER, so "lose his
+      temper" isn't made childish.
+    triggers:
+      vp: [throw a tantrum, have a tantrum, throw a hissy fit, have a hissy fit, pitch a fit]
+  evidence: own
+  confidence: high
+  why: Only the tantrum phrasings; LOSE_TEMPER shares two of them, which merges the two readings on that span.
+
+- decision: add_entry
+  candidate: a tanty
+  entry:
+    id: a-tanty
+    form: a tanty
+    concept: [TANTRUM]
+    frame: np
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: A tantrum.
+    sources: [https://en.wiktionary.org/wiki/tanty]
+  evidence: own
+  confidence: high
+  why: TANTRUM's noun (a tantrum, a hissy fit), beside a wobbly.
+
+- decision: add_entry
+  candidate: muck up
+  entry:
+    id: muck-up
+    form: muck up
+    concept: [NEW:MISBEHAVE]
+    frame: vp
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Misbehave, get up to mischief (of kids, mostly).
+    sources: [https://en.wiktionary.org/wiki/muck_up]
+  new_concept:
+    id: MISBEHAVE
+    description: Behave badly (of a person, often a child). Apart from PLAY_UP, which a machine can do too.
+    triggers:
+      vp: [misbehave]
+  evidence: own
+  confidence: medium
+  why: Not "mess up" (a mistake) or "act up" (a car acts up); "misbehave" is PLAY_UP's too, so both read there.
+  triggers_to_add:
+    COMPLAINER:
+      np: [crybaby, cry-baby]
+
+# --- reference only --------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: is she buggery
+  entry:
+    id: is-it-buggery
+    form: is it buggery
+    variants: [is she buggery, is he buggery]
+    concept: [NEW:EMPHATIC_NO]
+    frame: interjection
+    intensity: 5
+    incoherence: 4
+    vulgarity: 1
+    register: current
+    gloss: An emphatic, scornful no to a question, echoing its subject (is he coming? no way).
+    sources: [https://en.wiktionary.org/wiki/buggery]
+  new_concept:
+    id: EMPHATIC_NO
+    description: A scornful, emphatic "certainly not" in answer to a question (lookup only); the form echoes the
+      question's subject, which no plain trigger can.
+    triggers:
+      interjection: [most certainly not in any way whatsoever]
+  evidence: own
+  confidence: medium
+  why: Reference only; it echoes the question ("is she...", "did he..."), so no plain "no" can be swapped for it.

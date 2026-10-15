@@ -1,0 +1,209 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 1,
+   "tone": 3,
+   "flow": 3,
+   "variety": 1,
+   "essence": 4
+  },
+  "yarn": {
+   "meaning": 4,
+   "sense": 3,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every fact, figure, timestamp, link and component survives unchanged (the table, \"0.02154816 USDC / FOLD\", \"`1787148023`\", the CCA rules, the safety list, all four notices). Small shifts are colour or near-synonyms: \"locked in for long-term on-chain liquidity support\", \"stop sniping\" for 'mitigate', and \"or what it'll trade at\" added to the risk notice.",
+   "sense": "Terms fit: \"done and dusted\", \"up for grabs in the final period\", \"kicked in\", \"dodgy, unofficial sources\", \"land in your DMs out of the blue\". \"stop sniping\" overstates 'mitigate', and \"locked in\" slightly overstates 'committed'.",
+   "authenticity": "Natural Aussie plain English: \"It's for folks who had a go in\", \"No one can tell you what the market price will do down the track\", \"Have a read of the full\".",
+   "register": "A light level-3 touch, perhaps a shade light: idiom is sprinkled (\"Nope.\", \"Yep.\", \"done and dusted\") but much reads as plain English (\"The auction runs over a number of separate periods.\"). No swearing, fitting vulgarity 1 on a financial FAQ.",
+   "tone": "Keeps the careful, official FAQ tone; the safety warnings stay firm (\"will never, ever ask for your seed phrase\").",
+   "flow": "Reads cleanly: \"The CCA hands out tokens bit by bit and uses the one price for everyone within each period.\"",
+   "variety": "Varied (\"done and dusted\", \"up for grabs\", \"gas wars\", \"kicked in\", \"dodgy\"), with \"kicked in\"/\"kicked off\" and \"had a go\" recurring.",
+   "essence": "Unmistakably the FOLD Auction FAQ, structure, callouts and notices intact."
+  },
+  "engine": {
+   "meaning": "Almost the original verbatim, so facts survive, but \"50% of proceeds dead set on long-term on-chain liquidity support\" muddies 'dedicated to', and \"sweet bugger-all in this communication constitutes legal, tax, financial\" puts slang into the legal disclaimer.",
+   "sense": "Of four changes, two take the wrong sense: \"dead set on\" (determined) for 'dedicated to', and \"Righto.\" (okay, let's go) for 'Yes.' answering 'Was KYC required?'.",
+   "authenticity": "Bolted-on interjections in otherwise untouched copy: \"Bloody hell, it is\", \"Righto. Participants had to complete identity verification\".",
+   "register": "Level 3 asked; the text is untranslated apart from four swaps, and the swaps put \"Bloody hell\" and \"bugger-all\" into a financial FAQ and its legal notice.",
+   "tone": "Official tone holds except where \"Bloody hell,\" and \"sweet bugger-all\" make a compliance text flippant.",
+   "flow": "Reads as the original, but \"Bloody hell, it is\" and the lower-case \"_sweet bugger-all in this communication\" jar.",
+   "variety": "Only four Aussie touches in the whole document.",
+   "essence": "Recognisably the original FAQ, since it is nearly unchanged."
+  },
+  "yarn": {
+   "meaning": "Every figure, timestamp, link and component survives, and the legal notices are left verbatim. Two lines shift sense: \"The auction gave every man and his dog an open, public way to hand out a bit more FOLD\" makes the public the distributor, and \"If you're dead set on staying safe, only use auction\" makes a firm instruction conditional. \"If they do, they're not who they say they are.\" is colour on the warning.",
+   "sense": "Most terms fit (\"done and dusted\", \"up for grabs in the last period\", \"have a squiz\", \"had a crack\", \"make sniping harder\"), but \"every man and his dog\" and \"dead set on staying safe\" strain, and \"Punters put their bids in\" casts bidders as gamblers.",
+   "authenticity": "Mostly natural: \"It's for anyone who had a go in\", \"Nobody can tell you what the market price will do down the track\". \"Righto, here's how it went:\" and \"every man and his dog\" read a little stock.",
+   "register": "Level-3 weight: steady idiom through the explanatory sections, plain legal notices, no swearing.",
+   "tone": "Official tone mostly holds, but \"If you're dead set on staying safe\" softens a safety instruction into an option.",
+   "flow": "Reads smoothly: \"The CCA hands tokens out bit by bit and charges everyone the same price within each period.\"",
+   "variety": "Varied (\"done and dusted\", \"up for grabs\", \"had a crack\", \"squiz\", \"Punters\"), with \"kicked in\"/\"kicked off\" and \"switched on\" recurring.",
+   "essence": "Clearly the FOLD Auction FAQ, structure and notices intact."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "set up that way to cut down gas wars, stop sniping",
+    "original": "This design is intended to reduce gas competition, mitigate sniping",
+    "severity": "minor",
+    "why": "'Stop' overstates 'mitigate' in a factual explainer."
+   },
+   {
+    "quote": "what FOLD's actually worth or what it'll trade at",
+    "original": "guarantee of FOLD’s actual price or value",
+    "severity": "minor",
+    "why": "Small addition to a legal disclaimer; harmless but not in the original."
+   },
+   {
+    "quote": "**50% of proceeds were locked in for long-term on-chain liquidity support.**",
+    "original": "**50% of proceeds were committed to long-term on-chain liquidity support.**",
+    "severity": "minor",
+    "why": "'Locked in' suggests a technical lock the original does not claim."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "50% of proceeds dead set on long-term on-chain liquidity support",
+    "original": "50% of proceeds dedicated to long-term on-chain liquidity support",
+    "severity": "major",
+    "why": "'Dead set on' means determined; wrong sense in a figures table."
+   },
+   {
+    "quote": "Bloody hell, it is",
+    "original": "It is",
+    "severity": "major",
+    "why": "Swearing bolted into a technical definition."
+   },
+   {
+    "quote": "_sweet bugger-all in this communication constitutes legal, tax, financial,",
+    "original": "_Nothing in this communication constitutes legal, tax, financial,",
+    "severity": "major",
+    "why": "Crude slang dropped into a legal disclaimer; the wording a reader relies on is changed."
+   },
+   {
+    "quote": "Righto. Participants had to complete identity verification",
+    "original": "Yes. Participants had to complete identity verification",
+    "severity": "minor",
+    "why": "'Righto' does not answer yes to a question."
+   },
+   {
+    "quote": "Participation was available to eligible participants.",
+    "original": "Participation was available to eligible participants.",
+    "severity": "major",
+    "why": "Left untranslated across the document against a level-3 brief."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "every man and his dog an open, public way to hand out a bit more FOLD",
+    "original": "The auction gave a transparent, public mechanism for additional distribution",
+    "severity": "major",
+    "why": "Makes the public the one handing out FOLD; 'transparent' is lost."
+   },
+   {
+    "quote": "If you're dead set on staying safe, only use auction, claiming, verification and support links",
+    "original": "Use only auction, claiming, verification, and support links",
+    "severity": "major",
+    "why": "Turns a firm safety instruction into a conditional."
+   },
+   {
+    "quote": "Punters put their bids in through the official Uniswap CCA interface.",
+    "original": "Participants submit bids through the official Uniswap CCA interface.",
+    "severity": "minor",
+    "why": "'Punters' casts bidders as gamblers in a regulated sale."
+   },
+   {
+    "quote": "Righto, here's how it went:",
+    "original": "",
+    "severity": "minor",
+    "why": "Added stock lead-in."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Faithful, natural plain-Aussie FAQ that keeps every figure and warning; a touch light for level 3.",
+  "engine": "Essentially untranslated, with four swaps that are mostly wrong-sense or crude in a financial FAQ.",
+  "yarn": "Natural level-3 FAQ that keeps every figure; a couple of idioms bend the sense, one softening a safety instruction."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

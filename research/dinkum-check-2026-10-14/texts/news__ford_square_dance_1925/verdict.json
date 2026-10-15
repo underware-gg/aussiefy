@@ -1,0 +1,167 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "dinkum-3": "A",
+  "dinkum-4": "B",
+  "yarn-dinkum": "C"
+ },
+ "scores": {
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "dinkum-4": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 3,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "dinkum-3": {
+   "meaning": "Every fact survives: the Tuesday dance, the advertised couples, the 21 quadrilles cut to four, Dunham's week as guest, the vaudeville contract, Tex Rickard and the barn dance: \"they'll pick four, so they're easier to teach\", \"he'll be under the management of Tex Rickard\". \"so they reckon\" is colour on \"It was added\".",
+   "sense": "Terms fit: \"his first big crack at it\", \"For the do\", \"rock up at the Tuesday night do\", \"front up in New York\", \"Mr. Ford sang out\" for exclaimed.",
+   "authenticity": "Natural Aussie: \"already let on\", \"rock up\", \"the missus\", \"brand-spankin'-new\". Ford's quote is rightly kept as his own words. A little stock in the dropped-g run (\"stayin'\", \"playin'\", \"chippin'\", \"bein'\").",
+   "register": "A solid middle weight for a level-5 brief: slang in most narrative sentences (\"rock up\", \"front up\", \"the missus\") but it is a wire report lightly retold, not a full pub yarn. No swearing, within vulgarity 2.",
+   "tone": "Keeps the brisk, faintly amused wire-report tone: \"where he might just answer the call of the footlights and sign a vaudeville contract.\"",
+   "flow": "Reads well; the Dunham paragraph is split into two sentences, easing the original's long one. One stretch is heavy: \"chippin' in several old-time tunes for the Ford \"Americana\" of such pieces that's bein' got ready for publishin'\".",
+   "variety": "Varied: \"let on\", \"big crack\", \"sang out\", \"get keen\", \"rock up\", \"front up\", \"brand-spankin'-new\"; \"do\" twice is fine.",
+   "essence": "Unmistakably the 1925 AP item, its shape and Ford's quote intact: \"Come back? They're here!\""
+  },
+  "dinkum-4": {
+   "meaning": "All facts kept, closest to the original's order: \"Henry Ford's first big crack at the campaign he's already announced\", \"was meant to turn up at the Tuesday night do\", \"It was added that puttin' on this dance was hoped to help\".",
+   "sense": "Terms fit: \"comes off on Tuesday night\", \"For the do\", \"front up in New York\", \"Henry Ford's push\".",
+   "authenticity": "Mostly natural (\"front up\", \"the missus\", \"brand-spankin'-new\"), with the source's officialese kept in places: \"It was added that puttin' on this dance was hoped to help\".",
+   "register": "Middle weight for a level-5 brief, a shade lighter than the others: \"to make 'em easier to teach and get people keener on 'em\", but whole clauses kept from the wire (\"the champion fiddler of Maine\"). No swearing.",
+   "tone": "Keeps the wire-report tone: \"where he might answer the call of the footlights and sign up for a vaudeville contract.\"",
+   "flow": "The long Dunham sentence is kept as one breathless run (\"who's been stayin' with Mr. Ford for a week, playin' for an old-fashioned dance party and chippin' in\"), and the last sentence is awkward: \"It was added that puttin' on this dance was hoped to help Henry Ford's push\".",
+   "variety": "Reasonably varied: \"big crack\", \"comes off\", \"sang out\", \"turn up\", \"front up\", \"push\".",
+   "essence": "Clearly the original item, retold: \"Come back? They're here!\" and the Rickard barn-dance close."
+  },
+  "yarn-dinkum": {
+   "meaning": "All facts kept: \"they'll pick four, so they're easier to teach\", \"he'll be managed by Tex Rickard\", \"They reckon puttin' on this dance should help Henry Ford along\". \"punters\" for the public is a slight shift.",
+   "sense": "Mostly apt (\"lob in New York\", \"rock up\", \"a fair few old-time tunes\"), but \"Mr. Ford fair shot back\" strains (\"fair\" as an intensifier before a verb of reply is odd, and \"shot back\" implies a retort), and \"more punters'll get keen\" casts dancers as customers or gamblers.",
+   "authenticity": "Good Aussie: \"lob in\", \"rock up\", \"the missus\", \"s'posed to be\". \"fair shot back\" sounds forced.",
+   "register": "The heaviest of the three, still middle weight for level 5: \"puttin' ads out for couples to come 'n dance\", \"more punters'll get keen\", \"lob in\". No swearing.",
+   "tone": "Keeps the brisk, wry report: \"where he might answer the call of the footlights and sign up for a vaudeville contract.\"",
+   "flow": "Reads easily; small bumps at \"fair shot back\" and \"the Ford \"Americana\" of them pieces that's bein' got ready to print\".",
+   "variety": "Varied: \"let on\", \"big crack\", \"come 'n dance\", \"punters\", \"a fair few\", \"rock up\", \"lob in\", \"s'posed\".",
+   "essence": "Unmistakably the original item: Ford's quote verbatim, Dunham, Rickard, Madison Square Garden."
+  }
+ },
+ "problems": {
+  "dinkum-3": [
+   {
+    "quote": "that's bein' got ready for publishin'",
+    "original": "now being prepared for publication",
+    "severity": "minor",
+    "why": "Clunky; \"publishin'\" for \"publication\" reads oddly."
+   },
+   {
+    "quote": "Henry Ford's already let on he's on a mission",
+    "original": "Henry Ford's first large venture in his already announced campaign",
+    "severity": "minor",
+    "why": "Middle weight only; the brief asks for a full level-5 yarn."
+   }
+  ],
+  "dinkum-4": [
+   {
+    "quote": "It was added that puttin' on this dance was hoped to help Henry Ford's push",
+    "original": "It was added that in putting on this dance it was hoped to further Henry Ford's purpose",
+    "severity": "minor",
+    "why": "Officialese plus a dropped g; the passive construction is clumsy and half-translated."
+   },
+   {
+    "quote": "to make 'em easier to teach and get people keener on 'em",
+    "original": "to simplify their teaching and encourage their popularity",
+    "severity": "minor",
+    "why": "\"'em ... 'em\" repetition in one line."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "Mr. Ford fair shot back",
+    "original": "Mr. Ford exclaimed",
+    "severity": "minor",
+    "why": "Forced: \"fair\" as an intensifier sits awkwardly here, and \"shot back\" adds a retort the original doesn't have."
+   },
+   {
+    "quote": "more punters'll get keen on 'em",
+    "original": "encourage their popularity",
+    "severity": "minor",
+    "why": "\"punters\" (customers, gamblers) is a slightly off sense for the dancing public."
+   }
+  ]
+ },
+ "summaries": {
+  "dinkum-3": "Faithful, natural and well paced; a middle-weight retelling rather than the full yarn level 5 asks for.",
+  "dinkum-4": "Accurate and natural in its slang, but the closest to the wire's syntax, with a clumsy close and a long unbroken Dunham sentence.",
+  "yarn-dinkum": "Livelier and a little more Aussie than the others, faithful, with a couple of forced choices."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "dinkum-3",
+    "dinkum-4",
+    "yarn-dinkum"
+   ]
+  ],
+  "flow": [
+   [
+    "dinkum-3",
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-4"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-3"
+   ],
+   [
+    "dinkum-4"
+   ]
+  ],
+  "essence": [
+   [
+    "dinkum-3",
+    "dinkum-4",
+    "yarn-dinkum"
+   ]
+  ],
+  "overall": [
+   [
+    "dinkum-3",
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-4"
+   ]
+  ]
+ }
+}

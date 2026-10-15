@@ -1,0 +1,57 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {"evidence": "All technical content intact: \"`pip install black`\", \"It needs Python 3.10+ to run\", \"`pip install \\\"black[jupyter]\\\"`\", the AST safety check and \"use `--fast`\". \"the no-nonsense Python code formatter\" softens \"uncompromising\", the tool's defining claim.", "score": 4},
+        "sense": {"evidence": "Terms fit: \"the fiddly bits of hand-formatting\", \"Have a squiz at the [PyCon 2019 talk]\", \"To get cracking straight away\", \"down the track\", \"grab one of the PyInstaller-built standalone executables\". \"no-nonsense\" is close to but not quite \"uncompromising\".", "score": 4},
+        "authenticity": {"evidence": "Natural Australian dev-speak: \"You'll save time and brainpower for the stuff that actually matters.\", \"you shouldn't expect big formatting changes down the track\".", "score": 5},
+        "register": {"evidence": "Level 2: a light, casual rewording with a few touches (\"squiz\", \"get cracking\", \"down the track\"); code and links untouched; no swearing.", "score": 5},
+        "tone": {"evidence": "Keeps the confident, opinionated README voice, though \"no-nonsense\" is milder than \"uncompromising\".", "score": 4},
+        "flow": {"evidence": "Reads naturally: \"After a while the formatting stops being something you notice, and you can focus on the content instead.\"", "score": 5},
+        "variety": {"evidence": "No repetition: \"fiddly bits\", \"brainpower\", \"squiz\", \"grab\", \"get cracking\", \"plenty of\", \"down the track\", \"have a look\".", "score": 5},
+        "essence": {"evidence": "Clearly the Black README, structure and claims kept.", "score": 5}
+      },
+      "problems": [
+        {"quote": "_Black_ is the no-nonsense Python code formatter.", "original": "_Black_ is the uncompromising Python code formatter.", "severity": "minor", "why": "\"uncompromising\" is Black's signature tagline; \"no-nonsense\" softens it."}
+      ],
+      "summary": "A natural, light-touch README that keeps all technical detail; softens the \"uncompromising\" tagline."
+    },
+    "B": {
+      "scores": {
+        "meaning": {"evidence": "Everything kept, including the tagline \"the uncompromising Python code formatter\", the install commands, the AST check and \"use `--fast`\".", "score": 5},
+        "sense": {"evidence": "Terms fit: \"the fiddly bits of hand-formatting\", \"heaps of projects\", \"down the track\", \"have a squiz at [The Black Code Style]\".", "score": 5},
+        "authenticity": {"evidence": "Natural: \"After a while you stop noticing the formatting\", \"Black is already [successfully used] ... by heaps of projects, small and big\".", "score": 5},
+        "register": {"evidence": "Level 2: light, with \"heaps\", \"squiz\", \"down the track\"; no swearing.", "score": 5},
+        "tone": {"evidence": "The confident README voice is intact, tagline included: \"_Black_ is the uncompromising Python code formatter.\"", "score": 5},
+        "flow": {"evidence": "Smooth: \"Now that we're stable, you shouldn't expect big formatting changes down the track.\"", "score": 5},
+        "variety": {"evidence": "Light and unrepeated: \"fiddly bits\", \"brainpower\", \"get going\", \"heaps\", \"down the track\", \"squiz\".", "score": 5},
+        "essence": {"evidence": "Unmistakably the Black README, lightly localised.", "score": 5}
+      },
+      "problems": [],
+      "summary": "A faithful, natural light-touch README that keeps the tagline and every technical detail."
+    },
+    "C": {
+      "scores": {
+        "meaning": {"evidence": "The original verbatim, so nothing lost: \"_Black_ is the uncompromising Python code formatter.\"", "score": 5},
+        "sense": {"evidence": "The only change is \"Any colour you like.\"; nothing takes a wrong sense.", "score": 5},
+        "authenticity": {"evidence": "There is no Australian in it to judge beyond the spelling \"colour\"; the prose is the original: \"you agree to cede control over minutiae of hand-formatting\".", "score": 3},
+        "register": {"evidence": "Untranslated: \"Further information can be found in our docs\", \"you should not expect large formatting changes in the future\". Well under level 2.", "score": 1},
+        "tone": {"evidence": "The original's tone, unchanged.", "score": 5},
+        "flow": {"evidence": "Reads as the original README does.", "score": 5},
+        "variety": {"evidence": "No slang at all to vary.", "score": 1},
+        "essence": {"evidence": "It is the original, unretold.", "score": 4}
+      },
+      "problems": [
+        {"quote": "you agree to cede control over minutiae of hand-formatting", "original": "you agree to cede control over minutiae of hand-formatting", "severity": "major", "why": "The whole text is left untranslated apart from one spelling; under the level-2 brief."}
+      ],
+      "summary": "The original with only \"colour\" respelt; no translation."
+    }
+  },
+  "rankings": {
+    "tone": [["B", "C"], ["A"]],
+    "flow": [["A", "B", "C"]],
+    "variety": [["A", "B"], ["C"]],
+    "essence": [["B"], ["A"], ["C"]],
+    "overall": [["B"], ["A"], ["C"]]
+  }
+}

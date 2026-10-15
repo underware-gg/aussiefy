@@ -1,0 +1,185 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 3,
+   "register": 4,
+   "tone": 4,
+   "flow": 4,
+   "variety": 3,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 3,
+   "register": 2,
+   "tone": 5,
+   "flow": 4,
+   "variety": 2,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every beat survives: the bald question, the portrait, the reading list, the four books, the $1.12, the geometry report, the holidays, the telegram P.S. Small rewordings keep sense: \"and pretty well, too\" for \"very satisfactorily\", \"pick up without trying\" for \"know by absorption\", \"there's another Freshman from Texas staying back too\".",
+   "sense": "Each swap fits: \"a verandah roof\" for porch roof, \"You're a crabby old thing with a temper on you\" for snappy, \"so chock-a-block you can hardly get through\" for cluttered, \"what she's on about\" for talking about, \"Hooroo, Daddy\" as the sign-off.",
+   "authenticity": "The Aussie is natural and unforced: \"I've got four on the go at once\", \"If you can't be bothered writing\", \"I haven't told anybody, mind\". One clumsy line: \"a sort of sprinkly grey sort of hair\".",
+   "register": "A light level-2 touch, clean throughout: \"verandah\", \"chock-a-block\", \"on the go\", \"Hooroo\", with the letter's voice left intact; no swearing.",
+   "tone": "Judy's eager, playful voice stays: \"Oh, you see, I know!\", \"And oh, it's fun!\", the mock-formal \"I have the honour to report fresh explorations in the field of geometry.\"",
+   "flow": "Reads smoothly, apart from the doubled \"a sort of sprinkly grey sort of hair\" and the slightly wordy \"the study's getting left by the wayside\".",
+   "variety": "Different terms each time: \"verandah\", \"crabby\", \"on the go\", \"chock-a-block\", \"Hooroo\", \"on about\"; the closing \"Bye till January\" avoids repeating Hooroo.",
+   "essence": "Unmistakably the Daddy-Long-Legs letter, its shape of dated entries and interruptions kept: \"(Ten o'clock bell. This is a very interrupted letter.)\""
+  },
+  "yarn": {
+   "meaning": "All points kept; one added opener, \"Ya won't believe this, but you never answered my question\", is colour rather than new fact. Otherwise close: \"there's another Freshman who lives in Texas staying back too\".",
+   "sense": "Most terms fit: \"so chockers you can hardly get through\", \"a beaut time over the holidays\", \"heaps of others besides\". \"and a merry Chrissie!\" strains: Chrissie is used in compounds, not usually in the greeting.",
+   "authenticity": "Natural in places (\"I've got four on the go at once\", \"cos there are eighteen blank years behind me\"), but the bolted-on \"Ya won't believe this\" and \"merry Chrissie\" read as pastiche.",
+   "register": "Slightly above a light touch with \"Ya\", \"cos\", \"chockers\", \"beaut\", \"Hooroo\" twice and \"Chrissie\"; still clean, near level 2.",
+   "tone": "Mostly Judy's voice, but the opening \"Ya won't believe this\" makes the genteel letter-writer coarser than she is.",
+   "flow": "Smooth on the whole; the opener \"Ya won't believe this, but you never answered my question\" is an awkward join.",
+   "variety": "Varied terms, but the sign-off repeats: \"Hooroo, Daddy\" and then \"Hooroo till January\".",
+   "essence": "Clearly the same letter with its entries and bells: \"(Chapel bell.)\", \"I have the honour to report fresh explorations\"."
+  },
+  "engine": {
+   "meaning": "Nearly the original word for word, so nothing is lost: \"I have it planned exactly what you look like--very satisfactorily\", \"have your secretary telegraph\".",
+   "sense": "The few swaps mostly fit (\"verandah roof\", \"heaps of others besides\"), but \"vacation\" became \"I’m going to have a beautiful time in holiday\", which breaks the phrase.",
+   "authenticity": "Little Aussie at all; what is there is spelling (\"colour\", \"realising\", \"honour\") plus a pasted \"a merry Chrissie!\" and US forms left in: \"my nice red bath robe\", \"Good-by, Daddy\".",
+   "register": "Largely untranslated: apart from \"verandah\", \"heaps\" and \"Chrissie\", the text is the original (\"You’re a snappy old thing with a temper.\"), lighter than a level-2 brief.",
+   "tone": "Being the original, the tone is whole: \"Oh, you see, I know! You’re a snappy old thing with a temper.\"",
+   "flow": "The original prose reads well, but the swap \"a beautiful time in holiday\" is ungrammatical.",
+   "variety": "Hardly any slang to vary: \"verandah\", \"heaps\", \"Chrissie\".",
+   "essence": "Unmistakably the original: \"(Ten o’clock bell. This is a very interrupted letter.)\""
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "a sort of sprinkly grey sort of hair",
+    "original": "sort of sprinkly gray hair",
+    "severity": "minor",
+    "why": "\"sort of\" doubled; clunky."
+   },
+   {
+    "quote": "the study's getting left by the wayside",
+    "original": "studying is getting left out",
+    "severity": "minor",
+    "why": "\"the study\" reads as a room; slightly awkward."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Ya won't believe this, but you never answered my question",
+    "original": "You never answered my question and it was very important.",
+    "severity": "major",
+    "why": "Stage-Aussie opener bolted on; out of character for Judy."
+   },
+   {
+    "quote": "and a merry Chrissie!",
+    "original": "and a merry Christmas!",
+    "severity": "minor",
+    "why": "\"Merry Chrissie\" is a forced greeting; Australians say Merry Christmas."
+   },
+   {
+    "quote": "Hooroo till January",
+    "original": "Good-by till January",
+    "severity": "minor",
+    "why": "Repeats the Hooroo used a few lines earlier."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "I’m going to have a beautiful time in holiday",
+    "original": "I’m going to have a beautiful time in vacation",
+    "severity": "major",
+    "why": "Word swap broke the grammar; Australians say \"over the holidays\"."
+   },
+   {
+    "quote": "You’re a snappy old thing with a temper.",
+    "original": "You’re a snappy old thing with a temper.",
+    "severity": "major",
+    "why": "Representative of the whole: the text is left largely untranslated against a level-2 brief."
+   },
+   {
+    "quote": "and a merry Chrissie!",
+    "original": "and a merry Christmas!",
+    "severity": "minor",
+    "why": "Forced greeting, pasted onto otherwise untouched text."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A light, natural level-2 retelling that keeps every point and Judy's voice; one clumsy doubled phrase.",
+  "yarn": "Faithful and lively, but a little heavier than asked, with a stagey opener and a forced Christmas greeting.",
+  "engine": "Essentially the original with spelling changes and a couple of swaps, one of which breaks the grammar; far too light for the brief."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "engine"
+   ],
+   [
+    "yarn"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn",
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "engine"
+   ],
+   [
+    "yarn"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

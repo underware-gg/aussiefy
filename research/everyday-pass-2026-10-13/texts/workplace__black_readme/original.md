@@ -1,0 +1,63 @@
+> “Any color you like.”
+
+_Black_ is the uncompromising Python code formatter. By using it, you agree to cede
+control over minutiae of hand-formatting. In return, _Black_ gives you speed,
+determinism, and freedom from `pycodestyle` nagging about formatting. You will save time
+and mental energy for more important matters.
+
+Blackened code looks the same regardless of the project you're reading. Formatting
+becomes transparent after a while and you can focus on the content instead.
+
+_Black_ makes code review faster by producing the smallest diffs possible.
+
+Watch the [PyCon 2019 talk](https://youtu.be/esZLCuWs_2Y) to learn more.
+
+---
+
+**[Read the documentation on ReadTheDocs!](https://black.readthedocs.io/en/stable)**
+
+---
+
+## Installation and usage
+
+### Installation
+
+_Black_ can be installed by running `pip install black`. It requires Python 3.10+ to
+run. If you want to format Jupyter Notebooks, install with
+`pip install "black[jupyter]"`.
+
+If you want to run _Black_ without installing Python, download one of the
+PyInstaller-built standalone executables from the
+[latest GitHub release](https://github.com/psf/black/releases/latest).
+
+### Usage
+
+To get started right away with sensible defaults:
+
+```sh
+black {source_file_or_directory}
+```
+
+You can run _Black_ as a package if running it as a script doesn't work:
+
+```sh
+python -m black {source_file_or_directory}
+```
+
+Further information can be found in our docs:
+
+- [Usage and Configuration](https://black.readthedocs.io/en/stable/usage_and_configuration/index.html)
+
+_Black_ is already [successfully used](https://github.com/psf/black#used-by) by many
+projects, small and big. _Black_ has a comprehensive test suite, with efficient parallel
+tests, and our own auto formatting and parallel Continuous Integration runner. Now that
+we have become stable, you should not expect large formatting changes in the future.
+Stylistic changes will mostly be responses to bug reports and support for new Python
+syntax. For more information please refer to
+[The Black Code Style](https://black.readthedocs.io/en/stable/the_black_code_style/index.html).
+
+Also, as a safety measure which slows down processing, _Black_ will check that the
+reformatted code still produces a valid AST that is effectively equivalent to the
+original (see the
+[Pragmatism](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#ast-before-and-after-formatting)
+section for details). If you're feeling confident, use `--fast`.

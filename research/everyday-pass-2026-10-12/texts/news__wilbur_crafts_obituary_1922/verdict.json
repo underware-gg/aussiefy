@@ -1,0 +1,223 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 2,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 2,
+   "flow": 1,
+   "variety": 2,
+   "essence": 3
+  },
+  "yarn": {
+   "meaning": 4,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 3,
+   "flow": 4,
+   "variety": 5,
+   "essence": 4
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every fact survives, including the dateline, the 28 years, pneumonia, age 73, the Dempsey-Carpentier bout, the burial at Westerly, the three denominations with dates, Sara J. Timanus, six lectures a week in twenty-nine countries, \"Rhetoric Made Racy\" and the Twentieth Century Quarterly. The quotation \"often proved a ride of lifelong shame and woe\" is kept verbatim.",
+   "sense": "Terms mostly fit: \"barracking for prohibition\", \"his offsider\", \"sheer hard yakka\", \"the reform mob\", \"having a go at popular entertainment\". \"that sort of carry-on\" adds a sneer the original's \"similar movements\" doesn't carry.",
+   "authenticity": "Natural Australian idiom used the way locals use it: \"a real character around the congressional lobbies\", \"Never one to hold his tongue\", \"a red-hot go\", \"won't raise an eyebrow\".",
+   "register": "A full level-4 retelling, with swearing at dad level: \"He wrote a bloody mountain of stuff on moral questions.\"",
+   "tone": "Keeps the obituary's wry but respectful air, and the death and funeral are reported plainly (\"died of pneumonia in a hospital here today\"). A few lines tip a little cheeky: \"that sort of carry-on\", \"his gob\".",
+   "flow": "Mostly smooth, with one tangled clause: \"Dr. Crafts, who the blokes fighting the laws he pushed reckoned was a \\\"reform fanatic,\\\" was a real character\".",
+   "variety": "Wide range: \"barracking\", \"carry-on\", \"of that ilk\", \"red-hot go\", \"offsider\", \"goings-on\", \"hard yakka\", \"gob\", \"ciggies\", \"never-say-die\".",
+   "essence": "Clearly the 1922 Crafts obituary, with the same structure, dateline, quoted title and closing catalogue of vices."
+  },
+  "engine": {
+   "meaning": "Most text is untouched, but key details are changed: \"Sunday baseball, dartses\" replaces cigarettes with darts, the book title is altered to \"Rhetoric Made Racy, ay.\", and \"a picturesque reckon\" turns a figure into nonsense.",
+   "sense": "Several terms take the wrong sense: \"picturesque reckon\" (reckon is a verb), \"dartses\" for cigarettes, \"his bloody attacks\" (an intensifier where none belongs), \"ay\" inside a book title.",
+   "authenticity": "Stock bits bolted onto unchanged 1922 prose: \"Jeez, after funeral services here tomorrow\", \"Well, he was 73 years old.\", \"Now, he was a prolific writer\".",
+   "register": "Far lighter than level 4 in substance: whole paragraphs are verbatim (\"Among reform leaders, few can have equaled Dr. Crafts in the amount of work done\"), with jarring tokens dropped in.",
+   "tone": "The obituary's dignity is undercut by misplaced interjections at the death and funeral: \"carked it at a hospital here today of pneumonia. Well, he was 73 years old.\" \"Jeez, after funeral services\".",
+   "flow": "Broken grammar and jarring joins: \"a picturesque reckon in congressional lobbies\", \"Sunday baseball, dartses were a few of the objects\", \"Boston uni\".",
+   "variety": "A few fillers (\"Well,\", \"Now,\", \"Jeez\", \"ay\") and \"bloody\"; little range.",
+   "essence": "Recognisably the original where untouched, but corrupted details and a mangled book title flatten what made it distinctive."
+  },
+  "yarn": {
+   "meaning": "All the facts are present, but some liberties are taken: the quoted \"often proved a ride of lifelong shame and woe\" is paraphrased without quote marks (\"often ended up a ride you'd be sorry and red-faced about for the rest of your days\"), and \"Fancy tryin' to call off the biggest fight of the year.\" adds a claim. Sara's \"forceful\" is softened to \"threw her weight behind\".",
+   "sense": "Terms fit well: \"barrackin' for prohibition\", \"stoush\" for the bout, \"the wowser who went after everything people did for a bit of fun\", \"good old puritan stock\".",
+   "authenticity": "Strong local idiom (\"wowser\", \"stoush\", \"bugger-all rest\", \"by the bucketload\"), but the relentless g-dropping (\"startin'\", \"fightin'\", \"gettin'\", \"stoppin'\", \"goin'\", \"dancin'\", \"reformin'\") tips toward stage-Australian.",
+   "register": "Pub-yarn heavy, a shade past level 4, with stacked asides (\"Listen to this.\", \"Didn't see that one comin'.\", \"Bloody tireless, he was.\"). Swearing stays at dad level.",
+   "tone": "Turns a wry obituary into something closer to a roast: \"Pneumonia got him.\", \"The fun police never had a harder-workin' officer.\" The death is reported more flippantly than the original allows.",
+   "flow": "Lively and readable, with some choppy lines: \"Crafts wanted 'em banned by law, the lot.\"",
+   "variety": "Very varied: \"carked it\", \"barrackin'\", \"stoush\", \"kept his trap shut\", \"old man\", \"yakka\", \"gob\", \"wowser\", \"fun police\".",
+   "essence": "Still recognisably the Crafts obituary, but the mocking frame pushes it toward a send-up of the man rather than a report of his death."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "that sort of carry-on",
+    "original": "prohibition and similar movements",
+    "severity": "minor",
+    "why": "\"carry-on\" is mildly derisive; the original is neutral here."
+   },
+   {
+    "quote": "who the blokes fighting the laws he pushed reckoned was a \"reform fanatic,\"",
+    "original": "charged by opponents of legislation he sponsored with being a \"reform fanatic,\"",
+    "severity": "minor",
+    "why": "A tangled relative clause that reads awkwardly aloud."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "dartses",
+    "original": "cigarettes",
+    "severity": "critical",
+    "why": "Changes the list of vices: cigarettes become darts, in an ungrammatical plural."
+   },
+   {
+    "quote": "\"Rhetoric Made Racy, ay.\"",
+    "original": "\"Rhetoric Made Racy.\"",
+    "severity": "critical",
+    "why": "Alters a quoted book title, the very detail the paragraph turns on."
+   },
+   {
+    "quote": "a picturesque reckon",
+    "original": "a picturesque figure",
+    "severity": "major",
+    "why": "\"reckon\" is a verb; the noun swap produces nonsense."
+   },
+   {
+    "quote": "Jeez, after funeral services here tomorrow",
+    "original": "After funeral services here tomorrow",
+    "severity": "major",
+    "why": "An exclamation in front of the funeral notice; tone-deaf in an obituary."
+   },
+   {
+    "quote": "Well, he was 73 years old.",
+    "original": "He was 73 years old.",
+    "severity": "minor",
+    "why": "A filler interjection that makes the age sound like an afterthought."
+   },
+   {
+    "quote": "his bloody attacks",
+    "original": "his attacks",
+    "severity": "minor",
+    "why": "The swear word lands as a gratuitous intensifier in neutral prose."
+   },
+   {
+    "quote": "Divinity School of Boston uni",
+    "original": "Divinity School of Boston University",
+    "severity": "minor",
+    "why": "Abbreviates a proper name, which breaks it."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "which he said often ended up a ride you'd be sorry and red-faced about for the rest of your days",
+    "original": "which he said \"often proved a ride of lifelong shame and woe\"",
+    "severity": "major",
+    "why": "A direct quotation is paraphrased and stripped of its quote marks; in a news obituary the man's own words matter."
+   },
+   {
+    "quote": "Fancy tryin' to call off the biggest fight of the year.",
+    "original": "",
+    "severity": "minor",
+    "why": "Adds a claim (the biggest fight of the year) and a jeer."
+   },
+   {
+    "quote": "Pneumonia got him.",
+    "original": "died at a hospital here today of pneumonia",
+    "severity": "minor",
+    "why": "Flippant for the cause of death in an obituary."
+   },
+   {
+    "quote": "The fun police never had a harder-workin' officer.",
+    "original": "",
+    "severity": "minor",
+    "why": "An added punchline that tips the obituary into a roast."
+   },
+   {
+    "quote": "startin' it up himself",
+    "original": "which he founded",
+    "severity": "minor",
+    "why": "Representative of near-constant g-dropping that reads as put-on."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A faithful, natural level-4 obituary that keeps every fact and quotation and a fitting wry tone. A couple of slightly cheeky word choices.",
+  "engine": "Mostly untranslated, with interjections and word swaps that corrupt facts (darts for cigarettes, an altered book title) and jar the obituary's tone.",
+  "yarn": "Vivid and very Australian, with excellent terms like \"wowser\" and \"stoush\", but over-egged, mocking in tone and loose with the quoted words."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

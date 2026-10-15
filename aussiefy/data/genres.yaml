@@ -1,0 +1,155 @@
+# How far a text may be Aussified beyond its words. Two things decide it (aussiefy/genre.py):
+#
+# The embellishment (the dial, deadset 0 · dinkum 1 · troppo 2) is how much liberty the telling takes: the
+# engine's garnish, a talker's openings, and in yarn mode how freely the agent retells. The level still decides
+# how thick the slang is and the vulgarity how strong the language: a deadset text at swaggie is broad Aussie
+# in every word, told straight.
+#   garnish: the placements it takes (connective, opener, tag, aside, tail, riff, closer, infix: a swear inside
+#            a phrase, "a bloody great stoush", insult: a tag-on calling the listener names, "ya galah"); the
+#            words swap at every setting; "all" for every one
+#   follows_form: whether the genre's form narrows its garnish; troppo is a performance, so whatever the text
+#                 it takes all it lists. At every setting, troppo's too, the form decides the openings and the
+#                 name-calling (Genre.setting)
+#   openings: whether yarn mode offers a talker's openings
+#   draft: whether yarn mode's brief carries the engine's draft (troppo writes first, from the original)
+#   keep_share: the share of the planned phrases (not declined) a yarn must keep; 0: they're vocabulary to
+#               draw on, not a plan
+#   max_length: a retelling longer than this many times the original (plus 20 words) is too long
+#   perform: whether the style guide's "perform it" block applies (guide.yaml)
+#   guidance: yarn mode's note for the setting
+#
+# The genre (which genre.py reads from the text's cues) sets the default embellishment, which the caller may
+# override, and decides the form:
+#   embellishment: its default
+#   garnish: the garnish its form allows, at a setting that follows the form: a storyteller's openers and
+#            connectives only where there's a teller, a tag-on only where someone is spoken to, no swear
+#            infixes in a notice, a doc or official prose ("a bloody good seal" in a leak guide), no riff where
+#            a real thing is described (a riff is a picture: "creeks, bone dry half the year" is a claim about
+#            Yellowstone), and no name-calling aimed at the reader
+#   openings: whether a talker's openings suit it (a story or a letter has a teller; a notice doesn't), at every
+#             setting: troppo performs a notice, but doesn't open it like a yarn
+#   formal_to_rework: whether the plan lists its formal sentences as difficult (DIFFICULT_SENTENCES) for a
+#                     writer to rework; not in docs and official prose, where the formal words are terms of art
+#                     the form keeps ("miscompilation", "eligibility"). The engine's own rewriter isn't affected
+#   person_swears: whether a swear may name a person ("some bastard" for someone, "little buggers" for kids);
+#                  at any setting, nobody's lightning victim is "some mongrel"
+#   keep_quotes: whether quoted speech and documents stay as said (a reporter quotes; a storyteller retells)
+#   guidance: yarn mode's note on the genre's form (what stays exact, what shape it keeps)
+#   (which concepts name people neutrally is concepts.yaml's neutral_person)
+#
+# retelling: the embellishment a retelling takes when none is set, whatever the genre: yarn mode, and the plan
+# and lint an agent writes with. The genre's own setting is the engine's: its garnish is placed by rule, so it
+# stays conservative, while a writer's dinkum retelling scored best in every genre (the 2026-10-13 pass).
+retelling: dinkum
+
+embellishments:
+  deadset:
+    garnish: []
+    follows_form: true
+    openings: false
+    draft: true
+    keep_share: 0.6
+    max_length: 1.3
+    perform: false
+    guidance: >-
+      Deadset: tell it straight. Sentence for sentence, in the original's order and shape, every word that has
+      an everyday Australian one taking it, at the level's weight. Add nothing: no openers, tag-ons, asides,
+      reactions or closing lines.
+  dinkum:
+    garnish: [connective, opener, tag, tail, riff, infix, insult]
+    follows_form: true
+    openings: true
+    draft: true
+    keep_share: 0.6
+    max_length: 1.6
+    perform: false
+    guidance: >-
+      Dinkum: retell it in a genuine Aussie voice. Rephrase freely so each sentence sounds said, not
+      translated; the odd opener, connective or tag-on where a talker would use one; the original's points in
+      its order. Colour hangs off what's there: no new scenes, asides or punchlines. Where the genre keeps its
+      form exact (a notice, a doc, official prose), the voice goes into everything around what's kept: say the
+      connecting prose the way a local would explain it to a mate, at the level's weight, not in the
+      original's officialese with a word or two swapped. What's kept includes the force of what it says: an
+      obligation, a decision, a finding or a stated aim keeps its verb's weight ("we consider you responsible"
+      isn't "we reckon"; "reaffirmed" isn't "doubled down"; a goal isn't "while they're at it").
+  troppo:
+    garnish: all
+    follows_form: false
+    openings: true
+    draft: false
+    keep_share: 0
+    max_length: 2.0
+    perform: true
+    guidance: >-
+      Troppo: go for it. Write your own retelling from the original first, the way you'd tell it at the pub,
+      then check it with the tools. PLANNED_PHRASES is vocabulary to draw on, not a plan: use what fits.
+      Elaborate, react, riff and perform: the colour is yours. The substance is the original's: every fact,
+      event and name still there, its claims as it makes them (a "won't" stays a "won't"), and every addition
+      hanging off something in it. Let the form shape the performance: a story can be told to the bar, but a
+      letter stays a letter and a post its writer's own words, and a hazard is never the joke.
+
+genres:
+  story:
+    formal_to_rework: true
+    garnish: all
+    openings: true
+    embellishment: troppo
+    person_swears: true
+    keep_quotes: false
+    guidance: >-
+      A story: keep every event and line of dialogue's meaning. A play keeps its script layout (speaker labels,
+      stage directions).
+  personal:
+    formal_to_rework: true
+    garnish: all
+    openings: true
+    embellishment: dinkum
+    person_swears: true
+    keep_quotes: false
+    guidance: >-
+      Someone talking or writing in their own voice (a letter, a forum post, a speech): keep their voice and
+      their point, and Aussify it the way they would talk. Keep a letter's greeting and sign-off in place, a
+      speech's jokes and puns intact.
+  news:
+    formal_to_rework: true
+    garnish: []
+    openings: false
+    embellishment: deadset
+    person_swears: false
+    keep_quotes: true
+    guidance: >-
+      News or a notice: a local reporter's Aussie. Keep every fact, name, number, date and quote; quoted speech
+      and official statements stay as said. An obituary is respectful.
+  instructions:
+    formal_to_rework: true
+    garnish: [tail]
+    openings: false
+    embellishment: deadset
+    person_swears: false
+    keep_quotes: false
+    guidance: >-
+      Instructions or safety advice: keep every step, quantity, unit and warning exact and in order, and keep
+      numbered and bulleted lists as lists. Aussify the words (servo, esky, bin, chemist) and the connecting
+      prose; no insults aimed at the reader. Safety comes before colour: never make light of a hazard.
+  technical:
+    formal_to_rework: false
+    garnish: []
+    openings: false
+    embellishment: deadset
+    person_swears: false
+    keep_quotes: false
+    guidance: >-
+      Technical documentation: keep every term of art (cookie, field, task, build, commit), command, name and
+      number exactly; leave code and markup alone. Aussify the plain prose around them; no slang for a
+      technical term.
+  official:
+    formal_to_rework: false
+    garnish: []
+    openings: false
+    embellishment: deadset
+    person_swears: false
+    keep_quotes: true
+    guidance: >-
+      Official prose (terms, policy, minutes, a job ad, an encyclopedia entry): keep every obligation,
+      condition, name and number exact, and quoted documents verbatim. Aussify the connecting prose; no
+      swearing at anyone.
