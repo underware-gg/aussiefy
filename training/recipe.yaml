@@ -1,0 +1,60 @@
+# The recipe for the bundled embedder (aussiefy/data/model). One source of truth for scripts/train_embedder.py:
+# change anything here, or the sources it reads, and release a new version (see training/README.md).
+
+name: aussie-static
+
+base:                                    # the sentence-transformers model fine-tuned first
+  model: sentence-transformers/all-MiniLM-L6-v2
+  revision: 1110a243fdf4706b3f48f1d95db1a4f5529b4d41   # pinned Hugging Face commit
+
+seed: 13                                 # hold-out split, training order and initialisation
+holdout: 0.2                             # share of entries the evaluation run holds back; the release run uses all
+
+sources:
+  dictionary: true                       # aussiefy/data: triggers, replaces, glosses, variants, riffs, !exclusions
+  opposites: training/opposites.yaml     # concept pairs with opposite meanings, pushed apart (1.1.0)
+  extra_pairs: []                        # more YAML files of {anchor, positive} or {anchor, negative} (see README)
+  wordnet:                               # plain-English synonyms of the triggers (1.2.0): coverage for gap words
+    enabled: true
+    senses: 1                            # the most common sense only: a word's second sense is often another
+                                         # meaning altogether (tired: "banal")
+    per_trigger: 6                       # at most this many synonyms per trigger
+    forms_per_concept: 2                 # each synonym is paired with the concept's description and this many forms
+    exclude: training/gap_benchmark.yaml # benchmark words never enter training
+gap_benchmark: training/gap_benchmark.yaml
+reference: training/reference.yaml       # the checks every version is held to
+
+pairs:
+  placeholders: {poss: their, subj: "", obj: them, refl: themselves}   # how {slots} read in training text
+  sense_forms_per_concept: 4             # wrong-sense pairs per excluded phrase ("great war" x 4 EXCELLENT forms)
+  sense_targets: [forms, glosses, description]   # what a wrong sense is pushed from (1.2.0: lookup compares with
+                                                 # glosses, and beaut's says "great")
+  opposite_anchors_per_concept: 6        # per opposite pair and direction: this many of A's triggers, and of its
+  opposite_forms_per_concept: 4          # glosses, each against this many of B's forms (and of its glosses)
+  opposite_targets: [forms, glosses, description]   # what A is pushed away from: lookup compares with glosses
+
+finetune:                                # MiniLM: MultipleNegativesRankingLoss; ContrastiveLoss on wrong senses
+                                         # and opposites
+  epochs: 4
+  lr: 5.0e-5
+  batch: 64
+  warmup: 0.1
+  sense_margin: 0.5
+  opposite_margin: 0.75                  # pushes opposites to cosine <= 0.25, well under lookup's 0.50 cut-off
+
+distil:                                  # Model2Vec
+  pca_dims: 256
+  dictionary_vocabulary: true            # add the dictionary's whole words as tokens, so slang gets its own vector
+  sif_coefficient: 1.0e-4
+
+static_tune:                             # then train the static vectors themselves on the same pairs and losses
+  epochs: 4
+  lr: 0.05                               # static vectors need a high rate; train in float32 (float16 overflows)
+  batch: 256
+  blend: 0.7                             # then ship 0.7 x tuned + 0.3 x distilled (each scaled by its mean row norm):
+                                         # tuning moves shared word pieces for slang and plain-English gap words
+                                         # drift; the blend keeps recall and improves gap filling (1.2.0)
+
+cutoffs:                                 # written into meta.json; check them against the release's calibration
+  lookup: 0.50
+  gaps: 0.60

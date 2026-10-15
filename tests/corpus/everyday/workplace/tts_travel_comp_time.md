@@ -1,0 +1,29 @@
+## Travel comp time, for everyone
+
+You may request travel comp time when you are approved to travel for work and that travel occurs outside regular working hours. Travel comp time is for “temporary duty,” also known as “TDY” travel, _not_ local travel or commuting. TDY travel is more than 12 hours long and requires a pre-approved authorization in Concur.
+
+There are no limitations for earning travel comp time based on salary level or schedule type.
+
+Refer to OPM’s [Travel Comp Time Fact Sheet](https://www.opm.gov/policy-data-oversight/pay-leave/pay-administration/fact-sheets/compensatory-time-off-for-travel/) for more detail.
+
+### Understanding travel comp time
+
+Traveling during your usual work day is considered regular hours, including traveling to the airport from your home.
+
+Generally, travel comp time is used as a “gap filler” when you are traveling outside of your regular work hours during a regular work day, but not officially “performing work.”
+
+For further details, current GSA employees can refer to the [Compensation for Government Travel slidedeck](https://drive.google.com/file/d/1RFSq_4KdMza_pkcHGp9Hy2RNR2ryLs0b/view?usp=sharing) to determine the breakdown of your hours. Please contact your Timekeeper or an HR Specialist at your agency if you have questions.
+
+### Calculating travel comp time
+
+For calculating travel comp time hours, travel ends when you check in at the hotel or arrive home. Travel comp time hours are based on elapsed time. Use the time zone at departure to calculate elapsed time.
+
+To accurately report travel time, we recommend keeping a log of:
+
+- When you departed your home and arrived at the airport
+- When your flights actually departed and arrived
+- When you left the destination airport and arrived at your hotel
+
+### Using travel comp time
+
+Travel comp time expires one year (26 pay periods) after it is earned. When you reach the expiration date, you will forfeit the leave. If you leave GSA, any unused travel comp time will be forfeited.

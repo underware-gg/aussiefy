@@ -1,0 +1,197 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 3,
+   "sense": 3,
+   "authenticity": 2,
+   "register": 3,
+   "tone": 3,
+   "flow": 2,
+   "variety": 2,
+   "essence": 4
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every fact kept: the sale, the old man's advice, Doyle scouting, the Grand Rapids games, Flynn's misjudged fly. \"I didn't have no idea nothing like that was on the cards\" matches.",
+   "sense": "Terms fit: \"big-noting meself\" for boasting, \"running the eye over me\" for looking me over, \"on song\" for when I was right, \"the guts\" for nerve.",
+   "authenticity": "Sounds like a real bush-league yarn: \"happy as Larry\", \"having a squiz\", \"not all up meself\", \"Say g'day to all the boys\".",
+   "register": "Level 3: steady Aussie idiom on top of Jack's grammar (\"Fair dinkum Al it come as a shock\"), no swearing beyond the brief.",
+   "tone": "Jack's naive, boastful-modest letter voice survives, misspellings and all (\"appresiated\", \"that serious\", \"excepted\").",
+   "flow": "Reads naturally: \"I can't help being proud of me first year's record in professional baseball\".",
+   "variety": "Good spread; \"mate\" recurs (salutation, \"old mate\", \"mates\", \"Your mate\"), as the original's \"pal\" did.",
+   "essence": "Unmistakably Ring Lardner's Jack Keefe, now with an Aussie tongue."
+  },
+  "engine": {
+   "meaning": "Adds lines that change Jack's confidence: \"Buggered if I know.\" after the tall-buildings boast and \"Well, I'll be buggered.\" after the sign-off; otherwise intact.",
+   "sense": "\"all you beaut old pals\" and \"They always was beaut to me\" strain; \"won't have sweet bugger-all on you\" is a forced swap.",
+   "authenticity": "Swaps bolted onto the untouched original: \"that bloody big league\", \"this bloody big league business\", \"FRIEND AL: Well, Al old pal\".",
+   "register": "Lighter than level 3 in substance (most sentences unchanged: \"I will just give them what I got\"), with swearing tacked on; \"bloody\", \"bugger\" within dad.",
+   "tone": "The tacked-on oaths make the guileless Jack sound coarse and doubtful (\"Buggered if I know.\").",
+   "flow": "Jarring joins: \"Your mate, JACK. Well, I'll be buggered.\"",
+   "variety": "Leans on \"bloody\", \"bugger\" and \"beaut\" over and over.",
+   "essence": "Recognisably the letter, since most of it is the original."
+  },
+  "yarn": {
+   "meaning": "All facts kept; small colour like \"they only got one run\" and \"the young fellas on the team\" hangs off the original.",
+   "sense": "Mostly exact (\"a bit of ticker\", \"never had Buckley's\", \"sussing me out\"), but \"show them galahs\" turns neutral birds into fools, and \"the fair go I got\" shifts treatment.",
+   "authenticity": "Natural idiom: \"never had Buckley's against me when I was on song\", \"happy as Larry\", \"not skiting\".",
+   "register": "Level 3, consistently retold, no swearing beyond \"bugger all\", within dad.",
+   "tone": "Keeps Jack's naive bravado and his misspellings (\"appresiated\", \"that serious\").",
+   "flow": "Mostly smooth, with some mixing of forms: \"So I says I would do me best\".",
+   "variety": "Wide range of idiom, but \"fair dinkum\" twice and \"on the cards\"/\"on song\" close together.",
+   "essence": "Clearly the same letter, retold."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "MATE AL:",
+    "original": "FRIEND AL:",
+    "severity": "minor",
+    "why": "Odd as a letter salutation; Australians would still write \"Dear Al\" or keep \"Friend\"."
+   },
+   {
+    "quote": "them blokes",
+    "original": "those birds",
+    "severity": "minor",
+    "why": "Fine, but loses the period slang \"birds\" for no gain."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Buggered if I know.",
+    "original": "",
+    "severity": "major",
+    "why": "Added line undercuts Jack's cocky \"eh Al?\"."
+   },
+   {
+    "quote": "Your mate, JACK. Well, I'll be buggered.",
+    "original": "Your pal, JACK.",
+    "severity": "major",
+    "why": "Oath after the signature; nonsensical in a letter."
+   },
+   {
+    "quote": "all you beaut old pals",
+    "original": "all you good old pals",
+    "severity": "minor",
+    "why": "\"beaut\" as an adjective for people is forced."
+   },
+   {
+    "quote": "that bloody big league",
+    "original": "that big league",
+    "severity": "minor",
+    "why": "Bolted-on \"bloody\" in the old man's speech."
+   },
+   {
+    "quote": "I will just give them what I got",
+    "original": "I will just give them what I got",
+    "severity": "major",
+    "why": "Large stretches left untranslated for a level-3 brief."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "show them galahs",
+    "original": "show those birds",
+    "severity": "minor",
+    "why": "\"galahs\" means fools; adds a sneer to the old man's neutral \"birds\"."
+   },
+   {
+    "quote": "the fair go I got",
+    "original": "the treatment I got",
+    "severity": "minor",
+    "why": "\"fair go\" is a slightly different idea from treatment."
+   },
+   {
+    "quote": "fair dinkum Al I will make good",
+    "original": "believe me Al I will make good",
+    "severity": "minor",
+    "why": "\"fair dinkum\" used twice."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A clean, natural level-3 retelling that keeps Jack's voice and misspellings.",
+  "engine": "Mostly the original with oaths and \"beaut\" bolted on, including added lines that change the tone.",
+  "yarn": "Lively and natural, nearly level with A; a couple of terms shift sense slightly."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

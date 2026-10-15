@@ -1,0 +1,187 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "engine": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 3,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 1,
+   "tone": 3,
+   "flow": 2,
+   "variety": 2,
+   "essence": 4
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "All points kept (10 am, Privy Council, PMBOK quote, commitments, not a status update, token, 5 to 15 minutes, the three 2017 questions removed in 2020), with asides as colour: \"Not a chair in sight for the lot of 'em.\", \"Nobody wants a bloke rabbiting on while their legs go numb.\" But \"That's a fair bit more get-up-and-go than your average status meeting\" turns a more active intention into energy, and \"Pull up a stool.\" contradicts the subject.",
+   "sense": "Most fit: \"front up\", \"trouble brewing\", \"time-chewing problems\", \"a full-blown chinwag\", \"quick smart\", \"how they're tracking\". \"get-up-and-go\" strains for active intention.",
+   "authenticity": "Natural yarn voice (\"just cos a few of them aren't there\", \"ask for a hand\"), but \"Pull up a stool.\" is a stock opener, and an odd one for an article about standing.",
+   "register": "Full level 4, with \"gets bloody uncomfortable\" inside vulgarity 1.",
+   "tone": "The encyclopedic explainer becomes a cheerful yarn, as the brief allows; the added gags (\"while their legs go numb\") push toward comedy a little.",
+   "flow": "Mostly smooth; \"what with how often it happens, the follow-up yarns it calls for and how short it is, and all that means a lot more know-how gets passed around\" is a long run-on.",
+   "variety": "Varied: \"front up\", \"put off\", \"headache\", \"chinwag\", \"rabbiting on\", \"quick smart\", \"size up\"; \"cos\" and \"reckon\" each twice.",
+   "essence": "Unmistakably the stand-up meeting article, its structure and the Scrum questions intact."
+  },
+  "engine": {
+   "meaning": "Mostly verbatim, but \"to coordinate efforts to swear blind difficult or time-consuming issues\" destroys resolve, and the Scrum Guide question gains \"ay?\" (\"meeting the sprint goal, ay?\").",
+   "sense": "\"swear blind\" for resolve and \"punters\" for participants both take the wrong sense.",
+   "authenticity": "Bolted-on tags: \"Tell ya what, the meeting should usually occur\", \"the \"daily stand-up\", mate.\", \"sprint goal, ay?\".",
+   "register": "Largely untranslated apart from the tags and two swaps; far under level 4.",
+   "tone": "Encyclopedic tone intact except where tags make it flippant (\"Tell ya what\", \"mate\").",
+   "flow": "Breaks: \"to coordinate efforts to swear blind difficult or time-consuming issues\".",
+   "variety": "Little Aussie, all of it tics.",
+   "essence": "Recognisably the article, being mostly the original."
+  },
+  "unharnessed": {
+   "meaning": "Every point kept, quotes intact: \"not a status report for the bosses or stakeholders\", \"handing round a token to show whose turn it is to talk\", \"for one minute each at the most\", \"Those questions got the flick from the 2020 Scrum Guide.\" \"no rabbiting on\" is colour.",
+   "sense": "Every term fits: \"any strife coming up\", \"knock over the tricky or time-chewing problems\", \"have a yarn with each other\", \"chuck in a short comment\", \"got the flick\".",
+   "authenticity": "Sounds like a real Australian explaining it: \"any software development process going\", \"how they're tracking\", \"gets held over till the thing's done\".",
+   "register": "Full level 4, no swearing (within vulgarity 1).",
+   "tone": "Keeps the explanatory tone under the slang, with no added gags beyond \"no rabbiting on\".",
+   "flow": "Reads smoothly, and untangles the original: \"Because it happens so often, needs follow-up chats and is kept short, it also gets people working closer together\".",
+   "variety": "Varied; \"follow-up chats\" twice and \"team up\" twice.",
+   "essence": "Unmistakably the article, retold."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "Pull up a stool.",
+    "original": "",
+    "severity": "major",
+    "why": "A stock yarn opener that invites sitting down in an article about meetings held standing."
+   },
+   {
+    "quote": "That's a fair bit more get-up-and-go than your average status meeting.",
+    "original": "a much more active intention than the typical status meeting",
+    "severity": "minor",
+    "why": "Get-up-and-go means energy, not the purpose of passing on knowledge."
+   },
+   {
+    "quote": "Nobody wants a bloke rabbiting on while their legs go numb.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added gag; colour, but it tilts the tone toward comedy."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "to coordinate efforts to swear blind difficult or time-consuming issues",
+    "original": "to coordinate efforts to resolve difficult or time-consuming issues",
+    "severity": "critical",
+    "why": "Swear blind means insist; wrong sense and ungrammatical, the sentence loses its meaning."
+   },
+   {
+    "quote": "meeting the sprint goal, ay?",
+    "original": "meeting the sprint goal?",
+    "severity": "major",
+    "why": "A tag added inside a quoted Scrum Guide question."
+   },
+   {
+    "quote": "to remind punters to keep the meeting short",
+    "original": "to remind people to keep the meeting short",
+    "severity": "major",
+    "why": "Punters are customers or gamblers, not team members."
+   },
+   {
+    "quote": "Tell ya what, the meeting should usually occur",
+    "original": "The meeting should usually occur",
+    "severity": "minor",
+    "why": "Stock filler opener."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "needs follow-up chats",
+    "original": "need for follow-up conversations",
+    "severity": "minor",
+    "why": "Follow-up chats repeats from the previous sentence."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A full, mostly natural yarn with a few added jokes and one misfiring opener.",
+  "engine": "Untranslated text with bolted-on tags and wrong-sense swaps.",
+  "unharnessed": "Faithful, natural and at the asked level; the best."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

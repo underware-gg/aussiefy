@@ -1,0 +1,465 @@
+# Phonetic respellings ("drawl"), applied in order to the final text. Each occurrence rolls
+# against prob x the level profile's `phonetic` multiplier. `match` is a Python regex
+# (case-insensitive via (?i)); `replace` may use group references.
+#
+# Contractions come first (min_level 4) so the later rules see "you're", "can't" and so on.
+
+# --- contractions: level 4 starts to drawl, level 5 drawls everything ----------
+- id: cannot-cant
+  match: "(?i)\\bcan ?not\\b"
+  replace: "can't"
+  prob: 1.0
+  min_level: 4
+- id: will-not-wont
+  match: "(?i)\\b(?:will|shall) not\\b"
+  replace: "won't"
+  prob: 1.0
+  min_level: 4
+- id: do-not-dont
+  match: "(?i)\\bdo not\\b"
+  replace: "don't"
+  prob: 1.0
+  min_level: 4
+- id: does-did-not
+  match: "(?i)\\b(does|did|is|are|was|were|could|would|should|have|has|had) not\\b"
+  replace: "\\1n't"
+  prob: 1.0
+  min_level: 4
+- id: pronoun-be
+  match: "(?i)\\b(it|that|there|here|what|who|he|she) is\\b(?!\\s*(?:[.,;:!?)\"\u201d\u2014-]))"   # not at a clause end ("This it is."); no "$": rules run on fragments
+  replace: "\\1's"
+  prob: 1.0
+  min_level: 4
+- id: pronoun-are
+  match: "(?i)\\b(we|they|you) are\\b(?!\\s*(?:[.,;:!?)\"\u201d\u2014-]))"
+  replace: "\\1're"
+  prob: 1.0
+  min_level: 4
+- id: i-am
+  match: "\\bI am\\b(?!\\s*(?:[.,;:!?)\"\u201d\u2014-]))"
+  replace: "I'm"
+  prob: 1.0
+  min_level: 4
+- id: pronoun-have
+  match: "(?i)\\b(I|we|they|you) have(?= (?:been|got|come|done|gone|seen|had|made|given|taken|\\w+ed)\\b)"
+  replace: "\\1've"
+  prob: 1.0
+  min_level: 4
+- id: noun-has-been
+  match: "(?i)\\b(\\w+) has (?=(?:been|got|gone)\\b)"
+  replace: "\\1's "
+  prob: 1.0
+  min_level: 4
+- id: shall-will-ll
+  match: "(?i)\\b(I|we|they|you|he|she|it|this \\w+|that \\w+) (?:shall|will)\\b(?! not)"
+  replace: "\\1'll"
+  prob: 1.0
+  min_level: 4
+- id: shall-will
+  match: "(?i)\\bshall\\b"
+  replace: "will"
+  prob: 0.9
+  min_level: 5
+
+# --- drawl ---------------------------------------------------------------------
+- id: dont-know-dunno
+  match: "(?i)\\b(?:don't|do not) know\\b"
+  replace: "dunno"
+  prob: 0.7
+  min_level: 5
+- id: because-cause
+  match: "(?i)\\bbecause\\b"
+  replace: "'cause"
+  prob: 0.7
+  min_level: 5
+- id: probably-probly
+  match: "(?i)\\bprobably\\b"
+  replace: "prob'ly"
+  prob: 0.7
+  min_level: 5
+- id: alright-orright
+  match: "(?i)\\b(?:all right|alright)\\b"
+  replace: "orright"
+  prob: 0.6
+  min_level: 5
+- id: australia-straya
+  match: "\\bAustralia\\b"
+  replace: "Straya"
+  prob: 0.7
+  min_level: 5
+- id: something-nothing
+  match: "(?i)\\b(some|no|any|every)thing\\b"
+  replace: "\\1thin'"
+  prob: 0.6
+  min_level: 5
+- id: a-lot-of-lotta
+  match: "(?i)\\ba lot of\\b"
+  replace: "a lotta"
+  prob: 0.6
+  min_level: 5
+
+# --- respellings ----------------------------------------------------------------
+- id: youre-yer
+  match: "(?i)\\byou['’]re\\b"
+  replace: "yer"
+  prob: 0.9
+  min_level: 5
+- id: your-yer
+  match: "(?i)\\byour\\b"
+  replace: "yer"
+  prob: 0.9
+  min_level: 5
+  dialogue_prob: 1.0
+- id: yourself-yerself
+  match: "(?i)\\byourself\\b"
+  replace: "yerself"
+  prob: 0.8
+  min_level: 5
+- id: you-ya
+  match: "(?i)\\byou\\b(?!['’])"
+  replace: "ya"
+  prob: 0.75
+  min_level: 5
+  dialogue_prob: 0.95
+- id: going-to-gonna
+  match: "(?i)\\bgoing to\\b(?= (?!(?:the|a|an|my|your|his|her|our|their|this|that|bed|work|school|church|town|uni|be)\\b)[a-z])"
+  replace: "gonna"
+  prob: 0.8
+  min_level: 5
+- id: want-to-wanna
+  match: "(?i)\\bwant to\\b"
+  replace: "wanna"
+  prob: 0.6
+  min_level: 5
+- id: got-to-gotta
+  match: "(?i)\\bgot to\\b"
+  replace: "gotta"
+  prob: 0.6
+  min_level: 5
+- id: and-n
+  match: "(?<=[A-Za-z])\\s+and\\s+(?=[a-z])"
+  replace: "'n "
+  prob: 0.35
+  min_level: 5
+  dialogue_prob: 0.5
+  notes: "Elided 'and' glued to the previous word: sideways'n call me the pope."
+- id: have-ave
+  match: "(?i)\\bhave\\b(?! to\\b)"
+  replace: "'ave"
+  prob: 0.4
+  min_level: 5
+- id: them-em
+  match: "(?i)\\bthem\\b"
+  replace: "'em"
+  prob: 0.5
+  min_level: 5
+  dialogue_prob: 0.8
+- id: isnt-aint
+  match: "(?i)\\b(?:isn['’]t|aren['’]t)\\b"
+  replace: "ain't"
+  prob: 0.0              # reads American in narration; only in broad speech, and rarely
+  dialogue_prob: 0.15
+  min_level: 5
+- id: my-me
+  match: "(?i)\\bmy\\b(?! oath)"
+  replace: "me"
+  prob: 0.35
+  min_level: 5
+  dialogue_prob: 0.85
+- id: ing-in
+  match: "(?i)\\b(?!(?:thing|nothing|something|anything|everything|king|ring|sing|bring|spring|string|wing|sling|sting|swing|ceiling|morning|evening|during)\\b)([a-z]{3,})ing\\b"
+  replace: "\\1in'"
+  prob: 0.35
+  min_level: 5
+  dialogue_prob: 0.75
+- id: kind-of-kinda
+  match: "(?i)\\bkind of\\b"
+  replace: "kinda"
+  prob: 0.6
+  min_level: 5
+- id: out-of-outta
+  match: "(?i)\\bout of\\b"
+  replace: "outta"
+  prob: 0.4
+  min_level: 5
+
+# --- Australian spelling: applies at every level, not scaled by drawl ------------
+- id: spell-our
+  kind: spelling
+  match: "\\b(hon|col|fav|flav|harb|hum|neighb|behavi|rum|vap|vig|arm|od|endeav|lab)or(s|ed|ing|able|ite|ites|hood|ful)?\\b"
+  replace: "\\1our\\2"
+  prob: 1.0
+  min_level: 1
+  notes: Lower-case only, so the Australian Labor Party keeps its American spelling.
+- id: spell-re
+  kind: spelling
+  match: "\\b(cent|theat|fib|lit|calib|somb|spect)er(s)?\\b"
+  replace: "\\1re\\2"
+  prob: 1.0
+  min_level: 1
+- id: spell-metre
+  kind: spelling
+  # a measure is a metre: a kilometre, centimetre ..., and a plain "meter" after a quantity ("5 meters", "the
+  # 100-meter sprint", "twenty meters", "hundreds of meters", "a meter long", "per meter", "square meters"). A
+  # device is a meter in Australia too ("if the meter changes", "a gas meter", "install a meter", "a meter
+  # reader"). One rule, so a text's American spelling counts it once (dialect.text_english).
+  match: "(?<!install a )(?<!Install a )(?<!check a )(?<!Check a )(?<!read a )(?<!Read a )(?<!replace a )(?<!Replace a )(?<!fit a )(?<!Fit a )(?<!fix a )(?<!Fix a )(?<!test a )(?<!Test a )(?<!use a )(?<!Use a )((?:\\b(?:kilo|centi|milli|micro|nano))|(?:(?<=\\d)|(?<=\\d )|(?<=\\d-)|(?<=\\ba )|(?<=\\bA )|(?<=\\bone )|(?<=\\btwo )|(?<=\\bthree )|(?<=\\bfour )|(?<=\\bfive )|(?<=\\bsix )|(?<=\\bseven )|(?<=\\beight )|(?<=\\bnine )|(?<=\\bten )|(?<=\\beleven )|(?<=\\btwelve )|(?<=\\btwenty )|(?<=\\bthirty )|(?<=\\bforty )|(?<=\\bfifty )|(?<=\\bsixty )|(?<=\\bseventy )|(?<=\\beighty )|(?<=\\bninety )|(?<=\\bhundred )|(?<=\\bthousand )|(?<=\\bfew )|(?<=\\bseveral )|(?<=\\bdozen )|(?<=\\bhalf )|(?<=\\bof )|(?<=\\bper )|(?<=\\bsquare )|(?<=\\bcubic )))meter(s)?\\b(?!\\s+(?:reader|readers|reading|readings|box|boxes|maid|maids))"
+  replace: "\\1metre\\2"
+  prob: 1.0
+  min_level: 1
+- id: spell-ise
+  kind: spelling
+  match: "\\b(organ|real|recogn|apolog|critic|emphas|minim|maxim|prior|summar|categor|characteris|util|special|civil|modern|memor|sympath|author|final|standard|optim|visual|mobil|central|normal)iz(e|es|ed|ing|ation|ations)\\b"
+  replace: "\\1is\\2"
+  prob: 1.0
+  min_level: 1
+- id: spell-yse
+  kind: spelling
+  match: "\\b(anal|paral|catal)yz(e|es|ed|ing)\\b"
+  replace: "\\1ys\\2"
+  prob: 1.0
+  min_level: 1
+- id: spell-gray
+  kind: spelling
+  match: "(?i)\\bgray\\b"
+  replace: "grey"
+  prob: 1.0
+  min_level: 1
+- id: spell-grays
+  kind: spelling
+  match: "(?i)\\bgrays\\b"
+  replace: "greys"
+  prob: 1.0
+  min_level: 1
+- id: spell-mom
+  kind: spelling
+  match: "(?i)\\bmom\\b"
+  replace: "mum"
+  prob: 1.0
+  min_level: 1
+- id: spell-moms
+  kind: spelling
+  match: "(?i)\\bmoms\\b"
+  replace: "mums"
+  prob: 1.0
+  min_level: 1
+- id: spell-defense
+  kind: spelling
+  match: "(?i)\\bdefense\\b"
+  replace: "defence"
+  prob: 1.0
+  min_level: 1
+- id: spell-offense
+  kind: spelling
+  match: "(?i)\\boffense\\b"
+  replace: "offence"
+  prob: 1.0
+  min_level: 1
+- id: spell-jewelry
+  kind: spelling
+  match: "(?i)\\bjewelry\\b"
+  replace: "jewellery"
+  prob: 1.0
+  min_level: 1
+- id: spell-aluminum
+  kind: spelling
+  match: "(?i)\\baluminum\\b"
+  replace: "aluminium"
+  prob: 1.0
+  min_level: 1
+- id: spell-catalog
+  kind: spelling
+  match: "(?i)\\bcatalog\\b"
+  replace: "catalogue"
+  prob: 1.0
+  min_level: 1
+- id: spell-traveled
+  kind: spelling
+  match: "(?i)\\btraveled\\b"
+  replace: "travelled"
+  prob: 1.0
+  min_level: 1
+- id: spell-traveling
+  kind: spelling
+  match: "(?i)\\btraveling\\b"
+  replace: "travelling"
+  prob: 1.0
+  min_level: 1
+- id: spell-traveler
+  kind: spelling
+  match: "(?i)\\btraveler\\b"
+  replace: "traveller"
+  prob: 1.0
+  min_level: 1
+- id: spell-travelers
+  kind: spelling
+  match: "(?i)\\btravelers\\b"
+  replace: "travellers"
+  prob: 1.0
+  min_level: 1
+- id: spell-canceled
+  kind: spelling
+  match: "(?i)\\bcanceled\\b"
+  replace: "cancelled"
+  prob: 1.0
+  min_level: 1
+- id: spell-canceling
+  kind: spelling
+  match: "(?i)\\bcanceling\\b"
+  replace: "cancelling"
+  prob: 1.0
+  min_level: 1
+- id: spell-labeled
+  kind: spelling
+  match: "(?i)\\blabeled\\b"
+  replace: "labelled"
+  prob: 1.0
+  min_level: 1
+- id: spell-modeled
+  kind: spelling
+  match: "(?i)\\bmodeled\\b"
+  replace: "modelled"
+  prob: 1.0
+  min_level: 1
+- id: spell-fueled
+  kind: spelling
+  match: "(?i)\\bfueled\\b"
+  replace: "fuelled"
+  prob: 1.0
+  min_level: 1
+- id: spell-plow
+  kind: spelling
+  match: "(?i)\\bplow\\b"
+  replace: "plough"
+  prob: 1.0
+  min_level: 1
+- id: spell-pajamas
+  kind: spelling
+  match: "(?i)\\bpajamas\\b"
+  replace: "pyjamas"
+  prob: 1.0
+  min_level: 1
+- id: spell-cozy
+  kind: spelling
+  match: "(?i)\\bcozy\\b"
+  replace: "cosy"
+  prob: 1.0
+  min_level: 1
+- id: spell-skeptical
+  kind: spelling
+  match: "(?i)\\bskeptical\\b"
+  replace: "sceptical"
+  prob: 1.0
+  min_level: 1
+- id: spell-mold
+  kind: spelling
+  match: "(?i)\\bmold\\b"
+  replace: "mould"
+  prob: 1.0
+  min_level: 1
+- id: spell-donut
+  kind: spelling
+  match: "(?i)\\bdonut\\b"
+  replace: "doughnut"
+  prob: 1.0
+  min_level: 1
+
+# --- more drawl ------------------------------------------------------------------
+- id: might-not-mightnt
+  match: "(?i)\\bmight not\\b"
+  replace: "mightn't"
+  prob: 1.0
+  min_level: 4
+- id: ought-to-oughta
+  match: "(?i)\\bought to\\b"
+  replace: "oughta"
+  prob: 0.7
+  min_level: 5
+
+# --- swear infixes: "a bloody great stoush", "can't bloody well hallow it" -----
+# These follow the vulgarity dial, not the level (profiles.yaml `swearing:` infix), so min_level doesn't apply to
+# them; a rule a tier below the vulgarity asked for runs at half strength, so uncle-bob says "too fuckin' hot"
+# more than "too bloody hot". A fuckin' rule comes before its bloody twin so it gets first go.
+- id: infix-bloody-adjective
+  match: "(?<=[a-z] )(?<!great )(?<!bloody )(?<!fuckin' )(?=(?:great|big|huge|massive|hard|good|awful|terrible|stupid|ridiculous|beautiful|brilliant)\\b(?!-))"
+  replace: "bloody "
+  prob: 0.35
+  min_level: 5
+  vulgarity: 1
+- id: infix-bloody-well
+  match: "(?i)\\b(can't|won't|couldn't|wouldn't|shouldn't|didn't|don't|doesn't|mustn't|mightn't|shall not|will not|can not)\\s+(?!bloody|well|even|really|just|be\\b|have\\b|you\\b|ya\\b|yer\\b|we\\b|they\\b|it\\b|he\\b|she\\b|i\\b)(?=[a-z])"
+  replace: "\\1 bloody well "
+  prob: 0.35
+  min_level: 5
+  vulgarity: 1
+- id: as-fuck-intensifier
+  # "very hot" -> "hot as fuck": the intensifier moves behind the adjective
+  match: "(?i)\\b(?:very|really|so|bloody|fuckin'|flamin'|dead|properly|real) (hot|cold|tired|hungry|good|bad|busy|ugly|stupid|lucky|drunk|keen|quick|slow|funny|weird|boring|expensive|cheap|dry|wet|loud|happy|angry|sore|full|old|rich|smart)\\b(?!-| as )"
+  replace: "\\1 as fuck"
+  prob: 0.3
+  min_level: 5
+  vulgarity: 2
+- id: infix-every-fuckin
+  match: "(?i)\\b(every|a single|not a) (?=(?:word|one|day|time|minute|thing|cent|bit)\\b)"
+  replace: "\\1 fuckin' "
+  prob: 0.4
+  min_level: 5
+  vulgarity: 2
+- id: infix-every-bloody
+  match: "(?i)\\b(every|a single|not a) (?=(?:word|one|day|time|minute|thing|cent|bit)\\b)"
+  replace: "\\1 bloody "
+  prob: 0.4
+  min_level: 5
+  vulgarity: 1
+- id: infix-fuckin-adjective
+  match: "(?<=[a-z] )(?<!great )(?<!bloody )(?<!fuckin' )(?=(?:great|big|huge|massive|hard|good|awful|terrible|stupid|ridiculous|beautiful|brilliant)\\b(?!-))"
+  replace: "fuckin' "
+  prob: 0.3
+  min_level: 5
+  vulgarity: 2
+- id: infix-abso-fuckin-lutely
+  match: "(?i)\\babsolutely\\b"
+  replace: "abso-fuckin'-lutely"
+  prob: 0.7
+  min_level: 5
+  vulgarity: 2
+- id: infix-too-fuckin
+  match: "(?i)\\btoo (?=(?:hot|cold|big|small|hard|soft|much|far|late|early|good|right|long|tired|full)\\b)"
+  replace: "too fuckin' "
+  prob: 0.5
+  min_level: 5
+  vulgarity: 2
+- id: infix-too-bloody
+  match: "(?i)\\btoo (?=(?:hot|cold|big|small|hard|soft|much|far|late|early|good|right|long|tired|full)\\b)"
+  replace: "too bloody "
+  prob: 0.5
+  min_level: 5
+  vulgarity: 1
+- id: infix-upon-a-bloody-time
+  match: "(?i)\\bupon a time\\b"
+  replace: "upon a bloody time"
+  prob: 0.8
+  min_level: 5
+  vulgarity: 1
+- id: infix-whole-fuckin
+  match: "(?i)\\bthe whole (?=(?:thing|lot|place|day|time|world|show)\\b)"
+  replace: "the whole fuckin' "
+  prob: 0.5
+  min_level: 5
+  vulgarity: 2
+- id: infix-whole-bloody
+  match: "(?i)\\bthe whole (?=(?:thing|lot|place|day|time|world|show)\\b)"
+  replace: "the whole bloody "
+  prob: 0.5
+  min_level: 5
+  vulgarity: 1
+- id: infix-bloody-possession
+  # "me" and "her" are also object pronouns ("give me that straw", "let me come in"): not before a function word
+  # or a verb that follows an object
+  match: "\\b(my|me|your|yer|his|her|their|our) (?!(?:own|bloody|way|that|this|these|those|the|and|but|for|with|from|about|into|out|off|all|any|some|too|now|then|why|how|what|when|where|who|come|go|see|know|tell|get|take|give|have|do|think|help|say|ask|want|make|let|alone|back|again|was|is|are|were|had|has|will|would|can|could)\\b)(?=[a-z]{3,}\\b)"
+  replace: "\\1 bloody "
+  prob: 0.08
+  dialogue_prob: 0.35
+  min_level: 5
+  vulgarity: 1
+  notes: "Who's been at me bloody porridge? Mostly in speech."

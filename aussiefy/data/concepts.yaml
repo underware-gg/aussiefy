@@ -1,0 +1,3611 @@
+# Controlled concept vocabulary.
+#
+# Every entry's `concept` must name one of these IDs. `triggers` are plain-English
+# patterns, grouped by the grammatical frame they appear in. They drive detection
+# alongside each entry's own `replaces`. A trailing @N sets the intensity (1-5) the
+# paraphrase expresses; the default is 3. `person: true` means the concept describes
+# a person, so clause idioms with a {subj} slot may bind to it.
+#
+# The vocabulary is hand-curated. The LLM tagging pass may propose new IDs, which
+# a human consolidates here (see aussiefy/scrape/tag.py).
+
+# --- states and traits --------------------------------------------------------
+BUSY:
+  description: Having a great deal to do.
+  person: true
+  triggers:
+    predicate_adj: ["busy@2", "swamped@4", "snowed under@4", "run off {poss} feet@4", "flat out@4",
+                    "overloaded@3", "up to {poss} eyeballs@4", "rushed off {poss} feet@4", "slammed@4"]
+CRAZY:
+  description: Mentally unbalanced, irrational, or acting wildly.
+  person: true
+  triggers:
+    predicate_adj: ["crazy", "mad", "nuts", "insane@4", "out of {poss} mind@4", "bonkers", "loopy",
+                    "deranged@4", "unhinged@4", "irrational@2", "losing it", "off {poss} rocker"]
+STUPID:
+  description: Unintelligent or foolish.
+  person: true
+  triggers:
+    # "thick" of a person only: thick air, thick with vapour, a thick mixture are dense
+    predicate_adj: ["stupid", "dumb", "thick !=with|and ^person", "dim@2", "brainless@4", "clueless@2", "an idiot@3", "a moron@4",
+                    "a fool@2", "not very bright@2"]
+IDIOT:
+  description: A foolish person (as a noun).
+  triggers:
+    np: ["idiot", "fool", "moron@4", "dimwit", "nitwit@2", "dummy@2", "twit@2"]
+ALL_TALK:
+  description: Boastful without substance; talks big, delivers little.
+  person: true
+  triggers:
+    predicate_adj: ["all talk", "all talk and no action@4", "full of hot air", "a big talker", "a show-off",
+                    "full of it", "nothing but talk"]
+BOASTER:
+  description: A person who boasts or shows off.
+  triggers:
+    np: ["show-off", "braggart", "boaster", "big talker"]
+ANGRY:
+  description: Annoyed, cross or furious.
+  person: true
+  triggers:
+    predicate_adj: ["angry", "furious@4", "livid@5", "annoyed@2", "cross@2", "mad at {obj}", "fuming@4",
+                    "irritated@2", "pissed off@4", "grumpy@2", "in a bad mood@2", "irate@4", "enraged@5", "incensed@4", "seething@5"]
+LOSE_TEMPER:
+  description: To suddenly become angry; throw a tantrum.
+  triggers:
+    vp: ["lose {poss} temper", "throw a tantrum@4", "have a tantrum@4", "fly off the handle@4", "blow up@4",
+         "get angry", "have a meltdown@4", "lose {poss} cool"]
+OVERREACT:
+  description: Make an excessive fuss; behave dramatically.
+  triggers:
+    vp: ["overreact", "make a fuss", "make a scene@4", "make a song and dance", "kick up a fuss@4"]
+    predicate_adj: ["being dramatic", "being ridiculous", "being a drama queen", "making a fuss"]
+COMPLAIN:
+  description: Complain persistently.
+  triggers:
+    vp: ["complain", "moan", "whine", "grumble@2", "gripe"]
+COMPLAINER:
+  description: A habitual complainer.
+  triggers:
+    np: ["complainer", "moaner", "whiner", "crybaby", "cry-baby"]
+TIRED:
+  description: Exhausted, worn out.
+  person: true
+  triggers:
+    # ^person: said of things too ("the tank was drained", "the data is wiped out", "done in any case")
+    predicate_adj: ["tired@2", "exhausted@4", "worn out ^person@4", "wiped out ^person@4", "shattered ^person@4",
+                    "drained ^person@3", "dead on {poss} feet@5", "knackered@4", "fatigued", "weary",
+                    "done in ^person", "tired out", "bone-tired@4"]
+BROKEN:
+  description: Not working; ruined or beyond repair.
+  triggers:
+    predicate_adj: ["broken", "ruined@4", "busted", "not working@2", "beyond repair@5", "wrecked@4"]
+BROKEN_OTHER_SENSE:
+  description: >-
+    Guard (no entries) - a heart, a silence, a record, a promise or the law broken isn't out of order. An np
+    frame, so the noun that starts each phrase isn't refused as a verb.
+  triggers:
+    np: ["heart was broken", "heart is broken", "hearts were broken", "hearts are broken", "heart had been broken",
+         "silence was broken", "silence is broken", "spell was broken", "spell is broken", "record was broken",
+         "record is broken", "records were broken", "promise was broken", "promises were broken",
+         "law was broken", "laws were broken", "rules were broken", "rule was broken", "ice was broken",
+         "news was broken", "deadlock was broken", "fast was broken", "will was broken", "spirit was broken",
+         "was broken-hearted", "was heartbroken"]
+USELESS:
+  description: Of no use or help at all.
+  person: true
+  triggers:
+    predicate_adj: ["useless", "pointless@2", "hopeless", "no use", "no help", "worthless@4", "a waste of space@4"]
+UGLY:
+  description: Unattractive in appearance.
+  person: true
+  triggers:
+    predicate_adj: ["ugly", "hideous@4", "unattractive@2", "not much to look at@2"]
+HAPPY:
+  description: Pleased, delighted.
+  person: true
+  triggers:
+    predicate_adj: ["happy@2", "delighted@4", "thrilled@4", "over the moon@4", "very pleased@3", "ecstatic@5",
+                    "pleased@2", "excited@3", "chuffed@3", "elated@4", "jubilant@4", "overjoyed@4", "euphoric@5"]
+GET_EXCITED:
+  description: >-
+    Guard (no entries) - "get excited" is getting worked up or enthused (a mare gets excited and desperate near the
+    end of a race; young coders get excited by learning), not delighted at how something turned out.
+  triggers:
+    vp: ["get excited", "get all excited", "get so excited", "get too excited", "get overexcited"]
+DISAPPOINTED:
+  description: Upset or disappointed about an outcome.
+  person: true
+  triggers:
+    predicate_adj: ["disappointed", "gutted@4", "upset", "devastated@5", "bummed@3", "heartbroken@5"]
+SICK:
+  description: Unwell.
+  person: true
+  triggers:
+    predicate_adj: ["sick", "ill", "unwell", "poorly@2", "under the weather@2", "not well@2"]
+DRUNK:
+  description: Intoxicated by alcohol.
+  person: true
+  triggers:
+    predicate_adj: ["drunk", "wasted@4", "hammered@4", "plastered@4", "smashed@4", "tipsy@2", "intoxicated@3",
+                    "legless@5", "inebriated@4", "tiddly@2"]
+FULL:
+  description: Having eaten as much as one can.
+  person: true
+  triggers:
+    predicate_adj: ["full ^person@3", "stuffed ^person@4", "so full ^person@4", "full up@3"]   # a tank is full too
+HUNGRY:
+  description: Wanting food.
+  person: true
+  triggers:
+    predicate_adj: ["hungry@3", "starving@4", "famished@4", "ravenous@5", "peckish@2"]
+THIRSTY:
+  description: Wanting a drink.
+  person: true
+  triggers:
+    predicate_adj: ["thirsty@3", "parched@4", "dying for a drink@4", "gasping for a drink@4"]
+STINGY:
+  description: Unwilling to spend money.
+  person: true
+  triggers:
+    predicate_adj: ["stingy", "mean with money", "tight-fisted@4", "miserly@4"]
+LAZY:
+  description: Unwilling to work.
+  person: true
+  triggers:
+    predicate_adj: ["lazy", "idle@2", "work-shy@4", "bone idle@5"]
+SLACKER:
+  description: Someone who avoids work or lives off others.
+  triggers:
+    np: ["slacker", "freeloader", "layabout", "lazybones", "loafer", "scrounger"]
+SLACK_OFF:
+  description: Avoid work; loaf.
+  triggers:
+    vp: ["slack off", "loaf around", "laze around", "skive off", "freeload", "goof off"]
+GENUINE:
+  description: Real, honest, true.
+  triggers:
+    predicate_adj: ["genuine", "honest", "authentic", "the real deal"]
+    adj: ["genuine", "authentic"]
+SHOWY:
+  description: Flashy, ostentatious.
+  person: true
+  triggers:
+    adj: ["swanky"]
+    predicate_adj: ["flashy", "showy", "ostentatious@4", "dressed to the nines@4"]
+FAR_AWAY:
+  description: A very remote place.
+  triggers:
+    np: ["the middle of nowhere", "the back of beyond", "the boondocks", "the sticks"]
+EVERYONE:
+  description: Absolutely everybody.
+  neutral_person: true
+  # a policy's, a doc's or a report's "everyone" is a plain quantifier ("one price for everyone", "let everyone
+  # know" in an obituary): every man and his dog and every bastard are a crowd's hyperbole (dinkum-check round)
+  not_in: [official, technical, news, instructions]
+  triggers:
+    np: ["everyone !=else", "everybody !=else", "the whole world"]   # "every bugger else" isn't said
+NOTHING:
+  description: Nothing at all; very little.
+  # a policy's or a doc's "nothing" is a logical quantifier ("Nothing in this communication is advice"), not a
+  # quantity: bugger all and zilch are out there
+  not_in: [official, technical]
+  triggers:
+    # not "not much of a housekeeper" (a predicate: "bugger all of a housekeeper" isn't English)
+    # nor "nothing but/else/more than/like" (only, just): bugger all is a quantity
+    np: ["nothing !=but|else|more|less|like|short", "nothing at all@4", "very little@2", "not much !=of@2", "zilch@4"]   # not "zero": the zero ciphertext
+NO_CHANCE:
+  description: No chance at all.
+  triggers:
+    np: ["no chance", "no chance at all@4", "a snowball's chance in hell@5", "zero chance@4", "no hope"]
+MESS:
+  description: A muddle, a botched job.
+  triggers:
+    np: ["a mess", "a shambles@4", "a disaster@4", "a botched job", "a fiasco@4", "chaos@4", "a debacle@4",
+         "a free-for-all@4"]
+BOTCH_IT:
+  # apart from BOTCH (dinkum-check round): stuff {obj} up keeps the object in its place ("screwed it up" -> "stuffed
+  # it up"); in BOTCH, stuff up's form would be picked as often and lose it
+  description: Get something badly wrong, with what was spoiled between the verb and its particle ("screwed it up").
+  triggers:
+    vp: ["screw {obj} up", "foul {obj} up", "make a mess of {obj}"]
+SCREW_UP_FACE:
+  description: >-
+    Guard (no entries) - screwing up a face or the eyes (squinting, grimacing) or one's courage isn't getting
+    something wrong.
+  triggers:
+    vp: ["screw up {poss} face|eyes|nose|mouth|courage", "screw {poss} face|eyes|nose|mouth up",
+         "screw up the paper", "screw up the letter"]
+NONSENSE:
+  description: Untrue or foolish talk.
+  triggers:
+    np: ["nonsense", "baloney", "hogwash", "a load of rubbish", "a load of nonsense", "a load of garbage", "bullshit",
+         "a load of bullshit"]
+LOOK:
+  description: A quick look.
+  triggers:
+    np: ["a look !of|on", "a quick look", "a peek@2", "a quick glance@2"]   # not "at a glance", "a look of horror on her face"
+TRY:
+  description: An attempt.
+  triggers:
+    np: ["a try", "a go", "an attempt", "a real try@4", "a serious attempt@4", "a good try@4"]
+WORK:
+  description: (Hard) work.
+  triggers:
+    np: ["hard work@4", "hard labour@4", "a hard slog@4", "unfinished work@3", "chore@2"]   # not "task": yakka is uncountable
+EXCELLENT:
+  description: Very good, first-rate.
+  triggers:
+    # "great" also means large or eminent ("a great war", "a great deal", "a great man"); block those senses
+    adj: ["great !big|little|huge|large|war|wars|battle|battles|battle-field|task|deal|many|number|majority|extent|length|distance|sense|care|pains|importance|power|powers|nation|nations|man|men|leader|leaders|depression|wall|lakes|plains|barrier|britain|grandfather|grandmother|aunt|uncle|fire|flood|famine|loss|danger|cause",
+          "excellent@4", "fantastic@4", "wonderful@4", "terrific@4", "awesome@4",
+          # "brilliant" of a person or a mind is clever, and of a light or a colour is bright: neither is beaut
+          "brilliant !=young|mind|minds|scientist|scientists|student|students|mathematician|mathematicians|engineer|engineers|coder|coders|programmer|programmers|thinker|thinkers|scholar|scholars|lawyer|lawyers|doctor|doctors|writer|writers|man|men|woman|women|people|person|boy|boys|girl|girls|kid|kids|child|children|light|lights|sunshine|sunlight|sun|white|blue|red|green|yellow|colour|colours|color|colors|flash|star|stars@4",
+          "superb@4", "amazing@4", "first-rate@4", "splendid@4"]
+    predicate_adj: ["great", "excellent@4", "fantastic@4", "awesome@4", "amazing@4", "brilliant@4"]
+GOOD:
+  description: Pleasing, nice (of a thing, a day, the weather).
+  triggers:
+    # not a bare "good": good friends (close), good riddance, a good imitation (passable), good work (well done),
+    # a good sport, a good seal (tight) - beaut is pleasing to look at or have, and "good" is mostly other senses.
+    # "nice" and "lovely" not of people, a compliment or "nice to/of" (it was nice of you, nice to meet you)
+    adj: ["nice !=of|to|work|job|try|one|guy|guys|man|men|woman|women|lady|ladies|girl|girls|boy|boys|kid|kids|people|person|bloke|fellow|chap|and|enough@2",
+          "lovely !=of|to|work|job|man|men|woman|women|lady|ladies|girl|girls|boy|boys|kid|kids|people|person|and@3"]
+VERY:
+  description: Intensifier.
+  triggers:
+    adv: ["very", "really ^adj", "extremely@4", "seriously@4", "absolutely@4", "thoroughly@4", "completely@4"]
+A_LOT:
+  description: A large amount; many.
+  triggers:
+    np: ["a lot@3", "lots@3", "loads@3", "tons@3", "plenty@3", "a great deal@3", "masses@4"]
+    adv: ["a lot", "very much"]
+COUNTED_LOTS:
+  description: >-
+    Guard (no entries) - loads and lots that are counted units (60 loads of dishes, a load of washing, parking
+    lots, lots at an auction), not "a large amount".
+  triggers:
+    np: ["loads of dishes", "loads of washing", "loads of laundry", "loads of wash", "loads of washing-up",
+         "parking lots", "car lots", "vacant lots", "empty lots", "building lots", "auction lots",
+         # a counted number of lots is groups (split into four lots), not a large amount (dinkum-check round)
+         "two lots", "three lots", "four lots", "five lots", "six lots", "seven lots", "eight lots", "nine lots",
+         "ten lots", "both lots", "several lots", "separate lots", "multiple lots"]
+DEFINITELY:
+  description: Certainly, without doubt.
+  triggers:
+    adv: ["definitely", "certainly", "for sure"]
+FAST:
+  description: Quickly.
+  triggers:
+    adv: ["very fast@4", "really quickly@4", "at top speed@4", "very quickly@4", "as fast as {subj} could@4",
+          "as quickly as {subj} could@4", "as fast as possible@4", "on the double", "double-quick", "in double-quick time"]
+    predicate_adj: ["very fast@4", "really quick@4", "lightning fast@5"]
+
+# --- people and things ----------------------------------------------------
+FRIEND:
+  description: A friend or companion.
+  triggers:
+    np: ["friend", "buddy", "pal", "chum", "companion"]
+MAN:
+  description: A man, a guy.
+  triggers:
+    np: ["man", "guy", "chap", "bloke"]
+FELLOW_MAN:
+  description: The noun "fellow", a man.
+  # in a report, a policy or a doc "fellow" is nearly always the adjective (fellow Grateful Dead alumni, fellow
+  # members), and a multi-word name after it can't be held by a guard
+  not_in: [news, official, technical]
+  triggers:
+    # not the adjective before a noun (fellow alumni, fellow citizens); before a one-word name ("fellow Texans") it
+    # is held by FELLOW_BEFORE_NAME. Before a longer name ("fellow Grateful Dead alumni") nothing holds it: a span
+    # that holds part of a multi-word name is refused, guards too (DECISIONS.md, needs engine changes)
+    np: ["fellow !=alumni|alumnus|members|member|citizens|citizen|countrymen|students|student|workers|worker|travellers|travelers|traveller|traveler|passengers|soldiers|officers|players|musicians|artists|writers|parishioners|competitors|human|humans|feeling|employees|colleagues|team|band|americans|australians|residents|veterans|believers|scientists|researchers|creatures|sufferers|survivors|inmates|prisoners|delegates|candidates|nominees"]
+FELLOW_BEFORE_NAME:
+  description: >-
+    Guard (no entries) - "fellow" before a one-word name is the adjective (fellow Texans, fellow Democrats), not a
+    man.
+  triggers:
+    np: ["fellow {obj}"]
+WOMAN:
+  description: A woman.
+  triggers:
+    np: ["woman", "lady"]
+GOOD_PERSON:
+  description: A thoroughly decent person.
+  triggers:
+    np: ["a nice guy", "a good guy", "a decent person", "a good person", "a good man", "a top person",
+         "a great guy@4"]
+CHAMPION_PERSON:
+  # apart from GOOD_PERSON: "a good man" (a virtuous parson) is decent, not a champion
+  description: Someone admired as outstanding, a star or a hero.
+  triggers:
+    np: ["an absolute star", "an absolute champion", "an absolute hero", "a real hero", "a true hero"]
+BREAKFAST:
+  description: Breakfast.
+  triggers:
+    np: ["breakfast"]
+BREAKFAST_IDIOM:
+  description: Guard (no entries) - a dog's breakfast is a mess (its own entry), not the morning meal.
+  triggers:
+    np: ["dog's breakfast", "dogs breakfast", "dog’s breakfast"]
+AFTERNOON:
+  description: The afternoon.
+  triggers:
+    np: ["afternoon"]
+BARBECUE:
+  description: A barbecue grill or the event.
+  triggers:
+    np: ["barbecue", "barbeque", "bbq", "the outdoor grill", "a gas grill", "a charcoal grill", "the backyard grill", "a barbecue grill"]
+SAUSAGE:
+  description: A sausage.
+  triggers:
+    np: ["sausage"]
+SANDWICH:
+  description: A sandwich.
+  triggers:
+    np: ["sandwich"]
+BISCUIT:
+  description: A biscuit or cookie.
+  not_in: [technical]   # a term of art in docs
+  triggers:
+    np: ["biscuit", "cookie"]
+WEB_COOKIE:
+  description: >-
+    Guard (no entries) - a browser's cookie, in a how-to as in the docs ("delete the session cookie"), isn't a
+    bickie. The phrases a web cookie comes in hold it.
+  triggers:
+    np: ["session cookie", "session cookies", "browser cookie", "browser cookies", "tracking cookie",
+         "tracking cookies", "third-party cookie", "third-party cookies", "first-party cookies", "http cookie",
+         "http cookies", "cookie settings", "cookie banner", "cookie policy", "cookie consent", "cookie file",
+         "cookie files", "accept cookies", "accept all cookies", "delete cookies", "clear cookies",
+         "clear your cookies", "enable cookies", "block cookies", "disable cookies", "cookies and site data", "uses cookies",
+         "use cookies", "store cookies", "set cookies", "sets a cookie", "set a cookie"]
+CHOCOLATE:
+  description: Chocolate.
+  # a box of chocolates as a corporate gift in a policy, or a cookie's value in a doc, isn't choccy
+  not_in: [official, technical]
+  triggers:
+    np: ["chocolate"]
+AVOCADO:
+  description: An avocado.
+  triggers:
+    np: ["avocado"]
+VEGETABLES:
+  description: Vegetables.
+  triggers:
+    np: ["vegetables", "veggies"]
+BEER:
+  description: A beer, especially a cold one.
+  triggers:
+    np: ["beer", "cold beer", "cold one", "can of beer", "bottle of beer"]
+TEA:
+  description: A cup of tea.
+  triggers:
+    np: ["cup of tea"]
+MCDONALDS:
+  description: McDonald's restaurants.
+  triggers:
+    np: ["McDonald's", "McDonalds"]
+LIQUOR_STORE:
+  description: A shop selling alcohol.
+  triggers:
+    np: ["liquor store", "bottle shop", "off-licence"]
+SERVICE_STATION:
+  description: A petrol / gas station.
+  triggers:
+    np: ["service station", "gas station", "petrol station"]
+PICKUP:
+  description: A utility vehicle with an open tray.
+  triggers:
+    np: ["pickup truck", "utility vehicle"]
+SUNGLASSES:
+  description: Sunglasses.
+  triggers:
+    np: ["sunglasses", "shades"]
+SWIMSUIT:
+  description: Swimwear.
+  triggers:
+    np: ["swimsuit", "swimming costume", "bathing suit", "swimwear", "swimming trunks"]
+FLIP_FLOPS:
+  description: Rubber sandals.
+  triggers:
+    np: ["flip-flops", "flip flops", "flip-flop"]
+MOSQUITO:
+  description: A mosquito.
+  triggers:
+    np: ["mosquito"]
+KANGAROO:
+  description: A kangaroo.
+  triggers:
+    np: ["kangaroo"]
+CROCODILE:
+  description: A crocodile.
+  triggers:
+    np: ["crocodile"]
+PRESENT:
+  description: A gift.
+  # a policy's or a report's "gift" is a regulated term (a gifts policy, gifts to officials), not a birthday pressie
+  not_in: [official, news, technical]
+  triggers:
+    # not the fixed compounds (gift card, gift shop, gift tax) or a donation ("a gift of $5m"); a talent ("a gift
+    # for music") is held by GIFT_TALENT
+    np: ["gift !=card|cards|shop|shops|tax|taxes|certificate|certificates|voucher|vouchers|aid|economy|horse|of|basket|baskets|registry|policy|policies|rule|rules|exceeding|worth|valued"]
+UNIVERSITY:
+  description: University.
+  triggers:
+    np: ["university", "college"]
+COLLEGE_OTHER_SENSE:
+  description: >-
+    Guard (no entries) - the Electoral College, a professional college (of surgeons) or a community college isn't a
+    university.
+  triggers:
+    np: ["electoral college", "Electoral College", "community college", "community colleges", "college of surgeons",
+         "college of physicians", "college of cardinals", "royal college", "college of arms", "college of nursing"]
+FOOTBALL:
+  description: Football (any code).
+  triggers:
+    np: ["football", "rugby league", "rugby"]   # not soccer: Australians don't call it footy
+RELATIVES:
+  description: Relatives, family members.
+  triggers:
+    # not "relative to the goal", "relative humidity", "in relative terms"
+    np: ["relative !to|terms|humidity|risk|value|values|ease|importance|size|position|path|paths|frequency|error|errors|clause|merits|calm|strength|weakness|cost|costs|speed|density|abundance|newcomer|newcomers|safety|poverty|peace|majority"]
+TOILET:
+  description: A toilet.
+  triggers:
+    np: ["toilet", "restroom", "loo", "outhouse", "lavatory"]
+TRADESPERSON:
+  description: A tradesperson.
+  triggers:
+    np: ["tradesman", "tradesperson"]
+PARAMEDIC:
+  description: An ambulance officer.
+  triggers:
+    np: ["paramedic", "ambulance officer"]
+FIREFIGHTER:
+  description: A firefighter.
+  triggers:
+    np: ["firefighter", "fireman"]
+GARBAGE_COLLECTOR:
+  description: A rubbish collector.
+  triggers:
+    np: ["garbage collector", "garbage man", "rubbish collector", "binman"]
+POSTMAN:
+  description: A postal worker.
+  triggers:
+    np: ["postman", "mailman", "postie", "postal worker"]
+JOURNALIST:
+  description: A journalist.
+  triggers:
+    np: ["journalist", "reporter"]
+CHRISTMAS:
+  description: Christmas.
+  triggers:
+    np: ["Christmas", "Xmas"]
+DOCUMENTARY:
+  description: A documentary.
+  triggers:
+    np: ["documentary"]
+HAPPY_SNAP:
+  description: >-
+    A casual snapshot photo (second-pass round 2026-10-13, by hand for its not_in). Not a figurative snapshot
+    (of the economy, a database), so not in docs, news or official prose.
+  not_in: [technical, news, official]
+  triggers:
+    np: ["snapshot !=of|in|shows|showed|suggests|suggested", holiday photo, vacation photo]
+FISHERMAN:
+  description: A person who fishes (an angler or a commercial fisherman).
+  not_in: [news, official, technical, instructions]   # a park notice's "anglers" and a regulation's stay
+  triggers:
+    np: [fisherman, fishermen, angler]
+AMERICANS:
+  description: Americans, the people of the United States, as a group.
+  not_in: [news, official, technical, instructions]   # casual talk about Americans, not a report's
+  triggers:
+    np: [Americans]
+AMERICANS_GROUP:
+  description: >-
+    Guard (no entries) - Americans named as a group within the country (African Americans, Native Americans,
+    black Americans) or of the other Americas (South Americans) aren't Yanks.
+  triggers:
+    np: ["African Americans", "Native Americans", "Asian Americans", "Latin Americans", "Hispanic Americans",
+         "Mexican Americans", "Japanese Americans", "Chinese Americans", "Korean Americans", "Indian Americans",
+         "Arab Americans", "Muslim Americans", "Jewish Americans", "Irish Americans", "Italian Americans",
+         "Filipino Americans", "Cuban Americans", "Latino Americans", "Indigenous Americans", "black Americans",
+         "Black Americans", "white Americans", "White Americans", "South Americans", "Central Americans",
+         "North Americans", "LGBT Americans", "LGBTQ Americans", "Americans with Disabilities"]
+AMERICAN_FOOTBALL_COMPOUND:
+  description: >-
+    Guard (no entries) - "an American football player": the game's name before a noun, which GRIDIRON's np
+    doesn't take, so FOOTBALL's footy can't land on the American game (second-pass round 2026-10-13).
+  triggers:
+    np: ["American football player|players|team|teams|league|leagues|game|games|coach|coaches|fan|fans|field|fields|season|seasons|star|stars"]
+
+# --- speech acts --------------------------------------------------------------
+NO_PROBLEM:
+  description: Reassurance; no trouble at all; you're welcome.
+  triggers:
+    interjection: ["no problem", "no problem at all", "you're welcome", "don't worry", "don't worry about it",
+                   "not a problem", "it's no trouble", "that's fine", "it's fine", "that's okay", "no trouble",
+                   "never mind", "it's all good", "all good"]
+IT_WILL_BE_OK:
+  description: Everything will turn out fine.
+  triggers:
+    interjection: ["it will be fine", "it'll be fine", "it will be okay", "it'll be okay", "everything will be fine",
+                   "everything will be okay", "it'll work out", "it will all work out", "don't panic"]
+EASY:
+  description: Agreement that a task is simple / done gladly.
+  triggers:
+    interjection: ["easy", "that's easy", "consider it done", "sure thing", "happy to help", "no sweat"]
+AGREE:
+  description: Emphatic yes.
+  triggers:
+    # "of course" agrees as a reply ("Of course."); before a comma it's the adverb ("Of course, the river ...")
+    interjection: ["absolutely", "definitely", "of course !=,|;|—|-", "you bet", "too right", "exactly", "certainly",
+                   "for sure", "yes, absolutely@4", "yes, definitely@4", "you're right"]
+DISAGREE:
+  description: No, softened or emphatic.
+  triggers:
+    interjection: ["no", "no way@4", "not a chance@4", "absolutely not@5", "I don't think so@2", "nope",
+                   "certainly not@5", "over my dead body@5"]
+REALLY_Q:
+  description: Expressing disbelief; "really?"
+  triggers:
+    interjection: ["really", "seriously", "is that true", "honestly", "are you serious", "are you kidding",
+                   "are you joking", "no kidding", "you're kidding", "you're joking"]
+SURPRISE:
+  description: Exclamation of surprise or dismay.
+  triggers:
+    interjection: ["wow", "good grief", "goodness", "my goodness", "oh my god@4", "oh my gosh", "good heavens",
+                   "goodness me", "gosh", "golly", "oh dear", "blimey", "holy cow", "well I never",
+                   "I can't believe it", "unbelievable"]
+GREETING:
+  description: Hello.
+  triggers:
+    interjection: ["hello", "hi", "hey", "hi there", "hello there", "good morning", "good day", "greetings"]
+HOW_ARE_YOU:
+  description: Asking after someone.
+  triggers:
+    interjection: ["how are you", "how are you doing", "how's it going", "how are things", "how have you been"]
+GOODBYE:
+  description: Farewell.
+  triggers:
+    interjection: ["goodbye", "bye", "see you later", "see you", "farewell", "bye for now", "catch you later",
+                   "see you soon", "take care"]
+THANKS:
+  description: Thanks.
+  triggers:
+    interjection: ["thanks", "thank you", "thank you very much", "thanks a lot", "thank you so much", "many thanks",
+                   "much appreciated"]
+BE_FAIR:
+  description: An appeal for reasonableness.
+  triggers:
+    interjection: ["be fair", "be reasonable", "give me a break", "come on", "give me a fair go", "that's not fair"]
+GO_AWAY:
+  description: Telling someone to leave.
+  triggers:
+    imperative: ["go away", "get lost", "leave me alone", "buzz off", "clear off", "get out of here", "shoo"]
+CALM_DOWN:
+  description: Telling someone to calm down or settle.
+  triggers:
+    imperative: ["calm down", "settle down", "relax", "take it easy", "chill out", "cool it"]
+MIND_OWN_BUSINESS:
+  description: Telling someone to behave or butt out.
+  triggers:
+    imperative: ["mind your own business", "behave yourself", "behave", "butt out", "keep out of it",
+                 "stay out of it"]
+HURRY:
+  description: Telling someone to hurry.
+  triggers:
+    imperative: ["hurry up", "hurry", "get a move on", "move it", "be quick", "speed up", "step on it"]
+STOP_COMPLAINING:
+  description: Telling someone to stop complaining.
+  triggers:
+    imperative: ["stop complaining", "stop moaning", "stop whining", "quit complaining", "quit whining"]
+SHUT_UP:
+  description: Telling someone to be quiet.
+  triggers:
+    imperative: ["shut up", "be quiet", "keep quiet", "quiet down", "pipe down", "hush"]
+TEASE:
+  description: Joking at someone's expense; pulling a leg.
+  triggers:
+    clause: ["{subj} {be} kidding", "{subj} {be} joking", "{subj} {be} teasing {obj}", "{subj} {be} pulling {poss} leg",
+             "{subj} {be} winding {obj} up", "{subj} {be} having {obj} on"]
+TOILET_BREAK:
+  description: Excusing oneself (to the toilet, or vaguely).
+  triggers:
+    vp: ["go to the toilet", "go to the bathroom", "use the bathroom", "use the toilet"]
+LEAVE:
+  description: Leave, depart.
+  triggers:
+    # leaving, without a destination: "heads off to the shops" is just going there, "head off trouble"
+    # is preventing it, and a project "getting going" is starting
+    vp: ["head off !=to|for|into|towards|toward|down|up|home|across|through|back|out|the|a|an|any|it|this|that|them|trouble",
+         "get going !=on|with|again|at|in|early|soon", "make a move", "make {poss}self scarce"]
+EAT:
+  description: Have something to eat.
+  triggers:
+    vp: ["grab a bite", "get something to eat", "have something to eat", "grab some food", "have lunch", "have dinner", "grab something to eat"]
+SCOLD:
+  description: Scold or get angry at someone.
+  triggers:
+    vp: ["tell {obj} off", "yell at {obj}", "get angry at {obj}", "have a go at {obj}", "scold {obj}",
+         "shout at {obj}"]
+CHAT:
+  description: Have a long chat.
+  triggers:
+    np: ["a chat", "a natter"]
+    vp: ["have a chat", "have a long chat", "have a natter", "have a good chat", "chew the fat", "shoot the breeze"]
+FIGHT:
+  description: A fight or scuffle.
+  triggers:
+    np: ["a fight", "a brawl", "a scuffle", "a punch-up", "an argument", "a row", "a quarrel", "a spat", "a set-to"]
+LUCKY:
+  description: Remarkably lucky.
+  person: true
+  triggers:
+    # not "you'd be lucky if/to" (it's unlikely)
+    predicate_adj: ["lucky !=if|to", "very lucky@4", "so lucky@4", "fortunate !=if|to@3", "incredibly lucky@5"]
+HOT_WEATHER:
+  description: A very hot day.
+  triggers:
+    np: ["a very hot day@4", "a hot day@3", "a scorching day@4", "a heatwave@4"]
+RAINING_HARD:
+  description: Raining heavily (of the weather).
+  triggers:
+    # the weather's "it" only: fans pouring onto the street, tea poured, tears pouring down aren't rain
+    clause: ["it {be} pouring !down|onto|into|across|through|over|from|out|off|floor|drain|sink",
+             "it {be} pouring down !onto|into|across|through|over|from|out|off|floor|drain|sink", "it {be} pouring with rain", "it {be} raining heavily",
+             "it {be} bucketing down", "it {be} raining hard", "it {be} raining cats and dogs"]
+FAKE_SICK:
+  description: Take a day off work claiming (falsely) to be sick.
+  triggers:
+    vp: ["take a sick day", "call in sick", "fake being sick", "skip work", "take a day off"]
+COOLER:
+  description: A portable insulated drinks cooler.
+  triggers:
+    # the comparative ("your body stays cooler") is held by COOLER_COMPARATIVE
+    # nor the comparative before a noun ("a cooler airmass", "cooler temperatures") or in a pair ("cooler and
+    # drier"): the tagger reads it as a noun there
+    np: ["cooler !=than|and|or|air|airmass|airmasses|weather|temperature|temperatures|temps|conditions|climate|day|days|night|nights|morning|mornings|evening|evenings|afternoon|afternoons|month|months|season|seasons|spell|change|water|waters|region|regions|area|areas|part|parts|side|spot|spots|place|places|shade|tones|tone|colours|colors|head|heads|front|pattern|period|periods|summer|summers|winter|winters|still|overnight",
+         "cool box", "cool-box", "ice chest", "ice box"]
+COOLER_COMPARATIVE:
+  description: >-
+    Guard (no entries) - "stays cooler", "a bit cooler": the comparative of cool, not an esky. The tagger often
+    reads it as a noun, so the phrases a comparative comes in hold it.
+  triggers:
+    np: ["stay cooler", "stays cooler", "stayed cooler", "keep cooler", "keeps cooler", "is cooler", "was cooler",
+         "are cooler", "were cooler", "be cooler", "been cooler", "feel cooler", "feels cooler", "felt cooler",
+         "get cooler", "gets cooler", "getting cooler", "got cooler", "grow cooler", "turn cooler", "turns cooler",
+         "become cooler", "remain cooler", "run cooler", "runs cooler", "much cooler", "a bit cooler",
+         "slightly cooler", "even cooler", "far cooler", "a lot cooler", "little cooler", "cooler weather",
+         "cooler temperatures", "cooler days", "cooler nights", "cooler air", "cooler water", "cooler months",
+         "cooler parts", "cooler part", "cooler times", "cooler hours", "cooler conditions", "cooler climate",
+         "cooler, drier", "cooler, wetter", "cooler, cloudier", "cooler, windier", "cooler, calmer"]
+DUVET:
+  description: A quilt or duvet.
+  triggers:
+    np: ["duvet", "comforter", "quilt"]
+SWEATER:
+  description: A knitted pullover.
+  triggers:
+    np: ["sweater", "pullover"]
+CANDY:
+  description: Sweets / candy.
+  triggers:
+    np: ["candy", "sweets", "candies"]
+CHICKEN:
+  description: A chicken.
+  triggers:
+    np: ["chicken"]
+BREAK:
+  description: A short work break.
+  triggers:
+    np: ["coffee break", "tea break", "smoke break", "work break", "morning break"]
+RASCAL:
+  description: A cheeky, mischievous but likeable person.
+  triggers:
+    np: ["rascal", "prankster", "joker", "mischief-maker", "scamp"]
+CHILD:
+  description: A small child.
+  neutral_person: true
+  # a policy's or a report's kid or child is of any age ("a friend's kid" at a private school): littlie and ankle
+  # biter are small children, and too familiar there (dinkum-check round)
+  not_in: [news, official, technical]
+  triggers:
+    # not the verb "kid" (don't kid yourself, just kidding around)
+    np: ["kid !=yourself|yerself|yourselves|himself|herself|themselves|myself|ourselves|around|me|you", "child",
+         "toddler", "little one", "youngster", "little kid", "little boy", "small child"]
+OLDER_CHILD:
+  description: >-
+    Guard (no entries) - kids who aren't small (teenagers, high-school and college kids, grown and adult
+    children, older kids): not small children.
+  triggers:
+    np: ["high school kids", "high-school kids", "high school kid", "college kids", "college kid", "teenage kids",
+         "teenage kid", "teenage children", "teen kids", "grown kids", "grown-up kids", "grown children",
+         "grown-up children", "adult children", "adult child", "older kids", "older children", "older kid",
+         "older child", "big kids", "university kids"]
+LITTLE_BOY:
+  description: A small boy (a pet name for one), not any child ("your kid", "small children" in a safety step).
+  triggers:
+    np: ["little boy", "small boy", "little lad"]
+BOLTED_TOO_LATE:
+  description: >-
+    Guard (no entries) - "the horse has bolted" is an idiom (too late to act), not anyone running off.
+  triggers:
+    np: ["the horse has bolted", "horse has bolted", "the horse had bolted", "horse had bolted",
+         "the horse has already bolted", "horse has already bolted", "the horse is bolted"]
+RUN_OFF:
+  description: Leave in a hurry; flee.
+  triggers:
+    # not the transitive "bolt" (bolt the door, bolted the shelf onto the wall, bolt down food); "the horse has
+    # bolted" (too late) is held by BOLTED_TOO_LATE
+    vp: ["run away as fast as {subj} could@4", "run away@3", "run off@3",
+         "bolt !=the|a|an|it|them|this|that|his|her|their|its|my|our|your|onto|on|to|down|together|shut|upright@4",
+         "flee@4", "take off in a hurry@4"]
+FALL_ASLEEP:
+  description: Drop off to sleep, usually from exhaustion.
+  triggers:
+    vp: ["fall fast asleep@4", "fall asleep", "nod off", "doze off", "drop off to sleep", "go straight to sleep@4"]
+EAT_IT_ALL:
+  description: Eat everything, greedily.
+  triggers:
+    vp: ["eat it all up@4", "eat it all@4", "eat everything@4", "gobble it up@4", "wolf it down@4", "polish it off@4"]
+FOREST:
+  description: Wooded country.
+  triggers:
+    np: ["woods", "forest", "wilderness", "countryside", "the backcountry", "the backwoods"]
+FOREST_OTHER_SENSE:
+  description: >-
+    Guard (no entries) - US land categories and agencies (a national forest, the Forest Service, a wilderness
+    area) are terms of art, and "neck of the woods" and "out of the woods" are idioms: none is the bush.
+  triggers:
+    np: ["national forest", "national forests", "state forest", "state forests", "forest service",
+         "forest ranger", "forest rangers", "forest district", "forest districts", "forest land", "forest lands",
+         "forest road", "forest roads", "wilderness area", "wilderness areas", "wilderness study area",
+         "neck of the woods", "out of the woods", "rain forest", "rainforest", "forest floor", "forest canopy",
+         # fourth pass: a legal designation and forestry terms of art
+         "designated wilderness", "federally designated wilderness", "wilderness designation", "wilderness act",
+         "forest health", "forest management", "forest plan", "forest products", "forest supervisor"]
+MOCK:
+  description: Make fun of someone.
+  triggers:
+    vp: ["ridicule", "make fun of", "mock", "poke fun at", "laugh at", "tease"]
+
+# --- added for the Gettysburg reference text (kept general) ---------------------
+LONG_AGO:
+  description: A long time ago.
+  triggers:
+    adv: ["a long time ago", "ages ago", "long ago", "many years ago", "four score and seven years ago@5"]
+DIE:
+  description: Die; give one's life; (of a machine) stop working for good.
+  triggers:
+    vp: ["die", "pass away", "perish", "give {poss} lives@4", "give {poss} life@4", "lay down {poss} life@4",
+         "kick the bucket"]
+STRUGGLE:
+  description: Go through hardship; have a hard time of it.
+  triggers:
+    # not "struggle to/with/against" (highs that struggle to get out of the 40s, struggle with a lid): doing it
+    # tough is hard times, said of people, and takes no infinitive or object
+    vp: ["struggle !=to|with|against|for|over|through|up|on|into|across|free|out|along", "have a hard time",
+         "go through hard times", "have it rough", "suffer hardship", "fight hard", "give it everything"]
+ENDURE:
+  description: Keep going in the face of difficulty; last.
+  triggers:
+    # "hold out" without an object: "hold out your hands" and "hold out little hope" aren't enduring
+    vp: ["endure", "persevere",
+         "hold out !=your|his|her|their|my|our|the|a|an|its|it|them|him|me|us|this|that|some|any|little|much|no|hope|hands|arms",
+         "soldier on", "keep going !=overnight|through|until|till|into|for|all|on", "carry on regardless"]   # rain that keeps going overnight doesn't battle on
+SOLDIERS:
+  description: Soldiers, especially in remembrance.
+  neutral_person: true
+  triggers:
+    # head-noun matching makes "brave man" also match "brave men"
+    np: ["soldier", "serviceman", "servicewoman", "infantryman", "brave man@4", "fallen soldier"]
+BRAVE:
+  description: Courageous, willing to take risks.
+  person: true
+  triggers:
+    predicate_adj: ["brave", "courageous", "fearless", "plucky", "gutsy", "daring"]
+WAR:
+  description: A war, battle or major conflict.
+  triggers:
+    # a fight, not the compounds (war stories, a war memorial, war-time) or a conflict of interest
+    np: ["war !=stories|story|memorial|memorials|veteran|veterans|crimes|crime|criminal|criminals|zone|zones|time|bride|brides|horse|horses|chest|room|cry|games|game|paint|effort|bonds|widow|widows|dead|grave|graves|correspondent|correspondents|hero|heroes|record|years|department|office|ministry|council|declaration",
+         "battle !=to|for|against|of|with", "conflict !=of|between|with|resolution"]
+FIELD:
+  description: An enclosed field or pasture.
+  not_in: [technical, instructions]   # a form's field, in docs and how-tos alike
+  triggers:
+    # not a field of study or work, a field trip, a struct's or form's fields
+    np: ["field !of|trip|trips|day|test|tests|goal|goals|work|marshal|hockey|hospital|covered|name|names|value|values|type|types|data|study|studies|research|experience|expertise|engineering|science|sciences|office|offices|notes|guide|manual|level|levels|is|are|in|that|which|for|with|to|(|show|shows|showed|indicate|indicates|suggest|suggests",
+         "meadow", "pasture"]
+FIELD_OTHER_SENSE:
+  description: >-
+    Guard (no entries) - a field of study or work ("a social science field", "experts in the field", "her
+    field"), of data ("RH fields", "a text field") or of physics ("a magnetic field") isn't a paddock.
+  triggers:
+    np: ["{poss} field", "{poss} fields", "to {poss} field", "to {poss} fields", "science field", "science fields", "scientific field", "technical field",
+         "related field", "related fields", "relevant field", "appropriate field", "chosen field", "same field",
+         "medical field", "legal field", "academic field", "professional field", "data field", "data fields",
+         "RH field", "RH fields", "wind field", "wind fields", "temperature field", "pressure field",
+         "moisture field", "text field", "input field", "form field", "search field", "required field",
+         "magnetic field", "electric field", "electromagnetic field", "gravitational field", "force field",
+         "playing field", "oil field", "oil fields", "gas field", "gas fields", "experts in the field",
+         "leaders in the field", "professionals in the field", "researchers in the field", "others in the field",
+         "work in the field", "working in the field", "years in the field", "experience in the field",
+         "career in the field"]
+PEOPLE:
+  description: Ordinary people; the public.
+  triggers:
+    # "punters" are the public; battlers (the strugglers) have their own concept, STRUGGLERS
+    # not bare "people": "punters" took contributors, park staff, colleagues, a nation (the second pass)
+    # nor "the public, private or ..." and "the public and private sectors": the public sector (a mark stops the
+    # look-ahead, so the comma is named)
+    np: ["the public !sector|sectors|service|servant|servants|interest|record|records|domain|health|holiday|holidays|transport|school|schools|hospital|hospitals|library|libraries|eye|purse|good|square|space|spaces|land|lands|broadcaster|liability|policy|debate|consultation|comment|comments|hearing|private|,|/",
+         "members of the public", "the general public", "ordinary folk", "the masses", "the paying public"]
+STRUGGLERS:
+  description: Ordinary working people doing it tough.
+  triggers:
+    np: ["ordinary people", "working people", "working families", "the common man", "the working class",
+         "the poor", "struggling families", "ordinary Australians"]
+FREEDOM:
+  description: Freedom, liberty, fairness for all.
+  triggers:
+    np: ["freedom", "liberty", "equal opportunity", "fairness"]
+REASONABLE:
+  description: Proper, fitting, reasonable.
+  triggers:
+    predicate_adj: ["fitting and proper", "proper", "appropriate", "reasonable", "only right", "only fair",
+                    "fitting"]
+FATHER:
+  description: Father.
+  # a report's father (an obituary's "the son of a Methodist preacher") isn't the old man or the old fella, which
+  # are fond but irreverent (dinkum-check round)
+  not_in: [news, official, technical]
+  triggers:
+    np: ["father", "dad"]
+POLITICIAN:
+  description: A politician.
+  # "the government" in a notice or a policy is the agency and its staff (scammers pretending to be from the
+  # government), not the pollies
+  not_in: [official, technical, instructions]
+  triggers:
+    np: ["politician", "statesman", "senator", "congressman", "member of parliament", "lawmaker",
+         "the government", "the authorities", "the powers that be"]   # not bare "government": "a Form of
+                                                                       # Government" is a system, not pollies
+
+# --- the words that stuck out in Gettysburg, plus everyday filler -------------
+SANCTIFY:
+  description: Make sacred; set apart as something held dear.
+  triggers:
+    vp: ["consecrate {obj}@4", "hallow {obj}@4", "sanctify {obj}@4", "consecrate@4", "hallow@4", "sanctify@4",
+         "dedicate", "make sacred", "bless"]
+DEDICATED_TO:
+  description: >-
+    Guard (no entries) - "dedicated to" is devoted or allocated to ("a nation dedicated to the proposition",
+    "proceeds dedicated to liquidity"), not consecrated or set on.
+  triggers:
+    np: ["dedicated to", "dedicated here to", "dedicated there to", "here dedicated to"]
+COMMITTED:
+  description: Set on having or doing something, determined on it.
+  triggers:
+    # an adverbial chunk so it works after "be" and in participle clauses ("..., and bent on revenge"). Only the
+    # phrasings "dead set on" can stand in for word for word, with "on" and a noun or -ing after: not "dedicated
+    # to" (half the proceeds were dedicated to liquidity: allocated), "devoted to" (his wife, a chapter devoted
+    # to birds), "committed to" (prison, memory) or "determined to" ("dead set on win")
+    adv: ["intent on", "hell-bent on", "hellbent on", "bent on !=one|both|all|his|her|their", "determined on"]
+DEVOTION:
+  description: Loyal devotion to a cause or to each other.
+  triggers:
+    np: ["devotion", "loyalty", "comradeship", "solidarity", "fellowship", "camaraderie"]
+RESOLVE:
+  description: Insist with total conviction that something is true ("I'd swear it was him").
+  triggers:
+    # not "resolve" (a noun, "continuing resolve", or sort out, "resolve the issues"), "vow" (swear blind takes no
+    # "to": "vowed to return") or a bare "swear" (curse at someone)
+    vp: ["swear up and down", "swear that", "solemnly swear that", "swear on {poss} life that"]
+NATION:
+  description: A nation or people as a community.
+  triggers:
+    np: ["tribe"]   # not "nation" or "community": "across the mob", "the Kurdish mob"
+HEREABOUTS:
+  description: This part of the world.
+  triggers:
+    np: ["this continent", "this region", "these parts", "this area", "this part of the world"]
+    adv: ["on|in this continent", "in this region", "in these parts", "around here", "in this part of the world"]
+FOUND:
+  description: Bring into being; establish.
+  triggers:
+    vp: ["bring forth", "establish", "bring into being", "put together",   # not bare "build": "build a house" isn't "kick off"
+         "throw together"]
+THINK:
+  description: Think, believe, suppose.
+  triggers:
+    vp: ["think !about|of|over|through|up|back|ahead|twice|again", "believe !in|me|you|it",
+         "suppose !to"]   # not "figure" (a noun as often) or "expect" ("thunderstorms are expected")
+AFFIRM:
+  description: A plain yes.
+  triggers:
+    interjection: ["yes", "yes please", "sure"]
+OK_THEN:
+  description: All right, okay, agreeing to go ahead (not a yes to a question of fact).
+  triggers:
+    interjection: ["okay", "ok", "alright", "all right", "okay then", "all right then", "very well"]
+SPOOKED:
+  description: Startled or rattled (by something), not afraid of it.
+  person: true
+  triggers:
+    predicate_adj: ["spooked", "startled", "rattled", "unnerved", "jumpy", "on edge"]
+DENY:
+  description: A plain no.
+  triggers:
+    interjection: ["no", "no thanks", "nope"]
+CONSPICUOUS:
+  description: Be glaringly obvious or out of place.
+  triggers:
+    # not a thing that projects ("a nail sticks out of the board", "stick out your tongue")
+    vp: ["stick out !=of|from|over|above|beyond|through|your|his|her|their|my|our|its|the|a", "stand out",
+         "look out of place", "stick out a mile"]
+    predicate_adj: ["obvious", "glaringly obvious@4", "out of place", "conspicuous"]
+DOUBT_IT:
+  description: Believe something can't be done or won't happen.
+  triggers:
+    vp: ["believe {np} to be simply|quite|completely|totally|utterly? impossible@4",
+         "think {np} simply|quite|completely|totally|utterly? impossible@4",
+         "consider {np} to be? simply|quite|completely|totally|utterly? impossible@4",
+         "believe {np} could never happen@4", "doubt {np} could be done@3", "doubt {np} would work@3"]
+IMPOSSIBLE:
+  description: Something can't happen or be done.
+  triggers:
+    clause: ["it|that|this {be} simply|quite|completely|totally|utterly|just? impossible@4",
+             "it|that|this {be} not possible@3", "it|that|this {be} out of the question@4",
+             "it|that|this {be} never going to happen@4", "it|that|this {be} not going to happen@3",
+             "{be} it|that|this simply|really|actually|just? impossible@4"]
+GO_ALONG:
+  description: Agree to a proposal.
+  # a committee's or a board's "approved" is a formal act (a vote), not reckoning it a goer
+  not_in: [official, technical, news]
+  triggers:
+    vp: ["assent to {np}", "consent to {np}", "go along with {np}", "approve {np}"]   # "agree to" takes verbs
+
+# --- concepts introduced by the fragment pass ------------------------------------
+EGG:
+  description: An egg.
+  triggers:
+    np: [egg]
+DOLLAR:
+  description: A dollar; money loosely.
+  triggers:
+    # "the buck stops here" is responsibility (a guard ending on the verb would be read as a verb, so it is held here)
+    np: ["dollar !bill|bills|note|notes|sign|signs|store|stores|amount|amounts|value|coin|coins", "buck !=stops|stopped|stop|up"]
+MONEY_IDIOM_OTHER_SENSE:
+  description: >-
+    Guard (no entries) - "pass the buck" is about responsibility (and "the buck stops here", held on DOLLAR's own
+    trigger), "buck the trend" is a verb, and cents on the dollar or what a dollar is worth is an exact sum: none
+    is money in slang.
+  triggers:
+    # the verbs as verb phrases: a noun-phrase guard right after a pronoun ("they pass the buck") is refused
+    vp: ["pass the buck", "buck the trend"]
+    np: ["bang for {poss} buck", "bang for the buck", "cents on the dollar", "cents on any dollar",
+         "cents in the dollar", "cents to the dollar", "a dollar is worth", "the dollar is worth",
+         "dollar is worth", "dollars are worth", "the US dollar", "the U.S. dollar", "the Australian dollar"]
+SAVELOY:
+  description: A saveloy / frankfurt sausage.
+  triggers:
+    np: [saveloy, frankfurter, frankfurt]
+SICK_DAY:
+  description: A day off work for illness.
+  triggers:
+    np: [sick day, day off sick]
+TRICK:
+  description: A deception or swindle.
+  triggers:
+    np: [a fast one, a sneaky trick, a con, a swindle]
+    clause: ["{subj} {be} trying to trick {obj}", "{subj} {be} trying to con {obj}", "{subj} {be} conning {obj}"]
+TANTRUM:
+  description: A fit of temper (noun).
+  triggers:
+    np: [a tantrum, a hissy fit, a fit of temper]
+ROAD:
+  description: The road.
+  triggers:
+    np: [the road, the highway]
+ENGLISH_PERSON:
+  description: A person from England.
+  triggers:
+    np: [Englishman, Englishwoman, English person]
+SCOUNDREL:
+  description: A contemptible person.
+  triggers:
+    np: [scoundrel, lowlife, rotter, troublemaker]
+LONG_TIME:
+  description: A long period of time (noun).
+  triggers:
+    np: [a long time, ages and ages]
+VIABLE:
+  description: Workable; going ahead.
+  triggers:
+    predicate_adj: [viable, feasible, going ahead, a viable option]
+VIABLE_OF_LOOKS:
+  description: >-
+    Guard (no entries) - "she looked feasible" (an old word for presentable) and "he seems viable" are said of
+    how someone looks, and the slang for a workable plan said of a woman is a sexual slur. The verbs of appearance hold it, with a
+    pronoun before them where there is one (a guard right after "she" is read as a verb and refused).
+  triggers:
+    np: ["looked|looks|look|looking|seemed|seems|appeared feasible|viable",
+         "{subj} looked|looks|seemed|seems|appeared feasible|viable", "she was|is feasible|viable"]
+SCOLDING:
+  description: A telling-off (noun).
+  triggers:
+    np: [a telling-off, a dressing-down, a tongue-lashing, an earful]
+HASSLE:
+  description: A difficulty or bother.
+  triggers:
+    np: [hassle]
+TANK_TOP:
+  description: A sleeveless top or undershirt.
+  triggers:
+    np: [tank top, undershirt, sleeveless undershirt]
+EUCALYPTUS:
+  description: A eucalyptus tree.
+  triggers:
+    np: [eucalyptus tree, eucalypt]
+THROW:
+  description: Throw something.
+  triggers:
+    # not tossing in a recipe (toss to coat, toss with the dressing)
+    vp: [throw, "toss !=to|with|together|gently|well|lightly|until"]
+TOSS_OTHER_SENSE:
+  description: Guard (no entries) - a coin toss, the toss (cricket) and a toss-up are nouns, not throwing.
+  triggers:
+    np: ["coin toss", "toss of a coin", "toss-up", "toss up", "the toss"]
+    vp: ["win the toss", "lose the toss", "toss the salad", "toss a salad", "toss the salads"]
+CAR_TRUNK:
+  description: Luggage space of a car.
+  triggers:
+    np: [car trunk]
+ALCOHOL:
+  description: Alcoholic drink generally.
+  triggers:
+    # not "the drink": it caught "the drinks" (beverages)
+    np: [booze, alcohol, liquor, "strong drink", "the demon drink", "rotgut", "hooch"]
+
+# --- harvested from an agent's Aussie Gettysburg (aussiefy harvest), curated ------
+ARRIVE:
+  description: Arrive; turn up (of a person).
+  triggers:
+    # a person arriving: not things that turn up or show up somewhere (keys turned up in a drawer, minerals turn up
+    # in a survey, changes show up correctly, a dish turns up as the bread), nor the transitive "turn up the heat".
+    # (^person would be the real fix, but it doesn't reach a vp's subject.)
+    vp: ["arrive", "turn up !=the|a|an|it|that|this|your|his|her|their|my|our|its|volume|heat|in|on|as|correctly|well|again|everywhere|anywhere|somewhere|nowhere|missing|dead|empty|nothing|among|inside|under",
+         "show up !=the|a|an|it|that|him|her|them|me|us|you|in|on|as|correctly|well|again|everywhere|anywhere|somewhere|nowhere|clearly|better|among|inside|under"]
+FRONT_UP:
+  description: >-
+    Present yourself to face something (front up to the boss, front up to court) (lookup only). Not plain arriving:
+    families arriving at a picnic or in a new country just turn up.
+  triggers:
+    vp: ["present yourself in person to face the music"]
+GIFT_TALENT:
+  description: Guard (no entries) - a gift for something (a talent) and the gift of the gab aren't a present.
+  triggers:
+    # with its subject too: a noun-phrase match right after a pronoun is refused as a verb ("she has a gift for")
+    np: ["{subj} {have} a gift for", "has a gift for", "have a gift for", "had a gift for", "having a gift for",
+         "a natural gift for",
+         "a real gift for", "a rare gift for", "a special gift for", "a great gift for", "the gift of the gab"]
+BRAND_NEW:
+  description: Completely new.
+  not_in: [technical]   # a term of art in docs
+  triggers:
+    adj: ["brand new@4", "brand-new@4", "shiny new@4",
+          "new !york|zealand|south|year|years|england|guinea|delhi|orleans|jersey|mexico|hampshire|testament|wave|age|moon|world@2"]
+EQUALITY:
+  description: Everyone is equal.
+  triggers:
+    clause: ["all men are created equal", "all people are created equal", "all men are equal", "everyone is equal",
+             "we are all equal", "all people are equal", "everybody is equal"]
+IN_THE_MIDDLE:
+  description: Right in the middle of something.
+  triggers:
+    adv: ["right in the middle of", "in the middle of", "in the midst of", "in the thick of", "engaged in@3"]
+ALIVE:
+  description: Alive.
+  neutral_person: true
+  person: true
+  triggers:
+    predicate_adj: ["alive", "still alive", "still living"]
+    np: ["the living !room|rooms|area|areas|space|quarters|costs|wage|standard|thing|things|creature|creatures|proof|legend|memory"]
+DEAD_PEOPLE:
+  description: The dead; the fallen.
+  neutral_person: true
+  triggers:
+    np: ["honored dead", "honoured dead", "the fallen", "the dead", "the departed"]
+DOWN_IN_THE_DUMPS:
+  description: Guard (no entries) - "down in the dumps" is low spirits, not the tip.
+  triggers:
+    np: ["in the dumps"]
+WAKE_THE_DEAD:
+  description: Guard (no entries) - "loud enough to wake the dead" is about noise, not the dead.
+  triggers:
+    vp: ["wake the dead", "raise the dead"]
+CARE_ABOUT:
+  description: Care at all about something, said in the negative (couldn't care less about it).
+  triggers:
+    # every entry is said in the negative ("didn't give a stuff about"), so only triggers that are themselves
+    # negative-polarity: not "care about" ("we care about your privacy"), "pay attention to" (an instruction to
+    # the reader) or "take notice of". "couldn't care less about" becomes "couldn't give a stuff about".
+    vp: ["care less about", "give a damn about", "give a hoot about"]
+TALK_ON:
+  description: Talk at length.
+  triggers:
+    vp: ["ramble", "go on and on", "talk at length", "babble", "prattle", "drone on", "talk {poss} ear off", "natter on"]
+TACKLE:
+  description: Start on something with energy.
+  triggers:
+    vp: ["get to work on", "tackle", "start on", "dig into", "get going on", "set about"]
+SINCERELY:
+  description: Sincerely, solemnly.
+  triggers:
+    adv: ["solemnly", "sincerely", "in all sincerity", "with all {poss} heart", "honestly and truly"]
+EVERYTHING:
+  description: The whole lot.
+  triggers:
+    # not "the whole lot of you" (all of you people)
+    # nor a range: "everything from country rock to jazz" (dinkum-check round)
+    np: ["everything !=from", "the whole thing", "the whole lot !=of", "the entire thing", "all of it", "the whole boatload",
+         "the whole shooting match"]
+GOD_WILLING:
+  description: Under God; with God's blessing.
+  triggers:
+    adv: ["under God", "God willing", "by the grace of God", "so help me God", "by God"]
+
+# --- harvested from a refined LLM Gettysburg (tests/corpus/targets), curated ------
+IN_THE_END:
+  description: A discourse marker for "ultimately".
+  triggers:
+    adv: ["in a larger sense", "ultimately", "in the end", "when all is said and done", "all things considered",
+          "at the end of the day", "in the final analysis"]
+NO_MATTER_WHAT:
+  description: Whatever happens.
+  triggers:
+    # not "no matter what you do" (a clause follows): come hell or high water stands alone
+    adv: ["no matter what !=you|he|she|they|we|i|it|the|a|an|happens|happened|people|anyone|anybody|your|his|her|their|our|my|its|this|that|kind|sort|type",
+          "whatever happens", "at all costs", "regardless of the cost", "come what may"]
+FINISH_JOB:
+  description: Finish what was started.
+  triggers:
+    vp: ["finish the job", "complete the job", "finish the task", "complete the task", "finish the work",
+         "complete the work", "carry on the work"]
+SECOND_CHANCE:
+  description: A fresh chance at something.
+  triggers:
+    adv: ["a new birth of", "a second chance at", "another chance at", "a fresh start at", "a new lease of"]
+IN_VAIN:
+  description: For no result.
+  triggers:
+    adv: ["in vain", "for nothing", "to no avail", "for no reason"]
+LIVE_ON:
+  description: Live on; survive.
+  triggers:
+    # not bare "live": "where do you live?", "playing live" (the "not" can't see past the question mark)
+    vp: ["survive", "go on living", "stay alive"]
+PENIS:
+  description: The penis (colloquial).
+  triggers:
+    np: ["penis"]   # not "willy": "the willies" are the creeps
+SOMEONE:
+  description: Some unknown person (usually a culprit).
+  neutral_person: true
+  triggers:
+    np: ["someone", "somebody", "some person"]
+SCORCHING:
+  description: Far too hot.
+  triggers:
+    predicate_adj: ["too hot@4", "boiling hot@4", "scalding@4", "scorching@4", "boiling@4"]
+FREEZING:
+  description: Far too cold.
+  triggers:
+    predicate_adj: ["too cold@4", "freezing@4", "ice cold@4", "freezing cold@5"]
+JUST_RIGHT:
+  description: Exactly right.
+  triggers:
+    predicate_adj: ["just right", "perfect", "exactly right", "spot on"]
+GREAT_EXCLAIM:
+  description: An exclamation of delight.
+  triggers:
+    interjection: ["great", "excellent", "brilliant", "wonderful", "fantastic", "perfect", "lovely"]
+TRY_OUT:
+  description: Have a go at something.
+  triggers:
+    # not "have a go at": it is Australian already, and it is as often criticising ("having a go at popular
+    # amusements") as trying
+    vp: ["try {np}", "taste !than|of|for|like|and|is|was|buds|test|tests {np}", "attempt {np}", "give {np} a try"]
+GOBBLE:
+  description: Eat greedily and fast (no object implied).
+  triggers:
+    vp: ["wolf it down@4", "gobble it up@4", "polish it off@4", "eat greedily@4", "eat up@4", "gobble up@4",
+         "devour@4"]
+BREAK_APART:
+  description: Fall to pieces; collapse.
+  triggers:
+    vp: ["break into pieces", "break into bits", "fall apart", "fall to pieces", "collapse", "give way"]
+SMASH:
+  description: Break something to pieces.
+  triggers:
+    vp: ["break {obj} into pieces", "break {obj} into bits", "smash {obj}", "wreck {obj}"]
+FALL_OVER:
+  description: Fall over (a person, a tumble).
+  # in docs a system "falls over" (crashes) and you "trip over" a bug (come across it)
+  not_in: [technical]
+  triggers:
+    # intransitive only: "tripped over the cable" and "fell down the stairs" would lose their object ("came a
+    # cropper the cable")
+    vp: ["fall on the floor", "fall onto the floor",
+         "fall over !=the|a|an|his|her|my|your|their|our|its|it|him|them|me|us|this|that|these|those|each|one|something|someone|nothing|themselves|himself|herself|myself|yourself|backwards|board",
+         "fall down !=the|a|an|his|her|my|your|their|our|its|this|that|these|those|stairs|steps",
+         "trip over !=the|a|an|his|her|my|your|their|our|its|it|him|them|me|us|this|that|these|those|each|one|something|someone|nothing|themselves|himself|herself|myself|yourself|bugs|problems|issues",
+         "fall flat"]
+SCARED:
+  description: Frightened.
+  person: true
+  triggers:
+    predicate_adj: ["terrified@5", "scared", "frightened", "afraid !=so|not|that|i|we|you|he|she|they|it|there|this|your|my|his|her|our|their|its|the|a|an|these|those|some|no|all|most|many|any|one|nobody|nothing|everyone|everything|someone|something|people|mr|mrs|ms|dr", "scared to death@5", "petrified@5", "terrified out of {poss} wits@5", "scared shitless@5", "scared out of {poss} wits@5"]
+BEEN_AT:
+  description: Has been interfering with something (eating, using).
+  triggers:
+    adv: ["been eating", "been drinking"]
+BEEN_SLEEPING_IN:
+  description: Has been sleeping in.
+  triggers:
+    adv: ["been sleeping in"]
+ANGRILY:
+  description: In a bad temper.
+  triggers:
+    adv: ["angrily", "crossly", "furiously@4", "grumpily"]
+BOY:
+  description: A boy or young man.
+  triggers:
+    np: ["boy", "lad", "young man"]
+BOYS_OTHER_SENSE:
+  description: >-
+    Guard (no entries) - "the boys" and "one of the boys" are a man's friends, a team or a crew of any age, not
+    youths; "boys and girls" is children; "old boy", "baby boy", "oh boy" aren't a young man either.
+  triggers:
+    np: ["the boys", "one of the boys", "all the boys", "of the boys", "boys and girls", "girls and boys",
+         "old boy", "old boys", "baby boy", "baby boys", "boys will be boys", "oh boy", "boy oh boy",
+         "good old boy", "good ol' boy", "the boys in blue", "the old boys"]
+MONEY:
+  description: Money.
+  triggers:
+    np: ["money", "cash"]
+MONEY_COMPOUND:
+  description: >-
+    Guard (no entries) - money and cash inside a name for a kind of it (pocket money, prize money, petty cash,
+    a money order, cash flow): the slang can't go inside the compound.
+  triggers:
+    np: ["pocket money", "prize money", "seed money", "hush money", "protection money", "danger money",
+         "spending money", "lunch money", "pin money", "blood money", "smart money", "money order",
+         "money orders", "money market", "money markets", "money laundering", "petty cash", "cash flow",
+         "cash flows", "cash register", "cash registers", "cash cow", "cash crop", "cash crops", "cash machine",
+         "cash advance", "cash prize", "cash prizes"]
+APARTMENT:
+  description: A flat in a building.
+  triggers:
+    np: ["apartment", "condo", "condominium"]
+SUBURB:
+  description: A suburb.
+  triggers:
+    np: ["suburb"]
+ASYLUM:
+  description: A psychiatric hospital (colloquial, insensitive).
+  triggers:
+    np: ["madhouse", "asylum", "insane asylum", "mental hospital"]
+CITY:
+  description: The city, as seen from the country.
+  # a report's or a notice's "the city" names a real place (the city's cultural development), with no bush
+  # viewpoint
+  not_in: [news, official, technical, instructions]
+  triggers:
+    np: ["the city !=council|councils|hall|limits|centre|center|of|government|officials|manager|budget", "downtown",
+         "the metropolis"]
+PRISON:
+  description: A jail.
+  triggers:
+    np: ["prison", "jail", "jailhouse", "gaol", "penitentiary"]
+LONELY:
+  description: Lonely; all alone.
+  person: true
+  triggers:
+    predicate_adj: ["lonely", "all alone", "alone", "isolated", "on {poss} own", "by {poss}self"]
+SCREAM:
+  description: Scream, shriek.
+  triggers:
+    vp: ["scream", "shriek", "yell their heads off"]
+CRY:
+  description: Cry, weep.
+  triggers:
+    vp: ["weep", "sob", "bawl", "burst into tears"]   # not "cry": usually a speech verb in stories
+FRIGHTEN:
+  description: Frighten.
+  triggers:
+    vp: ["frighten", "scare", "terrify"]
+WORK_HARD:
+  description: Work extremely hard.
+  triggers:
+    vp: ["break {poss} backs", "break {poss} back", "work {poss} fingers to the bone", "slave away", "toil"]
+SAY_GOODBYE:
+  description: Say goodbye.
+  triggers:
+    vp: ["bid farewell", "say goodbye", "say farewell", "bid goodbye"]
+LOUNGE_ROOM:
+  description: The living room.
+  triggers:
+    np: ["living room", "sitting room", "family room", "den"]
+SIT_DOWN:
+  description: Sit down heavily or casually.
+  triggers:
+    vp: ["sit down", "flop down", "slump down", "take a seat"]
+FOOD:
+  description: Food.
+  # a doc's or a policy's food is a term (food safety rules, food products), not tucker
+  not_in: [technical, official]
+  triggers:
+    np: ["food !coloring|colouring|safety|poisoning|processor|processors|chain|bank|banks|court|truck|stamps|service|industry|label|labels|allergy|allergies|group|groups|grade|science|handling|supply|waste|storage|packaging|thermometer|additives|dye|dyes|production|prices|security|preparation|contact|temperature|temperatures|item|items|product|products|container|containers|type|types|borne|and",
+         "provisions"]
+FOODS_PLURAL:
+  description: >-
+    Guard (no entries) - "foods" is kinds of food, counted ("thick foods are cooked", "processed foods"); the swap
+    is a mass noun, which breaks the agreement and the sense ("thick ... are cooked").
+  triggers:
+    np: ["thick foods", "thin foods", "these foods", "those foods", "some foods", "certain foods", "many foods",
+         "most foods", "all foods", "other foods", "such foods", "frozen foods", "processed foods", "raw foods",
+         "cooked foods", "fried foods", "solid foods", "perishable foods", "fatty foods", "fresh foods",
+         "cold foods", "hot foods", "healthy foods", "whole foods", "junk foods", "dense foods", "large foods",
+         "packaged foods", "canned foods", "dried foods", "baby foods", "starchy foods", "sugary foods",
+         "salty foods", "acidic foods", "leftover foods", "different foods", "favourite foods", "favorite foods",
+         "of foods", "the foods", "foods such as", "foods like", "foods that", "foods which", "foods are",
+         "foods were"]
+NOSY_PERSON:
+  description: A nosy person.
+  triggers:
+    np: ["nosy person", "busybody", "nosy parker", "snoop"]
+CROWDED:
+  description: Completely full; crowded.
+  triggers:
+    predicate_adj: ["packed !while|in|into|with|up|away|separately|tightly|for|on|by|together|and", "crowded", "jam-packed", "full to bursting", "overcrowded", "completely full"]
+FLEE:
+  description: Run off, especially to avoid paying or getting caught.
+  triggers:
+    vp: ["run off without paying", "skip out", "abscond", "make a run for it", "flee"]
+RUN:
+  description: Run, hurry on foot.
+  triggers:
+    vp: ["run like hell@4", "run flat out@4", "sprint", "dash off", "run for {poss} life@5", "race off"]
+NAP:
+  description: A short daytime sleep.
+  triggers:
+    vp: ["doze", "dozing", "have a doze"]
+    np: ["a nap", "a short sleep", "a snooze", "forty winks", "a siesta"]
+WALK_WEARILY:
+  description: Walk wearily or aimlessly.
+  triggers:
+    vp: ["trudge", "plod", "wander along", "walk wearily", "trek"]
+WALK:
+  description: Go on foot.
+  triggers:
+    vp: ["walk there", "go on foot", "walk home"]
+DRESS_WARMLY:
+  description: Dress warmly.
+  triggers:
+    vp: ["dress warmly", "wrap up warm", "bundle up !=the|a|an|it|them|this|that|these|those|his|her|their|my|our|your|its",
+         "put on warm clothes"]
+HEAD:
+  description: The head or skull (body part).
+  triggers:
+    np: ["skull", "cranium"]
+HEART_ORGAN:
+  description: The heart (the organ).
+  triggers:
+    np: ["heart !attack|attacks|disease|failure|surgery|rate|of|and|felt|sank|broke|out|set"]
+IBIS:
+  description: The Australian white ibis.
+  triggers:
+    np: ["ibis", "white ibis"]
+BIN:
+  description: A rubbish bin.
+  triggers:
+    np: ["trash can", "garbage can", "ashcan", "rubbish bin", "dustbin", "garbage bin"]
+PENNY:
+  description: The smallest amount of money.
+  triggers:
+    np: ["a cent", "a penny", "a dime", "a red cent", "a single cent"]
+OLD_MAN:
+  description: An old man.
+  triggers:
+    np: ["old fellow", "old geezer", "old timer", "elderly man", "old-timer"]
+DAZED:
+  description: Dazed, bewildered.
+  person: true
+  triggers:
+    predicate_adj: ["dazed", "stunned", "bewildered", "dumbfounded", "baffled", "confused"]
+DEAF:
+  description: Deaf, or not listening.
+  person: true
+  triggers:
+    predicate_adj: ["deaf", "stone deaf", "completely deaf", "hard of hearing"]
+BLIND:
+  description: Blind; unable to see.
+  triggers:
+    predicate_adj: ["blind", "completely blind", "stone blind"]
+AWFUL:
+  description: Terrible, very bad.
+  triggers:
+    predicate_adj: ["terrible", "awful", "dreadful", "appalling", "horrendous"]
+FEEL_SORRY:
+  description: >-
+    Guard (no entries) - feeling terrible about something is remorse ("I felt terrible about stealing the
+    blanket"), not feeling ill or a thing being bad.
+  triggers:
+    vp: ["feel terrible about", "feel awful about", "feel bad about", "feel terrible for", "feel awful for",
+         "feel terrible that", "feel awful that", "feel dreadful about"]
+BIG_STRONG:
+  description: Very big and solidly built.
+  triggers:
+    predicate_adj: ["solidly built", "strongly built", "built like a tank", "massive and solid"]
+DISGUSTING:
+  description: Disgusting.
+  triggers:
+    predicate_adj: ["disgusting", "revolting", "sickening", "gross", "repulsive"]
+HIGH:
+  description: High on drugs, or out of it.
+  person: true
+  triggers:
+    predicate_adj: ["high", "stoned", "high on drugs", "off {poss} head", "out of it"]
+GONE_FOR_GOOD:
+  description: Lost or ruined for good.
+  triggers:
+    predicate_adj: ["gone for good", "lost forever", "done for !=the|today|tonight|now|this|good|me|you|us|him|her|them", "lost for good"]
+    vp: ["go down the drain", "go to waste", "go down the toilet", "be lost forever"]
+DONE_FOR:
+  description: Done for, beyond saving (of a person, a team or a plan); in deep trouble.
+  triggers:
+    predicate_adj: ["done for !=the|today|tonight|now|this|good|me|you|us|him|her|them", "doomed", "toast ^person", "in deep trouble@4"]
+SCRAP:
+  description: The tiniest amount.
+  triggers:
+    np: ["a scrap", "a trace", "a crumb", "a shred", "a morsel", "a single bit"]
+DARK:
+  description: Very dark.
+  triggers:
+    predicate_adj: ["pitch black", "pitch dark", "very dark", "dark as night", "jet black"]
+GO_MAD:
+  description: Go mad.
+  triggers:
+    # not "go mad with the salt" or "go nuts for it" (overdo, love)
+    vp: ["go mad !=with|on|for|over", "go crazy !=with|on|for|over", "lose {poss} mind", "go insane",
+         "go nuts !=with|on|for|over"]
+RETIRED_STATE:
+  description: >-
+    Guard (no entries) - being retired is a state ("she is retired now") or a passive ("the ship was retired"),
+    not the act ("she is pulled the pin" isn't English); and "retiring" is also shy.
+  triggers:
+    # a pronoun subject's state ("they are retired"), and a passive with any subject ("the ship was retired in 1990")
+    clause: ["{subj} {be} retired", "{subj} {be} now retired", "{subj} {be} long retired", "{subj} {be} semi-retired"]
+    # (a vp's "be" inflects to is/was/been/being only, so "are" and "were" are their own)
+    vp: ["be retired", "be now retired", "be long retired", "be semi-retired", "are retired", "were retired"]
+    # and the adjective "retiring", shy
+    np: ["shy and retiring", "quiet and retiring", "modest and retiring", "a retiring nature", "a retiring type"]
+RETIRE:
+  # dinkum-check round: carries pull the pin (also QUIT), so by hand
+  description: Retire from work or from playing, for good.
+  triggers:
+    # retiring for good, without an object: not "retire to bed" or "retired to the lounge" (withdraw), "retire
+    # from" (pull the pin on is calling a thing off), "retire a debt" or "a jersey", a cricketer "retired hurt",
+    # "retire on a pension" (pull the pin on)
+    # nor a glossary's or a list's "retire; withdraw", "Retiring; reticent" (shy), cut off by a semicolon
+    vp: ["retire !=to|from|on|the|a|an|his|her|its|their|our|my|your|it|them|this|that|hurt|into|;"]
+QUIT:
+  description: Quit, give up.
+  triggers:
+    vp: ["quit !of", "give up", "call it quits", "resign", "throw in the towel"]   # "be quit of them": be rid
+FED_UP:
+  description: Fed up; had enough.
+  triggers:
+    clause: ["{subj} {be} fed up", "{subj} {be} sick of it", "{subj} {have} had enough", "{subj} {be} sick and tired of it"]
+GLAD_ALIVE:
+  description: Very glad to be alive.
+  triggers:
+    clause: ["{subj} {be} glad to be alive", "{subj} {be} happy to be alive", "{subj} {be} thrilled to be alive"]
+TERRIFY:
+  description: Terrify someone.
+  triggers:
+    vp: ["terrify {obj}", "frighten {obj} badly", "scare {obj} badly", "scare {obj} to death"]
+CONSTRUCT:
+  description: Build or put something together, often quickly or roughly.
+  not_in: [technical]   # a term of art in docs
+  triggers:
+    # not a bare "build": knocking together is building quickly and roughly, and most building isn't (a house, a
+    # relationship, an auction program, a site; a threat builds; built on infrastructure). The fourth pass's agents
+    # declined it in four texts after the third pass's long exclusion list.
+    vp: ["put together", "throw together", "cobble together", "slap together", "rig up"]
+EAGER_FOR:
+  description: >-
+    Dying to do something, dying for something: eager, not dying. No entries on purpose: the longer match keeps
+    DIE's "cark it" off "dying to see it" (a "!to" exclusion would also catch "To die, to sleep").
+  triggers:
+    vp: ["die to", "die for a"]
+A_PEOPLE:
+  description: >-
+    A people, a nation ("one people", "a free people"). No entries on purpose: the longer match keeps "people"
+    here from PEOPLE's "battlers" and "punters", so the original stands.
+  triggers:
+    np: ["one people", "a people", "a free people", "a whole people"]
+PLACE:
+  description: A place or premises (colloquial).
+  # dismissive of a real place in a report, a notice or a doc ("the place" for a city in a news story)
+  not_in: [news, official, technical, instructions]
+  triggers:
+    np: ["the place", "the premises", "the establishment !of"]   # not "the establishment of a tyranny"
+CONGRESS:
+  description: The national legislature (localised).
+  # a real US Congress in a notice, a report or a policy is a fact about the US, not a place to localise
+  not_in: [news, official, technical, instructions]
+  triggers:
+    # not the body acting ("Congress has not acted", "Congress passed"): a guard can't end on the verb, so the
+    # verbs are held here
+    np: ["Congress !=has|have|had|passed|acted|voted|approved|rejected|will|would|must|should|can|could|is|was|did|does|enacted|created|established|authorized|authorised|declared",
+         "the Capitol", "the legislature"]
+CONGRESS_ACTING:
+  description: >-
+    Guard (no entries) - the US Congress as the body that acts (it passed a bill, has not acted, its members) and
+    institutions named after it (the Library of Congress): a fact about the US, which Parliament House misstates.
+  triggers:
+    vp: ["pass Congress"]   # "it passed Congress": a verb phrase, so the pronoun before it doesn't refuse it
+    # "of Congress" holds members of, an act of and the Library of Congress
+    np: ["U.S. Congress", "US Congress", "United States Congress", "of Congress", "through Congress", "by Congress",
+         "in Congress", "to Congress"]
+PAVEMENT:
+  description: A footpath.
+  triggers:
+    np: ["pavement", "sidewalk"]
+RADIO:
+  description: A radio set.
+  triggers:
+    np: ["radio"]
+SMASHED_UP:
+  description: Smashed to pieces.
+  triggers:
+    predicate_adj: ["smashed to pieces", "in pieces", "shattered", "smashed to bits", "broken to pieces"]
+
+# --- basics a yarn-mode agent looked up and didn't find -------------------------
+LUNATIC:
+  description: A crazy person (as a noun).
+  triggers:
+    np: ["lunatic", "madman", "maniac", "nutcase", "crazy person", "psycho@4", "basket case"]
+ASTONISHED:
+  description: Utterly amazed, lost for words.
+  person: true
+  triggers:
+    predicate_adj: ["astonished", "amazed", "flabbergasted@4", "speechless", "dumbfounded@4", "astounded@4",
+                    "lost for words"]
+BROKE:
+  description: Out of money.
+  person: true
+  triggers:
+    predicate_adj: ["broke", "penniless@4", "out of money", "short of money@2", "strapped for cash@2", "hard up", "impoverished@4", "destitute@5", "without a penny", "without a cent", "flat broke", "dirt poor@4", "without a bean@4"]
+INFORM_ON:
+  description: Report someone's wrongdoing to an authority.
+  triggers:
+    vp: ["inform on {obj}", "tell on {obj}", "snitch on {obj}", "rat on {obj}", "report {obj} to the police"]
+DUMP:
+  description: A rubbish dump.
+  triggers:
+    np: ["the dump", "garbage dump", "rubbish dump", "landfill", "trash heap"]
+STREAM:
+  description: A small river.
+  triggers:
+    np: ["stream !of|on|live|online|shortwave|trough|flow|energy|pattern", "brook"]   # not a stream of data
+STREAM_OTHER_SENSE:
+  description: >-
+    Guard (no entries) - the jet stream and a forecast's northern and southern stream are air, and an income,
+    revenue or data stream isn't water: none is a watercourse.
+  triggers:
+    np: ["jet stream", "the jet stream", "northern stream", "southern stream", "polar stream", "subtropical stream",
+         "Gulf Stream", "income stream", "income streams", "revenue stream", "revenue streams", "data stream",
+         "data streams", "audio stream", "video stream", "event stream", "work stream", "workstream"]
+HUGE:
+  description: Enormous.
+  triggers:
+    adj: ["huge", "enormous@4", "monstrous@4", "gigantic@4", "massive", "colossal@4", "vast", "immense@4"]
+    predicate_adj: ["huge", "enormous@4", "gigantic@4", "massive", "colossal@4", "immense@4"]
+HEARTLESS:
+  description: Without love or pity; cold-hearted.
+  person: true
+  triggers:
+    adj: ["heartless", "loveless", "cold-hearted", "pitiless@4", "merciless@4", "ruthless"]
+    predicate_adj: ["heartless", "loveless", "cold-hearted", "pitiless@4", "merciless@4", "ruthless"]
+# --- more basics a yarn-mode agent looked up and didn't find --------------------
+ADORE:
+  description: Adore someone and think they can do no wrong.
+  triggers:
+    vp: ["dote on {obj}@4", "adore {obj}@4", "idolise {obj}@4", "idolize {obj}@4", "worship {obj}@4",
+         "think the world of {obj}@4"]
+POKIES:
+  description: Poker machines; slot machines.
+  triggers:
+    np: ["slot machine", "poker machine", "gaming machine", "fruit machine"]
+DORK:
+  description: An unfashionable, uncool person; a nerd.
+  triggers:
+    np: ["dork", "nerd@2", "geek@2", "uncool person"]   # not "square": a town square, a square meal
+UNCOOL:
+  description: Unfashionable, uncool.
+  person: true
+  triggers:
+    predicate_adj: ["uncool", "unfashionable", "dorky", "nerdy@2", "frumpy"]
+WELFARE:
+  description: Unemployment benefits.
+  triggers:
+    np: ["unemployment benefits", "unemployment benefit", "welfare", "jobseeker payments"]
+UNEMPLOYED:
+  description: Out of work, on benefits.
+  person: true
+  triggers:
+    predicate_adj: ["unemployed", "out of work", "jobless", "on welfare"]
+DODGY:
+  description: Of dubious honesty or quality.
+  person: true
+  triggers:
+    predicate_adj: ["dishonest", "shady", "untrustworthy", "crooked@4", "fishy", "suspect"]
+    adj: ["shady", "dishonest", "untrustworthy", "crooked@4", "fishy", "cheap and nasty@4"]
+SELL:
+  description: Sell, especially pushily or cheaply.
+  triggers:
+    vp: ["sell off {obj}", "peddle {obj}", "hawk {obj}", "flog off {obj}"]
+STEAL:
+  description: Steal.
+  triggers:
+    vp: ["steal {obj}", "pinch {obj}", "swipe {obj}", "pilfer {obj}"]
+WANKER:
+  description: A pretentious or contemptible man.
+  triggers:
+    np: ["jerk", "tosser", "pretentious idiot", "show-off@2", "poser@2"]
+HAVE_SEX:
+  description: Have sex.
+  triggers:
+    vp: ["have sex", "make love", "sleep together", "sleep with {obj}"]
+SUICIDE:
+  description: Kill oneself.
+  triggers:
+    vp: ["kill {poss}self", "commit suicide", "take {poss} own life"]
+BIG_BUSINESS:
+  description: Big business and the wealthy.
+  triggers:
+    np: ["big business", "the corporations", "corporate america", "the corporate world", "wall street",
+         "the wealthy elite", "the top end of town"]
+ANTENNA:
+  description: A radio or TV antenna.
+  triggers:
+    np: ["antenna", "antennae", "antennas"]
+DISMISS:
+  description: Get rid of someone or something; end a relationship.
+  triggers:
+    vp: ["dump {obj}", "get rid of {obj}", "break up with {obj}", "abandon {obj}", "reject {obj}", "ditch {obj}"]
+HANDS:
+  description: Hands (the body part).
+  # jokey body slang: not in instructions (a burn on someone's hands), docs or official prose
+  not_in: [technical, instructions, official]
+  triggers:
+    # not the verb, with its object after it ("it hands you back a ciphertext", "the CCA hands tokens out")
+    np: ["hands !=me|you|him|her|them|us|it|the|a|an|his|its|their|our|my|your|this|that|these|those|over|out|back|down|each|every|tokens",
+         "fists@4"]
+HANDS_OTHER_SENSE:
+  description: >-
+    Guard (no entries) - hands as workers (farm hands, all hands), in idioms (in good hands, change hands, time
+    on your hands) or a contest won hands down aren't the body part.
+  triggers:
+    np: ["farm hands", "farmhands", "deck hands", "hired hands", "ranch hands", "factory hands", "stage hands",
+         "all hands", "old hands", "in good hands", "in safe hands", "in capable hands", "change hands",
+         "changed hands", "changes hands", "changing hands", "time on {poss} hands", "blood on {poss} hands",
+         "{poss} hands are tied", "{poss} hands were tied", "hands down", "with {poss} bare hands",
+         "on {poss} hands and knees", "{poss} hands full", "hands full"]
+LAUGH_HARD:
+  description: Laugh uncontrollably.
+  triggers:
+    vp: ["laugh {poss} head off", "burst out laughing", "laugh uncontrollably", "be in stitches", "crack up",
+         "roar with laughter"]
+SAD:
+  description: Sad, low, miserable.
+  person: true
+  triggers:
+    predicate_adj: ["sad", "unhappy", "miserable@4", "depressed@4", "glum", "gloomy", "feeling down", "feeling low", "despondent@4", "dejected", "downcast@3", "down in the mouth"]
+RICH:
+  description: Wealthy.
+  person: true
+  triggers:
+    predicate_adj: ["rich", "wealthy", "loaded", "well-off", "well off", "rolling in money@4", "made of money@4"]
+BOSS:
+  description: The person in charge.
+  triggers:
+    np: ["the boss", "the person in charge", "the manager", "the head honcho"]
+DIRTY:
+  description: Dirty, grubby.
+  person: true
+  triggers:
+    predicate_adj: ["dirty", "filthy@4", "grubby", "grimy", "squalid@4"]
+    adj: ["dirty", "filthy@4", "grubby", "grimy", "squalid@4"]
+CONTENT:
+  description: Comfortable, settled and content; all's well.
+  person: true
+  triggers:
+    predicate_adj: ["content", "comfortable", "settled", "snug", "perfectly happy", "happy as can be@4",
+                    "at ease", "contented"]
+NOT_BAD:
+  description: It's alright, all things considered; better than nothing.
+  triggers:
+    interjection: ["not bad", "not too bad", "could be worse", "it could be worse", "better than nothing",
+                   "it'll do", "that'll do", "all things considered"]
+    predicate_adj: ["better than nothing", "not too bad", "not bad at all", "not so bad"]
+
+LEGEND:
+  description: Someone outstanding, admired by all who know them.
+  person: true
+  triggers:
+    np: [a great guy@4, a wonderful person, an amazing person, an outstanding person, a fantastic person]
+FUNNY_PERSON:
+  description: A very funny person.
+  person: true
+  triggers:
+    np: [a funny guy, a funny man, a funny person, a joker, a comedian, a real joker]
+WILD_ONE:
+  description: Someone wild and reckless, up for anything.
+  person: true
+  triggers:
+    np: [a wild one, a party animal, a wild man, a wild woman, a daredevil]
+SHADY_PERSON:
+  description: Someone who seems untrustworthy or up to no good.
+  person: true
+  triggers:
+    np: [a shady character, a suspicious person, a sneaky person, a sneak, a suspicious character]
+CLEVER_PERSON:
+  description: A clever or crafty person.
+  person: true
+  triggers:
+    np: [a clever one, a clever fellow, a clever person, a smart cookie, a crafty one, a sly fox]
+BACKSIDE:
+  description: The buttocks.
+  triggers:
+    np: [backside, rear end, buttocks@4]
+NOBODY:
+  description: No one at all.
+  neutral_person: true
+  triggers:
+    np: [nobody, no one, not a soul@4]
+
+# --- gap-fill round 2026-10-11 (research/gap-fill-2026-10-11) ----------------------------------
+WIFE:
+  description: A man's wife or female partner.
+  triggers:
+    np: [wife, the wife, my wife, his wife]
+PARENTS:
+  description: One's parents.
+  triggers:
+    # not "the folks at the agency" (people)
+    np: [parents, my parents, the folks !=at|from|who|in|of|over|behind|here|there|on|that|around|down|up, his parents,
+         her parents, mum and dad, my folks]
+UNLUCKY:
+  description: Out of luck; hard done by.
+  triggers:
+    predicate_adj: [unlucky, out of luck, hard done by, unfortunate]
+BORED:
+  description: Bored, with nothing to do.
+  triggers:
+    predicate_adj: [bored, bored stiff, bored to tears, 'bored out of {poss} mind']
+CIGARETTE:
+  description: A cigarette.
+  triggers:
+    np: [a cigarette, cigarette, cigarettes, a smoke, cig]
+ONE_CIGARETTE:
+  description: >-
+    One cigarette ("a cigarette", "a smoke"). The swap is said of one; its plural, in a list, reads as the pub game.
+  triggers:
+    np: [a cigarette, a smoke]
+FINE_DAY:
+  description: A beautiful sunny day.
+  triggers:
+    np: [a beautiful day, a lovely day, a fine day, a gorgeous day, a glorious day, a perfect day]
+PARTY:
+  description: A party or social gathering.
+  triggers:
+    np: [a party, the party, a function, a get-together]
+DANGEROUS:
+  description: Risky or dangerous.
+  triggers:
+    predicate_adj: [risky, dangerous, touch-and-go, unsafe, precarious]
+HOLIDAY_HOUSE:
+  description: A holiday house or beach house.
+  triggers:
+    np: [holiday house, beach house, holiday home]
+EARLY:
+  description: Very early in the morning.
+  triggers:
+    adv: [at dawn, at the crack of dawn, very early, first thing, at daybreak, at first light, very early in the
+        morning]
+ATTRACTIVE:
+  description: Good-looking, sexually attractive.
+  triggers:
+    predicate_adj: [attractive, good-looking, handsome, gorgeous]
+    np: [an attractive person, a good-looking bloke, a hottie, a hunk, a looker, a good-looking man, a good-looking
+        guy, a handsome man, a heartthrob]
+DINNER:
+  description: The evening meal (at home).
+  # tea is the meal at home: a policy's or a report's dinner is a client's or a formal one
+  not_in: [official, technical, news]
+  triggers:
+    np: ["dinner !=party|parties|jacket|jackets|dance|guests|guest|meeting|meetings|theatre|theater|service|in|at", supper,
+         the evening meal]
+DINNER_OUT:
+  description: >-
+    Guard (no entries) - a dinner out, a formal or business dinner, or the Southern US midday "dinner" (lunch or
+    dinner (supper)): not tea, the evening meal at home.
+  triggers:
+    np: ["out for dinner", "out to dinner", "a dinner", "business dinner", "client dinner", "state dinner",
+         "gala dinner", "formal dinner", "awards dinner", "charity dinner", "fundraising dinner", "rehearsal dinner",
+         "anniversary dinner", "lunch or dinner", "dinner or supper", "Christmas dinner", "Thanksgiving dinner",
+         "Sunday dinner"]
+ROUGH_PATCH:
+  description: A run of bad luck or hard times.
+  triggers:
+    np: [a rough patch, a run of bad luck, a bad run, a bad patch, a lean spell]
+LIAR:
+  description: A habitual liar or exaggerator.
+  triggers:
+    np: [a liar, a fibber, a teller of tall tales, liar, fibber, bluffer, a bluffer]
+MIXED_BREED_DOG:
+  description: A dog of mixed or unknown breed.
+  triggers:
+    np: [a mutt, a mongrel dog, a mixed breed, a crossbreed, a mixed-breed dog]
+LIE:
+  description: Tell lies.
+  triggers:
+    vp: [tell lies, tell a lie, fib, tell fibs, tell a fib]
+EXPENSIVE:
+  description: Costly, overpriced.
+  triggers:
+    predicate_adj: [expensive, costly, pricey, overpriced]
+HUSBAND:
+  description: A woman's husband or male partner.
+  triggers:
+    np: [husband, her husband, my husband]
+ANNOY:
+  description: To annoy or irritate someone.
+  triggers:
+    vp: ['annoy {obj}', 'irritate {obj}', 'get on {poss} nerves', 'drive {obj} up the wall', 'bug {obj}']
+    clause: ['{np} drives {obj} mad', '{np} gets on {poss} nerves', '{np} really annoys {obj}', '{np} irritates
+        {obj}', '{np} bugs {obj}']
+GOSSIP:
+  description: Gossip; talk about other people.
+  triggers:
+    np: [the latest gossip, the latest, rumours, scuttlebutt]
+    vp: [have a gossip, gossip]
+EMBARRASSING:
+  description: Embarrassing; causing embarrassment.
+  triggers:
+    predicate_adj: [embarrassing, so embarrassing]
+SUSPICIOUS:
+  description: Suspicious; not quite right.
+  triggers:
+    predicate_adj: [suspicious]
+ARROGANT:
+  description: Conceited, stuck-up, thinks too highly of themselves.
+  triggers:
+    predicate_adj: [arrogant, conceited, big-headed, stuck-up, vain, 'full of {poss}self', snobby, snooty]
+CLAIM:
+  description: Claim something first (dibs).
+  triggers:
+    vp: ['dibs on {np}', 'call dibs on {np}', 'claim {np} first']
+WINDY:
+  description: Very windy weather.
+  triggers:
+    predicate_adj: [windy, very windy, gusty, blowing a gale]
+BOMB_DIVE:
+  description: Jump into water in a tucked cannonball.
+  triggers:
+    vp: [do a cannonball, cannonball, dive-bomb, do a dive bomb]
+PUB_MEAL:
+  description: A meal at the pub.
+  triggers:
+    np: [a pub lunch, a pub meal, a pub dinner]
+RAVE:
+  description: A rave or outdoor dance party.
+  triggers:
+    np: [a rave, an outdoor rave, a dance party]
+FALSE_RUMOUR:
+  description: An untrue rumour.
+  triggers:
+    np: [a false rumour, an unfounded rumour, a baseless rumour, a false story]
+HOON:
+  description: A hooligan or reckless show-off driver.
+  triggers:
+    np: [hooligan, lout, a reckless driver, a boy racer, "yob"]   # bare, so "some hooligan" and "the louts" count
+RECESS:
+  description: The mid-morning school break.
+  triggers:
+    np: [recess, morning recess]
+EARN_WELL:
+  description: Earn good money.
+  triggers:
+    vp: [earn a lot, make good money, earn good money, make a lot of money]
+FOOL_AROUND:
+  description: Fool about; not be serious.
+  triggers:
+    vp: [fool around, mess about, mess around, kid around, horse around, play the fool]
+DAYDREAMY:
+  description: Vague or daydreaming, not paying attention.
+  triggers:
+    predicate_adj: [absent-minded, distracted, daydreaming, spacey, miles away]
+OGLE:
+  description: Ogle or leer at someone.
+  triggers:
+    vp: ['ogle {obj}', 'leer at {obj}', 'eye {obj} up']
+UNCOUTH:
+  description: Crude, rough, unpolished in manners or finish.
+  triggers:
+    predicate_adj: [uncouth, crude, coarse, ill-mannered, rough around the edges, badly behaved, unruly]
+SHOUT:
+  description: Pay for others; buy a round or treat.
+  triggers:
+    clause: ['{subj} {be} {poss} round', '{subj} {be} {poss} treat']
+    vp: [buy a round, 'treat {obj} to {np}', 'pay for {obj}']
+STIR:
+  description: Deliberately stir up trouble or controversy.
+  triggers:
+    vp: [stir up trouble, cause a fuss, rock the boat, make waves, 'provoke {obj}']
+CHECK_OUT:
+  description: Investigate, size up, figure out.
+  triggers:
+    vp: ['figure {obj} out', 'check {obj} out', 'size {obj} up', 'look into {np}']
+CLUMSY:
+  description: Clumsy, badly coordinated.
+  triggers:
+    predicate_adj: [clumsy, uncoordinated, bumbling, all thumbs]
+WHIRLWIND:
+  description: A dust devil or small whirlwind.
+  triggers:
+    np: [a dust devil, a whirlwind]
+ODD_PERSON:
+  description: An eccentric or odd person (gentle).
+  triggers:
+    np: [an eccentric, an odd person, a strange person, an oddball, a weirdo]
+OUT_OF_LINE:
+  description: Behaviour that is rude, unfair or not acceptable.
+  triggers:
+    predicate_adj: [out of line, uncalled for, not on, a bit rude, unfair, "a bit much", "a bit steep"]
+ROLL_UP:
+  description: A hand-rolled cigarette.
+  triggers:
+    np: [roll-up, a roll-up, hand-rolled cigarette, roll-your-own, rolled cigarette]
+SLOW:
+  description: Extremely slow.
+  triggers:
+    predicate_adj: [very slow, painfully slow, sluggish, slow as a snail, slow as molasses]
+NUISANCE:
+  description: An annoying person or thing.
+  triggers:
+    np: [a nuisance, a pest, a pain, a pain in the neck, a pain in the butt, a pain in the ass]
+THRASH:
+  description: Beat someone soundly, in a fight or on the scoreboard.
+  triggers:
+    vp: ['thrash {obj}', 'beat {obj} up', 'give {obj} a beating', 'trounce {obj}', 'beat {obj} soundly', 'wallop
+        {obj}', 'clobber {obj}']
+ARGUE:
+  description: Have an argument or quarrel.
+  triggers:
+    vp: [have an argument, have a row, have a quarrel, argue, quarrel, bicker, get into an argument]
+MOMENT:
+  description: A short moment (noun).
+  triggers:
+    np: [a moment, a sec]
+POOR:
+  description: Poor; doing it tough financially over a long stretch.
+  triggers:
+    predicate_adj: [impoverished@4, poverty-stricken, living in poverty, struggling financially, down and out]
+SPOUSE:
+  description: One's husband, wife or partner (gender-neutral).
+  triggers:
+    np: [my partner, my spouse, my better half]
+LOT_OF_MONEY:
+  description: A large sum of money.
+  triggers:
+    np: [a fortune, a lot of money, a small fortune, a pretty penny, a pile of cash, a pile of money]
+BOOZE_UP:
+  description: A party or session built around drinking.
+  triggers:
+    np: [a booze-up, a drinking session, a drinking party, a binge, a bender]
+COOL_CHANGE:
+  description: A sudden, gusty cool wind change after a hot day (NSW coast).
+  triggers:
+    np: [a sudden cool change, a cold front, a sudden southerly wind, a gusty southerly change]
+NERVOUS:
+  description: Nervous, on edge, jumpy.
+  triggers:
+    predicate_adj: [nervous, jittery, jumpy, edgy, on edge, restless, antsy, anxious]
+WORK_LATE:
+  description: Stay on at work after normal hours.
+  triggers:
+    vp: [work late, stay late at work, work overtime, stay back at work, work after hours]
+GRAPEVINE:
+  description: The informal word-of-mouth network for news and rumour.
+  triggers:
+    np: [the grapevine, word of mouth, the rumour mill, the gossip network]
+WELL_INFORMED:
+  description: Expert in or thoroughly informed about a subject.
+  triggers:
+    predicate_adj: ['an expert on {np}', 'well informed about {np}', 'knowledgeable about {np}', 'clued up on {np}']
+JUST_JOKING:
+  description: Fake, pretend, only joking.
+  triggers:
+    interjection: [just kidding, only joking, just joking]
+WAIT:
+  description: Asking someone to wait briefly.
+  triggers:
+    interjection: [wait a moment, just a second, hold on, wait a second, one moment, just a moment, hang on a second,
+      wait a minute, just a minute]
+PARTY_ON:
+  description: Keep the party or night going.
+  triggers:
+    vp: [keep partying, party on, carry on partying, keep the party going, go on to another venue]
+PRE_DRINKS:
+  description: Drinks at someone's place before going out.
+  triggers:
+    np: [predrinks, pre-gaming, drinks before going out]
+JINX:
+  description: Bring bad luck on someone or something.
+  triggers:
+    vp: ['jinx {obj}', 'put a jinx on {obj}', 'put a curse on {obj}', 'bring {obj} bad luck']
+EMBARRASSED_SHY:
+  description: Embarrassed or shy at being singled out (Aboriginal English sense).
+  triggers:
+    predicate_adj: [embarrassed, shy, ashamed, self-conscious, awkward]
+STIRRER:
+  description: Someone who deliberately causes trouble or winds people up.
+  triggers:
+    np: [a troublemaker, a mischief-maker, an agitator, a provocateur]
+SKOL:
+  description: Drink a whole drink in one go.
+  triggers:
+    vp: ['drink {obj} in one go', 'chug {obj}', 'down {obj} in one', 'gulp {obj} down', 'knock back {obj} in one']
+SHARP:
+  description: Quick-witted and hard to fool.
+  triggers:
+    clause: ['{obj} {be} sharp', '{obj} {be} shrewd', '{obj} {be} quick-witted', '{obj} {be} nobody''s fool', '{obj}
+        {be} on the ball']
+DONT_KNOW:
+  description: Saying you don't know or have no idea.
+  triggers:
+    # not a bare "no idea": "she had no idea that..." isn't "I dunno"
+    clause: [I don't know, I have no idea, who knows]
+FAIR_POINT:
+  description: Conceding that the other person has made a reasonable point.
+  triggers:
+    interjection: [fair point, good point, that's a fair point, that's a good point, point taken]
+WELL_DONE:
+  description: Praise or congratulation for something someone did.
+  triggers:
+    interjection: [well done, good for you, nice one, bravo, good job]
+DREAM_ON:
+  description: Dismissing an unrealistic price, demand or hope.
+  triggers:
+    interjection: [you must be joking, you've got to be kidding, in your dreams, dream on]
+DAMN_EXCLAIM:
+  description: A mild exclamation of annoyance at a setback.
+  triggers:
+    interjection: [damn, darn, blast, oh no, dammit, damn it]
+
+# --- classics round 2026-10-11 (research/classics-2026-10-11) ----------------------------------
+SQUATTER_GRAZIER:
+  description: A colonial pastoralist holding a large run of Crown land; a wealthy grazier of the squattocracy.
+  triggers:
+    np: [cattle baron, a cattle baron]
+SWAGMAN:
+  description: An itinerant worker or vagrant travelling on foot.
+  triggers:
+    np: [hobo, vagrant, drifter, itinerant worker, a hobo, a vagrant, a drifter, an itinerant worker]
+COOLIBAH:
+  description: The coolibah, a eucalypt of inland floodplains (lookup and explanation only).
+  triggers:
+    np: [a eucalyptus by the water, a eucalypt by the water, a gum tree by the waterhole]
+COLONIAL_MOUNTED_POLICE:
+  description: Colonial mounted police (lookup and explanation only).
+  triggers:
+    np: [the mounted police, the colonial police]
+WILDFIRE:
+  description: An uncontrolled fire in forest, scrub or grassland.
+  triggers:
+    np: [forest fire, brush fire, brushfire, a wildfire, the wildfire, a forest fire, a brush fire, a brushfire]
+DROVER:
+  description: A person who drives livestock overland over long distances.
+  triggers:
+    np: [cattle driver, trail driver, a cattle driver, a trail driver]
+    vp: [drive cattle to market, drive the cattle to market]
+SELECTION_BLOCK:
+  description: A small farm block taken up under colonial free-selection law.
+  triggers:
+    np: [homestead claim, a homestead claim]
+STOCKYARD:
+  description: A fenced pen for holding and working livestock.
+  triggers:
+    np: [a corral, the corral, a cattle pen, the cattle pen, a stock pen, the stock pen]
+FASHIONABLE:
+  description: In fashion; all the rage.
+  triggers:
+    predicate_adj: [all the rage, in vogue]
+CRITICISE:
+  description: Criticise or disparage someone or something.
+  triggers:
+    vp: ['criticise {obj}', 'criticize {obj}', 'bad-mouth {obj}', 'badmouth {obj}', 'slag {obj} off', 'slag off
+        {obj}', 'pan {obj}']
+SUPPORT_TEAM:
+  description: Support or cheer for a team or player.
+  triggers:
+    vp: ['root for {obj}', 'cheer for {obj}']
+RAINFOREST:
+  description: Rainforest or dense coastal forest.
+  triggers:
+    np: [rainforest, a rainforest, the rainforest]
+BULLOCK:
+  description: A steer or ox.
+  triggers:
+    np: [a steer, an ox, oxen]
+BUSHWOMAN:
+  description: A woman of the frontier or remote country.
+  triggers:
+    np: [a frontier woman, a frontierswoman, a pioneer woman]
+BROOD:
+  description: Brood or sulk over a grievance.
+  triggers:
+    vp: ['brood over {np}', 'brood about {np}', 'stew over {np}', nurse a grievance]
+COP_IT:
+  description: Receive or suffer something unwelcome.
+  triggers:
+    vp: ['get hit with {np}', 'be hit with {np}', 'get slapped with {np}', 'be slapped with {np}', 'get stuck with
+        {np}', 'be stuck with {np}']
+BRAVE_FACE:
+  description: Put on a brave face; suppress feelings and endure.
+  triggers:
+    vp: [put on a brave face, keep a stiff upper lip, grin and bear it, tough it out]
+SPOIL_CHANCES:
+  description: Ruin someone's chances or plans.
+  triggers:
+    vp: ['ruin {poss} chances', 'spoil {poss} chances', 'wreck {poss} chances', 'queer {poss} pitch']
+ENDEARMENT:
+  description: An affectionate term of address (darling, dear).
+  triggers:
+    np: [my darling]
+GRUDGE:
+  description: Hold a grudge against someone.
+  triggers:
+    vp: ['hold a grudge against {obj}', 'bear a grudge against {obj}', 'have it in for {obj}']
+INSIDE_WORD:
+  description: Inside information someone is given or passes on (the lowdown), not a story told.
+  triggers:
+    np: [the lowdown, the inside word]
+THE_REAL_STORY:
+  description: The real truth; reliable inside information.
+  triggers:
+    np: [the inside story, the real story, the lowdown, the inside information, the inside word]
+BETRAYER:
+  description: Someone who betrays friends or informs on them.
+  triggers:
+    np: [a traitor, a backstabber, a turncoat]
+RIVER_FLAT:
+  description: Flat low land beside a river (bottomland).
+  triggers:
+    np: [bottomland, the bottomland]
+GOANNA:
+  description: An Australian monitor lizard.
+  triggers:
+    np: [monitor lizard, a monitor lizard, the monitor lizard]
+HARD_WORKER:
+  description: A hard, reliable worker.
+  triggers:
+    np: [a hard worker, a real hard worker]
+COWARD:
+  description: A coward.
+  triggers:
+    np: [coward, a coward, a spineless coward]
+HOMESTEAD:
+  description: The main house of a large farm or station.
+  triggers:
+    np: [the ranch house, the main ranch house, the main house on the ranch]
+TRAMP_ROADS:
+  description: Travel on foot through the country as a swagman.
+  triggers:
+    vp: [tramp the roads, be on the tramp, tramp the country roads, travel the roads on foot]
+POLICE_OFFICER:
+  description: A police officer.
+  triggers:
+    np: [police officer, policeman, a police officer, a policeman]
+SETBACK_BLOW:
+  description: A cruel, demoralising setback.
+  triggers:
+    np: [a kick in the teeth, a slap in the face, a crushing blow]
+HOME_PLACE:
+  description: One's house or home (lookup only; no safe trigger).
+  triggers:
+    np: ['{poss} humble abode']
+REJECTION:
+  description: A rejection or refusal.
+  triggers:
+    np: [a rejection, a rebuff, a refusal]
+ACCOST:
+  description: Go up to someone to speak to them.
+  triggers:
+    vp: ['sidle up to {obj}', 'accost {obj}', 'walk up to {obj}', 'march up to {obj}']
+ROUND_UP_STOCK:
+  description: Round up livestock.
+  triggers:
+    vp: [round up the cattle, round up the sheep, round up the livestock, round up the herd, round up the stock]
+    np: [a roundup, the roundup, a round-up, the round-up]
+KILLJOY:
+  description: A spoilsport or wet blanket.
+  triggers:
+    np: [a killjoy, a spoilsport, a wet blanket, a party pooper]
+DINGO:
+  description: The Australian wild dog.
+  triggers:
+    np: [wild dog, a wild dog]
+LOSER:
+  description: A hopeless, useless person.
+  triggers:
+    np: [a loser, a deadbeat, a hopeless case, a born loser]
+NOT_MUCH_GOOD:
+  description: Not very good; unimpressive.
+  triggers:
+    predicate_adj: [not much good, not very good, no great shakes, nothing special, nothing to write home about]
+GANG:
+  description: A street gang or rough crowd.
+  triggers:
+    np: [a street gang, the street gang, a gang of thugs, a gang of hoodlums, a gang of hooligans]
+KICK_WHEN_DOWN:
+  description: Attack someone already beaten or in trouble.
+  triggers:
+    vp: ['kick {obj} when {obj} {be} down', kick a man when he is down, kick a man when he's down]
+HILL_COUNTRY:
+  description: Hilly or mountainous country as a region.
+  triggers:
+    np: [the hill country, hill country, the foothills]
+IN_FLOOD:
+  description: 'Of a river: flowing bank-high, in flood.'
+  triggers:
+    vp: [burst its banks, overflow its banks, run high to its banks]
+SANDY_BLIGHT:
+  description: Outback conjunctivitis.
+  triggers:
+    np: [conjunctivitis, pink eye]
+SWINDLER:
+  description: A swindler or dishonest operator.
+  triggers:
+    np: [a swindler, a con man, a con artist, a fraudster]
+CALL_OUT:
+  description: Call out to someone, give a yell.
+  triggers:
+    vp: [holler, give a holler, 'give {obj} a holler', 'give {obj} a shout', yell out]
+CASE_OF_BEER:
+  description: A carton of 24 beers.
+  triggers:
+    np: [a case of beer, a carton of beer, a 24-pack of beer, a twenty-four pack, a 24-pack]
+SET_DOG_ON:
+  description: Set a dog on someone.
+  triggers:
+    vp: ['set the dog on {obj}', 'set the dogs on {obj}', 'sic the dog on {obj}']
+CONFRONT:
+  description: Accost or confront someone aggressively.
+  triggers:
+    vp: ['accost {obj}', 'get in {poss} face']
+STOCKWHIP:
+  description: A long cattle whip.
+  triggers:
+    np: [bullwhip, a bullwhip, the bullwhip, a cattle whip]
+TROUSERS:
+  description: Trousers.
+  triggers:
+    np: [trousers, a pair of trousers, slacks, a pair of pants]
+WEEK_FROM_SUNDAY:
+  description: The Sunday after next.
+  triggers:
+    np: [a week from Sunday, a week from this Sunday]
+TAKE_A_REST:
+  description: Stop work for a rest.
+  triggers:
+    vp: [take a breather, have a breather, take a rest, have a rest]
+HARD_FOUGHT:
+  description: A fierce, hard-fought contest.
+  triggers:
+    np: [a hard-fought contest, a hard-fought game, a bruising contest]
+BILLY:
+  description: A tin can for boiling water or tea over a campfire (not a household kettle).
+  triggers:
+    np: [a camp kettle, a campfire kettle]
+GONE_MISSING:
+  description: 'Of a thing or person: gone missing or wandered off; can''t be found.'
+  triggers:
+    predicate_adj: [gone missing, gone astray, 'disappeared on {obj}']
+TUCKER_BAG:
+  description: A bag for carrying food while travelling on foot.
+  triggers:
+    np: [a food bag, a ration bag, a provisions bag]
+BUSHMAN:
+  description: A man at home in the bush and skilled at living in it.
+  triggers:
+    np: [a backwoodsman, a woodsman, an experienced outdoorsman]
+LUG:
+  description: Carry something heavy, with effort.
+  triggers:
+    vp: ['lug {obj}', 'lug {obj} around', 'carry {obj} on {poss} back']
+SLAB_HUT:
+  description: A rough pioneer hut built of split timber slabs.
+  triggers:
+    np: [a rough timber hut, a rough timber cabin, a crude log cabin]
+EVERYWHERE:
+  description: Everywhere, scattered about; or disorganised.
+  triggers:
+    adv: [all over the place, "all over the map"]
+PRAISE:
+  description: Speak highly of someone or something.
+  triggers:
+    vp: ['speak highly of {obj}', 'praise {obj} to the skies', 'rave about {obj}', 'sing the praises of {obj}', "commend {obj}", "heap praise on {obj}", "speak glowingly of {obj}"]
+BOAST:
+  description: Brag or boast (verb).
+  triggers:
+    vp: [brag, boast, 'blow {poss} own trumpet']
+POSH:
+  description: Upper-class, fancy, posh.
+  triggers:
+    adj: [upper-class, upper-crust]
+BURN_OFF:
+  description: A deliberate fire set to clear scrub or reduce fuel.
+  triggers:
+    np: [a controlled burn, a prescribed burn, controlled burning]
+CRAYFISH:
+  description: A rock lobster / crayfish.
+  triggers:
+    np: [a rock lobster, rock lobster, a crayfish]
+FOR_A_LIVING:
+  description: As a way of earning a living.
+  triggers:
+    adv: [for a living]
+PAY_TRIBUTE:
+  description: Pay tribute to someone; show respect.
+  triggers:
+    vp: ['take {poss} hat off to {obj}', 'tip {poss} hat to {obj}']
+PROMENADE:
+  description: Stroll the fashionable streets to see and be seen.
+  triggers:
+    vp: [go promenading]
+LOSE_NERVE:
+  description: Lose heart or nerve; go to pieces.
+  triggers:
+    vp: ['lose {poss} nerve', lose heart, go to pieces]
+DROVING:
+  description: Drive livestock overland over long distances.
+  triggers:
+    vp: [drive cattle overland, herd cattle overland, move stock overland]
+CONCEDE_DEFEAT:
+  description: Admit defeat to someone or something.
+  triggers:
+    vp: [admit defeat, concede defeat]
+PRETENCE:
+  description: Pretence; an act put on to impress or deceive.
+  triggers:
+    np: [a pretence, a put-on, a sham]
+PESSIMIST:
+  description: A habitual pessimist.
+  triggers:
+    np: [a pessimist, a prophet of doom, a doom-monger, a doomsayer]
+HAVE_CONTACT:
+  description: Having an indirect contact who can arrange something.
+  triggers:
+    clause: [I know a guy, I know a guy who knows a guy]
+EVER_IN_LIFE:
+  description: Ever, in all one's life.
+  triggers:
+    adv: ['in all {poss} life', 'in all {poss} born days']
+PUNCH:
+  description: Punch someone.
+  triggers:
+    vp: ['punch {obj} in the face', 'punch {obj} in the nose', 'sock {obj}', 'punch {obj}', 'thump {obj}']
+RACKET:
+  description: A dodge, scheme or cushy perk.
+  triggers:
+    np: [a dodge, a cushy number, a nice little earner]
+GET_RICH:
+  description: Make a fortune.
+  triggers:
+    vp: ['make {poss} fortune', strike it rich]
+GOOD_CONDITION:
+  description: In good condition (thing or person).
+  triggers:
+    predicate_adj: [in good condition, in good shape, in great shape]
+UNLUCKY_PERSON:
+  description: Someone to be pitied for their bad luck.
+  triggers:
+    np: [the poor devil, the poor sod, the poor chap, the poor fellow, the poor guy, the poor thing, the poor little
+        thing]
+PUB:
+  description: A drinking establishment.
+  triggers:
+    np: [a tavern, the tavern, a saloon, the saloon, the local bar]
+PUT_ON_AIRS:
+  description: Act superior; put on airs.
+  triggers:
+    vp: [put on airs, 'give {poss}self airs', act high and mighty]
+RINGBARK:
+  description: Kill a tree by girdling its bark.
+  triggers:
+    vp: ['girdle {obj}', girdle the trees]
+ARREST:
+  description: Arrest someone.
+  triggers:
+    vp: ['take {obj} into custody', 'haul {obj} off to jail']
+SAY_HELLO:
+  description: Say hello to someone.
+  triggers:
+    vp: [say hello, say hi]
+SHEOAK:
+  description: A casuarina tree.
+  triggers:
+    np: [casuarina, a casuarina, casuarina tree]
+INFATUATED:
+  description: Infatuated with someone.
+  triggers:
+    predicate_adj: ['sweet on {obj}', 'infatuated with {obj}', 'smitten with {obj}']
+CANT_STAND:
+  description: Can't stand someone or something.
+  triggers:
+    vp: ['can''t abide {obj}', 'can''t stomach {obj}']
+KITCHEN_HAND:
+  description: A kitchen helper in a camp, station or mess.
+  triggers:
+    np: [a cook's assistant, a scullery hand, a scullion, a kitchen porter]
+PROMOTE:
+  description: Promote or tout something loudly.
+  triggers:
+    vp: ['talk up {obj}', 'tout {obj}', 'hype {obj} up', 'hype up {obj}']
+STATION:
+  description: A large pastoral property (ranch).
+  triggers:
+    np: [ranch !dressing|style|slider|sliders|house|hand|hands, a ranch, the ranch, a cattle ranch, a sheep ranch]
+STOCK_HORSE:
+  description: A horse trained to work livestock.
+  triggers:
+    np: [a cow horse, a ranch horse, a cutting horse]
+HAVE_BEER:
+  description: Have a beer.
+  triggers:
+    vp: ["have a beer !belly|bellies|gut|guts|garden|gardens", grab a beer, down a beer]   # not "has a beer belly"
+REAL_STORY:
+  description: Asking for the truth of a matter.
+  triggers:
+    clause: [what's the real story, what's the truth of it]
+IN_TROUBLE:
+  description: In trouble.
+  triggers:
+    predicate_adj: [in trouble, in big trouble, in hot water]
+SOMETHING_AFOOT:
+  description: Something is afoot.
+  triggers:
+    clause: [something is afoot, something's afoot, something was afoot]
+APPROVAL:
+  description: Endorsement or approval.
+  triggers:
+    np: [the seal of approval, a seal of approval, the stamp of approval]
+COURT:
+  description: Court or go steady with someone.
+  triggers:
+    vp: ['go steady with {obj}', 'walk out with {obj}']
+DOOMED:
+  description: Predicting ruin.
+  triggers:
+    clause: [we're doomed, we're all doomed, we're all going to be ruined]
+REGRET:
+  description: Uselessly reproach oneself after the event.
+  triggers:
+    vp: ['kick {poss}self', 'beat {poss}self up', cry over spilt milk]
+PULL_STRINGS:
+  description: Use influence or scheming to get a result.
+  triggers:
+    vp: [pull strings, pull some strings]
+BEDROLL:
+  description: A bedroll, with one's belongings rolled inside it.
+  triggers:
+    np: [a bedroll, bedroll]
+WATERHOLE:
+  description: A waterhole, especially a pool left in a dry or dead river channel.
+  triggers:
+    np: [a waterhole, waterhole, an oxbow lake, oxbow lake]
+SHEEP:
+  description: A sheep.
+  triggers:
+    np: [a sheep]
+CLOTHES:
+  description: Clothes; what one is wearing.
+  triggers:
+    np: [clothes !line|lines|peg|pegs|horse|hanger|hangers|basket|baskets|dryer|dryers|shop|shops|store|stores|brush|rack|racks]
+FARM_DAM:
+  description: A farm pond or stock pond (an Australian "dam").
+  triggers:
+    np: [a farm pond, a stock pond, the farm pond, the stock pond]
+HERD_OF:
+  description: A herd, flock or crowd of animals or people.
+  triggers:
+    np: ['a herd of {np}', 'a flock of {np}', 'a crowd of {np}']
+WALKING_TRACK:
+  description: A walking or hiking trail.
+  triggers:
+    np: [a hiking trail, a walking trail, a hiking path, a nature trail, the hiking trail, the walking trail, "a hiking track", "a bushwalking trail", "a mountain trail", "a forest trail", "a backcountry trail", "a park trail", "the park trails", "hiking trails", "walking trails"]
+BUTT_IN:
+  description: Intervene in someone's affairs uninvited.
+  triggers:
+    vp: [butt in, 'stick {poss} oar in', 'put {poss} oar in', 'poke {poss} nose in']
+NEWCOMER:
+  description: A newcomer to a place or community.
+  triggers:
+    np: [newcomer, a newcomer]
+TRINKETS:
+  description: Cheap, flashy trinkets or jewellery.
+  triggers:
+    np: [cheap trinkets, tacky jewellery, tacky jewelry, cheap jewellery, gaudy trinkets]
+WILD_HORSE:
+  description: A wild or feral horse.
+  triggers:
+    np: [feral horse, a wild horse, wild horses !couldn't|could|wouldn't|would|won't|will|can't|cannot, a feral
+        horse]
+GIRLFRIEND:
+  description: A man's girlfriend or sweetheart.
+  triggers:
+    np: [girlfriend]
+TAKE_IT:
+  description: Accept a setback or punishment without complaint.
+  triggers:
+    vp: [take it on the chin, accept it without complaint, accept it without complaining, grin and bear it]
+CANT_BE_BOTHERED:
+  description: Unwilling to make the effort.
+  triggers:
+    clause: ['{subj} couldn''t be bothered']
+KEEP_MUM:
+  description: 'Give nothing away: not reveal a secret or show feeling.'
+  triggers:
+    clause: ['{subj} never let on', '{subj} didn''t let on']
+SHILLING:
+  description: A shilling coin.
+  triggers:
+    np: [a shilling]
+BLOWN_CHANCE:
+  description: Have used up or lost one's chance; be finished.
+  triggers:
+    clause: ['{subj} {have} blown {poss} chance', '{subj} {have} blown it', '{subj} {have} missed {poss} chance']
+DRAY:
+  description: A heavy horse- or bullock-drawn cart.
+  triggers:
+    np: [a horse-drawn cart, a bullock cart, an ox cart, an oxcart, a farm cart, a hay cart]
+UNDRESS:
+  description: Take off one's clothes.
+  triggers:
+    vp: [undress, get undressed, 'take off {poss} clothes', 'take {poss} clothes off', strip off]
+GULLY:
+  description: A ravine or narrow water-worn valley.
+  triggers:
+    np: [a ravine, the ravine, a narrow valley]
+CHILDS_PLAY:
+  description: Something trivial; kids' stuff.
+  triggers:
+    np: [child's play, kids' stuff, kid stuff, kiddie stuff]
+INTRODUCE:
+  description: Introduce one person to another.
+  triggers:
+    vp: ['introduce {obj} to {np}']
+COME_TO_BLOWS:
+  description: Start or get into a fist fight.
+  triggers:
+    vp: [come to blows, trade blows, get into a fistfight, get into a fist fight]
+MOTHER:
+  description: One's mother (informal).
+  triggers:
+    np: [mom, mommy, momma]
+GRANDMOTHER:
+  description: One's grandmother.
+  triggers:
+    np: [grandma, grandmother, granny !flat|flats|smith|smiths|knot|knots]
+GUESS_RIGHT:
+  description: Guess or foresee something.
+  triggers:
+    clause: ['{subj} would never have guessed', '{subj} never would have guessed']
+POP_OVER:
+  description: Go somewhere briefly and quickly.
+  triggers:
+    vp: [pop over, pop round, nip over, nip round]
+TIP_OFF:
+  description: Give someone a warning, hint or signal.
+  triggers:
+    vp: ['tip {obj} off', 'give {obj} a tip-off']
+PLAY_UP:
+  description: Misbehave, or malfunction.
+  triggers:
+    vp: [act up, misbehave]
+HORSE:
+  description: A horse.
+  triggers:
+    np: [horse !around|about|race|races|racing|riding|sense|play|power|trade|trading|box|float|shoe|shoes]
+GAMBLER:
+  description: Someone who bets.
+  triggers:
+    np: [gambler, a gambler, a bettor]
+SCRUB:
+  description: Dense low vegetation; rough scrubby country.
+  triggers:
+    np: [the undergrowth, thick brush, brushland, scrubland]
+BUSH_PUB:
+  description: A rough, often unlicensed roadside bar.
+  triggers:
+    np: [an unlicensed bar, an unlicensed pub, a roadside tavern, a roadside bar]
+CANOODLE:
+  description: Kiss and cuddle.
+  triggers:
+    vp: [canoodle, kiss and cuddle, cuddle up]
+STOCKMAN:
+  description: A ranch hand who works cattle.
+  triggers:
+    np: [ranch hand, cowhand, a ranch hand, a cattle hand, a cowhand]
+POSH_PERSON:
+  description: A posh, upper-class person.
+  triggers:
+    np: [a posh gentleman, a posh gent, an upper-class gentleman, an upper-class gent]
+VERANDAH:
+  description: A porch or veranda.
+  triggers:
+    np: [porch, front porch, veranda]
+WOODPILE:
+  description: A pile of firewood.
+  triggers:
+    np: [the woodpile, a woodpile, the wood pile, the pile of firewood]
+
+# --- everyday round 2026-10-13 (research/everyday-round-2026-10-13) ----------------------------------
+PHARMACY:
+  description: A retail pharmacy (the shop, not the academic field).
+  triggers:
+    np: [drugstore, drug store, pharmacy !school|schools|degree|degrees|student|students|technician|technicians|benefits|board|course|courses|faculty|studies|practice|law|program|programs|programme,
+      retail pharmacy, community pharmacy]
+DISCARD:
+  description: Throw something away; get rid of it as rubbish.
+  triggers:
+    vp: ['throw away {obj}', 'throw {obj} away', 'discard {obj}']
+SOUTH_WIND:
+  description: A wind blowing from the south.
+  triggers:
+    np: [a south wind, south winds, a southerly wind, southerly winds]
+FUSS:
+  description: A fuss, commotion or silly behaviour (noun).
+  triggers:
+    np: [a commotion, a to-do, a kerfuffle, such a fuss]
+HIKER:
+  description: A person who hikes on foot in natural areas.
+  triggers:
+    np: [hiker, trekker]
+PUT_IN_CASUAL:
+  description: Casually put something in (pop it in, stick it in).
+  triggers:
+    vp: ['pop {obj} in', 'pop {obj} into', 'stick {obj} in', 'toss {obj} in']
+CHOCOLATE_BLOCK:
+  description: A large slab of chocolate.
+  triggers:
+    np: [a bar of chocolate, a large chocolate bar, a slab of chocolate, a family-size chocolate bar]
+WORN_OUT_THING:
+  description: 'Of a machine or thing: worn out, beaten up, barely working.'
+  triggers:
+    adj: [beat-up, beaten-up, broken-down !by]
+LIE_DOWN_REST:
+  description: Lie down for a rest.
+  triggers:
+    vp: [go and lie down, go lie down, lie down for a while, lie down for a bit, take a lie-down]
+ICE_BRICK:
+  description: A reusable freezer block for a cooler.
+  triggers:
+    np: [gel pack, gel packs, freezer pack, freezer packs, cooler pack, cooler packs, freezer block, freezer blocks,
+      blue ice]
+SUCKER:
+  description: A gullible person; a dupe (some poor sucker).
+  triggers:
+    np: [some poor sucker, some sucker, some poor sap, some poor fool, some patsy]
+STAY_OUT_OF_TROUBLE:
+  description: Avoid getting into trouble.
+  triggers:
+    vp: [stay out of trouble, keep out of trouble]
+FRUIT_AND_VEG:
+  description: Fresh fruit and vegetables; produce.
+  triggers:
+    np: [fruits and vegetables, fruit and vegetables, fresh produce, the produce section, the produce aisle, produce
+        department]
+MARGARINE:
+  description: Margarine.
+  triggers:
+    np: [margarine]
+SIDEKICK:
+  description: A helper or deputy who works alongside someone.
+  triggers:
+    np: [sidekick, side-kick, right-hand man, right-hand woman]
+MAGISTRATE:
+  description: A magistrate presiding in court.
+  triggers:
+    np: [the magistrate, the magistrates]
+HIKING:
+  description: Recreational walking in natural country.
+  triggers:
+    np: [hiking !trail|trails|path|paths]
+    vp: [go hiking, went hiking, going hiking]
+HOUSEHOLD_BUDGET:
+  description: Personal or household finances.
+  triggers:
+    np: [the household budget, household budgets, the family budget, household finances]
+CATCH_ON:
+  description: Realise what is happening.
+  triggers:
+    vp: ['catch on to {np}', 'cotton on to {np}', 'wise up to {np}']
+MUSICIAN:
+  description: A musician.
+  triggers:
+    np: [musician, a musician, local musicians, session musician]
+SNOOP:
+  description: Pry or snoop into others' business.
+  triggers:
+    vp: [snoop around ^person, snoop about ^person, nose around ^person, nose about ^person, pry into other people's
+        business]
+PUT_IN_OVEN:
+  description: Put food into the oven (recipe instruction).
+  triggers:
+    vp: ['put {obj} in the oven', 'place {obj} in the oven', 'pop {obj} in the oven', 'transfer {obj} to the oven',
+      'place {obj} into the oven', 'put {obj} into the oven']
+CLOGGED:
+  description: Physically blocked or clogged (pipe, drain, vent, nose).
+  triggers:
+    predicate_adj: [clogged, clogged up, plugged up, blocked up]
+MEAL:
+  description: A (good, filling) meal, as a countable noun.
+  triggers:
+    np: [a good meal, a hearty meal, a decent meal, a square meal, a big meal, a filling meal, a quick meal !plan|plans|kit|kits|prep|deal|deals]
+GET_DUMPED:
+  description: Be dumped, rejected or sacked (passive of DISMISS).
+  triggers:
+    vp: [get dumped, got dumped, get ditched, got ditched, get the boot !camp|camps, get the elbow, get the push,
+      get the sack, got the sack, get sacked, got sacked]
+COMMON_SENSE:
+  description: Practical good sense, savvy (as a mass noun).
+  triggers:
+    np: [common sense !approach|approaches|solution|solutions|reform|reforms|measure|measures|rule|rules|policy|policies|test|view|thing,
+      gumption, horse sense, street smarts]
+FOIL:
+  description: Aluminium foil for cooking and wrapping food.
+  triggers:
+    np: [aluminum foil, aluminium foil, tin foil, tinfoil, kitchen foil]
+CHOC_CHIPS:
+  description: Chocolate chips/morsels used in baking.
+  triggers:
+    np: [chocolate chips, chocolate morsels, chocolate chip, chocolate pieces]
+KEEP_QUIET:
+  description: Keep quiet about something; refrain from speaking.
+  triggers:
+    vp: ['keep {poss} mouth shut', 'hold {poss} tongue']
+
+# --- fairdinkum round 2026-10-13 (research/fairdinkum-round-2026-10-13) ----------------------------------
+AUSTRALIAN_PERSON:
+  description: An Australian person (the noun, not the adjective, so no institution's name is touched).
+  triggers:
+    np: [an Australian]
+BOGAN:
+  description: An uncouth, unsophisticated person of a working-class stereotype (the redneck, the chav).
+  triggers:
+    np: [redneck, chav]
+TELLTALE:
+  description: Someone who tells on others to an authority; a snitch (the noun).
+  triggers:
+    np: [a snitch, a tattletale, a tattle-tale, a telltale !sign|signs|mark|marks|trace|traces|heart|smell|clue|clues]
+SOME_BLOKE:
+  description: Some random person whose name doesn't matter (some guy, this random guy).
+  triggers:
+    np: [some random guy, this random guy, a random guy, some random bloke, some random dude, this random dude]
+HIGH_ACHIEVER:
+  description: A conspicuously successful person.
+  triggers:
+    np: [a high achiever, a high-flyer, a high flyer]
+CHAMPAGNE_SOCIALIST:
+  description: An affluent person who professes left-wing views.
+  triggers:
+    np: [a champagne socialist, a limousine liberal, a latte liberal]
+LIGHTWEIGHT_DRINKER:
+  description: Someone who gets drunk on very little.
+  triggers:
+    np: [a cheap drunk, a lightweight drinker]
+PROVISIONAL_DRIVER:
+  description: A newly licensed driver on a provisional licence.
+  triggers:
+    np: [provisional driver, newly licensed driver, newly-licensed driver, probationary driver]
+LEARNER_DRIVER:
+  description: A learner driver.
+  triggers:
+    np: [learner driver, student driver]
+BRICKLAYER:
+  description: A bricklayer.
+  triggers:
+    np: [bricklayer]
+ELECTRICIAN:
+  description: An electrician.
+  triggers:
+    np: [electrician]
+CARPENTER:
+  description: A carpenter.
+  triggers:
+    np: [carpenter]
+TRUCK_DRIVER:
+  description: A truck driver.
+  triggers:
+    np: [truck driver, trucker]
+PUBLIC_SERVANT:
+  description: A government employee in the public service.
+  triggers:
+    np: [civil servant, a civil servant, government employee]
+PUBLIC_SERVICE:
+  description: The government workforce as a body.
+  triggers:
+    np: [the civil service]
+FINISH_WORK:
+  description: Stop work for the day.
+  triggers:
+    vp: [finish work !on|for|in|with|by|before, clock off, knock off work, call it a day, finish up for the day]
+ON_THE_DRINK:
+  description: Drinking heavily over a stretch of time; on a bender.
+  triggers:
+    predicate_adj: [on a bender, on a binge, on a drinking binge, on the booze, drinking heavily]
+RORT:
+  description: A dishonest misuse of a system, its rules or public money.
+  triggers:
+    np: [a misuse of public funds, an abuse of the system, an expenses scandal]
+GAME_SYSTEM:
+  description: Exploit a system's rules for undeserved gain.
+  triggers:
+    vp: [game the system, exploit the system, abuse the system, cheat the system, milk the system, rip off the system]
+HOT_BUTTON_ISSUE:
+  description: A hotly debated public issue.
+  triggers:
+    np: [hot-button issue, hot button issue, hot-button topic, divisive issue]
+LOOSE_CHANGE:
+  description: Loose coins.
+  triggers:
+    np: [loose change, spare change]
+LAYAWAY:
+  description: Paying off goods in instalments while the shop holds them.
+  triggers:
+    np: [layaway, a layaway plan]
+CAR_REGISTRATION:
+  description: A vehicle's registration with the state road authority.
+  triggers:
+    np: [car registration, vehicle registration, the car registration, the vehicle registration]
+GROUNDBAIT:
+  description: Bait scattered in the water to attract fish (as a mass noun).
+  triggers:
+    np: [groundbait, ground bait]
+BARRAMUNDI:
+  description: The barramundi (the fish).
+  triggers:
+    np: [barramundi]
+CHEWING_GUM:
+  description: Chewing gum.
+  triggers:
+    np: [chewing gum]
+CORN_DOG:
+  description: A battered, deep-fried sausage on a stick.
+  triggers:
+    np: [corn dog, corndog]
+DAMPER:
+  description: Simple bread baked in the coals of a campfire.
+  triggers:
+    np: [campfire bread, bush bread, camp bread]
+CASK_WINE:
+  description: Cheap wine sold in a cask (as a mass noun).
+  triggers:
+    np: [boxed wine, box wine, cask wine]
+WINE_CASK:
+  description: A cask (box) of wine, as a countable thing.
+  triggers:
+    np: [a box of wine, a wine cask, a cask of wine]
+CHEAP_WINE:
+  description: Cheap, ordinary wine.
+  triggers:
+    np: [cheap wine !list|lists|bar|bars|glass|glasses|shop|shops|store|stores, rotgut wine]
+GOOD_WINE:
+  description: A good wine, something worth drinking.
+  triggers:
+    np: [a good wine, a nice wine, a fine wine, a decent wine, a great wine, a lovely wine]
+SUGARY_DRINK:
+  description: Sweet fizzy drink (said dismissively).
+  triggers:
+    np: [sugary drinks, a sugary drink, sugary soft drink]
+BRING_A_PLATE:
+  description: Bring a dish of food to share at a gathering.
+  triggers:
+    vp: [bring a dish to share, bring food to share, bring something to share, bring a potluck dish]
+BIKIE:
+  description: A member of a motorcycle gang; a biker.
+  triggers:
+    np: [biker !shorts|jacket|jackets|boots|chick|chicks|bar|bars, biker gang, a motorcycle gang member]
+SOAPBOX_CART:
+  description: A homemade unpowered cart raced downhill.
+  triggers:
+    np: [soapbox cart, soapbox racer, soapbox car, box cart]
+FENDER_BENDER:
+  description: A minor car crash.
+  triggers:
+    np: [fender bender, fender-bender, minor car accident, minor car crash, minor collision]
+BLOWFLY:
+  description: A blowfly.
+  triggers:
+    np: [blowfly]
+MAN_O_WAR:
+  description: The Portuguese man o' war, a stinging sea creature.
+  triggers:
+    np: [Portuguese man o' war, Portuguese man-of-war, a Portuguese man o' war, a Portuguese man-of-war]
+BOARDSHORTS:
+  description: Board shorts.
+  triggers:
+    np: [board shorts, boardshorts]
+SWIM_BRIEFS:
+  description: Men's tight swimming briefs.
+  triggers:
+    np: [swim briefs, swimming briefs, speedos]
+BUDGERIGAR:
+  description: A budgerigar (the bird).
+  triggers:
+    np: [budgerigar, pet parakeet]
+BUCKS_NIGHT:
+  description: A groom's party with his friends before the wedding.
+  triggers:
+    np: [bachelor party, stag party, stag night, stag do]
+HENS_NIGHT:
+  description: A bride's party with her friends before the wedding.
+  triggers:
+    np: [bachelorette party, hen party, hen night, hen do]
+SPORTS_OVAL:
+  description: A grassed sports ground for football and cricket.
+  triggers:
+    np: [the sports field, the sports ground, the school sports field, the school playing field]
+HOPE_CHEST:
+  description: A chest of linen and household goods kept for marriage.
+  triggers:
+    np: [hope chest, dowry chest]
+HOUSEHOLD_LINEN:
+  description: Household linen (sheets, towels and the like) as a mass noun.
+  triggers:
+    np: [bed linen, household linen, bed linens, household linens]
+VERGE:
+  description: The grass strip between the footpath and the road.
+  triggers:
+    np: [the grass verge, the road verge, the tree lawn, the parking strip, the curb strip, the kerb strip]
+RASH_VEST:
+  description: A rash vest or rash guard (a swim shirt).
+  triggers:
+    np: [rash guard, rash vest, rashguard, swim shirt]
+SLEEPING_PORCH:
+  description: A porch or verandah enclosed as a bedroom.
+  triggers:
+    np: [sleeping porch, enclosed porch]
+SPORTS_DAY:
+  description: A school sports day.
+  triggers:
+    np: [sports day, school sports day, track and field day]
+SWIM_MEET:
+  description: A swimming competition, especially a school one.
+  triggers:
+    np: [swim meet, swimming meet, swimming gala, swim gala]
+MUFTI_DAY:
+  description: A school day without uniform.
+  triggers:
+    np: [casual clothes day, non-uniform day, dress-down day, free dress day]
+CAN_COOLER:
+  description: An insulated sleeve for a can or bottle of drink.
+  triggers:
+    np: [koozie, beer koozie, can cooler, beer cozy, can cozy, can koozie]
+SWEATPANTS:
+  description: Tracksuit pants, sweatpants.
+  triggers:
+    np: [sweatpants, track pants, tracksuit pants, tracksuit bottoms, jogging pants]
+SHEEPSKIN_BOOTS:
+  description: Fleece-lined sheepskin boots.
+  triggers:
+    np: [sheepskin boots, shearling boots]
+SCHOOL_CANTEEN:
+  description: The school shop that sells lunch and snacks to students.
+  triggers:
+    np: [the school cafeteria, the school canteen, the school lunchroom]
+MIDDY_BEER:
+  description: A small (about half-pint) glass of beer.
+  triggers:
+    np: [a half-pint of beer, a half pint of beer, a small glass of beer]
+FRESHWATER_CRAYFISH:
+  description: A freshwater crayfish (crawfish).
+  triggers:
+    np: [crawfish, crawdad, freshwater crayfish]
+JOEY:
+  description: A baby marsupial.
+  triggers:
+    np: [baby kangaroo, baby wallaby, baby koala, baby wombat, baby possum]
+SNAKE:
+  description: A snake, the reptile (lookup only; "a snake" is also a traitor, and "the snake" would lose its article).
+  triggers:
+    np: [a slithering snake]
+TALL_TALE:
+  description: A story told for entertainment, often a tall one.
+  triggers:
+    np: [a tall tale, a tall story, an anecdote]
+BEER_GUT:
+  description: A big belly, as from beer.
+  triggers:
+    np: [beer belly, beer gut, pot belly, potbelly, paunch]
+AGGRESSIVE:
+  description: Aggressive, belligerent (of a person).
+  triggers:
+    predicate_adj: [aggressive ^person, belligerent ^person, combative ^person, confrontational ^person]
+BEES_KNEES:
+  description: The very best (the bee's knees and its kin).
+  triggers:
+    predicate_adj: [the bee's knees, the cat's pyjamas, the cat's pajamas, the cat's whiskers]
+COLD_WEATHER:
+  description: Bitterly cold weather (it is freezing out).
+  triggers:
+    clause: ['it {be} freezing', 'it {be} freezing cold', 'it {be} bitterly cold', 'it {be} absolutely freezing',
+      'it {be} perishing']
+FREEZING_WEATHER:
+  description: Bitterly cold weather (the noun phrase).
+  triggers:
+    np: [freezing weather, bitterly cold weather, freezing cold weather]
+ANY_FOOL:
+  description: Anyone at all, even the least observant (any fool could see it).
+  triggers:
+    np: [any fool, anyone with half a brain, anybody with half a brain, anyone with eyes, anybody with eyes]
+VOMIT:
+  description: Vomit, throw up (intransitive).
+  triggers:
+    vp: [vomit, puke, throw up !a|an|the|his|her|their|its|our|my|your|some|any|this|that|these|those|new|questions|walls|barriers|obstacles|roadblocks|hands|arms|dust|ideas]
+WITHIN_EARSHOT:
+  description: Within calling distance; close enough to hear a shout.
+  triggers:
+    adv: [within earshot, within shouting distance, within calling distance, within hailing distance]
+INCOMPETENT:
+  description: Hopelessly disorganised or incompetent (a person or an outfit).
+  triggers:
+    clause: ['{subj} {be} completely incompetent', '{subj} {be} totally incompetent', '{subj} {be} utterly incompetent',
+      '{subj} {be} hopelessly disorganised', '{subj} {be} hopelessly disorganized', '{subj} {be} completely disorganised',
+      '{subj} couldn''t organise a piss-up in a brewery', '{subj} couldn''t organize a piss-up in a brewery']
+UTTER:
+  description: Complete, out-and-out (before a noun, as in an utter disaster).
+  triggers:
+    adj: [utter, out-and-out, absolute !value|values|zero|majority|terms|power|powers|pitch|humidity|path|paths|address|monarchy|monarch|monarchs|minimum|maximum|temperature|magnitude|threshold|risk|number|numbers|despotism|tyranny|tyrant|tyrants|rule|ruler|rulers|authority|control|sovereignty|dictatorship|dictator|discretion|freedom|liberty|right|rights|silence|priority|necessity|requirement|limit|limits|position|location|reference|error|deviation|advantage|poverty|truth|confidence|trust|ownership|immunity|ban|bans|privilege|and]
+NOT_NAIVE:
+  description: Not gullible; not easily fooled.
+  triggers:
+    clause: ['{subj} wasn''t born yesterday', '{subj} weren''t born yesterday', '{subj} {be} not naive', '{subj}
+        {be} no fool']
+WIN_FROM_NOWHERE:
+  description: Win unexpectedly, against the odds.
+  triggers:
+    vp: [win against all odds, win against the odds, come from nowhere to win, snatch an unlikely victory]
+LITTER_PICK:
+  description: A line of people walking an area picking up litter.
+  triggers:
+    np: [litter pick, litter pick-up, litter patrol, litter sweep]
+RUMMAGE:
+  description: Search by rummaging about (intransitive).
+  triggers:
+    vp: [rummage around, rummage about, root around, root about]
+RUMMAGE_THROUGH:
+  description: Rummage through something.
+  triggers:
+    vp: ['rummage through {np}', 'root through {np}', 'rifle through {np}']
+INTENSE:
+  description: Intense, hectic, demanding.
+  triggers:
+    predicate_adj: [hectic, a lot to deal with, a lot to handle]   # not "intense": "the pain was intense"
+GET_SELECTED:
+  description: Be picked for a team or a role.
+  triggers:
+    vp: [make the team, get picked for the team, get selected for the team]
+HIT_UP_FOR:
+  description: Ask someone insistently for money or a favour.
+  triggers:
+    vp: ['hit {obj} up for {np}', 'tap {obj} for {np}']
+AMAZED:
+  description: An exclamation of amazement (not of dismay).
+  triggers:
+    interjection: [wow, good heavens, goodness me, holy cow, well I never, golly, gosh, my goodness]
+HOON_DRIVE:
+  description: Drive recklessly to show off.
+  triggers:
+    vp: [drive recklessly, go joyriding, do burnouts, drive like a maniac, drive like a lunatic]
+LET_IT_RAIN:
+  description: A call for rain to come.
+  triggers:
+    interjection: [let it rain, bring on the rain]
+SUCKER_PUNCH:
+  description: An unprovoked punch thrown without warning.
+  triggers:
+    np: [sucker punch, sucker-punch]
+STRONG_FIT:
+  description: Very strong and fit (of a person).
+  triggers:
+    predicate_adj: [strong as an ox, as strong as an ox, strong as a horse, as strong as a horse, fit as a fiddle,
+      as fit as a fiddle]
+FLUSTERED:
+  description: Utterly flustered and muddled.
+  triggers:
+    clause: ['{subj} {be} completely confused', '{subj} {be} totally confused', '{subj} {be} all at sea', '{subj}
+        {be} in a complete muddle', '{subj} {do}n''t know whether {subj} {be} coming or going']
+NOWHERE_NEAR:
+  description: Nowhere near (a place or a goal), before "the".
+  triggers:
+    adv: [nowhere near the !same|level|standard|quality|amount|number|size|kind]
+BROAD_AUSSIE:
+  description: Broadly, stereotypically Australian (before a noun).
+  triggers:
+    adj: [broad Australian, stereotypically Australian]
+OFF_IN_A_FLASH:
+  description: Gone or away in a flash.
+  triggers:
+    predicate_adj: [off like a shot, off in a flash, gone in a flash, gone like a shot]
+MAKE_OUT:
+  description: Kiss someone passionately.
+  triggers:
+    vp: ['make out with {obj}', 'snog {obj}', 'kiss {obj} passionately']
+BACK_OUT:
+  description: Withdraw from a plan or commitment.
+  triggers:
+    vp: [pull out at the last minute, chicken out]
+FLAKE:
+  description: An unreliable person who backs out of plans.
+  triggers:
+    np: [a flake !of, a flaky friend, a no-show]
+PATHETIC:
+  description: Feeble, pathetic, a poor effort.
+  triggers:
+    predicate_adj: [pathetic, feeble, pitiful, a poor effort, weak as water]
+A_LIE:
+  description: A lie, a fib (the noun).
+  triggers:
+    np: [a fib, a lie !detector|detectors|down|in|to]
+DONT_FOOL_ME:
+  description: Don't try to fool me; do you take me for a fool?
+  triggers:
+    imperative: [don't try to fool me, don't try to con me, don't try to trick me, don't play dumb with me, don't
+        take me for a fool]
+    interjection: [do you think I'm stupid, do you take me for a fool, do you think I'm an idiot, what do you take
+        me for]
+RAW_DEAL:
+  description: Be treated unfairly; get the worst of it.
+  triggers:
+    vp: [get a raw deal, get the short end of the stick, get the rough end of the stick]
+SPIFFY:
+  description: Neat, stylish and in top condition.
+  triggers:
+    predicate_adj: [spick and span, immaculate, spiffy, snazzy, in mint condition]
+SHOEY:
+  description: Drink out of one's shoe in celebration.
+  triggers:
+    vp: [drink out of a shoe, drink from a shoe, drink beer out of a shoe, drink champagne out of a shoe]
+TRASH_TALK:
+  description: Taunting opponents to unsettle them (the noun).
+  triggers:
+    np: [trash talk, trash-talk, trash talking, trash-talking]
+CAUGHT_OUT:
+  description: Caught in the act; found out.
+  triggers:
+    predicate_adj: [caught red-handed, caught in the act]
+TREASURE_IT:
+  description: I'll treasure it (said of a gift or keepsake).
+  triggers:
+    interjection: [I'll treasure it forever, I'll treasure it always, I will treasure it forever, I'll treasure
+        this forever]
+TELL_HIM_DREAMING:
+  description: Tell him (them) to dream on; the offer is laughable.
+  triggers:
+    interjection: [tell him to dream on, tell them to dream on]
+LOYAL:
+  description: Loyal and dependable to the core (of a person).
+  triggers:
+    predicate_adj: [loyal ^person, fiercely loyal ^person, utterly loyal ^person, dependable ^person, staunch ^person]
+U_TURN:
+  description: Make a U-turn.
+  triggers:
+    vp: [make a U-turn, do a U-turn, pull a U-turn, hang a U-turn, make a u-turn, do a u-turn]
+VEGETARIAN:
+  description: A vegetarian (the person).
+  triggers:
+    predicate_adj: [vegetarian ^person, a vegetarian ^person !chef|chefs|cook|cooks|restaurant|restaurants|cafe|cafes|option|options|meal|meals|dish|dishes|diet|diets|lasagne|lasagna|burger|burgers|pizza|menu|menus|recipe|recipes|alternative|version|society|activist|activists|household|family|place]
+TRUANT:
+  description: Stay away from school without leave.
+  triggers:
+    vp: [skip school, play hooky, play truant, ditch school, bunk off school, skip class, cut class]
+YOU_PLURAL:
+  description: You (plural), addressing more than one person.
+  triggers:
+    np: [you guys, y'all, you lot, you all !right|alright|good]
+SUIT_CLOTHES:
+  description: A man's suit (clothing, not a lawsuit or a suit of cards).
+  triggers:
+    np: [suit and tie, business suit, three-piece suit]
+EASYGOING:
+  description: Relaxed and easygoing by nature (of a person).
+  triggers:
+    predicate_adj: [easygoing ^person, easy-going ^person, relaxed ^person, mellow ^person]
+RELAXED_ATTITUDE:
+  description: A relaxed, unworried attitude (the noun phrase).
+  triggers:
+    np: [a laid-back attitude, a relaxed attitude, a carefree attitude, a laid back attitude]
+TASMANIA:
+  description: Tasmania (the state), in speech (a narrow trigger; a bare "Tasmania" is in too many names).
+  triggers:
+    np: [the island state]
+BRISBANE:
+  description: Brisbane (the city), in speech (a narrow trigger; a bare "Brisbane" is in too many names).
+  triggers:
+    np: [the Queensland capital]
+QUEENSLANDER:
+  description: A person from Queensland (lookup only; no safe trigger, since "Queenslander" is also a house style).
+  triggers:
+    np: [a person from Queensland]
+SOUTH_AUSTRALIAN:
+  description: A person from South Australia (lookup only; "a South Australian" starts many other phrases).
+  triggers:
+    np: [a person from South Australia]
+DROP_BEAR:
+  description: The drop bear, a made-up killer koala used to tease visitors (lookup only).
+  triggers:
+    np: [a killer koala, a carnivorous koala]
+AUSSIE_RULES:
+  description: Australian rules football, mockingly (lookup only; the plain name shouldn't be mocked).
+  triggers:
+    np: [Aussie rules football, as its detractors call it]
+GREY_NOMAD:
+  description: A retiree touring long-term by caravan (lookup only).
+  triggers:
+    np: [a retired caravanner, retired caravanners]
+FREO_DOCTOR:
+  description: Perth's afternoon sea breeze (lookup only; a sea breeze elsewhere isn't it).
+  triggers:
+    np: [Perth's afternoon sea breeze]
+SCHOOLIES:
+  description: School leavers' celebration week (lookup only; spring break and senior week are other things).
+  triggers:
+    np: [the school leavers' celebration week]
+ESHAY:
+  description: A young member of the eshay street subculture (lookup only; no plain equivalent).
+  triggers:
+    np: [a member of the eshay subculture]
+ON_THE_TOOLS:
+  description: Working hands-on at a trade (lookup only; no safe trigger).
+  triggers:
+    predicate_adj: [doing hands-on trade work]
+MIND_YOUR_OWN:
+  description: An evasive answer to a nosy question about what something is (lookup only).
+  triggers:
+    np: [a thingamajig for a whatsit]
+
+# --- second-pass round 2026-10-13 (research/second-pass-round-2026-10-13) ----------------------------------
+EAGER:
+  description: Eager to do or have something (of a person); "keen" is the everyday Australian word.
+  triggers:
+    predicate_adj: [eager ^person]
+VERY_EAGER:
+  description: Very eager, raring to go (of a person). Apart from EAGER, so a plain "eager" isn't overstated.
+  triggers:
+    predicate_adj: [very eager ^person, really eager ^person, extremely eager ^person, raring to go ^person]
+KEEN_ON:
+  description: Enthusiastic about a thing or an idea, into it. Not "fond of", which can be said of a person with
+    no romance in it (and "keen on her" has some).
+  triggers:
+    predicate_adj: [enthusiastic about]
+SUPPOSED_TO:
+  description: Supposed to, expected or obliged to ("you're supposed to wait"), or reputed to.
+  triggers:
+    predicate_adj: [supposed to]
+OCCASIONAL:
+  description: Occasional, one here and there ("the occasional beer").
+  triggers:
+    adj: [the occasional]
+QUITE_A_LOT:
+  description: Quite a lot, a fair amount (a middling quantity, not a huge one).
+  triggers:
+    np: [quite a lot, quite a bit, a fair amount]
+    adv: [quite a lot, quite a bit, considerably ^adj]
+DEAD_EASY:
+  description: Very easy, no trouble at all (as a predicate, with nothing after it).
+  triggers:
+    predicate_adj: [very easy !=to|for, really easy !=to|for, easy as pie, a piece of cake]
+ALL_DONE:
+  description: Completely finished and settled (a job, a deal, a match).
+  triggers:
+    predicate_adj: [all done !=for|with|up, over and done with, all finished !=with, completely finished !=with]
+WORKED_UP:
+  description: Agitated, worked up (of a person).
+  triggers:
+    predicate_adj: [worked up ^person, all worked up]
+STAGGERED:
+  description: Badly shaken, thrown off balance by a blow or bad news (of a person).
+  triggers:
+    predicate_adj: [thrown for a loop, floored ^person, knocked sideways ^person]
+STAGGER_SOMEONE:
+  description: Shake someone badly, throw them off balance (of news or a blow).
+  triggers:
+    vp: ['throw {obj} for a loop', 'knock {obj} sideways']
+FRIDGE:
+  description: A refrigerator (the appliance, not a refrigerated truck or rail car).
+  triggers:
+    np: [refrigerator !=car|cars|truck|trucks|van|vans|ship|ships]
+GET_ON_THE_PHONE:
+  description: Get on the phone, ring someone up.
+  triggers:
+    vp: [get on the phone]
+GO_OFF_FOOD:
+  description: Of food, spoil or turn bad. Not "go bad" or "turn sour", which things and relations do too.
+  triggers:
+    vp: [go rancid, go mouldy, go moldy, spoil quickly, spoil easily]
+EXASPERATION:
+  description: Exasperation at bad luck (lookup only). "Can you beat that" is also a challenge to beat a record.
+  triggers:
+    interjection: [well wouldn't that just rot your socks off]
+GRIDIRON:
+  description: American football (the game). A bare "football" is left alone, since it is a different game in every
+    country.
+  triggers:
+    np: [American football]
+
+# --- fourth-pass round 2026-10-14, by hand (research/fourth-pass-round-2026-10-14) -------------------------
+# Outside the round's section: each needs a not_in, or carries an existing entry (a round writes neither).
+MEDAL_AWARD:
+  description: A medal or an award won (for bravery, a prize, an honour).
+  # an award in official or technical prose is a pay agreement or a contract (the industrial award)
+  not_in: [official, technical]
+  triggers:
+    np: ["a medal !=of", "an award !=of|ceremony|ceremonies|winning|winner|winners|rate|rates|wage|wages"]
+TOLERATE:
+  description: Tolerate, put up with something unwelcome.
+  triggers:
+    vp: ["put up with {np}"]
+ELDERLY:
+  description: Old people in general (the elderly), not one's parents.
+  # casual for a group of people: not in a report, a notice, a doc or a policy
+  not_in: [news, official, technical, instructions]
+  triggers:
+    np: ["the elderly", "elderly people", "old people", "older people", "the aged !=care|pension|pensions|pensioner|pensioners"]
+EMPHATIC_REFUSAL:
+  description: An emphatic refusal (certainly not, not a chance); not a plain "no" answering a question.
+  triggers:
+    interjection: ["absolutely not", "certainly not", "no way", "not a chance", "no chance", "over my dead body"]
+DOUBLE_NO:
+  description: A doubled no, waving off a misunderstanding ("no, no, that's not it").
+  triggers:
+    interjection: ["no, no", "no no", "no, no, no"]
+REPLY_TO_THANKS:
+  description: Answering thanks or an apology (it's fine, no trouble); not reassurance before a warning ("don't
+    worry, it won't explode").
+  triggers:
+    interjection: ["you're welcome", "no problem", "no problem at all", "not a problem", "no trouble",
+                   "it's no trouble", "that's fine", "that's okay", "it's fine", "it's all good", "all good"]
+FAIR_AMOUNT:
+  description: A sizeable amount, often of money (a fair amount of work, a lot of money).
+  triggers:
+    # noun phrases only: not the adverb "quite a lot" ("I travel quite a lot")
+    np: ["a fair amount", "a sizeable amount", "a hefty sum", "a tidy sum", "a lot of money"]
+
+# --- third-pass round 2026-10-13 (research/third-pass-round-2026-10-13) ----------------------------------
+CALL_OFF:
+  description: Cancel a planned thing (a trip, a search, a deal), with the thing named after the verb.
+  triggers:
+    vp: ['call off {np}', 'call {obj} off']
+DRAG_FEET:
+  description: Go slow on something, lag behind the others.
+  triggers:
+    vp: ['drag {poss} feet', 'lag behind !=the|a|an|his|her|their|its|my|our|your|everyone|everybody|us|them|him|schedule|others']
+NUT_OUT:
+  description: Work out a solution or an agreement by thinking it through.
+  triggers:
+    vp: [figure out, hammer out, thrash out, puzzle out]
+RING_UP:
+  description: Phone someone, call them up.
+  triggers:
+    vp: ['give {obj} a call', 'give {obj} a phone call']
+HERES_THE_DEAL:
+  description: Leading into the situation or the plan ("here's the deal").
+  triggers:
+    np: [here's the deal, here is the deal, here's the plan, here is the plan]
+WHATS_THE_DEAL:
+  description: Asking what the situation or the plan is.
+  triggers:
+    np: [what's the deal !=worth|for|between|on|size, what is the deal !=worth|for|between|on|size, what's the plan
+        !=for, what is the plan !=for]
+FIRST_COME:
+  description: First come, first served.
+  triggers:
+    np: ['first come, first served', 'first-come, first-served', first come first served]
+COWORKER:
+  description: A person you work with (a coworker).
+  triggers:
+    np: [coworker, co-worker]
+DIEHARD_FAN:
+  description: A die-hard, obsessive fan or supporter.
+  triggers:
+    np: [die-hard fan !=of, diehard fan !=of, die-hard supporter !=of, diehard supporter !=of]
+DIRT_CHEAP:
+  description: Very cheap to buy (of a thing). Not "very cheap" of a person, which is stingy.
+  triggers:
+    predicate_adj: [dirt cheap, dirt-cheap, very inexpensive, really inexpensive]
+IN_TOP_FORM:
+  description: Performing at a peak (a player, a side, a band).
+  triggers:
+    predicate_adj: [in top form, in fine form, in great form, on top form, in peak form]
+FAR_BETTER:
+  description: Far better than, well ahead of (with what it is compared with after it).
+  triggers:
+    predicate_adj: [far superior to, vastly superior to, miles ahead of]
+GO_WRONG_BADLY:
+  description: Of a plan or a situation, go badly wrong.
+  triggers:
+    vp: [go awry, go haywire, go badly wrong, go horribly wrong, go terribly wrong]
+GOOD_INNINGS:
+  description: Live a long (and full) life.
+  triggers:
+    vp: [live a long and full life, live a long and happy life, live a long life, live a full and long life]
+IN_TOTAL:
+  description: Altogether, counting everything (a sum or a count).
+  triggers:
+    adv: [in total !=darkness|silence|control|contrast|disregard|agreement|chaos|confusion|secrecy|isolation|despair|awe|shock|disbelief|denial|ignorance|freedom|safety|comfort|war|eclipse|failure|charge|command|recall]
+QUITE_A_FEW:
+  description: Quite a few, a sizeable number (before a plural noun).
+  triggers:
+    adj: [quite a few]
+UMBRELLA:
+  description: An umbrella for the rain or sun (not an umbrella organisation, term or policy).
+  triggers:
+    np: [umbrella !=term|terms|organisation|organisations|organization|organizations|group|groups|body|bodies|policy|policies|insurance|fund|funds|company|companies|brand|brands|agreement|agreements|union|unions|of|for|stand|stands|movement|structure]
+OUT_BUSH:
+  description: Out in the country, far from towns (as a place phrase).
+  triggers:
+    adv: [out in the countryside, out in the sticks, out in the boondocks, in the boondocks, out in the backwoods]
+THROW_TANTRUM:
+  description: Throw a tantrum (a fit of temper, a child's or one like it). Apart from LOSE_TEMPER, so "lose his
+    temper" isn't made childish.
+  triggers:
+    vp: [throw a tantrum, have a tantrum, throw a hissy fit, have a hissy fit, pitch a fit]
+MISBEHAVE:
+  description: Behave badly (of a person, often a child). Apart from PLAY_UP, which a machine can do too.
+  triggers:
+    vp: [misbehave]
+EMPHATIC_NO:
+  description: A scornful, emphatic "certainly not" in answer to a question (lookup only); the form echoes the question's
+    subject, which no plain trigger can.
+  triggers:
+    interjection: [most certainly not in any way whatsoever]
+
+# --- fourth-pass round 2026-10-14 (research/fourth-pass-round-2026-10-14) ----------------------------------
+THATS_ALL:
+  description: Saying there is nothing more, at the end of a list or a share-out.
+  triggers:
+    interjection: [that's all, that is all, that's all there is]
+GO_AHEAD:
+  description: Giving someone the go-ahead or the run of something ("go ahead", "help yourself").
+  triggers:
+    interjection: [go ahead, help yourself, be my guest, feel free]
+SURE_AS_CAN_BE:
+  description: Certainly, without a doubt, as a sentence adverb ("as sure as can be, he was late").
+  triggers:
+    adv: [as sure as can be, sure as can be, as sure as anything, sure as anything]
+WAY_TO_GO:
+  description: The best thing to do or choose ("booking ahead is the way to go").
+  triggers:
+    np: [the way to go !=to|home|there|back|from|in|on|about|out|is|for|into|up|down|over|through|when|if|and|now|forward|ahead|around|across|by|with|after|before|but|was|will|would|can|could]
+TRICKY_QUESTION:
+  description: A hard question to answer.
+  triggers:
+    np: [a tricky question, a tough question, a difficult question, a hard question, a tricky one]
+TURN_OUT_FINE:
+  description: Turn out all right in the end.
+  triggers:
+    vp: [turn out fine, turn out all right, turn out alright, turn out okay, work out fine, work out all right,
+      work out okay]
+OVERCHARGE:
+  description: Charge someone too much.
+  triggers:
+    vp: ['overcharge {np}']
+SPLIT_COST:
+  description: Share a cost in two equal portions.
+  triggers:
+    # A bill split among a group, or going Dutch (each paying their own share), need not mean halves.
+    vp: [go fifty-fifty, split the bill fifty-fifty, split the cost fifty-fifty, split the costs fifty-fifty]
+STOP_WORK:
+  description: Stop working, especially together as a protest.
+  triggers:
+    vp: [stop work !=on|at|in|order|orders|notice|notices|notification, walk off the job, go on strike]
+FINISH_LINE:
+  description: Get something finished or through (a deal, a bill, a project).
+  triggers:
+    vp: ['get {obj} across the finish line', 'get {obj} over the finish line', 'get {obj} across the line']
+LATER_ON:
+  description: At some point in the future.
+  triggers:
+    # "further down the road/line" is as often a place ("the pub is further down the road"): time phrases only
+    adv: [somewhere down the road, later down the road, somewhere down the line, later down the line,
+          at some point in the future]
+TAKE_FOREVER:
+  description: Take a very long time.
+  triggers:
+    vp: [take forever, take ages]
+THAT_CROWD:
+  description: A particular group of people or an outfit, pointed at ("that crowd").
+  triggers:
+    np: [that crowd]
+HYPER:
+  description: Overexcited, unable to keep still (of a person).
+  triggers:
+    predicate_adj: [bouncing off the walls, hyper ^person]
+ONCE_OVER:
+  description: Look over carefully, to check or judge.
+  triggers:
+    vp: ['give {np} the once-over', 'cast an eye over {np}', 'look {obj} over']
+GET_OUT_OF_THE_WAY:
+  description: Move out of someone's path.
+  triggers:
+    vp: [get out of the way]
+MINOR_BUG:
+  description: A minor illness going around (lookup only); "a bug" is mostly software, and "a virus" can be grave.
+  triggers:
+    np: [a minor unnamed illness going around the office]
+ENGINE_POWER:
+  description: An engine's pulling power (lookup only); "power" and "horsepower" have too many other senses and
+    numbers.
+  triggers:
+    np: [the pulling power of an engine under the bonnet]
+SAUSAGE_SIZZLE:
+  description: A fundraising barbecue of sausages in bread (lookup only); there is no plain English name for it.
+  triggers:
+    np: [a fundraising barbecue selling sausages in slices of bread]
+WANT_NO_PART_OF:
+  description: Refuse to have anything to do with something (lookup only).
+  triggers:
+    vp: ['refuse to have anything at all to do with {np}']
+
+# --- dinkum-check round 2026-10-14 (research/dinkum-check-round-2026-10-14) ----------------------------------
+BOTCH:
+  description: Get something badly wrong, ruin it by a mistake (a job, a plan, a chance), with what was spoiled
+    after it or nothing.
+  triggers:
+    vp: [screw up, mess up !=the|a|an|his|her|my|your|their|our|its|this|that|these|those|hair|room|kitchen|house|bed|desk|place|everything|me|him|them|us,
+      botch, bungle, foul up]
+BLUNDER:
+  description: A bad mistake that spoils something, a bungle (not a plain error of fact).
+  triggers:
+    np: [a blunder, a botch-up, a foul-up, a cock-up, a mix-up]
+UNDER_PRESSURE:
+  description: Of a person (a pronoun or a name), under pressure to deliver or to cope.
+  triggers:
+    predicate_adj: [under pressure ^person, under a lot of pressure ^person, under heavy pressure ^person, under
+        enormous pressure ^person, under intense pressure ^person]
+NOT_KNOW_AT_ALL:
+  description: Not know someone at all, not recognise them ("not know him from Adam").
+  triggers:
+    clause: ['{subj} {do}n''t know {obj} from Adam', '{subj} {do} not know {obj} from Adam', '{subj} wouldn''t know
+        {obj} from Adam', '{subj} would not know {obj} from Adam']
+LIGHT_RAIN:
+  description: Raining lightly, in a few drops (of the weather).
+  triggers:
+    # the weather's "it" only: she drizzled honey, and "she was drizzling" isn't rain
+    clause: ['it {be} drizzling', 'it {be} raining lightly', 'it {be} only just raining']
+A_RAFT_OF:
+  description: A large number of (things), before a plural noun ("a raft of changes", "a slew of awards").
+  triggers:
+    adj: [a raft of !=logs|timber|planks|barrels|ice|pumice|seaweed|kelp|weed|debris|branches|wood|reeds|bamboo|rubbish|plastic|ants|otters|ducks|birds,
+      a slew of, a whole raft of, a whole slew of, a whole host of]

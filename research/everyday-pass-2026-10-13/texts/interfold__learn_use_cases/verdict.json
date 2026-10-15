@@ -1,0 +1,179 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "unharnessed": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 4,
+   "flow": 3,
+   "variety": 2,
+   "essence": 4
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Every property, limit and table row survives: \"T + 1 committee members who get in cahoots can decrypt any ciphertext\", \"On mainnet, only `Small` (T = 9) can be requested at launch\", \"Use `getE3Quote` to get the fee\". \"No single operator can be trusted to mind the inputs\" slightly reframes \"is acceptable as the custodian\" but keeps the point.",
+   "sense": "Terms fit: \"ticks these boxes\", \"chip in inputs\", \"The catch is the computation\", \"eats into the limited noise budget\", \"stuff up the result\", \"stop the E3 dead\".",
+   "authenticity": "Natural Australian technical English: \"stack your task up against a working example\", \"Kick off with the [CRISP introduction]\". Spelling localised: \"organisations\".",
+   "register": "A light-to-middle Aussie touch, closer to level 3 than the level 5 asked: whole lines read plainly, such as \"The design can help an application meet data-protection goals.\" No swearing, though uncle-bob is allowed.",
+   "tone": "Keeps the clear, careful developer-doc tone, warnings intact: \"The design doesn't, on its own, make an application compliant with a regulation.\"",
+   "flow": "Reads smoothly: \"Before you build an auction, make sure your secure process can work out the result within that budget.\"",
+   "variety": "Varied: \"ticks these boxes\", \"chip in\", \"the catch\", \"eats into\", \"in cahoots\", \"stuff up\". \"work out\" recurs.",
+   "essence": "Unmistakably the original page: structure, table, code and link cards kept."
+  },
+  "unharnessed": {
+   "meaning": "The facts survive, including the table and limits: \"If T + 1 committee members get together and collude, they can decrypt any ciphertext\". One link card loses a point: \"Design rules for E3 programs that won't leave you up the creek without a paddle\" drops \"secure\". Asides like \"so don't get your hopes up\" are colour.",
+   "sense": "Most terms fit: \"the committee's graft\" for work, \"Where it comes unstuck is the computation\", \"chews through the limited noise budget\", \"a dodgy ciphertext\" for malformed, \"the whole box and dice\". \"no skin off anyone's nose if that result is public\" strains for \"the result can be public\".",
+   "authenticity": "Mostly natural (\"Have a good squiz at these limits\", \"give an app a leg up\"), with some stock lines: \"up the creek without a paddle\", \"full stop\", \"for all the world to see\".",
+   "register": "A full, broad voice through the prose, close to level 5: \"Righto, this page runs through the jobs\", \"The app can hang about for the E3 stages\". No swearing, within uncle-bob.",
+   "tone": "Keeps the docs helpful, though jokes shade the cautions: \"An E3 won't give you a result in real time, so don't get your hopes up.\"",
+   "flow": "Reads well, with a few padded lines: \"The whole private voting app, start to finish, from circuits to client.\"",
+   "variety": "Wide range: \"chip in\", \"hang about\", \"whips up\", \"legit\", \"comes unstuck\", \"chews through\", \"graft\", \"leg up\", \"Knock up\".",
+   "essence": "Clearly the original page, structure and code intact, retold in voice."
+  },
+  "engine": {
+   "meaning": "All content kept, nearly verbatim: \"No single operator is acceptable as the custodian of the inputs.\"",
+   "sense": "The few swaps fit: \"knock together an auction\", \"wanna know\".",
+   "authenticity": "The original with eye-dialect pronouns bolted on: \"ya can compare yer task\", \"each 'ave a deadline\", \"on yer computer\". \"'ave\" reads as Cockney, not Australian.",
+   "register": "Largely untranslated, far off level 5: \"This page describes tasks that fit an E3 and the limits that apply to them.\"",
+   "tone": "The developer-doc tone survives, jarred by stray dialect in technical lines: \"decryption each 'ave a deadline\".",
+   "flow": "Jarring joins of formal prose and eye dialect: \"Before you knock together an auction, confirm that yer secure process can compute the result\".",
+   "variety": "Leans on \"ya\" and \"yer\" with almost nothing else.",
+   "essence": "Recognisably the original page; it is mostly the original."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "The design can help an application meet data-protection goals.",
+    "original": "The design can help an application meet data-protection goals.",
+    "severity": "major",
+    "why": "Many lines left as they were; the telling is well short of level 5."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "Design rules for E3 programs that won't leave you up the creek without a paddle.",
+    "original": "Design rules for secure E3 programs.",
+    "severity": "major",
+    "why": "Swaps the point (security) for a stock idiom about being stranded."
+   },
+   {
+    "quote": "it's no skin off anyone's nose if that result is public",
+    "original": "the result can be public",
+    "severity": "minor",
+    "why": "The idiom shifts a technical condition into indifference."
+   },
+   {
+    "quote": "so don't get your hopes up",
+    "original": "",
+    "severity": "minor",
+    "why": "Tacked-on aside that makes a design constraint sound like a disappointment."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "decryption each 'ave a deadline",
+    "original": "decryption each have a deadline",
+    "severity": "major",
+    "why": "H-dropping is Cockney, not Australian, and it sits in a technical sentence."
+   },
+   {
+    "quote": "ya can compare yer task",
+    "original": "you can compare your task",
+    "severity": "minor",
+    "why": "Eye-dialect pronouns are the only change in most lines."
+   },
+   {
+    "quote": "This page describes tasks that fit an E3 and the limits that apply to them.",
+    "original": "This page describes tasks that fit an E3 and the limits that apply to them.",
+    "severity": "major",
+    "why": "Left largely untranslated against a level-5 brief."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "Accurate, natural and clean, but much lighter than the level-5 brief.",
+  "unharnessed": "The fullest and most varied telling, at the brief's weight, with a couple of stock idioms and one link card that loses its point.",
+  "engine": "Mostly the original with \"ya\", \"yer\" and a Cockney \"'ave\" dropped in; far lighter than the brief."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed",
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,239 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "unharnessed": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 2,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 3,
+   "tone": 2,
+   "flow": 1,
+   "variety": 2,
+   "essence": 2
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Every joke and every claim survives, from \"Vice Turkey\" to \"Yes, We Cran\" and the \"leftovers\" close. Additions are colour hanging off the original: \"longer than a wet week\" on the campaign, \"Not a gutless chook among 'em\" after the chicken pun, \"sticky fingers and all\" on the children.",
+   "sense": "Terms fit: \"on the bench\" for the backup role, \"let 'em off the hook\" for clemency, \"ankle biters\" for children, \"crook\" for sick, \"stinkers\" for the bad jokes. \"rustle him up a pair of aviator sunnies\" is fine.",
+   "authenticity": "Largely natural pub-yarn voice: \"me great privilege\", \"this arvo\", \"every man and his dog has a feed\". A couple of non-Aussie forms: \"chuffed\" is British, \"folks\" leans American.",
+   "register": "A full level-5 yarn throughout, dropped g's and all (\"pushin' on\", \"doin'-it-tough\"). Swearing stays mild (\"Too bloody right\", \"every poor bugger\"), well within vulgarity 2.",
+   "tone": "The jokes stay jokes and the serious middle stays warm and earnest: \"We're a mob that looks out for each other and has each other's backs.\"",
+   "flow": "Reads aloud easily; the long health-cover sentence with \"millions of ankle biters among 'em, sticky fingers and all, who finally know they're covered if they get crook\" runs a little long.",
+   "variety": "Wide and unrepeated: \"stoked\", \"wet week\", \"sunnies\", \"arvo\", \"copped\", \"chook\", \"ankle biters\", \"crook\", \"beaut\", \"stinkers\".",
+   "essence": "Unmistakably Obama's last turkey pardon: the self-deprecating gags, the policy list, the inclusive creed, the pun-laden close."
+  },
+  "unharnessed": {
+   "meaning": "All points kept, including every pun (\"cold turkey\", \"polls to poultry\", \"weren't chicken\", \"Yes, We Cran\"). \"Tot can't pull his weight on the day\" shifts \"can't fulfill his duties\" slightly.",
+   "sense": "Mostly exact (\"on the mend\", \"let 'em off the hook this arvo\", \"a few shockers\"). \"pull his weight\" means do a fair share, not be unable to perform, so it strains a little.",
+   "authenticity": "Natural throughout: \"That was a ripper, that one\", \"never been a walk in the park\", \"We're a mob that looks out for each other\". \"after a long arse of a campaign season\" is a slightly awkward construction; \"folks\" leans American.",
+   "register": "Clearly Aussie but nearer level 4 than 5: long stretches stay close to the original (\"guided by values and ideals that have been a light to all of humanity\"). Swearing (\"bloody\", \"arse\") is within vulgarity 2.",
+   "tone": "Jokes land as jokes and the serious passages stay serious: \"I reckon we're judged by how we look after the poor and the vulnerable\".",
+   "flow": "Reads smoothly; \"a long arse of a campaign season\" is the one clunky join.",
+   "variety": "Reasonably varied (\"stoked\", \"ripper\", \"sunnies\", \"arvo\", \"crook\", \"a feed\", \"shockers\"); \"reckon\" recurs a few times.",
+   "essence": "Unmistakably the original speech, its jokes and its message intact."
+  },
+  "engine": {
+   "meaning": "Several lines change or garble the sense: \"the brave turkeys who werea lucky bugger\" inverts \"weren't so lucky\"; \"we're cactus, stuffed on getting him a pair of aviator glasses\" loses the meaning; \"no matter what some drongo reckons\" adds a jab not in the original.",
+   "sense": "\"cactus\" (broken) and \"stuffed\" make no sense in \"we're cactus, stuffed on getting him\"; \"proved that they weren't chook\" breaks the chicken pun; \"Yep, We Cran\" breaks the \"Yes, We Can\" pun.",
+   "authenticity": "Stage-Australian: stock interjections bolted onto sentence starts (\"Crikey,\", \"Struth,\", \"Bugger me,\", \"Mate,\"), plus US \"Jeez Louise\" and the original's \"come one\" typo left in.",
+   "register": "Heavy slang and swearing reach level 5, but much text is the original untouched (\"by an adherence to a common creed\"), and the weight is uneven. \"fuckin' oath\" and \"Oh, shit\" are within vulgarity 2 but \"every bastard\" and \"Faaaaaark me\" push its spirit.",
+   "tone": "\"Oh, shit, and there are many families of servicemembers who had empty chairs at the table\" makes the solemn passage flippant; \"Faaaaaark me.\" ends the speech on a crude note it never had.",
+   "flow": "Hard to read: \"Struth, (laughter.)\", \"who werea lucky bugger\", \"the spirit of a hungry battlers\", \"values'n ideals\".",
+   "variety": "Leans on the same tics: \"Anyway,\" three times, \"bloody\" repeatedly (\"my bloody great privilege -- well, it's me bloody privilege\").",
+   "essence": "Recognisable as the turkey pardon, but the puns are broken and the earnest middle is undercut."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "we're chuffed to have two of the lucky ones here",
+    "original": "we're honored to be joined by two of the lucky ones",
+    "severity": "minor",
+    "why": "\"chuffed\" is British rather than Australian."
+   },
+   {
+    "quote": "the number of folks without health cover",
+    "original": "our uninsured rate",
+    "severity": "minor",
+    "why": "\"folks\" leans American."
+   },
+   {
+    "quote": "millions of ankle biters among 'em, sticky fingers and all",
+    "original": "including millions of children",
+    "severity": "minor",
+    "why": "\"sticky fingers and all\" is harmless colour but clutters an already long sentence."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "after a long arse of a campaign season",
+    "original": "after a long campaign season",
+    "severity": "minor",
+    "why": "Awkward construction; \"a bloody long campaign\" would sit more naturally."
+   },
+   {
+    "quote": "just in case Tot can't pull his weight on the day",
+    "original": "just in case Tot can't fulfill his duties",
+    "severity": "minor",
+    "why": "\"pull his weight\" means do a fair share, not be unable to do the job."
+   },
+   {
+    "quote": "guided by values and ideals that have been a light to all of humanity",
+    "original": "defined by values and ideals that have been a light to all humanity",
+    "severity": "minor",
+    "why": "Several passages stay close to the original, light for level 5."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Well, we're cactus, stuffed on getting him a pair of aviator glasses. Struth, (laughter.)",
+    "original": "We're working on getting him a pair of aviator glasses. (Laughter.)",
+    "severity": "critical",
+    "why": "Garbled; the line no longer says they are trying to get him glasses."
+   },
+   {
+    "quote": "who werea lucky bugger",
+    "original": "who weren't so lucky",
+    "severity": "critical",
+    "why": "Inverts the meaning and breaks the grammar."
+   },
+   {
+    "quote": "proved that they weren't chook",
+    "original": "proved that they weren't chicken",
+    "severity": "major",
+    "why": "Breaks the \"chicken\" (coward) pun."
+   },
+   {
+    "quote": "Yep, We Cran",
+    "original": "Yes, We Cran",
+    "severity": "major",
+    "why": "Breaks the pun on \"Yes, We Can\"."
+   },
+   {
+    "quote": "Oh, shit, and there are many families of servicemembers",
+    "original": "And there are many families of servicemembers",
+    "severity": "major",
+    "why": "Swear makes a solemn passage about military families flippant."
+   },
+   {
+    "quote": "no matter what some drongo reckons",
+    "original": "",
+    "severity": "major",
+    "why": "Invented political jab not in the original."
+   },
+   {
+    "quote": "Faaaaaark me.",
+    "original": "",
+    "severity": "major",
+    "why": "Added crude close that changes the tone of the ending."
+   },
+   {
+    "quote": "Jeez Louise, Malia and Sasha",
+    "original": "Malia and Sasha",
+    "severity": "minor",
+    "why": "US interjection, bolted on."
+   },
+   {
+    "quote": "Now, come one.",
+    "original": "Now, come one.",
+    "severity": "minor",
+    "why": "Typo carried over untouched."
+   },
+   {
+    "quote": "Anyway, low unemployment.",
+    "original": "Low unemployment.",
+    "severity": "minor",
+    "why": "\"Anyway,\" is a repeated filler tic stuck on sentence starts."
+   },
+   {
+    "quote": "the spirit of a hungry battlers",
+    "original": "the spirit of a hungry people",
+    "severity": "major",
+    "why": "Broken grammar."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A full, natural level-5 retelling that keeps every joke and the earnest middle.",
+  "unharnessed": "Faithful and natural, a notch lighter than level 5.",
+  "engine": "Bolted-on slang and swearing, broken puns and garbled lines; the tone of the serious passages is undercut."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

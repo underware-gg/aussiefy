@@ -1,0 +1,314 @@
+# Everyday register: INSTRUCTIONS AND HOW-TO (recipes, DIY, appliance and product instructions,
+# safety and public-health advice, gardening, park and travel guidance, FAQs). Source texts for
+# testing the translator; committed files have public-domain or CC BY-SA 4.0 declarations.
+# Rockwell has file: null and a remote pointer pending Australian redistribution review.
+#
+# words: whitespace-split count of the saved file (Python str.split, so no-break spaces count as breaks).
+# Texts are verbatim. Changes are whitespace only (one blank line between blocks, no hard wrapping),
+# plus removal of page furniture (nav, link lists, image captions, page numbers), noted per item.
+# Pre-1929 Gutenberg texts keep their original spelling and punctuation; Gutenberg's "--" became
+# U+2014 and its _italic_ markers were dropped (typography only), as in tests/corpus/classics.
+
+- file: instructions/nps_bear_safety.txt
+  title: Staying Safe Around Bears
+  genre: safety
+  register: neutral
+  tone: serious, bossy (shouty capitals, "Do NOT ...")
+  url: https://www.nps.gov/subjects/bears/safety.htm
+  author: National Park Service (US Department of the Interior)
+  licence: public domain (US federal government work)
+  licence_evidence: >-
+    https://www.nps.gov/aboutus/disclaimer.htm: "material created by the National Park Service and
+    presented on this website, unless otherwise indicated, is generally considered in the public
+    domain." No other notice on the page text.
+  retrieved: 2026-10-12
+  words: 729
+  excerpt: >-
+    From "Once a bear has noticed you" (the "Bear Encounters" section) to the end of "Bear Attacks"
+    ("do NOT play dead—ﬁght back!"). Omits the opening "What Should I Do" paragraphs and the
+    bear-spray section.
+  notes: >-
+    The page uses the "ﬁ"/"ﬂ" ligature characters (U+FB01, U+FB02) in a few words (wooﬁng, ﬂat,
+    ﬂeeing, ﬁght); kept as published. One sentence ("Do not make any loud noises or screams...") is
+    repeated in the source; kept.
+
+- file: instructions/nws_lightning_safety.txt
+  title: "Overview: Lightning Safety"
+  genre: safety
+  register: neutral
+  tone: serious, urgent, slogan-driven ("When Thunder Roars, Go Indoors!")
+  url: https://www.weather.gov/safety/lightning-safety-overview
+  author: National Weather Service (NOAA)
+  licence: public domain (US federal government work)
+  licence_evidence: >-
+    https://www.weather.gov/disclaimer: "The information on National Weather Service (NWS) Web pages
+    are in the public domain, unless specifically noted otherwise". The same notice asks users not to
+    "modify its content and then present it as official government material", so translations must
+    not be passed off as NWS text.
+  retrieved: 2026-10-12
+  words: 546
+  excerpt: >-
+    The whole article body, from "There is no safe place outside" to "...Defibrillator if needed."
+    (the "Return to Lightning Safety page" link and site footer dropped).
+  notes: >-
+    The text refers to "The graphs below"; the graphs are not included. Source has the typo "when
+    thunderstorm are in the area"; kept.
+
+- file: instructions/wikibooks_chocolate_chip_cookies.txt
+  title: "Cookbook: Chocolate Chip Cookies I"
+  genre: recipe
+  register: casual
+  tone: cheerful, chatty tips
+  url: https://en.wikibooks.org/wiki/Cookbook:Chocolate_Chip_Cookies_I
+  author: Wikibooks contributors (page history at https://en.wikibooks.org/w/index.php?title=Cookbook:Chocolate_Chip_Cookies_I&action=history)
+  licence: CC BY-SA 4.0
+  licence_evidence: >-
+    Page footer: "Text is available under the Creative Commons Attribution-ShareAlike License"
+    linking to https://creativecommons.org/licenses/by-sa/4.0/ ("This page was last edited on
+    16 April 2026").
+  licence_url: https://creativecommons.org/licenses/by-sa/4.0/
+  retrieved: 2026-10-12
+  words: 724
+  excerpt: >-
+    Ingredients, Procedure and "Notes, tips, and variations", from "Ingredients" to "...for a nice
+    soft middle." The breadcrumb line and the category links at the end are dropped.
+  notes: >-
+    Very American: sticks of butter, cups, all-purpose flour, baking soda, °F first, "chips". Ingredient
+    lines are list items.
+
+- file: instructions/wikibooks_southern_cornbread.txt
+  title: "Cookbook: Southern Cornbread"
+  genre: recipe
+  register: neutral
+  tone: plain, homely
+  url: https://en.wikibooks.org/wiki/Cookbook:Southern_Cornbread
+  author: Wikibooks contributors (page history at https://en.wikibooks.org/w/index.php?title=Cookbook:Southern_Cornbread&action=history)
+  licence: CC BY-SA 4.0
+  licence_evidence: >-
+    Page footer: "Text is available under the Creative Commons Attribution-ShareAlike License"
+    linking to https://creativecommons.org/licenses/by-sa/4.0/ ("This page was last edited on
+    19 July 2025").
+  licence_url: https://creativecommons.org/licenses/by-sa/4.0/
+  retrieved: 2026-10-12
+  words: 283
+  excerpt: >-
+    From the introduction to the end of "Notes, tips, and variations" ("...more crumbly if stored
+    this way."); breadcrumb, "See also" list and categories dropped.
+  notes: Self-rising corn meal, buttermilk, skillet, 425°F, "dinner (supper)".
+
+- file: instructions/farmer_boston_baked_beans_1896.txt
+  title: Sausages; Boston Baked Beans (The Boston Cooking-School Cook Book, 1896)
+  genre: recipe
+  register: neutral
+  tone: terse, matter-of-fact, old-fashioned
+  url: https://www.gutenberg.org/ebooks/65061
+  author: Fannie Merritt Farmer
+  licence: public domain (published in the US in 1896, before 1929)
+  licence_evidence: >-
+    Project Gutenberg catalogue page https://www.gutenberg.org/ebooks/65061, Copyright Status:
+    "Public domain in the USA." Text taken from
+    https://www.gutenberg.org/cache/epub/65061/pg65061-images.html.
+  retrieved: 2026-10-12
+  words: 319
+  excerpt: >-
+    Chapter XVI (pork), from "Sausages" to "Yellow-eyed beans are very good when baked." The
+    page number "239" printed mid-word in the HTML ("last hour of 239cooking") is removed.
+  notes: >-
+    Imperative recipe prose with the ingredients written into the method (quart, pea beans, salt pork,
+    molasses, lard pail). Not Australian-origin; American 1890s usage.
+
+- file: instructions/wikivoyage_us_gasoline.txt
+  title: "Driving in the United States: Gasoline"
+  genre: travel
+  register: neutral
+  tone: informative, wry asides, one bossy line ("Do not mix them up.")
+  url: https://en.wikivoyage.org/wiki/Driving_in_the_United_States
+  author: Wikivoyage contributors (page history at https://en.wikivoyage.org/w/index.php?title=Driving_in_the_United_States&action=history)
+  licence: CC BY-SA 4.0
+  licence_evidence: >-
+    Page footer: "Text is available under the Creative Commons Attribution-ShareAlike License"
+    linking to https://creativecommons.org/licenses/by-sa/4.0/.
+  licence_url: https://creativecommons.org/licenses/by-sa/4.0/
+  retrieved: 2026-10-12
+  words: 412
+  excerpt: >-
+    First five paragraphs of the "Gasoline" section, from 'Gasoline ("gas") is sold by the gallon' to
+    "Do not mix them up."
+  notes: >-
+    Rich in Americanisms the translator should handle: gas/gasoline, gallon, pump your own gas, "50
+    bucks on pump number 1", truckers, color, liters. Written for visitors, so it explains US terms.
+
+- file: instructions/fda_picnic_food_safety.txt
+  title: Handling Food Safely While Eating Outdoors
+  genre: food safety
+  register: neutral
+  tone: cheerful opening, then firm rules
+  url: https://www.fda.gov/food/buy-store-serve-safe-food/handling-food-safely-while-eating-outdoors
+  author: US Food and Drug Administration
+  licence: public domain (US federal government work)
+  licence_evidence: >-
+    https://www.fda.gov/about-fda/about-website/website-policies: "Unless otherwise noted, the
+    contents of the FDA website (www.fda.gov) — both text and graphics — are not copyrighted. They are
+    in the public domain".
+  retrieved: 2026-10-12
+  words: 639
+  excerpt: >-
+    From "Picnic and barbecue season" through the "Follow Safe Grilling Tips" section ("...ready at
+    grill-side to serve your food."). Omits the serving and "Four Simple Steps" sections.
+  notes: Picnic, barbecue, cooler, grill, "40 °F". Page "Content current as of 03/05/2024".
+
+- file: instructions/fda_microwave_ovens.txt
+  title: "Microwave Ovens: Cooking with Microwaves; Avoiding Injuries from Super-Heated Water"
+  genre: appliance
+  register: formal
+  tone: explanatory, cautionary
+  url: https://www.fda.gov/radiation-emitting-products/resources-you-radiation-emitting-products/microwave-ovens
+  author: US Food and Drug Administration (Center for Devices and Radiological Health)
+  licence: public domain (US federal government work)
+  licence_evidence: >-
+    https://www.fda.gov/about-fda/about-website/website-policies: "Unless otherwise noted, the
+    contents of the FDA website (www.fda.gov) — both text and graphics — are not copyrighted. They are
+    in the public domain".
+  retrieved: 2026-10-12
+  words: 501
+  excerpt: >-
+    The "Cooking with Microwaves" and "Avoiding Injuries from Super-Heated Water in Microwave Ovens"
+    sections, from "Microwaves are produced inside the oven" to "...heat water to the desired
+    temperature."
+  notes: Appliance-manual style; aluminum foil, instant coffee, "spoon full".
+
+- file: instructions/fda_dispose_unused_medicines.txt
+  title: Where and How to Dispose of Unused Medicines
+  genre: public health
+  register: neutral
+  tone: practical, step-by-step
+  url: https://www.fda.gov/consumers/consumer-updates/where-and-how-dispose-unused-medicines
+  author: US Food and Drug Administration
+  licence: public domain (US federal government work)
+  licence_evidence: >-
+    https://www.fda.gov/about-fda/about-website/website-policies: "Unless otherwise noted, the
+    contents of the FDA website (www.fda.gov) — both text and graphics — are not copyrighted. They are
+    in the public domain".
+  retrieved: 2026-10-12
+  words: 583
+  excerpt: >-
+    From "Is your medicine cabinet full" to the end of "Disposing Fentanyl Patches" ("...flush used or
+    leftover patches."); inhaler, other-product and water-supply sections omitted.
+  notes: >-
+    US terms: over-the-counter/OTC, take-back, U.S. Postal Service, trash, cat litter, zipper storage
+    bag. Page "Content current as of 04/16/2025".
+
+- file: instructions/nps_grand_canyon_hike_smart.txt
+  title: "Summer Hiking - Hike Smart (Grand Canyon National Park)"
+  genre: park visitor guidance
+  register: casual
+  tone: encouraging but bossy (exclamations, capitals)
+  url: https://www.nps.gov/grca/planyourvisit/hike-smart.htm
+  author: National Park Service, Grand Canyon National Park
+  licence: public domain (US federal government work)
+  licence_evidence: >-
+    https://www.nps.gov/aboutus/disclaimer.htm: "material created by the National Park Service and
+    presented on this website, unless otherwise indicated, is generally considered in the public
+    domain." No other notice on the page text.
+  retrieved: 2026-10-12
+  words: 572
+  excerpt: >-
+    From "Hiking in the Grand Canyon offers unique challenges" to "...simple yet vital cooling
+    strategy!" The caption of the temperature table ("Average SHADE Temperatures at Phantom Ranch
+    ...") is dropped; the table itself was not extracted.
+  notes: "°F with °C in brackets; pretzels, chips, bandanas, \"cotton is great in the desert!\"."
+
+- file: instructions/nps_yellowstone_faq.txt
+  title: Yellowstone National Park Frequently Asked Questions
+  genre: faq
+  register: neutral
+  tone: friendly, informative
+  url: https://www.nps.gov/yell/faqs.htm
+  author: National Park Service, Yellowstone National Park
+  licence: public domain (US federal government work)
+  licence_evidence: >-
+    https://www.nps.gov/aboutus/disclaimer.htm: "material created by the National Park Service and
+    presented on this website, unless otherwise indicated, is generally considered in the public
+    domain." No other notice on the page text.
+  retrieved: 2026-10-12
+  words: 763
+  excerpt: >-
+    All questions and answers on the page, from "Where do I make reservations to stay in
+    Yellowstone?" to "...Congress has not acted on the recommendation."; link lists after dropped.
+  notes: >-
+    Each question is followed by its answer on the next line (single newline, as extracted). Feet,
+    acres, "late spring through fall". Page "Last updated: June 4, 2026".
+
+- file: instructions/epa_find_and_fix_leaks.txt
+  title: "Fix a Leak Week: Checking for Leaks; Toilet, Faucet and Showerhead Leaks"
+  genre: diy
+  register: casual
+  tone: upbeat, practical
+  url: https://www.epa.gov/watersense/fix-leak-week
+  author: US Environmental Protection Agency (WaterSense)
+  licence: public domain (US federal government work)
+  licence_evidence: >-
+    Written by EPA as a federal agency (17 U.S.C. 105). https://www.epa.gov/web-policies-and-procedures/epa-disclaimers,
+    "Copyright Status": "These documents may be freely distributed and used for non-commercial,
+    scientific and educational purposes. Commercial use of the documents available from the EPA
+    websites may be protected under the U.S. and Foreign Copyright Laws. Individual documents on the
+    EPA website may have different copyright conditions, and that will be noted in those documents."
+    This page carries no such note.
+  retrieved: 2026-10-12
+  words: 742
+  excerpt: >-
+    From "The average household's leaks" (the "Checking for Leaks" section) to the end of the
+    "Showerhead Leaks" section ("...while making this repair."). Dropped: the lines that are only
+    links to third-party videos, PDFs and retailer guides (checklist PDF, water-utility videos,
+    WaterSense Bath Hack videos, Lowe's/Home Depot/manufacturer guides, AWWA calculator, Know Your
+    Flow PDFs). The sentences that introduce those lists ("Here are some online resources from
+    WaterSense partners:") are kept as published.
+  notes: >-
+    Faucet, flapper, food coloring, hardware store, teflon tape, handyperson, gallons. Flag: EPA's
+    general disclaimer is vaguer than FDA/NPS/NWS about commercial reuse; fine for a test corpus.
+
+- file: instructions/ford_manual_before_starting_1919.txt
+  title: "Ford Manual for Owners and Operators of Ford Cars and Trucks (1919): The Car and Its Operation, Answers 1-5"
+  genre: product instructions
+  register: formal
+  tone: instructive, old-fashioned, cautionary
+  url: https://www.gutenberg.org/ebooks/46206
+  author: Ford Motor Company
+  licence: public domain (published in the US in 1919, before 1929)
+  licence_evidence: >-
+    Project Gutenberg catalogue page https://www.gutenberg.org/ebooks/46206, Copyright Status:
+    "Public domain in the USA." Text taken from the plain-text edition
+    https://www.gutenberg.org/cache/epub/46206/pg46206.txt.
+  retrieved: 2026-10-12
+  words: 701
+  excerpt: >-
+    "The Car and Its Operation", questions and answers 1 to 5 (radiator, gasoline, oiling, spark and
+    throttle levers, lever positions for starting). The question lines are kept as headings; the
+    right-margin labels "Answer No. 1" etc. and the illustration caption (Cut No. 1) are dropped;
+    printer's line wrapping removed.
+  notes: Q&A owner's-manual format; gasoline, crank case, pet cocks, muslin, "back kick".
+
+- file: null
+  remote: rockwell_transplanting_1911
+  redistribution: Australian status unconfirmed; keep the full excerpt local.
+  status: copyright
+  title: "Home Vegetable Gardening (1911), Chapter IX: setting out plants"
+  genre: gardening
+  register: casual
+  tone: cheerful, bossy, humorous
+  url: https://www.gutenberg.org/ebooks/7123
+  author: F. F. Rockwell (Frederick Frye Rockwell, 1884-1976)
+  licence: public domain (published in the US in 1911, before 1929)
+  licence_evidence: >-
+    Project Gutenberg catalogue page https://www.gutenberg.org/ebooks/7123, Copyright Status:
+    "Public domain in the USA." Text taken from
+    https://www.gutenberg.org/cache/epub/7123/pg7123-images.html.
+  retrieved: 2026-10-12
+  words: 493
+  excerpt: >-
+    The last part of Chapter IX, from "The reader has not forgotten, of course" to "...for that will
+    keep things growing."
+  notes: >-
+    Hands-and-knees transplanting instructions with jokes ("being careful to keep your toes from
+    undoing your good work"). The author died in 1976; the work is public domain in the US by date
+    of publication, but may still be in copyright in countries using life+70.

@@ -1,0 +1,896 @@
+# Verdicts for slice-fillers.yaml (gap-fill 2026-10-11), with extra items from web/findings.yaml and the
+# agents' `fillers:` lists at the end.
+# Placement mechanics come from aussiefy/garnish.py and engine.py:
+#   opener      "X, ..." at sentence start (inside the quote for speech)
+#   tag         ", X" before sentence-final punctuation; the default `when` is dialogue|question|second_person
+#   connective  "X, ..." on narration sentences that don't already open with a connective
+#   aside       a short standalone sentence after a sentence (paragraph_end, or after a question)
+#   tail        ", X" after a list that ends the sentence (not in speech)
+#   closer      once, after the last sentence. NB: the engine passes no contexts to closers, so a closer's
+#               `when` is currently ignored. Closers marked when: [opinion] need that check added first.
+# Web pages could not be fetched; anything cited as search_summary was judged from the search tool's summary.
+
+# ------------------------------------------------------------------ slice candidates
+- decision: add_entry
+  candidate: dunno
+  entry:
+    id: g-aside-dunno
+    form: "dunno."
+    variants: []
+    type: garnish
+    placement: aside
+    when: [question]
+    concept: [NEW:DONT_KNOW]
+    frame: interjection
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    gloss: A shrug, I've no idea (the narrator answering their own question).
+    notes: General informal English, very common in Australia. Same slot as the existing "search me." and "beats me."
+    sources: ["https://www.goodreads.com/author_blog_posts/5923084-series-glossary?tab=author"]
+  new_concept:
+    id: DONT_KNOW
+    description: Saying you don't know or have no idea.
+    triggers: {clause: ["I don't know", "I have no idea", "no idea", "who knows"]}
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: All three agents used it; it fits the rhetorical-question aside slot next to "search me." and "beats me."
+
+- decision: merge
+  candidate: eh
+  into: g-ay (existing tag "ay"); add "eh" as a spelling variant of g-ay
+  why: Same sentence-final tag; the dictionary already has it spelt "ay". The common spelling "eh" belongs in its variants.
+
+- decision: add_entry
+  candidate: Hey
+  entry:
+    id: g-tag-hey
+    form: hey
+    variants: []
+    type: garnish
+    placement: tag
+    when: [question, exclamation]
+    concept: []
+    frame: tag
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    weight: 0.5
+    gloss: Sentence-final "hey", asking for agreement or adding emphasis ("Good night, hey?").
+    notes: >-
+      Very common in everyday Australian speech ("thanks, hey") but not Australia-specific (also South African and Canadian).
+      Keep the weight low and don't use it alongside "ay" in the same text. The opener "Hey, it's Sam" is a greeting,
+      already covered by GREETING's trigger "hey".
+    sources: ["https://www.wiktionary.com/wiki/hey"]
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: low
+  why: All three agents used it and I'm confident it is current here, but no source labels it Australian.
+
+- decision: add_entry
+  candidate: a motza
+  entry:
+    id: a-motza
+    form: a motza
+    variants: [a motser, a motzer]
+    concept: [NEW:FORTUNE]
+    frame: np
+    intensity: 4
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: [a fortune, a small fortune, a heap of money, a pile of cash, a lot of money]
+    gloss: A huge sum of money, often a win or a windfall ("made a motza").
+    sources:
+      - https://dictionary.com/browse/motser
+      - https://greensdictofslang.com/entry/kzfzcvi
+      - https://www.wordnik.com/words/motza
+  new_concept:
+    id: FORTUNE
+    description: A very large sum of money.
+    triggers: {np: [a fortune, a small fortune, a heap of money, a pile of cash, a pile of money, a lot of money]}
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Well attested Australian slang (dictionary.com and Green's, via search summary); fills the 'a heap of money' gap. It's a noun phrase, not a filler.
+
+- decision: style_guide
+  candidate: a bit
+  guidance: >-
+    Use understatement: soften complaints and praise with "a bit" ("a bit warm" at 45 degrees, "a bit of a pain"),
+    deadpan rather than gushing.
+  why: Monash research documents the habit, but it's a hedge with no fixed slot. Swapping plain "a little" for it adds nothing Australian.
+
+- decision: merge
+  candidate: but (sentence-final)
+  into: but
+  why: Same particle; the entry is under "but".
+
+- decision: reject
+  candidate: good call
+  reason: not_aussie
+  why: General (originally American sporting) English for "good decision"; nothing Australian about it.
+
+- decision: style_guide
+  candidate: I reckon
+  guidance: >-
+    Hedge opinions with "reckon": "I reckon ...", "Reckon he's jealous", or a trailing ", I reckon." on opinion
+    sentences. Don't stack it on a sentence that already has "think" or "reckon".
+  why: THINK already maps think to reckon; the free hedge is a habit. It could later be a tag with when [opinion] if the engine checks for an existing think/reckon.
+
+- decision: style_guide
+  candidate: I s'pose
+  guidance: >-
+    Shrug a point off with "I s'pose" ("Bit of rough luck, I s'pose."); in speech, "suppose" reduces to "s'pose".
+  why: General colloquial hedge with no source; the respelling suits a phonetic rule better than an entry.
+
+- decision: add_entry
+  candidate: Look
+  entry:
+    id: g-look
+    form: look
+    variants: []
+    type: garnish
+    placement: opener
+    when: [dialogue, opinion]
+    concept: []
+    frame: interjection
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    weight: 0.7
+    gloss: '"Look, ...": a frank, levelling opener before a point or excuse.'
+    notes: >-
+      A well-known Australian speech habit (politicians, footballers: "Yeah, look, ..."), but it isn't documented; the
+      web researcher found only a forum aside. Not on questions or plain narration.
+    sources: ["https://singletrackworld.com/forum/off-topic/starting-every-sentence-with-so/paged/2/"]
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: All three agents opened with it independently; it fits the opener slot when limited to speech or opinion sentences.
+
+- decision: add_entry
+  candidate: Mind you
+  entry:
+    id: c-mind-you
+    form: mind you
+    variants: []
+    type: garnish
+    placement: connective
+    when: [narration, opinion]
+    concept: []
+    frame: interjection
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    weight: 0.5
+    gloss: Adds a qualifying afterthought ("Mind you, his brother turned up").
+    notes: Shared with British English, and very natural in an Australian yarn. Best on a sentence that qualifies the one before it, so keep the weight low.
+    sources: []
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: All three agents used it as a connective; it is general Commonwealth English, current here.
+
+- decision: add_entry
+  candidate: Nah, nah
+  entry:
+    id: nah-nah
+    form: nah, nah
+    variants: []
+    concept: [DENY]
+    frame: interjection
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: ["no, no", "no no"]
+    gloss: A doubled, firm-but-friendly no.
+    sources: []
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: All three agents used it; it's the "nah" already in DENY, doubled, so it should replace plain "no, no".
+
+- decision: style_guide
+  candidate: or something
+  guidance: >-
+    Leave details vague with a trailing "or something" / "or somethin'" ("end of financial year or something").
+  why: General English extender. It hedges a detail, not a closing list, so the tail slot doesn't fit it.
+
+- decision: style_guide
+  candidate: or whatever
+  guidance: >-
+    Shrug off your own suggestion with "or whatever" ("just a suggestion or whatever").
+  why: General English; no placement fits because it hangs off a noun phrase.
+
+- decision: reject
+  candidate: What else?
+  reason: not_lexical
+  why: A monologue's own thinking-aloud beat, general English; the engine can't place it sensibly.
+
+- decision: style_guide
+  candidate: will ya?
+  guidance: >-
+    Soften a request to a mate with a trailing "will ya?" ("Pass us the tongs, will ya?"). Only on imperatives.
+  why: Needs an imperative sentence, and the engine has no imperative context. On other sentences it's nonsense. Could become a tag if an imperative context (when imperative) is added.
+
+- decision: add_entry
+  candidate: you know
+  entry:
+    id: g-tag-ya-know
+    form: ya know
+    variants: [you know]
+    type: garnish
+    placement: tag
+    when: [dialogue]
+    concept: []
+    frame: tag
+    intensity: 1
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    weight: 0.5
+    gloss: A trailing check that the listener is with you.
+    notes: General English. The UWA study finds it the most common utterance-final tag in Australian English. Speech only, not on questions.
+    sources: ["https://research-repository.uwa.edu.au/en/publications/utterance-final-tags-in-aboriginal-and-non-aboriginal-english/"]
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Documented as the most frequent Australian final tag; a rhythm device, so limit it to dialogue with a low weight.
+
+- decision: merge
+  candidate: aren't they? / haven't ya?
+  into: haven't ya?
+  why: The same echo-question-tag habit.
+
+- decision: add_entry
+  candidate: but
+  entry:
+    id: g-tag-but
+    form: but
+    variants: []
+    type: garnish
+    placement: tag
+    when: [dialogue]
+    concept: []
+    frame: tag
+    intensity: 2
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    weight: 0.3
+    gloss: Sentence-final "but", meaning "though" ("A boat, but?").
+    notes: >-
+      Only correct when the sentence contrasts with the one before it; the engine can't check that, so keep it rare. A
+      'contrast' context (previous sentence + this one with though/however/but) would make it safe. Stronger in Qld and
+      working-class speech. If tagging it as a replacement for a final ", though", that is always safe.
+    sources:
+      - https://www.jbe-platform.com/content/books/9789027289407-veaw.g39.19mul
+      - https://ewave-atlas.org/valuesets/59-211
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: A strongly attested Australian particle (Mulder et al. 2009; eWAVE), and all three agents used it. It's placeable as a tag, with a contrast caveat.
+
+- decision: gate
+  candidate: a fair whack
+  entry:
+    id: a-fair-whack
+    form: a fair whack
+    variants: []
+    concept: [A_LOT]
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: [a fair bit, quite a lot, a fair amount, a lot of money]
+    status: gate
+    flags: [dubious_meaning]
+    notes: >-
+      Dictionaries found give "fair share" ("pay your fair whack"), British/Aus/NZ. The "considerable amount, pricey"
+      sense the agents used ("That's a fair whack") is real in speech but wasn't confirmed by any source.
+    gloss: A sizeable amount (often of money).
+    sources: ["https://merriam-webster.com/dictionary/fair whack", "https://greensdictofslang.com/entry/kstxt3y"]
+  new_concept: null
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: low
+  why: Genuine phrase, but the sources found only support the "fair share" sense, not "a lot".
+
+- decision: style_guide
+  candidate: goes (quotative)
+  guidance: >-
+    In yarns, report speech in the historic present with "goes" (or "is like" for younger speakers): "and he goes, 'Mate, ...'".
+  why: A grammar habit, not a word swap; Rodríguez Louro documents quotatives in Australian English.
+
+- decision: style_guide
+  candidate: haven't ya?
+  guidance: >-
+    End checks with a matching echo tag in casual form ("haven't ya?", "aren't they?", "isn't he?"), using ya for you.
+  why: The tag must agree with the sentence's auxiliary and subject; that's grammar, not a fixed garnish.
+
+- decision: add_entry
+  candidate: I dunno
+  entry:
+    id: i-dunno
+    form: I dunno
+    variants: [dunno]
+    concept: [NEW:DONT_KNOW]
+    frame: clause
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces: ["I don't know"]
+    gloss: I don't know.
+    notes: General informal English, near-universal in Australian speech.
+    sources: []
+  new_concept:
+    id: DONT_KNOW
+    description: Saying you don't know or have no idea.
+    triggers: {clause: ["I don't know", "I have no idea", "no idea", "who knows"]}
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: A swap for a plain-English phrase, so a normal entry. The new DONT_KNOW concept also lets "search me"/"beats me" fire for "I have no idea".
+
+- decision: style_guide
+  candidate: like
+  guidance: >-
+    Sprinkle filler or approximating "like" ("like twenty bucks") only for young speakers, and sparingly.
+  why: Not Australia-specific, and it reads young; no stable slot.
+
+- decision: add_entry
+  candidate: Listen
+  entry:
+    id: g-listen
+    form: listen
+    variants: []
+    type: garnish
+    placement: opener
+    when: [dialogue, second_person]
+    concept: []
+    frame: interjection
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    weight: 0.4
+    gloss: '"Listen, ...": getting someone''s attention before a point.'
+    notes: General English. Lower weight than "look", which is the more Australian-sounding opener.
+    sources: []
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Two agents opened phone talk with it; general but natural, so limit it to speech addressed to someone.
+
+- decision: style_guide
+  candidate: pretty much
+  guidance: >-
+    Hedge summaries with "pretty much" and soften adjectives with "pretty" ("pretty pricey").
+  why: General English hedge with no slot.
+
+- decision: style_guide
+  candidate: Right, so
+  guidance: >-
+    Kick off a told story with "Right, so ..." or "Righto, ..." (once, at the very start of a yarn).
+  why: Only right for the first sentence of a story; the opener slot fires on any sentence.
+
+- decision: merge
+  candidate: Right, so / Righto
+  into: Right, so (style guide); "righto" is already an AFFIRM form
+  why: Same opener habit, plus an existing form.
+
+- decision: reject
+  candidate: shocking
+  reason: not_aussie
+  why: >-
+    "A shocking gossip" (terrible, inveterate) is general British/Commonwealth usage, and no source marks it Australian;
+    AWFUL already has "a shocker".
+
+- decision: merge
+  candidate: sorta
+  into: sorta / sort of
+  why: Same hedge.
+
+- decision: style_guide
+  candidate: sorta / sort of
+  guidance: >-
+    In speech, reduce "sort of"/"kind of" to "sorta"/"kinda" as a softener ("Well, sorta.").
+  why: A general colloquial respelling, better as a phonetic rule than a dictionary entry.
+
+- decision: add_entry
+  candidate: That's my two bob's worth
+  entry:
+    id: g-two-bobs-worth
+    form: "that's my two bob's worth."
+    variants: ["that's me two bob's worth."]
+    type: garnish
+    placement: closer
+    when: [opinion]
+    concept: []
+    frame: interjection
+    intensity: 2
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: ["that's my two cents", "just my two cents", "my two cents' worth"]
+    gloss: That's my opinion, for what it's worth.
+    notes: >-
+      Pre-decimal ("two bob" = two shillings), still current alongside "two cents' worth". Only right closing an opinion
+      piece. The engine ignores closer contexts today, so it needs a text-level opinion check before it can be enabled.
+    sources: ["https://en.wikipedia.org/wiki/My_two_cents"]
+  new_concept: null
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Australian form of "my two cents" (Wikipedia, via search summary); a natural sign-off for an opinion text.
+
+- decision: merge
+  candidate: Yeah, nah / Nah, yeah
+  into: existing forms "yeah, nah" (DISAGREE) and "nah, yeah" (AGREE)
+  why: Already in the dictionary.
+
+- decision: style_guide
+  candidate: Yeah, so
+  guidance: >-
+    Open a reply or voicemail with "Yeah, so, ..." ("Yeah, so, a few things.").
+  why: Only right at the start of a turn or message, not on any sentence.
+
+- decision: style_guide
+  candidate: and everything
+  guidance: >-
+    Round off a list with a vague "and everything" / "and all" ("the ute and everything").
+  why: General English extender. The tail slot already has Australian-coloured options ("the lot", "the whole box 'n dice").
+
+- decision: add_entry
+  candidate: and stuff
+  entry:
+    id: g-tail-and-stuff
+    form: and stuff
+    variants: []
+    type: garnish
+    placement: tail
+    concept: []
+    frame: np
+    intensity: 1
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    weight: 0.5
+    gloss: A vague "and the like" after a list.
+    notes: General English, well documented in Australian corpus studies; it adds a casual rhythm rather than Aussie colour.
+    sources:
+      - https://assets.cambridge.org/97811088/37231/excerpt/9781108837231_excerpt.pdf
+      - https://ldaca.edu.au/resources/general-resources/case-studies/masters-research-project
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: It fits the tail slot exactly (after a closing list), and the general-extender research covers Australia.
+
+- decision: style_guide
+  candidate: and that
+  guidance: >-
+    Working-class yarns can trail off a list with "and that" ("the barbie and that"); use rarely.
+  why: The best evidence is British (working-class marked); Australian frequency is unseen, so a guide note rather than an engine slot.
+
+- decision: style_guide
+  candidate: my arse
+  guidance: >-
+    Scoff by echoing the claim and adding "my arse" ("Accident, my arse."); impolite (vulgarity 2), speech only.
+  why: It attaches to an echoed phrase, so it can't stand as a free closer; at text end it would be nonsense.
+
+- decision: add_entry
+  candidate: fair call
+  entry:
+    id: fair-call
+    form: fair call
+    variants: []
+    concept: [NEW:FAIR_POINT]
+    frame: interjection
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: [fair point, good point, "that's a fair point", point taken]
+    gloss: Conceding someone has a point.
+    sources: ["https://aussieenglish.com.au/like-native-fair-call"]
+  new_concept:
+    id: FAIR_POINT
+    description: Conceding that the other person has made a reasonable point.
+    triggers: {interjection: [fair point, good point, "that's a fair point", "that's a good point", point taken]}
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Current Aussie concession. REASONABLE is an adjective concept ("proper"), so a small new concept fits better than a closer; "fair enough" could join it too.
+
+- decision: add_entry
+  candidate: far out
+  entry:
+    id: g-far-out
+    form: far out
+    variants: []
+    type: garnish
+    placement: opener
+    when: [dialogue, exclamation]
+    concept: [SURPRISE]
+    frame: interjection
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    gloss: Exasperation or amazement ("Far out, that's expensive!").
+    notes: Not the US hippie "cool" sense. A clean alternative to "jeez"/"strewth".
+    sources:
+      - https://aussieenglish.com.au/ep014-aussie-english-expression-far-out/
+      - https://kvia.com/entertainment/cnn-style/2024/08/20/australian-slang-terms-every-visitor-should-know/
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Well-sourced Australian exclamation; fits the SURPRISE opener group.
+
+- decision: add_entry
+  candidate: good on ya
+  entry:
+    id: good-on-ya
+    form: good on ya
+    variants: [good onya, good on you]
+    concept: [NEW:WELL_DONE]
+    frame: interjection
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: ["good for you", "well done", "nice one", "bravo"]
+    gloss: Well done; good for you (sometimes wry).
+    notes: Use only as an interjection; "well done" as a steak doneness must not trigger it.
+    sources: ["https://www.babbel.com/en/magazine/21-essential-australian-expressions", "https://languagehat.com/good-on-you/"]
+  new_concept:
+    id: WELL_DONE
+    description: Praise or congratulation for something someone did.
+    triggers: {interjection: ["well done", "good for you", "nice one", "bravo", "good job"]}
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: A classic Australian expression, well sourced. It's a direct swap, so a normal entry rather than a free closer.
+
+- decision: add_entry
+  candidate: hang on
+  entry:
+    id: hang-on
+    form: hang on
+    variants: []
+    concept: [NEW:WAIT]
+    frame: interjection
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    region: []
+    replaces: ["hold on", "wait a minute", "just a minute", "wait a moment", "wait a second"]
+    gloss: Wait a moment; also an objecting "hang on, ...".
+    notes: Shared with British English; the OED's first citation for this sense is Australian (via blog summary). Pairs with "hang on a tick" from the content slice.
+    sources: ["https://notoneoffbritishisms.com/2012/02/16/hang-on/"]
+  new_concept:
+    id: WAIT
+    description: Asking someone to wait a moment.
+    triggers: {interjection: ["hold on", "wait a minute", "just a minute", "wait a moment", "wait a second", "one moment"]}
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Widely used here; a swap for plain "hold on"/"wait a minute". Don't trigger on bare "wait", which is ambiguous.
+
+- decision: add_entry
+  candidate: how good is that?
+  entry:
+    id: how-good-is-that
+    form: how good is that?
+    variants: ["how good?"]
+    concept: [GREAT_EXCLAIM]
+    frame: interjection
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: ["isn't that great", "how great is that", "how wonderful is that", "isn't that wonderful"]
+    weight: 0.5
+    gloss: Rhetorical "isn't that great?".
+    notes: Strongly linked to Scott Morrison and often used in mock imitation of him; gives a political, slightly ironic flavour.
+    sources: ["https://www.hachette.co.uk/titles/peter-van-onselen/how-good-is-scott-morrison/9780733645747/"]
+  new_concept: null
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Current Australian catchphrase. As a closer it would fire on sad texts too, so it should be a direct swap for "isn't that great".
+
+- decision: add_entry
+  candidate: tell him he's dreamin'
+  entry:
+    id: youre-dreamin
+    form: "you're dreamin'"
+    variants: ["ya dreamin'"]
+    concept: [NEW:DREAM_ON]
+    frame: interjection
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: ["you must be joking", "you've got to be kidding", "in your dreams", "dream on"]
+    gloss: No chance; that's unrealistic (especially about a price or a demand).
+    notes: From The Castle (1997). The film line "Tell him he's dreamin'" is the third-person version and suits reported haggling; the direct form generalises.
+    sources:
+      - https://theconversation.com/straight-to-the-pool-room-a-love-letter-to-the-castle-on-its-25th-anniversary-176361
+      - https://www.screenaustralia.gov.au/sa/Screen-News/2015/10-11-The-Castle-top-10-quotes
+  new_concept:
+    id: DREAM_ON
+    description: Dismissing an unrealistic price, demand or hope.
+    triggers: {interjection: ["you must be joking", "you've got to be kidding", "in your dreams", "dream on"]}
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Iconic and current; a direct swap is safer than a free closer, which would need an unreasonable demand to precede it.
+
+- decision: gate
+  candidate: unna
+  entry:
+    id: g-tag-unna
+    form: unna
+    variants: []
+    type: garnish
+    placement: tag
+    when: [dialogue]
+    concept: []
+    frame: tag
+    intensity: 2
+    vulgarity: 0
+    incoherence: 5
+    register: current
+    region: [aboriginal_english, wa]
+    replaces: []
+    status: gate
+    flags: []
+    notes: >-
+      Aboriginal English (WA, also NT, Qld, NSW). Genuine, but never put it in a generic speaker's mouth; unlock only for
+      an Aboriginal English voice. No current flag fits (it is not doubtful), so it's gated by region.
+    gloss: Tag inviting agreement, "isn't it?".
+    sources: ["https://ewave-atlas.org/valuesets/61-165", "https://www.uwa.edu.au/news/article/2021/july/10-ways-aboriginal-australians-made-english-their-own"]
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Well attested, but it belongs to a specific community variety, so it is gated.
+
+- decision: reject
+  candidate: what a bummer
+  reason: not_aussie
+  why: American in origin and general; plain "bugger" (added below) is the Australian reaction.
+
+- decision: add_entry
+  candidate: yeah, no
+  entry:
+    id: g-yeah-no
+    form: yeah, no
+    variants: []
+    type: garnish
+    placement: opener
+    when: [dialogue]
+    concept: []
+    frame: interjection
+    intensity: 1
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    weight: 0.4
+    gloss: Acknowledges what was said before making your own point.
+    notes: >-
+      The discourse-marker use (Burridge and Florey 2002), distinct from DISAGREE's "yeah, nah". Best at the start of a
+      reply in speech; keep the weight low so it doesn't open every quote.
+    sources:
+      - https://www.ingentaconnect.com/content/routledg/cajl/2002/00000022/00000002/art00001
+      - https://blog.oup.com/2019/03/where-phrase-yeah-no-come-from/
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Documented Australian discourse marker; works as a speech opener.
+
+# ------------------------------------------------------------------ extras (not in the slice)
+- decision: add_entry
+  candidate: mate (opener)
+  entry:
+    id: g-mate-opener
+    form: mate
+    variants: []
+    type: garnish
+    placement: opener
+    when: [dialogue, exclamation, second_person]
+    concept: []
+    frame: interjection
+    intensity: 2
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    weight: 0.6
+    gloss: '"Mate, ...": an emphatic or confiding opener ("Mate, you won''t believe this.").'
+    notes: The dictionary has "mate" as a tag and as a connective but not as an opener. Don't use it as an opener and a tag in the same sentence.
+    sources: []
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Agent C's filler list; it is one of the most Australian openers and is missing from the opener slot.
+
+- decision: add_entry
+  candidate: bugger (interjection)
+  entry:
+    id: bugger-damn
+    form: bugger
+    variants: ["oh, bugger"]
+    concept: [NEW:DAMN_EXCLAIM]
+    frame: interjection
+    intensity: 3
+    vulgarity: 1
+    incoherence: 2
+    register: current
+    region: []
+    replaces: [damn, darn, blast, "oh no"]
+    gloss: A mild curse at a setback ("Bugger, I've left my wallet at home").
+    notes: Also British. Famous here from the 1999 Toyota ad. SURPRISE has "bugger me" but not plain "bugger".
+    sources:
+      - https://aussieenglish.com.au/ep019-aussie-expressions-when-hearing-bad-news
+      - https://st.japantimes.co.jp/writer/up_close/1997/ac19970314/ac19970314main.htm
+  new_concept:
+    id: DAMN_EXCLAIM
+    description: A mild exclamation of annoyance at a setback.
+    triggers: {interjection: [damn, darn, blast, "oh no", "dammit", "damn it"]}
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: From web/findings.yaml (interjection), not in any slice; a high-confidence swap for "damn".
+
+- decision: add_entry
+  candidate: legend (address)
+  entry:
+    id: g-tag-legend
+    form: legend
+    variants: [ya legend]
+    type: garnish
+    placement: tag
+    when: [second_person]
+    concept: []
+    frame: tag
+    intensity: 2
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    region: []
+    replaces: []
+    weight: 0.4
+    gloss: Warm address to someone who has helped ("Thanks heaps, legend.").
+    notes: Best on thanks or praise. The web record proposed a closer, but a closer can't see context, so a second-person tag is safer.
+    sources: ["https://dev.aussieenglish.com.au/?p=222622", "https://www.thesenior.com.au/story/7550151/straya-youre-a-dinky-di-legend/"]
+  new_concept: null
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: From web/findings.yaml (garnish:closer), not in any slice. Very current Aussie address for a helper.
+
+- decision: add_entry
+  candidate: what d'ya reckon?
+  entry:
+    id: g-what-dya-reckon
+    form: "what d'ya reckon?"
+    variants: ["what do ya reckon?"]
+    type: garnish
+    placement: closer
+    when: [opinion]
+    concept: []
+    frame: interjection
+    intensity: 1
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: ["what do you think?"]
+    gloss: Asking the listener's view at the end.
+    notes: Needs the opinion check for closers (the engine ignores closer contexts today). As a direct swap for "what do you think?" it is safe now.
+    sources: []
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Agent A's closer; "reckon" makes it distinctly Australian and it suits opinion texts.
+
+- decision: add_entry
+  candidate: yeah? (tag)
+  entry:
+    id: g-tag-yeah
+    form: yeah
+    variants: []
+    type: garnish
+    placement: tag
+    when: [question]
+    concept: []
+    frame: tag
+    intensity: 1
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    region: []
+    replaces: []
+    weight: 0.4
+    gloss: A trailing "yeah?" checking agreement ("You right for Sunday, yeah?").
+    notes: >-
+      General English. Limited to questions because add_tag keeps the sentence's own punctuation, and ", yeah." on a
+      statement reads as agreement rather than a check.
+    sources: []
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: low
+  why: Two agents (A, C) used it; it's common in Australian speech but not specific to it.
+
+- decision: style_guide
+  candidate: to be fair / to be honest / if I'm honest
+  guidance: >-
+    Qualify a judgement with a trailing "to be fair" or "to be honest" ("It was pretty pricey, to be fair.").
+  why: All three agents used these; very common here (and in NZ), but no source marks them Australian and they have no fixed slot.
+
+- decision: style_guide
+  candidate: ADJ as (bare intensifier)
+  guidance: >-
+    Intensify by dropping the comparison: "ADJ as" ("boring as", "sweet as", "loud as"), mostly as a predicate or at the end of a sentence.
+  why: All three agents used it, and the web notes cover "sweet as". It's a productive pattern, not one entry; "sweet as" is already in the dictionary.
+
+- decision: style_guide
+  candidate: So (narrative, historic present)
+  guidance: >-
+    Tell anecdotes in the present tense, driven by "So ..." ("So I'm walking home, and next door's mutt gets out.").
+  why: Agent C's narrative device; it changes tense, so it's beyond a word swap.

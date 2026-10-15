@@ -1,0 +1,502 @@
+# Garnish attaches to text rather than replacing it.
+#   opener: sentence start ("Strewth, ...")
+#   tag:    before sentence-final punctuation ("..., mate.")
+#   closer: once, after the last sentence ("Faaaark me.")
+# stretch: true elongates the first vowel at levels with a stretch range.
+
+- id: g-strewth
+  form: strewth
+  spellings: [struth]
+  variants: [struth]
+  type: garnish
+  placement: opener
+  concept: [SURPRISE]
+  frame: interjection
+  incoherence: 4
+  gloss: Surprise.
+- id: g-crikey
+  form: crikey
+  type: garnish
+  placement: opener
+  concept: [SURPRISE]
+  frame: interjection
+  incoherence: 4
+  gloss: Surprise or alarm.
+- id: g-stone-the-crows
+  form: stone the crows
+  variants: ["stone the flamin' crows"]
+  type: garnish
+  placement: opener
+  concept: [SURPRISE]
+  frame: interjection
+  incoherence: 5
+  register: dated
+  gloss: Astonishment.
+- id: g-bugger-me
+  form: bugger me
+  type: garnish
+  placement: opener
+  concept: [SURPRISE]
+  frame: interjection
+  vulgarity: 1
+  incoherence: 2
+  gloss: Well I never.
+- id: g-bloody-hell
+  form: bloody hell
+  type: garnish
+  placement: opener
+  concept: [SURPRISE]
+  frame: interjection
+  vulgarity: 1
+  incoherence: 1
+  gloss: Dismay.
+- id: g-fair-dinkum
+  form: fair dinkum
+  type: garnish
+  placement: opener
+  concept: [REALLY_Q]
+  frame: interjection
+  incoherence: 4
+  gloss: Honestly.
+- id: g-oi
+  form: oi
+  type: garnish
+  placement: opener
+  when: [dialogue, exclamation, second_person]
+  frame: interjection
+  incoherence: 5
+  weight: 0.5
+  gloss: Hey, listen.
+- id: g-jeez
+  form: jeez
+  variants: [jeez Louise]
+  type: garnish
+  placement: opener
+  concept: [SURPRISE]
+  frame: interjection
+  incoherence: 4
+  gloss: Exasperation.
+- id: g-bugger-me-sideways
+  form: bugger me sideways'n call me the pope
+  type: garnish
+  placement: opener
+  concept: [SURPRISE]
+  frame: interjection
+  vulgarity: 1
+  incoherence: 5
+  status: gate
+  flags: [fabricated]
+  notes: From the project brief's sample output; no attestation found. Unlock with --unlock fabricated.
+  gloss: Extravagant astonishment.
+
+- id: g-mate
+  form: mate
+  type: garnish
+  placement: tag
+  frame: tag
+  incoherence: 4
+  weight: 3
+  gloss: Friendly (or pointedly unfriendly) address.
+- id: g-ay
+  form: ay
+  type: garnish
+  placement: tag
+  frame: tag
+  incoherence: 4
+  weight: 1.5
+  gloss: Sentence-final "eh", inviting agreement.
+- id: g-cobber
+  form: cobber
+  type: garnish
+  placement: tag
+  frame: tag
+  incoherence: 5
+  register: dated
+  gloss: Old-fashioned "mate".
+- id: g-ya-galah
+  form: ya galah
+  insult: true
+  type: garnish
+  placement: tag
+  when: [second_person, question]
+  frame: tag
+  incoherence: 5
+  gloss: Affectionate insult.
+- id: g-ya-drongo
+  form: ya drongo
+  insult: true
+  type: garnish
+  placement: tag
+  when: [second_person, question]
+  frame: tag
+  incoherence: 5
+  gloss: You fool.
+- id: g-ya-flamin-mongrel
+  form: ya flamin' mongrel
+  insult: true
+  type: garnish
+  placement: tag
+  when: [second_person, question]
+  frame: tag
+  intensity: 4
+  vulgarity: 1
+  incoherence: 3
+  gloss: Insult; affectionate or not, depending on tone.
+
+- id: g-fark-me
+  form: fark me
+  tone: comic
+  type: garnish
+  placement: closer
+  frame: interjection
+  vulgarity: 2
+  incoherence: 2
+  stretch: true
+  weight: 2
+  gloss: A minced swear of disbelief, drawn out.
+- id: g-strewth-closer
+  form: strewth
+  type: garnish
+  placement: closer
+  frame: interjection
+  incoherence: 5
+  stretch: true
+  gloss: Drawn-out surprise.
+- id: g-bugger-me-dead
+  form: bugger me dead
+  tone: comic
+  type: garnish
+  placement: closer
+  frame: interjection
+  vulgarity: 2
+  incoherence: 3
+  gloss: Astonishment.
+- id: g-too-easy
+  form: too easy
+  tone: comic
+  type: garnish
+  placement: closer
+  frame: interjection
+  incoherence: 5
+  gloss: Cheerful sign-off.
+- id: g-stone-the-flamin-crows
+  form: stone the flamin' crows
+  tone: comic
+  type: garnish
+  placement: closer
+  frame: interjection
+  incoherence: 5
+  register: dated
+  gloss: Astonishment.
+- id: g-no-matter-what-some-drongo-reckons
+  form: no matter what some drongo reckons
+  insult: true
+  type: garnish
+  placement: tag
+  when: [opinion]
+  frame: tag
+  incoherence: 5
+  weight: 0.5
+  gloss: A pub aside dismissing the doubters.
+
+# --- the f-word (vulgarity 2, level 5) and the c-word (vulgarity 3: tradie, only when asked for) -------
+- id: g-fuck-me-dead
+  form: fuck me dead
+  tone: comic
+  type: garnish
+  placement: closer
+  frame: interjection
+  vulgarity: 2
+  incoherence: 2
+  weight: 2
+  gloss: The full-strength version of "bugger me dead".
+- id: g-fuckin-hell
+  form: fuckin' hell
+  type: garnish
+  placement: opener
+  concept: [SURPRISE]
+  frame: interjection
+  vulgarity: 2
+  incoherence: 1
+  gloss: Dismay.
+- id: g-fair-fuckin-dinkum
+  form: fair fuckin' dinkum
+  type: garnish
+  placement: opener
+  concept: [REALLY_Q]
+  frame: interjection
+  vulgarity: 2
+  incoherence: 3
+  gloss: Honestly, emphatically.
+- id: g-ya-mad-cunt
+  form: ya mad cunt
+  insult: true
+  type: garnish
+  placement: tag
+  when: [second_person, question]
+  frame: tag
+  vulgarity: 3
+  incoherence: 3
+  notes: Affectionate in Australia. Strongly offensive to American ears.
+  gloss: Affectionate address for a mate.
+
+# --- connectives: how a yarn moves along ("Anyway, she ...") --------------------------
+# Narration only, never the first sentence, never before a sentence that already opens with one.
+- id: c-anyway
+  form: anyway
+  type: garnish
+  placement: connective
+  frame: interjection
+  incoherence: 4
+  weight: 2
+  gloss: Moving the story along.
+- id: c-well
+  form: well
+  type: garnish
+  placement: connective
+  frame: interjection
+  incoherence: 4
+  weight: 2
+  gloss: Setting up the next bit.
+- id: c-now
+  form: now
+  type: garnish
+  placement: connective
+  frame: interjection
+  incoherence: 4
+  gloss: Turning to the next part.
+- id: c-so-anyway
+  form: so anyway
+  type: garnish
+  placement: connective
+  frame: interjection
+  incoherence: 5
+  gloss: Getting back to it.
+- id: c-mate
+  form: mate
+  type: garnish
+  placement: connective
+  frame: interjection
+  incoherence: 5
+  weight: 0.6
+  gloss: The storyteller nudging the listener.
+- id: g-aw
+  form: aw
+  type: garnish
+  placement: opener
+  when: [dialogue]
+  frame: interjection
+  incoherence: 4
+  gloss: Dismay, in speech.
+- id: g-well-bugger-me
+  form: well, bugger me
+  type: garnish
+  placement: opener
+  when: [dialogue]
+  frame: interjection
+  vulgarity: 1
+  incoherence: 2
+  gloss: Astonishment, in speech.
+- id: g-ya-mug
+  form: ya mug
+  insult: true
+  type: garnish
+  placement: tag
+  when: [second_person, question]
+  frame: tag
+  incoherence: 5
+  gloss: You fool.
+- id: g-well-ill-be-buggered
+  form: well, I'll be buggered
+  tone: comic
+  type: garnish
+  placement: closer
+  frame: interjection
+  vulgarity: 1
+  incoherence: 2
+  gloss: Well I never.
+# --- asides: the storyteller's short standalone beat after a sentence of narration -----------
+- id: g-aside-what-a-shocker
+  form: what a shocker!
+  tone: comic
+  type: garnish
+  placement: aside
+  frame: interjection
+  incoherence: 5
+  when: [paragraph_end]
+  gloss: That was terrible.
+  sources: [llm-moloch-unharnessed]
+- id: g-aside-wouldnt-ya-know-it
+  form: wouldn't ya know it.
+  tone: comic
+  type: garnish
+  placement: aside
+  frame: interjection
+  incoherence: 5
+  gloss: Just as you'd expect; typical.
+- id: g-aside-dogs-breakfast
+  form: what a dog's breakfast!
+  tone: comic
+  type: garnish
+  placement: aside
+  frame: interjection
+  incoherence: 5
+  when: [paragraph_end]
+  gloss: What a mess.
+- id: g-aside-fair-dinkum
+  form: fair dinkum.
+  type: garnish
+  placement: aside
+  frame: interjection
+  incoherence: 5
+  when: [paragraph_end]
+  gloss: Honestly, truly.
+- id: g-aside-true-story
+  form: true story.
+  type: garnish
+  placement: aside
+  frame: interjection
+  incoherence: 5
+  when: [paragraph_end]
+  gloss: No word of a lie.
+- id: g-aside-no-word-of-a-lie
+  form: no word of a lie.
+  type: garnish
+  placement: aside
+  frame: interjection
+  incoherence: 5
+  when: [paragraph_end]
+  gloss: Honestly.
+- id: g-aside-strike-me-pink
+  form: strike me pink!
+  tone: comic
+  type: garnish
+  placement: aside
+  frame: interjection
+  incoherence: 5
+  when: [paragraph_end]
+  register: dated
+  gloss: Astonishment.
+- id: g-aside-cop-that
+  form: cop that!
+  tone: comic
+  type: garnish
+  placement: aside
+  frame: interjection
+  incoherence: 5
+  when: [paragraph_end]
+  gloss: Take that; how about that.
+- id: g-aside-bloody-shambles
+  form: what a bloody shambles!
+  tone: comic
+  type: garnish
+  placement: aside
+  frame: interjection
+  vulgarity: 1
+  incoherence: 2
+  when: [paragraph_end]
+  gloss: What a mess.
+  sources: [llm-moloch-unharnessed]
+- id: g-aside-carry-on
+  form: strewth, what a carry-on!
+  tone: comic
+  type: garnish
+  placement: aside
+  frame: interjection
+  incoherence: 5
+  when: [paragraph_end]
+  gloss: What a fuss; what a performance.
+- id: g-aside-gawd-help-us
+  form: Gawd help us.
+  tone: grim
+  type: garnish
+  placement: aside
+  frame: interjection
+  incoherence: 5
+  when: [paragraph_end]
+  gloss: Heaven help us.
+# rhetorical follow-ups: the narrator answers their own question
+- id: g-aside-search-me
+  form: search me.
+  type: garnish
+  placement: aside
+  frame: interjection
+  incoherence: 5
+  when: [question]
+  gloss: I've no idea (after a rhetorical question).
+- id: g-aside-buggered-if-i-know
+  form: buggered if I know.
+  type: garnish
+  placement: aside
+  frame: interjection
+  vulgarity: 1
+  incoherence: 2
+  when: [question]
+  gloss: I've no idea.
+- id: g-aside-beats-me
+  form: beats me.
+  type: garnish
+  placement: aside
+  frame: interjection
+  incoherence: 5
+  when: [question]
+  gloss: I've no idea.
+# tails: round off a closing list
+- id: g-tail-whole-bloody-works
+  form: the whole bloody works
+  type: garnish
+  placement: tail
+  frame: np
+  vulgarity: 1
+  incoherence: 2
+  gloss: All of it.
+  sources: [llm-moloch-unharnessed]
+- id: g-tail-box-and-dice
+  form: the whole box 'n dice
+  type: garnish
+  placement: tail
+  frame: np
+  incoherence: 4
+  gloss: All of it.
+- id: g-tail-kit-and-caboodle
+  form: the whole kit 'n caboodle
+  type: garnish
+  placement: tail
+  frame: np
+  incoherence: 4
+  gloss: All of it.
+- id: g-tail-the-lot
+  form: the lot
+  type: garnish
+  placement: tail
+  frame: np
+  incoherence: 4
+  gloss: All of it.
+- id: g-like-a-drongo
+  form: like a drongo
+  insult: true
+  type: garnish
+  placement: tag
+  when: [action_end]
+  frame: tag
+  incoherence: 5
+  gloss: 'Foolishly ("... until he gave in, like a drongo"); a narrator''s jibe at what someone just did.'
+  notes: 'The project owner''s suggestion (2026-10-11), for narration where a vocative "ya drongo" has nobody to address.'
+- id: g-like-a-right-galah
+  form: like a right galah
+  insult: true
+  type: garnish
+  placement: tag
+  when: [action_end]
+  frame: tag
+  incoherence: 5
+  gloss: "Foolishly, like an idiot; a narrator's jibe at what someone just did."
+- id: g-like-a-mug
+  form: like a mug
+  insult: true
+  type: garnish
+  placement: tag
+  when: [action_end]
+  frame: tag
+  incoherence: 4
+  gloss: "Like a sucker; a narrator's jibe at someone who's been had or gave in."

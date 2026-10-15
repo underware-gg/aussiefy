@@ -1,0 +1,171 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "yarn-dinkum": "A",
+  "dinkum-4": "B",
+  "dinkum-3": "C"
+ },
+ "scores": {
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "dinkum-4": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 3,
+   "register": 5,
+   "tone": 4,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn-dinkum": {
+   "meaning": "All facts kept: three F-5s, the Jets vs Browns game, the 10 to 1 Experience Zone, Artemis dome, inflatable SLS, MAX POWER on Nov. 7 and 8, the 250th anniversary. Additions are colour: \"Now here's one for the gridiron fans.\", \"roaring over to kick off\".",
+   "sense": "Terms fit their context: \"at the stick of one of three F-5 fighter jets\", \"having a yarn with the fans\", \"the uni mob\" for academia, \"driverless vehicles\" for autonomous vehicles, \"down the track\" for the future.",
+   "authenticity": "Natural Australian: \"a whopping great inflatable\", \"have a crack at the hands-on games\", \"a multi-day do\", \"down the track\". One US form: \"public sector folks\".",
+   "register": "Right about level 4: most sentences retold in Aussie (\"The Inspiration Tour's pulling up all over the country\", \"The whole show wraps up\") without tipping into a pub yarn. No swearing, within vulgarity 1.",
+   "tone": "Keeps the upbeat promotional tone of the release: \"it's a multi-day do that's good for the whole family, showing off the next-gen aircraft\".",
+   "flow": "Reads well; the last sentence is long (\"Put on to honour America's historic 250th anniversary, it's a multi-day do that's good for the whole family, showing off\").",
+   "variety": "Varied throughout: \"at the stick\", \"roaring over\", \"having a yarn\", \"pop under\", \"have a crack\", \"snap a few pics\", \"uni mob\", \"hook the agency up\", \"wraps up\", \"know-how\".",
+   "essence": "Unmistakably the NASA flyover notice, same order and content: \"MAX POWER, a public expo of American air and space know-how\"."
+  },
+  "dinkum-4": {
+   "meaning": "All facts kept in the original order: \"to get the New York Jets vs. Cleveland Browns game underway\", \"from 10 a.m. to 1 p.m. EDT\", \"on Saturday, Nov. 7, and Sunday, Nov. 8\". Nothing invented.",
+   "sense": "Mostly apt (\"at the controls\", \"having a yarn\", \"a big blow-up SLS\", \"down the track\"), but \"a public show-and-tell of American air and space know-how\" shrinks an exposition to a classroom activity, and \"rock up under the agency's Artemis dome\" is a slightly odd fit for going inside.",
+   "authenticity": "Natural throughout: \"the academic, industry and public sector mob\", \"have a go at the hands-on games\", \"the multi-day, family-friendly do\". Nothing American left in.",
+   "register": "A shade lighter than level 4: the first sentence is nearly the original, and terms like \"next-generation aircraft, spacecraft, autonomous vehicles and technologies\" are kept as written. No swearing.",
+   "tone": "Keeps the promotional tone: \"so the agency can link up with the people, technologies and organisations that keep America out in front in space.\"",
+   "flow": "Reads smoothly, like it was written that way: \"With stops right round the country, NASA’s Inspiration Tour gets the academic, industry and public sector mob together\".",
+   "variety": "Varied: \"at the controls\", \"having a yarn\", \"rock up\", \"have a go\", \"snap a few pics\", \"mob\", \"show-and-tell\", \"down the track\".",
+   "essence": "Clearly the original release, retold: \"The whole tour wraps up with MAX POWER\"."
+  },
+  "dinkum-3": {
+   "meaning": "All facts kept: \"fly one of three F-5 fighter jets himself\", \"from 10 a.m. to 1 p.m. EDT\", \"on Saturday, Nov. 7, and Sunday, Nov. 8\". \"gridiron game\" is a gloss for Aussie readers; \"out the front of the stadium\" is a slight narrowing of \"outside\".",
+   "sense": "Terms fit: \"having a yarn with the fans\", \"grab a happy snap\", \"public sector players\", \"the next lot of aircraft\", \"down the track\".",
+   "authenticity": "Good Aussie in places (\"a happy snap\", \"a whopping great blow-up SLS\", \"keep the Yanks out in front\"), but US forms and a stagey opener: \"Okay, so.\" and \"is gonna fly\".",
+   "register": "About level 4: the narrative is retold throughout (\"It all winds up with MAX POWER\", \"the multi-day, family-friendly do'll show off\"). No swearing.",
+   "tone": "The promotional tone mostly holds; \"keep the Yanks out in front in space\" adds a faintly ironic outsider's edge to a NASA release.",
+   "flow": "Mostly smooth, but it starts with a jarring \"Okay, so. As part of the agency's Inspiration Tour flyover\".",
+   "variety": "Varied: \"having a yarn\", \"Pop under\", \"have a crack\", \"happy snap\", \"whopping great\", \"hooking the agency up\", \"winds up\", \"next lot\".",
+   "essence": "Unmistakably the original release, retold: \"MAX POWER, a public expo of American air and space know-how\"."
+  }
+ },
+ "problems": {
+  "yarn-dinkum": [
+   {
+    "quote": "public sector folks",
+    "original": "public sector stakeholders",
+    "severity": "minor",
+    "why": "\"folks\" is American; an Australian would say people or mob."
+   }
+  ],
+  "dinkum-4": [
+   {
+    "quote": "a public show-and-tell of American air and space know-how",
+    "original": "a public exposition of American air and space innovation",
+    "severity": "minor",
+    "why": "\"show-and-tell\" belittles a national exposition; a slightly wrong sense."
+   },
+   {
+    "quote": "Fans can rock up under the agency’s Artemis dome",
+    "original": "Fans can learn more about NASA’s return to the Moon under the agency’s Artemis dome",
+    "severity": "minor",
+    "why": "\"rock up\" means arrive, a slightly odd fit for going under a dome."
+   }
+  ],
+  "dinkum-3": [
+   {
+    "quote": "is gonna fly",
+    "original": "will pilot",
+    "severity": "major",
+    "why": "\"gonna\" is an American form an Australian writer would not use here."
+   },
+   {
+    "quote": "Okay, so.",
+    "original": "",
+    "severity": "minor",
+    "why": "A stagey, American-sounding opener bolted on; jars at the start."
+   },
+   {
+    "quote": "keep the Yanks out in front in space",
+    "original": "drive American leadership in space",
+    "severity": "minor",
+    "why": "\"the Yanks\" gives the release an outsider's wry edge it doesn't have."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn-dinkum": "Lively, natural and accurate, at the right level-4 weight; the best of the three.",
+  "dinkum-4": "Smooth, faithful and natural, a touch lighter than level 4, with one belittling choice in \"show-and-tell\".",
+  "dinkum-3": "Right weight and good idiom in places, let down by \"gonna\", a bolted-on opener and a slight tonal edge."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn-dinkum",
+    "dinkum-4"
+   ],
+   [
+    "dinkum-3"
+   ]
+  ],
+  "flow": [
+   [
+    "dinkum-4"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-3"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-4",
+    "dinkum-3"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn-dinkum",
+    "dinkum-4",
+    "dinkum-3"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-4"
+   ],
+   [
+    "dinkum-3"
+   ]
+  ]
+ }
+}

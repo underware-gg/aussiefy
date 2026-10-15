@@ -1,0 +1,62 @@
+The name Kubernetes comes from the Greek, meaning helmsman or pilot, the bloke at the wheel. K8s as a
+short form comes from counting the eight letters between the "K" and the "s". Google chucked the
+Kubernetes project open source back in 2014. Kubernetes mixes
+[over 15 years of Google's experience](/blog/2015/04/borg-predecessor-to-kubernetes/) running
+production workloads at a whopping scale with the pick of the ideas and practices from the community.
+
+## Why you need Kubernetes and what it can do {#why-you-need-kubernetes-and-what-can-it-do}
+
+Containers are a top way to bundle up and run your apps. In a production
+environment, you've gotta look after the containers running the apps and
+make sure nothing ever falls over. Say a container carks it, another
+container's gotta fire up. Wouldn't it be a bloody sight easier if a system handled all that for you?
+
+That's where Kubernetes rides in to save the day! Kubernetes gives you a framework
+to run distributed systems that can cop a hit and keep going. It sorts out scaling and failover for
+your app, gives you deployment patterns, and a fair bit more. For example: Kubernetes
+can handle a canary deployment for your system, no worries.
+
+Kubernetes gives you:
+
+* **Service discovery and load balancing**
+  Kubernetes can put a container out there using a DNS name or its own IP address.
+  If a container's getting slammed with traffic, Kubernetes can load balance and spread
+  the network traffic round so the deployment stays steady.
+* **Storage orchestration**
+  Kubernetes lets you automatically mount whatever storage system takes your fancy, like
+  local storage, public cloud providers, and more.
+* **Automated rollouts and rollbacks**
+  You can spell out the state you want your deployed containers in using Kubernetes,
+  and it'll shift the actual state over to that at a steady, controlled clip.
+  For example, you can get Kubernetes to automatically spin up new containers for your
+  deployment, turf the old ones and hand all their resources over to the new container.
+* **Automatic bin packing**
+  You give Kubernetes a cluster of nodes it can use to run containerised tasks.
+  You tell Kubernetes how much CPU and memory (RAM) each container needs. Kubernetes can squeeze
+  the containers onto your nodes to get the most bang for your buck out of your resources.
+* **Self-healing**
+  Kubernetes restarts containers that fall over, swaps containers out, knocks off containers that won't
+  answer your user-defined health check, and doesn't let on to clients they exist till they're
+  ready to serve.
+* **Secret and configuration management**
+  Kubernetes lets you stash and manage sensitive stuff, like passwords, OAuth tokens,
+  and SSH keys. You can deploy and update secrets and app configuration without
+  rebuilding your container images, and without leaving secrets hanging out in your stack configuration.
+* **Batch execution**
+  As well as services, Kubernetes can look after your batch and CI workloads, swapping out containers that fall over, if you want.
+* **Horizontal scaling**
+  Scale your app up and down with one simple command, with a UI, or automatically based on how hard the CPU's working.
+* **IPv4/IPv6 dual-stack**
+  Dishing out IPv4 and IPv6 addresses to Pods and Services.
+* **Designed for extensibility**
+  Bolt features onto your Kubernetes cluster without mucking about with the upstream source code.
+
+## What Kubernetes is not
+
+Kubernetes isn't your traditional, all-in, everything-in-the-box PaaS (Platform as a Service) system.
+Since Kubernetes works at the container level rather than down at the hardware level,
+it gives you some handy all-round features you'd find in PaaS offerings, like
+deployment, scaling and load balancing, and it lets users plug in their own logging, monitoring,
+and alerting setups. But Kubernetes isn't one big lump, and these default setups
+are optional and you can swap 'em in and out. Kubernetes gives you the building blocks for knocking up developer
+platforms, but leaves you the choice and room to move where it counts.

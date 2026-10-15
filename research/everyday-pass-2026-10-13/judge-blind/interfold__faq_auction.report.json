@@ -1,0 +1,66 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {"evidence": "All facts, dates, numbers and code survive; the CCA rules are kept (\"whichever's higher: the original floor price or the clearing price of the period before\"). A few shifts in strength: \"50% of proceeds were locked in\" for \"committed\", \"stop sniping\" for \"mitigate sniping\", and the legal notices are paraphrased (\"Nothing in here counts as legal, tax, financial, investment, or other professional advice\"), which keeps their sense.", "score": 4},
+        "sense": {"evidence": "\"done and dusted\", \"up for grabs\", \"kicked in\", \"down the track\", \"land in your DMs out of the blue\" fit. \"locked in\" can suggest a technical lock on funds; \"stop sniping\" overstates \"mitigate\".", "score": 4},
+        "authenticity": {"evidence": "Natural Australian: \"The first auction's done and dusted\", \"No one can tell you what the market price will do down the track\", \"Have a read of the full FOLD Auction Terms\". \"It's for folks who had a go\" uses American \"folks\".", "score": 4},
+        "register": {"evidence": "A friendly level-3 retelling throughout, light on the dense technical bits (\"Participants put their bids in through the official Uniswap CCA interface\"), no swearing, fine for an FAQ at dad level.", "score": 5},
+        "tone": {"evidence": "Stays an informative FAQ; safety warnings keep their weight (\"Interfold team members and moderators will never, ever ask for your seed phrase\"). Paraphrasing the legal notices relaxes their formal register a little.", "score": 4},
+        "flow": {"evidence": "Reads smoothly: \"The CCA hands out tokens bit by bit and uses the one price for everyone within each period.\"", "score": 5},
+        "variety": {"evidence": "\"had a go\", \"up and running\", \"kicked in\", \"wrapped up\", \"done and dusted\", \"up for grabs\", \"bit by bit\", \"gas wars\", \"Nope\", \"Yep\", \"down the track\", \"dodgy\"; \"had a go\" twice.", "score": 5},
+        "essence": {"evidence": "Unmistakably the FOLD Auction 2 FAQ with its structure, table, code and safety list intact.", "score": 5}
+      },
+      "problems": [
+        {"quote": "50% of proceeds were locked in for long-term on-chain liquidity support.", "original": "50% of proceeds were committed to long-term on-chain liquidity support.", "severity": "minor", "why": "\"locked in\" can imply a technical lock in a crypto context, stronger than \"committed\"."},
+        {"quote": "cut down gas wars, stop sniping", "original": "reduce gas competition, mitigate sniping", "severity": "minor", "why": "Overstates \"mitigate\" as a guarantee."},
+        {"quote": "It's for folks who had a go", "original": "It is for people who took part", "severity": "minor", "why": "\"folks\" is American."},
+        {"quote": "Nothing in here counts as legal, tax, financial, investment, or other professional advice.", "original": "Nothing in this communication constitutes legal, tax, financial, investment, or other professional advice.", "severity": "minor", "why": "Paraphrasing a legal disclaimer loosens wording that is meant to be exact."}
+      ],
+      "summary": "A natural, smooth level-3 FAQ that keeps every fact; a few overstatements and paraphrased legal notices."
+    },
+    "B": {
+      "scores": {
+        "meaning": {"evidence": "Content is nearly the original verbatim, but \"50% of proceeds dead set on long-term on-chain liquidity support\" muddles \"dedicated\", and \"Righto.\" no longer clearly answers \"Was KYC required?\" with yes.", "score": 3},
+        "sense": {"evidence": "Wrong senses: \"dead set on\" means determined to (of a person), not allocated; \"Righto.\" is an acknowledgement, not \"yes\"; \"sweet bugger-all in this communication constitutes legal ... advice\" forces a slang noun into legal grammar.", "score": 1},
+        "authenticity": {"evidence": "Slang bolted onto untouched text: \"Nah, nah. The auction determined allocations and a clearing price within the auction itself.\" and \"sweet bugger-all in this communication constitutes\".", "score": 1},
+        "register": {"evidence": "Almost all of it is the original (\"Participation was available to eligible participants. It was subject to jurisdiction\"), far lighter than level 3, with \"bugger-all\" dropped into a legal notice.", "score": 1},
+        "tone": {"evidence": "Mostly the original's tone, but \"sweet bugger-all in this communication constitutes legal, tax, financial\" makes the risk notice flippant.", "score": 3},
+        "flow": {"evidence": "Jarring joins: \"_sweet bugger-all in this communication constitutes legal, tax, financial,\", \"Nah, nah. The auction determined\".", "score": 2},
+        "variety": {"evidence": "Only four touches in the whole page: \"dead set on\", \"Nah, nah\", \"Righto\", \"sweet bugger-all\".", "score": 2},
+        "essence": {"evidence": "Recognisably the FAQ, being nearly unchanged, but not retold.", "score": 3}
+      },
+      "problems": [
+        {"quote": "50% of proceeds dead set on long-term on-chain liquidity support", "original": "50% of proceeds dedicated to long-term on-chain liquidity support", "severity": "major", "why": "\"dead set on\" means determined to; it can't mean allocated to. Wrong sense in the key facts table."},
+        {"quote": "Righto. Participants had to complete identity verification", "original": "Yes. Participants had to complete identity verification", "severity": "major", "why": "\"Righto\" means OK/understood, not \"yes\"; the answer to the KYC question becomes unclear."},
+        {"quote": "sweet bugger-all in this communication constitutes legal, tax, financial,", "original": "Nothing in this communication constitutes legal, tax, financial,", "severity": "major", "why": "Slang crammed into a legal disclaimer, ungrammatical and unprofessional."},
+        {"quote": "Nah, nah. The auction determined allocations", "original": "No. The auction determined allocations", "severity": "minor", "why": "Bolted-on reply on an untranslated paragraph."},
+        {"quote": "Participation was available to eligible participants. It was subject to jurisdiction, identity", "original": "Participation was available to eligible participants. It was subject to jurisdiction, identity", "severity": "major", "why": "Most of the text left untranslated for a level-3 brief."}
+      ],
+      "summary": "The original almost untouched, with four bolted-on terms, three of them wrong in sense or placement."
+    },
+    "C": {
+      "scores": {
+        "meaning": {"evidence": "All facts, dates and code survive; legal notices are kept verbatim; \"with everything above board\" is an elaboration of \"transparent\". \"take the sting out of sniping\" matches \"mitigate\".", "score": 5},
+        "sense": {"evidence": "\"done and dusted\", \"up for grabs\", \"take the sting out of sniping\", \"kicked off\", \"There's no telling what future market prices will be\" all fit.", "score": 5},
+        "authenticity": {"evidence": "Natural: \"It's for anyone who had a go in the auction\", \"spread FOLD round more widely\", \"Have a read of the full FOLD Auction Terms\". \"with everything above board\" is a little tacked on.", "score": 5},
+        "register": {"evidence": "Level-3 friendliness through the FAQ, with the legal block left formal (\"Participation in the FOLD auction was subject to eligibility requirements\"), which suits a disclaimer; a shade lighter than A but on brief.", "score": 4},
+        "tone": {"evidence": "Informative FAQ tone throughout, and the legal notices keep their formality.", "score": 5},
+        "flow": {"evidence": "Smooth: \"It's set up this way to cut down on gas competition, take the sting out of sniping, and let clearing prices settle through the bidding itself.\"", "score": 5},
+        "variety": {"evidence": "\"had a go\", \"lots\", \"switched on\", \"up and running\", \"above board\", \"done and dusted\", \"up for grabs\", \"bit by bit\", \"take the sting out\", \"out of the blue\"; \"switched on\" repeats.", "score": 4},
+        "essence": {"evidence": "Unmistakably the FOLD Auction 2 FAQ, structure and safety guidance intact.", "score": 5}
+      },
+      "problems": [
+        {"quote": "with everything above board", "original": "The auction gave a transparent, public mechanism", "severity": "minor", "why": "Slightly tacked-on phrase; edges toward a claim of probity beyond \"transparent\"."}
+      ],
+      "summary": "A faithful, natural level-3 FAQ that wisely leaves the legal notices formal."
+    }
+  },
+  "rankings": {
+    "tone": [["C"], ["A"], ["B"]],
+    "flow": [["A", "C"], ["B"]],
+    "variety": [["A"], ["C"], ["B"]],
+    "essence": [["A", "C"], ["B"]],
+    "overall": [["C"], ["A"], ["B"]]
+  }
+}

@@ -1,0 +1,255 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "dinkum-3": "A",
+  "unharnessed": "B",
+  "yarn-dinkum": "C",
+  "engine": "D",
+  "yarn-troppo": "E"
+ },
+ "scores": {
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 4,
+   "variety": 3,
+   "essence": 5
+  },
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 5,
+   "flow": 2,
+   "variety": 1,
+   "essence": 5
+  },
+  "yarn-troppo": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 5,
+   "variety": 5,
+   "essence": 4
+  }
+ },
+ "evidence": {
+  "dinkum-3": {
+   "meaning": "Every step, command block and the closing welcome survive: \"So it’s\n_hello_world.rs_, not _helloworld.rs_.\" and \"You’ve officially written a Rust\nprogram, which makes ya a Rust programmer—welcome to the club!\"",
+   "sense": "Terms fit: \"Rust couldn’t care less\" for 'it doesn't matter to Rust', \"the\nusual go is\" for the convention, \"have a squiz\", \"where to get a hand\".",
+   "authenticity": "Natural throughout: \"Righto, first thing ya do is make a directory\", \"good on ya!\"",
+   "register": "Fully retold in casual Aussie but with no swearing and moderate slang; a shade under level 5, vulgarity 2.",
+   "tone": "Keeps the friendly, encouraging tutorial voice.",
+   "flow": "Reads smoothly: \"Got more than one word in yer filename? Then the\nusual go is to stick an underscore between ’em.\"",
+   "variety": "Leans on \"punch in\": \"punch in these commands\", \"punch in the code from Listing 1-1\", \"punch in these\ncommands\".",
+   "essence": "Unmistakably the Rust book's first program, warmth intact."
+  },
+  "unharnessed": {
+   "meaning": "All steps survive; \"we reckon you\nmake a _projects_ directory\" keeps the suggestion.",
+   "sense": "Terms fit: \"Rust couldn't give a toss where\nyour code lives\", \"the\ndone thing is to stick an underscore\", \"have a squiz back at\".",
+   "authenticity": "Mostly natural, but \"chuck in this\" for typing commands is odd, and \"good on ya, you bloody legend!\" is a stock line.",
+   "register": "Casual Aussie with mild swearing (\"you bloody legend\"); moderate density, a shade under level 5.",
+   "tone": "Keeps the welcoming tutorial tone.",
+   "flow": "Mostly smooth; \"we reckon you\nmake a _projects_ directory\" is a clumsy suggestion (needs 'should').",
+   "variety": "Repeats \"chuck in this\" twice and \"punch in\" twice.",
+   "essence": "Unmistakably the original."
+  },
+  "yarn-dinkum": {
+   "meaning": "All steps and the welcome survive.",
+   "sense": "Terms fit: \"bung this in\", \"duck back to yer terminal window\", \"have a squiz back at\", \"ways to get a hand\".",
+   "authenticity": "Natural throughout: \"Rust couldn't care less where yer code lives\", \"good on ya!\"",
+   "register": "Casual Aussie with moderate slang and no swearing; a shade under level 5, vulgarity 2.",
+   "tone": "Keeps the friendly tutorial tone.",
+   "flow": "Mostly smooth; \"we reckon ya make a _projects_ directory\" is clumsy as a suggestion.",
+   "variety": "Reasonably varied (\"bung\", \"duck back\", \"punch in\", \"squiz\").",
+   "essence": "Unmistakably the original."
+  },
+  "engine": {
+   "meaning": "Nothing is lost; it is the original with a few spelling changes.",
+   "sense": "The few swaps (\"yer\", \"ya\") carry no sense problems.",
+   "authenticity": "The dialect is spliced in mechanically, with mixed forms: \"enter the followin'\ncommands to compile'n run the file\" next to \"go back to your terminal window\".",
+   "register": "Effectively untranslated: \"Regardless of your operatin' system, the string `Hello, world!` should print to\nthe terminal.\"",
+   "tone": "Keeps the original's tone, since it keeps the original.",
+   "flow": "Clunky splices: \"a directory for the “Hello, world!” project\" joined as \"directory'n a directory\", \"ya just created'n enter the code\".",
+   "variety": "The same two or three edits throughout: dropped g, \"'n\", \"yer\".",
+   "essence": "Unmistakably the original."
+  },
+  "yarn-troppo": {
+   "meaning": "All steps survive; additions hang off the original: \"Three lines. That's the lot.\", \"which just looks like someone sat on the keyboard\", \"cos Windows always has to be different\", \"first round's on you\".",
+   "sense": "Terms fit: \"keep the whole box and dice in there\", \"don't spit the dummy\" for not panicking, \"Linux, macOS, and PowerShell on Windows mob\".",
+   "authenticity": "Mostly natural (\"don't spit the dummy\", \"the whole box and dice\"), with a stock opener: \"Strewth, where do I start?\"",
+   "register": "A full level-5 yarn, with mild swearing (\"doesn't give a toss\").",
+   "tone": "Keeps the welcoming warmth, but the jabs (\"cos Windows always has to be different\") add snark the tutorial doesn't have.",
+   "flow": "Reads naturally: \"Rust files always end in the _.rs_ extension, no exceptions.\"",
+   "variety": "Varied openers and slang: \"Righto\", \"So fire up a terminal\", \"crack open\", \"duck back\", \"have a squiz\".",
+   "essence": "The Rust book's first program, recognisably, but the jokes give it a cheekier character than the original's plain encouragement."
+  }
+ },
+ "problems": {
+  "dinkum-3": [
+   {
+    "quote": "punch in the code from Listing 1-1",
+    "original": "enter the code in Listing 1-1",
+    "severity": "minor",
+    "why": "'punch in' used three times."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "For Linux, macOS, and PowerShell on Windows, chuck in this:",
+    "original": "For Linux, macOS, and PowerShell on Windows, enter this:",
+    "severity": "minor",
+    "why": "'chuck in' for entering commands is unnatural and repeated for CMD."
+   },
+   {
+    "quote": "good on ya, you bloody legend!",
+    "original": "congratulations!",
+    "severity": "minor",
+    "why": "Stock phrase."
+   },
+   {
+    "quote": "we reckon you\nmake a _projects_ directory",
+    "original": "we suggest making a _projects_ directory",
+    "severity": "minor",
+    "why": "Clumsy grammar for a suggestion."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "we reckon ya make a _projects_ directory",
+    "original": "we suggest making a _projects_ directory",
+    "severity": "minor",
+    "why": "Clumsy grammar for a suggestion."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "compile'n run the file",
+    "original": "compile and run the file",
+    "severity": "major",
+    "why": "Forced contraction; representative of the mechanical edits."
+   },
+   {
+    "quote": "Regardless of your operatin' system",
+    "original": "Regardless of your operating system",
+    "severity": "major",
+    "why": "Left untranslated with only a dropped g; far under the brief."
+   }
+  ],
+  "yarn-troppo": [
+   {
+    "quote": "Strewth, where do I start?",
+    "original": "",
+    "severity": "minor",
+    "why": "Stock opener."
+   },
+   {
+    "quote": "cos Windows always has to be different",
+    "original": "",
+    "severity": "minor",
+    "why": "Adds a jab at Windows the original doesn't make."
+   }
+  ]
+ },
+ "summaries": {
+  "dinkum-3": "A natural, faithful tutorial in Aussie voice; leans on 'punch in' and stops short of the vulgarity allowed.",
+  "unharnessed": "Natural and complete with a touch of swearing; some repetition and a stock closing line.",
+  "yarn-dinkum": "Natural, faithful and varied; light on vulgarity for the brief.",
+  "engine": "The original with mechanical dialect spellings; not a retelling.",
+  "yarn-troppo": "The fullest, most varied yarn, with a stock opener and a few cheeky additions."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "dinkum-3",
+    "unharnessed",
+    "yarn-dinkum",
+    "engine"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "flow": [
+   [
+    "dinkum-3",
+    "yarn-troppo"
+   ],
+   [
+    "unharnessed",
+    "yarn-dinkum"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-troppo"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-3",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "dinkum-3",
+    "unharnessed",
+    "yarn-dinkum",
+    "engine"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn-troppo"
+   ],
+   [
+    "dinkum-3",
+    "yarn-dinkum"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

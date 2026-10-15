@@ -1,0 +1,99 @@
+# Testing
+
+```sh
+python -m pytest -q        # the full suite, including golden outputs and the reference texts
+ruff check .               # unused and undefined names (pyflakes rules only; layout is left to the author)
+```
+
+Tests have one primary owner in `tests/{user,functional,architecture,contributor}/`, matching the
+documentation layers. [The test indexes](../../../tests/README.md) list every module and its responsibility;
+the [functional specification](../functional/README.md#tests-as-behavioural-specification) links behaviour to
+its checks. Shared corpus, fixtures, `conftest.py` and reference helpers remain at tests root.
+
+Run one layer with `python -m pytest -q tests/functional` (or another layer folder). The full command above
+collects them all. When moving tests, compare every collected test identity and parameter case, update
+source/fixture/documentation paths and the exact promotion skip allowlist, and run the full suite.
+
+`tests/contributor/test_docs.py` parses authoritative plain sources and ungenerated current docs/skill command examples, including inline commands,
+shell fences, pipes and redirections, without executing shell scripts or paid API calls. It also runs each
+displayed `$ aussiefy` example through the CLI and checks its exact output (including explain stderr).
+Historical ADRs/design reviews and the imported standard are excluded from the current-command contract.
+Published copies are not scanned again. A source edit may precede regeneration during development; promotion
+requires `python scripts/publish_docs.py check`, which enforces fresh output and links in both trees.
+
+## The golden corpus
+
+`tests/corpus/sentences.txt` holds the plain-English sentence corpus. `tests/corpus/golden.yaml` pins the output
+for every sentence at every level at seeds 0 and 1, and for every reference text at every level at seed 0.
+`tests/architecture/test_golden.py` compares against it.
+
+After an intended change to the engine or the dictionary, regenerate it and review the diff like any other
+code change:
+
+```sh
+python scripts/regen_golden.py && git diff tests/corpus/golden.yaml
+```
+
+Never edit `golden.yaml` by hand, and don't accept a regenerated diff without reading it: an unexpected
+change is a regression until shown otherwise.
+
+## Reference texts
+
+`tests/corpus/reference/` holds public-domain texts, from fairy tales to the Declaration of Independence and The
+Raven; `tests/corpus/reference/SOURCES.yaml` lists each one and where it came from. `tests/functional/test_reference.py`
+checks them at every level across 20 seeds. Four of them, for example:
+
+| Text | What it tests |
+|---|---|
+| Gettysburg Address | Sense accuracy: every swap must be one of the speech's real meanings (war, dying, enduring, soldiers, the people, liberty and so on), with no "ripper civil war". Level 5 must reach most of them, while levels 1–2 stay light |
+| Goldilocks (a plain retelling written for this corpus) | Hit rate: swaps must rise with level and the senses must be right (a girl is never a "sheila") |
+| The Hare and the Tortoise (Aesop, Townsend 1867) | Archaic syntax: "fell fast asleep" is not about speed |
+| Waltzing Matilda (popular 1903 lyrics) | Existing slang: swagman, billabong and jumbuck survive, with nothing to translate and line breaks intact |
+
+Every run is also checked for well-formed output: no broken punctuation, correct a/an, openers followed by
+lower case, and the same garnish placement never in adjacent sentences.
+
+## Target translations and the benchmark
+
+`tests/corpus/targets/` holds target translations, such as a refined LLM rendering of Gettysburg at level 5.
+`aussiefy compare` measures how much of a target's slang the engine reproduces across seeds, two ways:
+
+- **Aligned spans,** for close translations: `test_benchmark_against_target_translation` holds the engine to
+  60% of the Gettysburg target's spans over 10 seeds.
+- **Vocabulary overlap,** for targets that restructure or extend the text, like the agent's Goldilocks:
+  `test_goldilocks_benchmark_vocabulary_overlap` holds it to 60% of the dictionary phrases in that target.
+
+Both bars should rise as the dictionary improves. Running `aussiefy dev harvest` on a target is how its misses become candidate
+entries (see [data acquisition](data-acquisition.md)).
+
+## Classic Australian texts
+
+`tests/corpus/classics/` holds public-domain Australian poems and stories (Paterson, Lawson, Dennis and others),
+used as source material for the classics research round and as test input. Its rules and manifest are in
+[tests/corpus/classics/README.md](../../../tests/corpus/classics/README.md).
+
+## Everyday texts
+
+[tests/corpus/everyday/](../../../tests/corpus/everyday/README.md) adds committed inputs spanning instructions, news,
+conversation and workplace/technical registers. Each group has an attributed source/licence manifest. A
+bounded three-case level/seed check covers each committed input for repeatability and source/record
+integrity; plain `.txt` inputs also retain line counts. Strict Markdown tests cover syntax, hard wraps,
+whole-document context, unit offsets and public warnings; extended markup tests include the MDX corpus. This does not extend the original 20-seed, five-level reference sweep.
+
+The 15 pinned Interfold MDX pages now have confirmed LGPL redistribution evidence and committed attribution.
+Remote-only Rockwell/Kieran material and full research exports stay local. Only the
+existing two local-corpus tests can skip; new corpus checks run without private files or network access.
+
+## Copyrighted texts, kept local
+
+Copyrighted texts are never committed ([DD-011](../../architecture/decisions/dd-011-copyrighted-texts-stay-local.md)).
+`tests/corpus/remote.yaml` points at public copies, such as Ginsberg's "Meditations on Moloch" as quoted in Scott
+Alexander's essay, and `aussiefy dev ingest tests/corpus/remote.yaml` (with the `scrape` extra) saves the excerpts to
+the gitignored `tests/corpus/local/`, where `tests/functional/test_local_reference.py` tests them. With the folder empty,
+those tests skip. How to fetch them, add your own, and keep Aussie versions alongside is in
+[tests/corpus/local/README.md](../../../tests/corpus/local/README.md).
+
+## LLM modes
+
+The LLM modes are tested against scripted clients at the API boundary; the suite never calls Claude. Running
+them against the live API is an open item: see [limitations](../functional/limitations.md).

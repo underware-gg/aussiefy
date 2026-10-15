@@ -1,0 +1,191 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 3,
+   "sense": 3,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 2,
+   "flow": 1,
+   "variety": 2,
+   "essence": 3
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every fact kept: \"From Friday, Sept. 4\", the three rivers \"(downstream of Norris Campground)\", sunrise to sunset, July 15 closures \"wound back to partial restrictions on Aug. 28\", \"68 degrees Fahrenheit (20 degrees Celsius)\", the Aug. 28 sunrise-till-2 p.m. rule, rain in the forecast, and the angler guidance.",
+   "sense": "Mostly exact: \"getting the flick\" for lifted, \"wet a line\", \"land your fish quick smart\", \"till the poor bugger's buggered\". \"Fair go,\" as an opener to the anglers' plea is an odd fit ('be fair' rather than 'please').",
+   "authenticity": "Sounds like an Aussie ranger: \"Staff'll keep an eye on the water temps\", \"Don't muck about playing a hooked trout\", \"Doing the right thing protects the park's fisheries\".",
+   "register": "Clearly Aussie, with \"poor bugger's buggered\" inside vulgarity 2, but much of the notice is close paraphrase (\"The full closures came in on July 15 because low water flows and water temps over 68 degrees Fahrenheit (20 degrees Celsius) can kill fish.\"), lighter than a full level-5 yarn.",
+   "tone": "Stays a practical park notice with a conservation plea; the trout line adds warmth without flippancy.",
+   "flow": "Reads smoothly: \"The water's been cooling down overnight, so there's fishing for part of the day.\"",
+   "variety": "Varied (\"getting the flick\", \"wet a line\", \"wound back\", \"quick smart\", \"muck about\"), though \"Staff'll keep an eye on the water temps\" and \"how conditions are looking\" repeat verbatim.",
+   "essence": "Clearly the two Yellowstone notices, structure intact."
+  },
+  "yarn": {
+   "meaning": "All facts kept, including \"(the Gibbon from Norris Campground downstream)\", July 15 and Aug. 28, \"68 degrees Fahrenheit (20 degrees Celsius)\", \"from sunup till 2 p.m. every day\", rain in the forecast and the angler guidance. \"Here's the earlier one.\" helpfully flags the older notice; \"Poor buggers.\" and \"Fair enough, too.\" are reactions, not new facts.",
+   "sense": "Terms fit: \"Good news for the fishos\", \"every creek that runs into 'em\" for tributaries, \"from sunup to sundown\", \"enough to cook a trout in its own creek\", \"till it's absolutely buggered\".",
+   "authenticity": "A real Aussie voice: \"They had to do it: the rivers were runnin' low\", \"The park staff'll keep an eye on the water temperatures, mind\", \"Fishos, listen up\".",
+   "register": "A full level-5 retelling, with \"buggers\"/\"buggered\" well inside vulgarity 2.",
+   "tone": "The good-news-with-caution tone holds; the conservation plea stays sincere (\"please fish in the coolest part of the day\").",
+   "flow": "Reads well aloud: \"The water's been coolin' down overnight, though, so you can have a fish for part of the day.\"",
+   "variety": "Varied: \"fishos\", \"sunup\", \"comin' off\", \"wound back\", \"quick smart\", \"have a fish\", \"round the clock\".",
+   "essence": "Unmistakably the Yellowstone notices, told as a yarn."
+  },
+  "engine": {
+   "meaning": "Mostly the original verbatim, but \"Effective Friday, Sept. Strewth, 4\" garbles the date, and \"creeks, bone dry half the year, and lakes\" invents a claim about park creeks.",
+   "sense": "Few terms to judge; \"bone dry half the year\" is a wrong-sense insertion, and \"Fuck me dead.\" has no sense in context.",
+   "authenticity": "Stage-Australian: interjections bolted on (\"Jeez, Staff will continue\", \"Crikey, water temperatures 'ave cooled\", \"Anyway, Staff will continue\", \"Fuck me dead.\") onto bureaucratic prose (\"depending on condition assessments\").",
+   "register": "Level 5 asked, yet the body is untranslated (\"Temporary restrictions or closures may be implemented depending on condition assessments\"); the closing \"Fuck me dead.\" is crude for nothing.",
+   "tone": "The careful conservation plea ends with \"Fuck me dead.\", which makes it flippant.",
+   "flow": "Broken joins: \"Sept. Strewth, 4\", \"rivers'n all associated tributaries\", \"fisheries'n may prevent\", \"Jeez, Staff will\".",
+   "variety": "Leans on \"'n\" joins and stock openers (\"Well,\", \"Crikey,\", \"Anyway,\").",
+   "essence": "Recognisably the notices, because they are mostly unchanged, but cluttered with tics."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "Anglers: Fair go, fish in the coolest part of the day",
+    "original": "Anglers: Please fish during the coolest times of day",
+    "severity": "minor",
+    "why": "'Fair go' means 'be fair', not quite 'please'."
+   },
+   {
+    "quote": "Staff'll keep an eye on the water temps. Temporary restrictions might be lifted",
+    "original": "Staff will continue to monitor the water temperatures. Temporary restrictions may be lifted",
+    "severity": "minor",
+    "why": "Phrasing repeated word for word from the first notice; reads a little lighter than level 5."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Fair enough, too.",
+    "original": "",
+    "severity": "minor",
+    "why": "Tacked-on tag at the very end."
+   },
+   {
+    "quote": "Poor buggers.",
+    "original": "",
+    "severity": "minor",
+    "why": "Small added aside; harmless colour."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Effective Friday, Sept. Strewth, 4",
+    "original": "Effective Friday, Sept. 4",
+    "severity": "critical",
+    "why": "Interjection splits the date; the key effective date becomes garbled."
+   },
+   {
+    "quote": "creeks, bone dry half the year, and lakes",
+    "original": "streams and lakes",
+    "severity": "major",
+    "why": "Invented claim about the park's waterways."
+   },
+   {
+    "quote": "if conditions worsen. Fuck me dead.",
+    "original": "if conditions worsen.",
+    "severity": "major",
+    "why": "Crude tag on a conservation plea; inverts the tone."
+   },
+   {
+    "quote": "Jeez, Staff will continue to monitor the water temperatures.",
+    "original": "Staff will continue to monitor the water temperatures.",
+    "severity": "major",
+    "why": "Interjection bolted on; body left untranslated."
+   },
+   {
+    "quote": "fisheries'n may prevent",
+    "original": "fisheries and may prevent",
+    "severity": "minor",
+    "why": "Forced contraction."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Accurate, natural Aussie park notice; slightly lighter than the full yarn asked for.",
+  "yarn": "A natural full-strength yarn that keeps every rule and date; the best fit to the brief.",
+  "engine": "The original with interjections jammed in, a garbled date, an invented aside and a crude sign-off; well short of the brief."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

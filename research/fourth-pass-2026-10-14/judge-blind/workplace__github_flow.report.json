@@ -1,0 +1,93 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {"evidence": "Every point and every link survives: prerequisites, the tip, branch naming, safe place to make changes, one change per commit, the rename/tests example, backup to remote storage. \"you'll be busting your arse a lot harder to revert your changes\" keeps 'spend more effort'. 'collaborators' becomes \"your teammates\", a slight narrowing for open-source contributors.", "score": 5},
+        "sense": {"evidence": "\"knock over every step\" for complete all steps, \"without stuffing up the default branch\" for without affecting it, \"run their eye over your work\" for review, \"bin the variable rename\" for revert it, \"If you cock something up\" for make a mistake: all fit. \"see what's cooking\" for ongoing work fits.", "score": 5},
+        "authenticity": {"evidence": "Natural Australian: \"For the lowdown\", \"chip in on\", \"knock over\", \"stuff-up\", \"dead easy\", \"muck around\". \"say you wanna rename a variable\" is fine casual speech.", "score": 5},
+        "register": {"evidence": "A full, chatty Aussie retelling of a doc page with swearing inside vulgarity 2 (\"cock something up\", \"busting your arse\"). Link text and code names left alone, as they should be.", "score": 5},
+        "tone": {"evidence": "Stays a friendly how-to: \"Keep making, committing and pushing changes to your branch till you're ready to ask for feedback.\"", "score": 5},
+        "flow": {"evidence": "Reads smoothly: \"Making a branch gives you your own patch to work in without stuffing up the default branch.\"", "score": 5},
+        "variety": {"evidence": "Varied: \"no-fuss\", \"have a go\", \"lowdown\", \"track down\", \"chip in on\", \"knock over\", \"hook up\", \"what's cooking\", \"run their eye over\", \"bin\", \"shove\", \"smear\".", "score": 5},
+        "essence": {"evidence": "Unmistakably GitHub's doc page, structure and examples kept: \"put the variable rename in one commit and the tests in another\".", "score": 5}
+      },
+      "problems": [
+        {"quote": "lets your teammates see what's cooking", "original": "enables your collaborators to see ongoing work at a glance", "severity": "minor", "why": "Teammates narrows collaborators, who in open source may not be on your team."}
+      ],
+      "summary": "Faithful, natural and lively, a full-weight Aussie retelling of the doc that keeps every step."
+    },
+    "B": {
+      "scores": {
+        "meaning": {"evidence": "Nearly verbatim, so every point survives: \"By creating a branch, ya create a space to work without affectin' the default branch.\"", "score": 5},
+        "sense": {"evidence": "The one idiom fits: \"useful for every man and his dog, not just developers\" for everyone. Nothing else is swapped.", "score": 5},
+        "authenticity": {"evidence": "Mostly the original with ya/yer spellings applied unevenly: \"If you make a mistake, ya can revert your changes\", and a broken join \"By committin''n pushin' yer changes\".", "score": 2},
+        "register": {"evidence": "Largely untranslated: \"A short, descriptive branch name enables yer collaborators to see ongoing work at a glance.\" Far under a level-5 brief.", "score": 1},
+        "tone": {"evidence": "The doc's instructional tone is intact because the text is barely changed: \"Continue to make, commit, and push changes to yer branch until yer ready to ask for feedback.\"", "score": 5},
+        "flow": {"evidence": "Formal phrasing with dialect spellings stitched in reads awkwardly: \"ya would spend more effort reverting yer changes\", \"put the variable rename in one commit'n the tests\", \"By committin''n pushin'\".", "score": 2},
+        "variety": {"evidence": "One idiom (\"every man and his dog\") and the ya/yer spellings repeated throughout.", "score": 1},
+        "essence": {"evidence": "It is the original page, shape intact: \"Ideally, each commit contains an isolated, complete change.\"", "score": 4}
+      },
+      "problems": [
+        {"quote": "A short, descriptive branch name enables yer collaborators to see ongoing work at a glance.", "original": "A short, descriptive branch name enables your collaborators to see ongoing work at a glance.", "severity": "major", "why": "Left untranslated apart from yer, like most of the text; far lighter than the brief."},
+        {"quote": "By committin''n pushin' yer changes", "original": "By committing and pushing your changes", "severity": "minor", "why": "Broken contraction join, hard to read."}
+      ],
+      "summary": "A rule-engine pass: nearly verbatim with ya/yer spellings and one idiom, far under the brief."
+    },
+    "C": {
+      "scores": {
+        "meaning": {"evidence": "Every point survives: \"When ya create a branch, ya get a space to work in without mucking up the default branch.\", the rename/tests example, the backup to remote storage.", "score": 5},
+        "sense": {"evidence": "\"For the drum on how to set up an account\", \"have a squiz at\", \"chip in on\", \"what's on the go\" all fit. \"you'd be flat out for heaps longer revertin' yer changes\" strains: flat out means busy, not 'more effort'.", "score": 4},
+        "authenticity": {"evidence": "Natural: \"every man and his dog\", \"the drum\", \"have a squiz\", \"If ya stuff up\", \"dead easy\".", "score": 5},
+        "register": {"evidence": "Clearly Aussie but lighter in places, with whole sentences close to the original (\"Ideally, each commit holds one self-contained, complete change.\") and no swearing though vulgarity 2 is allowed.", "score": 4},
+        "tone": {"evidence": "Friendly how-to throughout: \"Keep on makin', committin', and pushin' changes to yer branch till you're ready to ask for feedback.\"", "score": 5},
+        "flow": {"evidence": "Smooth, with one clunky line: \"or spread the variable rename over a heap of commits, you'd be flat out for heaps longer revertin' yer changes\".", "score": 4},
+        "variety": {"evidence": "Good spread (\"the drum\", \"squiz\", \"chip in\", \"hook up\", \"on the go\", \"mucking up\", \"stuff-up\", \"chuck in\"), with \"heap\" and \"heaps\" side by side.", "score": 4},
+        "essence": {"evidence": "Clearly the GitHub flow page retold: \"Yer branch is a safe spot to make changes.\"", "score": 5}
+      },
+      "problems": [
+        {"quote": "you'd be flat out for heaps longer revertin' yer changes", "original": "you would spend more effort reverting your changes", "severity": "minor", "why": "Flat out means busy; the phrase strains, and heaps follows heap in the same sentence."}
+      ],
+      "summary": "Natural and faithful, a bit lighter than level 5, with one strained line."
+    },
+    "D": {
+      "scores": {
+        "meaning": {"evidence": "Every point survives, reordered smoothly: \"Committin' and pushin' yer changes also backs yer work up to remote storage, so ya can get at it from any device.\" \"Commit and push yer changes to yer branch as ya go\" adds a fair gloss.", "score": 5},
+        "sense": {"evidence": "\"the good oil on settin' up an account\", \"have a squiz at\", \"run their eye over yer work\", \"muck about with changes\", \"Stuff something up\": all fit. \"Best case, each commit's one change\" for ideally fits.", "score": 5},
+        "authenticity": {"evidence": "Sounds like a local explaining it: \"Stuff something up and ya can revert yer changes\", \"yer in for heaps more work\".", "score": 5},
+        "register": {"evidence": "A steady Aussie voice, a little under full pub-yarn weight, and no swearing where vulgarity 2 is allowed: \"For how to create a repository, check out\".", "score": 4},
+        "tone": {"evidence": "Friendly instructional tone kept: \"First up, create a branch in yer repository.\"", "score": 5},
+        "flow": {"evidence": "Reads as if written that way: \"Give it a short name that says what it's for, and yer collaborators can tell what's goin' on at a glance\".", "score": 5},
+        "variety": {"evidence": "Varied: \"every man and his dog\", \"the good oil\", \"squiz\", \"chip in\", \"run their eye over\", \"muck about\", \"Lump\", \"chuck in\".", "score": 5},
+        "essence": {"evidence": "Unmistakably the doc page retold: \"Say ya want to rename a variable and add some tests\".", "score": 5}
+      },
+      "problems": [
+        {"quote": "For how to create a repository, check out", "original": "For information on how to create a repository, see", "severity": "minor", "why": "Some lines stay plain; a notch under level 5."}
+      ],
+      "summary": "Smooth, faithful, natural and varied, a touch lighter than a full level 5."
+    },
+    "E": {
+      "scores": {
+        "meaning": {"evidence": "Every point and link survives. Additions are colour: \"no detective work needed\", \"whatever takes yer fancy\", \"Short and sweet does it\". \"even our [roadmap]\" adds emphasis; \"Reckon you'd rather pitch in on an existing repository?\" frames contributing as an alternative to creating one, a slight shift.", "score": 5},
+        "sense": {"evidence": "\"knock over every single step\", \"go for yer life\", \"suss out\", \"revertin' yer changes is a piece of piss\", \"ditch the variable rename\", \"Down the track\": all fit.", "score": 5},
+        "authenticity": {"evidence": "Natural and local: \"Stuff somethin' up? No worries\", \"whoever rocks up later\", \"Bung the variable rename and the tests in the same commit\". The opener \"Okay, so.\" is a little stock.", "score": 5},
+        "register": {"evidence": "Full yarn weight with rhetorical questions and asides, swearing inside vulgarity 2 (\"a piece of piss\").", "score": 5},
+        "tone": {"evidence": "Keeps a helpful how-to, with more cheer: \"go for yer life and make whatever changes ya like\".", "score": 5},
+        "flow": {"evidence": "Reads well; the question-and-answer prerequisites flow naturally (\"No repository yet? Have a squiz at\"). A few add-ons lengthen lines: \"nothin' else tagging along\".", "score": 5},
+        "variety": {"evidence": "Wide spread: \"nothin' fancy\", \"kick off\", \"the drum\", \"squiz\", \"pitch in\", \"knock over\", \"takes yer fancy\", \"go for yer life\", \"suss out\", \"piece of piss\", \"Down the track\", \"Bung\", \"smear\".", "score": 5},
+        "essence": {"evidence": "Recognisably the GitHub flow doc, retold as a chat: \"Every time ya commit and push yer changes, ya back up yer work to remote storage.\"", "score": 5}
+      },
+      "problems": [
+        {"quote": "Reckon you'd rather pitch in on an existing repository?", "original": "For information on how to find an existing repository to contribute to", "severity": "minor", "why": "Recasts finding a repository to contribute to as an alternative choice; slight shift."},
+        {"quote": "Okay, so.", "original": "", "severity": "minor", "why": "Stock spoken opener bolted on."}
+      ],
+      "summary": "The fullest, most varied retelling, natural and faithful, with a few stock add-ons."
+    }
+  },
+  "rankings": {
+    "tone": [["A", "B", "C", "D", "E"]],
+    "flow": [["A", "D", "E"], ["C"], ["B"]],
+    "variety": [["A", "D", "E"], ["C"], ["B"]],
+    "essence": [["A", "C", "D", "E"], ["B"]],
+    "overall": [["E", "A"], ["D"], ["C"], ["B"]]
+  }
+}

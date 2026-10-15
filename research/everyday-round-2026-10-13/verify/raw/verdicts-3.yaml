@@ -1,0 +1,1054 @@
+- decision: reject
+  candidate: plus
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: ask
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: covers
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: guts
+  reason: not_aussie
+  why: general English
+- decision: americanism
+  candidate: lift
+  us: elevator
+  australian: lift
+  why: '"elevator" in the building sense; must not touch verb "lift" (the Fed lifting rates).'
+- decision: reject
+  candidate: probably
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: swap
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: add_entry
+  candidate: whack it
+  entry:
+    id: whack-in-the-oven
+    form: whack {obj} in the oven
+    variants:
+    - bung {obj} in the oven
+    concept:
+    - NEW:PUT_IN_OVEN
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Pop something into the oven, casually.
+    sources: []
+  new_concept:
+    id: PUT_IN_OVEN
+    description: Put food into the oven (recipe instruction).
+    triggers:
+      vp:
+      - put {obj} in the oven
+      - place {obj} in the oven
+      - pop {obj} in the oven
+      - transfer {obj} to the oven
+      - place {obj} into the oven
+      - put {obj} into the oven
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Casual Aus "whack/bung it in" for put; deliberately limited to the oven frame so it never catches "put in effort", "place an order" or "put your trust in". (bung is a verb variant, not spelling;
+    split it into its own entry if variants must be spelling-only.)
+- decision: reject
+  candidate: a container
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: a heap of dosh
+  reason: duplicate
+  why: dosh (MONEY) and heaps exist
+- decision: reject
+  candidate: a picnic usually
+  reason: duplicate
+  why: barbie exists; fragment
+- decision: reject
+  candidate: a ripper that one
+  reason: duplicate
+  why: ripper exists
+- decision: reject
+  candidate: a well-run
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: achievement
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: ageing sportsman
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: always fussin'
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: And they reckon puttin' on
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: anything the mad bastard Once
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: aren't telling porkies
+  reason: duplicate
+  why: tell porkies exists (LIE)
+- decision: reject
+  candidate: as sin pining for
+  reason: not_aussie
+  why: '"miserable as sin" is general British/English; fragment'
+- decision: reject
+  candidate: at Mount Vernon
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: bagging everything
+  reason: duplicate
+  why: bag {obj} exists (CRITICISE)
+- decision: reject
+  candidate: bands
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: americanism
+  candidate: bath
+  us: bathtub
+  australian: bath
+  why: Only "bathtub"; bare "tub" is ambiguous (ice-cream tub).
+- decision: reject
+  candidate: bean pot was cactus
+  reason: duplicate
+  why: cactus exists (BROKEN)
+- decision: americanism
+  candidate: bench
+  us: kitchen counter
+  australian: kitchen bench
+  why: Also "countertop" -> "benchtop". Bare "counter" stays (shop counter).
+- decision: add_entry
+  candidate: big-noting meself
+  entry:
+    id: big-note-oneself
+    form: big-note {poss}self
+    variants: []
+    concept:
+    - BOAST
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    replaces:
+    - boast about {poss}self
+    - brag about {poss}self
+    - talk {poss}self up
+    - blow {poss} own trumpet
+    gloss: Talk yourself up; make out you are more important or accomplished than you are.
+    sources:
+    - https://www.wiktionary.com/wiki/big-note
+    - https://greensdictofslang.com/entry/rgc2gua
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Distinctly Aus/NZ; the reflexive verb complements the existing noun big-noter. Only reflexive boasting; must not catch "boast" meaning "to have" (the hotel boasts a pool).
+- decision: reject
+  candidate: bikkies Choccy
+  reason: duplicate
+  why: bikkie/choccy exist
+- decision: reject
+  candidate: bikkies turn out
+  reason: duplicate
+  why: bikkie exists
+- decision: reject
+  candidate: bit of tucker
+  reason: wrong_sense
+  why: '"tucker" used for a piece of food being cooked; food-sense misfire'
+- decision: reject
+  candidate: bloody hefty
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: boots
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: bright lights
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: add_entry
+  candidate: bunged
+  entry:
+    id: bunged-up
+    form: bunged up
+    variants: []
+    concept:
+    - NEW:CLOGGED
+    frame: predicate_adj
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Blocked or clogged so nothing gets through.
+    sources: []
+  new_concept:
+    id: CLOGGED
+    description: Physically blocked or clogged (pipe, drain, vent, nose).
+    triggers:
+      predicate_adj:
+      - clogged
+      - clogged up
+      - plugged up
+      - blocked up
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Aus/UK colloquial for clogged (nose, vent, drain). Must not catch "blocked" (accounts, roads, shots) or "stuffed up" meaning botched.
+- decision: reject
+  candidate: busiest stretch of
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: americanism
+  candidate: by-laws
+  us: city ordinance
+  australian: council by-law
+  why: US municipal "ordinance"; bare "ordinance" left alone (ACT legislation, religious ordinances).
+- decision: add_entry
+  candidate: caper
+  entry:
+    id: caper-racket
+    form: a caper
+    variants: []
+    concept:
+    - RACKET
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    replaces:
+    - a racket
+    - a little scheme
+    - a money-making scheme
+    - a get-rich-quick scheme
+    - a scam !artist|artists|call|calls|email|emails|text|texts
+    gloss: A scheme, racket or line of activity, often a bit shady or tongue-in-cheek.
+    sources:
+    - https://greensdictofslang.com/entry/dcbq4fy
+    - https://www.dictionary.com/browse/caper
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Aus/Commonwealth "caper" = a scheme or line of business ("the marriage agency caper"). Must not catch formal "scheme" (pension, superannuation, colour, rhyme scheme) or a heist film "caper".
+- decision: reject
+  candidate: cars
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: centres
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: cheery
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: chipping in a few
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: Chook fight
+  reason: duplicate
+  why: chook exists
+- decision: reject
+  candidate: choppers flying
+  reason: not_aussie
+  why: chopper is general English (US origin too), not distinctly Aussie
+- decision: reject
+  candidate: churned out writin'
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: americanism
+  candidate: cistern Give
+  us: toilet tank
+  australian: cistern
+  why: Unambiguous US plumbing term.
+- decision: reject
+  candidate: clean tongs
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: colder than usual Now the
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: colour turns
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: cooks
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: copy
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: counts
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: crankcase
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: cruise
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: Deathly
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: details
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: direction
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: does its meetings
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: downstream
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: dried
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: drooling
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: dunk often It's
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: easygoing kid-like
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: engine's properly loosened
+  reason: duplicate
+  why: properly exists (VERY); rest is plain English
+- decision: reject
+  candidate: every climate
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: extra
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: fairly
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: add_entry
+  candidate: feed of it
+  entry:
+    id: a-feed
+    form: a feed
+    variants: []
+    concept:
+    - NEW:MEAL
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: A meal, usually a good filling one.
+    sources:
+    - https://greensdictofslang.com/entry/iwnqday
+  new_concept:
+    id: MEAL
+    description: A (good, filling) meal, as a countable noun.
+    triggers:
+      np:
+      - a good meal
+      - a hearty meal
+      - a decent meal
+      - a square meal
+      - a big meal
+      - a filling meal
+      - a quick meal !plan|plans|kit|kits|prep|deal|deals
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Noun use of the existing "have a feed"; triggers limited to qualified "a ... meal" so it never catches "bone meal", "meal plan", "meal ticket", "meal kit" or "piecemeal".
+- decision: reject
+  candidate: fired up
+  reason: wrong_sense
+  why: '"fired up" means enthusiastic, not "exclaimed"'
+- decision: reject
+  candidate: five-year-old
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: flat-footed heavy-breathing bloke
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: fluffy
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: footy ay Before
+  reason: duplicate
+  why: footy exists
+- decision: reject
+  candidate: For the big spender
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: frettin'
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: americanism
+  candidate: frypan
+  us: skillet
+  australian: frypan
+  why: '"skillet" -> "frypan" (or frying pan); "cast-iron skillet" -> "cast-iron frypan".'
+- decision: reject
+  candidate: fumes are
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: fussing where
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: get defensive
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: get through--and
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: getting-up time
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: add_trigger
+  candidate: gives a big rap to
+  triggers_to_add:
+    PRAISE:
+      vp:
+      - commend {obj}
+      - heap praise on {obj}
+      - speak glowingly of {obj}
+  why: '"give {obj} a big wrap" (Aus spelling) already exists; widen triggers. Avoid bare "praise" (praise the Lord) and "pay tribute to" (said of the dead) and "highlight".'
+- decision: reject
+  candidate: gold
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: got hotter than
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: add_entry
+  candidate: got the flick
+  entry:
+    id: get-the-flick
+    form: get the flick
+    variants: []
+    concept:
+    - NEW:GET_DUMPED
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Be dumped, rejected or let go, from a job, a relationship or a line-up.
+    sources:
+    - https://greensdictofslang.com/entry/cd3brka
+  new_concept:
+    id: GET_DUMPED
+    description: Be dumped, rejected or sacked (passive of DISMISS).
+    triggers:
+      vp:
+      - get dumped
+      - got dumped
+      - be dumped
+      - get ditched
+      - got ditched
+      - get the boot !camp|camps
+      - get the elbow
+      - get the push
+      - get the sack
+      - got the sack
+      - get sacked
+      - got sacked
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Passive counterpart of existing "give {obj} the flick". Keep to people/things being dumped; must not catch "removed" (surgery, stains, data) or "fired up"/"fired at".
+- decision: americanism
+  candidate: grilled
+  us: broil
+  australian: grill
+  why: Covers broil/broiled/broiling and "the broiler" (oven grill); not "broiler" chickens.
+- decision: reject
+  candidate: had stints with
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: handed out
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: harmless bit
+  reason: duplicate
+  why: a lurk exists
+- decision: reject
+  candidate: have a ripper of a
+  reason: duplicate
+  why: ripper exists
+- decision: reject
+  candidate: heat those
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: himself Whatever
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: hook
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: how dazzlingly uncertain
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: ideas
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: In theory
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: interested in the
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: is happening
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: it matters
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: jam jars
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: just scrape
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: kitty
+  reason: not_aussie
+  why: '"kitty litter" is general English'
+- decision: reject
+  candidate: Le-- well anyway mate
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: lesson
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: liked
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: long-running
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: mailing desk
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: mare The
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: marriage caper with
+  reason: duplicate
+  why: covered by the caper entry
+- decision: reject
+  candidate: mattered
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: meds
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: might answer
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: minding its
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: months like
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: mostly blow-ins
+  reason: duplicate
+  why: a blow-in exists (NEWCOMER)
+- decision: reject
+  candidate: muck
+  reason: not_aussie
+  why: general English; fragment
+- decision: reject
+  candidate: NASA heading back
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: never-say-die
+  reason: not_aussie
+  why: general English idiom
+- decision: reject
+  candidate: noises
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: add_entry
+  candidate: nous
+  entry:
+    id: nous
+    form: nous
+    variants: []
+    concept:
+    - NEW:COMMON_SENSE
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    replaces: []
+    gloss: Practical good sense and know-how; savvy.
+    sources: []
+  new_concept:
+    id: COMMON_SENSE
+    description: Practical good sense, savvy (as a mass noun).
+    triggers:
+      np:
+      - common sense !approach|approaches|solution|solutions|reform|reforms|measure|measures|rule|rules|policy|policies|test|view|thing
+      - gumption
+      - horse sense
+      - street smarts
+      - savvy !shopper|shoppers|investor|investors|consumer|consumers
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: 'British in origin but the everyday Aus choice (rhymes with "house"). Mass noun only: excludes "common sense" as a modifier and adjectival "savvy"; must not catch "sense" alone or philosophical "nous".'
+- decision: reject
+  candidate: of pneumonia in
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: old colour
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: one-year probation
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: other ex-Grateful
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: outfit
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: overnight
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: painkiller
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: Part-cooking
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: patronisin' same
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: perishables aren't copping the
+  reason: duplicate
+  why: cop {np} exists
+- decision: reject
+  candidate: pick out
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: picks up
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: Plates
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: plus the
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: prob'ly readin' somethin'
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: purchase In person
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: pushing on guided
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: rainwater if you can get
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: readings
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: Reckon on
+  reason: duplicate
+  why: reckon exists; "reckon on" (expect) is general English
+- decision: reject
+  candidate: reckoned each
+  reason: wrong_sense
+  why: '"reckon" for a guide suggesting; wrong register/sense'
+- decision: reject
+  candidate: regular at
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: right spacing
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: rockers
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: round Nowadays you've gotta pre-authorise
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: rush
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: sawing
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: self-driving
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: sent
+  reason: wrong_sense
+  why: '"sent the washing out" is plain retelling; "had" is not the sense'
+- decision: reject
+  candidate: sheila reckons
+  reason: duplicate
+  why: sheila/reckon exist
+- decision: reject
+  candidate: shindig
+  reason: not_aussie
+  why: general English (US origin), not distinctively Aussie; PARTY already has "a do"
+- decision: reject
+  candidate: shoving
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: side of it
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: single biggest thing
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: slides
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: smack in
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: snags apart Give
+  reason: duplicate
+  why: snag exists
+- decision: reject
+  candidate: so nothing sticks Whisk the
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: south-east
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: spoonful
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: Spotting
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: stand-up's especially handy
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: stats on
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: steepening the
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: stony broke by
+  reason: duplicate
+  why: stony broke exists
+- decision: reject
+  candidate: storms
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: straightens up
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: sunup
+  reason: not_aussie
+  why: US-flavoured; Aussies say sunrise
+- decision: reject
+  candidate: sussing
+  reason: duplicate
+  why: suss {obj} out exists
+- decision: reject
+  candidate: switched
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: add_entry
+  candidate: takin' the piss
+  entry:
+    id: taking-the-piss-joking
+    form: '{subj} {be} takin'' the piss'
+    variants:
+    - '{subj} {be} taking the piss'
+    concept:
+    - TEASE
+    frame: clause
+    intensity: 3
+    vulgarity: 2
+    incoherence: 2
+    register: current
+    replaces:
+    - '{subj} {be} only joking'
+    - '{subj} {be} just joking'
+    - '{subj} {be} having a laugh'
+    gloss: Joking, not being serious; having someone on.
+    sources:
+    - https://greensdictofslang.com/
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: high
+  why: Very common Aus (also UK); existing form is only the transitive "take the piss out of {obj}" (mocking). Must not catch literal "joking" in reported comedy contexts or "taking" anything else.
+- decision: americanism
+  candidate: tap washers
+  us: faucet
+  australian: tap
+  why: Aussies say tap; "faucet washer" -> "tap washer".
+- decision: reject
+  candidate: temps mostly
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: that got wound
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: that's downright
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: the Congregationalists
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: the explorer and geographer
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: the lid on
+  reason: duplicate
+  why: esky exists; plain English otherwise
+- decision: reject
+  candidate: the perishables
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: the seasonin's
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: the weather blokes reckon storms
+  reason: duplicate
+  why: reckon exists; fragment
+- decision: reject
+  candidate: there's a few shockers
+  reason: duplicate
+  why: a shocker exists (AWFUL)
+- decision: reject
+  candidate: this dodgy behaviour
+  reason: duplicate
+  why: dodgy exists; "unsafe" is a stretch of its sense anyway
+- decision: reject
+  candidate: ticks
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: to be buried
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: too sappy
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: add_trigger
+  candidate: tracks
+  triggers_to_add:
+    WALKING_TRACK:
+      np:
+      - a hiking track
+      - a bushwalking trail
+      - a mountain trail
+      - a forest trail
+      - a backcountry trail
+      - a park trail
+      - the park trails
+      - hiking trails
+      - walking trails
+  why: Existing "a walking track" should fire for more hiking-trail phrasings; bare "trail" deliberately excluded (paper trail, campaign trail, on the trail of).
+- decision: americanism
+  candidate: trays no greasing needed
+  us: cookie sheet
+  australian: baking tray
+  why: Also "baking sheet" -> "baking tray".
+- decision: reject
+  candidate: tucker right
+  reason: wrong_sense
+  why: '"tucker" for nutrition is exactly the food-colouring style misfire'
+- decision: reject
+  candidate: two-facedness
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: up properly crook
+  reason: duplicate
+  why: crook (SICK) and properly (VERY) exist
+- decision: reject
+  candidate: usually tell porkies
+  reason: duplicate
+  why: tell porkies exists (LIE)
+- decision: reject
+  candidate: versus
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: was banking
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: washing your hands properly out
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: wear
+  reason: wrong_sense
+  why: '"can wear it" (bear the cost/tolerate) is general Commonwealth English, and the sense is hard to gate'
+- decision: reject
+  candidate: weren't properly awake
+  reason: duplicate
+  why: properly exists as an intensifier (VERY)
+- decision: reject
+  candidate: whenever you like
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: americanism
+  candidate: wholemeal
+  us: whole wheat
+  australian: wholemeal
+  why: '"whole wheat flour/bread/pasta" -> wholemeal.'
+- decision: reject
+  candidate: with a bit of plumber's
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: worn-out dunny
+  reason: duplicate
+  why: dunny exists
+- decision: reject
+  candidate: yakking wrapped up
+  reason: not_aussie
+  why: yak/yakking is general English (US origin); CHAT/TALK_ON cover it
+- decision: reject
+  candidate: You can chuck
+  reason: duplicate
+  why: chuck exists
+- decision: reject
+  candidate: you're getting dehydrated
+  reason: not_lexical
+  why: Plain English, a retold fragment or a merged diff span.
+- decision: reject
+  candidate: your eyes peeled
+  reason: not_aussie
+  why: general English idiom

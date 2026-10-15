@@ -1,0 +1,678 @@
+{
+ "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as rude, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+ "prompt": "BRIEF: level 4, vulgarity 1\n\nORIGINAL:\nThe name Kubernetes originates from Greek, meaning helmsman or pilot. K8s as an abbreviation\nresults from counting the eight letters between the \"K\" and the \"s\". Google open sourced the\nKubernetes project in 2014. Kubernetes combines\n[over 15 years of Google's experience](/blog/2015/04/borg-predecessor-to-kubernetes/) running\nproduction workloads at scale with best-of-breed ideas and practices from the community.\n\n## Why you need Kubernetes and what it can do {#why-you-need-kubernetes-and-what-can-it-do}\n\nContainers are a good way to bundle and run your applications. In a production\nenvironment, you need to manage the containers that run the applications and\nensure that there is no downtime. For example, if a container goes down, another\ncontainer needs to start. Wouldn't it be easier if this behavior was handled by a system?\n\nThat's how Kubernetes comes to the rescue! Kubernetes provides you with a framework\nto run distributed systems resiliently. It takes care of scaling and failover for\nyour application, provides deployment patterns, and more. For example: Kubernetes\ncan easily manage a canary deployment for your system.\n\nKubernetes provides you with:\n\n* **Service discovery and load balancing**\n  Kubernetes can expose a container using a DNS name or its own IP address.\n  If traffic to a container is high, Kubernetes is able to load balance and distribute\n  the network traffic so that the deployment is stable.\n* **Storage orchestration**\n  Kubernetes allows you to automatically mount a storage system of your choice, such as\n  local storage, public cloud providers, and more.\n* **Automated rollouts and rollbacks**\n  You can describe the desired state for your deployed containers using Kubernetes,\n  and it can change the actual state to the desired state at a controlled rate.\n  For example, you can automate Kubernetes to create new containers for your\n  deployment, remove existing containers and adopt all their resources to the new container.\n* **Automatic bin packing**\n  You provide Kubernetes with a cluster of nodes that it can use to run containerized tasks.\n  You tell Kubernetes how much CPU and memory (RAM) each container needs. Kubernetes can fit\n  containers onto your nodes to make the best use of your resources.\n* **Self-healing**\n  Kubernetes restarts containers that fail, replaces containers, kills containers that don't\n  respond to your user-defined health check, and doesn't advertise them to clients until they\n  are ready to serve.\n* **Secret and configuration management**\n  Kubernetes lets you store and manage sensitive information, such as passwords, OAuth tokens,\n  and SSH keys. You can deploy and update secrets and application configuration without\n  rebuilding your container images, and without exposing secrets in your stack configuration.\n* **Batch execution**\n  In addition to services, Kubernetes can manage your batch and CI workloads, replacing containers that fail, if desired.\n* **Horizontal scaling**\n  Scale your application up and down with a simple command, with a UI, or automatically based on CPU usage.\n* **IPv4/IPv6 dual-stack**\n  Allocation of IPv4 and IPv6 addresses to Pods and Services.\n* **Designed for extensibility**\n  Add features to your Kubernetes cluster without changing upstream source code.\n\n## What Kubernetes is not\n\nKubernetes is not a traditional, all-inclusive PaaS (Platform as a Service) system.\nSince Kubernetes operates at the container level rather than at the hardware level,\nit provides some generally applicable features common to PaaS offerings, such as\ndeployment, scaling, load balancing, and lets users integrate their logging, monitoring,\nand alerting solutions. However, Kubernetes is not monolithic, and these default solutions\nare optional and pluggable. Kubernetes provides the building blocks for building developer\nplatforms, but preserves user choice and flexibility where it is important.\n\nCANDIDATE A:\nThe name Kubernetes comes from the Greek, meaning helmsman or pilot, the bloke at the wheel. K8s as a\nshort form comes from counting the eight letters between the \"K\" and the \"s\". Google chucked the\nKubernetes project open source back in 2014. Kubernetes mixes\n[over 15 years of Google's experience](/blog/2015/04/borg-predecessor-to-kubernetes/) running\nproduction workloads at a whopping scale with the pick of the ideas and practices from the community.\n\n## Why you need Kubernetes and what it can do {#why-you-need-kubernetes-and-what-can-it-do}\n\nContainers are a top way to bundle up and run your apps. In a production\nenvironment, you've gotta look after the containers running the apps and\nmake sure nothing ever falls over. Say a container carks it, another\ncontainer's gotta fire up. Wouldn't it be a bloody sight easier if a system handled all that for you?\n\nThat's where Kubernetes rides in to save the day! Kubernetes gives you a framework\nto run distributed systems that can cop a hit and keep going. It sorts out scaling and failover for\nyour app, gives you deployment patterns, and a fair bit more. For example: Kubernetes\ncan handle a canary deployment for your system, no worries.\n\nKubernetes gives you:\n\n* **Service discovery and load balancing**\n  Kubernetes can put a container out there using a DNS name or its own IP address.\n  If a container's getting slammed with traffic, Kubernetes can load balance and spread\n  the network traffic round so the deployment stays steady.\n* **Storage orchestration**\n  Kubernetes lets you automatically mount whatever storage system takes your fancy, like\n  local storage, public cloud providers, and more.\n* **Automated rollouts and rollbacks**\n  You can spell out the state you want your deployed containers in using Kubernetes,\n  and it'll shift the actual state over to that at a steady, controlled clip.\n  For example, you can get Kubernetes to automatically spin up new containers for your\n  deployment, turf the old ones and hand all their resources over to the new container.\n* **Automatic bin packing**\n  You give Kubernetes a cluster of nodes it can use to run containerised tasks.\n  You tell Kubernetes how much CPU and memory (RAM) each container needs. Kubernetes can squeeze\n  the containers onto your nodes to get the most bang for your buck out of your resources.\n* **Self-healing**\n  Kubernetes restarts containers that fall over, swaps containers out, knocks off containers that won't\n  answer your user-defined health check, and doesn't let on to clients they exist till they're\n  ready to serve.\n* **Secret and configuration management**\n  Kubernetes lets you stash and manage sensitive stuff, like passwords, OAuth tokens,\n  and SSH keys. You can deploy and update secrets and app configuration without\n  rebuilding your container images, and without leaving secrets hanging out in your stack configuration.\n* **Batch execution**\n  As well as services, Kubernetes can look after your batch and CI workloads, swapping out containers that fall over, if you want.\n* **Horizontal scaling**\n  Scale your app up and down with one simple command, with a UI, or automatically based on how hard the CPU's working.\n* **IPv4/IPv6 dual-stack**\n  Dishing out IPv4 and IPv6 addresses to Pods and Services.\n* **Designed for extensibility**\n  Bolt features onto your Kubernetes cluster without mucking about with the upstream source code.\n\n## What Kubernetes is not\n\nKubernetes isn't your traditional, all-in, everything-in-the-box PaaS (Platform as a Service) system.\nSince Kubernetes works at the container level rather than down at the hardware level,\nit gives you some handy all-round features you'd find in PaaS offerings, like\ndeployment, scaling and load balancing, and it lets users plug in their own logging, monitoring,\nand alerting setups. But Kubernetes isn't one big lump, and these default setups\nare optional and you can swap 'em in and out. Kubernetes gives you the building blocks for knocking up developer\nplatforms, but leaves you the choice and room to move where it counts.\n\nCANDIDATE B:\nPull up a stool. The name Kubernetes comes from the Greek for helmsman or pilot, the bloke\nsteering the boat. K8s, the short version, is what you get when you count the eight letters\nbetween the \"K\" and the \"s\". Google open sourced the Kubernetes project in 2014. Kubernetes\nmixes [over 15 years of Google's experience](/blog/2015/04/borg-predecessor-to-kubernetes/)\nrunning production workloads at scale with the pick of the ideas and practices from the\nwider open-source mob.\n\n## Why you need Kubernetes and what it can do {#why-you-need-kubernetes-and-what-can-it-do}\n\nContainers are a handy way to bundle up and run your applications. In production, though,\nyou've got to keep an eye on the containers running those applications and make sure\nnothing ever goes down. Say a container carks it: another one needs to fire up in its\nplace. Wouldn't it be easier if some system just sorted that out for you, ay?\n\nWell, that's where Kubernetes rides in to save the day! Kubernetes gives you a framework for\nrunning distributed systems so they bounce back when something breaks. It looks after\nscaling and failover for your application, gives you deployment patterns, and plenty more.\nFor example, Kubernetes can run a canary deployment for your system without breaking a sweat.\n\nKubernetes gives you:\n\n* **Service discovery and load balancing**\n  Kubernetes can put a container out there under a DNS name or its own IP address.\n  If a container's getting slammed with traffic, Kubernetes can load balance and spread\n  the network traffic around so the deployment stays steady.\n* **Storage orchestration**\n  Kubernetes lets you automatically mount whatever storage system you fancy, whether that's\n  local storage, public cloud providers, or whatever else.\n* **Automated rollouts and rollbacks**\n  You tell Kubernetes how you want your deployed containers to look, and it shifts what's\n  actually running over to that, at a pace you control. For example, you can set Kubernetes\n  to spin up brand-spankin'-new containers for your deployment, get rid of the old ones\n  and hand all their resources over to the fresh container.\n* **Automatic bin packing**\n  You give Kubernetes a cluster of nodes it can use to run containerised tasks.\n  You tell Kubernetes how much CPU and memory (RAM) each container needs. Kubernetes then\n  packs the containers onto your nodes like a good Tetris player, so you get the most out\n  of your resources.\n* **Self-healing**\n  Kubernetes restarts containers that fall over, swaps containers out, kills off any that\n  don't answer your user-defined health check, and doesn't let clients know they're there\n  until they're ready to do the job.\n* **Secret and configuration management**\n  Kubernetes lets you store and look after sensitive stuff, like passwords, OAuth tokens,\n  and SSH keys. You can deploy and update secrets and application config without\n  rebuilding your container images, and without leaving your secrets lying about in your\n  stack configuration.\n* **Batch execution**\n  As well as services, Kubernetes can run your batch and CI workloads, and swap out containers that fail if you want it to.\n* **Horizontal scaling**\n  Scale your application up and down with one simple command, through a UI, or automatically based on how hard the CPU's working.\n* **IPv4/IPv6 dual-stack**\n  Hands out IPv4 and IPv6 addresses to Pods and Services.\n* **Designed for extensibility**\n  Bolt new features onto your Kubernetes cluster without touching the upstream source code.\n\n## What Kubernetes is not\n\nKubernetes isn't your old-school, everything-included PaaS (Platform as a Service) system.\nBecause Kubernetes works at the container level rather than down at the hardware, it gives\nyou some all-purpose features that PaaS offerings tend to have, like deployment, scaling and\nload balancing, and lets you plug in your own logging, monitoring and alerting setups. But\nKubernetes isn't one big lump, and those default bits are optional and you can swap them in\nand out. Kubernetes gives you the building blocks for knocking together developer platforms,\nbut it leaves the choice with you, and the wiggle room, where it counts. A toolbox, not a\nflat-pack house, basically.\n\nCANDIDATE C:\nThe name Kubernetes originates from Greek, meaning helmsman or pilot. K8s as an abbreviation\nresults from counting the eight letters between the \"K\" and the \"s\", ay. Crikey, Google open sourced the\nKubernetes project in 2014. Kubernetes combines\n[over 15 years of Google's experience](/blog/2015/04/borg-predecessor-to-kubernetes/) running\nproduction workloads at scale with best-of-breed ideas and practices from the mob.\n\n## Why you need Kubernetes and what it can do {#why-you-need-kubernetes-and-what-can-it-do}\n\nContainers are a bloody good way to bundle and run your applications. In a production\nenvironment, you need to manage the containers that run the applications and\nensure that there's no downtime. For example, if a container goes down, another\ncontainer needs to start. Wouldn't it be easier if this behaviour was handled by a system, mate?\n\nThat's how Kubernetes comes to the rescue! Bloody hell, Kubernetes provides you with a framework\nto run distributed systems resiliently. It takes care of scaling and failover for\nyour application, provides deployment patterns, and more. For example: Kubernetes\ncan easily manage a canary deployment for your system.\n\nKubernetes provides you with:\n\n* **Service discovery and load balancing**\n  Kubernetes can expose a container using a DNS name or its own IP address.\n  If traffic to a container is high, Kubernetes is able to load balance and distribute\n  the network traffic so that the deployment is stable.\n* **Storage orchestration**\n  Kubernetes allows you to automatically mount a storage system of your choice, such as\n  local storage, public cloud providers, and more.\n* **Automated rollouts and rollbacks**\n  You can describe the desired state for your deployed containers using Kubernetes,\n  and it can change the actual state to the desired state at a controlled rate.\n  For example, you can automate Kubernetes to create brand-spankin'-new containers for your\n  deployment, remove existing containers and adopt all their resources to the brand-spankin'-new container.\n* **Automatic bin packing**\n  You provide Kubernetes with a cluster of nodes that it can use to run containerized yakka.\n  You tell Kubernetes how much CPU and memory (RAM) each container needs. Kubernetes can fit\n  containers onto your nodes to make the best use of your resources.\n* **Self-healing**\n  Kubernetes restarts containers that fail, replaces containers, kills containers that don't bloody well respond to your user-defined health check, and doesn't advertise them to clients until they\n  are ready to serve.\n* **Secret and configuration management**\n  Kubernetes lets you store and manage sensitive information, such as passwords, OAuth tokens,\n  and SSH keys. You can deploy and update secrets and application configuration without\n  rebuilding your container images, and without exposing secrets in your stack configuration.\n* **Batch execution**\n  In addition to services, Kubernetes can manage your batch and CI workloads, replacing containers that fail, if desired.\n* **Horizontal scaling**\n  Scale your application up and down with a simple command, with a UI, or automatically based on CPU usage.\n* **IPv4/IPv6 dual-stack**\n  Allocation of IPv4 and IPv6 addresses to Pods and Services.\n* **Designed for extensibility**\n  Add features to your Kubernetes cluster without changing upstream source code.\n\n## What Kubernetes is not\n\nKubernetes is not a traditional, all-inclusive PaaS (Platform as a Service) system.\nSince Kubernetes operates at the container level rather than at the hardware level,\nit provides some generally applicable features common to PaaS offerings, such as\ndeployment, scaling, load balancing, and lets users integrate their logging, monitoring,\nand alerting solutions. However, Kubernetes isn't monolithic, and these default solutions\nare optional and pluggable. Kubernetes provides the building blocks for building developer\nplatforms, but preserves user choice and flexibility where it is important.",
+ "schema": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "object",
+    "properties": {
+     "A": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "B": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "C": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "A",
+     "B",
+     "C"
+    ],
+    "additionalProperties": false
+   },
+   "rankings": {
+    "type": "object",
+    "properties": {
+     "tone": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "flow": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "variety": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "essence": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "overall": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "tone",
+     "flow",
+     "variety",
+     "essence",
+     "overall"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "required": [
+   "candidates",
+   "rankings"
+  ],
+  "additionalProperties": false
+ }
+}

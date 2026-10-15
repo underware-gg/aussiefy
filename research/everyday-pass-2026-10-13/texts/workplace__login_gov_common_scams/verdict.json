@@ -1,0 +1,181 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "engine": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 3,
+   "authenticity": 1,
+   "register": 1,
+   "tone": 4,
+   "flow": 3,
+   "variety": 2,
+   "essence": 4
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Every point and bullet survives: phishing, the three phishing tactics, the three protections, threats and gift-card demands, .gov check, typing the URL, upfront-fee grants, reporting profiles. \"Hurry you up to click\" softens \"Urge\" slightly.",
+   "sense": "Terms fit: \"con punters\", \"makin' dodgy payments\", \"Check the message is fair dinkum\", \"Report shonky messages\", \"Shonks might ring you up\", \"Report suss profiles\".",
+   "authenticity": "Natural Aussie for the most part: \"Scammers are always cookin' up brand-spankin'-new ways\", \"makin' out they're government officials\". The dropped-g spelling is applied heavily (\"usin' its official contact details\", \"double-check the spellin'\").",
+   "register": "Clearly Aussie throughout, but restrained for level 5: headings and many bullets stay plain (\"Government agencies will never ask you to pay over the phone.\"). No swearing, which is allowed.",
+   "tone": "Keeps the serious, protective consumer-warning tone under the slang.",
+   "flow": "Reads smoothly, though the dropped g's clutter some lines: \"Check the message is fair dinkum by gettin' in touch with the agency directly, usin' its official contact details.\"",
+   "variety": "Varied: \"punters\", \"dodgy\", \"fair dinkum\", \"shonky\", \"Shonks\", \"suss\", \"makin' out\"; \"dodgy\" twice, and the g-dropping device leaned on.",
+   "essence": "Unmistakably the Login.gov scam guide, structure intact."
+  },
+  "engine": {
+   "meaning": "Points survive since the text is mostly verbatim, but \"Demand immediate payment via pressie cards\" changes gift cards (a specific payment method) into presents.",
+   "sense": "Wrong-sense swap: \"pressie cards\" for gift cards; \"trick punters\" fits.",
+   "authenticity": "Mechanical swaps into untouched US prose: \"Staying informed about these tactics is yer best defence\", \"Urge ya to click on a link to “verify yer account”\", \"pressie cards\".",
+   "register": "Far under level 5: apart from \"yer\"/\"ya\", \"punters\", \"brand-spankin'-new\" and a few dropped g's, it is the original (\"Verify the message by contacting the agency directly using official contact information.\").",
+   "tone": "The warning tone survives because the text does.",
+   "flow": "Readable, but the \"yer\" spellings in formal sentences jar: \"as well as methods to protect yerself\".",
+   "variety": "Leans on \"yer\"/\"ya\" and dropped g's; little else.",
+   "essence": "Recognisably the original, barely changed."
+  },
+  "unharnessed": {
+   "meaning": "Every point survives. \"paying up for stuff that's a total rort\" reframes \"making fraudulent payments\" a little; \"will never, ever ask\" adds emphasis to an existing claim.",
+   "sense": "Mostly exact: \"Dob in dodgy messages\", \"Shonks might ring up\", \"Sting you with fees\", \"cough up fees first\", \"suss profiles\". \"bodgy websites\" strains: bodgy means shoddily made, whereas these fakes are built to look convincing.",
+   "authenticity": "Sounds like an Australian talking: \"the most common dodges going around\", \"getting onto the agency directly\", \"Reckon there's some urgent drama with your benefits\".",
+   "register": "Full casual Aussie across headings' bodies and bullets alike, the right weight for level 5 in a guide; no swearing, which is allowed.",
+   "tone": "Keeps the protective warning tone; \"never, ever\" reinforces rather than jokes.",
+   "flow": "Reads smoothly: \"Don't go using search engines to find sign-in links. Type the official URL in yourself and double-check the spelling.\"",
+   "variety": "Very varied: \"rort\", \"dodges\", \"lingo\", \"Hassle\", \"drama\", \"legit\", \"Dob in\", \"Shonks\", \"bodgy\", \"Sting you\", \"cough up\", \"suss\"; \"Dob in\" twice.",
+   "essence": "Unmistakably the Login.gov scam guide."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "by gettin' in touch with the agency directly, usin' its official contact details",
+    "original": "by contacting the agency directly using official contact information",
+    "severity": "minor",
+    "why": "Dropped-g spelling is applied mechanically throughout, which reads as a device rather than a voice."
+   },
+   {
+    "quote": "Hurry you up to click on a link",
+    "original": "Urge you to click on a link",
+    "severity": "minor",
+    "why": "Slightly awkward phrasing."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Demand immediate payment via pressie cards",
+    "original": "Demand immediate payment via gift cards",
+    "severity": "major",
+    "why": "'Gift cards' is the specific scam payment method; 'pressie cards' is not a term and obscures the warning."
+   },
+   {
+    "quote": "Staying informed about these tactics is yer best defence.",
+    "original": "Staying informed about these tactics is your best defense.",
+    "severity": "major",
+    "why": "Dialect spelling dropped into formal prose; typical of a text otherwise left untranslated, far under level 5."
+   },
+   {
+    "quote": "Verify the message by contacting the agency directly using official contact information.",
+    "original": "Verify the message by contacting the agency directly using official contact information.",
+    "severity": "major",
+    "why": "Left untranslated."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "Some scams use bodgy websites made up to look like official government pages.",
+    "original": "Some scams use fraudulent websites designed to look like official government pages.",
+    "severity": "minor",
+    "why": "'Bodgy' means shoddy or poorly made; these sites are fake but convincing, so 'dodgy' or 'fake' fits better."
+   },
+   {
+    "quote": "paying up for stuff that's a total rort",
+    "original": "making fraudulent payments",
+    "severity": "minor",
+    "why": "Slight reframing of fraudulent payments as overpriced goods."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A natural, accurate Aussie retelling of the scam guide; restrained for level 5 and heavy on dropped g's.",
+  "engine": "The original with 'yer' spellings and a wrong-sense 'pressie cards'; essentially untranslated.",
+  "unharnessed": "A lively, natural Aussie retelling at full weight that keeps every warning; one strained 'bodgy'."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

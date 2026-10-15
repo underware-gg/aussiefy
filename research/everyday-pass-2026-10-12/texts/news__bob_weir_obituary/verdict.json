@@ -1,0 +1,179 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "yarn": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 3,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 1,
+   "tone": 3,
+   "flow": 2,
+   "variety": 1,
+   "essence": 3
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "Mostly the original verbatim, but \"making various groups with bloke Grateful Dead alumni\" and \"playing keep on kickin' until months before his death\" garble two facts (fellow members; playing live).",
+   "sense": "\"bloke\" replaces \"fellow\" as if it were a noun swap, twice; \"keep on kickin'\" replaces \"live\". Both take the wrong sense.",
+   "authenticity": "The only Aussie is mechanical: \"bloke Grateful Dead alumni\", \"Bugger me, on December 31, 1965\".",
+   "register": "Almost entirely untranslated; far below level 3. \"Bugger me\" is within vulgarity 1 but out of place.",
+   "tone": "\"Bugger me,\" dropped into an obituary jars with its respectful tone.",
+   "flow": "\"playing keep on kickin' until months before his death\" and \"bloke Grateful Dead collaborators\" break the grammar.",
+   "variety": "Too little Aussie to vary; \"bloke\" is used twice the same broken way.",
+   "essence": "Recognisable as the obituary because it is the obituary, with a few broken patches."
+  },
+  "yarn": {
+   "meaning": "Every fact survives, including the full band list and dates. Additions are colour hanging off the original: \"Not a bad way to see in the new year.\" on the New Year's Eve founding, and \"A bloke who never really got off the road, by the sound of it.\" on his staying active.",
+   "sense": "Terms fit: \"shook on starting their own outfit\", \"a whole swag of other bands\", \"local musos\", \"helping people doing it tough\" for poverty relief. \"he kept on kickin'\" is fine for still performing.",
+   "authenticity": "Sounds like an Australian telling it: \"Sad news on Saturday, this.\", \"he was into his politics\", \"had a crack at a solo career\".",
+   "register": "Right weight for level 3: steady, natural Aussie without becoming a pub yarn. No swearing, allowed under vulgarity 1.",
+   "tone": "Respectful and warm; the asides are gentle, fitting an obituary.",
+   "flow": "Reads smoothly: \"which is where he first came across Jerry Garcia, plucking away on a banjo.\"",
+   "variety": "Varied: \"rockers\", \"a fixture\", \"mates\", \"outfit\", \"a whole swag\", \"on the mic\", \"musos\".",
+   "essence": "Unmistakably the Bob Weir obituary, with its career sweep and its close on his local scene."
+  },
+  "unharnessed": {
+   "meaning": "Every fact survives, nothing added: \"His family broke the news on Instagram, saying he'd recently battled a cancer diagnosis\".",
+   "sense": "Terms fit: \"muso\", \"Grateful Dead gigs\", \"had a crack at a solo career\", \"a whole heap of other groups\".",
+   "authenticity": "Natural, understated Australian news voice; nothing forced.",
+   "register": "Retold throughout but light for level 3: much of it is plain English with a few terms (\"muso\", \"gigs\", \"had a crack\", \"a whole heap\").",
+   "tone": "Keeps the respectful news-obituary tone.",
+   "flow": "Reads smoothly, like it was written that way.",
+   "variety": "\"muso\"/\"musos\" and \"a few\" recur, but there is little to repeat.",
+   "essence": "Unmistakably the original obituary."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "making various groups with bloke Grateful Dead alumni",
+    "original": "making various groups with fellow Grateful Dead alumni",
+    "severity": "major",
+    "why": "\"bloke\" used as an adjective for \"fellow\"; ungrammatical."
+   },
+   {
+    "quote": "playing keep on kickin' until months before his death",
+    "original": "playing live until months before his death",
+    "severity": "major",
+    "why": "Garbles the fact that he played live."
+   },
+   {
+    "quote": "Bugger me, on December 31, 1965",
+    "original": "On December 31, 1965",
+    "severity": "major",
+    "why": "Interjection bolted into an obituary."
+   },
+   {
+    "quote": "His family announced his death via Instagram",
+    "original": "His family announced his death via Instagram",
+    "severity": "major",
+    "why": "The text is left largely untranslated."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Not a bad way to see in the new year.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added aside; harmless colour but nudges a news obituary toward chat."
+   },
+   {
+    "quote": "an online platform for live performance",
+    "original": "a virtual performance platform",
+    "severity": "minor",
+    "why": "Slight paraphrase; close enough."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "The former guitarist and singer of rock band the Grateful Dead was 78.",
+    "original": "The former guitarist and vocalist of the rock band Grateful Dead was 78.",
+    "severity": "minor",
+    "why": "Many lines stay close to the original; a touch light for level 3."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "Essentially untranslated, with a few broken word swaps and a misplaced interjection.",
+  "yarn": "Natural, warm, faithful and pitched right for level 3.",
+  "unharnessed": "Clean and faithful, lighter than level 3 asks."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

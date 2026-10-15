@@ -1,41 +1,28 @@
 # AGENTS.md
 
-Guidance for coding agents working in this repository.
+aussiefy: a deterministic, seeded rule engine (with optional Claude-powered modes) that rewrites plain English
+as Australian slang, on three dials: level, vulgarity and embellishment.
 
-## Project
+Conforms to Agent-Ready Documentation Standard v1.0.0, Level 1.
 
-aussiefy rewrites plain English as Australian slang. The engine is a deterministic, seeded rule pipeline in
-`aussiefy/` (parse, detect, select, realise, garnish); the slang itself is data in `aussiefy/data/*.yaml`.
-User-facing docs: `README.md` (short) and `docs/usage.md` (full guide).
+## Documentation
 
-## Setup and checks
+Start at [docs/README.md](docs/README.md). Each layer has its own index:
 
-```sh
-python -m venv .venv && . .venv/bin/activate
-pip install -e '.[dev]'
-ruff check .
-pytest -q
-```
+- [User](docs/user/README.md): installing and using aussiefy.
+- [Functional](docs/functional/README.md): reference for commands, dials, the dictionary format and the APIs.
+- [Architecture](docs/architecture/README.md): how it works, with the
+  [decision records](docs/architecture/decisions/README.md) and design reviews.
+- [Contributor](docs/contributor/README.md): how to work in this repository. Read
+  [plain CONTRIBUTING.md](docs/plain/root/CONTRIBUTING.md) before changing anything.
 
-Both must pass before a commit. If a change intentionally alters translations, regenerate the golden corpus
-with `scripts/regen_golden.py` and review the diff rather than accepting it blindly.
+## Other files
 
-## Conventions
+- [CHANGELOG.md](CHANGELOG.md): release notes.
+- [LICENSE](LICENSE), [LICENSES/](LICENSES/) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md): licensing.
+- [docs/standards/](docs/standards/README.md): the documentation standard this project follows.
+- [skills/aussiefy/SKILL.md](skills/aussiefy/SKILL.md): the Claude skill for using the toolkit
+  (`.claude/skills/aussiefy` links to it).
 
-- Never hard-code slang in the engine. Every phrase is a dictionary entry and every level is a profile in
-  `aussiefy/data/profiles.yaml`.
-- Output must stay deterministic: random choices are seeded rolls keyed by context, so the same text, level
-  and seed always give the same result.
-- Copyrighted reference texts are never committed: they live in `tests/corpus/local/` (ignored) and are
-  fetched with `scripts/fetch_reference_texts.py`.
-- Record user-visible changes under `[Unreleased]` in `CHANGELOG.md` as they land.
-
-## Branches and releases
-
-Work happens on `dev`. `main` holds releases only: each is one squashed, tagged `vX.Y.Z` commit made by
-`scripts/promote.py`, which sets the version, checks the tree, changelog, ruff and tests, then commits and tags.
-Don't commit to `main` directly.
-
-## Agent skill
-
-`skills/aussiefy/SKILL.md` is a Claude skill for using the toolkit; `.claude/skills/aussiefy` symlinks to it.
+Editable current guides and root documentation live in `docs/plain/`; public copies are generated.
+See [publication instructions](docs/plain/contributor/documentation.md). Agent instructions and legal texts stay plain.

@@ -1,0 +1,238 @@
+{
+ "candidates": {
+  "A": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every step, path, command and code block is intact, and the technical claims are unchanged. \"the operator panics and spits the dummy\" is colour on \"panics\". \"the whole lot\" and \"Bewdy.\" are reactions.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit their technical sense: \"knocked over the Quick Start\", \"ferries ciphertexts\", \"fires them off\", \"can't have a squiz at them\", \"waves through every receipt\", \"If the test falls over\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Natural Aussie dev voice: \"no dramas\", \"punch in 5 and 3\", \"It's got no idea what the computation actually does\". \"Bewdy.\" is a little stock.",
+     "score": 5
+    },
+    "register": {
+     "evidence": "Level 4 across the prose while leaving the code alone. A few passages stay close to the original (\"The program server ... calls `fhe_processor` and sends the encrypted result back\"). Swearing: none.",
+     "score": 4
+    },
+    "tone": {
+     "evidence": "Stays a clear, friendly tutorial. The jokes never obscure an instruction.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads smoothly: \"In `program/src/lib.rs`, swap the `fhe_processor` function out for this version\".",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Varied: knocked over, ferries, lugs, fires off, dishes out, squiz, no dramas, track down, punch in, bewdy, stashes, waves through, spits the dummy, fiddle with. \"Have a look at\" appears twice.",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Unmistakably the Hello World tutorial, with its structure, MDX components and code untouched.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "The results step shows `2 × (5 + 3) = 16`. Bewdy.",
+     "original": "The results step shows `2 × (5 + 3) = 16`.",
+     "severity": "minor",
+     "why": "A stock tag, slightly bolted on."
+    },
+    {
+     "quote": "Have a look at\n  [Compute provider]",
+     "original": "See\n  [Compute provider]",
+     "severity": "minor",
+     "why": "\"Have a look at\" repeats in two adjacent sections."
+    }
+   ],
+   "summary": "A clean, accurate, natural level-4 retelling that leaves every bit of code untouched."
+  },
+  "B": {
+   "scores": {
+    "meaning": {
+     "evidence": "Code is intact, but the prose breaks technical meaning. \"two paddocks\" stands for two fields. \"the sweet bugger-all ciphertext\" stands for the zero ciphertext. \"2 × (a + b) must be maggoted than 100\" makes the constraint unreadable. \"reckons their sum\" stands for \"expects their sum\".",
+     "score": 1
+    },
+    "sense": {
+     "evidence": "Several terms take the wrong sense: \"paddocks\" (a farm field) for struct fields, \"sweet bugger-all\" (nothing at all) for a zero value, \"maggoted\" (drunk) for \"less\", \"reckons\" for a test's expectation, \"a source knock together\" for a source build.",
+     "score": 1
+    },
+    "authenticity": {
+     "evidence": "Bolted-on tags: \"Strewth, you need the `my-first-e3` project\", \"Bugger me, change the expected value\", and \"Well,\", \"Now,\" and \"Anyway,\" at the start of sentences. US \"serialized\" is left in.",
+     "score": 1
+    },
+    "register": {
+     "evidence": "Mostly untranslated docs with misplaced slang dropped in, well under level 4. The swearing is dad level but used as filler.",
+     "score": 2
+    },
+    "tone": {
+     "evidence": "The instructional clarity is undercut by exclamations: \"Bugger me, change the expected value from 5 to 10\".",
+     "score": 2
+    },
+    "flow": {
+     "evidence": "Jarring: \"must be maggoted than 100\", \"for a source knock together\", with \"Well,\" and \"Now,\" as repeated sentence openers.",
+     "score": 1
+    },
+    "variety": {
+     "evidence": "Leans on \"Well,\" (five times), \"Now,\" (four times), \"Anyway,\" and \"brand-spankin'-new\" (twice).",
+     "score": 1
+    },
+    "essence": {
+     "evidence": "The structure and code survive, but key explanations are garbled.",
+     "score": 3
+    }
+   },
+   "problems": [
+    {
+     "quote": "2 × (a + b) must be maggoted than 100",
+     "original": "For this tutorial, 2 × (a + b) must be less than 100.",
+     "severity": "critical",
+     "why": "\"Maggoted\" (drunk) replaces \"less\", so the key numeric constraint is unreadable."
+    },
+    {
+     "quote": "`FHEProcessorInput` has two paddocks.",
+     "original": "`FHEProcessorInput` has two fields.",
+     "severity": "critical",
+     "why": "Struct fields become farm paddocks."
+    },
+    {
+     "quote": "makes the sweet bugger-all ciphertext, the start value",
+     "original": "`Ciphertext::zero` makes the zero ciphertext, the start value.",
+     "severity": "critical",
+     "why": "\"Sweet bugger-all\" (nothing) misdescribes the zero ciphertext."
+    },
+    {
+     "quote": "It encrypts 1 and 2 and reckons\ntheir sum.",
+     "original": "It encrypts 1 and 2 and expects\ntheir sum.",
+     "severity": "major",
+     "why": "\"Reckons\" (opines) is the wrong sense for a test's expectation."
+    },
+    {
+     "quote": "for a source knock together",
+     "original": "for a source build",
+     "severity": "major",
+     "why": "Broken phrase."
+    },
+    {
+     "quote": "Bugger me, change the\nexpected value from 5 to 10:",
+     "original": "Change the\nexpected value from 5 to 10:",
+     "severity": "major",
+     "why": "An oath bolted onto an instruction."
+    },
+    {
+     "quote": "Well, if `pnpm dev:all` runs",
+     "original": "If `pnpm dev:all` runs",
+     "severity": "minor",
+     "why": "A filler opener, repeated throughout."
+    }
+   ],
+   "summary": "A broken mechanical pass: several technical terms swapped for wrong-sense slang, and filler tags."
+  },
+  "C": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every step, path and code block is intact. Additions are colour or clarification: \"or it'll wrap round on ya\", \"Sixteen. Too easy.\", \"the delivery crew\". \"Like counting votes in a sealed box\" is an analogy that is loose but harmless. \"(the code kind, not paddocks)\" is a strange aside.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"tinker\", \"knocked over the Quick Start\", \"lugs ciphertexts\", \"Bump the expected value\", \"knows sweet bugger-all about what the computation does\", \"falls in a heap\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Natural, confident Aussie voice: \"Righto\", \"Too easy.\", \"Heads up\". The paddocks aside, which jokes about a mistranslation the reader never saw, reads oddly.",
+     "score": 4
+    },
+    "register": {
+     "evidence": "A full level 4 in the prose, with code untouched. Swearing is a dad-level \"sweet bugger-all\".",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "A friendly tutorial whose instructions stay clear. The wrap-round warning is even clarified.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Smooth, and it joins short sentences well: \"The coordination server publishes the encrypted result, and the committee decrypts it.\"",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Highly varied: righto, tinker, spits out, delivery crew, lugs, carts off, peek, wrap round on ya, bump, hunt down, baked in, too easy, sweet bugger-all, falls in a heap.",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Unmistakably the tutorial, retold with personality.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "(the code kind, not paddocks)",
+     "original": "`FHEProcessorInput` has two fields.",
+     "severity": "minor",
+     "why": "An odd aside that jokes about a confusion the reader never had."
+    },
+    {
+     "quote": "Like counting votes in a sealed box.",
+     "original": "",
+     "severity": "minor",
+     "why": "A loose analogy: sealed-box votes are opened before counting."
+    }
+   ],
+   "summary": "A lively, accurate level-4 retelling with strong variety. Two asides are slightly odd."
+  }
+ },
+ "rankings": {
+  "tone": [
+   [
+    "A",
+    "C"
+   ],
+   [
+    "B"
+   ]
+  ],
+  "flow": [
+   [
+    "A",
+    "C"
+   ],
+   [
+    "B"
+   ]
+  ],
+  "variety": [
+   [
+    "C"
+   ],
+   [
+    "A"
+   ],
+   [
+    "B"
+   ]
+  ],
+  "essence": [
+   [
+    "A",
+    "C"
+   ],
+   [
+    "B"
+   ]
+  ],
+  "overall": [
+   [
+    "C"
+   ],
+   [
+    "A"
+   ],
+   [
+    "B"
+   ]
+  ]
+ }
+}

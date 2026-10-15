@@ -1,0 +1,163 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "engine": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 3,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 3,
+   "flow": 2,
+   "variety": 1,
+   "essence": 3
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Every technical point kept: the definition, the four-step sign-in flow, three purposes, storage limits (\"usually in the hundreds\", \"usually 4KB\"), performance cost, the Set-Cookie examples. \"Storage APIs can store a fair bit more data\" keeps larger amounts.",
+   "sense": "Terms fit: \"have a squiz at what they mean for privacy and security\", \"a fair bit more data\", \"if you've got heaps of cookies set\", \"to work out whether\".",
+   "authenticity": "Natural Australian tech writing: \"personalised\", \"analysing\", \"Here's how a basic user sign-in system works\". Nothing forced.",
+   "register": "A light level-2 touch (\"squiz\", \"heaps\", \"a fair bit\") on clear docs prose; no swearing.",
+   "tone": "Stays a clear MDN explainer.",
+   "flow": "Reads smoothly: \"After getting an HTTP request, a server can send one or more ... headers with the response, and each one sets a separate cookie.\"",
+   "variety": "Little slang, none repeated.",
+   "essence": "Unmistakably the MDN cookies article, code blocks and links intact."
+  },
+  "engine": {
+   "meaning": "Text mostly verbatim, but HTTP cookies are renamed biscuits in places (\"also known as a web bickie or browser bickie\", \"the contents of HTTP bickies\", \"A bikkie is set by specifying a name-value pair\"), which misnames the technical term readers need.",
+   "sense": "\"bickie\" is the Aussie word for an edible biscuit, not for an HTTP cookie; the technical term takes the wrong sense throughout.",
+   "authenticity": "Mechanical, inconsistent swaps: \"bickies\", \"bikkies\" and \"cookies\" alternate in one paragraph, and a sentence starts lowercase (\"bickies are mainly used for three purposes\"). US \"personalized\" left in.",
+   "register": "Apart from bickie and \"heaps\", untranslated; under level 2, and the swaps that are there are wrong.",
+   "tone": "The explainer tone is undercut by turning the subject into biscuits: \"a web bickie or browser bickie\".",
+   "flow": "Jarring: \"The browser may store bikkies, create new cookies, modify existing ones\"; \"bickies are mainly used\".",
+   "variety": "One swap repeated about ten times in two spellings.",
+   "essence": "Recognisably the MDN article, but the core term is muddled."
+  },
+  "unharnessed": {
+   "meaning": "All points kept; \"Recording and analysing what users get up to\" for user behavior and \"out of the box\" for by default are fair recasts; \"shopping trolley contents\" localises.",
+   "sense": "Terms fit: \"it still reckons the user is signed in\", \"Browsers are generally capped at\", \"drag down performance\", \"what users get up to\".",
+   "authenticity": "Natural Australian: \"shopping trolley\", \"heads to a different page\", \"run through best practice\".",
+   "register": "Light level-2 touch (\"reckons\", \"trolley\", \"get up to\"); no swearing.",
+   "tone": "Clear explainer tone kept.",
+   "flow": "Reads smoothly: \"Cookies get sent with every request, so they can drag down performance\".",
+   "variety": "Varied; \"have a look\" / \"look at\" in one sentence (\"we'll have a look at the main uses ... and look at what they mean\").",
+   "essence": "Unmistakably the MDN cookies article."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "shopping cart contents",
+    "original": "shopping cart contents",
+    "severity": "minor",
+    "why": "US cart kept; trolley would be the Australian word, though cart is common online."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "also known as a web bickie or browser bickie",
+    "original": "also known as a web cookie or browser cookie",
+    "severity": "critical",
+    "why": "HTTP cookie is a fixed technical term; bickie is a food word and misleads readers."
+   },
+   {
+    "quote": "The browser may store bikkies, create new cookies",
+    "original": "The browser may store cookies, create new cookies",
+    "severity": "major",
+    "why": "Inconsistent spelling and term within one sentence."
+   },
+   {
+    "quote": "bickies are mainly used for three purposes",
+    "original": "Cookies are mainly used for three purposes",
+    "severity": "minor",
+    "why": "Lowercase sentence start; mechanical substitution."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "we'll have a look at the main uses of cookies, run through best practice for using them, and look at what they mean",
+    "original": "we will explore the main uses of cookies, explain best practices for using them, and look at their privacy and security implications",
+    "severity": "minor",
+    "why": "Look repeated within one sentence."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "Faithful, natural and at the asked weight.",
+  "engine": "A wrong-sense swap of the article's core technical term, on otherwise untranslated text.",
+  "unharnessed": "Faithful, natural and well localised; level with A."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

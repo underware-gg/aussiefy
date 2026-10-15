@@ -1,0 +1,51 @@
+A **cookie** (also known as a web cookie or browser cookie) is a small bit of data a server sends to a user's web browser. The browser can store cookies, create new cookies, change existing ones, and send them back to the same server with later requests. Cookies let web applications store a limited amount of data and remember state information; by default the HTTP protocol is [stateless](/en-US/docs/Web/HTTP/Guides/Overview#http_is_stateless_but_not_sessionless).
+
+In this article we'll run through the main uses of cookies, explain best practice for using them, and have a squiz at what they mean for privacy and security.
+
+## What cookies are used for
+
+Usually, the server uses the contents of HTTP cookies to work out whether different requests come from the same browser/user, and then sends back a personalised or generic response to suit. Here's how a basic user sign-in system works:
+
+1. The user sends sign-in credentials to the server, for example by submitting a form.
+2. If the credentials are right, the server updates the UI to show the user is signed in, and responds with a cookie containing a session ID that records their sign-in status on the browser.
+3. Later on, the user moves to a different page on the same site. The browser sends the cookie containing the session ID along with that request, to show it still thinks the user is signed in.
+4. The server checks the session ID and, if it's still valid, sends the user a personalised version of the new page. If it's not valid, the session ID is deleted and the user is shown a generic version of the page (or maybe an "access denied" message, and asked to sign in again).
+
+![visual representation of the above sign-in system description](/shared-assets/images/diagrams/http/cookies/cookie-basic-example.png)
+
+Cookies are mainly used for three things:
+
+- **Session management**: User sign-in status, shopping cart contents, game scores, or any other session details the server needs to remember.
+- **Personalisation**: User preferences like display language and UI theme.
+- **Tracking**: Recording and analysing user behaviour.
+
+### Data storage
+
+Back in the early days of the web, when there was no other option, cookies were used for general client-side data storage. These days modern storage APIs are recommended instead, for example the [Web Storage API](/en-US/docs/Web/API/Web_Storage_API) (`localStorage` and `sessionStorage`) and [IndexedDB](/en-US/docs/Web/API/IndexedDB_API).
+
+They're built with storage in mind, never send data to the server, and don't come with the other downsides of using cookies for storage:
+
+- Browsers are generally limited to a maximum number of cookies per domain (it varies by browser, usually in the hundreds), and a maximum size per cookie (usually 4KB). Storage APIs can store a fair bit more data.
+- Cookies are sent with every request, so they can slow things down (for example on slow mobile data connections), especially if you've got heaps of cookies set.
+
+> [!NOTE]
+> To see stored cookies (and any other storage a web page is using) you can use the [Storage Inspector](https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/index.html) in Firefox Developer Tools, or the [Application panel](https://developer.chrome.com/docs/devtools/progressive-web-apps) in Chrome Developer Tools.
+
+## Creating, removing, and updating cookies
+
+After getting an HTTP request, a server can send one or more {{HTTPHeader("Set-Cookie")}} headers with the response, and each one sets a separate cookie. A cookie is set by giving a name-value pair like this:
+
+```http
+Set-Cookie: <cookie-name>=<cookie-value>
+```
+
+The following HTTP response tells the receiving browser to store a pair of cookies:
+
+```http
+HTTP/2.0 200 OK
+Content-Type: text/html
+Set-Cookie: yummy_cookie=chocolate
+Set-Cookie: tasty_cookie=strawberry
+
+[page content]
+```

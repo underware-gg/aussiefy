@@ -1,0 +1,43 @@
+# Contributor documentation
+
+How to work on aussiefy: setting up, testing, growing the dictionary and releasing. This applies equally to
+people and to agents working in the repository.
+
+## Start here
+
+- [CONTRIBUTING.md](../root/CONTRIBUTING.md): the baseline: setup, the checks that must pass, and the project's
+  conventions.
+
+## Guides
+
+| Document | Summary |
+|---|---|
+| [testing.md](testing.md) | The test suite and its corpora: golden outputs, reference texts, targets and the benchmark, classics, and local copyrighted texts |
+| [data-acquisition.md](data-acquisition.md) | Growing the dictionary: what counts as Aussie, reference dictionaries, the scrape → tag → review pipeline, fragments, harvests and research rounds |
+| [releasing.md](releasing.md) | Branches, changelog discipline, and cutting a release with `scripts/promote.py` |
+| [licensing.md](licensing.md) | Bundled licences, generated notices, text provenance, remote-only works and the wheel gate |
+
+## Co-located contributor documents
+
+- [tests/corpus/local/README.md](../../../tests/corpus/local/README.md): the regime for copyrighted texts kept
+  locally, and retelling them.
+- [tests/corpus/classics/README.md](../../../tests/corpus/classics/README.md): the public-domain rule and manifest
+  for the classic Australian texts.
+- [training/README.md](../../../training/README.md): retraining and releasing the bundled embedding model, its
+  versioning, lessons and version history; [training/research.md](../../../training/research.md) is the study
+  that chose the approach.
+- Research rounds, each with its own README indexing its files:
+  [gap-fill-2026-10-11](../../../research/gap-fill-2026-10-11/README.md),
+  [classics-2026-10-11](../../../research/classics-2026-10-11/README.md) and
+  [swearing-2026-10-12](../../../research/swearing-2026-10-12/README.md); and the retellings study,
+  [COMPARISON.md](../../../research/retellings-2026-10-11/COMPARISON.md) and
+  [COMPARISON-2.md](../../../research/retellings-2026-10-11/COMPARISON-2.md).
+- Script docstrings: `scripts/promote.py`, `scripts/regen_golden.py`, `scripts/fetch_reference_texts.py` and
+  `scripts/train_embedder.py` each open with their usage.
+
+- [Source ingestion](ingestion.md): manifest-based fetching and recovery.
+- [Judging and research](judging.md): blind rubric comparison and hand-run yarn tools.
+
+- [Committed source integration](source-integration.md): pin, path accounting and intentional adaptations.
+
+- [Documentation publication](documentation.md): authoritative sources, generated prose and freshness.

@@ -1,0 +1,50 @@
+# Translation context and embellishment
+
+Level controls the weight of Australian words (1–5); vulgarity controls language (0–3). Embellishment is an
+independent third dial: `deadset` (0) changes the words, `dinkum` (1) gives them a conversational voice, and
+`troppo` (2) permits a performed yarn. Set it with `--embellishment` / `-e`, or `embellishment=` in Python/MCP.
+
+```sh
+aussiefy translate "I am very tired." -l 5 --vulgarity nan --embellishment deadset
+aussiefy translate "I am very tired." --english uk --embellishment troppo --explain
+```
+
+The deterministic genre reader recognises story, personal, news, instructions, technical and official prose.
+The engine defaults to that genre's setting: story troppo, personal dinkum, the other forms deadset. A
+retelling's tools (`plan`, `guide`, `lint`, `verify`, `yarn`) default to dinkum. An explicit setting wins; genre
+still rules out inappropriate openings and name-calling. These policies are data in `genres.yaml`, loaded
+with the selected dictionary. Explanations and results report the genre and actual setting.
+
+`english=` / `--english` selects `us`, `uk`, `auto` or `none`. The default comes from the profile (`auto` in
+the bundled profiles). Auto uses American spellings to infer US English; ambiguous British words such as
+“pants” need `uk`. `none` disables dialect swaps. Plain Australian equivalents (faucet → tap) apply at every
+level, separately from slang. `dialect.yaml` owns the vocabulary and technical/genre exclusions; source
+quotes and mentioned words have their own protections. POS tags help distinguish nouns, verbs and names;
+the small bundled tagger runs offline without NLTK.
+
+## Document modes
+
+The explicit [`--markdown` / `markdown=True`](markdown.md) mode preserves whole links, tables and HTML,
+returns `DocumentResult`, and permits offline ngram/disabled fallback only. It resolves genre and English
+once for the whole document and retains separate source/output ranges for each rewritten unit.
+
+The imported `--markup markdown|mdx|auto` / `markup=` contract is an **extended document mode**. It uses opaque
+protected spans while translating sentence context, including eligible link labels, table cells and JSX
+children; attributes, code, headings, paths, maths and destination syntax stay protected. Table/list rows
+suppress garnish. Auto detects the document dialect from the text. It returns the engine's `Result`, with
+source-relative records restored to the original source. This contract also applies to planning, lint,
+verification and yarn; a rewrite that drops or duplicates a protected span is refused.
+
+Choose either `markdown=True` or a non-text `markup`, rather than combining them. `--surface` cannot preserve
+extended markup; use checked sentence rewrites or yarn. Strict Markdown retains its offline-only contract.
+The core `Translator.translate` remains plain text; document selection belongs to the public adapter.
+
+Tests: [genre](../../../tests/functional/test_genre.py), [dialect](../../../tests/functional/test_dialect.py),
+[POS](../../../tests/functional/test_pos.py), [extended markup](../../../tests/functional/test_markup.py) and
+[strict Markdown](../../../tests/functional/test_markdown.py).
+
+Lint suggestions inherit the original's genre and source-English context, including custom dictionary policies,
+even when the draft sounds like a story. Held dialect wording is excused only with the same folded surface
+and occurrence count; quoted spelling still follows the Australian house rules. Planning offers riffs only
+where the resolved setting permits them: deadset offers none, and strict news/instructions/docs/official
+forms below troppo offer none. The dinkum guidance preserves the force of obligations and findings.

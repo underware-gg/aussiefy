@@ -1,0 +1,239 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn-dinkum": "C",
+  "dinkum-3": "D",
+  "yarn-troppo": "E"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 5,
+   "flow": 2,
+   "variety": 1,
+   "essence": 4
+  },
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn-troppo": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every point and every link survives: prerequisites, the tip, branch naming, safe place to make changes, one change per commit, the rename/tests example, backup to remote storage. \"you'll be busting your arse a lot harder to revert your changes\" keeps 'spend more effort'. 'collaborators' becomes \"your teammates\", a slight narrowing for open-source contributors.",
+   "sense": "\"knock over every step\" for complete all steps, \"without stuffing up the default branch\" for without affecting it, \"run their eye over your work\" for review, \"bin the variable rename\" for revert it, \"If you cock something up\" for make a mistake: all fit. \"see what's cooking\" for ongoing work fits.",
+   "authenticity": "Natural Australian: \"For the lowdown\", \"chip in on\", \"knock over\", \"stuff-up\", \"dead easy\", \"muck around\". \"say you wanna rename a variable\" is fine casual speech.",
+   "register": "A full, chatty Aussie retelling of a doc page with swearing inside vulgarity 2 (\"cock something up\", \"busting your arse\"). Link text and code names left alone, as they should be.",
+   "tone": "Stays a friendly how-to: \"Keep making, committing and pushing changes to your branch till you're ready to ask for feedback.\"",
+   "flow": "Reads smoothly: \"Making a branch gives you your own patch to work in without stuffing up the default branch.\"",
+   "variety": "Varied: \"no-fuss\", \"have a go\", \"lowdown\", \"track down\", \"chip in on\", \"knock over\", \"hook up\", \"what's cooking\", \"run their eye over\", \"bin\", \"shove\", \"smear\".",
+   "essence": "Unmistakably GitHub's doc page, structure and examples kept: \"put the variable rename in one commit and the tests in another\"."
+  },
+  "engine": {
+   "meaning": "Nearly verbatim, so every point survives: \"By creating a branch, ya create a space to work without affectin' the default branch.\"",
+   "sense": "The one idiom fits: \"useful for every man and his dog, not just developers\" for everyone. Nothing else is swapped.",
+   "authenticity": "Mostly the original with ya/yer spellings applied unevenly: \"If you make a mistake, ya can revert your changes\", and a broken join \"By committin''n pushin' yer changes\".",
+   "register": "Largely untranslated: \"A short, descriptive branch name enables yer collaborators to see ongoing work at a glance.\" Far under a level-5 brief.",
+   "tone": "The doc's instructional tone is intact because the text is barely changed: \"Continue to make, commit, and push changes to yer branch until yer ready to ask for feedback.\"",
+   "flow": "Formal phrasing with dialect spellings stitched in reads awkwardly: \"ya would spend more effort reverting yer changes\", \"put the variable rename in one commit'n the tests\", \"By committin''n pushin'\".",
+   "variety": "One idiom (\"every man and his dog\") and the ya/yer spellings repeated throughout.",
+   "essence": "It is the original page, shape intact: \"Ideally, each commit contains an isolated, complete change.\""
+  },
+  "yarn-dinkum": {
+   "meaning": "Every point survives: \"When ya create a branch, ya get a space to work in without mucking up the default branch.\", the rename/tests example, the backup to remote storage.",
+   "sense": "\"For the drum on how to set up an account\", \"have a squiz at\", \"chip in on\", \"what's on the go\" all fit. \"you'd be flat out for heaps longer revertin' yer changes\" strains: flat out means busy, not 'more effort'.",
+   "authenticity": "Natural: \"every man and his dog\", \"the drum\", \"have a squiz\", \"If ya stuff up\", \"dead easy\".",
+   "register": "Clearly Aussie but lighter in places, with whole sentences close to the original (\"Ideally, each commit holds one self-contained, complete change.\") and no swearing though vulgarity 2 is allowed.",
+   "tone": "Friendly how-to throughout: \"Keep on makin', committin', and pushin' changes to yer branch till you're ready to ask for feedback.\"",
+   "flow": "Smooth, with one clunky line: \"or spread the variable rename over a heap of commits, you'd be flat out for heaps longer revertin' yer changes\".",
+   "variety": "Good spread (\"the drum\", \"squiz\", \"chip in\", \"hook up\", \"on the go\", \"mucking up\", \"stuff-up\", \"chuck in\"), with \"heap\" and \"heaps\" side by side.",
+   "essence": "Clearly the GitHub flow page retold: \"Yer branch is a safe spot to make changes.\""
+  },
+  "dinkum-3": {
+   "meaning": "Every point survives, reordered smoothly: \"Committin' and pushin' yer changes also backs yer work up to remote storage, so ya can get at it from any device.\" \"Commit and push yer changes to yer branch as ya go\" adds a fair gloss.",
+   "sense": "\"the good oil on settin' up an account\", \"have a squiz at\", \"run their eye over yer work\", \"muck about with changes\", \"Stuff something up\": all fit. \"Best case, each commit's one change\" for ideally fits.",
+   "authenticity": "Sounds like a local explaining it: \"Stuff something up and ya can revert yer changes\", \"yer in for heaps more work\".",
+   "register": "A steady Aussie voice, a little under full pub-yarn weight, and no swearing where vulgarity 2 is allowed: \"For how to create a repository, check out\".",
+   "tone": "Friendly instructional tone kept: \"First up, create a branch in yer repository.\"",
+   "flow": "Reads as if written that way: \"Give it a short name that says what it's for, and yer collaborators can tell what's goin' on at a glance\".",
+   "variety": "Varied: \"every man and his dog\", \"the good oil\", \"squiz\", \"chip in\", \"run their eye over\", \"muck about\", \"Lump\", \"chuck in\".",
+   "essence": "Unmistakably the doc page retold: \"Say ya want to rename a variable and add some tests\"."
+  },
+  "yarn-troppo": {
+   "meaning": "Every point and link survives. Additions are colour: \"no detective work needed\", \"whatever takes yer fancy\", \"Short and sweet does it\". \"even our [roadmap]\" adds emphasis; \"Reckon you'd rather pitch in on an existing repository?\" frames contributing as an alternative to creating one, a slight shift.",
+   "sense": "\"knock over every single step\", \"go for yer life\", \"suss out\", \"revertin' yer changes is a piece of piss\", \"ditch the variable rename\", \"Down the track\": all fit.",
+   "authenticity": "Natural and local: \"Stuff somethin' up? No worries\", \"whoever rocks up later\", \"Bung the variable rename and the tests in the same commit\". The opener \"Okay, so.\" is a little stock.",
+   "register": "Full yarn weight with rhetorical questions and asides, swearing inside vulgarity 2 (\"a piece of piss\").",
+   "tone": "Keeps a helpful how-to, with more cheer: \"go for yer life and make whatever changes ya like\".",
+   "flow": "Reads well; the question-and-answer prerequisites flow naturally (\"No repository yet? Have a squiz at\"). A few add-ons lengthen lines: \"nothin' else tagging along\".",
+   "variety": "Wide spread: \"nothin' fancy\", \"kick off\", \"the drum\", \"squiz\", \"pitch in\", \"knock over\", \"takes yer fancy\", \"go for yer life\", \"suss out\", \"piece of piss\", \"Down the track\", \"Bung\", \"smear\".",
+   "essence": "Recognisably the GitHub flow doc, retold as a chat: \"Every time ya commit and push yer changes, ya back up yer work to remote storage.\""
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "lets your teammates see what's cooking",
+    "original": "enables your collaborators to see ongoing work at a glance",
+    "severity": "minor",
+    "why": "Teammates narrows collaborators, who in open source may not be on your team."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "A short, descriptive branch name enables yer collaborators to see ongoing work at a glance.",
+    "original": "A short, descriptive branch name enables your collaborators to see ongoing work at a glance.",
+    "severity": "major",
+    "why": "Left untranslated apart from yer, like most of the text; far lighter than the brief."
+   },
+   {
+    "quote": "By committin''n pushin' yer changes",
+    "original": "By committing and pushing your changes",
+    "severity": "minor",
+    "why": "Broken contraction join, hard to read."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "you'd be flat out for heaps longer revertin' yer changes",
+    "original": "you would spend more effort reverting your changes",
+    "severity": "minor",
+    "why": "Flat out means busy; the phrase strains, and heaps follows heap in the same sentence."
+   }
+  ],
+  "dinkum-3": [
+   {
+    "quote": "For how to create a repository, check out",
+    "original": "For information on how to create a repository, see",
+    "severity": "minor",
+    "why": "Some lines stay plain; a notch under level 5."
+   }
+  ],
+  "yarn-troppo": [
+   {
+    "quote": "Reckon you'd rather pitch in on an existing repository?",
+    "original": "For information on how to find an existing repository to contribute to",
+    "severity": "minor",
+    "why": "Recasts finding a repository to contribute to as an alternative choice; slight shift."
+   },
+   {
+    "quote": "Okay, so.",
+    "original": "",
+    "severity": "minor",
+    "why": "Stock spoken opener bolted on."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Faithful, natural and lively, a full-weight Aussie retelling of the doc that keeps every step.",
+  "engine": "A rule-engine pass: nearly verbatim with ya/yer spellings and one idiom, far under the brief.",
+  "yarn-dinkum": "Natural and faithful, a bit lighter than level 5, with one strained line.",
+  "dinkum-3": "Smooth, faithful, natural and varied, a touch lighter than a full level 5.",
+  "yarn-troppo": "The fullest, most varied retelling, natural and faithful, with a few stock add-ons."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "engine",
+    "yarn-dinkum",
+    "dinkum-3",
+    "yarn-troppo"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "dinkum-3",
+    "yarn-troppo"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "dinkum-3",
+    "yarn-troppo"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn-dinkum",
+    "dinkum-3",
+    "yarn-troppo"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn-troppo",
+    "unharnessed"
+   ],
+   [
+    "dinkum-3"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

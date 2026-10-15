@@ -1,0 +1,1195 @@
+- decision: reject
+  candidate: mix
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: temps
+  reason: not_aussie
+  why: Informal clipping used across English (US weather reports included); also means temporary workers.
+- decision: reject
+  candidate: climbs
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: americanism
+  candidate: fridge
+  us: refrigerator
+  australian: fridge
+  why: '"refrigerator" is formal/US-sounding; Australians say fridge. Must not touch "refrigerated" or "refrigeration" in technical text.'
+- decision: reject
+  candidate: having a squiz
+  reason: duplicate
+  why: '"a squiz" already under LOOK (trigger "a look") so "having a look" already becomes "having a squiz".'
+- decision: americanism
+  candidate: post
+  us: in the mail
+  australian: in the post
+  why: Australians post things and get them "in the post"; "mail it back" -> "post it back" too. Avoid bare "mail" (email, mail-order, chain mail).
+- decision: reject
+  candidate: spread
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: watch yourself
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: gate
+  candidate: a bit rough bagging
+  entry:
+    id: a-bit-rough
+    form: a bit rough
+    variants: []
+    concept:
+    - OUT_OF_LINE
+    frame: predicate_adj
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Harsh or unfair on someone.
+    sources: []
+    status: gate
+    flags:
+    - dubious_meaning
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Aussie "that's a bit rough" = unfair/harsh. Gated because "rough" also means unwell, poor quality or approximate, and is shared with Britain; should fire only via OUT_OF_LINE "unfair", never for
+    "rough draft" or "feeling rough".
+- decision: reject
+  candidate: a heads-up about weird
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: a once-over
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: a relevant
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: a tent shape
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: accurately and
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: advice
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: altitude
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: and the servos over there
+  reason: duplicate
+  why: 'Existing form: SERVICE_STATION servo.'
+- decision: add_entry
+  candidate: anyone uses marg
+  entry:
+    id: marg
+    form: marg
+    variants: []
+    concept:
+    - NEW:MARGARINE
+    frame: np
+    intensity: 1
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Margarine, the everyday table spread.
+    sources:
+    - https://www.dictionary.com/browse/Marg
+  new_concept:
+    id: MARGARINE
+    description: Margarine.
+    triggers:
+      np:
+      - margarine
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Everyday Aussie clipping ("butter or marg"). Mass noun. Trigger only margarine; never "margarita".
+- decision: reject
+  candidate: are Teaming up
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: add_entry
+  candidate: as offsiders
+  entry:
+    id: offsider
+    form: an offsider
+    variants: []
+    concept:
+    - NEW:SIDEKICK
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    replaces: []
+    gloss: A helper, deputy or right-hand person who works alongside someone.
+    sources:
+    - https://www.australiangeographic.com.au/history-culture/2018/04/oz-words-offsider/
+    - https://en.wikipedia.org/wiki/Offsider
+  new_concept:
+    id: SIDEKICK
+    description: A helper or deputy who works alongside someone.
+    triggers:
+      np:
+      - sidekick
+      - side-kick
+      - right-hand man
+      - right-hand woman
+      - offsider
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Genuine Aus/NZ (bullocky's helper, 1879). Triggers only sidekick/right-hand man; never bare "assistant" (assistant professor, digital assistant) or "partner" (the harvest misused it for "coeducator").
+- decision: reject
+  candidate: asks
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: backyard The choppers
+  reason: not_aussie
+  why: '"Chopper" for helicopter is general English, not distinctly Australian; fragment otherwise.'
+- decision: reject
+  candidate: bandanna
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: barrels
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: gate
+  candidate: beak
+  entry:
+    id: the-beak
+    form: the beak
+    variants: []
+    concept:
+    - NEW:MAGISTRATE
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 4
+    register: dated
+    replaces: []
+    gloss: A magistrate or judge in a lower court.
+    sources:
+    - https://greensdictofslang.com/
+    status: gate
+    flags:
+    - archaic
+    - not_aussie
+  new_concept:
+    id: MAGISTRATE
+    description: A magistrate presiding in court.
+    triggers:
+      np:
+      - the magistrate
+      - the magistrates
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: low
+  why: British criminal slang also used in Australia; dated. Only the courtroom sense ("up before the magistrate"); never "beak" of a bird or "justice of the peace" generally.
+- decision: reject
+  candidate: below-ground
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: big-hitting
+  reason: not_aussie
+  why: General sports English.
+- decision: reject
+  candidate: bikkies
+  reason: duplicate
+  why: 'Existing form: BISCUIT bikkie (cookie trigger).'
+- decision: reject
+  candidate: bikkies or they'll
+  reason: duplicate
+  why: 'Existing form: BISCUIT bikkie; rest is a fragment.'
+- decision: reject
+  candidate: Bit of a scruffy-looking lot
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: blokes traipsing
+  reason: duplicate
+  why: 'Existing form: bloke and traipse exist.'
+- decision: americanism
+  candidate: booking just
+  us: make a reservation
+  australian: make a booking
+  why: Australian choice is a booking. Only the "make/need a reservation" phrasings; bare "reservation" also means a doubt or a Native American reservation.
+- decision: reject
+  candidate: brand-spankin'-new ute
+  reason: duplicate
+  why: 'Existing form: BRAND_NEW and PICKUP exist.'
+- decision: add_entry
+  candidate: bung one
+  entry:
+    id: bung-in
+    form: bung {obj} in
+    variants: []
+    concept:
+    - NEW:PUT_CASUALLY
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Put something in, carelessly or without fuss.
+    sources:
+    - https://www.oxfordlearnersdictionaries.com/definition/english/bung_2
+  new_concept:
+    id: PUT_CASUALLY
+    description: Put something in somewhere casually.
+    triggers:
+      vp:
+      - pop {obj} in
+      - stick {obj} in
+      - toss {obj} in
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Aus/UK informal; very natural in recipes and instructions ("bung it in the oven"). Only casual put-in phrasings with an object; never "put" generally or "pop in" (visit).
+- decision: add_entry
+  candidate: Bushwalking
+  entry:
+    id: bushwalking
+    form: bushwalking
+    variants: []
+    concept:
+    - NEW:HIKING
+    frame: np
+    intensity: 1
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Walking for recreation along tracks in natural country.
+    sources: []
+  new_concept:
+    id: HIKING
+    description: Recreational walking in natural country.
+    triggers:
+      np:
+      - hiking !trail|trails|path|paths
+      vp:
+      - go hiking
+      - went hiking
+      - going hiking
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: high
+  why: Distinctly Australian for hiking. Must not catch "price hike" or "hike" verb of prices; "hiking trail" already goes to WALKING_TRACK so excluded here.
+- decision: reject
+  candidate: by the wayside
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: cap
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: carry-on
+  reason: not_lexical
+  why: '"Carry-on" (fuss) is Aus/UK but clashes with carry-on luggage; the harvest had no counterpart. Not worth the wrong-sense risk.'
+- decision: reject
+  candidate: cautious types predicted
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: cheerier
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: add_entry
+  candidate: chemists have
+  entry:
+    id: chemist-pharmacy
+    form: a chemist
+    variants: []
+    concept:
+    - NEW:PHARMACY
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: The shop where you buy medicines and fill prescriptions.
+    sources:
+    - https://www.oxfordlearnersdictionaries.com/definition/english/chemist
+  new_concept:
+    id: PHARMACY
+    description: A pharmacy or drugstore (the shop).
+    triggers:
+      np:
+      - pharmacy !school|degree|student|students|technician|technicians|benefit|benefits|industry|board|practice|program|programs|course|courses
+      - drugstore
+      - drug store
+      - a pharmacy
+      - the pharmacy !school|degree|industry|board
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: high
+  why: Australians go "to the chemist" for a pharmacy. Must not touch "chemist" the scientist (trigger is pharmacy/drugstore only) or "pharmacy" as a field of study/industry.
+- decision: reject
+  candidate: chockers with
+  reason: duplicate
+  why: 'Existing form: CROWDED chockers.'
+- decision: reject
+  candidate: choppers
+  reason: duplicate
+  why: 'Existing form: same as backyard The choppers (general English, see that entry).'
+- decision: reject
+  candidate: chunk
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: americanism
+  candidate: cistern
+  us: toilet tank
+  australian: cistern
+  why: The water tank behind a toilet is the cistern in Australia.
+- decision: reject
+  candidate: clay bean pot
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: colder than
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: colour rocks
+  reason: duplicate
+  why: 'Existing form: ARRIVE rock up; extending it to colour appearing is a stretch.'
+- decision: reject
+  candidate: cooking
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: add_entry
+  candidate: coppers
+  entry:
+    id: copper
+    form: a copper
+    variants: []
+    concept:
+    - POLICE_OFFICER
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces:
+    - cop
+    gloss: A police officer.
+    sources:
+    - https://www.oxfordlearnersdictionaries.com/definition/english/copper_2
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Current in Australia ("the coppers") though shared with Britain. Must not catch copper the metal (form only; triggers are police officer/policeman/cop).
+- decision: reject
+  candidate: counterparty per
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: Crank
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: crucial way
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: dead important
+  reason: duplicate
+  why: 'Existing form: VERY dead.'
+- decision: reject
+  candidate: depends on the
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: dipping
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: dodgy little raids on
+  reason: duplicate
+  why: 'Existing form: DODGY dodgy.'
+- decision: reject
+  candidate: dosh you've handed over
+  reason: duplicate
+  why: 'Existing form: MONEY dosh.'
+- decision: americanism
+  candidate: dressing-gown
+  us: bathrobe
+  australian: dressing-gown
+  why: Australian/British choice; "bath robe" spelling variant too.
+- decision: americanism
+  candidate: drippy taps
+  us: faucet
+  australian: tap
+  why: Unambiguous US word; Australians only say tap ("leaky tap", "turn the tap off").
+- decision: reject
+  candidate: dunk
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: easygoing
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: ended up
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: every bastard stuck to
+  reason: duplicate
+  why: 'Existing form: EVERYONE every bastard.'
+- decision: reject
+  candidate: expo
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: fair and square
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: federal and state
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: finding where the
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: americanism
+  candidate: five-quid note
+  us: dollar bill
+  australian: dollar note
+  why: Australians have notes, not bills ("a five-dollar note", "a fifty"). Only "dollar bill(s)" phrasings; bare "bill" means an invoice.
+- decision: reject
+  candidate: flat-footed heavy-breathin' bloke
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: flown in
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: food cooks
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: for sheer hard yakka
+  reason: duplicate
+  why: 'Existing form: WORK hard yakka.'
+- decision: reject
+  candidate: fresher
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: americanism
+  candidate: frying pan or else
+  us: skillet
+  australian: frying pan
+  why: '"Skillet" is US; Australians say frying pan (cast-iron frying pan).'
+- decision: americanism
+  candidate: full-cream
+  us: whole milk
+  australian: full-cream milk
+  why: Australian milk labelling and speech use full-cream. Only "whole milk", never bare "whole".
+- decision: reject
+  candidate: fussin'
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: geophysics gear It's
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: get spooked by
+  reason: duplicate
+  why: 'Existing form: SCARED spooked.'
+- decision: reject
+  candidate: getting it ready
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: give the seedling trays
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: gob got bugger-all
+  reason: duplicate
+  why: 'Existing form: NOTHING bugger all; gob is in shut your gob.'
+- decision: reject
+  candidate: got hitched
+  reason: not_aussie
+  why: General informal English (US too).
+- decision: reject
+  candidate: got the chop in
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: grey sort of
+  reason: not_lexical
+  why: US spelling; handled by the spelling lint.
+- decision: reject
+  candidate: gusting
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: halfway
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: handyman
+  reason: not_aussie
+  why: General English; no Aussie form (tradie covers tradesperson).
+- decision: reject
+  candidate: have a lie-down Funny that
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: americanism
+  candidate: heaped
+  us: rounded tablespoon
+  australian: heaped tablespoon
+  why: Australian/British recipes say heaped tablespoon/teaspoon. Only with spoon measures.
+- decision: reject
+  candidate: himself
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: homers
+  reason: not_aussie
+  why: US baseball slang; the source text is about baseball, no Aussie form.
+- decision: reject
+  candidate: housin' market's on the mend
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: ID
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: gate
+  candidate: in the hip pocket
+  entry:
+    id: hip-pocket
+    form: the hip pocket
+    variants: []
+    concept:
+    - NEW:HOUSEHOLD_BUDGET
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Your own money and household budget, as hit by prices or taxes.
+    sources:
+    - https://slll.cass.anu.edu.au/centres/andc/australian-words-h
+    - https://www.oup.com.au/__data/assets/pdf_file/0028/88741/WotM_September_2016.pdf
+    status: gate
+    flags:
+    - dubious_meaning
+  new_concept:
+    id: HOUSEHOLD_BUDGET
+    description: Personal or household finances.
+    triggers:
+      np:
+      - the household budget
+      - household budgets
+      - the family budget
+      - household finances
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: 'Genuine (ANDC: hip-pocket nerve). Harvest used it for "economic development", which is wrong; only personal finances. Never "economy" or "economically".'
+- decision: reject
+  candidate: insides
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: is a rundown of
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: it helps keep
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: it's super-heated the slightest bump
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: joined
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: kit
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: Le-- ah stuff it Look
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: lend a hand
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: like peanuts
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: long-haul
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: lump
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: many goings-on especially anything
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: marriage
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: matter-of-fact
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: medium-light top-quality
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: middle cooks
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: gate
+  candidate: mightn't twig
+  entry:
+    id: twig
+    form: twig to {np}
+    variants: []
+    concept:
+    - NEW:CATCH_ON
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    replaces: []
+    gloss: Suddenly realise what is going on.
+    sources:
+    - https://www.oxfordlearnersdictionaries.com/definition/english/twig_2
+    status: gate
+    flags:
+    - not_aussie
+  new_concept:
+    id: CATCH_ON
+    description: Realise what is happening.
+    triggers:
+      vp:
+      - catch on to {np}
+      - cotton on to {np}
+      - wise up to {np}
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: low
+  why: Used in Australia but British in origin and getting dated. Only "catch on to/cotton on to"; never bare "realise" (realise a dream) or "catch on" meaning become popular.
+- decision: reject
+  candidate: mob on earth
+  reason: wrong_sense
+  why: '"mob" for nation/nationality: the exact wrong sense flagged by the last evaluation.'
+- decision: reject
+  candidate: mostly
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: much of a knack for
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: add_entry
+  candidate: musos
+  entry:
+    id: muso
+    form: a muso
+    variants: []
+    concept:
+    - NEW:MUSICIAN
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: A musician, especially one who plays gigs.
+    sources:
+    - https://greensdictofslang.com/entry/a7uefay
+    - https://www.wiktionary.com/wiki/muso
+  new_concept:
+    id: MUSICIAN
+    description: A musician.
+    triggers:
+      np:
+      - musician
+      - a musician
+      - local musicians
+      - session musician
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Common Aussie clipping. Must not catch "music", "musical" or "musician" inside a formal title.
+- decision: reject
+  candidate: never stopped to
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: no-sugar sort
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: not-knowing
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: octane
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: Okay so What's the sheila
+  reason: duplicate
+  why: 'Existing form: WOMAN sheila.'
+- decision: reject
+  candidate: one-liner like
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: organisations driving
+  reason: not_lexical
+  why: Spelling only; handled by the lint.
+- decision: reject
+  candidate: oughta
+  reason: not_aussie
+  why: American eye-dialect for ought to; not Australian.
+- decision: reject
+  candidate: over-the-counter
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: padding
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: parks itself over
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: patient and long-suffering
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: perched
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: pick
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: picking
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: plants
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: Plumber's
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: pressing
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: protect
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: pushed reckoned was
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: rain or snow
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: read through
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: add_trigger
+  candidate: reckon by the time
+  triggers_to_add:
+    THINK:
+      vp:
+      - guess !what|who|where|when|which|how|why|the|a|an|right|wrong|correctly|again|at|my|his|her|their|your|its|our|so
+  why: '"I guess (that) X" -> "I reckon X"; reckon already exists. Exclusions keep "guess what", "guess the answer" and "guess right" out; only the opinion use.'
+- decision: reject
+  candidate: reckon you've got
+  reason: duplicate
+  why: 'Existing form: THINK reckon with believe trigger.'
+- decision: reject
+  candidate: regular as clockwork
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: right Righto
+  reason: duplicate
+  why: 'Existing form: AFFIRM righto.'
+- decision: reject
+  candidate: rivers the Gibbon from
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: rough-and-ready
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: rummaging
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: saves you
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: Scratch
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: send-off
+  reason: not_lexical
+  why: General English for a farewell or funeral; not distinctly Australian.
+- decision: reject
+  candidate: shaft--there's good dosh
+  reason: duplicate
+  why: 'Existing form: MONEY dosh; rest is a fragment.'
+- decision: reject
+  candidate: shift
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: should quickly answer
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: side
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: singer
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: sliced
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: slurry
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: Snags
+  reason: duplicate
+  why: 'Existing form: SAUSAGE snag.'
+- decision: reject
+  candidate: So naturally
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: sort of blemish on it
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: spill
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: spots might
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: staff specialise
+  reason: not_lexical
+  why: Spelling only; handled by the lint.
+- decision: reject
+  candidate: States
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: steam
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: add_entry
+  candidate: stickybeaking about
+  entry:
+    id: stickybeak-around
+    form: stickybeak around
+    variants: []
+    concept:
+    - NEW:SNOOP
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: To nose about in things that are none of your business.
+    sources:
+    - https://wordhistories.net/2022/06/12/stickybeak/
+    - https://www.oxfordlearnersdictionaries.com/definition/english/stickybeak
+  new_concept:
+    id: SNOOP
+    description: Pry or snoop into others' business.
+    triggers:
+      vp:
+      - snoop around ^person
+      - snoop about ^person
+      - nose around ^person
+      - nose about ^person
+      - pry into other people's business
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Verb use of the existing noun stickybeak (Aus/NZ). Only of nosy prying by people; must not catch "poke around" meaning explore code or a menu, so that is not a trigger.
+- decision: reject
+  candidate: storm turns up
+  reason: duplicate
+  why: 'Existing form: ARRIVE turn up/rock up.'
+- decision: reject
+  candidate: straightens
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: americanism
+  candidate: sump that
+  us: oil pan
+  australian: sump
+  why: Engine oil reservoir is the sump in Australia. Only the engine sense of "oil pan".
+- decision: reject
+  candidate: sure-fire
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: switch the thing
+  reason: not_lexical
+  why: Switch off vs turn off is a shared preference; turn off has too many other senses.
+- decision: reject
+  candidate: Take the lid off for
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: tap dripping
+  reason: not_lexical
+  why: Covered by the faucet -> tap americanism (drippy taps).
+- decision: reject
+  candidate: teach
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: that collect the
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: that too Strewth
+  reason: duplicate
+  why: 'Existing form: strewth exists.'
+- decision: add_entry
+  candidate: the choc bits
+  entry:
+    id: choc-chips
+    form: choc chips
+    variants: []
+    concept:
+    - NEW:CHOC_CHIPS
+    frame: np
+    intensity: 1
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Small chocolate pieces for baking.
+    sources: []
+  new_concept:
+    id: CHOC_CHIPS
+    description: Chocolate chips for baking.
+    triggers:
+      np:
+      - chocolate chips
+      - chocolate morsels
+      - chocolate chip pieces
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Aussie clipping in recipes (Choc Bits is also a local brand name, so the form uses the generic). Only "chocolate chips/morsels"; must not catch "potato chips" or "chocolate" alone.
+- decision: reject
+  candidate: the eskies shut
+  reason: duplicate
+  why: 'Existing form: COOLER esky.'
+- decision: reject
+  candidate: the frying pan
+  reason: not_lexical
+  why: Covered by the skillet -> frying pan americanism.
+- decision: reject
+  candidate: the parson comes
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: the regular way
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: the temperature
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: them so your tucker cooks
+  reason: duplicate
+  why: 'Existing form: FOOD tucker (and "food" as material is a wrong-sense risk).'
+- decision: reject
+  candidate: Thirty
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: americanism
+  candidate: through the roadworks
+  us: construction zone
+  australian: roadworks
+  why: Road construction areas are "roadworks" in Australia. Only road contexts ("road construction", "construction zone").
+- decision: reject
+  candidate: time-chewing problems
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: tongs
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: topped up
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: americanism
+  candidate: trays might
+  us: cookie sheet
+  australian: baking tray
+  why: Australians bake on a baking tray; "baking sheet" also -> baking tray.
+- decision: reject
+  candidate: tucker he'd plonk himself down
+  reason: duplicate
+  why: 'Existing form: FOOD tucker and SIT_DOWN plonk exist.'
+- decision: reject
+  candidate: two totals
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: up Post it with
+  reason: not_lexical
+  why: Covered by the in the mail -> in the post americanism.
+- decision: reject
+  candidate: using ready-made
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: add_entry
+  candidate: veg labelled
+  entry:
+    id: fruit-and-veg
+    form: fruit and veg
+    variants: []
+    concept:
+    - NEW:FRUIT_AND_VEG
+    frame: np
+    intensity: 1
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Fresh fruit and vegetables, as sold at the greengrocer.
+    sources: []
+  new_concept:
+    id: FRUIT_AND_VEG
+    description: Fruit and vegetables together.
+    triggers:
+      np:
+      - fruit and vegetables
+      - fruits and vegetables
+      - fresh produce
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: high
+  why: Fixed Aussie (and British) everyday pairing ("the fruit and veg shop"). Only the full pairing; "veg" alone stays under VEGETABLES/veggies.
+- decision: reject
+  candidate: warnings
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: Washing Up Outdoors
+  reason: wrong_sense
+  why: '"Washing up" in Australia means doing the dishes, not washing hands.'
+- decision: reject
+  candidate: we roped in
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: were grown
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: wheel out
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: whole sporting
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: wisely
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: worn-out
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: ya like your bikkies
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: you apply You
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: you success
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: reject
+  candidate: your average
+  reason: not_lexical
+  why: Plain English, a one-off phrasing, or a merged diff fragment; no reusable Aussie form.
+- decision: americanism
+  candidate: zip-lock
+  us: Ziploc bag
+  australian: snap-lock bag
+  why: Ziploc is a US brand; the Australian generic is a snap-lock bag (Glad Snap Lock); "zip-lock bag" is also understood. Only the bag sense.

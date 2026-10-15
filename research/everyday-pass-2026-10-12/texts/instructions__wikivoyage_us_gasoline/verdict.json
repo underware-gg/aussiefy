@@ -1,0 +1,197 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "unharnessed": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 3,
+   "sense": 3,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 3,
+   "flow": 1,
+   "variety": 2,
+   "essence": 3
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "Most facts are the original verbatim, but the American's line becomes \"I need 50 quid on pump number 1\", which misstates what an American says, and inserts like \"yer bloody using\" add nothing. Gallons, octane, red diesel and handle colours survive.",
+   "sense": "Mostly fine (\"servos\", \"the folding stuff\", \"dosh\"), but \"50 quid\" takes a British sense in an American quote, and \"cobber\" is tacked on with no sense at all.",
+   "authenticity": "Stage-Australian: openers bolted on (\"Listen, gasoline\", \"Jeez Louise, Due to problems\", \"Tell ya what, in the alternative\", \"Mate, in most states\") and a closing \"Streeeewth.\" US forms left in (\"gasoline\", \"gas\", \"preauthorize\").",
+   "register": "Level 5 asked, but the body is the original encyclopedia prose (\"This is suitable for use by 87-octane vehicles at high elevations\") with slang sprinkled on.",
+   "tone": "The practical travel-guide tone survives where untouched, but tags like \"Streeeewth.\" make it wobble into parody.",
+   "flow": "Jarring joins: \"Jeez Louise, Due to problems\", \"Tell ya what, in the alternative, ya have to\", \"which pump yer bloody using\".",
+   "variety": "Leans on 'yer'/'ya' and bolted-on openers (\"Well,\", \"So anyway,\", \"Mate,\").",
+   "essence": "Recognisably the Wikivoyage entry, because it mostly is, but turned into a gag reel."
+  },
+  "unharnessed": {
+   "meaning": "All facts kept: New Jersey and Oregon, \"3.785 litres\", pay-before-pump, \"I need 50 bucks on pump number 1\", the octane grades, 85 at altitude, red diesel fines, black/green handles and the UK opposite. \"or you'll be well and truly fucked\" is colour on 'do not mix them up'.",
+   "sense": "Terms fit: \"Petrol (\"gas\", as the Yanks call it)\", \"servos\", \"flash luxury car\", \"truckies\", \"out in the bush\", \"cop a massive fine\".",
+   "authenticity": "Natural Aussie: \"These days you've gotta preauthorise\", \"whoever's on the counter\", \"The pump cuts out by itself\", \"make bloody sure\".",
+   "register": "Clearly Aussie and within vulgarity 2 (\"bloody\", \"well and truly fucked\"), but closer to a chatty guide than a full level-5 yarn; much is close paraphrase.",
+   "tone": "Keeps the practical, slightly wry guide; the final warning stays a warning.",
+   "flow": "Reads cleanly: \"Otherwise you have to guess how much fuel you need, hand over that much cash to whoever's on the counter, and tell 'em which pump you're on\".",
+   "variety": "Good spread (\"servos\", \"flash\", \"truckies\", \"cop\"), with \"servos\" and \"bloody\" recurring.",
+   "essence": "Unmistakably the US-petrol travel entry, every section intact."
+  },
+  "yarn": {
+   "meaning": "All facts kept, in order: the two state exceptions, \"It's 3.785 litres\", pay-first, \"I need 50 bucks on pump number 1\", the 87/89/91 grades, 85 in the Rockies, red diesel fines, black/green handles. Asides \"past the pie that's been in the warmer since Tuesday\" and \"that hire car'll be cactus\" hang off the original's actions.",
+   "sense": "Terms fit: \"shootin' through without payin'\" for drive-offs, \"the folding stuff\", \"dosh\", \"flash luxury car\", \"truckies\", \"cactus\".",
+   "authenticity": "A real Aussie voice: \"Listen up if you're headin' over to the States\", \"don't you dare put it in a car\", \"the fines are bloody hefty\".",
+   "register": "A full level-5 yarn with dropped g's and asides, \"bloody\" within vulgarity 2.",
+   "tone": "A practical travel tip told as a yarn; the warnings stay warnings (\"make bloody sure you fill up with 87\").",
+   "flow": "Reads well aloud: \"So these days nearly every servo in America makes you pay before you pump (used to be the other way round).\"",
+   "variety": "Varied: \"shootin' through\", \"folding stuff\", \"dosh\", \"flash\", \"truckies\", \"cactus\", \"don't you dare\".",
+   "essence": "Unmistakably the Wikivoyage entry, retold."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "I need 50 quid on pump number 1",
+    "original": "I need 50 bucks on pump number 1",
+    "severity": "major",
+    "why": "An American would say bucks; 'quid' is British/Aussie and breaks the point of the quote."
+   },
+   {
+    "quote": "Jeez Louise, Due to problems",
+    "original": "Due to problems",
+    "severity": "major",
+    "why": "Interjection jammed in with a stray capital."
+   },
+   {
+    "quote": "Today, you have to preauthorize a credit or debit card at the pump, cobber.",
+    "original": "Today, you have to preauthorize a credit or debit card at the pump.",
+    "severity": "minor",
+    "why": "Stock 'cobber' tag."
+   },
+   {
+    "quote": "identify which pump yer bloody using",
+    "original": "identify which pump you are using",
+    "severity": "minor",
+    "why": "Swearing inserted with no reason."
+   },
+   {
+    "quote": "This is suitable for use by 87-octane vehicles at high elevations",
+    "original": "This is suitable for use by 87-octane vehicles at high elevations",
+    "severity": "major",
+    "why": "Body left untranslated against a level-5 brief."
+   },
+   {
+    "quote": "Streeeewth.",
+    "original": "",
+    "severity": "minor",
+    "why": "Stock tag added."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "Don't get 'em mixed up, or you'll be well and truly fucked.",
+    "original": "Do not mix them up.",
+    "severity": "minor",
+    "why": "Allowed at vulgarity 2, but a bit heavy as the closing line of a travel tip."
+   },
+   {
+    "quote": "The U.S. octane scale's different from the one they use in Europe",
+    "original": "The U.S. octane scale is different from that used in Europe",
+    "severity": "minor",
+    "why": "Long stretches of close paraphrase keep it lighter than level 5."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Listen up if you're headin' over to the States and drivin'.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added framing line; harmless colour."
+   },
+   {
+    "quote": "Nowadays you've gotta pre-authorise",
+    "original": "Today, you have to preauthorize",
+    "severity": "minor",
+    "why": "'Nowadays' follows 'these days' a line earlier; slight repetition."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "The original with interjections and 'yer' bolted on, and a wrong 'quid' in the American's quote; far short of level 5.",
+  "unharnessed": "Accurate, natural Aussie travel tip; a notch lighter than a full level-5 yarn.",
+  "yarn": "A natural full-strength yarn that keeps every fact; asides are colour, not invention."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,3011 @@
+# Verdicts for the fairdinkum round, one per added entry, in the format of the everyday round's verify/BRIEF.md.
+# Written by hand from the headword list alone: glosses and triggers in our own words, sources are open
+# references. DECISIONS.md lists every headword, including the ones skipped or already covered.
+# `evidence: own` means own knowledge of a common term, checked against the cited Wiktionary page.
+
+# --- people -------------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: aussie
+  entry:
+    id: an-aussie
+    form: an Aussie
+    concept: [NEW:AUSTRALIAN_PERSON]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: An Australian (the person); Aussies call themselves this without a second thought.
+    sources: [https://en.wiktionary.org/wiki/Aussie]
+  new_concept:
+    id: AUSTRALIAN_PERSON
+    description: An Australian person (the noun, not the adjective, so no institution's name is touched).
+    triggers:
+      np: [an Australian]
+  evidence: own
+  confidence: high
+  why: Only the noun with its article, so "the Australian Bureau of Statistics" and "Australian wine" stay.
+
+- decision: add_entry
+  candidate: bogan
+  entry:
+    id: a-bogan
+    form: a bogan
+    concept: [NEW:BOGAN]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: An uncouth, unsophisticated person of a working-class stereotype (mullet, flanno, loud ute); the
+      Aussie counterpart of the redneck or the chav. Mildly derogatory, often said of oneself with pride.
+    sources: [https://en.wiktionary.org/wiki/bogan]
+  new_concept:
+    id: BOGAN
+    description: An uncouth, unsophisticated person of a working-class stereotype (the redneck, the chav).
+    triggers:
+      np: [redneck, chav]
+  evidence: own
+  confidence: high
+  why: The redneck and chav are the same figure in other Englishes; "hick" and "yokel" are rural, which bogan isn't.
+
+- decision: add_entry
+  candidate: bevan
+  entry:
+    id: a-bevan
+    form: a bevan
+    concept: [BOGAN]
+    frame: np
+    intensity: 3
+    incoherence: 4
+    register: current
+    region: [qld]
+    gloss: A bogan, in Queensland's word for it.
+    sources: [https://en.wiktionary.org/wiki/bevan]
+  evidence: own
+  confidence: medium
+  why: The Queensland synonym of bogan; region-tagged so --region qld prefers it.
+
+- decision: add_entry
+  candidate: yobbo
+  entry:
+    id: a-yobbo
+    form: a yobbo
+    concept: [HOON]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: A loud, loutish, badly behaved bloke.
+    sources: [https://en.wiktionary.org/wiki/yobbo]
+  triggers_to_add:
+    HOON:
+      np: [yob]
+  evidence: own
+  confidence: high
+  why: HOON's triggers are yobbo's sense (made bare by hand in concepts.yaml, so "the louts" count); plus British yob.
+
+- decision: add_entry
+  candidate: grub
+  entry:
+    id: a-grub
+    form: a grub
+    concept: [SCOUNDREL]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: A low, contemptible person; someone who behaves like a dog.
+    sources: [https://en.wiktionary.org/wiki/grub]
+  evidence: own
+  confidence: high
+  why: SCOUNDREL's triggers (lowlife, rotter) only; the food sense of grub is never a trigger.
+
+- decision: add_entry
+  candidate: drop-kick
+  entry:
+    id: a-drop-kick
+    form: a drop-kick
+    variants: [a dropkick]
+    concept: [LOSER]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: A hopeless, useless person; a loser.
+    sources: [https://en.wiktionary.org/wiki/dropkick]
+  evidence: own
+  confidence: high
+  why: LOSER's triggers only (a loser, a deadbeat); the football kick is never a trigger.
+
+- decision: add_entry
+  candidate: show pony
+  entry:
+    id: a-show-pony
+    form: a show pony
+    concept: [BOASTER]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: A show-off who loves an audience, all style and preening.
+    sources: [https://en.wiktionary.org/wiki/show_pony]
+  evidence: own
+  confidence: high
+  why: BOASTER's triggers (show-off, braggart) fit it exactly.
+
+- decision: add_entry
+  candidate: wowser
+  entry:
+    id: a-wowser
+    form: a wowser
+    concept: [KILLJOY]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    replaces: [a prude, a teetotaller, a teetotaler, a moraliser, a moralizer]
+    gloss: A puritanical killjoy who disapproves of drinking, gambling and fun in general.
+    sources: [https://en.wiktionary.org/wiki/wowser]
+  evidence: own
+  confidence: high
+  why: Not "a puritan", which also names the historical Puritans.
+
+- decision: add_entry
+  candidate: dobber
+  entry:
+    id: a-dobber
+    form: a dobber
+    concept: [NEW:TELLTALE]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Someone who dobs others in; a telltale.
+    sources: [https://en.wiktionary.org/wiki/dobber]
+  new_concept:
+    id: TELLTALE
+    description: Someone who tells on others to an authority; a snitch (the noun).
+    triggers:
+      np: [a snitch, a tattletale, a tattle-tale, "a telltale !sign|signs|mark|marks|trace|traces|heart|smell|clue|clues"]
+  evidence: own
+  confidence: high
+  why: The adjective telltale (a telltale sign) is excluded.
+
+- decision: add_entry
+  candidate: old mate
+  entry:
+    id: old-mate
+    form: old mate
+    concept: [NEW:SOME_BLOKE]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Some unnamed stranger, pointed out in passing (that bloke over there).
+    sources: [https://en.wiktionary.org/wiki/old_mate]
+  new_concept:
+    id: SOME_BLOKE
+    description: Some random person whose name doesn't matter (some guy, this random guy).
+    triggers:
+      np: [some random guy, this random guy, a random guy, some random bloke, some random dude, this random dude]
+  evidence: own
+  confidence: medium
+  why: Only "random guy" phrasings; plain "this guy" and "some guy" are often specific or contemptuous.
+
+- decision: add_entry
+  candidate: tall poppy
+  entry:
+    id: a-tall-poppy
+    form: a tall poppy
+    concept: [NEW:HIGH_ACHIEVER]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: A conspicuously successful person, the sort others like to cut down to size.
+    sources: [https://en.wiktionary.org/wiki/tall_poppy]
+  new_concept:
+    id: HIGH_ACHIEVER
+    description: A conspicuously successful person.
+    triggers:
+      np: [a high achiever, a high-flyer, a high flyer]
+  evidence: own
+  confidence: medium
+  why: The success sense only.
+
+- decision: add_entry
+  candidate: chardonnay socialist
+  entry:
+    id: a-chardonnay-socialist
+    form: a chardonnay socialist
+    concept: [NEW:CHAMPAGNE_SOCIALIST]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: A well-off person who talks left-wing politics over a good glass of white.
+    sources: [https://en.wiktionary.org/wiki/chardonnay_socialist]
+  new_concept:
+    id: CHAMPAGNE_SOCIALIST
+    description: An affluent person who professes left-wing views.
+    triggers:
+      np: [a champagne socialist, a limousine liberal, a latte liberal]
+  evidence: own
+  confidence: high
+  why: The British and American versions of the same jibe.
+
+- decision: add_entry
+  candidate: two-pot screamer
+  entry:
+    id: a-two-pot-screamer
+    form: a two-pot screamer
+    concept: [NEW:LIGHTWEIGHT_DRINKER]
+    frame: np
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: Someone who gets drunk (and loud) on a couple of drinks.
+    sources: [https://en.wiktionary.org/wiki/two-pot_screamer]
+  new_concept:
+    id: LIGHTWEIGHT_DRINKER
+    description: Someone who gets drunk on very little.
+    triggers:
+      np: [a cheap drunk, a lightweight drinker]
+  evidence: own
+  confidence: high
+  why: Not bare "a lightweight" (boxing, a political lightweight, a lightweight jacket).
+
+- decision: add_entry
+  candidate: p-plater
+  entry:
+    id: a-p-plater
+    form: a P-plater
+    concept: [NEW:PROVISIONAL_DRIVER]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: A newly licensed driver on a provisional licence, who must display P plates.
+    sources: [https://en.wiktionary.org/wiki/P-plater]
+  new_concept:
+    id: PROVISIONAL_DRIVER
+    description: A newly licensed driver on a provisional licence.
+    triggers:
+      np: [provisional driver, newly licensed driver, newly-licensed driver, probationary driver]
+  evidence: own
+  confidence: high
+  why: Narrow driver phrasings.
+
+- decision: add_entry
+  candidate: p-plater (its learner counterpart)
+  entry:
+    id: an-l-plater
+    form: an L-plater
+    concept: [NEW:LEARNER_DRIVER]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: A learner driver, who must display L plates and drive with a licensed supervisor.
+    sources: [https://en.wiktionary.org/wiki/L-plater]
+  new_concept:
+    id: LEARNER_DRIVER
+    description: A learner driver.
+    triggers:
+      np: [learner driver, student driver]
+  evidence: own
+  confidence: high
+  why: The sibling of P-plater, added with it.
+
+# --- trades and work -----------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: brickie
+  entry:
+    id: a-brickie
+    form: a brickie
+    concept: [NEW:BRICKLAYER]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: A bricklayer.
+    sources: [https://en.wiktionary.org/wiki/brickie]
+  new_concept:
+    id: BRICKLAYER
+    description: A bricklayer.
+    triggers:
+      np: [bricklayer]
+  evidence: own
+  confidence: high
+  why: One sense only.
+
+- decision: add_entry
+  candidate: sparky
+  entry:
+    id: a-sparky
+    form: a sparky
+    plural: sparkies
+    concept: [NEW:ELECTRICIAN]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: An electrician.
+    sources: [https://en.wiktionary.org/wiki/sparky]
+  new_concept:
+    id: ELECTRICIAN
+    description: An electrician.
+    triggers:
+      np: [electrician]
+  evidence: own
+  confidence: high
+  why: One sense only.
+
+- decision: add_entry
+  candidate: chippy
+  entry:
+    id: a-chippy
+    form: a chippy
+    plural: chippies
+    concept: [NEW:CARPENTER]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: A carpenter.
+    notes: Also British slang for a fish and chip shop (dialect.yaml's known_only swap); here only the trade.
+    sources: [https://en.wiktionary.org/wiki/chippy]
+  new_concept:
+    id: CARPENTER
+    description: A carpenter.
+    triggers:
+      np: [carpenter]
+  evidence: own
+  confidence: high
+  why: Carpenter has one sense.
+
+- decision: add_entry
+  candidate: truckie
+  entry:
+    id: a-truckie
+    form: a truckie
+    concept: [NEW:TRUCK_DRIVER]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: A truck driver, especially a long-haul one.
+    sources: [https://en.wiktionary.org/wiki/truckie]
+  new_concept:
+    id: TRUCK_DRIVER
+    description: A truck driver.
+    triggers:
+      np: [truck driver, trucker]
+  evidence: own
+  confidence: high
+  why: One sense only.
+
+- decision: add_entry
+  candidate: public servant
+  entry:
+    id: a-public-servant
+    form: a public servant
+    concept: [NEW:PUBLIC_SERVANT]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: A government employee; the Australian name for a civil servant.
+    sources: [https://en.wiktionary.org/wiki/public_servant]
+  new_concept:
+    id: PUBLIC_SERVANT
+    description: A government employee in the public service.
+    triggers:
+      np: [civil servant, a civil servant, government employee]
+  evidence: own
+  confidence: high
+  why: Plain Australian English, like chemist for pharmacy; British "civil servant" isn't the local word.
+
+- decision: add_entry
+  candidate: public servant (the service)
+  entry:
+    id: the-public-service
+    form: the public service
+    concept: [NEW:PUBLIC_SERVICE]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: The government's workforce; what Britain calls the civil service.
+    sources: [https://en.wiktionary.org/wiki/public_service]
+  new_concept:
+    id: PUBLIC_SERVICE
+    description: The government workforce as a body.
+    triggers:
+      np: [the civil service]
+  evidence: own
+  confidence: high
+  why: Added with public servant.
+
+- decision: add_entry
+  candidate: knock off
+  entry:
+    id: knock-off-work
+    form: knock off
+    concept: [NEW:FINISH_WORK]
+    frame: vp
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Finish work for the day ("we knock off at four").
+    sources: [https://en.wiktionary.org/wiki/knock_off]
+  new_concept:
+    id: FINISH_WORK
+    description: Stop work for the day.
+    triggers:
+      vp: ["finish work !on|for|in|with|by|before", clock off, knock off work, call it a day, "finish up for the day"]
+  evidence: own
+  confidence: high
+  why: Not "finish work on the house" (a job); the steal and imitation senses of knock off are never triggers.
+
+- decision: add_entry
+  candidate: hard yards
+  entry:
+    id: do-the-hard-yards
+    form: do the hard yards
+    concept: [WORK_HARD]
+    frame: vp
+    intensity: 4
+    incoherence: 2
+    register: current
+    replaces: [do the hard work, put in the hard work, do the groundwork, do the legwork]
+    gloss: Put in the hard, unglamorous work that success is built on.
+    sources: [https://en.wiktionary.org/wiki/hard_yards]
+  evidence: own
+  confidence: high
+  why: Its own groundwork phrasings, on top of WORK_HARD's triggers.
+
+- decision: add_entry
+  candidate: on the turps
+  entry:
+    id: on-the-turps
+    form: on the turps
+    concept: [NEW:ON_THE_DRINK]
+    frame: predicate_adj
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Drinking hard over a stretch of time; on a bender.
+    sources: [https://en.wiktionary.org/wiki/turps]
+  new_concept:
+    id: ON_THE_DRINK
+    description: Drinking heavily over a stretch of time; on a bender.
+    person: true
+    triggers:
+      predicate_adj: [on a bender, on a binge, on a drinking binge, on the booze, drinking heavily]
+  evidence: own
+  confidence: high
+  why: The drinking sense only (turps is also turpentine).
+
+# --- money, schemes and politics ---------------------------------------------------------------------------
+- decision: add_entry
+  candidate: rort
+  entry:
+    id: a-rort
+    form: a rort
+    concept: [NEW:RORT]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: A shonky scheme for milking a system, its rules or the public purse (an expenses rort).
+    sources: [https://en.wiktionary.org/wiki/rort]
+  new_concept:
+    id: RORT
+    description: A dishonest misuse of a system, its rules or public money.
+    triggers:
+      np: [a misuse of public funds, an abuse of the system, an expenses scandal]
+  evidence: own
+  confidence: medium
+  why: 'Not "a scam": a fraud on a victim isn''t a rort, and the last round kept "a caper" off scam warnings.'
+
+- decision: add_entry
+  candidate: rort (the verb)
+  entry:
+    id: rort-the-system
+    form: rort the system
+    concept: [NEW:GAME_SYSTEM]
+    frame: vp
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Exploit a system's rules or loopholes for undeserved gain.
+    sources: [https://en.wiktionary.org/wiki/rort]
+  new_concept:
+    id: GAME_SYSTEM
+    description: Exploit a system's rules for undeserved gain.
+    triggers:
+      vp: [game the system, exploit the system, abuse the system, cheat the system, milk the system, rip off the system]
+  evidence: own
+  confidence: high
+  why: Only "the system" phrasings.
+
+- decision: add_entry
+  candidate: barbecue stopper
+  entry:
+    id: a-barbecue-stopper
+    form: a barbecue stopper
+    concept: [NEW:HOT_BUTTON_ISSUE]
+    frame: np
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: An issue so hotly argued it stops the talk around the barbie.
+    sources: [https://en.wiktionary.org/wiki/barbecue_stopper]
+  new_concept:
+    id: HOT_BUTTON_ISSUE
+    description: A hotly debated public issue.
+    triggers:
+      np: [hot-button issue, hot button issue, hot-button topic, divisive issue]
+  evidence: own
+  confidence: high
+  why: One sense only.
+
+- decision: add_entry
+  candidate: shrapnel
+  entry:
+    id: shrapnel-change
+    form: shrapnel
+    concept: [NEW:LOOSE_CHANGE]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Loose coins, small change.
+    sources: [https://en.wiktionary.org/wiki/shrapnel]
+  new_concept:
+    id: LOOSE_CHANGE
+    description: Loose coins.
+    triggers:
+      np: [loose change, spare change]
+  evidence: own
+  confidence: high
+  why: 'Not "small change" (figurative: a trifling sum), and never the bomb fragments.'
+
+- decision: add_entry
+  candidate: lay-by
+  entry:
+    id: lay-by
+    form: lay-by
+    concept: [NEW:LAYAWAY]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: Paying for goods by instalments while the shop holds them for you.
+    sources: [https://en.wiktionary.org/wiki/lay-by]
+  new_concept:
+    id: LAYAWAY
+    description: Paying off goods in instalments while the shop holds them.
+    triggers:
+      np: [layaway, a layaway plan]
+  evidence: own
+  confidence: high
+  why: A US-to-Australian pair; in Britain a lay-by is a roadside stopping place, but no trigger is British.
+
+- decision: add_entry
+  candidate: rego
+  entry:
+    id: rego
+    form: rego
+    concept: [NEW:CAR_REGISTRATION]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: A vehicle's registration, and the fee for it ("the rego's due").
+    sources: [https://en.wiktionary.org/wiki/rego]
+  new_concept:
+    id: CAR_REGISTRATION
+    description: A vehicle's registration with the state road authority.
+    triggers:
+      np: [car registration, vehicle registration, the car registration, the vehicle registration]
+  evidence: own
+  confidence: high
+  why: Only vehicle registration; "registration" alone is also enrolment for an event.
+
+# --- food and drink -----------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: berley
+  entry:
+    id: berley
+    form: berley
+    concept: [NEW:GROUNDBAIT]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Bait scattered in the water to bring the fish in.
+    sources: [https://en.wiktionary.org/wiki/berley]
+  new_concept:
+    id: GROUNDBAIT
+    description: Bait scattered in the water to attract fish (as a mass noun).
+    triggers:
+      np: [groundbait, ground bait]
+  evidence: own
+  confidence: high
+  why: Not "chum", which is also a friend (FRIEND's trigger).
+
+- decision: add_entry
+  candidate: barra
+  entry:
+    id: barra
+    form: barra
+    plural: barra
+    concept: [NEW:BARRAMUNDI]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Barramundi, the prized eating and sport fish of the north.
+    sources: [https://en.wiktionary.org/wiki/barra]
+  new_concept:
+    id: BARRAMUNDI
+    description: The barramundi (the fish).
+    triggers:
+      np: [barramundi]
+  evidence: own
+  confidence: high
+  why: The clipping, as croc for crocodile.
+
+- decision: add_entry
+  candidate: chewie
+  entry:
+    id: chewie
+    form: chewie
+    concept: [NEW:CHEWING_GUM]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: Chewing gum.
+    sources: [https://en.wiktionary.org/wiki/chewie]
+  new_concept:
+    id: CHEWING_GUM
+    description: Chewing gum.
+    triggers:
+      np: [chewing gum]
+  evidence: own
+  confidence: high
+  why: Not bare "gum" (gum trees, the gums in your mouth).
+
+- decision: add_entry
+  candidate: dagwood dog
+  entry:
+    id: a-dagwood-dog
+    form: a dagwood dog
+    concept: [NEW:CORN_DOG]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: A battered sausage on a stick, dunked in tomato sauce; the show-bag staple (a Pluto Pup in some states).
+    sources: [https://en.wiktionary.org/wiki/dagwood_dog]
+  new_concept:
+    id: CORN_DOG
+    description: A battered, deep-fried sausage on a stick.
+    triggers:
+      np: [corn dog, corndog]
+  evidence: own
+  confidence: high
+  why: The US name for the same thing.
+
+- decision: add_entry
+  candidate: damper
+  entry:
+    id: damper
+    form: damper
+    concept: [NEW:DAMPER]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Bush bread, a simple soda loaf baked in the coals of a campfire.
+    sources: [https://en.wiktionary.org/wiki/damper]
+  new_concept:
+    id: DAMPER
+    description: Simple bread baked in the coals of a campfire.
+    triggers:
+      np: [campfire bread, bush bread, camp bread]
+  evidence: own
+  confidence: medium
+  why: Narrow camp-bread phrasings; Irish soda bread is a different loaf.
+
+- decision: add_entry
+  candidate: goon
+  entry:
+    id: goon
+    form: goon
+    concept: [NEW:CASK_WINE]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Cheap cask wine, the student and backpacker standby.
+    sources: [https://en.wiktionary.org/wiki/goon]
+  new_concept:
+    id: CASK_WINE
+    description: Cheap wine sold in a cask (as a mass noun).
+    triggers:
+      np: [boxed wine, box wine, cask wine]
+  evidence: own
+  confidence: high
+  why: The wine only; goon's thug sense is never a trigger.
+
+- decision: add_entry
+  candidate: goon bag
+  entry:
+    id: a-goon-bag
+    form: a goon bag
+    variants: [a goon sack]
+    concept: [NEW:WINE_CASK]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: The silver bladder inside a wine cask, or the whole cask.
+    sources: [https://en.wiktionary.org/wiki/goon]
+  new_concept:
+    id: WINE_CASK
+    description: A cask (box) of wine, as a countable thing.
+    triggers:
+      np: [a box of wine, a wine cask, a cask of wine]
+  evidence: own
+  confidence: high
+  why: Countable, kept apart from CASK_WINE so the article fits.
+
+- decision: add_entry
+  candidate: plonk
+  entry:
+    id: plonk
+    form: plonk
+    concept: [NEW:CHEAP_WINE]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Cheap, ordinary wine.
+    sources: [https://en.wiktionary.org/wiki/plonk]
+  new_concept:
+    id: CHEAP_WINE
+    description: Cheap, ordinary wine.
+    triggers:
+      np: ["cheap wine !list|lists|bar|bars|glass|glasses|shop|shops|store|stores", rotgut wine]
+  evidence: own
+  confidence: high
+  why: The noun only; plonk the verb (plonk yourself down) is a form elsewhere, not a trigger.
+
+- decision: add_entry
+  candidate: good drop
+  entry:
+    id: a-good-drop
+    form: a good drop
+    concept: [NEW:GOOD_WINE]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: 'A good wine (or beer): something worth drinking.'
+    sources: [https://en.wiktionary.org/wiki/drop]
+  new_concept:
+    id: GOOD_WINE
+    description: A good wine, something worth drinking.
+    triggers:
+      np: [a good wine, a nice wine, a fine wine, a decent wine, a great wine, a lovely wine]
+  evidence: own
+  confidence: high
+  why: Only wine phrasings.
+
+- decision: add_entry
+  candidate: lolly water
+  entry:
+    id: lolly-water
+    form: lolly water
+    concept: [NEW:SUGARY_DRINK]
+    frame: np
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: Sweet fizzy drink; said scornfully of soft drink, or of a drink with no kick to it.
+  new_concept:
+    id: SUGARY_DRINK
+    description: Sweet fizzy drink (said dismissively).
+    triggers:
+      np: [sugary drinks, a sugary drink, sugary soft drink]
+  evidence: own
+  confidence: medium
+  why: Not "soft drink", which the dialect table writes and so may not be swapped again.
+
+- decision: add_entry
+  candidate: bring a plate
+  entry:
+    id: bring-a-plate
+    form: bring a plate
+    concept: [NEW:BRING_A_PLATE]
+    frame: vp
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Bring a dish of food to share at a gathering (not an empty plate).
+  new_concept:
+    id: BRING_A_PLATE
+    description: Bring a dish of food to share at a gathering.
+    triggers:
+      vp: [bring a dish to share, bring food to share, bring something to share, bring a potluck dish]
+  evidence: own
+  confidence: high
+  why: Only "to share" phrasings, never a literal plate.
+
+# --- things and places --------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: bikie
+  entry:
+    id: a-bikie
+    form: a bikie
+    concept: [NEW:BIKIE]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: A member of a motorcycle club or gang.
+    sources: [https://en.wiktionary.org/wiki/bikie]
+  new_concept:
+    id: BIKIE
+    description: A member of a motorcycle gang; a biker.
+    triggers:
+      np: ["biker !shorts|jacket|jackets|boots|chick|chicks|bar|bars", "biker gang", "a motorcycle gang member"]
+  evidence: own
+  confidence: high
+  why: Not the fashion senses (biker shorts, a biker jacket).
+
+- decision: add_entry
+  candidate: billycart
+  entry:
+    id: a-billycart
+    form: a billycart
+    concept: [NEW:SOAPBOX_CART]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: A homemade, unpowered wooden cart that kids race downhill.
+    sources: [https://en.wiktionary.org/wiki/billycart]
+  new_concept:
+    id: SOAPBOX_CART
+    description: A homemade unpowered cart raced downhill.
+    triggers:
+      np: [soapbox cart, soapbox racer, soapbox car, box cart]
+  evidence: own
+  confidence: high
+  why: Not a go-kart, which has a motor.
+
+- decision: add_entry
+  candidate: bingle
+  entry:
+    id: a-bingle
+    form: a bingle
+    concept: [NEW:FENDER_BENDER]
+    frame: np
+    intensity: 2
+    incoherence: 2
+    register: current
+    gloss: A minor car crash.
+    sources: [https://en.wiktionary.org/wiki/bingle]
+  new_concept:
+    id: FENDER_BENDER
+    description: A minor car crash.
+    triggers:
+      np: [fender bender, fender-bender, minor car accident, minor car crash, minor collision]
+  evidence: own
+  confidence: high
+  why: Minor car crashes only; a serious one isn't a bingle, and "a minor crash in prices" isn't one at all.
+
+- decision: add_entry
+  candidate: blowie
+  entry:
+    id: a-blowie
+    form: a blowie
+    concept: [NEW:BLOWFLY]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: A blowfly.
+    sources: [https://en.wiktionary.org/wiki/blowie]
+  new_concept:
+    id: BLOWFLY
+    description: A blowfly.
+    triggers:
+      np: [blowfly]
+  evidence: own
+  confidence: high
+  why: One sense only.
+
+- decision: add_entry
+  candidate: bluebottle
+  entry:
+    id: a-bluebottle
+    form: a bluebottle
+    concept: [NEW:MAN_O_WAR]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: The Portuguese man o' war (or its smaller Pacific cousin), the blue stinger washed up on summer beaches.
+    sources: [https://en.wiktionary.org/wiki/bluebottle]
+  new_concept:
+    id: MAN_O_WAR
+    description: The Portuguese man o' war, a stinging sea creature.
+    triggers:
+      np: [Portuguese man o' war, Portuguese man-of-war, a Portuguese man o' war, a Portuguese man-of-war]
+  evidence: own
+  confidence: high
+  why: The jellyfish-like stinger only; the British blowfly sense of bluebottle is never a trigger.
+
+- decision: add_entry
+  candidate: boardies
+  entry:
+    id: boardies
+    form: boardies
+    plural: boardies
+    concept: [NEW:BOARDSHORTS]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: Board shorts, the long baggy swimming shorts.
+    sources: [https://en.wiktionary.org/wiki/boardies]
+  new_concept:
+    id: BOARDSHORTS
+    description: Board shorts.
+    triggers:
+      np: [board shorts, boardshorts]
+  evidence: own
+  confidence: high
+  why: One sense only.
+
+- decision: add_entry
+  candidate: budgie smugglers
+  entry:
+    id: budgie-smugglers
+    form: budgie smugglers
+    plural: budgie smugglers
+    concept: [NEW:SWIM_BRIEFS]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Men's tight swimming briefs (Speedos), so called for the outline they leave.
+    sources: [https://en.wiktionary.org/wiki/budgie_smugglers]
+  new_concept:
+    id: SWIM_BRIEFS
+    description: Men's tight swimming briefs.
+    triggers:
+      np: [swim briefs, swimming briefs, speedos]
+  evidence: own
+  confidence: high
+  why: Only briefs; SWIMSUIT keeps togs and cozzie for swimwear in general.
+
+- decision: add_entry
+  candidate: budgie
+  entry:
+    id: a-budgie
+    form: a budgie
+    concept: [NEW:BUDGERIGAR]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: A budgerigar, the small green-and-yellow parrot.
+    sources: [https://en.wiktionary.org/wiki/budgie]
+  new_concept:
+    id: BUDGERIGAR
+    description: A budgerigar (the bird).
+    triggers:
+      np: [budgerigar, pet parakeet]
+  evidence: own
+  confidence: high
+  why: Only a pet parakeet; wild parakeets are other species.
+
+- decision: add_entry
+  candidate: bucks
+  entry:
+    id: a-bucks-night
+    form: a bucks night
+    variants: [a bucks party, a buck's night]
+    concept: [NEW:BUCKS_NIGHT]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: A groom's night out with his mates before the wedding.
+    sources: [https://en.wiktionary.org/wiki/buck%27s_night]
+  new_concept:
+    id: BUCKS_NIGHT
+    description: A groom's party with his friends before the wedding.
+    triggers:
+      np: [bachelor party, stag party, stag night, stag do]
+  evidence: own
+  confidence: high
+  why: The US and British names for it.
+
+- decision: add_entry
+  candidate: bucks (its counterpart)
+  entry:
+    id: a-hens-night
+    form: a hens night
+    variants: [a hens party, a hen's night]
+    concept: [NEW:HENS_NIGHT]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: A bride's night out with her friends before the wedding.
+  new_concept:
+    id: HENS_NIGHT
+    description: A bride's party with her friends before the wedding.
+    triggers:
+      np: [bachelorette party, hen party, hen night, hen do]
+  evidence: own
+  confidence: high
+  why: Added with bucks night.
+
+- decision: add_entry
+  candidate: footy oval
+  entry:
+    id: the-footy-oval
+    form: the footy oval
+    concept: [NEW:SPORTS_OVAL]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: The grassed oval where football and cricket are played.
+    sources: [https://en.wiktionary.org/wiki/oval]
+  new_concept:
+    id: SPORTS_OVAL
+    description: A grassed sports ground for football and cricket.
+    triggers:
+      np: [the sports field, the sports ground, the school sports field, the school playing field]
+  evidence: own
+  confidence: medium
+  why: Definite "the ..." only, so "a level playing field" is untouched.
+
+- decision: add_entry
+  candidate: glory box
+  entry:
+    id: a-glory-box
+    form: a glory box
+    concept: [NEW:HOPE_CHEST]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: dated
+    gloss: A chest where a young woman kept linen and things for her future home.
+    sources: [https://en.wiktionary.org/wiki/glory_box]
+  new_concept:
+    id: HOPE_CHEST
+    description: A chest of linen and household goods kept for marriage.
+    triggers:
+      np: [hope chest, dowry chest]
+  evidence: own
+  confidence: high
+  why: The US name for the same chest.
+
+- decision: add_entry
+  candidate: manchester
+  entry:
+    id: manchester-linen
+    form: manchester
+    concept: [NEW:HOUSEHOLD_LINEN]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Household linen (sheets, towels, tablecloths), as a shop's department calls it.
+    sources: [https://en.wiktionary.org/wiki/manchester]
+  new_concept:
+    id: HOUSEHOLD_LINEN
+    description: Household linen (sheets, towels and the like) as a mass noun.
+    triggers:
+      np: [bed linen, household linen, bed linens, household linens]
+  evidence: own
+  confidence: high
+  why: The linen sense only; the city is never a trigger.
+
+- decision: add_entry
+  candidate: nature strip
+  entry:
+    id: the-nature-strip
+    form: the nature strip
+    concept: [NEW:VERGE]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: The strip of council grass between the footpath and the road.
+    sources: [https://en.wiktionary.org/wiki/nature_strip]
+  new_concept:
+    id: VERGE
+    description: The grass strip between the footpath and the road.
+    triggers:
+      np: [the grass verge, the road verge, the tree lawn, the parking strip, the curb strip, the kerb strip]
+  evidence: own
+  confidence: high
+  why: Not bare "the verge" ("on the verge of tears").
+
+- decision: add_entry
+  candidate: rashie
+  entry:
+    id: a-rashie
+    form: a rashie
+    concept: [NEW:RASH_VEST]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: A rash vest, the snug swim shirt worn against sunburn and board rash.
+    sources: [https://en.wiktionary.org/wiki/rashie]
+  new_concept:
+    id: RASH_VEST
+    description: A rash vest or rash guard (a swim shirt).
+    triggers:
+      np: [rash guard, rash vest, rashguard, swim shirt]
+  evidence: own
+  confidence: high
+  why: One sense only.
+
+- decision: add_entry
+  candidate: sleepout
+  entry:
+    id: a-sleep-out
+    form: a sleep-out
+    concept: [NEW:SLEEPING_PORCH]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: A verandah or porch closed in to make an extra bedroom.
+    sources: [https://en.wiktionary.org/wiki/sleepout]
+  new_concept:
+    id: SLEEPING_PORCH
+    description: A porch or verandah enclosed as a bedroom.
+    triggers:
+      np: [sleeping porch, enclosed porch]
+  evidence: own
+  confidence: medium
+  why: The room only; a charity sleep-out (a night rough for a cause) is never a trigger.
+
+- decision: add_entry
+  candidate: sports carnival
+  entry:
+    id: a-sports-carnival
+    form: a sports carnival
+    concept: [NEW:SPORTS_DAY]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: A school's day of races and field events.
+    sources: [https://en.wiktionary.org/wiki/carnival]
+  new_concept:
+    id: SPORTS_DAY
+    description: A school sports day.
+    triggers:
+      np: [sports day, school sports day, track and field day]
+  evidence: own
+  confidence: high
+  why: Not "a field day" (have a field day).
+
+- decision: add_entry
+  candidate: sports carnival (the swimming one)
+  entry:
+    id: a-swimming-carnival
+    form: a swimming carnival
+    concept: [NEW:SWIM_MEET]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: A school's day of swimming races.
+    sources: [https://en.wiktionary.org/wiki/carnival]
+  new_concept:
+    id: SWIM_MEET
+    description: A swimming competition, especially a school one.
+    triggers:
+      np: [swim meet, swimming meet, swimming gala, swim gala]
+  evidence: own
+  confidence: high
+  why: Added with sports carnival.
+
+- decision: add_entry
+  candidate: mufti day
+  entry:
+    id: a-mufti-day
+    form: a mufti day
+    concept: [NEW:MUFTI_DAY]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: A school day when students come in their own clothes, usually for a gold-coin donation.
+    sources: [https://en.wiktionary.org/wiki/mufti]
+  new_concept:
+    id: MUFTI_DAY
+    description: A school day without uniform.
+    triggers:
+      np: [casual clothes day, non-uniform day, dress-down day, free dress day]
+  evidence: own
+  confidence: high
+  why: School-day phrasings only.
+
+- decision: add_entry
+  candidate: stubby cooler
+  entry:
+    id: a-stubby-holder
+    form: a stubby holder
+    variants: [a stubby cooler]
+    concept: [NEW:CAN_COOLER]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: The foam sleeve that keeps a stubby or can cold in your hand.
+    sources: [https://en.wiktionary.org/wiki/stubby_holder]
+  new_concept:
+    id: CAN_COOLER
+    description: An insulated sleeve for a can or bottle of drink.
+    triggers:
+      np: [koozie, beer koozie, can cooler, beer cozy, can cozy, can koozie]
+  evidence: own
+  confidence: high
+  why: The US names for it.
+
+- decision: add_entry
+  candidate: trackies
+  entry:
+    id: trackies
+    form: trackies
+    plural: trackies
+    variants: [trackie daks]
+    concept: [NEW:SWEATPANTS]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: Tracksuit pants.
+    sources: [https://en.wiktionary.org/wiki/trackies, https://en.wiktionary.org/wiki/daks]
+  new_concept:
+    id: SWEATPANTS
+    description: Tracksuit pants, sweatpants.
+    triggers:
+      np: [sweatpants, track pants, tracksuit pants, tracksuit bottoms, jogging pants]
+  evidence: own
+  confidence: high
+  why: Not "sweats" (also sweating) or "joggers" (also runners).
+
+- decision: add_entry
+  candidate: ugg boots
+  entry:
+    id: ugg-boots
+    form: ugg boots
+    plural: ugg boots
+    concept: [NEW:SHEEPSKIN_BOOTS]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: Sheepskin boots, the fleece-lined winter slipper-boot.
+    notes: Generic in Australia (a trademark only abroad), so it's in despite the no-brands rule.
+    sources: [https://en.wiktionary.org/wiki/ugg_boot]
+  new_concept:
+    id: SHEEPSKIN_BOOTS
+    description: Fleece-lined sheepskin boots.
+    triggers:
+      np: [sheepskin boots, shearling boots]
+  evidence: own
+  confidence: high
+  why: One sense only.
+
+- decision: add_entry
+  candidate: tuckshop
+  entry:
+    id: the-tuckshop
+    form: the tuckshop
+    concept: [NEW:SCHOOL_CANTEEN]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    region: [qld, wa]
+    gloss: The school's lunch shop (Queensland and WA; elsewhere the canteen).
+    sources: [https://en.wiktionary.org/wiki/tuckshop]
+  new_concept:
+    id: SCHOOL_CANTEEN
+    description: The school shop that sells lunch and snacks to students.
+    triggers:
+      np: [the school cafeteria, the school canteen, the school lunchroom]
+  evidence: own
+  confidence: high
+  why: Only school phrasings; a workplace cafeteria isn't a tuckshop.
+
+- decision: add_entry
+  candidate: middy
+  entry:
+    id: a-middy
+    form: a middy
+    concept: [NEW:MIDDY_BEER]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    region: [nsw, wa]
+    gloss: A 285 ml glass of beer (NSW and WA; a pot in Victoria and Queensland, a schooner in SA).
+    sources: [https://en.wiktionary.org/wiki/middy]
+  new_concept:
+    id: MIDDY_BEER
+    description: A small (about half-pint) glass of beer.
+    triggers:
+      np: [a half-pint of beer, a half pint of beer, a small glass of beer]
+  evidence: own
+  confidence: medium
+  why: Only beer measures; the sizes differ by state, so the region tag says where it's the word.
+
+- decision: add_entry
+  candidate: yabby
+  entry:
+    id: a-yabby
+    form: a yabby
+    plural: yabbies
+    concept: [NEW:FRESHWATER_CRAYFISH]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: A small freshwater crayfish of farm dams and creeks.
+    sources: [https://en.wiktionary.org/wiki/yabby]
+  new_concept:
+    id: FRESHWATER_CRAYFISH
+    description: A freshwater crayfish (crawfish).
+    triggers:
+      np: [crawfish, crawdad, freshwater crayfish]
+  evidence: own
+  confidence: high
+  why: Not "a crayfish", which CRAYFISH keeps for the rock lobster (cray).
+
+- decision: add_entry
+  candidate: joey
+  entry:
+    id: a-joey
+    form: a joey
+    concept: [NEW:JOEY]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: A baby kangaroo, wallaby or other marsupial.
+    sources: [https://en.wiktionary.org/wiki/joey]
+  new_concept:
+    id: JOEY
+    description: A baby marsupial.
+    triggers:
+      np: [baby kangaroo, baby wallaby, baby koala, baby wombat, baby possum]
+  evidence: own
+  confidence: high
+  why: Only "baby" + marsupial.
+
+- decision: add_entry
+  candidate: joe blake
+  entry:
+    id: a-joe-blake
+    form: a Joe Blake
+    concept: [NEW:SNAKE]
+    frame: np
+    intensity: 3
+    incoherence: 5
+    register: dated
+    gloss: A snake (rhyming slang).
+    sources: [https://en.wiktionary.org/wiki/Joe_Blake]
+  new_concept:
+    id: SNAKE
+    description: A snake, the reptile (lookup only; "a snake" is also a traitor, and "the snake" would lose its article).
+    triggers:
+      np: [a slithering snake]
+  evidence: own
+  confidence: medium
+  why: 'Lookup only: "he''s a snake" is a traitor, and a "the snake" trigger turned the Drover''s Wife''s snake into "a Joe Blake".'
+
+- decision: add_entry
+  candidate: yarn
+  entry:
+    id: a-yarn
+    form: a yarn
+    concept: [NEW:TALL_TALE]
+    frame: np
+    intensity: 3
+    incoherence: 1
+    register: current
+    gloss: A story, especially a long or tall one told for the fun of it.
+    sources: [https://en.wiktionary.org/wiki/yarn]
+  new_concept:
+    id: TALL_TALE
+    description: A story told for entertainment, often a tall one.
+    triggers:
+      np: [a tall tale, a tall story, an anecdote]
+  evidence: own
+  confidence: high
+  why: Not "a story" (news story, a two-story house); the knitting sense is never a trigger.
+
+- decision: add_entry
+  candidate: verandah over the toy shop
+  entry:
+    id: verandah-over-the-toy-shop
+    form: a verandah over the toy shop
+    concept: [NEW:BEER_GUT]
+    frame: np
+    intensity: 4
+    vulgarity: 1
+    incoherence: 5
+    register: current
+    gloss: A beer gut big enough to shade what's below it.
+    notes: A cheeky innuendo, rated 1.
+  new_concept:
+    id: BEER_GUT
+    description: A big belly, as from beer.
+    triggers:
+      np: [beer belly, beer gut, pot belly, potbelly, paunch]
+  evidence: own
+  confidence: medium
+  why: The belly only.
+
+# --- deeds and states -----------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: aggro
+  entry:
+    id: aggro
+    form: aggro
+    concept: [NEW:AGGRESSIVE]
+    frame: predicate_adj
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Aggressive, belligerent, spoiling for a fight.
+    sources: [https://en.wiktionary.org/wiki/aggro]
+  new_concept:
+    id: AGGRESSIVE
+    description: Aggressive, belligerent (of a person).
+    person: true
+    triggers:
+      predicate_adj: [aggressive ^person, belligerent ^person, combative ^person, confrontational ^person]
+  evidence: own
+  confidence: high
+  why: People only, so an aggressive cancer or pricing strategy stays.
+
+- decision: add_entry
+  candidate: ant's pants
+  entry:
+    id: the-ants-pants
+    form: the ant's pants
+    concept: [NEW:BEES_KNEES]
+    frame: predicate_adj
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: The very best, top of the heap (also "she thinks she's the ant's pants").
+    sources: [https://en.wiktionary.org/wiki/ant%27s_pants]
+  new_concept:
+    id: BEES_KNEES
+    description: The very best (the bee's knees and its kin).
+    triggers:
+      predicate_adj: [the bee's knees, the cat's pyjamas, the cat's pajamas, the cat's whiskers]
+  evidence: own
+  confidence: high
+  why: 'Not on EXCELLENT: the engine reads "it would be great fun" as a predicate "great", and a multi-word form there gives "the ant''s pants fun".'
+
+- decision: add_entry
+  candidate: brass monkeys
+  entry:
+    id: brass-monkeys
+    form: '{subj} {be} brass monkeys'
+    concept: [NEW:COLD_WEATHER]
+    frame: clause
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Bitterly cold (the weather), short for cold enough to freeze the balls off a brass monkey.
+    sources: [https://en.wiktionary.org/wiki/brass_monkeys]
+  new_concept:
+    id: COLD_WEATHER
+    description: Bitterly cold weather (it is freezing out).
+    triggers:
+      clause: ["it {be} freezing", "it {be} freezing cold", "it {be} bitterly cold", "it {be} absolutely freezing", "it {be} perishing"]
+  evidence: own
+  confidence: high
+  why: Only with "it" as subject, so "I'm freezing" (a person) can't become brass monkeys.
+
+- decision: add_entry
+  candidate: brass monkeys (the weather)
+  entry:
+    id: brass-monkey-weather
+    form: brass monkey weather
+    concept: [NEW:FREEZING_WEATHER]
+    frame: np
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Bitterly cold weather.
+    sources: [https://en.wiktionary.org/wiki/brass_monkey]
+  new_concept:
+    id: FREEZING_WEATHER
+    description: Bitterly cold weather (the noun phrase).
+    triggers:
+      np: [freezing weather, bitterly cold weather, freezing cold weather]
+  evidence: own
+  confidence: high
+  why: Weather only.
+
+- decision: add_entry
+  candidate: bung
+  entry:
+    id: bung-broken
+    form: bung
+    concept: [BROKEN]
+    frame: predicate_adj
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Broken, not working, crook ("the telly's gone bung", "a bung knee").
+    sources: [https://en.wiktionary.org/wiki/bung]
+  evidence: own
+  confidence: high
+  why: BROKEN's predicate triggers; the verb bung (bung it in) is a different entry.
+
+- decision: add_entry
+  candidate: bit of a curry
+  entry:
+    id: give-a-bit-of-curry
+    form: give {obj} a bit of curry
+    concept: [SCOLD]
+    frame: vp
+    intensity: 3
+    incoherence: 4
+    register: current
+    replaces: ["give {obj} a hard time", "give {obj} grief", "give {obj} heaps of grief"]
+    gloss: Give someone a hard time, a spray or a ribbing.
+  evidence: own
+  confidence: medium
+  why: Its hard-time phrasings plus SCOLD's own.
+
+- decision: add_entry
+  candidate: blind freddy
+  entry:
+    id: blind-freddy
+    form: Blind Freddy
+    concept: [NEW:ANY_FOOL]
+    frame: np
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: The least observant person imaginable ("Blind Freddy could see that").
+    sources: [https://en.wiktionary.org/wiki/Blind_Freddy]
+  new_concept:
+    id: ANY_FOOL
+    description: Anyone at all, even the least observant (any fool could see it).
+    triggers:
+      np: [any fool, anyone with half a brain, anybody with half a brain, anyone with eyes, anybody with eyes]
+  evidence: own
+  confidence: high
+  why: Only the "anyone at all" phrasings.
+
+- decision: add_entry
+  candidate: chunder
+  entry:
+    id: chunder
+    form: chunder
+    concept: [NEW:VOMIT]
+    frame: vp
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Vomit, throw up.
+    sources: [https://en.wiktionary.org/wiki/chunder]
+  new_concept:
+    id: VOMIT
+    description: Vomit, throw up (intransitive).
+    triggers:
+      vp: [vomit, puke, "throw up !a|an|the|his|her|their|its|our|my|your|some|any|this|that|these|those|new|questions|walls|barriers|obstacles|roadblocks|hands|arms|dust|ideas"]
+  evidence: own
+  confidence: medium
+  why: '"Throw up a wall" and "throw up questions" are excluded.'
+
+- decision: add_entry
+  candidate: come a gutser
+  entry:
+    id: come-a-gutser
+    form: come a gutser
+    variants: [come a gutzer]
+    concept: [FALL_OVER]
+    frame: vp
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Take a heavy fall; by extension, fail badly.
+    sources: [https://en.wiktionary.org/wiki/come_a_gutser]
+  evidence: own
+  confidence: high
+  why: FALL_OVER's triggers.
+
+- decision: add_entry
+  candidate: cooee
+  entry:
+    id: within-cooee
+    form: within cooee
+    concept: [NEW:WITHIN_EARSHOT]
+    frame: adv
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Within calling distance; close by (from the bush call).
+    sources: [https://en.wiktionary.org/wiki/cooee]
+  new_concept:
+    id: WITHIN_EARSHOT
+    description: Within calling distance; close enough to hear a shout.
+    triggers:
+      adv: [within earshot, within shouting distance, within calling distance, within hailing distance]
+  evidence: own
+  confidence: high
+  why: Only the distance phrasings.
+
+- decision: add_entry
+  candidate: couldn't organise a chook raffle
+  entry:
+    id: couldnt-organise-a-chook-raffle
+    form: "{subj} couldn't organise a chook raffle"
+    concept: [NEW:INCOMPETENT]
+    frame: clause
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Hopelessly disorganised; incapable of running the simplest thing.
+    sources: [https://en.wiktionary.org/wiki/couldn%27t_organise_a_chook_raffle]
+  new_concept:
+    id: INCOMPETENT
+    description: Hopelessly disorganised or incompetent (a person or an outfit).
+    triggers:
+      clause: ["{subj} {be} completely incompetent", "{subj} {be} totally incompetent", "{subj} {be} utterly incompetent",
+               "{subj} {be} hopelessly disorganised", "{subj} {be} hopelessly disorganized", "{subj} {be} completely disorganised",
+               "{subj} couldn't organise a piss-up in a brewery", "{subj} couldn't organize a piss-up in a brewery"]
+  evidence: own
+  confidence: high
+  why: Intensified incompetence only, not plain "disorganised".
+
+- decision: add_entry
+  candidate: cup of tea, a bex, and a good lie down
+  entry:
+    id: cup-of-tea-bex-lie-down
+    form: have a cup of tea, a Bex and a good lie-down
+    concept: [CALM_DOWN]
+    frame: imperative
+    intensity: 3
+    incoherence: 5
+    register: dated
+    gloss: Settle down, you're overwrought (Bex was a headache powder; the line is from a 1950s revue).
+  evidence: own
+  confidence: medium
+  why: CALM_DOWN's imperatives; level 5 and dated.
+
+- decision: add_entry
+  candidate: deadset
+  entry:
+    id: deadset-adj
+    form: deadset
+    concept: [NEW:UTTER]
+    frame: adj
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Complete, out-and-out, no mistake about it (a deadset legend, a deadset disaster).
+    sources: [https://en.wiktionary.org/wiki/dead_set]
+  new_concept:
+    id: UTTER
+    description: Complete, out-and-out (before a noun, as in an utter disaster).
+    triggers:
+      adj: ["utter", "out-and-out", "absolute !value|values|zero|majority|terms|power|powers|pitch|humidity|path|paths|address|monarchy|monarch|monarchs|minimum|maximum|temperature|magnitude|threshold|risk|number|numbers|despotism|tyranny|tyrant|tyrants|rule|ruler|rulers|authority|control|sovereignty|dictatorship|dictator|discretion|freedom|liberty|right|rights|silence|priority|necessity|requirement|limit|limits|position|location|reference|error|deviation|advantage|poverty|truth|confidence|trust|ownership|immunity|ban|bans|privilege|and"]
+  evidence: own
+  confidence: medium
+  why: The intensifying adjective; "absolute" keeps its technical and political senses (absolute value, absolute zero, absolute Despotism).
+
+- decision: add_entry
+  candidate: didn't come down in the last shower
+  entry:
+    id: didnt-come-down-in-the-last-shower
+    form: "{subj} didn't come down in the last shower"
+    concept: [NEW:NOT_NAIVE]
+    frame: clause
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Not born yesterday; too knowing to be fooled.
+    sources: [https://en.wiktionary.org/wiki/come_down_in_the_last_shower]
+  new_concept:
+    id: NOT_NAIVE
+    description: Not gullible; not easily fooled.
+    triggers:
+      clause: ["{subj} wasn't born yesterday", "{subj} weren't born yesterday", "{subj} {be} not naive", "{subj} {be} no fool"]
+  evidence: own
+  confidence: high
+  why: One sense only.
+
+- decision: add_entry
+  candidate: do a bradbury
+  entry:
+    id: do-a-bradbury
+    form: do a Bradbury
+    concept: [NEW:WIN_FROM_NOWHERE]
+    frame: vp
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: Win against all odds when everyone ahead falls over (after skater Steven Bradbury's 2002 Olympic gold).
+    sources: [https://en.wiktionary.org/wiki/do_a_Bradbury]
+  new_concept:
+    id: WIN_FROM_NOWHERE
+    description: Win unexpectedly, against the odds.
+    triggers:
+      vp: [win against all odds, win against the odds, come from nowhere to win, snatch an unlikely victory]
+  evidence: own
+  confidence: high
+  why: 'An idiom, not a name: it means the win, not the man.'
+
+- decision: add_entry
+  candidate: emu bob
+  entry:
+    id: an-emu-bob
+    form: an emu bob
+    variants: [an emu parade]
+    concept: [NEW:LITTER_PICK]
+    frame: np
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: A line of people walking across ground picking up litter (an emu parade at school).
+    sources: [https://en.wiktionary.org/wiki/emu_parade]
+  new_concept:
+    id: LITTER_PICK
+    description: A line of people walking an area picking up litter.
+    triggers:
+      np: [litter pick, litter pick-up, litter patrol, litter sweep]
+  evidence: own
+  confidence: medium
+  why: Only litter phrasings.
+
+- decision: add_entry
+  candidate: fossick
+  entry:
+    id: fossick-around
+    form: fossick around
+    concept: [NEW:RUMMAGE]
+    frame: vp
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Rummage about looking for something (first said of prospecting for gold).
+    sources: [https://en.wiktionary.org/wiki/fossick]
+  new_concept:
+    id: RUMMAGE
+    description: Search by rummaging about (intransitive).
+    triggers:
+      vp: [rummage around, rummage about, root around, root about]
+  evidence: own
+  confidence: high
+  why: Not "poke around" (snooping, SNOOP's).
+
+- decision: add_entry
+  candidate: fossick (through)
+  entry:
+    id: fossick-through
+    form: fossick through {np}
+    concept: [NEW:RUMMAGE_THROUGH]
+    frame: vp
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Rummage through something looking for what's in it.
+    sources: [https://en.wiktionary.org/wiki/fossick]
+  new_concept:
+    id: RUMMAGE_THROUGH
+    description: Rummage through something.
+    triggers:
+      vp: ["rummage through {np}", "root through {np}", "rifle through {np}"]
+  evidence: own
+  confidence: high
+  why: The transitive use.
+
+- decision: add_entry
+  candidate: full-on
+  entry:
+    id: full-on
+    form: full-on
+    concept: [NEW:INTENSE]
+    frame: predicate_adj
+    intensity: 4
+    incoherence: 2
+    register: current
+    gloss: Intense, hectic, a lot to deal with ("it's been a full-on week").
+    sources: [https://en.wiktionary.org/wiki/full-on]
+  new_concept:
+    id: INTENSE
+    description: Intense, hectic, demanding.
+    triggers:
+      predicate_adj: [intense, really intense, hectic, a lot to deal with, a lot to handle]
+  evidence: own
+  confidence: medium
+  why: Not "overwhelming", whose evidence sense isn't full-on.
+
+- decision: add_entry
+  candidate: get knotted
+  entry:
+    id: get-knotted
+    form: get knotted
+    concept: [GO_AWAY]
+    frame: imperative
+    intensity: 3
+    incoherence: 3
+    register: dated
+    gloss: Get lost, nick off (a clean way to tell someone where to go).
+    sources: [https://en.wiktionary.org/wiki/get_knotted]
+  evidence: own
+  confidence: high
+  why: GO_AWAY's imperatives; clean, so it serves the nan cap.
+
+- decision: add_entry
+  candidate: got a guernsey
+  entry:
+    id: get-a-guernsey
+    form: get a guernsey
+    concept: [NEW:GET_SELECTED]
+    frame: vp
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: Be picked for the team, or get a mention or a role (from the footy jumper).
+  new_concept:
+    id: GET_SELECTED
+    description: Be picked for a team or a role.
+    triggers:
+      vp: [make the team, get picked for the team, get selected for the team]
+  evidence: own
+  confidence: high
+  why: Selection only.
+
+- decision: add_entry
+  candidate: happy little vegemite
+  entry:
+    id: happy-little-vegemite
+    form: a happy little Vegemite
+    concept: [CONTENT]
+    frame: predicate_adj
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: Cheerful and contented, all's right with the world (from the old jingle).
+    notes: A brand name, but the idiom is the language's now.
+  evidence: own
+  confidence: medium
+  why: CONTENT's predicate triggers (content, settled, at ease).
+
+- decision: add_entry
+  candidate: hard word
+  entry:
+    id: put-the-hard-word-on
+    form: put the hard word on {obj} for {np}
+    concept: [NEW:HIT_UP_FOR]
+    frame: vp
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: Lean on someone for something (money, a favour, a date).
+  new_concept:
+    id: HIT_UP_FOR
+    description: Ask someone insistently for money or a favour.
+    triggers:
+      vp: ["hit {obj} up for {np}", "tap {obj} for {np}"]
+  evidence: own
+  confidence: medium
+  why: Only with "for" and what's wanted, so physical leaning can't fire.
+
+- decision: add_entry
+  candidate: put the acid on
+  entry:
+    id: put-the-acid-on
+    form: put the acid on {obj} for {np}
+    concept: [HIT_UP_FOR]
+    frame: vp
+    intensity: 4
+    incoherence: 5
+    register: dated
+    gloss: Pressure someone hard for something.
+  evidence: own
+  confidence: medium
+  why: Same concept as the hard word, older.
+
+- decision: add_entry
+  candidate: hooley dooley
+  entry:
+    id: hooley-dooley
+    form: hooley dooley
+    concept: [NEW:AMAZED]
+    frame: interjection
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: Well, I'll be! (a clean, comic exclamation of surprise).
+  new_concept:
+    id: AMAZED
+    description: An exclamation of amazement (not of dismay).
+    triggers:
+      interjection: [wow, good heavens, goodness me, holy cow, well I never, golly, gosh, my goodness]
+  evidence: own
+  confidence: medium
+  why: 'Amazement only: under SURPRISE it took "Oh dear," he thought (dismay).'
+
+- decision: add_entry
+  candidate: hooning
+  entry:
+    id: hoon-around
+    form: hoon around
+    concept: [NEW:HOON_DRIVE]
+    frame: vp
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Drive (or carry on) fast, loud and reckless to show off.
+    sources: [https://en.wiktionary.org/wiki/hoon]
+  new_concept:
+    id: HOON_DRIVE
+    description: Drive recklessly to show off.
+    triggers:
+      vp: [drive recklessly, go joyriding, do burnouts, drive like a maniac, drive like a lunatic]
+  evidence: own
+  confidence: high
+  why: Reckless driving only.
+
+- decision: add_entry
+  candidate: hughie
+  entry:
+    id: send-her-down-hughie
+    form: send her down, Hughie
+    concept: [NEW:LET_IT_RAIN]
+    frame: interjection
+    intensity: 3
+    incoherence: 5
+    register: dated
+    gloss: A farmer's call for rain (or a surfer's for waves) to Hughie, the weather god.
+    sources: [https://en.wiktionary.org/wiki/Hughie]
+  new_concept:
+    id: LET_IT_RAIN
+    description: A call for rain to come.
+    triggers:
+      interjection: [let it rain, bring on the rain]
+  evidence: own
+  confidence: medium
+  why: Rain calls only.
+
+- decision: add_entry
+  candidate: king-hit
+  entry:
+    id: a-king-hit
+    form: a king hit
+    variants: [a king-hit]
+    concept: [NEW:SUCKER_PUNCH]
+    frame: np
+    intensity: 4
+    incoherence: 2
+    register: current
+    gloss: A heavy punch thrown without warning, often from behind (now also called a coward punch).
+    sources: [https://en.wiktionary.org/wiki/king_hit]
+  new_concept:
+    id: SUCKER_PUNCH
+    description: An unprovoked punch thrown without warning.
+    triggers:
+      np: [sucker punch, sucker-punch]
+  evidence: own
+  confidence: high
+  why: One sense only.
+
+- decision: add_entry
+  candidate: lairy
+  entry:
+    id: lairy
+    form: lairy
+    concept: [SHOWY]
+    frame: adj
+    intensity: 3
+    incoherence: 3
+    register: current
+    replaces: [garish, gaudy]
+    gloss: Loud and flashy (of clothes), or brash and cocky (of a person).
+    sources: [https://en.wiktionary.org/wiki/lairy]
+  evidence: own
+  confidence: high
+  why: SHOWY's triggers plus garish and gaudy.
+
+- decision: add_entry
+  candidate: mallee bull
+  entry:
+    id: strong-as-a-mallee-bull
+    form: as strong as a Mallee bull
+    variants: [as fit as a Mallee bull]
+    concept: [NEW:STRONG_FIT]
+    frame: predicate_adj
+    intensity: 4
+    incoherence: 4
+    register: current
+    gloss: Very strong and fit (of a person).
+  new_concept:
+    id: STRONG_FIT
+    description: Very strong and fit (of a person).
+    person: true
+    triggers:
+      predicate_adj: [strong as an ox, as strong as an ox, strong as a horse, as strong as a horse, fit as a fiddle, as fit as a fiddle]
+  evidence: own
+  confidence: high
+  why: Similes for a person's strength only.
+
+- decision: add_entry
+  candidate: miserable as a bandicoot
+  entry:
+    id: miserable-as-a-bandicoot
+    form: as miserable as a bandicoot
+    concept: [SAD]
+    frame: predicate_adj
+    intensity: 4
+    incoherence: 5
+    register: dated
+    gloss: Thoroughly miserable.
+    sources: [https://en.wiktionary.org/wiki/bandicoot]
+  evidence: own
+  confidence: medium
+  why: SAD's predicate triggers; level 5, dated.
+
+- decision: add_entry
+  candidate: not a drama
+  entry:
+    id: not-a-drama
+    form: not a drama
+    concept: [NO_PROBLEM]
+    frame: interjection
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: No problem at all.
+  evidence: own
+  confidence: high
+  why: NO_PROBLEM's interjections.
+
+- decision: add_entry
+  candidate: not know if you're arthur or martha
+  entry:
+    id: arthur-or-martha
+    form: "{subj} {do}n't know if {subj} {be} Arthur or Martha"
+    concept: [NEW:FLUSTERED]
+    frame: clause
+    intensity: 4
+    incoherence: 4
+    register: current
+    gloss: So flustered or muddled you don't know which way is up.
+  new_concept:
+    id: FLUSTERED
+    description: Utterly flustered and muddled.
+    triggers:
+      clause: ["{subj} {be} completely confused", "{subj} {be} totally confused", "{subj} {be} all at sea",
+               "{subj} {be} in a complete muddle", "{subj} {do}n't know whether {subj} {be} coming or going"]
+  evidence: own
+  confidence: medium
+  why: Strong confusion only, not plain "confused" (DAZED keeps that).
+
+- decision: add_entry
+  candidate: not within a bull's roar
+  entry:
+    id: not-within-a-bulls-roar
+    form: not within a bull's roar of the
+    concept: [NEW:NOWHERE_NEAR]
+    frame: adv
+    intensity: 4
+    incoherence: 4
+    register: current
+    gloss: Nowhere near (in distance or in achievement).
+  new_concept:
+    id: NOWHERE_NEAR
+    description: Nowhere near (a place or a goal), before "the".
+    triggers:
+      adv: ["nowhere near the !same|level|standard|quality|amount|number|size|kind"]
+  evidence: own
+  confidence: medium
+  why: Only before "the" + a place or goal; "nowhere near enough" and "nowhere near as good" are degree, not distance.
+
+- decision: add_entry
+  candidate: ocker
+  entry:
+    id: ocker-adj
+    form: ocker
+    concept: [NEW:BROAD_AUSSIE]
+    frame: adj
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Broadly, unashamedly Australian in speech and manner (an ocker accent).
+    sources: [https://en.wiktionary.org/wiki/ocker]
+  new_concept:
+    id: BROAD_AUSSIE
+    description: Broadly, stereotypically Australian (before a noun).
+    triggers:
+      adj: [broad Australian, stereotypically Australian]
+  evidence: own
+  confidence: high
+  why: Only those modifiers.
+
+- decision: add_entry
+  candidate: off like a bride's nightie
+  entry:
+    id: off-like-a-brides-nightie
+    form: off like a bride's nightie
+    concept: [NEW:OFF_IN_A_FLASH]
+    frame: predicate_adj
+    intensity: 4
+    vulgarity: 1
+    incoherence: 4
+    register: current
+    gloss: Gone in a flash.
+    notes: Innuendo, rated 1.
+    sources: [https://en.wiktionary.org/wiki/off_like_a_bride%27s_nightie]
+  new_concept:
+    id: OFF_IN_A_FLASH
+    description: Gone or away in a flash.
+    triggers:
+      predicate_adj: [off like a shot, off in a flash, gone in a flash, gone like a shot]
+  evidence: own
+  confidence: high
+  why: Speed of leaving only.
+
+- decision: add_entry
+  candidate: pash
+  entry:
+    id: pash-obj
+    form: pash {obj}
+    concept: [NEW:MAKE_OUT]
+    frame: vp
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Kiss someone long and passionately.
+    sources: [https://en.wiktionary.org/wiki/pash]
+  new_concept:
+    id: MAKE_OUT
+    description: Kiss someone passionately.
+    triggers:
+      vp: ["make out with {obj}", "snog {obj}", "kiss {obj} passionately"]
+  evidence: own
+  confidence: high
+  why: Not bare "make out" (make out a shape, a cheque).
+
+- decision: add_entry
+  candidate: pig's bum
+  entry:
+    id: pigs-bum
+    form: pig's bum
+    concept: [DREAM_ON]
+    frame: interjection
+    intensity: 4
+    incoherence: 4
+    register: current
+    gloss: Rubbish! No way! (the cleaner cousin of pig's arse).
+  evidence: own
+  confidence: medium
+  why: DREAM_ON's dismissals (you must be joking), not DISAGREE's bare "no" ("No, I didn't see it").
+
+- decision: add_entry
+  candidate: piker
+  entry:
+    id: pike-out
+    form: pike out
+    concept: [NEW:BACK_OUT]
+    frame: vp
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Pull out of a plan or a night out; not see it through.
+    sources: [https://en.wiktionary.org/wiki/piker]
+  new_concept:
+    id: BACK_OUT
+    description: Withdraw from a plan or commitment.
+    triggers:
+      vp: [pull out at the last minute, chicken out]
+  evidence: own
+  confidence: medium
+  why: Not "back out", which is also reversing a car.
+
+- decision: add_entry
+  candidate: piker (the noun)
+  entry:
+    id: a-piker
+    form: a piker
+    concept: [NEW:FLAKE]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Someone who pikes out; won't join in or keeps pulling out.
+    sources: [https://en.wiktionary.org/wiki/piker]
+  new_concept:
+    id: FLAKE
+    description: An unreliable person who backs out of plans.
+    triggers:
+      np: ["a flake !of", a flaky friend, a no-show]
+  evidence: own
+  confidence: medium
+  why: Not "a flake of snow".
+
+- decision: add_entry
+  candidate: piss weak
+  entry:
+    id: piss-weak
+    form: piss weak
+    concept: [NEW:PATHETIC]
+    frame: predicate_adj
+    intensity: 4
+    vulgarity: 2
+    incoherence: 3
+    register: current
+    gloss: Feeble, gutless, a poor effort; of a drink, watery.
+    sources: [https://en.wiktionary.org/wiki/piss-weak]
+  new_concept:
+    id: PATHETIC
+    description: Feeble, pathetic, a poor effort.
+    triggers:
+      predicate_adj: [pathetic, feeble, pitiful, a poor effort, weak as water]
+  evidence: own
+  confidence: high
+  why: Not plain "weak" (feeling weak is ill, not piss weak).
+
+- decision: add_entry
+  candidate: porky
+  entry:
+    id: a-porky
+    form: a porky
+    plural: porkies
+    concept: [NEW:A_LIE]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: 'A lie (rhyming slang: porky pie).'
+    sources: [https://en.wiktionary.org/wiki/porky]
+  new_concept:
+    id: A_LIE
+    description: A lie, a fib (the noun).
+    triggers:
+      np: [a fib, "a lie !detector|detectors|down|in|to"]
+  evidence: own
+  confidence: medium
+  why: Not a lie detector or a lie-down.
+
+- decision: add_entry
+  candidate: raw prawn
+  entry:
+    id: dont-come-the-raw-prawn
+    form: don't come the raw prawn with me
+    concept: [NEW:DONT_FOOL_ME]
+    frame: imperative
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Don't try to put one over me.
+    sources: [https://en.wiktionary.org/wiki/come_the_raw_prawn]
+  new_concept:
+    id: DONT_FOOL_ME
+    description: Don't try to fool me; do you take me for a fool?
+    triggers:
+      imperative: [don't try to fool me, don't try to con me, don't try to trick me, don't play dumb with me, don't take me for a fool]
+      interjection: [do you think I'm stupid, do you take me for a fool, do you think I'm an idiot, what do you take me for]
+  evidence: own
+  confidence: high
+  why: One sense only.
+
+- decision: add_entry
+  candidate: what do you think this is, bush week?
+  entry:
+    id: bush-week
+    form: what do ya think this is, bush week?
+    concept: [DONT_FOOL_ME]
+    frame: interjection
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: Do you take me for a mug? (said to someone trying it on).
+    sources: [https://en.wiktionary.org/wiki/bush_week]
+  evidence: own
+  confidence: medium
+  why: DONT_FOOL_ME's questions.
+
+- decision: add_entry
+  candidate: rough as guts
+  entry:
+    id: rough-as-guts
+    form: rough as guts
+    concept: [UNCOUTH]
+    frame: predicate_adj
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Crude and unpolished, of a person or of a job.
+  evidence: own
+  confidence: high
+  why: UNCOUTH's triggers, beside rough as bags.
+
+- decision: add_entry
+  candidate: rough end of the pineapple
+  entry:
+    id: rough-end-of-the-pineapple
+    form: get the rough end of the pineapple
+    concept: [NEW:RAW_DEAL]
+    frame: vp
+    intensity: 4
+    incoherence: 3
+    register: current
+    gloss: Get the worst of a deal; be treated unfairly.
+    sources: [https://en.wiktionary.org/wiki/rough_end_of_the_pineapple]
+  new_concept:
+    id: RAW_DEAL
+    description: Be treated unfairly; get the worst of it.
+    triggers:
+      vp: [get a raw deal, get the short end of the stick, get the rough end of the stick]
+  evidence: own
+  confidence: high
+  why: One sense only.
+
+- decision: add_entry
+  candidate: schmick
+  entry:
+    id: schmick
+    form: schmick
+    concept: [NEW:SPIFFY]
+    frame: predicate_adj
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Neat, smart and in tip-top condition.
+    sources: [https://en.wiktionary.org/wiki/schmick]
+  new_concept:
+    id: SPIFFY
+    description: Neat, stylish and in top condition.
+    triggers:
+      predicate_adj: [spick and span, immaculate, spiffy, snazzy, in mint condition]
+  evidence: own
+  confidence: medium
+  why: Not "spotless" (a spotless record isn't schmick).
+
+- decision: add_entry
+  candidate: shoey
+  entry:
+    id: do-a-shoey
+    form: do a shoey
+    concept: [NEW:SHOEY]
+    frame: vp
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Drink beer (or bubbly) out of your shoe, as a celebration.
+    sources: [https://en.wiktionary.org/wiki/shoey]
+  new_concept:
+    id: SHOEY
+    description: Drink out of one's shoe in celebration.
+    triggers:
+      vp: [drink out of a shoe, drink from a shoe, drink beer out of a shoe, drink champagne out of a shoe]
+  evidence: own
+  confidence: high
+  why: One sense only.
+
+- decision: add_entry
+  candidate: sledging
+  entry:
+    id: sledging
+    form: sledging
+    concept: [NEW:TRASH_TALK]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Needling an opponent to put them off their game (cricket's word, now any sport's).
+    sources: [https://en.wiktionary.org/wiki/sledging]
+  new_concept:
+    id: TRASH_TALK
+    description: Taunting opponents to unsettle them (the noun).
+    triggers:
+      np: [trash talk, trash-talk, trash talking, trash-talking]
+  evidence: own
+  confidence: high
+  why: One sense only; MOCK's "sledge {obj}" stays the verb.
+
+- decision: add_entry
+  candidate: sprung
+  entry:
+    id: sprung
+    form: sprung
+    concept: [NEW:CAUGHT_OUT]
+    frame: predicate_adj
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Caught in the act, found out.
+    sources: [https://en.wiktionary.org/wiki/sprung]
+  new_concept:
+    id: CAUGHT_OUT
+    description: Caught in the act; found out.
+    person: true
+    triggers:
+      predicate_adj: [caught red-handed, caught in the act]
+  evidence: own
+  confidence: high
+  why: Caught-in-the-act phrasings only, never the spring of a trap.
+
+- decision: add_entry
+  candidate: straight to the pool room
+  entry:
+    id: straight-to-the-pool-room
+    form: that's going straight to the pool room
+    concept: [NEW:TREASURE_IT]
+    frame: interjection
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: I'll treasure it (from The Castle, where every prize goes on show in the pool room).
+  new_concept:
+    id: TREASURE_IT
+    description: I'll treasure it (said of a gift or keepsake).
+    triggers:
+      interjection: [I'll treasure it forever, I'll treasure it always, I will treasure it forever, I'll treasure this forever]
+  evidence: own
+  confidence: medium
+  why: The treasuring line only.
+
+- decision: add_entry
+  candidate: tell him he's dreamin
+  entry:
+    id: tell-him-hes-dreamin
+    form: tell him he's dreamin'
+    concept: [NEW:TELL_HIM_DREAMING]
+    frame: interjection
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Not a chance, dream on (from The Castle, said of a lowball offer).
+  new_concept:
+    id: TELL_HIM_DREAMING
+    description: Tell him (them) to dream on; the offer is laughable.
+    triggers:
+      interjection: [tell him to dream on, tell them to dream on, tell him he's dreaming]
+  evidence: own
+  confidence: high
+  why: Third person only; DREAM_ON's "you must be joking" is said to "you", where "tell him" would be the wrong person.
+
+- decision: add_entry
+  candidate: true blue
+  entry:
+    id: true-blue
+    form: true blue
+    concept: [NEW:LOYAL]
+    frame: predicate_adj
+    intensity: 4
+    incoherence: 2
+    register: current
+    gloss: Loyal and genuine to the core; dinkum Aussie.
+    sources: [https://en.wiktionary.org/wiki/true_blue]
+  new_concept:
+    id: LOYAL
+    description: Loyal and dependable to the core (of a person).
+    person: true
+    triggers:
+      predicate_adj: [loyal ^person, fiercely loyal ^person, utterly loyal ^person, dependable ^person, staunch ^person]
+  evidence: own
+  confidence: medium
+  why: People only; not GENUINE, whose triggers include genuine leather.
+
+- decision: add_entry
+  candidate: uey
+  entry:
+    id: chuck-a-uey
+    form: chuck a uey
+    variants: [chuck a U-ey, chuck a youie]
+    concept: [NEW:U_TURN]
+    frame: vp
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Make a U-turn.
+    sources: [https://en.wiktionary.org/wiki/uey]
+  new_concept:
+    id: U_TURN
+    description: Make a U-turn.
+    triggers:
+      vp: [make a U-turn, do a U-turn, pull a U-turn, hang a U-turn, make a u-turn, do a u-turn]
+  evidence: own
+  confidence: high
+  why: One sense; a political U-turn reads fine too.
+
+- decision: add_entry
+  candidate: unreal
+  entry:
+    id: unreal
+    form: unreal
+    concept: [GREAT_EXCLAIM]
+    frame: interjection
+    intensity: 4
+    incoherence: 2
+    register: current
+    gloss: Fantastic! (as an exclamation).
+    sources: [https://en.wiktionary.org/wiki/unreal]
+  evidence: own
+  confidence: high
+  why: The exclamation only.
+
+- decision: add_entry
+  candidate: veggo
+  entry:
+    id: a-veggo
+    form: a veggo
+    concept: [NEW:VEGETARIAN]
+    frame: predicate_adj
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: A vegetarian.
+    sources: [https://en.wiktionary.org/wiki/veggo]
+  new_concept:
+    id: VEGETARIAN
+    description: A vegetarian (the person).
+    person: true
+    triggers:
+      predicate_adj: [vegetarian ^person, "a vegetarian ^person !chef|chefs|cook|cooks|restaurant|restaurants|cafe|cafes|option|options|meal|meals|dish|dishes|diet|diets|lasagne|lasagna|burger|burgers|pizza|menu|menus|recipe|recipes|alternative|version|society|activist|activists|household|family|place"]
+  evidence: own
+  confidence: medium
+  why: 'The person, as a predicate ("she is vegetarian"), so a vegetarian lasagne or chef stays.'
+
+- decision: add_entry
+  candidate: wag
+  entry:
+    id: wag-school
+    form: wag school
+    concept: [NEW:TRUANT]
+    frame: vp
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Skip school without leave.
+    sources: [https://en.wiktionary.org/wiki/wag]
+  new_concept:
+    id: TRUANT
+    description: Stay away from school without leave.
+    triggers:
+      vp: [skip school, play hooky, play truant, ditch school, bunk off school, skip class, cut class]
+  evidence: own
+  confidence: high
+  why: School only.
+
+- decision: add_entry
+  candidate: yabber
+  entry:
+    id: yabber-on
+    form: yabber on
+    concept: [TALK_ON]
+    frame: vp
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Chatter on and on.
+    sources: [https://en.wiktionary.org/wiki/yabber]
+  evidence: own
+  confidence: high
+  why: TALK_ON's triggers, beside rabbit on.
+
+- decision: add_entry
+  candidate: your blood's worth bottling
+  entry:
+    id: your-bloods-worth-bottling
+    form: your blood's worth bottling
+    concept: [WELL_DONE]
+    frame: interjection
+    intensity: 4
+    incoherence: 4
+    register: dated
+    gloss: Applause for someone who has outdone themselves (an old, warm compliment).
+  evidence: own
+  confidence: medium
+  why: WELL_DONE's interjections.
+
+- decision: add_entry
+  candidate: youse
+  entry:
+    id: youse
+    form: youse
+    concept: [NEW:YOU_PLURAL]
+    frame: np
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: You, more than one of you; the Aussie plural of you.
+    notes: Broad and working-class, so level 4; lint already suggests it for y'all and you guys.
+    sources: [https://en.wiktionary.org/wiki/youse]
+  new_concept:
+    id: YOU_PLURAL
+    description: You (plural), addressing more than one person.
+    triggers:
+      np: [you guys, "y'all", you lot, "you all !right|alright|good"]
+  evidence: own
+  confidence: medium
+  why: Not "you all right?" (are you alright).
+
+- decision: add_entry
+  candidate: bottler
+  entry:
+    id: you-little-bottler
+    form: you little bottler
+    concept: [GREAT_EXCLAIM]
+    frame: interjection
+    intensity: 4
+    incoherence: 4
+    register: dated
+    gloss: You beauty! (a bottler being anything first-rate).
+    sources: [https://en.wiktionary.org/wiki/bottler]
+  evidence: own
+  confidence: medium
+  why: GREAT_EXCLAIM's interjections, beside you little ripper.
+
+- decision: add_entry
+  candidate: captain cook
+  entry:
+    id: a-captain-cook
+    form: a Captain Cook
+    concept: [LOOK]
+    frame: np
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: 'A look (rhyming slang: have a Captain Cook).'
+    sources: [https://en.wiktionary.org/wiki/Captain_Cook]
+  evidence: own
+  confidence: high
+  why: LOOK's triggers (a look, a quick look), beside a squiz.
+
+- decision: add_entry
+  candidate: bag of fruit
+  entry:
+    id: a-bag-of-fruit
+    form: a bag of fruit
+    concept: [NEW:SUIT_CLOTHES]
+    frame: np
+    intensity: 3
+    incoherence: 5
+    register: dated
+    gloss: A suit (rhyming slang).
+    sources: [https://en.wiktionary.org/wiki/bag_of_fruit]
+  new_concept:
+    id: SUIT_CLOTHES
+    description: A man's suit (clothing, not a lawsuit or a suit of cards).
+    triggers:
+      np: [suit and tie, business suit, three-piece suit]
+  evidence: own
+  confidence: medium
+  why: Only clothing phrasings; level 5.
+
+- decision: add_entry
+  candidate: laid-back
+  entry:
+    id: laid-back
+    form: laid-back
+    variants: [laid back]
+    concept: [NEW:EASYGOING]
+    frame: predicate_adj
+    intensity: 3
+    incoherence: 1
+    register: current
+    status: gate
+    flags: [not_aussie]
+    gloss: Relaxed and easygoing by nature.
+    notes: General English; Australians say it constantly, but so does everyone. Gated at the owner's request.
+    sources: [https://en.wiktionary.org/wiki/laid-back]
+  new_concept:
+    id: EASYGOING
+    description: Relaxed and easygoing by nature (of a person).
+    person: true
+    triggers:
+      predicate_adj: [easygoing ^person, easy-going ^person, relaxed ^person, mellow ^person]
+  evidence: own
+  confidence: high
+  why: Gated not_aussie; the concept also carries the Aussie she'll-be-right attitude below.
+
+- decision: add_entry
+  candidate: laid-back (the Aussie way to say it)
+  entry:
+    id: a-shell-be-right-attitude
+    form: a she'll-be-right attitude
+    concept: [NEW:RELAXED_ATTITUDE]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: A relaxed, it'll-all-work-out attitude, sometimes to a fault.
+    sources: [https://en.wiktionary.org/wiki/she%27ll_be_right]
+  new_concept:
+    id: RELAXED_ATTITUDE
+    description: A relaxed, unworried attitude (the noun phrase).
+    triggers:
+      np: [a laid-back attitude, a relaxed attitude, a carefree attitude, a laid back attitude]
+  evidence: own
+  confidence: medium
+  why: Attitude phrasings only.
+
+# --- place names ---------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: tassie
+  entry:
+    id: tassie
+    form: Tassie
+    concept: [NEW:TASMANIA]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: Tasmania.
+    sources: [https://en.wiktionary.org/wiki/Tassie]
+  new_concept:
+    id: TASMANIA
+    description: Tasmania (the state), in speech (a narrow trigger; a bare "Tasmania" is in too many names).
+    triggers:
+      np: [the island state]
+  evidence: own
+  confidence: medium
+  why: Only "the island state"; a bare Tasmania trigger turned "the University of Tasmania" into Tassie.
+
+- decision: add_entry
+  candidate: brissie
+  entry:
+    id: brissie
+    form: Brissie
+    variants: [Brizzie]
+    concept: [NEW:BRISBANE]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Brisbane.
+    sources: [https://en.wiktionary.org/wiki/Brissie]
+  new_concept:
+    id: BRISBANE
+    description: Brisbane (the city), in speech (a narrow trigger; a bare "Brisbane" is in too many names).
+    triggers:
+      np: [the Queensland capital]
+  evidence: own
+  confidence: medium
+  why: As Tassie, only the journalist's periphrasis.
+
+# --- reference only: genuinely Australian, but no plain English worth swapping (lookup) -------------------
+- decision: add_entry
+  candidate: banana bender
+  entry:
+    id: a-banana-bender
+    form: a banana bender
+    concept: [NEW:QUEENSLANDER]
+    frame: np
+    intensity: 3
+    incoherence: 5
+    register: current
+    gloss: A Queenslander (a jocular nickname from the other states).
+    sources: [https://en.wiktionary.org/wiki/banana_bender]
+  new_concept:
+    id: QUEENSLANDER
+    description: A person from Queensland (lookup only; no safe trigger, since "Queenslander" is also a house style).
+    triggers:
+      np: [a person from Queensland]
+  evidence: own
+  confidence: high
+  why: Reference only.
+
+- decision: add_entry
+  candidate: croweater
+  entry:
+    id: a-croweater
+    form: a croweater
+    concept: [NEW:SOUTH_AUSTRALIAN]
+    frame: np
+    intensity: 3
+    incoherence: 5
+    register: current
+    gloss: A South Australian (a jocular nickname).
+    sources: [https://en.wiktionary.org/wiki/croweater]
+  new_concept:
+    id: SOUTH_AUSTRALIAN
+    description: A person from South Australia (lookup only; "a South Australian" starts many other phrases).
+    triggers:
+      np: [a person from South Australia]
+  evidence: own
+  confidence: high
+  why: Reference only.
+
+- decision: add_entry
+  candidate: drop bear
+  entry:
+    id: a-drop-bear
+    form: a drop bear
+    concept: [NEW:DROP_BEAR]
+    frame: np
+    intensity: 3
+    incoherence: 4
+    register: current
+    gloss: A ferocious koala that drops from trees onto passers-by; a leg-pull for tourists.
+    sources: [https://en.wiktionary.org/wiki/drop_bear]
+  new_concept:
+    id: DROP_BEAR
+    description: The drop bear, a made-up killer koala used to tease visitors (lookup only).
+    triggers:
+      np: [a killer koala, a carnivorous koala]
+  evidence: own
+  confidence: high
+  why: Reference only.
+
+- decision: add_entry
+  candidate: aerial ping pong
+  entry:
+    id: aerial-ping-pong
+    form: aerial ping-pong
+    concept: [NEW:AUSSIE_RULES]
+    frame: np
+    intensity: 3
+    incoherence: 5
+    register: current
+    gloss: Australian rules football, as rugby fans mock it.
+    sources: [https://en.wiktionary.org/wiki/aerial_ping_pong]
+  new_concept:
+    id: AUSSIE_RULES
+    description: Australian rules football, mockingly (lookup only; the plain name shouldn't be mocked).
+    triggers:
+      np: [Aussie rules football, as its detractors call it]
+  evidence: own
+  confidence: high
+  why: 'Reference only: swapping the game''s name would put a jibe in every match report.'
+
+- decision: add_entry
+  candidate: grey nomad
+  entry:
+    id: a-grey-nomad
+    form: a grey nomad
+    concept: [NEW:GREY_NOMAD]
+    frame: np
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: A retiree touring Australia for months or years with a caravan or motorhome.
+    sources: [https://en.wiktionary.org/wiki/grey_nomad]
+  new_concept:
+    id: GREY_NOMAD
+    description: A retiree touring long-term by caravan (lookup only).
+    triggers:
+      np: [a retired caravanner, retired caravanners]
+  evidence: own
+  confidence: high
+  why: Reference only.
+
+- decision: add_entry
+  candidate: fremantle doctor
+  entry:
+    id: the-fremantle-doctor
+    form: the Fremantle Doctor
+    concept: [NEW:FREO_DOCTOR]
+    frame: np
+    intensity: 3
+    incoherence: 4
+    register: current
+    region: [wa]
+    gloss: Perth's cooling afternoon sea breeze off the Indian Ocean.
+    sources: [https://en.wiktionary.org/wiki/Fremantle_Doctor]
+  new_concept:
+    id: FREO_DOCTOR
+    description: Perth's afternoon sea breeze (lookup only; a sea breeze elsewhere isn't it).
+    triggers:
+      np: [Perth's afternoon sea breeze]
+  evidence: own
+  confidence: high
+  why: Reference only.
+
+- decision: add_entry
+  candidate: schoolies
+  entry:
+    id: schoolies
+    form: Schoolies
+    concept: [NEW:SCHOOLIES]
+    frame: np
+    intensity: 3
+    incoherence: 2
+    register: current
+    gloss: The week of beach-town partying by school leavers after their final exams.
+    sources: [https://en.wiktionary.org/wiki/schoolies]
+  new_concept:
+    id: SCHOOLIES
+    description: School leavers' celebration week (lookup only; spring break and senior week are other things).
+    triggers:
+      np: [the school leavers' celebration week]
+  evidence: own
+  confidence: high
+  why: Reference only.
+
+- decision: add_entry
+  candidate: eshay
+  entry:
+    id: an-eshay
+    form: an eshay
+    concept: [NEW:ESHAY]
+    frame: np
+    intensity: 3
+    incoherence: 5
+    register: current
+    gloss: A young member of a street subculture of tracksuits, bum bags and mullets, with a name for petty crime.
+    sources: [https://en.wiktionary.org/wiki/eshay]
+  new_concept:
+    id: ESHAY
+    description: A young member of the eshay street subculture (lookup only; no plain equivalent).
+    triggers:
+      np: [a member of the eshay subculture]
+  evidence: own
+  confidence: medium
+  why: Reference only.
+
+- decision: add_entry
+  candidate: on the tools
+  entry:
+    id: on-the-tools
+    form: on the tools
+    concept: [NEW:ON_THE_TOOLS]
+    frame: predicate_adj
+    intensity: 3
+    incoherence: 3
+    register: current
+    gloss: Working hands-on at a trade, rather than managing or in the office.
+    sources: [https://en.wiktionary.org/wiki/on_the_tools]
+  new_concept:
+    id: ON_THE_TOOLS
+    description: Working hands-on at a trade (lookup only; no safe trigger).
+    triggers:
+      predicate_adj: [doing hands-on trade work]
+  evidence: own
+  confidence: medium
+  why: Reference only.
+
+- decision: add_entry
+  candidate: a wigwam for a goose's bridle
+  entry:
+    id: a-wigwam-for-a-gooses-bridle
+    form: a wigwam for a goose's bridle
+    concept: [NEW:MIND_YOUR_OWN]
+    frame: np
+    intensity: 3
+    incoherence: 5
+    register: dated
+    gloss: 'The fob-off answer to a nosy "what''s that?": nothing you need to know about.'
+    sources: [https://en.wiktionary.org/wiki/wigwam_for_a_goose%27s_bridle]
+  new_concept:
+    id: MIND_YOUR_OWN
+    description: An evasive answer to a nosy question about what something is (lookup only).
+    triggers:
+      np: [a thingamajig for a whatsit]
+  evidence: own
+  confidence: medium
+  why: Reference only.

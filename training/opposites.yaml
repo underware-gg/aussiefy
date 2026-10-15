@@ -1,0 +1,46 @@
+# Concepts with opposite meanings, for training only: scripts/train_embedder.py turns each pair into negatives
+# (A's triggers and glosses pushed away from B's forms, and B's from A's), so "a heap of money" stops landing
+# on *stony broke*. Static vectors put words that share a topic close together, opposite or not.
+#
+# List only true opposites, both concepts in concepts.yaml. Near misses (LUCKY / STRUGGLE, BRAND_NEW / BROKEN)
+# are left out: pushing apart things that are merely different costs recall for nothing.
+
+- [RICH, BROKE]
+- [HOT_WEATHER, FREEZING]
+- [SCORCHING, FREEZING]
+- [HAPPY, SAD]
+- [HAPPY, DISAPPOINTED]
+- [CONTENT, FED_UP]
+- [BUSY, SLACK_OFF]
+- [WORK_HARD, SLACK_OFF]
+- [WORK_HARD, LAZY]
+- [EXCELLENT, AWFUL]
+- [GOOD, AWFUL]
+- [GOOD_PERSON, SCOUNDREL]
+- [GENUINE, DODGY]
+- [A_LOT, NOTHING]
+- [EVERYTHING, NOTHING]
+- [AGREE, DISAGREE]
+- [AFFIRM, DENY]
+- [EASY, IMPOSSIBLE]
+- [VIABLE, NO_CHANCE]
+- [DEFINITELY, NO_CHANCE]
+- [DEFINITELY, DOUBT_IT]
+- [ARRIVE, LEAVE]
+- [GREETING, GOODBYE]
+- [GREETING, SAY_GOODBYE]
+- [HUNGRY, FULL]
+- [BRAVE, SCARED]
+- [ALIVE, DIE]
+- [CALM_DOWN, LOSE_TEMPER]
+- [FAR_AWAY, HEREABOUTS]
+# 1.2.0: opposites among the concepts the 2026-10-11 gap-fill round added (a new concept needs its pairs here,
+# or the model has no reason to keep it away from its opposite)
+- [RICH, POOR]
+- [RICH, PENNY]
+- [LOT_OF_MONEY, BROKE]
+- [LOT_OF_MONEY, PENNY]
+- [LOT_OF_MONEY, POOR]
+- [LUCKY, UNLUCKY]
+- [ATTRACTIVE, UGLY]
+- [SHARP, STUPID]

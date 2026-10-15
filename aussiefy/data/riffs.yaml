@@ -1,0 +1,117 @@
+# Riffs: the image an Aussie term brings to mind, beyond what it means.
+#
+# A wheelie bin means a rubbish bin, but to an Australian it calls up the bin chickens raiding it. That
+# association is what makes "Wheelie bins overflowin', bin chickens fightin' over the scraps!" land, and
+# it isn't translation: it's colour that hangs off a word already in the text.
+#
+# Keyed by entry id. Each riff is written to follow its term after a comma ("wheelie bins, <riff>"), and
+# works for one or many. Each has a tone: comic (a laugh), grim (bleak) or plain (just a picture). The
+# text's mood pulls the choice like gravity, not a fence: in a solemn text (Gettysburg) a comic riff is a
+# quarter as likely, likewise a grim one in a light text, and plan marks which riffs suit the mood.
+# lookup and plan offer them as optional colour; at level 5 the engine may attach one where the term ends
+# a clause (profiles.yaml `riff`). Swearing in a riff is rated from swears.yaml,
+# so riffs over the vulgarity cap are never offered.
+
+wheelie-bin:
+  - {text: "overflowin', bin chickens fightin' over the scraps", tone: comic}
+  - {text: "tipped over in the gutter", tone: plain}
+  - {text: "rottin' in the heat", tone: grim}
+bin-chicken:
+  - {text: "headfirst in a wheelie bin", tone: comic}
+  - {text: "nickin' chips off some poor bugger's plate", tone: comic}
+footpath:
+  - {text: "cracked to buggery", tone: plain}
+  - {text: "hot enough to fry an egg on", tone: comic}
+the-pollies:
+  - {text: "standin' about like stunned mullets", tone: comic}
+  - {text: "all piss and wind", tone: comic}
+  - {text: "with their snouts in the trough", tone: comic}
+pollie:
+  - {text: "standin' about like stunned mullets", tone: comic}
+  - {text: "all mouth and no trousers", tone: comic}
+parliament-house:
+  - {text: "full of pollies flappin' their gums", tone: comic}
+the-big-smoke:
+  - {text: "all traffic, tolls and coffee at six bucks a pop", tone: comic}
+  - {text: "choked in its own smog", tone: grim}
+the-bush:
+  - {text: "miles from the nearest servo", tone: plain}
+  - {text: "nothin' but flies and gum trees", tone: plain}
+  - {text: "burnt black as far as ya can see", tone: grim}
+creek:
+  - {text: "bone dry half the year", tone: plain}
+the-tip:
+  - {text: "with the seagulls and the bin chickens havin' a field day", tone: comic}
+  - {text: "smoulderin' away", tone: grim}
+clink:
+  - {text: "where they throw away the key", tone: grim}
+slammer:
+  - {text: "where they throw away the key", tone: grim}
+lock-up:
+  - {text: "where they throw away the key", tone: grim}
+loony-bin:
+  - {text: "with the walls padded and the doors locked", tone: grim}
+ankle-biter:
+  - {text: "sticky fingers and all", tone: comic}
+  - {text: "runnin' rings round their mum", tone: comic}
+  - {text: "snotty-nosed and barefoot", tone: grim}
+old-codger:
+  - {text: "complainin' it was better in his day", tone: comic}
+  - {text: "sittin' on his own on a park bench", tone: grim}
+young-fella:
+  - {text: "barely out of short pants", tone: grim}
+burb:
+  - {text: "all brick veneer and Hills Hoists", tone: plain}
+  - {text: "every house the same and every blind drawn", tone: grim}
+unit:
+  - {text: "walls so thin ya can hear next door clip their toenails", tone: comic}
+  - {text: "stacked up like battery hens", tone: grim}
+esky:
+  - {text: "full of tinnies and half a bag of ice", tone: plain}
+stubby:
+  - {text: "sweatin' in the heat", tone: plain}
+grog:
+  - {text: "enough to sink a battleship", tone: comic}
+barbie:
+  - {text: "snags burnin' and the flies havin' a go", tone: comic}
+servo:
+  - {text: "with a pie that's been in the warmer since Tuesday", tone: comic}
+ute:
+  - {text: "with a kelpie in the tray", tone: plain}
+mozzie:
+  - {text: "big enough to carry off a small dog", tone: comic}
+dunny:
+  - {text: "out the back with a redback under the seat", tone: comic}
+wireless:
+  - {text: "crackling away in the corner", tone: plain}
+quid:
+  - {text: "not a brass razoo to yer name", tone: plain}    # not "to rub together": that's two bob
+the-folding-stuff:
+  - {text: "pumpin' through its veins", tone: grim}
+dosh:
+  - {text: "burnin' a hole in their pocket", tone: comic}
+skint:
+  - {text: "not two bob to rub together", tone: plain}
+ticker:
+  - {text: "goin' like the clappers", tone: comic}
+drongo:
+  - {text: "couldn't organise a piss-up in a brewery", tone: comic}
+galah:
+  - {text: "squawkin' its head off", tone: comic}
+bludger:
+  - {text: "never done a day's yakka in their life", tone: comic}
+roo:
+  - {text: "starin' down the headlights", tone: grim}
+footy:
+  - {text: "with the whole town down at the oval", tone: plain}
+bucketing-down:
+  - {text: "like a cow pissin' on a flat rock", tone: comic}
+like-a-stunned-mullet:
+  - {text: "mouth open, not a thought in its head", tone: comic}
+hard-yakka:
+  - {text: "sun on yer neck and blisters on yer hands", tone: plain}
+stoush-war:
+  - {text: "fists flyin' and nobody backin' down", tone: plain}
+  - {text: "with the young blokes comin' home in boxes", tone: grim}
+the-joint:
+  - {text: "like they owned the place", tone: comic}

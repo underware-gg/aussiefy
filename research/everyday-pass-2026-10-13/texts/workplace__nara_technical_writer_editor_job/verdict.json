@@ -1,0 +1,173 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 3,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 1,
+   "tone": 4,
+   "flow": 3,
+   "variety": 1,
+   "essence": 3
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every duty, condition and qualification survives: GS-12 duties, the Status Candidates announcement, pro rata part-time, probation, background check, Selective Service, PIV with \"two forms of ID from the Form i-9\", the GS-09 experience, education and combination routes, the 15 semester hours note, and the additional information. \"telework\" becomes \"the chance to work from home\", which narrows it slightly.",
+   "sense": "\"all the program goals get ticked off\" fits (done), though \"ticked off\" can also read as annoyed; \"postgrad\", \"pass a background check\", \"put down how many hours a week\" fit. \"work from home\" narrows \"telework\".",
+   "authenticity": "Natural plain Australian: \"Here's what the job involves at the GS-12\", \"part-time work gets counted pro rata\", \"You've gotta pass a background check\", \"Have a look at that announcement\".",
+   "register": "A friendly level-3 retelling of a dense federal job ad, with colloquial touches throughout (\"If you get picked\", \"You've gotta\", \"postgrad\") and no swearing. Right weight for a job posting at level 3.",
+   "tone": "Keeps the job ad's informative, requirement-laden character, just chattier: \"You must be a U.S. Citizen or U.S. National.\"",
+   "flow": "Reads smoothly: \"Manage the work, whether you're doing it on your own, as part of a team, or leading others, so all documents get published on time and accurately\".",
+   "variety": "\"get picked\", \"ticked off\", \"look after\", \"pro rata\", \"put down\", \"gotta\", \"spotting and working through\", \"coming up with fixes\", \"postgrad\"; \"You've gotta\" twice and \"Have a look\" twice.",
+   "essence": "Unmistakably the NARA writer-editor posting, every section in order."
+  },
+  "yarn": {
+   "meaning": "Every point survives, carefully: \"part-time work is counted pro rata\", \"born after 31 December 1959\", \"We offer the chance to telework (work remotely)\".",
+   "sense": "\"new starters\", \"get through a background check\", \"Getting information across effectively\", \"Spotting and analysing production problems\" all fit.",
+   "authenticity": "Natural Australian plain English: \"all new starters in the U.S.\", \"organisations\", \"31 December 1959\". Nothing forced; very little vernacular.",
+   "register": "Mostly Australian-standard plain English with almost no slang (\"Please check that announcement for details on the open period, who's eligible, and how to apply.\"), lighter than level 3.",
+   "tone": "The formal-but-plain job ad tone is intact: \"You must meet the following requirements by the closing date of this announcement.\"",
+   "flow": "Smooth: \"Fill in a Declaration for Federal Employment, when the agency asks for it, so they can decide whether you're suitable for Federal employment.\"",
+   "variety": "Little slang to vary; \"picked\", \"get through\", \"new starters\", \"Getting information across\"; no repetition noticed.",
+   "essence": "Clearly the same job posting, in Australian plain English."
+  },
+  "engine": {
+   "meaning": "Near-verbatim, but two swaps change the meaning: \"gained in either the punters, private sector or volunteer service\" (public sector becomes punters) and \"in an appropriate scientific, technical, or social science paddock(s)\".",
+   "sense": "\"punters\" for \"public\" (sector) and \"paddock(s)\" for academic \"field(s)\" are both wrong senses; \"new starters\" fits.",
+   "authenticity": "No Australian would write \"social science paddock(s)\" or \"the punters, private sector\"; otherwise the US text is untouched (\"Specialized Experience\", \"Recognizing\").",
+   "register": "Effectively the original (\"Properly manipulate the contents of documents and of Federal Register publications\"), far below level 3.",
+   "tone": "The formal tone survives, though \"paddock(s)\" makes the qualification note faintly ridiculous.",
+   "flow": "Reads as the original, including its errors (\"prior to developed for publication\"), plus the jarring \"either the punters, private sector\".",
+   "variety": "Only \"punters\", \"paddock\" (twice) and \"new starters\".",
+   "essence": "It is the original posting, unretold."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "We offer the chance to work from home, as per Agency policy.",
+    "original": "We offer opportunities for telework, per Agency policy.",
+    "severity": "minor",
+    "why": "Telework can be any remote location, not only home."
+   },
+   {
+    "quote": "all the program goals get ticked off",
+    "original": "accomplish all program goals",
+    "severity": "minor",
+    "why": "\"ticked off\" can be read as \"annoyed\"; \"ticked off the list\" would be clearer."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Understand and properly deal with customer needs across every part of the Federal Register publication process, in carrying out the Office of the Federal Register's program responsibilities.",
+    "original": "Understand and appropriately address customer needs associated with all aspects of the Federal Register publication process in fulfillment of the Office of the Federal Register's program responsibilities.",
+    "severity": "minor",
+    "why": "Plain rewording with little Aussie flavour; lighter than the level-3 brief."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "gained in either the punters, private sector or volunteer service",
+    "original": "gained in either the public, private sector or volunteer service",
+    "severity": "critical",
+    "why": "\"public sector\" turned into \"punters\" (customers or gamblers); the eligible experience becomes nonsense."
+   },
+   {
+    "quote": "social science paddock(s)",
+    "original": "social science field(s)",
+    "severity": "major",
+    "why": "\"paddock\" is a farm field, never an academic field."
+   },
+   {
+    "quote": "Properly manipulate the contents of documents and of Federal Register publications to ensure legally effective, timely, and accurate publication of them.",
+    "original": "Properly manipulate the contents of documents and of Federal Register publications to ensure legally effective, timely, and accurate publication of them.",
+    "severity": "major",
+    "why": "Left untranslated, like nearly all the text."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A natural, faithful level-3 retelling of a dense job ad.",
+  "yarn": "A careful Australian plain-English version, faithful and smooth, but lighter than level 3.",
+  "engine": "The original posting with two wrong-sense word swaps (\"punters\", \"paddock\") and nothing else retold."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,1084 @@
+- decision: reject
+  candidate: ready
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- candidate: autumn
+  decision: americanism
+  us: in the fall
+  australian: in autumn
+  why: Only the phrase forms ("in the fall", "this/last/next fall", "fall season") are safe; bare "fall" is a verb and noun too.
+- decision: reject
+  candidate: creeks
+  reason: duplicate
+  why: 'Existing form: creek is STREAM''s form; "stream" is already a trigger.'
+- decision: reject
+  candidate: handed
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- candidate: meant
+  decision: style_guide
+  guidance: Prefer "meant to" over "supposed to" ("I was meant to leave it") -- the usual Australian/British choice.
+  why: A grammatical preference, not a slang term; a global swap is fine but not as a dictionary entry.
+- decision: reject
+  candidate: publishing
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: teaming up
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: a bandanna
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- candidate: a doddle
+  decision: gate
+  entry:
+    id: a-doddle
+    form: a doddle
+    variants: []
+    concept:
+    - CHILDS_PLAY
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces:
+    - a breeze
+    - a cinch
+    gloss: Something that takes no effort at all.
+    sources: []
+  new_concept: null
+  triggers_to_add: {}
+  flags:
+  - not_aussie
+  evidence: agents_only
+  confidence: medium
+  why: Understood and used in Australia but chiefly British; "kid stakes" or "a piece of piss" are the more Aussie picks. Must not fire on "easy" as an adjective, only on easy-task nouns.
+- decision: reject
+  candidate: a height
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: a plain-looking
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: a share
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: about 4 C
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: ad
+  reason: not_lexical
+  why: '"ad" is international English, not an Aussie choice.'
+- candidate: alfoil shouldn't go
+  decision: add_entry
+  entry:
+    id: alfoil
+    form: alfoil
+    variants: []
+    concept:
+    - NEW:FOIL
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Kitchen aluminium foil; a former brand name now used generically.
+    sources:
+    - https://search.ipaustralia.gov.au/trademarks/search/view/2443598/details
+  new_concept:
+    id: FOIL
+    description: Aluminium foil for cooking and wrapping food.
+    triggers:
+      np:
+      - aluminum foil
+      - aluminium foil
+      - tin foil
+      - tinfoil
+      - kitchen foil
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: high
+  why: Everyday Australian word for kitchen foil (genericised Comalco brand). Must not catch bare "foil" (fencing, "foil a plan", a dramatic foil) or "foil" in packaging/industrial contexts such as "foil
+    balloons" -- only the full foil phrases.
+- decision: reject
+  candidate: an actual woman
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: another squiz round
+  reason: duplicate
+  why: 'Existing form: squiz (LOOK).'
+- decision: reject
+  candidate: are flagging
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: arvo Seasoned
+  reason: duplicate
+  why: 'Existing form: arvo.'
+- decision: reject
+  candidate: ash-bin
+  reason: not_lexical
+  why: Retelling of an archaic "ash-barrel"; BIN already covers ashcan.
+- candidate: at the roadworks
+  decision: americanism
+  us: construction zone
+  australian: roadworks
+  why: US road-sign phrase; Australian signs and speech say "roadworks". Only the road/traffic phrase, not "construction" in general (a construction site stays a building site).
+- candidate: baking
+  decision: americanism
+  us: parchment paper
+  australian: baking paper
+  why: US kitchen term; Australians say baking paper. Only the two-word phrase, never bare "parchment" (historical documents).
+- decision: reject
+  candidate: barbecued
+  reason: wrong_sense
+  why: US "grilled" = Aussie "barbecued", but Australian "grilled" means under the grill, so a swap is ambiguous.
+- decision: reject
+  candidate: battled
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: beaut idea
+  reason: duplicate
+  why: 'Existing form: beaut.'
+- candidate: bicarb
+  decision: add_entry
+  entry:
+    id: bicarb-soda
+    form: bicarb soda
+    variants:
+    - bicarb
+    concept:
+    - NEW:BICARB_SODA
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Sodium bicarbonate as a kitchen raising agent and cleaner.
+    sources:
+    - https://www.readersdigest.com.au/recipes/bicarb-soda-versus-baking-powder
+    - https://www.nowtolove.com.au/lifestyle/baking-soda-bicarb-soda-baking-powder-what-is-the-difference-15828/
+  new_concept:
+    id: BICARB_SODA
+    description: Baking soda / bicarbonate of soda used in cooking or cleaning.
+    triggers:
+      np:
+      - baking soda
+      - bicarbonate of soda
+      - bicarbonate soda
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: high
+  why: Standard Australian supermarket and recipe name for baking soda. Must not catch "baking powder" (a different product) or "sodium bicarbonate" in chemistry/medical text.
+- decision: reject
+  candidate: biggest thing
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: bikkies either
+  reason: duplicate
+  why: 'Existing form: bikkie.'
+- decision: reject
+  candidate: bikkies turning into
+  reason: duplicate
+  why: 'Existing form: bikkie.'
+- decision: reject
+  candidate: blocked
+  reason: not_lexical
+  why: Plain English "blocked up".
+- decision: reject
+  candidate: bone-idle
+  reason: duplicate
+  why: '"bone idle" is already a LAZY trigger; British anyway.'
+- decision: reject
+  candidate: bought
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: bump up the
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- candidate: bunged one
+  decision: add_entry
+  entry:
+    id: bung-in
+    form: bung {obj} in
+    variants: []
+    concept:
+    - NEW:BUNG_IN
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Put something in somewhere casually, without fuss (in the oven, the post, the bin).
+    sources: []
+  new_concept:
+    id: BUNG_IN
+    description: Casually put or toss something into a place (oven, microwave, bag, bin).
+    triggers:
+      vp:
+      - pop {obj} in
+      - toss {obj} in
+      - throw {obj} in
+      - stick {obj} in
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: '"Bung it in the oven" is core Aussie kitchen talk (also British). Triggers are only the casual "pop/toss/stick X in" phrasals; must never fire on plain "put" or "place", or on "throw in" meaning
+    include extra ("throw in a free drink"), so consider "throw {obj} in" only with an oven|microwave|fridge|bin context or drop it.'
+- decision: reject
+  candidate: businessman
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: cake Head to
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: carburettor Ya can drain
+  reason: not_lexical
+  why: Spelling (carburetor -> carburettor) is the spelling lint's job.
+- decision: reject
+  candidate: cars up
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: charged
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: cheery sort of
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- candidate: choc
+  decision: add_entry
+  entry:
+    id: choc-chips
+    form: choc chips
+    variants:
+    - choc bits
+    concept:
+    - NEW:CHOC_CHIPS
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Little drops of chocolate for baking.
+    sources: []
+  new_concept:
+    id: CHOC_CHIPS
+    description: Chocolate chips/morsels used in baking.
+    triggers:
+      np:
+      - chocolate chips
+      - chocolate morsels
+      - chocolate chip
+      - chocolate pieces
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: high
+  why: '"Choc" clipping is the normal Aussie recipe/packaging form (choc chip, choc bits, choc-top). Only for baking chips; bare "chocolate" already goes to CHOCOLATE/choccy.'
+- decision: reject
+  candidate: Chook fight Yep
+  reason: duplicate
+  why: 'Existing form: chook.'
+- candidate: Chuck em
+  decision: add_entry
+  entry:
+    id: chuck-in
+    form: chuck {obj} in
+    variants: []
+    concept:
+    - NEW:BUNG_IN
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Toss something in somewhere without ceremony.
+    sources: []
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: 'Same concept as bung-in. The object slot must stay filled: bare "chuck in" means quit ("chuck in the job"), which this must not produce.'
+- decision: reject
+  candidate: cigars
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: city culturally socially
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- candidate: cleared out
+  decision: add_entry
+  entry:
+    id: clear-out
+    form: clear out
+    variants: []
+    concept:
+    - LEAVE
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces:
+    - leave in a hurry
+    gloss: Leave a place, usually quickly or for good.
+    sources: []
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Long-standing Aussie/British informal "leave, decamp". Form only; must not be produced for transitive "clear out the garage/a cupboard" (emptying), and no trigger on bare "left".
+- decision: reject
+  candidate: coldest temps
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: column with
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: cooling off
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: Cornbread's
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: crabby
+  reason: not_aussie
+  why: '"Crabby" is general/US English; Aussies would say cranky (existing).'
+- decision: reject
+  candidate: creepy-crawlies
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: culture
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: decent product
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: dice and they'll give you
+  reason: duplicate
+  why: 'Existing form: the whole box and dice (EVERYTHING).'
+- decision: reject
+  candidate: dishing
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: doesn't get into full-blown
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: dragging
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: dries off quick smart
+  reason: duplicate
+  why: 'Existing form: quick smart.'
+- decision: reject
+  candidate: drop-off spot
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: earthquake
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: edge closer
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: enjoy eating straight
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: every climate going
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: extra careful
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: faith
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: fiddled
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: firm
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: fix
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: flavour from
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: folding stuff over to the
+  reason: duplicate
+  why: 'Existing form: the folding stuff.'
+- decision: reject
+  candidate: for a spin
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: forebears
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- candidate: fridge or
+  decision: americanism
+  us: refrigerator
+  australian: fridge
+  why: Australians say fridge; "refrigerator" reads as US or formal. The brief's own example.
+- candidate: frypan bung
+  decision: americanism
+  us: skillet
+  australian: frypan
+  why: US word; Australians say frypan or frying pan (electric frypan). Also covers "cast-iron skillet".
+- decision: reject
+  candidate: fumes are flamin'
+  reason: duplicate
+  why: '"flamin''" is already an intensifier form.'
+- decision: reject
+  candidate: gadgets
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: get folks keener on em
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: get zapped
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: gigs
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: gizmo
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: good all-round
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: got its mitts on that
+  reason: duplicate
+  why: 'Existing form: mitts.'
+- decision: reject
+  candidate: got wound
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: grounded
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: hairdos get worked
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: handful
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: has another squiz round
+  reason: duplicate
+  why: 'Existing form: squiz (LOOK).'
+- decision: reject
+  candidate: have a yarn about
+  reason: duplicate
+  why: 'Existing form: have a yarn.'
+- decision: reject
+  candidate: hemlock's
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: his savings
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: hop
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: how dazzlingly unpredictable
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: ideas about
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: indigestion cure
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: into the role
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: is ticking
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: it quicker
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: jazz-tinged
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: just swap
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: knees
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: leaky
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: lets it go
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: litres Thanks
+  reason: not_lexical
+  why: Spelling only (liters -> litres).
+- decision: reject
+  candidate: long-term achievement
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: makes crispier bikkies Putting
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- candidate: marg
+  decision: add_entry
+  entry:
+    id: marg
+    form: marg
+    variants:
+    - marge
+    concept:
+    - NEW:MARGARINE
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Margarine, clipped.
+    sources:
+    - https://www.dictionary.com/browse/Marg
+  new_concept:
+    id: MARGARINE
+    description: Margarine or similar table spread.
+    triggers:
+      np:
+      - margarine
+      - oleo
+      - oleomargarine
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: high
+  why: Everyday Aussie clipping (butter or marg). Mass noun only; must not catch names like Marg/Margaret or "margin".
+- decision: reject
+  candidate: marriage lurk with
+  reason: duplicate
+  why: 'Existing form: a lurk.'
+- decision: reject
+  candidate: meant to happen
+  reason: duplicate
+  why: 'Existing form: covered by the "meant to" style note.'
+- candidate: meself
+  decision: style_guide
+  guidance: At higher drawl levels "me" for "my" and "meself" for "myself" ("all up meself") are fine in dialogue and yarns, never in instructions or formal text.
+  why: A pronoun habit shared with Irish/British vernacular, not a word swap the engine should place.
+- decision: reject
+  candidate: might pick
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: missus reckons
+  reason: duplicate
+  why: 'Existing form: the missus, reckon.'
+- decision: reject
+  candidate: more cheerful
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: mostly self-serve
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: muck about for
+  reason: duplicate
+  why: 'Existing form: muck around (existing form).'
+- decision: reject
+  candidate: nearly
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: nicking it I'll
+  reason: duplicate
+  why: 'Existing form: nick.'
+- decision: reject
+  candidate: north-east of the
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: Now for the hard yakka
+  reason: duplicate
+  why: 'Existing form: hard yakka.'
+- decision: reject
+  candidate: of some dodgy-looking
+  reason: duplicate
+  why: 'Existing form: dodgy.'
+- decision: reject
+  candidate: old Grateful Dead
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: or choccy bits
+  reason: duplicate
+  why: 'Existing form: choccy, and choc-chips added from "choc".'
+- decision: reject
+  candidate: otherwise unsurprisin' ones
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: outright
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: overnight Come sparrow's fart
+  reason: duplicate
+  why: 'Existing form: at sparrow''s fart.'
+- decision: reject
+  candidate: pan bung
+  reason: duplicate
+  why: 'Existing form: bung-in added from "bunged one".'
+- decision: reject
+  candidate: part-day
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: patronising same
+  reason: not_lexical
+  why: Spelling only (patronizing -> patronising).
+- candidate: phone alone Mobiles
+  decision: americanism
+  us: cell phones
+  australian: mobiles
+  why: '"cell phone" is already listed; add the plural and "cellphone" so the lint catches them. "mobile phone" or just "mobile" is Australian.'
+- decision: reject
+  candidate: pick up
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: pitching in on
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: players in it
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: pointing to the
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: prob'ly won't
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: push to get
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: put forward
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: ramps up
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: ready-made
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: Reckon they've got every right
+  reason: duplicate
+  why: 'Existing form: reckon.'
+- decision: reject
+  candidate: reckoned that'd
+  reason: duplicate
+  why: 'Existing form: reckon.'
+- decision: reject
+  candidate: rejigging
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: righto So
+  reason: duplicate
+  why: 'Existing form: righto.'
+- decision: reject
+  candidate: rolled oats
+  reason: wrong_sense
+  why: US "oatmeal" can mean porridge or rolled oats, so no safe one-to-one swap.
+- decision: reject
+  candidate: rowdy larrikin
+  reason: duplicate
+  why: 'Existing form: larrikin (and "lad" is the wrong sense).'
+- decision: reject
+  candidate: salts
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: scooped up
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- candidate: self-raising cornmeal
+  decision: americanism
+  us: self-rising
+  australian: self-raising
+  why: Self-raising flour is the Australian (and British) name; "self-rising" is US. Unambiguous.
+- decision: reject
+  candidate: servos
+  reason: duplicate
+  why: 'Existing form: servo; "gas stations" already a trigger.'
+- decision: reject
+  candidate: sheilas
+  reason: duplicate
+  why: 'Existing form: sheila.'
+- decision: reject
+  candidate: shiniest
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: show-and-tell
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: sides
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: singling out the way the
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: sliding
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: smartly so
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: snout
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: soaks them up
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: south-east of the
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: spot Post
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: sprawling
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: standardise the bloody things
+  reason: not_lexical
+  why: Spelling plus a "bloody" intensifier; nothing new.
+- decision: reject
+  candidate: stay properly hydrated keep sipping
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: steps
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: stop bacteria growing
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: stoush from goin' ahead
+  reason: duplicate
+  why: 'Existing form: stoush; "bout" is too ambiguous to trigger.'
+- decision: reject
+  candidate: Strewth I know
+  reason: duplicate
+  why: 'Existing form: strewth.'
+- decision: reject
+  candidate: sunup till
+  reason: not_aussie
+  why: '"Sunup" is American; Aussie is sunrise or sparrow''s fart.'
+- decision: reject
+  candidate: Swapping
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: switched over
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: taking the lid off for
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: tapers off
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: temps on the
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: that handful
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: the advice
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: the coves
+  reason: duplicate
+  why: 'Existing form: cove.'
+- decision: reject
+  candidate: the food cooks
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: the littlies straight away Don't
+  reason: duplicate
+  why: 'Existing form: littlie.'
+- candidate: the Petrol Fill
+  decision: americanism
+  us: gasoline
+  australian: petrol
+  why: Unambiguous US word. Leave bare "gas" alone (natural gas, gas bottles); "gas tank" -> "petrol tank" could be listed too.
+- decision: reject
+  candidate: the servo gives you
+  reason: duplicate
+  why: 'Existing form: servo.'
+- decision: reject
+  candidate: the weather forecaster
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- candidate: there's a few stinkers
+  decision: add_entry
+  entry:
+    id: a-stinker-bad
+    form: a stinker
+    variants: []
+    concept:
+    - AWFUL
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces:
+    - a bad one
+    - a dud
+    gloss: Something very poor or unpleasant (a joke, a match, a cold).
+    sources: []
+  new_concept: null
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Distinct from the existing hot-day "a stinker" (HOT_WEATHER). Only as a noun for a bad thing; AWFUL triggers are predicate_adj, so it needs the np replaces ("a bad one") and must not catch "bad"
+    alone or describe people.
+- candidate: this travel caper
+  decision: add_entry
+  entry:
+    id: caper-activity
+    form: this {np} caper
+    variants:
+    - the {np} caper
+    concept:
+    - NEW:CAPER
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    replaces: []
+    gloss: A line of work or a pursuit, said with mild irony ("this travel caper").
+    sources:
+    - https://www.dictionary.com/browse/caper
+  new_concept:
+    id: CAPER
+    description: An activity, line of work or business, spoken of wryly.
+    triggers:
+      np:
+      - this whole {np} thing
+      - this whole {np} business
+      - the whole {np} thing
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Collins marks caper = job/occupation as Australian informal. Only for the "whole X thing/business" idiom; must not catch a literal business/company, "thing" as an object, or caper meaning a prank/heist.
+- decision: reject
+  candidate: tied to
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: to pick from
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: too soft and sappy do
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- candidate: trap shut about
+  decision: add_entry
+  entry:
+    id: keep-trap-shut
+    form: keep {poss} trap shut
+    variants: []
+    concept:
+    - NEW:KEEP_QUIET
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Keep quiet; not speak up or blab.
+    sources: []
+  new_concept:
+    id: KEEP_QUIET
+    description: Keep quiet about something; refrain from speaking.
+    triggers:
+      vp:
+      - keep {poss} mouth shut
+      - keep quiet
+      - hold {poss} tongue
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: '"Trap" for mouth is common Aussie/British; KEEP_MUM is about not letting on, and SHUT_UP is imperative, so a vp concept fits. Must not catch "keep quiet" as a noise instruction in procedures ("keep
+    quiet near bears") -- consider gating that trigger to ^person dialogue.'
+- decision: reject
+  candidate: trickier
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: tucker that's ready
+  reason: duplicate
+  why: 'Existing form: tucker.'
+- decision: reject
+  candidate: underneath
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: up spots
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: vamps
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: wake up
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: was fretting
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: watch
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: wears
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: wetter-than-normal air north
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: which kinds
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: whopping great blow-up
+  reason: duplicate
+  why: 'Existing form: whopping / bloody great.'
+- decision: reject
+  candidate: with cords Mobiles
+  reason: duplicate
+  why: 'Existing form: covered by the cell phones americanism.'
+- decision: reject
+  candidate: worrying about
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: yank
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: You can freeze
+  reason: not_lexical
+  why: Plain English or a retold fragment / merged diff span; no reusable Aussie term.
+- decision: reject
+  candidate: young fellas
+  reason: duplicate
+  why: 'Existing form: young fella.'
+- decision: reject
+  candidate: your flavouring
+  reason: not_lexical
+  why: Spelling only (flavoring -> flavouring).

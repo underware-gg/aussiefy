@@ -1,0 +1,6 @@
+## Yarn pass 2026-10-13 (accepted on first submit)
+- Wrong-sense planned phrases: "chook" for "chicken" in "proved that they weren't chicken" (the coward pun; the engine draft even has "weren't chook"); "Yep" for "Yes" in the pun "Yes, We Cran"; "punters" for "people" in "a hungry people" (a people, a nation); "fuckin' oath" and "too bloody right" for "Of course" used as "naturally" at the start of a statement, not as an agreeing reply. Declined "every bastard" for "everybody" in the list of the poor, refugees and the vulnerable: wrong tone for that line.
+- The brief's genre says to keep a speech's jokes and puns intact, but the planned phrases break two of them (chicken, Yes We Can); the planner could skip a word inside a pun or a quoted slogan.
+- Lint false positive: name_dropped "Thanksgiving" when the draft has "Thanksgivin'" (the drawl the level-5 voice asks for).
+- Lint suggestions wrong-sense: "really" in "really live up to" offered "fuckin'"; "come on" (coaxing a crying baby) offered "fair go"; "man" inside "every man 'n his dog" offered "bloke"; "Yes" in "Yes, We Cran" offered "righto"; "chicken" (coward) offered "chook"; "of course" offered "too right"/"bloody oath".
+- Engine draft notes: "weren't lucky as fuck" for "weren't so lucky" flips the meaning.

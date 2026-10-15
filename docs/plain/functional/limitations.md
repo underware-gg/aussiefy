@@ -1,0 +1,21 @@
+# Status and known limitations
+
+- **The frame checker is heuristic.** Expect occasional misfires on unusual syntax. Every one is visible in
+  [explain mode](explain.md), and most are fixed by tightening a trigger pattern in the data rather than the
+  code. The hand-written frame checker now uses a small bundled POS model for noun/verb context;
+  [DD-016](../../architecture/decisions/dd-016-reconcile-source-capabilities.md) records its offline boundary.
+- **The LLM modes have not been run against the live API.** Tagging, `--surface`, `--rewrite` and yarn mode
+  are tested with fake clients. The yarn workflow itself has been exercised by agents through its research CLI
+  (`research/retellings-2026-10-11/yarn_tools.py`), which shares yarn mode's brief and tools.
+- **The seed source has not been scraped.** The build environment couldn't reach learnconversations.com
+  (DNS fails, and the network allows only package registries), so the scraper is tested against synthetic
+  fixture pages. The starter dictionary was hand-curated, with glosses in our own words, and later grown by
+  research rounds; only the four flagged entries that the original brief names cite the seed URL. How to bring
+  it in is in [data acquisition](../contributor/data-acquisition.md).
+- **Two reference texts have no checked source.** Most of `tests/corpus/reference/` is taken verbatim from
+  Project Gutenberg files, but the Gettysburg Address is the standard modern text with no source file, and the
+  Waltzing Matilda lyrics were not compared against the 1903 sheet music (see
+  `tests/corpus/reference/SOURCES.yaml`). Check them against a canonical copy before relying on exact wording.
+- **The bundled embedding model lags the dictionary.** `aussiefy embedder status` reports the shipped model
+  (aussie-static 1.2.0) as `stale` after the later research rounds; the next version is described in
+  `training/README.md`. Default translations are unaffected, since the engine does not use it unless asked.

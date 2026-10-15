@@ -1,0 +1,21 @@
+# Sources the scraper must not bulk-extract. They are for spot-checking entries and
+# confirming region tags by hand. Cite a page in an entry's `sources` once you have
+# checked it, but don't copy its definitions.
+#
+# `aussiefy dev scrape` refuses any URL whose host is one of these domains or a subdomain
+# of one (in any case) unless you pass --permitted (for example, with written
+# permission from the publisher).
+reference_only:
+  - domain: macquariedictionary.com.au
+    reason: Macquarie Dictionary, including the Australian Word Map. Crowd-sourced but
+      published under subscription and Macquarie's copyright; no reuse licence found.
+  # a bare label, not a domain: it matches any host with this label in it
+  # (australiannationaldictionary.oup.com, australiannationaldictionary.com.au)
+  - domain: australiannationaldictionary
+    reason: Australian National Dictionary (ANDC/OUP). Verify senses and dates only.
+  - domain: oed.com
+    reason: Oxford English Dictionary. Verify only.
+  - domain: fairdinkumslang.au
+    reason: Fair Dinkum Aussie Slang (Danni, Down Under English), about 600 entries with definitions,
+      examples and origin stories. A personal work with no licence or terms of use (checked 2026-10-13), so
+      all rights reserved. Spot-check senses and currency only; ask before reusing anything.

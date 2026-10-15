@@ -1,0 +1,187 @@
+---
+title: 'The FOLD Auction'
+description:
+  'Frequently asked questions about FOLD Auction 2: participation, the Uniswap Continuous Clearing
+  Auction, eligibility, claiming, liquidity support, and general FOLD transferability.'
+---
+
+import { Callout } from 'nextra/components'
+import { LinkCard, LinkCards } from '@/components/ui'
+
+# The FOLD Auction
+
+This FAQ's all about FOLD Auction 2, the second public FOLD auction. It's for anyone who got in on the auction, or who's got FOLD to claim after it. We've split the questions into four groups: the auction itself, taking part, claiming and transferability, and keeping safe.
+
+<Callout type='info'>
+  **Status.** General FOLD transferability's up and running. The FOLD contract recorded the TGE on Aug 19, 2026 at 14:00:23 UTC. Call `tgeTimestamp()` on the FOLD contract and you'll get back `1787148023`.
+</Callout>
+
+## Auction 2 at a glance
+
+| Item                    | Value                                                                                  |
+| ----------------------- | -------------------------------------------------------------------------------------- |
+| Opened                  | Aug 17 at **14:06 UTC (10:06 AM ET)**                                                  |
+| Closed                  | Aug 19 at **13:06 UTC (9:06 AM ET)**                                                   |
+| Allocation              | 2% of total FOLD supply                                                                |
+| Denomination            | USDC                                                                                   |
+| Floor                   | 0.02154816 USDC / FOLD                                                                 |
+| Liquidity               | 50% of proceeds dedicated to long-term on-chain liquidity support                      |
+| General transferability | Active since Aug 19, 2026 at **14:00 UTC (10 AM ET)**                                  |
+| Official auction        | [https://www.theinterfold.com/fold-auction](https://www.theinterfold.com/fold-auction) |
+
+## About the auction
+
+### What is FOLD Auction 2?
+
+FOLD Auction 2 was the second public FOLD auction, and it ran on the Uniswap Continuous Clearing Auction mechanism.
+
+It came along after the first FOLD Auction, which was held July 8–10, 2026.
+
+We kept Auction 2 to **2% of total FOLD supply** on purpose, and held it right around the changeover to general FOLD transferability. The point was to get FOLD into more hands and help get deeper, longer-term on-chain liquidity off the ground.
+
+### Why was there a second FOLD Auction?
+
+Think of Auction 2 as a limited step for spreading FOLD round before general FOLD transferability came in on Aug 19.
+
+It was small on purpose, just **2% of total FOLD supply**, and it started off with a floor that matched the clearing price of the first FOLD Auction.
+
+The auction was an open, public way of handing out a bit more FOLD before FOLD became generally transferable. It gave long-term on-chain liquidity a leg-up too.
+
+**50% of proceeds were locked in for long-term on-chain liquidity support.**
+
+Auction 2 wrapped up not long before general FOLD transferability got switched on.
+
+### What happened in the first FOLD Auction?
+
+The first FOLD Auction ran from **July 8–10, 2026**, on the Uniswap Continuous Clearing Auction mechanism.
+
+That one's all done and dusted. Its clearing price came in at **0.02154816 USDC / FOLD**, and that's the floor for FOLD Auction 2 as well.
+
+If you took part in the first auction, you can still get to claiming and post-auction info through the official [Interfold auction page](https://www.theinterfold.com/fold-auction).
+
+### What is a Uniswap Continuous Clearing Auction?
+
+A Continuous Clearing Auction (CCA) is a price-discovery mechanism for handing out tokens, and it's built on Uniswap infrastructure.
+
+- The auction runs over a string of separate periods.
+- Participants put their bids in through the official Uniswap CCA interface.
+- Bids that get up within a period all clear at the same clearing price.
+- For each following period, the minimum price is whichever's higher: the original floor price, or the clearing price of the period before.
+- The minimum price can go up in later periods. It won't drop below the applicable prior clearing price or the original floor, though.
+- Any tokens that weren't handed out earlier are still up for grabs in the final period.
+
+The CCA hands tokens out bit by bit, at the one price within each period. It's set up like that to cut down on gas competition, take the wind out of sniping, and let clearing prices find their own level as people take part in the auction.
+
+[Read more about Uniswap CCAs](https://cca.uniswap.org).
+
+### Did the auction determine the price of FOLD after transferability?
+
+Nah, nah. The auction sorted out allocations and a clearing price inside the auction itself. It didn't set the market price of FOLD once general transferability kicked in.
+
+Nobody can tell you where future market prices will go.
+
+## Participation
+
+<Callout type='warning'>
+  Auction 2 closed on Aug 19, 2026 at 13:06 UTC. The steps in this section just show how the auction worked. You can't put in a new bid now.
+</Callout>
+
+### How did participation work?
+
+1. Participants headed to the official [FOLD Auction page](https://www.theinterfold.com/fold-auction).
+2. They followed the verified link through to the Uniswap CCA interface.
+3. They got through the required verification process via the official flow.
+4. They put their bids in while the auction window was open.
+5. Once the auction closed, they could claim any allocated FOLD and unspent USDC through the verified auction interface.
+
+Participants needed USDC on Ethereum Mainnet, and they had to go over the auction terms and eligibility requirements before jumping in.
+
+### Who could participate?
+
+Taking part was open to eligible participants, subject to jurisdiction, identity verification, AML and sanctions screening, and other applicable restrictions.
+
+It was the official verification process that decided eligibility, and the auction terms that governed it.
+
+Getting through verification didn't guarantee you eligibility or an allocation, mind.
+
+### Was KYC required?
+
+Yep. Before taking part, participants had to get through identity verification via the official verification process.
+
+That process decided eligibility and did the applicable AML and sanctions screening.
+
+Taking part was subject to the auction terms and applicable restrictions.
+
+## Claiming and transferability
+
+### When can participants claim FOLD?
+
+Claiming was set to open straight after the auction closed.
+
+Participants claim their allocated FOLD and any unspent USDC through the verified auction interface.
+
+Claiming and general FOLD transferability are two different things.
+
+### When did general FOLD transferability begin?
+
+FOLD Auction 2 closed Aug 19 at **13:06 UTC (9:06 AM ET)**.
+
+General FOLD transferability could be switched on shortly after, at or after **14:00 UTC (10 AM ET)**.
+
+From Unix timestamp **`1787148000`** on, anyone could call the `tge()` function on the FOLD contract to switch on general transferability. The TGE transaction went through on Aug 19, 2026 at 14:00:23 UTC, and `tgeTimestamp()` returns `1787148023`. So FOLD is now generally transferable.
+
+FOLD Auction 2, claiming, general FOLD transferability, and Network Alpha are separate milestones in the bigger Interfold launch sequence. For the details, check out [FOLD Transferability](/faq/transferability).
+
+## Safety
+
+### How do I know I’m using the official auction?
+
+Stick to auction, claiming, verification, and support links put out through official Interfold channels, and only those.
+
+The official Interfold channels are:
+
+- [Interfold auction page](https://www.theinterfold.com/fold-auction)
+- [Interfold website](https://www.theinterfold.com/)
+- [Interfold X account](https://x.com/theinterfold)
+- [Interfold documentation](https://docs.theinterfold.com/)
+
+Don't trust:
+
+- Auction, claiming, or support links that turn up out of the blue in DMs.
+- Copied token or contract addresses from unofficial sources.
+- Impersonator accounts.
+- Private wallet-connection links.
+- Anyone asking for your seed phrase, private key, or wallet backup.
+- Anyone asking to be paid in exchange for support.
+
+<Callout type='warning'>
+  Interfold team members and moderators will never ask for your seed phrase, private key, wallet backup, or access to your wallet. Not ever.
+</Callout>
+
+## Important Information
+
+_FOLD Auction 2, general FOLD transferability, and Network Alpha are separate parts of the launch sequence._
+
+_Official info will only ever go out through Interfold’s verified channels._
+
+**_Eligibility notice._** _Participation in the FOLD auction was subject to eligibility requirements, jurisdictional restrictions, verification procedures, AML/sanctions screening, and other applicable restrictions. Participation could be restricted in certain jurisdictions._
+
+**_Issuer notice._** _The FOLD auction was run by Interfold Ltd. (the “Issuer”). Participation in the FOLD auction was subject to the official Auction Terms, eligibility requirements, and verification procedures._
+
+**_No advice / risk notice._** _Nothing in this communication is legal, tax, financial, investment, or other professional advice. The auction floor isn't any projection, estimate, or guarantee of FOLD’s actual price or value._
+
+Have a read of the full [FOLD Auction Terms](https://www.theinterfold.com/auction/legal).
+
+## Next steps
+
+<LinkCards min={230}>
+  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>
+    The TGE, claiming, and the verified FOLD contract.
+  </LinkCard>
+  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>
+    The CCA Sale allocation and the other allocations of FOLD.
+  </LinkCard>
+  <LinkCard title='FOLD Token FAQ' href='/faq/fold-token' icon='sparkle' tag='FAQ'>
+    What FOLD does in the Interfold network.
+  </LinkCard>
+</LinkCards>

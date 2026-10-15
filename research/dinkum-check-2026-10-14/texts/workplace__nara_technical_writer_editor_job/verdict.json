@@ -1,0 +1,167 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "yarn-dinkum": "A",
+  "dinkum-4": "B",
+  "dinkum-3": "C"
+ },
+ "scores": {
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "dinkum-4": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn-dinkum": {
+   "meaning": "All duties, conditions, qualifications and additional information kept, e.g. \"You might have to do a one year probationary period.\" and \"There's the chance to work from home, per Agency policy.\"",
+   "sense": "\"spot on\" for accurate, \"ticked off\" for accomplishing goals, \"Have a squiz\", \"on your CV\" and \"new starters\" all fit.",
+   "authenticity": "Natural Australian workplace English with \"Specialised\", \"organisations\", \"pro rata\" and \"CV\"; \"so they get published legally effective, on time and spot on\" is a forced fit.",
+   "register": "A light level 3: conversational throughout (\"Here's what the job involves\"), with only a few slang touches (\"Have a squiz\", \"ticked off\", \"sort it out properly\"). Slightly under the brief. No swearing (permitted).",
+   "tone": "Keeps the plain, informative tone of a job ad.",
+   "flow": "Mostly smooth; \"so they get published legally effective, on time and spot on\" is ungrammatical.",
+   "variety": "Little to repeat; \"Have a squiz\" once, \"Have a look\" once.",
+   "essence": "Unmistakably the job announcement."
+  },
+  "dinkum-4": {
+   "meaning": "Everything kept; \"2 full years of graduate study, each year at a higher level\" is a fair gloss of \"progressively higher level graduate education\".",
+   "sense": "\"the whole box and dice\" for all these duties, \"ticked off\", \"Have a squiz\" all fit.",
+   "authenticity": "Natural, but leaves US \"Specialized Experience\" beside \"specialised experience\", and uses \"résumé\" where Australians say CV.",
+   "register": "Lightest of the three: mostly plain conversational English, with \"the whole box and dice\" and \"Have a squiz\" as the main Aussie touches. Under level 3. No swearing (permitted).",
+   "tone": "Job-ad tone intact.",
+   "flow": "Smoothest of the three: \"so they're published in a way that's legally effective, on time and accurate.\"",
+   "variety": "Little slang, but no repetition: \"box and dice\", \"ticked off\", \"squiz\", \"on offer\".",
+   "essence": "Clearly the original."
+  },
+  "dinkum-3": {
+   "meaning": "All points kept; \"so it's a union job\" is a fair gloss of the bargaining unit line; \"no worries:\" is colour.",
+   "sense": "\"nutting out production problems\", \"Get your head around what customers need\", \"pitching in as part of a team\" all carry the right sense.",
+   "authenticity": "Sounds like an Australian HR writer: \"If you get picked at a lower grade level, no worries\", \"Spotting and nutting out production problems\".",
+   "register": "Right at level 3: a steady sprinkle of idiom (\"Have a squiz\", \"pitching in\", \"nutting out\", \"ticked off\") without becoming a yarn. No swearing (permitted).",
+   "tone": "Friendly but still a job ad.",
+   "flow": "Mostly smooth, but shares the clunk \"so they get published legally effective, on time and spot on\".",
+   "variety": "Varied: \"no worries\", \"pitching in\", \"Get your head around\", \"nutting out\", \"squiz\", \"union job\".",
+   "essence": "Unmistakably the original."
+  }
+ },
+ "problems": {
+  "yarn-dinkum": [
+   {
+    "quote": "so they get published legally effective, on time and spot on",
+    "original": "to ensure legally effective, timely, and accurate publication of them",
+    "severity": "minor",
+    "why": "Adjective stacked after published reads ungrammatically."
+   },
+   {
+    "quote": "Have a squiz at that announcement for the details on the open period, eligibility, and how to apply.",
+    "original": "Please refer to that announcement for details on open period, eligibility, and how to apply.",
+    "severity": "minor",
+    "why": "One of only a few slang touches; register slightly under level 3."
+   }
+  ],
+  "dinkum-4": [
+   {
+    "quote": "Specialized Experience: For the GS-09, you need one year of specialised experience",
+    "original": "Specialized Experience: For the GS-09, you must have one year of specialized experience",
+    "severity": "minor",
+    "why": "Inconsistent spelling; US form left in the heading."
+   },
+   {
+    "quote": "on your résumé",
+    "original": "on your resume",
+    "severity": "minor",
+    "why": "Australians would say CV or resume, not résumé."
+   },
+   {
+    "quote": "Check that announcement for the details on the open period, who's eligible and how to apply.",
+    "original": "Please refer to that announcement for details on open period, eligibility, and how to apply.",
+    "severity": "minor",
+    "why": "Register under level 3: much of the text is plain English."
+   }
+  ],
+  "dinkum-3": [
+   {
+    "quote": "so they get published legally effective, on time and spot on",
+    "original": "to ensure legally effective, timely, and accurate publication of them",
+    "severity": "minor",
+    "why": "Ungrammatical stacking after published."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn-dinkum": "Faithful and natural, slightly light.",
+  "dinkum-4": "Clean and accurate, but lighter than asked.",
+  "dinkum-3": "The best balance of weight, naturalness and accuracy."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn-dinkum",
+    "dinkum-4",
+    "dinkum-3"
+   ]
+  ],
+  "flow": [
+   [
+    "dinkum-4"
+   ],
+   [
+    "yarn-dinkum",
+    "dinkum-3"
+   ]
+  ],
+  "variety": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "yarn-dinkum",
+    "dinkum-4"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn-dinkum",
+    "dinkum-4",
+    "dinkum-3"
+   ]
+  ],
+  "overall": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-4"
+   ]
+  ]
+ }
+}

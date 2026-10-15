@@ -1,0 +1,316 @@
+{
+ "candidates": {
+  "A": {
+   "scores": {
+    "meaning": {
+     "evidence": "All technical content survives, commands and links intact: \"generate a trait object vtable with a null pointer\", \"rustup default beta\", \"locally and in your CI\". Additions react to the text: \"Not ideal.\", \"you'd be lucky if that's all\", \"Don't be shy.\", \"and that's the honest truth\". The thanks link now reads \"Cheers, legends!\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"easy as\", \"No wukkas\", \"the guts of it\", \"par for the course\", \"keen\", \"pitched in\". \"the excuse for arbitrary effects\" is a fair take on \"justification\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Natural lines (\"getting Rust 1.98.1 is easy as. Just run:\", \"No wukkas\"), but several stock openers bolted on: \"G'day, Rustaceans.\", \"For anyone who's been living under a rock\", \"Cheers, legends!\"",
+     "score": 3
+    },
+    "register": {
+     "evidence": "Full level 4: friendly-mate voice all the way through. No swearing, within vulgarity 1.",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "The release note's friendly tone is pushed toward banter; \"For anyone who's been living under a rock\" adds a mild jab the original lacks.",
+     "score": 4
+    },
+    "flow": {
+     "evidence": "Reads well; the added beats break up the technical paragraph: \"sitting right where a function pointer ought to be. Not ideal. That leads to undefined behaviour\".",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "Varied: \"G'day\", \"every man and his dog\", \"easy as\", \"No wukkas\", \"Righto\", \"par for the course\", \"Don't be shy\", \"legends\".",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Recognisably the 1.98.1 notes, structure and links intact.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "For anyone who's been living under a rock",
+     "original": "",
+     "severity": "minor",
+     "why": "Added jab at readers; stock line."
+    },
+    {
+     "quote": "Cheers, legends!",
+     "original": "Thanks!",
+     "severity": "minor",
+     "why": "Stock sign-off, and changes the link text."
+    },
+    {
+     "quote": "G'day, Rustaceans.",
+     "original": "",
+     "severity": "minor",
+     "why": "Stock opener bolted on."
+    }
+   ],
+   "summary": "Lively and faithful, but leans on stock Aussie openers and sign-offs."
+  },
+  "B": {
+   "scores": {
+    "meaning": {
+     "evidence": "Faithful throughout, commands and links intact: \"under some conditions, rustc would wrongly generate a trait object vtable\", \"it can also be the excuse for arbitrary effects\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"every man and his dog\" for \"everyone\", \"par for the course\" for \"typical\", \"keen\", \"pitched in\", \"the lot of you\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Natural, idiom used as locals do: \"If you're keen to give us a hand by testing future releases\".",
+     "score": 5
+    },
+    "register": {
+     "evidence": "Light for level 4: much of the text is close to the original, slang limited to a handful of phrases (\"every man and his dog\", \"par for the course\", \"keen\", \"Heaps\").",
+     "score": 3
+    },
+    "tone": {
+     "evidence": "The original's friendly, technical tone is intact.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Smooth: \"Heaps of people pitched in to make Rust 1.98.1.\"",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Few terms but none repeated.",
+     "score": 4
+    },
+    "essence": {
+     "evidence": "Unmistakably the release notes.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "The Rust team has put out a new point release of Rust, 1.98.1.",
+     "original": "The Rust team has published a new point release of Rust, 1.98.1.",
+     "severity": "minor",
+     "why": "Stays close to the original; light for level 4."
+    }
+   ],
+   "summary": "Clean, natural and faithful, but lighter than the brief asks."
+  },
+  "C": {
+   "scores": {
+    "meaning": {
+     "evidence": "Technical content intact. \"build software that's reliable and runs like a bloody dream\" stretches \"efficient\"; \"any old weird effects at all\" for \"arbitrary effects\" is right. \"the mongrel\" is an aside.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms mostly fit: \"stuff up\", \"sorts out\", \"code it spits out\", \"fair game\" (UB licenses anything), \"trip over\", \"lend us a hand\". \"runs like a bloody dream\" reads as speed rather than efficiency, a slight strain.",
+     "score": 4
+    },
+    "authenticity": {
+     "evidence": "Mostly natural (\"rustc would go and stuff up a trait object vtable\", \"the lot of youse\"), but \"got an older version of Rust in through rustup\" is clumsy.",
+     "score": 4
+    },
+    "register": {
+     "evidence": "Full level 4 with dad-level swearing in bounds: \"runs like a bloody dream\", \"the mongrel\". Within vulgarity 1.",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "Still a release note, but \"(as you'd expect with UB, the mongrel)\" and \"a bloody dream\" add a larrikin edge to a neutral announcement.",
+     "score": 4
+    },
+    "flow": {
+     "evidence": "Mostly smooth; one awkward join: \"If you've already got an older version of Rust in through rustup\".",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "Varied: \"pushed out\", \"leg-up\", \"grabbing\", \"sorts out\", \"stuff up\", \"spits out\", \"fair game\", \"mongrel\", \"trip over\", \"youse\".",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Unmistakably the release notes, retold.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "got an older version of Rust in through rustup",
+     "original": "have a previous version of Rust installed via rustup",
+     "severity": "minor",
+     "why": "Clumsy phrasing."
+    },
+    {
+     "quote": "runs like a bloody dream",
+     "original": "efficient",
+     "severity": "minor",
+     "why": "Stretches \"efficient\" toward speed."
+    }
+   ],
+   "summary": "Vivid and varied with apt swearing; one clumsy line and a slight larrikin tilt."
+  },
+  "D": {
+   "scores": {
+    "meaning": {
+     "evidence": "The original verbatim apart from two swaps; nothing lost.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "\"empowering every man and his dog\" keeps the sense of \"everyone\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "One stock phrase dropped into corporate prose: \"Rust is a programming language that is empowering every man and his dog\".",
+     "score": 2
+    },
+    "register": {
+     "evidence": "Untranslated apart from \"every man and his dog\" and \"behaviour\": far under level 4.",
+     "score": 1
+    },
+    "tone": {
+     "evidence": "The original's tone is untouched.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads as the original; \"empowering every man and his dog\" is a jarring mix.",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "One slang phrase in the whole text.",
+     "score": 1
+    },
+    "essence": {
+     "evidence": "What it says is the original.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "empowering every man and his dog",
+     "original": "empowering everyone",
+     "severity": "minor",
+     "why": "Stock idiom grafted onto corporate \"empowering\"."
+    },
+    {
+     "quote": "If you have a previous version of Rust installed via rustup",
+     "original": "If you have a previous version of Rust installed via rustup",
+     "severity": "major",
+     "why": "Left untranslated throughout, far under level 4."
+    }
+   ],
+   "summary": "Effectively the original with one idiom swapped in; far under the brief."
+  },
+  "E": {
+   "scores": {
+    "meaning": {
+     "evidence": "Faithful throughout, commands and links intact: \"rustc would get it wrong and generate a trait object vtable with a null pointer\", \"it can be grounds for arbitrary effects too\". \"Good news:\" is a light frame.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"every man and his dog\", \"No worries\", \"par for the course\", \"keen\", \"have a go at\", \"pitched in\". \"grounds for\" renders \"justification\" well.",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Natural, nothing forced: \"Haven't got it yet? No worries, you can get rustup from the right page on our website.\"",
+     "score": 5
+    },
+    "register": {
+     "evidence": "Level 4 in voice and kept within a technical note's bounds; slang moderate (\"No worries\", \"keen\", \"Heaps\"). No swearing, within the dial. A touch light.",
+     "score": 4
+    },
+    "tone": {
+     "evidence": "Friendly technical tone kept whole.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Smooth: \"Back in Rust 1.98.0, in some cases, rustc would get it wrong and generate a trait object vtable\".",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Varied enough, no tic repeated.",
+     "score": 4
+    },
+    "essence": {
+     "evidence": "Unmistakably the release notes.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "Good news: the Rust team's just put out",
+     "original": "The Rust team has published",
+     "severity": "minor",
+     "why": "Mild framing addition."
+    }
+   ],
+   "summary": "Natural, faithful and smooth; slightly light for level 4."
+  }
+ },
+ "rankings": {
+  "tone": [
+   [
+    "B",
+    "D",
+    "E"
+   ],
+   [
+    "A",
+    "C"
+   ]
+  ],
+  "flow": [
+   [
+    "B",
+    "E"
+   ],
+   [
+    "A",
+    "C",
+    "D"
+   ]
+  ],
+  "variety": [
+   [
+    "A",
+    "C"
+   ],
+   [
+    "B",
+    "E"
+   ],
+   [
+    "D"
+   ]
+  ],
+  "essence": [
+   [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+   ]
+  ],
+  "overall": [
+   [
+    "E"
+   ],
+   [
+    "C"
+   ],
+   [
+    "A"
+   ],
+   [
+    "B"
+   ],
+   [
+    "D"
+   ]
+  ]
+ }
+}

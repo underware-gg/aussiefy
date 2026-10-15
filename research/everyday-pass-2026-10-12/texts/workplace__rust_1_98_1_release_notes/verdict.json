@@ -1,0 +1,199 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "unharnessed": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 3,
+   "flow": 2,
+   "variety": 2,
+   "essence": 4
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "All the technical content survives, including the code block, links, null pointer, segfault, UB and the beta/nightly channels. But \"every now and then\" turns the conditional \"in some circumstances\" into a frequency, and \"The whole box and dice, basically, and none of it good.\" adds an editorial line.",
+   "sense": "Most terms fit: \"sorts out a miscompilation\", \"spit out a trait object vtable\", \"the excuse for any old thing to happen\", \"par for the course with UB\". \"runs like the clappers\" stretches \"efficient\" into \"fast\", and \"every now and then\" takes the wrong sense of \"in some circumstances\".",
+   "authenticity": "Natural idiom (\"Righto\", \"every man and his dog\", \"have a crack at\", \"Not flash.\"), but the g-dropping (\"helpin'\", \"gettin'\", \"sittin'\", \"testin'\") and the stacked stock phrases lean stagey.",
+   "register": "A full level-4 retelling of release notes, with no swearing beyond dad level (none used); markdown, code and links are intact.",
+   "tone": "Keeps the upbeat, grateful release-note tone, though the asides \"Not flash.\" and \"none of it good\" make a factual bug note a bit chatty.",
+   "flow": "Reads well, but the added tail \"The whole box and dice, basically, and none of it good.\" trails after an already complete sentence.",
+   "variety": "Varied throughout: \"brand-spankin'-new\", \"runs like the clappers\", \"knock together\", \"Not flash\", \"par for the course\", \"have a crack\", \"pitched in\".",
+   "essence": "Clearly the Rust 1.98.1 point-release notes, with the same sections and links."
+  },
+  "unharnessed": {
+   "meaning": "Everything survives accurately: \"In Rust 1.98.0, in some situations, rustc would go and stuff up a trait object vtable, putting a null pointer where a function pointer was meant to be.\" Code, links and channels are intact.",
+   "sense": "Terms mostly fit: \"giving everyone a leg-up\", \"stuff up\", \"code it spits out\", \"bugs you might trip over\", \"the lot of youse\". \"it's also fair game for any old weird effects\" strains: UB permits any effect, and \"fair game\" means a legitimate target.",
+   "authenticity": "Sounds like an Aussie dev writing the notes: \"pushed out a fresh point release\", \"runs like a bloody dream\", \"as you'd expect with UB, the mongrel\".",
+   "register": "A solid level 4 with dad-level swearing (\"runs like a bloody dream\"); the structure and markdown are preserved.",
+   "tone": "Keeps the friendly, grateful, technically sober voice; the joke at UB's expense (\"the mongrel\") suits the original's own wry \"'just'\".",
+   "flow": "Smooth throughout: \"Heaps of people pitched in to put Rust 1.98.1 together. We couldn't have done it without the lot of youse.\"",
+   "variety": "Varied: \"pushed out\", \"leg-up\", \"grabbing\", \"sorts out\", \"stuff up\", \"spits out\", \"fair game\", \"mongrel\", \"trip over\", \"pitched in\".",
+   "essence": "Unmistakably the same release notes, retold."
+  },
+  "engine": {
+   "meaning": "Technical content is the original verbatim, so it survives, but \"many punters came together\" misnames the contributors.",
+   "sense": "\"punters\" (customers or gamblers) for contributors takes the wrong sense, and \"Strewth\" signals surprise at a routine release.",
+   "authenticity": "Stock interjections bolted onto unchanged prose: \"Strewth, the Rust team has published\", \"Mind you, Rust is a programming language that is empowering every man and his dog\", \"from the appropriate page on our website, mate.\"",
+   "register": "Far under level 4: the technical paragraphs are left verbatim (\"rustc would incorrectly generate a trait object vtable with a null pointer\"), with a few tokens added.",
+   "tone": "The original tone survives in the untouched parts, but \"Strewth\" and \"Mind you\" add misplaced surprise and contradiction.",
+   "flow": "Jarring joins: \"Mind you, many punters came together\", \"is empowering every man and his dog to knock together reliable and efficient software\", \"We couldn't have done it without all of you, ay.\"",
+   "variety": "Leans on fillers: \"Mind you\" twice, \"Now,\", \"mate\", \"ay\".",
+   "essence": "Recognisably the original release notes, since most is unchanged."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "every now and then",
+    "original": "in some circumstances",
+    "severity": "major",
+    "why": "Changes a condition (certain code patterns) into a frequency (random occasions), which misdescribes a deterministic miscompilation."
+   },
+   {
+    "quote": "runs like the clappers",
+    "original": "efficient",
+    "severity": "minor",
+    "why": "\"like the clappers\" means fast, which narrows \"efficient\"."
+   },
+   {
+    "quote": "The whole box and dice, basically, and none of it good.",
+    "original": "",
+    "severity": "minor",
+    "why": "An added line that restates the UB point and tips into hyperbole."
+   },
+   {
+    "quote": "gettin' Rust 1.98.1",
+    "original": "getting Rust 1.98.1",
+    "severity": "minor",
+    "why": "Representative of frequent g-dropping that reads as put-on in written notes."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "it's also fair game for\nany old weird effects at all",
+    "original": "it is possible for it to be justification for\narbitrary effects",
+    "severity": "minor",
+    "why": "\"fair game\" means a legitimate target, which slightly strains the sense of \"licenses any behaviour\"."
+   },
+   {
+    "quote": "the lot of youse",
+    "original": "all of you",
+    "severity": "minor",
+    "why": "\"youse\" is very broad and a little ocker even at level 4; \"the lot of ya\" would sit easier."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "many punters came together",
+    "original": "Many people came together",
+    "severity": "major",
+    "why": "\"punters\" are customers or gamblers, not contributors."
+   },
+   {
+    "quote": "Strewth, the Rust team has published",
+    "original": "The Rust team has published",
+    "severity": "minor",
+    "why": "A stock exclamation bolted on where there is nothing surprising."
+   },
+   {
+    "quote": "Mind you, Rust is a programming language",
+    "original": "Rust is a programming language",
+    "severity": "minor",
+    "why": "\"Mind you\" implies a qualification that isn't there."
+   },
+   {
+    "quote": "rustc would incorrectly generate a trait object vtable with a null pointer",
+    "original": "rustc would incorrectly generate a trait object vtable with a null pointer",
+    "severity": "major",
+    "why": "The technical body is left untranslated, well under a level-4 brief."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A lively, natural level-4 retelling with intact technical content, marred by one sense slip (\"every now and then\") and some over-egged asides.",
+  "unharnessed": "Accurate, natural and well judged at level 4; the strongest of the three, with only small quibbles.",
+  "engine": "The original with stock interjections and one wrong-sense word stuck on. Far under the brief."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

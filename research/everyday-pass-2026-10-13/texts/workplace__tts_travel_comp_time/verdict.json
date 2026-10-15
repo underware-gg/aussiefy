@@ -1,0 +1,149 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "unharnessed": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 3,
+   "register": 1,
+   "tone": 5,
+   "flow": 5,
+   "variety": 1,
+   "essence": 4
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "The policy is reproduced verbatim apart from spelling (\"authorisation\", \"Travelling\"), so every rule survives: \"TDY travel is more than 12 hours long\", \"expires one year (26 pay periods)\".",
+   "sense": "No Aussie terms were introduced, so none takes a wrong sense; only \"authorisation\" and \"Travelling\" respelt.",
+   "authenticity": "Nothing Australian beyond spelling; the prose is the US original: \"You may request travel comp time when you are approved to travel for work\".",
+   "register": "Untranslated: \"When you reach the expiration date, you will forfeit the leave.\" Under the level-2 brief.",
+   "tone": "The original's formal HR tone, unchanged.",
+   "flow": "Reads as the original does.",
+   "variety": "No slang to vary.",
+   "essence": "It is the original, unretold."
+  },
+  "unharnessed": {
+   "meaning": "Every rule kept: \"TDY travel is longer than 12 hours and needs a pre-approved authorisation in Concur\", \"travel ends when you check in at the hotel or get home\", \"runs out one year (26 pay periods) after you earn it\".",
+   "sense": "Plain swaps fit: \"getting to and from work\" for commuting, \"work out the breakdown\", \"Once you hit the expiry date\", \"took off and landed\".",
+   "authenticity": "Natural plain Australian English: \"Have a look at OPM's [Travel Comp Time Fact Sheet]\", \"Please get in touch with your Timekeeper\", \"expiry date\".",
+   "register": "A shade light even for level 2: casual plain English with \"Have a look\", \"check out\", \"work out\", \"expiry\", but nothing distinctively Aussie.",
+   "tone": "Stays a clear, helpful HR page: \"If you leave GSA, any unused travel comp time is lost.\"",
+   "flow": "Smooth throughout: \"Use the time zone where you departed from to work out elapsed time.\" (a small \"where ... from\" redundancy).",
+   "variety": "\"work out\" three times (\"to work out the breakdown\", \"For working out\", \"to work out elapsed time\"); otherwise little slang to vary.",
+   "essence": "Clearly the TTS comp-time policy, every section kept."
+  },
+  "yarn": {
+   "meaning": "Every rule kept, with a helpful gloss: \"travel comp time (time in lieu for travel)\", \"needs an authorisation approved beforehand in Concur\", \"expires one year (26 pay periods) after you earn it\".",
+   "sense": "Terms fit: \"time in lieu\" is the Australian workplace term for comp time, \"normal working hours\", \"have a chat to your Timekeeper\", \"GSA staff\".",
+   "authenticity": "Sounds like an Australian HR page: \"time in lieu for travel\", \"If you've got questions, have a chat to your Timekeeper or an HR Specialist at your agency.\"",
+   "register": "Level 2: a light, natural touch with \"time in lieu\", \"have a chat to\", \"staff\"; no swearing.",
+   "tone": "Clear, helpful HR tone kept: \"If you leave GSA, any travel comp time you haven't used is forfeited.\"",
+   "flow": "Smooth: \"Travelling during your usual work day counts as normal hours, and that includes travelling from home to the airport.\"",
+   "variety": "\"normal\" four times and \"work out\" twice; light touch otherwise varied.",
+   "essence": "Clearly the TTS policy, every section kept."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "You may request travel comp time when you are approved to travel for work",
+    "original": "You may request travel comp time when you are approved to travel for work",
+    "severity": "major",
+    "why": "Whole text left untranslated apart from spelling; under level 2."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "For working out travel comp time hours",
+    "original": "For calculating travel comp time hours",
+    "severity": "minor",
+    "why": "\"work out\" repeated three times in a short text."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "outside your normal work hours on a normal work day",
+    "original": "outside of your regular work hours during a regular work day",
+    "severity": "minor",
+    "why": "\"normal\" repeated, as it is across the text."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "The original with Australian spelling only; no translation.",
+  "unharnessed": "A faithful, natural plain-English Australian version, a touch light on Aussie colour.",
+  "yarn": "A faithful, natural Australian HR version with an apt \"time in lieu\" gloss."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "engine",
+    "unharnessed",
+    "yarn"
+   ]
+  ],
+  "flow": [
+   [
+    "engine",
+    "unharnessed",
+    "yarn"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

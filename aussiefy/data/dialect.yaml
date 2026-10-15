@@ -1,0 +1,349 @@
+# Words American or British English uses where Australians say something else. The engine swaps them at
+# every level, like spelling: this is plain Australian English, not slang (the dictionary does the slang,
+# and wins where it swaps the same words). lint flags them in a draft.
+#
+# Each section maps a pattern to the Australian. The pattern is a trigger pattern (aussiefy/matcher.py): a
+# noun phrase whose last word also matches its plural, "!a|b" blocks a sense by the next words, and a
+# pattern with `frame: vp` is a verb phrase whose first word inflects ("stood in line" -> "queued up").
+# The value is the Australian, or a mapping:
+#   to:          the Australian
+#   frame:       vp for a verb phrase (np by default)
+#   plural:      its plural, when it isn't regular (or the Australian is already plural: candy -> lollies)
+#   known_only:  the word is ordinary in Australia in another sense (British pants are undies, Australian
+#                pants are trousers), so it swaps only once the text is known to be in that English: the
+#                `english` dial, or for American, its spelling (color, gray)
+#   not_in:      genres where the word is a term of art (a browser's cookies)
+#
+# A swap to itself is a guard: it claims its words so a shorter swap inside can't ("petroleum jelly" keeps
+# its jelly). Overlapping swaps go longest first. The table is checked at load: no Australian it writes may be
+# swapped again by another entry.
+#
+# `both` holds what American and British English share and Australia doesn't. `lint_only` is for lint: words
+# with no plain swap ("y'all" -> youse is slang).
+
+both:
+  flip-flop !on|again|back: {to: thong, plural: thongs}   # not "flip-flops on taxes"
+  flip flop !on|again|back: {to: thong, plural: thongs}
+  duvet: doona
+  butternut squash: butternut pumpkin
+  bicarbonate of soda: bicarb soda
+  real estate agent: real estate agent
+
+us:
+  # food and the kitchen
+  faucet: {to: tap, not_in: [technical]}   # a crypto testnet's faucet
+  bell pepper: capsicum
+  cilantro: coriander
+  arugula: rocket
+  scallion: spring onion
+  romaine: cos lettuce
+  rutabaga: swede
+  cantaloupe: rockmelon
+  # berries and cherry tomatoes come by the punnet, not the pint (a pint of milk or beer is left alone)
+  pint of strawberries: punnet of strawberries
+  pints of strawberries: punnets of strawberries
+  pint of blueberries: punnet of blueberries
+  pints of blueberries: punnets of blueberries
+  pint of raspberries: punnet of raspberries
+  pint of cherry tomatoes: punnet of cherry tomatoes
+  pint of grape tomatoes: punnet of cherry tomatoes
+  garbanzo bean: chickpea
+  beet !greens: {to: beetroot, plural: beetroot}
+  sugar beet: sugar beet
+  ground beef: beef mince
+  ground pork: pork mince
+  ground turkey: turkey mince
+  ground lamb: lamb mince
+  candy bar: chocolate bar
+  candy apple: toffee apple
+  candy store: lolly shop
+  candy !bar|bars|apple|apples|store|stores|cane|canes|crush|floss: {to: lollies, plural: lollies}
+  eye candy: eye candy
+  arm candy: arm candy
+  rock candy: rock candy
+  cotton candy: fairy floss
+  popsicle: icy pole
+  jell-o: jelly
+  jello: jelly
+  jelly !bean|beans|baby|babies|fish|roll|rolls: {to: jam, known_only: true}
+  petroleum jelly: petroleum jelly
+  royal jelly: royal jelly
+  jelly roll: Swiss roll
+  peanut butter and jelly: peanut butter and jam
+  biscuits and gravy: {to: scones and gravy, known_only: true}
+  biscuit: {to: scone, known_only: true}
+  appetizer: entrée
+  french fries: {to: chips, plural: chips}
+  french fry: chip
+  the fries: the chips
+  with fries: with chips
+  and fries: and chips
+  of fries: of chips
+  potato chips: chips
+  ketchup: tomato sauce
+  frosting: icing
+  the sprinkles: the hundreds and thousands   # not "she sprinkles salt"
+  with sprinkles: with hundreds and thousands
+  rainbow sprinkles: hundreds and thousands
+  cookie !jar|jars|cutter|cutters|dough: {to: biscuit, not_in: [technical]}
+  fortune cookie: fortune cookie
+  # a browser's cookie, in a how-to as in the docs (the dictionary's guard is WEB_COOKIE)
+  session cookie: session cookie
+  browser cookie: browser cookie
+  tracking cookie: tracking cookie
+  third-party cookie: third-party cookie
+  first-party cookie: first-party cookie
+  http cookie: http cookie
+  cookie settings: cookie settings
+  cookie banner: cookie banner
+  cookie policy: cookie policy
+  cookie consent: cookie consent
+  cookie file: cookie file
+  accept cookies: accept cookies
+  accept all cookies: accept all cookies
+  delete cookies: delete cookies
+  clear cookies: clear cookies
+  clear your cookies: clear your cookies
+  enable cookies: enable cookies
+  block cookies: block cookies
+  disable cookies: disable cookies
+  cookies and site data: cookies and site data
+  uses cookies: uses cookies
+  use cookies: use cookies
+  store cookies: store cookies
+  set cookies: set cookies
+  sets a cookie: sets a cookie
+  set a cookie: set a cookie
+  tough cookie: tough cookie
+  smart cookie: smart cookie
+  cookie jar: biscuit tin
+  cookie sheet: baking tray
+  cookie cutter: biscuit cutter
+  bowl of oatmeal: bowl of porridge   # in a recipe, oatmeal is rolled oats
+  shrimp cocktail: prawn cocktail
+  takeout: takeaway
+  take-out: takeaway
+  soda !water|bread|fountain|ash|can|cans|crystals: {to: soft drink, known_only: true}
+  bicarb soda: bicarb soda
+  caustic soda: caustic soda
+  washing soda: washing soda
+  club soda: soda water
+  baking soda: bicarb soda
+  baking sheet: baking tray
+  parchment paper: baking paper
+  plastic wrap: cling wrap
+  saran wrap: cling wrap
+  powdered sugar: icing sugar
+  confectioners' sugar: icing sugar
+  superfine sugar: caster sugar
+  all-purpose flour: plain flour
+  self-rising flour: self-raising flour
+  self-rising: self-raising
+  heavy cream: thickened cream
+  whole milk: full-cream milk
+  whole wheat: wholemeal
+  rounded tablespoon: heaped tablespoon
+  rounded teaspoon: heaped teaspoon
+  skillet: frying pan
+  broil: {to: grill, frame: vp}
+  broiler: grill
+  kitchen counter: kitchen bench
+  countertop: benchtop
+  dish towel: tea towel
+  dishtowel: tea towel
+  granulated sugar: white sugar
+  cake pan: cake tin
+  loaf pan: loaf tin
+  baking pan: baking tin
+  old-fashioned oats: rolled oats
+  old-fashioned rolled oats: rolled oats
+  dish soap: dishwashing liquid
+  dinner reservation: dinner booking
+  make a reservation: {to: make a booking, frame: vp}
+  # around the house
+  elevator !pitch|pitches|music: lift
+  restroom: toilet
+  bathtub: bath
+  electrical outlet: power point
+  electric outlet: power point
+  wall outlet: power point
+  power outlet: power point
+  walk-in closet: walk-in robe
+  comforter: doona
+  the drapes: the curtains   # not "she drapes the scarf"
+  mailbox: letterbox
+  mailman: postie
+  mail carrier: postie
+  zip code: postcode
+  in the mail: in the post
+  "mail {obj}": {to: "post {obj}", frame: vp}
+  the trash !can|cans|bag|bags|bin|bins: the rubbish
+  trash can: bin
+  trash bag: bin bag
+  garbage can: bin
+  diaper: nappy
+  pacifier: dummy
+  baby carriage: pram
+  flashlight: torch
+  cell phone: mobile
+  cellphone: mobile
+  toilet tank: cistern
+  moist towelette: wet wipe
+  ziploc bag: snap-lock bag
+  scotch tape: sticky tape
+  q-tip: cotton bud
+  condo: unit
+  condominium: unit
+  row house: terrace house
+  yard sale: garage sale
+  thrift store: op shop
+  thrift shop: op shop
+  realtor: real estate agent
+  # out and about
+  parking lot: car park
+  parking garage: car park
+  sidewalk: footpath
+  crosswalk: pedestrian crossing
+  windshield: windscreen
+  license plate: number plate
+  pickup truck: ute
+  tractor-trailer: semitrailer
+  eighteen-wheeler: semitrailer
+  stoplight: traffic light
+  stop light: traffic light
+  construction zone: roadworks
+  rest stop: rest area
+  gasoline: petrol
+  gas station: petrol station
+  gas tank: petrol tank
+  gas pump: petrol pump
+  gas prices: petrol prices
+  out of gas: out of petrol
+  a tank of gas: a tank of petrol
+  flat tire: flat tyre
+  spare tire: spare tyre
+  tire pressure: tyre pressure
+  the tire: the tyre
+  the tires: the tyres
+  the curb: the kerb
+  oil pan: sump
+  top off the tank: {to: top up the tank, frame: vp}   # not "to top it off"
+  liquor store: bottle shop
+  grocery store: supermarket
+  drugstore: chemist
+  drug store: chemist
+  shopping cart: {to: shopping trolley, not_in: [technical]}   # a web shop's cart
+  the mall: the shopping centre
+  shopping mall: shopping centre
+  strip mall: shopping strip
+  movie theater: cinema
+  stand in line: {to: queue up, frame: vp}
+  wait in line: {to: queue up, frame: vp}
+  airplane !mode: plane
+  # a car or a van is hired, not rented (a house or a flat is still rented)
+  rental car: hire car
+  car rental: car hire
+  rent a car: {to: hire a car, frame: vp}
+  rent a van: {to: hire a van, frame: vp}
+  rent a truck: {to: hire a truck, frame: vp}
+  road construction: roadworks
+  # people, school, work, clothes, money
+  percent: {to: per cent, not_in: [technical]}   # a doc's percent-encoding and CSS percentages keep it
+  mommy: mummy
+  grade school: primary school
+  elementary school: primary school
+  grad school: postgrad
+  math: {to: maths, plural: maths}
+  new hire: new starter
+  comp time: time in lieu
+  compensatory time: time in lieu
+  travel comp time: travel comp time   # a US federal entitlement's name (tts_travel_comp_time): kept
+  council member: councillor
+  councilman: councillor
+  councilwoman: councillor
+  prorated: pro rata
+  vacationer: holidaymaker
+  vacation: holiday
+  sweater: jumper
+  undershirt: singlet
+  tank top: singlet
+  fanny pack: bum bag
+  bangs !on|against|into|the|a|his|her|their: {to: fringe, known_only: true}
+  suspenders: {to: braces, known_only: true, plural: braces}
+  braces and suspenders: braces and suspenders
+  vest: {to: waistcoat, known_only: true}
+  life vest: life jacket
+  bulletproof vest: bulletproof vest
+  safety vest: safety vest
+  high-vis vest: high-vis vest
+  "{poss} purse": {to: "{poss} handbag", known_only: true}   # not "purse her lips"
+  a purse: {to: a handbag, known_only: true}
+  the purse !strings: {to: the handbag, known_only: true}
+  dollar bill: dollar note
+  five-dollar bill: five-dollar note
+  ten-dollar bill: ten-dollar note
+  twenty-dollar bill: twenty-dollar note
+  acetaminophen: paracetamol
+  emergency room: emergency department
+  three-fourths: three-quarters
+  one-fourth: one-quarter
+  # seasons
+  in the fall !of: {to: in autumn, known_only: true}   # "she broke her hip in the fall"
+  this fall: {to: this autumn, known_only: true}
+  last fall: {to: last autumn, known_only: true}
+  next fall: {to: next autumn, known_only: true}
+  fall foliage: autumn leaves
+
+uk:
+  courgette: {to: zucchini, plural: zucchini}
+  aubergine: eggplant
+  mangetout: {to: snow peas, plural: snow peas}
+  jacket potato: baked potato
+  candyfloss: fairy floss
+  candy floss: fairy floss
+  ice lolly: icy pole
+  crisps: {to: chips, plural: chips}
+  fizzy drink: soft drink
+  cling film: cling wrap
+  kitchen roll: paper towel
+  hob: stovetop
+  cooker hood: rangehood
+  washing-up liquid: dishwashing liquid
+  the washing-up !liquid|bowl: the dishes
+  the washing up !liquid|bowl: the dishes
+  dustbin: bin
+  binman: garbage collector
+  bin man: garbage collector
+  dustman: garbage collector
+  lorry: truck
+  articulated lorry: semitrailer
+  flyover: {to: overpass, known_only: true}   # American: a flypast
+  pavement: {to: footpath, known_only: true}
+  single ticket: one-way ticket
+  estate agent: real estate agent
+  off-licence: bottle shop
+  chip shop: fish and chip shop
+  fish and chip shop: fish and chip shop
+  chippy: {to: fish and chip shop, known_only: true}
+  high street: main street
+  wellies: {to: gumboots, plural: gumboots}
+  wellington boots: gumboots
+  wellingtons: {to: gumboots, plural: gumboots}
+  pushchair: stroller
+  pants: {to: undies, plural: undies, known_only: true}
+  vest: {to: singlet, known_only: true}
+  life vest: life jacket
+  high-vis vest: high-vis vest
+  thong: {to: g-string, known_only: true}
+  sweets: {to: lollies, plural: lollies, known_only: true}
+  sellotape: sticky tape
+  postman: postie
+  bank holiday: public holiday
+  allotment: {to: community garden plot, known_only: true}
+  council estate: housing commission estate
+
+lint_only:
+  "y'all": youse
+  "ya'll": youse (or ya'd / you'll, if that's what you meant)
+  "you guys": youse
+  gotten: got

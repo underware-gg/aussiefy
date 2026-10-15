@@ -1,0 +1,1070 @@
+{
+ "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as vulgar, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+ "prompt": "BRIEF: level 3, vulgarity 1\n\nORIGINAL:\n---\ntitle: 'The FOLD Auction'\ndescription:\n  'Frequently asked questions about FOLD Auction 2: participation, the Uniswap Continuous Clearing\n  Auction, eligibility, claiming, liquidity support, and general FOLD transferability.'\n---\n\nimport { Callout } from 'nextra/components'\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# The FOLD Auction\n\nThis FAQ is about FOLD Auction 2, the second public FOLD auction. It is for people who took part in\nthe auction or who must claim FOLD after it. The questions are in four groups: the auction itself,\nparticipation, claiming and transferability, and safety.\n\n<Callout type='info'>\n  **Status.** General FOLD transferability is active. The FOLD contract recorded the TGE on Aug 19,\n  2026 at 14:00:23 UTC. `tgeTimestamp()` on the FOLD contract returns `1787148023`.\n</Callout>\n\n## Auction 2 at a glance\n\n| Item                    | Value                                                                                  |\n| ----------------------- | -------------------------------------------------------------------------------------- |\n| Opened                  | Aug 17 at **14:06 UTC (10:06 AM ET)**                                                  |\n| Closed                  | Aug 19 at **13:06 UTC (9:06 AM ET)**                                                   |\n| Allocation              | 2% of total FOLD supply                                                                |\n| Denomination            | USDC                                                                                   |\n| Floor                   | 0.02154816 USDC / FOLD                                                                 |\n| Liquidity               | 50% of proceeds dedicated to long-term on-chain liquidity support                      |\n| General transferability | Active since Aug 19, 2026 at **14:00 UTC (10 AM ET)**                                  |\n| Official auction        | [https://www.theinterfold.com/fold-auction](https://www.theinterfold.com/fold-auction) |\n\n## About the auction\n\n### What is FOLD Auction 2?\n\nFOLD Auction 2 was the second public FOLD auction. It used the Uniswap Continuous Clearing Auction\nmechanism.\n\nIt followed the initial FOLD Auction, which was held July 8–10, 2026.\n\nAuction 2 was intentionally limited to **2% of total FOLD supply**. It was held around the\ntransition to general FOLD transferability. Its purpose was to broaden distribution and help\nbootstrap deeper, longer-term on-chain liquidity.\n\n### Why was there a second FOLD Auction?\n\nAuction 2 was a limited distribution step before general FOLD transferability on Aug 19.\n\nIt was intentionally small at **2% of total FOLD supply**. It began with a floor that matched the\nclearing price of the first FOLD Auction.\n\nThe auction gave a transparent, public mechanism for additional distribution before FOLD became\ngenerally transferable. It also supported long-term on-chain liquidity.\n\n**50% of proceeds were committed to long-term on-chain liquidity support.**\n\nAuction 2 closed shortly before general FOLD transferability was enabled.\n\n### What happened in the first FOLD Auction?\n\nThe initial FOLD Auction ran from **July 8–10, 2026**. It used the Uniswap Continuous Clearing\nAuction mechanism.\n\nThe first auction is complete. Its clearing price was **0.02154816 USDC / FOLD**, which is also the\nfloor for FOLD Auction 2.\n\nParticipants from the first auction can continue to access claiming and post-auction information\nthrough the official [Interfold auction page](https://www.theinterfold.com/fold-auction).\n\n### What is a Uniswap Continuous Clearing Auction?\n\nA Continuous Clearing Auction (CCA) is a price-discovery mechanism for token distribution. It is\nbuilt on Uniswap infrastructure.\n\n- The auction runs across multiple discrete periods.\n- Participants submit bids through the official Uniswap CCA interface.\n- Successful bids within a period clear at the same clearing price.\n- The minimum price for each subsequent period is the greater of the original floor price or the\n  clearing price of the previous period.\n- The minimum price may rise in later periods. It does not fall below the applicable prior clearing\n  price or the original floor.\n- Any tokens not distributed earlier remain available in the final period.\n\nThe CCA distributes tokens progressively and applies a uniform price within each period. This design\nis intended to reduce gas competition, mitigate sniping, and let clearing prices develop through\nauction participation.\n\n[Read more about Uniswap CCAs](https://cca.uniswap.org).\n\n### Did the auction determine the price of FOLD after transferability?\n\nNo. The auction determined allocations and a clearing price within the auction itself. It did not\ndetermine the market price of FOLD when general transferability began.\n\nFuture market prices cannot be predicted.\n\n## Participation\n\n<Callout type='warning'>\n  Auction 2 closed on Aug 19, 2026 at 13:06 UTC. The steps in this section show how the auction\n  worked. You cannot submit a new bid.\n</Callout>\n\n### How did participation work?\n\n1. Participants went to the official [FOLD Auction page](https://www.theinterfold.com/fold-auction).\n2. They followed the verified link to the Uniswap CCA interface.\n3. They completed the required verification process through the official flow.\n4. They submitted bids during the auction window.\n5. After the auction closed, they could claim any allocated FOLD and unspent USDC through the\n   verified auction interface.\n\nParticipants needed USDC on Ethereum Mainnet. They had to review the auction terms and eligibility\nrequirements before they took part.\n\n### Who could participate?\n\nParticipation was available to eligible participants. It was subject to jurisdiction, identity\nverification, AML and sanctions screening, and other applicable restrictions.\n\nThe official verification process determined eligibility. The auction terms governed eligibility.\n\nCompleting verification did not guarantee eligibility or an allocation.\n\n### Was KYC required?\n\nYes. Participants had to complete identity verification through the official verification process\nbefore they took part.\n\nThe verification process determined eligibility and did applicable AML and sanctions screening.\n\nParticipation was subject to the auction terms and applicable restrictions.\n\n## Claiming and transferability\n\n### When can participants claim FOLD?\n\nClaiming was scheduled to open immediately after the auction closed.\n\nParticipants claim allocated FOLD and any unspent USDC through the verified auction interface.\n\nClaiming and general FOLD transferability are separate actions.\n\n### When did general FOLD transferability begin?\n\nFOLD Auction 2 closed Aug 19 at **13:06 UTC (9:06 AM ET)**.\n\nGeneral FOLD transferability could be enabled shortly afterward, at or after **14:00 UTC (10 AM\nET)**.\n\nAt or after Unix timestamp **`1787148000`**, anyone could call the `tge()` function on the FOLD\ncontract to enable general transferability. The TGE transaction was executed on Aug 19, 2026 at\n14:00:23 UTC. `tgeTimestamp()` returns `1787148023`. FOLD is now generally transferable.\n\nFOLD Auction 2, claiming, general FOLD transferability, and Network Alpha are distinct milestones\nwithin the broader Interfold launch sequence. For details, see\n[FOLD Transferability](/faq/transferability).\n\n## Safety\n\n### How do I know I’m using the official auction?\n\nUse only auction, claiming, verification, and support links published through official Interfold\nchannels.\n\nOfficial Interfold channels are:\n\n- [Interfold auction page](https://www.theinterfold.com/fold-auction)\n- [Interfold website](https://www.theinterfold.com/)\n- [Interfold X account](https://x.com/theinterfold)\n- [Interfold documentation](https://docs.theinterfold.com/)\n\nDo not trust:\n\n- Auction, claiming, or support links sent through unsolicited DMs.\n- Copied token or contract addresses from unofficial sources.\n- Impersonator accounts.\n- Private wallet-connection links.\n- Requests for your seed phrase, private key, or wallet backup.\n- Requests for payment in exchange for support.\n\n<Callout type='warning'>\n  Interfold team members and moderators will never ask for your seed phrase, private key, wallet\n  backup, or access to your wallet.\n</Callout>\n\n## Important Information\n\n_FOLD Auction 2, general FOLD transferability, and Network Alpha are distinct parts of the launch\nsequence._\n\n_Official information will be published only through Interfold’s verified channels._\n\n**_Eligibility notice._** _Participation in the FOLD auction was subject to eligibility\nrequirements, jurisdictional restrictions, verification procedures, AML/sanctions screening, and\nother applicable restrictions. Participation could be restricted in certain jurisdictions._\n\n**_Issuer notice._** _The FOLD auction was conducted by Interfold Ltd. (the “Issuer”). Participation\nin the FOLD auction was subject to the official Auction Terms, eligibility requirements, and\nverification procedures._\n\n**_No advice / risk notice._** _Nothing in this communication constitutes legal, tax, financial,\ninvestment, or other professional advice. The auction floor does not represent any projection,\nestimate, or guarantee of FOLD’s actual price or value._\n\nRead the full [FOLD Auction Terms](https://www.theinterfold.com/auction/legal).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    The CCA Sale allocation and the other allocations of FOLD.\n  </LinkCard>\n  <LinkCard title='FOLD Token FAQ' href='/faq/fold-token' icon='sparkle' tag='FAQ'>\n    What FOLD does in the Interfold network.\n  </LinkCard>\n</LinkCards>\n\nCANDIDATE A:\n---\ntitle: 'The FOLD Auction'\ndescription:\n  'Frequently asked questions about FOLD Auction 2: participation, the Uniswap Continuous Clearing\n  Auction, eligibility, claiming, liquidity support, and general FOLD transferability.'\n---\n\nimport { Callout } from 'nextra/components'\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# The FOLD Auction\n\nThis FAQ is about FOLD Auction 2, the second public FOLD auction. It is for people who took part in\nthe auction or who must claim FOLD after it. The questions are in four groups: the auction itself,\nparticipation, claiming and transferability, and safety.\n\n<Callout type='info'>\n  **Status.** General FOLD transferability is active. The FOLD contract recorded the TGE on Aug 19,\n  2026 at 14:00:23 UTC. `tgeTimestamp()` on the FOLD contract returns `1787148023`.\n</Callout>\n\n## Auction 2 at a glance\n\n| Item                    | Value                                                                                  |\n| ----------------------- | -------------------------------------------------------------------------------------- |\n| Opened                  | Aug 17 at **14:06 UTC (10:06 AM ET)**                                                  |\n| Closed                  | Aug 19 at **13:06 UTC (9:06 AM ET)**                                                   |\n| Allocation              | 2% of total FOLD supply                                                                |\n| Denomination            | USDC                                                                                   |\n| Floor                   | 0.02154816 USDC / FOLD                                                                 |\n| Liquidity               | 50% of proceeds dedicated to long-term on-chain liquidity support                      |\n| General transferability | Active since Aug 19, 2026 at **14:00 UTC (10 AM ET)**                                  |\n| Official auction        | [https://www.theinterfold.com/fold-auction](https://www.theinterfold.com/fold-auction) |\n\n## About the auction\n\n### What is FOLD Auction 2?\n\nFOLD Auction 2 was the second public FOLD auction. It used the Uniswap Continuous Clearing Auction\nmechanism.\n\nIt followed the initial FOLD Auction, which was held July 8–10, 2026.\n\nAuction 2 was intentionally limited to **2% of total FOLD supply**. It was held around the\ntransition to general FOLD transferability. Its purpose was to broaden distribution and help\nbootstrap deeper, longer-term on-chain liquidity.\n\n### Why was there a second FOLD Auction?\n\nAuction 2 was a limited distribution step before general FOLD transferability on Aug 19.\n\nIt was intentionally small at **2% of total FOLD supply**. It began with a floor that matched the\nclearing price of the first FOLD Auction.\n\nThe auction gave a transparent, public mechanism for additional distribution before FOLD became\ngenerally transferable. It also supported long-term on-chain liquidity.\n\n**50% of proceeds were committed to long-term on-chain liquidity support.**\n\nAuction 2 closed shortly before general FOLD transferability was enabled.\n\n### What happened in the first FOLD Auction?\n\nThe initial FOLD Auction ran from **July 8–10, 2026**. It used the Uniswap Continuous Clearing\nAuction mechanism.\n\nThe first auction is complete. Its clearing price was **0.02154816 USDC / FOLD**, which is also the\nfloor for FOLD Auction 2.\n\nParticipants from the first auction can continue to access claiming and post-auction information\nthrough the official [Interfold auction page](https://www.theinterfold.com/fold-auction).\n\n### What is a Uniswap Continuous Clearing Auction?\n\nA Continuous Clearing Auction (CCA) is a price-discovery mechanism for token distribution. It is\nbuilt on Uniswap infrastructure.\n\n- The auction runs across multiple discrete periods.\n- Participants submit bids through the official Uniswap CCA interface.\n- Successful bids within a period clear at the same clearing price.\n- The minimum price for each subsequent period is the greater of the original floor price or the\n  clearing price of the previous period.\n- The minimum price may rise in later periods. It does not fall below the applicable prior clearing\n  price or the original floor.\n- Any tokens not distributed earlier remain available in the final period.\n\nThe CCA distributes tokens progressively and applies a uniform price within each period. This design\nis intended to reduce gas competition, mitigate sniping, and let clearing prices develop through\nauction participation.\n\n[Read more about Uniswap CCAs](https://cca.uniswap.org).\n\n### Did the auction determine the price of FOLD after transferability?\n\nNah, nah. The auction determined allocations and a clearing price within the auction itself. It did not\ndetermine the market price of FOLD when general transferability began.\n\nFuture market prices cannot be predicted.\n\n## Participation\n\n<Callout type='warning'>\n  Auction 2 closed on Aug 19, 2026 at 13:06 UTC. The steps in this section show how the auction\n  worked. You cannot submit a new bid.\n</Callout>\n\n### How did participation work?\n\n1. Participants went to the official [FOLD Auction page](https://www.theinterfold.com/fold-auction).\n2. They followed the verified link to the Uniswap CCA interface.\n3. They completed the required verification process through the official flow.\n4. They submitted bids during the auction window.\n5. After the auction closed, they could claim any allocated FOLD and unspent USDC through the\n   verified auction interface.\n\nParticipants needed USDC on Ethereum Mainnet. They had to review the auction terms and eligibility\nrequirements before they took part.\n\n### Who could participate?\n\nParticipation was available to eligible participants. It was subject to jurisdiction, identity\nverification, AML and sanctions screening, and other applicable restrictions.\n\nThe official verification process determined eligibility. The auction terms governed eligibility.\n\nCompleting verification did not guarantee eligibility or an allocation.\n\n### Was KYC required?\n\nYep. Participants had to complete identity verification through the official verification process\nbefore they took part.\n\nThe verification process determined eligibility and did applicable AML and sanctions screening.\n\nParticipation was subject to the auction terms and applicable restrictions.\n\n## Claiming and transferability\n\n### When can participants claim FOLD?\n\nClaiming was scheduled to open immediately after the auction closed.\n\nParticipants claim allocated FOLD and any unspent USDC through the verified auction interface.\n\nClaiming and general FOLD transferability are separate actions.\n\n### When did general FOLD transferability begin?\n\nFOLD Auction 2 closed Aug 19 at **13:06 UTC (9:06 AM ET)**.\n\nGeneral FOLD transferability could be enabled shortly afterward, at or after **14:00 UTC (10 AM\nET)**.\n\nAt or after Unix timestamp **`1787148000`**, anyone could call the `tge()` function on the FOLD\ncontract to enable general transferability. The TGE transaction was executed on Aug 19, 2026 at\n14:00:23 UTC. `tgeTimestamp()` returns `1787148023`. FOLD is now generally transferable.\n\nFOLD Auction 2, claiming, general FOLD transferability, and Network Alpha are distinct milestones\nwithin the broader Interfold launch sequence. For details, see\n[FOLD Transferability](/faq/transferability).\n\n## Safety\n\n### How do I know I’m using the official auction?\n\nUse only auction, claiming, verification, and support links published through official Interfold\nchannels.\n\nOfficial Interfold channels are:\n\n- [Interfold auction page](https://www.theinterfold.com/fold-auction)\n- [Interfold website](https://www.theinterfold.com/)\n- [Interfold X account](https://x.com/theinterfold)\n- [Interfold documentation](https://docs.theinterfold.com/)\n\nDo not trust:\n\n- Auction, claiming, or support links sent through unsolicited DMs.\n- Copied token or contract addresses from unofficial sources.\n- Impersonator accounts.\n- Private wallet-connection links.\n- Requests for your seed phrase, private key, or wallet backup.\n- Requests for payment in exchange for support.\n\n<Callout type='warning'>\n  Interfold team members and moderators will never ask for your seed phrase, private key, wallet\n  backup, or access to your wallet.\n</Callout>\n\n## Important Information\n\n_FOLD Auction 2, general FOLD transferability, and Network Alpha are distinct parts of the launch\nsequence._\n\n_Official information will be published only through Interfold’s verified channels._\n\n**_Eligibility notice._** _Participation in the FOLD auction was subject to eligibility\nrequirements, jurisdictional restrictions, verification procedures, AML/sanctions screening, and\nother applicable restrictions. Participation could be restricted in certain jurisdictions._\n\n**_Issuer notice._** _The FOLD auction was conducted by Interfold Ltd. (the “Issuer”). Participation\nin the FOLD auction was subject to the official Auction Terms, eligibility requirements, and\nverification procedures._\n\n**_No advice / risk notice._** _Nothing in this communication constitutes legal, tax, financial,\ninvestment, or other professional advice. The auction floor does not represent any projection,\nestimate, or guarantee of FOLD’s actual price or value._\n\nRead the full [FOLD Auction Terms](https://www.theinterfold.com/auction/legal).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    The CCA Sale allocation and the other allocations of FOLD.\n  </LinkCard>\n  <LinkCard title='FOLD Token FAQ' href='/faq/fold-token' icon='sparkle' tag='FAQ'>\n    What FOLD does in the Interfold network.\n  </LinkCard>\n</LinkCards>\n\nCANDIDATE B:\n---\ntitle: 'The FOLD Auction'\ndescription:\n  'Frequently asked questions about FOLD Auction 2: participation, the Uniswap Continuous Clearing\n  Auction, eligibility, claiming, liquidity support, and general FOLD transferability.'\n---\n\nimport { Callout } from 'nextra/components'\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# The FOLD Auction\n\nThis FAQ covers FOLD Auction 2, the second public FOLD auction. It's for people who had a go in\nthe auction, or who need to claim FOLD after it. The questions come in four lots: the auction itself,\nparticipation, claiming and transferability, and safety.\n\n<Callout type='info'>\n  **Status.** General FOLD transferability is switched on. The FOLD contract recorded the TGE on Aug 19,\n  2026 at 14:00:23 UTC. `tgeTimestamp()` on the FOLD contract returns `1787148023`.\n</Callout>\n\n## Auction 2 at a glance\n\n| Item                    | Value                                                                                  |\n| ----------------------- | -------------------------------------------------------------------------------------- |\n| Opened                  | Aug 17 at **14:06 UTC (10:06 AM ET)**                                                  |\n| Closed                  | Aug 19 at **13:06 UTC (9:06 AM ET)**                                                   |\n| Allocation              | 2% of total FOLD supply                                                                |\n| Denomination            | USDC                                                                                   |\n| Floor                   | 0.02154816 USDC / FOLD                                                                 |\n| Liquidity               | 50% of proceeds dedicated to long-term on-chain liquidity support                      |\n| General transferability | Active since Aug 19, 2026 at **14:00 UTC (10 AM ET)**                                  |\n| Official auction        | [https://www.theinterfold.com/fold-auction](https://www.theinterfold.com/fold-auction) |\n\n## About the auction\n\n### What is FOLD Auction 2?\n\nFOLD Auction 2 was the second public FOLD auction. It ran on the Uniswap Continuous Clearing Auction\nmechanism.\n\nIt came after the first FOLD Auction, which was held July 8–10, 2026.\n\nAuction 2 was kept small on purpose, at **2% of total FOLD supply**. It was held around the\nchangeover to general FOLD transferability. The idea was to spread FOLD around more widely and help\nget deeper, longer-term on-chain liquidity up and running.\n\n### Why was there a second FOLD Auction?\n\nAuction 2 was a limited distribution step before general FOLD transferability on Aug 19.\n\nIt was kept small on purpose, at **2% of total FOLD supply**. It kicked off with a floor that matched the\nclearing price of the first FOLD Auction.\n\nThe auction gave an open, public way to hand out more FOLD before it became\ngenerally transferable. It also backed long-term on-chain liquidity.\n\n**50% of proceeds were committed to long-term on-chain liquidity support.**\n\nAuction 2 wrapped up just before general FOLD transferability was switched on.\n\n### What happened in the first FOLD Auction?\n\nThe first FOLD Auction ran from **July 8–10, 2026**. It used the Uniswap Continuous Clearing\nAuction mechanism.\n\nThat first auction's done and dusted. Its clearing price was **0.02154816 USDC / FOLD**, which is also the\nfloor for FOLD Auction 2.\n\nPeople who took part in the first auction can still get to claiming and the post-auction info\nthrough the official [Interfold auction page](https://www.theinterfold.com/fold-auction).\n\n### What is a Uniswap Continuous Clearing Auction?\n\nA Continuous Clearing Auction (CCA) is a way of finding the price when tokens get handed out. It's\nbuilt on Uniswap infrastructure.\n\n- The auction runs over a number of separate periods.\n- Participants put their bids in through the official Uniswap CCA interface.\n- Successful bids within a period all clear at the same clearing price.\n- The minimum price for each later period is whichever's higher: the original floor price or the\n  clearing price of the period before.\n- The minimum price can go up in later periods. It doesn't drop below the applicable earlier clearing\n  price or the original floor.\n- Any tokens not handed out earlier are still up for grabs in the final period.\n\nThe CCA hands tokens out bit by bit and sets one price for everyone within each period. It's\ndesigned to cut down gas competition, make sniping harder, and let clearing prices settle through\npeople taking part in the auction.\n\n[Read more about Uniswap CCAs](https://cca.uniswap.org).\n\n### Did the auction determine the price of FOLD after transferability?\n\nNah, nah. The auction settled the allocations and a clearing price within the auction itself. It didn't\nset the market price of FOLD when general transferability started.\n\nNobody can tell you what market prices will do down the track.\n\n## Participation\n\n<Callout type='warning'>\n  Auction 2 closed on Aug 19, 2026 at 13:06 UTC. The steps in this section show how the auction\n  worked. You can't put in a new bid.\n</Callout>\n\n### How did participation work?\n\n1. Participants headed to the official [FOLD Auction page](https://www.theinterfold.com/fold-auction).\n2. They followed the verified link through to the Uniswap CCA interface.\n3. They got through the required verification process via the official flow.\n4. They put their bids in during the auction window.\n5. Once the auction closed, they could claim any allocated FOLD and unspent USDC through the\n   verified auction interface.\n\nParticipants needed USDC on Ethereum Mainnet. They had to read over the auction terms and eligibility\nrequirements before they had a crack at it.\n\n### Who could participate?\n\nParticipation was open to eligible participants. It was subject to jurisdiction, identity\nverification, AML and sanctions screening, and other applicable restrictions.\n\nThe official verification process decided who was eligible. The auction terms governed eligibility.\n\nGetting through verification didn't guarantee you were eligible or that you'd get an allocation.\n\n### Was KYC required?\n\nYep. Participants had to get through identity verification via the official verification process\nbefore they took part.\n\nThe verification process decided eligibility and did the applicable AML and sanctions screening.\n\nParticipation was subject to the auction terms and applicable restrictions.\n\n## Claiming and transferability\n\n### When can participants claim FOLD?\n\nClaiming was set to open straight after the auction closed.\n\nParticipants claim allocated FOLD and any unspent USDC through the verified auction interface.\n\nClaiming and general FOLD transferability are two separate things.\n\n### When did general FOLD transferability begin?\n\nFOLD Auction 2 closed Aug 19 at **13:06 UTC (9:06 AM ET)**.\n\nGeneral FOLD transferability could be switched on not long after, at or after **14:00 UTC (10 AM\nET)**.\n\nAt or after Unix timestamp **`1787148000`**, anyone could call the `tge()` function on the FOLD\ncontract to switch on general transferability. The TGE transaction went through on Aug 19, 2026 at\n14:00:23 UTC. `tgeTimestamp()` returns `1787148023`. FOLD is now generally transferable.\n\nFOLD Auction 2, claiming, general FOLD transferability, and Network Alpha are separate milestones\nin the bigger Interfold launch sequence. For the details, see\n[FOLD Transferability](/faq/transferability).\n\n## Safety\n\n### How do I know I’m using the official auction?\n\nOnly use auction, claiming, verification, and support links put out through official Interfold\nchannels.\n\nThe official Interfold channels are:\n\n- [Interfold auction page](https://www.theinterfold.com/fold-auction)\n- [Interfold website](https://www.theinterfold.com/)\n- [Interfold X account](https://x.com/theinterfold)\n- [Interfold documentation](https://docs.theinterfold.com/)\n\nDon't trust:\n\n- Auction, claiming, or support links sent to you in DMs out of the blue.\n- Token or contract addresses copied from unofficial sources.\n- Accounts pretending to be someone they're not.\n- Private wallet-connection links.\n- Anyone asking for your seed phrase, private key, or wallet backup.\n- Anyone asking you to pay for support.\n\n<Callout type='warning'>\n  Interfold team members and moderators will never ask for your seed phrase, private key, wallet\n  backup, or access to your wallet.\n</Callout>\n\n## Important Information\n\n_FOLD Auction 2, general FOLD transferability, and Network Alpha are separate parts of the launch\nsequence._\n\n_Official information will only be put out through Interfold’s verified channels._\n\n**_Eligibility notice._** _Participation in the FOLD auction was subject to eligibility\nrequirements, jurisdictional restrictions, verification procedures, AML/sanctions screening, and\nother applicable restrictions. Participation could be restricted in certain jurisdictions._\n\n**_Issuer notice._** _The FOLD auction was run by Interfold Ltd. (the “Issuer”). Participation\nin the FOLD auction was subject to the official Auction Terms, eligibility requirements, and\nverification procedures._\n\n**_No advice / risk notice._** _Nothing in this communication is legal, tax, financial,\ninvestment, or other professional advice. The auction floor isn't any projection,\nestimate, or guarantee of FOLD’s actual price or value._\n\nHave a read of the full [FOLD Auction Terms](https://www.theinterfold.com/auction/legal).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    The CCA Sale allocation and the other allocations of FOLD.\n  </LinkCard>\n  <LinkCard title='FOLD Token FAQ' href='/faq/fold-token' icon='sparkle' tag='FAQ'>\n    What FOLD does in the Interfold network.\n  </LinkCard>\n</LinkCards>\n\nCANDIDATE C:\n---\ntitle: 'The FOLD Auction'\ndescription:\n  'Frequently asked questions about FOLD Auction 2: participation, the Uniswap Continuous Clearing\n  Auction, eligibility, claiming, liquidity support, and general FOLD transferability.'\n---\n\nimport { Callout } from 'nextra/components'\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# The FOLD Auction\n\nHere's the good oil. This FAQ's all about FOLD Auction 2, the second public FOLD auction. It's for anyone\nwho had a crack at the auction, or who's got FOLD to claim after it. We've split the questions into four\nbits: the auction itself, participation, claiming and transferability, and safety.\n\n<Callout type='info'>\n  **Status.** General FOLD transferability is up and running. The FOLD contract recorded the TGE on Aug 19,\n  2026 at 14:00:23 UTC, on the dot (well, near enough). `tgeTimestamp()` on the FOLD contract returns `1787148023`.\n</Callout>\n\n## Auction 2 at a glance\n\n| Item                    | Value                                                                                  |\n| ----------------------- | -------------------------------------------------------------------------------------- |\n| Opened                  | Aug 17 at **14:06 UTC (10:06 AM ET)**                                                  |\n| Closed                  | Aug 19 at **13:06 UTC (9:06 AM ET)**                                                   |\n| Allocation              | 2% of total FOLD supply                                                                |\n| Denomination            | USDC                                                                                   |\n| Floor                   | 0.02154816 USDC / FOLD                                                                 |\n| Liquidity               | 50% of proceeds dedicated to long-term on-chain liquidity support                      |\n| General transferability | Active since Aug 19, 2026 at **14:00 UTC (10 AM ET)**                                  |\n| Official auction        | [https://www.theinterfold.com/fold-auction](https://www.theinterfold.com/fold-auction) |\n\n## About the auction\n\n### What is FOLD Auction 2?\n\nFOLD Auction 2 was the second public FOLD auction, the sequel, if you like. It ran on the Uniswap\nContinuous Clearing Auction mechanism.\n\nIt followed on from the first FOLD Auction, which was held July 8–10, 2026.\n\nAuction 2 was kept small on purpose: just **2% of total FOLD supply**, not the whole box and dice. It\nwas held right around the changeover to general FOLD transferability. The point of it was to spread\nFOLD round a few more hands and help get deeper, longer-term on-chain liquidity off the ground.\n\n### Why was there a second FOLD Auction?\n\nThink of Auction 2 as a limited distribution step, one last hand-out before general FOLD\ntransferability on Aug 19.\n\nIt was small on purpose, at **2% of total FOLD supply**. And it kicked off with a floor that matched\nthe clearing price of the first FOLD Auction, so nobody started lower than last time.\n\nThe auction gave everyone an open, public way to get more FOLD out the door before it became\ngenerally transferable. It also put its shoulder behind long-term on-chain liquidity.\n\n**50% of proceeds were committed to long-term on-chain liquidity support.**\n\nAuction 2 shut up shop just before general FOLD transferability was switched on.\n\n### What happened in the first FOLD Auction?\n\nThe first FOLD Auction ran from **July 8–10, 2026**. It used the same Uniswap Continuous Clearing\nAuction mechanism.\n\nThat one's done and dusted. Its clearing price was **0.02154816 USDC / FOLD**, and that's also the\nfloor for FOLD Auction 2.\n\nIf you were in the first auction, you can still get to claiming and the post-auction info through the\nofficial [Interfold auction page](https://www.theinterfold.com/fold-auction).\n\n### What is a Uniswap Continuous Clearing Auction?\n\nA Continuous Clearing Auction (CCA) is a way of sussing out the price when tokens get handed out. It's\nbuilt on Uniswap infrastructure. Here's how it goes:\n\n- The auction runs over a string of separate periods.\n- Participants put their bids in through the official Uniswap CCA interface.\n- Successful bids within a period all clear at the same clearing price, no favourites.\n- The minimum price for each later period is whichever's higher: the original floor price or the\n  clearing price of the period before.\n- The minimum price can creep up in later periods. It never drops below the applicable earlier clearing\n  price or the original floor.\n- Any tokens not handed out earlier are still up for grabs in the final period.\n\nSo the CCA dishes tokens out bit by bit, with one price for everyone in each period. It's built to cut\ndown the gas competition, make life hard for snipers, and let the clearing prices find their own level\nas people take part in the auction.\n\n[Read more about Uniswap CCAs](https://cca.uniswap.org).\n\n### Did the auction determine the price of FOLD after transferability?\n\nNah, nah. The auction sorted out the allocations and a clearing price inside the auction itself, and\nthat's where it stopped. It didn't set the market price of FOLD when general transferability started.\n\nAnd where market prices go from here? Nobody can tell ya. Anyone who reckons they can is dreamin'.\n\n## Participation\n\n<Callout type='warning'>\n  Auction 2 closed on Aug 19, 2026 at 13:06 UTC. The steps in this section show how the auction\n  worked, for the record. You can't put in a new bid. That horse has bolted.\n</Callout>\n\n### How did participation work?\n\n1. Participants headed over to the official [FOLD Auction page](https://www.theinterfold.com/fold-auction).\n2. They followed the verified link through to the Uniswap CCA interface.\n3. They got through the required verification process via the official flow.\n4. They put their bids in while the auction window was open.\n5. Once the auction closed, they could claim any allocated FOLD and unspent USDC through the\n   verified auction interface.\n\nParticipants needed USDC on Ethereum Mainnet. And before they had a go, they had to read over the\nauction terms and eligibility requirements. Homework first.\n\n### Who could participate?\n\nParticipation was open to eligible participants. It was subject to jurisdiction, identity\nverification, AML and sanctions screening, and other applicable restrictions.\n\nThe official verification process decided who was eligible, and the auction terms governed eligibility.\n\nMind you, getting through verification didn't guarantee you were eligible, or that you'd score an\nallocation.\n\n### Was KYC required?\n\nYep. Participants had to get through identity verification via the official verification process\nbefore they took part. No ID, no go.\n\nThe verification process decided eligibility and ran the applicable AML and sanctions screening.\n\nParticipation was subject to the auction terms and applicable restrictions.\n\n## Claiming and transferability\n\n### When can participants claim FOLD?\n\nClaiming was set to open straight after the auction closed.\n\nParticipants claim allocated FOLD and any unspent USDC through the verified auction interface.\n\nNow, claiming and general FOLD transferability are two separate things. Don't mix 'em up.\n\n### When did general FOLD transferability begin?\n\nFOLD Auction 2 closed Aug 19 at **13:06 UTC (9:06 AM ET)**.\n\nGeneral FOLD transferability could be switched on not long after, at or after **14:00 UTC (10 AM\nET)**.\n\nAt or after Unix timestamp **`1787148000`**, anyone at all could call the `tge()` function on the FOLD\ncontract to switch on general transferability. The TGE transaction went through on Aug 19, 2026 at\n14:00:23 UTC. `tgeTimestamp()` returns `1787148023`. So FOLD's now generally transferable. Done.\n\nFOLD Auction 2, claiming, general FOLD transferability, and Network Alpha are separate milestones in\nthe bigger Interfold launch sequence. For the nitty-gritty, see\n[FOLD Transferability](/faq/transferability).\n\n## Safety\n\n### How do I know I’m using the official auction?\n\nThis bit matters. Only use auction, claiming, verification, and support links put out through\nofficial Interfold channels.\n\nThe official Interfold channels are:\n\n- [Interfold auction page](https://www.theinterfold.com/fold-auction)\n- [Interfold website](https://www.theinterfold.com/)\n- [Interfold X account](https://x.com/theinterfold)\n- [Interfold documentation](https://docs.theinterfold.com/)\n\nDon't trust:\n\n- Auction, claiming, or support links sent to you in DMs out of the blue.\n- Token or contract addresses copied from unofficial sources.\n- Accounts pretending to be someone they're not.\n- Private wallet-connection links.\n- Anyone asking for your seed phrase, private key, or wallet backup.\n- Anyone asking you to pay for support.\n\nIf it looks suss, it probably is.\n\n<Callout type='warning'>\n  Interfold team members and moderators will never ask for your seed phrase, private key, wallet\n  backup, or access to your wallet. Never. Anyone who does is a shonk.\n</Callout>\n\n## Important Information\n\n_FOLD Auction 2, general FOLD transferability, and Network Alpha are separate parts of the launch\nsequence._\n\n_Official information will only ever be put out through Interfold’s verified channels._\n\n**_Eligibility notice._** _Participation in the FOLD auction was subject to eligibility\nrequirements, jurisdictional restrictions, verification procedures, AML/sanctions screening, and\nother applicable restrictions. Participation could be restricted in certain jurisdictions._\n\n**_Issuer notice._** _The FOLD auction was run by Interfold Ltd. (the “Issuer”). Participation\nin the FOLD auction was subject to the official Auction Terms, eligibility requirements, and\nverification procedures._\n\n**_No advice / risk notice._** _Nothing in this communication is legal, tax, financial,\ninvestment, or other professional advice. The auction floor isn't any projection,\nestimate, or guarantee of FOLD’s actual price or value._\n\nHave a proper read of the full [FOLD Auction Terms](https://www.theinterfold.com/auction/legal).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    The CCA Sale allocation and the other allocations of FOLD.\n  </LinkCard>\n  <LinkCard title='FOLD Token FAQ' href='/faq/fold-token' icon='sparkle' tag='FAQ'>\n    What FOLD does in the Interfold network.\n  </LinkCard>\n</LinkCards>\n\nCANDIDATE D:\n---\ntitle: 'The FOLD Auction'\ndescription:\n  'Frequently asked questions about FOLD Auction 2: participation, the Uniswap Continuous Clearing\n  Auction, eligibility, claiming, liquidity support, and general FOLD transferability.'\n---\n\nimport { Callout } from 'nextra/components'\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# The FOLD Auction\n\nThis FAQ's all about FOLD Auction 2, the second public FOLD auction. It's for folks who had a go in\nthe auction or who've got to claim FOLD after it. The questions are split into four lots: the auction\nitself, participation, claiming and transferability, and safety.\n\n<Callout type='info'>\n  **Status.** General FOLD transferability is up and running. The FOLD contract recorded the TGE on\n  Aug 19, 2026 at 14:00:23 UTC. `tgeTimestamp()` on the FOLD contract returns `1787148023`.\n</Callout>\n\n## Auction 2 at a glance\n\n| Item                    | Value                                                                                  |\n| ----------------------- | -------------------------------------------------------------------------------------- |\n| Opened                  | Aug 17 at **14:06 UTC (10:06 AM ET)**                                                  |\n| Closed                  | Aug 19 at **13:06 UTC (9:06 AM ET)**                                                   |\n| Allocation              | 2% of total FOLD supply                                                                |\n| Denomination            | USDC                                                                                   |\n| Floor                   | 0.02154816 USDC / FOLD                                                                 |\n| Liquidity               | 50% of proceeds dedicated to long-term on-chain liquidity support                      |\n| General transferability | Active since Aug 19, 2026 at **14:00 UTC (10 AM ET)**                                  |\n| Official auction        | [https://www.theinterfold.com/fold-auction](https://www.theinterfold.com/fold-auction) |\n\n## About the auction\n\n### What is FOLD Auction 2?\n\nFOLD Auction 2 was the second public FOLD auction. It ran on the Uniswap Continuous Clearing Auction\nmechanism.\n\nIt came after the first FOLD Auction, which was held July 8–10, 2026.\n\nAuction 2 was kept to **2% of total FOLD supply** on purpose. It was held round the time FOLD\nswitched over to general transferability. The point of it was to spread FOLD around more widely and\nhelp get deeper, longer-term on-chain liquidity off the ground.\n\n### Why was there a second FOLD Auction?\n\nAuction 2 was a limited distribution step before general FOLD transferability kicked in on Aug 19.\n\nIt was kept small on purpose, at **2% of total FOLD supply**. It started with a floor that matched\nthe clearing price of the first FOLD Auction.\n\nThe auction gave a transparent, public way to hand out more FOLD before it became generally\ntransferable. It also backed long-term on-chain liquidity.\n\n**50% of proceeds were locked in for long-term on-chain liquidity support.**\n\nAuction 2 wrapped up not long before general FOLD transferability was switched on.\n\n### What happened in the first FOLD Auction?\n\nThe first FOLD Auction ran from **July 8–10, 2026**. It used the Uniswap Continuous Clearing\nAuction mechanism.\n\nThe first auction's done and dusted. Its clearing price was **0.02154816 USDC / FOLD**, which is\nalso the floor for FOLD Auction 2.\n\nPeople who took part in the first auction can still get to claiming and post-auction info through\nthe official [Interfold auction page](https://www.theinterfold.com/fold-auction).\n\n### What is a Uniswap Continuous Clearing Auction?\n\nA Continuous Clearing Auction (CCA) is a way of working out the price when tokens get handed out.\nIt's built on Uniswap infrastructure.\n\n- The auction runs over a number of separate periods.\n- Participants put their bids in through the official Uniswap CCA interface.\n- Winning bids in a period all clear at the same clearing price.\n- The minimum price for each period after that is whichever's higher: the original floor price or\n  the clearing price of the period before.\n- The minimum price can go up in later periods. It doesn't drop below the relevant earlier clearing\n  price or the original floor.\n- Any tokens not handed out earlier are still up for grabs in the final period.\n\nThe CCA hands out tokens bit by bit and uses the one price for everyone within each period. It's\nset up that way to cut down gas wars, stop sniping, and let clearing prices settle through people\ntaking part in the auction.\n\n[Read more about Uniswap CCAs](https://cca.uniswap.org).\n\n### Did the auction determine the price of FOLD after transferability?\n\nNope. The auction worked out allocations and a clearing price within the auction itself. It didn't\nset the market price of FOLD when general transferability kicked off.\n\nNo one can tell you what the market price will do down the track.\n\n## Participation\n\n<Callout type='warning'>\n  Auction 2 closed on Aug 19, 2026 at 13:06 UTC. The steps in this section show how the auction\n  worked. You can't put in a new bid.\n</Callout>\n\n### How did participation work?\n\n1. Participants headed to the official [FOLD Auction page](https://www.theinterfold.com/fold-auction).\n2. They followed the verified link to the Uniswap CCA interface.\n3. They got through the required verification process via the official flow.\n4. They put their bids in during the auction window.\n5. Once the auction closed, they could claim any FOLD they'd been allocated and any unspent USDC\n   through the verified auction interface.\n\nParticipants needed USDC on Ethereum Mainnet. They had to read over the auction terms and\neligibility requirements before they had a go.\n\n### Who could participate?\n\nAnyone eligible could take part. That came down to jurisdiction, identity verification, AML and\nsanctions screening, and other restrictions that applied.\n\nThe official verification process decided who was eligible. The auction terms set the rules on\neligibility.\n\nGetting through verification didn't guarantee you were eligible or that you'd get an allocation.\n\n### Was KYC required?\n\nYep. Participants had to get through identity verification via the official verification process\nbefore they took part.\n\nThe verification process worked out eligibility and did the relevant AML and sanctions screening.\n\nTaking part was subject to the auction terms and any restrictions that applied.\n\n## Claiming and transferability\n\n### When can participants claim FOLD?\n\nClaiming was set to open straight after the auction closed.\n\nParticipants claim their allocated FOLD and any unspent USDC through the verified auction interface.\n\nClaiming and general FOLD transferability are two separate things.\n\n### When did general FOLD transferability begin?\n\nFOLD Auction 2 closed Aug 19 at **13:06 UTC (9:06 AM ET)**.\n\nGeneral FOLD transferability could be switched on not long after, at or after **14:00 UTC (10 AM\nET)**.\n\nAt or after Unix timestamp **`1787148000`**, anyone could call the `tge()` function on the FOLD\ncontract to switch on general transferability. The TGE transaction went through on Aug 19, 2026 at\n14:00:23 UTC. `tgeTimestamp()` returns `1787148023`. FOLD is now generally transferable.\n\nFOLD Auction 2, claiming, general FOLD transferability, and Network Alpha are separate milestones\nin the wider Interfold launch sequence. For the details, have a look at\n[FOLD Transferability](/faq/transferability).\n\n## Safety\n\n### How do I know I’m using the official auction?\n\nOnly use auction, claiming, verification and support links put out through official Interfold\nchannels.\n\nThe official Interfold channels are:\n\n- [Interfold auction page](https://www.theinterfold.com/fold-auction)\n- [Interfold website](https://www.theinterfold.com/)\n- [Interfold X account](https://x.com/theinterfold)\n- [Interfold documentation](https://docs.theinterfold.com/)\n\nDon't trust:\n\n- Auction, claiming or support links that land in your DMs out of the blue.\n- Token or contract addresses copied from dodgy, unofficial sources.\n- Accounts pretending to be someone they're not.\n- Private wallet-connection links.\n- Anyone asking for your seed phrase, private key or wallet backup.\n- Anyone asking you to pay for support.\n\n<Callout type='warning'>\n  Interfold team members and moderators will never, ever ask for your seed phrase, private key,\n  wallet backup, or access to your wallet.\n</Callout>\n\n## Important Information\n\n_FOLD Auction 2, general FOLD transferability, and Network Alpha are separate parts of the launch\nsequence._\n\n_Official info will only be put out through Interfold's verified channels._\n\n**_Eligibility notice._** _Taking part in the FOLD auction was subject to eligibility requirements,\njurisdiction restrictions, verification procedures, AML/sanctions screening, and other restrictions\nthat applied. Taking part could be restricted in some jurisdictions._\n\n**_Issuer notice._** _The FOLD auction was run by Interfold Ltd. (the “Issuer”). Taking part in the\nFOLD auction was subject to the official Auction Terms, eligibility requirements, and verification\nprocedures._\n\n**_No advice / risk notice._** _Nothing in here counts as legal, tax, financial, investment, or\nother professional advice. The auction floor isn't any kind of projection, estimate or guarantee of\nwhat FOLD's actually worth or what it'll trade at._\n\nHave a read of the full [FOLD Auction Terms](https://www.theinterfold.com/auction/legal).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    The CCA Sale allocation and all the other FOLD allocations.\n  </LinkCard>\n  <LinkCard title='FOLD Token FAQ' href='/faq/fold-token' icon='sparkle' tag='FAQ'>\n    What FOLD does in the Interfold network.\n  </LinkCard>\n</LinkCards>\n\nCANDIDATE E:\n---\ntitle: 'The FOLD Auction'\ndescription:\n  'Frequently asked questions about FOLD Auction 2: participation, the Uniswap Continuous Clearing\n  Auction, eligibility, claiming, liquidity support, and general FOLD transferability.'\n---\n\nimport { Callout } from 'nextra/components'\nimport { LinkCard, LinkCards } from '@/components/ui'\n\n# The FOLD Auction\n\nThis FAQ's all about FOLD Auction 2, the second public FOLD auction. It's for anyone who got in on the auction, or who's got FOLD to claim after it. We've split the questions into four groups: the auction itself, taking part, claiming and transferability, and keeping safe.\n\n<Callout type='info'>\n  **Status.** General FOLD transferability's up and running. The FOLD contract recorded the TGE on Aug 19, 2026 at 14:00:23 UTC. Call `tgeTimestamp()` on the FOLD contract and you'll get back `1787148023`.\n</Callout>\n\n## Auction 2 at a glance\n\n| Item                    | Value                                                                                  |\n| ----------------------- | -------------------------------------------------------------------------------------- |\n| Opened                  | Aug 17 at **14:06 UTC (10:06 AM ET)**                                                  |\n| Closed                  | Aug 19 at **13:06 UTC (9:06 AM ET)**                                                   |\n| Allocation              | 2% of total FOLD supply                                                                |\n| Denomination            | USDC                                                                                   |\n| Floor                   | 0.02154816 USDC / FOLD                                                                 |\n| Liquidity               | 50% of proceeds dedicated to long-term on-chain liquidity support                      |\n| General transferability | Active since Aug 19, 2026 at **14:00 UTC (10 AM ET)**                                  |\n| Official auction        | [https://www.theinterfold.com/fold-auction](https://www.theinterfold.com/fold-auction) |\n\n## About the auction\n\n### What is FOLD Auction 2?\n\nFOLD Auction 2 was the second public FOLD auction, and it ran on the Uniswap Continuous Clearing Auction mechanism.\n\nIt came along after the first FOLD Auction, which was held July 8–10, 2026.\n\nWe kept Auction 2 to **2% of total FOLD supply** on purpose, and held it right around the changeover to general FOLD transferability. The point was to get FOLD into more hands and help get deeper, longer-term on-chain liquidity off the ground.\n\n### Why was there a second FOLD Auction?\n\nThink of Auction 2 as a limited step for spreading FOLD round before general FOLD transferability came in on Aug 19.\n\nIt was small on purpose, just **2% of total FOLD supply**, and it started off with a floor that matched the clearing price of the first FOLD Auction.\n\nThe auction was an open, public way of handing out a bit more FOLD before FOLD became generally transferable. It gave long-term on-chain liquidity a leg-up too.\n\n**50% of proceeds were locked in for long-term on-chain liquidity support.**\n\nAuction 2 wrapped up not long before general FOLD transferability got switched on.\n\n### What happened in the first FOLD Auction?\n\nThe first FOLD Auction ran from **July 8–10, 2026**, on the Uniswap Continuous Clearing Auction mechanism.\n\nThat one's all done and dusted. Its clearing price came in at **0.02154816 USDC / FOLD**, and that's the floor for FOLD Auction 2 as well.\n\nIf you took part in the first auction, you can still get to claiming and post-auction info through the official [Interfold auction page](https://www.theinterfold.com/fold-auction).\n\n### What is a Uniswap Continuous Clearing Auction?\n\nA Continuous Clearing Auction (CCA) is a price-discovery mechanism for handing out tokens, and it's built on Uniswap infrastructure.\n\n- The auction runs over a string of separate periods.\n- Participants put their bids in through the official Uniswap CCA interface.\n- Bids that get up within a period all clear at the same clearing price.\n- For each following period, the minimum price is whichever's higher: the original floor price, or the clearing price of the period before.\n- The minimum price can go up in later periods. It won't drop below the applicable prior clearing price or the original floor, though.\n- Any tokens that weren't handed out earlier are still up for grabs in the final period.\n\nThe CCA hands tokens out bit by bit, at the one price within each period. It's set up like that to cut down on gas competition, take the wind out of sniping, and let clearing prices find their own level as people take part in the auction.\n\n[Read more about Uniswap CCAs](https://cca.uniswap.org).\n\n### Did the auction determine the price of FOLD after transferability?\n\nNah, nah. The auction sorted out allocations and a clearing price inside the auction itself. It didn't set the market price of FOLD once general transferability kicked in.\n\nNobody can tell you where future market prices will go.\n\n## Participation\n\n<Callout type='warning'>\n  Auction 2 closed on Aug 19, 2026 at 13:06 UTC. The steps in this section just show how the auction worked. You can't put in a new bid now.\n</Callout>\n\n### How did participation work?\n\n1. Participants headed to the official [FOLD Auction page](https://www.theinterfold.com/fold-auction).\n2. They followed the verified link through to the Uniswap CCA interface.\n3. They got through the required verification process via the official flow.\n4. They put their bids in while the auction window was open.\n5. Once the auction closed, they could claim any allocated FOLD and unspent USDC through the verified auction interface.\n\nParticipants needed USDC on Ethereum Mainnet, and they had to go over the auction terms and eligibility requirements before jumping in.\n\n### Who could participate?\n\nTaking part was open to eligible participants, subject to jurisdiction, identity verification, AML and sanctions screening, and other applicable restrictions.\n\nIt was the official verification process that decided eligibility, and the auction terms that governed it.\n\nGetting through verification didn't guarantee you eligibility or an allocation, mind.\n\n### Was KYC required?\n\nYep. Before taking part, participants had to get through identity verification via the official verification process.\n\nThat process decided eligibility and did the applicable AML and sanctions screening.\n\nTaking part was subject to the auction terms and applicable restrictions.\n\n## Claiming and transferability\n\n### When can participants claim FOLD?\n\nClaiming was set to open straight after the auction closed.\n\nParticipants claim their allocated FOLD and any unspent USDC through the verified auction interface.\n\nClaiming and general FOLD transferability are two different things.\n\n### When did general FOLD transferability begin?\n\nFOLD Auction 2 closed Aug 19 at **13:06 UTC (9:06 AM ET)**.\n\nGeneral FOLD transferability could be switched on shortly after, at or after **14:00 UTC (10 AM ET)**.\n\nFrom Unix timestamp **`1787148000`** on, anyone could call the `tge()` function on the FOLD contract to switch on general transferability. The TGE transaction went through on Aug 19, 2026 at 14:00:23 UTC, and `tgeTimestamp()` returns `1787148023`. So FOLD is now generally transferable.\n\nFOLD Auction 2, claiming, general FOLD transferability, and Network Alpha are separate milestones in the bigger Interfold launch sequence. For the details, check out [FOLD Transferability](/faq/transferability).\n\n## Safety\n\n### How do I know I’m using the official auction?\n\nStick to auction, claiming, verification, and support links put out through official Interfold channels, and only those.\n\nThe official Interfold channels are:\n\n- [Interfold auction page](https://www.theinterfold.com/fold-auction)\n- [Interfold website](https://www.theinterfold.com/)\n- [Interfold X account](https://x.com/theinterfold)\n- [Interfold documentation](https://docs.theinterfold.com/)\n\nDon't trust:\n\n- Auction, claiming, or support links that turn up out of the blue in DMs.\n- Copied token or contract addresses from unofficial sources.\n- Impersonator accounts.\n- Private wallet-connection links.\n- Anyone asking for your seed phrase, private key, or wallet backup.\n- Anyone asking to be paid in exchange for support.\n\n<Callout type='warning'>\n  Interfold team members and moderators will never ask for your seed phrase, private key, wallet backup, or access to your wallet. Not ever.\n</Callout>\n\n## Important Information\n\n_FOLD Auction 2, general FOLD transferability, and Network Alpha are separate parts of the launch sequence._\n\n_Official info will only ever go out through Interfold’s verified channels._\n\n**_Eligibility notice._** _Participation in the FOLD auction was subject to eligibility requirements, jurisdictional restrictions, verification procedures, AML/sanctions screening, and other applicable restrictions. Participation could be restricted in certain jurisdictions._\n\n**_Issuer notice._** _The FOLD auction was run by Interfold Ltd. (the “Issuer”). Participation in the FOLD auction was subject to the official Auction Terms, eligibility requirements, and verification procedures._\n\n**_No advice / risk notice._** _Nothing in this communication is legal, tax, financial, investment, or other professional advice. The auction floor isn't any projection, estimate, or guarantee of FOLD’s actual price or value._\n\nHave a read of the full [FOLD Auction Terms](https://www.theinterfold.com/auction/legal).\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='FOLD Transferability' href='/faq/transferability' icon='lock' tag='FAQ'>\n    The TGE, claiming, and the verified FOLD contract.\n  </LinkCard>\n  <LinkCard title='FOLD Tokenomics' href='/tokenomics' icon='coin' tag='Token'>\n    The CCA Sale allocation and the other allocations of FOLD.\n  </LinkCard>\n  <LinkCard title='FOLD Token FAQ' href='/faq/fold-token' icon='sparkle' tag='FAQ'>\n    What FOLD does in the Interfold network.\n  </LinkCard>\n</LinkCards>",
+ "schema": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "object",
+    "properties": {
+     "A": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "B": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "C": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "D": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "E": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "A",
+     "B",
+     "C",
+     "D",
+     "E"
+    ],
+    "additionalProperties": false
+   },
+   "rankings": {
+    "type": "object",
+    "properties": {
+     "tone": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "flow": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "variety": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "essence": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "overall": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "tone",
+     "flow",
+     "variety",
+     "essence",
+     "overall"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "required": [
+   "candidates",
+   "rankings"
+  ],
+  "additionalProperties": false
+ }
+}

@@ -1,0 +1,61 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {"evidence": "Every fact survives: the October start, the partners, the mineral list, the hazards areas, the flight specs (\"660 feet (200 metres) apart, at a height of 330 feet (100 metres)\"), the contractors, \"completely passive\", no photos, daylight only, airports, counties, ScienceBase. Both quotes are left as spoken.", "score": 5},
+        "sense": {"evidence": "\"a push to bring the country’s maps ... up to date\", \"track down energy and groundwater resources\", \"sizing up the geothermal energy potential\", \"AS350 choppers\" fit. \"give the groundwork geological data\" strains a little for \"foundational\".", "score": 4},
+        "authenticity": {"evidence": "Plain natural Australian English: \"The survey takes in a chunk of eastern California\", \"There's still plenty of room for exploration\", \"The USGS has signed up NRG Exploration\". Nothing forced.", "score": 5},
+        "register": {"evidence": "Light: mostly plain-English rewording with a handful of Aussie touches (\"choppers\", \"chunk\", \"sizing up\"); quotes untouched. A little under level 3 but in range for a press release.", "score": 4},
+        "tone": {"evidence": "Stays an informative, reassuring release: \"These scientific instruments are completely passive, giving off nothing that poses a risk to people, animals or plants.\"", "score": 5},
+        "flow": {"evidence": "Reads smoothly: \"Their AS350 choppers will be fitted with a long \"stinger\" sticking out from the main cabin or the helicopter skids, which holds the sensors collecting the data.\" \"will give the groundwork geological data to back future mineral exploration\" is slightly clunky.", "score": 4},
+        "variety": {"evidence": "\"joint effort\", \"push\", \"track down\", \"takes in a chunk\", \"plenty of room\", \"sizing up\", \"signed up\", \"choppers\", \"free for anyone to get\"; \"takes in\" twice.", "score": 4},
+        "essence": {"evidence": "Unmistakably the USGS flight notice with its reassurance and logistics intact.", "score": 5}
+      },
+      "problems": [
+        {"quote": "will give the groundwork geological data to back future mineral exploration", "original": "will provide foundational geological data that can be used to support future mineral exploration", "severity": "minor", "why": "\"the groundwork geological data\" is an awkward noun phrase."}
+      ],
+      "summary": "A faithful, natural light retelling of the release that leaves the quotes alone; a touch under level 3."
+    },
+    "B": {
+      "scores": {
+        "meaning": {"evidence": "The text is the original verbatim except \"Low-level plane flights\", \"modernise\", \"metres\" and \"These scientific instruments are flamin' passive with no emissions\", which muddles the reassurance.", "score": 4},
+        "sense": {"evidence": "\"flamin' passive\" uses an intensifier of exasperation where the original means \"completely\"; it reads as annoyance.", "score": 3},
+        "authenticity": {"evidence": "One bolted-on \"flamin'\" in an otherwise untouched press release: \"These scientific instruments are flamin' passive with no emissions that pose a risk to humans\".", "score": 2},
+        "register": {"evidence": "Essentially untranslated (\"The survey includes magnetic and radiometric data collection from helicopters along pre-planned flight lines\"), far below level 3.", "score": 1},
+        "tone": {"evidence": "Mostly the original tone, but \"flamin' passive\" makes the safety reassurance sound flippant.", "score": 4},
+        "flow": {"evidence": "Reads as the original does, with one jarring word: \"flamin' passive\".", "score": 4},
+        "variety": {"evidence": "A single slang term, \"flamin'\".", "score": 1},
+        "essence": {"evidence": "It is the original, unretold.", "score": 3}
+      },
+      "problems": [
+        {"quote": "These scientific instruments are flamin' passive with no emissions", "original": "These scientific instruments are completely passive with no emissions", "severity": "major", "why": "Exasperated intensifier in a safety reassurance; wrong sense and tone."},
+        {"quote": "The survey covers a portion of eastern California on the western edge of the Great Basin, which hosts a diverse range of mineral deposits", "original": "The survey covers a portion of eastern California on the western edge of the Great Basin, which hosts a diverse range of mineral deposits", "severity": "major", "why": "The whole text is left untranslated."}
+      ],
+      "summary": "The original press release with one misplaced \"flamin'\" and spelling changes; effectively untranslated."
+    },
+    "C": {
+      "scores": {
+        "meaning": {"evidence": "All facts survive, but Jamey Jones's direct quotation is rewritten (\"Teaming up with the state surveys helps get national goals done ... The California Geological Survey is pitching in on the nation's work\"), putting different words in his mouth while Lancaster's quote is left verbatim.", "score": 4},
+        "sense": {"evidence": "\"all about bringing the country's maps ... up to date\", \"pitching in\", \"sizing up\", \"choppers\", \"takes in a chunk\" fit. \"safe and above board under U.S. law\" stretches \"in accordance with\" slightly.", "score": 4},
+        "authenticity": {"evidence": "Natural: \"The California Geological Survey is pitching in on the nation's work\", \"There's still plenty of potential for exploring and mining\", \"Their AS350 choppers will be fitted with a long \"stinger\"\".", "score": 5},
+        "register": {"evidence": "Light-to-mid level 3: \"choppers\", \"chunk\", \"pitching in\", \"sizing up\", \"above board\"; slightly more Aussie than A.", "score": 4},
+        "tone": {"evidence": "Informative and reassuring: \"These scientific instruments are completely passive and give off nothing that's any risk to people, animals or plants.\"", "score": 5},
+        "flow": {"evidence": "Smooth: \"The survey involves collecting magnetic and radiometric data from choppers flying pre-planned flight lines\". The rewritten Jones quote is a bit long-winded (\"adding to what the state knows about things that really matter for water resources\").", "score": 4},
+        "variety": {"evidence": "\"thin slice\", \"joint effort\", \"all about\", \"teaming up\", \"pitching in\", \"takes in a chunk\", \"sizing up\", \"choppers\", \"above board\"; \"choppers\" twice.", "score": 4},
+        "essence": {"evidence": "Clearly the USGS notice, logistics and reassurance intact.", "score": 5}
+      },
+      "problems": [
+        {"quote": "Teaming up with the state surveys helps get national goals done, like mapping the critical minerals the U.S. needs.", "original": "Partnership with state surveys helps accomplish national goals like mapping the critical minerals the U.S. needs.", "severity": "major", "why": "Rewrites a named official's direct quotation, so the release misquotes him."},
+        {"quote": "safe and above board under U.S. law", "original": "safe and in accordance with U.S. law", "severity": "minor", "why": "\"above board\" implies honesty rather than legal compliance."}
+      ],
+      "summary": "Natural and faithful in substance, but it rewrites one official's direct quote."
+    }
+  },
+  "rankings": {
+    "tone": [["A", "C"], ["B"]],
+    "flow": [["A", "C"], ["B"]],
+    "variety": [["A", "C"], ["B"]],
+    "essence": [["A", "C"], ["B"]],
+    "overall": [["A"], ["C"], ["B"]]
+  }
+}

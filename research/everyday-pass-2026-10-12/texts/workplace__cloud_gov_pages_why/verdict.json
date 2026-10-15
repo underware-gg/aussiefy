@@ -1,0 +1,179 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 3,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 1,
+   "tone": 2,
+   "flow": 2,
+   "variety": 1,
+   "essence": 3
+  },
+  "yarn": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every point survives, from the compliance burden to the API use case; nothing added.",
+   "sense": "Mostly exact (\"knock up a website\", \"grunt work\", \"weak spots\", \"dead easy\"). \"get the tick-off on content updates\" strains: the idiom is \"get the tick\", and \"tick-off\" can read as a telling-off.",
+   "authenticity": "Natural, low-key Australian office voice: \"chances are you've been handed what looks like a simple job\", \"Static websites have a few things going for them\".",
+   "register": "Retold throughout but on the light side of level 3; a handful of terms (\"knock up\", \"grunt work\", \"dead easy\") over plain casual English. No swearing, allowed under vulgarity 1.",
+   "tone": "Keeps the friendly, persuasive product tone.",
+   "flow": "Reads smoothly; \"Steering clear of a traditional CMS means steering clear of headaches\" is a deliberate echo that works.",
+   "variety": "Reasonably varied, without leaning on any term.",
+   "essence": "Unmistakably the cloud.gov Pages pitch, with its headings, bullets and diagram link intact."
+  },
+  "engine": {
+   "meaning": "Mostly the original verbatim, but \"a seemingly simple bloody hard yakka\" contradicts itself (a simple task called hard work), and \"ya old bastard\" adds an insult to the reader.",
+   "sense": "\"hard yakka\" replaces \"task\" as if it were a noun for a job, which it is not, and contradicts \"seemingly simple\".",
+   "authenticity": "Swears bolted on: \"bloody hard yakka\", \"ya old bastard\"; \"properly easy\" is a British form.",
+   "register": "Almost entirely untranslated; the few changes are a swear and an insult. \"bastard\" is within vulgarity 1 but the level is far below 3.",
+   "tone": "\"ya old bastard\" turns a polite government product page into an insult to its reader.",
+   "flow": "\"a seemingly simple bloody hard yakka: create a website\" breaks the grammar.",
+   "variety": "Too little Aussie to vary.",
+   "essence": "Recognisably the original, because it is the original."
+  },
+  "yarn": {
+   "meaning": "Every point survives. \"already flat-out web team\" elaborates \"extra strain\"; \"the tick from the higher-ups\" narrows \"stakeholders\", who are not necessarily superiors.",
+   "sense": "Terms fit: \"the real hard yakka\", \"knock up a website\", \"babysitting server applications\", \"fewer holes in it\". \"higher-ups\" for stakeholders is slightly narrower.",
+   "authenticity": "Sounds like an Australian colleague explaining it: \"Thing is, the real hard yakka usually isn't writing the content\", \"plus all the database scaling and backup carry-on\".",
+   "register": "Right weight for level 3: steady, natural Aussie through every section, without becoming a yarn. No swearing, allowed under vulgarity 1.",
+   "tone": "Keeps the friendly, persuasive product tone.",
+   "flow": "Reads like it was written that way: \"So the whole site's easier to look after and has fewer holes in it.\"",
+   "variety": "Varied: \"dead simple\", \"hard yakka\", \"flat-out\", \"babysitting\", \"carry-on\", \"have a go at\", \"lumps you with\". \"dead\" appears twice.",
+   "essence": "Unmistakably the original pitch, retold."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "it's easy to get the tick-off on content updates from stakeholders",
+    "original": "makes it easy to get signoff on content updates from stakeholders",
+    "severity": "minor",
+    "why": "The idiom is \"get the tick\"; \"tick-off\" can read as a reprimand."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "a seemingly simple bloody hard yakka",
+    "original": "a seemingly simple task",
+    "severity": "major",
+    "why": "\"hard yakka\" is not a noun for a task, and contradicts \"simple\"."
+   },
+   {
+    "quote": "ya old bastard",
+    "original": "",
+    "severity": "major",
+    "why": "Added insult to the reader on a government product page."
+   },
+   {
+    "quote": "It’s properly easy to host",
+    "original": "It’s very easy to host",
+    "severity": "minor",
+    "why": "\"properly easy\" is British rather than Australian."
+   },
+   {
+    "quote": "Pages generates static websites instead of using a more complex content management system",
+    "original": "Pages generates static websites instead of using a more complex content management system",
+    "severity": "major",
+    "why": "Text left largely untranslated."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "it's easy to get the tick from the higher-ups on content updates",
+    "original": "makes it easy to get signoff on content updates from stakeholders",
+    "severity": "minor",
+    "why": "\"higher-ups\" narrows \"stakeholders\"."
+   },
+   {
+    "quote": "your agency's already flat-out web team",
+    "original": "your agency’s web team",
+    "severity": "minor",
+    "why": "Small elaboration; colour, but adds a claim about the team."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Clean, faithful and natural, a little light for level 3.",
+  "engine": "Essentially untranslated, with a broken swap and an insult bolted on.",
+  "yarn": "Natural and varied, at the right weight, with a couple of small shifts."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

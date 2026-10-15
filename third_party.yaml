@@ -1,0 +1,720 @@
+schema: 1
+project_licence:
+  file: LICENSE
+  licence: MIT
+  sha256: d25dca78c6843e13a0be6db64f0dabbe46dfb4140b3e06471fffd7b9314c4775
+licences:
+  Apache-2.0:
+    file: LICENSES/Apache-2.0.txt
+    sha256: c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c
+    url: https://www.apache.org/licenses/LICENSE-2.0.txt
+  MIT:
+    file: LICENSES/MIT.txt
+    sha256: 45651d6af45c674b39de8fb59513cf032c85ed1512ee57f523cc5b950f805066
+    url: https://opensource.org/license/mit
+components:
+- id: minilm-static-model
+  name: aussie-static embedding model
+  paths:
+  - aussiefy/data/model/vectors.f16
+  - aussiefy/data/model/vocab.txt
+  licence: Apache-2.0
+  upstream:
+  - name: sentence-transformers/all-MiniLM-L6-v2
+    url: https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/tree/1110a243fdf4706b3f48f1d95db1a4f5529b4d41
+    licence: Apache-2.0
+    copyright: Upstream contributors; no separate NOTICE file identified in the 2026-10-13 audit
+  - name: nreimers/MiniLM-L6-H384-uncased
+    url: https://huggingface.co/nreimers/MiniLM-L6-H384-uncased
+    licence: MIT
+    copyright: Upstream contributors
+  - name: microsoft/MiniLM-L12-H384-uncased
+    url: https://huggingface.co/microsoft/MiniLM-L12-H384-uncased
+    licence: MIT
+    copyright: Copyright (c) Microsoft Corporation
+  - name: Google BERT uncased WordPiece vocabulary, via all-MiniLM-L6-v2
+    url: https://github.com/google-research/bert
+    licence: Apache-2.0
+    copyright: Copyright 2018 The Google AI Language Team Authors
+  modifications: 'The base model was fine-tuned on pairs from aussiefy''s own slang dictionary, distilled
+    with Model2Vec into 256-dimensional static vectors, tuned again on the same pairs and exported as
+    float16 rows. The recipe is in training/recipe.yaml and the process in training/README.md.
+
+
+    In vocab.txt, the [unused*] tokens and [CLS], [SEP] and [MASK] were removed; dictionary slang words
+    and contracted forms were added as whole tokens.'
+  binds:
+    file: aussiefy/data/model/meta.json
+    expect:
+      name: aussie-static
+      version: 1.2.0
+      recipe.base.model: sentence-transformers/all-MiniLM-L6-v2
+      recipe.base.revision: 1110a243fdf4706b3f48f1d95db1a4f5529b4d41
+- id: english-pos-tagger
+  name: NLTK/TextBlob averaged-perceptron English tagger
+  paths:
+  - aussiefy/pos.py
+  - aussiefy/data/pos/tagger.json.gz
+  - aussiefy/data/pos/README.md
+  licence: MIT
+  upstream:
+  - name: textblob-aptagger
+    url: https://github.com/sloria/textblob-aptagger
+    licence: MIT
+    copyright: Copyright 2013 Matthew Honnibal
+  - name: NLTK averaged-perceptron English tagger
+    url: https://www.nltk.org/_modules/nltk/tag/perceptron.html
+    licence: MIT
+    copyright: NLTK modifications Copyright 2015 The NLTK Project
+  modifications: Inference is re-implemented without NLTK. Three upstream JSON files are combined, nonzero
+    weights rounded to three decimals, and gzipped with a fixed timestamp; scripts/build_pos.py verifies
+    the pinned archive checksum.
+  binds:
+    file: aussiefy/data/pos/meta.json
+    expect:
+      name: averaged-perceptron-english
+      version: nltk-data-2026-10-12
+      source_sha256: 6025f530624335c67d6547d44757b357b4e79bae030a0383e9887a92c1718f0b
+  digests:
+    aussiefy/data/pos/tagger.json.gz: 3222c88544fbc2600def0686055843f9dccc3f60d485c4b791339ea8af2627f6
+credits:
+- name: WordNet 3.0
+  copyright: WordNet 3.0 Copyright 2006 by Princeton University. All rights reserved.
+  url: https://wordnet.princeton.edu/license-and-commercial-use
+  binds:
+    file: aussiefy/data/model/meta.json
+    expect:
+      wordnet: WordNet 3.0
+first_party:
+- glob: aussiefy/**/*.py
+  reason: Project code, including an independent BERT-compatible tokeniser; not a port.
+  exclude:
+  - aussiefy/pos.py
+- glob: aussiefy/data/*.yaml
+  reason: Project profiles, concepts, guidance and source citations.
+- glob: aussiefy/data/entries/*.yaml
+  reason: Project glosses and wording; scraped entries additionally pass the source-policy gate.
+- glob: aussiefy/data/model/meta.json
+  reason: Project training metadata.
+- glob: tests/corpus/sentences.txt
+  reason: Project test sentences.
+- glob: tests/corpus/targets/*.txt
+  reason: Project renderings of public-domain or own reference texts.
+- glob: tests/fixtures/listicle_[ab].html
+  reason: Synthetic fixture pages, not scraped content.
+- glob: tests/corpus/classics/README.md
+  reason: Project corpus documentation.
+- glob: tests/corpus/everyday/README.md
+  reason: Project corpus documentation and licence index.
+- glob: tests/corpus/local/README.md
+  reason: Project local-only corpus instructions.
+- glob: research/classics-2026-10-11/README.md
+  reason: Project research briefs, notes and analysis; audit 2026-10-13.
+- glob: research/classics-2026-10-11/extract/X/NOTES.md
+  reason: Project research briefs, notes and analysis; audit 2026-10-13.
+- glob: research/classics-2026-10-11/extract/Y/NOTES.md
+  reason: Project research briefs, notes and analysis; audit 2026-10-13.
+- glob: research/classics-2026-10-11/verify/BRIEF.md
+  reason: Project research briefs, notes and analysis; audit 2026-10-13.
+- glob: research/classics-2026-10-11/existing_forms.txt
+  reason: Project dictionary form inventory.
+- glob: research/gap-fill-2026-10-11/README.md
+  reason: Project research briefs, notes and analysis; audit 2026-10-13.
+- glob: research/gap-fill-2026-10-11/verify/BRIEF.md
+  reason: Project research briefs, notes and analysis; audit 2026-10-13.
+- glob: research/gap-fill-2026-10-11/web/NOTES.md
+  reason: Project research briefs, notes and analysis; audit 2026-10-13.
+- glob: research/gap-fill-2026-10-11/existing_forms.txt
+  reason: Project dictionary form inventory.
+- glob: research/gap-fill-2026-10-11/passages/synthetic/*.txt
+  reason: Project synthetic passages.
+- glob: research/gap-fill-2026-10-11/rephrasings/[ABC]/*.txt
+  reason: Project rephrasings of synthetic/public-domain/own texts.
+- glob: research/retellings-2026-10-11/COMPARISON*.md
+  reason: Project analysis and renderings of public-domain reference texts.
+- glob: research/swearing-2026-10-12/README.md
+  reason: Project research analysis.
+- glob: research/swearing-2026-10-12/retellings/*.txt
+  reason: Project renderings of public-domain fables and own sentences.
+- glob: research/retellings-2026-10-11/base/boy_who_cried_wolf.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/base/declaration_of_independence.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/base/emperors_new_clothes.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/base/hamlet_to_be.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/base/hansel_and_gretel.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/base/little_red_riding_hood.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/base/pride_and_prejudice_ch1.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/base/the_raven.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/base/three_little_pigs.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/harnessed/boy_who_cried_wolf.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/harnessed/declaration_of_independence.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/harnessed/emperors_new_clothes.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/harnessed/hamlet_to_be.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/harnessed/hansel_and_gretel.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/harnessed/little_red_riding_hood.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/harnessed/pride_and_prejudice_ch1.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/harnessed/the_raven.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/harnessed/three_little_pigs.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/unharnessed/boy_who_cried_wolf.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/unharnessed/declaration_of_independence.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/unharnessed/emperors_new_clothes.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/unharnessed/hamlet_to_be.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/unharnessed/hansel_and_gretel.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/unharnessed/little_red_riding_hood.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/unharnessed/pride_and_prejudice_ch1.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/unharnessed/the_raven.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: research/retellings-2026-10-11/unharnessed/three_little_pigs.txt
+  reason: Project rendering of a public-domain reference text; audit 2026-10-13.
+- glob: aussiefy/data/pos/meta.json
+  reason: Reviewed upstream POS artefact metadata; weights/inference are separately attributed.
+- glob: research/OPEN_ISSUES.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/dinkum-check-2026-10-14/JUDGE_TASK.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/dinkum-check-2026-10-14/YARN_TASK.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/dinkum-check-2026-10-14/manifest.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/embellishment-pass-2026-10-13/COMPARE.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/embellishment-pass-2026-10-13/FINDINGS.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/embellishment-pass-2026-10-13/JUDGE_TASK.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/embellishment-pass-2026-10-13/YARN_TASK.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/embellishment-pass-2026-10-13/manifest.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/embellishment-pass-2026-10-13/summary.json
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-pass-2026-10-12/FINDINGS.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-pass-2026-10-12/manifest.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-pass-2026-10-12/summary.json
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-pass-2026-10-13/COMPARE.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-pass-2026-10-13/FINDINGS.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-pass-2026-10-13/JUDGE_TASK.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-pass-2026-10-13/YARN_TASK.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-pass-2026-10-13/manifest.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-pass-2026-10-13/summary.json
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-round-2026-10-13/americanisms.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-round-2026-10-13/existing_forms.txt
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-round-2026-10-13/round.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-round-2026-10-13/verify/BRIEF.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-round-2026-10-13/verify/raw/verdicts-0.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-round-2026-10-13/verify/raw/verdicts-1.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-round-2026-10-13/verify/raw/verdicts-2.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-round-2026-10-13/verify/raw/verdicts-3.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-round-2026-10-13/verify/raw/verdicts-4.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/everyday-round-2026-10-13/verify/verdicts-merged.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/fairdinkum-round-2026-10-13/DECISIONS.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/fairdinkum-round-2026-10-13/round.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/fairdinkum-round-2026-10-13/verify/verdicts-fairdinkum.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/fourth-pass-2026-10-14/COMPARE.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/fourth-pass-2026-10-14/FINDINGS.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/fourth-pass-2026-10-14/JUDGE_TASK.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/fourth-pass-2026-10-14/YARN_TASK.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/fourth-pass-2026-10-14/manifest.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/fourth-pass-2026-10-14/summary.json
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/rails-audit-2026-10-13/FINDINGS.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/second-pass-round-2026-10-13/DECISIONS.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/second-pass-round-2026-10-13/round.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/second-pass-round-2026-10-13/verify/verdicts-second-pass.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/techniques-2026-10-13/README.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/third-pass-round-2026-10-13/DECISIONS.md
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/third-pass-round-2026-10-13/round.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/third-pass-round-2026-10-13/verify/verdicts-third-pass.yaml
+  reason: Reviewed project research analysis, aggregate metrics, task instructions or dictionary proposals;
+    substantial local-only source examples are sanitised separately. Source-bearing work groups inherit
+    corpus provenance instead.
+- glob: research/PROVENANCE.yaml
+  reason: Source-linked provenance inventory and modification declarations, with no embedded source texts.
+- glob: research/classics-2026-10-11/concept_aliases.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/classics-2026-10-11/dropped.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/classics-2026-10-11/entry_fixes.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/classics-2026-10-11/extra_entries.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/classics-2026-10-11/extract/X/terms.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/classics-2026-10-11/extract/Y/terms.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/classics-2026-10-11/merged.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/classics-2026-10-11/round.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/classics-2026-10-11/seeds.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/classics-2026-10-11/trigger_fixes.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/classics-2026-10-11/verify/candidates-1.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/classics-2026-10-11/verify/candidates-2.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/classics-2026-10-11/verify/candidates-3.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/classics-2026-10-11/verify/verdicts-1.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/classics-2026-10-11/verify/verdicts-2.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/classics-2026-10-11/verify/verdicts-3.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/concept_aliases.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/corpus_gaps.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/entry_fixes.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/inventory.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/merged.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/passages/synthetic/manifest.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/rephrasings/A/uses.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/rephrasings/B/uses.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/rephrasings/C/uses.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/round.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/trigger_fixes.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/verify/audit.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/verify/candidates.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/verify/slice-content-1.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/verify/slice-content-2.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/verify/slice-fillers.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/verify/verdicts-content-1.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/verify/verdicts-content-2.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/verify/verdicts-fillers.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/gap-fill-2026-10-11/web/findings.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/harnessed/boy_who_cried_wolf.log.jsonl
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/harnessed/declaration_of_independence.log.jsonl
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/harnessed/emperors_new_clothes.log.jsonl
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/harnessed/hamlet_to_be.log.jsonl
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/harnessed/hansel_and_gretel.log.jsonl
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/harnessed/little_red_riding_hood.log.jsonl
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/harnessed/moloch.log.jsonl
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/harnessed/pride_and_prejudice_ch1.log.jsonl
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/harnessed/the_raven.log.jsonl
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/harnessed/three_little_pigs.log.jsonl
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/new_phrases-2.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/new_phrases.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/unharnessed/boy_who_cried_wolf.phrases.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/unharnessed/declaration_of_independence.phrases.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/unharnessed/emperors_new_clothes.phrases.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/unharnessed/hamlet_to_be.phrases.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/unharnessed/hansel_and_gretel.phrases.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/unharnessed/little_red_riding_hood.phrases.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/unharnessed/pride_and_prejudice_ch1.phrases.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/unharnessed/the_raven.phrases.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/retellings-2026-10-11/unharnessed/three_little_pigs.phrases.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/swearing-2026-10-12/fables_terms.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/swearing-2026-10-12/sentences_terms.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/swearing-2026-10-12/stories_terms.yaml
+  reason: Existing reviewed research extraction, dictionary proposals and annotations, including short
+    quoted evidence; not a claim that source quotations are original project prose. Existing source audit
+    and remote-only excerpt decisions remain in force.
+- glob: research/fourth-pass-round-2026-10-14/DECISIONS.md
+  reason: Reviewed own dictionary proposals, glosses, trigger patterns, synthetic examples and administrative
+    decisions; reference citations without copied definitions. Integration status annotations retain historical
+    decisions.
+- glob: research/fourth-pass-round-2026-10-14/round.yaml
+  reason: Reviewed own dictionary proposals, glosses, trigger patterns, synthetic examples and administrative
+    decisions; reference citations without copied definitions. Integration status annotations retain historical
+    decisions.
+- glob: research/fourth-pass-round-2026-10-14/verify/verdicts-fourth-pass.yaml
+  reason: Reviewed own dictionary proposals, glosses, trigger patterns, synthetic examples and administrative
+    decisions; reference citations without copied definitions. Integration status annotations retain historical
+    decisions.
+- glob: research/dinkum-check-round-2026-10-14/DECISIONS.md
+  reason: Reviewed own dictionary proposals, glosses, trigger patterns, synthetic examples and administrative
+    decisions; reference citations without copied definitions. Integration status annotations retain historical
+    decisions.
+- glob: research/dinkum-check-round-2026-10-14/round.yaml
+  reason: Reviewed own dictionary proposals, glosses, trigger patterns, synthetic examples and administrative
+    decisions; reference citations without copied definitions. Integration status annotations retain historical
+    decisions.
+- glob: research/dinkum-check-round-2026-10-14/verify/verdicts-dinkum-check.yaml
+  reason: Reviewed own dictionary proposals, glosses, trigger patterns, synthetic examples and administrative
+    decisions; reference citations without copied definitions. Integration status annotations retain historical
+    decisions.
+texts:
+  local_dir: tests/corpus/local
+  remote_manifests:
+  - file: tests/corpus/remote.yaml
+    rows: items
+  - file: tests/corpus/everyday/news-remote.yaml
+    rows: items
+  - file: tests/corpus/everyday/instructions-remote.yaml
+    rows: items
+  manifests:
+  - dir: tests/corpus/reference
+    file: tests/corpus/reference/SOURCES.yaml
+    require:
+    - title
+    - author
+    - licence
+    - notes
+  - dir: tests/corpus/classics
+    file: tests/corpus/classics/manifest.yaml
+    require:
+    - title
+    - author
+    - licence
+    - notes
+  - dir: tests/corpus/everyday
+    file: tests/corpus/everyday/instructions.yaml
+    require:
+    - title
+    - author
+    - licence
+    - licence_evidence
+    - url
+  - dir: tests/corpus/everyday
+    file: tests/corpus/everyday/news.yaml
+    require:
+    - title
+    - author
+    - licence
+    - licence_evidence
+    - url
+  - dir: tests/corpus/everyday/conversational
+    file: tests/corpus/everyday/conversational.yaml
+    require:
+    - title
+    - author
+    - licence
+    - licence_evidence
+    - url
+  - dir: tests/corpus/everyday/workplace
+    file: tests/corpus/everyday/workplace.yaml
+    require:
+    - title
+    - author
+    - licence
+    - licence_evidence
+    - url
+  - dir: tests/corpus/everyday/interfold
+    file: tests/corpus/everyday/interfold-provenance.yaml
+    require:
+    - title
+    - author
+    - licence
+    - url
+    - licence_evidence
+    - notes
+  research:
+    file: research/PROVENANCE.yaml
+corpus_licences:
+  LGPL-3.0-or-later:
+    file: research/licences/LGPL-3.0.txt
+    sha256: 996af0513df21f7496288951c41428a03c174e9e4a9d63665c57d670f845ccb1
+    url: https://github.com/spdx/license-list-data/blob/main/text/LGPL-3.0-or-later.txt
+  GPL-3.0-or-later:
+    file: research/licences/GPL-3.0.txt
+    sha256: fb981668c18a279e285fc4d83fba1e836cc84dd4daa73c9697d3cfd2d8aca6e0
+    url: https://github.com/spdx/license-list-data/blob/main/text/GPL-3.0-or-later.txt

@@ -1,0 +1,25 @@
+Now, if you’re a program manager or a federal web developer, odds are some bright spark’s handed you a job that looks simple as: knock up a website for some initiative at your agency. Easy, ya reckon? Nah. The hard yakka usually isn't writing the content or making the site look schmick. It's getting the bloody security and privacy compliance sorted so you can launch the actual website and keep the thing running. For that lot you might have to bring in a contractor, or pile even more onto your agency’s web team, and they're already flat out.
+
+It shouldn’t be like that.
+
+## Why Pages?
+
+That's where Pages comes in. It's there for our fellow federal partners, handling all the backend and compliance work of launching and running a website, and it knows its stuff. So you get to put your know-how where it belongs: your content.
+
+- **FedRAMP Certified Platform** Pages is hosted on cloud.gov, a platform whose security and compliance have been checked over by the FedRAMP Joint Authorization Board. And they don't just wave anyone through. So you can count on your site being fast, reliable, and ready when the traffic comes out of nowhere like a mob at the pie cart.
+
+- **Easy previews and content approvals** Pages builds your draft updates at a special preview URL, so your team can have a squiz before anything goes live. That way they know their changes'll come out right once they're pushed to the main site, and getting signoff on content updates from stakeholders is no drama at all.
+
+[![Diagram of Pages architecture]({{site.baseurl}}/assets/images/pages/how-pages-works-diagram.png)]({{site.baseurl}}/assets/documents/how-pages-works-diagram.pdf)
+
+## Why static websites?
+
+Pages generates static websites instead of running some great hulking content management system (CMS) like Drupal or WordPress. And static websites have a fair bit going for them, I reckon:
+
+- **Less complexity and vulnerability:** Ditch the traditional CMS and you ditch the headaches that come with it: babysitting server applications (no PHP or Apache / IIS, thank you very much), plus database scaling and redundancy. A production-level static site generally gets by on one simple static file server or service, not dozens of the things. So the whole website's easier to look after, and there's fewer holes for some mongrel to poke at.
+
+- **Update content without writing code:** Static websites often keep their content in plain old text files that anyone on the team can edit. With the GitHub editor, any team member can make basic edits to their text files, whether they're a seasoned coder or they've never written a line of code in their life.
+
+- **Easy to host and maintain:** Hosting static website files on Pages is dead easy. And through Pages you can hook into scaling services like Amazon S3 without any fuss, where you only pay for what you use. No paying for the whole box and dice when you only need a bit.
+
+- **Fully customisable:** Designers and developers can bend static websites into whatever shape they're after, without first having to rip out all the CMS-provided features and defaults. You can build all sorts with 'em, from organisation homepages or intranets right through to pre-generated web application program interfaces that display data from a separate server. The whole shebang.

@@ -1,0 +1,163 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "unharnessed": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 3,
+   "authenticity": 2,
+   "register": 2,
+   "tone": 4,
+   "flow": 4,
+   "variety": 2,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Every fact kept: dates, offices, Walatowa Saturday hours, $10 permit, $2.50 fee, tag sizes, 15-foot example, free permit for fourth graders, the thinning rationale. \"Year 4 kids (fourth graders)\" localises while keeping the US term.",
+   "sense": "Terms fit: \"up for grabs\", \"Pre-cut Chrissie trees may be on sale\", \"crowded stands of skinny trees\", \"open up patches that give wildlife a feed\".",
+   "authenticity": "Natural Australian: \"Get in touch for current opening hours\", \"Year 4 kids\", \"give wildlife a feed\". \"Chrissie tree\" twice is a little cute but current.",
+   "register": "A light level-2 touch on a plain-English rewrite: \"up for grabs\", \"Chrissie\", \"skinny\", \"a feed\". No swearing.",
+   "tone": "Stays a friendly public notice; facts presented plainly.",
+   "flow": "Reads smoothly: \"Whether there are any depends on the weather and supply, with priority going to people who can't cut their own tree.\"",
+   "variety": "Varied; \"Chrissie tree\" appears twice.",
+   "essence": "Unmistakably the Santa Fe permit notice."
+  },
+  "unharnessed": {
+   "meaning": "Every fact kept, including \"from November 22 through December 20, 2024\", \"One tag covers a tree up to 5 inches in diameter and 10 feet tall\", and the thinning rationale.",
+   "sense": "Terms fit: \"up for grabs\", \"with first dibs going to people who can't cut their own tree\", \"crowded stands of skinny trees\".",
+   "authenticity": "Natural, though mostly neutral English; US \"Fourth graders\" and \"through December 20\" left in.",
+   "register": "A shade light even for level 2: Aussie limited to \"up for grabs\", \"first dibs\", \"skinny\".",
+   "tone": "Friendly public notice tone kept.",
+   "flow": "Reads smoothly: \"Taking these trees out of designated areas helps the other trees grow bigger\".",
+   "variety": "Little slang, none repeated.",
+   "essence": "Unmistakably the permit notice."
+  },
+  "engine": {
+   "meaning": "The original nearly verbatim, so facts survive; \"Local bush health experts\" and \"improves bush health\" shift forest health toward something vaguer.",
+   "sense": "\"Cutting a Chrissie tree also improves bush health\" and \"Local bush health experts\" use bush for a managed national forest, which strains; \"Chrissie tree permits\" fits.",
+   "authenticity": "Engine-like swaps on untouched official prose: \"Chrissie tree permits will be available to purchase online\" sits oddly beside \"Purchase your Christmas Tree permit\".",
+   "register": "Largely untranslated apart from \"Chrissie\" and \"bush\"; lighter than level 2.",
+   "tone": "Official tone intact, with \"Chrissie\" in the headline sentence jarring slightly.",
+   "flow": "Reads as the original, with its stiff \"Online through Recreation.gov and search for\".",
+   "variety": "Two swaps, each repeated: \"Chrissie\" three times, \"bush\" twice.",
+   "essence": "Unmistakably the notice, being nearly the original."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "One tag covers a tree up to 5 inches across",
+    "original": "One tag is valid for a tree up to 5 inches in diameter",
+    "severity": "minor",
+    "why": "Across is looser than diameter in a size rule, though clear enough."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "Fourth graders with an Every Kid Outdoors pass",
+    "original": "Fourth graders with Every Kid Outdoors pass",
+    "severity": "minor",
+    "why": "US school-grade term left without an Australian gloss."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Local bush health experts identify areas",
+    "original": "Local forest health experts identify areas",
+    "severity": "major",
+    "why": "Bush health experts is not a thing; forest health is a technical field."
+   },
+   {
+    "quote": "Chrissie tree permits will be available to purchase online",
+    "original": "Christmas tree permits will be available to purchase online",
+    "severity": "minor",
+    "why": "A pet form dropped into otherwise untouched official prose."
+   },
+   {
+    "quote": "It is important to carefully read the overview and need-to-know information prior to purchasing the permit.",
+    "original": "It is important to carefully read the overview and need-to-know information prior to purchasing the permit.",
+    "severity": "major",
+    "why": "Representative of the text left untranslated."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "Faithful, natural and at the asked weight, with a neat Year 4 localisation; the best.",
+  "unharnessed": "Faithful and clean, slightly lighter and less localised than A.",
+  "engine": "Mostly untranslated with mechanical swaps, one of them off-sense."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed",
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,177 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 5,
+   "flow": 4,
+   "variety": 1,
+   "essence": 4
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every feature and claim kept: \"counting the eight letters between the \\\"K\\\" and the \\\"s\\\"\", \"back in 2014\", \"over 15 years of Google's experience\", all eleven features, and the PaaS caveat. Small shifts: \"make sure nothing ever falls over\" for no downtime, \"doesn't let on to clients they exist till they're ready to serve\" for not advertising them; \"at a whopping scale\" is colour.",
+   "sense": "Most terms fit: \"if a container carks it\", \"cop a hit and keep going\" for resilience, \"getting slammed with traffic\", \"turf the old ones\", \"stash\" secrets, \"mucking about with the upstream source code\". \"knocks off containers\" is ambiguous (knock off also means steal or finish work).",
+   "authenticity": "Sounds like an Aussie dev explaining it: \"Wouldn't it be a bloody sight easier if a system handled all that for you?\", \"without leaving secrets hanging out\". A couple of US idioms slip in: \"the most bang for your buck\", \"rides in to save the day\".",
+   "register": "Full level-4 weight across the feature list, with dad vulgarity only (\"a bloody sight easier\").",
+   "tone": "The explanatory, upbeat docs voice survives under the slang: \"Kubernetes gives you the building blocks for knocking up developer platforms, but leaves you the choice and room to move where it counts.\"",
+   "flow": "Reads smoothly: \"If a container's getting slammed with traffic, Kubernetes can load balance and spread the network traffic round so the deployment stays steady.\" \"fall over\" recurs three times.",
+   "variety": "Wide range: \"chucked\", \"whopping\", \"carks it\", \"fire up\", \"cop a hit\", \"no worries\", \"slammed\", \"takes your fancy\", \"turf\", \"stash\", \"Dishing out\", \"Bolt\", \"mucking about\". \"fall over\" repeats.",
+   "essence": "Unmistakably the Kubernetes overview, headings, anchors, links and feature list intact."
+  },
+  "yarn": {
+   "meaning": "All features and claims kept, close to the original: \"make sure there's no downtime\", \"doesn't advertise them to clients until they're ready to serve\", the PaaS caveat.",
+   "sense": "Terms fit: \"if a container carks it\", \"cop a hit and keep going\", \"no worries\", \"mucking about with upstream source code\", \"leaving secrets out in the open\".",
+   "authenticity": "Natural where it changes, but \"create brand-spankin'-new containers\" is a bolted-on phrase in otherwise formal docs.",
+   "register": "Lighter than level 4: most feature entries are untranslated, e.g. \"You can describe the desired state for your deployed containers using Kubernetes, and it can change the actual state to the desired state at a controlled rate.\"",
+   "tone": "The docs voice is intact, lightly roughened.",
+   "flow": "Readable, with a jolt at \"you can automate Kubernetes to create brand-spankin'-new containers\".",
+   "variety": "A handful of terms without repetition: \"carks it\", \"cop a hit\", \"a fair bit\", \"no worries\", \"brand-spankin'-new\", \"mucking about\".",
+   "essence": "Clearly the Kubernetes overview."
+  },
+  "engine": {
+   "meaning": "The original verbatim apart from spelling and one phrase; nothing lost.",
+   "sense": "\"brand-spankin'-new\" fits new containers in sense; no wrong-sense terms.",
+   "authenticity": "The only Aussie is a stock phrase used twice in one sentence: \"create brand-spankin'-new containers for your deployment, remove existing containers and adopt all their resources to the brand-spankin'-new container.\"",
+   "register": "Untranslated: \"The name Kubernetes originates from Greek, meaning helmsman or pilot.\" Far under level 4.",
+   "tone": "The original's tone, unchanged.",
+   "flow": "Reads as the original, except the doubled \"brand-spankin'-new\".",
+   "variety": "One phrase, used twice.",
+   "essence": "It is the original, unretold."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "the most bang for your buck",
+    "original": "make the best use of your resources",
+    "severity": "minor",
+    "why": "American idiom."
+   },
+   {
+    "quote": "knocks off containers that won't answer your user-defined health check",
+    "original": "kills containers that don't respond to your user-defined health check",
+    "severity": "minor",
+    "why": "\"knock off\" can mean steal or stop work as well as kill; ambiguous in docs."
+   },
+   {
+    "quote": "make sure nothing ever falls over",
+    "original": "ensure that there is no downtime",
+    "severity": "minor",
+    "why": "Shifts the point from no downtime to nothing failing, which contradicts the next line about containers going down."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "create brand-spankin'-new containers",
+    "original": "create new containers",
+    "severity": "minor",
+    "why": "Stock phrase bolted into technical prose."
+   },
+   {
+    "quote": "You can describe the desired state for your deployed containers using Kubernetes,",
+    "original": "You can describe the desired state for your deployed containers using Kubernetes,",
+    "severity": "major",
+    "why": "Much of the feature list left untranslated; lighter than level 4."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "adopt all their resources to the brand-spankin'-new container",
+    "original": "adopt all their resources to the new container",
+    "severity": "minor",
+    "why": "The phrase repeated within one sentence."
+   },
+   {
+    "quote": "The name Kubernetes originates from Greek, meaning helmsman or pilot.",
+    "original": "The name Kubernetes originates from Greek, meaning helmsman or pilot.",
+    "severity": "major",
+    "why": "Whole text left untranslated; far under level 4."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A lively, faithful level-4 retelling of the docs; a few US idioms and a small shift on downtime.",
+  "yarn": "A faithful, partly localised version; natural where it changes but well short of level 4.",
+  "engine": "The original with one stock phrase repeated; no real translation."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn",
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

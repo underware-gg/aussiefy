@@ -1,0 +1,191 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "dinkum-4": "A",
+  "dinkum-3": "B",
+  "yarn-dinkum": "C"
+ },
+ "scores": {
+  "dinkum-4": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 3,
+   "register": 2,
+   "tone": 5,
+   "flow": 4,
+   "variety": 3,
+   "essence": 5
+  },
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 2,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn-dinkum": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 2,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "dinkum-4": {
+   "meaning": "Every point survives, including the limits list, the CRISP table and the compliance caveat: \"T + 1 committee members who get in cahoots can decrypt\", \"The design doesn't, on its own, make an\napplication compliant with a regulation.\" Nothing invented.",
+   "sense": "Terms mostly fit: \"chip in inputs\", \"hang about for the E3 stages\", \"a dodgy ciphertext can stuff up the result\". \"cooks up a Noir proof\" carries a faint sense of concocting for a legitimate proof generation, a slight strain.",
+   "authenticity": "Some natural Aussie (\"Run yer eye over these limits\", \"stuff up the result\"), but a US form slips in: \"wanna know\", and \"get in cahoots\" is generic rather than Australian. Much of the slang is a thin layer of \"ya\"/\"yer\" on the source.",
+   "register": "Brief is level 5, vulgarity 2. This is a light touch: \"ya can line yer job\", \"chip in\", \"hang about\"; most sentences sit close to the original (\"The plaintext output goes on-chain.\"). No swearing, which is allowed, but the Aussie weight is far below a full pub yarn.",
+   "tone": "Stays an informative, careful technical doc with a friendly voice: \"The program must enforce a minimum input count or\n  other rules where this matters.\"",
+   "flow": "Reads smoothly; occasional clunk such as \"stop the E3 dead\" and \"The client cooks up a Noir proof that the ballot's valid.\" in a table cell.",
+   "variety": "Leans on \"ya\"/\"yer\" throughout (\"before ya design\", \"yer own computer\", \"before ya put in a request\"); otherwise a modest set of phrasal verbs (\"chip in\", \"hang about\", \"Whip up\").",
+   "essence": "Unmistakably the same use-cases page, same structure and table: \"## Limits to check\", \"is the reference application, sittin' in\"."
+  },
+  "dinkum-3": {
+   "meaning": "All content kept, rephrased faithfully: \"If T + 1 committee members collude, they can decrypt any\", \"Another way to go is to decrypt an aggregate\", \"That assessment's the application owner's job.\" \"and it actually works\" is colour on \"working\".",
+   "sense": "Every term fits: \"An E3's the go for a job\", \"Ya can't have any one operator holdin' the lot\", \"give an application a leg up\".",
+   "authenticity": "Natural Australian conversational voice: \"An E3's the go\", \"So, this page runs through\", \"stuff up the result\". Little forced; \"right up the E3\" ... \"alley\" is generic but used naturally.",
+   "register": "Still a light touch for a level-5 brief: much of it reads as the original with a chatty frame (\"The plaintext output goes on-chain.\", \"A bigger committee raises T.\"). No swearing, allowed at vulgarity 2, but no full yarn.",
+   "tone": "Keeps the careful, instructive tone: \"Where that matters, the program has to enforce a minimum input\".",
+   "flow": "Reads like talk; joins smoothed (\"the secure process adds 'em up, and only the aggregate\"). A few long sentences run on.",
+   "variety": "Varied phrasing: \"the go\", \"chip in\", \"holdin' the lot\", \"hang about\", \"leg up\", \"eats into\"; \"ya\"/\"yer\" used but less heavily.",
+   "essence": "Same page, same structure, same table, retold: \"## Sealed-bid auctions and private markets\", \"It's a full E3 program for secret ballots, and it actually works.\""
+  },
+  "yarn-dinkum": {
+   "meaning": "Mostly faithful, with small drifts: \"Nobody's happy with any single operator lookin' after the inputs.\" turns a requirement into a claim about everyone's feelings; \"that result's right to be public\" muddies \"the result can be public\"; \"Design rules for E3 programs that are locked up tight.\" for secure programs.",
+   "sense": "Most terms fit (\"Have a squiz\", \"suss out an individual value\", \"comes unstuck\", \"dodgy ciphertext\"), but \"that result's right to be public\" strains (\"right\" reads as proper) and \"locked up tight\" narrows security to lockdown.",
+   "authenticity": "Good Australian idiom: \"Have a squiz at these limits\", \"Where it comes unstuck is the computation\", \"make dead sure\", \"Down the bottom\". \"get together on the sly\" is a touch forced.",
+   "register": "Light for a level-5 brief: table rows are untouched from the original (\"The CRISP command-line tool requests one E3 for each voting round.\") and many lines are near-verbatim. No swearing.",
+   "tone": "Keeps the instructive, cautious tone: \"Where that matters, the program\".",
+   "flow": "Smooth overall; \"Nobody's happy with any single operator lookin' after the inputs.\" and \"Design rules for E3 programs that are locked up tight.\" are slightly awkward.",
+   "variety": "Varied: \"squiz\", \"suss out\", \"on the sly\", \"comes unstuck\", \"dead sure\", \"leg-up\", \"Whip up\".",
+   "essence": "Clearly the original page retold, structure intact: \"## Limits to check\" and the full CRISP table."
+  }
+ },
+ "problems": {
+  "dinkum-4": [
+   {
+    "quote": "wanna know",
+    "original": "want to know",
+    "severity": "major",
+    "why": "\"wanna\" is an American colloquial form, not Australian."
+   },
+   {
+    "quote": "This page runs through the jobs that suit an E3",
+    "original": "This page describes tasks that fit an E3",
+    "severity": "major",
+    "why": "Throughout, the retelling is far lighter than the level-5 brief asks; most lines are the original with \"ya\" and contractions."
+   },
+   {
+    "quote": "The client cooks up a Noir proof",
+    "original": "The client generates a Noir proof",
+    "severity": "minor",
+    "why": "\"cooks up\" suggests concocting, a slightly wrong flavour for generating a validity proof."
+   },
+   {
+    "quote": "get in cahoots",
+    "original": "collude",
+    "severity": "minor",
+    "why": "Generic folksy English rather than Australian idiom."
+   }
+  ],
+  "dinkum-3": [
+   {
+    "quote": "So, this page runs through the sorts of jobs an E3's good for",
+    "original": "This page describes tasks that fit an E3",
+    "severity": "major",
+    "why": "Like the others, much lighter than the level-5 brief; a chatty doc rather than a full yarn."
+   },
+   {
+    "quote": "That's right up the E3",
+    "original": "This pattern matches the E3",
+    "severity": "minor",
+    "why": "Generic English idiom (right up its alley), not specifically Australian."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "Nobody's happy with any single operator lookin' after the inputs.",
+    "original": "No single operator is acceptable as the custodian of the inputs.",
+    "severity": "minor",
+    "why": "Turns a design requirement into a claim about people's feelings; loosens the meaning."
+   },
+   {
+    "quote": "that result's right to be public",
+    "original": "the result can be public",
+    "severity": "minor",
+    "why": "\"right to be\" reads as \"ought to be\" rather than \"may be\"; strains the sense."
+   },
+   {
+    "quote": "Design rules for E3 programs that are locked up tight.",
+    "original": "Design rules for secure E3 programs.",
+    "severity": "minor",
+    "why": "Awkward, and narrows \"secure\" to lockdown."
+   },
+   {
+    "quote": "The CRISP command-line tool requests one E3 for each voting round.",
+    "original": "The CRISP command-line tool requests one E3 for each voting round.",
+    "severity": "major",
+    "why": "Table left verbatim and much of the text lightly touched; far under the level-5 brief."
+   }
+  ]
+ },
+ "summaries": {
+  "dinkum-4": "Accurate and readable, but a light, level-2 sort of retelling for a level-5 brief, with a US \"wanna\" and a lean on ya/yer.",
+  "dinkum-3": "The most natural-sounding and varied of the three, accurate throughout, but well under the level-5 weight asked for.",
+  "yarn-dinkum": "Good, varied Aussie idiom and accurate in the main, with a few loosened lines; like the others far lighter than level 5."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "dinkum-4",
+    "dinkum-3",
+    "yarn-dinkum"
+   ]
+  ],
+  "flow": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "dinkum-4",
+    "yarn-dinkum"
+   ]
+  ],
+  "variety": [
+   [
+    "dinkum-3",
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-4"
+   ]
+  ],
+  "essence": [
+   [
+    "dinkum-4",
+    "dinkum-3",
+    "yarn-dinkum"
+   ]
+  ],
+  "overall": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-4"
+   ]
+  ]
+ }
+}

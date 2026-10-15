@@ -1,0 +1,230 @@
+{
+ "candidates": {
+  "A": {
+   "scores": {
+    "meaning": {
+     "evidence": "All technical points survive (sign-in flow, three uses, storage APIs, per-domain limits, 4KB, performance, devtools, Set-Cookie example). The bikkie aside is colour, but the {{HTTPHeader(\"Set-Cookie\")}} macro is rewritten as a different link, and \"dodgy mobile data connection\" shifts \"slow\".",
+     "score": 4
+    },
+    "sense": {
+     "evidence": "Terms mostly fit (\"hang on to `cookies`\", \"one-size-fits-all response\", \"shopping trolley\", \"Storage APIs can hold heaps more data\"), but \"on a dodgy mobile data connection\" turns slow into unreliable.",
+     "score": 4
+    },
+    "authenticity": {
+     "evidence": "Natural light Aussie (\"still reckons the user's signed in\", \"have a squiz\", \"the way to go\"); the bikkie joke is a touch laboured: \"not the kind of bikkie you dunk in your cuppa; sadly, you can't eat these bikkies\".",
+     "score": 4
+    },
+    "register": {
+     "evidence": "A level-2 touch in a technical doc, no swearing.",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "Friendly tech-doc tone kept; the joke aside and repeated code formatting make it a little jokey.",
+     "score": 4
+    },
+    "flow": {
+     "evidence": "Every \"cookie\" in prose is wrapped in backticks (`cookies`, `Cookies`), which reads as code identifiers and clutters the text; the opening parenthesis is overlong.",
+     "score": 3
+    },
+    "variety": {
+     "evidence": "Varied: \"bikkie\", \"cuppa\", \"hang on to\", \"out of the box\", \"reckons\", \"trolley\", \"get up to\", \"heaps\", \"dodgy\", \"squiz\".",
+     "score": 4
+    },
+    "essence": {
+     "evidence": "Clearly the MDN page, but the backtick formatting and rewritten macro alter the document's markup.",
+     "score": 4
+    }
+   },
+   "problems": [
+    {
+     "quote": "`Cookies` let web applications keep small amounts of data",
+     "original": "Cookies enable web applications to store limited amounts of data",
+     "severity": "major",
+     "why": "Representative of the word \"cookie\" wrapped in code formatting throughout, which misrepresents prose as code."
+    },
+    {
+     "quote": "[`Set-Cookie`](/en-US/docs/Web/HTTP/Reference/Headers/Set-Cookie)",
+     "original": "{{HTTPHeader(\"Set-Cookie\")}}",
+     "severity": "minor",
+     "why": "Rewrites the source macro into a different link."
+    },
+    {
+     "quote": "on a dodgy mobile data connection",
+     "original": "on slow mobile data connections",
+     "severity": "minor",
+     "why": "\"dodgy\" means unreliable, not slow."
+    },
+    {
+     "quote": "sadly, you can't eat these bikkies",
+     "original": "",
+     "severity": "minor",
+     "why": "Added joke runs on a little long."
+    }
+   ],
+   "summary": "A natural, lightly Aussie rewrite of the doc, marred by code-formatting every \"cookie\" and a tinkered macro."
+  },
+  "B": {
+   "scores": {
+    "meaning": {
+     "evidence": "The technical content is mostly untouched, but the term itself is changed: \"web bickie or browser bickie\", \"a separate bikkie\", so the defined term becomes a different word mid-document.",
+     "score": 3
+    },
+    "sense": {
+     "evidence": "\"cookie\" is repeatedly taken in its food sense (\"bickies enable web applications\"), which is wrong for an HTTP term.",
+     "score": 1
+    },
+    "authenticity": {
+     "evidence": "A mechanical swap, inconsistently spelled (\"bickie\", \"bikkie\", \"cookies\") and with US spellings left (\"personalized\", \"Personalization\").",
+     "score": 1
+    },
+    "register": {
+     "evidence": "Apart from the term swap and \"heaps\", untranslated; lighter than level 2 and off-key.",
+     "score": 2
+    },
+    "tone": {
+     "evidence": "The neutral doc tone survives, but \"bickies\" makes it read as a gag.",
+     "score": 3
+    },
+    "flow": {
+     "evidence": "Jarring: \"bickies are mainly used for three purposes:\" (lower-case start), and cookie/bickie/bikkie alternating sentence to sentence.",
+     "score": 2
+    },
+    "variety": {
+     "evidence": "Leans entirely on the one swapped word.",
+     "score": 1
+    },
+    "essence": {
+     "evidence": "Recognisably the MDN page, but its central term is defaced.",
+     "score": 3
+    }
+   },
+   "problems": [
+    {
+     "quote": "also known as a web bickie or browser bickie",
+     "original": "also known as a web cookie or browser cookie",
+     "severity": "critical",
+     "why": "Renames the technical term being defined; a reader would not find \"web bickie\" anywhere."
+    },
+    {
+     "quote": "bickies are mainly used for three purposes:",
+     "original": "Cookies are mainly used for three purposes:",
+     "severity": "major",
+     "why": "Wrong-sense swap with broken capitalisation."
+    },
+    {
+     "quote": "each one of which will set a separate bikkie",
+     "original": "each one of which will set a separate cookie",
+     "severity": "major",
+     "why": "Inconsistent spelling (\"bikkie\" vs \"bickie\") of the wrong-sense swap."
+    },
+    {
+     "quote": "issue a personalized or generic response",
+     "original": "issue a personalized or generic response",
+     "severity": "minor",
+     "why": "US spelling left in; representative of untranslated text."
+    }
+   ],
+   "summary": "A word-swap that turns the HTTP term into \"bickie\"; wrong sense, inconsistent and otherwise untranslated."
+  },
+  "C": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every point survives faithfully; the macro and code blocks are left intact.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"out of the box, the HTTP protocol is stateless\", \"it still reckons the user is signed in\", \"shopping trolley contents\", \"what users get up to\", \"drag down performance\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Plain, natural Australian English with a light touch; Australian spellings throughout (\"personalised\", \"analysing\").",
+     "score": 5
+    },
+    "register": {
+     "evidence": "Exactly a level-2 touch for a technical doc; no swearing.",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "The friendly, neutral MDN tone comes through whole.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads like it was written that way.",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Small but varied set (\"have a look\", \"run through\", \"out of the box\", \"reckons\", \"trolley\", \"get up to\", \"capped\").",
+     "score": 4
+    },
+    "essence": {
+     "evidence": "Unmistakably the MDN page.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "Browsers are generally capped at a maximum number of cookies per domain",
+     "original": "Browsers are generally limited to a maximum number of cookies per domain",
+     "severity": "minor",
+     "why": "\"capped at a maximum\" is slightly redundant."
+    }
+   ],
+   "summary": "A clean, faithful level-2 rewrite with natural light Aussie touches."
+  }
+ },
+ "rankings": {
+  "tone": [
+   [
+    "C"
+   ],
+   [
+    "A"
+   ],
+   [
+    "B"
+   ]
+  ],
+  "flow": [
+   [
+    "C"
+   ],
+   [
+    "A"
+   ],
+   [
+    "B"
+   ]
+  ],
+  "variety": [
+   [
+    "A",
+    "C"
+   ],
+   [
+    "B"
+   ]
+  ],
+  "essence": [
+   [
+    "C"
+   ],
+   [
+    "A"
+   ],
+   [
+    "B"
+   ]
+  ],
+  "overall": [
+   [
+    "C"
+   ],
+   [
+    "A"
+   ],
+   [
+    "B"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,692 @@
+{
+ "rubric_version": 2,
+ "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as rude, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+ "prompt": "BRIEF: level 3, vulgarity 1\n\nORIGINAL:\n## B. Account Terms\n\n**Short version:** _Personal Accounts and Organizations have different administrative controls; a human must create your Account; you must be 13 or over; you must provide a valid email address; and you may not have more than one free Account. You alone are responsible for your Account and anything that happens while you are signed in to or using your Account. You are responsible for keeping your Account secure._\n\n### 1. Account Controls\n\n* Users. Subject to these Terms, you retain ultimate administrative control over your Personal Account and the Content within it.\n\n* Organizations. The \"owner\" of an Organization that was created under these Terms has ultimate administrative control over that Organization and the Content within it. Within the Service, an owner can manage User access to the Organization’s data and projects. An Organization may have multiple owners, but there must be at least one Personal Account designated as an owner of an Organization. If you are the owner of an Organization under these Terms, we consider you responsible for the actions that are performed on or through that Organization.\n\n### 2. Required Information\n\nYou must provide a valid email address in order to complete the signup process. Any other information requested, such as your real name, is optional, unless you are accepting these terms on behalf of a legal entity (in which case we need more information about the legal entity) or if you opt for a [paid Account](#l-payment), in which case additional information will be necessary for billing purposes.\n\n### 3. Account Requirements\n\nWe have a few simple rules for Accounts on GitHub's Service.\n* You must be a human to create an Account. Accounts registered by \"bots\" or other automated methods are not permitted. We do permit machine accounts:\n* A machine account is an Account set up by an individual human who accepts the Terms on behalf of the Account, provides a valid email address, and is responsible for its actions. A machine account is used exclusively for performing automated tasks. Multiple users may direct the actions of a machine account, but the owner of the Account is ultimately responsible for the machine's actions. You may maintain no more than one free machine account in addition to your free Personal Account.\n* One person or legal entity may maintain no more than one free Account (if you choose to control a machine account as well, that's fine, but it can only be used for running a machine).\n* You must be age 13 or older. While we are thrilled to see brilliant young coders get excited by learning to program, we must comply with United States law. GitHub does not target our Service to children under 13, and we do not permit any Users under 13 on our Service. If we learn of any User under the age of 13, we will [terminate that User’s Account immediately](#m-cancellation-and-termination). If you are a resident of a country outside the United States, your country’s minimum age may be older; in such a case, you are responsible for complying with your country’s laws.\n* Your login may only be used by one person — i.e., a single login may not be shared by multiple people. A paid Organization may only provide access to as many Personal Accounts as your subscription allows.\n* You may not use GitHub in violation of export control or sanctions laws of the United States or any other applicable jurisdiction. You may not use GitHub if you are or are working on behalf of a [Specially Designated National (SDN)](https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/default.aspx) or a person subject to similar blocking or denied party prohibitions administered by a U.S. government agency. GitHub may allow persons in certain sanctioned countries or territories to access certain GitHub services pursuant to U.S. government authorizations. For more information, please see our [Export Controls policy](/site-policy/other-site-policies/github-and-trade-controls).\n\nCANDIDATE A:\n## B. Account Terms\n\n**Short version:** _Personal Accounts and Organizations get different admin controls; a real human has to create your Account; you've gotta be 13 or over; you need to give a valid email address; and you can't have more than one free Account. You and only you are responsible for your Account and anything that happens while you're signed in to it or using it. It's on you to keep your Account secure._\n\n### 1. Account Controls\n\n* Users. Subject to these Terms, you keep the final say on admin control over your Personal Account and the Content in it.\n\n* Organizations. The \"owner\" of an Organization that was set up under these Terms has the final say on admin control over that Organization and the Content in it. Within the Service, an owner can manage User access to the Organization's data and projects. An Organization can have more than one owner, but there has to be at least one Personal Account named as an owner of an Organization. If you're the owner of an Organization under these Terms, we reckon you're responsible for whatever gets done on or through that Organization.\n\n### 2. Required Information\n\nYou've gotta give a valid email address to finish signing up. Any other info we ask for, like your real name, is optional, unless you're accepting these terms on behalf of a legal entity (in which case we need more info about the legal entity) or if you go for a [paid Account](#l-payment), in which case we'll need extra info for billing.\n\n### 3. Account Requirements\n\nWe've got a few simple rules for Accounts on GitHub's Service.\n* You've gotta be a human to create an Account. Accounts registered by \"bots\" or other automated methods aren't allowed. We do allow machine accounts:\n* A machine account is an Account set up by an individual human who accepts the Terms on behalf of the Account, gives a valid email address, and is responsible for what it does. A machine account is used only for doing automated tasks. Multiple users can direct what a machine account does, but the owner of the Account is the one ultimately on the hook for the machine's actions. You can keep no more than one free machine account on top of your free Personal Account.\n* One person or legal entity can keep no more than one free Account (if you want to run a machine account as well, that's fine, but it can only be used for running a machine).\n* You've gotta be 13 or older. We're stoked to see bright young coders getting fired up about learning to program, but we have to follow United States law. GitHub doesn't aim our Service at kids under 13, and we don't allow any Users under 13 on our Service. If we find out about any User under 13, we'll [terminate that User's Account immediately](#m-cancellation-and-termination). If you live in a country outside the United States, your country's minimum age might be higher; if so, it's on you to follow your country's laws.\n* Your login can only be used by one person — i.e., a single login can't be shared by a bunch of people. A paid Organization can only give access to as many Personal Accounts as your subscription allows.\n* You can't use GitHub in breach of export control or sanctions laws of the United States or any other applicable jurisdiction. You can't use GitHub if you are, or are working on behalf of, a [Specially Designated National (SDN)](https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/default.aspx) or a person subject to similar blocking or denied party bans run by a U.S. government agency. GitHub may let people in certain sanctioned countries or territories get at certain GitHub services under U.S. government authorisations. For more info, have a look at our [Export Controls policy](/site-policy/other-site-policies/github-and-trade-controls).\n\nCANDIDATE B:\n## B. Account Terms\n\n**Short version:** _Personal Accounts and Organizations have different admin controls; a human has to create your Account; you have to be 13 or over; you have to give us a valid email address; and you can't have more than one free Account. You alone are responsible for your Account and anything that happens while you're signed in to or using your Account. It's up to you to keep your Account secure._\n\n### 1. Account Controls\n\n* Users. Subject to these Terms, you keep final admin control over your Personal Account and the Content in it.\n\n* Organizations. The \"owner\" of an Organization that was created under these Terms has final admin control over that Organization and the Content in it. Within the Service, an owner can manage User access to the Organization’s data and projects. An Organization can have more than one owner, but at least one Personal Account has to be named as an owner of an Organization. If you're the owner of an Organization under these Terms, we hold you responsible for anything done on or through that Organization.\n\n### 2. Required Information\n\nYou have to give us a valid email address to finish signing up. Any other information we ask for, like your real name, is optional, unless you're accepting these terms on behalf of a legal entity (in which case we need more information about the legal entity) or you go for a [paid Account](#l-payment), in which case we'll need more information for billing.\n\n### 3. Account Requirements\n\nWe've got a few simple rules for Accounts on GitHub's Service.\n* You have to be a human to create an Account. Accounts registered by \"bots\" or other automated methods aren't allowed. We do allow machine accounts:\n* A machine account is an Account set up by an individual human who accepts the Terms on behalf of the Account, gives a valid email address, and is responsible for what it does. A machine account is used only for running automated tasks. More than one user can direct what a machine account does, but at the end of the day the owner of the Account is responsible for what the machine does. You can keep no more than one free machine account on top of your free Personal Account.\n* One person or legal entity can keep no more than one free Account (if you choose to control a machine account as well, no worries, but it can only be used for running a machine).\n* You have to be 13 or older. We're stoked to see clever young coders getting excited about learning to program, but we have to comply with United States law. GitHub doesn't target our Service at children under 13, and we don't allow any Users under 13 on our Service. If we find out about any User under the age of 13, we will [terminate that User’s Account immediately](#m-cancellation-and-termination). If you live in a country outside the United States, your country’s minimum age may be older; if so, it's up to you to comply with your country’s laws.\n* Your login can only be used by one person — i.e., a single login can't be shared by more than one person. A paid Organization can only give access to as many Personal Accounts as your subscription allows.\n* You can't use GitHub in breach of the export control or sanctions laws of the United States or any other applicable jurisdiction. You can't use GitHub if you are, or are working on behalf of, a [Specially Designated National (SDN)](https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/default.aspx) or a person subject to similar blocking or denied party prohibitions administered by a U.S. government agency. GitHub may let people in certain sanctioned countries or territories access certain GitHub services under U.S. government authorisations. For more information, please see our [Export Controls policy](/site-policy/other-site-policies/github-and-trade-controls).\n\nCANDIDATE C:\n## B. Account Terms\n\n**Short version:** _Personal Accounts and Organizations have different administrative controls; a human must create your Account; you must be 13 or over; you must provide a valid email address; and you may not have more than one free Account. You alone are responsible for your Account and anything that happens while you are signed in to or using your Account. You are responsible for keeping your Account secure._\n\n### 1. Account Controls\n\n* Users. Subject to these Terms, you retain ultimate administrative control over your Personal Account and the Content within it.\n\n* Organizations. The \"owner\" of an Organization that was created under these Terms has ultimate administrative control over that Organization and the Content within it. Within the Service, an owner can manage User access to the Organization’s data and projects. An Organization may have multiple owners, but there must be at least one Personal Account designated as an owner of an Organization. If you are the owner of an Organization under these Terms, we consider you responsible for the actions that are performed on or through that Organization.\n\n### 2. Required Information\n\nYou must provide a valid email address in order to complete the signup process. Any other information requested, such as your real name, is optional, unless you are accepting these terms on behalf of a legal entity (in which case we need more information about the legal entity) or if you opt for a [paid Account](#l-payment), in which case additional information will be necessary for billing purposes.\n\n### 3. Account Requirements\n\nWe have a few simple rules for Accounts on GitHub's Service.\n* You must be a human to create an Account. Accounts registered by \"bots\" or other automated methods are not permitted. We do permit machine accounts:\n* A machine account is an Account set up by an individual human who accepts the Terms on behalf of the Account, provides a valid email address, and is responsible for its actions. A machine account is used exclusively for performing automated tasks. Multiple users may direct the actions of a machine account, but the owner of the Account is at the end of the day responsible for the machine's actions. You may maintain no more than one free machine account in addition to your free Personal Account.\n* One person or legal entity may maintain no more than one free Account (if you choose to control a machine account as well, that's fine, but it can only be used for running a machine).\n* You must be age 13 or older. While we are thrilled to see beaut young coders get excited by learning to program, we must comply with United States law. GitHub does not target our Service to children under 13, and we do not permit any Users under 13 on our Service. If we learn of any User under the age of 13, we will [terminate that User’s Account immediately](#m-cancellation-and-termination). If you are a resident of a country outside the United States, your country’s minimum age may be older; in such a case, you are responsible for complying with your country’s laws.\n* Your login may only be used by one person — i.e., a single login may not be shared by multiple punters. A paid Organization may only provide access to as many Personal Accounts as your subscription allows.\n* You may not use GitHub in violation of export control or sanctions laws of the United States or any other applicable jurisdiction. You may not use GitHub if you are or are working on behalf of a [Specially Designated National (SDN)](https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/default.aspx) or a person subject to similar blocking or denied party prohibitions administered by a U.S. government agency. GitHub may allow persons in certain sanctioned countries or territories to access certain GitHub services pursuant to U.S. government authorisations. For more information, please see our [Export Controls policy](/site-policy/other-site-policies/github-and-trade-controls).",
+ "schema": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "object",
+    "properties": {
+     "A": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "B": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "C": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "A",
+     "B",
+     "C"
+    ],
+    "additionalProperties": false
+   },
+   "rankings": {
+    "type": "object",
+    "properties": {
+     "tone": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "flow": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "variety": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "essence": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "overall": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "tone",
+     "flow",
+     "variety",
+     "essence",
+     "overall"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "required": [
+   "candidates",
+   "rankings"
+  ],
+  "additionalProperties": false
+ },
+ "original": "## B. Account Terms\n\n**Short version:** _Personal Accounts and Organizations have different administrative controls; a human must create your Account; you must be 13 or over; you must provide a valid email address; and you may not have more than one free Account. You alone are responsible for your Account and anything that happens while you are signed in to or using your Account. You are responsible for keeping your Account secure._\n\n### 1. Account Controls\n\n* Users. Subject to these Terms, you retain ultimate administrative control over your Personal Account and the Content within it.\n\n* Organizations. The \"owner\" of an Organization that was created under these Terms has ultimate administrative control over that Organization and the Content within it. Within the Service, an owner can manage User access to the Organization’s data and projects. An Organization may have multiple owners, but there must be at least one Personal Account designated as an owner of an Organization. If you are the owner of an Organization under these Terms, we consider you responsible for the actions that are performed on or through that Organization.\n\n### 2. Required Information\n\nYou must provide a valid email address in order to complete the signup process. Any other information requested, such as your real name, is optional, unless you are accepting these terms on behalf of a legal entity (in which case we need more information about the legal entity) or if you opt for a [paid Account](#l-payment), in which case additional information will be necessary for billing purposes.\n\n### 3. Account Requirements\n\nWe have a few simple rules for Accounts on GitHub's Service.\n* You must be a human to create an Account. Accounts registered by \"bots\" or other automated methods are not permitted. We do permit machine accounts:\n* A machine account is an Account set up by an individual human who accepts the Terms on behalf of the Account, provides a valid email address, and is responsible for its actions. A machine account is used exclusively for performing automated tasks. Multiple users may direct the actions of a machine account, but the owner of the Account is ultimately responsible for the machine's actions. You may maintain no more than one free machine account in addition to your free Personal Account.\n* One person or legal entity may maintain no more than one free Account (if you choose to control a machine account as well, that's fine, but it can only be used for running a machine).\n* You must be age 13 or older. While we are thrilled to see brilliant young coders get excited by learning to program, we must comply with United States law. GitHub does not target our Service to children under 13, and we do not permit any Users under 13 on our Service. If we learn of any User under the age of 13, we will [terminate that User’s Account immediately](#m-cancellation-and-termination). If you are a resident of a country outside the United States, your country’s minimum age may be older; in such a case, you are responsible for complying with your country’s laws.\n* Your login may only be used by one person — i.e., a single login may not be shared by multiple people. A paid Organization may only provide access to as many Personal Accounts as your subscription allows.\n* You may not use GitHub in violation of export control or sanctions laws of the United States or any other applicable jurisdiction. You may not use GitHub if you are or are working on behalf of a [Specially Designated National (SDN)](https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/default.aspx) or a person subject to similar blocking or denied party prohibitions administered by a U.S. government agency. GitHub may allow persons in certain sanctioned countries or territories to access certain GitHub services pursuant to U.S. government authorizations. For more information, please see our [Export Controls policy](/site-policy/other-site-policies/github-and-trade-controls).\n",
+ "level": 3,
+ "vulgarity": 1,
+ "candidates": {
+  "A": "## B. Account Terms\n\n**Short version:** _Personal Accounts and Organizations get different admin controls; a real human has to create your Account; you've gotta be 13 or over; you need to give a valid email address; and you can't have more than one free Account. You and only you are responsible for your Account and anything that happens while you're signed in to it or using it. It's on you to keep your Account secure._\n\n### 1. Account Controls\n\n* Users. Subject to these Terms, you keep the final say on admin control over your Personal Account and the Content in it.\n\n* Organizations. The \"owner\" of an Organization that was set up under these Terms has the final say on admin control over that Organization and the Content in it. Within the Service, an owner can manage User access to the Organization's data and projects. An Organization can have more than one owner, but there has to be at least one Personal Account named as an owner of an Organization. If you're the owner of an Organization under these Terms, we reckon you're responsible for whatever gets done on or through that Organization.\n\n### 2. Required Information\n\nYou've gotta give a valid email address to finish signing up. Any other info we ask for, like your real name, is optional, unless you're accepting these terms on behalf of a legal entity (in which case we need more info about the legal entity) or if you go for a [paid Account](#l-payment), in which case we'll need extra info for billing.\n\n### 3. Account Requirements\n\nWe've got a few simple rules for Accounts on GitHub's Service.\n* You've gotta be a human to create an Account. Accounts registered by \"bots\" or other automated methods aren't allowed. We do allow machine accounts:\n* A machine account is an Account set up by an individual human who accepts the Terms on behalf of the Account, gives a valid email address, and is responsible for what it does. A machine account is used only for doing automated tasks. Multiple users can direct what a machine account does, but the owner of the Account is the one ultimately on the hook for the machine's actions. You can keep no more than one free machine account on top of your free Personal Account.\n* One person or legal entity can keep no more than one free Account (if you want to run a machine account as well, that's fine, but it can only be used for running a machine).\n* You've gotta be 13 or older. We're stoked to see bright young coders getting fired up about learning to program, but we have to follow United States law. GitHub doesn't aim our Service at kids under 13, and we don't allow any Users under 13 on our Service. If we find out about any User under 13, we'll [terminate that User's Account immediately](#m-cancellation-and-termination). If you live in a country outside the United States, your country's minimum age might be higher; if so, it's on you to follow your country's laws.\n* Your login can only be used by one person — i.e., a single login can't be shared by a bunch of people. A paid Organization can only give access to as many Personal Accounts as your subscription allows.\n* You can't use GitHub in breach of export control or sanctions laws of the United States or any other applicable jurisdiction. You can't use GitHub if you are, or are working on behalf of, a [Specially Designated National (SDN)](https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/default.aspx) or a person subject to similar blocking or denied party bans run by a U.S. government agency. GitHub may let people in certain sanctioned countries or territories get at certain GitHub services under U.S. government authorisations. For more info, have a look at our [Export Controls policy](/site-policy/other-site-policies/github-and-trade-controls).\n",
+  "B": "## B. Account Terms\n\n**Short version:** _Personal Accounts and Organizations have different admin controls; a human has to create your Account; you have to be 13 or over; you have to give us a valid email address; and you can't have more than one free Account. You alone are responsible for your Account and anything that happens while you're signed in to or using your Account. It's up to you to keep your Account secure._\n\n### 1. Account Controls\n\n* Users. Subject to these Terms, you keep final admin control over your Personal Account and the Content in it.\n\n* Organizations. The \"owner\" of an Organization that was created under these Terms has final admin control over that Organization and the Content in it. Within the Service, an owner can manage User access to the Organization’s data and projects. An Organization can have more than one owner, but at least one Personal Account has to be named as an owner of an Organization. If you're the owner of an Organization under these Terms, we hold you responsible for anything done on or through that Organization.\n\n### 2. Required Information\n\nYou have to give us a valid email address to finish signing up. Any other information we ask for, like your real name, is optional, unless you're accepting these terms on behalf of a legal entity (in which case we need more information about the legal entity) or you go for a [paid Account](#l-payment), in which case we'll need more information for billing.\n\n### 3. Account Requirements\n\nWe've got a few simple rules for Accounts on GitHub's Service.\n* You have to be a human to create an Account. Accounts registered by \"bots\" or other automated methods aren't allowed. We do allow machine accounts:\n* A machine account is an Account set up by an individual human who accepts the Terms on behalf of the Account, gives a valid email address, and is responsible for what it does. A machine account is used only for running automated tasks. More than one user can direct what a machine account does, but at the end of the day the owner of the Account is responsible for what the machine does. You can keep no more than one free machine account on top of your free Personal Account.\n* One person or legal entity can keep no more than one free Account (if you choose to control a machine account as well, no worries, but it can only be used for running a machine).\n* You have to be 13 or older. We're stoked to see clever young coders getting excited about learning to program, but we have to comply with United States law. GitHub doesn't target our Service at children under 13, and we don't allow any Users under 13 on our Service. If we find out about any User under the age of 13, we will [terminate that User’s Account immediately](#m-cancellation-and-termination). If you live in a country outside the United States, your country’s minimum age may be older; if so, it's up to you to comply with your country’s laws.\n* Your login can only be used by one person — i.e., a single login can't be shared by more than one person. A paid Organization can only give access to as many Personal Accounts as your subscription allows.\n* You can't use GitHub in breach of the export control or sanctions laws of the United States or any other applicable jurisdiction. You can't use GitHub if you are, or are working on behalf of, a [Specially Designated National (SDN)](https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/default.aspx) or a person subject to similar blocking or denied party prohibitions administered by a U.S. government agency. GitHub may let people in certain sanctioned countries or territories access certain GitHub services under U.S. government authorisations. For more information, please see our [Export Controls policy](/site-policy/other-site-policies/github-and-trade-controls).\n",
+  "C": "## B. Account Terms\n\n**Short version:** _Personal Accounts and Organizations have different administrative controls; a human must create your Account; you must be 13 or over; you must provide a valid email address; and you may not have more than one free Account. You alone are responsible for your Account and anything that happens while you are signed in to or using your Account. You are responsible for keeping your Account secure._\n\n### 1. Account Controls\n\n* Users. Subject to these Terms, you retain ultimate administrative control over your Personal Account and the Content within it.\n\n* Organizations. The \"owner\" of an Organization that was created under these Terms has ultimate administrative control over that Organization and the Content within it. Within the Service, an owner can manage User access to the Organization’s data and projects. An Organization may have multiple owners, but there must be at least one Personal Account designated as an owner of an Organization. If you are the owner of an Organization under these Terms, we consider you responsible for the actions that are performed on or through that Organization.\n\n### 2. Required Information\n\nYou must provide a valid email address in order to complete the signup process. Any other information requested, such as your real name, is optional, unless you are accepting these terms on behalf of a legal entity (in which case we need more information about the legal entity) or if you opt for a [paid Account](#l-payment), in which case additional information will be necessary for billing purposes.\n\n### 3. Account Requirements\n\nWe have a few simple rules for Accounts on GitHub's Service.\n* You must be a human to create an Account. Accounts registered by \"bots\" or other automated methods are not permitted. We do permit machine accounts:\n* A machine account is an Account set up by an individual human who accepts the Terms on behalf of the Account, provides a valid email address, and is responsible for its actions. A machine account is used exclusively for performing automated tasks. Multiple users may direct the actions of a machine account, but the owner of the Account is at the end of the day responsible for the machine's actions. You may maintain no more than one free machine account in addition to your free Personal Account.\n* One person or legal entity may maintain no more than one free Account (if you choose to control a machine account as well, that's fine, but it can only be used for running a machine).\n* You must be age 13 or older. While we are thrilled to see beaut young coders get excited by learning to program, we must comply with United States law. GitHub does not target our Service to children under 13, and we do not permit any Users under 13 on our Service. If we learn of any User under the age of 13, we will [terminate that User’s Account immediately](#m-cancellation-and-termination). If you are a resident of a country outside the United States, your country’s minimum age may be older; in such a case, you are responsible for complying with your country’s laws.\n* Your login may only be used by one person — i.e., a single login may not be shared by multiple punters. A paid Organization may only provide access to as many Personal Accounts as your subscription allows.\n* You may not use GitHub in violation of export control or sanctions laws of the United States or any other applicable jurisdiction. You may not use GitHub if you are or are working on behalf of a [Specially Designated National (SDN)](https://www.treasury.gov/resource-center/sanctions/SDN-List/Pages/default.aspx) or a person subject to similar blocking or denied party prohibitions administered by a U.S. government agency. GitHub may allow persons in certain sanctioned countries or territories to access certain GitHub services pursuant to U.S. government authorisations. For more information, please see our [Export Controls policy](/site-policy/other-site-policies/github-and-trade-controls).\n"
+ },
+ "key": {
+  "A": "unharnessed",
+  "B": "yarn",
+  "C": "engine"
+ }
+}

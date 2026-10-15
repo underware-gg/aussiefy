@@ -1,0 +1,63 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {"evidence": "Every point kept: the 1.98.1 point release, `rustup update stable`, the vtable miscompilation with a null pointer, UB, segfaults \"but it can also open the door to arbitrary effects\", the beta and nightly channels, the bug-report link, thanks to contributors.", "score": 5},
+        "sense": {"evidence": "Terms fit: \"empowering every man and his dog\" for everyone, \"give us a hand\", \"any bugs you might run into\", \"Heaps of people pitched in\".", "score": 5},
+        "authenticity": {"evidence": "Mostly natural (\"every man and his dog\", \"pitched in\"), though \"a brand-spankin'-new point release\" is an American stock phrase.", "score": 4},
+        "register": {"evidence": "Lighter than level 4: a handful of touches (\"brand-spankin'-new\", \"every man and his dog\", \"Heaps\") on otherwise lightly reworded release notes, e.g. \"rustc would wrongly generate a trait object vtable\".", "score": 3},
+        "tone": {"evidence": "Keeps the friendly, informative release-note voice: \"We couldn't have done it without all of you.\"", "score": 5},
+        "flow": {"evidence": "Reads smoothly: \"Sometimes this may 'just' cause segfaults when the null pointer gets loaded, but it can also open the door to arbitrary effects\".", "score": 5},
+        "variety": {"evidence": "Several distinct touches, none repeated: \"put out\", \"brand-spankin'-new\", \"every man and his dog\", \"give us a hand\", \"run into\", \"Heaps\", \"pitched in\".", "score": 4},
+        "essence": {"evidence": "Plainly the same Rust point-release announcement, code blocks and links intact.", "score": 5}
+      },
+      "problems": [
+        {"quote": "a brand-spankin'-new point release", "original": "a new point release", "severity": "minor", "why": "American stock phrase rather than Australian."},
+        {"quote": "rustc would wrongly generate a trait object vtable", "original": "rustc would incorrectly generate a trait object vtable", "severity": "minor", "why": "Representative of the technical body staying plain, under the level-4 brief."}
+      ],
+      "summary": "Clear, accurate and natural, but lighter than the level-4 brief."
+    },
+    "B": {
+      "scores": {
+        "meaning": {"evidence": "All points kept: the point release, the rustup command, the null-pointer vtable bug and UB, segfaults, beta and nightly testing, bug reports, thanks. Additions are colour hanging off the original: \"runs like a bloody dream\" for efficient, \"(as you'd expect with UB, the mongrel)\".", "score": 5},
+        "sense": {"evidence": "Most terms fit (\"giving everyone a leg-up\", \"rustc would go and stuff up a trait object vtable\", \"the code it spits out\", \"bugs you might trip over\"), but \"it's also fair game for any old weird effects\" strains: fair game means a legitimate target, not something that can happen.", "score": 4},
+        "authenticity": {"evidence": "Sounds like an Australian dev talking: \"go and stuff up\", \"the lot of youse\", \"Heaps of people pitched in to put Rust 1.98.1 together\".", "score": 4},
+        "register": {"evidence": "Level-4 throughout with dad-level swearing: \"runs like a bloody dream\", \"the mongrel\", \"the lot of youse\".", "score": 5},
+        "tone": {"evidence": "The friendly release-note tone survives, though the bug explanation gets jokier than the original: \"(as you'd expect with UB, the mongrel)\".", "score": 4},
+        "flow": {"evidence": "Mostly smooth; one clunky stretch: \"but it's also fair game for any old weird effects at all\".", "score": 4},
+        "variety": {"evidence": "Wide range, nothing leaned on: \"pushed out\", \"leg-up\", \"grabbing\", \"sorts out\", \"stuff up\", \"spits out\", \"mongrel\", \"lend us a hand\", \"trip over\", \"youse\".", "score": 5},
+        "essence": {"evidence": "Clearly the same announcement, code and links unchanged.", "score": 5}
+      },
+      "problems": [
+        {"quote": "it's also fair game for any old weird effects at all", "original": "it is possible for it to be justification for arbitrary effects", "severity": "minor", "why": "\"Fair game\" strains the sense, and the line is wordy."},
+        {"quote": "runs like a bloody dream", "original": "efficient", "severity": "minor", "why": "Loose rendering of \"efficient\"; colour rather than an exact match."}
+      ],
+      "summary": "A lively level-4 retelling that keeps all the technical content; one strained idiom."
+    },
+    "C": {
+      "scores": {
+        "meaning": {"evidence": "Almost the original verbatim, so every point survives: \"rustc would incorrectly generate a trait object vtable with a null pointer\".", "score": 5},
+        "sense": {"evidence": "\"every man and his dog\" fits, but \"Many punters came together to create Rust 1.98.1\" uses punters (customers, gamblers, the public) for contributors.", "score": 3},
+        "authenticity": {"evidence": "Three phrases pasted onto untouched text: \"a brand-spankin'-new point release\" (American), \"every man and his dog\", \"punters\".", "score": 2},
+        "register": {"evidence": "Largely untranslated against a level-4 brief: \"In some cases this may 'just' cause segfaults due to the null pointer being loaded\".", "score": 2},
+        "tone": {"evidence": "The original tone is intact.", "score": 5},
+        "flow": {"evidence": "Reads as the original, with the pasted \"brand-spankin'-new\" a bit jarring beside \"has published\".", "score": 4},
+        "variety": {"evidence": "Only three touches: \"brand-spankin'-new\", \"every man and his dog\", \"punters\".", "score": 2},
+        "essence": {"evidence": "It is the original announcement.", "score": 5}
+      },
+      "problems": [
+        {"quote": "Many punters came together to create Rust 1.98.1.", "original": "Many people came together to create Rust 1.98.1.", "severity": "major", "why": "Punters are customers or the public, not contributors; wrong sense."},
+        {"quote": "In some cases this may 'just' cause segfaults due to the null", "original": "In some cases this may 'just' cause segfaults due to the null", "severity": "major", "why": "Representative: the text is left largely untranslated."},
+        {"quote": "brand-spankin'-new", "original": "new", "severity": "minor", "why": "American stock phrase."}
+      ],
+      "summary": "The original with three pasted phrases, one in the wrong sense; far too light."
+    }
+  },
+  "rankings": {
+    "tone": [["A", "C"], ["B"]],
+    "flow": [["A"], ["B", "C"]],
+    "variety": [["B"], ["A"], ["C"]],
+    "essence": [["A", "B", "C"]],
+    "overall": [["B"], ["A"], ["C"]]
+  }
+}

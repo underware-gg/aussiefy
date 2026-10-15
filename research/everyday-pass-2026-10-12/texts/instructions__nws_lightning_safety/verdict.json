@@ -1,0 +1,229 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "engine": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 3,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 3,
+   "tone": 1,
+   "flow": 1,
+   "variety": 2,
+   "essence": 2
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "All the safety points survive, in order. Additions mostly elaborate (\"like a golf buggy or a convertible\" for open vehicles). But it reframes the US notice for an Australian reader: \"in that country\" for \"in this country\" and \"Call 911 (it's the States, remember, not triple-zero)\", which shifts who is speaking.",
+   "sense": "Most terms fit (\"power point\", \"Mobiles\", \"bucketin' down\", \"quick smart\", \"in strife\"). \"Some bastards have the sense to get inside\" uses a term of abuse for the sensible people, which strains.",
+   "authenticity": "Sounds like a real Aussie yarn: \"No word of a lie\", \"have a crack at ya\", \"Don't muck about\", \"ya galah\". \"a lot of folks\" leans American.",
+   "register": "A full level-5 retelling throughout, with swearing (\"bloody\", \"bastards\", \"flamin'\") within vulgarity 2.",
+   "tone": "Stays a serious warning under the yarn (\"Not one spot.\", \"Don't muck about.\"); \"ya galah\" adds a jokey jab but does not make it flippant.",
+   "flow": "Reads smoothly aloud: \"Some hang about till the storm's right on top of 'em and it starts bucketin' down.\"",
+   "variety": "Varied: \"punters\", \"dawdlin'\", \"weather blokes\", \"strife\", \"zapped\", \"carry-on\", \"quick smart\", \"copping\". \"bastard\" appears twice.",
+   "essence": "Unmistakably the NWS lightning notice, with its slogan and its sequence of advice."
+  },
+  "engine": {
+   "meaning": "Mostly the original text, but \"if thunderstorms are reckoned\" loses \"expected\", and \"If some mongrel is struck by lightning\" turns the victim into a villain.",
+   "sense": "Several terms take the wrong sense: \"battlers\" for people in general, \"reckoned\" for \"expected\", \"mongrel\" for a lightning victim, \"Too easy.\" after CPR instructions.",
+   "authenticity": "Stage-Australian: stock phrases bolted onto sentence starts (\"Crikey,\", \"Stone the flamin' crows,\", \"Fair dinkum,\", \"So anyway,\"); US \"Cell phones\" and \"electrical outlet\" left in.",
+   "register": "Heavy-handed swearing reaches level 5 by brute force, but the underlying text is largely untranslated (\"Substantial buildings and hard-topped vehicles are safe options.\"). \"Fair fuckin' dinkum\" is within vulgarity 2.",
+   "tone": "\"Oh, shit,\" and \"Too easy.\" make a life-safety notice flippant; calling the victim \"some mongrel\" is callous.",
+   "flow": "Jarring joins: \"Anyway, Understandin' the Threat\" as a heading, \"Well, Cell phones\", \"Well, lightning Victims\", \"punters’s behaviour\".",
+   "variety": "Repeats \"battlers\", \"punters\", \"bloody\", \"Anyway\"/\"Well\" fillers throughout.",
+   "essence": "Recognisable as the lightning notice, but its sober authority is lost."
+  },
+  "unharnessed": {
+   "meaning": "Every point survives, in order, with no reframing: \"If everyone stuck to those simple rules, the number of people killed and hurt by lightning in this country could drop a hell of a lot.\"",
+   "sense": "Terms fit their context: \"on the cards\", \"power point\", \"Mobiles\", \"bucketing down\", \"piss-poor planning\", \"quick smart\".",
+   "authenticity": "Natural throughout: \"Rain shelters, little sheds and open vehicles are bloody useless\", \"Some hang about till the storm's right overhead\".",
+   "register": "Clearly Aussie and lively, with swearing inside vulgarity 2 (\"piss-poor\", \"bloody\"), but more a casual retelling than a full level-5 pub yarn.",
+   "tone": "Stays a serious, practical warning throughout.",
+   "flow": "Reads smoothly: \"Whether someone cops a lightning strike comes down to how they carry on when there's storms about.\"",
+   "variety": "Varied, though \"when there's storms about\" and \"how they carry on\" recur.",
+   "essence": "Unmistakably the original notice, retold."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "Some bastards have the sense to get inside at the first sign of a storm",
+    "original": "While some people move inside at the first signs of a thunderstorm",
+    "severity": "minor",
+    "why": "A term of abuse applied to the people doing the right thing; strains the sense."
+   },
+   {
+    "quote": "the number of people hurt or killed by lightning in that country",
+    "original": "the number of lightning casualties in this country",
+    "severity": "minor",
+    "why": "Changes the speaker from the US agency to an outsider."
+   },
+   {
+    "quote": "Call 911 (it's the States, remember, not triple-zero)",
+    "original": "Call 911",
+    "severity": "minor",
+    "why": "Aside reframes the notice for Australian readers; colour, but it shifts the voice."
+   },
+   {
+    "quote": "a lot of folks leave it way too long",
+    "original": "many people wait far too long",
+    "severity": "minor",
+    "why": "\"folks\" leans American."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Oh, shit, there's no safe place outside",
+    "original": "There is no safe place outside",
+    "severity": "major",
+    "why": "Swear bolted onto a safety notice; makes it flippant."
+   },
+   {
+    "quote": "if thunderstorms are reckoned",
+    "original": "if thunderstorms are expected",
+    "severity": "major",
+    "why": "\"reckoned\" does not mean \"expected\" here."
+   },
+   {
+    "quote": "Fair fuckin' dinkum, also, keep away from outside doors",
+    "original": "Also, keep away from outside doors",
+    "severity": "major",
+    "why": "Stock phrase bolted on with a jarring join."
+   },
+   {
+    "quote": "Anyway, Understandin' the Threat",
+    "original": "Understanding the Threat",
+    "severity": "major",
+    "why": "Filler stuck onto a heading."
+   },
+   {
+    "quote": "many battlers wait far too fuckin' long",
+    "original": "many people wait far too long",
+    "severity": "major",
+    "why": "\"battlers\" means people doing it tough, not people in general; repeated throughout."
+   },
+   {
+    "quote": "it’s punters’s behaviour",
+    "original": "it’s people’s behavior",
+    "severity": "major",
+    "why": "Broken possessive."
+   },
+   {
+    "quote": "If some mongrel is struck by lightning",
+    "original": "If someone is struck by lightning",
+    "severity": "critical",
+    "why": "Insults the victim; changes the sense of the first-aid section."
+   },
+   {
+    "quote": "Too easy.",
+    "original": "",
+    "severity": "major",
+    "why": "Flippant added close after CPR instructions."
+   },
+   {
+    "quote": "Well, Cell phones and cordless phones are safe.",
+    "original": "Cell phones and cordless phones are safe.",
+    "severity": "minor",
+    "why": "US \"Cell phones\" left in, with a filler bolted on."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "Some people head inside at the first sign of a storm",
+    "original": "While some people move inside at the first signs of a thunderstorm",
+    "severity": "minor",
+    "why": "Many lines stay fairly plain; a little light for level 5."
+   },
+   {
+    "quote": "when there's storms about",
+    "original": "when thunderstorms are in the area",
+    "severity": "minor",
+    "why": "The phrase recurs several times."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A vivid, natural level-5 yarn that keeps every safety point; a few reframings and an odd \"bastards\".",
+  "engine": "Mostly untranslated, with swears and stock phrases bolted on and several wrong-sense terms; the safety tone is undercut.",
+  "unharnessed": "Faithful, natural and serious, a notch lighter than level 5."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

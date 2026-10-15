@@ -1,0 +1,171 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 3,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 5,
+   "flow": 3,
+   "variety": 1,
+   "essence": 4
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every point of both posts survives: the wife setting tiles aside, the tiles buried at the bottom, the chess handicap, the stepdad, the article. The paraphrases are faithful: \"she pops it aside and picks the next one\", \"watching my handicap shrink over time\".",
+   "sense": "Each term fits its context: \"having a squiz at the tiles\", \"the deck was being fiddled\", \"be gutted when he doesn't\", \"win fair and square\", \"over the moon\".",
+   "authenticity": "Natural, everyday Australian: \"I reckon that's spot on\", \"give it my best shot\", \"stay keen enough\". The spelling is local too (\"favour\", \"mum\"), and nothing is bolted on.",
+   "register": "A light level-2 touch: a handful of terms (\"squiz\", \"reckon\", \"gutted\") over a plain parenting-forum voice, with no swearing, as vulgarity 0 asks.",
+   "tone": "Keeps the earnest, reflective forum tone: \"Is that a fair worry at his age, or is he just too little to care about the competitive side of games\".",
+   "flow": "Reads naturally throughout: \"When he finally did win, he was over the moon, because he knew I hadn't just handed it to him.\"",
+   "variety": "Varied, with no tic, though the slang is sparse, as the level suits, and \"real achievement\" is repeated where the original also repeats.",
+   "essence": "Plainly the same question and the same contrasting answer, in the same order and with the same reasoning."
+  },
+  "engine": {
+   "meaning": "Mostly the original verbatim, so most facts survive, but \"What makes a little fellas's game a littlies's game\" garbles the definition the second post rests on.",
+   "sense": "\"littlie\" fits for the toddler, but it is forced onto general uses: \"keep your littlie happy\" works, \"a little fellas's game a littlies's game\" does not.",
+   "authenticity": "Barely any Aussie apart from \"littlie\", \"favour\" and \"mum\", and the one bigger swap is ungrammatical: \"little fellas's\".",
+   "register": "Left largely untranslated: \"Setting aside the implications of lessons about cheating ... is there any problem with ensuring that he wins each time?\" is the original word for word.",
+   "tone": "Because almost nothing is changed, the original's earnest tone is intact: \"I want him to enjoy playing games for the sake of playing, and not for the sake of winning.\"",
+   "flow": "Reads as the original does, except for the broken line \"What makes a little fellas's game a littlies's game is the element of chance\".",
+   "variety": "The only slang device is \"littlie\", used in the title, the second post and the last paragraph, plus \"little fellas's\".",
+   "essence": "Recognisably the original, since it mostly is the original; the garbled key definition dents the second post's argument."
+  },
+  "yarn": {
+   "meaning": "All points survive with faithful paraphrase: \"she pops it aside and takes the next one\", \"start off without my queen\", \"they can't cope with disappointment\". \"getting upset\" for \"become disappointed\" is close enough.",
+   "sense": "Each term fits: \"littlie\" for toddler, \"having a squiz\", \"fiddled\", \"Chrissie\" for Christmas, \"stoked\" for ecstatic, \"have a red-hot go at winning\".",
+   "authenticity": "Sounds like an Australian parent writing: \"Thing is, I noticed last night\", \"Dunno if she doesn't notice\", \"luck usually counts for heaps more than strategy\".",
+   "register": "Clean, as vulgarity 0 asks, but a notch heavier than a light level 2: \"Chrissie\", \"stoked\", \"red-hot go\", \"Dunno\" and \"heaps\" pile up in the second post.",
+   "tone": "Keeps the thoughtful, earnest tone; the slang is warm rather than jokey: \"he's learning to be a good sport whether he wins or loses\".",
+   "flow": "Smooth and idiomatic: \"That way a win's a real achievement for either of us\".",
+   "variety": "A good spread with no term leaned on: \"littlie\", \"squiz\", \"pops it aside\", \"stoked\", \"Chrissie\", \"red-hot go\", \"keen\", \"Dunno\".",
+   "essence": "The same two posts, the same argument and the same shape, retold in a slightly broader voice."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "be gutted",
+    "original": "become disappointed",
+    "severity": "minor",
+    "why": "\"gutted\" is a bit stronger than \"disappointed\" and leans British, though Australians use it."
+   },
+   {
+    "quote": "I made a deliberate decision",
+    "original": "I made a conscious decision",
+    "severity": "minor",
+    "why": "A stiff paraphrase that adds nothing; it could have stayed or been made casual."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "What makes a little fellas's game a littlies's game",
+    "original": "What makes a children's game a children's game",
+    "severity": "critical",
+    "why": "Ungrammatical (fellas's, littlies's), and swapping two different words breaks the tautology the argument relies on."
+   },
+   {
+    "quote": "Setting aside the implications of lessons about cheating (let's assume that it was subtle enough, and that my son was distracted enough, that he had no clue that the deck was being manipulated), is there any problem with ensuring that he wins each time?",
+    "original": "Setting aside the implications of lessons about cheating (let's assume that it was subtle enough, and that my son was distracted enough, that he had no clue that the deck was being manipulated), is there any problem with ensuring that he wins each time?",
+    "severity": "major",
+    "why": "The text is left almost entirely untranslated, well below even a level-2 brief."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "have a red-hot go at winning",
+    "original": "still do my best to win",
+    "severity": "minor",
+    "why": "A bit colourful for a level-2 brief; \"give it my best shot\" would be lighter."
+   },
+   {
+    "quote": "Chrissie",
+    "original": "Christmas",
+    "severity": "minor",
+    "why": "Adds to a slight overweight of slang for level 2; natural, but not needed."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A faithful, natural light-touch rendering, exactly at level 2 and clean. Little to fault.",
+  "engine": "Essentially the original with a few spelling changes and a repeated \"littlie\", plus one garbled sentence. Far under the brief.",
+  "yarn": "Natural and faithful, with good variety; it runs a touch heavier than level 2 in the second half but stays clean and on tone."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn",
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,205 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "engine": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 2,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 2,
+   "flow": 1,
+   "variety": 1,
+   "essence": 2
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "All the forecast content survives: front and high Wednesday, gusts 20-30 mph, +17-18C at 925mb, highs in the 70s, stray shower, Thursday 10C cooler and lower 60s, Friday rain 0.25-0.60\" with ECMWF/Canadian wetter, timing uncertainty, NW 40-50 kt LLJ, gusts 35-45 mph, -2C to +2C, 40s/50s, Berkshires, \"S word\", freezing, upper 20s. Additions (\"Not enough to bother bringing the washing in.\", \"Hang onto your hat.\") hang off the forecast.",
+   "sense": "Terms fit: \"a bit of spitting\", \"keener on the wet than the GFS runs\", \"on the cards\", \"when the rain fronts up\", \"Highs will do it tough to get out of the 40s\", \"bugger all instability\".",
+   "authenticity": "Mostly a real Aussie voice (\"Righto, here's the drum.\", \"moving through fairly smartly\"), but some tags are stock: \"Proper brass monkey weather.\", \"keep the tinnies on the back verandah\".",
+   "register": "Level 4 with dad-level swearing (\"bugger all\").",
+   "tone": "Keeps the forecaster's measured hedging (\"still hard to pin down this far out\"), though the jokey tags lighten a technical discussion somewhat more than needed.",
+   "flow": "Reads well; the tacked-on tag sentences at paragraph ends (\"Hang onto your hat.\", the tinnies line) make some joins abrupt.",
+   "variety": "Varied: \"here's the drum\", \"spitting\", \"nippy\", \"by the bucketload\", \"bugger all\", \"on the cards\", \"fronts up\", \"barrels\", \"parks itself\", \"brass monkey\".",
+   "essence": "Unmistakably the forecast discussion with its key messages, models and numbers, retold."
+  },
+  "engine": {
+   "meaning": "Key facts are lost: \"cooler\" becomes \"esky\" (\"although esky than Wednesday\", \"esky temperatures\"), \"less certain\" becomes \"maggoted certain\", and \"northern stream\" becomes \"northern creek\", so the cooling trend and uncertainty are garbled.",
+   "sense": "Many terms take the wrong sense: \"high pressure knocking together\", \"esky airmass\", \"northern creek shortwave trough\", \"maggoted certain\", \"RH paddocks\".",
+   "authenticity": "Stage-Australian: \"Struth, westerly, downslope flow\", \"Well, across those particular models\", \"Anyway, rain more likely fronts up\" bolted onto untouched technical text; US \"fall\" left in.",
+   "register": "Swearing within dad level (\"bloody early\"), but mostly untranslated with scattered tags; far lighter than a level-4 retelling.",
+   "tone": "The forecast's clarity is undermined by nonsense substitutions and random interjections.",
+   "flow": "Broken grammar throughout: \"although esky than Wednesday\", \"still maggoted certain this far out\".",
+   "variety": "\"esky\" repeated for every \"cooler\"; filler \"Well,\" \"Anyway,\" \"Now,\".",
+   "essence": "The forecast's structure remains, but its content is defaced."
+  },
+  "unharnessed": {
+   "meaning": "Every point survives with correct numbers and caveats; additions are small (\"drier than a dead dingo's donger\" for the dry lower levels).",
+   "sense": "Most terms fit (\"Might cop a stray shower\", \"Gusty nor'westers\", \"on the cards\", \"a bit up in the air\"), but \"back up\" is stretched to mean \"support\" in \"will back up deeper mixing\" and \"back up a few isolated showers\".",
+   "authenticity": "Natural Aussie voice (\"moving along pretty smartly\", \"smack in a classic cold air advection pattern\"), with one stock crude simile, \"drier than a dead dingo's donger\".",
+   "register": "A shade light for level 4: most technical sentences are close to the original with a few Aussie words; \"bloody cold night\" and \"donger\" are within dad level, though \"donger\" is crude.",
+   "tone": "Keeps the measured, hedged forecaster tone under the slang.",
+   "flow": "Smooth, but \"back up\" recurs in close succession.",
+   "variety": "Good range (\"cop\", \"nor'westers\", \"barrels\", \"on the cards\", \"turns up\", \"smack in\"), with \"back up\" leaned on three times.",
+   "essence": "Unmistakably the forecast discussion, retold."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "Cold enough to leave the esky at home and keep the tinnies on the back verandah.",
+    "original": "",
+    "severity": "minor",
+    "why": "Stock Aussie tag bolted onto the end of a forecast."
+   },
+   {
+    "quote": "Proper brass monkey weather.",
+    "original": "",
+    "severity": "minor",
+    "why": "Stock phrase; and highs in the 40s-50s is cold but a bit of a stretch for \"brass monkey\"."
+   },
+   {
+    "quote": "Thursday dries right out and turns a bit fresh",
+    "original": "Dry conditions return for Thursday with seasonably cool temperatures",
+    "severity": "minor",
+    "why": "Fine, though \"fresh\" plus \"about what you'd expect\" spreads one idea over two clauses."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "although esky than Wednesday",
+    "original": "although cooler than Wednesday",
+    "severity": "critical",
+    "why": "\"cooler\" replaced with \"esky\"; the temperature trend is lost (also \"esky airmass\", \"esky temperatures\")."
+   },
+   {
+    "quote": "still maggoted certain this far out",
+    "original": "still less certain this far out",
+    "severity": "critical",
+    "why": "\"less\" replaced with \"maggoted\" (drunk); the uncertainty statement becomes nonsense."
+   },
+   {
+    "quote": "northern creek shortwave trough",
+    "original": "northern stream shortwave trough",
+    "severity": "major",
+    "why": "Technical term \"stream\" mangled."
+   },
+   {
+    "quote": "surface high pressure knocking together in from the west",
+    "original": "surface high pressure building in from the west",
+    "severity": "major",
+    "why": "\"building\" taken as construction."
+   },
+   {
+    "quote": "RH paddocks show residual moisture",
+    "original": "RH fields show residual moisture",
+    "severity": "major",
+    "why": "Model \"fields\" taken as farm paddocks."
+   },
+   {
+    "quote": "Struth, westerly, downslope flow",
+    "original": "Westerly, downslope flow",
+    "severity": "minor",
+    "why": "Bolted-on interjection."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "drier than a dead dingo's donger",
+    "original": "due to the drier lower levels",
+    "severity": "minor",
+    "why": "Stock crude simile; edges the vulgarity and reads as bolted on in a forecast."
+   },
+   {
+    "quote": "will back up deeper mixing",
+    "original": "will support deeper mixing",
+    "severity": "minor",
+    "why": "\"back up\" strains as \"support\" and is repeated (\"backs up drier conditions\", \"back up a few isolated showers\")."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A thorough, lively level-4 retelling that keeps every number; a few stock tags bolted on.",
+  "engine": "A broken word-swap pass that garbles key forecast terms; unusable as a forecast.",
+  "unharnessed": "Faithful and natural, a little light on Aussie for level 4, with one repeated phrase."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

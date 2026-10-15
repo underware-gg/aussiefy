@@ -1,0 +1,169 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 3,
+   "authenticity": 3,
+   "register": 3,
+   "tone": 5,
+   "flow": 3,
+   "variety": 3,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every quantity, step and tip survives, with ingredients put in Australian terms: \"plain flour\", \"bicarb soda\", \"chopped nuts, like peanuts\", \"swap two teaspoons of the white sugar for vanilla sugar\". \"dark choc bits\" for semi-sweet is a fair local equivalent.",
+   "sense": "Terms fit: \"not much chop to eat on its own\", \"bump up the spread\", \"baking paper\", \"Top-shelf butter, chocolate and vanilla will make a cracker of a bikkie\", \"rolled oats\" for oatmeal.",
+   "authenticity": "Reads like an Australian recipe written by a home cook: \"Chuck in the vanilla and beat it through\", \"pop them in the 350°F oven\", \"On the flip side\". Spelling localised: \"flavour\".",
+   "register": "A friendly middle weight that suits level 3: casual verbs and local names, nothing piled on; no swearing.",
+   "tone": "Keeps the practical, encouraging recipe voice: \"If you like a soft, squishy middle in your bikkie, pull them out one minute earlier\".",
+   "flow": "Reads like it was written that way: \"Let them sit for about 1 minute, then take them off the hot tray to cool on a wire rack.\"",
+   "variety": "Varied verbs and turns (\"Chuck in\", \"bump up\", \"tweak\", \"pop them in\"), though \"bikkies\" is the noun in nearly every tip.",
+   "essence": "Unmistakably the original recipe, sections and tips in order: \"Notes, tips, and variations\"."
+  },
+  "yarn": {
+   "meaning": "All quantities, steps and tips survive: \"use two teaspoons of vanilla sugar in place of the same amount of white sugar\", \"the trick is to bump the flour up to 3+ cups\". The first \"Procedure\" heading becomes \"Method\", so the recipe now has two \"Method\" sections.",
+   "sense": "Terms fit: \"plain flour\", \"bicarb soda\", \"not much chop to eat on its own\", \"help rein in the spread\", \"baking paper\". \"won't spread out heaps\" is fine.",
+   "authenticity": "Natural Australian recipe English: \"If you can't get hold of vanilla extract\", \"you mightn't like it in the bikkies either\". \"groundnuts\" left unlocalised.",
+   "register": "A light-to-middle weight, plain and local, suitable for level 3: \"Top-quality butter, choccy and vanilla will make a better bikkie.\" No swearing.",
+   "tone": "Keeps the practical recipe voice throughout: \"just make sure the pieces are small enough to eat comfortably\".",
+   "flow": "Smooth throughout; switches between \"biscuits\" and \"bikkies\" sometimes in adjacent lines: \"for thicker biscuits. The other way round, grease your tray if you like thinner (crispier) bikkies.\"",
+   "variety": "Varied: \"rein in\", \"bump the flour up\", \"not much chop\", \"get hold of\".",
+   "essence": "Clearly the original, every section and tip there."
+  },
+  "engine": {
+   "meaning": "All content kept, mostly verbatim: \"Cream butter, granulated sugar, and brown sugar in a large mixer bowl.\"",
+   "sense": "Some swaps strain: \"Some punters also recommend chilling dough\" (punters are customers or gamblers, not people at large), \"Using chopped bar choccy\". Inconsistent localising: \"plain flour\" in the list but \"Use cake flour instead of all-purpose\", \"chocolate morsels (chips)\" left.",
+   "authenticity": "Mostly the original with word swaps; the cookie word varies at random: \"chewier bickies\", \"crisper biscuits\", \"thinner bikkies\", \"a superior biscuit\". Formal US recipe phrasing kept: \"if you find this not to be the case\".",
+   "register": "Lighter than level 3: most lines are untouched, such as \"The proportion of granulated to brown sugar may be adjusted to suit taste.\"",
+   "tone": "The recipe's instructional tone is kept, as little is changed.",
+   "flow": "Readable, but the switching spellings jar: \"More brown sugar will result in chewier bickies. More white sugar will result in crisper biscuits.\"",
+   "variety": "Little slang beyond rotating \"bikkie/bickie/biscuit\" and \"choccy\".",
+   "essence": "Recognisably the original recipe; it mostly is the original."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "More brown sugar makes chewier bikkies. More white sugar makes crispier bikkies.",
+    "original": "More brown sugar will result in chewier cookies. More white sugar will result in crisper cookies.",
+    "severity": "minor",
+    "why": "\"bikkies\" repeated in nearly every line."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Method\n\nPreheat the oven",
+    "original": "Procedure\n\nPreheat oven",
+    "severity": "minor",
+    "why": "Renaming \"Procedure\" to \"Method\" leaves two \"Method\" headings."
+   },
+   {
+    "quote": "for thicker biscuits. The other way round, grease your tray if you like thinner (crispier) bikkies.",
+    "original": "for thicker cookies. Conversely, grease your sheet if you like thinner (crispier) cookies.",
+    "severity": "minor",
+    "why": "Alternates \"biscuits\" and \"bikkies\" for no reason."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Some punters also recommend chilling dough",
+    "original": "Some people also recommend chilling dough",
+    "severity": "major",
+    "why": "\"punters\" means customers or gamblers; an odd fit for people giving baking advice."
+   },
+   {
+    "quote": "More brown sugar will result in chewier bickies. More white sugar will result in crisper biscuits.",
+    "original": "More brown sugar will result in chewier cookies. More white sugar will result in crisper cookies.",
+    "severity": "minor",
+    "why": "Switches between \"bickies\", \"bikkies\" and \"biscuits\" at random."
+   },
+   {
+    "quote": "Use cake flour instead of all-purpose",
+    "original": "Use cake flour instead of all-purpose",
+    "severity": "minor",
+    "why": "US \"all-purpose\" left after the list says \"plain flour\"."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A natural, faithful Australian recipe at the right weight; \"bikkies\" is leaned on.",
+  "yarn": "A faithful, natural local recipe, a touch plainer than A, with a duplicated heading.",
+  "engine": "Mostly the original with word swaps, inconsistent and light, and one wrong-sense \"punters\"."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn",
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn",
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,176 @@
+# Verdicts for the dinkum-check round, one per added entry or trigger, in the format of the everyday round's
+# verify/BRIEF.md. Written by hand from the yarn agents' notes (research/dinkum-check-2026-10-14/texts/*/yarn-notes.md):
+# glosses and triggers in our own words, sources are open references. DECISIONS.md lists every candidate considered,
+# including the ones skipped or already covered, and the hand edits (RETIRE for pull the pin, the guards, not_in).
+# `evidence: own` means own knowledge of a common term, checked against the cited Wiktionary page where there is one
+# (a HEAD request with the User-Agent aussiefy-research/0.1; nothing was taken from the pages).
+
+# --- getting it wrong ----------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: stuff up (ruin, botch)
+  entry:
+    id: stuff-up
+    form: stuff up
+    concept: [NEW:BOTCH]
+    frame: vp
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    gloss: Get something wrong or ruin it by a mistake (I stuffed up; they stuffed up the booking).
+    sources: [https://en.wiktionary.org/wiki/stuff_up]
+  new_concept:
+    id: BOTCH
+    description: Get something badly wrong, ruin it by a mistake (a job, a plan, a chance), with what was spoiled after it or nothing.
+    triggers:
+      # "screw up" also crumples a face ("screwed up her eyes"): guarded by SCREW_UP_FACE (by hand).
+      # "mess up" only without an object: "messed up the kitchen" is untidying it
+      vp: ["screw up", "mess up !=the|a|an|his|her|my|your|their|our|its|this|that|these|those|hair|room|kitchen|house|bed|desk|place|everything|me|him|them|us",
+           "botch", "bungle", "foul up"]
+  evidence: own
+  confidence: high
+  why: The everyday Australian verb for getting it wrong ("I stuffed up", said by premiers on the news); clean in
+    Australia, where the euphemism has lost its edge. Lookup found only the folding stuff.
+
+# stuff {obj} up (BOTCH_IT: "screwed it up" -> "stuffed it up") is by hand, at the end of entries/dinkumcheck.yaml:
+# the round's form guard reads it as the same term as stuff up and drops it, and a single entry with both forms
+# picks between them at random, so "screwed it up" could lose its object ("stuffed up"). See DECISIONS.md.
+
+- decision: add_entry
+  candidate: a stuff-up (a mistake)
+  entry:
+    id: a-stuff-up
+    form: a stuff-up
+    plural: stuff-ups
+    concept: [NEW:BLUNDER]
+    frame: np
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    gloss: A mistake or a bungle that makes a mess of things (there was a stuff-up with the tickets).
+    sources: [https://en.wiktionary.org/wiki/stuff-up]
+  new_concept:
+    id: BLUNDER
+    description: A bad mistake that spoils something, a bungle (not a plain error of fact).
+    triggers:
+      # not "a mistake" ("it was a mistake to go" is a misjudgement) nor "a screw-up" (also a person)
+      np: ["a blunder", "a botch-up", "a foul-up", "a cock-up", "a mix-up"]
+  evidence: own
+  confidence: high
+  why: The noun beside the verb; "a blunder" and "a mix-up" are the plain words. Lookup found a fair whack.
+
+# --- pressure ----------------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: under the pump
+  entry:
+    id: under-the-pump
+    form: under the pump
+    concept: [NEW:UNDER_PRESSURE]
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    gloss: Under pressure, with too much to do or a lot riding on it (the coach is under the pump).
+    sources: [https://en.wiktionary.org/wiki/under_the_pump]
+  new_concept:
+    id: UNDER_PRESSURE
+    description: Of a person or a team, under pressure to deliver or to cope.
+    triggers:
+      # of a person only: a gas, a pipe or prices "under pressure" are physics or markets
+      predicate_adj: ["under pressure ^person", "under a lot of pressure ^person", "under heavy pressure ^person",
+                      "under enormous pressure ^person", "under intense pressure ^person"]
+  evidence: own
+  confidence: high
+  why: Current, everyday and Australian. Lookup gave only crook.
+
+# --- strangers ---------------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: not know someone from a bar of soap
+  entry:
+    id: not-know-from-a-bar-of-soap
+    form: "{subj} wouldn't know {obj} from a bar of soap"
+    concept: [NEW:NOT_KNOW_AT_ALL]
+    frame: clause
+    intensity: 4
+    vulgarity: 0
+    incoherence: 4
+    register: current
+    gloss: Not know someone at all, never have met them (I wouldn't know him from a bar of soap).
+    sources: [https://en.wiktionary.org/wiki/know_from_a_bar_of_soap]
+  new_concept:
+    id: NOT_KNOW_AT_ALL
+    description: Not know someone at all, not recognise them ("not know him from Adam").
+    triggers:
+      clause: ["{subj} {do}n't know {obj} from Adam", "{subj} {do} not know {obj} from Adam",
+               "{subj} wouldn't know {obj} from Adam", "{subj} would not know {obj} from Adam"]
+  evidence: own
+  confidence: high
+  why: The Australian for "not know him from Adam"; lookup found "I dunno" instead. Only the "wouldn't" form, since a
+    "don't know" form would be contracted to "dunno" ("I dunno him from a bar of soap").
+
+# --- weather -----------------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: spitting (light rain)
+  entry:
+    id: spitting-rain
+    form: "{subj} {be} spitting"
+    concept: [NEW:LIGHT_RAIN]
+    frame: clause
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    gloss: Raining a few light drops, only just raining (it's spitting, bring a jacket).
+    sources: [https://en.wiktionary.org/wiki/spit]
+  new_concept:
+    id: LIGHT_RAIN
+    description: Raining lightly, in a few drops (of the weather).
+    triggers:
+      # not drizzling something over food ("she was drizzling honey over it"): an object after it is refused
+      clause: ["{subj} {be} drizzling !=the|a|an|it|some|honey|oil|sauce|syrup|dressing|chocolate|cream|butter|over|on|onto|with|across|them",
+               "{subj} {be} raining lightly", "{subj} {be} only just raining"]
+  evidence: own
+  confidence: medium
+  why: Shared with British English, but the everyday Australian word for a few drops; "nippy" and "chucking it
+    down" are British and skipped (bucketing down is in already).
+
+# --- amounts ----------------------------------------------------------------------------------------------------
+- decision: add_entry
+  candidate: a whole swag of (a lot of)
+  entry:
+    id: a-swag-of
+    form: a swag of
+    variants: ["a whole swag of"]
+    concept: [NEW:A_RAFT_OF]
+    frame: adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 3
+    register: current
+    gloss: A big number of things, a whole lot of them (a swag of goals, a whole swag of other bands).
+    sources: [https://en.wiktionary.org/wiki/swag]
+  new_concept:
+    id: A_RAFT_OF
+    description: A large number of (things), before a plural noun ("a raft of changes", "a slew of awards").
+    triggers:
+      # not a raft of floating stuff (a raft of logs, of pumice after an eruption, of debris in a flood)
+      adj: ["a raft of !=logs|timber|planks|barrels|ice|pumice|seaweed|kelp|weed|debris|branches|wood|reeds|bamboo|rubbish|plastic|ants|otters|ducks|birds",
+            "a slew of", "a whole raft of", "a whole slew of", "a whole host of"]
+  evidence: own
+  confidence: medium
+  why: The Bob Weir agent's "a whole swag of other bands"; Australian, current in sport and news ("kicked a swag of
+    goals"). Not "a lot of" (a mass noun, "a lot of water", isn't a swag) nor "a host of" alone ("a host of the
+    show").
+
+# --- triggers on existing concepts -------------------------------------------------------------------------------
+- decision: add_triggers
+  candidate: all over the shop (all over the map)
+  triggers_to_add:
+    EVERYWHERE:
+      adv: ["all over the map"]
+  evidence: own
+  confidence: high
+  why: All over the shop is in the dictionary (all-over-the-shop) with only "all over the place"; the American
+    "all over the map" (disorganised, varied) is the same sense ("the forecasts are all over the map").

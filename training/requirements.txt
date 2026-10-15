@@ -1,0 +1,19 @@
+# The training toolchain the current version was built with (Python 3.13, x86_64, CPU). Only maintainers
+# retraining the bundled model need it; aussiefy itself never imports any of this.
+#   python3 -m venv .venv && .venv/bin/pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
+#   .venv/bin/pip install -r training/requirements.txt -e .
+# WordNet 3.0 data for nltk (a direct download: nltk's own downloader refuses to go through a proxy):
+#   mkdir -p ~/nltk_data/corpora && curl -sSL -o ~/nltk_data/corpora/wordnet.zip \
+#     https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/corpora/wordnet.zip
+torch==2.14.1
+sentence-transformers==6.1.0
+transformers==5.3.0
+model2vec[distill]==0.9.0
+tokenizers==0.22.2
+safetensors==0.8.0
+datasets==5.1.0
+accelerate==1.15.0
+scikit-learn==1.9.1
+numpy==2.5.3
+huggingface_hub==1.33.0
+nltk==3.10.3

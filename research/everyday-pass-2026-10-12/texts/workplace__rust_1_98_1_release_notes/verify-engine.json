@@ -1,0 +1,51 @@
+{
+ "ok": true,
+ "level": 4,
+ "level_name": "larrikin",
+ "vulgarity": 1,
+ "vulgarity_name": "dad",
+ "policy_warnings": [],
+ "counts": {
+  "critical": 0,
+  "major": 0,
+  "minor": 0
+ },
+ "problems": [
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "In Rust 1.98.0, in some circumstances, rustc would incorrectly generate a trait object vtable with a null pointer\nwhere ",
+   "why": "left exactly as it was",
+   "sentence": 4
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "In some cases this may 'just' cause segfaults due to the null\npointer being loaded, but it is possible for it to be just",
+   "why": "left exactly as it was",
+   "sentence": 6
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "If you'd like to help us out by testing future releases, you might consider\nusing the beta (                     ) and n",
+   "why": "left exactly as it was",
+   "sentence": 7
+  },
+  {
+   "severity": "info",
+   "kind": "untouched",
+   "phrase": "Please\n[report                                                       any bugs you\nmight come across!",
+   "why": "left exactly as it was",
+   "sentence": 8
+  }
+ ],
+ "metrics": {
+  "original_words": 207,
+  "translation_words": 220,
+  "sentences": 12,
+  "translation_sentences": 12,
+  "untouched_share": 0.33
+ },
+ "scope": "Deterministic checks: policy, spelling, facts, markup, sentence structure. Not judged: tone, flow, whether each swap took the right sense (use the judge for those)."
+}

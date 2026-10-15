@@ -1,0 +1,181 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "unharnessed": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 3,
+   "sense": 2,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 4,
+   "flow": 3,
+   "variety": 2,
+   "essence": 4
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 4,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "The agency's name is corrupted: \"U.S. Tucker and Drug Administration\". A reader would not know which body keeps the flush list. Everything else is the original verbatim.",
+   "sense": "\"Tucker\" replaces the \"Food\" in a proper noun, which is badly wrong sense. \"dunny\" fits. \"heaps of the medicine remains\" is fine in sense but ungrammatical.",
+   "authenticity": "The few swaps are mechanical, and the original's own slips stay (\"Drop off them\", \"To discard of\"). Barely any Aussie to judge, and what is there includes a pastiche error.",
+   "register": "Almost untranslated: only \"dunny\", \"heaps\" and \"authorised\" change. Well short of level 2.",
+   "tone": "Still reads as sober health guidance, but \"Tucker and Drug Administration\" gives an unintended comic note.",
+   "flow": "Readable as the original is, but \"Drop off them\" and \"heaps of the medicine remains\" jar.",
+   "variety": "Too little slang to vary. \"dunny\" twice.",
+   "essence": "Recognisably the FDA page, with the agency-name error."
+  },
+  "unharnessed": {
+   "meaning": "Every instruction survives in order, with accurate localisation: \"Check with your local police\", \"chemists\", \"household rubbish bin\", \"Post the envelope\".",
+   "sense": "All terms fit: \"chockers\", \"kitty litter\", \"rummaging through the bin\", \"Chuck the container in the bin\".",
+   "authenticity": "Reads like an Australian government health page: \"Some pharmacies give them out for free\", \"isn't handy\".",
+   "register": "A light level-2 touch, mostly vocabulary (chockers, chemists, rubbish, chuck), with sober guidance kept and no swearing.",
+   "tone": "Stays calm and instructional, and the fentanyl warning stays serious: \"can be dangerous to people it's not prescribed for\".",
+   "flow": "Smooth plain English: \"Take the drugs out of their original containers and mix them with something unpleasant\".",
+   "variety": "Fine for its weight, but \"get rid of\" is used for every disposal verb and \"isn't handy\" appears twice.",
+   "essence": "Unmistakably the FDA guidance, Australianised."
+  },
+  "yarn": {
+   "meaning": "All the steps survive. \"ask your doctor or your chemist\" narrows \"health care professional\" slightly, and \"Then bin the packaging\" is fine.",
+   "sense": "Terms fit their contexts: \"have a squiz at the list\", \"chockers\", \"Chuck the container in the bin\". \"something yucky\" fits \"undesirable\" loosely.",
+   "authenticity": "Natural Australian voice: \"meds\", \"have a squiz\", \"Some chemists hand them out for free\".",
+   "register": "A bit above a light touch for official health guidance: \"dunny\" twice, \"have a squiz\", \"yucky\" and \"here's what to do\" push towards level 3.",
+   "tone": "Mostly sober, but \"something yucky\" and \"the dunny\" lighten a public-safety text a little.",
+   "flow": "Smooth, conversational and easy to follow: \"If neither of those works for you, here's what to do\".",
+   "variety": "More varied in openers and terms, but \"handy\" appears three times (\"no take-back option handy\").",
+   "essence": "Clearly the FDA guidance, all points intact."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "U.S. Tucker and Drug Administration",
+    "original": "U.S. Food and Drug Administration",
+    "severity": "critical",
+    "why": "It translates \"Food\" inside an agency's proper name, so it names a body that does not exist."
+   },
+   {
+    "quote": "heaps of the medicine remains",
+    "original": "a lot of the medicine remains",
+    "severity": "minor",
+    "why": "Subject-verb agreement jars with \"heaps\"."
+   },
+   {
+    "quote": "Drop off them at a drug take-back location.",
+    "original": "Drop off them at a drug take-back location.",
+    "severity": "major",
+    "why": "Left untranslated, including the original's ungrammatical wording. Representative of the whole text sitting below the brief."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "To get rid of your prescription or over-the-counter medicines",
+    "original": "To discard of your prescription or over-the-counter medicines",
+    "severity": "minor",
+    "why": "\"Get rid of\" recurs for nearly every disposal verb."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "something yucky",
+    "original": "something undesirable",
+    "severity": "minor",
+    "why": "Childish register for a safety instruction."
+   },
+   {
+    "quote": "When there's no take-back option handy",
+    "original": "When a take-back option is not easily available",
+    "severity": "minor",
+    "why": "\"Handy\" is repeated three times."
+   },
+   {
+    "quote": "flush these potentially dangerous medicines down the dunny",
+    "original": "flush these potentially dangerous medicines down the toilet",
+    "severity": "minor",
+    "why": "\"Dunny\" in official safety guidance nudges past a light touch."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "Essentially untranslated, with one critical mistranslation of the agency's name.",
+  "unharnessed": "An accurate, light, natural level-2 localisation that keeps the guidance sober.",
+  "yarn": "A fluent, natural version, a shade chattier than level 2 asks for in a safety text."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

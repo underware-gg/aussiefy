@@ -1,0 +1,205 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 3,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 1,
+   "flow": 1,
+   "variety": 1,
+   "essence": 2
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every point kept, links and examples intact: the branch-name examples, revert-or-push fix, one change per commit, the rename/tests example, backup to remote storage.",
+   "sense": "Exact: \"knock over every step\" for complete, \"what's cooking\" for ongoing work, \"without stuffing up the default branch\", \"bin the variable rename\", \"run their eye over\".",
+   "authenticity": "Natural Aussie workplace voice: \"For the lowdown\", \"chip in on\", \"If you cock something up\", \"fix the stuff-up\", \"busting your arse\".",
+   "register": "Well retold and casual, a little lighter than a full level-5 yarn in places (\"Commit and push your changes to your branch.\"); swearing \"cock something up\", \"busting your arse\" within level 2.",
+   "tone": "Still a practical how-to, with the casual voice on top.",
+   "flow": "Reads smoothly: \"Your branch is a safe spot to muck around with changes.\"",
+   "variety": "Varied: \"no-fuss\", \"have a go\", \"hook up\", \"muck around\", \"smear the rename\", \"throw in\".",
+   "essence": "Unmistakably the GitHub flow docs, structure and links intact."
+  },
+  "yarn": {
+   "meaning": "Complete and accurate; the one addition, the \"asdf\" commit-message jibe ending \"ya mug.\", hangs off the commit-message advice.",
+   "sense": "Fits: \"fix the blue\" for mistake, \"your own little paddock\", \"offsiders\", \"Down the track\", \"done and dusted\".",
+   "authenticity": "Mostly a real Aussie voice (\"every man and his dog\", \"a bloody sight harder\"), with a couple of non-local stock lines (\"Whatever floats ya boat.\", \"Okay, so.\").",
+   "register": "A full level-5 yarn across every section; swearing \"bloody\" within level 2.",
+   "tone": "Still a friendly how-to, but \"ya mug\" to the reader edges into ribbing the docs never do.",
+   "flow": "Lively but the \"ya\" tic gets thick (\"Ya can do every step of GitHub flow\", \"the tools ya can hook up to GitHub with\").",
+   "variety": "Wide range: \"have a quick squiz\", \"what's on the go\", \"have a crack\", \"ditch the rename\", \"Chuck the rename\".",
+   "essence": "Plainly the same docs, retold."
+  },
+  "engine": {
+   "meaning": "Facts mostly survive, but insults are added throughout (\"ya drongo\", \"ya flamin' mongrel\", \"ya old bastard\") and link titles are altered (\"Creating brand-spankin'-new files\", \"Moving a file to a brand-spankin'-new location\").",
+   "sense": "\"see ongoing work at a squiz\", \"brand-spankin'-new files\" for new files: terms forced into slots that do not fit.",
+   "authenticity": "Stage-Australian bolt-ons: \"Stone the crows\", \"Fair fuckin' dinkum\", \"Bloody hell, this means that you can access yer bloody work\", \"Stone the flamin' crows.\"",
+   "register": "Exclamations and insults sprinkled on untranslated docs (\"Give each commit a descriptive message to help ya and future contributors understand\"); swearing within level 2 but no real retelling.",
+   "tone": "A helpful guide made abusive: \"make suggestions or contributions, ya old bastard.\"",
+   "flow": "Broken joins: \"Listen, Additionally\", \"Anyway, Ideally\", \"By committin''n pushin'\".",
+   "variety": "\"Anyway\", \"ya\", \"yer\" and insults over and over.",
+   "essence": "The docs are there underneath, but no longer read as documentation."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "And it's not just for the developers, mate, it's handy for everyone.",
+    "original": "The GitHub flow is useful for everyone, not just developers.",
+    "severity": "minor",
+    "why": "\"mate\" tag a touch stock."
+   },
+   {
+    "quote": "Commit and push your changes to your branch.",
+    "original": "Commit and push your changes to your branch.",
+    "severity": "minor",
+    "why": "Some lines left plain; a little light for level 5."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Not \"stuff\" or \"asdf\", ya mug.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added aside that calls the reader a mug."
+   },
+   {
+    "quote": "Whatever floats ya boat.",
+    "original": "",
+    "severity": "minor",
+    "why": "Stock, not especially Australian."
+   },
+   {
+    "quote": "Ya can do every step of GitHub flow",
+    "original": "You can complete all steps of GitHub flow",
+    "severity": "minor",
+    "why": "\"ya\" leaned on throughout."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "ya flamin' mongrel",
+    "original": "",
+    "severity": "major",
+    "why": "Insult added to the reader."
+   },
+   {
+    "quote": "ya old bastard",
+    "original": "",
+    "severity": "major",
+    "why": "Insult added."
+   },
+   {
+    "quote": "[Creating brand-spankin'-new files]",
+    "original": "[Creating new files]",
+    "severity": "major",
+    "why": "Changes the title of a linked page."
+   },
+   {
+    "quote": "Listen, Additionally,",
+    "original": "Additionally,",
+    "severity": "major",
+    "why": "Broken join from a bolted-on filler."
+   },
+   {
+    "quote": "Fair fuckin' dinkum, if ya put",
+    "original": "If you put",
+    "severity": "major",
+    "why": "Oath with no anchor in the original."
+   },
+   {
+    "quote": "at a squiz",
+    "original": "at a glance",
+    "severity": "minor",
+    "why": "Wrong idiom; you have a squiz, not see at one."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Accurate, natural and well varied; just short of a full level-5 yarn.",
+  "yarn": "The fullest and most varied level-5 retelling, a little heavy on \"ya\" and one cheeky aside.",
+  "engine": "Untranslated docs with insults and oaths bolted on; abusive and broken."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

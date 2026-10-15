@@ -1,0 +1,29 @@
+                        yarn   unharnessed        engine
+meaning                    5             5             1
+sense                      5             5             1
+authenticity               4             5             1
+register                   5             4             2
+tone                       5             5             2
+flow                       5             5             1
+variety                    5             5             1
+essence                    5             5             3
+mean                    4.88          4.88          1.50
+
+rankings: tone: unharnessed = yarn > engine; flow: unharnessed = yarn > engine; variety: yarn > unharnessed > engine; essence: unharnessed = yarn > engine; overall: yarn > unharnessed > engine
+
+yarn: A lively, accurate level-4 retelling with strong variety. Two asides are slightly odd.
+  minor: '(the code kind, not paddocks)' (for '`FHEProcessorInput` has two fields.'): An odd aside that jokes about a confusion the reader never had.
+  minor: 'Like counting votes in a sealed box.' (added): A loose analogy: sealed-box votes are opened before counting.
+
+unharnessed: A clean, accurate, natural level-4 retelling that leaves every bit of code untouched.
+  minor: 'The results step shows `2 × (5 + 3) = 16`. Bewdy.' (for 'The results step shows `2 × (5 + 3) = 16`.'): A stock tag, slightly bolted on.
+  minor: 'Have a look at\n  [Compute provider]' (for 'See\n  [Compute provider]'): "Have a look at" repeats in two adjacent sections.
+
+engine: A broken mechanical pass: several technical terms swapped for wrong-sense slang, and filler tags.
+  critical: '2 × (a + b) must be maggoted than 100' (for 'For this tutorial, 2 × (a + b) must be less than 100.'): "Maggoted" (drunk) replaces "less", so the key numeric constraint is unreadable.
+  critical: '`FHEProcessorInput` has two paddocks.' (for '`FHEProcessorInput` has two fields.'): Struct fields become farm paddocks.
+  critical: 'makes the sweet bugger-all ciphertext, the start value' (for '`Ciphertext::zero` makes the zero ciphertext, the start value.'): "Sweet bugger-all" (nothing) misdescribes the zero ciphertext.
+  major: 'It encrypts 1 and 2 and reckons\ntheir sum.' (for 'It encrypts 1 and 2 and expects\ntheir sum.'): "Reckons" (opines) is the wrong sense for a test's expectation.
+  major: 'for a source knock together' (for 'for a source build'): Broken phrase.
+  major: 'Bugger me, change the\nexpected value from 5 to 10:' (for 'Change the\nexpected value from 5 to 10:'): An oath bolted onto an instruction.
+  minor: 'Well, if `pnpm dev:all` runs' (for 'If `pnpm dev:all` runs'): A filler opener, repeated throughout.

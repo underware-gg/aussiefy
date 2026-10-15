@@ -1,0 +1,32 @@
+## Introduction
+
+GitHub flow is a light, branch-based workflow. The GitHub flow's handy for every man and his dog, not just developers. For example, here at GitHub, we use GitHub flow for our [site policy](https://github.com/github/site-policy), [documentation](https://github.com/github/docs), and [roadmap](https://github.com/github/roadmap).
+
+## Prerequisites
+
+To follow GitHub flow, you'll need a GitHub account and a repository. For the good oil on how to create an account, see [Creating an account on GitHub](/en/account-and-profile/how-tos/account-management/creating-an-account-on-github). For the lowdown on how to create a repository, see [Quickstart for repositories](/en/repositories/creating-and-managing-repositories/quickstart-for-repositories). For the lowdown on how to find an existin' repository to chip in on, see [Finding ways to contribute to open source on GitHub](/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github).
+
+## Following GitHub flow
+
+> \[!TIP]
+> Ya can get through all the steps of GitHub flow in the GitHub web interface, command line and [GitHub CLI](https://cli.github.com), or [GitHub Desktop](/en/desktop). For more on the tools ya can use to connect to GitHub, see [Connecting to GitHub](/en/get-started/using-github/connecting-to-github).
+
+### Create a branch
+
+Create a branch in yer repository. A short branch name that says what it's for lets yer collaborators see the work that's goin' on at a glance. For example, `increase-test-timeout` or `add-code-of-conduct`. For more, see [Managing branches within your repository](/en/pull-requests/how-tos/commit-changes/managing-branches-within-your-repository).
+
+By creatin' a branch, ya make yerself a space to work in without touchin' the default branch. On top of that, ya give collaborators a chance to look over yer work.
+
+### Make changes
+
+On yer branch, make whatever changes ya like to the repository. For more, see [Creating new files](/en/repositories/working-with-files/managing-files/creating-new-files), [Editing files](/en/repositories/working-with-files/managing-files/editing-files), [Renaming a file](/en/repositories/working-with-files/managing-files/renaming-a-file), [Moving a file to a new location](/en/repositories/working-with-files/managing-files/moving-a-file-to-a-new-location), or [Deleting files in a repository](/en/repositories/working-with-files/managing-files/deleting-files-in-a-repository).
+
+Yer branch is a safe spot to make changes. If ya stuff up, ya can revert yer changes or push more changes to fix the stuff-up. Yer changes won't end up on the default branch till ya merge yer branch.
+
+Commit and push yer changes to yer branch. Give each commit a message that says what it does, to help you and future contributors work out what changes the commit's got in it. For example, `fix typo` or `increase rate limit`.
+
+Best case, each commit holds one change, on its own and complete. That makes it easy to revert yer changes if ya decide to go a different way. For example, if ya want to rename a variable and add some tests, put the variable rename in one commit and the tests in another commit. Later on, if ya want to keep the tests but revert the variable rename, ya can revert just the commit that had the variable rename in it. If ya put the variable rename and tests in the same commit or spread the variable rename over a few commits, you'd put in more work revertin' yer changes.
+
+By committin' and pushin' yer changes, ya back up yer work to remote storage. That means ya can get at yer work from any device. It also means yer collaborators can see yer work, answer questions, and chuck in suggestions or contributions.
+
+Keep makin', committin', and pushin' changes to yer branch till yer ready to ask for feedback.

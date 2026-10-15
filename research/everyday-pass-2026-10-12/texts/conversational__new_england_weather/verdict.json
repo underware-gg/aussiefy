@@ -1,0 +1,199 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "unharnessed": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 3,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 4,
+   "flow": 5,
+   "variety": 5,
+   "essence": 4
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 3,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 5,
+   "flow": 4,
+   "variety": 3,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Nearly every point survives, including the apprentice factory, the 136 kinds of weather, the Centennial collector and Old Probabilities' forecast. But the poets joke breaks: \"the chance to ask how the locals feel has gone for good\" (the original means the poets are dead, so nobody can ask *them*). \"It's so thorough\" also loses \"convincing\". \"Old Probabilities, the weather forecaster\" is a harmless gloss.",
+   "sense": "Most terms fit: \"won't cop\", \"blow-ins\", \"knock off a heap of poets\", \"a pollie had been through\". \"fair old variety\" is a little weaker than \"sumptuous\" but holds its sense. \"chuffed with himself\" fits \"joy and pride\".",
+   "authenticity": "Sounds natural on the whole: \"knocked the foreigners for six\", \"fair enough too\", \"there's no helping it\", \"blow-ins\". \"Crikey, what awful thunder\" and the added \"Here's one for ya.\" lean a touch stagey, and \"chuffed\" is more British than Australian.",
+   "register": "A light, even level-2 touch, with no swearing: \"reckon\", \"beaut product\", \"heaps of it\", \"pollie\". The opener \"Here's one for ya.\" nudges it a little past a light touch, but not by much.",
+   "tone": "The deadpan tall-tale humour survives: \"weather to put in the bank, weather to invest, weather to give to the poor\", \"his head in the ash-bin\". Breaking the poets punchline dents one joke.",
+   "flow": "Paragraphed and smooth. It reads aloud easily: \"Watch him cruise along, chuffed with himself, till he gets to New England, and then watch his tail drop.\"",
+   "variety": "Varied slang, with no tic leaned on: \"beaut\", \"cop\", \"blow-ins\", \"knock off\", \"for six\", \"chuffed\", \"pollie\", \"Crikey\", \"heaps\".",
+   "essence": "Clearly Twain's weather speech, retold. Localising \"Congressman\" to \"pollie\" keeps the jab, but swapping \"convincing\" for \"thorough\" and losing the poets punchline flatten two of his signature twists."
+  },
+  "unharnessed": {
+   "meaning": "Follows the original closely, point by point, and keeps the poets joke (\"the chance to ask them how they feel has gone for good\"), \"convincing\" and \"Congressman\". \"muck about\" for \"experiment\" shades the sense slightly.",
+   "sense": "Mostly apt: \"blow-ins\", \"knock off\", \"hasn't got a clue\", \"flabbergasted\", \"won't put up with\". \"who muck about and learn the trade\" implies idle fooling rather than experimenting, and \"a funny one\" for \"peculiar\" is fine.",
+   "authenticity": "Generally natural: \"He hasn't got a clue\", \"chucked away\", \"Strewth\". \"I reverently reckon\" is an awkward hybrid, and a lot of Twain's diction stays (\"thoroughly deserves it\", \"points in between\").",
+   "register": "A light level-2 touch with no swearing: \"reckon\", \"decent product\", \"blow-ins\", \"Strewth\". About right, perhaps a shade light in the middle sections.",
+   "tone": "The deadpan exaggeration is kept whole: \"weather to hire out; weather to sell; to bank\" and \"his head in the ash-barrel\".",
+   "flow": "One unbroken block like the original. It mostly reads well, but \"I reverently reckon\" and then \"I reckon\" in consecutive sentences clunk.",
+   "variety": "Reasonable spread (\"muck about\", \"flabbergasted\", \"blow-ins\", \"Strewth\", \"hasn't got a clue\"), though \"reckon\" doubles up at the start.",
+   "essence": "Unmistakably Twain, with every twist intact, including the Congressman jab and the poets punchline."
+  },
+  "engine": {
+   "meaning": "Essentially the original word for word, so every point survives, apart from the garbled \"cannot, too right, know\".",
+   "sense": "\"cannot, too right, know how the natives feel\" puts \"too right\" (emphatic agreement) where \"of course\" was meant, which is wrong sense and broken grammar. \"beaut article\", \"bloke\" and \"pollie\" fit.",
+   "authenticity": "The few swaps sit in nineteenth-century prose (\"a beaut article, and will take their custom elsewhere\"). They read as bolted on, and \"too right\" is misused.",
+   "register": "Barely translated. Apart from \"beaut\", \"bloke\", \"heaps\", \"pollie\" and \"favourable\", it is the original, well short of level 2.",
+   "tone": "Tone intact because the text is almost untouched: \"you'll find that stranger down in the cellar with his head in the ash-barrel.\"",
+   "flow": "Reads as Twain does, except for the jarring \"cannot, too right, know\".",
+   "variety": "Too few Aussie terms to judge much. Each of the handful appears once (\"beaut\", \"bloke\", \"heaps\", \"pollie\").",
+   "essence": "It is the original, so its essence is intact: \"There is a sumptuous variety about the New England weather that compels the stranger's admiration\"."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "So, before they know it, the chance to ask how the locals feel has gone for good.",
+    "original": "And so the first thing they know the opportunity to inquire how they feel has permanently gone by.",
+    "severity": "major",
+    "why": "\"They\" were the poets, who have been killed. Making it \"the locals\" kills the punchline."
+   },
+   {
+    "quote": "It's so thorough that when it hits something",
+    "original": "it is so convincing, that when it strikes a thing",
+    "severity": "minor",
+    "why": "\"Convincing\" is Twain's ironic word. \"Thorough\" is literal and loses the irony."
+   },
+   {
+    "quote": "Here's one for ya.",
+    "original": "",
+    "severity": "minor",
+    "why": "An added, slightly stock yarn opener."
+   },
+   {
+    "quote": "\"Crikey, what awful thunder you've got here!\"",
+    "original": "“Why, what awful thunder you have here!”",
+    "severity": "minor",
+    "why": "\"Crikey\" in a stranger's mouth is a bit stage-Australian."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "I reverently reckon",
+    "original": "I reverently believe",
+    "severity": "minor",
+    "why": "\"Reverently\" and \"reckon\" sit oddly together. It reads like a word swap, not natural speech."
+   },
+   {
+    "quote": "who muck about and learn the trade",
+    "original": "who experiment and learn how",
+    "severity": "minor",
+    "why": "\"Muck about\" implies goofing off, not experimenting."
+   },
+   {
+    "quote": "I don't know who makes that, but I reckon",
+    "original": "I don't know who makes that, but I think",
+    "severity": "minor",
+    "why": "The second \"reckon\" in two sentences is noticeable."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "cannot, too right, know how the natives feel about spring",
+    "original": "cannot, of course, know how the natives feel about spring",
+    "severity": "major",
+    "why": "\"Too right\" means emphatic agreement. As a stand-in for \"of course\" here it is ungrammatical, and an Australian would wince."
+   },
+   {
+    "quote": "countries that require a beaut article",
+    "original": "countries that require a good article",
+    "severity": "minor",
+    "why": "The slang sits awkwardly in archaic phrasing."
+   },
+   {
+    "quote": "The weather is always doing something there; always attending strictly to business",
+    "original": "The weather is always doing something there; always attending strictly to business",
+    "severity": "major",
+    "why": "Left largely untranslated. Representative of the whole text sitting far below the level-2 brief."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A smooth, natural, well-weighted level-2 retelling. It is let down by breaking the poets punchline and softening \"convincing\".",
+  "unharnessed": "A faithful, light, natural level-2 version that keeps every joke. It has a couple of clunky swaps at the start.",
+  "engine": "Effectively untranslated, with a handful of word swaps, one of them broken."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "engine"
+   ],
+   [
+    "yarn"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "engine"
+   ],
+   [
+    "yarn"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,98 @@
+# Reference checks for the bundled embedder. `scripts/train_embedder.py check` runs them against the shipped
+# model (no torch needed), tests/architecture/test_static.py requires them, and every release records them per setup.
+#
+# Each check is a plain-English query scored the way lookup scores it: against every entry's gloss and its
+# concepts' descriptions; a concept's score is its best entry's. Broaden and refine this file between versions:
+# a release records this file's sha256, so each version says which reference it met.
+#
+#   must_not   no entry with the listed forms or concepts may reach the lookup cut-off, or be the best match
+#   should     one of the listed concepts must be in the top 3
+#   known      tracked failures (each with the kind it would be): reported, not required; move one up once fixed
+#
+# Written before measuring; queries that failed went to `known`, not out of the file.
+
+must_not:
+  - {query: girl, forms: [sheila], why: "a girl is a child; sheila is a dated, often dismissive word for a woman"}
+  - {query: a great war, concepts: [EXCELLENT, GREAT_EXCLAIM], why: "great means large here, not excellent"}
+
+  # opposites (1.1.0): same topic, opposite meaning. The last one is outside training/opposites.yaml, to see
+  # whether the fix generalises (a second, "wide awake", is in `known`)
+  - {query: rolling in cash, concepts: [BROKE, PENNY], why: "rich, not broke"}
+  - {query: completely skint, concepts: [RICH], why: "broke, not rich"}
+  - {query: a boiling hot day, concepts: [FREEZING], why: "hot, not cold"}
+  - {query: a freezing cold morning, concepts: [HOT_WEATHER, SCORCHING], why: "cold, not hot"}
+  - {query: over the moon about it, concepts: [SAD, DISAPPOINTED], why: "happy, not sad"}
+  - {query: feeling really down, concepts: [HAPPY], why: "sad, not happy"}
+  - {query: absolutely starving, concepts: [FULL], why: "hungry, not full"}
+  - {query: stuffed after dinner, concepts: [HUNGRY], why: "full, not hungry"}
+  - {query: working my guts out, concepts: [SLACK_OFF, LAZY, SLACKER], why: "working hard, not slacking"}
+  - {query: dead easy, concepts: [IMPOSSIBLE], why: "easy, not impossible"}
+  - {query: hello there, concepts: [GOODBYE, SAY_GOODBYE], why: "a greeting, not a farewell"}
+  - {query: a top bloke, concepts: [SCOUNDREL], why: "a good person, not a scoundrel"}
+  - {query: a tiny little thing, concepts: [HUGE], why: "small, not huge (not in opposites.yaml)"}
+
+  # plain queries yarn-mode agents actually sent to lookup (the 2026-10-11 retellings), whose results were wrong
+  # in sense; written before measuring against 1.2.0. These three pass; the nine that failed are in `known`
+  - {query: honest, concepts: [DODGY], why: "an antonym"}
+  - {query: a prank, concepts: [ATTRACTIVE], why: "a joke, not a spunkrat"}
+  - {query: skull, concepts: [SKOL], why: "the bone, not downing a drink"}
+
+
+should:
+  - {query: knackered beyond belief, concepts: [TIRED]}
+  - {query: feeling a bit under the weather, concepts: [SICK]}
+  - {query: late in the afternoon, concepts: [AFTERNOON]}
+  - {query: the bottle shop, concepts: [LIQUOR_STORE]}
+  - {query: it's pouring down outside, concepts: [RAINING_HARD]}
+  - {query: a quick snooze, concepts: [NAP]}
+  - {query: completely skint, concepts: [BROKE]}
+  - {query: a cold one at the pub, concepts: [BEER, ALCOHOL]}
+  - {query: chucking a wobbly, concepts: [TANTRUM, LOSE_TEMPER, OVERREACT]}
+  - {query: a shady deal, concepts: [DODGY]}
+  - {query: quit your whining, concepts: [STOP_COMPLAINING, COMPLAIN]}
+  - {query: a good mate of mine, concepts: [FRIEND]}
+  - {query: ages ago, concepts: [LONG_AGO]}
+  - {query: a complete idiot, concepts: [IDIOT, STUPID]}
+  - {query: having a chinwag, concepts: [CHAT]}   # known failure until 1.2.0 (the gap-fill round added "have a chinwag")
+
+known:
+  # regression checks added after the 1.2.0 release, when "very tired" was found to rank drunk slang first
+  - {kind: must_not, query: very tired, concepts: [DRUNK],
+     why: "1.2.0 (and 1.1.0): multi-concept entries chain TIRED, FULL and DRUNK in training (stuffed = TIRED/BROKEN/FULL,
+           full as a goog = FULL/DRUNK), so DRUNK ranks first. lookup's ranking fix (2026-10-11) makes lookup itself
+           answer knackered; the model needs those chains broken (see training/README.md, ideas)"}
+  - {kind: must_not, query: extremely tired, concepts: [DRUNK], why: "as for 'very tired'"}
+  - {kind: must_not, query: a heap of money, concepts: [BROKE, PENNY],
+     why: "1.1.0: a gap on the positive side. The model scores it against RICH at only 0.29-0.34 (the full
+           MiniLM fails too), so it lands on the money topic, whose most money-ish glosses are BROKE's. The
+           opposite pairs can't fix what it never learned: RICH needs phrase-level triggers in the dictionary"}
+  - {kind: must_not, query: wide awake, concepts: [FALL_ASLEEP, NAP],
+     why: "1.1.0: the control check outside opposites.yaml; opposite training doesn't generalise past the
+           listed pairs (and there is no AWAKE concept to pair)"}
+  - {kind: should, query: run off my feet, concepts: [BUSY],
+     why: "borderline in every build (BUSY 0.34-0.36, rank 3-4): 'run' dominates the averaged vector. 1.0.0's
+           release passed it at rank 3; 1.1.0's misses at rank 4"}
+  # from the yarn agents' real lookups (2026-10-12): targets for the next release
+  - {kind: must_not, query: put up with, forms: [chuck it in],
+     why: "endure, not give up. Added 2026-10-12 from the yarn agents' lookups; 1.2.0 ranks QUIT, COMMITTED, FOUND"}
+  - {kind: must_not, query: sleep, forms: [have a root],
+     why: "sleep, not sex. Added 2026-10-12 from the yarn agents' lookups; 1.2.0 ranks NAP, FALL_ASLEEP, HAVE_SEX"}
+  - {kind: must_not, query: dying, concepts: [NERVOUS],
+     why: "dying, not toey. Added 2026-10-12 from the yarn agents' lookups; 1.2.0 ranks NERVOUS, BORED, DRUNK"}
+  - {kind: must_not, query: very cold, concepts: [BEER],
+     why: "cold weather, not a coldie. Added 2026-10-12 from the yarn agents' lookups; 1.2.0 ranks FREEZING, BEER, HEARTLESS"}
+  - {kind: must_not, query: established, concepts: [CONTENT],
+     why: "set up long ago, not snug. Added 2026-10-12 from the yarn agents' lookups; 1.2.0 ranks CONTENT, COMMITTED, INFATUATED"}
+  - {kind: must_not, query: stepmother, concepts: [GRANDMOTHER],
+     why: "a stepmother isn't a nan. Added 2026-10-12 from the yarn agents' lookups; 1.2.0 ranks GRANDMOTHER, PARENTS, FATHER"}
+  - {kind: must_not, query: very large, concepts: [EXCELLENT],
+     why: "big, not excellent. Added 2026-10-12 from the yarn agents' lookups; 1.2.0 ranks GOOD, EXCELLENT, HUGE"}
+  - {kind: must_not, query: wake up, concepts: [FALL_ASLEEP],
+     why: "waking, not dropping off. Added 2026-10-12 from the yarn agents' lookups; 1.2.0 ranks FALL_ASLEEP, ARRIVE, FOUND"}
+  - {kind: must_not, query: worked very hard, concepts: [HAPPY],
+     why: "hard work, not happy as Larry. Added 2026-10-12 from the yarn agents' lookups; 1.2.0 ranks HAPPY, GLAD_ALIVE, BUSY"}
+  # from the third everyday pass's lookups (2026-10-13), written before measuring the 1.3.0 release
+  - {kind: must_not, query: harmless, concepts: [SCOUNDREL],
+     why: "harmless, not a mean bastard. Added 2026-10-14 from the third pass; 1.2.0 ranks SCOUNDREL first"}
+  - {kind: must_not, query: probably, concepts: [DISAGREE],
+     why: "likely, not 'no bloody way'. Added 2026-10-14 from the third pass; 1.2.0 ranks DISAGREE first"}

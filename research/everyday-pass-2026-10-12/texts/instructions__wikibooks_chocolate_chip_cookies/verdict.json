@@ -1,0 +1,203 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 2,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 2,
+   "flow": 1,
+   "variety": 2,
+   "essence": 3
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "All quantities, temperatures, steps and tips kept; the vanilla-sugar swap is right (\"swap two teaspoons of the white sugar for vanilla sugar\") and groundnuts become \"peanuts\" correctly.",
+   "sense": "Local terms fit (\"plain flour\", \"bicarb soda\", \"baking paper\", \"wholemeal\", \"rolled oats\", \"not much chop\"), but \"dark choc bits\" is not quite semi-sweet chocolate.",
+   "authenticity": "Natural Aussie kitchen voice: \"Chuck in the vanilla\", \"Top-shelf butter\", \"a cracker of a bikkie\", \"pop them in the 350°F oven\".",
+   "register": "Level 3: local names and a light conversational touch, still a usable recipe; no swearing.",
+   "tone": "Stays a helpful recipe: \"Let them sit for about 1 minute, then take them off the hot tray\".",
+   "flow": "Reads smoothly: \"If you beat this too long, you might get some gluten forming, which'll change the texture of your bikkies.\"",
+   "variety": "Varied verbs (\"bump up\", \"tweak\", \"pop\"), though \"bikkies\" and \"cut down the spread\" recur, as the subject demands.",
+   "essence": "Plainly the same recipe and tip list, sections intact."
+  },
+  "yarn": {
+   "meaning": "Complete; small additions are colour on the original (\"ovens vary, so keep an eye on 'em\", \"Throw in a handful of rolled oats\"). Vanilla-sugar swap made clear: \"in place of some of the white sugar\".",
+   "sense": "Fits: \"Don't go mad beating it\", \"rough-and-ready texture\" for rustic, \"a bit more chew\" for mouth-feel, \"flash\" for quality.",
+   "authenticity": "Sounds like a real Aussie cook: \"Crank the oven up\", \"a non-stick tray'll sort ya out\", \"muck about with how much white sugar\".",
+   "register": "A touch heavier than level 3 with the steady \"ya\" and \"'em\" (\"if ya like your bikkies chewy\", \"How ya do it\"); vulgarity \"bloody good\", within dad.",
+   "tone": "Friendly and still instructional throughout.",
+   "flow": "Mostly smooth, but the clipped forms pile up: \"Take 'em out and let 'em cool before ya add 'em to the dough.\".",
+   "variety": "Wide range of idiom; \"choccy\" and \"'em\" lean a bit.",
+   "essence": "Unmistakably the same recipe and notes."
+  },
+  "engine": {
+   "meaning": "\"will result in a significantly different have a crack at than the 'traditional' recipe\" loses \"taste\"; insults are added (\"ya old bastard\", \"ya flamin' mongrel\", \"some bastards also recommend\").",
+   "sense": "\"have a crack at\" for taste, \"spread out heaps\" and \"some bastards\" for some people: wrong senses.",
+   "authenticity": "Bolt-ons on an untouched recipe: \"Bugger me, the proportion of granulated\", \"Bloody hell, adding a greater quantity\"; US \"all-purpose flour\", \"baking soda\", \"whole wheat\" kept.",
+   "register": "Mostly untranslated, yet insults the reader; \"bastard\" is within dad but the abuse is off-brief.",
+   "tone": "A helpful recipe turned abusive: \"which will change the cookie texture, ya old bastard.\"",
+   "flow": "Broken: \"a significantly different have a crack at than\", and \"bickies\", \"bikkies\" and \"cookies\" mixed.",
+   "variety": "Leans on \"bloody\", \"bugger\", \"bastard\" and \"choccy\".",
+   "essence": "The recipe is recognisable underneath, but flattened by noise."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "dark choc bits",
+    "original": "semi-sweet chocolate morsels",
+    "severity": "minor",
+    "why": "Semi-sweet is closer to \"milk/dark\" middle; \"dark\" shifts it slightly."
+   },
+   {
+    "quote": "2 sticks (½ lb / 225 g / 1 cup) butter",
+    "original": "2 sticks (½ lb / 225 g / 1 cup) butter",
+    "severity": "minor",
+    "why": "US \"sticks\" and °F left as in the original; fine but unlocalised."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Take 'em out and let 'em cool before ya add 'em to the dough.",
+    "original": "Take them out and let them cool before adding them to the dough.",
+    "severity": "minor",
+    "why": "Pile-up of clipped forms."
+   },
+   {
+    "quote": "How ya do it",
+    "original": "Procedure",
+    "severity": "minor",
+    "why": "Slightly heavier than a level-3 brief needs."
+   },
+   {
+    "quote": "Throw in a handful of rolled oats",
+    "original": "Add a small amount of oatmeal",
+    "severity": "minor",
+    "why": "\"a handful\" is a touch more specific than the original."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "significantly different have a crack at than",
+    "original": "significantly different taste than",
+    "severity": "critical",
+    "why": "Word swap breaks the sentence and loses the meaning."
+   },
+   {
+    "quote": "ya old bastard",
+    "original": "",
+    "severity": "major",
+    "why": "Insult added to the reader."
+   },
+   {
+    "quote": "ya flamin' mongrel",
+    "original": "",
+    "severity": "major",
+    "why": "Insult added."
+   },
+   {
+    "quote": "some bastards also recommend",
+    "original": "Some people also recommend",
+    "severity": "major",
+    "why": "Calls the recommenders bastards."
+   },
+   {
+    "quote": "2 ¼ cups (600 ml / 290 g) all-purpose flour",
+    "original": "2 ¼ cups (600 ml / 290 g) all-purpose flour",
+    "severity": "major",
+    "why": "US terms left; mostly untranslated."
+   },
+   {
+    "quote": "chewier bickies",
+    "original": "chewier cookies",
+    "severity": "minor",
+    "why": "Inconsistent \"bickies\"/\"bikkies\"/\"cookies\"."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Accurate, natural, well-localised level-3 recipe.",
+  "yarn": "Lively, accurate and natural; slightly heavy on clipped forms for level 3.",
+  "engine": "Untranslated recipe with oaths and insults bolted on and one broken sentence."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

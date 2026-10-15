@@ -1,0 +1,92 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {"evidence": "All the technical content survives (install commands, Python 3.10+, the standalone executables, the AST check, `--fast`). It adds claims and asides: \"No more scrolling through a mile of whitespace changes.\", \"so you're in good company\", \"Bliss.\", \"Better safe than sorry.\" \"full stop\" adds emphasis the original lacks. These mostly hang off the original.", "score": 4},
+        "sense": {"evidence": "The terms fit: \"does not budge\" for uncompromising, \"fiddly little bits\" for minutiae, \"easy as\", \"won't play ball\", \"No Python on the box? No worries.\", \"down the track\".", "score": 5},
+        "authenticity": {"evidence": "There's real Aussie idiom (\"easy as\", \"No worries\", \"won't play ball\", \"get cracking\"), but the opener and tags are stock: \"So get this.\", \"Not an inch.\", \"Bliss.\", \"Which is the whole point, really.\"", "score": 3},
+        "register": {"evidence": "Much heavier than level 2 for a README: it is a chatty performance with added openers and tags (\"So get this.\", \"One last thing.\", \"and yeah, it does slow processing down a bit\"). There's no swearing.", "score": 2},
+        "tone": {"evidence": "The original is crisp and confident; A turns it into salesy banter (\"Bliss.\", \"you're in good company\"), though the documentation still reads as helpful.", "score": 3},
+        "flow": {"evidence": "Readable, but choppy with fragment tags: \"and it does not budge. Not an inch.\", \"Bliss.\", \"Better safe than sorry.\"", "score": 4},
+        "variety": {"evidence": "The slang and openers vary (\"easy as\", \"No worries\", \"play ball\", \"get cracking\", \"squiz\", \"heaps\"), though the short-tag tic recurs.", "score": 4},
+        "essence": {"evidence": "It is still the Black README, structure intact, but its terse confidence becomes chatter.", "score": 4}
+      },
+      "problems": [
+        {"quote": "So get this.", "original": "", "severity": "major", "why": "A yarn opener bolted onto a README; far past level 2."},
+        {"quote": "No more scrolling through a mile of whitespace changes.", "original": "_Black_ makes code review faster by producing the smallest diffs possible.", "severity": "minor", "why": "Added claim; colour, but beyond the original."},
+        {"quote": "Bliss.", "original": "", "severity": "minor", "why": "A bolted-on tag, one of several."},
+        {"quote": "Better safe than sorry.", "original": "", "severity": "minor", "why": "A stock tag."}
+      ],
+      "summary": "Natural idiom but heavily embellished, with stock tags and openers that take a terse README well past level 2."
+    },
+    "B": {
+      "scores": {
+        "meaning": {"evidence": "Identical to the original apart from \"Any colour you like.\"", "score": 5},
+        "sense": {"evidence": "There are no Aussie terms to misfire; \"colour\" is right.", "score": 5},
+        "authenticity": {"evidence": "There's no Aussie at all; it is the original's formal README voice (\"you agree to cede control over minutiae of hand-formatting\").", "score": 3},
+        "register": {"evidence": "Untranslated. Only the spelling \"colour\" changes, far under level 2.", "score": 1},
+        "tone": {"evidence": "The original tone, unchanged: \"_Black_ is the uncompromising Python code formatter.\"", "score": 5},
+        "flow": {"evidence": "It reads as the original.", "score": 5},
+        "variety": {"evidence": "There is no slang, so nothing to vary or repeat.", "score": 3},
+        "essence": {"evidence": "It is the original.", "score": 5}
+      },
+      "problems": [
+        {"quote": "By using it, you agree to cede\ncontrol over minutiae of hand-formatting.", "original": "By using it, you agree to cede\ncontrol over minutiae of hand-formatting.", "severity": "critical", "why": "The whole text is left untranslated; the brief asked for level 2."}
+      ],
+      "summary": "The original with a single spelling change; no Aussie at all."
+    },
+    "C": {
+      "scores": {
+        "meaning": {"evidence": "Every point is kept and nothing is invented; \"which does slow processing down a bit\" softens \"slows down processing\" only slightly.", "score": 5},
+        "sense": {"evidence": "The terms fit: \"won't budge\" for uncompromising, \"fiddly bits\", \"get cracking\", \"Heaps of projects\", \"down the track\", \"have a squiz\", \"grab\".", "score": 5},
+        "authenticity": {"evidence": "Natural, matter-of-fact Aussie technical writing: \"don't go expecting big formatting changes down the track\", \"For the full rundown, have a squiz at\".", "score": 5},
+        "register": {"evidence": "A light, consistent touch at level 2, with a sprinkling of idiom and a casual voice and no tags. There's no swearing.", "score": 5},
+        "tone": {"evidence": "It keeps the confident, direct README voice: \"_Black_ is the Python code formatter that won't budge.\"", "score": 5},
+        "flow": {"evidence": "Reads smoothly: \"After a while you stop even noticing the formatting, and you can get on with the content instead.\"", "score": 5},
+        "variety": {"evidence": "Varied: \"won't budge\", \"fiddly bits\", \"get cracking\", \"Heaps\", \"down the track\", \"squiz\", \"rundown\".", "score": 5},
+        "essence": {"evidence": "Unmistakably the Black README.", "score": 5}
+      },
+      "problems": [],
+      "summary": "A natural, faithful level-2 rendering that keeps the README's crisp voice."
+    },
+    "D": {
+      "scores": {
+        "meaning": {"evidence": "Faithful throughout; \"effectively the same as\" for \"effectively equivalent to\" is fine.", "score": 5},
+        "sense": {"evidence": "Mostly apt (\"fiddly bits\", \"get cracking\", \"down the track\", \"have a squiz\"), but \"no-nonsense\" softens uncompromising: no-nonsense is plain and practical, not unbending.", "score": 4},
+        "authenticity": {"evidence": "The swaps are natural: \"Have a squiz at the\", \"grab one of the\", \"down the track\".", "score": 5},
+        "register": {"evidence": "A light touch at about level 2, a shade lighter than C. There's no swearing.", "score": 5},
+        "tone": {"evidence": "It keeps the README voice intact.", "score": 5},
+        "flow": {"evidence": "Smooth throughout: \"After a while the formatting stops being something you notice\".", "score": 5},
+        "variety": {"evidence": "Varied, with each term used once: \"no-nonsense\", \"fiddly bits\", \"squiz\", \"get cracking\", \"down the track\".", "score": 5},
+        "essence": {"evidence": "Unmistakably the original. \"no-nonsense\" slightly dulls the defining \"uncompromising\".", "score": 5}
+      },
+      "problems": [
+        {"quote": "_Black_ is the no-nonsense Python code formatter.", "original": "_Black_ is the uncompromising Python code formatter.", "severity": "minor", "why": "\"no-nonsense\" loses the sense of refusing to compromise."}
+      ],
+      "summary": "A faithful, natural light rendering; \"no-nonsense\" slightly softens the tagline."
+    },
+    "E": {
+      "scores": {
+        "meaning": {"evidence": "Faithful throughout; nothing lost or added.", "score": 5},
+        "sense": {"evidence": "Mostly apt (\"nitty-gritty\" for minutiae, \"get cracking\", \"down the track\", \"have a squiz\", \"heaps of projects\"); \"no-nonsense\" softens uncompromising.", "score": 4},
+        "authenticity": {"evidence": "Natural, though \"nitty-gritty\" is general English rather than Australian; \"heaps of projects\" and \"have a squiz\" are local.", "score": 5},
+        "register": {"evidence": "A light touch, slightly under level 2; much of the text is the original wording (\"_Black_ can be installed by running\", \"Watch the\").", "score": 4},
+        "tone": {"evidence": "It keeps the README tone intact.", "score": 5},
+        "flow": {"evidence": "Smooth, with no clunky joins.", "score": 5},
+        "variety": {"evidence": "There are few terms, each used once: \"nitty-gritty\", \"get cracking\", \"heaps\", \"squiz\", \"down the track\".", "score": 5},
+        "essence": {"evidence": "It is the original, lightly accented.", "score": 5}
+      },
+      "problems": [
+        {"quote": "_Black_ is the no-nonsense Python code formatter.", "original": "_Black_ is the uncompromising Python code formatter.", "severity": "minor", "why": "\"no-nonsense\" loses the unbending sense."}
+      ],
+      "summary": "A faithful, light rendering a shade under level 2, natural where it changes anything."
+    }
+  },
+  "rankings": {
+    "tone": [["B", "C", "D", "E"], ["A"]],
+    "flow": [["B", "C", "D", "E"], ["A"]],
+    "variety": [["C", "D", "E"], ["A"], ["B"]],
+    "essence": [["B", "C", "D", "E"], ["A"]],
+    "overall": [["C"], ["D"], ["E"], ["A"], ["B"]]
+  }
+}

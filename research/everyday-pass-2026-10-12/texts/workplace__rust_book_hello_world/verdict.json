@@ -1,0 +1,191 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "yarn": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 4,
+   "sense": 3,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 2,
+   "flow": 2,
+   "variety": 2,
+   "essence": 3
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "All steps, commands and code blocks are intact, but insults are added (\"ya galah\", \"welcome, ya mug!\") and the link label is altered to \"[“Troubleshootin'”]\".",
+   "sense": "Few swaps, but \"ya galah\" and \"ya mug\" (fool) aimed at a beginner take the wrong sense for a welcome; \"brand-spankin'-new\" fits.",
+   "authenticity": "Stage-Australian: interjections bolted on (\"Crikey, open a terminal\", \"Mind ya, for Windows CMD\", \"Stone the crows, if yer using\", \"Tell ya what, if ya don’t see\", \"Streeeewth.\") and dropped g's sprinkled on otherwise unchanged docs.",
+   "register": "Level 5 asked, but most sentences are the original (\"Rust files always end with\"), with tics added; \"yer bloody code\" is within vulgarity 2.",
+   "tone": "The warm welcome is inverted: \"That makes ya a Rust programmer—welcome, ya mug! Streeeewth.\"",
+   "flow": "Clunky joins: \"a _projects_ directory'n a directory\", \"created'n enter\", \"compile'n run the file\".",
+   "variety": "Leans on \"yer\", \"'n\" and stock openers.",
+   "essence": "Recognisably the Rust book chapter, but it now sneers at the reader."
+  },
+  "yarn": {
+   "meaning": "Every step kept, code and commands untouched, link intact. Colour such as \"which just looks like some bugger's leanin' on the keyboard\" and \"kettle's on\" hangs off the filename tip and the welcome.",
+   "sense": "Terms fit: \"knock together a directory\", \"Rust couldn't give a toss\", \"bung in this\", \"duck back to yer terminal\", \"have a squiz back at\", \"good on ya!\". \"we reckon you make a _projects_ directory\" strains for 'we suggest making'.",
+   "authenticity": "Sounds like an Aussie mate showing you the ropes: \"Fire up a terminal and punch in these commands\", \"the done thing is to stick an underscore between 'em\".",
+   "register": "Full level-5 retelling with \"couldn't give a toss\" and \"some bugger's\", within vulgarity 2.",
+   "tone": "Keeps the encouraging beginner tutorial, ending warmly: \"Welcome aboard, mate, kettle's on.\"",
+   "flow": "Reads naturally: \"Save the file and duck back to yer terminal window\".",
+   "variety": "Varied verbs and idiom: \"knock together\", \"Fire up\", \"punch in\", \"bung in\", \"whip up\", \"duck back\", \"have a squiz\".",
+   "essence": "Unmistakably the Rust book's Hello World chapter, retold."
+  },
+  "unharnessed": {
+   "meaning": "Every step kept, code untouched, link intact; \"you bloody legend!\" is colour on the congratulations.",
+   "sense": "Terms fit: \"Rust couldn't give a toss\", \"Fire up a terminal\", \"have a squiz\", \"get a hand\", \"good on ya\". \"we reckon you\" plus \"make a _projects_ directory\" strains for 'we suggest making'.",
+   "authenticity": "Natural Aussie: \"punch in the following commands\", \"stick an underscore between 'em\", \"Welcome aboard, mate!\".",
+   "register": "Clearly Aussie and within vulgarity 2, but lighter than a full level-5 yarn; several sentences stay close to the original (\"Next, make a new source file and call it _main.rs_\").",
+   "tone": "The friendly tutorial and warm welcome come through: \"good on ya, you bloody legend!\"",
+   "flow": "Reads cleanly: \"Save the file and head back to your terminal window\".",
+   "variety": "Varied, though \"chuck in this\" is used twice in a row and \"punch in\" twice.",
+   "essence": "Clearly the Rust book chapter."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "welcome, ya mug! Streeeewth.",
+    "original": "That makes you a Rust programmer—welcome!",
+    "severity": "major",
+    "why": "Insults the new programmer at the moment of welcome; tone inverted."
+   },
+   {
+    "quote": "You’ll start by makin' a directory to store yer Rust code, ya galah.",
+    "original": "You’ll start by making a directory to store your Rust code.",
+    "severity": "major",
+    "why": "Calls the reader a fool for no reason."
+   },
+   {
+    "quote": "[“Troubleshootin'”]",
+    "original": "[“Troubleshooting”]",
+    "severity": "minor",
+    "why": "Alters a link label in the docs markup."
+   },
+   {
+    "quote": "Stone the crows, if yer using more than one word",
+    "original": "If you’re using more than one word",
+    "severity": "major",
+    "why": "Stock exclamation bolted on."
+   },
+   {
+    "quote": "make a _projects_ directory'n a directory",
+    "original": "make a _projects_ directory and a directory",
+    "severity": "minor",
+    "why": "Forced contraction."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "we reckon you make a _projects_ directory",
+    "original": "we suggest making a _projects_ directory",
+    "severity": "minor",
+    "why": "'We reckon you make' is slightly ungrammatical; 'reckon you should make' would fit."
+   },
+   {
+    "quote": "Welcome aboard, mate, kettle's on.",
+    "original": "welcome!",
+    "severity": "minor",
+    "why": "Small added colour; harmless."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "For Windows CMD, chuck in this:",
+    "original": "For Windows CMD, enter this:",
+    "severity": "minor",
+    "why": "Repeats 'chuck in this' from the line above."
+   },
+   {
+    "quote": "we reckon you\nmake a _projects_ directory",
+    "original": "we suggest making a _projects_ directory",
+    "severity": "minor",
+    "why": "'We reckon you make' is slightly ungrammatical."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "The original docs with stock interjections, 'yer' and insults bolted on; the welcome is turned into a sneer.",
+  "yarn": "A natural, varied full-strength retelling that leaves every command and code block intact.",
+  "unharnessed": "Natural, faithful Aussie tutorial; a notch lighter than level 5 and repeats a phrase."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,191 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "engine": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 2,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 3,
+   "flow": 2,
+   "variety": 1,
+   "essence": 3
+  },
+  "unharnessed": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 4,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Every forecast point kept, with figures intact: gusts 20-30 mph, 925mb +17-18C, 0.25 to 0.60\", gusts 35-45 mph, highs in the 40s, upper 20s. Plain-English recasts keep the sense: \"so the chance of heavy rain causing real trouble is low\", \"moving through fairly quickly, so it won't hang about\".",
+   "sense": "Terms fit: \"The odd shower possible Wednesday\", \"won't hang about the whole weekend\", \"Highs will likely battle to get out of the 40s\", \"Despite heaps of moisture\".",
+   "authenticity": "Natural Australian forecast English: \"temperatures on the cool side for this time of year\", \"autumn\", \"a good chance the interior drops to at least freezing\". Nothing forced.",
+   "register": "Light for a level-4 brief: the Aussie is a few touches (\"The odd shower\", \"heaps\", \"hang about\", \"battle\") on a mostly plain rewrite.",
+   "tone": "Keeps the forecaster's measured, technical tone, including the wry \"It's a bit early to be saying the \"S word\" just yet (snow).\"",
+   "flow": "Reads smoothly, untangling the original's clumsy sentences: \"The degree of mixing and the strength of the LLJ are still less certain this far out\".",
+   "variety": "Little slang and none leaned on.",
+   "essence": "Unmistakably the area forecast discussion, structure and jargon kept."
+  },
+  "engine": {
+   "meaning": "Cooler becomes \"esky\" (\"although esky than Wednesday\", \"925mb temperatures around 10C esky than Wednesday\"), the northern stream becomes \"northern creek\", RH fields become \"RH paddocks\". The forecast for Thursday and Saturday is garbled.",
+   "sense": "Several wrong senses: \"esky\" (a cool box) for cooler, \"northern creek shortwave trough\" for the jet stream, \"RH paddocks\" for data fields, \"Highs will likely do it tough\" for struggle.",
+   "authenticity": "Mechanical swaps and filler openers (\"Well, across those particular models\", \"Anyway, rain more likely arrives\", \"Now, a strong cold front\"); US \"fall\" left in.",
+   "register": "Mostly untranslated original with scattered wrong swaps; far under level 4.",
+   "tone": "The technical tone is mostly the original's, but \"An esky airmass\" turns it absurd.",
+   "flow": "Ungrammatical: \"although esky than Wednesday\", \"10C esky than Wednesday\".",
+   "variety": "\"esky\" three times for cooler, plus a run of filler openers.",
+   "essence": "Recognisably the forecast discussion, but key lines no longer parse."
+  },
+  "unharnessed": {
+   "meaning": "Every point and figure kept (\"gusts of 35-45 mph, maybe stronger over the coastal waters\", \"totals closer to an inch are on the cards\"), but \"the lower levels are drier than a dead dingo's donger\" overstates slightly drier lower levels.",
+   "sense": "Most fit: \"Might cop a stray shower\", \"Gusty nor'westers\", \"on the cards\", \"still a bit up in the air\", \"only just scrape the 40 degree mark\". \"backs up\" for supporting is a stretch in a meteorological sense.",
+   "authenticity": "Sounds like an Aussie forecaster talking: \"temps\", \"moving along pretty smartly\", \"higher country out west\". The dingo's donger simile is a stock pub phrase dropped into a forecast.",
+   "register": "A full level-4 retelling; \"bloody cold night\" sits within vulgarity 1, though \"dead dingo's donger\" edges past dad-level crude.",
+   "tone": "Keeps the forecaster's measured voice and the \"S word\" joke, but \"drier than a dead dingo's donger\" makes the technical reasoning jokey.",
+   "flow": "Reads smoothly aloud: \"A strong cold front barrels across the region by early Saturday morning, putting the northeast smack in a classic cold air advection pattern\".",
+   "variety": "Varied overall, but \"back up\" is leaned on (\"which backs up drier conditions\", \"will back up deeper mixing\", \"enough to back up a few isolated showers\"), and \"turns up\" twice.",
+   "essence": "Unmistakably the forecast discussion, jargon and structure kept."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "There's synoptic support for this system, with an upper level jet sitting near southern New England",
+    "original": "There is synoptic support with this system as an upper level jet positions near southern New England",
+    "severity": "minor",
+    "why": "Representative of long stretches with no Aussie colour, lighter than level 4."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "although esky than Wednesday",
+    "original": "although cooler than Wednesday",
+    "severity": "critical",
+    "why": "Esky is a cool box, not a comparative; the temperature claim is lost. Repeats in the next sentence and for Saturday's temperatures."
+   },
+   {
+    "quote": "northern creek shortwave trough",
+    "original": "northern stream shortwave trough",
+    "severity": "critical",
+    "why": "Northern stream is a jet-stream branch, not a watercourse."
+   },
+   {
+    "quote": "RH paddocks show residual moisture",
+    "original": "RH fields show residual moisture",
+    "severity": "major",
+    "why": "Data fields rendered as farm paddocks."
+   },
+   {
+    "quote": "Highs will likely do it tough to get out of the 40s",
+    "original": "Highs will likely struggle to get out of the 40s",
+    "severity": "major",
+    "why": "Do it tough means endure hardship; ungrammatical here."
+   },
+   {
+    "quote": "Anyway, rain more likely arrives",
+    "original": "Rain more likely arrives",
+    "severity": "minor",
+    "why": "Filler opener bolted on; one of several."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "the lower levels are drier than a dead dingo's donger",
+    "original": "due to the drier lower levels",
+    "severity": "major",
+    "why": "Exaggerates a modest technical point and is crude for the brief and the genre."
+   },
+   {
+    "quote": "will back up deeper mixing",
+    "original": "will support deeper mixing",
+    "severity": "minor",
+    "why": "Back up repeated three times for support."
+   },
+   {
+    "quote": "Rain most likely turns up some time Friday morning",
+    "original": "Rain more likely arrives in the Friday morning timeframe",
+    "severity": "minor",
+    "why": "Turns up repeats from the sentence before."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "Faithful, clear and natural, but noticeably lighter than the brief.",
+  "engine": "Mechanical wrong-sense swaps that garble a technical forecast.",
+  "unharnessed": "Lively, natural level-4 retelling with one crude overstatement and a leaned-on verb."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

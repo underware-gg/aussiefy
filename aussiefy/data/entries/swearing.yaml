@@ -1,0 +1,638 @@
+# Plain-word swearing: the everyday swaps Australians make with a swear (very -> fuckin', nothing -> fuck all,
+# go away -> fuck off, an idiot -> a dickhead). Each entry's level is how hard it is to follow, not how vulgar it
+# is: that is the vulgarity dial's business (vulgarity 1 dad, 2 uncle-bob, 3 tradie). Drawn from three
+# unharnessed "swearing like a dockie" retellings of the reference texts (2026-10-12), checked by hand; terms
+# the retellings marked doubtful or not distinctively Australian ("holy shit", "Jesus Christ") are left out.
+
+# --- intensifiers -------------------------------------------------------------------------------------------
+- id: fuckin-very
+  form: fuckin'
+  concept: [VERY]
+  frame: adv
+  intensity: 5
+  vulgarity: 2
+  incoherence: 1
+  weight: 0.6
+  gloss: The f-word as an all-purpose intensifier ("fuckin' freezing").
+  sources: [https://en.wiktionary.org/wiki/fucking]
+
+# --- people -------------------------------------------------------------------------------------------------
+- id: a-bastard
+  form: a bastard
+  concept: [SCOUNDREL]
+  frame: np
+  intensity: 3
+  vulgarity: 1
+  incoherence: 1
+  gloss: A contemptible person.
+  sources: [https://en.wiktionary.org/wiki/bastard]
+- id: a-mongrel-bastard
+  form: a mongrel bastard
+  concept: [SCOUNDREL]
+  frame: np
+  intensity: 5
+  vulgarity: 1
+  incoherence: 3
+  gloss: A thoroughly rotten person.
+- id: a-good-bastard
+  form: a good bastard
+  concept: [GOOD_PERSON]
+  frame: np
+  intensity: 3
+  vulgarity: 1
+  incoherence: 2
+  gloss: A decent bloke; praise, not insult.
+- id: a-dickhead
+  form: a dickhead
+  concept: [IDIOT]
+  frame: np
+  intensity: 3
+  vulgarity: 2
+  incoherence: 1
+  gloss: A fool, an idiot.
+  sources: [https://en.wiktionary.org/wiki/dickhead]
+- id: a-fuckwit
+  form: a fuckwit
+  concept: [IDIOT]
+  frame: np
+  intensity: 5
+  vulgarity: 2
+  incoherence: 2
+  gloss: A complete idiot.
+  sources: [https://en.wiktionary.org/wiki/fuckwit]
+- id: a-silly-bugger
+  form: a silly bugger
+  concept: [IDIOT]
+  frame: np
+  intensity: 2
+  vulgarity: 1
+  incoherence: 2
+  gloss: A fool, said fondly.
+- id: little-bugger
+  form: a little bugger
+  concept: [CHILD]
+  frame: np
+  intensity: 3
+  vulgarity: 1
+  incoherence: 2
+  gloss: A child, said fondly ("the little buggers").
+- id: little-shit
+  form: a little shit
+  concept: [CHILD]
+  frame: np
+  intensity: 4
+  vulgarity: 2
+  incoherence: 2
+  weight: 0.5
+  notes: For a naughty or annoying kid; less fond than "little bugger".
+  gloss: A child, a cheeky or annoying one.
+- id: every-bastard
+  form: every bastard
+  concept: [EVERYONE]
+  frame: np
+  intensity: 4
+  vulgarity: 1
+  incoherence: 2
+  gloss: Everybody, every last one.
+- id: every-bugger
+  form: every bugger
+  concept: [EVERYONE]
+  frame: np
+  intensity: 3
+  vulgarity: 1
+  incoherence: 2
+  gloss: Everybody.
+- id: every-cunt
+  form: every cunt
+  concept: [EVERYONE]
+  frame: np
+  intensity: 5
+  vulgarity: 3
+  incoherence: 2
+  notes: The c-word as a pronoun; vulgar, not a slur. Strongly offensive to American ears.
+  gloss: Everybody.
+- id: no-bastard
+  form: no bastard
+  concept: [NOBODY]
+  frame: np
+  intensity: 4
+  vulgarity: 1
+  incoherence: 2
+  gloss: Nobody at all.
+- id: no-bugger
+  form: no bugger
+  concept: [NOBODY]
+  frame: np
+  intensity: 3
+  vulgarity: 1
+  incoherence: 2
+  gloss: Nobody.
+- id: no-cunt
+  form: no cunt
+  concept: [NOBODY]
+  frame: np
+  intensity: 5
+  vulgarity: 3
+  incoherence: 2
+  notes: The c-word as a pronoun; vulgar, not a slur. Strongly offensive to American ears.
+  gloss: Nobody at all.
+- id: some-cunt
+  form: some cunt
+  concept: [SOMEONE]
+  frame: np
+  intensity: 4
+  vulgarity: 3
+  incoherence: 2
+  notes: The c-word as a pronoun; vulgar, not a slur. Strongly offensive to American ears.
+  gloss: Some unknown person, usually the culprit.
+
+# --- things and states --------------------------------------------------------------------------------------
+- id: fuck-all
+  form: fuck all
+  variants: [sweet fuck all]
+  concept: [NOTHING]
+  frame: np
+  intensity: 5
+  vulgarity: 2
+  incoherence: 2
+  gloss: Nothing whatsoever.
+  sources: [https://en.wiktionary.org/wiki/fuck_all]
+- id: fucked-broken
+  form: fucked
+  concept: [BROKEN, TIRED]
+  frame: predicate_adj
+  intensity: 5
+  vulgarity: 2
+  incoherence: 1
+  gloss: Broken beyond repair; or utterly exhausted.
+- id: shithouse
+  form: shithouse
+  concept: [AWFUL, USELESS]
+  frame: predicate_adj
+  intensity: 4
+  vulgarity: 2
+  incoherence: 3
+  gloss: Terrible, hopeless, no good at all.
+  sources: [https://en.wiktionary.org/wiki/shithouse]
+- id: shit-faced
+  form: shit-faced
+  concept: [DRUNK]
+  frame: predicate_adj
+  intensity: 5
+  vulgarity: 2
+  incoherence: 2
+  gloss: Very drunk.
+  sources: [https://en.wiktionary.org/wiki/shitfaced]
+- id: thick-as-shit
+  form: thick as shit
+  concept: [STUPID]
+  frame: predicate_adj
+  intensity: 5
+  vulgarity: 2
+  incoherence: 2
+  gloss: Very stupid.
+- id: crook-as-buggery
+  form: crook as buggery
+  concept: [SICK]
+  frame: predicate_adj
+  intensity: 5
+  vulgarity: 1
+  incoherence: 3
+  gloss: Very sick.
+- id: luckier-than-a-shithouse-rat
+  form: luckier than a shithouse rat
+  concept: [LUCKY]
+  frame: predicate_adj
+  intensity: 5
+  vulgarity: 2
+  incoherence: 4
+  gloss: Extraordinarily lucky.
+- id: pissed-as-a-cunt
+  form: pissed as a cunt
+  concept: [DRUNK]
+  frame: predicate_adj
+  intensity: 5
+  vulgarity: 3
+  incoherence: 3
+  notes: Vulgar intensifying simile; not a slur. Strongly offensive to American ears.
+  gloss: Blind drunk.
+- id: bullshit
+  form: bullshit
+  concept: [NONSENSE]
+  frame: np
+  intensity: 4
+  vulgarity: 2
+  incoherence: 1
+  gloss: Nonsense, lies.
+  sources: [https://en.wiktionary.org/wiki/bullshit]
+- id: bloody-good
+  form: bloody good
+  concept: [EXCELLENT]
+  frame: predicate_adj
+  intensity: 4
+  vulgarity: 1
+  incoherence: 1
+  gloss: Very good indeed.
+
+# --- doing and saying ---------------------------------------------------------------------------------------
+- id: fuck-off
+  form: fuck off
+  concept: [GO_AWAY]
+  frame: imperative
+  intensity: 5
+  vulgarity: 2
+  incoherence: 1
+  gloss: Go away (forcefully).
+  sources: [https://en.wiktionary.org/wiki/fuck_off]
+- id: move-your-arse
+  form: move yer arse
+  concept: [HURRY]
+  frame: imperative
+  intensity: 4
+  vulgarity: 2
+  incoherence: 2
+  gloss: Hurry up.
+- id: give-a-shit-about
+  form: give a shit about
+  variants: [give a fuck about]
+  concept: [CARE_ABOUT]
+  frame: vp
+  intensity: 4
+  vulgarity: 2
+  incoherence: 2
+  gloss: Care about (usually in the negative).
+  sources: [https://en.wiktionary.org/wiki/give_a_shit]
+- id: take-the-piss-out-of
+  form: take the piss out of {obj}
+  concept: [MOCK]
+  frame: vp
+  intensity: 3
+  vulgarity: 2
+  incoherence: 3
+  gloss: Make fun of, send up.
+  sources: [https://en.wiktionary.org/wiki/take_the_piss]
+- id: no-fuckin-way
+  form: no fuckin' way
+  variants: [not a fuckin' chance]
+  concept: [DISAGREE]
+  frame: interjection
+  intensity: 5
+  vulgarity: 2
+  incoherence: 1
+  gloss: Absolutely not.
+- id: fuckin-oath
+  form: fuckin' oath
+  concept: [AGREE]
+  frame: interjection
+  intensity: 5
+  vulgarity: 2
+  incoherence: 3
+  gloss: Absolutely; too right (the stronger "bloody oath").
+- id: shit-damn
+  form: shit
+  concept: [DAMN_EXCLAIM]
+  frame: interjection
+  intensity: 3
+  vulgarity: 2
+  incoherence: 1
+  gloss: An exclamation at a setback.
+- id: fuck-damn
+  form: fuck
+  concept: [DAMN_EXCLAIM]
+  frame: interjection
+  intensity: 5
+  vulgarity: 2
+  incoherence: 1
+  gloss: A stronger exclamation at a setback.
+
+# --- garnish ------------------------------------------------------------------------------------------------
+- id: g-oh-shit
+  form: oh, shit
+  type: garnish
+  placement: opener
+  frame: interjection
+  vulgarity: 2
+  incoherence: 1
+  gloss: Dismay at what's coming.
+- id: g-ya-old-bastard
+  form: ya old bastard
+  insult: true
+  type: garnish
+  placement: tag
+  when: [second_person, question]
+  frame: tag
+  vulgarity: 1
+  incoherence: 2
+  gloss: Fond address for a mate.
+- id: g-ya-cunt
+  form: ya cunt
+  insult: true
+  type: garnish
+  placement: tag
+  when: [second_person, question]
+  frame: tag
+  vulgarity: 3
+  incoherence: 3
+  notes: Affectionate between mates in Australia. Strongly offensive to American ears.
+  gloss: Fond address for a mate.
+
+# --- best cunts to worst cunts --------------------------------------------------------------------------------
+# The c-word as a description of a person runs from the highest praise to the lowest contempt, by its adjective:
+# sick, funny, good, mad, loose, cooked, weird, suss, dumb, fucked, dodgy, shit, dog. ("A good cunt" and "a mad
+# cunt" live in phrases.yaml.) All are vulgar rather than slurs, and strongly offensive to American ears.
+- id: a-sick-cunt
+  form: a sick cunt
+  concept: [LEGEND, GOOD_PERSON]
+  frame: np
+  intensity: 5
+  vulgarity: 3
+  incoherence: 3
+  notes: 1 of 13, best cunts to worst. "Sick" is high praise. Strongly offensive to American ears.
+  gloss: High praise; someone who is simply the best.
+- id: a-funny-cunt
+  form: a funny cunt
+  concept: [FUNNY_PERSON]
+  frame: np
+  intensity: 4
+  vulgarity: 3
+  incoherence: 2
+  notes: 2 of 13, best cunts to worst. Praise. Strongly offensive to American ears.
+  gloss: A very funny person.
+- id: a-loose-cunt
+  form: a loose cunt
+  concept: [WILD_ONE]
+  frame: np
+  intensity: 4
+  vulgarity: 3
+  incoherence: 3
+  notes: 5 of 13, best cunts to worst. Fond; wild, up for anything, no brakes. Strongly offensive to American ears.
+  gloss: Someone wild and reckless, up for anything.
+- id: a-cooked-cunt
+  form: a cooked cunt
+  concept: [LUNATIC]
+  frame: np
+  intensity: 4
+  vulgarity: 3
+  incoherence: 3
+  notes: 6 of 13, best cunts to worst. "Cooked" is not right in the head, fried. Strongly offensive to American ears.
+  gloss: Someone not right in the head; fried.
+- id: a-weird-cunt
+  form: a weird cunt
+  concept: [ODD_PERSON]
+  frame: np
+  intensity: 4
+  vulgarity: 3
+  incoherence: 2
+  notes: 7 of 13, best cunts to worst. Strongly offensive to American ears.
+  gloss: A strange person.
+- id: a-suss-cunt
+  form: a suss cunt
+  concept: [SHADY_PERSON]
+  frame: np
+  intensity: 4
+  vulgarity: 3
+  incoherence: 3
+  notes: 8 of 13, best cunts to worst. "Suss" is suspicious. Strongly offensive to American ears.
+  gloss: Someone who seems untrustworthy.
+- id: a-dumb-cunt
+  form: a dumb cunt
+  concept: [IDIOT]
+  frame: np
+  intensity: 5
+  vulgarity: 3
+  incoherence: 2
+  notes: 9 of 13, best cunts to worst. Strongly offensive to American ears.
+  gloss: A complete idiot.
+- id: a-fucked-cunt
+  form: a fucked cunt
+  concept: [LUNATIC, SCOUNDREL]
+  frame: np
+  intensity: 5
+  vulgarity: 3
+  incoherence: 3
+  notes: 10 of 13, best cunts to worst. Messed up past saving, or vile. Strongly offensive to American ears.
+  gloss: Someone deranged or thoroughly rotten.
+- id: a-dodgy-cunt
+  form: a dodgy cunt
+  concept: [SWINDLER, SHADY_PERSON]
+  frame: np
+  intensity: 5
+  vulgarity: 3
+  incoherence: 3
+  notes: 11 of 13, best cunts to worst. Strongly offensive to American ears.
+  gloss: A crook; someone not to be trusted an inch.
+- id: a-shit-cunt
+  form: a shit cunt
+  concept: [SCOUNDREL]
+  frame: np
+  intensity: 5
+  vulgarity: 3
+  incoherence: 2
+  notes: 12 of 13, best cunts to worst. Strongly offensive to American ears.
+  gloss: A thoroughly bad person.
+- id: a-dog-cunt
+  form: a dog cunt
+  concept: [BETRAYER, SCOUNDREL]
+  frame: np
+  intensity: 5
+  vulgarity: 3
+  incoherence: 3
+  notes: >-
+    13 of 13, best cunts to worst: the lowest. A "dog" betrays mates or informs on them. Strongly offensive to
+    American ears.
+  gloss: A traitor to his mates; the lowest of the low.
+- id: a-smart-little-cunt
+  form: a smart little cunt
+  concept: [CLEVER_PERSON]
+  frame: np
+  intensity: 4
+  vulgarity: 3
+  incoherence: 3
+  notes: Grudging admiration. Strongly offensive to American ears.
+  gloss: A clever, cheeky person.
+- id: a-sneaky-cunt
+  form: a sneaky cunt
+  concept: [SHADY_PERSON]
+  frame: np
+  intensity: 4
+  vulgarity: 3
+  incoherence: 2
+  notes: Strongly offensive to American ears.
+  gloss: A sly, sneaky person.
+- id: g-ya-beautiful-cunt
+  form: ya beautiful cunt
+  insult: true
+  type: garnish
+  placement: tag
+  when: [second_person, question]
+  frame: tag
+  vulgarity: 3
+  incoherence: 3
+  notes: Warm thanks or praise to a mate. Strongly offensive to American ears.
+  gloss: Fond address, in thanks or delight.
+
+# --- milder people ------------------------------------------------------------------------------------------
+- id: a-funny-bugger
+  form: a funny bugger
+  concept: [FUNNY_PERSON]
+  frame: np
+  intensity: 3
+  vulgarity: 1
+  incoherence: 2
+  gloss: A funny person, or an odd one.
+- id: a-smart-bugger
+  form: a smart bugger
+  variants: [a cunning bastard, a cunning little bugger]
+  concept: [CLEVER_PERSON]
+  frame: np
+  intensity: 3
+  vulgarity: 1
+  incoherence: 2
+  gloss: A clever, crafty person.
+- id: a-sneaky-bastard
+  form: a sneaky bastard
+  concept: [SHADY_PERSON]
+  frame: np
+  intensity: 3
+  vulgarity: 1
+  incoherence: 2
+  gloss: A sly, sneaky person.
+- id: a-shonky-bastard
+  form: a shonky bastard
+  concept: [SWINDLER]
+  frame: np
+  intensity: 4
+  vulgarity: 1
+  incoherence: 3
+  gloss: A swindler, a shonk.
+- id: a-mean-bastard
+  form: a mean bastard
+  concept: [SCOUNDREL]
+  frame: np
+  intensity: 4
+  vulgarity: 1
+  incoherence: 1
+  gloss: A cruel, nasty person.
+
+# --- more states and doings ---------------------------------------------------------------------------------
+- id: slow-as-buggery
+  form: slow as buggery
+  concept: [SLOW]
+  frame: predicate_adj
+  intensity: 5
+  vulgarity: 1
+  incoherence: 2
+  gloss: Painfully slow.
+- id: the-ducks-nuts
+  form: the duck's nuts
+  concept: [EXCELLENT]
+  frame: predicate_adj
+  intensity: 5
+  vulgarity: 1
+  incoherence: 3
+  gloss: The very best.
+- id: hungry-enough-to-eat-the-arse-out-of-a-duck
+  form: hungry enough to eat the arse out of a low-flyin' duck
+  concept: [HUNGRY]
+  frame: predicate_adj
+  intensity: 5
+  vulgarity: 2
+  incoherence: 4
+  gloss: Starving.
+- id: the-arse-end-of-nowhere
+  form: the arse-end of nowhere
+  concept: [FAR_AWAY]
+  frame: np
+  intensity: 5
+  vulgarity: 2
+  incoherence: 2
+  gloss: The most remote place imaginable.
+- id: arse
+  form: arse
+  concept: [BACKSIDE]
+  frame: np
+  intensity: 3
+  vulgarity: 2
+  incoherence: 1
+  gloss: The backside.
+- id: piss-off-leave
+  form: piss off
+  concept: [LEAVE]
+  frame: vp
+  intensity: 3
+  vulgarity: 2
+  incoherence: 2
+  gloss: Leave, clear off.
+- id: kick-arse
+  form: kick {objposs} arse
+  concept: [THRASH]
+  frame: vp
+  intensity: 4
+  vulgarity: 2
+  incoherence: 2
+  gloss: Beat someone soundly.
+- id: piss-about
+  form: piss about
+  variants: [fart-arse around]
+  concept: [FOOL_AROUND]
+  frame: vp
+  intensity: 3
+  vulgarity: 2
+  incoherence: 2
+  gloss: Muck about, waste time.
+- id: work-arse-off
+  form: work {poss} arse off
+  concept: [WORK_HARD]
+  frame: vp
+  intensity: 4
+  vulgarity: 2
+  incoherence: 2
+  gloss: Work extremely hard.
+- id: scare-the-shit-out-of
+  form: scare the shit out of {obj}
+  concept: [FRIGHTEN]
+  frame: vp
+  intensity: 5
+  vulgarity: 2
+  incoherence: 1
+  gloss: Frighten badly.
+- id: no-fuckin-idea
+  form: I've got no fuckin' idea
+  concept: [DONT_KNOW]
+  frame: clause
+  intensity: 5
+  vulgarity: 2
+  incoherence: 1
+  gloss: I don't know at all.
+- id: what-the-fuck
+  form: what the fuck
+  concept: [SURPRISE]
+  frame: interjection
+  intensity: 5
+  vulgarity: 2
+  incoherence: 1
+  gloss: Disbelief or shock.
+- id: a-cheeky-bastard
+  form: a cheeky bastard
+  concept: [RASCAL]
+  frame: np
+  intensity: 3
+  vulgarity: 1
+  incoherence: 2
+  gloss: A cheeky, likeable rascal.
+- id: a-cheeky-little-shit
+  form: a cheeky little shit
+  concept: [RASCAL]
+  frame: np
+  intensity: 4
+  vulgarity: 2
+  incoherence: 2
+  gloss: An impudent rascal, often a kid.
+- id: a-cocky-bastard
+  form: a cocky bastard
+  concept: [BOASTER]
+  frame: np
+  intensity: 4
+  vulgarity: 1
+  incoherence: 2
+  gloss: An arrogant show-off.

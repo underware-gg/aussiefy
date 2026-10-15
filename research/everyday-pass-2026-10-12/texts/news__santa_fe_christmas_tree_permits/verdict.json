@@ -1,0 +1,171 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "unharnessed": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 4,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 3,
+   "authenticity": 2,
+   "register": 2,
+   "tone": 5,
+   "flow": 4,
+   "variety": 1,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "All details kept: November 13, 2025 start, Recreation.gov and offices, the Walatowa Saturdays 9-4 from November 22 to December 20, 2024, pre-cut trees and priority, $10 non-refundable, $2.50 fee, 5 inch/10 foot tag rule, 15-foot example, Every Kid Outdoors, forest-health rationale.",
+   "sense": "Terms fit: \"Give us a bell for current opening hours\", \"get first dibs\", \"patches where heaps of skinny little trees are all crammed in\", \"where the wildlife can find a feed\". \"good for the bush\" fits forest health in Aussie usage.",
+   "authenticity": "Sounds like a friendly Aussie notice: \"Good news if you're after a real Chrissie tree\", \"Just pop in the pass or voucher number\", \"heads up\".",
+   "register": "A level-2 touch: everyday Aussie words in a plain notice; no swearing.",
+   "tone": "Stays an informative notice, though \"Good news\" and \"here's a bonus\" make it a bit more promotional than the neutral original.",
+   "flow": "Reads smoothly, with the original's order intact.",
+   "variety": "Varied: \"Chrissie\", \"have a good read\", \"give us a bell\", \"first dibs\", \"pop in\", \"heads up\", \"the bush\", \"find a feed\".",
+   "essence": "Unmistakably the permit notice, retold."
+  },
+  "unharnessed": {
+   "meaning": "Every fact kept, closely following the original.",
+   "sense": "\"up for grabs\", \"first dibs\", \"skinny trees\", \"Get in touch with us\" all fit.",
+   "authenticity": "Plain, natural Australian English; nothing forced.",
+   "register": "On the light side of level 2: only \"up for grabs\" and \"first dibs\" stand out; otherwise a plain-English rewrite.",
+   "tone": "Neutral, informative notice tone kept.",
+   "flow": "Reads smoothly.",
+   "variety": "Very few Aussie terms to vary; little to lean on but little there.",
+   "essence": "Unmistakably the original."
+  },
+  "engine": {
+   "meaning": "Text is the original almost verbatim, so the facts survive.",
+   "sense": "\"Local bush health experts\" turns forest-health specialists into something odd, and \"improves bush health\" strains; \"Chrissie tree permits\" is fine.",
+   "authenticity": "Two word-swaps (\"Chrissie\", \"bush\") dropped into untouched agency prose (\"Availability is subject to weather conditions and supply\"); mixes \"Chrissie tree\" and \"Christmas Tree\" inconsistently.",
+   "register": "Largely untranslated; lighter than level 2.",
+   "tone": "Original notice tone intact.",
+   "flow": "Reads as the original; the \"Chrissie\"/\"Christmas\" switching is a little jarring.",
+   "variety": "Only \"Chrissie\" and \"bush\", repeated.",
+   "essence": "It is the original."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "Good news if you're after a real Chrissie tree:",
+    "original": "Christmas tree permits will be available to purchase",
+    "severity": "minor",
+    "why": "Promotional framing added to a neutral notice."
+   },
+   {
+    "quote": "cutting a Chrissie tree is actually good for the bush",
+    "original": "Cutting a Christmas tree also improves forest health",
+    "severity": "minor",
+    "why": "\"the bush\" is fine but loosens \"forest health\" slightly."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "Visitors will also need to set up or log in to a Recreation.gov account to finish the purchase.",
+    "original": "Visitors will also need to set up or log in to a Recreation.gov account to complete the transaction.",
+    "severity": "minor",
+    "why": "Representative of passages left close to the original, lighter than level 2."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Local bush health experts",
+    "original": "Local forest health experts",
+    "severity": "major",
+    "why": "A word-swap that makes a job title sound odd; Australians would say forest health experts."
+   },
+   {
+    "quote": "Chrissie tree permits will be available to purchase online",
+    "original": "Christmas tree permits will be available to purchase online",
+    "severity": "minor",
+    "why": "Lone slang word in otherwise untouched formal text."
+   },
+   {
+    "quote": "Availability is subject to weather conditions and supply",
+    "original": "Availability is subject to weather conditions and supply",
+    "severity": "major",
+    "why": "Representative of the text left untranslated."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A natural, complete level-2 notice with well-chosen everyday Aussie; slightly chirpier than the original.",
+  "unharnessed": "A clean, faithful plain-English rewrite with a couple of Aussie touches, a little light for the brief.",
+  "engine": "The original with \"Chrissie\" and \"bush\" swapped in; barely translated and one awkward swap."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "engine"
+   ],
+   [
+    "yarn"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed",
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

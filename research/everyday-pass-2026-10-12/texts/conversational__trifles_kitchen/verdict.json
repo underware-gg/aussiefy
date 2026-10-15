@@ -1,0 +1,219 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "yarn": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 3,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 2,
+   "flow": 1,
+   "variety": 2,
+   "essence": 2
+  },
+  "yarn": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 4,
+   "flow": 5,
+   "variety": 5,
+   "essence": 4
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "The dialogue mostly survives verbatim, but words are wedged into stage directions and speaker tags (\"Crikey, he gets up on a chair\", \"Anyway, HALE:\", \"Bugger me, MRS HALE:\"), so who says what gets muddied. \"Now, we left in such a hurry\" and \"ladies, mate?\" add nothing true to the text.",
+   "sense": "Several swaps miss the sense. \"didn't get on properly well\" for \"very well\". \"Yeah, but nah, I don't mean anything\" garbles the denial. \"bugger all of a housekeeper\" strains. \"Crikey\" in a stage direction makes no sense.",
+   "authenticity": "Stage-Australian, with tags bolted on: \"ladies, mate?\", \"loyal to your sex, I see, ay\", \"Blokes's mitts\", \"grotty bloody awful quick\", and \"Anyway,\" repeated as a filler.",
+   "register": "Patchy: dense bolted-on slang in spots (\"Sweet bugger-all\", \"mitts\", \"grotty bloody\") over long untouched stretches (\"I shouldn't say she had the homemaking instinct\"). Swearing stays within dad level, but \"Bugger me, MRS HALE\" puts it in the wrong place.",
+   "tone": "The quiet menace is undercut by comic tics: \"Bugger me, MRS HALE: Yeah, but nah\" and \"would you say, ladies, mate?\" turn tension into farce.",
+   "flow": "Hard to read: \"Anyway, HALE:\", \"Blokes's mitts\", \"grotty bloody awful quick\" and \"the blokes's steps on the stairs\" break the grammar and the script format.",
+   "variety": "The same few tics recur: \"Anyway,\" four times, plus \"mitts\", \"blokes's\" and \"bugger\" more than once.",
+   "essence": "The underlying scene is there, since it is mostly the original, but the garbling makes it hard to recognise as a play script: \"Anyway, MRS HALE: (_stiffly_)\"."
+  },
+  "yarn": {
+   "meaning": "Nearly everything is kept. \"frettin' over little things\" drops the pointed word \"trifles\". \"Whatever Mrs Peters takes'll be right, surely\" and Mrs Peters' \"Well, it's only their job, I s'pose\" soften her conviction slightly. \"like a young pollie after a vote\" is light colour.",
+   "sense": "Mostly exact: \"has another squiz\", \"stickybeaking about\", \"picking holes in everything\", \"jam jars\", \"Not much... Bugger all of a housekeeper\". \"Bugger all of a housekeeper\" strains a little as phrasing, and \"don't thaw an inch\" mixes two idioms.",
+   "authenticity": "Sounds like real Australian speech: \"Sweet bugger-all here but kitchen stuff\", \"Yeah, nah, I don't mean anything\", \"Seems a bit rough, bagging her\". \"where would we be without the ladies, ay?\" is fine.",
+   "register": "A solid level 4 that keeps it a play rather than a pub yarn. The swearing (\"bugger-all\", \"Bugger all\") is within dad level.",
+   "tone": "The tension and the condescension survive: \"Filthy towels!\" and \"I'd hate to have men traipsin' into my kitchen, stickybeaking about\". \"Sweet bugger-all\" gives the Sheriff a slightly jokier edge.",
+   "flow": "Reads naturally aloud throughout: \"Haven't set foot in this house in more than a year.\"",
+   "variety": "Good spread: squiz, mitts, beaut, grotty, stickybeaking, picking holes, spick and span, keep your eyes peeled.",
+   "essence": "Clearly Glaspell's scene, with the gender undercurrent intact, but losing \"trifles\", the play's title word and its point, is a real cost."
+  },
+  "unharnessed": {
+   "meaning": "Every beat survives, including \"trifles\". \"might've put a bit of this muck on it himself\" only spells out Mrs Hale's implication. \"sticking up for the sisterhood\" is a fair rendering of \"loyal to your sex\".",
+   "sense": "Terms fit: \"Not much chop as a housekeeper\", \"a fair whack of work\", \"the lie of the land\", \"carryin' on about her jam\". \"here's a bloody mess\" drops the irony of \"nice mess\" slightly.",
+   "authenticity": "Natural and local: \"wouldn't it rot your socks\", \"Not much chop\", \"has a look on a shelf\", \"hops up on a chair\". \"Well, wouldn't it rot your socks, women!\" is slightly awkward with \"women\" tacked on.",
+   "register": "Level 4 in voice and slang, kept to a light dad-level \"bloody\". If anything a shade lighter than B, but on brief.",
+   "tone": "The tension and the men's condescension come through: \"Locked up for murder and she's carryin' on about her jam.\" The women's quiet solidarity stays.",
+   "flow": "Smooth throughout: \"Seems a bit rough, bagging her for not having the place spick and span when she had to clear out in such a hurry.\"",
+   "variety": "Varied (squiz, chop, fair whack, rot your socks, yarn, traipsing), but \"bagging\" appears twice in the closing lines and \"clear out\" or \"cleared out\" twice.",
+   "essence": "Unmistakably Trifles, with the title word, the dashes and the undercurrent all retained."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "Anyway, HALE:",
+    "original": "HALE: Well, women are used to worrying over trifles.",
+    "severity": "critical",
+    "why": "A filler is inserted in front of the speaker tag, which breaks the script format. This recurs throughout (\"Anyway, MRS HALE:\", \"Bugger me, MRS HALE:\")."
+   },
+   {
+    "quote": "Crikey, he gets up on a chair",
+    "original": "He gets up on a chair",
+    "severity": "major",
+    "why": "An exclamation inside a stage direction makes no sense."
+   },
+   {
+    "quote": "would you say, ladies, mate?",
+    "original": "would you say, ladies?",
+    "severity": "major",
+    "why": "\"Mate\" addressed to the women is wrong and comic, and it is stacked after \"ladies\"."
+   },
+   {
+    "quote": "Blokes's mitts",
+    "original": "Men's hands",
+    "severity": "major",
+    "why": "\"Blokes's\" is broken grammar."
+   },
+   {
+    "quote": "grotty bloody awful quick",
+    "original": "dirty awful quick",
+    "severity": "major",
+    "why": "A pile-up of intensifiers, and swearing out of character for Mrs Hale's stiff reply."
+   },
+   {
+    "quote": "didn't get on properly well",
+    "original": "didn't get on very well",
+    "severity": "minor",
+    "why": "An unidiomatic swap."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "women are used to frettin' over little things",
+    "original": "women are used to worrying over trifles",
+    "severity": "major",
+    "why": "\"Trifles\" is the play's title and its thematic hinge. Swapping it for \"little things\" loses that."
+   },
+   {
+    "quote": "Well, it's only their job, I s'pose.",
+    "original": "Of course it's no more than their duty.",
+    "severity": "minor",
+    "why": "\"I s'pose\" softens Mrs Peters' dutiful certainty."
+   },
+   {
+    "quote": "the women don't thaw an inch",
+    "original": "the women do not unbend",
+    "severity": "minor",
+    "why": "A mixed idiom (\"thaw\" and \"give an inch\")."
+   },
+   {
+    "quote": "Bugger all of a housekeeper",
+    "original": "Not much of a housekeeper",
+    "severity": "minor",
+    "why": "\"Bugger all of a\" is a strained construction."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "Well, here's a bloody mess.",
+    "original": "Here's a nice mess.",
+    "severity": "minor",
+    "why": "\"Nice mess\" is dry irony. \"Bloody mess\" is literal."
+   },
+   {
+    "quote": "Well, wouldn't it rot your socks, women!",
+    "original": "Well, can you beat the women!",
+    "severity": "minor",
+    "why": "The idiom is good, but \", women!\" sits awkwardly after it."
+   },
+   {
+    "quote": "sticking their noses in and bagging everything",
+    "original": "snooping around and criticising",
+    "severity": "minor",
+    "why": "\"Bagging\" recurs a few lines later (\"bagging her\")."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "A mechanical, broken pass. Tags and swears are spliced into stage directions and speaker names, and it wrecks both the format and the tension.",
+  "yarn": "A natural, well-pitched level-4 retelling. Its main loss is the key word \"trifles\".",
+  "unharnessed": "The strongest: faithful, natural, and keeps \"trifles\" and the scene's tension, with only small repetition."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

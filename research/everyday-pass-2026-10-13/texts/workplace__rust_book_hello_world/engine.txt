@@ -1,0 +1,74 @@
+### Project Directory Setup
+
+You’ll start by makin' a directory to store yer Rust code. It doesn’t matter
+to Rust where yer code lives, but for the exercises and projects in this book,
+we suggest makin' a _projects_ directory in yer home directory and keepin' all
+yer projects there.
+
+Open a terminal and enter the following commands to make a _projects_ directory'n a directory for the “Hello, world!” project within the _projects_ directory.
+
+For Linux, macOS, and PowerShell on Windows, enter this:
+
+```console
+$ mkdir ~/projects
+$ cd ~/projects
+$ mkdir hello_world
+$ cd hello_world
+```
+
+For Windows CMD, enter this:
+
+```cmd
+> mkdir "%USERPROFILE%\projects"
+> cd /d "%USERPROFILE%\projects"
+> mkdir hello_world
+> cd hello_world
+```
+
+<!-- Old headings. Do not remove or links may break. -->
+<a id="writing-and-running-a-rust-program"></a>
+
+### Rust Program Basics
+
+Next, make a brand-spankin'-new source file and call it _main.rs_. Rust files always end with
+the _.rs_ extension. If yer using more than one word in yer filename, the
+convention is to use an underscore to separate them. For example, use
+_hello_world.rs_ rather than _helloworld.rs_.
+
+Now open the _main.rs_ file ya just created'n enter the code in Listing 1-1.
+
+<Listing number="1-1" file-name="main.rs" caption="A program that prints `Hello, world!`">
+
+```rust
+fn main() {
+    println!("Hello, world!");
+}
+```
+
+</Listing>
+
+Save the file and go back to your terminal window in the
+_~/projects/hello_world_ directory. On Linux or macOS, enter the followin'
+commands to compile'n run the file:
+
+```console
+$ rustc main.rs
+$ ./main
+Hello, world!
+```
+
+On Windows, enter the command `.\main` instead of `./main`:
+
+```powershell
+> rustc main.rs
+> .\main
+Hello, world!
+```
+
+Regardless of your operatin' system, the string `Hello, world!` should print to
+the terminal. If you don’t see this output, refer back to the
+[“Troubleshootin'”][troubleshooting]<!-- ignore --> part of the Installation
+section for ways to get help.
+
+If `Hello, world!` did print, congratulations! You’ve officially written a Rust
+program. That makes ya a Rust programmer—welcome!

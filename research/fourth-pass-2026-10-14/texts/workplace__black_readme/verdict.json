@@ -1,0 +1,259 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "dinkum-3": "B",
+  "yarn-dinkum": "C",
+  "yarn-troppo": "D",
+  "engine": "E"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn-troppo": {
+   "meaning": 4,
+   "sense": 3,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 4
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 3,
+   "register": 1,
+   "tone": 5,
+   "flow": 5,
+   "variety": 1,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every point survives, commands and links intact: \"you shouldn't expect big formatting changes down the track\", \"If you're feeling confident, use `--fast`.\"",
+   "sense": "\"fiddly bits\", \"Have a squiz\", \"get cracking\", \"down the track\" fit; \"no-nonsense\" is a little softer than \"uncompromising\", which is the project's point.",
+   "authenticity": "Natural Australian English in a README voice: \"grab one of the PyInstaller-built standalone executables\", \"brainpower for the stuff that actually matters\".",
+   "register": "A light level 2 touch: \"squiz\", \"get cracking\", \"down the track\", otherwise plain. No swearing.",
+   "tone": "Stays a confident, practical README: \"Black makes code review quicker by producing the smallest diffs possible.\"",
+   "flow": "Reads smoothly: \"After a while the formatting stops being something you notice, and you can focus on the content instead.\"",
+   "variety": "Varied, though a reader sees \"have a look\" and \"Have a squiz\" doing the same job; \"fiddly bits\", \"grab\", \"get cracking\", \"down the track\".",
+   "essence": "Unmistakably the Black README, with its \"Any colour you like.\" motto."
+  },
+  "dinkum-3": {
+   "meaning": "Every point survives: \"Now that we're stable, don't go expecting big formatting changes down the track.\"; \"One more thing:\" is colour.",
+   "sense": "\"the Python code formatter that won't budge\" catches \"uncompromising\"; \"Heaps of projects\", \"the full rundown\", \"have a squiz\" fit.",
+   "authenticity": "Sounds like an Australian developer writing: \"Want to format Jupyter Notebooks as well?\", \"just grab one of the PyInstaller-built standalone executables\".",
+   "register": "Light level 2 touch, a shade chattier than A: \"won't budge\", \"Heaps\", \"squiz\", \"don't go expecting\". No swearing.",
+   "tone": "Keeps the confident, practical README tone: \"If you're feeling confident, use `--fast`.\"",
+   "flow": "Reads like it was written that way: \"After a while you stop even noticing the formatting, and you can get on with the content instead.\"",
+   "variety": "Varied with nothing leaned on: \"won't budge\", \"fiddly bits\", \"get cracking\", \"Heaps\", \"down the track\", \"rundown\", \"squiz\".",
+   "essence": "Unmistakably the Black README; \"won't budge\" keeps its uncompromising character."
+  },
+  "yarn-dinkum": {
+   "meaning": "Every point survives: \"Black checks that the reformatted code still produces a valid AST\".",
+   "sense": "\"heaps of projects\", \"have a squiz\", \"get cracking\" fit; \"Now that we've gone stable\" strains (projects \"become\" stable, \"gone\" suggests a switch), and \"no-nonsense\" softens \"uncompromising\".",
+   "authenticity": "Natural Australian English: \"grab one of the PyInstaller-built standalone executables\", \"down the track\".",
+   "register": "Light level 2 touch: \"heaps\", \"squiz\", \"get cracking\", \"down the track\". No swearing.",
+   "tone": "Keeps the practical README tone throughout.",
+   "flow": "Mostly smooth, but \"After a while the formatting stops getting noticed\" is a clumsy passive.",
+   "variety": "Varied enough: \"fiddly bits\", \"grab\", \"get cracking\", \"heaps\", \"squiz\".",
+   "essence": "Unmistakably the Black README."
+  },
+  "yarn-troppo": {
+   "meaning": "The steps survive, but \"Sign up for it\" implies a subscription, and \"Less to wade through, less to argue about.\" adds a claim the original does not make; \"Easy as.\" is colour.",
+   "sense": "Several terms strain: \"won't take no for an answer\" means pushy, not uncompromising; \"churning out the smallest diffs possible\" suggests mass output where the point is minimal change; \"Sign up for it\" for \"By using it\".",
+   "authenticity": "Plenty of natural idiom (\"banging on at you\", \"won't play ball\", \"Feeling game?\"), but packed so densely it starts to read as a showcase: \"a stack more info\", \"the nitty-gritty\", \"Easy as.\"",
+   "register": "Heavier than a level 2: idioms in almost every sentence (\"hand over the reins\", \"get stuck into\", \"shake-ups\", \"Feeling game?\") plus added tags. No swearing.",
+   "tone": "Still a README, but the stream of quips (\"Easy as.\", \"Less to wade through, less to argue about.\") makes it breezier than the original's crisp confidence.",
+   "flow": "Readable, but the density of idiom piles up: \"Sign up for it and you're agreeing to hand over the reins on all the fiddly little bits of hand-formatting.\"",
+   "variety": "Very varied: \"banging on\", \"get stuck into\", \"won't play ball\", \"a stack more\", \"shake-ups\", \"nitty-gritty\".",
+   "essence": "Recognisably the Black README, but \"won't take no for an answer\" turns principled rigidity into pushiness."
+  },
+  "engine": {
+   "meaning": "The original word for word: \"By using it, you agree to cede control over minutiae of hand-formatting.\"",
+   "sense": "No Aussie terms to misfire; only the spelling in \"Any colour you like.\" changes.",
+   "authenticity": "Plain international English with no Australian voice at all: \"Further information can be found in our docs\".",
+   "register": "Untranslated apart from \"colour\"; nowhere near a level 2 light touch.",
+   "tone": "The original's tone kept whole.",
+   "flow": "Reads as the original does.",
+   "variety": "No slang at all to vary.",
+   "essence": "Unmistakably the original, untouched."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "the no-nonsense Python code formatter",
+    "original": "the uncompromising Python code formatter",
+    "severity": "minor",
+    "why": "Softens the project's defining word."
+   }
+  ],
+  "dinkum-3": [
+   {
+    "quote": "_Black_ is the Python code formatter that won't budge.",
+    "original": "_Black_ is the uncompromising Python code formatter.",
+    "severity": "minor",
+    "why": "Good fit, though it moves the project's tagline word out of its usual slot."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "After a while the formatting stops getting noticed",
+    "original": "Formatting becomes transparent after a while",
+    "severity": "minor",
+    "why": "Clumsy passive."
+   },
+   {
+    "quote": "Now that we've gone stable",
+    "original": "Now that we have become stable",
+    "severity": "minor",
+    "why": "'Gone stable' is an odd fit."
+   }
+  ],
+  "yarn-troppo": [
+   {
+    "quote": "the Python code formatter that won't take no for an answer",
+    "original": "the uncompromising Python code formatter",
+    "severity": "major",
+    "why": "Wrong sense: pushy insistence rather than refusal to compromise on style."
+   },
+   {
+    "quote": "churning out the smallest diffs possible",
+    "original": "producing the smallest diffs possible",
+    "severity": "minor",
+    "why": "'Churning out' implies volume and carelessness, against the point."
+   },
+   {
+    "quote": "Sign up for it",
+    "original": "By using it",
+    "severity": "minor",
+    "why": "Implies a subscription."
+   },
+   {
+    "quote": "Less to wade through, less to argue about.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added claim."
+   },
+   {
+    "quote": "Easy as.",
+    "original": "",
+    "severity": "minor",
+    "why": "Tag bolted on; part of the over-weighting."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "_Black_ is the uncompromising Python code formatter. By using it, you agree to cede",
+    "original": "_Black_ is the uncompromising Python code formatter. By using it, you agree to cede",
+    "severity": "critical",
+    "why": "Left untranslated; the brief is not attempted."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Light, natural and faithful; right on the brief.",
+  "dinkum-3": "Natural, faithful and varied; the best of the set.",
+  "yarn-dinkum": "Light and faithful, a little less polished than A.",
+  "yarn-troppo": "Colourful and varied but over the brief, with several terms in the wrong sense.",
+  "engine": "The original with one spelling change; fails the brief."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "dinkum-3",
+    "yarn-dinkum",
+    "engine"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "dinkum-3",
+    "engine"
+   ],
+   [
+    "yarn-dinkum",
+    "yarn-troppo"
+   ]
+  ],
+  "variety": [
+   [
+    "dinkum-3",
+    "yarn-troppo"
+   ],
+   [
+    "unharnessed",
+    "yarn-dinkum"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "dinkum-3",
+    "yarn-dinkum",
+    "engine"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "overall": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "yarn-troppo"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -219,3 +219,37 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
+# aussiefy
+# Project-specific rules, imported from the original repo. Entries already in the
+# template above (__pycache__/, *.egg-info/, .pytest_cache/, build/, dist/) are omitted.
+*.pyc
+.cache/
+data/staging/*
+!data/staging/.gitkeep
+
+# copyrighted reference texts: run locally, never committed
+tests/corpus/local/*
+!tests/corpus/local/README.md
+
+# local virtualenv and model state (aussiefy model install, scripts/train_embedder.py): never committed
+.venv/
+.aussiefy-home/
+.claude/worktrees/
+
+# Reviewed local-only source research groups (including embedded originals, candidates and logs).
+/research/embellishment-pass-2026-10-13/judge-blind/instructions__rockwell_transplanting_1911.*
+/research/embellishment-pass-2026-10-13/judge-blind/news__babe_ruth_comeback_1927.*
+/research/embellishment-pass-2026-10-13/texts/instructions__rockwell_transplanting_1911/
+/research/embellishment-pass-2026-10-13/texts/news__babe_ruth_comeback_1927/
+/research/everyday-pass-2026-10-12/judge-blind/instructions__rockwell_transplanting_1911.*
+/research/everyday-pass-2026-10-12/judge-blind/news__babe_ruth_comeback_1927.*
+/research/everyday-pass-2026-10-12/texts/instructions__rockwell_transplanting_1911/
+/research/everyday-pass-2026-10-12/texts/news__babe_ruth_comeback_1927/
+/research/everyday-pass-2026-10-13/judge-blind/instructions__rockwell_transplanting_1911.*
+/research/everyday-pass-2026-10-13/judge-blind/news__babe_ruth_comeback_1927.*
+/research/everyday-pass-2026-10-13/texts/instructions__rockwell_transplanting_1911/
+/research/everyday-pass-2026-10-13/texts/news__babe_ruth_comeback_1927/
+/research/fourth-pass-2026-10-14/judge-blind/instructions__rockwell_transplanting_1911.*
+/research/fourth-pass-2026-10-14/judge-blind/news__babe_ruth_comeback_1927.*
+/research/fourth-pass-2026-10-14/texts/instructions__rockwell_transplanting_1911/
+/research/fourth-pass-2026-10-14/texts/news__babe_ruth_comeback_1927/

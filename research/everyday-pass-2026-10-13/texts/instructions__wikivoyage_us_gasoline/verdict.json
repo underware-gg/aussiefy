@@ -1,0 +1,191 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "unharnessed": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 3,
+   "sense": 3,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 3,
+   "flow": 2,
+   "variety": 2,
+   "essence": 4
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "Most facts survive because the original is largely kept, but the American's quoted line is changed to \"I need 50 quid on pump number 1\", which no American would say and undercuts the point of the example.",
+   "sense": "Wrong-sense swap in \"an American might say, \"I need 50 quid on pump number 1\"\"; \"the folding stuff\" and \"dosh\" fit; \"servos\" fits. \"which pump yer bloody using\" puts the oath on the wrong word.",
+   "authenticity": "Stage-Australian fillers bolted onto untouched prose: \"Jeez Louise, Due to problems\", \"at the pump, cobber\", \"Tell ya what, in the alternative\", \"Streeeewth\".",
+   "register": "Uneven: the body is the original wiki text (\"This is suitable for use by 87-octane vehicles at high elevations\") with interjections and \"ya\"/\"yer\" sprinkled over it; well under a level-5 retelling despite the tags.",
+   "tone": "The practical travel-guide tone mostly survives, but the interjections (\"Streeeewth.\") make it read as a send-up.",
+   "flow": "Jarring joins: \"Jeez Louise, Due to problems with frequent \"drive offs\"\", \"Tell ya what, in the alternative, ya have to estimate\", \"Well, the American gallon\".",
+   "variety": "Leans on openers bolted to paragraph starts (\"Listen,\", \"Well,\", \"Jeez Louise,\", \"So anyway,\") and \"yer\" repeated throughout.",
+   "essence": "Recognisably the Wikivoyage gasoline entry, as most of it is unchanged."
+  },
+  "unharnessed": {
+   "meaning": "Every fact survives: New Jersey and Oregon rules, 3.785 litres, prepay, the cashier option, octane 87/89/91 and 85 in the Rockies, red diesel fines, black and green handles. \"Don't get 'em mixed up, or you'll be well and truly fucked\" elaborates the warning. \"the old colour code\" slightly shifts \"traditional\".",
+   "sense": "Terms fit: \"servos\", \"Unless you've hired some flash luxury car\", \"the ones that look after truckies\", \"sold out in the bush for farm use\", \"you'll cop a massive fine\".",
+   "authenticity": "Natural throughout: \"These days you've gotta preauthorise\", \"hand over that much cash to whoever's on the counter\", \"make bloody sure you fill up with 87\".",
+   "register": "Clearly Aussie and casual with \"bloody\" and one \"well and truly fucked\" within vulgarity 2, but it reads as a friendly retelling rather than a full pub yarn; a shade under level 5.",
+   "tone": "Keeps the practical travel-advice tone; the swearing adds bluntness without making it flippant.",
+   "flow": "Reads smoothly: \"The pump cuts out by itself once the cost of the fuel hits the amount of cash you've handed over\".",
+   "variety": "Varied: \"servos\", \"Yanks\", \"flash\", \"truckies\", \"the bush\", \"cop a massive fine\"; \"bloody\" twice.",
+   "essence": "Unmistakably the Wikivoyage gas entry, with its practical tips for foreign drivers intact."
+  },
+  "yarn": {
+   "meaning": "Every fact survives, with a gloss that hangs off the original: \"the \"drive offs\" (people fillin' up and doin' a runner)\". \"the old colour code\" slightly shifts \"traditional\".",
+   "sense": "Terms fit: \"on the till\", \"the folding stuff\", \"if ya get sprung\", \"whoppin' great fines\", \"lower country\", \"flash luxury car\".",
+   "authenticity": "Sounds like an Aussie talking: \"near enough every American servo now makes ya pay before ya pump\", \"yer car'll prob'ly only need 87\". \"flamin' illegal\" is a touch stock.",
+   "register": "Full casual Aussie with dialect spelling throughout and \"flamin'\", \"bloody\"; mild for vulgarity 2 but the weight is at level 5 for a practical text.",
+   "tone": "Practical travel tone kept: \"Don't get 'em mixed up, whatever ya do.\"",
+   "flow": "Reads well aloud, though the dense \"ya\"/\"yer\" spelling slows reading: \"If yer drivin' round the Rocky Mountains, ya might come across servos sellin' gas\".",
+   "variety": "Varied slang (\"doin' a runner\", \"the folding stuff\", \"dosh\", \"sprung\", \"whoppin' great\"), but \"ya\" is leaned on heavily, several times per sentence.",
+   "essence": "Unmistakably the original travel entry."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "an American might say, \"I need 50 quid on pump number 1\"",
+    "original": "an American might say, \"I need 50 bucks on pump number 1\"",
+    "severity": "critical",
+    "why": "An American quoted as saying 'quid' defeats the example of what to say at a US pump."
+   },
+   {
+    "quote": "Jeez Louise, Due to problems with frequent \"drive offs\"",
+    "original": "Due to problems with frequent \"drive offs\"",
+    "severity": "major",
+    "why": "Interjection bolted on with the original capital left in; stage-Australian."
+   },
+   {
+    "quote": "Today, you have to preauthorize a credit or debit card at the pump, cobber.",
+    "original": "Today, you have to preauthorize a credit or debit card at the pump.",
+    "severity": "minor",
+    "why": "Dated 'cobber' tag added; US spelling 'preauthorize' kept."
+   },
+   {
+    "quote": "Don't mix them up. Streeeewth.",
+    "original": "Do not mix them up.",
+    "severity": "minor",
+    "why": "Stock exclamation bolted on, rendering nothing."
+   },
+   {
+    "quote": "which pump yer bloody using",
+    "original": "which pump you are using",
+    "severity": "minor",
+    "why": "Oath placed mechanically."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "the old colour code at servos",
+    "original": "the traditional color code at gas stations",
+    "severity": "minor",
+    "why": "'Old' can suggest the code is out of date; 'traditional' means long-standing and still in use."
+   },
+   {
+    "quote": "or you'll be well and truly fucked",
+    "original": "Do not mix them up.",
+    "severity": "minor",
+    "why": "Fine for vulgarity 2, but a little heavier than the plain warning needs."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "ya have to guess how much gas ya need",
+    "original": "you have to estimate how much gas you need",
+    "severity": "minor",
+    "why": "'Ya' spelling is used so densely it becomes a tic."
+   },
+   {
+    "quote": "the old colour code at the servo",
+    "original": "the traditional color code at gas stations",
+    "severity": "minor",
+    "why": "'Old' can suggest the code is no longer in use."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "The original wiki text with stage-Aussie interjections bolted on and one wrong-sense swap of 'bucks' to 'quid'; well under the level asked.",
+  "unharnessed": "A natural, accurate Aussie retelling of the travel tips; a shade under full level-5 weight.",
+  "yarn": "A lively, natural level-5 Aussie retelling that keeps every fact; leans heavily on 'ya'."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

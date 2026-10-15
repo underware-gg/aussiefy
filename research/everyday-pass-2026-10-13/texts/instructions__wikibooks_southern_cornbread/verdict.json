@@ -1,0 +1,167 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "engine": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 5,
+   "flow": 3,
+   "variety": 2,
+   "essence": 4
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Every ingredient, quantity, temperature and time kept: \"2 cups yellow or white self-raising corn meal\", \"Preheat the oven to 425°F\", \"25–30 minutes\", \"Let it cool for 5 minutes in the pan\". \"a solid, no-sugar kind of cornbread\" slightly shifts \"hearty\".",
+   "sense": "Terms fit the kitchen: \"easy as to make\", \"tea (dinner)\" for the evening meal, \"brekkie\", \"whack it in the oven\", \"a skewer poked into the centre\", \"full-cream milk\", \"tea towel\". \"solid\" for hearty strains a little.",
+   "authenticity": "Reads like an Australian recipe: \"It's easy as to make\", \"getting stuck into it\", \"pop it in the oven\", \"baking tin\", \"kept in the fridge\".",
+   "register": "A touch light for level 4: the method is mostly plain Australian recipe English (\"Beat the egg in the bowl. Stir in the buttermilk and oil.\") with slang mainly in the intro and a few verbs.",
+   "tone": "Stays a friendly, practical recipe: \"Go easy and don't overmix it.\"",
+   "flow": "Smooth throughout: \"If you're using a cast-iron frying pan, whack it in the oven to heat up.\"",
+   "variety": "Varied: \"easy as\", \"feed\", \"brekkie\", \"getting stuck into\", \"whack\", \"pop\", \"skewer\", \"tea towel\".",
+   "essence": "Clearly the Wikibooks cornbread recipe, intro, ingredients, equipment, method and notes in order."
+  },
+  "engine": {
+   "meaning": "Mostly verbatim, but \"lunch or tea (tea)\" garbles the original's \"dinner (supper)\" gloss into a meaningless repetition.",
+   "sense": "Swaps fit their sense (\"self-raising\", \"full-cream milk\", \"frying pan\", \"whack it in the oven\") except \"lunch or tea (tea)\", which loses the gloss.",
+   "authenticity": "Little Aussie and it sits in formal US recipe prose: \"If using cast-iron frying pan, whack it in the oven to heat.\"",
+   "register": "Far under level 4: most lines are the original, e.g. \"Southern Cornbread is a hearty, unsweetened variety of cornbread, widely served in the Southeastern United States.\"",
+   "tone": "The neutral recipe tone is kept because the text is largely unchanged.",
+   "flow": "Readable but with jolts: \"lunch or tea (tea)\" and \"If using cast-iron frying pan, whack it in the oven\".",
+   "variety": "Only spelling and product swaps plus one \"whack\".",
+   "essence": "It is the recipe, barely retold."
+  },
+  "unharnessed": {
+   "meaning": "All quantities, temperatures and times intact: \"Crank the oven up to 425°F\", \"For an 8-inch frypan that can be 25–30 minutes\", \"Let it cool for 5 minutes in the pan\". \"for a few days\" and \"a few months\" for \"several\" is close enough.",
+   "sense": "Terms fit: \"a doddle to make\", \"dinner (tea, if you like)\", \"bung it in the oven\", \"Tip the batter into the frypan\", \"mix till it's just wet through\", \"to stop it drying out\".",
+   "authenticity": "Sounds like an Aussie cook: \"knock together a quick, simple feed\", \"give it a spray of non-stick\", \"Go easy and don't overmix the bugger.\"",
+   "register": "Level 4 weight carried through the method as well as the intro (\"Crank\", \"bung\", \"whack\", \"Tip\"), with dad-level \"the bugger\".",
+   "tone": "A friendly, practical recipe voice; the slang adds warmth without losing the instructions.",
+   "flow": "Smooth: \"If you're using a cast-iron frypan, bung it in the oven to heat up. Don't preheat any other kind of frypan or baking tin.\"",
+   "variety": "Varied: \"dished up\", \"doddle\", \"knock together\", \"feed\", \"brekkie\", \"getting stuck into\", \"Crank\", \"bung\", \"whack\", \"Tip\".",
+   "essence": "Unmistakably the cornbread recipe, every section kept."
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "a solid, no-sugar kind of cornbread",
+    "original": "a hearty, unsweetened variety of cornbread",
+    "severity": "minor",
+    "why": "\"solid\" can suggest dense or heavy rather than filling."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "lunch or tea (tea)",
+    "original": "lunch or dinner (supper)",
+    "severity": "major",
+    "why": "Mechanical swap turns the gloss into a meaningless repetition."
+   },
+   {
+    "quote": "Southern Cornbread is a hearty, unsweetened variety of cornbread, widely served in the Southeastern United States.",
+    "original": "Southern Cornbread is a hearty, unsweetened variety of cornbread, widely served in the Southeastern United States.",
+    "severity": "major",
+    "why": "Text left largely untranslated; far under a level-4 brief."
+   },
+   {
+    "quote": "If using cast-iron frying pan, whack it in the oven to heat.",
+    "original": "If using cast-iron skillet, place it in the oven to heat.",
+    "severity": "minor",
+    "why": "Slang verb in clipped formal syntax reads oddly."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "Go easy and don't overmix the bugger.",
+    "original": "Take care not to overmix.",
+    "severity": "minor",
+    "why": "\"the bugger\" for batter is a little forced, though within the brief."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A natural Australian recipe rewrite, faithful in every quantity; a little light on slang for level 4.",
+  "engine": "Mostly the original with localised spellings and terms, one broken gloss; far too light for level 4.",
+  "unharnessed": "A lively, faithful level-4 recipe that keeps every quantity and sounds like an Aussie kitchen."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

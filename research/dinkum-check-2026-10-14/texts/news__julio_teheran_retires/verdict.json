@@ -1,0 +1,148 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "dinkum-4": "A",
+  "yarn-dinkum": "B",
+  "dinkum-3": "C"
+ },
+ "scores": {
+  "dinkum-4": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "dinkum-4": {
+   "meaning": "All facts kept: \"pulled from a scheduled start for Team Colombia\", \"helped Team Colombia to a 3-1 win over Team Panama\", \"an 81-82 record, a 3.85 ERA, a 1.223 WHIP and 1,260 strikeouts in 1,470.2 innings\".",
+   "sense": "Each term fits: \"called time on his baseball career\", \"with a crook shoulder\", \"hung up the glove\", \"All up\".",
+   "authenticity": "Sounds like Australian sports copy: \"has called time on his baseball career\", \"stuck with them for his first nine seasons\".",
+   "register": "A light level-2 touch: a handful of terms (\"called time\", \"crook shoulder\", \"hung up the glove\", \"All up\") over plain sports reporting. No swearing.",
+   "tone": "Stays a straight sports news brief: \"picking up All-Star selections in 2014 and 2016\".",
+   "flow": "Reads cleanly: \"most of it with the Atlanta Braves, though he also had stints with the Los Angeles Angels\". \"The call came two days after\" echoes \"called time\" closely.",
+   "variety": "No term repeats except the call/called echo in \"has called time\" and \"The call came\".",
+   "essence": "The same retirement brief, same order and stats: \"He'd also spent the 2022 and 2025 seasons in the Mexican Baseball League.\""
+  },
+  "yarn-dinkum": {
+   "meaning": "All facts kept: \"helped Team Colombia knock off Team Panama 3-1 in the WBC\", \"1,260 strikeouts in 1,470.2 innings\", \"playing in the Mexican Baseball League\".",
+   "sense": "Terms fit: \"has called it a day on baseball\", \"with a crook shoulder\", \"knock off Team Panama\", \"All up\".",
+   "authenticity": "Natural Australian sports idiom: \"knock off Team Panama 3-1\", \"stuck with them for his first nine seasons\".",
+   "register": "Level 2: a few well-placed terms (\"called it a day\", \"crook shoulder\", \"hung up the glove\", \"knock off\", \"All up\") on plain reporting, no swearing.",
+   "tone": "A straight news brief throughout: \"made his MLB debut with the Braves in 2011 as a 20-year-old\".",
+   "flow": "Smooth: \"Before he hung up the glove, Teherán had helped Team Colombia knock off Team Panama 3-1 in the WBC.\"",
+   "variety": "Slightly more spread than the others (\"called it a day\", \"knock off\"), with only the \"The call came\" echo after \"called it a day\".",
+   "essence": "Unmistakably the same brief, in the same order: \"picking up All-Star selections in 2014 and 2016\"."
+  },
+  "dinkum-3": {
+   "meaning": "All facts kept, reordered: \"a crook shoulder saw him scratched from a scheduled start for Team Colombia\", \"1,260 strikeouts from 1,470.2 innings\".",
+   "sense": "Terms fit: \"called time\", \"turned out for the Los Angeles Angels\", \"All up\". \"Before he called it\" is vague: it could mean called the game.",
+   "authenticity": "Very local: \"he also turned out for the Los Angeles Angels\", \"a crook shoulder saw him scratched\". \"He had thirteen years in the MLB\" is a slightly American \"the MLB\".",
+   "register": "Level 2: \"called time\", \"crook shoulder\", \"turned out for\", \"All up\", \"over in the Mexican Baseball League\", no swearing.",
+   "tone": "Straight sports news: \"picking up All-Star selections in 2014 and 2016 along the way\".",
+   "flow": "Mostly smooth, but the opening is chopped into short sentences: \"He announced his retirement on Monday, at 35. It came two days after\".",
+   "variety": "Varied: \"called time\", \"called it\", \"turned out for\", \"along the way\", \"over in\". The call words repeat: \"called time\" then \"called it\".",
+   "essence": "The same brief: \"He'd also spent the 2022 and 2025 seasons over in the Mexican Baseball League.\""
+  }
+ },
+ "problems": {
+  "dinkum-4": [
+   {
+    "quote": "The call came two days after",
+    "original": "The decision came two days after",
+    "severity": "minor",
+    "why": "Echoes called time in the previous sentence."
+   }
+  ],
+  "yarn-dinkum": [],
+  "dinkum-3": [
+   {
+    "quote": "Before he called it",
+    "original": "before announcing his retirement",
+    "severity": "minor",
+    "why": "Called it is vague here and repeats called time from the opening."
+   },
+   {
+    "quote": "He announced his retirement on Monday, at 35. It came two days after",
+    "original": "announced his retirement from baseball on Monday, at the age of 35. The decision came two days after",
+    "severity": "minor",
+    "why": "Choppy short sentences; It has no clear referent."
+   }
+  ]
+ },
+ "summaries": {
+  "dinkum-4": "Accurate, light, natural level-2 sports copy.",
+  "yarn-dinkum": "Accurate and natural, with the most varied light touch of the three.",
+  "dinkum-3": "Accurate and authentic, slightly choppier at the start."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "dinkum-4",
+    "yarn-dinkum",
+    "dinkum-3"
+   ]
+  ],
+  "flow": [
+   [
+    "dinkum-4",
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-3"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-4",
+    "dinkum-3"
+   ]
+  ],
+  "essence": [
+   [
+    "dinkum-4",
+    "yarn-dinkum",
+    "dinkum-3"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "dinkum-4"
+   ],
+   [
+    "dinkum-3"
+   ]
+  ]
+ }
+}

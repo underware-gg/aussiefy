@@ -1,0 +1,63 @@
+> “Any colour you like.”
+
+So get this. _Black_ is the Python code formatter, and it does not budge. Not an inch. You use it, you're agreeing
+to hand over control of all the fiddly little bits of hand-formatting, full stop. And what do you get back from
+_Black_? Speed, determinism, and no more `pycodestyle` in your ear nagging about formatting. Bliss. You'll save
+yourself time and brainpower for the stuff that actually matters.
+
+Blackened code looks the same whatever project you've got open. Give it a while and you stop even noticing the
+formatting, and you just get on with the content. Which is the whole point, really.
+
+And _Black_ makes code review quicker, too, because it spits out the smallest diffs it possibly can. No more
+scrolling through a mile of whitespace changes.
+
+Have a squiz at the [PyCon 2019 talk](https://youtu.be/esZLCuWs_2Y) if you want to know more.
+
+---
+
+**[Read the documentation on ReadTheDocs!](https://black.readthedocs.io/en/stable)**
+
+---
+
+## Installation and usage
+
+### Installation
+
+Installing _Black_ is easy as: run `pip install black`. It needs Python 3.10+ to
+run, mind. Want it to format your Jupyter Notebooks as well? Then install it with
+`pip install "black[jupyter]"`.
+
+No Python on the box? No worries. You can still run _Black_: just grab one of the
+PyInstaller-built standalone executables from the
+[latest GitHub release](https://github.com/psf/black/releases/latest).
+
+### Usage
+
+Keen to get cracking straight away with sensible defaults? Here you go:
+
+```sh
+black {source_file_or_directory}
+```
+
+And if running it as a script won't play ball, run _Black_ as a package instead:
+
+```sh
+python -m black {source_file_or_directory}
+```
+
+There's plenty more in our docs:
+
+- [Usage and Configuration](https://black.readthedocs.io/en/stable/usage_and_configuration/index.html)
+
+Now, heaps of projects, big and small, are already [successfully using](https://github.com/psf/black#used-by)
+_Black_, so you're in good company. It's got a thorough test suite, with efficient parallel tests, plus our own
+auto formatting and parallel Continuous Integration runner. And now that we're stable, don't go expecting big
+formatting changes down the track. Any stylistic changes will mostly come from bug reports and support for new
+Python syntax. For the full rundown, have a look at
+[The Black Code Style](https://black.readthedocs.io/en/stable/the_black_code_style/index.html).
+
+One last thing. As a safety measure, and yeah, it does slow processing down a bit, _Black_ checks that the
+reformatted code still produces a valid AST that's effectively equivalent to the
+original (see the
+[Pragmatism](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#ast-before-and-after-formatting)
+section for the details). Better safe than sorry. If you're feeling confident, though, use `--fast`.

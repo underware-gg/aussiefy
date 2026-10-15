@@ -1,0 +1,191 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 1,
+   "tone": 3,
+   "flow": 2,
+   "variety": 1,
+   "essence": 3
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every fact survives: the council, May 1, 1976, 20,000 Kurds, the Peshmerga cooperation, Cortese and District 4, October 6, 2026. Nothing added.",
+   "sense": "Terms fit: \"gives a big rap to\", \"pulling their weight\", \"a proper hub\", \"teaming up\". \"the first mob of Kurdish families\" is fine for a group, if a little loaded.",
+   "authenticity": "Natural: \"has gone and officially marked\", \"VOA got hold of\", \"the first lot of Kurdish families\".",
+   "register": "Retold throughout, but at about level 3: a casual news voice (\"Plenty of them later settled in Nashville\") rather than the full pub yarn level 5 asks for. No swearing, allowed under vulgarity 2.",
+   "tone": "Keeps the respectful, celebratory news tone.",
+   "flow": "Reads smoothly: \"The city's become a proper hub for Kurdish cultural and community life.\"",
+   "variety": "Varied: \"mob\", \"lot\", \"dues\", \"big rap\", \"pulling their weight\", \"proper hub\", \"gives a nod\", \"shoulder to shoulder\".",
+   "essence": "Unmistakably the VOA report."
+  },
+  "yarn": {
+   "meaning": "Every fact survives, including dates, numbers and names. Additions are colour hanging off the original: \"That's no small effort, I reckon.\", \"Not bad for a town most of us only know for country music.\", \"Game as, the lot of 'em.\", \"Fifty years in the making, that one.\"",
+   "sense": "Mostly exact: \"in the hip pocket\" for economic, \"fronted up\", \"hard yakka\", \"led the charge\". \"The Big Smoke\" is a term for the capital or big city as seen from the bush, and strains as a name for Nashville.",
+   "authenticity": "Sounds like an Australian telling the yarn: \"So get this.\", \"VOA got its mitts on\", \"Game as, the lot of 'em.\"",
+   "register": "A full level-5 retelling, told as a yarn with asides. No swearing, allowed under vulgarity 2.",
+   "tone": "The change to a yarn is what the brief asks; underneath it stays warm and respectful toward the community.",
+   "flow": "Reads like spoken Australian: \"Plenty of 'em ended up putting down roots in Nashville, Tennessee\".",
+   "variety": "Varied: \"mob\", \"lot\", \"mitts\", \"fronted up\", \"hard yakka\", \"Big Smoke\", \"tips its hat\", \"Game as\", \"led the charge\".",
+   "essence": "Unmistakably the original report, retold as a yarn."
+  },
+  "engine": {
+   "meaning": "Facts survive because the text is largely the original, but \"established mobs in cities\" and \"Kurdish cultural and mob life\" blur \"communities\".",
+   "sense": "\"mob\" is swapped mechanically for \"community\" (\"the Kurdish mob's efforts\", \"Kurdish cultural and mob life\"); in Australia \"mob\" in that sense usually refers to Aboriginal communities, and \"mob life\" reads like gangsters.",
+   "authenticity": "Stage-Australian: \"Well, According to\", \"Anyway, Accordin' to\", \"Jeez Louise,\" (American), \"Stone the flamin' crows.\" all bolted on.",
+   "register": "Mostly untranslated (\"highlighting cooperation between Kurdish Peshmerga forces, U.S. troops and their allies\"), far below level 5 apart from bolted interjections.",
+   "tone": "\"Stone the flamin' crows.\" after the signing date and \"Jeez Louise\" make a respectful report sound flippant.",
+   "flow": "Jarring joins with capitals left in: \"Well, According\", \"Anyway, Accordin'\", \"So anyway, the proclamation\".",
+   "variety": "Leans on \"mob\" and the fillers \"Well,\"/\"Anyway,\".",
+   "essence": "Recognisably the report, mainly because it is the report."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "Plenty of them later settled in Nashville, Tennessee, while others set up communities in cities and states right across the country.",
+    "original": "Many later settled in Nashville, Tennessee, while others established communities in cities and states across the country.",
+    "severity": "minor",
+    "why": "Much of the text stays a plain news voice; light for level 5."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "The Big Smoke's turned into a real hub",
+    "original": "The city has become an important center",
+    "severity": "minor",
+    "why": "\"the Big Smoke\" is the big city as seen from the country, an odd fit for Nashville."
+   },
+   {
+    "quote": "Not bad for a town most of us only know for country music.",
+    "original": "",
+    "severity": "minor",
+    "why": "An aside reacting to the original; harmless colour but slightly flip about a community report."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Kurdish cultural and mob life",
+    "original": "Kurdish cultural and community life",
+    "severity": "major",
+    "why": "\"mob life\" reads as gangster life; wrong sense."
+   },
+   {
+    "quote": "the Kurdish mob's efforts",
+    "original": "the Kurdish community's efforts",
+    "severity": "major",
+    "why": "Mechanical swap of \"community\" for \"mob\"."
+   },
+   {
+    "quote": "Well, According to an official proclamation",
+    "original": "According to an official proclamation",
+    "severity": "major",
+    "why": "Filler bolted on, capital left in."
+   },
+   {
+    "quote": "Jeez Louise, the Big Smoke",
+    "original": "The city",
+    "severity": "major",
+    "why": "American interjection bolted on; \"Big Smoke\" strains for Nashville."
+   },
+   {
+    "quote": "Stone the flamin' crows.",
+    "original": "",
+    "severity": "major",
+    "why": "Added stock exclamation after a dry fact."
+   },
+   {
+    "quote": "highlighting cooperation between Kurdish Peshmerga forces",
+    "original": "highlighting cooperation between Kurdish Peshmerga forces",
+    "severity": "major",
+    "why": "Most of the text is left untranslated."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Faithful and natural, but well short of the level-5 yarn the brief asks for.",
+  "yarn": "A full, natural level-5 yarn that keeps every fact, with asides that are colour.",
+  "engine": "Mostly untranslated, with stock interjections and a mechanical \"mob\" swap."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

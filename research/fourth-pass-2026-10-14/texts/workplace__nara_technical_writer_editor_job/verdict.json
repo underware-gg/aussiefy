@@ -1,0 +1,267 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "dinkum-3": "A",
+  "engine": "B",
+  "yarn-dinkum": "C",
+  "unharnessed": "D",
+  "yarn-troppo": "E"
+ },
+ "scores": {
+  "dinkum-3": {
+   "meaning": 4,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 3,
+   "register": 1,
+   "tone": 5,
+   "flow": 4,
+   "variety": 1,
+   "essence": 5
+  },
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  },
+  "yarn-troppo": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 3,
+   "flow": 4,
+   "variety": 5,
+   "essence": 4
+  }
+ },
+ "evidence": {
+  "dinkum-3": {
+   "meaning": "Every duty, condition and qualification kept, numbers and dates exact. The gloss \"AFGE Council 260, so it's a union job\" slightly overstates a bargaining unit position; \"no worries:\" is colour.",
+   "sense": "Terms fit: \"Get your head around what customers need\", \"Have a squiz at that announcement\", \"nutting out production problems\", \"on your CV\", \"new starters\", \"pro rata\".",
+   "authenticity": "Reads like an Australian job ad: \"all the program goals get ticked off\", \"Know your way around the technical resources\", \"spot on\".",
+   "register": "Level 3: conversational and local throughout, without turning the notice into a yarn; no swearing.",
+   "tone": "Stays a clear, official-but-friendly job notice; requirements still read as requirements (\"You'll need to pass a background check.\").",
+   "flow": "Mostly smooth; \"so they get published legally effective, on time and spot on\" is a little ungrammatical.",
+   "variety": "Varied; \"properly\" recurs as in the original (\"Handle ... properly\", \"look after them properly\", \"use them properly\").",
+   "essence": "Unmistakably the federal job announcement."
+  },
+  "engine": {
+   "meaning": "The original text with spelling changes and \"new starters\", so nothing lost or changed.",
+   "sense": "The few changes fit: \"new starters\", \"pro rata basis\", \"specialised\".",
+   "authenticity": "Hardly any Aussie to judge; spelling is mixed, \"Specialized Experience\" then \"specialised experience\" in the same line.",
+   "register": "Left essentially untranslated: \"Properly manipulate the contents of documents\", \"Please refer to that announcement\". Far under level 3.",
+   "tone": "The original's official tone, intact.",
+   "flow": "Reads as the original, including its own slip \"prior to developed for publication\".",
+   "variety": "Almost no slang to vary.",
+   "essence": "The original, untouched."
+  },
+  "yarn-dinkum": {
+   "meaning": "Every point kept; the clumsy education clause clarified (\"2 full years of graduate study, each year at a higher level\"). Nothing invented.",
+   "sense": "Terms fit: \"learn the whole box and dice\", \"all program goals get ticked off\", \"Have a squiz\", \"on offer too\".",
+   "authenticity": "Natural and unforced: \"There's the chance to work from home (telework)\", \"look after it properly\".",
+   "register": "Level 3, a touch light: several duty lines stay formal (\"Understand and properly use the technical resources on hand\"). Keeps \"résumé\" rather than CV.",
+   "tone": "Official but approachable, as the original.",
+   "flow": "Smooth throughout.",
+   "variety": "Slang used sparingly, little repetition; \"Specialized Experience\" heading kept beside \"specialised\".",
+   "essence": "Unmistakably the job announcement."
+  },
+  "unharnessed": {
+   "meaning": "All content kept, plainly reworded; nothing added.",
+   "sense": "Fits: \"ticked off\", \"postgrad degree\", \"new hire\" left, \"work eligibility\".",
+   "authenticity": "Plain casual English more than Australian; \"You've gotta pass a background check\" and \"You've gotta meet these requirements\" lean American.",
+   "register": "Closer to level 2: casual register but little Australian vocabulary beyond \"ticked off\" and \"postgrad\".",
+   "tone": "Official-but-friendly tone kept.",
+   "flow": "Smooth throughout.",
+   "variety": "\"gotta\" twice and \"Have a look at\" twice; little slang to vary.",
+   "essence": "Unmistakably the announcement."
+  },
+  "yarn-troppo": {
+   "meaning": "All requirements kept, but additions creep in: \"legacy systems (the old clunkers that still have to keep running)\", \"No way round that one.\", \"Not the day after.\", \"so the union's in the picture\", \"Not bad, ay?\".",
+   "sense": "Mostly fit (\"toe the line on style and formatting\", \"nutting out\", \"over the line\"), but \"leading the pack\" for leading others and \"Wrangle the contents\" strain.",
+   "authenticity": "Real idiom, but some stock openers and tags: \"Righto\", \"no dramas\", \"Not bad, ay?\".",
+   "register": "Heavier than level 3: chatty asides added to nearly every section.",
+   "tone": "An official notice made jokey in places (\"Not the day after.\", \"Not bad, ay?\"), undercutting the requirements.",
+   "flow": "Readable, but the tag lines interrupt: \"You've got to pass a background check. No way round that one.\"",
+   "variety": "Varied throughout.",
+   "essence": "Recognisably the announcement, but the asides change its character toward a pitch."
+  }
+ },
+ "problems": {
+  "dinkum-3": [
+   {
+    "quote": "so they get published legally effective, on time and spot on",
+    "original": "to ensure legally effective, timely, and accurate publication of them",
+    "severity": "minor",
+    "why": "Adjective after published reads awkwardly."
+   },
+   {
+    "quote": "AFGE Council 260, so it's a union job",
+    "original": "This is a bargaining unit position, AFGE Council 260.",
+    "severity": "minor",
+    "why": "A bargaining unit position is covered by a union agreement; union job overstates it slightly."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Properly manipulate the contents of documents and of Federal Register publications",
+    "original": "Properly manipulate the contents of documents and of Federal Register publications",
+    "severity": "major",
+    "why": "Left untranslated throughout; far short of the brief."
+   },
+   {
+    "quote": "Specialized Experience: For the GS-09, you must have one year of specialised experience",
+    "original": "Specialized Experience: For the GS-09, you must have one year of specialized experience",
+    "severity": "minor",
+    "why": "Inconsistent spelling in one sentence."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "on your résumé",
+    "original": "on your resume",
+    "severity": "minor",
+    "why": "CV is the Australian term."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "You've gotta pass a background check.",
+    "original": "Must successfully complete a background investigation.",
+    "severity": "minor",
+    "why": "Gotta reads American; got to would be local."
+   },
+   {
+    "quote": "on your resume",
+    "original": "on your resume",
+    "severity": "minor",
+    "why": "CV is the Australian term."
+   }
+  ],
+  "yarn-troppo": [
+   {
+    "quote": "(the old clunkers that still have to keep running)",
+    "original": "legacy systems",
+    "severity": "minor",
+    "why": "Invented gloss that disparages the agency's systems."
+   },
+   {
+    "quote": "Not bad, ay?",
+    "original": "",
+    "severity": "minor",
+    "why": "Salesy tag that changes the notice's tone."
+   },
+   {
+    "quote": "Not the day after.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added aside; flippant about a formal deadline."
+   },
+   {
+    "quote": "leading the pack",
+    "original": "in leading others",
+    "severity": "minor",
+    "why": "Means being ahead of others, not leading a team."
+   }
+  ]
+ },
+ "summaries": {
+  "dinkum-3": "Natural, well-pitched level-3 job ad that keeps every requirement.",
+  "engine": "Essentially untranslated; only spelling and a word or two changed.",
+  "yarn-dinkum": "Faithful, clean and natural; a slightly light level 3.",
+  "unharnessed": "Faithful plain-English rewrite, under the level asked and more casual than Australian.",
+  "yarn-troppo": "Varied and lively, but heavier than asked and jokey in places, with invented asides."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "dinkum-3",
+    "engine",
+    "yarn-dinkum",
+    "unharnessed"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn-dinkum",
+    "unharnessed"
+   ],
+   [
+    "dinkum-3",
+    "engine",
+    "yarn-troppo"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-troppo"
+   ],
+   [
+    "dinkum-3",
+    "yarn-dinkum"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "dinkum-3",
+    "engine",
+    "yarn-dinkum",
+    "unharnessed"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "overall": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn-troppo"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

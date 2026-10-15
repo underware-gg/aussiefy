@@ -1,0 +1,1070 @@
+{
+ "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as vulgar, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+ "prompt": "BRIEF: level 3, vulgarity 1\n\nORIGINAL:\n\"As I have told you before,\" said Jeff Peters, \"I never had much confidence in the perfidiousness of woman. As partners or coeducators in the most innocent line of graft they are not trustworthy.\"\n\n\"They deserve the compliment,\" said I. \"I think they are entitled to be called the honest sex.\"\n\n\"Why shouldn't they be?\" said Jeff. \"They've got the other sex either grafting or working overtime for 'em. They're all right in business until they get their emotions or their hair touched up too much. Then you want to have a flat footed, heavy breathing man with sandy whiskers, five kids and a building and loan mortgage ready as an understudy to take her desk. Now there was that widow lady that me and Andy Tucker engaged to help us in that little matrimonial agency scheme we floated out in Cairo.\n\n\"When you've got enough advertising capital--say a roll as big as the little end of a wagon tongue--there's money in matrimonial agencies. We had about $6,000 and we expected to double it in two months, which is about as long as a scheme like ours can be carried on without taking out a New Jersey charter.\n\n\"We fixed up an advertisement that read about like this:\n\n\"Charming widow, beautiful, home loving, 32 years, possessing $3,000 cash and owning valuable country property, would remarry. Would prefer a poor man with affectionate disposition to one with means, as she realizes that the solid virtues are oftenest to be found in the humble walks of life. No objection to elderly man or one of homely appearance if faithful and true and competent to manage property and invest money with judgment. Address, with particulars.\n\nLonely, Care of Peters & Tucker, agents, Cairo, Ill.\n\n\"'So far, so pernicious,' says I, when we had finished the literary concoction. 'And now,' says I, 'where is the lady.'\n\n\"Andy gives me one of his looks of calm irritation.\n\n\"'Jeff,' says he, 'I thought you had lost them ideas of realism in your art. Why should there be a lady? When they sell a lot of watered stock on Wall Street would you expect to find a mermaid in it? What has a matrimonial ad got to do with a lady?'\n\n\"'Now listen,' says I. 'You know my rule, Andy, that in all my illegitimate inroads against the legal letter of the law the article sold must be existent, visible, producible. In that way and by a careful study of city ordinances and train schedules I have kept out of all trouble with the police that a five dollar bill and a cigar could not square. Now, to work this scheme we've got to be able to produce bodily a charming widow or its equivalent with or without the beauty, hereditaments and appurtenances set forth in the catalogue and writ of errors, or hereafter be held by a justice of the peace.'\n\n\"'Well,' says Andy, reconstructing his mind, 'maybe it would be safer in case the post office or the peace commission should try to investigate our agency. But where,' he says, 'could you hope to find a widow who would waste time on a matrimonial scheme that had no matrimony in it?'\n\n\"I told Andy that I thought I knew of the exact party. An old friend of mine, Zeke Trotter, who used to draw soda water and teeth in a tent show, had made his wife a widow a year before by drinking some dyspepsia cure of the old doctor's instead of the liniment that he always got boozed up on. I used to stop at their house often, and I thought we could get her to work with us.\n\n\"'Twas only sixty miles to the little town where she lived, so I jumped out on the I. C. and finds her in the same cottage with the same sunflowers and roosters standing on the washtub. Mrs. Trotter fitted our ad first rate except, maybe for beauty and age and property valuation. But she looked feasible and praiseworthy to the eye, and it was a kindness to Zeke's memory to give her the job.\n\nCANDIDATE A:\n\"Like I've told ya before,\" says Jeff Peters, \"I never had much faith in the perfidiousness of women. As partners, or co-workers in even the most harmless little lurk, you can't trust 'em as far as you can throw 'em.\"\n\n\"That's a compliment they've earned,\" says I. \"Reckon they're entitled to be called the honest sex.\"\n\n\"Course they are,\" says Jeff. \"Why wouldn't they be? They've got the rest of us blokes either on the take or staying back at the office for 'em. They're all right in business, mind, till their feelings or their hair get touched up a bit too much. Then you want a flat-footed, puffing and blowing sort of bloke with sandy whiskers, five nippers, sticky fingers and all, and a building and loan mortgage, waiting in the wings to take over her desk. Now, that puts me in mind of the widow lady me and Andy Tucker took on to help us with that little marriage agency lurk we cooked up out in Cairo.\n\n\"See, when you've got enough capital for the advertising--a roll about as fat as the skinny end of a wagon tongue, say--there's good dosh in marriage agencies. We had about $6,000 and we were banking on doubling it in two months, which is about as long as a racket like ours lasts before you'd need to go and take out a New Jersey charter.\n\n\"So we knocked up an ad that went more or less like this:\n\n\"Charming widow, beautiful, home loving, 32 years, possessing $3,000 cash and owning valuable country property, would remarry. Would prefer a poor man with affectionate disposition to one with means, as she realises that the solid virtues are oftenest to be found in the humble walks of life. No objection to elderly man or one of homely appearance if faithful and true and competent to manage property and invest money with judgment. Address, with particulars.\n\nLonely, Care of Peters & Tucker, agents, Cairo, Ill.\n\n\"'So far, so pernicious,' says I, once we'd finished cooking up our little masterpiece. 'And now,' says I, 'where's the lady?'\n\n\"And Andy gives me one of his looks. Dead calm on top, and fed up to the back teeth underneath.\n\n\"'Jeff,' he goes, 'I thought you'd chucked in all that realism caper in your art. Why's there gotta be a lady? When they flog heaps of watered stock on Wall Street, do you go looking for a mermaid in it? What's a marriage ad got to do with a lady, ay?'\n\n\"'Now you listen here,' says I. 'You know my rule, Andy. In all my shonky little raids on the letter of the law, whatever you're flogging has got to be real: you can see it, you can touch it, you can trot it out. That's how, with a good hard squiz at the council by-laws and the train timetables, I've kept clear of any strife with the cops that a five dollar note and a cigar couldn't square away. So to work this scheme we've got to be able to produce a charming widow in the flesh, or something near enough, with or without the beauty, hereditaments and appurtenances set out in the catalogue and writ of errors. Otherwise we end up held by a justice of the peace, and that's the whole box and dice gone.'\n\n\"'Well,' says Andy, and you could see the cogs turning while he put his noggin back together, 'maybe it'd be safer, in case the post office or the peace commission comes sniffing round the agency. But where,' he goes, 'are you gonna find a widow who'd waste her time on a marriage racket with no marriage in it?'\n\n\"I told Andy I reckoned I knew just the sheila. Old mate of mine, Zeke Trotter, used to pull soda water and teeth in a tent show. A year back he'd made his missus a widow by knocking back a bottle of the old doctor's indigestion cure instead of the liniment he always got sloshed on. Wrong bottle, poor bugger. I used to drop round their place a fair bit, and I thought we could get her in on it.\n\n\"It was only sixty miles to the little town where she lived, so I jumped on the I. C., and there she is, same cottage, same sunflowers, same roosters standing on the washtub. Mrs. Trotter fitted our ad first rate, give or take the beauty and the age and what the property was worth. But she looked workable and respectable enough to the eye, and giving her the job was a kindness to Zeke's memory, rest his soul.\n\nCANDIDATE B:\n\"Like I've told ya before,\" says Jeff Peters, \"I never had much faith in how sneaky women are. As partners, or as off-siders in even the most harmless bit of a swifty, you just can't trust 'em.\"\n\n\"They've earned that compliment,\" I says. \"I reckon they've got every right to be called the honest sex.\"\n\n\"Well, why wouldn't they be?\" says Jeff. \"They've got the other sex either grafting or staying back for 'em. They're all right in business till they get their feelings or their hair done up a bit too much. Then you want a flat-footed, puffing bloke with sandy whiskers, five nippers and a building society mortgage standing by to take over her desk. Now, there was that widow lady me and Andy Tucker took on to help with that little marriage agency lurk we started up out in Cairo.\n\n\"See, when you've got enough to spend on advertising--say a roll as big as the little end of a wagon tongue--there's good dosh in marriage agencies. We had about $6,000, and we were counting on doubling it in two months, which is about as long as a lurk like ours can keep going without taking out a New Jersey charter.\n\n\"So we knocked up an ad that went more or less like this:\n\n\"Charming widow, beautiful, home-loving, 32 years, with $3,000 ready money and valuable country property, would remarry. Would prefer a poor man with a loving nature to one with money, as she realises the solid virtues are most often found in the humble walks of life. Doesn't mind an older man or a plain-looking one, if he's faithful and true and can manage property and invest money sensibly. Write, with particulars.\n\nLonely, Care of Peters & Tucker, agents, Cairo, Ill.\n\n\"'So far, so pernicious,' I says, once we'd finished cooking up our bit of literature. 'And now,' I says, 'where's the lady?'\n\n\"Andy gives me one of his looks, calm but fed up.\n\n\"'Jeff,' he says, 'I thought you'd got over them ideas of realism in your art. Why does there have to be a lady? When they flog heaps of watered stock on Wall Street, would you expect to find a mermaid in it? What's a marriage ad got to do with a lady?'\n\n\"'Now listen,' I says. 'You know my rule, Andy. Whenever I'm bending the letter of the law, the goods I'm selling have to be real, out where you can see 'em, and handy to produce. That way, and by keeping a close eye on the council by-laws and the train timetables, I've stayed out of any strife with the coppers that a five dollar note and a cigar couldn't fix. So to work this lurk we've got to be able to trot out a real live charming widow, or near enough, with or without the beauty, hereditaments and appurtenances listed in the catalogue and writ of errors, or else we'll be fronting a justice of the peace.'\n\n\"'Well,' says Andy, having a bit of a rethink, 'maybe it'd be safer, in case the post office or the peace commission comes sniffing round our agency. But where,' he says, 'are you gonna find a widow who'd waste her time on a marriage lurk with no bloody marriage in it?'\n\n\"I told Andy I reckoned I knew just the one. An old mate of mine, Zeke Trotter, who used to pull soda water and teeth in a tent show, had made his missus a widow a year before by drinking a bottle of the old doctor's indigestion cure instead of the liniment he always got sloshed on. I used to pop in at their place all the time, and I thought we could get her on board.\n\n\"It was only sixty miles to the little town where she lived, so I hopped on the I. C., and there she is in the same cottage, with the same sunflowers and the same roosters standing on the washtub. Mrs. Trotter fitted our ad first-rate, except maybe for beauty, age and what the property was worth. But she looked like she'd do the job and wasn't hard on the eye, and it was a kindness to Zeke's memory to give her the work.\n\nCANDIDATE C:\n\"Like I've told you before,\" said Jeff Peters, \"I never put much stock in the perfidiousness of women. As partners or co-workers in even the most innocent sort of lurk, you can't trust 'em.\"\n\n\"They've earned the compliment,\" said I. \"I reckon they're entitled to be called the honest sex.\"\n\n\"Why wouldn't they be?\" said Jeff. \"They've got the other lot either on the take or staying back for 'em. They're all right in business till their feelings or their hair get touched up a bit too much. Then you want a flat-footed, heavy-breathing bloke with sandy whiskers, five nippers and a building and loan mortgage standing by as an understudy to take over her desk. Now, there was that widow lady me and Andy Tucker took on to help us with that little marriage agency scheme we got going out in Cairo.\n\n\"When you've got enough capital for the advertising--say a roll as fat as the little end of a wagon tongue--there's good dosh in marriage agencies. We had about $6,000 and we were counting on doubling it in two months, which is about as long as a scheme like ours can run without taking out a New Jersey charter.\n\n\"We knocked up an ad that went roughly like this:\n\n\"Charming widow, beautiful, home loving, 32 years, possessing $3,000 cash and owning valuable country property, would remarry. Would prefer a poor man with affectionate disposition to one with means, as she realises that the solid virtues are oftenest to be found in the humble walks of life. No objection to elderly man or one of homely appearance if faithful and true and competent to manage property and invest money with judgment. Address, with particulars.\n\nLonely, Care of Peters & Tucker, agents, Cairo, Ill.\n\n\"'So far, so pernicious,' says I, once we'd finished cooking up that bit of literature. 'And now,' says I, 'where's the lady?'\n\n\"Andy gives me one of his calm, fed-up looks.\n\n\"'Jeff,' says he, 'I thought you'd chucked in them ideas of realism in your art. Why should there be a lady? When they flog heaps of watered stock on Wall Street, would you expect to find a mermaid in it? What's a marriage ad got to do with a lady?'\n\n\"'Now listen,' says I. 'You know my rule, Andy: in all my shonky raids on the letter of the law, the article sold has got to exist, be seen and be produced. That way, and by a careful study of the council by-laws and the train timetables, I've stayed out of any trouble with the cops that a five dollar note and a cigar couldn't square. Now, to work this scheme we've got to be able to produce, in the flesh, a charming widow or something just as good, with or without the beauty, hereditaments and appurtenances set out in the catalogue and writ of errors, or else end up held by a justice of the peace.'\n\n\"'Well,' says Andy, having a rethink, 'maybe it'd be safer in case the post office or the peace commission comes sniffing round our agency. But where,' he says, 'are you gonna find a widow who'd waste her time on a marriage scheme with no marriage in it?'\n\n\"I told Andy I reckoned I knew just the party. An old mate of mine, Zeke Trotter, who used to pull soda water and teeth in a tent show, had made his wife a widow a year back by drinking some of the old doctor's indigestion cure instead of the liniment he always got sloshed on. I used to drop in at their place a fair bit, and I thought we could get her to work with us.\n\n\"It was only sixty miles to the little town where she lived, so I jumped on the I. C. and finds her in the same cottage with the same sunflowers and the roosters standing on the washtub. Mrs. Trotter fitted our ad first rate, except maybe for beauty and age and what the property was worth. But she looked workable and decent enough to the eye, and it was a kindness to Zeke's memory to give her the job.\n\nCANDIDATE D:\n\"As I have told you before,\" said Jeff Peters, \"I never had much confidence in the perfidiousness of woman. As partners or coeducators in the most innocent line of graft they are not trustworthy.\"\n\n\"They deserve the compliment,\" said I. \"I think they are entitled to be called the honest sex.\"\n\n\"Why shouldn't they be?\" said Jeff. \"They've got the other sex either grafting or staying back for 'em. They're all right in business until they get their emotions or their hair touched up too bloody much. Then you want to have a flat footed, heavy breathing bloke with sandy whiskers, five nippers and a building and loan mortgage ready as an understudy to take her desk. Now there was that widow lady that me and Andy Tucker engaged to help us in that little matrimonial agency scheme we floated out in Cairo.\n\n\"When you've got enough advertising capital--say a roll as bloody big as the little end of a wagon tongue--there's dosh in matrimonial agencies. Bloody hell, we had about $6,000 and we expected to double it in two months, which is about as long as a scheme like ours can be carried on without taking out a New Jersey charter.\n\n\"We fixed up an advertisement that read about like this:\n\n\"Charming widow, beautiful, home loving, 32 years, possessing $3,000 dosh and owning valuable country property, would remarry. Would prefer a poor man with affectionate disposition to one with means, as she realises that the solid virtues are oftenest to be found in the humble walks of life. No objection to elderly bloke or one of homely appearance if faithful and true and competent to manage property and invest dosh with judgment. Address, with particulars.\n\nLonely, Care of Peters & Tucker, agents, Cairo, Ill.\n\n\"'So far, so pernicious,' says I, when we had finished the literary concoction. 'And now,' says I, 'where is the lady.'\n\n\"Andy gives me one of his looks of calm irritation.\n\n\"'Jeff,' says he, 'I thought you had lost them ideas of realism in your art. Why should there be a lady? When they sell heaps of watered stock on Wall Street would you expect to find a mermaid in it? What has a matrimonial ad got to do with a lady?'\n\n\"'Now listen,' says I. 'You know my rule, Andy, that in all my illegitimate inroads against the legal letter of the law the article sold must be existent, visible, producible. In that way and by a careful study of city ordinances and train schedules I have kept out of all trouble with the police that a five dollar note and a cigar could not square. Now, to work this scheme we've got to be able to produce bodily a charming widow or its equivalent with or without the beauty, hereditaments and appurtenances set forth in the catalogue and writ of errors, or hereafter be held by a justice of the peace.'\n\n\"'Well,' says Andy, reconstructing his bloody mind, 'maybe it would be safer in case the post office or the peace commission should try to investigate our bloody agency. Bugger me, but where,' he says, 'could you hope to find a widow who would waste time on a matrimonial scheme that had no matrimony in it?'\n\n\"I told Andy that I reckoned I knew of the exact party. An old mate of mine, Zeke Trotter, who used to draw soda water and teeth in a tent show, had made his wife a widow a year before by drinking some dyspepsia cure of the old doctor's instead of the liniment that he always got boozed up on. I used to stop at their house often, and I reckoned we could get her to work with us.\n\n\"'Twas only sixty miles to the little town where she lived, so I jumped out on the I. C. and finds her in the same cottage with the same sunflowers and roosters standing on the washtub. Mrs. Trotter fitted our ad first rate except, maybe for beauty and age and property valuation. But she looked feasible and praiseworthy to the eye, and it was a kindness to Zeke's memory to give her the job.\n\nCANDIDATE E:\n\"Like I've told ya before,\" says Jeff Peters, \"I never had much faith in the perfidiousness of women. As partners or co-workers in even the most harmless bit of a lurk, you can't trust 'em.\"\n\n\"Fair enough, they've earned that one,\" I said. \"Reckon they've got every right to be called the honest sex.\"\n\n\"Well, why wouldn't they be?\" says Jeff. \"They've got the blokes either running lurks or flogging themselves on overtime for 'em. They're right as rain in business till their feelings or their hairdos get worked up too much. Then you want a flat-footed, heavy-breathin' bloke with sandy whiskers, five kids and a building society mortgage standing by as an understudy to take over her desk. Now, there was this widow we roped in, me and Andy Tucker, to give us a hand with that little marriage agency caper we got going out in Cairo.\n\n\"When you've got enough advertising money behind ya, say a roll as thick as the skinny end of a wagon tongue, there's a quid to be made in marriage agencies. We had about $6,000 and figured we'd double it in two months, which is about as long as you can keep a caper like ours running without taking out a New Jersey charter.\n\n\"We knocked up an ad that went something like this:\n\n\"Charming widow, beautiful, home loving, 32 years, possessing $3,000 cash and owning valuable country property, would remarry. Would prefer a poor man with affectionate disposition to one with means, as she realizes that the solid virtues are oftenest to be found in the humble walks of life. No objection to elderly man or one of homely appearance if faithful and true and competent to manage property and invest money with judgment. Address, with particulars.\n\nLonely, Care of Peters & Tucker, agents, Cairo, Ill.\n\n\"'So far, so pernicious,' I says, once we'd finished cooking up that bit of literature. 'And now,' I says, 'where's the sheila?'\n\n\"Andy gives me one of his calm, fed-up looks.\n\n\"'Jeff,' he says, 'I thought you'd given away them ideas of realism in your art. Why's there gotta be a sheila? When they flog a heap of watered stock on Wall Street, d'you expect to find a mermaid in it? What's a marriage ad got to do with an actual woman?'\n\n\"'Now listen here,' I says. 'You know my rule, Andy: in all my dodgy little raids on the letter of the law, whatever's being sold has gotta exist, be seen and be produced. That way, and by having a good hard squiz at the city by-laws and the train timetables, I've stayed out of any strife with the coppers that a five-dollar note and a cigar couldn't fix. Now, to pull this one off we've gotta be able to front up with a real live charming widow, or near enough, with or without the looks, hereditaments and appurtenances set out in the catalogue and writ of errors, or else end up hauled before a justice of the peace.'\n\n\"'Well,' says Andy, rejigging his thinking, 'maybe it'd be safer, in case the post office or the peace commission come sniffing round our agency. But where,' he says, 'are you gonna find a widow who'd waste her time on a marriage caper with no marrying in it?'\n\n\"I told Andy I reckoned I knew just the one. An old mate of mine, Zeke Trotter, who used to pull soda water and teeth in a travelling tent show, had gone and made his missus a widow a year back by drinking some of the old doctor's indigestion cure instead of the liniment he always got sloshed on. I used to drop in at their place a fair bit, and I reckoned we could get her on board.\n\n\"It was only sixty miles to the little town where she lived, so I hopped on the I. C. and there she was, same cottage, same sunflowers, same roosters perched on the washtub. Mrs. Trotter fitted our ad pretty bloody well, except maybe for the looks and the age and what the property was worth. But she looked workable and decent enough to the eye, and it was doing right by Zeke's memory to give her the job.",
+ "schema": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "object",
+    "properties": {
+     "A": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "B": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "C": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "D": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "E": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "A",
+     "B",
+     "C",
+     "D",
+     "E"
+    ],
+    "additionalProperties": false
+   },
+   "rankings": {
+    "type": "object",
+    "properties": {
+     "tone": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "flow": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "variety": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "essence": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "overall": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "tone",
+     "flow",
+     "variety",
+     "essence",
+     "overall"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "required": [
+   "candidates",
+   "rankings"
+  ],
+  "additionalProperties": false
+ }
+}

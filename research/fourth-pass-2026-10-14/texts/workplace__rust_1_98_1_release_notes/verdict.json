@@ -1,0 +1,251 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "yarn-troppo": "A",
+  "yarn-dinkum": "B",
+  "unharnessed": "C",
+  "engine": "D",
+  "dinkum-3": "E"
+ },
+ "scores": {
+  "yarn-troppo": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 3,
+   "register": 5,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 5,
+   "flow": 4,
+   "variety": 1,
+   "essence": 5
+  },
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn-troppo": {
+   "meaning": "All technical content survives, commands and links intact: \"generate a trait object vtable with a null pointer\", \"rustup default beta\", \"locally and in your CI\". Additions react to the text: \"Not ideal.\", \"you'd be lucky if that's all\", \"Don't be shy.\", \"and that's the honest truth\". The thanks link now reads \"Cheers, legends!\".",
+   "sense": "Terms fit: \"easy as\", \"No wukkas\", \"the guts of it\", \"par for the course\", \"keen\", \"pitched in\". \"the excuse for arbitrary effects\" is a fair take on \"justification\".",
+   "authenticity": "Natural lines (\"getting Rust 1.98.1 is easy as. Just run:\", \"No wukkas\"), but several stock openers bolted on: \"G'day, Rustaceans.\", \"For anyone who's been living under a rock\", \"Cheers, legends!\"",
+   "register": "Full level 4: friendly-mate voice all the way through. No swearing, within vulgarity 1.",
+   "tone": "The release note's friendly tone is pushed toward banter; \"For anyone who's been living under a rock\" adds a mild jab the original lacks.",
+   "flow": "Reads well; the added beats break up the technical paragraph: \"sitting right where a function pointer ought to be. Not ideal. That leads to undefined behaviour\".",
+   "variety": "Varied: \"G'day\", \"every man and his dog\", \"easy as\", \"No wukkas\", \"Righto\", \"par for the course\", \"Don't be shy\", \"legends\".",
+   "essence": "Recognisably the 1.98.1 notes, structure and links intact."
+  },
+  "yarn-dinkum": {
+   "meaning": "Faithful throughout, commands and links intact: \"under some conditions, rustc would wrongly generate a trait object vtable\", \"it can also be the excuse for arbitrary effects\".",
+   "sense": "Terms fit: \"every man and his dog\" for \"everyone\", \"par for the course\" for \"typical\", \"keen\", \"pitched in\", \"the lot of you\".",
+   "authenticity": "Natural, idiom used as locals do: \"If you're keen to give us a hand by testing future releases\".",
+   "register": "Light for level 4: much of the text is close to the original, slang limited to a handful of phrases (\"every man and his dog\", \"par for the course\", \"keen\", \"Heaps\").",
+   "tone": "The original's friendly, technical tone is intact.",
+   "flow": "Smooth: \"Heaps of people pitched in to make Rust 1.98.1.\"",
+   "variety": "Few terms but none repeated.",
+   "essence": "Unmistakably the release notes."
+  },
+  "unharnessed": {
+   "meaning": "Technical content intact. \"build software that's reliable and runs like a bloody dream\" stretches \"efficient\"; \"any old weird effects at all\" for \"arbitrary effects\" is right. \"the mongrel\" is an aside.",
+   "sense": "Terms mostly fit: \"stuff up\", \"sorts out\", \"code it spits out\", \"fair game\" (UB licenses anything), \"trip over\", \"lend us a hand\". \"runs like a bloody dream\" reads as speed rather than efficiency, a slight strain.",
+   "authenticity": "Mostly natural (\"rustc would go and stuff up a trait object vtable\", \"the lot of youse\"), but \"got an older version of Rust in through rustup\" is clumsy.",
+   "register": "Full level 4 with dad-level swearing in bounds: \"runs like a bloody dream\", \"the mongrel\". Within vulgarity 1.",
+   "tone": "Still a release note, but \"(as you'd expect with UB, the mongrel)\" and \"a bloody dream\" add a larrikin edge to a neutral announcement.",
+   "flow": "Mostly smooth; one awkward join: \"If you've already got an older version of Rust in through rustup\".",
+   "variety": "Varied: \"pushed out\", \"leg-up\", \"grabbing\", \"sorts out\", \"stuff up\", \"spits out\", \"fair game\", \"mongrel\", \"trip over\", \"youse\".",
+   "essence": "Unmistakably the release notes, retold."
+  },
+  "engine": {
+   "meaning": "The original verbatim apart from two swaps; nothing lost.",
+   "sense": "\"empowering every man and his dog\" keeps the sense of \"everyone\".",
+   "authenticity": "One stock phrase dropped into corporate prose: \"Rust is a programming language that is empowering every man and his dog\".",
+   "register": "Untranslated apart from \"every man and his dog\" and \"behaviour\": far under level 4.",
+   "tone": "The original's tone is untouched.",
+   "flow": "Reads as the original; \"empowering every man and his dog\" is a jarring mix.",
+   "variety": "One slang phrase in the whole text.",
+   "essence": "What it says is the original."
+  },
+  "dinkum-3": {
+   "meaning": "Faithful throughout, commands and links intact: \"rustc would get it wrong and generate a trait object vtable with a null pointer\", \"it can be grounds for arbitrary effects too\". \"Good news:\" is a light frame.",
+   "sense": "Terms fit: \"every man and his dog\", \"No worries\", \"par for the course\", \"keen\", \"have a go at\", \"pitched in\". \"grounds for\" renders \"justification\" well.",
+   "authenticity": "Natural, nothing forced: \"Haven't got it yet? No worries, you can get rustup from the right page on our website.\"",
+   "register": "Level 4 in voice and kept within a technical note's bounds; slang moderate (\"No worries\", \"keen\", \"Heaps\"). No swearing, within the dial. A touch light.",
+   "tone": "Friendly technical tone kept whole.",
+   "flow": "Smooth: \"Back in Rust 1.98.0, in some cases, rustc would get it wrong and generate a trait object vtable\".",
+   "variety": "Varied enough, no tic repeated.",
+   "essence": "Unmistakably the release notes."
+  }
+ },
+ "problems": {
+  "yarn-troppo": [
+   {
+    "quote": "For anyone who's been living under a rock",
+    "original": "",
+    "severity": "minor",
+    "why": "Added jab at readers; stock line."
+   },
+   {
+    "quote": "Cheers, legends!",
+    "original": "Thanks!",
+    "severity": "minor",
+    "why": "Stock sign-off, and changes the link text."
+   },
+   {
+    "quote": "G'day, Rustaceans.",
+    "original": "",
+    "severity": "minor",
+    "why": "Stock opener bolted on."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "The Rust team has put out a new point release of Rust, 1.98.1.",
+    "original": "The Rust team has published a new point release of Rust, 1.98.1.",
+    "severity": "minor",
+    "why": "Stays close to the original; light for level 4."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "got an older version of Rust in through rustup",
+    "original": "have a previous version of Rust installed via rustup",
+    "severity": "minor",
+    "why": "Clumsy phrasing."
+   },
+   {
+    "quote": "runs like a bloody dream",
+    "original": "efficient",
+    "severity": "minor",
+    "why": "Stretches \"efficient\" toward speed."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "empowering every man and his dog",
+    "original": "empowering everyone",
+    "severity": "minor",
+    "why": "Stock idiom grafted onto corporate \"empowering\"."
+   },
+   {
+    "quote": "If you have a previous version of Rust installed via rustup",
+    "original": "If you have a previous version of Rust installed via rustup",
+    "severity": "major",
+    "why": "Left untranslated throughout, far under level 4."
+   }
+  ],
+  "dinkum-3": [
+   {
+    "quote": "Good news: the Rust team's just put out",
+    "original": "The Rust team has published",
+    "severity": "minor",
+    "why": "Mild framing addition."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn-troppo": "Lively and faithful, but leans on stock Aussie openers and sign-offs.",
+  "yarn-dinkum": "Clean, natural and faithful, but lighter than the brief asks.",
+  "unharnessed": "Vivid and varied with apt swearing; one clumsy line and a slight larrikin tilt.",
+  "engine": "Effectively the original with one idiom swapped in; far under the brief.",
+  "dinkum-3": "Natural, faithful and smooth; slightly light for level 4."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn-dinkum",
+    "engine",
+    "dinkum-3"
+   ],
+   [
+    "yarn-troppo",
+    "unharnessed"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn-dinkum",
+    "dinkum-3"
+   ],
+   [
+    "yarn-troppo",
+    "unharnessed",
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-troppo",
+    "unharnessed"
+   ],
+   [
+    "yarn-dinkum",
+    "dinkum-3"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn-troppo",
+    "yarn-dinkum",
+    "unharnessed",
+    "engine",
+    "dinkum-3"
+   ]
+  ],
+  "overall": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn-troppo"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

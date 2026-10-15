@@ -1,0 +1,179 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 2,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 1,
+   "tone": 3,
+   "flow": 2,
+   "variety": 2,
+   "essence": 4
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every fact survives: the council, 50th anniversary, May 1, 1976, 20,000 Kurds, Peshmerga cooperation, Mike Cortese of District 4, signed October 6, 2026. \"while pulling their weight in Nashville's growth\" slightly shifts \"playing an important role\" toward merely doing their share.",
+   "sense": "Mostly fits: \"the first mob of Kurdish families\", \"giving them their dues\", \"gives a big rap to\", \"a proper hub\", \"working shoulder to shoulder\". \"pulling their weight\" undersells \"an important role\".",
+   "authenticity": "Natural Aussie: \"has gone and officially marked\", \"VOA got hold of\", \"the first lot of Kurdish families\". Reads like an Australian telling the news.",
+   "register": "Clearly retold in Aussie voice, but more a chatty news read than a level-5 pub yarn; no swearing, which is allowed. Somewhat lighter than asked.",
+   "tone": "Keeps the warm, honouring tone of the proclamation story; the casual voice doesn't mock it.",
+   "flow": "Reads smoothly: \"Nashville's now home to more than 20,000 Kurds, which makes it one of the biggest Kurdish communities in the United States.\"",
+   "variety": "Varied: \"mob\", \"first lot\", \"giving them their dues\", \"big rap\", \"pulling their weight\", \"proper hub\", \"gives a nod\", \"shoulder to shoulder\", \"teaming up\".",
+   "essence": "Unmistakably the VOA story about the proclamation, in its order."
+  },
+  "yarn": {
+   "meaning": "Every fact survives in order, accurately.",
+   "sense": "The few Aussie choices fit: \"councillor\", \"hang on to its language\", \"a big part\", \"long-standing ties\".",
+   "authenticity": "Reads as natural Australian news copy: \"south-eastern US state\", \"on 1 May 1976\", \"councillors\". Little slang, but nothing false.",
+   "register": "Far under level 5: an Australian newspaper rewrite rather than an Aussie yarn (\"The city has become an important hub for Kurdish cultural and community life.\").",
+   "tone": "Keeps the formal, honouring tone exactly.",
+   "flow": "Reads smoothly as news copy.",
+   "variety": "Little slang to vary; what there is doesn't repeat.",
+   "essence": "Unmistakably the original news item."
+  },
+  "engine": {
+   "meaning": "Facts survive since the text is mostly the original; \"The Big Smoke has become an important centre\" muddles which city is meant.",
+   "sense": "Wrong-sense swaps: \"The Big Smoke\" (the big city, usually Sydney or the capital, as seen from the country) used for Nashville; \"fronted up in the United States\" (fronted up means turned up to face something) for arrived as migrants.",
+   "authenticity": "Stock openers bolted onto untouched news copy: \"Well, according to\", \"Anyway, accordin' to\", \"Mind ya, the proclamation\", \"Well, the proclamation was signed\".",
+   "register": "Far under level 5: the original verbatim apart from the openers and two swaps.",
+   "tone": "The formal news tone is undercut by the chatty openers bolted onto otherwise formal sentences.",
+   "flow": "Jarring joins: \"Anyway, accordin' to the document, Nashville is now home\", \"Well, the proclamation was signed on October 6, 2026.\".",
+   "variety": "Leans on \"Well,\" (twice) and filler openers.",
+   "essence": "Recognisably the news item."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "while pulling their weight in Nashville's growth and development",
+    "original": "while playing an important role in Nashville's growth and development",
+    "severity": "minor",
+    "why": "'Pulling their weight' means doing a fair share; it undersells the 'important role' the proclamation praises."
+   },
+   {
+    "quote": "has gone and officially marked",
+    "original": "has officially recognized",
+    "severity": "minor",
+    "why": "Fine as voice, but the piece overall stays around a chatty level 3-4 rather than a full level-5 yarn."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "The city has become an important hub for Kurdish cultural and community life.",
+    "original": "The city has become an important center for Kurdish cultural and community life.",
+    "severity": "major",
+    "why": "Typical of the whole text: Australian news style but almost no vernacular, far under a level-5 brief."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "The Big Smoke has become an important centre",
+    "original": "The city has become an important center",
+    "severity": "major",
+    "why": "'The Big Smoke' is a big city seen from the bush, usually Sydney; wrong sense for Nashville here."
+   },
+   {
+    "quote": "the first group of Kurdish families fronted up in the United States",
+    "original": "the first group of Kurdish families arrived in the United States",
+    "severity": "major",
+    "why": "'Fronted up' means turned up to face something; odd for refugee families arriving."
+   },
+   {
+    "quote": "Mind ya, the proclamation also recognises",
+    "original": "The proclamation also recognizes",
+    "severity": "minor",
+    "why": "Stock opener bolted on; adds no meaning."
+   },
+   {
+    "quote": "Well, the proclamation was signed on October 6, 2026.",
+    "original": "The proclamation was signed on October 6, 2026.",
+    "severity": "minor",
+    "why": "Filler opener on a bare fact."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A natural, faithful Aussie retelling of the news item, a little under the level asked.",
+  "yarn": "Accurate, natural Australian news English, but far lighter than the level-5 brief.",
+  "engine": "The original news copy with bolted-on openers and two wrong-sense swaps; far under the brief."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,260 @@
+---
+title: 'Hello World'
+description:
+  'Change the FHE computation in the default template so that the E3 returns two times the sum, and
+  run it again.'
+---
+
+import { Callout, Steps } from 'nextra/components'
+import { Flow, LinkCard, LinkCards } from '@/components/ui'
+
+# Hello World
+
+Righto, here's the go. In this tutorial you're gonna get into the default template, fiddle with its FHE computation, and run the E3 again. It's for
+developers who've already knocked over the [Quick Start](/build/quick-start), so if that's not you, off you pop and do that first. By the time you're done, your E3 spits out 2 ×
+(a + b) instead of boring old a + b. Double the fun. And you'll know exactly which files hold the computation, its test, and its labels
+in the client, which is half the battle.
+
+## Before you begin
+
+You'll want the `my-first-e3` project from the [Quick Start](/build/quick-start), fresh as it came, no tinkering. Every one of the
+paths on this page is relative to the project folder, so park yourself in there.
+
+## How the template computes
+
+Here's the thing: the whole FHE computation is the one Rust function, `fhe_processor`, sitting in `program/src/lib.rs`. That's it. Everything else
+in the template's basically a delivery driver, ferrying ciphertexts to this function and carting its result off to the committee.
+
+<Flow
+  label='Data path of one E3'
+  steps={[
+    {
+      label: 'Encrypt',
+      icon: 'lock',
+      sub: 'The client encrypts each number to the committee key.',
+    },
+    { label: 'Publish', icon: 'contract', sub: 'MyProgram.publishInput records each ciphertext.' },
+    {
+      label: 'Compute',
+      icon: 'chip',
+      sub: 'The program server runs fhe_processor on the ciphertexts.',
+    },
+    { label: 'Decrypt', icon: 'key', sub: 'The committee decrypts only the output.' },
+  ]}
+/>
+
+1. The client locks up each number with the committee public key, encrypts it, and calls `MyProgram.publishInput`.
+2. Soon as the input window shuts, the coordination server (`server/index.ts`) reads the published
+   inputs and fires the lot off to the program server on port 13151.
+3. The program server (`.interfold/support/dev/src/main.rs`) calls `fhe_processor` and sends the
+   encrypted result straight back to the coordination server.
+4. The coordination server publishes the encrypted result, and the committee decrypts it. Only the result, mind.
+
+So here's the default computation in `program/src/lib.rs`, in all its glory. We've ditched the doc comment above `policy`
+here to keep it short:
+
+```rust filename="program/src/lib.rs"
+use e3_compute_provider::{FHEProcessorInput, InputPolicy};
+use fhe::bfv::Ciphertext;
+use fhe_traits::{DeserializeParametrized, Serialize};
+
+pub fn policy() -> InputPolicy {
+    InputPolicy::default()
+}
+
+/// Implementation of the CiphertextProcessor function
+pub fn fhe_processor(fhe_inputs: FHEProcessorInput<'_>) -> Vec<u8> {
+    let mut sum = Ciphertext::zero(fhe_inputs.params);
+    for (bytes, _) in fhe_inputs.ciphertexts {
+        let ciphertext = Ciphertext::from_bytes(&bytes, fhe_inputs.params).unwrap();
+        sum += &ciphertext;
+    }
+
+    sum.to_bytes()
+}
+```
+
+- `FHEProcessorInput` has got two fields. `ciphertexts` yields `(Vec<u8>, u64)` pairs one at a time: the
+  serialised ciphertext and its input index. `params` holds the BFV parameters of the E3.
+- `Ciphertext::zero` makes the zero ciphertext, the starting point. Then the `+=` operator piles each input
+  ciphertext on top. And here's the clever bit: this addition is homomorphic. The function adds up the hidden values without ever getting
+  a squiz at them. Like totting up a stack of sealed envelopes without opening a single one.
+- `sum.to_bytes()` serialises the encrypted result.
+- `policy()` returns the input policy. The default policy just takes every published input, no questions asked.
+
+<Callout type='info'>
+  Fair warning: the template asks for E3s with the `insecure-512` parameter set. Its plaintext modulus is 100, so
+  every result gets worked out modulo 100. For this tutorial, keep 2 × (a + b) under 100, or you'll get some very odd answers.
+</Callout>
+
+## Change the computation
+
+<Steps>
+
+### Stop the stack
+
+If you've got `pnpm dev:all` humming away, give `Ctrl+C` a whack in its terminal.
+
+### Double the encrypted sum
+
+Into `program/src/lib.rs` you go, and swap the `fhe_processor` function out for this version:
+
+```rust filename="program/src/lib.rs" {9-11}
+/// Implementation of the CiphertextProcessor function
+pub fn fhe_processor(fhe_inputs: FHEProcessorInput<'_>) -> Vec<u8> {
+    let mut sum = Ciphertext::zero(fhe_inputs.params);
+    for (bytes, _) in fhe_inputs.ciphertexts {
+        let ciphertext = Ciphertext::from_bytes(&bytes, fhe_inputs.params).unwrap();
+        sum += &ciphertext;
+    }
+
+    // Add the encrypted sum to itself. The hidden value becomes 2 × (a + b).
+    let doubled = &sum + &sum;
+    doubled.to_bytes()
+}
+```
+
+`&sum + &sum` adds the two ciphertexts and hands you back a brand new ciphertext. And you don't need a single new import for it. Easy as.
+
+### Update the unit test
+
+Down the bottom of `program/src/lib.rs` there's a test that encrypts 3 and 2 and calls `fhe_processor`. It's still expecting 5, poor thing, so bump the
+expected value from 5 to 10:
+
+```rust filename="program/src/lib.rs"
+        let tally = Vec::<u64>::try_decode(&decrypted, Encoding::poly())?;
+        assert_eq!(tally[0], 10);
+        Ok(())
+```
+
+### Run the unit test
+
+```bash
+cargo test -p e3-user-program
+```
+
+All going well, Cargo prints `test tests::test ... ok`. If the test fails, don't spit the dummy, just go back and check your `fhe_processor` against the
+code in the step before.
+
+### Update the label on the input step
+
+Now the client's still telling every man and his dog it's doing plain addition, so in `client/src/pages/steps/EnterInputs.tsx`, track down this line:
+
+```tsx filename="client/src/pages/steps/EnterInputs.tsx"
+<strong className='font-semibold'>Ready to compute:</strong> {input1} + {input2} = ?
+```
+
+Change it to:
+
+```tsx filename="client/src/pages/steps/EnterInputs.tsx"
+<strong className='font-semibold'>Ready to compute:</strong> 2 × ({input1} + {input2}) = ?
+```
+
+### Update the label on the results step
+
+Same deal over in `client/src/pages/steps/Results.tsx`. Track down this line:
+
+```tsx filename="client/src/pages/steps/Results.tsx"
+{
+  submittedInputs
+    ? `${submittedInputs.input1} + ${submittedInputs.input2} = ${result !== null ? result : '…'}`
+    : '…'
+}
+```
+
+Change it to:
+
+```tsx filename="client/src/pages/steps/Results.tsx"
+{
+  submittedInputs
+    ? `2 × (${submittedInputs.input1} + ${submittedInputs.input2}) = ${result !== null ? result : '…'}`
+    : '…'
+}
+```
+
+### Start the stack
+
+```bash
+pnpm dev:all
+```
+
+The `PROGRAM` process runs `interfold program start`. In dev mode that command runs
+`cargo run --bin e3-support-scripts-dev`, so Cargo rebuilds the program server from scratch with your shiny new
+`fhe_processor` baked in.
+
+### Run an E3
+
+Open [http://localhost:3000](http://localhost:3000). If the client's still hanging on to the result of an earlier
+E3, select **Start over** up in the top bar. Request an E3, then punch in 5 and 3.
+
+The input step shows `Ready to compute: 2 × (5 + 3) = ?`. And the results step? `2 × (5 + 3) = 16`. Sixteen, all worked out on numbers nobody could see. Not bad for a few lines of Rust.
+
+</Steps>
+
+## Why nothing else changes
+
+- **The contract.** `MyProgram.publishInput` stores a commitment for each input, and
+  `MyProgram.verify` checks the compute proof. Neither of them has the computation anywhere in it.
+- **The coordination server.** `server/index.ts` passes every published input on to the program server
+  and publishes whatever output comes back. Hasn't got a clue what the computation does, and doesn't need one.
+- **The deployment.** Every time it fires up, `pnpm dev:all` deploys the contracts again on a fresh local chain.
+
+<Callout type='info'>
+  In dev mode, the program server runs `fhe_processor` without a proof, and the template deploys
+  `MockOpenVmReceiptVerifier`, which waves every receipt through on the local chain, like a bouncer who's knocked off for the night. Once you're on real proofs, though, it's a different story:
+  `MyProgram.verify` checks the OpenVM receipt against the `imageId` that `MyProgram` gets when
+  it's deployed. Change the program and you change that identity, so compile and deploy again. Have a geek at
+  [Compute provider](/build/e3-program/compute-provider).
+</Callout>
+
+## Update the integration test
+
+There's an end-to-end test in the template too, in `tests/integration.spec.ts`. It encrypts 1 and 2 and expects
+their sum, and it'll be in for a shock now. So after your change, update the expected value:
+
+```ts filename="tests/integration.spec.ts"
+expect(BigInt(result)).toBe(2n * (num1 + num2))
+```
+
+Run the test with `pnpm test:integration`. Now here's the catch: this test needs a CLI that's built with the
+`test-only-skip-proof-aggregation` Cargo feature, and the release binaries don't come with it. So check out
+[Installation](/build/installation#install-the-cli) for a source build.
+
+## Operations on ciphertexts
+
+The template uses the `fhe` crate from `gnosisguild/fhe.rs` at tag `v0.4.2`. For a `Ciphertext`,
+here's what that crate implements, the whole toolbox:
+
+| Operation                   | Operator             | Example           |
+| --------------------------- | -------------------- | ----------------- |
+| Add two ciphertexts         | `+`, `+=`            | `&a + &b`         |
+| Subtract two ciphertexts    | `-`, `-=`            | `&a - &b`         |
+| Negate a ciphertext         | unary `-`            | `-&a`             |
+| Add or subtract a plaintext | `+`, `+=`, `-`, `-=` | `&a + &plaintext` |
+| Multiply by a plaintext     | `*`, `*=`            | `&a * &plaintext` |
+
+One thing to watch: a `Plaintext` has to use the very same parameters object as the ciphertext, that's `fhe_inputs.params`. If
+the parameters objects don't match, the operator panics, and fair enough too.
+
+And every result wraps modulo the plaintext modulus. So a negative result, say from `&a - &b` with
+`a < b`, doesn't go below zero, it wraps right round to a big value. The crate implements `*` for two ciphertexts as well, but the default
+template doesn't touch it, and that's a yarn for another page.
+
+## Next steps
+
+<LinkCards min={230}>
+  <LinkCard title='Secure process' href='/build/e3-program/secure-process' icon='chip' tag='Build'>
+    Write the FHE computation for your own E3 program.
+  </LinkCard>
+  <LinkCard
+    title='Program contract'
+    href='/build/e3-program/program-contract'
+    icon='contract'
+    tag='Build'
+  >
+    Validate inputs and verify proofs in your E3 program contract.
+  </LinkCard>
+  <LinkCard title='Project Template' href='/build/project-template' icon='layers' tag='Reference'>
+    Find the file to edit for each part of the template.
+  </LinkCard>
+</LinkCards>

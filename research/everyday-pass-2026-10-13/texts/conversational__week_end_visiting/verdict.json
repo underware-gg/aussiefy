@@ -1,0 +1,177 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn": "A",
+  "unharnessed": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 4
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 2,
+   "authenticity": 2,
+   "register": 2,
+   "tone": 4,
+   "flow": 3,
+   "variety": 2,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn": {
+   "meaning": "Every beat is kept in order: the house-party contrast, \"Liberty Hall\", eight and eight-twenty, the creak, the pictures, the books and inscription, Emerson, \"Only ten past nine!\", dressing quietly. The 1902 photo is now \"in a dinner suit\" and \"in his uni music club\", fair equivalents.",
+   "sense": "Terms fit: \"What time's brekkie?\", \"nothing you can really hang your hat on\" for nothing to take hold of, \"Pretty scruffy-looking bunch\", \"dodgy-looking barges\", \"Oh, righto then!\", \"almost on the sly\".",
+   "authenticity": "Natural Australian speech (\"Let's have a squiz at the pictures\", \"Fair enough, I s'pose.\"), though the opener \"Okay, so take getting up in the morning\" sounds more generic modern than Australian.",
+   "register": "A light touch at level 2, clean: \"brekkie\", \"squiz\", \"uni\", \"dodgy\", \"righto\", with the rest in plain modern English.",
+   "tone": "The gentle comic self-mockery survives: \"Never touch a sonnet before breakfast.\", \"Reckon they thought that'd be over your head, did they? Well, we'll show them!\"",
+   "flow": "Reads easily aloud: \"So it's back over on the cool pillow till eight-twenty. Then up on your elbow again, head cocked to one side.\"",
+   "variety": "Varied, though \"brekkie\" is used twice: \"What time's brekkie?\" and \"heading down to brekkie!\"",
+   "essence": "Clearly the same sketch, but some of the period wit is flattened: \"It's fine at the time, but come the morning it's so vague it's downright scary.\", \"Forget the bath, too noisy.\""
+  },
+  "unharnessed": {
+   "meaning": "Every point kept, closely: \"there's likely to be a frightful mix-up\", \"Maybe eleven o'clock is their Sunday getting-up time.\", \"Only ten past nine!\"",
+   "sense": "Terms fit: \"The feeling behind it is perfectly bonzer\" matches \"bully\" (excellent), \"Pretty scruffy-looking mob\", \"dodgy-looking barges\", \"Oh, righto!\", \"So they reckoned\".",
+   "authenticity": "Natural on the whole; \"perfectly bonzer\" is dated, but the period setting carries it. \"mob\" and \"go out for a wander round the grounds\" sound right.",
+   "register": "Light level-2 touch, clean: \"bonzer\", \"mob\", \"dodgy\", \"righto\", \"reckoned\", \"on the sly\".",
+   "tone": "Keeps the mock-dramatic comedy: \"come morning there's a vagueness about it that's downright terrifying\", \"It's the work of a moment to leap out of bed\", \"Deathly silence\".",
+   "flow": "Smooth throughout; only \"Scratch the bath as too noisy.\" is slightly stiff.",
+   "variety": "No term repeated; slang spread thinly and evenly: \"bonzer\", \"mob\", \"dodgy\", \"righto\", \"reckoned\", \"wander\".",
+   "essence": "Unmistakably the original: keeps its rhythm and its mock-grand phrasing, \"Any more sleep is out of the question.\", \"We'll read it just out of spite.\""
+  },
+  "engine": {
+   "meaning": "Mostly the original verbatim, but the quoted inscription is altered: \"To my beaut friends the Elbridges\", which puts slang into a quoted 1907 dedication.",
+   "sense": "\"Too right, where there is a large house-party\" uses an agreement reply in place of the connective \"Of course\"; \"To my beaut friends\" is wrong in a quoted dedication; \"At what time is brekkie?\" clashes with its formal frame.",
+   "authenticity": "Slang dropped into untouched 1920s prose: \"At what time is brekkie?\", \"Let's take a squiz\"; \"perfectly bully\" and \"if you started your tub\" left as is.",
+   "register": "Largely untranslated, lighter than level 2: \"Let us say that you awake at eight.\" and nearly every sentence as written.",
+   "tone": "The original's tone carries through, but \"Too right\" at the start jars against the stately mock-formality.",
+   "flow": "Original prose reads well, but the swaps produce clunky joins: \"Too right, where there is a large house-party the problem is a simple one\", \"At what time is brekkie?\"",
+   "variety": "Only \"Too right\", \"brekkie\", \"squiz\", \"beaut\".",
+   "essence": "It is the original text, so its shape and character are whole: \"Eliminate the tub as too noisy. And so, very cautiously, almost clandestinely, you proceed to dress.\""
+  }
+ },
+ "problems": {
+  "yarn": [
+   {
+    "quote": "Okay, so take getting up in the morning, for example.",
+    "original": "Take, for example, the matter of arising in the morning.",
+    "severity": "minor",
+    "why": "Added \"Okay, so\" is generic chat filler and jars with the period setting."
+   },
+   {
+    "quote": "it's so vague it's downright scary",
+    "original": "there is a vagueness about it that is simply terrifying",
+    "severity": "minor",
+    "why": "Loses the mock-grand phrasing that carries the humour."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "Scratch the bath as too noisy.",
+    "original": "Eliminate the tub as too noisy.",
+    "severity": "minor",
+    "why": "\"Scratch ... as\" is a slightly stiff join."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Too right, where there is a large house-party",
+    "original": "Of course, where there is a large house-party",
+    "severity": "major",
+    "why": "\"Too right\" is an emphatic agreement reply, not a connective; wrong sense."
+   },
+   {
+    "quote": "To my beaut friends the Elbridges",
+    "original": "To my good friends the Elbridges",
+    "severity": "major",
+    "why": "Alters a quoted inscription written by someone else; wrong sense and voice."
+   },
+   {
+    "quote": "At what time is brekkie?",
+    "original": "At what time is breakfast?",
+    "severity": "minor",
+    "why": "Slang dropped into a formal sentence."
+   },
+   {
+    "quote": "Let us say that you awake at eight.",
+    "original": "Let us say that you awake at eight.",
+    "severity": "major",
+    "why": "Representative: left largely untranslated against the brief."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn": "A natural, accurate light-touch retelling; slightly modernised and flatter than the original's mock-grand voice.",
+  "unharnessed": "Faithful and light, keeping the original's comic voice with well-placed Aussie touches; the strongest of the three.",
+  "engine": "The original with a few misplaced word swaps, two of them wrong-sense; too light and jarring where it does change."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "engine"
+   ],
+   [
+    "yarn"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

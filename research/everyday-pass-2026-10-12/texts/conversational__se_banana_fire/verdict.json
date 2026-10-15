@@ -1,0 +1,195 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "engine": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 3,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 2,
+   "flow": 1,
+   "variety": 2,
+   "essence": 3
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Keeps the frozen bananas, 50% power, the flame \"about the size of a lighter's\", potassium arcing, the light show, frozen veggies and soil, magnesium/iron/zinc, the USDA advice and the backdraft warning. \"in the face\" is colour hanging off the fireball.",
+   "sense": "Terms fit: \"bunged one in\", \"No dramas\", \"harmless as\", \"Have a squiz at these too\". \"other big lots of metals\" strains for \"high concentrations\".",
+   "authenticity": "Sounds like a real Aussie: \"You can't peel the buggers when they're frozen\", \"The missus chucked some bananas in the freezer\", \"cop a nasty backdraft fireball\".",
+   "register": "Solid level 4 (\"Strewth\", \"fair dinkum\", \"bonzer\", \"squiz\") with swearing kept to dad level (\"bloody hell\", \"buggers\").",
+   "tone": "The bemused question and the helpful, cautionary answer both come through; \"don't you dare open the microwave door\" keeps the warning firm.",
+   "flow": "Reads well; \"other big lots of metals like magnesium, iron and zinc can be the mineral to blame\" is clunky.",
+   "variety": "Good range: \"Strewth\", \"dopey\", \"bunged\", \"Righto\", \"muck about\", \"bonzer\", \"No dramas\", \"harmless as\", \"squiz\".",
+   "essence": "Unmistakably the Q&A: puzzled question, explanation, safety advice, links."
+  },
+  "engine": {
+   "meaning": "The answer is kept almost verbatim, but the question adds things the original doesn't say: \"my bloody wife\" casts the wife as an annoyance, and \"ya old bastard\" insults an unnamed reader.",
+   "sense": "\"You're all bloody good, it won't explode\" misuses \"you're all good\" for \"don't worry\"; \"my bloody wife\" turns a neutral mention hostile; \"ya old bastard\" has nothing to attach to.",
+   "authenticity": "Stage-Australian bolt-ons: \"Crikey\", \"ya old bastard\", \"mate?\", \"ay\", stuck onto untouched text (\"Microwaves react with metals, bouncing off and cause arcing\").",
+   "register": "Swearing stays within dad level, but the Aussie is bunched into bolted-on tags while most of the answer is untranslated, well short of level 4.",
+   "tone": "The puzzled, friendly question turns rude (\"ya old bastard\") and the wife becomes a grievance; the safety warning is undercut by \"Well, Opening the door\".",
+   "flow": "Jarring joins: \"Anyway, my bloody wife\", \"Well, Opening the door could create\", \"nonetheless, ay\", and the original's broken \"bouncing off and cause arcing\" left as is.",
+   "variety": "Leans on \"bloody\" (five times) and filler \"Well,\".",
+   "essence": "Recognisably the original Q&A, but the questioner becomes abusive."
+  },
+  "yarn": {
+   "meaning": "Every point survives, with colour that hangs off the original: \"Banana's chock-full of the stuff\", \"the fresh air rushin' in can give you a backdraft\", \"Not the way you want to cook your brekkie.\"",
+   "sense": "Terms fit their contexts: \"dopey question\", \"No dramas, it won't blow up on ya\", \"make a dog's breakfast of the inside\", \"won't cook your microwave\", \"magnesium, iron, zinc and that\".",
+   "authenticity": "Sounds like a bloke telling it: \"So I bung one in the microwave\", \"Microwaves don't get on with metals\", \"What the bloody hell's goin' on there?\"",
+   "register": "Level 4 throughout, swearing limited to \"bloody\" and \"buggers\".",
+   "tone": "Bemused question, matter-of-fact explanation, firm safety warning (\"don't open the microwave door\"), with a light joke at the end that fits.",
+   "flow": "Reads aloud naturally; the switch to narrative present (\"the skinny end of the peel ... is on fire\") works.",
+   "variety": "Varied: \"Crikey\", \"fair dinkum\", \"the missus\", \"chucked\", \"bung\", \"chock-full\", \"No dramas\", \"dog's breakfast\", \"and that\", \"brekkie\".",
+   "essence": "Unmistakably the original Q&A, retold as a yarn."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "other big lots of metals like magnesium, iron and zinc can be the mineral to blame",
+    "original": "other high concentrations of metals such as magnesium, iron, and zinc can be the responsible mineral",
+    "severity": "minor",
+    "why": "\"big lots of metals\" is an awkward rendering of high concentrations."
+   },
+   {
+    "quote": "a bonzer little light show",
+    "original": "a cool light show",
+    "severity": "minor",
+    "why": "\"bonzer\" is a bit stock-Aussie, though it fits level 4."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "my bloody wife",
+    "original": "My wife",
+    "severity": "major",
+    "why": "Turns a neutral mention of the wife into a complaint about her."
+   },
+   {
+    "quote": "ya old bastard",
+    "original": "",
+    "severity": "major",
+    "why": "Added insult to nobody in particular; an Australian would wince."
+   },
+   {
+    "quote": "You're all bloody good, it won't explode",
+    "original": "Don't worry, it won't explode",
+    "severity": "major",
+    "why": "Wrong idiom: \"you're all good\" means you're fine/no problem from you, not \"don't worry\"."
+   },
+   {
+    "quote": "Well, Opening the door",
+    "original": "Opening the door",
+    "severity": "major",
+    "why": "Filler tag bolted on, with a stray capital, mid safety warning."
+   },
+   {
+    "quote": "Microwaves react with metals, bouncing off and cause arcing.",
+    "original": "Microwaves react with metals, bouncing off and cause arcing.",
+    "severity": "major",
+    "why": "Representative of the answer left untranslated, short of level 4."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Not the way you want to cook your brekkie.",
+    "original": "",
+    "severity": "minor",
+    "why": "An added quip; fine as colour, but slightly lightens the safety close."
+   },
+   {
+    "quote": "bunging a raw, peeled banana",
+    "original": "by putting a raw peeled banana",
+    "severity": "minor",
+    "why": "\"bung\" used twice in close succession."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A natural, well-pitched level-4 retelling that keeps all the facts and the safety warning, with one clunky line.",
+  "engine": "A tag-and-swear pass over mostly untouched text; the added insults and misused idioms make it read badly.",
+  "yarn": "The most natural and complete level-4 version: faithful, varied and keeps the warning clear."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

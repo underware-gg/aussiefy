@@ -1,0 +1,692 @@
+{
+ "rubric_version": 2,
+ "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as rude, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+ "prompt": "BRIEF: level 2, vulgarity 0\n\nORIGINAL:\nA **cookie** (also known as a web cookie or browser cookie) is a small piece of data a server sends to a user's web browser. The browser may store cookies, create new cookies, modify existing ones, and send them back to the same server with later requests. Cookies enable web applications to store limited amounts of data and remember state information; by default the HTTP protocol is [stateless](/en-US/docs/Web/HTTP/Guides/Overview#http_is_stateless_but_not_sessionless).\n\nIn this article we will explore the main uses of cookies, explain best practices for using them, and look at their privacy and security implications.\n\n## What cookies are used for\n\nTypically, the server will use the contents of HTTP cookies to determine whether different requests come from the same browser/user and then issue a personalized or generic response as appropriate. The following describes a basic user sign-in system:\n\n1. The user sends sign-in credentials to the server, for example via a form submission.\n2. If the credentials are correct, the server updates the UI to indicate that the user is signed in, and responds with a cookie containing a session ID that records their sign-in status on the browser.\n3. At a later time, the user moves to a different page on the same site. The browser sends the cookie containing the session ID along with the corresponding request to indicate that it still thinks the user is signed in.\n4. The server checks the session ID and, if it is still valid, sends the user a personalized version of the new page. If it is not valid, the session ID is deleted and the user is shown a generic version of the page (or perhaps shown an \"access denied\" message and asked to sign in again).\n\n![visual representation of the above sign-in system description](/shared-assets/images/diagrams/http/cookies/cookie-basic-example.png)\n\nCookies are mainly used for three purposes:\n\n- **Session management**: User sign-in status, shopping cart contents, game scores, or any other user session-related details that the server needs to remember.\n- **Personalization**: User preferences such as display language and UI theme.\n- **Tracking**: Recording and analyzing user behavior.\n\n### Data storage\n\nIn the early days of the web when there was no other option, cookies were used for general client-side data storage purposes. Modern storage APIs are now recommended, for example the [Web Storage API](/en-US/docs/Web/API/Web_Storage_API) (`localStorage` and `sessionStorage`) and [IndexedDB](/en-US/docs/Web/API/IndexedDB_API).\n\nThey are designed with storage in mind, never send data to the server, and don't come with other drawbacks of using cookies for storage:\n\n- Browsers are generally limited to a maximum number of cookies per domain (varies by browser, generally in the hundreds), and a maximum size per cookie (usually 4KB). Storage APIs can store larger amounts of data.\n- Cookies are sent with every request, so they can worsen performance (for example on slow mobile data connections), especially if you have a lot of cookies set.\n\n> [!NOTE]\n> To see stored cookies (and other storage that a web page is using) you can use the [Storage Inspector](https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/index.html) in Firefox Developer Tools, or the [Application panel](https://developer.chrome.com/docs/devtools/progressive-web-apps) in Chrome Developer Tools.\n\n## Creating, removing, and updating cookies\n\nAfter receiving an HTTP request, a server can send one or more {{HTTPHeader(\"Set-Cookie\")}} headers with the response, each one of which will set a separate cookie. A cookie is set by specifying a name-value pair like this:\n\n```http\nSet-Cookie: <cookie-name>=<cookie-value>\n```\n\nThe following HTTP response instructs the receiving browser to store a pair of cookies:\n\n```http\nHTTP/2.0 200 OK\nContent-Type: text/html\nSet-Cookie: yummy_cookie=chocolate\nSet-Cookie: tasty_cookie=strawberry\n\n[page content]\n```\n\nCANDIDATE A:\nA **cookie** (also known as a web cookie or browser cookie) is a small bit of data a server sends to a user's web browser. The browser can store cookies, create new cookies, change existing ones, and send them back to the same server with later requests. Cookies let web applications store a limited amount of data and remember state information; by default the HTTP protocol is [stateless](/en-US/docs/Web/HTTP/Guides/Overview#http_is_stateless_but_not_sessionless).\n\nIn this article we'll run through the main uses of cookies, explain best practice for using them, and have a squiz at what they mean for privacy and security.\n\n## What cookies are used for\n\nUsually, the server uses the contents of HTTP cookies to work out whether different requests come from the same browser/user, and then sends back a personalised or generic response to suit. Here's how a basic user sign-in system works:\n\n1. The user sends sign-in credentials to the server, for example by submitting a form.\n2. If the credentials are right, the server updates the UI to show the user is signed in, and responds with a cookie containing a session ID that records their sign-in status on the browser.\n3. Later on, the user moves to a different page on the same site. The browser sends the cookie containing the session ID along with that request, to show it still thinks the user is signed in.\n4. The server checks the session ID and, if it's still valid, sends the user a personalised version of the new page. If it's not valid, the session ID is deleted and the user is shown a generic version of the page (or maybe an \"access denied\" message, and asked to sign in again).\n\n![visual representation of the above sign-in system description](/shared-assets/images/diagrams/http/cookies/cookie-basic-example.png)\n\nCookies are mainly used for three things:\n\n- **Session management**: User sign-in status, shopping cart contents, game scores, or any other session details the server needs to remember.\n- **Personalisation**: User preferences like display language and UI theme.\n- **Tracking**: Recording and analysing user behaviour.\n\n### Data storage\n\nBack in the early days of the web, when there was no other option, cookies were used for general client-side data storage. These days modern storage APIs are recommended instead, for example the [Web Storage API](/en-US/docs/Web/API/Web_Storage_API) (`localStorage` and `sessionStorage`) and [IndexedDB](/en-US/docs/Web/API/IndexedDB_API).\n\nThey're built with storage in mind, never send data to the server, and don't come with the other downsides of using cookies for storage:\n\n- Browsers are generally limited to a maximum number of cookies per domain (it varies by browser, usually in the hundreds), and a maximum size per cookie (usually 4KB). Storage APIs can store a fair bit more data.\n- Cookies are sent with every request, so they can slow things down (for example on slow mobile data connections), especially if you've got heaps of cookies set.\n\n> [!NOTE]\n> To see stored cookies (and any other storage a web page is using) you can use the [Storage Inspector](https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/index.html) in Firefox Developer Tools, or the [Application panel](https://developer.chrome.com/docs/devtools/progressive-web-apps) in Chrome Developer Tools.\n\n## Creating, removing, and updating cookies\n\nAfter getting an HTTP request, a server can send one or more {{HTTPHeader(\"Set-Cookie\")}} headers with the response, and each one sets a separate cookie. A cookie is set by giving a name-value pair like this:\n\n```http\nSet-Cookie: <cookie-name>=<cookie-value>\n```\n\nThe following HTTP response tells the receiving browser to store a pair of cookies:\n\n```http\nHTTP/2.0 200 OK\nContent-Type: text/html\nSet-Cookie: yummy_cookie=chocolate\nSet-Cookie: tasty_cookie=strawberry\n\n[page content]\n```\n\nCANDIDATE B:\nA **cookie** (also known as a web bickie or browser bickie) is a small piece of data a server sends to a user's web browser. The browser may store bikkies, create new cookies, modify existing ones, and send them back to the same server with later requests. Bickies enable web applications to store limited amounts of data and remember state information; by default the HTTP protocol is [stateless](/en-US/docs/Web/HTTP/Guides/Overview#http_is_stateless_but_not_sessionless).\n\nIn this article we will explore the main uses of cookies, explain best practices for using them, and look at their privacy and security implications.\n\n## What cookies are used for\n\nTypically, the server will use the contents of HTTP bickies to determine whether different requests come from the same browser/user and then issue a personalized or generic response as appropriate. The following describes a basic user sign-in system:\n\n1. The user sends sign-in credentials to the server, for example via a form submission.\n2. If the credentials are correct, the server updates the UI to indicate that the user is signed in, and responds with a cookie containing a session ID that records their sign-in status on the browser.\n3. At a later time, the user moves to a different page on the same site. The browser sends the cookie containing the session ID along with the corresponding request to indicate that it still thinks the user is signed in.\n4. The server checks the session ID and, if it is still valid, sends the user a personalized version of the new page. If it is not valid, the session ID is deleted and the user is shown a generic version of the page (or perhaps shown an \"access denied\" message and asked to sign in again).\n\n![visual representation of the above sign-in system description](/shared-assets/images/diagrams/http/cookies/cookie-basic-example.png)\n\nbickies are mainly used for three purposes:\n\n- **Session management**: User sign-in status, shopping cart contents, game scores, or any other user session-related details that the server needs to remember.\n- **Personalization**: User preferences such as display language and UI theme.\n- **Tracking**: Recording and analysing user behaviour.\n\n### Data storage\n\nIn the early days of the web when there was no other option, cookies were used for general client-side data storage purposes. Modern storage APIs are now recommended, for example the [Web Storage API](/en-US/docs/Web/API/Web_Storage_API) (`localStorage` and `sessionStorage`) and [IndexedDB](/en-US/docs/Web/API/IndexedDB_API).\n\nThey are designed with storage in mind, never send data to the server, and don't come with other drawbacks of using bickies for storage:\n\n- Browsers are generally limited to a maximum number of bickies per domain (varies by browser, generally in the hundreds), and a maximum size per cookie (usually 4KB). Storage APIs can store larger amounts of data.\n- Cookies are sent with every request, so they can worsen performance (for example on slow mobile data connections), especially if you have heaps of cookies set.\n\n> [!NOTE]\n> To see stored cookies (and other storage that a web page is using) you can use the [Storage Inspector](https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/index.html) in Firefox Developer Tools, or the [Application panel](https://developer.chrome.com/docs/devtools/progressive-web-apps) in Chrome Developer Tools.\n\n## Creating, removing, and updating cookies\n\nAfter receiving an HTTP request, a server can send one or more {{HTTPHeader(\"Set-Cookie\")}} headers with the response, each one of which will set a separate bikkie. A bikkie is set by specifying a name-value pair like this:\n\n```http\nSet-Cookie: <cookie-name>=<cookie-value>\n```\n\nThe following HTTP response instructs the receiving browser to store a pair of cookies:\n\n```http\nHTTP/2.0 200 OK\nContent-Type: text/html\nSet-Cookie: yummy_cookie=chocolate\nSet-Cookie: tasty_cookie=strawberry\n\n[page content]\n```\n\nCANDIDATE C:\nA **cookie** (also called a web cookie or browser cookie) is a small bit of data a server sends to a user's web browser. The browser might store cookies, create new ones, change existing ones, and send them back to the same server with later requests. Cookies let web applications store small amounts of data and remember state information; out of the box, the HTTP protocol is [stateless](/en-US/docs/Web/HTTP/Guides/Overview#http_is_stateless_but_not_sessionless).\n\nIn this article we'll have a look at the main uses of cookies, run through best practice for using them, and look at what they mean for privacy and security.\n\n## What cookies are used for\n\nUsually, the server will use the contents of HTTP cookies to work out whether different requests are coming from the same browser/user, and then send back a personalised or generic response to suit. Here's how a basic user sign-in system works:\n\n1. The user sends their sign-in credentials to the server, for example by submitting a form.\n2. If the credentials are right, the server updates the UI to show that the user is signed in, and responds with a cookie containing a session ID that records their sign-in status on the browser.\n3. Later on, the user heads to a different page on the same site. The browser sends the cookie containing the session ID along with the matching request, to show that it still reckons the user is signed in.\n4. The server checks the session ID and, if it's still valid, sends the user a personalised version of the new page. If it's not valid, the session ID gets deleted and the user is shown a generic version of the page (or maybe shown an \"access denied\" message and asked to sign in again).\n\n![visual representation of the above sign-in system description](/shared-assets/images/diagrams/http/cookies/cookie-basic-example.png)\n\nCookies are mainly used for three things:\n\n- **Session management**: User sign-in status, shopping trolley contents, game scores, or any other details about the user's session that the server needs to remember.\n- **Personalisation**: User preferences like display language and UI theme.\n- **Tracking**: Recording and analysing what users get up to.\n\n### Data storage\n\nBack in the early days of the web, when there wasn't any other option, cookies were used for general client-side data storage. These days modern storage APIs are recommended instead, for example the [Web Storage API](/en-US/docs/Web/API/Web_Storage_API) (`localStorage` and `sessionStorage`) and [IndexedDB](/en-US/docs/Web/API/IndexedDB_API).\n\nThey're built with storage in mind, never send data to the server, and don't come with the other downsides of using cookies for storage:\n\n- Browsers are generally capped at a maximum number of cookies per domain (it varies by browser, but it's usually in the hundreds), and a maximum size per cookie (usually 4KB). Storage APIs can hold a lot more data.\n- Cookies get sent with every request, so they can drag down performance (for example on slow mobile data connections), especially if you've got a lot of cookies set.\n\n> [!NOTE]\n> To see stored cookies (and any other storage a web page is using) you can use the [Storage Inspector](https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/index.html) in Firefox Developer Tools, or the [Application panel](https://developer.chrome.com/docs/devtools/progressive-web-apps) in Chrome Developer Tools.\n\n## Creating, removing, and updating cookies\n\nAfter getting an HTTP request, a server can send one or more {{HTTPHeader(\"Set-Cookie\")}} headers with the response, and each one sets a separate cookie. A cookie is set by giving a name-value pair like this:\n\n```http\nSet-Cookie: <cookie-name>=<cookie-value>\n```\n\nThe following HTTP response tells the receiving browser to store a pair of cookies:\n\n```http\nHTTP/2.0 200 OK\nContent-Type: text/html\nSet-Cookie: yummy_cookie=chocolate\nSet-Cookie: tasty_cookie=strawberry\n\n[page content]\n```",
+ "schema": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "object",
+    "properties": {
+     "A": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "B": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "C": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "A",
+     "B",
+     "C"
+    ],
+    "additionalProperties": false
+   },
+   "rankings": {
+    "type": "object",
+    "properties": {
+     "tone": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "flow": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "variety": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "essence": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     },
+     "overall": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "tone",
+     "flow",
+     "variety",
+     "essence",
+     "overall"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "required": [
+   "candidates",
+   "rankings"
+  ],
+  "additionalProperties": false
+ },
+ "original": "A **cookie** (also known as a web cookie or browser cookie) is a small piece of data a server sends to a user's web browser. The browser may store cookies, create new cookies, modify existing ones, and send them back to the same server with later requests. Cookies enable web applications to store limited amounts of data and remember state information; by default the HTTP protocol is [stateless](/en-US/docs/Web/HTTP/Guides/Overview#http_is_stateless_but_not_sessionless).\n\nIn this article we will explore the main uses of cookies, explain best practices for using them, and look at their privacy and security implications.\n\n## What cookies are used for\n\nTypically, the server will use the contents of HTTP cookies to determine whether different requests come from the same browser/user and then issue a personalized or generic response as appropriate. The following describes a basic user sign-in system:\n\n1. The user sends sign-in credentials to the server, for example via a form submission.\n2. If the credentials are correct, the server updates the UI to indicate that the user is signed in, and responds with a cookie containing a session ID that records their sign-in status on the browser.\n3. At a later time, the user moves to a different page on the same site. The browser sends the cookie containing the session ID along with the corresponding request to indicate that it still thinks the user is signed in.\n4. The server checks the session ID and, if it is still valid, sends the user a personalized version of the new page. If it is not valid, the session ID is deleted and the user is shown a generic version of the page (or perhaps shown an \"access denied\" message and asked to sign in again).\n\n![visual representation of the above sign-in system description](/shared-assets/images/diagrams/http/cookies/cookie-basic-example.png)\n\nCookies are mainly used for three purposes:\n\n- **Session management**: User sign-in status, shopping cart contents, game scores, or any other user session-related details that the server needs to remember.\n- **Personalization**: User preferences such as display language and UI theme.\n- **Tracking**: Recording and analyzing user behavior.\n\n### Data storage\n\nIn the early days of the web when there was no other option, cookies were used for general client-side data storage purposes. Modern storage APIs are now recommended, for example the [Web Storage API](/en-US/docs/Web/API/Web_Storage_API) (`localStorage` and `sessionStorage`) and [IndexedDB](/en-US/docs/Web/API/IndexedDB_API).\n\nThey are designed with storage in mind, never send data to the server, and don't come with other drawbacks of using cookies for storage:\n\n- Browsers are generally limited to a maximum number of cookies per domain (varies by browser, generally in the hundreds), and a maximum size per cookie (usually 4KB). Storage APIs can store larger amounts of data.\n- Cookies are sent with every request, so they can worsen performance (for example on slow mobile data connections), especially if you have a lot of cookies set.\n\n> [!NOTE]\n> To see stored cookies (and other storage that a web page is using) you can use the [Storage Inspector](https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/index.html) in Firefox Developer Tools, or the [Application panel](https://developer.chrome.com/docs/devtools/progressive-web-apps) in Chrome Developer Tools.\n\n## Creating, removing, and updating cookies\n\nAfter receiving an HTTP request, a server can send one or more {{HTTPHeader(\"Set-Cookie\")}} headers with the response, each one of which will set a separate cookie. A cookie is set by specifying a name-value pair like this:\n\n```http\nSet-Cookie: <cookie-name>=<cookie-value>\n```\n\nThe following HTTP response instructs the receiving browser to store a pair of cookies:\n\n```http\nHTTP/2.0 200 OK\nContent-Type: text/html\nSet-Cookie: yummy_cookie=chocolate\nSet-Cookie: tasty_cookie=strawberry\n\n[page content]\n```\n",
+ "level": 2,
+ "vulgarity": 0,
+ "candidates": {
+  "A": "A **cookie** (also known as a web cookie or browser cookie) is a small bit of data a server sends to a user's web browser. The browser can store cookies, create new cookies, change existing ones, and send them back to the same server with later requests. Cookies let web applications store a limited amount of data and remember state information; by default the HTTP protocol is [stateless](/en-US/docs/Web/HTTP/Guides/Overview#http_is_stateless_but_not_sessionless).\n\nIn this article we'll run through the main uses of cookies, explain best practice for using them, and have a squiz at what they mean for privacy and security.\n\n## What cookies are used for\n\nUsually, the server uses the contents of HTTP cookies to work out whether different requests come from the same browser/user, and then sends back a personalised or generic response to suit. Here's how a basic user sign-in system works:\n\n1. The user sends sign-in credentials to the server, for example by submitting a form.\n2. If the credentials are right, the server updates the UI to show the user is signed in, and responds with a cookie containing a session ID that records their sign-in status on the browser.\n3. Later on, the user moves to a different page on the same site. The browser sends the cookie containing the session ID along with that request, to show it still thinks the user is signed in.\n4. The server checks the session ID and, if it's still valid, sends the user a personalised version of the new page. If it's not valid, the session ID is deleted and the user is shown a generic version of the page (or maybe an \"access denied\" message, and asked to sign in again).\n\n![visual representation of the above sign-in system description](/shared-assets/images/diagrams/http/cookies/cookie-basic-example.png)\n\nCookies are mainly used for three things:\n\n- **Session management**: User sign-in status, shopping cart contents, game scores, or any other session details the server needs to remember.\n- **Personalisation**: User preferences like display language and UI theme.\n- **Tracking**: Recording and analysing user behaviour.\n\n### Data storage\n\nBack in the early days of the web, when there was no other option, cookies were used for general client-side data storage. These days modern storage APIs are recommended instead, for example the [Web Storage API](/en-US/docs/Web/API/Web_Storage_API) (`localStorage` and `sessionStorage`) and [IndexedDB](/en-US/docs/Web/API/IndexedDB_API).\n\nThey're built with storage in mind, never send data to the server, and don't come with the other downsides of using cookies for storage:\n\n- Browsers are generally limited to a maximum number of cookies per domain (it varies by browser, usually in the hundreds), and a maximum size per cookie (usually 4KB). Storage APIs can store a fair bit more data.\n- Cookies are sent with every request, so they can slow things down (for example on slow mobile data connections), especially if you've got heaps of cookies set.\n\n> [!NOTE]\n> To see stored cookies (and any other storage a web page is using) you can use the [Storage Inspector](https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/index.html) in Firefox Developer Tools, or the [Application panel](https://developer.chrome.com/docs/devtools/progressive-web-apps) in Chrome Developer Tools.\n\n## Creating, removing, and updating cookies\n\nAfter getting an HTTP request, a server can send one or more {{HTTPHeader(\"Set-Cookie\")}} headers with the response, and each one sets a separate cookie. A cookie is set by giving a name-value pair like this:\n\n```http\nSet-Cookie: <cookie-name>=<cookie-value>\n```\n\nThe following HTTP response tells the receiving browser to store a pair of cookies:\n\n```http\nHTTP/2.0 200 OK\nContent-Type: text/html\nSet-Cookie: yummy_cookie=chocolate\nSet-Cookie: tasty_cookie=strawberry\n\n[page content]\n```\n",
+  "B": "A **cookie** (also known as a web bickie or browser bickie) is a small piece of data a server sends to a user's web browser. The browser may store bikkies, create new cookies, modify existing ones, and send them back to the same server with later requests. Bickies enable web applications to store limited amounts of data and remember state information; by default the HTTP protocol is [stateless](/en-US/docs/Web/HTTP/Guides/Overview#http_is_stateless_but_not_sessionless).\n\nIn this article we will explore the main uses of cookies, explain best practices for using them, and look at their privacy and security implications.\n\n## What cookies are used for\n\nTypically, the server will use the contents of HTTP bickies to determine whether different requests come from the same browser/user and then issue a personalized or generic response as appropriate. The following describes a basic user sign-in system:\n\n1. The user sends sign-in credentials to the server, for example via a form submission.\n2. If the credentials are correct, the server updates the UI to indicate that the user is signed in, and responds with a cookie containing a session ID that records their sign-in status on the browser.\n3. At a later time, the user moves to a different page on the same site. The browser sends the cookie containing the session ID along with the corresponding request to indicate that it still thinks the user is signed in.\n4. The server checks the session ID and, if it is still valid, sends the user a personalized version of the new page. If it is not valid, the session ID is deleted and the user is shown a generic version of the page (or perhaps shown an \"access denied\" message and asked to sign in again).\n\n![visual representation of the above sign-in system description](/shared-assets/images/diagrams/http/cookies/cookie-basic-example.png)\n\nbickies are mainly used for three purposes:\n\n- **Session management**: User sign-in status, shopping cart contents, game scores, or any other user session-related details that the server needs to remember.\n- **Personalization**: User preferences such as display language and UI theme.\n- **Tracking**: Recording and analysing user behaviour.\n\n### Data storage\n\nIn the early days of the web when there was no other option, cookies were used for general client-side data storage purposes. Modern storage APIs are now recommended, for example the [Web Storage API](/en-US/docs/Web/API/Web_Storage_API) (`localStorage` and `sessionStorage`) and [IndexedDB](/en-US/docs/Web/API/IndexedDB_API).\n\nThey are designed with storage in mind, never send data to the server, and don't come with other drawbacks of using bickies for storage:\n\n- Browsers are generally limited to a maximum number of bickies per domain (varies by browser, generally in the hundreds), and a maximum size per cookie (usually 4KB). Storage APIs can store larger amounts of data.\n- Cookies are sent with every request, so they can worsen performance (for example on slow mobile data connections), especially if you have heaps of cookies set.\n\n> [!NOTE]\n> To see stored cookies (and other storage that a web page is using) you can use the [Storage Inspector](https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/index.html) in Firefox Developer Tools, or the [Application panel](https://developer.chrome.com/docs/devtools/progressive-web-apps) in Chrome Developer Tools.\n\n## Creating, removing, and updating cookies\n\nAfter receiving an HTTP request, a server can send one or more {{HTTPHeader(\"Set-Cookie\")}} headers with the response, each one of which will set a separate bikkie. A bikkie is set by specifying a name-value pair like this:\n\n```http\nSet-Cookie: <cookie-name>=<cookie-value>\n```\n\nThe following HTTP response instructs the receiving browser to store a pair of cookies:\n\n```http\nHTTP/2.0 200 OK\nContent-Type: text/html\nSet-Cookie: yummy_cookie=chocolate\nSet-Cookie: tasty_cookie=strawberry\n\n[page content]\n```\n",
+  "C": "A **cookie** (also called a web cookie or browser cookie) is a small bit of data a server sends to a user's web browser. The browser might store cookies, create new ones, change existing ones, and send them back to the same server with later requests. Cookies let web applications store small amounts of data and remember state information; out of the box, the HTTP protocol is [stateless](/en-US/docs/Web/HTTP/Guides/Overview#http_is_stateless_but_not_sessionless).\n\nIn this article we'll have a look at the main uses of cookies, run through best practice for using them, and look at what they mean for privacy and security.\n\n## What cookies are used for\n\nUsually, the server will use the contents of HTTP cookies to work out whether different requests are coming from the same browser/user, and then send back a personalised or generic response to suit. Here's how a basic user sign-in system works:\n\n1. The user sends their sign-in credentials to the server, for example by submitting a form.\n2. If the credentials are right, the server updates the UI to show that the user is signed in, and responds with a cookie containing a session ID that records their sign-in status on the browser.\n3. Later on, the user heads to a different page on the same site. The browser sends the cookie containing the session ID along with the matching request, to show that it still reckons the user is signed in.\n4. The server checks the session ID and, if it's still valid, sends the user a personalised version of the new page. If it's not valid, the session ID gets deleted and the user is shown a generic version of the page (or maybe shown an \"access denied\" message and asked to sign in again).\n\n![visual representation of the above sign-in system description](/shared-assets/images/diagrams/http/cookies/cookie-basic-example.png)\n\nCookies are mainly used for three things:\n\n- **Session management**: User sign-in status, shopping trolley contents, game scores, or any other details about the user's session that the server needs to remember.\n- **Personalisation**: User preferences like display language and UI theme.\n- **Tracking**: Recording and analysing what users get up to.\n\n### Data storage\n\nBack in the early days of the web, when there wasn't any other option, cookies were used for general client-side data storage. These days modern storage APIs are recommended instead, for example the [Web Storage API](/en-US/docs/Web/API/Web_Storage_API) (`localStorage` and `sessionStorage`) and [IndexedDB](/en-US/docs/Web/API/IndexedDB_API).\n\nThey're built with storage in mind, never send data to the server, and don't come with the other downsides of using cookies for storage:\n\n- Browsers are generally capped at a maximum number of cookies per domain (it varies by browser, but it's usually in the hundreds), and a maximum size per cookie (usually 4KB). Storage APIs can hold a lot more data.\n- Cookies get sent with every request, so they can drag down performance (for example on slow mobile data connections), especially if you've got a lot of cookies set.\n\n> [!NOTE]\n> To see stored cookies (and any other storage a web page is using) you can use the [Storage Inspector](https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/index.html) in Firefox Developer Tools, or the [Application panel](https://developer.chrome.com/docs/devtools/progressive-web-apps) in Chrome Developer Tools.\n\n## Creating, removing, and updating cookies\n\nAfter getting an HTTP request, a server can send one or more {{HTTPHeader(\"Set-Cookie\")}} headers with the response, and each one sets a separate cookie. A cookie is set by giving a name-value pair like this:\n\n```http\nSet-Cookie: <cookie-name>=<cookie-value>\n```\n\nThe following HTTP response tells the receiving browser to store a pair of cookies:\n\n```http\nHTTP/2.0 200 OK\nContent-Type: text/html\nSet-Cookie: yummy_cookie=chocolate\nSet-Cookie: tasty_cookie=strawberry\n\n[page content]\n```\n"
+ },
+ "key": {
+  "A": "yarn",
+  "B": "engine",
+  "C": "unharnessed"
+ }
+}

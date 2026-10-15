@@ -1,0 +1,217 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "unharnessed": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 1,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 1,
+   "flow": 1,
+   "variety": 2,
+   "essence": 2
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 4,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "Facts are corrupted. \"national bush\" replaces \"national forest\", and \"federally designated bush\" replaces \"wilderness\", which changes the question. \"The United mobs\" replaces the United Nations, and \"Parliament House\" replaces Congress. \"Buggered if I know\" undercuts the answer that follows it.",
+   "sense": "Many swaps take the wrong sense: \"national bush\", \"United mobs\", \"750 battlers\" for \"750 people\", and \"ya flamin' mongrel\" aimed at the reader.",
+   "authenticity": "Stage-Australian tags are bolted on: \"Fair dinkum, all are open\", \"Bugger me, do I need a reservation\", \"How did Mt. Washburn form, mate?\", \"Now, Approximately 392\". US forms remain (\"fall\", \"reservations\").",
+   "register": "Lurches between untouched FAQ prose and abuse. \"ya flamin' mongrel\" insults the reader, which is out of keeping for a visitor FAQ even if it is within dad-level words. Mostly it sits well under level 4.",
+   "tone": "The helpful official tone is inverted by abuse and flippancy: \"before you lob, ya flamin' mongrel\" and \"Buggered if I know.\"",
+   "flow": "Jarring joins: \"Now, Approximately 392\", \"Well, Learn more about working with us\", \"Six national bush surround\".",
+   "variety": "A few fillers recur: \"Now,\" four times and \"Anyway,\" several times.",
+   "essence": "The FAQ shape survives, but the facts and the welcoming character do not."
+  },
+  "unharnessed": {
+   "meaning": "Every fact survives in order, with accurate figures. \"cold enough to freeze the bits off a brass monkey\" is colour hung off \"dangerously cold\". \"have a ripper of a visit\" is colour too.",
+   "sense": "Terms fit: \"rock up\", \"flat out\", \"roadworks\", \"track maintenance\", \"kick off their careers\", \"pulls the biggest crowds\".",
+   "authenticity": "Natural Australian voice: \"Get your booking in early, mate!\", \"wherever people have pulled over to gawk at the wildlife\", \"Congress still hasn't got round to doing anything about it\".",
+   "register": "A clear Aussie voice that is still informative. Closer to level 3 than 4 in the denser factual answers (\"National parks are run by the Department of the Interior\"). Swearing is a mild \"bloody\".",
+   "tone": "Stays friendly and helpful, and the cold-water warning stays a warning.",
+   "flow": "Reads easily: \"The volcano got literally sliced in half by an eruption 631,000 years ago.\"",
+   "variety": "Good spread (rock up, flat out, gawk, ripper, kick off, brass monkey, got round to), though \"biggest\" repeats across one answer.",
+   "essence": "Unmistakably the NPS FAQ, retold."
+  },
+  "yarn": {
+   "meaning": "All the facts survive. Most additions are colour (\"or you'll be sleepin' in the car!\", \"So Yellowstone got bumped\", \"The whole box and dice, really.\"). A few nudge into new detail: \"gawk at a bison\", \"Fifty-odd years and countin'\", and \"find out more about working with them\", which changes who is speaking.",
+   "sense": "Mostly apt: \"flat chat\", \"lob\", \"punters rocking up\", \"takes the cake\", \"all over the shop\". \"Congress, their version of Parliament House\" mislabels it, since Parliament House is a building and the counterpart of Congress is Parliament.",
+   "authenticity": "Sounds like a local: \"come winter only two of 'em keep the lights on\", \"quicker than a cat in a bath\", \"the whole box and dice\".",
+   "register": "A level-4 retelling, chatty and full of idiom, with swearing a mild \"bloody\".",
+   "tone": "Friendly and helpful, but a touch jokey in places: \"No bloody way, not yet... Fifty-odd years and countin'.\" The swim warning keeps \"properly dangerous\".",
+   "flow": "Smooth and conversational: \"the ridge doesn't run straight, it wanders all over the shop.\"",
+   "variety": "Varied idiom, with nothing leaned on: lob, flat chat, gawk, punters, takes the cake, box and dice, all over the shop, cat in a bath.",
+   "essence": "Clearly the NPS FAQ, with its Q-and-A shape and facts intact, told with character."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "before you lob, ya flamin' mongrel",
+    "original": "before you arrive",
+    "severity": "critical",
+    "why": "It insults the reader of a visitor FAQ, inverting the tone."
+   },
+   {
+    "quote": "Does Yellowstone include a federally designated bush?",
+    "original": "Does Yellowstone include a federally designated wilderness?",
+    "severity": "critical",
+    "why": "\"Wilderness\" is a legal designation. \"Bush\" makes the question meaningless."
+   },
+   {
+    "quote": "The United mobs designated",
+    "original": "The United Nations designated",
+    "severity": "critical",
+    "why": "It mangles the proper noun."
+   },
+   {
+    "quote": "but Parliament House hasn't acted",
+    "original": "but Congress has not acted",
+    "severity": "major",
+    "why": "It wrongly transplants the US Congress into an Australian building."
+   },
+   {
+    "quote": "How did Yellowstone get its name? Buggered if I know.",
+    "original": "How did Yellowstone get its name?",
+    "severity": "major",
+    "why": "The FAQ disclaims knowledge and then answers."
+   },
+   {
+    "quote": "Approximately 750 battlers work",
+    "original": "Approximately 750 people work",
+    "severity": "major",
+    "why": "\"Battlers\" means people doing it tough, not staff."
+   },
+   {
+    "quote": "Now, Approximately 392",
+    "original": "Approximately 392 are permanent",
+    "severity": "minor",
+    "why": "A broken join, and \"Now,\" is used as a recurring filler."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "which is the biggest unit of the lot (13 million acres)",
+    "original": "which is the largest unit (13 million acres)",
+    "severity": "minor",
+    "why": "\"Biggest\" is used four times in one answer."
+   },
+   {
+    "quote": "National parks are run by the Department of the Interior",
+    "original": "National parks are administered by the Department of the Interior",
+    "severity": "minor",
+    "why": "Long stretches are only lightly touched for a level-4 brief."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Congress, their version of Parliament House",
+    "original": "Congress",
+    "severity": "minor",
+    "why": "Parliament House is a building. The counterpart of Congress is Parliament."
+   },
+   {
+    "quote": "You can find out more about working with them.",
+    "original": "Learn more about working with us.",
+    "severity": "minor",
+    "why": "It changes the NPS's first-person voice."
+   },
+   {
+    "quote": "Fifty-odd years and countin'.",
+    "original": "",
+    "severity": "minor",
+    "why": "An added editorial jab that goes slightly beyond the original's neutral statement."
+   },
+   {
+    "quote": "gawk at a bison",
+    "original": "at roadside wildlife sightings",
+    "severity": "minor",
+    "why": "Narrows \"wildlife\" to bison."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "A broken mechanical pass: corrupted facts and proper nouns, and abuse aimed at the reader.",
+  "unharnessed": "An accurate, natural and friendly retelling, a shade lighter than level 4.",
+  "yarn": "A lively, natural level-4 retelling with good variety. A few additions edge into editorial."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

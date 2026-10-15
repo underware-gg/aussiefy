@@ -1,0 +1,191 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 3,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 2,
+   "sense": 1,
+   "authenticity": 1,
+   "register": 1,
+   "tone": 2,
+   "flow": 3,
+   "variety": 1,
+   "essence": 3
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every duty, condition and qualification kept accurately, including the Selective Service line, PIV, the 18-semester-hour note and the AFGE unit: \"Only postgrad study beyond the first year (18 semester hours) counts for the GS-9.\"",
+   "sense": "Fits: \"part-time work gets counted pro rata\", \"all the program goals get ticked off\", \"the chance to work from home\" for telework.",
+   "authenticity": "Natural plain Australian English (\"postgrad\", \"Have a look at\"), though \"You've gotta\" is a little forced in a job ad and \"Specialized Experience\" keeps US spelling beside \"specialised\".",
+   "register": "More plain-English rewrite than level-3 Aussie: little idiom beyond \"ticked off\" and \"gotta\" (\"Understand and properly use the technical resources available for, and tied to\").",
+   "tone": "Still a clear, official job ad, made friendlier.",
+   "flow": "Reads easily: \"If you get picked at a lower grade level, you'll get the chance to learn how to do all of these duties\".",
+   "variety": "Little slang to vary; \"gotta\" twice, \"Have a look\" twice.",
+   "essence": "Plainly the NARA vacancy, structure intact."
+  },
+  "yarn": {
+   "meaning": "All requirements kept accurately; additions are colour (\"no worries\", \"Your experience can come from any paddock\").",
+   "sense": "Exact: \"learn the whole box and dice\", \"running the show\" for leading others, \"new starter\", \"right to work\", \"tick these boxes\", \"on your CV\".",
+   "authenticity": "Sounds like an Australian HR officer talking: \"Get your head around what the customers need\", \"Know your way around the technical gear\".",
+   "register": "Level 3: idiom throughout without losing the ad's function; no swearing.",
+   "tone": "Still an official vacancy notice, warmer in voice.",
+   "flow": "Reads smoothly: \"Keep the work on track, whether you're going it alone, pulling your weight in a team or running the show\".",
+   "variety": "Varied: \"box and dice\", \"paddock\", \"squiz\", \"kit\", \"tick these boxes\".",
+   "essence": "Unmistakably the same job ad."
+  },
+  "engine": {
+   "meaning": "\"Must be U.S. Battlers or U.S. Nationals\" turns the citizenship requirement into nonsense; the rest is the original verbatim.",
+   "sense": "\"Battlers\" for Citizens, \"the paddock(s) covered by the position\" for field(s): wrong senses.",
+   "authenticity": "Bolt-ons on untouched text: \"Bugger me, go through a Personal Identity Verification\", \"Bloody hell, specialised experience\".",
+   "register": "Essentially untranslated (\"The following are the duties of this position at the GS-12\"); far under level 3.",
+   "tone": "An official ad with random oaths, which jar badly.",
+   "flow": "Readable because it is the original, but the inserted oaths break sentences.",
+   "variety": "Two oaths and two swaps; nothing to vary.",
+   "essence": "Recognisably the ad, but with its key eligibility line garbled."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "You've gotta pass a background check.",
+    "original": "Must successfully complete a background investigation.",
+    "severity": "minor",
+    "why": "\"gotta\" is a stock casualism, a touch off in an ad."
+   },
+   {
+    "quote": "Specialized Experience: For the GS-09, you need one year of specialised experience",
+    "original": "Specialized Experience: For the GS-09, you must have one year of specialized experience",
+    "severity": "minor",
+    "why": "Mixed US and Aussie spelling."
+   },
+   {
+    "quote": "Understand and properly use the technical resources available for, and tied to",
+    "original": "Understand and properly use the technical resources available for, and associated with",
+    "severity": "minor",
+    "why": "Close paraphrase; light for level 3."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "the old legacy systems",
+    "original": "legacy systems",
+    "severity": "minor",
+    "why": "\"old legacy\" is redundant."
+   },
+   {
+    "quote": "Your experience can come from any paddock",
+    "original": "The experience may have been gained in either the public, private sector or volunteer service",
+    "severity": "minor",
+    "why": "\"paddock\" is a slightly forced image here."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "Must be U.S. Battlers or U.S. Nationals.",
+    "original": "Must be U.S. Citizens or U.S. Nationals.",
+    "severity": "critical",
+    "why": "Garbles the citizenship requirement."
+   },
+   {
+    "quote": "in the paddock(s) covered by the position",
+    "original": "in the field(s) covered by the position",
+    "severity": "major",
+    "why": "\"paddock\" for field of study is the wrong sense."
+   },
+   {
+    "quote": "Bugger me, go through a Personal Identity Verification",
+    "original": "Go through a Personal Identity Verification",
+    "severity": "major",
+    "why": "Oath bolted onto an official requirement."
+   },
+   {
+    "quote": "The following are the duties of this position at the GS-12.",
+    "original": "The following are the duties of this position at the GS-12.",
+    "severity": "major",
+    "why": "Left untranslated."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "Accurate and readable plain-English version, lighter on Aussie than the brief asks.",
+  "yarn": "A natural, accurate and fully level-3 retelling of the ad.",
+  "engine": "The original ad with a few wrong word swaps and oaths, one of them garbling eligibility."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

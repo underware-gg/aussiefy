@@ -1,0 +1,37 @@
+# Hand review of the triggers the verifiers proposed, applied by `aussiefy dev round` after the guards.
+remove:                       # would fire in the wrong sense
+  LIE: {vp: [lie]}                                  # "lie down"
+  ATTRACTIVE: {predicate_adj: [hot, pretty]}        # temperature; "pretty good"
+  MOMENT: {np: [a second, a minute]}                # "a second chance", "a minute later"
+  JUST_JOKING: {interjection: [not really]}         # "I'm not really sure"
+  UNCOUTH: {predicate_adj: [wild, out of control]}  # too broad for "rough as bags"
+  DANGEROUS: {predicate_adj: [scary]}               # scary isn't dangerous
+  SUSPICIOUS: {predicate_adj: [shady, fishy]}       # DODGY's triggers already
+  GOSSIP: {np: [gossip, the gossip]}                # the person ("a terrible gossip") isn't "the goss"
+  DRUNK: {predicate_adj: [merry]}                   # "a merry crowd"
+  RICH: {np: [a pile of cash]}                      # RICH's forms are predicates; LOT_OF_MONEY has it
+add:
+  GOSSIP: {np: [the latest gossip]}
+intensity:                    # the verifiers' plain words default to 3; these are stronger or weaker
+  irate: 4
+  enraged: 5
+  incensed: 4
+  seething: 5
+  bone-tired: 4
+  elated: 4
+  jubilant: 4
+  overjoyed: 4
+  euphoric: 5
+  inebriated: 4
+  tiddly: 2
+  petrified: 5
+  terrified out of {poss} wits: 5
+  scared shitless: 5
+  scared out of {poss} wits: 5
+  destitute: 5
+  impoverished: 4
+  dirt poor: 4
+  without a bean: 4
+  despondent: 4
+  downcast: 3
+  made of money: 4

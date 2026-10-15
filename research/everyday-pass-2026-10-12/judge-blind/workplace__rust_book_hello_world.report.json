@@ -1,0 +1,226 @@
+{
+ "candidates": {
+  "A": {
+   "scores": {
+    "meaning": {
+     "evidence": "All steps, commands and code blocks are intact, but insults are added (\"ya galah\", \"welcome, ya mug!\") and the link label is altered to \"[“Troubleshootin'”]\".",
+     "score": 4
+    },
+    "sense": {
+     "evidence": "Few swaps, but \"ya galah\" and \"ya mug\" (fool) aimed at a beginner take the wrong sense for a welcome; \"brand-spankin'-new\" fits.",
+     "score": 3
+    },
+    "authenticity": {
+     "evidence": "Stage-Australian: interjections bolted on (\"Crikey, open a terminal\", \"Mind ya, for Windows CMD\", \"Stone the crows, if yer using\", \"Tell ya what, if ya don’t see\", \"Streeeewth.\") and dropped g's sprinkled on otherwise unchanged docs.",
+     "score": 1
+    },
+    "register": {
+     "evidence": "Level 5 asked, but most sentences are the original (\"Rust files always end with\"), with tics added; \"yer bloody code\" is within vulgarity 2.",
+     "score": 2
+    },
+    "tone": {
+     "evidence": "The warm welcome is inverted: \"That makes ya a Rust programmer—welcome, ya mug! Streeeewth.\"",
+     "score": 2
+    },
+    "flow": {
+     "evidence": "Clunky joins: \"a _projects_ directory'n a directory\", \"created'n enter\", \"compile'n run the file\".",
+     "score": 2
+    },
+    "variety": {
+     "evidence": "Leans on \"yer\", \"'n\" and stock openers.",
+     "score": 2
+    },
+    "essence": {
+     "evidence": "Recognisably the Rust book chapter, but it now sneers at the reader.",
+     "score": 3
+    }
+   },
+   "problems": [
+    {
+     "quote": "welcome, ya mug! Streeeewth.",
+     "original": "That makes you a Rust programmer—welcome!",
+     "severity": "major",
+     "why": "Insults the new programmer at the moment of welcome; tone inverted."
+    },
+    {
+     "quote": "You’ll start by makin' a directory to store yer Rust code, ya galah.",
+     "original": "You’ll start by making a directory to store your Rust code.",
+     "severity": "major",
+     "why": "Calls the reader a fool for no reason."
+    },
+    {
+     "quote": "[“Troubleshootin'”]",
+     "original": "[“Troubleshooting”]",
+     "severity": "minor",
+     "why": "Alters a link label in the docs markup."
+    },
+    {
+     "quote": "Stone the crows, if yer using more than one word",
+     "original": "If you’re using more than one word",
+     "severity": "major",
+     "why": "Stock exclamation bolted on."
+    },
+    {
+     "quote": "make a _projects_ directory'n a directory",
+     "original": "make a _projects_ directory and a directory",
+     "severity": "minor",
+     "why": "Forced contraction."
+    }
+   ],
+   "summary": "The original docs with stock interjections, 'yer' and insults bolted on; the welcome is turned into a sneer."
+  },
+  "B": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every step kept, code and commands untouched, link intact. Colour such as \"which just looks like some bugger's leanin' on the keyboard\" and \"kettle's on\" hangs off the filename tip and the welcome.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"knock together a directory\", \"Rust couldn't give a toss\", \"bung in this\", \"duck back to yer terminal\", \"have a squiz back at\", \"good on ya!\". \"we reckon you make a _projects_ directory\" strains for 'we suggest making'.",
+     "score": 4
+    },
+    "authenticity": {
+     "evidence": "Sounds like an Aussie mate showing you the ropes: \"Fire up a terminal and punch in these commands\", \"the done thing is to stick an underscore between 'em\".",
+     "score": 5
+    },
+    "register": {
+     "evidence": "Full level-5 retelling with \"couldn't give a toss\" and \"some bugger's\", within vulgarity 2.",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "Keeps the encouraging beginner tutorial, ending warmly: \"Welcome aboard, mate, kettle's on.\"",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads naturally: \"Save the file and duck back to yer terminal window\".",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Varied verbs and idiom: \"knock together\", \"Fire up\", \"punch in\", \"bung in\", \"whip up\", \"duck back\", \"have a squiz\".",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Unmistakably the Rust book's Hello World chapter, retold.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "we reckon you make a _projects_ directory",
+     "original": "we suggest making a _projects_ directory",
+     "severity": "minor",
+     "why": "'We reckon you make' is slightly ungrammatical; 'reckon you should make' would fit."
+    },
+    {
+     "quote": "Welcome aboard, mate, kettle's on.",
+     "original": "welcome!",
+     "severity": "minor",
+     "why": "Small added colour; harmless."
+    }
+   ],
+   "summary": "A natural, varied full-strength retelling that leaves every command and code block intact."
+  },
+  "C": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every step kept, code untouched, link intact; \"you bloody legend!\" is colour on the congratulations.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"Rust couldn't give a toss\", \"Fire up a terminal\", \"have a squiz\", \"get a hand\", \"good on ya\". \"we reckon you\" plus \"make a _projects_ directory\" strains for 'we suggest making'.",
+     "score": 4
+    },
+    "authenticity": {
+     "evidence": "Natural Aussie: \"punch in the following commands\", \"stick an underscore between 'em\", \"Welcome aboard, mate!\".",
+     "score": 5
+    },
+    "register": {
+     "evidence": "Clearly Aussie and within vulgarity 2, but lighter than a full level-5 yarn; several sentences stay close to the original (\"Next, make a new source file and call it _main.rs_\").",
+     "score": 4
+    },
+    "tone": {
+     "evidence": "The friendly tutorial and warm welcome come through: \"good on ya, you bloody legend!\"",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads cleanly: \"Save the file and head back to your terminal window\".",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Varied, though \"chuck in this\" is used twice in a row and \"punch in\" twice.",
+     "score": 4
+    },
+    "essence": {
+     "evidence": "Clearly the Rust book chapter.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "For Windows CMD, chuck in this:",
+     "original": "For Windows CMD, enter this:",
+     "severity": "minor",
+     "why": "Repeats 'chuck in this' from the line above."
+    },
+    {
+     "quote": "we reckon you\nmake a _projects_ directory",
+     "original": "we suggest making a _projects_ directory",
+     "severity": "minor",
+     "why": "'We reckon you make' is slightly ungrammatical."
+    }
+   ],
+   "summary": "Natural, faithful Aussie tutorial; a notch lighter than level 5 and repeats a phrase."
+  }
+ },
+ "rankings": {
+  "tone": [
+   [
+    "B",
+    "C"
+   ],
+   [
+    "A"
+   ]
+  ],
+  "flow": [
+   [
+    "B",
+    "C"
+   ],
+   [
+    "A"
+   ]
+  ],
+  "variety": [
+   [
+    "B"
+   ],
+   [
+    "C"
+   ],
+   [
+    "A"
+   ]
+  ],
+  "essence": [
+   [
+    "B",
+    "C"
+   ],
+   [
+    "A"
+   ]
+  ],
+  "overall": [
+   [
+    "B"
+   ],
+   [
+    "C"
+   ],
+   [
+    "A"
+   ]
+  ]
+ }
+}

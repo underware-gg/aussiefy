@@ -1,0 +1,344 @@
+{
+ "candidates": {
+  "A": {
+   "scores": {
+    "meaning": {
+     "evidence": "The original verbatim apart from contractions and spelling (\"there's no downtime\", \"this behaviour\", \"isn't monolithic\"); nothing lost.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "No Aussie terms that could take a wrong sense.",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "No Australian voice; it reads as the US documentation: \"Kubernetes provides you with a framework to run distributed systems resiliently.\"",
+     "score": 2
+    },
+    "register": {
+     "evidence": "Left untranslated; far under level 4.",
+     "score": 1
+    },
+    "tone": {
+     "evidence": "The documentation's tone is the original's.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads as the original does.",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Nothing to vary.",
+     "score": 1
+    },
+    "essence": {
+     "evidence": "It is the original, unretold.",
+     "score": 4
+    }
+   },
+   "problems": [
+    {
+     "quote": "Kubernetes provides you with a framework\nto run distributed systems resiliently.",
+     "original": "Kubernetes provides you with a framework\nto run distributed systems resiliently.",
+     "severity": "critical",
+     "why": "Left untranslated; the brief asked for level 4."
+    }
+   ],
+   "summary": "Untranslated apart from contractions and spelling."
+  },
+  "B": {
+   "scores": {
+    "meaning": {
+     "evidence": "Every feature survives with its technical point intact: \"doesn't let on to clients they exist till they're ready to serve\", \"without leaving secrets hanging out in your stack configuration\". \"make sure nothing ever falls over\" overstates \"no downtime\" slightly.",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Most terms fit (\"carks it\", \"cop a hit and keep going\" for resilience, \"turf the old ones\", \"Bolt features onto\"), but \"knocks off containers\" can read as steals, and \"knocking up developer platforms\" carries an unwanted second sense.",
+     "score": 4
+    },
+    "authenticity": {
+     "evidence": "Sounds like an Australian dev explaining it: \"Say a container carks it, another container's gotta fire up.\" \"rides in to save the day\" and \"bang for your buck\" are generic.",
+     "score": 4
+    },
+    "register": {
+     "evidence": "Full level 4 throughout the prose and the bullets; one \"a bloody sight easier\", within vulgarity 1.",
+     "score": 5
+    },
+    "tone": {
+     "evidence": "Keeps the confident, helpful docs tone in a mate's voice: \"Kubernetes can handle a canary deployment for your system, no worries.\"",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Reads smoothly: \"But Kubernetes isn't one big lump, and these default setups are optional and you can swap 'em in and out.\"",
+     "score": 5
+    },
+    "variety": {
+     "evidence": "Wide range: \"carks it\", \"cop a hit\", \"getting slammed\", \"takes your fancy\", \"turf\", \"stash\", \"dishing out\", \"mucking about\". \"fall over\" repeats (\"containers that fall over\" twice).",
+     "score": 4
+    },
+    "essence": {
+     "evidence": "Unmistakably the Kubernetes overview, every section and bullet in place.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "knocks off containers that won't\n  answer your user-defined health check",
+     "original": "kills containers that don't\n  respond to your user-defined health check",
+     "severity": "minor",
+     "why": "\"knock off\" more often means steal or finish work."
+    },
+    {
+     "quote": "knocking up developer\nplatforms",
+     "original": "building developer\nplatforms",
+     "severity": "minor",
+     "why": "\"Knocking up\" has an unwanted pregnancy sense."
+    },
+    {
+     "quote": "make sure nothing ever falls over",
+     "original": "ensure that there is no downtime",
+     "severity": "minor",
+     "why": "Slight overstatement."
+    }
+   ],
+   "summary": "A full, natural level-4 retelling that keeps every technical point; the best of the set."
+  },
+  "C": {
+   "scores": {
+    "meaning": {
+     "evidence": "Faithful throughout; nothing invented: \"doesn't let on to clients they're there until they're ready to serve\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"carks it\", \"bounce back when things go pear-shaped\", \"takes your fancy\", \"mucking about\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Natural where it changes; \"containerized\" keeps US spelling.",
+     "score": 4
+    },
+    "register": {
+     "evidence": "About level 3: the bullets stay close to the original (\"Kubernetes restarts containers that fail, replaces containers, kills containers\"); lighter than the brief.",
+     "score": 3
+    },
+    "tone": {
+     "evidence": "Docs tone intact, friendly.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Smooth, though \"a good, handy way\" is a small stack.",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "Moderate range (\"carks it\", \"pear-shaped\", \"takes your fancy\", \"Bolt features onto\").",
+     "score": 4
+    },
+    "essence": {
+     "evidence": "Clearly the original.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "run containerized tasks",
+     "original": "run containerized tasks",
+     "severity": "minor",
+     "why": "US spelling left in."
+    },
+    {
+     "quote": "Kubernetes restarts containers that fail, replaces containers, kills containers that don't",
+     "original": "Kubernetes restarts containers that fail, replaces containers, kills containers that don't",
+     "severity": "minor",
+     "why": "Bullets largely left untranslated; lighter than level 4."
+    }
+   ],
+   "summary": "Faithful and natural, but closer to level 3 than 4."
+  },
+  "D": {
+   "scores": {
+    "meaning": {
+     "evidence": "Faithful; nothing lost or invented: \"doesn't advertise them to clients till they're good to go and ready to serve\".",
+     "score": 5
+    },
+    "sense": {
+     "evidence": "Terms fit: \"a beaut way\", \"carks it\", \"a heap easier\", \"isn't one big lump\".",
+     "score": 5
+    },
+    "authenticity": {
+     "evidence": "Mostly natural; \"Okay, so.\" is an American-style opener, and \"Thing is,\" and \"Now,\" and \"mind\" read as added tics.",
+     "score": 4
+    },
+    "register": {
+     "evidence": "About level 3 to 4: chattier prose, but bullets near the original (\"Allocation of IPv4 and IPv6 addresses to Pods and Services\").",
+     "score": 3
+    },
+    "tone": {
+     "evidence": "Friendly docs tone kept.",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Smooth apart from the opening \"Okay, so.\" and \"good to go and ready to serve\" doubling.",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "Some range, but leans on openers: \"Okay, so.\", \"Thing is,\", \"Well,\", \"Now,\".",
+     "score": 3
+    },
+    "essence": {
+     "evidence": "Clearly the original.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "Okay, so.",
+     "original": "",
+     "severity": "minor",
+     "why": "Filler opener with an American ring."
+    },
+    {
+     "quote": "Allocation of IPv4 and IPv6 addresses to Pods and Services.",
+     "original": "Allocation of IPv4 and IPv6 addresses to Pods and Services.",
+     "severity": "minor",
+     "why": "Bullets left largely as is."
+    }
+   ],
+   "summary": "Faithful and readable, a little light, with filler openers."
+  },
+  "E": {
+   "scores": {
+    "meaning": {
+     "evidence": "All the features survive, with colour hung off them: \"like a publican putting another barman on when the pub fills up\", \"like a dad packing the boot for the Chrissie holidays\". \"carks it at three in the morning\" adds a detail; the barman simile describes adding capacity, which is scaling rather than load balancing.",
+     "score": 4
+    },
+    "sense": {
+     "evidence": "Most terms fit (\"cop a hit and keep going\", \"the rest of the box and dice\", \"turf out\", \"for all and sundry\"); the publican simile fits scaling better than spreading traffic.",
+     "score": 4
+    },
+    "authenticity": {
+     "evidence": "Strong Aussie voice (\"Chrissie holidays\", \"without breaking a sweat\"), but some stock bolt-ons: \"Pull up a stool.\", \"Bob's your uncle\", \"Take 'em or leave 'em.\"",
+     "score": 4
+    },
+    "register": {
+     "evidence": "Full level 4, leaning to 5 in places; no swearing.",
+     "score": 4
+    },
+    "tone": {
+     "evidence": "The docs' confident helpfulness survives under the yarn: \"Now, don't get the wrong idea\".",
+     "score": 5
+    },
+    "flow": {
+     "evidence": "Mostly smooth, but some clunks: \"whether that's local storage, public cloud providers, and more\" and \"isn't one great lump of a thing, it isn't monolithic\".",
+     "score": 4
+    },
+    "variety": {
+     "evidence": "Very varied: \"carks it\", \"charging in\", \"box and dice\", \"copping heaps\", \"turf out\", \"Chrissie\", \"dishes out\".",
+     "score": 5
+    },
+    "essence": {
+     "evidence": "Unmistakably the overview, retold as a yarn.",
+     "score": 5
+    }
+   },
+   "problems": [
+    {
+     "quote": "like a publican putting another barman on when the pub fills up",
+     "original": "Kubernetes is able to load balance and distribute\n  the network traffic",
+     "severity": "minor",
+     "why": "Adding a barman is scaling, not spreading load across existing containers."
+    },
+    {
+     "quote": "Pull up a stool.",
+     "original": "",
+     "severity": "minor",
+     "why": "Stock opener."
+    },
+    {
+     "quote": "isn't one great lump of a thing, it isn't monolithic",
+     "original": "Kubernetes is not monolithic",
+     "severity": "minor",
+     "why": "Says it twice."
+    },
+    {
+     "quote": "whether that's\n  local storage, public cloud providers, and more",
+     "original": "such as\n  local storage, public cloud providers, and more",
+     "severity": "minor",
+     "why": "\"whether that's ... and more\" doesn't join."
+    },
+    {
+     "quote": "run containerized tasks",
+     "original": "run containerized tasks",
+     "severity": "minor",
+     "why": "US spelling left in."
+    }
+   ],
+   "summary": "The most colourful retelling, natural on the whole; a few stock lines and a strained simile."
+  }
+ },
+ "rankings": {
+  "tone": [
+   [
+    "B",
+    "C",
+    "D",
+    "E",
+    "A"
+   ]
+  ],
+  "flow": [
+   [
+    "B",
+    "A"
+   ],
+   [
+    "C",
+    "D",
+    "E"
+   ]
+  ],
+  "variety": [
+   [
+    "E"
+   ],
+   [
+    "B"
+   ],
+   [
+    "C"
+   ],
+   [
+    "D"
+   ],
+   [
+    "A"
+   ]
+  ],
+  "essence": [
+   [
+    "B",
+    "E",
+    "C",
+    "D"
+   ],
+   [
+    "A"
+   ]
+  ],
+  "overall": [
+   [
+    "B"
+   ],
+   [
+    "E"
+   ],
+   [
+    "C"
+   ],
+   [
+    "D"
+   ],
+   [
+    "A"
+   ]
+  ]
+ }
+}

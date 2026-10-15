@@ -1,0 +1,169 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "unharnessed": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 2,
+   "register": 2,
+   "tone": 4,
+   "flow": 3,
+   "variety": 4,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 4,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "All instructions survive, since the text is mostly the original: take-back, mail-back, flush list, the household-trash steps, the fentanyl patch. \"heaps of the medicine remains\" keeps the point.",
+   "sense": "\"chemists\", \"rubbish\" and \"Post them\" fit; \"flush them down the sink or dunny\" carries the sense but is a casual word in a safety directive.",
+   "authenticity": "Half-converted: \"Some chemists offer\" next to \"retail pharmacies\", \"the rubbish\" next to \"your household trash\", US \"unrecognizable\", and the original's errors kept (\"Drop off them\", \"To discard of\"). \"heaps of the medicine remains\" is ungrammatical.",
+   "register": "Largely untranslated; only \"Post\", \"chemists\", \"authorised\", \"dunny\", \"rubbish\" and \"heaps\" change. Lighter than level 2.",
+   "tone": "Stays a calm public-health notice, except \"down the sink or dunny\" which jars in the serious flushing directive.",
+   "flow": "Reads as the original, including its clumsy \"Drop off them at a drug take-back location.\" and the new \"heaps of the medicine remains\".",
+   "variety": "Too little slang to repeat; \"rubbish\" twice.",
+   "essence": "Unmistakably the FDA guidance, almost verbatim."
+  },
+  "unharnessed": {
+   "meaning": "Every instruction kept: \"Drop them off at a drug take-back location.\", \"Check with your local police\", \"mix them with something unpleasant, like used coffee grounds, dirt or kitty litter\", \"a fair bit of the medicine is still left in it\". \"right across the country\" for nationwide is fine.",
+   "sense": "Every term fits: \"chockers with expired drugs\", \"Chuck the container in the bin\", \"kitty litter\", \"empty tin\", \"zip-lock bag\".",
+   "authenticity": "Sounds like an Australian health leaflet in a friendly voice: \"go rummaging through the bin on purpose\", \"If you've got a question\". Mixes \"pharmacies\" and \"chemists\", both current.",
+   "register": "A light level-2 touch (\"chockers\", \"Chuck\", \"a fair bit\") while keeping plain instructions; no swearing.",
+   "tone": "Stays clear and serious where it matters: \"flush them down the sink or toilet straight away\", \"can be dangerous to people it's not prescribed for\".",
+   "flow": "Reads smoothly, and fixes the original's clumsy \"Drop off them\" to \"Drop them off\".",
+   "variety": "\"get rid of\" is used for nearly every dispose (\"The best way to get rid of\", \"To get rid of your prescription\", \"get rid of it at home\", \"get rid of medicines safely\"), which a reader would notice.",
+   "essence": "Unmistakably the FDA disposal guidance with its steps intact."
+  },
+  "yarn": {
+   "meaning": "All instructions kept: \"Drop them off\", \"Post them\", \"Check with your local police\", \"Chuck the container in the bin at home.\", \"heaps of the medicine is left in it\". \"bathroom cabinet\" for medicine cabinet is a fair localisation.",
+   "sense": "Terms fit (\"out-of-date\", \"bin it at home\", \"have a squiz at the list\", \"kitty litter\"); \"flush them straight down the sink or dunny\" carries the sense but is casual for the directive.",
+   "authenticity": "Natural Australian usage: \"chemists\" consistently, \"Some chemists hand them out for free\", \"ask your health professional or chemist\".",
+   "register": "Level 2, with \"squiz\", \"dunny\", \"Chuck\", \"heaps\"; \"dunny\" nudges it a shade past light for a health notice.",
+   "tone": "Mostly the calm health notice, but \"flush them straight down the sink or dunny\" in the line about especially harmful medicines undercuts the seriousness a little.",
+   "flow": "Reads smoothly: \"Put the mixture in something you can close ... to stop the drug leaking or spilling out.\"",
+   "variety": "Varies its verbs (\"dispose of\", \"get rid of\", \"bin it\", \"Chuck\"); nothing leaned on.",
+   "essence": "Unmistakably the FDA guidance, retold lightly."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "Remember, don’t flush your medicine unless it is on the flush list.",
+    "original": "Remember, don’t flush your medicine unless it is on the flush list.",
+    "severity": "major",
+    "why": "Representative of the text being left nearly untranslated, well under level 2."
+   },
+   {
+    "quote": "can be thrown into your household trash",
+    "original": "can be thrown into your household trash",
+    "severity": "minor",
+    "why": "US trash left in while other lines switch to rubbish; inconsistent."
+   },
+   {
+    "quote": "heaps of the medicine remains",
+    "original": "a lot of the medicine remains",
+    "severity": "minor",
+    "why": "Heaps takes a plural verb; reads ungrammatical."
+   },
+   {
+    "quote": "flush them down the sink or dunny",
+    "original": "flush them down the sink or toilet",
+    "severity": "minor",
+    "why": "Dunny is jokey in a safety instruction about dangerous drugs."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "help you get rid of medicines safely",
+    "original": "help you safely dispose of medicines",
+    "severity": "minor",
+    "why": "Representative of get rid of repeated for every dispose."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "flush them straight down the sink or dunny",
+    "original": "immediately flush them down the sink or toilet",
+    "severity": "minor",
+    "why": "Dunny is jokey in a warning about especially harmful medicines; toilet was used a few lines earlier."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "Barely converted, inconsistent and under the brief, though nothing is lost.",
+  "unharnessed": "Faithful, natural and at the right weight; leans on one phrase.",
+  "yarn": "Faithful and natural with good variety; one slightly too casual word in a safety line."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn",
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ],
+   [
+    "unharnessed"
+   ]
+  ],
+  "essence": [
+   [
+    "engine",
+    "unharnessed",
+    "yarn"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

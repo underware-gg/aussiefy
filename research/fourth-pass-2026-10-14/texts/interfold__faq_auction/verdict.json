@@ -1,0 +1,263 @@
+{
+ "rubric_version": 3,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "yarn-dinkum": "B",
+  "yarn-troppo": "C",
+  "unharnessed": "D",
+  "dinkum-3": "E"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 3,
+   "register": 1,
+   "tone": 5,
+   "flow": 4,
+   "variety": 1,
+   "essence": 4
+  },
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 5
+  },
+  "yarn-troppo": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 3,
+   "register": 2,
+   "tone": 3,
+   "flow": 4,
+   "variety": 5,
+   "essence": 4
+  },
+  "unharnessed": {
+   "meaning": 4,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  },
+  "dinkum-3": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "Every fact, date, figure and link is kept; the text is the original with two words changed: \"Nah, nah. The auction determined allocations\" and \"Yep. Participants had to complete identity verification\".",
+   "sense": "Both swaps carry the sense: \"Nah, nah.\" for No, \"Yep.\" for Yes.",
+   "authenticity": "The two words are natural, but they sit in unchanged formal copy: \"Participation was available to eligible participants.\"",
+   "register": "Essentially untranslated: \"This FAQ is about FOLD Auction 2, the second public FOLD auction. It is for people who took part in the auction or who must claim FOLD after it.\" Two words of Aussie is far below level 3.",
+   "tone": "The careful, compliance-minded FAQ tone is intact: \"Future market prices cannot be predicted.\"",
+   "flow": "Reads as the original, but the one change jars against what follows: \"Nah, nah. The auction determined allocations and a clearing price within the auction itself.\"",
+   "variety": "Only \"Nah, nah.\" and \"Yep.\"",
+   "essence": "It is the original, with nothing retold."
+  },
+  "yarn-dinkum": {
+   "meaning": "Everything is kept: figures, dates, timestamps, links, the CCA rules and the notices. \"make sniping harder\" fairly renders mitigate; \"Nobody can tell you what market prices will do down the track.\"",
+   "sense": "Terms fit: \"people who had a go in the auction\", \"four lots\", \"That first auction's done and dusted\", \"still up for grabs in the final period\", \"before they had a crack at it\".",
+   "authenticity": "Sounds like an Australian writing the FAQ: \"Auction 2 wrapped up just before general FOLD transferability was switched on.\", \"Have a read of the full [FOLD Auction Terms]\".",
+   "register": "A light-to-moderate level 3 that leaves the notices formal: \"had a go\", \"done and dusted\", \"up for grabs\", \"down the track\", \"had a crack at it\". Perhaps a touch light.",
+   "tone": "The careful, clear FAQ tone holds; warnings stay serious: \"Interfold team members and moderators will never ask for your seed phrase\".",
+   "flow": "Reads as if written that way: \"The CCA hands tokens out bit by bit and sets one price for everyone within each period.\"",
+   "variety": "Varied without leaning: \"had a go\", \"four lots\", \"switched on\", \"kicked off\", \"done and dusted\", \"up for grabs\", \"down the track\", \"had a crack\", \"out of the blue\"; \"switched on\" recurs.",
+   "essence": "Unmistakably the same FAQ, structure and code intact."
+  },
+  "yarn-troppo": {
+   "meaning": "Facts are kept, but many asides add claims or gloss: \"on the dot (well, near enough)\", \"one last hand-out\" (the original never says last), \"so nobody started lower than last time\", \"Anyone who reckons they can is dreamin'.\", \"That horse has bolted.\", \"Anyone who does is a shonk.\"",
+   "sense": "Most terms fit: \"Here's the good oil.\", \"not the whole box and dice\", \"shut up shop\", \"make life hard for snipers\", \"If it looks suss, it probably is.\". \"put its shoulder behind long-term on-chain liquidity\" strains.",
+   "authenticity": "The idiom is real, but stacked as tags: \"Homework first.\", \"No ID, no go.\", \"Don't mix 'em up.\", \"Done.\", \"This bit matters.\".",
+   "register": "Well past level 3: nearly every section gets a quip or tag (\"the sequel, if you like\", \"That horse has bolted.\", \"Anyone who does is a shonk.\"). No swearing.",
+   "tone": "The FAQ's careful compliance voice turns flippant in places, worst on the risk line: \"Nobody can tell ya. Anyone who reckons they can is dreamin'.\" Safety warnings get punchlines.",
+   "flow": "Lively but choppy with fragments bolted after sentences: \"So FOLD's now generally transferable. Done.\"",
+   "variety": "Wide range, nothing leaned on: \"good oil\", \"box and dice\", \"shut up shop\", \"done and dusted\", \"sussing out\", \"dreamin'\", \"horse has bolted\", \"nitty-gritty\", \"suss\", \"shonk\".",
+   "essence": "Recognisable as the FAQ, but its sober, compliance-first character is flattened by the running jokes."
+  },
+  "unharnessed": {
+   "meaning": "Complete, with one overstatement: \"cut down gas wars, stop sniping\" turns mitigate into prevent. \"from dodgy, unofficial sources\" and \"never, ever ask\" are colour.",
+   "sense": "Terms fit: \"four lots\", \"kicked in\", \"locked in for long-term on-chain liquidity support\", \"done and dusted\", \"gas wars\", \"down the track\", \"dodgy\".",
+   "authenticity": "Natural mostly: \"Auction 2 wrapped up not long before general FOLD transferability was switched on.\" One American form: \"It's for folks who had a go\".",
+   "register": "Steady level 3 throughout, notices included: \"Nothing in here counts as legal, tax, financial, investment, or other professional advice.\" No swearing.",
+   "tone": "Mostly keeps the careful FAQ voice; the legal notices are made casual (\"Nothing in here counts as\"), softening their formality a little.",
+   "flow": "Smooth on the whole: \"The CCA hands out tokens bit by bit and uses the one price for everyone within each period.\"",
+   "variety": "Good spread: \"folks\", \"four lots\", \"kicked in\", \"locked in\", \"done and dusted\", \"gas wars\", \"Nope\", \"down the track\", \"had a go\", \"dodgy\"; \"kicked in\" and \"kicked off\" both appear.",
+   "essence": "Unmistakably the FAQ, structure and code intact."
+  },
+  "dinkum-3": {
+   "meaning": "Complete: all figures, timestamps and links, CCA rules and notices kept; \"Call `tgeTimestamp()` on the FOLD contract and you'll get back `1787148023`\" is a fair recast.",
+   "sense": "Terms fit: \"anyone who got in on the auction\", \"gave long-term on-chain liquidity a leg-up\", \"Bids that get up within a period\", \"all done and dusted\", \"before jumping in\". \"take the wind out of sniping\" strains a little for mitigate.",
+   "authenticity": "Sounds like an Australian writing it: \"Bids that get up within a period all clear at the same clearing price.\", \"Getting through verification didn't guarantee you eligibility or an allocation, mind.\"",
+   "register": "Right at level 3, notices left formal and the rest lightly retold: \"leg-up\", \"get up\", \"done and dusted\", \"up for grabs\", \"Nah, nah.\", \"mind\". No swearing.",
+   "tone": "The careful FAQ voice holds; warnings stay serious with only light emphasis: \"Not ever.\"",
+   "flow": "Reads smoothly: \"The CCA hands tokens out bit by bit, at the one price within each period.\"",
+   "variety": "Varied: \"got in on\", \"leg-up\", \"locked in\", \"done and dusted\", \"get up\", \"take the wind out of\", \"up for grabs\", \"jumping in\", \"check out\", \"turn up out of the blue\".",
+   "essence": "Unmistakably the FAQ, retold."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "This FAQ is about FOLD Auction 2, the second public FOLD auction.",
+    "original": "This FAQ is about FOLD Auction 2, the second public FOLD auction.",
+    "severity": "critical",
+    "why": "Left untranslated, like nearly all the text; the brief asked for level 3."
+   },
+   {
+    "quote": "Nah, nah. The auction determined allocations",
+    "original": "No. The auction determined allocations",
+    "severity": "minor",
+    "why": "A lone casual answer dropped into otherwise formal prose jars."
+   }
+  ],
+  "yarn-dinkum": [
+   {
+    "quote": "General FOLD transferability is switched on.",
+    "original": "General FOLD transferability is active.",
+    "severity": "minor",
+    "why": "\"switched on\" recurs several times through the text; a small lean."
+   }
+  ],
+  "yarn-troppo": [
+   {
+    "quote": "Anyone who reckons they can is dreamin'.",
+    "original": "Future market prices cannot be predicted.",
+    "severity": "major",
+    "why": "Turns a risk disclosure into a joke; the wrong tone for a no-advice line."
+   },
+   {
+    "quote": "one last hand-out before general FOLD",
+    "original": "Auction 2 was a limited distribution step before general FOLD transferability",
+    "severity": "minor",
+    "why": "\"last\" adds a claim the original doesn't make."
+   },
+   {
+    "quote": "on the dot (well, near enough)",
+    "original": "The FOLD contract recorded the TGE on Aug 19, 2026 at 14:00:23 UTC.",
+    "severity": "minor",
+    "why": "Added aside in a status notice; renders nothing."
+   },
+   {
+    "quote": "Anyone who does is a shonk.",
+    "original": "",
+    "severity": "minor",
+    "why": "Added tag on a safety warning; representative of the many bolted-on lines."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "cut down gas wars, stop sniping",
+    "original": "reduce gas competition, mitigate sniping",
+    "severity": "minor",
+    "why": "\"stop\" overstates \"mitigate\", a claim the design doesn't make."
+   },
+   {
+    "quote": "It's for folks who had a go",
+    "original": "It is for people who took part",
+    "severity": "minor",
+    "why": "\"folks\" is American, not Australian."
+   }
+  ],
+  "dinkum-3": [
+   {
+    "quote": "take the wind out of sniping",
+    "original": "mitigate sniping",
+    "severity": "minor",
+    "why": "The idiom fits people better than a practice; strains slightly."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "Untranslated apart from two words; accurate but misses the brief.",
+  "yarn-dinkum": "Clean, natural and faithful; a well-judged light level 3.",
+  "yarn-troppo": "Colourful and varied, but over-told for level 3 and flippant on risk and safety lines.",
+  "unharnessed": "Natural and on-brief, with one American word and one overstated claim.",
+  "dinkum-3": "The best: natural, idiomatic, faithful and exactly on the brief."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "engine",
+    "yarn-dinkum",
+    "dinkum-3"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn-dinkum",
+    "dinkum-3"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine",
+    "yarn-troppo"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-troppo",
+    "dinkum-3"
+   ],
+   [
+    "yarn-dinkum",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn-dinkum",
+    "unharnessed",
+    "dinkum-3"
+   ],
+   [
+    "engine",
+    "yarn-troppo"
+   ]
+  ],
+  "overall": [
+   [
+    "dinkum-3"
+   ],
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn-troppo"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

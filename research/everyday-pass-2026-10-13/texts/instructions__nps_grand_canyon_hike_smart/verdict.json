@@ -1,0 +1,165 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 4,
+   "sense": 2,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 4,
+   "flow": 3,
+   "variety": 2,
+   "essence": 4
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every point survives: salt stains, sipping without thirst, the rangers' snacks, the 15F to 20F (9C-11C) sun penalty, no walking 10am to 4pm, soaking clothes, cotton, hat or bandanna. \"Seasoned desert walkers know the timing of their walk is the biggest thing in staying out of strife\" keeps the claim.",
+   "sense": "Terms fit: \"you mightn't twig how much fluid you're losing\", \"not running out of puff\" for avoiding fatigue, \"Have a spell somewhere near shade\", \"finish up late arvo\", \"staying out of strife\" for avoiding hazards, \"tasty tucker that's ready for the track\".",
+   "authenticity": "Natural Aussie: \"keep your fluids up\", \"your sweat dries off quick smart\", \"keep the tank full\", \"where the temperature can go through the roof\". Heading \"Stay Hydrated and Energized\" keeps the US spelling.",
+   "register": "A real light retelling at level 3: friendly and Aussie throughout without becoming a yarn; one \"bloody effective\" within vulgarity 1.",
+   "tone": "Keeps the upbeat, safety-minded park-service tone: \"so you've gotta grab every chance to cool down\" and the closing warning stays earnest.",
+   "flow": "Reads smoothly: \"Get going before sunrise and finish up late arvo.\" No clunky joins.",
+   "variety": "Varied: \"twig\", \"tucker\", \"quick smart\", \"out of puff\", \"a spell\", \"strife\", \"sopping wet\"; \"tucker\" twice and \"gotta\" twice.",
+   "essence": "Unmistakably the NPS hike-smart page: its headings, its ranger snack list, its 10-to-4 rule and its soak-yourself advice."
+  },
+  "yarn": {
+   "meaning": "Every point survives, close to the original in order and detail: \"Sun temperatures are 15F to 20F (9C-11C) degrees hotter than the posted shade temperatures\", \"Make an early start before sunup and finish late in the arvo\".",
+   "sense": "Mostly fits: \"chuck in their day packs\", \"quick smart\", \"late in the arvo\", \"full of beans\". \"can be hard yakka\" (hard work) is close to \"demanding\"; \"cotton's a ripper in the desert\" fits.",
+   "authenticity": "Natural where it uses Aussie, though some original phrasing is kept: \"it's essential to stay hydrated\", \"the most important factor in avoiding hazards\". Spelling localised: \"Energised\".",
+   "register": "Level 3, a little lighter than A: a good scatter of Aussie (\"hard yakka\", \"tucker\", \"full of beans\") with stretches close to the original.",
+   "tone": "Keeps the helpful, earnest tone throughout.",
+   "flow": "Reads smoothly: \"Regular snacks with a mix of carbs, protein and electrolytes will help keep your energy up.\"",
+   "variety": "Varied: \"tucker\", \"quick smart\", \"chuck\", \"hard yakka\", \"arvo\", \"ripper\", \"full of beans\"; nothing leaned on.",
+   "essence": "Unmistakably the original page."
+  },
+  "engine": {
+   "meaning": "The text is almost entirely the original, so every point survives; one swap muddies a line: \"your body stays esky and more refreshed\".",
+   "sense": "Wrong-sense swap: \"your body stays esky\" uses esky (a cooler box) as an adjective for cool. \"cotton is ripper in the desert\" is ungrammatical. \"bushwalking\" for hiking is fine.",
+   "authenticity": "Mechanical swaps into otherwise untouched US park prose: \"Enjoy a predawn start and a late arvo finish\", \"cotton is ripper\", \"stays esky\". No Australian would say the last two.",
+   "register": "Far under level 3: apart from \"bushwalking\", \"arvo\", \"ripper\", \"esky\" and \"realise\", it is the original word for word (\"To ensure an enjoyable and safe hike, it's important to properly manage hydration and nutrition.\").",
+   "tone": "The original tone is kept because the text is; \"esky\" introduces an odd jokey note.",
+   "flow": "Reads like the original except the inserted joins: \"you'll feel the difference as your body stays esky and more refreshed\".",
+   "variety": "Little Aussie to vary; \"bushwalking\"/\"bushwalkers\" repeated mechanically: \"you are not bushwalking\", \"desert bushwalkers\", \"are bushwalking between 10 a.m. and 4 p.m.\".",
+   "essence": "Recognisably the original page, since it barely changes."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "Stay Hydrated and Energized",
+    "original": "Stay Hydrated and Energized",
+    "severity": "minor",
+    "why": "Heading keeps the US spelling 'Energized'."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Experienced desert bushwalkers know that the timing of their walk is the most important factor in avoiding hazards.",
+    "original": "Experienced desert hikers know that the timing of their hike is the most important factor in avoiding hazards.",
+    "severity": "minor",
+    "why": "Close to the original wording; a few stretches like this stay formal for level 3."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "your body stays esky and more refreshed",
+    "original": "your body stays cooler and more refreshed",
+    "severity": "major",
+    "why": "An esky is a cooler box; using it as an adjective for 'cool' is wrong sense and would make an Australian wince."
+   },
+   {
+    "quote": "cotton is ripper in the desert!",
+    "original": "cotton is great in the desert!",
+    "severity": "minor",
+    "why": "Needs 'a ripper'; ungrammatical as is."
+   },
+   {
+    "quote": "To ensure an enjoyable and safe hike, it's important to properly manage hydration and nutrition.",
+    "original": "To ensure an enjoyable and safe hike, it's important to properly manage hydration and nutrition.",
+    "severity": "major",
+    "why": "Left untranslated, as is most of the text; far under the level-3 brief."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A natural, faithful level-3 Aussie retelling of the safety page; nothing of substance lost.",
+  "yarn": "A faithful, natural level-3 retelling, slightly lighter on the Aussie than it could be.",
+  "engine": "Essentially the original with a handful of mechanical swaps, one of them ('esky') wrong-sense; far under the brief."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

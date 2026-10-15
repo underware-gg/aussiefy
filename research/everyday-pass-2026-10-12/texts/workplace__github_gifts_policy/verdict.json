@@ -1,0 +1,175 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "yarn": "B",
+  "unharnessed": "C"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 2,
+   "register": 1,
+   "tone": 5,
+   "flow": 4,
+   "variety": 1,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 5,
+   "flow": 4,
+   "variety": 4,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "The policy is the original almost word for word, so every rule, threshold and example survives: \"for any expenses exceeding $150, you'll need approval (each time) from Legal in writing\".",
+   "sense": "The few swaps fit: \"your mate's daughter\", \"an informal pressie\", \"any prezzies you receive exceeding $150\".",
+   "authenticity": "Three slang words in otherwise untouched US corporate prose read pasted in, and US forms are left: \"A futbol ⚽️ autographed\", \"Bleacher-type tickets\", \"vendor\".",
+   "register": "Left almost entirely untranslated; only \"mate's\", \"pressie\" and \"prezzies\" change.",
+   "tone": "The original's breezy-but-serious policy tone is intact, because it is the original: \"FINES and JAIL.\"",
+   "flow": "Reads as the original, but \"pressie\" and then \"prezzies\" a few lines apart, two spellings of one word, jar.",
+   "variety": "Almost no slang to vary, and the one gift word appears in two spellings.",
+   "essence": "Unmistakably the GitHub gifts policy."
+  },
+  "yarn": {
+   "meaning": "All rules, examples and thresholds survive: \"for any spending over $150, you'll need sign-off (every time) from Legal in writing\", \"Legal is only weighing in on the bribery side of it\". The Yoda joke is kept: \"Sorry, Yoda, but here it's the trying that counts.\"",
+   "sense": "Terms fit: \"that's not on\", \"a flash private school\", \"Cheap seats\" for bleacher tickets, \"shouting a possible customer\", \"pick up the bill\", \"sign-off\", \"dosh\".",
+   "authenticity": "Reads like an Australian workplace policy: \"that's not on\", \"shouting\", \"flash\", \"promo gear\". \"small potatoes\" is American more than Australian.",
+   "register": "A light level-2 touch suited to a workplace policy, clean as vulgarity 0 asks; the structure, headings and emoji are kept.",
+   "tone": "Keeps the friendly-but-firm tone and the punchline: \"FINES and JAIL. And not just for GitHub, either.\"",
+   "flow": "Smooth throughout: \"So if a supplier, or a business that wants to be one, sends you something \\\"of value,\\\" don't accept it\".",
+   "variety": "Well varied: \"small potatoes\", \"heaps\", \"a gig\", \"not on\", \"flash\", \"pressie\", \"promo gear\", \"shouting\", \"dosh\".",
+   "essence": "Clearly the same GitHub policy, retold in a local voice."
+  },
+  "unharnessed": {
+   "meaning": "Every rule and example survives: \"for any gifts you receive over $150, you'll need to report it (every time) to Legal in writing\", \"Yoda notwithstanding, it's the trying that counts.\"",
+   "sense": "Terms fit: \"a gig as an intern\", \"worth heaps to them\", \"a posh private school\", \"shouting a potential customer\", \"in the slammer\".",
+   "authenticity": "Mostly natural, but \"small potatoes\" and \"in the slammer\" lean American, and \"Cheap-seats tickets\" is a clunky coinage.",
+   "register": "Clean and light, but a notch lighter than level 2 in places, keeping the source's corporate wording: \"First class airfare to GitHub offices\", \"vendor or potential vendor\", \"Note the recipient and the purpose of the gift\".",
+   "tone": "Keeps the friendly-but-firm policy tone and the jokes: \"(all right, maybe stickers)\".",
+   "flow": "Reads well, with small bumps: \"Cheap-seats tickets to a sporting event\", and \"But if you're not sure... But if she's not qualified\" repeats the openers.",
+   "variety": "Reasonable range (\"small potatoes\", \"gig\", \"heaps\", \"posh\", \"shouting\", \"slammer\"), with \"mate's\" used twice.",
+   "essence": "Clearly the same policy."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "an informal pressie",
+    "original": "an informal gift",
+    "severity": "minor",
+    "why": "Inconsistent with \"prezzies\" a paragraph later; pick one spelling."
+   },
+   {
+    "quote": "A futbol ⚽️ autographed by a famous player",
+    "original": "A futbol ⚽️ autographed by a famous player",
+    "severity": "major",
+    "why": "Representative of the text left untranslated, with US terms (futbol, bleacher, vendor) kept; well under level 2."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "small potatoes",
+    "original": "might seem trivial",
+    "severity": "minor",
+    "why": "An Americanism; \"small beer\" or \"no big deal\" would sound more local."
+   },
+   {
+    "quote": "Putting in a good word for a friend's kid to get into a flash private school",
+    "original": "Recommending a friend’s kid to a prestigious private school for admission",
+    "severity": "minor",
+    "why": "Fine, but \"flash\" is slightly less formal than the policy line needs; arguably right at level 2."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "Cheap-seats tickets",
+    "original": "Bleacher-type tickets",
+    "severity": "minor",
+    "why": "An awkward compound; \"Cheap seats at\" reads better."
+   },
+   {
+    "quote": "in the slammer",
+    "original": "in jail",
+    "severity": "minor",
+    "why": "\"slammer\" is more American; \"in the clink\" or plain \"inside\" would be more local."
+   },
+   {
+    "quote": "small potatoes",
+    "original": "might seem trivial",
+    "severity": "minor",
+    "why": "An Americanism."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "Essentially the original with three slang words dropped in. Faithful but not translated to the brief.",
+  "yarn": "The best balance: accurate, natural, light-touch Australian with the jokes and the warnings intact.",
+  "unharnessed": "Accurate and readable, a touch light, with a few American-leaning slang choices."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "engine",
+    "yarn",
+    "unharnessed"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn"
+   ],
+   [
+    "engine",
+    "unharnessed"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "engine",
+    "yarn",
+    "unharnessed"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

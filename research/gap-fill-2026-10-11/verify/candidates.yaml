@@ -1,0 +1,8496 @@
+- term: a chinwag
+  key: chinwag
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: CHAT
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://www.wiktionary.com/wiki/chinwag
+    - https://www.visualthesaurus.com/cm/wordroutes/down-under-obama-has-a-chinwag/
+    confidence: high
+    notes: 'Wiktionary labels it UK/IE/Aus/NZ. This fixes the ''having a chinwag'' known failure: add ''chinwag''
+      as a trigger and as a second form for CHAT.'
+    meaning: a good chat
+  gaps:
+  - chat
+  - chatting
+  - chinwag
+  - conversation
+  - having a chinwag
+  - natter
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - have a talk
+  - talk
+  - talk at length
+  - talk
+  examples: []
+- term: dart
+  key: dart
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: NEW:CIGARETTE
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://blog.matetranslate.com/from-darts-to-cigarettes-unraveling-the-slang-behind-smoking-darts/
+    confidence: low
+    notes: Weak sources only. I avoided 'fag' (British) because of the US slur sense.
+    meaning: a cigarette
+  gaps:
+  - cigarette
+  - smoke
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - cigarette
+  - cigarette
+  - smoke a cigarette
+  - a cigarette
+  examples: []
+- term: dunno
+  key: dunno
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: NEW:DUNNO
+    frame: garnish:aside
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://www.goodreads.com/author_blog_posts/5923084-series-glossary?tab=author
+    confidence: medium
+    notes: General informal English. Pairs with the existing asides 'search me' and 'beats me'. Only a light source
+      found.
+    meaning: '''I don''t know'' (also a trailing shrug)'
+  gaps:
+  - I don't know
+  - filler:thinking
+  - not sure
+  - thinking_fillers
+  - who knows
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - hesitation
+  - hesitation
+  - '''I don''t know'' (also a trailing shrug)'
+  examples:
+  - '''Dunno, you know what he''s like.'''
+  - Dunno, I s'pose it's end of financial year or somethin'.
+  - Dunno, I s'pose it's end of financial year or something.
+- term: eh
+  key: eh
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: NEW:TAG_EH
+    frame: garnish:tag
+    register: current
+    region:
+    - qld
+    - rural
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://languagelog.ldc.upenn.edu/nll/?p=119
+    - https://en.wikipedia.org/wiki/Eh
+    confidence: medium
+    notes: The garnish already has 'ay' (same tag, different spelling). Language Log quotes an observer linking
+      it to rural Queensland, and Avis recorded it in Australian English. Also common in NZ and Canada.
+    meaning: confirmation-seeking or emphatic tag, 'isn't it?' or 'right?'
+  gaps:
+  - don't you think
+  - eh
+  - filler:sentence_final_tag
+  - isn't it
+  - right?
+  - sentence_final_tags
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - tag seeking agreement
+  - tag
+  - tag
+  - tag
+  examples:
+  - Trev's a generous bugger like that, eh?
+  - That's a fair whack, eh?
+  - That's a fair whack, eh?
+- term: flat out
+  key: flat out
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: BUSY
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://wordhistories.net/2021/11/29/flat-out-lizard-drinking/
+    - https://macquariedictionary.com.au/?p=11033
+    confidence: high
+    notes: The bare form of the existing 'flat out like a lizard drinking'. For the known failure, add 'run off
+      {poss} feet' as a BUSY trigger so it isn't read as running (no source needed for the trigger).
+    meaning: as busy as can be
+  gaps:
+  - busy
+  - run off my feet
+  - snowed under
+  - swamped
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - extremely busy
+  - extremely busy
+  - extremely busy
+  - as busy as can be
+  examples:
+  - I've been flat out at work all week.
+- term: Hey
+  key: hey
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: NEW:TAG_EH
+    frame: garnish:tag
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://www.wiktionary.com/wiki/hey
+    confidence: low
+    notes: Wiktionary documents tag 'hey' generally, with no Australian label, and Collins labels the tag South
+      African. It is very common in everyday Australian speech (also 'thanks, hey'), but I found no source that
+      labels it Australian. Keep it, but don't overuse it.
+    meaning: sentence-final tag adding emphasis or asking for agreement
+  gaps:
+  - (sentence-final) hey
+  - eh
+  - filler:opener
+  - isn't it
+  - openers
+  - right?
+  - sentence_final_tags
+  frames:
+  - garnish
+  - interjection
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - discourse opener
+  - tag seeking agreement
+  - greeting / opener
+  - tag seeking agreement
+  examples:
+  - Hey, it's Sam.
+  - Hey, it's Sam.
+- term: hubby
+  key: hubby
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: NEW:HUSBAND
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://vocafy.net/dictionary/en/husband
+    confidence: low
+    notes: General informal English, very common in Australia but not distinctive. 'The old man' would clash with
+      FATHER. I found no distinctively Aussie word for husband.
+    meaning: husband
+  gaps:
+  - husband
+  - my husband
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - husband
+  - husband
+  - husband
+  - husband
+  examples:
+  - And my hubby? He's working back again, three nights on the trot.
+  - And my hubby? He's workin' back again, three nights on the trot.
+  - bring that hubby of yours
+- term: missus
+  key: missus
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: NEW:WIFE
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://greensdictofslang.com/entry/vxhzbvq
+    - https://www.oxfordlearnersdictionaries.com/definition/english/missus
+    confidence: high
+    notes: Also British. Oxford notes it can sound old-fashioned or dismissive. Green's records an Australian station-owner's-wife
+      sense.
+    meaning: one's wife (or female partner)
+  gaps:
+  - girlfriend
+  - my wife
+  - the wife
+  - wife
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - wife
+  - wife
+  - wife
+  - wife
+  examples:
+  - Trev did the barbie, and his missus made about six salads.
+  - My missus has to hang around in the car park every Tuesday till half seven.
+  - Trev was on the barbie, and his missus knocked up about six salads.
+- term: a motza
+  key: motza
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: RICH
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://dictionary.com/browse/motser
+    - https://greensdictofslang.com/entry/kzfzcvi
+    - https://www.wordnik.com/words/motza
+    confidence: high
+    notes: Also spelt motser or motzer. Probably from Yiddish. Fixes the 'a heap of money' known failure ('made
+      a motza', 'won a motza').
+    meaning: a very large sum of money, often a win
+  gaps:
+  - a fortune
+  - a heap of money
+  - a lot of money
+  - a pile of cash
+  - intensifiers
+  frames:
+  - garnish
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - emphasis on amount
+  - lots of money
+  - a lot of money
+  - a very large sum of money, often a win
+  examples:
+  - Apparently he made a motza sellin' his business.
+  - Apparently he made a motza selling his business.
+- term: an odd bod
+  key: odd bod
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: NEW:ODD_PERSON
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://greensdictofslang.com/entry/ik5wkyq
+    - https://wordwebonline.com/en/ODDBOD
+    confidence: medium
+    notes: Chiefly British, but Green's has Australian usage. A gentle way to say odd or weird.
+    meaning: an eccentric person
+  gaps:
+  - eccentric
+  - odd
+  - odd person
+  - strange
+  - strange person
+  - weirdo
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - odd person
+  - oddly behaved
+  - odd person
+  - odd, unsettling
+  examples: []
+- term: the oldies
+  key: oldies
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: NEW:PARENTS
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://pvt.fr/pvt-australie/dictionnaire-slang-australie
+    - https://www.deseret.com/2000/9/10/20679388/australian-slang/
+    confidence: medium
+    notes: Also means old people in general.
+    meaning: one's parents
+  gaps:
+  - folks
+  - mum and dad
+  - parents
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - parents
+  - parents
+  - one's parents
+  - one's parents
+  examples: []
+- term: The olds
+  key: olds
+  in_dictionary: null
+  support: 4
+  agents:
+  - A
+  - B
+  - C
+  web:
+    concept: NEW:PARENTS
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://greensdictofslang.com/entry/pt6m63q
+    - https://kaweah.freedombox.rocks/kiwix/wiktionary_en_all_maxi_2023-04/olds
+    confidence: medium
+    notes: Green's has Australian and NZ citations. Wiktionary tags it UK.
+    meaning: one's parents
+  gaps:
+  - folks
+  - mum and dad
+  - my parents
+  - parents
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - parents
+  - parents
+  - parents
+  - parents of players
+  examples:
+  - The olds were spewing when the plumber's bill came.
+  - The olds were spewin' when the plumber's bill turned up.
+  - The olds were spewing when the plumber sent the bill through.
+- term: after all her hard yakka
+  key: after all hard yakka
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - fatigue
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - after her exertion
+  - tiredness from effort
+  - tiredness
+  examples:
+  - after all her hard yakka.
+  - after all her hard yakka
+- term: asking for trouble
+  key: asking for trouble
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - dangerous
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - dangerous
+  - risky
+  - risky, unsafe
+  examples: []
+- term: at sparrow's
+  key: at sparrow's
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - early
+  frames:
+  - adv
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - early
+  - early
+  - early
+  examples: []
+- term: bash
+  key: bash
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - party
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - party / social event
+  - party
+  - social gathering
+  examples: []
+- term: bawled his eyes out
+  key: bawled eyes out
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - cry (cried)
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - cried
+  - cry
+  - wept
+  examples: []
+- term: beach house
+  key: beach house
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - house
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - holiday house
+  - holiday house
+  - holiday house
+  examples: []
+- term: a bit
+  key: bit
+  in_dictionary: null
+  support: 3
+  agents:
+  - B
+  - C
+  web:
+    concept: NEW:HEDGE
+    frame: adv
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://lens.monash.edu/discourse-markers-when-saying-a-bit-can-mean-a-lot/
+    confidence: high
+    notes: 'Monash research (Burridge and colleagues) finds Australians use ''a bit'' so much it gets criticised.
+      It softens both complaints and praise, which fits the ''don''t whinge'' norm. Often deadpan understatement:
+      ''a bit warm'' at 45 degrees.'
+    meaning: softening hedge, 'somewhat'
+  gaps:
+  - a little
+  - filler:hedge
+  - hedges
+  - kind of
+  - portion
+  - rather
+  - somewhat
+  - sort of
+  frames:
+  - garnish
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - softener
+  - part
+  - softening
+  - part
+  examples:
+  - And the bedroom window sticks a bit, so you've gotta give it a shove.
+- term: a bit of a character
+  key: bit of a character
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - strange
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - odd person
+  - eccentric
+  - eccentric
+  - eccentric
+  examples:
+  - Oh, and Greg next door's a bit of a character, but he's harmless.
+  - Greg next door's a bit of a character, but he wouldn't hurt a fly.
+  - Oh, and Greg next door's a bit of a character, but he's harmless.
+- term: a bit of a spunk
+  key: bit of a spunk
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - attractive
+  - handsome
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - good-looking person
+  - good-looking
+  - attractive man
+  - attractive
+  examples:
+  - And he's a bit of a spunk, so all the neighbours were checking him out.
+  - And he's a bit of a spunk, so all the neighbours were checkin' him out.
+  - And he's a bit of a spunk, so all the neighbours were having a perve.
+- term: a bit of a weirdo
+  key: bit of a weirdo
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - strange
+  - weird
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - strange
+  - odd person
+  - odd, unsettling
+  - eccentric
+  examples:
+  - though one bloke in accounts was a bit of a weirdo
+- term: a bit off
+  key: bit off
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - odd
+  - rude
+  - strange
+  - weird
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - strange in manner
+  - stuck-up, snobbish
+  - suspicious, dodgy
+  - not quite right
+  examples:
+  - sorta quiet and a bit off
+  - Anyway, he was a bit off about it, sort of quiet and weird as, and he just goes, 'Climbing fences at night's
+    a bit dodgy, you know.'
+  - Everyone seemed friendly enough, though one bloke in accounts was a bit off.
+- term: Bit stiff
+  key: bit stiff
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - unlucky
+  frames:
+  - np
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - unlucky
+  - unlucky
+  - had bad luck
+  - unlucky
+  examples:
+  - Bit stiff, eh?
+  - Bit stiff, wasn't I?
+- term: blanket
+  key: blanket
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - blanket
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - quilt/duvet
+  - bed cover
+  - bed covering
+  examples: []
+- term: Bored shitless
+  key: bored shitless
+  in_dictionary: null
+  support: 3
+  agents:
+  - B
+  - C
+  web:
+    concept: NEW:BORED
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 2
+    incoherence: 2
+    sources:
+    - https://manofmany.com/lifestyle/advice/australian-slang-dictionary
+    - https://greensdictofslang.com/entry/yvel3ya
+    confidence: medium
+    notes: Not uniquely Australian (Green's has citations from several countries) but listed in Australian slang
+      guides and very current here.
+    meaning: bored out of your mind
+  gaps:
+  - bored
+  - bored stiff
+  - bored to tears
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 2
+  meanings:
+  - very bored
+  - very bored
+  - bored out of your mind
+  examples:
+  - Bugger all. Bored shitless.
+- term: Boring as
+  key: boring as
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - boring
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 2
+  meanings:
+  - very boring
+  - very boring
+  - very boring
+  - boring
+  examples:
+  - Boring as. Three hours of concrete.
+  - It's just his trainin' sessions are boring as, eh?
+  - Boring as.
+- term: a bucketload
+  key: bucketload
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - a heap of money
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - large sum of money
+  - lots of money
+  - a lot of money
+  examples: []
+- term: bullshitter
+  key: bullshitter
+  in_dictionary: null
+  support: 3
+  agents:
+  - B
+  - C
+  web:
+    concept: NEW:LIAR
+    frame: np
+    register: current
+    region: []
+    vulgarity: 2
+    incoherence: 2
+    sources:
+    - https://greensdictofslang.com/entry/bkdiezq
+    confidence: medium
+    notes: Green's has Australian citations from 1939 and 1945 (the entry id is from the result set; mapping unverified).
+      The documented use of 'bullshit artist' is American, but it is common in Australia too. A cleaner option is
+      'a bulldust artist' (built from the existing NONSENSE form; not attested).
+    meaning: a person who tells lies or tall stories
+  gaps:
+  - bluffer
+  - braggart
+  - fibber
+  - liar
+  frames:
+  - np
+  vulgarity_guesses:
+  - 2
+  meanings:
+  - liar
+  - liar
+  - a person who tells lies or tall stories
+  examples: []
+- term: a bundle of nerves
+  key: bundle of nerves
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - nervous
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very nervous
+  - nervous, jumpy
+  - nervous, jumpy
+  examples:
+  - I was a bundle of nerves on the train and nearly got off at the wrong station.
+- term: but (sentence-final)
+  key: but (sentence-final)
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:connective
+  - filler:sentence_final_tag
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - A boat, but?
+  - A boat, but?
+  - A boat, but?
+- term: a chat
+  key: chat
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - having a chinwag
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - have a talk
+  - talk at length
+  - a talk
+  - a talk
+  examples: []
+- term: ciggie
+  key: ciggie
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - cigarette
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - cigarette
+  - cigarette
+  - smoke a cigarette
+  examples: []
+- term: cool her heels
+  key: cool heels
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - wait
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - wait
+  - wait
+  - wait alone
+  examples: []
+- term: a cracker of a day
+  key: cracker of a day
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - C
+  web:
+    concept: NEW:FINE_DAY
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://www.csu.edu.au/current-students/support/international-students/english-language-support/aussie-slang-words-and-phrases
+    confidence: medium
+    notes: Charles Sturt University's slang page gives this exact example. Also 'a beaut day', 'a ripper of a day'
+      (built from EXCELLENT forms; not directly attested).
+    meaning: a gorgeous day
+  gaps:
+  - beautiful day
+  - fine day
+  - lovely weather
+  - sunny
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - beautiful (days)
+  - fine, sunny days
+  - a gorgeous day
+  examples: []
+- term: dicey
+  key: dicey
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - dangerous
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - dangerous
+  - dangerous
+  - risky, unsafe
+  - dangerous
+  examples: []
+- term: the do
+  key: do
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - party
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - party / social event
+  - party
+  - social gathering
+  examples:
+  - So, how was the do on Saturday?
+  - So, how was the do on Satdy?
+  - '"So, how was the do on Saturday?'
+- term: down the road
+  key: down the road
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - nearby
+  frames:
+  - adv
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - close by
+  - close by
+  - close by
+  - near
+  examples: []
+- term: drenched
+  key: drenched
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - soaked
+  - wet
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very wet
+  - drenched
+  - drenched
+  - soaked through
+  examples: []
+- term: exy
+  key: exy
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - C
+  web:
+    concept: NEW:EXPENSIVE
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://www.wiktionary.com/wiki/exy
+    - https://greensdictofslang.com/entry/vr4qyry
+    confidence: high
+    notes: Also spelt exxy. Clipped 'expensive' plus -y, like brekkie or servo.
+    meaning: pricey
+  gaps:
+  - costly
+  - dear
+  - expensive
+  - pricey
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - costly
+  - costly
+  - costly
+  - pricey
+  examples:
+  - Is it exy?
+- term: a feed
+  key: feed
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - dinner
+  - lunch
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - lunch
+  - evening meal
+  - lunch
+  - evening meal
+  examples: []
+- term: good call
+  key: good call
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:agreement
+  - smart
+  frames:
+  - adj
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - smart
+  - astute
+  examples:
+  - Yeah, good call.
+- term: good like that
+  key: good like that
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - generous
+  frames:
+  - np
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - generous person
+  - very generous
+  - generous
+  - generous
+  examples: []
+- term: a good sort
+  key: good sort
+  in_dictionary: null
+  support: 3
+  agents:
+  - B
+  - C
+  web:
+    concept: NEW:ATTRACTIVE
+    frame: np
+    register: dated
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://boards.straightdope.com/t/a-good-sort/595647
+    - https://greensdictofslang.com/entry/muv4fki
+    confidence: low
+    notes: 'Ambiguous: Green''s supports the ''decent person'' sense, and the looks sense rests mainly on forum
+      comments. It also judges women on looks, so it can come across as old-fashioned or sexist.'
+    meaning: an attractive woman (or simply a decent person)
+  gaps:
+  - attractive
+  - generous
+  - good-looking
+  - handsome
+  - pretty
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - good-looking
+  - attractive person
+  - generous, kind
+  - attractive
+  examples:
+  - Your grandad reckons your new hubby is a good sort
+- term: had a good cry
+  key: had a good cry
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - cry (cried)
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - cried
+  - cry
+  - wept
+  examples:
+  - Arthur sat down beside it and had a good cry for the first time since the funeral.
+- term: had tea
+  key: had tea
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - dinner
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - evening meal
+  - evening meal
+  - evening meal
+  - evening meal
+  examples:
+  - Arthur and his wife had their tea at the little table by the kitchen window.
+  - most nights we had tea at a fish restaurant down the road.
+  - Arthur and his missus had their tea at the little table by the kitchen window.
+- term: had the jitters
+  key: had the jitters
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - nervous
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very nervous
+  - nervous, jumpy
+  - nervous, jumpy
+  - nervous
+  examples: []
+- term: hairy
+  key: hairy
+  in_dictionary: null
+  support: 3
+  agents:
+  - B
+  - C
+  web:
+    concept: NEW:DANGEROUS
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://listserv.linguistlist.org/pipermail/ads-l/2008-July/082843.html
+    - https://www.vocafy.net/dictionary/en/hairy
+    confidence: low
+    notes: General informal English (British record from 1917), not specifically Australian. Include only if 'strongly
+      current in Aus' is enough; it is common here.
+    meaning: dicey, scary, risky
+  gaps:
+  - dangerous
+  - risky
+  - scary
+  - touch-and-go
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - risky
+  - risky, unsafe
+  - dicey, scary, risky
+  examples: []
+- term: hang on and see
+  key: hang on and see
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - wait
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - wait
+  - wait
+  - wait
+  examples:
+  - I told her to hang on and see, but you know what she's like.
+  - I told her to hang on and see, but you know what she's like.
+- term: hopped the fence
+  key: hopped the fence
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - jump
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - jump over
+  - jump
+  - jump over
+  examples:
+  - He bolted across the road with a hose, hopped the fence
+  - He bolted across the road with a hose, hopped the fence and put it out before the fireys got there.
+- term: I reckon
+  key: i reckon
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - C
+  web:
+    concept: THINK
+    frame: garnish:aside
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://www.inyourpocket.com/australia/sydney/articles/australian-slang-a-survival-glossary
+    confidence: high
+    notes: '''Reckon'' is already in THINK as a verb. This is the free-floating aside/tag use (''..., I reckon.''
+      or ''I reckon, ...''). The glossary calls it a sure sign you''re talking to an Australian.'
+    meaning: thinking or hedging filler, 'I think'
+  gaps:
+  - I guess
+  - I suppose
+  - I think
+  - probably
+  - thinking_fillers
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - hedge/thinking
+  - hesitation / vagueness
+  - hesitation
+  - thinking or hedging filler, 'I think'
+  examples:
+  - About twenty bucks for a burger, I reckon.
+- term: I s'pose
+  key: i s'pose
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:hedge
+  - filler:thinking
+  - hedges
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - softening
+  - softening
+  - softening
+  examples:
+  - I s'pose it's end of financial year or something.
+  - Copped the rough end of the pineapple a bit, I s'pose.
+  - Bit of rough luck, I s'pose.
+- term: the idea
+  key: idea
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - proposition
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - idea
+  - principle
+  - principle
+  examples:
+  - and built on the idea that everyone's created equal.
+  - built on the idea that all men are created equal
+- term: in a bad way
+  key: in a bad way
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - despondent
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - struggling, in despair
+  - in deep low spirits
+  - deeply unhappy
+  examples: []
+- term: in a flap
+  key: in a flap
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - anxious
+  - worried
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - anxious, fretting
+  - nervous
+  - worried
+  - anxious, fretting
+  examples: []
+- term: jumped the fence
+  key: jumped the fence
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - jump
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - climb/jump over
+  - jump over
+  - jump over
+  - jump over
+  examples: []
+- term: let herself in
+  key: let herself in
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - inside
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - entered
+  - enter
+  - entered
+  examples:
+  - So she opened the door and let herself in.
+  - So she opened the door and let herself in.
+  - So she let herself in.
+- term: Look
+  key: look
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:opener
+  - openers
+  frames:
+  - garnish
+  - interjection
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - opener
+  examples:
+  - Look, I can't talk long, I'm on my break.
+  - Look, I'll be fair dinkum with ya.
+  - Look, I've gotta go, my boss is waving at me.
+- term: loud as
+  key: loud as
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - loud
+  - noisy
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very loud
+  - loud
+  - loud
+  - noisy
+  examples:
+  - Big black mongrel of a thing, loud as, barking its head off at everything.
+  - Big black thing, loud as, makin' a hell of a racket
+  - Big black mongrel of a thing, loud as, making a hell of a racket, barking at everything.
+- term: Mind you
+  key: mind you
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - connectives
+  - filler:connective
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - topic shift / discourse linkers
+  - linkers
+  examples:
+  - Mind you, his brother turned up
+  - Mind you, his brother turned up
+  - Mind you, his brother turned up, and he's a bit of a pain in the arse.
+- term: the mums and dads
+  key: mums and dads
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - parents
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - parents
+  - parents
+  - parents
+  - parents of players
+  examples:
+  - Thanks to the volunteers, the mums and dads and the families who cook
+  - And the mums and dads are getting a bit dirty about it too.
+  - Cheers to the volunteers, the mums and dads and the families
+- term: mutt
+  key: mutt
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - dog
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - dog
+  - dog
+  - dog
+  - dog
+  examples:
+  - '''cause the mutt barked at the postie'
+- term: Nah, nah
+  key: nah, nah
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:disagreement
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - Nah, nah, I won't.
+  - Nah, nah, me lips are sealed.
+  - '"Nah, nah, I won''t.'
+- term: or something
+  key: or something
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - C
+  web:
+    concept: NEW:GENERAL_EXTENDER
+    frame: garnish:tail
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://assets.cambridge.org/97811088/37231/excerpt/9781108837231_excerpt.pdf
+    confidence: medium
+    notes: General English. Also 'or whatever'.
+    meaning: vague tail hedging the precise detail
+  gaps:
+  - filler:hedge
+  - or so
+  - or thereabouts
+  - roughly
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings:
+  - vague tail hedging the precise detail
+  examples:
+  - end of financial year or something.
+  - Dunno, I s'pose it's end of financial year or something.
+- term: or whatever
+  key: or whatever
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:hedge
+  - thinking_fillers
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - hesitation
+  - hesitation / vagueness
+  examples:
+  - just a suggestion or whatever.
+  - just a suggestion or whatever.
+  - Not a whinge, just a suggestion or whatever.
+- term: over the moon
+  key: over the moon
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - elated
+  - jubilant
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - thrilled
+  - delighted
+  - thrilled
+  - overjoyed
+  examples: []
+- term: place
+  key: place
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - house
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - house
+  - holiday house
+  - house
+  - house
+  examples:
+  - When the new mob moved into the place across the road
+  - When the new mob moved into the place across the road, the whole street was having a stickybeak.
+- term: pooch
+  key: pooch
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - dog
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - dog
+  - dog
+  - dog
+  - dog
+  examples: []
+- term: pricey
+  key: pricey
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - expensive
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - expensive
+  - too costly
+  - costly
+  - costly
+  examples:
+  - Yeah, good call. Is it pricey?
+- term: rollie
+  key: rollie
+  in_dictionary: null
+  support: 3
+  agents:
+  - B
+  - C
+  web:
+    concept: NEW:CIGARETTE
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://en.wiktionary.org/wiki/rollie
+    confidence: medium
+    notes: Wiktionary says chiefly UK; very common in Australia. Rolled cigarettes only.
+    meaning: a hand-rolled cigarette
+  gaps:
+  - cigarette
+  - roll-up
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - cigarette
+  - smoke a cigarette
+  - a hand-rolled cigarette
+  examples: []
+- term: rough luck
+  key: rough luck
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - unlucky
+  frames:
+  - np
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - unlucky
+  - unlucky
+  - unlucky
+  - unlucky
+  examples:
+  - Bit of rough luck, I s'pose.
+- term: round the corner
+  key: round the corner
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - nearby
+  frames:
+  - adv
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - close by
+  - close by
+  - near
+  - close by
+  examples: []
+- term: shack
+  key: shack
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - house
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - holiday house
+  - holiday house
+  - house
+  examples:
+  - The shack we'd rented was small and a bit run-down
+  - The shack we'd rented was small and a bit tired-lookin'
+- term: shindig
+  key: shindig
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - party
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - party / social event
+  - party
+  - social gathering
+  examples: []
+- term: sit tight
+  key: sit tight
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - wait
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - wait
+  - wait
+  - wait
+  examples: []
+- term: slow and steady
+  key: slow and steady
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - steady
+  frames:
+  - adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - steady
+  - persistent
+  - constant
+  examples:
+  - Slow and steady wins the race.
+- term: slow as
+  key: slow as
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - slow
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very slow
+  - very slow
+  - very slow
+  examples: []
+- term: slow as a wet week
+  key: slow as a wet week
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - C
+  web:
+    concept: NEW:SLOW
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://blog.worldsweeper.com/2016/05/27/can-you-identify-these-australian-slang-terms/
+    confidence: low
+    notes: Only a quiz list attests it. Green's has 'like a wet week' only in the gloomy sense. Plausible, but weak;
+      verify.
+    meaning: painfully slow
+  gaps:
+  - slow
+  - slowly
+  - sluggish
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very slow
+  - very slow
+  - painfully slow
+  examples:
+  - for her short little legs and for being slow as a wet week.
+  - One day a Hare was paying out on the Tortoise for her stumpy little legs and for being slow as a wet week.
+- term: smoke
+  key: smoke
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - cigarette
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - cigarette
+  - cigarette
+  - smoke a cigarette
+  examples: []
+- term: sparrow's
+  key: sparrow's
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - early
+  frames:
+  - np
+  vulgarity_guesses:
+  - 1
+  meanings:
+  - very early (dawn)
+  - very early
+  - very early in the morning
+  examples: []
+- term: Sparrow's fart
+  key: sparrow's fart
+  in_dictionary: null
+  support: 3
+  agents:
+  - B
+  - C
+  web:
+    concept: NEW:EARLY
+    frame: np
+    register: current
+    region: []
+    vulgarity: 1
+    incoherence: 4
+    sources:
+    - https://aussieenglish.com.au/?p=153775
+    - https://wordhistories.net/2026/03/02/sparrowfart/
+    - https://www.phrases.org.uk/idioms/sparrow-fart.html
+    confidence: high
+    notes: British dialect origin (1828), but strongly current in Australia. Usually 'at sparrow's fart' or 'sparrow's'.
+      Vulgarity 1 for 'fart'.
+    meaning: the crack of dawn
+  gaps:
+  - dawn
+  - early
+  - first thing
+  - very early
+  frames:
+  - np
+  vulgarity_guesses:
+  - 1
+  meanings:
+  - very early
+  - very early in the morning
+  - the crack of dawn
+  examples:
+  - Sparrow's fart, that.
+  - That's sparrow's fart.
+- term: spent
+  key: spent
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - weary
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - exhausted
+  - exhausted
+  - exhausted
+  examples: []
+- term: a spunk
+  key: spunk
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  web:
+    concept: NEW:ATTRACTIVE
+    frame: np
+    register: current
+    region: []
+    vulgarity: 1
+    incoherence: 3
+    sources:
+    - https://lens.monash.edu/orright-you-spunkrats-heres-where-all-our-aussie-summertime-language-came-from-howard-manns-senior-lecturer-in-linguistics-monash-university/
+    - https://www.wiktionary.com/wiki/spunk
+    confidence: high
+    notes: Monash research (Manns/Burridge) says the spunk family is still the most common Aussie way to say 'attractive'.
+      Works for any gender. In Britain 'spunk' is also vulgar for semen, so gate it outside Aussie mode.
+    meaning: a good-looking person
+  gaps:
+  - attractive
+  - beautiful
+  - good-looking
+  - handsome
+  - hot
+  - pretty
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - attractive person
+  - attractive person
+  - a good-looking person
+  examples: []
+- term: a strange one
+  key: strange one
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - odd
+  - strange
+  - weird
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - strange
+  - eccentric
+  - strange, cold
+  - odd, unsettling
+  examples: []
+- term: tea
+  key: tea
+  in_dictionary: null
+  support: 3
+  agents:
+  - B
+  - C
+  web:
+    concept: NEW:DINNER
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://www.wikipedia.org/wiki/Teatime
+    - https://blog.englishteastore.com/2010/12/14/tea-traditions-australia
+    - https://lemmy.4d2.org/post/4357291/5789029
+    confidence: high
+    notes: 'Marks class and region: working-class and rural, and older speakers. In some rural families ''dinner''
+      is the midday meal. It clashes with TEA (the cuppa), so only use it for the evening meal.'
+    meaning: the evening meal
+  gaps:
+  - dinner
+  - evening meal
+  - supper
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - evening meal
+  - evening meal
+  - the evening meal
+  examples:
+  - And then tea at Mum's at six, don't forget.
+  - And then tea at Mum's at 6, don't forget.
+- term: tell porkies
+  key: tell porkies
+  in_dictionary: null
+  support: 3
+  agents:
+  - B
+  - C
+  web:
+    concept: NEW:LIE
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://greensdictofslang.com/entry/zpa2phq
+    - https://wordhistories.net/2022/05/03/porky-rhyming-slang/
+    - https://www.yourlifechoices.com.au/entertainment/why-i-adore-rhyming-slang/
+    confidence: high
+    notes: Rhyming slang (pork pies = lies), British in origin with Australian citations. Also 'a porky' = a lie.
+    meaning: tell lies
+  gaps:
+  - fib
+  - lie
+  - lie (tell lies)
+  - tell lies
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - tell a lie
+  - tell a lie
+  - tell lies
+  examples: []
+- term: up with the sparrows
+  key: up with the sparrows
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - wide awake
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - fully awake
+  - fully awake
+  - fully awake
+  examples: []
+- term: What else?
+  key: what else
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:thinking
+  - thinking_fillers
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - filler
+  - hesitation
+  examples:
+  - What else? Bins go out Wednesday night.
+  - What else... Bins go out Wednesdy night.
+  - What else?
+- term: will ya?
+  key: will ya
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:sentence_final_tag
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - Chuck us the tongs, will ya?
+  - Pass us the tongs, will ya?
+  - Pass us the tongs, will ya?
+- term: a word
+  key: word
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - having a chinwag
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - talk
+  - talk
+  - a talk
+  examples: []
+- term: a yarn
+  key: yarn
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - B
+  - C
+  web: null
+  gaps:
+  - having a chinwag
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - chat
+  - chat
+  - a talk
+  examples: []
+- term: you know
+  key: you know
+  in_dictionary: null
+  support: 3
+  agents:
+  - A
+  - C
+  web:
+    concept: NEW:TAG_YOU_KNOW
+    frame: garnish:tag
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://research-repository.uwa.edu.au/en/publications/utterance-final-tags-in-aboriginal-and-non-aboriginal-english/
+    confidence: high
+    notes: The UWA study (Fraiese, Rodríguez Louro, Collard) found utterance-final 'you know' to be the most common
+      tag in both Australian English and Aboriginal English. Render it as 'ya know'. General English, so it's mostly
+      a rhythm device.
+    meaning: tag checking the listener is with you
+  gaps:
+  - (sentence-final filler)
+  - filler:thinking
+  - right
+  - thinking_fillers
+  - you know
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - filler
+  - hesitation
+  - tag checking the listener is with you
+  examples:
+  - Not falling over, but, you know, happy.
+  - Not falling over, but, you know, happy.
+  - Not falling over, but, you know, happy.
+- term: Absolutely saturated
+  key: absolutely saturated
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - soaked
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - drenched
+  - soaked through
+  - drenched
+  examples:
+  - Absolutely saturated.
+  - Absolutely saturated.
+  - He came back absolutely saturated and covered in ash.
+- term: add or take away
+  key: add or take away
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - detract
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - remove
+  - take away
+  examples:
+  - way beyond anything the likes of us could add or take away.
+  - beyond anythin' our piddlin' efforts could add or take away
+- term: are cooked
+  key: are cooked
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - weary
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - exhausted
+  - exhausted
+  examples:
+  - '"Our players are cooked, but they''ll celebrate tonight," she said.'
+  - '"Our players are cooked, but they''ll be kickin'' on tonight,"'
+- term: aren't they? / haven't ya?
+  key: aren't they? / haven't ya
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - sentence_final_tags
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - tag
+  - tag
+  examples:
+  - You've been here longer than me, haven't ya?
+  - You've been here longer than me, haven't ya?
+- term: a bad trot
+  key: bad trot
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: NEW:UNLUCKY
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://macquariedictionary.com.au/?p=11126
+    - https://greensdictofslang.com/entry/wqzopya
+    - https://aussieenglish.com.au/ae-882-aussie-slang-a-bad-trot
+    confidence: high
+    notes: 'Macquarie dates it from the 1940s. Variants: rough trot, tough trot, lean trot. Usually ''on a bad trot''
+      or ''had a bad trot''. Collins labels it British too.'
+    meaning: a run of bad luck
+  gaps:
+  - a rough patch
+  - a run of bad luck
+  - bad luck
+  - unlucky
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - unlucky
+  - unlucky
+  - a run of bad luck
+  examples: []
+- term: barking its head off
+  key: barking its head off
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - noisy
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - noisy (barking)
+  - noisy
+  examples:
+  - loud as, barking its head off at everything.
+- term: battled it out
+  key: battled it out
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - fought
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - fought
+  - fought
+  examples: []
+- term: bawled
+  key: bawled
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - cried
+  - cry (cried)
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - cried out (upset)
+  - wept
+  - called out
+  examples: []
+- term: big mouth
+  key: big mouth
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - gossip
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - nosy person
+  - person who spreads rumours / to gossip
+  examples: []
+- term: a bit full
+  key: bit full
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - inebriated
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - drunk
+  - drunk
+  examples:
+  - I'd been round at my cousin's, and I'll admit I was a bit full.
+  - I'd been round me cousin's place, and I'll admit I was a bit full.
+- term: a bit funny
+  key: bit funny
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - odd
+  - strange
+  - weird
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - oddly behaved
+  - strange, cold
+  - odd, unsettling
+  - suspicious-looking
+  examples:
+  - Anyway, he was a bit funny about it, sorta quiet and a bit off
+  - By the end of the month, nobody on the street remembered they'd ever seemed a bit funny at all.
+- term: a bit odd
+  key: bit odd
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - strange
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - eccentric
+  - odd, unsettling
+  - eccentric
+  examples: []
+- term: a bit of a bullshitter
+  key: bit of a bullshitter
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - liar
+  frames:
+  - np
+  vulgarity_guesses:
+  - 2
+  meanings:
+  - liar/exaggerator
+  - exaggerator, liar
+  examples:
+  - He's a bit of a bullshitter too
+  - He's a bit of a bullshitter too, to be honest — he'll tell you he grew a pumpkin the size of a car.
+- term: a bit of a pain in the arse
+  key: bit of a pain in the arse
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - annoying
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 2
+  meanings:
+  - irritating
+  - irritating
+  examples:
+  - Mind you, his brother turned up, and he's a bit of a pain in the arse.
+  - Mind you, his brother turned up, and he's a bit of a pain in the arse.
+- term: a bit of a strange one
+  key: bit of a strange one
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - strange
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - odd person
+  - eccentric
+  - odd person
+  examples:
+  - though one bloke in accounts was a bit of a strange one.
+- term: a bit rich
+  key: bit rich
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - expensive
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - costly
+  - costly
+  examples: []
+- term: a bit strange
+  key: bit strange
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - odd
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - oddly behaved
+  - strange, cold
+  - strange
+  examples: []
+- term: a bit sus
+  key: bit sus
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - odd
+  - strange
+  - weird
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - not quite right
+  - suspicious-looking
+  - strange, cold
+  - odd, unsettling
+  examples: []
+- term: bitzer
+  key: bitzer
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: NEW:DOG
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://en.wiktionary.com/wiki/bitzer
+    - https://greensdictofslang.com/entry/t2sttci
+    - https://waywordradio.org/bitza_1
+    confidence: high
+    notes: Aus/NZ. Fits only an unremarkable or mixed dog, not 'dog' in general (Goldilocks-style texts). Wiktionary
+      also records a sense for a person of mixed ethnicity, which is offensive; use the dog sense only.
+    meaning: a mixed-breed dog
+  gaps:
+  - dog
+  - mixed breed
+  - mongrel
+  - mutt
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - dog
+  - dog
+  - a mixed-breed dog
+  examples: []
+- term: a blabbermouth
+  key: blabbermouth
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - gossip
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - gossip
+  - spread rumours; a rumour-monger
+  - rumour-monger
+  examples: []
+- term: blowing a dog off its chain
+  key: blowing a dog off its chain
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - windy
+  frames:
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very windy
+  - windy
+  - very windy
+  - very windy
+  examples:
+  - It was last winter, and it was blowing a dog off its chain, the kind of wind that bends the trees right over.
+  - It was last winter, and it was blowing a dog off its chain, the kind of wind that bends the trees.
+- term: blowing a gale
+  key: blowing a gale
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - windy
+  frames:
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very windy
+  - windy
+  - very windy
+  - very windy
+  examples:
+  - It started blowing a gale, and the surf got huge and pretty hairy.
+- term: bored as
+  key: bored as
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - bored
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 2
+  meanings:
+  - very bored
+  - very bored
+  - very bored
+  - very bored
+  examples: []
+- term: Bored out of my brain
+  key: bored out of brain
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - bored
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very bored
+  - very bored
+  examples:
+  - I'm bored out of my brain.
+  - Bored out of my brain.
+- term: bored stiff
+  key: bored stiff
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - bored
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very bored
+  - fed up, bored
+  - very bored
+  - very bored
+  examples:
+  - The kids were bored stiff by lunchtime.
+- term: boring as batshit
+  key: boring as batshit
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - boring
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 2
+  meanings:
+  - very boring
+  - dull
+  examples:
+  - Boring as batshit. Three hours of concrete.
+- term: bulldust artist
+  key: bulldust artist
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - liar
+  frames:
+  - np
+  vulgarity_guesses:
+  - 2
+  meanings:
+  - liar
+  - liar
+  examples: []
+- term: bullshit
+  key: bullshit
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - lie (tell lies)
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - tell a lie
+  - tell a lie
+  examples: []
+- term: bullshit artist
+  key: bullshit artist
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - liar
+  frames:
+  - np
+  vulgarity_guesses:
+  - 2
+  meanings:
+  - liar/exaggerator
+  - liar
+  - exaggerator, liar
+  examples: []
+- term: but
+  key: but
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: NEW:TAG_BUT
+    frame: garnish:tag
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://www.jbe-platform.com/content/books/9789027289407-veaw.g39.19mul
+    - https://ewave-atlas.org/valuesets/59-211
+    - https://kengrace.substack.com/p/but-where-does-yours-go
+    confidence: high
+    notes: Mulder, Thompson and Penry Williams (2009) show final 'but' is a fully developed particle in Australian
+      English that marks contrast and signals Australianness. eWAVE rates it neither pervasive nor rare. Only attach
+      it to a clause that contrasts with the one before. Impressionistically stronger in Qld and among working-class
+      speakers.
+    meaning: sentence-final 'though', leaving a contrast hanging
+  gaps:
+  - (sentence-final) but
+  - however
+  - mind you
+  - sentence_final_tags
+  - though
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - tag seeking agreement
+  - tag
+  - tag
+  - sentence-final 'though', leaving a contrast hanging
+  examples: []
+- term: cheeky
+  key: cheeky
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - rude
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - rude, unfriendly
+  - rude, curt
+  examples: []
+- term: chuffed
+  key: chuffed
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - elated
+  - happily
+  frames:
+  - adv
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - thrilled
+  - delighted
+  - happily
+  examples: []
+- term: clean up
+  key: clean up
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - tidy up
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - clean and arrange
+  - clean/tidy
+  examples: []
+- term: climbing the walls
+  key: climbing the walls
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - bored
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - fed up, bored
+  - very bored
+  examples: []
+- term: closing shifts
+  key: closing shifts
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - late
+  frames:
+  - adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - late
+  - evening shifts
+  examples: []
+- term: completely stuffed
+  key: completely stuffed
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - fatigued
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - exhausted
+  - exhausted
+  examples:
+  - By six I was completely stuffed.
+  - By six o'clock I was completely stuffed.
+- term: cooked
+  key: cooked
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - fatigued
+  - weary
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - exhausted
+  - exhausted
+  - exhausted
+  - exhausted
+  examples: []
+- term: copped it
+  key: copped it
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - unlucky
+  frames:
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - unlucky
+  - had bad luck
+  - unlucky
+  examples: []
+- term: cost an arm and a leg
+  key: cost an arm and a leg
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - expensive
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - too costly
+  - costly
+  examples: []
+- term: Couldn't tell a porky
+  key: couldn't tell a porky
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - lie (tell lies)
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - tell a lie
+  - tell a lie
+  examples:
+  - Couldn't tell a porky to save my life.
+  - Couldn't tell a porky to save me life.
+- term: crack of dawn
+  key: crack of dawn
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - early
+  frames:
+  - adv
+  - np
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - very early
+  - very early in the morning
+  - early
+  examples: []
+- term: a cracker
+  key: cracker
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - beautiful
+  frames:
+  - adj
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - excellent
+  - beautiful
+  examples: []
+- term: cracks the shits
+  key: cracks the shits
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - difficult
+  frames:
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - becomes difficult/tantrum
+  - hostile, aggressive
+  examples: []
+- term: daylight robbery
+  key: daylight robbery
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - expensive
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - too costly
+  - costly
+  examples: []
+- term: deadly
+  key: deadly
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: EXCELLENT
+    frame: adj
+    register: current
+    region:
+    - aboriginal_english
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://www.sbs.com.au/language/english/audio/minipod-welcome-to-aboriginal-english-1_1
+    - https://en.wiktionary.com/wiki/deadly
+    confidence: high
+    notes: An Aboriginal English high compliment, increasingly used by non-Indigenous Australians. Also an interjection
+      ('Deadly!'). Gate it as for 'shame'/'gammon'.
+    meaning: excellent, brilliant
+  gaps:
+  - awesome
+  - boring
+  - brilliant
+  - cool
+  - excellent
+  - great
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - dull
+  - excellent, brilliant
+  examples: []
+- term: dear
+  key: dear
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - expensive
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - too costly
+  - costly
+  - costly
+  - costly
+  examples: []
+- term: didn't have a brass razoo
+  key: didn't have a brass razoo
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - destitute
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - penniless
+  - penniless
+  examples:
+  - our family didn't have a brass razoo for nearly two years
+  - After my father lost his job, we didn't have a brass razoo for nearly two years.
+- term: dinner
+  key: dinner
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - dinner
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - evening meal
+  - evening meal
+  - evening meal
+  - evening meal
+  examples: []
+- term: dirty
+  key: dirty
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - irate
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - furious
+  - furious
+  examples: []
+- term: doing it just as tough
+  key: doing it just as tough
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - impoverished
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - struggling, poor
+  - poor, struggling
+  examples:
+  - Plenty of families in our street were doing it just as tough.
+  - Plenty of families in our street were doing it just as tough.
+- term: down the beach
+  key: down the beach
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - beach
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - beach
+  - beach
+  examples:
+  - Bloke gets seasick down the beach.
+  - He gets seasick down the beach!
+- term: dripping
+  key: dripping
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - soaked
+  - wet
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - thoroughly wet
+  - drenched
+  - drenched
+  examples: []
+- term: dull as dishwater
+  key: dull as dishwater
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - boring
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 2
+  meanings:
+  - very boring
+  - boring
+  - dull
+  - dull
+  examples: []
+- term: easy on the eye
+  key: easy on the eye
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - attractive
+  - handsome
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - good-looking
+  - attractive man
+  - attractive
+  examples: []
+- term: even more devotion
+  key: even more devotion
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - increas
+  frames:
+  - adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - more
+  - greater
+  examples:
+  - we take on even more devotion to the cause
+  - 'It''s really on us to get stuck into the big job still in front of us: that from these honoured dead we take
+    even more devotion to the cause they gave everything for; that we here make a fair dinkum promise that these
+    blokes won''t have died for nothing; that this nation, under God, gets a fresh start at freedom; and that government
+    of the people, by the people, for the people won''t be wiped off the face of the earth.'
+- term: a fair whack
+  key: fair whack
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - expensive
+  - filler:intensifier
+  frames:
+  - garnish
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - costly
+  examples:
+  - That's a fair whack, isn't it?
+- term: fella
+  key: fella
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - husband
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - husband
+  - husband
+  - husband
+  examples: []
+- term: flat broke
+  key: flat broke
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - destitute
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - penniless
+  - penniless
+  examples: []
+- term: fuming
+  key: fuming
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - enraged
+  - irate
+  frames:
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - furious
+  - furious
+  - furious
+  - furious
+  examples: []
+- term: gag
+  key: gag
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - joke
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - joke
+  - joke
+  examples: []
+- term: give it a once-over
+  key: give it a once-over
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - tidy up
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - clean and arrange
+  - clean/tidy
+  examples: []
+- term: give you a hiding
+  key: give you a hiding
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - beat
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - defeat soundly
+  - defeat
+  examples: []
+- term: gives me the shits
+  key: gives me the shits
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - annoying
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 2
+  meanings:
+  - irritating
+  - irritating
+  examples: []
+- term: goes (quotative)
+  key: goes (quotative)
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - filler:other
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - and he just goes, 'Climbing fences at night's dangerous, you know.'
+  - She goes, 'Why's it take so bloody long?'
+- term: gorgeous
+  key: gorgeous
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - beautiful
+  frames:
+  - adj
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - looked beautiful
+  - beautiful
+  - beautiful
+  examples: []
+- term: a goss
+  key: goss
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: NEW:GOSSIP
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://en.wiktionary.com/wiki/goss
+    - https://www.macquariedictionary.com.au/?p=10949
+    confidence: high
+    notes: Wiktionary marks it General Australian. 'Have a goss' (the verb, to gossip) is common but I found no
+      direct attestation.
+    meaning: gossip, the latest news about people
+  gaps:
+  - gossip
+  - having a chinwag
+  - rumours
+  - scuttlebutt
+  - the latest
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - a talk
+  - gossip, the latest news about people
+  examples: []
+- term: got into a blue
+  key: got into a blue
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - argue
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - argument
+  - argue
+  examples:
+  - Daniel and I got into a blue about whose turn it was to cook.
+  - Daniel and me got into a blue about whose turn it was to cook.
+- term: grab a feed
+  key: grab a feed
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - lunch
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - have a meal
+  - a meal
+  examples:
+  - Wanna grab a feed instead?
+  - Wanna grab a feed instead?
+- term: had a barney
+  key: had a barney
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - argue
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - argument
+  - argue
+  examples: []
+- term: had a quiet yarn
+  key: had a quiet yarn
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - having a chinwag
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - talk
+  - talk
+  examples:
+  - Maybe if we had a quiet yarn with him after the game on Saturday
+  - Maybe if we had a quiet yarn with him after the game Satdy
+- term: half-cut
+  key: half-cut
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: DRUNK
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://greensdictofslang.com/entry/cgqa7ra
+    - https://greensdictofslang.com/entry/g3aiuvi
+    confidence: medium
+    notes: Also British. Clean, so it suits the lower levels for 'inebriated'.
+    meaning: fairly drunk
+  gaps:
+  - drunk
+  - inebriated
+  - tipsy
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 2
+  meanings:
+  - drunk
+  - fairly drunk
+  examples: []
+- term: hard work
+  key: hard work
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - annoying
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 2
+  meanings:
+  - irritating person
+  - irritating
+  - trying, irritating
+  examples:
+  - I know some customers can be hard work.
+- term: have a barney
+  key: have a barney
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: NEW:ARGUE
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://en.wiktionary.com/wiki/barney
+    - https://greensdictofslang.com/entry/icdgxta
+    - https://www.macquariedictionary.com.au/?p=11190
+    confidence: high
+    notes: Aus/UK. Can shade into a scuffle. The existing FIGHT form 'a blue' should also get 'argument' and 'argue'
+      triggers ('have a blue').
+    meaning: have a row
+  gaps:
+  - argue
+  - bicker
+  - have an argument
+  - quarrel
+  - row
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - argue
+  - have a row
+  examples: []
+- term: haven't ya?
+  key: haven't ya
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - filler:sentence_final_tag
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - You've been here longer than me, haven't ya?
+  - You've been here longer than me, haven't ya?
+- term: having a durry
+  key: having a durry
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - cigarette
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - cigarette
+  - smoke a cigarette
+  examples:
+  - Then he stood by the fence having a durry and banging on about what his new boat cost.
+  - Then he stood by the fence having a durry and carrying on about how much his new boat set him back.
+- term: having a good old chinwag
+  key: having a good old chinwag
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - having a chinwag
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - chat
+  - a long chat
+  examples:
+  - having a good old chinwag with the mum on the front step.
+  - She stayed an hour, having a good old chinwag with the mum on the front step.
+- term: having a kip
+  key: having a kip
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - dozing
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - napping
+  - napping
+  examples: []
+- term: he'd give you the shirt off his back
+  key: he'd give you the shirt off back
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - generous
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - generous person
+  - generous, kind
+  examples: []
+- term: heavy
+  key: heavy
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - wet
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - waterlogged and slippery
+  - wet, slippery
+  examples: []
+- term: hold your horses
+  key: hold horses
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - wait
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - wait
+  - wait
+  examples: []
+- term: holiday house
+  key: holiday house
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - house
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - holiday house
+  - holiday house
+  examples: []
+- term: howling
+  key: howling
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - windy
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very windy
+  - very windy
+  - very windy
+  examples: []
+- term: I dunno
+  key: i dunno
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - filler:thinking
+  - thinking_fillers
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - hesitation
+  examples:
+  - I dunno, I s'pose it's end of financial year or something.
+- term: I hopped a fence
+  key: i hopped a fence
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - jump
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - climb/jump over
+  - jump over
+  examples:
+  - I hopped a fence into someone's yard and landed straight in their fish pond.
+  - I hopped a fence into some bloke's yard
+- term: instead
+  key: instead
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - rather
+  frames:
+  - adv
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - on the contrary
+  - instead
+  examples:
+  - It's on us still kickin', instead, to throw ourselves into the unfinished job
+- term: into the wee hours
+  key: into the wee hours
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - late
+  frames:
+  - adv
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - late at night
+  - late
+  examples: []
+- term: jealous as
+  key: jealous as
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - jealous
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - envious
+  - envious
+  examples:
+  - Well, I'd be jealous as too.
+  - Well, I'd be jealous as, too.
+- term: just round the corner
+  key: just round the corner
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - nearby
+  frames:
+  - adv
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - close by
+  - close by
+  examples:
+  - There's a new cafe just round the corner, near the station.
+  - There's a new cafe just round the corner, near the station.
+- term: kid
+  key: kid
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - girl
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - small child
+  - small child
+  - small child
+  examples: []
+- term: a killing
+  key: killing
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - a heap of money
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - lots of money
+  - a lot of money
+  examples: []
+- term: late in the arvo
+  key: late in the arvo
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - late
+  frames:
+  - adv
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - late
+  - late
+  examples:
+  - We headed down late in the arvo
+  - We headed down late in the arvo
+- term: leapt out of bed
+  key: leapt out of bed
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - jump
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - leapt
+  - leapt
+  examples: []
+- term: like
+  key: like
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: NEW:FILLER_LIKE
+    frame: garnish:aside
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://lens.monash.edu/2022/09/14/1385080
+    - https://research-repository.uwa.edu.au/en/publications/quotatives-across-time-west-australian-english-then-and-now/
+    confidence: medium
+    notes: Not specifically Australian. ICE-Aus corpus work shows it across ages and occupations, and Rodríguez
+      Louro shows quotative 'be like' has overtaken 'say' in Perth. Use sparingly; it reads young.
+    meaning: filler or focus marker mid-sentence
+  gaps:
+  - (filler)
+  - sort of
+  - thinking_fillers
+  - um
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - hesitation / vagueness
+  - hesitation
+  - hesitation
+  - hesitation
+  examples: []
+- term: Like a drowned rat
+  key: like a drowned rat
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - soaked
+  - wet
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - drenched
+  - soaked
+  - drenched
+  - drenched
+  examples:
+  - Like a drowned rat.
+  - Like a drowned rat, head to toe.
+- term: Listen
+  key: listen
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:opener
+  - openers
+  frames:
+  - garnish
+  - interjection
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - opener
+  examples:
+  - Listen, can't yak for long, I'm on me smoko.
+  - Listen, I can't talk for long, I'm on my smoko.
+- term: little girl
+  key: little girl
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - girl
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - girl
+  - child
+  - small child
+  - small child
+  examples:
+  - One arvo a little girl from next door knocked on the door.
+- term: a little scrap of a kitten
+  key: little scrap of a kitten
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - tiny
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very small
+  - very small
+  examples:
+  - she had a little scrap of a kitten in both hands
+  - She was about eight, and she had a little scrap of a kitten cupped in both hands.
+- term: a looker
+  key: looker
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - attractive
+  - handsome
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - good-looking person
+  - attractive man
+  - attractive
+  examples: []
+- term: a mo
+  key: mo
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - moment
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - moment
+  - an instant
+  examples: []
+- term: mosey
+  key: mosey
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - slowly
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - stroll slowly
+  - leisurely
+  examples: []
+- term: a mud heap
+  key: mud heap
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - wet
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - waterlogged
+  - wet, slippery
+  examples: []
+- term: Mum and Dad
+  key: mum and dad
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - parents
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - parents
+  - one's parents
+  examples: []
+- term: a natter
+  key: natter
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - having a chinwag
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - talk at length
+  - a talk
+  examples: []
+- term: nice and comfy
+  key: nice and comfy
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - comfortably
+  frames:
+  - adv
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - comfortably
+  - comfortably
+  examples:
+  - was having a nana nap, nice and comfy, after all her hard yakka.
+  - When he finally woke up and took off flat chat, he saw the Tortoise had already made it to the finish line and
+    was having a nanna nap, nice and comfy, after wearing herself out.
+- term: nice and slow
+  key: nice and slow
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - slowly
+  frames:
+  - adv
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - slowly
+  - slowly
+  - leisurely
+  examples:
+  - Then, nice and slow, he held out his hands.
+- term: no-one was home
+  key: no-one was home
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - answer
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - no response
+  - respond
+  examples: []
+- term: oats
+  key: oats
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - porridge
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - porridge
+  - oat porridge
+  examples: []
+- term: off the face of the earth
+  key: off the face of the earth
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - earth
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - world
+  - the world
+  examples:
+  - won't vanish off the face of the earth.
+  - won't be wiped off the face of the earth
+- term: on struggle street
+  key: on struggle street
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - impoverished
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - struggling, poor
+  - poor, struggling
+  examples: []
+- term: on the bones of our arse
+  key: on the bones of arse
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - destitute
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - penniless
+  - penniless
+  examples: []
+- term: Once she'd had her feed
+  key: once she'd had feed
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - eaten
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - eaten
+  - after eating
+  examples:
+  - Once she'd had her feed, she wanted to take a load off.
+  - Once she'd had her feed, she wanted a sit-down.
+- term: once she'd polished it off
+  key: once she'd polished it off
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - eaten
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - after eating
+  - eaten
+  examples: []
+- term: other half
+  key: other half
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - husband
+  - wife
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - husband
+  - wife
+  - wife
+  - husband
+  examples: []
+- term: over it
+  key: over it
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - bored
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very bored
+  - very bored
+  - very bored
+  examples: []
+- term: a packet
+  key: packet
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - a heap of money
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - lots of money
+  - a lot of money
+  examples: []
+- term: packing death
+  key: packing death
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - petrified
+  frames:
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - terrified
+  - terrified
+  examples:
+  - I was packing death, honestly.
+- term: packing it
+  key: packing it
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - nervous
+  - petrified
+  frames:
+  - np
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - terrified
+  - very nervous
+  - terrified
+  examples:
+  - I was packing it, honestly.
+- term: a pain
+  key: pain
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - annoying
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 2
+  meanings:
+  - tiresome
+  - irritating
+  - trying, irritating
+  examples: []
+- term: a picture
+  key: picture
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - beautiful
+  frames:
+  - np
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - looked beautiful
+  - very good-looking
+  examples: []
+- term: piped up
+  key: piped up
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - cried
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - called out
+  - called out
+  examples: []
+- term: piss-up
+  key: piss-up
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: NEW:PARTY
+    frame: np
+    register: current
+    region: []
+    vulgarity: 2
+    incoherence: 2
+    sources:
+    - https://ielts.co.nz/newzealand/prepare/article-australian-slang-words-phrases
+    confidence: medium
+    notes: Also British. Use only for parties built around drinking.
+    meaning: a boozy party or session
+  gaps:
+  - booze-up
+  - drinking session
+  - get-together
+  - party
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - social gathering
+  - a boozy party or session
+  examples: []
+- term: the place round the corner
+  key: place round the corner
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - nearby
+  frames:
+  - adv
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - close by
+  - close by
+  examples:
+  - I'll order from the place round the corner.
+  - I'll order from the place round the corner.
+- term: pretty much
+  key: pretty much
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - filler:hedge
+  - hedges
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - softening
+  - softening
+  - softening
+  examples:
+  - That's pretty much the whole story.
+  - That's pretty much the whole story.
+- term: pretty pricey
+  key: pretty pricey
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - expensive
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - costly
+  - costly
+  examples:
+  - Well, it was pretty pricey, to be fair.
+  - Well, it was pretty pricey, to be fair.
+- term: red as a beetroot
+  key: red as a beetroot
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - embarrassed
+  frames:
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - embarrassed, foolish
+  - embarrassed
+  examples:
+  - I was red as a beetroot.
+- term: Right, so
+  key: right, so
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - filler:opener
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - Right, so you wanna hear about the worst night of my life?
+  - Right, so you wanna hear about the worst night of my life?
+- term: Right, so / Righto
+  key: right, so / righto
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - openers
+  frames:
+  - interjection
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - opener
+  - opener
+  examples:
+  - Right, so you wanna hear about the worst night of my life? Righto. Sit down.
+  - Righto.
+- term: a ripper idea
+  key: ripper idea
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - clever
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - clever
+  - clever, excellent
+  examples: []
+- term: room
+  key: room
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - bedroom
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - bedroom
+  - bedroom
+  - bedroom
+  - bedroom
+  examples:
+  - Supposed to clean up my room but I keep putting it off.
+  - Meant to sort out my room but I keep putting it off.
+- term: rowdy
+  key: rowdy
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - noisy
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - noisy
+  - noisy
+  examples: []
+- term: rude
+  key: rude
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - rude
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - stuck-up, snobbish
+  - rude, curt
+  - stuck-up, impolite
+  examples: []
+- term: scared shitless
+  key: scared shitless
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - petrified
+  frames:
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  - 2
+  meanings:
+  - terrified
+  - terrified
+  examples: []
+- term: seemed a bit funny
+  key: seemed a bit funny
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - odd
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - strange
+  - odd
+  examples:
+  - nobody in the street could remember they'd ever seemed a bit funny at all.
+  - no-one on the street remembered they'd ever seemed a bit funny at all
+- term: set the finish line
+  key: set the finish line
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - goal
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - finish point
+  - finishing point
+  examples:
+  - the Fox would pick the course and set the finish line.
+  - The Hare reckoned that was never gonna happen, but said "You're on"; and they shook on it that the Fox would
+    pick the course and set the finish line.
+- term: shame job
+  key: shame job
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - embarrassed
+  frames:
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - foolish, embarrassed
+  - embarrassed
+  examples: []
+- term: shitty
+  key: shitty
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: ANGRY
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 2
+    incoherence: 2
+    sources:
+    - https://en.wiktionary.org/wiki/shitty
+    confidence: medium
+    notes: Wiktionary labels this sense UK, Australia and NZ, so not uniquely Aussie, but very common here. Usually
+      'get shitty (with)'.
+    meaning: in a bad mood, cross with someone
+  gaps:
+  - annoyed
+  - cranky
+  - irate
+  - irritated
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - furious
+  - in a bad mood, cross with someone
+  examples: []
+- term: shocking
+  key: shocking
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - filler:intensifier
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - Sandra's a shocking gossip
+  - Sandra's a shocking gossip, and if she hears I said it, the whole suburb'll know by Tuesday.
+- term: short with
+  key: short with
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - rude
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - rude, unfriendly
+  - rude, curt
+  examples: []
+- term: the size of a postage stamp
+  key: size of a postage stamp
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - tiny
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very small
+  - very small
+  examples:
+  - me desk is the size of a postage stamp
+- term: a slog
+  key: slog
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - difficult
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - hard
+  - hard
+  examples: []
+- term: slower than a wet week
+  key: slower than a wet week
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - slow
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very slow
+  - very slow
+  examples:
+  - the way she plodded along, slower than a wet week
+- term: snowed under
+  key: snowed under
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - run off my feet
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - extremely busy
+  - extremely busy
+  examples: []
+- term: soaked to the bone
+  key: soaked to the bone
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - soaked
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - drenched
+  - soaked through
+  examples: []
+- term: sodden
+  key: sodden
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - soaked
+  - wet
+  frames:
+  - np
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - waterlogged
+  - soaked through
+  - wet
+  examples: []
+- term: sopping
+  key: sopping
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - wet
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - thoroughly wet
+  - wet
+  - drenched
+  examples: []
+- term: sorta
+  key: sorta
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - hedges
+  - thinking_fillers
+  frames:
+  - garnish
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - softener
+  - hesitation / vagueness
+  - softening
+  - softening
+  examples: []
+- term: sorta / sort of
+  key: sorta / sort of
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - filler:hedge
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - sorta quiet and a bit off
+  - Well, sorta.
+- term: sorted it
+  key: sorted it
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - agre
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - agreed
+  - agreed
+  examples: []
+- term: a southerly buster
+  key: southerly buster
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: NEW:WINDY
+    frame: np
+    register: current
+    region:
+    - nsw
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://media.bom.gov.au/social/blog/18/the-big-bust-southerly-busters-explained/
+    - https://weatherzone.com.au/news/southerly-buster-rolls-through-sydney/416648
+    confidence: high
+    notes: A real weather term on the NSW coast (Sydney). Elsewhere just 'a cool change'. Use only for a sudden
+      wind change, not wind in general.
+    meaning: a sudden cool, gusty southerly change after a hot day
+  gaps:
+  - cool change
+  - sudden wind
+  - windy
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very windy
+  - very windy
+  - a sudden cool, gusty southerly change after a hot day
+  examples: []
+- term: spin a yarn
+  key: spin a yarn
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - lie (tell lies)
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - tell a lie
+  - tell a lie
+  examples: []
+- term: spits the dummy
+  key: spits the dummy
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - difficult
+  frames:
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - becomes difficult/tantrum
+  - hostile, aggressive
+  examples:
+  - give me a bell if anyone spits the dummy
+- term: spunky
+  key: spunky
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: NEW:ATTRACTIVE
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 1
+    incoherence: 3
+    sources:
+    - https://www.oxfordlearnersdictionaries.com/definition/english/spunky
+    - https://lens.monash.edu/orright-you-spunkrats-heres-where-all-our-aussie-summertime-language-came-from-howard-manns-senior-lecturer-in-linguistics-monash-university/
+    confidence: high
+    notes: Oxford Learner's marks the 'sexually attractive' sense as Australian. Elsewhere 'spunky' means plucky.
+    meaning: good-looking, sexy
+  gaps:
+  - attractive
+  - handsome
+  - hot
+  - pretty
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - attractive man
+  - good-looking, sexy
+  examples: []
+- term: steep
+  key: steep
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - expensive
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - costly
+  - expensive
+  - costly
+  - costly
+  examples: []
+- term: stiff cheddar
+  key: stiff cheddar
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - unlucky
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - unlucky
+  - unlucky
+  examples: []
+- term: stressing
+  key: stressing
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - anxious
+  - worried
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - anxious, fretting
+  - nervous
+  - anxious, fretting
+  - anxious
+  examples:
+  - Mum's just stressing about the roof now as well.
+  - Mum's just stressing about the roof now as well.
+- term: suss
+  key: suss
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: NEW:SUSPICIOUS
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://kaikki.org/dictionary/English/meaning/s/su/suss.html
+    - https://ruk.ca/comment/3414
+    confidence: high
+    notes: Clipped 'suspicious'. Also UK/NZ. Spelt 'sus' in US gaming slang. Fits 'odd/strange' only where the oddness
+      looks shady.
+    meaning: dodgy-looking, not quite right
+  gaps:
+  - fishy
+  - odd
+  - shady
+  - strange
+  - suspicious
+  - weird
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - strange
+  - dodgy-looking, not quite right
+  examples: []
+- term: tanked
+  key: tanked
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - inebriated
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - drunk
+  - drunk
+  examples: []
+- term: teeny
+  key: teeny
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - tiny
+  frames:
+  - adj
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very small
+  - very small
+  - very small, cramped
+  examples: []
+- term: that toey
+  key: that toey
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - nervous
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - nervous, jumpy
+  - nervous, jumpy
+  examples:
+  - I was that toey on the train I nearly got off at the wrong station.
+  - I was that toey on the train I nearly got off at the wrong station.
+- term: That's my two bob's worth
+  key: that's two bob's worth
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - filler:closer
+  frames:
+  - garnish
+  vulgarity_guesses: []
+  meanings: []
+  examples:
+  - Anyway. That's my two bob's worth.
+  - That's my two bob's worth.
+- term: thrash
+  key: thrash
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - beat
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - defeat soundly
+  - defeat
+  examples: []
+- term: three sheets to the wind
+  key: three sheets to the wind
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - inebriated
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 2
+  meanings:
+  - drunk
+  - drunk
+  examples: []
+- term: till all hours
+  key: till all hours
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - late
+  frames:
+  - adv
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - late at night
+  - late
+  examples:
+  - Celebrations were expected to kick on till all hours at the clubrooms.
+- term: toey
+  key: toey
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: NEW:NERVOUS
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://greensdictofslang.com/entry/l6fkkyq
+    - https://www.oxfordlearnersdictionaries.com/definition/english/toey
+    - https://en.wiktionary.com/wiki/toey
+    confidence: high
+    notes: Aus/NZ. From racehorses. Can also mean eager to get going, and Wiktionary notes a sexual sense ('feeling
+      toey'); use with care.
+    meaning: on edge, restless, jumpy
+  gaps:
+  - anxious
+  - edgy
+  - jittery
+  - nervous
+  - on edge
+  - restless
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - nervous
+  - on edge, restless, jumpy
+  examples: []
+- term: trouble and strife
+  key: trouble and strife
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: NEW:WIFE
+    frame: np
+    register: dated
+    region: []
+    vulgarity: 0
+    incoherence: 5
+    sources:
+    - https://greensdictofslang.com/entry/rs4zika
+    - https://www.diqt.net/en/words/2050972
+    confidence: medium
+    notes: Cockney in origin and used in Australia. Jokey, a bit old-blokey. Level 5 only.
+    meaning: the wife (rhyming slang)
+  gaps:
+  - wife
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - wife
+  - the wife (rhyming slang)
+  examples: []
+- term: up the road
+  key: up the road
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - nearby
+  frames:
+  - adv
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - close by
+  - close by
+  - close by
+  - close by
+  examples: []
+- term: up themselves
+  key: up themselves
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - rude
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - rude, unfriendly
+  - stuck-up, impolite
+  examples:
+  - Mrs Patel at number twelve reckoned they were up themselves, because the father hadn't waved back at her.
+- term: wanted the ground to swallow me
+  key: wanted the ground to swallow me
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - embarrassed
+  frames:
+  - predicate_adj
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - embarrassed, foolish
+  - embarrassed
+  examples: []
+- term: was a bit off with her
+  key: was a bit off with
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - rude
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - rude, unfriendly
+  - rude
+  examples:
+  - A customer said one of our staff was a bit off with her on Tuesday arvo.
+  - A customer reckons one of our mob was a bit off with her Tuesdy arvo.
+- term: a weirdo
+  key: weirdo
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - odd
+  - weird
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - not quite right
+  - strange, cold
+  examples: []
+- term: went over the fence
+  key: went over the fence
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - jump
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - jump over
+  - jump over
+  examples: []
+- term: were a bit up themselves
+  key: were a bit up themselves
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - rude
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - stuck-up, snobbish
+  - stuck-up/rude
+  examples:
+  - Mrs Patel at number twelve reckoned they were a bit up themselves
+  - Mrs Patel at number twelve reckoned they were a bit up themselves
+- term: were a rowdy lot
+  key: were a rowdy lot
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - B
+  web: null
+  gaps:
+  - noisy
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - noisy
+  - noisy
+  examples:
+  - Mr Doyle reckoned they were a rowdy lot, because the dog barked at the postie.
+  - Mr Doyle reckoned they were a rowdy lot
+- term: were spitting chips over
+  key: were spitting chips over
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - enraged
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - furious
+  - furious
+  examples:
+  - Several visiting fans were spitting chips over a late umpiring call
+  - Several visiting fans were spitting chips over a late umpiring call and had to be asked to leave the stand.
+- term: wet as
+  key: wet as
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - wet
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - very wet
+  - drenched
+  examples: []
+- term: whip
+  key: whip
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - beat
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - defeat soundly
+  - defeat
+  examples: []
+- term: the wife
+  key: wife
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - wife
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - wife
+  - wife
+  - wife
+  - wife
+  examples: []
+- term: working back
+  key: working back
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - late
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - working after hours
+  - working after hours
+  examples:
+  - He's working back again, three nights on the trot.
+  - He's working back again, three nights on the trot.
+- term: worried sick
+  key: worried sick
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - anxious
+  - worried
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - anxious, fretting
+  - anxious, fretting
+  - anxious
+  examples: []
+- term: wrecked
+  key: wrecked
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - fatigued
+  - weary
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - exhausted
+  - exhausted
+  - exhausted
+  examples: []
+- term: wringing wet
+  key: wringing wet
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - soaked
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - drenched
+  - soaked through
+  examples: []
+- term: Yeah, nah / Nah, yeah
+  key: yeah, nah / nah, yeah
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - agreement_disagreement_fillers
+  frames:
+  - interjection
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - agree-then-disagree / disagree-then-agree
+  - agree-then-disagree markers
+  examples:
+  - Yeah, nah, I'm not saying he's a bad coach.
+  - Yeah, nah, I'm not saying he's a bad coach.
+- term: Yeah, so
+  key: yeah, so
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - filler:opener
+  - filler:thinking
+  - openers
+  frames:
+  - garnish
+  - interjection
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - opener
+  examples:
+  - Yeah, so, a few things.
+  - Yeah, so, a few things.
+- term: yelled
+  key: yelled
+  in_dictionary: null
+  support: 2
+  agents:
+  - A
+  - C
+  web: null
+  gaps:
+  - cried
+  frames:
+  - vp
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - called out
+  - called out
+  examples: []
+- term: young'un
+  key: young'un
+  in_dictionary: null
+  support: 2
+  agents:
+  - B
+  - C
+  web: null
+  gaps:
+  - girl
+  frames:
+  - np
+  vulgarity_guesses:
+  - 0
+  meanings:
+  - small child
+  - child
+  - small child
+  - small child
+  examples: []
+- term: zonked
+  key: zonked
+  in_dictionary: null
+  support: 2
+  agents:
+  - C
+  web:
+    concept: TIRED
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://en.wiktionary.com/wiki/zonked
+    - https://www.deseret.com/2000/9/10/20679388/australian-slang/
+    confidence: medium
+    notes: General informal English, listed in Australian slang guides. Also means drunk or stoned. Add 'weary'
+      and 'fatigued' as triggers on TIRED anyway.
+    meaning: completely worn out
+  gaps:
+  - exhausted
+  - fatigued
+  - tired
+  - weary
+  - worn out
+  frames:
+  - predicate_adj
+  vulgarity_guesses:
+  - 0
+  - 1
+  meanings:
+  - exhausted
+  - exhausted
+  - completely worn out
+  examples: []
+- term: '{subj} {have} a face like a wet week'
+  key: a face like a wet week
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: SAD
+    frame: vp
+    register: dated
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://greensdictofslang.com/entry/qacz4ha
+    confidence: medium
+    notes: Green's lists it as Australian with Australian literary citations; also recorded in Britain. Describes
+      appearance, so best for 'looked dejected'.
+    meaning: look thoroughly gloomy
+  gaps:
+  - dejected
+  - despondent
+  - down in the mouth
+  - glum
+  - miserable-looking
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - look thoroughly gloomy
+  examples: []
+- term: all good
+  key: all good
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NO_PROBLEM
+    frame: interjection
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://www.switchliving.com.au/student-guide/g-day-mate-a-guide-to-aussie-slang/
+    - https://www.remitly.com/blog/immigration/australian-idioms-and-expressions/
+    confidence: medium
+    notes: Extremely common reply in Australia (also 'you're all good'), but not uniquely Australian. Sources treat
+      it as a 'no worries' synonym.
+    meaning: no problem, it's fine (reply to thanks or sorry)
+  gaps:
+  - don't worry about it
+  - no problem
+  - that's okay
+  - you're welcome
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - no problem, it's fine (reply to thanks or sorry)
+  examples: []
+- term: and everything
+  key: and everything
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:GENERAL_EXTENDER
+    frame: garnish:tail
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://assets.cambridge.org/97811088/37231/excerpt/9781108837231_excerpt.pdf
+    confidence: medium
+    notes: Cheshire's (British) data rank it among the most grammaticalised extenders. Similar to the existing 'the
+      whole box 'n dice' tails, but lighter.
+    meaning: vague emphatic tail, 'the works'
+  gaps:
+  - and all
+  - and so on
+  - the whole lot
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - vague emphatic tail, 'the works'
+  examples: []
+- term: and stuff
+  key: and stuff
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:GENERAL_EXTENDER
+    frame: garnish:tail
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://assets.cambridge.org/97811088/37231/excerpt/9781108837231_excerpt.pdf
+    - https://ldaca.edu.au/resources/general-resources/case-studies/masters-research-project
+    confidence: medium
+    notes: Overstreet and Yule's excerpt includes an Australian example. General English.
+    meaning: vague tail meaning 'and the like'
+  gaps:
+  - and so on
+  - and things
+  - et cetera
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - vague tail meaning 'and the like'
+  examples: []
+- term: and that
+  key: and that
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:GENERAL_EXTENDER
+    frame: garnish:tail
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://bridges.monash.edu/articles/conference_contribution/The_use_and_functions_of_general_extenders_in_contemporary_Australian_English/4239305
+    - https://ldaca.edu.au/resources/general-resources/case-studies/masters-research-project
+    confidence: medium
+    notes: 'General extenders are studied for Australian English (Monash ALS 2016 paper; LDaCA Sydney study: varies
+      by age, gender and class). The British study of ''and that'' finds it working-class marked. I could not see
+      the Australian papers'' frequency figures.'
+    meaning: vague tail meaning 'and so on'
+  gaps:
+  - and so on
+  - and things like that
+  - et cetera
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - vague tail meaning 'and so on'
+  examples: []
+- term: arc up
+  key: arc up
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: LOSE_TEMPER
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://en.wiktionary.com/wiki/arc_up
+    - https://www.macquariedictionary.com.au/arcing-up/
+    - https://greensdictofslang.com/entry/yggdwia
+    confidence: high
+    notes: Green's says it is especially common in Victoria, and can also mean getting worked up or excited in a
+      good way.
+    meaning: flare up in anger, get suddenly heated
+  gaps:
+  - blow up
+  - enraged
+  - flare up
+  - get angry
+  - irate
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - flare up in anger, get suddenly heated
+  examples: []
+- term: my arse
+  key: arse
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:DISBELIEF
+    frame: garnish:closer
+    register: current
+    region: []
+    vulgarity: 2
+    incoherence: 2
+    sources:
+    - https://en.wiktionary.org/wiki/my_arse
+    confidence: high
+    notes: Wiktionary labels it British/Irish/Commonwealth. Usually comes after the echoed phrase. Impolite.
+    meaning: rubbish, I don't believe a word
+  gaps:
+  - I don't believe it
+  - no way
+  - nonsense
+  - yeah right
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - rubbish, I don't believe a word
+  examples: []
+- term: '{adj} as'
+  key: as
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: VERY
+    frame: adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://resolve.cambridge.org/core/journals/english-today/article/sweet-as-the-intensifier-as-in-new-zealand-and-australian-english/D7D51CDDFF7FBFFCD404E11166ACB901
+    - https://www.1news.co.nz/2025/09/24/oed-says-sweet-as-to-kiwi-slang-as-nz-words-join-the-dictionary
+    confidence: high
+    notes: 'English Today: well established in Aus and NZ, rare elsewhere. ''Sweet as'' is already in; this generalises
+      it (lazy as, keen as, rough as). Goes at the end of a clause or phrase. Strongly NZ-associated too.'
+    meaning: post-posed intensifier, 'really {adj}'
+  gaps:
+  - extremely
+  - really
+  - so
+  - very
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - post-posed intensifier, 'really {adj}'
+  examples: []
+- term: bags
+  key: bags
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:CLAIM
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://www.wiktionary.com/wiki/bags
+    - https://www.writerscentre.com.au/blog/qa-bags-dibs-and-calling-shotgun/
+    confidence: high
+    notes: 'Aus/NZ/Ireland, British school-slang origin. Usually childish or playful. Older and regional variant:
+      ''bars''.'
+    meaning: claim something first
+  gaps:
+  - call dibs
+  - choose
+  - claim
+  - pick first
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - claim something first
+  examples: []
+- term: bend {poss} ear
+  key: bend ear
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: TALK_ON
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://greensdictofslang.com/entry/k63cu4y
+    - https://dictionary.dogonews.com/definitions/bend%20someone's%20ear
+    confidence: medium
+    notes: Green's lists it as Australian. Also used in Britain and the US. Can also be a polite request for a chat.
+    meaning: talk at someone at length
+  gaps:
+  - chat
+  - chew someone's ear off
+  - talk at length
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - talk at someone at length
+  examples: []
+- term: biffo
+  key: biffo
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: FIGHT
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://en.wiktionary.com/wiki/biffo
+    - https://greensdictofslang.com/entry/uq4enqq
+    - https://platform.aussieenglish.com.au/blog/ae-999-aussie-slang-biffo
+    confidence: high
+    notes: Aus/NZ. Footy commentary staple. A mass noun ('a bit of biffo'), or 'a biffo'.
+    meaning: punch-ups, physical fighting
+  gaps:
+  - a fight
+  - brawl
+  - fighting
+  - fought
+  - punch-up
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - punch-ups, physical fighting
+  examples: []
+- term: a bit of a {np}
+  key: bit of a
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:HEDGE
+    frame: adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://lens.monash.edu/discourse-markers-when-saying-a-bit-can-mean-a-lot/
+    confidence: high
+    notes: Same source. Pairs well with existing NP forms ('a bit of a dag', 'a bit of a shocker').
+    meaning: hedge before a noun, 'something of a'
+  gaps:
+  - kind of a
+  - something of a
+  - sort of a
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - hedge before a noun, 'something of a'
+  examples: []
+- term: '{subj} {be} blowing dogs off chains'
+  key: blowing dogs off chains
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:WINDY
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://weatherzone.com.au/news/dry-as-a-dead-dingos-your-favourite-aussie-weather-phrases/534944
+    - https://phrases.org.uk/bulletin_board/52/messages/55.html
+    confidence: medium
+    notes: Aus/NZ, especially among sailors. Weatherzone uses 'blow the proverbial dog off its chain'.
+    meaning: the wind is ferocious
+  gaps:
+  - blowing a gale
+  - gusty
+  - stormy
+  - windy
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - the wind is ferocious
+  examples: []
+- term: the bush telegraph
+  key: bush telegraph
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:GOSSIP
+    frame: np
+    register: dated
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://www.macquariedictionary.com.au/?p=10949
+    confidence: medium
+    notes: Macquarie also lists 'mulga wire' for the same thing (rarer) and 'dorry' for a habitual gossip (rare,
+      from a 1970s soap character).
+    meaning: the informal word-of-mouth grapevine
+  gaps:
+  - gossip
+  - grapevine
+  - rumour mill
+  - word of mouth
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - the informal word-of-mouth grapevine
+  examples: []
+- term: cheesed off
+  key: cheesed off
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: FED_UP
+    frame: predicate_adj
+    register: dated
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://www.macquariedictionary.com.au/?p=11012
+    - https://icis-2014.m.asnevents.com.au/information/page/53
+    confidence: medium
+    notes: Also British. Gives FED_UP (single entry today) a second form.
+    meaning: fed up and irritated
+  gaps:
+  - annoyed
+  - bored
+  - fed up
+  - irritated
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - fed up and irritated
+  examples: []
+- term: chuck a berko
+  key: chuck a berko
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: LOSE_TEMPER
+    frame: vp
+    register: dated
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://blog.oup.com.au/?p=3928
+    confidence: medium
+    notes: Berko = berserk. Less common than chuck a wobbly (already in dictionary).
+    meaning: go berserk with rage
+  gaps:
+  - enraged
+  - go berserk
+  - lose it
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - go berserk with rage
+  examples: []
+- term: chuck a bombie
+  key: chuck a bombie
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:BOMB_DIVE
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://www.macquariedictionary.com.au/?p=11070
+    confidence: high
+    notes: Narrow sense, water only. Also 'do a bomb'. Plain 'jump' has no Aussie equivalent.
+    meaning: jump into water tucked up to make a big splash
+  gaps:
+  - cannonball
+  - dive bomb
+  - jump in
+  - jump into the pool
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - jump into water tucked up to make a big splash
+  examples: []
+- term: chuck a mental
+  key: chuck a mental
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: LOSE_TEMPER
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://macquariedictionary.com.au/?p=10941
+    confidence: medium
+    notes: Some people find 'mental' insensitive about mental illness; consider gating.
+    meaning: have a furious outburst
+  gaps:
+  - enraged
+  - lose it
+  - throw a tantrum
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - have a furious outburst
+  examples: []
+- term: chuck a mickey
+  key: chuck a mickey
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: LOSE_TEMPER
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://blog.oup.com.au/?p=3928
+    - https://macquariedictionary.com.au/?p=10941
+    confidence: medium
+    notes: 'Spelt micky or mickey. One of the ''chuck a ...'' family (ANDC: chuck = put on, perform).'
+    meaning: throw a tantrum
+  gaps:
+  - irate
+  - lose it
+  - throw a tantrum
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - throw a tantrum
+  examples: []
+- term: cost {obj} a bucketload
+  key: cost a bucketload
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:EXPENSIVE
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://aussieenglish.com.au/?p=123717
+    confidence: medium
+    notes: Same source also gives 'cost a heap' and 'cost an arm and a leg' (the last one is general English).
+    meaning: cost a huge amount
+  gaps:
+  - cost a fortune
+  - cost a lot
+  - expensive
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - cost a huge amount
+  examples: []
+- term: a counter lunch
+  key: counter lunch
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:PUB_MEAL
+    frame: np
+    register: dated
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://grantourismotravels.com/the-renaissance-of-the-great-australian-pub-counter-meal/
+    - https://www.ipswichfirst.com.au/counter-meals-are-they-a-thing-of-the-past
+    confidence: medium
+    notes: Also 'counter meal' (at tea time). Pub context only.
+    meaning: a cheap, hearty pub lunch eaten at the bar or bistro
+  gaps:
+  - lunch
+  - pub lunch
+  - pub meal
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - a cheap, hearty pub lunch eaten at the bar or bistro
+  examples: []
+- term: crack the shits
+  key: crack the shits
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: LOSE_TEMPER
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 2
+    incoherence: 3
+    sources:
+    - https://www.tckpublishing.com/australian-slang-words/
+    - https://aussieenglish.com.au/?p=124882
+    confidence: medium
+    notes: Also 'crack a shit' / 'crack your shits'. Impolite.
+    meaning: get cranky or sulky, lose patience
+  gaps:
+  - enraged
+  - get angry
+  - irate
+  - sulk
+  - throw a tantrum
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - get cranky or sulky, lose patience
+  examples: []
+- term: crook on
+  key: crook on
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: ANGRY
+    frame: predicate_adj
+    register: dated
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://www.inyourpocket.com/australia/goldcoast/articles/australian-english-glossary
+    confidence: medium
+    notes: Glossary gives 'crooked on'; 'crook on' is the usual spoken form. Takes an object ('crook on {obj}').
+      'Go crook at' is already in SCOLD.
+    meaning: angry with somebody
+  gaps:
+  - angry with
+  - cross with
+  - irate
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - angry with somebody
+  examples: []
+- term: cut
+  key: cut
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: DISAPPOINTED
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://wikipedia2006.classicistranieri.com/en/a/u/s/Australian_English_vocabulary_8951.html
+    confidence: low
+    notes: Only a 2006 Wikipedia mirror found. 'Cut up' is shared with British English. Best kept for upset rather
+      than furious.
+    meaning: upset or angry about something
+  gaps:
+  - angry
+  - despondent
+  - hurt
+  - upset
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - upset or angry about something
+  examples: []
+- term: a doof
+  key: doof
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:PARTY
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://en.wikipedia.org/wiki/Doof_(disambiguation)
+    - https://kaweah.freedombox.rocks/kiwix/wiktionary_en_all_maxi_2023-04/doof
+    confidence: high
+    notes: 'Narrow sense: a dance or rave party, not just any party. Usually ''bush doof''. Comes from the 1990s
+      Sydney scene.'
+    meaning: an outdoor dance party with electronic music, often in the bush
+  gaps:
+  - music festival
+  - outdoor party
+  - party
+  - rave
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - an outdoor dance party with electronic music, often in the bush
+  examples: []
+- term: a durry
+  key: durry
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:CIGARETTE
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://www.wiktionary.com/wiki/durry
+    - https://greensdictofslang.com/entry/qjjdlrq
+    - https://www.dictionary.com/browse/durry
+    confidence: high
+    notes: Aus/NZ. Also spelt durrie. Origin unknown (Bull Durham tobacco is the usual guess). Green's records 'digital
+      durry' for a vape.
+    meaning: a cigarette, especially a rolled one
+  gaps:
+  - cig
+  - cigarette
+  - rollie
+  - smoke
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - a cigarette, especially a rolled one
+  examples: []
+- term: earbash {obj}
+  key: earbash
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: TALK_ON
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://slll.cass.anu.edu.au/centres/andc/meanings-origins/e
+    - https://greensdictofslang.com/entry/k63cu4y
+    confidence: high
+    notes: 'ANDC: from the 1940s, probably WWII service slang. Noun forms ''an earbashing'' (which can also be a
+      scolding) and ''an earbasher'' (a bore).'
+    meaning: talk at someone non-stop
+  gaps:
+  - nag
+  - rabbit on
+  - talk at length
+  - talk someone's ear off
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - talk at someone non-stop
+  examples: []
+- term: fair call
+  key: fair call
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: REASONABLE
+    frame: garnish:closer
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://aussieenglish.com.au/like-native-fair-call
+    confidence: medium
+    notes: Concedes a point, a near-synonym of 'fair enough' (already in REASONABLE). Also 'that's a fair call'.
+    meaning: that's a reasonable point, fair enough
+  gaps:
+  - fair point
+  - good point
+  - that's reasonable
+  - you're right
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - that's a reasonable point, fair enough
+  examples: []
+- term: far out
+  key: far out
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: SURPRISE
+    frame: garnish:opener
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://kvia.com/entertainment/cnn-style/2024/08/20/australian-slang-terms-every-visitor-should-know/
+    - https://aussieenglish.com.au/ep014-aussie-english-expression-far-out/
+    confidence: high
+    notes: 'Unlike the US hippie sense (''cool''), Australians use it for frustration or being impressed. Playful
+      variant: ''far out, Brussel sprout''. A clean SURPRISE opener.'
+    meaning: exclamation of exasperation or amazement
+  gaps:
+  - for heaven's sake
+  - good grief
+  - unbelievable
+  - wow
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - exclamation of exasperation or amazement
+  examples: []
+- term: feral
+  key: feral
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:UNCOUTH
+    frame: adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://www.onelook.com/?w=ferals
+    - https://www.berlitz.com/blog/australian-slang-words-phrases-expressions-insults
+    - https://greensdictofslang.com/entry/eag52zq
+    confidence: high
+    notes: The noun 'a feral' can also mean a hippie or greenie (Green's). An insult, though not a slur.
+    meaning: wild, out of control and uncouth (of people, esp. kids)
+  gaps:
+  - annoying
+  - badly behaved
+  - rude
+  - uncouth
+  - wild
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - wild, out of control and uncouth (of people, esp. kids)
+  examples: []
+- term: full as a state school
+  key: full as a state school
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: DRUNK
+    frame: predicate_adj
+    register: dated
+    region: []
+    vulgarity: 0
+    incoherence: 5
+    sources:
+    - https://greensdictofslang.com/entry/wtdg3di
+    confidence: medium
+    notes: One of the 'full as a ...' family (goog and boot are already in). Green's cites Beckett's Dinkum Aussie
+      Dictionary.
+    meaning: extremely drunk
+  gaps:
+  - drunk
+  - inebriated
+  - plastered
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - extremely drunk
+  examples: []
+- term: a full bottle on {np}
+  key: full bottle on
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:CLEVER
+    frame: predicate_adj
+    register: dated
+    region: []
+    vulgarity: 0
+    incoherence: 5
+    sources:
+    - https://commisceo-global.com/resources/quizzes/quiz/12
+    confidence: low
+    notes: Only a quiz confirms the expression exists ('fully informed' is one of its answer options). Green's has
+      the negative 'not the full bottle' (dim), which would confuse things. Verify before shipping.
+    meaning: very well informed about a subject
+  gaps:
+  - clever
+  - expert
+  - knowledgeable
+  - well informed
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - very well informed about a subject
+  examples: []
+- term: a furphy
+  key: furphy
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:GOSSIP
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://en.wikipedia.org/wiki/Furphy
+    - https://en.wiktionary.com/wiki/furphy
+    confidence: high
+    notes: From World War I water carts made by J. Furphy & Sons (origin disputed). Means an untrue rumour, not
+      gossip in general.
+    meaning: a rumour or false story passed off as fact
+  gaps:
+  - false story
+  - gossip
+  - lie
+  - myth
+  - rumour
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - a rumour or false story passed off as fact
+  examples: []
+- term: gammon
+  key: gammon
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:JOKE
+    frame: interjection
+    register: current
+    region:
+    - aboriginal_english
+    - qld
+    - nt
+    vulgarity: 0
+    incoherence: 5
+    sources:
+    - https://en.wikipedia.org/wiki/Gammon
+    - https://www.sbs.com.au/language/english/audio/minipod-welcome-to-aboriginal-english-1_1
+    confidence: medium
+    notes: Aboriginal English (also spelt gammin), strongest in northern Australia. SBS describes it as the opposite
+      of 'deadly'. Gate it as for 'shame'.
+    meaning: fake, pretend, just joking
+  gaps:
+  - fake
+  - joke
+  - kidding
+  - lie
+  - nonsense
+  - pretend
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - fake, pretend, just joking
+  examples: []
+- term: a gasbag
+  key: gasbag
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: TALK_ON
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://greensdictofslang.com/entry/k63cu4y
+    confidence: medium
+    notes: Seen in Seal's 'Lingo' list via Green's alongside chinwag and bend your ear. General Commonwealth slang.
+    meaning: someone who talks too much
+  gaps:
+  - chatterbox
+  - gossip
+  - talker
+  - windbag
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - someone who talks too much
+  examples: []
+- term: '{np} give {obj} the shits'
+  key: give the shits
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:ANNOY
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 2
+    incoherence: 3
+    sources:
+    - https://aussieenglish.com.au/?p=124882
+    - https://www.goodreads.com/author_blog_posts/7808869-why-s-t-is-my-favourite-profanity?tab=book
+    confidence: high
+    notes: 'Variants: ''shits me (to tears)'', ''that''s what shits me''. Impolite.'
+    meaning: something really annoys someone
+  gaps:
+  - annoying
+  - drives me mad
+  - gets on my nerves
+  - irritating
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - something really annoys someone
+  examples: []
+- term: good on ya
+  key: good on ya
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:WELL_DONE
+    frame: garnish:closer
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://www.babbel.com/en/magazine/21-essential-australian-expressions
+    - https://languagehat.com/good-on-you/
+    confidence: high
+    notes: Stress on 'on' ('good ONya'). Also written 'onya'. Can be sarcastic. Also used in the UK and NZ, but
+      far more strongly Australian.
+    meaning: well done, good for you
+  gaps:
+  - bravo
+  - good for you
+  - nice one
+  - well done
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - well done, good for you
+  examples: []
+- term: goodo
+  key: goodo
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: AFFIRM
+    frame: interjection
+    register: dated
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://greensdictofslang.com/entry/o5rhdpy
+    - https://www.wiktionary.com/wiki/goodo
+    confidence: medium
+    notes: Aus/NZ. Green's links it with somewhat dated schoolboy use. Also spelt good-oh. Still heard from older
+      speakers.
+    meaning: righto, good, that's settled
+  gaps:
+  - all right then
+  - fine
+  - good
+  - great
+  - okay
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - righto, good, that's settled
+  examples: []
+- term: hang on
+  key: hang on
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:WAIT
+    frame: garnish:opener
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://notoneoffbritishisms.com/2012/02/16/hang-on/
+    confidence: medium
+    notes: The blog notes the OED's first citation for the 'wait' sense is a 1941 Australian slang dictionary. It's
+      now seen as British too. As an opener it signals objection.
+    meaning: wait a sec (also an objecting opener)
+  gaps:
+  - hold on
+  - just a minute
+  - wait
+  - wait a minute
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - wait a sec (also an objecting opener)
+  examples: []
+- term: hang on a tick
+  key: hang on a tick
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:WAIT
+    frame: interjection
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://greensdictofslang.com/entry/42xvuni
+    - https://www.oxfordlearnersdictionaries.com/definition/english/tick_2
+    confidence: medium
+    notes: 'Shared with British English. Green''s cites a 1939 Australian novel and a 1941 RAAF songbook. Variants:
+      ''half a tick'', ''in two ticks''.'
+    meaning: wait a moment
+  gaps:
+  - hold on
+  - just a second
+  - wait
+  - wait a moment
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - wait a moment
+  examples: []
+- term: a hoon
+  key: hoon
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:HOON
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://en.wikipedia.org/wiki/Hoon
+    - https://slll.cass.anu.edu.au/files/andc/Word%20of%20the%20Month%20July%202015.pdf
+    - https://en.wiktionary.com/wiki/hoon
+    confidence: high
+    notes: 'Also a verb: ''hoon around''. Even official use has ''anti-hoon laws''. The only Aussie route to ''noisy''
+      I found, and it only works for loud louts or cars.'
+    meaning: a lout, especially one who drives loudly and recklessly
+  gaps:
+  - hooligan
+  - lout
+  - noisy
+  - noisy driver
+  - reckless driver
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - a lout, especially one who drives loudly and recklessly
+  examples: []
+- term: how good is that?
+  key: how good is that
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: GREAT_EXCLAIM
+    frame: garnish:closer
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://www.freitag.de/autoren/julica-jungehuelsing/der-kohlenhaendler
+    - https://www.hachette.co.uk/titles/peter-van-onselen/how-good-is-scott-morrison/9780733645747/
+    confidence: medium
+    notes: Strongly linked to Scott Morrison and often used in mocking imitation of him. Also the shortened 'How
+      good!'. Gives a political flavour; use sparingly.
+    meaning: rhetorical 'isn't that great?'
+  gaps:
+  - how great
+  - isn't that great
+  - wonderful
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - rhetorical 'isn't that great?'
+  examples: []
+- term: kick on
+  key: kick on
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:PARTY_ON
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://www.macquariedictionary.com.au/skol-these-drinking-words/
+    confidence: high
+    notes: 'Also a noun: ''a kick-on''.'
+    meaning: keep the party going late
+  gaps:
+  - carry on (party)
+  - keep partying
+  - party on
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - keep the party going late
+  examples: []
+- term: little lunch
+  key: little lunch
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:RECESS
+    frame: np
+    register: current
+    region:
+    - nsw
+    - vic
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://childmags.com.au/5-reasons-we-love-little-lunch/
+    - https://actf.com.au/news/10185/hey-it-s-almost-time-for-little-lunch
+    confidence: medium
+    notes: 'School context only. ''Big lunch'' is the main midday break. Regional: other states say recess or morning
+      tea.'
+    meaning: the morning recess snack or break at primary school
+  gaps:
+  - lunch (school)
+  - morning tea
+  - recess
+  - snack
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - the morning recess snack or break at primary school
+  examples: []
+- term: maggered
+  key: maggered
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: DRUNK
+    frame: predicate_adj
+    register: current
+    region:
+    - vic
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://www.macquariedictionary.com.au/australian-word-map/?region=Northern+Victoria&word=maggered
+    confidence: low
+    notes: From the Macquarie Australian Word Map, contributed for Northern Victoria. A regional variant of maggoted,
+      which is already in the dictionary.
+    meaning: drunk on beer
+  gaps:
+  - drunk
+  - inebriated
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - drunk on beer
+  examples: []
+- term: make a good quid
+  key: make a good quid
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: RICH
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://boards.straightdope.com/t/quid-anyone/194090
+    - https://greensdictofslang.com/entry/jsrihyi
+    confidence: medium
+    notes: Quid (DOLLAR) has carried on as a loose word for money since decimal currency came in. Also 'turn a quid'.
+    meaning: earn a lot of money
+  gaps:
+  - earn a lot
+  - rich
+  - rolling in money
+  - well off
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - earn a lot of money
+  examples: []
+- term: molo
+  key: molo
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: DRUNK
+    frame: predicate_adj
+    register: rare
+    region: []
+    vulgarity: 0
+    incoherence: 5
+    sources:
+    - https://greensdictofslang.com/entry/cgqa7ra
+    confidence: low
+    notes: Recorded as Australian in Green's. Obscure today, so level 5 only.
+    meaning: drunk
+  gaps:
+  - drunk
+  - inebriated
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - drunk
+  examples: []
+- term: muck around
+  key: muck around
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:JOKE
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://www.wiktionary.com/wiki/muck_up
+    - https://www.oxfordlearnersdictionaries.com/definition/english/muck-around
+    confidence: high
+    notes: Wiktionary labels 'muck about' British/Australian. 'Just mucking around' = only joking. 'Muck up' (misbehave,
+      as in muck-up day) is an Australian sense.
+    meaning: fool about, not be serious
+  gaps:
+  - fool around
+  - joke
+  - joking
+  - kid around
+  - mess about
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - fool about, not be serious
+  examples: []
+- term: no wukkas
+  key: no wukkas
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NO_PROBLEM
+    frame: interjection
+    register: current
+    region: []
+    vulgarity: 1
+    incoherence: 4
+    sources:
+    - https://www.macquariedictionary.com.au/no-wucking-furries-mate/
+    - https://aussieenglish.com.au/?p=124761
+    confidence: high
+    notes: Clipped from 'no wucking furries', a spoonerism of a ruder phrase. The clipped form is close to clean;
+      'no wucking furries' itself is vulgarity 1-2.
+    meaning: no worries, no problem
+  gaps:
+  - no problem
+  - no worries
+  - that's fine
+  - you're welcome
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - no worries, no problem
+  examples: []
+- term: off with the fairies
+  key: off with the fairies
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:DAYDREAMY
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://aussieenglish.com.au/?p=150557
+    confidence: medium
+    notes: British 'away with the fairies' is the same idea. Means dreamy or vague, not crazy.
+    meaning: daydreaming, away in your own world
+  gaps:
+  - absent-minded
+  - distracted
+  - odd
+  - spacey
+  - weird
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - daydreaming, away in your own world
+  examples: []
+- term: a pearler
+  key: pearler
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:FINE_DAY
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://www.jayco.com.au/community/article/top-10-aussie-sayings-and-what-they-mean
+    confidence: medium
+    notes: Jayco's list says pearler, ripper and ripsnorter can all describe a good-weather day. Could also be another
+      form for EXCELLENT.
+    meaning: a first-rate one (of a day, a catch, a shot)
+  gaps:
+  - beautiful day
+  - excellent
+  - sunny day
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - a first-rate one (of a day, a catch, a shot)
+  examples: []
+- term: perv on {obj}
+  key: perv on
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:OGLE
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 1
+    incoherence: 3
+    sources:
+    - https://www.oxfordlearnersdictionaries.com/definition/english/perv_1
+    - https://www.wiktionary.com/wiki/perv
+    confidence: high
+    notes: Oxford labels the verb Aus/NZ. It has a sexual overtone, so don't use it as a plain substitute for 'watch'.
+      Also the noun 'have a perv'.
+    meaning: ogle someone, or (jokingly) have a good look at something
+  gaps:
+  - check out
+  - leer
+  - ogle
+  - stare at
+  - watch
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - ogle someone, or (jokingly) have a good look at something
+  examples: []
+- term: pres
+  key: pres
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:PRE_DRINKS
+    frame: np
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://www.macquariedictionary.com.au/skol-these-drinking-words/
+    confidence: high
+    notes: Youth usage. Not an inventory gap, but it fits 'party' passages.
+    meaning: drinks at someone's place before heading out
+  gaps:
+  - drinks before going out
+  - pre-drinks
+  - pre-party
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - drinks at someone's place before heading out
+  examples: []
+- term: pull the other one
+  key: pull the other one
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:DISBELIEF
+    frame: interjection
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://en.wiktionary.org/wiki/my_arse
+    - https://waywordradio.org/idioms-for-expressing-doubt/
+    confidence: medium
+    notes: 'British in origin, common in Australia. Full form: ''...it''s got bells on''.'
+    meaning: I don't believe you
+  gaps:
+  - I don't believe it
+  - come off it
+  - yeah right
+  - you're kidding
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - I don't believe you
+  examples: []
+- term: put the mozz on {obj}
+  key: put the mozz on
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:JINX
+    frame: vp
+    register: dated
+    region: []
+    vulgarity: 0
+    incoherence: 5
+    sources:
+    - https://macquariedictionary.com.au/?p=11126
+    - https://slll.cass.anu.edu.au/centres/andc/meanings-origins/m
+    - https://dictionary.com/browse/moz
+    confidence: high
+    notes: Also spelt moz. ANDC traces it to Yiddish mozzle (luck) and dates it from the 1920s. Older speakers know
+      it; young people use it less.
+    meaning: jinx somebody
+  gaps:
+  - bring bad luck
+  - curse
+  - jinx
+  - unlucky
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - jinx somebody
+  examples: []
+- term: rough as bags
+  key: rough as bags
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:UNCOUTH
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://greensdictofslang.com/entry/j45brmy
+    - https://www.funtrivia.com/trivia-quiz/Humanities/Aussie-Lingo-98647.html
+    confidence: high
+    notes: Aus/NZ. Can also describe a rough job or a plain face. The variant 'rough as guts' is very common, but
+      I could not confirm its definition.
+    meaning: crude and unpolished in manners or finish
+  gaps:
+  - coarse
+  - crude
+  - ill-mannered
+  - rough
+  - rude
+  - uncouth
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - crude and unpolished in manners or finish
+  examples: []
+- term: shame
+  key: shame
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:EMBARRASSED
+    frame: predicate_adj
+    register: current
+    region:
+    - aboriginal_english
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://blog.linguisten.de/post/105433923749/ae-speakers-the-concept-of-shame
+    - https://nsm-approach.net/?p=824
+    confidence: medium
+    notes: 'Australian Aboriginal English usage, broader than standard ''ashamed''. ''Shame job'' (an embarrassing
+      situation) is common too but I found no direct definition. Should be gated: putting it in a non-Indigenous
+      speaker''s mouth can come across as appropriation.'
+    meaning: embarrassed, shy, made uncomfortable by being singled out
+  gaps:
+  - ashamed
+  - awkward
+  - embarrassed
+  - shy
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - embarrassed, shy, made uncomfortable by being singled out
+  examples: []
+- term: shickered
+  key: shickered
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: DRUNK
+    frame: predicate_adj
+    register: dated
+    region: []
+    vulgarity: 0
+    incoherence: 5
+    sources:
+    - https://greensdictofslang.com/entry/cgqa7ra
+    confidence: medium
+    notes: From Yiddish shicker. Old-timer flavour, fine for a full pub yarn.
+    meaning: drunk
+  gaps:
+  - drunk
+  - inebriated
+  - intoxicated
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - drunk
+  examples: []
+- term: shit-stirrer
+  key: shit-stirrer
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:STIR
+    frame: np
+    register: current
+    region: []
+    vulgarity: 2
+    incoherence: 3
+    sources:
+    - https://macquariedictionary.com.au/?p=11032
+    confidence: medium
+    notes: Macquarie lists the verb 'shit-stir'; I took the agent noun from that. Also used in Britain.
+    meaning: a person who makes trouble or teases for fun
+  gaps:
+  - gossip
+  - stirrer
+  - tease
+  - troublemaker
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - a person who makes trouble or teases for fun
+  examples: []
+- term: '{subj} {be} {poss} shout'
+  key: shout
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:SHOUT
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://en.wikipedia.org/wiki/Round_of_drinks
+    - https://en.wiktionary.com/wiki/shout
+    - https://greensdictofslang.com/entry/o6v3rgi
+    confidence: high
+    notes: 'Also a verb: ''I''ll shout you lunch''. Wiktionary labels it UK/Aus/NZ, but it is far more common in
+      Australia. ''Generous'' only fits where the generosity is paying for someone (''always shouts'').'
+    meaning: it's that person's turn to pay, or they're treating everyone
+  gaps:
+  - buy a round
+  - generous
+  - my treat
+  - pay for
+  - treat
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - it's that person's turn to pay, or they're treating everyone
+  examples: []
+- term: skol
+  key: skol
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:SKOL
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://www.macquariedictionary.com.au/skol-these-drinking-words/
+    confidence: high
+    notes: Also spelt scull. Macquarie also lists chug and neck.
+    meaning: down a drink in one go
+  gaps:
+  - chug
+  - down
+  - drink in one go
+  - gulp
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - down a drink in one go
+  examples: []
+- term: a spunkrat
+  key: spunkrat
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:ATTRACTIVE
+    frame: np
+    register: current
+    region: []
+    vulgarity: 1
+    incoherence: 4
+    sources:
+    - https://lens.monash.edu/orright-you-spunkrats-heres-where-all-our-aussie-summertime-language-came-from-howard-manns-senior-lecturer-in-linguistics-monash-university/
+    confidence: medium
+    notes: Playful. Often used as a term of address.
+    meaning: an attractive person (jokey)
+  gaps:
+  - attractive
+  - good-looking
+  - handsome
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - an attractive person (jokey)
+  examples: []
+- term: stiff
+  key: stiff
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:UNLUCKY
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://dictionary.dogonews.com/definitions/stiff
+    - https://www.dictionary.com/browse/stiffs
+    confidence: medium
+    notes: Common as 'stiff luck' or 'that's stiff' (also 'stiff cheddar', which I could not attest). Collins lists
+      'unlucky' as a slang sense.
+    meaning: out of luck, hard done by
+  gaps:
+  - bad luck
+  - hard luck
+  - unlucky
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - out of luck, hard done by
+  examples: []
+- term: stir the possum
+  key: stir the possum
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:STIR
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://macquariedictionary.com.au/?p=11032
+    - https://wordhistories.net/2024/06/25/stir-the-possum/
+    confidence: high
+    notes: 'Recorded since the late 1800s. Related: ''stir'' (tease), and ''stirrer'' (a troublemaker or tease),
+      which I could not separately attest.'
+    meaning: deliberately stir up trouble or debate
+  gaps:
+  - cause a fuss
+  - provoke
+  - stir up trouble
+  - tease
+  - wind up
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - deliberately stir up trouble or debate
+  examples: []
+- term: stonkered
+  key: stonkered
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: TIRED
+    frame: predicate_adj
+    register: dated
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://wordwebonline.com/en/ZONKED
+    - https://greensdictofslang.com/entry/mrjhjai
+    confidence: low
+    notes: Green's says the word started in Australia (originally killed or knocked out). WordWeb tags the exhausted
+      sense British/Aus/NZ informal. It could go under DRUNK too. The Green's entry id comes from a result set I
+      could not open, so the mapping is unverified.
+    meaning: done in, knocked flat, exhausted (also very drunk)
+  gaps:
+  - drunk
+  - exhausted
+  - fatigued
+  - inebriated
+  - weary
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - done in, knocked flat, exhausted (also very drunk)
+  examples: []
+- term: suss {obj} out
+  key: suss out
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:CHECK_OUT
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 2
+    sources:
+    - https://en.wiktionary.com/wiki/suss
+    - https://www.wordnik.com/words/suss
+    confidence: high
+    notes: UK/Aus/NZ.
+    meaning: check something out, work out what's going on
+  gaps:
+  - check out
+  - examine
+  - figure out
+  - investigate
+  - size up
+  - watch
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - check something out, work out what's going on
+  examples: []
+- term: tell him he's dreamin'
+  key: tell him he's dreamin'
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: DISAGREE
+    frame: garnish:closer
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://theconversation.com/straight-to-the-pool-room-a-love-letter-to-the-castle-on-its-25th-anniversary-176361
+    - https://www.nfsa.gov.au/collection/item/castle-fathers-day
+    - https://www.screenaustralia.gov.au/sa/Screen-News/2015/10-11-The-Castle-top-10-quotes
+    confidence: high
+    notes: 'From The Castle (1997), now everyday vernacular. Direct form: ''You''re dreamin''''. Best after an unreasonable
+      price or request.'
+    meaning: no way, that's unrealistic (especially about a price or demand)
+  gaps:
+  - no way
+  - not a chance
+  - unrealistic
+  - you must be joking
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - no way, that's unrealistic (especially about a price or demand)
+  examples: []
+- term: there are no flies on {obj}
+  key: there are no flies on
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:CLEVER
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://www.macquariedictionary.com.au/no-flies-on-you-mate/
+    confidence: high
+    notes: 'Macquarie dates it to the 1840s in Australia. Usual forms: ''no flies on him'', ''no flies on you, mate''.'
+    meaning: someone is sharp and hard to fool
+  gaps:
+  - clever
+  - quick-witted
+  - sharp
+  - shrewd
+  - smart
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - someone is sharp and hard to fool
+  examples: []
+- term: '{subj} {have} tickets on {reflexive}'
+  key: tickets on
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:ARROGANT
+    frame: vp
+    register: dated
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://slll.cass.anu.edu.au/centres/andc/meanings-origins/t
+    - https://aussieenglish.com.au/?p=124458
+    - https://greensdictofslang.com/entry/lz6clga
+    confidence: high
+    notes: ANDC records it from 1904. Closely tied to tall-poppy culture.
+    meaning: think too highly of yourself
+  gaps:
+  - arrogant
+  - big-headed
+  - conceited
+  - vain
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - think too highly of yourself
+  examples: []
+- term: towel {obj} up
+  key: towel up
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:THRASH
+    frame: vp
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://greensdictofslang.com/entry/z67pa7a
+    - https://grammarist.com/?p=24303
+    confidence: high
+    notes: 'Recorded in WWI AIF slang. Also a noun: ''a good towelling''. Covers the corpus gap ''beat'' (hare and
+      tortoise).'
+    meaning: give someone a hiding, physically or on the scoreboard
+  gaps:
+  - beat
+  - beat up
+  - defeat
+  - flog
+  - thrash
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - give someone a hiding, physically or on the scoreboard
+  examples: []
+- term: unco
+  key: unco
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:CLUMSY
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://www.macquariedictionary.com.au/?p=11104
+    - https://www.wiktionary.com/wiki/unco
+    confidence: high
+    notes: Aus/NZ, playground origin. Not an inventory word, but it fills the physical-description slot.
+    meaning: clumsy, badly coordinated
+  gaps:
+  - awkward
+  - bumbling
+  - clumsy
+  - uncoordinated
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - clumsy, badly coordinated
+  examples: []
+- term: unna
+  key: unna
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:TAG_EH
+    frame: garnish:tag
+    register: current
+    region:
+    - aboriginal_english
+    - wa
+    vulgarity: 0
+    incoherence: 5
+    sources:
+    - https://ewave-atlas.org/valuesets/61-165
+    - https://www.uwa.edu.au/news/article/2021/july/10-ways-aboriginal-australians-made-english-their-own
+    confidence: high
+    notes: Aboriginal English, widely used in WA and also in the NT, Qld and NSW. It establishes shared knowledge.
+      Gate it strictly; don't put it in a generic speaker's mouth.
+    meaning: tag inviting agreement, 'isn't it?' or 'you know?'
+  gaps:
+  - eh
+  - isn't it
+  - right?
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - tag inviting agreement, 'isn't it?' or 'you know?'
+  examples: []
+- term: up {reflexive}
+  key: up
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:ARROGANT
+    frame: predicate_adj
+    register: current
+    region: []
+    vulgarity: 1
+    incoherence: 3
+    sources:
+    - https://kangaeroo.com/2010/11/03/up-yourself-up-someone/
+    - https://www.studiesinaustralia.com/studying-in-australia/living-in-australia/aussie-slang
+    confidence: high
+    notes: '''Up himself / up herself / up yourself''. Mildly rude (a euphemism of ''up his own arse'').'
+    meaning: full of yourself, stuck-up
+  gaps:
+  - arrogant
+  - conceited
+  - rude
+  - snobby
+  - stuck-up
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - full of yourself, stuck-up
+  examples: []
+- term: what a bummer
+  key: what a bummer
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:COMMISERATE
+    frame: garnish:aside
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 1
+    sources:
+    - https://aussieenglish.com.au/ep019-aussie-expressions-when-hearing-bad-news
+    confidence: medium
+    notes: American in origin but standard in Australia. The same source lists 'Bugger!' and 'That sucks!'.
+    meaning: that's disappointing (reacting to bad news)
+  gaps:
+  - oh no
+  - that's a shame
+  - too bad
+  - what a pity
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - that's disappointing (reacting to bad news)
+  examples: []
+- term: a willy-willy
+  key: willy-willy
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:WINDY
+    frame: np
+    register: current
+    region:
+    - outback
+    - wa
+    vulgarity: 0
+    incoherence: 4
+    sources:
+    - https://dictionary.com/browse/willy-willy
+    - https://wordnik.com/words/willy%20willy
+    confidence: high
+    notes: Probably from an Aboriginal language, though the origin is disputed. Inland and northern usage. Narrow
+      sense.
+    meaning: a small whirlwind of dust
+  gaps:
+  - dust devil
+  - whirlwind
+  - windy
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - a small whirlwind of dust
+  examples: []
+- term: yeah, no
+  key: yeah, no
+  in_dictionary: null
+  support: 1
+  agents: []
+  web:
+    concept: NEW:YEAH_NO
+    frame: garnish:opener
+    register: current
+    region: []
+    vulgarity: 0
+    incoherence: 3
+    sources:
+    - https://www.ingentaconnect.com/content/routledg/cajl/2002/00000022/00000002/art00001
+    - https://blog.oup.com/2019/03/where-phrase-yeah-no-come-from/
+    confidence: high
+    notes: 'Burridge and Florey (2002) studied ''yeah-no'' in Australian English: it agrees, hedges or saves face,
+      and can lead back to a topic. ''Yeah, nah'' and ''nah, yeah'' are already in DISAGREE and AGREE; ''yeah, no''
+      is the discourse-marker version and works as an opener.'
+    meaning: agree with or acknowledge what was said, then add your own point (or soften a no)
+  gaps:
+  - (agreeing preface)
+  - (softened disagreement)
+  - I mean
+  - right
+  - well
+  frames: []
+  vulgarity_guesses: []
+  meanings:
+  - agree with or acknowledge what was said, then add your own point (or soften a no)
+  examples: []

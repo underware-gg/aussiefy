@@ -1,0 +1,265 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn-dinkum": "A",
+  "unharnessed": "B",
+  "engine": "C",
+  "yarn-deadset": "D",
+  "yarn-troppo": "E"
+ },
+ "scores": {
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 5,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 3,
+   "register": 1,
+   "tone": 5,
+   "flow": 4,
+   "variety": 1,
+   "essence": 5
+  },
+  "yarn-deadset": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 2,
+   "tone": 5,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  },
+  "yarn-troppo": {
+   "meaning": 4,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 4,
+   "flow": 4,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn-dinkum": {
+   "meaning": "Every point kept, code and links intact: \"rustc would get it wrong and generate a trait object vtable with a null pointer\", \"it can be grounds for\", \"(as is par for the course with UB)\".",
+   "sense": "Terms fit: \"every man and his dog\" for everyone, \"No worries\", \"par for the course\", \"Heaps of people pitched in\", \"give us a hand\".",
+   "authenticity": "Natural Aussie tech-blog voice: \"Haven't got it yet? No worries\", \"If you're keen to give us a hand\".",
+   "register": "Chatty and Aussie throughout (\"Good news: the Rust team's just put out\"), a touch restrained for level 4; no swearing, within the dial.",
+   "tone": "Keeps the friendly, precise release-note tone; the technical warning stays clear: \"That ends up as undefined behaviour in the\\nemitted code.\"",
+   "flow": "Reads smoothly: \"Back in Rust 1.98.0, in some cases, rustc would get it wrong\".",
+   "variety": "Varied: \"Good news\", \"No worries\", \"par for the course\", \"have a go at\", \"pitched in\", \"the lot of you\".",
+   "essence": "Unmistakably the Rust point-release post."
+  },
+  "unharnessed": {
+   "meaning": "All points kept, but the tagline changes \"efficient\" to \"software that's reliable and runs like a bloody dream\", and \"any old weird effects at all\" loosens \"arbitrary effects\".",
+   "sense": "Mostly fits (\"stuff up a trait object vtable\", \"code it spits out\", \"fair game for\"), though \"runs like a bloody dream\" overclaims \"efficient\" and \"UB, the mongrel\" strains.",
+   "authenticity": "Largely natural, with some forced touches: \"the lot of youse\" is stagey in a project blog, \"already got an older version of Rust in through rustup\" is awkward.",
+   "register": "Level-4 Aussie with dad-level swearing: \"runs like a bloody dream\", \"(as you'd expect with UB, the mongrel)\".",
+   "tone": "The cheerful release tone mostly holds, though \"the mongrel\" and \"youse\" push it toward pub banter in a technical note.",
+   "flow": "Mostly smooth, with one clunky join: \"If you've already got an older version of Rust in through rustup\".",
+   "variety": "Varied: \"pushed out\", \"a leg-up\", \"grabbing\", \"sorts out\", \"stuff up\", \"spits out\", \"trip over\".",
+   "essence": "Clearly the release note retold."
+  },
+  "engine": {
+   "meaning": "The original verbatim apart from two swaps, so nothing is lost: \"rustc would incorrectly generate a trait object vtable\".",
+   "sense": "The lone idiom fits: \"empowering every man and his dog\".",
+   "authenticity": "Too little Aussie to judge; the one idiom sits oddly in corporate prose: \"is empowering every man and his dog\".",
+   "register": "Essentially untranslated for level 4: \"If you have a previous version of Rust installed via rustup\".",
+   "tone": "The original tone is untouched.",
+   "flow": "Reads as the original does, with a jarring \"empowering every man and his dog\".",
+   "variety": "One idiom in the whole text.",
+   "essence": "Unmistakably the original, since it is the original."
+  },
+  "yarn-deadset": {
+   "meaning": "Every point kept: \"rustc would wrongly generate a trait object vtable with a null pointer\", \"(as is usual for UB)\".",
+   "sense": "The few terms fit: \"every man and his dog\", \"give us a hand\", \"Heaps of people pitched in\".",
+   "authenticity": "What there is is natural: \"If you haven't got it yet, you can [get `rustup`][rustup] from the right page\".",
+   "register": "Light touch only, far under level 4: \"That leads to undefined behaviour in the\\nemitted code.\"",
+   "tone": "Release-note tone intact.",
+   "flow": "Smooth throughout.",
+   "variety": "Little slang to vary.",
+   "essence": "Clearly the release note."
+  },
+  "yarn-troppo": {
+   "meaning": "All facts kept with reactive colour (\"That's it. That's the whole job.\", \"Nothing where something ought to be\"), but \"Solid stuff, and quick with it.\" adds an evaluative claim, and \"for anyone who's been living under a rock\" adds a jab.",
+   "sense": "Terms fit: \"No dramas\", \"Here's the go\", \"get it flamin' wrong\", \"par for the course\", \"have a crack at\", \"give us a yell\".",
+   "authenticity": "Sounds like a real Aussie dev talking: \"rustc would get it flamin' wrong\", \"you'd be lucky if that's all\".",
+   "register": "Full level-4 voice (\"You'll like this one.\") with dad-level swearing: \"the unpredictable bugger\".",
+   "tone": "The warning about undefined behaviour still lands (\"you'd be lucky if that's all\"), but the opener's \"living under a rock\" is a bit cheeky for project notes.",
+   "flow": "Mostly smooth, though the asides stack up: \"Heaps of people pitched in to make Rust 1.98.1, the whole crew. We couldn't have done it without the lot of you, so cheers. [Thanks!]\".",
+   "variety": "Varied openers and tags: \"You'll like this one.\", \"Now,\", \"So what's the fuss?\", \"Here's the go.\", \"No dramas\".",
+   "essence": "Unmistakably the release note retold."
+  }
+ },
+ "problems": {
+  "yarn-dinkum": [
+   {
+    "quote": "Rust's a programming language that's giving every man and his dog what they need to build",
+    "original": "Rust is a programming language that is empowering everyone to build",
+    "severity": "minor",
+    "why": "Slightly wordy recasting of the tagline."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "runs like a bloody dream",
+    "original": "reliable and efficient software",
+    "severity": "minor",
+    "why": "Overstates \"efficient\" into a performance boast."
+   },
+   {
+    "quote": "the lot of youse",
+    "original": "all of you",
+    "severity": "minor",
+    "why": "\"Youse\" is a broad, stagey choice for a project's thank-you."
+   },
+   {
+    "quote": "already got an older version of Rust in through rustup",
+    "original": "If you have a previous version of Rust installed via rustup",
+    "severity": "minor",
+    "why": "Awkward phrasing."
+   },
+   {
+    "quote": "as you'd expect with UB, the mongrel",
+    "original": "as is typical for UB",
+    "severity": "minor",
+    "why": "\"Mongrel\" strains as a tag on undefined behaviour."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "If you have a previous version of Rust installed via rustup",
+    "original": "If you have a previous version of Rust installed via rustup",
+    "severity": "major",
+    "why": "Left untranslated; far below level 4."
+   },
+   {
+    "quote": "empowering every man and his dog",
+    "original": "empowering everyone",
+    "severity": "minor",
+    "why": "Lone idiom bolted onto corporate phrasing."
+   }
+  ],
+  "yarn-deadset": [
+   {
+    "quote": "In Rust 1.98.0, in some cases, rustc would wrongly generate a trait object vtable",
+    "original": "In Rust 1.98.0, in some circumstances, rustc would incorrectly generate a trait object vtable",
+    "severity": "minor",
+    "why": "Representative of lightly edited stretches that keep it well under level 4."
+   }
+  ],
+  "yarn-troppo": [
+   {
+    "quote": "Solid stuff, and quick with it.",
+    "original": "",
+    "severity": "minor",
+    "why": "An added evaluative claim not in the original."
+   },
+   {
+    "quote": "for anyone who's been living under a rock",
+    "original": "",
+    "severity": "minor",
+    "why": "A cheeky jab at readers the original does not make."
+   },
+   {
+    "quote": "so cheers. [Thanks!]",
+    "original": "We couldn't have done it without all of you. [Thanks!]",
+    "severity": "minor",
+    "why": "\"Cheers\" right before \"Thanks!\" doubles up."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn-dinkum": "A natural, faithful and precise Aussie retelling, a shade light for level 4.",
+  "unharnessed": "Lively and Aussie at the right level, with a few forced or overclaiming touches.",
+  "engine": "Virtually the original, with one idiom dropped in.",
+  "yarn-deadset": "Faithful and natural, but closer to level 2 than 4.",
+  "yarn-troppo": "The fullest, most authentic level-4 voice; a few asides overreach."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "yarn-dinkum",
+    "engine",
+    "yarn-deadset"
+   ],
+   [
+    "yarn-troppo",
+    "unharnessed"
+   ]
+  ],
+  "flow": [
+   [
+    "yarn-dinkum",
+    "yarn-deadset"
+   ],
+   [
+    "yarn-troppo",
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-troppo",
+    "yarn-dinkum",
+    "unharnessed"
+   ],
+   [
+    "yarn-deadset"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "yarn-dinkum",
+    "unharnessed",
+    "yarn-deadset",
+    "yarn-troppo"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn-troppo",
+    "yarn-dinkum"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn-deadset"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

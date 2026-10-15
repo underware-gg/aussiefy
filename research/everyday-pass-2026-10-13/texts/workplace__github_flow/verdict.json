@@ -1,0 +1,181 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "unharnessed": "A",
+  "yarn": "B",
+  "engine": "C"
+ },
+ "scores": {
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 4,
+   "register": 2,
+   "tone": 5,
+   "flow": 5,
+   "variety": 4,
+   "essence": 4
+  },
+  "engine": {
+   "meaning": 3,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 2,
+   "tone": 4,
+   "flow": 1,
+   "variety": 1,
+   "essence": 3
+  }
+ },
+ "evidence": {
+  "unharnessed": {
+   "meaning": "Every point survives: the uses at GitHub, prerequisites and links, the tip, branch naming examples, the safety of a branch, descriptive commits, the rename-and-tests example (\"put the variable rename in one commit and the tests in another\"), backup to remote storage, and \"Keep making, committing and pushing changes\". Link texts are left intact.",
+   "sense": "\"knock over every step\", \"hook up to GitHub\", \"what's cooking at a glance\", \"without stuffing up the default branch\", \"run their eye over your work\", \"bin the variable rename\" all fit. \"you'll be busting your arse a lot harder\" carries \"spend more effort\".",
+   "authenticity": "Sounds like an Aussie dev explaining it: \"If you cock something up, you can revert your changes or push more changes to fix the stuff-up.\", \"That makes it dead easy to revert\". \"And it's not just for the developers, mate\" is a slightly stock tag.",
+   "register": "Full level-5 voice with uncle-bob vulgarity used once or twice (\"cock something up\", \"busting your arse\"), within limit, while keeping the docs usable.",
+   "tone": "Still helpful documentation, just told by a mate: \"Your branch is a safe spot to muck around with changes.\"",
+   "flow": "Reads well: \"Making a branch gives you your own patch to work in without stuffing up the default branch.\"",
+   "variety": "\"no-fuss\", \"have a go\", \"lowdown\", \"track down\", \"chip in\", \"knock over\", \"hook up\", \"what's cooking\", \"patch\", \"stuffing up\", \"run their eye over\", \"muck around\", \"cock something up\", \"bin\", \"shove\", \"smear\", \"busting your arse\"; \"stuff\" appears twice.",
+   "essence": "Unmistakably the GitHub flow page, structure, links and examples intact."
+  },
+  "yarn": {
+   "meaning": "Every point survives, including the commit example (\"put the variable rename in one commit and the tests in another commit\") and remote backup.",
+   "sense": "\"every man and his dog\" for everyone, \"get a quick squiz at work in progress\", \"without mucking up the default branch\", \"If you stuff something up\" fit.",
+   "authenticity": "Natural where it changes: \"If you're after an existing repository to contribute to\", \"make whatever changes you're after\". \"every man and his dog\" is a little stock.",
+   "register": "Much of it reads as lightly edited docs (\"By committing and pushing your changes, you back up your work to remote storage.\"), with a few touches; closer to level 2-3 than the level-5 brief, and no use of the allowed vulgarity.",
+   "tone": "Helpful documentation tone intact.",
+   "flow": "Smooth throughout: \"Your changes won't end up on the default branch until you merge your branch.\"",
+   "variety": "\"handy\", \"every man and his dog\", \"you're after\" twice, \"squiz\", \"mucking up\", \"stuff something up\", \"get at\"; sparse but not repetitive.",
+   "essence": "Clearly the GitHub flow page, barely retold."
+  },
+  "engine": {
+   "meaning": "Content is the original, but link texts that name real pages are altered (\"[Creating brand-spankin'-new files]\", \"[Moving a file to a brand-spankin'-new location]\", \"[Findin' ways to contribute to open source on GitHub]\"), and \"until yer ready\" says \"your\" for \"you're\".",
+   "sense": "\"to see ongoing work at a squiz\" misuses \"squiz\" (you have a squiz; \"at a glance\" is the idiom); \"brand-spankin'-new files\" for \"new files\" overloads a page title; \"until yer ready\" is wrong.",
+   "authenticity": "Stage drawl on untouched prose: \"By committin''n pushin' yer changes, you back up yer work to remote storage.\", \"Ya can complete all steps of GitHub flow\".",
+   "register": "Mostly the original words (\"Ideally, each commit contains an isolated, complete change. This makes it easy to revert your changes\") with spelling drawl; well under level 5.",
+   "tone": "The documentation tone survives under the apostrophes, though page titles turned to slang look careless.",
+   "flow": "Broken bits: \"committin''n pushin'\", \"one commit'n the tests\", \"ya would spend more effort\", \"until yer ready\"; and inconsistent \"your\"/\"yer\".",
+   "variety": "Leans on \"ya\"/\"yer\" and \"brand-spankin'-new\" twice; little else.",
+   "essence": "Recognisably the page, but not retold."
+  }
+ },
+ "problems": {
+  "unharnessed": [
+   {
+    "quote": "And it's not just for the developers, mate, it's handy for everyone.",
+    "original": "The GitHub flow is useful for everyone, not just developers.",
+    "severity": "minor",
+    "why": "\"mate\" tag is a slightly stock touch."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "If you put the variable rename and the tests in the same commit, or spread the variable rename across multiple commits, you'd spend more effort reverting your changes.",
+    "original": "If you put the variable rename and tests in the same commit or spread the variable rename across multiple commits, you would spend more effort reverting your changes.",
+    "severity": "major",
+    "why": "Large stretches stay close to the original, far lighter than the level-5 brief."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "[Creating brand-spankin'-new files]",
+    "original": "[Creating new files]",
+    "severity": "major",
+    "why": "Changes the title of a linked page."
+   },
+   {
+    "quote": "to see ongoing work at a squiz",
+    "original": "to see ongoing work at a glance",
+    "severity": "major",
+    "why": "\"at a squiz\" isn't an idiom; \"squiz\" is a look you have."
+   },
+   {
+    "quote": "By committin''n pushin' yer changes",
+    "original": "By committing and pushing your changes",
+    "severity": "major",
+    "why": "Broken apostrophe pile-up."
+   },
+   {
+    "quote": "until yer ready to ask for feedback",
+    "original": "until you are ready to ask for feedback",
+    "severity": "minor",
+    "why": "\"yer\" is \"your\", not \"you're\"."
+   },
+   {
+    "quote": "Ideally, each commit contains an isolated, complete change. This makes it easy to revert your changes if you decide to take a different approach.",
+    "original": "Ideally, each commit contains an isolated, complete change. This makes it easy to revert your changes if you decide to take a different approach.",
+    "severity": "major",
+    "why": "Largely untranslated for a level-5 brief."
+   }
+  ]
+ },
+ "summaries": {
+  "unharnessed": "A vivid, natural level-5 retelling of the docs that keeps every instruction and leaves links intact.",
+  "yarn": "Clean and faithful but only lightly Aussie for a level-5 brief.",
+  "engine": "Drawl spellings on an untouched text, with altered link titles and a misused \"squiz\"."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed",
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

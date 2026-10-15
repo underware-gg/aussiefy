@@ -1,0 +1,1070 @@
+{
+ "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as rude, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+ "prompt": "BRIEF: level 2, vulgarity 0\n\nORIGINAL:\n> “Any color you like.”\n\n_Black_ is the uncompromising Python code formatter. By using it, you agree to cede\ncontrol over minutiae of hand-formatting. In return, _Black_ gives you speed,\ndeterminism, and freedom from `pycodestyle` nagging about formatting. You will save time\nand mental energy for more important matters.\n\nBlackened code looks the same regardless of the project you're reading. Formatting\nbecomes transparent after a while and you can focus on the content instead.\n\n_Black_ makes code review faster by producing the smallest diffs possible.\n\nWatch the [PyCon 2019 talk](https://youtu.be/esZLCuWs_2Y) to learn more.\n\n---\n\n**[Read the documentation on ReadTheDocs!](https://black.readthedocs.io/en/stable)**\n\n---\n\n## Installation and usage\n\n### Installation\n\n_Black_ can be installed by running `pip install black`. It requires Python 3.10+ to\nrun. If you want to format Jupyter Notebooks, install with\n`pip install \"black[jupyter]\"`.\n\nIf you want to run _Black_ without installing Python, download one of the\nPyInstaller-built standalone executables from the\n[latest GitHub release](https://github.com/psf/black/releases/latest).\n\n### Usage\n\nTo get started right away with sensible defaults:\n\n```sh\nblack {source_file_or_directory}\n```\n\nYou can run _Black_ as a package if running it as a script doesn't work:\n\n```sh\npython -m black {source_file_or_directory}\n```\n\nFurther information can be found in our docs:\n\n- [Usage and Configuration](https://black.readthedocs.io/en/stable/usage_and_configuration/index.html)\n\n_Black_ is already [successfully used](https://github.com/psf/black#used-by) by many\nprojects, small and big. _Black_ has a comprehensive test suite, with efficient parallel\ntests, and our own auto formatting and parallel Continuous Integration runner. Now that\nwe have become stable, you should not expect large formatting changes in the future.\nStylistic changes will mostly be responses to bug reports and support for new Python\nsyntax. For more information please refer to\n[The Black Code Style](https://black.readthedocs.io/en/stable/the_black_code_style/index.html).\n\nAlso, as a safety measure which slows down processing, _Black_ will check that the\nreformatted code still produces a valid AST that is effectively equivalent to the\noriginal (see the\n[Pragmatism](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#ast-before-and-after-formatting)\nsection for details). If you're feeling confident, use `--fast`.\n\nCANDIDATE A:\n> “Any colour you like.”\n\nSo get this. _Black_ is the Python code formatter, and it does not budge. Not an inch. You use it, you're agreeing\nto hand over control of all the fiddly little bits of hand-formatting, full stop. And what do you get back from\n_Black_? Speed, determinism, and no more `pycodestyle` in your ear nagging about formatting. Bliss. You'll save\nyourself time and brainpower for the stuff that actually matters.\n\nBlackened code looks the same whatever project you've got open. Give it a while and you stop even noticing the\nformatting, and you just get on with the content. Which is the whole point, really.\n\nAnd _Black_ makes code review quicker, too, because it spits out the smallest diffs it possibly can. No more\nscrolling through a mile of whitespace changes.\n\nHave a squiz at the [PyCon 2019 talk](https://youtu.be/esZLCuWs_2Y) if you want to know more.\n\n---\n\n**[Read the documentation on ReadTheDocs!](https://black.readthedocs.io/en/stable)**\n\n---\n\n## Installation and usage\n\n### Installation\n\nInstalling _Black_ is easy as: run `pip install black`. It needs Python 3.10+ to\nrun, mind. Want it to format your Jupyter Notebooks as well? Then install it with\n`pip install \"black[jupyter]\"`.\n\nNo Python on the box? No worries. You can still run _Black_: just grab one of the\nPyInstaller-built standalone executables from the\n[latest GitHub release](https://github.com/psf/black/releases/latest).\n\n### Usage\n\nKeen to get cracking straight away with sensible defaults? Here you go:\n\n```sh\nblack {source_file_or_directory}\n```\n\nAnd if running it as a script won't play ball, run _Black_ as a package instead:\n\n```sh\npython -m black {source_file_or_directory}\n```\n\nThere's plenty more in our docs:\n\n- [Usage and Configuration](https://black.readthedocs.io/en/stable/usage_and_configuration/index.html)\n\nNow, heaps of projects, big and small, are already [successfully using](https://github.com/psf/black#used-by)\n_Black_, so you're in good company. It's got a thorough test suite, with efficient parallel tests, plus our own\nauto formatting and parallel Continuous Integration runner. And now that we're stable, don't go expecting big\nformatting changes down the track. Any stylistic changes will mostly come from bug reports and support for new\nPython syntax. For the full rundown, have a look at\n[The Black Code Style](https://black.readthedocs.io/en/stable/the_black_code_style/index.html).\n\nOne last thing. As a safety measure, and yeah, it does slow processing down a bit, _Black_ checks that the\nreformatted code still produces a valid AST that's effectively equivalent to the\noriginal (see the\n[Pragmatism](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#ast-before-and-after-formatting)\nsection for the details). Better safe than sorry. If you're feeling confident, though, use `--fast`.\n\nCANDIDATE B:\n> “Any colour you like.”\n\n_Black_ is the uncompromising Python code formatter. By using it, you agree to cede\ncontrol over minutiae of hand-formatting. In return, _Black_ gives you speed,\ndeterminism, and freedom from `pycodestyle` nagging about formatting. You will save time\nand mental energy for more important matters.\n\nBlackened code looks the same regardless of the project you're reading. Formatting\nbecomes transparent after a while and you can focus on the content instead.\n\n_Black_ makes code review faster by producing the smallest diffs possible.\n\nWatch the [PyCon 2019 talk](https://youtu.be/esZLCuWs_2Y) to learn more.\n\n---\n\n**[Read the documentation on ReadTheDocs!](https://black.readthedocs.io/en/stable)**\n\n---\n\n## Installation and usage\n\n### Installation\n\n_Black_ can be installed by running `pip install black`. It requires Python 3.10+ to\nrun. If you want to format Jupyter Notebooks, install with\n`pip install \"black[jupyter]\"`.\n\nIf you want to run _Black_ without installing Python, download one of the\nPyInstaller-built standalone executables from the\n[latest GitHub release](https://github.com/psf/black/releases/latest).\n\n### Usage\n\nTo get started right away with sensible defaults:\n\n```sh\nblack {source_file_or_directory}\n```\n\nYou can run _Black_ as a package if running it as a script doesn't work:\n\n```sh\npython -m black {source_file_or_directory}\n```\n\nFurther information can be found in our docs:\n\n- [Usage and Configuration](https://black.readthedocs.io/en/stable/usage_and_configuration/index.html)\n\n_Black_ is already [successfully used](https://github.com/psf/black#used-by) by many\nprojects, small and big. _Black_ has a comprehensive test suite, with efficient parallel\ntests, and our own auto formatting and parallel Continuous Integration runner. Now that\nwe have become stable, you should not expect large formatting changes in the future.\nStylistic changes will mostly be responses to bug reports and support for new Python\nsyntax. For more information please refer to\n[The Black Code Style](https://black.readthedocs.io/en/stable/the_black_code_style/index.html).\n\nAlso, as a safety measure which slows down processing, _Black_ will check that the\nreformatted code still produces a valid AST that is effectively equivalent to the\noriginal (see the\n[Pragmatism](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#ast-before-and-after-formatting)\nsection for details). If you're feeling confident, use `--fast`.\n\nCANDIDATE C:\n> “Any colour you like.”\n\n_Black_ is the Python code formatter that won't budge. Use it and you're agreeing to hand\nover control of all the fiddly bits of hand-formatting. What you get back from _Black_ is speed,\ndeterminism, and no more `pycodestyle` nagging you about formatting. You'll save yourself time\nand brainpower for the stuff that actually matters.\n\nBlackened code looks the same whatever project you're reading. After a while you stop even\nnoticing the formatting, and you can get on with the content instead.\n\n_Black_ makes code review quicker, too, by producing the smallest diffs it can.\n\nHave a look at the [PyCon 2019 talk](https://youtu.be/esZLCuWs_2Y) if you want to know more.\n\n---\n\n**[Read the documentation on ReadTheDocs!](https://black.readthedocs.io/en/stable)**\n\n---\n\n## Installation and usage\n\n### Installation\n\nYou can install _Black_ by running `pip install black`. It needs Python 3.10+ to\nrun. Want to format Jupyter Notebooks as well? Install it with\n`pip install \"black[jupyter]\"`.\n\nIf you'd rather run _Black_ without installing Python, just grab one of the\nPyInstaller-built standalone executables from the\n[latest GitHub release](https://github.com/psf/black/releases/latest).\n\n### Usage\n\nTo get cracking straight away with sensible defaults:\n\n```sh\nblack {source_file_or_directory}\n```\n\nAnd if running it as a script doesn't work, you can run _Black_ as a package:\n\n```sh\npython -m black {source_file_or_directory}\n```\n\nThere's more in our docs:\n\n- [Usage and Configuration](https://black.readthedocs.io/en/stable/usage_and_configuration/index.html)\n\nHeaps of projects, big and small, are already [successfully using](https://github.com/psf/black#used-by)\n_Black_. It's got a thorough test suite, with efficient parallel tests, plus our own auto\nformatting and parallel Continuous Integration runner. Now that we're stable, don't go\nexpecting big formatting changes down the track. Stylistic changes will mostly come from\nbug reports and support for new Python syntax. For the full rundown, have a squiz at\n[The Black Code Style](https://black.readthedocs.io/en/stable/the_black_code_style/index.html).\n\nOne more thing: as a safety measure, which does slow processing down a bit, _Black_ checks that the\nreformatted code still produces a valid AST that's effectively equivalent to the\noriginal (see the\n[Pragmatism](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#ast-before-and-after-formatting)\nsection for the details). If you're feeling confident, use `--fast`.\n\nCANDIDATE D:\n> \"Any colour you like.\"\n\n_Black_ is the no-nonsense Python code formatter. By using it, you agree to hand over\ncontrol of the fiddly bits of hand-formatting. In return, _Black_ gives you speed,\ndeterminism, and freedom from `pycodestyle` nagging you about formatting. You'll save time\nand brainpower for the stuff that actually matters.\n\nBlackened code looks the same no matter whose project you're reading. After a while the\nformatting stops being something you notice, and you can focus on the content instead.\n\n_Black_ makes code review quicker by producing the smallest diffs possible.\n\nHave a squiz at the [PyCon 2019 talk](https://youtu.be/esZLCuWs_2Y) to learn more.\n\n---\n\n**[Read the documentation on ReadTheDocs!](https://black.readthedocs.io/en/stable)**\n\n---\n\n## Installation and usage\n\n### Installation\n\n_Black_ can be installed by running `pip install black`. It needs Python 3.10+ to\nrun. If you want to format Jupyter Notebooks, install with\n`pip install \"black[jupyter]\"`.\n\nIf you want to run _Black_ without installing Python, grab one of the\nPyInstaller-built standalone executables from the\n[latest GitHub release](https://github.com/psf/black/releases/latest).\n\n### Usage\n\nTo get cracking straight away with sensible defaults:\n\n```sh\nblack {source_file_or_directory}\n```\n\nYou can run _Black_ as a package if running it as a script doesn't work:\n\n```sh\npython -m black {source_file_or_directory}\n```\n\nThere's more info in our docs:\n\n- [Usage and Configuration](https://black.readthedocs.io/en/stable/usage_and_configuration/index.html)\n\n_Black_ is already [successfully used](https://github.com/psf/black#used-by) by plenty of\nprojects, big and small. _Black_ has a thorough test suite, with efficient parallel\ntests, and our own auto formatting and parallel Continuous Integration runner. Now that\nwe've become stable, you shouldn't expect big formatting changes down the track.\nStylistic changes will mostly be in response to bug reports and support for new Python\nsyntax. For more info, have a look at\n[The Black Code Style](https://black.readthedocs.io/en/stable/the_black_code_style/index.html).\n\nAlso, as a safety measure that slows things down a bit, _Black_ will check that the\nreformatted code still produces a valid AST that's effectively the same as the\noriginal (see the\n[Pragmatism](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#ast-before-and-after-formatting)\nsection for the details). If you're feeling confident, use `--fast`.\n\nCANDIDATE E:\n> “Any colour you like.”\n\n_Black_ is the no-nonsense Python code formatter. By using it, you agree to hand over\ncontrol of the nitty-gritty of hand-formatting. In return, _Black_ gives you speed,\ndeterminism, and freedom from `pycodestyle` nagging you about formatting. You'll save time\nand brainpower for more important stuff.\n\nBlackened code looks the same no matter which project you're reading. Formatting\nstops being noticeable after a while and you can focus on the content instead.\n\n_Black_ makes code review quicker by producing the smallest diffs possible.\n\nWatch the [PyCon 2019 talk](https://youtu.be/esZLCuWs_2Y) to find out more.\n\n---\n\n**[Read the documentation on ReadTheDocs!](https://black.readthedocs.io/en/stable)**\n\n---\n\n## Installation and usage\n\n### Installation\n\n_Black_ can be installed by running `pip install black`. It needs Python 3.10+ to\nrun. If you want to format Jupyter Notebooks, install with\n`pip install \"black[jupyter]\"`.\n\nIf you want to run _Black_ without installing Python, download one of the\nPyInstaller-built standalone executables from the\n[latest GitHub release](https://github.com/psf/black/releases/latest).\n\n### Usage\n\nTo get cracking straight away with sensible defaults:\n\n```sh\nblack {source_file_or_directory}\n```\n\nYou can run _Black_ as a package if running it as a script doesn't work:\n\n```sh\npython -m black {source_file_or_directory}\n```\n\nThere's more info in our docs:\n\n- [Usage and Configuration](https://black.readthedocs.io/en/stable/usage_and_configuration/index.html)\n\n_Black_ is already [successfully used](https://github.com/psf/black#used-by) by heaps of\nprojects, small and big. _Black_ has a thorough test suite, with efficient parallel\ntests, and our own auto formatting and parallel Continuous Integration runner. Now that\nwe've become stable, you shouldn't expect big formatting changes down the track.\nStylistic changes will mostly be responses to bug reports and support for new Python\nsyntax. For more info, have a squiz at\n[The Black Code Style](https://black.readthedocs.io/en/stable/the_black_code_style/index.html).\n\nAlso, as a safety measure that slows down processing, _Black_ will check that the\nreformatted code still produces a valid AST that's effectively equivalent to the\noriginal (see the\n[Pragmatism](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#ast-before-and-after-formatting)\nsection for the details). If you're feeling confident, use `--fast`.",
+ "schema": {
+  "type": "object",
+  "properties": {
+   "candidates": {
+    "type": "object",
+    "properties": {
+     "A": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "B": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "C": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "D": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     },
+     "E": {
+      "type": "object",
+      "properties": {
+       "scores": {
+        "type": "object",
+        "properties": {
+         "meaning": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "sense": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "authenticity": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "register": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "tone": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "flow": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "variety": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         },
+         "essence": {
+          "type": "object",
+          "properties": {
+           "evidence": {
+            "type": "string"
+           },
+           "score": {
+            "type": "integer"
+           }
+          },
+          "required": [
+           "evidence",
+           "score"
+          ],
+          "additionalProperties": false
+         }
+        },
+        "required": [
+         "meaning",
+         "sense",
+         "authenticity",
+         "register",
+         "tone",
+         "flow",
+         "variety",
+         "essence"
+        ],
+        "additionalProperties": false
+       },
+       "problems": {
+        "type": "array",
+        "items": {
+         "type": "object",
+         "properties": {
+          "quote": {
+           "type": "string"
+          },
+          "original": {
+           "type": "string"
+          },
+          "severity": {
+           "type": "string",
+           "enum": [
+            "critical",
+            "major",
+            "minor"
+           ]
+          },
+          "why": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "quote",
+          "original",
+          "severity",
+          "why"
+         ],
+         "additionalProperties": false
+        }
+       },
+       "summary": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "scores",
+       "problems",
+       "summary"
+      ],
+      "additionalProperties": false
+     }
+    },
+    "required": [
+     "A",
+     "B",
+     "C",
+     "D",
+     "E"
+    ],
+    "additionalProperties": false
+   },
+   "rankings": {
+    "type": "object",
+    "properties": {
+     "tone": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "flow": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "variety": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "essence": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     },
+     "overall": {
+      "type": "array",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "A",
+         "B",
+         "C",
+         "D",
+         "E"
+        ]
+       }
+      }
+     }
+    },
+    "required": [
+     "tone",
+     "flow",
+     "variety",
+     "essence",
+     "overall"
+    ],
+    "additionalProperties": false
+   }
+  },
+  "required": [
+   "candidates",
+   "rankings"
+  ],
+  "additionalProperties": false
+ }
+}

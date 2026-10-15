@@ -1,0 +1,53 @@
+Retell this in Australian English vernacular: lightly Aussie, no swearing at all. The original is a markdown document. Retell only its prose. Keep every code block, inline code span, tag and component (props included), import, front matter block, heading, link target, URL, table layout and list marker exactly as it is, character for character. Reply with the retelling only.
+
+A **cookie** (also known as a web cookie or browser cookie) is a small piece of data a server sends to a user's web browser. The browser may store cookies, create new cookies, modify existing ones, and send them back to the same server with later requests. Cookies enable web applications to store limited amounts of data and remember state information; by default the HTTP protocol is [stateless](/en-US/docs/Web/HTTP/Guides/Overview#http_is_stateless_but_not_sessionless).
+
+In this article we will explore the main uses of cookies, explain best practices for using them, and look at their privacy and security implications.
+
+## What cookies are used for
+
+Typically, the server will use the contents of HTTP cookies to determine whether different requests come from the same browser/user and then issue a personalized or generic response as appropriate. The following describes a basic user sign-in system:
+
+1. The user sends sign-in credentials to the server, for example via a form submission.
+2. If the credentials are correct, the server updates the UI to indicate that the user is signed in, and responds with a cookie containing a session ID that records their sign-in status on the browser.
+3. At a later time, the user moves to a different page on the same site. The browser sends the cookie containing the session ID along with the corresponding request to indicate that it still thinks the user is signed in.
+4. The server checks the session ID and, if it is still valid, sends the user a personalized version of the new page. If it is not valid, the session ID is deleted and the user is shown a generic version of the page (or perhaps shown an "access denied" message and asked to sign in again).
+
+![visual representation of the above sign-in system description](/shared-assets/images/diagrams/http/cookies/cookie-basic-example.png)
+
+Cookies are mainly used for three purposes:
+
+- **Session management**: User sign-in status, shopping cart contents, game scores, or any other user session-related details that the server needs to remember.
+- **Personalization**: User preferences such as display language and UI theme.
+- **Tracking**: Recording and analyzing user behavior.
+
+### Data storage
+
+In the early days of the web when there was no other option, cookies were used for general client-side data storage purposes. Modern storage APIs are now recommended, for example the [Web Storage API](/en-US/docs/Web/API/Web_Storage_API) (`localStorage` and `sessionStorage`) and [IndexedDB](/en-US/docs/Web/API/IndexedDB_API).
+
+They are designed with storage in mind, never send data to the server, and don't come with other drawbacks of using cookies for storage:
+
+- Browsers are generally limited to a maximum number of cookies per domain (varies by browser, generally in the hundreds), and a maximum size per cookie (usually 4KB). Storage APIs can store larger amounts of data.
+- Cookies are sent with every request, so they can worsen performance (for example on slow mobile data connections), especially if you have a lot of cookies set.
+
+> [!NOTE]
+> To see stored cookies (and other storage that a web page is using) you can use the [Storage Inspector](https://firefox-source-docs.mozilla.org/devtools-user/storage_inspector/index.html) in Firefox Developer Tools, or the [Application panel](https://developer.chrome.com/docs/devtools/progressive-web-apps) in Chrome Developer Tools.
+
+## Creating, removing, and updating cookies
+
+After receiving an HTTP request, a server can send one or more {{HTTPHeader("Set-Cookie")}} headers with the response, each one of which will set a separate cookie. A cookie is set by specifying a name-value pair like this:
+
+```http
+Set-Cookie: <cookie-name>=<cookie-value>
+```
+
+The following HTTP response instructs the receiving browser to store a pair of cookies:
+
+```http
+HTTP/2.0 200 OK
+Content-Type: text/html
+Set-Cookie: yummy_cookie=chocolate
+Set-Cookie: tasty_cookie=strawberry
+
+[page content]
+```

@@ -1,0 +1,201 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "engine": "A",
+  "unharnessed": "B",
+  "yarn": "C"
+ },
+ "scores": {
+  "engine": {
+   "meaning": 3,
+   "sense": 2,
+   "authenticity": 1,
+   "register": 1,
+   "tone": 3,
+   "flow": 2,
+   "variety": 2,
+   "essence": 4
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn": {
+   "meaning": 4,
+   "sense": 4,
+   "authenticity": 4,
+   "register": 4,
+   "tone": 4,
+   "flow": 3,
+   "variety": 5,
+   "essence": 4
+  }
+ },
+ "evidence": {
+  "engine": {
+   "meaning": "Mostly verbatim, but \"With stops across the mob\" garbles \"across the nation\", and \"Well, I'll be buggered.\" is an added reaction attached to nothing.",
+   "sense": "\"across the mob\" uses \"mob\" (a group of people) for a country, which is the wrong sense. \"the punters\" for \"the people\" who drive American space leadership strains, since punters are customers or spectators.",
+   "authenticity": "Bolted-on tags: \"Now, the tour will culminate\", \"Well, I'll be buggered.\" The rest is press-release English.",
+   "register": "Nearly untranslated for a level-4 brief. A few swaps and a closing \"buggered\" (within dad level).",
+   "tone": "The promotional tone holds until the tacked-on \"Well, I'll be buggered.\", which reads as a non sequitur.",
+   "flow": "Press-release prose with jarring joins: \"Now, the tour will culminate\" and the closing exclamation.",
+   "variety": "Too few terms to vary.",
+   "essence": "Recognisably the press release, essentially untouched, with a tacked-on swear."
+  },
+  "unharnessed": {
+   "meaning": "All the facts survive: the jets, the date, the Experience Zone hours, the Artemis dome, the SLS photos, the tour's purpose and the MAX POWER dates. \"Not a bad way to start the footy, eh?\" is colour.",
+   "sense": "Terms fit: \"at the stick\", \"having a yarn with the fans\", \"happy snaps\", \"shindig\", \"getting about\". Calling the NFL game \"the footy\" is a fair Australian stretch.",
+   "authenticity": "Natural Aussie: \"have a crack at some interactive games\", \"grab a few happy snaps with a bloody big inflatable SLS\".",
+   "register": "A full level-4 retelling of a press release, with the swearing at a mild \"bloody\".",
+   "tone": "The upbeat promotional tone carries through as cheerful chat.",
+   "flow": "Reads smoothly: \"The tour wraps up with a bang at MAX POWER\".",
+   "variety": "Varied: at the stick, yarn, punters, have a crack, happy snaps, mob, hook up, shindig.",
+   "essence": "Clearly the NASA announcement, with its structure kept and retold."
+  },
+  "yarn": {
+   "meaning": "All the facts survive. The tailgating gloss is explanatory colour. \"Not a bad way to get to the footy\" slightly misstates things, since he is flying over to open the game, not getting to it. \"gadgets\" for \"technologies\" and \"how we get about\" shift nuance slightly.",
+   "sense": "Mostly apt (\"head honcho\", \"chinwag\", \"happy snap\", \"the uni crowd\", \"down the track\"), but \"gadgets\" trivialises \"technologies\" and \"show-and-tell\" undersells \"exposition\".",
+   "authenticity": "Mostly natural, but \"Here's one for ya.\" is a stock opener, \"all the other folks\" is an Americanism, and \"The whole box and dice, by the sound of it.\" feels tacked on.",
+   "register": "Heavy, close to level 5, but still on the level-4 side, with no swearing. Fine.",
+   "tone": "The upbeat tone is kept, though the closing quip slightly mocks the event.",
+   "flow": "Mostly readable, with a few pile-ups: \"rounding up the uni crowd, industry and the public service and all the other folks with a stake in it\", and \"and it runs over a few days and is good for the whole family\".",
+   "variety": "Lots of variety: head honcho, chinwag, mob, punters, happy snap, whopping great, show-and-tell, down the track, box and dice.",
+   "essence": "Recognisably the press release, retold as a chat, with a slight drift into commentary."
+  }
+ },
+ "problems": {
+  "engine": [
+   {
+    "quote": "With stops across the mob",
+    "original": "With stops across the nation",
+    "severity": "major",
+    "why": "\"Mob\" means a group of people, not a country."
+   },
+   {
+    "quote": "Well, I'll be buggered.",
+    "original": "",
+    "severity": "major",
+    "why": "An added exclamation reacting to nothing in particular."
+   },
+   {
+    "quote": "connect the agency with the punters, technologies",
+    "original": "connect the agency with the people, technologies",
+    "severity": "minor",
+    "why": "\"Punters\" means customers or spectators, not the people driving space leadership."
+   },
+   {
+    "quote": "NASA team members will engage with fans at the agency’s Experience Zone",
+    "original": "NASA team members will engage with fans at the agency’s Experience Zone",
+    "severity": "major",
+    "why": "Left untranslated. Representative of the text sitting far below the level-4 brief."
+   }
+  ],
+  "unharnessed": [
+   {
+    "quote": "rounds up the academic, industry and public sector mob",
+    "original": "convenes academic, industry, and public sector stakeholders",
+    "severity": "minor",
+    "why": "\"Mob\" for stakeholders is a little loose, but acceptable."
+   }
+  ],
+  "yarn": [
+   {
+    "quote": "Here's one for ya.",
+    "original": "",
+    "severity": "minor",
+    "why": "A stock yarn opener."
+   },
+   {
+    "quote": "Not a bad way to get to the footy, ay?",
+    "original": "to kick off the New York Jets vs. Cleveland Browns game",
+    "severity": "minor",
+    "why": "He is opening the game with a flyover, not travelling to it."
+   },
+   {
+    "quote": "all the other folks with a stake in it",
+    "original": "stakeholders",
+    "severity": "minor",
+    "why": "\"Folks\" is American."
+   },
+   {
+    "quote": "self-driving vehicles and gadgets",
+    "original": "autonomous vehicles, and technologies",
+    "severity": "minor",
+    "why": "\"Gadgets\" trivialises \"technologies\"."
+   },
+   {
+    "quote": "The whole box and dice, by the sound of it.",
+    "original": "",
+    "severity": "minor",
+    "why": "A tacked-on closing tag."
+   }
+  ]
+ },
+ "summaries": {
+  "engine": "Barely translated, with a garbled \"mob\" and a tacked-on swear.",
+  "unharnessed": "A clean, accurate, natural level-4 retelling of the press release.",
+  "yarn": "A lively, varied retelling, a bit over-stuffed and stock in places."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "flow": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn",
+    "engine"
+   ]
+  ],
+  "overall": [
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}

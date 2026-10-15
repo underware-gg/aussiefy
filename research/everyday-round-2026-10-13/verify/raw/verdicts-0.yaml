@@ -1,0 +1,1234 @@
+- decision: reject
+  candidate: biggest
+  reason: not_lexical
+  why: plain English, standing in for 'largest'.
+- decision: reject
+  candidate: skinny
+  reason: not_lexical
+  why: plain English, not Aussie-specific.
+- decision: reject
+  candidate: bigger
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: doctor
+  reason: not_lexical
+  why: plain English; 'physician' is used in Aus too.
+- decision: reject
+  candidate: handy
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: named
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: shifting
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: veggie
+  reason: duplicate
+  why: veggies is already the VEGETABLES form; the singular modifier 'veggie brush' isn't worth a trigger, since the engine
+    would pluralise it.
+- decision: reject
+  candidate: a bit of plumber's
+  reason: not_lexical
+  why: a fragment.
+- decision: reject
+  candidate: a flap
+  reason: not_aussie
+  why: '''in a flap'' is general British/International English, not the distinctive Aussie choice.'
+- decision: reject
+  candidate: a loving nature
+  reason: not_lexical
+  why: a one-off phrasing.
+- decision: reject
+  candidate: a proper hub
+  reason: not_lexical
+  why: proper-as-intensifier is British; a one-off phrasing.
+- decision: reject
+  candidate: a suitable
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: about all floppy
+  reason: not_lexical
+  why: a one-off phrasing.
+- decision: reject
+  candidate: add up to
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: all sorts
+  reason: not_lexical
+  why: general English (UK/Aus), not distinctively Aussie.
+- decision: reject
+  candidate: and freeze it
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: any strife
+  reason: duplicate
+  why: '''in strife'' is already the IN_TROUBLE form.'
+- decision: reject
+  candidate: are getting the flick thanks
+  reason: duplicate
+  why: '''give {obj} the flick'' is already in DISMISS; here it was stretched to restrictions being lifted (wrong sense).'
+- decision: reject
+  candidate: arvo While I'm at it
+  reason: duplicate
+  why: arvo is already the AFTERNOON form; a merged span.
+- decision: reject
+  candidate: ask at
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: at uni
+  reason: duplicate
+  why: uni is already the UNIVERSITY form.
+- decision: reject
+  candidate: ban
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: Barbecuing Rules A barbie
+  reason: duplicate
+  why: barbie is already the BARBECUE form; US 'grilling' is ambiguous with an oven grill.
+- decision: reject
+  candidate: be handed
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: beaut product
+  reason: duplicate
+  why: beaut is already a GOOD and EXCELLENT form.
+- decision: reject
+  candidate: big letdowns
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: bikkie pull
+  reason: duplicate
+  why: bikkie is already the BISCUIT form; a fragment.
+- decision: reject
+  candidate: bikkies On the flip side
+  reason: duplicate
+  why: bikkie is already the BISCUIT form; a merged span.
+- decision: reject
+  candidate: bin That covers
+  reason: duplicate
+  why: BIN and the trash americanism already cover this.
+- decision: reject
+  candidate: blocks up
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: book a place
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: bounce
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: bunch
+  reason: not_lexical
+  why: plain English; 'a mob of' already covers groups.
+- decision: add_entry
+  candidate: bunging
+  entry:
+    id: bung-in
+    form: bung {obj} in
+    variants: []
+    concept:
+    - NEW:PUT_IN_CASUALLY
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Put something in somewhere quickly and without fuss.
+    sources:
+    - https://en.wiktionary.org/wiki/bung
+  new_concept:
+    id: PUT_IN_CASUALLY
+    description: Put something in (an oven, bag, pot) casually.
+    triggers:
+      vp:
+      - pop {obj} in
+      - stick {obj} in
+      - toss {obj} in
+      - throw {obj} in
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Aus/UK casual 'put'. Must not catch plain 'put' (too broad), 'put in an effort/application', or 'bung' = broken (a
+    separate Aussie sense); 'throw in the towel' is an idiom, so maybe drop that trigger.
+- decision: reject
+  candidate: by the barbie
+  reason: duplicate
+  why: barbie is already the BARBECUE form.
+- decision: reject
+  candidate: calm fed-up
+  reason: not_lexical
+  why: a one-off phrasing.
+- decision: reject
+  candidate: carburettor You can drain
+  reason: not_lexical
+  why: a spelling difference, which the lint handles; a merged span.
+- decision: reject
+  candidate: cashier's
+  reason: not_lexical
+  why: a fragment.
+- decision: reject
+  candidate: charm like
+  reason: duplicate
+  why: pollie is already a form; the rest is a fragment.
+- decision: add_entry
+  candidate: chemists
+  entry:
+    id: chemist-shop
+    form: a chemist
+    variants: []
+    concept:
+    - NEW:PHARMACY
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: The shop that fills prescriptions and sells medicines; the usual Australian word for a pharmacy.
+    sources:
+    - https://en.wiktionary.org/wiki/chemist
+  new_concept:
+    id: PHARMACY
+    description: A retail pharmacy (the shop, not the academic field).
+    triggers:
+      np:
+      - drugstore
+      - drug store
+      - pharmacy !school|schools|degree|degrees|student|students|technician|technicians|benefits|board|course|courses|faculty|studies|practice|law|program|programs|programme
+      - retail pharmacy
+      - community pharmacy
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: high
+  why: Chemist is the everyday Aussie word for the shop; must not catch pharmacy as a field of study, the profession or the
+    PBS ('pharmacy degree', 'Pharmaceutical Benefits'), nor 'chemist' the scientist going the other way.
+- decision: reject
+  candidate: choccy's
+  reason: duplicate
+  why: choccy is already the CHOCOLATE form.
+- decision: reject
+  candidate: chop as
+  reason: duplicate
+  why: '''not much chop'' is already the NOT_MUCH_GOOD form.'
+- decision: add_entry
+  candidate: chucked away everything with
+  entry:
+    id: chuck-out
+    form: chuck out {obj}
+    variants: []
+    concept:
+    - NEW:DISCARD
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Throw something away or out as rubbish.
+    sources: []
+  new_concept:
+    id: DISCARD
+    description: Throw something away; get rid of it as rubbish.
+    triggers:
+      vp:
+      - throw away {obj}
+      - throw {obj} away
+      - throw out {obj}
+      - throw {obj} out
+      - discard {obj}
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: high
+  why: Everyday Aussie 'chuck out/chuck away'. Not on DISMISS (that's breaking up / getting rid of people); 'throw out a case/idea'
+    still reads fine as 'chuck out'. Must not catch 'throw' alone (THROW has 'chuck').
+- decision: reject
+  candidate: ciggies just
+  reason: duplicate
+  why: a ciggie is already the CIGARETTE form.
+- decision: add_entry
+  candidate: clapped-out
+  entry:
+    id: clapped-out
+    form: clapped-out
+    variants: []
+    concept:
+    - NEW:WORN_OUT_THING
+    frame: adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Old, worn out and barely working (said of machines, cars, gear).
+    sources:
+    - https://www.macquariedictionary.com.au/?p=11001
+    - https://greensdictofslang.com/entry/zxgtmyi
+  new_concept:
+    id: WORN_OUT_THING
+    description: Worn out and decrepit (of a machine, vehicle or object, not a person).
+    triggers:
+      adj:
+      - beat-up
+      - broken-down
+      - decrepit !old|man|woman|person|people
+      - worn-out !person|people|man|woman|mother|father|parent|parents|worker|workers|staff|nurse|nurses|teacher|teachers|player|players|body|feet|legs|eyes
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Aus/UK/NZ for decrepit machines. Must not catch tired people ('I'm worn out' is EXHAUSTED's business), so attributive
+    adj frame only, with people excluded.
+- decision: reject
+  candidate: clears out
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: collecting fees
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: combined
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: cope
+  reason: not_lexical
+  why: plain English.
+- decision: style_guide
+  candidate: cos
+  guidance: In casual speech write 'cos' (not US ''cause' or 'cuz') for because.
+  why: Too frequent and context-dependent for a word swap; a register choice.
+- decision: add_entry
+  candidate: cracker of a bikkie
+  entry:
+    id: cracker-of-a
+    form: a cracker of a {np}
+    variants: []
+    concept:
+    - EXCELLENT
+    frame: np
+    intensity: 4
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces:
+    - a terrific {np}
+    - a superb {np}
+    - a cracking {np}
+    gloss: An excellent example of the thing.
+    sources:
+    - https://en.wiktionary.org/wiki/cracker
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: low
+  why: Extends the existing 'a cracker of a day' pattern to other nouns; low confidence about the slot. Must not catch 'cracker'
+    the biscuit or firecracker, nor 'great deal/great many'.
+- decision: reject
+  candidate: crew
+  reason: not_lexical
+  why: plain English.
+- decision: add_entry
+  candidate: dark choc bits
+  entry:
+    id: choc-bits
+    form: choc bits
+    variants: []
+    concept:
+    - NEW:CHOC_BITS
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Small drops of baking chocolate, as sold on Aussie supermarket shelves.
+    sources:
+    - https://www.woolworths.com.au/shop/productdetails/490008/nestle-bakers-choice-dark-choc-bits
+  new_concept:
+    id: CHOC_BITS
+    description: Chocolate chips for baking.
+    triggers:
+      np:
+      - chocolate chips
+      - chocolate morsels
+      - chocolate chip morsels
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Aus/NZ shelf name for chocolate chips. Plural triggers only so 'chocolate chip cookie' (compound modifier) and computer
+    'chips' are untouched; mass-like plural form, so no extra pluralising.
+- decision: reject
+  candidate: decides
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: different
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: do real harm
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: don't thaw an inch
+  reason: not_lexical
+  why: a one-off phrasing.
+- decision: americanism
+  candidate: drapery trade
+  us: dry-goods store
+  australian: draper's (drapery store)
+  why: 'US dry-goods store (textiles and clothing) was the Aussie draper''s. Don''t list bare ''dry goods'': in Aus it also
+    means pantry staples.'
+- decision: reject
+  candidate: drifted into the
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: drying out
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: earthquake risks
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: either cashed up
+  reason: duplicate
+  why: cashed up is already a RICH form.
+- decision: reject
+  candidate: entertainment
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: Everyone reckoned
+  reason: duplicate
+  why: reckon is already in the dictionary.
+- decision: reject
+  candidate: extra precaution
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: fame
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: find
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: fitted
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: flamin' thing at all Dangedest
+  reason: duplicate
+  why: flamin' is already an intensifier form.
+- decision: reject
+  candidate: flavour too
+  reason: not_lexical
+  why: a spelling difference, which the lint handles.
+- decision: reject
+  candidate: folks I'm talkin' to mightn't
+  reason: not_lexical
+  why: a merged span; 'mightn't' is in the style guide.
+- decision: reject
+  candidate: for example needs
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: Forget
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: frog and toad Whips
+  reason: duplicate
+  why: the frog and toad (ROAD) and whips of (A_LOT) are both already forms.
+- decision: add_entry
+  candidate: frypan or else
+  entry:
+    id: frypan
+    form: a frypan
+    variants: []
+    concept:
+    - NEW:FRYING_PAN
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: A shallow pan for frying; the everyday Aussie name for a skillet.
+    sources:
+    - https://en.wiktionary.org/wiki/frypan
+  new_concept:
+    id: FRYING_PAN
+    description: A frying pan (US skillet).
+    triggers:
+      np:
+      - skillet
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Skillet is US (especially Southern); trigger only 'skillet', not 'pan' or 'frying pan', so saucepans, solar panels
+    and 'out of the frying pan' idioms are untouched.
+- decision: reject
+  candidate: further down
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: gadgets that'll
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: get picked
+  reason: not_lexical
+  why: plain English.
+- decision: americanism
+  candidate: gets counted pro rata
+  us: prorated
+  australian: pro rata
+  why: Aussie employment and billing language says 'pro rata' ('$80k pro rata'); 'prorated' reads US.
+- decision: reject
+  candidate: give important
+  reason: not_lexical
+  why: a fragment.
+- decision: style_guide
+  candidate: go Crikey
+  guidance: Quotative 'go/goes' to introduce speech or an exclamation ('and he goes, Crikey!').
+  why: Discourse habit, not a word swap; Crikey itself is already in the dictionary.
+- decision: reject
+  candidate: good dose
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: got ready
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: great useless lump
+  reason: not_lexical
+  why: a one-off phrasing.
+- decision: reject
+  candidate: group shot--taken
+  reason: not_lexical
+  why: a fragment.
+- decision: reject
+  candidate: half-decent copy
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: handing round
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: has totals
+  reason: not_lexical
+  why: a fragment.
+- decision: reject
+  candidate: he sang
+  reason: not_lexical
+  why: a fragment.
+- decision: americanism
+  candidate: higher-level postgrad study
+  us: grad school
+  australian: postgrad (study)
+  why: Aussies talk about postgrad study or a postgrad degree; 'grad school' is American. Full 'graduate school' is also used
+    in some Aus university names, so list only 'grad school'.
+- decision: reject
+  candidate: hits something
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: hopped
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: I read
+  reason: not_lexical
+  why: a fragment.
+- decision: reject
+  candidate: in hard dosh
+  reason: duplicate
+  why: dosh is already a MONEY form.
+- decision: reject
+  candidate: infinite mercy and
+  reason: not_lexical
+  why: a spelling normalisation.
+- decision: reject
+  candidate: intro
+  reason: not_lexical
+  why: general English clipping.
+- decision: reject
+  candidate: it cut off a quarter-inch
+  reason: not_lexical
+  why: a fragment.
+- decision: reject
+  candidate: It was a pressie from
+  reason: duplicate
+  why: pressie is already the PRESENT form.
+- decision: reject
+  candidate: jazzy
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: keener on the wet
+  reason: not_lexical
+  why: a one-off phrasing; 'the wet' in Aus means the tropical wet season, a different sense.
+- decision: reject
+  candidate: know-how on
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: leap
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: lifting a finger
+  reason: duplicate
+  why: general English; the 'carked it' in context is already a DIE form.
+- decision: reject
+  candidate: Locked up
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: loves
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: making em arc
+  reason: not_lexical
+  why: a fragment.
+- decision: reject
+  candidate: marked
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: marrying
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: meantime Yep
+  reason: not_lexical
+  why: a merged span; 'yep' isn't distinctively Aussie.
+- decision: add_entry
+  candidate: mickey Sayin' this
+  entry:
+    id: taking-the-mickey
+    form: '{subj} {be} takin'' the mickey'
+    variants:
+    - '{subj} {be} taking the mickey'
+    - '{subj} {be} takin'' the micky'
+    concept:
+    - TEASE
+    frame: clause
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Kidding or teasing; the clean version of taking the piss.
+    sources:
+    - https://platform.aussieenglish.com.au/blog/ae-1406-expression-take-the-mickey
+    - https://en.wikipedia.org/wiki/Taking_the_piss
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Used widely in Aus as a clean alternative to 'taking the piss'; clause frame on TEASE only, so it won't fire on 'Mickey'
+    the name.
+- decision: style_guide
+  candidate: mightn't be keen on
+  guidance: 'Use the contraction ''mightn''t'' (and ''keen on'' for ''like/want'') in casual speech: ''you mightn''t be keen
+    on it''.'
+  why: '''Mightn''t'' is common in Aus speech and rare in the US, but it''s a contraction habit, not a lexical swap.'
+- decision: reject
+  candidate: missus was crook real crook
+  reason: duplicate
+  why: the missus and crook are already forms.
+- decision: reject
+  candidate: more intense But
+  reason: not_lexical
+  why: a fragment.
+- decision: reject
+  candidate: mostly self-serve so
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: musical club Pretty scruffy-looking mob
+  reason: duplicate
+  why: '''a mob of'' is already a form; a merged span.'
+- decision: reject
+  candidate: needing
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: nippers
+  reason: duplicate
+  why: nipper is already a CHILD form.
+- decision: reject
+  candidate: not sexist in the slightest
+  reason: not_lexical
+  why: a one-off phrasing.
+- decision: reject
+  candidate: nudge
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: of your bikkies
+  reason: duplicate
+  why: bikkie is already the BISCUIT form.
+- decision: reject
+  candidate: on the cards
+  reason: not_aussie
+  why: general British English idiom, not distinctively Aussie.
+- decision: add_entry
+  candidate: or marg
+  entry:
+    id: marg
+    form: marg
+    variants: []
+    concept:
+    - NEW:MARGARINE
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Short for margarine, the spread.
+    sources: []
+  new_concept:
+    id: MARGARINE
+    description: Margarine, the spread.
+    triggers:
+      np:
+      - margarine
+      - oleo
+      - oleomargarine
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Aussie clipping (spelt marg, cf. British marge); web search found no dictionary page, so agents_only. Must not catch
+    'margin' or names like Marg/Margaret, hence whole-word 'margarine' triggers only.
+- decision: reject
+  candidate: ought
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: ovens
+  reason: not_lexical
+  why: a fragment.
+- decision: reject
+  candidate: owned up
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: parade
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: Partly
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: Payday's
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: photo
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: picked up
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: plane Odds are
+  reason: not_lexical
+  why: general English; a merged span.
+- decision: reject
+  candidate: plenty of spots
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: pollie after a vote
+  reason: duplicate
+  why: pollie is already the POLITICIAN form.
+- decision: reject
+  candidate: proper assortment of
+  reason: not_lexical
+  why: a one-off phrasing.
+- decision: reject
+  candidate: pushed
+  reason: not_lexical
+  why: plain English.
+- decision: add_entry
+  candidate: queues
+  entry:
+    id: queue-up
+    form: queue up
+    variants: []
+    concept:
+    - NEW:WAIT_IN_LINE
+    frame: vp
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: Stand in line waiting your turn.
+    sources:
+    - https://en.wiktionary.org/wiki/queue
+  new_concept:
+    id: WAIT_IN_LINE
+    description: Wait in a line of people.
+    triggers:
+      vp:
+      - stand in line
+      - wait in line
+      - line up !to|for|behind|with|alongside|against
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: medium
+  why: Queue is the Aussie (and British) choice over US 'line'. Must not catch 'line' the noun (lines of code, phone lines)
+    or 'line up' meaning arrange or 'get in line' (obey), so only explicit stand/wait-in-line phrases.
+- decision: reject
+  candidate: react
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: realises
+  reason: not_lexical
+  why: a spelling difference, which the lint handles.
+- decision: reject
+  candidate: reckon you should chill the
+  reason: duplicate
+  why: reckon is already in the dictionary; a fragment.
+- decision: reject
+  candidate: reckons you should switch it
+  reason: duplicate
+  why: reckon is already in the dictionary; a fragment.
+- decision: reject
+  candidate: replace it
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: righto then Reckon
+  reason: duplicate
+  why: righto is already the AFFIRM form; a merged span.
+- decision: reject
+  candidate: roller towel
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: rowdy young fella
+  reason: duplicate
+  why: young fella is already a form.
+- decision: reject
+  candidate: samples
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: scoops
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: self-serve's flat-out against the law
+  reason: not_lexical
+  why: a one-off phrasing; 'flat out' here means outright, not the Aussie 'busy'.
+- decision: reject
+  candidate: servos give you
+  reason: duplicate
+  why: servo is already the SERVICE_STATION form.
+- decision: reject
+  candidate: sheilas callin'
+  reason: duplicate
+  why: sheila is already a form.
+- decision: reject
+  candidate: shook on starting
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: shrink
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: signed off
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: skinny little
+  reason: not_lexical
+  why: plain English.
+- decision: add_entry
+  candidate: sloshed
+  entry:
+    id: sloshed
+    form: sloshed
+    variants: []
+    concept:
+    - DRUNK
+    frame: predicate_adj
+    intensity: 3
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Drunk, in a cheerful, slightly sloppy way.
+    sources:
+    - https://en.wiktionary.org/wiki/sloshed
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Common Aus/UK colloquial for drunk, not yet among DRUNK's forms; fits only the drunk sense, and as a form it won't
+    fire on liquid 'sloshing'.
+- decision: reject
+  candidate: snag a few good jabs
+  reason: duplicate
+  why: snag is already the SAUSAGE form.
+- decision: reject
+  candidate: so I scooped
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: some leftover
+  reason: not_lexical
+  why: plain English.
+- decision: add_entry
+  candidate: southerlies
+  entry:
+    id: southerly
+    form: a southerly
+    variants: []
+    concept:
+    - NEW:SOUTH_WIND
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: A wind from the south; in southern Aus, often the one that brings a cool change.
+    sources:
+    - http://www.bom.gov.au/
+  new_concept:
+    id: SOUTH_WIND
+    description: A wind blowing from the south.
+    triggers:
+      np:
+      - a south wind
+      - south winds
+      - a southerly wind
+      - southerly winds
+  triggers_to_add: {}
+  evidence: search_summary
+  confidence: medium
+  why: Aussie forecasts use 'southerly' as a noun. Must not catch 'south' as a direction or 'Southern'; COOL_CHANGE keeps
+    'a sudden southerly wind' through the longer match. Not in the harvest's sense of US southward winds, but harmless there.
+- decision: reject
+  candidate: spot problems
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: staff
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: started himself for 28 years
+  reason: not_lexical
+  why: a fragment.
+- decision: reject
+  candidate: stay topped up
+  reason: not_lexical
+  why: a one-off phrasing.
+- decision: reject
+  candidate: sticking up for the sisterhood
+  reason: not_lexical
+  why: general English idiom.
+- decision: reject
+  candidate: stops being
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: straddle
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: strewth There's heaps of
+  reason: duplicate
+  why: strewth and heaps are already forms.
+- decision: americanism
+  candidate: supermarket Say
+  us: grocery store
+  australian: supermarket
+  why: In Aus you shop for groceries at the supermarket; 'grocery store' marks the text as US. 'Groceries' alone is fine in
+    Aus.
+- decision: reject
+  candidate: swaps are
+  reason: not_lexical
+  why: a fragment.
+- decision: reject
+  candidate: table full
+  reason: not_lexical
+  why: a one-off phrasing.
+- decision: add_entry
+  candidate: taking the piss
+  entry:
+    id: taking-the-piss
+    form: '{subj} {be} taking the piss'
+    variants: []
+    concept:
+    - TEASE
+    frame: clause
+    intensity: 3
+    vulgarity: 2
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Only joking; having someone on.
+    sources:
+    - https://en.wikipedia.org/wiki/Taking_the_piss
+    - https://aussieenglish.com.au/ae-373-expression-take-the-piss
+  new_concept: null
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Common Aussie for kidding (MOCK has the transitive 'take the piss out of {obj}'). Must not catch urinating ('taking
+    a piss'); TEASE's clause triggers are about joking, so they're safe.
+- decision: add_entry
+  candidate: taps
+  entry:
+    id: tap-faucet
+    form: a tap
+    variants: []
+    concept:
+    - NEW:TAP
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 1
+    register: current
+    replaces: []
+    gloss: The valve a sink or basin runs water from.
+    sources:
+    - https://en.wiktionary.org/wiki/faucet
+  new_concept:
+    id: TAP
+    description: A water tap (US faucet).
+    triggers:
+      np:
+      - faucet
+      - water faucet
+      - kitchen faucet
+      - bathroom faucet
+  triggers_to_add: {}
+  evidence: agents_only
+  confidence: high
+  why: Faucet is purely American (already in americanisms.yaml for lint); this lets the engine swap it. Trigger only 'faucet'
+    so 'tap' itself and 'on tap' are untouched.
+- decision: reject
+  candidate: temps over
+  reason: not_lexical
+  why: a general informal clipping, used in the US too.
+- decision: add_entry
+  candidate: that sort of carry-on
+  entry:
+    id: carry-on-fuss
+    form: a carry-on
+    variants: []
+    concept:
+    - NEW:FUSS
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: A fuss or a display of silly or excessive behaviour.
+    sources:
+    - https://en.wiktionary.org/wiki/carry-on
+  new_concept:
+    id: FUSS
+    description: A fuss, commotion or silly behaviour (noun).
+    triggers:
+      np:
+      - a commotion
+      - a to-do
+      - a kerfuffle
+      - such a fuss
+      - shenanigans
+      - tomfoolery
+  triggers_to_add: {}
+  evidence: web
+  confidence: medium
+  why: Aus/UK noun 'carry-on'. Must not catch carry-on luggage (US 'a carry-on bag'), so the form is the fuss noun only and
+    no trigger is 'carry-on'; OVERREACT keeps 'make a fuss'.
+- decision: reject
+  candidate: the bikkies come out
+  reason: duplicate
+  why: bikkie is already the BISCUIT form.
+- decision: reject
+  candidate: the east
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: the food soaks
+  reason: not_lexical
+  why: plain English.
+- decision: style_guide
+  candidate: the odd shower
+  guidance: Use 'the odd X' for occasional or scattered things ('the odd shower', 'the odd roo on the road').
+  why: Pattern over any noun; also British, but very Aussie in weather and everyday talk.
+- decision: reject
+  candidate: the place spick and span
+  reason: not_lexical
+  why: general English idiom.
+- decision: reject
+  candidate: the spread
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: the west
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: they bounce
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: thorough
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: till they're nice and brown
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: to spend on advertising--say
+  reason: not_lexical
+  why: a fragment.
+- decision: americanism
+  candidate: top up the electrolytes you've
+  us: top off the tank
+  australian: top up the tank
+  why: Aussies top up a tank, a drink or a phone; US 'top off' (fill) doesn't exist in Aus. Only the full phrase, since 'top
+    off a meal' is a different sense.
+- decision: reject
+  candidate: travelling salesman
+  reason: not_lexical
+  why: a spelling difference, which the lint handles.
+- decision: reject
+  candidate: tryin' to rustle
+  reason: not_lexical
+  why: general/US English.
+- decision: reject
+  candidate: tucker the whole way
+  reason: duplicate
+  why: tucker is already the FOOD form; FOOD already excludes 'food safe(ty)'.
+- decision: reject
+  candidate: unheard of
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: upside
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: vanilla
+  reason: not_lexical
+  why: plain English.
+- decision: add_entry
+  candidate: walkers
+  entry:
+    id: bushwalker
+    form: a bushwalker
+    variants: []
+    concept:
+    - NEW:HIKER
+    frame: np
+    intensity: 2
+    vulgarity: 0
+    incoherence: 2
+    register: current
+    replaces: []
+    gloss: Someone who goes walking on tracks through the bush or national parks; an Aussie hiker.
+    sources:
+    - https://www.sbs.com.au/language/indonesian/id/podcast-episode/47-lets-go-bushwalking-adv/0v3d3wn05
+  new_concept:
+    id: HIKER
+    description: A person who hikes on foot in natural areas.
+    triggers:
+      np:
+      - hiker
+      - backpacker !hostel|hostels
+      - trekker
+  triggers_to_add: {}
+  evidence: web
+  confidence: high
+  why: Bushwalking is the standard Aussie term for hiking. Must not catch 'hitchhiker' or 'price hike'; 'backpacker' in Aus
+    usually means a budget traveller, so maybe drop that trigger if precision is the priority.
+- decision: reject
+  candidate: was itching
+  reason: not_lexical
+  why: general English.
+- decision: reject
+  candidate: watching
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: well-known saying
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: wetter-than-usual air up north
+  reason: not_lexical
+  why: a one-off phrasing.
+- decision: reject
+  candidate: which needs
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: wide
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: woofing
+  reason: not_lexical
+  why: plain English (said of dogs).
+- decision: reject
+  candidate: Wright
+  reason: not_lexical
+  why: a proper name fragment.
+- decision: reject
+  candidate: yarn with each other
+  reason: duplicate
+  why: '''have a yarn'' is already in the dictionary.'
+- decision: reject
+  candidate: you rinse
+  reason: not_lexical
+  why: plain English.
+- decision: reject
+  candidate: young fellas on the team
+  reason: duplicate
+  why: young fella is already a form.
+- decision: reject
+  candidate: your tongs
+  reason: not_lexical
+  why: plain English.

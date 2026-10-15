@@ -1,0 +1,240 @@
+{
+ "rubric_version": 2,
+ "judge": "subagent",
+ "labels": {
+  "yarn-troppo": "A",
+  "engine": "B",
+  "yarn-dinkum": "C",
+  "unharnessed": "D",
+  "yarn-deadset": "E"
+ },
+ "scores": {
+  "yarn-troppo": {
+   "meaning": 4,
+   "sense": 5,
+   "authenticity": 3,
+   "register": 2,
+   "tone": 3,
+   "flow": 4,
+   "variety": 4,
+   "essence": 4
+  },
+  "engine": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 3,
+   "register": 1,
+   "tone": 5,
+   "flow": 5,
+   "variety": 3,
+   "essence": 5
+  },
+  "yarn-dinkum": {
+   "meaning": 5,
+   "sense": 5,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "unharnessed": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 5,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  },
+  "yarn-deadset": {
+   "meaning": 5,
+   "sense": 4,
+   "authenticity": 5,
+   "register": 4,
+   "tone": 5,
+   "flow": 5,
+   "variety": 5,
+   "essence": 5
+  }
+ },
+ "evidence": {
+  "yarn-troppo": {
+   "meaning": "All the technical content survives (install commands, Python 3.10+, the standalone executables, the AST check, `--fast`). It adds claims and asides: \"No more scrolling through a mile of whitespace changes.\", \"so you're in good company\", \"Bliss.\", \"Better safe than sorry.\" \"full stop\" adds emphasis the original lacks. These mostly hang off the original.",
+   "sense": "The terms fit: \"does not budge\" for uncompromising, \"fiddly little bits\" for minutiae, \"easy as\", \"won't play ball\", \"No Python on the box? No worries.\", \"down the track\".",
+   "authenticity": "There's real Aussie idiom (\"easy as\", \"No worries\", \"won't play ball\", \"get cracking\"), but the opener and tags are stock: \"So get this.\", \"Not an inch.\", \"Bliss.\", \"Which is the whole point, really.\"",
+   "register": "Much heavier than level 2 for a README: it is a chatty performance with added openers and tags (\"So get this.\", \"One last thing.\", \"and yeah, it does slow processing down a bit\"). There's no swearing.",
+   "tone": "The original is crisp and confident; A turns it into salesy banter (\"Bliss.\", \"you're in good company\"), though the documentation still reads as helpful.",
+   "flow": "Readable, but choppy with fragment tags: \"and it does not budge. Not an inch.\", \"Bliss.\", \"Better safe than sorry.\"",
+   "variety": "The slang and openers vary (\"easy as\", \"No worries\", \"play ball\", \"get cracking\", \"squiz\", \"heaps\"), though the short-tag tic recurs.",
+   "essence": "It is still the Black README, structure intact, but its terse confidence becomes chatter."
+  },
+  "engine": {
+   "meaning": "Identical to the original apart from \"Any colour you like.\"",
+   "sense": "There are no Aussie terms to misfire; \"colour\" is right.",
+   "authenticity": "There's no Aussie at all; it is the original's formal README voice (\"you agree to cede control over minutiae of hand-formatting\").",
+   "register": "Untranslated. Only the spelling \"colour\" changes, far under level 2.",
+   "tone": "The original tone, unchanged: \"_Black_ is the uncompromising Python code formatter.\"",
+   "flow": "It reads as the original.",
+   "variety": "There is no slang, so nothing to vary or repeat.",
+   "essence": "It is the original."
+  },
+  "yarn-dinkum": {
+   "meaning": "Every point is kept and nothing is invented; \"which does slow processing down a bit\" softens \"slows down processing\" only slightly.",
+   "sense": "The terms fit: \"won't budge\" for uncompromising, \"fiddly bits\", \"get cracking\", \"Heaps of projects\", \"down the track\", \"have a squiz\", \"grab\".",
+   "authenticity": "Natural, matter-of-fact Aussie technical writing: \"don't go expecting big formatting changes down the track\", \"For the full rundown, have a squiz at\".",
+   "register": "A light, consistent touch at level 2, with a sprinkling of idiom and a casual voice and no tags. There's no swearing.",
+   "tone": "It keeps the confident, direct README voice: \"_Black_ is the Python code formatter that won't budge.\"",
+   "flow": "Reads smoothly: \"After a while you stop even noticing the formatting, and you can get on with the content instead.\"",
+   "variety": "Varied: \"won't budge\", \"fiddly bits\", \"get cracking\", \"Heaps\", \"down the track\", \"squiz\", \"rundown\".",
+   "essence": "Unmistakably the Black README."
+  },
+  "unharnessed": {
+   "meaning": "Faithful throughout; \"effectively the same as\" for \"effectively equivalent to\" is fine.",
+   "sense": "Mostly apt (\"fiddly bits\", \"get cracking\", \"down the track\", \"have a squiz\"), but \"no-nonsense\" softens uncompromising: no-nonsense is plain and practical, not unbending.",
+   "authenticity": "The swaps are natural: \"Have a squiz at the\", \"grab one of the\", \"down the track\".",
+   "register": "A light touch at about level 2, a shade lighter than C. There's no swearing.",
+   "tone": "It keeps the README voice intact.",
+   "flow": "Smooth throughout: \"After a while the formatting stops being something you notice\".",
+   "variety": "Varied, with each term used once: \"no-nonsense\", \"fiddly bits\", \"squiz\", \"get cracking\", \"down the track\".",
+   "essence": "Unmistakably the original. \"no-nonsense\" slightly dulls the defining \"uncompromising\"."
+  },
+  "yarn-deadset": {
+   "meaning": "Faithful throughout; nothing lost or added.",
+   "sense": "Mostly apt (\"nitty-gritty\" for minutiae, \"get cracking\", \"down the track\", \"have a squiz\", \"heaps of projects\"); \"no-nonsense\" softens uncompromising.",
+   "authenticity": "Natural, though \"nitty-gritty\" is general English rather than Australian; \"heaps of projects\" and \"have a squiz\" are local.",
+   "register": "A light touch, slightly under level 2; much of the text is the original wording (\"_Black_ can be installed by running\", \"Watch the\").",
+   "tone": "It keeps the README tone intact.",
+   "flow": "Smooth, with no clunky joins.",
+   "variety": "There are few terms, each used once: \"nitty-gritty\", \"get cracking\", \"heaps\", \"squiz\", \"down the track\".",
+   "essence": "It is the original, lightly accented."
+  }
+ },
+ "problems": {
+  "yarn-troppo": [
+   {
+    "quote": "So get this.",
+    "original": "",
+    "severity": "major",
+    "why": "A yarn opener bolted onto a README; far past level 2."
+   },
+   {
+    "quote": "No more scrolling through a mile of whitespace changes.",
+    "original": "_Black_ makes code review faster by producing the smallest diffs possible.",
+    "severity": "minor",
+    "why": "Added claim; colour, but beyond the original."
+   },
+   {
+    "quote": "Bliss.",
+    "original": "",
+    "severity": "minor",
+    "why": "A bolted-on tag, one of several."
+   },
+   {
+    "quote": "Better safe than sorry.",
+    "original": "",
+    "severity": "minor",
+    "why": "A stock tag."
+   }
+  ],
+  "engine": [
+   {
+    "quote": "By using it, you agree to cede\ncontrol over minutiae of hand-formatting.",
+    "original": "By using it, you agree to cede\ncontrol over minutiae of hand-formatting.",
+    "severity": "critical",
+    "why": "The whole text is left untranslated; the brief asked for level 2."
+   }
+  ],
+  "yarn-dinkum": [],
+  "unharnessed": [
+   {
+    "quote": "_Black_ is the no-nonsense Python code formatter.",
+    "original": "_Black_ is the uncompromising Python code formatter.",
+    "severity": "minor",
+    "why": "\"no-nonsense\" loses the sense of refusing to compromise."
+   }
+  ],
+  "yarn-deadset": [
+   {
+    "quote": "_Black_ is the no-nonsense Python code formatter.",
+    "original": "_Black_ is the uncompromising Python code formatter.",
+    "severity": "minor",
+    "why": "\"no-nonsense\" loses the unbending sense."
+   }
+  ]
+ },
+ "summaries": {
+  "yarn-troppo": "Natural idiom but heavily embellished, with stock tags and openers that take a terse README well past level 2.",
+  "engine": "The original with a single spelling change; no Aussie at all.",
+  "yarn-dinkum": "A natural, faithful level-2 rendering that keeps the README's crisp voice.",
+  "unharnessed": "A faithful, natural light rendering; \"no-nonsense\" slightly softens the tagline.",
+  "yarn-deadset": "A faithful, light rendering a shade under level 2, natural where it changes anything."
+ },
+ "rankings": {
+  "tone": [
+   [
+    "engine",
+    "yarn-dinkum",
+    "unharnessed",
+    "yarn-deadset"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "flow": [
+   [
+    "engine",
+    "yarn-dinkum",
+    "unharnessed",
+    "yarn-deadset"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "variety": [
+   [
+    "yarn-dinkum",
+    "unharnessed",
+    "yarn-deadset"
+   ],
+   [
+    "yarn-troppo"
+   ],
+   [
+    "engine"
+   ]
+  ],
+  "essence": [
+   [
+    "engine",
+    "yarn-dinkum",
+    "unharnessed",
+    "yarn-deadset"
+   ],
+   [
+    "yarn-troppo"
+   ]
+  ],
+  "overall": [
+   [
+    "yarn-dinkum"
+   ],
+   [
+    "unharnessed"
+   ],
+   [
+    "yarn-deadset"
+   ],
+   [
+    "yarn-troppo"
+   ],
+   [
+    "engine"
+   ]
+  ]
+ }
+}
