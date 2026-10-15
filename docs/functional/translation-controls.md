@@ -43,7 +43,7 @@ aussiefy translate "Read the API documentation." --document-type custom --docume
 | `garnish` | Exact list from `connective`, `opener`, `tag`, `aside`, `tail`, `closer`, `riff`, `infix`, `insult`; probabilities default to level/vulgarity profiles, with advanced tuning below |
 | `openings` | Boolean: offer talker's openings in a plan |
 | `person_swears` | Boolean: allow swear words to replace neutral descriptions of people, within the vulgarity limit |
-| `keep_quotes` | Boolean: preserve quoted wording |
+| `keep_quotes` | Boolean: preserve quoted wording; straight/curly double-quoted documents may span paragraphs |
 | `term_domains` | List of named detected types whose concept/dialect `not_in` vocabulary is protected; `[]` disables this protection |
 | `command_context` | Boolean: recognise sentence-initial imperative verbs as commands |
 | `dateline_context` | Boolean: preserve news-style datelines |

@@ -1,0 +1,3 @@
+Retold the connecting prose as an Australian explanation without softening must, may not, immediate termination, responsibility or sanctions scope. Kept every heading, list marker, URL, quoted owner/bots and defined term, including Organizations rather than changing its spelling. Used planned at the end of the day exactly where ultimately assigns responsibility to the machine-account owner. No phrase was moved to a different sense; no planned declines. No swearing or garnish.
+
+Initial lint flagged authorizations; changed it to authorisations. Rapt gives the enthusiasm an Australian voice. Final lint and canonical submit passed.

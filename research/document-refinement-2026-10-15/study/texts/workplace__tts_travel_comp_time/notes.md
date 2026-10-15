@@ -1,0 +1,2 @@
+Used light have a look, work out and get in touch around unchanged policy force. All quoted terms, eligibility, expiry and elapsed-time calculation kept. Lookup showed knock off means finishing work for the day; excluded it because the rule also covers travel outside hours on a regular workday and should stay precise. No planned phrases.
+Took the lint suggestion a squiz for a document referral; it fits the light conversational register.

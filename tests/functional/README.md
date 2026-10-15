@@ -14,6 +14,7 @@ python -m pytest -q tests/functional
 | [test_contracts.py](test_contracts.py) | Agent-consumed result shapes and shared behaviour |
 | [test_document_policy.py](test_document_policy.py) | Explicit document presets and behaviour override precedence |
 | [test_document_refinement.py](test_document_refinement.py) | Sentence-boundary flavour, casing, contractions and exact technical examples |
+| [test_multiline_quotes.py](test_multiline_quotes.py) | Multi-paragraph quote preservation and ordinary dialect checks across surfaces |
 | [test_smart_performance.py](test_smart_performance.py) | Semantic fallback eligibility, exact scores and complete-result parity |
 | [test_profile_overrides.py](test_profile_overrides.py) | Advanced numeric defaults, isolated behaviour controls and surface parity |
 | [test_sense_boundaries.py](test_sense_boundaries.py) | Person/adjective sense guards and clothing agreement |

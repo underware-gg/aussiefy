@@ -32,7 +32,7 @@ Both refinements remain conservative; this is not a complete English parser.
 
 ## Same-source publication measurement
 
-[docs-measurement.json](docs-measurement.json) compares all 40 current authoritative sources under the engine
+[docs-measurement.json](docs-measurement.json) compares the 40 authoritative sources frozen in `245ae75` under the engine
 and publication configuration at `912dead`, then under the refined engine/configuration. Both runs read the
 same source bytes; no model or remote service was involved.
 
@@ -95,7 +95,7 @@ from passing evidence.
 
 ## Fresh independent comparison
 
-The next stage uses the unchanged 20-case [pinned study](../maintenance-check-2026-10-15/retelling-study.yaml).
+The comparison uses the unchanged 20-case [pinned study](../maintenance-check-2026-10-15/retelling-study.yaml).
 Fresh writers receive original sources and current yarn briefs, not historical candidates. Separate fresh
 judge contexts receive key-free blind packets under rubric 3. The two historical anchors remain byte-pinned.
 Accepted submissions, diagnostics, reports, source/engine hashes and deterministic verification are retained.
@@ -105,11 +105,36 @@ The local `study.py` driver prepares the frozen brief/source/policy and complete
 retained tool diagnostics and final acceptance through the canonical yarn session, then issues write-once
 blind packets bound to source/output/log hashes. Identical packet regeneration preserves existing reports.
 Collection validates all reports before freezing their hashes. Integrity tests reject mutated evidence,
-added dictionary files, false acceptance and corrected reports after an invalid first collection.
+added dictionary files and false acceptance, and permit correction after an invalid first collection. Select a
+new local run name for each round; existing manifests/packets are never replaced by changed evidence.
 
 ```sh
-python research/document-refinement-2026-10-15/study.py prepare
-python research/document-refinement-2026-10-15/study.py packets
-python research/document-refinement-2026-10-15/study.py check CASE
-python research/document-refinement-2026-10-15/study.py collect
+python research/document-refinement-2026-10-15/study.py prepare --run new-round
+python research/document-refinement-2026-10-15/study.py packets --run new-round
+python research/document-refinement-2026-10-15/study.py check CASE --run new-round
+python research/document-refinement-2026-10-15/study.py collect --run new-round
 ```
+
+## Controlled second refinement: multi-paragraph quotes
+
+The first frozen round is retained in [study/manifest.json](study/manifest.json), with its outcome in
+[study/round-outcome.json](study/round-outcome.json). Nineteen fresh retellings were canonically accepted
+and replayed under `245ae75`. FOMC submission was blocked: its straight-double-quoted documents span blank
+lines, which the shared quote parser did not recognise. Keeping those documents exact then caused dialect
+rejection. No blind packets or quality scores were issued in this aborted round.
+
+The correction permits paragraph breaks in straight double quotes, matching existing curly double quotes.
+It applies at shared recognition, with no lint exemption; inches and single/drawl forms retain their
+existing guards. Positive/negative regressions cover all translation routes, lint, verify and real submit.
+A separately identified writer replacement error in `percentage` is corrected in the new draft; failed
+round-one text and diagnostics remain unchanged.
+
+Recomputed briefs change only for FOMC. Its original writer read the new brief and deliberately revised and
+submitted the text. The other 19 may carry forward only after exact brief comparison and fresh canonical
+tool execution under the newly frozen engine. Per-case writer-origin metadata records that lineage and is
+bound to the issued packets. These are reused fresh outputs from this study, not newly authored round-two
+texts. The independent blind comparison remains pending until round two is frozen and judged.
+
+The quote-fix full gate exited 0: **1,836 passed / 2 expected local skips in 444.34s**. Ruff, publication
+freshness/links and provenance with actual wheel inspection passed. Golden outputs are unchanged.
+Independent design review converged cleanly, with 38 quote/study-integrity tests independently passing.

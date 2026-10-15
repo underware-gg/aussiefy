@@ -1,0 +1,1 @@
+Used respectful, spoken reporting: got through, going ahead, from then on. Preserved dateline and all quoted wording. Declined durries because its casual smoker register jars with a respectful obituary and the historical list of reform targets. Lookup confirmed its cigarette meaning; this is a tone decision, not a sense error.

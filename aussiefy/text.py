@@ -180,11 +180,11 @@ def _paragraph_ends(text: str, last: Token, nxt: Token) -> bool:
     return True
 
 
-# quoted speech or a quoted document, within a paragraph: straight or curly, double or single. A straight double
+# quoted speech or a quoted document: straight or curly, double or single. A straight double
 # quote after a digit is an inch mark ('a 6" pipe'); an apostrophe inside a word ("don't", "the faucet's") never
 # opens or closes a single quote
 QUOTED_RE = re.compile(
-    r'(?<!\d)"(?:[^"\n]|\n(?![^\S\n]*\n))*?"'
+    r'(?<!\d)"[^"]*"'
     "|“[^”]*”"
     # a straight single quote: not the drawl's own marks ("'cause", "'em", "'n" don't open one; "pursuin'" doesn't
     # close one)
@@ -203,7 +203,7 @@ MENTION_RE = re.compile(rf"(?:{_CUE})\s*([\"“‘']|(?<!\w)')"
 
 
 def quoted_spans(text: str) -> list[tuple[int, int]]:
-    """The spans of quoted speech and quoted documents, quote marks and all (a paragraph at most)."""
+    """The spans of quoted speech and quoted documents, including their quote marks."""
     return [m.span() for m in QUOTED_RE.finditer(text)]
 
 

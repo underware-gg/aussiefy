@@ -1,5 +1,7 @@
 """Prepare fresh yarn briefs, blind independent reports, and validate/tally the pinned comparison.
 
+Use --run NAME to keep each frozen round and its summary in a separate local directory.
+
     python research/document-refinement-2026-10-15/study.py prepare
     python research/document-refinement-2026-10-15/study.py packets
     python research/document-refinement-2026-10-15/study.py check CASE
@@ -52,6 +54,12 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def run_path(name: str) -> Path:
+    if not name or name in (".", "..") or Path(name).name != name or "/" in name or "\\" in name:
+        raise ValueError("run must be one local directory name")
+    return HERE / name
+
+
 def plan() -> dict:
     data = yaml.safe_load(PLAN.read_text())
     if data["rubric_version"] != judge.Rubric.load().version:
@@ -97,7 +105,8 @@ def prepare() -> None:
     write(RUN / "manifest.json", {"source_commit": subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(), "plan_sha256": digest(PLAN),
         "driver_sha256": digest(Path(__file__)),
-        "rubric_version": judge.Rubric.load().version, "engine_files": engine_snapshot(), "cases": manifest,
+        "run": RUN.name, "rubric_version": judge.Rubric.load().version,
+        "engine_files": engine_snapshot(), "cases": manifest,
         "writer": "fresh Codex agent contexts using yarn tools; no historical candidates shown",
         "judge": "independent fresh Codex agent contexts; candidate names withheld"})
     print(f"prepared {len(manifest)} fresh briefs")
@@ -139,7 +148,10 @@ def evidence(item: dict, tr: Translator) -> dict:
             matched = True
     if not matched:
         raise ValueError(f"output has no replayed accepted submission: {item['name']}")
-    return {name: digest(d / name) for name in (*expected, "current.txt", "tools.jsonl")}
+    names = [*expected, "current.txt", "tools.jsonl"]
+    if (d / "writer-origin.json").exists():
+        names.append("writer-origin.json")
+    return {name: digest(d / name) for name in names}
 
 
 def issued(item: dict, tr: Translator, bindings: dict) -> None:
@@ -217,7 +229,8 @@ def collect() -> None:
         checks[item["name"]] = {"ok": verification["ok"], "counts": verification["counts"],
             "output_sha256": digest(d / "current.txt"), "report_sha256": digest(
                 RUN / "judge-blind" / f"{item['name']}.report.json")}
-    write(HERE / "study-summary.json", {"status": "completed", "source_commit": data["source_commit"],
+    write(RUN / "summary.json", {"status": "completed", "source_commit": data["source_commit"],
+        "run": RUN.name,
         "rubric_version": data["rubric_version"], "cases": len(verdicts), "tally": judge.tally(verdicts),
         "verification": checks,
         "limits": "One independent blind report per text; different current and historical writer contexts. "
@@ -229,7 +242,9 @@ if __name__ == "__main__":
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("action", choices=("prepare", "packets", "check", "collect"))
     p.add_argument("name", nargs="?")
+    p.add_argument("--run", default="study", help="one local run directory name; existing evidence is preserved")
     args = p.parse_args()
+    RUN = run_path(args.run)
     if args.action == "check":
         check(args.name)
     else:

@@ -65,7 +65,7 @@ def test_replay_and_identical_packet_regeneration_preserve_issued_evidence(study
     assert [(p.read_bytes(), p.stat().st_mtime_ns) for p in paths] == before
     study.check("case")
     study.collect()
-    assert json.loads((study.HERE / "study-summary.json").read_text())["cases"] == 1
+    assert json.loads((study.RUN / "summary.json").read_text())["cases"] == 1
 
 
 @pytest.mark.parametrize("relative", ["texts/case/original.txt", "texts/case/brief.json",
@@ -144,3 +144,28 @@ def test_invalid_report_does_not_poison_first_collection(study):
     write_report(study)
     study.collect()
     assert (study.RUN / "reports-manifest.json").is_file()
+
+
+@pytest.mark.parametrize("name", ["", ".", "..", "../another", "/tmp/another", "nested/name", "nested\\name"])
+def test_run_selection_cannot_escape_local_directory(study, name):
+    with pytest.raises(ValueError, match="one local directory"):
+        study.run_path(name)
+
+
+def test_new_round_preserves_previous_frozen_run(study):
+    first = study.RUN / "manifest.json"
+    before = first.read_bytes()
+    study.RUN = study.run_path("study-round2")
+    study.prepare()
+    assert study.manifest()["run"] == "study-round2"
+    assert first.read_bytes() == before
+
+
+def test_writer_origin_metadata_is_bound_to_issued_packet(study):
+    origin = study.RUN / "texts/case/writer-origin.json"
+    study.write(origin, {"kind": "fresh"})
+    study.packets()
+    write_report(study)
+    study.write(origin, {"kind": "changed"})
+    with pytest.raises(ValueError, match="issued packet evidence changed"):
+        study.check("case")

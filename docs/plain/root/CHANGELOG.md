@@ -5,6 +5,8 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Preserve straight double-quoted documents across paragraph breaks, matching curly quotes. Translation,
+  lint, verification and yarn submission now share that recognition while retaining ordinary dialect checks.
 - Refine documentation flavour with explicit publication controls, exact quoted examples and neutral person
   wording. Strict Markdown permits leading garnish at real sentence starts across inline boundaries, with
   whole-sentence context and shared casing evidence; suffixes and riffs stay out of partial units.
