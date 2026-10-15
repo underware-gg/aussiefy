@@ -26,11 +26,12 @@
   `not out of the question` can still offer refusal phrases. Review suggestions in their actual sentence.
 - **Mechanical acceptance doesn't kick off retelling quality.** The first fresh 20\-text blind comparison
   scored meaning 4.95/5 but register 2.00/5: eligible prose was too restrained. All deterministic checks
-  passed. Mate, a further writer refinement uses the same controls'n supplies judges with the full document
-  contract. See [the findings](../../research/document-refinement-2026-10-15/FINDINGS.md) for raw results,
-  protocol limits'n the next round; no improved score is claimed before that round completes.
+  passed. Anyway, a further writer revision under contract\-aware evaluation scored meaning 4.95/5 and register
+  4.65/5, with some high\-level prose still too light'n a minor forecast narrowin'. Fair dinkum, the packet protocol
+  and judges changed; those rounds don't knock together a causal engine improvement. See
+  [the findings](../../research/document-refinement-2026-10-15/FINDINGS.md) for raw results'n limits.
 - **The bundled embeddin' model lags the dictionary.** `aussiefy embedder status` reports the shipped model
   (aussie\-static 1.2.0\) as `stale` after the later research rounds; the next version is described in
-  `training/README.md`. Anyway, the 2026\-10\-15 offline check passes 33/33 required references but retains 16 known
+  `training/README.md`. Now, the 2026\-10\-15 offline check passes 33/33 required references but retains 16 known
   failures. Current gap\-fill precision remains below the 90% bar, so default automatic fillin' stays off.
   Default translations are unaffected, since the engine doesn't use it unless asked.

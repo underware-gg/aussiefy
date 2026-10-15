@@ -6,8 +6,8 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 ## [Unreleased]
 
 - Remove duplicated ungated infix advice from guide/yarn prompts; swear-infix guidance now follows placement
-  permission and the effective multiplier, including zero. Retain the first full retelling comparison and
-  add contract-aware evaluation.
+  permission and the effective multiplier, including zero. Retain both controlled retelling comparisons,
+  including the initial weak-register result and the contract-aware writer revision with remaining limits.
 - Preserve straight double-quoted documents across paragraph breaks, matching curly quotes. Translation,
   lint, verification and yarn submission now share that recognition while retaining ordinary dialect checks.
 - Refine documentation flavour with explicit publication controls, exact quoted examples and neutral person
@@ -26,7 +26,7 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
   Isolated behaviour tests cover flavour alongside technical and markup protection.
 
 - Share Markdown document choices, garnish limits and sentence spacing; prevent mid-sentence fragment openers and repeated per-unit closers.
-- Reconcile documentation and test indexes, verify Gettysburg wording provenance, and record the offline model baseline plus the pending independent retelling study.
+- Reconcile documentation and test indexes, verify Gettysburg wording provenance, and record the offline model baseline and independent retelling study.
 
 - Preserve concept metadata and hand edits when reapplying dictionary rounds; support explicit concept fixes, entryless guards and reviewed second senses.
 

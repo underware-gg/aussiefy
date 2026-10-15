@@ -1,0 +1,149 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "dinkum-3": "A",
+    "current": "B",
+    "pre-fix-yarn": "C"
+  },
+  "scores": {
+    "dinkum-3": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 4,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 4,
+      "register": 4,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "dinkum-3": {
+      "meaning": "\"security and compliance have been checked by the FedRAMP Joint Authorization Board\" weakens verified status to merely checked; the remaining platform, preview and static-site details survive.",
+      "sense": "\"load up your agency’s web team even more\" correctly conveys additional strain; \"surge in traffic\" keeps the technical sense.",
+      "authenticity": "\"hard yakka\", \"no drama\" and \"a fair bit going for them\" are natural local choices.",
+      "register": "\"getting the security and privacy compliance sorted\" and \"dead easy\" put a clear level-3 voice into the connecting prose.",
+      "tone": "\"so you can put your know-how into your content\" preserves the helpful explanatory pitch.",
+      "flow": "\"Skip the traditional CMS and you skip the headaches that come with it\" makes the technical explanation easy to say aloud.",
+      "variety": "\"no drama\", \"dead easy\" and \"look after\" vary the body without a repeating tag.",
+      "essence": "\"one simple static file server or service, not dozens\" retains the page’s practical static-site argument and original structure."
+    },
+    "current": {
+      "meaning": "\"security and compliance verified by the FedRAMP Joint Authorization Board\" retains the formal assertion; preview, cost, architecture and customisation claims remain.",
+      "sense": "\"keep it ticking over\" correctly means maintain operation; \"go-ahead\" correctly renders approval.",
+      "authenticity": "\"Hosting static website files on Pages is flamin' easy.\" sounds like a stock intensifier inserted into otherwise natural prose.",
+      "register": "\"backend and compliance legwork\" and \"get stuck into what you know\" give appropriate level-3 connecting prose without requiring added garnish.",
+      "tone": "\"You can count on your site being fast, reliable\" keeps the helpful assurance and explanatory intent.",
+      "flow": "\"That leaves you with a whole website that’s easier to look after\" joins the architecture explanation cleanly.",
+      "variety": "\"keep it ticking over\", \"go-ahead\" and \"Less to wrangle\" vary the phrasing and editable bold labels.",
+      "essence": "\"pre-generated web application program interfaces that display data from a separate server\" retains the distinctive scope of static-site uses."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"security and compliance verified by the FedRAMP Joint Authorization Board\" preserves status, and \"you only pay for what you use\" preserves the cost condition.",
+      "sense": "\"put your agency’s web team under the pump\" correctly expresses strain rather than a new staffing event.",
+      "authenticity": "\"It’s flamin’ easy\" is a slightly stock insertion, though \"under the pump\" and \"look after\" are natural.",
+      "register": "\"dead simple\", \"hard yakka\", \"under the pump\" and \"easy as\" make the treatment somewhat busier and broader than moderate level 3.",
+      "tone": "\"so you can put your know-how into your content\" preserves the practical, encouraging product explanation.",
+      "flow": "\"Steer clear of a traditional CMS and you steer clear of headaches\" gives a clean, spoken causal explanation.",
+      "variety": "\"under the pump\", \"out of the blue\" and \"rip out\" vary the local language well.",
+      "essence": "\"Production-level static sites generally need one simple static file server or service\" retains the technical comparison and persuasive structure."
+    }
+  },
+  "problems": {
+    "dinkum-3": [
+      {
+        "quote": "security and compliance have been checked by the FedRAMP Joint Authorization Board",
+        "original": "security and compliance verified by the FedRAMP Joint Authorization Board",
+        "severity": "minor",
+        "why": "Checked does not explicitly retain the affirmative verification status on which the platform claim rests."
+      }
+    ],
+    "current": [
+      {
+        "quote": "Hosting static website files on Pages is flamin' easy.",
+        "original": "It’s very easy to host static website files on Pages.",
+        "severity": "minor",
+        "why": "Flamin easy is a slightly stock-sounding local intensifier here, less natural than the surrounding conversational phrasing."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "It’s flamin’ easy to host static website files on Pages.",
+        "original": "It’s very easy to host static website files on Pages.",
+        "severity": "minor",
+        "why": "The stock flamin intensifier is less convincing than the rest of the local speech."
+      },
+      {
+        "quote": "getting signoff on content updates from stakeholders is easy as",
+        "original": "makes it easy to get signoff on content updates from stakeholders",
+        "severity": "minor",
+        "why": "Alongside dead simple, hard yakka and under the pump, this contributes to a busier, broader treatment than level 3 requires."
+      }
+    ]
+  },
+  "summaries": {
+    "dinkum-3": "Smooth and appropriately colloquial; one formal security-status assertion becomes less exact.",
+    "current": "Accurate and well-weighted, with one slightly stock intensifier.",
+    "pre-fix-yarn": "Faithful and fluent but slightly over-broad, with a stock intensifier."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "dinkum-3",
+        "current",
+        "pre-fix-yarn"
+      ]
+    ],
+    "flow": [
+      [
+        "dinkum-3",
+        "current",
+        "pre-fix-yarn"
+      ]
+    ],
+    "variety": [
+      [
+        "dinkum-3",
+        "current",
+        "pre-fix-yarn"
+      ]
+    ],
+    "essence": [
+      [
+        "dinkum-3",
+        "current",
+        "pre-fix-yarn"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ]
+  }
+}

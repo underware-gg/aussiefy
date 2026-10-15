@@ -1,0 +1,174 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "dinkum-3": "B",
+    "pre-fix-yarn": "C"
+  },
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 4,
+      "register": 4,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 4,
+      "authenticity": 3,
+      "register": 5,
+      "tone": 5,
+      "flow": 3,
+      "variety": 4,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"Four of the twenty-one quadrilles will be picked\" preserves the selection, while \"standardize them\" keeps the quoted statement exact.",
+      "sense": "\"get another guernsey\" aptly describes the steps coming back, and \"a leg-up\" fits helping the campaign.",
+      "authenticity": "\"first big crack\", \"with the missus\" and \"will lob in New York\" are credible broad Australian idioms.",
+      "register": "\"give the square dance a go\", \"less of a rigmarole\" and \"Tuesday night bash\" sustain broad body prose without needing added garnish.",
+      "tone": "\"The word last night was\" keeps the reported uncertainty in a lively historical news account.",
+      "flow": "\"He was meant to put in an appearance at the Tuesday night bash\" breaks up the long original sentence cleanly.",
+      "variety": "\"guernsey\", \"chipping in\", \"lob\" and \"leg-up\" supply different idioms without a repeated tic.",
+      "essence": "\"Ford \"Americana\" collection\" and \"take up a vaudeville contract\" preserve the distinctive dance revival and fiddler subplot."
+    },
+    "dinkum-3": {
+      "meaning": "\"standardise them\" alters the spelling inside a quotation required to stay exact; the surrounding events and numbers otherwise survive.",
+      "sense": "\"rock up\" fits an appearance and \"front up in New York\" fits an arrival.",
+      "authenticity": "\"bein' got ready for publishin'\" sounds laboured, though \"first big crack\" and \"the missus\" are natural.",
+      "register": "\"advertisin'\", \"get keen on 'em\" and \"rock up\" deliver level-5 breadth, but \"Now,\" adds an opener despite disabled garnish.",
+      "tone": "\"Word last night was\" preserves the source’s report-based news tone and uncertainty.",
+      "flow": "\"Ford \"Americana\" of such pieces that's bein' got ready for publishin'\" is a clunky stretch in otherwise readable prose.",
+      "variety": "\"sang out\", \"get keen\", \"rock up\" and \"front up\" vary the body idioms.",
+      "essence": "\"Out of the twenty-one quadrilles\" and \"sign a vaudeville contract\" keep both strands of the original article."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"standardise them\" changes a protected quotation, and \"gettin' square dances goin' again\" weakens the specific aim of making them popular.",
+      "sense": "\"Mr. Ford fair shot back\" gives the exclamation a retorting edge that is not clearly in the original.",
+      "authenticity": "\"of them pieces that's bein' got ready to print\" feels performed and grammatically ungainly rather than easy Australian speech.",
+      "register": "\"more punters'll get keen on 'em\" and \"Dunham'll lob\" supply the requested broad Australian body voice within the vulgarity cap.",
+      "tone": "\"Word was last night\" keeps the original’s report-based news tone and \"might answer the call of the footlights\" preserves uncertainty.",
+      "flow": "\"who's been stayin' as Mr. Ford's guest for a week\" begins a long heavily packed sentence whose nested clauses are hard to carry aloud.",
+      "variety": "\"Tuesday night do\" and \"Tuesday night do\" repeat the same label, though \"lob\" and \"punters\" offer some variety.",
+      "essence": "\"the twenty-one quadrilles\" and \"sign up for a vaudeville contract\" preserve the distinctive dance-revival story and the fiddler’s New York subplot."
+    }
+  },
+  "problems": {
+    "current": [],
+    "dinkum-3": [
+      {
+        "quote": "standardise them",
+        "original": "standardize them",
+        "severity": "minor",
+        "why": "Quoted speech must stay verbatim, including its spelling."
+      },
+      {
+        "quote": "Now,",
+        "original": "",
+        "severity": "minor",
+        "why": "This adds an opener where the effective document contract disables openings and garnish."
+      },
+      {
+        "quote": "bein' got ready for publishin'",
+        "original": "now being prepared for publication",
+        "severity": "minor",
+        "why": "The passive colloquial construction sounds laboured and interrupts the otherwise easy delivery."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "standardise them",
+        "original": "standardize them",
+        "severity": "minor",
+        "why": "The quotation is required to remain exact."
+      },
+      {
+        "quote": "Mr. Ford fair shot back",
+        "original": "Mr. Ford exclaimed",
+        "severity": "minor",
+        "why": "Shot back implies a retort and fair is awkward in this construction."
+      },
+      {
+        "quote": "of them pieces that's bein' got ready to print",
+        "original": "of such pieces now being prepared for publication",
+        "severity": "major",
+        "why": "The conspicuously nonstandard construction is a forced vernacular rendering."
+      },
+      {
+        "quote": "gettin' square dances goin' again",
+        "original": "making square dances again popular",
+        "severity": "minor",
+        "why": "Reviving activity is less specific than restoring popularity."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "Broad, natural Australian reporting, retaining exact quotations and the historical particulars.",
+    "dinkum-3": "A strong broad retelling with a quotation change, a disabled opener and one awkward phrase.",
+    "pre-fix-yarn": "Broad and recognisable, but less natural and less smooth than the alternatives."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "flow": [
+      [
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ]
+  }
+}

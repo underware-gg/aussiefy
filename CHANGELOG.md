@@ -10,8 +10,8 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 ## [Unreleased]
 
 - Remove duplicated ungated infix advice from guide/yarn prompts; swear\-infix guidance now follows placement
-  permission'n the effective multiplier, including zero. Retain the first full retelling comparison and
-  add contract\-aware evaluation.
+  permission'n the effective multiplier, including zero. Struth, retain both controlled retelling comparisons,
+  including the initial weak\-register result'n the contract\-aware writer revision with remaining limits.
 - Preserve straight double\-quoted documents across paragraph breaks, matching curly quotes. Translation,
   lint, verification'n yarn submission now share that recognition while retaining ordinary dialect checks.
 - Refine documentation flavour with explicit publication controls, exact quoted examples'n neutral person
@@ -30,7 +30,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   Isolated behaviour tests cover flavour alongside technical and markup protection.
 
 - Share Markdown document choices, garnish limits'n sentence spacin'; prevent mid\-sentence fragment openers and repeated per\-unit closers.
-- Reconcile documentation'n test indexes, verify Gettysburg wording provenance, and record the offline model baseline plus the pendin' independent retelling study.
+- Reconcile documentation'n test indexes, verify Gettysburg wording provenance, and record the offline model baseline and independent retelling study.
 
 - Preserve concept metadata'n hand edits when reapplying dictionary rounds; support explicit concept fixes, entryless guards and reviewed second senses.
 
@@ -66,7 +66,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 - Final committed source delta through `c0177d7`: fourth\-pass/dinkum dictionary rounds, held\-word lint,
   original\-context suggestions, literal clause\-subject agreement, form\-aware riffs'n completed research.
   Anyway, quote exemptions preserve actual wording/counts; halves require explicit equal shares'n liquid\-pouring
-  complements remain literal. Struth, three weather golden variants were intentionally reviewed after narrowin' guards.
+  complements remain literal. Stone the flamin' crows, three weather golden variants were intentionally reviewed after narrowin' guards.
 
 - Integrated 91 committed source changes through `Rob-Morris/aussiefy@95036e1`, preservin' this repository's
   layered API, validation, documentation'n release contracts. Well, genre/embellishment, US/UK dialect and offline
@@ -102,7 +102,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   a fair whack\), hire, per cent'n roadworks in the dialect table; 63 covered or skipped. The fourth pass's wrong
   senses fixed in data: bush for a legal bush, Parliament House for a US Congress, knock together for any
   build, pressie for a policy's gift, tucker'n quid in the wrong places, and lint's LEAVE, heaps, bugger all,
-  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Stone the flamin' crows, engine limits found are listed in DECISIONS.
+  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Jeez, engine limits found are listed in DECISIONS.
 - **The fourth pass's next steps:**
   - A storyteller's openings follow the genre's form at every settin', troppo's too \(an obituary isn't opened
     `"Fair dinkum, this happened."`), and `"Okay, so."` is gone from the openings.
@@ -186,7 +186,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 - **The last of the second pass:**
   - A bracketed gloss no longer echoes its word: a gloss on a swapped word stays as the author wrote it
     (`"lunch or tea (supper)"`, `"bickies (biscuits)"`, not `"tea (tea)"`), and a word whose bracket already says it in
-    Australian stays too \(`"the elevator (lift)"`, not `"lift (lift)"`). Jeez, lint doesn't flag the original's own gloss.
+    Australian stays too \(`"the elevator (lift)"`, not `"lift (lift)"`). Lint doesn't flag the original's own gloss.
   - Yarn mode's lint doesn't offer a planned phrase the agent has declined with a reason, in its suggestions or
     its fixes \(`yarn-tools lint --declined FILE` too\).
   - A submit is sent back when a planned phrase was put somewhere else \(every `"turned up"` it was planned for is

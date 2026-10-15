@@ -52,14 +52,66 @@ contract in anonymous packets and clarifies that level controls eligible vocabul
 embellishment/document settings control performance and added garnish. Scores across these protocols are
 not directly comparable. The eight criterion definitions and historical text anchors remain unchanged.
 
-## Next controlled refinement
+## Controlled third refinement
 
 Review found duplicated infix advice: a generic craft section recommended swear infixes even when the
 effective garnish list forbade them. The duplicate is removed; the existing gated section remains. Isolated
 guide/yarn tests cover General, Custom, News, Official, explicit infix activation and the clean cap.
 This fixes a configuration contradiction without claiming it caused the low register scores.
 
-The writers are revisiting all 20 texts with the same controls and sources, concentrating the selected
+The writers revisited all 20 texts with the same controls and sources, concentrating the selected
 Australian voice in eligible prose while preserving facts, qualifications, quotations, technical terms
-and markup. New canonical submissions and fresh independent protocol-two judges will test the result.
-No improved scores are claimed before that round completes.
+and markup. New canonical submissions and fresh independent protocol-two judges test the result.
+
+Round three is frozen at `d11446c`. All 20 outputs were deliberately revised by the continuing original
+writer contexts, with aggregate weak-register feedback but no historical candidate text or judge reports.
+The generic `writer` field retained by `prepare()` in its frozen manifest describes the original creation
+of those contexts; it must not be read as a claim that round three used new writer contexts. Per-case
+`writer-origin.json` records carry the precise lineage. All 100 retained tool calls replayed under the
+frozen engine. Two new independent judge contexts received the contract-aware anonymous packets.
+
+### Results under evaluation protocol 2
+
+The [round-three summary](study-round3/summary.json) and attributed per-case reports retain all results.
+This table compares candidates within protocol 2; it is not a before/after score comparison with round two.
+
+| Criterion, mean out of 5 | Current revision | Dinkum-3 | Earlier yarn |
+|---|---:|---:|---:|
+| Meaning | 4.95 | 4.05 | 4.25 |
+| Sense | 5.00 | 4.60 | 4.65 |
+| Authenticity | 4.95 | 4.90 | 4.75 |
+| Register | 4.65 | 4.05 | 4.65 |
+| Tone | 5.00 | 4.90 | 4.90 |
+| Flow | 5.00 | 4.75 | 4.60 |
+| Variety | 4.95 | 4.70 | 4.75 |
+| Essence | 5.00 | 5.00 | 5.00 |
+| Mean of the eight criteria | 4.94 | 4.62 | 4.69 |
+
+Current ranks ahead of Dinkum-3 in all 20 paired overall comparisons. Against earlier yarn it wins 16,
+ties two and loses two. Its fractional share of first places is 0.85. All 20 deterministic checks pass;
+Santa Fe retains one non-blocking repetition warning for the literal tree-cutting action. Every one of
+the 480 criterion-evidence fields contains a verbatim excerpt from its own anonymous candidate.
+
+The judges report no current critical problems, one major and eight minor. The major is Yellowstone's
+underweight level-5 body voice; its forecast also narrows precipitation to rain, a minor meaning weakness.
+Other remaining findings concern some restrained connecting prose, repeated idioms and one stock-sounding
+intensifier. Current register means at levels 2–5 are 5.00/5.00/4.25/4.20. Broad high-level voice therefore
+still needs editorial judgement; the strong aggregate is not a claim of perfect fidelity or register.
+
+### What this establishes, and what remains
+
+This sample supports coexistence of strong Australian voice and high fidelity under the composable
+controls. It does not isolate an engine improvement: continuing writers revised familiar sources after
+feedback, judges and packet context changed, and there is one report per case from two judge contexts.
+The unchanged historical anchors receive different ratings under the new context too. Neither the
+round-two-to-three score difference nor the anchor ratings establish a causal prompt/model/engine effect.
+The live Claude API and website latency remain untested by this study.
+
+No frozen text or report is corrected after judgement. The remaining case weaknesses stay visible for a
+future writing/refinement round. A general production judge-context API, held-out sources and repeat judges
+are independent next steps; current research packets already carry the effective contract. Repository-doc
+flavour density remains an editorial review point, not something these news/official/MDX scores measure.
+
+Validation for the results slice: the full suite exited 0 with **1,846 passed / 2 expected local skips in
+396.36s**. Final publication/provenance and independent interpretation review are recorded in the linked
+[design review](../../docs/architecture/reviews/design-review-2026-10-16-retelling-results.md).

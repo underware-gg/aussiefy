@@ -1,0 +1,166 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "dinkum-3": "B",
+    "pre-fix-yarn": "C"
+  },
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 4,
+      "variety": 4,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 3,
+      "sense": 4,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"They also reaffirmed the FOMC's policy\" preserves the formal action’s force, and \"until told otherwise\" retains the directive’s duration; quoted documents remain verbatim.",
+      "sense": "\"had hardly budged\" correctly means largely unchanged, and \"signed off on the minutes\" preserves approval.",
+      "authenticity": "\"bump the target range\", \"domestic spending held its own\" and \"Once the discussion had wrapped up\" are credible Australian conversational phrasing.",
+      "register": "\"gave the nod\", \"had hardly budged\", \"wrapped up\" and \"signed off\" give the eligible connecting prose level-4 weight without touching protected quotations.",
+      "tone": "\"made it plain it remained resolved\" preserves institutional seriousness beneath the conversational retelling.",
+      "flow": "\"The directive was for release at 2:00 p.m.\" cleanly separates a long procedural sentence.",
+      "variety": "\"To back\", \"had hardly budged\", \"gave the nod\" and \"In step with\" vary the connecting language.",
+      "essence": "\"voted unanimously\" and \"Through a notation vote completed on August 18, 2026\" retain the minutes’ procedural sequence, voting record and policy detail."
+    },
+    "dinkum-3": {
+      "meaning": "\"they stuck by the FOMC's policy\" reports continued adherence rather than the explicit reaffirmation, though numbers, votes, dates and quoted documents remain intact.",
+      "sense": "\"dead set on hitting its dual-mandate goals\" captures continuing resolve; \"give a 1/4 percentage point increase ... the nod\" retains approval.",
+      "authenticity": "\"at a solid clip\", \"had hardly budged\" and \"holding up well\" are natural Australian phrasing.",
+      "register": "\"dead set\", \"bump ... up\" and \"give ... the nod\" sustain the requested level-4 voice around the protected material.",
+      "tone": "\"The Committee made it plain it's still dead set\" keeps the seriousness of its commitment in a conversational voice.",
+      "flow": "\"inflation was still sitting up high against the Committee's 2 percent goal\" is a slightly awkward comparison in otherwise smooth prose.",
+      "variety": "\"gave the nod\" and \"give a 1/4 percentage point increase in the primary credit rate the nod\" reuse the same approval idiom.",
+      "essence": "\"Voting against this action: None.\" and the full preserved directives keep the distinctive unanimous-policy-action minutes intact."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"Members reckoned\" turns noted observations into a looser judgement, and \"3-3/4 to 4 per cent\" inside the directive alters a quoted document required verbatim.",
+      "sense": "\"doubled down on the FOMC's policy\" adds an emphatic recommitment or escalation beyond reaffirming it.",
+      "authenticity": "\"kept chugging along at a solid clip\" and \"Once the talking was done and dusted\" are recognisable Australian speech.",
+      "register": "\"barely budged\", \"give the tick\" and \"signed off\" carry the eligible body prose at level 4 without requiring garnish or swearing.",
+      "tone": "\"put it in black and white\" still communicates a serious stated policy commitment rather than making a joke of it.",
+      "flow": "\"They agreed the Committee would get together next on Tuesday–Wednesday, October 27–28, 2026\" is clear and smoothly spoken.",
+      "variety": "\"gave the nod\", \"done and dusted\", \"signed off\" and \"give the tick\" vary the idiomatic phrasing.",
+      "essence": "\"By a notation vote finished up on August 18, 2026\" retains the procedural closing, and the policy rates, voting list and meeting sequence remain recognisable."
+    }
+  },
+  "problems": {
+    "current": [],
+    "dinkum-3": [
+      {
+        "quote": "they stuck by the FOMC's policy",
+        "original": "reaffirmed the FOMC's policy",
+        "severity": "minor",
+        "why": "Stuck by conveys continued adherence but does not quite convey a renewed explicit affirmation."
+      },
+      {
+        "quote": "inflation was still sitting up high against",
+        "original": "inflation remained elevated relative to",
+        "severity": "minor",
+        "why": "Sitting up high against is an awkward comparative construction."
+      },
+      {
+        "quote": "give a 1/4 percentage point increase in the primary credit rate the nod",
+        "original": "approve a 1/4 percentage point increase in the primary credit rate",
+        "severity": "minor",
+        "why": "Repeats the nod idiom used earlier for statement approval."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "Members reckoned",
+        "original": "Members noted",
+        "severity": "major",
+        "why": "Reckoned weakens the force of a recorded institutional observation, contrary to the contract."
+      },
+      {
+        "quote": "doubled down on the FOMC's policy",
+        "original": "reaffirmed the FOMC's policy",
+        "severity": "major",
+        "why": "Doubled down implies a stronger, possibly defensive renewed commitment than the recorded reaffirmation; the contract specifically requires preserving that force."
+      },
+      {
+        "quote": "3-3/4 to 4 per cent.",
+        "original": "3-3/4 to 4 percent.",
+        "severity": "minor",
+        "why": "Spelling is changed inside the quoted directive, and the same change recurs in the quoted statement; quoted documents must be verbatim."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "The best balance of substantial Australian connecting prose, exact official force and protected quoted documents.",
+    "dinkum-3": "Strong and mostly exact, with a small shift in institutional action and a couple of stylistic weaknesses.",
+    "pre-fix-yarn": "Fluent and idiomatic, but changes the force of official actions and edits protected quoted documents."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "flow": [
+      [
+        "current",
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ]
+  }
+}

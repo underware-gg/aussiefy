@@ -61,7 +61,9 @@ then validate/read/tally them through the existing commands. A writer and judge 
 as agents without a paid API, or use the live API with configured credentials. There is no Anthropic API key
 configured at the original check. The subsequent [refinement study](../document-refinement-2026-10-15/FINDINGS.md)
 completed the fresh 20-text pass: meaning 4.95/5, register 2.00/5, all mechanical checks passing. Raw results
-and the following writer/contract-aware-evaluator refinement are retained there.
+and the following writer/contract-aware-evaluator refinement are retained there. The latter scored meaning
+4.95/5 and register 4.65/5 under its new packet protocol, with remaining high-level voice weaknesses and one
+minor forecast narrowing. These cross-protocol scores are not a causal engine comparison.
 
 The important comparison is whether the stronger verb/quote fidelity rules recover meaning while keeping the
 register regained in the earlier study. Tests, old verdicts and replayed submissions cannot answer that.

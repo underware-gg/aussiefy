@@ -1,0 +1,158 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "pre-fix-yarn": "A",
+    "current": "B",
+    "dinkum-3": "C"
+  },
+  "scores": {
+    "pre-fix-yarn": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 3,
+      "tone": 5,
+      "flow": 5,
+      "variety": 3,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 3,
+      "tone": 5,
+      "flow": 5,
+      "variety": 3,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "pre-fix-yarn": {
+      "meaning": "\"November 22 through December 20, 2024\" preserves the original year rather than correcting it; all office, price, tag and eligibility details survive.",
+      "sense": "\"first dibs\" correctly expresses priority; \"skinny little trees\" conveys small diameter.",
+      "authenticity": "\"Give us a ring\" and \"find a feed\" are natural Australian expressions.",
+      "register": "\"cos it matters\", \"does the bush a good turn\" and \"find a feed\" make the body noticeably broader than the requested light level 2.",
+      "tone": "\"Have a good read of the overview\" maintains the practical advisory purpose.",
+      "flow": "\"That depends on the weather and the supply\" reads as a clear spoken explanation.",
+      "variety": "\"Chrissy\" recurs throughout almost every tree reference, making the diminutive conspicuous.",
+      "essence": "\"One tag covers a tree up to 5 inches\" retains the administrative detail and forest-health explanation that distinguish the notice."
+    },
+    "current": {
+      "meaning": "\"November 13, 2025\" and \"November 22 through December 20, 2024\" preserve both dates, and all fees and tag thresholds remain.",
+      "sense": "\"Get in touch with us\" preserves the unrestricted contact instruction, and \"first priority\" conveys the allocation rule.",
+      "authenticity": "\"Have a look here\" and \"does the forest some good too\" sound natural and unforced.",
+      "register": "\"Chrissy tree permit\" provides a light touch, with modest spoken recasting in \"Give the overview and need-to-know information a careful read before you buy.\"",
+      "tone": "\"you’ll need another tag\" keeps the instruction clear and suitably serious.",
+      "flow": "\"Buying through recreation.gov adds a $2.50 service fee\" is concise and easily read aloud.",
+      "variety": "\"Have a look\", \"Get in touch\" and \"for instance\" vary the transitions without repeated slang.",
+      "essence": "\"Local forest health experts pick out areas\" retains the distinctive explanatory ending and practical notice structure."
+    },
+    "dinkum-3": {
+      "meaning": "\"Year 4 kids\" recasts a US fourth-grade eligibility category as an Australian school-year label, while dates, fees and dimensions otherwise remain.",
+      "sense": "\"first dibs\" correctly expresses priority and \"patches of feed\" reasonably conveys forage.",
+      "authenticity": "\"have a proper read\" and \"does the bush a good turn\" are credible local speech.",
+      "register": "\"just pop in\", \"heads up\" and \"skinny little trees\" give the whole notice a broader voice than level 2 asks for.",
+      "tone": "\"Make sure you have a proper read\" preserves the practical advisory force.",
+      "flow": "\"Buy one online through recreation.gov and there's an extra $2.50 service fee on top.\" is smooth explanatory speech.",
+      "variety": "\"Chrissie\" repeats in most references to the trees and permits, drawing attention to itself.",
+      "essence": "\"Anything taller than 10 feet and/or wider than 5 inches needs an extra tag\" retains the unusually specific permit mechanics and the forest-benefit ending."
+    }
+  },
+  "problems": {
+    "pre-fix-yarn": [
+      {
+        "quote": "Cutting a Chrissy tree does the bush a good turn, too.",
+        "original": "Cutting a Christmas tree also improves forest health.",
+        "severity": "major",
+        "why": "Representative of a broadly colloquial body beyond the light level-2 request."
+      },
+      {
+        "quote": "Chrissy tree permits",
+        "original": "Christmas tree permits",
+        "severity": "minor",
+        "why": "Chrissy is repeated at nearly every opportunity instead of varied naturally."
+      }
+    ],
+    "current": [],
+    "dinkum-3": [
+      {
+        "quote": "Year 4 kids",
+        "original": "Fourth graders",
+        "severity": "minor",
+        "why": "Eligibility belongs to a US programme; replacing the school-system category with Year 4 can mislead a reader applying an Australian label."
+      },
+      {
+        "quote": "And cutting a Chrissie tree does the bush a good turn, too.",
+        "original": "Cutting a Christmas tree also improves forest health.",
+        "severity": "major",
+        "why": "The broad conversational recasting across the body exceeds the requested light level 2."
+      },
+      {
+        "quote": "Chrissie tree permits",
+        "original": "Christmas tree permits",
+        "severity": "minor",
+        "why": "The diminutive recurs conspicuously throughout the notice."
+      }
+    ]
+  },
+  "summaries": {
+    "pre-fix-yarn": "Complete and natural, but broader and more repetitive than a light treatment.",
+    "current": "Faithful, clear notice with the right light Australian weight.",
+    "dinkum-3": "Readable and complete in most respects, but too broad for level 2 and with a less exact eligibility label."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "flow": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "variety": [
+      [
+        "current"
+      ],
+      [
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "essence": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ]
+  }
+}

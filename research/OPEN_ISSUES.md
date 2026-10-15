@@ -37,8 +37,10 @@ The [2026-10-15 maintenance measurement](maintenance-check-2026-10-15/README.md)
 references with all 16 known failures retained. It separately captures real toolkit lookups and pins a fresh
 20-text Dinkum comparison. No new weights were produced. The subsequent
 [fresh retelling study](document-refinement-2026-10-15/FINDINGS.md) scored meaning 4.95/5 but register 2.00/5;
-all 20 deterministic checks passed. Stronger eligible-prose writing and contract-aware evaluation are the
-next controlled round; the raw weak-register result is retained.
+all 20 deterministic checks passed. The following writer revision and contract-aware evaluation scored
+meaning 4.95/5 and register 4.65/5, again passing all mechanical checks. Raw results from both protocols
+remain; cross-protocol scores do not establish a causal engine improvement. Remaining high-level voice
+weaknesses, one minor forecast narrowing, repeat judges and held-out sources are explicit follow-ups.
 
 `aussiefy embedder status` reports aussie-static 1.2.0 as stale. It was trained before the fairdinkum, second-pass
 and third-pass rounds; their entries work through the engine and lookup triggers without it, but meaning-based lookup
@@ -78,7 +80,8 @@ left:
 
 | issue | benefit | why it's separate |
 |---|---|---|
-| Re-measure dinkum after the dinkum check's fixes (`research/dinkum-check-2026-10-14/FINDINGS.md`: register came back, 3.60 to 4.00, but meaning fell 4.90 to 4.65 and dinkum-3 still leads, 4.57 against 4.46) | Whether "a verb keeps its weight" and no riffs on real things win back fidelity without losing the voice | Needs a yarn and judge pass, with dinkum-3 as the anchor |
+| Repeat the completed controlled comparison on held-out sources and with repeat judges | Test whether the high fidelity/register balance generalises beyond these 20 familiar sources | The completed refinement retains the weak first result and later contract-aware comparison; a fresh dataset is independent evidence |
+| Carry the full effective document/profile/markup contract through the production judge API | Public judging can apply the same restrictions as writing, as research protocol 2 now does | A public interface change across judge surfaces; the research run already has the context |
 | Thin plans in news and official prose: most texts get no planned phrases, and at level 2 the draft is the original | The engine's draft carries some of the voice, as dinkum-3's did | Dictionary coverage of formal words, or a level-aware plan |
 | Some US spellings in capitalised headings escape lint | Catch heading spellings without changing names or the Australian Labor Party | Spelling-context work; outta/oughta/wanna are intentionally emitted by our drawl and must not be banned wholesale |
 | A form that leaves a captured slot unused drops it (stuff up needed two entries); a trigger's lookahead stops at punctuation | Simpler entries | Engine changes (`research/dinkum-check-round-2026-10-14/DECISIONS.md`) |

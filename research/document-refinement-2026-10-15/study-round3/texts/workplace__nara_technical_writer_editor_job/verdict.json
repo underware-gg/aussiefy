@@ -1,0 +1,164 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "dinkum-3": "A",
+    "current": "B",
+    "pre-fix-yarn": "C"
+  },
+  "scores": {
+    "dinkum-3": {
+      "meaning": 3,
+      "sense": 4,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "dinkum-3": {
+      "meaning": "\"You can work from home, per Agency policy\" turns an offer of telework opportunities into an apparent permission or entitlement; the eligibility numbers and alternatives otherwise remain.",
+      "sense": "\"look after them properly\" appears to refer to customers rather than specifically addressing their publication-process needs, a looser rendering of the duty.",
+      "authenticity": "\"Have a squiz\", \"Spotting and nutting out production problems\" and \"new starters\" sound naturally Australian.",
+      "register": "\"no worries:\" is an added reassurance tag despite disabled garnish; the rest of the idiomatic body prose fits a moderate level 3.",
+      "tone": "\"You must be a U.S. Citizen or U.S. National\" keeps the job ad’s serious conditions and requirements clear beneath the colloquial wording.",
+      "flow": "\"so they get published legally effective, on time and spot on\" has a grammatical snag: legally effective does not fit as the manner of publication.",
+      "variety": "\"get picked\", \"pitching in\", \"get your head around\", \"squiz\" and \"nutting out\" provide varied phrasing.",
+      "essence": "\"Announcement ST-12632063-25-SW\" and \"GS-09\" preserve the distinctive federal job-ad identity, qualifications and conditions."
+    },
+    "current": {
+      "meaning": "\"There are telework opportunities on offer under Agency policy\" preserves opportunity rather than entitlement, while \"You must successfully complete a background investigation\" retains the condition exactly.",
+      "sense": "\"Get to grips with customer needs\" fits understanding them, and \"bring them into line\" correctly describes compliance with formatting requirements.",
+      "authenticity": "\"Have a squiz\", \"new starters\" and \"Get your head round\" sound natural in Australian explanatory prose.",
+      "register": "\"get the chance\", \"Have a squiz\", \"spell out\" and \"working out solutions\" provide a moderate level-3 body voice around the protected names and exact qualification details.",
+      "tone": "\"You must meet these requirements by the time this announcement closes\" keeps the authoritative job-ad purpose intact.",
+      "flow": "\"That includes information technology, legacy systems and other technical resources\" cleanly completes the technical-duty explanation.",
+      "variety": "\"Get to grips\", \"head round\", \"squiz\", \"spell out\" and \"picked up\" provide varied local phrasing.",
+      "essence": "\"a bargaining unit position, AFGE Council 260\" and \"Only graduate study over and above the first year (18 semester hours)\" preserve the ad’s distinctive employment and qualification particulars."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"There's the chance to work from home\" retains opportunity but narrows telework to home; the required qualifications, dates, identification and alternative pathways otherwise survive.",
+      "sense": "\"You must get through a background investigation\" keeps the requirement to complete it successfully, and \"come up with fixes\" fits developing solutions.",
+      "authenticity": "\"Know your way around\", \"Have a squiz\" and \"new starters\" are natural Australian phrasing.",
+      "register": "\"get picked\", \"spot on\", \"ticked off\" and \"come up with fixes\" give the eligible prose the requested moderate local voice without added routines.",
+      "tone": "\"you have to certify\" and \"You've got to meet these requirements\" retain the authoritative conditions of the job ad.",
+      "flow": "\"so they get published legally effective, on time and spot on\" is grammatically awkward, although most of the document reads smoothly.",
+      "variety": "\"ticked off\", \"sort it out\", \"squiz\", \"Hit\" and \"fixes\" vary the conversational choices.",
+      "essence": "\"COMBINATION OF EDUCATION AND EXPERIENCE\" and \"AFGE Council 260\" keep the distinctive qualification alternatives and employment context."
+    }
+  },
+  "problems": {
+    "dinkum-3": [
+      {
+        "quote": "You can work from home, per Agency policy.",
+        "original": "We offer opportunities for telework, per Agency policy.",
+        "severity": "critical",
+        "why": "The source offers opportunities subject to policy; this wording sounds like an assurance that the applicant can work from home, and narrows telework to home."
+      },
+      {
+        "quote": "look after them properly",
+        "original": "appropriately address customer needs",
+        "severity": "minor",
+        "why": "Looking after customers is less specific than addressing their publication-process needs."
+      },
+      {
+        "quote": "no worries:",
+        "original": "",
+        "severity": "minor",
+        "why": "Adds a reassuring tag where the effective contract disables garnish."
+      },
+      {
+        "quote": "get published legally effective",
+        "original": "ensure legally effective, timely, and accurate publication",
+        "severity": "major",
+        "why": "The adjective phrase is not grammatically integrated into get published, making the core duty awkward to read."
+      }
+    ],
+    "current": [],
+    "pre-fix-yarn": [
+      {
+        "quote": "There's the chance to work from home, per Agency policy.",
+        "original": "We offer opportunities for telework, per Agency policy.",
+        "severity": "minor",
+        "why": "Home is one possible telework location; the rewrite narrows the category while correctly retaining only a chance."
+      },
+      {
+        "quote": "get published legally effective",
+        "original": "ensure legally effective, timely, and accurate publication",
+        "severity": "major",
+        "why": "Legally effective is left as an adjective phrase where the publication construction needs a grammatical complement or with legal effect."
+      }
+    ]
+  },
+  "summaries": {
+    "dinkum-3": "A natural local voice, but less exact about telework availability and one customer-service duty, with a grammatical snag.",
+    "current": "Best fit: smooth Australian explanation that preserves duties, qualification alternatives and the precise employment conditions.",
+    "pre-fix-yarn": "Faithful and naturally colloquial overall, with a small narrowing of telework and one awkward duty sentence."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "dinkum-3",
+        "current",
+        "pre-fix-yarn"
+      ]
+    ],
+    "flow": [
+      [
+        "current"
+      ],
+      [
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "variety": [
+      [
+        "dinkum-3",
+        "current",
+        "pre-fix-yarn"
+      ]
+    ],
+    "essence": [
+      [
+        "dinkum-3",
+        "current",
+        "pre-fix-yarn"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ]
+  }
+}

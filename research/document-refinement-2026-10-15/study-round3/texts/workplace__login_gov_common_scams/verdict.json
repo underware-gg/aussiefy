@@ -1,0 +1,179 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "pre-fix-yarn": "A",
+    "dinkum-3": "B",
+    "current": "C"
+  },
+  "scores": {
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 4,
+      "authenticity": 3,
+      "register": 5,
+      "tone": 5,
+      "flow": 4,
+      "variety": 4,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 4,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "pre-fix-yarn": {
+      "meaning": "\"Keepin' yer wits about ya on their tricks\" changes staying informed into being alert, although all specific defensive steps and threats survive.",
+      "sense": "\"slanter websites\" uses an obscure expression associated with a fraudulent trick/deal awkwardly as a website adjective; \"swifties\" otherwise fits.",
+      "authenticity": "\"handin'\", \"yer\" and \"yerself\" are pushed through nearly every sentence, making the voice look performed rather than naturally broad.",
+      "register": "\"don't know from a bar of soap\", \"Shonks\" and \"cough up fees upfront\" provide full level-5 body prose without demanding forbidden embellishment or swearing.",
+      "tone": "\"Government agencies will never ask ya for payment over the phone.\" retains the firm protective warning.",
+      "flow": "\"Dob in dodgy messages to the agency the scammer's tryin' to pass themselves off as\" has a crowded join and repeated in/to construction.",
+      "variety": "\"swifties\", \"Shonks\" and \"Sting ya fees\" offer variety, though \"Dob in\" repeats twice.",
+      "essence": "\"Always check the website URL ends in .gov.\" and the preserved scam-type headings keep the actionable guide’s shape."
+    },
+    "dinkum-3": {
+      "meaning": "\"Nine times outta ten\" replaces often with a numerical frequency the original never claims; the remaining threats and protective instructions are retained.",
+      "sense": "\"rorts\" and \"fair dinkum\" correctly convey scams and legitimacy, and \"on the spot\" preserves immediacy.",
+      "authenticity": "\"ya\", \"yer\" and \"yerself\" recur almost everywhere, giving otherwise natural idiom a visibly performed quality.",
+      "register": "\"gettin' onto the agency yerself\", \"give ya a ring\" and \"rorts goin' round\" give sustained broad level-5 prose within the permitted vulgarity cap.",
+      "tone": "\"Government agencies will never ask ya to pay over the phone.\" keeps the protective instruction firm.",
+      "flow": "\"Hang up, then ring the official number\" is crisp and easy to follow aloud.",
+      "variety": "\"real deal\", \"fair dinkum\" and \"out of the blue\" vary the language without a repeated decorative tag.",
+      "essence": "\"type the official URL in yerself and double-check the spellin'\" retains the guide’s concrete defensive steps and scam taxonomy."
+    },
+    "current": {
+      "meaning": "\"Demand that you cough up straightaway via gift cards, cryptocurrency, or wire transfers\" preserves urgency and payment methods; all scam types and defences survive.",
+      "sense": "\"shonky websites\", \"Give search engines a miss\" and \"suss\" all fit their intended meanings.",
+      "authenticity": "\"give you a ring\" and \"messages out of the blue\" sound natural; dropped-g forms are present without dominating every word.",
+      "register": "\"Offer grants or financial assistance if you pay fees upfront\" and other eligible bullets remain fairly neutral, so the overall voice is a little lighter than full level 5.",
+      "tone": "\"Government agencies will never ask you to pay over the phone.\" retains warning force and \"Always check\" remains mandatory.",
+      "flow": "\"Suss out whether the message is legit by gettin' in touch with the agency directly\" reads cleanly and gives the user a clear action.",
+      "variety": "\"cough up\", \"shonky\", \"Give search engines a miss\" and \"out of the blue\" vary the local language.",
+      "essence": "\"Report suss social media profiles to the social media platform.\" preserves the actionable educational character and the original progression."
+    }
+  },
+  "problems": {
+    "pre-fix-yarn": [
+      {
+        "quote": "Keepin' yer wits about ya on their tricks is yer best defence.",
+        "original": "Staying informed about these tactics is your best defense.",
+        "severity": "minor",
+        "why": "Being watchful is not quite the stated advice to remain informed about evolving tactics."
+      },
+      {
+        "quote": "slanter websites",
+        "original": "fraudulent websites",
+        "severity": "major",
+        "why": "Slanter is an obscure trick/deal term and strains as an adjective for websites."
+      },
+      {
+        "quote": "handin' over their personal info or makin' dodgy payments",
+        "original": "sharing their personal information or making fraudulent payments",
+        "severity": "major",
+        "why": "Representative of pervasive eye dialect that gives the prose a performed sound rather than natural broad Australian speech."
+      },
+      {
+        "quote": "Dob in dodgy messages to the agency the scammer's tryin' to pass themselves off as",
+        "original": "Report fraudulent messages to the agency the scammer is trying to represent",
+        "severity": "minor",
+        "why": "Crowded construction reads less cleanly than the surrounding instructions."
+      },
+      {
+        "quote": "Dob in suss profiles",
+        "original": "Report suspicious profiles",
+        "severity": "minor",
+        "why": "Repeats dob in as the stock reporting phrase."
+      }
+    ],
+    "dinkum-3": [
+      {
+        "quote": "Nine times outta ten they'll:",
+        "original": "They often:",
+        "severity": "major",
+        "why": "Invents an apparent nine-in-ten frequency; a quantitative-sounding claim is more specific than often."
+      },
+      {
+        "quote": "handin' over yer personal info or makin' a dodgy payment",
+        "original": "sharing their personal information or making fraudulent payments",
+        "severity": "minor",
+        "why": "Representative of pervasive eye dialect that makes the voice somewhat performed."
+      }
+    ],
+    "current": [
+      {
+        "quote": "Offer grants or financial assistance if you pay fees upfront",
+        "original": "Offer grants or financial assistance in exchange for upfront fees",
+        "severity": "minor",
+        "why": "Representative of eligible body prose left relatively neutral, making the guide a shade lighter than requested level 5; protected technical terms need not be changed."
+      }
+    ]
+  },
+  "summaries": {
+    "pre-fix-yarn": "Complete practical advice in a very broad voice, weakened by eye dialect, an awkward term and one advice shift.",
+    "dinkum-3": "Clear and broad, but invents a numerical frequency and leans heavily on eye dialect.",
+    "current": "Most precise and natural, although the eligible prose is a little restrained for level 5."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "pre-fix-yarn",
+        "dinkum-3",
+        "current"
+      ]
+    ],
+    "flow": [
+      [
+        "dinkum-3",
+        "current"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ],
+    "variety": [
+      [
+        "dinkum-3",
+        "current"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ],
+    "essence": [
+      [
+        "pre-fix-yarn",
+        "dinkum-3",
+        "current"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ]
+  }
+}

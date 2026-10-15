@@ -10,6 +10,7 @@ commands that have since been renamed. Mate, decisions they led to are recorded 
 
 | Review | Summary |
 |---|---|
+| [design-review-2026-10-16-retelling-results.md](design-review-2026-10-16-retelling-results.md) | Controlled writer refinement, source-linked evidence and contract-aware blind comparison |
 | [design-review-2026-10-16-retelling-contract.md](design-review-2026-10-16-retelling-contract.md) | Configuration-consistent craft guidance, retained negative results and contract-aware research evaluation |
 | [design-review-2026-10-16-multiline-quotes.md](design-review-2026-10-16-multiline-quotes.md) | Shared quote recognition and preserved evidence across frozen refinement rounds |
 | [design-review-2026-10-15-document-refinement.md](design-review-2026-10-15-document-refinement.md) | Sentence-safe document flavour, bounded grammar inference, semantic performance and study integrity |

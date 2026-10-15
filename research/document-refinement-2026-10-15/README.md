@@ -100,7 +100,9 @@ Fresh writers receive original sources and current yarn briefs, not historical c
 judge contexts receive key-free blind packets under rubric 3. The two historical anchors remain byte-pinned.
 Accepted submissions, diagnostics, reports, source/engine hashes and deterministic verification are retained.
 Round two is complete: meaning scored 4.95/5, register 2.00/5, and all 20 deterministic checks passed.
-[FINDINGS.md](FINDINGS.md) retains the poor register result, anchor comparison, methodology and limits.
+The subsequent controlled revision also completed: under contract-aware protocol 2, meaning is 4.95/5 and
+register 4.65/5; its overall mean is 4.94 versus 4.62/4.69 for the unchanged anchors in that same round.
+[FINDINGS.md](FINDINGS.md) retains both results, remaining weaknesses, methodology and comparison limits.
 
 The local `study.py` driver prepares the frozen brief/source/policy and complete engine-file set, replays
 retained tool diagnostics and final acceptance through the canonical yarn session, then issues write-once
@@ -156,3 +158,16 @@ judge-context API remains separate work.
 The guidance/protocol slice's final full gate exited 0: **1,846 passed / 2 expected local skips in
 501.88s**. The final focused run passed 154 cases. Ruff, 40-output publication freshness/links and
 provenance with actual wheel inspection passed. Independent design review has no outstanding findings.
+
+Round three freezes at `d11446c` and uses continuing original writer contexts, deliberately revising all
+20 outputs after aggregate feedback; its per-case origins explicitly record this. The manifest's generic
+`writer` string describes their original creation, not fresh round-three contexts. All 100 tool calls
+replayed. Its two independent blind judge contexts are new. Collection completed with 20 passing
+deterministic checks and 480 verbatim criterion-evidence fields. Current wins all 20 paired overall
+comparisons with Dinkum-3; against earlier yarn it wins 16, ties two and loses two. One major and eight minor
+current problems remain, including light high-level voice and one forecast narrowing. Frozen outputs and
+reports stay unchanged. Full results gate: **1,846 passed / 2 expected local skips in 396.36s**, exit 0.
+Final Ruff, 40-output publication freshness/links and provenance with actual wheel inspection passed after
+collection. Independent all-six-concern design review reproduced the tally, outcomes and hashes, checked
+all 284 artefacts' provenance, and converged without outstanding findings.
+The final study-integrity/provenance-focused run passed 111 cases in 100.06s.

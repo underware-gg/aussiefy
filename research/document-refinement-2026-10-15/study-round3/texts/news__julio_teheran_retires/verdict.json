@@ -1,0 +1,142 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "pre-fix-yarn": "B",
+    "dinkum-3": "C"
+  },
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 5,
+      "flow": 5,
+      "variety": 4,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 4,
+      "variety": 4,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"an 81-82 record, a 3.85 ERA, 1.223 WHIP, and 1,260 strikeouts in 1,470.2 innings\" preserves all statistics and the career chronology is intact.",
+      "sense": "\"calling time on his baseball career\" accurately means retiring.",
+      "authenticity": "\"spent the bulk\" and \"All up\" sound natural rather than staged.",
+      "register": "\"with stints\" and \"picking up All-Star selections\" give the light level-2 touch requested.",
+      "tone": "\"a shoulder injury had ruled him out\" maintains straightforward sports reporting.",
+      "flow": "\"He made his MLB debut for the Braves in 2011, aged 20, and stayed on\" flows easily.",
+      "variety": "\"calling time\", \"get past\" and \"All up\" avoid repetitive tags.",
+      "essence": "\"his first nine seasons\" and \"the 2022 and 2025 seasons\" preserve the distinctive career summary."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"two days after he was pulled from a scheduled start\" and the full \"1,260 strikeouts in 1,470.2 innings\" preserve event and statistics.",
+      "sense": "\"with a crook shoulder\" correctly conveys an injured shoulder.",
+      "authenticity": "\"knock off Team Panama 3-1\" is a natural sporting idiom.",
+      "register": "\"called it a day\", \"crook shoulder\" and \"hung up the glove\" make this a little busier than a level-2 light touch.",
+      "tone": "\"announcing his retirement on Monday at the age of 35\" retains the sober sports-news framing.",
+      "flow": "\"mostly with the Atlanta Braves, though he also had stints\" reads cleanly.",
+      "variety": "\"called it a day\" followed by \"hung up the glove\" repeats the retirement image slightly.",
+      "essence": "\"his first nine seasons\" and the named clubs preserve the career-focused shape."
+    },
+    "dinkum-3": {
+      "meaning": "\"a 3.85 ERA, a 1.223 WHIP and 1,260 strikeouts from 1,470.2 innings\" keeps the figures and the injury timing is explicit.",
+      "sense": "\"turned out for\" correctly refers to playing for the named teams.",
+      "authenticity": "\"a crook shoulder saw him scratched\" and \"All up\" sound locally natural.",
+      "register": "\"called time\", \"crook shoulder\" and \"stuck with them\" give a recognisable but modest Australian voice suitable for level 2.",
+      "tone": "\"He announced his retirement on Monday, at 35\" stays matter-of-fact.",
+      "flow": "\"Before he called it\" has a slightly clipped, under-specified join after the previous retirement wording.",
+      "variety": "\"called time\" and \"Before he called it\" repeat the same calling construction noticeably in consecutive paragraphs.",
+      "essence": "\"most of them with the Atlanta Braves\" maintains the career trajectory and emphasis."
+    }
+  },
+  "problems": {
+    "current": [],
+    "pre-fix-yarn": [
+      {
+        "quote": "Before he hung up the glove",
+        "original": "before announcing his retirement",
+        "severity": "minor",
+        "why": "Alongside called it a day and crook shoulder, the extra retirement idiom makes the light level-2 treatment a little busy; also repeats the opening retirement expression."
+      }
+    ],
+    "dinkum-3": [
+      {
+        "quote": "Before he called it",
+        "original": "before announcing his retirement",
+        "severity": "minor",
+        "why": "The clipped phrase is less smooth than the surrounding sentences and echoes called time just above."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "Faithful, fluent sports reporting with a well-judged light Australian touch.",
+    "pre-fix-yarn": "Accurate and natural, slightly more idiom-heavy than the light brief.",
+    "dinkum-3": "Faithful and suitably light, with a small repetitive transition."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "flow": [
+      [
+        "current",
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ],
+    "variety": [
+      [
+        "current"
+      ],
+      [
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ]
+  }
+}

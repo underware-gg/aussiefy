@@ -1,0 +1,144 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "pre-fix-yarn": "A",
+    "current": "B",
+    "dinkum-3": "C"
+  },
+  "scores": {
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 5,
+      "sense": 4,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "pre-fix-yarn": {
+      "meaning": "\"gave everyone a transparent, public way\" adds an unrestricted everyone to a distribution mechanism governed by eligibility restrictions, though later eligibility conditions are retained.",
+      "sense": "\"up for grabs in the final period\" correctly conveys remaining available and \"set to open straight after\" retains scheduling rather than asserting actual opening.",
+      "authenticity": "\"done and dusted\", \"have a squiz\" and \"out of the blue\" sound natural rather than staged.",
+      "register": "\"spread FOLD a bit wider\", \"put their bids in\" and \"up for grabs\" give moderate level-3 connecting prose without altering protected terms.",
+      "tone": "\"Only use auction, claiming, verification, and support links\" keeps the safety instruction firm, and the original no-advice statement remains.",
+      "flow": "\"whichever is higher: the original floor price or\" makes the price mechanism easy to follow aloud.",
+      "variety": "\"up and running\", \"done and dusted\" and \"take the sting out\" vary the local language across the long FAQ.",
+      "essence": "\"Claiming and general FOLD transferability are two separate things.\" preserves the FAQ’s central distinction, chronology and safety emphasis."
+    },
+    "current": {
+      "meaning": "\"The aim was to spread distribution further\" retains purpose, while \"50% of proceeds were committed\" preserves commitment and all thresholds, dates and functions remain.",
+      "sense": "\"Claiming was due to open as soon as the auction closed.\" preserves the scheduled opening and \"whichever is higher\" preserves the price floor logic.",
+      "authenticity": "\"gives you the good oil\", \"had wrapped up\" and \"have a squiz\" are credible local idioms.",
+      "register": "\"put their bids in\", \"off the ground\" and \"There’s no telling\" give an appropriately moderate level-3 voice to eligible prose.",
+      "tone": "\"Getting through verification wasn’t a guarantee of eligibility or an allocation.\" keeps the qualification firm; safety and no-advice warnings retain force.",
+      "flow": "\"Claiming is one action; general FOLD transferability is another.\" is concise and easy to read aloud.",
+      "variety": "\"good oil\", \"wrapped up\", \"kicked in\" and \"cough up\" vary the language without repetitive filler.",
+      "essence": "\"The minimum price may go up in later periods. It doesn’t drop below\" preserves the unusual auction mechanics and the full FAQ structure."
+    },
+    "dinkum-3": {
+      "meaning": "\"Getting through verification didn't guarantee you eligibility or an allocation\" retains the key limitation; exact dates, amounts, timestamps and claim distinction remain.",
+      "sense": "\"50% of proceeds were locked in\" can suggest actual locking of funds, stronger and more technical than a commitment to support.",
+      "authenticity": "\"done and dusted\", \"got in on\" and \"a leg-up\" are natural local constructions.",
+      "register": "\"Nah, nah.\", \"mind.\" and \"Not ever.\" add performed emphasis and tails beyond the empty-garnish contract, although the body has ample level-3 voice.",
+      "tone": "\"Stick to auction, claiming, verification, and support links\" and \"and only those.\" preserve a firm safety instruction; the no-advice provision remains clear.",
+      "flow": "\"For each following period, the minimum price is whichever's higher\" turns the technical condition into smooth speech.",
+      "variety": "\"a leg-up\", \"up for grabs\" and \"jumping in\" give a varied vocabulary.",
+      "essence": "\"Claiming and general FOLD transferability are two different things.\" keeps the central distinction, while headings, chronology and disclaimer structure remain recognisable."
+    }
+  },
+  "problems": {
+    "pre-fix-yarn": [
+      {
+        "quote": "gave everyone a transparent, public way",
+        "original": "gave a transparent, public mechanism",
+        "severity": "minor",
+        "why": "Everyone overgeneralises access in a document where participation is explicitly restricted; later eligibility text limits but does not justify the added universal."
+      }
+    ],
+    "current": [],
+    "dinkum-3": [
+      {
+        "quote": "50% of proceeds were locked in for long-term on-chain liquidity support.",
+        "original": "50% of proceeds were committed to long-term on-chain liquidity support.",
+        "severity": "minor",
+        "why": "Locked in can imply a fund-locking mechanism rather than the stated allocation commitment; technical financial prose needs the precise commitment sense."
+      },
+      {
+        "quote": "Not ever.",
+        "original": "",
+        "severity": "minor",
+        "why": "Adds a separate emphatic tail despite empty garnish; mind and Nah, nah similarly introduce a small amount of performed emphasis."
+      }
+    ]
+  },
+  "summaries": {
+    "pre-fix-yarn": "Natural moderate vernacular with the mechanics intact; one unnecessary universal blurs restricted access.",
+    "current": "Precise, fluent and naturally moderate; conditions, technical distinctions and warning force survive.",
+    "dinkum-3": "Fluent and complete, with an imprecise commitment expression and a little prohibited emphatic garnish."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "flow": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "variety": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "essence": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ]
+  }
+}

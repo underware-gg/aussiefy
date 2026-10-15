@@ -1,0 +1,138 @@
+{
+  "ok": true,
+  "level": 3,
+  "level_name": "local",
+  "vulgarity": 1,
+  "vulgarity_name": "dad",
+  "policy_warnings": [],
+  "profile_config": {
+    "substitution": {
+      "lexical": 0.7,
+      "phrase": 0.7,
+      "idiom": 0.6
+    },
+    "frames": [
+      "np",
+      "adj",
+      "adv",
+      "interjection",
+      "imperative",
+      "predicate_adj",
+      "vp",
+      "clause"
+    ],
+    "garnish": {
+      "connective": 0.0,
+      "opener": 0.0,
+      "tag": 0.0,
+      "aside": 0.0,
+      "tail": 0.0,
+      "closer": 0.0,
+      "riff": 0.0
+    },
+    "max_garnish": {
+      "connective": 99,
+      "opener": 2,
+      "tag": 2,
+      "aside": 99,
+      "tail": 99,
+      "closer": 1,
+      "riff": 1
+    },
+    "garnish_gap": 1,
+    "garnish_per_sentence": 1,
+    "rewrite": {
+      "min_level": 3,
+      "min_words": 6,
+      "min_formal_words": 2,
+      "max_coverage": 0.1,
+      "formal_length": 7
+    },
+    "stack": 0.0,
+    "phonetic": 0.0,
+    "stretch": [
+      3,
+      5
+    ],
+    "swearing": {
+      "exclaim": 0.06,
+      "closer": 0.12,
+      "infix": 0.5,
+      "lean": 1.0
+    }
+  },
+  "document_type": "news",
+  "document_type_source": "preset",
+  "genre": "news",
+  "genre_scores": {},
+  "document_config": {
+    "formal_to_rework": true,
+    "person_swears": false,
+    "keep_quotes": true,
+    "guidance": "News or a notice: a local reporter's Aussie. Keep every fact, name, number, date and quote; quoted speech and official statements stay as said. An obituary is respectful.",
+    "term_domains": [
+      "news"
+    ],
+    "command_context": false,
+    "dateline_context": true,
+    "check_length": true,
+    "garnish": [],
+    "openings": false,
+    "draft": true,
+    "keep_share": 0.6,
+    "max_length": 1.6,
+    "perform": false,
+    "embellishment_guidance": "Dinkum: retell it in a genuine Aussie voice. Rephrase freely so each sentence sounds said, not translated; the odd opener, connective or tag-on where a talker would use one; the original's points in its order. Colour hangs off what's there: no new scenes, asides or punchlines. Where the genre keeps its form exact (a notice, a doc, official prose), the voice goes into everything around what's kept: say the connecting prose the way a local would explain it to a mate, at the level's weight, not in the original's officialese with a word or two swapped. What's kept includes the force of what it says: an obligation, a decision, a finding or a stated aim keeps its verb's weight (\"we consider you responsible\" isn't \"we reckon\"; \"reaffirmed\" isn't \"doubled down\"; a goal isn't \"while they're at it\")."
+  },
+  "document_overrides": {},
+  "counts": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0
+  },
+  "problems": [
+    {
+      "severity": "info",
+      "kind": "untouched",
+      "phrase": "\"Partnership with state surveys helps accomplish national goals like mapping the critical minerals the U.S. needs.",
+      "why": "left exactly as it was",
+      "sentence": 4
+    },
+    {
+      "severity": "info",
+      "kind": "untouched",
+      "phrase": "The California Geological Survey is helping with the work of the nation—and adding to state knowledge crucial to water r",
+      "why": "left exactly as it was",
+      "sentence": 5
+    },
+    {
+      "severity": "info",
+      "kind": "untouched",
+      "phrase": "\"Earth MRI datasets are a coordinated federal-state partnership to collect modern data in priority regions of the state,",
+      "why": "left exactly as it was",
+      "sentence": 6
+    },
+    {
+      "severity": "info",
+      "kind": "untouched",
+      "phrase": "This 2026 airborne geophysical survey is of significant scale and in an area that has been a focus for some years,\" said",
+      "why": "left exactly as it was",
+      "sentence": 7
+    },
+    {
+      "severity": "info",
+      "kind": "untouched",
+      "phrase": "Potential critical minerals and related commodities include antimony, arsenic, beryllium, bismuth, boron, copper, fluori",
+      "why": "left exactly as it was",
+      "sentence": 9
+    }
+  ],
+  "metrics": {
+    "original_words": 549,
+    "translation_words": 547,
+    "sentences": 22,
+    "translation_sentences": 25,
+    "untouched_share": 0.23
+  },
+  "scope": "Deterministic checks: policy, spelling, facts, markup, sentence structure. Not judged: tone, flow, whether each swap took the right sense (use the judge for those)."
+}

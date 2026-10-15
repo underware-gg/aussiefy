@@ -1,0 +1,158 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "dinkum-3": "B",
+    "pre-fix-yarn": "C"
+  },
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 4,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"The Library of Congress recognised that song as a national treasure in 1997\" retains the designation and date, with the biography and death circumstances intact.",
+      "sense": "\"gave a range of other groups a burl\" aptly renders exploring other musical groups.",
+      "authenticity": "\"He did some of his schooling in Colorado\" and \"got behind causes\" are natural local conversational prose.",
+      "register": "\"American muso\", \"a burl\" and \"Away from the gigs\" give a moderate level-3 voice without prohibited garnish or swearing.",
+      "tone": "\"died surrounded by loved ones\" keeps the death respectful while the career remains warmly reported.",
+      "flow": "\"He took up guitar at 13 and found his way into the local bluegrass scene\" reads smoothly aloud.",
+      "variety": "\"got a regular run\", \"branched out\" and \"in the thick of\" vary the phrasing without repeated tags.",
+      "essence": "\"co-owning Sweetwater Music Hall in Mill Valley, California\" preserves the distinctive local involvement and chronological career shape."
+    },
+    "dinkum-3": {
+      "meaning": "\"a fixture at every Grateful Dead gig\" changes a concert staple into a claim about every show; the remaining biographical detail survives.",
+      "sense": "\"with a stint at school in Colorado\" and \"kept his hand in\" use idioms in fitting senses.",
+      "authenticity": "\"played in a fair few other groups\" and \"local musos\" sound comfortably Australian.",
+      "register": "\"had a crack at everything\" alongside conversational sentences supplies the requested moderate Australian weight.",
+      "tone": "\"has died surrounded by loved ones\" retains a respectful obituary voice.",
+      "flow": "\"He was born Robert Hall Parber on 16 October 1947\" leads cleanly into the schooling and musical history.",
+      "variety": "\"starting up\", \"fair few\", \"had a crack\" and \"kept his hand in\" provide varied body phrasing.",
+      "essence": "\"including the Grateful Dead anthem \"Truckin'\"\" retains the career landmarks and emphasis on collaborative music."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"a fixture at every Grateful Dead concert\" overstates frequency, and \"an online platform for live shows\" narrows the original virtual performance platform.",
+      "sense": "\"had a crack at a solo career\" and \"a whole swag of other bands\" use Australian terms coherently.",
+      "authenticity": "\"with a stint at school in Colorado\" and \"people doing it tough\" are idiomatic, unforced Australian expressions.",
+      "register": "\"for yonks\", \"a fair few\" and \"a whole swag\" supply a clear level-3 Australian voice without swearing or added routines.",
+      "tone": "\"The old Grateful Dead guitarist\" and \"for yonks\" make the obituary slightly more breezy than its respectful source.",
+      "flow": "\"He picked up the guitar at 13 and found his way into the local bluegrass scene\" has a fluent spoken cadence.",
+      "variety": "\"all sorts of bands\", \"had a crack\" and \"doing it tough\" offer variety without habitual openers or tags.",
+      "essence": "\"Kingfish, Bobby and the Midnites, RatDog, Furthur\" preserves the distinctive career catalogue within the same life-story structure."
+    }
+  },
+  "problems": {
+    "current": [],
+    "dinkum-3": [
+      {
+        "quote": "a fixture at every Grateful Dead gig",
+        "original": "a staple of Grateful Dead concerts",
+        "severity": "minor",
+        "why": "Every asserts universal performance where the original only says the song was a staple."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "a fixture at every Grateful Dead concert",
+        "original": "a staple of Grateful Dead concerts",
+        "severity": "minor",
+        "why": "Every adds a universal frequency claim."
+      },
+      {
+        "quote": "an online platform for live shows",
+        "original": "a virtual performance platform",
+        "severity": "minor",
+        "why": "Online live shows is a narrower description than virtual performance."
+      },
+      {
+        "quote": "helping people doing it tough",
+        "original": "poverty relief",
+        "severity": "minor",
+        "why": "This broadens the named political cause beyond poverty relief."
+      },
+      {
+        "quote": "The old Grateful Dead guitarist",
+        "original": "The former guitarist and vocalist of the rock band Grateful Dead",
+        "severity": "minor",
+        "why": "Old is breezier and potentially age-focused in a respectful obituary."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "A fluent, respectful level-3 retelling with the factual detail preserved.",
+    "dinkum-3": "Natural and respectful, with one small factual overstatement.",
+    "pre-fix-yarn": "Fluent and recognisable, but slightly breezier and less exact in a few details."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ],
+    "flow": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ]
+  }
+}
