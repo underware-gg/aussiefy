@@ -5,6 +5,9 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Prevent adjacent-sentence reuse from producing yarn moved-phrase false warnings; keep broader fidelity alignment.
+- Read lint's drawl comparison from dictionary annotations, recognise known swaps in capitalised phrases and pin strict-preset/name behaviour.
+
 - Lookup recognises filled pronoun slots, confines inflection to grammatical heads and excludes unrelated
   model suggestions after a complete slot parse. Negated model matches need a shared content anchor.
 

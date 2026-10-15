@@ -65,26 +65,31 @@
 - id: dont-know-dunno
   match: "(?i)\\b(?:don't|do not) know\\b"
   replace: "dunno"
+  reads_as: do not know
   prob: 0.7
   min_level: 5
 - id: because-cause
   match: "(?i)\\bbecause\\b"
   replace: "'cause"
+  reads_as: because
   prob: 0.7
   min_level: 5
 - id: probably-probly
   match: "(?i)\\bprobably\\b"
   replace: "prob'ly"
+  reads_as: probably
   prob: 0.7
   min_level: 5
 - id: alright-orright
   match: "(?i)\\b(?:all right|alright)\\b"
   replace: "orright"
+  reads_as: alright
   prob: 0.6
   min_level: 5
 - id: australia-straya
   match: "\\bAustralia\\b"
   replace: "Straya"
+  reads_as: australia
   prob: 0.7
   min_level: 5
 - id: something-nothing
@@ -95,6 +100,7 @@
 - id: a-lot-of-lotta
   match: "(?i)\\ba lot of\\b"
   replace: "a lotta"
+  reads_as: a lot of
   prob: 0.6
   min_level: 5
 
@@ -102,43 +108,51 @@
 - id: youre-yer
   match: "(?i)\\byou['’]re\\b"
   replace: "yer"
+  reads_as: your
   prob: 0.9
   min_level: 5
 - id: your-yer
   match: "(?i)\\byour\\b"
   replace: "yer"
+  reads_as: your
   prob: 0.9
   min_level: 5
   dialogue_prob: 1.0
 - id: yourself-yerself
   match: "(?i)\\byourself\\b"
   replace: "yerself"
+  reads_as: yourself
   prob: 0.8
   min_level: 5
 - id: you-ya
   match: "(?i)\\byou\\b(?!['’])"
   replace: "ya"
+  reads_as: you
   prob: 0.75
   min_level: 5
   dialogue_prob: 0.95
 - id: going-to-gonna
   match: "(?i)\\bgoing to\\b(?= (?!(?:the|a|an|my|your|his|her|our|their|this|that|bed|work|school|church|town|uni|be)\\b)[a-z])"
   replace: "gonna"
+  reads_as: going to
   prob: 0.8
   min_level: 5
 - id: want-to-wanna
   match: "(?i)\\bwant to\\b"
   replace: "wanna"
+  reads_as: want to
   prob: 0.6
   min_level: 5
 - id: got-to-gotta
   match: "(?i)\\bgot to\\b"
   replace: "gotta"
+  reads_as: got to
   prob: 0.6
   min_level: 5
 - id: and-n
   match: "(?<=[A-Za-z])\\s+and\\s+(?=[a-z])"
   replace: "'n "
+  reads_as: and
   prob: 0.35
   min_level: 5
   dialogue_prob: 0.5
@@ -146,11 +160,13 @@
 - id: have-ave
   match: "(?i)\\bhave\\b(?! to\\b)"
   replace: "'ave"
+  reads_as: have
   prob: 0.4
   min_level: 5
 - id: them-em
   match: "(?i)\\bthem\\b"
   replace: "'em"
+  reads_as: them
   prob: 0.5
   min_level: 5
   dialogue_prob: 0.8
@@ -163,6 +179,7 @@
 - id: my-me
   match: "(?i)\\bmy\\b(?! oath)"
   replace: "me"
+  reads_as: my
   prob: 0.35
   min_level: 5
   dialogue_prob: 0.85
@@ -175,11 +192,13 @@
 - id: kind-of-kinda
   match: "(?i)\\bkind of\\b"
   replace: "kinda"
+  reads_as: kind of
   prob: 0.6
   min_level: 5
 - id: out-of-outta
   match: "(?i)\\bout of\\b"
   replace: "outta"
+  reads_as: out of
   prob: 0.4
   min_level: 5
 
@@ -373,6 +392,7 @@
 - id: ought-to-oughta
   match: "(?i)\\bought to\\b"
   replace: "oughta"
+  reads_as: ought to
   prob: 0.7
   min_level: 5
 

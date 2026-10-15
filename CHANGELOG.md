@@ -9,6 +9,9 @@ Add changes under [Unreleased] Jeez Louise, as they land; `python scripts/promot
 
 ## [Unreleased]
 
+- Stone the crows, Prevent adjacent\-sentence reuse from producing yarn moved\-phrase false warnings; keep broader fidelity alignment.
+- Bloody hell, Read lint's drawl comparison from dictionary annotations, recognise known swaps in capitalised phrases'n pin strict\-preset/name behaviour.
+
 - Lookup recognises filled pronoun slots, confines inflection to grammatical heads'n excludes unrelated
   model suggestions after a complete slot parse. Negated model matches need a shared content anchor.
 

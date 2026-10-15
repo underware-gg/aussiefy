@@ -81,3 +81,14 @@ Inflection applies to a noun's head or a verb phrase's head verb, not every word
 does not become a drinks noun. Negated model queries also need a shared content anchor with the candidate
 meaning; “harmless” is not evidence for “not acceptable”. Conservative filtering may return no result rather
 than an unreliable suggestion. These checks do not make the meaning model a general word-sense classifier.
+
+### Phrase location and fidelity
+
+Yarn's moved-phrase check compares a planned spot with one counterpart sentence, preferring its expected
+position when lexical scores tie. This prevents nearby sentences from collectively claiming a correctly
+placed phrase. The broader verification alignment still permits up to three sentences for splits and merges.
+Both are lexical heuristics; a substantially rewritten sentence may need the writer's explicit review.
+
+Lint compares refrains through the dictionary's drawl annotations. Reviewed whole-phrase `name_aliases` in
+`grammar.yaml` can excuse a known capitalised common phrase, such as `Christmas Trees` becoming `Chrissy trees`.
+Aliases are explicit: neither `John Woods` nor `Christmas Island` is inferred from its individual words.

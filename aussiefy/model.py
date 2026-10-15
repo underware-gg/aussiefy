@@ -15,6 +15,7 @@ from .dialect import DialectTable
 from .matcher import Pattern, PatternIndex
 from .schema import Concept, Entry
 from .text import COMMON_STARTERS
+from .terms import fold
 
 
 def swear_strength(swears: dict[str, int], word: str) -> int:
@@ -87,6 +88,7 @@ class PhoneticRule:
     vulgarity: int = 0          # respects the policy's vulgarity ("bloody well" is 1)
     kind: str = "drawl"         # drawl (scaled by the level's `phonetic`) | spelling (always, from min_level)
     dialogue_prob: float | None = None  # probability inside quoted speech, which drawls broader than narration
+    reads_as: str | None = None         # canonical wording for lint's refrain comparison; literal drawl only
 
 
 @dataclass
@@ -108,6 +110,7 @@ class Dictionary:
     pos_words: frozenset[str] = frozenset()
     person_roles: frozenset[str] = frozenset()
     adjective_nouns: dict[str, frozenset[str]] = field(default_factory=dict)
+    name_aliases: dict[str, tuple[str, ...]] = field(default_factory=dict)
 
     def swear_strength(self, word: str) -> int:
         """How strong a swear a word is (0 for none), dropped g and plurals read as the listed word."""
@@ -136,6 +139,10 @@ class Dictionary:
     @cached_property
     def person_concepts(self) -> frozenset[str]:
         return frozenset(c.id for c in self.concepts.values() if c.person)
+
+    @cached_property
+    def drawl_readings(self) -> dict[str, str]:
+        return {fold(r.replace): r.reads_as for r in self.phonetic if r.reads_as is not None}
 
     @cached_property
     def us_spellings(self) -> dict[str, re.Pattern]:

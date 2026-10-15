@@ -232,7 +232,7 @@ def _moved(session: "YarnSession", text: str, kept: list[str]) -> list[tuple[str
     told = mask(text, session.markup).prose()
     src = sentence_spans(source)   # as verify aligns them
     yarned = [fold(told[a:b]) for a, b in sentence_spans(told)]
-    found = counterparts([source[a:b] for a, b in src], yarned)
+    found = counterparts([source[a:b] for a, b in src], yarned, max_sentences=1)
 
     def window(at: int) -> str | None:
         i = next((n for n, (a, b) in enumerate(src) if a <= at < b), None)

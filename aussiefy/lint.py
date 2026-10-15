@@ -142,7 +142,7 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     # a refrain the translation repeats is fine where the original repeats it too, said in Australian
     refrains = (_in_australian(original, d, read_english, genre) if original is not None and dial != "none"
                 else original)
-    warnings += _repeated_phrases(text, refrains, covered)
+    warnings += _repeated_phrases(text, refrains, d.drawl_readings, covered)
     issues += changed
     if original is not None:
         warnings += fidelity(text, original, check_length=read_as.policy.check_length, max_length=read_as.setting(pol.embellishment).max_length,
@@ -228,19 +228,19 @@ FUNCTION_WORDS = frozenset("""a an the of to in on at and or but is are was were
 that this for with his her their my your our me him them us as by from so not no do does did have has had will
 would can could just there here what it's don't i'm that's isn't wasn't didn't can't won't i'll you're they're
 he's she's we're there's""".split())
-# the drawl's respellings, read back as the words they stand for, so a respelt refrain is the same refrain
-DRAWL = {"ya": "you", "yer": "your", "me": "my", "'n": "and", "n'": "and", "'em": "them", "outta": "out of",
-         "gonna": "going to"}
 
 
-def _phrase_words(t: str) -> list[list[str]]:
-    """Each sentence's words, folded, with the drawl read back ("ridin'" -> riding, "ya" -> you)."""
+def _phrase_words(t: str, drawl: dict[str, str]) -> list[list[str]]:
+    """Each sentence's words, with literal drawl read through its dictionary annotations."""
+    alternatives = [("" if word.startswith("'") else r"(?<![a-z'])") + re.escape(word) + r"(?![a-z'])"
+                    for word in sorted(drawl, key=len, reverse=True)]
     out = []
     for sent in re.split(r"(?<=[.!?])\s+|\n\s*\n", fold(t)):
+        if alternatives:
+            sent = re.sub("|".join(alternatives), lambda m: " " + drawl[m[0]] + " ", sent)
         words = []
         for w in re.findall(r"[a-z']+", sent):
-            w = DRAWL.get(w, w)
-            w = "per cent" if w == "percent" else w   # the Australian spelling of the original's word
+            w = "per cent" if w == "percent" else w
             words += (w[:-1] + "g" if w.endswith("in'") else w).split()
         out.append(words)
     return out
@@ -277,7 +277,7 @@ _CONVERSION = re.compile(r"\(\s*(?:about|around|roughly|approx\.?|nearly|over|un
                          r"\s*(?:°\s*[CF]\b|[CF]\b|[a-zµ]+)[^()]*\)")
 
 
-def _repeated_phrases(text: str, original: str | None, covered: set[str] = frozenset(),
+def _repeated_phrases(text: str, original: str | None, drawl: dict[str, str], covered: set[str] = frozenset(),
                       most: int = 5) -> list[dict[str, Any]]:
     """A phrase of three to six words said three times or more where the original doesn't repeat it: a tic the
     dictionary doesn't know ("has a go at you" four times). Measured against the original only: its own
@@ -286,8 +286,8 @@ def _repeated_phrases(text: str, original: str | None, covered: set[str] = froze
     or". Overlapping windows of one repeat are reported once, as the longest."""
     if original is None:
         return []
-    mine = _grams(_phrase_words(_CONVERSION.sub(" ", text)))
-    theirs = _grams(_phrase_words(_CONVERSION.sub(" ", original)))
+    mine = _grams(_phrase_words(_CONVERSION.sub(" ", text), drawl))
+    theirs = _grams(_phrase_words(_CONVERSION.sub(" ", original), drawl))
     refrains = [set(g.split()) - FUNCTION_WORDS for g, at in theirs.items() if len(at) >= 3]
     claimed: set[tuple[int, int]] = set()
     out = []
@@ -365,7 +365,8 @@ def fidelity(text: str, original: str, *, max_length: float | None = None, check
     for name in sorted(orig_names):
         word = _same_name(name.lower().rstrip("."))
         short = [k for k, v in DATE_WORDS.items() if v == word]
-        if " ".join(word.split()) in flat or DATE_WORDS.get(word, "\0") in flat \
+        if " ".join(word.split()) in flat or _dictionary_name_kept(name, flat, tr.dictionary) \
+                or DATE_WORDS.get(word, "\0") in flat \
                 or any(re.search(rf"\b{k.title()}\.|(?<=[\w,;] ){k.title()}\b", text) for k in short):
             continue   # kept, or a date localised ("Oct. 11" -> "11 October", "Monday" -> "Mon")
         out.append({"kind": "name_dropped", "phrase": name,
@@ -383,6 +384,12 @@ def fidelity(text: str, original: str, *, max_length: float | None = None, check
             out.append({"kind": "name_added", "phrase": name,
                         "why": "a name not in the original: is it a deliberate local swap or invented content?"})
     return out
+
+
+def _dictionary_name_kept(name: str, flat: str, dictionary: Dictionary) -> bool:
+    """Only an explicitly reviewed whole-phrase alias excuses a changed capitalised phrase."""
+    return any(re.search(r"(?<!\w)" + re.escape(_same_name(alias)) + r"(?!\w)", flat)
+               for alias in dictionary.name_aliases.get(fold(name), ()))
 
 
 # what turns a place into its people or their adjective: Colombia -> Colombian, Europe -> European, New England

@@ -14,6 +14,7 @@ from typing import Any, Iterable
 import yaml
 
 from .errors import UserError
+from .terms import fold
 from . import pos
 from .dialect import parse_dialect
 from .genre import GenreConfig
@@ -144,9 +145,9 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         errors.append(f"profiles.yaml must define levels 1-5, found {sorted(profiles)}")
 
     grammar = _read_optional(data / "grammar.yaml", errors, {})
-    person_roles, adjective_nouns = frozenset(), {}
-    if not isinstance(grammar, dict) or set(grammar) - {"person_nouns", "adjective_nouns"}:
-        errors.append("grammar.yaml: expected person_nouns and adjective_nouns")
+    person_roles, adjective_nouns, name_aliases = frozenset(), {}, {}
+    if not isinstance(grammar, dict) or set(grammar) - {"person_nouns", "adjective_nouns", "name_aliases"}:
+        errors.append("grammar.yaml: expected person_nouns, adjective_nouns and name_aliases")
     else:
         def words(raw, where):
             if not isinstance(raw, list) or any(not isinstance(w, str) or not re.fullmatch(r"[a-z]+", w) for w in raw):
@@ -160,14 +161,40 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         else:
             adjective_nouns = {w: words(ns, f"adjective_nouns.{w}") for w, ns in adjectives.items()}
 
+    aliases = grammar.get("name_aliases", {}) if isinstance(grammar, dict) else {}
+    if not isinstance(aliases, dict):
+        errors.append("grammar.yaml: name_aliases must map exact phrases to accepted wording lists")
+    else:
+        for phrase, variants in aliases.items():
+            if (not isinstance(phrase, str) or not phrase.strip() or not isinstance(variants, list)
+                    or not variants or any(not isinstance(v, str) or not v.strip() for v in variants)):
+                errors.append("grammar.yaml: name_aliases requires non-empty phrases and wording lists")
+            else:
+                name_aliases[fold(phrase)] = tuple(fold(v) for v in variants)
+
     phonetic: list[PhoneticRule] = []
+    readings = {}
+
     for raw in _read(data / "phonetic.yaml", errors, []):
         try:
+            if not isinstance(raw, dict):
+                raise TypeError("expected a mapping")
+            reading = raw.get("reads_as")
+            if reading is not None and (
+                    not isinstance(reading, str) or not re.fullmatch(r"[a-z]+(?:[ '][a-z]+)*", reading)
+                    or raw.get("kind", "drawl") != "drawl" or not isinstance(raw.get("replace"), str)
+                    or not re.fullmatch(r"[A-Za-z' ]+", raw["replace"]) or not raw["replace"].strip()):
+                raise ValueError("reads_as requires canonical lower-case words and a literal drawl replacement")
+            if reading is not None:
+                key = fold(raw["replace"])
+                if key in readings and readings[key] != reading:
+                    raise ValueError(f"reads_as conflicts for replacement {key!r}")
+                readings[key] = reading
             phonetic.append(PhoneticRule(raw["id"], re.compile(raw["match"]), raw["replace"],
                                          float(raw.get("prob", 1.0)), int(raw.get("min_level", 5)),
                                          raw.get("notes", ""), int(raw.get("vulgarity", 0)),
                                          raw.get("kind", "drawl"),
-                                         float(raw["dialogue_prob"]) if "dialogue_prob" in raw else None))
+                                         float(raw["dialogue_prob"]) if "dialogue_prob" in raw else None, reading))
         except (KeyError, TypeError, ValueError, re.error) as exc:
             errors.append(f"phonetic rule {raw!r}: {exc}")
 
@@ -274,7 +301,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
     if errors:
         raise SchemaError("dictionary failed validation:\n  " + "\n  ".join(errors))
     return Dictionary(entries, concepts, profiles, phonetic, prof_raw.get("policy", {}), patterns,
-                      PatternIndex(patterns), PatternIndex(forms), swears, dialect, warnings, swearing, genres, pos.lower_words(), person_roles, adjective_nouns)
+                      PatternIndex(patterns), PatternIndex(forms), swears, dialect, warnings, swearing, genres, pos.lower_words(), person_roles, adjective_nouns, name_aliases)
 
 
 def write_validated(data_dir: str | Path, files: dict[str, str], extra: Iterable[str | Path] = ()) -> Dictionary:

@@ -15,7 +15,7 @@ and the checks the loader runs. Well, how entries get into the dictionary is in 
 ```
 aussiefy/data/
   concepts.yaml        controlled concept vocabulary + plain-English trigger patterns per frame
-  grammar.yaml         editable person nouns and adjective/noun sense limits for the frame checker
+  grammar.yaml         editable person nouns, adjective/noun sense limits and reviewed name-comparison aliases for the frame checker
   profiles.yaml        level profiles 1-5, the swearing rates per vulgarity, and policy defaults
   phonetic.yaml        drawl: contractions (level 4+), respellings (level 5), swear infixes (by vulgarity),
                        and Australian spelling (kind: spelling)
@@ -146,3 +146,25 @@ engine selects a compatible singular alternative rather than introducing “is m
 
 Stone the flamin' crows, Similarity fallback covers slot\-free predicate patterns with a fixed literal shape. Well, Optional\-word patterns
 Stone the crows, remain supported by exact trigger matching; they aren't guessed through similarity.
+
+## Drawl comparison
+
+A literal drawl rule may declare `reads_as`, its canonical wording for lint's refrain comparison:
+
+```yaml
+- id: want-to-wanna
+  match: "(?i)\\bwant to\\b"
+  replace: wanna
+  reads_as: want to
+  prob: 0.6
+  min_level: 5
+```
+
+Lint reads these annotations from the loaded dictionary, including custom data. This is a comparison spelling,
+not a grammatical inverse: ambiguous `yer` is consistently read as `your`. Group-reference replacements and
+spelling rules cannot declare `reads_as`. Dropped-g words are also normalised during comparison.
+
+`grammar.yaml` may declare `name_aliases`, a mapping of exact original phrases to accepted comparison wordings.
+These only affect lint fidelity, never translation. Keep them narrowly reviewed: a capitalised common phrase
+such as `Christmas Trees` can have `Chrissy trees` as an alias without exempting `Christmas Island` or words
+inside a person's name. Changed names without an explicit alias retain their warnings.
