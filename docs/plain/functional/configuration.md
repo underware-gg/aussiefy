@@ -3,6 +3,10 @@
 aussiefy needs no configuration for its core: the dials are passed per call, and the dictionary is built in.
 These are the settings, files and caches it does read or write.
 
+Per-request advanced tuning uses `document_config.profile` on every document operation. Omitted settings
+inherit level/vulgarity defaults; explicit probabilities, limits, spacing, drawl, swearing and rewrite
+thresholds apply only to that request. See [translation controls](translation-controls.md#advanced-profile-tuning).
+
 ## Environment
 
 | Variable | Used by | Meaning |
@@ -44,3 +48,4 @@ Behaviour that is tuned rather than coded lives in `aussiefy/data/profiles.yaml`
 probabilities, frames, registers, garnish and drawl; the `swearing:` rates per vulgarity; and the `rewrite:`
 thresholds for what counts as a difficult sentence. The [dictionary](dictionary.md) page lists the other data
 files.
+Request overrides leave these files unchanged. JSON `profile_config` reports the resolved numeric settings.

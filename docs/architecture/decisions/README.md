@@ -45,6 +45,7 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 | [DD-018](dd-018-checked-pr-release-promotion.md) | Checked GitHub PR promotion, exact-head CI and resumable reconciliation | Accepted |
 | [DD-019](dd-019-explicit-composable-document-policy.md) | General by default, opt-in detection and exact composable document behaviour overrides | Accepted |
 | [DD-020](dd-020-document-composition-state.md) | Share document choices and garnish limits while preserving Markdown source units | Accepted |
+| [DD-021](dd-021-request-local-profile-overrides.md) | Inherit and override request-local engine profiles consistently across document operations | Accepted |
 
 ## By topic
 

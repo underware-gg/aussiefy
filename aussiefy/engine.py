@@ -151,9 +151,10 @@ class Result:
     embellishment: Embellishment | None = None   # the garnish it took
 
     variety: int = 0
+    profile_config: dict[str, Any] = field(default_factory=dict)
 
     def envelope(self) -> dict[str, Any]:
-        return envelope(self.level, self.vulgarity, self.warnings)
+        return {**envelope(self.level, self.vulgarity, self.warnings), "profile_config": self.profile_config}
 
     def sentence_text(self, i: int) -> str:
         return self.source[slice(*self.sentences[i])]
@@ -316,7 +317,8 @@ class Translator:
                       deterministic_text=final, rewrites=run.rewrites, difficult=run.difficult,
                       vulgarity=run.eff.vulgarity, mood=run.mood, genre=run.genre,
                       sentences=[(s[0].start, s[-1].end) for s in sents], dialect=run.dialect,
-                      english=run.english, embellishment=run.embellishment, variety=pol.variety)
+                      english=run.english, embellishment=run.embellishment, variety=pol.variety,
+                      profile_config=run.eff.envelope()["profile_config"])
 
     # -- stages -------------------------------------------------------------------------
 
@@ -444,13 +446,17 @@ class Translator:
         p = eff.profile.garnish.get("riff", 0)
         ends_clause = end >= len(toks) or toks[end].is_punct and toks[end].text not in ("'", "-")
         before_and = choice.entry.frame == "np" and end < len(toks) and toks[end].norm == "and"
+        ordinal = sent.index + (run.composition.first_sentence if run.composition is not None else 0)
+        last = state.last_placed.get("riff")
         if not (riffs and p > 0 and (ends_clause or before_and) and len(state.riffed) < eff.profile.limit("riff")
                 and choice.entry.id not in state.riffed and sent.key not in state.riffed_sentences
+                and (last is None or ordinal - last > eff.profile.garnish_gap)
                 and roll(run.pol.seed, "riff", *sent.key, det.start) < p):
             return ""
         rec.riff = pick_riff(riffs, run.mood, roll(run.pol.seed, "riff-pick", *sent.key, det.start)).text
         state.riffed.add(choice.entry.id)
         state.riffed_sentences.add(sent.key)
+        state.last_placed["riff"] = ordinal
         return ", " + rec.riff + ("," if before_and and not ends_clause else "")
 
     def _rewrite(self, sent: "_Sentence", out: str, recs: list[SubstitutionRecord], run: "_Run", rewriter: Rewriter,
@@ -475,7 +481,7 @@ class Translator:
                                              or run.composition.quiet)):
             return joined
         if (not sents or run.masked.quiet_at(sents[-1][0].start) or run.is_held(sents[-1])
-                or not run.embellishment.takes("closer")):
+                or not run.embellishment.takes("closer") or run.eff.profile.limit("closer") == 0):
             return joined     # a text that ends in a table has nowhere to say it; a notice has no punchline
         contexts = sentence_contexts(sents[-1])
         for swear, p, key in ((True, run.eff.swearing.closer, "swear-closer"),
@@ -501,9 +507,13 @@ class Translator:
         if not run.embellishment.takes("tail"):
             return out
         state = run.state
+        ordinal = sent.index + (run.composition.first_sentence if run.composition is not None else 0)
+        last = state.last_placed.get("tail")
+        if last is not None and ordinal - last <= run.eff.profile.garnish_gap:
+            return out
         for swear, p in ((False, run.eff.profile.garnish.get("tail", 0)), (True, run.eff.swearing.exclaim)):
             key = ("swear" if swear else "") + "tail"
-            if p <= 0 or state.placed[key] >= run.eff.profile.limit("tail") or not ends_in_list(out):
+            if p <= 0 or state.placed["tail"] >= run.eff.profile.limit("tail") or not ends_in_list(out):
                 continue
             r = roll(run.pol.seed, "garnish", key, *sent.key)
             if r >= p:
@@ -514,7 +524,8 @@ class Translator:
             if entry:
                 out = add_tail(out, form)
                 state.garnish_uses[entry.id] += 1
-                state.placed[key] += 1
+                state.placed["tail"] += 1
+                state.last_placed["tail"] = ordinal
             run.garnish.append(GarnishRecord.rolled("tail", sent.index, entry, form, r, p, rej))
             if entry:
                 break
@@ -579,7 +590,8 @@ class Translator:
         level_rates = {p: eff.profile.garnish.get(p, 0) for p in ("connective", "aside", "opener", "tag")}
         out = self._garnish_channel(out, sent, run, g, level_rates, eff.profile.garnish_per_sentence, swear=False)
         swear_rates = {p: eff.swearing.exclaim for p in ("aside", "opener", "tag")}
-        return self._garnish_channel(out, sent, run, g, swear_rates, 1, swear=True)
+        return self._garnish_channel(out, sent, run, g, swear_rates,
+                                     max(0, eff.profile.garnish_per_sentence - len(g.placed)), swear=True)
 
     def _garnish_channel(self, out: str, sent: "_Sentence", run: "_Run", g: "_GarnishSpot",
                          rates: dict[str, float], budget: int, swear: bool) -> str:
@@ -604,7 +616,7 @@ class Translator:
             if placement != "aside" and (run.chant or placement == "opener" and "fragment" in g.contexts):
                 continue  # "Jeez Louise, Nightmare of Moloch!": openers and tag-ons break a chant
             key = channel + placement
-            if state.placed[key] >= eff.profile.limit(placement):
+            if state.placed[placement] >= eff.profile.limit(placement):
                 continue
             last = state.last_placed.get(placement)   # spacing is per placement, across both channels
             if last is not None and ordinal - last <= eff.profile.garnish_gap:
@@ -633,7 +645,7 @@ class Translator:
                     state.garnish_uses[entry.id] += 1
                 else:
                     state.connectives[entry.id] = ordinal
-                state.placed[key] += 1
+                state.placed[placement] += 1
                 state.last_placed[placement] = ordinal
                 g.placed.add(placement)
                 spent += 1

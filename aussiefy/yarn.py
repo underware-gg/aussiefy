@@ -213,6 +213,7 @@ def brief(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | st
                "EMBELLISHMENT": {"name": setting.name, "guidance": setting.guidance},
                "GENRE": {"name": the_plan["genre"], "guidance": the_plan["guidance"]["genre"]},
                "DOCUMENT_CONFIG": the_plan["document_config"],
+               "PROFILE_CONFIG": the_plan["profile_config"],
                **({"ENGINE_DRAFT": the_plan["draft"]} if setting.draft else {}),
                "PLANNED_PHRASES": list(phrases.values()), "RIFFS": the_plan["riffs"],
                "OPENINGS": the_plan["openings"], "DIFFICULT_SENTENCES": the_plan["difficult_sentences"]}

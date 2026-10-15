@@ -20,6 +20,10 @@ Explicit embellishment always overrides that default.
 `custom` starts with optional document behaviours disabled. Choosing an embellishment alone does not enable
 its garnish, openings or performance for Custom; specify exactly what you want in `document_config`.
 Core vocabulary substitution, level, vulgarity limits and selected markup protection still apply.
+Neither General nor Custom requires a complete configuration. Omitted document settings inherit the selected
+type's values: General keeps normal optional behaviours, Custom keeps them off. Numeric engine settings in
+both cases start from the selected level and vulgarity profiles. Setting an opener probability alone does not
+enable the opener in Custom; also include `opener` in its `garnish` list.
 
 Every type accepts the same `document_config` object (`--document-config` takes JSON). Precedence is the
 selected preset, then explicit dials, then exact behaviour overrides. Lists replace inherited lists; `false`,
@@ -32,7 +36,7 @@ aussiefy translate "Read the API documentation." --document-type custom --docume
 
 | Setting | Values and effect |
 |---|---|
-| `garnish` | Exact list from `connective`, `opener`, `tag`, `aside`, `tail`, `closer`, `riff`, `infix`, `insult`; placement probabilities still come from the level/vulgarity profiles |
+| `garnish` | Exact list from `connective`, `opener`, `tag`, `aside`, `tail`, `closer`, `riff`, `infix`, `insult`; probabilities default to level/vulgarity profiles, with advanced tuning below |
 | `openings` | Boolean: offer talker's openings in a plan |
 | `person_swears` | Boolean: allow swear words to replace neutral descriptions of people, within the vulgarity limit |
 | `keep_quotes` | Boolean: preserve quoted wording |
@@ -47,6 +51,49 @@ aussiefy translate "Read the API documentation." --document-type custom --docume
 | `max_length` | Finite number at least 1: retelling length multiplier, plus the existing 20-word allowance |
 | `perform` | Boolean: include performance craft guidance |
 | `embellishment_guidance` | Text: replace embellishment guidance in the brief |
+| `profile` | Object: override engine probabilities, limits, spacing and thresholds; omitted keys inherit dial defaults |
+
+## Advanced profile tuning
+
+Every document type accepts the same `document_config.profile`. Map keys merge with the selected profile;
+lists replace it. `{}` inherits all numeric settings; `frames: []` disables vocabulary substitutions. JSON
+`null`, unknown keys, wrong types and out-of-range values are errors. The caller owns the coherence of valid
+combinations: a permitted garnish placement with probability zero remains off. Overrides do not change the
+shared dictionary or future calls. The ordinary level, vulgarity, seed, registers, regions, unlock, English,
+variety and embedder arguments keep their existing roles; these are not duplicated inside `profile`.
+
+| Profile setting | Values and effect |
+|---|---|
+| `substitution` | Map of `lexical`, `phrase`, `idiom` probabilities, each 0–1 |
+| `frames` | List from `predicate_adj`, `np`, `adj`, `adv`, `vp`, `clause`, `interjection`, `imperative`, `tag` |
+| `garnish` | Map of placement probabilities 0–1: `connective`, `opener`, `tag`, `aside`, `tail`, `closer`, `riff`; distinct from the outer placement allow-list |
+| `max_garnish` | Map of nonnegative integer per-document placement limits, combined across clean and swearing channels; a closer can occur at most once |
+| `garnish_gap` | Nonnegative integer source sentences that must pass before the same placement repeats, across channels and Markdown units |
+| `garnish_per_sentence` | Nonnegative integer combined budget for connectives, openers, asides and tags; tails, riffs and the document closer have their own placement limits |
+| `stack` | Probability 0–1 of stacking a second eligible descriptive idiom |
+| `phonetic` | Finite nonnegative multiplier on clean drawl; 0 disables drawl, while Australian spelling remains active |
+| `stretch` | Two positive integers `[minimum, maximum]` vowel repeats for stretchable garnish, in ascending order |
+| `swearing` | Object: `exclaim` and `closer` probabilities 0–1, plus finite nonnegative `infix` and `lean` multipliers; 0 disables that channel/weight, and vulgarity still caps eligibility |
+| `rewrite` | Object: integer `min_level` 1–5; nonnegative integer `min_words`, `min_formal_words`; positive integer `formal_length`; `max_coverage` 0–1; controls difficult-sentence detection and requested sentence rewrites |
+
+For flavour around exact technical wording, enable only suitable garnish, protect terminology and tune the
+rates independently. Sentence/markup grammar guards still apply, even at probability 1:
+
+```sh
+aussiefy translate 'The browser uses cookies. You are very tired.' --document-type custom --vulgarity nan --document-config '{"term_domains":["technical"],"garnish":["opener"],"profile":{"garnish":{"opener":1},"max_garnish":{"opener":1},"phonetic":0}}'
+```
+
+Each document operation reports a complete `profile_config`, including inherited probabilities, fallback
+limits, swearing rates and rewrite thresholds. Inspect the defaults with `aussiefy guide --json`, or inspect
+a translation/plan/check's JSON for the settings it actually used. Copy `profile_config` into
+`document_config.profile` to reuse that numeric configuration, alongside your chosen document behaviours.
+Explain reports include these settings too. Yarn briefs include `PROFILE_CONFIG`, and session tools retain
+the same immutable snapshot.
+
+Tests isolate [advanced profile behaviours](../../../tests/functional/test_profile_overrides.py), including
+zero/one probabilities, shared limits, spacing, drawl, swearing, rewrite dispatch, markup and surface parity.
+
+## Shared document contract
 
 All controls have the same names and meaning in Python, CLI, MCP and yarn sessions. Results and explain mode
 report the requested type, resolved type and effective behaviours. Auto resolves against the complete original,

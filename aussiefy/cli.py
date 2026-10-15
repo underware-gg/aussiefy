@@ -765,7 +765,8 @@ def build_parser() -> argparse.ArgumentParser:
     embellished.add_argument("--document-type", choices=DOCUMENT_TYPES, default="general",
                              help="document behaviour preset (default general); auto opts into detection; custom enables only configured behaviours")
     embellished.add_argument("--document-config", type=_document_json, metavar="JSON",
-                             help="exact behaviour overrides as a JSON object; lists replace preset lists")
+                             help="exact behaviour overrides as JSON; nested profile tunes rates, limits and spacing; "
+                                  "omitted keys inherit, lists replace")
     toolkit = [dictionary, policy, as_json]
     sub = p.add_subparsers(dest="command", required=True, metavar="COMMAND")
 

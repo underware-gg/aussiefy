@@ -142,7 +142,7 @@ def guide(*, level: int | str = 5, vulgarity: int | str | None = None, embellish
           translator: Translator | None = None) -> dict[str, Any]:
     """The voice, language limits and craft rules for a level and vulgarity, and the toolkit workflow."""
     tr = translator or default_translator()
-    eff = tr.effective(level=level, vulgarity=vulgarity)
+    eff = tr.effective(level=level, vulgarity=vulgarity, document_config=document_config)
     data = style_guide_data()
     pol = tr.policy(embellishment=embellishment, document_type=document_type, document_config=document_config)
     context = resolve_document(None, config=tr.dictionary.genres, document_type=pol.document_type,

@@ -5,6 +5,12 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Tune request-local profile probabilities, frames, limits, spacing, drawl, swearing and rewrite thresholds
+  through `document_config.profile` on every document surface; expose complete reusable `profile_config`.
+  Omitted keys inherit dial defaults for both General and Custom. Combined garnish budgets/limits now cover
+  clean and swearing channels, and zero swear weighting excludes candidates even without clean alternatives.
+  Isolated behaviour tests cover flavour alongside technical and markup protection.
+
 - Share Markdown document choices, garnish limits and sentence spacing; prevent mid-sentence fragment openers and repeated per-unit closers.
 - Reconcile documentation and test indexes, verify Gettysburg wording provenance, and record the offline model baseline plus the pending independent retelling study.
 

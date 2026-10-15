@@ -15,6 +15,10 @@ take `-e/--embellishment` 0-2: how much liberty the telling takes (`deadset` str
 detection, or select a named preset. `custom` enables only explicitly configured optional behaviours.
 All document operations accept `document_config` (`--document-config` JSON): exact overrides after presets and
 dials, with false and empty lists preserved. See [translation controls](../../docs/functional/translation-controls.md).
+Its nested `profile` object tunes substitution, frames, garnish rates/limits/spacing, drawl, stacking,
+swearing and rewrite thresholds. Omitted keys inherit the level/vulgarity defaults for every type, including
+Custom. Enable Custom's optional document behaviours separately. Inspect JSON `profile_config` for the full
+resolved numeric configuration, and pass it back as `document_config.profile` to reuse it.
 
 ## Workflow
 

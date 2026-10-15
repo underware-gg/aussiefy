@@ -29,7 +29,10 @@ vulgarity defaults to the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5), 
 A third, embellishment 0-2 (deadset, dinkum, troppo), controls liberty in the telling. General is the default
 explicit document type, with Dinkum embellishment. Auto opts into detection; named types supply presets;
 Custom enables only explicitly configured optional behaviours. document_config applies exact overrides after
-the preset and explicit dials. False and empty lists override inherited settings."""
+the preset and explicit dials. False and empty lists override inherited settings. Its nested profile object
+tunes substitution, frames, garnish rates/limits/spacing, stack, phonetic, stretch, swearing and rewrite
+thresholds; partial objects inherit missing keys from level/vulgarity defaults. profile_config reports the
+complete resolved numeric settings. Custom still requires optional behaviours enabled explicitly."""
 
 
 INSTRUCTIONS += "\n" + style_guide_data().workflow_for("mcp")

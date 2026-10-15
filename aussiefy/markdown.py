@@ -53,9 +53,10 @@ class DocumentResult:
     genre: Genre
     english: str | None
     embellishment: Embellishment
+    profile_config: dict
 
     def envelope(self) -> dict:
-        return envelope(self.level, self.vulgarity, self.warnings)
+        return {**envelope(self.level, self.vulgarity, self.warnings), "profile_config": self.profile_config}
 
     def to_dict(self) -> dict:
         return {"format": "markdown", "text": self.text, "source": self.source, **self.envelope(),
@@ -400,4 +401,5 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
         protected.append(ProtectedSpan((source_at, len(source)), (output_at, output_at + len(piece))))
     warnings = list(dict.fromkeys([*effective.warnings, *(w for u in units for w in u.result.warnings)]))
     return DocumentResult("".join(pieces), source, effective.level, policy.seed, effective.vulgarity,
-                          policy.variety, warnings, units, protected, genre, context[1], genre.setting(policy.embellishment))
+                          policy.variety, warnings, units, protected, genre, context[1], genre.setting(policy.embellishment),
+                          effective.envelope()["profile_config"])

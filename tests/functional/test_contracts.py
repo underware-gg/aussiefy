@@ -6,7 +6,7 @@ import pytest
 from aussiefy import harness
 from aussiefy.terms import fold, form_key
 
-ENVELOPE = {"level", "level_name", "vulgarity", "vulgarity_name", "policy_warnings"}
+ENVELOPE = {"level", "level_name", "vulgarity", "vulgarity_name", "policy_warnings", "profile_config"}
 DOCUMENT = {"document_type", "document_type_source", "genre", "genre_scores", "document_config", "document_overrides"}
 TEXT = ('She was very tired and hungry. "Are you crazy?" he asked. The proposition was conceived with considerable '
         "deliberation and dedicated to posterity.")
@@ -66,7 +66,7 @@ def test_brief_is_what_yarn_sends(translator):
 
     s = brief("She was very tired.", level=4, seed=3, embellishment="troppo", translator=translator)
     assert set(s.payload) == {"ORIGINAL", "LEVEL", "VULGARITY", "EMBELLISHMENT", "GENRE", "PLANNED_PHRASES",
-                              "RIFFS", "OPENINGS", "DIFFICULT_SENTENCES", "DOCUMENT_CONFIG"}   # troppo writes first: no draft
+                              "RIFFS", "OPENINGS", "DIFFICULT_SENTENCES", "DOCUMENT_CONFIG", "PROFILE_CONFIG"}   # troppo writes first: no draft
     assert set(brief("She was very tired.", translator=translator).payload) == (   # a retelling's dinkum
         set(s.payload) | {"ENGINE_DRAFT"})
     assert s.payload["LEVEL"] == 4 and s.vulgarity == s.payload["VULGARITY"]

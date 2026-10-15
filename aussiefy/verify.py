@@ -65,7 +65,7 @@ def verify(text: str, *, original: str, level: int | str = 5, vulgarity: int | s
     english (us, uk, auto, none) is the original's English, for its US and British words; embellishment
     (deadset, dinkum, troppo; None = the selected document type's default) how much longer than the original it may run."""
     tr = translator or default_translator()
-    eff = tr.effective(level=level, vulgarity=vulgarity)
+    eff = tr.effective(level=level, vulgarity=vulgarity, document_config=document_config)
     checked = lint(text, original=original, level=level, vulgarity=vulgarity, markup=markup,
                    english=english, embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr, suggest=False)
     problems = [Problem(SEVERITY[i["kind"]], i["kind"], i["phrase"],

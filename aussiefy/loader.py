@@ -20,7 +20,7 @@ from .dialect import parse_dialect
 from .genre import GenreConfig
 from .matcher import Pattern, PatternIndex, compile_pattern
 from .model import Dictionary, LevelProfile, PhoneticRule, RewriteThresholds, SwearProfile, swear_strength
-from .schema import (CLASSES, FRAMES, PLACEMENTS, RIFF_TONES, Concept, Entry, Riff, SchemaError, parse_concept,
+from .schema import (CLASSES, FRAMES, GARNISH_KEYS, RIFF_TONES, Concept, Entry, Riff, SchemaError, parse_concept,
                      parse_entry)
 
 DATA_DIR = Path(__file__).parent / "data"
@@ -76,9 +76,6 @@ def _entry_files(paths: Iterable[Path]) -> list[Path]:
 def entry_files(data_dir: str | Path = DATA_DIR) -> list[Path]:
     """The entry files a data directory's dictionary is built from (entries/*.yaml and *.yml)."""
     return _entry_files([Path(data_dir) / "entries"])
-
-
-GARNISH_KEYS = (*PLACEMENTS, "riff")   # profiles.yaml `garnish` and `max_garnish`: placements, and riffs
 
 
 def _thresholds(level: int, raw: dict) -> RewriteThresholds:

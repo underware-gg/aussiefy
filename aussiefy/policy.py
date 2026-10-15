@@ -9,6 +9,7 @@ from typing import Any, Sequence
 from .dialect import ENGLISHES
 from .errors import UserError
 from .model import Dictionary, LevelProfile, SwearProfile
+from .profile import ProfileOverrides, profile_config
 from .schema import FLAGS, REGISTERS
 
 
@@ -77,6 +78,7 @@ class DocumentOverrides:
     max_length: float | None = None
     perform: bool | None = None
     embellishment_guidance: str | None = None
+    profile: ProfileOverrides | None = None
 
     @classmethod
     def parse(cls, raw):
@@ -98,6 +100,8 @@ class DocumentOverrides:
         booleans = {"openings", "formal_to_rework", "person_swears", "keep_quotes", "command_context",
                     "dateline_context", "draft", "perform", "check_length"}
         for key, value in data.items():
+            if key == "profile":
+                data[key] = ProfileOverrides.parse(value)
             if key in booleans and type(value) is not bool:
                 raise UserError(f"document_config.{key} must be true or false")
             if key in ("guidance", "embellishment_guidance") and not isinstance(value, str):
@@ -115,7 +119,10 @@ class DocumentOverrides:
         return cls(**data)
 
     def values(self) -> dict:
-        return {f.name: getattr(self, f.name) for f in fields(self) if getattr(self, f.name) is not None}
+        values = {f.name: getattr(self, f.name) for f in fields(self) if getattr(self, f.name) is not None}
+        if self.profile is not None:
+            values["profile"] = self.profile.values()
+        return values
 
 
 @dataclass(frozen=True)
@@ -191,7 +198,8 @@ class Effective:
     swearing: SwearProfile = SwearProfile()   # how often swearing comes at this vulgarity
 
     def envelope(self) -> dict[str, Any]:
-        return envelope(self.level, self.vulgarity, self.warnings)
+        return {**envelope(self.level, self.vulgarity, self.warnings),
+                "profile_config": profile_config(self.profile, self.swearing)}
 
 
 def resolve(policy: Policy, dictionary: Dictionary) -> Effective:
@@ -200,9 +208,12 @@ def resolve(policy: Policy, dictionary: Dictionary) -> Effective:
     profile = dictionary.profiles[policy.level]
     vulgarity = profile.vulgarity if policy.vulgarity is None else policy.vulgarity
     registers = policy.registers if policy.registers is not None else profile.registers
+    swearing = dictionary.swearing.get(vulgarity, SwearProfile())
+    if policy.document_config.profile is not None:
+        profile, swearing = policy.document_config.profile.apply(profile, swearing)
     return Effective(policy.level, profile, vulgarity, tuple(registers), tuple(policy.regions),
                      frozenset(policy.unlock), _warnings(policy, dictionary),
-                     swearing=dictionary.swearing.get(vulgarity, SwearProfile()))
+                     swearing=swearing)
 
 
 def _warnings(policy: Policy, dictionary: Dictionary) -> tuple[str, ...]:

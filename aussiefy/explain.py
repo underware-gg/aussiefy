@@ -33,6 +33,7 @@ def format_explain(result: Result | DocumentResult, show_rejected: bool = True, 
              + ("" if g.policy.person_swears else "; no swears for people"), ""]
     lines.insert(-1, "document behaviours: " + json.dumps({k: v for k, v in g.envelope(result.embellishment.step)["document_config"].items()
                                       if k not in ("guidance", "embellishment_guidance")}, sort_keys=True))
+    lines.insert(-1, "profile settings: " + json.dumps(result.profile_config, sort_keys=True))
     if result.surface:
         lines += [f"deterministic: {result.deterministic_text}",
                   f"surface ({result.surface.get('model')}): {result.surface.get('status')}", ""]

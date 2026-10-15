@@ -48,6 +48,10 @@ and `document_config=None`, plus the `embellishment` dial (0–2 or its name; om
 General defaults to Dinkum; Auto opts into detection; named types select presets;
 Custom enables only configured optional behaviours. The shared override object replaces inherited values after
 explicit dials, including false and empty lists. See [translation controls](translation-controls.md).
+Its nested `profile` tunes engine rates, limits, spacing, frames, drawl, swearing and rewrite thresholds.
+Partial maps inherit missing keys. Every toolkit result includes the resolved `profile_config`; document
+operations accept that snapshot back as `document_config.profile`. Custom still needs optional document
+behaviours enabled explicitly, even when their numeric settings are supplied.
 
 `translate` returns a `Result`, or `DocumentResult` with explicit `markdown=True`
 ([Markdown contract](markdown.md)); the other toolkit functions return dicts, and `yarn` returns a result whose
@@ -56,7 +60,7 @@ explicit dials, including false and empty lists. See [translation controls](tran
 `UserError` (a problem the user can fix; the CLI prints it and exits 2).
 
 `Result.to_dict()` is a superset of the toolkit translate dict: `text`, `level`, `level_name`, `vulgarity`,
-`vulgarity_name`, `policy_warnings`, `seed`, `variety`, `decisions` and `difficult_sentences`, plus `source`
+`vulgarity_name`, `policy_warnings`, `profile_config`, `seed`, `variety`, `decisions` and `difficult_sentences`, plus `source`
 and `explain`. The old `difficult` and duplicate `warnings` JSON keys are gone. Policy warnings name region
 tags or unlock flags unused by the dictionary; invalid register and unlock names raise `UserError`.
 

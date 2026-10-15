@@ -49,7 +49,7 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     text = mask(text, markup).prose()
     original = source.prose() if original is not None else None
     d = tr.dictionary
-    eff = tr.effective(level=level, vulgarity=vulgarity)
+    eff = tr.effective(level=level, vulgarity=vulgarity, document_config=document_config)
     cap = eff.vulgarity
     low = " " + fold(text) + " "
     # what the original itself says isn't the translator's word ("cooked" in a recipe, a quoted swear)
@@ -162,7 +162,9 @@ def _suggestions(text: str, low: str, aussie_spans: list, level: int | str, vulg
     """What the rule engine would still Aussify in a draft: optional, ranked by how sure it is. A whole engine
     translation, so the checks that don't show suggestions (verify, yarn's submit) skip it. It reads the draft in
     the original's genre: a voiced policy reads as a story, but its gift is no pressie."""
-    result = tr.translate(text, level=level, vulgarity=vulgarity, embedder="none", english=dial, embellishment=embellishment, _context=(genre, english))
+    result = tr.translate(text, level=level, vulgarity=vulgarity, embedder="none", english=dial,
+                          embellishment=embellishment, document_type=genre.name,
+                          document_config=genre.overrides, _context=(genre, english))
     suggestions = []
     for r in result.records:
         a, b = r.span

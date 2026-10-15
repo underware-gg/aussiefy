@@ -13,6 +13,7 @@ python -m pytest -q tests/functional
 | [test_claude.py](test_claude.py) | Shared SDK request, prompt and cache contracts |
 | [test_contracts.py](test_contracts.py) | Agent-consumed result shapes and shared behaviour |
 | [test_document_policy.py](test_document_policy.py) | Explicit document presets and behaviour override precedence |
+| [test_profile_overrides.py](test_profile_overrides.py) | Advanced numeric defaults, isolated behaviour controls and surface parity |
 | [test_sense_boundaries.py](test_sense_boundaries.py) | Person/adjective sense guards and clothing agreement |
 | [test_lookup_senses.py](test_lookup_senses.py) | Slots, head inflection and conservative negation matching |
 | [test_harness_reliability.py](test_harness_reliability.py) | Phrase locality, drawl annotations and reviewed name aliases |
