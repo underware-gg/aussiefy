@@ -12,10 +12,12 @@ from __future__ import annotations
 
 import re
 import math
-from dataclasses import dataclass, replace, field
+from dataclasses import asdict, dataclass, replace, field
+from functools import cached_property
 
 from .pos import IMPERATIVES
-from .policy import EMBELLISHMENT_NAMES, EMBELLISHMENTS
+from .policy import EMBELLISHMENT_NAMES, EMBELLISHMENTS, DocumentOverrides
+from .errors import UserError
 from .schema import GENRES, PLACEMENTS, SchemaError
 from .text import DATELINE, MID_SENTENCE_NAME, SCRIPT_LINE
 
@@ -90,6 +92,10 @@ class GenrePolicy:
     person_swears: bool           # "some bastard" for someone, "little buggers" for children
     keep_quotes: bool             # quoted speech and documents stay as said (news, official prose)
     guidance: str                 # yarn mode's note on the genre's form
+    term_domains: tuple[str, ...] = ()
+    command_context: bool = False
+    dateline_context: bool = False
+    check_length: bool = True
 
 
 @dataclass(frozen=True)
@@ -98,9 +104,17 @@ class Genre:
     scores: dict[str, float]      # each genre's score: explain reports them
     config: "GenreConfig" = field(repr=False, compare=False)
 
-    @property
+    selected: str = "auto"
+    overrides: DocumentOverrides = field(default_factory=DocumentOverrides)
+
+    @cached_property
     def policy(self) -> GenrePolicy:
-        return self.config.policies[self.name]
+        base = self.config.policies[self.name]
+        keys = set(GenrePolicy.__dataclass_fields__) - {"garnish", "openings"}
+        values = {k: v for k, v in self.overrides.values().items() if k in keys}
+        if self.overrides.max_length is not None and self.overrides.check_length is None:
+            values["check_length"] = True
+        return replace(base, **values)
 
     def setting(self, step: int | None = None) -> Embellishment:
         """The embellishment a text of this genre takes: the caller's step (parsed), or the genre's own, narrowed
@@ -109,12 +123,50 @@ class Genre:
         notice's reader a galah) and a storyteller's openings (an obituary doesn't start "Fair dinkum, this
         happened.": the fourth pass's commonest troppo fault)."""
         e = self.config.embellishments[self.policy.default_embellishment if step is None else step]
-        e = replace(e, openings=e.openings and self.policy.openings)
-        if "insult" not in self.policy.garnish:
-            e = replace(e, garnish=e.garnish - {"insult"})
-        if not e.follows_form:
-            return e
-        return replace(e, garnish=e.garnish & self.policy.garnish)
+        if self.name == "custom":
+            e = replace(e, garnish=frozenset(), openings=False, draft=False, keep_share=0, max_length=1,
+                        perform=False, guidance="")
+        else:
+            e = replace(e, openings=e.openings and self.policy.openings)
+            if "insult" not in self.policy.garnish:
+                e = replace(e, garnish=e.garnish - {"insult"})
+            if e.follows_form:
+                e = replace(e, garnish=e.garnish & self.policy.garnish)
+        overrides = self.overrides.values()
+        values = {k: v for k, v in overrides.items() if k in Embellishment.__dataclass_fields__}
+        if "garnish" in values:
+            values["garnish"] = frozenset(values["garnish"])
+        if "embellishment_guidance" in overrides:
+            values["guidance"] = overrides["embellishment_guidance"]
+        else:
+            values.pop("guidance", None)
+        return replace(e, **values)
+
+    def envelope(self, step: int | None = None) -> dict:
+        e = self.setting(step)
+        policy = asdict(self.policy)
+        policy.pop("garnish")
+        policy.pop("openings")
+        policy.pop("default_embellishment")
+        return {"document_type": self.selected, "genre": self.name, "genre_scores": self.scores,
+                "document_type_source": "detected" if self.selected == "auto" else "preset",
+                "document_overrides": {k: list(v) if isinstance(v, tuple) else v for k, v in self.overrides.values().items()},
+                "document_config": {**policy, **{k: v for k, v in asdict(e).items()
+                                      if k not in ("step", "follows_form", "guidance")},
+                                    "garnish": sorted(e.garnish), "term_domains": list(self.policy.term_domains),
+                                    "embellishment_guidance": e.guidance}}
+
+
+def resolve_document(text: str | None, layout: str | None = None, *, config: "GenreConfig",
+                     document_type: str = "general", document_config=None) -> Genre:
+    overrides = DocumentOverrides.parse(document_config)
+    if document_type == "auto":
+        if text is None:
+            raise UserError("document_type auto requires source text; choose a named type for guide")
+        return replace(text_genre(text, layout, config=config), overrides=overrides)
+    if document_type not in config.policies:
+        raise UserError(f"unknown document_type {document_type!r}")
+    return Genre(document_type, {}, config, document_type, overrides)
 
 
 def form_removes(genre: "Genre", placement: str, step: int) -> bool:
@@ -176,37 +228,30 @@ def parse_embellishments(data: dict) -> dict[int, Embellishment]:
     return out
 
 
-def parse_retelling(data: dict, settings: dict[int, Embellishment]) -> Embellishment:
-    """The embellishment a retelling takes when the caller sets none (yarn mode, and the plan and lint a writer
-    works with), whatever the genre: genres.yaml's retelling. The engine's own default is the genre's."""
-    name = data.get("retelling")
-    if not isinstance(name, str) or name not in EMBELLISHMENTS:
-        raise SchemaError(f"genres.yaml: retelling must be one of {', '.join(EMBELLISHMENTS)}, got {name!r}")
-    return settings[EMBELLISHMENTS[name]]
-
-
-def retelling_step(step: int | str | None, config: "GenreConfig") -> int | str:
-    """A retelling's embellishment: the caller's, or genres.yaml's retelling when none is set."""
-    return config.retelling.step if step is None else step
-
-
 def parse_genre_policies(data: dict) -> dict[str, GenrePolicy]:
     """Each genre's policy, from data/genres.yaml, checked: every genre, every key, a known default setting and
     known garnish."""
     raw = data.get("genres")
     if not isinstance(raw, dict):
         raise SchemaError("genres.yaml: genres must be a mapping")
-    if set(raw) != set(GENRES):
-        raise SchemaError(f"genres.yaml: genres must be exactly {list(GENRES)}, got {list(raw)}")
+    if set(raw) != set(GENRES) | {"general", "custom"}:
+        raise SchemaError(f"genres.yaml: genres must include General, Custom and {list(GENRES)}, got {list(raw)}")
     out = {}
     for name, g in raw.items():
         _missing(name, g, POLICY_KEYS)
         _typed_fields(name, g, ("openings", "formal_to_rework", "person_swears", "keep_quotes"))
         if not isinstance(g["embellishment"], str) or g["embellishment"] not in EMBELLISHMENTS:
             raise SchemaError(f"genres.yaml: {name}: embellishment must be one of {', '.join(EMBELLISHMENTS)}")
+        for key in ("command_context", "dateline_context", "check_length"):
+            if type(g.get(key, key == "check_length")) is not bool:
+                raise SchemaError(f"genres.yaml: {name}.{key} must be a boolean")
+        domains = g.get("term_domains", [])
+        if not isinstance(domains, list) or any(not isinstance(v, str) or v not in GENRES for v in domains):
+            raise SchemaError(f"genres.yaml: {name}.term_domains must list known detected types")
         out[name] = GenrePolicy(_garnish(name, g["garnish"]), g["openings"], g["formal_to_rework"],
                                 EMBELLISHMENTS[g["embellishment"]],
-                                g["person_swears"], g["keep_quotes"], " ".join(g["guidance"].split()))
+                                g["person_swears"], g["keep_quotes"], " ".join(g["guidance"].split()),
+                                tuple(g.get("term_domains", ())), g.get("command_context", False), g.get("dateline_context", False), g.get("check_length", True))
     return out
 
 
@@ -327,7 +372,6 @@ def text_genre(text: str, layout: str | None = None, *, config: "GenreConfig" | 
 class GenreConfig:
     policies: dict[str, GenrePolicy]
     embellishments: dict[int, Embellishment]
-    retelling: Embellishment
     vocabulary: frozenset[str] = frozenset()
 
     @classmethod
@@ -335,4 +379,4 @@ class GenreConfig:
         if not isinstance(data, dict):
             raise SchemaError("genres.yaml: expected a mapping")
         settings = parse_embellishments(data)
-        return cls(parse_genre_policies(data), settings, parse_retelling(data, settings), vocabulary)
+        return cls(parse_genre_policies(data), settings, vocabulary=vocabulary)

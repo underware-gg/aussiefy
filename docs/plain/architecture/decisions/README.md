@@ -40,6 +40,8 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 | [DD-018](../../../architecture/decisions/dd-018-checked-pr-release-promotion.md) | Checked GitHub PR promotion, exact-head CI and resumable reconciliation | Accepted |
 | [DD-017](../../../architecture/decisions/dd-017-authoritative-plain-documentation.md) | Authoritative plain sources and deterministic published prose | Accepted |
 
+| [DD-019](../../../architecture/decisions/dd-019-explicit-composable-document-policy.md) | General by default, opt-in detection and exact composable document behaviour overrides | Accepted |
+
 ## By topic
 
 - **Engine:** DD-001, DD-003, DD-007

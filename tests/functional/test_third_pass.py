@@ -73,7 +73,7 @@ def test_the_right_sense_still_swaps(translator, text, wanted):
 
 
 def _suggested(text, word):
-    return [s for s in harness.lint(text, level=4)["suggestions"] if s["text"].lower() == word]
+    return [s for s in harness.lint(text, level=4, document_type="auto")["suggestions"] if s["text"].lower() == word]
 
 
 def test_lint_leaves_compounds_verbs_and_idioms_alone():
@@ -124,11 +124,11 @@ def test_the_rounds_new_entries_keep_to_their_sense(translator, text, never):
 def test_no_fishos_or_yanks_in_the_news(translator):
     from pathlib import Path
     news = (Path(__file__).resolve().parents[1] / "corpus" / "everyday" / "news" / "yellowstone_fishing_restrictions_lifted.txt")
-    for out in _seeds(translator, news.read_text(encoding="utf-8"), n=4, level=5):
+    for out in _seeds(translator, news.read_text(encoding="utf-8"), n=4, level=5, document_type="auto"):
         assert "fisho" not in out.lower(), out
-    assert any("fishos" in o for o in _seeds(translator, "The fishermen came home with a big catch.", level=5))
+    assert any("fishos" in o for o in _seeds(translator, "The fishermen came home with a big catch.", level=5, document_type="auto"))
     report = "WASHINGTON (AP) — Officials said 20 million more Americans now have health insurance, the agency said."
-    for out in _seeds(translator, report, n=4, level=5):
+    for out in _seeds(translator, report, n=4, level=5, document_type="auto"):
         assert "yank" not in out.lower(), out
 
 

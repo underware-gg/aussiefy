@@ -9,8 +9,10 @@ python scripts/publish_docs.py generate
 python scripts/publish_docs.py check
 ```
 
-Generation uses the strict Markdown adapter at level 5, vulgarity dad and seed 0, with the offline ngram
-fallback. It preserves headings, tables, links, code and displayed command outputs. The generated notice
+Generation uses the strict Markdown adapter at Swaggie (5), Dinkum (1), Dad (1) and seed 0, with the offline
+ngram fallback. It explicitly selects General, protects Technical vocabulary through `term_domains`, and
+disables formal-sentence rework. Every published page has the same settings notice and a link to its own plain
+counterpart: “Prefer docs that are as dry as a dead dingo's donger?” It preserves headings, tables, links, code and displayed command outputs. The generated notice
 links back to the editable source. All outputs are derived from the current dictionary and publication map;
 their exact bytes are checked before promotion.
 

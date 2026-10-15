@@ -278,7 +278,7 @@ def test_validate_counts_declined_phrases_with_reasons(translator):
                 if "kept only" in p]
     # a plan too short for a share (one wrong sense would block it) asks for none
     short = YarnSession(text="x", level=5, seed=0, vulgarity=2, translator=translator, plan={"planned": []},
-                        planned=planned[:3], system="", payload={}, embellishment=load_genres().retelling)
+                        planned=planned[:3], system="", payload={}, embellishment=load_genres().embellishments[1])
     assert not [p for p in validate(short, "Nothing kept.") if "kept only" in p]
     # declining most of a long plan doesn't let the rest be dropped quietly
     assert any("kept only 0%" in p for p in validate(s, "Nothing kept.", declined[:1]))
@@ -420,8 +420,8 @@ def test_lint_suggests_in_the_originals_genre(translator):
     # a voiced retelling of a policy can read as a story, but its gift is still no pressie
     original = "Employees must not accept a gift from a vendor. Any gift over $150 must be reported to Legal."
     draft = "Once upon a time, a vendor gave me a gift for my birthday and I laughed."
-    options = [o for s in harness.lint(draft, original=original, level=5, translator=translator)["suggestions"]
+    options = [o for s in harness.lint(draft, original=original, level=5, translator=translator, document_type="auto")["suggestions"]
                for o in s["options"]]
     assert not {"pressie", "prezzie"} & set(options)
-    alone = [o for s in harness.lint(draft, level=5, translator=translator)["suggestions"] for o in s["options"]]
+    alone = [o for s in harness.lint(draft, level=5, translator=translator, document_type="auto")["suggestions"] for o in s["options"]]
     assert {"pressie", "prezzie"} & set(alone)

@@ -207,6 +207,11 @@ def quoted_spans(text: str) -> list[tuple[int, int]]:
     return [m.span() for m in QUOTED_RE.finditer(text)]
 
 
+def document_spans(text: str, *, keep_quotes: bool = False, datelines: bool = False) -> list[tuple[int, int]]:
+    """Literal document wording selected for preservation, including spelling."""
+    return (quoted_spans(text) if keep_quotes else []) + ([m.span() for m in DATELINE.finditer(text)] if datelines else [])
+
+
 # in a text that talks about words: a short quote ("“gals.”", "version of 'guys'"), and a list item's term before
 # its colon ("- boys: too patronizing")
 SHORT_QUOTE_RE = re.compile(r"(?<!\w)[\"“‘']((?:\w['’]\w|[^\"”’',!?\n]){1,30})[\"”’'](?!\w)")

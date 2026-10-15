@@ -37,11 +37,6 @@
 #   guidance: yarn mode's note on the genre's form (what stays exact, what shape it keeps)
 #   (which concepts name people neutrally is concepts.yaml's neutral_person)
 #
-# retelling: the embellishment a retelling takes when none is set, whatever the genre: yarn mode, and the plan
-# and lint an agent writes with. The genre's own setting is the engine's: its garnish is placed by rule, so it
-# stays conservative, while a writer's dinkum retelling scored best in every genre (the 2026-10-13 pass).
-retelling: dinkum
-
 embellishments:
   deadset:
     garnish: []
@@ -89,7 +84,25 @@ embellishments:
       letter stays a letter and a post its writer's own words, and a hazard is never the joke.
 
 genres:
+  general:
+    formal_to_rework: true
+    garnish: all
+    openings: true
+    embellishment: dinkum
+    person_swears: true
+    keep_quotes: false
+    guidance: Keep the original meaning and structure; give its prose the selected voice.
+  custom:
+    check_length: false
+    formal_to_rework: false
+    garnish: []
+    openings: false
+    embellishment: deadset
+    person_swears: false
+    keep_quotes: false
+    guidance: Enable only the explicitly configured optional behaviours.
   story:
+    term_domains: [story]
     formal_to_rework: true
     garnish: all
     openings: true
@@ -100,6 +113,7 @@ genres:
       A story: keep every event and line of dialogue's meaning. A play keeps its script layout (speaker labels,
       stage directions).
   personal:
+    term_domains: [personal]
     formal_to_rework: true
     garnish: all
     openings: true
@@ -111,6 +125,8 @@ genres:
       their point, and Aussify it the way they would talk. Keep a letter's greeting and sign-off in place, a
       speech's jokes and puns intact.
   news:
+    term_domains: [news]
+    dateline_context: true
     formal_to_rework: true
     garnish: []
     openings: false
@@ -121,6 +137,8 @@ genres:
       News or a notice: a local reporter's Aussie. Keep every fact, name, number, date and quote; quoted speech
       and official statements stay as said. An obituary is respectful.
   instructions:
+    term_domains: [instructions]
+    command_context: true
     formal_to_rework: true
     garnish: [tail]
     openings: false
@@ -132,6 +150,7 @@ genres:
       numbered and bulleted lists as lists. Aussify the words (servo, esky, bin, chemist) and the connecting
       prose; no insults aimed at the reader. Safety comes before colour: never make light of a hazard.
   technical:
+    term_domains: [technical]
     formal_to_rework: false
     garnish: []
     openings: false
@@ -143,6 +162,7 @@ genres:
       number exactly; leave code and markup alone. Aussify the plain prose around them; no slang for a
       technical term.
   official:
+    term_domains: [official]
     formal_to_rework: false
     garnish: []
     openings: false

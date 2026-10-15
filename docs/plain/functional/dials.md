@@ -63,7 +63,7 @@ The rules are in `aussiefy/data/phonetic.yaml` with `kind: spelling`, and the La
 ## Embellishment
 
 The third dial controls liberty in the telling: `deadset` (0) keeps it straight, `dinkum` (1) permits limited
-colour, and `troppo` (2) permits a performance. The deterministic engine defaults to the text genre's setting;
-a retelling, including yarn and an agent's plan/lint workflow, defaults to `genres.yaml`'s `retelling` setting
-(currently dinkum). An explicit setting overrides that default. Genre still controls quoted material,
-openings and name-calling. See [translation controls](translation-controls.md) for the full context contract.
+colour, and `troppo` (2) permits a performance. General defaults to Dinkum. A named document type supplies its
+own default; Auto opts into detecting that type. Explicit embellishment wins over the type's default, and
+exact advanced behaviour overrides win after both. Custom enables only explicitly configured behaviours.
+See [translation controls](translation-controls.md) for all document types, overrides and precedence.

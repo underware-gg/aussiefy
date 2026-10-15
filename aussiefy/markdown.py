@@ -61,7 +61,7 @@ class DocumentResult:
         return {"format": "markdown", "text": self.text, "source": self.source, **self.envelope(),
                 "seed": self.seed, "variety": self.variety, "units": [u.to_dict() for u in self.units],
                 "protected": [p.to_dict() for p in self.protected],
-                "genre": self.genre.name, "genre_scores": self.genre.scores, "english": self.english,
+                **self.genre.envelope(self.embellishment.step), "english": self.english,
                 "embellishment": self.embellishment.step, "embellishment_name": self.embellishment.name}
 
 
@@ -343,12 +343,26 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
     protected = []
     source_at = output_at = 0
     from .dialect import text_english
-    from .genre import text_genre
+    from .genre import resolve_document
 
     spans = prose_spans(source)
     prose = "\n".join(source[span.start:span.end] for span in spans)
-    genre = text_genre(prose, source, config=translator.dictionary.genres)
+    genre = resolve_document(prose, source, config=translator.dictionary.genres,
+                             document_type=policy.document_type, document_config=policy.document_config)
     context = (genre, text_english(policy.english, prose, translator.dictionary.us_spellings))
+    from .text import document_spans
+
+    held = _merged(document_spans(source, keep_quotes=genre.policy.keep_quotes,
+                                 datelines=genre.policy.dateline_context))
+    eligible = []
+    for span in spans:
+        for a, b in _without(span.start, span.end, held, 0):
+            part = source[a:b]
+            left = a + len(part) - len(part.lstrip(" \t"))
+            right = b - (len(part) - len(part.rstrip(" \t")))
+            if any(c.isalpha() for c in source[left:right]):
+                eligible.append(ProseSpan(left, right))
+    spans = eligible
     for span in spans:
         if span.start > source_at:
             piece = source[source_at:span.start]
@@ -358,7 +372,8 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
         r = translator.translate(source[span.start:span.end], level=policy.level, seed=policy.seed,
                                  vulgarity=policy.vulgarity, variety=policy.variety, registers=policy.registers,
                                  regions=policy.regions, unlock=policy.unlock, embedder=policy.embedder,
-                                 english=policy.english, embellishment=policy.embellishment, _context=context)
+                                 english=policy.english, embellishment=policy.embellishment, document_type=policy.document_type,
+                                 document_config=policy.document_config, _context=context)
         rendered = _escape(r.text)
         pieces.append(rendered)
         units.append(ProseUnit((span.start, span.end), (output_at, output_at + len(rendered)), rendered, r))

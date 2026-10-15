@@ -37,6 +37,11 @@ level's own). `translate`, `plan` and `yarn` also take `seed` (default 0). `tran
 The engine/Translator and `plan` remain plain-text operations. `lookup` takes `limit` (default 8) and `include_gated`, and
 `lint` takes `original`. Every function takes an optional `translator` for a non-default dictionary.
 
+Document operations (`translate`, `plan`, `lint`, `verify`, `guide`, `yarn`) also take `document_type="general"`
+and `document_config=None`. General defaults to Dinkum; Auto opts into detection; named types select presets;
+Custom enables only configured optional behaviours. The shared override object replaces inherited values after
+explicit dials, including false and empty lists. See [translation controls](translation-controls.md).
+
 `translate` returns a `Result`, or `DocumentResult` with explicit `markdown=True`
 ([Markdown contract](markdown.md)); the other toolkit functions return dicts, and `yarn` returns a result whose
 `outcome` is `applied` or `fell_back`. The package also exports `Policy`, `Dictionary`, `Entry`,

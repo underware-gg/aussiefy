@@ -10,8 +10,9 @@
     aussiefy dev ingest|scrape|fragments|harvest|tag|review|round  # maintainers: sources, scraping, rounds
 
 Every command reads the same dictionary (the built-in one plus any --dict files). The toolkit commands
-(translate, yarn, lookup, lint, guide, plan, verify) take the same two dials, by number or name, each on its own:
+(translate, yarn, lookup, lint, guide, plan, verify) take the same three dials, by number or name, each on its own:
   -l/--level        1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie (default)
+  -e/--embellishment 0 deadset, 1 dinkum, 2 troppo
   --vulgarity       0 nan, 1 dad, 2 uncle-bob, 3 tradie (default: the level's own: nan at 1-2, dad at 3-4,
                     uncle-bob at 5); "-l swaggie --vulgarity nan" is full Aussie with no swearing
 and -s/--seed where choices are made; translate and plan also --variety, --registers, --region, --unlock; and
@@ -42,7 +43,7 @@ from .errors import UserError
 from .dialect import ENGLISHES
 from .loader import load_genres
 from .markup import MARKUPS
-from .policy import parse_embellishment, parse_level, parse_vulgarity
+from .policy import DOCUMENT_TYPES, parse_embellishment, parse_level, parse_vulgarity
 
 FELL_BACK = 4
 REFUSED = 3
@@ -61,8 +62,9 @@ writing your own version with the toolkit (what an agent does):
 {workflow}
 
 Text comes from the arguments, a single file, or stdin. The toolkit commands (translate, yarn, lookup,
-lint, guide, plan) take the same two dials, by number or name:
+lint, guide, plan) take the same three dials, by number or name:
   -l/--level        1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie (default)
+  -e/--embellishment 0 deadset, 1 dinkum, 2 troppo
   --vulgarity       0 nan, 1 dad, 2 uncle-bob, 3 tradie (default: the level's own: nan at 1-2, dad at 3-4,
                     uncle-bob at 5); "-l swaggie --vulgarity nan" is full Aussie with no swearing
 Every command reads the built-in dictionary plus any --dict files.
@@ -175,7 +177,21 @@ def _policy(args) -> dict:
 def _steering(args) -> dict:
     """The engine options translate and plan share, as the toolkit's parameters."""
     return {"variety": args.variety, "registers": _csv(args.registers), "regions": _csv(args.regions),
-            "unlock": _csv(args.unlock), "english": args.english, "embellishment": args.embellishment}
+            "unlock": _csv(args.unlock), "english": args.english, "embellishment": args.embellishment, **_document(args)}
+
+
+def _document(args) -> dict:
+    return {"document_type": args.document_type, "document_config": args.document_config}
+
+
+def _document_json(value: str) -> dict:
+    from .policy import DocumentOverrides
+    try:
+        raw = json.loads(value)
+        DocumentOverrides.parse(raw)
+        return raw
+    except (ValueError, UserError) as exc:
+        raise argparse.ArgumentTypeError(str(exc)) from exc
 
 
 def _json(obj) -> None:
@@ -227,7 +243,7 @@ def cmd_yarn(args) -> int:
     from .yarn import yarn
 
     result = yarn(_text(args), seed=args.seed, model=args.model, cache=not args.no_cache, markup=args.markup, english=args.english,
-                  embellishment=args.embellishment, translator=_translator(args),
+                  embellishment=args.embellishment, **_document(args), translator=_translator(args),
                   **_policy(args))
     if args.json:
         _json(result.to_dict())
@@ -244,7 +260,7 @@ def cmd_yarn_tools(args) -> int:
 
     source = _read(args.source, "source", verbatim=True)
     session = brief(source, seed=args.seed, markup=args.markup, english=args.english,
-                    embellishment=args.embellishment, translator=_translator(args), **_policy(args))
+                    embellishment=args.embellishment, **_document(args), translator=_translator(args), **_policy(args))
     if args.declined and args.step == "lint":   # each call is a fresh session: lint learns what was declined here
         session.decline(_declined(args.declined))
     if args.step == "brief":
@@ -310,7 +326,7 @@ def cmd_lint(args) -> int:
 
     original = _read(args.original, "--original") if args.original else None
     out = harness.lint(_text(args), original=original, markup=args.markup, english=args.english,
-                       embellishment=args.embellishment, translator=_translator(args), suggest=args.suggest,
+                       embellishment=args.embellishment, **_document(args), translator=_translator(args), suggest=args.suggest,
                        **_policy(args))
     if args.json:
         _json(out)
@@ -333,7 +349,7 @@ def cmd_verify(args) -> int:
 
     original = _read(args.original, "--original")
     out = harness.verify(_text(args), original=original, markup=args.markup, english=args.english,
-                         embellishment=args.embellishment, translator=_translator(args),
+                         embellishment=args.embellishment, **_document(args), translator=_translator(args),
                          **_policy(args))
     if args.json:
         _json(out)
@@ -422,7 +438,7 @@ def cmd_guide(args) -> int:
 
     from .guide import style_guide_data
 
-    g = harness.guide(embellishment=args.embellishment, translator=_translator(args), **_policy(args))
+    g = harness.guide(embellishment=args.embellishment, **_document(args), translator=_translator(args), **_policy(args))
     if args.json:
         _json(g)
     else:
@@ -744,10 +760,12 @@ def build_parser() -> argparse.ArgumentParser:
     embellished = argparse.ArgumentParser(add_help=False)
     embellished.add_argument("-e", "--embellishment", type=_dial(parse_embellishment), metavar="EMBELLISHMENT",
                              help="how much liberty the telling takes: 0-2 or deadset (straight), dinkum (a genuine "
-                                  "voice), troppo (a performed yarn). Default: for translate, the text's genre's "
-                                  "own (a story troppo, a letter dinkum, news, instructions, docs and official "
-                                  "prose deadset); for a retelling and its checks (yarn, plan, lint, verify, "
-                                  "guide) dinkum")
+                                  "voice), troppo (a performed yarn). Default Dinkum for General; named types "
+                                  "supply defaults; explicit settings and advanced overrides win")
+    embellished.add_argument("--document-type", choices=DOCUMENT_TYPES, default="general",
+                             help="document behaviour preset (default general); auto opts into detection; custom enables only configured behaviours")
+    embellished.add_argument("--document-config", type=_document_json, metavar="JSON",
+                             help="exact behaviour overrides as a JSON object; lists replace preset lists")
     toolkit = [dictionary, policy, as_json]
     sub = p.add_subparsers(dest="command", required=True, metavar="COMMAND")
 

@@ -37,7 +37,9 @@ What `compare`, `gaps` and the `dev` steps do is described in [maintainer-tools.
 | Option | Commands | Meaning |
 |---|---|---|
 | `text` | translate, yarn, lint, plan | The text itself, a file path, or nothing to read stdin |
-| `-e/--embellishment SETTING` | translate, yarn, lint, plan, guide, verify, yarn-tools | 0–2 or deadset/dinkum/troppo; default depends on engine genre or retelling |
+| `--document-type TYPE` | translate, yarn, lint, plan, guide, verify, yarn-tools | General (default), Custom, Auto detection, or a named type; guide requires a named type |
+| `--document-config JSON` | same document operations | Exact behaviour overrides; see [translation controls](translation-controls.md) |
+| `-e/--embellishment SETTING` | translate, yarn, lint, plan, guide, verify, yarn-tools | 0–2 or deadset/dinkum/troppo; default Dinkum for General; named types supply defaults |
 | `--english {auto,us,uk,none}` | translate, yarn, lint, plan, verify, yarn-tools | Source-English dialect context |
 | `--markup {text,markdown,mdx,auto}` | translate, yarn, lint, plan, verify, yarn-tools | Extended document mode; differs from strict `--markdown` ([controls](translation-controls.md)) |
 | `--dict PATH` | every command except `embedder` and `dev round` | An extra entry file or directory, on top of the built-in dictionary (repeatable) |

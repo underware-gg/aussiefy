@@ -16,7 +16,7 @@ from .garnish import (GarnishRecord, PhoneticRecord, add_closer, add_connective,
                       apply_phonetic, ends_in_list, pick_garnish, pick_riff, tag_in_speech)
 from .loader import load_dictionary
 from .dialect import text_english
-from .genre import Embellishment, Genre, form_removes, text_genre
+from .genre import resolve_document, Embellishment, Genre, form_removes
 from .protected import Masked, protected_runs
 from .model import Dictionary
 from .policy import Effective, Policy, envelope, pick_form, resolve, roll
@@ -25,7 +25,7 @@ from .select import Candidate, candidates, usable_forms, weighted_pick
 from .schema import Entry, SchemaError
 from .terms import form_key
 from .text import (COMMON_STARTERS, DATELINE, MID_SENTENCE_NAME, OPEN_QUOTES, QUOTES, SCRIPT_LINE, Token, capital_is_positional, fix_articles, heading_lines, match_case,
-                   held_spans, sentences, tokenize)
+                   document_spans, mentioned_spans, held_spans, sentences, tokenize)
 
 
 UNTOUCHED_MIN_WORDS = 5
@@ -189,7 +189,7 @@ class Result:
             **self.envelope(),
             "variety": self.variety,
             "mood": self.mood,
-            "genre": self.genre.name, "genre_scores": self.genre.scores,
+            **self.genre.envelope(self.embellishment.step),
             "embellishment": self.embellishment.step, "embellishment_name": self.embellishment.name,
             "decisions": self.decisions(),
             "explain": [r.to_dict() for r in self.records] + [w.to_dict() for w in self.rewrites]
@@ -247,12 +247,13 @@ class Translator:
                   embedder: str | None = None, rewriter: Rewriter | None = None,
                   rewrite_mode: Literal["hard", "all"] = "hard",
                   embellishment: int | str | None = None,
+                  document_type: str = "general", document_config: dict | None = None,
                   _protected: Masked | None = None, _context: tuple | None = None) -> Result:
         """Translate text: the same text, policy and seed always give the same Result.
 
         level (1-5 or tourist .. swaggie) is how Aussie; vulgarity (0-3 or nan, dad, uncle-bob, tradie; None = the
         level's own) is how vulgar, and wins over the level's in either direction. embellishment (0-2 or deadset,
-        dinkum, troppo; None = the genre's own) is how much garnish the telling takes. variety N
+        dinkum, troppo; None = the selected document type's default) is how much garnish the telling takes. variety N
         picks among the N best-fitting terms (0 weighs every eligible one). registers (current, dated,
         archaic), regions ("qld") and unlock (flags whose gated entries become eligible) narrow or widen what
         the level allows. english (us, uk, auto, none; None = profiles.yaml's) is the English the text is in,
@@ -264,12 +265,14 @@ class Translator:
         internal composition parameters; format selection belongs to the public translation route."""
         pol = self.policy(level=level, seed=seed, vulgarity=vulgarity,
                           variety=variety, registers=registers, regions=regions, unlock=unlock, embedder=embedder,
-                          english=english, embellishment=embellishment)
+                          english=english, embellishment=embellishment,
+                          document_type=document_type, document_config=document_config)
         masked = _protected if _protected is not None else Masked(text, text)
         source, text = text, masked.text      # the engine reads the masked text: the same length, same offsets
         tokens = tokenize(text)
         sents = sentences(tokens)
-        genre = _context[0] if _context is not None else text_genre(masked.prose(), masked.source, config=self.dictionary.genres)
+        genre = _context[0] if _context is not None else resolve_document(masked.prose(), masked.source, config=self.dictionary.genres,
+                        document_type=pol.document_type, document_config=pol.document_config)
         run = _Run(text, pol, resolve(pol, self.dictionary), text_mood(text), is_chant(sents), masked, genre,
                    _context[1] if _context is not None else text_english(pol.english, masked.prose(), self.dictionary.us_spellings),
                    genre.setting(pol.embellishment))
@@ -293,7 +296,9 @@ class Translator:
         joined = (self._closer(body, sents, run) + trail) if any(t.is_word for t in tokens) else "".join(pieces)
         final, phon = apply_phonetic(joined, self.dictionary.phonetic, run.eff, pol.seed,
                                      infixes=run.embellishment.takes("infix"),
-                                     keep=lambda t: _no_drawl(t, run.genre.policy.keep_quotes, masked.no_phonetic))
+                                     keep=lambda t: _no_drawl(t, run.genre.policy.keep_quotes, masked.no_phonetic),
+                                     preserve=partial(document_spans, keep_quotes=run.genre.policy.keep_quotes,
+                                                      datelines=run.genre.policy.dateline_context))
         final = masked.restore(final)
         warnings = list(run.eff.warnings)
         if pol.vulgarity is not None and run.eff.vulgarity and not run.embellishment.takes("infix"):
@@ -312,11 +317,11 @@ class Translator:
 
     # -- stages -------------------------------------------------------------------------
 
-    def _term_of_art(self, det: Detection, genre: str) -> bool:
+    def _term_of_art(self, det: Detection, domains: tuple[str, ...]) -> bool:
         """Whether every concept a span was read as is a term of art in this genre (a browser's cookie, a
         struct's field, a build): then the span stays as it is, and no shorter match takes it either."""
         known = [self.dictionary.concepts[c] for c in det.concepts if c in self.dictionary.concepts]
-        return bool(known) and all(genre in c.not_in for c in known)
+        return bool(known) and all(set(domains) & c.not_in for c in known)
 
     def _substitute(self, sent: "_Sentence", run: "_Run") -> tuple[list[SubstitutionRecord], list[tuple[int, int, str]]]:
         """Detect the sentence's concepts and swap in Aussie terms: one record per detected span."""
@@ -324,7 +329,7 @@ class Translator:
         dets = resolve_overlaps(detect(toks, self.dictionary.index, self._fallback_scorer(pol.embedder),
                                        self.dictionary.fallback_patterns, pol.similarity_threshold, sent.tags))
         held = run.held(toks)
-        dets = [d for d in dets if not self._term_of_art(d, run.genre.name)
+        dets = [d for d in dets if not self._term_of_art(d, run.genre.policy.term_domains)
                 and not held & set(range(d.start, d.end))]
         if pol.english != "none":
             dets = self._yield_to_dialect(dets, toks, run)
@@ -387,7 +392,7 @@ class Translator:
     def _yield_to_dialect(self, dets: list[Detection], toks: list[Token], run: "_Run") -> list[Detection]:
         """The detections a longer dialect span holds: "cookie jar" is a biscuit tin, not a bickie jar, and
         "petroleum jelly" keeps its jelly. Equal or longer detections keep their words."""
-        claimed = self.dictionary.dialect.spans(toks, run.english, run.genre.name)
+        claimed = self.dictionary.dialect.spans(toks, run.english, run.genre.policy.term_domains)
         return [d for d in dets if not any(a <= d.start and d.end <= b and b - a > d.end - d.start
                                            for a, b in claimed)]
 
@@ -396,7 +401,7 @@ class Translator:
         """American and British words the dictionary left alone, swapped for the Australian: every one, at
         every level (plain Australian English, like the spelling), unless a bracketed gloss would echo it."""
         toks, splices = sent.tokens, []
-        for f in self.dictionary.dialect.find(toks, run.english, run.genre.name, replaced):
+        for f in self.dictionary.dialect.find(toks, run.english, run.genre.policy.term_domains, replaced):
             if _gloss_echo(toks, f.start, f.end, f.text, said):
                 continue
             said[f.end] = f.text
@@ -751,7 +756,8 @@ class _Run:
         """The tokens no swap may touch: words mentioned rather than used ("the word 'guys'"), and in a genre
         that keeps quotes (news, official prose) the quoted speech and documents."""
         if self._held is None:
-            self._held = held_spans(self.text, self.genre.policy.keep_quotes)
+            self._held = mentioned_spans(self.text) + document_spans(self.text, keep_quotes=self.genre.policy.keep_quotes,
+                                                                   datelines=self.genre.policy.dateline_context)
         return {i for i, t in enumerate(tokens) if any(a <= t.start < b for a, b in self._held)}
 
     def commands(self) -> frozenset[str]:
@@ -759,7 +765,7 @@ class _Run:
         capitalises mid-sentence (it's a name there: "Captain Cook"). Elsewhere none: "Cook sailed in"."""
         if self._commands is None:
             named = {m.lower() for m in MID_SENTENCE_NAME.findall(self.text)}
-            self._commands = (pos.IMPERATIVES - named if self.genre.name == "instructions" else frozenset())
+            self._commands = (pos.IMPERATIVES - named if self.genre.policy.command_context else frozenset())
         return self._commands
 
     def opener_lowerable(self, sent: _Sentence, dictionary: Dictionary) -> frozenset[str]:
@@ -798,7 +804,7 @@ class _Run:
         """A sentence starting in a news story's dateline ("MAMMOTH HOT SPRINGS, Wyo. –", which splits at
         "Wyo.")."""
         if self._datelines is None:
-            self._datelines = ([m.span() for m in DATELINE.finditer(self.text)] if self.genre.name == "news"
+            self._datelines = ([m.span() for m in DATELINE.finditer(self.text)] if self.genre.policy.dateline_context
                                else [])
         return any(a <= tokens[0].start < b for a, b in self._datelines)
 

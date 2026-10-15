@@ -141,7 +141,7 @@ def repo(tmp_path):
     git(root, 'checkout', '-qb', 'dev')
     write(root, p.VERSION_FILE, '__version__ = "0.1.0"\n')
     write(root, 'docs/plain/root/CHANGELOG.md', '# Changelog\n\n## [Unreleased]\n\n- I am very busy.\n')
-    write(root, 'docs/publication.yaml', yaml.safe_dump({'translation': {'level': 5, 'vulgarity': 'dad', 'seed': 0},
+    write(root, 'docs/publication.yaml', yaml.safe_dump({'translation': {'level': 5, 'vulgarity': 'dad', 'seed': 0, 'embellishment': 'dinkum', 'document_type': 'general', 'document_config': {'term_domains': ['technical'], 'formal_to_rework': False}},
         'documents': [{'source': 'docs/plain/root/CHANGELOG.md', 'output': 'CHANGELOG.md'}]}))
     write(root, 'README.md', '# Fixture\n')
     write(root, 'CONTRIBUTING.md', '# Fixture\n')

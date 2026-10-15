@@ -7,6 +7,7 @@ from aussiefy import harness
 from aussiefy.terms import fold, form_key
 
 ENVELOPE = {"level", "level_name", "vulgarity", "vulgarity_name", "policy_warnings"}
+DOCUMENT = {"document_type", "document_type_source", "genre", "genre_scores", "document_config", "document_overrides"}
 TEXT = ('She was very tired and hungry. "Are you crazy?" he asked. The proposition was conceived with considerable '
         "deliberation and dedicated to posterity.")
 
@@ -25,7 +26,7 @@ def test_every_toolkit_result_carries_the_policy_envelope(translator):
 
 def test_plan_shape(translator):
     p = harness.plan(TEXT, translator=translator)
-    assert set(p) == ENVELOPE | {"draft", "seed", "planned", "garnish", "dialect", "riffs", "openings", "mood", "genre",
+    assert set(p) == ENVELOPE | DOCUMENT | {"draft", "seed", "planned", "garnish", "dialect", "riffs", "openings", "mood", "genre",
                                  "embellishment", "embellishment_name", "guidance", "difficult_sentences",
                                  "untouched_sentences", "note"}
     assert set(p["guidance"]) == {"genre", "embellishment"}
@@ -44,7 +45,7 @@ def test_plan_shape(translator):
 def test_lint_shape(translator):
     out = harness.lint("Y'all know the color is wrong, mate. Bloody bloody bloody bloody hell.",
                        original="You know the colour is wrong.", translator=translator)
-    assert set(out) == ENVELOPE | {"ok", "issues", "warnings", "suggestions", "scope"}
+    assert set(out) == ENVELOPE | DOCUMENT | {"ok", "issues", "warnings", "suggestions", "scope"}
     assert out["issues"] and all({"kind", "phrase"} <= set(i) for i in out["issues"])
     assert {i["kind"] for i in out["issues"]} >= {"dialect", "spelling"}
     assert all("australian" in i for i in out["issues"] if i["kind"] in ("dialect", "spelling"))
@@ -65,7 +66,7 @@ def test_brief_is_what_yarn_sends(translator):
 
     s = brief("She was very tired.", level=4, seed=3, embellishment="troppo", translator=translator)
     assert set(s.payload) == {"ORIGINAL", "LEVEL", "VULGARITY", "EMBELLISHMENT", "GENRE", "PLANNED_PHRASES",
-                              "RIFFS", "OPENINGS", "DIFFICULT_SENTENCES"}   # troppo writes first: no draft
+                              "RIFFS", "OPENINGS", "DIFFICULT_SENTENCES", "DOCUMENT_CONFIG"}   # troppo writes first: no draft
     assert set(brief("She was very tired.", translator=translator).payload) == (   # a retelling's dinkum
         set(s.payload) | {"ENGINE_DRAFT"})
     assert s.payload["LEVEL"] == 4 and s.vulgarity == s.payload["VULGARITY"]
@@ -116,7 +117,7 @@ def test_fold():
 
 def test_verify_shape(translator):
     out = harness.verify("She was knackered.", original="She was very tired.", translator=translator)
-    assert set(out) == ENVELOPE | {"ok", "counts", "problems", "metrics", "scope"}
+    assert set(out) == ENVELOPE | DOCUMENT | {"ok", "counts", "problems", "metrics", "scope"}
     assert set(out["counts"]) == {"critical", "major", "minor"}
     assert all({"severity", "kind", "phrase", "why"} <= set(p) for p in out["problems"])
     assert set(out["metrics"]) == {"original_words", "translation_words", "sentences", "translation_sentences",

@@ -198,11 +198,13 @@ def add_closer(text: str, closer: str) -> str:
 
 
 def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: int, infixes: bool = True,
-                   keep: Callable[[str], list[tuple[int, int]]] | None = None) -> tuple[str, list[PhoneticRecord]]:
+                   keep: Callable[[str], list[tuple[int, int]]] | None = None,
+                   preserve: Callable[[str], list[tuple[int, int]]] | None = None) -> tuple[str, list[PhoneticRecord]]:
     """Apply each rule in order; every occurrence rolls independently. infixes: whether the swear infixes may
     go in (the embellishment's call: not in a manual or a policy). keep: the spans of a text the drawl and
-    infixes stay out of (a heading, a link's text); Australian spelling still applies there."""
+    infixes stay out of (a heading, a link's text); Australian spelling still applies there. preserve protects literal wording from every rule."""
     records: list[PhoneticRecord] = []
+    preserved_for: list = [None, []]
     kept_for: list = [None, []]   # (text, its kept spans): the same until a rule changes the text
     for rule in rules:
         if rule.vulgarity > 0 and not infixes:
@@ -231,7 +233,9 @@ def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: i
 
         def sub(m: re.Match) -> str:
             counter["n"] += 1   # counted either way, so a kept span doesn't shift the rolls after it
-            if any(a <= m.start() < b for a, b in kept()):
+            if preserve is not None and preserved_for[0] != before:
+                preserved_for[:] = [before, preserve(before)]
+            if any(a <= m.start() < b for a, b in kept() + preserved_for[1]):
                 return m.group(0)
             in_dialogue = any(a <= m.start() < b for a, b in quotes)
             prob = rule.dialogue_prob if in_dialogue else rule.prob

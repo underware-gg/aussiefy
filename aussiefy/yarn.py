@@ -2,7 +2,7 @@
 
 The rule engine plans: its draft, the phrases it chose, and the sentences it found too formal. Claude
 gets that plan, the style guide for the level, and three tools. The embellishment (deadset, dinkum, troppo;
-data/genres.yaml; default dinkum, a retelling's, whatever the genre) sets how much liberty it takes: troppo
+data/genres.yaml; default Dinkum for General, whatever the genre) sets how much liberty it takes: troppo
 writes first, without the engine's draft, and treats the planned phrases as vocabulary.
 
 - lookup(query): look up genuine Aussie options for a meaning, or check what a term means
@@ -29,7 +29,8 @@ from . import claude, harness
 from .align import counterparts, sentence_spans
 from .claude import DEFAULT_MODEL
 from .engine import Translator, default_translator
-from .genre import Embellishment
+from .genre import resolve_document, Embellishment
+from .policy import DocumentOverrides
 from .guide import style_guide_data
 
 from .markup import detect_markup, mask
@@ -37,6 +38,13 @@ from .terms import phrase_kept, fold, form_key
 
 YARN_SYSTEM = """You retell English as genuine Australian English using the supplied toolkit and brief.
 {rules}
+
+DOCUMENT_CONFIG is the effective behaviour contract and takes precedence over general craft and preset
+guidance. Use only the listed garnish placements; offer no talker's openings when openings is false. When
+keep_quotes is true, preserve quoted wording exactly. When person_swears is false, do not replace neutral
+people with swears. Keep terms protected by term_domains and datelines protected by dateline_context unchanged.
+Respect check_length/max_length and keep_share as configured. No optional Custom behaviour is implied by its
+embellishment label. Preserve every original fact and the selected markup regardless of the type.
 
 STYLE GUIDE:
 {guide}
@@ -113,7 +121,7 @@ def validate(session: "YarnSession", text: str, declined: list[dict] | None = No
     planned = session.planned
     keep_share = session.embellishment.keep_share if keep_share is None else keep_share
     lint = harness.lint(text, level=session.level, vulgarity=session.vulgarity, english=session.english,
-                         embellishment=session.embellishment.step, original=session.text, markup=session.markup,
+                         embellishment=session.embellishment.step, document_type=session.document_type, document_config=session.document_config, original=session.text, markup=session.markup,
                          translator=session.translator, suggest=False)
     for issue in lint["issues"]:
         fix = issue.get("australian")
@@ -161,6 +169,8 @@ class YarnSession:
     system: str
     payload: dict[str, Any]
     embellishment: Embellishment   # resolved by brief from the selected dictionary
+    document_type: str = "general"
+    document_config: DocumentOverrides | None = None
     markup: str = "text"
     english: str | None = None     # the original's English, for the dialect swaps (None: the default)
     declined: set[str] = field(default_factory=set)   # planned phrases declined with a reason (form keys), at any
@@ -180,14 +190,18 @@ MARKUP_RULE = ("The original is a {markup} document. Retell only its prose. Keep
 
 def brief(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None,
           markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
+              document_type: str = "general", document_config: dict | None = None,
           translator: Translator | None = None) -> YarnSession:
     tr = translator or default_translator()
+    document_config = DocumentOverrides.parse(document_config)
     if markup == "auto":
         markup = detect_markup(text)
     the_plan = harness.plan(text, level=level, seed=seed, vulgarity=vulgarity, markup=markup, english=english,
-                            embellishment=embellishment, translator=tr)
-    setting = (translator or default_translator()).dictionary.genres.embellishments[the_plan["embellishment"]]
-    guide = harness.guide(level=level, vulgarity=vulgarity, embellishment=setting.step, translator=tr)
+                            embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr)
+    context = resolve_document(None, config=tr.dictionary.genres, document_type=the_plan["genre"],
+                               document_config=document_config)
+    setting = context.setting(the_plan["embellishment"])
+    guide = harness.guide(level=level, vulgarity=vulgarity, embellishment=setting.step, document_type=context.name, document_config=document_config, translator=tr)
     # each phrase once, with what it stands for, so a wrong sense shows at a glance
     phrases: dict[str, dict[str, str]] = {}
     for p in the_plan["planned"]:
@@ -198,13 +212,14 @@ def brief(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | st
     payload = {"ORIGINAL": text, "LEVEL": guide["level"], "VULGARITY": guide["vulgarity"],
                "EMBELLISHMENT": {"name": setting.name, "guidance": setting.guidance},
                "GENRE": {"name": the_plan["genre"], "guidance": the_plan["guidance"]["genre"]},
+               "DOCUMENT_CONFIG": the_plan["document_config"],
                **({"ENGINE_DRAFT": the_plan["draft"]} if setting.draft else {}),
                "PLANNED_PHRASES": list(phrases.values()), "RIFFS": the_plan["riffs"],
                "OPENINGS": the_plan["openings"], "DIFFICULT_SENTENCES": the_plan["difficult_sentences"]}
     if markup != "text":
         payload["MARKUP"] = MARKUP_RULE.format(markup=markup)
     return YarnSession(text, guide["level"], seed, guide["vulgarity"], tr, the_plan, planned,
-                       YARN_SYSTEM.format(guide=guide_text, rules=style_guide_data().yarn_rules), payload, embellishment=setting, markup=markup, english=english)
+                       YARN_SYSTEM.format(guide=guide_text, rules=style_guide_data().yarn_rules), payload, embellishment=setting, document_type=context.name, document_config=document_config, markup=markup, english=english)
 
 
 def _moved(session: "YarnSession", text: str, kept: list[str]) -> list[tuple[str, str]]:
@@ -270,7 +285,7 @@ def dispatch_tool(session: YarnSession, name: str, args: dict[str, Any]) -> tupl
                               translator=s.translator), False
     if name == "lint":
         out = harness.lint(args["text"], level=s.level, vulgarity=s.vulgarity, markup=s.markup, english=s.english,
-                           embellishment=s.embellishment.step, translator=s.translator, original=s.text)
+                           embellishment=s.embellishment.step, document_type=s.document_type, document_config=s.document_config, translator=s.translator, original=s.text)
         return _without_declined(out, s.declined), False
     s.decline(args["declined"])
     problems = validate(s, args["text"], args["declined"])
@@ -281,14 +296,15 @@ def yarn(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str
          markup: str = "text", client: Any = None, model: str = DEFAULT_MODEL, cache: bool = True,
          cache_dir: str | None = None,
          max_turns: int = 12, english: str | None = None, embellishment: int | str | None = None,
+              document_type: str = "general", document_config: dict | None = None,
          translator: Translator | None = None) -> YarnResult:
     """Run yarn mode: brief the model, answer its tool calls, accept the first submit that validates. Only the
     Anthropic SDK and API calls are guarded (offline, no key, API errors keep the engine's draft); a bug in the
     harness or validation raises. markup (markdown, mdx, auto): the model retells the prose only, and a
     submission that changes any code or markup is sent back. english as for translate; embellishment as for
-    translate, except that the default is dinkum, a retelling's, whatever the genre."""
+    translate: General defaults to Dinkum, named types supply presets."""
     session = brief(text, level=level, seed=seed, vulgarity=vulgarity, markup=markup, english=english,
-                    embellishment=embellishment, translator=translator)
+                    embellishment=embellishment, document_type=document_type, document_config=document_config, translator=translator)
     result = YarnResult(session.plan["draft"], "", session.plan["draft"], session.plan, {}, model)
 
     key_payload = {"BRIEF": session.payload, "PLAN": session.plan, "VALIDATION": VALIDATION_VERSION,

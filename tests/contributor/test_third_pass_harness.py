@@ -75,10 +75,10 @@ def test_dialogue_in_a_text_with_one_mention_stays_speech():
 
 def test_troppo_calls_no_safety_reader_names(translator):
     bears = (CORPUS / "everyday" / "instructions" / "nps_bear_safety.txt").read_text(encoding="utf-8")
-    r = translator.translate(bears, level=5, vulgarity=3, embellishment="troppo")
+    r = translator.translate(bears, level=5, vulgarity=3, embellishment="troppo", document_type="auto")
     assert r.embellishment.takes("opener") and not r.embellishment.takes("insult")
     story = (CORPUS / "reference" / "goldilocks.txt").read_text(encoding="utf-8")
-    assert translator.translate(story, level=5, embellishment="troppo").embellishment.takes("insult")
+    assert translator.translate(story, level=5, embellishment="troppo", document_type="auto").embellishment.takes("insult")
 
 
 def test_a_term_plural_in_form_takes_no_a(translator):

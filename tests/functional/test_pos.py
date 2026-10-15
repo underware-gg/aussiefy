@@ -68,14 +68,14 @@ def test_swear_infixes_go_only_where_the_embellishment_takes_them(translator):
     tech = ("Run the build command. If the server returns an error, check the config file and the API key. "
             "The deploy is a big problem when the cache is stale. Restart the node and check the logs.")
     tech += " The cache is really stale and the build is very slow."
-    for out in _outs(translator, tech, level=5, vulgarity="tradie"):
+    for out in _outs(translator, tech, level=5, vulgarity="tradie", document_type="auto"):
         assert not any(w in out for w in ("fuckin'", "bloody")), out   # flamin' is clean (vulgarity 0)
-    r = translator.translate(tech, level=5, seed=1, vulgarity="tradie")
+    r = translator.translate(tech, level=5, seed=1, vulgarity="tradie", document_type="auto")
     assert any("deadset (the technical text's own) takes no swear infixes" in w for w in r.warnings)
-    told = translator.translate(tech, level=5, seed=1, vulgarity="tradie", embellishment="troppo")
+    told = translator.translate(tech, level=5, seed=1, vulgarity="tradie", embellishment="troppo", document_type="auto")
     assert not any("takes no swear infixes" in w for w in told.warnings)
     story = "It was a great big stone. He couldn't believe it."
-    assert any("bloody" in o or "fuckin'" in o for o in _outs(translator, story, level=5, vulgarity="tradie"))
+    assert any("bloody" in o or "fuckin'" in o for o in _outs(translator, story, level=5, vulgarity="tradie", document_type="auto"))
 
 
 def test_the_tags_follow_our_tokens():

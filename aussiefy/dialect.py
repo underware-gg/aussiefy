@@ -40,9 +40,10 @@ class DialectSwap:
     known_only: bool = False      # swaps only in a text known to be in this English
     not_in: frozenset[str] = frozenset()   # genres where the word is a term of art
 
-    def applies(self, english: str | None, genre: str) -> bool:
+    def applies(self, english: str | None, genre: str | tuple[str, ...]) -> bool:
         """Whether this swap may go in a text in this English (None: not known) and genre."""
-        if genre in self.not_in:
+        domains = (genre,) if isinstance(genre, str) else genre
+        if self.not_in.intersection(domains):
             return False
         return not self.known_only or english == self.english
 
@@ -74,7 +75,7 @@ class DialectTable:
         self._by_pattern = {id(s.pattern): s for s in self.swaps}
         self._index = PatternIndex([s.pattern for s in self.swaps])
 
-    def find(self, tokens: list[Token], english: str | None, genre: str, taken: set[int] = frozenset()) -> list[Found]:
+    def find(self, tokens: list[Token], english: str | None, genre: str | tuple[str, ...], taken: set[int] = frozenset()) -> list[Found]:
         """The swaps in one sentence: longest first where they overlap ("trash can" before "the trash"), none
         on a taken token, a guard's words, or a capital that marks a name or title ("Parking Lot B")."""
         def named(span: range) -> bool:
@@ -86,12 +87,12 @@ class DialectTable:
                if (text := swap.realise(m.inflection, m.captures)).lower() != _surface(tokens[m.start:m.end]).lower()]
         return sorted(out, key=lambda f: f.start)
 
-    def spans(self, tokens: list[Token], english: str | None, genre: str) -> list[tuple[int, int]]:
+    def spans(self, tokens: list[Token], english: str | None, genre: str | tuple[str, ...]) -> list[tuple[int, int]]:
         """Every span the table claims in a sentence, guards included: where a shorter dictionary match inside
         one ("cookie" in "cookie jar", "jelly" in "petroleum jelly") must give way."""
         return [(m.start, m.end) for m, _ in self._claims(tokens, english, genre)]
 
-    def _claims(self, tokens: list[Token], english: str | None, genre: str, taken: set[int] = frozenset(),
+    def _claims(self, tokens: list[Token], english: str | None, genre: str | tuple[str, ...], taken: set[int] = frozenset(),
                 skip=lambda span: False):
         """The matches the table claims, longest first where they overlap, each with its swap: none on a taken
         token, none that doesn't apply to this English and genre, none `skip` turns down (left for a shorter

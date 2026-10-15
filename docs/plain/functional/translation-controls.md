@@ -9,11 +9,49 @@ aussiefy translate "I am very tired." -l 5 --vulgarity nan --embellishment deads
 aussiefy translate "I am very tired." --english uk --embellishment troppo --explain
 ```
 
-The deterministic genre reader recognises story, personal, news, instructions, technical and official prose.
-The engine defaults to that genre's setting: story troppo, personal dinkum, the other forms deadset. A
-retelling's tools (`plan`, `guide`, `lint`, `verify`, `yarn`) default to dinkum. An explicit setting wins; genre
-still rules out inappropriate openings and name-calling. These policies are data in `genres.yaml`, loaded
-with the selected dictionary. Explanations and results report the genre and actual setting.
+## Document types and exact behaviour overrides
+
+Document behaviour is explicit. `document_type="general"` / `--document-type general` is the default, with
+Dinkum embellishment. It applies no genre-specific restrictions. `auto` opts into deterministic detection of
+story, personal, news, instructions, technical or official prose. A named type selects that preset directly.
+Named types retain their own default embellishment (story Troppo, personal Dinkum, the others Deadset).
+Explicit embellishment always overrides that default.
+
+`custom` starts with optional document behaviours disabled. Choosing an embellishment alone does not enable
+its garnish, openings or performance for Custom; specify exactly what you want in `document_config`.
+Core vocabulary substitution, level, vulgarity limits and selected markup protection still apply.
+
+Every type accepts the same `document_config` object (`--document-config` takes JSON). Precedence is the
+selected preset, then explicit dials, then exact behaviour overrides. Lists replace inherited lists; `false`,
+`[]` and `0` are explicit values. Omit a field to inherit; unknown fields and invalid values are errors.
+
+```sh
+aussiefy translate "You are very tired." --document-type general -e dinkum --document-config '{"garnish":["tag"],"keep_quotes":true}'
+aussiefy translate "Read the API documentation." --document-type custom --document-config '{"term_domains":["technical"],"garnish":[]}'
+```
+
+| Setting | Values and effect |
+|---|---|
+| `garnish` | Exact list from `connective`, `opener`, `tag`, `aside`, `tail`, `closer`, `riff`, `infix`, `insult`; placement probabilities still come from the level/vulgarity profiles |
+| `openings` | Boolean: offer talker's openings in a plan |
+| `person_swears` | Boolean: allow swear words to replace neutral descriptions of people, within the vulgarity limit |
+| `keep_quotes` | Boolean: preserve quoted wording |
+| `term_domains` | List of named detected types whose concept/dialect `not_in` vocabulary is protected; `[]` disables this protection |
+| `command_context` | Boolean: recognise sentence-initial imperative verbs as commands |
+| `dateline_context` | Boolean: preserve news-style datelines |
+| `formal_to_rework` | Boolean: offer difficult formal sentences to a retelling writer |
+| `guidance` | Text: replace document-type guidance in the brief |
+| `draft` | Boolean: include the engine's draft in a yarn brief |
+| `keep_share` | Number 0–1: required share of planned phrases retained or declined by a yarn |
+| `check_length` | Boolean: enforce the length limit; Custom defaults to false, and an explicit `max_length` enables it unless explicitly disabled |
+| `max_length` | Finite number at least 1: retelling length multiplier, plus the existing 20-word allowance |
+| `perform` | Boolean: include performance craft guidance |
+| `embellishment_guidance` | Text: replace embellishment guidance in the brief |
+
+All controls have the same names and meaning in Python, CLI, MCP and yarn sessions. Results and explain mode
+report the requested type, resolved type and effective behaviours. Auto resolves against the complete original,
+including in Markdown and when checking a draft. `guide` has no source text, so Auto is an error there; select
+General or a named type. Markdown syntax protection is independent of document behaviour.
 
 `english=` / `--english` selects `us`, `uk`, `auto` or `none`. The default comes from the profile (`auto` in
 the bundled profiles). Auto uses American spellings to infer US English; ambiguous British words such as
@@ -43,8 +81,8 @@ Tests: [genre](../../../tests/functional/test_genre.py), [dialect](../../../test
 [POS](../../../tests/functional/test_pos.py), [extended markup](../../../tests/functional/test_markup.py) and
 [strict Markdown](../../../tests/functional/test_markdown.py).
 
-Lint suggestions inherit the original's genre and source-English context, including custom dictionary policies,
+Lint suggestions inherit the original's selected document policy and source-English context, including custom dictionary policies,
 even when the draft sounds like a story. Held dialect wording is excused only with the same folded surface
-and occurrence count; quoted spelling still follows the Australian house rules. Planning offers riffs only
+and occurrence count; explicitly kept quotes retain their original spelling too. Planning offers riffs only
 where the resolved setting permits them: deadset offers none, and strict news/instructions/docs/official
 forms below troppo offer none. The dinkum guidance preserves the force of obligations and findings.

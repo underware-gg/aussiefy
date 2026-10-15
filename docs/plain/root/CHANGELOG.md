@@ -5,6 +5,12 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- General is the default document type; detection is opt-in. Named presets and Custom accept the same exact
+  behaviour overrides through Python, CLI, MCP and yarn tools. Explicit values override presets, including
+  false and empty lists; Markdown protection remains independent.
+- Public docs use Swaggie/Dinkum/Dad with explicit technical-term protection and a shared notice linking to
+  each plain counterpart.
+
 ## [0.1.0] - 2026-10-15
 
 - First Underware release from a clean development baseline, with the complete pre-cutover history

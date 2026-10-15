@@ -22,7 +22,7 @@ def put(root, name, text):
 def repo(tmp_path):
     rows = [{"source": "docs/plain/root/README.md", "output": "README.md"},
             {"source": "docs/plain/user/guide.md", "output": "docs/user/guide.md"}]
-    put(tmp_path, p.CONFIG, yaml.safe_dump({"translation": {"level": 5, "vulgarity": "dad", "seed": 0}, "documents": rows}))
+    put(tmp_path, p.CONFIG, yaml.safe_dump({"translation": p.SETTINGS, "documents": rows}))
     put(tmp_path, "docs/plain/root/README.md", '# Intro\n\nI\'m extremely busy.\n\n[Guide](../user/guide.md#usage) and [licence](../../../LICENSE).\n\n```console\n$ aussiefy "test"\nExact output.\n```\n')
     put(tmp_path, "docs/plain/user/guide.md", '# Usage\n\nShe was extremely busy.\n\n[Home](../root/README.md#intro)\n')
     put(tmp_path, "LICENSE", "Own fixture licence.\n")
@@ -36,7 +36,7 @@ def test_generate_is_repeatable_prose_changes_and_structure_examples_survive(rep
     assert "I'm extremely busy.\n" not in text
     assert '[Guide](docs/user/guide.md#usage)' in text and '[licence](LICENSE)' in text
     assert '```console\n$ aussiefy "test"\nExact output.\n```' in text
-    assert '# Intro\n' in text and '[Edit the plain source](docs/plain/root/README.md)' in text
+    assert '# Intro\n' in text and "[Prefer docs that are as dry as a dead dingo's donger?](docs/plain/root/README.md)" in text
     p.generate(repo)
     assert first == {d.output: (repo / d.output).read_bytes() for d in p.load(repo).documents}
     p.check(repo)

@@ -20,7 +20,8 @@ $ aussiefy "Are you crazy?" -l 4 -s 0 --explain
 Crikey, do you have a kangaroo loose in your top paddock?
 
 level 4, seed 0, mood light
-genre story (story 1, personal 0.08, technical 0, instructions 0, news 0, official 0); embellishment troppo: garnish aside, closer, connective, infix, insult, opener, riff, tag, tail
+document type general -> general (); embellishment dinkum: garnish connective, infix, insult, opener, riff, tag, tail
+document behaviours: {"check_length": true, "command_context": false, "dateline_context": false, "draft": true, "formal_to_rework": true, "garnish": ["connective", "infix", "insult", "opener", "riff", "tag", "tail"], "keep_quotes": false, "keep_share": 0.6, "max_length": 1.6, "openings": true, "perform": false, "person_swears": true, "term_domains": []}
 
 substitutions:
   [8:13] "crazy" -> "Do you have a kangaroo loose in your top paddock"

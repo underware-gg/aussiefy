@@ -11,10 +11,10 @@ result is genuinely Australian rather than a caricature. All commands come from 
 `blow-in`, `local`, `larrikin`, `swaggie`) and `--vulgarity` 0-3 (`nan`, `dad`, `uncle-bob`, `tradie`;
 default: the level's own, `nan` at 1-2, `dad` at 3-4, `uncle-bob` at 5). Commands that read a text, and `guide`, also
 take `-e/--embellishment` 0-2: how much liberty the telling takes (`deadset` straight, `dinkum` in a genuine voice,
-`troppo` a performed yarn). For your own retelling (`plan`, `lint`, `verify`, `guide`) the default is `dinkum`, whatever the
-genre: it scored best in every genre. `translate`'s default is the text's genre's own (a story `troppo`, news
-and docs `deadset`). Use `troppo` when the brief wants a performance: at levels 4-5 it scores as well as `dinkum` (the fourth everyday
-pass), at 2-3 its colour is out of register, and it always gives up some fidelity for its liberty.
+`troppo` a performed yarn). General is the default document type, with `dinkum` embellishment. Use `--document-type auto` to opt into
+detection, or select a named preset. `custom` enables only explicitly configured optional behaviours.
+All document operations accept `document_config` (`--document-config` JSON): exact overrides after presets and
+dials, with false and empty lists preserved. See [translation controls](../../docs/functional/translation-controls.md).
 
 ## Workflow
 

@@ -9,6 +9,7 @@ from aussiefy import harness
 from aussiefy.terms import fold, form_key, phrase_kept, restore_g, strip_markup
 
 ENVELOPE = {"level", "level_name", "vulgarity", "vulgarity_name", "policy_warnings"}
+DOCUMENT = {"document_type", "document_type_source", "genre", "genre_scores", "document_config", "document_overrides"}
 TEXT = ('She was very tired and hungry. "Are you crazy?" he asked. The proposition was conceived with considerable '
         "deliberation and dedicated to posterity.")
 
@@ -63,7 +64,7 @@ def test_policy_rejects_values_outside_its_closed_sets(translator, bad, message)
 
 def test_plan_shape(translator):
     p = harness.plan(TEXT, translator=translator)
-    assert set(p) == ENVELOPE | {"draft", "seed", "planned", "garnish", "riffs", "openings", "mood",
+    assert set(p) == ENVELOPE | DOCUMENT | {"draft", "seed", "planned", "garnish", "riffs", "openings", "mood",
                                  "difficult_sentences", "untouched_sentences", "note", "genre", "embellishment", "embellishment_name", "dialect", "mood", "guidance"}
     assert p["planned"] and all(set(x) == {"original", "span", "entry", "aussie", "gloss"} for x in p["planned"])
     assert all(set(g) == {"placement", "sentence", "entry", "text", "sentence_text"} for g in p["garnish"])
@@ -81,7 +82,7 @@ def test_plan_shape(translator):
 def test_lint_shape(translator):
     out = harness.lint("Y'all know the color is wrong, mate. Bloody bloody bloody bloody hell.",
                        original="You know the colour is wrong.", translator=translator)
-    assert set(out) == ENVELOPE | {"ok", "issues", "warnings", "suggestions", "scope"}
+    assert set(out) == ENVELOPE | DOCUMENT | {"ok", "issues", "warnings", "suggestions", "scope"}
     assert out["issues"] and all({"kind", "phrase"} <= set(i) for i in out["issues"])
     assert {i["kind"] for i in out["issues"]} >= {"dialect", "spelling"}
     assert all("australian" in i for i in out["issues"] if i["kind"] in ("dialect", "spelling"))
@@ -118,7 +119,7 @@ def test_brief_is_what_yarn_sends(translator):
 
     s = brief("She was very tired.", level=4, seed=3, translator=translator)
     assert set(s.payload) == {"ORIGINAL", "LEVEL", "VULGARITY", "ENGINE_DRAFT", "PLANNED_PHRASES", "RIFFS",
-                              "OPENINGS", "DIFFICULT_SENTENCES", "GENRE", "EMBELLISHMENT"}
+                              "OPENINGS", "DIFFICULT_SENTENCES", "GENRE", "EMBELLISHMENT", "DOCUMENT_CONFIG"}
     assert s.payload["LEVEL"] == 4 and s.vulgarity == s.payload["VULGARITY"]
     assert s.planned == [p["aussie"] for p in s.plan["planned"]] and "STYLE GUIDE" in s.system
 

@@ -87,7 +87,7 @@ def test_short_and_clear_cases(text, genre):
 
 
 def test_every_genre_has_a_policy_and_neutral_people_are_flagged(translator):
-    assert set(load_genres().policies) == set(GENRES)
+    assert set(load_genres().policies) == set(GENRES) | {"general", "custom"}
     settings = load_genres().embellishments
     assert all(e.garnish <= set(GARNISH) for e in settings.values())
     assert {"SOMEONE", "CHILD", "DEAD_PEOPLE"} <= translator.dictionary.neutral_person_concepts
@@ -105,7 +105,7 @@ SAFETY = ("If someone is struck by lightning, call 911. Stay indoors. Avoid wate
 
 def test_a_safety_notice_takes_no_garnish_and_no_one_is_a_mongrel(translator):
     for seed in range(8):
-        r = translator.translate(SAFETY, level=5, seed=seed, vulgarity="tradie")
+        r = translator.translate(SAFETY, level=5, seed=seed, vulgarity="tradie", document_type="auto")
         assert r.genre.name == "instructions"
         assert not [g for g in r.garnish if g.text], seed
         assert not any(w in r.text for w in ("mongrel", "bastard", "bugger", "cunt")), r.text
@@ -113,17 +113,17 @@ def test_a_safety_notice_takes_no_garnish_and_no_one_is_a_mongrel(translator):
 
 def test_a_story_keeps_its_garnish(translator):
     story = (CORPUS / "reference" / "goldilocks.txt").read_text(encoding="utf-8")
-    r = translator.translate(story, level=5, seed=1)
+    r = translator.translate(story, level=5, seed=1, document_type="auto")
     assert r.genre.name == "story" and [g for g in r.garnish if g.text]
 
 
 def test_yarn_mode_reads_the_genre(translator):
     from aussiefy.yarn import brief
 
-    s = brief(SAFETY, level=4, translator=translator)
+    s = brief(SAFETY, level=4, translator=translator, document_type="auto", embellishment="dinkum")
     assert s.payload["GENRE"]["name"] == "instructions" and "step" in s.payload["GENRE"]["guidance"]
     assert s.payload["OPENINGS"] == []
-    told = brief((CORPUS / "reference" / "goldilocks.txt").read_text(encoding="utf-8"), translator=translator)
+    told = brief((CORPUS / "reference" / "goldilocks.txt").read_text(encoding="utf-8"), translator=translator, document_type="auto", embellishment="dinkum")
     assert told.payload["OPENINGS"]
     assert s.payload["EMBELLISHMENT"]["name"] == "dinkum" and "ENGINE_DRAFT" in s.payload   # a retelling's
     assert told.payload["EMBELLISHMENT"]["name"] == "dinkum"
@@ -137,12 +137,12 @@ def test_yarn_mode_reads_the_genre(translator):
 def test_the_caller_sets_the_embellishment(translator):
     """A safety notice told troppo takes the garnish (the caller asked for it), but still names nobody a mongrel:
     that's the genre's form, not the setting's liberty."""
-    told = [translator.translate(SAFETY, level=5, seed=s, vulgarity="tradie", embellishment="troppo")
+    told = [translator.translate(SAFETY, level=5, seed=s, vulgarity="tradie", embellishment="troppo", document_type="auto")
             for s in range(8)]
     assert all(r.embellishment.name == "troppo" for r in told) and any(g.text for r in told for g in r.garnish)
     assert not any(w in r.text for r in told for w in ("mongrel", "bastard", "cunt"))
     story = (CORPUS / "reference" / "goldilocks.txt").read_text(encoding="utf-8")
-    straight = translator.translate(story, level=5, seed=1, embellishment="deadset")
+    straight = translator.translate(story, level=5, seed=1, embellishment="deadset", document_type="auto")
     assert not [g for g in straight.garnish if g.text]
 
 
@@ -176,11 +176,11 @@ def test_the_length_limit_follows_the_embellishment(translator):
     original = SAFETY
     padded = original + " " + " ".join(["Keep well clear of the water and stay inside."] * 5)
     kinds = lambda **kw: {w["kind"] for w in harness.lint(padded, original=original, translator=translator,
-                                                            **kw)["warnings"]}
+                                                            **kw, document_type="auto")["warnings"]}
     assert "too_long" in kinds()                                # instructions: deadset, 1.3x
     assert "too_long" not in kinds(embellishment="troppo")      # the caller's setting wins
     problems = lambda **kw: {p["kind"] for p in harness.verify(padded, original=original, translator=translator,
-                                                                **kw)["problems"]}
+                                                                **kw, document_type="auto")["problems"]}
     assert "too_long" in problems() and "too_long" not in problems(embellishment="troppo")
 
 
@@ -209,22 +209,22 @@ def test_the_yarn_cache_key_covers_the_setting(translator, tmp_path):
     assert len(seen) == 2 and seen[0] != seen[1]
 
 
-def test_a_retelling_defaults_to_dinkum_whatever_the_genre(translator):
+def test_general_defaults_to_dinkum_and_auto_uses_the_detected_type(translator):
     g = harness.guide(level=5, translator=translator)
     assert g["embellishment_name"] == "dinkum" and "perform it" not in g["craft"]
     assert "perform it" in harness.guide(level=5, embellishment="troppo", translator=translator)["craft"]
     assert harness.guide(level=5, embellishment="deadset", translator=translator)["embellishment_name"] == "deadset"
     notice = (CORPUS / "everyday" / "instructions" / "fda_picnic_food_safety.txt").read_text(encoding="utf-8")
-    assert harness.translate(notice, level=4, translator=translator)["embellishment_name"] == "deadset"
-    assert harness.plan(notice, level=4, translator=translator)["embellishment_name"] == "dinkum"
-    assert yarn_brief(notice, level=4, translator=translator).embellishment.name == "dinkum"
-    assert harness.plan(notice, level=4, embellishment="deadset", translator=translator)["embellishment_name"] == "deadset"
+    assert harness.translate(notice, level=4, translator=translator, document_type="auto")["embellishment_name"] == "deadset"
+    assert harness.plan(notice, level=4, translator=translator, document_type="auto")["embellishment_name"] == "deadset"
+    assert yarn_brief(notice, level=4, translator=translator, document_type="auto").embellishment.name == "deadset"
+    assert harness.plan(notice, level=4, embellishment="deadset", translator=translator, document_type="auto")["embellishment_name"] == "deadset"
 
 
 def test_results_report_the_embellishment(translator):
-    d = translator.translate(SAFETY, level=4, embellishment="dinkum").to_dict()
+    d = translator.translate(SAFETY, level=4, embellishment="dinkum", document_type="auto").to_dict()
     assert d["embellishment"] == 1 and d["embellishment_name"] == "dinkum"
-    assert harness.translate(SAFETY, translator=translator)["embellishment_name"] == "deadset"
+    assert harness.translate(SAFETY, translator=translator, document_type="auto")["embellishment_name"] == "deadset"
 
 
 def test_a_form_narrows_dinkum_and_its_openings_at_every_setting(translator):
@@ -233,19 +233,19 @@ def test_a_form_narrows_dinkum_and_its_openings_at_every_setting(translator):
     at every setting the form decides the openings."""
     bears = (CORPUS / "everyday" / "instructions" / "nps_bear_safety.txt").read_text(encoding="utf-8")
     for seed in range(3):
-        r = translator.translate(bears, level=5, seed=seed, embellishment="dinkum")
+        r = translator.translate(bears, level=5, seed=seed, embellishment="dinkum", document_type="auto")
         assert r.genre.name == "instructions" and r.embellishment.name == "dinkum"
         assert not [g for g in r.garnish if g.text and g.placement in ("opener", "connective", "tag")]
-    assert not translator.translate(bears, level=5, embellishment="dinkum").embellishment.openings
-    assert harness.plan(bears, level=5, translator=translator)["openings"] == []
+    assert not translator.translate(bears, level=5, embellishment="dinkum", document_type="auto").embellishment.openings
+    assert harness.plan(bears, level=5, translator=translator, document_type="auto")["openings"] == []
     # a storyteller's openings follow the form at every setting (the fourth pass: troppo opened an obituary with
     # "Fair dinkum, this happened."), and so do swear infixes below troppo
-    assert harness.plan(bears, level=5, embellishment="troppo", translator=translator)["openings"] == []
-    assert not translator.translate(bears, level=5, embellishment="dinkum").embellishment.takes("infix")
+    assert harness.plan(bears, level=5, embellishment="troppo", translator=translator, document_type="auto")["openings"] == []
+    assert not translator.translate(bears, level=5, embellishment="dinkum", document_type="auto").embellishment.takes("infix")
     story = (CORPUS / "reference" / "goldilocks.txt").read_text(encoding="utf-8")
-    assert harness.plan(story, level=5, embellishment="troppo", translator=translator)["openings"]
-    assert translator.translate(bears, level=5, embellishment="troppo").embellishment.takes("opener")
-    assert translator.translate(story, level=5, embellishment="dinkum").embellishment.takes("opener")
+    assert harness.plan(story, level=5, embellishment="troppo", translator=translator, document_type="auto")["openings"]
+    assert translator.translate(bears, level=5, embellishment="troppo", document_type="auto").embellishment.takes("opener")
+    assert translator.translate(story, level=5, embellishment="dinkum", document_type="auto").embellishment.takes("opener")
 
 
 def test_no_name_calling_where_the_form_rules_it_out():
@@ -265,7 +265,7 @@ def test_no_name_calling_where_the_form_rules_it_out():
 def test_a_dateline_takes_no_opener_even_at_troppo(translator):
     text = (CORPUS / "everyday" / "news" / "ford_square_dance_1925.txt").read_text(encoding="utf-8")
     for seed in range(4):
-        r = translator.translate(text, level=5, seed=seed, embellishment="troppo")
+        r = translator.translate(text, level=5, seed=seed, embellishment="troppo", document_type="auto")
         assert r.text.lstrip().startswith("DETROIT")
 
 
@@ -274,7 +274,7 @@ def test_a_held_quote_takes_no_garnish(translator):
                         'very pleased with it. Wages are rising," the statement said.'] * 4)
     seen = []
     for seed in range(8):
-        r = translator.translate(text, level=5, seed=seed, embellishment="troppo")
+        r = translator.translate(text, level=5, seed=seed, embellishment="troppo", document_type="auto")
         assert r.genre.name == "news"
         assert r.text.count('"Productivity growth is strong. We are very pleased with it. Wages are rising,"') == 4
         seen += [g for g in r.garnish if g.text]
@@ -286,7 +286,7 @@ def test_a_command_is_lowered_after_an_opener(translator):
     import re
 
     for seed in range(4):
-        out = translator.translate(text, level=4, seed=seed, embellishment="troppo").text
+        out = translator.translate(text, level=4, seed=seed, embellishment="troppo", document_type="auto").text
         assert not re.search(r"\b(?:Well|Now|Anyway), (?:Pour|Bake|Beat|Stir|Preheat)\b", out)
 
 
@@ -302,7 +302,6 @@ def test_a_command_is_lowered_after_an_opener(translator):
     (("genres", "news", "keep_quotes"), "false"),
     (("genres", "news", "guidance"), None),
     (("genres", "news", "embellishment"), []),
-    (("retelling",), []),
 ])
 def test_genre_configuration_rejects_wrong_types(path, value):
     from aussiefy.genre import GenreConfig
