@@ -12,13 +12,12 @@ I'm flat out like a lizard drinking.
 
 ## Install
 
-Requires Python 3.10+. Until the first release from this repository, install the development snapshot
-from `dev`, which is also the repository's default branch. These examples follow that moving branch;
-replace `dev` with a full commit SHA for a reproducible installation.
+Requires Python 3.10+. These commands install the `v0.1.0` release. Releases are on `main`;
+development continues on `dev`. A full commit SHA can be used in place of the tag.
 
 ```sh
-pip install "git+https://github.com/underware-gg/aussiefy@dev"            # core
-pip install "aussiefy[llm] @ git+https://github.com/underware-gg/aussiefy@dev"   # + Claude modes (yarn, --surface, --rewrite)
+pip install "git+https://github.com/underware-gg/aussiefy@v0.1.0"            # core
+pip install "aussiefy[llm] @ git+https://github.com/underware-gg/aussiefy@v0.1.0"   # + Claude modes (yarn, --surface, --rewrite)
 ```
 
 Other extras: `mcp` (the `aussiefy-mcp` server), `embeddings`, `scrape`, `dev`. For development, clone the

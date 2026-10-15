@@ -9,8 +9,12 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
-- Public installation examples select the development snapshot on `dev` until the first release;
-  package metadata'n setup guides reflect all three controls and current dependencies.
+## [0.1.0] - 2026-10-15
+
+- First Underware release from a clean development baseline, with the complete pre\-cutover history
+  preserved in Rob\-Morris main. Subsequent development history is retained normally.
+- Public installation examples select `v0.1.0`; package metadata'n setup guides reflect all three
+  controls'n current dependencies.
 
 - Releases use checked GitHub squash PRs, strict main protection, exact release\-head CI'n resumable
   tag/publication/dev reconciliation. Preparation preserves failed work for review.
@@ -299,7 +303,7 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 - Define the package version once, include all test dependencies in the dev extra, and refuse promotion
   on skipped checks except the local copyrighted\-corpus tests.
 
-## [0.1.0] - 2026-10-12
+### Imported initial capabilities
 
 The first release.
 

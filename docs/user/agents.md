@@ -22,7 +22,7 @@ the `skills/aussiefy/` folder to `~/.claude/skills/aussiefy/`.
 ## In any MCP-capable agent: the MCP server
 
 ```sh
-pip install "aussiefy[mcp] @ git+https://github.com/underware-gg/aussiefy@dev"
+pip install "aussiefy[mcp] @ git+https://github.com/underware-gg/aussiefy@v0.1.0"
 claude mcp add aussiefy -- aussiefy-mcp     # Claude Code; other clients run `aussiefy-mcp` over stdio
 ```
 

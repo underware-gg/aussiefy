@@ -8,11 +8,22 @@
 
 Work happens on `dev` (or a branch off it\). `main` holds one checked, squashed commit per tagged release.
 `scripts/promote.py` prepares a release branch, checks its exact head/base'n finishes through a GitHub PR.
-Before the first release, `dev` is the GitHub default branch so visitors'n clones see the workin' project;
-`main` still contains only repository setup. After the first checked release reaches `main`, change the
-GitHub default branch to `main` and update installation examples to a released tag. Development stays on `dev`.
+After the first checked release, `main` is the GitHub default branch'n installation examples select a
+released tag. Contributors check out `dev`; its development history is retained between releases.
 Don't commit to `main` directly. The decisions are [DD-013](../architecture/decisions/dd-013-one-squashed-release-per-version.md)
 and [DD-018](../architecture/decisions/dd-018-checked-pr-release-promotion.md).
+
+## Initial history cutover
+
+Before the first Underware release, the completed source work'n the accumulated Underware development
+history were consolidated into `Rob-Morris/aussiefy` main. Its merge `f83647d` preserves both histories and
+the reviewed final project tree. Underware's clean baseline `efecc8c` has the original licence commit as
+its sole parent'n exactly the same project files as the archived development tip.
+
+The user\-authorised, expected\-old\-SHA leased reset of `dev` to that baseline was a one\-time cutover before
+release preparation. Normal promotion retains development'n release\-source ancestry from that point;
+there's no recurring reset, and `main` remains release\-only. Final release\-development commits are also
+preserved in Rob\-Morris main before obsolete cutover/source branches are removed.
 
 ## The changelog
 
@@ -67,7 +78,7 @@ and observed strict server protection. Expected\-head merging protects against a
 checks close the base\-move race. After squash merge, finish reads back parent, tree, changelog'n trailer
 before creating the immutable tag'n publishin' notes. It fast\-forwards dev to the release head,
 reconciles main with `git merge -s ours`, pushes dev, then removes the release branch. Deletion uses an
-expected\-head lease; dev'n main are never force\-updated.
+expected\-head lease; ordinary promotion never force\-updates dev or main.
 
 ## Interrupted work
 
