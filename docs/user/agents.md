@@ -4,7 +4,7 @@
 
 # Using aussiefy from an agent
 
-Language models write bloody good Australian English when they have ridgy\-didge source material'n a check. aussiefy
+Language models write good Australian English when they have ridgy\-didge source material'n a check. aussiefy
 gives an agent both, through the same six operations \(lookup, lint, guide, plan, translate, verify\) on every surface.
 The operations themselves are described in the [toolkit reference](../functional/toolkit.md).
 
@@ -16,7 +16,7 @@ use its phrases'n suggestions without forcing a wrong sense.
 ## In Claude Code: the skill
 
 [skills/aussiefy/SKILL.md](../../skills/aussiefy/SKILL.md) walks an agent through that workflow using the CLI.
-In this repository it's already linked into `.claude/skills/`. To use it anywhere, install aussiefy, then copy
+Anyway, in this repository it's already linked into `.claude/skills/`. To use it anywhere, install aussiefy, then copy
 the `skills/aussiefy/` folder to `~/.claude/skills/aussiefy/`.
 
 ## In any MCP-capable agent: the MCP server

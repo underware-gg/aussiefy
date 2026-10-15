@@ -18,7 +18,7 @@ Problems are ordered by severity: critical (lost numbers, changed protected mark
 major problem; CLI exit 1 reports failure. `--json` exposes the complete evidence.
 
 Verification reuses lint'n fidelity, then aligns original sentences against nearby windows of translated
-sentences, allowing a retelling to split or merge them. This is a bounded heuristic, not a proof of meaning
+sentences, allowing a retelling to split or merge them. Mate, this is a bounded heuristic, not a proof of meaning
 or literary quality. It can miss wrong senses'n can't judge tone/flow; [the judge](../contributor/judging.md)
 provides that separate evaluation. Optional suggestions are disabled during verification'n yarn submission
 to avoid an unnecessary full translation. Lint callers can similarly use `suggest=False` / `--no-suggestions`.

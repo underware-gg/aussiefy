@@ -6,7 +6,7 @@
 
 `lookup` and `gaps` use a small embeddin' model to match by meanin', so "knackered beyond belief" finds
 *buggered*. aussiefy ships one, and it works outta the box: ya only need this page to check it, switch it
-off, or have a crack at a bigger one. Well, Default translations never use it. What uses which model is in the
+off, or have a crack at a bigger one. Default translations never use it. What uses which model is in the
 [embedding reference](../functional/embedding.md).
 
 ## Check which model is in use
@@ -27,7 +27,7 @@ aussiefy embedder enable bundled
 
 ## Try a bigger model
 
-Jeez, a sentence\-transformers model can replace the bundled one. It's installed'n enabled only when ya ask:, ya mug
+Jeez, a sentence\-transformers model can replace the bundled one. It's installed'n enabled only when ya ask:, mate
 
 ```sh
 aussiefy embedder install --dry-run   # print the steps first

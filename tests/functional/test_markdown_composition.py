@@ -46,15 +46,15 @@ def test_garnish_limits_and_spacing_apply_to_whole_markdown(loud_document_transl
 
 
 @pytest.mark.parametrize(
-    "source",
+    "source,has_leading_opener",
     [
-        "Work happens on `dev`. `main` holds releases only.\n",
-        "The river runs through the valley\nand reaches the bay without turning.\n",
-        "The **river** reaches the valley.\n",
-        "The [river](https://example.com) reaches the valley.\n",
+        ("Work happens on `dev`. `main` holds releases only.\n", True),
+        ("The river runs through the valley\nand reaches the bay without turning.\n", True),
+        ("The **river** reaches the valley.\n", False),
+        ("The [river](https://example.com) reaches the valley.\n", False),
     ],
 )
-def test_partial_sentences_cannot_receive_garnish_openers(source, loud_document_translator):
+def test_only_safe_source_starts_receive_garnish_openers(source, has_leading_opener, loud_document_translator):
     result = translate(
         source,
         markdown=True,
@@ -64,7 +64,9 @@ def test_partial_sentences_cannot_receive_garnish_openers(source, loud_document_
         document_config={"garnish": ["opener"]},
         translator=loud_document_translator,
     )
-    assert not selected(result, "opener")
+    openers = selected(result, "opener")
+    assert bool(openers) == has_leading_opener
+    assert all(index == 0 for index, _ in openers)
     assert all(
         source[a:b] == result.text[c:d]
         for p in result.protected

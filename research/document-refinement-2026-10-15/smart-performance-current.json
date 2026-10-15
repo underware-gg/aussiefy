@@ -1,0 +1,375 @@
+{
+  "started_utc": "2026-10-15T12:58:24.490245+00:00",
+  "finished_utc": "2026-10-15T12:58:56.892339+00:00",
+  "python": "3.12.13 (main, May 10 2026, 23:27:07) [Clang 17.0.0 (clang-1700.6.3.2)]",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "script_sha256": "5f0ab919d33a393e6b78e823dd5da98d0d491c462b20d0ccf85810d6da4c6b76",
+  "source_hashes": {
+    "aussiefy/__init__.py": "0891187a239aeff6b5a95c5f656b00901b7cff9a7a86593736449f3347e0997a",
+    "aussiefy/align.py": "c81e2d5e2bde60d6cfd80ace84d40ae4cf453a9007cb9b28645ad27ec8a80b0b",
+    "aussiefy/claude.py": "c5d67f3c351006663be3f1095ba0dd27a83c2e2d866ccb38e20bd03de4db49e8",
+    "aussiefy/cli.py": "d69480a64027853c304eb02677797e1c9b852af36524118734604b6da9e920fb",
+    "aussiefy/context.py": "683794dadfe3b095a73989e73d574d3f6bc447eab102596272a015c0dc8d2d2e",
+    "aussiefy/detect.py": "1a383aa295559780edf83fd72fdfa4facfd8041dcdb0aa9fc3dcb780f4286174",
+    "aussiefy/dialect.py": "8cf34ba9a2bdb86d924351122b4eaa6a2690730f64d1bc0ee97f6a6a8e46eb33",
+    "aussiefy/dump.py": "208fa74cd244718552d8dc2065321f44f604c8ac79937bcabb010fdc030fbf20",
+    "aussiefy/embed.py": "afb78a3624c86492800aa8f639f008d45c8de5906d930827a47f169bd01a737f",
+    "aussiefy/engine.py": "76508c6379f84b5168b1bac36e758cc8c4a13d0ae9365b8c48c6bc1a92b5cfcf",
+    "aussiefy/errors.py": "3c565cfe02d93f68f0a57bb1013a0dc799b47bea748c9a38b1639e1483448319",
+    "aussiefy/explain.py": "9027beb88ce242457c772fdef6023308acd9ace3c94c5a17055f42b36eade907",
+    "aussiefy/gaps.py": "715711e7c5eb0d21d48b1a5ce07e51f904ba6bde20be621d7be8f5802bb241c0",
+    "aussiefy/garnish.py": "564b0d1e31c5fe8970f3949eaa6ba2e9b1cb53ca549e64d1b5f11c1a7f9afae9",
+    "aussiefy/genre.py": "e62c798f4b5348e5c7b3f998a3a5b6ea5d7d7ef00208bae0654e9849be6e313b",
+    "aussiefy/guide.py": "bb953b1de8782da4e26cc2cb6c4c09ea8c6da9cee8bfc66f9cfb2438cb2cf07e",
+    "aussiefy/harness.py": "49d92f15fe97fe6b24c79a793422ed5db3bf361b1853c9f9a0782bca49daba97",
+    "aussiefy/judge.py": "ec7b06b376fd15d489d2404e0890abd2db086895fffb43ae221c12bcd3c4044f",
+    "aussiefy/lint.py": "2454283d56327c39d7397196927014375cb3712331e6406b0d599b4e09e58da5",
+    "aussiefy/llm.py": "4f7a4aacfa0f6e060417ec6690829c8a764459e205af91924f6a798b3890a7ca",
+    "aussiefy/loader.py": "2ff97ca82e157941aee60254e096a65a35fabab43d42bb3cda94f3956e3af83d",
+    "aussiefy/lookup.py": "4a864943f0183cd209312ffdccafe9256bd91f9926936dfd7bf2d63fa17ec31f",
+    "aussiefy/markdown.py": "33fb59927f47a56a5537a78bdfab107d62dcc011611ca2a908debedfeb83f376",
+    "aussiefy/markup.py": "9bfe4154dafd8181185c12fb23d130c614b205a4a3ab5b7fc9dcd858ba36ab64",
+    "aussiefy/matcher.py": "d7f526ca140e4559ffef0c397cce449d47db85e62dce516354d020ac61f0bc48",
+    "aussiefy/mcp_server.py": "799f3061198a71b883998190ce3119ee8bea417ae9a125a084466f8a3c98e9ae",
+    "aussiefy/model.py": "35a70f6fb8b1184e89340845a963513379b67fcfdcbcd30e31dd2b8ba191d5d3",
+    "aussiefy/models.py": "b8c1e4f03d9d2bbe221fd2382112afb07668e489b50499a51a41995a0afcbf65",
+    "aussiefy/morph.py": "e3cdd0934ec0d7867e9624f3f0359549e289c5de624ca3de78b326103b3ec0b3",
+    "aussiefy/policy.py": "90474f25f10d5da8ee29052250253306d4b9d54e3f89809e2e4955edaf02f5dd",
+    "aussiefy/pos.py": "2dd736bba71f76cab58d0820dea5b48cbcd330b47032a49990b2b84cac3cc50c",
+    "aussiefy/profile.py": "faca5d7b66e4afff461f77ccf7051d9b761e5e9d86487bb21120d3091e1dfc64",
+    "aussiefy/protected.py": "2909130ba76dc405bdc7496929044a81b83ac3efa73c4adc62db1e792dcade03",
+    "aussiefy/realise.py": "5609d7092742c7f2581fe913b2900dfabf6bb63bc61f791a3ac15ba73537f085",
+    "aussiefy/rounds.py": "3ba82247e6f0ae805a7545f66adf550511ba1792425ba088f148a04074c3a5d5",
+    "aussiefy/schema.py": "f90d9a25c1f88ff2ffe01f20838faf07ee2b5203c8b41e39b86cf406d1bfe4b8",
+    "aussiefy/select.py": "13eee27837de49291565d0ae6004e8f46b514f5010572d760beb5c79da2b8a10",
+    "aussiefy/static.py": "a6490595c3200e89ec71639d85d25b6a2f71f5963ebed75fc47ae343d1f4b150",
+    "aussiefy/terms.py": "d1d4857ffe557fb342533e9f29d8069fbe6ddcb52bf3b7fc46eb07ad09cd02fd",
+    "aussiefy/text.py": "8b63bd8d6d4e3777f9ddc94b065e5e4dbd87dae71cbcc5d2a2d20d3e3668b812",
+    "aussiefy/translation.py": "7d0dcebcbc9baeee2b4b640f2b9c1aad92e07e1341b3062b7b0a9635495faf28",
+    "aussiefy/verify.py": "34273141474249606c0b54022b48bb149f4e8246364c8e68d5a9df837b023e48",
+    "aussiefy/yarn.py": "1cbfb0be4a3cae368eff3cc7b4a167c68cde95aaa437c346664742220effa4ab",
+    "aussiefy/data/concepts.yaml": "ba71783d14724639ebb2e20ac9c15d63421b7b09c67c99f041a3d171f22da9f2",
+    "aussiefy/data/dialect.yaml": "fe575da570e23615fbadf955fd3d7dccc142da58625eb3214fdbe77565a53c1c",
+    "aussiefy/data/entries/classics.yaml": "9b56aa94dbe4385ff07fc06350dad7af5a5515fd6bbd12fe907fff88fdce8c81",
+    "aussiefy/data/entries/dinkumcheck.yaml": "2f7c4ca793ba5b5de0053b78b548766f0f23be1560bd76354c2197428c8f2980",
+    "aussiefy/data/entries/everyday.yaml": "ad80e506ac17e462cb91c34a8d147a4e48f6c5e94dfd6b44bb7601aabe2eac54",
+    "aussiefy/data/entries/fairdinkum.yaml": "f02bbfd441c233007631fcea0a7b01787bd8593ed0cb6e25b7df13644cac60c6",
+    "aussiefy/data/entries/flagged.yaml": "0966e94fe79e9f3d9e86f8c05bf9a3f25834142d645c3d7c15534d42a48c6326",
+    "aussiefy/data/entries/fourthpass.yaml": "d3f4f054429da1ff7dd321e5117a1cfef9514b7429dd07854da00d6aac4aec4c",
+    "aussiefy/data/entries/fragments.yaml": "1883a15e3d65ebd2bee142dc65f57028f55db4f2da9f1eba3e1da6070484ac82",
+    "aussiefy/data/entries/gapfill.yaml": "7763349206535e3c151e21eb0598f6c42ad163f8cb105763f608a26800b5c88c",
+    "aussiefy/data/entries/garnish.yaml": "73207353fa0a682127a6727d945d17e3fa466af12c9356c690fd2809538393d4",
+    "aussiefy/data/entries/idioms.yaml": "72bef5db605a1dfe41810eaf4fd14e1026b22e8963d4c980eb6ac209a464b170",
+    "aussiefy/data/entries/lexical.yaml": "f4bd5565498fc910f9d74fc2a4f7bd2b0faa6e765588e726803cf7a36ddde863",
+    "aussiefy/data/entries/phrases.yaml": "9534802f3a52a3c061b55d3e69e32c76a611338133d7ef18d9960a89db3863d4",
+    "aussiefy/data/entries/scraped.yaml": "15fc044490680f13a8b24eef39f0668b9488ee74961b1ed2985c5b93b918c32e",
+    "aussiefy/data/entries/secondpass.yaml": "b1fdd5bbf9a597cb8239b5b58a1468155ae1307be9b17a18c0ff7297a9c882b5",
+    "aussiefy/data/entries/swearing.yaml": "9d514aa20038ef0a48fd97ae3e5b31c0a0802bb5a2ef892d91648072d38324c2",
+    "aussiefy/data/entries/thirdpass.yaml": "988d5a6b1a23c8e0e352da86777825c9429772964bbdf222982b209a54b28169",
+    "aussiefy/data/genres.yaml": "37bca4bbfd96a03232e8e4f27f76c01f88a7a62ca4d53a84d423753530973ce3",
+    "aussiefy/data/grammar.yaml": "9c384595403144d446f7823aa6027b014b98c048e07e34fed36e09b5b8b88510",
+    "aussiefy/data/guide.yaml": "fb6a4549d414c03584ff75b38d4d5f93747d955e8e68665f34214b839d31b4f8",
+    "aussiefy/data/judge.yaml": "f4122c83d9297c8b359688b23256c62e325df34c7c7c5bac3b593b1bb2596cc2",
+    "aussiefy/data/model/meta.json": "2dfbc3c8b6909dcfa821fd846116904f0f79b57b07c75b104e8ffa91e1991a5a",
+    "aussiefy/data/model/vectors.f16": "c43adab96572058bb1c106fc448f6ebf56e9a1f9406360b462cd6874e16273ac",
+    "aussiefy/data/model/vocab.txt": "9fe80d0dca7829bce0490b8f4004f417fe7b230fb275802e64087ba7cc3dc5eb",
+    "aussiefy/data/phonetic.yaml": "05eb6894727f82d69e33f7301da0219aad2a6c51e6ffa48098e23dd49aeaf27a",
+    "aussiefy/data/pos/README.md": "d51caf6d3b464e907d4f0337f4126caa2f9b31da64940184ea851d4ff6883ca5",
+    "aussiefy/data/pos/meta.json": "d6df62aecd3971528037cd2f387d944537e8a6ce04be7b7d538ae29cb903dc7b",
+    "aussiefy/data/pos/tagger.json.gz": "3222c88544fbc2600def0686055843f9dccc3f60d485c4b791339ea8af2627f6",
+    "aussiefy/data/profiles.yaml": "db918602c1978c2c09e22ac72958882cd68133b83839e82efa4ae1419591f284",
+    "aussiefy/data/riffs.yaml": "fc61f161c50e0dabfdc9e3c0203e8aab14f5f997cd9e6c6d25b2e557ff616593",
+    "aussiefy/data/source_policy.yaml": "4ffbe6513020907b1f2425f1be874ae7739ad4254a154a39accf1b1190cc2c12",
+    "aussiefy/data/sources.yaml": "775eac577b8f75ca95af98310c15ee91db271e35528ce6c8284437a12ac34349",
+    "aussiefy/data/swears.yaml": "48518167f51ac8f0f3ca19c7614439521d41f36a8ef384d683f86e1ae2d971b2"
+  },
+  "method": {
+    "warmup_runs_per_mode_per_input": 1,
+    "warm_repetitions": 5,
+    "measurement": "perf_counter translation only; serial modes rotate each repetition",
+    "shared": "same current dictionary, grammar, embedding weights and vector caches",
+    "comparison": "exhaustive candidate scores with original generator dot vs current scorer and dot",
+    "scope": "core backend only; excludes construction, network and website overhead",
+    "options": {
+      "level": 4,
+      "seed": 42,
+      "vulgarity": 1,
+      "embellishment": 1
+    }
+  },
+  "model": {
+    "name": "bundled:aussie-static-1.2.0",
+    "dimensions": 256,
+    "fallback_patterns": 568
+  },
+  "benchmarks": [
+    {
+      "input": "short_known",
+      "path": null,
+      "source": "script literal",
+      "sha256": "1cf807d23a7319fb56c622e0b5e26a2f3bf45dbd3079ab69499460497c96d7dc",
+      "words": 15,
+      "characters": 72,
+      "exact_full_result_parity": true,
+      "modes": {
+        "exhaustive_original_dot": {
+          "seconds": [
+            0.0034799580462276936,
+            0.003244207939133048,
+            0.003738250001333654,
+            0.0028949169209226966,
+            0.002902833977714181
+          ],
+          "median_seconds": 0.003244207939133048,
+          "min_seconds": 0.0028949169209226966,
+          "max_seconds": 0.003738250001333654,
+          "output_sha256": "49610ac0df9da0a0f4267bc04f0330ea007f05e39bee3b1f556e38ee0bd18564"
+        },
+        "shape_first_map_dot": {
+          "seconds": [
+            0.003704165923409164,
+            0.0028122079093009233,
+            0.003699583001434803,
+            0.0028638748917728662,
+            0.0034961249912157655
+          ],
+          "median_seconds": 0.0034961249912157655,
+          "min_seconds": 0.0028122079093009233,
+          "max_seconds": 0.003704165923409164,
+          "output_sha256": "49610ac0df9da0a0f4267bc04f0330ea007f05e39bee3b1f556e38ee0bd18564"
+        },
+        "ngram": {
+          "seconds": [
+            0.003347416059114039,
+            0.0034374159295111895,
+            0.0028634160989895463,
+            0.0028045420767739415,
+            0.0033320420188829303
+          ],
+          "median_seconds": 0.0033320420188829303,
+          "min_seconds": 0.0028045420767739415,
+          "max_seconds": 0.0034374159295111895,
+          "output_sha256": "49610ac0df9da0a0f4267bc04f0330ea007f05e39bee3b1f556e38ee0bd18564"
+        }
+      }
+    },
+    {
+      "input": "short_fallback",
+      "path": null,
+      "source": "script literal",
+      "sha256": "df8e670fb99d05eab1240e4dd48e7279a75cf360bd498a482303b614c31fef8b",
+      "words": 12,
+      "characters": 81,
+      "exact_full_result_parity": true,
+      "modes": {
+        "exhaustive_original_dot": {
+          "seconds": [
+            0.03643304202705622,
+            0.035961874993517995,
+            0.03566179203335196,
+            0.035205458058044314,
+            0.03631691704504192
+          ],
+          "median_seconds": 0.035961874993517995,
+          "min_seconds": 0.035205458058044314,
+          "max_seconds": 0.03643304202705622,
+          "output_sha256": "530774a93c9a48f9dfece8f5c6996970c488429ff5226f6331b19c9a0cf84883"
+        },
+        "shape_first_map_dot": {
+          "seconds": [
+            0.004321417072787881,
+            0.004122750018723309,
+            0.004284666967578232,
+            0.0041762079345062375,
+            0.004253667080774903
+          ],
+          "median_seconds": 0.004253667080774903,
+          "min_seconds": 0.004122750018723309,
+          "max_seconds": 0.004321417072787881,
+          "output_sha256": "530774a93c9a48f9dfece8f5c6996970c488429ff5226f6331b19c9a0cf84883"
+        },
+        "ngram": {
+          "seconds": [
+            0.0035916249034926295,
+            0.002236541942693293,
+            0.002607207978144288,
+            0.002271000063046813,
+            0.0029127500019967556
+          ],
+          "median_seconds": 0.002607207978144288,
+          "min_seconds": 0.002236541942693293,
+          "max_seconds": 0.0035916249034926295,
+          "output_sha256": "530774a93c9a48f9dfece8f5c6996970c488429ff5226f6331b19c9a0cf84883"
+        }
+      }
+    },
+    {
+      "input": "story",
+      "path": "tests/corpus/classics/drovers_wife.txt",
+      "source": "file",
+      "sha256": "fbad157d7003523603067b598e36e978d58fb31fbf67df1892be098a5700521d",
+      "words": 3209,
+      "characters": 17315,
+      "exact_full_result_parity": true,
+      "modes": {
+        "exhaustive_original_dot": {
+          "seconds": [
+            1.539258791017346,
+            1.548961375025101,
+            1.5330830829916522,
+            1.5845433750655502,
+            1.5540701249847189
+          ],
+          "median_seconds": 1.548961375025101,
+          "min_seconds": 1.5330830829916522,
+          "max_seconds": 1.5845433750655502,
+          "output_sha256": "4cf444e6663b4826053e1ec4d683419076b4a7dc4f7bd322c46ebe2213f8f70c"
+        },
+        "shape_first_map_dot": {
+          "seconds": [
+            0.4870649999938905,
+            0.517948416993022,
+            0.48695275001227856,
+            0.47633583296556026,
+            0.486147208022885
+          ],
+          "median_seconds": 0.48695275001227856,
+          "min_seconds": 0.47633583296556026,
+          "max_seconds": 0.517948416993022,
+          "output_sha256": "4cf444e6663b4826053e1ec4d683419076b4a7dc4f7bd322c46ebe2213f8f70c"
+        },
+        "ngram": {
+          "seconds": [
+            0.37178883398883045,
+            0.4044413330266252,
+            0.37081533297896385,
+            0.3877887079725042,
+            0.4039073339663446
+          ],
+          "median_seconds": 0.3877887079725042,
+          "min_seconds": 0.37081533297896385,
+          "max_seconds": 0.4044413330266252,
+          "output_sha256": "66fd226949d21b76ad4b9ca93cb85da677d8e3b7e6e862224074a942f3707254"
+        }
+      }
+    },
+    {
+      "input": "technical",
+      "path": "tests/corpus/everyday/workplace/mdn_http_cookies.md",
+      "source": "file",
+      "sha256": "dd58d9893a2e0151d3294e7138b4f75bbc4cccb2eae82494198af8afc92da526",
+      "words": 580,
+      "characters": 3950,
+      "exact_full_result_parity": true,
+      "modes": {
+        "exhaustive_original_dot": {
+          "seconds": [
+            0.27286683302372694,
+            0.2756165830651298,
+            0.2778221669141203,
+            0.2778104579774663,
+            0.27413429191801697
+          ],
+          "median_seconds": 0.2756165830651298,
+          "min_seconds": 0.27286683302372694,
+          "max_seconds": 0.2778221669141203,
+          "output_sha256": "cf774c7abd65f1c0dcd50633153d39e5b1aeff6ae5611ea1d9c8c7d74279616d"
+        },
+        "shape_first_map_dot": {
+          "seconds": [
+            0.09363104193471372,
+            0.09457179089076817,
+            0.092033667024225,
+            0.11372541694436222,
+            0.08961329201702029
+          ],
+          "median_seconds": 0.09363104193471372,
+          "min_seconds": 0.08961329201702029,
+          "max_seconds": 0.11372541694436222,
+          "output_sha256": "cf774c7abd65f1c0dcd50633153d39e5b1aeff6ae5611ea1d9c8c7d74279616d"
+        },
+        "ngram": {
+          "seconds": [
+            0.07059858296997845,
+            0.07196575007401407,
+            0.06957016699016094,
+            0.0723234579199925,
+            0.07329358393326402
+          ],
+          "median_seconds": 0.07196575007401407,
+          "min_seconds": 0.06957016699016094,
+          "max_seconds": 0.07329358393326402,
+          "output_sha256": "cf774c7abd65f1c0dcd50633153d39e5b1aeff6ae5611ea1d9c8c7d74279616d"
+        }
+      }
+    }
+  ],
+  "parity": {
+    "source": "tests/corpus/golden.yaml",
+    "source_sha256": "acef53f94dc20fcf361b7987b83e69c0ef0a2bbb5697d41e75eb7f3826a82b5d",
+    "input_hashes": [
+      "2dc07c3f489b21895f7aee4c973175201d9e6520b5b5c96df34a405d11057fab",
+      "e46082e487bcf948eab1837e7ce9967e216f9a7913cf4f64f5ea84b1599a3297",
+      "597003ba59cdc454836f59365142f1334b3c7adc241b9bade64b6764928a8890",
+      "9ac98985b35958dc11675f9c90c3c513bd8cb4fddce02e772c196c587d9d37c3",
+      "043843e9d1371294835ac6f45f2548f465dbd46242f54ad105641c876d6da4c0",
+      "d1a197bde6df9eafe980271a9bbe7fc22bf2dca9b310f71ed29deb52b04594ea",
+      "769094c621fdc961573a54c975e18e75ee2787f155a4212ebdb2611990ba4191",
+      "95d6869065533127def0e361a64bac91217d26fc01fc79773c77b9d1bf49a296",
+      "a2a491d83dbd94b93c7ec00a38e729f87f94577e7a4746edb88003f118ba0c8f",
+      "ae1ffc83f2dc9adda972e690337fe92d426bbb70a0de3998731f013a21c3877e",
+      "6490f2cddc096cab43a8672f28f2cd5d5043478cd0b51acb6c91b6c765119d13",
+      "bc049a1cdc2071dd4dc5d8e5af0bb8cfac8713fccd7fe7a03efad7f854876086",
+      "87ccf94311fd6f409e0b52dff509d50f173d4c0f6df84cd9aefa3b0d97a4cd74",
+      "3ededd18894c1d78f9bde5f35b628cfc7f74e3c135b77ce8714219bef18e0acc",
+      "3475e13ef2c4d43bde3adec871f268abb6019b4d65f1d90bc745b5f4d7b79dd5",
+      "193063141fe0f7563a247d752bc2e941ad8a737b2b5285af10c2974dde205277",
+      "e68e6b95448b139a702f8c8f4c371b21165252c0122778532fb67c6f01b9985d",
+      "031c7f77d226f852ae08d190773e783ce04a1f9cb0499e98c694eecd3ebe030b",
+      "bda042be99cb1073e677373c0293524fc9bc640212e458a54f4578139b75b9f5",
+      "ab1b688275dca60618736743a572734445734f930f50b63d722409ef56fc0b40",
+      "cbedf9204009f347ce11d09b8bc51646a882b4dc3d1b94b33972830c98f77b56",
+      "a8e18b488309ff0a650546b3719642a77ff13eb2853e9c59b27175d5196a1341",
+      "cadbb44f04104499cc2992710423c4c3d3ef6c21bcaa4383a34836137a5b9e7d",
+      "82874bc6e5ffea9fe12260f1abaf43bf7a5da1f233761b1a46d6ffcc3b161253",
+      "5acaa3f77bb23a251b3a097562038f18c5bbb16e9cec043252e80efd96e8b31f",
+      "2afcae9965a5656760e71ea29e87ae8833ee50ed11efe3180fdf767637fc99e6",
+      "202ea44f7172ae6819f59cafe6f324ff70ee0b812ec630fb14824124292db5f7",
+      "44c0c05550b02f7a7c77666fdb7956a01e87e902407e9d0d30e3e8a9142b026f",
+      "371b5ed49d86d65442146ee3479c123764a02ec1a9a3c7e76e11c3669f3c48f4",
+      "2bd5e1c9a6a8e5c54034378d38d47cc307d1274dba57961cb2a498b18ccd4d8b",
+      "efa6c257fad87d09913844902211c5eed36691ae3b7b41b745996cd566ffeb7e",
+      "5dd43797c5117d21afd2e2685d5a2a2124a19a038405850704202d262bb80da5",
+      "bef36ca6d03e741ec888321093a154665e8beee7b1f3e91090dccf09a28be824",
+      "809838efd41698422636fb2df8bebe2a7e8c29a3baf109b3bdceed6812266903",
+      "4bf6d606c586eda9b7145c4791b217fb57a28df69dcfa66701f5dee4a0c59bc5",
+      "8d6d20a37470f9333c650c7ca6a036c2403893a167edc7254e27b1d7c3f2dc74",
+      "8919a8c3439487491e2111f9a45fb340a61b1ba08b294e863e53a0ad1da0dd3d",
+      "935fa3f700694f520b5fc85156cccfb5f546908ad54787a60f31c5f96e36bf01",
+      "6e09870fd772fd9bdeb8386564fdfdde4a24223eb17100ce95878879b7e98106",
+      "fa7934e70b4ee99bc61280651b5bae3bd2f9807c7564e926a195db41d5d422e8",
+      "a2778055f5a192cff5ddf6cfb57c3dcd5ab24dcda357a33294512701147d28e4",
+      "c2b7122f02628d69f7cea46344833e2e4daafe6ad942034d8ae635654f9806a9",
+      "831f9ee931202597d4aa2878b9d7d952d21de0026f7e230f4d8f19f6c803a1f7",
+      "a91932c5008598ff47c7af0e87f63495666b9f443ad6078a012c2839bb65c2fb",
+      "fbad157d7003523603067b598e36e978d58fb31fbf67df1892be098a5700521d",
+      "dd58d9893a2e0151d3294e7138b4f75bbc4cccb2eae82494198af8afc92da526"
+    ],
+    "inputs": 46,
+    "source_words": 11267,
+    "level_seed_pairs": [
+      [
+        2,
+        0
+      ],
+      [
+        5,
+        42
+      ]
+    ],
+    "comparisons": 92,
+    "exact_full_result_parity": true
+  },
+  "sources_unchanged_during_run": true
+}

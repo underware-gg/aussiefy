@@ -10,8 +10,8 @@ from typing import Any, Callable, Literal, Protocol, Sequence
 
 from . import pos
 from .context import FORMAL_RE, is_chant, sentence_contexts, text_mood
-from .detect import CODE_CONCEPTS, DETERMINERS, Detection, after_determiner, detect, resolve_overlaps
-from .embed import Embedder, make_embedder, similarity_scorer
+from .detect import CODE_CONCEPTS, DETERMINERS, Detection, after_determiner, detect, fallback_scorer, resolve_overlaps
+from .embed import Embedder, make_embedder
 from .garnish import (GarnishRecord, PhoneticRecord, add_closer, add_connective, add_opener, add_tag, add_tail,
                       apply_phonetic, ends_in_list, pick_garnish, pick_riff, tag_in_speech)
 from .loader import load_dictionary
@@ -234,7 +234,7 @@ class Translator:
         """The similarity fallback's scorer over the fallback patterns, built once per embedder."""
         if spec not in self._scorers:
             emb = self._embedder(spec)
-            self._scorers[spec] = emb and similarity_scorer(emb, [p.text for p in self.dictionary.fallback_patterns])
+            self._scorers[spec] = emb and fallback_scorer(emb, self.dictionary.fallback_patterns)
         return self._scorers[spec]
 
     def _embedder(self, spec: str | None) -> Embedder | None:
@@ -439,7 +439,7 @@ class Translator:
         """The image the term calls up ("wheelie bins, overflowin', with the bin chickens fightin' over the
         scraps"), only where the term ends a clause (or is the first of a pair) so the riff can't split a phrase.
         Returns the text to append, or ""."""
-        if sent.quiet or not run.embellishment.takes("riff"):
+        if sent.quiet or sent.prefix_only or not run.embellishment.takes("riff"):
             return ""
         toks, state, eff = sent.tokens, run.state, run.eff
         riffs = choice.entry.riffs_within(eff.vulgarity)
@@ -504,7 +504,7 @@ class Translator:
         """Round off a closing list ("their brains and imagination, the whole bloody works?"): the level's clean
         tail, or else a sweary one at the vulgarity's rate. It sits inside the sentence, so it doesn't count
         against the sentence's garnish budget."""
-        if not run.embellishment.takes("tail"):
+        if sent.prefix_only or not run.embellishment.takes("tail"):
             return out
         state = run.state
         ordinal = sent.index + (run.composition.first_sentence if run.composition is not None else 0)
@@ -519,7 +519,7 @@ class Translator:
             if r >= p:
                 continue
             entry, form, rej = pick_garnish("tail", self.dictionary.garnish, run.eff, run.pol.seed,
-                                            (key,) + sent.key, state.garnish_uses, sentence_contexts(sent.tokens),
+                                            (key,) + sent.key, state.garnish_uses, sentence_contexts(sent.tokens, sent.tags),
                                             swear=swear, insults=run.embellishment.takes("insult"))
             if entry:
                 out = add_tail(out, form)
@@ -578,7 +578,8 @@ class Translator:
             starts_with_interjection=any(r.det.start == 0 and r.det.frame == "interjection" for r in recs),
             first_replaced=any(r.substituted and r.out_span and r.out_span[0] == toks[0].start
                                and r.chosen.entry.form[:1].islower() for r in recs),
-            contexts=sentence_contexts(toks) | ({"paragraph_end"} if sent.para_end else set()))
+            contexts=(sent.source_contexts if sent.source_contexts is not None else sentence_contexts(toks, sent.tags))
+                     | ({"paragraph_end"} if sent.para_end else set()))
         # a tag lands at the sentence's end: when that's narration after a closing quote ('"... get the coffins
         # ready,"--and she left him no peace until he consented'), judge it on that narration, not the speech
         quotes = [i for i, t in enumerate(toks) if t.text in QUOTES]
@@ -601,6 +602,8 @@ class Translator:
         spent = 0
         for placement in rates:
             p = rates[placement]
+            if sent.prefix_only and placement not in ("opener", "connective"):
+                continue
             if p <= 0 or spent >= budget or placement in g.placed or not run.embellishment.takes(placement):
                 continue
             if placement in ("opener", "connective") and (g.starts_with_interjection or "opener" in g.placed
@@ -615,6 +618,17 @@ class Translator:
                 continue  # a stanza-end punchline, or the narrator answering their own question; never speech
             if placement != "aside" and (run.chant or placement == "opener" and "fragment" in g.contexts):
                 continue  # "Jeez Louise, Nightmare of Moloch!": openers and tag-ons break a chant
+            lowerable = frozenset()
+            if placement in ("opener", "connective"):
+                lowerable = run.opener_lowerable(sent, self.dictionary)
+                first = re.search(r"[A-Za-z][A-Za-z'’-]*", out)
+                if first is not None:
+                    word = first.group()
+                    # If ordinary-word/name evidence is inconclusive, leave the sentence's case alone.
+                    if (word[0].isupper() and word.lower() not in lowerable and not g.first_replaced
+                            and word != "I" and not word.startswith(("I'", "I’"))
+                            and not any(c.isupper() for c in word[1:])):
+                        continue
             key = channel + placement
             if state.placed[placement] >= eff.profile.limit(placement):
                 continue
@@ -630,14 +644,14 @@ class Translator:
                                             exclude=recent, mood=run.mood, swear=swear,
                                             insults=run.embellishment.takes("insult"))
             if entry and placement == "connective":
-                new = add_connective(out, form, run.opener_lowerable(sent, self.dictionary))
+                new = add_connective(out, form, lowerable)
                 if new is None:
                     entry, form = None, None
                     rej = rej + [("-", "sentence already opens with a connective or quote")]
                 else:
                     out = new
             elif entry:
-                out = (add_opener(out, form, run.opener_lowerable(sent, self.dictionary), g.first_replaced) if placement == "opener"
+                out = (add_opener(out, form, lowerable, g.first_replaced) if placement == "opener"
                        else add_closer(out, form) if placement == "aside" else add_tag(out, form))
             if entry:
                 # connectives are plain storytelling words, so the same one can come back later
@@ -699,6 +713,8 @@ class DocumentPart:
     ends_sentence: bool
     last: bool
     quiet: bool = False
+    last_contexts: frozenset[str] = frozenset()
+    written: frozenset[str] | None = None
 
 
 @dataclass
@@ -712,6 +728,8 @@ class _Sentence:
     quiet: bool = False    # a table cell, list item, heading, dateline or held quote: words may be swapped (not
                            # a held quote's), no garnish or riff
     tags: list[str] = field(default_factory=list)   # each token's part of speech (pos.tag), tagged once
+    prefix_only: bool = False
+    source_contexts: frozenset[str] | None = None
 
     @property
     def end(self) -> int:
@@ -808,7 +826,8 @@ class _Run:
     def written(self) -> frozenset[str]:
         """The words this text writes in lower case somewhere."""
         if self._written is None:
-            self._written = frozenset(re.findall(r"(?<![\w'’])[a-z][a-z'’-]*", self.text))
+            self._written = (self.composition.written if self.composition is not None and self.composition.written is not None
+                             else frozenset(re.findall(r"(?<![\w'’])[a-z][a-z'’-]*", self.text)))
         return self._written
 
     def plain_words(self, dictionary: Dictionary) -> frozenset[str]:
@@ -827,13 +846,15 @@ class _Run:
         # in a story the engine can't tell whether "What a shocker!" fits what just happened, so only chants
         # get stanza-end asides
         para_end = self.chant and i + 1 < len(sents) and "\n" in self.text[tokens[-1].end:nxt]
-        partial = self.composition is not None and (
-            self.composition.quiet or i == 0 and not self.composition.starts_sentence
-            or i == len(sents) - 1 and not self.composition.ends_sentence)
-        quiet = (partial or self.masked.quiet_at(tokens[0].start) or self.is_heading(tokens) or self.is_held(tokens)
+        part = self.composition
+        starts = part is None or i > 0 or part.starts_sentence
+        ends = part is None or i < len(sents) - 1 or part.ends_sentence
+        quiet = (not starts or part is not None and part.quiet
+                 or self.masked.quiet_at(tokens[0].start) or self.is_heading(tokens) or self.is_held(tokens)
                  or self.in_dateline(tokens))
         return _Sentence(i, tokens, text, (text.lower(), self.state.seen_sentences[text]), nxt, para_end, quiet,
-                         pos.tag([t.text for t in tokens]))
+                         pos.tag([t.text for t in tokens]), prefix_only=starts and not ends,
+                         source_contexts=part.last_contexts if part is not None and starts and not ends else None)
 
     def in_dateline(self, tokens: list[Token]) -> bool:
         """A sentence starting in a news story's dateline ("MAMMOTH HOT SPRINGS, Wyo. –", which splits at

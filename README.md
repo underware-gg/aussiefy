@@ -5,7 +5,7 @@
 # aussiefy
 
 Rewrites plain English as Australian slang, with level \(1\-5, `tourist` to `swaggie`),
-vulgarity \(0\-3, `nan` to `tradie`) and embellishment \(0\-2, deadset/dinkum/troppo\) controls. A deterministic, seeded rule engine
+vulgarity \(0\-3, `nan` to `tradie`) and embellishment \(0\-2, deadset/dinkum/troppo\) controls. Now, a deterministic, seeded rule engine
 does the translating from a YAML slang dictionary; optional Claude\-powered modes smooth the result or retell a
 whole text as a yarn.
 
@@ -24,7 +24,7 @@ pip install "git+https://github.com/underware-gg/aussiefy@v0.1.0"            # c
 pip install "aussiefy[llm] @ git+https://github.com/underware-gg/aussiefy@v0.1.0"   # + Claude modes (yarn, --surface, --rewrite)
 ```
 
-Other extras: `mcp` (the `aussiefy-mcp` server\), `embeddings`, `scrape`, `dev`. For development, clone the
+Anyway, other extras: `mcp` (the `aussiefy-mcp` server\), `embeddings`, `scrape`, `dev`. For development, clone the
 repo and `pip install -e '.[dev]'`.
 
 ## Usage

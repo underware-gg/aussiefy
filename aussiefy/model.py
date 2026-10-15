@@ -89,6 +89,7 @@ class PhoneticRule:
     kind: str = "drawl"         # drawl (scaled by the level's `phonetic`) | spelling (always, from min_level)
     dialogue_prob: float | None = None  # probability inside quoted speech, which drawls broader than narration
     reads_as: str | None = None         # canonical wording for lint's refrain comparison; literal drawl only
+    unless_before: re.Pattern | None = None   # refuse a match following this grammatical context
 
 
 @dataclass

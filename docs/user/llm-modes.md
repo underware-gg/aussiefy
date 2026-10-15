@@ -5,7 +5,7 @@
 # Using Claude to polish or retell
 
 The rule engine's output is deterministic'n safe, but it can read like a word swap. Three optional modes
-hand some of the writin' to Claude, while the dictionary keeps the slang genuine. What each one guarantees is
+hand some of the writin' to Claude, while the dictionary keeps the slang genuine. Well, what each one guarantees is
 in the [LLM modes reference](../functional/llm-modes.md).
 
 ## Before you start
@@ -14,7 +14,7 @@ in the [LLM modes reference](../functional/llm-modes.md).
    (or `pip install -e '.[llm]'` from a clone\).
 2. Set `ANTHROPIC_API_KEY`, or log in with an `ant auth login` profile.
 
-Every mode uses `claude-opus-5-5` unless ya pass `--model`.
+Stone the crows, every mode uses `claude-opus-5-5` unless ya pass `--model`.
 
 ## Smooth the joins
 
@@ -22,7 +22,7 @@ Every mode uses `claude-opus-5-5` unless ya pass `--model`.
 aussiefy story.txt -l 5 --surface
 ```
 
-So anyway, Claude rewrites the draft for flow, keeping every phrase the engine planned'n addin' no new slang.
+Claude rewrites the draft for flow, keeping every phrase the engine planned'n addin' no new slang.
 
 ## Rewrite the sentences the dictionary can't carry
 
@@ -40,7 +40,7 @@ aussiefy yarn story.txt -l 5
 aussiefy yarn story.txt -l 5 --vulgarity nan --json
 ```
 
-Fair dinkum, Claude retells the text using the toolkit \(lookup'n lint\) and must pass the same checks an agent would.
+Claude retells the text using the toolkit \(lookup'n lint\) and must pass the same checks an agent would.
 This gives the most natural result: it can change tense, pace'n dialogue, which rules can't.
 
 ## If Claude isn't available

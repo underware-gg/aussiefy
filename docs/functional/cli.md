@@ -7,7 +7,7 @@
 The `aussiefy` command is a thin shell over the [toolkit](toolkit.md), yarn mode'n the maintainer tools.
 `aussiefy --help` and `aussiefy <command> --help` print the same options as this page.
 A near\-miss command in one or two words prints a suggestion on stderr'n still translates the text.
-With no text arguments on a terminal, a hint explains how to finish stdin. Missing or unreadable
+Strewth, with no text arguments on a terminal, a hint explains how to finish stdin. Missing or unreadable
 user\-named files are exit 2; a single path\-like argument \(for example `drfat.txt`) is treated as a file,
 so a typo can't silently become a successful translation or lint.
 
@@ -81,11 +81,11 @@ entries held back as doubtful \(omitted entries remain excluded\). `N` must be a
 
 **`lint`**: `--short` gives a compact agent checklist; `--no-suggestions` skips engine suggestions.
 `--original FILE`, the source text, which adds the fidelity checks \(length, names'n numbers\).
-Text markers are `!` issues, `?` warnings and `~` suggestions. With warnings but no issues, it prints
+Well, text markers are `!` issues, `?` warnings and `~` suggestions. Bugger me, with warnings but no issues, it prints
 `ok (N warning(s))` and exits 0. Issues exit 1; suggestions aren't repeated when already reported.
 
 **`show QUERY`**: matches an entry's id or form by substring, or a concept by name. No match prints a
-notice on stderr'n exits 1. Entries and staging files use the same YAML field order.
+notice on stderr'n exits 1. Jeez Louise, entries and staging files use the same YAML field order.
 
 **`compare ORIGINAL TARGET`**: `-l/--level LEVEL` (number or name; default 5\); `--seeds N`, how many seeds to
 translate with, from 0 \(default 10\).

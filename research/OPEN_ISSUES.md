@@ -113,5 +113,14 @@ variant semantics were retained after comparing all eight historical round plans
 
 Documentation follow-up: current sources and generated outputs are reconciled across all four layers; the
 publication notice is uniform and links to each plain counterpart. Markdown fragments now share document
-choices/limits and receive garnish only at complete sentence boundaries. Gettysburg wording is verified
+choices/limits. The subsequent sentence-safe refinement permits only leading garnish at a known source
+sentence start in an incomplete unit; tags/tails/riffs still require complete units. Quoted examples, neutral
+people and technical sense guards are pinned alongside conservative contraction/POS-context refinements.
+Gettysburg wording is verified
 against the linked primary transcription; Waltzing Matilda still needs an accessible exact-edition check.
+
+Semantic fallback performance: measured dense comparisons dominated the opt-in bundled backend. Eligibility
+indexing and an arithmetic-equivalent dot product now reduce warmed core translation time by about 3x on
+the long measured inputs, with 92 exact full-result parity comparisons. Weights and thresholds remain.
+See [the refinement report](document-refinement-2026-10-15/README.md) for reproducible evidence and limits;
+website routing/end-to-end latency was not measured.

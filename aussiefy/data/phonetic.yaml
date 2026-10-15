@@ -28,16 +28,20 @@
 - id: pronoun-be
   match: "(?i)\\b(it|that|there|here|what|who|he|she) is\\b(?!\\s*(?:[.,;:!?)\"\u201d\u2014-]))"   # not at a clause end ("This it is."); no "$": rules run on fragments
   replace: "\\1's"
+  # A fronted predicate keeps its stressed verb: "how hard it is to follow", not "how hard it's to follow".
+  unless_before: &fronted_be "(?i)\\b(?:how(?:\\s+[a-z'-]+){0,5}|(?:where|who|what)(?:\\s+[a-z'-]+){0,4}|as(?:\\s+[a-z'-]+){1,4}\\s+as|than)\\s+$"
   prob: 1.0
   min_level: 4
 - id: pronoun-are
   match: "(?i)\\b(we|they|you) are\\b(?!\\s*(?:[.,;:!?)\"\u201d\u2014-]))"
   replace: "\\1're"
+  unless_before: *fronted_be
   prob: 1.0
   min_level: 4
 - id: i-am
   match: "\\bI am\\b(?!\\s*(?:[.,;:!?)\"\u201d\u2014-]))"
   replace: "I'm"
+  unless_before: *fronted_be
   prob: 1.0
   min_level: 4
 - id: pronoun-have

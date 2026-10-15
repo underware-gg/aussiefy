@@ -5,6 +5,15 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Refine documentation flavour with explicit publication controls, exact quoted examples and neutral person
+  wording. Strict Markdown permits leading garnish at real sentence starts across inline boundaries, with
+  whole-sentence context and shared casing evidence; suffixes and riffs stay out of partial units.
+- Preserve stressed be-verbs in fronted predicates and comparisons; distinguish finite present-tense clauses
+  from noun, gerund, relative and subordinate fragments. Guard relative links, technical liberty and
+  everything-relative clauses from wrong-sense swaps. Decline uncertain-case prefixes and pin isolated cases.
+- Speed up semantic concept fallback by scoring only patterns that satisfy the existing token-count and
+  character-length rules, preserving exact scores, candidate order and complete translation results.
+
 - Tune request-local profile probabilities, frames, limits, spacing, drawl, swearing and rewrite thresholds
   through `document_config.profile` on every document surface; expose complete reusable `profile_config`.
   Omitted keys inherit dial defaults for both General and Custom. Combined garnish budgets/limits now cover

@@ -5,7 +5,7 @@
 # Decision records
 
 The architectural history of aussiefy: one record per decision, each preservin' the context, the decision and
-its consequences as they stood when it was made. Records are numbered in sequence \(`dd-NNN-slug.md`, titled
+its consequences as they stood when it was made. Anyway, records are numbered in sequence \(`dd-NNN-slug.md`, titled
 `DD-NNN: Title`) and never renumbered.
 
 ## Conventions
@@ -46,6 +46,7 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 | [DD-019](dd-019-explicit-composable-document-policy.md) | General by default, opt-in detection and exact composable document behaviour overrides | Accepted |
 | [DD-020](dd-020-document-composition-state.md) | Share document choices and garnish limits while preserving Markdown source units | Accepted |
 | [DD-021](dd-021-request-local-profile-overrides.md) | Inherit and override request-local engine profiles consistently across document operations | Accepted |
+| [DD-022](dd-022-sentence-safe-document-flavour.md) | Keep technical examples exact while placing conversational flavour at source sentence starts | Accepted |
 
 ## By topic
 

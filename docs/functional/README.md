@@ -5,7 +5,7 @@
 # Functional documentation
 
 What aussiefy does, as reference: every command, option, dial, data file and API, and what each one
-guarantees. For step\-by\-step guides, see the [user layer](../user/README.md); for how it works inside, the
+guarantees. So anyway, for step\-by\-step guides, see the [user layer](../user/README.md); for how it works inside, the
 [architecture layer](../architecture/README.md).
 
 ## Reference
@@ -39,13 +39,15 @@ guarantees. For step\-by\-step guides, see the [user layer](../user/README.md); 
 ## Tests as behavioural specification
 
 The tests are executable specifications, organised by primary owner in the [test indexes](../../tests/README.md).
-How to run them is in the
+Fair dinkum, how to run them is in the
 [contributor layer](../contributor/testing.md).
 
 | Test module | Behaviour it pins |
 |---|---|
 | `tests/functional/test_engine.py` | The engine: detection, selection, realisation, garnish, drawl and the dials |
 | `tests/functional/test_document_policy.py` | Document presets, exact overrides and shared-surface behaviour |
+| `tests/functional/test_document_refinement.py` | Sentence-safe flavour, contractions, casing and technical-example fidelity |
+| `tests/functional/test_smart_performance.py` | Semantic fallback eligibility, exact scores and complete-result parity |
 | `tests/functional/test_profile_overrides.py` | Inherited advanced defaults, isolated controls and cross-surface configuration |
 | `tests/functional/test_sense_boundaries.py` | Person/adjective sense limits and clothing agreement |
 | `tests/functional/test_lookup_senses.py`, `tests/functional/test_harness_reliability.py` | Slot/sense lookup, phrase locality and data-driven lint comparisons |

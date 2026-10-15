@@ -4,7 +4,7 @@
 
 # The toolkit and its surfaces
 
-Language models are bloody good at Australian English when they have quality source material'n clear guidance.
+Language models are good at Australian English when they have quality source material'n clear guidance.
 Mind ya, the toolkit gives them both, as six plain functions that return JSON\-ready dicts. `aussiefy.harness` gathers
 them; `lookup`, `lint` and `guide` each live in their own module \(`lookup.py`, `lint.py`, `guide.py`).
 
@@ -17,7 +17,7 @@ them; `lookup`, `lint` and `guide` each live in their own module \(`lookup.py`, 
 | `translate(text)` | `aussiefy "text"` | The deterministic rule-engine output |
 | `verify(text, original=...)` | `aussiefy verify draft.txt --original original.txt` | Severity-based fidelity, structure and policy checks; [reference](verification.md) |
 
-How an agent uses them, step by step, is in [skills/aussiefy/SKILL.md](../../skills/aussiefy/SKILL.md),
+Well, how an agent uses them, step by step, is in [skills/aussiefy/SKILL.md](../../skills/aussiefy/SKILL.md),
 which also explains each kind of lint issue \(`!`), warnin' \(`?`) and suggestion \(`~`).
 
 ## The Python API
@@ -64,7 +64,7 @@ behaviours enabled explicitly, even when their numeric settings are supplied.
 and `explain`. The old `difficult` and duplicate `warnings` JSON keys are gone. Policy warnings name region
 tags or unlock flags unused by the dictionary; invalid register and unlock names raise `UserError`.
 
-MCP tools expose parameter descriptions'n dial choices in their schemas, and preserve `UserError`
+Struth, MCP tools expose parameter descriptions'n dial choices in their schemas, and preserve `UserError`
 messages as tool errors. `lookup` requires `limit >= 1` and marks each riff's `best` fit.
 
 ## The same toolkit, three more ways
@@ -86,11 +86,11 @@ Genre, English, embellishment'n extended document controls are described in [tra
 
 ## Lookup sense matching
 
-Lookup matches complete slang forms with grammatical slots, so “give 'em a bell” reaches the telephone
+Lookup matches complete slang forms with grammatical slots, so “give them a bell” reaches the telephone
 sense. Crikey, when such a complete parse identifies a sense, unrelated meaning\-model suggestions are excluded.
 Inflection applies to a noun's head or a verb phrase's head verb, not every word of every frame: “shouted”
 doesn't become a drinks noun. Negated model queries also need a shared content anchor with the candidate
-meaning; “harmless” isn't evidence for “not acceptable”. Conservative filterin' may return no result rather
+meaning; “harmless” isn't evidence for “not acceptable”. Conservative filtering may return no result rather
 than an unreliable suggestion. Now, these checks don't make the meaning model a general word\-sense classifier.
 
 ### Phrase location and fidelity

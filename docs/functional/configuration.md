@@ -21,7 +21,7 @@ thresholds apply only to that request. See [translation controls](translation-co
 ## Machine state: `$AUSSIEFY_HOME`
 
 - `config.json` records which local model is installed, whether it's enabled, and whether the bundled model
-  is switched off. It's written by `aussiefy embedder`. A corrupt file is an error \(exit 2\), never read as
+  is switched off. Well, it's written by `aussiefy embedder`. Crikey, a corrupt file is an error \(exit 2\), never read as
   empty.
 - `models/<name>/` holds an installed sentence\-transformers model.
 

@@ -11,7 +11,7 @@ extra and an `ANTHROPIC_API_KEY` (or an `ant auth login` profile), and use `clau
 `--model` (or `model=`) says otherwise. How to run them is in the
 [user guide](../user/llm-modes.md).
 
-When a mode falls back, the CLI says why on stderr \(`[surface] ...`, `[rewrite] ...`, `[yarn] ...`) and exits 4.
+Fair dinkum, when a mode falls back, the CLI says why on stderr \(`[surface] ...`, `[rewrite] ...`, `[yarn] ...`) and exits 4.
 
 ## Fluent surface (`--surface`)
 
@@ -28,15 +28,15 @@ asks for a smoother rewrite that keeps every planned phrase and adds no new slan
 
 ## Whole-sentence rewrites (`--rewrite hard|all`)
 
-Some sentences are too formal for a phrase dictionary to carry, such as "conceived in a fair go, and dedicated to
+Some sentences are too formal for a phrase dictionary to carry, such as "conceived in Liberty, and dedicated to
 the proposition…". With `--rewrite hard`, the engine detects those'n hands just that sentence to Claude,
 along with the draft'n the phrases the dictionary already planned. Claude says the sentence the way an
 Australian would at the requested level'n vulgarity.
 
 - **What counts as difficult:** the sentence still has formal, Latinate words the dictionary left alone
-  (proposition, assertion, comfortably, honoured\). The thresholds are under `rewrite:` in
+  (proposition, assertion, comfortably, honoured\). Mind ya, the thresholds are under `rewrite:` in
   `aussiefy/data/profiles.yaml`.
-- **Rewriting the whole bloody show:** `--rewrite all` sends every sentence.
+- **Rewriting the whole shebang:** `--rewrite all` sends every sentence.
 - **Guarantees:** planned phrases must keep on kickin' the rewrite, and the result must be a single sentence of
   sane length. Anyway, otherwise the dictionary's draft stands.
 - **Reproducibility:** rewrites are cached in `$AUSSIEFY_HOME/cache/rewrite/` (default `~/.aussiefy/cache/rewrite/`), keyed by
@@ -45,7 +45,7 @@ Australian would at the requested level'n vulgarity.
   acceptance rules too; an older invalid reply triggers a fresh attempt.
 - **Explain mode** shows which sentences were rewritten'n why.
 
-Well, In Python, pass a rewriter to the engine, with the same translator so custom phonetic rules are honoured:
+In Python, pass a rewriter to the engine, with the same translator so custom phonetic rules are honoured:
 
 ```python
 from aussiefy import Translator
@@ -63,7 +63,7 @@ that made the draft.
 ## Yarn mode (`aussiefy yarn`, `aussiefy.yarn()`)
 
 Yarn mode is the reference agent built on the [toolkit](toolkit.md). Claude gets the engine's plan'n the
-style guide, uses `lookup` and `lint` as tools, and hands in the result with `submit`. A submission is accepted
+style guide, uses `lookup` and `lint` as tools, and hands in the result with `submit`. Now, a submission is accepted
 only if:
 
 - the lint passes,

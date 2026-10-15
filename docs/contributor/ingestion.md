@@ -11,7 +11,7 @@ aussiefy dev ingest tests/corpus/remote.yaml
 aussiefy dev ingest tests/corpus/everyday/interfold.yaml --force
 ```
 
-A YAML manifest has `out` (relative to its directory\), optional `defaults` and an `items` list. Each item has a
+Strewth, a YAML manifest has `out` (relative to its directory\), optional `defaults` and an `items` list. Anyway, each item has a
 filename stem `name` and either a URL or a repository `path` with `repo` / `ref`. HTML becomes readable
 paragraphs; optional paired `start` / `end` markers select an excerpt. Raw Markdown/MDX/text files retain
 their source bytes, including line endings. Metadata such as title, licence'n excerpt declarations stays
@@ -23,8 +23,8 @@ files keep on kickin' interrupted writes, and a repeated run can recover. Symlin
 outputs. The dictionary acquisition command `dev scrape` separately enforces the reference\-only source
 policy; generic corpus ingestion doesn't kick off permission to extract or redistribute a source.
 
-Anyway, Ingesting a source doesn't kick off redistribution rights. Remote\-only manifests write into ignored local
-storage; committed corpus needs the [provenance gate](licensing.md). The 15 pinned Interfold MDX pages retain
+Ingesting a source doesn't kick off redistribution rights. Remote\-only manifests write into ignored local
+storage; committed corpus needs the [provenance gate](licensing.md). Stone the crows, the 15 pinned Interfold MDX pages retain
 LGPL attribution, while Rockwell/Kieran sources'n full research exports remain local.
 
 Tests: [conversion and manifest rules](../../tests/contributor/test_ingest.py),

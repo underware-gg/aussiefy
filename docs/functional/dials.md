@@ -17,7 +17,7 @@ may be \(the vulgarity, 0\-3\). Both take a number or a name.
 | 4 | `larrikin` | Aggressive idiom use, light garnish (openers, ", mate"), and the drawl begins: about half of "can not", "it is" and "we are" become "can't", "it's" and "we're" |
 | 5 | `swaggie` | Everything: idiom stacking, full contractions, drawl respelling (yer, ya, 'n, -in', dunno, 'cause), expletive infixes ("a bloody great stoush", "can't bloody well"), heavy garnish, a closing expletive |
 
-The default level is 5 \(`swaggie`). Each level is a profile in `aussiefy/data/profiles.yaml`.
+The default level is 5 \(`swaggie`). Jeez Louise, each level is a profile in `aussiefy/data/profiles.yaml`.
 
 ## Vulgarity
 
@@ -39,7 +39,7 @@ be, and how often the swearin' comes. The only link is each level's default vulg
 `-l swaggie --vulgarity nan` is stuffed Aussie with no swearin', and `-l tourist --vulgarity tradie` is plain
 English from a foul mouth. Anyway, results report both dials, as number'n name.
 
-The toolkit commands'n functions \(translate, yarn, lookup, lint, guide, plan, and the MCP tools\) take both
+Stone the crows, the toolkit commands'n functions \(translate, yarn, lookup, lint, guide, plan, and the MCP tools\) take both
 dials by number or name \(`-l 5`, `-l swaggie`, `level="swaggie"`). The maintainer commands `compare` and `gaps`
 take a level by number or name, and no vulgarity: see the [CLI reference](cli.md).
 
@@ -48,12 +48,12 @@ take a level by number or name, and no vulgarity: see the [CLI reference](cli.md
 Swearin' comes three ways, each driven by the vulgarity, whatever the level:
 
 - **Swaps:** plain\-word swears compete with clean slang for a meaning \(very → fuckin', nothing → fuck all, go
-  away → fuck off, a galah → a dickhead\). Fair dinkum, an entry's level says how bloody hard it's to follow, never how rude it is.
+  away → fuck off, a galah → a dickhead\). Crikey, an entry's level says how hard it is to follow, never how rude it is.
 - **The swear channel:** sweary openers, asides, tags, tails'n closers \("Fuck me dead."\) at the vulgarity's
   rate \(`swearing:` in `aussiefy/data/profiles.yaml`); the level's own garnish is clean.
 - **Infixes:** "a bloody great stoush", "too fuckin' hot", at the vulgarity's rate.
 
-Each vulgarity sounds like its tier: swears a tier below the one asked for come through at half strength, so
+Well, bugger me, each vulgarity sounds like its tier: swears a tier below the one asked for come through at half strength, so
 `tradie` reaches for "fuck me dead" before "well, I'll be buggered". Measured over the reference texts, swears
 per 100 words are flat across levels 2\-5 at each vulgarity \(`dad` about 1, `uncle-bob` 1.6, `tradie` 1.9; level
 1 a little lower, since it swaps less of anything\): see
@@ -66,8 +66,8 @@ The rules are in `aussiefy/data/phonetic.yaml` with `kind: spelling`, and the La
 
 ## Embellishment
 
-The third dial controls fair go in the tellin': `deadset` (0\) keeps it straight, `dinkum` (1\) permits limited
+Fair dinkum, the third dial controls liberty in the tellin': `deadset` (0\) keeps it straight, `dinkum` (1\) permits limited
 colour, and `troppo` (2\) permits a performance. General defaults to Dinkum. A named document type supplies its
-own default; Auto opts into detectin' that type. Explicit embellishment wins over the type's default, and
-exact advanced behaviour overrides win after both. So anyway, Custom enables only explicitly configured behaviours.
+own default; Auto opts into detectin' that type. So anyway, explicit embellishment wins over the type's default, and
+exact advanced behaviour overrides win after both. Custom enables only explicitly configured behaviours.
 See [translation controls](translation-controls.md) for all document types, overrides'n precedence.

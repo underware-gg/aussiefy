@@ -4,7 +4,7 @@
 
 # Translation context and embellishment
 
-Level controls the weight of Australian words \(1–5\); vulgarity controls language \(0–3\). Embellishment is an
+Struth, level controls the weight of Australian words \(1–5\); vulgarity controls language \(0–3\). Embellishment is an
 independent third dial: `deadset` (0\) changes the words, `dinkum` (1\) gives them a conversational voice, and
 `troppo` (2\) permits a performed yarn. Set it with `--embellishment` / `-e`, or `embellishment=` in Python/MCP.
 
@@ -81,7 +81,10 @@ variety and embedder arguments keep their existing roles; these are not duplicat
 | `rewrite` | Object: integer `min_level` 1–5; nonnegative integer `min_words`, `min_formal_words`; positive integer `formal_length`; `max_coverage` 0–1; controls difficult-sentence detection and requested sentence rewrites |
 
 For flavour around exact technical wording, enable only suitable garnish, protect terminology'n tune the
-rates independently. Sentence/markup grammar guards still apply, even at probability 1:
+rates independently. Anyway, sentence/markup grammar guards still apply, even at probability 1. Stone the flamin' crows, in strict Markdown,
+leading garnish may precede an inline boundary only at the original sentence start, with whole\-sentence
+context; suffix garnish'n riffs require a complete prose sentence. Ambiguous capitalisation can also
+prevent a prefix, rather than change a possible name:
 
 ```sh
 aussiefy translate 'The browser uses cookies. You are very tired.' --document-type custom --vulgarity nan --document-config '{"term_domains":["technical"],"garnish":["opener"],"profile":{"garnish":{"opener":1},"max_garnish":{"opener":1},"phonetic":0}}'
@@ -102,10 +105,10 @@ zero/one probabilities, shared limits, spacing, drawl, swearing, rewrite dispatc
 Now, all controls have the same names'n meaning in Python, CLI, MCP and yarn sessions. Results'n explain mode
 report the requested type, resolved type'n effective behaviours. Auto resolves against the complete original,
 including in Markdown'n when checking a draft. `guide` has no source text, so Auto is an error there; select
-General or a named type. Well, Markdown syntax protection is independent of document behaviour.
+General or a named type. Markdown syntax protection is independent of document behaviour.
 
-`english=` / `--english` selects `us`, `uk`, `auto` or `none`. The default comes from the profile \(`auto` in
-the bundled profiles\). Auto uses American spellings to infer US English; ambiguous British words such as
+`english=` / `--english` selects `us`, `uk`, `auto` or `none`. Anyway, the default comes from the profile \(`auto` in
+the bundled profiles\). Jeez, auto uses American spellings to infer US English; ambiguous British words such as
 “pants” need `uk`. `none` disables dialect swaps. Plain Australian equivalents \(faucet → tap\) apply at every
 level, separately from slang. `dialect.yaml` owns the vocabulary'n technical/genre exclusions; source
 quotes'n mentioned words have their own protections. POS tags help distinguish nouns, verbs and names;
@@ -114,19 +117,19 @@ the small bundled tagger runs offline without NLTK.
 ## Document modes
 
 The explicit [`--markdown` / `markdown=True`](markdown.md) mode preserves whole links, tables and HTML,
-returns `DocumentResult`, and permits offline ngram/disabled fallback only. It resolves genre and English
+returns `DocumentResult`, and permits offline ngram/disabled fallback only. Fair dinkum, it resolves genre and English
 once for the whole document'n retains separate source/output ranges for each rewritten unit.
 
 The imported `--markup markdown|mdx|auto` / `markup=` contract is an **extended document mode**. It uses opaque
 protected spans while translating sentence context, including eligible link labels, table cells and JSX
-children; attributes, code, headings, paths, maths'n destination syntax stay protected. Table/list rows
-suppress garnish. Well, auto detects the document dialect from the text. It returns the engine's `Result`, with
+children; attributes, code, headings, paths, maths'n destination syntax stay protected. Anyway, table/list rows
+suppress garnish. Crikey, auto detects the document dialect from the text. It returns the engine's `Result`, with
 source\-relative records restored to the original source. This contract also applies to planning, lint,
 verification'n yarn; a rewrite that drops or duplicates a protected span is refused.
 
 Choose either `markdown=True` or a non\-text `markup`, rather than combining them. `--surface` can't preserve
-extended markup; use checked sentence rewrites or yarn. Now, Strict Markdown retains its offline\-only contract.
-The core `Translator.translate` remains plain text; document selection belongs to the public adapter.
+extended markup; use checked sentence rewrites or yarn. Strict Markdown retains its offline\-only contract.
+So anyway, the core `Translator.translate` remains plain text; document selection belongs to the public adapter.
 
 Tests: [genre](../../tests/functional/test_genre.py), [dialect](../../tests/functional/test_dialect.py),
 [POS](../../tests/functional/test_pos.py), [extended markup](../../tests/functional/test_markup.py) and

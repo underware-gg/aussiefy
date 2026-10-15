@@ -15,6 +15,7 @@ aussiefy/data/
   profiles.yaml        level profiles 1-5, the swearing rates per vulgarity, and policy defaults
   phonetic.yaml        drawl: contractions (level 4+), respellings (level 5), swear infixes (by vulgarity),
                        and Australian spelling (kind: spelling)
+                       optional unless_before regex excludes grammatical contexts before a rule match
   riffs.yaml           the image a term calls up (wheelie bin: bin chickens fightin' over the scraps)
   guide.yaml           voice, language limits, openings, gated craft, workflow, plan note and yarn rules
   swears.yaml          swear words by strength, for lint and for rating riffs

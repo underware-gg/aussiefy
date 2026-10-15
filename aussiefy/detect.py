@@ -19,6 +19,7 @@ from dataclasses import dataclass, field
 from typing import Callable, NamedTuple
 
 from . import morph, pos
+from .embed import Embedder, NgramEmbedder, similarity_scorer
 from .matcher import match_at, SLOT_MATCHERS, Match, Pattern, PatternIndex, is_name
 from .text import CLAUSE_BREAK, QUOTES, SENTENCE_END, Token
 
@@ -375,6 +376,36 @@ def _wrong_part_of_speech(m: Match, tokens: list[Token], tags: list[str]) -> boo
     return False
 
 
+FALLBACK_LENGTH_TOLERANCE = 2
+
+
+def _fallback_literal(pattern: Pattern) -> str:
+    return " ".join(sorted(e.values)[0] for e in pattern.elements if e.kind == "lit")
+
+
+def fallback_scorer(embedder: Embedder, patterns: list[Pattern]) -> Callable[[str], dict[int, float]]:
+    """Score mandatory, slot-free fallback patterns that can pass the detector's shape checks.
+
+    N-grams already use a sparse inverted index. Meaning models avoid dense vector comparisons against
+    patterns whose literal count or length the detector would reject afterwards.
+    """
+    if isinstance(embedder, NgramEmbedder):
+        return similarity_scorer(embedder, [p.text for p in patterns])
+    by_shape: dict[tuple[int, int], list[int]] = {}
+    for i, pattern in enumerate(patterns):
+        shape = (sum(e.kind == "lit" for e in pattern.elements), len(_fallback_literal(pattern)))
+        by_shape.setdefault(shape, []).append(i)
+
+    def score(query: str) -> dict[int, float]:
+        words = len(query.split())
+        indices = sorted(i for length in range(len(query) - FALLBACK_LENGTH_TOLERANCE,
+                                               len(query) + FALLBACK_LENGTH_TOLERANCE + 1)
+                         for i in by_shape.get((words, length), ()))
+        return {i: embedder.similarity(query, patterns[i].text) for i in indices}
+
+    return score
+
+
 def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dict[int, float]] | None = None,
            fallback_patterns: list[Pattern] | None = None, threshold: float = 0.72,
            tags: list[str] | None = None, adjective_nouns: dict[str, frozenset[str]] | None = None) -> list[Detection]:
@@ -413,8 +444,9 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
                     # "under the" is not "under the weather") and about its length ("less" is not "legless")
                     p = fallback_patterns[k]
                     matched = match_at(p, tokens, j, exact=False)
-                    literal = " ".join(sorted(e.values)[0] for e in p.elements if e.kind == "lit")
-                    if matched is None or matched.end != j + n or abs(len(literal) - len(text)) > 2:
+                    literal = _fallback_literal(p)
+                    if (matched is None or matched.end != j + n
+                            or abs(len(literal) - len(text)) > FALLBACK_LENGTH_TOLERANCE):
                         continue
                     if best is None or scores[k] > best[0]:
                         best = (scores[k], n, fallback_patterns[k])

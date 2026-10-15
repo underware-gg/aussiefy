@@ -15,27 +15,33 @@ python scripts/publish_docs.py check
 
 Generation uses the strict Markdown adapter at Swaggie (5), Dinkum (1), Dad (1) and seed 0, with the offline
 ngram fallback. It explicitly selects General, protects Technical vocabulary through `term_domains`, and
-disables formal-sentence rework. Every published page has the same settings notice and a link to its own plain
+disables formal-sentence rework. Its explicit advanced configuration preserves quoted wording, excludes
+person swears, factual riffs, insulting garnish and infixes, and enables conversational connectives, openers
+and tags. Their per-sentence probabilities are 0.35/0.35/0.25; per-document caps are 10/6/4, with two source
+sentences between repeats of the same placement. Stacking is off. These are repository publication choices,
+not changes to the public dial defaults. Every published page has the same settings notice and a link to its own plain
 counterpart: “Prefer docs that are as dry as a dead dingo's donger?” It preserves headings, tables, links, code and displayed command outputs. The generated notice
 links back to the editable source. All outputs are derived from the current dictionary and publication map;
 their exact bytes are checked before promotion. Strict Markdown units share document-wide choice and garnish
-state; garnish is suppressed on incomplete sentence fragments, keeping flavour out of code/link boundaries.
+state. A source sentence start can receive a leading opener/connective before an inline boundary, using the
+whole sentence's context. Suffixes and riffs require complete prose; continuation fragments cannot acquire
+an opener. Word-case evidence is shared across the document, and an ambiguous first word can prevent a prefix.
 
-Rello links in a plain source point to other plain sources where available, or to the actual ungenerated
-repository file. Now, Publication remaps those destinations back to their public paths. External destinations and
-fragments stay unchanged. Both trees have checked file targets'n anchors; no parsed document is rendered
+Well, relative links in a plain source point to other plain sources where available, or to the actual ungenerated
+repository file. Publication remaps those destinations back to their public paths. External destinations and
+fragments stay unchanged. Now, both trees have checked file targets'n anchors; no parsed document is rendered
 back into Markdown.
 
-Anyway, during development, a plain\-source edit may leave published prose stale. The ordinary command/output tests
+During development, a plain\-source edit may leave published prose stale. The ordinary command/output tests
 read each authoritative current source once, along with ungenerated current docs'n skills. Run generation
 to preview the published result, and review its readability before committin' a publication update.
-So anyway, Promotion requires fresh outputs, valid links'n executable examples.
+Promotion requires fresh outputs, valid links'n executable examples.
 
-AGENTS/CLAUDE instructions, legal notices'n licence texts, the copied standard, ADR records and historical
-reviews stay plain. Jeez Louise, their current indexes may be published. Trainin', research'n corpus READMEs stay at
-their existin' paths. Publication doesn't recursively translate `docs/plain/`.
+Crikey, AGENTS/CLAUDE instructions, legal notices'n licence texts, the copied standard, ADR records and historical
+reviews stay plain. Their current indexes may be published. Trainin', research'n corpus READMEs stay at
+their existin' paths. Anyway, publication doesn't recursively translate `docs/plain/`.
 
-Mate, Add a new current guide to the explicit map. A missing mapped input, an unmapped plain source, a stale or
+Add a new current guide to the explicit map. A missing mapped input, an unmapped plain source, a stale or
 unexpected generated output, or a broken link fails with its path'n a correction. Commands resolve the
 repository from the script location, and support `--root PATH` for local fixtures. No LLM call is made.
 

@@ -77,7 +77,10 @@ variety and embedder arguments keep their existing roles; these are not duplicat
 | `rewrite` | Object: integer `min_level` 1–5; nonnegative integer `min_words`, `min_formal_words`; positive integer `formal_length`; `max_coverage` 0–1; controls difficult-sentence detection and requested sentence rewrites |
 
 For flavour around exact technical wording, enable only suitable garnish, protect terminology and tune the
-rates independently. Sentence/markup grammar guards still apply, even at probability 1:
+rates independently. Sentence/markup grammar guards still apply, even at probability 1. In strict Markdown,
+leading garnish may precede an inline boundary only at the original sentence start, with whole-sentence
+context; suffix garnish and riffs require a complete prose sentence. Ambiguous capitalisation can also
+prevent a prefix, rather than change a possible name:
 
 ```sh
 aussiefy translate 'The browser uses cookies. You are very tired.' --document-type custom --vulgarity nan --document-config '{"term_domains":["technical"],"garnish":["opener"],"profile":{"garnish":{"opener":1},"max_garnish":{"opener":1},"phonetic":0}}'

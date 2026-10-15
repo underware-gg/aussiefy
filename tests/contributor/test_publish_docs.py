@@ -55,6 +55,19 @@ def test_source_or_output_edit_is_stale_until_regenerated(repo):
     p.check(repo)
 
 
+def test_publication_protects_quoted_examples_and_neutral_people(repo):
+    source = ('# Usage\n\nAn example: "mosquitoes" becomes "mozzies".\n\n'
+              'The incorrect example is “is my togs”.\n\nSomeone is being addressed.\n\n'
+              'You must use `dev` for changes.\n')
+    put(repo, 'docs/plain/user/guide.md', source)
+    p.generate(repo)
+    rendered = (repo / 'docs/user/guide.md').read_text()
+    assert '"mosquitoes" becomes "mozzies"' in rendered
+    assert '“is my togs”' in rendered
+    assert 'mongrel' not in rendered and 'bastard' not in rendered
+    assert '`dev`' in rendered
+
+
 def test_missing_unmapped_or_unexpected_files_fail(repo):
     p.generate(repo)
     put(repo, 'docs/leftover.md', p.MARKER + '\n')

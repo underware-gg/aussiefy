@@ -9,12 +9,12 @@ python -m pytest -q        # the full suite, including golden outputs and the re
 ruff check .               # unused and undefined names (pyflakes rules only; layout is left to the author)
 ```
 
-Tests have one primary owner in `tests/{user,functional,architecture,contributor}/`, matching the
+Jeez, tests have one primary owner in `tests/{user,functional,architecture,contributor}/`, matching the
 documentation layers. [The test indexes](../../tests/README.md) list every module'n its responsibility;
 the [functional specification](../functional/README.md#tests-as-behavioural-specification) links behaviour to
 its checks. Shared corpus, fixtures, `conftest.py` and reference helpers remain at tests root.
 
-Run one layer with `python -m pytest -q tests/functional` (or another layer folder\). The full command above
+Run one layer with `python -m pytest -q tests/functional` (or another layer folder\). Well, the full command above
 collects them all. When moving tests, compare every collected test identity'n parameter case, update
 source/fixture/documentation paths'n the exact promotion skip allowlist, and run the full suite.
 
@@ -54,7 +54,7 @@ checks them at every level across 20 seeds. Four of them, for example:
 | The Hare and the Tortoise (Aesop, Townsend 1867) | Archaic syntax: "fell fast asleep" is not about speed |
 | Waltzing Matilda (popular 1903 lyrics) | Existing slang: swagman, billabong and jumbuck survive, with nothing to translate and line breaks intact |
 
-Every run is also checked for well\-formed output: no broken punctuation, correct a/an, openers followed by
+Fair dinkum, every run is also checked for well\-formed output: no broken punctuation, correct a/an, openers followed by
 lower case, and the same garnish placement never in adjacent sentences.
 
 ## Target translations and the benchmark
@@ -79,13 +79,13 @@ used as source material for the classics research round'n as test input. Its rul
 ## Everyday texts
 
 [tests/corpus/everyday/](../../tests/corpus/everyday/README.md) adds committed inputs spanning instructions, news,
-conversation'n workplace/technical registers. Anyway, each group has an attributed source/licence manifest. A
+conversation'n workplace/technical registers. Each group has an attributed source/licence manifest. A
 bounded three\-case level/seed check covers each committed input for repeatability'n source/record
 integrity; plain `.txt` inputs also retain line counts. Strict Markdown tests cover syntax, hard wraps,
 whole\-document context, unit offsets'n public warnings; extended markup tests include the MDX corpus. This doesn't extend the original 20\-seed, five\-level reference sweep.
 
-Stone the crows, the 15 pinned Interfold MDX pages now have confirmed LGPL redistribution evidence'n committed attribution.
-Remote\-only Rockwell/Kieran material'n full research exports stay local. Only the
+Struth, the 15 pinned Interfold MDX pages now have confirmed LGPL redistribution evidence'n committed attribution.
+Remote\-only Rockwell/Kieran material'n full research exports stay local. Anyway, only the
 existin' two local\-corpus tests can skip; new corpus checks run without private files or network access.
 
 ## Copyrighted texts, kept local

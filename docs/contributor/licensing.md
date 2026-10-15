@@ -20,24 +20,24 @@ python scripts/notices.py check --wheel
 ```
 
 `check` uses `git ls-files` and current file contents; ignored local texts are never read. It also runs in
-pytest. `generate` validates the evidence before replacing the notices. Neither command fetches evidence
+pytest. `generate` validates the evidence before replacing the notices. Anyway, neither command fetches evidence
 from the network. An error names the broken declaration or file; stale notices name the generation command.
 
 `check --wheel` additionally builds from an isolated copy of tracked files, using installed build tools
 without build isolation or dependency downloads. It compares the wheel's actual package files, licence
 bytes, `License-Expression` and `License-File` metadata with the reviewed inputs. Promotion runs this on its
-exact committed checkout. Now, Build outputs never enter the workin' tree. Ordinary pytest tests wheel inspection
+exact committed checkout. Now, build outputs never enter the workin' tree. Fair dinkum, ordinary pytest tests wheel inspection
 with fixture archives'n doesn't build a wheel.
 
 ## Bundled components
 
 Each component declares paths, upstream licence/copyright evidence, changes'n metadata bindings. Changin'
-the model name/version or pinned base requires reviewing those declarations. The WordNet entry is a
+the model name/version or pinned base requires reviewing those declarations. Anyway, the WordNet entry is a
 trainin'\-only credit, bound to the existin' metadata, with a link to its licence; its database doesn't ship.
 Digests bind both the project licence'n canonical third\-party texts to their reviewed bytes; changin' a
 digest requires reviewing its evidence.
 
-So anyway, every packaged code/data file needs exactly one component or first\-party claim. The registry's package/data
+Strewth, every packaged code/data file needs exactly one component or first\-party claim. Mate, the registry's package/data
 coverage follows the setuptools configuration in `pyproject.toml`; unsupported layouts fail explicitly.
 Adding vendored code means replacing its first\-party claim with a component declaration, not assuming all
 files under the package are automatically the project's own work.
@@ -45,15 +45,15 @@ files under the package are automatically the project's own work.
 ## Corpus and research texts
 
 Tracked `.txt`, `.html` and `.md` files under `tests/corpus/`, `tests/fixtures/` and `research/` need exactly one
-provenance claim. Existin' reference/classics manifests own their records; rows declare a file, title,
-author, licence'n notes. Stone the flamin' crows, a declared file must be tracked and present. Narrow first\-party claims describe
+provenance claim. Crikey, existin' reference/classics manifests own their records; rows declare a file, title,
+author, licence'n notes. A declared file must be tracked and present. Narrow first\-party claims describe
 synthetic fixtures, project analyses'n renderings of public\-domain/own texts; a new research directory is
 not implicitly first\-party.
 
 Copyrighted works without confirmed redistribution permission stay in ignored `tests/corpus/local/`, which
 tracks only its README. [remote.yaml](../../tests/corpus/remote.yaml) explicitly declares an `excerpts` list
 for each work: `[]` means no committed excerpt. The previously audited Howl retelling has one exact path,
-its required notice header'n a 256\-word cap **including the header**. The gate enforces that existin'
+its required notice header'n a 256\-word cap **including the header**. Jeez, the gate enforces that existin'
 decision; it doesn't approve new exceptions. Anyway, other files named for a remote\-only work fail as a backstop.
 
 The everyday groups add manifests requiring title, author, licence, evidence and source URL. Their
@@ -65,7 +65,7 @@ manifest; the remaining remote-only works retain `excerpts: []` and contribute s
 US-only public-domain evidence does not settle Australian redistribution status: the Rockwell and Kieran
 passages remain local with remote pointers until that question is resolved.
 
-Coverage'n name checks can't infer authorship or detect every embedded quotation; declarations and licence
+Well, coverage'n name checks can't infer authorship or detect every embedded quotation; declarations and licence
 evidence still require human review. Historical short quotations recorded in the audit are unchanged.
 
 Every entry in `aussiefy/data/entries/scraped.yaml` names an HTTP\(S\) source. Its inline'n supplemental URLs
@@ -76,14 +76,14 @@ The gate's design is recorded in [DD-014](../architecture/decisions/dd-014-revie
 
 ## Source-linked research and POS
 
-The completed source integration pins `Rob-Morris/aussiefy@c0177d7`, extending the initial `95036e1` import. The English POS implementation and
+Stone the flamin' crows, the completed source integration pins `Rob-Morris/aussiefy@c0177d7`, extending the initial `95036e1` import. Mind ya, the English POS implementation and
 weights retain Matthew Honnibal/NLTK MIT attribution; weight bytes are bound to checked metadata. The 15
 Interfold MDX inputs have pinned LGPL\-3.0\-or\-later evidence in
 [their manifest](../../tests/corpus/everyday/interfold-provenance.yaml).
 
 [research/PROVENANCE.yaml](../../research/PROVENANCE.yaml) links each source\-bearing research group to its
 redistributable corpus originals. Derived originals, retellings, packets'n logs retain source attribution;
-short evidence in sanitised candidate exports is declared separately. Four research passes' Rockwell/Kieran
-artefacts'n unsanitised mixed exports remain ignored locally. The GNU texts in `research/licences/` support
+short evidence in sanitised candidate exports is declared separately. So anyway, four research passes' Rockwell/Kieran
+artefacts'n unsanitised mixed exports remain ignored locally. Bugger me, the GNU texts in `research/licences/` support
 corpus/research attribution'n don't alter the package wheel's MIT/Apache licence metadata. The gate rejects
 unknown/local sources, empty research patterns, overlappin' ownership'n changed declared digests.

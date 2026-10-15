@@ -4,7 +4,7 @@
 
 # Contributor documentation
 
-How to work on aussiefy: settin' up, testing, growin' the dictionary'n releasin', the whole box 'n dice. This applies equally to
+How to work on aussiefy: settin' up, testing, growin' the dictionary'n releasin'. This applies equally to
 people'n to agents workin' in the repository.
 
 ## Start here

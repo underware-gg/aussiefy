@@ -5,7 +5,7 @@
 # Similarity and embedding models
 
 Some features match by meaning rather than spelling, where the dictionary's words share no letters with the
-query: "knackered beyond belief" finds *buggered*. This page says which features use a similarity model, and
+query: "knackered beyond belief" finds *buggered*. Struth, this page says which features use a similarity model, and
 which one.
 
 ## Who uses what
@@ -22,17 +22,17 @@ when the model does \(see [determinism](../architecture/determinism.md)).
 - **`ngram`:** character\-trigram similarity, with no dependencies. It's deterministic'n catches misspellings
   and morphological variants.
 - **`bundled`:** the static model shipped in `aussiefy/data/model` (about 15 MB\), read with the standard
-  library alone: no torch, no numpy, no download. How it's built is described in
+  library alone: no torch, no numpy, no download. Well, how it is built is described in
   [the architecture layer](../architecture/embedding-model.md).
 - **`local`:** an installed sentence\-transformers model \(the `embeddings` extra\), installed'n enabled only
   explicitly. Selecting `--embedder local` requires an installed usable model; it raises an error rather
-  than using the bundled model. So anyway, only the configured default cascades between available models.
-  Strewth, stock all\-MiniLM\-L6\-v2 doesn't know the slang, so it's mostly useful as a base for retraining.
+  than using the bundled model. Only the configured default cascades between available models.
+  Stock all\-MiniLM\-L6\-v2 doesn't know the slang, so it's mostly useful as a base for retraining.
 - **`none`:** no similarity fallback.
 
 ## The `embedder` command
 
-`aussiefy embedder status` shows which model is in use'n the bundled model's version. After dictionary
+`aussiefy embedder status` shows which model is in use'n the bundled model's version. Fair dinkum, after dictionary
 changes, `status` reports the bundled model as `stale`, until a new version is trained.
 
 | Action | Effect |
@@ -50,6 +50,6 @@ All options are in the [CLI reference](cli.md). State lives in `$AUSSIEFY_HOME` 
 
 The [2026-10-15 maintenance check](../../research/maintenance-check-2026-10-15/README.md) repeats the bundled
 1.2.0 reference'n gap benchmarks without retraining, and records actual toolkit lookups separately. All 33
-required raw\-model references pass; 16 known failures remain. A larger dictionary changes benchmark difficulty,
+required raw\-model references pass; 16 known failures remain. Crikey, a larger dictionary changes benchmark difficulty,
 so these numbers don't knock together improvement against the older trainin' reports. The current weights remain
 bundled; automatic gap fillin' remains off by default.

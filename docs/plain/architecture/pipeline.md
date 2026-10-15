@@ -66,5 +66,6 @@ explicit dials and exact behaviour overrides. `dialect.py` reserves and realises
 slang. `pos.py` tags each sentence once, supplying noun/verb and subject checks. Consumers read the resolved
 controls for garnish, quotes and terminology domains. Strict Markdown shares one document context, vocabulary
 choices and garnish state across its prose units, retains source sentence positions for spacing and suppresses
-garnish on incomplete fragments. Extended markup sends one masked document through the pipeline with opaque
+suffix garnish and riffs on incomplete fragments, while allowing a leading opener/connective only at a
+known source sentence start. Extended markup sends one masked document through the pipeline with opaque
 protected spans. See [translation controls](../functional/translation-controls.md).

@@ -86,6 +86,12 @@ credits:
     expect:
       wordnet: WordNet 3.0
 first_party:
+- glob: research/document-refinement-2026-10-15/README.md
+  reason: Project-authored documentation/refinement analysis and aggregate activity measurements; no copied corpus text.
+- glob: research/document-refinement-2026-10-15/docs-measurement.json
+  reason: Project-authored per-document activity counts and comparison metadata for the repository's own documentation.
+- glob: research/document-refinement-2026-10-15/smart-performance-current.json
+  reason: Project-authored timing, hash and parity metadata; no copied source text or model vectors.
 - glob: research/maintenance-check-2026-10-15/README.md
   reason: Project-authored implementation analysis and measured findings; no copied corpus text.
 - glob: research/maintenance-check-2026-10-15/model-check.json

@@ -5,7 +5,7 @@
 # aussiefy documentation
 
 aussiefy rewrites plain English as Australian slang, with independent level \(1\-5\), vulgarity \(0\-3\) and
-embellishment \(0\-2\) controls. Document types supply explicit behaviour presets; General is the default'n detection is opt\-in. This is the front door to its documentation, which is organised in four layers, each with
+embellishment \(0\-2\) controls. Document types supply explicit behaviour presets; General is the default'n detection is opt\-in. Strewth, this is the front door to its documentation, which is organised in four layers, each with
 its own index. It follows the [Agent-Ready Documentation Standard](standards/agent-ready-documentation.md)
 v1.0.0, at Level 1.
 
@@ -28,5 +28,5 @@ v1.0.0, at Level 1.
 - [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md): attribution and changes for the bundled embedding model.
 - [standards/](standards/README.md): the documentation standard this project follows.
 
-Current guides are edited under `docs/plain/` and published at stable public paths. See
+Now, current guides are edited under `docs/plain/` and published at stable public paths. See
 [documentation publication](contributor/documentation.md).

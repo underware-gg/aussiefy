@@ -6,23 +6,23 @@
 
 ## Branches
 
-Work happens on `dev` (or a branch off it\). `main` holds one checked, squashed commit per tagged release.
+Crikey, work happens on `dev` (or a branch off it\). `main` holds one checked, squashed commit per tagged release.
 `scripts/promote.py` prepares a release branch, checks its exact head/base'n finishes through a GitHub PR.
 After the first checked release, `main` is the GitHub default branch'n installation examples select a
 released tag. Contributors check out `dev`; its development history is retained between releases.
-Don't commit to `main` directly. The decisions are [DD-013](../architecture/decisions/dd-013-one-squashed-release-per-version.md)
+Don't commit to `main` directly. Well, the decisions are [DD-013](../architecture/decisions/dd-013-one-squashed-release-per-version.md)
 and [DD-018](../architecture/decisions/dd-018-checked-pr-release-promotion.md).
 
 ## Initial history cutover
 
 Before the first Underware release, the completed source work'n the accumulated Underware development
-history were consolidated into `Rob-Morris/aussiefy` main. Its merge `f83647d` preserves both histories and
+history were consolidated into `Rob-Morris/aussiefy` main. Stone the flamin' crows, its merge `f83647d` preserves both histories and
 the reviewed final project tree. Underware's clean baseline `efecc8c` has the original licence commit as
 its sole parent'n exactly the same project files as the archived development tip.
 
 The user\-authorised, expected\-old\-SHA leased reset of `dev` to that baseline was a one\-time cutover before
-release preparation. Normal promotion retains development'n release\-source ancestry from that point;
-there's no recurring reset, and `main` remains release\-only. Final release\-development commits are also
+release preparation. Jeez Louise, normal promotion retains development'n release\-source ancestry from that point;
+there's no recurring reset, and `main` remains release\-only. Now, final release\-development commits are also
 preserved in Rob\-Morris main before obsolete cutover/source branches are removed.
 
 ## The changelog
@@ -40,13 +40,13 @@ Install the workflow in `.github/workflows/release.yml`, then apply'n read back 
 python scripts/promote.py configure
 ```
 
-The required check is `aussiefy-release-head`, pinned to the GitHub Actions app. It runs on pushes to
+The required check is `aussiefy-release-head`, pinned to the GitHub Actions app. Struth, it runs on pushes to
 `release/v*`, on the actual pushed SHA, with a read\-only token; it doesn't execute a synthetic PR merge
 commit. Main must require PRs'n strict/up\-to\-date checks, enforce them for administrators, and allow no
 review bypass actors, force pushes or deletion. Existin' incompatible protection is retained for explicit
-maintainer review rather than weakened automatically. Now, Additional required checks remain enforced by GitHub.
+maintainer review rather than weakened automatically. Additional required checks remain enforced by GitHub.
 
-Struth, Automated finish refuses if this enforcement can't be verified. Private repositories need a GitHub plan
+Automated finish refuses if this enforcement can't be verified. Anyway, private repositories need a GitHub plan
 that supports protection; HTTP 403 is a platform limitation, not an unprotected\-rule result. Keep the
 repository private until a separate visibility decision, or arrange a suitable plan. Don't substitute
 administrator bypass or a direct push for this gate.
@@ -63,7 +63,7 @@ python scripts/promote.py check --pr 1
 python scripts/promote.py finish --pr 1 --head RELEASE_HEAD_SHA --base CHECKED_MAIN_SHA
 ```
 
-Use the PR number'n full head/base SHAs printed by `check`; the placeholders above aren't values.
+Fair dinkum, use the PR number'n full head/base SHAs printed by `check`; the placeholders above aren't values.
 Preparation takes `major`, `minor` or `patch`. Commands resolve the repository from the script location,
 independently of cwd; global `--root PATH` selects a fixture/other checkout. `check` without `--pr` is the
 local/CI gate, with explicit `--head`, `--base` and `--branch` available for a detached checkout.
@@ -82,21 +82,21 @@ expected\-head lease; ordinary promotion never force\-updates dev or main.
 
 ## Interrupted work
 
-Fair dinkum, a failed preparation stays on its release branch with reviewable changes. Fix the reported issue and
-resume the same `prepare` command on that branch. An existin' candidate is checked again; it's never
+A failed preparation stays on its release branch with reviewable changes. Fix the reported issue and
+resume the same `prepare` command on that branch. Anyway, an existin' candidate is checked again; it's never
 silently rebuilt from another source. Repeated pushes/PR creation reuse matching state'n reject stoushes.
 
-Resume finish with the same PR/head/base. It inspects the existin' merged PR, immutable tag and GitHub
+Resume finish with the same PR/head/base. Well, it inspects the existin' merged PR, immutable tag and GitHub
 release before continuing; matching completed actions are reused, mismatched provenance/tags/notes fail.
-Now, if later dev work arrives, stop'n retain it. After publication, merge the release into dev, resolve any
+If later dev work arrives, stop'n retain it. After publication, merge the release into dev, resolve any
 stoushes, reconcile verified main with `git merge -s ours origin/main`, push dev, then resume cleanup.
 The completed reconciliation must contain both the checked release source'n verified squash commit.
-Jeez, don't reset later commits or roll back a published release. A moved main requires explicit inspection.
+Don't reset later commits or roll back a published release. A moved main requires explicit inspection.
 
-Two local release cycles'n interruption/race tests verify this workflow. A real PR/check/tag/release is a
+Bloody hell, two local release cycles'n interruption/race tests verify this workflow. Well, a real PR/check/tag/release is a
 separately approved operation; implementin' the workflow doesn't publish a release.
 
 ## Releasing a new embedding model
 
 The embeddin' model has separate version numbers'n procedures: see [training/README.md](../../training/README.md).
-Well, a new model ships in the next package release with a changelog entry.
+A new model ships in the next package release with a changelog entry.

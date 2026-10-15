@@ -448,7 +448,7 @@ RELATIVES:
   description: Relatives, family members.
   triggers:
     # not "relative to the goal", "relative humidity", "in relative terms"
-    np: ["relative !to|terms|humidity|risk|value|values|ease|importance|size|position|path|paths|frequency|error|errors|clause|merits|calm|strength|weakness|cost|costs|speed|density|abundance|newcomer|newcomers|safety|poverty|peace|majority"]
+    np: ["relative !to|terms|humidity|risk|value|values|ease|importance|size|position|path|paths|link|links|frequency|error|errors|clause|merits|calm|strength|weakness|cost|costs|speed|density|abundance|newcomer|newcomers|safety|poverty|peace|majority"]
 TOILET:
   description: A toilet.
   triggers:
@@ -850,6 +850,7 @@ STRUGGLERS:
          "the poor", "struggling families", "ordinary Australians"]
 FREEDOM:
   description: Freedom, liberty, fairness for all.
+  not_in: [technical]
   triggers:
     np: ["freedom", "liberty", "equal opportunity", "fairness"]
 REASONABLE:
@@ -1151,7 +1152,8 @@ EVERYTHING:
   triggers:
     # not "the whole lot of you" (all of you people)
     # nor a range: "everything from country rock to jazz" (dinkum-check round)
-    np: ["everything !=from", "the whole thing", "the whole lot !=of", "the entire thing", "all of it", "the whole boatload",
+    # A relative clause needs the original pronoun: "everything a level does", not "the whole show a level does".
+    np: ["everything !=from|that|which|a|an|the|this|these|those|my|your|our|their|his|her|its|we|you|he|she|it|they", "the whole thing", "the whole lot !=of", "the entire thing", "all of it", "the whole boatload",
          "the whole shooting match"]
 GOD_WILLING:
   description: Under God; with God's blessing.

@@ -233,6 +233,8 @@ def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: i
 
         def sub(m: re.Match) -> str:
             counter["n"] += 1   # counted either way, so a kept span doesn't shift the rolls after it
+            if rule.unless_before is not None and rule.unless_before.search(before[:m.start()]):
+                return m.group(0)
             if preserve is not None and preserved_for[0] != before:
                 preserved_for[:] = [before, preserve(before)]
             if any(a <= m.start() < b for a, b in kept() + preserved_for[1]):

@@ -12,8 +12,8 @@ passes the loader's validation, and is reviewed as a diff. What each tool does i
 ## What counts as Aussie
 
 Jeez, an entry needs to be slang Australians actually use, not slang only Australians use. "Christen", "this neck of
-the bush" and "put a sock in it" are shared with other Englishes but are everyday here, so they're in, with a
-`notes` line sayin' so. Phrases that are foreign to Australian speech \("that dog won't bloody well hunt"\) or unattested are
+the woods" and "put a sock in it" are shared with other Englishes but are everyday here, so they're in, with a
+`notes` line sayin' so. Phrases that are foreign to Australian speech \("that dog won't hunt"\) or unattested are
 flagged instead, and kept in `aussiefy/data/entries/flagged.yaml` so re\-scrapes don't reintroduce them.
 
 Every gloss is written in our own words, never a source's
@@ -32,7 +32,7 @@ pass `--permitted`. Use them by hand: look a word up, set its `region` and `regi
 
 `aussiefy gaps FILE...` runs the engine over a corpus'n lists the content words it keeps leaving in plain
 English, each with a verdict on what to do \(add a trigger to the nearest concept, add a concept, or leave it\).
-`aussiefy compare` against a target translation shows which of its slang the engine misses. Both point at
+`aussiefy compare` against a target translation shows which of its slang the engine misses. Anyway, both point at
 where to curate next.
 
 ## The scrape → tag → review pipeline
@@ -44,15 +44,15 @@ aussiefy dev review data/staging/tagged.yaml                     # dry run: summ
 aussiefy dev review data/staging/tagged.yaml --apply
 ```
 
-`tag` needs the `llm` extra'n an API key; `scrape` needs the `scrape` extra. The staging files under
+`tag` needs the `llm` extra'n an API key; `scrape` needs the `scrape` extra. Crikey, the staging files under
 `data/staging/` are workin' files, not part of the dictionary.
 
 Two more sources feed the same `tag` and `review` steps:
 
 - **Fragments.** `aussiefy dev fragments -o data/staging/fragments.yaml` stages slang buried inside our own
-  idioms \("dunny" in "stick out like a country dunny like a country dunny"\).
+  idioms \("dunny" in "stick out like a country dunny").
 - **Harvests.** `aussiefy dev harvest plain.txt aussie.txt` mines an Aussified rewrite \(from an agent, the
-  `--rewrite` cache or a person\) for the spans it changed. Running it on a target translation's misses is how
+  `--rewrite` cache or a person\) for the spans it changed. Stone the crows, running it on a target translation's misses is how
   they become candidate entries.
 
 `aussiefy/data/entries/fragments.yaml` and the "harvested" sections of the other entry files came from running
@@ -81,8 +81,8 @@ ZZ_GUARD:
 Field overrides replace the named field, so `triggers` replaces the complete trigger mapping. They apply last,
 after `trigger_fixes.yaml`'s additions/removals/intensities, and the dry run lists their IDs and fields.
 
-Reapplication preserves previously written concept records'n their hand edits. New definitions are appended
-to the round's own section. Explicit trigger fixes update triggers while keeping other metadata; explicit
+Reapplication preserves previously written concept records'n their hand edits. Bugger me, new definitions are appended
+to the round's own section. Well, explicit trigger fixes update triggers while keeping other metadata; explicit
 concept fixes rewrite only affected records, whose internal formattin'/comments may change. Neighbouring
 records'n section comments remain intact. Move an intentional change into a fix file rather than relyin'
 on edited verifier verdicts to overwrite a concept already written.
@@ -105,7 +105,7 @@ The retellings study compared the engine, yarn mode'n an unharnessed agent on th
 
 ## Concepts
 
-The concept vocabulary in `aussiefy/data/concepts.yaml` is hand\-curated
+Now, the concept vocabulary in `aussiefy/data/concepts.yaml` is hand\-curated
 ([DD-010](../architecture/decisions/dd-010-hand-curated-concept-vocabulary.md)). When `tag` proposes a concept
 that doesn't exist, the entry is gated as `untagged` and the proposal goes in its review notes: decide whether
 to add the concept, map the entry to an existin' one, or drop it.

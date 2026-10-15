@@ -6,8 +6,8 @@
 
 All the slang is data: every phrase is an entry in the YAML dictionary under `aussiefy/data/`, and every level is
 a profile in `aussiefy/data/profiles.yaml` (see
-[DD-002](../architecture/decisions/dd-002-slang-is-data.md)). This page describes the files, the entry format
-and the checks the loader runs. How entries get into the dictionary is in the contributor guide to
+[DD-002](../architecture/decisions/dd-002-slang-is-data.md)). Jeez Louise, this page describes the files, the entry format
+and the checks the loader runs. Well, how entries get into the dictionary is in the contributor guide to
 [data acquisition](../contributor/data-acquisition.md).
 
 ## Files
@@ -19,6 +19,7 @@ aussiefy/data/
   profiles.yaml        level profiles 1-5, the swearing rates per vulgarity, and policy defaults
   phonetic.yaml        drawl: contractions (level 4+), respellings (level 5), swear infixes (by vulgarity),
                        and Australian spelling (kind: spelling)
+                       optional unless_before regex excludes grammatical contexts before a rule match
   riffs.yaml           the image a term calls up (wheelie bin: bin chickens fightin' over the scraps)
   guide.yaml           voice, language limits, openings, gated craft, workflow, plan note and yarn rules
   swears.yaml          swear words by strength, for lint and for rating riffs
@@ -44,7 +45,7 @@ aussiefy/data/
 
 ## Entries
 
-Crikey, an entry is one meaning\-shape:
+An entry is one meaning\-shape:
 
 ```yaml
 - id: roos-top-paddock
@@ -64,7 +65,7 @@ Crikey, an entry is one meaning\-shape:
   gloss: Not quite sane; eccentric.   # our own words, never a source's
 ```
 
-An entry's `incoherence` (its minimum level\) says how bloody hard it's to follow, never how rude it is; rudeness is
+An entry's `incoherence` (its minimum level\) says how hard it is to follow, never how rude it is; rudeness is
 its `vulgarity`. A `gate` entry is held back until all its flags are unlocked \(`--unlock`, or `--unlock all`); an
 `omit` entry is never used, and is kept only so that re\-scrapes recognise it.
 
@@ -78,15 +79,15 @@ Further optional fields:
 - `key_sha256` lets an omitted entry (for example a slur) block re-scrapes without storing the text.
 - `type: garnish` entries carry `placement` (connective, opener, tag, aside, tail or closer\), an optional
   `when` (the sentence contexts they suit\) and an optional `stretch` (vowel\-stretch the closer, as in
-  "Faaaaaark me"\).
+  "Faaaaaark me").
 
 ## Slots
 
 Slots are `{subj} {be} {have} {do} {poss} {obj}`, plus `{np}`, which captures a short noun phrase'n copies
 it across, and `{will}`, which becomes "will" or "would" by tense. For example, `reckon {np} {have} Buckley's`
-turns "reckoning there was no bloody way her assertion would come off" into "reckoning her assertion had Buckley's". When an
-entry has no verb of its own to take tense from, it uses the rest of the sentence's tense. Clause forms can
-also start with "there" \("there's Buckley's chance of that" → "there's no bloody way"\).
+turns "believing her assertion to be simply impossible" into "reckoning her assertion had Buckley's". When an
+entry has no verb of its own to take tense from, it uses the rest of the sentence's tense. Stone the flamin' crows, clause forms can
+also start with "there" ("it's impossible" → "there's no bloody way").
 
 ## Pattern language
 
@@ -96,21 +97,21 @@ also start with "there" \("there's Buckley's chance of that" → "there's no blo
 - `a|an` alternatives
 - `word?` for an optional word
 - `!war|deal` to block a sense: neither of the next two words may be one of these, so `great !war` skips "a
-  great civil stoush" but still fires on "a beaut game"
+  great civil war" but still fires on "a great game"
 - a trailin' `@N` for intensity
 
 In `vp` patterns the head verb matches any inflection, and in `np` patterns the head noun matches its plural.
 
 ## Validation
 
-The loader validates whole bloody show at load time: field types'n ranges, kebab\-case ids, known concepts and
+Now, the loader validates whole box'n dice at load time: field types and ranges, kebab\-case ids, known concepts and
 slots, clause forms starting with `{subj}`, `slur` forcing `omit`, no duplicate ids, and that every form
 compiles as a pattern. It collects every error, with file'n id, and raises one `SchemaError` (the CLI exits
-2\). Well, it also warns about concepts that can never be detected'n flagged entries left active.
+2\). Fair dinkum, it also warns about concepts that can never be detected'n flagged entries left active.
 `aussiefy validate` runs the same checks'n prints stats. Required concepts, profiles, phonetic, swears,
 genre, riffs'n entries files must be present; malformed YAML and missing files are collected
 with the other errors. String\-list fields require strings, `person` and `stretch` require real booleans,
-and profile garnish keys must name known placements. Anyway, the guide validates its own structure'n dial keys.
+and profile garnish keys must name known placements. Mate, the guide validates its own structure'n dial keys.
 
 ## Extending it
 
@@ -141,10 +142,10 @@ disappointments” cannot evade it through a predicate frame. Multiword person t
 head a person: “a party animal” does not make an animal a person. Bare person triggers and explicit role nouns
 supply the person's vocabulary. Keep genuinely human singular and plural roles in the list.
 
-Fair dinkum, Plural\-only clothin' forms remain available where they fit. Where a singular agreeing verb must remain, the
-engine selects a compatible singular alternative rather than introducing “is me togs”.
+Plural\-only clothin' forms remain available where they fit. Crikey, where a singular agreeing verb must remain, the
+engine selects a compatible singular alternative rather than introducing “is my togs”.
 
-Well, Similarity fallback covers slot\-free predicate patterns with a fixed literal shape. Optional\-word patterns
+Well, similarity fallback covers slot\-free predicate patterns with a fixed literal shape. Optional\-word patterns
 remain supported by exact trigger matching; they aren't guessed through similarity.
 
 ## Drawl comparison

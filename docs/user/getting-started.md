@@ -6,7 +6,7 @@
 
 ## Install
 
-aussiefy needs Python 3.10 or later. So anyway, the core depends on PyYAML'n markdown\-it\-py.
+Struth, aussiefy needs Python 3.10 or later. So anyway, the core depends on PyYAML'n markdown\-it\-py.
 These commands install the `v0.1.0` release. For development, check out `dev` in a clone'n install
 in editable mode. A full commit SHA can be used in place of the tag.
 
@@ -23,7 +23,7 @@ pip install "aussiefy[llm] @ git+https://github.com/underware-gg/aussiefy@v0.1.0
 | `scrape` | requests, beautifulsoup4 | `dev scrape`, and fetching the local reference texts |
 | `dev` | pytest, ruff, mcp, numpy, requests, beautifulsoup4, tokenizers | working on aussiefy itself: see [CONTRIBUTING.md](../../CONTRIBUTING.md) |
 
-From a clone, install in editable mode instead: `pip install -e '.[llm]'`.
+Well, from a clone, install in editable mode instead: `pip install -e '.[llm]'`.
 
 ## Translate a text
 
@@ -35,7 +35,7 @@ aussiefy story.txt -l 3
 echo "I'm exhausted." | aussiefy -l 4
 ```
 
-Anyway, at level 5 the engine goes all out:
+Crikey, at level 5 the engine goes all out:
 
 ```
 $ aussiefy "Good grief, are you crazy? You're overreacting, you're stupid and all talk, and I'm extremely busy cleaning up after you." -l 5 -s 1
@@ -49,18 +49,18 @@ Three dials control the tellin', each by number or name:
 - `-l/--level`: how Aussie, from 1 \(`tourist`) to 5 \(`swaggie`, the default\).
 - `--vulgarity`: how rude, from 0 \(`nan`, no swearin'\) to 3 \(`tradie`, anything goes\). By default it follows the
   level: `nan` at levels 1\-2, `dad` at 3\-4, `uncle-bob` at 5.
-- `-e/--embellishment`: a fair go in the tellin', from 0 \(`deadset`, straight\) through 1 \(`dinkum`, limited
+- `-e/--embellishment`: liberty in the tellin', from 0 \(`deadset`, straight\) through 1 \(`dinkum`, limited
   colour\) to 2 \(`troppo`, a performance\). General defaults to `dinkum` across translation'n retelling.
   Mate, auto'n named document types use their preset's default; an explicit dial overrides it. See [translation controls](../functional/translation-controls.md).
 
-Crikey, Level'n vulgarity are independent, so ya can have either without the other:
+Fair dinkum, level'n vulgarity are independent, so ya can have either without the other:
 
 ```sh
 aussiefy "..." -l swaggie --vulgarity nan      # full Aussie, no swearing
 aussiefy "..." -l tourist --vulgarity tradie   # plain English from a foul mouth
 ```
 
-What each settin' does is in the [dials reference](../functional/dials.md).
+Anyway, what each settin' does is in the [dials reference](../functional/dials.md).
 
 ## Get the same result again, or a different one
 
@@ -71,7 +71,7 @@ The rule engine gives the same output for the same text, dials, settings'n seed.
 - **`--variety N`** (`variety=N` in Python\) sets how far down the list of fittin' terms a choice may go. With 1,
   each slot takes its best\-fittin' eligible term at that point \(on meanin', intensity'n register\).
   Earlier swaps can change repetition weights, so another seed can still change the chosen term; variants
-  and drawl can also vary. With 2 or 3, a choice is weighted among that
+  and drawl can also vary. So anyway, with 2 or 3, a choice is weighted among that
   many best fits. With 0, the default, it's weighted over every eligible term, which gives the most
   variety'n sometimes a looser fit.
 
@@ -109,7 +109,7 @@ aussiefy lint -l 5 --original story.txt < draft.txt   # check your own Aussified
 aussiefy show lizard                              # dictionary entries by id, form or concept
 ```
 
-These are the same tools agents use: see [agents.md](agents.md).
+Anyway, these are the same tools agents use: see [agents.md](agents.md).
 
 ## Add your own entries
 
@@ -136,7 +136,7 @@ from aussiefy import translate
 translate("I'm extremely busy.", level=4, seed=7).text   # "I'm flat out like a lizard drinking."
 ```
 
-The full API is in [toolkit.md](../functional/toolkit.md).
+Jeez Louise, the full API is in [toolkit.md](../functional/toolkit.md).
 
 ## When something goes wrong
 

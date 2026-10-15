@@ -187,11 +187,15 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
                 if key in readings and readings[key] != reading:
                     raise ValueError(f"reads_as conflicts for replacement {key!r}")
                 readings[key] = reading
+            unless_before = raw.get("unless_before")
+            if unless_before is not None and (not isinstance(unless_before, str) or not unless_before.strip()):
+                raise ValueError("unless_before must be a non-empty regular expression")
             phonetic.append(PhoneticRule(raw["id"], re.compile(raw["match"]), raw["replace"],
                                          float(raw.get("prob", 1.0)), int(raw.get("min_level", 5)),
                                          raw.get("notes", ""), int(raw.get("vulgarity", 0)),
                                          raw.get("kind", "drawl"),
-                                         float(raw["dialogue_prob"]) if "dialogue_prob" in raw else None, reading))
+                                         float(raw["dialogue_prob"]) if "dialogue_prob" in raw else None, reading,
+                                         re.compile(unless_before) if unless_before is not None else None))
         except (KeyError, TypeError, ValueError, re.error) as exc:
             errors.append(f"phonetic rule {raw!r}: {exc}")
 

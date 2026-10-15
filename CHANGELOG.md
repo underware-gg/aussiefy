@@ -5,9 +5,18 @@
 # Changelog
 
 Each release is one squashed commit on `main`, tagged `vX.Y.Z` (semver\), made by `scripts/promote.py`.
-Add changes under [Unreleased] as they land; `python scripts/promote.py prepare major|minor|patch` dates it.
+Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py prepare major|minor|patch` dates it.
 
 ## [Unreleased]
+
+- Refine documentation flavour with explicit publication controls, exact quoted examples'n neutral person
+  wording. Strict Markdown permits leadin' garnish at real sentence starts across inline boundaries, with
+  whole\-sentence context'n shared casing evidence; suffixes and riffs stay outta partial units.
+- Preserve stressed be\-verbs in fronted predicates'n comparisons; distinguish finite present\-tense clauses
+  from noun, gerund, rellie'n subordinate fragments. Well, guard relative links, technical liberty and
+  everythin'\-relative clauses from wrong\-sense swaps. Decline uncertain\-case prefixes'n pin isolated cases.
+- Speed up semantic concept fallback by scorin' only patterns that satisfy the existin' token\-count and
+  character\-length rules, preservin' exact scores, candidate order'n complete translation results.
 
 - Tune request-local profile probabilities, frames, limits, spacing, drawl, swearing and rewrite thresholds
   through `document_config.profile` on every document surface; expose complete reusable `profile_config`.
@@ -28,7 +37,7 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 - Fix attributive praise escapin' through predicate frames, capitalised determiners hiding compound guards,
   animal nouns being treated as people, and plural clothin' conflicting with retained singular verbs.
-  Frame vocabulary is editable in `grammar.yaml`; similarity fallback enforces zero\-width exclusions.
+  Mind ya, frame vocabulary is editable in `grammar.yaml`; similarity fallback enforces zero\-width exclusions.
 
 - General is the default document type; detection is opt\-in. Named presets and Custom accept the same exact
   behaviour overrides through Python, CLI, MCP'n yarn tools. Explicit values override presets, including
@@ -44,18 +53,18 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
   controls'n current dependencies.
 
 - Releases use checked GitHub squash PRs, strict main protection, exact release\-head CI'n resumable
-  tag/publication/dev reconciliation. Crikey, Preparation preserves failed work for review.
+  tag/publication/dev reconciliation. Preparation preserves failed work for review.
 
 - Documentation now derives from authoritative plain sources, with deterministic Aussie prose, repository
   link remapping, preserved examples'n promotion freshness checks.
 
 - Final committed source delta through `c0177d7`: fourth\-pass/dinkum dictionary rounds, held\-word lint,
   original\-context suggestions, literal clause\-subject agreement, form\-aware riffs'n completed research.
-  Quote exemptions preserve actual wording/counts; halves require explicit equal shares'n liquid\-pouring
-  complements remain literal. Anyway, three weather golden variants were intentionally reviewed after narrowin' guards.
+  Anyway, quote exemptions preserve actual wording/counts; halves require explicit equal shares'n liquid\-pouring
+  complements remain literal. Struth, three weather golden variants were intentionally reviewed after narrowin' guards.
 
 - Integrated 91 committed source changes through `Rob-Morris/aussiefy@95036e1`, preservin' this repository's
-  layered API, validation, documentation'n release contracts. Genre/embellishment, US/UK dialect and offline
+  layered API, validation, documentation'n release contracts. Well, genre/embellishment, US/UK dialect and offline
   POS context, extended Markdown/MDX, verification, blind judgin', common corpus ingestion are available.
 - Strict Markdown units share document\-wide context'n expose its controls and policy warnings. Format
   scanners stay above the plain engine; opaque restoration is collision\-safe'n cached per document.
@@ -64,8 +73,8 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 - **Dinkum\-check dictionary round** (`research/dinkum-check-round-2026-10-14/DECISIONS.md`): 67 rows from the
   check's yarn agents reviewed. New: stuff up, stuff {obj} up, a stuff\-up, under the pump \(of a person\), not know
-  some mongrel from a bar of soap, spitting \(light rain\), a swag of; pull the pin takes pulling the pin, all over the shop
-  `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Wrong senses
+  someone from a bar of soap, spitting \(light rain\), a swag of; pull the pin takes pulling the pin, all over the shop
+  `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Fair dinkum, wrong senses
   fixed in data: heaps for counted heaps, every bloke'n his dog and old fella outta the formal genres, littlie
   for a policy's kid, the whole box'n dice for `"everything from"`; rain only for the weather's `"it"` (not fans
   pouring onto a street, tears pouring down, or tea poured\).
@@ -76,19 +85,19 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 - **The dinkum check's fixes** (`research/dinkum-check-2026-10-14/FINDINGS.md`: the voice came back in news and
   official prose, register 3.60 to 4.00, but reached into what the form keeps\):
   - Dinkum's guidance: an obligation, a decision, a finding or a stated aim keeps its verb's weight \(`"we
-    consider you responsible"` isn't `"we reckon"`).
+    consider you responsible"` Anyway, isn't `"we reckon"`).
   - No riffs in news, docs or official prose below troppo, in the engine's draft or the plan's offers: a
     picture of a real thing is a claim \(`"creeks, bone dry half the year"` for Yellowstone\).
   - Lint asks for no dialect swap inside what the original holds as said (a quote news or official prose
     keeps, a word mentioned), as the engine makes none; a quote the draft adds is still checked, and spelling
     inside a quote is still Australian. `held_spans` moves to `text.py`.
 - **Fourth\-pass dictionary round** (`research/fourth-pass-round-2026-10-14/DECISIONS.md`): 93 candidates from the
-  fourth pass's agents reviewed. 19 new entries \(give a hoy, the drum, the go, come bloody good, sting, go halves, down
+  fourth pass's agents reviewed. 19 new entries \(give a hoy, the drum, the go, come good, sting, go halves, down
   tools, down the track, that mob, a gong'n more\), 4 lookup\-only, 4 senses added by hand \(cop, the oldies, crook,
   a fair whack\), hire, per cent'n roadworks in the dialect table; 63 covered or skipped. The fourth pass's wrong
   senses fixed in data: bush for a legal bush, Parliament House for a US Congress, knock together for any
   build, pressie for a policy's gift, tucker'n quid in the wrong places, and lint's LEAVE, heaps, bugger all,
-  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Struth, engine limits found are listed in DECISIONS.
+  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Stone the flamin' crows, engine limits found are listed in DECISIONS.
 - **The fourth pass's next steps:**
   - A storyteller's openings follow the genre's form at every settin', troppo's too \(an obituary isn't opened
     `"Fair dinkum, this happened."`), and `"Okay, so."` is gone from the openings.
@@ -124,12 +133,12 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
     `judge.yaml`.
 - **Embedder:** a 1.3.0 retrain on the grown dictionary stopped at the reference gate \(32/33: `"a top bloke"` reaches
   a mongrel's gloss\) and wasn't clearly better, so 1.2.0 stays bundled \(`training/README.md`,
-  `training/reports/trials/1.3.0-trial-2026-10-14.json`). The third pass's lookup misses \(`"harmless"`, `"probably"`)
+  `training/reports/trials/1.3.0-trial-2026-10-14.json`). Crikey, the third pass's lookup misses \(`"harmless"`, `"probably"`)
   are in the reference set as known failures.
 - **Third\-pass dictionary round** (`research/third-pass-round-2026-10-13/DECISIONS.md`): 24 entries from the
-  terms the third pass's agents reached for \(pull the pin on, drag the chain, nut out, give some bugger a ring, here's
+  terms the third pass's agents reached for \(pull the pin on, drag the chain, nut out, give someone a ring, here's
   the go, what's the go, first in best dressed, workmate, fisho, Yank, tragic, cheap as chips, on song, streets
-  ahead of, go pear\-shaped, have a bloody good innings, all up, a fair few, brolly, out bush, chuck a tanty, a tanty,
+  ahead of, go pear\-shaped, have a good innings, all up, a fair few, brolly, out bush, chuck a tanty, a tanty,
   muck up, active; is it buggery for lookup only\) and punnet in the dialect table. Guards'n narrower triggers for the
   pass's wrong senses: beaut for any `"good"`, young fellas for `"the boys"`, little fella for any child, bush for
   US land and `"neck of the woods"`, dead set on for `"dedicated to"`, swear blind for `"resolve"`, a goer for
@@ -159,7 +168,7 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
     command is lowered \(`"Well, pour the batter"`), unless the text capitalises it mid\-sentence.
   - Sentence alignment moved to `align.py` (verify and yarn mode share it); DATELINE and SCRIPT_LINE to
     `text.py`, IMPERATIVES to `pos.py`.
-  - The style guide's general craft rules \(tag\-ons only where some bastard is addressed, connectives in narration,
+  - The style guide's general craft rules \(tag\-ons only where someone is addressed, connectives in narration,
     the drawl heaviest in dialogue at levels 4\-5, no pile\-ups, Australian spellin'\) are in every setting's craft,
     with clean examples, not only
     troppo's perform block, so the dinkum default carries them.
@@ -172,7 +181,7 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 - **The last of the second pass:**
   - A bracketed gloss no longer echoes its word: a gloss on a swapped word stays as the author wrote it
     (`"lunch or tea (supper)"`, `"bickies (biscuits)"`, not `"tea (tea)"`), and a word whose bracket already says it in
-    Australian stays too \(`"the elevator (lift)"`, not `"lift (lift)"`). Fair dinkum, Lint doesn't flag the original's own gloss.
+    Australian stays too \(`"the elevator (lift)"`, not `"lift (lift)"`). Jeez, lint doesn't flag the original's own gloss.
   - Yarn mode's lint doesn't offer a planned phrase the agent has declined with a reason, in its suggestions or
     its fixes \(`yarn-tools lint --declined FILE` too\).
   - A submit is sent back when a planned phrase was put somewhere else \(every `"turned up"` it was planned for is
@@ -209,7 +218,7 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
   - Engine: `"war"` is no longer found inside a dialect `"warn't"`; `"1/4"`, `"4.5"` and `"10:30"` are one token each; a
     blank line ends a sentence \(a heading no longer merges into the next one\) unless the line before leads in
     with a comma or colon; a plain\-text heading takes no garnish or drawl, nor does a link's text; no opener
-    before a play's speaker label \(`"So anyway, HALE:"`). A bare `"meter"` becomes `"metre"` only after a quantity
+    before a play's speaker label \(`"So anyway, HALE:"`). Bugger me, a bare `"meter"` becomes `"metre"` only after a quantity
     (`"if the meter changes"` stays, `"the 100-meter sprint"` changes\).
   - Lint: a plain-English variant (`"full"` for `"a bit full"`) isn't counted as a use of the slang; `"y'all"` in
     the original isn't the translator's; a gated entry in ordinary English words (`"a bit rough"`, `"shame"`) isn't
@@ -238,7 +247,7 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
   explicit `--vulgarity` the genre limits is reported in the warnings. Yarn mode briefs the genre.
 - **US and British English** (`dialect.py`, `data/dialect.yaml`, replacing `americanisms.yaml`): faucet \-\>
   tap, capsicum \-\> capsicum, zucchini \-\> zucchini at every level, with plurals, inflections'n articles;
-  words Australians use in another sense swap only for a known source \(`--english us|uk|auto|none`). Lint's
+  words Australians use in another sense swap only for a known source \(`--english us|uk|auto|none`). Anyway, lint's
   `americanism` kind is now `dialect`.
 - **A dictionary round** from the everyday pass's retellings: 40 entries, 29 concepts, and triggers that
   caught the wrong sense taken out with their reasons.
@@ -247,7 +256,7 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
   couldn't organise a chook raffle; a few lookup-only, such as drop bear and banana bender; laid-back gated
   not_aussie), variants on 10 existing entries, and existing triggers fixed: `"has a beer belly"` was a beer,
   `"at a glance"` and `"a look of horror"` were a squiz, and HOON's needed an `"a"` (`"the louts"` went unseen).
-- **Rails audit:** swaps the guards refused for no bloody good reason now go in \(`"his missus"`, `"the poor buggers"`,
+- **Rails audit:** swaps the guards refused for no good reason now go in \(`"his missus"`, `"the poor buggers"`,
   `"the old billabong"`, `"brumbies"`), with number from the data \(`number: plural` on terms such as `"the
   pollies"`) and determiners fitted, not refused.
 - **Part of speech** (`pos.py`): NLTK's averaged\-perceptron tagger, vendored \(MIT weights in `data/pos/`). A
@@ -273,7 +282,7 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
   translation says again (`unmatched`), plus coverage metrics.
 - `aussiefy judge`: a blind, rubric\-scored comparison of 2\-8 translations of one original
   (`data/judge.yaml`: eight criteria scored 1\-5 with evidence first, quoted problems with severity, and
-  rankings\). Reports are validated \(quotes must be verbatim\) and unblinded into verdicts that `judge tally`
+  rankings\). Anyway, reports are validated \(quotes must be verbatim\) and unblinded into verdicts that `judge tally`
   averages. It runs with the API \(`run`, optionally with an unharnessed reference retelling\), or with any
   agent as the judge \(`brief`, then `read`).
 
@@ -342,7 +351,7 @@ The first release.
   descriptive c\-word scale, best cunts to worst \(a sick cunt ... a dog cunt\), each at its own vulgarity tier.
 - A deterministic rule engine that rewrites English as Australian slang at levels 1 to 5: concept detection
   with frame checking, seeded selection, realisation with agreement'n tense, garnish \(connectives,
-  openers, tag\-ons, asides, riffs, closers\), the drawl, and Australian spellin'. The same text, level'n seed
+  openers, tag\-ons, asides, riffs, closers\), the drawl, and Australian spellin'. Anyway, the same text, level'n seed
   always give the same output.
 - A validated YAML dictionary of about 900 entries over about 500 concepts, grown by hand curation'n two
   verified research rounds \(gap\-fill'n classics\), with vulgarity tiers, registers, regions and gating.

@@ -17,6 +17,12 @@ it matches the full fine-tuned transformer, at a sixth of the size, and beats st
 re-implements the BERT tokenizer exactly, which `tests/architecture/test_static.py` checks whenever `tokenizers` is
 installed. Users therefore never install a machine-learning stack.
 
+For semantic concept fallback, `detect.py` groups eligible literal patterns by token count and canonical
+character length before scoring them. Only shapes the detector could already accept reach the model.
+Original pattern indices, tie order, exact similarity scores and the final matcher remain unchanged.
+Character-trigram fallback retains its own sparse index. The bundled dot product uses standard-library
+`map` and `operator.mul`, preserving the original multiplication and summation order.
+
 ## Versions
 
 The model is versioned (`aussiefy embedder status` shows which), and each version is rebuilt reproducibly

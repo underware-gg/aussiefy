@@ -16,7 +16,7 @@ pip install -e '.[dev]'
 ```
 
 The `dev` extra includes the test dependencies'n isolated wheel\-build tools, plus a TOML reader on Python
-3.10, so the interface, scrape'n embeddin' checks run rather than skip. Promotion checks run too. Add `llm` or `embeddings` when workin'
+3.10, so the interface, scrape'n embeddin' checks run rather than skip. Jeez, promotion checks run too. Add `llm` or `embeddings` when workin'
 on those optional modes. Only the two local copyrighted\-corpus tests may skip in a release.
 
 ## Check
@@ -30,7 +30,7 @@ Both must pass before a commit. The suite includes golden outputs and the refere
 `python scripts/regen_golden.py` and review the diff rather than accepting it blindly (see
 [testing](docs/contributor/testing.md)).
 
-Stone the flamin' crows, the suite also checks tracked provenance'n generated third\-party notices. Stage new files/declarations
+Strewth, the suite also checks tracked provenance'n generated third\-party notices. Stage new files/declarations
 before checking; promotion checks the exact committed checkout'n additionally inspects a built wheel.
 See [licensing and provenance](docs/contributor/licensing.md) for the commands'n evidence requirements.
 
@@ -53,14 +53,14 @@ checked against plain sources while development outputs may be stale. See
   CLI, the MCP server and yarn mode's tools; `tests/functional/test_interfaces.py` checks this.
 - **Keep remote\-only full texts local.** Copyrighted full texts without confirmed redistribution permission
   live in the gitignored `tests/corpus/local/`. Licensed corpus material needs provenance'n attribution;
-  the previously audited Howl excerpt has an exact declared path, notice header'n word cap. New exceptions
+  the previously audited Howl excerpt has an exact declared path, notice header'n word cap. Well, new exceptions
   need review \(see [licensing](docs/contributor/licensing.md) and [local texts](tests/corpus/local/README.md)).
 - **Keep the docs in step.** Update the documentation with the change that affects it, and record a new
   architectural decision as a decision record in
   [docs/architecture/decisions/](docs/architecture/decisions/README.md).
 - **Record user\-visible changes** under `[Unreleased]` in [CHANGELOG.md](CHANGELOG.md) as they land.
 - **Write Australian spellin'** in documentation'n user\-facin' messages \(colour, organise, licence as a
-  noun\). Data is different: trigger patterns and `aussiefy/data/dialect.yaml` must match plain and US
+  noun\). Crikey, data is different: trigger patterns and `aussiefy/data/dialect.yaml` must match plain and US
   English as written.
 
 ## Branches and releases
