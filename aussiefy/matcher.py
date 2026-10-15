@@ -160,7 +160,7 @@ SLOT_MATCHERS = {
 }
 
 
-def match_at(pattern: Pattern, tokens: list[Token], pos: int) -> Match | None:
+def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = True) -> Match | None:
     """Match pattern starting at tokens[pos]; tokens is one sentence."""
     captures: dict[str, Token] = {}
     inflection = ""
@@ -200,7 +200,7 @@ def match_at(pattern: Pattern, tokens: list[Token], pos: int) -> Match | None:
                     if end is not None:
                         return end
                     captures.pop(el.slot, None)
-            elif tok.norm in el.values:
+            elif not exact or tok.norm in el.values:
                 saved = inflection
                 if el.forms:
                     inflection = dict(el.forms).get(tok.norm, "")

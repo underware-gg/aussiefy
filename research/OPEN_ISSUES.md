@@ -7,17 +7,11 @@ is in the file named after it. The backlog was reconciled after the Underware in
 
 The data can't fix these without losing the right sense:
 
-- **"great" before a noun, read as a predicate:** "These are great disappointments" → "ripper disappointments"; "great
-  fun" and "great dearth" take a predicate form. (fairdinkum-round DECISIONS)
 - **"good" and "nice" need a list of the nouns they praise**, like "great"'s GREAT_GOOD_NOUNS (better in data: a
   concept-level `only_before:`). Until then GOOD has no bare "good" trigger, so "a good feed" doesn't become a beaut
   one. (third-pass-round DECISIONS)
 - **No "not a person" marker (`^thing`):** "she is feasible" can still become "a goer"; the same marker would suit
   Yanks and the punters. `^person` also does nothing on an `adv` trigger ("dedicated to"). (third-pass-round)
-- **"An American football coach"** at the start of a sentence gets "footy": the capitalised determiner hides the
-  guard. (second-pass-round)
-- **`^person` counts "dog" as a person** ("the dog is loyal" → "true blue"), and doesn't know many real person
-  nouns ("the apprentice was keen" is missed). (fairdinkum and second-pass rounds)
 
 ## Matching gaps (safe, but narrow)
 
@@ -26,7 +20,6 @@ The data can't fix these without losing the right sense:
 - The tagger reads a comparative before a noun as a noun ("a cooler airmass").
 - "The kids misbehaved all day" and "The public loved it" never swap; clause triggers need a pronoun subject ("the
   council is completely incompetent" doesn't reach its idiom).
-- A plural-only term after a singular verb keeps the verb: "Where is my swimsuit?" becomes "Where is my togs?".
 - The dialect table skips every capitalised word as a name ("American football").
 - Intensity fit is soft: an intensity-5 entry still wins about a quarter of the time on an intensity-3 trigger.
 
@@ -65,7 +58,6 @@ The review's findings were fixed; these are its follow-ups, each independent of 
 | One `read_text(text, markup, policy, dictionary)` for the engine and lint (mask, genre, English) | Lint can't drift from how the engine read the original; it would also tidy lint's rebound parameters | Touches the engine's and lint's entry points together |
 | `terms.dropped_g` for the six local copies of "Xin' is Xing" (`model.swear_strength`, `lint._phrase_words`, `lint._DROPPED_G`, lookup, gaps, llm) | One rule, one apostrophe handling | Older sites outside this change share it |
 | Generate lint's `DRAWL` reverse map from `phonetic.yaml` | It has fallen behind: wanna, gotta, 'ave, dunno, 'cause, prob'ly and others aren't read back | A data-format decision (a `reads_as` field, or derived) |
-| Move `model.PERSON_ROLES` into the dictionary data | Dictionary rounds can grow the person nouns `^person` knows ("the apprentice") | A data migration |
 | Move the engine's reading heuristics (when to lower a first word, commands, datelines, held spans) out of `engine.py` into `context.py` or a `reading.py` | `engine.py` grew from 635 to about 900 lines, mostly text reading rather than pipeline | A refactor with no behaviour change |
 | File `tests/test_second_pass.py`, `test_third_pass.py` and `test_third_pass_harness.py` by behaviour (`test_text`, `test_lint`, `test_dialect` ...) | A change's tests sit in one place | A move of about 1,000 lines of tests |
 | Shared plural-inflection constants (`det.is_plural`) for `realise.number_problem`, `fit_article` and `realise` | Three sites match "plural"/"written_plural" by hand | Older sites outside this change share it |
@@ -88,7 +80,6 @@ left:
 | A form that leaves a captured slot unused drops it (stuff up needed two entries); a trigger's lookahead stops at punctuation | Simpler entries | Engine changes (`research/dinkum-check-round-2026-10-14/DECISIONS.md`) |
 | A person swear can't tell a warm referent from any other ("every bastard" for refugees, "some bugger" for a hoped-for husband) | The worst remaining wrong senses in retellings | Needs a sentiment or referent signal the engine doesn't have |
 | No negative-polarity marker in triggers, so "didn't care about" can't reach give a stuff about | Restores a swap the round had to cut | A pattern-language change |
-| The embedding fallback's shape check counts a trigger's `!` exclusions ("felt terrible about" slipped through one) | Exclusions hold in the fallback too | Matcher and model change |
 | `^person` does nothing on a verb phrase; a guard can't end on a finite verb or hold part of a multi-word name; a noun-phrase trigger can't keep "a"; "three lots" isn't read as a count; a capital after "No" reads as a vocative | Each narrows a wrong sense the round could only part-fix (see DECISIONS) | Engine changes, one each |
 | Lookup doesn't match a slot to a pronoun ("give them a bell" misses give {obj} a bell) | Agents find the variants they reach for | Lookup change |
 | The round tool can't write `not_in` or a concept carrying existing entries | Rounds stop needing hand edits to concepts.yaml | Tooling |
@@ -109,3 +100,7 @@ collisions and writes its report beside the dry-run model. These are resolved, n
 The two whole-repository design reviews are historical records with their principal findings already fixed.
 Remaining structural opportunities above should accompany relevant behaviour changes, rather than reopening
 those reviews wholesale. Renaming research-pass test files by behaviour remains optional housekeeping.
+
+Engine follow-up: the four reproduced sense/agreement defects and zero-width fallback exclusions are fixed,
+with behaviour regressions. Person classification remains a conservative heuristic; grow explicit roles in
+`grammar.yaml` rather than relying on ambiguous compound heads.

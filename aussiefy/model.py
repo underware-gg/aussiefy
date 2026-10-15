@@ -89,16 +89,6 @@ class PhoneticRule:
     dialogue_prob: float | None = None  # probability inside quoted speech, which drawls broader than narration
 
 
-# who a sentence is about when it isn't a pronoun or a name; with person_nouns, and any plural agent noun
-# ("hikers", "visitors", "students"), what a predicate about a person may have as its subject
-PERSON_ROLES = {"man", "men", "woman", "women", "person", "people", "kid", "kids", "child", "children", "boy", "boys",
-                "girl", "girls", "baby", "babies", "family", "families", "friend", "friends", "guest", "guests",
-                "team", "staff", "crew", "everyone", "everybody", "someone", "somebody", "nobody", "anyone",
-                "anybody", "folk", "folks", "parent", "mum", "dad", "mother", "father", "wife", "husband",
-                "son", "daughter", "brother", "sister", "player", "doctor", "nurse", "teacher", "patient",
-                "audience", "crowd", "public", "fans", "dog", "dogs", "horse", "horses", "animal", "animals"}
-
-
 @dataclass
 class Dictionary:
     entries: dict[str, Entry]
@@ -116,6 +106,8 @@ class Dictionary:
 
     genres: Any = None
     pos_words: frozenset[str] = frozenset()
+    person_roles: frozenset[str] = frozenset()
+    adjective_nouns: dict[str, frozenset[str]] = field(default_factory=dict)
 
     def swear_strength(self, word: str) -> int:
         """How strong a swear a word is (0 for none), dropped g and plurals read as the listed word."""
@@ -158,18 +150,21 @@ class Dictionary:
     def person_nouns(self) -> frozenset[str]:
         """Nouns that name people: the person concepts' own noun triggers (child, kids, mate ...), with their
         plurals, and common roles. What a predicate about a person may have as its subject."""
-        words = set(PERSON_ROLES)
+        words = set(self.person_roles)
         for c in self.concepts.values():
             if c.person:
                 for trigger in c.triggers.get("np", ()):
-                    head = re.sub(r"@\d+$", "", trigger).split("!")[0].split()[-1:]
-                    words |= {w for h in head for w in (h, morph.pluralise(h))}
+                    bare = re.sub(r"@\d+$", "", trigger).split("!")[0].split()
+                    if len(bare) == 2 and bare[0] in {"a", "an", "the"}:
+                        bare = bare[1:]
+                    if len(bare) == 1 and bare[0].isalpha():
+                        words |= {bare[0], morph.pluralise(bare[0])}
         return frozenset(words)
 
     @cached_property
     def fallback_patterns(self) -> list[Pattern]:
         """Slot-free predicate-adjective triggers: what the similarity fallback compares spans against."""
-        return [p for p in self.patterns if p.frame == "predicate_adj" and not p.slots]
+        return [p for p in self.patterns if p.frame == "predicate_adj" and not p.slots and not any(e.optional for e in p.elements)]
 
     @cached_property
     def tag_forms(self) -> frozenset[str]:

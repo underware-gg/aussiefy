@@ -5,6 +5,10 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Fix attributive praise escaping through predicate frames, capitalised determiners hiding compound guards,
+  animal nouns being treated as people, and plural clothing conflicting with retained singular verbs.
+  Frame vocabulary is editable in `grammar.yaml`; similarity fallback enforces zero-width exclusions.
+
 - General is the default document type; detection is opt-in. Named presets and Custom accept the same exact
   behaviour overrides through Python, CLI, MCP and yarn tools. Explicit values override presets, including
   false and empty lists; Markdown protection remains independent.

@@ -15,6 +15,7 @@ and the checks the loader runs. Well, how entries get into the dictionary is in 
 ```
 aussiefy/data/
   concepts.yaml        controlled concept vocabulary + plain-English trigger patterns per frame
+  grammar.yaml         editable person nouns and adjective/noun sense limits for the frame checker
   profiles.yaml        level profiles 1-5, the swearing rates per vulgarity, and policy defaults
   phonetic.yaml        drawl: contractions (level 4+), respellings (level 5), swear infixes (by vulgarity),
                        and Australian spelling (kind: spelling)
@@ -131,3 +132,17 @@ with `to`, optional `plural`, `frame`, `known_only` and `not_in`. Replacement/pl
 See [translation controls](translation-controls.md) and the executable
 [dialect](../../tests/functional/test_dialect.py), [noun phrase](../../tests/functional/test_noun_phrase.py)
 and [schema](../../tests/functional/test_schema.py) specifications.
+
+## Frame vocabulary
+
+`grammar.yaml` contains `person_nouns` (lower-case noun forms) and `adjective_nouns` (adjective to allowed
+following nouns). The same adjective rule applies to attributive matches after a linking verb, so “great
+disappointments” cannot evade it through a predicate frame. Multiword person triggers do not make their bare
+head a person: “a party animal” does not make an animal a person. Bare person triggers and explicit role nouns
+supply the person's vocabulary. Keep genuinely human singular and plural roles in the list.
+
+Crikey, Plural\-only clothin' forms remain available where they fit. Where a singular agreeing verb must remain, the
+engine selects a compatible singular alternative rather than introducing “is me togs”, mate.
+
+Stone the flamin' crows, Similarity fallback covers slot\-free predicate patterns with a fixed literal shape. Well, Optional\-word patterns
+Stone the crows, remain supported by exact trigger matching; they aren't guessed through similarity.

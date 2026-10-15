@@ -9,6 +9,10 @@ Add changes under [Unreleased] Jeez Louise, as they land; `python scripts/promot
 
 ## [Unreleased]
 
+- Fix attributive praise escapin' through predicate frames, capitalised determiners hiding compound guards,
+  Jeez, animal nouns being treated as people, and plural clothin' conflicting with retained singular verbs.
+  Bugger me, Frame vocabulary is editable in `grammar.yaml`; similarity fallback enforces zero\-width exclusions.
+
 - General is the default document type; detection is opt\-in. Anyway, named presets and Custom accept the same exact
   behaviour overrides through Python, CLI, MCP'n yarn tools. Explicit values override presets, including
   false'n empty lists; Markdown protection remains independent.

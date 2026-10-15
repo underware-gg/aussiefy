@@ -143,6 +143,23 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
     if sorted(profiles) != [1, 2, 3, 4, 5]:
         errors.append(f"profiles.yaml must define levels 1-5, found {sorted(profiles)}")
 
+    grammar = _read_optional(data / "grammar.yaml", errors, {})
+    person_roles, adjective_nouns = frozenset(), {}
+    if not isinstance(grammar, dict) or set(grammar) - {"person_nouns", "adjective_nouns"}:
+        errors.append("grammar.yaml: expected person_nouns and adjective_nouns")
+    else:
+        def words(raw, where):
+            if not isinstance(raw, list) or any(not isinstance(w, str) or not re.fullmatch(r"[a-z]+", w) for w in raw):
+                errors.append(f"grammar.yaml: {where} must list lower-case words")
+                return frozenset()
+            return frozenset(raw)
+        person_roles = words(grammar.get("person_nouns", []), "person_nouns")
+        adjectives = grammar.get("adjective_nouns", {})
+        if not isinstance(adjectives, dict) or any(not isinstance(w, str) or not re.fullmatch(r"[a-z]+", w) for w in adjectives):
+            errors.append("grammar.yaml: adjective_nouns must map lower-case adjectives to noun lists")
+        else:
+            adjective_nouns = {w: words(ns, f"adjective_nouns.{w}") for w, ns in adjectives.items()}
+
     phonetic: list[PhoneticRule] = []
     for raw in _read(data / "phonetic.yaml", errors, []):
         try:
@@ -257,7 +274,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
     if errors:
         raise SchemaError("dictionary failed validation:\n  " + "\n  ".join(errors))
     return Dictionary(entries, concepts, profiles, phonetic, prof_raw.get("policy", {}), patterns,
-                      PatternIndex(patterns), PatternIndex(forms), swears, dialect, warnings, swearing, genres, pos.lower_words())
+                      PatternIndex(patterns), PatternIndex(forms), swears, dialect, warnings, swearing, genres, pos.lower_words(), person_roles, adjective_nouns)
 
 
 def write_validated(data_dir: str | Path, files: dict[str, str], extra: Iterable[str | Path] = ()) -> Dictionary:
