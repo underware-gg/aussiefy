@@ -7,33 +7,33 @@
 The reviewed baseline was `Rob-Morris/aussiefy@2d13cf8b41e446ec10539cafa22f49ee6de370fa`.
 This integration pins its active branch at `95036e146da88fb497dae94e8532000913d92bcd`, bringin' across
 91 commits'n accounting for all 4,422 changed paths. This initial accounting is retained as historical
-Fair dinkum, evidence; the completed final delta below extends the pin.
+evidence; the completed final delta below extends the pin.
 
 The [inventory](source-integration-inventory.json) records 4,198 byte\-identical source files, 79 adapted
 files, 141 unchanged local\-only files, three applied deletions'n one retained test deletion. Source tests
 move to their documentation\-layer owners; `git diff --name-status --no-renames BASE PIN` in a source clone
-Struth, reproduces the path set'n its recorded SHA\-256. The retained reference\-fetch tests now exercise shared
-conversion. Jeez, the two specialised fetch scripts are replaced by `dev ingest`.
+reproduces the path set'n its recorded SHA\-256. The retained reference\-fetch tests now exercise shared
+conversion. The two specialised fetch scripts are replaced by `dev ingest`.
 
-Stone the flamin' crows, production adaptations preserve this repository's layered structure'n supported contracts: dictionary
+Production adaptations preserve this repository's layered structure'n supported contracts: dictionary
 validation, canonical policy/term rules, typed MCP diagnostics, shared style/workflow data, checked optional
 modes, and strict Markdown document evidence. Incoming extended Markdown/MDX is a separate explicit
 contract. Now, Genre configuration and POS vocabulary enter through the selected dictionary loader. Format
 scanners stay above the engine'n supply opaque protection/context; [DD-016](../architecture/decisions/dd-016-reconcile-source-capabilities.md)
-records the decision. Mate, the project version remains `0.1.0`; Jeez Louise, source release history'n failed retraining
-Jeez, reports are evidence, not releases of this repository. So anyway, the existin' bundled model is preserved.
+records the decision. The project version remains `0.1.0`; source release history'n failed retraining
+reports are evidence, not releases of this repository. So anyway, the existin' bundled model is preserved.
 
 The source golden corpus'n other dictionary additions remain unchanged except for pre\-existin' reviewed
-target validation/metadata adaptations. Mate, New CLI/report/schema boundaries have contextual errors and
+target validation/metadata adaptations. New CLI/report/schema boundaries have contextual errors and
 regressions; document context, restoration'n atomic fetch recovery are observed through public surfaces.
 
 The 15 Interfold MDX pages'n source\-linked research retain pinned LGPL attribution; POS implementation
-Crikey, and weights retain MIT attribution'n checked digests. Four research passes' Rockwell/Kieran originals,
-Stone the crows, retellings, blind packets'n logs stay ignored locally \(141 paths\). Now, full mixed harvest/candidate/verification
-Crikey, exports are also preserved under ignored local storage; published versions omit rows reproducing these
+and weights retain MIT attribution'n checked digests. Four research passes' Rockwell/Kieran originals,
+retellings, blind packets'n logs stay ignored locally \(141 paths\). Full mixed harvest/candidate/verification
+exports are also preserved under ignored local storage; published versions omit rows reproducing these
 works. [Provenance](licensing.md) and [research/PROVENANCE.yaml](../../research/PROVENANCE.yaml) declare
 ownership, source links, exclusions'n modifications. These changes import evidence without rerunnin'
-Strewth, paid judgin', corpus fetching or model trainin'.
+paid judgin', corpus fetching or model trainin'.
 
 The authoritative plain/published documentation'n checked PR release workflow are now implemented and
 verified. Each integration'n subsequent slice receives a design review and the repository's full gates
@@ -48,7 +48,7 @@ lint, quote preservation, clause agreement, form-aware riff offers and completed
 retain their assertions except the generic bill-split case corrected to establish actual equal halves; document
 fixtures use the public adapter and their existing layer owner.
 
-Jeez Louise, Review caught three soundness issues: changed quoted inflections/slots must not borrow a held\-word allowance;
+Review caught three soundness issues: changed quoted inflections/slots must not borrow a held\-word allowance;
 multiparty/Dutch cost sharing must not become halves; liquid pouring onto/from somethin' must not become rain.
 The fixes use canonical folded surfaces'n data triggers rather than special cases in the engine. The round
 replay data carries the same cost restriction. The regenerated golden corpus differs from final source at
@@ -56,9 +56,9 @@ three variants of the pouring\-weather sentence; those deterministic choice chan
 
 Stone the crows, completed blind packets inherit the 20 originals' licences through existin' per\-work groups. New harvest,
 findings'n summary have a mixed\-source declaration; administrative round proposals use narrow own\-work
-claims with integration annotations. Now, no new local\-only corpus is published'n the earlier 141 ignored files
-and sanitised historical exports remain intact. Well, historical judge scores describe the source runs rather than
+claims with integration annotations. No new local\-only corpus is published'n the earlier 141 ignored files
+and sanitised historical exports remain intact. Historical judge scores describe the source runs rather than
 a new evaluation of the integrated fixes.
 
-Stone the crows, the existin' repeated\-city/non\-nestin' regression retains every assertion; its catalogue\-dependent witness
+The existin' repeated\-city/non\-nestin' regression retains every assertion; its catalogue\-dependent witness
 uses seed 10 instead of 9 after the dictionary growth. So anyway, the same behaviour is directly reproduced.

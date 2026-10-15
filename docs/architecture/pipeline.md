@@ -4,51 +4,51 @@
 
 # The translation pipeline
 
-Idioms replace **meanings**, Jeez Louise, not words, and each one brings its own grammar. The engine
-(`aussiefy/engine.py`) runs each text through five stages. Well, the whole bloody show a level does is read from
+Idioms replace **meanings**, not words, and each one brings its own grammar. The engine
+(`aussiefy/engine.py`) runs each text through five stages. The whole bloody show a level does is read from
 `aussiefy/data/profiles.yaml`, and every phrase from the [dictionary](../functional/dictionary.md): the engine
 has no slang or level logic of its own.
 
 1. **Parse** (`text.py`, `detect.py`). Tokenise with character offsets'n split contractions
-   (`you're` → `you` + `are`). Jeez, a frame checker then decides whether each candidate span is in a position its
+   (`you're` → `you` + `are`). A frame checker then decides whether each candidate span is in a position its
    frame allows. A predicate adjective needs a linking verb \("he's ___"), and the checker absorbs
    intensifiers \("bloody busy" scores intensity 4 and is replaced whole\). It also sees through
    coordination \("stupid'n all talk"\) and question inversion \("are ya a few snags short of a barbie"\), and rejects negation
    ("not tired"\) and "so X that" result clauses. Interjections'n imperatives must stand at the start of a
-   clause. Stone the crows, the checker records the subject'n verb so that clause idioms can bind `{subj}`.
+   clause. The checker records the subject'n verb so that clause idioms can bind `{subj}`.
 2. **Detect concepts** (`matcher.py`, `detect.py`). Trigger patterns come from the concept vocabulary and
-   from every entry's `replaces`. A match on an entry's own paraphrase earns that entry a bonus. Well, a fallback
-   Fair dinkum, compares predicate spans the triggers missed against those paraphrases by similarity \(`embed.py`;
+   from every entry's `replaces`. A match on an entry's own paraphrase earns that entry a bonus. A fallback
+   compares predicate spans the triggers missed against those paraphrases by similarity \(`embed.py`;
    character trigrams by default\).
 3. **Select** (`select.py`). Filter candidates by concept, frame compatibility, level, vulgarity,
    register, region, status'n slot availability. A clause idiom needs a subject, and a person idiom needs
-   a person \("the plan is troppo" never gets a roo loose in its top paddock\). Jeez Louise, each surviving candidate is
+   a person \("the plan is troppo" never gets a roo loose in its top paddock\). Each surviving candidate is
    weighted by intensity fit, direct match, source count, repeat penalty'n the level's probability for
-   Bloody hell, its class, with a lean towards rude candidates set by the vulgarity. Anyway, one seeded roll decides whether to
+   its class, with a lean towards rude candidates set by the vulgarity. One seeded roll decides whether to
    substitute'n another picks the candidate.
-4. **Realise** (`realise.py`, `morph.py`). Far out, Fill slots'n fix agreement: "are ya as mad as a meat axe" becomes "do ya
+4. **Realise** (`realise.py`, `morph.py`). Fill slots'n fix agreement: "are ya as mad as a meat axe" becomes "do ya
    have a roo loose in yer top paddock", "was" becomes "had", "chucked a wobbly" becomes "spat the
-   Crikey, mug" and "carrying on like a pork chop" becomes "carryin' on like a pork chop". This step also handles plurals
-   ("Fair dinkum, mozzies" becomes "mozzies"\), a/an, capitalisation, and keeps contractions \("it's bucketing down"\).
+   mug" and "carrying on like a pork chop" becomes "carryin' on like a pork chop". This step also handles plurals
+   ("mozzies" becomes "mozzies"\), a/an, capitalisation, and keeps contractions \("it's bucketing down"\).
 5. **Garnish** (`garnish.py`). Each sentence gets at most one item, chosen to suit it:
    - **Connectives** ("Anyway,", "Well,", "Now,"\) go on narration, to move a yarn along.
-   - **Openers** Bugger me, are exclamations.
+   - **Openers** are exclamations.
    - **Tag\-ons** (", mate"\) go only where some mongrel is being addressed: dialogue \(inside the quote\),
-     Fair dinkum, questions, exclamations, or "ya".
-   - **The pub aside** ("Well, bugger me, come hell or high water some drongo reckons"\) goes only after an opinion.
-   - **Asides** ("Far out, what a dog's breakfast\!", "Gawd help us."\) close a stanza of a chant, and rhetorical
-     follow\-ups \("Search me, mate."\) answer the narrator's own question. Crikey, in a story the engine can't judge
-     whether "What a shocker, ay\!" fits what just happened, so asides stay outta story narration.
+     questions, exclamations, or "ya".
+   - **The pub aside** ("come hell or high water some drongo reckons"\) goes only after an opinion.
+   - **Asides** ("What a dog's breakfast\!", "Gawd help us."\) close a stanza of a chant, and rhetorical
+     follow\-ups \("Search me."\) answer the narrator's own question. In a story the engine can't judge
+     whether "What a shocker\!" fits what just happened, so asides stay outta story narration.
    - **Riffs** (`aussiefy/data/riffs.yaml`): at level 5 a swapped term may bring its image along where it ends a
      clause, once per sentence'n twice per text: "Wheelie bins, overflowin', bin chooks fightin' over
      the scraps, and unobtainable quid\!" Riffs are rated for swearin' word by word, so the cap applies,
-     Crikey, and each has a tone \(comic, grim or plain\). The text's mood pulls the choice like gravity rather than a
-     Jeez Louise, fence: a comic riff in a solemn text \(Gettysburg\) or a grim one in a light text \(Goldilocks\) is a
-     Jeez Louise, quarter as likely, never banned. `lookup` and `plan` offer riffs to agents too.
-   - **Tails** round off a closing list: "their brains'n imagination, the whole kit 'n caboodle, ay?"
+     and each has a tone \(comic, grim or plain\). The text's mood pulls the choice like gravity rather than a
+     fence: a comic riff in a solemn text \(Gettysburg\) or a grim one in a light text \(Goldilocks\) is a
+     quarter as likely, never banned. `lookup` and `plan` offer riffs to agents too.
+   - **Tails** round off a closing list: "their brains'n imagination, the whole kit 'n caboodle?"
    - **Chants** (mostly short exclamations, like a litany\) get no openers, connectives or tag\-ons, which
-     Crikey, would break the rhythm; only the stanza\-end asides'n the closer.
-   - **Closers** end the text, vowel\-stretched when the entry says `stretch: true` ("Faaaaaark me"\), mate.
+     would break the rhythm; only the stanza\-end asides'n the closer.
+   - **Closers** end the text, vowel\-stretched when the entry says `stretch: true` ("Faaaaaark me"\).
 
    The swear channel adds sweary openers, asides, tags, tails'n closers at the vulgarity's own rate, apart
    from the level's clean garnish \(see [the dials](../functional/dials.md#how-swearing-comes)). Repeats and
@@ -64,9 +64,11 @@ substitutions'n before its garnish; with `--surface`, the finished text goes to 
 Every random choice in these stages is a seeded roll keyed by its context: see
 [determinism](determinism.md).
 
-Genre'n source English are resolved before those stages. `genre.py` classifies eligible prose with layout
-cues'n the selected dictionary's policies; `dialect.py` reserves'n realises US/UK word swaps alongside
-slang. `pos.py` tags each sentence once, supplying noun/verb'n subject checks. Well, Genre and the embellishment
-dial narrow garnish, quote changes'n terms of art. So anyway, Strict Markdown shares one document context across its
-prose units; extended markup sends one masked document through this pipeline with opaque protected spans.
-See [translation controls](../functional/translation-controls.md).
+Document behaviour'n source English are resolved before those stages. `genre.py` selects General by default,
+a named preset directly, or classifies eligible prose'n layout only when Auto is requested. It then applies
+explicit dials'n exact behaviour overrides. `dialect.py` reserves'n realises US/UK word swaps alongside
+slang. `pos.py` tags each sentence once, supplying noun/verb'n subject checks. Consumers read the resolved
+controls for garnish, quotes'n terminology domains. Strict Markdown shares one document context, vocabulary
+choices'n garnish state across its prose units, retains source sentence positions for spacin' and suppresses
+garnish on incomplete fragments. Extended markup sends one masked document through the pipeline with opaque
+protected spans. See [translation controls](../functional/translation-controls.md).

@@ -9,8 +9,8 @@ The same records are in `result.to_dict()["explain"]` and in `--json` output.
 
 For every detected span it records:
 
-- Fair dinkum, the span'n the concept found
-- Stone the crows, how it was detected \(trigger, entry paraphrase, or similarity score\)
+- the span'n the concept found
+- how it was detected \(trigger, entry paraphrase, or similarity score\)
 - the frame, the intensity'n the captured slots
 - the roll'n the probability
 - the chosen entry'n its weight breakdown
@@ -41,4 +41,4 @@ garnish:
 ```
 
 The weight factors are described in [the pipeline](../architecture/pipeline.md), step 3. With `--rewrite`,
-Fair dinkum, explain mode also shows which sentences were rewritten'n why.
+explain mode also shows which sentences were rewritten'n why.

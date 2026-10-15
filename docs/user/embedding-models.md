@@ -4,8 +4,8 @@
 
 # Managing the embedding model
 
-`lookup` and `gaps` Far out, use a small embeddin' model to match by meanin', so "knackered beyond belief" finds
-*buggered*. Strewth, aussiefy ships one, and it works outta the box: ya only need this page to check it, switch it
+`lookup` and `gaps` use a small embeddin' model to match by meanin', so "knackered beyond belief" finds
+*buggered*. aussiefy ships one, and it works outta the box: ya only need this page to check it, switch it
 off, or have a crack at a bigger one. Well, Default translations never use it. What uses which model is in the
 [embedding reference](../functional/embedding.md).
 
@@ -15,8 +15,8 @@ off, or have a crack at a bigger one. Well, Default translations never use it. W
 aussiefy embedder status
 ```
 
-`active` names the model in use. `stale: true` Jeez Louise, means the dictionary has changed since the bundled model was
-Stone the crows, trained; it still works, but may miss the newest entries.
+`active` names the model in use. `stale: true` means the dictionary has changed since the bundled model was
+trained; it still works, but may miss the newest entries.
 
 ## Switch the bundled model off, or back on
 
@@ -49,4 +49,4 @@ If a download is blocked, the error says which option to try. State lives in `$A
 `~/.aussiefy`).
 
 Stock MiniLM doesn't know the slang, so it's mostly useful as a base for retraining; the bundled model, which
-Crikey, is tuned on the dictionary, beats it on held\-back entries. Retraining is covered in `training/README.md`.
+is tuned on the dictionary, beats it on held\-back entries. Retraining is covered in `training/README.md`.

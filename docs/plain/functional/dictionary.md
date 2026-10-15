@@ -19,7 +19,7 @@ aussiefy/data/
   guide.yaml           voice, language limits, openings, gated craft, workflow, plan note and yarn rules
   swears.yaml          swear words by strength, for lint and for rating riffs
   dialect.yaml         US/UK patterns, Australian replacements, sense guards and lint-only expressions
-  genres.yaml          per-form policies, embellishment settings and the default retelling
+  genres.yaml          explicit document presets and embellishment settings
   judge.yaml           blind comparison rubric and report schema
   pos/                 licensed English POS weights and provenance metadata
   source_policy.yaml   sites the scraper must not bulk-extract (reference-only)

@@ -248,7 +248,8 @@ class Translator:
                   rewrite_mode: Literal["hard", "all"] = "hard",
                   embellishment: int | str | None = None,
                   document_type: str = "general", document_config: dict | None = None,
-                  _protected: Masked | None = None, _context: tuple | None = None) -> Result:
+                  _protected: Masked | None = None, _context: tuple | None = None,
+                  _composition: DocumentPart | None = None) -> Result:
         """Translate text: the same text, policy and seed always give the same Result.
 
         level (1-5 or tourist .. swaggie) is how Aussie; vulgarity (0-3 or nan, dad, uncle-bob, tradie; None = the
@@ -275,7 +276,9 @@ class Translator:
                         document_type=pol.document_type, document_config=pol.document_config)
         run = _Run(text, pol, resolve(pol, self.dictionary), text_mood(text), is_chant(sents), masked, genre,
                    _context[1] if _context is not None else text_english(pol.english, masked.prose(), self.dictionary.us_spellings),
-                   genre.setting(pol.embellishment))
+                   genre.setting(pol.embellishment), composition=_composition)
+        if _composition is not None:
+            run.state = _composition.state
         pieces: list[str] = [text[: tokens[0].start] if tokens else text]
         for i, tokens_i in enumerate(sents):
             sent = run.sentence(i, tokens_i, sents)
@@ -468,6 +471,9 @@ class Translator:
     def _closer(self, joined: str, sents: list[list[Token]], run: "_Run") -> str:
         """One closing exclamation for the whole text, answering its last sentence ("that's my two bob's worth"
         only after an opinion): a sweary one at the vulgarity's rate, or else the level's clean one."""
+        if (run.composition is not None and (not run.composition.last or not run.composition.ends_sentence
+                                             or run.composition.quiet)):
+            return joined
         if (not sents or run.masked.quiet_at(sents[-1][0].start) or run.is_held(sents[-1])
                 or not run.embellishment.takes("closer")):
             return joined     # a text that ends in a table has nowhere to say it; a notice has no punchline
@@ -578,6 +584,7 @@ class Translator:
     def _garnish_channel(self, out: str, sent: "_Sentence", run: "_Run", g: "_GarnishSpot",
                          rates: dict[str, float], budget: int, swear: bool) -> str:
         state, eff = run.state, run.eff
+        ordinal = sent.index + (run.composition.first_sentence if run.composition is not None else 0)
         channel = "swear" if swear else ""
         spent = 0
         for placement in rates:
@@ -586,7 +593,7 @@ class Translator:
                 continue
             if placement in ("opener", "connective") and (g.starts_with_interjection or "opener" in g.placed
                                                           or "connective" in g.placed
-                                                          or sent.index == 0 and placement == "connective"):
+                                                          or ordinal == 0 and placement == "connective"):
                 continue
             if placement in ("opener", "connective") and SCRIPT_LINE.match(out):
                 continue  # a label starts the line: a play's speaker ("HALE:"), or a "NOTE:" or "PS:"
@@ -600,12 +607,12 @@ class Translator:
             if state.placed[key] >= eff.profile.limit(placement):
                 continue
             last = state.last_placed.get(placement)   # spacing is per placement, across both channels
-            if last is not None and sent.index - last <= eff.profile.garnish_gap:
+            if last is not None and ordinal - last <= eff.profile.garnish_gap:
                 continue
             r = roll(run.pol.seed, "garnish", key, *sent.key)
             if r >= p:
                 continue
-            recent = {cid for cid, at in state.connectives.items() if sent.index - at <= CONNECTIVE_REPEAT_GAP}
+            recent = {cid for cid, at in state.connectives.items() if ordinal - at <= CONNECTIVE_REPEAT_GAP}
             entry, form, rej = pick_garnish(placement, self.dictionary.garnish, eff, run.pol.seed, (key,) + sent.key,
                                             state.garnish_uses, g.tag_contexts if placement == "tag" else g.contexts,
                                             exclude=recent, mood=run.mood, swear=swear,
@@ -625,9 +632,9 @@ class Translator:
                 if placement != "connective":
                     state.garnish_uses[entry.id] += 1
                 else:
-                    state.connectives[entry.id] = sent.index
+                    state.connectives[entry.id] = ordinal
                 state.placed[key] += 1
-                state.last_placed[placement] = sent.index
+                state.last_placed[placement] = ordinal
                 g.placed.add(placement)
                 spent += 1
             run.garnish.append(GarnishRecord.rolled(placement, sent.index, entry, form, r, p, rej))
@@ -669,6 +676,17 @@ class TextState:
     connectives: dict[str, int] = field(default_factory=dict)    # connective id -> sentence it was last used in
     seen_sentences: Counter = field(default_factory=Counter)     # sentence text -> occurrences so far
     spellings: dict[str, str] = field(default_factory=dict)      # entry id -> the spelling it first took
+
+
+@dataclass(frozen=True)
+class DocumentPart:
+    """A source-preserving adapter's unit: shared document choices, with local result offsets."""
+    state: TextState
+    first_sentence: int
+    starts_sentence: bool
+    ends_sentence: bool
+    last: bool
+    quiet: bool = False
 
 
 @dataclass
@@ -741,6 +759,7 @@ class _Run:
     english: str | None           # the source's English (dialect.text_english), where known
     embellishment: Embellishment  # the caller's setting, or the genre's own: which garnish it takes
     state: TextState = field(default_factory=TextState)
+    composition: DocumentPart | None = None
     records: list[SubstitutionRecord] = field(default_factory=list)
     garnish: list[GarnishRecord] = field(default_factory=list)
     rewrites: list[RewriteRecord] = field(default_factory=list)
@@ -796,7 +815,10 @@ class _Run:
         # in a story the engine can't tell whether "What a shocker!" fits what just happened, so only chants
         # get stanza-end asides
         para_end = self.chant and i + 1 < len(sents) and "\n" in self.text[tokens[-1].end:nxt]
-        quiet = (self.masked.quiet_at(tokens[0].start) or self.is_heading(tokens) or self.is_held(tokens)
+        partial = self.composition is not None and (
+            self.composition.quiet or i == 0 and not self.composition.starts_sentence
+            or i == len(sents) - 1 and not self.composition.ends_sentence)
+        quiet = (partial or self.masked.quiet_at(tokens[0].start) or self.is_heading(tokens) or self.is_held(tokens)
                  or self.in_dateline(tokens))
         return _Sentence(i, tokens, text, (text.lower(), self.state.seen_sentences[text]), nxt, para_end, quiet,
                          pos.tag([t.text for t in tokens]))

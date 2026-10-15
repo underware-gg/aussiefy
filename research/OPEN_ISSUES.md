@@ -33,6 +33,10 @@ The data can't fix these without losing the right sense:
 
 ## The bundled embedder
 
+The [2026-10-15 maintenance measurement](maintenance-check-2026-10-15/README.md) passes 33/33 required raw
+references with all 16 known failures retained. It separately captures real toolkit lookups and pins a fresh
+20-text Dinkum comparison. No new model weights or fresh writer/judge scores were produced.
+
 `aussiefy embedder status` reports aussie-static 1.2.0 as stale. It was trained before the fairdinkum, second-pass
 and third-pass rounds; their entries work through the engine and lookup triggers without it, but meaning-based lookup
 doesn't know them. Two 1.3.0 trials have stopped at the reference gate: "girl" ranked WOMAN after the classics round,
@@ -65,7 +69,7 @@ The review's findings were fixed; these are its follow-ups, each independent of 
 
 Measured in `research/fourth-pass-2026-10-14/FINDINGS.md`. Its recommendations are done: openings follow the form
 at every setting, strict genres take no swear infixes, dinkum's guidance puts the voice into strict forms'
-connecting prose, and the docs offer troppo for levels 4-5. The fourth-pass round
+connecting prose, and the historical docs offered troppo for levels 4-5. Current repository publication explicitly uses Swaggie/Dinkum/Dad. The fourth-pass round
 (`research/fourth-pass-round-2026-10-14/DECISIONS.md`) took its vocabulary and fixed its wrong senses in data. What's
 left:
 
@@ -106,3 +110,8 @@ behaviour overrides retain their documented freedom.
 Round follow-up: metadata/guard/second-sense and reapplication preservation are implemented and regression-tested.
 General comment-preserving YAML editing and a stricter variant-collision policy remain separate work; existing
 variant semantics were retained after comparing all eight historical round plans.
+
+Documentation follow-up: current sources and generated outputs are reconciled across all four layers; the
+publication notice is uniform and links to each plain counterpart. Markdown fragments now share document
+choices/limits and receive garnish only at complete sentence boundaries. Gettysburg wording is verified
+against the linked primary transcription; Waltzing Matilda still needs an accessible exact-edition check.

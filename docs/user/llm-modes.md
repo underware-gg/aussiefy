@@ -5,7 +5,7 @@
 # Using Claude to polish or retell
 
 The rule engine's output is deterministic'n safe, but it can read like a word swap. Three optional modes
-hand some of the writin' to Claude, while the dictionary keeps the slang genuine. Well, what each one guarantees is
+hand some of the writin' to Claude, while the dictionary keeps the slang genuine. What each one guarantees is
 in the [LLM modes reference](../functional/llm-modes.md).
 
 ## Before you start
@@ -22,7 +22,7 @@ Every mode uses `claude-opus-5-5` unless ya pass `--model`.
 aussiefy story.txt -l 5 --surface
 ```
 
-Strewth, Claude rewrites the draft for flow, keeping every phrase the engine planned'n addin' no new slang.
+So anyway, Claude rewrites the draft for flow, keeping every phrase the engine planned'n addin' no new slang.
 
 ## Rewrite the sentences the dictionary can't carry
 
@@ -31,7 +31,7 @@ aussiefy speech.txt -l 5 --rewrite hard   # only the formal, difficult sentences
 aussiefy speech.txt -l 5 --rewrite all    # every sentence
 ```
 
-Add `--explain` Strewth, to see which sentences were rewritten'n why.
+Add `--explain` to see which sentences were rewritten'n why.
 
 ## Retell a whole text as a yarn
 

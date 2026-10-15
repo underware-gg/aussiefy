@@ -19,33 +19,33 @@ At level 5 the deterministic output is right but can sound clunky at the joins. 
 (`aussiefy.llm.surface_rewrite`) sends the original, the draft and the list of planned phrases to Claude, and
 asks for a smoother rewrite that keeps every planned phrase and adds no new slang.
 
-- Jeez, the rewrite is accepted only if every planned phrase survives.
+- The rewrite is accepted only if every planned phrase survives.
 - Otherwise, or on any API failure or refusal, the deterministic text stands, and `result.surface["status"]`
   says why.
-- Jeez Louise, with nothing planned, there's nothin' to polish: the mode is skipped, which isn't a fallback.
+- With nothing planned, there's nothin' to polish: the mode is skipped, which isn't a fallback.
 - The plan is always in explain mode.
 - Surface rewrites aren't cached: each run asks Claude again.
 
 ## Whole-sentence rewrites (`--rewrite hard|all`)
 
 Some sentences are too formal for a phrase dictionary to carry, such as "conceived in a fair go, and dedicated to
-Tell ya what, the proposition…". With `--rewrite hard`, the engine detects those'n hands just that sentence to Claude,
-along with the draft'n the phrases the dictionary already planned. Well, Claude says the sentence the way an
+the proposition…". With `--rewrite hard`, the engine detects those'n hands just that sentence to Claude,
+along with the draft'n the phrases the dictionary already planned. Claude says the sentence the way an
 Australian would at the requested level'n vulgarity.
 
-- **What counts as difficult:** Crikey, the sentence still has formal, Latinate words the dictionary left alone
-  (proposition, assertion, comfortably, honoured\). Mind ya, the thresholds are under `rewrite:` in
+- **What counts as difficult:** the sentence still has formal, Latinate words the dictionary left alone
+  (proposition, assertion, comfortably, honoured\). The thresholds are under `rewrite:` in
   `aussiefy/data/profiles.yaml`.
 - **Rewriting the whole bloody show:** `--rewrite all` sends every sentence.
-- **Guarantees:** Crikey, planned phrases must keep on kickin' the rewrite, and the result must be a single sentence of
+- **Guarantees:** planned phrases must keep on kickin' the rewrite, and the result must be a single sentence of
   sane length. Anyway, otherwise the dictionary's draft stands.
 - **Reproducibility:** rewrites are cached in `$AUSSIEFY_HOME/cache/rewrite/` (default `~/.aussiefy/cache/rewrite/`), keyed by
   the sentence, its draft, the planned phrases, the level and vulgarity, the seed, the model and the
   instructions, so a run can be repeated offline. Cached replies are checked against the current
   acceptance rules too; an older invalid reply triggers a fresh attempt.
-- **Explain mode** Crikey, shows which sentences were rewritten'n why.
+- **Explain mode** shows which sentences were rewritten'n why.
 
-Strewth, In Python, pass a rewriter to the engine, with the same translator so custom phonetic rules are honoured:
+Well, In Python, pass a rewriter to the engine, with the same translator so custom phonetic rules are honoured:
 
 ```python
 from aussiefy import Translator
@@ -67,9 +67,14 @@ style guide, uses `lookup` and `lint` as tools, and hands in the result with `su
 only if:
 
 - the lint passes,
-- Jeez, most planned phrases keep on kickin' \(a planned phrase the agent declines, with a reason, counts as kept, up to
-  half the plan\), and
-- Crikey, the length is sane.
+- the effective `keep_share` of undeclined planned phrases survives when the original plan has at least four
+  distinct phrases; each decline must name a planned phrase and supply a reason, and
+- configured length checks pass when `check_length` is enabled.
+
+General/Deadset/Dinkum normally require a 0.6 share; Troppo and bare Custom use zero. A zero share disables
+retention and moved-phrase checks. Exact `document_config` overrides apply to every preset, including
+`keep_share`, `check_length` and `max_length`. Lint issues, selected factual/style checks and markup integrity
+remain enforced. An engine draft appears in the brief only when the effective `draft` setting enables it.
 
 Otherwise Claude gets the reasons and tries again, for up to 12 turns. If nothing passes, or the API is
 unavailable, the deterministic draft stands. Accepted yarns are cached in `$AUSSIEFY_HOME/cache/yarn/`

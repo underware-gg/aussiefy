@@ -14,30 +14,34 @@ aussiefy translate --markdown README.md --json
 aussiefy translate --markdown README.md --explain
 ```
 
-Paragraph, list'n blockquote prose is translated in source order. Mate, each physical line and each gap between
-protected inline constructs is an engine unit, so phrases don't cross bloody hard wraps or links. So anyway, Fragments can
-have their own garnish; this mode preserves structure rather than rewriting whole paragraphs.
+Paragraph, list'n blockquote prose is translated in source order. Each physical line and each gap between
+protected inline constructs is an engine unit, so phrases don't cross bloody hard wraps or links. Units share
+one document's term/spellin' choices'n garnish limits. Source sentence positions govern garnish spacing;
+partial sentences don't receive sentence garnish, so inline code, links'n bloody hard wraps can't bloody well acquire an
+opener halfway through a sentence. Complete later sentences remain eligible. A closer is considered only at
+the final prose unit when it ends a complete source sentence. This mode preserves source structure rather
+than rewriting whole paragraphs.
 
 ## Protected content and dialect
 
-Headings'n explicit IDs stay exact for stable anchors, including Setext and changelog version/date headings.
-Fair dinkum, code/output fences \(including nested containers'n variable\-length delimiters\), indented/inline code, tables
+Mind ya, headings'n explicit IDs stay exact for stable anchors, including Setext and changelog version/date headings.
+Code/output fences \(including nested containers'n variable\-length delimiters\), indented/inline code, tables
 and YAML/TOML frontmatter stay exact. Anyway, whole links/images'n reference definitions retain labels and destinations.
 Fair dinkum, Autolinks, source escapes, entities, markers'n complete raw HTML regions are retained too.
 
-Jeez, the dialect is CommonMark with tables'n the repository's constructs. Now, Ambiguous unclosed regions and
+The dialect is CommonMark with tables'n the repository's constructs. Ambiguous unclosed regions and
 word\-adjacent emphasis are conservatively retained. Template expressions and MDX declarations stay protected;
-Stone the crows, this isn't an MDX/JSX prose extractor. Mate, the adapter uses `markdown-it-py` block line maps'n raw\-source inline
+this isn't an MDX/JSX prose extractor. The adapter uses `markdown-it-py` block line maps'n raw\-source inline
 spans, never formatted parser output. The light parser supports Python 3.10 and heaps only in Markdown mode.
 
-Indentation, boundary/trailin' whitespace, hard wraps'n line endings keep on kickin'. Well, whitespace inside a
-rewritten prose phrase can change. Mate, Generated prose characters that could create markup are escaped;
-Jeez, newlines in custom slang are flattened within the unit. Original protected bytes are never escaped or reformatted.
+Indentation, boundary/trailin' whitespace, hard wraps'n line endings keep on kickin'. Whitespace inside a
+rewritten prose phrase can change. Generated prose characters that could create markup are escaped;
+newlines in custom slang are flattened within the unit. Stone the crows, Original protected bytes are never escaped or reformatted.
 
-Markdown permits only `ngram` Crikey, or disabled fallback \(`none`, including profiles with no fallback\). The CLI's
-existin' `--embedder ngram`/`--embedder none` Jeez, can override a profile; API/toolkit/MCP callers use the translator's
+Markdown permits only `ngram` or disabled fallback \(`none`, including profiles with no fallback\). The CLI's
+existin' `--embedder ngram`/`--embedder none` can override a profile; API/toolkit/MCP callers use the translator's
 profile defaults. Well, no embeddin' parameter is added to the toolkit. LLM modes \(`--rewrite`, `--surface`) and
-model fallbacks raise `UserError` (Fair dinkum, CLI exit 2\) before a model loads or Claude is called.
+model fallbacks raise `UserError` (CLI exit 2\) before a model loads or Claude is called.
 
 ## Results and explanations
 
@@ -52,14 +56,16 @@ CLI `--json` include the document structure:
 | `units` | Each unit's `source_span`, `output_span`, rendered `text` and original engine `result` |
 | `protected` | Corresponding source/output ranges copied exactly |
 
-Ranges are half\-open Python string character offsets, not UTF\-8 byte positions. Child engine records remain
-relative to that child's source. Fair dinkum, Rendered unit text may differ from raw engine text 'cause of escapin'.
-`--explain` Fair dinkum, names document source/output ranges before reporting the local engine decisions; there are no
+So anyway, ranges are half\-open Python string character offsets, not UTF\-8 byte positions. Child engine records remain
+relative to that child's source. Crikey, Rendered unit text may differ from raw engine text 'cause of escapin'.
+`--explain` names document source/output ranges before reporting the local engine decisions; there are no
 fake document\-wide engine records. Markdown text output adds no terminal newline to the document.
 
-`Translator.translate`, `aussiefy.engine.translate` and `plan` remain plain text. Plan doesn't describe the
-adapter's per\-unit output; yarn lookup/lint tools stay unchanged.
+`Translator.translate` and `aussiefy.engine.translate` remain the core text operations. Plan can read extended
+`markup`, but doesn't describe strict Markdown's per\-unit output. Yarn tools use their selected markup route;
+strict `markdown=True` remains a translation\-only option.
 
 The contracts are checked in [test_markdown.py](../../tests/functional/test_markdown.py) and
-[test_interfaces.py](../../tests/functional/test_interfaces.py). See
+[test_interfaces.py](../../tests/functional/test_interfaces.py), with document composition pinned in
+[test_markdown_composition.py](../../tests/functional/test_markdown_composition.py). See
 [DD-015](../architecture/decisions/dd-015-source-preserving-markdown.md) for the boundary decision.

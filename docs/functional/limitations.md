@@ -4,22 +4,32 @@
 
 # Status and known limitations
 
-- **Crikey, the frame checker is heuristic.** Expect occasional misfires on unusual syntax. Struth, every one is visible in
-  [explain mode](explain.md), Crikey, and most are fixed by tightenin' a trigger pattern in the data rather than the
-  code. Now, the hand\-written frame checker now uses a small bundled POS model for noun/verb context;
+- **The frame checker is heuristic.** Expect occasional misfires on unusual syntax. Every one is visible in
+  [explain mode](explain.md), and most are fixed by tightenin' a trigger pattern in the data rather than the
+  code. The hand\-written frame checker now uses a small bundled POS model for noun/verb context;
   [DD-016](../architecture/decisions/dd-016-reconcile-source-capabilities.md) records its offline boundary.
 - **The LLM modes have not been run against the live API.** Tagging, `--surface`, `--rewrite` and yarn mode
   are tested with fake clients. The yarn workflow itself has been exercised by agents through its research CLI
   (`research/retellings-2026-10-11/yarn_tools.py`), which shares yarn mode's brief and tools.
-- **The seed source hasn't been scraped.** The build environment couldn't reach learnconversations.com
-  (DNS fails, and the network allows only package registries\), so the scraper is tested against synthetic
-  fixture pages. Jeez Louise, the starter dictionary was hand\-curated, with glosses in our own words, and later grown by
-  Strewth, research rounds; only the four flagged entries that the original brief names cite the seed URL. Mate, how to bring
-  it in is in [data acquisition](../contributor/data-acquisition.md).
-- **Two reference texts have no checked source.** Most of `tests/corpus/reference/` is taken verbatim from
-  Jeez Louise, Project Gutenberg files, but the Gettysburg Address is the standard modern text with no source file, and the
-  Crikey, Waltzing Matilda lyrics weren't compared against the 1903 sheet music \(see
-  `tests/corpus/reference/SOURCES.yaml`). Check them against a canonical copy before relyin' on exact wording.
-- **The bundled embeddin' model lags the dictionary.** `aussiefy embedder status` Fair dinkum, reports the shipped model
+- **The seed source hasn't been scraped.** The original build recorded network restrictions reaching
+  learnconversations.com; that historical failure isn't a current connectivity assessment. The scraper has
+  synthetic fixtures, and the hand\-curated dictionary'n later research rounds use our own glosses.
+  Acquisition remains a separate task: see [data acquisition](../contributor/data-acquisition.md).
+- **Waltzing Matilda still needs exact edition verification.** Its lyrics haven't been compared with an
+  accessible scan of Cowan's 1903 sheet music. The Gettysburg fixture was checked on 2026\-10\-15 against the
+  [Library of Congress's standard Lincoln Memorial transcription](https://www.loc.gov/exhibits/gettysburg-address/ext/trans-nicolay-inscribed.html):
+  wording matches after documented punctuation/case'n word\-joining normalisation. The fixture's existin'
+  typography is retained; see `tests/corpus/reference/SOURCES.yaml`.
+- **Fidelity'n lookup remain heuristic.** Explicit name aliases avoid inferrin' replacements inside proper
+  names, but sentence\-initial names can still escape extraction. Slot/inflection matching'n negation anchors
+  fix the reproduced toolkit cases; they don't solve general negation or sense disambiguation. For example,
+  `not out of the question` can still offer refusal phrases. Review suggestions in their actual sentence.
+- **Fresh retelling quality scores are pendin'.** Current guidance, quote preservation'n toolkit fixes need
+  a new writer/independent\-judge pass against the historical Dinkum anchors. Offline tests'n replayed results
+  don't knock together a new register/fidelity score. The [maintenance study](../../research/maintenance-check-2026-10-15/README.md)
+  records measured results'n the prepared comparison.
+- **The bundled embeddin' model lags the dictionary.** `aussiefy embedder status` reports the shipped model
   (aussie\-static 1.2.0\) as `stale` after the later research rounds; the next version is described in
-  `training/README.md`. Default translations are unaffected, since the engine doesn't use it unless asked.
+  `training/README.md`. The 2026\-10\-15 offline check passes 33/33 required references but retains 16 known
+  failures. Current gap\-fill precision remains below the 90% bar, so default automatic fillin' stays off.
+  Default translations are unaffected, since the engine doesn't use it unless asked.

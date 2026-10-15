@@ -24,3 +24,8 @@ logs inherit corpus attribution through [PROVENANCE.yaml](../../../research/PROV
 exports stay ignored. Sanitised harvests omit entries that reproduce those works.
 
 Tests: [judge](../../../tests/contributor/test_judge.py), [yarn/toolkit](../../../tests/functional/test_harness.py).
+
+The [maintenance comparison](../../../research/maintenance-check-2026-10-15/README.md) pins the next 20-text
+Dinkum remeasurement: original source hashes, original dials and named document presets, with Dinkum-3 and
+pre-fix yarn as unchanged anchors. It is prepared, not scored. Use fresh writer output and an independent
+judge; do not reuse previous verdicts as evidence for current guidance.

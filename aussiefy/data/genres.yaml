@@ -18,8 +18,9 @@
 #   perform: whether the style guide's "perform it" block applies (guide.yaml)
 #   guidance: yarn mode's note for the setting
 #
-# The genre (which genre.py reads from the text's cues) sets the default embellishment, which the caller may
-# override, and decides the form:
+# Document types provide presets. General is the default; Auto opts into genre.py's text/layout classifier.
+# Named types select a preset directly, and Custom starts with optional behaviours off. Explicit dials apply
+# next; exact document_config overrides apply last, for every type. These presets describe the form:
 #   embellishment: its default
 #   garnish: the garnish its form allows, at a setting that follows the form: a storyteller's openers and
 #            connectives only where there's a teller, a tag-on only where someone is spoken to, no swear

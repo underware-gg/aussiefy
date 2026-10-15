@@ -4,9 +4,9 @@
 
 # Design reviews
 
-Crikey, whole\-repository design reviews, kept as written. Anyway, each lists its findings with evidence, the fixes chosen and
+Crikey, whole\-repository design reviews, kept as written. Each lists its findings with evidence, the fixes chosen and
 what was done; line numbers'n file names in them refer to the code as it was at the time, and some name
-Stone the flamin' crows, commands that have since been renamed. Mate, decisions they led to are recorded in [decisions](../decisions/README.md).
+commands that have since been renamed. Decisions they led to are recorded in [decisions](../decisions/README.md).
 
 | Review | Summary |
 |---|---|

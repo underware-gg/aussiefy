@@ -10,7 +10,7 @@ The operations themselves are described in the [toolkit reference](../functional
 
 The workflow is the same everywhere: knock together the **brief** and dials, read the **guide**, get the engine's
 **plan**, write the text with **lookups**, **lint** and fix it, then **deliver**. Run `aussiefy guide` for
-the current craft guidance, which is filtered to the level'n vulgarity, the whole box 'n dice. The plan's `note` explains how to
+the current craft guidance, which is filtered to the level'n vulgarity. The plan's `note` explains how to
 use its phrases'n suggestions without forcing a wrong sense.
 
 ## In Claude Code: the skill
@@ -31,9 +31,9 @@ server's instructions tell the agent the workflow.
 
 ## In your own Claude API agent
 
-- Strewth, to have aussiefy run the whole loop, call `aussiefy.yarn(text, level=5)` (see
+- To have aussiefy run the whole loop, call `aussiefy.yarn(text, level=5)` (see
   [using Claude to polish or retell](llm-modes.md)).
-- To run the loop yerself, import the loop's parts from the module \(`aussiefy.yarn` Stone the crows, on the package is the
+- To run the loop yerself, import the loop's parts from the module \(`aussiefy.yarn` on the package is the
   function\):
 
   ```python

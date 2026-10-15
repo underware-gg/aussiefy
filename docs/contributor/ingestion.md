@@ -11,20 +11,20 @@ aussiefy dev ingest tests/corpus/remote.yaml
 aussiefy dev ingest tests/corpus/everyday/interfold.yaml --force
 ```
 
-Strewth, a YAML manifest has `out` (relative to its directory\), optional `defaults` and an `items` list. Anyway, each item has a
+A YAML manifest has `out` (relative to its directory\), optional `defaults` and an `items` list. Each item has a
 filename stem `name` and either a URL or a repository `path` with `repo` / `ref`. HTML becomes readable
 paragraphs; optional paired `start` / `end` markers select an excerpt. Raw Markdown/MDX/text files retain
 their source bytes, including line endings. Metadata such as title, licence'n excerpt declarations stays
-in the manifest. Anyway, Existin' files are kept unless `--force`; `--ref` overrides both default'n item pins.
+in the manifest. Existin' files are kept unless `--force`; `--ref` overrides both default'n item pins.
 
 Bugger me, names'n repository paths can't traverse directories; output filenames must be unique. Each fetched page
-uses the shared home cache'n atomic persistence. Strewth, Failed pages are reported individually, complete previous
+uses the shared home cache'n atomic persistence. Failed pages are reported individually, complete previous
 files keep on kickin' interrupted writes, and a repeated run can recover. Symlinks/directories are rejected as page
 outputs. The dictionary acquisition command `dev scrape` separately enforces the reference\-only source
 policy; generic corpus ingestion doesn't kick off permission to extract or redistribute a source.
 
-Ingesting a source doesn't kick off redistribution rights. Jeez, Remote\-only manifests write into ignored local
-storage; committed corpus needs the [provenance gate](licensing.md). Stone the crows, the 15 pinned Interfold MDX pages retain
+Anyway, Ingesting a source doesn't kick off redistribution rights. Remote\-only manifests write into ignored local
+storage; committed corpus needs the [provenance gate](licensing.md). The 15 pinned Interfold MDX pages retain
 LGPL attribution, while Rockwell/Kieran sources'n full research exports remain local.
 
 Tests: [conversion and manifest rules](../../tests/contributor/test_ingest.py),

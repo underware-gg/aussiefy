@@ -5,7 +5,7 @@
 # aussiefy documentation
 
 aussiefy rewrites plain English as Australian slang, with independent level \(1\-5\), vulgarity \(0\-3\) and
-embellishment \(0\-2\) controls. Document types supply explicit behaviour presets; General is the default'n detection is opt\-in. Strewth, this is the front door to its documentation, which is organised in four layers, each with
+embellishment \(0\-2\) controls. Document types supply explicit behaviour presets; General is the default'n detection is opt\-in. This is the front door to its documentation, which is organised in four layers, each with
 its own index. It follows the [Agent-Ready Documentation Standard](standards/agent-ready-documentation.md)
 v1.0.0, at Level 1.
 
@@ -22,11 +22,11 @@ v1.0.0, at Level 1.
 
 - [README.md](../README.md): the project's landing page.
 - [CONTRIBUTING.md](../CONTRIBUTING.md): the contributor layer's landing page, with the baseline rules.
-- [CHANGELOG.md](../CHANGELOG.md): Fair dinkum, what changed in each release.
+- [CHANGELOG.md](../CHANGELOG.md): what changed in each release.
 - [LICENSE](../LICENSE): the MIT licence for aussiefy. [LICENSES/](../LICENSES) holds the full Apache\-2.0 and
-  Crikey, MIT texts for bundled third\-party material.
+  MIT texts for bundled third\-party material.
 - [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md): attribution and changes for the bundled embedding model.
 - [standards/](standards/README.md): the documentation standard this project follows.
 
-Current guides are edited under `docs/plain/` Fair dinkum, and published at stable public paths. See
+Current guides are edited under `docs/plain/` and published at stable public paths. See
 [documentation publication](contributor/documentation.md).

@@ -30,3 +30,13 @@ def test_negated_model_meaning_needs_a_shared_anchor(translator):
 def test_slots_cannot_cross_trailing_words(translator):
     out = lookup('give them a bell then', translator=translator)['results']
     assert all(r['match'] != 'slang term' for r in out)
+
+
+def test_slot_only_custom_form_is_rejected_at_dictionary_boundary(tmp_path):
+    from aussiefy import load_dictionary
+    from aussiefy.schema import SchemaError
+
+    path = tmp_path / 'slot-only.yaml'
+    path.write_text('- {id: zz-slot-only, form: "{obj}", concept: [TIRED], frame: vp}\n')
+    with pytest.raises(SchemaError, match='needs at least one required literal word'):
+        load_dictionary([path])

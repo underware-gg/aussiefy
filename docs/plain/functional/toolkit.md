@@ -34,11 +34,14 @@ lookup("very tired", translator=tr)   # the toolkit functions take a translator 
 Every function takes keyword-only dials, by number or name: `level` (default 5) and `vulgarity` (default: the
 level's own). `translate`, `plan` and `yarn` also take `seed` (default 0). `translate` and `plan` also take
 `variety`, `registers`, `regions` and `unlock`; only `translate` takes `markdown` (default false).
-The engine/Translator and `plan` remain plain-text operations. `lookup` takes `limit` (default 8) and `include_gated`, and
-`lint` takes `original`. Every function takes an optional `translator` for a non-default dictionary.
+The core engine/Translator consumes plain text or internally masked text. `translate`, `plan`, `lint`, `verify`
+and `yarn` support the extended `markup` route; strict `markdown=True` source units belong only to translation.
+`lookup` takes `limit` (default 8) and `include_gated`; `lint` takes `original`. Every function takes an optional
+`translator` for a non-default dictionary.
 
 Document operations (`translate`, `plan`, `lint`, `verify`, `guide`, `yarn`) also take `document_type="general"`
-and `document_config=None`. General defaults to Dinkum; Auto opts into detection; named types select presets;
+and `document_config=None`, plus the `embellishment` dial (0–2 or its name; omitted uses the selected preset).
+General defaults to Dinkum; Auto opts into detection; named types select presets;
 Custom enables only configured optional behaviours. The shared override object replaces inherited values after
 explicit dials, including false and empty lists. See [translation controls](translation-controls.md).
 
@@ -59,7 +62,7 @@ messages as tool errors. `lookup` requires `limit >= 1` and marks each riff's `b
 ## The same toolkit, three more ways
 
 - **MCP server, for any MCP-capable agent.** The `aussiefy-mcp` command (stdio) serves the tools
-  `aussie_lookup`, `aussie_lint`, `aussie_guide`, `aussie_plan` and `aussie_translate`. Setup is in the
+  `aussie_lookup`, `aussie_lint`, `aussie_guide`, `aussie_plan`, `aussie_translate` and `aussie_verify`. Setup is in the
   [user guide](../user/agents.md).
 - **Claude Code skill.** [skills/aussiefy/SKILL.md](../../../skills/aussiefy/SKILL.md) walks an agent through
   brief → guide → plan → write with lookups → lint and fix → deliver, using the CLI.

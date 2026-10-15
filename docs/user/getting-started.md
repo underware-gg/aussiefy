@@ -35,7 +35,7 @@ aussiefy story.txt -l 3
 echo "I'm exhausted." | aussiefy -l 4
 ```
 
-At level 5 the engine goes all out:
+Anyway, at level 5 the engine goes all out:
 
 ```
 $ aussiefy "Good grief, are you crazy? You're overreacting, you're stupid and all talk, and I'm extremely busy cleaning up after you." -l 5 -s 1
@@ -50,8 +50,8 @@ Three dials control the tellin', each by number or name:
 - `--vulgarity`: how rude, from 0 \(`nan`, no swearin'\) to 3 \(`tradie`, anything goes\). By default it follows the
   level: `nan` at levels 1\-2, `dad` at 3\-4, `uncle-bob` at 5.
 - `-e/--embellishment`: a fair go in the tellin', from 0 \(`deadset`, straight\) through 1 \(`dinkum`, limited
-  colour\) to 2 \(`troppo`, a performance\). Translation defaults to the genre's settin'; retelling defaults
-  to `dinkum`. See [translation controls](../functional/translation-controls.md).
+  colour\) to 2 \(`troppo`, a performance\). General defaults to `dinkum` across translation'n retelling.
+  Mate, auto'n named document types use their preset's default; an explicit dial overrides it. See [translation controls](../functional/translation-controls.md).
 
 Crikey, Level'n vulgarity are independent, so ya can have either without the other:
 
@@ -66,13 +66,13 @@ What each settin' does is in the [dials reference](../functional/dials.md).
 
 The rule engine gives the same output for the same text, dials, settings'n seed. Two settings control variability:
 
-- **The seed.** Stone the flamin' crows, it's 0 by default, so a text comes out the same on every run. `--seed 3` gives another
+- **The seed.** It's 0 by default, so a text comes out the same on every run. `--seed 3` gives another
   version, and `--seed random` picks a seed'n prints it to stderr, so ya can repeat a run ya liked.
-- **`--variety N`** (`variety=N` in Python\) sets how far down the list of fittin' terms a choice may go. Mind ya, with 1,
+- **`--variety N`** (`variety=N` in Python\) sets how far down the list of fittin' terms a choice may go. With 1,
   each slot takes its best\-fittin' eligible term at that point \(on meanin', intensity'n register\).
   Earlier swaps can change repetition weights, so another seed can still change the chosen term; variants
-  and drawl can also vary. So anyway, with 2 or 3, a choice is weighted among that
-  many best fits. Well, with 0, the default, it's weighted over every eligible term, which gives the most
+  and drawl can also vary. With 2 or 3, a choice is weighted among that
+  many best fits. With 0, the default, it's weighted over every eligible term, which gives the most
   variety'n sometimes a looser fit.
 
 ```sh
@@ -109,7 +109,7 @@ aussiefy lint -l 5 --original story.txt < draft.txt   # check your own Aussified
 aussiefy show lizard                              # dictionary entries by id, form or concept
 ```
 
-Jeez, these are the same tools agents use: see [agents.md](agents.md).
+These are the same tools agents use: see [agents.md](agents.md).
 
 ## Add your own entries
 
@@ -136,10 +136,10 @@ from aussiefy import translate
 translate("I'm extremely busy.", level=4, seed=7).text   # "I'm flat out like a lizard drinking."
 ```
 
-Fair dinkum, the full API is in [toolkit.md](../functional/toolkit.md).
+The full API is in [toolkit.md](../functional/toolkit.md).
 
 ## When something goes wrong
 
 Every command exits non\-zero with a message on stderr when it can't do what was asked; the
-[exit codes](../functional/cli.md#exit-codes) say which kind of problem it was. Stone the flamin' crows, Known limitations are listed in
+[exit codes](../functional/cli.md#exit-codes) say which kind of problem it was. Known limitations are listed in
 [limitations.md](../functional/limitations.md).

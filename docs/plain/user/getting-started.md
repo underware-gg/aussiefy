@@ -46,8 +46,8 @@ Three dials control the telling, each by number or name:
 - `--vulgarity`: how rude, from 0 (`nan`, no swearing) to 3 (`tradie`, anything goes). By default it follows the
   level: `nan` at levels 1-2, `dad` at 3-4, `uncle-bob` at 5.
 - `-e/--embellishment`: liberty in the telling, from 0 (`deadset`, straight) through 1 (`dinkum`, limited
-  colour) to 2 (`troppo`, a performance). Translation defaults to the genre's setting; retelling defaults
-  to `dinkum`. See [translation controls](../functional/translation-controls.md).
+  colour) to 2 (`troppo`, a performance). General defaults to `dinkum` across translation and retelling.
+  Auto and named document types use their preset's default; an explicit dial overrides it. See [translation controls](../functional/translation-controls.md).
 
 Level and vulgarity are independent, so you can have either without the other:
 

@@ -4,7 +4,7 @@
 
 # Architecture documentation
 
-Struth, how aussiefy is built, and why. So anyway, the current design is described in the overviews below; the reasons behind it
+Struth, how aussiefy is built, and why. The current design is described in the overviews below; the reasons behind it
 are in the decision records, which are kept as history rather than rewritten.
 
 ## Overviews

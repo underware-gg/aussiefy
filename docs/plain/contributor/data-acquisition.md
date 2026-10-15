@@ -109,7 +109,7 @@ to add the concept, map the entry to an existing one, or drop it.
 ## The seed listicle
 
 The original brief's seed source, a "funny Aussie old sayings" listicle, has not been scraped (see
-[limitations](../functional/limitations.md)). To bring it in, run from a networked machine:
+[limitations](../functional/limitations.md)). To bring it in, run with access to the source site:
 
 ```sh
 aussiefy dev scrape https://learnconversations.com/funny-aussie-old-sayings-and-phrases/

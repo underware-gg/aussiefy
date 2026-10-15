@@ -5,7 +5,7 @@
 # Configuration, files and environment
 
 Fair dinkum, aussiefy needs no configuration for its core: the dials are passed per call, and the dictionary is built in.
-These are the settings, files'n caches it does read or write.
+Well, these are the settings, files'n caches it does read or write.
 
 ## Environment
 
@@ -17,7 +17,7 @@ These are the settings, files'n caches it does read or write.
 ## Machine state: `$AUSSIEFY_HOME`
 
 - `config.json` records which local model is installed, whether it's enabled, and whether the bundled model
-  Jeez Louise, is switched off. Well, it's written by `aussiefy embedder`. Crikey, a corrupt file is an error \(exit 2\), never read as
+  is switched off. It's written by `aussiefy embedder`. A corrupt file is an error \(exit 2\), never read as
   empty.
 - `models/<name>/` holds an installed sentence\-transformers model.
 

@@ -17,16 +17,16 @@ which one.
 | The engine's concept-detection fallback | Character trigrams (`ngram`) | `--embedder` `ngram`, `none`, `bundled` or `local` on `translate` |
 
 The engine uses a meaning model only when asked, so default translations stay deterministic'n don't change
-Jeez Louise, when the model does \(see [determinism](../architecture/determinism.md)).
+when the model does \(see [determinism](../architecture/determinism.md)).
 
-- **`ngram`:** character\-trigram similarity, with no dependencies. So anyway, it's deterministic'n catches misspellings
+- **`ngram`:** character\-trigram similarity, with no dependencies. It's deterministic'n catches misspellings
   and morphological variants.
 - **`bundled`:** the static model shipped in `aussiefy/data/model` (about 15 MB\), read with the standard
-  library alone: no torch, no numpy, no download. Well, how it's built is described in
+  library alone: no torch, no numpy, no download. How it's built is described in
   [the architecture layer](../architecture/embedding-model.md).
 - **`local`:** an installed sentence\-transformers model \(the `embeddings` extra\), installed'n enabled only
-  explicitly. Selecting `--embedder local` Crikey, requires an installed usable model; it raises an error rather
-  Strewth, than using the bundled model. So anyway, only the configured default cascades between available models.
+  explicitly. Selecting `--embedder local` requires an installed usable model; it raises an error rather
+  than using the bundled model. So anyway, only the configured default cascades between available models.
   Strewth, stock all\-MiniLM\-L6\-v2 doesn't know the slang, so it's mostly useful as a base for retraining.
 - **`none`:** no similarity fallback.
 
@@ -45,3 +45,11 @@ changes, `status` reports the bundled model as `stale`, until a new version is t
 
 All options are in the [CLI reference](cli.md). State lives in `$AUSSIEFY_HOME` (default `~/.aussiefy`): see
 [configuration](configuration.md).
+
+## Current measurement
+
+The [2026-10-15 maintenance check](../../research/maintenance-check-2026-10-15/README.md) repeats the bundled
+1.2.0 reference'n gap benchmarks without retraining, and records actual toolkit lookups separately. All 33
+required raw\-model references pass; 16 known failures remain. A larger dictionary changes benchmark difficulty,
+so these numbers don't knock together improvement against the older trainin' reports. The current weights remain
+bundled; automatic gap fillin' remains off by default.

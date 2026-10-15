@@ -60,9 +60,11 @@ substitutions and before its garnish; with `--surface`, the finished text goes t
 Every random choice in these stages is a seeded roll keyed by its context: see
 [determinism](determinism.md).
 
-Genre and source English are resolved before those stages. `genre.py` classifies eligible prose with layout
-cues and the selected dictionary's policies; `dialect.py` reserves and realises US/UK word swaps alongside
-slang. `pos.py` tags each sentence once, supplying noun/verb and subject checks. Genre and the embellishment
-dial narrow garnish, quote changes and terms of art. Strict Markdown shares one document context across its
-prose units; extended markup sends one masked document through this pipeline with opaque protected spans.
-See [translation controls](../functional/translation-controls.md).
+Document behaviour and source English are resolved before those stages. `genre.py` selects General by default,
+a named preset directly, or classifies eligible prose and layout only when Auto is requested. It then applies
+explicit dials and exact behaviour overrides. `dialect.py` reserves and realises US/UK word swaps alongside
+slang. `pos.py` tags each sentence once, supplying noun/verb and subject checks. Consumers read the resolved
+controls for garnish, quotes and terminology domains. Strict Markdown shares one document context, vocabulary
+choices and garnish state across its prose units, retains source sentence positions for spacing and suppresses
+garnish on incomplete fragments. Extended markup sends one masked document through the pipeline with opaque
+protected spans. See [translation controls](../functional/translation-controls.md).

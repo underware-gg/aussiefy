@@ -4,7 +4,7 @@
 
 # User documentation
 
-How to install aussiefy'n get things done with it. So anyway, these guides are task\-oriented; for exactly what every
+How to install aussiefy'n get things done with it. These guides are task\-oriented; for exactly what every
 command'n option does, see the [functional reference](../functional/README.md).
 
 | Guide | Summary |

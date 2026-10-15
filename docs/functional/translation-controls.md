@@ -52,14 +52,14 @@ aussiefy translate "Read the API documentation." --document-type custom --docume
 | `perform` | Boolean: include performance craft guidance |
 | `embellishment_guidance` | Text: replace embellishment guidance in the brief |
 
-All controls have the same names'n meaning in Python, CLI, MCP and yarn sessions. Results'n explain mode
+Now, all controls have the same names'n meaning in Python, CLI, MCP and yarn sessions. Results'n explain mode
 report the requested type, resolved type'n effective behaviours. Auto resolves against the complete original,
-including in Markdown'n when checking a draft. `guide` Strewth, has no source text, so Auto is an error there; select
-Stone the flamin' crows, General or a named type. So anyway, Markdown syntax protection is independent of document behaviour.
+including in Markdown'n when checking a draft. `guide` has no source text, so Auto is an error there; select
+General or a named type. Well, Markdown syntax protection is independent of document behaviour.
 
 `english=` / `--english` selects `us`, `uk`, `auto` or `none`. The default comes from the profile \(`auto` in
-Jeez, the bundled profiles\). Well, auto uses American spellings to infer US English; ambiguous British words such as
-“Tell ya what, pants” need `uk`. `none` disables dialect swaps. So anyway, Plain Australian equivalents \(faucet → tap\) apply at every
+the bundled profiles\). Auto uses American spellings to infer US English; ambiguous British words such as
+“pants” need `uk`. `none` disables dialect swaps. Plain Australian equivalents \(faucet → tap\) apply at every
 level, separately from slang. `dialect.yaml` owns the vocabulary'n technical/genre exclusions; source
 quotes'n mentioned words have their own protections. POS tags help distinguish nouns, verbs and names;
 the small bundled tagger runs offline without NLTK.
@@ -67,12 +67,12 @@ the small bundled tagger runs offline without NLTK.
 ## Document modes
 
 The explicit [`--markdown` / `markdown=True`](markdown.md) mode preserves whole links, tables and HTML,
-returns `DocumentResult`, Struth, and permits offline ngram/disabled fallback only. It resolves genre and English
+returns `DocumentResult`, and permits offline ngram/disabled fallback only. It resolves genre and English
 once for the whole document'n retains separate source/output ranges for each rewritten unit.
 
-Crikey, the imported `--markup markdown|mdx|auto` / `markup=` contract is an **extended document mode**. It uses opaque
+The imported `--markup markdown|mdx|auto` / `markup=` contract is an **extended document mode**. It uses opaque
 protected spans while translating sentence context, including eligible link labels, table cells and JSX
-Strewth, children; attributes, code, headings, paths, maths'n destination syntax stay protected. Anyway, table/list rows
+children; attributes, code, headings, paths, maths'n destination syntax stay protected. Table/list rows
 suppress garnish. Well, auto detects the document dialect from the text. It returns the engine's `Result`, with
 source\-relative records restored to the original source. This contract also applies to planning, lint,
 verification'n yarn; a rewrite that drops or duplicates a protected span is refused.
@@ -86,7 +86,7 @@ Tests: [genre](../../tests/functional/test_genre.py), [dialect](../../tests/func
 [strict Markdown](../../tests/functional/test_markdown.py).
 
 Lint suggestions inherit the original's selected document policy'n source\-English context, including custom dictionary policies,
-even when the draft sounds like a story. Anyway, Held dialect wording is excused only with the same folded surface
-Bloody hell, and occurrence count; explicitly kept quotes retain their original spellin' too. Planning offers riffs only
+even when the draft sounds like a story. Held dialect wording is excused only with the same folded surface
+and occurrence count; explicitly kept quotes retain their original spellin' too. Planning offers riffs only
 where the resolved settin' permits them: deadset offers none, and strict news/instructions/docs/official
 forms below troppo offer none. Anyway, the dinkum guidance preserves the force of obligations'n findings.

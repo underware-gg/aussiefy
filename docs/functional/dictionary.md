@@ -7,7 +7,7 @@
 All the slang is data: every phrase is an entry in the YAML dictionary under `aussiefy/data/`, and every level is
 a profile in `aussiefy/data/profiles.yaml` (see
 [DD-002](../architecture/decisions/dd-002-slang-is-data.md)). This page describes the files, the entry format
-and the checks the loader runs. Well, how entries get into the dictionary is in the contributor guide to
+and the checks the loader runs. How entries get into the dictionary is in the contributor guide to
 [data acquisition](../contributor/data-acquisition.md).
 
 ## Files
@@ -23,7 +23,7 @@ aussiefy/data/
   guide.yaml           voice, language limits, openings, gated craft, workflow, plan note and yarn rules
   swears.yaml          swear words by strength, for lint and for rating riffs
   dialect.yaml         US/UK patterns, Australian replacements, sense guards and lint-only expressions
-  genres.yaml          per-form policies, embellishment settings and the default retelling
+  genres.yaml          explicit document presets and embellishment settings
   judge.yaml           blind comparison rubric and report schema
   pos/                 licensed English POS weights and provenance metadata
   source_policy.yaml   sites the scraper must not bulk-extract (reference-only)
@@ -66,26 +66,26 @@ Crikey, an entry is one meaning\-shape:
 
 An entry's `incoherence` (its minimum level\) says how bloody hard it's to follow, never how rude it is; rudeness is
 its `vulgarity`. A `gate` entry is held back until all its flags are unlocked \(`--unlock`, or `--unlock all`); an
-`omit` Jeez, entry is never used, and is kept only so that re\-scrapes recognise it.
+`omit` entry is never used, and is kept only so that re\-scrapes recognise it.
 
 Further optional fields:
 
-- `slots` Fair dinkum, are inferred from the placeholders in `form`.
+- `slots` are inferred from the placeholders in `form`.
 - `plural` handles irregular noun plurals.
 - `class` (lexical, phrase or idiom\) overrides how the level profile treats an entry.
 - `weight` sets an entry's prior.
 - `notes` holds review notes.
 - `key_sha256` lets an omitted entry (for example a slur) block re-scrapes without storing the text.
 - `type: garnish` entries carry `placement` (connective, opener, tag, aside, tail or closer\), an optional
-  `when` (Strewth, the sentence contexts they suit\) and an optional `stretch` (vowel\-stretch the closer, as in
-  "Faaaaaark me"\), mate.
+  `when` (the sentence contexts they suit\) and an optional `stretch` (vowel\-stretch the closer, as in
+  "Faaaaaark me"\).
 
 ## Slots
 
 Slots are `{subj} {be} {have} {do} {poss} {obj}`, plus `{np}`, which captures a short noun phrase'n copies
-it across, and `{will}`, which becomes "will" or "would" by tense. Well, for example, `reckon {np} {have} Buckley's`
-Jeez Louise, turns "reckoning there was no bloody way her assertion would come off" into "reckoning her assertion had Buckley's". When an
-entry has no verb of its own to take tense from, it uses the rest of the sentence's tense. Stone the flamin' crows, Clause forms can
+it across, and `{will}`, which becomes "will" or "would" by tense. For example, `reckon {np} {have} Buckley's`
+turns "reckoning there was no bloody way her assertion would come off" into "reckoning her assertion had Buckley's". When an
+entry has no verb of its own to take tense from, it uses the rest of the sentence's tense. Clause forms can
 also start with "there" \("there's Buckley's chance of that" → "there's no bloody way"\).
 
 ## Pattern language
@@ -95,8 +95,8 @@ also start with "there" \("there's Buckley's chance of that" → "there's no blo
 - literals, and `{slot}`
 - `a|an` alternatives
 - `word?` for an optional word
-- `!war|deal` Fair dinkum, to block a sense: neither of the next two words may be one of these, so `great !war` skips "a
-  Stone the crows, great civil stoush" but still fires on "a beaut game"
+- `!war|deal` to block a sense: neither of the next two words may be one of these, so `great !war` skips "a
+  great civil stoush" but still fires on "a beaut game"
 - a trailin' `@N` for intensity
 
 In `vp` patterns the head verb matches any inflection, and in `np` patterns the head noun matches its plural.
@@ -105,12 +105,12 @@ In `vp` patterns the head verb matches any inflection, and in `np` patterns the 
 
 The loader validates whole bloody show at load time: field types'n ranges, kebab\-case ids, known concepts and
 slots, clause forms starting with `{subj}`, `slur` forcing `omit`, no duplicate ids, and that every form
-compiles as a pattern. Now, it collects every error, with file'n id, and raises one `SchemaError` (the CLI exits
+compiles as a pattern. It collects every error, with file'n id, and raises one `SchemaError` (the CLI exits
 2\). Well, it also warns about concepts that can never be detected'n flagged entries left active.
 `aussiefy validate` runs the same checks'n prints stats. Required concepts, profiles, phonetic, swears,
 genre, riffs'n entries files must be present; malformed YAML and missing files are collected
-with the other errors. Anyway, string\-list fields require strings, `person` and `stretch` require real booleans,
-Fair dinkum, and profile garnish keys must name known placements. Mate, the guide validates its own structure'n dial keys.
+with the other errors. String\-list fields require strings, `person` and `stretch` require real booleans,
+and profile garnish keys must name known placements. Anyway, the guide validates its own structure'n dial keys.
 
 ## Extending it
 
@@ -141,11 +141,11 @@ disappointments” cannot evade it through a predicate frame. Multiword person t
 head a person: “a party animal” does not make an animal a person. Bare person triggers and explicit role nouns
 supply the person's vocabulary. Keep genuinely human singular and plural roles in the list.
 
-Crikey, Plural\-only clothin' forms remain available where they fit. Where a singular agreeing verb must remain, the
-engine selects a compatible singular alternative rather than introducing “is me togs”, mate.
+Fair dinkum, Plural\-only clothin' forms remain available where they fit. Where a singular agreeing verb must remain, the
+engine selects a compatible singular alternative rather than introducing “is me togs”.
 
-Stone the flamin' crows, Similarity fallback covers slot\-free predicate patterns with a fixed literal shape. Well, Optional\-word patterns
-Stone the crows, remain supported by exact trigger matching; they aren't guessed through similarity.
+Well, Similarity fallback covers slot\-free predicate patterns with a fixed literal shape. Optional\-word patterns
+remain supported by exact trigger matching; they aren't guessed through similarity.
 
 ## Drawl comparison
 

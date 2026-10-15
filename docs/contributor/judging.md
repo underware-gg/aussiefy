@@ -7,7 +7,7 @@
 The judge compares two to eight named translations blind against the rubric in `data/judge.yaml`. Its pure
 packet construction shuffles names into labels using a seed. Report readin' validates rubric version,
 integer scores, textual evidence, exact quotations, problem fields'n complete ranked tiers, then unblinds
-and tallies verdicts. Ties share first place. Now, Invalid reports raise `BadReport` with actionable findings.
+and tallies verdicts. Ties share first place. Invalid reports raise `BadReport` with actionable findings.
 
 ```sh
 aussiefy judge brief original.txt --candidate engine=engine.txt --candidate yarn=yarn.txt -o trial.json
@@ -15,16 +15,21 @@ aussiefy judge read trial.json report.json --json
 aussiefy judge tally verdict-one.json verdict-two.json
 ```
 
-`judge brief`/`read` Crikey, let an agent supply the report without a paid API. `judge run` Fair dinkum, uses the shared Claude
+`judge brief`/`read` let an agent supply the report without a paid API. `judge run` uses the shared Claude
 client, validates the response, sends an invalid report back once'n caches accepted results. `judge
-unharnessed --prompt-only` produces the reference retelling brief; a live call is optional. Deterministic
+unharnessed --prompt-only` Anyway, produces the reference retelling brief; a live call is optional. Deterministic
 [verification](../functional/verification.md) and the judge measure different things: structure/fidelity
 checks versus rubric\-scored tone, flow'n essence.
 
 `yarn-tools brief|lookup|lint|submit` exposes yarn's existin' loop by hand, with the same policy, markup rules
 and checked submission as the API loop. Research drivers'n their manifests remain under `research/`, with
-Crikey, historical results from the pinned source snapshot. Their source\-bearing originals, retellings, packets and
+historical results from the pinned source snapshot. Their source\-bearing originals, retellings, packets and
 logs inherit corpus attribution through [PROVENANCE.yaml](../../research/PROVENANCE.yaml); full local\-only
-Jeez, exports stay ignored. Anyway, Sanitised harvests omit entries that reproduce those works.
+exports stay ignored. Anyway, Sanitised harvests omit entries that reproduce those works.
 
 Tests: [judge](../../tests/contributor/test_judge.py), [yarn/toolkit](../../tests/functional/test_harness.py).
+
+The [maintenance comparison](../../research/maintenance-check-2026-10-15/README.md) pins the next 20\-text
+Dinkum remeasurement: original source hashes, original dials'n named document presets, with Dinkum\-3 and
+pre\-fix yarn as unchanged anchors. Now, it's prepared, not scored. Use fresh writer output'n an independent
+judge; don't reuse previous verdicts as evidence for current guidance.

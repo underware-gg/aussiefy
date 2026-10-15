@@ -9,13 +9,13 @@ python -m pytest -q        # the full suite, including golden outputs and the re
 ruff check .               # unused and undefined names (pyflakes rules only; layout is left to the author)
 ```
 
-Jeez, Tests have one primary owner in `tests/{user,functional,architecture,contributor}/`, matching the
+Tests have one primary owner in `tests/{user,functional,architecture,contributor}/`, matching the
 documentation layers. [The test indexes](../../tests/README.md) list every module'n its responsibility;
 the [functional specification](../functional/README.md#tests-as-behavioural-specification) links behaviour to
-its checks. Strewth, Shared corpus, fixtures, `conftest.py` and reference helpers remain at tests root.
+its checks. Shared corpus, fixtures, `conftest.py` and reference helpers remain at tests root.
 
-Run one layer with `python -m pytest -q tests/functional` (or another layer folder\). Well, the full command above
-collects them all. Struth, when moving tests, compare every collected test identity'n parameter case, update
+Run one layer with `python -m pytest -q tests/functional` (or another layer folder\). The full command above
+collects them all. When moving tests, compare every collected test identity'n parameter case, update
 source/fixture/documentation paths'n the exact promotion skip allowlist, and run the full suite.
 
 `tests/contributor/test_docs.py` parses authoritative plain sources and ungenerated current docs/skill command examples, including inline commands,
@@ -31,15 +31,15 @@ requires `python scripts/publish_docs.py check`, which enforces fresh output and
 for every sentence at every level at seeds 0 and 1, and for every reference text at every level at seed 0.
 `tests/architecture/test_golden.py` compares against it.
 
-Fair dinkum, after an intended change to the engine or the dictionary, regenerate it'n review the diff like any other
+After an intended change to the engine or the dictionary, regenerate it'n review the diff like any other
 code change:
 
 ```sh
 python scripts/regen_golden.py && git diff tests/corpus/golden.yaml
 ```
 
-Never edit `golden.yaml` Bugger me, by hand, and don't accept a regenerated diff without readin' it: an unexpected
-Fair dinkum, change is a regression until shown otherwise.
+Never edit `golden.yaml` by hand, and don't accept a regenerated diff without readin' it: an unexpected
+change is a regression until shown otherwise.
 
 ## Reference texts
 
@@ -54,12 +54,12 @@ checks them at every level across 20 seeds. Four of them, for example:
 | The Hare and the Tortoise (Aesop, Townsend 1867) | Archaic syntax: "fell fast asleep" is not about speed |
 | Waltzing Matilda (popular 1903 lyrics) | Existing slang: swagman, billabong and jumbuck survive, with nothing to translate and line breaks intact |
 
-Fair dinkum, every run is also checked for well\-formed output: no broken punctuation, correct a/an, openers followed by
+Every run is also checked for well\-formed output: no broken punctuation, correct a/an, openers followed by
 lower case, and the same garnish placement never in adjacent sentences.
 
 ## Target translations and the benchmark
 
-`tests/corpus/targets/` Struth, holds target translations, such as a refined LLM renderin' of Gettysburg at level 5.
+`tests/corpus/targets/` holds target translations, such as a refined LLM renderin' of Gettysburg at level 5.
 `aussiefy compare` measures how much of a target's slang the engine reproduces across seeds, two ways:
 
 - **Aligned spans,** for close translations: `test_benchmark_against_target_translation` holds the engine to
@@ -67,7 +67,7 @@ lower case, and the same garnish placement never in adjacent sentences.
 - **Vocabulary overlap,** for targets that restructure or extend the text, like the agent's Goldilocks:
   `test_goldilocks_benchmark_vocabulary_overlap` holds it to 60% of the dictionary phrases in that target.
 
-Both bars should rise as the dictionary improves, no matter what some drongo reckons. Running `aussiefy dev harvest` on a target is how its misses become candidate
+Anyway, both bars should rise as the dictionary improves. Running `aussiefy dev harvest` on a target is how its misses become candidate
 entries \(see [data acquisition](data-acquisition.md)).
 
 ## Classic Australian texts
@@ -82,10 +82,10 @@ used as source material for the classics research round'n as test input. Its rul
 conversation'n workplace/technical registers. Anyway, each group has an attributed source/licence manifest. A
 bounded three\-case level/seed check covers each committed input for repeatability'n source/record
 integrity; plain `.txt` inputs also retain line counts. Strict Markdown tests cover syntax, hard wraps,
-Stone the crows, whole\-document context, unit offsets'n public warnings; extended markup tests include the MDX corpus. This doesn't extend the original 20\-seed, five\-level reference sweep.
+whole\-document context, unit offsets'n public warnings; extended markup tests include the MDX corpus. This doesn't extend the original 20\-seed, five\-level reference sweep.
 
 Stone the crows, the 15 pinned Interfold MDX pages now have confirmed LGPL redistribution evidence'n committed attribution.
-Remote\-only Rockwell/Kieran material'n full research exports stay local. Anyway, only the
+Remote\-only Rockwell/Kieran material'n full research exports stay local. Only the
 existin' two local\-corpus tests can skip; new corpus checks run without private files or network access.
 
 ## Copyrighted texts, kept local
@@ -99,5 +99,5 @@ those tests skip. How to fetch them, add your own, and keep Aussie versions alon
 
 ## LLM modes
 
-The LLM modes are tested against scripted clients at the API boundary; the suite never calls Claude. Running
-Stone the flamin' crows, them against the live API is an open item: see [limitations](../functional/limitations.md).
+Well, the LLM modes are tested against scripted clients at the API boundary; the suite never calls Claude. Running
+them against the live API is an open item: see [limitations](../functional/limitations.md).

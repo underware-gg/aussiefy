@@ -86,6 +86,12 @@ credits:
     expect:
       wordnet: WordNet 3.0
 first_party:
+- glob: research/maintenance-check-2026-10-15/README.md
+  reason: Project-authored implementation analysis and measured findings; no copied corpus text.
+- glob: research/maintenance-check-2026-10-15/model-check.json
+  reason: Project evaluation queries/results and model/dictionary hashes; no model vectors or corpus text copied.
+- glob: research/maintenance-check-2026-10-15/retelling-study.yaml
+  reason: Project comparison configuration and source/anchor path hashes; referenced texts are not reproduced.
 - glob: aussiefy/**/*.py
   reason: Project code, including an independent BERT-compatible tokeniser; not a port.
   exclude:

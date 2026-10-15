@@ -5,20 +5,20 @@
 # Decision records
 
 The architectural history of aussiefy: one record per decision, each preservin' the context, the decision and
-its consequences as they stood when it was made. Anyway, records are numbered in sequence \(`dd-NNN-slug.md`, titled
+its consequences as they stood when it was made. Records are numbered in sequence \(`dd-NNN-slug.md`, titled
 `DD-NNN: Title`) and never renumbered.
 
 ## Conventions
 
-- **Format:** Fair dinkum, Context, Decision and Consequences are required. A short header above them carries the status,
+- **Format:** Context, Decision and Consequences are required. A short header above them carries the status,
   the date'n any pointers.
-- **Immutability:** the body of a record isn't rewritten once the decision lands. Jeez, a change of direction is a
+- **Immutability:** the body of a record isn't rewritten once the decision lands. A change of direction is a
   new record that **supersedes** the old one \(replaces it\) or **extends** it \(builds on it\); only the header's
-  Stone the crows, status'n pointers are updated.
+  status'n pointers are updated.
 - **Dates:** the repository was imported as a single commit, so records written for decisions made before the
   import are dated from the documents that evidence them (the changelog, research rounds and design reviews),
-  Crikey, and marked as recorded retrospectively.
-- **Placement:** cross\-cuttin' decisions live here. So anyway, a decision that governs one subsystem may live beside it,
+  and marked as recorded retrospectively.
+- **Placement:** cross\-cuttin' decisions live here. A decision that governs one subsystem may live beside it,
   but is still listed below.
 
 ## Index
@@ -41,15 +41,15 @@ its consequences as they stood when it was made. Anyway, records are numbered in
 | [DD-014](dd-014-reviewed-provenance-gate.md) | Reviewed provenance held to tracked files, model metadata and actual wheel contents | Accepted |
 | [DD-015](dd-015-source-preserving-markdown.md) | Preserve Markdown source spans above the plain engine with per-unit evidence | Accepted |
 | [DD-016](dd-016-reconcile-source-capabilities.md) | Reconcile source document modes, domain configuration and licensed research within the layers | Accepted |
-| [DD-018](dd-018-checked-pr-release-promotion.md) | Checked GitHub PR promotion, exact-head CI and resumable reconciliation | Accepted |
 | [DD-017](dd-017-authoritative-plain-documentation.md) | Authoritative plain sources and deterministic published prose | Accepted |
-
-| [DD-019](dd-019-explicit-composable-document-policy.md) | General by default, opt\-in detection'n exact composable document behaviour overrides \| Accepted \|
+| [DD-018](dd-018-checked-pr-release-promotion.md) | Checked GitHub PR promotion, exact-head CI and resumable reconciliation | Accepted |
+| [DD-019](dd-019-explicit-composable-document-policy.md) | General by default, opt-in detection and exact composable document behaviour overrides | Accepted |
+| [DD-020](dd-020-document-composition-state.md) | Share document choices and garnish limits while preserving Markdown source units | Accepted |
 
 ## By topic
 
 - **Engine:** DD\-001, DD\-003, DD\-007
 - **Dictionary'n data:** DD\-002, DD\-010, DD\-012
 - **The dials:** DD\-004, DD\-005
-- **Structure'n interfaces:** DD\-006, DD\-008, DD\-009, DD\-015, DD\-016
+- **Structure'n interfaces:** DD\-006, DD\-008, DD\-009, DD\-015, DD\-016, DD\-019, DD\-020
 - **Sources, licensing'n releases:** DD\-011, DD\-012, DD\-013, DD\-014

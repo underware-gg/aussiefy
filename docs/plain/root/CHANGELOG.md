@@ -5,6 +5,9 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Share Markdown document choices, garnish limits and sentence spacing; prevent mid-sentence fragment openers and repeated per-unit closers.
+- Reconcile documentation and test indexes, verify Gettysburg wording provenance, and record the offline model baseline plus the pending independent retelling study.
+
 - Preserve concept metadata and hand edits when reapplying dictionary rounds; support explicit concept fixes, entryless guards and reviewed second senses.
 
 - Prevent adjacent-sentence reuse from producing yarn moved-phrase false warnings; keep broader fidelity alignment.

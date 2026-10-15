@@ -5,7 +5,7 @@
 # Contributing to aussiefy
 
 These are the baseline rules for workin' on aussiefy, for people'n agents alike. The rest of the contributor
-Fair dinkum, documentation \(testing, data acquisition, releases\) is indexed in
+documentation \(testing, data acquisition, releases\) is indexed in
 [docs/contributor/README.md](docs/contributor/README.md).
 
 ## Set up
@@ -31,7 +31,7 @@ Both must pass before a commit. The suite includes golden outputs and the refere
 [testing](docs/contributor/testing.md)).
 
 Stone the flamin' crows, the suite also checks tracked provenance'n generated third\-party notices. Stage new files/declarations
-Jeez Louise, before checking; promotion checks the exact committed checkout'n additionally inspects a built wheel.
+before checking; promotion checks the exact committed checkout'n additionally inspects a built wheel.
 See [licensing and provenance](docs/contributor/licensing.md) for the commands'n evidence requirements.
 
 ## Documentation
@@ -43,28 +43,28 @@ checked against plain sources while development outputs may be stale. See
 
 ## Conventions
 
-- **Never hard\-code slang in the engine.** Bugger me, every phrase is a dictionary entry'n every level is a profile in
+- **Never hard\-code slang in the engine.** Every phrase is a dictionary entry'n every level is a profile in
   `aussiefy/data/profiles.yaml` ([DD-002](docs/architecture/decisions/dd-002-slang-is-data.md)).
-- **Keep output deterministic.** Jeez, Random choices are seeded rolls keyed by context, so the same text, level and
+- **Keep output deterministic.** Random choices are seeded rolls keyed by context, so the same text, level and
   seed always give the same result \([DD-003](docs/architecture/decisions/dd-003-deterministic-context-keyed-rolls.md)).
 - **Respect the layering.** The engine'n the dictionary import nothing from the toolkit, the LLM modes, the
   surfaces or the maintainer tools \([package layout](docs/architecture/package-layout.md)).
 - **Change every surface together.** A toolkit parameter has the same name and default in the Python API, the
   CLI, the MCP server and yarn mode's tools; `tests/functional/test_interfaces.py` checks this.
 - **Keep remote\-only full texts local.** Copyrighted full texts without confirmed redistribution permission
-  Struth, live in the gitignored `tests/corpus/local/`. Licensed corpus material needs provenance'n attribution;
-  Stone the flamin' crows, the previously audited Howl excerpt has an exact declared path, notice header'n word cap. Well, new exceptions
+  live in the gitignored `tests/corpus/local/`. Licensed corpus material needs provenance'n attribution;
+  the previously audited Howl excerpt has an exact declared path, notice header'n word cap. New exceptions
   need review \(see [licensing](docs/contributor/licensing.md) and [local texts](tests/corpus/local/README.md)).
 - **Keep the docs in step.** Update the documentation with the change that affects it, and record a new
   architectural decision as a decision record in
   [docs/architecture/decisions/](docs/architecture/decisions/README.md).
 - **Record user\-visible changes** under `[Unreleased]` in [CHANGELOG.md](CHANGELOG.md) as they land.
 - **Write Australian spellin'** in documentation'n user\-facin' messages \(colour, organise, licence as a
-  noun\). Well, Data is different: trigger patterns and `aussiefy/data/dialect.yaml` must match plain and US
+  noun\). Data is different: trigger patterns and `aussiefy/data/dialect.yaml` must match plain and US
   English as written.
 
 ## Branches and releases
 
-Work happens on `dev`. `main` Crikey, holds releases only: each is one squashed, tagged `vX.Y.Z` commit made by
+Work happens on `dev`. `main` holds releases only: each is one squashed, tagged `vX.Y.Z` commit made by
 `scripts/promote.py`. Don't commit to `main` directly. The procedure is in
 [docs/contributor/releasing.md](docs/contributor/releasing.md).

@@ -1,0 +1,363 @@
+status: awaiting-fresh-writer-and-independent-judge
+rubric_version: 3
+cases:
+- name: news__bob_weir_obituary
+  source: tests/corpus/everyday/news/bob_weir_obituary.txt
+  source_sha256: 08fb4c53f5c096e41b16eb66eb08e3ade29a2e4df40f6d2d7e00b61ea33c540d
+  policy:
+    level: 3
+    vulgarity: 1
+    seed: 1
+    embellishment: dinkum
+    document_type: news
+    document_config: {}
+    markup: text
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/news__bob_weir_obituary/dinkum-3.txt
+      sha256: 3d86bae9e061867e818f2af4f029e83dd59038e7958c8c5ad06b6456e78f0dec
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/news__bob_weir_obituary/yarn-dinkum.txt
+      sha256: 8ba122748146698ee8eec9966e762bcba61fa6f91690035750d4981e861bdd4c
+- name: news__boston_area_forecast_discussion
+  source: tests/corpus/everyday/news/boston_area_forecast_discussion.txt
+  source_sha256: 7b59acd0338269dbd74287071a9b1f9f06ed90a65539e6e8f272849e3f9336dc
+  policy:
+    level: 4
+    vulgarity: 1
+    seed: 1
+    embellishment: dinkum
+    document_type: news
+    document_config: {}
+    markup: text
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/news__boston_area_forecast_discussion/dinkum-3.txt
+      sha256: 13aaf3520c8ce6b1e9cebbb480c5b931481dbef96b2ac481fe29e1636df49887
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/news__boston_area_forecast_discussion/yarn-dinkum.txt
+      sha256: da527c314cf9e47e40fc36c3e2e7f89ec76ffac8d2c6a3682ca666201ca23cd2
+- name: news__ford_square_dance_1925
+  source: tests/corpus/everyday/news/ford_square_dance_1925.txt
+  source_sha256: 865cc7fef5fe5dbdadf63aa3f326e5a4be37e634fd67ad8578fdc42be97956d0
+  policy:
+    level: 5
+    vulgarity: 2
+    seed: 1
+    embellishment: dinkum
+    document_type: news
+    document_config: {}
+    markup: text
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/news__ford_square_dance_1925/dinkum-3.txt
+      sha256: 5a77345a173c804386949dbaabc7fa5f67d8d33b6a2615ea56ddc8a89c0d07f2
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/news__ford_square_dance_1925/yarn-dinkum.txt
+      sha256: 4d00ad5ce1d6807897a7c312019513ea0cce161bcfe2bbe76b8c8bad97cb173c
+- name: news__julio_teheran_retires
+  source: tests/corpus/everyday/news/julio_teheran_retires.txt
+  source_sha256: f748ebe8271847cabb5c4cd5dd98f2263b1dcc7981d7e08ccb7e2e3b69b107fd
+  policy:
+    level: 2
+    vulgarity: 0
+    seed: 1
+    embellishment: dinkum
+    document_type: news
+    document_config: {}
+    markup: text
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/news__julio_teheran_retires/dinkum-3.txt
+      sha256: 2c7cf77f8db45e31f741495fa92d41558ad068c4bd6ed0e892a5c32447f0194b
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/news__julio_teheran_retires/yarn-dinkum.txt
+      sha256: ede3bcd586c7e41f1601b52b884b62cdf39648a7f1e985f84a3f36b904ac2a7b
+- name: news__mount_vernon_hemlock_storm
+  source: tests/corpus/everyday/news/mount_vernon_hemlock_storm.txt
+  source_sha256: cde408f9ed16bb9af9d07b00a821cd8954ec0421ef829f142ae41eb2eab4dc15
+  policy:
+    level: 3
+    vulgarity: 1
+    seed: 1
+    embellishment: dinkum
+    document_type: news
+    document_config: {}
+    markup: text
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/news__mount_vernon_hemlock_storm/dinkum-3.txt
+      sha256: 9b7d4ecdeb1a97f18b2fe9e3cb2283c39b70842dc304a3065cb75f29e93500b1
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/news__mount_vernon_hemlock_storm/yarn-dinkum.txt
+      sha256: c5ecc825dcfbad046727358c98d4b4f7d5636b8aa6d32ae1c761e933f1f4839f
+- name: news__nasa_nfl_flyover
+  source: tests/corpus/everyday/news/nasa_nfl_flyover.txt
+  source_sha256: fc90c38d8fc39ec05b714402707838c36456dac2e9800f4b926b1464c8218cde
+  policy:
+    level: 4
+    vulgarity: 1
+    seed: 1
+    embellishment: dinkum
+    document_type: news
+    document_config: {}
+    markup: text
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/news__nasa_nfl_flyover/dinkum-3.txt
+      sha256: 27a2a1f4cb8cedbcd5b75d261830cfa3de9e983faa6dd11abde1a50708e11be9
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/news__nasa_nfl_flyover/yarn-dinkum.txt
+      sha256: 4b199f5eb04a49312f9f689a1664b245e0787aea7ff7fd34615df46602ea8611
+- name: news__nashville_kurdish_community_anniversary
+  source: tests/corpus/everyday/news/nashville_kurdish_community_anniversary.txt
+  source_sha256: 685c0f79f2b5e946d5400b326c3e378ffa7052d2f0f750d83d06cde2b7b3e8f8
+  policy:
+    level: 5
+    vulgarity: 2
+    seed: 1
+    embellishment: dinkum
+    document_type: news
+    document_config: {}
+    markup: text
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/news__nashville_kurdish_community_anniversary/dinkum-3.txt
+      sha256: e8ff2c3ffe0448ff53defe1cf02e4e05544e0880b649cc61805f2085466b3363
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/news__nashville_kurdish_community_anniversary/yarn-dinkum.txt
+      sha256: 7cf6a12d9776f66afb0f9114f4b033d30daf8753f0a602fe6e5481c057669281
+- name: news__santa_fe_christmas_tree_permits
+  source: tests/corpus/everyday/news/santa_fe_christmas_tree_permits.txt
+  source_sha256: 711d8ed38c822d8f6f1657e364bfefcfceae82d806a6e6485b1133d0ead24a19
+  policy:
+    level: 2
+    vulgarity: 0
+    seed: 1
+    embellishment: dinkum
+    document_type: news
+    document_config: {}
+    markup: text
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/news__santa_fe_christmas_tree_permits/dinkum-3.txt
+      sha256: 860592fe0f5783a105e5b040731cf75cf3df37ab3f02e1fe76824275c71dde71
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/news__santa_fe_christmas_tree_permits/yarn-dinkum.txt
+      sha256: e8839f3ad03f4d05a5173bbaa2a6f63ebcfc35e4ca51042eda69819113b52dc5
+- name: news__usgs_low_level_survey_flights
+  source: tests/corpus/everyday/news/usgs_low_level_survey_flights.txt
+  source_sha256: 6f833b4068116bba58e2400d1ada38dc04c9fd819487d98e1be516c82297d5cd
+  policy:
+    level: 3
+    vulgarity: 1
+    seed: 1
+    embellishment: dinkum
+    document_type: news
+    document_config: {}
+    markup: text
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/news__usgs_low_level_survey_flights/dinkum-3.txt
+      sha256: 6e94bcc36e9a031b87da934d1e796197a6ae90731b3e82ab6cbd020f9ce24882
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/news__usgs_low_level_survey_flights/yarn-dinkum.txt
+      sha256: 95d7fbcebc4bd84865733decb1486561375103ead82ae65d623cff4c1833ef74
+- name: news__wilbur_crafts_obituary_1922
+  source: tests/corpus/everyday/news/wilbur_crafts_obituary_1922.txt
+  source_sha256: 3d723f1b0d86b54b5e914d8dd36ba01c4419de77e4e3f1d637eaa0091f810d4d
+  policy:
+    level: 4
+    vulgarity: 1
+    seed: 1
+    embellishment: dinkum
+    document_type: news
+    document_config: {}
+    markup: text
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/news__wilbur_crafts_obituary_1922/dinkum-3.txt
+      sha256: 4453f038243a9250a03cb83396112aa4edf53089834a3f9faaccc68e6d860ecf
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/news__wilbur_crafts_obituary_1922/yarn-dinkum.txt
+      sha256: b97a3025029487078aafe4d2e94e4fa7adc710c376bd60d8861f81654b405f4f
+- name: news__yellowstone_fishing_restrictions_lifted
+  source: tests/corpus/everyday/news/yellowstone_fishing_restrictions_lifted.txt
+  source_sha256: 780553e0fa3e18500a38031bceea2982f579a9778f10e0ae0376f5daca880878
+  policy:
+    level: 5
+    vulgarity: 2
+    seed: 1
+    embellishment: dinkum
+    document_type: news
+    document_config: {}
+    markup: text
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/news__yellowstone_fishing_restrictions_lifted/dinkum-3.txt
+      sha256: ce9a57cd8ba2f87dee10bccf99558ede17d8a6633805a9ba7187f936d3efc1d9
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/news__yellowstone_fishing_restrictions_lifted/yarn-dinkum.txt
+      sha256: 747542e8d28331495c297fca0c3272babc0745ac663ca1066e6e3c5e22c552fd
+- name: workplace__cloud_gov_pages_why
+  source: tests/corpus/everyday/workplace/cloud_gov_pages_why.md
+  source_sha256: b3addf37770f77886deeedc4f24c6c2ef567c8b4f6ddeca03794e3b6b94b26ef
+  policy:
+    level: 3
+    vulgarity: 1
+    seed: 1
+    embellishment: dinkum
+    document_type: official
+    document_config: {}
+    markup: markdown
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/workplace__cloud_gov_pages_why/dinkum-3.txt
+      sha256: b5ded96bf0e161666ebc97a73f56f0a70c9c9e12437a67c85200151ed97230fc
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/workplace__cloud_gov_pages_why/yarn-dinkum.txt
+      sha256: 294715cc1133c6ff3e67edd8f3bfcbcdcf41c9d05093d3fbd4dd6c4ee5030899
+- name: workplace__fomc_minutes_policy_actions
+  source: tests/corpus/everyday/workplace/fomc_minutes_policy_actions.txt
+  source_sha256: a998066f93e983cdee154aaffe43ef3cd3cb3a5649634379ae6b768e2676ab0e
+  policy:
+    level: 4
+    vulgarity: 1
+    seed: 1
+    embellishment: dinkum
+    document_type: official
+    document_config: {}
+    markup: text
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/workplace__fomc_minutes_policy_actions/dinkum-3.txt
+      sha256: b756620b85c1dd8bcc51d97ad3f82c72f3f31b87558d3d5e1503d5633bc4b5d2
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/workplace__fomc_minutes_policy_actions/yarn-dinkum.txt
+      sha256: 4ecbeb6d78e842f227ea9b7e3ff6941ecaea74ec26aec86a958cdca78cb4e7a3
+- name: workplace__github_gifts_policy
+  source: tests/corpus/everyday/workplace/github_gifts_policy.md
+  source_sha256: 0e37a69a34ce7cfe30bfb15b2962eed94f35f37e264bb872b58676276d39da60
+  policy:
+    level: 2
+    vulgarity: 0
+    seed: 1
+    embellishment: dinkum
+    document_type: official
+    document_config: {}
+    markup: markdown
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/workplace__github_gifts_policy/dinkum-3.txt
+      sha256: 235891b3fc260e7770960895ec0b363db4b77d044f0c07a5f9356598da33cec3
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/workplace__github_gifts_policy/yarn-dinkum.txt
+      sha256: 136b1f18b481447f991a623eaac0a7ad2addf04007f83d33bac7eca8ed435cf9
+- name: workplace__github_terms_account_terms
+  source: tests/corpus/everyday/workplace/github_terms_account_terms.md
+  source_sha256: 0315f7a2c1d52c3c282b8adbd13aa8bfc032f7e43ccd45a5577a94a856fe1484
+  policy:
+    level: 3
+    vulgarity: 1
+    seed: 1
+    embellishment: dinkum
+    document_type: official
+    document_config: {}
+    markup: markdown
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/workplace__github_terms_account_terms/dinkum-3.txt
+      sha256: cf557ca99a710fc3a374ddf69e68a0f038f0efce05022ce538aa15aeb8c27d79
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/workplace__github_terms_account_terms/yarn-dinkum.txt
+      sha256: a00635e857ae0ab773c0c2fbaf891b694e5747409211b76e2141dc1aac3f6888
+- name: workplace__login_gov_common_scams
+  source: tests/corpus/everyday/workplace/login_gov_common_scams.md
+  source_sha256: 9fde30ebf5074840a61111e5d21638be7128a28fba9fa9f1aef844453a8e055e
+  policy:
+    level: 5
+    vulgarity: 2
+    seed: 1
+    embellishment: dinkum
+    document_type: official
+    document_config: {}
+    markup: markdown
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/workplace__login_gov_common_scams/dinkum-3.txt
+      sha256: 08addef39a8b64c167adc4356daad0693fffb4f4cdb8f6fd0f5848e7d6f7e220
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/workplace__login_gov_common_scams/yarn-dinkum.txt
+      sha256: b61e310f68456ddad3d3505e3c48a726e0a75ba23b7e529e94ec25943f6821ff
+- name: workplace__nara_technical_writer_editor_job
+  source: tests/corpus/everyday/workplace/nara_technical_writer_editor_job.txt
+  source_sha256: a129233aa5abd40b2d5840f17388202e9079091bcad3e9b31dc33528047d2807
+  policy:
+    level: 3
+    vulgarity: 1
+    seed: 1
+    embellishment: dinkum
+    document_type: official
+    document_config: {}
+    markup: text
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/workplace__nara_technical_writer_editor_job/dinkum-3.txt
+      sha256: 73a8fe2fe37fe8076418f05bbf4571d6a16587202830eba551cf6fa8bcb5246f
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/workplace__nara_technical_writer_editor_job/yarn-dinkum.txt
+      sha256: 432013eb47a8bbec6878e9d2f626f205e4ae9ef4ed0a9378c34bdacabcd024a9
+- name: workplace__tts_travel_comp_time
+  source: tests/corpus/everyday/workplace/tts_travel_comp_time.md
+  source_sha256: d7b6e6404bfe23396611d538c249b2c199ee1dc37f45662c513d4350d9ab3afc
+  policy:
+    level: 2
+    vulgarity: 0
+    seed: 1
+    embellishment: dinkum
+    document_type: official
+    document_config: {}
+    markup: markdown
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/workplace__tts_travel_comp_time/dinkum-3.txt
+      sha256: 952f670e249c3c3f72fe0df2e8e9d5ca0e64c26f2866ec4a2362e43e351b855d
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/workplace__tts_travel_comp_time/yarn-dinkum.txt
+      sha256: 22d8e99dffa5fcdf105cd2146d5adfeed89be957bcf79edcba5b72e30a7b3b93
+- name: interfold__learn_use_cases
+  source: tests/corpus/everyday/interfold/learn_use_cases.mdx
+  source_sha256: da4514ed405a66ef90676995742bc2f01bbccbf557d18484e6341b3e30249543
+  policy:
+    level: 5
+    vulgarity: 2
+    seed: 1
+    embellishment: dinkum
+    document_type: official
+    document_config: {}
+    markup: mdx
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/interfold__learn_use_cases/dinkum-3.txt
+      sha256: 5ee855bcb0955a137edc8aa6f86bed5ab132388afcfd8fa1de89a88814fccd62
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/interfold__learn_use_cases/yarn-dinkum.txt
+      sha256: 6f5109b80225ef8cef77bdd41a9e09b018b51367980a96e89cf805336587afd9
+- name: interfold__faq_auction
+  source: tests/corpus/everyday/interfold/faq_auction.mdx
+  source_sha256: 0536ec1a41f4decba4f72f97ddb73e51db22fe503eb62e7f4423a8095021d708
+  policy:
+    level: 3
+    vulgarity: 1
+    seed: 1
+    embellishment: dinkum
+    document_type: official
+    document_config: {}
+    markup: mdx
+  anchors:
+    dinkum-3:
+      path: research/dinkum-check-2026-10-14/texts/interfold__faq_auction/dinkum-3.txt
+      sha256: 976422dc4b46d567fb1c7fbda96679472f686797acab963a4b9a6713e6556a29
+    pre-fix-yarn:
+      path: research/dinkum-check-2026-10-14/texts/interfold__faq_auction/yarn-dinkum.txt
+      sha256: c30a5c4282592102b60a8f6dd62e6a108154e054f96d2325f8774a1746f5f684

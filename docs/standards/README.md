@@ -4,7 +4,7 @@
 
 # Standards
 
-Strewth, External standards this project follows, copied verbatim so the documentation is self\-contained. Well, don't edit
+Strewth, External standards this project follows, copied verbatim so the documentation is self\-contained. Don't edit
 them here; replace a copy with a newer version when the project adopts it.
 
 | Standard | Summary |

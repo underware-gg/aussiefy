@@ -9,7 +9,7 @@ people'n to agents workin' in the repository.
 
 ## Start here
 
-- [CONTRIBUTING.md](../../CONTRIBUTING.md): Crikey, the baseline: setup, the checks that must pass, and the project's
+- [CONTRIBUTING.md](../../CONTRIBUTING.md): the baseline: setup, the checks that must pass, and the project's
   conventions.
 
 ## Guides
@@ -39,9 +39,9 @@ people'n to agents workin' in the repository.
 - Script docstrings: `scripts/promote.py`, `scripts/regen_golden.py`, `scripts/fetch_reference_texts.py` and
   `scripts/train_embedder.py` each open with their usage.
 
-- [Source ingestion](ingestion.md): Jeez Louise, manifest\-based fetching'n recovery.
+- [Source ingestion](ingestion.md): manifest\-based fetching'n recovery.
 - [Judging and research](judging.md): blind rubric comparison'n hand\-run yarn tools.
 
 - [Committed source integration](source-integration.md): pin, path accounting'n intentional adaptations.
 
-- [Documentation publication](documentation.md): Fair dinkum, authoritative sources, generated prose'n freshness.
+- [Documentation publication](documentation.md): authoritative sources, generated prose'n freshness.

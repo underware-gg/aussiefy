@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from bisect import bisect_right
+from bisect import bisect_left, bisect_right
 import re
 import unicodedata
 
-from .engine import Result, Translator
+from .engine import DocumentPart, Result, TextState, Translator
 from .genre import Genre, Embellishment
 from .policy import Effective, Policy, envelope
 
@@ -363,17 +363,32 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
             if any(c.isalpha() for c in source[left:right]):
                 eligible.append(ProseSpan(left, right))
     spans = eligible
-    for span in spans:
+    from .markup import mask
+    from .text import sentences, tokenize
+
+    reading = mask(source, "markdown")
+    boundaries = [(sent[0].start, sent[-1].end) for sent in sentences(tokenize(reading.text))
+                  if any(t.is_word for t in sent)]
+    starts = [a for a, _ in boundaries]
+    ends = [b for _, b in boundaries]
+    state = TextState()
+    for index, span in enumerate(spans):
         if span.start > source_at:
             piece = source[source_at:span.start]
             pieces.append(piece)
             protected.append(ProtectedSpan((source_at, span.start), (output_at, output_at + len(piece))))
             output_at += len(piece)
+        first = bisect_right(ends, span.start)
+        last = bisect_left(starts, span.end) - 1
+        part = DocumentPart(state, first,
+                            first < len(boundaries) and boundaries[first][0] >= span.start,
+                            last >= 0 and boundaries[last][1] <= span.end,
+                            index == len(spans) - 1, quiet=reading.quiet_at(span.start))
         r = translator.translate(source[span.start:span.end], level=policy.level, seed=policy.seed,
                                  vulgarity=policy.vulgarity, variety=policy.variety, registers=policy.registers,
                                  regions=policy.regions, unlock=policy.unlock, embedder=policy.embedder,
                                  english=policy.english, embellishment=policy.embellishment, document_type=policy.document_type,
-                                 document_config=policy.document_config, _context=context)
+                                 document_config=policy.document_config, _context=context, _composition=part)
         rendered = _escape(r.text)
         pieces.append(rendered)
         units.append(ProseUnit((span.start, span.end), (output_at, output_at + len(rendered)), rendered, r))
