@@ -9,6 +9,14 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Document the portable skill and MCP setup for both Claude Code and Codex; add `.agents/skills` discovery
+  alongside the existin' Claude link. Jeez Louise, keep agent\-neutral retelling briefs, schemas, validation'n dispatch
+  in `retelling.py`, with API\-specific formats at the client edge'n existin' Python imports supported.
+- Verify cached yarns against current session/dictionary rules before reuse, and report malformed cache
+  records with their path. Well, preserve ordinary generation'n deterministic fallback for stale replies.
+- Fix partial slang lookup for standard `-ing` spellings alongside dropped\-g forms. Align the shared agent
+  workflow with verification before delivery'n reconcile CLI options, MCP tools and research/licensing docs.
+
 - Remove duplicated ungated infix advice from guide/yarn prompts; swear\-infix guidance now follows placement
   permission'n the effective multiplier, including zero. Struth, retain both controlled retelling comparisons,
   including the initial weak\-register result'n the contract\-aware writer revision with remaining limits.
@@ -79,7 +87,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 - **Dinkum\-check dictionary round** (`research/dinkum-check-round-2026-10-14/DECISIONS.md`): 67 rows from the
   check's yarn agents reviewed. New: stuff up, stuff {obj} up, a stuff\-up, under the pump \(of a person\), not know
   someone from a bar of soap, spitting \(light rain\), a swag of; pull the pin takes pulling the pin, all over the shop
-  `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Fair dinkum, wrong senses
+  `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Crikey, wrong senses
   fixed in data: heaps for counted heaps, every bloke'n his dog and old fella outta the formal genres, littlie
   for a policy's kid, the whole box'n dice for `"everything from"`; rain only for the weather's `"it"` (not fans
   pouring onto a street, tears pouring down, or tea poured\).
@@ -102,7 +110,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   a fair whack\), hire, per cent'n roadworks in the dialect table; 63 covered or skipped. The fourth pass's wrong
   senses fixed in data: bush for a legal bush, Parliament House for a US Congress, knock together for any
   build, pressie for a policy's gift, tucker'n quid in the wrong places, and lint's LEAVE, heaps, bugger all,
-  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Jeez, engine limits found are listed in DECISIONS.
+  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Fair dinkum, engine limits found are listed in DECISIONS.
 - **The fourth pass's next steps:**
   - A storyteller's openings follow the genre's form at every settin', troppo's too \(an obituary isn't opened
     `"Fair dinkum, this happened."`), and `"Okay, so."` is gone from the openings.
@@ -138,7 +146,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
     `judge.yaml`.
 - **Embedder:** a 1.3.0 retrain on the grown dictionary stopped at the reference gate \(32/33: `"a top bloke"` reaches
   a mongrel's gloss\) and wasn't clearly better, so 1.2.0 stays bundled \(`training/README.md`,
-  `training/reports/trials/1.3.0-trial-2026-10-14.json`). Crikey, the third pass's lookup misses \(`"harmless"`, `"probably"`)
+  `training/reports/trials/1.3.0-trial-2026-10-14.json`). The third pass's lookup misses \(`"harmless"`, `"probably"`)
   are in the reference set as known failures.
 - **Third\-pass dictionary round** (`research/third-pass-round-2026-10-13/DECISIONS.md`): 24 entries from the
   terms the third pass's agents reached for \(pull the pin on, drag the chain, nut out, give someone a ring, here's
@@ -305,7 +313,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 
 - Translate Markdown prose explicitly through the API/toolkit, CLI and MCP while retaining protected
-  source'n stable headings. Report honest per\-unit offsets and explanations; give LLM the flick/model modes
+  source'n stable headings. Now, report honest per\-unit offsets and explanations; give LLM the flick/model modes
   before loading or calling. Plain engine/plan behaviour remains unchanged.
 
 - Organise tests by user, functional, architecture'n contributor ownership, with layer indexes and
@@ -321,7 +329,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 - Reorganise documentation into user, functional, architecture'n contributor layers, with decision
   records'n checks for documented commands and example outputs.
 - Report missing files, corrupt caches'n configs, invalid policy names and failed model installs as
-  actionable errors \(exit 2\). Well, MCP tools retain those messages'n describe their parameters.
+  actionable errors \(exit 2\). MCP tools retain those messages'n describe their parameters.
 - Accept named levels in compare'n gaps, `plan --json`, and `yarn --no-cache`; improve CLI help, stdin
   hints, near\-command notices, no\-match messages'n lint warnin' output.
 - Align translation JSON across surfaces, including dial names, policy warnings, variety and
@@ -356,7 +364,7 @@ The first release.
   descriptive c\-word scale, best cunts to worst \(a sick cunt ... a dog cunt\), each at its own vulgarity tier.
 - A deterministic rule engine that rewrites English as Australian slang at levels 1 to 5: concept detection
   with frame checking, seeded selection, realisation with agreement'n tense, garnish \(connectives,
-  openers, tag\-ons, asides, riffs, closers\), the drawl, and Australian spellin'. Anyway, the same text, level'n seed
+  openers, tag\-ons, asides, riffs, closers\), the drawl, and Australian spellin'. The same text, level'n seed
   always give the same output.
 - A validated YAML dictionary of about 900 entries over about 500 concepts, grown by hand curation'n two
   verified research rounds \(gap\-fill'n classics\), with vulgarity tiers, registers, regions and gating.

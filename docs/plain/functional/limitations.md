@@ -4,7 +4,7 @@
   [explain mode](explain.md), and most are fixed by tightening a trigger pattern in the data rather than the
   code. The hand-written frame checker now uses a small bundled POS model for noun/verb context;
   [DD-016](../../architecture/decisions/dd-016-reconcile-source-capabilities.md) records its offline boundary.
-- **The LLM modes have not been run against the live API.** Tagging, `--surface`, `--rewrite` and yarn mode
+- **The built-in API client has not been run against the live API.** Tagging, `--surface`, `--rewrite` and yarn mode
   are tested with fake clients. The yarn workflow itself has been exercised by agents through its research CLI
   (`research/retellings-2026-10-11/yarn_tools.py`), which shares yarn mode's brief and tools.
 - **The seed source has not been scraped.** The original build recorded network restrictions reaching

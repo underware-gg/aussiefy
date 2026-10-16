@@ -13,7 +13,7 @@ v1.0.0, at Level 1.
 
 | Layer | What it covers |
 |---|---|
-| [User](user/README.md) | Installing aussiefy and getting things done with it: translating, the dials, the Claude modes, using it from an agent |
+| [User](user/README.md) | Installing aussiefy and getting things done with it: translating, the dials, optional model-assisted modes, using it from an agent |
 | [Functional](functional/README.md) | Reference: what every command, option, dial, data file and API does, and the tests that pin that behaviour |
 | [Architecture](architecture/README.md) | How it works and why: the pipeline, the package layers, determinism, the decision records and the design reviews |
 | [Contributor](contributor/README.md) | How to work on it: setup and checks, testing, growing the dictionary, and releases |

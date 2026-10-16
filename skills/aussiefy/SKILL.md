@@ -3,27 +3,52 @@ name: aussiefy
 description: Rewrite English as genuine Australian English (slang, idiom, drawl) at a chosen level from 1 (light) to 5 (full pub yarn). Use when asked to "aussify", "say it like an Aussie", "translate into Australian slang", or to tell something as an Aussie yarn. Gives you a curated slang dictionary, a draft from a rule engine, a lint for non-Aussie phrases and US spelling, and the craft rules that make it read naturally.
 ---
 
-# Aussify
+# Aussiefy
 
 You're good at Australian English. This skill gives you quality source material and a check, so the
 result is genuinely Australian rather than a caricature. All commands come from the `aussiefy` CLI
-(`pip install -e .` in the aussiefy repo). Every toolkit command takes two independent dials, by number or name: `-l/--level` 1-5 (`tourist`,
+(`pip install -e .` in an aussiefy checkout; otherwise follow the
+[installation guide](https://github.com/underware-gg/aussiefy#install)). The skill works with Claude, Codex or another agent that can run
+CLI commands; it does not call a model API. Level and vulgarity apply throughout: `-l/--level` 1-5 (`tourist`,
 `blow-in`, `local`, `larrikin`, `swaggie`) and `--vulgarity` 0-3 (`nan`, `dad`, `uncle-bob`, `tradie`;
 default: the level's own, `nan` at 1-2, `dad` at 3-4, `uncle-bob` at 5). Commands that read a text, and `guide`, also
 take `-e/--embellishment` 0-2: how much liberty the telling takes (`deadset` straight, `dinkum` in a genuine voice,
 `troppo` a performed yarn). General is the default document type, with `dinkum` embellishment. Use `--document-type auto` to opt into
 detection, or select a named preset. `custom` enables only explicitly configured optional behaviours.
 All document operations accept `document_config` (`--document-config` JSON): exact overrides after presets and
-dials, with false and empty lists preserved. See [translation controls](../../docs/functional/translation-controls.md).
+dials, with false and empty lists preserved. See [translation controls](https://github.com/underware-gg/aussiefy/blob/main/docs/functional/translation-controls.md).
 Its nested `profile` object tunes substitution, frames, garnish rates/limits/spacing, drawl, stacking,
 swearing and rewrite thresholds. Omitted keys inherit the level/vulgarity defaults for every type, including
 Custom. Enable Custom's optional document behaviours separately. Inspect JSON `profile_config` for the full
 resolved numeric configuration, and pass it back as `document_config.profile` to reuse it.
 
+## Agent setup
+
+In this repository, `.agents/skills/aussiefy` and `.claude/skills/aussiefy` point to this skill. For personal
+skill discovery, copy this folder to `~/.agents/skills/aussiefy/` for Codex or
+`~/.claude/skills/aussiefy/` for Claude Code. Any shell-capable agent can also read this file directly.
+The CLI must be installed in the environment where the agent runs commands.
+
+For MCP, install the `mcp` extra and register the stdio server with your client:
+
+```sh
+codex mcp add aussiefy -- aussiefy-mcp
+claude mcp add aussiefy -- aussiefy-mcp
+```
+
+Other MCP clients launch the same `aussiefy-mcp` command with no arguments. See the
+[agent guide](https://github.com/underware-gg/aussiefy/blob/main/docs/user/agents.md) for installation and
+the six tools. The shared workflow does not require the built-in API client or its credentials.
+
 ## Workflow
 
+Run `aussiefy guide` for the canonical workflow and current craft rules. The steps below explain its CLI
+use. Keep the chosen dials, document configuration and markup consistent across operations. The effective
+configuration controls permitted behaviour: empty garnish still allows Australian phrasing within the
+original propositions, while protected quotes, terms, facts and grammar remain intact.
+
 1. **Know the brief.** Ask, or assume, the level (default 5, `swaggie`) and how vulgar it can be (default: the
-   level's own). The vulgarity tiers are calibrated to Australian ears:
+   level's own), embellishment and document settings. The vulgarity tiers are calibrated to Australian ears:
    - 0 `nan`: no swearing (strewth and crikey are fine)
    - 1 `dad`: bloody, bugger, bastard, donger
    - 2 `uncle-bob`: piss, arse, fuck
@@ -53,7 +78,8 @@ resolved numeric configuration, and pass it back as `document_config.profile` to
 
    `riffs` lists the images the text's Aussie terms call up for an Australian: wheelie bins bring
    "bin chickens fightin' over the scraps", the pollies "standin' about like stunned mullets". They're
-   colour that hangs off a word already there, not new content. Use one or two where they land; `lookup`
+   colour that hangs off a word already there, not new content. Use them only when your effective settings
+   permit riffs; `lookup`
    shows riffs too. The riff marked `best` is the term's signature image (wheelie bins: the bin chickens).
 
    `openings` suggests three ways to start this particular text. "Right, so" is the opener every model
@@ -98,9 +124,11 @@ resolved numeric configuration, and pass it back as `document_config.profile` to
 
 - `aussiefy "text" -l 3`: the plain deterministic translation. The same text, level and seed always give
   the same output.
-- `aussiefy yarn -l 5 < input.txt`: hands the whole job to Claude via the API, using this same toolkit.
-  It needs `pip install -e '.[llm]'` and an API key.
-- MCP: `claude mcp add aussiefy -- aussiefy-mcp` exposes the tools `aussie_lookup`, `aussie_lint`,
+- `aussiefy yarn-tools brief input.txt -l 5`: brief your own agent, then use its `lookup`, `lint` and `submit`
+  steps for checked delivery. No built-in model client is involved.
+- `aussiefy yarn -l 5 < input.txt`: runs the optional API client; see its setup in the
+  [model-assisted writing guide](https://github.com/underware-gg/aussiefy/blob/main/docs/user/llm-modes.md).
+- MCP: configure your client's stdio server command as `aussiefy-mcp`. It exposes `aussie_lookup`, `aussie_lint`,
   `aussie_guide`, `aussie_plan`, `aussie_translate` and `aussie_verify`.
 
 ## Quality bar

@@ -5,6 +5,14 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Document the portable skill and MCP setup for both Claude Code and Codex; add `.agents/skills` discovery
+  alongside the existing Claude link. Keep agent-neutral retelling briefs, schemas, validation and dispatch
+  in `retelling.py`, with API-specific formats at the client edge and existing Python imports supported.
+- Verify cached yarns against current session/dictionary rules before reuse, and report malformed cache
+  records with their path. Preserve ordinary generation and deterministic fallback for stale replies.
+- Fix partial slang lookup for standard `-ing` spellings alongside dropped-g forms. Align the shared agent
+  workflow with verification before delivery and reconcile CLI options, MCP tools and research/licensing docs.
+
 - Remove duplicated ungated infix advice from guide/yarn prompts; swear-infix guidance now follows placement
   permission and the effective multiplier, including zero. Retain both controlled retelling comparisons,
   including the initial weak-register result and the contract-aware writer revision with remaining limits.

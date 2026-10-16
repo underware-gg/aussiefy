@@ -31,7 +31,7 @@ from .errors import UserError
 from .loader import DATA_DIR
 from .markup import detect_markup
 from .terms import fold
-from .yarn import MARKUP_RULE
+from .retelling import MARKUP_RULE
 
 SEVERITIES = ("critical", "major", "minor")
 PROBLEM_KEYS = ("quote", "original", "severity", "why")   # each a string; "original" empty for an addition

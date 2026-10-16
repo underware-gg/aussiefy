@@ -10,12 +10,12 @@ command'n option does, see the [functional reference](../functional/README.md).
 | Guide | Summary |
 |---|---|
 | [getting-started.md](getting-started.md) | Install, translate a text, set the dials, repeat or vary a result, see why, look things up, add your own entries |
-| [llm-modes.md](llm-modes.md) | Have Claude smooth the output, rewrite the hard sentences, or retell a whole text as a yarn |
-| [agents.md](agents.md) | Use the toolkit from an agent: the Claude Code skill, the MCP server, the Claude API, or the shell |
+| [llm-modes.md](llm-modes.md) | Model-assisted writing: smooth output, rewrite hard sentences or retell a whole text |
+| [agents.md](agents.md) | Use the portable skill, MCP server, Python toolkit or shell from your chosen agent |
 | [embedding-models.md](embedding-models.md) | Check, switch off or replace the embedding model that `lookup` and `gaps` use |
 
 Related:
 
-- [skills/aussiefy/SKILL.md](../../skills/aussiefy/SKILL.md): the Claude Code skill, a step\-by\-step guide for
+- [skills/aussiefy/SKILL.md](../../skills/aussiefy/SKILL.md): the portable CLI skill, a step\-by\-step guide for
   an agent writin' Australian English with the toolkit.
 - [Known limitations](../functional/limitations.md).

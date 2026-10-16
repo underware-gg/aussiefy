@@ -22,6 +22,17 @@ def test_real_noun_and_head_verb_inflections_still_work(query, form, translator)
     assert form in [r['form'] for r in lookup(query, translator=translator)['results']]
 
 
+@pytest.mark.parametrize('query,form', [
+    ('drink', 'flat out like a lizard drinking'), ('bushwalk', 'bushwalking'),
+    ('pull', '{subj} {be} pulling a swifty'), ('kip', "been kippin' in"),
+])
+def test_partial_lookup_handles_standard_and_dropped_g(query, form, dictionary):
+    from aussiefy import Translator
+
+    results = lookup(query, translator=Translator(dictionary, lookup_embedder=None), limit=100)['results']
+    assert any(r['form'] == form and r['match'] == 'part of a phrase' for r in results)
+
+
 def test_negated_model_meaning_needs_a_shared_anchor(translator):
     bad = {'OUT_OF_LINE', 'DANGEROUS', 'SCOUNDREL'}
     assert all(not bad.intersection(r['concepts']) for r in lookup('harmless', translator=translator)['results'])

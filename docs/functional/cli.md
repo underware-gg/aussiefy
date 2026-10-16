@@ -19,7 +19,7 @@ Without a command, arguments go to `translate`: `aussiefy "some text" -l 4` is s
 | Command | What it does |
 |---|---|
 | `translate` | The rule engine's translation (the default command) |
-| `yarn` | Claude retells the whole text as an Aussie yarn, using the toolkit (needs the `llm` extra) |
+| `yarn` | The optional API client retells the whole text using the shared harness (needs the `llm` extra) |
 | `lookup` | Aussie options for a meaning, or what a term means |
 | `lint` | Lint an Aussified draft (exit 1 if there are issues) |
 | `guide` | The voice, language limits and craft rules for a level and vulgarity |
@@ -40,17 +40,17 @@ What `compare`, `gaps` and the `dev` steps do is described in [maintainer-tools.
 
 | Option | Commands | Meaning |
 |---|---|---|
-| `text` | translate, yarn, lint, plan | The text itself, a file path, or nothing to read stdin |
+| `text` | translate, yarn, lint, plan, verify, judge unharnessed | The text itself, a file path, or nothing to read stdin |
 | `--document-type TYPE` | translate, yarn, lint, plan, guide, verify, yarn-tools | General (default), Custom, Auto detection, or a named type; guide requires a named type |
 | `--document-config JSON` | same document operations | Exact behaviour overrides; see [translation controls](translation-controls.md) |
 | `-e/--embellishment SETTING` | translate, yarn, lint, plan, guide, verify, yarn-tools | 0–2 or deadset/dinkum/troppo; default Dinkum for General; named types supply defaults |
 | `--english {auto,us,uk,none}` | translate, yarn, lint, plan, verify, yarn-tools | Source-English dialect context |
-| `--markup {text,markdown,mdx,auto}` | translate, yarn, lint, plan, verify, yarn-tools | Extended document mode; differs from strict `--markdown` ([controls](translation-controls.md)) |
-| `--dict PATH` | every command except `embedder` and `dev round` | An extra entry file or directory, on top of the built-in dictionary (repeatable) |
-| `-l/--level LEVEL` | translate, yarn, lookup, lint, guide, plan, compare, gaps | 1-5 or `tourist`, `blow-in`, `local`, `larrikin`, `swaggie` (default 5) |
-| `--vulgarity VULGARITY` | translate, yarn, lookup, lint, guide, plan | 0-3 or `nan`, `dad`, `uncle-bob`, `tradie` (default: the level's own) |
-| `-s/--seed SEED` | translate, yarn, plan | Seed for the weighted choices (default 0). `random` picks one and prints it to stderr |
-| `--json` | translate, yarn, lookup, lint, guide, plan, gaps | Print the full result as JSON (`plan` always prints JSON) |
+| `--markup {text,markdown,mdx,auto}` | translate, yarn, lint, plan, verify, yarn-tools, judge unharnessed | Extended document mode; differs from strict `--markdown` ([controls](translation-controls.md)) |
+| `--dict PATH` | all leaf commands except embedder, dev ingest, dev round and judge tally | An extra entry file or directory, on top of the built-in dictionary (repeatable); on nested commands, put it after the step |
+| `-l/--level LEVEL` | translate, yarn, yarn-tools, lookup, lint, verify, guide, plan, compare, gaps, judge brief/run/unharnessed | 1-5 or `tourist`, `blow-in`, `local`, `larrikin`, `swaggie` (default 5) |
+| `--vulgarity VULGARITY` | translate, yarn, yarn-tools, lookup, lint, verify, guide, plan, judge brief/run/unharnessed | 0-3 or `nan`, `dad`, `uncle-bob`, `tradie` (default: the level's own) |
+| `-s/--seed SEED` | translate, yarn, yarn-tools, plan, judge brief/run | Seed for the weighted choices (default 0). `random` picks one and prints it to stderr |
+| `--json` | translate, yarn, lookup, lint, verify, guide, plan, gaps, judge brief/run/read/unharnessed | Print the full result as JSON (`plan` always prints JSON). yarn-tools tool steps already print JSON; its brief prints the prompt |
 | `--variety N` | translate, plan | Choose among the N best-fitting terms only; 0 (the default) weighs every eligible term |
 | `--registers LIST` | translate, plan | Comma list from `current`, `dated`, `archaic` (default: per level) |
 | `--region LIST` | translate, plan | Comma list of region tags to prefer, such as `qld` |
@@ -78,11 +78,29 @@ accepted\-result cache for this run.
 
 **`lookup QUERY...`**: `--limit N`, the most results to show \(default 8\); `--include-gated`, also show
 entries held back as doubtful \(omitted entries remain excluded\). `N` must be at least 1.
+With `--json`, `--short` returns compact cards for an agent: form, gloss, frame, level'n vulgarity.
 
-**`lint`**: `--short` gives a compact agent checklist; `--no-suggestions` skips engine suggestions.
+**`lint`**: `--no-suggestions` skips engine suggestions.
 `--original FILE`, the source text, which adds the fidelity checks \(length, names'n numbers\).
 Well, text markers are `!` issues, `?` warnings and `~` suggestions. Bugger me, with warnings but no issues, it prints
 `ok (N warning(s))` and exits 0. Issues exit 1; suggestions aren't repeated when already reported.
+
+**`verify`**: requires `--original FILE`; `--all` also lists information such as untouched sentences.
+Use `--json` for the full report. Critical or major problems exit 1; minor problems alone exit 0.
+
+**`yarn-tools STEP SOURCE [ARG]`**: `STEP` is `brief`, `lookup`, `lint` or `submit`. `SOURCE` is the original
+file. `lookup` needs a query; `lint` and `submit` need a draft file. `--declined FILE` supplies a YAML list
+of `{phrase, reason}` records to lint or submit; `--log FILE` appends tool calls'n diagnostics as JSONL.
+`-o/--output FILE` saves an accepted submission. Anyway, each command starts a fresh session, so repeat the same
+dials, overrides'n markup flags, and carry declines with `--declined`.
+
+```sh
+aussiefy lookup --short --json "very busy"
+aussiefy verify --original source.txt draft.txt --all
+aussiefy yarn-tools brief source.txt -l 3
+aussiefy yarn-tools lint source.txt draft.txt -l 3 --log calls.jsonl
+aussiefy yarn-tools submit source.txt draft.txt -l 3 -o accepted.txt --log calls.jsonl
+```
 
 **`show QUERY`**: matches an entry's id or form by substring, or a concept by name. No match prints a
 notice on stderr'n exits 1. Jeez Louise, entries and staging files use the same YAML field order.

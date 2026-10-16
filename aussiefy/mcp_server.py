@@ -3,7 +3,7 @@
     pip install -e '.[mcp]'
     aussiefy-mcp                      # stdio transport
 
-Claude Code:  claude mcp add aussiefy -- aussiefy-mcp
+Configure your agent to launch aussiefy-mcp over stdio; see docs/user/agents.md.
 
 Each tool is a thin adapter over the harness function of the same name, with the same parameters (less the
 in-process translator); tests/test_interfaces.py holds the two in step.
@@ -20,8 +20,7 @@ from . import harness
 from .guide import style_guide_data
 
 INSTRUCTIONS = """Tools for rewriting English as genuine Australian English (levels 1-5).
-Workflow: aussie_guide for the level, aussie_plan for the rule engine's draft and planned phrases, write your
-own version using aussie_lookup for genuine options, then aussie_lint your text and fix every issue.
+Use the shared workflow below for the guide, plan, writing, lint and verification steps.
 aussie_translate gives the plain deterministic output if that's all you need; aussie_verify checks a finished
 translation against its original. Two independent dials, by number
 or name: level 1-5 (tourist, blow-in, local, larrikin, swaggie) and vulgarity 0-3 (nan, dad, uncle-bob, tradie);

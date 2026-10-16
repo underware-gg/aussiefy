@@ -130,3 +130,21 @@ indexing and an arithmetic-equivalent dot product now reduce warmed core transla
 the long measured inputs, with 92 exact full-result parity comparisons. Weights and thresholds remain.
 See [the refinement report](document-refinement-2026-10-15/README.md) for reproducible evidence and limits;
 website routing/end-to-end latency was not measured.
+
+## Whole-repository review, 2026-10-16
+
+Six concern reviews found yarn cache acceptance bypass, partial lookup `-ing` drift, a missing verification
+step in the canonical agent workflow and inaccurate current documentation. The fixes retain one portable
+skill and a shared `retelling.py` contract for agents, with API-specific integration at the edge. Claude
+Code and Codex setup is explicit. Existing Python imports remain available.
+
+Independent opportunities remain: optional real-SDK request serialization tests with an HTTP mock,
+Python 3.10 compatibility CI, and consolidation of older duplicate contract tests. Live model execution
+and website routing remain unverified. The current readiness assessment passed an installed-wheel smoke
+check outside the checkout, including its CLI, shared session and installed MCP stdio wrapper; that is
+separate from live model execution.
+
+The review withdrew a proposed known-trigger gaps shortcut: custom embedder similarities are not bounded
+by one, and even bundled floating-point dot products may slightly exceed it. Preserve current scores until
+their public semantics are deliberately changed. Small request-local lookup caching also remains deferred;
+measured savings did not justify another cache.

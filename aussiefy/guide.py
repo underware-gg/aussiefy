@@ -19,7 +19,7 @@ from .schema import SchemaError
 
 # The toolkit's operations, and each surface's name for them: the workflow's {plan} is `aussiefy plan` on the
 # command line, `aussie_plan` over MCP and `plan` in Python.
-TOOLS = ("guide", "plan", "lookup", "lint", "translate")
+TOOLS = ("guide", "plan", "lookup", "lint", "verify", "translate")
 SURFACES = {"cli": "aussiefy {}", "mcp": "aussie_{}", "python": "{}"}
 TONES = ("plain", "chirpy")   # chirpy openings are left out for dark and solemn texts
 

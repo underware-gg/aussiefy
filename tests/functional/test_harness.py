@@ -93,7 +93,7 @@ def test_yarn_loop_lookup_check_reject_then_accept(tmp_path, translator):
 def test_yarn_cache_misses_when_the_instructions_change(tmp_path, translator, monkeypatch, api_error):
     import importlib
 
-    y = importlib.import_module("aussiefy.yarn")   # the package exports the yarn() function under this name
+    y = importlib.import_module("aussiefy.retelling")
 
     from aussiefy.yarn import brief
 
@@ -109,6 +109,73 @@ def test_yarn_cache_misses_when_the_instructions_change(tmp_path, translator, mo
         beta = SimpleNamespace(messages=SimpleNamespace(create=lambda **k: (_ for _ in ()).throw(api_error("offline"))))
     r = yarn(STORY, level=5, client=Offline(), translator=translator, cache_dir=str(tmp_path))
     assert "cached" not in r.status          # a changed guide or rule isn't answered from the old cache
+
+
+@pytest.fixture
+def accepted_yarn_cache(tmp_path, translator):
+    from aussiefy.yarn import brief
+
+    good = brief(STORY, vulgarity=0, translator=translator).plan["draft"]
+    result = yarn(STORY, vulgarity=0, translator=translator, cache_dir=str(tmp_path),
+                  client=Scripted([_resp(_use(1, "submit", text=good, declined=[]))]))
+    assert result.outcome == "applied"
+    return good, next(tmp_path.glob("*.json"))
+
+
+@pytest.mark.parametrize("record", [
+    [], {}, {"text": 123}, {"text": "text", "declined": "phrase"},
+    {"text": "text", "declined": [{}]},
+    {"text": "text", "declined": [{"phrase": "phrase", "reason": None}]},
+    {"text": "text", "tool_calls": []}, {"text": "text", "tool_calls": {"submit": -1}},
+    {"text": "text", "tool_calls": {"submit": True}},
+])
+def test_malformed_yarn_cache_names_the_file(record, accepted_yarn_cache, tmp_path, translator):
+    from aussiefy.errors import UserError
+
+    _, path = accepted_yarn_cache
+    path.write_text(json.dumps(record))
+    with pytest.raises(UserError, match=f"{path.name}: invalid yarn cache entry; delete it"):
+        yarn(STORY, vulgarity=0, translator=translator, cache_dir=str(tmp_path), max_turns=0)
+
+
+def test_stale_yarn_cache_gets_a_new_checked_reply(accepted_yarn_cache, tmp_path, translator):
+    good, path = accepted_yarn_cache
+    cached = json.loads(path.read_text())
+    cached["text"] = "Y'all have a good day."
+    path.write_text(json.dumps(cached))
+    client = Scripted([_resp(_use(1, "submit", text=good, declined=[]))])
+    result = yarn(STORY, vulgarity=0, translator=translator, cache_dir=str(tmp_path), client=client)
+    assert result.text == good and result.status == "yarned" and len(client.calls) == 1
+    assert json.loads(path.read_text())["text"] == good
+
+
+def test_cached_declines_still_need_to_be_valid(accepted_yarn_cache, tmp_path, translator):
+    _, path = accepted_yarn_cache
+    cached = json.loads(path.read_text())
+    cached["declined"] = [{"phrase": "not a planned phrase", "reason": "wrong sense"}]
+    path.write_text(json.dumps(cached))
+    result = yarn(STORY, vulgarity=0, translator=translator, cache_dir=str(tmp_path), max_turns=0)
+    assert result.outcome == "fell_back" and result.text == result.draft
+
+
+def test_yarn_cache_uses_current_dictionary_acceptance(tmp_path, dictionary):
+    from dataclasses import replace
+    from aussiefy import Translator
+    from aussiefy.yarn import brief, validate
+
+    source = "The sun is bright today and we will spend the whole afternoon sitting outside under the trees."
+    good = source.replace("bright", "bloody bright")
+    first = Translator(dictionary, lookup_embedder=None)
+    stricter = Translator(replace(dictionary, swears={**dictionary.swears, "bloody": 3}), lookup_embedder=None)
+    settings = dict(level=1, vulgarity=1, embellishment=0)
+    old = brief(source, translator=first, **settings)
+    new = brief(source, translator=stricter, **settings)
+    assert (old.plan, old.payload, old.system) == (new.plan, new.payload, new.system)
+    assert validate(old, good) == [] and "too_vulgar: bloody" in validate(new, good)
+    assert yarn(source, translator=first, cache_dir=str(tmp_path), **settings,
+                client=Scripted([_resp(_use(1, "submit", text=good, declined=[]))])).outcome == "applied"
+    result = yarn(source, translator=stricter, cache_dir=str(tmp_path), max_turns=0, **settings)
+    assert result.outcome == "fell_back" and result.text == result.draft and result.text != good
 
 
 def test_yarn_falls_back_to_draft(tmp_path, translator, api_error):

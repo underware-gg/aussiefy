@@ -68,12 +68,13 @@ messages as tool errors. `lookup` requires `limit >= 1` and marks each riff's `b
 - **MCP server, for any MCP-capable agent.** The `aussiefy-mcp` command (stdio) serves the tools
   `aussie_lookup`, `aussie_lint`, `aussie_guide`, `aussie_plan`, `aussie_translate` and `aussie_verify`. Setup is in the
   [user guide](../user/agents.md).
-- **Claude Code skill.** [skills/aussiefy/SKILL.md](../../../skills/aussiefy/SKILL.md) walks an agent through
-  brief → guide → plan → write with lookups → lint and fix → deliver, using the CLI.
-- **Claude API tools.** `tool_definitions()` in the `aussiefy.yarn` module gives `lookup`, `lint` and `submit`
-  for any Messages API agent; `brief()` and `dispatch_tool()` in the same module are the loop's pure parts, for
-  driving it yourself. Import them with `from aussiefy.yarn import ...`: on the package, `aussiefy.yarn` is the
-  yarn function, not the module. [Yarn mode](llm-modes.md) is the reference loop.
+- **Portable CLI skill.** [skills/aussiefy/SKILL.md](../../../skills/aussiefy/SKILL.md) walks an agent through
+  brief → guide → plan → write with lookups → lint and fix → verify → deliver, using the CLI.
+- **Shared retelling session.** `aussiefy.retelling` owns `brief()`, `dispatch_tool()` and `tool_contracts()`:
+  model-independent briefs, checked tool calls and neutral JSON Schemas for `lookup`, `lint` and `submit`.
+  Clients adapt those contracts to their own transport. The optional `aussiefy.yarn` API driver derives its
+  Anthropic `tool_definitions()` from them. Existing `from aussiefy.yarn import brief, dispatch_tool` imports
+  remain supported. On the package, `aussiefy.yarn` is the convenience function, not the module.
 
 Every surface takes the same parameters by the same names and defaults; `tests/functional/test_interfaces.py` holds them
 in step (see [DD-008](../../architecture/decisions/dd-008-one-toolkit-thin-surfaces.md)).

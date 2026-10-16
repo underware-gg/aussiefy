@@ -143,7 +143,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
 
     grammar = _read_optional(data / "grammar.yaml", errors, {})
     person_roles, adjective_nouns, name_aliases = frozenset(), {}, {}
-    if not isinstance(grammar, dict) or set(grammar) - {"person_nouns", "adjective_nouns", "name_aliases"}:
+    if set(grammar) - {"person_nouns", "adjective_nouns", "name_aliases"}:
         errors.append("grammar.yaml: expected person_nouns, adjective_nouns and name_aliases")
     else:
         def words(raw, where):
@@ -158,7 +158,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         else:
             adjective_nouns = {w: words(ns, f"adjective_nouns.{w}") for w, ns in adjectives.items()}
 
-    aliases = grammar.get("name_aliases", {}) if isinstance(grammar, dict) else {}
+    aliases = grammar.get("name_aliases", {})
     if not isinstance(aliases, dict):
         errors.append("grammar.yaml: name_aliases must map exact phrases to accepted wording lists")
     else:

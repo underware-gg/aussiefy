@@ -61,7 +61,7 @@ def test_the_workflow_names_each_surfaces_tools_in_order():
     for surface, plan in (("cli", "aussiefy plan"), ("mcp", "aussie_plan"), ("python", "(plan)")):
         steps = data.workflow_for(surface)
         assert plan in steps and "{" not in steps, surface
-        order = [steps.index(t) for t in ("guide", "plan", "lookup", "lint")]
+        order = [steps.index(t) for t in ("guide", "plan", "lookup", "lint", "verify", "Deliver")]
         assert order == sorted(order), surface
     assert "aussie_" not in data.workflow_for("python") and "aussiefy" not in data.workflow_for("mcp")
 

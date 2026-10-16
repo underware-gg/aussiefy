@@ -29,7 +29,10 @@ exports stay ignored. Sanitised harvests omit entries that reproduce those works
 
 Tests: [judge](../../tests/contributor/test_judge.py), [yarn/toolkit](../../tests/functional/test_harness.py).
 
-The [maintenance comparison](../../research/maintenance-check-2026-10-15/README.md) pins the next 20\-text
-Dinkum remeasurement: original source hashes, original dials'n named document presets, with Dinkum\-3 and
-pre\-fix yarn as unchanged anchors. Mate, it's prepared, not scored. Use fresh writer output'n an independent
-judge; don't reuse previous verdicts as evidence for current guidance.
+The [maintenance comparison](../../research/maintenance-check-2026-10-15/README.md) pins the completed
+20\-text Dinkum remeasurement: original source hashes, dials'n named document presets, with Dinkum\-3 and
+pre\-fix yarn as unchanged anchors. The [refinement findings](../../research/document-refinement-2026-10-15/FINDINGS.md)
+retain the weak first result'n subsequent writer revision, with independent blind judges. Research
+evaluation protocol 2 includes the full effective contract; the production judge API still receives only
+level'n vulgarity. Don't compare scores across those packet protocols as a causal engine improvement.
+For a new study, use new outputs'n independent judges rather than recyclin' verdicts.

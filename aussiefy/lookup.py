@@ -168,8 +168,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         stems = set()
         raw = [fold(PLACEHOLDER_RE.sub("", f)) for f in e.all_forms]
         for w in (w for f in raw for w in f.split() if len(w) > 3):
-            st = w.rstrip("'").removesuffix("in") if w.endswith(("in'", "ing")) else w
-            st = st.removesuffix("g") if w.endswith("ing") else st
+            st = w.rstrip("'").removesuffix("g").removesuffix("in") if w.endswith(("in'", "ing")) else w
             stems |= {st, st[:-1] if len(st) > 2 and st[-1] == st[-2] else st}   # kippin' -> kipp -> kip
         if len(qn) >= 3 and (any(f" {qn} " in f" {f} " for f in forms) or (" " not in qn and qn in stems)):
             scored.append((SCORE_IN_PHRASE, e, "part of a phrase"))
@@ -188,8 +187,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
             # the local model: meaning where n-grams only see spelling. Scored for every entry, not just the
             # ones n-grams missed: otherwise a weak n-gram match (knackered for "very tired", 0.65) keeps its weak
             # score while a model-only one (maggoted, from "Very drunk.") gets the model's, and outranks it
-            texts = [e.gloss] if e.gloss else []
-            texts += [d.concepts[c].description for c in e.concept if c in d.concepts]
+            texts = meaning_texts(e, d)
             m = max((model.similarity(q, t) for t in texts if t and bool(_NEGATED.search(t.lower())) == negated
                      and (not negated or negative_anchors & {
                          w[:-4] if w.endswith("less") else w for w in content_words(t)})),

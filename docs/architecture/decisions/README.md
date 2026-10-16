@@ -47,11 +47,12 @@ its consequences as they stood when it was made. Anyway, records are numbered in
 | [DD-020](dd-020-document-composition-state.md) | Share document choices and garnish limits while preserving Markdown source units | Accepted |
 | [DD-021](dd-021-request-local-profile-overrides.md) | Inherit and override request-local engine profiles consistently across document operations | Accepted |
 | [DD-022](dd-022-sentence-safe-document-flavour.md) | Keep technical examples exact while placing conversational flavour at source sentence starts | Accepted |
+| [DD-023](dd-023-agent-neutral-retelling.md) | Share agent-neutral retelling contracts and keep client integrations at the edge | Accepted |
 
 ## By topic
 
 - **Engine:** DD\-001, DD\-003, DD\-007
 - **Dictionary'n data:** DD\-002, DD\-010, DD\-012
 - **The dials:** DD\-004, DD\-005
-- **Structure'n interfaces:** DD\-006, DD\-008, DD\-009, DD\-015, DD\-016, DD\-019, DD\-020
+- **Structure'n interfaces:** DD\-006, DD\-008, DD\-009, DD\-015, DD\-016, DD\-019, DD\-020, DD\-021, DD\-022, DD\-023
 - **Sources, licensing'n releases:** DD\-011, DD\-012, DD\-013, DD\-014

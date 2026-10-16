@@ -3,7 +3,7 @@
 Language models are very good at Aussie English when they have good source material and clear guidance. These six
 operations give any agent both. They are plain Python and return JSON-ready dicts, and every surface is a thin
 adapter over them: the Python API (`aussiefy.lookup` ...), the CLI (`aussiefy lookup|lint|guide|plan|verify|translate`),
-the MCP server (`aussiefy-mcp`: aussie_lookup ...), yarn mode's tools (`aussiefy.yarn`) and the Claude Code skill.
+the MCP server (`aussiefy-mcp`: aussie_lookup ...), retelling sessions and the portable CLI skill.
 
 - lookup(query):     plain-English meaning or slang term -> dictionary entries with gloss, level, vulgarity
 - lint(text):        a draft's issues (flagged phrases, swearing over the cap, US spelling, US and British words),

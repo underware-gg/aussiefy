@@ -256,7 +256,7 @@ def cmd_yarn(args) -> int:
 
 def cmd_yarn_tools(args) -> int:
     """Yarn mode's loop run by hand: an agent (or a person) is the model, and each step is one call."""
-    from .yarn import brief, dispatch_tool
+    from .retelling import brief, dispatch_tool
 
     source = _read(args.source, "source", verbatim=True)
     session = brief(source, seed=args.seed, markup=args.markup, english=args.english,

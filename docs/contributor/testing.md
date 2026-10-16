@@ -25,6 +25,11 @@ Historical ADRs/design reviews and the imported standard are excluded from the c
 Published copies are not scanned again. A source edit may precede regeneration during development; promotion
 requires `python scripts/publish_docs.py check`, which enforces fresh output and links in both trees.
 
+`tests/functional/test_retelling.py` exercises a session with provider SDK imports blocked, neutral tool
+contracts and the real MCP stdio entry point from another working directory. Candidate paths are explicit,
+so isolated release worktrees exercise their own code. This verifies the shared agent boundary, not live
+Claude or Codex model execution. Client setup commands are documented in [agent integration](../user/agents.md).
+
 ## The golden corpus
 
 `tests/corpus/sentences.txt` holds the plain-English sentence corpus. `tests/corpus/golden.yaml` pins the output
@@ -88,11 +93,13 @@ Struth, the 15 pinned Interfold MDX pages now have confirmed LGPL redistribution
 Remote\-only Rockwell/Kieran material'n full research exports stay local. Anyway, only the
 existin' two local\-corpus tests can skip; new corpus checks run without private files or network access.
 
-## Copyrighted texts, kept local
+## Remote-only texts, kept local
 
-Copyrighted texts are never committed ([DD-011](../architecture/decisions/dd-011-copyrighted-texts-stay-local.md)).
-`tests/corpus/remote.yaml` points at public copies, such as Ginsberg's "Meditations on Moloch" as quoted in Scott
-Alexander's essay, and `aussiefy dev ingest tests/corpus/remote.yaml` (with the `scrape` extra) saves the excerpts to
+Works without confirmed redistribution permission stay local
+([DD-011](../architecture/decisions/dd-011-copyrighted-texts-stay-local.md)); licensed imports and the
+reviewed bounded exception are documented in [licensing](licensing.md). `tests/corpus/remote.yaml` points
+at public copies, including the Moloch section of Ginsberg's *Howl* quoted in Scott Alexander's essay
+*Meditations on Moloch*. `aussiefy dev ingest tests/corpus/remote.yaml` (with the `scrape` extra) saves excerpts to
 the gitignored `tests/corpus/local/`, where `tests/functional/test_local_reference.py` tests them. With the folder empty,
 those tests skip. How to fetch them, add your own, and keep Aussie versions alongside is in
 [tests/corpus/local/README.md](../../tests/corpus/local/README.md).

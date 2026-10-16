@@ -2,11 +2,14 @@
 
 > Aussiefied at **Swaggie** level, with **Dinkum** embellishment and **Dad** vulgarity. [Prefer docs that are as dry as a dead dingo's donger?](../plain/user/llm-modes.md)
 
-# Using Claude to polish or retell
+# Model-assisted polishing and retelling
 
-The rule engine's output is deterministic'n safe, but it can read like a word swap. Three optional modes
-hand some of the writin' to Claude, while the dictionary keeps the slang genuine. Well, what each one guarantees is
-in the [LLM modes reference](../functional/llm-modes.md).
+The rule engine runs offline'n produces repeatable drafts, but they can read like word swaps. Yer agent
+can use the toolkit to polish or retell them, with the dictionary supplying dinkum slang. Claude, Codex
+and other agents follow the same [writing workflow](agents.md).
+
+So anyway, the commands below use the optional built\-in API client to run that work automatically. Fair dinkum, its guarantees are
+in the [LLM modes reference](../functional/llm-modes.md); it's one client of the shared harness.
 
 ## Before you start
 

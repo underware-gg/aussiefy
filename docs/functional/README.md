@@ -19,7 +19,7 @@ guarantees. So anyway, for step\-by\-step guides, see the [user layer](../user/R
 | [markdown.md](markdown.md) | Explicit prose translation with protected source, stable headings and per-unit results |
 | [explain.md](explain.md) | What explain mode records for each decision, with a sample |
 | [verification.md](verification.md) | Deterministic structural and fidelity checks against the original |
-| [llm-modes.md](llm-modes.md) | The optional Claude modes (fluent surface, whole-sentence rewrites, yarn mode), their guarantees and caches |
+| [llm-modes.md](llm-modes.md) | Model-assisted writing, the optional API client, guarantees and caches |
 | [dictionary.md](dictionary.md) | The data files, the entry format, slots, the pattern language, validation and extending the dictionary |
 | [embedding.md](embedding.md) | Which features use a similarity model, the choices, and the `embedder` command |
 | [configuration.md](configuration.md) | Environment variables, machine state, caches, working files and tunable data |
