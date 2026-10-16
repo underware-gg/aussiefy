@@ -16,12 +16,12 @@ I'm flat out like a lizard drinking.
 
 ## Install
 
-Requires Python 3.10\+. Well, these commands install the `v0.1.0` release. Releases are on `main`;
+Requires Python 3.10\+. Well, these commands install the `v0.2.0` release. Releases are on `main`;
 development continues on `dev`. A full commit SHA can be used in place of the tag.
 
 ```sh
-pip install "git+https://github.com/underware-gg/aussiefy@v0.1.0"            # core
-pip install "aussiefy[llm] @ git+https://github.com/underware-gg/aussiefy@v0.1.0"   # + built-in API modes
+pip install "git+https://github.com/underware-gg/aussiefy@v0.2.0"            # core
+pip install "aussiefy[llm] @ git+https://github.com/underware-gg/aussiefy@v0.2.0"   # + built-in API modes
 ```
 
 Anyway, other extras: `mcp` (the `aussiefy-mcp` server\), `embeddings`, `scrape`, `dev`. For development, clone the

@@ -13,7 +13,7 @@ in the [LLM modes reference](../functional/llm-modes.md); it's one client of the
 
 ## Before you start
 
-1. Install the `llm` extra: `pip install "aussiefy[llm] @ git+https://github.com/underware-gg/aussiefy@v0.1.0"`
+1. Install the `llm` extra: `pip install "aussiefy[llm] @ git+https://github.com/underware-gg/aussiefy@v0.2.0"`
    (or `pip install -e '.[llm]'` from a clone\).
 2. Set `ANTHROPIC_API_KEY`, or log in with an `ant auth login` profile.
 

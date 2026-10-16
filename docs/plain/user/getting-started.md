@@ -3,12 +3,12 @@
 ## Install
 
 aussiefy needs Python 3.10 or later. The core depends on PyYAML and markdown-it-py.
-These commands install the `v0.1.0` release. For development, check out `dev` in a clone and install
+These commands install the `v0.2.0` release. For development, check out `dev` in a clone and install
 in editable mode. A full commit SHA can be used in place of the tag.
 
 ```sh
-pip install "git+https://github.com/underware-gg/aussiefy@v0.1.0"                  # core
-pip install "aussiefy[llm] @ git+https://github.com/underware-gg/aussiefy@v0.1.0"   # with an extra
+pip install "git+https://github.com/underware-gg/aussiefy@v0.2.0"                  # core
+pip install "aussiefy[llm] @ git+https://github.com/underware-gg/aussiefy@v0.2.0"   # with an extra
 ```
 
 | Extra | Adds | Needed for |

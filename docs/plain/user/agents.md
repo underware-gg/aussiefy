@@ -37,7 +37,7 @@ cp -R skills/aussiefy ~/.claude/skills/
 ## In any MCP-capable agent: the MCP server
 
 ```sh
-pip install "aussiefy[mcp] @ git+https://github.com/underware-gg/aussiefy@v0.1.0"
+pip install "aussiefy[mcp] @ git+https://github.com/underware-gg/aussiefy@v0.2.0"
 claude mcp add aussiefy -- aussiefy-mcp     # Claude Code; other clients run `aussiefy-mcp` over stdio
 codex mcp add aussiefy -- aussiefy-mcp      # Codex
 ```

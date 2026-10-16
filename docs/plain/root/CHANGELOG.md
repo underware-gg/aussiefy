@@ -5,6 +5,8 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-16
+
 - Carry the complete effective writing contract through agent/API judging and reference retelling, preserve
   legacy judgement protocols, and add held-out repeat-judge evidence plus an attributed public-domain
   Good Samaritan Bible passage.
