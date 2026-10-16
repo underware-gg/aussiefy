@@ -10,6 +10,7 @@ commands that have since been renamed. Mate, decisions they led to are recorded 
 
 | Review | Summary |
 |---|---|
+| [design-review-2026-10-16-verification-maintenance.md](design-review-2026-10-16-verification-maintenance.md) | Offline real-SDK serialization, minimum-Python CI and consolidated toolkit contracts |
 | [design-review-2026-10-16-whole-repository.md](design-review-2026-10-16-whole-repository.md) | Six-concern whole-repository audit, agent-neutral retelling, cache/lookup fixes and readiness evidence |
 | [design-review-2026-10-16-retelling-results.md](design-review-2026-10-16-retelling-results.md) | Controlled writer refinement, source-linked evidence and contract-aware blind comparison |
 | [design-review-2026-10-16-retelling-contract.md](design-review-2026-10-16-retelling-contract.md) | Configuration-consistent craft guidance, retained negative results and contract-aware research evaluation |

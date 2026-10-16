@@ -39,7 +39,6 @@ python -m pytest -q tests/functional
 | [test_markup.py](test_markup.py) | Extended Markdown/MDX preservation and restoration integrity |
 | [test_noun_phrase.py](test_noun_phrase.py) | Nominal matching, sense and subject fit |
 | [test_pos.py](test_pos.py) | Bundled tagger and contextual part-of-speech decisions |
-| [test_repository_contracts.py](test_repository_contracts.py) | Retained pre-integration API and policy invariants |
 | [test_second_pass.py](test_second_pass.py) | Second-pass corpus regressions |
 | [test_third_pass.py](test_third_pass.py) | Third-pass corpus regressions |
 | [test_verify.py](test_verify.py) | Deterministic fidelity, severity and alignment |

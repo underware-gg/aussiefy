@@ -9,11 +9,14 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Verify real optional SDK HTTP serialization offline, require Python 3.10/minimum\-SDK'n current\-SDK
+  compatibility smoke checks before release CI, and consolidate duplicate toolkit contract tests.
+
 - Document the portable skill and MCP setup for both Claude Code and Codex; add `.agents/skills` discovery
-  alongside the existin' Claude link. Jeez Louise, keep agent\-neutral retelling briefs, schemas, validation'n dispatch
+  alongside the existin' Claude link. So anyway, keep agent\-neutral retelling briefs, schemas, validation'n dispatch
   in `retelling.py`, with API\-specific formats at the client edge'n existin' Python imports supported.
 - Verify cached yarns against current session/dictionary rules before reuse, and report malformed cache
-  records with their path. Well, preserve ordinary generation'n deterministic fallback for stale replies.
+  records with their path. Preserve ordinary generation'n deterministic fallback for stale replies.
 - Fix partial slang lookup for standard `-ing` spellings alongside dropped\-g forms. Align the shared agent
   workflow with verification before delivery'n reconcile CLI options, MCP tools and research/licensing docs.
 
@@ -87,7 +90,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 - **Dinkum\-check dictionary round** (`research/dinkum-check-round-2026-10-14/DECISIONS.md`): 67 rows from the
   check's yarn agents reviewed. New: stuff up, stuff {obj} up, a stuff\-up, under the pump \(of a person\), not know
   someone from a bar of soap, spitting \(light rain\), a swag of; pull the pin takes pulling the pin, all over the shop
-  `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Crikey, wrong senses
+  `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Fair dinkum, wrong senses
   fixed in data: heaps for counted heaps, every bloke'n his dog and old fella outta the formal genres, littlie
   for a policy's kid, the whole box'n dice for `"everything from"`; rain only for the weather's `"it"` (not fans
   pouring onto a street, tears pouring down, or tea poured\).
@@ -110,7 +113,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   a fair whack\), hire, per cent'n roadworks in the dialect table; 63 covered or skipped. The fourth pass's wrong
   senses fixed in data: bush for a legal bush, Parliament House for a US Congress, knock together for any
   build, pressie for a policy's gift, tucker'n quid in the wrong places, and lint's LEAVE, heaps, bugger all,
-  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Fair dinkum, engine limits found are listed in DECISIONS.
+  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Jeez, engine limits found are listed in DECISIONS.
 - **The fourth pass's next steps:**
   - A storyteller's openings follow the genre's form at every settin', troppo's too \(an obituary isn't opened
     `"Fair dinkum, this happened."`), and `"Okay, so."` is gone from the openings.
@@ -146,7 +149,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
     `judge.yaml`.
 - **Embedder:** a 1.3.0 retrain on the grown dictionary stopped at the reference gate \(32/33: `"a top bloke"` reaches
   a mongrel's gloss\) and wasn't clearly better, so 1.2.0 stays bundled \(`training/README.md`,
-  `training/reports/trials/1.3.0-trial-2026-10-14.json`). The third pass's lookup misses \(`"harmless"`, `"probably"`)
+  `training/reports/trials/1.3.0-trial-2026-10-14.json`). Crikey, the third pass's lookup misses \(`"harmless"`, `"probably"`)
   are in the reference set as known failures.
 - **Third\-pass dictionary round** (`research/third-pass-round-2026-10-13/DECISIONS.md`): 24 entries from the
   terms the third pass's agents reached for \(pull the pin on, drag the chain, nut out, give someone a ring, here's

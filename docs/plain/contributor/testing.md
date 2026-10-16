@@ -102,5 +102,12 @@ those tests skip. How to fetch them, add your own, and keep Aussie versions alon
 
 ## LLM modes
 
-The LLM modes are tested against scripted clients at the API boundary; the suite never calls Claude. Running
-them against the live API is an open item: see [limitations](../functional/limitations.md).
+The LLM modes use scripted clients for acceptance and fallback tests. `test_claude.py` additionally runs the
+real optional SDK through a mocked HTTP transport, checking serialized JSON requests, strict tool schemas,
+prompt-cache markers, beta headers and parsed replies. The `dev` extra includes that SDK so these tests
+cannot silently skip. No test contacts a model service. Live API execution remains an open item: see [limitations](../functional/limitations.md).
+
+
+Release CI smoke-tests Python 3.10 with the minimum API SDK (0.120.0), and Python 3.12 with the currently
+resolved SDK. Both exercise CLI, dictionary, contracts, judge and real stdio MCP/HTTP-mock boundaries. The
+required release-head job depends on both smoke checks before its complete exact-head/squash-tree gate.

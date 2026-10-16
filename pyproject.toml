@@ -22,7 +22,7 @@ mcp = ["mcp>=2"]
 # everything the suite needs to run without skips (promote.py fails a release on any other skip): mcp for the parity
 # tests, numpy for the model gate, the scrape extra for the scrape pipeline, tokenizers (pinned as in
 # training/requirements.txt) for tokeniser parity
-dev = ["pytest>=8", "ruff>=0.6", "mcp>=2", "numpy", "requests>=2.31", "beautifulsoup4>=4.12", "tokenizers==0.22.2",
+dev = ["anthropic>=0.120", "pytest>=8", "ruff>=0.6", "mcp>=2", "numpy", "requests>=2.31", "beautifulsoup4>=4.12", "tokenizers==0.22.2",
        "tomli>=2; python_version < '3.11'", "build>=1.2", "setuptools>=77", "wheel"]
 
 [project.scripts]

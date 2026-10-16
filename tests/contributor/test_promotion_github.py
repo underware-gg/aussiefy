@@ -100,7 +100,18 @@ def test_ci_check_is_associated_with_actual_release_push_head():
     assert workflow['permissions'] == {'contents': 'read'}
     job = workflow['jobs']['release-head']
     assert job['name'] == api.REQUIRED_CHECK
-    checkout = job['steps'][0]['with']
+    assert job['needs'] == 'python-compatibility'
+    assert job['if'] == '${{ always() }}'
+    guard = job['steps'][0]
+    assert guard['env']['COMPATIBILITY_RESULT'] == '${{ needs.python-compatibility.result }}'
+    assert guard['run'] == 'test "$COMPATIBILITY_RESULT" = success'
+    compatibility = workflow['jobs']['python-compatibility']
+    matrix = compatibility['strategy']['matrix']['include']
+    assert {row['python'] for row in matrix} >= {'3.10', '3.12'}
+    assert any(row['sdk'] == 'anthropic==0.120.0' for row in matrix)
+    assert 'test_claude.py' in compatibility['steps'][-1]['run']
+    assert compatibility['steps'][0]['with']['ref'] == '${{ github.sha }}'
+    checkout = job['steps'][1]['with']
     assert checkout['ref'] == '${{ github.sha }}' and checkout['fetch-depth'] == '0'
     assert checkout['persist-credentials'] == 'false'
     verification = job['steps'][-1]

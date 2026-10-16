@@ -138,8 +138,9 @@ step in the canonical agent workflow and inaccurate current documentation. The f
 skill and a shared `retelling.py` contract for agents, with API-specific integration at the edge. Claude
 Code and Codex setup is explicit. Existing Python imports remain available.
 
-Independent opportunities remain: optional real-SDK request serialization tests with an HTTP mock,
-Python 3.10 compatibility CI, and consolidation of older duplicate contract tests. Live model execution
+The verification-maintenance follow-up adds real-SDK request serialization tests with an HTTP mock,
+Python 3.10/minimum-SDK compatibility CI gating the required release check, and one consolidated owner
+for toolkit contract tests. Live model execution
 and website routing remain unverified. The current readiness assessment passed an installed-wheel smoke
 check outside the checkout, including its CLI, shared session and installed MCP stdio wrapper; that is
 separate from live model execution.

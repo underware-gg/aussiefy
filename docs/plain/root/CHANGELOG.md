@@ -5,6 +5,9 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Verify real optional SDK HTTP serialization offline, require Python 3.10/minimum-SDK and current-SDK
+  compatibility smoke checks before release CI, and consolidate duplicate toolkit contract tests.
+
 - Document the portable skill and MCP setup for both Claude Code and Codex; add `.agents/skills` discovery
   alongside the existing Claude link. Keep agent-neutral retelling briefs, schemas, validation and dispatch
   in `retelling.py`, with API-specific formats at the client edge and existing Python imports supported.
