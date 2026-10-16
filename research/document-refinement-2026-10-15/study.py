@@ -25,23 +25,11 @@ sys.path.insert(0, str(ROOT))
 
 from aussiefy import harness, judge  # noqa: E402
 from aussiefy.engine import Translator  # noqa: E402
-from aussiefy.yarn import brief, dispatch_tool  # noqa: E402
+from aussiefy.retelling import brief, dispatch_tool  # noqa: E402
 
 PLAN = ROOT / "research/maintenance-check-2026-10-15/retelling-study.yaml"
 RUN = HERE / "study"
-EVALUATION_PROTOCOL = 2
-CONTRACT_INSTRUCTIONS = """
-Additional experiment contract (protocol 2): apply evaluation_contract to every anonymous candidate.
-The level measures Australian vocabulary, idiomatic phrasing and cadence in eligible prose. Level 5 means
-broad Australian prose; performance and added garnish depend on the effective embellishment/document
-settings, not the level alone. Do not demand prohibited openings, insults, infixes or other garnish.
-Empty garnish does not prohibit idiomatic paraphrase within the original propositions. Judge that eligible
-body prose at the requested level; preserving facts does not justify leaving all connecting prose neutral.
-Do not penalise verbatim quotes, protected technical terms, markup or headings which the contract requires
-to remain exact. Bold prose labels are not automatically headings. Vulgarity is a cap, not a quota.
-Disabled behaviours remain disabled; nonzero profile probabilities are not exact output quotas.
-Keep the rubric's eight criteria and score each weakness once.
-"""
+EVALUATION_PROTOCOL = judge.EVALUATION_PROTOCOL
 
 
 def write(path: Path, value) -> None:
@@ -118,7 +106,8 @@ def prepare() -> None:
     write(RUN / "manifest.json", {"source_commit": subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(), "plan_sha256": digest(PLAN),
         "driver_sha256": digest(Path(__file__)),
-        "run": RUN.name, "rubric_version": judge.Rubric.load().version,
+        "run": RUN.name, "plan_path": str(PLAN.relative_to(ROOT)),
+        "rubric_version": judge.Rubric.load().version,
         "evaluation_protocol": EVALUATION_PROTOCOL,
         "engine_files": engine_snapshot(), "cases": manifest,
         "writer": "fresh Codex agent contexts using yarn tools; no historical candidates shown",
@@ -128,7 +117,7 @@ def prepare() -> None:
 
 def manifest() -> dict:
     data = json.loads((RUN / "manifest.json").read_text())
-    checked(str(PLAN.relative_to(ROOT)), data["plan_sha256"])
+    checked(data.get("plan_path", str(PLAN.relative_to(ROOT))), data["plan_sha256"])
     if digest(Path(__file__)) != data["driver_sha256"]:
         raise ValueError("study driver changed after freeze")
     if engine_snapshot() != data["engine_files"]:
@@ -187,18 +176,13 @@ def packets() -> None:
         bound = evidence(item, tr)
         values = {"current": current.read_text(), **{name: checked(a["path"], a["sha256"]).read_text()
                     for name, a in item["anchors"].items()}}
+        policy = {k: v for k, v in item["policy"].items() if k != "seed"}
         packet = judge.blind(checked(item["source"], item["source_sha256"]).read_text(), values,
-                             level=item["policy"]["level"], vulgarity=item["policy"]["vulgarity"], seed=71 + index)
+                             seed=71 + index, translator=tr, **policy)
         frozen(d / "packet.json", encoded(packet.to_dict(rubric)))
         blind = RUN / "judge-blind" / f"{item['name']}.json"
-        payload = json.loads((d / "brief.json").read_text())["payload"]
-        frozen(blind, encoded({
-            "rubric_version": rubric.version, "evaluation_protocol": EVALUATION_PROTOCOL,
-            "evaluation_contract": {"document_config": payload["DOCUMENT_CONFIG"],
-                "profile_config": payload["PROFILE_CONFIG"], "embellishment": payload["EMBELLISHMENT"],
-                "markup": item["policy"]["markup"], "markup_rules": payload.get("MARKUP")},
-            "instructions": rubric.text() + "\n" + CONTRACT_INSTRUCTIONS, "prompt": packet.prompt(),
-            "schema": packet.schema(rubric)}))
+        frozen(blind, encoded({"rubric_version": rubric.version, "evaluation_protocol": packet.evaluation_protocol,
+                              "evaluation_contract": packet.evaluation_contract, **packet.judging(rubric)}))
         bindings[item["name"]] = {**bound, "packet.json": digest(d / "packet.json"),
                                   "judge_packet": digest(blind)}
     frozen(RUN / "packets-manifest.json", encoded(bindings))
@@ -265,7 +249,9 @@ if __name__ == "__main__":
     p.add_argument("action", choices=("prepare", "packets", "check", "collect"))
     p.add_argument("name", nargs="?")
     p.add_argument("--run", default="study", help="one local run directory name; existing evidence is preserved")
+    p.add_argument("--plan", type=Path, default=PLAN, help="pinned study plan (prepare only)")
     args = p.parse_args()
+    PLAN = args.plan.resolve()
     RUN = run_path(args.run)
     if args.action == "check":
         check(args.name)

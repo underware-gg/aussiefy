@@ -40,7 +40,9 @@ references with all 16 known failures retained. It separately captures real tool
 all 20 deterministic checks passed. The following writer revision and contract-aware evaluation scored
 meaning 4.95/5 and register 4.65/5, again passing all mechanical checks. Raw results from both protocols
 remain; cross-protocol scores do not establish a causal engine improvement. Remaining high-level voice
-weaknesses, one minor forecast narrowing, repeat judges and held-out sources are explicit follow-ups.
+weaknesses and one minor forecast narrowing are retained. The six-source
+[held-out repeat-judge comparison](heldout-2026-10-16/README.md) is now complete; it adds evidence and
+exposes the specific issues below rather than erasing the earlier results.
 
 `aussiefy embedder status` reports aussie-static 1.2.0 as stale. It was trained before the fairdinkum, second-pass
 and third-pass rounds; their entries work through the engine and lookup triggers without it, but meaning-based lookup
@@ -80,8 +82,8 @@ left:
 
 | issue | benefit | why it's separate |
 |---|---|---|
-| Repeat the completed controlled comparison on held-out sources and with repeat judges | Test whether the high fidelity/register balance generalises beyond these 20 familiar sources | The completed refinement retains the weak first result and later contract-aware comparison; a fresh dataset is independent evidence |
-| Carry the full effective document/profile/markup contract through the production judge API | Public judging can apply the same restrictions as writing, as research protocol 2 now does | A public interface change across judge surfaces; the research run already has the context |
+| Completed 2026-10-16: [six held-out sources and two independent judges](heldout-2026-10-16/README.md) | Guided retellings scored meaning 5.00 and register 4.58, with the same overall winner in all twelve assessments | Six sources, two judge contexts; broader external replication remains separate |
+| Completed 2026-10-16: production judge protocol 2 carries the full effective contract | Agent/API judging and reference retelling share document/profile/embellishment/markup/source-English settings | Legacy packets remain protocol 1; mixed-protocol tallies are rejected |
 | Thin plans in news and official prose: most texts get no planned phrases, and at level 2 the draft is the original | The engine's draft carries some of the voice, as dinkum-3's did | Dictionary coverage of formal words, or a level-aware plan |
 | Some US spellings in capitalised headings escape lint | Catch heading spellings without changing names or the Australian Labor Party | Spelling-context work; outta/oughta/wanna are intentionally emitted by our drawl and must not be banned wholesale |
 | A form that leaves a captured slot unused drops it (stuff up needed two entries); a trigger's lookahead stops at punctuation | Simpler entries | Engine changes (`research/dinkum-check-round-2026-10-14/DECISIONS.md`) |
@@ -149,3 +151,29 @@ The review withdrew a proposed known-trigger gaps shortcut: custom embedder simi
 by one, and even bundled floating-point dot products may slightly exceed it. Preserve current scores until
 their public semantics are deliberately changed. Small request-local lookup caching also remains deferred;
 measured savings did not justify another cache.
+
+
+## Held-out verification and quality follow-ups, 2026-10-16
+
+The first four verification/maintenance follow-ups are complete: real minimum/current SDK HTTP-mock
+serialization, Python 3.10 CI smoke gating, consolidated contract tests, and production judge context plus
+six held-out sources/two repeat judges. Source provenance includes Luke 10:25–37 from the public-domain
+World English Bible Classic. No model weights changed. Live configured client/API execution and website
+routing/end-to-end latency remain the fifth, unrequested follow-up.
+
+The [new results](heldout-2026-10-16/README.md) retain these independent quality issues:
+
+- **Wrong heart idiom:** the Bible engine draft maps wholehearted devotion to `hand on heart`, which asserts
+  sincerity rather than extent of love. Narrow its meaning/trigger in data with positive and negative tests.
+- **Deliberative shall:** `what shall I do` becomes `what will I do`; obligation/deliberation and future
+  prediction differ. A context-aware modal guard needs a separate engine/data change and regressions.
+- **Underweight instruction voice:** both judges score the guided lantern prose register 3 at requested
+  level 4 (one major, one minor assessment). Refine eligible body phrasing without weakening technical,
+  safety, step-order or no-garnish protections. One technical sample also has a lighter-voice assessment.
+- **Mechanical drawl/stock joins:** raw draft `once'n` and the guided technical opener/repeated-pronoun
+  join drew minor flow/authenticity comments. Further refinement should use fresh sources and preserve
+  these frozen outputs/reports.
+
+The six cases are now evaluated inputs; future tuning on them must be described as reuse. Larger samples
+and human/cross-model judges would provide independent generalisation evidence, not a missing step in
+this completed bounded study.

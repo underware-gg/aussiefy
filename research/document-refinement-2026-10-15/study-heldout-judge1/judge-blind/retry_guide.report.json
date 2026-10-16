@@ -1,0 +1,129 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {
+          "evidence": "\"The client retries requests only after a connection failure; if a request gets rejected, it goes straight back to the caller.\" preserves the retry trigger and immediate rejection result; the exact limits, delay semantics, check and file-retention condition survive, with protected markup unchanged.",
+          "score": 5
+        },
+        "sense": {
+          "evidence": "\"Bumpin' it up doesn't change how many attempts the client makes.\" correctly renders increasing the delay value without changing attempt count; squiz and hang on to also fit their contexts.",
+          "score": 5
+        },
+        "authenticity": {
+          "evidence": "\"Have a squiz at\" is a natural local invitation to consult the reference, consistent with the explanatory voice.",
+          "score": 5
+        },
+        "register": {
+          "evidence": "\"Here's one for ya: set\" uses a permitted opener alongside broad phrasing throughout eligible prose, with no forbidden performance and technical content kept precise.",
+          "score": 5
+        },
+        "tone": {
+          "evidence": "\"Hang on to the existing configuration file till the replacement passes this check.\" keeps the operational caution direct; the conversational voice does not make the constraint optional.",
+          "score": 5
+        },
+        "flow": {
+          "evidence": "\"if a request gets rejected, it goes straight back to the caller.\" is easy to say and explains the branch clearly, with smooth transitions elsewhere.",
+          "score": 5
+        },
+        "variety": {
+          "evidence": "\"before you get the worker goin'.\" offers a different expression from bumping the value up, having a squiz and hanging on to the file, without a repeated tag.",
+          "score": 5
+        },
+        "essence": {
+          "evidence": "\"# Retry settings\" preserves the heading and technical-document shape, with its precise retry explanation and reference/check workflow intact.",
+          "score": 5
+        }
+      },
+      "problems": [],
+      "summary": "A broad, readable technical retelling that preserves exact markup and retry semantics."
+    },
+    "B": {
+      "scores": {
+        "meaning": {
+          "evidence": "\"a rejected request is returned to the caller immediately.\" preserves the rejection rule; the retry trigger, delay semantics, limit values, check and retention condition remain, as does protected markup.",
+          "score": 5
+        },
+        "sense": {
+          "evidence": "\"Keep the existin' configuration file\" correctly means retaining the current file; none of the colloquial changes introduces a wrong term sense.",
+          "score": 5
+        },
+        "authenticity": {
+          "evidence": "\"Increasing it doesn't change the number of attempts.\" is natural spoken explanation; sparse Australian expression is assessed under register.",
+          "score": 5
+        },
+        "register": {
+          "evidence": "\"Set `retry_limit` to `3` before starting the worker.\" keeps the eligible surrounding prose neutral, representative of much of the guide; a connective and a few elisions are much lighter than level 5.",
+          "score": 2
+        },
+        "tone": {
+          "evidence": "\"Keep the existin' configuration file until the replacement passes this check.\" maintains the practical warning and its force.",
+          "score": 5
+        },
+        "flow": {
+          "evidence": "\"the client sends the request once'n returns the result.\" glues the reduced conjunction to once, creating an awkward written join within otherwise clear explanation.",
+          "score": 4
+        },
+        "variety": {
+          "evidence": "\"Well, the `backoff_ms` value controls the delay between attempts.\" uses its connective once, with no repeated stock opener or slang phrase.",
+          "score": 5
+        },
+        "essence": {
+          "evidence": "\"Run `worker --check-config` to check the configuration.\" retains the specific reference/check function and same ordered technical explanation.",
+          "score": 5
+        }
+      },
+      "problems": [
+        {
+          "quote": "Set `retry_limit` to `3` before starting the worker.",
+          "original": "Set `retry_limit` to `3` before starting the worker.",
+          "severity": "major",
+          "why": "Register: most eligible surrounding explanation retains the original neutral cadence, falling well short of level 5. Technical tokens correctly remain exact."
+        },
+        {
+          "quote": "once'n returns the result",
+          "original": "once and returns the result",
+          "severity": "minor",
+          "why": "Flow: the reduced conjunction is attached directly to once, creating a clumsy join in the middle of technical explanation."
+        }
+      ],
+      "summary": "Faithful technical content and markup, but an underdeveloped broad voice and one clumsy contraction."
+    }
+  },
+  "rankings": {
+    "tone": [
+      [
+        "A",
+        "B"
+      ]
+    ],
+    "flow": [
+      [
+        "A"
+      ],
+      [
+        "B"
+      ]
+    ],
+    "variety": [
+      [
+        "A",
+        "B"
+      ]
+    ],
+    "essence": [
+      [
+        "A",
+        "B"
+      ]
+    ],
+    "overall": [
+      [
+        "A"
+      ],
+      [
+        "B"
+      ]
+    ]
+  }
+}

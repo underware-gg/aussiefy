@@ -86,6 +86,26 @@ credits:
     expect:
       wordnet: WordNet 3.0
 first_party:
+- glob: research/document-refinement-2026-10-15/study-heldout-judge[12]/manifest.json
+  reason: Project experiment metadata, evidence hashes and aggregate counts; source-bearing
+    files have derived corpus declarations.
+- glob: research/document-refinement-2026-10-15/study-heldout-judge[12]/packets-manifest.json
+  reason: Project experiment metadata, evidence hashes and aggregate counts; source-bearing
+    files have derived corpus declarations.
+- glob: research/document-refinement-2026-10-15/study-heldout-judge[12]/reports-manifest.json
+  reason: Project experiment metadata, evidence hashes and aggregate counts; source-bearing
+    files have derived corpus declarations.
+- glob: research/document-refinement-2026-10-15/study-heldout-judge[12]/summary.json
+  reason: Project experiment metadata, evidence hashes and aggregate counts; source-bearing
+    files have derived corpus declarations.
+- glob: research/heldout-2026-10-16/README.md
+  reason: Project methodology, aggregate findings and limitations; source quotations
+    remain in attributed per-case evidence.
+- glob: research/heldout-2026-10-16/plan.yaml
+  reason: Project study settings and source/anchor hashes, no copied corpus wording.
+- glob: research/heldout-2026-10-16/repeat-tally.json
+  reason: Aggregate scores/counts over two independent judgements of six sources,
+    no quoted prose.
 - glob: research/document-refinement-2026-10-15/study-round3/manifest.json
   reason: Project experiment settings, source paths and frozen input/engine/driver hashes; no copied source prose.
 - glob: research/document-refinement-2026-10-15/study-round3/packets-manifest.json
@@ -686,6 +706,9 @@ texts:
   - file: tests/corpus/everyday/instructions-remote.yaml
     rows: items
   manifests:
+  - file: tests/corpus/heldout/20261016/SOURCES.yaml
+    dir: tests/corpus/heldout/20261016
+    require: [title, author, licence, notes]
   - dir: tests/corpus/reference
     file: tests/corpus/reference/SOURCES.yaml
     require:

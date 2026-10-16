@@ -1,0 +1,102 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "engine": "B"
+  },
+  "evaluation_protocol": 2,
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "engine": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 1,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"The kids' room will stay shut till 2 December, but ya can drop borrowed books back at the front desk.\" preserves both the closure date and return option; the announcement date, reopening date, three-week delay, damaged timber, exact quote and pool-point closure condition also remain.",
+      "sense": "\"The stopgap collection point at the swimming pool will shut up shop when the main buildin' opens.\" uses stopgap and shut up shop correctly for the temporary service and its closure.",
+      "authenticity": "\"the library would be back in business on 18 November.\" is a natural local way of describing reopening, consistent with the surrounding broad explanation.",
+      "register": "\"Fixin' the roof had taken three weeks longer than expected after the workers found damaged timber.\" voices eligible prose broadly while keeping the facts; the direct quote and attribution are appropriately preserved, with no added garnish.",
+      "tone": "\"Council spokesperson Maya Chen said,\" retains straightforward attributed reporting; the closure and return advice remain informative rather than comic.",
+      "flow": "\"The kids' room will stay shut till 2 December, but ya can drop borrowed books back at the front desk.\" joins the contrast clearly and reads easily aloud.",
+      "variety": "\"The stopgap collection point at the swimming pool will shut up shop when the main buildin' opens.\" adds different idiom from back in business and drop books back, without repeated tags.",
+      "essence": "\"No late fees will be charged during the closure.\" preserves the exact practical assurance within the same attributed library notice and ordered factual structure."
+    },
+    "engine": {
+      "meaning": "\"The temporary collection point at the swimming pool will close when the main buildin' opens.\" retains the closure condition; all names, dates, delay details, return arrangements and the exact quotation remain intact.",
+      "sense": "\"main buildin'\" retains the exact sense of main building; no Australian term takes a wrong meaning.",
+      "authenticity": "\"main buildin' opens\" is a plausible Australian pronunciation; the otherwise neutral prose contains no forced local idiom.",
+      "register": "\"Repairs to the roof had taken three weeks longer than expected after workers found damaged timber.\" is unchanged eligible body prose, representative of nearly the entire notice; one dropped-g spelling falls far short of level 5.",
+      "tone": "\"The children's room will remain closed until 2 December, but borrowed books can be returned at the front desk.\" keeps the matter-of-fact public-service tone.",
+      "flow": "\"Harbourtown Council announced on Tuesday that the library would reopen on 18 November.\" is clear, fluent reporting, as are the following sentences.",
+      "variety": "\"The temporary collection point at the swimming pool will close when the main buildin' opens.\" does not repeat a slang tic or stock tag; the sparse voice is assessed only under register.",
+      "essence": "\"No late fees will be charged during the closure.\" preserves the exact assurance and the same recognisable notice with its practical library information."
+    }
+  },
+  "problems": {
+    "current": [],
+    "engine": [
+      {
+        "quote": "Repairs to the roof had taken three weeks longer than expected after workers found damaged timber.",
+        "original": "Repairs to the roof had taken three weeks longer than expected after workers found damaged timber.",
+        "severity": "major",
+        "why": "Register: almost all eligible body prose remains neutral report language. Preserving the quotation is correct, but it does not require retaining the original body voice at level 5."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "A broad local reporting voice that preserves every notice fact and the exact quotation.",
+    "engine": "Accurate and readable, with almost none of the requested broad Australian body voice."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "engine"
+      ]
+    ],
+    "flow": [
+      [
+        "current",
+        "engine"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "engine"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "engine"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "engine"
+      ]
+    ]
+  }
+}

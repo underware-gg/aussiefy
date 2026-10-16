@@ -1,0 +1,129 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "engine": "B"
+  },
+  "evaluation_protocol": 2,
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    },
+    "engine": {
+      "meaning": 4,
+      "sense": 3,
+      "authenticity": 4,
+      "register": 2,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"Next day, as he was leavin', he took out two denarii\" Preserves the sequence, participants, money, care and repayment promise, and the opening exchange and final moral.",
+      "sense": "\"his heart went out to him.\" Accurately conveys compassion; bashed, cleared off and looked after also fit their source meanings.",
+      "authenticity": "\"They stripped him, bashed him and cleared off, leavin' him half dead.\" Sounds like broad Australian narration rather than assembled tourist catchphrases.",
+      "register": "\"the bloke who fell among the robbers\" Sustained Australian vocabulary, pronouns and cadence suit level 5 without adding prohibited garnish or requiring swearing.",
+      "tone": "\"The one who showed him mercy.\" Retains the gravity of injury and the moral focus on mercy despite the change in voice.",
+      "flow": "\"But a Samaritan came to where he was as he was travellin'.\" This one join repeats he/was awkwardly and momentarily tangles the referents; the remainder reads easily.",
+      "variety": "\"his heart went out to him.\" Varies sympathetic idiom, action verbs and conversational phrasing without leaning on tags or openers.",
+      "essence": "\"Go and do the same.\" Preserves the question-and-answer framing, contrasting passers-by and final instruction to imitate mercy."
+    },
+    "engine": {
+      "meaning": "\"what will I do to inherit eternal life?\" Most narrative details remain exact, but will shifts the opening question slightly towards future action rather than what one ought to do.",
+      "sense": "\"hand on heart\" This means sincerely or as an assurance of truth, not loving with the entirety of one's heart; a central expression takes the wrong sense.",
+      "authenticity": "\"stripped him'n beat him\" The glued-on clitic reads like an imposed pronunciation effect rather than natural vernacular writing.",
+      "register": "\"By chance a certain priest was going down that way. When he saw him, he passed by on the other side.\" Much eligible narration retains biblical source phrasing with scattered pronouns and spelling changes, substantially below level 5.",
+      "tone": "\"He who showed mercy on him.\" The serious moral and compassionate tone remains despite the uneven voice.",
+      "flow": "\"Whatever ya spend beyond that, I'll repay ya when I return.\" The sentence structure remains intelligible and reads smoothly aloud; artificial clitic styling is assessed in authenticity.",
+      "variety": "\"Who's me neighbour?\" No intrusive recurring opener or tag; sparse retelling belongs to register rather than variety.",
+      "essence": "\"Go and do likewise.\" The moral conclusion, the three contrasting encounters and dialogue frame still identify the same parable."
+    }
+  },
+  "problems": {
+    "current": [
+      {
+        "quote": "But a Samaritan came to where he was as he was travellin'.",
+        "original": "But a certain Samaritan, as he traveled, came where he was.",
+        "severity": "minor",
+        "why": "Flow: repeated he and was in adjacent clauses briefly obscures who is travelling and makes this join less smooth than the surrounding narration."
+      }
+    ],
+    "engine": [
+      {
+        "quote": "what will I do to inherit eternal life?",
+        "original": "what shall I do to inherit eternal life?",
+        "severity": "minor",
+        "why": "Meaning: the deliberative request for what ought to be done becomes a question about what will be done; context limits the damage but the question's force shifts."
+      },
+      {
+        "quote": "hand on heart",
+        "original": "with all your heart",
+        "severity": "major",
+        "why": "Sense: an idiom asserting sincerity replaces the command to love with the whole heart. These are not the same expression or extent of devotion."
+      },
+      {
+        "quote": "stripped him'n beat him",
+        "original": "stripped him and beat him",
+        "severity": "minor",
+        "why": "Authenticity: the attached phonetic clitic looks manufactured rather than like natural Australian vernacular prose; the same styling appears again later."
+      },
+      {
+        "quote": "By chance a certain priest was going down that way. When he saw him, he passed by on the other side.",
+        "original": "By chance a certain priest was going down that way. When he saw him, he passed by on the other side.",
+        "severity": "major",
+        "why": "Register: representative of substantial unchanged biblical narration; scattered colloquial insertions do not supply the level-5 eligible body voice."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "A broad Australian telling that preserves the parable's detail, compassion and moral structure, with one awkward sentence.",
+    "engine": "The parable remains recognisable and serious, but a central heart idiom is mistranslated and most narration stays below the requested register."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "engine"
+      ]
+    ],
+    "flow": [
+      [
+        "engine"
+      ],
+      [
+        "current"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "engine"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "engine"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "engine"
+      ]
+    ]
+  }
+}

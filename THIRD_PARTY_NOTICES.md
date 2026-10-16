@@ -45,6 +45,7 @@ WordNet 3.0 Copyright 2006 by Princeton University. All rights reserved. [Licenc
 
 The corpus and research texts do not ship in the wheel. Their provenance declarations are:
 
+- [tests/corpus/heldout/20261016/SOURCES.yaml](tests/corpus/heldout/20261016/SOURCES.yaml)
 - [tests/corpus/reference/SOURCES.yaml](tests/corpus/reference/SOURCES.yaml)
 - [tests/corpus/classics/manifest.yaml](tests/corpus/classics/manifest.yaml)
 - [tests/corpus/everyday/instructions.yaml](tests/corpus/everyday/instructions.yaml)

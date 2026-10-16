@@ -1,0 +1,102 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "engine": "B"
+  },
+  "evaluation_protocol": 2,
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "engine": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 1,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"three weeks longer than expected after the workers found damaged timber.\" Preserves cause and duration of the delay, dates, locations, named speaker and the exact fee statement.",
+      "sense": "\"back in business on 18 November\" Correctly conveys reopening; stopgap and shut up shop fit the temporary point and its closure.",
+      "authenticity": "\"ya can drop borrowed books back at the front desk.\" Sounds like a local explaining the notice, with idiomatic everyday phrasing.",
+      "register": "\"The kids' room will stay shut till 2 December\" Broad Australian connecting prose matches level 5 within a fact-bound notice; the quote is correctly untouched and no garnish is added.",
+      "tone": "\"Council spokesperson Maya Chen said,\" The report remains an informative community notice with an attributed official assurance.",
+      "flow": "\"The stopgap collection point at the swimming pool will shut up shop when the main buildin' opens.\" Clear sentence joins retain the reopening/temporary-point relationship.",
+      "variety": "\"Fixin' the roof had taken three weeks longer than expected\" Uses varied verbs and ordinary idiom, without recurring openers or tags.",
+      "essence": "\"but ya can drop borrowed books back at the front desk.\" Keeps the practical public-service information and original arrangement."
+    },
+    "engine": {
+      "meaning": "\"The temporary collection point at the swimming pool will close when the main buildin' opens.\" All source claims and the exact attributed quote are retained.",
+      "sense": "\"the main buildin' opens.\" The sole colloquial alteration retains its literal sense.",
+      "authenticity": "\"the main buildin' opens.\" The colloquial pronunciation is plausible; neutral prose is also natural English.",
+      "register": "\"Repairs to the roof had taken three weeks longer than expected after workers found damaged timber.\" Eligible body prose is almost entirely unchanged; one dropped g is far below the level-5 local voice.",
+      "tone": "\"The children's room will remain closed until 2 December\" Retains the informative, practical notice tone.",
+      "flow": "\"but borrowed books can be returned at the front desk.\" The original clear structure remains smooth.",
+      "variety": "\"the main buildin' opens.\" There are no repeated slang or garnish tics; the scarcity of retelling belongs to register.",
+      "essence": "\"The temporary collection point at the swimming pool will close when the main buildin' opens.\" Preserves the notice's practical identity and full information architecture."
+    }
+  },
+  "problems": {
+    "current": [],
+    "engine": [
+      {
+        "quote": "Repairs to the roof had taken three weeks longer than expected after workers found damaged timber.",
+        "original": "Repairs to the roof had taken three weeks longer than expected after workers found damaged timber.",
+        "severity": "major",
+        "why": "Register: eligible explanatory prose remains virtually verbatim throughout, producing almost no level-5 Australian retelling. Required quotation preservation is not the issue."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "Broad but controlled local notice prose, preserving every factual detail and the official quotation.",
+    "engine": "Accurate and readable, but essentially untranslated outside a single pronunciation spelling."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "engine"
+      ]
+    ],
+    "flow": [
+      [
+        "current",
+        "engine"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "engine"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "engine"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "engine"
+      ]
+    ]
+  }
+}

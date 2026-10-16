@@ -1,0 +1,121 @@
+status: prepared-for-fresh-writers-and-repeat-blind-judges
+rubric_version: 3
+scope: 'Six inputs absent from the earlier 20-text refinement: five newly authored
+  synthetic texts and a newly acquired public-domain Bible passage. Held out from
+  that refinement, not a guarantee of unseen model pretraining.'
+cases:
+- name: missed_ferry
+  source: tests/corpus/heldout/20261016/missed_ferry.txt
+  source_sha256: 0166ea4dc61d3c3f8c796a2acf3220bd133847c184736e022559340c42a4ab81
+  policy:
+    level: 4
+    vulgarity: 1
+    seed: 7
+    embellishment: dinkum
+    document_type: general
+    document_config: {}
+    markup: text
+  anchors:
+    engine:
+      path: research/heldout-2026-10-16/anchors/missed_ferry.txt
+      sha256: a94f6fa731efafe6311a3273568582027c10a35d254d6e50e5771f85e2861f14
+- name: community_notice
+  source: tests/corpus/heldout/20261016/community_notice.txt
+  source_sha256: 9821dbfdf8fa768bba96e96b7b9ccf0e9211c1138da11f903dafe7c0c9a84af3
+  policy:
+    level: 5
+    vulgarity: 1
+    seed: 7
+    embellishment: dinkum
+    document_type: news
+    document_config: {}
+    markup: text
+  anchors:
+    engine:
+      path: research/heldout-2026-10-16/anchors/community_notice.txt
+      sha256: 39a950d2ecd710b4b5802f0fca12f445ad15cbee06692428731d3698783b815c
+- name: battery_instructions
+  source: tests/corpus/heldout/20261016/battery_instructions.txt
+  source_sha256: f9977cba8380fe74b1bf266cb917972bd2e04005ba058a592ddd8cc5c70566b4
+  policy:
+    level: 4
+    vulgarity: 0
+    seed: 7
+    embellishment: dinkum
+    document_type: instructions
+    document_config: {}
+    markup: text
+  anchors:
+    engine:
+      path: research/heldout-2026-10-16/anchors/battery_instructions.txt
+      sha256: 8e0c099e374ae667a9028d089b3a244dba24df77f9c46410f4431dcfb2dcdf45
+- name: retry_guide
+  source: tests/corpus/heldout/20261016/retry_guide.md
+  source_sha256: de66baf62a2b11b39775162a61f5d1fb0cc86036718789801a76a0e3f88f5684
+  policy:
+    level: 5
+    vulgarity: dad
+    seed: 0
+    embellishment: dinkum
+    document_type: general
+    document_config:
+      term_domains:
+      - technical
+      formal_to_rework: false
+      keep_quotes: true
+      person_swears: false
+      command_context: true
+      garnish:
+      - connective
+      - opener
+      - tag
+      profile:
+        garnish:
+          connective: 0.35
+          opener: 0.35
+          tag: 0.25
+        max_garnish:
+          connective: 10
+          opener: 6
+          tag: 4
+        garnish_gap: 2
+        stack: 0
+    markup: markdown
+  anchors:
+    engine:
+      path: research/heldout-2026-10-16/anchors/retry_guide.txt
+      sha256: 847e649e5c4778df9df515948fd3b7669be4c1492f5595ab5af2571d87d8bc53
+- name: refund_policy
+  source: tests/corpus/heldout/20261016/refund_policy.txt
+  source_sha256: 09b90b7d792c0b8d3f1d7026129c682b83c1c50579f3f99599c278627dd6a08d
+  policy:
+    level: 3
+    vulgarity: 0
+    seed: 7
+    embellishment: deadset
+    document_type: official
+    document_config: {}
+    markup: text
+  anchors:
+    engine:
+      path: research/heldout-2026-10-16/anchors/refund_policy.txt
+      sha256: 842438f7a54876d4385f12772bff067eb01653111adc15fb987081079561946f
+- name: good_samaritan
+  source: tests/corpus/reference/bible_good_samaritan.txt
+  source_sha256: 3dcae3954566ebc41f3244dc8a5c63cb56699733398a27be09d828e703fbf651
+  policy:
+    level: 5
+    vulgarity: 1
+    seed: 7
+    embellishment: dinkum
+    document_type: general
+    document_config:
+      garnish: []
+      openings: false
+      person_swears: false
+      keep_quotes: false
+    markup: text
+  anchors:
+    engine:
+      path: research/heldout-2026-10-16/anchors/good_samaritan.txt
+      sha256: 34ad1bcb6707b7169791f25d6701973c643e7b36287b4c6191e48e014e9c875d

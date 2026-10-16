@@ -44,11 +44,12 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 | [DD-021](../../../architecture/decisions/dd-021-request-local-profile-overrides.md) | Inherit and override request-local engine profiles consistently across document operations | Accepted |
 | [DD-022](../../../architecture/decisions/dd-022-sentence-safe-document-flavour.md) | Keep technical examples exact while placing conversational flavour at source sentence starts | Accepted |
 | [DD-023](../../../architecture/decisions/dd-023-agent-neutral-retelling.md) | Share agent-neutral retelling contracts and keep client integrations at the edge | Accepted |
+| [DD-024](../../../architecture/decisions/dd-024-contract-aware-judging.md) | Give agent/API judges the complete effective writing contract while preserving legacy protocols | Accepted |
 
 ## By topic
 
 - **Engine:** DD-001, DD-003, DD-007
 - **Dictionary and data:** DD-002, DD-010, DD-012
 - **The dials:** DD-004, DD-005
-- **Structure and interfaces:** DD-006, DD-008, DD-009, DD-015, DD-016, DD-019, DD-020, DD-021, DD-022, DD-023
+- **Structure and interfaces:** DD-006, DD-008, DD-009, DD-015, DD-016, DD-019, DD-020, DD-021, DD-022, DD-023, DD-024
 - **Sources, licensing and releases:** DD-011, DD-012, DD-013, DD-014

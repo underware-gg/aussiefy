@@ -49,7 +49,8 @@ change is a regression until shown otherwise.
 ## Reference texts
 
 `tests/corpus/reference/` holds public-domain texts, from fairy tales to the Declaration of Independence and The
-Raven; `tests/corpus/reference/SOURCES.yaml` lists each one and where it came from. `tests/functional/test_reference.py`
+Raven, plus Luke 10:25–37 (the Good Samaritan) from the public-domain World English Bible Classic;
+`tests/corpus/reference/SOURCES.yaml` lists each one and where it came from. `tests/functional/test_reference.py`
 checks them at every level across 20 seeds. Four of them, for example:
 
 | Text | What it tests |
@@ -115,3 +116,10 @@ cannot silently skip. No test contacts a model service. Live API execution remai
 Release CI smoke\-tests Python 3.10 with the minimum API SDK \(0.120.0\), and Python 3.12 with the currently
 resolved SDK. Both exercise CLI, dictionary, contracts, judge'n real stdio MCP/HTTP\-mock boundaries. The
 required release\-head job depends on both smoke checks before its complete exact\-head/squash\-tree gate.
+
+
+The [held-out refinement inputs](../../research/heldout-2026-10-16/README.md) add five fictional own\-work
+texts plus that Bible passage for a six\-case repeat\-judge comparison. They're disjoint from the earlier
+20\-source refinement by source hash; this isn't a claim about language\-model trainin' data. Anyway, source and
+research derivatives retain their attributed provenance. The Bible fixture also participates in the full
+reference level/seed property sweep'n has five golden level outputs; existin' golden cases are unchanged.

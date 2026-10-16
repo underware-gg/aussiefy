@@ -385,13 +385,16 @@ def cmd_judge(args) -> int:
         _json(j.tally(verdicts))
         return 0
     tr = _translator(args)
+    if args.judge_command != "read":
+        writing = {"markup": args.markup, "english": args.english, "embellishment": args.embellishment,
+                   **_document(args)}
     if args.judge_command == "unharnessed":
         eff = tr.effective(**_policy(args))
         original = _text(args)
         if args.prompt_only:
-            print(j.unharnessed_prompt(original, level=eff.level, vulgarity=eff.vulgarity, markup=args.markup))
+            print(j.unharnessed_prompt(original, level=eff.level, vulgarity=eff.vulgarity, translator=tr, **writing))
         else:
-            print(j.unharnessed(original, model=args.model, markup=args.markup, translator=tr, **_policy(args)))
+            print(j.unharnessed(original, model=args.model, translator=tr, **_policy(args), **writing))
         return 0
     if args.judge_command == "read":
         packet = j.Packet.from_dict(_json_file(args.packet, "packet"), where=args.packet)
@@ -406,17 +409,17 @@ def cmd_judge(args) -> int:
         original = _read(args.original, "--original")
         if args.judge_command == "run" and args.unharnessed:
             try:
-                candidates["unharnessed"] = j.unharnessed(original, model=args.model, markup="auto", translator=tr,
-                                                          **_policy(args))
+                candidates["unharnessed"] = j.unharnessed(original, model=args.model, translator=tr,
+                                                          **_policy(args), **writing)
             except claude.Error as exc:
                 print(f"[judge] no unharnessed retelling: {type(exc).__name__}: {exc}", file=sys.stderr)
                 return FELL_BACK
-        packet = j.blind(original, candidates, seed=args.seed, translator=tr, **_policy(args))
+        packet = j.blind(original, candidates, seed=args.seed, translator=tr, **_policy(args), **writing)
         rubric = j.Rubric.load()
         if args.judge_command == "brief":
             Path(args.output).write_text(json.dumps(packet.to_dict(rubric), indent=1, ensure_ascii=False),
                                          encoding="utf-8")
-            judging = {k: v for k, v in packet.to_dict(rubric).items() if k in ("instructions", "prompt", "schema")}
+            judging = packet.judging(rubric)
             _json(judging)   # what the judge sees: no key
             print(f"packet (with the key) -> {args.output}; judge it, then: aussiefy judge read {args.output} "
                   "REPORT.json", file=sys.stderr)
@@ -828,10 +831,10 @@ def build_parser() -> argparse.ArgumentParser:
     cands.add_argument("original", help="the original text file")
     cands.add_argument("--candidate", action="append", required=True, metavar="NAME=FILE",
                        help="a translation to judge (2 to 8 of them, with --unharnessed counted)")
-    jb = jsub.add_parser("brief", parents=[*toolkit, seeded, cands],
+    jb = jsub.add_parser("brief", parents=[*toolkit, seeded, cands, marked, english, embellished],
                          help="the blind packet, for an agent to judge (prints what the judge sees)")
     jb.add_argument("-o", "--output", default="judge-packet.json", help="the packet, with the key to unblind it")
-    jr = jsub.add_parser("run", parents=[*toolkit, seeded, cands], help="judge with Claude and print the report card")
+    jr = jsub.add_parser("run", parents=[*toolkit, seeded, cands, marked, english, embellished], help="judge with Claude and print the report card")
     jr.add_argument("--unharnessed", action="store_true",
                     help="add a model's own retelling (no toolkit) as a candidate, the reference point")
     jr.add_argument("--model", default=DEFAULT_MODEL, help="Claude model to judge (and retell) with")
@@ -840,7 +843,7 @@ def build_parser() -> argparse.ArgumentParser:
     jrd.add_argument("packet")
     jrd.add_argument("report")
     jrd.add_argument("--judge", default="", help="who judged it, to record in the verdict")
-    ju = jsub.add_parser("unharnessed", parents=[*toolkit, marked, text],
+    ju = jsub.add_parser("unharnessed", parents=[*toolkit, marked, text, english, embellished],
                          help="a model's own retelling, the reference")
     ju.add_argument("--prompt-only", action="store_true", help="print the brief for an agent to answer instead")
     ju.add_argument("--model", default=DEFAULT_MODEL)

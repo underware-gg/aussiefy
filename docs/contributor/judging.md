@@ -15,7 +15,22 @@ aussiefy judge read trial.json report.json --json
 aussiefy judge tally verdict-one.json verdict-two.json
 ```
 
-`judge brief`/`read` let an agent supply the report without a paid API. `judge run` uses the shared Claude
+`judge brief`/`read` let an agent supply the report without a paid API. New packets use evaluation protocol 2:
+the same effective document behaviours, full numeric profile, embellishment guidance, resolved markup and
+source-English context used for writing. `judge.blind()` and CLI `judge brief`/`run` accept `markup`, `english`,
+`embellishment`, `document_type` and `document_config`; the reference `unharnessed` routes accept them too.
+For example, add `--document-type custom --document-config '{"keep_quotes":true,"profile":{"phonetic":0}}'`
+to choose explicit behaviours while inheriting the selected level's numeric defaults. Saved packets contain
+the complete resolved snapshot, so later dictionary changes cannot reinterpret those settings. Completeness
+and types are checked; deliberately unconventional combinations remain the caller's responsibility.
+
+`Packet.judging(rubric)` returns the key-free `instructions`, `prompt` and `schema` sent to either an agent
+or the API. `Packet.to_dict(rubric)` also includes originals, candidates and the unblinding key: keep that
+file away from blind judges. Historical packets/verdicts without protocol metadata remain protocol 1;
+settings are not inferred, and tallying protocol 1 with protocol 2 raises an error. The API cache includes
+both instructions and the effective contract.
+
+ `judge run` uses the shared Claude
 client, validates the response, sends an invalid report back once'n caches accepted results. `judge
 unharnessed --prompt-only` Anyway, produces the reference retelling brief; a live call is optional. Deterministic
 [verification](../functional/verification.md) and the judge measure different things: structure/fidelity
@@ -33,6 +48,12 @@ The [maintenance comparison](../../research/maintenance-check-2026-10-15/README.
 20\-text Dinkum remeasurement: original source hashes, dials'n named document presets, with Dinkum\-3 and
 pre\-fix yarn as unchanged anchors. The [refinement findings](../../research/document-refinement-2026-10-15/FINDINGS.md)
 retain the weak first result'n subsequent writer revision, with independent blind judges. Research
-evaluation protocol 2 includes the full effective contract; the production judge API still receives only
-level'n vulgarity. Don't compare scores across those packet protocols as a causal engine improvement.
+evaluation protocol 2 included the effective contract before the public judge API. Crikey, current public packets
+now carry that contract through every judge route; historical evidence stays unchanged. Don't compare scores across those packet protocols as a causal engine improvement.
 For a new study, use new outputs'n independent judges rather than recyclin' verdicts.
+
+
+The [held-out comparison](../../research/heldout-2026-10-16/README.md) uses six new\-to\-refinement texts and
+two fresh independent blind judges over the same frozen outputs. Anyway, the existin' study driver accepts a
+`--plan` when preparing a new run, records its path/hash, and reuses the production judge contract. Fair dinkum, it does
+not rewrite historical packets or reports. Each repeat has its own frozen report manifest'n summary.

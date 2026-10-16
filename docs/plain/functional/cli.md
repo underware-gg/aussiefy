@@ -37,11 +37,11 @@ What `compare`, `gaps` and the `dev` steps do is described in [maintainer-tools.
 | Option | Commands | Meaning |
 |---|---|---|
 | `text` | translate, yarn, lint, plan, verify, judge unharnessed | The text itself, a file path, or nothing to read stdin |
-| `--document-type TYPE` | translate, yarn, lint, plan, guide, verify, yarn-tools | General (default), Custom, Auto detection, or a named type; guide requires a named type |
+| `--document-type TYPE` | translate, yarn, lint, plan, guide, verify, yarn-tools, judge brief/run/unharnessed | General (default), Custom, Auto detection, or a named type; guide requires a named type |
 | `--document-config JSON` | same document operations | Exact behaviour overrides; see [translation controls](translation-controls.md) |
-| `-e/--embellishment SETTING` | translate, yarn, lint, plan, guide, verify, yarn-tools | 0–2 or deadset/dinkum/troppo; default Dinkum for General; named types supply defaults |
-| `--english {auto,us,uk,none}` | translate, yarn, lint, plan, verify, yarn-tools | Source-English dialect context |
-| `--markup {text,markdown,mdx,auto}` | translate, yarn, lint, plan, verify, yarn-tools, judge unharnessed | Extended document mode; differs from strict `--markdown` ([controls](translation-controls.md)) |
+| `-e/--embellishment SETTING` | translate, yarn, lint, plan, guide, verify, yarn-tools, judge brief/run/unharnessed | 0–2 or deadset/dinkum/troppo; default Dinkum for General; named types supply defaults |
+| `--english {auto,us,uk,none}` | translate, yarn, lint, plan, verify, yarn-tools, judge brief/run/unharnessed | Source-English dialect context |
+| `--markup {text,markdown,mdx,auto}` | translate, yarn, lint, plan, verify, yarn-tools, judge brief/run/unharnessed | Extended document mode; differs from strict `--markdown` ([controls](translation-controls.md)) |
 | `--dict PATH` | all leaf commands except embedder, dev ingest, dev round and judge tally | An extra entry file or directory, on top of the built-in dictionary (repeatable); on nested commands, put it after the step |
 | `-l/--level LEVEL` | translate, yarn, yarn-tools, lookup, lint, verify, guide, plan, compare, gaps, judge brief/run/unharnessed | 1-5 or `tourist`, `blow-in`, `local`, `larrikin`, `swaggie` (default 5) |
 | `--vulgarity VULGARITY` | translate, yarn, yarn-tools, lookup, lint, verify, guide, plan, judge brief/run/unharnessed | 0-3 or `nan`, `dad`, `uncle-bob`, `tradie` (default: the level's own) |

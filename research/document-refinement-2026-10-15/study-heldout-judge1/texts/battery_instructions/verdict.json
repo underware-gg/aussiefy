@@ -1,0 +1,117 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "engine": "B"
+  },
+  "evaluation_protocol": 2,
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 3,
+      "tone": 5,
+      "flow": 5,
+      "variety": 4,
+      "essence": 5
+    },
+    "engine": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 1,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"tighten both screws by hand.\" retains quantity and method; every action, the five-minute wait, wet-cloth prohibition, damaged-case or leaking-battery response and L12-only scope remain in the original order.",
+      "sense": "\"Keep a firm hold on the cover while you loosen the two screws.\" preserves the exact practical sense of holding it firmly while loosening, with similarly accurate everyday paraphrases elsewhere.",
+      "authenticity": "\"Give it five minutes before you open the battery cover.\" is natural everyday Australian-compatible instruction phrasing.",
+      "register": "\"stop using the lantern and get in touch with the supplier.\" makes connecting prose conversational but still relatively general and light for level 4; the exact safety actions are appropriately retained.",
+      "tone": "\"Don't touch the metal contacts with a wet cloth.\" keeps the warning direct and serious, with no joke or dismissal of the hazard.",
+      "flow": "\"Give the outside a wipe with a dry cloth, put the cover back on, and tighten both screws by hand.\" presents the action sequence clearly and smoothly.",
+      "variety": "\"Give the outside a wipe\" repeats the give-construction already used for cleaning the lantern and waiting five minutes.",
+      "essence": "\"These instructions are only for model L12.\" preserves the precise scope and the original orderly safety procedure."
+    },
+    "engine": {
+      "meaning": "\"These instructions apply only to model L12.\" preserves the restricted scope; the unchanged procedure also preserves every action, warning, quantity, timing and method.",
+      "sense": "\"Hold the cover firmly while loosening the two screws.\" retains its precise practical sense; no term is misapplied.",
+      "authenticity": "\"switch it off.\" is ordinary Australian-compatible usage without a forced localism.",
+      "register": "\"Before cleaning the demonstration lantern, disconnect it from the charger and switch it off.\" retains the original neutral instruction style throughout, without the requested level-4 voice in eligible connecting prose.",
+      "tone": "\"Do not touch the metal contacts with a wet cloth.\" preserves the direct, serious safety warning.",
+      "flow": "\"Wipe the outside with a dry cloth, replace the cover, and tighten both screws by hand.\" is a smooth and clear sequence of actions.",
+      "variety": "\"Wait five minutes before opening the battery cover.\" varies the imperative structure from disconnecting, holding and wiping; no stock slang is repeated.",
+      "essence": "\"If the case is cracked or the battery is leaking, stop using the lantern and contact the supplier.\" preserves the safety-first character and specific response within the complete original procedure."
+    }
+  },
+  "problems": {
+    "current": [
+      {
+        "quote": "If the case is cracked or the battery's leaking, stop using the lantern and get in touch with the supplier.",
+        "original": "If the case is cracked or the battery is leaking, stop using the lantern and contact the supplier.",
+        "severity": "major",
+        "why": "Register: the connecting words are more conversational, but the eligible prose is still noticeably lighter than level 4. The safety terms and required actions themselves are correct."
+      },
+      {
+        "quote": "Give the outside a wipe with a dry cloth",
+        "original": "Wipe the outside with a dry cloth",
+        "severity": "minor",
+        "why": "Variety: the give-construction is used for a third time after giving the lantern a clean and giving it five minutes."
+      }
+    ],
+    "engine": [
+      {
+        "quote": "Before cleaning the demonstration lantern, disconnect it from the charger and switch it off.",
+        "original": "Before cleaning the demonstration lantern, disconnect it from the charger and switch it off.",
+        "severity": "major",
+        "why": "Register: the text reproduces the neutral original throughout, rather than voicing eligible connecting prose at level 4. Exact safety steps and details are correctly preserved."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "Accurate and responsible instructions, with a conversational voice somewhat lighter than level 4.",
+    "engine": "Fully faithful and clear, but the requested Australian retelling is absent."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "engine"
+      ]
+    ],
+    "flow": [
+      [
+        "current",
+        "engine"
+      ]
+    ],
+    "variety": [
+      [
+        "engine"
+      ],
+      [
+        "current"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "engine"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "engine"
+      ]
+    ]
+  }
+}

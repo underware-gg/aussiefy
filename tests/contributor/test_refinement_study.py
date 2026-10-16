@@ -183,3 +183,10 @@ def test_blind_evaluator_receives_complete_frozen_contract_without_candidate_key
     assert contract["markup"] == "text" and contract["markup_rules"] is None
     assert not {"key", "names", "labels"} & packet.keys()
     assert "anchor-one" not in json.dumps(packet) and "anchor-two" not in json.dumps(packet)
+
+
+def test_manifest_remembers_the_selected_plan_for_later_actions(study, monkeypatch):
+    data = study.manifest()
+    assert data["plan_path"] == "plan.yaml"
+    monkeypatch.setattr(study, "PLAN", study.ROOT / "another-plan.yaml")
+    assert study.manifest() == data

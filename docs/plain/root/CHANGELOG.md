@@ -5,6 +5,10 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Carry the complete effective writing contract through agent/API judging and reference retelling, preserve
+  legacy judgement protocols, and add held-out repeat-judge evidence plus an attributed public-domain
+  Good Samaritan Bible passage.
+
 - Verify real optional SDK HTTP serialization offline, require Python 3.10/minimum-SDK and current-SDK
   compatibility smoke checks before release CI, and consolidate duplicate toolkit contract tests.
 
