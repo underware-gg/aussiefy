@@ -11,14 +11,16 @@ and the checks the loader runs. How entries get into the dictionary is in the co
 ```
 aussiefy/data/
   concepts.yaml        controlled concept vocabulary + plain-English trigger patterns per frame
+  grammar.yaml         editable person nouns, adjective/noun sense limits and reviewed name-comparison aliases for the frame checker
   profiles.yaml        level profiles 1-5, the swearing rates per vulgarity, and policy defaults
   phonetic.yaml        drawl: contractions (level 4+), respellings (level 5), swear infixes (by vulgarity),
                        and Australian spelling (kind: spelling)
+                       optional unless_before regex excludes grammatical contexts before a rule match
   riffs.yaml           the image a term calls up (wheelie bin: bin chickens fightin' over the scraps)
   guide.yaml           voice, language limits, openings, gated craft, workflow, plan note and yarn rules
   swears.yaml          swear words by strength, for lint and for rating riffs
   dialect.yaml         US/UK patterns, Australian replacements, sense guards and lint-only expressions
-  genres.yaml          per-form policies, embellishment settings and the default retelling
+  genres.yaml          explicit document presets and embellishment settings
   judge.yaml           blind comparison rubric and report schema
   pos/                 licensed English POS weights and provenance metadata
   source_policy.yaml   sites the scraper must not bulk-extract (reference-only)
@@ -127,3 +129,39 @@ with `to`, optional `plural`, `frame`, `known_only` and `not_in`. Replacement/pl
 See [translation controls](translation-controls.md) and the executable
 [dialect](../../../tests/functional/test_dialect.py), [noun phrase](../../../tests/functional/test_noun_phrase.py)
 and [schema](../../../tests/functional/test_schema.py) specifications.
+
+## Frame vocabulary
+
+`grammar.yaml` contains `person_nouns` (lower-case noun forms) and `adjective_nouns` (adjective to allowed
+following nouns). The same adjective rule applies to attributive matches after a linking verb, so “great
+disappointments” cannot evade it through a predicate frame. Multiword person triggers do not make their bare
+head a person: “a party animal” does not make an animal a person. Bare person triggers and explicit role nouns
+supply the person's vocabulary. Keep genuinely human singular and plural roles in the list.
+
+Plural-only clothing forms remain available where they fit. Where a singular agreeing verb must remain, the
+engine selects a compatible singular alternative rather than introducing “is my togs”.
+
+Similarity fallback covers slot-free predicate patterns with a fixed literal shape. Optional-word patterns
+remain supported by exact trigger matching; they are not guessed through similarity.
+
+## Drawl comparison
+
+A literal drawl rule may declare `reads_as`, its canonical wording for lint's refrain comparison:
+
+```yaml
+- id: want-to-wanna
+  match: "(?i)\\bwant to\\b"
+  replace: wanna
+  reads_as: want to
+  prob: 0.6
+  min_level: 5
+```
+
+Lint reads these annotations from the loaded dictionary, including custom data. This is a comparison spelling,
+not a grammatical inverse: ambiguous `yer` is consistently read as `your`. Group-reference replacements and
+spelling rules cannot declare `reads_as`. Dropped-g words are also normalised during comparison.
+
+`grammar.yaml` may declare `name_aliases`, a mapping of exact original phrases to accepted comparison wordings.
+These only affect lint fidelity, never translation. Keep them narrowly reviewed: a capitalised common phrase
+such as `Christmas Trees` can have `Chrissy trees` as an alias without exempting `Christmas Island` or words
+inside a person's name. Changed names without an explicit alias retain their warnings.

@@ -10,8 +10,9 @@
     aussiefy dev ingest|scrape|fragments|harvest|tag|review|round  # maintainers: sources, scraping, rounds
 
 Every command reads the same dictionary (the built-in one plus any --dict files). The toolkit commands
-(translate, yarn, lookup, lint, guide, plan, verify) take the same two dials, by number or name, each on its own:
+(translate, yarn, lookup, lint, guide, plan, verify) take the same three dials, by number or name, each on its own:
   -l/--level        1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie (default)
+  -e/--embellishment 0 deadset, 1 dinkum, 2 troppo
   --vulgarity       0 nan, 1 dad, 2 uncle-bob, 3 tradie (default: the level's own: nan at 1-2, dad at 3-4,
                     uncle-bob at 5); "-l swaggie --vulgarity nan" is full Aussie with no swearing
 and -s/--seed where choices are made; translate and plan also --variety, --registers, --region, --unlock; and
@@ -42,7 +43,7 @@ from .errors import UserError
 from .dialect import ENGLISHES
 from .loader import load_genres
 from .markup import MARKUPS
-from .policy import parse_embellishment, parse_level, parse_vulgarity
+from .policy import DOCUMENT_TYPES, parse_embellishment, parse_level, parse_vulgarity
 
 FELL_BACK = 4
 REFUSED = 3
@@ -61,8 +62,9 @@ writing your own version with the toolkit (what an agent does):
 {workflow}
 
 Text comes from the arguments, a single file, or stdin. The toolkit commands (translate, yarn, lookup,
-lint, guide, plan) take the same two dials, by number or name:
+lint, guide, plan) take the same three dials, by number or name:
   -l/--level        1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie (default)
+  -e/--embellishment 0 deadset, 1 dinkum, 2 troppo
   --vulgarity       0 nan, 1 dad, 2 uncle-bob, 3 tradie (default: the level's own: nan at 1-2, dad at 3-4,
                     uncle-bob at 5); "-l swaggie --vulgarity nan" is full Aussie with no swearing
 Every command reads the built-in dictionary plus any --dict files.
@@ -175,7 +177,21 @@ def _policy(args) -> dict:
 def _steering(args) -> dict:
     """The engine options translate and plan share, as the toolkit's parameters."""
     return {"variety": args.variety, "registers": _csv(args.registers), "regions": _csv(args.regions),
-            "unlock": _csv(args.unlock), "english": args.english, "embellishment": args.embellishment}
+            "unlock": _csv(args.unlock), "english": args.english, "embellishment": args.embellishment, **_document(args)}
+
+
+def _document(args) -> dict:
+    return {"document_type": args.document_type, "document_config": args.document_config}
+
+
+def _document_json(value: str) -> dict:
+    from .policy import DocumentOverrides
+    try:
+        raw = json.loads(value)
+        DocumentOverrides.parse(raw)
+        return raw
+    except (ValueError, UserError) as exc:
+        raise argparse.ArgumentTypeError(str(exc)) from exc
 
 
 def _json(obj) -> None:
@@ -227,7 +243,7 @@ def cmd_yarn(args) -> int:
     from .yarn import yarn
 
     result = yarn(_text(args), seed=args.seed, model=args.model, cache=not args.no_cache, markup=args.markup, english=args.english,
-                  embellishment=args.embellishment, translator=_translator(args),
+                  embellishment=args.embellishment, **_document(args), translator=_translator(args),
                   **_policy(args))
     if args.json:
         _json(result.to_dict())
@@ -240,11 +256,11 @@ def cmd_yarn(args) -> int:
 
 def cmd_yarn_tools(args) -> int:
     """Yarn mode's loop run by hand: an agent (or a person) is the model, and each step is one call."""
-    from .yarn import brief, dispatch_tool
+    from .retelling import brief, dispatch_tool
 
     source = _read(args.source, "source", verbatim=True)
     session = brief(source, seed=args.seed, markup=args.markup, english=args.english,
-                    embellishment=args.embellishment, translator=_translator(args), **_policy(args))
+                    embellishment=args.embellishment, **_document(args), translator=_translator(args), **_policy(args))
     if args.declined and args.step == "lint":   # each call is a fresh session: lint learns what was declined here
         session.decline(_declined(args.declined))
     if args.step == "brief":
@@ -310,7 +326,7 @@ def cmd_lint(args) -> int:
 
     original = _read(args.original, "--original") if args.original else None
     out = harness.lint(_text(args), original=original, markup=args.markup, english=args.english,
-                       embellishment=args.embellishment, translator=_translator(args), suggest=args.suggest,
+                       embellishment=args.embellishment, **_document(args), translator=_translator(args), suggest=args.suggest,
                        **_policy(args))
     if args.json:
         _json(out)
@@ -333,7 +349,7 @@ def cmd_verify(args) -> int:
 
     original = _read(args.original, "--original")
     out = harness.verify(_text(args), original=original, markup=args.markup, english=args.english,
-                         embellishment=args.embellishment, translator=_translator(args),
+                         embellishment=args.embellishment, **_document(args), translator=_translator(args),
                          **_policy(args))
     if args.json:
         _json(out)
@@ -369,13 +385,16 @@ def cmd_judge(args) -> int:
         _json(j.tally(verdicts))
         return 0
     tr = _translator(args)
+    if args.judge_command != "read":
+        writing = {"markup": args.markup, "english": args.english, "embellishment": args.embellishment,
+                   **_document(args)}
     if args.judge_command == "unharnessed":
         eff = tr.effective(**_policy(args))
         original = _text(args)
         if args.prompt_only:
-            print(j.unharnessed_prompt(original, level=eff.level, vulgarity=eff.vulgarity, markup=args.markup))
+            print(j.unharnessed_prompt(original, level=eff.level, vulgarity=eff.vulgarity, translator=tr, **writing))
         else:
-            print(j.unharnessed(original, model=args.model, markup=args.markup, translator=tr, **_policy(args)))
+            print(j.unharnessed(original, model=args.model, translator=tr, **_policy(args), **writing))
         return 0
     if args.judge_command == "read":
         packet = j.Packet.from_dict(_json_file(args.packet, "packet"), where=args.packet)
@@ -390,17 +409,17 @@ def cmd_judge(args) -> int:
         original = _read(args.original, "--original")
         if args.judge_command == "run" and args.unharnessed:
             try:
-                candidates["unharnessed"] = j.unharnessed(original, model=args.model, markup="auto", translator=tr,
-                                                          **_policy(args))
+                candidates["unharnessed"] = j.unharnessed(original, model=args.model, translator=tr,
+                                                          **_policy(args), **writing)
             except claude.Error as exc:
                 print(f"[judge] no unharnessed retelling: {type(exc).__name__}: {exc}", file=sys.stderr)
                 return FELL_BACK
-        packet = j.blind(original, candidates, seed=args.seed, translator=tr, **_policy(args))
+        packet = j.blind(original, candidates, seed=args.seed, translator=tr, **_policy(args), **writing)
         rubric = j.Rubric.load()
         if args.judge_command == "brief":
             Path(args.output).write_text(json.dumps(packet.to_dict(rubric), indent=1, ensure_ascii=False),
                                          encoding="utf-8")
-            judging = {k: v for k, v in packet.to_dict(rubric).items() if k in ("instructions", "prompt", "schema")}
+            judging = packet.judging(rubric)
             _json(judging)   # what the judge sees: no key
             print(f"packet (with the key) -> {args.output}; judge it, then: aussiefy judge read {args.output} "
                   "REPORT.json", file=sys.stderr)
@@ -422,7 +441,7 @@ def cmd_guide(args) -> int:
 
     from .guide import style_guide_data
 
-    g = harness.guide(embellishment=args.embellishment, translator=_translator(args), **_policy(args))
+    g = harness.guide(embellishment=args.embellishment, **_document(args), translator=_translator(args), **_policy(args))
     if args.json:
         _json(g)
     else:
@@ -744,10 +763,13 @@ def build_parser() -> argparse.ArgumentParser:
     embellished = argparse.ArgumentParser(add_help=False)
     embellished.add_argument("-e", "--embellishment", type=_dial(parse_embellishment), metavar="EMBELLISHMENT",
                              help="how much liberty the telling takes: 0-2 or deadset (straight), dinkum (a genuine "
-                                  "voice), troppo (a performed yarn). Default: for translate, the text's genre's "
-                                  "own (a story troppo, a letter dinkum, news, instructions, docs and official "
-                                  "prose deadset); for a retelling and its checks (yarn, plan, lint, verify, "
-                                  "guide) dinkum")
+                                  "voice), troppo (a performed yarn). Default Dinkum for General; named types "
+                                  "supply defaults; explicit settings and advanced overrides win")
+    embellished.add_argument("--document-type", choices=DOCUMENT_TYPES, default="general",
+                             help="document behaviour preset (default general); auto opts into detection; custom enables only configured behaviours")
+    embellished.add_argument("--document-config", type=_document_json, metavar="JSON",
+                             help="exact behaviour overrides as JSON; nested profile tunes rates, limits and spacing; "
+                                  "omitted keys inherit, lists replace")
     toolkit = [dictionary, policy, as_json]
     sub = p.add_subparsers(dest="command", required=True, metavar="COMMAND")
 
@@ -809,10 +831,10 @@ def build_parser() -> argparse.ArgumentParser:
     cands.add_argument("original", help="the original text file")
     cands.add_argument("--candidate", action="append", required=True, metavar="NAME=FILE",
                        help="a translation to judge (2 to 8 of them, with --unharnessed counted)")
-    jb = jsub.add_parser("brief", parents=[*toolkit, seeded, cands],
+    jb = jsub.add_parser("brief", parents=[*toolkit, seeded, cands, marked, english, embellished],
                          help="the blind packet, for an agent to judge (prints what the judge sees)")
     jb.add_argument("-o", "--output", default="judge-packet.json", help="the packet, with the key to unblind it")
-    jr = jsub.add_parser("run", parents=[*toolkit, seeded, cands], help="judge with Claude and print the report card")
+    jr = jsub.add_parser("run", parents=[*toolkit, seeded, cands, marked, english, embellished], help="judge with Claude and print the report card")
     jr.add_argument("--unharnessed", action="store_true",
                     help="add a model's own retelling (no toolkit) as a candidate, the reference point")
     jr.add_argument("--model", default=DEFAULT_MODEL, help="Claude model to judge (and retell) with")
@@ -821,7 +843,7 @@ def build_parser() -> argparse.ArgumentParser:
     jrd.add_argument("packet")
     jrd.add_argument("report")
     jrd.add_argument("--judge", default="", help="who judged it, to record in the verdict")
-    ju = jsub.add_parser("unharnessed", parents=[*toolkit, marked, text],
+    ju = jsub.add_parser("unharnessed", parents=[*toolkit, marked, text, english, embellished],
                          help="a model's own retelling, the reference")
     ju.add_argument("--prompt-only", action="store_true", help="print the brief for an agent to answer instead")
     ju.add_argument("--model", default=DEFAULT_MODEL)

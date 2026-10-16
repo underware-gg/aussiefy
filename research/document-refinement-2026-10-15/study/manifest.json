@@ -1,0 +1,618 @@
+{
+  "source_commit": "245ae755d3204e8c6ac1a79fb02b3ebe5b333472",
+  "plan_sha256": "bc6acd62f91c5d17fd47aadf0a0e066559d3b22d6842df7882c145716bda2184",
+  "driver_sha256": "1b4f434e1be249520df1973030d80b9db58bc4be1f16e485b53d82709a7241cd",
+  "rubric_version": 3,
+  "engine_files": {
+    "aussiefy/__init__.py": "0891187a239aeff6b5a95c5f656b00901b7cff9a7a86593736449f3347e0997a",
+    "aussiefy/align.py": "c81e2d5e2bde60d6cfd80ace84d40ae4cf453a9007cb9b28645ad27ec8a80b0b",
+    "aussiefy/claude.py": "c5d67f3c351006663be3f1095ba0dd27a83c2e2d866ccb38e20bd03de4db49e8",
+    "aussiefy/cli.py": "d69480a64027853c304eb02677797e1c9b852af36524118734604b6da9e920fb",
+    "aussiefy/context.py": "683794dadfe3b095a73989e73d574d3f6bc447eab102596272a015c0dc8d2d2e",
+    "aussiefy/data/concepts.yaml": "ba71783d14724639ebb2e20ac9c15d63421b7b09c67c99f041a3d171f22da9f2",
+    "aussiefy/data/dialect.yaml": "fe575da570e23615fbadf955fd3d7dccc142da58625eb3214fdbe77565a53c1c",
+    "aussiefy/data/entries/classics.yaml": "9b56aa94dbe4385ff07fc06350dad7af5a5515fd6bbd12fe907fff88fdce8c81",
+    "aussiefy/data/entries/dinkumcheck.yaml": "2f7c4ca793ba5b5de0053b78b548766f0f23be1560bd76354c2197428c8f2980",
+    "aussiefy/data/entries/everyday.yaml": "ad80e506ac17e462cb91c34a8d147a4e48f6c5e94dfd6b44bb7601aabe2eac54",
+    "aussiefy/data/entries/fairdinkum.yaml": "f02bbfd441c233007631fcea0a7b01787bd8593ed0cb6e25b7df13644cac60c6",
+    "aussiefy/data/entries/flagged.yaml": "0966e94fe79e9f3d9e86f8c05bf9a3f25834142d645c3d7c15534d42a48c6326",
+    "aussiefy/data/entries/fourthpass.yaml": "d3f4f054429da1ff7dd321e5117a1cfef9514b7429dd07854da00d6aac4aec4c",
+    "aussiefy/data/entries/fragments.yaml": "1883a15e3d65ebd2bee142dc65f57028f55db4f2da9f1eba3e1da6070484ac82",
+    "aussiefy/data/entries/gapfill.yaml": "7763349206535e3c151e21eb0598f6c42ad163f8cb105763f608a26800b5c88c",
+    "aussiefy/data/entries/garnish.yaml": "73207353fa0a682127a6727d945d17e3fa466af12c9356c690fd2809538393d4",
+    "aussiefy/data/entries/idioms.yaml": "72bef5db605a1dfe41810eaf4fd14e1026b22e8963d4c980eb6ac209a464b170",
+    "aussiefy/data/entries/lexical.yaml": "f4bd5565498fc910f9d74fc2a4f7bd2b0faa6e765588e726803cf7a36ddde863",
+    "aussiefy/data/entries/phrases.yaml": "9534802f3a52a3c061b55d3e69e32c76a611338133d7ef18d9960a89db3863d4",
+    "aussiefy/data/entries/scraped.yaml": "15fc044490680f13a8b24eef39f0668b9488ee74961b1ed2985c5b93b918c32e",
+    "aussiefy/data/entries/secondpass.yaml": "b1fdd5bbf9a597cb8239b5b58a1468155ae1307be9b17a18c0ff7297a9c882b5",
+    "aussiefy/data/entries/swearing.yaml": "9d514aa20038ef0a48fd97ae3e5b31c0a0802bb5a2ef892d91648072d38324c2",
+    "aussiefy/data/entries/thirdpass.yaml": "988d5a6b1a23c8e0e352da86777825c9429772964bbdf222982b209a54b28169",
+    "aussiefy/data/genres.yaml": "37bca4bbfd96a03232e8e4f27f76c01f88a7a62ca4d53a84d423753530973ce3",
+    "aussiefy/data/grammar.yaml": "9c384595403144d446f7823aa6027b014b98c048e07e34fed36e09b5b8b88510",
+    "aussiefy/data/guide.yaml": "fb6a4549d414c03584ff75b38d4d5f93747d955e8e68665f34214b839d31b4f8",
+    "aussiefy/data/judge.yaml": "f4122c83d9297c8b359688b23256c62e325df34c7c7c5bac3b593b1bb2596cc2",
+    "aussiefy/data/model/meta.json": "2dfbc3c8b6909dcfa821fd846116904f0f79b57b07c75b104e8ffa91e1991a5a",
+    "aussiefy/data/model/vectors.f16": "c43adab96572058bb1c106fc448f6ebf56e9a1f9406360b462cd6874e16273ac",
+    "aussiefy/data/model/vocab.txt": "9fe80d0dca7829bce0490b8f4004f417fe7b230fb275802e64087ba7cc3dc5eb",
+    "aussiefy/data/phonetic.yaml": "05eb6894727f82d69e33f7301da0219aad2a6c51e6ffa48098e23dd49aeaf27a",
+    "aussiefy/data/pos/README.md": "d51caf6d3b464e907d4f0337f4126caa2f9b31da64940184ea851d4ff6883ca5",
+    "aussiefy/data/pos/meta.json": "d6df62aecd3971528037cd2f387d944537e8a6ce04be7b7d538ae29cb903dc7b",
+    "aussiefy/data/pos/tagger.json.gz": "3222c88544fbc2600def0686055843f9dccc3f60d485c4b791339ea8af2627f6",
+    "aussiefy/data/profiles.yaml": "db918602c1978c2c09e22ac72958882cd68133b83839e82efa4ae1419591f284",
+    "aussiefy/data/riffs.yaml": "fc61f161c50e0dabfdc9e3c0203e8aab14f5f997cd9e6c6d25b2e557ff616593",
+    "aussiefy/data/source_policy.yaml": "4ffbe6513020907b1f2425f1be874ae7739ad4254a154a39accf1b1190cc2c12",
+    "aussiefy/data/sources.yaml": "775eac577b8f75ca95af98310c15ee91db271e35528ce6c8284437a12ac34349",
+    "aussiefy/data/swears.yaml": "48518167f51ac8f0f3ca19c7614439521d41f36a8ef384d683f86e1ae2d971b2",
+    "aussiefy/detect.py": "1a383aa295559780edf83fd72fdfa4facfd8041dcdb0aa9fc3dcb780f4286174",
+    "aussiefy/dialect.py": "8cf34ba9a2bdb86d924351122b4eaa6a2690730f64d1bc0ee97f6a6a8e46eb33",
+    "aussiefy/dump.py": "208fa74cd244718552d8dc2065321f44f604c8ac79937bcabb010fdc030fbf20",
+    "aussiefy/embed.py": "afb78a3624c86492800aa8f639f008d45c8de5906d930827a47f169bd01a737f",
+    "aussiefy/engine.py": "76508c6379f84b5168b1bac36e758cc8c4a13d0ae9365b8c48c6bc1a92b5cfcf",
+    "aussiefy/errors.py": "3c565cfe02d93f68f0a57bb1013a0dc799b47bea748c9a38b1639e1483448319",
+    "aussiefy/explain.py": "9027beb88ce242457c772fdef6023308acd9ace3c94c5a17055f42b36eade907",
+    "aussiefy/gaps.py": "715711e7c5eb0d21d48b1a5ce07e51f904ba6bde20be621d7be8f5802bb241c0",
+    "aussiefy/garnish.py": "564b0d1e31c5fe8970f3949eaa6ba2e9b1cb53ca549e64d1b5f11c1a7f9afae9",
+    "aussiefy/genre.py": "e62c798f4b5348e5c7b3f998a3a5b6ea5d7d7ef00208bae0654e9849be6e313b",
+    "aussiefy/guide.py": "bb953b1de8782da4e26cc2cb6c4c09ea8c6da9cee8bfc66f9cfb2438cb2cf07e",
+    "aussiefy/harness.py": "49d92f15fe97fe6b24c79a793422ed5db3bf361b1853c9f9a0782bca49daba97",
+    "aussiefy/judge.py": "ec7b06b376fd15d489d2404e0890abd2db086895fffb43ae221c12bcd3c4044f",
+    "aussiefy/lint.py": "2454283d56327c39d7397196927014375cb3712331e6406b0d599b4e09e58da5",
+    "aussiefy/llm.py": "4f7a4aacfa0f6e060417ec6690829c8a764459e205af91924f6a798b3890a7ca",
+    "aussiefy/loader.py": "2ff97ca82e157941aee60254e096a65a35fabab43d42bb3cda94f3956e3af83d",
+    "aussiefy/lookup.py": "4a864943f0183cd209312ffdccafe9256bd91f9926936dfd7bf2d63fa17ec31f",
+    "aussiefy/markdown.py": "33fb59927f47a56a5537a78bdfab107d62dcc011611ca2a908debedfeb83f376",
+    "aussiefy/markup.py": "9bfe4154dafd8181185c12fb23d130c614b205a4a3ab5b7fc9dcd858ba36ab64",
+    "aussiefy/matcher.py": "d7f526ca140e4559ffef0c397cce449d47db85e62dce516354d020ac61f0bc48",
+    "aussiefy/mcp_server.py": "799f3061198a71b883998190ce3119ee8bea417ae9a125a084466f8a3c98e9ae",
+    "aussiefy/model.py": "35a70f6fb8b1184e89340845a963513379b67fcfdcbcd30e31dd2b8ba191d5d3",
+    "aussiefy/models.py": "b8c1e4f03d9d2bbe221fd2382112afb07668e489b50499a51a41995a0afcbf65",
+    "aussiefy/morph.py": "e3cdd0934ec0d7867e9624f3f0359549e289c5de624ca3de78b326103b3ec0b3",
+    "aussiefy/policy.py": "90474f25f10d5da8ee29052250253306d4b9d54e3f89809e2e4955edaf02f5dd",
+    "aussiefy/pos.py": "2dd736bba71f76cab58d0820dea5b48cbcd330b47032a49990b2b84cac3cc50c",
+    "aussiefy/profile.py": "faca5d7b66e4afff461f77ccf7051d9b761e5e9d86487bb21120d3091e1dfc64",
+    "aussiefy/protected.py": "2909130ba76dc405bdc7496929044a81b83ac3efa73c4adc62db1e792dcade03",
+    "aussiefy/realise.py": "5609d7092742c7f2581fe913b2900dfabf6bb63bc61f791a3ac15ba73537f085",
+    "aussiefy/rounds.py": "3ba82247e6f0ae805a7545f66adf550511ba1792425ba088f148a04074c3a5d5",
+    "aussiefy/schema.py": "f90d9a25c1f88ff2ffe01f20838faf07ee2b5203c8b41e39b86cf406d1bfe4b8",
+    "aussiefy/scrape/__init__.py": "87bb592f9905a5ccc99020dfaf7af0c359fc9e9d15d825730f20b8b0d10e3696",
+    "aussiefy/scrape/fetch.py": "e57b85891834e29dc25e7e2bc3170715d5dc2dab1fcffc5e6875a539a57c0fb7",
+    "aussiefy/scrape/fragments.py": "063fed1f9d3b71c5de4ffea7e04516df7683c031a74d5afa9e8f2d6f93cbb47a",
+    "aussiefy/scrape/harvest.py": "30d099a5a76b7099180c5440a965024059e092a9ffb8410a6be2d9443f99c90e",
+    "aussiefy/scrape/ingest.py": "4af0978359d2eaab2ae3ff33fc34cc48263c6de38620d2e85e891918b4be508b",
+    "aussiefy/scrape/normalise.py": "2995e0c1457404eb1bbc1eff499628ac719a91fc1661bd958b212c52ca27e60b",
+    "aussiefy/scrape/parse.py": "0f93f4a2dc14b4e385054c3fa8216bd5cc3be365e475c0d2149260c4c9174596",
+    "aussiefy/scrape/review.py": "8cdff28d564935c029c8376ff23f8e357dd1ef4a9a445af37c1ae9a1eac13641",
+    "aussiefy/scrape/tag.py": "9b13c5f8467c8ffe5362945765f8cb1c2da35a960cb16f283f6364279ba5be2c",
+    "aussiefy/select.py": "13eee27837de49291565d0ae6004e8f46b514f5010572d760beb5c79da2b8a10",
+    "aussiefy/static.py": "a6490595c3200e89ec71639d85d25b6a2f71f5963ebed75fc47ae343d1f4b150",
+    "aussiefy/terms.py": "d1d4857ffe557fb342533e9f29d8069fbe6ddcb52bf3b7fc46eb07ad09cd02fd",
+    "aussiefy/text.py": "8b63bd8d6d4e3777f9ddc94b065e5e4dbd87dae71cbcc5d2a2d20d3e3668b812",
+    "aussiefy/translation.py": "7d0dcebcbc9baeee2b4b640f2b9c1aad92e07e1341b3062b7b0a9635495faf28",
+    "aussiefy/verify.py": "34273141474249606c0b54022b48bb149f4e8246364c8e68d5a9df837b023e48",
+    "aussiefy/yarn.py": "1cbfb0be4a3cae368eff3cc7b4a167c68cde95aaa437c346664742220effa4ab"
+  },
+  "cases": [
+    {
+      "name": "news__bob_weir_obituary",
+      "source": "tests/corpus/everyday/news/bob_weir_obituary.txt",
+      "source_sha256": "08fb4c53f5c096e41b16eb66eb08e3ade29a2e4df40f6d2d7e00b61ea33c540d",
+      "policy": {
+        "level": 3,
+        "vulgarity": 1,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "news",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__bob_weir_obituary/dinkum-3.txt",
+          "sha256": "3d86bae9e061867e818f2af4f029e83dd59038e7958c8c5ad06b6456e78f0dec"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__bob_weir_obituary/yarn-dinkum.txt",
+          "sha256": "8ba122748146698ee8eec9966e762bcba61fa6f91690035750d4981e861bdd4c"
+        }
+      },
+      "brief_sha256": "5529e906fbc056a73ee70179daa511379e0331d638b5f9649afd90b6cb372bd1",
+      "policy_sha256": "4f1c0cef633e898da69f8772b20bd6168640fb68dc5c2fab7af52a2145a9f09e"
+    },
+    {
+      "name": "news__boston_area_forecast_discussion",
+      "source": "tests/corpus/everyday/news/boston_area_forecast_discussion.txt",
+      "source_sha256": "7b59acd0338269dbd74287071a9b1f9f06ed90a65539e6e8f272849e3f9336dc",
+      "policy": {
+        "level": 4,
+        "vulgarity": 1,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "news",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__boston_area_forecast_discussion/dinkum-3.txt",
+          "sha256": "13aaf3520c8ce6b1e9cebbb480c5b931481dbef96b2ac481fe29e1636df49887"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__boston_area_forecast_discussion/yarn-dinkum.txt",
+          "sha256": "da527c314cf9e47e40fc36c3e2e7f89ec76ffac8d2c6a3682ca666201ca23cd2"
+        }
+      },
+      "brief_sha256": "d3872da2acb7ce8e2b693e165c666af9bad5b0446a8c6d29ba36c5cd43c1d6da",
+      "policy_sha256": "7c24b69d4d8eee73a4ab8c7016bd641046cdd792fd3b2e917e9e86946e5f5836"
+    },
+    {
+      "name": "news__ford_square_dance_1925",
+      "source": "tests/corpus/everyday/news/ford_square_dance_1925.txt",
+      "source_sha256": "865cc7fef5fe5dbdadf63aa3f326e5a4be37e634fd67ad8578fdc42be97956d0",
+      "policy": {
+        "level": 5,
+        "vulgarity": 2,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "news",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__ford_square_dance_1925/dinkum-3.txt",
+          "sha256": "5a77345a173c804386949dbaabc7fa5f67d8d33b6a2615ea56ddc8a89c0d07f2"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__ford_square_dance_1925/yarn-dinkum.txt",
+          "sha256": "4d00ad5ce1d6807897a7c312019513ea0cce161bcfe2bbe76b8c8bad97cb173c"
+        }
+      },
+      "brief_sha256": "bc547294b78a0fde185997695abb3f82b1731d7d102a4f3e2d602c7e8508e3ed",
+      "policy_sha256": "79742fe93ee7d36703e097e452136aa097fe6ecc94bea485050fc54275496eb5"
+    },
+    {
+      "name": "news__julio_teheran_retires",
+      "source": "tests/corpus/everyday/news/julio_teheran_retires.txt",
+      "source_sha256": "f748ebe8271847cabb5c4cd5dd98f2263b1dcc7981d7e08ccb7e2e3b69b107fd",
+      "policy": {
+        "level": 2,
+        "vulgarity": 0,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "news",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__julio_teheran_retires/dinkum-3.txt",
+          "sha256": "2c7cf77f8db45e31f741495fa92d41558ad068c4bd6ed0e892a5c32447f0194b"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__julio_teheran_retires/yarn-dinkum.txt",
+          "sha256": "ede3bcd586c7e41f1601b52b884b62cdf39648a7f1e985f84a3f36b904ac2a7b"
+        }
+      },
+      "brief_sha256": "c5a72b623853836667108534e293673f0b1eb2c33574bfb8d932e3e80da7d3f3",
+      "policy_sha256": "a4f24429d0af9c1c24a39f06383a74f7997780d76a4d5d95795c148ab9d4ad7a"
+    },
+    {
+      "name": "news__mount_vernon_hemlock_storm",
+      "source": "tests/corpus/everyday/news/mount_vernon_hemlock_storm.txt",
+      "source_sha256": "cde408f9ed16bb9af9d07b00a821cd8954ec0421ef829f142ae41eb2eab4dc15",
+      "policy": {
+        "level": 3,
+        "vulgarity": 1,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "news",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__mount_vernon_hemlock_storm/dinkum-3.txt",
+          "sha256": "9b7d4ecdeb1a97f18b2fe9e3cb2283c39b70842dc304a3065cb75f29e93500b1"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__mount_vernon_hemlock_storm/yarn-dinkum.txt",
+          "sha256": "c5ecc825dcfbad046727358c98d4b4f7d5636b8aa6d32ae1c761e933f1f4839f"
+        }
+      },
+      "brief_sha256": "33ab92770c390c2cac4f35715f4de891da4a244ddd9dca57f5a3250d14db66ea",
+      "policy_sha256": "4f1c0cef633e898da69f8772b20bd6168640fb68dc5c2fab7af52a2145a9f09e"
+    },
+    {
+      "name": "news__nasa_nfl_flyover",
+      "source": "tests/corpus/everyday/news/nasa_nfl_flyover.txt",
+      "source_sha256": "fc90c38d8fc39ec05b714402707838c36456dac2e9800f4b926b1464c8218cde",
+      "policy": {
+        "level": 4,
+        "vulgarity": 1,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "news",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__nasa_nfl_flyover/dinkum-3.txt",
+          "sha256": "27a2a1f4cb8cedbcd5b75d261830cfa3de9e983faa6dd11abde1a50708e11be9"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__nasa_nfl_flyover/yarn-dinkum.txt",
+          "sha256": "4b199f5eb04a49312f9f689a1664b245e0787aea7ff7fd34615df46602ea8611"
+        }
+      },
+      "brief_sha256": "5ddad1ecbb918537699562f4992f08529c92efb9918634207c54d131d988538e",
+      "policy_sha256": "7c24b69d4d8eee73a4ab8c7016bd641046cdd792fd3b2e917e9e86946e5f5836"
+    },
+    {
+      "name": "news__nashville_kurdish_community_anniversary",
+      "source": "tests/corpus/everyday/news/nashville_kurdish_community_anniversary.txt",
+      "source_sha256": "685c0f79f2b5e946d5400b326c3e378ffa7052d2f0f750d83d06cde2b7b3e8f8",
+      "policy": {
+        "level": 5,
+        "vulgarity": 2,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "news",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__nashville_kurdish_community_anniversary/dinkum-3.txt",
+          "sha256": "e8ff2c3ffe0448ff53defe1cf02e4e05544e0880b649cc61805f2085466b3363"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__nashville_kurdish_community_anniversary/yarn-dinkum.txt",
+          "sha256": "7cf6a12d9776f66afb0f9114f4b033d30daf8753f0a602fe6e5481c057669281"
+        }
+      },
+      "brief_sha256": "3c5370b38805e12daa14e6172ddce60f0b9f66b7557f03ec5d5a04eda50cd845",
+      "policy_sha256": "79742fe93ee7d36703e097e452136aa097fe6ecc94bea485050fc54275496eb5"
+    },
+    {
+      "name": "news__santa_fe_christmas_tree_permits",
+      "source": "tests/corpus/everyday/news/santa_fe_christmas_tree_permits.txt",
+      "source_sha256": "711d8ed38c822d8f6f1657e364bfefcfceae82d806a6e6485b1133d0ead24a19",
+      "policy": {
+        "level": 2,
+        "vulgarity": 0,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "news",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__santa_fe_christmas_tree_permits/dinkum-3.txt",
+          "sha256": "860592fe0f5783a105e5b040731cf75cf3df37ab3f02e1fe76824275c71dde71"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__santa_fe_christmas_tree_permits/yarn-dinkum.txt",
+          "sha256": "e8839f3ad03f4d05a5173bbaa2a6f63ebcfc35e4ca51042eda69819113b52dc5"
+        }
+      },
+      "brief_sha256": "197ed5a79aa7b982acb0e20d935a853c76dc46776c25c18def0270eef9514eff",
+      "policy_sha256": "a4f24429d0af9c1c24a39f06383a74f7997780d76a4d5d95795c148ab9d4ad7a"
+    },
+    {
+      "name": "news__usgs_low_level_survey_flights",
+      "source": "tests/corpus/everyday/news/usgs_low_level_survey_flights.txt",
+      "source_sha256": "6f833b4068116bba58e2400d1ada38dc04c9fd819487d98e1be516c82297d5cd",
+      "policy": {
+        "level": 3,
+        "vulgarity": 1,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "news",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__usgs_low_level_survey_flights/dinkum-3.txt",
+          "sha256": "6e94bcc36e9a031b87da934d1e796197a6ae90731b3e82ab6cbd020f9ce24882"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__usgs_low_level_survey_flights/yarn-dinkum.txt",
+          "sha256": "95d7fbcebc4bd84865733decb1486561375103ead82ae65d623cff4c1833ef74"
+        }
+      },
+      "brief_sha256": "cb823f041e766ec3a1e29d79eb31091c72f2daa447754713ffa7619cb2729d2e",
+      "policy_sha256": "4f1c0cef633e898da69f8772b20bd6168640fb68dc5c2fab7af52a2145a9f09e"
+    },
+    {
+      "name": "news__wilbur_crafts_obituary_1922",
+      "source": "tests/corpus/everyday/news/wilbur_crafts_obituary_1922.txt",
+      "source_sha256": "3d723f1b0d86b54b5e914d8dd36ba01c4419de77e4e3f1d637eaa0091f810d4d",
+      "policy": {
+        "level": 4,
+        "vulgarity": 1,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "news",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__wilbur_crafts_obituary_1922/dinkum-3.txt",
+          "sha256": "4453f038243a9250a03cb83396112aa4edf53089834a3f9faaccc68e6d860ecf"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__wilbur_crafts_obituary_1922/yarn-dinkum.txt",
+          "sha256": "b97a3025029487078aafe4d2e94e4fa7adc710c376bd60d8861f81654b405f4f"
+        }
+      },
+      "brief_sha256": "d5d73469eaa387afd1590d68979060c98ae92e37c55dcf844ed36cd289a2ab17",
+      "policy_sha256": "7c24b69d4d8eee73a4ab8c7016bd641046cdd792fd3b2e917e9e86946e5f5836"
+    },
+    {
+      "name": "news__yellowstone_fishing_restrictions_lifted",
+      "source": "tests/corpus/everyday/news/yellowstone_fishing_restrictions_lifted.txt",
+      "source_sha256": "780553e0fa3e18500a38031bceea2982f579a9778f10e0ae0376f5daca880878",
+      "policy": {
+        "level": 5,
+        "vulgarity": 2,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "news",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__yellowstone_fishing_restrictions_lifted/dinkum-3.txt",
+          "sha256": "ce9a57cd8ba2f87dee10bccf99558ede17d8a6633805a9ba7187f936d3efc1d9"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/news__yellowstone_fishing_restrictions_lifted/yarn-dinkum.txt",
+          "sha256": "747542e8d28331495c297fca0c3272babc0745ac663ca1066e6e3c5e22c552fd"
+        }
+      },
+      "brief_sha256": "4b94186fceceaf96ee19dc10428cb5a3b50d2dd259d766029a8565ed0d5cf87f",
+      "policy_sha256": "79742fe93ee7d36703e097e452136aa097fe6ecc94bea485050fc54275496eb5"
+    },
+    {
+      "name": "workplace__cloud_gov_pages_why",
+      "source": "tests/corpus/everyday/workplace/cloud_gov_pages_why.md",
+      "source_sha256": "b3addf37770f77886deeedc4f24c6c2ef567c8b4f6ddeca03794e3b6b94b26ef",
+      "policy": {
+        "level": 3,
+        "vulgarity": 1,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "official",
+        "document_config": {},
+        "markup": "markdown"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/workplace__cloud_gov_pages_why/dinkum-3.txt",
+          "sha256": "b5ded96bf0e161666ebc97a73f56f0a70c9c9e12437a67c85200151ed97230fc"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/workplace__cloud_gov_pages_why/yarn-dinkum.txt",
+          "sha256": "294715cc1133c6ff3e67edd8f3bfcbcdcf41c9d05093d3fbd4dd6c4ee5030899"
+        }
+      },
+      "brief_sha256": "117ba8760c1531f5d001f34d605dcbed215c3ea4b445fceda5cd635d37034230",
+      "policy_sha256": "45f6d0bb99dd08d6957c900316dfe11cba5aa7b804bd14438eedf915f9349041"
+    },
+    {
+      "name": "workplace__fomc_minutes_policy_actions",
+      "source": "tests/corpus/everyday/workplace/fomc_minutes_policy_actions.txt",
+      "source_sha256": "a998066f93e983cdee154aaffe43ef3cd3cb3a5649634379ae6b768e2676ab0e",
+      "policy": {
+        "level": 4,
+        "vulgarity": 1,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "official",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/workplace__fomc_minutes_policy_actions/dinkum-3.txt",
+          "sha256": "b756620b85c1dd8bcc51d97ad3f82c72f3f31b87558d3d5e1503d5633bc4b5d2"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/workplace__fomc_minutes_policy_actions/yarn-dinkum.txt",
+          "sha256": "4ecbeb6d78e842f227ea9b7e3ff6941ecaea74ec26aec86a958cdca78cb4e7a3"
+        }
+      },
+      "brief_sha256": "0f751de5e6e8c611b0b1693775a72175b9e5554201ee1ad597c8cf9fcc6519be",
+      "policy_sha256": "e5d88eea81d9356b4035df9499c45c18f8ec371249ed5bc31d5cabd4d2d83a86"
+    },
+    {
+      "name": "workplace__github_gifts_policy",
+      "source": "tests/corpus/everyday/workplace/github_gifts_policy.md",
+      "source_sha256": "0e37a69a34ce7cfe30bfb15b2962eed94f35f37e264bb872b58676276d39da60",
+      "policy": {
+        "level": 2,
+        "vulgarity": 0,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "official",
+        "document_config": {},
+        "markup": "markdown"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/workplace__github_gifts_policy/dinkum-3.txt",
+          "sha256": "235891b3fc260e7770960895ec0b363db4b77d044f0c07a5f9356598da33cec3"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/workplace__github_gifts_policy/yarn-dinkum.txt",
+          "sha256": "136b1f18b481447f991a623eaac0a7ad2addf04007f83d33bac7eca8ed435cf9"
+        }
+      },
+      "brief_sha256": "c1ecd9e0f6a3cf7df3f71008178c76c77af5c112479687d390dbc225068223ab",
+      "policy_sha256": "3c93d883ad6301cd6188b0af1bc0a9f12c18dcb45399dc328b27624ae4ac47f3"
+    },
+    {
+      "name": "workplace__github_terms_account_terms",
+      "source": "tests/corpus/everyday/workplace/github_terms_account_terms.md",
+      "source_sha256": "0315f7a2c1d52c3c282b8adbd13aa8bfc032f7e43ccd45a5577a94a856fe1484",
+      "policy": {
+        "level": 3,
+        "vulgarity": 1,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "official",
+        "document_config": {},
+        "markup": "markdown"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/workplace__github_terms_account_terms/dinkum-3.txt",
+          "sha256": "cf557ca99a710fc3a374ddf69e68a0f038f0efce05022ce538aa15aeb8c27d79"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/workplace__github_terms_account_terms/yarn-dinkum.txt",
+          "sha256": "a00635e857ae0ab773c0c2fbaf891b694e5747409211b76e2141dc1aac3f6888"
+        }
+      },
+      "brief_sha256": "3280934efe6ea426648e47b9a475e630b1daf496b89af5bc9149a71ed7e85d17",
+      "policy_sha256": "45f6d0bb99dd08d6957c900316dfe11cba5aa7b804bd14438eedf915f9349041"
+    },
+    {
+      "name": "workplace__login_gov_common_scams",
+      "source": "tests/corpus/everyday/workplace/login_gov_common_scams.md",
+      "source_sha256": "9fde30ebf5074840a61111e5d21638be7128a28fba9fa9f1aef844453a8e055e",
+      "policy": {
+        "level": 5,
+        "vulgarity": 2,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "official",
+        "document_config": {},
+        "markup": "markdown"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/workplace__login_gov_common_scams/dinkum-3.txt",
+          "sha256": "08addef39a8b64c167adc4356daad0693fffb4f4cdb8f6fd0f5848e7d6f7e220"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/workplace__login_gov_common_scams/yarn-dinkum.txt",
+          "sha256": "b61e310f68456ddad3d3505e3c48a726e0a75ba23b7e529e94ec25943f6821ff"
+        }
+      },
+      "brief_sha256": "37c62cff39fca5b5c2942ac28b7fa389b5033838546135d130d2348d1a6941a1",
+      "policy_sha256": "7e10987c7859764ced9de8a58a67f5dd691813a430ae8a1c97b5a5de250013b0"
+    },
+    {
+      "name": "workplace__nara_technical_writer_editor_job",
+      "source": "tests/corpus/everyday/workplace/nara_technical_writer_editor_job.txt",
+      "source_sha256": "a129233aa5abd40b2d5840f17388202e9079091bcad3e9b31dc33528047d2807",
+      "policy": {
+        "level": 3,
+        "vulgarity": 1,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "official",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/workplace__nara_technical_writer_editor_job/dinkum-3.txt",
+          "sha256": "73a8fe2fe37fe8076418f05bbf4571d6a16587202830eba551cf6fa8bcb5246f"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/workplace__nara_technical_writer_editor_job/yarn-dinkum.txt",
+          "sha256": "432013eb47a8bbec6878e9d2f626f205e4ae9ef4ed0a9378c34bdacabcd024a9"
+        }
+      },
+      "brief_sha256": "7294c4e22831c36ac054c0365c6639c7bd4959ece7bf2bb868f6cf6c8f4bf296",
+      "policy_sha256": "806aa1a43f0816b662fa00650854034493f528f71b7dde7c2c069083413b5a18"
+    },
+    {
+      "name": "workplace__tts_travel_comp_time",
+      "source": "tests/corpus/everyday/workplace/tts_travel_comp_time.md",
+      "source_sha256": "d7b6e6404bfe23396611d538c249b2c199ee1dc37f45662c513d4350d9ab3afc",
+      "policy": {
+        "level": 2,
+        "vulgarity": 0,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "official",
+        "document_config": {},
+        "markup": "markdown"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/workplace__tts_travel_comp_time/dinkum-3.txt",
+          "sha256": "952f670e249c3c3f72fe0df2e8e9d5ca0e64c26f2866ec4a2362e43e351b855d"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/workplace__tts_travel_comp_time/yarn-dinkum.txt",
+          "sha256": "22d8e99dffa5fcdf105cd2146d5adfeed89be957bcf79edcba5b72e30a7b3b93"
+        }
+      },
+      "brief_sha256": "4701b2b4931d0558d151cc8a03072f792aa3f33c9e281bde96b501c49ab94bf6",
+      "policy_sha256": "3c93d883ad6301cd6188b0af1bc0a9f12c18dcb45399dc328b27624ae4ac47f3"
+    },
+    {
+      "name": "interfold__learn_use_cases",
+      "source": "tests/corpus/everyday/interfold/learn_use_cases.mdx",
+      "source_sha256": "da4514ed405a66ef90676995742bc2f01bbccbf557d18484e6341b3e30249543",
+      "policy": {
+        "level": 5,
+        "vulgarity": 2,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "official",
+        "document_config": {},
+        "markup": "mdx"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/interfold__learn_use_cases/dinkum-3.txt",
+          "sha256": "5ee855bcb0955a137edc8aa6f86bed5ab132388afcfd8fa1de89a88814fccd62"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/interfold__learn_use_cases/yarn-dinkum.txt",
+          "sha256": "6f5109b80225ef8cef77bdd41a9e09b018b51367980a96e89cf805336587afd9"
+        }
+      },
+      "brief_sha256": "29fe3909b0462a7ec45fbb4df3f16bfadef46781fb7c026f728f46c2dc9488e3",
+      "policy_sha256": "cc091d4a7eb3232322fd1b57306d43f5502db87a30a84f971fc90a6f7624db24"
+    },
+    {
+      "name": "interfold__faq_auction",
+      "source": "tests/corpus/everyday/interfold/faq_auction.mdx",
+      "source_sha256": "0536ec1a41f4decba4f72f97ddb73e51db22fe503eb62e7f4423a8095021d708",
+      "policy": {
+        "level": 3,
+        "vulgarity": 1,
+        "seed": 1,
+        "embellishment": "dinkum",
+        "document_type": "official",
+        "document_config": {},
+        "markup": "mdx"
+      },
+      "anchors": {
+        "dinkum-3": {
+          "path": "research/dinkum-check-2026-10-14/texts/interfold__faq_auction/dinkum-3.txt",
+          "sha256": "976422dc4b46d567fb1c7fbda96679472f686797acab963a4b9a6713e6556a29"
+        },
+        "pre-fix-yarn": {
+          "path": "research/dinkum-check-2026-10-14/texts/interfold__faq_auction/yarn-dinkum.txt",
+          "sha256": "c30a5c4282592102b60a8f6dd62e6a108154e054f96d2325f8774a1746f5f684"
+        }
+      },
+      "brief_sha256": "8bc39f47e51c166dac3cfdaffe36f5fde2eb95253d508faf1fbfced2589cb7c2",
+      "policy_sha256": "c9c79b4d2b700fdd8147c518803aa2023cbf88d0160539d444a6e282b4642854"
+    }
+  ],
+  "writer": "fresh Codex agent contexts using yarn tools; no historical candidates shown",
+  "judge": "independent fresh Codex agent contexts; candidate names withheld"
+}

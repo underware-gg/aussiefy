@@ -29,7 +29,7 @@ SEVERITIES = ("critical", "major", "minor", "info")
 SEVERITY = {
     "markup_changed": "critical", "number_dropped": "critical", "empty": "critical", "unmatched": "minor",
     "too_vulgar": "major", "dialect": "major", "spelling": "major", "flagged": "major",
-    "too_short": "major",
+    "too_short": "major", "document_changed": "major",
     "swear_overuse": "minor", "swear_density": "minor", "tag_in_narration": "minor", "tag_overuse": "minor",
     "pile_up": "minor", "repeated": "minor", "repeated_phrase": "minor", "stock_opener": "minor", "stock_closer": "minor",
     "too_long": "minor", "name_added": "minor", "name_dropped": "minor", "untouched": "info",
@@ -56,17 +56,18 @@ class Problem:
 
 def verify(text: str, *, original: str, level: int | str = 5, vulgarity: int | str | None = None,
            markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
+              document_type: str = "general", document_config: dict | None = None,
            translator: Translator | None = None) -> dict[str, Any]:
     """Problems in text as a translation of original, worst first, each with a severity: critical (broke the
     document or a fact), major (breaks the brief: the policy, Australian English), minor (craft, or a hint
     worth a look), info (coverage); and metrics that put them in proportion. ok is true with no critical or
     major problem. markup (markdown, mdx, auto) reads the prose only and checks the markup came through.
     english (us, uk, auto, none) is the original's English, for its US and British words; embellishment
-    (deadset, dinkum, troppo; None = a retelling's, as for lint) how much longer than the original it may run."""
+    (deadset, dinkum, troppo; None = the selected document type's default) how much longer than the original it may run."""
     tr = translator or default_translator()
-    eff = tr.effective(level=level, vulgarity=vulgarity)
+    eff = tr.effective(level=level, vulgarity=vulgarity, document_config=document_config)
     checked = lint(text, original=original, level=level, vulgarity=vulgarity, markup=markup,
-                   english=english, embellishment=embellishment, translator=tr, suggest=False)
+                   english=english, embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr, suggest=False)
     problems = [Problem(SEVERITY[i["kind"]], i["kind"], i["phrase"],
                         i.get("why") or (f"use {i['australian']}" if i.get("australian") else "fix it"))
                 for i in checked["issues"]]
@@ -99,6 +100,8 @@ def verify(text: str, *, original: str, level: int | str = 5, vulgarity: int | s
     return {
         "ok": not counts["critical"] and not counts["major"],
         **eff.envelope(),
+        **{k: checked[k] for k in ("document_type", "document_type_source", "genre", "genre_scores",
+                                  "document_config", "document_overrides")},
         "counts": counts,
         "problems": [p.to_dict() for p in problems],
         "metrics": {"original_words": len(original.split()), "translation_words": len(text.split()),

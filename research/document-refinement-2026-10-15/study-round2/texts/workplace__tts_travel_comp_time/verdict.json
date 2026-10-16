@@ -1,0 +1,153 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "dinkum-3": "A",
+    "pre-fix-yarn": "B",
+    "current": "C"
+  },
+  "scores": {
+    "dinkum-3": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 3,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "dinkum-3": {
+      "meaning": "\"When your flights actually took off and landed\" changes the recommended log points from departures and arrivals to airborne times, which can omit taxi time; the eligibility and forfeiture rules remain intact.",
+      "sense": "\"put in for travel comp time\" and \"have a squiz\" correctly mean request and consult.",
+      "authenticity": "\"Give your Timekeeper or an HR Specialist at your agency a shout\" is natural Australian informal advice.",
+      "register": "\"have a squiz\" and \"put in for\" supply a light local touch without crowding out the practical guidance or adding vulgarity.",
+      "tone": "\"Once you hit the expiry date, you forfeit the leave\" keeps the firm employment-rule warning clear.",
+      "flow": "\"The hours are based on elapsed time, and you work that out using the time zone you left from\" is easy spoken explanation.",
+      "variety": "\"put in for\", \"have a squiz\" and \"Give your Timekeeper or an HR Specialist at your agency a shout\" offer varied phrasing rather than a recurring tag.",
+      "essence": "\"### Understanding travel comp time\" and \"### Using travel comp time\" retain the guide's path from eligibility to calculation to expiry."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"one year (26 pay periods)\" and \"the time zone you left from\" retain the expiry and elapsed-time calculation instructions, alongside the conditions and links.",
+      "sense": "\"Have a squiz\" fits consulting the fact sheet, and \"runs out\" accurately means expires.",
+      "authenticity": "\"if you're after more detail\" and \"we reckon it's worth keeping a log\" sound like natural Australian workplace advice.",
+      "register": "\"Have a squiz\" and \"we reckon\" provide a light Australian presence while the technical rules stay plain, matching level 2.",
+      "tone": "\"Please get in touch with your Timekeeper or an HR Specialist\" keeps the helpful, responsible employee-guidance tone.",
+      "flow": "\"any travel comp time you haven't used is gone too: it's forfeited\" repeats the same point awkwardly at the close.",
+      "variety": "\"after more detail\", \"finer points\" and \"runs out\" vary the conversational wording without recurring slang tags.",
+      "essence": "\"Travel comp time is for “temporary duty,” also known as “TDY” travel\" keeps the defining scope and the original step-by-step guide shape."
+    },
+    "current": {
+      "meaning": "\"Use the departure time zone to calculate that elapsed time\" and \"you forfeit any unused travel comp time\" retain the calculation and departure-from-GSA rules.",
+      "sense": "\"have a squiz\" correctly invites consulting the linked fact sheet.",
+      "authenticity": "\"If you have questions, please get in touch\" and \"have a squiz\" are natural language for an Australian workplace guide.",
+      "register": "\"When calculating travel comp time hours\" reflects mostly conventional guidance with one local phrase, leaving the level-2 retelling somewhat faint.",
+      "tone": "\"Your salary level and schedule type don’t limit your ability to earn travel comp time\" keeps the inclusive but factual employment-guidance tone.",
+      "flow": "\"for further details to work out the breakdown of their hours\" is a somewhat tangled purpose phrase within otherwise clean writing.",
+      "variety": "\"counts as\", \"acts as\" and \"get in touch\" vary the plain verbs and avoid repeated tics.",
+      "essence": "\"### Calculating travel comp time\" followed by \"### Using travel comp time\" preserves the guide's practical order and purpose."
+    }
+  },
+  "problems": {
+    "dinkum-3": [
+      {
+        "quote": "When your flights actually took off and landed",
+        "original": "When your flights actually departed and arrived",
+        "severity": "major",
+        "why": "Takeoff and landing can exclude taxi time included in departure and arrival, which matters in a guide to logging compensable elapsed travel time."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "any travel comp time you haven't used is gone too: it's forfeited",
+        "original": "any unused travel comp time will be forfeited",
+        "severity": "minor",
+        "why": "The final explanatory repetition is unnecessary and less fluent."
+      }
+    ],
+    "current": [
+      {
+        "quote": "for further details to work out the breakdown of their hours",
+        "original": "to determine the breakdown of your hours",
+        "severity": "minor",
+        "why": "The two purpose phrases make the linked-resource sentence less smooth."
+      },
+      {
+        "quote": "When calculating travel comp time hours, travel ends when you check in at the hotel or arrive home.",
+        "original": "For calculating travel comp time hours, travel ends when you check in at the hotel or arrive home.",
+        "severity": "minor",
+        "why": "The mainly standard wording makes the requested light Australian vernacular very faint beyond squiz."
+      }
+    ]
+  },
+  "summaries": {
+    "dinkum-3": "A natural, well-pitched light Australian guide with intact rules and structure, but its flight log wording risks changing the hours employees record.",
+    "pre-fix-yarn": "The strongest combination of factual precision and light local voice here, with only a redundant final phrase.",
+    "current": "A faithful and responsible plain-English guide with a natural local touch, though lighter than requested and slightly clumsy around one resource link."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "dinkum-3",
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "flow": [
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "variety": [
+      [
+        "dinkum-3",
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "essence": [
+      [
+        "dinkum-3",
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "overall": [
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "current"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "dinkum-3": "B",
+    "pre-fix-yarn": "C"
+  },
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 4,
+      "sense": 4,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 4,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"He graduated from Wesleyan in 1869 and the Divinity School of Boston University in 1871\" preserves the qualifications; dates, names, activities and quotations survive.",
+      "sense": "\"made no bones about his opposition\" accurately conveys outspoken opposition.",
+      "authenticity": "\"got through\", \"going flat out\" and \"durries\" are natural local usages.",
+      "register": "\"a fair bit of influence\" and \"never let up on\" bring an Australian cadence, though some biographical linking remains relatively restrained for level 4.",
+      "tone": "\"After funeral services here tomorrow, his body will be sent\" remains respectful, with no gag or disparaging aside.",
+      "flow": "\"Among a long list of titles that raise no eyebrows, one curious one stands out\" cleanly retells a long original sentence.",
+      "variety": "\"made no bones\", \"going flat out\" and \"raise no eyebrows\" offer variety without recurring tags.",
+      "essence": "\"He averaged six lectures a week, delivered in twenty-nine different countries\" retains the obituary’s unusual productivity portrait and contrasting public reputation."
+    },
+    "dinkum-3": {
+      "meaning": "\"well known right across the country\" adds a specific national extent to widely known; the rest of the names, chronology and quotations are intact.",
+      "sense": "\"he wrote a fair bit on moral questions\" weakens prolific to a merely moderate quantity.",
+      "authenticity": "\"Those on side with him\" and \"stayed put\" sound natural rather than theatrical.",
+      "register": "\"The mob on the other side\", \"a big hand\" and \"barely got a rest\" give sustained, broad level-4 prose without swearing.",
+      "tone": "\"has died of pneumonia in hospital here today, aged 73\" is respectful; the conversational opposition description does not become ridicule.",
+      "flow": "\"On top of a steady stream of papers for religious magazines\" links smoothly into the editorship detail.",
+      "variety": "\"a big hand\", \"stayed put\" and \"having a go\" provide varied idiom.",
+      "essence": "\"His pen and his voice barely got a rest\" preserves the industrious reformer portrait and the public-amusements contrast."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"He finished at Wesleyan in 1869 and at the Divinity School of Boston University in 1871\" no longer explicitly states graduation, although the rest of the factual sequence and quotations are preserved.",
+      "sense": "\"a fair whack of the credit\" appropriately conveys influential involvement; \"rein in\" conveys restricting use.",
+      "authenticity": "\"got precious little rest\" and \"a stack\" are natural local expressions.",
+      "register": "\"sheer hard yakka\", \"his dad's church\" and \"stayed from then on\" give broad level-4 vocabulary and cadence.",
+      "tone": "\"had a red-hot go at stopping\" adds a slightly boisterous edge to an otherwise respectful obituary.",
+      "flow": "\"who ran the International Reform Bureau as its superintendent for 28 years after founding it himself, and who was known far and wide\" makes the opening a lengthy nested sentence.",
+      "variety": "\"puritan stock\", \"a stack\" and \"precious little rest\" vary the local language well.",
+      "essence": "\"His pen and his voice got precious little rest over the last fifty years\" keeps the distinctive prolific-reformer portrait."
+    }
+  },
+  "problems": {
+    "current": [
+      {
+        "quote": "She worked alongside him in many of his numerous activities",
+        "original": "his partner in many of his numerous activities",
+        "severity": "minor",
+        "why": "Representative of linking prose that remains quite neutral; the overall level-4 body is a little restrained."
+      }
+    ],
+    "dinkum-3": [
+      {
+        "quote": "well known right across the country",
+        "original": "widely known",
+        "severity": "minor",
+        "why": "Adds a geographical extent the original does not state."
+      },
+      {
+        "quote": "he wrote a fair bit on moral questions",
+        "original": "He was a prolific writer on moral questions.",
+        "severity": "minor",
+        "why": "Fair bit is weaker than the original assertion of prolific output."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "He finished at Wesleyan in 1869",
+        "original": "He was graduated from Wesleyan in 1869",
+        "severity": "minor",
+        "why": "Finishing at an institution is less explicit than graduating; the same weakening affects the divinity qualification."
+      },
+      {
+        "quote": "had a red-hot go at stopping",
+        "original": "endeavored to prevent",
+        "severity": "minor",
+        "why": "Adds a more boisterous sporting flavour than this respectful obituary needs."
+      },
+      {
+        "quote": "who ran the International Reform Bureau as its superintendent for 28 years after founding it himself, and who was known far and wide",
+        "original": "for 28 years superintendent of the International Reform Bureau which he founded, and widely known",
+        "severity": "minor",
+        "why": "The opening retains an awkward stack of relative clauses rather than speaking cleanly."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "Accurate and respectful, with smooth idiomatic prose and slightly restrained vernacular weight.",
+    "dinkum-3": "Natural, broad and respectful; two small changes in specificity and strength.",
+    "pre-fix-yarn": "Strong local voice and the original portrait survive, with a few small precision, tone and sentence-shape weaknesses."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ],
+    "flow": [
+      [
+        "current",
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ]
+  }
+}

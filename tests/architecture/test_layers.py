@@ -7,8 +7,8 @@ from pathlib import Path
 PKG = Path(__file__).resolve().parents[2] / "aussiefy"
 MODULES = {p.stem for p in PKG.glob("*.py")} | {p.parent.name for p in PKG.glob("*/__init__.py")}
 CORE = {"text", "matcher", "detect", "select", "realise", "morph", "garnish", "context", "policy", "schema",
-        "model", "terms", "embed", "engine", "loader", "static", "dump", "dialect", "genre", "pos", "protected"}
-UPPER = {"__init__", "harness", "lookup", "lint", "guide", "yarn", "llm", "claude", "cli", "mcp_server", "gaps",
+        "model", "terms", "embed", "engine", "loader", "static", "dump", "dialect", "genre", "pos", "protected", "profile"}
+UPPER = {"__init__", "harness", "lookup", "lint", "guide", "retelling", "yarn", "llm", "claude", "cli", "mcp_server", "gaps",
          "rounds", "explain", "scrape", "models", "markdown", "translation", "align", "verify", "judge", "markup"}
 NEUTRAL = {"errors"}   # shared by every layer, and imports nothing of the package
 # embed.make_embedder("local") resolves the installed model's config: the one place the core reaches out
@@ -59,11 +59,16 @@ def test_the_core_imports_nothing_above_it():
         assert not upward, (module, upward)
 
 
+def test_shared_agent_workflow_does_not_depend_on_api_clients():
+    for module in ("harness", "retelling"):
+        assert not _imports(module) & {"yarn", "llm", "claude"}, module
+
+
 def test_the_shared_modules_import_nothing_of_the_package():
     for module in sorted(NEUTRAL):
         assert not _imports(module), module
 
 
 def test_the_dictionary_model_does_no_io():
-    for module in ("model", "schema", "policy", "matcher", "text", "genre"):
+    for module in ("model", "schema", "policy", "matcher", "text", "genre", "profile"):
         assert "loader" not in _imports(module), module

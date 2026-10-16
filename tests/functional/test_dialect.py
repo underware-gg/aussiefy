@@ -42,8 +42,8 @@ def test_a_word_australians_use_in_another_sense_needs_its_english(translator):
 def test_a_term_of_art_stays_in_its_genre(translator):
     tech = ("The server sets a cookie in the HTTP response header. The browser stores cookies and sends them "
             "with each request to the API, so the session token and user data persist across requests.")
-    assert "cookie" in _t(translator, tech) and "biscuit" not in _t(translator, tech)
-    assert _t(translator, "Then eat a cookie.") == "Then eat a biscuit."
+    assert "cookie" in _t(translator, tech, document_type="auto") and "biscuit" not in _t(translator, tech, document_type="auto")
+    assert _t(translator, "Then eat a cookie.", document_type="auto") == "Then eat a biscuit."
 
 
 def test_english_none_turns_the_swaps_off(translator):

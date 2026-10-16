@@ -3,7 +3,7 @@
     pip install -e '.[mcp]'
     aussiefy-mcp                      # stdio transport
 
-Claude Code:  claude mcp add aussiefy -- aussiefy-mcp
+Configure your agent to launch aussiefy-mcp over stdio; see docs/user/agents.md.
 
 Each tool is a thin adapter over the harness function of the same name, with the same parameters (less the
 in-process translator); tests/test_interfaces.py holds the two in step.
@@ -20,15 +20,18 @@ from . import harness
 from .guide import style_guide_data
 
 INSTRUCTIONS = """Tools for rewriting English as genuine Australian English (levels 1-5).
-Workflow: aussie_guide for the level, aussie_plan for the rule engine's draft and planned phrases, write your
-own version using aussie_lookup for genuine options, then aussie_lint your text and fix every issue.
+Use the shared workflow below for the guide, plan, writing, lint and verification steps.
 aussie_translate gives the plain deterministic output if that's all you need; aussie_verify checks a finished
 translation against its original. Two independent dials, by number
 or name: level 1-5 (tourist, blow-in, local, larrikin, swaggie) and vulgarity 0-3 (nan, dad, uncle-bob, tradie);
 vulgarity defaults to the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5), and tradie is never a default.
-A third, embellishment 0-2 (deadset, dinkum, troppo), is how much liberty the telling takes: dinkum by default for
-aussie_plan, aussie_lint, aussie_guide and aussie_verify (a retelling's), the text's genre's own for
-aussie_translate."""
+A third, embellishment 0-2 (deadset, dinkum, troppo), controls liberty in the telling. General is the default
+explicit document type, with Dinkum embellishment. Auto opts into detection; named types supply presets;
+Custom enables only explicitly configured optional behaviours. document_config applies exact overrides after
+the preset and explicit dials. False and empty lists override inherited settings. Its nested profile object
+tunes substitution, frames, garnish rates/limits/spacing, stack, phonetic, stretch, swearing and rewrite
+thresholds; partial objects inherit missing keys from level/vulgarity defaults. profile_config reports the
+complete resolved numeric settings. Custom still requires optional behaviours enabled explicitly."""
 
 
 INSTRUCTIONS += "\n" + style_guide_data().workflow_for("mcp")
@@ -89,43 +92,47 @@ def build_server():
     def aussie_lint(text: Text, level: Level = 5, vulgarity: Vulgarity = None,
                     original: str | None = None, markup: str = "text", english: str | None = None,
                     embellishment: int | str | None = None,
+              document_type: str = "general", document_config: dict | None = None,
                     suggest: bool = True) -> dict[str, Any]:
         """Lint an Aussified draft: flagged or non-Australian phrases, swearing over the cap or overused, US
         spelling, and US and British words (english: us, uk, auto, none, as for aussie_translate). Pass the original text to also check length and that names and numbers survive.
         Also suggests spots that could be more Aussie. markup (markdown, mdx, auto) lints the prose only and,
         with the original, checks its code and markup came through unchanged. embellishment (deadset, dinkum,
-        troppo; default dinkum, a retelling's): how much longer than the original it may run. suggest=False
+        troppo; default Dinkum for General): how much longer than the original it may run. suggest=False
         skips the optional suggestions (a whole engine translation), for a faster check."""
         return harness.lint(text, level=level, vulgarity=vulgarity, original=original, markup=markup,
-                            english=english, embellishment=embellishment, suggest=suggest)
+                            english=english, embellishment=embellishment, document_type=document_type, document_config=document_config, suggest=suggest)
 
     @tool
     def aussie_guide(level: Level = 5, vulgarity: Vulgarity = None,
-                     embellishment: int | str | None = None) -> dict[str, Any]:
+                     embellishment: int | str | None = None,
+              document_type: str = "general", document_config: dict | None = None) -> dict[str, Any]:
         """Voice, language limits and craft rules for Aussifying at a level (1-5), and how much liberty to take
-        at an embellishment (deadset, dinkum, troppo; default dinkum, a retelling's)."""
-        return harness.guide(level=level, vulgarity=vulgarity, embellishment=embellishment)
+        at an embellishment (deadset, dinkum, troppo; default Dinkum for General)."""
+        return harness.guide(level=level, vulgarity=vulgarity, embellishment=embellishment, document_type=document_type, document_config=document_config)
 
     @tool
     def aussie_plan(text: Text, level: Level = 5, seed: Seed = 0, vulgarity: Vulgarity = None,
                     variety: Variety = 0, registers: Registers = None,
                     regions: Regions = None, unlock: Unlock = None,
                     markup: str = "text", english: str | None = None,
-                    embellishment: int | str | None = None) -> dict[str, Any]:
+                    embellishment: int | str | None = None,
+              document_type: str = "general", document_config: dict | None = None) -> dict[str, Any]:
         """The rule engine's draft, the slang it planned (with riffs and suggested openings), and the sentences
         it found too formal to handle, and guidance for the text's genre and embellishment. Takes
         aussie_translate's options. embellishment defaults to dinkum, a retelling's (the plan is for writing
         your own version); pass the genre's own setting for a plan that matches aussie_translate's output."""
         return harness.plan(text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
                             registers=registers, regions=regions, unlock=unlock, markup=markup, english=english,
-                            embellishment=embellishment)
+                            embellishment=embellishment, document_type=document_type, document_config=document_config)
 
     @tool
     def aussie_translate(text: Text, level: Level = 5, seed: Seed = 0, vulgarity: Vulgarity = None,
                          variety: Variety = 0, registers: Registers = None,
                          regions: Regions = None, unlock: Unlock = None,
                          markdown: bool = False, markup: str = "text", english: str | None = None,
-                         embellishment: int | str | None = None) -> dict[str, Any]:
+                         embellishment: int | str | None = None,
+              document_type: str = "general", document_config: dict | None = None) -> dict[str, Any]:
         """Deterministic rule-engine translation (same text, level and seed give the same output). Change the
         seed for a different version. variety N picks among the N best-fitting terms only (1 = always the best
         fit); 0, the default, weighs every eligible term. registers (current, dated, archaic), regions (e.g. qld)
@@ -134,23 +141,24 @@ def build_server():
         and headings exactly as they were. english (us, uk, auto, none): the English the text is in, for US and
         UK words Australians say differently (faucet -> tap; British pants -> undies only for uk). embellishment
         (0-2 or deadset, dinkum, troppo): how much liberty the telling takes, from none (the words swap, nothing
-        added) to a performed yarn; default the text's genre's own (a story troppo, news and docs deadset)."""
+        added) to a performed yarn; default Dinkum for General; named types supply presets."""
         return harness.translate(text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
                                  registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english,
-                                 embellishment=embellishment)
+                                 embellishment=embellishment, document_type=document_type, document_config=document_config)
 
     @tool
     def aussie_verify(text: Text, original: str, level: Level = 5, vulgarity: Vulgarity = None,
                       markup: str = "text", english: str | None = None,
-                      embellishment: int | str | None = None) -> dict[str, Any]:
+                      embellishment: int | str | None = None,
+              document_type: str = "general", document_config: dict | None = None) -> dict[str, Any]:
         """Check a finished translation (anyone's: the engine's, yours, a person's) against its original: a log of
         problems, worst first, each with a severity (critical: a lost number, a piece of markup changed, or an
         empty translation; major: breaks the brief; minor: craft, a sentence nothing in the translation says
         again, or a hint worth a look; info: coverage), and metrics. Deterministic; it
         doesn't judge tone or flow. english as for aussie_translate; embellishment sets the length limit (default
-        dinkum's, a retelling's)."""
+        Dinkum for General)."""
         return harness.verify(text, original=original, level=level, vulgarity=vulgarity, markup=markup,
-                              english=english, embellishment=embellishment)
+                              english=english, embellishment=embellishment, document_type=document_type, document_config=document_config)
 
     return server
 

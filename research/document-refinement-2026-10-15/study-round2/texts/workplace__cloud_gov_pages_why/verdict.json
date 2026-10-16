@@ -1,0 +1,175 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "dinkum-3": "A",
+    "current": "B",
+    "pre-fix-yarn": "C"
+  },
+  "scores": {
+    "dinkum-3": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 3,
+      "register": 3,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 4,
+      "register": 4,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "dinkum-3": {
+      "meaning": "\"one simple static file server or service, not dozens\" and \"you only pay for what you use\" preserve the hosting and cost claims; the architecture link and all benefit sections remain.",
+      "sense": "\"the hard yakka\" correctly refers to the difficult compliance work.",
+      "authenticity": "\"getting the security and privacy compliance sorted\" and \"no drama\" are natural Australian conversational choices.",
+      "register": "\"hard yakka\", \"a fair bit going for them\" and \"dead easy\" give a steady medium Australian voice suited to level 3.",
+      "tone": "\"so you can put your know-how into your content\" preserves the reassuring service pitch and focus on the reader's expertise.",
+      "flow": "\"we handle the backend and compliance work of launching and running a website, and we know what we're doing, so\" is a somewhat crowded sentence among otherwise clear bullets.",
+      "variety": "\"no drama\", \"skip the headaches\" and \"dead easy\" distribute different conversational choices across the page.",
+      "essence": "\"## Why static websites?\" and \"## Why Pages?\" preserve both halves of the source's argument and its scannable structure."
+    },
+    "current": {
+      "meaning": "\"security and compliance have been verified by the FedRAMP Joint Authorization Board\" retains the certification claim, with the previews, hosting and customisation details also intact.",
+      "sense": "\"put more pressure on your agency’s web team\" correctly renders extra strain.",
+      "authenticity": "\"Hosting static website files on Pages is flamin' easy\" feels like a stock flourish in otherwise plain prose; \"Fully customizable\" also retains US spelling.",
+      "register": "\"Often, the hard bit isn’t putting the content together\" is lightly conversational, but the overall Australian weight is below the requested medium level.",
+      "tone": "\"That leaves you free to put your expertise into your content\" retains the helpful, confident service pitch.",
+      "flow": "\"Static sites can cover all sorts of sites\" is a repetitive, awkward construction in otherwise fluent exposition.",
+      "variety": "\"hard bit\", \"look after\" and \"a few things going for them\" vary the wording without leaning on repeated slang.",
+      "essence": "\"Update content without writing code\" preserves the practical non-coder benefit alongside the source's broader case for static websites."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"no PHP or Apache / IIS\" and \"database scaling and redundancy\" retain the specific technical burdens avoided by static hosting.",
+      "sense": "\"under the pump\" accurately describes the increased pressure on the agency web team.",
+      "authenticity": "\"a fair few things going for them\" and \"easy as\" are natural local speech; \"Fully customizable\" leaves a small US spelling inconsistency.",
+      "register": "\"dead simple\", \"hard yakka\", \"under the pump\" and \"flamin’ easy\" cumulatively run a little heavier than a medium level-3 brief.",
+      "tone": "\"you can count on your site being fast, reliable\" keeps the original confident reassurance and its service-selling purpose.",
+      "flow": "\"handling the backend and compliance work of launching and running a website, and doing it properly, so\" slightly overloads the service explanation.",
+      "variety": "\"out of the blue\", \"easy as\" and \"rip out\" offer varied wording across the technical sections.",
+      "essence": "\"from organisation homepages or intranets to pre-generated web application program interfaces\" preserves the source's distinctive breadth of static-site uses."
+    }
+  },
+  "problems": {
+    "dinkum-3": [
+      {
+        "quote": "we handle the backend and compliance work of launching and running a website, and we know what we're doing, so",
+        "original": "expertly managing the backend and compliance work to launch and manage a website, allowing you",
+        "severity": "minor",
+        "why": "The extra coordinated clause makes an otherwise simple explanation less fluid."
+      }
+    ],
+    "current": [
+      {
+        "quote": "Hosting static website files on Pages is flamin' easy.",
+        "original": "It’s very easy to host static website files on Pages.",
+        "severity": "minor",
+        "why": "The conspicuous stock Australian intensifier feels bolted into an otherwise restrained page."
+      },
+      {
+        "quote": "Fully customizable",
+        "original": "Fully customizable",
+        "severity": "minor",
+        "why": "The retained US spelling is out of step with an Australian-English retelling."
+      },
+      {
+        "quote": "Static sites can cover all sorts of sites",
+        "original": "Static sites can be used to build many different types of sites",
+        "severity": "minor",
+        "why": "The repeated sites and vague cover make the sentence clumsy."
+      },
+      {
+        "quote": "Pages helps our fellow federal partners by expertly handling the backend and compliance work needed to launch and manage a website.",
+        "original": "Pages serves our fellow federal partners by expertly managing the backend and compliance work to launch and manage a website",
+        "severity": "major",
+        "why": "The prevailing conventional exposition is lighter than the medium Australian voice requested."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "Fully customizable",
+        "original": "Fully customizable",
+        "severity": "minor",
+        "why": "A retained US spelling amid Australian spellings such as customise."
+      },
+      {
+        "quote": "The hard yakka usually isn’t writing the content or designing the site, though.",
+        "original": "The hardest part is often not crafting the content or designing the website",
+        "severity": "minor",
+        "why": "The cumulative cluster of strongly colloquial phrases is a little heavier than the medium brief."
+      },
+      {
+        "quote": "handling the backend and compliance work of launching and running a website, and doing it properly, so",
+        "original": "expertly managing the backend and compliance work to launch and manage a website, allowing you",
+        "severity": "minor",
+        "why": "The extra clause makes this key explanation somewhat cumbersome."
+      }
+    ]
+  },
+  "summaries": {
+    "dinkum-3": "A complete, well-pitched medium Australian retelling that retains the technical and service argument; one promotional sentence is crowded.",
+    "current": "Accurate and accessible, but its isolated stock intensifier, retained US spelling and mostly plain register make the Australian voice less convincing.",
+    "pre-fix-yarn": "A faithful and lively technical service page with effective local idiom, slightly stronger than requested and with a few small polish issues."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "dinkum-3",
+        "current",
+        "pre-fix-yarn"
+      ]
+    ],
+    "flow": [
+      [
+        "dinkum-3",
+        "current",
+        "pre-fix-yarn"
+      ]
+    ],
+    "variety": [
+      [
+        "dinkum-3",
+        "current",
+        "pre-fix-yarn"
+      ]
+    ],
+    "essence": [
+      [
+        "dinkum-3",
+        "current",
+        "pre-fix-yarn"
+      ]
+    ],
+    "overall": [
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "current"
+      ]
+    ]
+  }
+}

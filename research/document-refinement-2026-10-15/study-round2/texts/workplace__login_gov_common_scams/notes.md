@@ -1,0 +1,1 @@
+Broad voice carried by handing over, ring you up, dodgy and steer clear, without obscuring protective instructions or swearing at people. Used planned brand-spankin'-new in the new-methods sense confirmed by lookup. Kept exact headings, list markers and quoted verify your account. No declines.

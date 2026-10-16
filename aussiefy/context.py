@@ -7,6 +7,7 @@ from __future__ import annotations
 import re
 
 from .morph import is_past
+from . import pos
 from .text import QUOTES, Token
 
 # not "must" ("nobody must know it") or "fair" (also the noun: "going to the fair")
@@ -21,7 +22,7 @@ FINITE_HINTS = {"am", "is", "are", "was", "were", "have", "has", "had", "do", "d
                 "could", "shall", "should", "may", "might", "must", "not", "i", "we", "they", "he", "she", "you"}
 
 
-def sentence_contexts(sent: list[Token]) -> set[str]:
+def sentence_contexts(sent: list[Token], tags: list[str] | None = None) -> set[str]:
     """What kind of sentence this is, for garnish that only suits some ("mate" needs someone addressed)."""
     norms = [t.norm for t in sent]
     texts = [t.text for t in sent]
@@ -38,7 +39,9 @@ def sentence_contexts(sent: list[Token]) -> set[str]:
         ctx.add("opinion")
     if not ctx & {"dialogue", "question", "exclamation", "second_person"}:
         ctx.add("narration")
-    finite = FINITE_HINTS & set(norms) or any(is_past(n) for n in norms)
+    finite = FINITE_HINTS & set(norms)
+    if not finite:
+        finite = _finite_clause(sent, tags if tags is not None else pos.tag(texts))
     if not finite and not ctx & {"dialogue"}:
         ctx.add("fragment")   # "Robot apartments! invisible suburbs!": an incantation, nobody to tag
     # narration that ends on someone doing something ("... until he consented."), so a jibe at the doer fits
@@ -55,6 +58,24 @@ def sentence_contexts(sent: list[Token]) -> set[str]:
             and not _hits(DARK_WORDS, " ".join(norms)):
         ctx.add("action_end")
     return ctx
+
+
+def _finite_clause(sent: list[Token], tags: list[str]) -> bool:
+    """Finite verbs need a subject and a main clause; noun/gerund headings do not qualify."""
+    subject = False
+    subordinate = False
+    for token, tag in zip(sent, tags):
+        if token.text in (",", ";", ":"):
+            subject, subordinate = False, False
+        elif ((token.norm in ("that", "which", "who") and tag in ("WDT", "WP"))
+              or token.norm in ("if", "unless", "when", "while", "because", "although", "whether", "until",
+                                "before", "after") and tag in ("IN", "WRB")):
+            subordinate = True
+        elif tag in ("VBD", "VBP", "VBZ") and subject and not subordinate:
+            return True
+        elif tag in (*pos.NOUNS, *pos.NAMES, "PRP"):
+            subject = True
+    return False
 
 
 # Words of remembrance and reverence. A text full of them (a eulogy, Gettysburg) gets no comic riffs.

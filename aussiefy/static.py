@@ -22,6 +22,7 @@ import string
 import struct
 import unicodedata
 from functools import lru_cache
+from operator import mul
 from pathlib import Path
 
 from .errors import UserError
@@ -158,7 +159,7 @@ class StaticEmbedder:
         return tuple(v / norm for v in sums)
 
     def similarity(self, a: str, b: str) -> float:
-        return sum(x * y for x, y in zip(self.encode(a), self.encode(b)))
+        return sum(map(mul, self.encode(a), self.encode(b)))
 
     def stale(self) -> bool:
         """True when the dictionary has changed since the model was trained (retrain with the script)."""

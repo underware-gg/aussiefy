@@ -3,7 +3,7 @@
 Language models are very good at Aussie English when they have good source material and clear guidance. These six
 operations give any agent both. They are plain Python and return JSON-ready dicts, and every surface is a thin
 adapter over them: the Python API (`aussiefy.lookup` ...), the CLI (`aussiefy lookup|lint|guide|plan|verify|translate`),
-the MCP server (`aussiefy-mcp`: aussie_lookup ...), yarn mode's tools (`aussiefy.yarn`) and the Claude Code skill.
+the MCP server (`aussiefy-mcp`: aussie_lookup ...), retelling sessions and the portable CLI skill.
 
 - lookup(query):     plain-English meaning or slang term -> dictionary entries with gloss, level, vulgarity
 - lint(text):        a draft's issues (flagged phrases, swearing over the cap, US spelling, US and British words),
@@ -20,7 +20,6 @@ from typing import Any
 from .context import RIFF_TONES_FOR
 from . import translation
 from .engine import Result, Translator, default_translator
-from .genre import retelling_step
 from .guide import guide, openings, style_guide_data
 from .lint import fidelity, lint
 from .lookup import lookup, riff_cards
@@ -32,18 +31,19 @@ __all__ = ["lookup", "lint", "guide", "plan", "translate", "verify", "fidelity",
 def translate(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None,
               variety: int = 0, registers: list[str] | None = None, regions: list[str] | None = None,
               unlock: list[str] | None = None, markdown: bool = False, markup: str = "text", english: str | None = None,
-              embellishment: int | str | None = None, translator: Translator | None = None) -> dict[str, Any]:
+              embellishment: int | str | None = None,
+              document_type: str = "general", document_config: dict | None = None, translator: Translator | None = None) -> dict[str, Any]:
     """The deterministic rule-engine translation: the same text, level and seed give the same output. variety N
     picks among the N best-fitting terms only (1 = always the best fit; 0 weighs every eligible term). registers
     (current, dated, archaic), regions (e.g. qld) and unlock (flags whose gated entries become eligible) narrow
     or widen what the level allows. markup (markdown, mdx, auto) translates only the prose and keeps code, tags,
     links, front matter and headings exactly as they were. english (us, uk, auto, none) is the English the
     text is in, for the US and UK words swapped at every level (faucet -> tap; British pants -> undies only for uk).
-    embellishment (deadset, dinkum, troppo; None = the text's genre's own) is how much garnish the telling takes."""
+    embellishment (deadset, dinkum, troppo; None = the selected document type's default) is how much garnish the telling takes."""
     tr = translator or default_translator()
     r = translation.translate(text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
                          registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english,
-                         embellishment=embellishment, translator=tr)
+                         embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr)
     if markdown:
         return r.to_dict()
     return {"text": r.text, "seed": seed, "variety": variety, **r.envelope(), **_embellished(r)}
@@ -51,24 +51,22 @@ def translate(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int 
 
 def _embellished(r: Result) -> dict[str, Any]:
     """The embellishment a result took (the caller's, or its genre's) and the genre that set its form."""
-    return {"genre": r.genre.name, "embellishment": r.embellishment.step,
+    return {**r.genre.envelope(r.embellishment.step), "embellishment": r.embellishment.step,
             "embellishment_name": r.embellishment.name}
 
 
 def plan(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None,
          variety: int = 0, registers: list[str] | None = None, regions: list[str] | None = None,
          unlock: list[str] | None = None, markup: str = "text", english: str | None = None,
-         embellishment: int | str | None = None, translator: Translator | None = None) -> dict[str, Any]:
+         embellishment: int | str | None = None,
+              document_type: str = "general", document_config: dict | None = None, translator: Translator | None = None) -> dict[str, Any]:
     """The engine's draft, what it planned, and which sentences it couldn't carry (best done by hand).
-    markup and english as for translate. embellishment as for translate, except that None is a retelling's
-    (genres.yaml's retelling, dinkum), not the genre's: the plan is for a writer; pass the genre's own setting
-    to match translate's output."""
+    markup, english, embellishment and document policy have the same defaults and meanings as translate."""
     tr = translator or default_translator()
-    embellishment = retelling_step(embellishment, tr.dictionary.genres)
 
     r = translation.run(text, translator=tr, level=level, seed=seed, vulgarity=vulgarity,
                      variety=variety, registers=registers, regions=regions, unlock=unlock, markup=markup,
-                     english=english, embellishment=embellishment)
+                     english=english, embellishment=embellishment, document_type=document_type, document_config=document_config)
     decided = r.decisions()
     for g in decided["garnish"]:
         g["sentence_text"] = r.sentence_text(g["sentence"])

@@ -1,0 +1,2 @@
+Fresh prose from the source, with rundown, get off the ground, put in, stick to and planned Nah/Yep. Retained exact MDX imports, front matter, components and props, headings, code spans, URLs, table layout and markers. Auction figures, conditions, verification obligations, timing and legal notices retain their force. Lookup checked affirmative/negative vocabulary; its broad combined query returned mostly affirmative alternatives. No planned phrases declined.
+Took the lint suggestion a squiz for a document referral; it fits the light conversational register.

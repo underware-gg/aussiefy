@@ -1,12 +1,15 @@
-# Using Claude to polish or retell
+# Model-assisted polishing and retelling
 
-The rule engine's output is deterministic and safe, but it can read like a word swap. Three optional modes
-hand some of the writing to Claude, while the dictionary keeps the slang genuine. What each one guarantees is
-in the [LLM modes reference](../functional/llm-modes.md).
+The rule engine runs offline and produces repeatable drafts, but they can read like word swaps. Your agent
+can use the toolkit to polish or retell them, with the dictionary supplying genuine slang. Claude, Codex
+and other agents follow the same [writing workflow](agents.md).
+
+The commands below use the optional built-in API client to run that work automatically. Its guarantees are
+in the [LLM modes reference](../functional/llm-modes.md); it is one client of the shared harness.
 
 ## Before you start
 
-1. Install the `llm` extra: `pip install "aussiefy[llm] @ git+https://github.com/underware-gg/aussiefy@v0.1.0"`
+1. Install the `llm` extra: `pip install "aussiefy[llm] @ git+https://github.com/underware-gg/aussiefy@v0.2.0"`
    (or `pip install -e '.[llm]'` from a clone).
 2. Set `ANTHROPIC_API_KEY`, or log in with an `ant auth login` profile.
 

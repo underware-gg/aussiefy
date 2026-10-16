@@ -1,0 +1,146 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "dinkum-3": "A",
+    "pre-fix-yarn": "B",
+    "current": "C"
+  },
+  "scores": {
+    "dinkum-3": {
+      "meaning": 5,
+      "sense": 4,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "dinkum-3": {
+      "meaning": "\"more than 12 hours\" and \"one year (26 pay periods)\" retain the eligibility and expiry thresholds, and approval and forfeiture conditions remain explicit.",
+      "sense": "\"flights actually took off and landed\" narrows departed and arrived to airborne events, potentially excluding gate/taxi time when logging the instructed travel interval.",
+      "authenticity": "\"put in for\", \"have a squiz\" and \"Give your Timekeeper or an HR Specialist at your agency a shout.\" are ordinary, naturally used local expressions.",
+      "register": "\"have a squiz\" and \"get home\" give a light level-2 touch with no unnecessary garnish or swearing.",
+      "tone": "\"we recommend keeping a log\" preserves institutional advice and \"you forfeit the leave\" retains the firm consequence.",
+      "flow": "\"The hours are based on elapsed time, and you work that out using the time zone you left from.\" gives a clean spoken explanation.",
+      "variety": "\"put in for\", \"squiz\" and \"runs out\" vary the modest local vocabulary.",
+      "essence": "\"not officially “performing work.”\" preserves the crucial distinction between travel comp time and work, along with the document’s practical order."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"we reckon it's worth keeping a log\" weakens the stated institutional recommendation into an informal opinion; the substantive eligibility, time-zone and forfeiture rules remain.",
+      "sense": "\"your flights actually departed and got in\" preserves flight departure/arrival rather than substituting airborne time.",
+      "authenticity": "\"if you're after more detail\" and \"got in\" sound natural in a lightly local guide.",
+      "register": "\"Have a squiz\" and \"For the finer points\" provide an appropriate light level-2 voice.",
+      "tone": "\"you lose the leave\" keeps expiry firm and \"Please get in touch\" remains useful staff guidance.",
+      "flow": "\"any travel comp time you haven't used is gone too: it's forfeited\" repeats the same conclusion slightly awkwardly.",
+      "variety": "\"squiz\", \"finer points\" and \"runs out\" vary the language without repeated tags.",
+      "essence": "\"use the time zone you left from\" retains the defining calculation advice and original structure."
+    },
+    "current": {
+      "meaning": "\"TDY travel runs for more than 12 hours and needs a pre-approved authorisation in Concur.\" preserves both conditions; time-zone and forfeiture rules are exact.",
+      "sense": "\"have a squiz\" accurately invites looking at the fact sheet; \"work out how your hours break down\" preserves the calculation sense.",
+      "authenticity": "\"Once that date comes round\" and \"get home\" are credible ordinary local speech.",
+      "register": "\"have a squiz\" with lightly spoken \"If you’ve got questions\" is the requested modest level-2 touch.",
+      "tone": "\"we recommend keeping a log\" and \"you forfeit any unused travel comp time\" retain institutional advice and consequences.",
+      "flow": "\"The hours are based on elapsed time. Use the time zone you departed from\" is clear and unencumbered.",
+      "variety": "\"squiz\", \"work out\" and \"comes round\" vary the small amount of local phrasing.",
+      "essence": "\"aren’t officially “performing work.”\" keeps the travel-versus-work distinction central and all sections retain their jobs."
+    }
+  },
+  "problems": {
+    "dinkum-3": [
+      {
+        "quote": "When your flights actually took off and landed",
+        "original": "When your flights actually departed and arrived",
+        "severity": "minor",
+        "why": "Taking off/landing may be later/earlier than departure/arrival; this narrows the timing instruction in a document about accurately recording hours."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "we reckon it's worth keeping a log",
+        "original": "we recommend keeping a log",
+        "severity": "minor",
+        "why": "Changes the official recommendation into a softer personal opinion; the contract asks that institutional verb force survive."
+      },
+      {
+        "quote": "any travel comp time you haven't used is gone too: it's forfeited",
+        "original": "any unused travel comp time will be forfeited",
+        "severity": "minor",
+        "why": "Gone and forfeited repeat the same conclusion with an unnecessary explanatory tail."
+      }
+    ],
+    "current": []
+  },
+  "summaries": {
+    "dinkum-3": "Accurate and lightly colloquial, with one narrowed flight-timing expression.",
+    "pre-fix-yarn": "Mostly faithful and naturally light, with a softened recommendation and one redundant ending.",
+    "current": "Precise, clear and well-calibrated to the light brief."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "dinkum-3",
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "flow": [
+      [
+        "dinkum-3",
+        "current"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ],
+    "variety": [
+      [
+        "dinkum-3",
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "essence": [
+      [
+        "dinkum-3",
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ]
+  }
+}

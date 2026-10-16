@@ -13,13 +13,13 @@ from typing import Any
 
 from .engine import Translator, default_translator
 from .loader import DATA_DIR, _read
-from .genre import retelling_step
-from .policy import parse_embellishment, LEVELS, VULGARITIES, roll
+from .genre import resolve_document
+from .policy import LEVELS, VULGARITIES, roll
 from .schema import SchemaError
 
 # The toolkit's operations, and each surface's name for them: the workflow's {plan} is `aussiefy plan` on the
 # command line, `aussie_plan` over MCP and `plan` in Python.
-TOOLS = ("guide", "plan", "lookup", "lint", "translate")
+TOOLS = ("guide", "plan", "lookup", "lint", "verify", "translate")
 SURFACES = {"cli": "aussiefy {}", "mcp": "aussie_{}", "python": "{}"}
 TONES = ("plain", "chirpy")   # chirpy openings are left out for dark and solemn texts
 
@@ -138,13 +138,19 @@ def openings(text: str, seed: int = 0, mood: str = "light", n: int = 3) -> list[
 
 
 def guide(*, level: int | str = 5, vulgarity: int | str | None = None, embellishment: int | str | None = None,
+              document_type: str = "general", document_config: dict | None = None,
           translator: Translator | None = None) -> dict[str, Any]:
     """The voice, language limits and craft rules for a level and vulgarity, and the toolkit workflow."""
     tr = translator or default_translator()
-    eff = tr.effective(level=level, vulgarity=vulgarity)
+    eff = tr.effective(level=level, vulgarity=vulgarity, document_config=document_config)
     data = style_guide_data()
-    e = tr.dictionary.genres.embellishments[parse_embellishment(retelling_step(embellishment, tr.dictionary.genres))]
-    return {**eff.envelope(),
+    pol = tr.policy(embellishment=embellishment, document_type=document_type, document_config=document_config)
+    context = resolve_document(None, config=tr.dictionary.genres, document_type=pol.document_type,
+                               document_config=pol.document_config)
+    e = context.setting(pol.embellishment)
+    return {**eff.envelope(), **context.envelope(pol.embellishment),
             "embellishment": e.step, "embellishment_name": e.name, "embellishment_guidance": e.guidance,
             "voice": data.levels[eff.level], "language": data.language[eff.vulgarity],
-            "craft": data.craft_for(eff.level, eff.vulgarity, perform=e.perform, infix=e.takes("infix")), "workflow": data.workflow_for("python")}
+            "craft": data.craft_for(eff.level, eff.vulgarity, perform=e.perform,
+                                     infix=e.takes("infix") and eff.swearing.infix > 0),
+            "workflow": data.workflow_for("python")}

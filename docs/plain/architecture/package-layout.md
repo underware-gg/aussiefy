@@ -8,16 +8,18 @@ subpackages (see [DD-006](../../architecture/decisions/dd-006-layered-flat-packa
 |---|---|
 | Public API | `__init__.py` (translate, lookup, lint, guide, plan, yarn, Translator, load_dictionary, verify, and the result and error types) |
 | Surfaces (thin adapters) | `cli.py`, `mcp_server.py`, `skills/aussiefy/SKILL.md` |
-| Toolkit | `harness.py` (gathers lookup, lint and guide, and adds `plan` and `translate`), `lookup.py`, `lint.py`, `guide.py`, `verify.py` (fidelity and policy checks), `align.py` (shared sentence counterparts) |
+| Toolkit | `harness.py` (six agent operations), `lookup.py`, `lint.py`, `guide.py`, `verify.py` (fidelity and policy checks), `align.py` (shared sentence counterparts), `retelling.py` (agent-neutral briefs, JSON Schema tool contracts, sessions, dispatch and checked submission) |
 | Document translation | `translation.py` (shared surface routing), `markdown.py` (strict source spans and document results), `markup.py` (extended Markdown/MDX scanning) |
-| LLM modes | `yarn.py` (yarn mode), `llm.py` (surface and sentence rewrites), `claude.py` (the one Claude client) |
+| Optional API clients | `yarn.py` (built-in retelling loop and Anthropic tool adapter), `llm.py` (surface and sentence rewrites), `claude.py` (Anthropic SDK boundary) |
 | Engine | `engine.py` (the pipeline), `text.py`, `matcher.py`, `detect.py`, `select.py`, `realise.py`, `morph.py`, `garnish.py`, `context.py`, `policy.py`, `genre.py` (pure form policy and classification), `dialect.py` (source-English swaps), `pos.py` (bundled tagger), `protected.py` (opaque source spans and restoration) |
 | Dictionary | `schema.py` (entries, concepts), `model.py` (the dictionary as data, and what derives from it), `loader.py` (reading and validating the YAML), `terms.py` (when two spellings are one term), `dump.py` |
 | Similarity | `embed.py`, `static.py` (the bundled model), `models.py` (installed ones) |
 | Maintainers | `gaps.py`, `explain.py`, `rounds.py` (research rounds), `judge.py` (blind packets, report validation and optional Claude boundary), `scrape/` (scrape, fragments, harvest, tag, review) |
 | Shared | `errors.py` (`UserError`, the error a user can fix) |
 
-The data the engine reads is in `aussiefy/data/` (see [the dictionary](../functional/dictionary.md)).
+`profile.py` belongs to the Engine layer: it validates immutable request-local tuning and applies it to the
+selected level and swearing profiles without changing dictionary data. The data the engine reads is in
+`aussiefy/data/` (see [the dictionary](../functional/dictionary.md)).
 
 ## The layering rule
 
@@ -39,6 +41,8 @@ loads only in that mode; the plain engine never imports its adapter ([DD-015](..
 - A new agent-facing operation or parameter: the toolkit function first, then each surface, which
   `tests/functional/test_interfaces.py` holds in step.
 - Anything that talks to Claude: through `claude.py`, the single seam for the SDK.
+- Shared agent workflow or submission rules: `retelling.py`; client-specific tool shapes and model calls
+  belong at the edge. See [DD-023](../../architecture/decisions/dd-023-agent-neutral-retelling.md).
 
 Genre configuration and the POS vocabulary are loaded once into the selected dictionary. The classifier and
 model derive values without opening files. Syntax scanners supply opaque source spans to the engine; no

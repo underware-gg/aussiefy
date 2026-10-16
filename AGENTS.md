@@ -1,6 +1,6 @@
 # AGENTS.md
 
-aussiefy: a deterministic, seeded rule engine (with optional Claude-powered modes) that rewrites plain English
+aussiefy: a deterministic, seeded rule engine (with optional model-assisted modes) that rewrites plain English
 as Australian slang, on three dials: level, vulgarity and embellishment.
 
 Conforms to Agent-Ready Documentation Standard v1.0.0, Level 1.
@@ -21,8 +21,8 @@ Start at [docs/README.md](docs/README.md). Each layer has its own index:
 - [CHANGELOG.md](CHANGELOG.md): release notes.
 - [LICENSE](LICENSE), [LICENSES/](LICENSES/) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md): licensing.
 - [docs/standards/](docs/standards/README.md): the documentation standard this project follows.
-- [skills/aussiefy/SKILL.md](skills/aussiefy/SKILL.md): the Claude skill for using the toolkit
-  (`.claude/skills/aussiefy` links to it).
+- [skills/aussiefy/SKILL.md](skills/aussiefy/SKILL.md): the portable CLI skill for using the toolkit
+  (`.agents/skills/aussiefy` and `.claude/skills/aussiefy` link to it).
 
 Editable current guides and root documentation live in `docs/plain/`; public copies are generated.
 See [publication instructions](docs/plain/contributor/documentation.md). Agent instructions and legal texts stay plain.

@@ -1,0 +1,3 @@
+Freshly retold the obituary with a respectful local reporter's voice. Kept all dates, names, song titles and the family's quoted cause of death; retained the source's repeated account of his long band tenure. Used the planned muso in its proper sense, with ordinary Australian turns such as took up, came across and kept a hand in. No garnish or profanity added. No planned phrases declined.
+
+Lint passed. Its optional ticker suggestion for heart in the musical metaphor with blues and country at their heart is a wrong anatomical sense, so I kept the metaphor. Suggestions are not required planned phrases.

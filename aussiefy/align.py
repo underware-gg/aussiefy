@@ -41,7 +41,8 @@ class Counterpart:
     similarity: float | None  # meaning similarity (None without a meaning model)
 
 
-def counterparts(original: list[str], translation: list[str], embedder=None) -> list[Counterpart | None]:
+def counterparts(original: list[str], translation: list[str], embedder=None, *,
+                 max_sentences: int = 3) -> list[Counterpart | None]:
     """For each original sentence, its best counterpart (None if the translation is empty)."""
     n, m = len(original), len(translation)
     if not m:
@@ -50,18 +51,19 @@ def counterparts(original: list[str], translation: list[str], embedder=None) -> 
     # retellings shuffle locally: look a fifth of the way either side of where it should be, but no further
     # than BAND_MAX sentences, so a long document doesn't search most of itself for each sentence
     band = min(max(6, m // 5), BAND_MAX)
-    windows = {(j, k): set().union(*words[j:k]) for j in range(m) for k in range(j + 1, min(m, j + 3) + 1)}
+    windows = {(j, k): set().union(*words[j:k]) for j in range(m) for k in range(j + 1, min(m, j + max_sentences) + 1)}
     found = []
     for i, sentence in enumerate(original):
         want = content_words(sentence)
         centre = round(i * m / max(n, 1))
         best: tuple[float, int, int] | None = None
         for j in range(max(0, centre - band), min(m, centre + band + 1)):
-            for k in range(j + 1, min(m, j + 3) + 1):
+            for k in range(j + 1, min(m, j + max_sentences) + 1):
                 got = windows[j, k]
                 retained = len(want & got) / len(want) if want else float(not got)
-                # prefer the most words kept, then the tightest window
-                if best is None or (retained, -(k - j)) > (best[0], -(best[2] - best[1])):
+                # Prefer retained words, then tight windows, then the expected sentence position.
+                if best is None or (retained, -(k - j), -abs(j - centre)) > (
+                        best[0], -(best[2] - best[1]), -abs(best[1] - centre)):
                     best = (retained, j, k)
         retained, j, k = best
         sim = embedder.similarity(sentence, " ".join(translation[j:k])) if embedder else None

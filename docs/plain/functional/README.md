@@ -9,11 +9,13 @@ guarantees. For step-by-step guides, see the [user layer](../user/README.md); fo
 | Document | Summary |
 |---|---|
 | [dials.md](dials.md) | Level (1-5), vulgarity (0-3) and embellishment (0-2): what each setting does, how they combine, how swearing comes, and Australian spelling |
+| [translation-controls.md](translation-controls.md) | General, Auto, named presets and Custom with exact behaviour overrides |
 | [cli.md](cli.md) | Every `aussiefy` command and option, with defaults and exit codes |
 | [toolkit.md](toolkit.md) | The six toolkit operations, the Python API, the MCP server's tools and the Claude API tools |
 | [markdown.md](markdown.md) | Explicit prose translation with protected source, stable headings and per-unit results |
 | [explain.md](explain.md) | What explain mode records for each decision, with a sample |
-| [llm-modes.md](llm-modes.md) | The optional Claude modes (fluent surface, whole-sentence rewrites, yarn mode), their guarantees and caches |
+| [verification.md](verification.md) | Deterministic structural and fidelity checks against the original |
+| [llm-modes.md](llm-modes.md) | Model-assisted writing, the optional API client, guarantees and caches |
 | [dictionary.md](dictionary.md) | The data files, the entry format, slots, the pattern language, validation and extending the dictionary |
 | [embedding.md](embedding.md) | Which features use a similarity model, the choices, and the `embedder` command |
 | [configuration.md](configuration.md) | Environment variables, machine state, caches, working files and tunable data |
@@ -39,6 +41,14 @@ How to run them is in the
 | Test module | Behaviour it pins |
 |---|---|
 | `tests/functional/test_engine.py` | The engine: detection, selection, realisation, garnish, drawl and the dials |
+| `tests/functional/test_document_policy.py` | Document presets, exact overrides and shared-surface behaviour |
+| `tests/functional/test_document_refinement.py` | Sentence-safe flavour, contractions, casing and technical-example fidelity |
+| `tests/functional/test_multiline_quotes.py` | Multi-paragraph quote preservation across translation, lint, verification and yarn |
+| `tests/functional/test_smart_performance.py` | Semantic fallback eligibility, exact scores and complete-result parity |
+| `tests/functional/test_profile_overrides.py` | Inherited advanced defaults, isolated controls and cross-surface configuration |
+| `tests/functional/test_sense_boundaries.py` | Person/adjective sense limits and clothing agreement |
+| `tests/functional/test_lookup_senses.py`, `tests/functional/test_harness_reliability.py` | Slot/sense lookup, phrase locality and data-driven lint comparisons |
+| `tests/functional/test_markdown_composition.py` | Document-wide garnish and source sentence boundaries |
 | `tests/functional/test_matching.py` | Tokenising, the pattern language and concept detection |
 | `tests/functional/test_schema.py` | Dictionary loading and validation |
 | `tests/architecture/test_golden.py` | Exact outputs per input, level and seed (`tests/corpus/golden.yaml`) |
@@ -56,13 +66,10 @@ How to run them is in the
 | `tests/architecture/test_layers.py` | The package layering: the engine and dictionary import nothing from the layers above |
 | `tests/user/test_models.py`, `tests/architecture/test_static.py` | Which embedding model is used and how it is installed, and the bundled static model's tokenizer, vectors and senses |
 | `tests/functional/test_gaps.py` | Gap finding |
-| `tests/contributor/test_scrape.py`, `tests/contributor/test_harvest.py`, `tests/contributor/test_rounds.py` | The `dev` pipeline: scraping, fragments and harvesting, and research rounds |
+| `tests/contributor/test_scrape.py`, `tests/contributor/test_harvest.py`, `tests/contributor/test_rounds.py`, `tests/contributor/test_rounds_preservation.py` | The `dev` pipeline: scraping, fragments and harvesting, and research rounds |
 | `tests/contributor/test_staging.py` | Staging format, YAML output, source policy and saved-page handling |
 | `tests/contributor/test_notices.py` | Tracked provenance, generated notices and actual wheel contents |
 | `tests/contributor/test_fetch_interfold.py` | Pinned local MDX acquisition, cache replay and interrupted-save recovery |
 | `tests/contributor/test_fetch_reference.py` | Fetching and cutting the local reference texts |
 | `tests/contributor/test_train_embedder.py` | Trainer recipe option placement, usage errors and help |
 | `tests/contributor/test_promote.py` | Semver/changelog rules, strict PR enforcement and resumable local release cycles |
-
-- [Translation context and embellishment](translation-controls.md): genre, English and explicit document contracts.
-- [Verification](verification.md): severity-based checks against the original.

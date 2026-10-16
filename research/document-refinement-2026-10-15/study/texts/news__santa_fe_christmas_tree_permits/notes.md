@@ -1,0 +1,2 @@
+Kept light level-2 voice and used planned Chrissy once, leaving the formal search name unchanged. Preserved the original’s mismatched 2025 and 2024 dates rather than silently correcting them. Retained all fees, dimensions and eligibility conditions. Lookup confirmed the Christmas sense (variant spelling Chrissie).
+Lint warned about repeated cut. This is the actual tree-cutting action and appears in distinct permit conditions, so repetition keeps the notice clear. No lint issues.

@@ -1,0 +1,161 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "dinkum-3": "A",
+    "current": "B",
+    "pre-fix-yarn": "C"
+  },
+  "scores": {
+    "dinkum-3": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 2,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 3,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "dinkum-3": {
+      "meaning": "\"You can work from home, per Agency policy\" is somewhat firmer than offering opportunities, although the eligibility thresholds, documents, education alternatives and dates are preserved.",
+      "sense": "\"Spotting and nutting out production problems\" retains identification and analysis, and \"get ticked off\" correctly means completed here.",
+      "authenticity": "\"Have a squiz\", \"Know your way around\" and \"new starters\" are natural Australian phrasing in context.",
+      "register": "\"Get your head around\", \"spot on\" and \"nutting out\" give the job notice the moderate vernacular requested without gratuitous swearing.",
+      "tone": "\"you'll get the chance to learn to do all of it\" preserves encouragement, while \"You'll need to pass a background check\" keeps requirements firm.",
+      "flow": "\"so they get published legally effective, on time and spot on\" has a broken parallel construction, although most of the notice is easy to follow.",
+      "variety": "\"no worries\", \"Get your head around\", \"squiz\", \"nutting out\" and \"Getting information across\" provide a varied conversational vocabulary.",
+      "essence": "\"COMBINATION OF EDUCATION AND EXPERIENCE\" and \"AND\" retain the eligibility structure, while the sequence of duties, conditions and benefits remains intact."
+    },
+    "current": {
+      "meaning": "\"Only graduate study beyond the first year (18 semester hours) qualifies\" and \"telework opportunities under Agency policy\" preserve both technical eligibility and the conditional benefit; the full requirements survive.",
+      "sense": "\"with legal effect\" correctly renders legally effective publication, and \"on a pro rata basis\" retains how part-time experience is counted.",
+      "authenticity": "\"Have a look\" and \"new starters\" are locally natural without any forced accent or bolted-on slogan.",
+      "register": "\"Understand and properly address customer needs\" and \"A one year probationary period may be required\" remain close to formal source prose; the moderate vernacular is largely absent.",
+      "tone": "\"with training to help you grow in the position\" retains the encouraging opportunity, and the eligibility language remains firm and informative.",
+      "flow": "\"so they're published accurately, on time and with legal effect\" neatly resolves the original's dense wording and the conditions read clearly.",
+      "variety": "\"Have a look\", \"coming up with solutions\" and \"new starters\" vary the limited colloquial phrasing without noticeable repetition.",
+      "essence": "\"You must meet these requirements by this announcement's closing date\" and the maintained OR/AND structure keep the same practical recruitment notice."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"There's the chance to work from home, per Agency policy\" retains the opportunity qualification, and the exact grade, experience, educational and identity requirements remain.",
+      "sense": "\"all the program goals get ticked off\" correctly conveys achievement and \"sort it out properly\" fits addressing customer needs.",
+      "authenticity": "\"Have a squiz\", \"Know your way around\" and \"coming up with fixes\" sound like ordinary Australian speech rather than caricature.",
+      "register": "\"spot on\", \"get ticked off\", \"Have a squiz\" and \"Hit \"Print Preview\"\" sustain a moderate vernacular frame without overdoing it.",
+      "tone": "\"you'll get training to help you grow into the role\" retains encouragement and \"You've got to meet these requirements\" keeps the notice's firm practical intent.",
+      "flow": "\"get published legally effective\" is grammatically awkward, and \"written documents written by other people\" retains unnecessary repetition; the rest remains readable.",
+      "variety": "\"Know your way around\", \"Have a squiz\", \"Hit\" and \"help the program goals along\" vary the oral wording rather than leaning on one tag.",
+      "essence": "\"Specialised Experience: For the GS-09\" and all education alternatives preserve the job notice's distinctive layered eligibility structure and detailed official conditions."
+    }
+  },
+  "problems": {
+    "dinkum-3": [
+      {
+        "quote": "You can work from home, per Agency policy.",
+        "original": "We offer opportunities for telework, per Agency policy.",
+        "severity": "minor",
+        "why": "Even with the policy qualification, can work from home sounds more assured than an opportunity for telework."
+      },
+      {
+        "quote": "so they get published legally effective, on time and spot on.",
+        "original": "to ensure legally effective, timely, and accurate publication of them.",
+        "severity": "major",
+        "why": "Legally effective does not fit grammatically after get published; the mixed modifiers make this duty clunky aloud."
+      }
+    ],
+    "current": [
+      {
+        "quote": "Understand and properly address customer needs across every part of the Federal Register publication process",
+        "original": "Understand and appropriately address customer needs associated with all aspects of the Federal Register publication process",
+        "severity": "major",
+        "why": "The largely unchanged formal register throughout the duties and conditions falls well below the requested moderate vernacular."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "so they get published legally effective, on time and spot on.",
+        "original": "to ensure legally effective, timely, and accurate publication of them.",
+        "severity": "major",
+        "why": "The adjective legally effective does not join grammatically to get published, making a key duty awkward."
+      },
+      {
+        "quote": "written documents written by other people",
+        "original": "written documents written by others",
+        "severity": "minor",
+        "why": "This inherited repetition remains cumbersome in an otherwise conversational retelling."
+      }
+    ]
+  },
+  "summaries": {
+    "dinkum-3": "A natural, moderately Aussie job notice that retains the detailed requirements, with one clunky duty and a slightly stronger benefit claim.",
+    "current": "The cleanest and most precise prose, but substantially under-retold for level 3.",
+    "pre-fix-yarn": "The best overall balance of faithful qualifications and moderate voice, though several source-shaped constructions still impede flow."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "dinkum-3",
+        "current",
+        "pre-fix-yarn"
+      ]
+    ],
+    "flow": [
+      [
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ],
+    "variety": [
+      [
+        "dinkum-3",
+        "current",
+        "pre-fix-yarn"
+      ]
+    ],
+    "essence": [
+      [
+        "dinkum-3",
+        "current",
+        "pre-fix-yarn"
+      ]
+    ],
+    "overall": [
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "current"
+      ]
+    ]
+  }
+}

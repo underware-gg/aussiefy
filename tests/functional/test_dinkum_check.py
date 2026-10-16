@@ -92,7 +92,7 @@ def test_the_right_sense_still_swaps(translator, text, wanted):
 def _texts(translator, path, n=3):
     text = path.read_text(encoding="utf-8")
     markup = "auto" if path.suffix in (".md", ".mdx") else "text"
-    return [translate(text, translator=translator, level=lv, seed=s, markup=markup).text for lv in (2, 4) for s in range(n)]
+    return [translate(text, translator=translator, level=lv, seed=s, markup=markup, document_type="auto").text for lv in (2, 4) for s in range(n)]
 
 
 def test_report_and_policy_prose(translator):

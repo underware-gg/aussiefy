@@ -1,0 +1,140 @@
+{
+  "candidates": {
+    "A": {
+      "scores": {
+        "meaning": {
+          "evidence": "\"The client retries requests only after a connection failure; if a request gets rejected, it goes straight back to the caller.\" Preserves failure-only retries, immediate rejection return, delay/count distinction, zero behaviour and replacement-file condition.",
+          "score": 5
+        },
+        "sense": {
+          "evidence": "\"Bumpin' it up doesn't change how many attempts the client makes.\" The colloquial verb correctly means increasing the delay value, with no count change.",
+          "score": 5
+        },
+        "authenticity": {
+          "evidence": "\"Here's one for ya:\" This stock announcement feels slightly bolted onto a settings instruction; the rest uses plausible Australian idiom.",
+          "score": 4
+        },
+        "register": {
+          "evidence": "\"Have a squiz at\" Substantial Australian body voice respects protected code, heading and link target; some eligible prose stays neutral, leaving it slightly light for level 5.",
+          "score": 4
+        },
+        "tone": {
+          "evidence": "\"Hang on to the existing configuration file till the replacement passes this check.\" Retains practical caution and explanatory purpose under the informal voice.",
+          "score": 5
+        },
+        "flow": {
+          "evidence": "\"if a request gets rejected, it goes straight back to the caller.\" The causal and conditional explanations are easy to follow aloud.",
+          "score": 5
+        },
+        "variety": {
+          "evidence": "\"before you get the worker goin'.\" Mixes several idioms and colloquial constructions without repetitive tags.",
+          "score": 5
+        },
+        "essence": {
+          "evidence": "\"If `retry_limit` is `0`, the client sends the request once 'n returns the result.\" Retains the guide's specific operational distinctions, checks and layout.",
+          "score": 5
+        }
+      },
+      "problems": [
+        {
+          "quote": "Here's one for ya:",
+          "original": "",
+          "severity": "minor",
+          "why": "Authenticity: a stock presentational opener adds a slight pasted-on quality at the start of this practical explanation; it is allowed garnish but not an especially natural lead-in here."
+        },
+        {
+          "quote": "The `backoff_ms` value controls the delay between attempts.",
+          "original": "The `backoff_ms` value controls the delay between attempts.",
+          "severity": "minor",
+          "why": "Register: alongside the unchanged configuration-check sentence, this eligible neutral connecting prose leaves the overall voice a little below level 5. The inline code itself must be preserved."
+        }
+      ],
+      "summary": "Accurate technical retelling with clear Australian phrasing, a slightly stock opener and a few neutral stretches."
+    },
+    "B": {
+      "scores": {
+        "meaning": {
+          "evidence": "\"Increasing it doesn't change the number of attempts.\" Preserves every operational condition and instruction, including zero retries and retaining the existing file.",
+          "score": 5
+        },
+        "sense": {
+          "evidence": "\"Keep the existin' configuration file until the replacement passes this check.\" The colloquial spellings introduce no wrong lexical sense.",
+          "score": 5
+        },
+        "authenticity": {
+          "evidence": "\"once'n returns the result.\" The glued-on phonetic contraction feels manufactured rather than natural written Australian vernacular.",
+          "score": 4
+        },
+        "register": {
+          "evidence": "\"The client retries requests only after a connection failure; a rejected request is returned to the caller immediately.\" Most eligible body prose is neutral and unchanged; an opener, contractions and dropped g are substantially below level 5.",
+          "score": 2
+        },
+        "tone": {
+          "evidence": "\"Run `worker --check-config` to check the configuration.\" Still a sober practical guide with the caution and explanations intact.",
+          "score": 5
+        },
+        "flow": {
+          "evidence": "\"Increasing it doesn't change the number of attempts.\" The underlying short explanatory sentences remain clear and smooth aloud; the awkward written clitic is assessed in authenticity.",
+          "score": 5
+        },
+        "variety": {
+          "evidence": "\"Well, the `backoff_ms` value controls the delay between attempts.\" No recurring opener or tag tic; minimal transformation is a register issue.",
+          "score": 5
+        },
+        "essence": {
+          "evidence": "\"If `retry_limit` is `0`, the client sends the request once'n returns the result.\" Keeps the distinctive configuration behaviour, three-paragraph structure and protected markup.",
+          "score": 5
+        }
+      },
+      "problems": [
+        {
+          "quote": "once'n returns the result.",
+          "original": "once and returns the result.",
+          "severity": "minor",
+          "why": "Authenticity: attaching the pronunciation contraction directly to once looks mechanically imposed rather than a convincing vernacular writing choice."
+        },
+        {
+          "quote": "The client retries requests only after a connection failure; a rejected request is returned to the caller immediately.",
+          "original": "The client retries requests only after a connection failure; a rejected request is returned to the caller immediately.",
+          "severity": "major",
+          "why": "Register: representative of the nearly untouched eligible prose; the requested level-5 voice is mostly absent despite a few surface contractions."
+        }
+      ],
+      "summary": "Technically faithful and clear, but mostly neutral prose with sparse surface vernacular."
+    }
+  },
+  "rankings": {
+    "tone": [
+      [
+        "A",
+        "B"
+      ]
+    ],
+    "flow": [
+      [
+        "A",
+        "B"
+      ]
+    ],
+    "variety": [
+      [
+        "A",
+        "B"
+      ]
+    ],
+    "essence": [
+      [
+        "A",
+        "B"
+      ]
+    ],
+    "overall": [
+      [
+        "A"
+      ],
+      [
+        "B"
+      ]
+    ]
+  }
+}

@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from bisect import bisect_right
+from bisect import bisect_left, bisect_right
 import re
 import unicodedata
 
-from .engine import Result, Translator
+from .engine import DocumentPart, Result, TextState, Translator
 from .genre import Genre, Embellishment
 from .policy import Effective, Policy, envelope
 
@@ -53,15 +53,16 @@ class DocumentResult:
     genre: Genre
     english: str | None
     embellishment: Embellishment
+    profile_config: dict
 
     def envelope(self) -> dict:
-        return envelope(self.level, self.vulgarity, self.warnings)
+        return {**envelope(self.level, self.vulgarity, self.warnings), "profile_config": self.profile_config}
 
     def to_dict(self) -> dict:
         return {"format": "markdown", "text": self.text, "source": self.source, **self.envelope(),
                 "seed": self.seed, "variety": self.variety, "units": [u.to_dict() for u in self.units],
                 "protected": [p.to_dict() for p in self.protected],
-                "genre": self.genre.name, "genre_scores": self.genre.scores, "english": self.english,
+                **self.genre.envelope(self.embellishment.step), "english": self.english,
                 "embellishment": self.embellishment.step, "embellishment_name": self.embellishment.name}
 
 
@@ -343,22 +344,57 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
     protected = []
     source_at = output_at = 0
     from .dialect import text_english
-    from .genre import text_genre
+    from .genre import resolve_document
 
     spans = prose_spans(source)
     prose = "\n".join(source[span.start:span.end] for span in spans)
-    genre = text_genre(prose, source, config=translator.dictionary.genres)
+    genre = resolve_document(prose, source, config=translator.dictionary.genres,
+                             document_type=policy.document_type, document_config=policy.document_config)
     context = (genre, text_english(policy.english, prose, translator.dictionary.us_spellings))
+    from .text import document_spans
+
+    held = _merged(document_spans(source, keep_quotes=genre.policy.keep_quotes,
+                                 datelines=genre.policy.dateline_context))
+    eligible = []
     for span in spans:
+        for a, b in _without(span.start, span.end, held, 0):
+            part = source[a:b]
+            left = a + len(part) - len(part.lstrip(" \t"))
+            right = b - (len(part) - len(part.rstrip(" \t")))
+            if any(c.isalpha() for c in source[left:right]):
+                eligible.append(ProseSpan(left, right))
+    spans = eligible
+    from .markup import mask
+    from .text import sentences, tokenize
+    from .context import sentence_contexts
+
+    reading = mask(source, "markdown")
+    source_sentences = [sent for sent in sentences(tokenize(reading.text)) if any(t.is_word for t in sent)]
+    source_contexts = [frozenset(sentence_contexts(sent)) for sent in source_sentences]
+    boundaries = [(sent[0].start, sent[-1].end) for sent in source_sentences]
+    starts = [a for a, _ in boundaries]
+    ends = [b for _, b in boundaries]
+    state = TextState()
+    written = frozenset(re.findall(r"(?<![\w'’])[a-z][a-z'’-]*", prose))
+    for index, span in enumerate(spans):
         if span.start > source_at:
             piece = source[source_at:span.start]
             pieces.append(piece)
             protected.append(ProtectedSpan((source_at, span.start), (output_at, output_at + len(piece))))
             output_at += len(piece)
+        first = bisect_right(ends, span.start)
+        last = bisect_left(starts, span.end) - 1
+        part = DocumentPart(state, first,
+                            first < len(boundaries) and boundaries[first][0] >= span.start,
+                            last >= 0 and boundaries[last][1] <= span.end,
+                            index == len(spans) - 1, quiet=reading.quiet_at(span.start),
+                            last_contexts=source_contexts[last] if last >= 0 else frozenset(),
+                            written=written)
         r = translator.translate(source[span.start:span.end], level=policy.level, seed=policy.seed,
                                  vulgarity=policy.vulgarity, variety=policy.variety, registers=policy.registers,
                                  regions=policy.regions, unlock=policy.unlock, embedder=policy.embedder,
-                                 english=policy.english, embellishment=policy.embellishment, _context=context)
+                                 english=policy.english, embellishment=policy.embellishment, document_type=policy.document_type,
+                                 document_config=policy.document_config, _context=context, _composition=part)
         rendered = _escape(r.text)
         pieces.append(rendered)
         units.append(ProseUnit((span.start, span.end), (output_at, output_at + len(rendered)), rendered, r))
@@ -370,4 +406,5 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
         protected.append(ProtectedSpan((source_at, len(source)), (output_at, output_at + len(piece))))
     warnings = list(dict.fromkeys([*effective.warnings, *(w for u in units for w in u.result.warnings)]))
     return DocumentResult("".join(pieces), source, effective.level, policy.seed, effective.vulgarity,
-                          policy.variety, warnings, units, protected, genre, context[1], genre.setting(policy.embellishment))
+                          policy.variety, warnings, units, protected, genre, context[1], genre.setting(policy.embellishment),
+                          effective.envelope()["profile_config"])

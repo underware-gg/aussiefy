@@ -15,45 +15,63 @@ from .context import sentence_contexts
 from .dialect import Found, text_english
 from .engine import Translator, default_translator
 from . import morph
-from .genre import Genre, retelling_step, text_genre
+from .genre import Genre, resolve_document
 from .markup import markup_changed, mask
 from .model import Dictionary
 from .schema import PLACEHOLDER_RE, Entry
 from .terms import fold, strip_markup
-from .text import HONORIFICS, Token, capital_is_positional, heading_lines, held_spans, sentences, tokenize
+from .text import document_spans, HONORIFICS, Token, capital_is_positional, heading_lines, held_spans, sentences, tokenize
 
 
 def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
          original: str | None = None, markup: str = "text", english: str | None = None,
-         embellishment: int | str | None = None, translator: Translator | None = None,
+         embellishment: int | str | None = None,
+              document_type: str = "general", document_config: dict | None = None, translator: Translator | None = None,
          suggest: bool = True) -> dict[str, Any]:
     """Lint an Aussified draft. Issues are things to fix; suggestions are optional extra Aussie.
     Pass the original text to also check fidelity: length, and names and numbers kept or invented.
     markup (markdown, mdx, auto) lints the prose only, and with the original checks that every piece of code
     and markup in it came through unchanged. english (us, uk, auto, none) is the original's English, as for
     translate: British "pants" in a draft is only flagged for uk. embellishment (deadset, dinkum, troppo; None =
-    a retelling's, genres.yaml's retelling) sets how much longer than the original a retelling may run.
+    the selected document type's default) sets how much longer than the original a retelling may run.
     suggest=False skips the suggestions (a whole engine translation) for a check that doesn't show them:
     verify, and yarn mode's submit."""
     tr = translator or default_translator()
-    embellishment = retelling_step(embellishment, tr.dictionary.genres)
-    pol = tr.policy(english=english, embellishment=embellishment)
+    pol = tr.policy(english=english, embellishment=embellishment, document_type=document_type, document_config=document_config)
     dial = pol.english
     changed = markup_changed(text, original, markup) if original is not None else []
     # the US and British words are read as the engine read the original: its English, and its genre (a
     # browser's cookies stay in a technical text)
     source = mask(original if original is not None else text, markup)
-    read_as = text_genre(source.prose(), source.source, config=tr.dictionary.genres)
-    genre = read_as.name
+    read_as = resolve_document(source.prose(), source.source, config=tr.dictionary.genres,
+                               document_type=pol.document_type, document_config=pol.document_config)
+    genre = read_as.policy.term_domains
     text = mask(text, markup).prose()
     original = source.prose() if original is not None else None
     d = tr.dictionary
-    eff = tr.effective(level=level, vulgarity=vulgarity)
+    eff = tr.effective(level=level, vulgarity=vulgarity, document_config=document_config)
     cap = eff.vulgarity
     low = " " + fold(text) + " "
     # what the original itself says isn't the translator's word ("cooked" in a recipe, a quoted swear)
     orig_low = " " + fold(original) + " " if original is not None else " "
     issues: list[dict[str, Any]] = []
+    kept_spelling = []
+    if original is not None:
+        spans = document_spans(original, keep_quotes=read_as.policy.keep_quotes,
+                               datelines=read_as.policy.dateline_context)
+        protected = Counter(original[a:b] for a, b in spans)
+        for phrase, count in protected.items():
+            if text.count(phrase) < count:
+                issues.append({"kind": "document_changed", "phrase": phrase,
+                               "why": "quoted wording or a dateline protected by document_config changed or was dropped"})
+
+        remaining = protected.copy()
+        for a, b in document_spans(text, keep_quotes=read_as.policy.keep_quotes,
+                                    datelines=read_as.policy.dateline_context):
+            phrase = text[a:b]
+            if remaining[phrase] > 0:
+                kept_spelling.append((a, b))
+                remaining[phrase] -= 1
 
     for e in d.entries.values():
         if e.status == "active" and e.vulgarity <= cap:
@@ -107,13 +125,15 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
         if rule.kind != "spelling":
             continue
         for m in rule.pattern.finditer(text):
+            if any(a <= m.start() and m.end() <= b for a, b in kept_spelling):
+                continue
             issues.append({"kind": "spelling", "phrase": m.group(0), "australian": m.expand(rule.replace)})
 
     # where the text already uses dictionary slang (so we don't suggest replacing it): matched with the
     # engine's own matcher, so inflections and slots count ("smashed it to buggery", "kippin'")
     aussie_spans = _aussie_spans(text, tr)
 
-    suggestions = _suggestions(text, low, aussie_spans, level, vulgarity, tr, read_as, read_english, dial) if suggest else []
+    suggestions = _suggestions(text, low, aussie_spans, level, vulgarity, tr, read_as, read_english, dial, pol.embellishment) if suggest else []
     fixed = {fold(issue["phrase"]) for issue in issues if issue.get("australian")}
     suggestions = [item for item in suggestions if fold(item["text"]) not in fixed]
 
@@ -122,12 +142,12 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     # a refrain the translation repeats is fine where the original repeats it too, said in Australian
     refrains = (_in_australian(original, d, read_english, genre) if original is not None and dial != "none"
                 else original)
-    warnings += _repeated_phrases(text, refrains, covered)
+    warnings += _repeated_phrases(text, refrains, d.drawl_readings, covered)
     issues += changed
     if original is not None:
-        warnings += fidelity(text, original, max_length=read_as.setting(pol.embellishment).max_length,
+        warnings += fidelity(text, original, check_length=read_as.policy.check_length, max_length=read_as.setting(pol.embellishment).max_length,
                              translator=tr)
-    return {"ok": not issues, **eff.envelope(),
+    return {"ok": not issues, **eff.envelope(), **read_as.envelope(pol.embellishment),
             "issues": issues, "warnings": warnings,
             "suggestions": suggestions[:20],
             "scope": ("Issues: flagged phrases, swearing over the cap, US spelling and US words. Warnings: the "
@@ -138,11 +158,13 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
 
 
 def _suggestions(text: str, low: str, aussie_spans: list, level: int | str, vulgarity: int | str | None,
-                 tr: Translator, genre: Genre, english: str | None, dial: str) -> list[dict[str, Any]]:
+                 tr: Translator, genre: Genre, english: str | None, dial: str, embellishment: int | None = None) -> list[dict[str, Any]]:
     """What the rule engine would still Aussify in a draft: optional, ranked by how sure it is. A whole engine
     translation, so the checks that don't show suggestions (verify, yarn's submit) skip it. It reads the draft in
     the original's genre: a voiced policy reads as a story, but its gift is no pressie."""
-    result = tr.translate(text, level=level, vulgarity=vulgarity, embedder="none", english=dial, _context=(genre, english))
+    result = tr.translate(text, level=level, vulgarity=vulgarity, embedder="none", english=dial,
+                          embellishment=embellishment, document_type=genre.name,
+                          document_config=genre.overrides, _context=(genre, english))
     suggestions = []
     for r in result.records:
         a, b = r.span
@@ -160,7 +182,7 @@ def _suggestions(text: str, low: str, aussie_spans: list, level: int | str, vulg
 
     return suggestions
 
-def _dialect_issues(text: str, original: str | None, d: Dictionary, english: str | None, genre: str,
+def _dialect_issues(text: str, original: str | None, d: Dictionary, english: str | None, genre: str | tuple[str, ...],
                     keep_quotes: bool) -> list[dict[str, Any]]:
     """US and British words Australians say differently, found as the engine finds them: plurals and
     inflections, its sense guards, names left alone, terms of art in their genre (a browser's cookies). Given
@@ -208,19 +230,19 @@ FUNCTION_WORDS = frozenset("""a an the of to in on at and or but is are was were
 that this for with his her their my your our me him them us as by from so not no do does did have has had will
 would can could just there here what it's don't i'm that's isn't wasn't didn't can't won't i'll you're they're
 he's she's we're there's""".split())
-# the drawl's respellings, read back as the words they stand for, so a respelt refrain is the same refrain
-DRAWL = {"ya": "you", "yer": "your", "me": "my", "'n": "and", "n'": "and", "'em": "them", "outta": "out of",
-         "gonna": "going to"}
 
 
-def _phrase_words(t: str) -> list[list[str]]:
-    """Each sentence's words, folded, with the drawl read back ("ridin'" -> riding, "ya" -> you)."""
+def _phrase_words(t: str, drawl: dict[str, str]) -> list[list[str]]:
+    """Each sentence's words, with literal drawl read through its dictionary annotations."""
+    alternatives = [("" if word.startswith("'") else r"(?<![a-z'])") + re.escape(word) + r"(?![a-z'])"
+                    for word in sorted(drawl, key=len, reverse=True)]
     out = []
     for sent in re.split(r"(?<=[.!?])\s+|\n\s*\n", fold(t)):
+        if alternatives:
+            sent = re.sub("|".join(alternatives), lambda m: " " + drawl[m[0]] + " ", sent)
         words = []
         for w in re.findall(r"[a-z']+", sent):
-            w = DRAWL.get(w, w)
-            w = "per cent" if w == "percent" else w   # the Australian spelling of the original's word
+            w = "per cent" if w == "percent" else w
             words += (w[:-1] + "g" if w.endswith("in'") else w).split()
         out.append(words)
     return out
@@ -238,7 +260,7 @@ def _grams(sentences: list[list[str]]) -> dict[str, list[tuple[int, int, int]]]:
     return found
 
 
-def _in_australian(original: str, d: Dictionary, english: str | None, genre: str) -> str:
+def _in_australian(original: str, d: Dictionary, english: str | None, genre: str | tuple[str, ...]) -> str:
     """The original with its US and British words in Australian ("skillet or" -> "frying pan or"), so a retelling
     that says the Australian as often as the original said the American isn't repeating. english None (not
     known): read as American, the commoner case."""
@@ -257,7 +279,7 @@ _CONVERSION = re.compile(r"\(\s*(?:about|around|roughly|approx\.?|nearly|over|un
                          r"\s*(?:°\s*[CF]\b|[CF]\b|[a-zµ]+)[^()]*\)")
 
 
-def _repeated_phrases(text: str, original: str | None, covered: set[str] = frozenset(),
+def _repeated_phrases(text: str, original: str | None, drawl: dict[str, str], covered: set[str] = frozenset(),
                       most: int = 5) -> list[dict[str, Any]]:
     """A phrase of three to six words said three times or more where the original doesn't repeat it: a tic the
     dictionary doesn't know ("has a go at you" four times). Measured against the original only: its own
@@ -266,8 +288,8 @@ def _repeated_phrases(text: str, original: str | None, covered: set[str] = froze
     or". Overlapping windows of one repeat are reported once, as the longest."""
     if original is None:
         return []
-    mine = _grams(_phrase_words(_CONVERSION.sub(" ", text)))
-    theirs = _grams(_phrase_words(_CONVERSION.sub(" ", original)))
+    mine = _grams(_phrase_words(_CONVERSION.sub(" ", text), drawl))
+    theirs = _grams(_phrase_words(_CONVERSION.sub(" ", original), drawl))
     refrains = [set(g.split()) - FUNCTION_WORDS for g, at in theirs.items() if len(at) >= 3]
     claimed: set[tuple[int, int]] = set()
     out = []
@@ -313,7 +335,7 @@ DATE_WORDS = {"jan": "january", "feb": "february", "mar": "march", "apr": "april
               "aug": "august", "sep": "september", "sept": "september", "oct": "october", "nov": "november",
               "dec": "december", "mon": "monday", "tue": "tuesday", "tues": "tuesday", "wed": "wednesday",
               "thu": "thursday", "thurs": "thursday", "fri": "friday", "sat": "saturday", "sun": "sunday"}
-def fidelity(text: str, original: str, *, max_length: float | None = None,
+def fidelity(text: str, original: str, *, max_length: float | None = None, check_length: bool = True,
              translator: Translator | None = None) -> list[dict[str, Any]]:
     """Does the Aussie version tell the same story? Length (up to max_length times the original, plus 20 words:
     the embellishment's; None: the loosest, troppo's), and the original's names and numbers.
@@ -325,11 +347,11 @@ def fidelity(text: str, original: str, *, max_length: float | None = None,
     n_text, n_orig = len(text.split()), len(original.split())
     if max_length is None:
         max_length = max(e.max_length for e in tr.dictionary.genres.embellishments.values())
-    if n_orig and n_text > max_length * n_orig + 20:
+    if check_length and n_orig and n_text > max_length * n_orig + 20:
         out.append({"kind": "too_long", "phrase": f"{n_text} words vs {n_orig}", "times": round(n_text / n_orig, 1),
                     "why": f"more than {max_length:g} times the original's length at this embellishment: trim what "
                            f"doesn't hang off anything in the original"})
-    if n_orig and n_text < 0.6 * n_orig:
+    if check_length and n_orig and n_text < 0.6 * n_orig:
         out.append({"kind": "too_short", "phrase": f"{n_text} words vs {n_orig}", "times": round(n_text / n_orig, 1),
                     "why": "much shorter than the original: keep every event and line"})
     low = text.lower()
@@ -345,7 +367,8 @@ def fidelity(text: str, original: str, *, max_length: float | None = None,
     for name in sorted(orig_names):
         word = _same_name(name.lower().rstrip("."))
         short = [k for k, v in DATE_WORDS.items() if v == word]
-        if " ".join(word.split()) in flat or DATE_WORDS.get(word, "\0") in flat \
+        if " ".join(word.split()) in flat or _dictionary_name_kept(name, flat, tr.dictionary) \
+                or DATE_WORDS.get(word, "\0") in flat \
                 or any(re.search(rf"\b{k.title()}\.|(?<=[\w,;] ){k.title()}\b", text) for k in short):
             continue   # kept, or a date localised ("Oct. 11" -> "11 October", "Monday" -> "Mon")
         out.append({"kind": "name_dropped", "phrase": name,
@@ -363,6 +386,12 @@ def fidelity(text: str, original: str, *, max_length: float | None = None,
             out.append({"kind": "name_added", "phrase": name,
                         "why": "a name not in the original: is it a deliberate local swap or invented content?"})
     return out
+
+
+def _dictionary_name_kept(name: str, flat: str, dictionary: Dictionary) -> bool:
+    """Only an explicitly reviewed whole-phrase alias excuses a changed capitalised phrase."""
+    return any(re.search(r"(?<!\w)" + re.escape(_same_name(alias)) + r"(?!\w)", flat)
+               for alias in dictionary.name_aliases.get(fold(name), ()))
 
 
 # what turns a place into its people or their adjective: Colombia -> Colombian, Europe -> European, New England

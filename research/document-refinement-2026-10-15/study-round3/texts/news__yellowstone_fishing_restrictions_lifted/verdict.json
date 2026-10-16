@@ -1,0 +1,185 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "pre-fix-yarn": "A",
+    "current": "B",
+    "dinkum-3": "C"
+  },
+  "scores": {
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 3,
+      "tone": 5,
+      "flow": 5,
+      "variety": 4,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 3,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 3,
+      "tone": 5,
+      "flow": 5,
+      "variety": 3,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "pre-fix-yarn": {
+      "meaning": "\"a bit of rain in the current forecast\" narrows precipitation to rain and adds a small amount; the dates, limits, temperature threshold and handling instructions otherwise remain.",
+      "sense": "\"land yer fish quick smart\" correctly calls for quick landing, and \"come good before you let 'em go\" retains recovery before release.",
+      "authenticity": "\"Don't play hooked trout till they're stuffed\" and \"quick smart\" are plausible broad Australian instructions.",
+      "register": "\"Anglers'll be right\", \"cos\", \"yer\" and \"come good\" sustain broad level-5 body prose while avoiding added openers and keeping within the vulgarity cap.",
+      "tone": "\"The restrictions and closures had to go in\" and \"Don't play hooked trout\" keep the conservation warning and instruction serious beneath the slang.",
+      "flow": "\"Depending on how the conditions shape up, the temporary restrictions might come off, or more closures could go in\" is clear aloud.",
+      "variety": "\"wound back\", \"knock fish off\", \"quick smart\" and \"come good\" vary the idiom across the repeated notice structure.",
+      "essence": "\"from sunup till 2 p.m. each day\" and \"let 'em come good before you let 'em go\" preserve the successive updates and fish-protection purpose."
+    },
+    "current": {
+      "meaning": "\"there's rain in the current forecast\" specifies rain where the source says precipitation; the operative dates, hours, scope and fish-care instructions otherwise survive.",
+      "sense": "\"wet a line\" fits fishing and \"head off the need\" correctly renders preventing a future prohibition.",
+      "authenticity": "\"Don't play hooked trout till they're knackered\" and \"Doing your bit\" are natural Australian phrasing.",
+      "register": "\"Staff will keep tabs\" and \"wet a line\" add local idiom, but much of the eligible prose remains a moderate conversational notice rather than the requested broad level 5.",
+      "tone": "\"The restrictions and closures were needed\" preserves their necessity and the conservation purpose.",
+      "flow": "\"When conditions picked up, that was eased back to partial restrictions on Aug. 28\" is smoothly sequenced and easy to follow.",
+      "variety": "\"wet a line\" and \"Staff will keep tabs\" recur in the two updates, but \"Doing your bit\" and \"head off\" provide some range.",
+      "essence": "\"let them recover before release\" retains the core handling instruction and the dual-update notice structure."
+    },
+    "dinkum-3": {
+      "meaning": "\"every creek that runs into 'em\" narrows tributaries to creeks, and \"give 'em a chance to come good\" weakens the instruction to let fish recover before release.",
+      "sense": "\"got wound back to part-day restrictions\" correctly captures the eased closures; \"knackered\" fits exhaustion.",
+      "authenticity": "\"fishos\", \"Do us a favour\" and \"land yer fish quick\" are credible Australian vernacular.",
+      "register": "\"Good news for fishos:\" and \"mind\" add disabled opening/tag garnish, despite the otherwise appropriate broad body voice.",
+      "tone": "\"Don't play a hooked trout till it's knackered\" retains the warning and care for fish in colloquial terms.",
+      "flow": "\"With the weather and the water coolin' off, and a bit of rain in the forecast too, the full closures can come off\" is readily spoken.",
+      "variety": "\"Staff'll keep an eye on the water temperatures\" and \"Depending on how things are lookin'\" repeat the same formula across updates.",
+      "essence": "\"from sunup till 2 p.m. each day\" and \"ban fishin' at all hours\" preserve the two stages of restrictions and their protective rationale."
+    }
+  },
+  "problems": {
+    "pre-fix-yarn": [
+      {
+        "quote": "a bit of rain in the current forecast",
+        "original": "precipitation in the current weather forecast",
+        "severity": "minor",
+        "why": "Rain is narrower than precipitation, and a bit adds an amount not stated."
+      }
+    ],
+    "current": [
+      {
+        "quote": "there's rain in the current forecast",
+        "original": "precipitation in the current weather forecast",
+        "severity": "minor",
+        "why": "This narrows the forecast type without support."
+      },
+      {
+        "quote": "Staff will keep tabs on the water temperatures.",
+        "original": "Staff will continue to monitor the water temperatures.",
+        "severity": "major",
+        "why": "Representative of a relatively light-to-moderate local voice across eligible prose, noticeably below the broad level-5 brief."
+      },
+      {
+        "quote": "Anglers will be able to wet a line",
+        "original": "Anglers will be able to fish",
+        "severity": "minor",
+        "why": "Wet a line is reused in the later update, as is keep tabs; the repeated choices make the voice a little less varied."
+      }
+    ],
+    "dinkum-3": [
+      {
+        "quote": "every creek that runs into 'em",
+        "original": "all associated tributaries",
+        "severity": "minor",
+        "why": "Tributaries may be rivers as well as creeks, so the scope becomes narrower."
+      },
+      {
+        "quote": "a bit of rain in the forecast",
+        "original": "precipitation in the current weather forecast",
+        "severity": "minor",
+        "why": "Adds an amount and narrows precipitation to rain."
+      },
+      {
+        "quote": "give 'em a chance to come good before ya let 'em go",
+        "original": "let them recover before release",
+        "severity": "major",
+        "why": "Giving fish a chance does not require waiting until they have recovered, weakening a protective instruction."
+      },
+      {
+        "quote": "Good news for fishos:",
+        "original": "",
+        "severity": "major",
+        "why": "Added opener and the later mind tag violate disabled garnish."
+      },
+      {
+        "quote": "Depending on how things are lookin'",
+        "original": "depending on condition assessments",
+        "severity": "minor",
+        "why": "The same phrasing recurs in both monitoring paragraphs, alongside a repeated keep an eye formula."
+      }
+    ]
+  },
+  "summaries": {
+    "pre-fix-yarn": "The strongest broad-voice fit, with the practical rules and conservation instructions intact apart from a small weather-detail shift.",
+    "current": "Clear and careful in substance, but substantially lighter in Australian weight than requested.",
+    "dinkum-3": "Broad and natural, but disabled garnish and weakened precision in scope and fish recovery reduce its suitability."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "flow": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "variety": [
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ],
+    "essence": [
+      [
+        "pre-fix-yarn",
+        "current",
+        "dinkum-3"
+      ]
+    ],
+    "overall": [
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ]
+  }
+}

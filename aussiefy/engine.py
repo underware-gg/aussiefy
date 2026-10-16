@@ -10,13 +10,13 @@ from typing import Any, Callable, Literal, Protocol, Sequence
 
 from . import pos
 from .context import FORMAL_RE, is_chant, sentence_contexts, text_mood
-from .detect import CODE_CONCEPTS, DETERMINERS, Detection, after_determiner, detect, resolve_overlaps
-from .embed import Embedder, make_embedder, similarity_scorer
+from .detect import CODE_CONCEPTS, DETERMINERS, Detection, after_determiner, detect, fallback_scorer, resolve_overlaps
+from .embed import Embedder, make_embedder
 from .garnish import (GarnishRecord, PhoneticRecord, add_closer, add_connective, add_opener, add_tag, add_tail,
                       apply_phonetic, ends_in_list, pick_garnish, pick_riff, tag_in_speech)
 from .loader import load_dictionary
 from .dialect import text_english
-from .genre import Embellishment, Genre, form_removes, text_genre
+from .genre import resolve_document, Embellishment, Genre, form_removes
 from .protected import Masked, protected_runs
 from .model import Dictionary
 from .policy import Effective, Policy, envelope, pick_form, resolve, roll
@@ -25,7 +25,7 @@ from .select import Candidate, candidates, usable_forms, weighted_pick
 from .schema import Entry, SchemaError
 from .terms import form_key
 from .text import (COMMON_STARTERS, DATELINE, MID_SENTENCE_NAME, OPEN_QUOTES, QUOTES, SCRIPT_LINE, Token, capital_is_positional, fix_articles, heading_lines, match_case,
-                   held_spans, sentences, tokenize)
+                   document_spans, mentioned_spans, held_spans, sentences, tokenize)
 
 
 UNTOUCHED_MIN_WORDS = 5
@@ -151,9 +151,10 @@ class Result:
     embellishment: Embellishment | None = None   # the garnish it took
 
     variety: int = 0
+    profile_config: dict[str, Any] = field(default_factory=dict)
 
     def envelope(self) -> dict[str, Any]:
-        return envelope(self.level, self.vulgarity, self.warnings)
+        return {**envelope(self.level, self.vulgarity, self.warnings), "profile_config": self.profile_config}
 
     def sentence_text(self, i: int) -> str:
         return self.source[slice(*self.sentences[i])]
@@ -189,7 +190,7 @@ class Result:
             **self.envelope(),
             "variety": self.variety,
             "mood": self.mood,
-            "genre": self.genre.name, "genre_scores": self.genre.scores,
+            **self.genre.envelope(self.embellishment.step),
             "embellishment": self.embellishment.step, "embellishment_name": self.embellishment.name,
             "decisions": self.decisions(),
             "explain": [r.to_dict() for r in self.records] + [w.to_dict() for w in self.rewrites]
@@ -233,7 +234,7 @@ class Translator:
         """The similarity fallback's scorer over the fallback patterns, built once per embedder."""
         if spec not in self._scorers:
             emb = self._embedder(spec)
-            self._scorers[spec] = emb and similarity_scorer(emb, [p.text for p in self.dictionary.fallback_patterns])
+            self._scorers[spec] = emb and fallback_scorer(emb, self.dictionary.fallback_patterns)
         return self._scorers[spec]
 
     def _embedder(self, spec: str | None) -> Embedder | None:
@@ -247,12 +248,14 @@ class Translator:
                   embedder: str | None = None, rewriter: Rewriter | None = None,
                   rewrite_mode: Literal["hard", "all"] = "hard",
                   embellishment: int | str | None = None,
-                  _protected: Masked | None = None, _context: tuple | None = None) -> Result:
+                  document_type: str = "general", document_config: dict | None = None,
+                  _protected: Masked | None = None, _context: tuple | None = None,
+                  _composition: DocumentPart | None = None) -> Result:
         """Translate text: the same text, policy and seed always give the same Result.
 
         level (1-5 or tourist .. swaggie) is how Aussie; vulgarity (0-3 or nan, dad, uncle-bob, tradie; None = the
         level's own) is how vulgar, and wins over the level's in either direction. embellishment (0-2 or deadset,
-        dinkum, troppo; None = the genre's own) is how much garnish the telling takes. variety N
+        dinkum, troppo; None = the selected document type's default) is how much garnish the telling takes. variety N
         picks among the N best-fitting terms (0 weighs every eligible one). registers (current, dated,
         archaic), regions ("qld") and unlock (flags whose gated entries become eligible) narrow or widen what
         the level allows. english (us, uk, auto, none; None = profiles.yaml's) is the English the text is in,
@@ -264,15 +267,19 @@ class Translator:
         internal composition parameters; format selection belongs to the public translation route."""
         pol = self.policy(level=level, seed=seed, vulgarity=vulgarity,
                           variety=variety, registers=registers, regions=regions, unlock=unlock, embedder=embedder,
-                          english=english, embellishment=embellishment)
+                          english=english, embellishment=embellishment,
+                          document_type=document_type, document_config=document_config)
         masked = _protected if _protected is not None else Masked(text, text)
         source, text = text, masked.text      # the engine reads the masked text: the same length, same offsets
         tokens = tokenize(text)
         sents = sentences(tokens)
-        genre = _context[0] if _context is not None else text_genre(masked.prose(), masked.source, config=self.dictionary.genres)
+        genre = _context[0] if _context is not None else resolve_document(masked.prose(), masked.source, config=self.dictionary.genres,
+                        document_type=pol.document_type, document_config=pol.document_config)
         run = _Run(text, pol, resolve(pol, self.dictionary), text_mood(text), is_chant(sents), masked, genre,
                    _context[1] if _context is not None else text_english(pol.english, masked.prose(), self.dictionary.us_spellings),
-                   genre.setting(pol.embellishment))
+                   genre.setting(pol.embellishment), composition=_composition)
+        if _composition is not None:
+            run.state = _composition.state
         pieces: list[str] = [text[: tokens[0].start] if tokens else text]
         for i, tokens_i in enumerate(sents):
             sent = run.sentence(i, tokens_i, sents)
@@ -293,7 +300,9 @@ class Translator:
         joined = (self._closer(body, sents, run) + trail) if any(t.is_word for t in tokens) else "".join(pieces)
         final, phon = apply_phonetic(joined, self.dictionary.phonetic, run.eff, pol.seed,
                                      infixes=run.embellishment.takes("infix"),
-                                     keep=lambda t: _no_drawl(t, run.genre.policy.keep_quotes, masked.no_phonetic))
+                                     keep=lambda t: _no_drawl(t, run.genre.policy.keep_quotes, masked.no_phonetic),
+                                     preserve=partial(document_spans, keep_quotes=run.genre.policy.keep_quotes,
+                                                      datelines=run.genre.policy.dateline_context))
         final = masked.restore(final)
         warnings = list(run.eff.warnings)
         if pol.vulgarity is not None and run.eff.vulgarity and not run.embellishment.takes("infix"):
@@ -308,23 +317,25 @@ class Translator:
                       deterministic_text=final, rewrites=run.rewrites, difficult=run.difficult,
                       vulgarity=run.eff.vulgarity, mood=run.mood, genre=run.genre,
                       sentences=[(s[0].start, s[-1].end) for s in sents], dialect=run.dialect,
-                      english=run.english, embellishment=run.embellishment, variety=pol.variety)
+                      english=run.english, embellishment=run.embellishment, variety=pol.variety,
+                      profile_config=run.eff.envelope()["profile_config"])
 
     # -- stages -------------------------------------------------------------------------
 
-    def _term_of_art(self, det: Detection, genre: str) -> bool:
+    def _term_of_art(self, det: Detection, domains: tuple[str, ...]) -> bool:
         """Whether every concept a span was read as is a term of art in this genre (a browser's cookie, a
         struct's field, a build): then the span stays as it is, and no shorter match takes it either."""
         known = [self.dictionary.concepts[c] for c in det.concepts if c in self.dictionary.concepts]
-        return bool(known) and all(genre in c.not_in for c in known)
+        return bool(known) and all(set(domains) & c.not_in for c in known)
 
     def _substitute(self, sent: "_Sentence", run: "_Run") -> tuple[list[SubstitutionRecord], list[tuple[int, int, str]]]:
         """Detect the sentence's concepts and swap in Aussie terms: one record per detected span."""
         pol, eff, state, toks = run.pol, run.eff, run.state, sent.tokens
         dets = resolve_overlaps(detect(toks, self.dictionary.index, self._fallback_scorer(pol.embedder),
-                                       self.dictionary.fallback_patterns, pol.similarity_threshold, sent.tags))
+                                       self.dictionary.fallback_patterns, pol.similarity_threshold, sent.tags,
+                                       self.dictionary.adjective_nouns))
         held = run.held(toks)
-        dets = [d for d in dets if not self._term_of_art(d, run.genre.name)
+        dets = [d for d in dets if not self._term_of_art(d, run.genre.policy.term_domains)
                 and not held & set(range(d.start, d.end))]
         if pol.english != "none":
             dets = self._yield_to_dialect(dets, toks, run)
@@ -387,7 +398,7 @@ class Translator:
     def _yield_to_dialect(self, dets: list[Detection], toks: list[Token], run: "_Run") -> list[Detection]:
         """The detections a longer dialect span holds: "cookie jar" is a biscuit tin, not a bickie jar, and
         "petroleum jelly" keeps its jelly. Equal or longer detections keep their words."""
-        claimed = self.dictionary.dialect.spans(toks, run.english, run.genre.name)
+        claimed = self.dictionary.dialect.spans(toks, run.english, run.genre.policy.term_domains)
         return [d for d in dets if not any(a <= d.start and d.end <= b and b - a > d.end - d.start
                                            for a, b in claimed)]
 
@@ -396,7 +407,7 @@ class Translator:
         """American and British words the dictionary left alone, swapped for the Australian: every one, at
         every level (plain Australian English, like the spelling), unless a bracketed gloss would echo it."""
         toks, splices = sent.tokens, []
-        for f in self.dictionary.dialect.find(toks, run.english, run.genre.name, replaced):
+        for f in self.dictionary.dialect.find(toks, run.english, run.genre.policy.term_domains, replaced):
             if _gloss_echo(toks, f.start, f.end, f.text, said):
                 continue
             said[f.end] = f.text
@@ -428,20 +439,24 @@ class Translator:
         """The image the term calls up ("wheelie bins, overflowin', with the bin chickens fightin' over the
         scraps"), only where the term ends a clause (or is the first of a pair) so the riff can't split a phrase.
         Returns the text to append, or ""."""
-        if sent.quiet or not run.embellishment.takes("riff"):
+        if sent.quiet or sent.prefix_only or not run.embellishment.takes("riff"):
             return ""
         toks, state, eff = sent.tokens, run.state, run.eff
         riffs = choice.entry.riffs_within(eff.vulgarity)
         p = eff.profile.garnish.get("riff", 0)
         ends_clause = end >= len(toks) or toks[end].is_punct and toks[end].text not in ("'", "-")
         before_and = choice.entry.frame == "np" and end < len(toks) and toks[end].norm == "and"
+        ordinal = sent.index + (run.composition.first_sentence if run.composition is not None else 0)
+        last = state.last_placed.get("riff")
         if not (riffs and p > 0 and (ends_clause or before_and) and len(state.riffed) < eff.profile.limit("riff")
                 and choice.entry.id not in state.riffed and sent.key not in state.riffed_sentences
+                and (last is None or ordinal - last > eff.profile.garnish_gap)
                 and roll(run.pol.seed, "riff", *sent.key, det.start) < p):
             return ""
         rec.riff = pick_riff(riffs, run.mood, roll(run.pol.seed, "riff-pick", *sent.key, det.start)).text
         state.riffed.add(choice.entry.id)
         state.riffed_sentences.add(sent.key)
+        state.last_placed["riff"] = ordinal
         return ", " + rec.riff + ("," if before_and and not ends_clause else "")
 
     def _rewrite(self, sent: "_Sentence", out: str, recs: list[SubstitutionRecord], run: "_Run", rewriter: Rewriter,
@@ -462,8 +477,11 @@ class Translator:
     def _closer(self, joined: str, sents: list[list[Token]], run: "_Run") -> str:
         """One closing exclamation for the whole text, answering its last sentence ("that's my two bob's worth"
         only after an opinion): a sweary one at the vulgarity's rate, or else the level's clean one."""
+        if (run.composition is not None and (not run.composition.last or not run.composition.ends_sentence
+                                             or run.composition.quiet)):
+            return joined
         if (not sents or run.masked.quiet_at(sents[-1][0].start) or run.is_held(sents[-1])
-                or not run.embellishment.takes("closer")):
+                or not run.embellishment.takes("closer") or run.eff.profile.limit("closer") == 0):
             return joined     # a text that ends in a table has nowhere to say it; a notice has no punchline
         contexts = sentence_contexts(sents[-1])
         for swear, p, key in ((True, run.eff.swearing.closer, "swear-closer"),
@@ -486,23 +504,28 @@ class Translator:
         """Round off a closing list ("their brains and imagination, the whole bloody works?"): the level's clean
         tail, or else a sweary one at the vulgarity's rate. It sits inside the sentence, so it doesn't count
         against the sentence's garnish budget."""
-        if not run.embellishment.takes("tail"):
+        if sent.prefix_only or not run.embellishment.takes("tail"):
             return out
         state = run.state
+        ordinal = sent.index + (run.composition.first_sentence if run.composition is not None else 0)
+        last = state.last_placed.get("tail")
+        if last is not None and ordinal - last <= run.eff.profile.garnish_gap:
+            return out
         for swear, p in ((False, run.eff.profile.garnish.get("tail", 0)), (True, run.eff.swearing.exclaim)):
             key = ("swear" if swear else "") + "tail"
-            if p <= 0 or state.placed[key] >= run.eff.profile.limit("tail") or not ends_in_list(out):
+            if p <= 0 or state.placed["tail"] >= run.eff.profile.limit("tail") or not ends_in_list(out):
                 continue
             r = roll(run.pol.seed, "garnish", key, *sent.key)
             if r >= p:
                 continue
             entry, form, rej = pick_garnish("tail", self.dictionary.garnish, run.eff, run.pol.seed,
-                                            (key,) + sent.key, state.garnish_uses, sentence_contexts(sent.tokens),
+                                            (key,) + sent.key, state.garnish_uses, sentence_contexts(sent.tokens, sent.tags),
                                             swear=swear, insults=run.embellishment.takes("insult"))
             if entry:
                 out = add_tail(out, form)
                 state.garnish_uses[entry.id] += 1
-                state.placed[key] += 1
+                state.placed["tail"] += 1
+                state.last_placed["tail"] = ordinal
             run.garnish.append(GarnishRecord.rolled("tail", sent.index, entry, form, r, p, rej))
             if entry:
                 break
@@ -555,7 +578,8 @@ class Translator:
             starts_with_interjection=any(r.det.start == 0 and r.det.frame == "interjection" for r in recs),
             first_replaced=any(r.substituted and r.out_span and r.out_span[0] == toks[0].start
                                and r.chosen.entry.form[:1].islower() for r in recs),
-            contexts=sentence_contexts(toks) | ({"paragraph_end"} if sent.para_end else set()))
+            contexts=(sent.source_contexts if sent.source_contexts is not None else sentence_contexts(toks, sent.tags))
+                     | ({"paragraph_end"} if sent.para_end else set()))
         # a tag lands at the sentence's end: when that's narration after a closing quote ('"... get the coffins
         # ready,"--and she left him no peace until he consented'), judge it on that narration, not the speech
         quotes = [i for i, t in enumerate(toks) if t.text in QUOTES]
@@ -567,20 +591,24 @@ class Translator:
         level_rates = {p: eff.profile.garnish.get(p, 0) for p in ("connective", "aside", "opener", "tag")}
         out = self._garnish_channel(out, sent, run, g, level_rates, eff.profile.garnish_per_sentence, swear=False)
         swear_rates = {p: eff.swearing.exclaim for p in ("aside", "opener", "tag")}
-        return self._garnish_channel(out, sent, run, g, swear_rates, 1, swear=True)
+        return self._garnish_channel(out, sent, run, g, swear_rates,
+                                     max(0, eff.profile.garnish_per_sentence - len(g.placed)), swear=True)
 
     def _garnish_channel(self, out: str, sent: "_Sentence", run: "_Run", g: "_GarnishSpot",
                          rates: dict[str, float], budget: int, swear: bool) -> str:
         state, eff = run.state, run.eff
+        ordinal = sent.index + (run.composition.first_sentence if run.composition is not None else 0)
         channel = "swear" if swear else ""
         spent = 0
         for placement in rates:
             p = rates[placement]
+            if sent.prefix_only and placement not in ("opener", "connective"):
+                continue
             if p <= 0 or spent >= budget or placement in g.placed or not run.embellishment.takes(placement):
                 continue
             if placement in ("opener", "connective") and (g.starts_with_interjection or "opener" in g.placed
                                                           or "connective" in g.placed
-                                                          or sent.index == 0 and placement == "connective"):
+                                                          or ordinal == 0 and placement == "connective"):
                 continue
             if placement in ("opener", "connective") and SCRIPT_LINE.match(out):
                 continue  # a label starts the line: a play's speaker ("HALE:"), or a "NOTE:" or "PS:"
@@ -590,38 +618,49 @@ class Translator:
                 continue  # a stanza-end punchline, or the narrator answering their own question; never speech
             if placement != "aside" and (run.chant or placement == "opener" and "fragment" in g.contexts):
                 continue  # "Jeez Louise, Nightmare of Moloch!": openers and tag-ons break a chant
+            lowerable = frozenset()
+            if placement in ("opener", "connective"):
+                lowerable = run.opener_lowerable(sent, self.dictionary)
+                first = re.search(r"[A-Za-z][A-Za-z'’-]*", out)
+                if first is not None:
+                    word = first.group()
+                    # If ordinary-word/name evidence is inconclusive, leave the sentence's case alone.
+                    if (word[0].isupper() and word.lower() not in lowerable and not g.first_replaced
+                            and word != "I" and not word.startswith(("I'", "I’"))
+                            and not any(c.isupper() for c in word[1:])):
+                        continue
             key = channel + placement
-            if state.placed[key] >= eff.profile.limit(placement):
+            if state.placed[placement] >= eff.profile.limit(placement):
                 continue
             last = state.last_placed.get(placement)   # spacing is per placement, across both channels
-            if last is not None and sent.index - last <= eff.profile.garnish_gap:
+            if last is not None and ordinal - last <= eff.profile.garnish_gap:
                 continue
             r = roll(run.pol.seed, "garnish", key, *sent.key)
             if r >= p:
                 continue
-            recent = {cid for cid, at in state.connectives.items() if sent.index - at <= CONNECTIVE_REPEAT_GAP}
+            recent = {cid for cid, at in state.connectives.items() if ordinal - at <= CONNECTIVE_REPEAT_GAP}
             entry, form, rej = pick_garnish(placement, self.dictionary.garnish, eff, run.pol.seed, (key,) + sent.key,
                                             state.garnish_uses, g.tag_contexts if placement == "tag" else g.contexts,
                                             exclude=recent, mood=run.mood, swear=swear,
                                             insults=run.embellishment.takes("insult"))
             if entry and placement == "connective":
-                new = add_connective(out, form, run.opener_lowerable(sent, self.dictionary))
+                new = add_connective(out, form, lowerable)
                 if new is None:
                     entry, form = None, None
                     rej = rej + [("-", "sentence already opens with a connective or quote")]
                 else:
                     out = new
             elif entry:
-                out = (add_opener(out, form, run.opener_lowerable(sent, self.dictionary), g.first_replaced) if placement == "opener"
+                out = (add_opener(out, form, lowerable, g.first_replaced) if placement == "opener"
                        else add_closer(out, form) if placement == "aside" else add_tag(out, form))
             if entry:
                 # connectives are plain storytelling words, so the same one can come back later
                 if placement != "connective":
                     state.garnish_uses[entry.id] += 1
                 else:
-                    state.connectives[entry.id] = sent.index
-                state.placed[key] += 1
-                state.last_placed[placement] = sent.index
+                    state.connectives[entry.id] = ordinal
+                state.placed[placement] += 1
+                state.last_placed[placement] = ordinal
                 g.placed.add(placement)
                 spent += 1
             run.garnish.append(GarnishRecord.rolled(placement, sent.index, entry, form, r, p, rej))
@@ -665,6 +704,19 @@ class TextState:
     spellings: dict[str, str] = field(default_factory=dict)      # entry id -> the spelling it first took
 
 
+@dataclass(frozen=True)
+class DocumentPart:
+    """A source-preserving adapter's unit: shared document choices, with local result offsets."""
+    state: TextState
+    first_sentence: int
+    starts_sentence: bool
+    ends_sentence: bool
+    last: bool
+    quiet: bool = False
+    last_contexts: frozenset[str] = frozenset()
+    written: frozenset[str] | None = None
+
+
 @dataclass
 class _Sentence:
     index: int
@@ -676,6 +728,8 @@ class _Sentence:
     quiet: bool = False    # a table cell, list item, heading, dateline or held quote: words may be swapped (not
                            # a held quote's), no garnish or riff
     tags: list[str] = field(default_factory=list)   # each token's part of speech (pos.tag), tagged once
+    prefix_only: bool = False
+    source_contexts: frozenset[str] | None = None
 
     @property
     def end(self) -> int:
@@ -735,6 +789,7 @@ class _Run:
     english: str | None           # the source's English (dialect.text_english), where known
     embellishment: Embellishment  # the caller's setting, or the genre's own: which garnish it takes
     state: TextState = field(default_factory=TextState)
+    composition: DocumentPart | None = None
     records: list[SubstitutionRecord] = field(default_factory=list)
     garnish: list[GarnishRecord] = field(default_factory=list)
     rewrites: list[RewriteRecord] = field(default_factory=list)
@@ -751,7 +806,8 @@ class _Run:
         """The tokens no swap may touch: words mentioned rather than used ("the word 'guys'"), and in a genre
         that keeps quotes (news, official prose) the quoted speech and documents."""
         if self._held is None:
-            self._held = held_spans(self.text, self.genre.policy.keep_quotes)
+            self._held = mentioned_spans(self.text) + document_spans(self.text, keep_quotes=self.genre.policy.keep_quotes,
+                                                                   datelines=self.genre.policy.dateline_context)
         return {i for i, t in enumerate(tokens) if any(a <= t.start < b for a, b in self._held)}
 
     def commands(self) -> frozenset[str]:
@@ -759,7 +815,7 @@ class _Run:
         capitalises mid-sentence (it's a name there: "Captain Cook"). Elsewhere none: "Cook sailed in"."""
         if self._commands is None:
             named = {m.lower() for m in MID_SENTENCE_NAME.findall(self.text)}
-            self._commands = (pos.IMPERATIVES - named if self.genre.name == "instructions" else frozenset())
+            self._commands = (pos.IMPERATIVES - named if self.genre.policy.command_context else frozenset())
         return self._commands
 
     def opener_lowerable(self, sent: _Sentence, dictionary: Dictionary) -> frozenset[str]:
@@ -770,7 +826,8 @@ class _Run:
     def written(self) -> frozenset[str]:
         """The words this text writes in lower case somewhere."""
         if self._written is None:
-            self._written = frozenset(re.findall(r"(?<![\w'’])[a-z][a-z'’-]*", self.text))
+            self._written = (self.composition.written if self.composition is not None and self.composition.written is not None
+                             else frozenset(re.findall(r"(?<![\w'’])[a-z][a-z'’-]*", self.text)))
         return self._written
 
     def plain_words(self, dictionary: Dictionary) -> frozenset[str]:
@@ -789,16 +846,21 @@ class _Run:
         # in a story the engine can't tell whether "What a shocker!" fits what just happened, so only chants
         # get stanza-end asides
         para_end = self.chant and i + 1 < len(sents) and "\n" in self.text[tokens[-1].end:nxt]
-        quiet = (self.masked.quiet_at(tokens[0].start) or self.is_heading(tokens) or self.is_held(tokens)
+        part = self.composition
+        starts = part is None or i > 0 or part.starts_sentence
+        ends = part is None or i < len(sents) - 1 or part.ends_sentence
+        quiet = (not starts or part is not None and part.quiet
+                 or self.masked.quiet_at(tokens[0].start) or self.is_heading(tokens) or self.is_held(tokens)
                  or self.in_dateline(tokens))
         return _Sentence(i, tokens, text, (text.lower(), self.state.seen_sentences[text]), nxt, para_end, quiet,
-                         pos.tag([t.text for t in tokens]))
+                         pos.tag([t.text for t in tokens]), prefix_only=starts and not ends,
+                         source_contexts=part.last_contexts if part is not None and starts and not ends else None)
 
     def in_dateline(self, tokens: list[Token]) -> bool:
         """A sentence starting in a news story's dateline ("MAMMOTH HOT SPRINGS, Wyo. –", which splits at
         "Wyo.")."""
         if self._datelines is None:
-            self._datelines = ([m.span() for m in DATELINE.finditer(self.text)] if self.genre.name == "news"
+            self._datelines = ([m.span() for m in DATELINE.finditer(self.text)] if self.genre.policy.dateline_context
                                else [])
         return any(a <= tokens[0].start < b for a, b in self._datelines)
 

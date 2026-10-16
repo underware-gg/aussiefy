@@ -289,7 +289,7 @@ def test_strict_document_context_reaches_short_units_and_public_warnings(transla
     if custom_default:
         policies = {k: replace(v, default_embellishment=1) for k, v in config.policies.items()}
         translator = Translator(replace(translator.dictionary, genres=replace(config, policies=policies)))
-    result = aussiefy.translate(source, markdown=True, translator=translator, level=1, vulgarity=2)
+    result = aussiefy.translate(source, markdown=True, translator=translator, level=1, vulgarity=2, document_type="auto")
     whole = text_genre("\n".join(source[u.source_span[0]:u.source_span[1]] for u in result.units), source,
                        config=translator.dictionary.genres)
     assert whole.name == "instructions" and len(result.units) >= 2
@@ -301,11 +301,11 @@ def test_strict_document_context_reaches_short_units_and_public_warnings(transla
     assert "biscuit" in result.text
     assert result.warnings == list(dict.fromkeys(w for u in result.units for w in u.result.warnings))
     assert result.warnings and result.to_dict()["genre"] == whole.name
-    public = harness.translate(source, markdown=True, level=1, vulgarity=2, translator=translator)
+    public = harness.translate(source, markdown=True, level=1, vulgarity=2, translator=translator, document_type="auto")
     assert public["policy_warnings"] == result.warnings
     if not custom_default:
-        assert main(["translate", source, "--markdown", "-l", "1", "--vulgarity", "2", "--json"]) == 0
+        assert main(["translate", source, "--document-type", "auto", "--markdown", "-l", "1", "--vulgarity", "2", "--json"]) == 0
         captured = capsys.readouterr()
         assert "policy_warnings" in captured.out and "no swear infixes" in captured.out
-        assert main(["translate", source, "--markdown", "-l", "1", "--vulgarity", "2"]) == 0
+        assert main(["translate", source, "--document-type", "auto", "--markdown", "-l", "1", "--vulgarity", "2"]) == 0
         assert "no swear infixes" in capsys.readouterr().err

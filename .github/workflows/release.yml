@@ -5,10 +5,41 @@ on:
 permissions:
   contents: read
 jobs:
+  python-compatibility:
+    name: Python ${{ matrix.python }} / SDK ${{ matrix.sdk }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - python: '3.10'
+            sdk: 'anthropic==0.120.0'
+          - python: '3.12'
+            sdk: 'anthropic>=0.120'
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install -e '.[dev]' '${{ matrix.sdk }}'
+      - name: Check supported Python and real SDK boundary offline
+        run: >-
+          python -m pytest -q tests/user tests/functional/test_claude.py
+          tests/functional/test_retelling.py tests/functional/test_contracts.py
+          tests/functional/test_schema.py tests/contributor/test_judge.py
   release-head:
+    needs: python-compatibility
+    if: ${{ always() }}
     name: aussiefy-release-head
     runs-on: ubuntu-latest
     steps:
+      - name: Require successful compatibility checks
+        env:
+          COMPATIBILITY_RESULT: ${{ needs.python-compatibility.result }}
+        run: test "$COMPATIBILITY_RESULT" = success
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           ref: ${{ github.sha }}

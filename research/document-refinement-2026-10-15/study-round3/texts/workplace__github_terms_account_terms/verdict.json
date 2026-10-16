@@ -1,0 +1,156 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "dinkum-3": "A",
+    "pre-fix-yarn": "B",
+    "current": "C"
+  },
+  "scores": {
+    "dinkum-3": {
+      "meaning": 3,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 3,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 3,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "dinkum-3": {
+      "meaning": "\"we reckon you're responsible\" weakens the explicit institutional attribution of responsibility, and \"Your Account is your lookout\" loses the summary’s explicit you alone.",
+      "sense": "\"final say on admin control\" fits ultimate administrative control, and \"have a squiz\" appropriately invites reading a policy.",
+      "authenticity": "\"Keeping your Account secure is up to you, too\" and \"shared round\" sound natural in Australian usage.",
+      "register": "\"ta\" and \"Look,\" add prohibited tag/opener garnish; the idiomatic body itself is reasonably level 3.",
+      "tone": "\"You can't use GitHub in breach\" still conveys serious terms and prohibitions rather than making them optional or comic.",
+      "flow": "\"Anything else we ask for, like your real name, is up to you\" is a smooth conversational explanation of the exceptions that follow.",
+      "variety": "\"your lookout\", \"get at\", \"switched-on\" and \"have a squiz\" offer varied phrasing without a dominant repeated slang term.",
+      "essence": "\"You must be 13 or older\" and the retained sanctions link preserve the recognisable account-terms structure and subject matter."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"we reckon you're responsible\" weakens the formal attribution of responsibility; the account limits, age, exceptions and restrictions otherwise remain precise.",
+      "sense": "\"final say on admin control\" and \"on top of your free Personal Account\" carry their intended senses clearly.",
+      "authenticity": "\"We're stoked\", \"that's no worries\" and \"have a squiz\" are natural Australian idioms.",
+      "register": "\"sort out\", \"stoked\", \"kids\" and \"have a squiz\" give a moderate level-3 voice while retaining exact legal prohibitions and markdown headings.",
+      "tone": "\"Accounts registered by \"bots\" or other automated methods aren't allowed\" retains a clear rules-and-responsibility tone.",
+      "flow": "\"Anything else we ask for, like your real name, is optional\" reads easily, with the legal exceptions still attached clearly.",
+      "variety": "\"final say\", \"sort out\", \"on top of\", \"stoked\" and \"have a squiz\" vary the connecting prose.",
+      "essence": "\"You alone are responsible for your Account\" and the complete age, machine-account and sanctions clauses preserve the distinctive terms document."
+    },
+    "current": {
+      "meaning": "\"we consider you responsible\" preserves the institutional attribution exactly, while \"at least one Personal Account must be designated\" retains the condition and all limits and exceptions survive.",
+      "sense": "\"at the end of the day\" aptly renders ultimate responsibility, and \"have a squiz\" fits the policy-reading invitation.",
+      "authenticity": "\"We're rapt\" and \"getting keen on learning to program\" sound natural in Australian English.",
+      "register": "\"The guts of it:\", \"look after User access\", \"rapt\" and \"pass a single login round\" provide the requested level-3 voice in eligible prose; the bold label is not a protected heading.",
+      "tone": "\"we must stick to United States law\" and \"we consider you responsible\" retain the document’s serious legal intent under the conversational voice.",
+      "flow": "\"Any other details we ask for, such as your real name, are up to you, with two exceptions\" makes the conditions particularly easy to follow.",
+      "variety": "\"The guts of it\", \"on top of\", \"rapt\", \"getting keen\" and \"have a squiz\" provide varied idiom.",
+      "essence": "\"You may keep no more than one free machine account\" and the retained account-terms headings keep the original’s rule structure and practical legal character."
+    }
+  },
+  "problems": {
+    "dinkum-3": [
+      {
+        "quote": "we reckon you're responsible",
+        "original": "we consider you responsible",
+        "severity": "critical",
+        "why": "Reckon makes a stated attribution of legal responsibility sound like a tentative opinion; the effective contract explicitly says this force must stay."
+      },
+      {
+        "quote": "Your Account is your lookout",
+        "original": "You alone are responsible for your Account",
+        "severity": "major",
+        "why": "The paraphrase does not explicitly preserve sole responsibility."
+      },
+      {
+        "quote": "ta",
+        "original": "",
+        "severity": "major",
+        "why": "An added politeness tag is disabled by the empty-garnish contract; Look likewise adds a disabled opener."
+      },
+      {
+        "quote": "can have a few owners",
+        "original": "may have multiple owners",
+        "severity": "minor",
+        "why": "A few suggests a small number, whereas multiple does not impose that scale."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "we reckon you're responsible",
+        "original": "we consider you responsible",
+        "severity": "critical",
+        "why": "This turns a formal attribution of responsibility into a looser opinion, the exact force shift singled out by the contract."
+      }
+    ],
+    "current": []
+  },
+  "summaries": {
+    "dinkum-3": "Natural and fluent, but weaker on exact legal responsibility and adds disabled garnish.",
+    "pre-fix-yarn": "A good level-3 retelling and faithful markdown, undermined by one consequential responsibility phrase.",
+    "current": "Best fit: idiomatic prose with the legal force, conditions, markdown structure and link targets preserved."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "dinkum-3",
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "flow": [
+      [
+        "dinkum-3",
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "variety": [
+      [
+        "dinkum-3",
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "essence": [
+      [
+        "dinkum-3",
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ]
+  }
+}

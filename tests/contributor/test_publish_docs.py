@@ -22,7 +22,7 @@ def put(root, name, text):
 def repo(tmp_path):
     rows = [{"source": "docs/plain/root/README.md", "output": "README.md"},
             {"source": "docs/plain/user/guide.md", "output": "docs/user/guide.md"}]
-    put(tmp_path, p.CONFIG, yaml.safe_dump({"translation": {"level": 5, "vulgarity": "dad", "seed": 0}, "documents": rows}))
+    put(tmp_path, p.CONFIG, yaml.safe_dump({"translation": p.SETTINGS, "documents": rows}))
     put(tmp_path, "docs/plain/root/README.md", '# Intro\n\nI\'m extremely busy.\n\n[Guide](../user/guide.md#usage) and [licence](../../../LICENSE).\n\n```console\n$ aussiefy "test"\nExact output.\n```\n')
     put(tmp_path, "docs/plain/user/guide.md", '# Usage\n\nShe was extremely busy.\n\n[Home](../root/README.md#intro)\n')
     put(tmp_path, "LICENSE", "Own fixture licence.\n")
@@ -36,7 +36,7 @@ def test_generate_is_repeatable_prose_changes_and_structure_examples_survive(rep
     assert "I'm extremely busy.\n" not in text
     assert '[Guide](docs/user/guide.md#usage)' in text and '[licence](LICENSE)' in text
     assert '```console\n$ aussiefy "test"\nExact output.\n```' in text
-    assert '# Intro\n' in text and '[Edit the plain source](docs/plain/root/README.md)' in text
+    assert '# Intro\n' in text and "[Prefer docs that are as dry as a dead dingo's donger?](docs/plain/root/README.md)" in text
     p.generate(repo)
     assert first == {d.output: (repo / d.output).read_bytes() for d in p.load(repo).documents}
     p.check(repo)
@@ -53,6 +53,19 @@ def test_source_or_output_edit_is_stale_until_regenerated(repo):
         p.check(repo)
     p.generate(repo)
     p.check(repo)
+
+
+def test_publication_protects_quoted_examples_and_neutral_people(repo):
+    source = ('# Usage\n\nAn example: "mosquitoes" becomes "mozzies".\n\n'
+              'The incorrect example is “is my togs”.\n\nSomeone is being addressed.\n\n'
+              'You must use `dev` for changes.\n')
+    put(repo, 'docs/plain/user/guide.md', source)
+    p.generate(repo)
+    rendered = (repo / 'docs/user/guide.md').read_text()
+    assert '"mosquitoes" becomes "mozzies"' in rendered
+    assert '“is my togs”' in rendered
+    assert 'mongrel' not in rendered and 'bastard' not in rendered
+    assert '`dev`' in rendered
 
 
 def test_missing_unmapped_or_unexpected_files_fail(repo):

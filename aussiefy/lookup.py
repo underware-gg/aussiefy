@@ -11,6 +11,8 @@ import re
 from functools import lru_cache
 from typing import Any
 
+from .align import content_words
+from .text import tokenize
 from .embed import NgramEmbedder
 from .errors import UserError
 from .engine import Translator, default_translator
@@ -29,15 +31,17 @@ _NEGATED = re.compile(r"\b(?:no|not|never|nothing|none|nobody|nowhere|without|ca
 
 
 @lru_cache(maxsize=None)
-def _inflected(form: str) -> frozenset[str]:
+def _inflected(form: str, frame: str) -> frozenset[str]:
     """A form with one word inflected, as a query may give it: "coves" for cove, "playing up" for play up, "chucked
     a sickie" for chuck a sickie (morph's plurals and verb forms)."""
     words = form.split()
     out = set()
-    for i, w in enumerate(words):
-        if not w.isalpha():
+    positions = [0] if frame == "vp" else [len(words) - 1] if frame == "np" else []
+    for i in positions:
+        if i < 0 or not words[i].isalpha():
             continue
-        for other in {pluralise(w), *verb_forms(w)} - {w}:
+        variants = {pluralise(words[i])} if frame == "np" else set(verb_forms(words[i]))
+        for other in variants - {words[i]}:
             out.add(form_key(" ".join(words[:i] + [other] + words[i + 1:])))
     return frozenset(out)
 
@@ -124,12 +128,21 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     one_word = " " not in q
     negated = bool(_NEGATED.search(q))   # a model match must agree with the query on negation
     fuzz = ONE_WORD_FUZZ if one_word else 1.0
+    tokens = tokenize(query.strip())
+    while tokens and tokens[0].is_punct:
+        tokens.pop(0)
+    while tokens and tokens[-1].is_punct:
+        tokens.pop()
     concept_score: dict[str, float] = {}
     for p in d.patterns:
         text = strip_markup(p.text)
         score = 1.0 if text == q else sim.similarity(q, text) * fuzz
         for c in p.concepts:
             concept_score[c] = max(concept_score.get(c, 0.0), score)
+    for matched in d.index.find(tokens):
+        if matched.start == 0 and matched.end == len(tokens):
+            for cid in matched.pattern.concepts:
+                concept_score[cid] = max(concept_score.get(cid, 0), 1.0)
     if one_word:   # "cry": the concept's own description names it even where no trigger does
         variants = {q, re.sub(r"ying$", "y", q), re.sub(r"ing$", "", q), re.sub(r"ing$", "e", q),
                     re.sub(r"ies$", "y", q), re.sub(r"s$", "", q)}
@@ -138,27 +151,32 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
                 concept_score[cid] = max(concept_score.get(cid, 0.0), DESCRIPTION_NAMES_IT)
     scored: list[tuple[float, Entry, str]] = []
     qn = form_key(q)
+    slotted = {m.pattern.entry_id for m in d.form_index.find(tokens)
+               if m.start == 0 and m.end == len(tokens) and m.pattern.slots}
+    parsed_concepts = {cid for eid in slotted for cid in d.entries[eid].concept}
+    negative_anchors = {w[:-4] if w.endswith("less") else w for w in content_words(q)}
     for e in d.idioms + d.garnish:
         if dial_rejection(e, eff):
             continue
         forms = [form_key(f) for f in e.all_forms]
-        if qn in forms or any(qn in f.split() for f in forms):
+        if e.id in slotted or qn in forms or any(qn in f.split() for f in forms):
             scored.append((SCORE_TERM, e, "slang term"))
             continue
-        if any(qn in _inflected(fold(PLACEHOLDER_RE.sub("", f)).strip()) for f in e.all_forms):
+        if any(qn in _inflected(fold(PLACEHOLDER_RE.sub("", f)).strip(), e.frame) for f in e.all_forms):
             scored.append((SCORE_INFLECTED, e, "the slang term, inflected"))
             continue
         stems = set()
         raw = [fold(PLACEHOLDER_RE.sub("", f)) for f in e.all_forms]
         for w in (w for f in raw for w in f.split() if len(w) > 3):
-            st = w.rstrip("'").removesuffix("in") if w.endswith(("in'", "ing")) else w
-            st = st.removesuffix("g") if w.endswith("ing") else st
+            st = w.rstrip("'").removesuffix("g").removesuffix("in") if w.endswith(("in'", "ing")) else w
             stems |= {st, st[:-1] if len(st) > 2 and st[-1] == st[-2] else st}   # kippin' -> kipp -> kip
         if len(qn) >= 3 and (any(f" {qn} " in f" {f} " for f in forms) or (" " not in qn and qn in stems)):
             scored.append((SCORE_IN_PHRASE, e, "part of a phrase"))
             continue
         if " " in qn and any(_in_order(qn.split(), f.split()) for f in forms):
             scored.append((SCORE_IN_ORDER, e, "part of a phrase"))   # "chuck in" ~ "chuck it in", "give the flick"
+            continue
+        if parsed_concepts and not parsed_concepts.intersection(e.concept):
             continue
         best = max((concept_score.get(c, 0.0) for c in e.concept), default=0.0)
         if e.gloss:
@@ -169,9 +187,10 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
             # the local model: meaning where n-grams only see spelling. Scored for every entry, not just the
             # ones n-grams missed: otherwise a weak n-gram match (knackered for "very tired", 0.65) keeps its weak
             # score while a model-only one (maggoted, from "Very drunk.") gets the model's, and outranks it
-            texts = [e.gloss] if e.gloss else []
-            texts += [d.concepts[c].description for c in e.concept if c in d.concepts]
-            m = max((model.similarity(q, t) for t in texts if t and bool(_NEGATED.search(t.lower())) == negated),
+            texts = meaning_texts(e, d)
+            m = max((model.similarity(q, t) for t in texts if t and bool(_NEGATED.search(t.lower())) == negated
+                     and (not negated or negative_anchors & {
+                         w[:-4] if w.endswith("less") else w for w in content_words(t)})),
                     default=0.0)
             if m >= model.lookup_threshold and MEANING_FLOOR + (m - model.lookup_threshold) > best:
                 scored.append((round(MEANING_FLOOR + (m - model.lookup_threshold), 3), e, "meaning (local model)"))

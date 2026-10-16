@@ -21,6 +21,11 @@ Historical ADRs/design reviews and the imported standard are excluded from the c
 Published copies are not scanned again. A source edit may precede regeneration during development; promotion
 requires `python scripts/publish_docs.py check`, which enforces fresh output and links in both trees.
 
+`tests/functional/test_retelling.py` exercises a session with provider SDK imports blocked, neutral tool
+contracts and the real MCP stdio entry point from another working directory. Candidate paths are explicit,
+so isolated release worktrees exercise their own code. This verifies the shared agent boundary, not live
+Claude or Codex model execution. Client setup commands are documented in [agent integration](../user/agents.md).
+
 ## The golden corpus
 
 `tests/corpus/sentences.txt` holds the plain-English sentence corpus. `tests/corpus/golden.yaml` pins the output
@@ -40,7 +45,8 @@ change is a regression until shown otherwise.
 ## Reference texts
 
 `tests/corpus/reference/` holds public-domain texts, from fairy tales to the Declaration of Independence and The
-Raven; `tests/corpus/reference/SOURCES.yaml` lists each one and where it came from. `tests/functional/test_reference.py`
+Raven, plus Luke 10:25–37 (the Good Samaritan) from the public-domain World English Bible Classic;
+`tests/corpus/reference/SOURCES.yaml` lists each one and where it came from. `tests/functional/test_reference.py`
 checks them at every level across 20 seeds. Four of them, for example:
 
 | Text | What it tests |
@@ -84,16 +90,32 @@ The 15 pinned Interfold MDX pages now have confirmed LGPL redistribution evidenc
 Remote-only Rockwell/Kieran material and full research exports stay local. Only the
 existing two local-corpus tests can skip; new corpus checks run without private files or network access.
 
-## Copyrighted texts, kept local
+## Remote-only texts, kept local
 
-Copyrighted texts are never committed ([DD-011](../../architecture/decisions/dd-011-copyrighted-texts-stay-local.md)).
-`tests/corpus/remote.yaml` points at public copies, such as Ginsberg's "Meditations on Moloch" as quoted in Scott
-Alexander's essay, and `aussiefy dev ingest tests/corpus/remote.yaml` (with the `scrape` extra) saves the excerpts to
+Works without confirmed redistribution permission stay local
+([DD-011](../../architecture/decisions/dd-011-copyrighted-texts-stay-local.md)); licensed imports and the
+reviewed bounded exception are documented in [licensing](licensing.md). `tests/corpus/remote.yaml` points
+at public copies, including the Moloch section of Ginsberg's *Howl* quoted in Scott Alexander's essay
+*Meditations on Moloch*. `aussiefy dev ingest tests/corpus/remote.yaml` (with the `scrape` extra) saves excerpts to
 the gitignored `tests/corpus/local/`, where `tests/functional/test_local_reference.py` tests them. With the folder empty,
 those tests skip. How to fetch them, add your own, and keep Aussie versions alongside is in
 [tests/corpus/local/README.md](../../../tests/corpus/local/README.md).
 
 ## LLM modes
 
-The LLM modes are tested against scripted clients at the API boundary; the suite never calls Claude. Running
-them against the live API is an open item: see [limitations](../functional/limitations.md).
+The LLM modes use scripted clients for acceptance and fallback tests. `test_claude.py` additionally runs the
+real optional SDK through a mocked HTTP transport, checking serialized JSON requests, strict tool schemas,
+prompt-cache markers, beta headers and parsed replies. The `dev` extra includes that SDK so these tests
+cannot silently skip. No test contacts a model service. Live API execution remains an open item: see [limitations](../functional/limitations.md).
+
+
+Release CI smoke-tests Python 3.10 with the minimum API SDK (0.120.0), and Python 3.12 with the currently
+resolved SDK. Both exercise CLI, dictionary, contracts, judge and real stdio MCP/HTTP-mock boundaries. The
+required release-head job depends on both smoke checks before its complete exact-head/squash-tree gate.
+
+
+The [held-out refinement inputs](../../../research/heldout-2026-10-16/README.md) add five fictional own-work
+texts plus that Bible passage for a six-case repeat-judge comparison. They are disjoint from the earlier
+20-source refinement by source hash; this is not a claim about language-model training data. Source and
+research derivatives retain their attributed provenance. The Bible fixture also participates in the full
+reference level/seed property sweep and has five golden level outputs; existing golden cases are unchanged.

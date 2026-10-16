@@ -34,8 +34,20 @@ lookup("very tired", translator=tr)   # the toolkit functions take a translator 
 Every function takes keyword-only dials, by number or name: `level` (default 5) and `vulgarity` (default: the
 level's own). `translate`, `plan` and `yarn` also take `seed` (default 0). `translate` and `plan` also take
 `variety`, `registers`, `regions` and `unlock`; only `translate` takes `markdown` (default false).
-The engine/Translator and `plan` remain plain-text operations. `lookup` takes `limit` (default 8) and `include_gated`, and
-`lint` takes `original`. Every function takes an optional `translator` for a non-default dictionary.
+The core engine/Translator consumes plain text or internally masked text. `translate`, `plan`, `lint`, `verify`
+and `yarn` support the extended `markup` route; strict `markdown=True` source units belong only to translation.
+`lookup` takes `limit` (default 8) and `include_gated`; `lint` takes `original`. Every function takes an optional
+`translator` for a non-default dictionary.
+
+Document operations (`translate`, `plan`, `lint`, `verify`, `guide`, `yarn`) also take `document_type="general"`
+and `document_config=None`, plus the `embellishment` dial (0–2 or its name; omitted uses the selected preset).
+General defaults to Dinkum; Auto opts into detection; named types select presets;
+Custom enables only configured optional behaviours. The shared override object replaces inherited values after
+explicit dials, including false and empty lists. See [translation controls](translation-controls.md).
+Its nested `profile` tunes engine rates, limits, spacing, frames, drawl, swearing and rewrite thresholds.
+Partial maps inherit missing keys. Every toolkit result includes the resolved `profile_config`; document
+operations accept that snapshot back as `document_config.profile`. Custom still needs optional document
+behaviours enabled explicitly, even when their numeric settings are supplied.
 
 `translate` returns a `Result`, or `DocumentResult` with explicit `markdown=True`
 ([Markdown contract](markdown.md)); the other toolkit functions return dicts, and `yarn` returns a result whose
@@ -44,7 +56,7 @@ The engine/Translator and `plan` remain plain-text operations. `lookup` takes `l
 `UserError` (a problem the user can fix; the CLI prints it and exits 2).
 
 `Result.to_dict()` is a superset of the toolkit translate dict: `text`, `level`, `level_name`, `vulgarity`,
-`vulgarity_name`, `policy_warnings`, `seed`, `variety`, `decisions` and `difficult_sentences`, plus `source`
+`vulgarity_name`, `policy_warnings`, `profile_config`, `seed`, `variety`, `decisions` and `difficult_sentences`, plus `source`
 and `explain`. The old `difficult` and duplicate `warnings` JSON keys are gone. Policy warnings name region
 tags or unlock flags unused by the dictionary; invalid register and unlock names raise `UserError`.
 
@@ -54,16 +66,37 @@ messages as tool errors. `lookup` requires `limit >= 1` and marks each riff's `b
 ## The same toolkit, three more ways
 
 - **MCP server, for any MCP-capable agent.** The `aussiefy-mcp` command (stdio) serves the tools
-  `aussie_lookup`, `aussie_lint`, `aussie_guide`, `aussie_plan` and `aussie_translate`. Setup is in the
+  `aussie_lookup`, `aussie_lint`, `aussie_guide`, `aussie_plan`, `aussie_translate` and `aussie_verify`. Setup is in the
   [user guide](../user/agents.md).
-- **Claude Code skill.** [skills/aussiefy/SKILL.md](../../../skills/aussiefy/SKILL.md) walks an agent through
-  brief → guide → plan → write with lookups → lint and fix → deliver, using the CLI.
-- **Claude API tools.** `tool_definitions()` in the `aussiefy.yarn` module gives `lookup`, `lint` and `submit`
-  for any Messages API agent; `brief()` and `dispatch_tool()` in the same module are the loop's pure parts, for
-  driving it yourself. Import them with `from aussiefy.yarn import ...`: on the package, `aussiefy.yarn` is the
-  yarn function, not the module. [Yarn mode](llm-modes.md) is the reference loop.
+- **Portable CLI skill.** [skills/aussiefy/SKILL.md](../../../skills/aussiefy/SKILL.md) walks an agent through
+  brief → guide → plan → write with lookups → lint and fix → verify → deliver, using the CLI.
+- **Shared retelling session.** `aussiefy.retelling` owns `brief()`, `dispatch_tool()` and `tool_contracts()`:
+  model-independent briefs, checked tool calls and neutral JSON Schemas for `lookup`, `lint` and `submit`.
+  Clients adapt those contracts to their own transport. The optional `aussiefy.yarn` API driver derives its
+  Anthropic `tool_definitions()` from them. Existing `from aussiefy.yarn import brief, dispatch_tool` imports
+  remain supported. On the package, `aussiefy.yarn` is the convenience function, not the module.
 
 Every surface takes the same parameters by the same names and defaults; `tests/functional/test_interfaces.py` holds them
 in step (see [DD-008](../../architecture/decisions/dd-008-one-toolkit-thin-surfaces.md)).
 
 Genre, English, embellishment and extended document controls are described in [translation controls](translation-controls.md). `lookup(short=True)` offers compact cards; `lint(suggest=False)` skips optional engine suggestions.
+
+## Lookup sense matching
+
+Lookup matches complete slang forms with grammatical slots, so “give them a bell” reaches the telephone
+sense. When such a complete parse identifies a sense, unrelated meaning-model suggestions are excluded.
+Inflection applies to a noun's head or a verb phrase's head verb, not every word of every frame: “shouted”
+does not become a drinks noun. Negated model queries also need a shared content anchor with the candidate
+meaning; “harmless” is not evidence for “not acceptable”. Conservative filtering may return no result rather
+than an unreliable suggestion. These checks do not make the meaning model a general word-sense classifier.
+
+### Phrase location and fidelity
+
+Yarn's moved-phrase check compares a planned spot with one counterpart sentence, preferring its expected
+position when lexical scores tie. This prevents nearby sentences from collectively claiming a correctly
+placed phrase. The broader verification alignment still permits up to three sentences for splits and merges.
+Both are lexical heuristics; a substantially rewritten sentence may need the writer's explicit review.
+
+Lint compares refrains through the dictionary's drawl annotations. Reviewed whole-phrase `name_aliases` in
+`grammar.yaml` can excuse a known capitalised common phrase, such as `Christmas Trees` becoming `Chrissy trees`.
+Aliases are explicit: neither `John Woods` nor `Christmas Island` is inferred from its individual words.

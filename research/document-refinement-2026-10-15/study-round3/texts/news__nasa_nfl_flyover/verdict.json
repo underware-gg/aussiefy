@@ -1,0 +1,179 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "dinkum-3": "A",
+    "pre-fix-yarn": "B",
+    "current": "C"
+  },
+  "scores": {
+    "dinkum-3": {
+      "meaning": 5,
+      "sense": 4,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 4,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 5,
+      "sense": 4,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "dinkum-3": {
+      "meaning": "\"Sunday, Oct. 11\" and \"10 a.m. to 1 p.m. EDT\" preserve the practical facts; the four-paragraph event sequence remains intact.",
+      "sense": "\"driverless vehicles\" is narrower than autonomous vehicles and suggests road vehicles rather than the full technical category.",
+      "authenticity": "\"have a crack\", \"grab a happy snap\" and \"down the track\" are natural Australian speech.",
+      "register": "\"Okay, so.\" adds an opening although openings are disabled; the body otherwise has clear level-4 weight.",
+      "tone": "\"the Yanks out in front in space\" shifts the promotional explanation into slightly cheekier national labelling.",
+      "flow": "\"the multi-day, family-friendly do'll show off\" is a somewhat crowded spoken contraction, though the rest reads easily.",
+      "variety": "\"having a yarn\", \"happy snap\" and \"down the track\" provide varied idiom.",
+      "essence": "\"It all winds up with MAX POWER\" preserves the tour-to-finale shape and public-event character."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"Saturday, Nov. 7, and Sunday, Nov. 8\" preserves dates and \"on and around\" preserves venue scope.",
+      "sense": "\"driverless vehicles\" narrows the original autonomous category; \"uni mob\" also loosely narrows academic participants.",
+      "authenticity": "\"at the stick\" and \"in the one spot\" fit the local spoken voice.",
+      "register": "\"Now here's one for the gridiron fans.\" is added garnish despite disabled openings; body weight is appropriate for level 4.",
+      "tone": "\"Put on to honour America's historic 250th anniversary\" retains the celebratory public-information intent.",
+      "flow": "\"The whole show wraps up with MAX POWER\" and the following venue sentence move smoothly.",
+      "variety": "\"having a yarn\", \"have a crack\" and \"down the track\" vary the idiom without repetition.",
+      "essence": "\"The Inspiration Tour's pulling up all over the country\" keeps the nationwide outreach and finale structure."
+    },
+    "current": {
+      "meaning": "\"at the controls of one of three F-5 fighter jets\" retains the pilot fact; names, dates, times, tour purpose and finale are all present.",
+      "sense": "\"autonomous vehicles\" retains the technical category; \"get the good oil\" correctly means obtain information.",
+      "authenticity": "\"have a yarn\", \"get stuck into\" and \"doing the rounds\" are credible local idioms.",
+      "register": "\"bringing academic, industry, and public sector stakeholders together\" stays fairly formal between the broader idioms, making this a little light for level 4.",
+      "tone": "\"It’s being held in honour of America’s historic 250th anniversary\" keeps the event’s promotional, respectful purpose.",
+      "flow": "\"It links the agency up with the people, technologies, and organisations\" creates a clean spoken transition.",
+      "variety": "\"good oil\", \"doing the rounds\" and \"down the track\" offer varied local vocabulary.",
+      "essence": "\"The tour finishes up with MAX POWER\" keeps the original outreach-to-exposition arc and its distinguishing information."
+    }
+  },
+  "problems": {
+    "dinkum-3": [
+      {
+        "quote": "Okay, so.",
+        "original": "",
+        "severity": "minor",
+        "why": "An added opening conflicts with the disabled openings setting."
+      },
+      {
+        "quote": "driverless vehicles",
+        "original": "autonomous vehicles",
+        "severity": "minor",
+        "why": "Narrows a protected technical category; autonomous vehicles are not confined to driverless road transport."
+      },
+      {
+        "quote": "the Yanks out in front in space",
+        "original": "American leadership in space",
+        "severity": "minor",
+        "why": "The cheeky national label makes the official public-information tone slightly wobblier."
+      },
+      {
+        "quote": "the multi-day, family-friendly do'll show off",
+        "original": "the multi-day, family-friendly event will showcase",
+        "severity": "minor",
+        "why": "The noun-plus-contraction construction is slightly clotted aloud."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "Now here's one for the gridiron fans.",
+        "original": "",
+        "severity": "minor",
+        "why": "Adds an opener despite the effective disabled openings setting."
+      },
+      {
+        "quote": "driverless vehicles",
+        "original": "autonomous vehicles",
+        "severity": "minor",
+        "why": "Narrows the protected autonomous-vehicle technical category."
+      },
+      {
+        "quote": "the uni mob",
+        "original": "academic",
+        "severity": "minor",
+        "why": "Academic stakeholders need not all belong to universities."
+      }
+    ],
+    "current": [
+      {
+        "quote": "bringing academic, industry, and public sector stakeholders together",
+        "original": "convenes academic, industry, and public sector stakeholders",
+        "severity": "minor",
+        "why": "The connecting prose remains relatively institutional, making the overall body a shade light for level 4; the protected technical labels themselves need no change."
+      }
+    ]
+  },
+  "summaries": {
+    "dinkum-3": "Vivid and mostly faithful, with an unauthorised opening and a narrowed technical term.",
+    "pre-fix-yarn": "Fluent and convincing local prose, with a forbidden opener and slightly narrowed category language.",
+    "current": "Most precise and controlled; natural local phrasing with a slightly restrained level-4 body."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "pre-fix-yarn",
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ],
+    "flow": [
+      [
+        "pre-fix-yarn",
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ],
+    "variety": [
+      [
+        "dinkum-3",
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "essence": [
+      [
+        "dinkum-3",
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ]
+  }
+}

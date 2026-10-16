@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import json
+
 from .engine import Result
 from .markdown import DocumentResult
 from .select import Gated
@@ -26,9 +28,12 @@ def format_explain(result: Result | DocumentResult, show_rejected: bool = True, 
     g = result.genre
     scores = ", ".join(f"{k} {v:g}" for k, v in sorted(g.scores.items(), key=lambda kv: -kv[1]))
     lines = [f"level {result.level}, seed {result.seed}, mood {result.mood}",
-             f"genre {g.name} ({scores}); embellishment {result.embellishment.name}: garnish "
+             f"document type {g.selected} -> {g.name} ({scores}); embellishment {result.embellishment.name}: garnish "
              f"{', '.join(sorted(result.embellishment.garnish)) or 'none'}"
              + ("" if g.policy.person_swears else "; no swears for people"), ""]
+    lines.insert(-1, "document behaviours: " + json.dumps({k: v for k, v in g.envelope(result.embellishment.step)["document_config"].items()
+                                      if k not in ("guidance", "embellishment_guidance")}, sort_keys=True))
+    lines.insert(-1, "profile settings: " + json.dumps(result.profile_config, sort_keys=True))
     if result.surface:
         lines += [f"deterministic: {result.deterministic_text}",
                   f"surface ({result.surface.get('model')}): {result.surface.get('status')}", ""]

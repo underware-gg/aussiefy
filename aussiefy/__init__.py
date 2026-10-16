@@ -32,4 +32,4 @@ from .yarn import yarn
 
 __all__ = ["translate", "lookup", "lint", "guide", "plan", "verify", "yarn", "Translator", "default_translator", "Result",
            "DocumentResult", "Policy", "Dictionary", "load_dictionary", "Entry", "SchemaError", "UserError"]
-__version__ = "0.1.0"
+__version__ = "0.2.0"

@@ -1,0 +1,1 @@
+Kept meteorological terms, units, model names and uncertainty. Broad voice sits in connecting prose (few and far between, hang around, up in the air), not invented weather judgements. Used lookup-confirmed the odd for isolated showers. No planned phrases or garnish. Original backtick apostrophes normalised in prose; quoted S word unchanged.

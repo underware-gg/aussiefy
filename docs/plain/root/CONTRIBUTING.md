@@ -12,8 +12,8 @@ pip install -e '.[dev]'
 ```
 
 The `dev` extra includes the test dependencies and isolated wheel-build tools, plus a TOML reader on Python
-3.10, so the interface, scrape and embedding checks run rather than skip. Promotion checks run too. Add `llm` or `embeddings` when working
-on those optional modes. Only the two local copyrighted-corpus tests may skip in a release.
+3.10, so the interface, scrape and embedding checks run rather than skip. It includes the optional API SDK for
+offline HTTP tests. Promotion checks run too. Add `embeddings` when working on that optional backend. Only the two local copyrighted-corpus tests may skip in a release.
 
 ## Check
 

@@ -1,0 +1,140 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "dinkum-3": "B",
+    "pre-fix-yarn": "C"
+  },
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 1,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"He averaged six lectures a week, delivered in twenty-nine different countries\" preserves the unusual productivity details, alongside the institutions, dates and family history.",
+      "sense": "\"bringing in prohibition\" correctly renders enactment of the legislation.",
+      "authenticity": "\"the sheer amount of work Dr. Crafts got through\" sounds naturally conversational without forced Australian idiom.",
+      "register": "\"He wrote prolifically on moral questions\" typifies an almost entirely standard obituary, far lighter than level 4.",
+      "tone": "\"Supporters of his policies credited him\" keeps the source's careful attribution rather than endorsing the claims outright.",
+      "flow": "\"One curious title among the many less surprising ones was \"Rhetoric Made Racy.\"\" smoothly carries the original's dry aside.",
+      "variety": "\"spoke out\", \"tried to stop\" and \"staying there from then on\" vary the prose without a repeated conversational tic.",
+      "essence": "\"Screen vampires, close dancing, \"joy rides,\"\" preserves the distinctive closing catalogue of his moral campaigns."
+    },
+    "dinkum-3": {
+      "meaning": "\"he'd been chief editor of the Twentieth Century Quarterly since 1896\" and \"twenty-nine different countries\" retain the detailed career record.",
+      "sense": "\"had a big hand in getting prohibition through\" correctly conveys an influential part in enactment.",
+      "authenticity": "\"The mob on the other side\" and \"ciggies\" fit a credible Australian spoken account.",
+      "register": "\"reckoned\", \"stayed put\" and \"having a go\" give a sustained Australian conversational voice, though slightly restrained for level 4.",
+      "tone": "\"aged 73\" and \"Those on side with him, though, reckoned\" maintain the death notice's seriousness and balance under the slang.",
+      "flow": "\"His pen and his voice barely got a rest in the last fifty years\" carries the source's image easily aloud.",
+      "variety": "\"rein in\", \"stayed put\" and \"a steady stream of papers\" offer varied phrasing across the long obituary.",
+      "essence": "\"there's this odd one that crops up: \"Rhetoric Made Racy.\"\" keeps the source's wry detail as well as its biographical arc."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"He finished at Wesleyan in 1869 and at the Divinity School of Boston University in 1871\" keeps the education chronology, with the ministry changes and other career specifics also preserved.",
+      "sense": "\"a fair whack of the credit\" correctly renders a substantial attributed role in passing legislation.",
+      "authenticity": "\"had a red-hot go\" and \"sheer hard yakka\" use familiar Australian idiom in appropriate contexts.",
+      "register": "\"his dad's church\", \"a stack\" and \"durries\" sustain a strong Australian vernacular without exceeding vulgarity 1.",
+      "tone": "\"died of pneumonia in a hospital here today. He was 73\" retains the serious death announcement; the more vivid phrasing elsewhere respects the source's character sketch.",
+      "flow": "\"who ran the International Reform Bureau as its superintendent for 28 years after founding it himself, and who was known far and wide\" makes a rather crowded opening sentence.",
+      "variety": "\"a fair whack\", \"a red-hot go\", \"hard yakka\" and \"won't raise an eyebrow\" are varied rather than one repeated flourish.",
+      "essence": "\"those were just a few of the things his tireless reforming zeal took aim at\" keeps the original's closing portrait of the tireless reformer."
+    }
+  },
+  "problems": {
+    "current": [
+      {
+        "quote": "He wrote prolifically on moral questions.",
+        "original": "He was a prolific writer on moral questions.",
+        "severity": "major",
+        "why": "The retelling remains formal standard English almost throughout and misses the requested strong Australian vernacular."
+      }
+    ],
+    "dinkum-3": [],
+    "pre-fix-yarn": [
+      {
+        "quote": "who ran the International Reform Bureau as its superintendent for 28 years after founding it himself, and who was known far and wide",
+        "original": "for 28 years superintendent of the International Reform Bureau which he founded, and widely known",
+        "severity": "minor",
+        "why": "The long chain of relative clauses makes the opening harder to say than the rest of the retelling."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "A complete, polished obituary that preserves the source's character and attributions but barely supplies the level-4 voice.",
+    "dinkum-3": "An especially smooth, respectful conversational obituary, faithful to the facts and the original's dry character, with a slightly restrained level-4 voice.",
+    "pre-fix-yarn": "A faithful, strongly Australian obituary with well-varied idiom and intact dignity; its opening is less fluent than B's."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "flow": [
+      [
+        "current",
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "dinkum-3",
+        "pre-fix-yarn"
+      ]
+    ],
+    "overall": [
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "current"
+      ]
+    ]
+  }
+}

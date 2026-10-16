@@ -1,6 +1,6 @@
-# Provenance of every reference text. All are public domain in Australia and the US (published before 1929,
-# and every named author and translator died in or before 1955), except the two Goldilocks retellings, which
-# were written for this corpus and are the project's own work.
+# Provenance of every reference text. Historical editions are public domain in Australia and the US
+# (published before 1929, every named author and translator died in or before 1955). The modern Bible
+# translation is explicitly dedicated to the public domain. The two Goldilocks retellings are own work.
 #
 # Text from a Project Gutenberg file is verbatim except: Gutenberg
 # headers/licence removed, _italic_ underscores dropped, [Illustration] notes
@@ -137,10 +137,14 @@
   translator: null
   edition_year: null
   gutenberg_ebook: null
-  url: null
+  url: https://www.loc.gov/exhibits/gettysburg-address/ext/trans-nicolay-inscribed.html
   excerpt: null
   words: 264
-  notes: Delivered 1863. The wording is the standard modern text (including "under God"), as in the Bliss and Everett copies.
+  notes: >-
+    Delivered 1863. Verified 2026-10-15 against the Library of Congress transcription of the standard text
+    inscribed at the Lincoln Memorial. Wording matches after ignoring case/punctuation and normalising
+    fourscore to four score, battlefield to battle field, and cannot to can not (272 normalised tokens).
+    Existing fixture typography and its 264 whitespace-word count are retained; not a byte-identical copy.
 
 - file: waltzing_matilda.txt
   licence: public-domain
@@ -177,3 +181,25 @@
   excerpt: null
   words: 478
   notes: A longer plain retelling of the traditional tale, written for this corpus. The project's own work, under the repository licence.
+
+- file: bible_good_samaritan.txt
+  licence: public-domain
+  title: Luke 10:25–37 (the Good Samaritan), World English Bible Classic
+  author: Gospel traditionally attributed to Luke
+  translator: World English Bible contributors
+  edition_year: 2020
+  gutenberg_ebook: null
+  url: https://ebible.org/eng-web/LUK10.htm
+  licence_evidence: https://ebible.org/eng-web/copyright.htm
+  retrieved: 2026-10-16
+  excerpt: Luke 10:25–37 inclusive, from the lawyer's question through "Go and do likewise."
+  words: 288
+  source_sha256: 52ea0bfa7fa5d6653c2f78de9ee3a979f167b380362397d60884513f52e3464d
+  sha256: 3dcae3954566ebc41f3244dc8a5c63cb56699733398a27be09d828e703fbf651
+  notes: >-
+    Publisher's 2020 stable text, retrieved from the live Classic HTML chapter. Selected paragraph blocks
+    from verse 25 up to verse 38 (including the second paragraph of verse 37). Verse-number spans and
+    footnote links/popups removed; whitespace normalised within paragraphs; eight source paragraphs kept.
+    Wording, punctuation and US spelling are unchanged. Publisher dedicates the text to the public domain
+    and asks that changed texts not be called the World English Bible; research outputs are labelled
+    retellings, not editions of that translation. The source hash identifies the fetched HTML before extraction.

@@ -3,12 +3,13 @@
 from __future__ import annotations
 
 import hashlib
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 from typing import Any, Sequence
 
 from .dialect import ENGLISHES
 from .errors import UserError
 from .model import Dictionary, LevelProfile, SwearProfile
+from .profile import ProfileOverrides, profile_config
 from .schema import FLAGS, REGISTERS
 
 
@@ -56,6 +57,74 @@ def parse_embellishment(value: int | str) -> int:
     return _parse(value, EMBELLISHMENTS, "embellishment")
 
 
+DOCUMENT_TYPES = ("general", "custom", "auto", "story", "personal", "news", "instructions", "technical", "official")
+
+
+@dataclass(frozen=True)
+class DocumentOverrides:
+    """Exact overrides on a document preset. None means inherit; false and empty lists are explicit."""
+    garnish: tuple[str, ...] | None = None
+    openings: bool | None = None
+    formal_to_rework: bool | None = None
+    person_swears: bool | None = None
+    keep_quotes: bool | None = None
+    check_length: bool | None = None
+    term_domains: tuple[str, ...] | None = None
+    command_context: bool | None = None
+    dateline_context: bool | None = None
+    guidance: str | None = None
+    draft: bool | None = None
+    keep_share: float | None = None
+    max_length: float | None = None
+    perform: bool | None = None
+    embellishment_guidance: str | None = None
+    profile: ProfileOverrides | None = None
+
+    @classmethod
+    def parse(cls, raw):
+        import math
+        from .schema import GENRES, PLACEMENTS
+
+        if isinstance(raw, cls):
+            raw = raw.values()
+        if raw is None:
+            return cls()
+        if not isinstance(raw, dict):
+            raise UserError("document_config must be an object of behaviour overrides")
+        names = {f.name for f in fields(cls)}
+        if any(not isinstance(k, str) for k in raw):
+            raise UserError("document_config setting names must be strings")
+        if set(raw) - names:
+            raise UserError(f"unknown document_config settings: {', '.join(sorted(set(raw) - names))}")
+        data = dict(raw)
+        booleans = {"openings", "formal_to_rework", "person_swears", "keep_quotes", "command_context",
+                    "dateline_context", "draft", "perform", "check_length"}
+        for key, value in data.items():
+            if key == "profile":
+                data[key] = ProfileOverrides.parse(value)
+            if key in booleans and type(value) is not bool:
+                raise UserError(f"document_config.{key} must be true or false")
+            if key in ("guidance", "embellishment_guidance") and not isinstance(value, str):
+                raise UserError(f"document_config.{key} must be text")
+            if key in ("garnish", "term_domains"):
+                allowed = (*PLACEMENTS, "riff", "infix", "insult") if key == "garnish" else GENRES
+                if not isinstance(value, (list, tuple)) or any(not isinstance(v, str) or v not in allowed for v in value):
+                    raise UserError(f"document_config.{key} must be a list from {', '.join(allowed)}")
+                data[key] = tuple(dict.fromkeys(value))
+            if key in ("keep_share", "max_length"):
+                if type(value) not in (int, float) or not math.isfinite(value):
+                    raise UserError(f"document_config.{key} must be a finite number")
+                if (key == "keep_share" and not 0 <= value <= 1) or (key == "max_length" and value < 1):
+                    raise UserError(f"document_config.{key} must be {'between 0 and 1' if key == 'keep_share' else 'at least 1'}")
+        return cls(**data)
+
+    def values(self) -> dict:
+        values = {f.name: getattr(self, f.name) for f in fields(self) if getattr(self, f.name) is not None}
+        if self.profile is not None:
+            values["profile"] = self.profile.values()
+        return values
+
+
 @dataclass(frozen=True)
 class Policy:
     level: int | str = 5
@@ -70,7 +139,13 @@ class Policy:
     english: str = "auto"                 # the source's English (dialect.ENGLISHES): us, uk, auto, none
     embellishment: int | str | None = None   # None: the text's genre's own (genres.yaml); set, it wins
 
+    document_type: str = "general"
+    document_config: DocumentOverrides | dict | None = None
+
     def __post_init__(self):
+        if self.document_type not in DOCUMENT_TYPES:
+            raise UserError(f"document_type must be one of {', '.join(DOCUMENT_TYPES)}")
+        object.__setattr__(self, "document_config", DocumentOverrides.parse(self.document_config))
         object.__setattr__(self, "level", parse_level(self.level))
         if self.vulgarity is not None:
             object.__setattr__(self, "vulgarity", parse_vulgarity(self.vulgarity))
@@ -123,7 +198,8 @@ class Effective:
     swearing: SwearProfile = SwearProfile()   # how often swearing comes at this vulgarity
 
     def envelope(self) -> dict[str, Any]:
-        return envelope(self.level, self.vulgarity, self.warnings)
+        return {**envelope(self.level, self.vulgarity, self.warnings),
+                "profile_config": profile_config(self.profile, self.swearing)}
 
 
 def resolve(policy: Policy, dictionary: Dictionary) -> Effective:
@@ -132,9 +208,12 @@ def resolve(policy: Policy, dictionary: Dictionary) -> Effective:
     profile = dictionary.profiles[policy.level]
     vulgarity = profile.vulgarity if policy.vulgarity is None else policy.vulgarity
     registers = policy.registers if policy.registers is not None else profile.registers
+    swearing = dictionary.swearing.get(vulgarity, SwearProfile())
+    if policy.document_config.profile is not None:
+        profile, swearing = policy.document_config.profile.apply(profile, swearing)
     return Effective(policy.level, profile, vulgarity, tuple(registers), tuple(policy.regions),
                      frozenset(policy.unlock), _warnings(policy, dictionary),
-                     swearing=dictionary.swearing.get(vulgarity, SwearProfile()))
+                     swearing=swearing)
 
 
 def _warnings(policy: Policy, dictionary: Dictionary) -> tuple[str, ...]:

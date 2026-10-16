@@ -21,10 +21,10 @@ SEEDS = range(20)
 @pytest.fixture(scope="session")
 def translated(translator):
     """translated(name, level, seed): TEXTS[name] translated once a session, since several tests sweep the same
-    texts, levels and seeds. Results are read, never changed."""
+    texts, levels and seeds. This historical benchmark explicitly uses Auto. Results are read, never changed."""
     @functools.cache
     def get(name, level, seed):
-        return translator.translate(TEXTS[name], level=level, seed=seed)
+        return translator.translate(TEXTS[name], level=level, seed=seed, document_type="auto")
     return get
 
 

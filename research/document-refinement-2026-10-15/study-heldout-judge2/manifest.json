@@ -1,0 +1,266 @@
+{
+  "source_commit": "4d6b353aeaed6fb65ae977b7e29b6ca4c9620c91",
+  "plan_sha256": "b6249fd1407973744afe0f5438b554ba543e8c8e46b783392348835af8195149",
+  "driver_sha256": "5c3be4b397313e6b11805db295f7e76811686365ef83214bd7733a32f4803c18",
+  "run": "study-heldout-judge2",
+  "plan_path": "research/heldout-2026-10-16/plan.yaml",
+  "rubric_version": 3,
+  "evaluation_protocol": 2,
+  "engine_files": {
+    "aussiefy/__init__.py": "0891187a239aeff6b5a95c5f656b00901b7cff9a7a86593736449f3347e0997a",
+    "aussiefy/align.py": "c81e2d5e2bde60d6cfd80ace84d40ae4cf453a9007cb9b28645ad27ec8a80b0b",
+    "aussiefy/claude.py": "c5d67f3c351006663be3f1095ba0dd27a83c2e2d866ccb38e20bd03de4db49e8",
+    "aussiefy/cli.py": "2f901f1d0ce343cdc6c2ed6e73a665e37d5630504e568af40b516406f7f9952b",
+    "aussiefy/context.py": "683794dadfe3b095a73989e73d574d3f6bc447eab102596272a015c0dc8d2d2e",
+    "aussiefy/data/concepts.yaml": "ba71783d14724639ebb2e20ac9c15d63421b7b09c67c99f041a3d171f22da9f2",
+    "aussiefy/data/dialect.yaml": "fe575da570e23615fbadf955fd3d7dccc142da58625eb3214fdbe77565a53c1c",
+    "aussiefy/data/entries/classics.yaml": "9b56aa94dbe4385ff07fc06350dad7af5a5515fd6bbd12fe907fff88fdce8c81",
+    "aussiefy/data/entries/dinkumcheck.yaml": "2f7c4ca793ba5b5de0053b78b548766f0f23be1560bd76354c2197428c8f2980",
+    "aussiefy/data/entries/everyday.yaml": "ad80e506ac17e462cb91c34a8d147a4e48f6c5e94dfd6b44bb7601aabe2eac54",
+    "aussiefy/data/entries/fairdinkum.yaml": "f02bbfd441c233007631fcea0a7b01787bd8593ed0cb6e25b7df13644cac60c6",
+    "aussiefy/data/entries/flagged.yaml": "0966e94fe79e9f3d9e86f8c05bf9a3f25834142d645c3d7c15534d42a48c6326",
+    "aussiefy/data/entries/fourthpass.yaml": "d3f4f054429da1ff7dd321e5117a1cfef9514b7429dd07854da00d6aac4aec4c",
+    "aussiefy/data/entries/fragments.yaml": "1883a15e3d65ebd2bee142dc65f57028f55db4f2da9f1eba3e1da6070484ac82",
+    "aussiefy/data/entries/gapfill.yaml": "7763349206535e3c151e21eb0598f6c42ad163f8cb105763f608a26800b5c88c",
+    "aussiefy/data/entries/garnish.yaml": "73207353fa0a682127a6727d945d17e3fa466af12c9356c690fd2809538393d4",
+    "aussiefy/data/entries/idioms.yaml": "72bef5db605a1dfe41810eaf4fd14e1026b22e8963d4c980eb6ac209a464b170",
+    "aussiefy/data/entries/lexical.yaml": "f4bd5565498fc910f9d74fc2a4f7bd2b0faa6e765588e726803cf7a36ddde863",
+    "aussiefy/data/entries/phrases.yaml": "9534802f3a52a3c061b55d3e69e32c76a611338133d7ef18d9960a89db3863d4",
+    "aussiefy/data/entries/scraped.yaml": "15fc044490680f13a8b24eef39f0668b9488ee74961b1ed2985c5b93b918c32e",
+    "aussiefy/data/entries/secondpass.yaml": "b1fdd5bbf9a597cb8239b5b58a1468155ae1307be9b17a18c0ff7297a9c882b5",
+    "aussiefy/data/entries/swearing.yaml": "9d514aa20038ef0a48fd97ae3e5b31c0a0802bb5a2ef892d91648072d38324c2",
+    "aussiefy/data/entries/thirdpass.yaml": "988d5a6b1a23c8e0e352da86777825c9429772964bbdf222982b209a54b28169",
+    "aussiefy/data/genres.yaml": "37bca4bbfd96a03232e8e4f27f76c01f88a7a62ca4d53a84d423753530973ce3",
+    "aussiefy/data/grammar.yaml": "9c384595403144d446f7823aa6027b014b98c048e07e34fed36e09b5b8b88510",
+    "aussiefy/data/guide.yaml": "fde074178210589d0cfb6e017107f9ca7a9c68ac3f5a5738904438ae3021c552",
+    "aussiefy/data/judge.yaml": "f4122c83d9297c8b359688b23256c62e325df34c7c7c5bac3b593b1bb2596cc2",
+    "aussiefy/data/model/meta.json": "2dfbc3c8b6909dcfa821fd846116904f0f79b57b07c75b104e8ffa91e1991a5a",
+    "aussiefy/data/model/vectors.f16": "c43adab96572058bb1c106fc448f6ebf56e9a1f9406360b462cd6874e16273ac",
+    "aussiefy/data/model/vocab.txt": "9fe80d0dca7829bce0490b8f4004f417fe7b230fb275802e64087ba7cc3dc5eb",
+    "aussiefy/data/phonetic.yaml": "05eb6894727f82d69e33f7301da0219aad2a6c51e6ffa48098e23dd49aeaf27a",
+    "aussiefy/data/pos/README.md": "d51caf6d3b464e907d4f0337f4126caa2f9b31da64940184ea851d4ff6883ca5",
+    "aussiefy/data/pos/meta.json": "d6df62aecd3971528037cd2f387d944537e8a6ce04be7b7d538ae29cb903dc7b",
+    "aussiefy/data/pos/tagger.json.gz": "3222c88544fbc2600def0686055843f9dccc3f60d485c4b791339ea8af2627f6",
+    "aussiefy/data/profiles.yaml": "db918602c1978c2c09e22ac72958882cd68133b83839e82efa4ae1419591f284",
+    "aussiefy/data/riffs.yaml": "fc61f161c50e0dabfdc9e3c0203e8aab14f5f997cd9e6c6d25b2e557ff616593",
+    "aussiefy/data/source_policy.yaml": "4ffbe6513020907b1f2425f1be874ae7739ad4254a154a39accf1b1190cc2c12",
+    "aussiefy/data/sources.yaml": "775eac577b8f75ca95af98310c15ee91db271e35528ce6c8284437a12ac34349",
+    "aussiefy/data/swears.yaml": "48518167f51ac8f0f3ca19c7614439521d41f36a8ef384d683f86e1ae2d971b2",
+    "aussiefy/detect.py": "1a383aa295559780edf83fd72fdfa4facfd8041dcdb0aa9fc3dcb780f4286174",
+    "aussiefy/dialect.py": "8cf34ba9a2bdb86d924351122b4eaa6a2690730f64d1bc0ee97f6a6a8e46eb33",
+    "aussiefy/dump.py": "208fa74cd244718552d8dc2065321f44f604c8ac79937bcabb010fdc030fbf20",
+    "aussiefy/embed.py": "afb78a3624c86492800aa8f639f008d45c8de5906d930827a47f169bd01a737f",
+    "aussiefy/engine.py": "76508c6379f84b5168b1bac36e758cc8c4a13d0ae9365b8c48c6bc1a92b5cfcf",
+    "aussiefy/errors.py": "3c565cfe02d93f68f0a57bb1013a0dc799b47bea748c9a38b1639e1483448319",
+    "aussiefy/explain.py": "9027beb88ce242457c772fdef6023308acd9ace3c94c5a17055f42b36eade907",
+    "aussiefy/gaps.py": "715711e7c5eb0d21d48b1a5ce07e51f904ba6bde20be621d7be8f5802bb241c0",
+    "aussiefy/garnish.py": "564b0d1e31c5fe8970f3949eaa6ba2e9b1cb53ca549e64d1b5f11c1a7f9afae9",
+    "aussiefy/genre.py": "e62c798f4b5348e5c7b3f998a3a5b6ea5d7d7ef00208bae0654e9849be6e313b",
+    "aussiefy/guide.py": "26469f716318af88ab30010feafdda09451e337676ce1f9aee71aefea57212bf",
+    "aussiefy/harness.py": "1f3e704f97a2f5bc9f2ceead83dd14598663cb4289b2cb71f8eae191c9df7559",
+    "aussiefy/judge.py": "6fc1aca4c3e746f8a2dd91690bd46c64ef0981f50a90016283789c1c0119e725",
+    "aussiefy/lint.py": "2454283d56327c39d7397196927014375cb3712331e6406b0d599b4e09e58da5",
+    "aussiefy/llm.py": "4f7a4aacfa0f6e060417ec6690829c8a764459e205af91924f6a798b3890a7ca",
+    "aussiefy/loader.py": "d3b3fd8e3a58b0fd6bc9acecb947159faa9cd31c2a0f73da00cda185ff43e393",
+    "aussiefy/lookup.py": "49514dcd5820407d2bc447ea632369743f3c716346930ab056f0fa74204f050d",
+    "aussiefy/markdown.py": "33fb59927f47a56a5537a78bdfab107d62dcc011611ca2a908debedfeb83f376",
+    "aussiefy/markup.py": "9bfe4154dafd8181185c12fb23d130c614b205a4a3ab5b7fc9dcd858ba36ab64",
+    "aussiefy/matcher.py": "d7f526ca140e4559ffef0c397cce449d47db85e62dce516354d020ac61f0bc48",
+    "aussiefy/mcp_server.py": "f73196fc2384756f4a535052718ade325467e3f1f0b5acac36959699535a725d",
+    "aussiefy/model.py": "35a70f6fb8b1184e89340845a963513379b67fcfdcbcd30e31dd2b8ba191d5d3",
+    "aussiefy/models.py": "b8c1e4f03d9d2bbe221fd2382112afb07668e489b50499a51a41995a0afcbf65",
+    "aussiefy/morph.py": "e3cdd0934ec0d7867e9624f3f0359549e289c5de624ca3de78b326103b3ec0b3",
+    "aussiefy/policy.py": "90474f25f10d5da8ee29052250253306d4b9d54e3f89809e2e4955edaf02f5dd",
+    "aussiefy/pos.py": "2dd736bba71f76cab58d0820dea5b48cbcd330b47032a49990b2b84cac3cc50c",
+    "aussiefy/profile.py": "faca5d7b66e4afff461f77ccf7051d9b761e5e9d86487bb21120d3091e1dfc64",
+    "aussiefy/protected.py": "2909130ba76dc405bdc7496929044a81b83ac3efa73c4adc62db1e792dcade03",
+    "aussiefy/realise.py": "5609d7092742c7f2581fe913b2900dfabf6bb63bc61f791a3ac15ba73537f085",
+    "aussiefy/retelling.py": "8dd92855c1b86f42da2f55b41f9fe2bd8e6ff15ee4692fed29900be19ab7cd94",
+    "aussiefy/rounds.py": "3ba82247e6f0ae805a7545f66adf550511ba1792425ba088f148a04074c3a5d5",
+    "aussiefy/schema.py": "f90d9a25c1f88ff2ffe01f20838faf07ee2b5203c8b41e39b86cf406d1bfe4b8",
+    "aussiefy/scrape/__init__.py": "87bb592f9905a5ccc99020dfaf7af0c359fc9e9d15d825730f20b8b0d10e3696",
+    "aussiefy/scrape/fetch.py": "e57b85891834e29dc25e7e2bc3170715d5dc2dab1fcffc5e6875a539a57c0fb7",
+    "aussiefy/scrape/fragments.py": "063fed1f9d3b71c5de4ffea7e04516df7683c031a74d5afa9e8f2d6f93cbb47a",
+    "aussiefy/scrape/harvest.py": "30d099a5a76b7099180c5440a965024059e092a9ffb8410a6be2d9443f99c90e",
+    "aussiefy/scrape/ingest.py": "4af0978359d2eaab2ae3ff33fc34cc48263c6de38620d2e85e891918b4be508b",
+    "aussiefy/scrape/normalise.py": "2995e0c1457404eb1bbc1eff499628ac719a91fc1661bd958b212c52ca27e60b",
+    "aussiefy/scrape/parse.py": "0f93f4a2dc14b4e385054c3fa8216bd5cc3be365e475c0d2149260c4c9174596",
+    "aussiefy/scrape/review.py": "8cdff28d564935c029c8376ff23f8e357dd1ef4a9a445af37c1ae9a1eac13641",
+    "aussiefy/scrape/tag.py": "9b13c5f8467c8ffe5362945765f8cb1c2da35a960cb16f283f6364279ba5be2c",
+    "aussiefy/select.py": "13eee27837de49291565d0ae6004e8f46b514f5010572d760beb5c79da2b8a10",
+    "aussiefy/static.py": "a6490595c3200e89ec71639d85d25b6a2f71f5963ebed75fc47ae343d1f4b150",
+    "aussiefy/terms.py": "d1d4857ffe557fb342533e9f29d8069fbe6ddcb52bf3b7fc46eb07ad09cd02fd",
+    "aussiefy/text.py": "f50dd4f8b77ebffa84bc5fe27142ea3a27541609eb362ba2b8f8af721d031df0",
+    "aussiefy/translation.py": "7d0dcebcbc9baeee2b4b640f2b9c1aad92e07e1341b3062b7b0a9635495faf28",
+    "aussiefy/verify.py": "34273141474249606c0b54022b48bb149f4e8246364c8e68d5a9df837b023e48",
+    "aussiefy/yarn.py": "87b31225c0553a02d0f8bc31b59a1af756f117dd03294f75bac5b2906adc8c25"
+  },
+  "cases": [
+    {
+      "name": "missed_ferry",
+      "source": "tests/corpus/heldout/20261016/missed_ferry.txt",
+      "source_sha256": "0166ea4dc61d3c3f8c796a2acf3220bd133847c184736e022559340c42a4ab81",
+      "policy": {
+        "level": 4,
+        "vulgarity": 1,
+        "seed": 7,
+        "embellishment": "dinkum",
+        "document_type": "general",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "engine": {
+          "path": "research/heldout-2026-10-16/anchors/missed_ferry.txt",
+          "sha256": "a94f6fa731efafe6311a3273568582027c10a35d254d6e50e5771f85e2861f14"
+        }
+      },
+      "brief_sha256": "8e3d6f8f66c64253eed9a6673d0552f796f267d24cbc30caf765d4594892cdee",
+      "policy_sha256": "bcfa03e3ae27dc88476abddc423c0f1ba6dc70ded5975dce47cc2b85e8a7b2e8"
+    },
+    {
+      "name": "community_notice",
+      "source": "tests/corpus/heldout/20261016/community_notice.txt",
+      "source_sha256": "9821dbfdf8fa768bba96e96b7b9ccf0e9211c1138da11f903dafe7c0c9a84af3",
+      "policy": {
+        "level": 5,
+        "vulgarity": 1,
+        "seed": 7,
+        "embellishment": "dinkum",
+        "document_type": "news",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "engine": {
+          "path": "research/heldout-2026-10-16/anchors/community_notice.txt",
+          "sha256": "39a950d2ecd710b4b5802f0fca12f445ad15cbee06692428731d3698783b815c"
+        }
+      },
+      "brief_sha256": "2d76e17da12d30d762cf95b4a62f7f116f2f787859a4f6f1a87824fe0d161318",
+      "policy_sha256": "4421ae08ea51b849578ce8fef28bba075ac1131c06d048c330075888f53b3f24"
+    },
+    {
+      "name": "battery_instructions",
+      "source": "tests/corpus/heldout/20261016/battery_instructions.txt",
+      "source_sha256": "f9977cba8380fe74b1bf266cb917972bd2e04005ba058a592ddd8cc5c70566b4",
+      "policy": {
+        "level": 4,
+        "vulgarity": 0,
+        "seed": 7,
+        "embellishment": "dinkum",
+        "document_type": "instructions",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "engine": {
+          "path": "research/heldout-2026-10-16/anchors/battery_instructions.txt",
+          "sha256": "8e0c099e374ae667a9028d089b3a244dba24df77f9c46410f4431dcfb2dcdf45"
+        }
+      },
+      "brief_sha256": "5e5e65ac427d74fe18ca5abe0ef868c71570ee8f51ee0c4c241eb1d42ad828eb",
+      "policy_sha256": "ccefb70092981cc04f769ec35d40060df6658f172598673ee5d70d276b345dfb"
+    },
+    {
+      "name": "retry_guide",
+      "source": "tests/corpus/heldout/20261016/retry_guide.md",
+      "source_sha256": "de66baf62a2b11b39775162a61f5d1fb0cc86036718789801a76a0e3f88f5684",
+      "policy": {
+        "level": 5,
+        "vulgarity": "dad",
+        "seed": 0,
+        "embellishment": "dinkum",
+        "document_type": "general",
+        "document_config": {
+          "term_domains": [
+            "technical"
+          ],
+          "formal_to_rework": false,
+          "keep_quotes": true,
+          "person_swears": false,
+          "command_context": true,
+          "garnish": [
+            "connective",
+            "opener",
+            "tag"
+          ],
+          "profile": {
+            "garnish": {
+              "connective": 0.35,
+              "opener": 0.35,
+              "tag": 0.25
+            },
+            "max_garnish": {
+              "connective": 10,
+              "opener": 6,
+              "tag": 4
+            },
+            "garnish_gap": 2,
+            "stack": 0
+          }
+        },
+        "markup": "markdown"
+      },
+      "anchors": {
+        "engine": {
+          "path": "research/heldout-2026-10-16/anchors/retry_guide.txt",
+          "sha256": "847e649e5c4778df9df515948fd3b7669be4c1492f5595ab5af2571d87d8bc53"
+        }
+      },
+      "brief_sha256": "983c7306465b7df00e0d363efaed025e339126013a1c76f63272bf19b043176c",
+      "policy_sha256": "4b9184c6eadd380ffa00333638f6f74cd17a33199113ba95971105d8cf838e32"
+    },
+    {
+      "name": "refund_policy",
+      "source": "tests/corpus/heldout/20261016/refund_policy.txt",
+      "source_sha256": "09b90b7d792c0b8d3f1d7026129c682b83c1c50579f3f99599c278627dd6a08d",
+      "policy": {
+        "level": 3,
+        "vulgarity": 0,
+        "seed": 7,
+        "embellishment": "deadset",
+        "document_type": "official",
+        "document_config": {},
+        "markup": "text"
+      },
+      "anchors": {
+        "engine": {
+          "path": "research/heldout-2026-10-16/anchors/refund_policy.txt",
+          "sha256": "842438f7a54876d4385f12772bff067eb01653111adc15fb987081079561946f"
+        }
+      },
+      "brief_sha256": "38f26c5497f0c696f81af01fe4dc6c0b6aa12efa764318db33d4ccc5273c9dfb",
+      "policy_sha256": "f6c1b09909862b5f021d7ee7954e803deaa1e5d10cd3c838ae23a9ac1bced678"
+    },
+    {
+      "name": "good_samaritan",
+      "source": "tests/corpus/reference/bible_good_samaritan.txt",
+      "source_sha256": "3dcae3954566ebc41f3244dc8a5c63cb56699733398a27be09d828e703fbf651",
+      "policy": {
+        "level": 5,
+        "vulgarity": 1,
+        "seed": 7,
+        "embellishment": "dinkum",
+        "document_type": "general",
+        "document_config": {
+          "garnish": [],
+          "openings": false,
+          "person_swears": false,
+          "keep_quotes": false
+        },
+        "markup": "text"
+      },
+      "anchors": {
+        "engine": {
+          "path": "research/heldout-2026-10-16/anchors/good_samaritan.txt",
+          "sha256": "34ad1bcb6707b7169791f25d6701973c643e7b36287b4c6191e48e014e9c875d"
+        }
+      },
+      "brief_sha256": "8577c758f6938afaffb55e51c82194fdbbcf9eef9f5ed1758a38fbfb71bf6f9b",
+      "policy_sha256": "b8a98e4721cdaf7b3dccb94e6d94e3f32f257f826958692e9398d7d7ca70494d"
+    }
+  ],
+  "writer": "fresh Codex agent contexts using yarn tools; no historical candidates shown",
+  "judge": "independent fresh Codex agent contexts; candidate names withheld"
+}

@@ -1,0 +1,162 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "pre-fix-yarn": "A",
+    "dinkum-3": "B",
+    "current": "C"
+  },
+  "scores": {
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 4,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 5,
+      "sense": 4,
+      "authenticity": 5,
+      "register": 3,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "pre-fix-yarn": {
+      "meaning": "\"And not just for GitHub, either.\" removes the original not necessarily qualifier, making the personal-consequence statement more categorical; approval thresholds remain exact.",
+      "sense": "\"Cheap seats in the stands\" broadens bleacher-type seating to any inexpensive stand seats.",
+      "authenticity": "\"pick up the bill\", \"mate’s daughter\" and \"shouting\" are natural local terms.",
+      "register": "\"small potatoes\", \"a gig\" and \"worth heaps\" make the body a little heavier than a light level-2 treatment.",
+      "tone": "\"FINES and JAIL.\" retains the emphatic warning and the original Yoda joke remains in place.",
+      "flow": "\"When you put in your expense report to get reimbursed\" is smooth and clear.",
+      "variety": "\"pick up the bill\", \"fair bit\" and \"cop a few years\" avoid leaning on one expression.",
+      "essence": "\"you'll need approval (each time) from Legal in writing\" retains the concrete compliance mechanism and the cautionary shape."
+    },
+    "dinkum-3": {
+      "meaning": "\"you'll need Legal's approval in writing (each time)\" and \"not necessarily just for GitHub\" retain obligation, threshold and consequence qualifications.",
+      "sense": "\"Cheap seats\" broadens bleacher-type tickets, while \"posh private school\" substitutes social status for prestigious standing.",
+      "authenticity": "\"shout them\", \"that's not on\" and \"suitcase of dosh\" are recognisable and contextually natural Australian speech.",
+      "register": "\"righto\", \"pressie\", \"choccies\" and \"dosh\" across the whole text make this noticeably stronger than light level 2.",
+      "tone": "\"FINES and JAIL.\" and \"Sorry, Yoda: it’s the trying that counts.\" preserve the blunt warning and existing joke.",
+      "flow": "\"When you put in your expense claim to get paid back\" reads easily, and the long threshold paragraph stays coherent.",
+      "variety": "\"pressie\" and \"pressies\" recur, but \"shout\", \"choccies\" and \"dosh\" give sufficient variety overall.",
+      "essence": "\"Legal's only weighing in on the bribery side of things\" retains the distinction between bribery review and other Finance concerns."
+    },
+    "current": {
+      "meaning": "\"For any gift you receive worth more than $150, you’ll need to report it to Legal in writing, each time.\" retains the threshold, recipient, medium and repetition requirements.",
+      "sense": "\"Bleacher-type tickets\" keeps the exact seating category; \"shout them dinner\" correctly conveys paying for dinner.",
+      "authenticity": "\"that’s not on\", \"fair bit\" and \"choccies\" sound like an Australian speaking naturally.",
+      "register": "\"shout them dinner\" and \"a fair bit of money\" give the light level-2 touch without overloading the policy.",
+      "tone": "\"And GitHub mightn’t be the only one.\" preserves the warning’s conditional force, and the Yoda punchline remains.",
+      "flow": "\"If she isn’t qualified and you pull strings to get her in, though, that’s not on.\" reads fluently aloud.",
+      "variety": "\"shout\", \"choccies\" and \"fair bit\" vary the modest local vocabulary.",
+      "essence": "\"Legal is only weighing in on the bribery question\" and the unchanged approval-email requirement keep the policy’s distinguishing practical character."
+    }
+  },
+  "problems": {
+    "pre-fix-yarn": [
+      {
+        "quote": "And not just for GitHub, either.",
+        "original": "Not necessarily just for GitHub, either.",
+        "severity": "minor",
+        "why": "Drops the explicit possibility qualifier; subsequent might partially restores the distinction but the sentence is stronger."
+      },
+      {
+        "quote": "Cheap seats in the stands at a sporting event ⚾️",
+        "original": "Bleacher-type tickets to a sporting event ⚾️",
+        "severity": "minor",
+        "why": "Inexpensive stand seating is not the same category as bleacher-type seating."
+      },
+      {
+        "quote": "some things might look like small potatoes to you",
+        "original": "certain things might seem trivial",
+        "severity": "minor",
+        "why": "Representative of idiom and slang being somewhat heavier than the light level-2 brief."
+      }
+    ],
+    "dinkum-3": [
+      {
+        "quote": "Cheap seats at a sporting event ⚾️",
+        "original": "Bleacher-type tickets to a sporting event ⚾️",
+        "severity": "minor",
+        "why": "Price alone does not preserve the specified seating category."
+      },
+      {
+        "quote": "posh private school",
+        "original": "prestigious private school",
+        "severity": "minor",
+        "why": "Posh means socially fancy or upper-class rather than necessarily prestigious."
+      },
+      {
+        "quote": "informal pressie",
+        "original": "informal gift",
+        "severity": "major",
+        "why": "Representative of a sustained heavier slang treatment than the requested light level 2."
+      }
+    ],
+    "current": []
+  },
+  "summaries": {
+    "pre-fix-yarn": "Clear and mostly accurate; slightly heavy for the brief and less exact about seating and consequence modality.",
+    "dinkum-3": "Fluent and faithful to obligations, but over-colloquial for level 2 with two imprecise substitutions.",
+    "current": "Precise and readable, with a well-calibrated light local voice and intact policy force."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "pre-fix-yarn",
+        "dinkum-3",
+        "current"
+      ]
+    ],
+    "flow": [
+      [
+        "pre-fix-yarn",
+        "dinkum-3",
+        "current"
+      ]
+    ],
+    "variety": [
+      [
+        "pre-fix-yarn",
+        "dinkum-3",
+        "current"
+      ]
+    ],
+    "essence": [
+      [
+        "pre-fix-yarn",
+        "dinkum-3",
+        "current"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ]
+  }
+}

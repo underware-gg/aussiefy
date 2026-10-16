@@ -11,8 +11,12 @@ aussiefy translate --markdown README.md --explain
 ```
 
 Paragraph, list and blockquote prose is translated in source order. Each physical line and each gap between
-protected inline constructs is an engine unit, so phrases do not cross hard wraps or links. Fragments can
-have their own garnish; this mode preserves structure rather than rewriting whole paragraphs.
+protected inline constructs is an engine unit, so phrases do not cross hard wraps or links. Units share
+one document's term/spelling choices and garnish limits. Source sentence positions govern garnish spacing;
+partial sentences do not receive sentence garnish, so inline code, links and hard wraps cannot acquire an
+opener halfway through a sentence. Complete later sentences remain eligible. A closer is considered only at
+the final prose unit when it ends a complete source sentence. This mode preserves source structure rather
+than rewriting whole paragraphs.
 
 ## Protected content and dialect
 
@@ -53,9 +57,11 @@ relative to that child's source. Rendered unit text may differ from raw engine t
 `--explain` names document source/output ranges before reporting the local engine decisions; there are no
 fake document-wide engine records. Markdown text output adds no terminal newline to the document.
 
-`Translator.translate`, `aussiefy.engine.translate` and `plan` remain plain text. Plan does not describe the
-adapter's per-unit output; yarn lookup/lint tools stay unchanged.
+`Translator.translate` and `aussiefy.engine.translate` remain the core text operations. Plan can read extended
+`markup`, but does not describe strict Markdown's per-unit output. Yarn tools use their selected markup route;
+strict `markdown=True` remains a translation-only option.
 
 The contracts are checked in [test_markdown.py](../../../tests/functional/test_markdown.py) and
-[test_interfaces.py](../../../tests/functional/test_interfaces.py). See
+[test_interfaces.py](../../../tests/functional/test_interfaces.py), with document composition pinned in
+[test_markdown_composition.py](../../../tests/functional/test_markdown_composition.py). See
 [DD-015](../../architecture/decisions/dd-015-source-preserving-markdown.md) for the boundary decision.

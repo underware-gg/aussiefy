@@ -1,0 +1,113 @@
+{
+  "status": "completed",
+  "source_commit": "4d6b353aeaed6fb65ae977b7e29b6ca4c9620c91",
+  "run": "study-heldout-judge1",
+  "evaluation_protocol": 2,
+  "rubric_version": 3,
+  "cases": 6,
+  "tally": {
+    "current": {
+      "texts": 6,
+      "scores": {
+        "meaning": 5.0,
+        "sense": 5.0,
+        "authenticity": 5.0,
+        "register": 4.67,
+        "tone": 5.0,
+        "flow": 5.0,
+        "variety": 4.83,
+        "essence": 5.0
+      },
+      "mean": 4.94,
+      "first": 1.0,
+      "problems": {
+        "critical": 0,
+        "major": 1,
+        "minor": 1
+      }
+    },
+    "engine": {
+      "texts": 6,
+      "scores": {
+        "meaning": 4.83,
+        "sense": 4.5,
+        "authenticity": 5.0,
+        "register": 1.67,
+        "tone": 5.0,
+        "flow": 4.5,
+        "variety": 5.0,
+        "essence": 5.0
+      },
+      "mean": 4.44,
+      "first": 0.0,
+      "problems": {
+        "critical": 0,
+        "major": 9,
+        "minor": 1
+      }
+    }
+  },
+  "verification": {
+    "missed_ferry": {
+      "ok": true,
+      "counts": {
+        "critical": 0,
+        "major": 0,
+        "minor": 0
+      },
+      "output_sha256": "c940aea54e3404ae6b2d48ddece8c70d54d960a407d0a3f0eac4565567ae297a",
+      "report_sha256": "201dc7d4197d070a25c373bcd92488cae9fd1ecff44bbe2468c72889038bb12f"
+    },
+    "community_notice": {
+      "ok": true,
+      "counts": {
+        "critical": 0,
+        "major": 0,
+        "minor": 0
+      },
+      "output_sha256": "978c8c4c95966ccd21c7778deef5abc4973d1c980bd05ab4f8d1ea35086caf77",
+      "report_sha256": "f2a30420ea7685c90bf0cab21a7a8655a084e34da6f31e803977a1ffb6d0fd7f"
+    },
+    "battery_instructions": {
+      "ok": true,
+      "counts": {
+        "critical": 0,
+        "major": 0,
+        "minor": 0
+      },
+      "output_sha256": "b9f6236f8086d6faf775ea4839bc64fcb01035b3a2c32523946b5a6e2a1048a3",
+      "report_sha256": "6f83727a38ec0511b6b91539d733174227fcf5f12d6139ac64893acd58f3e530"
+    },
+    "retry_guide": {
+      "ok": true,
+      "counts": {
+        "critical": 0,
+        "major": 0,
+        "minor": 0
+      },
+      "output_sha256": "a3919e2ca24f4dfd020cdb7e45c17b971eedc1af8dec4d876cc3fb5909765485",
+      "report_sha256": "9f45ecf98c7651b97e68668d1d811c73f86e4284ef903bba1d9548d74754f80f"
+    },
+    "refund_policy": {
+      "ok": true,
+      "counts": {
+        "critical": 0,
+        "major": 0,
+        "minor": 0
+      },
+      "output_sha256": "d4db057d6518d60ba84707b42bbd88f3119e56118c41428497843641a698c15a",
+      "report_sha256": "b5cffd058fb1ea92a2871783d7aaec029d2738578e1a43b4faa67f15e8e068b8"
+    },
+    "good_samaritan": {
+      "ok": true,
+      "counts": {
+        "critical": 0,
+        "major": 0,
+        "minor": 0
+      },
+      "output_sha256": "92b6853c81cc17cc39aed467587050e1c176bc75f8417c4bf21ab525591c6060",
+      "report_sha256": "5b498c5fdc0b8d397f2a35a1f92b254fc9568e0ec6c84b8a906ea5f2d871bc26"
+    }
+  },
+  "limits": "One independent blind report per text; different current and historical writer contexts. This is a bounded comparison, not an isolated causal test of engine or model quality. Protocol 2 supplies the full effective contract; scores from earlier level/vulgarity-only packets are not directly comparable."
+}

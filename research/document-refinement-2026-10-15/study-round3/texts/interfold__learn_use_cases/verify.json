@@ -1,0 +1,145 @@
+{
+  "ok": true,
+  "level": 5,
+  "level_name": "swaggie",
+  "vulgarity": 2,
+  "vulgarity_name": "uncle-bob",
+  "policy_warnings": [],
+  "profile_config": {
+    "substitution": {
+      "lexical": 1.0,
+      "phrase": 1.0,
+      "idiom": 1.0
+    },
+    "frames": [
+      "np",
+      "adj",
+      "adv",
+      "interjection",
+      "imperative",
+      "predicate_adj",
+      "vp",
+      "clause"
+    ],
+    "garnish": {
+      "connective": 0.4,
+      "opener": 0.45,
+      "tag": 0.5,
+      "aside": 0.3,
+      "tail": 0.6,
+      "closer": 1.0,
+      "riff": 0.5
+    },
+    "max_garnish": {
+      "connective": 6,
+      "opener": 3,
+      "tag": 3,
+      "aside": 4,
+      "tail": 2,
+      "closer": 1,
+      "riff": 2
+    },
+    "garnish_gap": 1,
+    "garnish_per_sentence": 1,
+    "rewrite": {
+      "min_level": 3,
+      "min_words": 6,
+      "min_formal_words": 2,
+      "max_coverage": 0.1,
+      "formal_length": 7
+    },
+    "stack": 0.35,
+    "phonetic": 1.0,
+    "stretch": [
+      3,
+      6
+    ],
+    "swearing": {
+      "exclaim": 0.14,
+      "closer": 0.3,
+      "infix": 1.5,
+      "lean": 1.2
+    }
+  },
+  "document_type": "official",
+  "document_type_source": "preset",
+  "genre": "official",
+  "genre_scores": {},
+  "document_config": {
+    "formal_to_rework": false,
+    "person_swears": false,
+    "keep_quotes": true,
+    "guidance": "Official prose (terms, policy, minutes, a job ad, an encyclopedia entry): keep every obligation, condition, name and number exact, and quoted documents verbatim. Aussify the connecting prose; no swearing at anyone.",
+    "term_domains": [
+      "official"
+    ],
+    "command_context": false,
+    "dateline_context": false,
+    "check_length": true,
+    "garnish": [],
+    "openings": false,
+    "draft": true,
+    "keep_share": 0.6,
+    "max_length": 1.6,
+    "perform": false,
+    "embellishment_guidance": "Dinkum: retell it in a genuine Aussie voice. Rephrase freely so each sentence sounds said, not translated; the odd opener, connective or tag-on where a talker would use one; the original's points in its order. Colour hangs off what's there: no new scenes, asides or punchlines. Where the genre keeps its form exact (a notice, a doc, official prose), the voice goes into everything around what's kept: say the connecting prose the way a local would explain it to a mate, at the level's weight, not in the original's officialese with a word or two swapped. What's kept includes the force of what it says: an obligation, a decision, a finding or a stated aim keeps its verb's weight (\"we consider you responsible\" isn't \"we reckon\"; \"reaffirmed\" isn't \"doubled down\"; a goal isn't \"while they're at it\")."
+  },
+  "document_overrides": {},
+  "counts": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0
+  },
+  "problems": [
+    {
+      "severity": "info",
+      "kind": "untouched",
+      "phrase": "Part of the E3      What CRISP does",
+      "why": "left exactly as it was",
+      "sentence": 11
+    },
+    {
+      "severity": "info",
+      "kind": "untouched",
+      "phrase": "Input proof         The client generates a Noir proof that the ballot is valid.                    verifies it.",
+      "why": "left exactly as it was",
+      "sentence": 14
+    },
+    {
+      "severity": "info",
+      "kind": "untouched",
+      "phrase": "Data availability   The ciphertext bytes go to Avail.",
+      "why": "left exactly as it was",
+      "sentence": 15
+    },
+    {
+      "severity": "info",
+      "kind": "untouched",
+      "phrase": "The program checks the         receipt.",
+      "why": "left exactly as it was",
+      "sentence": 16
+    },
+    {
+      "severity": "info",
+      "kind": "untouched",
+      "phrase": "The template and CRISP use only homomorphic addition.",
+      "why": "left exactly as it was",
+      "sentence": 25
+    },
+    {
+      "severity": "info",
+      "kind": "untouched",
+      "phrase": "No single operator holds a plaintext\ninput, and the committee decrypts only the output.",
+      "why": "left exactly as it was",
+      "sentence": 46
+    }
+  ],
+  "metrics": {
+    "original_words": 769,
+    "translation_words": 838,
+    "sentences": 52,
+    "translation_sentences": 53,
+    "untouched_share": 0.12
+  },
+  "scope": "Deterministic checks: policy, spelling, facts, markup, sentence structure. Not judged: tone, flow, whether each swap took the right sense (use the judge for those)."
+}

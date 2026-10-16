@@ -1,0 +1,679 @@
+{
+  "rubric_version": 3,
+  "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as vulgar, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.",
+  "prompt": "BRIEF: level 4, vulgarity 1\n\nORIGINAL:\nCommittee Policy Actions\nIn support of the Committee's dual-mandate goals, all members agreed to raise the target range for the federal funds rate 1/4 percentage point to 3-3/4 to 4 percent and reaffirmed the FOMC's policy of maintaining ample reserves in the banking system. Members noted that the unemployment rate was largely unchanged and that solid growth in economic activity had continued amid resilient domestic spending, while inflation remained elevated relative to the Committee's 2 percent goal. The Committee underlined its continuing resolve to achieve its dual-mandate goals by indicating in its postmeeting statement that it \"will deliver price stability.\" Members agreed that the policy action taken would support a timelier return of inflation to the Committee's 2 percent goal.\n\nAt the conclusion of the discussion, the Committee voted to direct the Federal Reserve Bank of New York, until instructed otherwise, to execute transactions in the System Open Market Account in accordance with the following domestic policy directive, for release at 2:00 p.m.:\n\n\"Effective September 17, 2026, the Federal Open Market Committee directs the Desk to:\n\nUndertake open market operations as necessary to maintain the federal funds rate in a target range of 3-3/4 to 4 percent.\n\nConduct standing overnight repurchase agreement operations at a rate of 4.0 percent.\n\nConduct standing overnight reverse repurchase agreement operations at an offering rate of 3.75 percent and with a per-counterparty limit of $160 billion per day.\n\nWhen appropriate, increase the System Open Market Account holdings of securities through purchases of Treasury bills and, if needed, other Treasury securities with remaining maturities of 3 years or less to maintain an ample level of reserves.\n\nRoll over at auction all principal payments from the Federal Reserve's holdings of Treasury securities. Reinvest all principal payments from the Federal Reserve's holdings of agency securities into Treasury bills.\"\n\nThe vote also encompassed approval of the statement below for release at 2:00 p.m.:\n\n\"The Federal Open Market Committee approved the following statement for release by a 12–0 vote:\n\nThe Committee decided to raise the target range for the federal funds rate by 1/4 percentage point to 3-3/4 to 4 percent, in support of the Federal Reserve's dual mandate. The Committee is continuing its policy of maintaining ample reserves in the banking system.\n\nEconomic activity is expanding at a solid pace. While uncertainty remains elevated owing, in part, to geopolitical developments, domestic spending has been resilient. Productivity growth is strong, and capital investment is robust. Job gains have kept pace with the workforce, and the unemployment rate has changed little.\n\nInflation remains elevated. Today's policy action will support a timelier return to the Committee's 2 percent goal. The Committee will deliver price stability.\"\n\nVoting for this action: Kevin Warsh, John C. Williams, Michael S. Barr, Michelle W. Bowman, Lisa D. Cook, Beth M. Hammack, Philip N. Jefferson, Neel Kashkari, Lorie K. Logan, Anna Paulson, Jerome H. Powell, and Christopher J. Waller.\n\nVoting against this action: None.\n\nConsistent with the Committee's decision to raise the target range for the federal funds rate to 3-3/4 to 4 percent, the Board of Governors of the Federal Reserve System voted unanimously to raise the interest rate paid on reserve balances to 3.90 percent, effective September 17, 2026. The Board of Governors of the Federal Reserve System voted unanimously to approve a 1/4 percentage point increase in the primary credit rate to 4.0 percent, effective September 17, 2026.2\n\nIt was agreed that the next meeting of the Committee would be held on Tuesday–Wednesday, October 27–28, 2026. The meeting adjourned at 10:15 a.m. on September 16, 2026.\n\nNotation Vote\nBy notation vote completed on August 18, 2026, the Committee unanimously approved the minutes of the Committee meeting held on July 28–29, 2026.\n\nCANDIDATE A:\nCommittee Policy Actions\nAll members agreed to lift the target range for the federal funds rate 1/4 percentage point to 3-3/4 to 4 per cent to support the Committee's dual-mandate goals. They also reaffirmed the FOMC's policy of keeping ample reserves in the banking system. Members noted that the unemployment rate had barely changed, while economic activity kept growing solidly and domestic spending held up. Inflation was still above the Committee's 2 per cent goal. The Committee stressed its continuing resolve to meet its dual-mandate goals, saying in its postmeeting statement that it \"will deliver price stability.\" Members agreed the policy action would help bring inflation back to the Committee's 2 per cent goal sooner.\n\nAfter the discussion wrapped up, the Committee voted to direct the Federal Reserve Bank of New York to carry out transactions in the System Open Market Account under the domestic policy directive below, until told otherwise. The directive was for release at 2:00 p.m.:\n\n\"Effective September 17, 2026, the Federal Open Market Committee directs the Desk to:\n\nUndertake open market operations as necessary to maintain the federal funds rate in a target range of 3-3/4 to 4 percent.\n\nConduct standing overnight repurchase agreement operations at a rate of 4.0 percent.\n\nConduct standing overnight reverse repurchase agreement operations at an offering rate of 3.75 percent and with a per-counterparty limit of $160 billion per day.\n\nWhen appropriate, increase the System Open Market Account holdings of securities through purchases of Treasury bills and, if needed, other Treasury securities with remaining maturities of 3 years or less to maintain an ample level of reserves.\n\nRoll over at auction all principal payments from the Federal Reserve's holdings of Treasury securities. Reinvest all principal payments from the Federal Reserve's holdings of agency securities into Treasury bills.\"\n\nThe vote also approved the statement below for release at 2:00 p.m.:\n\n\"The Federal Open Market Committee approved the following statement for release by a 12–0 vote:\n\nThe Committee decided to raise the target range for the federal funds rate by 1/4 percentage point to 3-3/4 to 4 percent, in support of the Federal Reserve's dual mandate. The Committee is continuing its policy of maintaining ample reserves in the banking system.\n\nEconomic activity is expanding at a solid pace. While uncertainty remains elevated owing, in part, to geopolitical developments, domestic spending has been resilient. Productivity growth is strong, and capital investment is robust. Job gains have kept pace with the workforce, and the unemployment rate has changed little.\n\nInflation remains elevated. Today's policy action will support a timelier return to the Committee's 2 percent goal. The Committee will deliver price stability.\"\n\nVoting for this action: Kevin Warsh, John C. Williams, Michael S. Barr, Michelle W. Bowman, Lisa D. Cook, Beth M. Hammack, Philip N. Jefferson, Neel Kashkari, Lorie K. Logan, Anna Paulson, Jerome H. Powell, and Christopher J. Waller.\n\nVoting against this action: None.\n\nIn line with the Committee's decision to raise the target range for the federal funds rate to 3-3/4 to 4 per cent, the Board of Governors of the Federal Reserve System unanimously voted to lift the interest rate paid on reserve balances to 3.90 per cent from September 17, 2026. The Board of Governors of the Federal Reserve System also unanimously voted to approve a 1/4 percentage point rise in the primary credit rate to 4.0 per cent from September 17, 2026.2\n\nIt was agreed the Committee would meet next on Tuesday–Wednesday, October 27–28, 2026. The meeting adjourned at 10:15 a.m. on September 16, 2026.\n\nNotation Vote\nThe Committee unanimously approved the minutes of its July 28–29, 2026 meeting through a notation vote completed on August 18, 2026.\n\nCANDIDATE B:\nCommittee Policy Actions\nTo back the Committee's dual-mandate goals, all members agreed to put the target range for the federal funds rate up 1/4 percentage point to 3-3/4 to 4 percent, and they stuck by the FOMC's policy of keeping ample reserves in the banking system. Members noted the unemployment rate had hardly budged, and that the economy had kept on growing at a solid clip, with domestic spending holding up well, while inflation was still sitting up high against the Committee's 2 percent goal. The Committee made it plain it's still dead set on hitting its dual-mandate goals, saying in its postmeeting statement that it \"will deliver price stability.\" And members agreed the policy action they'd taken would help bring inflation back to the Committee's 2 percent goal sooner.\n\nOnce the discussion wrapped up, the Committee voted to direct the Federal Reserve Bank of New York, until it's told otherwise, to carry out transactions in the System Open Market Account in line with the following domestic policy directive, for release at 2:00 p.m.:\n\n\"Effective September 17, 2026, the Federal Open Market Committee directs the Desk to:\n\nUndertake open market operations as necessary to maintain the federal funds rate in a target range of 3-3/4 to 4 percent.\n\nConduct standing overnight repurchase agreement operations at a rate of 4.0 percent.\n\nConduct standing overnight reverse repurchase agreement operations at an offering rate of 3.75 percent and with a per-counterparty limit of $160 billion per day.\n\nWhen appropriate, increase the System Open Market Account holdings of securities through purchases of Treasury bills and, if needed, other Treasury securities with remaining maturities of 3 years or less to maintain an ample level of reserves.\n\nRoll over at auction all principal payments from the Federal Reserve's holdings of Treasury securities. Reinvest all principal payments from the Federal Reserve's holdings of agency securities into Treasury bills.\"\n\nThat same vote also gave the nod to the statement below, for release at 2:00 p.m.:\n\n\"The Federal Open Market Committee approved the following statement for release by a 12–0 vote:\n\nThe Committee decided to raise the target range for the federal funds rate by 1/4 percentage point to 3-3/4 to 4 percent, in support of the Federal Reserve's dual mandate. The Committee is continuing its policy of maintaining ample reserves in the banking system.\n\nEconomic activity is expanding at a solid pace. While uncertainty remains elevated owing, in part, to geopolitical developments, domestic spending has been resilient. Productivity growth is strong, and capital investment is robust. Job gains have kept pace with the workforce, and the unemployment rate has changed little.\n\nInflation remains elevated. Today's policy action will support a timelier return to the Committee's 2 percent goal. The Committee will deliver price stability.\"\n\nVoting for this action: Kevin Warsh, John C. Williams, Michael S. Barr, Michelle W. Bowman, Lisa D. Cook, Beth M. Hammack, Philip N. Jefferson, Neel Kashkari, Lorie K. Logan, Anna Paulson, Jerome H. Powell, and Christopher J. Waller.\n\nVoting against this action: None.\n\nTo go with the Committee's decision to lift the target range for the federal funds rate to 3-3/4 to 4 percent, the Board of Governors of the Federal Reserve System voted unanimously to bump the interest rate paid on reserve balances up to 3.90 percent, effective September 17, 2026. The Board of Governors of the Federal Reserve System also voted unanimously to give a 1/4 percentage point increase in the primary credit rate the nod, taking it to 4.0 percent, effective September 17, 2026.2\n\nIt was agreed the Committee's next meeting would be on Tuesday–Wednesday, October 27–28, 2026. The meeting wrapped up at 10:15 a.m. on September 16, 2026.\n\nNotation Vote\nBy notation vote completed on August 18, 2026, the Committee unanimously approved the minutes of the Committee meeting held on July 28–29, 2026.\n\nCANDIDATE C:\nWhat the Committee Did\nTo back the Committee's dual-mandate goals, every member gave the nod to bumping the target range for the federal funds rate up 1/4 percentage point to 3-3/4 to 4 per cent, and they doubled down on the FOMC's policy of keeping ample reserves in the banking system. Members reckoned the unemployment rate had barely budged, and the economy had kept chugging along at a solid clip with spending at home holding up well, but inflation was still sitting up high next to the Committee's 2 per cent goal. To show they meant business on the dual-mandate goals, the Committee put it in black and white in its postmeeting statement that it \"will deliver price stability.\" Members agreed the move would help get inflation back to the Committee's 2 per cent goal a bit sooner.\n\nOnce the talking was done and dusted, the Committee voted to tell the Federal Reserve Bank of New York, till it's told otherwise, to carry out transactions in the System Open Market Account in line with this domestic policy directive, to go out at 2:00 p.m.:\n\n\"Effective September 17, 2026, the Federal Open Market Committee directs the Desk to:\n\nUndertake open market operations as necessary to maintain the federal funds rate in a target range of 3-3/4 to 4 per cent.\n\nConduct standing overnight repurchase agreement operations at a rate of 4.0 per cent.\n\nConduct standing overnight reverse repurchase agreement operations at an offering rate of 3.75 per cent and with a per-counterparty limit of $160 billion per day.\n\nWhen appropriate, increase the System Open Market Account holdings of securities through purchases of Treasury bills and, if needed, other Treasury securities with remaining maturities of 3 years or less to maintain an ample level of reserves.\n\nRoll over at auction all principal payments from the Federal Reserve's holdings of Treasury securities. Reinvest all principal payments from the Federal Reserve's holdings of agency securities into Treasury bills.\"\n\nThe same vote also signed off on the statement below, to go out at 2:00 p.m.:\n\n\"The Federal Open Market Committee approved the following statement for release by a 12–0 vote:\n\nThe Committee decided to raise the target range for the federal funds rate by 1/4 percentage point to 3-3/4 to 4 per cent, in support of the Federal Reserve's dual mandate. The Committee is continuing its policy of maintaining ample reserves in the banking system.\n\nEconomic activity is expanding at a solid pace. While uncertainty remains elevated owing, in part, to geopolitical developments, domestic spending has been resilient. Productivity growth is strong, and capital investment is robust. Job gains have kept pace with the workforce, and the unemployment rate has changed little.\n\nInflation remains elevated. Today's policy action will support a timelier return to the Committee's 2 per cent goal. The Committee will deliver price stability.\"\n\nVoting for this action: Kevin Warsh, John C. Williams, Michael S. Barr, Michelle W. Bowman, Lisa D. Cook, Beth M. Hammack, Philip N. Jefferson, Neel Kashkari, Lorie K. Logan, Anna Paulson, Jerome H. Powell, and Christopher J. Waller.\n\nVoting against this action: None.\n\nGoing hand in hand with the Committee's call to lift the target range for the federal funds rate to 3-3/4 to 4 per cent, the Board of Governors of the Federal Reserve System voted unanimously to put the interest rate paid on reserve balances up to 3.90 per cent, from September 17, 2026. The Board of Governors of the Federal Reserve System also voted unanimously to give the tick to a 1/4 percentage point rise in the primary credit rate to 4.0 per cent, from September 17, 2026.2\n\nThey agreed the Committee would get together next on Tuesday–Wednesday, October 27–28, 2026. The meeting wrapped up at 10:15 a.m. on September 16, 2026.\n\nNotation Vote\nBy a notation vote finished up on August 18, 2026, the Committee unanimously signed off on the minutes of the Committee meeting held on July 28–29, 2026.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "candidates": {
+        "type": "object",
+        "properties": {
+          "A": {
+            "type": "object",
+            "properties": {
+              "scores": {
+                "type": "object",
+                "properties": {
+                  "meaning": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "sense": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "authenticity": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "register": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "tone": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "flow": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "variety": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "essence": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "meaning",
+                  "sense",
+                  "authenticity",
+                  "register",
+                  "tone",
+                  "flow",
+                  "variety",
+                  "essence"
+                ],
+                "additionalProperties": false
+              },
+              "problems": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quote": {
+                      "type": "string"
+                    },
+                    "original": {
+                      "type": "string"
+                    },
+                    "severity": {
+                      "type": "string",
+                      "enum": [
+                        "critical",
+                        "major",
+                        "minor"
+                      ]
+                    },
+                    "why": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "quote",
+                    "original",
+                    "severity",
+                    "why"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "summary": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "scores",
+              "problems",
+              "summary"
+            ],
+            "additionalProperties": false
+          },
+          "B": {
+            "type": "object",
+            "properties": {
+              "scores": {
+                "type": "object",
+                "properties": {
+                  "meaning": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "sense": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "authenticity": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "register": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "tone": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "flow": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "variety": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "essence": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "meaning",
+                  "sense",
+                  "authenticity",
+                  "register",
+                  "tone",
+                  "flow",
+                  "variety",
+                  "essence"
+                ],
+                "additionalProperties": false
+              },
+              "problems": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quote": {
+                      "type": "string"
+                    },
+                    "original": {
+                      "type": "string"
+                    },
+                    "severity": {
+                      "type": "string",
+                      "enum": [
+                        "critical",
+                        "major",
+                        "minor"
+                      ]
+                    },
+                    "why": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "quote",
+                    "original",
+                    "severity",
+                    "why"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "summary": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "scores",
+              "problems",
+              "summary"
+            ],
+            "additionalProperties": false
+          },
+          "C": {
+            "type": "object",
+            "properties": {
+              "scores": {
+                "type": "object",
+                "properties": {
+                  "meaning": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "sense": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "authenticity": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "register": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "tone": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "flow": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "variety": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "essence": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "meaning",
+                  "sense",
+                  "authenticity",
+                  "register",
+                  "tone",
+                  "flow",
+                  "variety",
+                  "essence"
+                ],
+                "additionalProperties": false
+              },
+              "problems": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quote": {
+                      "type": "string"
+                    },
+                    "original": {
+                      "type": "string"
+                    },
+                    "severity": {
+                      "type": "string",
+                      "enum": [
+                        "critical",
+                        "major",
+                        "minor"
+                      ]
+                    },
+                    "why": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "quote",
+                    "original",
+                    "severity",
+                    "why"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "summary": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "scores",
+              "problems",
+              "summary"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "A",
+          "B",
+          "C"
+        ],
+        "additionalProperties": false
+      },
+      "rankings": {
+        "type": "object",
+        "properties": {
+          "tone": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            }
+          },
+          "flow": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            }
+          },
+          "variety": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            }
+          },
+          "essence": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            }
+          },
+          "overall": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "tone",
+          "flow",
+          "variety",
+          "essence",
+          "overall"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "candidates",
+      "rankings"
+    ],
+    "additionalProperties": false
+  }
+}

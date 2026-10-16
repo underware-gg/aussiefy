@@ -1,0 +1,7 @@
+# Retry settings
+
+Here's one for ya: set `retry_limit` to `3` before you get the worker goin'. The client retries requests only after a connection failure; if a request gets rejected, it goes straight back to the caller.
+
+The `backoff_ms` value controls the delay between attempts. Bumpin' it up doesn't change how many attempts the client makes. If `retry_limit` is `0`, the client sends the request once 'n returns the result.
+
+Run `worker --check-config` to check the configuration. Have a squiz at [the settings reference](https://example.invalid/settings#retry_limit) for the accepted values. Hang on to the existing configuration file till the replacement passes this check.

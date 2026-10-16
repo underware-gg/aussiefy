@@ -1,0 +1,102 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "engine": "A",
+    "current": "B"
+  },
+  "evaluation_protocol": 2,
+  "scores": {
+    "engine": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 1,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "engine": {
+      "meaning": "\"A replacement may be offered, but the applicant is not required to accept it.\" All obligations, permissions, conditions, timelines and scope are preserved exactly.",
+      "sense": "\"Approval does not depend on whether the original packaging is available.\" No altered idiom introduces a wrong sense.",
+      "authenticity": "\"The applicant must provide the order number and a description of the fault.\" This is natural standard Australian policy language, with no forced vernacular.",
+      "register": "\"If that method is no longer available, the accounts team will contact the applicant to arrange an alternative.\" The whole eligible passage is unchanged; even a level-3 straight official treatment calls for everyday connecting prose.",
+      "tone": "\"Approved refunds will be paid to the original payment method within five working days.\" Maintains a clear, authoritative policy tone.",
+      "flow": "\"This policy applies to demonstration orders placed through the test store.\" The source's concise sentence structure remains readable.",
+      "variety": "\"A replacement may be offered\" No repeated slang or garnish tic; amount of transformation is assessed in register.",
+      "essence": "\"Requests for a refund must be submitted within 30 days of purchase.\" Remains unmistakably the same refund policy, including its defined scope."
+    },
+    "current": {
+      "meaning": "\"A replacement may be offered, but the applicant doesn't have to take it.\" Preserves optional replacement, mandatory submission/details, packaging independence, payment promise, contingency and scope.",
+      "sense": "\"Approval doesn't hinge on whether the original packaging is available.\" Hinge on accurately means depend on; sent in, give and sort out also fit their contexts.",
+      "authenticity": "\"the accounts team will get in touch with the applicant to sort out an alternative.\" Natural everyday Australian wording without theatrical slang.",
+      "register": "\"Requests for a refund must be sent in within 30 days of purchase.\" A measured level-3 everyday voice, constrained appropriately by straight official prose and no garnish.",
+      "tone": "\"Approved refunds will be paid to the original payment method within five working days.\" Keeps the firm policy promise and authoritative conditions.",
+      "flow": "\"The applicant must give the order number and a description of the fault.\" Simple spoken syntax fits the original sentence-by-sentence shape.",
+      "variety": "\"doesn't have to take it.\" Varies ordinary verbs and constructions without leaning on slang tics.",
+      "essence": "\"This policy applies to demonstration orders placed through the test store.\" Retains the same precise policy identity, order and scope."
+    }
+  },
+  "problems": {
+    "engine": [
+      {
+        "quote": "If that method is no longer available, the accounts team will contact the applicant to arrange an alternative.",
+        "original": "If that method is no longer available, the accounts team will contact the applicant to arrange an alternative.",
+        "severity": "major",
+        "why": "Register: representative of unchanged eligible prose across the policy. Everyday Australian connecting language is absent; preserving legal force does not require retaining every formal verb."
+      }
+    ],
+    "current": []
+  },
+  "summaries": {
+    "engine": "Exact and readable policy text, without the requested level-3 voice change.",
+    "current": "Faithful everyday Australian official prose, with all conditions and their force retained."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "engine",
+        "current"
+      ]
+    ],
+    "flow": [
+      [
+        "engine",
+        "current"
+      ]
+    ],
+    "variety": [
+      [
+        "engine",
+        "current"
+      ]
+    ],
+    "essence": [
+      [
+        "engine",
+        "current"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "engine"
+      ]
+    ]
+  }
+}

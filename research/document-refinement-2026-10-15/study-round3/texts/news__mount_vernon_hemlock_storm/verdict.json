@@ -1,0 +1,143 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "pre-fix-yarn": "B",
+    "dinkum-3": "C"
+  },
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 3,
+      "tone": 4,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"gusts reportedly up to 70 mph (about 110 kph)\" preserves the measurement and uncertainty; the historical dates, names and preservation plan remain intact.",
+      "sense": "\"copped it\" and \"bowled over\" both fit a tree lost to storm gusts.",
+      "authenticity": "\"Washington's own place\" and \"cos the first White House still wasn't finished\" sound natural in Australian speech.",
+      "register": "\"copped it\", \"bowled over\" and \"own place\" provide the moderate level-3 body voice, without added routines.",
+      "tone": "\"gathered up for preservation and special projects\" keeps the report attentive to the tree’s historical value.",
+      "flow": "\"That governor was no relation to the 42nd President Bill Clinton\" breaks a dense historical explanation into an easy spoken sentence.",
+      "variety": "\"copped it\", \"bowled over\" and \"come down lately\" vary the descriptions rather than repeating a stock tag.",
+      "essence": "\"delivered in a whisky barrel\" preserves the memorable detail and the article’s storm-to-history structure."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"As of yesterday\" and \"gusts reportedly up to 70 mph (about 110 kph)\" retain the timing and uncertainty, with the historical details complete.",
+      "sense": "\"took out a 227-year-old tree\" correctly describes the storm destroying it, while \"the mob that runs\" means estate officials.",
+      "authenticity": "\"the mob that runs the Mount Vernon estate\" and \"it turned up in a whisky barrel\" are plausible local phrasing.",
+      "register": "\"own place\", \"cos\" and \"no relation\" sustain a moderate spoken register matching level 3.",
+      "tone": "\"gathered up to be preserved and used for special projects\" retains the historical-news purpose without making light of people’s suffering.",
+      "flow": "\"The New York governor's no relation to the 42nd President Bill Clinton\" integrates the aside smoothly into the historical account.",
+      "variety": "\"took out\", \"came down\", \"turned up\" and \"go over\" vary the body expressions.",
+      "essence": "\"the one famous for the car-sized tunnel cut through its trunk\" keeps the distinctive closing comparison with other fallen historic trees."
+    },
+    "dinkum-3": {
+      "meaning": "\"with bits set aside for special projects\" adds a specific allocation of parts where the original only reports collection for preservation and projects.",
+      "sense": "\"went in back in 1791\" aptly means planted, and \"come a gutser\" fits the fallen trees.",
+      "authenticity": "\"Washington's own patch\" and \"as a pressie\" are idiomatic Australian choices.",
+      "register": "\"So get this.\" and \"no less\" add prohibited opening and tag garnish; the body also runs heavier than a restrained level 3.",
+      "tone": "\"come a gutser\" gives the historical loss a slightly comic bounce, although the main report remains informative.",
+      "flow": "\"The hemlock went in back in 1791, and it got knocked flat on Friday\" is easy to say and follow.",
+      "variety": "\"own patch\", \"pressie\" and \"come a gutser\" provide varied idiom without a recurring stock phrase.",
+      "essence": "\"delivered in a whisky barrel\" and \"the car-sized tunnel cut through its trunk\" preserve the article’s defining historical details."
+    }
+  },
+  "problems": {
+    "current": [],
+    "pre-fix-yarn": [],
+    "dinkum-3": [
+      {
+        "quote": "with bits set aside for special projects",
+        "original": "has been collected for preservation and special projects",
+        "severity": "minor",
+        "why": "The allocation of particular bits is an added operational detail."
+      },
+      {
+        "quote": "So get this.",
+        "original": "",
+        "severity": "major",
+        "why": "Adds a performance opener despite the effective contract disabling openings and all garnish; no less and And no show the same pattern."
+      },
+      {
+        "quote": "come a gutser",
+        "original": "recently fallen",
+        "severity": "minor",
+        "why": "The comic idiom makes the historic loss a little more flippant."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "Accurate, smooth, moderately Australian local reporting.",
+    "pre-fix-yarn": "A fluent and faithful level-3 retelling, inseparable in overall quality from A.",
+    "dinkum-3": "Natural and readable, but its added performance garnish conflicts with the contract and its colour slightly overstates the brief."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ],
+    "flow": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "overall": [
+      [
+        "current",
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ]
+  }
+}

@@ -19,18 +19,14 @@ from dataclasses import dataclass, field
 from typing import Callable, NamedTuple
 
 from . import morph, pos
-from .matcher import SLOT_MATCHERS, Match, Pattern, PatternIndex, is_name
+from .embed import Embedder, NgramEmbedder, similarity_scorer
+from .matcher import match_at, SLOT_MATCHERS, Match, Pattern, PatternIndex, is_name
 from .text import CLAUSE_BREAK, QUOTES, SENTENCE_END, Token
 
 DETERMINERS = {"a", "an", "the", "my", "your", "his", "her", "its", "our", "their", "this", "that", "these",
                "those", "some", "any", "no", "every", "each"}
 NOT_NOUNS = {"at", "of", "to", "for", "with", "in", "on", "and", "or", "but", "as", "than", "the", "a", "an",
              "enough", "about", "by", "from", "that", "if", "when", "so", "too"}
-# "great" before a noun mostly means big or eminent ("a great forest", "a great dearth", "ya great boofhead");
-# it means excellent before these, and anywhere predicative ("it was great")
-GREAT_GOOD_NOUNS = {"game", "games", "time", "times", "idea", "ideas", "job", "day", "days", "night", "bloke",
-                    "mate", "news", "effort", "fun", "party", "show", "result", "work", "feed", "meal", "view",
-                    "weather", "place", "spot", "choice", "move", "shot", "song", "movie", "film", "book", "yarn"}
 # adverbs that make a past participle an adjective: "long established", "well known"
 PARTICIPLE_ADVERBS = {"long", "well", "newly", "firmly", "recently", "once", "so-called", "ill", "badly"}
 CLAUSE_VERBS = {"am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had", "do", "does",
@@ -127,6 +123,8 @@ def _in_a_name(tokens: list[Token], start: int, end: int) -> bool:
     for k in range(start, end):
         if _capital(tokens, k) and not capital_is_positional(tokens, k) and (_capital(tokens, k - 1)
                                                                              or _capital(tokens, k + 1)):
+            if k > 0 and tokens[k - 1].norm in DETERMINERS and capital_is_positional(tokens, k - 1) and not _capital(tokens, k + 1):
+                continue
             return True
     return False
 
@@ -213,7 +211,8 @@ def predicate_context(tokens: list[Token], start: int) -> PredicateContext | Non
     return None
 
 
-def check_frame(m: Match, tokens: list[Token]) -> Detection | None:
+def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozenset[str]] | None = None,
+                tags: list[str] | None = None) -> Detection | None:
     p: Pattern = m.pattern
     det = Detection(m.start, m.end, p.concepts, p.frame, p.intensity,
                     "entry" if p.entry_id else "trigger", p.text, p.entry_id,
@@ -232,6 +231,11 @@ def check_frame(m: Match, tokens: list[Token]) -> Detection | None:
         det.captures.setdefault("agent", tokens[m.start - 1])
     if p.frame == "np" and m.end - m.start > 1 and first.norm in morph.POSSESSIVES:
         det.captures.setdefault("poss", first)   # "his wife": the possessive a "{poss} missus" keeps
+    noun_limits = (adjective_nouns or {}).get(first.norm)
+    next_is_noun = m.end < len(tokens) and (tags is not None and tags[m.end] in pos.NOUNS) \
+        and tokens[m.end].norm not in {"today", "tomorrow", "yesterday", "tonight"}
+    if p.frame == "predicate_adj" and noun_limits is not None and next_is_noun:
+        return None  # an attributive adjective must pass its noun-sense rule, even after a linking verb
     if p.frame == "predicate_adj":
         ctx = predicate_context(tokens, m.start)
         if ctx is None:
@@ -294,7 +298,7 @@ def check_frame(m: Match, tokens: list[Token]) -> Detection | None:
         attributive = nxt is not None and nxt.is_word and nxt.norm not in NOT_NOUNS
         if not attributive and predicate_context(tokens, m.start) is None:
             return None
-        if attributive and tokens[m.start].norm == "great" and nxt.norm not in GREAT_GOOD_NOUNS:
+        if attributive and noun_limits is not None and nxt.norm not in noun_limits:
             return None  # "a great forest", "a great dearth": size, not quality
     elif p.frame == "np":
         # a bare noun swap shouldn't split a compound we can't see ("sausage roll")
@@ -372,16 +376,46 @@ def _wrong_part_of_speech(m: Match, tokens: list[Token], tags: list[str]) -> boo
     return False
 
 
+FALLBACK_LENGTH_TOLERANCE = 2
+
+
+def _fallback_literal(pattern: Pattern) -> str:
+    return " ".join(sorted(e.values)[0] for e in pattern.elements if e.kind == "lit")
+
+
+def fallback_scorer(embedder: Embedder, patterns: list[Pattern]) -> Callable[[str], dict[int, float]]:
+    """Score mandatory, slot-free fallback patterns that can pass the detector's shape checks.
+
+    N-grams already use a sparse inverted index. Meaning models avoid dense vector comparisons against
+    patterns whose literal count or length the detector would reject afterwards.
+    """
+    if isinstance(embedder, NgramEmbedder):
+        return similarity_scorer(embedder, [p.text for p in patterns])
+    by_shape: dict[tuple[int, int], list[int]] = {}
+    for i, pattern in enumerate(patterns):
+        shape = (sum(e.kind == "lit" for e in pattern.elements), len(_fallback_literal(pattern)))
+        by_shape.setdefault(shape, []).append(i)
+
+    def score(query: str) -> dict[int, float]:
+        words = len(query.split())
+        indices = sorted(i for length in range(len(query) - FALLBACK_LENGTH_TOLERANCE,
+                                               len(query) + FALLBACK_LENGTH_TOLERANCE + 1)
+                         for i in by_shape.get((words, length), ()))
+        return {i: embedder.similarity(query, patterns[i].text) for i in indices}
+
+    return score
+
+
 def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dict[int, float]] | None = None,
            fallback_patterns: list[Pattern] | None = None, threshold: float = 0.72,
-           tags: list[str] | None = None) -> list[Detection]:
+           tags: list[str] | None = None, adjective_nouns: dict[str, frozenset[str]] | None = None) -> list[Detection]:
     """Every concept the triggers find in the sentence, frame-checked. With a scorer (embed.similarity_scorer over
     the fallback patterns' texts), a predicate after a linking verb that no trigger matched is compared with
     the fallback patterns by similarity ("he was exhaustedd")."""
     found: list[Detection] = []
     tags = tags if tags is not None else pos.tag([t.text for t in tokens])
     for m in index.find(tokens):
-        det = check_frame(m, tokens)
+        det = check_frame(m, tokens, adjective_nouns, tags)
         if det and not _in_a_name(tokens, det.start, det.end) and not _possessed(tokens, det) \
                 and not _wrong_part_of_speech(m, tokens, tags):
             found.append(det)
@@ -408,14 +442,18 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
                 for k in sorted(k for k, score in scores.items() if score >= threshold):   # pattern order breaks ties
                     # a misspelling has its trigger's shape: as many words ("working" is not "not working",
                     # "under the" is not "under the weather") and about its length ("less" is not "legless")
-                    if len(fallback_patterns[k].elements) != n or abs(len(fallback_patterns[k].text) - len(text)) > 2:
+                    p = fallback_patterns[k]
+                    matched = match_at(p, tokens, j, exact=False)
+                    literal = _fallback_literal(p)
+                    if (matched is None or matched.end != j + n
+                            or abs(len(literal) - len(text)) > FALLBACK_LENGTH_TOLERANCE):
                         continue
                     if best is None or scores[k] > best[0]:
                         best = (scores[k], n, fallback_patterns[k])
             if best:
                 score, n, p = best
                 m = Match(p, j, j + n)
-                det = check_frame(m, tokens)
+                det = check_frame(m, tokens, adjective_nouns, tags)
                 if det:
                     det.method = "embedding"
                     det.score = round(score, 3)

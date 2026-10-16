@@ -1,0 +1,763 @@
+{
+  "rubric_version": 3,
+  "evaluation_protocol": 2,
+  "evaluation_contract": {
+    "document_config": {
+      "formal_to_rework": false,
+      "person_swears": false,
+      "keep_quotes": true,
+      "guidance": "Official prose (terms, policy, minutes, a job ad, an encyclopedia entry): keep every obligation, condition, name and number exact, and quoted documents verbatim. Aussify the connecting prose; no swearing at anyone.",
+      "term_domains": [
+        "official"
+      ],
+      "command_context": false,
+      "dateline_context": false,
+      "check_length": true,
+      "garnish": [],
+      "openings": false,
+      "draft": true,
+      "keep_share": 0.6,
+      "max_length": 1.6,
+      "perform": false,
+      "embellishment_guidance": "Dinkum: retell it in a genuine Aussie voice. Rephrase freely so each sentence sounds said, not translated; the odd opener, connective or tag-on where a talker would use one; the original's points in its order. Colour hangs off what's there: no new scenes, asides or punchlines. Where the genre keeps its form exact (a notice, a doc, official prose), the voice goes into everything around what's kept: say the connecting prose the way a local would explain it to a mate, at the level's weight, not in the original's officialese with a word or two swapped. What's kept includes the force of what it says: an obligation, a decision, a finding or a stated aim keeps its verb's weight (\"we consider you responsible\" isn't \"we reckon\"; \"reaffirmed\" isn't \"doubled down\"; a goal isn't \"while they're at it\")."
+    },
+    "profile_config": {
+      "substitution": {
+        "lexical": 1.0,
+        "phrase": 1.0,
+        "idiom": 1.0
+      },
+      "frames": [
+        "np",
+        "adj",
+        "adv",
+        "interjection",
+        "imperative",
+        "predicate_adj",
+        "vp",
+        "clause"
+      ],
+      "garnish": {
+        "connective": 0.4,
+        "opener": 0.45,
+        "tag": 0.5,
+        "aside": 0.3,
+        "tail": 0.6,
+        "closer": 1.0,
+        "riff": 0.5
+      },
+      "max_garnish": {
+        "connective": 6,
+        "opener": 3,
+        "tag": 3,
+        "aside": 4,
+        "tail": 2,
+        "closer": 1,
+        "riff": 2
+      },
+      "garnish_gap": 1,
+      "garnish_per_sentence": 1,
+      "rewrite": {
+        "min_level": 3,
+        "min_words": 6,
+        "min_formal_words": 2,
+        "max_coverage": 0.1,
+        "formal_length": 7
+      },
+      "stack": 0.35,
+      "phonetic": 1.0,
+      "stretch": [
+        3,
+        6
+      ],
+      "swearing": {
+        "exclaim": 0.14,
+        "closer": 0.3,
+        "infix": 1.5,
+        "lean": 1.2
+      }
+    },
+    "embellishment": {
+      "name": "dinkum",
+      "guidance": "Dinkum: retell it in a genuine Aussie voice. Rephrase freely so each sentence sounds said, not translated; the odd opener, connective or tag-on where a talker would use one; the original's points in its order. Colour hangs off what's there: no new scenes, asides or punchlines. Where the genre keeps its form exact (a notice, a doc, official prose), the voice goes into everything around what's kept: say the connecting prose the way a local would explain it to a mate, at the level's weight, not in the original's officialese with a word or two swapped. What's kept includes the force of what it says: an obligation, a decision, a finding or a stated aim keeps its verb's weight (\"we consider you responsible\" isn't \"we reckon\"; \"reaffirmed\" isn't \"doubled down\"; a goal isn't \"while they're at it\")."
+    },
+    "markup": "mdx",
+    "markup_rules": "The original is a mdx document. Retell only its prose. Keep every code block, inline code span, tag and component (props included), import, front matter block, heading, link target, URL, table layout and list marker exactly as it is, character for character."
+  },
+  "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as vulgar, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.\n\nAdditional experiment contract (protocol 2): apply evaluation_contract to every anonymous candidate.\nThe level measures Australian vocabulary, idiomatic phrasing and cadence in eligible prose. Level 5 means\nbroad Australian prose; performance and added garnish depend on the effective embellishment/document\nsettings, not the level alone. Do not demand prohibited openings, insults, infixes or other garnish.\nEmpty garnish does not prohibit idiomatic paraphrase within the original propositions. Judge that eligible\nbody prose at the requested level; preserving facts does not justify leaving all connecting prose neutral.\nDo not penalise verbatim quotes, protected technical terms, markup or headings which the contract requires\nto remain exact. Bold prose labels are not automatically headings. Vulgarity is a cap, not a quota.\nDisabled behaviours remain disabled; nonzero profile probabilities are not exact output quotas.\nKeep the rubric's eight criteria and score each weakness once.\n",
+  "prompt": "BRIEF: level 5, vulgarity 2\n\nORIGINAL:\n---\ntitle: 'Use Cases'\ndescription:\n  'Tasks that fit an E3, how CRISP uses the Interfold for private voting, and the limits to check\n  before you design an E3 program.'\n---\n\nimport { LinkCards, LinkCard } from '@/components/ui'\n\n# Use Cases\n\nThis page describes tasks that fit an E3 and the limits that apply to them. It is for developers who\nwant to know if the Interfold fits their application. At the end, you can compare your task with a\nworking example and with the checks in [Limits to check](#limits-to-check).\n\n## What fits an E3\n\nAn E3 fits a task that has these properties:\n\n- Several independent parties contribute inputs that must stay private.\n- The application needs one result from all inputs, and the result can be public.\n- The result is a computation that BFV supports well, for example a sum, a count, or a tally.\n- No single operator is acceptable as the custodian of the inputs.\n- The application can wait for the E3 stages. An E3 does not give a real-time result.\n\n## Private voting (CRISP)\n\nCRISP (Coercion-Resistant Impartial Selection Protocol) is the reference application in\n`examples/CRISP`. It is a complete, working E3 program for secret ballots.\n\n| Part of the E3    | What CRISP does                                                                             |\n| ----------------- | ------------------------------------------------------------------------------------------- |\n| Request           | The CRISP command-line tool requests one E3 for each voting round.                          |\n| Inputs            | Each voter encrypts a ballot in the browser under the committee key.                        |\n| Input proof       | The client generates a Noir proof that the ballot is valid. `CRISPProgram.sol` verifies it. |\n| Data availability | The ciphertext bytes go to Avail. The program checks the VectorX receipt.                   |\n| Secure process    | An OpenVM program adds the encrypted ballots into an encrypted tally.                       |\n| Output            | The committee decrypts only the tally. Individual ballots stay encrypted.                   |\n\nCRISP has its own contracts, Noir circuits, a Rust coordination server, and a React client. Start\nwith the [CRISP introduction](/CRISP/introduction), then follow [Setup](/CRISP/setup) to run it.\n\n## Sealed-bid auctions and private markets\n\nBidders submit encrypted bids, and only the auction result is decrypted. This pattern matches the E3\nmodel. The limit is the computation. The template and CRISP use only homomorphic addition. Other\noperations cost more and use the limited noise budget of the BFV parameter set.\n\nBefore you build an auction, confirm that your secure process can compute the result within that\nbudget. A design can also decrypt an aggregate, for example the number of bids at each price level.\nThe contract can then compute the result from the aggregate. This design reveals the aggregate, but\nnot the individual bids.\n\n## Aggregate statistics over private data\n\nSeveral organizations can compute a total, a count, or a histogram over records that they do not\nshare. Each organization encrypts its values, and the secure process adds them. Only the aggregate\nis decrypted. This pattern uses the same addition as the default template, which sums all inputs.\n\n## Limits to check\n\nCheck these limits before you design an E3 program:\n\n- **The output is public.** The plaintext output goes on-chain. A small number of inputs can reveal\n  an individual value, for example a tally with one vote. The program must enforce a minimum input\n  count or other rules where this matters.\n- **The committee is the trust boundary.** T + 1 committee members that collude can decrypt any\n  ciphertext under the committee key. A larger committee raises T. On mainnet, only `Small` (T = 9)\n  can be requested at launch.\n- **Inputs need validation.** The E3 program decides which inputs to accept. Without an input proof,\n  a malformed ciphertext can corrupt the result or stop the E3.\n- **Time matters.** Committee setup, the input window, computation, and decryption each have a\n  deadline. The [E3 lifecycle](/learn/e3-lifecycle) page lists the values.\n- **Costs grow with the committee.** The fee pays for the committee work, and it grows with N. Use\n  `getE3Quote` to get the fee before you request.\n\n## Data protection\n\nThe design can help an application meet data-protection goals. No single operator holds a plaintext\ninput, and the committee decrypts only the output. The design does not by itself make an application\ncompliant with a regulation. The application owner is responsible for that assessment.\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='CRISP' href='/CRISP/introduction' icon='vote' tag='Example'>\n    The complete private voting application, from circuits to client.\n  </LinkCard>\n  <LinkCard title='Quick Start' href='/build/quick-start' icon='rocket' tag='Build'>\n    Make a project from the template and run a complete E3 on your computer.\n  </LinkCard>\n  <LinkCard title='Best practices' href='/build/best-practices' icon='shield' tag='Build'>\n    Design rules for secure E3 programs.\n  </LinkCard>\n</LinkCards>\n\nCANDIDATE A:\n---\ntitle: 'Use Cases'\ndescription:\n  'Tasks that fit an E3, how CRISP uses the Interfold for private voting, and the limits to check\n  before you design an E3 program.'\n---\n\nimport { LinkCards, LinkCard } from '@/components/ui'\n\n# Use Cases\n\nThis page spells out which tasks an E3 fits and the limits you'll need to keep an eye on. It's for developers\nsussing out whether the Interfold is a good fit for their application. By the end, you can see how your task\nstacks up against a working example and the checks in [Limits to check](#limits-to-check).\n\n## What fits an E3\n\nAn E3 fits the bill when all of this holds for your task:\n\n- Several independent parties chip in inputs that must stay private.\n- The application needs just one result from all the inputs, and it's all right for that result to be public.\n- The result comes from a computation BFV is good at, such as a sum, a count, or a tally.\n- No single operator is an acceptable custodian for the inputs.\n- The application can hang on through the E3 stages. You won't get a real-time result from an E3.\n\n## Private voting (CRISP)\n\nCRISP (Coercion-Resistant Impartial Selection Protocol), in\n`examples/CRISP`, is the reference application. It's the whole working E3 program for secret ballots.\n\n| Part of the E3    | What CRISP does                                                                             |\n| ----------------- | ------------------------------------------------------------------------------------------- |\n| Request           | The CRISP command-line tool puts in a request for one E3 per voting round.                  |\n| Inputs            | Each voter encrypts a ballot in the browser using the committee key.                        |\n| Input proof       | The client generates a Noir proof that the ballot is valid. `CRISPProgram.sol` verifies it. |\n| Data availability | The ciphertext bytes go to Avail. The program checks the VectorX receipt.                   |\n| Secure process    | An OpenVM program adds up the encrypted ballots to make an encrypted tally.                 |\n| Output            | The committee decrypts just the tally. Individual ballots stay encrypted.                   |\n\nCRISP comes with its own contracts, Noir circuits, a Rust coordination server, and a React client. Get going\nwith the [CRISP introduction](/CRISP/introduction), then work through [Setup](/CRISP/setup) to run it.\n\n## Sealed-bid auctions and private markets\n\nBidders put in encrypted bids, and only the auction result gets decrypted. That lines up with the E3\nmodel. The catch is what you can compute. The template and CRISP use only homomorphic addition. Other\noperations cost more and eat into the BFV parameter set's limited noise budget.\n\nBefore you get stuck into building an auction, make sure your secure process can compute the result without\nblowing that budget. Another way to go is to decrypt an aggregate, such as the number of bids at each price level.\nThe contract can then work out the result from that aggregate. That puts the aggregate out in the open while\nkeeping the individual bids under wraps.\n\n## Aggregate statistics over private data\n\nSeveral organisations can get a total, a count, or a histogram from records without handing those records\nround. Each organisation encrypts its values, and the secure process adds them up. Only the aggregate\ngets decrypted. It's the same addition the default template uses to sum all inputs.\n\n## Limits to check\n\nCheck these limits before you start designing an E3 program:\n\n- **The output is public.** The plaintext output goes on-chain. Having only a few inputs can give away\n  an individual value: a tally with one vote, for instance. Where that matters, the program must enforce a minimum input\n  count or other rules.\n- **The committee is the trust boundary.** If T + 1 committee members collude, they can decrypt any\n  ciphertext under the committee key. A bigger committee pushes T up. At mainnet launch, `Small` (T = 9)\n  is the only size you can request.\n- **Inputs need validation.** It's up to the E3 program which inputs get in. Without an input proof,\n  a malformed ciphertext can corrupt the result or bring the E3 to a halt.\n- **Time matters.** Committee setup, the input window, computation, and decryption each have their own\n  deadline to meet. You'll find the values on the [E3 lifecycle](/learn/e3-lifecycle) page.\n- **Costs grow with the committee.** The fee covers the committee's work, and it goes up with N. Find out\n  what you're up for with `getE3Quote` before putting in your request.\n\n## Data protection\n\nThe design can help an application meet its data-protection goals. No single operator holds a plaintext\ninput, and the committee decrypts only the output. This design alone doesn't get an application over the line\non compliance with a regulation. That assessment is the application owner's responsibility.\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='CRISP' href='/CRISP/introduction' icon='vote' tag='Example'>\n    The whole private voting application, from circuits right through to client.\n  </LinkCard>\n  <LinkCard title='Quick Start' href='/build/quick-start' icon='rocket' tag='Build'>\n    Set a project up from the template, then run a complete E3 on your computer.\n  </LinkCard>\n  <LinkCard title='Best practices' href='/build/best-practices' icon='shield' tag='Build'>\n    Rules to follow when you're designing secure E3 programs.\n  </LinkCard>\n</LinkCards>\n\nCANDIDATE B:\n---\ntitle: 'Use Cases'\ndescription:\n  'Tasks that fit an E3, how CRISP uses the Interfold for private voting, and the limits to check\n  before you design an E3 program.'\n---\n\nimport { LinkCards, LinkCard } from '@/components/ui'\n\n# Use Cases\n\nThis page runs ya through the jobs that suit an E3 and the limits that come with 'em. It's for\ndevelopers who want to know if the Interfold's the right fit for their application. Down the bottom,\nyou can stack yer job up against a working example and against the checks in [Limits to check](#limits-to-check).\n\n## What fits an E3\n\nAn E3 suits a job that ticks these boxes:\n\n- A few independent parties chip in inputs that have to stay private.\n- The application needs the one result out of all the inputs, and that result's right to be public.\n- The result's a calculation BFV handles well, say a sum, a count, or a tally.\n- Nobody's happy with any single operator lookin' after the inputs.\n- The application can hang about for the E3 stages. An E3 won't give ya a real-time result.\n\n## Private voting (CRISP)\n\nCRISP (Coercion-Resistant Impartial Selection Protocol) is the reference application in\n`examples/CRISP`. It's a full, working E3 program for secret ballots.\n\n| Part of the E3    | What CRISP does                                                                             |\n| ----------------- | ------------------------------------------------------------------------------------------- |\n| Request           | The CRISP command-line tool requests one E3 for each voting round.                          |\n| Inputs            | Each voter encrypts a ballot in the browser under the committee key.                        |\n| Input proof       | The client generates a Noir proof that the ballot is valid. `CRISPProgram.sol` verifies it. |\n| Data availability | The ciphertext bytes go to Avail. The program checks the VectorX receipt.                   |\n| Secure process    | An OpenVM program adds the encrypted ballots into an encrypted tally.                       |\n| Output            | The committee decrypts only the tally. Individual ballots stay encrypted.                   |\n\nCRISP's got its own contracts, Noir circuits, a Rust coordination server, and a React client. Kick off\nwith the [CRISP introduction](/CRISP/introduction), then follow [Setup](/CRISP/setup) to get it runnin'.\n\n## Sealed-bid auctions and private markets\n\nBidders put in encrypted bids, and only the auction result gets decrypted. That pattern lines up with\nthe E3 model. Where it comes unstuck is the computation. The template and CRISP only use homomorphic\naddition. Anything else costs more and chews through the limited noise budget of the BFV parameter set.\n\nBefore ya build an auction, make dead sure yer secure process can work out the result inside that\nbudget. A design can also decrypt an aggregate, say the number of bids at each price level. The\ncontract can then work out the result from the aggregate. That way the aggregate's out in the open,\nbut the individual bids aren't.\n\n## Aggregate statistics over private data\n\nA handful of organisations can work out a total, a count, or a histogram over records they don't\nshare with each other. Each organisation encrypts its values, and the secure process adds 'em up.\nOnly the aggregate gets decrypted. This pattern uses the same addition as the default template,\nwhich sums all the inputs.\n\n## Limits to check\n\nHave a squiz at these limits before ya design an E3 program:\n\n- **The output is public.** The plaintext output goes on-chain. With only a few inputs, someone can\n  suss out an individual value, say a tally with one vote in it. Where that matters, the program\n  must enforce a minimum input count or other rules.\n- **The committee is the trust boundary.** If T + 1 committee members get together on the sly, they can\n  decrypt any ciphertext under the committee key. A bigger committee pushes T up. On mainnet, only\n  `Small` (T = 9) can be requested at launch.\n- **Inputs need validation.** The E3 program decides which inputs it'll take. Without an input proof,\n  a dodgy ciphertext can stuff up the result or stop the E3 in its tracks.\n- **Time matters.** Committee setup, the input window, computation, and decryption each have their own\n  deadline. The [E3 lifecycle](/learn/e3-lifecycle) page lists the values.\n- **Costs grow with the committee.** The fee covers the committee's work, and it goes up with N. Use\n  `getE3Quote` to get the fee before ya put in a request.\n\n## Data protection\n\nThe design can give an application a leg-up on its data-protection goals. No single operator holds a\nplaintext input, and the committee only decrypts the output. But the design on its own doesn't make an\napplication compliant with a regulation. Sortin' out that assessment is the application owner's job.\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='CRISP' href='/CRISP/introduction' icon='vote' tag='Example'>\n    The whole private voting application, from circuits to client.\n  </LinkCard>\n  <LinkCard title='Quick Start' href='/build/quick-start' icon='rocket' tag='Build'>\n    Whip up a project from the template and run a full E3 on yer own computer.\n  </LinkCard>\n  <LinkCard title='Best practices' href='/build/best-practices' icon='shield' tag='Build'>\n    Design rules for E3 programs that are locked up tight.\n  </LinkCard>\n</LinkCards>\n\nCANDIDATE C:\n---\ntitle: 'Use Cases'\ndescription:\n  'Tasks that fit an E3, how CRISP uses the Interfold for private voting, and the limits to check\n  before you design an E3 program.'\n---\n\nimport { LinkCards, LinkCard } from '@/components/ui'\n\n# Use Cases\n\nSo, this page runs through the sorts of jobs an E3's good for, and the limits that come with 'em. It's for developers\ntryin' to work out whether the Interfold suits their application. By the end ya can hold yer own job up against a\nworking example and against the checks in [Limits to check](#limits-to-check).\n\n## What fits an E3\n\nAn E3's the go for a job that ticks these boxes:\n\n- A few independent parties each chip in inputs that have to stay private.\n- The application's after one result out of all the inputs, and it's fine for that result to be public.\n- The result's a computation BFV's good at, like a sum, a count, or a tally.\n- Ya can't have any one operator holdin' the lot.\n- The application can hang about while the E3 goes through its stages. Don't expect a real-time result out of an E3.\n\n## Private voting (CRISP)\n\nCRISP (Coercion-Resistant Impartial Selection Protocol) is the reference application, and it lives in\n`examples/CRISP`. It's a full E3 program for secret ballots, and it actually works.\n\n| Part of the E3    | What CRISP does                                                                             |\n| ----------------- | ------------------------------------------------------------------------------------------- |\n| Request           | The CRISP command-line tool requests one E3 for every votin' round.                         |\n| Inputs            | Each voter encrypts a ballot in the browser under the committee key.                        |\n| Input proof       | The client generates a Noir proof that the ballot is valid. `CRISPProgram.sol` verifies it. |\n| Data availability | The ciphertext bytes go off to Avail. The program checks the VectorX receipt.               |\n| Secure process    | An OpenVM program adds the encrypted ballots up into an encrypted tally.                    |\n| Output            | The committee decrypts only the tally. Every ballot on its own stays encrypted.             |\n\nCRISP comes with its own contracts, Noir circuits, a Rust coordination server, and a React client. Best place to start\nis the [CRISP introduction](/CRISP/introduction), then follow [Setup](/CRISP/setup) to get it runnin'.\n\n## Sealed-bid auctions and private markets\n\nBidders put in encrypted bids, and the only thing that gets decrypted is the auction result. That's right up the E3\nmodel's alley. Where ya hit the limit is the computation. The template and CRISP only use homomorphic addition, and\nanything else costs more and eats into the limited noise budget of the BFV parameter set.\n\nSo before ya build an auction, make sure yer secure process can actually get the result within that\nbudget. Another way to go is to decrypt an aggregate, say the number of bids at each price level,\nand then have the contract work out the result from the aggregate. That way the aggregate's out in the open, but\nthe individual bids aren't.\n\n## Aggregate statistics over private data\n\nA few organisations can work out a total, a count, or a histogram over records they don't\nshare with each other. Each organisation encrypts its values, the secure process adds 'em up, and only the aggregate\ngets decrypted. It's the same addition the default template uses, which just sums every input.\n\n## Limits to check\n\nRun yer eye over these limits before ya design an E3 program:\n\n- **The output is public.** The plaintext output goes on-chain. With only a handful of inputs, it can give away\n  an individual value: a tally with one vote, say. Where that matters, the program has to enforce a minimum input\n  count or other rules.\n- **The committee is the trust boundary.** If T + 1 committee members collude, they can decrypt any\n  ciphertext under the committee key. A bigger committee raises T. On mainnet, ya can only request `Small` (T = 9)\n  at launch.\n- **Inputs need validation.** It's the E3 program that decides which inputs it'll take. Without an input proof,\n  a malformed ciphertext can stuff up the result or bring the E3 to a halt.\n- **Time matters.** Committee setup, the input window, computation, and decryption each come with a\n  deadline. The [E3 lifecycle](/learn/e3-lifecycle) page has the values.\n- **Costs grow with the committee.** The fee covers the committee's work, and it goes up with N. Use\n  `getE3Quote` to find out the fee before ya request.\n\n## Data protection\n\nThe design can give an application a leg up on data-protection goals. No single operator ever holds a plaintext\ninput, and the committee only decrypts the output. But the design doesn't make an application\ncompliant with a regulation all on its own. That assessment's the application owner's job.\n\n## Next steps\n\n<LinkCards min={230}>\n  <LinkCard title='CRISP' href='/CRISP/introduction' icon='vote' tag='Example'>\n    The whole private voting application, from circuits to client.\n  </LinkCard>\n  <LinkCard title='Quick Start' href='/build/quick-start' icon='rocket' tag='Build'>\n    Make a project from the template and run a complete E3 on yer own computer.\n  </LinkCard>\n  <LinkCard title='Best practices' href='/build/best-practices' icon='shield' tag='Build'>\n    The design rules for secure E3 programs.\n  </LinkCard>\n</LinkCards>",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "candidates": {
+        "type": "object",
+        "properties": {
+          "A": {
+            "type": "object",
+            "properties": {
+              "scores": {
+                "type": "object",
+                "properties": {
+                  "meaning": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "sense": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "authenticity": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "register": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "tone": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "flow": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "variety": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "essence": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "meaning",
+                  "sense",
+                  "authenticity",
+                  "register",
+                  "tone",
+                  "flow",
+                  "variety",
+                  "essence"
+                ],
+                "additionalProperties": false
+              },
+              "problems": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quote": {
+                      "type": "string"
+                    },
+                    "original": {
+                      "type": "string"
+                    },
+                    "severity": {
+                      "type": "string",
+                      "enum": [
+                        "critical",
+                        "major",
+                        "minor"
+                      ]
+                    },
+                    "why": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "quote",
+                    "original",
+                    "severity",
+                    "why"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "summary": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "scores",
+              "problems",
+              "summary"
+            ],
+            "additionalProperties": false
+          },
+          "B": {
+            "type": "object",
+            "properties": {
+              "scores": {
+                "type": "object",
+                "properties": {
+                  "meaning": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "sense": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "authenticity": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "register": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "tone": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "flow": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "variety": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "essence": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "meaning",
+                  "sense",
+                  "authenticity",
+                  "register",
+                  "tone",
+                  "flow",
+                  "variety",
+                  "essence"
+                ],
+                "additionalProperties": false
+              },
+              "problems": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quote": {
+                      "type": "string"
+                    },
+                    "original": {
+                      "type": "string"
+                    },
+                    "severity": {
+                      "type": "string",
+                      "enum": [
+                        "critical",
+                        "major",
+                        "minor"
+                      ]
+                    },
+                    "why": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "quote",
+                    "original",
+                    "severity",
+                    "why"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "summary": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "scores",
+              "problems",
+              "summary"
+            ],
+            "additionalProperties": false
+          },
+          "C": {
+            "type": "object",
+            "properties": {
+              "scores": {
+                "type": "object",
+                "properties": {
+                  "meaning": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "sense": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "authenticity": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "register": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "tone": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "flow": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "variety": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "essence": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "meaning",
+                  "sense",
+                  "authenticity",
+                  "register",
+                  "tone",
+                  "flow",
+                  "variety",
+                  "essence"
+                ],
+                "additionalProperties": false
+              },
+              "problems": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quote": {
+                      "type": "string"
+                    },
+                    "original": {
+                      "type": "string"
+                    },
+                    "severity": {
+                      "type": "string",
+                      "enum": [
+                        "critical",
+                        "major",
+                        "minor"
+                      ]
+                    },
+                    "why": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "quote",
+                    "original",
+                    "severity",
+                    "why"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "summary": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "scores",
+              "problems",
+              "summary"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "A",
+          "B",
+          "C"
+        ],
+        "additionalProperties": false
+      },
+      "rankings": {
+        "type": "object",
+        "properties": {
+          "tone": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            }
+          },
+          "flow": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            }
+          },
+          "variety": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            }
+          },
+          "essence": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            }
+          },
+          "overall": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B",
+                  "C"
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "tone",
+          "flow",
+          "variety",
+          "essence",
+          "overall"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "candidates",
+      "rankings"
+    ],
+    "additionalProperties": false
+  }
+}

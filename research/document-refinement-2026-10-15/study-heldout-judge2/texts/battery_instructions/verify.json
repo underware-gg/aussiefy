@@ -1,0 +1,104 @@
+{
+  "ok": true,
+  "level": 4,
+  "level_name": "larrikin",
+  "vulgarity": 0,
+  "vulgarity_name": "nan",
+  "policy_warnings": [],
+  "profile_config": {
+    "substitution": {
+      "lexical": 0.85,
+      "phrase": 0.85,
+      "idiom": 0.9
+    },
+    "frames": [
+      "np",
+      "adj",
+      "adv",
+      "interjection",
+      "imperative",
+      "predicate_adj",
+      "vp",
+      "clause"
+    ],
+    "garnish": {
+      "connective": 0.2,
+      "opener": 0.2,
+      "tag": 0.3,
+      "aside": 0.0,
+      "tail": 0.3,
+      "closer": 0.0,
+      "riff": 0.0
+    },
+    "max_garnish": {
+      "connective": 99,
+      "opener": 1,
+      "tag": 2,
+      "aside": 99,
+      "tail": 1,
+      "closer": 0,
+      "riff": 1
+    },
+    "garnish_gap": 1,
+    "garnish_per_sentence": 1,
+    "rewrite": {
+      "min_level": 3,
+      "min_words": 6,
+      "min_formal_words": 2,
+      "max_coverage": 0.1,
+      "formal_length": 7
+    },
+    "stack": 0.0,
+    "phonetic": 0.5,
+    "stretch": [
+      3,
+      5
+    ],
+    "swearing": {
+      "exclaim": 0.0,
+      "closer": 0.0,
+      "infix": 0.0,
+      "lean": 1.0
+    }
+  },
+  "document_type": "instructions",
+  "document_type_source": "preset",
+  "genre": "instructions",
+  "genre_scores": {},
+  "document_config": {
+    "formal_to_rework": true,
+    "person_swears": false,
+    "keep_quotes": false,
+    "guidance": "Instructions or safety advice: keep every step, quantity, unit and warning exact and in order, and keep numbered and bulleted lists as lists. Aussify the words (servo, esky, bin, chemist) and the connecting prose; no insults aimed at the reader. Safety comes before colour: never make light of a hazard.",
+    "term_domains": [
+      "instructions"
+    ],
+    "command_context": true,
+    "dateline_context": false,
+    "check_length": true,
+    "garnish": [
+      "tail"
+    ],
+    "openings": false,
+    "draft": true,
+    "keep_share": 0.6,
+    "max_length": 1.6,
+    "perform": false,
+    "embellishment_guidance": "Dinkum: retell it in a genuine Aussie voice. Rephrase freely so each sentence sounds said, not translated; the odd opener, connective or tag-on where a talker would use one; the original's points in its order. Colour hangs off what's there: no new scenes, asides or punchlines. Where the genre keeps its form exact (a notice, a doc, official prose), the voice goes into everything around what's kept: say the connecting prose the way a local would explain it to a mate, at the level's weight, not in the original's officialese with a word or two swapped. What's kept includes the force of what it says: an obligation, a decision, a finding or a stated aim keeps its verb's weight (\"we consider you responsible\" isn't \"we reckon\"; \"reaffirmed\" isn't \"doubled down\"; a goal isn't \"while they're at it\")."
+  },
+  "document_overrides": {},
+  "counts": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0
+  },
+  "problems": [],
+  "metrics": {
+    "original_words": 82,
+    "translation_words": 96,
+    "sentences": 7,
+    "translation_sentences": 7,
+    "untouched_share": 0.0
+  },
+  "scope": "Deterministic checks: policy, spelling, facts, markup, sentence structure. Not judged: tone, flow, whether each swap took the right sense (use the judge for those)."
+}

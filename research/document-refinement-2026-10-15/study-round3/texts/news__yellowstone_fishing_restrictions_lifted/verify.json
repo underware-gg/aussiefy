@@ -1,0 +1,110 @@
+{
+  "ok": true,
+  "level": 5,
+  "level_name": "swaggie",
+  "vulgarity": 2,
+  "vulgarity_name": "uncle-bob",
+  "policy_warnings": [],
+  "profile_config": {
+    "substitution": {
+      "lexical": 1.0,
+      "phrase": 1.0,
+      "idiom": 1.0
+    },
+    "frames": [
+      "np",
+      "adj",
+      "adv",
+      "interjection",
+      "imperative",
+      "predicate_adj",
+      "vp",
+      "clause"
+    ],
+    "garnish": {
+      "connective": 0.4,
+      "opener": 0.45,
+      "tag": 0.5,
+      "aside": 0.3,
+      "tail": 0.6,
+      "closer": 1.0,
+      "riff": 0.5
+    },
+    "max_garnish": {
+      "connective": 6,
+      "opener": 3,
+      "tag": 3,
+      "aside": 4,
+      "tail": 2,
+      "closer": 1,
+      "riff": 2
+    },
+    "garnish_gap": 1,
+    "garnish_per_sentence": 1,
+    "rewrite": {
+      "min_level": 3,
+      "min_words": 6,
+      "min_formal_words": 2,
+      "max_coverage": 0.1,
+      "formal_length": 7
+    },
+    "stack": 0.35,
+    "phonetic": 1.0,
+    "stretch": [
+      3,
+      6
+    ],
+    "swearing": {
+      "exclaim": 0.14,
+      "closer": 0.3,
+      "infix": 1.5,
+      "lean": 1.2
+    }
+  },
+  "document_type": "news",
+  "document_type_source": "preset",
+  "genre": "news",
+  "genre_scores": {},
+  "document_config": {
+    "formal_to_rework": true,
+    "person_swears": false,
+    "keep_quotes": true,
+    "guidance": "News or a notice: a local reporter's Aussie. Keep every fact, name, number, date and quote; quoted speech and official statements stay as said. An obituary is respectful.",
+    "term_domains": [
+      "news"
+    ],
+    "command_context": false,
+    "dateline_context": true,
+    "check_length": true,
+    "garnish": [],
+    "openings": false,
+    "draft": true,
+    "keep_share": 0.6,
+    "max_length": 1.6,
+    "perform": false,
+    "embellishment_guidance": "Dinkum: retell it in a genuine Aussie voice. Rephrase freely so each sentence sounds said, not translated; the odd opener, connective or tag-on where a talker would use one; the original's points in its order. Colour hangs off what's there: no new scenes, asides or punchlines. Where the genre keeps its form exact (a notice, a doc, official prose), the voice goes into everything around what's kept: say the connecting prose the way a local would explain it to a mate, at the level's weight, not in the original's officialese with a word or two swapped. What's kept includes the force of what it says: an obligation, a decision, a finding or a stated aim keeps its verb's weight (\"we consider you responsible\" isn't \"we reckon\"; \"reaffirmed\" isn't \"doubled down\"; a goal isn't \"while they're at it\")."
+  },
+  "document_overrides": {},
+  "counts": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0
+  },
+  "problems": [
+    {
+      "severity": "info",
+      "kind": "untouched",
+      "phrase": "Update: Yellowstone lifts full closures for Firehole, Madison and Gibbon rivers",
+      "why": "left exactly as it was",
+      "sentence": 7
+    }
+  ],
+  "metrics": {
+    "original_words": 375,
+    "translation_words": 398,
+    "sentences": 21,
+    "translation_sentences": 23,
+    "untouched_share": 0.05
+  },
+  "scope": "Deterministic checks: policy, spelling, facts, markup, sentence structure. Not judged: tone, flow, whether each swap took the right sense (use the judge for those)."
+}

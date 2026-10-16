@@ -2,6 +2,30 @@ translation:
   level: 5
   vulgarity: dad
   seed: 0
+  embellishment: dinkum
+  document_type: general
+  document_config:
+    term_domains:
+    - technical
+    formal_to_rework: false
+    keep_quotes: true
+    person_swears: false
+    command_context: true
+    garnish:
+    - connective
+    - opener
+    - tag
+    profile:
+      garnish:
+        connective: 0.35
+        opener: 0.35
+        tag: 0.25
+      max_garnish:
+        connective: 10
+        opener: 6
+        tag: 4
+      garnish_gap: 2
+      stack: 0
 documents:
 - source: docs/plain/root/README.md
   output: README.md

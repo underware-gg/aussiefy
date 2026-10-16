@@ -1,0 +1,102 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "engine": "A",
+    "current": "B"
+  },
+  "evaluation_protocol": 2,
+  "scores": {
+    "engine": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 2,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "engine": {
+      "meaning": "\"A replacement may be offered, but the applicant is not required to accept it.\" preserves the optional replacement and lack of an acceptance duty; all deadlines, application requirements, packaging independence, payment fallback and test-store scope remain exact.",
+      "sense": "\"Approval does not depend on whether the original packaging is available.\" keeps its precise sense, with no misapplied idiom anywhere.",
+      "authenticity": "\"the accounts team will contact the applicant to arrange an alternative.\" is natural formal English an Australian could use, without a forced localism.",
+      "register": "\"the accounts team will contact the applicant to arrange an alternative.\" retains the original official wording even in eligible connecting prose, leaving the level-3 voice too light.",
+      "tone": "\"Approved refunds will be paid to the original payment method within five working days.\" keeps the measured authority and firm commitment of the original.",
+      "flow": "\"If that method is no longer available, the accounts team will contact the applicant to arrange an alternative.\" is clear, grammatical and easy to follow.",
+      "variety": "\"A replacement may be offered, but the applicant is not required to accept it.\" uses a contrasting clause among varied conditional and declarative sentences, without repetitive slang tics.",
+      "essence": "\"This policy applies to demonstration orders placed through the test store.\" keeps the specific limited policy scope and original rights-and-obligations structure."
+    },
+    "current": {
+      "meaning": "\"A replacement may be offered, but the applicant doesn't have to take it.\" preserves the optional offer and lack of an acceptance duty; all deadlines, requirements, packaging independence, fallback and test-store scope remain exact.",
+      "sense": "\"Approval doesn't hinge on whether the original packaging is available.\" accurately retains independence from packaging; sent in, take it and sort out also carry the right contextual senses.",
+      "authenticity": "\"the accounts team will get in touch with the applicant to sort out an alternative.\" is natural everyday Australian explanatory phrasing.",
+      "register": "\"Requests for a refund must be sent in within 30 days of purchase.\" gives eligible wording a moderate plain Australian voice, sustained by everyday paraphrases elsewhere without garnish or swearing.",
+      "tone": "\"Approved refunds will be paid to the original payment method within five working days.\" keeps the exact force of the policy commitment; the conversational wording elsewhere does not undermine authority.",
+      "flow": "\"A replacement may be offered, but the applicant doesn't have to take it.\" reads easily aloud and clearly separates the possible offer from the applicant's choice.",
+      "variety": "\"the accounts team will get in touch with the applicant to sort out an alternative.\" varies expression from sent in, give, hinge on and take it without leaning on repeated tags.",
+      "essence": "\"This policy applies to demonstration orders placed through the test store.\" retains the limited policy scope and the same ordered set of rights, conditions and commitments."
+    }
+  },
+  "problems": {
+    "engine": [
+      {
+        "quote": "If that method is no longer available, the accounts team will contact the applicant to arrange an alternative.",
+        "original": "If that method is no longer available, the accounts team will contact the applicant to arrange an alternative.",
+        "severity": "major",
+        "why": "Register: the original wording is unchanged, including connecting prose that could use everyday Australian phrasing while preserving the commitment. It falls short of the moderate level-3 request."
+      }
+    ],
+    "current": []
+  },
+  "summaries": {
+    "engine": "Exact policy fidelity and clear official tone, but no discernible Australian retelling.",
+    "current": "An appropriately moderate Australian policy retelling with every condition and commitment intact."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "engine",
+        "current"
+      ]
+    ],
+    "flow": [
+      [
+        "engine",
+        "current"
+      ]
+    ],
+    "variety": [
+      [
+        "engine",
+        "current"
+      ]
+    ],
+    "essence": [
+      [
+        "engine",
+        "current"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "engine"
+      ]
+    ]
+  }
+}

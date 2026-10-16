@@ -29,6 +29,7 @@ FLAGS = ("not_aussie", "slur", "dubious_meaning", "archaic", "fabricated", "unta
 TYPES = ("idiom", "garnish")
 CLASSES = ("lexical", "phrase", "idiom")
 PLACEMENTS = ("connective", "opener", "tag", "aside", "tail", "closer")
+GARNISH_KEYS = (*PLACEMENTS, "riff")   # rate and per-text-limit keys in level profiles
 GENRES = ("story", "personal", "news", "instructions", "technical", "official")   # genre.py reads a text as one
 # Sentence contexts a garnish entry may require (`when`); see context.sentence_contexts.
 CONTEXTS = ("narration", "dialogue", "question", "exclamation", "second_person", "opinion", "fragment",

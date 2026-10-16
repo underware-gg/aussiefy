@@ -1,0 +1,356 @@
+{
+  "kind": "exact-output-reuse-for-independent-judge-repeat",
+  "source_run": "study-heldout-judge1",
+  "source_output_sha256": "d4db057d6518d60ba84707b42bbd88f3119e56118c41428497843641a698c15a",
+  "source_writer_origin_sha256": "ce49acea660f48fab8bfc7873847fdfb184493070258800fbad9399665732833",
+  "source_writer_origin": {
+    "kind": "fresh",
+    "writer": "heldout_writer_b",
+    "fresh_context": true,
+    "source_inputs": [
+      "original.txt",
+      "brief.json",
+      "policy.json"
+    ],
+    "anchors_read": false,
+    "prior_retellings_read": false,
+    "prior_research_outputs_read": false,
+    "manifests_read": false,
+    "other_writers_read": false,
+    "scores_read": false,
+    "provenance": "Fresh writing subagent. Read this case original, full system/payload brief and exact policy; consulted shared retelling implementation, contributor instructions and the portable aussiefy skill for tool usage. No anchors, manifests, prior retelling content, other writer content or scores were read. Actual shared offline lookup, lint and accepted submit calls are recorded in tools.jsonl.",
+    "submitted_text": "candidate.strip()",
+    "accepted": true,
+    "additional_brief_calls": [
+      {
+        "step": "brief",
+        "args": {
+          "text": "Requests for a refund must be submitted within 30 days of purchase. The applicant must provide the order number and a description of the fault. Approval does not depend on whether the original packaging is available. A replacement may be offered, but the applicant is not required to accept it. Approved refunds will be paid to the original payment method within five working days. If that method is no longer available, the accounts team will contact the applicant to arrange an alternative. This policy applies to demonstration orders placed through the test store.\n",
+          "level": 3,
+          "vulgarity": 0,
+          "seed": 7,
+          "embellishment": "deadset",
+          "document_type": "official",
+          "document_config": {},
+          "markup": "text"
+        },
+        "result": {
+          "system": "You retell English as genuine Australian English using the supplied toolkit and brief.\n- Keep every event, fact, number, name, instruction and claim. Don't add plot, characters or scenes. Add a\n  talker's colour only as far as EMBELLISHMENT allows (and the style guide says how).\n- If OPENINGS are offered, open the way a talker would (not with \"Right, so\"); if none are, start with the\n  text.\n- DIFFICULT_SENTENCES are the ones the engine couldn't carry, where your writing adds most; a word in them the\n  GENRE says to keep (a term of art, a legal or scientific term) stays as it is.\n- In plain text a heading keeps its place and its shortness, and its words may be Aussified like any others; in\n  a Markdown or MDX document (MARKUP) headings stay exactly as they are. A US unit may carry the metric in\n  brackets (\"90°F (32°C)\"), never replace it.\n- Use lookup whenever you're unsure a phrase is genuinely Australian or what it means.\n- Run lint on your draft and fix every issue it reports.\n- The engine sometimes takes the wrong sense or part of speech (compare a phrase's `replaces` and `means`):\n  \"battlers\" for any \"people\", \"tucker\" in \"food colouring\", \"reckon\" for the noun \"figure\". Leave a wrong one\n  out and list it in submit's `declined` with a one-line reason. Never work a phrase in somewhere else just\n  to keep it.\n- Finish by calling submit with the complete text. If it's rejected, fix what it says and submit again.\n\nDOCUMENT_CONFIG is the effective behaviour contract and takes precedence over general craft and preset\nguidance. Use only the listed garnish placements; offer no talker's openings when openings is false. When\nkeep_quotes is true, preserve quoted wording exactly. When person_swears is false, do not replace neutral\npeople with swears. Keep terms protected by term_domains and datelines protected by dateline_context unchanged.\nRespect check_length/max_length and keep_share as configured. No optional Custom behaviour is implied by its\nembellishment label. Preserve every original fact and the selected markup regardless of the type.\n\nSTYLE GUIDE:\nVoice: Colourful Aussie: idioms where they fit naturally (flat out like a lizard drinking), easy to follow.\nLanguage: Clean: no swearing.\nCraft:\n- Use slang Australians actually say. It needn't be exclusively Australian, but nothing American and\n  nothing invented. If you're unsure, look it up; if it's not there and you're not sure, don't use it.\n- Translate meanings, not words. Each idiom brings its own grammar (\"he's extremely busy\" becomes\n  \"he's flat out like a lizard drinking\"; \"believing it impossible\" becomes \"reckoning it had Buckley's\").\n- Keep every fact, name and claim. Keep the original's structure and its famous lines where they still\n  work (\"of the people, by the people, for the people\"). Translate the register, not the content.\n- One opener or tag-on per sentence at most, and not on every sentence.\n- Localise where it helps the listener (Congress becomes Parliament House, a sidewalk a footpath, an ibis\n  a bin chicken) and reach for body slang and similes (noggin, ticker, deaf as a post).\n- Where the setting takes tag-ons (not deadset), they go where someone is being spoken to: dialogue,\n  questions, \"you\". In a story's narration, move it along with connectives instead (\"Anyway,\", \"Well,\",\n  \"Now,\", \"So\"). In a monologue or poem the speaker is talking to the listener, so \"mate\" aimed at them is\n  fine a few times in the whole piece.\n- At levels 4-5 people talk broader than narrators: dialogue gets the heaviest drawl (\"me porridge\", \"Oi!\").\n- Don't pile up synonyms (\"knackered, stuffed, done in\") and don't reuse the same slang. Vary it. The\n  exception is a deliberate pattern in the original, like the three bears' lines: keep each speaker's\n  phrasing consistent if the story's rhythm depends on it.\n- Australian spelling: honoured, colour, organise, grey, mum.\nHow Australians talk, beyond the words (use a few, not all):\n- Understate: soften praise and complaint with \"a bit\" and \"a bit of a\" (\"a bit warm\" at 45 degrees, \"a\n  bit of a worry\", \"a bit of a character\"). Deadpan beats gushing.\n- Hedge an opinion with \"reckon\": \"I reckon ...\", \"Reckon he's jealous\", or a trailing \", I reckon.\" Don't\n  stack it on a sentence that already says \"think\". Shrug with \"I s'pose\" and \"dunno\".\n- Leave details vague at the end: \"or something\", \"or whatever\", \"and that\", \"and stuff\".\n- Clip \"as ADJ as anything\" to \"ADJ as\" at the end of a clause (lazy as, keen as, boring as); once a\n  paragraph at most, and never on an adjective that already has an Aussie form.\n- Drop \"to\" before familiar places: \"down the beach\", \"up the shops\", \"over the road\", \"round Dave's\".\n- Soften a request with \"will ya?\" (\"Pass us the tongs, will ya?\"), on imperatives only; check with an echo\n  tag in casual form (\"haven't ya?\", \"isn't he?\").\n- In a yarn, report speech with \"goes\" in the present (\"and he goes, 'Mate, ...'\"). \"Yeah, nah\" means no;\n  \"nah, yeah\" means yes.\n- Vary how a piece opens. \"Right, so\" is the opener every model reaches for: the plan's openings (OPENINGS in\n  yarn mode) suggest a few for this text, or start straight in with the action.\n- \"but\" at the very end of a sentence (\"It was good, but.\") means \"though\"; only after a contrast.\nFrom the classic bush yarns :\n- Tag the subject back on for emphasis: \"He's a good bloke, is Davo\", \"Never get done, do they.\"\n- \"fair\" before a verb means \"really, completely\" (\"it fair knocked me flat\"), and \"a fair\" measures (\"a fair\n  way\", \"a fair bit\"). Not before an adjective.\n- Bring someone on with \"and who does she run into but ...\" / \"who should turn up but ...\".\n- Undercut rather than gush: end praise with a flat clause that takes some back, and let a narrator run\n  themselves down (\"like any mug would\") instead of boasting.\n- Old bush grammar (\"I seen\", \"them blokes what keeps\") is for a character's speech, rarely. Never Cockney\n  eye-dialect (wiv, orf, 'ere, lorst): it reads British, not Australian.\n- Everyday Australian choices: \"cos\" for because (not \"'cause\" or \"cuz\"), \"meant to\" over \"supposed to\",\n  \"mightn't\", \"keen on\" for wanting or liking, \"the odd\" for the occasional (\"the odd shower\"), and \"goes\"\n  to bring in speech in a yarn (\"and he goes, 'Crikey!'\").\n- In dialogue and yarns at higher levels, \"me\" for \"my\" and \"meself\" (\"all up meself\") are fine; never in\n  instructions or formal text.\n",
+          "payload": {
+            "ORIGINAL": "Requests for a refund must be submitted within 30 days of purchase. The applicant must provide the order number and a description of the fault. Approval does not depend on whether the original packaging is available. A replacement may be offered, but the applicant is not required to accept it. Approved refunds will be paid to the original payment method within five working days. If that method is no longer available, the accounts team will contact the applicant to arrange an alternative. This policy applies to demonstration orders placed through the test store.\n",
+            "LEVEL": 3,
+            "VULGARITY": 0,
+            "EMBELLISHMENT": {
+              "name": "deadset",
+              "guidance": "Deadset: tell it straight. Sentence for sentence, in the original's order and shape, every word that has an everyday Australian one taking it, at the level's weight. Add nothing: no openers, tag-ons, asides, reactions or closing lines."
+            },
+            "GENRE": {
+              "name": "official",
+              "guidance": "Official prose (terms, policy, minutes, a job ad, an encyclopedia entry): keep every obligation, condition, name and number exact, and quoted documents verbatim. Aussify the connecting prose; no swearing at anyone."
+            },
+            "DOCUMENT_CONFIG": {
+              "formal_to_rework": false,
+              "person_swears": false,
+              "keep_quotes": true,
+              "guidance": "Official prose (terms, policy, minutes, a job ad, an encyclopedia entry): keep every obligation, condition, name and number exact, and quoted documents verbatim. Aussify the connecting prose; no swearing at anyone.",
+              "term_domains": [
+                "official"
+              ],
+              "command_context": false,
+              "dateline_context": false,
+              "check_length": true,
+              "garnish": [],
+              "openings": false,
+              "draft": true,
+              "keep_share": 0.6,
+              "max_length": 1.3,
+              "perform": false,
+              "embellishment_guidance": "Deadset: tell it straight. Sentence for sentence, in the original's order and shape, every word that has an everyday Australian one taking it, at the level's weight. Add nothing: no openers, tag-ons, asides, reactions or closing lines."
+            },
+            "PROFILE_CONFIG": {
+              "substitution": {
+                "lexical": 0.7,
+                "phrase": 0.7,
+                "idiom": 0.6
+              },
+              "frames": [
+                "np",
+                "adj",
+                "adv",
+                "interjection",
+                "imperative",
+                "predicate_adj",
+                "vp",
+                "clause"
+              ],
+              "garnish": {
+                "connective": 0.0,
+                "opener": 0.0,
+                "tag": 0.0,
+                "aside": 0.0,
+                "tail": 0.0,
+                "closer": 0.0,
+                "riff": 0.0
+              },
+              "max_garnish": {
+                "connective": 99,
+                "opener": 2,
+                "tag": 2,
+                "aside": 99,
+                "tail": 99,
+                "closer": 1,
+                "riff": 1
+              },
+              "garnish_gap": 1,
+              "garnish_per_sentence": 1,
+              "rewrite": {
+                "min_level": 3,
+                "min_words": 6,
+                "min_formal_words": 2,
+                "max_coverage": 0.1,
+                "formal_length": 7
+              },
+              "stack": 0.0,
+              "phonetic": 0.0,
+              "stretch": [
+                3,
+                5
+              ],
+              "swearing": {
+                "exclaim": 0.0,
+                "closer": 0.0,
+                "infix": 0.0,
+                "lean": 1.0
+              }
+            },
+            "ENGINE_DRAFT": "Requests for a refund must be submitted within 30 days of purchase. The applicant must provide the order number and a description of the fault. Approval does not depend on whether the original packaging is available. A replacement may be offered, but the applicant is not required to accept it. Approved refunds will be paid to the original payment method within five working days. If that method is no longer available, the accounts team will contact the applicant to arrange an alternative. This policy applies to demonstration orders placed through the test store.\n",
+            "PLANNED_PHRASES": [],
+            "RIFFS": [],
+            "OPENINGS": [],
+            "DIFFICULT_SENTENCES": []
+          }
+        }
+      },
+      {
+        "step": "brief",
+        "args": {
+          "text": "Requests for a refund must be submitted within 30 days of purchase. The applicant must provide the order number and a description of the fault. Approval does not depend on whether the original packaging is available. A replacement may be offered, but the applicant is not required to accept it. Approved refunds will be paid to the original payment method within five working days. If that method is no longer available, the accounts team will contact the applicant to arrange an alternative. This policy applies to demonstration orders placed through the test store.\n",
+          "level": 3,
+          "vulgarity": 0,
+          "seed": 7,
+          "embellishment": "deadset",
+          "document_type": "official",
+          "document_config": {},
+          "markup": "text"
+        },
+        "result": {
+          "system": "You retell English as genuine Australian English using the supplied toolkit and brief.\n- Keep every event, fact, number, name, instruction and claim. Don't add plot, characters or scenes. Add a\n  talker's colour only as far as EMBELLISHMENT allows (and the style guide says how).\n- If OPENINGS are offered, open the way a talker would (not with \"Right, so\"); if none are, start with the\n  text.\n- DIFFICULT_SENTENCES are the ones the engine couldn't carry, where your writing adds most; a word in them the\n  GENRE says to keep (a term of art, a legal or scientific term) stays as it is.\n- In plain text a heading keeps its place and its shortness, and its words may be Aussified like any others; in\n  a Markdown or MDX document (MARKUP) headings stay exactly as they are. A US unit may carry the metric in\n  brackets (\"90°F (32°C)\"), never replace it.\n- Use lookup whenever you're unsure a phrase is genuinely Australian or what it means.\n- Run lint on your draft and fix every issue it reports.\n- The engine sometimes takes the wrong sense or part of speech (compare a phrase's `replaces` and `means`):\n  \"battlers\" for any \"people\", \"tucker\" in \"food colouring\", \"reckon\" for the noun \"figure\". Leave a wrong one\n  out and list it in submit's `declined` with a one-line reason. Never work a phrase in somewhere else just\n  to keep it.\n- Finish by calling submit with the complete text. If it's rejected, fix what it says and submit again.\n\nDOCUMENT_CONFIG is the effective behaviour contract and takes precedence over general craft and preset\nguidance. Use only the listed garnish placements; offer no talker's openings when openings is false. When\nkeep_quotes is true, preserve quoted wording exactly. When person_swears is false, do not replace neutral\npeople with swears. Keep terms protected by term_domains and datelines protected by dateline_context unchanged.\nRespect check_length/max_length and keep_share as configured. No optional Custom behaviour is implied by its\nembellishment label. Preserve every original fact and the selected markup regardless of the type.\n\nSTYLE GUIDE:\nVoice: Colourful Aussie: idioms where they fit naturally (flat out like a lizard drinking), easy to follow.\nLanguage: Clean: no swearing.\nCraft:\n- Use slang Australians actually say. It needn't be exclusively Australian, but nothing American and\n  nothing invented. If you're unsure, look it up; if it's not there and you're not sure, don't use it.\n- Translate meanings, not words. Each idiom brings its own grammar (\"he's extremely busy\" becomes\n  \"he's flat out like a lizard drinking\"; \"believing it impossible\" becomes \"reckoning it had Buckley's\").\n- Keep every fact, name and claim. Keep the original's structure and its famous lines where they still\n  work (\"of the people, by the people, for the people\"). Translate the register, not the content.\n- One opener or tag-on per sentence at most, and not on every sentence.\n- Localise where it helps the listener (Congress becomes Parliament House, a sidewalk a footpath, an ibis\n  a bin chicken) and reach for body slang and similes (noggin, ticker, deaf as a post).\n- Where the setting takes tag-ons (not deadset), they go where someone is being spoken to: dialogue,\n  questions, \"you\". In a story's narration, move it along with connectives instead (\"Anyway,\", \"Well,\",\n  \"Now,\", \"So\"). In a monologue or poem the speaker is talking to the listener, so \"mate\" aimed at them is\n  fine a few times in the whole piece.\n- At levels 4-5 people talk broader than narrators: dialogue gets the heaviest drawl (\"me porridge\", \"Oi!\").\n- Don't pile up synonyms (\"knackered, stuffed, done in\") and don't reuse the same slang. Vary it. The\n  exception is a deliberate pattern in the original, like the three bears' lines: keep each speaker's\n  phrasing consistent if the story's rhythm depends on it.\n- Australian spelling: honoured, colour, organise, grey, mum.\nHow Australians talk, beyond the words (use a few, not all):\n- Understate: soften praise and complaint with \"a bit\" and \"a bit of a\" (\"a bit warm\" at 45 degrees, \"a\n  bit of a worry\", \"a bit of a character\"). Deadpan beats gushing.\n- Hedge an opinion with \"reckon\": \"I reckon ...\", \"Reckon he's jealous\", or a trailing \", I reckon.\" Don't\n  stack it on a sentence that already says \"think\". Shrug with \"I s'pose\" and \"dunno\".\n- Leave details vague at the end: \"or something\", \"or whatever\", \"and that\", \"and stuff\".\n- Clip \"as ADJ as anything\" to \"ADJ as\" at the end of a clause (lazy as, keen as, boring as); once a\n  paragraph at most, and never on an adjective that already has an Aussie form.\n- Drop \"to\" before familiar places: \"down the beach\", \"up the shops\", \"over the road\", \"round Dave's\".\n- Soften a request with \"will ya?\" (\"Pass us the tongs, will ya?\"), on imperatives only; check with an echo\n  tag in casual form (\"haven't ya?\", \"isn't he?\").\n- In a yarn, report speech with \"goes\" in the present (\"and he goes, 'Mate, ...'\"). \"Yeah, nah\" means no;\n  \"nah, yeah\" means yes.\n- Vary how a piece opens. \"Right, so\" is the opener every model reaches for: the plan's openings (OPENINGS in\n  yarn mode) suggest a few for this text, or start straight in with the action.\n- \"but\" at the very end of a sentence (\"It was good, but.\") means \"though\"; only after a contrast.\nFrom the classic bush yarns :\n- Tag the subject back on for emphasis: \"He's a good bloke, is Davo\", \"Never get done, do they.\"\n- \"fair\" before a verb means \"really, completely\" (\"it fair knocked me flat\"), and \"a fair\" measures (\"a fair\n  way\", \"a fair bit\"). Not before an adjective.\n- Bring someone on with \"and who does she run into but ...\" / \"who should turn up but ...\".\n- Undercut rather than gush: end praise with a flat clause that takes some back, and let a narrator run\n  themselves down (\"like any mug would\") instead of boasting.\n- Old bush grammar (\"I seen\", \"them blokes what keeps\") is for a character's speech, rarely. Never Cockney\n  eye-dialect (wiv, orf, 'ere, lorst): it reads British, not Australian.\n- Everyday Australian choices: \"cos\" for because (not \"'cause\" or \"cuz\"), \"meant to\" over \"supposed to\",\n  \"mightn't\", \"keen on\" for wanting or liking, \"the odd\" for the occasional (\"the odd shower\"), and \"goes\"\n  to bring in speech in a yarn (\"and he goes, 'Crikey!'\").\n- In dialogue and yarns at higher levels, \"me\" for \"my\" and \"meself\" (\"all up meself\") are fine; never in\n  instructions or formal text.\n",
+          "payload": {
+            "ORIGINAL": "Requests for a refund must be submitted within 30 days of purchase. The applicant must provide the order number and a description of the fault. Approval does not depend on whether the original packaging is available. A replacement may be offered, but the applicant is not required to accept it. Approved refunds will be paid to the original payment method within five working days. If that method is no longer available, the accounts team will contact the applicant to arrange an alternative. This policy applies to demonstration orders placed through the test store.\n",
+            "LEVEL": 3,
+            "VULGARITY": 0,
+            "EMBELLISHMENT": {
+              "name": "deadset",
+              "guidance": "Deadset: tell it straight. Sentence for sentence, in the original's order and shape, every word that has an everyday Australian one taking it, at the level's weight. Add nothing: no openers, tag-ons, asides, reactions or closing lines."
+            },
+            "GENRE": {
+              "name": "official",
+              "guidance": "Official prose (terms, policy, minutes, a job ad, an encyclopedia entry): keep every obligation, condition, name and number exact, and quoted documents verbatim. Aussify the connecting prose; no swearing at anyone."
+            },
+            "DOCUMENT_CONFIG": {
+              "formal_to_rework": false,
+              "person_swears": false,
+              "keep_quotes": true,
+              "guidance": "Official prose (terms, policy, minutes, a job ad, an encyclopedia entry): keep every obligation, condition, name and number exact, and quoted documents verbatim. Aussify the connecting prose; no swearing at anyone.",
+              "term_domains": [
+                "official"
+              ],
+              "command_context": false,
+              "dateline_context": false,
+              "check_length": true,
+              "garnish": [],
+              "openings": false,
+              "draft": true,
+              "keep_share": 0.6,
+              "max_length": 1.3,
+              "perform": false,
+              "embellishment_guidance": "Deadset: tell it straight. Sentence for sentence, in the original's order and shape, every word that has an everyday Australian one taking it, at the level's weight. Add nothing: no openers, tag-ons, asides, reactions or closing lines."
+            },
+            "PROFILE_CONFIG": {
+              "substitution": {
+                "lexical": 0.7,
+                "phrase": 0.7,
+                "idiom": 0.6
+              },
+              "frames": [
+                "np",
+                "adj",
+                "adv",
+                "interjection",
+                "imperative",
+                "predicate_adj",
+                "vp",
+                "clause"
+              ],
+              "garnish": {
+                "connective": 0.0,
+                "opener": 0.0,
+                "tag": 0.0,
+                "aside": 0.0,
+                "tail": 0.0,
+                "closer": 0.0,
+                "riff": 0.0
+              },
+              "max_garnish": {
+                "connective": 99,
+                "opener": 2,
+                "tag": 2,
+                "aside": 99,
+                "tail": 99,
+                "closer": 1,
+                "riff": 1
+              },
+              "garnish_gap": 1,
+              "garnish_per_sentence": 1,
+              "rewrite": {
+                "min_level": 3,
+                "min_words": 6,
+                "min_formal_words": 2,
+                "max_coverage": 0.1,
+                "formal_length": 7
+              },
+              "stack": 0.0,
+              "phonetic": 0.0,
+              "stretch": [
+                3,
+                5
+              ],
+              "swearing": {
+                "exclaim": 0.0,
+                "closer": 0.0,
+                "infix": 0.0,
+                "lean": 1.0
+              }
+            },
+            "ENGINE_DRAFT": "Requests for a refund must be submitted within 30 days of purchase. The applicant must provide the order number and a description of the fault. Approval does not depend on whether the original packaging is available. A replacement may be offered, but the applicant is not required to accept it. Approved refunds will be paid to the original payment method within five working days. If that method is no longer available, the accounts team will contact the applicant to arrange an alternative. This policy applies to demonstration orders placed through the test store.\n",
+            "PLANNED_PHRASES": [],
+            "RIFFS": [],
+            "OPENINGS": [],
+            "DIFFICULT_SENTENCES": []
+          }
+        }
+      },
+      {
+        "step": "brief",
+        "args": {
+          "text": "Requests for a refund must be submitted within 30 days of purchase. The applicant must provide the order number and a description of the fault. Approval does not depend on whether the original packaging is available. A replacement may be offered, but the applicant is not required to accept it. Approved refunds will be paid to the original payment method within five working days. If that method is no longer available, the accounts team will contact the applicant to arrange an alternative. This policy applies to demonstration orders placed through the test store.\n",
+          "level": 3,
+          "vulgarity": 0,
+          "seed": 7,
+          "embellishment": "deadset",
+          "document_type": "official",
+          "document_config": {},
+          "markup": "text"
+        },
+        "result": {
+          "system": "You retell English as genuine Australian English using the supplied toolkit and brief.\n- Keep every event, fact, number, name, instruction and claim. Don't add plot, characters or scenes. Add a\n  talker's colour only as far as EMBELLISHMENT allows (and the style guide says how).\n- If OPENINGS are offered, open the way a talker would (not with \"Right, so\"); if none are, start with the\n  text.\n- DIFFICULT_SENTENCES are the ones the engine couldn't carry, where your writing adds most; a word in them the\n  GENRE says to keep (a term of art, a legal or scientific term) stays as it is.\n- In plain text a heading keeps its place and its shortness, and its words may be Aussified like any others; in\n  a Markdown or MDX document (MARKUP) headings stay exactly as they are. A US unit may carry the metric in\n  brackets (\"90°F (32°C)\"), never replace it.\n- Use lookup whenever you're unsure a phrase is genuinely Australian or what it means.\n- Run lint on your draft and fix every issue it reports.\n- The engine sometimes takes the wrong sense or part of speech (compare a phrase's `replaces` and `means`):\n  \"battlers\" for any \"people\", \"tucker\" in \"food colouring\", \"reckon\" for the noun \"figure\". Leave a wrong one\n  out and list it in submit's `declined` with a one-line reason. Never work a phrase in somewhere else just\n  to keep it.\n- Finish by calling submit with the complete text. If it's rejected, fix what it says and submit again.\n\nDOCUMENT_CONFIG is the effective behaviour contract and takes precedence over general craft and preset\nguidance. Use only the listed garnish placements; offer no talker's openings when openings is false. When\nkeep_quotes is true, preserve quoted wording exactly. When person_swears is false, do not replace neutral\npeople with swears. Keep terms protected by term_domains and datelines protected by dateline_context unchanged.\nRespect check_length/max_length and keep_share as configured. No optional Custom behaviour is implied by its\nembellishment label. Preserve every original fact and the selected markup regardless of the type.\n\nSTYLE GUIDE:\nVoice: Colourful Aussie: idioms where they fit naturally (flat out like a lizard drinking), easy to follow.\nLanguage: Clean: no swearing.\nCraft:\n- Use slang Australians actually say. It needn't be exclusively Australian, but nothing American and\n  nothing invented. If you're unsure, look it up; if it's not there and you're not sure, don't use it.\n- Translate meanings, not words. Each idiom brings its own grammar (\"he's extremely busy\" becomes\n  \"he's flat out like a lizard drinking\"; \"believing it impossible\" becomes \"reckoning it had Buckley's\").\n- Keep every fact, name and claim. Keep the original's structure and its famous lines where they still\n  work (\"of the people, by the people, for the people\"). Translate the register, not the content.\n- One opener or tag-on per sentence at most, and not on every sentence.\n- Localise where it helps the listener (Congress becomes Parliament House, a sidewalk a footpath, an ibis\n  a bin chicken) and reach for body slang and similes (noggin, ticker, deaf as a post).\n- Where the setting takes tag-ons (not deadset), they go where someone is being spoken to: dialogue,\n  questions, \"you\". In a story's narration, move it along with connectives instead (\"Anyway,\", \"Well,\",\n  \"Now,\", \"So\"). In a monologue or poem the speaker is talking to the listener, so \"mate\" aimed at them is\n  fine a few times in the whole piece.\n- At levels 4-5 people talk broader than narrators: dialogue gets the heaviest drawl (\"me porridge\", \"Oi!\").\n- Don't pile up synonyms (\"knackered, stuffed, done in\") and don't reuse the same slang. Vary it. The\n  exception is a deliberate pattern in the original, like the three bears' lines: keep each speaker's\n  phrasing consistent if the story's rhythm depends on it.\n- Australian spelling: honoured, colour, organise, grey, mum.\nHow Australians talk, beyond the words (use a few, not all):\n- Understate: soften praise and complaint with \"a bit\" and \"a bit of a\" (\"a bit warm\" at 45 degrees, \"a\n  bit of a worry\", \"a bit of a character\"). Deadpan beats gushing.\n- Hedge an opinion with \"reckon\": \"I reckon ...\", \"Reckon he's jealous\", or a trailing \", I reckon.\" Don't\n  stack it on a sentence that already says \"think\". Shrug with \"I s'pose\" and \"dunno\".\n- Leave details vague at the end: \"or something\", \"or whatever\", \"and that\", \"and stuff\".\n- Clip \"as ADJ as anything\" to \"ADJ as\" at the end of a clause (lazy as, keen as, boring as); once a\n  paragraph at most, and never on an adjective that already has an Aussie form.\n- Drop \"to\" before familiar places: \"down the beach\", \"up the shops\", \"over the road\", \"round Dave's\".\n- Soften a request with \"will ya?\" (\"Pass us the tongs, will ya?\"), on imperatives only; check with an echo\n  tag in casual form (\"haven't ya?\", \"isn't he?\").\n- In a yarn, report speech with \"goes\" in the present (\"and he goes, 'Mate, ...'\"). \"Yeah, nah\" means no;\n  \"nah, yeah\" means yes.\n- Vary how a piece opens. \"Right, so\" is the opener every model reaches for: the plan's openings (OPENINGS in\n  yarn mode) suggest a few for this text, or start straight in with the action.\n- \"but\" at the very end of a sentence (\"It was good, but.\") means \"though\"; only after a contrast.\nFrom the classic bush yarns :\n- Tag the subject back on for emphasis: \"He's a good bloke, is Davo\", \"Never get done, do they.\"\n- \"fair\" before a verb means \"really, completely\" (\"it fair knocked me flat\"), and \"a fair\" measures (\"a fair\n  way\", \"a fair bit\"). Not before an adjective.\n- Bring someone on with \"and who does she run into but ...\" / \"who should turn up but ...\".\n- Undercut rather than gush: end praise with a flat clause that takes some back, and let a narrator run\n  themselves down (\"like any mug would\") instead of boasting.\n- Old bush grammar (\"I seen\", \"them blokes what keeps\") is for a character's speech, rarely. Never Cockney\n  eye-dialect (wiv, orf, 'ere, lorst): it reads British, not Australian.\n- Everyday Australian choices: \"cos\" for because (not \"'cause\" or \"cuz\"), \"meant to\" over \"supposed to\",\n  \"mightn't\", \"keen on\" for wanting or liking, \"the odd\" for the occasional (\"the odd shower\"), and \"goes\"\n  to bring in speech in a yarn (\"and he goes, 'Crikey!'\").\n- In dialogue and yarns at higher levels, \"me\" for \"my\" and \"meself\" (\"all up meself\") are fine; never in\n  instructions or formal text.\n",
+          "payload": {
+            "ORIGINAL": "Requests for a refund must be submitted within 30 days of purchase. The applicant must provide the order number and a description of the fault. Approval does not depend on whether the original packaging is available. A replacement may be offered, but the applicant is not required to accept it. Approved refunds will be paid to the original payment method within five working days. If that method is no longer available, the accounts team will contact the applicant to arrange an alternative. This policy applies to demonstration orders placed through the test store.\n",
+            "LEVEL": 3,
+            "VULGARITY": 0,
+            "EMBELLISHMENT": {
+              "name": "deadset",
+              "guidance": "Deadset: tell it straight. Sentence for sentence, in the original's order and shape, every word that has an everyday Australian one taking it, at the level's weight. Add nothing: no openers, tag-ons, asides, reactions or closing lines."
+            },
+            "GENRE": {
+              "name": "official",
+              "guidance": "Official prose (terms, policy, minutes, a job ad, an encyclopedia entry): keep every obligation, condition, name and number exact, and quoted documents verbatim. Aussify the connecting prose; no swearing at anyone."
+            },
+            "DOCUMENT_CONFIG": {
+              "formal_to_rework": false,
+              "person_swears": false,
+              "keep_quotes": true,
+              "guidance": "Official prose (terms, policy, minutes, a job ad, an encyclopedia entry): keep every obligation, condition, name and number exact, and quoted documents verbatim. Aussify the connecting prose; no swearing at anyone.",
+              "term_domains": [
+                "official"
+              ],
+              "command_context": false,
+              "dateline_context": false,
+              "check_length": true,
+              "garnish": [],
+              "openings": false,
+              "draft": true,
+              "keep_share": 0.6,
+              "max_length": 1.3,
+              "perform": false,
+              "embellishment_guidance": "Deadset: tell it straight. Sentence for sentence, in the original's order and shape, every word that has an everyday Australian one taking it, at the level's weight. Add nothing: no openers, tag-ons, asides, reactions or closing lines."
+            },
+            "PROFILE_CONFIG": {
+              "substitution": {
+                "lexical": 0.7,
+                "phrase": 0.7,
+                "idiom": 0.6
+              },
+              "frames": [
+                "np",
+                "adj",
+                "adv",
+                "interjection",
+                "imperative",
+                "predicate_adj",
+                "vp",
+                "clause"
+              ],
+              "garnish": {
+                "connective": 0.0,
+                "opener": 0.0,
+                "tag": 0.0,
+                "aside": 0.0,
+                "tail": 0.0,
+                "closer": 0.0,
+                "riff": 0.0
+              },
+              "max_garnish": {
+                "connective": 99,
+                "opener": 2,
+                "tag": 2,
+                "aside": 99,
+                "tail": 99,
+                "closer": 1,
+                "riff": 1
+              },
+              "garnish_gap": 1,
+              "garnish_per_sentence": 1,
+              "rewrite": {
+                "min_level": 3,
+                "min_words": 6,
+                "min_formal_words": 2,
+                "max_coverage": 0.1,
+                "formal_length": 7
+              },
+              "stack": 0.0,
+              "phonetic": 0.0,
+              "stretch": [
+                3,
+                5
+              ],
+              "swearing": {
+                "exclaim": 0.0,
+                "closer": 0.0,
+                "infix": 0.0,
+                "lean": 1.0
+              }
+            },
+            "ENGINE_DRAFT": "Requests for a refund must be submitted within 30 days of purchase. The applicant must provide the order number and a description of the fault. Approval does not depend on whether the original packaging is available. A replacement may be offered, but the applicant is not required to accept it. Approved refunds will be paid to the original payment method within five working days. If that method is no longer available, the accounts team will contact the applicant to arrange an alternative. This policy applies to demonstration orders placed through the test store.\n",
+            "PLANNED_PHRASES": [],
+            "RIFFS": [],
+            "OPENINGS": [],
+            "DIFFICULT_SENTENCES": []
+          }
+        }
+      }
+    ],
+    "log_preparation": "Before packet issuance, root verified every brief call against frozen source/policy/brief and separated these construction calls from dispatch-tool replay. Actual calls/results are unchanged."
+  },
+  "provenance": "Root checked byte-identical original/brief/policy and copied the accepted output and actual dispatch log unchanged. The second study run canonically replays it before independent blind judging. No second writer or revision is claimed."
+}

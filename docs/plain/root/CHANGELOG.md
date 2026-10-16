@@ -5,6 +5,64 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-16
+
+- Carry the complete effective writing contract through agent/API judging and reference retelling, preserve
+  legacy judgement protocols, and add held-out repeat-judge evidence plus an attributed public-domain
+  Good Samaritan Bible passage.
+
+- Verify real optional SDK HTTP serialization offline, require Python 3.10/minimum-SDK and current-SDK
+  compatibility smoke checks before release CI, and consolidate duplicate toolkit contract tests.
+
+- Document the portable skill and MCP setup for both Claude Code and Codex; add `.agents/skills` discovery
+  alongside the existing Claude link. Keep agent-neutral retelling briefs, schemas, validation and dispatch
+  in `retelling.py`, with API-specific formats at the client edge and existing Python imports supported.
+- Verify cached yarns against current session/dictionary rules before reuse, and report malformed cache
+  records with their path. Preserve ordinary generation and deterministic fallback for stale replies.
+- Fix partial slang lookup for standard `-ing` spellings alongside dropped-g forms. Align the shared agent
+  workflow with verification before delivery and reconcile CLI options, MCP tools and research/licensing docs.
+
+- Remove duplicated ungated infix advice from guide/yarn prompts; swear-infix guidance now follows placement
+  permission and the effective multiplier, including zero. Retain both controlled retelling comparisons,
+  including the initial weak-register result and the contract-aware writer revision with remaining limits.
+- Preserve straight double-quoted documents across paragraph breaks, matching curly quotes. Translation,
+  lint, verification and yarn submission now share that recognition while retaining ordinary dialect checks.
+- Refine documentation flavour with explicit publication controls, exact quoted examples and neutral person
+  wording. Strict Markdown permits leading garnish at real sentence starts across inline boundaries, with
+  whole-sentence context and shared casing evidence; suffixes and riffs stay out of partial units.
+- Preserve stressed be-verbs in fronted predicates and comparisons; distinguish finite present-tense clauses
+  from noun, gerund, relative and subordinate fragments. Guard relative links, technical liberty and
+  everything-relative clauses from wrong-sense swaps. Decline uncertain-case prefixes and pin isolated cases.
+- Speed up semantic concept fallback by scoring only patterns that satisfy the existing token-count and
+  character-length rules, preserving exact scores, candidate order and complete translation results.
+
+- Tune request-local profile probabilities, frames, limits, spacing, drawl, swearing and rewrite thresholds
+  through `document_config.profile` on every document surface; expose complete reusable `profile_config`.
+  Omitted keys inherit dial defaults for both General and Custom. Combined garnish budgets/limits now cover
+  clean and swearing channels, and zero swear weighting excludes candidates even without clean alternatives.
+  Isolated behaviour tests cover flavour alongside technical and markup protection.
+
+- Share Markdown document choices, garnish limits and sentence spacing; prevent mid-sentence fragment openers and repeated per-unit closers.
+- Reconcile documentation and test indexes, verify Gettysburg wording provenance, and record the offline model baseline and independent retelling study.
+
+- Preserve concept metadata and hand edits when reapplying dictionary rounds; support explicit concept fixes, entryless guards and reviewed second senses.
+
+- Prevent adjacent-sentence reuse from producing yarn moved-phrase false warnings; keep broader fidelity alignment.
+- Read lint's drawl comparison from dictionary annotations, recognise known swaps in capitalised phrases and pin strict-preset/name behaviour.
+
+- Lookup recognises filled pronoun slots, confines inflection to grammatical heads and excludes unrelated
+  model suggestions after a complete slot parse. Negated model matches need a shared content anchor.
+
+- Fix attributive praise escaping through predicate frames, capitalised determiners hiding compound guards,
+  animal nouns being treated as people, and plural clothing conflicting with retained singular verbs.
+  Frame vocabulary is editable in `grammar.yaml`; similarity fallback enforces zero-width exclusions.
+
+- General is the default document type; detection is opt-in. Named presets and Custom accept the same exact
+  behaviour overrides through Python, CLI, MCP and yarn tools. Explicit values override presets, including
+  false and empty lists; Markdown protection remains independent.
+- Public docs use Swaggie/Dinkum/Dad with explicit technical-term protection and a shared notice linking to
+  each plain counterpart.
+
 ## [0.1.0] - 2026-10-15
 
 - First Underware release from a clean development baseline, with the complete pre-cutover history

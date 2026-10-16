@@ -1,0 +1,142 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "pre-fix-yarn": "B",
+    "dinkum-3": "C"
+  },
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 3,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 4,
+      "variety": 4,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"an 81-82 record, a 3.85 ERA, 1.223 WHIP, and 1,260 strikeouts in 1,470.2 innings\" retains the complete statistical line.",
+      "sense": "\"picked up All-Star selections\" correctly renders earning selections.",
+      "authenticity": "\"aged 20\" and \"stayed with the team\" are natural, unshowy Australian-compatible prose.",
+      "register": "\"announced on Monday that he was retiring from baseball at 35\" remains a plain news rewrite with less local vernacular than the level-2 brief invites.",
+      "tone": "\"a shoulder injury forced him out of a scheduled start\" maintains the sober sports-news account.",
+      "flow": "\"He made his MLB debut with the Braves in 2011, aged 20, and stayed with the team for his first nine seasons\" is clear and easy aloud.",
+      "variety": "\"mostly with\" and \"Across his MLB career\" vary the sentence transitions without verbal tics.",
+      "essence": "\"He spent the 2022 and 2025 seasons playing in the Mexican Baseball League\" preserves the career coda as well as the main retirement story."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"The call came two days after he was pulled from a scheduled start\" preserves the retirement timing and missed start, and the career figures remain intact.",
+      "sense": "\"a crook shoulder\" precisely fits the shoulder injury.",
+      "authenticity": "\"All up\" and \"had stints with\" sit naturally in Australian sports reporting.",
+      "register": "\"has called it a day on baseball\" supplies a light local conversational voice without swearing or overplaying level 2.",
+      "tone": "\"Before he hung up the glove\" keeps a respectful retirement-news tone while using a sporting idiom.",
+      "flow": "\"mostly with the Atlanta Braves, though he also had stints with\" joins the club history smoothly.",
+      "variety": "\"called it a day\", \"crook shoulder\" and \"knock off\" offer different, apt idioms without leaning on one.",
+      "essence": "\"picking up All-Star selections in 2014 and 2016\" keeps the achievements and career arc that make this particular retirement story distinctive."
+    },
+    "dinkum-3": {
+      "meaning": "\"the 2022 and 2025 seasons over in the Mexican Baseball League\" keeps both later seasons, with the earlier career details and figures also present.",
+      "sense": "\"turned out for the Los Angeles Angels\" correctly uses a sporting idiom for playing for a club.",
+      "authenticity": "\"a crook shoulder saw him scratched\" is credible local sporting language.",
+      "register": "\"All up\" and \"along the way\" keep the requested modest conversational Australian weight and no vulgarity.",
+      "tone": "\"has called time on his baseball career\" retains the straightforward retirement-news tone.",
+      "flow": "\"Before he called it\" is a slightly clipped, vague transition, although the rest reads readily.",
+      "variety": "\"has called time\" followed by \"Before he called it\" unnecessarily returns to the same retirement expression.",
+      "essence": "\"stuck with them for his first nine seasons\" maintains the long Braves tenure at the centre of the career account."
+    }
+  },
+  "problems": {
+    "current": [
+      {
+        "quote": "announced on Monday that he was retiring from baseball at 35",
+        "original": "announced his retirement from baseball on Monday, at the age of 35",
+        "severity": "minor",
+        "why": "The text is almost wholly plain journalistic English, leaving the requested light Australian vernacular faint."
+      }
+    ],
+    "pre-fix-yarn": [],
+    "dinkum-3": [
+      {
+        "quote": "Before he called it",
+        "original": "before announcing his retirement",
+        "severity": "minor",
+        "why": "The abbreviated expression is a less clear transition and echoes called time in the opening."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "Accurate, restrained and fluent sports reporting, with too little vernacular even for this light-touch brief.",
+    "pre-fix-yarn": "A complete, fluent light Australian retelling with well-chosen sporting language and no substantive problems.",
+    "dinkum-3": "Faithful and naturally Australian at the requested light level; a clipped repeated retirement phrase makes it slightly less polished than B."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "flow": [
+      [
+        "current",
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "overall": [
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "current"
+      ]
+    ]
+  }
+}

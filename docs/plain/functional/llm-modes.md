@@ -1,7 +1,7 @@
 # LLM modes
 
-Three optional modes hand some of the writing to Claude. Each one keeps the deterministic engine's output as
-its fallback, so a failure never loses the translation: see
+The [shared retelling harness](toolkit.md) is agent-neutral. This page covers the optional built-in API
+client and its three convenience modes. Each keeps the deterministic engine's output as its fallback: see
 [DD-009](../../architecture/decisions/dd-009-llm-output-accepted-only-when-checked.md). All three need the `llm`
 extra and an `ANTHROPIC_API_KEY` (or an `ant auth login` profile), and use `claude-opus-5-5` unless
 `--model` (or `model=`) says otherwise. How to run them is in the
@@ -63,15 +63,23 @@ style guide, uses `lookup` and `lint` as tools, and hands in the result with `su
 only if:
 
 - the lint passes,
-- most planned phrases survive (a planned phrase the agent declines, with a reason, counts as kept, up to
-  half the plan), and
-- the length is sane.
+- the effective `keep_share` of undeclined planned phrases survives when the original plan has at least four
+  distinct phrases; each decline must name a planned phrase and supply a reason, and
+- configured length checks pass when `check_length` is enabled.
+
+General/Deadset/Dinkum normally require a 0.6 share; Troppo and bare Custom use zero. A zero share disables
+retention and moved-phrase checks. Exact `document_config` overrides apply to every preset, including
+`keep_share`, `check_length` and `max_length`. Lint issues, selected factual/style checks and markup integrity
+remain enforced. An engine draft appears in the brief only when the effective `draft` setting enables it.
 
 Otherwise Claude gets the reasons and tries again, for up to 12 turns. If nothing passes, or the API is
 unavailable, the deterministic draft stands. Accepted yarns are cached in `$AUSSIEFY_HOME/cache/yarn/`
 (default `~/.aussiefy/cache/yarn/`), keyed by everything that decides the reply, so a run can be repeated
 offline. `--no-cache` (Python: `cache=False`) bypasses reading and writing; `cache_dir` overrides the
-Python cache location. Yarn also uses API prompt caching for the shared brief and growing conversation;
+Python cache location. Cached yarns pass the same validation against the current session and dictionary
+before reuse; an old reply that no longer passes triggers a fresh attempt and the ordinary draft fallback
+if no new reply is accepted. Malformed cache records name the file to delete and exit 2.
+Yarn also uses API prompt caching for the shared brief and growing conversation;
 this reduces repeated prompt processing and is separate from the on-disk accepted-result cache.
 
 Yarn mode can do what rules can't (the present tense, short beats, restructured dialogue) while the dictionary

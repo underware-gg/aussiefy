@@ -1,0 +1,143 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "pre-fix-yarn": "B",
+    "dinkum-3": "C"
+  },
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"with 925mb temperatures around 10C cooler than Wednesday\" retains the thermal change; amounts, timing, uncertainty and places also survive.",
+      "sense": "\"amounts closer to an inch are on the cards\" correctly expresses a possibility.",
+      "authenticity": "\"there won’t be much in them\" and \"won’t hang about all weekend\" are natural local phrasing.",
+      "register": "\"As high pressure settles in further into Thursday\" leaves some eligible connecting prose neutral; \"a job getting out of the 40s\" gives a moderate rather than consistently broad level-4 voice.",
+      "tone": "\"we can’t rule out a morning flurry or shower\" keeps the measured forecast caution.",
+      "flow": "\"The finer details—just when the rain turns up and clears off—are still a bit up in the air\" integrates explanation smoothly.",
+      "variety": "\"few and far between\", \"on the cards\" and \"a cold one\" vary the phrasing without a dominant tic.",
+      "essence": "\"The tighter gradient and CAA, helping steepen lapse rates\" preserves the distinctive technical reasoning and forecast progression."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"the chance of heavy rain doing any real damage is pretty slim\" narrows impacts to real damage and makes the limited-instability inference stronger; other forecast details are retained.",
+      "sense": "\"a warm autumn day\" and \"the odd isolated shower\" carry the intended senses.",
+      "authenticity": "\"in a fair few spots\" and \"might only just scrape\" sound like ordinary Australian speech.",
+      "register": "\"you'll cop a light shower/sprinkle\" and \"Gusty nor'westers\" give the eligible prose a sustained level-4 weight without prohibited swearing.",
+      "tone": "\"a morning flurry or shower can`t be ruled out\" preserves uncertainty and the forecasting purpose, despite the colourful cold description.",
+      "flow": "\"How much mixing there'll be, and how strong the LLJ gets, is still a bit up in the air\" reads naturally around technical terms.",
+      "variety": "\"on the cards\", \"barrels across\" and \"brass monkeys\" provide varied colouring.",
+      "essence": "\"The tighter gradient and CAA helping steepen lapse rates\" retains the technical forecast rather than reducing it to a generic weather yarn."
+    },
+    "dinkum-3": {
+      "meaning": "\"a bit cool for this time of year\" and \"a bit on the cool side for this time of year\" change seasonably cool into cooler than seasonal expectations.",
+      "sense": "\"a few spits at most\" correctly renders a sprinkle; \"rocks up\" correctly renders arrival.",
+      "authenticity": "\"Tops'll likely battle to get out of the 40s\" gives a convincing local weather cadence.",
+      "register": "\"in a fair few spots\", \"Best bet\" and \"a cold one\" sustain broad conversational level-4 body prose without forcing garnish.",
+      "tone": "\"a morning flurry or shower can't be ruled out\" keeps the forecast caution and public-information purpose.",
+      "flow": "\"Put that westerly, downslope flow together with 925mb temperatures\" smoothly links technical reasoning in speech.",
+      "variety": "\"few spits\", \"lobs in\" and \"good odds\" vary the idiom well.",
+      "essence": "\"RH fields show leftover moisture in the cyclonic flow pattern\" retains the diagnostic detail and original order."
+    }
+  },
+  "problems": {
+    "current": [
+      {
+        "quote": "As high pressure settles in further into Thursday",
+        "original": "As high pressure settles in further into Thursday",
+        "severity": "minor",
+        "why": "Representative of some neutral connecting prose remaining alongside the conversational rewrite, making the body slightly light for level 4."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "the chance of heavy rain doing any real damage is pretty slim",
+        "original": "thus minimizing the potential for heavy rain impacts",
+        "severity": "minor",
+        "why": "Impacts include more than real damage; pretty slim is also a stronger likelihood judgment than the stated minimisation."
+      }
+    ],
+    "dinkum-3": [
+      {
+        "quote": "a bit cool for this time of year",
+        "original": "seasonably cool temperatures",
+        "severity": "major",
+        "why": "Seasonably means normal for the season, not unusually cool; the change recurs in the Thursday discussion."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "Accurate, fluent and professionally cautious; slightly restrained against the requested broad voice.",
+    "pre-fix-yarn": "Broad, natural forecast retelling with one slightly stronger and narrower impact claim.",
+    "dinkum-3": "Natural and thorough, but repeatedly changes the seasonal temperature comparison."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "flow": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "overall": [
+      [
+        "current",
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ]
+  }
+}

@@ -180,7 +180,7 @@ def test_person_idioms_need_a_person(translator):
 
 
 def test_level_five_garnish_and_phonetics(translator):
-    r = translator.translate(RANT, level=5, seed=3)
+    r = translator.translate(RANT, level=5, seed=3, embellishment="troppo")
     assert r.garnish and r.phonetic
     closer = [g for g in r.garnish if g.placement == "closer"]
     assert closer and closer[0].text
@@ -357,18 +357,18 @@ def test_asides_only_at_chant_stanza_ends_and_after_questions(translator):
     chant = "\n\n".join(["Moloch! Filth! Ugliness! Dollars! Moloch the loveless! Moloch the prison!"] * 4)
     asides = []
     for seed in range(20):
-        r = translator.translate(chant, level=5, seed=seed)
+        r = translator.translate(chant, level=5, seed=seed, embellishment="troppo")
         asides += [g for g in r.garnish if g.placement == "aside" and g.entry_id]
         assert not any(g.placement == "opener" and g.entry_id for g in r.garnish)   # openers break a chant
     assert asides and all(g.sentence % 6 == 5 for g in asides)   # the last line of a stanza
     story = ("The dog ran down the road. The cat sat on the fence. The farmer chased the dog. "
              "The rain came down hard. \"Get back here!\" he yelled. The dog hid under the shed.")
     for seed in range(20):
-        assert not any(g.placement == "aside" and g.entry_id for g in translator.translate(story, level=5, seed=seed).garnish)
+        assert not any(g.placement == "aside" and g.entry_id for g in translator.translate(story, level=5, seed=seed, embellishment="troppo").garnish)
     # level 4 has no asides of its own; a sweary one (the vulgarity's) still keeps to stanza ends
     assert not any(g.placement == "aside" for s in range(10)
-                   for g in translator.translate(chant, level=4, vulgarity="nan", seed=s).garnish)
-    sweary = [g for s in range(10) for g in translator.translate(chant, level=4, seed=s).garnish
+                   for g in translator.translate(chant, level=4, vulgarity="nan", seed=s, embellishment="troppo").garnish)
+    sweary = [g for s in range(10) for g in translator.translate(chant, level=4, seed=s, embellishment="troppo").garnish
               if g.placement == "aside" and g.entry_id]
     assert all(g.sentence % 6 == 5 and translator.dictionary.entries[g.entry_id].vulgarity for g in sweary)
 
@@ -457,7 +457,7 @@ def test_tag_after_a_closing_quote_is_judged_on_the_narration():
     text = ('"O you fool," said she, "then we must all four die of hunger; you may as well plane the planks for '
             'our coffins,"--and she left him no peace until he consented.')
     for seed in range(12):
-        out = tr.translate(text, level=5, seed=seed).text
+        out = tr.translate(text, level=5, seed=seed, embellishment="troppo").text
         assert not any(out.rstrip().split(".")[0].endswith(t) for t in (", ya drongo", ", mate", ", ya mug"))
     assert "action_end" in sentence_contexts(tokenize("And she left him no peace until he consented."))
     for t in ("His only ambition was to be always well dressed.", "She knocked, and nobody answered.",

@@ -262,3 +262,11 @@ entries, 12,151 pairs). A release run with the shipped recipe (`reports/trials/1
 | (1.2.0-rc1) | 2026-10-11 | **not released**: retrained on the gap-fill dictionary; blocked by the reference gate (rolling in cash, under the weather, a good mate of mine) and real-lookup regressions | 0.30 / 0.66 / 0.28; opposites offered 0.06 (larger dictionary: not comparable with the rows above) | 27/29 |
 | 1.2.0 | 2026-10-11 | the gap-fill dictionary (681 entries, 353 concepts), WordNet synonyms (first sense, 6 per trigger), a 0.7 / 0.3 blend of tuned and distilled vectors, wrong senses pushed from glosses too, and five glosses no longer using "great" for excellent. Gap benchmark: right top-1 **0.37**, filled right 0.23, filled wrong 0.09, everyday filled 0.04 (rc1: 0.30 / 0.09 / 0.16) | 0.26 / 0.62 / 0.34; opposites offered 0.09 | 29/29 (and "having a chinwag" fixed); evaluation-run model 27/29 |
 | (1.3.0-trial) | 2026-10-11 | **not released**: retrained on the classics dictionary (893 entries, 493 concepts), with and without `trigger_concepts: first`; blocked by "girl" ranking WOMAN first | 0.25 / 0.57 / 0.35 (first: 0.27 / 0.56 / 0.36); gap right@1 0.42 (first: 0.37) | 29/30 (both) |
+
+## Maintenance measurement, 2026-10-15
+
+The [maintenance check](../research/maintenance-check-2026-10-15/README.md) reruns 1.2.0 against the current
+dictionary: 33/33 required references pass and all 16 tracked failures remain. It records raw semantic checks and
+current toolkit queries separately, with model/reference/dictionary hashes. No weights were trained or
+exported. Default automatic gap filling remains off; its current benchmark precision is below the 90% bar.
+A fresh writer/independent-judge Dinkum comparison is pinned but unrun. Existing version reports remain immutable.

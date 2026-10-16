@@ -1,0 +1,169 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "pre-fix-yarn": "A",
+    "dinkum-3": "B",
+    "current": "C"
+  },
+  "scores": {
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 5,
+      "sense": 4,
+      "authenticity": 5,
+      "register": 3,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 4,
+      "register": 2,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "pre-fix-yarn": {
+      "meaning": "\"approval (each time) from Legal in writing\" and \"report them (each time) to Legal in writing\" retain the distinct outgoing and incoming requirements; \"And not just for GitHub\" drops a qualification about liability.",
+      "sense": "\"shouting a prospective customer and his family a first class trip\" correctly uses shout for paying another person's costs.",
+      "authenticity": "\"your mate’s daughter a gig as an intern\" and \"You might cop a few years\" are natural Australian speech.",
+      "register": "\"small potatoes\", \"worth heaps\" and \"shouting\" make the text a little more colloquial than the light level-2 brief, though it remains clean and measured.",
+      "tone": "\"FINES and JAIL\" and \"it’s the trying that counts\" keep the original's emphatic, lightly humorous warning.",
+      "flow": "\"Note down who got the gift and what it was for in the notes\" is clear, and the lists remain easy to follow aloud.",
+      "variety": "\"pick up the bill\", \"pull strings\", \"fair bit\" and \"cop\" vary the idiom across the policy.",
+      "essence": "\"All of the above goes for _taking_ bribes too\" preserves the policy's two-way scope as well as the Yoda punchline."
+    },
+    "dinkum-3": {
+      "meaning": "\"Legal's approval in writing (each time)\" and \"report it to Legal in writing (each time)\" keep both $150 rules and their separate obligations.",
+      "sense": "\"Cheap seats at a sporting event\" changes a seating type into a price test, and \"posh private school\" shifts prestige towards social class.",
+      "authenticity": "\"shout them\", \"pressie\" and \"choccies\" are recognisable and contextually natural Australian usages.",
+      "register": "\"righto\", \"choccies\", \"pressie\", \"promo gear\" and \"dosh\" produce a noticeably heavier voice than level 2.",
+      "tone": "\"Sorry, Yoda: it’s the trying that counts\" preserves the source's joke while the \"FINES and JAIL\" warning remains emphatic.",
+      "flow": "\"So if a supplier, or someone who'd like to be one, sends you something\" is a smooth spoken explanation without losing the conditional.",
+      "variety": "\"run it past\", \"that's not on\", \"pressie\" and \"dosh\" give varied vocabulary with no dominant catchphrase.",
+      "essence": "\"it won’t matter whether the customer ever put an order in\" preserves the central lesson that attempted bribery counts even without a successful outcome."
+    },
+    "current": {
+      "meaning": "\"Any gift you receive worth more than $150 must also be reported to Legal in writing, each time\" retains the incoming-gift threshold and reporting rule exactly.",
+      "sense": "\"pull strings to get her in\" correctly conveys improper influence over the hiring decision.",
+      "authenticity": "\"your mate’s daughter\" is natural Australian usage, but \"Bleacher-type tickets\" leaves a conspicuous US sporting term unadapted.",
+      "register": "\"When you submit your expense report for reimbursement\" exemplifies a mostly standard policy rewrite with very little requested Australian vernacular.",
+      "tone": "\"And that doesn’t necessarily stop at GitHub\" keeps the calibrated warning about individual consequences.",
+      "flow": "\"You could spend a few years in jail yourself. It won’t matter whether\" breaks the final warning into clear, forceful spoken units.",
+      "variety": "\"Remember\", \"If you’re unsure\" and \"pick up the bill\" vary the explanatory voice without excessive repeated tags.",
+      "essence": "\"Yoda notwithstanding, it’s the trying that counts\" preserves the distinctive closing joke and the policy's emphasis on attempted bribery."
+    }
+  },
+  "problems": {
+    "pre-fix-yarn": [
+      {
+        "quote": "And not just for GitHub, either.",
+        "original": "Not necessarily just for GitHub, either.",
+        "severity": "minor",
+        "why": "Drops necessarily and makes personal exposure sound categoric at this point, although the next sentence restores might."
+      },
+      {
+        "quote": "Say you get your mate’s daughter a gig as an intern",
+        "original": "although it might not seem like a big deal to you to get your friend’s daughter hired as an intern",
+        "severity": "minor",
+        "why": "The cumulative colloquial density is a little stronger than the requested light touch."
+      }
+    ],
+    "dinkum-3": [
+      {
+        "quote": "Cheap seats at a sporting event",
+        "original": "Bleacher-type tickets to a sporting event",
+        "severity": "major",
+        "why": "Cheap tickets are not necessarily bleacher-type tickets, so the acceptable-gift example changes category."
+      },
+      {
+        "quote": "posh private school",
+        "original": "prestigious private school",
+        "severity": "minor",
+        "why": "Posh describes class or luxury rather than necessarily prestige."
+      },
+      {
+        "quote": "If you're planning to give or take an informal pressie",
+        "original": "If you are planning to provide or accept an informal gift",
+        "severity": "major",
+        "why": "The cumulative vernacular density is heavier than the requested light-touch level, particularly for the process section."
+      }
+    ],
+    "current": [
+      {
+        "quote": "Bleacher-type tickets to a sporting event",
+        "original": "Bleacher-type tickets to a sporting event",
+        "severity": "minor",
+        "why": "The untranslated US seating term weakens the local Australian voice."
+      },
+      {
+        "quote": "When you submit your expense report for reimbursement, please:",
+        "original": "When you submit your expense report for reimbursement, please:",
+        "severity": "major",
+        "why": "The text remains predominantly conventional policy English and underdelivers even the requested light Australian retelling."
+      }
+    ]
+  },
+  "summaries": {
+    "pre-fix-yarn": "A clear, largely precise Australian policy retelling that keeps the practical process and warning; slightly chatty and less qualified in one liability line.",
+    "dinkum-3": "Readable and engaging, with the full compliance process intact, but too heavily colloquial for the brief and less exact in two gift examples.",
+    "current": "The most exact and restrained policy rewrite, with excellent clarity, but little Australian vernacular and an untouched US sporting term."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "pre-fix-yarn",
+        "dinkum-3",
+        "current"
+      ]
+    ],
+    "flow": [
+      [
+        "pre-fix-yarn",
+        "dinkum-3",
+        "current"
+      ]
+    ],
+    "variety": [
+      [
+        "pre-fix-yarn",
+        "dinkum-3",
+        "current"
+      ]
+    ],
+    "essence": [
+      [
+        "pre-fix-yarn",
+        "dinkum-3",
+        "current"
+      ]
+    ],
+    "overall": [
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "current"
+      ]
+    ]
+  }
+}

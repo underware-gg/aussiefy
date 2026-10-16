@@ -1,0 +1,159 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "dinkum-3": "A",
+    "pre-fix-yarn": "B",
+    "current": "C"
+  },
+  "scores": {
+    "dinkum-3": {
+      "meaning": 5,
+      "sense": 4,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 4,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 1,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "dinkum-3": {
+      "meaning": "\"from 10 a.m. to 1 p.m. EDT\" and \"Saturday, Nov. 7, and Sunday, Nov. 8\" preserve both event schedules and the surrounding activities.",
+      "sense": "\"driverless vehicles\" narrows the source's autonomous vehicles to vehicles without drivers; the vernacular terms otherwise fit.",
+      "authenticity": "\"grab a happy snap\" and \"family-friendly do\" sound natural in an Australian conversational account.",
+      "register": "\"having a yarn\", \"have a crack\" and \"down the track\" sustain a strong level-4 voice without exceeding the vulgarity allowance.",
+      "tone": "\"show off the next lot of aircraft, spacecraft\" retains the upbeat promotional purpose.",
+      "flow": "\"Okay, so.\" is a stilted standalone lead-in before an otherwise smooth story.",
+      "variety": "\"happy snap\", \"whopping great blow-up\" and \"keep the Yanks out in front\" give the retelling varied texture.",
+      "essence": "\"It all winds up with MAX POWER\" retains the tour's culminating exposition and the space-innovation focus."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"on and around the agency's Kennedy Space Center in Florida\" preserves the final event location, but \"the uni mob\" slightly narrows the academic stakeholders.",
+      "sense": "\"driverless vehicles\" is narrower than autonomous vehicles, while \"at the stick\" correctly conveys piloting.",
+      "authenticity": "\"out having a yarn\" and \"a multi-day do\" are convincing Australian conversational choices.",
+      "register": "\"Now here's one for the gridiron fans\" sets a strong vernacular level maintained by \"have a crack\" and \"down the track\", without swearing.",
+      "tone": "\"showing off the next-gen aircraft\" carries the same enthusiastic public-outreach tone.",
+      "flow": "\"The whole show wraps up with MAX POWER\" gives the final paragraph a clear, easy transition.",
+      "variety": "\"at the stick\", \"uni mob\" and \"air and space know-how\" vary vocabulary without a repetitive tag.",
+      "essence": "\"NASA heading back to the Moon\" and \"America's historic 250th anniversary\" keep the distinctive mission and anniversary framing."
+    },
+    "current": {
+      "meaning": "\"one of three F-5 fighter jets\" and \"from 10 a.m. to 1 p.m. EDT\" keep the flyover and outreach specifics intact.",
+      "sense": "\"get the lowdown\" appropriately means learning more, and \"have a go\" fits participating in the games.",
+      "authenticity": "\"will chat with fans\" and \"wrap up\" are natural, low-key language without a forced Australian performance.",
+      "register": "\"bringing academic, industry, and public sector stakeholders together\" exemplifies a predominantly formal account far lighter than level 4.",
+      "tone": "\"It will show off the next-generation aircraft\" retains the positive public-information tone.",
+      "flow": "\"the event runs over several days and caters for families\" cleanly separates the source's long final sentence.",
+      "variety": "\"take the controls\", \"get the lowdown\" and \"wrap up\" are varied touches without recurring tics.",
+      "essence": "\"The tour will wrap up with MAX POWER\" keeps the source's progression from game flyover to nationwide tour to culminating expo."
+    }
+  },
+  "problems": {
+    "dinkum-3": [
+      {
+        "quote": "driverless vehicles",
+        "original": "autonomous vehicles",
+        "severity": "minor",
+        "why": "Driverless is narrower: autonomous operation does not necessarily mean the absence of a driver."
+      },
+      {
+        "quote": "Okay, so.",
+        "original": "",
+        "severity": "minor",
+        "why": "The detached conversational filler makes the opening feel staged."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "the uni mob",
+        "original": "academic, industry, and public sector stakeholders",
+        "severity": "minor",
+        "why": "Academia can include institutions and researchers beyond universities."
+      },
+      {
+        "quote": "driverless vehicles",
+        "original": "autonomous vehicles",
+        "severity": "minor",
+        "why": "Driverless specifies the absence of a driver, while autonomous is about operational capability."
+      }
+    ],
+    "current": [
+      {
+        "quote": "bringing academic, industry, and public sector stakeholders together",
+        "original": "convenes academic, industry, and public sector stakeholders",
+        "severity": "major",
+        "why": "Most of the prose remains ordinary formal publicity language, missing the requested strong Australian vernacular register."
+      }
+    ]
+  },
+  "summaries": {
+    "dinkum-3": "A detailed, lively Australian retelling that keeps the promotional character, with a stiff opening and a slightly narrower vehicle term.",
+    "pre-fix-yarn": "The most fluid full vernacular retelling, preserving the schedules and promotional arc with two small reductions in technical breadth.",
+    "current": "A complete and polished publicity rewrite with natural phrasing, but much too light for the level-4 brief."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "dinkum-3",
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "flow": [
+      [
+        "pre-fix-yarn",
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ]
+    ],
+    "variety": [
+      [
+        "dinkum-3",
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "essence": [
+      [
+        "dinkum-3",
+        "pre-fix-yarn",
+        "current"
+      ]
+    ],
+    "overall": [
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "current"
+      ]
+    ]
+  }
+}

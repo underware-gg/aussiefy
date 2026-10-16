@@ -12,7 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
 import promotion as p  # noqa: E402
 import promote as flow  # noqa: E402
 from promotion_github import ACTIONS_APP_ID, REQUIRED_CHECK, require_checks, require_protection  # noqa: E402
-from publish_docs import generate, check as check_docs  # noqa: E402
+from publish_docs import SETTINGS, generate, check as check_docs  # noqa: E402
 
 
 def git(root, *args):
@@ -141,7 +141,7 @@ def repo(tmp_path):
     git(root, 'checkout', '-qb', 'dev')
     write(root, p.VERSION_FILE, '__version__ = "0.1.0"\n')
     write(root, 'docs/plain/root/CHANGELOG.md', '# Changelog\n\n## [Unreleased]\n\n- I am very busy.\n')
-    write(root, 'docs/publication.yaml', yaml.safe_dump({'translation': {'level': 5, 'vulgarity': 'dad', 'seed': 0},
+    write(root, 'docs/publication.yaml', yaml.safe_dump({'translation': SETTINGS,
         'documents': [{'source': 'docs/plain/root/CHANGELOG.md', 'output': 'CHANGELOG.md'}]}))
     write(root, 'README.md', '# Fixture\n')
     write(root, 'CONTRIBUTING.md', '# Fixture\n')

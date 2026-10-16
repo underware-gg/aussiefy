@@ -1,0 +1,156 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "pre-fix-yarn": "B",
+    "dinkum-3": "C"
+  },
+  "scores": {
+    "current": {
+      "meaning": 5,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 5,
+      "sense": 3,
+      "authenticity": 5,
+      "register": 5,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 4,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"the program must enforce a minimum input count or other rules\" keeps the requirement; \"That assessment is the application owner's responsibility\" retains accountability, with technical conditions and MDX structure intact.",
+      "sense": "\"eat into the BFV parameter set's limited noise budget\" accurately explains consuming budget, and \"under wraps\" fits keeping bids private.",
+      "authenticity": "\"sussing out\", \"fits the bill\", \"get stuck into\" and \"what you're up for\" sound naturally Australian.",
+      "register": "\"chip in\", \"hang on\", \"without blowing that budget\", \"under wraps\" and \"over the line\" sustain broad Australian prose around the protected technical material.",
+      "tone": "\"make sure your secure process can compute the result\" retains the original’s practical developer guidance and caution.",
+      "flow": "\"Another way to go is to decrypt an aggregate\" introduces the alternative design smoothly and clearly.",
+      "variety": "\"stacks up\", \"fits the bill\", \"get going\", \"under wraps\" and \"over the line\" vary the voice without repeated tags.",
+      "essence": "\"A bigger committee pushes T up\" and \"This design alone doesn't get an application over the line\" preserve the working-example-to-limits shape and distinctive trust/compliance caveats."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"the program must enforce a minimum input count or other rules\" and \"the application owner's job\" preserve the requirements and responsibility, with all major E3 stages, conditions and MDX material retained.",
+      "sense": "\"Where it comes unstuck is the computation\" implies failure rather than a limit, while \"locked up tight\" is a strained substitute for secure E3 programs and \"dodgy ciphertext\" is less precise than malformed.",
+      "authenticity": "\"make dead sure\", \"Have a squiz\" and \"give an application a leg-up\" are recognisable Australian body idioms.",
+      "register": "\"runs ya through\", \"stack yer job up\", \"chews through\" and \"Whip up\" deliver broad level-5 body prose without added performance garnish.",
+      "tone": "\"make dead sure yer secure process can work out the result inside that\" retains the force of confirming computational feasibility before building an auction.",
+      "flow": "\"That way the aggregate's out in the open,\" leads clearly into the contrasting protection for individual bids.",
+      "variety": "\"ticks these boxes\", \"chews through\", \"suss out\", \"stuff up\" and \"leg-up\" provide varied vernacular.",
+      "essence": "\"On mainnet, only\" followed by \"`Small` (T = 9) can be requested at launch\" retains the distinctive launch limit, alongside the CRISP example and design caveats."
+    },
+    "dinkum-3": {
+      "meaning": "\"No single operator ever holds a plaintext\" strengthens a design statement into an explicit lifetime assurance; the remaining technical details, obligations and protected MDX are retained.",
+      "sense": "\"eats into the limited noise budget\" accurately renders consumption, and \"stuff up the result\" fits corruption of a computed result.",
+      "authenticity": "\"An E3's the go\", \"Run yer eye over\" and \"give an application a leg up\" sound like natural broad Australian speech.",
+      "register": "\"So, this page\" adds an opener despite disabled garnish; the eligible body itself, including \"ya\" and \"yer\", has the requested level-5 breadth.",
+      "tone": "\"make sure yer secure process can actually get the result within that\" keeps the practical warning and explanatory purpose.",
+      "flow": "\"Another way to go is to decrypt an aggregate\" connects smoothly to the contract’s use of that aggregate.",
+      "variety": "\"ticks these boxes\", \"the go\", \"up the E3 model's alley\", \"Run yer eye over\" and \"leg up\" vary the expression.",
+      "essence": "\"the committee only decrypts the output\" and \"That assessment's the application owner's job\" preserve the page’s trust boundary and compliance caveat within the same use-case structure."
+    }
+  },
+  "problems": {
+    "current": [],
+    "pre-fix-yarn": [
+      {
+        "quote": "Where it comes unstuck is the computation.",
+        "original": "The limit is the computation.",
+        "severity": "major",
+        "why": "Comes unstuck implies that the model fails there, rather than that computation imposes a constraint to check."
+      },
+      {
+        "quote": "a dodgy ciphertext",
+        "original": "a malformed ciphertext",
+        "severity": "minor",
+        "why": "Dodgy broadly means dubious or faulty and loses the specific technical condition malformed."
+      },
+      {
+        "quote": "E3 programs that are locked up tight",
+        "original": "secure E3 programs",
+        "severity": "major",
+        "why": "Locked up tight suggests restricted access or impermeability rather than the security properties of E3 program design."
+      }
+    ],
+    "dinkum-3": [
+      {
+        "quote": "No single operator ever holds a plaintext\ninput",
+        "original": "No single operator holds a plaintext\ninput",
+        "severity": "minor",
+        "why": "Ever adds an explicit temporal assurance beyond the source’s statement of the design property."
+      },
+      {
+        "quote": "So,",
+        "original": "",
+        "severity": "minor",
+        "why": "Adds an opening connective where the effective contract disables openings and garnish."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "Strongest fit: broad idiomatic body prose with technical meaning, obligations and protected MDX preserved.",
+    "pre-fix-yarn": "Broad, natural and readable, but several colloquial replacements strain the technical sense.",
+    "dinkum-3": "A fluent broad retelling, slightly behind A because of a disabled opener and a small strengthening of the privacy statement."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "flow": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "overall": [
+      [
+        "current"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "pre-fix-yarn"
+      ]
+    ]
+  }
+}

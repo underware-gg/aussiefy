@@ -6,7 +6,7 @@ import re
 
 from . import morph
 from .detect import DETERMINERS, VERB_LEADERS, NP_BREAKS, Detection, after_determiner, opening_determiner
-from .matcher import NP_BOUNDARY
+from .matcher import NP_BOUNDARY, is_name
 from .schema import Entry
 from .text import Token, capital_is_positional
 
@@ -70,6 +70,15 @@ def number_problem(entry: Entry, det: Detection, toks: list[Token]) -> str | Non
     # before the span counts
     if is_plural_term(entry) and opening_determiner(toks, det.start) in ("a", "an"):
         return "a term plural in form (togs, sunnies) after 'a'"
+    if is_plural_term(entry):
+        before = det.start - 1
+        while before >= 0 and toks[before].norm in DETERMINERS | {"not", "n't"}:
+            before -= 1
+        after = toks[det.end].norm if det.end < len(toks) else ""
+        object_question = (toks[0].norm in {"what", "which", "whose"} and det.end + 1 < len(toks)
+                           and (toks[det.end + 1].norm in morph.PRONOUNS or is_name(toks[det.end + 1])))
+        if after in SINGULAR_VERBS and not object_question or before >= 0 and toks[before].norm in {"is", "was"}:
+            return "a term plural in form with a singular agreeing verb"
     if entry.number != "plural":
         return None
     if toks[det.end - 1].norm in COLLECTIVES:

@@ -1,0 +1,577 @@
+{
+  "rubric_version": 3,
+  "evaluation_protocol": 2,
+  "evaluation_contract": {
+    "level": 4,
+    "vulgarity": 0,
+    "document_type": "instructions",
+    "genre": {
+      "name": "instructions",
+      "guidance": "Instructions or safety advice: keep every step, quantity, unit and warning exact and in order, and keep numbered and bulleted lists as lists. Aussify the words (servo, esky, bin, chemist) and the connecting prose; no insults aimed at the reader. Safety comes before colour: never make light of a hazard."
+    },
+    "document_config": {
+      "formal_to_rework": true,
+      "person_swears": false,
+      "keep_quotes": false,
+      "guidance": "Instructions or safety advice: keep every step, quantity, unit and warning exact and in order, and keep numbered and bulleted lists as lists. Aussify the words (servo, esky, bin, chemist) and the connecting prose; no insults aimed at the reader. Safety comes before colour: never make light of a hazard.",
+      "term_domains": [
+        "instructions"
+      ],
+      "command_context": true,
+      "dateline_context": false,
+      "check_length": true,
+      "garnish": [
+        "tail"
+      ],
+      "openings": false,
+      "draft": true,
+      "keep_share": 0.6,
+      "max_length": 1.6,
+      "perform": false,
+      "embellishment_guidance": "Dinkum: retell it in a genuine Aussie voice. Rephrase freely so each sentence sounds said, not translated; the odd opener, connective or tag-on where a talker would use one; the original's points in its order. Colour hangs off what's there: no new scenes, asides or punchlines. Where the genre keeps its form exact (a notice, a doc, official prose), the voice goes into everything around what's kept: say the connecting prose the way a local would explain it to a mate, at the level's weight, not in the original's officialese with a word or two swapped. What's kept includes the force of what it says: an obligation, a decision, a finding or a stated aim keeps its verb's weight (\"we consider you responsible\" isn't \"we reckon\"; \"reaffirmed\" isn't \"doubled down\"; a goal isn't \"while they're at it\")."
+    },
+    "profile_config": {
+      "substitution": {
+        "lexical": 0.85,
+        "phrase": 0.85,
+        "idiom": 0.9
+      },
+      "frames": [
+        "np",
+        "adj",
+        "adv",
+        "interjection",
+        "imperative",
+        "predicate_adj",
+        "vp",
+        "clause"
+      ],
+      "garnish": {
+        "connective": 0.2,
+        "opener": 0.2,
+        "tag": 0.3,
+        "aside": 0.0,
+        "tail": 0.3,
+        "closer": 0.0,
+        "riff": 0.0
+      },
+      "max_garnish": {
+        "connective": 99,
+        "opener": 1,
+        "tag": 2,
+        "aside": 99,
+        "tail": 1,
+        "closer": 0,
+        "riff": 1
+      },
+      "garnish_gap": 1,
+      "garnish_per_sentence": 1,
+      "rewrite": {
+        "min_level": 3,
+        "min_words": 6,
+        "min_formal_words": 2,
+        "max_coverage": 0.1,
+        "formal_length": 7
+      },
+      "stack": 0.0,
+      "phonetic": 0.5,
+      "stretch": [
+        3,
+        5
+      ],
+      "swearing": {
+        "exclaim": 0.0,
+        "closer": 0.0,
+        "infix": 0.0,
+        "lean": 1.0
+      }
+    },
+    "embellishment": {
+      "name": "dinkum",
+      "guidance": "Dinkum: retell it in a genuine Aussie voice. Rephrase freely so each sentence sounds said, not translated; the odd opener, connective or tag-on where a talker would use one; the original's points in its order. Colour hangs off what's there: no new scenes, asides or punchlines. Where the genre keeps its form exact (a notice, a doc, official prose), the voice goes into everything around what's kept: say the connecting prose the way a local would explain it to a mate, at the level's weight, not in the original's officialese with a word or two swapped. What's kept includes the force of what it says: an obligation, a decision, a finding or a stated aim keeps its verb's weight (\"we consider you responsible\" isn't \"we reckon\"; \"reaffirmed\" isn't \"doubled down\"; a goal isn't \"while they're at it\")."
+    },
+    "markup": "text",
+    "markup_rules": null,
+    "english": null
+  },
+  "instructions": "You are judging translations of one English original into Australian English vernacular. The candidates\nare anonymous (A, B, C ...) and in random order; they may come from a rule engine, a language model or a\nperson. Judge each against the original and against the brief: the level of Aussie (1 tourist: a light\ntouch; 5 swaggie: a full pub yarn) and the vulgarity allowed (0 nan: no swearing; 1 dad: bloody, bugger,\nbastard; 2 uncle-bob: piss, arse, fuck; 3 tradie: the c-word too). A candidate is neither better nor worse\nfor being longer, or for using more slang than the brief asks for.\n\nEach criterion measures one thing, so one weakness costs a candidate once. How much Aussie there is, against\nthe brief, is register; how natural the Aussie that is there sounds is authenticity. A text left largely\nuntranslated scores low on register, and is judged on authenticity, tone and essence by what it does say.\nThe change of voice the brief asks for (a press release told as a yarn) is not a loss of tone. An aside that\nreacts to or elaborates something in the original is colour; a new fact, event or claim is invented, and\ncounts against meaning.\n\nFor each candidate and each criterion, write the evidence first: what you saw, quoting the candidate\nverbatim in double quotes. Then give the score. Use the anchors; a 2 or a 4 sits between them. Then list\nthe candidate's specific problems, each with a verbatim quote from the candidate, the original passage it\nrenders (empty when the line is added and renders nothing), a severity (critical: changes or loses meaning\nthat matters; major: wrong sense, wrong register, or something an Australian would wince at; minor: a\nweaker choice), and why. A problem that runs through the whole text is listed once, with one\nrepresentative quote. Last, rank the candidates on each comparison criterion and overall: a list of tiers,\nbest first, each tier the candidates you can't separate (most tiers hold one).\n\nCRITERIA\n- meaning: Does it say everything the original says, and nothing that changes it?\n    1: Events, facts or claims lost or changed; a reader would come away with a different story.\n    3: The gist survives, but some details are lost, changed or invented.\n    5: Every point survives; additions are colour that hangs off something in the original.\n- sense: Does every Aussie term carry the original's sense in its context?\n    1: Several terms took the wrong sense (\"the latest version\" as gossip, \"terrible\" as rude).\n    3: One or two terms took the wrong sense, or strain to fit.\n    5: Every term fits its context exactly.\n- authenticity: Would an Australian hear the Aussie it uses as natural, not a tourist's pastiche (however much or little there is)?\n    1: Stage-Australian; stock phrases bolted on; US or British forms left in.\n    3: Mostly natural, with some stock or forced lines.\n    5: Sounds like a real Australian talking; idiom used the way locals use it.\n- register: Is it as Aussie, and as vulgar, as the brief asked, no more and no less?\n    1: Far off the brief (a level-1 brief told as a pub yarn, or swearing past the vulgarity allowed).\n    3: Somewhat off: noticeably heavier or lighter than asked.\n    5: Exactly the weight the brief asked for.\n- tone: Does it keep the original's tone under the slang (solemn stays solemn, a joke stays a joke)? (also ranked across candidates)\n    1: The tone is lost or inverted (a eulogy played for laughs, a warning made flippant).\n    3: The tone wobbles in places.\n    5: The original's tone comes through whole.\n- flow: Does it read smoothly aloud, without pile-ups, clunky joins or repetition? (also ranked across candidates)\n    1: Hard to read; stacked synonyms, broken grammar, jarring joins.\n    3: Readable, with some clunky stretches.\n    5: Reads like it was written that way.\n- variety: Does it vary its slang, openers and tags, rather than leaning on a few? (also ranked across candidates)\n    1: The same few terms or tics over and over.\n    3: Some repetition a reader would notice.\n    5: Varied throughout, with nothing leaned on.\n- essence: Leaving aside how much it is retold (that is register), does it keep what the original is about and what makes it itself, its point, shape and character? (also ranked across candidates)\n    1: Could be a different text; what made the original distinctive is gone.\n    3: Recognisably the original, but flattened.\n    5: Unmistakably the original, retold.\nApply EVALUATION_CONTRACT to every anonymous candidate.\n\nThe effective contract overrides generic descriptions of the requested voice. Level measures Australian\nvocabulary, idiom and cadence in eligible prose. Level 5 means broad Australian prose; performance and\nadded garnish depend on the effective embellishment/document settings, not the level alone. Use no\nprohibited openings, insults, infixes or other garnish. Empty garnish still permits idiomatic paraphrase\nwithin the original propositions; preserving facts does not require leaving all connecting prose neutral.\nRespect exact quotes, protected technical terms, markup and headings where the contract requires them to\nstay unchanged. Bold prose labels are not automatically headings. Vulgarity is a cap, not a quota. Disabled\nbehaviours stay disabled; profile probabilities are not exact output quotas.\nDo not penalise required preservation. Keep the eight rubric criteria and score each weakness once.",
+  "prompt": "BRIEF: level 4, vulgarity 0\n\nEVALUATION_CONTRACT (protocol 2):\n{\"document_config\": {\"check_length\": true, \"command_context\": true, \"dateline_context\": false, \"draft\": true, \"embellishment_guidance\": \"Dinkum: retell it in a genuine Aussie voice. Rephrase freely so each sentence sounds said, not translated; the odd opener, connective or tag-on where a talker would use one; the original's points in its order. Colour hangs off what's there: no new scenes, asides or punchlines. Where the genre keeps its form exact (a notice, a doc, official prose), the voice goes into everything around what's kept: say the connecting prose the way a local would explain it to a mate, at the level's weight, not in the original's officialese with a word or two swapped. What's kept includes the force of what it says: an obligation, a decision, a finding or a stated aim keeps its verb's weight (\\\"we consider you responsible\\\" isn't \\\"we reckon\\\"; \\\"reaffirmed\\\" isn't \\\"doubled down\\\"; a goal isn't \\\"while they're at it\\\").\", \"formal_to_rework\": true, \"garnish\": [\"tail\"], \"guidance\": \"Instructions or safety advice: keep every step, quantity, unit and warning exact and in order, and keep numbered and bulleted lists as lists. Aussify the words (servo, esky, bin, chemist) and the connecting prose; no insults aimed at the reader. Safety comes before colour: never make light of a hazard.\", \"keep_quotes\": false, \"keep_share\": 0.6, \"max_length\": 1.6, \"openings\": false, \"perform\": false, \"person_swears\": false, \"term_domains\": [\"instructions\"]}, \"document_type\": \"instructions\", \"embellishment\": {\"guidance\": \"Dinkum: retell it in a genuine Aussie voice. Rephrase freely so each sentence sounds said, not translated; the odd opener, connective or tag-on where a talker would use one; the original's points in its order. Colour hangs off what's there: no new scenes, asides or punchlines. Where the genre keeps its form exact (a notice, a doc, official prose), the voice goes into everything around what's kept: say the connecting prose the way a local would explain it to a mate, at the level's weight, not in the original's officialese with a word or two swapped. What's kept includes the force of what it says: an obligation, a decision, a finding or a stated aim keeps its verb's weight (\\\"we consider you responsible\\\" isn't \\\"we reckon\\\"; \\\"reaffirmed\\\" isn't \\\"doubled down\\\"; a goal isn't \\\"while they're at it\\\").\", \"name\": \"dinkum\"}, \"english\": null, \"genre\": {\"guidance\": \"Instructions or safety advice: keep every step, quantity, unit and warning exact and in order, and keep numbered and bulleted lists as lists. Aussify the words (servo, esky, bin, chemist) and the connecting prose; no insults aimed at the reader. Safety comes before colour: never make light of a hazard.\", \"name\": \"instructions\"}, \"level\": 4, \"markup\": \"text\", \"markup_rules\": null, \"profile_config\": {\"frames\": [\"np\", \"adj\", \"adv\", \"interjection\", \"imperative\", \"predicate_adj\", \"vp\", \"clause\"], \"garnish\": {\"aside\": 0.0, \"closer\": 0.0, \"connective\": 0.2, \"opener\": 0.2, \"riff\": 0.0, \"tag\": 0.3, \"tail\": 0.3}, \"garnish_gap\": 1, \"garnish_per_sentence\": 1, \"max_garnish\": {\"aside\": 99, \"closer\": 0, \"connective\": 99, \"opener\": 1, \"riff\": 1, \"tag\": 2, \"tail\": 1}, \"phonetic\": 0.5, \"rewrite\": {\"formal_length\": 7, \"max_coverage\": 0.1, \"min_formal_words\": 2, \"min_level\": 3, \"min_words\": 6}, \"stack\": 0.0, \"stretch\": [3, 5], \"substitution\": {\"idiom\": 0.9, \"lexical\": 0.85, \"phrase\": 0.85}, \"swearing\": {\"closer\": 0.0, \"exclaim\": 0.0, \"infix\": 0.0, \"lean\": 1.0}}, \"vulgarity\": 0}\n\nORIGINAL:\nBefore cleaning the demonstration lantern, disconnect it from the charger and switch it off. Wait five minutes before opening the battery cover. Hold the cover firmly while loosening the two screws. Do not touch the metal contacts with a wet cloth. Wipe the outside with a dry cloth, replace the cover, and tighten both screws by hand. If the case is cracked or the battery is leaking, stop using the lantern and contact the supplier. These instructions apply only to model L12.\n\nCANDIDATE A:\nBefore you give the demonstration lantern a clean, disconnect it from the charger and switch it off. Give it five minutes before you open the battery cover. Keep a firm hold on the cover while you loosen the two screws. Don't touch the metal contacts with a wet cloth. Give the outside a wipe with a dry cloth, put the cover back on, and tighten both screws by hand. If the case is cracked or the battery's leaking, stop using the lantern and get in touch with the supplier. These instructions are only for model L12.\n\nCANDIDATE B:\nBefore cleaning the demonstration lantern, disconnect it from the charger and switch it off. Wait five minutes before opening the battery cover. Hold the cover firmly while loosening the two screws. Do not touch the metal contacts with a wet cloth. Wipe the outside with a dry cloth, replace the cover, and tighten both screws by hand. If the case is cracked or the battery is leaking, stop using the lantern and contact the supplier. These instructions apply only to model L12.",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "candidates": {
+        "type": "object",
+        "properties": {
+          "A": {
+            "type": "object",
+            "properties": {
+              "scores": {
+                "type": "object",
+                "properties": {
+                  "meaning": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "sense": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "authenticity": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "register": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "tone": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "flow": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "variety": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "essence": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "meaning",
+                  "sense",
+                  "authenticity",
+                  "register",
+                  "tone",
+                  "flow",
+                  "variety",
+                  "essence"
+                ],
+                "additionalProperties": false
+              },
+              "problems": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quote": {
+                      "type": "string"
+                    },
+                    "original": {
+                      "type": "string"
+                    },
+                    "severity": {
+                      "type": "string",
+                      "enum": [
+                        "critical",
+                        "major",
+                        "minor"
+                      ]
+                    },
+                    "why": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "quote",
+                    "original",
+                    "severity",
+                    "why"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "summary": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "scores",
+              "problems",
+              "summary"
+            ],
+            "additionalProperties": false
+          },
+          "B": {
+            "type": "object",
+            "properties": {
+              "scores": {
+                "type": "object",
+                "properties": {
+                  "meaning": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "sense": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "authenticity": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "register": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "tone": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "flow": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "variety": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "essence": {
+                    "type": "object",
+                    "properties": {
+                      "evidence": {
+                        "type": "string"
+                      },
+                      "score": {
+                        "type": "integer"
+                      }
+                    },
+                    "required": [
+                      "evidence",
+                      "score"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "meaning",
+                  "sense",
+                  "authenticity",
+                  "register",
+                  "tone",
+                  "flow",
+                  "variety",
+                  "essence"
+                ],
+                "additionalProperties": false
+              },
+              "problems": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "quote": {
+                      "type": "string"
+                    },
+                    "original": {
+                      "type": "string"
+                    },
+                    "severity": {
+                      "type": "string",
+                      "enum": [
+                        "critical",
+                        "major",
+                        "minor"
+                      ]
+                    },
+                    "why": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "quote",
+                    "original",
+                    "severity",
+                    "why"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "summary": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "scores",
+              "problems",
+              "summary"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "A",
+          "B"
+        ],
+        "additionalProperties": false
+      },
+      "rankings": {
+        "type": "object",
+        "properties": {
+          "tone": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B"
+                ]
+              }
+            }
+          },
+          "flow": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B"
+                ]
+              }
+            }
+          },
+          "variety": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B"
+                ]
+              }
+            }
+          },
+          "essence": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B"
+                ]
+              }
+            }
+          },
+          "overall": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "A",
+                  "B"
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "tone",
+          "flow",
+          "variety",
+          "essence",
+          "overall"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "required": [
+      "candidates",
+      "rankings"
+    ],
+    "additionalProperties": false
+  }
+}

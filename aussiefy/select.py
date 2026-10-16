@@ -153,6 +153,9 @@ def candidates(det: Detection, entries: list[Entry], eff: Effective, used: dict[
         # where a level allows dated words they're colour, not the default: "bloke" over "cove"
         dated = 0.25 if e.register in ("dated", "archaic") else 1.0
         lean = eff.swearing.lean if e.vulgarity else 1.0   # how a vulgarity leans towards the swearing option
+        if lean == 0:
+            rejected.append((e, "swear weighting disabled"))
+            continue
         w = e.weight * intensity_fit * direct * sources * repeat * regional * p_class * dated * lean
         why = (f"w={w:.3f} (base {e.weight:g} x intensity-fit {intensity_fit:.2f} [{e.intensity} vs {det.intensity}]"
                f" x direct {direct:g} x sources {sources:.1f} x repeat {repeat:.2f}"

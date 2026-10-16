@@ -9,10 +9,19 @@ python scripts/publish_docs.py generate
 python scripts/publish_docs.py check
 ```
 
-Generation uses the strict Markdown adapter at level 5, vulgarity dad and seed 0, with the offline ngram
-fallback. It preserves headings, tables, links, code and displayed command outputs. The generated notice
+Generation uses the strict Markdown adapter at Swaggie (5), Dinkum (1), Dad (1) and seed 0, with the offline
+ngram fallback. It explicitly selects General, protects Technical vocabulary through `term_domains`, and
+disables formal-sentence rework. Its explicit advanced configuration preserves quoted wording, excludes
+person swears, factual riffs, insulting garnish and infixes, and enables conversational connectives, openers
+and tags. Their per-sentence probabilities are 0.35/0.35/0.25; per-document caps are 10/6/4, with two source
+sentences between repeats of the same placement. Stacking is off. These are repository publication choices,
+not changes to the public dial defaults. Every published page has the same settings notice and a link to its own plain
+counterpart: “Prefer docs that are as dry as a dead dingo's donger?” It preserves headings, tables, links, code and displayed command outputs. The generated notice
 links back to the editable source. All outputs are derived from the current dictionary and publication map;
-their exact bytes are checked before promotion.
+their exact bytes are checked before promotion. Strict Markdown units share document-wide choice and garnish
+state. A source sentence start can receive a leading opener/connective before an inline boundary, using the
+whole sentence's context. Suffixes and riffs require complete prose; continuation fragments cannot acquire
+an opener. Word-case evidence is shared across the document, and an ambiguous first word can prevent a prefix.
 
 Relative links in a plain source point to other plain sources where available, or to the actual ungenerated
 repository file. Publication remaps those destinations back to their public paths. External destinations and

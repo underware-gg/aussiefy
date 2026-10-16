@@ -1,0 +1,171 @@
+{
+  "rubric_version": 3,
+  "judge": "independent Codex agent; blind rubric3",
+  "labels": {
+    "current": "A",
+    "pre-fix-yarn": "B",
+    "dinkum-3": "C"
+  },
+  "scores": {
+    "current": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 1,
+      "tone": 5,
+      "flow": 5,
+      "variety": 5,
+      "essence": 5
+    },
+    "pre-fix-yarn": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 4,
+      "register": 4,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    },
+    "dinkum-3": {
+      "meaning": 4,
+      "sense": 5,
+      "authenticity": 5,
+      "register": 3,
+      "tone": 5,
+      "flow": 4,
+      "variety": 5,
+      "essence": 5
+    }
+  },
+  "evidence": {
+    "current": {
+      "meaning": "\"gusts of 35-45 mph, potentially higher across the coastal waters\" keeps the wind uncertainty and geography; \"cool for the season\" slightly shifts seasonably cool.",
+      "sense": "\"they’ll be few and far between\" appropriately describes sparse showers.",
+      "authenticity": "\"the odd isolated shower\" is an unforced Australian conversational choice.",
+      "register": "\"Deterministic and ensemble guidance show a stronger/deeper northern stream shortwave trough\" typifies a largely formal rewrite, well below level 4.",
+      "tone": "\"a morning flurry or shower can’t be ruled out\" retains the cautious forecasting voice.",
+      "flow": "\"Just how much mixing there’ll be, and how strong the LLJ will be, remain less certain this far out\" reads cleanly despite the technical subject.",
+      "variety": "\"clear out early Saturday morning\" and \"won’t hang around the whole weekend\" vary the conversational phrasing without a repeated tag.",
+      "essence": "\"KEY MESSAGE 3...Low pressure system expected to bring rain Friday into early Saturday\" retains the bulletin structure and its central weather sequence."
+    },
+    "pre-fix-yarn": {
+      "meaning": "\"Ensemble guidance has amounts mostly from 0.25 to 0.60\" preserves rainfall amounts, but \"heavy rain doing any real damage\" narrows impacts to damage.",
+      "sense": "\"closer to an inch is on the cards\" uses the idiom correctly for a possible rainfall total.",
+      "authenticity": "\"at most you'll cop a light shower/sprinkle\" sounds locally plausible; \"Saturday night'll be brass monkeys\" is a slightly packaged flourish.",
+      "register": "\"Gusty nor'westers\" and \"cos the lower levels are that bit drier\" supply a sustained vernacular voice, though the extensive technical prose keeps it a little below level 4.",
+      "tone": "\"How much mixing there'll be, and how strong the LLJ gets, is still a bit up in the air\" retains scientific caution under the casual voice.",
+      "flow": "\"That works out to about the usual cool for the season\" is an awkward join in otherwise fluent exposition.",
+      "variety": "\"cop\", \"on the cards\" and \"only just scrape\" provide varied idiom rather than one recurring catchphrase.",
+      "essence": "\"It`s a bit early to be saying the \"S word\" just yet (snow)\" preserves the source's distinctive hesitant snow aside."
+    },
+    "dinkum-3": {
+      "meaning": "\"35-45 mph (55-70 km/h), maybe more across the coastal waters\" preserves the forecast while adding useful conversions; \"a bit cool for this time of year\" shifts the seasonal comparison.",
+      "sense": "\"a light shower or a few spits at most\" accurately carries the light-sprinkle sense.",
+      "authenticity": "\"Tops'll likely battle to get out of the 40s\" has a credible Australian weather-report sound.",
+      "register": "\"There's heaps of moisture, mind\" adds Australian informality, but much of the retained formal bulletin remains lighter than level 4.",
+      "tone": "\"good odds of the interior getting down to freezing at least\" preserves the practical warning without trivialising it.",
+      "flow": "\"Best bet is the rain lobs in the Friday morning timeframe\" mixes natural speech with bureaucratic wording, interrupting an otherwise readable passage.",
+      "variety": "\"a few spits\", \"rocks up\" and \"a cold one\" show varied conversational choices.",
+      "essence": "\"KEY MESSAGE 2...Isolated shower possible Wednesday, but drier overall\" keeps both the bulletin shape and the dry-to-wet-to-cold progression."
+    }
+  },
+  "problems": {
+    "current": [
+      {
+        "quote": "cool for the season",
+        "original": "seasonably cool temperatures",
+        "severity": "minor",
+        "why": "Suggests cooler than seasonal expectations rather than seasonally typical cool temperatures."
+      },
+      {
+        "quote": "The system has synoptic support: an upper level jet near southern New England produces large scale ascent",
+        "original": "There is synoptic support with this system as an upper level jet positions near southern New England yielding large scale ascent",
+        "severity": "major",
+        "why": "The prevailing formal exposition scarcely meets the requested level-4 Australian retelling."
+      }
+    ],
+    "pre-fix-yarn": [
+      {
+        "quote": "the chance of heavy rain doing any real damage is pretty slim",
+        "original": "minimizing the potential for heavy rain impacts",
+        "severity": "minor",
+        "why": "Damage is a narrower category than all heavy-rain impacts."
+      },
+      {
+        "quote": "That works out to about the usual cool for the season",
+        "original": "This will yield seasonably cool temperatures mainly in the lower 60s.",
+        "severity": "minor",
+        "why": "The phrase usual cool for the season is awkward aloud."
+      }
+    ],
+    "dinkum-3": [
+      {
+        "quote": "a bit cool for this time of year",
+        "original": "seasonably cool temperatures",
+        "severity": "minor",
+        "why": "Implies below seasonal expectations rather than the typical seasonal coolness of the original."
+      },
+      {
+        "quote": "Best bet is the rain lobs in the Friday morning timeframe",
+        "original": "Rain more likely arrives in the Friday morning timeframe",
+        "severity": "minor",
+        "why": "The colloquial verb jars with the formal timeframe wording."
+      },
+      {
+        "quote": "The tighter gradient, and CAA to help steepen lapse rates, will back deeper mixing",
+        "original": "The tighter gradient and CAA to help steepen lapse rates will support deeper mixing",
+        "severity": "major",
+        "why": "Most of the technical exposition is barely retold, making the overall register lighter than level 4."
+      }
+    ]
+  },
+  "summaries": {
+    "current": "A highly faithful, smooth forecast edit with very little of the requested Australian vernacular.",
+    "pre-fix-yarn": "The strongest vernacular retelling here, retaining the detailed forecast and uncertainty with a few slightly laboured phrases.",
+    "dinkum-3": "A careful and recognisable forecast with useful conversions and natural local touches, but only a moderately strong Australian voice."
+  },
+  "rankings": {
+    "tone": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "flow": [
+      [
+        "current"
+      ],
+      [
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "variety": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "essence": [
+      [
+        "current",
+        "pre-fix-yarn",
+        "dinkum-3"
+      ]
+    ],
+    "overall": [
+      [
+        "pre-fix-yarn"
+      ],
+      [
+        "dinkum-3"
+      ],
+      [
+        "current"
+      ]
+    ]
+  }
+}

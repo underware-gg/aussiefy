@@ -17,25 +17,44 @@ import hashlib
 import json
 import random
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, fields
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
 import yaml
 
-from . import claude
+from . import claude, translation
 from .claude import DEFAULT_MODEL
 from .engine import Translator, default_translator
 from .errors import UserError
 from .loader import DATA_DIR
 from .markup import detect_markup
 from .terms import fold
-from .yarn import MARKUP_RULE
+from .policy import DocumentOverrides
+from .profile import PROFILE_KEYS, ProfileOverrides
+from .markup import MARKUPS
+from .schema import CLASSES, GARNISH_KEYS
+from .model import RewriteThresholds, SwearProfile
+from .retelling import MARKUP_RULE
 
 SEVERITIES = ("critical", "major", "minor")
 PROBLEM_KEYS = ("quote", "original", "severity", "why")   # each a string; "original" empty for an addition
 LABELS = "ABCDEFGH"
+EVALUATION_PROTOCOL = 2
+CONTRACT_GUIDANCE = """
+The effective contract overrides generic descriptions of the requested voice. Level measures Australian
+vocabulary, idiom and cadence in eligible prose. Level 5 means broad Australian prose; performance and
+added garnish depend on the effective embellishment/document settings, not the level alone. Use no
+prohibited openings, insults, infixes or other garnish. Empty garnish still permits idiomatic paraphrase
+within the original propositions; preserving facts does not require leaving all connecting prose neutral.
+Respect exact quotes, protected technical terms, markup and headings where the contract requires them to
+stay unchanged. Bold prose labels are not automatically headings. Vulgarity is a cap, not a quota. Disabled
+behaviours stay disabled; profile probabilities are not exact output quotas.
+"""
+CONTRACT_INSTRUCTIONS = ("Apply EVALUATION_CONTRACT to every anonymous candidate.\n" + CONTRACT_GUIDANCE
+                         + "Do not penalise required preservation. Keep the eight rubric criteria and score "
+                           "each weakness once.")
 
 
 @dataclass(frozen=True)
@@ -80,9 +99,25 @@ class Packet:
     candidates: dict[str, str]          # label -> text
     names: dict[str, str]               # label -> candidate name (kept from the judge)
     rubric_version: int
+    evaluation_contract: dict[str, Any] | None = None
+
+    @property
+    def evaluation_protocol(self) -> int:
+        return EVALUATION_PROTOCOL if self.evaluation_contract is not None else 1
+
+    def instructions(self, rubric: Rubric) -> str:
+        return rubric.text() + ("\n" + CONTRACT_INSTRUCTIONS if self.evaluation_contract is not None else "")
+
+    def judging(self, rubric: Rubric) -> dict[str, Any]:
+        """The complete key-free request for either an agent or an API judge."""
+        return {"instructions": self.instructions(rubric), "prompt": self.prompt(), "schema": self.schema(rubric)}
 
     def prompt(self) -> str:
-        parts = [f"BRIEF: level {self.level}, vulgarity {self.vulgarity}", "", "ORIGINAL:", self.original.strip()]
+        parts = [f"BRIEF: level {self.level}, vulgarity {self.vulgarity}"]
+        if self.evaluation_contract is not None:
+            parts += ["", "EVALUATION_CONTRACT (protocol 2):", json.dumps(self.evaluation_contract,
+                                                                         ensure_ascii=False, sort_keys=True)]
+        parts += ["", "ORIGINAL:", self.original.strip()]
         for label, text in self.candidates.items():
             parts += ["", f"CANDIDATE {label}:", text.strip()]
         return "\n".join(parts)
@@ -112,10 +147,11 @@ class Packet:
 
     def to_dict(self, rubric: Rubric) -> dict[str, Any]:
         """For an agent judging by hand: everything it needs, and the key to unblind it (keep that from it)."""
-        return {"rubric_version": self.rubric_version, "instructions": rubric.text(),
-                "prompt": self.prompt(), "schema": self.schema(rubric),
+        return {"rubric_version": self.rubric_version, **self.judging(rubric),
                 "original": self.original, "level": self.level, "vulgarity": self.vulgarity,
-                "candidates": self.candidates, "key": self.names}
+                "candidates": self.candidates, "key": self.names,
+                **({"evaluation_protocol": self.evaluation_protocol, "evaluation_contract": self.evaluation_contract}
+                   if self.evaluation_contract is not None else {})}
 
     @classmethod
     def from_dict(cls, d: dict[str, Any], *, where: str = "judge packet") -> "Packet":
@@ -135,22 +171,99 @@ class Packet:
                 or any(not isinstance(name, str) or not name.strip() for name in names.values())
                 or len(set(names.values())) != len(names)):
             raise UserError(f"{where}: key must name every candidate exactly once")
-        return cls(d["original"], d["level"], d["vulgarity"], d["candidates"], d["key"], d["rubric_version"])
+        protocol = d.get("evaluation_protocol", 1)
+        contract = d.get("evaluation_contract")
+        if type(protocol) is not int or protocol not in (1, EVALUATION_PROTOCOL):
+            raise UserError(f"{where}: unknown evaluation protocol {protocol!r}")
+        if protocol == 1 and contract is not None:
+            raise UserError(f"{where}: evaluation_contract requires protocol {EVALUATION_PROTOCOL}")
+        if protocol == EVALUATION_PROTOCOL:
+            _check_contract(contract, where)
+            if (contract["level"], contract["vulgarity"]) != (d["level"], d["vulgarity"]):
+                raise UserError(f"{where}: evaluation_contract dials do not match packet")
+        return cls(d["original"], d["level"], d["vulgarity"], d["candidates"], d["key"], d["rubric_version"], contract)
+
+
+def _check_contract(contract, where: str) -> None:
+    required = {"level", "vulgarity", "document_type", "genre", "document_config", "profile_config", "embellishment", "markup",
+                "markup_rules", "english"}
+    if not isinstance(contract, dict) or set(contract) != required:
+        raise UserError(f"{where}: evaluation_contract needs {', '.join(sorted(required))}")
+    if (type(contract["level"]) is not int or contract["level"] not in range(1, 6)
+            or type(contract["vulgarity"]) is not int or contract["vulgarity"] not in range(4)):
+        raise UserError(f"{where}: invalid evaluation_contract dials")
+    document, profile = contract["document_config"], contract["profile_config"]
+    if (not isinstance(document, dict) or set(document) != {f.name for f in fields(DocumentOverrides)} - {"profile"}
+            or not isinstance(profile, dict) or set(profile) != set(PROFILE_KEYS)):
+        raise UserError(f"{where}: evaluation_contract needs complete document_config and profile_config")
+    nested = {"substitution": CLASSES, "garnish": GARNISH_KEYS, "max_garnish": GARNISH_KEYS,
+              "rewrite": [f.name for f in fields(RewriteThresholds)],
+              "swearing": [f.name for f in fields(SwearProfile)]}
+    if any(not isinstance(profile[key], dict) or set(profile[key]) != set(keys) for key, keys in nested.items()):
+        raise UserError(f"{where}: evaluation_contract needs complete nested profile_config maps")
+    try:
+        DocumentOverrides.parse(document)
+        ProfileOverrides.parse(profile)
+    except UserError as exc:
+        raise UserError(f"{where}: invalid evaluation_contract: {exc}") from exc
+    if contract["markup"] not in MARKUPS[:-1]:
+        raise UserError(f"{where}: evaluation_contract markup must be resolved (text, markdown or mdx)")
+    expected_rule = MARKUP_RULE.format(markup=contract["markup"]) if contract["markup"] != "text" else None
+    if contract["markup_rules"] != expected_rule:
+        raise UserError(f"{where}: evaluation_contract markup_rules do not match markup")
+    if contract["english"] not in (None, "us", "uk", "none"):
+        raise UserError(f"{where}: evaluation_contract english must be resolved")
+    from .policy import DOCUMENT_TYPES, EMBELLISHMENT_NAMES
+    if not isinstance(contract["document_type"], str) or contract["document_type"] not in DOCUMENT_TYPES:
+        raise UserError(f"{where}: invalid evaluation_contract document_type")
+    for key in ("genre", "embellishment"):
+        value = contract[key]
+        names = tuple(n for n in DOCUMENT_TYPES if n != "auto") if key == "genre" else EMBELLISHMENT_NAMES.values()
+        if (not isinstance(value, dict) or set(value) != {"name", "guidance"}
+                or not isinstance(value["name"], str) or value["name"] not in names
+                or not isinstance(value["guidance"], str)):
+            raise UserError(f"{where}: invalid evaluation_contract {key}")
+
+
+def _evaluation_contract(original: str, *, level: int | str, vulgarity: int | str | None,
+                         markup: str, english: str | None, embellishment: int | str | None,
+                         document_type: str, document_config: dict | None,
+                         translator: Translator | None) -> dict[str, Any]:
+    if markup == "auto":
+        markup = detect_markup(original)
+    result = translation.run(original, translator=translator or default_translator(), level=level,
+                             vulgarity=vulgarity, markup=markup, english=english,
+                             embellishment=embellishment, document_type=document_type, document_config=document_config)
+    return {"level": result.level, "vulgarity": result.vulgarity, "document_type": result.genre.selected,
+                "genre": {"name": result.genre.name, "guidance": result.genre.policy.guidance},
+                "document_config": result.genre.envelope(result.embellishment.step)["document_config"],
+                "profile_config": result.profile_config,
+                "embellishment": {"name": result.embellishment.name, "guidance": result.embellishment.guidance},
+                "markup": markup, "markup_rules": MARKUP_RULE.format(markup=markup) if markup != "text" else None,
+                "english": result.english}
 
 
 def blind(original: str, candidates: dict[str, str], *, level: int | str = 5, vulgarity: int | str | None = None,
-          seed: int = 0, rubric: Rubric | None = None, translator: Translator | None = None) -> Packet:
-    """The candidates shuffled under anonymous labels: the same inputs and seed always give the same order."""
+          seed: int = 0, rubric: Rubric | None = None, translator: Translator | None = None,
+          markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
+          document_type: str = "general", document_config: dict | None = None) -> Packet:
+    """Shuffle candidates under labels, with the source's effective writing contract for the judge.
+
+    The contract comes from the same translation route as writing; it contains no candidate identities.
+    Historical packets without a contract remain protocol 1 and retain their original instructions.
+    """
     if not 2 <= len(candidates) <= len(LABELS):
         raise UserError(f"judge 2 to {len(LABELS)} candidates, not {len(candidates)}")
     rubric = rubric or Rubric.load()
-    eff = (translator or default_translator()).effective(level=level, vulgarity=vulgarity)
+    contract = _evaluation_contract(original, level=level, vulgarity=vulgarity, markup=markup, english=english,
+                                    embellishment=embellishment, document_type=document_type,
+                                    document_config=document_config, translator=translator)
     names = sorted(candidates)
     key = hashlib.sha256(json.dumps([seed, original, names]).encode()).hexdigest()
     random.Random(key).shuffle(names)
     labels = LABELS[:len(names)]
-    return Packet(original, eff.level, eff.vulgarity, {lb: candidates[n] for lb, n in zip(labels, names)},
-                  dict(zip(labels, names)), rubric.version)
+    return Packet(original, contract["level"], contract["vulgarity"], {lb: candidates[n] for lb, n in zip(labels, names)},
+                  dict(zip(labels, names)), rubric.version, contract)
 
 
 class BadReport(ValueError):
@@ -173,15 +286,18 @@ class Verdict:
     judge: str = ""
     labels: dict[str, str] = field(default_factory=dict)       # name -> the label it was judged under
 
+    evaluation_protocol: int = 1
+
     def to_dict(self) -> dict[str, Any]:
         return {"rubric_version": self.rubric_version, "judge": self.judge, "labels": self.labels,
+                **({"evaluation_protocol": self.evaluation_protocol} if self.evaluation_protocol != 1 else {}),
                 "scores": self.scores, "evidence": self.evidence, "problems": self.problems,
                 "summaries": self.summaries, "rankings": self.rankings}
 
     @classmethod
     def from_dict(cls, data: dict[str, Any], *, where: str = "judge verdict") -> "Verdict":
         required = {"rubric_version", "scores", "evidence", "problems", "summaries", "rankings"}
-        if not isinstance(data, dict) or not required <= data.keys() or set(data) - required - {"judge", "labels"}:
+        if not isinstance(data, dict) or not required <= data.keys() or set(data) - required - {"judge", "labels", "evaluation_protocol"}:
             raise UserError(f"{where}: invalid verdict fields; need {', '.join(sorted(required))}")
         if type(data["rubric_version"]) is not int or data["rubric_version"] < 1:
             raise UserError(f"{where}: rubric_version must be a positive integer")
@@ -226,6 +342,9 @@ class Verdict:
         if labels and (set(labels) != set(scores) or any(not isinstance(v, str) or v not in LABELS or len(v) != 1
                                                         for v in labels.values())):
             raise UserError(f"{where}: labels must identify each candidate")
+        protocol = data.get("evaluation_protocol", 1)
+        if type(protocol) is not int or protocol not in (1, EVALUATION_PROTOCOL):
+            raise UserError(f"{where}: unknown evaluation protocol {protocol!r}")
         return cls(**data)
 
     def card(self) -> str:
@@ -308,13 +427,15 @@ def read(packet: Packet, report: dict[str, Any], rubric: Rubric | None = None, j
         {name[lb]: list(cands[lb].get("problems") or []) for lb in labels},
         {name[lb]: cands[lb].get("summary", "") for lb in labels},
         {k: [[name[lb] for lb in tier] for tier in report["rankings"][k]] for k in rubric.compared},
-        judge, {n: lb for lb, n in name.items()})
+        judge, {n: lb for lb, n in name.items()}, packet.evaluation_protocol)
 
 
 def tally(verdicts: list[Verdict]) -> dict[str, dict[str, Any]]:
     """Each candidate name across verdicts (one per text, or per seed): mean score per criterion, the overall
     mean, its share of first places (a tie for first shares it), and its problems by severity. What the tuning
     loop compares."""
+    if len({v.evaluation_protocol for v in verdicts}) > 1:
+        raise UserError("verdicts under different evaluation protocols don't compare")
     if len({v.rubric_version for v in verdicts}) > 1:
         raise UserError("verdicts under different rubric versions don't compare")
     if len({frozenset(values) for v in verdicts for values in v.scores.values()}) > 1:
@@ -363,25 +484,31 @@ def _unharnessed() -> dict[str, Any]:
             "vulgarity": {int(k): v for k, v in raw["vulgarity"].items()}}
 
 
-def unharnessed_prompt(original: str, *, level: int, vulgarity: int, markup: str = "text") -> str:
-    """The brief for the unharnessed reference retelling: the same for an API call or an agent. A document's
-    markup rule is yarn mode's, so the two retellings are held to the same standard."""
-    if markup == "auto":
-        markup = detect_markup(original)
-    rule = f" {MARKUP_RULE.format(markup=markup)}" if markup != "text" else ""
+def unharnessed_prompt(original: str, *, level: int | str, vulgarity: int | str | None,
+                       markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
+                       document_type: str = "general", document_config: dict | None = None,
+                       translator: Translator | None = None) -> str:
+    """A reference retelling brief without vocabulary/tools, under the same effective settings as judging."""
+    contract = _evaluation_contract(original, level=level, vulgarity=vulgarity, markup=markup, english=english,
+                                    embellishment=embellishment, document_type=document_type,
+                                    document_config=document_config, translator=translator)
     voice = _unharnessed()
-    return (f"Retell this in Australian English vernacular: {voice['levels'][level]}, {voice['vulgarity'][vulgarity]}."
-            f"{rule} Reply with the retelling only.\n\n{original.strip()}")
+    return (f"Retell this in Australian English vernacular: {voice['levels'][contract['level']]}, "
+            f"{voice['vulgarity'][contract['vulgarity']]}.\n{CONTRACT_GUIDANCE}\n"
+            f"EVALUATION_CONTRACT (protocol 2):\n{json.dumps(contract, ensure_ascii=False, sort_keys=True)}\n"
+            f"Reply with the retelling only.\n\n{original.strip()}")
 
 
 def unharnessed(original: str, *, level: int | str = 5, vulgarity: int | str | None = None, markup: str = "text",
-                client: Any = None, model: str = DEFAULT_MODEL, translator: Translator | None = None) -> str:
-    """A model's own retelling, without the toolkit: the judge's reference point. Raises claude.Error."""
-    eff = (translator or default_translator()).effective(level=level, vulgarity=vulgarity)
+                client: Any = None, model: str = DEFAULT_MODEL, translator: Translator | None = None,
+                english: str | None = None, embellishment: int | str | None = None,
+                document_type: str = "general", document_config: dict | None = None) -> str:
+    """A model's reference retelling, without the toolkit vocabulary. Raises claude.Error."""
+    prompt = unharnessed_prompt(original, level=level, vulgarity=vulgarity, markup=markup, english=english,
+                                embellishment=embellishment, document_type=document_type,
+                                document_config=document_config, translator=translator)
     response = claude.create(client or claude.client(), model=model, system=_unharnessed()["system"], max_tokens=16000,
-                             messages=[{"role": "user", "content": unharnessed_prompt(
-                                 original, level=eff.level, vulgarity=eff.vulgarity, markup=markup)}],
-                             effort="medium")
+                             messages=[{"role": "user", "content": prompt}], effort="medium")
     if response.stop_reason in ("refusal", "max_tokens"):
         raise claude.BadReply(f"no retelling: {response.stop_reason}")
     text = "".join(b.text for b in response.content if b.type == "text").strip()
@@ -396,7 +523,7 @@ def run(packet: Packet, *, client: Any = None, model: str = DEFAULT_MODEL, rubri
     report that fails validation goes back once with the reasons. Raises claude.Error or BadReport."""
     rubric = rubric or Rubric.load()
     cache = claude.Cache(cache_dir if cache_dir is not None else claude.default_cache_dir("judge"))
-    key = claude.Cache.key("judge", model, rubric.text(), packet.prompt())
+    key = claude.Cache.key("judge", model, packet.instructions(rubric), packet.prompt())
     cached = cache.get(key)
     if cached is not None:
         return read(packet, cached, rubric, judge=model)
@@ -404,7 +531,7 @@ def run(packet: Packet, *, client: Any = None, model: str = DEFAULT_MODEL, rubri
     messages = [{"role": "user", "content": packet.prompt()}]
     sent_back = 0
     while True:
-        response = claude.create(cl, model=model, system=rubric.text(), messages=messages, max_tokens=16000,
+        response = claude.create(cl, model=model, system=packet.instructions(rubric), messages=messages, max_tokens=16000,
                                  effort="high", schema=packet.schema(rubric))
         report = claude.json_reply(response, ("candidates", "rankings"))
         try:

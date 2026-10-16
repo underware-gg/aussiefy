@@ -3,12 +3,12 @@
 ## Install
 
 aussiefy needs Python 3.10 or later. The core depends on PyYAML and markdown-it-py.
-These commands install the `v0.1.0` release. For development, check out `dev` in a clone and install
+These commands install the `v0.2.0` release. For development, check out `dev` in a clone and install
 in editable mode. A full commit SHA can be used in place of the tag.
 
 ```sh
-pip install "git+https://github.com/underware-gg/aussiefy@v0.1.0"                  # core
-pip install "aussiefy[llm] @ git+https://github.com/underware-gg/aussiefy@v0.1.0"   # with an extra
+pip install "git+https://github.com/underware-gg/aussiefy@v0.2.0"                  # core
+pip install "aussiefy[llm] @ git+https://github.com/underware-gg/aussiefy@v0.2.0"   # with an extra
 ```
 
 | Extra | Adds | Needed for |
@@ -35,7 +35,7 @@ At level 5 the engine goes all out:
 
 ```
 $ aussiefy "Good grief, are you crazy? You're overreacting, you're stupid and all talk, and I'm extremely busy cleaning up after you." -l 5 -s 1
-Strewth, do ya 'ave kangaroos loose in yer bloody top paddock? Oi, yer carryin' on like a pork chop, yer thick as two short planks and a big-noter, and I'm flat out cleaning up after you, ya flamin' mongrel. Stone the flamin' crows.
+Strewth, do ya 'ave kangaroos loose in yer bloody top paddock? Oi, yer carryin' on like a pork chop, yer thick as two short planks and a big-noter, and I'm flat out cleaning up after you.
 ```
 
 ## Choose how Aussie, how rude, and how much liberty
@@ -46,8 +46,8 @@ Three dials control the telling, each by number or name:
 - `--vulgarity`: how rude, from 0 (`nan`, no swearing) to 3 (`tradie`, anything goes). By default it follows the
   level: `nan` at levels 1-2, `dad` at 3-4, `uncle-bob` at 5.
 - `-e/--embellishment`: liberty in the telling, from 0 (`deadset`, straight) through 1 (`dinkum`, limited
-  colour) to 2 (`troppo`, a performance). Translation defaults to the genre's setting; retelling defaults
-  to `dinkum`. See [translation controls](../functional/translation-controls.md).
+  colour) to 2 (`troppo`, a performance). General defaults to `dinkum` across translation and retelling.
+  Auto and named document types use their preset's default; an explicit dial overrides it. See [translation controls](../functional/translation-controls.md).
 
 Level and vulgarity are independent, so you can have either without the other:
 

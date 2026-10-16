@@ -17,6 +17,8 @@ TOOLS = {"aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_g
 VALUES = {"level": 4, "seed": 7, "vulgarity": 1, "variety": 2,
           "registers": ["current", "dated"], "regions": ["qld"], "unlock": ["archaic"], "limit": 3,
           "include_gated": True, "original": "She was tired.", "markup": "markdown", "english": "uk", "short": True,
+          "document_type": "custom", "document_config": {"garnish": [], "keep_quotes": True,
+              "profile": {"garnish": {"opener": 1}, "max_garnish": {"opener": 1}}},
           "embellishment": 2, "suggest": False, "markdown": False}
 SUBJECT = {"lookup": ("query", "very tired"), "lint": ("text", "G'day mate."), "plan": ("text", "She was tired."),
            "translate": ("text", "She was tired."), "guide": (None, None),
@@ -26,7 +28,8 @@ FLAGS = {"level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity",
          "variety": ["--variety", "2"], "registers": ["--registers", "current,dated"],
          "regions": ["--region", "qld"], "unlock": ["--unlock", "archaic"], "limit": ["--limit", "3"],
          "include_gated": ["--include-gated"], "markup": ["--markup", "markdown"],
-         "english": ["--english", "uk"], "short": ["--short"], "embellishment": ["--embellishment", "2"], "suggest": ["--no-suggestions"]}
+         "english": ["--english", "uk"], "document_type": ["--document-type", "custom"],
+         "document_config": ["--document-config", '{"garnish": [], "keep_quotes": true, "profile": {"garnish": {"opener": 1}, "max_garnish": {"opener": 1}}}'], "short": ["--short"], "embellishment": ["--embellishment", "2"], "suggest": ["--no-suggestions"]}
 
 
 def _params(fn):

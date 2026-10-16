@@ -209,20 +209,20 @@ def test_terms_of_art_stay_in_technical_text(translator):
     docs = ("Run the build command. The server sets a cookie in the browser. Each struct has a field for the "
             "user ID. If you build a new release, check the cache and the API key. A bug in the parser crashes "
             "the build.")
-    for out in _seeds(translator, docs, level=5):
+    for out in _seeds(translator, docs, level=5, document_type="auto"):
         assert not any(w in out for w in ("bickie", "bikkie", "paddock", "knock", "brand-spankin", "bug the")), out
     story = _seeds(translator, "Grandma baked a cookie. We built a new shed in the field.", level=4,
-                   embellishment="troppo")
+                   embellishment="troppo", document_type="auto")
     assert any("paddock" in o for o in story)
 
 
 def test_news_keeps_its_quotes_and_everyone_keeps_a_mentioned_word(translator):
     news = ('WASHINGTON (AP) — The senator said "the faucet is broken and the money is gone," officials reported '
             "Monday. Officials said the fund was very busy.")
-    for out in _seeds(translator, news, english="us"):
+    for out in _seeds(translator, news, english="us", document_type="auto"):
         assert '"the faucet is broken and the money is gone,"' in out, out
     talk = 'I hate the word "guys" for a group. Americans call it a "faucet". He called me "mate".'
-    for out in _seeds(translator, talk, english="us", embellishment="troppo"):
+    for out in _seeds(translator, talk, english="us", embellishment="troppo", document_type="auto"):
         assert all(w in out for w in ('"guys"', '"faucet"', '"mate"')), out
 
 
@@ -263,10 +263,10 @@ def test_news_quotes_keep_their_words_and_their_grammar(translator):
     news = ('SYDNEY (AP) — Police said the case was closed on Monday. "We are going to find the guys who did '
             'this, and they are going to be very sorry," Inspector Jane Smith told reporters.')
     quote = '"We are going to find the guys who did this, and they are going to be very sorry,"'
-    for out in _seeds(translator, news, level=5):
+    for out in _seeds(translator, news, level=5, document_type="auto"):
         assert quote in out, out
     single = news.replace('"', "'")
-    for out in _seeds(translator, single, level=5):
+    for out in _seeds(translator, single, level=5, document_type="auto"):
         assert quote.replace('"', "'") in out, out
 
 
@@ -326,10 +326,10 @@ def test_the_public_keeps_its_verb(translator):
 def test_a_web_cookie_in_a_how_to(translator):
     howto = ("1. Open your browser settings. 2. Delete the session cookie for the site. 3. Clear your cookies "
              "and site data. 4. Accept cookies. 5. Enter your name in the field.")
-    for out in _seeds(translator, howto, english="us"):
+    for out in _seeds(translator, howto, english="us", document_type="auto"):
         assert not any(w in out for w in ("biscuit", "bickie", "bikkie", "paddock")), out
     assert any("bickies" in o or "biscuits" in o for o in _seeds(translator, "Grandma's cookies are the best.",
-                                                                 english="us"))
+                                                                 english="us", document_type="auto"))
 
 
 def test_an_unknown_not_in_genre_is_refused():

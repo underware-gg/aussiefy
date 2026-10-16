@@ -86,6 +86,60 @@ credits:
     expect:
       wordnet: WordNet 3.0
 first_party:
+- glob: research/document-refinement-2026-10-15/study-heldout-judge[12]/manifest.json
+  reason: Project experiment metadata, evidence hashes and aggregate counts; source-bearing
+    files have derived corpus declarations.
+- glob: research/document-refinement-2026-10-15/study-heldout-judge[12]/packets-manifest.json
+  reason: Project experiment metadata, evidence hashes and aggregate counts; source-bearing
+    files have derived corpus declarations.
+- glob: research/document-refinement-2026-10-15/study-heldout-judge[12]/reports-manifest.json
+  reason: Project experiment metadata, evidence hashes and aggregate counts; source-bearing
+    files have derived corpus declarations.
+- glob: research/document-refinement-2026-10-15/study-heldout-judge[12]/summary.json
+  reason: Project experiment metadata, evidence hashes and aggregate counts; source-bearing
+    files have derived corpus declarations.
+- glob: research/heldout-2026-10-16/README.md
+  reason: Project methodology, aggregate findings and limitations; source quotations
+    remain in attributed per-case evidence.
+- glob: research/heldout-2026-10-16/plan.yaml
+  reason: Project study settings and source/anchor hashes, no copied corpus wording.
+- glob: research/heldout-2026-10-16/repeat-tally.json
+  reason: Aggregate scores/counts over two independent judgements of six sources,
+    no quoted prose.
+- glob: research/document-refinement-2026-10-15/study-round3/manifest.json
+  reason: Project experiment settings, source paths and frozen input/engine/driver hashes; no copied source prose.
+- glob: research/document-refinement-2026-10-15/study-round3/packets-manifest.json
+  reason: Project evidence hashes binding immutable blind packets to accepted submissions and writer lineage.
+- glob: research/document-refinement-2026-10-15/study-round3/reports-manifest.json
+  reason: Project report hashes bound to the issued packet manifest.
+- glob: research/document-refinement-2026-10-15/study-round3/summary.json
+  reason: Project aggregate scores, counts and evidence hashes; source-bearing quotes remain in attributed per-case reports.
+- glob: research/document-refinement-2026-10-15/study-round2/manifest.json
+  reason: Project experiment settings, source paths and frozen input/engine/driver hashes; no copied source prose.
+- glob: research/document-refinement-2026-10-15/study-round2/packets-manifest.json
+  reason: Project evidence hashes binding immutable blind packets to accepted submissions and writer lineage.
+- glob: research/document-refinement-2026-10-15/study-round2/reports-manifest.json
+  reason: Project report hashes bound to the issued packet manifest.
+- glob: research/document-refinement-2026-10-15/study-round2/summary.json
+  reason: Project aggregate scores, counts and evidence hashes; source-bearing quotes remain in attributed per-case reports.
+- glob: research/document-refinement-2026-10-15/FINDINGS.md
+  reason: Project-authored analysis of independent comparison outcomes; source-bearing quotes remain in attributed per-case reports.
+- glob: research/document-refinement-2026-10-15/study/manifest.json
+  reason: Project experiment settings, paths and frozen file hashes; no copied source prose.
+- glob: research/document-refinement-2026-10-15/study/round-outcome.json
+  reason: Project experiment status and accepted-case identifiers; no copied source prose.
+- glob: research/document-refinement-2026-10-15/README.md
+  reason: Project-authored documentation/refinement analysis and aggregate activity measurements; no copied corpus text.
+- glob: research/document-refinement-2026-10-15/docs-measurement.json
+  reason: Project-authored per-document activity counts and comparison metadata for the repository's own documentation.
+- glob: research/document-refinement-2026-10-15/smart-performance-current.json
+  reason: Project-authored timing, hash and parity metadata; no copied source text or model vectors.
+- glob: research/maintenance-check-2026-10-15/README.md
+  reason: Project-authored implementation analysis and measured findings; no copied corpus text.
+- glob: research/maintenance-check-2026-10-15/model-check.json
+  reason: Project evaluation queries/results and model/dictionary hashes; no model vectors or corpus text copied.
+- glob: research/maintenance-check-2026-10-15/retelling-study.yaml
+  reason: Project comparison configuration and source/anchor path hashes; referenced texts are not reproduced.
 - glob: aussiefy/**/*.py
   reason: Project code, including an independent BERT-compatible tokeniser; not a port.
   exclude:
@@ -652,6 +706,9 @@ texts:
   - file: tests/corpus/everyday/instructions-remote.yaml
     rows: items
   manifests:
+  - file: tests/corpus/heldout/20261016/SOURCES.yaml
+    dir: tests/corpus/heldout/20261016
+    require: [title, author, licence, notes]
   - dir: tests/corpus/reference
     file: tests/corpus/reference/SOURCES.yaml
     require:

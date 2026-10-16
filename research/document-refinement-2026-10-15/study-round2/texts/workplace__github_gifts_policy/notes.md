@@ -1,0 +1,1 @@
+Light voice uses mate in the genuine friend sense, pick up the bill and check with Legal. Kept the policy’s prohibitions, each-time written approvals and reporting thresholds. Headings, URLs, list markers, emojis and quoted wording retained. Lookup confirmed mate’s friendship sense. No declines.

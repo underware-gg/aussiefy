@@ -1,0 +1,1 @@
+Light level-2 sports-reporting voice: beat, picked up, aged. Kept all baseball statistics and team names. Lookup showed knock off means finishing a workday, so did not use it for retirement. No planned phrases to decline.

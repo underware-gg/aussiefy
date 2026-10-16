@@ -34,7 +34,7 @@ def test_blind_is_deterministic_and_hides_the_names(packet, translator):
     orders = {tuple(j.blind(ORIGINAL, CANDIDATES, seed=s, translator=translator).names.values()) for s in range(12)}
     assert len(orders) > 1                                       # the seed changes the order
     prompt = packet.prompt()
-    assert all(name not in prompt for name in ("engine", "yarn", "unharnessed"))
+    assert all(f"CANDIDATE {name}:" not in prompt for name in CANDIDATES)
     assert sorted(packet.names.values()) == sorted(CANDIDATES) and list(packet.candidates) == ["A", "B", "C"]
 
 
@@ -249,3 +249,170 @@ def test_tally_rejects_incomparable_criteria(packet):
     other = j.Verdict.from_dict(data)
     with pytest.raises(UserError, match="different criteria"):
         j.tally([verdict, other])
+
+
+@pytest.mark.parametrize("document_type", ["general", "custom", "auto", "technical", "news", "official", "instructions"])
+def test_judge_contract_matches_effective_writer_settings(translator, document_type):
+    from aussiefy.retelling import brief
+
+    source = '# Settings\n\nRun `worker --check` when you are very tired. “Keep this wording.”\n'
+    settings = {"level": "swaggie", "vulgarity": "dad", "embellishment": "dinkum", "markup": "auto",
+                "english": "uk", "document_type": document_type,
+                "document_config": {"garnish": [], "keep_quotes": True, "person_swears": False,
+                                    "profile": {"phonetic": 0.25, "stack": 0, "garnish_gap": 3}}}
+    writer = brief(source, translator=translator, **settings)
+    packet = j.blind(source, {"producer-canary-one": source, "producer-canary-two": source},
+                     translator=translator, **settings)
+    contract = packet.evaluation_contract
+    assert packet.evaluation_protocol == 2
+    assert (contract["level"], contract["vulgarity"]) == (writer.level, writer.vulgarity)
+    for key in ("document_config", "profile_config", "embellishment", "genre"):
+        assert contract[key] == writer.payload[key.upper()]
+    assert contract["markup"] == writer.markup == "markdown"
+    assert contract["markup_rules"] == writer.payload["MARKUP"]
+    assert contract["english"] == "uk"
+    assert "producer-canary" not in json.dumps(packet.judging(j.Rubric.load()))
+    assert j.Packet.from_dict(json.loads(json.dumps(packet.to_dict(j.Rubric.load())))) == packet
+
+
+@pytest.mark.parametrize("field", ["substitution", "garnish", "max_garnish", "rewrite", "swearing"])
+def test_saved_judge_contract_requires_every_nested_profile_setting(packet, field):
+    data = packet.to_dict(j.Rubric.load())
+    # Roundtrip first so the intentionally edited external JSON cannot mutate the in-memory packet.
+    data = json.loads(json.dumps(data))
+    settings = data["evaluation_contract"]["profile_config"][field]
+    del settings[next(iter(settings))]
+    with pytest.raises(j.UserError, match="fixture.*complete nested"):
+        j.Packet.from_dict(data, where="fixture")
+
+
+@pytest.mark.parametrize("field,value", [
+    ("evaluation_protocol", True), ("evaluation_protocol", 3), ("evaluation_contract", None),
+    ("evaluation_contract", {}),
+])
+def test_saved_judge_contract_rejects_invalid_protocol_or_missing_snapshot(packet, field, value):
+    data = json.loads(json.dumps(packet.to_dict(j.Rubric.load())))
+    data[field] = value
+    with pytest.raises(j.UserError, match="fixture"):
+        j.Packet.from_dict(data, where="fixture")
+
+
+@pytest.mark.parametrize("change", ["level", "markup", "document", "profile", "numeric"])
+def test_saved_judge_contract_rejects_invalid_effective_settings(packet, change):
+    data = json.loads(json.dumps(packet.to_dict(j.Rubric.load())))
+    contract = data["evaluation_contract"]
+    if change == "level":
+        contract["level"] = 1 if data["level"] != 1 else 2
+    elif change == "markup":
+        contract["markup"] = "auto"
+    elif change == "document":
+        del contract["document_config"]["keep_quotes"]
+    elif change == "profile":
+        del contract["profile_config"]["phonetic"]
+    else:
+        contract["profile_config"]["garnish"]["tag"] = -0.1
+    with pytest.raises(j.UserError, match="fixture"):
+        j.Packet.from_dict(data, where="fixture")
+
+
+def test_legacy_packet_and_verdict_keep_their_original_protocol(packet):
+    rubric = j.Rubric.load()
+    legacy = j.Packet(packet.original, packet.level, packet.vulgarity, packet.candidates, packet.names,
+                      packet.rubric_version)
+    saved = legacy.to_dict(rubric)
+    assert not {"evaluation_protocol", "evaluation_contract"} & saved.keys()
+    restored = j.Packet.from_dict(json.loads(json.dumps(saved)))
+    assert restored == legacy and restored.evaluation_protocol == 1
+    assert restored.instructions(rubric) == rubric.text() and "EVALUATION_CONTRACT" not in restored.prompt()
+    report = report_for(packet, rubric)
+    old = j.read(restored, report, rubric)
+    current = j.read(packet, report, rubric)
+    assert old.evaluation_protocol == 1 and "evaluation_protocol" not in old.to_dict()
+    assert j.Verdict.from_dict(old.to_dict()) == old
+    assert current.evaluation_protocol == current.to_dict()["evaluation_protocol"] == 2
+    assert j.Verdict.from_dict(current.to_dict()) == current
+    with pytest.raises(j.UserError, match="different evaluation protocols"):
+        j.tally([old, current])
+
+
+def test_api_judge_uses_agent_instructions_and_contract_sensitive_cache(packet, tmp_path, monkeypatch, translator):
+    from conftest import FakeClaude
+
+    rubric = j.Rubric.load()
+    changed = j.blind(ORIGINAL, CANDIDATES, level=4, seed=3, translator=translator,
+                      document_config={"profile": {"phonetic": 0}})
+    good = report_for(packet, rubric)
+    client = FakeClaude(_reply(good), _reply(good), _reply(good))
+    for item in (packet, changed):
+        j.run(item, client=client, model="offline", cache_dir=tmp_path)
+        sent = client.kwargs
+        assert sent["system"] == item.judging(rubric)["instructions"]
+        assert sent["messages"][0]["content"] == item.judging(rubric)["prompt"]
+    assert len(client.calls) == 2
+    j.run(packet, client=FakeClaude(), model="offline", cache_dir=tmp_path)
+    monkeypatch.setattr(j, "CONTRACT_INSTRUCTIONS", j.CONTRACT_INSTRUCTIONS + "\nRevised judge guidance.")
+    j.run(packet, client=client, model="offline", cache_dir=tmp_path)
+    assert len(client.calls) == 3 and len(list(tmp_path.glob("*.json"))) == 3
+
+
+def test_reference_writer_receives_contract_without_judge_scoring_directions(translator):
+    from conftest import FakeClaude, reply, text_block
+
+    source = "# Settings\n\nRun `worker --check`.\n"
+    settings = {"level": 5, "vulgarity": 0, "embellishment": "deadset", "markup": "auto",
+                "document_type": "custom", "document_config": {"keep_quotes": True,
+                      "profile": {"phonetic": 0, "garnish": {"tag": 0}}}, "translator": translator}
+    prompt = j.unharnessed_prompt(source, **settings)
+    assert "EVALUATION_CONTRACT" in prompt and '"phonetic": 0' in prompt
+    assert "every anonymous candidate" not in prompt and "eight rubric criteria" not in prompt
+    client = FakeClaude(reply(text_block(source)))
+    assert j.unharnessed(source, client=client, **settings) == source.strip()
+    assert client.kwargs["messages"][0]["content"] == prompt
+
+
+def test_cli_judge_routes_carry_advanced_writing_settings(tmp_path, capsys, monkeypatch):
+    from aussiefy.cli import main
+
+    source = "# Settings\n\nRun `worker --check` when you are very tired.\n"
+    original = tmp_path / "source.md"
+    original.write_text(source)
+    first, second = tmp_path / "first.md", tmp_path / "second.md"
+    first.write_text(source)
+    second.write_text(source)
+    config = {"keep_quotes": True, "garnish": [], "profile": {"phonetic": 0.2, "stack": 0}}
+    flags = ["--markup", "auto", "--english", "uk", "--document-type", "custom", "-l", "4",
+             "--vulgarity", "0", "-e", "dinkum", "--document-config", json.dumps(config)]
+    saved = tmp_path / "packet.json"
+    candidates = [str(original), "--candidate", f"first={first}", "--candidate", f"second={second}"]
+    assert main(["judge", "brief", *candidates, *flags, "-o", str(saved)]) == 0
+    visible = json.loads(capsys.readouterr().out)
+    packet = j.Packet.from_dict(json.loads(saved.read_text()))
+    assert visible == packet.judging(j.Rubric.load())
+    assert packet.evaluation_contract["document_type"] == "custom"
+    assert packet.evaluation_contract["profile_config"]["phonetic"] == 0.2
+    assert packet.evaluation_contract["markup"] == "markdown"
+    calls = []
+
+    def run(item, **kwargs):
+        calls.append(item)
+        return j.read(item, report_for(item, j.Rubric.load()))
+
+    def reference(text, **kwargs):
+        assert text == source and kwargs["document_config"] == config
+        assert kwargs["markup"] == "auto" and kwargs["english"] == "uk"
+        return source
+
+    monkeypatch.setattr(j, "run", run)
+    monkeypatch.setattr(j, "unharnessed", reference)
+    assert main(["judge", "run", *candidates, *flags, "--json"]) == 0
+    capsys.readouterr()
+    assert calls[-1].evaluation_contract == packet.evaluation_contract
+    assert main(["judge", "run", str(original), "--candidate", f"first={first}", "--unharnessed", *flags,
+                 "--json"]) == 0
+    capsys.readouterr()
+    assert calls[-1].evaluation_contract == packet.evaluation_contract
+    assert main(["judge", "unharnessed", str(original), *flags, "--prompt-only"]) == 0
+    prompt = capsys.readouterr().out
+    assert '"phonetic": 0.2' in prompt and '"keep_quotes": true' in prompt
+    assert main(["judge", "unharnessed", str(original), *flags]) == 0
+    assert capsys.readouterr().out.strip() == source.strip()
