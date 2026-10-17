@@ -325,9 +325,27 @@ said says say went came saw got had made took gave put ran sat stood fell woke l
 """.split())
 
 
+# a sentence's first word, after any opening quote or bracket: the word an opener lowers
+FIRST_WORD_RE = re.compile(r"([\"'(]*)([A-Za-z'\u2019]+)")
+# a word as masks and the swear list read it: letters, with apostrophes inside or after ("fuckin'", "bastard's")
+MASK_WORD_RE = re.compile(r"[A-Za-z][A-Za-z'\u2019]*")
+
+
+def spoken_word(token: str) -> str:
+    """A MASK_WORD_RE token as a word: without a closing quote mark after it, though a dropped g keeps its
+    apostrophe ("fuckin'")."""
+    bare = token.rstrip("'\u2019")
+    return token if bare.lower().endswith("in") and bare != token else bare
+
+
+def normalise_word(word: str) -> str:
+    """A word in lower case with a straight apostrophe, as the swear list and mask words write it."""
+    return word.lower().replace("\u2019", "'")
+
+
 def lower_first_word(sentence_text: str, common: set[str] | None = None, force: bool = False) -> str:
     """Lower-case the first word if it is an ordinary word rather than a name or "I"."""
-    m = re.match(r"([\"'(]*)([A-Za-z'\u2019]+)", sentence_text)
+    m = FIRST_WORD_RE.match(sentence_text)
     if not m:
         return sentence_text
     word = m.group(2)

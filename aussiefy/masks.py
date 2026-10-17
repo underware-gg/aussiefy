@@ -6,37 +6,29 @@ masked: the dictionary's swear list (swears.yaml), the compounds its rated words
 
 from __future__ import annotations
 
-import re
 from typing import Any
 
 from .model import MASK_ENDINGS, swear_strength
+from .text import MASK_WORD_RE, normalise_word, spoken_word
 
-WORD_RE = re.compile(r"[A-Za-z][A-Za-z'’]*")
 
-
-def masks(text: str, swears: dict[str, int], compounds: dict[str, int] | None = None,
-          words: dict[str, int] | None = None) -> list[dict[str, Any]]:
+def masks(text: str, swears: dict[str, int], compounds: dict[str, int],
+          words: dict[str, int]) -> list[dict[str, Any]]:
     """Each maskable word in text: its span, where its ending starts (its end, where it keeps none) and the
-    vulgarity it needs. words: the mask words of the entries rendered in text, with their entries' vulgarity. A
-    word keeps its ending (-s, -es, -ed, -er, -ers, -ing, -in', -in, -y) only after a stem that is itself a listed
-    swear or a mask word; any other, a compound included, is masked whole after its first letter."""
-    compounds, words = compounds or {}, words or {}
+    vulgarity it needs. compounds: Dictionary.swear_compounds. words: the mask words of the entries rendered in
+    text, with their entries' vulgarity. A word keeps its ending (-s, -es, -ed, -er, -ers, -ing, -in', -in, -y)
+    only after a stem that is itself a listed swear or a mask word; any other, a compound included, is masked
+    whole after its first letter. A word listed and authored both has one mask, at the higher vulgarity."""
     out = []
-    for m in WORD_RE.finditer(text):
-        word = _word(m.group())
-        low = word.lower().replace("’", "'")
+    for m in MASK_WORD_RE.finditer(text):
+        word = spoken_word(m.group())
+        low = normalise_word(word)
         strength = max(swear_strength(swears, low), _inflected(low, compounds), _inflected(low, words))
         if strength:
             start = m.start()
             out.append({"span": [start, start + len(word)], "ending_start": start + _stem_length(low, swears, words),
                         "vulgarity": strength})
     return out
-
-
-def _word(token: str) -> str:
-    """The word without a closing quote mark after it; a dropped g keeps its apostrophe ("fuckin'")."""
-    bare = token.rstrip("'’")
-    return token if bare.lower().endswith("in") and bare != token else bare
 
 
 def _inflected(low: str, table: dict[str, int]) -> int:

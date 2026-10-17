@@ -11,6 +11,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from .errors import UserError
+from .text import MASK_WORD_RE, normalise_word
 
 FRAMES = (
     "predicate_adj",  # complement of a linking verb: "he's [flat out like a lizard drinking]"
@@ -350,7 +351,7 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
         raise SchemaError(f"{entry_id}: an entry with nothing profane has nothing to mask; give it 'mask' or "
                           "'profane: false', not both")
     for word in mask:
-        if not re.fullmatch(r"[a-z][a-z'\u2019-]*", word) or not any(
+        if not MASK_WORD_RE.fullmatch(word) or word != normalise_word(word) or not any(
                 re.search(rf"(?<![a-z]){re.escape(word)}", f.lower()) for f in (form,) + variants):
             raise SchemaError(f"{entry_id}: mask word {word!r} must be a lower-case word in one of its forms")
 

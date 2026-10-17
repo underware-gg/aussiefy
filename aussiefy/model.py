@@ -14,7 +14,7 @@ from . import morph
 from .dialect import DialectTable
 from .matcher import Pattern, PatternIndex
 from .schema import Concept, Entry, Imagery
-from .text import COMMON_STARTERS
+from .text import COMMON_STARTERS, MASK_WORD_RE, normalise_word, spoken_word
 from .terms import fold
 
 
@@ -29,7 +29,7 @@ def _find_all(word: str, part: str) -> list[int]:
 def swear_strength(swears: dict[str, int], word: str) -> int:
     """How strong a swear a word is: as listed, with a dropped g ("fuckin'", "pissin" -> pissing) or a plural
     ("pricks") or a possessive ("bastard's") read as the listed word."""
-    w = word.lower().replace("\u2019", "'")
+    w = normalise_word(word)
     bare = w.rstrip("'")
     for cand in (w, bare, bare + "g" if bare.endswith("in") else "", bare[:-1] if bare.endswith("s") else "",
                  bare[:-2] if bare.endswith("'s") else ""):   # "the bastard's dog"
@@ -139,7 +139,7 @@ class Dictionary:
         texts = [f for e in self.entries.values() if e.vulgarity and e.status != "omit" for f in e.all_forms]
         texts += [r.text for e in self.entries.values() for r in e.riffs if r.vulgarity]
         out: dict[str, int] = {}
-        for word in {w.lower().replace("\u2019", "'").strip("'") for t in texts for w in re.findall(r"[A-Za-z'\u2019]+", t)}:
+        for word in {normalise_word(spoken_word(m.group())) for t in texts for m in MASK_WORD_RE.finditer(t)}:
             if swear_strength(self.swears, word):
                 continue
             held = []

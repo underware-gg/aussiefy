@@ -12,7 +12,7 @@ from aussiefy.schema import PLACEHOLDER_RE, SchemaError, parse_entry
 
 def _masked(dictionary, text, words=None):
     return [(text[m["span"][0]:m["ending_start"]], text[m["ending_start"]:m["span"][1]], m["vulgarity"])
-            for m in masks(text, dictionary.swears, dictionary.swear_compounds, words)]
+            for m in masks(text, dictionary.swears, dictionary.swear_compounds, words or {})]
 
 
 @pytest.mark.parametrize("text, expected", [
@@ -31,7 +31,7 @@ def test_maskable_words_and_the_endings_they_keep(dictionary, text, expected):
 
 
 def test_mask_offsets_count_unicode_code_points(dictionary):
-    assert masks("🦘 e\u0301 fucked", dictionary.swears, dictionary.swear_compounds) == [
+    assert masks("🦘 e\u0301 fucked", dictionary.swears, dictionary.swear_compounds, {}) == [
         {"span": [5, 11], "ending_start": 9, "vulgarity": 2}]
 
 
@@ -53,7 +53,7 @@ def _forms(entry):
 def test_every_rated_entry_yields_a_masked_word_at_its_rating_unless_nothing_in_it_is_profane(dictionary):
     """At least one of an entry's forms masks a word at its rating, and any form with a masked word reaches it,
     so a lock never shows a rated term's profanity in full. An entry marked `profane: false` (innuendo, an insult,
-    a crude word: "rooted", "mongrel", "gob") is never masked."""
+    a crude word: "rooted", "mongrel", "gob") yields no masked word at all, so the mark is never what hides one."""
     short, weak = [], []
     for e in dictionary.entries.values():
         if e.status != "active" or not e.vulgarity:
@@ -62,7 +62,7 @@ def test_every_rated_entry_yields_a_masked_word_at_its_rating_unless_nothing_in_
         strongest = [max((m["vulgarity"] for m in masks(f, dictionary.swears, dictionary.swear_compounds, words)),
                          default=0) for f in _forms(e)]
         if not e.profane:
-            assert not e.mask, e.id
+            assert not e.mask and max(strongest) == 0, (e.id, strongest)
             continue
         rating = e.vulgarity
         if max(strongest) < rating:
