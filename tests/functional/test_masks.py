@@ -45,11 +45,6 @@ def _forms(entry):
     return [" ".join(PLACEHOLDER_RE.sub(" ", f).split()) for f in entry.all_forms]
 
 
-# Rated 2, while their only listed word, "bugger", is rated 1 in swears.yaml: whether to lower the entries or mask
-# "bugger" at 2 on them is a content call put to Rob. Until then they are held to their listed word's rating only.
-RATED_ABOVE_THEIR_SWEAR = {"bugger-me-dead", "g-bugger-me-dead"}
-
-
 def test_every_rated_entry_yields_a_masked_word_at_its_rating_unless_nothing_in_it_is_profane(dictionary):
     """At least one of an entry's forms masks a word at its rating, and any form with a masked word reaches it,
     so a lock never shows a rated term's profanity in full. An entry marked `profane: false` (innuendo, an insult,
@@ -64,19 +59,12 @@ def test_every_rated_entry_yields_a_masked_word_at_its_rating_unless_nothing_in_
         if not e.profane:
             assert not e.mask, e.id
             continue
-        rating = 1 if e.id in RATED_ABOVE_THEIR_SWEAR else e.vulgarity
+        rating = e.vulgarity
         if max(strongest) < rating:
             short.append(e.id)
         weak += [(e.id, f) for f, s in zip(_forms(e), strongest) if 0 < s < rating]
     assert not short, f"rated entries with no masked word at their rating (author `mask` or mark `profane: false`): {short}"
     assert not weak, f"forms whose masked words fall short of the entry's rating: {weak}"
-
-
-def test_the_exception_still_holds(dictionary):
-    """Drop RATED_ABOVE_THEIR_SWEAR once the call is made and the data agrees."""
-    for i in RATED_ABOVE_THEIR_SWEAR:
-        e = dictionary.entries[i]
-        assert e.vulgarity == 2 and not e.mask and dictionary.swears["bugger"] == 1
 
 
 def test_entries_with_nothing_profane_are_marked_in_the_data(dictionary):

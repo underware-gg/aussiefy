@@ -5,6 +5,8 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Rate "bugger me dead" (phrase and garnish), "rooted" and "have a root" at Dad, matching "bugger" in the swear
+  list: cheeky, not profane.
 - Mask only actual profanity in `changes` renderings: swear-list words, the compounds the dictionary's rated
   words build on one ("fuckwit"), and the new per-entry `mask` words for profanity the swear list lacks ("wanker",
   "dickhead"), each with the ending a page keeps. Innuendo, insults and crude words show in full: 25 rated entries
