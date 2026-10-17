@@ -21,7 +21,7 @@ class Pins(PassObserver):
         if pinned is None:
             return choice
         return next((c for c in keep if c.entry.id == pinned), None) or Candidate(
-            self.dictionary.entries[pinned], 0.0, "pinned")
+            self.dictionary.entries[pinned], 1.0, "pinned")
 
     def placing(self, sentence, placement, entry, form):
         if (sentence, placement) in self.drop:

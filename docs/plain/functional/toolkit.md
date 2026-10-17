@@ -31,9 +31,11 @@ tr.translate(text, level="swaggie", seed=1, vulgarity="dad", regions=["vic"], un
 lookup("very tired", translator=tr)   # the toolkit functions take a translator too; the default is shared
 ```
 
-`translate_changes` takes `translate`'s parameters and returns a `ChangeSet`: the same translation, with every
-change it made and each swap's alternatives rendered in place ([changes](changes.md)). It's for a host that lets a
-reader edit a translation, so it's in the Python API only, not the CLI, MCP tools or yarn mode.
+`translate_changes` takes `translate`'s parameters, plus `embedder` (the similarity fallback), and returns a
+`ChangeSet`: the same translation, with every change it made and each swap's alternatives rendered in place
+([changes](changes.md)). It's for a host that lets a reader edit a translation, so it's in the Python API only, not
+the CLI, MCP tools or yarn mode. `aussiefy.guide.dial_descriptions()` lists every setting of the level, vulgarity
+and embellishment dials and every document type, each with a one-line description from `aussiefy/data/guide.yaml`.
 
 Every function takes keyword-only dials, by number or name: `level` (default 5) and `vulgarity` (default: the
 level's own). `translate`, `plan` and `yarn` also take `seed` (default 0). `translate` and `plan` also take

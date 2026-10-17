@@ -4,9 +4,17 @@ model and both the engine and the toolkit can use it."""
 
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from .schema import Entry
+
+if TYPE_CHECKING:
+    from .genre import Embellishment
+
+
+def shows_riffs(setting: "Embellishment") -> bool:
+    """Whether cards show an entry's riffs under an embellishment setting: it takes riffs, and entries' own."""
+    return setting.entry_riffs and setting.takes("riff")
 
 
 def riff_cards(e: Entry, cap: int) -> list[dict[str, str]]:
@@ -27,14 +35,15 @@ def short_card(e: Entry) -> dict[str, Any]:
     return card
 
 
-def entry_card(e: Entry, cap: int = 3) -> dict[str, Any]:
-    """The full card: meaning, level and vulgarity, register and region, notes, sources and the riffs under the
-    vulgarity cap."""
+def entry_card(e: Entry, cap: int = 3, riffs: bool = True) -> dict[str, Any]:
+    """The full card: meaning, level and vulgarity, register and region, notes, sources, the riffs under the
+    vulgarity cap (riffs: whether the embellishment takes the entry's riffs at all), and a gated entry's flags
+    (shown only where the policy unlocked it)."""
     card = {"id": e.id, "form": e.form, "gloss": e.gloss, "frame": e.frame, "concepts": list(e.concept),
             "level": e.incoherence, "vulgarity": e.vulgarity, "register": e.register}
     if e.placement:
         card["placement"] = e.placement
-    if e.riffs_within(cap):
+    if riffs and e.riffs_within(cap):
         card["riffs"] = riff_cards(e, cap)
     if e.variants:
         card["variants"] = list(e.variants)
@@ -46,4 +55,6 @@ def entry_card(e: Entry, cap: int = 3) -> dict[str, Any]:
         card["sources"] = list(e.sources)
     if e.replaces:
         card["replaces"] = [r.split("@")[0] for r in e.replaces]
+    if e.status == "gate":
+        card["gated"] = list(e.flags)
     return card

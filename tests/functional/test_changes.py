@@ -2,22 +2,26 @@
 locked options rendered where they stand (aussiefy.translate_changes; DD-029). The renderings are checked against
 whole pinned re-renders in test_changes_oracle.py."""
 
+import hashlib
 import inspect
 import json
 import os
+import re
 import subprocess
 import sys
 from dataclasses import replace
 from pathlib import Path
+from string import Formatter
 
 import pytest
 
 import aussiefy
 from aussiefy import changes as C
 from aussiefy import harness
-from aussiefy.cards import entry_card
+from aussiefy.engine import PassObserver
 from aussiefy.policy import resolve
-from aussiefy.select import fit_rejection, policy_rejection
+from aussiefy.schema import PLACEHOLDER_RE
+from aussiefy.terms import fold, restore_g
 
 ROOT = Path(__file__).resolve().parents[2]
 FIXTURES = ROOT / "tests" / "fixtures" / "changes"
@@ -26,10 +30,14 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from regen_changes_fixtures import CASES, build as fixture  # noqa: E402
 
 KINDS = json.loads((FIXTURES / "every-kind.json").read_text(encoding="utf-8"))["request"]
+# the contract each VERSION names: its schema's sha256 and its id format. Changing either means a new VERSION.
+CONTRACTS = {1: ("3ebb7cdb", "{kind}:{start}-{end}[:{placement or rule}][#{n}]")}
+LIVELY = dict(level=5, vulgarity=2, embellishment=2, document_config={"profile": {
+    "stack": 0.9, "garnish": {"riff": 1.0}, "max_garnish": {"riff": 30}, "garnish_gap": 0, "swearing": {"infix": 6.0}}})
 
 
-def _every_kind(translator):
-    options = {k: v for k, v in KINDS.items() if k != "text"}
+def _every_kind(translator, **overrides):
+    options = {**{k: v for k, v in KINDS.items() if k != "text"}, **overrides}
     return aussiefy.translate_changes(KINDS["text"], translator=translator, **options)
 
 
@@ -40,13 +48,52 @@ def _schema():
     return jsonschema, schema
 
 
-def test_the_python_api_takes_translates_parameters():
+def _valid(cs):
+    """A response checked against the schema, and what the schema can't say: a garnish has its removal unless it
+    is named under withheld, and then offers its pick alone (a contextual image, nothing), as the output has it
+    over its region."""
+    jsonschema, schema = _schema()
+    jsonschema.validate(cs.to_dict(), schema)
+    withheld = {w["id"] for w in cs.withheld}
+    for c in cs.changes:
+        if c["kind"] == "garnish":
+            assert ("removed" in c) == (c["id"] not in withheld), c["id"]
+        if c["id"] in withheld:
+            offered = [(o["entry_id"], o["rendered"], o["weight"]) for o in c["alternatives"]]
+            assert not c["locked"] and offered == [(c["entry_id"], cs.text[slice(*o["out_span"])], 1.0)
+                                                   for o in c["alternatives"][:bool(c["entry_id"])]], c["id"]
+    return cs
+
+
+def _id_pattern(format_: str) -> re.Pattern:
+    """A regular expression for the ids an id format makes (its [...] parts optional), naming kind, start and end."""
+    fields = {"kind": r"(?P<kind>[a-z_]+)", "start": r"(?P<start>\d+)", "end": r"(?P<end>\d+)",
+              "placement or rule": r"[a-z0-9-]+", "n": r"[2-9]\d*|1\d+"}
+    out = ""
+    for m in re.finditer(r"\[([^\]]*)\]|[^\[]+", format_):
+        part = m.group(1) if m.group(1) is not None else m.group(0)
+        rx = "".join(re.escape(text) + (f"(?:{fields[name]})" if name else "")
+                     for text, name, _, _ in Formatter().parse(part))
+        out += f"(?:{rx})?" if m.group(1) is not None else rx
+    return re.compile(out)
+
+
+def test_the_python_api_takes_translates_parameters_and_an_embedder():
     def params(fn):
         return {n: p.default for n, p in inspect.signature(fn).parameters.items()}
 
-    assert params(aussiefy.translate_changes) == params(aussiefy.translate)
+    assert params(aussiefy.translate_changes) == {**params(aussiefy.translate), "embedder": None}
     assert all(p.kind is inspect.Parameter.KEYWORD_ONLY
                for n, p in inspect.signature(aussiefy.translate_changes).parameters.items() if n != "text")
+
+
+def test_the_embedder_is_the_translations(translator):
+    text = "He was exhaustedd and the toilet is broken."
+    for embedder in ("none", "ngram"):
+        assert (aussiefy.translate_changes(text, translator=translator, embedder=embedder).text
+                == translator.translate(text, embedder=embedder).text)
+    with pytest.raises(aussiefy.UserError, match="ngram or none"):
+        aussiefy.translate_changes("# Hi\n\nShe was tired.", translator=translator, markdown=True, embedder="bundled")
 
 
 def test_changes_leave_the_translation_as_translate_gives_it(translator):
@@ -90,33 +137,53 @@ def test_every_kind_is_placed_in_the_output(translator):
             assert c["pair"]["english"] == "us" and c["pair"]["after"] == c["output"]
 
 
-def test_every_swap_and_removal_reads_true_in_place(translator):
-    """Swapping any one alternative, locked option or removal into the output changes only its span, and the
-    pick's own rendering is the output there."""
+def test_a_changes_renderings_share_its_region(translator):
+    """Every alternative and locked option of a change goes over one region, which takes in the change's own span;
+    the pick's rendering is the output there; a removal takes the garnish's words out of its region."""
     cs = _every_kind(translator)
     for c in cs.changes:
-        for o in c["alternatives"]:
-            if o["entry_id"] == c["entry_id"]:
-                assert cs.text[slice(*o["out_span"])] == o["rendered"], c["id"]
-        for o in c["alternatives"] + c["locked"] + ([c["removed"]] if c.get("removed") else []):
+        renderings = c["alternatives"] + c["locked"]
+        assert len({tuple(o["out_span"]) for o in renderings}) <= 1, c["id"]
+        for o in renderings:
             a, b = o["out_span"]
             assert a <= c["out_span"][0] <= c["out_span"][1] <= b, c["id"]
+            if o["entry_id"] == c["entry_id"]:
+                assert cs.text[a:b] == o["rendered"], c["id"]
         if c.get("removed"):
             a, b = c["removed"]["out_span"]
-            rest = cs.text[:a] + c["removed"]["rendered"] + cs.text[b:]
-            assert len(rest) < len(cs.text) and c["output"].strip(" ,.") not in rest[a - 2:a + 2]
+            words = c["output"].strip(" ,.!?").lower()
+            assert words and words not in c["removed"]["rendered"].lower(), c["id"]
+            assert len(c["removed"]["rendered"]) < b - a and a <= c["out_span"][0] <= c["out_span"][1] <= b
 
 
 @pytest.mark.parametrize("text, options, original, alternatives", [
     # "a" turns "an" with the alternative after it, taking the article into the span
     ("We let a toddler win the game.", {"level": 5, "vulgarity": 1}, "a toddler",
      {"nipper": "a nipper", "ankle-biter": "an ankle biter"}),
+    # a riff the entry brings, a stacked second idiom, and a swear infix inside a spot
+    ("You are very tired and hungry, and your car is broken.", {**LIVELY, "seed": 0}, "broken",
+     {"cactus": "cactus, like a flat-pack in a cyclone"}),
+    ("The toilet is broken and I am exhausted.", {**LIVELY, "seed": 2}, "exhausted",
+     {"buggered": "buggered, rooted", "fucked-broken": "fucked, out on my bloody feet"}),
+    # "very cold" as "cold as fuck": the intensifier rule takes the place of the entry's own word
+    ("The weather was very cold and the beer was very good.", {**LIVELY, "seed": 0}, "very cold",
+     {"flamin": "cold as fuck", "bloody": "cold as fuck"}),
 ])
-def test_an_alternative_fits_its_article(translator, text, options, original, alternatives):
+def test_named_renderings(translator, text, options, original, alternatives):
     cs = aussiefy.translate_changes(text, translator=translator, **options)
     c = next(c for c in cs.changes if c["kind"] == "substitution" and c["original"] == original)
     got = {o["entry_id"]: o["rendered"] for o in c["alternatives"]}
-    assert all(got[k] == v for k, v in alternatives.items()), got
+    assert all(got.get(k) == v for k, v in alternatives.items()), got
+
+
+def test_locked_options_render_at_the_readers_cap(translator):
+    """A locked option renders with the reader's riffs and infix rates, as the page shows it before unlocking: at
+    dad, "very" in "very cold" as fuckin' (tagged uncle-bob) reads "fuckin'", where a whole re-render at uncle-bob
+    would read "cold as fuck" (an uncle-bob infix)."""
+    text = "The weather was very cold and the beer was very good."
+    cs = aussiefy.translate_changes(text, translator=translator, **{**LIVELY, "vulgarity": 1, "seed": 0})
+    c = next(c for c in cs.changes if c["kind"] == "substitution" and c["original"] == "very")
+    assert {o["entry_id"]: (o["rendered"], o["vulgarity"]) for o in c["locked"]}["fuckin-very"] == ("fuckin'", 2)
 
 
 def test_stacked_idioms_riffs_and_infixes_count_in_a_renderings_vulgarity(translator, dictionary):
@@ -133,23 +200,62 @@ def test_stacked_idioms_riffs_and_infixes_count_in_a_renderings_vulgarity(transl
         assert d["vulgarity"] == next(r.vulgarity for r in dictionary.phonetic if r.id == d["rule"]["id"]) > 0
 
 
+def _words(text):
+    return re.findall(r"[a-z']{3,}", fold(restore_g(text.lower())))
+
+
+def test_each_rendering_says_its_entry_or_a_rule_rewrote_it(translator, dictionary):
+    """A swap's rendering holds a word of its entry's forms (inflected), unless a phonetic rule wrote over it:
+    "very cold" as flamin' reads "cold as fuck". For the pick, that rule's change is one it covers."""
+    rewriting = {r.id: _words(re.sub(r"\\\d|\\g<\w+>", " ", r.replace)) for r in dictionary.phonetic}
+    texts = [KINDS["text"], "The weather was very cold and the beer was very good.", "He is very drunk and broke."]
+    checked = rewritten = 0
+    for text in texts:
+        for seed in (0, 1):
+            cs = aussiefy.translate_changes(text, translator=translator, **{**LIVELY, "seed": seed})
+            for c in (c for c in cs.changes if c["kind"] == "substitution"):
+                for o in c["alternatives"] + c["locked"]:
+                    entry = dictionary.entries[o["entry_id"]]
+                    stems = {w[:max(3, len(w) - 2)] for f in entry.all_forms for w in _words(PLACEHOLDER_RE.sub(" ", f))}
+                    checked += 1
+                    if any(w.startswith(s) for w in _words(o["rendered"]) for s in stems):
+                        continue
+                    rules = [r for r, ws in rewriting.items() if ws and set(ws) <= set(_words(o["rendered"]))]
+                    assert rules, (o["entry_id"], o["rendered"])
+                    if o["entry_id"] == c["entry_id"]:
+                        assert any(i.split(":")[2] in rules for i in c["covers"]), c
+                    rewritten += 1
+    assert checked > 50 and rewritten >= 2
+
+
 def test_a_swaps_region_covers_the_changes_inside_it(translator):
     cs = _every_kind(translator)
     ids = {c["id"]: c for c in cs.changes}
     assert any(c["covers"] for c in cs.changes if c["kind"] == "substitution")
     for c in cs.changes:
+        spans = [c["out_span"]] + [o["out_span"] for o in c["alternatives"] + c["locked"]]
+        spans += [c["removed"]["out_span"]] if c.get("removed") else []
         for inner in c["covers"]:
             d = ids[inner]
-            spans = [c["out_span"]] + [o["out_span"] for o in c["alternatives"] + c["locked"]]
             assert min(s[0] for s in spans) <= d["out_span"][0] <= d["out_span"][1] <= max(s[1] for s in spans)
 
 
-def test_ids_are_unique_and_named_by_kind_and_source_span(translator):
+def test_ids_are_unique_and_made_by_the_contracts_id_format(translator):
     cs = _every_kind(translator)
     ids = [c["id"] for c in cs.changes]
     assert len(ids) == len(set(ids))
+    pattern = _id_pattern(CONTRACTS[C.VERSION][1])
     for c in cs.changes:
-        assert c["id"].startswith(f"{c['kind']}:{c['src_span'][0]}-{c['src_span'][1]}")
+        m = pattern.fullmatch(c["id"])
+        assert m and (m["kind"], int(m["start"]), int(m["end"])) == (c["kind"], *c["src_span"]), c["id"]
+    assert pattern.fullmatch("garnish:40-40:connective#2") and not pattern.fullmatch("garnish:40-40#1")
+
+
+def test_the_contract_version_names_its_schema_and_id_format():
+    """Changing the schema or how ids are made changes the contract: bump changes.VERSION and add it here."""
+    schema = hashlib.sha256(C.SCHEMA.read_bytes()).hexdigest()[:8]
+    assert (schema, C.ID_FORMAT) == CONTRACTS[C.VERSION], \
+        f"the changes contract changed (schema {schema}): bump changes.VERSION and record it in CONTRACTS"
 
 
 def test_ids_and_renderings_are_the_same_in_every_process():
@@ -164,29 +270,38 @@ def test_ids_and_renderings_are_the_same_in_every_process():
     assert len(outs) == 1
 
 
-def test_locked_options_pass_every_check_at_their_tagged_vulgarity(translator, dictionary):
-    """A locked option is held back by the vulgarity cap alone: at the vulgarity it's tagged with, the policy and
-    the grammar both take it, and at the one below they don't."""
-    checked = 0
-    for name, (_, request) in CASES.items():
-        options = {k: v for k, v in request.items() if k != "text"}
-        watch = C.Watch()
-        result, raw = C.collect(translator, request["text"], _observer=watch,
-                                **{k: v for k, v in options.items() if k != "markdown"})
-        run = watch.run
-        spots = {(s.rec.span): s for s in watch.spots if s.rec.substituted}
-        for c in raw:
-            for o in c["locked"]:
-                spot = next(s for s in spots.values() if c["src_span"][0] <= s.rec.span[0] < c["src_span"][1])
-                entry, v = dictionary.entries[o["entry_id"]], o["vulgarity"]
-                at = resolve(replace(run.pol, vulgarity=entry.vulgarity), dictionary)
-                assert entry.vulgarity > run.eff.vulgarity and entry.vulgarity <= v
-                assert policy_rejection(entry, at) is None
-                assert fit_rejection(entry, spot.rec.det, at, dictionary.person_concepts, dictionary.person_nouns) is None
-                below = resolve(replace(run.pol, vulgarity=entry.vulgarity - 1), dictionary)
-                assert policy_rejection(entry, below).startswith("vulgarity")
-                checked += 1
-    assert checked >= 5
+LOCKED_CASES = [(name, {k: v for k, v in request.items() if k != "text"}, request["text"])
+                for name, (_, request) in CASES.items()]
+LOCKED_CASES += [(f"variety {n}", {"level": 5, "vulgarity": v, "variety": n, "seed": s}, text)
+                 for n in (1, 2) for v in (0, 1) for s in (0, 1)
+                 for text in ["He was very tired and very drunk, and the toilet is very broken. She is an idiot."]]
+
+
+@pytest.mark.parametrize("name, options, text", LOCKED_CASES, ids=[c[0] + str(i) for i, c in enumerate(LOCKED_CASES)])
+def test_locked_options_are_held_back_by_the_cap_alone(translator, dictionary, name, options, text):
+    """A locked option is rated above the cap in effect (at any variety), selection takes it with only the cap
+    raised to its tag, and with the cap one below that it doesn't, unless a riff or an infix is what raised the
+    tag."""
+    watch = C.Watch()
+    result, drafts = C.collect(translator, text, _observer=watch, **options)
+    run, cap = watch.run, watch.run.eff.vulgarity
+    for d in drafts:
+        if d.change["kind"] != "substitution":
+            continue
+        spot = next(s for s in watch.spots if s.rec.substituted
+                    and d.change["src_span"][0] <= s.rec.span[0] < d.change["src_span"][1])
+        for o in d.change["locked"]:
+            entry, tag = dictionary.entries[o["entry_id"]], o["vulgarity"]
+            assert entry.vulgarity > cap, (o["entry_id"], entry.vulgarity, cap)
+
+            def eligible(v):
+                eff = resolve(replace(run.pol, vulgarity=v), dictionary)
+                keep, _ = translator.eligible(spot.rec.det, spot.sent, run, eff, spot.state, spot.taken)
+                return o["entry_id"] in {c.entry.id for c in keep}
+
+            assert eligible(tag), (o["entry_id"], tag)
+            if tag == entry.vulgarity:
+                assert not eligible(tag - 1), (o["entry_id"], tag)
 
 
 def test_locked_options_follow_the_gates_in_effect(translator):
@@ -198,28 +313,37 @@ def test_locked_options_follow_the_gates_in_effect(translator):
         assert d.entries[gated].status == "gate"
         assert gated not in {o["entry_id"] for c in plain.changes for o in c["alternatives"] + c["locked"]}
         assert gated in {o["entry_id"] for c in unlocked.changes for o in c["locked"]}
+        assert unlocked.entries[gated]["gated"] == list(d.entries[gated].flags)
+        _valid(unlocked)
 
 
-def test_cards_are_lookups(translator, dictionary):
-    """The entries a changes response sends are the cards lookup shows for the same entries (aussiefy.cards)."""
-    cs = _every_kind(translator)
-    cap = KINDS["vulgarity"]
+@pytest.mark.parametrize("options", [{"embellishment": 0}, {"embellishment": 1}, {"embellishment": 2},
+                                     {"embellishment": 2, "unlock": ["all"], "text": "He's a rascal and a liar."}])
+def test_cards_are_lookups(translator, dictionary, options):
+    """The entries a changes response sends are the cards lookup shows for the same entries under the same policy
+    (aussiefy.cards): riffs only where the embellishment takes them, flags for an unlocked gated entry."""
+    options = {**{k: v for k, v in KINDS.items() if k != "text"}, **options}
+    text = options.pop("text", KINDS["text"])
+    cs = aussiefy.translate_changes(text, translator=translator, **options)
+    looked = {k: options.get(k) for k in ("level", "vulgarity", "embellishment", "document_type", "document_config")}
     matched = 0
     for entry_id, card in cs.entries.items():
-        assert card == entry_card(dictionary.entries[entry_id], cap)
-        e = dictionary.entries[entry_id]
-        found = [r for r in harness.lookup(e.form, level=5, vulgarity=cap, limit=50, translator=translator)["results"]
-                 if r["id"] == entry_id]
+        query = PLACEHOLDER_RE.sub("", dictionary.entries[entry_id].form).strip()
+        found = [r for r in harness.lookup(query, limit=100, include_gated=bool(options.get("unlock")), **looked,
+                                           translator=translator)["results"] if r["id"] == entry_id]
         if found:
-            assert {k: v for k, v in found[0].items() if k not in ("match", "score")} == card
+            assert {k: v for k, v in found[0].items() if k not in ("match", "score")} == card, entry_id
             matched += 1
-    assert matched >= len(cs.entries) // 2
+    assert matched >= 0.8 * len(cs.entries), (matched, len(cs.entries))
+    if not options["embellishment"]:   # deadset takes no riffs, so its cards show none
+        assert not any("riffs" in card for card in cs.entries.values())
+    elif text == KINDS["text"]:
+        assert any("riffs" in card for card in cs.entries.values())
 
 
 def test_the_contract_validates_against_its_schema(translator):
-    jsonschema, schema = _schema()
-    jsonschema.validate(_every_kind(translator).to_dict(), schema)
-    jsonschema.validate(aussiefy.translate_changes("", translator=translator).to_dict(), schema)
+    _valid(_every_kind(translator))
+    _valid(aussiefy.translate_changes("", translator=translator))
 
 
 @pytest.mark.parametrize("name", sorted(CASES))
@@ -242,10 +366,106 @@ def test_a_rewriter_has_no_changes(translator):
 
     with pytest.raises(ValueError, match="rewriter"):
         C.build(translator, "She was tired.", rewriter=Rewriter())
-    with pytest.raises(aussiefy.UserError, match="rewrite"):
-        from aussiefy.translation import run
 
-        run("She was tired.", translator=translator, rewrite="hard", _changes=True)
+
+def test_the_watch_only_watches():
+    """The builder's watch steers nothing: the pick and the garnish words stay the engine's own."""
+    assert C.Watch.choose is PassObserver.choose and C.Watch.placing is PassObserver.placing
+
+
+def _withheld(cs, kind):
+    reasons = {w["id"]: w["reason"] for w in cs.withheld}
+    return {c["id"]: reasons.get(c["id"]) for c in cs.changes if c["kind"] == kind}
+
+
+def test_a_pick_that_doesnt_render_true_is_offered_alone_and_named(translator, monkeypatch):
+    """Where the pick's own rendering isn't the output over its region (never seen in the corpora), the swap
+    offers the pick alone and the response names it under withheld."""
+    real = C._Builder._render_option
+
+    def off(self, sentence, spot, o, region, flags):
+        text, infix = real(self, sentence, spot, o, region, flags)
+        return (text + "?" if o.candidate is spot.rec.chosen else text), infix
+
+    monkeypatch.setattr(C._Builder, "_render_option", off)
+    subs = _withheld(_valid(_every_kind(translator)), "substitution")
+    assert subs and set(subs.values()) == {C.PICK_DIFFERS}
+
+
+def test_a_swap_whose_region_cant_settle_is_offered_alone_and_named(translator, monkeypatch):
+    """Where a phonetic match still reads across a swap's region once it can widen no further (never seen in the
+    corpora), the swap offers the pick alone and the response names it under withheld."""
+    real = C._Builder._render_spot
+    monkeypatch.setattr(C._Builder, "_render_spot", lambda self, *args: (real(self, *args)[0], True))
+    subs = _withheld(_valid(_every_kind(translator)), "substitution")
+    assert subs and set(subs.values()) == {C.REGION_UNSETTLED}
+
+
+def test_a_garnish_whose_pick_doesnt_render_true_is_offered_alone_without_its_removal(translator, monkeypatch):
+    """A garnish's pick is rendered over its region as its alternatives are: where it isn't the output there, the
+    garnish of every placement, a contextual image and the closer included, offers its pick alone and no removal,
+    and the response names it under withheld."""
+    real = C._Builder._phonetic_region
+
+    def off(self, text, bounds, flags):
+        out, infix = real(self, text, bounds, flags)
+        return (out + "?" if out else out), infix
+
+    monkeypatch.setattr(C._Builder, "_phonetic_region", off)
+    cs = _valid(_every_kind(translator))
+    garnish = _withheld(cs, "garnish")
+    assert {c["placement"] for c in cs.changes if c["id"] in garnish} >= {"opener", "connective", "tag", "aside",
+                                                                         "tail", "closer", "riff"}
+    assert set(garnish.values()) == {C.PICK_DIFFERS}
+
+
+def test_a_garnish_region_widens_over_a_match_across_its_edge(translator):
+    """A garnish's region widens a word as a swap's does: a connective's takes in "it", the word it lowers, and a
+    drawl match runs on ("it is"), so its region takes in "is" too, and nothing is withheld."""
+    cs = _valid(aussiefy.translate_changes(
+        "We went home. It is easy to make.", translator=translator, level=4, vulgarity=1, embellishment=1, seed=0,
+        document_config={"profile": {"garnish": {"opener": 1.0, "connective": 1.0}, "garnish_gap": 0}}))
+    assert cs.text == "Crikey, we went home. Well, it is easy to make." and not cs.withheld
+    c = next(c for c in cs.changes if c["id"] == "garnish:14-14:connective")
+    assert cs.text[slice(*c["removed"]["out_span"])] == "Well, it is" and c["removed"]["rendered"] == "It is"
+    assert {o["rendered"] for o in c["alternatives"]} >= {"Well, it is", "Anyway, it is"}
+
+
+def test_a_garnish_whose_region_cant_settle_is_offered_alone_and_named(translator, monkeypatch):
+    """Where a phonetic match still reads across a garnish's region once it can widen no further (never seen in
+    the corpora), the garnish offers its pick alone and no removal, and the response names it under withheld."""
+    real = C._Builder._phonetic_region
+
+    def across(self, text, bounds, flags):
+        flags.add("straddle-right")
+        return real(self, text, bounds, flags)
+
+    monkeypatch.setattr(C._Builder, "_phonetic_region", across)
+    cs = _valid(_every_kind(translator))
+    garnish = _withheld(cs, "garnish")
+    assert {c["placement"] for c in cs.changes if c["id"] in garnish} >= {"opener", "connective", "tag", "aside",
+                                                                         "tail", "closer", "riff"}
+    assert set(garnish.values()) == {C.REGION_UNSETTLED}
+
+
+def test_the_region_pass_counts_from_the_text_before_it(translator):
+    """The phonetic pass over a spot reads only a window of the text around it, its count for each rule picking up
+    from the matches before the spot: a spot after many matches of a rule still renders its pick as the output
+    (and as a pinned re-render, test_changes_oracle.py)."""
+    text = "You are tired. " * 12 + "You are very tired and you are broke."
+    watch = C.Watch()
+    result = translator.translate(text, level=5, vulgarity=1, _observer=watch)
+    builder = C._Builder(translator, watch, result)
+    late = [s for s in watch.spots if s.rec.substituted and s.rec.span[0] > len(text) - 40]
+    assert late
+    for spot in late:
+        toks = spot.sent.tokens
+        region = builder._base_region(builder.sentences[spot.sent.index], 0, len(toks))
+        plan = builder._plan(region.bounds)
+        assert max(v.count for v in plan) > 10 and all(len(v.left) <= C.CONTEXT for v in plan)
+        draft = builder._substitution(spot)
+        assert draft.withheld is None
+        assert draft.change["output"] in [o["rendered"] for o in draft.change["alternatives"]]
 
 
 # -- the Markdown route: protected spans restored, and document units composed ------------------------------------
@@ -280,10 +500,47 @@ def test_markdown_changes_keep_markup_and_read_true_in_place(translator, mode):
     jsonschema.validate(cs.to_dict(), schema)
 
 
-def test_a_markdown_unit_renders_as_the_engine_would_there(translator):
-    """Within a document, each unit's changes are the unit's own, offset into the document and escaped."""
-    from aussiefy.markdown import _escape, _escape_map
+MARKDOWN = sorted(p for p in (ROOT / "tests" / "corpus" / "everyday").rglob("*") if p.suffix in (".md", ".mdx"))
+
+
+@pytest.mark.parametrize("path", MARKDOWN, ids=[p.name for p in MARKDOWN])
+def test_changes_translate_each_corpus_document_as_translate_does(translator, path):
+    text = path.read_text(encoding="utf-8")
+    modes = [{"markup": "auto"}] + ([{"markdown": True}] if path.suffix == ".md" else [])
+    for mode in modes:
+        options = dict(level=5, vulgarity=2, embellishment=1, seed=1, **mode)
+        assert (aussiefy.translate_changes(text, translator=translator, **options).text
+                == aussiefy.translate(text, translator=translator, **options).text), mode
+
+
+def test_the_escape_map_says_where_each_position_lands(translator):
+    """A unit's escaping, with where each of its positions lands: in order, every one, the ends at the ends."""
+    from aussiefy.markdown import _escape_map
 
     for text in ("1. Not a list", "  lead and *stars*  \r\nnext\nline", "a_b (c) [d] #e", ""):
         escaped, at = _escape_map(text)
-        assert escaped == _escape(text) and len(at) == len(text) + 1 and at == sorted(at) and at[-1] == len(escaped)
+        assert len(at) == len(text) + 1 and at == sorted(at) and at[-1] == len(escaped)
+    escaped, at = _escape_map("go *now*")
+    assert escaped == "go \\*now\\*" and escaped[at[3]:at[8]] == "\\*now\\*"
+
+
+@pytest.mark.parametrize("newlines", [False, True])
+def test_a_rendering_escaped_alone_reads_as_its_unit_escaped_with_it(newlines):
+    """_escaped_in escapes a rendering inside its unit on its own: the same as escaping the whole unit with it in
+    place, an opening "1." included, wherever the rendering sits."""
+    import random
+
+    from aussiefy.markdown import _escape_map, _escaped_in
+
+    rng = random.Random(29)
+    alphabet = "a1. \t*_#" + ("\n" if newlines else "")
+
+    def text(n):
+        return "".join(rng.choice(alphabet) for _ in range(rng.randint(0, n)))
+
+    for _ in range(20000):
+        unit, rendered = text(10), text(4)
+        a = rng.randint(0, len(unit))
+        b = rng.randint(a, len(unit))
+        escaped, at = _escape_map(unit[:a] + rendered + unit[b:])
+        assert _escaped_in(unit, [a, b], rendered) == escaped[at[a]:at[a + len(rendered)]], (unit, a, b, rendered)

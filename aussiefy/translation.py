@@ -9,52 +9,48 @@ from .engine import Result, Translator, default_translator
 from .errors import UserError
 from .changes import ChangeSet, build
 from .markdown import DocumentResult, document_changes, translate_document
-from .policy import resolve
+from .markup import mask
+from .policy import Effective, Policy, resolve
+
+
+def _check_modes(markdown: bool, markup: str, rewrite: str | None, surface: bool) -> None:
+    if markdown and markup != "text":
+        raise UserError("choose markdown=True or markup, rather than both document modes")
+    if surface and markup != "text":
+        raise UserError("--surface rewrites the whole document; use --rewrite to preserve markup")
+    if markdown and (rewrite or surface):
+        raise UserError("Markdown translation cannot use --rewrite or --surface")
+
+
+def _document_policy(translator: Translator, **dials) -> tuple[Policy, Effective]:
+    """A Markdown document's policy, resolved; its similarity fallback must be one the strict units can take."""
+    policy = translator.policy(**dials)
+    if policy.embedder not in (None, "", "ngram", "none"):
+        raise UserError(f"Markdown translation requires ngram or none fallback, got {policy.embedder!r}; "
+                        "use --embedder ngram/none or configure the profile's policy.embedder")
+    return policy, resolve(policy, translator.dictionary)
 
 
 def run(text: str, *, translator: Translator, level: int | str = 5, seed: int = 0,
         vulgarity: int | str | None = None, variety: int = 0, registers: Sequence[str] | None = None,
         regions: Sequence[str] | None = None, unlock: Sequence[str] | None = None, markdown: bool = False,
         markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
-              document_type: str = "general", document_config: dict | None = None,
+        document_type: str = "general", document_config: dict | None = None,
         embedder: str | None = None, rewrite: str | None = None, surface: bool = False,
-        model: str = DEFAULT_MODEL, _changes: bool = False) -> Result | DocumentResult | ChangeSet:
-    if markdown and markup != "text":
-        raise UserError("choose markdown=True or markup, rather than both document modes")
-    if surface and markup != "text":
-        raise UserError("--surface rewrites the whole document; use --rewrite to preserve markup")
+        model: str = DEFAULT_MODEL) -> Result | DocumentResult:
+    _check_modes(markdown, markup, rewrite, surface)
+    dials = dict(level=level, seed=seed, vulgarity=vulgarity, variety=variety, registers=registers, regions=regions,
+                 unlock=unlock, embedder=embedder, english=english, embellishment=embellishment,
+                 document_type=document_type, document_config=document_config)
     if markdown:
-        if rewrite or surface:
-            raise UserError("Markdown translation cannot use --rewrite or --surface")
-        policy = translator.policy(level=level, seed=seed, vulgarity=vulgarity, variety=variety,
-                                   registers=registers, regions=regions, unlock=unlock, embedder=embedder,
-                                   english=english, embellishment=embellishment, document_type=document_type, document_config=document_config)
-        if policy.embedder not in (None, "", "ngram", "none"):
-            raise UserError(f"Markdown translation requires ngram or none fallback, got {policy.embedder!r}; "
-                            "use --embedder ngram/none or configure the profile's policy.embedder")
-        effective = resolve(policy, translator.dictionary)
-        if _changes:
-            return document_changes(text, translator, policy, effective)
-        return translate_document(text, translator, policy, effective)
-    if _changes and (rewrite or surface):
-        raise UserError("changes come from the rule engine's own translation; leave out --rewrite and --surface")
+        return translate_document(text, translator, *_document_policy(translator, **dials))
     rewriter = None
     if rewrite:
         from .llm import ClaudeRewriter
 
         rewriter = ClaudeRewriter(model=model, translator=translator)
-    from .markup import mask
-
-    protected = mask(text, markup)
-    if _changes:
-        return build(translator, text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
-                     registers=registers, regions=regions, unlock=unlock, embedder=embedder, english=english,
-                     embellishment=embellishment, document_type=document_type, document_config=document_config,
-                     _protected=protected)
-    result = translator.translate(text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
-                                  registers=registers, regions=regions, unlock=unlock, embedder=embedder,
-                                  rewriter=rewriter, rewrite_mode=rewrite or "hard", english=english,
-                                  embellishment=embellishment, document_type=document_type, document_config=document_config, _protected=protected)
+    result = translator.translate(text, **dials, rewriter=rewriter, rewrite_mode=rewrite or "hard",
+                                  _protected=mask(text, markup))
     if surface:
         from .llm import surface_rewrite
 
@@ -78,12 +74,17 @@ def translate_changes(text: str, *, level: int | str = 5, seed: int = 0, vulgari
                       unlock: Sequence[str] | None = None, markdown: bool = False,
                       markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
                       document_type: str = "general", document_config: dict | None = None,
-                      translator: Translator | None = None) -> ChangeSet:
+                      embedder: str | None = None, translator: Translator | None = None) -> ChangeSet:
     """translate's translation, with every change it made (the `changes` contract, aussiefy.changes.VERSION): each
     swap, garnish, drawl, swear infix and US/UK swap placed in the output, and each swap's alternatives, and those a
-    vulgarity lock holds back, rendered where they stand. Takes translate's parameters. A host (the website's
-    service) passes it on; the CLI, MCP tools and yarn mode don't offer it (DD-029)."""
-    return run(text, translator=translator or default_translator(), level=level, seed=seed, vulgarity=vulgarity,
-               variety=variety, registers=registers, regions=regions, unlock=unlock, markdown=markdown,
-               markup=markup, english=english, embellishment=embellishment, document_type=document_type,
-               document_config=document_config, _changes=True)
+    vulgarity lock holds back, rendered where they stand. Takes translate's parameters, and embedder: the
+    similarity fallback ("ngram", "bundled", "local", "none"; None = profiles.yaml's), which a host sets
+    explicitly. The CLI, MCP tools and yarn mode don't offer it (DD-029)."""
+    tr = translator or default_translator()
+    _check_modes(markdown, markup, None, False)
+    dials = dict(level=level, seed=seed, vulgarity=vulgarity, variety=variety, registers=registers, regions=regions,
+                 unlock=unlock, embedder=embedder, english=english, embellishment=embellishment,
+                 document_type=document_type, document_config=document_config)
+    if markdown:
+        return document_changes(text, tr, *_document_policy(tr, **dials))
+    return build(tr, text, **dials, _protected=mask(text, markup))

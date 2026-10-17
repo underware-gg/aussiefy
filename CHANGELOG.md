@@ -9,6 +9,15 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Hold `changes` to its review, amending contract v1 before release: a locked option is only an entry the
+  vulgarity cap alone holds back (at any variety); a swap or garnish whose pick wouldn't render true, or whose
+  region can't settle, offers its pick alone (a garnish without its removal) and is named under the new
+  `withheld`; a garnish's region widens over a drawl or infix match as a swap's does; garnish alternatives come
+  from what the engine weighed (`GarnishOffer`); each drawl and infix match in a spot is gated as the engine gates
+  it; cards are built as lookup builds them (riffs only where the embellishment takes them, flags for an unlocked
+  gated entry). Fix a drawl change's output span that took in part of the next word. Add `embedder` to `translate_changes`, and a one-line description of each
+  embellishment and document type (`aussiefy.guide.dial_descriptions()`). The benchmark gates every setting the
+  website allows, per text.
 - Specify Unicode code\-point offsets for change regions'n profanity masks, with a JavaScript slicing example.
 
 - Rate "bugger me dead" \(phrase'n garnish\), "rooted" and "have a root" at Dad, matching "bugger" in the swear

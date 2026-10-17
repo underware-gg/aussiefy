@@ -1848,59 +1848,98 @@
     "removed": {
      "out_span": [
       535,
-      544
+      589
      ],
-     "rendered": "'ave"
+     "rendered": "'ave a cup of tea, a Bex'n a bloody good lie-down"
     },
     "alternatives": [
      {
       "entry_id": "c-anyway",
       "weight": 0.4878,
-      "rendered": "Anyway, 'ave",
+      "rendered": "Anyway, 'ave a cup of tea, a Bex'n a bloody good lie-down",
       "out_span": [
        535,
-       544
+       589
       ],
       "vulgarity": 0,
-      "masks": []
+      "masks": [
+       {
+        "span": [
+         37,
+         43
+        ],
+        "ending_start": 43,
+        "vulgarity": 1
+       }
+      ]
      },
      {
       "entry_id": "c-mate",
       "weight": 0.1463,
-      "rendered": "Mate, 'ave",
+      "rendered": "Mate, 'ave a cup of tea, a Bex'n a bloody good lie-down",
       "out_span": [
        535,
-       544
+       589
       ],
       "vulgarity": 0,
-      "masks": []
+      "masks": [
+       {
+        "span": [
+         35,
+         41
+        ],
+        "ending_start": 41,
+        "vulgarity": 1
+       }
+      ]
      },
      {
       "entry_id": "c-mind-you",
       "weight": 0.122,
-      "rendered": "Mind you, 'ave",
+      "rendered": "Mind you, 'ave a cup of tea, a Bex'n a bloody good lie-down",
       "out_span": [
        535,
-       544
+       589
       ],
       "vulgarity": 0,
-      "masks": []
+      "masks": [
+       {
+        "span": [
+         39,
+         45
+        ],
+        "ending_start": 45,
+        "vulgarity": 1
+       }
+      ]
      },
      {
       "entry_id": "c-now",
       "weight": 0.2439,
-      "rendered": "Now, 'ave",
+      "rendered": "Now, 'ave a cup of tea, a Bex'n a bloody good lie-down",
       "out_span": [
        535,
-       544
+       589
       ],
       "vulgarity": 0,
-      "masks": []
+      "masks": [
+       {
+        "span": [
+         34,
+         40
+        ],
+        "ending_start": 40,
+        "vulgarity": 1
+       }
+      ]
      }
     ],
     "locked": [],
     "covers": [
-     "phonetic:282-291:have-ave"
+     "phonetic:282-291:have-ave",
+     "substitution:282-291",
+     "phonetic:282-291:and-n",
+     "swear_infix:282-291:infix-bloody-adjective"
     ]
    },
    {
@@ -2173,7 +2212,9 @@
      }
     ],
     "locked": [],
-    "covers": []
+    "covers": [
+     "phonetic:314-318:i-am"
+    ]
    },
    {
     "id": "phonetic:314-318:i-am",
@@ -2184,10 +2225,10 @@
     ],
     "out_span": [
      655,
-     661
+     658
     ],
     "original": "I am",
-    "output": "I'm go",
+    "output": "I'm",
     "entry_id": null,
     "vulgarity": 0,
     "masks": [],
@@ -3185,6 +3226,7 @@
     "register": "current",
     "notes": "Shared with British English."
    }
-  }
+  },
+  "withheld": []
  }
 }

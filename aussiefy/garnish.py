@@ -80,13 +80,34 @@ def tier_match(tier: int, asked: int) -> float:
     return 0.5 ** max(0, asked - tier)
 
 
-def pick_garnish(placement: str, entries: list[Entry], eff: Effective, seed: int, key: tuple,
-                 used: dict[str, int], contexts: set[str] | None = None, exclude: set[str] = frozenset(),
-                 mood: str = "light", swear: bool | None = None,
-                 insults: bool = True) -> tuple[Entry | None, str | None, list[tuple[str, str]]]:
-    """One garnish entry for a placement, weighted, with the reasons the rest were passed over. swear picks the
-    channel: False the level's clean garnish, True the swearing (vulgarity 1 and up), None both. insults: whether
-    a garnish may call someone names ("ya galah"; not in a safety notice)."""
+@dataclass(frozen=True)
+class GarnishOffer:
+    """What the engine weighs for one garnish placement: the eligible entries in the order it weighs them, each
+    one's weight, the key its roll and words are drawn by, and why the rest were passed over. The engine picks from
+    it; the changes builder offers the same entries as alternatives, each with the words it would have said."""
+    placement: str
+    pool: tuple[Entry, ...]
+    weights: tuple[float, ...]
+    key: tuple
+    seed: int
+    eff: Effective
+    rejected: list[tuple[str, str]]
+
+    def pick(self) -> Entry | None:
+        if not self.pool:
+            return None
+        return self.pool[weighted_index(list(self.weights), roll(self.seed, "garnish-pick", self.placement, *self.key))]
+
+    def words(self, entry: Entry) -> str:
+        return realise_garnish(entry, self.seed, self.key, self.eff)
+
+
+def garnish_pool(placement: str, entries: list[Entry], eff: Effective, used: dict[str, int],
+                 contexts: set[str] | None = None, exclude: set[str] = frozenset(), mood: str = "light",
+                 swear: bool | None = None, insults: bool = True) -> tuple[list[Entry], list[tuple[str, str]]]:
+    """The garnish entries eligible for a placement, in the order they're weighed, and the rest with why not. swear
+    picks the channel: False the level's clean garnish, True the swearing (vulgarity 1 and up), None both. insults:
+    whether a garnish may call someone names ("ya galah"; not in a safety notice)."""
     rejected: list[tuple[str, str]] = []
     pool: list[Entry] = []
     for e in entries:
@@ -112,13 +133,22 @@ def pick_garnish(placement: str, entries: list[Entry], eff: Effective, seed: int
             rejected.append((e.id, reason))
         else:
             pool.append(e)
-    if not pool:
-        return None, None, rejected
     pool.sort(key=lambda e: e.id)
-    # swearing sounds like its tier: a closer at tradie leans to "fuck me dead" over "well, I'll be buggered"
-    weights = [e.weight * (tier_match(e.vulgarity, eff.vulgarity) if swear else 1.0) for e in pool]
-    chosen = pool[weighted_index(weights, roll(seed, "garnish-pick", placement, *key))]
-    return chosen, realise_garnish(chosen, seed, key, eff), rejected
+    return pool, rejected
+
+
+def garnish_weights(pool: list[Entry], eff: Effective, swear: bool | None) -> list[float]:
+    """Each entry's weight; swearing sounds like its tier, so a closer at tradie leans to "fuck me dead" over "well,
+    I'll be buggered"."""
+    return [e.weight * (tier_match(e.vulgarity, eff.vulgarity) if swear else 1.0) for e in pool]
+
+
+def garnish_offer(placement: str, entries: list[Entry], eff: Effective, seed: int, key: tuple,
+                  used: dict[str, int], contexts: set[str] | None = None, exclude: set[str] = frozenset(),
+                  mood: str = "light", swear: bool | None = None, insults: bool = True) -> GarnishOffer:
+    """What the engine weighs for a placement (garnish_pool, garnish_weights), keyed for its roll and words."""
+    pool, rejected = garnish_pool(placement, entries, eff, used, contexts, exclude, mood, swear, insults)
+    return GarnishOffer(placement, tuple(pool), tuple(garnish_weights(pool, eff, swear)), key, seed, eff, rejected)
 
 
 SENT_END_RE = re.compile(r"([.!?]+)([\"'\u201d\u2019)\]]*)\s*$")
@@ -131,7 +161,8 @@ Edit = tuple[int, int, int]
 
 def opener_edit(sentence: str, opener: str, common: set[str] | None = None,
                 force_lower: bool = False) -> tuple[str, Edit]:
-    """add_opener, with where it went."""
+    """'Strewth, the bloke...': an exclamation before the sentence (inside an opening quote), lowering the first word
+    where it's an ordinary one (common) or force_lower says so, with where it went."""
     lead = len(sentence) - len(sentence.lstrip())
     if sentence[lead:lead + 1] in OPEN_QUOTES:   # the speaker says it: '"Oi, some bugger's been ..."'
         lead += 1
@@ -140,16 +171,13 @@ def opener_edit(sentence: str, opener: str, common: set[str] | None = None,
     return sentence[:lead] + words + lower_first_word(body, common, force_lower), (lead, lead, len(words))
 
 
-def add_opener(sentence: str, opener: str, common: set[str] | None = None, force_lower: bool = False) -> str:
-    return opener_edit(sentence, opener, common, force_lower)[0]
-
-
 CONNECTIVE_STARTS = {"then", "so", "and", "but", "when", "now", "well", "anyway", "after", "before", "meanwhile",
                      "once", "finally", "next", "suddenly"}
 
 
 def connective_edit(sentence: str, connective: str, common: set[str] | None = None) -> tuple[str, Edit] | None:
-    """add_connective, with where it went."""
+    """'Anyway, she found...', with where it went; None if the sentence already opens with a connective or a
+    quote."""
     lead = len(sentence) - len(sentence.lstrip())
     body = sentence[lead:]
     first = re.match(r"[A-Za-z']+", body)
@@ -159,12 +187,6 @@ def connective_edit(sentence: str, connective: str, common: set[str] | None = No
     return sentence[:lead] + words + lower_first_word(body, common), (lead, lead, len(words))
 
 
-def add_connective(sentence: str, connective: str, common: set[str] | None = None) -> str | None:
-    """'Anyway, she found...'. None if the sentence already opens with a connective or a quote."""
-    placed = connective_edit(sentence, connective, common)
-    return placed and placed[0]
-
-
 def _speech_end(sentence: str) -> re.Match | None:
     """Where quoted speech ends in the sentence (its closing punctuation), if it has any."""
     q = re.search(r"([.!?])([\"\u201d])", sentence)
@@ -172,12 +194,13 @@ def _speech_end(sentence: str) -> re.Match | None:
 
 
 def tag_in_speech(sentence: str) -> bool:
-    """Whether add_tag puts the tag inside quoted speech ('"...my porridge, mate!" he said.') rather than at the end."""
+    """Whether tag_edit puts the tag inside quoted speech ('"...my porridge, mate!" he said.') rather than at the end."""
     return _speech_end(sentence) is not None
 
 
 def tag_edit(sentence: str, tag: str) -> tuple[str, Edit]:
-    """add_tag, with where it went."""
+    """', mate' before the sentence's closing punctuation, or for dialogue inside the quote ('"...my porridge, mate!"
+    he said.'), with where it went."""
     words = ", " + tag
     # dialogue: the tag belongs to the speaker, inside the quote ('"...my porridge, mate!" he said.')
     q = _speech_end(sentence)
@@ -189,10 +212,6 @@ def tag_edit(sentence: str, tag: str) -> tuple[str, Edit]:
     m = SENT_END_RE.search(stripped)
     at = m.start() if m else len(stripped)
     return stripped[:at] + words + stripped[at:] + trail, (at, at, len(words))
-
-
-def add_tag(sentence: str, tag: str) -> str:
-    return tag_edit(sentence, tag)[0]
 
 
 # a list closing the sentence: "their brains and imagination?", "trees, radios, tons!"
@@ -207,7 +226,8 @@ def ends_in_list(sentence: str) -> bool:
 
 
 def tail_edit(sentence: str, tail: str) -> tuple[str, Edit] | None:
-    """add_tail, with where it went."""
+    """Round off a closing list the way a talker does: "...their brains and imagination, the whole bloody works?",
+    with where it went. None when the sentence doesn't end in a list (or is speech)."""
     if not ends_in_list(sentence):
         return None
     stripped = sentence.rstrip()
@@ -216,15 +236,8 @@ def tail_edit(sentence: str, tail: str) -> tuple[str, Edit] | None:
     return stripped[:at] + words + stripped[at:] + sentence[len(stripped):], (at, at, len(words))
 
 
-def add_tail(sentence: str, tail: str) -> str | None:
-    """Round off a closing list the way a talker does: "...their brains and imagination, the whole bloody works?"
-    None when the sentence doesn't end in a list (or is speech)."""
-    placed = tail_edit(sentence, tail)
-    return placed and placed[0]
-
-
 def closer_edit(text: str, closer: str) -> tuple[str, Edit]:
-    """add_closer, with where it went (a full stop it adds included)."""
+    """A closing remark after the text's last sentence, with where it went (a full stop it adds included)."""
     stripped = text.rstrip()
     trail = text[len(stripped):]
     words = ""
@@ -235,10 +248,6 @@ def closer_edit(text: str, closer: str) -> tuple[str, Edit]:
         closer += "."
     words += " " + closer
     return stripped + words + trail, (len(stripped), len(stripped), len(words))
-
-
-def add_closer(text: str, closer: str) -> str:
-    return closer_edit(text, closer)[0]
 
 
 def place_garnish(text: str, placement: str, form: str, lowerable: set[str] | None = None,
@@ -316,6 +325,24 @@ def phonetic_scale(rule: PhoneticRule, rules: list[PhoneticRule], eff: Effective
     return 1.0 if rule.kind == "spelling" else eff.profile.phonetic
 
 
+def phonetic_admits(rule: PhoneticRule, pos: int, prefix: Callable[[], str], questions: list[tuple[int, int]],
+                     spans: Callable[[], list[tuple[int, int]]]) -> bool:
+    """Whether a match at pos may change at all: not in a question (a rule that keeps out of them), not after its
+    unless_before context (prefix: the text before the match), and not in a kept or preserved span (spans). The
+    engine's pass and the changes builder's pass over a spot both ask this, for each match."""
+    question = bisect_right(questions, pos, key=lambda span: span[0]) - 1
+    if question >= 0 and pos < questions[question][1]:
+        return False
+    if rule.unless_before is not None and rule.unless_before.search(prefix()):
+        return False
+    return not any(a <= pos < b for a, b in spans())
+
+
+def in_dialogue(pos: int, quotes: list[tuple[int, int]]) -> bool:
+    """Whether a match at pos is inside quoted speech, where a rule drawls at its dialogue rate."""
+    return any(a <= pos < b for a, b in quotes)
+
+
 def phonetic_replacement(rule: PhoneticRule, m: re.Match, n: int, seed: int, scale: float,
                          in_dialogue: bool) -> str | None:
     """What the n-th match of a rule's pass becomes, once nothing keeps it out, or None where its roll says no."""
@@ -355,22 +382,19 @@ def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: i
                 kept_for[:] = [before, keep(before)]
             return kept_for[1]
 
+        def spans() -> list[tuple[int, int]]:
+            if preserve is not None and preserved_for[0] != before:
+                preserved_for[:] = [before, preserve(before)]
+            return kept() + preserved_for[1]
+
         def sub(m: re.Match) -> str:
             counter["n"] += 1   # counted either way, so a kept span doesn't shift the rolls after it
             if traced is not None:
                 traced.starts.append(m.start())
                 traced.ends.append(m.end())
-            question = bisect_right(questions, m.start(), key=lambda span: span[0]) - 1
-            if question >= 0 and m.start() < questions[question][1]:
+            if not phonetic_admits(rule, m.start(), lambda: before[:m.start()], questions, spans):
                 return m.group(0)
-            if rule.unless_before is not None and rule.unless_before.search(before[:m.start()]):
-                return m.group(0)
-            if preserve is not None and preserved_for[0] != before:
-                preserved_for[:] = [before, preserve(before)]
-            if any(a <= m.start() < b for a, b in kept() + preserved_for[1]):
-                return m.group(0)
-            in_dialogue = any(a <= m.start() < b for a, b in quotes)
-            out = phonetic_replacement(rule, m, counter["n"], seed, scale, in_dialogue)
+            out = phonetic_replacement(rule, m, counter["n"], seed, scale, in_dialogue(m.start(), quotes))
             if out is None:
                 return m.group(0)
             records.append(PhoneticRecord(rule.id, m.group(0), out, m.start()))

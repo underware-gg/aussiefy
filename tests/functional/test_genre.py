@@ -250,15 +250,15 @@ def test_a_form_narrows_dinkum_and_its_openings_at_every_setting(translator):
 
 def test_no_name_calling_where_the_form_rules_it_out():
     from aussiefy.engine import resolve
-    from aussiefy.garnish import pick_garnish
+    from aussiefy.garnish import garnish_offer
     from aussiefy.loader import load_dictionary
 
     d = load_dictionary()
     eff = resolve(Policy(level=5, vulgarity=3), d)
     for seed in range(40):
-        entry, _, _ = pick_garnish("tag", d.garnish, eff, seed, ("k", seed), {}, {"second_person"}, insults=False)
+        entry = garnish_offer("tag", d.garnish, eff, seed, ("k", seed), {}, {"second_person"}, insults=False).pick()
         assert entry is None or not entry.insult
-    picked = {pick_garnish("tag", d.garnish, eff, s, ("k", s), {}, {"second_person"})[0].id for s in range(40)}
+    picked = {garnish_offer("tag", d.garnish, eff, s, ("k", s), {}, {"second_person"}).pick().id for s in range(40)}
     assert picked & {"g-ya-galah", "g-ya-drongo", "g-ya-mug", "g-ya-old-bastard"}
 
 

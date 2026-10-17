@@ -14,13 +14,15 @@ cs.to_dict()["changes"]  # every change, in output order
 cs.entries               # the card of every entry the changes name
 ```
 
-It takes `translate`'s parameters, by the same names and defaults, including `markdown` and `markup`. It's part
-of the Python API only: the CLI, the MCP tools and yarn mode don't offer it
-([DD-029](../../architecture/decisions/dd-029-changes-builder.md)).
+It takes `translate`'s parameters, by the same names and defaults, including `markdown` and `markup`, and also
+`embedder`: the similarity fallback (`ngram`, `bundled`, `local` or `none`; the profile's own when omitted), which a
+host sets explicitly. It's part of the Python API only: the CLI, the MCP tools and yarn mode don't offer it
+([DD-029](../../architecture/decisions/dd-029-changes-builder.md)). `aussiefy.guide.dial_descriptions()` gives every
+dial's settings with a one-line description each, for a page that lists them.
 
 ## The contract
 
-`ChangeSet.to_dict()` is version 1 of the `changes` contract, `{version, text, changes, entries}`. Its JSON
+`ChangeSet.to_dict()` is version 1 of the `changes` contract, `{version, text, changes, entries, withheld}`. Its JSON
 Schema ships in the package as `aussiefy/data/changes.schema.json` (`aussiefy.changes.SCHEMA`). Example requests
 and responses live in `tests/fixtures/changes/`. Each change has:
 
@@ -38,20 +40,32 @@ and responses live in `tests/fixtures/changes/`. Each change has:
 - `alternatives`: for a swap, every option the engine weighed at that spot, the pick among them, in the engine's
   order. Each one has its `entry_id`, its `weight` (they share 1), its `rendered` text, its `out_span`, its
   `vulgarity` and its `masks`. For a garnish, it's the other garnish of that placement the engine weighed there.
-- `locked`: for a swap, the options that only a higher vulgarity cap lets in, each tagged with the lowest
-  `vulgarity` that does and rendered like the others. Selection is run again for the spot with only the cap
-  raised, with every other check unchanged: level, registers, gates, grammar, span, document type, what the text
-  has already said, and variety. Gated entries appear only where the policy unlocks them.
+- `locked`: for a swap, the options the vulgarity cap alone holds back, each tagged with the lowest `vulgarity`
+  that lets it in. Selection is run again for the spot with only the cap raised, with every other check
+  unchanged: level, registers, gates, grammar, span, document type, what the text has already said, and variety.
+  Only an entry rated above the cap in effect is locked (a raised cap also reweighs, so variety's best few can take
+  in a clean entry, which isn't). Gated entries appear only where the policy unlocks them. A locked option is
+  rendered like the others, at the reader's cap: its riffs and swear infixes are the ones the reader's vulgarity
+  allows, as the page shows it before it's unlocked. At Dad, "very cold" as fuckin' reads "fuckin'", though a
+  whole re-translation at Uncle Bob would read "cold as fuck".
 - `removed` (garnish): `{out_span, rendered}`, how its region reads without it. An opener or connective's region
-  takes in the next word, whose capital it lowered.
+  takes in the next word, whose capital it lowered. Every garnish has one unless it's named under `withheld`.
 - `rule` (phonetic and swear infix): `{id, kind, before, after}`. `pair` (dialect): `{english, before, after}`.
 - `placement` (garnish): `connective`, `opener`, `tag`, `aside`, `tail`, `closer`, or `riff` for a contextual
   image after a term (which has `image_id` rather than an entry).
 - `covers`: the ids of the changes inside the region a swap or removal replaces, which go with it. A drawl or a
   swear infix inside a swapped term is one. So is a neighbouring change that a phonetic match tied to the region.
 
-`entries` maps each entry id the changes name to its card, as `lookup` shows it (`aussiefy/cards.py`), with riffs
-under the vulgarity cap.
+`entries` maps each entry id the changes name to its card, built as `lookup` builds it under the same dials
+(`aussiefy/cards.py`): riffs under the vulgarity cap where the embellishment takes riffs at all, and a gated
+entry's flags where the policy unlocked it.
+
+`withheld` lists, as `{id, reason}`, the swaps and garnish whose renderings are left out, with the pick alone
+offered: a swap's other alternatives and locked options, and a garnish's other alternatives and its removal. The
+reason is `pick-differs` where the pick, rendered over its region, isn't the output there, and `region-unsettled`
+where a drawl or infix match still reads across the region's edge after it has widened as far as it goes. Neither
+has happened over the test corpora. They're there so a rendering that might read wrong is never offered, and a
+page can tell why a spot has no alternatives.
 
 All offsets count Unicode code points, including source/output spans, alternative regions and mask positions.
 For example, `🦘 toilet` becomes `🦘 dunny`: the source span is `[2, 8)` and the output span is `[2, 7)`.
@@ -79,10 +93,20 @@ All of a spot's options share one region, so swapping one in replaces the same s
 where a drawl or infix match crosses its edge ("have not" becoming "haven't") or a neighbouring match's
 lookaround reads it ("won't bloody well have").
 
+A garnish's region widens the same way. An opener's or connective's region takes in the next word, whose capital
+it lowered, and a word more where a match runs on: in "Well, it is easy", a swap or removal of "Well" replaces
+"Well, it is", since the drawl's "it is" match crosses "it". A region never cuts another change's words: it takes
+in the whole of a swap it reaches.
+
+Each drawl, spelling or infix match in the spot is let in or kept out exactly as the engine's own pass does it
+(a question, the words before it, a kept heading or link text, a quoted document), reading those spans where the
+match sits.
+
 A swap is local. Swapping one alternative in reads exactly as a whole re-translation with that pick would read
 over its region. The rest of the text stays as it was, although a whole re-translation might differ further on:
 later picks, garnish and drawl rolls shift. Two swaps in one sentence, or in neighbouring ones, each read as
-rendered, unless the first used an entry the second's stacked idiom or riff would have used. The engine's
+rendered, unless the first used an entry the second's stacked idiom or riff would have used. Over the everyday
+corpus that happens in one pair in about fifty. The engine's
 output and its seeds are unchanged by any of this: `translate_changes(...).text` is `translate(...).text`.
 
 ## Masks
@@ -110,12 +134,16 @@ word is both listed and authored, it has one mask, at the higher vulgarity.
 With `markup`, protected spans (code, links, tags) are masked through the pass and restored after, keeping their
 length, so offsets and renderings hold. With `markdown=True`, each prose unit's changes are placed in the
 document. Source offsets are document positions. Each rendering is escaped as its unit is, so custom slang can't
-make markup.
+make markup. A whole re-render with a swap pinned inside its unit reads the same.
 
 ## Cost
 
-`changes` is built in the same pass as the translation. At 5,000 characters it costs about 1.1 times a plain
-translation at the website's default settings. Measure it with `python scripts/benchmark_changes.py`.
+`changes` is built in the same pass as the translation. Its budget is 1.5 times a plain translation for each
+5,000-character text, for every setting the website's service allows: its default, the strongest dials and each
+document type it offers. `python scripts/benchmark_changes.py` gates on that, timing the two in turn in process time.
+At the website's default it costs about 1.1 times; garnish alternatives take a share of the headroom alongside the
+swaps'. Larger texts, Markdown documents (which the website doesn't take) and a stress setting with every garnish
+at full rate are reported, not gated.
 
 Tests: [the contract](../../../tests/functional/test_changes.py),
 [renderings against pinned re-renders](../../../tests/functional/test_changes_oracle.py),

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 from collections import Counter
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, fields
 from functools import lru_cache, partial
 from typing import Any, Callable, Literal, Protocol, Sequence
 
@@ -12,8 +12,8 @@ from . import pos
 from .context import FORMAL_RE, is_chant, sentence_contexts, text_mood
 from .detect import CODE_CONCEPTS, DETERMINERS, Detection, after_determiner, detect, fallback_scorer, resolve_overlaps
 from .embed import Embedder, make_embedder
-from .garnish import (Edit, GarnishRecord, PhoneticRecord, PhoneticTrace, apply_phonetic, ends_in_list, pick_garnish,
-                      pick_riff, place_garnish, tag_in_speech)
+from .garnish import (Edit, GarnishOffer, GarnishRecord, PhoneticRecord, PhoneticTrace, apply_phonetic, ends_in_list,
+                      garnish_offer, pick_riff, place_garnish, tag_in_speech)
 from .loader import load_dictionary
 from .imagery import image_offers
 from .dialect import text_english
@@ -363,8 +363,8 @@ class Translator:
             rec = SubstitutionRecord((toks[det.start].start, toks[det.end - 1].end),
                                      run.text[toks[det.start].start: toks[det.end - 1].end], det, sent.index)
             records.append(rec)
-            keep, rejected = self.eligible(det, sent, run, eff, state,
-                                           (occupied - set(range(det.start, det.end))) | replaced)
+            taken = (occupied - set(range(det.start, det.end))) | replaced
+            keep, rejected = self.eligible(det, sent, run, eff, state, taken)
             rec.eligible = keep
             rec.rejected = sorted(((e.id, r) for e, r in rejected), key=lambda x: x[0])
             if not keep:
@@ -376,13 +376,16 @@ class Translator:
                 rec.decision = f"kept original: roll {rec.roll:.3f} >= p {rec.p:g}"
                 continue
             choice = weighted_pick(keep, roll(pol.seed, "pick", *sent.key, det.start, det.pattern))
+            here = Spot(sent, rec, keep, state, replaced, said, taken, len(splices))
             if run.observer is not None:
                 choice = run.observer.choose(sent, det, keep, choice)
-                run.observer.spot(Spot(sent, rec, keep, state, replaced, said, occupied, len(splices)))
-            spot = self.render_at_spot(choice, rec, keep, sent, run, replaced, said)
+                run.observer.spot(here.snapshot())
+            rec.chosen = choice
+            spot = self.render_at_spot(choice, here, run)
             if spot.echo:
                 rec.chosen, rec.decision = None, f"kept original: {spot.echo}"
                 continue
+            rec.stacked, rec.riff = spot.stacked, spot.riff
             s, e = spot.start, spot.end
             rec.output, rec.term, rec.out_span = spot.text, spot.term, (toks[s].start, toks[e - 1].end)
             rec.decision = f"substituted: roll {rec.roll:.3f} < p {rec.p:g}"
@@ -416,25 +419,23 @@ class Translator:
                 keep.append(c)
         return _narrow(keep, rejected, run.pol.variety, state), rejected
 
-    def render_at_spot(self, choice: Candidate, rec: SubstitutionRecord, keep: list[Candidate], sent: "_Sentence",
-                       run: "_Run", replaced: set[int], said: dict[int, str]) -> "SpotRendering":
+    def render_at_spot(self, choice: Candidate, spot: "Spot", run: "_Run") -> "SpotRendering":
         """A candidate rendered at its spot, as the splice puts it in: a form (and the spelling the text keeps), its
         article fitted, the entry's own replacement span, a stacked second idiom, a riff, and a/an and capitals
-        fixed against what comes before. It reads and updates run.state (the stack and riff spend from it) and
-        sets rec.chosen, rec.stacked and rec.riff; the caller applies the rest. translate and the changes builder
-        (on a copy of the state at the spot) both render this way."""
-        det, toks = rec.det, sent.tokens
-        rec.chosen = choice
+        fixed against what comes before. It reads run.pol (the seed), run.eff, run.mood, run.embellishment and
+        run.composition, and reads and spends from run.state (the stack and the riff use it); the caller applies
+        the rest. translate and the changes builder (on a copy of the state at the spot) both render this way."""
+        det, toks, sent = spot.rec.det, spot.sent.tokens, spot.sent
         form = self._form(choice.entry, det, run, sent.key)
         out = fit_article(realise(choice.entry, form, det), choice.entry, det, toks)
         s, e = replacement_span(choice.entry, det, toks)
-        echo = _gloss_echo(toks, s, e, out, said)
+        echo = _gloss_echo(toks, s, e, out, spot.said)
         if echo:
-            return SpotRendering(s, e, "", "", form, echo)
-        out = self._stack(out, rec, keep, det, sent, run)
-        riff_suffix = self._riff(rec, choice, det, e, sent, run)
-        s, out = _fix_article(out + riff_suffix, toks, s, replaced)
-        return SpotRendering(s, e, out, out[:-len(riff_suffix)] if riff_suffix else out, form)
+            return SpotRendering(s, e, "", "", form, echo=echo)
+        stacked, out = self._stack(out, choice, spot.keep, det, sent, run)
+        riff, riff_suffix = self._riff(choice, det, e, sent, run)
+        s, out = _fix_article(out + riff_suffix, toks, s, spot.replaced)
+        return SpotRendering(s, e, out, out[:-len(riff_suffix)] if riff_suffix else out, form, stacked, riff)
 
     def _contextual_imagery(self, records, splices, sent, run):
         if sent.quiet or sent.prefix_only:
@@ -463,9 +464,10 @@ class Translator:
                     splices[index] = (start, stop, text + suffix)
                     break
             else:
+                index = len(splices)
                 splices.append((end, end, suffix))
             if run.observer is not None:
-                run.observer.imagery(sent.index, offer.image.id, end, suffix)
+                run.observer.imagery(sent.index, offer.image.id, index, suffix)
             run.garnish.append(GarnishRecord("riff", sent.index, None, offer.text,
                                             "contextual imagery: direct meaning match", [], offer.image.id))
 
@@ -492,38 +494,38 @@ class Translator:
             splices.append((*span, out))
         return splices
 
-    def _stack(self, out: str, rec: SubstitutionRecord, keep: list[Candidate], det: Detection, sent: "_Sentence",
-               run: "_Run") -> str:
-        """A second descriptive idiom on a predicate slot ("yer a few snags short of a barbie, mad as a cut snake")."""
-        choice, uses = rec.chosen, run.state.entry_uses
+    def _stack(self, out: str, choice: Candidate, keep: list[Candidate], det: Detection, sent: "_Sentence",
+               run: "_Run") -> tuple[Candidate | None, str]:
+        """A second descriptive idiom on a predicate slot ("yer a few snags short of a barbie, mad as a cut snake"):
+        the one stacked (or None) and the text with it."""
+        uses = run.state.entry_uses
         others = [c for c in keep if c.entry.id != choice.entry.id and c.entry.frame == choice.entry.frame
                   and det.frame == "predicate_adj" and choice.entry.frame in ("predicate_adj", "adj")
                   and not uses.get(c.entry.id) and not det.coordinated
                   and len(c.entry.form.split()) <= STACK_MAX_WORDS and len(choice.entry.form.split()) <= STACK_MAX_WORDS
                   and abs(c.entry.intensity - choice.entry.intensity) <= STACK_INTENSITY_SPREAD]
         if not others or run.eff.profile.stack <= 0 or roll(run.pol.seed, "stack", *sent.key, det.start) >= run.eff.profile.stack:
-            return out
+            return None, out
         extra = weighted_pick(others, roll(run.pol.seed, "stack-pick", *sent.key, det.start))
-        rec.stacked = extra
         uses[extra.entry.id] += 1
-        return out + ", " + realise(extra.entry, self._form(extra.entry, det, run, sent.key + ("stack",)), det)
+        return extra, out + ", " + realise(extra.entry, self._form(extra.entry, det, run, sent.key + ("stack",)), det)
 
-    def _riff(self, rec: SubstitutionRecord, choice: Candidate, det: Detection, end: int, sent: "_Sentence",
-              run: "_Run") -> str:
+    def _riff(self, choice: Candidate, det: Detection, end: int, sent: "_Sentence",
+              run: "_Run") -> tuple[str | None, str]:
         """The image the term calls up ("wheelie bins, overflowin', with the bin chickens fightin' over the
         scraps"), only where the term ends a clause (or is the first of a pair) so the riff can't split a phrase.
-        Returns the text to append, or ""."""
+        Returns the riff (or None) and the text to append (or "")."""
         if not run.embellishment.entry_riffs or choice.entry.id in run.state.riffed:
-            return ""
+            return None, ""
         toks, state, eff = sent.tokens, run.state, run.eff
         riffs = choice.entry.riffs_within(eff.vulgarity)
         if not riffs or not self._riff_room(end, choice.entry.frame, det.start, sent, run):
-            return ""
-        rec.riff = pick_riff(riffs, run.mood, roll(run.pol.seed, "riff-pick", *sent.key, det.start)).text
+            return None, ""
+        riff = pick_riff(riffs, run.mood, roll(run.pol.seed, "riff-pick", *sent.key, det.start)).text
         state.riffed.add(choice.entry.id)
         self._note_riff(sent, run)
         before_and = end < len(toks) and toks[end].norm == "and"
-        return ", " + rec.riff + ("," if before_and else "")
+        return riff, ", " + riff + ("," if before_and else "")
 
     def _riff_room(self, end, frame, start, sent, run):
         if sent.quiet or sent.prefix_only or not run.embellishment.takes("riff"):
@@ -576,13 +578,15 @@ class Translator:
             r = roll(run.pol.seed, key, run.text.lower())
             if r >= p:
                 continue
-            entry, form, rej = pick_garnish("closer", self.dictionary.garnish, run.eff, run.pol.seed,
-                                            (key, run.text.lower()), run.state.garnish_uses, contexts=contexts,
-                                            mood=run.mood, swear=swear, insults=run.embellishment.takes("insult"))
-            run.garnish.append(GarnishRecord.rolled("closer", len(sents) - 1, entry, form, r, p, rej))
+            offer = garnish_offer("closer", self.dictionary.garnish, run.eff, run.pol.seed,
+                                  (key, run.text.lower()), run.state.garnish_uses, contexts=contexts,
+                                  mood=run.mood, swear=swear, insults=run.embellishment.takes("insult"))
+            entry = offer.pick()
+            form = entry and offer.words(entry)
+            run.garnish.append(GarnishRecord.rolled("closer", len(sents) - 1, entry, form, r, p, offer.rejected))
             if entry:
                 run.state.garnish_uses[entry.id] += 1
-                return self._place(joined, "closer", entry, form, len(sents) - 1, run)
+                return self._place(joined, offer, entry, form, len(sents) - 1, run)
         return joined
 
     def _tail(self, out: str, sent: "_Sentence", run: "_Run") -> str:
@@ -603,11 +607,13 @@ class Translator:
             r = roll(run.pol.seed, "garnish", key, *sent.key)
             if r >= p:
                 continue
-            entry, form, rej = pick_garnish("tail", self.dictionary.garnish, run.eff, run.pol.seed,
-                                            (key,) + sent.key, state.garnish_uses, sentence_contexts(sent.tokens, sent.tags),
-                                            swear=swear, insults=run.embellishment.takes("insult"))
+            offer = garnish_offer("tail", self.dictionary.garnish, run.eff, run.pol.seed,
+                                  (key,) + sent.key, state.garnish_uses, sentence_contexts(sent.tokens, sent.tags),
+                                  swear=swear, insults=run.embellishment.takes("insult"))
+            entry = offer.pick()
+            form, rej = entry and offer.words(entry), offer.rejected
             if entry:
-                out = self._place(out, "tail", entry, form, sent.index, run)
+                out = self._place(out, offer, entry, form, sent.index, run)
                 state.garnish_uses[entry.id] += 1
                 state.placed["tail"] += 1
                 state.last_placed["tail"] = ordinal
@@ -617,9 +623,11 @@ class Translator:
         return out
 
     @staticmethod
-    def _place(out: str, placement: str, entry: Entry, form: str, sentence: int, run: "_Run",
+    def _place(out: str, offer: GarnishOffer, entry: Entry, form: str, sentence: int, run: "_Run",
                lowerable: frozenset[str] = frozenset(), first_replaced: bool = False) -> str | None:
-        """Put a picked garnish in (None where a connective doesn't fit), and tell the observer where it went."""
+        """Put a picked garnish in (None where a connective doesn't fit), and tell the observer where it went and
+        what it was picked from."""
+        placement = offer.placement
         if run.observer is not None:
             form = run.observer.placing(sentence, placement, entry, form)
             if form is None:
@@ -628,7 +636,7 @@ class Translator:
         if placed is None:
             return None
         if run.observer is not None:
-            run.observer.garnish(sentence, placement, entry, form, placed[1])
+            run.observer.garnish(sentence, entry, form, placed[1], offer)
         return placed[0]
 
     @staticmethod
@@ -676,8 +684,7 @@ class Translator:
             return out
         g = _GarnishSpot(
             starts_with_interjection=any(r.det.start == 0 and r.det.frame == "interjection" for r in recs),
-            first_replaced=any(r.substituted and r.out_span and r.out_span[0] == toks[0].start
-                               and r.chosen.entry.form[:1].islower() for r in recs),
+            first_replaced=first_replaced(recs, toks),
             contexts=(sent.source_contexts if sent.source_contexts is not None else sentence_contexts(toks, sent.tags))
                      | ({"paragraph_end"} if sent.para_end else set()))
         # a tag lands at the sentence's end: when that's narration after a closing quote ('"... get the coffins
@@ -756,12 +763,14 @@ class Translator:
             if r >= p:
                 continue
             recent = {cid for cid, at in state.connectives.items() if ordinal - at <= CONNECTIVE_REPEAT_GAP}
-            entry, form, rej = pick_garnish(placement, self.dictionary.garnish, eff, run.pol.seed, (key,) + sent.key,
-                                            state.garnish_uses, g.tag_contexts if placement == "tag" else g.contexts,
-                                            exclude=recent, mood=run.mood, swear=swear,
-                                            insults=run.embellishment.takes("insult"))
+            offer = garnish_offer(placement, self.dictionary.garnish, eff, run.pol.seed, (key,) + sent.key,
+                                  state.garnish_uses, g.tag_contexts if placement == "tag" else g.contexts,
+                                  exclude=recent, mood=run.mood, swear=swear,
+                                  insults=run.embellishment.takes("insult"))
+            entry = offer.pick()
+            form, rej = entry and offer.words(entry), offer.rejected
             if entry:
-                new = self._place(out, placement, entry, form, sent.index, run, lowerable, g.first_replaced)
+                new = self._place(out, offer, entry, form, sent.index, run, lowerable, g.first_replaced)
                 if new is None:   # only a connective can refuse
                     entry, form = None, None
                     rej = rej + [("-", "sentence already opens with a connective or quote")]
@@ -820,37 +829,44 @@ class TextState:
 
 
     def copy(self) -> "TextState":
-        return TextState(Counter(self.entry_uses), Counter(self.garnish_uses), set(self.riffed), set(self.imagery_used),
-                         set(self.riffed_sentences), Counter(self.placed), dict(self.last_placed),
-                         dict(self.connectives), Counter(self.seen_sentences), dict(self.spellings))
+        """A copy to spend from without touching this one (each field's container copied)."""
+        return TextState(**{f.name: type(v)(v) for f in fields(self) for v in [getattr(self, f.name)]})
 
 
 @dataclass(frozen=True)
 class SpotRendering:
     """A candidate as render_at_spot puts it in: its token span (after taking in an "a"/"an" before it), its text
-    with any riff, the term without the riff, the form picked; or, with echo, why it can't go in (a bracketed gloss
-    would repeat it)."""
+    with any riff, the term without the riff, the form picked, the idiom stacked after it and the riff it brought;
+    or, with echo, why it can't go in (a bracketed gloss would repeat it)."""
     start: int
     end: int
     text: str
     term: str
     form: str
+    stacked: Candidate | None = None
+    riff: str | None = None
     echo: str | None = None
 
 
 @dataclass
 class Spot:
-    """A detection the engine is about to fill, as an observer sees it just before the pick is rendered: the
-    eligible candidates and the live state (the observer copies what it keeps). splice is the index its splice
-    will take in the sentence's splices."""
+    """A detection the engine is about to fill, just before the pick is rendered: the eligible candidates, the state
+    and the swaps the sentence has so far (replaced tokens, and what was said before each), the tokens other swaps
+    hold (taken), and the index its splice will take in the sentence's splices. render_at_spot reads it; an
+    observer gets a snapshot, whose candidates, state, replaced and said, and taken are copies the rest of the pass
+    leaves as they were. Its sentence (sent) and record (rec) are shared, and carry the pick's outcome."""
     sent: "_Sentence"
     rec: SubstitutionRecord
     keep: list[Candidate]
     state: TextState
     replaced: set[int]
     said: dict[int, str]
-    occupied: set[int]
+    taken: set[int]
     splice: int
+
+    def snapshot(self) -> "Spot":
+        return Spot(self.sent, self.rec, list(self.keep), self.state.copy(), set(self.replaced), dict(self.said),
+                    set(self.taken), self.splice)
 
 
 @dataclass
@@ -881,10 +897,10 @@ class PassObserver:
     def spot(self, spot: Spot) -> None:
         pass
 
-    def imagery(self, sentence: int, image_id: str, end: int, suffix: str) -> None:
+    def imagery(self, sentence: int, image_id: str, splice: int, suffix: str) -> None:
         pass
 
-    def garnish(self, sentence: int, placement: str, entry: Entry, form: str, edit: Edit) -> None:
+    def garnish(self, sentence: int, entry: Entry, form: str, edit: Edit, offer: GarnishOffer) -> None:
         pass
 
     def sentence(self, trace: SentenceTrace) -> None:
@@ -1080,6 +1096,23 @@ def _splice(sent: _Sentence, splices: list[tuple[int, int, str]]) -> str:
 
 def _bare(term: str) -> str:
     return re.sub(r"^(?:a|an|the)\s+", "", form_key(term))
+
+
+def first_replaced(records: Sequence[SubstitutionRecord], tokens: list[Token],
+                   swap: tuple[SubstitutionRecord, int, Entry] | None = None) -> bool:
+    """Whether a sentence starts with a swap whose term starts in lower case, so an opener lowers it whatever it
+    is. swap: (a record, where its swap would start, its entry) in place of that record's own pick, for a telling
+    with another option there."""
+    for r in records:
+        if swap is not None and r is swap[0]:
+            start, entry = swap[1], swap[2]
+        elif r.substituted and r.out_span:
+            start, entry = r.out_span[0], r.chosen.entry
+        else:
+            continue
+        if start == tokens[0].start and entry.form[:1].islower():
+            return True
+    return False
 
 
 def _gloss_echo(toks: list[Token], s: int, e: int, term: str, said: dict[int, str]) -> str | None:

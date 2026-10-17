@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 from _pins import Pins
 
-from aussiefy.engine import PassObserver
+from aussiefy.engine import PassObserver, first_replaced
 from aussiefy.garnish import place_garnish
 from aussiefy.markup import mask
 
@@ -30,7 +30,7 @@ def _same(a, b):
 
 
 class Recorder(PassObserver):
-    """Keeps everything the hooks report, copying the live state at each spot as the builder does."""
+    """Keeps everything the hooks report (each spot is a snapshot the rest of the pass leaves alone)."""
 
     def __init__(self):
         self.spots, self.sentences, self.placed, self.trace = [], [], [], None
@@ -39,12 +39,11 @@ class Recorder(PassObserver):
         self.run = run
 
     def spot(self, spot):
-        spot.state = spot.state.copy()
-        spot.replaced, spot.said = set(spot.replaced), dict(spot.said)
         self.spots.append(spot)
 
-    def garnish(self, sentence, placement, entry, form, edit):
-        self.placed.append((sentence, placement, form, edit))
+    def garnish(self, sentence, entry, form, edit, offer):
+        self.placed.append((sentence, offer.placement, form, edit))
+        assert entry in offer.pool and offer.words(entry) == form, "the offer the engine picked from"
 
     def sentence(self, trace):
         self.sentences.append(trace)
@@ -74,20 +73,15 @@ def test_render_at_spot_on_a_copy_of_the_state_gives_the_pick(translator):
     the pass put in."""
     from dataclasses import replace
 
-    from aussiefy.engine import SubstitutionRecord
-
     checked = 0
     for text in _texts(every=3):
         for settings in SETTINGS:
             seen = Recorder()
             translator.translate(text, _observer=seen, **settings)
             for spot in (s for s in seen.spots if s.rec.substituted):
-                rec = SubstitutionRecord(spot.rec.span, spot.rec.text, spot.rec.det, spot.sent.index)
-                run = replace(seen.run, state=spot.state.copy())
-                got = translator.render_at_spot(spot.rec.chosen, rec, spot.keep, spot.sent, run, spot.replaced,
-                                                spot.said)
-                assert (got.text, got.term) == (spot.rec.output, spot.rec.term)
-                assert (rec.stacked and rec.stacked.entry.id) == (spot.rec.stacked and spot.rec.stacked.entry.id)
+                got = translator.render_at_spot(spot.rec.chosen, spot, replace(seen.run, state=spot.state.copy()))
+                assert (got.text, got.term, got.riff) == (spot.rec.output, spot.rec.term, spot.rec.riff)
+                assert (got.stacked and got.stacked.entry.id) == (spot.rec.stacked and spot.rec.stacked.entry.id)
                 checked += 1
     assert checked > 50
 
@@ -136,9 +130,7 @@ def test_garnish_replay_reproduces_each_sentence(translator):
             translator.translate(text, _observer=seen, **settings)
             for st in seen.sentences:
                 ops = [(p, f) for s, p, f, _ in seen.placed if s == st.sent.index and p != "closer"]
-                toks = st.sent.tokens
-                first = any(r.substituted and r.out_span[0] == toks[0].start and r.chosen.entry.form[:1].islower()
-                            for r in st.records)
+                first = first_replaced(st.records, st.sent.tokens)
                 out, edits = translator.replay_garnish(st.spliced, st.sent, seen.run, ops, first)
                 assert out == st.garnished and None not in edits
                 assert edits == [e for s, p, _, e in seen.placed if s == st.sent.index and p != "closer"]
@@ -160,3 +152,33 @@ def test_pins_force_a_pick_and_leave_out_a_garnish(translator, dictionary):
     if placed:
         dropped = translator.translate(text, level=5, seed=0, _observer=Pins(dictionary, drop=placed[:1]))
         assert dropped.text != base.text
+
+
+def test_a_copy_of_the_state_copies_every_field():
+    """The builder spends from a copy of the state at each spot; nothing it does may reach the pass's own."""
+    from collections import Counter
+    from dataclasses import fields
+
+    from aussiefy.engine import TextState
+
+    state = TextState()
+    for f in fields(state):
+        value = getattr(state, f.name)
+        value.update({"x": 1} if isinstance(value, (dict, Counter)) else {"x"})
+    copy = state.copy()
+    assert copy == state
+    for f in fields(copy):
+        value = getattr(copy, f.name)
+        value.update({"y": 2} if isinstance(value, (dict, Counter)) else {"y"})
+        assert "y" not in getattr(state, f.name), f.name
+
+
+def test_an_observer_gets_a_snapshot_of_each_spot(translator):
+    """What an observer keeps of a spot is what the spot was: the rest of the pass leaves it as it was."""
+    text = "I'm exhausted and the toilet is broken. You are very tired and hungry, and your car is broken."
+    seen = Recorder()
+    translator.translate(text, level=5, vulgarity=2, _observer=seen)
+    spots = [s for s in seen.spots if s.rec.substituted]
+    later = [s for s in spots if s.sent.index == spots[-1].sent.index]
+    assert len(later) >= 2 and not later[0].replaced and later[-1].replaced
+    assert sum(later[0].state.entry_uses.values()) < sum(later[-1].state.entry_uses.values())

@@ -2,15 +2,25 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/underware-gg/aussiefy/blob/main/aussiefy/data/changes.schema.json",
   "title": "aussiefy changes, contract version 1",
-  "description": "What aussiefy.translate_changes returns (ChangeSet.to_dict()): a translation's text, every change it made in output order, and the card of every entry the changes name. Spans are [start, end) Unicode code-point offsets: src_span in the source, out_span in this text. Alternative regions and mask positions use the same unit; masks refer to their own rendering's text. Ids are a change's kind and source span, with a placement or rule where those could repeat. See docs/functional/changes.md.",
+  "description": "What aussiefy.translate_changes returns (ChangeSet.to_dict()): a translation's text, every change it made in output order, the card of every entry the changes name, and the swaps and garnish whose alternatives are withheld. Spans are [start, end) Unicode code-point offsets: src_span in the source, out_span in this text. Alternative regions and mask positions use the same unit; masks refer to their own rendering's text. Ids are a change's kind and source span, with a placement or rule where those could repeat. See docs/functional/changes.md.",
   "type": "object",
-  "required": ["version", "text", "changes", "entries"],
+  "required": ["version", "text", "changes", "entries", "withheld"],
   "additionalProperties": false,
   "properties": {
     "version": {"const": 1},
     "text": {"type": "string"},
     "changes": {"type": "array", "items": {"$ref": "#/$defs/change"}},
-    "entries": {"type": "object", "additionalProperties": {"$ref": "#/$defs/card"}}
+    "entries": {"type": "object", "additionalProperties": {"$ref": "#/$defs/card"}},
+    "withheld": {
+      "description": "Swaps and garnish whose renderings are withheld, the pick alone offered: a swap's other alternatives and locked options, a garnish's other alternatives and its removal. pick-differs where the pick, rendered over its region, isn't the output there; region-unsettled where a drawl or infix match still reads across the region's edge after widening.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "reason"],
+        "additionalProperties": false,
+        "properties": {"id": {"type": "string"}, "reason": {"enum": ["pick-differs", "region-unsettled"]}}
+      }
+    }
   },
   "$defs": {
     "span": {"type": "array", "items": {"type": "integer", "minimum": 0}, "minItems": 2, "maxItems": 2},
@@ -55,7 +65,7 @@
       }
     },
     "removed": {
-      "description": "How a garnish's region reads without it: its words gone (and the word an opener lowered recased).",
+      "description": "How a garnish's region reads without it: its words gone (and the word an opener lowered recased). Every garnish has one, but one named under withheld.",
       "type": "object",
       "required": ["out_span", "rendered"],
       "additionalProperties": false,
@@ -110,7 +120,7 @@
         {"if": {"properties": {"kind": {"const": "substitution"}}},
          "then": {"properties": {"entry_id": {"type": "string"}, "alternatives": {"minItems": 1}}}},
         {"if": {"properties": {"kind": {"const": "garnish"}}},
-         "then": {"required": ["placement", "removed"], "properties": {"locked": {"maxItems": 0}}}},
+         "then": {"required": ["placement"], "properties": {"locked": {"maxItems": 0}}}},
         {"if": {"properties": {"kind": {"enum": ["phonetic", "swear_infix"]}}},
          "then": {"required": ["rule"], "properties": {"entry_id": {"type": "null"}, "alternatives": {"maxItems": 0},
                                                          "locked": {"maxItems": 0}}}},
@@ -120,7 +130,7 @@
       ]
     },
     "card": {
-      "description": "An entry's card (aussiefy/cards.py), as lookup shows it too.",
+      "description": "An entry's card (aussiefy/cards.py), as lookup shows it too: riffs only where the embellishment takes them, and a gated entry's flags where the policy unlocked it.",
       "type": "object",
       "required": ["id", "form", "gloss", "frame", "concepts", "level", "vulgarity", "register"],
       "additionalProperties": false,
@@ -139,7 +149,8 @@
         "region": {"type": "array", "items": {"type": "string"}},
         "notes": {"type": "string"},
         "sources": {"type": "array", "items": {"type": "string"}},
-        "replaces": {"type": "array", "items": {"type": "string"}}
+        "replaces": {"type": "array", "items": {"type": "string"}},
+        "gated": {"type": "array", "items": {"type": "string"}}
       }
     }
   }

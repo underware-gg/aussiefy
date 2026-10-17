@@ -334,84 +334,83 @@ def prose_spans(source: str) -> list[ProseSpan]:
 
 def _escape(text: str) -> str:
     # Source units have no newlines; custom slang must not inject a block or hard break.
-    text = text.replace("\r\n", " ").replace("\r", " ").replace("\n", " ").strip(" \t")
-    text = re.sub(r"([\\`*_{}\[\]<>()!#|~>+\-=&])", r"\\\1", text)
-    return re.sub(r"^(\d{1,9})\.([ \t])", r"\1\\.\2", text)
+    return _escape_map(text)[0]
 
 
-_SPECIAL = set("\\`*_{}[]<>()!#|~+-=&")
+_SPECIAL = set("\\`*_{}[]<>()!#|~+-=&")   # what custom slang could make markup of
+_NUMBERED = re.compile(r"^(\d{1,9})\.([ \t])")   # a unit opening like an ordered list item ("1. ")
+
+
+def _escape_chars(text: str) -> tuple[list[str], list[int]]:
+    """Each character as a unit's escaping writes it (a newline as a space, a markup character after a backslash),
+    with where each position of text lands (len(text) + 1 of them)."""
+    out, at = [], []
+    i = 0
+    while i < len(text):
+        at.append(len(out))
+        if text.startswith("\r\n", i):   # one space for both
+            at.append(len(out))
+            i += 1
+        ch = " " if text[i] in "\r\n" else text[i]
+        out += ["\\", ch] if ch in _SPECIAL else [ch]
+        i += 1
+    at.append(len(out))
+    return out, at
 
 
 def _escape_map(text: str) -> tuple[str, list[int]]:
-    """_escape(text), with where each position of text lands in it (len(text) + 1 of them)."""
-    norm, at = [], []
-    i = 0
-    while i < len(text):
-        at.append(len(norm))
-        if text.startswith("\r\n", i):
-            at.append(len(norm))
-            i += 1
-        norm.append(" " if text[i] in "\r\n" else text[i])
-        i += 1
-    at.append(len(norm))
-    flat = "".join(norm)
+    """A prose unit as published: newlines as spaces, the ends stripped of spaces and tabs, markup characters and an
+    opening "1." escaped. With where each position of text lands in it (len(text) + 1 of them)."""
+    chars, at = _escape_chars(text)
+    flat = "".join(chars)
     lead = len(flat) - len(flat.lstrip(" \t"))
-    kept = flat.strip(" \t")
-    out, moved = [], []
-    for ch in kept:
-        moved.append(len(out))
-        if ch in _SPECIAL:
-            out.append("\\")
-        out.append(ch)
-    moved.append(len(out))
-    escaped = "".join(out)
-    numbered = re.match(r"^(\d{1,9})\.([ \t])", escaped)
+    escaped = flat.strip(" \t")
+    numbered = _NUMBERED.match(escaped)
     dot = numbered.end(1) if numbered else None
     if dot is not None:
         escaped = escaped[:dot] + "\\" + escaped[dot:]
     positions = []
     for x in at:
-        y = moved[min(max(x - lead, 0), len(kept))]
+        y = min(max(x - lead, 0), len(escaped) - (dot is not None))
         positions.append(y + 1 if dot is not None and y > dot else y)
     return escaped, positions
 
 
-def document_changes(source: str, translator: Translator, policy: Policy, effective: Effective):
-    """translate_document, with every unit's changes placed in the document: each unit's source and output offsets
-    added, its output mapped through the escaping that keeps custom slang from making markup, and each rendering
-    escaped the same way where it stands."""
+def document_changes(source: str, translator: Translator, policy: Policy, effective: Effective,
+                     _watch: Callable[[int], object] | None = None):
+    """translate_document, with every unit's changes placed in the document: each unit's source offset added, its
+    output mapped through the escaping that keeps custom slang from making markup, and each rendering escaped where
+    it stands. _watch: the changes builder's watch for each unit, by index (a test pins one unit's picks)."""
     from .changes import collect, finish
 
-    raw_units = []
+    units = []
 
     def unit(text, **options):
-        result, raw = collect(translator, text, **options)
-        raw_units.append((result, raw))
+        result, drafts = collect(translator, text, _observer=_watch(len(units)) if _watch else None, **options)
+        units.append((result, drafts))
         return result
 
     document = translate_document(source, translator, policy, effective, unit=unit)
-    changes = []
-    for u, (result, raw) in zip(document.units, raw_units):
-        escaped, at = _escape_map(result.text)
-        if escaped != u.text:   # pragma: no cover - _escape_map follows _escape
-            raise AssertionError("the escaping map no longer follows _escape")
-        src, out = u.source_span[0], u.output_span[0]
-        for c in raw:
-            c["src_span"] = [c["src_span"][0] + src, c["src_span"][1] + src]
-            a, b = c["out_span"]
-            for o in c["alternatives"] + c["locked"] + ([c["removed"]] if c.get("removed") else []):
-                o["rendered"] = _escaped_in(result.text, o["out_span"], o["rendered"])
-                oa, ob = o["out_span"]
-                o["out_span"] = [out + at[oa], out + at[ob]]
-            c["out_span"] = [out + at[a], out + at[b]]
-            c["output"] = document.text[c["out_span"][0]:c["out_span"][1]]
-            changes.append(c)
-    return finish(document, changes, translator.dictionary, effective.vulgarity)
+    drafts = []
+    for u, (result, unit_drafts) in zip(document.units, units):
+        _, at = _escape_map(result.text)
+        out = u.output_span[0]
+        for d in unit_drafts:
+            d.relocate(u.source_span[0], lambda pos: out + at[pos],
+                       lambda span, rendered: _escaped_in(result.text, span, rendered), document.text)
+            drafts.append(d)
+    return finish(document, drafts, translator.dictionary)
 
 
 def _escaped_in(text: str, span: list[int], rendered: str) -> str:
-    """A rendering as it reads once its unit is escaped: the unit with it in place, escaped, over its span."""
+    """A rendering as it reads once its unit is escaped. Within the unit it's escaped on its own; where it reaches
+    the unit's start or end (which escaping strips, and where an opening "1." is escaped), the unit is escaped with
+    it in place."""
     a, b = span
+    # how the unit opens, as escaping reads it: newlines as spaces, and the space or tab after a "1." taken in
+    opening = re.sub(r"[\r\n]", " ", text[:a] + rendered + text[b:b + 1]).lstrip(" \t")
+    if text[:a].strip(" \t\r\n") and text[b:].strip(" \t\r\n") and not _NUMBERED.match(opening):
+        return "".join(_escape_chars(rendered)[0])
     escaped, at = _escape_map(text[:a] + rendered + text[b:])
     return escaped[at[a]:at[a + len(rendered)]]
 

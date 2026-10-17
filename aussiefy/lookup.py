@@ -20,7 +20,7 @@ from .model import Dictionary
 from .morph import pluralise, verb_forms
 from .select import dial_rejection
 from .schema import PLACEHOLDER_RE, Entry
-from .cards import entry_card, short_card
+from .cards import entry_card, short_card, shows_riffs
 from .terms import fold, form_key, strip_markup
 from .genre import resolve_document
 from .imagery import lookup_images
@@ -176,11 +176,8 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     if short:
         results = [short_card(e) for _, e, _ in scored[:limit]]
     else:
-        results = [{**entry_card(e, cap), "match": how, "score": round(s, 2),
-                    **({"gated": list(e.flags)} if e.status == "gate" else {})} for s, e, how in scored[:limit]]
-    if not setting.entry_riffs or not setting.takes("riff"):
-        for card in results:
-            card.pop("riffs", None)
+        riffs = shows_riffs(setting)
+        results = [{**entry_card(e, cap, riffs), "match": how, "score": round(s, 2)} for s, e, how in scored[:limit]]
     # a lookup reads no profile settings, so its envelope is the dials alone (no profile_config)
     out = {"query": query, **envelope(eff.level, eff.vulgarity, eff.warnings), "results": results}
     images = lookup_images(d, query, eff.level, cap, setting, limit)

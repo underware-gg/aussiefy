@@ -269,9 +269,9 @@ def test_declining_a_question_does_not_shift_a_later_statements_roll(translator)
 @pytest.mark.parametrize('closing', ['"', '”', '’', '”)'])
 @pytest.mark.parametrize('punctuation', ['?', '!', '.'])
 def test_continued_dialogue_tag_precedes_terminal_punctuation_and_closers(closing, punctuation):
-    from aussiefy.garnish import add_tag
+    from aussiefy.garnish import tag_edit
     source = f'Are you ready{punctuation}{closing}  '
-    assert add_tag(source, 'mate') == f'Are you ready, mate{punctuation}{closing}  '
+    assert tag_edit(source, 'mate')[0] == f'Are you ready, mate{punctuation}{closing}  '
 
 
 def test_continued_curly_dialogue_keeps_its_tag_inside_the_quote(translator):

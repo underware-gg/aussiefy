@@ -8,7 +8,9 @@ import pytest
 from _pins import Pins
 
 from aussiefy import changes as C
+from aussiefy.markdown import document_changes
 from aussiefy.markup import mask
+from aussiefy.policy import resolve
 
 ROOT = Path(__file__).resolve().parents[2]
 EVERYDAY = sorted((ROOT / "tests" / "corpus" / "everyday").glob("*/*.txt"))
@@ -18,6 +20,12 @@ STRESS = dict(level=5, vulgarity=2, embellishment=2, document_config={"profile":
     "swearing": {"infix": 6.0, "exclaim": 0.5}}})
 SETTINGS = {"larrikin-dad": dict(level=4, vulgarity=1), "swaggie-tradie-troppo": dict(level=5, vulgarity=3, embellishment=2),
             "stress": STRESS}
+# Adjacent swaps where the second reads otherwise once both are pinned, because the first used an entry the
+# second's stacked idiom would have taken (entry_uses): the accepted locality of a swap. Any new one fails.
+SHIFTED_PAIRS = {
+    ("swaggie-tradie-troppo", "self_made_merchant_expense_account.txt", 0),
+    ("stress", "self_made_merchant_expense_account.txt", 7),
+}
 
 
 class Pinned(Pins, C.Watch):
@@ -38,15 +46,16 @@ def _build(translator, text, options, watch=None):
     return watch, result, C._Builder(translator, watch, result)
 
 
-def _spots(watch, builder):
-    """Each substitution change with its spot and its region's tokens."""
-    for c in (c for c in builder.changes() if c["kind"] == "substitution"):
+def _spots(watch, result, builder, translator):
+    """Each substitution change (with its id) with its spot and its region's tokens, and what finish() withheld."""
+    cs = C.finish(result, builder.drafts(), translator.dictionary)
+    for c in (c for c in cs.changes if c["kind"] == "substitution"):
         spot = next(s for s in watch.spots if s.rec.substituted
                     and c["src_span"][0] <= s.rec.span[0] and s.rec.span[1] <= c["src_span"][1])
         toks = spot.sent.tokens
         start = next(i for i, t in enumerate(toks) if t.start == c["src_span"][0])
         end = next(i for i, t in enumerate(toks) if t.end == c["src_span"][1]) + 1
-        yield c, spot, start, end
+        yield c, spot, start, end, cs.withheld
 
 
 def _region(translator, text, options, pins, sentence, start, end):
@@ -60,21 +69,31 @@ def _region(translator, text, options, pins, sentence, start, end):
 @pytest.mark.parametrize("setting", sorted(SETTINGS))
 def test_every_alternative_and_locked_option_is_the_pinned_re_render(translator, setting, seed):
     options, checked = {**SETTINGS[setting], "seed": seed}, 0
+    shown = {"stack": 0, "riff": 0, "infix": 0}
+    d = translator.dictionary
     for path in EVERYDAY:
         text = cut(path.read_text(encoding="utf-8"))
         watch, result, builder = _build(translator, text, options)
-        for c, spot, start, end in _spots(watch, builder):
+        for c, spot, start, end, withheld in _spots(watch, result, builder, translator):
+            assert not withheld, (path.name, withheld)
             assert c["output"] == result.text[slice(*c["out_span"])]
             pick = next(o for o in c["alternatives"] if o["entry_id"] == c["entry_id"])
             assert pick["rendered"] == c["output"], (path.name, c["id"])
             key = (spot.sent.index, spot.rec.det.start, spot.rec.det.pattern)
             for o in c["alternatives"] + c["locked"]:
+                entry = d.entries[o["entry_id"]]
+                riffed = any(r.text in o["rendered"] for r in entry.riffs)
+                shown["riff"] += riffed
+                shown["infix"] += o["vulgarity"] > entry.vulgarity
+                shown["stack"] += o["rendered"].count(", ") > riffed
                 if o["entry_id"] == c["entry_id"]:
                     continue
                 got = _region(translator, text, options, {"picks": {key: o["entry_id"]}}, spot.sent.index, start, end)
                 assert o["rendered"] == got, (path.name, c["id"], o["entry_id"])
                 checked += 1
     assert checked > 50
+    if setting != "larrikin-dad":   # the hard paths: stacked idioms, riffs, infixes in a spot
+        assert min(shown.values()) >= 3, shown
 
 
 @pytest.mark.parametrize("setting", sorted(SETTINGS))
@@ -91,17 +110,19 @@ def test_every_garnish_removal_and_alternative_is_the_pinned_re_render(translato
             if watch.closer:
                 ops.append((len(builder.sentences) - 1, -1, watch.closer))
             for sentence, k, op in ops:
-                c = builder._closer() if k < 0 else builder._garnish(builder.sentences[sentence], k)
+                draft = builder._closer() if k < 0 else builder._garnish(builder.sentences[sentence], k)
+                c = draft.change
+                assert not draft.withheld, (path.name, seed, c["placement"], draft.withheld)
                 a, _ = c["removed"]["out_span"]
                 got = translator.translate(text, **options, _observer=Pinned(
                     translator.dictionary, drop={(sentence, op.placement)})).text
                 assert got[:a + len(c["removed"]["rendered"])] == result.text[:a] + c["removed"]["rendered"]
-                words = {e.id: form for e, form, _ in builder._pool(sentence, op)}
+                words = {e.id: op.offer.words(e) for e in op.offer.pool}
                 for o in [o for o in c["alternatives"] if o["entry_id"] != op.entry.id][:2]:   # two an op bounds it
                     got = translator.translate(text, **options, _observer=Pinned(
                         translator.dictionary, words={(sentence, op.placement): words[o["entry_id"]]})).text
                     a, _ = o["out_span"]
-                    assert got[:a + len(o["rendered"])] == result.text[:a] + o["rendered"], (path.name, c["id"])
+                    assert got[:a + len(o["rendered"])] == result.text[:a] + o["rendered"], (path.name, c["placement"])
                     checked += 1
     assert checked > 50
 
@@ -117,34 +138,33 @@ def _state(spot):
 @pytest.mark.parametrize("setting", sorted(SETTINGS))
 def test_adjacent_swaps_agree_with_a_pinned_re_render(translator, setting):
     """Two swaps in one sentence, or in neighbouring ones, both pinned at once: their regions don't touch, the
-    first reads as rendered, and so does the second wherever the first leaves the state it reads alone. Where it
-    doesn't (the first swap used an entry the second's stack or riff would have), the second can read otherwise:
-    the accepted locality of a swap (later picks shift), which these pairs count."""
-    pairs, shifted = 0, 0
+    first reads as rendered, and so does the second, except in the pairs SHIFTED_PAIRS lists (the first swap used
+    an entry the second's stacked idiom would have taken)."""
+    pairs, shifted = 0, set()
     for path, seed in ((path, seed) for path in EVERYDAY for seed in (0, 7)):
         text, options = cut(path.read_text(encoding="utf-8")), {**SETTINGS[setting], "seed": seed}
         watch, result, builder = _build(translator, text, options)
-        spots = [s for s in _spots(watch, builder)
+        spots = [s for s in _spots(watch, result, builder, translator)
                  if any(o["entry_id"] != s[0]["entry_id"] for o in s[0]["alternatives"])]
         for one, two in zip(spots, spots[1:]):
             if two[1].sent.index - one[1].sent.index > 1:
                 continue
             assert one[0]["out_span"][1] <= two[0]["out_span"][0]
             chosen = [(c, spot, start, end, next(o for o in c["alternatives"] if o["entry_id"] != c["entry_id"]))
-                      for c, spot, start, end in (one, two)]
+                      for c, spot, start, end, _ in (one, two)]
             picks = {(spot.sent.index, spot.rec.det.start, spot.rec.det.pattern): o["entry_id"]
                      for c, spot, start, end, o in chosen}
             pinned_watch, pinned, pinned_builder = _build(translator, text, options,
                                                           Pinned(translator.dictionary, picks))
             for n, (c, spot, start, end, o) in enumerate(chosen):
                 a, b = pinned_builder._base_region(pinned_builder.sentences[spot.sent.index], start, end).final
-                there = next(s for s in pinned_watch.spots if s.rec.span == spot.rec.span)
-                if n and _state(there) != _state(spot) and pinned.text[a:b] != o["rendered"]:
-                    shifted += 1
-                    continue
-                assert pinned.text[a:b] == o["rendered"], (path.name, c["id"], o["entry_id"])
+                if pinned.text[a:b] != o["rendered"]:
+                    there = next(s for s in pinned_watch.spots if s.rec.span == spot.rec.span)
+                    assert n and _state(there) != _state(spot), (path.name, c["id"], o["entry_id"])
+                    shifted.add((setting, path.name, seed))
             pairs += 1
-    assert pairs > 8 and shifted <= pairs // 4
+    assert pairs > 8
+    assert shifted == {p for p in SHIFTED_PAIRS if p[0] == setting}
 
 
 def test_alternatives_in_masked_markup_are_the_pinned_re_render(translator):
@@ -155,7 +175,7 @@ def test_alternatives_in_masked_markup_are_the_pinned_re_render(translator):
     options = dict(level=5, vulgarity=2, embellishment=2, _protected=mask(text, "markdown"))
     watch, result, builder = _build(translator, text, options)
     checked = 0
-    for c, spot, start, end in _spots(watch, builder):
+    for c, spot, start, end, _ in _spots(watch, result, builder, translator):
         key = (spot.sent.index, spot.rec.det.start, spot.rec.det.pattern)
         for o in c["alternatives"] + c["locked"]:
             if o["entry_id"] != c["entry_id"]:
@@ -163,3 +183,59 @@ def test_alternatives_in_masked_markup_are_the_pinned_re_render(translator):
                                                 spot.sent.index, start, end)
                 checked += 1
     assert checked > 5 and "`make fix`" in result.text
+
+
+DOCUMENT = ("# Notes\n\nI'm exhausted and the toilet is broken. See `make test` and [the docs](http://x.au/a_b).\n\n"
+            "Then we lost the tent, the chairs and the esky (really)! You are very tired and hungry, my friend.\n\n"
+            "- Your car is broken.\n- The faucet in my apartment is broken, mate.\n")
+
+
+@pytest.mark.parametrize("seed", [0, 3])
+def test_the_document_route_is_the_pinned_re_render(translator, seed):
+    """A Markdown document's changes, units composed and escaped: each swap, garnish removal and garnish swap reads
+    in the document as a whole re-render with it pinned inside its unit (the watch hook) has it."""
+    policy = translator.policy(level=5, seed=seed, vulgarity=2, embellishment=2, english="us",
+                               document_config=STRESS["document_config"])
+    effective = resolve(policy, translator.dictionary)
+    units: list = []
+
+    def watch(i):
+        units.append(C.Watch())
+        return units[i]
+
+    base = document_changes(DOCUMENT, translator, policy, effective, _watch=watch)
+
+    def pinned(unit, **pins):
+        return document_changes(DOCUMENT, translator, policy, effective,
+                                _watch=lambda i: Pinned(translator.dictionary, **pins) if i == unit else C.Watch())
+
+    checked = {"substitution": 0, "removed": 0, "garnish": 0}
+    for i, w in enumerate(units):
+        offset = base.result.units[i].source_span[0]
+        for spot in (s for s in w.spots if s.rec.substituted):
+            key = (spot.sent.index, spot.rec.det.start, spot.rec.det.pattern)
+            c = next(c for c in base.changes if c["kind"] == "substitution"
+                     and c["src_span"][0] <= offset + spot.rec.span[0] < c["src_span"][1])
+            for o in c["alternatives"] + c["locked"]:
+                if o["entry_id"] != c["entry_id"]:
+                    again = {d["id"]: d for d in pinned(i, picks={key: o["entry_id"]}).changes}
+                    assert again[c["id"]]["output"] == o["rendered"], (c["id"], o["entry_id"])
+                    checked["substitution"] += 1
+        garnish = [c for c in base.changes if c["kind"] == "garnish" and c.get("placement") != "riff"
+                   and base.result.units[i].output_span[0] <= c["out_span"][0] <= base.result.units[i].output_span[1]]
+        for sentence, ops in w.ops.items():
+            for op in ops:
+                c = next(c for c in garnish if c["placement"] == op.placement and c["entry_id"] == op.entry.id)
+                assert c["id"] not in {x["id"] for x in base.withheld}, (c["id"], base.withheld)
+                a, _ = c["removed"]["out_span"]
+                got = pinned(i, drop={(sentence, op.placement)}).text
+                assert got[:a + len(c["removed"]["rendered"])] == base.text[:a] + c["removed"]["rendered"], c["id"]
+                checked["removed"] += 1
+                o = next((o for o in c["alternatives"] if o["entry_id"] != op.entry.id), None)
+                if o is not None:
+                    other = next(e for e in op.offer.pool if e.id == o["entry_id"])
+                    got = pinned(i, words={(sentence, op.placement): op.offer.words(other)}).text
+                    a, _ = o["out_span"]
+                    assert got[:a + len(o["rendered"])] == base.text[:a] + o["rendered"], c["id"]
+                    checked["garnish"] += 1
+    assert min(checked.values()) >= 1, checked
