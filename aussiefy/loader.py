@@ -193,9 +193,18 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
             unless_question = raw.get("unless_question", False)
             if not isinstance(unless_question, bool):
                 raise ValueError("unless_question must be a boolean")
+            vulgarity = raw.get("vulgarity", 0)
+            if type(vulgarity) is not int or not 0 <= vulgarity <= 3:
+                raise ValueError("vulgarity must be a whole number 0-3")
+            if vulgarity and "min_level" in raw:
+                raise ValueError("a swear infix (vulgarity above 0) has no min_level: the vulgarity and the "
+                                 "embellishment let it in at any level")
+            min_level = None if vulgarity else raw.get("min_level", 5)
+            if min_level is not None and (type(min_level) is not int or not 1 <= min_level <= 5):
+                raise ValueError("min_level must be a level 1-5")
             phonetic.append(PhoneticRule(raw["id"], re.compile(raw["match"]), raw["replace"],
-                                         float(raw.get("prob", 1.0)), int(raw.get("min_level", 5)),
-                                         raw.get("notes", ""), int(raw.get("vulgarity", 0)),
+                                         float(raw.get("prob", 1.0)), min_level,
+                                         raw.get("notes", ""), vulgarity,
                                          raw.get("kind", "drawl"),
                                          float(raw["dialogue_prob"]) if "dialogue_prob" in raw else None, reading,
                                          re.compile(unless_before) if unless_before is not None else None,

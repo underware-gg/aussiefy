@@ -91,9 +91,9 @@ class PhoneticRule:
     pattern: re.Pattern
     replace: str
     prob: float
-    min_level: int
+    min_level: int | None       # the lowest level it applies at; None for a swear infix, which has no level
     notes: str = ""
-    vulgarity: int = 0          # respects the policy's vulgarity ("bloody well" is 1)
+    vulgarity: int = 0          # above 0, a swear infix ("bloody well" is 1), under the policy's vulgarity
     kind: str = "drawl"         # drawl (scaled by the level's `phonetic`) | spelling (always, from min_level)
     dialogue_prob: float | None = None  # probability inside quoted speech, which drawls broader than narration
     reads_as: str | None = None         # canonical wording for lint's refrain comparison; literal drawl only
@@ -101,10 +101,9 @@ class PhoneticRule:
     unless_question: bool = False       # refuse matches in a question, using the shared sentence tokenizer
 
     @property
-    def from_level(self) -> int | None:
-        """The lowest level the rule applies at: its min_level, or None for a swear infix, which its vulgarity
-        gates at any level."""
-        return None if self.vulgarity > 0 else self.min_level
+    def is_infix(self) -> bool:
+        """A swear infix: the vulgarity and the embellishment let it in at any level, not min_level."""
+        return self.vulgarity > 0
 
 
 @dataclass

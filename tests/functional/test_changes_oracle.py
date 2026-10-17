@@ -169,34 +169,55 @@ def test_adjacent_swaps_agree_with_a_pinned_re_render(translator, setting):
     assert shifted == {p for p in SHIFTED_PAIRS if p[0] == setting}
 
 
-def _reaches(region, span):
-    """Replacing region touches span: they overlap, or an empty span sits inside it (not at its edge)."""
-    (lo, hi), (a, b) = region, span
-    return lo < a < hi if a == b else a < hi and lo < b
-
-
 def _regions(change):
     """The regions a change's alternatives, locked options and removal replace."""
     regions = [o["out_span"] for o in change["alternatives"] + change["locked"]]
     return regions + ([change["removed"]["out_span"]] if change.get("removed") else [])
 
 
+def _overlap(x, y):
+    return x[0] < y[1] and y[0] < x[1]
+
+
+def _check_covers(changes, where) -> int:
+    """What covers must hold, whatever builds it: each region takes in its change's output; a change with no region
+    covers nothing; covers is in output order; a change covers every other whose (non-empty) output one of its
+    regions overlaps, and nothing that shares no text with its regions; and two changes with regions cover each
+    other or neither. Returns how many covers are region to region only (the covered change's output lies outside
+    every region of the one covering it)."""
+    order = {c["id"]: k for k, c in enumerate(changes)}
+    by_id = {c["id"]: c for c in changes}
+    region_only = 0
+    for c in changes:
+        regions, (a, b) = _regions(c), c["out_span"]
+        assert all(lo <= a <= b <= hi for lo, hi in regions), (where, c["id"])
+        if not regions:
+            assert c["covers"] == [], (where, c["id"])
+            continue
+        at = [order[i] for i in c["covers"]]
+        assert at == sorted(set(at)) and c["id"] not in c["covers"], (where, c["id"])
+        for d in changes:
+            if d is not c and d["out_span"][0] < d["out_span"][1] and any(_overlap(r, d["out_span"]) for r in regions):
+                assert d["id"] in c["covers"], (where, c["id"], d["id"])
+        for d in map(by_id.get, c["covers"]):
+            assert not _regions(d) or c["id"] in d["covers"], (where, c["id"], d["id"])
+            near = [d["out_span"], *_regions(d)]   # nothing far away: it shares text with a region, or sits in one
+            assert any(_overlap(r, x) or r[0] < x[0] == x[1] < r[1] for r in regions for x in near), (where, c["id"])
+            region_only += not any(_overlap(r, d["out_span"]) for r in regions)
+    return region_only
+
+
 @pytest.mark.parametrize("setting", sorted(COVERS_SETTINGS))
-def test_every_change_covers_each_change_its_regions_reach(translator, setting):
-    """A change covers, in output order, exactly the other changes whose output or region a region its swap or
-    removal replaces reaches into: what nests inside it, and a neighbour whose region shares a word with its own,
-    either way round. So through their regions renders of neighbouring spots are independent, or the dependent
-    pairs are listed (the state one swap leaves for the next aside: SHIFTED_PAIRS)."""
-    covered = 0
+def test_covers_holds_over_the_everyday_corpus(translator, setting):
+    """Swapping a change rewrites the text of every change it covers, so a page knows what a swap disturbs. Through
+    their regions, renders of neighbouring spots are independent or listed as covering each other (the state one
+    swap leaves for the next is another matter: SHIFTED_PAIRS). Each setting has a pair whose regions alone
+    overlap: a garnish region that took in a whole swap, which covers the garnish back."""
+    region_only = 0
     for path, seed in ((path, seed) for path in EVERYDAY for seed in (0, 7)):
-        text = cut(path.read_text(encoding="utf-8"))
-        cs = C.build(translator, text, **COVERS_SETTINGS[setting], seed=seed)
-        for c in cs.changes:
-            reached = [d["id"] for d in cs.changes if d is not c and any(
-                _reaches(r, span) for r in _regions(c) for span in [d["out_span"], *_regions(d)])]
-            assert c["covers"] == reached, (path.name, seed, c["id"])
-            covered += bool(reached)
-    assert covered >= 5, covered
+        cs = C.build(translator, cut(path.read_text(encoding="utf-8")), **COVERS_SETTINGS[setting], seed=seed)
+        region_only += _check_covers(cs.changes, (path.name, seed))
+    assert region_only >= 1
 
 
 def test_alternatives_in_masked_markup_are_the_pinned_re_render(translator):
@@ -271,3 +292,4 @@ def test_the_document_route_is_the_pinned_re_render(translator, seed):
                     assert got[:a + len(o["rendered"])] == base.text[:a] + o["rendered"], c["id"]
                     checked["garnish"] += 1
     assert min(checked.values()) >= 1, checked
+    _check_covers(base.changes, ("document", seed))

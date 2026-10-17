@@ -396,82 +396,70 @@
   min_level: 5
 
 # --- swear infixes: "a bloody great stoush", "can't bloody well hallow it" -----
-# These follow the vulgarity dial, not the level (profiles.yaml `swearing:` infix), so min_level doesn't apply to
-# them; a rule a tier below the vulgarity asked for runs at half strength, so uncle-bob says "too fuckin' hot"
+# These follow the vulgarity dial and the embellishment, not the level (profiles.yaml `swearing:` infix), so they
+# take no min_level; a rule a tier below the vulgarity asked for runs at half strength, so uncle-bob says "too fuckin' hot"
 # more than "too bloody hot". A fuckin' rule comes before its bloody twin so it gets first go.
 - id: infix-bloody-adjective
   match: "(?<=[a-z] )(?<!great )(?<!bloody )(?<!fuckin' )(?=(?:great|big|huge|massive|hard|good|awful|terrible|stupid|ridiculous|beautiful|brilliant)\\b(?!-))"
   replace: "bloody "
   prob: 0.35
-  min_level: 5
   vulgarity: 1
 - id: infix-bloody-well
   unless_question: true
   match: "(?i)\\b(can't|won't|couldn't|wouldn't|shouldn't|didn't|don't|doesn't|mustn't|mightn't|shall not|will not|can not)\\s+(?!bloody|well|even|really|just|be\\b|have\\b|you\\b|ya\\b|yer\\b|we\\b|they\\b|it\\b|he\\b|she\\b|i\\b)(?=[a-z])"
   replace: "\\1 bloody well "
   prob: 0.35
-  min_level: 5
   vulgarity: 1
 - id: as-fuck-intensifier
   # "very hot" -> "hot as fuck": the intensifier moves behind the adjective
   match: "(?i)\\b(?:very|really|so|bloody|fuckin'|flamin'|dead|properly|real) (hot|cold|tired|hungry|good|bad|busy|ugly|stupid|lucky|drunk|keen|quick|slow|funny|weird|boring|expensive|cheap|dry|wet|loud|happy|angry|sore|full|old|rich|smart)\\b(?!-| as )"
   replace: "\\1 as fuck"
   prob: 0.3
-  min_level: 5
   vulgarity: 2
 - id: infix-every-fuckin
   match: "(?i)\\b(every|a single|not a) (?=(?:word|one|day|time|minute|thing|cent|bit)\\b)"
   replace: "\\1 fuckin' "
   prob: 0.4
-  min_level: 5
   vulgarity: 2
 - id: infix-every-bloody
   match: "(?i)\\b(every|a single|not a) (?=(?:word|one|day|time|minute|thing|cent|bit)\\b)"
   replace: "\\1 bloody "
   prob: 0.4
-  min_level: 5
   vulgarity: 1
 - id: infix-fuckin-adjective
   match: "(?<=[a-z] )(?<!great )(?<!bloody )(?<!fuckin' )(?=(?:great|big|huge|massive|hard|good|awful|terrible|stupid|ridiculous|beautiful|brilliant)\\b(?!-))"
   replace: "fuckin' "
   prob: 0.3
-  min_level: 5
   vulgarity: 2
 - id: infix-abso-fuckin-lutely
   match: "(?i)\\babsolutely\\b"
   replace: "abso-fuckin'-lutely"
   prob: 0.7
-  min_level: 5
   vulgarity: 2
 - id: infix-too-fuckin
   match: "(?i)\\btoo (?=(?:hot|cold|big|small|hard|soft|much|far|late|early|good|right|long|tired|full)\\b)"
   replace: "too fuckin' "
   prob: 0.5
-  min_level: 5
   vulgarity: 2
 - id: infix-too-bloody
   match: "(?i)\\btoo (?=(?:hot|cold|big|small|hard|soft|much|far|late|early|good|right|long|tired|full)\\b)"
   replace: "too bloody "
   prob: 0.5
-  min_level: 5
   vulgarity: 1
 - id: infix-upon-a-bloody-time
   match: "(?i)\\bupon a time\\b"
   replace: "upon a bloody time"
   prob: 0.8
-  min_level: 5
   vulgarity: 1
 - id: infix-whole-fuckin
   match: "(?i)\\bthe whole (?=(?:thing|lot|place|day|time|world|show)\\b)"
   replace: "the whole fuckin' "
   prob: 0.5
-  min_level: 5
   vulgarity: 2
 - id: infix-whole-bloody
   match: "(?i)\\bthe whole (?=(?:thing|lot|place|day|time|world|show)\\b)"
   replace: "the whole bloody "
   prob: 0.5
-  min_level: 5
   vulgarity: 1
 - id: infix-bloody-possession
   # "me" and "her" are also object pronouns ("give me that straw", "let me come in"): not before a function word
@@ -480,6 +468,5 @@
   replace: "\\1 bloody "
   prob: 0.08
   dialogue_prob: 0.35
-  min_level: 5
   vulgarity: 1
   notes: "Who's been at me bloody porridge? Mostly in speech."

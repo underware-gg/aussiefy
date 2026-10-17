@@ -15,6 +15,12 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
   embellishment and document type (`aussiefy.guide.dial_descriptions()`). The benchmark gates every setting the
   website allows, per text.
 - Specify Unicode code-point offsets for change regions and profanity masks, with a JavaScript slicing example.
+- Amend `changes` contract v1 again before release: `covers` lists every change whose output or region overlaps
+  one of the change's regions, so two changes whose regions overlap (a connective and the swap that shares its
+  "he's", or a garnish region that took in a whole swap) cover each other, and a drawl, infix or US word swapped
+  covers nothing. A drawl, spelling or infix change's `rule` gains `min_level`, the level the rule starts at
+  (`null` for a swear infix, which the vulgarity and the embellishment let in at any level). The loader checks a
+  phonetic rule's `min_level` (1-5) and `vulgarity` (0-3) and refuses a `min_level` on an infix.
 
 - Rate "bugger me dead" (phrase and garnish), "rooted" and "have a root" at Dad, matching "bugger" in the swear
   list: cheeky, not profane.

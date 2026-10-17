@@ -115,7 +115,7 @@ def test_swear_rates_and_stretch_respect_the_vulgarity_cap(translator):
 
 
 def test_infix_multiplier_is_independent_of_clean_drawl_and_respects_cap(translator):
-    rule = PhoneticRule("test-infix", re.compile(r"great"), "bloody great", 1, 1, vulgarity=1)
+    rule = PhoneticRule("test-infix", re.compile(r"great"), "bloody great", 1, None, vulgarity=1)
     tr = Translator(replace(translator.dictionary, phonetic=[rule]))
     for multiplier, cap, expected in [(0, 1, False), (2, 0, False), (2, 1, True)]:
         r = tr.translate("That is great.", vulgarity=cap, document_type="custom", document_config={

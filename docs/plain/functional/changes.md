@@ -50,20 +50,20 @@ and responses live in `tests/fixtures/changes/`. Each change has:
   whole re-translation at Uncle Bob would read "cold as fuck".
 - `removed` (garnish): `{out_span, rendered}`, how its region reads without it. An opener or connective's region
   takes in the next word, whose capital it lowered. Every garnish has one unless it's named under `withheld`.
-- `rule` (phonetic and swear infix): `{id, kind, min_level, before, after}`. `min_level` is the lowest level the
-  rule applies at, from the rule's own `min_level` in `aussiefy/data/phonetic.yaml`, so a page can say "from
-  level 5, swaggie". It's `null` for an infix, which the vulgarity gates at any level. `pair` (dialect):
-  `{english, before, after}`.
+- `rule` (phonetic and swear infix): `{id, kind, min_level, before, after}`. `min_level` is the level a drawl or
+  spelling rule starts at, from `aussiefy/data/phonetic.yaml`, so a page can say "from level 5, swaggie". A swear
+  infix's is `null`: it has no level, since the vulgarity and the embellishment let it in at any level. `pair`
+  (dialect): `{english, before, after}`.
 - `placement` (garnish): `connective`, `opener`, `tag`, `aside`, `tail`, `closer`, or `riff` for a contextual
   image after a term (which has `image_id` rather than an entry).
-- `covers`: the ids, in output order, of every other change whose output or region a region of the change's
-  alternatives, locked options or removal reaches into. Swapping the change re-renders text a covered change's
-  output or renderings stand on, so that output may be replaced, or those renderings no longer read true. A drawl
-  or a swear infix inside a swapped term is one. So is a neighbour whose region shares words with this one's, and
-  each of the two lists the other. In "Anyway, he's a few snags short of a barbie", the connective's region is
-  "Anyway, he's" and the swap's starts at "he's": the connective covers the swap, and the swap, one of whose
-  alternatives reads "he isn't the full quid", covers the connective. A garnish region that takes in a whole swap
-  is another such pair. A change with nothing to swap in (a drawl, an infix, a US word swapped) covers nothing.
+- `covers`: the ids, in output order, of the other changes whose output or region overlaps one of this change's
+  regions (its alternatives', locked options' or removal's). Swapping or removing this change rewrites text those
+  stand on. A drawl or a swear infix inside a swapped term is covered. So is a neighbour whose region overlaps this
+  one, and then each covers the other. In "Anyway, he's a few snags short of a barbie", the connective's region is
+  "Anyway, he's" and the swap's starts at "he's". Removing the connective rewrites "he's", and swapping in "he
+  isn't the full quid" rewrites part of the connective's region, so each covers the other. A garnish region that
+  takes in a whole swap is another such pair. A change with no region (a drawl, an infix, a US word swapped) covers
+  nothing.
 
 `entries` maps each entry id the changes name to its card, built as `lookup` builds it under the same dials
 (`aussiefy/cards.py`): riffs under the vulgarity cap where the embellishment takes riffs at all, and a gated
@@ -106,8 +106,7 @@ A garnish's region widens the same way. An opener's or connective's region takes
 it lowered, and a word more where a match runs on: in "Well, it is easy", a swap or removal of "Well" replaces
 "Well, it is", since the drawl's "it is" match crosses "it". A region never cuts the words another swap or
 garnish put in: it takes in the whole of one it reaches. Two regions can still share a word they both widened
-over for one drawl match, as a connective's and the swap after it share "he's", and each one's `covers` lists
-the other.
+over for one drawl match, as a connective's and the swap after it share "he's". Then each covers the other.
 
 Each drawl, spelling or infix match in the spot is let in or kept out exactly as the engine's own pass does it
 (a question, the words before it, a kept heading or link text, a quoted document), reading those spans where the

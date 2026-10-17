@@ -315,13 +315,12 @@ def phonetic_scale(rule: PhoneticRule, rules: list[PhoneticRule], eff: Effective
     """How strongly a rule applies under the policy (0: not at all). Spelling always applies; the drawl scales with
     the level; a swear infix ("a bloody great stoush") scales with the vulgarity, whatever the level, and only
     where the embellishment takes infixes (not in a manual or a policy)."""
-    level = rule.from_level
-    if level is None:
+    if rule.is_infix:
         if not infixes:
             return 0.0
         top = min(eff.vulgarity, max(r.vulgarity for r in rules))   # the strongest infix tier allowed
         return eff.swearing.infix * tier_match(rule.vulgarity, top) if rule.vulgarity <= eff.vulgarity else 0.0
-    if level > eff.level:
+    if rule.min_level > eff.level:
         return 0.0
     return 1.0 if rule.kind == "spelling" else eff.profile.phonetic
 

@@ -884,9 +884,9 @@ class _Builder:
                 a = s + delta
                 delta += n - (e - s)
                 src = (self._pass_source(k, s, "start"), self._pass_source(k, e, "end"))
-                kind = "swear_infix" if p.rule.vulgarity else "phonetic"
-                rule = {"id": p.rule.id, "kind": "infix" if p.rule.vulgarity else p.rule.kind,
-                        "min_level": p.rule.from_level, "before": p.before[s:e], "after": after[a:a + n]}
+                kind = "swear_infix" if p.rule.is_infix else "phonetic"
+                rule = {"id": p.rule.id, "kind": "infix" if p.rule.is_infix else p.rule.kind,
+                        "min_level": p.rule.min_level, "before": p.before[s:e], "after": after[a:a + n]}
                 out.append(Draft(self._change(kind, src, self._final_span(a, a + n, k + 1), None, p.rule.vulgarity,
                                               original=self.source[src[0]:src[1]], rule=rule), p.rule.id))
         return out
@@ -974,20 +974,28 @@ def _shares(alternatives: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def _cover(drafts: list[Draft]) -> None:
-    """Each change lists, in output order, every other change whose output or region a region its swap or removal
-    replaces reaches into: swapping it re-renders text the other's output or renderings stand on. A region can take
-    in part of a neighbour's (a drawl match both read), so each of the two lists the other, not only what nests
-    inside. A change with nothing to swap in covers nothing."""
-    regions = {id(d): {tuple(r["out_span"]) for r in d.renderings()} for d in drafts}
-    for d in drafts:
+    """Fills each change's covers: in output order, the other changes whose output or region overlaps one of its
+    regions. Swapping or removing the change rewrites text those stand on. Two changes with regions that overlap
+    cover each other; a change with no region (a drawl, an infix, a US word) covers nothing."""
+    regions = [sorted({tuple(r["out_span"]) for r in d.renderings()}) for d in drafts]
+    spans = [[tuple(d.change["out_span"]), *rs] for d, rs in zip(drafts, regions)]
+    reach = [_extent(rs) for rs in regions]          # where a change's regions lie, None for none
+    extent = [_extent(ss) for ss in spans]           # where a change's output and regions lie
+    for i, d in enumerate(drafts):
         d.change["covers"] = [
-            other.change["id"] for other in drafts
-            if other is not d and any(_reaches(r, span) for r in regions[id(d)]
-                                      for span in [tuple(other.change["out_span"]), *regions[id(other)]])]
+            other.change["id"] for k, other in enumerate(drafts)
+            if k != i and reach[i] is not None and _reaches(reach[i], extent[k])
+            and any(_reaches(r, s) for r in regions[i] for s in spans[k])]
+
+
+def _extent(spans: list[tuple[int, int]]) -> tuple[int, int] | None:
+    """The span from the first start to the last end, or None for no spans."""
+    return (min(a for a, _ in spans), max(b for _, b in spans)) if spans else None
 
 
 def _reaches(region: tuple[int, int], span: tuple[int, int]) -> bool:
-    """Whether replacing region touches span: they overlap, or an empty span sits inside it (not at its edge)."""
+    """Whether replacing region rewrites any of span: they share a character, or an empty span sits strictly inside
+    region (an empty span at its edge is left alone)."""
     lo, hi = region
     a, b = span
-    return lo < a < hi if a == b else a < hi and lo < b
+    return a < hi and lo < b

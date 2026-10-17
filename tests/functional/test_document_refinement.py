@@ -103,6 +103,19 @@ def test_phonetic_context_guard_is_validated_at_load_boundary(data_copy, bad):
         load_dictionary(data_dir=data_copy)
 
 
+@pytest.mark.parametrize("fields, problem", [
+    ({"min_level": 0}, "min_level must be a level 1-5"), ({"min_level": 6}, "min_level must be a level 1-5"),
+    ({"min_level": "5"}, "min_level must be a level 1-5"), ({"vulgarity": -1}, "vulgarity must be"),
+    ({"vulgarity": 4}, "vulgarity must be"), ({"vulgarity": 1, "min_level": 5}, "has no min_level"),
+])
+def test_phonetic_levels_and_vulgarity_are_validated_at_load_boundary(data_copy, fields, problem):
+    import yaml
+    p = data_copy / "phonetic.yaml"
+    p.write_text(p.read_text() + yaml.safe_dump([{"id": "bad-level", "match": "it is", "replace": "it's", **fields}]))
+    with pytest.raises(SchemaError, match=problem):
+        load_dictionary(data_dir=data_copy)
+
+
 def test_everything_relative_clause_keeps_its_pronoun_but_whole_lot_can_swap(translator):
     r = translator.translate("Everything a level does is read from data.", document_type="custom")
     assert not any(x.substituted and "EVERYTHING" in x.det.concepts for x in r.records)

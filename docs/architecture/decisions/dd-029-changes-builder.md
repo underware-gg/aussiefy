@@ -54,9 +54,10 @@ would read "cold as fuck".
 
 The output is the `changes` contract, version 1, with a JSON Schema in the package. Version 1 was amended before
 release, as this review found: it gained `withheld`, and a withheld garnish has no `removed`. It was amended
-again, unreleased, after the website's service found a connective's region reaching into a neighbouring swap's:
-`covers` had listed only the changes nested in a region, and now lists every change whose output or region a
-region reaches, either way round. A phonetic or infix change's `rule` also gained `min_level`. Ids are each change's
+again, unreleased, after the website's service found a connective's region overlapping a neighbouring swap's.
+`covers` had listed only the changes nested inside a region. It now lists every change whose output or region
+overlaps one of the change's regions, so two changes whose regions overlap list each other. A drawl, spelling or
+infix change's `rule` also gained `min_level`. Ids are each change's
 kind and source span, made by one format (`changes.ID_FORMAT`). Every rendering lists its maskable words, and only profanity is masked: swear-list words, the
 compounds the dictionary's rated words build on one, and the profane words an entry authors (`mask`). An entry
 whose rudeness is innuendo, an insult or a crude word is marked `profane: false` and shows in full.
@@ -75,15 +76,15 @@ re-render with that pick.
 - A swap is local. It reads as a whole re-render would over its region, while later picks and rolls, which a
   re-render would shift, stay as they were. Two swaps can interact only through the state one leaves for the
   other: the entries a later stack or riff may use.
-- A change's `covers` lists every other change whose output or region a region of its alternatives, locked
-  options or removal reaches into. A page then knows which drawl or infix a swap replaces, and which neighbours'
-  renderings a swap re-renders under: a garnish region that took in a whole swap, or "Anyway, he's" and the swap
-  starting at "he's", which both widened over one drawl match. Each of such a pair covers the other, so through
-  their regions renders of neighbouring spots are independent or the dependent pairs are listed (the state one
-  swap leaves for another, above, aside). A change with nothing to swap in covers nothing.
-- A drawl or spelling rule's `min_level` is reported as the data has it. An infix's is `null`: the engine gates an
-  infix by vulgarity at any level (`PhoneticRule.from_level`, which the engine's gate and the contract both read),
-  so the `min_level` its data carries is never read.
+- A change's `covers` lists every other change whose output or region overlaps one of its regions: the changes a
+  swap or removal of it rewrites text under. That includes a drawl or infix inside a swap, and a neighbour whose
+  region overlaps its own. A garnish region can take in a whole swap, and "Anyway, he's" shares "he's" with the
+  swap that starts there. Two changes whose regions overlap cover each other. So, through their regions,
+  neighbouring changes are either independent or listed as covering each other. The state one swap leaves for
+  another, above, is not covered. A change with no region (a drawl, an infix, a US word) covers nothing.
+- A drawl or spelling rule's `min_level` is the level it starts at, as `phonetic.yaml` gives it. A swear infix has
+  no level: the vulgarity and the embellishment let it in at any level. The loader refuses a `min_level` on an
+  infix rule, and `PhoneticRule.is_infix` decides a rule's change kind, its `rule.kind` and the engine's gate.
 - The budget is 1.5 times translate for each 5,000-character text, for every setting the website's service allows
   (its default, the strongest dials, each document type it offers). `scripts/benchmark_changes.py` gates on it,
   timing translate and `changes` in turn in process time. At the website's defaults it costs about 1.1 times.

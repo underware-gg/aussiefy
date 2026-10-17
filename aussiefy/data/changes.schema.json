@@ -72,7 +72,7 @@
       "properties": {"out_span": {"$ref": "#/$defs/span"}, "rendered": {"type": "string"}}
     },
     "rule": {
-      "description": "The phonetic or swear-infix rule that made the change: its id, its kind, the lowest level it applies at (its min_level; null for an infix, which the vulgarity gates at any level), and the text before and after it.",
+      "description": "The phonetic or swear-infix rule that made the change: its id, its kind, the level it starts at (min_level; null for an infix, which the vulgarity and the embellishment let in at any level), and the text before and after it.",
       "type": "object",
       "required": ["id", "kind", "min_level", "before", "after"],
       "additionalProperties": false,
