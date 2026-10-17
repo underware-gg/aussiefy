@@ -72,15 +72,20 @@
       "properties": {"out_span": {"$ref": "#/$defs/span"}, "rendered": {"type": "string"}}
     },
     "rule": {
+      "description": "The phonetic or swear-infix rule that made the change: its id, its kind, the lowest level it applies at (its min_level; null for an infix, which the vulgarity gates at any level), and the text before and after it.",
       "type": "object",
-      "required": ["id", "kind", "before", "after"],
+      "required": ["id", "kind", "min_level", "before", "after"],
       "additionalProperties": false,
       "properties": {
         "id": {"type": "string"},
         "kind": {"enum": ["drawl", "spelling", "infix"]},
+        "min_level": {"type": ["integer", "null"], "minimum": 1, "maximum": 5},
         "before": {"type": "string"},
         "after": {"type": "string"}
-      }
+      },
+      "if": {"properties": {"kind": {"const": "infix"}}},
+      "then": {"properties": {"min_level": {"type": "null"}}},
+      "else": {"properties": {"min_level": {"type": "integer"}}}
     },
     "pair": {
       "type": "object",

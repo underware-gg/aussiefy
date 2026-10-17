@@ -175,18 +175,25 @@ def _reaches(region, span):
     return lo < a < hi if a == b else a < hi and lo < b
 
 
+def _regions(change):
+    """The regions a change's alternatives, locked options and removal replace."""
+    regions = [o["out_span"] for o in change["alternatives"] + change["locked"]]
+    return regions + ([change["removed"]["out_span"]] if change.get("removed") else [])
+
+
 @pytest.mark.parametrize("setting", sorted(COVERS_SETTINGS))
 def test_every_change_covers_each_change_its_regions_reach(translator, setting):
-    """A change covers, in output order, exactly the other changes whose output a region its swap or removal
-    replaces reaches into: a neighbour it takes in part of as well as what nests inside it."""
+    """A change covers, in output order, exactly the other changes whose output or region a region its swap or
+    removal replaces reaches into: what nests inside it, and a neighbour whose region shares a word with its own,
+    either way round. So through their regions renders of neighbouring spots are independent, or the dependent
+    pairs are listed (the state one swap leaves for the next aside: SHIFTED_PAIRS)."""
     covered = 0
     for path, seed in ((path, seed) for path in EVERYDAY for seed in (0, 7)):
         text = cut(path.read_text(encoding="utf-8"))
         cs = C.build(translator, text, **COVERS_SETTINGS[setting], seed=seed)
         for c in cs.changes:
-            regions = [o["out_span"] for o in c["alternatives"] + c["locked"]]
-            regions += [c["removed"]["out_span"]] if c.get("removed") else []
-            reached = [d["id"] for d in cs.changes if d is not c and any(_reaches(r, d["out_span"]) for r in regions)]
+            reached = [d["id"] for d in cs.changes if d is not c and any(
+                _reaches(r, span) for r in _regions(c) for span in [d["out_span"], *_regions(d)])]
             assert c["covers"] == reached, (path.name, seed, c["id"])
             covered += bool(reached)
     assert covered >= 5, covered

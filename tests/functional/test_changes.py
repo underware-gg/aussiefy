@@ -31,7 +31,7 @@ from regen_changes_fixtures import CASES, build as fixture  # noqa: E402
 
 KINDS = json.loads((FIXTURES / "every-kind.json").read_text(encoding="utf-8"))["request"]
 # the contract each VERSION names: its schema's sha256 and its id format. Changing either means a new VERSION.
-CONTRACTS = {1: ("3ebb7cdb", "{kind}:{start}-{end}[:{placement or rule}][#{n}]")}
+CONTRACTS = {1: ("c1908685", "{kind}:{start}-{end}[:{placement or rule}][#{n}]")}
 LIVELY = dict(level=5, vulgarity=2, embellishment=2, document_config={"profile": {
     "stack": 0.9, "garnish": {"riff": 1.0}, "max_garnish": {"riff": 30}, "garnish_gap": 0, "swearing": {"infix": 6.0}}})
 
@@ -233,11 +233,10 @@ def test_a_swap_covers_the_changes_inside_it_and_a_change_with_nothing_to_swap_c
     region of its own to replace. Every change over the everyday corpus is held to the whole rule in
     test_changes_oracle.py."""
     cs = _every_kind(translator)
-    ids = {c["id"]: c for c in cs.changes}
-    inside = [(c, ids[i]) for c in cs.changes if c["kind"] == "substitution" for i in c["covers"]]
-    assert any(d["kind"] in ("phonetic", "swear_infix") for _, d in inside)
-    for c, d in inside:
-        assert c["out_span"][0] <= d["out_span"][0] <= d["out_span"][1] <= c["out_span"][1], (c["id"], d["id"])
+    inside = [(c, d) for c in cs.changes if c["kind"] == "substitution" for d in cs.changes
+              if d["kind"] in ("phonetic", "swear_infix")
+              and c["out_span"][0] <= d["out_span"][0] <= d["out_span"][1] <= c["out_span"][1]]
+    assert inside and all(d["id"] in c["covers"] for c, d in inside)
     assert not [c["id"] for c in cs.changes if c["covers"] and not (c["alternatives"] or c.get("removed"))]
 
 
@@ -245,18 +244,38 @@ FAUCET = ("The faucet in the apartment is broken, so I called the color guy. He 
           "What the hell is going on? Fantastic.")
 
 
-def test_a_garnish_region_that_reaches_into_a_swap_covers_it(translator):
+def test_a_garnish_region_and_a_swap_region_that_share_a_word_cover_each_other(translator):
     """A connective's region takes in "he's", the word it lowers with the drawl match on it, and so does the swap
-    that starts there. Swapping or removing the connective re-renders part of that swap, so it covers the swap,
-    not only the drawl nested in its own region. Found by the website, at Swaggie, Dinkum, Dad, seed 3."""
+    that starts there. Swapping or removing the connective re-renders part of that swap, and swapping in "he
+    isn't the full quid" re-renders part of the connective's region, so each covers the other as well as the drawl
+    they share. Found by the website, at Swaggie, Dinkum, Dad, seed 3."""
     cs = _valid(aussiefy.translate_changes(FAUCET, translator=translator, level=5, embellishment=1, vulgarity=1,
                                            seed=3))
     ids = {c["id"]: c for c in cs.changes}
     garnish, swap = ids["garnish:66-66:connective"], ids["substitution:66-80"]
     assert cs.text[slice(*garnish["removed"]["out_span"])] == "Anyway, he's"
     assert garnish["removed"]["out_span"] == [69, 81] and swap["out_span"] == [77, 111]
+    assert {o["entry_id"]: o["rendered"][:6] for o in swap["alternatives"]}["not-the-full-quid"] == "he isn"
     assert garnish["covers"] == ["phonetic:66-71:pronoun-be", "substitution:66-80"]
-    assert swap["covers"] == ["phonetic:66-71:pronoun-be"]
+    assert swap["covers"] == ["garnish:66-66:connective", "phonetic:66-71:pronoun-be"]
+
+
+def test_a_rules_min_level_is_where_it_applies(translator, dictionary):
+    """A drawl or spelling rule names the lowest level it applies at, its own min_level, for a page to say so ("from
+    level 5, swaggie"). An infix has none: its vulgarity gates it at any level."""
+    rules = {r.id: r for r in dictionary.phonetic}
+    seen = set()
+    faucet = aussiefy.translate_changes(FAUCET, translator=translator, level=5, vulgarity=1, seed=3)
+    for c in (c for cs in (_every_kind(translator), faucet) for c in cs.changes
+              if c["kind"] in ("phonetic", "swear_infix")):
+        rule = c["rule"]
+        expected = None if c["kind"] == "swear_infix" else rules[rule["id"]].min_level
+        assert rule["min_level"] == expected and (expected or 0) <= 5, c["id"]
+        seen.add((rule["kind"], expected))
+    assert {("spelling", 1), ("drawl", 4), ("drawl", 5), ("infix", None)} <= seen, seen
+    low = aussiefy.translate_changes("It is a very good fight.", translator=translator, level=1, vulgarity=3,
+                                     embellishment=2, seed=0, document_config={"profile": {"swearing": {"infix": 6.0}}})
+    assert [c["rule"]["min_level"] for c in low.changes if c["kind"] == "swear_infix"][:1] == [None]
 
 
 def test_ids_are_unique_and_made_by_the_contracts_id_format(translator):

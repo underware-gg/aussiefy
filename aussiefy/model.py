@@ -100,6 +100,12 @@ class PhoneticRule:
     unless_before: re.Pattern | None = None   # refuse a match following this grammatical context
     unless_question: bool = False       # refuse matches in a question, using the shared sentence tokenizer
 
+    @property
+    def from_level(self) -> int | None:
+        """The lowest level the rule applies at: its min_level, or None for a swear infix, which its vulgarity
+        gates at any level."""
+        return None if self.vulgarity > 0 else self.min_level
+
 
 @dataclass
 class Dictionary:

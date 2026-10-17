@@ -886,7 +886,7 @@ class _Builder:
                 src = (self._pass_source(k, s, "start"), self._pass_source(k, e, "end"))
                 kind = "swear_infix" if p.rule.vulgarity else "phonetic"
                 rule = {"id": p.rule.id, "kind": "infix" if p.rule.vulgarity else p.rule.kind,
-                        "before": p.before[s:e], "after": after[a:a + n]}
+                        "min_level": p.rule.from_level, "before": p.before[s:e], "after": after[a:a + n]}
                 out.append(Draft(self._change(kind, src, self._final_span(a, a + n, k + 1), None, p.rule.vulgarity,
                                               original=self.source[src[0]:src[1]], rule=rule), p.rule.id))
         return out
@@ -974,16 +974,19 @@ def _shares(alternatives: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def _cover(drafts: list[Draft]) -> None:
-    """Each change lists, in output order, every other change whose output a region its swap or removal replaces
-    reaches into: those go with it. A region can take in part of a neighbour (a drawl match both read), so that
-    neighbour is listed, not only what nests inside. A change with nothing to swap in covers nothing."""
+    """Each change lists, in output order, every other change whose output or region a region its swap or removal
+    replaces reaches into: swapping it re-renders text the other's output or renderings stand on. A region can take
+    in part of a neighbour's (a drawl match both read), so each of the two lists the other, not only what nests
+    inside. A change with nothing to swap in covers nothing."""
+    regions = {id(d): {tuple(r["out_span"]) for r in d.renderings()} for d in drafts}
     for d in drafts:
-        regions = {tuple(r["out_span"]) for r in d.renderings()}
-        d.change["covers"] = [other.change["id"] for other in drafts
-                              if other is not d and any(_reaches(r, other.change["out_span"]) for r in regions)]
+        d.change["covers"] = [
+            other.change["id"] for other in drafts
+            if other is not d and any(_reaches(r, span) for r in regions[id(d)]
+                                      for span in [tuple(other.change["out_span"]), *regions[id(other)]])]
 
 
-def _reaches(region: tuple[int, int], span: list[int]) -> bool:
+def _reaches(region: tuple[int, int], span: tuple[int, int]) -> bool:
     """Whether replacing region touches span: they overlap, or an empty span sits inside it (not at its edge)."""
     lo, hi = region
     a, b = span
