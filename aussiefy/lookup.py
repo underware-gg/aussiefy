@@ -20,10 +20,11 @@ from .model import Dictionary
 from .morph import pluralise, verb_forms
 from .select import dial_rejection
 from .schema import PLACEHOLDER_RE, Entry
+from .cards import entry_card, short_card
 from .terms import fold, form_key, strip_markup
 from .genre import resolve_document
 from .imagery import lookup_images
-from .policy import parse_embellishment
+from .policy import envelope, parse_embellishment
 
 
 
@@ -58,40 +59,6 @@ def meaning_texts(e: Entry, d: Dictionary) -> list[str]:
     """What a query is compared with to find an entry by meaning: its gloss and its concepts' descriptions.
     scripts/train_embedder.py scores the bundled model's lookup cut-off on these."""
     return [t for t in [e.gloss, *(d.concepts[c].description for c in e.concept if c in d.concepts)] if t]
-
-
-def riff_cards(e: Entry, cap: int) -> list[dict[str, str]]:
-    """An entry's riffs under the cap, as the toolkit shows them (best first)."""
-    return [{"text": r.text, "tone": r.tone, **({"best": True} if i == 0 else {})}
-            for i, r in enumerate(e.riffs_within(cap))]
-
-
-def _short_card(e: Entry) -> dict[str, Any]:
-    card = {"form": e.form, "gloss": e.gloss, "frame": e.frame, "level": e.incoherence, "vulgarity": e.vulgarity}
-    if e.register != "current":
-        card["register"] = e.register
-    if e.status == "gate":
-        card["gated"] = list(e.flags)
-    return card
-
-
-def _entry_card(e: Entry, cap: int = 3) -> dict[str, Any]:
-    card = {"form": e.form, "gloss": e.gloss, "frame": e.frame, "concepts": list(e.concept),
-            "level": e.incoherence, "vulgarity": e.vulgarity, "register": e.register}
-    if e.placement:
-        card["placement"] = e.placement
-    if e.riffs_within(cap):
-        card["riffs"] = riff_cards(e, cap)
-    if e.variants:
-        card["variants"] = list(e.variants)
-    if e.region:
-        card["region"] = list(e.region)
-    if e.notes:
-        card["notes"] = e.notes
-    if e.replaces:
-        card["replaces"] = [r.split("@")[0] for r in e.replaces]
-    return card
-
 
 
 # Ranking. A query that is itself slang beats one inside a phrase, which beats a match on meaning; meaning
@@ -207,15 +174,15 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
             scored.append((best, e, "meaning"))
     scored.sort(key=lambda t: (-t[0], t[1].incoherence, t[1].id))
     if short:
-        results = [_short_card(e) for _, e, _ in scored[:limit]]
+        results = [short_card(e) for _, e, _ in scored[:limit]]
     else:
-        results = [{**_entry_card(e, cap), "match": how, "score": round(s, 2),
+        results = [{**entry_card(e, cap), "match": how, "score": round(s, 2),
                     **({"gated": list(e.flags)} if e.status == "gate" else {})} for s, e, how in scored[:limit]]
     if not setting.entry_riffs or not setting.takes("riff"):
         for card in results:
             card.pop("riffs", None)
-    out = {"query": query, **eff.envelope(),
-           "results": results}
+    # a lookup reads no profile settings, so its envelope is the dials alone (no profile_config)
+    out = {"query": query, **envelope(eff.level, eff.vulgarity, eff.warnings), "results": results}
     images = lookup_images(d, query, eff.level, cap, setting, limit)
     if images:
         out["imagery"] = images

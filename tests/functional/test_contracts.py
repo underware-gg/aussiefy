@@ -8,18 +8,21 @@ import pytest
 from aussiefy import harness
 from aussiefy.terms import fold, form_key, phrase_kept, restore_g, strip_markup
 
-ENVELOPE = {"level", "level_name", "vulgarity", "vulgarity_name", "policy_warnings", "profile_config"}
+DIALS = {"level", "level_name", "vulgarity", "vulgarity_name", "policy_warnings"}
+ENVELOPE = DIALS | {"profile_config"}   # a document operation's; lookup reads no profile settings, so carries DIALS
 DOCUMENT = {"document_type", "document_type_source", "genre", "genre_scores", "document_config", "document_overrides"}
 TEXT = ('She was very tired and hungry. "Are you crazy?" he asked. The proposition was conceived with considerable '
         "deliberation and dedicated to posterity.")
 
 
 def test_every_toolkit_result_carries_the_policy_envelope(translator):
-    results = [harness.lookup("very tired", translator=translator), harness.lint("G'day.", translator=translator),
+    results = [harness.lint("G'day.", translator=translator),
                harness.guide(translator=translator), harness.plan(TEXT, translator=translator),
                harness.translate(TEXT, translator=translator)]
     for r in results:
         assert ENVELOPE <= set(r), sorted(r)
+    looked_up = harness.lookup("very tired", translator=translator)
+    assert DIALS <= set(looked_up) and "profile_config" not in looked_up
     # the dials are independent: a level's default vulgarity, overridden either way, by number or name
     assert harness.guide(level="blow-in", translator=translator)["vulgarity_name"] == "nan"
     assert harness.guide(level=2, vulgarity="tradie", translator=translator)["vulgarity"] == 3
@@ -59,9 +62,9 @@ def test_lint_shape(translator):
 
 def test_lookup_shape(translator):
     out = harness.lookup("very tired", translator=translator)
-    assert set(out) == ENVELOPE | {"query", "results"}
-    assert all({"form", "gloss", "frame", "level", "vulgarity", "register", "concepts", "match", "score"} <= set(r)
-               for r in out["results"])
+    assert set(out) == DIALS | {"query", "results"}
+    assert all({"id", "form", "gloss", "frame", "level", "vulgarity", "register", "concepts", "match", "score"}
+               <= set(r) for r in out["results"])
     assert "note" in harness.lookup("zzqqxx", translator=translator)
     riffs = [r["riffs"] for r in harness.lookup("wheelie bin", translator=translator)["results"] if r.get("riffs")]
     assert riffs and all(rs[0].get("best") is True and not any("best" in r for r in rs[1:]) for rs in riffs)
@@ -69,6 +72,20 @@ def test_lookup_shape(translator):
 
     with pytest.raises(UserError, match="limit must be 1 or more"):
         harness.lookup("very tired", limit=-1, translator=translator)
+
+
+def test_lookup_cards_come_from_the_shared_card_builder(translator):
+    """The changes builder's entries and lookup's results are the same cards (aussiefy.cards), by entry id."""
+    from aussiefy.cards import entry_card, short_card
+
+    d = translator.dictionary
+    for r in harness.lookup("very tired", vulgarity=2, translator=translator)["results"]:
+        card = {k: v for k, v in r.items() if k not in ("match", "score")}
+        assert card == entry_card(d.entries[r["id"]], 2)
+    for r in harness.lookup("very tired", short=True, translator=translator)["results"]:
+        assert r == short_card(d.entries[r["id"]])
+    sourced = next(e for e in d.idioms if e.sources)
+    assert entry_card(sourced)["sources"] == list(sourced.sources)
 
 
 def test_brief_is_what_yarn_sends(translator):

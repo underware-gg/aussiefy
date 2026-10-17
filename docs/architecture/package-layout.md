@@ -16,7 +16,7 @@ subpackages (see [DD-006](decisions/dd-006-layered-flat-package.md)).
 | Document translation | `translation.py` (shared surface routing), `markdown.py` (strict source spans and document results), `markup.py` (extended Markdown/MDX scanning) |
 | Optional API clients | `yarn.py` (built-in retelling loop and Anthropic tool adapter), `llm.py` (surface and sentence rewrites), `claude.py` (Anthropic SDK boundary) |
 | Engine | `engine.py` (the pipeline), `text.py`, `matcher.py`, `detect.py`, `select.py`, `realise.py`, `morph.py`, `garnish.py`, `context.py`, `policy.py`, `genre.py` (pure form policy and classification), `dialect.py` (source-English swaps), `pos.py` (bundled tagger), `protected.py` (opaque source spans and restoration) |
-| Dictionary | `schema.py` (entries, concepts), `model.py` (the dictionary as data, and what derives from it), `loader.py` (reading and validating the YAML), `terms.py` (when two spellings are one term), `dump.py` |
+| Dictionary | `schema.py` (entries, concepts), `cards.py` (the entry cards lookup and the changes builder both show), `model.py` (the dictionary as data, and what derives from it), `loader.py` (reading and validating the YAML), `terms.py` (when two spellings are one term), `dump.py` |
 | Similarity | `embed.py`, `static.py` (the bundled model), `models.py` (installed ones) |
 | Maintainers | `gaps.py`, `explain.py`, `rounds.py` (research rounds), `judge.py` (blind packets, report validation and optional Claude boundary), `scrape/` (scrape, fragments, harvest, tag, review) |
 | Shared | `errors.py` (`UserError`, the error a user can fix) |
@@ -31,7 +31,7 @@ The core (the engine, the dictionary and the similarity modules other than `mode
 the toolkit, the LLM modes, the surfaces or the maintainer tools, so it stays usable and testable on its own.
 `tests/architecture/test_layers.py` checks this with an import scan, and allows one exception: `embed.make_embedder("local")`
 resolves the installed model's settings through `models.py`, the one place the core reaches out. A second test
-keeps the dictionary model (`model.py`, `schema.py`, `policy.py`, `matcher.py`, `text.py`, `genre.py`) free of the loader's
+keeps the dictionary model (`model.py`, `schema.py`, `cards.py`, `policy.py`, `matcher.py`, `text.py`, `genre.py`) free of the loader's
 file I/O.
 
 Optional heavy dependencies \(anthropic, mcp, sentence\-transformers, torch\) are imported lazily, inside the

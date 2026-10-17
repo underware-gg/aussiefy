@@ -22,7 +22,8 @@ from . import translation
 from .engine import Result, Translator, default_translator
 from .guide import guide, openings, style_guide_data
 from .lint import fidelity, lint
-from .lookup import lookup, riff_cards
+from .cards import riff_cards
+from .lookup import lookup
 from .verify import verify
 
 __all__ = ["lookup", "lint", "guide", "plan", "translate", "verify", "fidelity", "openings"]

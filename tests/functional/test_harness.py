@@ -432,8 +432,8 @@ def test_template_macros_are_kept_in_markdown(translator):
 
 def test_lookup_short_keeps_what_a_writer_needs(translator):
     out = harness.lookup("very tired", short=True, translator=translator)
-    assert out["results"] and all({"form", "gloss", "frame", "level", "vulgarity"} <= set(r) <= {
-        "form", "gloss", "frame", "level", "vulgarity", "register", "gated"} for r in out["results"])
+    assert out["results"] and all({"id", "form", "gloss", "frame", "level", "vulgarity"} <= set(r) <= {
+        "id", "form", "gloss", "frame", "level", "vulgarity", "register", "gated"} for r in out["results"])
 
 
 def test_yarn_tools_reports_a_bad_declined_file(tmp_path, capsys):

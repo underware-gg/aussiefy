@@ -49,8 +49,8 @@ General defaults to Dinkum; Auto opts into detection; named types select presets
 Custom enables only configured optional behaviours. The shared override object replaces inherited values after
 explicit dials, including false and empty lists. See [translation controls](translation-controls.md).
 Its nested `profile` tunes engine rates, limits, spacing, frames, drawl, swearing and rewrite thresholds.
-Partial maps inherit missing keys. Every toolkit result includes the resolved `profile_config`; document
-operations accept that snapshot back as `document_config.profile`. Custom still needs optional document
+Partial maps inherit missing keys. Every document operation's result includes the resolved `profile_config`
+(lookup reads no profile settings, so its result reports the dials alone); document operations accept that snapshot back as `document_config.profile`. Custom still needs optional document
 behaviours enabled explicitly, even when their numeric settings are supplied.
 
 `translate` returns a `Result`, or `DocumentResult` with explicit `markdown=True`
@@ -89,7 +89,8 @@ non-destructive, idempotent and closed-world.
 Every surface takes the same parameters by the same names and defaults; `tests/functional/test_interfaces.py` holds them
 in step (see [DD-008](../architecture/decisions/dd-008-one-toolkit-thin-surfaces.md)).
 
-Genre, English, embellishment'n extended document controls are described in [translation controls](translation-controls.md). `lookup(short=True)` offers compact cards; `lint(suggest=False)` skips optional engine suggestions.
+Genre, English, embellishment'n extended document controls are described in [translation controls](translation-controls.md). Lookup's cards each carry the entry's `id` (full cards also its `sources`), built by `aussiefy/cards.py`, which the
+`changes` builder's entries share. `lookup(short=True)` offers compact cards; `lint(suggest=False)` skips optional engine suggestions.
 
 ## Lookup sense matching
 

@@ -5,6 +5,9 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Build entry cards in one place for lookup and the coming `changes` builder: each card carries its entry `id`,
+  and full cards their `sources`. Lookup's result reports the dials only, without `profile_config`, which no
+  lookup reads.
 - Let a hosted MCP server narrow the tools by capability: `build_server()` takes `translator`, `allow_unlock`,
   `allow_document_config`, `max_chars`, `max_query_chars` and `lookup_limit`, with defaults that serve everything. Annotate every
   MCP tool as read-only, so clients such as ChatGPT don't ask for confirmation.
