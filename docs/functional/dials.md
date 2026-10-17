@@ -69,8 +69,10 @@ Its force can't safely be inferred from punctuation alone. Ordinary `will` still
 
 ## Embellishment
 
-Anyway, the third dial controls liberty in the tellin': `deadset` (0\) keeps it straight, `dinkum` (1\) permits limited
-colour, and `troppo` (2\) permits a performance. General defaults to Dinkum. A named document type supplies its
-own default; Auto opts into detectin' that type. So anyway, explicit embellishment wins over the type's default, and
+The third dial controls liberty in the telling: `deadset` (0) keeps it straight, `dinkum` (1) permits limited
+colour, and `troppo` (2) permits a performance. General defaults to Dinkum. A named document type supplies its
+own default; Auto opts into detecting that type. Explicit embellishment wins over the type's default, and
 exact advanced behaviour overrides win after both. Custom enables only explicitly configured behaviours.
-See [translation controls](translation-controls.md) for all document types, overrides'n precedence.
+See [translation controls](translation-controls.md) for all document types, overrides and precedence.
+`aussiefy/data/guide.yaml` describes each setting of every dial, and each document type, in a line
+(`aussiefy.guide.dial_descriptions()`).

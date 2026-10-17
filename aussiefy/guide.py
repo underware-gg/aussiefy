@@ -14,7 +14,7 @@ from typing import Any
 from .engine import Translator, default_translator
 from .loader import DATA_DIR, _read
 from .genre import resolve_document
-from .policy import LEVELS, VULGARITIES, roll
+from .policy import DOCUMENT_TYPES, EMBELLISHMENTS, LEVELS, VULGARITIES, roll
 from .schema import SchemaError
 
 # The toolkit's operations, and each surface's name for them: the workflow's {plan} is `aussiefy plan` on the
@@ -39,6 +39,8 @@ class CraftSection:
 class StyleGuide:
     levels: dict[int, str]          # level 1-5 -> what it sounds like
     language: dict[int, str]        # vulgarity 0-3 -> what language it allows
+    embellishments: dict[int, str]  # embellishment 0-2 -> what it adds, in a line
+    document_types: dict[str, str]  # document type -> what it keeps and how, in a line
     openings: tuple[tuple[str, str], ...]   # (text, tone)
     craft: tuple[CraftSection, ...]
     workflow: tuple[str, ...]       # steps, with {tool} placeholders
@@ -62,10 +64,11 @@ def read_style_guide(path: Path = DATA_DIR / "guide.yaml") -> StyleGuide:
     errors: list[str] = []
     raw = _read(path, errors, {})
 
-    def texts(key: str, expected: set[int]) -> dict[int, str]:
+    def texts(key: str, expected: set) -> dict:
         got = raw.get(key)
-        if (not isinstance(got, dict) or set(got) != expected or any(type(k) is not int for k in got)
-                or not all(isinstance(v, str) for v in got.values())):
+        if (not isinstance(got, dict) or set(got) != expected
+                or any(type(k) is not type(next(iter(expected))) for k in got)
+                or not all(isinstance(v, str) and "\n" not in v.strip() for v in got.values())):
             errors.append(f"{key}: want a description for each of {sorted(expected)}")
             return {}
         return got
@@ -77,6 +80,8 @@ def read_style_guide(path: Path = DATA_DIR / "guide.yaml") -> StyleGuide:
         return raw[key]
 
     levels, language = texts("levels", set(LEVELS.values())), texts("language", set(VULGARITIES.values()))
+    embellishments = texts("embellishments", set(EMBELLISHMENTS.values()))
+    document_types = texts("document_types", set(DOCUMENT_TYPES))
 
     def items(key: str) -> list:
         value = raw.get(key, [])
@@ -111,7 +116,7 @@ def read_style_guide(path: Path = DATA_DIR / "guide.yaml") -> StyleGuide:
     if not isinstance(workflow, list) or not workflow or not all(isinstance(w, str) for w in workflow):
         errors.append("workflow: want a list of steps")
         workflow = []
-    guide = StyleGuide(levels, language, tuple(openings), tuple(craft), tuple(workflow), text("plan_note"),
+    guide = StyleGuide(levels, language, embellishments, document_types, tuple(openings), tuple(craft), tuple(workflow), text("plan_note"),
                        text("yarn_rules"))
     for step in workflow:
         try:
@@ -128,6 +133,17 @@ def read_style_guide(path: Path = DATA_DIR / "guide.yaml") -> StyleGuide:
 @lru_cache(maxsize=1)
 def style_guide_data() -> StyleGuide:
     return read_style_guide()
+
+
+def dial_descriptions() -> dict[str, dict[str, dict[str, Any]]]:
+    """Every dial's settings by name, each with its number (where it has one) and a description: level, vulgarity
+    and embellishment, and the document types. What a page or a host lists as the settings (guide.yaml)."""
+    g = style_guide_data()
+    return {"level": {name: {"value": n, "description": g.levels[n]} for name, n in LEVELS.items()},
+            "vulgarity": {name: {"value": n, "description": g.language[n]} for name, n in VULGARITIES.items()},
+            "embellishment": {name: {"value": n, "description": g.embellishments[n]}
+                              for name, n in EMBELLISHMENTS.items()},
+            "document_type": {name: {"description": text} for name, text in g.document_types.items()}}
 
 
 def openings(text: str, seed: int = 0, mood: str = "light", n: int = 3) -> list[str]:

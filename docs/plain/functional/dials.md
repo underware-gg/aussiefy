@@ -70,3 +70,5 @@ colour, and `troppo` (2) permits a performance. General defaults to Dinkum. A na
 own default; Auto opts into detecting that type. Explicit embellishment wins over the type's default, and
 exact advanced behaviour overrides win after both. Custom enables only explicitly configured behaviours.
 See [translation controls](translation-controls.md) for all document types, overrides and precedence.
+`aussiefy/data/guide.yaml` describes each setting of every dial, and each document type, in a line
+(`aussiefy.guide.dial_descriptions()`).

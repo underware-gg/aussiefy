@@ -8,9 +8,10 @@ import pytest
 import yaml
 
 from aussiefy import harness
-from aussiefy.guide import read_style_guide, style_guide_data
+from aussiefy.guide import dial_descriptions, read_style_guide, style_guide_data
+from aussiefy.policy import DOCUMENT_TYPES, EMBELLISHMENT_NAMES, EMBELLISHMENTS, LEVELS, VULGARITIES
 from aussiefy.schema import SchemaError
-from aussiefy.loader import DATA_DIR
+from aussiefy.loader import DATA_DIR, load_genres
 
 
 def test_no_guide_carries_language_over_its_vulgarity(translator):
@@ -132,3 +133,26 @@ def test_malformed_guide_data_is_a_schema_error(tmp_path, patch, problem):
     path.write_text(yaml.safe_dump(raw))
     with pytest.raises(SchemaError, match=problem):
         read_style_guide(path)
+
+
+def test_the_dial_descriptions_cover_every_setting():
+    """Every setting of every dial, by name, with its number where it has one and a line describing it."""
+    dials = dial_descriptions()
+    assert list(dials) == ["level", "vulgarity", "embellishment", "document_type"]
+    for dial, settings in (("level", LEVELS), ("vulgarity", VULGARITIES), ("embellishment", EMBELLISHMENTS)):
+        assert {name: s["value"] for name, s in dials[dial].items()} == settings, dial
+    assert set(dials["document_type"]) == set(DOCUMENT_TYPES)
+    assert all(s["description"].strip() for settings in dials.values() for s in settings.values())
+
+
+def test_a_document_types_line_names_the_default_embellishment_its_genre_sets():
+    """genres.yaml owns each document type's default embellishment; the guide's line says the same. Custom takes
+    only what its document_config switches on, and auto reads the type from the text, so neither names one."""
+    genres = load_genres()
+    for name, line in style_guide_data().document_types.items():
+        said = re.search(r"; (\w+) unless set\.$", line)
+        if name in ("custom", "auto"):
+            assert "unless set" not in line, name
+        else:
+            assert said and said.group(1).lower() == EMBELLISHMENT_NAMES[genres.policies[name].default_embellishment], \
+                (name, line)

@@ -11,6 +11,21 @@ language:
   2: 'Common but impolite language is fine: piss, arse, balls, fuck. Not the c-word.'
   3: 'Anything Australians say, including the c-word, used the Australian way: rude but often affectionate ("a good
     cunt"), never as an American slur.'
+# one line for each embellishment and document type, as a page or a tool describes the setting
+embellishments:
+  0: 'Deadset: changes the words and nothing else, sentence for sentence.'
+  1: 'Dinkum: a genuine Aussie voice, with the odd opener, connective or tag-on where a talker would use one.'
+  2: 'Troppo: a performance that riffs, reacts and elaborates, keeping every fact.'
+document_types:
+  general: 'General: any text, its meaning and structure kept; Dinkum unless set.'
+  auto: 'Auto: reads which kind of text it is and handles it as that type.'
+  story: 'Story: a yarn or a play, every event and line of dialogue kept; Troppo unless set.'
+  personal: 'Personal: a letter, a post or a speech, in its writer''s own voice; Dinkum unless set.'
+  news: 'News: a local reporter''s Aussie, every fact and quote kept as said; Deadset unless set.'
+  instructions: 'Instructions: every step, quantity and warning exact and in order; Deadset unless set.'
+  technical: 'Technical: terms of art, commands and code left alone, the prose around them Aussified; Deadset unless set.'
+  official: 'Official: every obligation, condition and quoted document exact; Deadset unless set.'
+  custom: 'Custom: only the behaviours its document_config switches on.'
 openings:
 - text: So get this.
   tone: plain
