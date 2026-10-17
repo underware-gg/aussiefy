@@ -19,6 +19,8 @@ Shared resources stay here:
 
 - `conftest.py`: dictionary/translator fixtures, isolated home state and scripted Claude helpers.
 - `_checks.py`: well-formedness checks shared by the public and local reference tests.
+- `_pins.py`: the test-only pin hook, an engine observer that forces a pick or leaves out a garnish, for
+  whole re-renders the changes builder is checked against.
 - `fixtures/`: synthetic acquisition inputs and frozen historical target-wording anchors; the latter
   preserve the Gettysburg benchmark denominator independently of dictionary prose.
 - `corpus/`: golden, public/licensed and ignored local reference inputs.

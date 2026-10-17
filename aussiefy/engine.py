@@ -12,8 +12,8 @@ from . import pos
 from .context import FORMAL_RE, is_chant, sentence_contexts, text_mood
 from .detect import CODE_CONCEPTS, DETERMINERS, Detection, after_determiner, detect, fallback_scorer, resolve_overlaps
 from .embed import Embedder, make_embedder
-from .garnish import (GarnishRecord, PhoneticRecord, add_closer, add_connective, add_opener, add_tag, add_tail,
-                      apply_phonetic, ends_in_list, pick_garnish, pick_riff, tag_in_speech)
+from .garnish import (Edit, GarnishRecord, PhoneticRecord, PhoneticTrace, apply_phonetic, ends_in_list, pick_garnish,
+                      pick_riff, place_garnish, tag_in_speech)
 from .loader import load_dictionary
 from .imagery import image_offers
 from .dialect import text_english
@@ -253,7 +253,7 @@ class Translator:
                   embellishment: int | str | None = None,
                   document_type: str = "general", document_config: dict | None = None,
                   _protected: Masked | None = None, _context: tuple | None = None,
-                  _composition: DocumentPart | None = None) -> Result:
+                  _composition: DocumentPart | None = None, _observer: PassObserver | None = None) -> Result:
         """Translate text: the same text, policy and seed always give the same Result.
 
         level (1-5 or tourist .. swaggie) is how Aussie; vulgarity (0-3 or nan, dad, uncle-bob, tradie; None = the
@@ -267,7 +267,8 @@ class Translator:
         profiles.yaml's). rewriter (e.g. aussiefy.llm.ClaudeRewriter) rewrites whole sentences the dictionary
         can't carry: the difficult ones (rewrite_mode="hard", thresholds in profiles.yaml `rewrite:`) or every
         one ("all"). Document adapters supply opaque protected spans and whole-text context through the
-        internal composition parameters; format selection belongs to the public translation route."""
+        internal composition parameters; format selection belongs to the public translation route. _observer
+        watches the pass (the changes builder) without changing it."""
         pol = self.policy(level=level, seed=seed, vulgarity=vulgarity,
                           variety=variety, registers=registers, regions=regions, unlock=unlock, embedder=embedder,
                           english=english, embellishment=embellishment,
@@ -280,10 +281,13 @@ class Translator:
                         document_type=pol.document_type, document_config=pol.document_config)
         run = _Run(text, pol, resolve(pol, self.dictionary), text_mood(text), is_chant(sents), masked, genre,
                    _context[1] if _context is not None else text_english(pol.english, masked.prose(), self.dictionary.us_spellings),
-                   genre.setting(pol.embellishment), composition=_composition)
+                   genre.setting(pol.embellishment), composition=_composition, observer=_observer)
         if _composition is not None:
             run.state = _composition.state
+        if _observer is not None:
+            _observer.begin(run)
         pieces: list[str] = [text[: tokens[0].start] if tokens else text]
+        at = len(pieces[0])   # where the next sentence starts in the joined text
         for i, tokens_i in enumerate(sents):
             sent = run.sentence(i, tokens_i, sents)
             recs, splices = self._substitute(sent, run)
@@ -297,15 +301,23 @@ class Translator:
                 out = self._rewrite(sent, out, recs, run, rewriter, hard if rewrite_mode == "hard" else
                                     ("rewrite mode: all" if run.eff.level >= run.eff.profile.rewrite.min_level
                                      else None))
-            pieces += [self._garnish_sentence(out, sent, recs, run), text[sent.end:sent.next_start]]
+            garnished = self._garnish_sentence(out, sent, recs, run)
+            if _observer is not None:
+                _observer.sentence(SentenceTrace(sent, recs, splices, out, garnished, at))
+                at += len(garnished) + sent.next_start - sent.end
+            pieces += [garnished, text[sent.end:sent.next_start]]
         # the closer answers the last sentence, so it goes there, not after a code block that follows it
         body, trail = "".join(pieces[:-1]), pieces[-1]
         joined = (self._closer(body, sents, run) + trail) if any(t.is_word for t in tokens) else "".join(pieces)
+        keep = partial(_no_drawl, keep_quotes=run.genre.policy.keep_quotes, protected=masked.no_phonetic)
+        preserve = partial(document_spans, keep_quotes=run.genre.policy.keep_quotes,
+                           datelines=run.genre.policy.dateline_context)
+        trace = PhoneticTrace(keep, preserve) if _observer is not None else None
         final, phon = apply_phonetic(joined, self.dictionary.phonetic, run.eff, pol.seed,
-                                     infixes=run.embellishment.takes("infix"),
-                                     keep=lambda t: _no_drawl(t, run.genre.policy.keep_quotes, masked.no_phonetic),
-                                     preserve=partial(document_spans, keep_quotes=run.genre.policy.keep_quotes,
-                                                      datelines=run.genre.policy.dateline_context))
+                                     infixes=run.embellishment.takes("infix"), keep=keep, preserve=preserve,
+                                     trace=trace)
+        if _observer is not None:
+            _observer.phonetic(joined, trace, final)
         final = masked.restore(final)
         warnings = list(run.eff.warnings)
         if pol.vulgarity is not None and run.eff.vulgarity and not run.embellishment.takes("infix"):
@@ -373,31 +385,46 @@ class Translator:
                 rec.decision = f"kept original: roll {rec.roll:.3f} >= p {rec.p:g}"
                 continue
             choice = weighted_pick(keep, roll(pol.seed, "pick", *sent.key, det.start, det.pattern))
-            rec.chosen = choice
-            form = self._form(choice.entry, det, run, sent.key)
-            out = fit_article(realise(choice.entry, form, det), choice.entry, det, toks)
-            s, e = replacement_span(choice.entry, det, toks)
-            echo = _gloss_echo(toks, s, e, out, said)
-            if echo:
-                rec.chosen, rec.decision = None, f"kept original: {echo}"
+            if run.observer is not None:
+                choice = run.observer.choose(sent, det, keep, choice)
+                run.observer.spot(Spot(sent, rec, keep, state, replaced, said, occupied, len(splices)))
+            spot = self.render_at_spot(choice, rec, keep, sent, run, replaced, said)
+            if spot.echo:
+                rec.chosen, rec.decision = None, f"kept original: {spot.echo}"
                 continue
-            out = self._stack(out, rec, keep, det, sent, run)
-            riff_suffix = self._riff(rec, choice, det, e, sent, run)
-            s, out = _fix_article(out + riff_suffix, toks, s, replaced)
-            rec.output = out
-            rec.term = out[:-len(riff_suffix)] if riff_suffix else out
-            rec.out_span = (toks[s].start, toks[e - 1].end)
+            s, e = spot.start, spot.end
+            rec.output, rec.term, rec.out_span = spot.text, spot.term, (toks[s].start, toks[e - 1].end)
             rec.decision = f"substituted: roll {rec.roll:.3f} < p {rec.p:g}"
             state.entry_uses[choice.entry.id] += 1
-            if form in choice.entry.spelling_group:
-                state.spellings.setdefault(choice.entry.id, form)
+            if spot.form in choice.entry.spelling_group:
+                state.spellings.setdefault(choice.entry.id, spot.form)
             replaced |= set(range(s, e))
             said[e] = rec.term
-            splices.append((toks[s].start, toks[e - 1].end, out))
+            splices.append((toks[s].start, toks[e - 1].end, spot.text))
         self._contextual_imagery(records, splices, sent, run)
         if pol.english != "none":
             splices += self._dialect(sent, run, replaced | held, said)
         return records, splices
+
+    def render_at_spot(self, choice: Candidate, rec: SubstitutionRecord, keep: list[Candidate], sent: "_Sentence",
+                       run: "_Run", replaced: set[int], said: dict[int, str]) -> "SpotRendering":
+        """A candidate rendered at its spot, as the splice puts it in: a form (and the spelling the text keeps), its
+        article fitted, the entry's own replacement span, a stacked second idiom, a riff, and a/an and capitals
+        fixed against what comes before. It reads and updates run.state (the stack and riff spend from it) and
+        sets rec.chosen, rec.stacked and rec.riff; the caller applies the rest. translate and the changes builder
+        (on a copy of the state at the spot) both render this way."""
+        det, toks = rec.det, sent.tokens
+        rec.chosen = choice
+        form = self._form(choice.entry, det, run, sent.key)
+        out = fit_article(realise(choice.entry, form, det), choice.entry, det, toks)
+        s, e = replacement_span(choice.entry, det, toks)
+        echo = _gloss_echo(toks, s, e, out, said)
+        if echo:
+            return SpotRendering(s, e, "", "", form, echo)
+        out = self._stack(out, rec, keep, det, sent, run)
+        riff_suffix = self._riff(rec, choice, det, e, sent, run)
+        s, out = _fix_article(out + riff_suffix, toks, s, replaced)
+        return SpotRendering(s, e, out, out[:-len(riff_suffix)] if riff_suffix else out, form)
 
     def _contextual_imagery(self, records, splices, sent, run):
         if sent.quiet or sent.prefix_only:
@@ -427,6 +454,8 @@ class Translator:
                     break
             else:
                 splices.append((end, end, suffix))
+            if run.observer is not None:
+                run.observer.imagery(sent.index, offer.image.id, end, suffix)
             run.garnish.append(GarnishRecord("riff", sent.index, None, offer.text,
                                             "contextual imagery: direct meaning match", [], offer.image.id))
 
@@ -543,7 +572,7 @@ class Translator:
             run.garnish.append(GarnishRecord.rolled("closer", len(sents) - 1, entry, form, r, p, rej))
             if entry:
                 run.state.garnish_uses[entry.id] += 1
-                return add_closer(joined, form)
+                return self._place(joined, "closer", entry, form, len(sents) - 1, run)
         return joined
 
     def _tail(self, out: str, sent: "_Sentence", run: "_Run") -> str:
@@ -568,7 +597,7 @@ class Translator:
                                             (key,) + sent.key, state.garnish_uses, sentence_contexts(sent.tokens, sent.tags),
                                             swear=swear, insults=run.embellishment.takes("insult"))
             if entry:
-                out = add_tail(out, form)
+                out = self._place(out, "tail", entry, form, sent.index, run)
                 state.garnish_uses[entry.id] += 1
                 state.placed["tail"] += 1
                 state.last_placed["tail"] = ordinal
@@ -576,6 +605,19 @@ class Translator:
             if entry:
                 break
         return out
+
+    @staticmethod
+    def _place(out: str, placement: str, entry: Entry, form: str, sentence: int, run: "_Run",
+               lowerable: frozenset[str] = frozenset(), first_replaced: bool = False) -> str | None:
+        """Put a picked garnish in (None where a connective doesn't fit), and tell the observer where it went."""
+        placed = place_garnish(out, placement, form, lowerable, first_replaced)
+        if placed is None:
+            return None
+        if run.observer is not None:
+            if not run.observer.placing(sentence, placement, entry):
+                return out   # a test hook: the garnish is decided and counted, but its words left out
+            run.observer.garnish(sentence, placement, entry, form, placed[1])
+        return placed[0]
 
     @staticmethod
     def _case(out: str, sent: list[Token], s: int) -> str:
@@ -640,6 +682,23 @@ class Translator:
         return self._garnish_channel(out, sent, run, g, swear_rates,
                                      max(0, eff.profile.garnish_per_sentence - len(g.placed)), swear=True)
 
+    def replay_garnish(self, out: str, sent: "_Sentence", run: "_Run", ops: Sequence[tuple[str, str]],
+                       first_replaced: bool) -> tuple[str, list[Edit | None]]:
+        """A sentence's garnish put back, as decided, into another text for it (the changes builder swaps a term
+        and keeps the rest): each (placement, words) in the order the engine placed them, the way it placed them,
+        with where each went (None where one no longer fits, such as a tail after a swap ends the closing list).
+        first_replaced: the sentence's first word is now a swap that starts in lower case."""
+        lowerable: frozenset[str] | None = None
+        edits: list[Edit | None] = []
+        for placement, form in ops:
+            if placement in ("opener", "connective") and lowerable is None:
+                lowerable = run.opener_lowerable(sent, self.dictionary)
+            placed = place_garnish(out, placement, form, lowerable or frozenset(), first_replaced)
+            if placed is not None:
+                out = placed[0]
+            edits.append(placed and placed[1])
+        return out, edits
+
     def _garnish_channel(self, out: str, sent: "_Sentence", run: "_Run", g: "_GarnishSpot",
                          rates: dict[str, float], budget: int, swear: bool) -> str:
         state, eff = run.state, run.eff
@@ -689,16 +748,13 @@ class Translator:
                                             state.garnish_uses, g.tag_contexts if placement == "tag" else g.contexts,
                                             exclude=recent, mood=run.mood, swear=swear,
                                             insults=run.embellishment.takes("insult"))
-            if entry and placement == "connective":
-                new = add_connective(out, form, lowerable)
-                if new is None:
+            if entry:
+                new = self._place(out, placement, entry, form, sent.index, run, lowerable, g.first_replaced)
+                if new is None:   # only a connective can refuse
                     entry, form = None, None
                     rej = rej + [("-", "sentence already opens with a connective or quote")]
                 else:
                     out = new
-            elif entry:
-                out = (add_opener(out, form, lowerable, g.first_replaced) if placement == "opener"
-                       else add_closer(out, form) if placement == "aside" else add_tag(out, form))
             if entry:
                 # connectives are plain storytelling words, so the same one can come back later
                 if placement != "connective":
@@ -749,6 +805,81 @@ class TextState:
     connectives: dict[str, int] = field(default_factory=dict)    # connective id -> sentence it was last used in
     seen_sentences: Counter = field(default_factory=Counter)     # sentence text -> occurrences so far
     spellings: dict[str, str] = field(default_factory=dict)      # entry id -> the spelling it first took
+
+
+    def copy(self) -> "TextState":
+        return TextState(Counter(self.entry_uses), Counter(self.garnish_uses), set(self.riffed), set(self.imagery_used),
+                         set(self.riffed_sentences), Counter(self.placed), dict(self.last_placed),
+                         dict(self.connectives), Counter(self.seen_sentences), dict(self.spellings))
+
+
+@dataclass(frozen=True)
+class SpotRendering:
+    """A candidate as render_at_spot puts it in: its token span (after taking in an "a"/"an" before it), its text
+    with any riff, the term without the riff, the form picked; or, with echo, why it can't go in (a bracketed gloss
+    would repeat it)."""
+    start: int
+    end: int
+    text: str
+    term: str
+    form: str
+    echo: str | None = None
+
+
+@dataclass
+class Spot:
+    """A detection the engine is about to fill, as an observer sees it just before the pick is rendered: the
+    eligible candidates and the live state (the observer copies what it keeps). splice is the index its splice
+    will take in the sentence's splices."""
+    sent: "_Sentence"
+    rec: SubstitutionRecord
+    keep: list[Candidate]
+    state: TextState
+    replaced: set[int]
+    said: dict[int, str]
+    occupied: set[int]
+    splice: int
+
+
+@dataclass
+class SentenceTrace:
+    """One sentence once it is spliced and garnished: start is where it begins in the joined text."""
+    sent: "_Sentence"
+    records: list[SubstitutionRecord]
+    splices: list[tuple[int, int, str]]
+    spliced: str
+    garnished: str
+    start: int
+
+
+class PassObserver:
+    """Watches one translate pass (the changes builder does). Every hook does nothing by default, and none may
+    change the output, except choose and placing, which exist for tests: a test pins a pick or leaves a garnish
+    out to check what the builder renders against a whole re-render."""
+
+    def begin(self, run: "_Run") -> None:
+        pass
+
+    def choose(self, sent: "_Sentence", det: Detection, keep: list[Candidate], choice: Candidate) -> Candidate:
+        return choice
+
+    def placing(self, sentence: int, placement: str, entry: Entry) -> bool:
+        return True
+
+    def spot(self, spot: Spot) -> None:
+        pass
+
+    def imagery(self, sentence: int, image_id: str, end: int, suffix: str) -> None:
+        pass
+
+    def garnish(self, sentence: int, placement: str, entry: Entry, form: str, edit: Edit) -> None:
+        pass
+
+    def sentence(self, trace: SentenceTrace) -> None:
+        pass
+
+    def phonetic(self, joined: str, trace: PhoneticTrace, final: str) -> None:
+        pass
 
 
 @dataclass(frozen=True)
@@ -837,6 +968,7 @@ class _Run:
     embellishment: Embellishment  # the caller's setting, or the genre's own: which garnish it takes
     state: TextState = field(default_factory=TextState)
     composition: DocumentPart | None = None
+    observer: PassObserver | None = None
     records: list[SubstitutionRecord] = field(default_factory=list)
     garnish: list[GarnishRecord] = field(default_factory=list)
     rewrites: list[RewriteRecord] = field(default_factory=list)
