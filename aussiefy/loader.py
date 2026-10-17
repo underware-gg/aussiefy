@@ -190,12 +190,16 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
             unless_before = raw.get("unless_before")
             if unless_before is not None and (not isinstance(unless_before, str) or not unless_before.strip()):
                 raise ValueError("unless_before must be a non-empty regular expression")
+            unless_question = raw.get("unless_question", False)
+            if not isinstance(unless_question, bool):
+                raise ValueError("unless_question must be a boolean")
             phonetic.append(PhoneticRule(raw["id"], re.compile(raw["match"]), raw["replace"],
                                          float(raw.get("prob", 1.0)), int(raw.get("min_level", 5)),
                                          raw.get("notes", ""), int(raw.get("vulgarity", 0)),
                                          raw.get("kind", "drawl"),
                                          float(raw["dialogue_prob"]) if "dialogue_prob" in raw else None, reading,
-                                         re.compile(unless_before) if unless_before is not None else None))
+                                         re.compile(unless_before) if unless_before is not None else None,
+                                         unless_question))
         except (KeyError, TypeError, ValueError, re.error) as exc:
             errors.append(f"phonetic rule {raw!r}: {exc}")
 

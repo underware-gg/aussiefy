@@ -187,3 +187,113 @@ def test_present_tense_source_context_enables_safe_colour_around_code(translator
                   document_config={**loud_config(), "term_domains": ["technical"]})
     assert len([g for u in r.units for g in u.result.garnish if g.entry_id]) == 1
     assert "browser uses `cookies` to retain state" in r.text
+
+
+@pytest.mark.parametrize('source', [
+    "Doesn't my suit fit me marvellously?",
+    "Can't the new server start?",
+    "Didn't Mr. Smith finish?",
+    "Won't the U.S. team win?",
+])
+def test_negative_questions_do_not_split_the_auxiliary_from_its_subject(source, translator):
+    rule = replace(next(r for r in translator.dictionary.phonetic if r.id == 'infix-bloody-well'), prob=1)
+    tr = Translator(replace(translator.dictionary, phonetic=[rule]))
+    r = tr.translate(source, vulgarity=1, document_type='custom', document_config={
+        'garnish': ['infix'], 'profile': {'frames': [], 'swearing': {'infix': 1}}})
+    assert r.text == source and not r.phonetic
+
+
+@pytest.mark.parametrize('source,expected', [
+    ("He won't go. Doesn't my suit fit?", "He won't bloody well go. Doesn't my suit fit?"),
+    ("He doesn't enjoy this.", "He doesn't bloody well enjoy this."),
+    ("Don't touch the wires.", "Don't bloody well touch the wires."),
+])
+def test_question_guard_leaves_statements_and_imperatives_available(source, expected, translator):
+    rule = replace(next(r for r in translator.dictionary.phonetic if r.id == 'infix-bloody-well'), prob=1)
+    tr = Translator(replace(translator.dictionary, phonetic=[rule]))
+    r = tr.translate(source, vulgarity=1, document_type='custom', document_config={
+        'garnish': ['infix'], 'profile': {'frames': [], 'swearing': {'infix': 1}}})
+    assert r.text == expected
+
+
+def test_other_grammatical_question_infixes_remain_available(translator):
+    rule = replace(next(r for r in translator.dictionary.phonetic if r.id == 'as-fuck-intensifier'), prob=1)
+    tr = Translator(replace(translator.dictionary, phonetic=[rule]))
+    r = tr.translate('Is that very good?', vulgarity=2, document_type='custom', document_config={
+        'garnish': ['infix'], 'profile': {'frames': [], 'swearing': {'infix': 1}}})
+    assert r.text == 'Is that good as fuck?'
+
+
+@pytest.mark.parametrize('bad', ['true', 1, None, []])
+def test_question_guard_requires_a_real_boolean(data_copy, bad):
+    import yaml
+    p = data_copy / 'phonetic.yaml'
+    p.write_text(p.read_text() + yaml.safe_dump([{
+        'id': 'bad-question', 'match': 'word', 'replace': 'word', 'unless_question': bad}]))
+    with pytest.raises(SchemaError, match='unless_question must be a boolean'):
+        load_dictionary(data_dir=data_copy)
+
+
+@pytest.mark.parametrize('word', ['Australian', 'English', 'French', 'Python'])
+def test_prefixes_cannot_lower_a_capital_only_because_it_is_dictionary_plain_text(word, translator):
+    source = f'{word} spelling is enabled.\n'
+    r = translate(source, markdown=True, translator=translator, vulgarity=0, document_type='custom',
+                  document_config=loud_config())
+    assert word in r.text and f', {word.lower()}' not in r.text
+    # With no lower-case evidence, the existing conservative placement rule declines the prefix.
+    assert not [g for u in r.units for g in u.result.garnish if g.entry_id]
+
+
+@pytest.mark.parametrize('source,lowered', [
+    ('Residents said the river rose.\n', 'residents'),
+    ('Cook the beans before serving.\n', 'cook'),
+])
+def test_ordinary_words_and_explicit_commands_can_still_take_prefixes(source, lowered, translator):
+    r = translate('We waited. ' + source, markdown=True, translator=translator, vulgarity=0, document_type='custom',
+                  document_config={**loud_config(('connective',)), 'command_context': True})
+    assert f', {lowered}' in r.text
+
+
+def test_declining_a_question_does_not_shift_a_later_statements_roll(translator):
+    rule = next(r for r in translator.dictionary.phonetic if r.id == 'infix-bloody-well')
+    guarded = Translator(replace(translator.dictionary, phonetic=[rule]))
+    unguarded = Translator(replace(translator.dictionary, phonetic=[replace(rule, unless_question=False)]))
+    source = "Doesn't my suit fit? He won't go."
+    config = {'garnish': ['infix'], 'profile': {'frames': [], 'swearing': {'infix': 1}}}
+    for seed in range(10):
+        outputs = [tr.translate(source, seed=seed, vulgarity=1, document_type='custom',
+                                document_config=config).text for tr in (guarded, unguarded)]
+        assert outputs[0].split('?')[1] == outputs[1].split('?')[1]
+
+
+@pytest.mark.parametrize('closing', ['"', '”', '’', '”)'])
+@pytest.mark.parametrize('punctuation', ['?', '!', '.'])
+def test_continued_dialogue_tag_precedes_terminal_punctuation_and_closers(closing, punctuation):
+    from aussiefy.garnish import add_tag
+    source = f'Are you ready{punctuation}{closing}  '
+    assert add_tag(source, 'mate') == f'Are you ready, mate{punctuation}{closing}  '
+
+
+def test_continued_curly_dialogue_keeps_its_tag_inside_the_quote(translator):
+    from aussiefy.schema import Entry
+    entry = Entry('test-tag', 'mate', (), 'interjection', type='garnish', placement='tag',
+                  when=('question',))
+    tr = Translator(replace(translator.dictionary, entries={
+        **{e.id: e for e in translator.dictionary.entries.values() if e.type != 'garnish'}, entry.id: entry},
+        phonetic=[]))
+    r = tr.translate('She asked, “We waited.\n\nAre you ready?”', vulgarity=0, document_type='custom',
+                     document_config=loud_config(('tag',)))
+    assert 'Are you ready, mate?”' in r.text
+    assert '?”, mate' not in r.text
+
+
+@pytest.mark.parametrize('lowercase_evidence', [False, True])
+def test_plain_word_inventory_preserves_source_case_and_lowercase_inflections(dictionary, lowercase_evidence):
+    from aussiefy.matcher import compile_pattern
+    from aussiefy.schema import Concept
+    triggers = {'np': ('English person', 'quuxwidget'), 'vp': ('arrive',)}
+    concept = Concept('CASE', 'An english alias.' if lowercase_evidence else 'A neutral description.', triggers)
+    patterns = [compile_pattern(text, frame, ('CASE',), 1) for frame, texts in triggers.items() for text in texts]
+    d = replace(dictionary, entries={}, concepts={'CASE': concept}, patterns=patterns)
+    assert {'person', 'quuxwidget', 'quuxwidgets', 'arrive', 'arrived'} <= d.plain_words
+    assert ('english' in d.plain_words) == lowercase_evidence

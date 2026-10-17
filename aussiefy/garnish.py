@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from bisect import bisect_right
 from collections.abc import Callable
 from dataclasses import dataclass
 
@@ -11,7 +12,7 @@ from .model import PhoneticRule
 from .policy import Effective, pick_form, roll, weighted_index
 from .schema import DEFAULT_WHEN, Entry
 from .select import policy_rejection
-from .text import OPEN_QUOTES, QUOTES, lower_first_word, match_case
+from .text import OPEN_QUOTES, QUOTES, lower_first_word, match_case, sentences, tokenize
 
 VOWEL_RE = re.compile(r"[aeiou]", re.I)
 QUOTE_RE = re.compile(r"[\"\u201c][^\"\u201c\u201d]*[\"\u201d]")
@@ -118,7 +119,7 @@ def pick_garnish(placement: str, entries: list[Entry], eff: Effective, seed: int
     return chosen, _realise_garnish(chosen, seed, key, eff), rejected
 
 
-SENT_END_RE = re.compile(r"([.!?]+)([\"')\]]*)\s*$")
+SENT_END_RE = re.compile(r"([.!?]+)([\"'\u201d\u2019)\]]*)\s*$")
 
 
 def add_opener(sentence: str, opener: str, common: set[str] | None = None, force_lower: bool = False) -> str:
@@ -225,6 +226,8 @@ def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: i
         counter = {"n": 0}
         quotes = [q.span() for q in QUOTE_RE.finditer(text)] if rule.dialogue_prob is not None else []
         before = text   # the text this rule matches in, for the kept spans (read once, when a rule first matches)
+        questions = [(s[0].start, s[-1].end) for s in sentences(tokenize(before))
+                     if any(t.text == "?" for t in s)] if rule.unless_question else []
 
         def kept() -> list[tuple[int, int]]:
             if keep is None or rule.kind == "spelling":
@@ -235,6 +238,9 @@ def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: i
 
         def sub(m: re.Match) -> str:
             counter["n"] += 1   # counted either way, so a kept span doesn't shift the rolls after it
+            question = bisect_right(questions, m.start(), key=lambda span: span[0]) - 1
+            if question >= 0 and m.start() < questions[question][1]:
+                return m.group(0)
             if rule.unless_before is not None and rule.unless_before.search(before[:m.start()]):
                 return m.group(0)
             if preserve is not None and preserved_for[0] != before:

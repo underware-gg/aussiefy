@@ -9,9 +9,9 @@ material product tradeoffs are flagged for shaping while independent work contin
 | 1 | Grammar and senses: modal clauses/questions, deliberative shall, restless tossing, object-taking quit, evidentiary establish, wholehearted devotion | Complete |
 | 2 | Seed-listicle intake: acquire through existing pipeline, verify senses, reconcile coverage and retain decisions | Complete |
 | 3 | Curated slang benchmark with independent review, fixed labels and an honest baseline | Complete |
-| 4 | Prose refinement: assess technical/instruction/body voice and fix clear defects while preserving configured flavour | Pending |
-| 5 | Bundled-model maintenance: inspect training environment, retrain on final data and enforce existing quality gates | Pending |
-| 6 | Pre-launch integration: exercise available client/API paths, measure actual routing/latency, document verified limits | Pending; website not built |
+| 4 | Prose refinement: assess technical/instruction/body voice and fix clear defects while preserving configured flavour | Complete |
+| 5 | Bundled-model maintenance: inspect training environment, retrain on final data and enforce existing quality gates | In progress; isolated trial |
+| 6 | Pre-launch integration: exercise available client/API paths, measure actual routing/latency, document verified limits | Available interfaces checked; final recheck pending; website not built |
 
 ## Decisions and verification
 
@@ -93,3 +93,36 @@ remain unchanged. Historical model reports and benchmark evidence are not rewrit
 Independent review found no remaining findings and reproduced all frozen baseline counts and output hashes.
 The 21 benchmark/trainer regressions also pass on Python 3.10. Final verification: **2,080 passed, two
 expected local-corpus skips, 554.42 seconds**; Ruff, whitespace and generated-publication checks passed.
+
+Committed and pushed as `2028a88`.
+
+### Slice 4: bounded prose refinement
+
+The opt-in `unless_question` phonetic guard uses canonical sentence spans, including Mr./U.S. abbreviations,
+only after rule-policy eligibility. It prevents bloody-well from splitting a negative question's auxiliary
+and subject. Standalone non-question statements and imperatives, other grammatical question infixes,
+protected spans and later occurrence rolls retain their existing behaviour. A mixed quoted unit containing
+statements and questions can conservatively lose this infix throughout. No new product dial is added.
+
+`Dictionary.plain_words` no longer fabricates lower-case evidence from case-folded capital-only patterns.
+Raw lower-case spellings and inflections from lower-case source patterns remain available. Existing POS,
+name and command guards remain; the prefix policy declines uncertain Australian/English placement without
+blocking ordinary Work. The first full run exposed that regression in the original broad guard: **2,111
+passed, two skipped, one failed, 718.70 seconds**. The guard was replaced with the owner correction before
+the required complete rerun.
+
+The original three-case [probes](prose-probes.json) use the unchanged publication settings and retain both
+outputs. Technical code, names, numeric bounds and the instruction's prohibition/condition remain intact;
+the technical case fixes the lowered Australian. The instruction remains deliberately restrained, while
+the body keeps its tired/delighted slang and conversational garnish. These are bounded manual readbacks,
+not an independent quality score or a general claim that every source can be flavoured equally.
+
+Independent review found a continued-dialogue punctuation defect and a measured quadratic question-span
+scan. Both are corrected, with curly-closer regressions and binary-search span lookup. The full golden diff
+was read, including corrected Emperor questions and continued Bible/Little Red Riding Hood speech. The
+reviewer independently passed the initial 96 focused checks; the final owner correction receives additional
+inventory, Markdown-composition, lint/contract and harvest coverage: 196 document/composition/POS/contracts
+and 102 harness/reliability/harvest checks pass. The 103 document/composition checks also pass on Python 3.10.
+Final independent review passed 205 document/composition/harness/reliability/harvest checks with no remaining
+findings. Complete rerun: **2,114 passed, two expected local-corpus skips, 581.91 seconds**; Ruff, whitespace
+and generated-publication checks passed.

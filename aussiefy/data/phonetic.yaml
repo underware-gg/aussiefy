@@ -406,6 +406,7 @@
   min_level: 5
   vulgarity: 1
 - id: infix-bloody-well
+  unless_question: true
   match: "(?i)\\b(can't|won't|couldn't|wouldn't|shouldn't|didn't|don't|doesn't|mustn't|mightn't|shall not|will not|can not)\\s+(?!bloody|well|even|really|just|be\\b|have\\b|you\\b|ya\\b|yer\\b|we\\b|they\\b|it\\b|he\\b|she\\b|i\\b)(?=[a-z])"
   replace: "\\1 bloody well "
   prob: 0.35

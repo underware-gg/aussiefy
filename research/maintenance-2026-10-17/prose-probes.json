@@ -1,0 +1,70 @@
+{
+  "purpose": "Bounded prose readback, not a controlled quality benchmark",
+  "base_commit": "2028a88222af17c4a4bbfb195a5a8a5f5667e840",
+  "working_tree_changes": true,
+  "code_sha256": {
+    "aussiefy/engine.py": "a54cbbfa1c5e4c4da8577e2f1b1ff07cd150128bbc9cfb224703a3516dc7bd5e",
+    "aussiefy/garnish.py": "4611929556583981426f8369876d730413917b30b73c4ed5f44e172c0d4e4877",
+    "aussiefy/model.py": "7fbc1812bd799cc4b754325e9abbe1cda34e233700816fb8a4dfb26f8951c4c3",
+    "aussiefy/loader.py": "dddaf7e161762286ad2e0116b62a5bf4432eb0713a80ee59b9070629d1e4b586",
+    "aussiefy/data/phonetic.yaml": "aa850aec28dc9461058337d92422ec4dc3f66678a3de9ea31a52b8ef9606cd59"
+  },
+  "settings": {
+    "level": 5,
+    "vulgarity": "dad",
+    "seed": 0,
+    "embellishment": "dinkum",
+    "document_type": "general",
+    "document_config": {
+      "term_domains": [
+        "technical"
+      ],
+      "formal_to_rework": false,
+      "keep_quotes": true,
+      "person_swears": false,
+      "command_context": true,
+      "garnish": [
+        "connective",
+        "opener",
+        "tag"
+      ],
+      "profile": {
+        "garnish": {
+          "connective": 0.35,
+          "opener": 0.35,
+          "tag": 0.25
+        },
+        "max_garnish": {
+          "connective": 10,
+          "opener": 6,
+          "tag": 4
+        },
+        "garnish_gap": 2,
+        "stack": 0
+      }
+    }
+  },
+  "cases": [
+    {
+      "case": "technical",
+      "source": "Australian spelling is enabled. English wording stays readable.\n\nThe `schema_version` remains 2. The function `get_user()` returns at most 30 records.\n",
+      "output": "Australian spellin' is enabled. English wording stays readable.\n\nThe `schema_version` remains 2. The function `get_user()` returns at most 30 records.\n",
+      "protected_spans_exact": true,
+      "before": "Stone the crows, australian spellin' is enabled. English wording stays readable.\n\nThe `schema_version` remains 2. The function `get_user()` returns at most 30 records.\n"
+    },
+    {
+      "case": "instructions",
+      "source": "Save the settings in `config.yaml`. Wait at least 30 seconds. Do not delete the backup until the health check passes.\n",
+      "output": "Save the settings in `config.yaml`. Wait at least 30 seconds. Don't delete the backup until the health check passes.\n",
+      "protected_spans_exact": true,
+      "before": "Save the settings in `config.yaml`. Wait at least 30 seconds. Don't delete the backup until the health check passes.\n"
+    },
+    {
+      "case": "body",
+      "source": "We should know better by now. We left Rob unsupervised again. He was very tired but delighted with the result. The team was rushing around frantically.\n",
+      "output": "Jeez Louise, we should know better by now. We left Rob unsupervised again. Well, he was buggered but happy as Larry with the result. The team was rushin' around frantically.\n",
+      "protected_spans_exact": true,
+      "before": "Jeez Louise, we should know better by now. We left Rob unsupervised again. Well, he was buggered but happy as Larry with the result. The team was rushin' around frantically.\n"
+    }
+  ]
+}

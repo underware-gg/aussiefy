@@ -9,6 +9,9 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Keep negative\-question subjects beside their auxiliary by declinin' the unsafe bloody\-well infix there.
+  Preserve capitals such as Australian and English when dictionary vocabulary alone would lowercase them.
+  Well, place dialogue tags before punctuation'n curly closing quotes in continued speech.
 - Add an independently curated target\-expression benchmark with fixed inputs'n an explicit first baseline.
   Crikey, share language cleanup with the trainer so grammar directives can't become trainin' words.
 - Review the original seed listicle, add ten curated expressions with precise senses, and retain a complete
@@ -325,7 +328,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   translation says again (`unmatched`), plus coverage metrics.
 - `aussiefy judge`: a blind, rubric\-scored comparison of 2\-8 translations of one original
   (`data/judge.yaml`: eight criteria scored 1\-5 with evidence first, quoted problems with severity, and
-  rankings\). Anyway, reports are validated \(quotes must be verbatim\) and unblinded into verdicts that `judge tally`
+  rankings\). Reports are validated \(quotes must be verbatim\) and unblinded into verdicts that `judge tally`
   averages. It runs with the API \(`run`, optionally with an unharnessed reference retelling\), or with any
   agent as the judge \(`brief`, then `read`).
 

@@ -90,6 +90,7 @@ class PhoneticRule:
     dialogue_prob: float | None = None  # probability inside quoted speech, which drawls broader than narration
     reads_as: str | None = None         # canonical wording for lint's refrain comparison; literal drawl only
     unless_before: re.Pattern | None = None   # refuse a match following this grammatical context
+    unless_question: bool = False       # refuse matches in a question, using the shared sentence tokenizer
 
 
 @dataclass
@@ -133,7 +134,9 @@ class Dictionary:
         # lower-case vocabulary knows, or the dictionary writes elsewhere, count
         bare = [re.sub(r"(?<!\S)![^\s\"',\]]+", " ", t) for t in texts]
         words = {w for t in bare for w in re.findall(r"\b[a-z][a-z'-]*\b", t)}
-        words |= {v for p in self.patterns for e in p.elements if e.kind == "lit" for v in e.values}
+        # Compilation folds capitals and expands inflections. Only a lower-case source pattern can supply
+        # lower-case evidence for its inferred forms; "an Australian" must not make "australian" ordinary.
+        words |= {v for p in self.patterns if p.text.islower() for e in p.elements if e.kind == "lit" for v in e.values}
         excluded = {v for p in self.patterns for e in p.elements if e.kind == "not" for v in e.values}
         words |= excluded & self.pos_words
         return frozenset(words | COMMON_STARTERS)

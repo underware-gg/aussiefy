@@ -51,6 +51,7 @@ its consequences as they stood when it was made. Anyway, records are numbered in
 | [DD-024](dd-024-contract-aware-judging.md) | Give agent/API judges the complete effective writing contract while preserving legacy protocols | Accepted |
 | [DD-025](dd-025-contextual-imagery.md) | Contextual imagery with explicit writer and engine boundaries | Accepted |
 | [DD-026](dd-026-finite-clauses-and-sense-boundaries.md) | Preserve finite-clause grammar and ambiguous senses | Accepted |
+| [DD-027](dd-027-question-safe-infixes-and-source-capitals.md) | Use canonical question spans for opt-in infix guards and preserve unresolved source capitals | Accepted |
 
 ## By topic
 

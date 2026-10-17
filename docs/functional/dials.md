@@ -61,7 +61,7 @@ per 100 words are flat across levels 2\-5 at each vulgarity \(`dad` about 1, `un
 
 ## Australian spelling
 
-Anyway, australian spellin' \(honoured, colour, organise, grey, mum\) applies at every level, whatever the dials say.
+Australian spellin' \(honoured, colour, organise, grey, mum\) applies at every level, whatever the dials say.
 The rules are in `aussiefy/data/phonetic.yaml` with `kind: spelling`, and the Labor Party keeps its name.
 
 The drawl preserves `shall`, including deliberative questions, embedded questions, obligations'n declarations.

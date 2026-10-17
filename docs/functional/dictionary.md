@@ -20,6 +20,7 @@ aussiefy/data/
   phonetic.yaml        drawl: contractions (level 4+), respellings (level 5), swear infixes (by vulgarity),
                        and Australian spelling (kind: spelling)
                        optional unless_before regex excludes grammatical contexts before a rule match
+                       optional unless_question boolean excludes matches in question sentences
   riffs.yaml           the image a term calls up (wheelie bin: bin chickens fightin' over the scraps)
   imagery.yaml         reviewed contextual images, meaning/frame anchors and writer usage conditions
   guide.yaml           voice, language limits, openings, gated craft, workflow, plan note and yarn rules
@@ -159,6 +160,13 @@ Well, similarity fallback covers slot\-free predicate patterns with a fixed lite
 remain supported by exact trigger matching; they aren't guessed through similarity.
 
 ## Drawl comparison
+
+Phonetic rules can declare `unless_question: true` when their grammatical placement is unsafe in a question.
+The guard uses the shared sentence tokenizer, including abbreviations such as `Mr.` and `U.S.`. It applies
+only to the declared rule: other grammatical question infixes remain available. Skipped matches keep their
+occurrence ordinal so later seeded choices do not shift. The loader requires a real boolean.
+Quoted speech can group a declaration and questions in one canonical unit; that whole unit conservatively
+skips the opted-in infix. Standalone statements and imperatives remain eligible.
 
 A literal drawl rule may declare `reads_as`, its canonical wording for lint's refrain comparison:
 
