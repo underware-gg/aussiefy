@@ -10,8 +10,8 @@ material product tradeoffs are flagged for shaping while independent work contin
 | 2 | Seed-listicle intake: acquire through existing pipeline, verify senses, reconcile coverage and retain decisions | Complete |
 | 3 | Curated slang benchmark with independent review, fixed labels and an honest baseline | Complete |
 | 4 | Prose refinement: assess technical/instruction/body voice and fix clear defects while preserving configured flavour | Complete |
-| 5 | Bundled-model maintenance: inspect training environment, retrain on final data and enforce existing quality gates | In progress; isolated trial |
-| 6 | Pre-launch integration: exercise available client/API paths, measure actual routing/latency, document verified limits | Available interfaces checked; final recheck pending; website not built |
+| 5 | Bundled-model maintenance: inspect training environment, retrain on final data and enforce existing quality gates | First trial rejected; deterministic ordering corrected; fresh trial pending commit |
+| 6 | Pre-launch integration: exercise available client/API paths, measure actual routing/latency, document verified limits | Available-interface checks complete; website/live provider checks remain external |
 
 ## Decisions and verification
 
@@ -126,3 +126,41 @@ and 102 harness/reliability/harvest checks pass. The 103 document/composition ch
 Final independent review passed 205 document/composition/harness/reliability/harvest checks with no remaining
 findings. Complete rerun: **2,114 passed, two expected local-corpus skips, 581.91 seconds**; Ruff, whitespace
 and generated-publication checks passed.
+
+Committed and pushed as `328d8d1`.
+
+### Slice 5: model maintenance and reproducibility prerequisite
+
+The [first current trial](model-maintenance.md) passed 30/33 required checks, failing on a great war,
+a top bloke and honest, and was not exported. The shipped 1.2.0 still passes 33/33 against the current dictionary. All
+reference requirements, recipe settings and cut-offs remain. Actual lookup diagnostics use the shared
+toolkit; the isolated candidate adapter is not presented as package-reader parity.
+
+An offline-cache metadata interruption reused the already saved evaluation fit without changing its ten
+artifacts. Further audit reproduced a real WordNet order defect: relation-pointer sets changed positive
+pair selection across process hash salts. The first trial retains that limitation, including differing
+evaluation/static pair counts. Sorting neighbours before truncation now stabilises every ordered pair
+digest at both splits while preserving sense and lemma priority. A fresh evaluation and full fit must follow
+the corrected trainer's commit. The 13 trainer tests pass on Python 3.10 and the primary environment.
+
+Historical gap queries now include covered words. Current raw scores are explicitly historical diagnostics,
+not current unseen-generalisation/false-fill claims; no invented 90% model-promotion gate is applied. Training
+documentation qualifies historical timing and byte-reproduction observations. Meaning-specific training and
+a refreshed unknown-word cohort/source-exclusion contract are flagged for shaping.
+
+The independent six-concern review converged with no remaining findings. Final pre-commit verification:
+**2,116 passed, two expected local-corpus skips, 516.67 seconds**; Ruff, whitespace and generated-publication
+checks passed. The 13 trainer regressions also pass on Python 3.10. Only the neighbour-order correction and
+its evidence are accepted here; a fresh evaluation and full-data trial follow this prerequisite commit.
+
+### Slice 6: available interfaces
+
+[Integration evidence](integration-checks.md) retains the original capture plus a final recheck against
+committed runtime `328d8d1`: all six real stdio tools, matching resolved profiles, exact code/name/number
+preservation, CLI lint/verification/checked submission and an explicit missing-key deterministic fallback.
+The actual Codex drafting workflow kept the source's facts and all three fitting planned phrases. All
+eight runtime-input digests match the committed implementation.
+
+This verifies an editable installed checkout from outside the repo. Live provider execution, separate
+agent-client MCP registration and the unbuilt website's routes, Smart/Basic mapping and browser/deployed API
+latency remain unverified. Prior core timings are linked, without substituting them for future web timing.

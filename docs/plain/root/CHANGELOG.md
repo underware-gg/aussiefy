@@ -5,6 +5,8 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Stabilise WordNet neighbour selection before training-pair truncation, preserving sense and lemma priority.
+  Record current-model trial limits and real portable CLI/MCP integration checks without claiming web deployment.
 - Keep negative-question subjects beside their auxiliary by declining the unsafe bloody-well infix there.
   Preserve capitals such as Australian and English when dictionary vocabulary alone would lowercase them.
   Place dialogue tags before punctuation and curly closing quotes in continued speech.

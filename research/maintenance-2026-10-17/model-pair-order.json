@@ -1,0 +1,108 @@
+{
+  "scope": "Ordered positive/wrong-sense/opposite lists at evaluation and full-fit splits; source/sense selection and recipe limits unchanged.",
+  "before": {
+    "trainer_sha256": "19301e3448bdede0236459f6a340ab021429787b31a99b4d3ae9529edd0fddd4",
+    "hash_seed_0": {
+      "count": 10478,
+      "sha256": "d4f38599bbe6c23128dc010972e06fadb488444b1caf943cbb480fbcd1caa6f5"
+    },
+    "hash_seed_1": {
+      "count": 10511,
+      "sha256": "7b0d95999f62e49021383d38880895e9aebd2018a88b1878cdd982a46d77f650"
+    },
+    "set_only_in_0": 347,
+    "set_only_in_1": 380
+  },
+  "after": [
+    {
+      "python_hash_seed": "0",
+      "trainer_sha256": "ffd3bd090cf845f364fccd673b9403d9d9c9d2d76bf919f5c90561be660fbc88",
+      "recipe_sha256": "099a736840dd3bc94588fab916ba4d2af226fdb0e8c72f0287e98fbb696ad4de",
+      "rows": [
+        {
+          "holdout": 0.2,
+          "training_entries": 951,
+          "held_entries": 238,
+          "pairs": {
+            "positive": {
+              "count": 10493,
+              "sha256": "2beafae0bfdd36520401164f7cab3f58b5bed13bb0b2f1219b3ee092b2b9420f"
+            },
+            "wrong_sense": {
+              "count": 5954,
+              "sha256": "dd8fa9d4ed7c9f16037a285064bf5ee73ff0da7faac7f23c089d314e5389e147"
+            },
+            "opposite": {
+              "count": 2978,
+              "sha256": "0aca9477f879d5ab0257fdc426e14220f7a290e5d0082bc067632761733bc573"
+            }
+          }
+        },
+        {
+          "holdout": 0.0,
+          "training_entries": 1189,
+          "held_entries": 0,
+          "pairs": {
+            "positive": {
+              "count": 12640,
+              "sha256": "022ad0e3f9b0b1a33cb5461743daa741dce93b7cff131c70786e40920f0d7f06"
+            },
+            "wrong_sense": {
+              "count": 6675,
+              "sha256": "a315c21d83ff89f41d473e4ff11ad455188ccef94ff89b514423405aae84203f"
+            },
+            "opposite": {
+              "count": 3821,
+              "sha256": "e2f837bd337fbc18c9e11f800041acaf515c303867166f2b32a2104b4a324f30"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "python_hash_seed": "1",
+      "trainer_sha256": "ffd3bd090cf845f364fccd673b9403d9d9c9d2d76bf919f5c90561be660fbc88",
+      "recipe_sha256": "099a736840dd3bc94588fab916ba4d2af226fdb0e8c72f0287e98fbb696ad4de",
+      "rows": [
+        {
+          "holdout": 0.2,
+          "training_entries": 951,
+          "held_entries": 238,
+          "pairs": {
+            "positive": {
+              "count": 10493,
+              "sha256": "2beafae0bfdd36520401164f7cab3f58b5bed13bb0b2f1219b3ee092b2b9420f"
+            },
+            "wrong_sense": {
+              "count": 5954,
+              "sha256": "dd8fa9d4ed7c9f16037a285064bf5ee73ff0da7faac7f23c089d314e5389e147"
+            },
+            "opposite": {
+              "count": 2978,
+              "sha256": "0aca9477f879d5ab0257fdc426e14220f7a290e5d0082bc067632761733bc573"
+            }
+          }
+        },
+        {
+          "holdout": 0.0,
+          "training_entries": 1189,
+          "held_entries": 0,
+          "pairs": {
+            "positive": {
+              "count": 12640,
+              "sha256": "022ad0e3f9b0b1a33cb5461743daa741dce93b7cff131c70786e40920f0d7f06"
+            },
+            "wrong_sense": {
+              "count": 6675,
+              "sha256": "a315c21d83ff89f41d473e4ff11ad455188ccef94ff89b514423405aae84203f"
+            },
+            "opposite": {
+              "count": 3821,
+              "sha256": "e2f837bd337fbc18c9e11f800041acaf515c303867166f2b32a2104b4a324f30"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

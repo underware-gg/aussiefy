@@ -1,0 +1,375 @@
+{
+  "captured_utc": "2026-10-17T08:42:54+00:00",
+  "git_base": "2028a88222af17c4a4bbfb195a5a8a5f5667e840",
+  "working_tree_dirty": true,
+  "installation": "editable installed checkout; CLI and Python MCP client launched from outside repository",
+  "python": "3.12.13",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "mcp_sdk": "2.3.0",
+  "dictionary_sha256": "a1f92cebbd6841cc28e5406d279d6963ec76cbb12680b4a8fde928967d30842b",
+  "model_version": "1.2.0",
+  "implementation_sha256": {
+    "aussiefy/engine.py": "006504084c8f01e6566291e907c2873c61cf045a9a93b58197bdf0e17eac44c7",
+    "aussiefy/garnish.py": "4611929556583981426f8369876d730413917b30b73c4ed5f44e172c0d4e4877",
+    "aussiefy/mcp_server.py": "ae8b19ee1b257d67b5d9b14ea4d2db6b1f8cc441f1aa1f75b89ada611e9cace4",
+    "aussiefy/retelling.py": "0f66c4eb070499fd9e8522feb2b9390c8a398e0406fa38dbc067afad9930e806",
+    "aussiefy/cli.py": "b848a9202b0232ebde2de19768f9cba795d6049fb2fb9495d194984448cb71b8",
+    "aussiefy/model.py": "b2a17ddd000b5ffddb530f3d2f5bea5f8ba651e191a51798cdc4aa13facfa598",
+    "aussiefy/loader.py": "dddaf7e161762286ad2e0116b62a5bf4432eb0713a80ee59b9070629d1e4b586",
+    "aussiefy/data/phonetic.yaml": "aa850aec28dc9461058337d92422ec4dc3f66678a3de9ea31a52b8ef9606cd59"
+  },
+  "settings": {
+    "level": 5,
+    "vulgarity": "dad",
+    "seed": 0,
+    "embellishment": "dinkum",
+    "document_type": "general",
+    "document_config": {
+      "term_domains": [
+        "technical"
+      ],
+      "formal_to_rework": false,
+      "keep_quotes": true,
+      "person_swears": false,
+      "command_context": true,
+      "garnish": [
+        "connective",
+        "opener",
+        "tag"
+      ],
+      "profile": {
+        "garnish": {
+          "connective": 0.35,
+          "opener": 0.35,
+          "tag": 0.25
+        },
+        "max_garnish": {
+          "connective": 10,
+          "opener": 6,
+          "tag": 4
+        },
+        "garnish_gap": 2,
+        "stack": 0
+      }
+    }
+  },
+  "cli_agent_workflow": {
+    "source": "Rob waited at the station for 30 minutes. He was very tired. He was delighted when the train arrived.\n",
+    "draft": "Rob waited at the station for 30 minutes. He was knackered. When the train rocked up, he was over the moon.\n",
+    "brief_exit_code": 0,
+    "lookup_exit_codes": [
+      0,
+      0
+    ],
+    "lookup_queries": [
+      "very tired",
+      "delighted"
+    ],
+    "lint_exit_code": 0,
+    "lint_ok": true,
+    "lint_issues": [],
+    "verify_exit_code": 0,
+    "verify_ok": true,
+    "verify_problems": [
+      {
+        "severity": "info",
+        "kind": "untouched",
+        "phrase": "Rob waited at the station for 30 minutes.",
+        "why": "left exactly as it was",
+        "sentence": 0
+      }
+    ],
+    "submit_exit_code": 0,
+    "submission": {
+      "accepted": true,
+      "problems": []
+    },
+    "accepted_file_matches": true,
+    "writer": "Current Codex agent using CLI; no built-in model client or live provider request"
+  },
+  "mcp": {
+    "entrypoint": "python -m aussiefy.mcp_server",
+    "transport": "real stdio, Python SDK client",
+    "tools": [
+      "aussie_guide",
+      "aussie_lint",
+      "aussie_lookup",
+      "aussie_plan",
+      "aussie_translate",
+      "aussie_verify"
+    ],
+    "source": "Australian spelling is enabled.\n\nRob waited at least 30 seconds before calling `get_user()`.\n",
+    "resolved_profiles_equal": true,
+    "calls": [
+      {
+        "tool": "aussie_guide",
+        "arguments": {},
+        "is_error": false,
+        "level": 5,
+        "vulgarity": 1
+      },
+      {
+        "tool": "aussie_lookup",
+        "arguments": {
+          "query": "very tired",
+          "limit": 3
+        },
+        "is_error": false,
+        "level": 5,
+        "vulgarity": 1
+      },
+      {
+        "tool": "aussie_plan",
+        "arguments": {
+          "text": "Australian spelling is enabled.\n\nRob waited at least 30 seconds before calling `get_user()`.\n",
+          "markup": "markdown",
+          "seed": 0
+        },
+        "is_error": false,
+        "level": 5,
+        "vulgarity": 1
+      },
+      {
+        "tool": "aussie_translate",
+        "arguments": {
+          "text": "Australian spelling is enabled.\n\nRob waited at least 30 seconds before calling `get_user()`.\n",
+          "markdown": true,
+          "seed": 0
+        },
+        "is_error": false,
+        "level": 5,
+        "vulgarity": 1,
+        "text": "Australian spellin' is enabled.\n\nRob waited at least 30 seconds before calling `get_user()`.\n"
+      },
+      {
+        "tool": "aussie_lint",
+        "arguments": {
+          "text": "Australian spellin' is enabled.\n\nRob waited at least 30 seconds before calling `get_user()`.\n",
+          "original": "Australian spelling is enabled.\n\nRob waited at least 30 seconds before calling `get_user()`.\n",
+          "markup": "markdown"
+        },
+        "is_error": false,
+        "level": 5,
+        "vulgarity": 1,
+        "ok": true,
+        "issues": [],
+        "warnings": []
+      },
+      {
+        "tool": "aussie_verify",
+        "arguments": {
+          "text": "Australian spellin' is enabled.\n\nRob waited at least 30 seconds before calling `get_user()`.\n",
+          "original": "Australian spelling is enabled.\n\nRob waited at least 30 seconds before calling `get_user()`.\n",
+          "markup": "markdown"
+        },
+        "is_error": false,
+        "level": 5,
+        "vulgarity": 1,
+        "ok": true,
+        "problems": [
+          {
+            "severity": "info",
+            "kind": "untouched",
+            "phrase": "Rob waited at least 30 seconds before calling             .",
+            "why": "left exactly as it was",
+            "sentence": 1
+          }
+        ],
+        "counts": {
+          "critical": 0,
+          "major": 0,
+          "minor": 0
+        }
+      }
+    ]
+  },
+  "optional_api": {
+    "invocation": [
+      "aussiefy",
+      "yarn",
+      "--no-cache",
+      "--json",
+      "-l",
+      "5",
+      "--vulgarity",
+      "dad",
+      "-e",
+      "dinkum"
+    ],
+    "input": "Rob waited at the station for 30 minutes. He was very tired. He was delighted when the train arrived.\n",
+    "settings": {
+      "level": 5,
+      "vulgarity": "dad",
+      "embellishment": "dinkum",
+      "seed": 0,
+      "document_type": "general",
+      "document_config": null,
+      "markup": "text",
+      "cache": false
+    },
+    "model": "claude-opus-5-5",
+    "exit_code": 4,
+    "outcome": "fell_back",
+    "status": "kept draft: Unavailable: TypeError: \"Could not resolve authentication method. Expected one of api_key, auth_token, or credentials to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+    "engine_draft": "Rob waited at the station for 30 minutes. Anyway, he was knackered, eyelids heavy as wet blankets. He was over the moon when the train rocked up.\n",
+    "returned_text": "Rob waited at the station for 30 minutes. Anyway, he was knackered, eyelids heavy as wet blankets. He was over the moon when the train rocked up.\n",
+    "draft_preserved": true,
+    "tool_calls": {},
+    "live_provider_execution_verified": false
+  },
+  "unverified": [
+    "Live provider execution; no current process API credential",
+    "Claude Code or Codex MCP registration in their separate clients",
+    "Future aussiefy-web routing, Smart/Basic mapping, browser latency, deployed API"
+  ],
+  "final_recheck": {
+    "captured_utc": "2026-10-17T09:11:11+00:00",
+    "git_base": "328d8d118406b2d5b84968860b8393515886a7a4",
+    "runtime_matches_base": true,
+    "working_tree_note": "Uncommitted training maintenance; runtime implementation matches the committed prose slice.",
+    "implementation_sha256": {
+      "aussiefy/engine.py": "a54cbbfa1c5e4c4da8577e2f1b1ff07cd150128bbc9cfb224703a3516dc7bd5e",
+      "aussiefy/garnish.py": "4611929556583981426f8369876d730413917b30b73c4ed5f44e172c0d4e4877",
+      "aussiefy/mcp_server.py": "ae8b19ee1b257d67b5d9b14ea4d2db6b1f8cc441f1aa1f75b89ada611e9cace4",
+      "aussiefy/retelling.py": "0f66c4eb070499fd9e8522feb2b9390c8a398e0406fa38dbc067afad9930e806",
+      "aussiefy/cli.py": "b848a9202b0232ebde2de19768f9cba795d6049fb2fb9495d194984448cb71b8",
+      "aussiefy/model.py": "7fbc1812bd799cc4b754325e9abbe1cda34e233700816fb8a4dfb26f8951c4c3",
+      "aussiefy/loader.py": "dddaf7e161762286ad2e0116b62a5bf4432eb0713a80ee59b9070629d1e4b586",
+      "aussiefy/data/phonetic.yaml": "aa850aec28dc9461058337d92422ec4dc3f66678a3de9ea31a52b8ef9606cd59"
+    },
+    "model_version": "1.2.0",
+    "mcp": {
+      "tools": [
+        "aussie_guide",
+        "aussie_lint",
+        "aussie_lookup",
+        "aussie_plan",
+        "aussie_translate",
+        "aussie_verify"
+      ],
+      "resolved_profiles_equal": true,
+      "calls": [
+        {
+          "tool": "aussie_guide",
+          "arguments": {},
+          "is_error": false,
+          "level": 5,
+          "vulgarity": 1
+        },
+        {
+          "tool": "aussie_lookup",
+          "arguments": {
+            "query": "very tired",
+            "limit": 3
+          },
+          "is_error": false,
+          "level": 5,
+          "vulgarity": 1
+        },
+        {
+          "tool": "aussie_plan",
+          "arguments": {
+            "text": "Australian spelling is enabled.\n\nRob waited at least 30 seconds before calling `get_user()`.\n",
+            "markup": "markdown",
+            "seed": 0
+          },
+          "is_error": false,
+          "level": 5,
+          "vulgarity": 1
+        },
+        {
+          "tool": "aussie_translate",
+          "arguments": {
+            "text": "Australian spelling is enabled.\n\nRob waited at least 30 seconds before calling `get_user()`.\n",
+            "markdown": true,
+            "seed": 0
+          },
+          "is_error": false,
+          "level": 5,
+          "vulgarity": 1,
+          "text": "Australian spellin' is enabled.\n\nRob waited at least 30 seconds before calling `get_user()`.\n"
+        },
+        {
+          "tool": "aussie_lint",
+          "arguments": {
+            "text": "Australian spellin' is enabled.\n\nRob waited at least 30 seconds before calling `get_user()`.\n",
+            "original": "Australian spelling is enabled.\n\nRob waited at least 30 seconds before calling `get_user()`.\n",
+            "markup": "markdown"
+          },
+          "is_error": false,
+          "level": 5,
+          "vulgarity": 1,
+          "ok": true,
+          "issues": [],
+          "warnings": []
+        },
+        {
+          "tool": "aussie_verify",
+          "arguments": {
+            "text": "Australian spellin' is enabled.\n\nRob waited at least 30 seconds before calling `get_user()`.\n",
+            "original": "Australian spelling is enabled.\n\nRob waited at least 30 seconds before calling `get_user()`.\n",
+            "markup": "markdown"
+          },
+          "is_error": false,
+          "level": 5,
+          "vulgarity": 1,
+          "ok": true,
+          "problems": [
+            {
+              "severity": "info",
+              "kind": "untouched",
+              "phrase": "Rob waited at least 30 seconds before calling             .",
+              "why": "left exactly as it was",
+              "sentence": 1
+            }
+          ],
+          "counts": {
+            "critical": 0,
+            "major": 0,
+            "minor": 0
+          }
+        }
+      ]
+    },
+    "cli": {
+      "lint": true,
+      "verify": true,
+      "submit": {
+        "accepted": true,
+        "problems": []
+      },
+      "accepted_file_matches": true
+    },
+    "optional_api": {
+      "invocation": [
+        "aussiefy",
+        "yarn",
+        "--no-cache",
+        "--json",
+        "-l",
+        "5",
+        "--vulgarity",
+        "dad",
+        "-e",
+        "dinkum"
+      ],
+      "input": "Rob waited at the station for 30 minutes. He was very tired. He was delighted when the train arrived.\n",
+      "settings": {
+        "level": 5,
+        "vulgarity": "dad",
+        "embellishment": "dinkum",
+        "seed": 0,
+        "document_type": "general",
+        "document_config": null,
+        "markup": "text",
+        "cache": false
+      },
+      "exit_code": 4,
+      "status": "kept draft: Unavailable: TypeError: \"Could not resolve authentication method. Expected one of api_key, auth_token, or credentials to be set. Or for one of the `X-Api-Key` or `Authorization` headers to be explicitly omitted\"",
+      "engine_draft": "Rob waited at the station for 30 minutes. Anyway, he was knackered, eyelids heavy as wet blankets. He was over the moon when the train rocked up.\n",
+      "returned_text": "Rob waited at the station for 30 minutes. Anyway, he was knackered, eyelids heavy as wet blankets. He was over the moon when the train rocked up.\n",
+      "draft_preserved": true,
+      "live_provider_execution_verified": false
+    }
+  }
+}

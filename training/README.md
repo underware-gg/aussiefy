@@ -2,12 +2,14 @@
 
 `aussiefy/data/model` holds a small static embedding model. `lookup` and `gaps` use it to match by meaning
 where the dictionary shares no spelling with the query: "knackered beyond belief" finds *buggered*. This
-folder holds everything needed to rebuild it exactly, to release a new version, and what we learned building
+folder records the inputs and process for rebuilding it, releasing a new version, and what we learned building
 the first one.
 
 **Who needs torch?** Only whoever retrains the model. The package reads the model with the standard library
 (`aussiefy/static.py`), so users never install torch, numpy or anything else, and nothing is downloaded.
-Retraining needs the pinned toolchain below: about 1.3 GB on CPU. A release takes about 4 minutes on 4 CPUs.
+Retraining needs the pinned CPU toolchain below. The initial small-dictionary release took about four minutes
+on four CPUs; installation size and runtime depend on the dictionary, toolchain and machine. That historical
+timing is not an estimate for the current larger dictionary.
 
 | file | what it is |
 |---|---|
@@ -41,8 +43,9 @@ Retraining needs the pinned toolchain below: about 1.3 GB on CPU. A release take
 
 A release runs this twice. The **evaluation run** holds back 20% of entries by id, so nothing from a
 held-back entry is trained on, not even its words in the vocabulary. It scores every setup on those entries
-(Recall@3 three ways, plus **opposites offered**: how often lookup would offer an opposite concept, over 73
-held-back glosses and unused triggers) and on the reference set, then calibrates. The **release run** trains on everything, and is what ships.
+(Recall@3 three ways, plus **opposites offered**: how often lookup would offer an opposite concept, over
+held-back glosses and unused triggers, with the count recorded per run) and on the reference set, then calibrates.
+The **release run** trains on everything, and is what ships.
 
 ## Releasing a version
 
@@ -59,8 +62,10 @@ python3 -m venv .venv
 `release` refuses to export if a required reference check fails, and refuses to reuse a version number.
 `--dest DIR` makes it a dry run that exports somewhere else. After it succeeds:
 
-- **Read the report.** Compare `evaluation` with the previous version's. Recall@3 moves by about ±0.05 on
-  the held-back 20% (99 entries at 1.0.0), so treat smaller changes as noise.
+- **Read the report.** Compare models on the same current queries and dictionary as well as retaining their
+  historical reports. Entry holdout protects the candidate's evaluation fit; a shipped model may already
+  have seen some of those entries, so this is not necessarily a common unseen holdout. The roughly ±0.05
+  Recall@3 variation observed on 1.0.0's 99 held entries is historical, not a current error bar.
 - **Check the calibration.** If the cut-offs in `recipe.yaml` no longer sit where `calibration` says
   related and unrelated pairs separate, change them and release again under a new version.
 - **Record it.** Add a row to the version history below.
@@ -99,11 +104,21 @@ there, such as antonym negatives.
 
 - **What's pinned:** the base model's Hugging Face revision, the seed (split, data order, initialisation),
   every hyperparameter, and the toolchain.
-- **Two builds from scratch give bit-identical weights** on the same machine and toolchain. sklearn's PCA
-  inside the distillation uses the full SVD, which is deterministic. The 1.0.0 release reproduced, byte for
-  byte, the model the prototype script had built before the recipe existed.
+- **Pair order:** WordNet neighbour relations are sorted by stable synset name before truncation. Source
+  sense-frequency order, primary lemma order and recipe limits are preserved. Fresh-process checks on the
+  current dictionary match all ordered positive, wrong-sense and opposite pair digests at both splits.
+- **Weight reproducibility is observed, not guaranteed by provenance alone.** sklearn's PCA uses the full
+  SVD. The 1.0.0 release reproduced, byte for byte on its original environment, the prototype's model.
+  That historical result is not a guarantee for every later toolchain or machine.
 - **Across machines or torch builds,** floating-point results can differ in the last bits. Compare the
   reports, not the hashes.
+
+The frozen gap benchmark describes its original unknown-word intent. Later dictionary growth has covered
+`sozzled`, `starved`, `kitchen` and `umbrella`; the fixture's comment about a release collision check does not
+describe an implemented guard. Preserve its historical reports and treat current raw scores as fixed-query
+diagnostics, not unseen generalisation or actual current false-fill rates. A refreshed coverage/source-exclusion
+contract needs its own fixed cohort. The 90% precision bar governs enabling automatic gap filling; it is not
+an additional blanket gate for every bundled-model replacement.
 
 ## Lessons from 1.0.0
 
@@ -238,6 +253,16 @@ entries, 12,151 pairs). A release run with the shipped recipe (`reports/trials/1
 - **Before the next attempt:** find what pulls "a top bloke" to the rotten-person glosses (the "bloke"/person
   words shared by MAN, GOOD_PERSON and SCOUNDREL glosses), and why form→concept fell with more entries (the
   multi-concept chains below are the likely cause).
+
+## The maintenance trial and ordering correction, 17 October 2026
+
+The 1,254-entry dictionary supplies 1,189 training entries. The first current trial passed 30/33 required
+references, failing on a great war, a top bloke and honest, so 1.2.0 stays and 1.3.0 is not released. Its interrupted
+evaluation fit was reused only for an offline-cache metadata repair. A subsequent audit found hash-dependent
+WordNet neighbour selection; the historical trial is retained with that limitation, not treated as an
+exactly replayable experiment. Neighbour sorting now stabilises every ordered pair digest across fresh
+processes while preserving sense/lemma priority and recipe limits. A fresh fit is required after committing
+this trainer correction. See the [maintenance evidence](../research/maintenance-2026-10-17/model-maintenance.md).
 
 ## Ideas for the next version
 

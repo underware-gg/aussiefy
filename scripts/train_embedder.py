@@ -117,7 +117,9 @@ def wordnet_synonyms(word: str, pos: str, senses: int) -> list[str]:
         for syn in wn.synsets(word.replace(" ", "_"), pos=p)[:senses]:
             out += [l.name() for l in syn.lemmas()]
             if p in "as":
-                out += [l.name() for s in syn.similar_tos() for l in s.lemmas()]
+                # NLTK's relation pointers are sets. Stabilise neighbours before per_trigger truncation,
+                # retaining the source's sense-frequency and lemma order.
+                out += [l.name() for s in sorted(syn.similar_tos(), key=lambda item: item.name()) for l in s.lemmas()]
     seen, keep = {word.lower()}, []
     for w in out:
         w = w.replace("_", " ").lower()

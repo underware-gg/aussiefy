@@ -1,0 +1,3656 @@
+{
+  "status": "rejected before export: 30/33 required references",
+  "model_version_attempted": "1.3.0",
+  "recipe_changed": false,
+  "allow_failures": false,
+  "source_and_recovery": {
+    "resumed_utc": "2026-10-17T08:51:05+00:00",
+    "original_fit_git_base": "2028a88",
+    "resume_git": {
+      "commit": "2028a88222af17c4a4bbfb195a5a8a5f5667e840",
+      "dirty": true
+    },
+    "dictionary_sha256": "a1f92cebbd6841cc28e5406d279d6963ec76cbb12680b4a8fde928967d30842b",
+    "recipe_sha256": "099a736840dd3bc94588fab916ba4d2af226fdb0e8c72f0287e98fbb696ad4de",
+    "trainer_sha256": "19301e3448bdede0236459f6a340ab021429787b31a99b4d3ae9529edd0fddd4",
+    "saved_fit_sha256": "5d9c408c73a4bb361314924bdecc423e8f96e9c42f092d025dfbf15247aace28",
+    "cached_base_sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+    "cached_base_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "reason": "Pinned-base tree metadata lookup rejected by offline mode after eval fit saved. Reuse that fit and require cached-only snapshot resolution; no recipe or gates changed.",
+    "driver_sha256": "818a40bfe20fef66346074c7d06619ebf82714d55b377f1135bd47761000472c",
+    "saved_fit_artifacts_sha256": {
+      "1_Pooling/config.json": "4fef0a7e8c8ee36e74c0fad89bab60ade72324442d43f559ea219bb7c2580710",
+      "2_Normalize/config.json": "cdb09dfca347a56aa2d691744e38d5ad3c7cbc2834e7181272b9a15328b82524",
+      "README.md": "3076fc24d39a092f3ac88f6886e475904898ddfddf0e4a9781b45215395c26c1",
+      "config.json": "5744a89faa3417b9e7e38eb3e7557da8c1cccd1fd2a11ec7432ae6c412bace0f",
+      "config_sentence_transformers.json": "4811866c5122f511493acf39c406b69458930e94f32d44f97fd75e11b53e3d20",
+      "model.safetensors": "5d9c408c73a4bb361314924bdecc423e8f96e9c42f092d025dfbf15247aace28",
+      "modules.json": "3d02572a0455b832de67fb8e63a54981bc7e8b46e337c95e917bd8122a533bfd",
+      "sentence_bert_config.json": "3084164002c0bca01b0259c5327123803fce32e660a57feb93184ffead186fc8",
+      "tokenizer.json": "851ca67100d372ca3ae031a6abd168f53489eebfd7d89523f35c5c9b4d372c3c",
+      "tokenizer_config.json": "8646525d0adef50bbbfde19b956023be4d68e28ee9ef68960eba5e60b2b10232"
+    },
+    "artifact_capture_note": "Full checkpoint digests captured after resume started, before any checkpoint modification; all are checked again after completion. Resume initially checked the model digest and existence of modules/config files.",
+    "saved_fit_unchanged_after_completion": true
+  },
+  "toolchain": {
+    "python": "3.12.13",
+    "torch": "2.14.1",
+    "sentence-transformers": "6.1.0",
+    "transformers": "5.3.0",
+    "model2vec": "0.9.0",
+    "tokenizers": "0.22.2",
+    "safetensors": "0.8.0",
+    "datasets": "5.1.0",
+    "nltk": "3.10.3",
+    "accelerate": "1.15.0",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.5.3",
+    "huggingface_hub": "1.33.0"
+  },
+  "counts": {
+    "evaluation_fit": {
+      "entries": 951,
+      "positive_pairs": 10476,
+      "wrong_sense_pairs": 5954,
+      "opposite_pairs": 2978
+    },
+    "evaluation_static_fit": {
+      "entries": 951,
+      "positive_pairs": 10477,
+      "wrong_sense_pairs": 5954,
+      "opposite_pairs": 2978
+    },
+    "full_fit_and_static": {
+      "entries": 1189,
+      "positive_pairs": 12622,
+      "wrong_sense_pairs": 6675,
+      "opposite_pairs": 3821
+    }
+  },
+  "limitations": [
+    "This trial predates the WordNet neighbour ordering correction; process hash salts changed selected positive pairs, so it is not an exactly replayable fixed-pair experiment.",
+    "Original and resumed evaluation-stage pair counts differ; retained checkpoint bytes were unchanged, but the selected pair lists were not captured.",
+    "Current-entry split is shared with shipped1.2 evaluation, but some entries may have been seen by1.2; not a common unseen holdout.",
+    "Raw frozen gap metrics are historical fixed-query diagnostics; sozzled/starved/kitchen/umbrella now have dictionary coverage. They are not current unseen generalisation or real current false-fill rates.",
+    "Dictionary growth and cleaner changes both differ from prior trials; no causal improvement claim.",
+    "Candidate lookups use a Model2Vec Embedder adapter; no exported package reader or shipping claim."
+  ],
+  "evaluation_metrics": [
+    {
+      "setup": "n-gram",
+      "gloss->form": 0.244,
+      "gloss->concept's forms": 0.294,
+      "form->concept": 0.147,
+      "opposites offered": 0.032,
+      "gap right@1": 0.023,
+      "gap filled right": 0.023,
+      "gap filled wrong": 0.07,
+      "everyday filled": 0.115,
+      "opposite_queries": 125,
+      "reference": "24/33"
+    },
+    {
+      "setup": "stock MiniLM",
+      "gloss->form": 0.261,
+      "gloss->concept's forms": 0.324,
+      "form->concept": 0.185,
+      "opposites offered": 0.128,
+      "gap right@1": 0.302,
+      "gap filled right": 0.233,
+      "gap filled wrong": 0.256,
+      "everyday filled": 0.231,
+      "opposite_queries": 125,
+      "reference": "26/33"
+    },
+    {
+      "setup": "stock MiniLM, static",
+      "gloss->form": 0.206,
+      "gloss->concept's forms": 0.269,
+      "form->concept": 0.113,
+      "opposites offered": 0.208,
+      "gap right@1": 0.209,
+      "gap filled right": 0.116,
+      "gap filled wrong": 0.209,
+      "everyday filled": 0.192,
+      "opposite_queries": 125,
+      "reference": "19/33"
+    },
+    {
+      "setup": "Aussie MiniLM",
+      "gloss->form": 0.34,
+      "gloss->concept's forms": 0.592,
+      "form->concept": 0.403,
+      "opposites offered": 0.008,
+      "gap right@1": 0.512,
+      "gap filled right": 0.209,
+      "gap filled wrong": 0.07,
+      "everyday filled": 0.154,
+      "opposite_queries": 125,
+      "reference": "28/33"
+    },
+    {
+      "setup": "Aussie static, distilled only",
+      "gloss->form": 0.265,
+      "gloss->concept's forms": 0.374,
+      "form->concept": 0.21,
+      "opposites offered": 0.184,
+      "gap right@1": 0.349,
+      "gap filled right": 0.233,
+      "gap filled wrong": 0.163,
+      "everyday filled": 0.115,
+      "opposite_queries": 125,
+      "reference": "23/33"
+    },
+    {
+      "setup": "Aussie static, tuned",
+      "gloss->form": 0.294,
+      "gloss->concept's forms": 0.584,
+      "form->concept": 0.332,
+      "opposites offered": 0.096,
+      "gap right@1": 0.395,
+      "gap filled right": 0.186,
+      "gap filled wrong": 0.116,
+      "everyday filled": 0.115,
+      "opposite_queries": 125,
+      "reference": "29/33"
+    }
+  ],
+  "evaluation_candidate_reference": {
+    "passed": 29,
+    "required": 33,
+    "known_fixed": [
+      "put up with",
+      "dying",
+      "very large",
+      "harmless"
+    ],
+    "checks": [
+      {
+        "kind": "must_not",
+        "query": "girl",
+        "pass": false,
+        "known": false,
+        "top_concepts": [
+          "WOMAN",
+          "GIRLFRIEND",
+          "LITTLE_BOY"
+        ],
+        "top_forms": [
+          "sheila",
+          "a cliner",
+          "little fella"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "a great war",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "WAR",
+          "MAN_O_WAR",
+          "FIGHT"
+        ],
+        "top_forms": [
+          "stoush",
+          "a bluebottle",
+          "a blue"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "rolling in cash",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "RICH",
+          "BEDROLL",
+          "BOMB_DIVE"
+        ],
+        "top_forms": [
+          "cashed up",
+          "loaded",
+          "on the pig's back"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "completely skint",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "BROKE",
+          "TIRED",
+          "HEARTLESS"
+        ],
+        "top_forms": [
+          "stony broke",
+          "{subj} {have}n't got a brass razoo",
+          "on the bones of {poss} arse"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "a boiling hot day",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "HOT_WEATHER",
+          "FINE_DAY",
+          "COOL_CHANGE"
+        ],
+        "top_forms": [
+          "a scorcher",
+          "a stinker",
+          "a pearler of a day"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "a freezing cold morning",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "COLD_WEATHER",
+          "FREEZING",
+          "FREEZING_WEATHER"
+        ],
+        "top_forms": [
+          "{subj} {be} brass monkeys",
+          "cold enough to freeze the balls off a brass monkey",
+          "colder than a witch's tit"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "over the moon about it",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "HAPPY",
+          "KEEN_ON",
+          "FINISH_LINE"
+        ],
+        "top_forms": [
+          "chuffed to bits",
+          "over the moon",
+          "stoked"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "feeling really down",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "SAD",
+          "NAUSEOUS",
+          "VERY"
+        ],
+        "top_forms": [
+          "as miserable as a bandicoot",
+          "{subj} {have} a face like a wet week",
+          "crook in the guts"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "absolutely starving",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "HUNGRY",
+          "AGREE",
+          "DISAGREE"
+        ],
+        "top_forms": [
+          "hungry enough to eat the arse out of a low-flyin' duck",
+          "starvin'",
+          "too bloody right"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "stuffed after dinner",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "TIRED",
+          "BROKEN",
+          "FULL"
+        ],
+        "top_forms": [
+          "stuffed",
+          "zonked",
+          "fucked"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "working my guts out",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "TIRED",
+          "BROKEN",
+          "FULL"
+        ],
+        "top_forms": [
+          "buggered",
+          "rooted",
+          "bung"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "dead easy",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "VERY",
+          "DEAD_EASY",
+          "DONE_FOR"
+        ],
+        "top_forms": [
+          "dead",
+          "easy as",
+          "fuckin'"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "hello there",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "GREETING",
+          "SAY_HELLO",
+          "STUPID"
+        ],
+        "top_forms": [
+          "g'day",
+          "say g'day",
+          "a stubby short of a six-pack"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "a top bloke",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "MAN",
+          "FELLOW_MAN",
+          "GOOD_PERSON"
+        ],
+        "top_forms": [
+          "bloke",
+          "cove",
+          "a good bastard"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "a tiny little thing",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "CHILD",
+          "LITTLE_BOY",
+          "NUISANCE"
+        ],
+        "top_forms": [
+          "littlie",
+          "ankle biter",
+          "nipper"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "honest",
+        "pass": false,
+        "known": false,
+        "top_concepts": [
+          "GENUINE",
+          "SINCERELY",
+          "DODGY"
+        ],
+        "top_forms": [
+          "dinkum",
+          "fair dinkum",
+          "fair dinkum"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "a prank",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "RASCAL",
+          "ODD_PERSON",
+          "SCOUNDREL"
+        ],
+        "top_forms": [
+          "a hard case",
+          "a cheeky bastard",
+          "a cheeky little shit"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "skull",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "HEAD",
+          "IDIOT",
+          "SCOUNDREL"
+        ],
+        "top_forms": [
+          "noggin",
+          "scone",
+          "gazob"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "knackered beyond belief",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "TIRED",
+          "BROKEN",
+          "DRUNK"
+        ],
+        "top_forms": [
+          "fucked",
+          "zonked",
+          "stuffed"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "feeling a bit under the weather",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "AWFUL",
+          "SICK",
+          "DODGY"
+        ],
+        "top_forms": [
+          "crook as buggery",
+          "as crook as a dog",
+          "crook"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "late in the afternoon",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "AFTERNOON",
+          "EARLY",
+          "WEEK_FROM_SUNDAY"
+        ],
+        "top_forms": [
+          "arvo",
+          "at sparrow's fart",
+          "Sunday week"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "the bottle shop",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "LIQUOR_STORE",
+          "PHARMACY",
+          "SCHOOL_CANTEEN"
+        ],
+        "top_forms": [
+          "bottle-o",
+          "a chemist",
+          "the tuckshop"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "it's pouring down outside",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "RAINING_HARD",
+          "LIGHT_RAIN",
+          "LET_IT_RAIN"
+        ],
+        "top_forms": [
+          "{subj} {be} pissing down",
+          "{subj} {be} bucketing down",
+          "{subj} {be} spitting"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "a quick snooze",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "NAP",
+          "LOOK",
+          "CHAT"
+        ],
+        "top_forms": [
+          "a nana nap",
+          "a kip",
+          "a Captain Cook"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "completely skint",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "BROKE",
+          "TIRED",
+          "HEARTLESS"
+        ],
+        "top_forms": [
+          "stony broke",
+          "{subj} {have}n't got a brass razoo",
+          "on the bones of {poss} arse"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "a cold one at the pub",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "PUB_MEAL",
+          "PUB",
+          "BEER"
+        ],
+        "top_forms": [
+          "a counter lunch",
+          "the pub",
+          "coldie"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "chucking a wobbly",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "THROW_TANTRUM",
+          "LOSE_TEMPER",
+          "TANTRUM"
+        ],
+        "top_forms": [
+          "chuck a tanty",
+          "chuck a micky",
+          "chuck a mental"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "a shady deal",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "AWFUL",
+          "SICK",
+          "DODGY"
+        ],
+        "top_forms": [
+          "dodgy",
+          "crook",
+          "shonky"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "quit your whining",
+        "pass": false,
+        "known": false,
+        "top_concepts": [
+          "QUIT",
+          "RETIRE",
+          "LOSE_TEMPER"
+        ],
+        "top_forms": [
+          "pull the pin",
+          "chuck it in",
+          "do {poss} block"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "a good mate of mine",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "FRIEND",
+          "REPLY_TO_THANKS",
+          "QUITE_A_FEW"
+        ],
+        "top_forms": [
+          "cobber",
+          "mate",
+          "all good"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "ages ago",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "LONG_AGO",
+          "LONG_TIME",
+          "PARENTS"
+        ],
+        "top_forms": [
+          "yonks ago",
+          "donkey's years ago",
+          "yonks"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "a complete idiot",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "IDIOT",
+          "SCOUNDREL",
+          "LUNATIC"
+        ],
+        "top_forms": [
+          "a fuckwit",
+          "a dumb cunt",
+          "a dickhead"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "having a chinwag",
+        "pass": false,
+        "known": false,
+        "top_concepts": [
+          "SCOUNDREL",
+          "RASCAL",
+          "CLEVER_PERSON"
+        ],
+        "top_forms": [
+          "larrikin",
+          "ratbag",
+          "a hard case"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "very tired",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "DRUNK",
+          "TIRED",
+          "BROKEN"
+        ],
+        "top_forms": [
+          "stonkered",
+          "maggoted",
+          "shit-faced"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "extremely tired",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "DRUNK",
+          "TIRED",
+          "BROKEN"
+        ],
+        "top_forms": [
+          "full as a state school",
+          "legless",
+          "fucked"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "a heap of money",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "FAIR_AMOUNT",
+          "MONEY",
+          "BROKE"
+        ],
+        "top_forms": [
+          "a fair whack",
+          "the folding stuff",
+          "dosh"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "wide awake",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "FALL_ASLEEP",
+          "ASTONISHED",
+          "TIRED"
+        ],
+        "top_forms": [
+          "go out like a light",
+          "gobsmacked",
+          "out on {poss} feet"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "run off my feet",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "RUN",
+          "FLEE",
+          "FALL_ASLEEP"
+        ],
+        "top_forms": [
+          "leg it",
+          "belt",
+          "do a runner"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "put up with",
+        "pass": true,
+        "known": true,
+        "top_concepts": [
+          "COP_IT",
+          "TOLERATE",
+          "RESOLVE"
+        ],
+        "top_forms": [
+          "cop {np}",
+          "swear blind",
+          "chuck it in"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "sleep",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "NAP",
+          "FALL_ASLEEP",
+          "HAVE_SEX"
+        ],
+        "top_forms": [
+          "a kip",
+          "a nana nap",
+          "flake out"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "dying",
+        "pass": true,
+        "known": true,
+        "top_concepts": [
+          "KEEN_ON",
+          "VERY_EAGER",
+          "EAGER"
+        ],
+        "top_forms": [
+          "keen on",
+          "keen as mustard",
+          "keen"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "very cold",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "FREEZING",
+          "COLD_WEATHER",
+          "FREEZING_WEATHER"
+        ],
+        "top_forms": [
+          "colder than a witch's tit",
+          "cold enough to freeze the balls off a brass monkey",
+          "{subj} {be} brass monkeys"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "established",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "CONTENT",
+          "COMMITTED",
+          "ALL_DONE"
+        ],
+        "top_forms": [
+          "like a koala up a gum tree",
+          "a happy little Vegemite",
+          "snug as a bug in a rug"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "stepmother",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "GRANDMOTHER",
+          "MOTHER",
+          "PARENTS"
+        ],
+        "top_forms": [
+          "nan",
+          "mum",
+          "the oldies"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "very large",
+        "pass": true,
+        "known": true,
+        "top_concepts": [
+          "STUPID",
+          "HIGH",
+          "CRAZY"
+        ],
+        "top_forms": [
+          "thick as two short planks",
+          "thick as shit",
+          "high as a kite"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "wake up",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "FALL_ASLEEP",
+          "QUIT",
+          "FOUND"
+        ],
+        "top_forms": [
+          "flake out",
+          "chuck it in",
+          "kick off"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "worked very hard",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "VERY",
+          "BUSY",
+          "HAPPY"
+        ],
+        "top_forms": [
+          "dead",
+          "flat chat",
+          "happy as Larry"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "harmless",
+        "pass": true,
+        "known": true,
+        "top_concepts": [
+          "DANGEROUS",
+          "CRAZY",
+          "SCOUNDREL"
+        ],
+        "top_forms": [
+          "dicey",
+          "hairy",
+          "{subj} {have} a kangaroo loose in {poss} top paddock"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "probably",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "DISAGREE",
+          "EMPHATIC_REFUSAL",
+          "NO_CHANCE"
+        ],
+        "top_forms": [
+          "not on your nelly",
+          "no bloody way",
+          "no fuckin' way"
+        ]
+      }
+    ]
+  },
+  "baseline_protocol": {
+    "protocol": "Canonical evaluate() with base_encoder factory set to Bundled; empty work skips trained setups. Stock-MiniLM row renamed to its actual encoder; no stock-MiniLM result claimed.",
+    "dictionary_sha256": "a1f92cebbd6841cc28e5406d279d6963ec76cbb12680b4a8fde928967d30842b",
+    "trainer_sha256": "19301e3448bdede0236459f6a340ab021429787b31a99b4d3ae9529edd0fddd4",
+    "recipe_sha256": "099a736840dd3bc94588fab916ba4d2af226fdb0e8c72f0287e98fbb696ad4de",
+    "model_meta_sha256": "2dfbc3c8b6909dcfa821fd846116904f0f79b57b07c75b104e8ffa91e1991a5a",
+    "holdout": 0.2,
+    "seed": 13,
+    "limit": "Current-entry split is shared with the candidate, but entries may have been seen during historical1.2.0 training; this is not a common unseen holdout."
+  },
+  "baseline_metrics": {
+    "gloss->form": 0.706,
+    "gloss->concept's forms": 0.777,
+    "form->concept": 0.639,
+    "opposites offered": 0.104,
+    "gap right@1": 0.279,
+    "gap filled right": 0.186,
+    "gap filled wrong": 0.163,
+    "everyday filled": 0.154,
+    "opposite_queries": 125,
+    "reference": "33/33"
+  },
+  "final_candidate_reference": {
+    "passed": 30,
+    "required": 33,
+    "known_fixed": [
+      "wide awake",
+      "run off my feet",
+      "put up with",
+      "harmless"
+    ],
+    "checks": [
+      {
+        "kind": "must_not",
+        "query": "girl",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "LITTLE_BOY",
+          "WOMAN",
+          "WIFE"
+        ],
+        "top_forms": [
+          "little fella",
+          "sheila",
+          "the missus"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "a great war",
+        "pass": false,
+        "known": false,
+        "top_concepts": [
+          "GREAT_EXCLAIM",
+          "EXCELLENT",
+          "GOOD"
+        ],
+        "top_forms": [
+          "you little bottler",
+          "ripper",
+          "beaut"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "rolling in cash",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "RICH",
+          "MONEY",
+          "LOT_OF_MONEY"
+        ],
+        "top_forms": [
+          "cashed up",
+          "loaded",
+          "on the pig's back"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "completely skint",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "BROKE",
+          "TIRED",
+          "FLUSTERED"
+        ],
+        "top_forms": [
+          "stony broke",
+          "{subj} {have}n't got a brass razoo",
+          "on the bones of {poss} arse"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "a boiling hot day",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "HOT_WEATHER",
+          "FINE_DAY",
+          "COOL_CHANGE"
+        ],
+        "top_forms": [
+          "a stinker",
+          "a scorcher",
+          "a cracker of a day"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "a freezing cold morning",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "BEER",
+          "COLD_WEATHER",
+          "FREEZING"
+        ],
+        "top_forms": [
+          "coldie",
+          "{subj} {be} brass monkeys",
+          "cold enough to freeze the balls off a brass monkey"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "over the moon about it",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "HAPPY",
+          "KEEN_ON",
+          "CARE_ABOUT"
+        ],
+        "top_forms": [
+          "happy as Larry",
+          "chuffed to bits",
+          "stoked"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "feeling really down",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "SAD",
+          "NAUSEOUS",
+          "SURPRISE"
+        ],
+        "top_forms": [
+          "as miserable as a bandicoot",
+          "down in the dumps",
+          "flat as a tack"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "absolutely starving",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "HUNGRY",
+          "AGREE",
+          "IN_VAIN"
+        ],
+        "top_forms": [
+          "hungry enough to eat the arse out of a low-flyin' duck",
+          "starvin'",
+          "too right"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "stuffed after dinner",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "TIRED",
+          "BROKEN",
+          "FULL"
+        ],
+        "top_forms": [
+          "stuffed",
+          "zonked",
+          "buggered"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "working my guts out",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "NUT_OUT",
+          "WORK_HARD",
+          "TIRED"
+        ],
+        "top_forms": [
+          "nut out",
+          "work {poss} arse off",
+          "work like billy-o"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "dead easy",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "VERY",
+          "DEAD_EASY",
+          "DONE_FOR"
+        ],
+        "top_forms": [
+          "dead",
+          "easy as",
+          "cooked"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "hello there",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "GREETING",
+          "SAY_HELLO",
+          "ENDEARMENT"
+        ],
+        "top_forms": [
+          "g'day",
+          "say g'day",
+          "darl"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "a top bloke",
+        "pass": false,
+        "known": false,
+        "top_concepts": [
+          "MAN",
+          "FELLOW_MAN",
+          "GOOD_PERSON"
+        ],
+        "top_forms": [
+          "bloke",
+          "cove",
+          "a top bloke"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "a tiny little thing",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "CHILD",
+          "NOTHING",
+          "LITTLE_BOY"
+        ],
+        "top_forms": [
+          "littlie",
+          "little tacker",
+          "a little bugger"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "honest",
+        "pass": false,
+        "known": false,
+        "top_concepts": [
+          "GENUINE",
+          "SINCERELY",
+          "THE_REAL_STORY"
+        ],
+        "top_forms": [
+          "dinkum",
+          "dinky-di",
+          "fair dinkum"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "a prank",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "RASCAL",
+          "SCOUNDREL",
+          "CLEVER_PERSON"
+        ],
+        "top_forms": [
+          "a cheeky bastard",
+          "a cheeky little shit",
+          "a hard case"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "skull",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "HEAD",
+          "IDIOT",
+          "SCOUNDREL"
+        ],
+        "top_forms": [
+          "noggin",
+          "scone",
+          "a dickhead"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "knackered beyond belief",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "DRUNK",
+          "TIRED",
+          "BROKEN"
+        ],
+        "top_forms": [
+          "zonked",
+          "stuffed",
+          "buggered"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "feeling a bit under the weather",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "AWFUL",
+          "SICK",
+          "DODGY"
+        ],
+        "top_forms": [
+          "crook",
+          "as crook as a dog",
+          "crook as buggery"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "late in the afternoon",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "AFTERNOON",
+          "EARLY",
+          "RECESS"
+        ],
+        "top_forms": [
+          "arvo",
+          "at sparrow's fart",
+          "little lunch"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "the bottle shop",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "LIQUOR_STORE",
+          "PHARMACY",
+          "SCHOOL_CANTEEN"
+        ],
+        "top_forms": [
+          "bottle-o",
+          "a chemist",
+          "the tuckshop"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "it's pouring down outside",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "RAINING_HARD",
+          "LIGHT_RAIN",
+          "SIT_DOWN"
+        ],
+        "top_forms": [
+          "{subj} {be} pissing down",
+          "{subj} {be} bucketing down",
+          "{subj} {be} raining like a cow pissing on a flat rock"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "a quick snooze",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "NAP",
+          "LOOK",
+          "FAST"
+        ],
+        "top_forms": [
+          "a nana nap",
+          "a kip",
+          "a geek"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "completely skint",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "BROKE",
+          "TIRED",
+          "FLUSTERED"
+        ],
+        "top_forms": [
+          "stony broke",
+          "{subj} {have}n't got a brass razoo",
+          "on the bones of {poss} arse"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "a cold one at the pub",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "PUB_MEAL",
+          "BEER",
+          "PUB"
+        ],
+        "top_forms": [
+          "a counter lunch",
+          "coldie",
+          "stubby"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "chucking a wobbly",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "THROW_TANTRUM",
+          "LOSE_TEMPER",
+          "TANTRUM"
+        ],
+        "top_forms": [
+          "chuck a tanty",
+          "spit the dummy",
+          "do {poss} nana"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "a shady deal",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "AWFUL",
+          "SICK",
+          "DODGY"
+        ],
+        "top_forms": [
+          "dodgy",
+          "slanter",
+          "crook"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "quit your whining",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "STOP_COMPLAINING",
+          "LOSE_TEMPER",
+          "QUIT"
+        ],
+        "top_forms": [
+          "stop your whingeing",
+          "do {poss} block",
+          "pull the pin"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "a good mate of mine",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "REPLY_TO_THANKS",
+          "FRIEND",
+          "GOOD"
+        ],
+        "top_forms": [
+          "all good",
+          "mate",
+          "beaut"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "ages ago",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "LONG_AGO",
+          "LONG_TIME",
+          "PARENTS"
+        ],
+        "top_forms": [
+          "yonks ago",
+          "donkey's years ago",
+          "yonks"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "a complete idiot",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "IDIOT",
+          "STUPID",
+          "SCOUNDREL"
+        ],
+        "top_forms": [
+          "a fuckwit",
+          "a dumb cunt",
+          "a dickhead"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "having a chinwag",
+        "pass": true,
+        "known": false,
+        "top_concepts": [
+          "BUSY",
+          "TEASE",
+          "CHAT"
+        ],
+        "top_forms": [
+          "flat chat",
+          "flat out",
+          "flat out like a lizard drinking"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "very tired",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "DRUNK",
+          "TIRED",
+          "BROKEN"
+        ],
+        "top_forms": [
+          "stonkered",
+          "out on {poss} feet",
+          "zonked"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "extremely tired",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "TIRED",
+          "DRUNK",
+          "BROKEN"
+        ],
+        "top_forms": [
+          "out on {poss} feet",
+          "stonkered",
+          "zonked"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "a heap of money",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "LOT_OF_MONEY",
+          "FAIR_AMOUNT",
+          "BROKE"
+        ],
+        "top_forms": [
+          "a motza",
+          "a packet",
+          "a fair whack"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "wide awake",
+        "pass": true,
+        "known": true,
+        "top_concepts": [
+          "TIRED",
+          "FALL_ASLEEP",
+          "DRUNK"
+        ],
+        "top_forms": [
+          "out on {poss} feet",
+          "go out like a light",
+          "zonked"
+        ]
+      },
+      {
+        "kind": "should",
+        "query": "run off my feet",
+        "pass": true,
+        "known": true,
+        "top_concepts": [
+          "RUN",
+          "FLEE",
+          "BUSY"
+        ],
+        "top_forms": [
+          "leg it",
+          "belt",
+          "do a runner"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "put up with",
+        "pass": true,
+        "known": true,
+        "top_concepts": [
+          "COP_IT",
+          "TOLERATE",
+          "RESOLVE"
+        ],
+        "top_forms": [
+          "cop {np}",
+          "swear blind",
+          "go crook at {obj}"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "sleep",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "NAP",
+          "FALL_ASLEEP",
+          "HAVE_SEX"
+        ],
+        "top_forms": [
+          "a kip",
+          "flake out",
+          "a nana nap"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "dying",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "NERVOUS",
+          "EAGER",
+          "VERY_EAGER"
+        ],
+        "top_forms": [
+          "toey",
+          "keen",
+          "keen as mustard"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "very cold",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "HEARTLESS",
+          "FREEZING",
+          "BEER"
+        ],
+        "top_forms": [
+          "as cold as a mother-in-law's kiss",
+          "colder than a witch's tit",
+          "cold enough to freeze the balls off a brass monkey"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "established",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "CONTENT",
+          "ALL_DONE",
+          "AFFIRM"
+        ],
+        "top_forms": [
+          "snug as a bug in a rug",
+          "a happy little Vegemite",
+          "like a koala up a gum tree"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "stepmother",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "GRANDMOTHER",
+          "PARENTS",
+          "ELDERLY"
+        ],
+        "top_forms": [
+          "nan",
+          "the oldies",
+          "the olds"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "very large",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "HIGH",
+          "ANGRY",
+          "STUPID"
+        ],
+        "top_forms": [
+          "high as a kite",
+          "filthy",
+          "thick as two short planks"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "wake up",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "HURRY",
+          "FALL_ASLEEP",
+          "FOUND"
+        ],
+        "top_forms": [
+          "get a wriggle on",
+          "move yer arse",
+          "flake out"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "worked very hard",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "WORK_HARD",
+          "BUSY",
+          "HAPPY"
+        ],
+        "top_forms": [
+          "do the hard yards",
+          "work like billy-o",
+          "work {poss} arse off"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "harmless",
+        "pass": true,
+        "known": true,
+        "top_concepts": [
+          "DANGEROUS",
+          "AWFUL",
+          "SICK"
+        ],
+        "top_forms": [
+          "dicey",
+          "hairy",
+          "a shocker"
+        ]
+      },
+      {
+        "kind": "must_not",
+        "query": "probably",
+        "pass": false,
+        "known": true,
+        "top_concepts": [
+          "DISAGREE",
+          "EMPHATIC_REFUSAL",
+          "AGREE"
+        ],
+        "top_forms": [
+          "no fuckin' way",
+          "no bloody way",
+          "not on your nelly"
+        ]
+      }
+    ]
+  },
+  "lookup_policy": {
+    "level": 5,
+    "vulgarity": "uncle-bob",
+    "limit": 8,
+    "embellishment": "dinkum",
+    "document_type": "general"
+  },
+  "query_selection": {
+    "selection": "Historical documented lookup defects and required/known reference cases; selected before inspecting the new candidate's scores.",
+    "queries": [
+      "a shady deal",
+      "sleepy",
+      "under the weather",
+      "a good mate of mine",
+      "fraudulent",
+      "honest",
+      "put up with",
+      "sleep",
+      "dying",
+      "very cold",
+      "girl",
+      "a top bloke",
+      "very tired",
+      "run off my feet",
+      "wake up",
+      "harmless",
+      "probably",
+      "worked very hard"
+    ]
+  },
+  "lookups": [
+    {
+      "model": "shipped1.2.0",
+      "encoder": "bundled:aussie-static-1.2.0",
+      "queries": [
+        {
+          "query": "a shady deal",
+          "results": [
+            {
+              "form": "crook",
+              "concepts": [
+                "SICK",
+                "AWFUL",
+                "DODGY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.65,
+              "vulgarity": 0
+            },
+            {
+              "form": "dodgy",
+              "concepts": [
+                "DODGY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.65,
+              "vulgarity": 0
+            },
+            {
+              "form": "shonky",
+              "concepts": [
+                "DODGY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.65,
+              "vulgarity": 0
+            },
+            {
+              "form": "slanter",
+              "concepts": [
+                "DODGY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.65,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "sleepy",
+          "results": [
+            {
+              "form": "stonkered",
+              "concepts": [
+                "DRUNK",
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.68,
+              "vulgarity": 0
+            },
+            {
+              "form": "fucked",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67,
+              "vulgarity": 2
+            },
+            {
+              "form": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67,
+              "vulgarity": 0
+            },
+            {
+              "form": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67,
+              "vulgarity": 1
+            },
+            {
+              "form": "out on {poss} feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67,
+              "vulgarity": 0
+            },
+            {
+              "form": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67,
+              "vulgarity": 0
+            },
+            {
+              "form": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67,
+              "vulgarity": 0
+            },
+            {
+              "form": "rooted",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67,
+              "vulgarity": 2
+            }
+          ]
+        },
+        {
+          "query": "under the weather",
+          "results": [
+            {
+              "form": "crook",
+              "concepts": [
+                "SICK",
+                "AWFUL",
+                "DODGY"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "as crook as a dog",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "crook as buggery",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 1
+            },
+            {
+              "form": "crook as Rookwood",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "{subj} {be} blowing a dog off its chain",
+              "concepts": [
+                "WINDY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.73,
+              "vulgarity": 0
+            },
+            {
+              "form": "brass monkey weather",
+              "concepts": [
+                "FREEZING_WEATHER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "a good mate of mine",
+          "results": [
+            {
+              "form": "a legend",
+              "concepts": [
+                "GOOD_PERSON"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.68,
+              "vulgarity": 0
+            },
+            {
+              "form": "mate",
+              "concepts": [
+                "FRIEND"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66,
+              "vulgarity": 0
+            },
+            {
+              "form": "cobber",
+              "concepts": [
+                "FRIEND"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66,
+              "vulgarity": 0
+            },
+            {
+              "form": "a dead-set legend",
+              "concepts": [
+                "CHAMPION_PERSON"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66,
+              "vulgarity": 0
+            },
+            {
+              "form": "beaut",
+              "concepts": [
+                "GOOD",
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.64,
+              "vulgarity": 0
+            },
+            {
+              "form": "true blue",
+              "concepts": [
+                "LOYAL"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.64,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "fraudulent",
+          "results": []
+        },
+        {
+          "query": "honest",
+          "results": [
+            {
+              "form": "fair dinkum",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "fair dinkum",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "dinkum",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "dinky-di",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "ridgy-didge",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "dodgy",
+              "concepts": [
+                "DODGY"
+              ],
+              "match": "meaning",
+              "score": 0.75,
+              "vulgarity": 0
+            },
+            {
+              "form": "the good oil",
+              "concepts": [
+                "THE_REAL_STORY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.73,
+              "vulgarity": 0
+            },
+            {
+              "form": "the dinkum oil",
+              "concepts": [
+                "THE_REAL_STORY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.73,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "put up with",
+          "results": [
+            {
+              "form": "cop {np}",
+              "concepts": [
+                "COP_IT",
+                "TOLERATE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "bung {obj} in",
+              "concepts": [
+                "PUT_IN_CASUAL"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67,
+              "vulgarity": 0
+            },
+            {
+              "form": "chuck it in",
+              "concepts": [
+                "QUIT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66,
+              "vulgarity": 0
+            },
+            {
+              "form": "dead set on",
+              "concepts": [
+                "COMMITTED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.64,
+              "vulgarity": 0
+            },
+            {
+              "form": "knock together",
+              "concepts": [
+                "CONSTRUCT",
+                "FOUND"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "sleep",
+          "results": [
+            {
+              "form": "a kip",
+              "concepts": [
+                "NAP"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.99,
+              "vulgarity": 0
+            },
+            {
+              "form": "a nana nap",
+              "concepts": [
+                "NAP"
+              ],
+              "match": "meaning",
+              "score": 0.9,
+              "vulgarity": 0
+            },
+            {
+              "form": "flake out",
+              "concepts": [
+                "FALL_ASLEEP"
+              ],
+              "match": "meaning",
+              "score": 0.9,
+              "vulgarity": 0
+            },
+            {
+              "form": "go out like a light",
+              "concepts": [
+                "FALL_ASLEEP"
+              ],
+              "match": "meaning",
+              "score": 0.9,
+              "vulgarity": 0
+            },
+            {
+              "form": "have a lie-down",
+              "concepts": [
+                "LIE_DOWN_REST"
+              ],
+              "match": "meaning",
+              "score": 0.75,
+              "vulgarity": 0
+            },
+            {
+              "form": "have a root",
+              "concepts": [
+                "HAVE_SEX"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.73,
+              "vulgarity": 2
+            },
+            {
+              "form": "have a yarn",
+              "concepts": [
+                "CHAT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.62,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "dying",
+          "results": [
+            {
+              "form": "cark it",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "go to meet {poss} maker",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "pass in {poss} cheque",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "toss in the alley",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "toey",
+              "concepts": [
+                "NERVOUS"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "very cold",
+          "results": [
+            {
+              "form": "cold enough to freeze the balls off a brass monkey",
+              "concepts": [
+                "FREEZING"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.9,
+              "vulgarity": 2
+            },
+            {
+              "form": "colder than a witch's tit",
+              "concepts": [
+                "FREEZING"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.9,
+              "vulgarity": 1
+            },
+            {
+              "form": "{subj} {be} brass monkeys",
+              "concepts": [
+                "COLD_WEATHER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.85,
+              "vulgarity": 0
+            },
+            {
+              "form": "brass monkey weather",
+              "concepts": [
+                "FREEZING_WEATHER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.84,
+              "vulgarity": 0
+            },
+            {
+              "form": "coldie",
+              "concepts": [
+                "BEER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.82,
+              "vulgarity": 0
+            },
+            {
+              "form": "stubby",
+              "concepts": [
+                "BEER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.76,
+              "vulgarity": 0
+            },
+            {
+              "form": "tinnie",
+              "concepts": [
+                "BEER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.76,
+              "vulgarity": 0
+            },
+            {
+              "form": "as cold as a mother-in-law's kiss",
+              "concepts": [
+                "HEARTLESS"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.74,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "girl",
+          "results": []
+        },
+        {
+          "query": "a top bloke",
+          "results": [
+            {
+              "form": "a top bloke",
+              "concepts": [
+                "GOOD_PERSON"
+              ],
+              "match": "slang term",
+              "score": 2.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "bloke",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.87,
+              "vulgarity": 0
+            },
+            {
+              "form": "cove",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.87,
+              "vulgarity": 0
+            },
+            {
+              "form": "a good bastard",
+              "concepts": [
+                "GOOD_PERSON"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.73,
+              "vulgarity": 1
+            },
+            {
+              "form": "a legend",
+              "concepts": [
+                "GOOD_PERSON"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.73,
+              "vulgarity": 0
+            },
+            {
+              "form": "a dead-set legend",
+              "concepts": [
+                "CHAMPION_PERSON"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69,
+              "vulgarity": 0
+            },
+            {
+              "form": "a funny bugger",
+              "concepts": [
+                "FUNNY_PERSON"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66,
+              "vulgarity": 1
+            },
+            {
+              "form": "a bikie",
+              "concepts": [
+                "BIKIE"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "very tired",
+          "results": [
+            {
+              "form": "fucked",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.84,
+              "vulgarity": 2
+            },
+            {
+              "form": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.84,
+              "vulgarity": 0
+            },
+            {
+              "form": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.84,
+              "vulgarity": 1
+            },
+            {
+              "form": "out on {poss} feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.84,
+              "vulgarity": 0
+            },
+            {
+              "form": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.84,
+              "vulgarity": 0
+            },
+            {
+              "form": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.84,
+              "vulgarity": 0
+            },
+            {
+              "form": "rooted",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.84,
+              "vulgarity": 2
+            },
+            {
+              "form": "stonkered",
+              "concepts": [
+                "DRUNK",
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.84,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "run off my feet",
+          "results": [
+            {
+              "form": "flat chat",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "flat out",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "flat out like a lizard drinking",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "leg it",
+              "concepts": [
+                "RUN",
+                "FLEE"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.74,
+              "vulgarity": 0
+            },
+            {
+              "form": "belt",
+              "concepts": [
+                "RUN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67,
+              "vulgarity": 0
+            },
+            {
+              "form": "shoot through",
+              "concepts": [
+                "RUN_OFF",
+                "LEAVE"
+              ],
+              "match": "meaning",
+              "score": 0.65,
+              "vulgarity": 0
+            },
+            {
+              "form": "shoot through like a Bondi tram",
+              "concepts": [
+                "RUN_OFF"
+              ],
+              "match": "meaning",
+              "score": 0.65,
+              "vulgarity": 0
+            },
+            {
+              "form": "do a break",
+              "concepts": [
+                "RUN_OFF"
+              ],
+              "match": "meaning",
+              "score": 0.65,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "wake up",
+          "results": [
+            {
+              "form": "flake out",
+              "concepts": [
+                "FALL_ASLEEP"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69,
+              "vulgarity": 0
+            },
+            {
+              "form": "rock up",
+              "concepts": [
+                "ARRIVE"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.65,
+              "vulgarity": 0
+            },
+            {
+              "form": "lob",
+              "concepts": [
+                "ARRIVE"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.65,
+              "vulgarity": 0
+            },
+            {
+              "form": "go out like a light",
+              "concepts": [
+                "FALL_ASLEEP"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.64,
+              "vulgarity": 0
+            },
+            {
+              "form": "kick off",
+              "concepts": [
+                "FOUND"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "harmless",
+          "results": []
+        },
+        {
+          "query": "probably",
+          "results": [
+            {
+              "form": "defo",
+              "concepts": [
+                "DEFINITELY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.7,
+              "vulgarity": 0
+            },
+            {
+              "form": "streets ahead of",
+              "concepts": [
+                "FAR_BETTER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.64,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "worked very hard",
+          "results": [
+            {
+              "form": "easy as",
+              "concepts": [
+                "DEAD_EASY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.65,
+              "vulgarity": 0
+            },
+            {
+              "form": "the duck's nuts",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.65,
+              "vulgarity": 1
+            },
+            {
+              "form": "happy as Larry",
+              "concepts": [
+                "HAPPY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.64,
+              "vulgarity": 0
+            },
+            {
+              "form": "{subj} wouldn't be dead for quids",
+              "concepts": [
+                "GLAD_ALIVE"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63,
+              "vulgarity": 0
+            },
+            {
+              "form": "flat chat",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63,
+              "vulgarity": 0
+            },
+            {
+              "form": "dead",
+              "concepts": [
+                "VERY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.62,
+              "vulgarity": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "candidate_full_fit",
+      "encoder": "isolated candidate Model2Vec static; not package export",
+      "queries": [
+        {
+          "query": "a shady deal",
+          "results": [
+            {
+              "form": "crook",
+              "concepts": [
+                "SICK",
+                "AWFUL",
+                "DODGY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66,
+              "vulgarity": 0
+            },
+            {
+              "form": "dodgy",
+              "concepts": [
+                "DODGY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66,
+              "vulgarity": 0
+            },
+            {
+              "form": "shonky",
+              "concepts": [
+                "DODGY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66,
+              "vulgarity": 0
+            },
+            {
+              "form": "slanter",
+              "concepts": [
+                "DODGY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "sleepy",
+          "results": [
+            {
+              "form": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.68,
+              "vulgarity": 0
+            },
+            {
+              "form": "fucked",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.68,
+              "vulgarity": 2
+            },
+            {
+              "form": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.68,
+              "vulgarity": 1
+            },
+            {
+              "form": "out on {poss} feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.68,
+              "vulgarity": 0
+            },
+            {
+              "form": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.68,
+              "vulgarity": 0
+            },
+            {
+              "form": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.68,
+              "vulgarity": 0
+            },
+            {
+              "form": "rooted",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.68,
+              "vulgarity": 2
+            },
+            {
+              "form": "stonkered",
+              "concepts": [
+                "DRUNK",
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.68,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "under the weather",
+          "results": [
+            {
+              "form": "crook",
+              "concepts": [
+                "SICK",
+                "AWFUL",
+                "DODGY"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "as crook as a dog",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "crook as buggery",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 1
+            },
+            {
+              "form": "crook as Rookwood",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "{subj} {be} blowing a dog off its chain",
+              "concepts": [
+                "WINDY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "a good mate of mine",
+          "results": [
+            {
+              "form": "mate",
+              "concepts": [
+                "FRIEND"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.64,
+              "vulgarity": 0
+            },
+            {
+              "form": "beaut",
+              "concepts": [
+                "GOOD",
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63,
+              "vulgarity": 0
+            },
+            {
+              "form": "cobber",
+              "concepts": [
+                "FRIEND"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.62,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "fraudulent",
+          "results": []
+        },
+        {
+          "query": "honest",
+          "results": [
+            {
+              "form": "fair dinkum",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "fair dinkum",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "dinkum",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "dinky-di",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "ridgy-didge",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "dodgy",
+              "concepts": [
+                "DODGY"
+              ],
+              "match": "meaning",
+              "score": 0.75,
+              "vulgarity": 0
+            },
+            {
+              "form": "the good oil",
+              "concepts": [
+                "THE_REAL_STORY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.68,
+              "vulgarity": 0
+            },
+            {
+              "form": "the dinkum oil",
+              "concepts": [
+                "THE_REAL_STORY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.68,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "put up with",
+          "results": [
+            {
+              "form": "cop {np}",
+              "concepts": [
+                "COP_IT",
+                "TOLERATE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "swear blind",
+              "concepts": [
+                "RESOLVE"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "sleep",
+          "results": [
+            {
+              "form": "a kip",
+              "concepts": [
+                "NAP"
+              ],
+              "match": "meaning (local model)",
+              "score": 1.01,
+              "vulgarity": 0
+            },
+            {
+              "form": "a nana nap",
+              "concepts": [
+                "NAP"
+              ],
+              "match": "meaning",
+              "score": 0.9,
+              "vulgarity": 0
+            },
+            {
+              "form": "flake out",
+              "concepts": [
+                "FALL_ASLEEP"
+              ],
+              "match": "meaning",
+              "score": 0.9,
+              "vulgarity": 0
+            },
+            {
+              "form": "go out like a light",
+              "concepts": [
+                "FALL_ASLEEP"
+              ],
+              "match": "meaning",
+              "score": 0.9,
+              "vulgarity": 0
+            },
+            {
+              "form": "have a lie-down",
+              "concepts": [
+                "LIE_DOWN_REST"
+              ],
+              "match": "meaning",
+              "score": 0.75,
+              "vulgarity": 0
+            },
+            {
+              "form": "have a root",
+              "concepts": [
+                "HAVE_SEX"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.7,
+              "vulgarity": 2
+            }
+          ]
+        },
+        {
+          "query": "dying",
+          "results": [
+            {
+              "form": "cark it",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "go to meet {poss} maker",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "pass in {poss} cheque",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "toss in the alley",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "toey",
+              "concepts": [
+                "NERVOUS"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.78,
+              "vulgarity": 0
+            },
+            {
+              "form": "keen",
+              "concepts": [
+                "EAGER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.65,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "very cold",
+          "results": [
+            {
+              "form": "as cold as a mother-in-law's kiss",
+              "concepts": [
+                "HEARTLESS"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.74,
+              "vulgarity": 0
+            },
+            {
+              "form": "cold enough to freeze the balls off a brass monkey",
+              "concepts": [
+                "FREEZING"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.74,
+              "vulgarity": 2
+            },
+            {
+              "form": "colder than a witch's tit",
+              "concepts": [
+                "FREEZING"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.74,
+              "vulgarity": 1
+            },
+            {
+              "form": "coldie",
+              "concepts": [
+                "BEER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.72,
+              "vulgarity": 0
+            },
+            {
+              "form": "{subj} {be} brass monkeys",
+              "concepts": [
+                "COLD_WEATHER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.71,
+              "vulgarity": 0
+            },
+            {
+              "form": "stubby",
+              "concepts": [
+                "BEER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.7,
+              "vulgarity": 0
+            },
+            {
+              "form": "tinnie",
+              "concepts": [
+                "BEER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.7,
+              "vulgarity": 0
+            },
+            {
+              "form": "as crook as a dog",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "girl",
+          "results": []
+        },
+        {
+          "query": "a top bloke",
+          "results": [
+            {
+              "form": "a top bloke",
+              "concepts": [
+                "GOOD_PERSON"
+              ],
+              "match": "slang term",
+              "score": 2.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "bloke",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.87,
+              "vulgarity": 0
+            },
+            {
+              "form": "cove",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.87,
+              "vulgarity": 0
+            },
+            {
+              "form": "a good bastard",
+              "concepts": [
+                "GOOD_PERSON"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.77,
+              "vulgarity": 1
+            },
+            {
+              "form": "a legend",
+              "concepts": [
+                "GOOD_PERSON"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.77,
+              "vulgarity": 0
+            },
+            {
+              "form": "a mongrel bastard",
+              "concepts": [
+                "SCOUNDREL"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.64,
+              "vulgarity": 1
+            },
+            {
+              "form": "a dead-set legend",
+              "concepts": [
+                "CHAMPION_PERSON"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.64,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "very tired",
+          "results": [
+            {
+              "form": "stonkered",
+              "concepts": [
+                "DRUNK",
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.83,
+              "vulgarity": 0
+            },
+            {
+              "form": "out on {poss} feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.79,
+              "vulgarity": 0
+            },
+            {
+              "form": "fucked",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.77,
+              "vulgarity": 2
+            },
+            {
+              "form": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.77,
+              "vulgarity": 0
+            },
+            {
+              "form": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.77,
+              "vulgarity": 1
+            },
+            {
+              "form": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.77,
+              "vulgarity": 0
+            },
+            {
+              "form": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.77,
+              "vulgarity": 0
+            },
+            {
+              "form": "rooted",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.77,
+              "vulgarity": 2
+            }
+          ]
+        },
+        {
+          "query": "run off my feet",
+          "results": [
+            {
+              "form": "flat chat",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "flat out",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "flat out like a lizard drinking",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0,
+              "vulgarity": 0
+            },
+            {
+              "form": "leg it",
+              "concepts": [
+                "RUN",
+                "FLEE"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69,
+              "vulgarity": 0
+            },
+            {
+              "form": "belt",
+              "concepts": [
+                "RUN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.65,
+              "vulgarity": 0
+            },
+            {
+              "form": "shoot through",
+              "concepts": [
+                "RUN_OFF",
+                "LEAVE"
+              ],
+              "match": "meaning",
+              "score": 0.65,
+              "vulgarity": 0
+            },
+            {
+              "form": "shoot through like a Bondi tram",
+              "concepts": [
+                "RUN_OFF"
+              ],
+              "match": "meaning",
+              "score": 0.65,
+              "vulgarity": 0
+            },
+            {
+              "form": "do a break",
+              "concepts": [
+                "RUN_OFF"
+              ],
+              "match": "meaning",
+              "score": 0.65,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "wake up",
+          "results": [
+            {
+              "form": "move yer arse",
+              "concepts": [
+                "HURRY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66,
+              "vulgarity": 2
+            },
+            {
+              "form": "get a wriggle on",
+              "concepts": [
+                "HURRY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66,
+              "vulgarity": 0
+            },
+            {
+              "form": "flake out",
+              "concepts": [
+                "FALL_ASLEEP"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.64,
+              "vulgarity": 0
+            },
+            {
+              "form": "kick off",
+              "concepts": [
+                "FOUND"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.64,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "harmless",
+          "results": []
+        },
+        {
+          "query": "probably",
+          "results": [
+            {
+              "form": "too right",
+              "concepts": [
+                "AGREE"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66,
+              "vulgarity": 0
+            },
+            {
+              "form": "too bloody right",
+              "concepts": [
+                "AGREE"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66,
+              "vulgarity": 1
+            },
+            {
+              "form": "defo",
+              "concepts": [
+                "DEFINITELY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.65,
+              "vulgarity": 0
+            }
+          ]
+        },
+        {
+          "query": "worked very hard",
+          "results": [
+            {
+              "form": "do the hard yards",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69,
+              "vulgarity": 0
+            },
+            {
+              "form": "work {poss} arse off",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69,
+              "vulgarity": 2
+            },
+            {
+              "form": "bust {poss} guts",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69,
+              "vulgarity": 0
+            },
+            {
+              "form": "work like billy-o",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69,
+              "vulgarity": 0
+            },
+            {
+              "form": "flat chat",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.65,
+              "vulgarity": 0
+            },
+            {
+              "form": "happy as Larry",
+              "concepts": [
+                "HAPPY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63,
+              "vulgarity": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
