@@ -49,8 +49,9 @@ change is a regression until shown otherwise.
 The `changes` contract fixtures (`tests/fixtures/changes/`) are golden too:
 `python scripts/regen_changes_fixtures.py` rewrites them, for review in the same way. The renderings themselves are
 checked against whole re-renders with each pick pinned (`tests/functional/test_changes_oracle.py`), and
-`python scripts/benchmark_changes.py` measures what `changes` costs over translate at 5,000 characters (its budget
-is 1.5 times).
+`python scripts/benchmark_changes.py` measures what `changes` costs over translate, timing the two in turn in
+process time. It fails when any 5,000-character text, at any setting the website's service allows, costs more than
+1.5 times translate; larger texts, Markdown and a stress setting are reported.
 
 ## Reference texts
 
