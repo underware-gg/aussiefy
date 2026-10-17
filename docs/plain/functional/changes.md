@@ -53,8 +53,12 @@ and responses live in `tests/fixtures/changes/`. Each change has:
 - `rule` (phonetic and swear infix): `{id, kind, before, after}`. `pair` (dialect): `{english, before, after}`.
 - `placement` (garnish): `connective`, `opener`, `tag`, `aside`, `tail`, `closer`, or `riff` for a contextual
   image after a term (which has `image_id` rather than an entry).
-- `covers`: the ids of the changes inside the region a swap or removal replaces, which go with it. A drawl or a
-  swear infix inside a swapped term is one. So is a neighbouring change that a phonetic match tied to the region.
+- `covers`: the ids, in output order, of every other change whose output a region the change's alternatives,
+  locked options or removal replace reaches into. Those go with it. A drawl or a swear infix inside a swapped term
+  is one. So is a neighbour whose output the region takes in only part of, because both widened over one drawl
+  match: in "Anyway, he's a few snags short of a barbie", the connective's region is "Anyway, he's", so it covers
+  the swap starting at "he's". A change with nothing to swap in (a drawl, an infix, a US word swapped) covers
+  nothing.
 
 `entries` maps each entry id the changes name to its card, built as `lookup` builds it under the same dials
 (`aussiefy/cards.py`): riffs under the vulgarity cap where the embellishment takes riffs at all, and a gated
@@ -95,8 +99,10 @@ lookaround reads it ("won't bloody well have").
 
 A garnish's region widens the same way. An opener's or connective's region takes in the next word, whose capital
 it lowered, and a word more where a match runs on: in "Well, it is easy", a swap or removal of "Well" replaces
-"Well, it is", since the drawl's "it is" match crosses "it". A region never cuts another change's words: it takes
-in the whole of a swap it reaches.
+"Well, it is", since the drawl's "it is" match crosses "it". A region never cuts the words another swap or
+garnish put in: it takes in the whole of one it reaches. Two regions can still share a word they both widened
+over for one drawl match, as a connective's and the swap after it share "he's"; the connective's `covers` lists
+the swap.
 
 Each drawl, spelling or infix match in the spot is let in or kept out exactly as the engine's own pass does it
 (a question, the words before it, a kept heading or link text, a quoted document), reading those spans where the

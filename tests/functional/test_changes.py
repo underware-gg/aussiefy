@@ -228,16 +228,35 @@ def test_each_rendering_says_its_entry_or_a_rule_rewrote_it(translator, dictiona
     assert checked > 50 and rewritten >= 2
 
 
-def test_a_swaps_region_covers_the_changes_inside_it(translator):
+def test_a_swap_covers_the_changes_inside_it_and_a_change_with_nothing_to_swap_covers_nothing(translator):
+    """A drawl or infix inside a swap's region goes with the swap. A drawl, an infix or a US word swapped has no
+    region of its own to replace. Every change over the everyday corpus is held to the whole rule in
+    test_changes_oracle.py."""
     cs = _every_kind(translator)
     ids = {c["id"]: c for c in cs.changes}
-    assert any(c["covers"] for c in cs.changes if c["kind"] == "substitution")
-    for c in cs.changes:
-        spans = [c["out_span"]] + [o["out_span"] for o in c["alternatives"] + c["locked"]]
-        spans += [c["removed"]["out_span"]] if c.get("removed") else []
-        for inner in c["covers"]:
-            d = ids[inner]
-            assert min(s[0] for s in spans) <= d["out_span"][0] <= d["out_span"][1] <= max(s[1] for s in spans)
+    inside = [(c, ids[i]) for c in cs.changes if c["kind"] == "substitution" for i in c["covers"]]
+    assert any(d["kind"] in ("phonetic", "swear_infix") for _, d in inside)
+    for c, d in inside:
+        assert c["out_span"][0] <= d["out_span"][0] <= d["out_span"][1] <= c["out_span"][1], (c["id"], d["id"])
+    assert not [c["id"] for c in cs.changes if c["covers"] and not (c["alternatives"] or c.get("removed"))]
+
+
+FAUCET = ("The faucet in the apartment is broken, so I called the color guy. He is an idiot and absolutely useless. "
+          "What the hell is going on? Fantastic.")
+
+
+def test_a_garnish_region_that_reaches_into_a_swap_covers_it(translator):
+    """A connective's region takes in "he's", the word it lowers with the drawl match on it, and so does the swap
+    that starts there. Swapping or removing the connective re-renders part of that swap, so it covers the swap,
+    not only the drawl nested in its own region. Found by the website, at Swaggie, Dinkum, Dad, seed 3."""
+    cs = _valid(aussiefy.translate_changes(FAUCET, translator=translator, level=5, embellishment=1, vulgarity=1,
+                                           seed=3))
+    ids = {c["id"]: c for c in cs.changes}
+    garnish, swap = ids["garnish:66-66:connective"], ids["substitution:66-80"]
+    assert cs.text[slice(*garnish["removed"]["out_span"])] == "Anyway, he's"
+    assert garnish["removed"]["out_span"] == [69, 81] and swap["out_span"] == [77, 111]
+    assert garnish["covers"] == ["phonetic:66-71:pronoun-be", "substitution:66-80"]
+    assert swap["covers"] == ["phonetic:66-71:pronoun-be"]
 
 
 def test_ids_are_unique_and_made_by_the_contracts_id_format(translator):

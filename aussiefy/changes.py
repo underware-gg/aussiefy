@@ -42,7 +42,7 @@ MARGIN = 16          # ... the outer part of which is read, never compared (a ma
 WIDEN = 4            # the most words a region widens by, each side, for a phonetic match across its edge
 _FIELDS = ("id", "kind", "src_span", "out_span", "original", "output", "entry_id", "vulgarity", "masks", "placement",
            "image_id", "removed", "rule", "pair", "alternatives", "locked", "covers")   # a change's, in order
-KINDS = ("substitution", "dialect", "garnish", "swear_infix", "phonetic")   # also the order covers ranks them in
+KINDS = ("substitution", "dialect", "garnish", "swear_infix", "phonetic")   # also their order at one output span
 # why a swap or a garnish offers its pick alone (ChangeSet.withheld)
 PICK_DIFFERS = "pick-differs"            # the pick, rendered over its region, isn't the output there
 REGION_UNSETTLED = "region-unsettled"    # a phonetic match still reads across the region's edge after widening
@@ -123,9 +123,9 @@ def collect(translator: Translator, text: str, _observer: Watch | None = None,
 
 def finish(result: Any, drafts: list[Draft], dictionary: Dictionary) -> ChangeSet:
     """The contract: ids made (kind, source span, placement or rule, and a running number for the rare repeat),
-    changes in output order, what each one's swap covers, each rendering's maskable words, the cards of the entries
-    they name (built as lookup builds them, under the result's vulgarity and embellishment), and the swaps whose
-    alternatives are withheld."""
+    changes in output order, what each one's swap or removal reaches into (covers), each rendering's maskable
+    words, the cards of the entries they name (built as lookup builds them, under the result's vulgarity and
+    embellishment), and the swaps whose alternatives are withheld."""
     for d in drafts:
         d.change["id"] = _change_id(d)
     drafts = sorted(drafts, key=lambda d: (d.change["out_span"][0], d.change["out_span"][1],
@@ -974,16 +974,17 @@ def _shares(alternatives: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def _cover(drafts: list[Draft]) -> None:
-    """Each change lists the changes inside the region its swap or removal replaces: those go with it."""
+    """Each change lists, in output order, every other change whose output a region its swap or removal replaces
+    reaches into: those go with it. A region can take in part of a neighbour (a drawl match both read), so that
+    neighbour is listed, not only what nests inside. A change with nothing to swap in covers nothing."""
     for d in drafts:
-        c = d.change
-        spans = [c["out_span"]] + [r["out_span"] for r in d.renderings()]
-        lo, hi = min(s[0] for s in spans), max(s[1] for s in spans)
-        rank = KINDS.index(c["kind"])
-        c["covers"] = []
-        for other in drafts:
-            a, b = other.change["out_span"]
-            if other is d or not lo <= a <= b <= hi or (a == b and a in (lo, hi)):
-                continue
-            if b - a < hi - lo or KINDS.index(other.change["kind"]) > rank:
-                c["covers"].append(other.change["id"])
+        regions = {tuple(r["out_span"]) for r in d.renderings()}
+        d.change["covers"] = [other.change["id"] for other in drafts
+                              if other is not d and any(_reaches(r, other.change["out_span"]) for r in regions)]
+
+
+def _reaches(region: tuple[int, int], span: list[int]) -> bool:
+    """Whether replacing region touches span: they overlap, or an empty span sits inside it (not at its edge)."""
+    lo, hi = region
+    a, b = span
+    return lo < a < hi if a == b else a < hi and lo < b

@@ -53,7 +53,9 @@ before they're unlocked. At Dad, "very cold" as fuckin' reads "fuckin'", though 
 would read "cold as fuck".
 
 The output is the `changes` contract, version 1, with a JSON Schema in the package. Version 1 was amended before
-release, as this review found: it gained `withheld`, and a withheld garnish has no `removed`. Ids are each change's
+release, as this review found: it gained `withheld`, and a withheld garnish has no `removed`. It was amended
+again, unreleased, for `covers`, which had listed only the changes nested in a region; the website's service found
+a connective's region reaching into a neighbouring swap's. Ids are each change's
 kind and source span, made by one format (`changes.ID_FORMAT`). Every rendering lists its maskable words, and only profanity is masked: swear-list words, the
 compounds the dictionary's rated words build on one, and the profane words an entry authors (`mask`). An entry
 whose rudeness is innuendo, an insult or a crude word is marked `profane: false` and shows in full.
@@ -72,7 +74,11 @@ re-render with that pick.
 - A swap is local. It reads as a whole re-render would over its region, while later picks and rolls, which a
   re-render would shift, stay as they were. Two swaps can interact only through the state one leaves for the
   other: the entries a later stack or riff may use.
-- Nested changes are listed in `covers`, so a page drops a drawl or infix that a swap replaces.
+- A change's `covers` lists every other change whose output a region its alternatives, locked options or
+  removal replace reaches into, so a page drops a drawl or infix that a swap replaces, and knows when a garnish's
+  region takes in part of a neighbouring swap: "Anyway, he's" and the swap starting at "he's" both widened over
+  one drawl match. A change with nothing to swap in covers nothing. Over the everyday corpus every change a region
+  reaches is nested in it; the website's service found one that isn't, in a short text.
 - The budget is 1.5 times translate for each 5,000-character text, for every setting the website's service allows
   (its default, the strongest dials, each document type it offers). `scripts/benchmark_changes.py` gates on it,
   timing translate and `changes` in turn in process time. At the website's defaults it costs about 1.1 times.

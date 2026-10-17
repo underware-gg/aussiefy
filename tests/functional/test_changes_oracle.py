@@ -20,6 +20,8 @@ STRESS = dict(level=5, vulgarity=2, embellishment=2, document_config={"profile":
     "swearing": {"infix": 6.0, "exclaim": 0.5}}})
 SETTINGS = {"larrikin-dad": dict(level=4, vulgarity=1), "swaggie-tradie-troppo": dict(level=5, vulgarity=3, embellishment=2),
             "stress": STRESS}
+# ... and the website's Swaggie, where it found a garnish region reaching into a swap (test_changes.py's FAUCET)
+COVERS_SETTINGS = {**SETTINGS, "swaggie-dad-dinkum": dict(level=5, vulgarity=1, embellishment=1)}
 # Adjacent swaps where the second reads otherwise once both are pinned, because the first used an entry the
 # second's stacked idiom would have taken (entry_uses): the accepted locality of a swap. Any new one fails.
 SHIFTED_PAIRS = {
@@ -165,6 +167,29 @@ def test_adjacent_swaps_agree_with_a_pinned_re_render(translator, setting):
             pairs += 1
     assert pairs > 8
     assert shifted == {p for p in SHIFTED_PAIRS if p[0] == setting}
+
+
+def _reaches(region, span):
+    """Replacing region touches span: they overlap, or an empty span sits inside it (not at its edge)."""
+    (lo, hi), (a, b) = region, span
+    return lo < a < hi if a == b else a < hi and lo < b
+
+
+@pytest.mark.parametrize("setting", sorted(COVERS_SETTINGS))
+def test_every_change_covers_each_change_its_regions_reach(translator, setting):
+    """A change covers, in output order, exactly the other changes whose output a region its swap or removal
+    replaces reaches into: a neighbour it takes in part of as well as what nests inside it."""
+    covered = 0
+    for path, seed in ((path, seed) for path in EVERYDAY for seed in (0, 7)):
+        text = cut(path.read_text(encoding="utf-8"))
+        cs = C.build(translator, text, **COVERS_SETTINGS[setting], seed=seed)
+        for c in cs.changes:
+            regions = [o["out_span"] for o in c["alternatives"] + c["locked"]]
+            regions += [c["removed"]["out_span"]] if c.get("removed") else []
+            reached = [d["id"] for d in cs.changes if d is not c and any(_reaches(r, d["out_span"]) for r in regions)]
+            assert c["covers"] == reached, (path.name, seed, c["id"])
+            covered += bool(reached)
+    assert covered >= 5, covered
 
 
 def test_alternatives_in_masked_markup_are_the_pinned_re_render(translator):
