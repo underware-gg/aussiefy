@@ -1,0 +1,286 @@
+schema_version: 1
+curated: '2026-10-17'
+protocol: An independent reviewer read only the paired source and target texts, without dictionary entries, engine
+  outputs, historical anchors or scores. Parent and reviewer adjudicated child/adult and loose-paraphrase exclusions
+  before measuring. Shared Australian/British colloquialisms are eligible; Australian exclusivity is not claimed.
+measure: Unique reviewed target-expression reproduction across fixed whole-text runs. Wording overlap is not general
+  semantic fidelity, grammatical quality, density or a count of correctly aligned source events. No score-derived
+  passing threshold.
+contract:
+  level: 5
+  vulgarity: 2
+  embellishment: troppo
+  document_type: general
+  embedder: none
+  seeds:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+ornament: Interjections, discourse particles, contractions, dropped g, ya/me dialect and inserted swears are not
+  positive semantic-expression labels.
+documents:
+- id: gettysburg
+  source: tests/corpus/reference/gettysburg.txt
+  target: tests/corpus/targets/gettysburg_level5.txt
+  source_sha256: 809838efd41698422636fb2df8bebe2a7e8c29a3baf109b3bdceed6812266903
+  target_sha256: 496d1076f8ca3504120115ddfce33a231f609a9c7cae55957034b28d332ebb13
+  labels:
+  - id: brand-new
+    forms:
+    - brand-spankin'-new
+    source_anchors:
+    - a new nation
+    meaning: New, with colloquial emphasis.
+  - id: blokes
+    forms:
+    - blokes
+    source_anchors:
+    - all men are created equal
+    meaning: The same men.
+  - id: civil-stoush
+    forms:
+    - civil stoush
+    source_anchors:
+    - a great civil war
+    meaning: Civil conflict in this context; not all arguments are wars.
+  - id: mob
+    forms:
+    - mob
+    source_anchors:
+    - any nation so conceived
+    meaning: A community in this context; not a universal state synonym.
+  - id: poor-buggers
+    forms:
+    - poor buggers
+    source_anchors:
+    - those who here gave their lives
+    - these honored dead
+    meaning: The same deceased people, with sympathy.
+  - id: cark-it
+    forms:
+    - carked it
+    - cark it
+    source_anchors:
+    - gave their lives
+    - shall not have died in vain
+    - shall not perish
+    meaning: Death, including metaphorical institutional death; sacrifice is expressed by context.
+  - id: keep-kicking
+    forms:
+    - keep on kickin'
+    source_anchors:
+    - that nation might live
+    meaning: Continue to exist.
+  - id: proper-crack
+    forms:
+    - had a proper crack
+    source_anchors:
+    - who struggled here
+    meaning: Made a serious effort.
+  - id: brave-bastards
+    forms:
+    - brave bastards
+    source_anchors:
+    - The brave men
+    meaning: Same people and bravery, familiar register.
+  - id: get-stuck-into
+    forms:
+    - get stuck into
+    source_anchors:
+    - be dedicated here to the unfinished work
+    meaning: Apply oneself energetically.
+  exclusions:
+  - span: Donkey's years
+    reason: Drops the exact 87 years.
+  - span: old fellas
+    reason: Does not itself preserve founding-fathers meaning.
+  - span: fair go
+    reason: Fair treatment/opportunity is not liberty.
+  - span: drongo
+    reason: Adds a foolish dissenter and comment.
+  - span: paddock
+    reason: Adds an agricultural characterisation.
+  - span: diggers
+    reason: Introduces Australian/New Zealand soldier identity.
+  - span: rabbit on about
+    reason: Adds a judgement of tedious/excessive speech.
+  - span: battlers
+    reason: Narrows all people to a struggling/disadvantaged group.
+  - span: God bloody willing
+    reason: Conditional hope differs from under God.
+  - span: another crack
+    reason: Another attempt differs from national rebirth.
+  - span: bugger-all
+    reason: A loose recasting of power to add/detract, not a direct source quantity of nothing.
+- id: goldilocks-full
+  source: tests/corpus/reference/goldilocks_full.txt
+  target: tests/corpus/targets/goldilocks_level5.txt
+  source_sha256: 8d6d20a37470f9333c650c7ca6a036c2403893a167edc7254e27b1d7c3f2dc74
+  target_sha256: 6fc87f5a4f0edd9abec02685dfd95a3bd67d3496a7589f76a5349d66abc925b2
+  labels:
+  - id: bush
+    forms:
+    - bush
+    source_anchors:
+    - the woods
+    meaning: The wooded setting, in this context.
+  - id: knackered
+    forms:
+    - knackered
+    source_anchors:
+    - very tired and very hungry
+    meaning: Very tired.
+  - id: buggered
+    forms:
+    - Buggered
+    source_anchors:
+    - very tired and very hungry
+    meaning: Exhausted; duplicate target emphasis on the same state.
+  - id: horse-jockey
+    forms:
+    - could've eaten a horse and chased the bloody jockey
+    source_anchors:
+    - very tired and very hungry
+    meaning: Figurative extreme hunger, not an eating event.
+  - id: have-crack
+    forms:
+    - Has a crack
+    source_anchors:
+    - She tasted the porridge in the first bowl
+    meaning: Try/taste the first bowl.
+  - id: shearers-armpit
+    forms:
+    - hotter than a shearer's armpit
+    source_anchors:
+    - This porridge is too hot
+    meaning: Figurative heat comparison.
+  - id: witchs-tit
+    forms:
+    - colder than a witch's tit
+    source_anchors:
+    - This porridge is too cold
+    meaning: Figurative cold comparison.
+  - id: gets-stuck-into
+    forms:
+    - gets stuck into
+    source_anchors:
+    - she tasted the porridge in the third bowl
+    meaning: Engage enthusiastically with the food.
+  - id: scoff-lot
+    forms:
+    - scoffs the lot
+    source_anchors:
+    - she ate it all up
+    meaning: Eat everything.
+  - id: skerrick
+    forms:
+    - skerrick
+    source_anchors:
+    - she ate it all up
+    meaning: Tiny amount, explicitly negated by the target.
+  - id: just-ticket
+    forms:
+    - just the ticket
+    source_anchors:
+    - This chair is just right
+    meaning: Exactly suitable.
+  - id: plonk-backside
+    forms:
+    - plonk her backside down
+    source_anchors:
+    - as soon as she settled down
+    meaning: Sit down informally.
+  - id: arse-over-tit
+    forms:
+    - Arse over tit
+    source_anchors:
+    - she fell on the floor
+    meaning: Uncontrolled fall; figurative description.
+  - id: rooted
+    forms:
+    - rooted
+    source_anchors:
+    - By now Goldilocks was very tired
+    meaning: Exhausted.
+  - id: have-kip
+    forms:
+    - have a kip
+    source_anchors:
+    - fell fast asleep
+    meaning: Sleep.
+  - id: squiz
+    forms:
+    - has a squiz
+    source_anchors:
+    - Someone has been eating my porridge
+    meaning: Looking at the bowl implied by the source recognition; no new object.
+  - id: some-bugger
+    forms:
+    - Some bugger
+    source_anchors:
+    - Someone has been sitting in my chair
+    meaning: Same indefinite person with familiar register.
+  - id: shirty
+    forms:
+    - shirty
+    source_anchors:
+    - The bears were very angry now
+    meaning: Angry; supported by the subsequent collective state.
+  - id: chair-buggery
+    forms:
+    - smashed me chair to buggery
+    source_anchors:
+    - they broke it into pieces
+    meaning: The same destructive result.
+  - id: spewing
+    forms:
+    - spewin'
+    source_anchors:
+    - The bears were very angry now
+    meaning: Anger; the invented closing occurrence is excluded.
+  - id: some-bastard
+    forms:
+    - Some bastard
+    source_anchors:
+    - Someone has been sleeping in my bed
+    meaning: Same indefinite person, insulting register.
+  - id: bondi-tram
+    forms:
+    - shootin' through like a Bondi tram
+    source_anchors:
+    - ran out of the house as fast as she could
+    meaning: Rapid departure.
+  exclusions:
+  - span: little sheila
+    reason: Child age is not safely preserved by the adult-woman sense.
+  - span: middle of nowhere
+    reason: Remoteness is stronger than forest location.
+  - span: mindin' her own business
+    reason: Adds innocent manner.
+  - span: out like a light
+    reason: Rapid onset differs from sound sleep.
+  - span: carryin' on like a pork chop
+    reason: Adds foolish fuss to an exclamation.
+  - span: spits the dummy
+    reason: Adds a tantrum.
+  - span: mongrel
+    reason: Adds a negative character judgement.
+  - span: drongo
+    reason: Adds a judgement of stupidity.
+  - span: cheeky bugger
+    reason: Adds a character judgement.
+  - span: before you can say Bob's your uncle
+    reason: Creative speed construction, not the ordinary completion/solution sense.
+  - span: coppers
+    reason: Entire closing police scene is invented.
+  - span: still spewin' about the porridge
+    reason: The closing anger event is invented.
+  - span: neck of the woods
+    reason: Broadens avoiding the house into avoiding the area.

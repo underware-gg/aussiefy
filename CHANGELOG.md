@@ -9,6 +9,8 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Add an independently curated target\-expression benchmark with fixed inputs'n an explicit first baseline.
+  Crikey, share language cleanup with the trainer so grammar directives can't become trainin' words.
 - Review the original seed listicle, add ten curated expressions with precise senses, and retain a complete
   decision ledger. Honour declared HTML encodings during acquisition without overriding explicit HTTP charsets.
 - Preserve outer auxiliaries'n question grammar, distinguish perfect\-have from possession, and retain the
@@ -115,7 +117,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 - **Dinkum\-check dictionary round** (`research/dinkum-check-round-2026-10-14/DECISIONS.md`): 67 rows from the
   check's yarn agents reviewed. New: stuff up, stuff {obj} up, a stuff\-up, under the pump \(of a person\), not know
   someone from a bar of soap, spitting \(light rain\), a swag of; pull the pin takes pulling the pin, all over the shop
-  `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Crikey, wrong senses
+  `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Fair dinkum, wrong senses
   fixed in data: heaps for counted heaps, every bloke'n his dog and old fella outta the formal genres, littlie
   for a policy's kid, the whole box'n dice for `"everything from"`; rain only for the weather's `"it"` (not fans
   pouring onto a street, tears pouring down, or tea poured\).
@@ -138,7 +140,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   a fair whack\), hire, per cent'n roadworks in the dialect table; 63 covered or skipped. The fourth pass's wrong
   senses fixed in data: bush for a legal bush, Parliament House for a US Congress, knock together for any
   build, pressie for a policy's gift, tucker'n quid in the wrong places, and lint's LEAVE, heaps, bugger all,
-  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Fair dinkum, engine limits found are listed in DECISIONS.
+  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Bugger me, engine limits found are listed in DECISIONS.
 - **The fourth pass's next steps:**
   - A storyteller's openings follow the genre's form at every settin', troppo's too \(an obituary isn't opened
     `"Fair dinkum, this happened."`), and `"Okay, so."` is gone from the openings.
@@ -259,7 +261,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   - Engine: `"war"` is no longer found inside a dialect `"warn't"`; `"1/4"`, `"4.5"` and `"10:30"` are one token each; a
     blank line ends a sentence \(a heading no longer merges into the next one\) unless the line before leads in
     with a comma or colon; a plain\-text heading takes no garnish or drawl, nor does a link's text; no opener
-    before a play's speaker label \(`"So anyway, HALE:"`). Bugger me, a bare `"meter"` becomes `"metre"` only after a quantity
+    before a play's speaker label \(`"So anyway, HALE:"`). A bare `"meter"` becomes `"metre"` only after a quantity
     (`"if the meter changes"` stays, `"the 100-meter sprint"` changes\).
   - Lint: a plain-English variant (`"full"` for `"a bit full"`) isn't counted as a use of the slang; `"y'all"` in
     the original isn't the translator's; a gated entry in ordinary English words (`"a bit rough"`, `"shame"`) isn't

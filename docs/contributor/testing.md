@@ -74,13 +74,27 @@ which spans count, and some counted spans are ordinary English. Stone the crows,
   25 word-anchor sets, ten seeds and 60% threshold. The
   [fixed fixture](../../tests/fixtures/gettysburg-wording-anchors.yaml) binds source/target hashes and
   checks every anchor's span membership. It is a historical target-wording proxy, not curated slang recall;
-  dictionary prose cannot change its denominator. A genuinely curated slang benchmark needs its own baseline.
+  dictionary prose cannot change its denominator. The separately curated benchmark below has its own baseline.
 - **Vocabulary overlap,** for targets that restructure or extend the text, like the agent's Goldilocks:
   `test_goldilocks_benchmark_vocabulary_overlap` holds it to 60% of the dictionary phrases in that target.
 
 Raise bars against an unchanged measurement. Running `aussiefy dev harvest` on a target turns its misses
 into candidate entries \(see [data acquisition](data-acquisition.md)); these proxies aren't evidence of semantic
 fidelity or natural writin' quality.
+
+### Curated target expressions
+
+`python scripts/benchmark_slang.py` measures 32 independently reviewed expressions across the paired
+Gettysburg and full Goldilocks sources, at a fixed ten-seed contract. The
+[labels](../../tests/fixtures/curated-slang-labels.yaml) and
+[protocol/baseline](../../research/maintenance-2026-10-17/slang-benchmark.md) are separate from the
+historical heuristic gates. Labels were chosen without consulting engine outputs, dictionary entries or
+scores; source/target hashes and transcription are checked. Wrong-meaning paraphrases and invented target
+events remain explicit exclusions.
+
+Well, the score is unique target\-expression reproduction, with raw unaligned output counts reported separately.
+Strewth, different valid slang can miss, and incorrectly used wording can hit. This isn't semantic fidelity or an
+aligned event score. Anyway, no new pass threshold is derived from the first result; existin' gates remain.
 
 ## Classic Australian texts
 
@@ -96,7 +110,7 @@ bounded three\-case level/seed check covers each committed input for repeatabili
 integrity; plain `.txt` inputs also retain line counts. Strict Markdown tests cover syntax, hard wraps,
 whole\-document context, unit offsets'n public warnings; extended markup tests include the MDX corpus. This doesn't extend the original 20\-seed, five\-level reference sweep.
 
-Struth, the 15 pinned Interfold MDX pages now have confirmed LGPL redistribution evidence'n committed attribution.
+Crikey, the 15 pinned Interfold MDX pages now have confirmed LGPL redistribution evidence'n committed attribution.
 Remote\-only Rockwell/Kieran material'n full research exports stay local. Anyway, only the
 existin' two local\-corpus tests can skip; new corpus checks run without private files or network access.
 

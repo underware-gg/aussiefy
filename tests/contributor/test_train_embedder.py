@@ -7,6 +7,20 @@ import pytest
 from scripts import train_embedder
 
 
+@pytest.mark.parametrize('pattern,expected', [
+    ('quit !of ^end@4','quit'),
+    ('hungry ^person','hungry'),
+    ('little ^adj','little'),
+    ('great !war|deal@4','great'),
+    ('Ordinary words','ordinary words'),
+    ('{subj} {have} had {poss} fill ^person@4','they have had their fill'),
+])
+def test_training_binds_recipe_slots_before_shared_annotation_cleanup(pattern, expected, monkeypatch):
+    monkeypatch.setattr(train_embedder,'R',{'pairs':{'placeholders':{
+        'subj':'they','have':'have','poss':'their'}}})
+    assert train_embedder.clean(pattern) == expected
+
+
 @pytest.mark.parametrize("before", [True, False])
 def test_recipe_option_works_on_either_side_of_the_command(tmp_path, monkeypatch, before):
     recipe = tmp_path / "recipe.yaml"

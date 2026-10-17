@@ -39,6 +39,7 @@ from aussiefy.gaps import concept_labels  # noqa: E402
 from aussiefy.loader import load_dictionary  # noqa: E402
 from aussiefy.lookup import meaning_texts  # noqa: E402
 from aussiefy.models import home  # noqa: E402
+from aussiefy.terms import strip_markup  # noqa: E402
 
 RECIPE_PATH = ROOT / "training" / "recipe.yaml"
 REPORTS = ROOT / "training" / "reports"
@@ -71,11 +72,10 @@ def best_by(scored) -> dict:
 # --- data -------------------------------------------------------------------------------------------------
 
 def clean(text: str) -> str:
-    """A pattern or form as plain words: placeholders as pronouns, no @N intensities or !exclusions."""
+    """Bind recipe pronouns, then remove grammar annotations through the shared language boundary."""
     slots = R["pairs"]["placeholders"]
-    text = re.sub(r"\{(\w+)\}", lambda m: slots.get(m.group(1), ""), text.split("@")[0])
-    text = re.sub(r"!\S+", "", text)
-    return re.sub(r"\s+", " ", text).strip()
+    text = re.sub(r"\{(\w+)\}", lambda m: slots.get(m.group(1), ""), text)
+    return strip_markup(text)
 
 
 def entries(d):

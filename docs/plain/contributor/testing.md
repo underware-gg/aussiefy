@@ -70,13 +70,27 @@ which spans count, and some counted spans are ordinary English. The regression g
   25 word-anchor sets, ten seeds and 60% threshold. The
   [fixed fixture](../../../tests/fixtures/gettysburg-wording-anchors.yaml) binds source/target hashes and
   checks every anchor's span membership. It is a historical target-wording proxy, not curated slang recall;
-  dictionary prose cannot change its denominator. A genuinely curated slang benchmark needs its own baseline.
+  dictionary prose cannot change its denominator. The separately curated benchmark below has its own baseline.
 - **Vocabulary overlap,** for targets that restructure or extend the text, like the agent's Goldilocks:
   `test_goldilocks_benchmark_vocabulary_overlap` holds it to 60% of the dictionary phrases in that target.
 
 Raise bars against an unchanged measurement. Running `aussiefy dev harvest` on a target turns its misses
 into candidate entries (see [data acquisition](data-acquisition.md)); these proxies are not evidence of semantic
 fidelity or natural writing quality.
+
+### Curated target expressions
+
+`python scripts/benchmark_slang.py` measures 32 independently reviewed expressions across the paired
+Gettysburg and full Goldilocks sources, at a fixed ten-seed contract. The
+[labels](../../../tests/fixtures/curated-slang-labels.yaml) and
+[protocol/baseline](../../../research/maintenance-2026-10-17/slang-benchmark.md) are separate from the
+historical heuristic gates. Labels were chosen without consulting engine outputs, dictionary entries or
+scores; source/target hashes and transcription are checked. Wrong-meaning paraphrases and invented target
+events remain explicit exclusions.
+
+The score is unique target-expression reproduction, with raw unaligned output counts reported separately.
+Different valid slang can miss, and incorrectly used wording can hit. This is not semantic fidelity or an
+aligned event score. No new pass threshold is derived from the first result; existing gates remain.
 
 ## Classic Australian texts
 

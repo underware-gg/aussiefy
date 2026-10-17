@@ -23,6 +23,7 @@ python -m pytest -q tests/contributor
 | [test_rounds.py](test_rounds.py) | Research verdict planning and apply/replay |
 | [test_scrape.py](test_scrape.py) | Dictionary acquisition, tagging and review pipeline |
 | [test_seed_intake.py](test_seed_intake.py) | Declared encodings, seed curation completeness and precise new senses |
+| [test_slang_benchmark.py](test_slang_benchmark.py) | Fixed reviewed slang labels, paired inputs and wording-score boundaries |
 | [test_staging.py](test_staging.py) | Maintainer staging format and source-policy boundaries |
 | [test_train_embedder.py](test_train_embedder.py) | Trainer CLI and recipe handling |
 | [test_judge.py](test_judge.py) | Blind packets, report shapes, evidence and tally |

@@ -25,6 +25,9 @@ Retraining needs the pinned toolchain below: about 1.3 GB on CPU. A release take
    triggers' `!exclusions`: `great !war|deal|…` gives "great war" paired against EXCELLENT forms. Opposites
    come from `opposites.yaml` (since 1.1.0): A's triggers and glosses are paired against B's forms, glosses
    and description, both ways. Extra sources can add more (see below).
+   Recipe placeholders are bound before shared dictionary-language cleanup removes intensity, exclusions
+   and grammar directives (`^person`, `^adj`, `^end`): constraints are not training words. Contextual imagery's
+   conditional/related writer suggestions are not positive synonym pairs.
 2. **Fine-tune** `all-MiniLM-L6-v2` on CPU. MultipleNegativesRankingLoss runs over the pairs, with no
    duplicate texts in a batch. ContrastiveLoss pushes the wrong senses apart (margin 0.5), and the
    opposites further (margin 0.75, so to cosine ≤ 0.25, well under lookup's 0.50 cut-off).

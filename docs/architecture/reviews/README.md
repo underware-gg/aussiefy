@@ -10,6 +10,7 @@ commands that have since been renamed. Mate, decisions they led to are recorded 
 
 | Review | Summary |
 |---|---|
+| [design-review-2026-10-17-curated-benchmark.md](design-review-2026-10-17-curated-benchmark.md) | Independent fixed labels, honest wording measurement and shared training cleanup |
 | [design-review-2026-10-17-seed-intake.md](design-review-2026-10-17-seed-intake.md) | Declared encodings, complete seed curation and narrow new senses |
 | [design-review-2026-10-17-fidelity-maintenance.md](design-review-2026-10-17-fidelity-maintenance.md) | Finite questions, modal force, complete-phrase guards and precise senses |
 | [design-review-2026-10-17-contextual-imagery.md](design-review-2026-10-17-contextual-imagery.md) | Precise imagery meanings, writer boundaries and shared riff budgets |
