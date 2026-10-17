@@ -53,6 +53,19 @@ and responses live in `tests/fixtures/changes/`. Each change has:
 `entries` maps each entry id the changes name to its card, as `lookup` shows it (`aussiefy/cards.py`), with riffs
 under the vulgarity cap.
 
+All offsets count Unicode code points, including source/output spans, alternative regions and mask positions.
+For example, `🦘 toilet` becomes `🦘 dunny`: the source span is `[2, 8)` and the output span is `[2, 7)`.
+JavaScript clients can slice and splice by code point with `Array.from(text)`:
+
+```javascript
+const points = Array.from(text);
+const current = points.slice(start, end).join("");
+const swapped = [...points.slice(0, start), replacement, ...points.slice(end)].join("");
+```
+
+Use the rendering's own text for its mask offsets. Combining marks count separately, so a visible letter or
+emoji sequence can occupy several positions.
+
 ## How a swap is rendered
 
 Every alternative is rendered as the engine would render it at that spot, with the rest of the output held

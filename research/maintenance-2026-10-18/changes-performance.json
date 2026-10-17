@@ -1,0 +1,440 @@
+{
+  "git_base": "0e12b9b2d262151be44ab05ba4257f4ff38dcd40",
+  "capture_note": "Unreleased dev code plus pending Unicode schema-description clarification; runtime algorithms unchanged. Local warm medians, no browser or deployment timing claim.",
+  "python": "3.12.13",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "repeats": 5,
+  "target_characters": 5000,
+  "script_sha256": "1dd4b19bd03c75624b4c2588b6133561f34ad62a9632693e4cbbbcd9274149a1",
+  "texts": {
+    "conversational-a": {
+      "characters": 4971,
+      "sha256": "344fe727d7fc54a08469cf7065a8d45fc7ef4134fe879bcf068902ee139c631d"
+    },
+    "conversational-b": {
+      "characters": 4888,
+      "sha256": "6726973f9ff8c56e81777cc7c4996f4cddcf20c2943ac9cd17a3162889cad1aa"
+    },
+    "instructions-a": {
+      "characters": 4993,
+      "sha256": "1fe628fd76f5bb0bbf2a7d0d8ed5e6447a3983793c012d179c004fa59b5aede1"
+    },
+    "instructions-b": {
+      "characters": 4956,
+      "sha256": "e5d97df7b7f1fd060de34121a06bf25a84966377fc3c834facb8ba361c3152a6"
+    },
+    "news-a": {
+      "characters": 4943,
+      "sha256": "48cf301dab2940e88d758238e8c1672854acfdb062a6f63650c2193300cf9c01"
+    },
+    "news-b": {
+      "characters": 4852,
+      "sha256": "8548b4d6794433b7005117d20730cc5ad0956c9e071362dfb049b86a84a23ec4"
+    }
+  },
+  "settings": {
+    "site default (larrikin, dinkum, dad)": {
+      "level": 4,
+      "vulgarity": 1
+    },
+    "swaggie, troppo, tradie": {
+      "level": 5,
+      "vulgarity": 3,
+      "embellishment": 2
+    },
+    "stress (every garnish, stacks, infixes)": {
+      "level": 5,
+      "vulgarity": 2,
+      "embellishment": 2,
+      "document_config": {
+        "profile": {
+          "stack": 0.9,
+          "garnish": {
+            "riff": 1.0,
+            "opener": 0.8,
+            "tag": 0.8,
+            "tail": 1.0,
+            "connective": 0.6
+          },
+          "max_garnish": {
+            "riff": 30,
+            "opener": 20,
+            "tag": 20,
+            "tail": 10
+          },
+          "garnish_gap": 0,
+          "swearing": {
+            "infix": 6.0,
+            "exclaim": 0.5
+          }
+        }
+      }
+    }
+  },
+  "model_version": "1.2.0",
+  "criterion": "Existing median ratio <=1.5 within each setting; individual cases may exceed it.",
+  "backends": {
+    "ngram": {
+      "rows": [
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 124.0,
+          "changes_ms": 185.0,
+          "ratio": 1.492,
+          "renderings": 48
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 166.5,
+          "changes_ms": 165.5,
+          "ratio": 0.994,
+          "renderings": 59
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 101.6,
+          "changes_ms": 136.7,
+          "ratio": 1.346,
+          "renderings": 34
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 99.8,
+          "changes_ms": 139.6,
+          "ratio": 1.398,
+          "renderings": 45
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 71.5,
+          "changes_ms": 73.9,
+          "ratio": 1.033,
+          "renderings": 32
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 71.7,
+          "changes_ms": 78.2,
+          "ratio": 1.09,
+          "renderings": 31
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 115.1,
+          "changes_ms": 156.7,
+          "ratio": 1.361,
+          "renderings": 109
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 111.9,
+          "changes_ms": 147.5,
+          "ratio": 1.318,
+          "renderings": 111
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 184.2,
+          "changes_ms": 138.7,
+          "ratio": 0.753,
+          "renderings": 85
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 173.7,
+          "changes_ms": 149.3,
+          "ratio": 0.859,
+          "renderings": 88
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 86.8,
+          "changes_ms": 95.1,
+          "ratio": 1.096,
+          "renderings": 54
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 74.5,
+          "changes_ms": 90.6,
+          "ratio": 1.216,
+          "renderings": 54
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 109.3,
+          "changes_ms": 153.6,
+          "ratio": 1.406,
+          "renderings": 145
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 108.6,
+          "changes_ms": 151.8,
+          "ratio": 1.398,
+          "renderings": 163
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 101.1,
+          "changes_ms": 142.8,
+          "ratio": 1.413,
+          "renderings": 116
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 130.8,
+          "changes_ms": 195.6,
+          "ratio": 1.495,
+          "renderings": 120
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 88.2,
+          "changes_ms": 132.7,
+          "ratio": 1.504,
+          "renderings": 82
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 117.6,
+          "changes_ms": 150.7,
+          "ratio": 1.282,
+          "renderings": 70
+        }
+      ],
+      "summary": {
+        "site default (larrikin, dinkum, dad)": {
+          "median_ratio": 1.218,
+          "max_ratio": 1.492
+        },
+        "swaggie, troppo, tradie": {
+          "median_ratio": 1.1560000000000001,
+          "max_ratio": 1.361
+        },
+        "stress (every garnish, stacks, infixes)": {
+          "median_ratio": 1.4095,
+          "max_ratio": 1.504
+        }
+      }
+    },
+    "bundled": {
+      "rows": [
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 117.2,
+          "changes_ms": 110.6,
+          "ratio": 0.944,
+          "renderings": 48
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 95.6,
+          "changes_ms": 131.2,
+          "ratio": 1.373,
+          "renderings": 59
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 86.1,
+          "changes_ms": 90.7,
+          "ratio": 1.054,
+          "renderings": 34
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 92.3,
+          "changes_ms": 98.9,
+          "ratio": 1.072,
+          "renderings": 45
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 69.8,
+          "changes_ms": 79.0,
+          "ratio": 1.132,
+          "renderings": 32
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 96.6,
+          "changes_ms": 129.5,
+          "ratio": 1.341,
+          "renderings": 31
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 130.2,
+          "changes_ms": 181.7,
+          "ratio": 1.396,
+          "renderings": 109
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 152.7,
+          "changes_ms": 164.9,
+          "ratio": 1.08,
+          "renderings": 111
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 128.8,
+          "changes_ms": 217.8,
+          "ratio": 1.691,
+          "renderings": 85
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 194.3,
+          "changes_ms": 128.7,
+          "ratio": 0.662,
+          "renderings": 88
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 78.5,
+          "changes_ms": 91.2,
+          "ratio": 1.162,
+          "renderings": 54
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 74.4,
+          "changes_ms": 92.4,
+          "ratio": 1.242,
+          "renderings": 54
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 121.7,
+          "changes_ms": 263.5,
+          "ratio": 2.165,
+          "renderings": 145
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 165.6,
+          "changes_ms": 201.1,
+          "ratio": 1.215,
+          "renderings": 163
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 145.0,
+          "changes_ms": 276.9,
+          "ratio": 1.91,
+          "renderings": 116
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 178.7,
+          "changes_ms": 249.7,
+          "ratio": 1.397,
+          "renderings": 120
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 96.3,
+          "changes_ms": 122.8,
+          "ratio": 1.276,
+          "renderings": 82
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 116.4,
+          "changes_ms": 186.1,
+          "ratio": 1.599,
+          "renderings": 70
+        }
+      ],
+      "summary": {
+        "site default (larrikin, dinkum, dad)": {
+          "median_ratio": 1.1019999999999999,
+          "max_ratio": 1.373
+        },
+        "swaggie, troppo, tradie": {
+          "median_ratio": 1.202,
+          "max_ratio": 1.691
+        },
+        "stress (every garnish, stacks, infixes)": {
+          "median_ratio": 1.498,
+          "max_ratio": 2.165
+        }
+      }
+    }
+  },
+  "translation_embedder": null,
+  "qualification": "Both captures used Basic translation. lookup_backend changes lookup/gaps, not translation matching. Retained as historical configuration runs; not a Basic/Smart comparison."
+}

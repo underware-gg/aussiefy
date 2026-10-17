@@ -1,0 +1,2435 @@
+{
+  "package_path": "/private/tmp/aussiefy-hosted-wheel-site-20261018/aussiefy",
+  "package_version": "0.2.0",
+  "dependencies": {
+    "mcp": "2.3.0",
+    "mcp-types": "2.3.0",
+    "jsonschema": "4.26.0",
+    "httpx2": "2.13.1"
+  },
+  "runtime_files_sha256": {
+    "__init__.py": "86a3896a45b385e9c2d27de1b11668ecaf6b4a04586425d75c0d833cb8c7d2ec",
+    "align.py": "c81e2d5e2bde60d6cfd80ace84d40ae4cf453a9007cb9b28645ad27ec8a80b0b",
+    "cards.py": "676fb6b6e7e07c0536bc4c331a39fdd5e62e8cfacfd18a840e2dc9ab85711708",
+    "changes.py": "40d549808421618ae98bde0b1cc6f57eff431fac9c0407932ef6f8a135112422",
+    "claude.py": "c5d67f3c351006663be3f1095ba0dd27a83c2e2d866ccb38e20bd03de4db49e8",
+    "cli.py": "b848a9202b0232ebde2de19768f9cba795d6049fb2fb9495d194984448cb71b8",
+    "context.py": "683794dadfe3b095a73989e73d574d3f6bc447eab102596272a015c0dc8d2d2e",
+    "data/changes.schema.json": "ac35e37e5a8885fa3cf79c3f18b7f7f43cac821684655d67fe037a81b82adf28",
+    "data/concepts.yaml": "ee4e10c95fb0084aada1a7940e985e6d569014cbf7b8628f6fb278054c4cc23a",
+    "data/dialect.yaml": "233579ccbf2df852ff0a24267430e795b30033ec4fbab0d0f6e23657f2ef08b8",
+    "data/entries/classics.yaml": "d0305f5ea35404c9495cf85c611d48a3e31a7b5f7535a87bcb81151de418deea",
+    "data/entries/contextual-harvest.yaml": "692c47a39cb73a38ac64926ae10a3d2a3e356b7dfbbcc515102c421fed3df828",
+    "data/entries/dinkumcheck.yaml": "2f7c4ca793ba5b5de0053b78b548766f0f23be1560bd76354c2197428c8f2980",
+    "data/entries/everyday.yaml": "ad80e506ac17e462cb91c34a8d147a4e48f6c5e94dfd6b44bb7601aabe2eac54",
+    "data/entries/fairdinkum.yaml": "bee584203e6c16f70b03a3e072437ea284ec7487be7747495effd9c9207ab6d8",
+    "data/entries/flagged.yaml": "0966e94fe79e9f3d9e86f8c05bf9a3f25834142d645c3d7c15534d42a48c6326",
+    "data/entries/fourthpass.yaml": "d3f4f054429da1ff7dd321e5117a1cfef9514b7429dd07854da00d6aac4aec4c",
+    "data/entries/fragments.yaml": "ce818191a179a55c332c51ebc63a3b7ffcd8be50f9d557c771e88f585a9bcf8d",
+    "data/entries/gapfill.yaml": "66940cb00ce5e694ae898055ea565a66d55e705cd9485a45ed60fca23e274a35",
+    "data/entries/garnish.yaml": "2ef58f56cb8fb9a711f150a301197c6094793c553df2c298f30cf8c2372c7b6c",
+    "data/entries/idioms.yaml": "5c8b4b680c7106d38e6be33d2c5c44dcba7a10389823900f2000e398c6c84f54",
+    "data/entries/lexical.yaml": "2cc1c770b65a6f473bb519cb4020ad202707e9c6459ea50f90ff8e135dd11a9b",
+    "data/entries/phrases.yaml": "fcf426a1e427ff4784aed6733655496a985fc3ee6de23e84952870048e60febd",
+    "data/entries/scraped.yaml": "46c1af797167c62ae3222d3806d7a70aab9378afc4353f0fcb9fd3bc4b5f440b",
+    "data/entries/secondpass.yaml": "b1fdd5bbf9a597cb8239b5b58a1468155ae1307be9b17a18c0ff7297a9c882b5",
+    "data/entries/swearing.yaml": "adf7cc5b0e2ba47563a31c12ab4f3fa91b1dbedabdddea57ef763f9f0874a073",
+    "data/entries/thirdpass.yaml": "988d5a6b1a23c8e0e352da86777825c9429772964bbdf222982b209a54b28169",
+    "data/genres.yaml": "0a14c7b4686f9aa511f3cd4084cb913d67c71369886f7c4dff5873dee1e3e8eb",
+    "data/grammar.yaml": "9c384595403144d446f7823aa6027b014b98c048e07e34fed36e09b5b8b88510",
+    "data/guide.yaml": "0055e2e62fe45df9f4537ea61c2eafd433363320f916fa0120fbf0ab1adb0126",
+    "data/imagery.yaml": "848c2d0b324650e042046a5ce52c73ddfef47dda527850fd2355e5579e93347c",
+    "data/judge.yaml": "f4122c83d9297c8b359688b23256c62e325df34c7c7c5bac3b593b1bb2596cc2",
+    "data/model/meta.json": "2dfbc3c8b6909dcfa821fd846116904f0f79b57b07c75b104e8ffa91e1991a5a",
+    "data/model/vectors.f16": "c43adab96572058bb1c106fc448f6ebf56e9a1f9406360b462cd6874e16273ac",
+    "data/model/vocab.txt": "9fe80d0dca7829bce0490b8f4004f417fe7b230fb275802e64087ba7cc3dc5eb",
+    "data/phonetic.yaml": "aa850aec28dc9461058337d92422ec4dc3f66678a3de9ea31a52b8ef9606cd59",
+    "data/pos/README.md": "d51caf6d3b464e907d4f0337f4126caa2f9b31da64940184ea851d4ff6883ca5",
+    "data/pos/meta.json": "d6df62aecd3971528037cd2f387d944537e8a6ce04be7b7d538ae29cb903dc7b",
+    "data/pos/tagger.json.gz": "3222c88544fbc2600def0686055843f9dccc3f60d485c4b791339ea8af2627f6",
+    "data/profiles.yaml": "db918602c1978c2c09e22ac72958882cd68133b83839e82efa4ae1419591f284",
+    "data/riffs.yaml": "4fbc61791215f12fb8d0931135c29e0cbe50003e863aca6650a2e69cc0aedf40",
+    "data/source_policy.yaml": "4ffbe6513020907b1f2425f1be874ae7739ad4254a154a39accf1b1190cc2c12",
+    "data/sources.yaml": "775eac577b8f75ca95af98310c15ee91db271e35528ce6c8284437a12ac34349",
+    "data/swears.yaml": "48518167f51ac8f0f3ca19c7614439521d41f36a8ef384d683f86e1ae2d971b2",
+    "detect.py": "64edc58586107125ba982824b475ba80dcbb4047a86571421306abb57b800477",
+    "dialect.py": "8cf34ba9a2bdb86d924351122b4eaa6a2690730f64d1bc0ee97f6a6a8e46eb33",
+    "dump.py": "208fa74cd244718552d8dc2065321f44f604c8ac79937bcabb010fdc030fbf20",
+    "embed.py": "afb78a3624c86492800aa8f639f008d45c8de5906d930827a47f169bd01a737f",
+    "engine.py": "e313a33cfcd7e614f79061cd51bfa39f1a1d639b4966321cb65ae14afbf4a76b",
+    "errors.py": "3c565cfe02d93f68f0a57bb1013a0dc799b47bea748c9a38b1639e1483448319",
+    "explain.py": "9027beb88ce242457c772fdef6023308acd9ace3c94c5a17055f42b36eade907",
+    "gaps.py": "715711e7c5eb0d21d48b1a5ce07e51f904ba6bde20be621d7be8f5802bb241c0",
+    "garnish.py": "ef0ac07a6b33df79fc2e6169324f9413d711114b6e8549b3d7fd1d1d1bd70a26",
+    "genre.py": "466304587f40af12cd2bc6eaf15403ad35746fb35c4a266af795fcd96ee616cf",
+    "guide.py": "26469f716318af88ab30010feafdda09451e337676ce1f9aee71aefea57212bf",
+    "harness.py": "3a15683b5449d45ffc9833ff26e79bcb182523be129dbc24e5e773bd48047d75",
+    "imagery.py": "6fe70f8a3a21412c92431fbd50208b8d680feadf1746241199dc51642f103dc8",
+    "judge.py": "6fc1aca4c3e746f8a2dd91690bd46c64ef0981f50a90016283789c1c0119e725",
+    "lint.py": "2454283d56327c39d7397196927014375cb3712331e6406b0d599b4e09e58da5",
+    "llm.py": "4f7a4aacfa0f6e060417ec6690829c8a764459e205af91924f6a798b3890a7ca",
+    "loader.py": "dddaf7e161762286ad2e0116b62a5bf4432eb0713a80ee59b9070629d1e4b586",
+    "lookup.py": "769fd471405383136a23f344607411a696e8cc0b2f300edeeea063ba756a30f6",
+    "markdown.py": "8e7c50c2e15790193f91deb5c30de8264c98ce1e50b7f41c41ff58ce172aa0c7",
+    "markup.py": "9bfe4154dafd8181185c12fb23d130c614b205a4a3ab5b7fc9dcd858ba36ab64",
+    "masks.py": "8ba17c186a3ef564e815a885e371da98653c7a801c7135dd72467a5ef33e61cb",
+    "matcher.py": "60e2c8f6a4f0019d94cbe313c830e0a27cd3e94c48254ae9c34207636feea573",
+    "mcp_server.py": "2d820e696297ef78997c4d7dde8a81fb0392f1f23a6acbd00e74b198c5e3e488",
+    "model.py": "bb06157e7f3d7caf50859f282c23c4d26caf5b513bf6b5b898035d66730d414e",
+    "models.py": "b8c1e4f03d9d2bbe221fd2382112afb07668e489b50499a51a41995a0afcbf65",
+    "morph.py": "cd6ace1c5bf1e07b58fa32278b4a61950d192ae345ad12c1b88a6328c0e1c930",
+    "policy.py": "c8f50de05d8c15bfceb409a6c1b1b52ab21d1963a217aa804470e46c2701dbac",
+    "pos.py": "2dd736bba71f76cab58d0820dea5b48cbcd330b47032a49990b2b84cac3cc50c",
+    "profile.py": "faca5d7b66e4afff461f77ccf7051d9b761e5e9d86487bb21120d3091e1dfc64",
+    "protected.py": "2909130ba76dc405bdc7496929044a81b83ac3efa73c4adc62db1e792dcade03",
+    "realise.py": "f8bd81d42eb0256fc05fe9684627bc3b0d92d66a8655e77769a7af59adf2937f",
+    "retelling.py": "0f66c4eb070499fd9e8522feb2b9390c8a398e0406fa38dbc067afad9930e806",
+    "rounds.py": "5bf5df186c6a954700fb59fd79d309a8db0d52b2bb5e5aa8d8357a04429eb067",
+    "schema.py": "ec4ac9656c2f59a299f1346648af1b254228846355d1651b33931b90f2eaa887",
+    "scrape/__init__.py": "87bb592f9905a5ccc99020dfaf7af0c359fc9e9d15d825730f20b8b0d10e3696",
+    "scrape/fetch.py": "94cc59262177fcecddd865293038aa318733973296e582763bf5896d58eb8582",
+    "scrape/fragments.py": "063fed1f9d3b71c5de4ffea7e04516df7683c031a74d5afa9e8f2d6f93cbb47a",
+    "scrape/harvest.py": "30d099a5a76b7099180c5440a965024059e092a9ffb8410a6be2d9443f99c90e",
+    "scrape/ingest.py": "4af0978359d2eaab2ae3ff33fc34cc48263c6de38620d2e85e891918b4be508b",
+    "scrape/normalise.py": "2995e0c1457404eb1bbc1eff499628ac719a91fc1661bd958b212c52ca27e60b",
+    "scrape/parse.py": "0f93f4a2dc14b4e385054c3fa8216bd5cc3be365e475c0d2149260c4c9174596",
+    "scrape/review.py": "8cdff28d564935c029c8376ff23f8e357dd1ef4a9a445af37c1ae9a1eac13641",
+    "scrape/tag.py": "9b13c5f8467c8ffe5362945765f8cb1c2da35a960cb16f283f6364279ba5be2c",
+    "select.py": "f093b544b1038091d7ad9df88b89ebbb4c9fea4abe00fca9b072682058af8bde",
+    "static.py": "a6490595c3200e89ec71639d85d25b6a2f71f5963ebed75fc47ae343d1f4b150",
+    "terms.py": "caf96c37d418181affa0dc15a0fd7c947c8dea978ed5c454280bbac969a3c264",
+    "text.py": "f50dd4f8b77ebffa84bc5fe27142ea3a27541609eb362ba2b8f8af721d031df0",
+    "translation.py": "98c6afb179e911ac52435eb12fd39eda8ce5c7a5d97b04a7c3013b8c92e9a1fe",
+    "verify.py": "34273141474249606c0b54022b48bb149f4e8246364c8e68d5a9df837b023e48",
+    "yarn.py": "87b31225c0553a02d0f8bc31b59a1af756f117dd03294f75bac5b2906adc8c25"
+  },
+  "wheel": {
+    "filename": "aussiefy-0.2.0-py3-none-any.whl",
+    "sha256": "4b8357774d8e2c91bd5e09eb8b7a775cc17a86bd7034a4bdfc646661db0bd083",
+    "payload_matches_imported_package": true
+  },
+  "driver_sha256": "a3c36bdfa84717e39388eed9128c96a0ca851f7adc39476982614b4ba5329a01",
+  "stdio": {
+    "tools": [
+      {
+        "name": "aussie_lookup",
+        "title": null,
+        "description": "Genuine Australian slang for a plain-English meaning ('very busy', 'someone'), or what an Aussie term\nmeans ('goog'). Filtered to the level and vulgarity, so it never offers what lint would reject.\ninclude_gated also returns entries held back as doubtful (marked as such).\nshort: each result as its form, gloss, frame, level and vulgarity only.",
+        "input_schema": {
+          "properties": {
+            "query": {
+              "description": "A plain-English meaning or an Aussie term.",
+              "title": "Query",
+              "type": "string"
+            },
+            "level": {
+              "anyOf": [
+                {
+                  "maximum": 5,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "tourist",
+                    "blow-in",
+                    "local",
+                    "larrikin",
+                    "swaggie"
+                  ],
+                  "type": "string"
+                }
+              ],
+              "default": 5,
+              "description": "How Aussie, by number or name: 1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie.",
+              "title": "Level"
+            },
+            "vulgarity": {
+              "anyOf": [
+                {
+                  "maximum": 3,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "nan",
+                    "dad",
+                    "uncle-bob",
+                    "tradie"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "How rude, by number or name: 0 nan, 1 dad, 2 uncle-bob, 3 tradie. Omit for the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5).",
+              "title": "Vulgarity"
+            },
+            "limit": {
+              "default": 8,
+              "title": "Limit",
+              "type": "integer"
+            },
+            "include_gated": {
+              "default": false,
+              "title": "Include Gated",
+              "type": "boolean"
+            },
+            "short": {
+              "default": false,
+              "title": "Short",
+              "type": "boolean"
+            },
+            "embellishment": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Embellishment"
+            },
+            "document_type": {
+              "default": "general",
+              "title": "Document Type",
+              "type": "string"
+            },
+            "document_config": {
+              "anyOf": [
+                {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Document Config"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "type": "object",
+          "title": "aussie_lookupArguments"
+        },
+        "execution": null,
+        "output_schema": {
+          "type": "object",
+          "additionalProperties": true,
+          "title": "aussie_lookupDictOutput"
+        },
+        "icons": null,
+        "annotations": {
+          "title": null,
+          "read_only_hint": true,
+          "destructive_hint": false,
+          "idempotent_hint": true,
+          "open_world_hint": false
+        },
+        "meta": null
+      },
+      {
+        "name": "aussie_lint",
+        "title": null,
+        "description": "Lint an Aussified draft: flagged or non-Australian phrases, swearing over the cap or overused, US\nspelling, and US and British words (english: us, uk, auto, none, as for aussie_translate). Pass the original text to also check length and that names and numbers survive.\nAlso suggests spots that could be more Aussie. markup (markdown, mdx, auto) lints the prose only and,\nwith the original, checks its code and markup came through unchanged. embellishment (deadset, dinkum,\ntroppo; default Dinkum for General): how much longer than the original it may run. suggest=False\nskips the optional suggestions (a whole engine translation), for a faster check.",
+        "input_schema": {
+          "properties": {
+            "text": {
+              "description": "The text: plain English to Aussify, or an Aussified draft to lint.",
+              "title": "Text",
+              "type": "string"
+            },
+            "level": {
+              "anyOf": [
+                {
+                  "maximum": 5,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "tourist",
+                    "blow-in",
+                    "local",
+                    "larrikin",
+                    "swaggie"
+                  ],
+                  "type": "string"
+                }
+              ],
+              "default": 5,
+              "description": "How Aussie, by number or name: 1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie.",
+              "title": "Level"
+            },
+            "vulgarity": {
+              "anyOf": [
+                {
+                  "maximum": 3,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "nan",
+                    "dad",
+                    "uncle-bob",
+                    "tradie"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "How rude, by number or name: 0 nan, 1 dad, 2 uncle-bob, 3 tradie. Omit for the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5).",
+              "title": "Vulgarity"
+            },
+            "original": {
+              "anyOf": [
+                {
+                  "description": "The original text it was translated from.",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Original"
+            },
+            "markup": {
+              "default": "text",
+              "title": "Markup",
+              "type": "string"
+            },
+            "english": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "English"
+            },
+            "embellishment": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Embellishment"
+            },
+            "document_type": {
+              "default": "general",
+              "title": "Document Type",
+              "type": "string"
+            },
+            "document_config": {
+              "anyOf": [
+                {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Document Config"
+            },
+            "suggest": {
+              "default": true,
+              "title": "Suggest",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "type": "object",
+          "title": "aussie_lintArguments"
+        },
+        "execution": null,
+        "output_schema": {
+          "type": "object",
+          "additionalProperties": true,
+          "title": "aussie_lintDictOutput"
+        },
+        "icons": null,
+        "annotations": {
+          "title": null,
+          "read_only_hint": true,
+          "destructive_hint": false,
+          "idempotent_hint": true,
+          "open_world_hint": false
+        },
+        "meta": null
+      },
+      {
+        "name": "aussie_guide",
+        "title": null,
+        "description": "Voice, language limits and craft rules for Aussifying at a level (1-5), and how much liberty to take\nat an embellishment (deadset, dinkum, troppo; default Dinkum for General).",
+        "input_schema": {
+          "properties": {
+            "level": {
+              "anyOf": [
+                {
+                  "maximum": 5,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "tourist",
+                    "blow-in",
+                    "local",
+                    "larrikin",
+                    "swaggie"
+                  ],
+                  "type": "string"
+                }
+              ],
+              "default": 5,
+              "description": "How Aussie, by number or name: 1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie.",
+              "title": "Level"
+            },
+            "vulgarity": {
+              "anyOf": [
+                {
+                  "maximum": 3,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "nan",
+                    "dad",
+                    "uncle-bob",
+                    "tradie"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "How rude, by number or name: 0 nan, 1 dad, 2 uncle-bob, 3 tradie. Omit for the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5).",
+              "title": "Vulgarity"
+            },
+            "embellishment": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Embellishment"
+            },
+            "document_type": {
+              "default": "general",
+              "title": "Document Type",
+              "type": "string"
+            },
+            "document_config": {
+              "anyOf": [
+                {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Document Config"
+            }
+          },
+          "type": "object",
+          "title": "aussie_guideArguments"
+        },
+        "execution": null,
+        "output_schema": {
+          "type": "object",
+          "additionalProperties": true,
+          "title": "aussie_guideDictOutput"
+        },
+        "icons": null,
+        "annotations": {
+          "title": null,
+          "read_only_hint": true,
+          "destructive_hint": false,
+          "idempotent_hint": true,
+          "open_world_hint": false
+        },
+        "meta": null
+      },
+      {
+        "name": "aussie_plan",
+        "title": null,
+        "description": "The rule engine's draft, the slang it planned (with riffs and suggested openings), and the sentences\nit found too formal to handle, and guidance for the text's genre and embellishment. Takes\naussie_translate's options. embellishment defaults to dinkum, a retelling's (the plan is for writing\nyour own version); pass the genre's own setting for a plan that matches aussie_translate's output.",
+        "input_schema": {
+          "properties": {
+            "text": {
+              "description": "The text: plain English to Aussify, or an Aussified draft to lint.",
+              "title": "Text",
+              "type": "string"
+            },
+            "level": {
+              "anyOf": [
+                {
+                  "maximum": 5,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "tourist",
+                    "blow-in",
+                    "local",
+                    "larrikin",
+                    "swaggie"
+                  ],
+                  "type": "string"
+                }
+              ],
+              "default": 5,
+              "description": "How Aussie, by number or name: 1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie.",
+              "title": "Level"
+            },
+            "seed": {
+              "default": 0,
+              "description": "Seed for the weighted choices: the same text, settings and seed give the same output; change it for a different version.",
+              "title": "Seed",
+              "type": "integer"
+            },
+            "vulgarity": {
+              "anyOf": [
+                {
+                  "maximum": 3,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "nan",
+                    "dad",
+                    "uncle-bob",
+                    "tradie"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "How rude, by number or name: 0 nan, 1 dad, 2 uncle-bob, 3 tradie. Omit for the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5).",
+              "title": "Vulgarity"
+            },
+            "variety": {
+              "default": 0,
+              "description": "Choose among the N best-fitting slang terms only (1 = always the best fit); 0 weighs every eligible term.",
+              "minimum": 0,
+              "title": "Variety",
+              "type": "integer"
+            },
+            "registers": {
+              "anyOf": [
+                {
+                  "items": {
+                    "enum": [
+                      "current",
+                      "dated",
+                      "archaic"
+                    ],
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Registers allowed; omit for the level's own (current, plus dated at 5).",
+              "title": "Registers"
+            },
+            "regions": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Region tags to prefer, e.g. ['qld']; entries tagged with other regions are left out.",
+              "title": "Regions"
+            },
+            "unlock": {
+              "anyOf": [
+                {
+                  "items": {
+                    "enum": [
+                      "not_aussie",
+                      "slur",
+                      "dubious_meaning",
+                      "archaic",
+                      "fabricated",
+                      "untagged",
+                      "all"
+                    ],
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Flags whose gated (doubtful) entries become eligible, or ['all'].",
+              "title": "Unlock"
+            },
+            "markup": {
+              "default": "text",
+              "title": "Markup",
+              "type": "string"
+            },
+            "english": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "English"
+            },
+            "embellishment": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Embellishment"
+            },
+            "document_type": {
+              "default": "general",
+              "title": "Document Type",
+              "type": "string"
+            },
+            "document_config": {
+              "anyOf": [
+                {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Document Config"
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "type": "object",
+          "title": "aussie_planArguments"
+        },
+        "execution": null,
+        "output_schema": {
+          "type": "object",
+          "additionalProperties": true,
+          "title": "aussie_planDictOutput"
+        },
+        "icons": null,
+        "annotations": {
+          "title": null,
+          "read_only_hint": true,
+          "destructive_hint": false,
+          "idempotent_hint": true,
+          "open_world_hint": false
+        },
+        "meta": null
+      },
+      {
+        "name": "aussie_translate",
+        "title": null,
+        "description": "Deterministic rule-engine translation (same text, level and seed give the same output). Change the\nseed for a different version. variety N picks among the N best-fitting terms only (1 = always the best\nfit); 0, the default, weighs every eligible term. registers (current, dated, archaic) and regions (e.g.\nqld) narrow or widen what the level allows.\nunlock (flags whose gated entries become eligible) widens it.\nmarkup (markdown, mdx, auto) translates only the prose of a document, keeping code, tags, links, front matter\nand headings exactly as they were. english (us, uk, auto, none): the English the text is in, for US and\nUK words Australians say differently (faucet -> tap; British pants -> undies only for uk). embellishment\n(0-2 or deadset, dinkum, troppo): how much liberty the telling takes, from none (the words swap, nothing\nadded) to a performed yarn; default Dinkum for General; named types supply presets.",
+        "input_schema": {
+          "properties": {
+            "text": {
+              "description": "The text: plain English to Aussify, or an Aussified draft to lint.",
+              "title": "Text",
+              "type": "string"
+            },
+            "level": {
+              "anyOf": [
+                {
+                  "maximum": 5,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "tourist",
+                    "blow-in",
+                    "local",
+                    "larrikin",
+                    "swaggie"
+                  ],
+                  "type": "string"
+                }
+              ],
+              "default": 5,
+              "description": "How Aussie, by number or name: 1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie.",
+              "title": "Level"
+            },
+            "seed": {
+              "default": 0,
+              "description": "Seed for the weighted choices: the same text, settings and seed give the same output; change it for a different version.",
+              "title": "Seed",
+              "type": "integer"
+            },
+            "vulgarity": {
+              "anyOf": [
+                {
+                  "maximum": 3,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "nan",
+                    "dad",
+                    "uncle-bob",
+                    "tradie"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "How rude, by number or name: 0 nan, 1 dad, 2 uncle-bob, 3 tradie. Omit for the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5).",
+              "title": "Vulgarity"
+            },
+            "variety": {
+              "default": 0,
+              "description": "Choose among the N best-fitting slang terms only (1 = always the best fit); 0 weighs every eligible term.",
+              "minimum": 0,
+              "title": "Variety",
+              "type": "integer"
+            },
+            "registers": {
+              "anyOf": [
+                {
+                  "items": {
+                    "enum": [
+                      "current",
+                      "dated",
+                      "archaic"
+                    ],
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Registers allowed; omit for the level's own (current, plus dated at 5).",
+              "title": "Registers"
+            },
+            "regions": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Region tags to prefer, e.g. ['qld']; entries tagged with other regions are left out.",
+              "title": "Regions"
+            },
+            "unlock": {
+              "anyOf": [
+                {
+                  "items": {
+                    "enum": [
+                      "not_aussie",
+                      "slur",
+                      "dubious_meaning",
+                      "archaic",
+                      "fabricated",
+                      "untagged",
+                      "all"
+                    ],
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Flags whose gated (doubtful) entries become eligible, or ['all'].",
+              "title": "Unlock"
+            },
+            "markdown": {
+              "default": false,
+              "title": "Markdown",
+              "type": "boolean"
+            },
+            "markup": {
+              "default": "text",
+              "title": "Markup",
+              "type": "string"
+            },
+            "english": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "English"
+            },
+            "embellishment": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Embellishment"
+            },
+            "document_type": {
+              "default": "general",
+              "title": "Document Type",
+              "type": "string"
+            },
+            "document_config": {
+              "anyOf": [
+                {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Document Config"
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "type": "object",
+          "title": "aussie_translateArguments"
+        },
+        "execution": null,
+        "output_schema": {
+          "type": "object",
+          "additionalProperties": true,
+          "title": "aussie_translateDictOutput"
+        },
+        "icons": null,
+        "annotations": {
+          "title": null,
+          "read_only_hint": true,
+          "destructive_hint": false,
+          "idempotent_hint": true,
+          "open_world_hint": false
+        },
+        "meta": null
+      },
+      {
+        "name": "aussie_verify",
+        "title": null,
+        "description": "Check a finished translation (anyone's: the engine's, yours, a person's) against its original: a log of\nproblems, worst first, each with a severity (critical: a lost number, a piece of markup changed, or an\nempty translation; major: breaks the brief; minor: craft, a sentence nothing in the translation says\nagain, or a hint worth a look; info: coverage), and metrics. Deterministic; it\ndoesn't judge tone or flow. english as for aussie_translate; embellishment sets the length limit (default\nDinkum for General).",
+        "input_schema": {
+          "properties": {
+            "text": {
+              "description": "The text: plain English to Aussify, or an Aussified draft to lint.",
+              "title": "Text",
+              "type": "string"
+            },
+            "original": {
+              "description": "The original text it was translated from.",
+              "title": "Original",
+              "type": "string"
+            },
+            "level": {
+              "anyOf": [
+                {
+                  "maximum": 5,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "tourist",
+                    "blow-in",
+                    "local",
+                    "larrikin",
+                    "swaggie"
+                  ],
+                  "type": "string"
+                }
+              ],
+              "default": 5,
+              "description": "How Aussie, by number or name: 1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie.",
+              "title": "Level"
+            },
+            "vulgarity": {
+              "anyOf": [
+                {
+                  "maximum": 3,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "nan",
+                    "dad",
+                    "uncle-bob",
+                    "tradie"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "How rude, by number or name: 0 nan, 1 dad, 2 uncle-bob, 3 tradie. Omit for the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5).",
+              "title": "Vulgarity"
+            },
+            "markup": {
+              "default": "text",
+              "title": "Markup",
+              "type": "string"
+            },
+            "english": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "English"
+            },
+            "embellishment": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Embellishment"
+            },
+            "document_type": {
+              "default": "general",
+              "title": "Document Type",
+              "type": "string"
+            },
+            "document_config": {
+              "anyOf": [
+                {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Document Config"
+            }
+          },
+          "required": [
+            "text",
+            "original"
+          ],
+          "type": "object",
+          "title": "aussie_verifyArguments"
+        },
+        "execution": null,
+        "output_schema": {
+          "type": "object",
+          "additionalProperties": true,
+          "title": "aussie_verifyDictOutput"
+        },
+        "icons": null,
+        "annotations": {
+          "title": null,
+          "read_only_hint": true,
+          "destructive_hint": false,
+          "idempotent_hint": true,
+          "open_world_hint": false
+        },
+        "meta": null
+      }
+    ],
+    "calls": [
+      {
+        "tool": "aussie_guide",
+        "arguments": {
+          "level": 4,
+          "vulgarity": 1,
+          "embellishment": 0,
+          "document_type": "general"
+        },
+        "result_sha256": "db3f283cf5a6eaa4f25116efcc70b3449efd9af1048aadb78d13d703944caadf"
+      },
+      {
+        "tool": "aussie_lookup",
+        "arguments": {
+          "level": 4,
+          "vulgarity": 1,
+          "embellishment": 0,
+          "document_type": "general",
+          "query": "very tired",
+          "limit": 3
+        },
+        "result_sha256": "7506b6b80db54c8975fbba28de987019215f11a2f8e707c561f088f9e52d4b1e"
+      },
+      {
+        "tool": "aussie_plan",
+        "arguments": {
+          "level": 4,
+          "vulgarity": 1,
+          "embellishment": 0,
+          "document_type": "general",
+          "text": "🦘 Australian spelling. Rob waited at least 30 seconds. The toilet is broken. Keep `get_user()` unchanged.",
+          "markup": "markdown",
+          "seed": 0
+        },
+        "result_sha256": "3e2039d73589ce9058317242f69f7444967df26b287f65037637cedea4f54a46"
+      },
+      {
+        "tool": "aussie_translate",
+        "arguments": {
+          "level": 4,
+          "vulgarity": 1,
+          "embellishment": 0,
+          "document_type": "general",
+          "text": "🦘 Australian spelling. Rob waited at least 30 seconds. The toilet is broken. Keep `get_user()` unchanged.",
+          "markdown": true,
+          "seed": 0
+        },
+        "result_sha256": "2b3fa3ca3fa2247756db46c549c1891536e535ada62f9772f292128cfa80d058",
+        "text": "🦘 Australian spelling. Rob waited at least 30 seconds. The toilet is broken. Keep `get_user()` unchanged."
+      },
+      {
+        "tool": "aussie_lint",
+        "arguments": {
+          "level": 4,
+          "vulgarity": 1,
+          "embellishment": 0,
+          "document_type": "general",
+          "text": "🦘 Australian spelling. Rob waited at least 30 seconds. The toilet is broken. Keep `get_user()` unchanged.",
+          "original": "🦘 Australian spelling. Rob waited at least 30 seconds. The toilet is broken. Keep `get_user()` unchanged.",
+          "markup": "markdown"
+        },
+        "result_sha256": "a6f46b04445c273f33bb9e3533b3883e18d294df702d41567945ffb6efa49817"
+      },
+      {
+        "tool": "aussie_verify",
+        "arguments": {
+          "level": 4,
+          "vulgarity": 1,
+          "embellishment": 0,
+          "document_type": "general",
+          "text": "🦘 Australian spelling. Rob waited at least 30 seconds. The toilet is broken. Keep `get_user()` unchanged.",
+          "original": "🦘 Australian spelling. Rob waited at least 30 seconds. The toilet is broken. Keep `get_user()` unchanged.",
+          "markup": "markdown"
+        },
+        "result_sha256": "2bd1e1610d5110d87b1685c3a7e49f91d57abf270a87296ecebc35b258faa190",
+        "ok": true
+      }
+    ]
+  },
+  "http_asgi": {
+    "tools": [
+      {
+        "name": "aussie_lookup",
+        "title": null,
+        "description": "Genuine Australian slang for a plain-English meaning ('very busy', 'someone'), or what an Aussie term\nmeans ('goog'). Filtered to the level and vulgarity, so it never offers what lint would reject.\nshort: each result as its form, gloss, frame, level and vulgarity only.",
+        "input_schema": {
+          "properties": {
+            "query": {
+              "description": "A plain-English meaning or an Aussie term.",
+              "maxLength": 24,
+              "title": "Query",
+              "type": "string"
+            },
+            "level": {
+              "anyOf": [
+                {
+                  "maximum": 5,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "tourist",
+                    "blow-in",
+                    "local",
+                    "larrikin",
+                    "swaggie"
+                  ],
+                  "type": "string"
+                }
+              ],
+              "default": 5,
+              "description": "How Aussie, by number or name: 1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie.",
+              "title": "Level"
+            },
+            "vulgarity": {
+              "anyOf": [
+                {
+                  "maximum": 3,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "nan",
+                    "dad",
+                    "uncle-bob",
+                    "tradie"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "How rude, by number or name: 0 nan, 1 dad, 2 uncle-bob, 3 tradie. Omit for the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5).",
+              "title": "Vulgarity"
+            },
+            "limit": {
+              "default": 3,
+              "maximum": 3,
+              "title": "Limit",
+              "type": "integer"
+            },
+            "short": {
+              "default": false,
+              "title": "Short",
+              "type": "boolean"
+            },
+            "embellishment": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Embellishment"
+            },
+            "document_type": {
+              "default": "general",
+              "enum": [
+                "general",
+                "auto",
+                "story",
+                "personal",
+                "news",
+                "instructions",
+                "technical",
+                "official"
+              ],
+              "title": "Document Type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "type": "object",
+          "title": "aussie_lookupArguments"
+        },
+        "execution": null,
+        "output_schema": {
+          "type": "object",
+          "additionalProperties": true,
+          "title": "aussie_lookupDictOutput"
+        },
+        "icons": null,
+        "annotations": {
+          "title": null,
+          "read_only_hint": true,
+          "destructive_hint": false,
+          "idempotent_hint": true,
+          "open_world_hint": false
+        },
+        "meta": null
+      },
+      {
+        "name": "aussie_lint",
+        "title": null,
+        "description": "Lint an Aussified draft: flagged or non-Australian phrases, swearing over the cap or overused, US\nspelling, and US and British words (english: us, uk, auto, none, as for aussie_translate). Pass the original text to also check length and that names and numbers survive.\nAlso suggests spots that could be more Aussie. markup (markdown, mdx, auto) lints the prose only and,\nwith the original, checks its code and markup came through unchanged. embellishment (deadset, dinkum,\ntroppo; default Dinkum for General): how much longer than the original it may run. suggest=False\nskips the optional suggestions (a whole engine translation), for a faster check.",
+        "input_schema": {
+          "properties": {
+            "text": {
+              "description": "The text: plain English to Aussify, or an Aussified draft to lint.",
+              "maxLength": 180,
+              "title": "Text",
+              "type": "string"
+            },
+            "level": {
+              "anyOf": [
+                {
+                  "maximum": 5,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "tourist",
+                    "blow-in",
+                    "local",
+                    "larrikin",
+                    "swaggie"
+                  ],
+                  "type": "string"
+                }
+              ],
+              "default": 5,
+              "description": "How Aussie, by number or name: 1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie.",
+              "title": "Level"
+            },
+            "vulgarity": {
+              "anyOf": [
+                {
+                  "maximum": 3,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "nan",
+                    "dad",
+                    "uncle-bob",
+                    "tradie"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "How rude, by number or name: 0 nan, 1 dad, 2 uncle-bob, 3 tradie. Omit for the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5).",
+              "title": "Vulgarity"
+            },
+            "original": {
+              "anyOf": [
+                {
+                  "description": "The original text it was translated from.",
+                  "maxLength": 180,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Original"
+            },
+            "markup": {
+              "default": "text",
+              "title": "Markup",
+              "type": "string"
+            },
+            "english": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "English"
+            },
+            "embellishment": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Embellishment"
+            },
+            "document_type": {
+              "default": "general",
+              "enum": [
+                "general",
+                "auto",
+                "story",
+                "personal",
+                "news",
+                "instructions",
+                "technical",
+                "official"
+              ],
+              "title": "Document Type",
+              "type": "string"
+            },
+            "suggest": {
+              "default": true,
+              "title": "Suggest",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "type": "object",
+          "title": "aussie_lintArguments"
+        },
+        "execution": null,
+        "output_schema": {
+          "type": "object",
+          "additionalProperties": true,
+          "title": "aussie_lintDictOutput"
+        },
+        "icons": null,
+        "annotations": {
+          "title": null,
+          "read_only_hint": true,
+          "destructive_hint": false,
+          "idempotent_hint": true,
+          "open_world_hint": false
+        },
+        "meta": null
+      },
+      {
+        "name": "aussie_guide",
+        "title": null,
+        "description": "Voice, language limits and craft rules for Aussifying at a level (1-5), and how much liberty to take\nat an embellishment (deadset, dinkum, troppo; default Dinkum for General).",
+        "input_schema": {
+          "properties": {
+            "level": {
+              "anyOf": [
+                {
+                  "maximum": 5,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "tourist",
+                    "blow-in",
+                    "local",
+                    "larrikin",
+                    "swaggie"
+                  ],
+                  "type": "string"
+                }
+              ],
+              "default": 5,
+              "description": "How Aussie, by number or name: 1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie.",
+              "title": "Level"
+            },
+            "vulgarity": {
+              "anyOf": [
+                {
+                  "maximum": 3,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "nan",
+                    "dad",
+                    "uncle-bob",
+                    "tradie"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "How rude, by number or name: 0 nan, 1 dad, 2 uncle-bob, 3 tradie. Omit for the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5).",
+              "title": "Vulgarity"
+            },
+            "embellishment": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Embellishment"
+            },
+            "document_type": {
+              "default": "general",
+              "enum": [
+                "general",
+                "auto",
+                "story",
+                "personal",
+                "news",
+                "instructions",
+                "technical",
+                "official"
+              ],
+              "title": "Document Type",
+              "type": "string"
+            }
+          },
+          "type": "object",
+          "title": "aussie_guideArguments"
+        },
+        "execution": null,
+        "output_schema": {
+          "type": "object",
+          "additionalProperties": true,
+          "title": "aussie_guideDictOutput"
+        },
+        "icons": null,
+        "annotations": {
+          "title": null,
+          "read_only_hint": true,
+          "destructive_hint": false,
+          "idempotent_hint": true,
+          "open_world_hint": false
+        },
+        "meta": null
+      },
+      {
+        "name": "aussie_plan",
+        "title": null,
+        "description": "The rule engine's draft, the slang it planned (with riffs and suggested openings), and the sentences\nit found too formal to handle, and guidance for the text's genre and embellishment. Takes\naussie_translate's options. embellishment defaults to dinkum, a retelling's (the plan is for writing\nyour own version); pass the genre's own setting for a plan that matches aussie_translate's output.",
+        "input_schema": {
+          "properties": {
+            "text": {
+              "description": "The text: plain English to Aussify, or an Aussified draft to lint.",
+              "maxLength": 180,
+              "title": "Text",
+              "type": "string"
+            },
+            "level": {
+              "anyOf": [
+                {
+                  "maximum": 5,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "tourist",
+                    "blow-in",
+                    "local",
+                    "larrikin",
+                    "swaggie"
+                  ],
+                  "type": "string"
+                }
+              ],
+              "default": 5,
+              "description": "How Aussie, by number or name: 1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie.",
+              "title": "Level"
+            },
+            "seed": {
+              "default": 0,
+              "description": "Seed for the weighted choices: the same text, settings and seed give the same output; change it for a different version.",
+              "title": "Seed",
+              "type": "integer"
+            },
+            "vulgarity": {
+              "anyOf": [
+                {
+                  "maximum": 3,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "nan",
+                    "dad",
+                    "uncle-bob",
+                    "tradie"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "How rude, by number or name: 0 nan, 1 dad, 2 uncle-bob, 3 tradie. Omit for the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5).",
+              "title": "Vulgarity"
+            },
+            "variety": {
+              "default": 0,
+              "description": "Choose among the N best-fitting slang terms only (1 = always the best fit); 0 weighs every eligible term.",
+              "minimum": 0,
+              "title": "Variety",
+              "type": "integer"
+            },
+            "registers": {
+              "anyOf": [
+                {
+                  "items": {
+                    "enum": [
+                      "current",
+                      "dated",
+                      "archaic"
+                    ],
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Registers allowed; omit for the level's own (current, plus dated at 5).",
+              "title": "Registers"
+            },
+            "regions": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Region tags to prefer, e.g. ['qld']; entries tagged with other regions are left out.",
+              "title": "Regions"
+            },
+            "markup": {
+              "default": "text",
+              "title": "Markup",
+              "type": "string"
+            },
+            "english": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "English"
+            },
+            "embellishment": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Embellishment"
+            },
+            "document_type": {
+              "default": "general",
+              "enum": [
+                "general",
+                "auto",
+                "story",
+                "personal",
+                "news",
+                "instructions",
+                "technical",
+                "official"
+              ],
+              "title": "Document Type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "type": "object",
+          "title": "aussie_planArguments"
+        },
+        "execution": null,
+        "output_schema": {
+          "type": "object",
+          "additionalProperties": true,
+          "title": "aussie_planDictOutput"
+        },
+        "icons": null,
+        "annotations": {
+          "title": null,
+          "read_only_hint": true,
+          "destructive_hint": false,
+          "idempotent_hint": true,
+          "open_world_hint": false
+        },
+        "meta": null
+      },
+      {
+        "name": "aussie_translate",
+        "title": null,
+        "description": "Deterministic rule-engine translation (same text, level and seed give the same output). Change the\nseed for a different version. variety N picks among the N best-fitting terms only (1 = always the best\nfit); 0, the default, weighs every eligible term. registers (current, dated, archaic) and regions (e.g.\nqld) narrow or widen what the level allows.\nmarkup (markdown, mdx, auto) translates only the prose of a document, keeping code, tags, links, front matter\nand headings exactly as they were. english (us, uk, auto, none): the English the text is in, for US and\nUK words Australians say differently (faucet -> tap; British pants -> undies only for uk). embellishment\n(0-2 or deadset, dinkum, troppo): how much liberty the telling takes, from none (the words swap, nothing\nadded) to a performed yarn; default Dinkum for General; named types supply presets.",
+        "input_schema": {
+          "properties": {
+            "text": {
+              "description": "The text: plain English to Aussify, or an Aussified draft to lint.",
+              "maxLength": 180,
+              "title": "Text",
+              "type": "string"
+            },
+            "level": {
+              "anyOf": [
+                {
+                  "maximum": 5,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "tourist",
+                    "blow-in",
+                    "local",
+                    "larrikin",
+                    "swaggie"
+                  ],
+                  "type": "string"
+                }
+              ],
+              "default": 5,
+              "description": "How Aussie, by number or name: 1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie.",
+              "title": "Level"
+            },
+            "seed": {
+              "default": 0,
+              "description": "Seed for the weighted choices: the same text, settings and seed give the same output; change it for a different version.",
+              "title": "Seed",
+              "type": "integer"
+            },
+            "vulgarity": {
+              "anyOf": [
+                {
+                  "maximum": 3,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "nan",
+                    "dad",
+                    "uncle-bob",
+                    "tradie"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "How rude, by number or name: 0 nan, 1 dad, 2 uncle-bob, 3 tradie. Omit for the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5).",
+              "title": "Vulgarity"
+            },
+            "variety": {
+              "default": 0,
+              "description": "Choose among the N best-fitting slang terms only (1 = always the best fit); 0 weighs every eligible term.",
+              "minimum": 0,
+              "title": "Variety",
+              "type": "integer"
+            },
+            "registers": {
+              "anyOf": [
+                {
+                  "items": {
+                    "enum": [
+                      "current",
+                      "dated",
+                      "archaic"
+                    ],
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Registers allowed; omit for the level's own (current, plus dated at 5).",
+              "title": "Registers"
+            },
+            "regions": {
+              "anyOf": [
+                {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "Region tags to prefer, e.g. ['qld']; entries tagged with other regions are left out.",
+              "title": "Regions"
+            },
+            "markdown": {
+              "default": false,
+              "title": "Markdown",
+              "type": "boolean"
+            },
+            "markup": {
+              "default": "text",
+              "title": "Markup",
+              "type": "string"
+            },
+            "english": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "English"
+            },
+            "embellishment": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Embellishment"
+            },
+            "document_type": {
+              "default": "general",
+              "enum": [
+                "general",
+                "auto",
+                "story",
+                "personal",
+                "news",
+                "instructions",
+                "technical",
+                "official"
+              ],
+              "title": "Document Type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "text"
+          ],
+          "type": "object",
+          "title": "aussie_translateArguments"
+        },
+        "execution": null,
+        "output_schema": {
+          "type": "object",
+          "additionalProperties": true,
+          "title": "aussie_translateDictOutput"
+        },
+        "icons": null,
+        "annotations": {
+          "title": null,
+          "read_only_hint": true,
+          "destructive_hint": false,
+          "idempotent_hint": true,
+          "open_world_hint": false
+        },
+        "meta": null
+      },
+      {
+        "name": "aussie_verify",
+        "title": null,
+        "description": "Check a finished translation (anyone's: the engine's, yours, a person's) against its original: a log of\nproblems, worst first, each with a severity (critical: a lost number, a piece of markup changed, or an\nempty translation; major: breaks the brief; minor: craft, a sentence nothing in the translation says\nagain, or a hint worth a look; info: coverage), and metrics. Deterministic; it\ndoesn't judge tone or flow. english as for aussie_translate; embellishment sets the length limit (default\nDinkum for General).",
+        "input_schema": {
+          "properties": {
+            "text": {
+              "description": "The text: plain English to Aussify, or an Aussified draft to lint.",
+              "maxLength": 180,
+              "title": "Text",
+              "type": "string"
+            },
+            "original": {
+              "description": "The original text it was translated from.",
+              "maxLength": 180,
+              "title": "Original",
+              "type": "string"
+            },
+            "level": {
+              "anyOf": [
+                {
+                  "maximum": 5,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "tourist",
+                    "blow-in",
+                    "local",
+                    "larrikin",
+                    "swaggie"
+                  ],
+                  "type": "string"
+                }
+              ],
+              "default": 5,
+              "description": "How Aussie, by number or name: 1 tourist, 2 blow-in, 3 local, 4 larrikin, 5 swaggie.",
+              "title": "Level"
+            },
+            "vulgarity": {
+              "anyOf": [
+                {
+                  "maximum": 3,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "enum": [
+                    "nan",
+                    "dad",
+                    "uncle-bob",
+                    "tradie"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "description": "How rude, by number or name: 0 nan, 1 dad, 2 uncle-bob, 3 tradie. Omit for the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5).",
+              "title": "Vulgarity"
+            },
+            "markup": {
+              "default": "text",
+              "title": "Markup",
+              "type": "string"
+            },
+            "english": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "English"
+            },
+            "embellishment": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Embellishment"
+            },
+            "document_type": {
+              "default": "general",
+              "enum": [
+                "general",
+                "auto",
+                "story",
+                "personal",
+                "news",
+                "instructions",
+                "technical",
+                "official"
+              ],
+              "title": "Document Type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "text",
+            "original"
+          ],
+          "type": "object",
+          "title": "aussie_verifyArguments"
+        },
+        "execution": null,
+        "output_schema": {
+          "type": "object",
+          "additionalProperties": true,
+          "title": "aussie_verifyDictOutput"
+        },
+        "icons": null,
+        "annotations": {
+          "title": null,
+          "read_only_hint": true,
+          "destructive_hint": false,
+          "idempotent_hint": true,
+          "open_world_hint": false
+        },
+        "meta": null
+      }
+    ],
+    "calls": [
+      {
+        "tool": "aussie_guide",
+        "arguments": {
+          "level": 4,
+          "vulgarity": 1,
+          "embellishment": 0,
+          "document_type": "general"
+        },
+        "result_sha256": "db3f283cf5a6eaa4f25116efcc70b3449efd9af1048aadb78d13d703944caadf"
+      },
+      {
+        "tool": "aussie_lookup",
+        "arguments": {
+          "level": 4,
+          "vulgarity": 1,
+          "embellishment": 0,
+          "document_type": "general",
+          "query": "very tired",
+          "limit": 3
+        },
+        "result_sha256": "7506b6b80db54c8975fbba28de987019215f11a2f8e707c561f088f9e52d4b1e"
+      },
+      {
+        "tool": "aussie_plan",
+        "arguments": {
+          "level": 4,
+          "vulgarity": 1,
+          "embellishment": 0,
+          "document_type": "general",
+          "text": "🦘 Australian spelling. Rob waited at least 30 seconds. The toilet is broken. Keep `get_user()` unchanged.",
+          "markup": "markdown",
+          "seed": 0
+        },
+        "result_sha256": "3e2039d73589ce9058317242f69f7444967df26b287f65037637cedea4f54a46"
+      },
+      {
+        "tool": "aussie_translate",
+        "arguments": {
+          "level": 4,
+          "vulgarity": 1,
+          "embellishment": 0,
+          "document_type": "general",
+          "text": "🦘 Australian spelling. Rob waited at least 30 seconds. The toilet is broken. Keep `get_user()` unchanged.",
+          "markdown": true,
+          "seed": 0
+        },
+        "result_sha256": "2b3fa3ca3fa2247756db46c549c1891536e535ada62f9772f292128cfa80d058",
+        "text": "🦘 Australian spelling. Rob waited at least 30 seconds. The toilet is broken. Keep `get_user()` unchanged."
+      },
+      {
+        "tool": "aussie_lint",
+        "arguments": {
+          "level": 4,
+          "vulgarity": 1,
+          "embellishment": 0,
+          "document_type": "general",
+          "text": "🦘 Australian spelling. Rob waited at least 30 seconds. The toilet is broken. Keep `get_user()` unchanged.",
+          "original": "🦘 Australian spelling. Rob waited at least 30 seconds. The toilet is broken. Keep `get_user()` unchanged.",
+          "markup": "markdown"
+        },
+        "result_sha256": "a6f46b04445c273f33bb9e3533b3883e18d294df702d41567945ffb6efa49817"
+      },
+      {
+        "tool": "aussie_verify",
+        "arguments": {
+          "level": 4,
+          "vulgarity": 1,
+          "embellishment": 0,
+          "document_type": "general",
+          "text": "🦘 Australian spelling. Rob waited at least 30 seconds. The toilet is broken. Keep `get_user()` unchanged.",
+          "original": "🦘 Australian spelling. Rob waited at least 30 seconds. The toilet is broken. Keep `get_user()` unchanged.",
+          "markup": "markdown"
+        },
+        "result_sha256": "2bd1e1610d5110d87b1685c3a7e49f91d57abf270a87296ecebc35b258faa190",
+        "ok": true
+      }
+    ],
+    "capabilities": {
+      "allow_unlock": false,
+      "allow_document_config": false,
+      "max_chars": 180,
+      "max_query_chars": 24,
+      "lookup_limit": 3
+    },
+    "boundaries": [
+      {
+        "tool": "aussie_translate",
+        "field": "text",
+        "length": 180,
+        "is_error": false
+      },
+      {
+        "tool": "aussie_translate",
+        "field": "text",
+        "length": 181,
+        "is_error": true
+      },
+      {
+        "tool": "aussie_plan",
+        "field": "text",
+        "length": 180,
+        "is_error": false
+      },
+      {
+        "tool": "aussie_plan",
+        "field": "text",
+        "length": 181,
+        "is_error": true
+      },
+      {
+        "tool": "aussie_lint",
+        "field": "text",
+        "length": 180,
+        "is_error": false
+      },
+      {
+        "tool": "aussie_lint",
+        "field": "text",
+        "length": 181,
+        "is_error": true
+      },
+      {
+        "tool": "aussie_lint",
+        "field": "original",
+        "length": 180,
+        "is_error": false
+      },
+      {
+        "tool": "aussie_lint",
+        "field": "original",
+        "length": 181,
+        "is_error": true
+      },
+      {
+        "tool": "aussie_verify",
+        "field": "text",
+        "length": 180,
+        "is_error": false
+      },
+      {
+        "tool": "aussie_verify",
+        "field": "text",
+        "length": 181,
+        "is_error": true
+      },
+      {
+        "tool": "aussie_verify",
+        "field": "original",
+        "length": 180,
+        "is_error": false
+      },
+      {
+        "tool": "aussie_verify",
+        "field": "original",
+        "length": 181,
+        "is_error": true
+      },
+      {
+        "tool": "aussie_lookup",
+        "arguments": {
+          "query": "xxxxxxxxxxxxxxxxxxxxxxxx"
+        },
+        "is_error": false
+      },
+      {
+        "tool": "aussie_lookup",
+        "arguments": {
+          "query": "xxxxxxxxxxxxxxxxxxxxxxxxx"
+        },
+        "is_error": true
+      },
+      {
+        "tool": "aussie_lookup",
+        "arguments": {
+          "query": "very tired",
+          "limit": 4
+        },
+        "is_error": true
+      },
+      {
+        "tool": "aussie_translate",
+        "fill": "🦘",
+        "length": 180,
+        "is_error": false
+      },
+      {
+        "tool": "aussie_translate",
+        "fill": "🦘",
+        "length": 181,
+        "is_error": true
+      }
+    ],
+    "hidden_arguments_keep_defaults": true,
+    "custom_refused": true
+  },
+  "changes": [
+    {
+      "case": "site-defaults",
+      "request": {
+        "text": "I'm exhausted and the toilet is broken. Thanks for breakfast, my friend. You are very tired and hungry, and your car is broken. We let a toddler win the game.",
+        "level": 4,
+        "vulgarity": 1,
+        "seed": 0,
+        "embellishment": 1
+      },
+      "response_sha256": "e17adf78bfcf89424a94859402330986811d934ad4f487f6cdd1fdd54eba6f95",
+      "changes": 9,
+      "kinds": [
+        "garnish",
+        "phonetic",
+        "substitution"
+      ]
+    },
+    {
+      "case": "every-kind",
+      "request": {
+        "text": "Good grief, are you crazy? You're overreacting, you're stupid and all talk, and I'm extremely busy cleaning up after you. I'm starving, let's get something to eat at McDonald's. The faucet in my apartment is broken. Then they lost their tents and chairs. He is an idiot and a liar. Calm down and stop complaining. I am going to the store.",
+        "level": 5,
+        "vulgarity": 1,
+        "seed": 10,
+        "embellishment": 2,
+        "english": "us",
+        "document_type": "general",
+        "document_config": {
+          "profile": {
+            "stack": 0.9,
+            "garnish": {
+              "riff": 1.0,
+              "opener": 0.8,
+              "tag": 0.8,
+              "tail": 1.0,
+              "connective": 0.6,
+              "aside": 1.0
+            },
+            "max_garnish": {
+              "riff": 30,
+              "opener": 20,
+              "tag": 20,
+              "tail": 10,
+              "aside": 10
+            },
+            "garnish_gap": 0,
+            "swearing": {
+              "infix": 6.0,
+              "exclaim": 0.5
+            }
+          }
+        }
+      },
+      "response_sha256": "e3186decd60a57aca2d0fda5fff7ec0c2450bdc22d785c93f88dda79e0a8de09",
+      "changes": 39,
+      "kinds": [
+        "dialect",
+        "garnish",
+        "phonetic",
+        "substitution",
+        "swear_infix"
+      ]
+    }
+  ],
+  "browser_case": {
+    "version": 1,
+    "text": "🦘 My car is buggered.",
+    "changes": [
+      {
+        "id": "substitution:12-18",
+        "kind": "substitution",
+        "src_span": [
+          12,
+          18
+        ],
+        "out_span": [
+          12,
+          20
+        ],
+        "original": "broken",
+        "output": "buggered",
+        "entry_id": "buggered",
+        "vulgarity": 1,
+        "masks": [
+          {
+            "span": [
+              0,
+              8
+            ],
+            "ending_start": 6,
+            "vulgarity": 1
+          }
+        ],
+        "alternatives": [
+          {
+            "entry_id": "buggered",
+            "weight": 0.1668,
+            "rendered": "buggered",
+            "out_span": [
+              12,
+              20
+            ],
+            "vulgarity": 1,
+            "masks": [
+              {
+                "span": [
+                  0,
+                  8
+                ],
+                "ending_start": 6,
+                "vulgarity": 1
+              }
+            ]
+          },
+          {
+            "entry_id": "bung-broken",
+            "weight": 0.3885,
+            "rendered": "bung",
+            "out_span": [
+              12,
+              20
+            ],
+            "vulgarity": 0,
+            "masks": []
+          },
+          {
+            "entry_id": "cactus",
+            "weight": 0.1668,
+            "rendered": "cactus",
+            "out_span": [
+              12,
+              20
+            ],
+            "vulgarity": 0,
+            "masks": []
+          },
+          {
+            "entry_id": "rooted",
+            "weight": 0.1112,
+            "rendered": "rooted",
+            "out_span": [
+              12,
+              20
+            ],
+            "vulgarity": 1,
+            "masks": []
+          },
+          {
+            "entry_id": "stuffed",
+            "weight": 0.1668,
+            "rendered": "stuffed",
+            "out_span": [
+              12,
+              20
+            ],
+            "vulgarity": 0,
+            "masks": []
+          }
+        ],
+        "locked": [],
+        "covers": []
+      }
+    ],
+    "entries": {
+      "buggered": {
+        "id": "buggered",
+        "form": "buggered",
+        "gloss": "Exhausted, or broken beyond use.",
+        "frame": "adj",
+        "concepts": [
+          "TIRED",
+          "BROKEN"
+        ],
+        "level": 2,
+        "vulgarity": 1,
+        "register": "current"
+      },
+      "bung-broken": {
+        "id": "bung-broken",
+        "form": "bung",
+        "gloss": "Broken, not working, crook (\"the telly's gone bung\", \"a bung knee\").",
+        "frame": "predicate_adj",
+        "concepts": [
+          "BROKEN"
+        ],
+        "level": 3,
+        "vulgarity": 0,
+        "register": "current",
+        "sources": [
+          "https://en.wiktionary.org/wiki/bung"
+        ]
+      },
+      "cactus": {
+        "id": "cactus",
+        "form": "cactus",
+        "gloss": "Dead, broken, finished.",
+        "frame": "adj",
+        "concepts": [
+          "BROKEN"
+        ],
+        "level": 2,
+        "vulgarity": 0,
+        "register": "current",
+        "riffs": [
+          {
+            "text": "like a flat-pack in a cyclone",
+            "tone": "comic",
+            "best": true
+          }
+        ],
+        "notes": "Of machines and things (\"the ute's cactus\"), not tired people. Older-sounding; Macquarie's blog thinks it may be fading, but it is still widely understood."
+      },
+      "rooted": {
+        "id": "rooted",
+        "form": "rooted",
+        "gloss": "Completely done for.",
+        "frame": "adj",
+        "concepts": [
+          "TIRED",
+          "BROKEN"
+        ],
+        "level": 3,
+        "vulgarity": 1,
+        "register": "current",
+        "notes": "\"Root\" is Australian slang for sex, so \"rooted\" (exhausted; broken) is cheeky but Dad-level (Rob, 2026-10-18). Never use \"root\" for US \"root for (a team)\"; Australians say \"barrack for\". \"Get rooted\" is a rude brush-off, a different sense."
+      },
+      "stuffed": {
+        "id": "stuffed",
+        "form": "stuffed",
+        "gloss": "Exhausted, broken, or full of food.",
+        "frame": "adj",
+        "concepts": [
+          "TIRED",
+          "BROKEN",
+          "FULL"
+        ],
+        "level": 2,
+        "vulgarity": 0,
+        "register": "current"
+      }
+    }
+  }
+}

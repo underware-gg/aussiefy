@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/underware-gg/aussiefy/blob/main/aussiefy/data/changes.schema.json",
   "title": "aussiefy changes, contract version 1",
-  "description": "What aussiefy.translate_changes returns (ChangeSet.to_dict()): a translation's text, every change it made in output order, and the card of every entry the changes name. Spans are [start, end) character offsets: src_span in the source, out_span in this text. Ids are a change's kind and source span, with a placement or rule where those could repeat. See docs/functional/changes.md.",
+  "description": "What aussiefy.translate_changes returns (ChangeSet.to_dict()): a translation's text, every change it made in output order, and the card of every entry the changes name. Spans are [start, end) Unicode code-point offsets: src_span in the source, out_span in this text. Alternative regions and mask positions use the same unit; masks refer to their own rendering's text. Ids are a change's kind and source span, with a placement or rule where those could repeat. See docs/functional/changes.md.",
   "type": "object",
   "required": ["version", "text", "changes", "entries"],
   "additionalProperties": false,

@@ -10,6 +10,7 @@ commands that have since been renamed. Mate, decisions they led to are recorded 
 
 | Review | Summary |
 |---|---|
+| [design-review-2026-10-18-package-integration.md](design-review-2026-10-18-package-integration.md) | Installed-wheel stdio/HTTP checks, browser Unicode offsets and bounded changes-cost evidence |
 | [design-review-2026-10-17-training-order-and-integrations.md](design-review-2026-10-17-training-order-and-integrations.md) | Stable WordNet pair selection, honest trial evidence and real CLI/MCP interface checks |
 | [design-review-2026-10-17-prose-refinement.md](design-review-2026-10-17-prose-refinement.md) | Question-safe infixes, source capitals, continued-dialogue punctuation and bounded prose readback |
 | [design-review-2026-10-17-curated-benchmark.md](design-review-2026-10-17-curated-benchmark.md) | Independent fixed labels, honest wording measurement and shared training cleanup |

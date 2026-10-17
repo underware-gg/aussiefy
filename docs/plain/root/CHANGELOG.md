@@ -5,6 +5,8 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Specify Unicode code-point offsets for change regions and profanity masks, with a JavaScript slicing example.
+
 - Rate "bugger me dead" (phrase and garnish), "rooted" and "have a root" at Dad, matching "bugger" in the swear
   list: cheeky, not profane.
 - Mask only actual profanity in `changes` renderings: swear-list words, the compounds the dictionary's rated

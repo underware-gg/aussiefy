@@ -173,6 +173,10 @@ checks passed. The final change records evidence and the decision to retain 1.2.
 
 ### Slice 6: available interfaces
 
+The [18 October continuation](../maintenance-2026-10-18/README.md) verifies the newly integrated W10/W3
+package as a built wheel through stdio, restricted HTTP/ASGI and the changes Python API, including browser
+Unicode offsets and measured changes overhead. Website service/browser work and live external clients remain.
+
 [Integration evidence](integration-checks.md) retains the original capture plus a final recheck against
 committed runtime `328d8d1`: all six real stdio tools, matching resolved profiles, exact code/name/number
 preservation, CLI lint/verification/checked submission and an explicit missing-key deterministic fallback.

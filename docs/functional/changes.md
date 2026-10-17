@@ -57,9 +57,22 @@ and responses live in `tests/fixtures/changes/`. Each change has:
 `entries` maps each entry id the changes name to its card, as `lookup` shows it \(`aussiefy/cards.py`), with riffs
 under the vulgarity cap.
 
+Stone the crows, all offsets count Unicode code points, including source/output spans, alternative regions'n mask positions.
+Well, for example, `🦘 toilet` becomes `🦘 dunny`: the source span is `[2, 8)` and the output span is `[2, 7)`.
+JavaScript clients can slice'n splice by code point with `Array.from(text)`:
+
+```javascript
+const points = Array.from(text);
+const current = points.slice(start, end).join("");
+const swapped = [...points.slice(0, start), replacement, ...points.slice(end)].join("");
+```
+
+Use the renderin''s own text for its mask offsets. Combining marks count separately, so a visible letter or
+emoji sequence can occupy several positions.
+
 ## How a swap is rendered
 
-Stone the flamin' crows, every alternative is rendered as the engine would render it at that spot, with the rest of the output held
+Jeez, every alternative is rendered as the engine would render it at that spot, with the rest of the output held
 fixed. It takes the engine's own path: the form'n the spellin' the text keeps, the article fitted \("a toddler"
 becomes "an ankle biter"\), the entry's own replacement span, a stacked second idiom, a riff, and capitals. The
 sentence's garnish is put back as it was decided. Then the drawl, spellin''n swear infixes run over the spot

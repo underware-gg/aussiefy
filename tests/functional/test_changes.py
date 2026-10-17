@@ -54,6 +54,21 @@ def test_changes_leave_the_translation_as_translate_gives_it(translator):
     assert _every_kind(translator).text == aussiefy.translate(KINDS["text"], translator=translator, **options).text
 
 
+@pytest.mark.parametrize("mode", [{}, {"markup": "markdown"}, {"markdown": True}])
+@pytest.mark.parametrize("prefix", ["🦘", "e\u0301", "👨‍👩‍👧‍👦"])
+def test_change_offsets_count_unicode_code_points(translator, mode, prefix):
+    cs = aussiefy.translate_changes(prefix + " toilet", translator=translator, level=4, vulgarity=0,
+                                    embellishment=0, **mode)
+    assert cs.text == prefix + " dunny"
+    change, = cs.changes
+    start = len(prefix) + 1
+    assert change["src_span"] == [start, start + 6]
+    assert change["out_span"] == [start, start + 5]
+    assert change["original"] == "toilet" and change["output"] == "dunny"
+    own = next(o for o in change["alternatives"] if o["entry_id"] == change["entry_id"])
+    assert own["out_span"] == change["out_span"] and own["rendered"] == "dunny"
+
+
 def test_every_kind_is_placed_in_the_output(translator):
     cs = _every_kind(translator)
     seen = {c["kind"] + (f":{c['placement']}" if c["kind"] == "garnish" else "") for c in cs.changes}

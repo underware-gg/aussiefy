@@ -9,13 +9,15 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Specify Unicode code\-point offsets for change regions'n profanity masks, with a JavaScript slicing example.
+
 - Rate "bugger me dead" \(phrase'n garnish\), "rooted" and "have a root" at Dad, matching "bugger" in the swear
   list: cheeky, not profane.
 - Mask only actual profanity in `changes` renderings: swear\-list words, the compounds the dictionary's rated
   words build on one \("fuckwit"\), and the new per\-entry `mask` words for profanity the swear list lacks \("wanker",
   "dickhead"\), each with the ending a page keeps. Innuendo, insults'n crude words show in full: 25 rated entries
   with nothing profane \("rooted", "mongrel", "shut your gob"\) are marked `profane: false`, and 5 author mask words.
-  Now, a test holds every other rated entry to a masked word at its rating.
+  Mind ya, a test holds every other rated entry to a masked word at its rating.
 - Add `aussiefy.translate_changes`: translate's translation with every change it made (swaps, garnish,
   drawl, swear infixes and US/UK swaps) placed in the output. Each swap comes with its alternatives and its
   vulgarity-locked options, rendered in place on the engine's own path, with ids, `covers`, `removed` for garnish,

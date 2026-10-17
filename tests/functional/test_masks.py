@@ -30,6 +30,11 @@ def test_maskable_words_and_the_endings_they_keep(dictionary, text, expected):
     assert _masked(dictionary, text) == expected
 
 
+def test_mask_offsets_count_unicode_code_points(dictionary):
+    assert masks("🦘 e\u0301 fucked", dictionary.swears, dictionary.swear_compounds) == [
+        {"span": [5, 11], "ending_start": 9, "vulgarity": 2}]
+
+
 def test_an_entrys_mask_words_keep_their_endings_in_its_renderings(dictionary):
     words = {w: dictionary.entries["wanker"].vulgarity for w in dictionary.entries["wanker"].mask}
     assert _masked(dictionary, "a pack of wankers", words) == [("wanker", "s", 2)]

@@ -6,6 +6,7 @@ commands that have since been renamed. Decisions they led to are recorded in [de
 
 | Review | Summary |
 |---|---|
+| [design-review-2026-10-18-package-integration.md](../../../architecture/reviews/design-review-2026-10-18-package-integration.md) | Installed-wheel stdio/HTTP checks, browser Unicode offsets and bounded changes-cost evidence |
 | [design-review-2026-10-17-training-order-and-integrations.md](../../../architecture/reviews/design-review-2026-10-17-training-order-and-integrations.md) | Stable WordNet pair selection, honest trial evidence and real CLI/MCP interface checks |
 | [design-review-2026-10-17-prose-refinement.md](../../../architecture/reviews/design-review-2026-10-17-prose-refinement.md) | Question-safe infixes, source capitals, continued-dialogue punctuation and bounded prose readback |
 | [design-review-2026-10-17-curated-benchmark.md](../../../architecture/reviews/design-review-2026-10-17-curated-benchmark.md) | Independent fixed labels, honest wording measurement and shared training cleanup |
