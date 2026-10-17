@@ -10,6 +10,7 @@ commands that have since been renamed. Mate, decisions they led to are recorded 
 
 | Review | Summary |
 |---|---|
+| [design-review-2026-10-17-vocabulary-harvest.md](design-review-2026-10-17-vocabulary-harvest.md) | Curated vocabulary and optional imagery, source-linked persona harvest, sign protection and scratch replay |
 | [design-review-2026-10-16-judge-contract-and-heldout.md](design-review-2026-10-16-judge-contract-and-heldout.md) | Full production judge settings, legacy protocol compatibility and six-source repeat-judge evidence |
 | [design-review-2026-10-16-verification-maintenance.md](design-review-2026-10-16-verification-maintenance.md) | Offline real-SDK serialization, minimum-Python CI and consolidated toolkit contracts |
 | [design-review-2026-10-16-whole-repository.md](design-review-2026-10-16-whole-repository.md) | Six-concern whole-repository audit, agent-neutral retelling, cache/lookup fixes and readiness evidence |

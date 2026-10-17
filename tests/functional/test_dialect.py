@@ -22,6 +22,18 @@ def test_words_only_another_english_uses_swap_at_every_level(translator, text, w
     assert _t(translator, text) == want
 
 
+@pytest.mark.parametrize("text,want", [
+    ("Stop at the yield sign.", "Stop at the give way sign."),
+    ("Look for yield signs.", "Look for give way signs."),
+    ("The investments yield significant returns.", "The investments yield significant returns."),
+    ("The crop yield signals a recovery.", "The crop yield signals a recovery."),
+    ("Stop at the give way sign.", "Stop at the give way sign."),
+])
+@pytest.mark.parametrize("level", range(1, 6))
+def test_yield_sign_localises_only_the_road_sign_phrase(translator, text, want, level):
+    assert translator.translate(text, level=level, seed=0, vulgarity=0, document_type="custom").text == want
+
+
 def test_a_capital_mid_sentence_is_a_name_and_stays(translator):
     assert _t(translator, "We bought a Diaper Genie and a diaper.") == "We bought a Diaper Genie and a nappy."
 

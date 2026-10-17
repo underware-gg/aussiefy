@@ -231,7 +231,9 @@ def base_dictionary(config: RoundConfig, data_dir: Path = DATA_DIR) -> Dictionar
     with tempfile.TemporaryDirectory() as tmp:
         scratch = Path(tmp) / "data"
         shutil.copytree(data_dir, scratch)
-        (scratch / "entries" / config.output).unlink(missing_ok=True)
+        output = scratch / "entries" / config.output
+        removed = {e["id"] for e in (_yaml(output.read_text(encoding="utf-8")) or [])} if output.exists() else set()
+        output.unlink(missing_ok=True)
         concepts = scratch / "concepts.yaml"
         kept, section = _split_section(concepts.read_text(encoding="utf-8"), config.marker)
         ours = set(_yaml(section) or {})
@@ -240,7 +242,13 @@ def base_dictionary(config: RoundConfig, data_dir: Path = DATA_DIR) -> Dictionar
             entries = _yaml(path.read_text(encoding="utf-8")) or []
             later = [e for e in entries if not set(e.get("concept") or ()) & ours]
             if len(later) < len(entries):   # scratch only: layout doesn't matter here
+                removed.update(e["id"] for e in entries if set(e.get("concept") or ()) & ours)
                 path.write_text(yaml.safe_dump(later, sort_keys=False, allow_unicode=True), encoding="utf-8")
+        riffs = scratch / "riffs.yaml"
+        images = _yaml(riffs.read_text(encoding="utf-8")) or {}
+        if removed & images.keys():
+            riffs.write_text(yaml.safe_dump({k: v for k, v in images.items() if k not in removed},
+                                            sort_keys=False, allow_unicode=True), encoding="utf-8")
         return load_dictionary(data_dir=scratch)
 
 

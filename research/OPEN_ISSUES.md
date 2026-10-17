@@ -56,7 +56,7 @@ repository may want `vectors.f16` in Git LFS or as a release asset first.
 - Dictionary rounds now retain metadata and existing concept records, support explicit `concept_fixes.yaml`
   (including entryless guards), and accept a reviewed second sense with `allow_existing_form: true` plus an
   additional concept. Explicit trigger fixes still apply on reapplication; dry runs show concept-fix intent.
-- Dialect-table candidate left over: "yield sign" → "give way sign".
+- Completed 2026-10-17: "yield sign" → "give way sign", with plural and unrelated-yield regressions.
 
 ## From the design review of the work since 5b385b4 (2026-10-14)
 
@@ -177,3 +177,12 @@ The [new results](heldout-2026-10-16/README.md) retain these independent quality
 The six cases are now evaluated inputs; future tuning on them must be described as reuse. Larger samples
 and human/cross-model judges would provide independent generalisation evidence, not a missing step in
 this completed bounded study.
+
+## Vocabulary reconciliation, 2026-10-17
+
+The [X-post and reference-persona harvest](vocabulary-2026-10-17/README.md) retains 45 unharnessed retellings
+and dispositions for 203 extracted expressions. It adds six entries and 25 optional riffs including the
+earlier X suggestions and extrapolations. All eight configured research rounds were replayed read-only:
+every currently proposed entry ID is already present, with no unparsed verdicts. Historical harvest files
+are not queues of approved additions. The original seed listicle remains unacquired through the pipeline;
+the independent heart-sense, modal and model follow-ups above are unchanged.

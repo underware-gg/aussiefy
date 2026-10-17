@@ -1,0 +1,566 @@
+{
+  "schema": 1,
+  "date": "2026-10-17",
+  "kind": "unharnessed vocabulary discovery; no quality scoring",
+  "base_commit": "6c82dd5b94be7aff002ef14ee29fffab57e48edb",
+  "contexts": [
+    {
+      "agent": "/root/reference_tradie",
+      "persona": "tradie",
+      "fresh_context": true,
+      "same_context_for_all_sources": true
+    },
+    {
+      "agent": "/root/reference_dockie",
+      "persona": "dockie",
+      "fresh_context": true,
+      "same_context_for_all_sources": true
+    },
+    {
+      "agent": "/root/reference_uncle_bob",
+      "persona": "uncle_bob",
+      "fresh_context": true,
+      "same_context_for_all_sources": true
+    }
+  ],
+  "sources": [
+    {
+      "file": "tests/corpus/reference/bible_good_samaritan.txt",
+      "sha256": "3dcae3954566ebc41f3244dc8a5c63cb56699733398a27be09d828e703fbf651",
+      "words": 288
+    },
+    {
+      "file": "tests/corpus/reference/boy_who_cried_wolf.txt",
+      "sha256": "efa6c257fad87d09913844902211c5eed36691ae3b7b41b745996cd566ffeb7e",
+      "words": 141
+    },
+    {
+      "file": "tests/corpus/reference/declaration_of_independence.txt",
+      "sha256": "5dd43797c5117d21afd2e2685d5a2a2124a19a038405850704202d262bb80da5",
+      "words": 337
+    },
+    {
+      "file": "tests/corpus/reference/emperors_new_clothes.txt",
+      "sha256": "bef36ca6d03e741ec888321093a154665e8beee7b1f3e91090dccf09a28be824",
+      "words": 1584
+    },
+    {
+      "file": "tests/corpus/reference/gettysburg.txt",
+      "sha256": "809838efd41698422636fb2df8bebe2a7e8c29a3baf109b3bdceed6812266903",
+      "words": 264
+    },
+    {
+      "file": "tests/corpus/reference/goldilocks.txt",
+      "sha256": "4bf6d606c586eda9b7145c4791b217fb57a28df69dcfa66701f5dee4a0c59bc5",
+      "words": 147
+    },
+    {
+      "file": "tests/corpus/reference/goldilocks_full.txt",
+      "sha256": "8d6d20a37470f9333c650c7ca6a036c2403893a167edc7254e27b1d7c3f2dc74",
+      "words": 478
+    },
+    {
+      "file": "tests/corpus/reference/hamlet_to_be.txt",
+      "sha256": "8919a8c3439487491e2111f9a45fb340a61b1ba08b294e863e53a0ad1da0dd3d",
+      "words": 260
+    },
+    {
+      "file": "tests/corpus/reference/hansel_and_gretel.txt",
+      "sha256": "935fa3f700694f520b5fc85156cccfb5f546908ad54787a60f31c5f96e36bf01",
+      "words": 894
+    },
+    {
+      "file": "tests/corpus/reference/hare_and_tortoise.txt",
+      "sha256": "6e09870fd772fd9bdeb8386564fdfdde4a24223eb17100ce95878879b7e98106",
+      "words": 134
+    },
+    {
+      "file": "tests/corpus/reference/little_red_riding_hood.txt",
+      "sha256": "fa7934e70b4ee99bc61280651b5bae3bd2f9807c7564e926a195db41d5d422e8",
+      "words": 664
+    },
+    {
+      "file": "tests/corpus/reference/pride_and_prejudice_ch1.txt",
+      "sha256": "a2778055f5a192cff5ddf6cfb57c3dcd5ab24dcda357a33294512701147d28e4",
+      "words": 847
+    },
+    {
+      "file": "tests/corpus/reference/the_raven.txt",
+      "sha256": "c2b7122f02628d69f7cea46344833e2e4daafe6ad942034d8ae635654f9806a9",
+      "words": 352
+    },
+    {
+      "file": "tests/corpus/reference/three_little_pigs.txt",
+      "sha256": "831f9ee931202597d4aa2878b9d7d952d21de0026f7e230f4d8f19f6c803a1f7",
+      "words": 963
+    },
+    {
+      "file": "tests/corpus/reference/waltzing_matilda.txt",
+      "sha256": "a91932c5008598ff47c7af0e87f63495666b9f443ad6078a012c2839bb65c2fb",
+      "words": 162
+    }
+  ],
+  "outputs": [
+    {
+      "source": "tests/corpus/reference/bible_good_samaritan.txt",
+      "persona": "tradie",
+      "file": "research/vocabulary-2026-10-17/texts/bible_good_samaritan/tradie.txt",
+      "sha256": "33f89e9f7d721496e4c0feede45874d264183563c9c540691c2212024f298a03",
+      "words": 296,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/bible_good_samaritan/tradie-candidates.json",
+      "candidates_sha256": "291564dd66f95f6d74ab0bf4eca427a9cd828a0a1e0e75561a4a276f15027c34",
+      "candidate_count": 5
+    },
+    {
+      "source": "tests/corpus/reference/boy_who_cried_wolf.txt",
+      "persona": "tradie",
+      "file": "research/vocabulary-2026-10-17/texts/boy_who_cried_wolf/tradie.txt",
+      "sha256": "c6c29a34d9441ded233cb8fcdbaae7ce890746f64bc256b7e50904d85de812bb",
+      "words": 152,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/boy_who_cried_wolf/tradie-candidates.json",
+      "candidates_sha256": "cdb8b5e34dd5366c958388d814df79864d4dc694317a74e40846304128edf29a",
+      "candidate_count": 4
+    },
+    {
+      "source": "tests/corpus/reference/declaration_of_independence.txt",
+      "persona": "tradie",
+      "file": "research/vocabulary-2026-10-17/texts/declaration_of_independence/tradie.txt",
+      "sha256": "9e098e7c9f25172f674237e7794072824e5231aa3e1ff2cf4f9b576da86668d5",
+      "words": 323,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/declaration_of_independence/tradie-candidates.json",
+      "candidates_sha256": "0acec5268d92580a824a2d46c0b859bf2d65d9d6a5bbdd2905c9fc11a502bb9a",
+      "candidate_count": 3
+    },
+    {
+      "source": "tests/corpus/reference/emperors_new_clothes.txt",
+      "persona": "tradie",
+      "file": "research/vocabulary-2026-10-17/texts/emperors_new_clothes/tradie.txt",
+      "sha256": "11c98d2e01064ab462fad50c31097fa3920fb07e7733913defa2040124c48eb7",
+      "words": 1395,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/emperors_new_clothes/tradie-candidates.json",
+      "candidates_sha256": "1452a4619e990977605322e2fc4bd5747b4f137071545a3ed13bb89bd8e7e69e",
+      "candidate_count": 11
+    },
+    {
+      "source": "tests/corpus/reference/gettysburg.txt",
+      "persona": "tradie",
+      "file": "research/vocabulary-2026-10-17/texts/gettysburg/tradie.txt",
+      "sha256": "412f6b231e02bb6d1720ac942060b6745ac6eb8707cefd2b65232fd8e7ac3948",
+      "words": 259,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/gettysburg/tradie-candidates.json",
+      "candidates_sha256": "aa30e655f3fca0ef5dbf39cec29c7d9d7afac5aed2cee20667e3cceb823c6f28",
+      "candidate_count": 2
+    },
+    {
+      "source": "tests/corpus/reference/goldilocks.txt",
+      "persona": "tradie",
+      "file": "research/vocabulary-2026-10-17/texts/goldilocks/tradie.txt",
+      "sha256": "ba1075dd7eb547fbc1f83a47799c0aa4e80b3c689d772ce76515097ffbfeacff",
+      "words": 153,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/goldilocks/tradie-candidates.json",
+      "candidates_sha256": "4f88b47a4ebb79188504fe88ce6a31562d420c2cfb1feb515135d4cb0a5b41ca",
+      "candidate_count": 3
+    },
+    {
+      "source": "tests/corpus/reference/goldilocks_full.txt",
+      "persona": "tradie",
+      "file": "research/vocabulary-2026-10-17/texts/goldilocks_full/tradie.txt",
+      "sha256": "57b903f634a8c5b1a7c96d03f7aef7e08ef3151c44165c996442846435ee2aa7",
+      "words": 429,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/goldilocks_full/tradie-candidates.json",
+      "candidates_sha256": "00bb3c46b868a62ca77959e2472eeed0b90102d624a83ae627f708762001142c",
+      "candidate_count": 7
+    },
+    {
+      "source": "tests/corpus/reference/hamlet_to_be.txt",
+      "persona": "tradie",
+      "file": "research/vocabulary-2026-10-17/texts/hamlet_to_be/tradie.txt",
+      "sha256": "e8d442197be98bc1f47996e7882acf0a9edae05c8701c428810cf3cbc7d956f5",
+      "words": 285,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/hamlet_to_be/tradie-candidates.json",
+      "candidates_sha256": "da1869a24221b96b3d355139b5e2187851cd3a81372060521c343aa0d2c8653c",
+      "candidate_count": 7
+    },
+    {
+      "source": "tests/corpus/reference/hansel_and_gretel.txt",
+      "persona": "tradie",
+      "file": "research/vocabulary-2026-10-17/texts/hansel_and_gretel/tradie.txt",
+      "sha256": "4579186cdbf437f9e7b315b7332d6a2c8ecdf6241882639bb732baa03419c976",
+      "words": 819,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/hansel_and_gretel/tradie-candidates.json",
+      "candidates_sha256": "78598a7702da1f0be4debc23900c6091c7096cc4c272a7a50429ef207702b812",
+      "candidate_count": 6
+    },
+    {
+      "source": "tests/corpus/reference/hare_and_tortoise.txt",
+      "persona": "tradie",
+      "file": "research/vocabulary-2026-10-17/texts/hare_and_tortoise/tradie.txt",
+      "sha256": "5564e10e59dce3268c7f1101a18435ab692eab8bfc52fca58f5fd3667b9f72d3",
+      "words": 132,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/hare_and_tortoise/tradie-candidates.json",
+      "candidates_sha256": "0324fc32f7045007e808a79dba088a782f45330f56add31c7224222f040807b5",
+      "candidate_count": 5
+    },
+    {
+      "source": "tests/corpus/reference/little_red_riding_hood.txt",
+      "persona": "tradie",
+      "file": "research/vocabulary-2026-10-17/texts/little_red_riding_hood/tradie.txt",
+      "sha256": "b56a3a1938cd0964a29cca147960c2b251ca4cc7ef7e08300458503c67cdd562",
+      "words": 594,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/little_red_riding_hood/tradie-candidates.json",
+      "candidates_sha256": "409cfe347eb93ea7d724a849ad6f406bee262413270151c8619c3a296b098c78",
+      "candidate_count": 3
+    },
+    {
+      "source": "tests/corpus/reference/pride_and_prejudice_ch1.txt",
+      "persona": "tradie",
+      "file": "research/vocabulary-2026-10-17/texts/pride_and_prejudice_ch1/tradie.txt",
+      "sha256": "84d1df97f0b3f120b09a9f5b0a6bca2ebdced7447a9a02f1876ee8ae30b64e17",
+      "words": 806,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/pride_and_prejudice_ch1/tradie-candidates.json",
+      "candidates_sha256": "ce0dea06d35a48a31274f31b9c4514d6f0ad6bf5d2072785722eaa341ab6e846",
+      "candidate_count": 7
+    },
+    {
+      "source": "tests/corpus/reference/the_raven.txt",
+      "persona": "tradie",
+      "file": "research/vocabulary-2026-10-17/texts/the_raven/tradie.txt",
+      "sha256": "05c66fcdf16b18427bfcff7c52b5dfac6c6a27258f642ae19752d79ff2afc6a5",
+      "words": 384,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/the_raven/tradie-candidates.json",
+      "candidates_sha256": "4e9907c6f80a6b5bd291ab1646602c4a4330a018ca4225b6a31c0852febe1bb3",
+      "candidate_count": 5
+    },
+    {
+      "source": "tests/corpus/reference/three_little_pigs.txt",
+      "persona": "tradie",
+      "file": "research/vocabulary-2026-10-17/texts/three_little_pigs/tradie.txt",
+      "sha256": "02bdd8a156c471f059f8b6fb9ec68b9d7d9cc21fa8905dbe320de54cda548637",
+      "words": 892,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/three_little_pigs/tradie-candidates.json",
+      "candidates_sha256": "389f02dab5c4fab5e633b41288a3e5d3c4d41e1363c4f1128373819816b5b3b9",
+      "candidate_count": 8
+    },
+    {
+      "source": "tests/corpus/reference/waltzing_matilda.txt",
+      "persona": "tradie",
+      "file": "research/vocabulary-2026-10-17/texts/waltzing_matilda/tradie.txt",
+      "sha256": "be91c4d2f4c730ffe476d1a5935ffde561a458b6ec8748888696c9794275abed",
+      "words": 168,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/waltzing_matilda/tradie-candidates.json",
+      "candidates_sha256": "1ad56ae5598771b51438ac157d277b395b92ebd0f91aff0c2f018c6b7bbf4c4b",
+      "candidate_count": 2
+    },
+    {
+      "source": "tests/corpus/reference/bible_good_samaritan.txt",
+      "persona": "dockie",
+      "file": "research/vocabulary-2026-10-17/texts/bible_good_samaritan/dockie.txt",
+      "sha256": "7d75552282bdc87eb32b029388c94ee82657555f5ce690f47cff9a0eb71e4bb2",
+      "words": 299,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/bible_good_samaritan/dockie-candidates.json",
+      "candidates_sha256": "b53bc4c097c489f95e8a2ff461663fb56ce30f57e291198812fcce4667cab23e",
+      "candidate_count": 4
+    },
+    {
+      "source": "tests/corpus/reference/boy_who_cried_wolf.txt",
+      "persona": "dockie",
+      "file": "research/vocabulary-2026-10-17/texts/boy_who_cried_wolf/dockie.txt",
+      "sha256": "ce62d3e2ad0e5ec3c7f8b71a6aa167c372fbf84f9ed4f5954c05dadfc3234a90",
+      "words": 150,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/boy_who_cried_wolf/dockie-candidates.json",
+      "candidates_sha256": "a535952b89c5ff2fda6231f0dc9381df2c2e400cbfd53d13296b6bc88f413fa1",
+      "candidate_count": 4
+    },
+    {
+      "source": "tests/corpus/reference/declaration_of_independence.txt",
+      "persona": "dockie",
+      "file": "research/vocabulary-2026-10-17/texts/declaration_of_independence/dockie.txt",
+      "sha256": "0e42f80e77805d2bb13533fbf0a4b5f70b7efd8b3cb781c8861d2fcec11fcef1",
+      "words": 315,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/declaration_of_independence/dockie-candidates.json",
+      "candidates_sha256": "3026efbd5a9c4b5d72ba0d3991e5050df5264b45acbe422550de21b16322e84b",
+      "candidate_count": 1
+    },
+    {
+      "source": "tests/corpus/reference/emperors_new_clothes.txt",
+      "persona": "dockie",
+      "file": "research/vocabulary-2026-10-17/texts/emperors_new_clothes/dockie.txt",
+      "sha256": "a813ead549e27621ea975b63bf057423b853017530eece179ef228ecca48b3da",
+      "words": 1346,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/emperors_new_clothes/dockie-candidates.json",
+      "candidates_sha256": "6eefa74912d3c64cef1797b8192ee23400ae2d4e1315d7ef1cff7f80e06594bb",
+      "candidate_count": 10
+    },
+    {
+      "source": "tests/corpus/reference/gettysburg.txt",
+      "persona": "dockie",
+      "file": "research/vocabulary-2026-10-17/texts/gettysburg/dockie.txt",
+      "sha256": "1980b5b670fdc4aa205dc80e74dc480ec0ec201d9ffd10939d56bdfaf56d6353",
+      "words": 272,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/gettysburg/dockie-candidates.json",
+      "candidates_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "candidate_count": 0
+    },
+    {
+      "source": "tests/corpus/reference/goldilocks.txt",
+      "persona": "dockie",
+      "file": "research/vocabulary-2026-10-17/texts/goldilocks/dockie.txt",
+      "sha256": "bb90f3fa53a8cb0b534c45ef9ad0cd3e1fa5d5dbd4a298c0f9566dd261578353",
+      "words": 156,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/goldilocks/dockie-candidates.json",
+      "candidates_sha256": "5373e70d564e2a18ba6131e029f54136c0bd049a7bd25c6655e3dcd6e85f4b9d",
+      "candidate_count": 5
+    },
+    {
+      "source": "tests/corpus/reference/goldilocks_full.txt",
+      "persona": "dockie",
+      "file": "research/vocabulary-2026-10-17/texts/goldilocks_full/dockie.txt",
+      "sha256": "b45f29f9bb04e55df4548338ef6aa6b1b99916c3402fdad2fce2615ba6810ee6",
+      "words": 426,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/goldilocks_full/dockie-candidates.json",
+      "candidates_sha256": "0f0f00ec86f4a61f332c069191b8dc32b956e6cbe781984dee8e6880d3982544",
+      "candidate_count": 6
+    },
+    {
+      "source": "tests/corpus/reference/hamlet_to_be.txt",
+      "persona": "dockie",
+      "file": "research/vocabulary-2026-10-17/texts/hamlet_to_be/dockie.txt",
+      "sha256": "cba2f23ed006381acbccf5924b76fb19cc3eb88accf34107001135e8fe51af15",
+      "words": 269,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/hamlet_to_be/dockie-candidates.json",
+      "candidates_sha256": "07320ef5db32b272b918c4c6934c9a4b7496c343c8da8ab7035927fe93b599e0",
+      "candidate_count": 2
+    },
+    {
+      "source": "tests/corpus/reference/hansel_and_gretel.txt",
+      "persona": "dockie",
+      "file": "research/vocabulary-2026-10-17/texts/hansel_and_gretel/dockie.txt",
+      "sha256": "2f21035687c4c939991af3833a01eb440975f18ab680eb751c3924a2628c54b1",
+      "words": 794,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/hansel_and_gretel/dockie-candidates.json",
+      "candidates_sha256": "6808780273106aedf8f56e83a2c33674d0c9f250cce3bd29aa2b1f3bde18b624",
+      "candidate_count": 5
+    },
+    {
+      "source": "tests/corpus/reference/hare_and_tortoise.txt",
+      "persona": "dockie",
+      "file": "research/vocabulary-2026-10-17/texts/hare_and_tortoise/dockie.txt",
+      "sha256": "3d8e188d983cb62d9b4de5aab6f500b2b7383e443254a8ab3131c5678b4fe366",
+      "words": 140,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/hare_and_tortoise/dockie-candidates.json",
+      "candidates_sha256": "9cba17252c363bfd24f431c46b129394f7a99be1908f98ba041d6d5792ce7bed",
+      "candidate_count": 4
+    },
+    {
+      "source": "tests/corpus/reference/little_red_riding_hood.txt",
+      "persona": "dockie",
+      "file": "research/vocabulary-2026-10-17/texts/little_red_riding_hood/dockie.txt",
+      "sha256": "1dcb32e018c6d73f91e8f5fccdbfbe4e83313318d7209d97990660d7020b6f95",
+      "words": 581,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/little_red_riding_hood/dockie-candidates.json",
+      "candidates_sha256": "1e8a81b3a69b626d7e4627b9d2f2029816c415ec06dd7c6d7db47243541f839b",
+      "candidate_count": 4
+    },
+    {
+      "source": "tests/corpus/reference/pride_and_prejudice_ch1.txt",
+      "persona": "dockie",
+      "file": "research/vocabulary-2026-10-17/texts/pride_and_prejudice_ch1/dockie.txt",
+      "sha256": "5a3d36c342c4708d2d896c913e6f53db998df87a7a88e2eef8ac46315d16e967",
+      "words": 779,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/pride_and_prejudice_ch1/dockie-candidates.json",
+      "candidates_sha256": "ec4a8562ce5591d4ebca1d10845ab1f0f2f33d0888af46ff70a911c1c8ffc6c1",
+      "candidate_count": 4
+    },
+    {
+      "source": "tests/corpus/reference/the_raven.txt",
+      "persona": "dockie",
+      "file": "research/vocabulary-2026-10-17/texts/the_raven/dockie.txt",
+      "sha256": "d6e73607ef8a3f1966c5dd80aaa856de840241f414caaf0a7ed94471c87a0fea",
+      "words": 349,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/the_raven/dockie-candidates.json",
+      "candidates_sha256": "7d71da9a6c99df4c8c1021a7f1cfdc844bac138caac28eef2f27dd23015f332e",
+      "candidate_count": 6
+    },
+    {
+      "source": "tests/corpus/reference/three_little_pigs.txt",
+      "persona": "dockie",
+      "file": "research/vocabulary-2026-10-17/texts/three_little_pigs/dockie.txt",
+      "sha256": "84654730055b71d02b4edda6c37e2796ef58e1938dd2bd34b17073066cbf0720",
+      "words": 862,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/three_little_pigs/dockie-candidates.json",
+      "candidates_sha256": "72aafedc36831ed1b84a2a15f2b0ab6a9d4e8eeef0af36e4800198f77db9fa7d",
+      "candidate_count": 9
+    },
+    {
+      "source": "tests/corpus/reference/waltzing_matilda.txt",
+      "persona": "dockie",
+      "file": "research/vocabulary-2026-10-17/texts/waltzing_matilda/dockie.txt",
+      "sha256": "2835cbdf248ca1c8118d7b8903f93d6c21c4f9d90f57521a7dd9264e1fdf24c8",
+      "words": 164,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/waltzing_matilda/dockie-candidates.json",
+      "candidates_sha256": "8b0d4227ffb551a3320f5570bcb1ac3cf939673911b500b06909b9ccc9dd237b",
+      "candidate_count": 1
+    },
+    {
+      "source": "tests/corpus/reference/bible_good_samaritan.txt",
+      "persona": "uncle_bob",
+      "file": "research/vocabulary-2026-10-17/texts/bible_good_samaritan/uncle_bob.txt",
+      "sha256": "9d4ea758a37e32befee175adfd4416e9cc6bb9b3f415932206e3796eb1a4cf9c",
+      "words": 302,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/bible_good_samaritan/uncle_bob-candidates.json",
+      "candidates_sha256": "843c7e8ecedc5b8ce46011c34e094f73503f04b43ffd2e70c472fcbc0b86b61d",
+      "candidate_count": 3
+    },
+    {
+      "source": "tests/corpus/reference/boy_who_cried_wolf.txt",
+      "persona": "uncle_bob",
+      "file": "research/vocabulary-2026-10-17/texts/boy_who_cried_wolf/uncle_bob.txt",
+      "sha256": "40b89ddc5775be13d6dbcb9a39a7f92a5e9074ebd23f7c6865a8d494335775ba",
+      "words": 137,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/boy_who_cried_wolf/uncle_bob-candidates.json",
+      "candidates_sha256": "84589f18f99329361381b894f19c7ba68cf7c677d0df2f1162df0a5e20256eef",
+      "candidate_count": 3
+    },
+    {
+      "source": "tests/corpus/reference/declaration_of_independence.txt",
+      "persona": "uncle_bob",
+      "file": "research/vocabulary-2026-10-17/texts/declaration_of_independence/uncle_bob.txt",
+      "sha256": "15fddbe62c370a905623008e0c46b7a2442a532ee2e0978f093f7b0be22ef2e6",
+      "words": 359,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/declaration_of_independence/uncle_bob-candidates.json",
+      "candidates_sha256": "64bf1920201fb83cd661faa8d156e3ddbe6f9df8a087970184df723e8c1861cc",
+      "candidate_count": 2
+    },
+    {
+      "source": "tests/corpus/reference/emperors_new_clothes.txt",
+      "persona": "uncle_bob",
+      "file": "research/vocabulary-2026-10-17/texts/emperors_new_clothes/uncle_bob.txt",
+      "sha256": "987b21915a421ae92811aec5dc69884bc7c517fd0a2f1bcb2919112f2b36b880",
+      "words": 1314,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/emperors_new_clothes/uncle_bob-candidates.json",
+      "candidates_sha256": "57aeb22c6b41505f6ec9b0aa01fdeb6ac6ef8e4b05fc3411ba6148001ca32fbf",
+      "candidate_count": 7
+    },
+    {
+      "source": "tests/corpus/reference/gettysburg.txt",
+      "persona": "uncle_bob",
+      "file": "research/vocabulary-2026-10-17/texts/gettysburg/uncle_bob.txt",
+      "sha256": "e952c5d3336be3659d1a203a42a8e742c55c14ba9f3d45bf15ee2eb2b5c4fef3",
+      "words": 287,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/gettysburg/uncle_bob-candidates.json",
+      "candidates_sha256": "3aaaece613a1ccc942211afa7b9720bb5bad5625f491b19255fe9c6ec35d2c51",
+      "candidate_count": 2
+    },
+    {
+      "source": "tests/corpus/reference/goldilocks.txt",
+      "persona": "uncle_bob",
+      "file": "research/vocabulary-2026-10-17/texts/goldilocks/uncle_bob.txt",
+      "sha256": "16687227ae079ddf8d769af4c062a20e3c0f8006692ad623ea6df4ea32828220",
+      "words": 141,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/goldilocks/uncle_bob-candidates.json",
+      "candidates_sha256": "2ee700449dd71af99c991e3cf16376ee878ef83adc83b02a3956f8c8c2fc355a",
+      "candidate_count": 5
+    },
+    {
+      "source": "tests/corpus/reference/goldilocks_full.txt",
+      "persona": "uncle_bob",
+      "file": "research/vocabulary-2026-10-17/texts/goldilocks_full/uncle_bob.txt",
+      "sha256": "9384096357a348427be01d211794f8d7f71ba40969043edd9a07061b9830ff4a",
+      "words": 416,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/goldilocks_full/uncle_bob-candidates.json",
+      "candidates_sha256": "be2cb9d7f3ad26c6239f080d61b5049467660586c709562ce8dc7b984e1b9fb0",
+      "candidate_count": 7
+    },
+    {
+      "source": "tests/corpus/reference/hamlet_to_be.txt",
+      "persona": "uncle_bob",
+      "file": "research/vocabulary-2026-10-17/texts/hamlet_to_be/uncle_bob.txt",
+      "sha256": "e81b50f645c4de9b9ff8418cdae3431290d02b4e197d9d0e94e6f7bac66d0c5d",
+      "words": 283,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/hamlet_to_be/uncle_bob-candidates.json",
+      "candidates_sha256": "be2308037558c9535c3c049d3dfdb01cefc123d1d513c7a4e0f3c5b9c1e13b25",
+      "candidate_count": 3
+    },
+    {
+      "source": "tests/corpus/reference/hansel_and_gretel.txt",
+      "persona": "uncle_bob",
+      "file": "research/vocabulary-2026-10-17/texts/hansel_and_gretel/uncle_bob.txt",
+      "sha256": "dd45c6869d173da5615a4f1a1694e64aea2fce070fec7129242896c81db4412c",
+      "words": 726,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/hansel_and_gretel/uncle_bob-candidates.json",
+      "candidates_sha256": "be4f7e9862d1dc5f4fb95c141ee9e8e192bb20cfbd7cceece034976541ea71d0",
+      "candidate_count": 5
+    },
+    {
+      "source": "tests/corpus/reference/hare_and_tortoise.txt",
+      "persona": "uncle_bob",
+      "file": "research/vocabulary-2026-10-17/texts/hare_and_tortoise/uncle_bob.txt",
+      "sha256": "a51b13c5a208a992a08fea76bcfaac4492aa9f01a829e00a94a2b16d523a2a70",
+      "words": 141,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/hare_and_tortoise/uncle_bob-candidates.json",
+      "candidates_sha256": "f44687a51d85e70127459b0d3fec93e656ff402f55d0e8a3d868253d8a4f041d",
+      "candidate_count": 4
+    },
+    {
+      "source": "tests/corpus/reference/little_red_riding_hood.txt",
+      "persona": "uncle_bob",
+      "file": "research/vocabulary-2026-10-17/texts/little_red_riding_hood/uncle_bob.txt",
+      "sha256": "da13e0dbcedba31f5be7d6b0da53912036ff4ea76514aab5b570382644279384",
+      "words": 564,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/little_red_riding_hood/uncle_bob-candidates.json",
+      "candidates_sha256": "bc5a8dce300a1b24b34bf6bb0178bf399a3a98138ae19535bad9603f2a02e2b7",
+      "candidate_count": 1
+    },
+    {
+      "source": "tests/corpus/reference/pride_and_prejudice_ch1.txt",
+      "persona": "uncle_bob",
+      "file": "research/vocabulary-2026-10-17/texts/pride_and_prejudice_ch1/uncle_bob.txt",
+      "sha256": "dbc7a041a3b44b08ba12947f586f083b2b01a16e742b8cf421baf7cfc06954eb",
+      "words": 777,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/pride_and_prejudice_ch1/uncle_bob-candidates.json",
+      "candidates_sha256": "03c9edf15c9846e9ed23130595275d1d9933e93b4ae79c5691cc6ef29c8d982c",
+      "candidate_count": 5
+    },
+    {
+      "source": "tests/corpus/reference/the_raven.txt",
+      "persona": "uncle_bob",
+      "file": "research/vocabulary-2026-10-17/texts/the_raven/uncle_bob.txt",
+      "sha256": "301f2c53d32a2226997bc84d7ccf0d4d9b6df737321ac57ced417695941dc358",
+      "words": 350,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/the_raven/uncle_bob-candidates.json",
+      "candidates_sha256": "adac91a6e97da7c77b93346030c2d536c5c2145610a40bc6f596492f4bb7c544",
+      "candidate_count": 4
+    },
+    {
+      "source": "tests/corpus/reference/three_little_pigs.txt",
+      "persona": "uncle_bob",
+      "file": "research/vocabulary-2026-10-17/texts/three_little_pigs/uncle_bob.txt",
+      "sha256": "4382f5deb7dfcc9cb6ad8500936f030ec573937ca1260cae79ccb2905f73bc14",
+      "words": 827,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/three_little_pigs/uncle_bob-candidates.json",
+      "candidates_sha256": "40a69868dda8c1c2c05240ca076741a3d6d330b0f287c209477a315c29f55f39",
+      "candidate_count": 7
+    },
+    {
+      "source": "tests/corpus/reference/waltzing_matilda.txt",
+      "persona": "uncle_bob",
+      "file": "research/vocabulary-2026-10-17/texts/waltzing_matilda/uncle_bob.txt",
+      "sha256": "66593cee6fb3051c39d9704ec74c25164665a6c04ce6398bddd88a767ba81fc6",
+      "words": 159,
+      "candidates_file": "research/vocabulary-2026-10-17/texts/waltzing_matilda/uncle_bob-candidates.json",
+      "candidates_sha256": "a14770a31102838727d2370067dacd0bbf6bdf27ea3ddc41c63e1d2f0fdf54b6",
+      "candidate_count": 2
+    }
+  ],
+  "candidate_decisions": {
+    "file": "research/vocabulary-2026-10-17/decisions.yaml",
+    "sha256": "923d70b558a89972ca99bbeb47ea2a9c8dafbbaad8beda0283588ddca21aa728",
+    "counts": {
+      "not_added": 162,
+      "added_entry": 10,
+      "covered": 19,
+      "added_riff": 11,
+      "rejected": 1
+    }
+  }
+}

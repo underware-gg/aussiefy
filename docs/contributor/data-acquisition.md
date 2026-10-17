@@ -58,9 +58,16 @@ Two more sources feed the same `tag` and `review` steps:
 `aussiefy/data/entries/fragments.yaml` and the "harvested" sections of the other entry files came from running
 both over our own idioms'n over an agent's Aussie Gettysburg, then curatin' by hand.
 
+Harvestin' is candidate discovery, not attestation. Review each expression against existin' forms, variants,
+triggers'n dialect swaps before adding it. Anyway, a newly written comparison can be useful without being a
+sayin' in common use: keep it as optional colour in `riffs.yaml`, attached to a term whose meaning it suits,
+rather than inventin' a plain\-English trigger for it. Riffs must read naturally after their term'n respect
+the same vulgarity'n document controls as existin' colour. Retain the source, persona and decision for
+each research candidate; a persona is a writin' brief, not a new engine setting.
+
 ## Research rounds
 
-Research rounds are the bigger route in: subagents extract or propose candidates, verifiers check each one
+Fair dinkum, research rounds are the bigger route in: subagents extract or propose candidates, verifiers check each one
 under a brief, and `aussiefy dev round research/<round>` applies the verdicts. Run it without `--write` first to
 see what it would add'n drop, and why; `--write` validates the result in a scratch copy before touching the
 dictionary. Each round's `README.md` says how it was run'n how to repeat it, and, for a round applied this way,
@@ -95,6 +102,7 @@ complete candidate dictionary in scratch before changing the real files.
 
 | Round | Summary |
 |---|---|
+| [vocabulary-2026-10-17](../../research/vocabulary-2026-10-17/README.md) | X-post suggestions and 45 unharnessed reference-persona retellings, curated into six entries and 25 optional riffs; no persona preset or scored benchmark |
 | [gap-fill-2026-10-11](../../research/gap-fill-2026-10-11/README.md) | Words the engine left in plain English, retold by subagents and searched on the web, then verified and applied with `dev round` |
 | [classics-2026-10-11](../../research/classics-2026-10-11/README.md) | Australianisms from classic Australian texts (`tests/corpus/classics/`), seed terms and the retellings, verified and applied with `dev round` |
 | [swearing-2026-10-12](../../research/swearing-2026-10-12/README.md) | Making level and vulgarity orthogonal, and adding plain-word swears; applied as engine and data changes rather than with `dev round` ([DD-005](../architecture/decisions/dd-005-orthogonal-level-and-vulgarity.md)) |

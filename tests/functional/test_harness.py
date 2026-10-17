@@ -283,6 +283,28 @@ def test_riffs_in_lookup_and_plan(translator):
     assert all(r["suits_mood"] == (r["tone"] != "grim") for r in bins["riffs"])
 
 
+def test_harvested_insult_riffs_keep_a_clean_option_and_respect_the_swear_cap(translator):
+    def riffs(cap):
+        card = harness.lookup("drongo", vulgarity=cap, translator=translator)["results"][0]
+        return {r["text"] for r in card["riffs"]}
+
+    clean = "with the brains of a fence post"
+    assert riffs(0) == riffs(1) == {clean}
+    assert {clean, "with the brains of a fucking fence post", "with the brains of a fucking wheelie bin"} <= riffs(2)
+
+
+def test_harvested_trade_riffs_are_offered_only_when_the_document_allows_them(translator):
+    config = {"garnish": ["riff"], "profile": {"garnish": {"riff": 1}, "max_garnish": {"riff": 1}, "stack": 0}}
+    text = "He is furious."
+    allowed = harness.plan(text, vulgarity=0, document_type="custom", document_config=config, translator=translator)
+    assert any("brickie" in riff["text"] for card in allowed["riffs"] for riff in card["riffs"])
+    result = translator.translate(text, vulgarity=0, document_type="custom", document_config=config)
+    assert any(record.riff for record in result.records)
+    blocked = harness.plan(text, vulgarity=0, document_type="custom", translator=translator)
+    assert blocked["riffs"] == []
+    assert not any(record.riff for record in translator.translate(text, vulgarity=0, document_type="custom").records)
+
+
 def test_lookup_normalises_spelling(translator):
     for query, form in [("yeah but nah", "yeah, but nah"), ("dob in", "dob {obj} in"), ("the clink", "clink"),
                         ("flamin", "flamin'"), ("top yourself", "top {poss}self"), ("gawd", "Gawd help us.")]:

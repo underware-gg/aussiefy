@@ -65,6 +65,12 @@ An entry's `incoherence` (its minimum level) says how hard it is to follow, neve
 its `vulgarity`. A `gate` entry is held back until all its flags are unlocked (`--unlock`, or `--unlock all`); an
 `omit` entry is never used, and is kept only so that re-scrapes recognise it.
 
+`riffs.yaml` maps entry IDs to optional images, each with `text` and `tone` (`comic`, `grim` or `plain`).
+These can include original comparisons as well as familiar imagery; they are not additional meanings or
+automatically attested sayings. Lookup offers only riffs within the swear cap, with the first eligible one
+marked `best`. Plans apply the effective document/embellishment permissions; translations additionally apply
+profile probabilities, spacing and limits. No extra persona setting is required to use a harvested riff.
+
 Further optional fields:
 
 - `slots` are inferred from the placeholders in `form`.

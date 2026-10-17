@@ -1,3 +1,5 @@
+import pytest
+
 from aussiefy.detect import detect, resolve_overlaps
 from aussiefy.matcher import PatternIndex, compile_pattern, match_at
 from aussiefy.text import sentences, tokenize
@@ -109,3 +111,33 @@ def test_idioms_for_is_every_idiom_carrying_a_concept_once_in_dictionary_order(d
     for concepts in [("TIRED",), ("TIRED", "BUSY"), ("NO_SUCH_CONCEPT",)] + [tuple(e.concept) for e in dictionary.idioms[:50]]:
         scanned = [e for e in dictionary.idioms if set(concepts) & set(e.concept)]
         assert dictionary.idioms_for(concepts) == scanned, concepts
+
+
+@pytest.mark.parametrize("text,entry_id", [
+    ("She reimbursed him yesterday.", "square-person-up"),
+    ("They are queasy.", "crook-in-the-guts"),
+    ("It is just right.", "just-the-shot"),
+    ("He is exhausted.", "out-on-poss-feet"),
+    ("They toiled all day.", "work-like-billy-o"),
+    ("Start work.", "get-cracking"),
+])
+def test_persona_vocabulary_reaches_its_reviewed_meaning(translator, text, entry_id):
+    result = translator.translate(text, level=5, seed=0, embellishment="deadset")
+    assert entry_id in {c.entry.id for record in result.records for c in record.eligible}
+    if entry_id == "square-person-up":
+        assert any(record.term == "squared him up" for record in result.records)
+
+
+@pytest.mark.parametrize("text,entry_id", [
+    ("I will repay your kindness.", "square-person-up"),
+    ("She squared up for a fight.", "square-person-up"),
+    ("The fumes are nauseous.", "crook-in-the-guts"),
+    ("She is sick.", "crook-in-the-guts"),
+    ("The battery is exhausted.", "out-on-poss-feet"),
+    ("She is a perfect square.", "just-the-shot"),
+    ("The engine started working.", "get-cracking"),
+    ("They begin work tomorrow.", "get-cracking"),
+])
+def test_persona_vocabulary_does_not_expand_to_unreviewed_senses(translator, text, entry_id):
+    result = translator.translate(text, level=5, seed=0, embellishment="deadset")
+    assert entry_id not in {c.entry.id for record in result.records for c in record.eligible}

@@ -5,6 +5,13 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Add six curated dictionary entries and 25 optional riffs from the X-post writing exercise, editorial
+  extrapolations and 45 unharnessed reference retellings in tradie, dockie and Uncle Bob voices. Retain all
+  203 candidate decisions, distinguish creative images from established sayings, and localise `yield sign`
+  to `give way sign` without changing other yield senses.
+- Preserve riffs when replaying dictionary research rounds: set aside only images belonging to temporarily
+  removed entries in the scratch base, while still rejecting genuine orphan references.
+
 ## [0.2.0] - 2026-10-16
 
 - Carry the complete effective writing contract through agent/API judging and reference retelling, preserve

@@ -3611,3 +3611,22 @@ A_RAFT_OF:
   triggers:
     adj: [a raft of !=logs|timber|planks|barrels|ice|pumice|seaweed|kelp|weed|debris|branches|wood|reeds|bamboo|rubbish|plastic|ants|otters|ducks|birds,
       a slew of, a whole raft of, a whole slew of, a whole host of]
+
+# --- reference-persona harvest, 17 October 2026 --------------------------------
+REIMBURSE_PERSON:
+  description: Pay money back to someone who is owed it.
+  triggers:
+    vp: ["reimburse {obj}"]
+NAUSEOUS:
+  description: Feeling sick in the stomach, rather than illness in general.
+  person: true
+  triggers:
+    predicate_adj: ["nauseous ^person", "queasy ^person", "sick to {poss} stomach ^person"]
+START_WORK_COMMAND:
+  description: An instruction to begin working.
+  triggers:
+    imperative: [start work, begin work]
+GIVE_WAY_SIGN:
+  description: Guard for the road sign; giving way here is not a structure collapsing.
+  triggers:
+    np: [give way sign]

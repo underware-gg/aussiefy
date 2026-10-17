@@ -86,6 +86,14 @@ credits:
     expect:
       wordnet: WordNet 3.0
 first_party:
+- glob: research/vocabulary-2026-10-17/README.md
+  reason: Project harvesting methodology and limitations, no copied source prose.
+- glob: research/vocabulary-2026-10-17/DECISIONS.md
+  reason: Project editorial decisions, original creative comparisons and backlog audit.
+- glob: research/vocabulary-2026-10-17/decisions.yaml
+  reason: Project candidate dispositions and phrase references; per-source candidate evidence retains corpus attribution.
+- glob: research/vocabulary-2026-10-17/manifest.json
+  reason: Project source/output hashes, writing-context metadata and aggregate counts, no copied source prose.
 - glob: research/document-refinement-2026-10-15/study-heldout-judge[12]/manifest.json
   reason: Project experiment metadata, evidence hashes and aggregate counts; source-bearing
     files have derived corpus declarations.

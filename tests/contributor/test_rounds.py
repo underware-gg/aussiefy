@@ -127,6 +127,28 @@ def test_replanning_sets_aside_later_entries_that_use_the_rounds_concepts(setup)
     assert "zzlater" in plan.write(data).entries
 
 
+def test_replanning_sets_aside_only_riffs_for_removed_entries_and_preserves_the_real_data(setup):
+    config, data = setup
+    _plan(config, data).write(data)
+    (data / "entries" / "later.yaml").write_text(
+        "- {id: zzlater, form: zzlater, concept: [ZZ_GREAT], frame: predicate_adj, gloss: Later.}\n")
+    path = data / "riffs.yaml"
+    original = path.read_text()
+    path.write_text(original + '\nzzbonzer: [{text: "a round image", tone: comic}]\n'
+                    'zzlater: [{text: "a later image", tone: plain}]\n')
+    before = path.read_bytes()
+    base = rounds.base_dictionary(config, data)
+    assert "zzbonzer" not in base.entries and "zzlater" not in base.entries
+    assert base.entries["wheelie-bin"].riffs
+    updated = rounds.plan_round(config, base).write(data)
+    assert updated.entries["zzbonzer"].riffs[0].text == "a round image"
+    assert updated.entries["zzlater"].riffs[0].text == "a later image"
+    assert path.read_bytes() == before
+    path.write_text(path.read_text() + 'zzunknown: [{text: "a genuine orphan", tone: comic}]\n')
+    with pytest.raises(SchemaError, match="unknown entry 'zzunknown'"):
+        rounds.base_dictionary(config, data)
+
+
 def test_harvest_keeps_numbers_out_of_the_way():
     from aussiefy.loader import load_dictionary
     from aussiefy.scrape.harvest import harvest
