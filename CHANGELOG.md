@@ -11,6 +11,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 - Stabilise WordNet neighbour selection before trainin'\-pair truncation, preserving sense'n lemma priority.
   Record current\-model trial limits'n real portable CLI/MCP integration checks without claiming web deployment.
+  So anyway, the fresh full\-data candidate passes 31/33 required checks, so the bundled model remains 1.2.0 \(33/33\).
 - Keep negative\-question subjects beside their auxiliary by declinin' the unsafe bloody\-well infix there.
   Preserve capitals such as Australian and English when dictionary vocabulary alone would lowercase them.
   Well, place dialogue tags before punctuation'n curly closing quotes in continued speech.
@@ -295,7 +296,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   explicit `--vulgarity` the genre limits is reported in the warnings. Yarn mode briefs the genre.
 - **US and British English** (`dialect.py`, `data/dialect.yaml`, replacing `americanisms.yaml`): faucet \-\>
   tap, capsicum \-\> capsicum, zucchini \-\> zucchini at every level, with plurals, inflections'n articles;
-  words Australians use in another sense swap only for a known source \(`--english us|uk|auto|none`). Anyway, lint's
+  words Australians use in another sense swap only for a known source \(`--english us|uk|auto|none`). Lint's
   `americanism` kind is now `dialect`.
 - **A dictionary round** from the everyday pass's retellings: 40 entries, 29 concepts, and triggers that
   caught the wrong sense taken out with their reasons.

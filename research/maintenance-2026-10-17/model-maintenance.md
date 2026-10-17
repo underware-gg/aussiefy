@@ -43,6 +43,42 @@ A trial after this correction must start with fresh evaluation and full-data fit
 trainer is committed. The old checkpoint cannot be reused for changed pair selection. Stable data ordering
 does not promise bit-identical weights across hardware/toolchains.
 
+## Fresh deterministic trial
+
+The corrected trainer was committed and pushed as `72015dc` before either new fit. Both began from the
+pinned base with clean Git inputs, with no checkpoint reuse, recipe changes or weakened gates. Cached-only
+snapshot resolution avoided the earlier offline metadata problem. The run finished normally with release
+exit 1 because the candidate failed its reference gate; it did not export any package model.
+
+[The fresh trial](model-trial-deterministic.json) retains execution/input/checkpoint hashes, toolchain,
+ordered pair counts/digests, all six evaluation setups, calibration summaries, complete candidate/shipped
+reference decisions and the same eighteen shared lookup queries for both models.
+
+| Measurement | Result |
+|---|---|
+| Evaluation fit | 951 entries; 10,493 positive / 5,954 wrong-sense / 2,978 opposite pairs |
+| Full-data fit | 1,189 entries; 12,640 positive / 6,675 wrong-sense / 3,821 opposite pairs |
+| Tuned evaluation model | 28/33 required references passed |
+| Full-data candidate | 31/33 required references passed |
+| Shipped 1.2.0, rechecked | 33/33 required references passed |
+
+The full candidate fails **girl** (retrieving WOMAN/GIRLFRIEND) and **a good mate of mine** (missing FRIEND
+among its first three distinct concepts). Four known reference failures pass: wide awake, put up with,
+dying and worked very hard. These are model-level retrieval checks, distinct from the actual toolkit's
+combined lexical/semantic ranking and policy guards. Both actual lookup runs decline girl under the frozen
+policy; that does not waive the model gate. The candidate declines probably rather than suggesting definite
+certainty, and offers WORK_HARD for worked very hard. It still offers sleep for wake up and beer among very
+cold results. These bounded observations do not establish general superiority.
+
+Pair hashes in this trial use compact UTF-8 JSON. The prerequisite report uses ordinary JSON separators;
+an independent rebuild matched all six complete ordered streams under both serializations. The saved
+evaluation checkpoint, all reference decisions and full calibration also independently reproduced. Stable
+selection is established; a single trial does not establish bit-identical retraining weights.
+
+**Decision:** keep shipped 1.2.0. The corrected fresh trial improves the count over the interrupted historical
+trial but still fails the unchanged required gate. Dictionary/cleaner/pair-selection changes and a single
+fit do not identify a cause for any quality change. No new version, cut-off or reference exception is added.
+
 ## Questions for shaping
 
 Meaning-specific training remains the substantial design question: multi-concept entries, compositional

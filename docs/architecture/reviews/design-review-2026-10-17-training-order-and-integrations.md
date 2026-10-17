@@ -22,6 +22,18 @@ projections to raw evidence; and reproduced all six complete MCP responses in a 
 Both fresh-process hash seeds yield identical ordered pair digests after the correction. Complete pre-commit
 results are recorded in the maintenance ledger.
 
+The subsequent fresh trial ran from committed `72015dc`. Its full candidate passes 31/33 required checks
+and is rejected before export; shipped 1.2.0 independently retains 33/33. The reporting wrapper was reviewed
+as well: candidate and optional package-reader references must be kept separate, and a written export is
+not proof of release success. The final evidence builder follows the canonical exit code and records the
+package-reader result separately. These corrections do not change fits or acceptance gates.
+
+The reviewer independently rebuilt all six ordered pair streams under both JSON hash conventions, matched
+the saved evaluation checkpoint, and reproduced its 28/33 reference decisions and complete calibration.
+Final review also reproduced full-candidate 31/33 and shipped 33/33 decisions, verified both dense-fit hashes
+and input/raw-measurement hashes, and matched all 36 actual lookup projections. No findings remain across
+the six concerns; the complete pre-commit suite remains recorded in the maintenance ledger.
+
 ## What's done well
 
 - Sorting stays at the WordNet neighbour boundary before truncation, preserving sense and lemma priority.

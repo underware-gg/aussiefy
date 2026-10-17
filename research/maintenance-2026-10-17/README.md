@@ -10,7 +10,7 @@ material product tradeoffs are flagged for shaping while independent work contin
 | 2 | Seed-listicle intake: acquire through existing pipeline, verify senses, reconcile coverage and retain decisions | Complete |
 | 3 | Curated slang benchmark with independent review, fixed labels and an honest baseline | Complete |
 | 4 | Prose refinement: assess technical/instruction/body voice and fix clear defects while preserving configured flavour | Complete |
-| 5 | Bundled-model maintenance: inspect training environment, retrain on final data and enforce existing quality gates | First trial rejected; deterministic ordering corrected; fresh trial pending commit |
+| 5 | Bundled-model maintenance: inspect training environment, retrain on final data and enforce existing quality gates | Complete: fresh trial rejected at 31/33; shipped 1.2.0 retained |
 | 6 | Pre-launch integration: exercise available client/API paths, measure actual routing/latency, document verified limits | Available-interface checks complete; website/live provider checks remain external |
 
 ## Decisions and verification
@@ -45,11 +45,11 @@ and historical 60% coverage gates, before the successful complete rerun.
 Independent preparation: the seed page fetched through the existing scraper (227 raw rows), exposing a
 declared-UTF-8/implicit-Latin-1 fetch bug. Correct decoding produces 212 candidates; raw HTML and copied
 definitions remain temporary. The pinned training toolchain, WordNet 3.0 and pinned base model are validated
-in an isolated Python 3.12 environment. No live API key is present in the current process. The user confirmed
-the website is not built; it will live in `underware-gg/aussiefy-web`, initially at
-`aussiefy.underware.gg`. Available engine/toolkit interfaces can be checked now; website routing/browser
-latency needs the future application. Standalone domain options are retained separately for shaping; no
-purchase or deployment is authorised by that research request.
+in an isolated Python 3.12 environment. No live API key was present in the captured process. The user confirmed
+the website had not been built and named its planned repository `underware-gg/aussiefy-web`. They subsequently
+provisionally selected `aussiefy.au`; package support is now being handled by the website agent in a separate
+worktree. Available engine/toolkit interfaces are verified below; website routing/browser latency needs the
+application. Domain research and a provisional choice do not authorise purchase or deployment.
 
 ### Slice 2: seed intake
 
@@ -153,6 +153,24 @@ The independent six-concern review converged with no remaining findings. Final p
 checks passed. The 13 trainer regressions also pass on Python 3.10. Only the neighbour-order correction and
 its evidence are accepted here; a fresh evaluation and full-data trial follow this prerequisite commit.
 
+The prerequisite was committed and pushed as `72015dc`. Both fresh fits then ran from clean inputs, with
+all six pair streams independently matched to the ordering evidence. The evaluation candidate passes
+28/33 references; the full candidate passes 31/33 and fails girl and a good mate of mine. The canonical
+release gate rejects it before export. Shipped 1.2.0 is independently rechecked at 33/33 and remains intact.
+[Fresh trial evidence](model-trial-deterministic.json) retains both fits, calibration, complete reference
+decisions and eighteen actual lookup comparisons per model. Gains on some queries coexist with misleading
+alternatives; model-level reference fixes are not substituted for actual toolkit observations.
+
+Slice 5 is complete as a measured maintenance decision, with the current model retained. Meaning-specific
+training and a refreshed unknown-word cohort need shaping before another recipe experiment. Slice 6's
+available interfaces are verified; website routing, deployed/browser latency, live-provider execution and
+actual external-client MCP registration remain follow-ups for those integrations.
+
+Final independent review reproduces candidate 31/33 and shipped 33/33, both fit hashes and all 36 lookup
+projections, with no remaining findings across the six concerns. Closing pre-commit verification:
+**2,116 passed, two expected local-corpus skips, 627.03 seconds**; Ruff, whitespace and generated-publication
+checks passed. The final change records evidence and the decision to retain 1.2.0; no package model or gate changes.
+
 ### Slice 6: available interfaces
 
 [Integration evidence](integration-checks.md) retains the original capture plus a final recheck against
@@ -162,5 +180,5 @@ The actual Codex drafting workflow kept the source's facts and all three fitting
 eight runtime-input digests match the committed implementation.
 
 This verifies an editable installed checkout from outside the repo. Live provider execution, separate
-agent-client MCP registration and the unbuilt website's routes, Smart/Basic mapping and browser/deployed API
+agent-client MCP registration and the planned website's routes, Smart/Basic mapping and browser/deployed API
 latency remain unverified. Prior core timings are linked, without substituting them for future web timing.

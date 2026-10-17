@@ -261,8 +261,12 @@ references, failing on a great war, a top bloke and honest, so 1.2.0 stays and 1
 evaluation fit was reused only for an offline-cache metadata repair. A subsequent audit found hash-dependent
 WordNet neighbour selection; the historical trial is retained with that limitation, not treated as an
 exactly replayable experiment. Neighbour sorting now stabilises every ordered pair digest across fresh
-processes while preserving sense/lemma priority and recipe limits. A fresh fit is required after committing
-this trainer correction. See the [maintenance evidence](../research/maintenance-2026-10-17/model-maintenance.md).
+processes while preserving sense/lemma priority and recipe limits. The correction was committed as `72015dc`
+before fresh evaluation and full-data fits. Those pass 28/33 and 31/33 required references respectively;
+the full candidate fails girl and a good mate of mine and is rejected before export. Shipped 1.2.0 still
+passes 33/33. The recipe, cut-offs and required checks remain unchanged. See the
+[maintenance evidence](../research/maintenance-2026-10-17/model-maintenance.md) for both trials, fixed-query
+lookup comparisons and the separate meaning-specific training questions.
 
 ## Ideas for the next version
 
