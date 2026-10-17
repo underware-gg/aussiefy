@@ -1,31 +1,35 @@
 """Masks (O23): the words in a rendering a reader may not want shown in full, with where each one's ending starts, so
 a page can hide the stem and keep the ending ("f$%&ed") without a swear list of its own. Only actual profanity is
-masked: the dictionary's swear list (swears.yaml)."""
+masked: the dictionary's swear list (swears.yaml), the compounds its rated words build on a listed swear
+(Dictionary.swear_compounds: "fuckwit", "shitfight"), and the mask words an entry authors where its rudeness isn't a
+listed word ("wanker"). Innuendo is never masked."""
 
 from __future__ import annotations
 
 import re
 from typing import Any
 
-from .model import swear_strength
+from .model import MASK_ENDINGS, swear_strength
 
-# the endings a masked word keeps, after a stem that is itself a listed swear (O23's fixed set), longest first
-ENDINGS = ("ers", "ing", "in'", "es", "ed", "er", "in", "s", "y")
 WORD_RE = re.compile(r"[A-Za-z][A-Za-z'’]*")
 
 
-def masks(text: str, swears: dict[str, int]) -> list[dict[str, Any]]:
+def masks(text: str, swears: dict[str, int], compounds: dict[str, int] | None = None,
+          words: dict[str, int] | None = None) -> list[dict[str, Any]]:
     """Each maskable word in text: its span, where its ending starts (its end, where it keeps none) and the
-    vulgarity it needs."""
+    vulgarity it needs. words: the mask words of the entries rendered in text, with their entries' vulgarity. A
+    word keeps its ending (-s, -es, -ed, -er, -ers, -ing, -in', -in, -y) only after a stem that is itself a listed
+    swear or a mask word; any other, a compound included, is masked whole after its first letter."""
+    compounds, words = compounds or {}, words or {}
     out = []
     for m in WORD_RE.finditer(text):
         word = _word(m.group())
-        strength = swear_strength(swears, word)
-        if not strength:
-            continue
-        start = m.start()
-        out.append({"span": [start, start + len(word)], "ending_start": start + _stem_length(word, swears),
-                    "vulgarity": strength})
+        low = word.lower().replace("’", "'")
+        strength = max(swear_strength(swears, low), _inflected(low, compounds), _inflected(low, words))
+        if strength:
+            start = m.start()
+            out.append({"span": [start, start + len(word)], "ending_start": start + _stem_length(low, swears, words),
+                        "vulgarity": strength})
     return out
 
 
@@ -35,9 +39,18 @@ def _word(token: str) -> str:
     return token if bare.lower().endswith("in") and bare != token else bare
 
 
-def _stem_length(word: str, swears: dict[str, int]) -> int:
-    low = word.lower().replace("’", "'")
-    for ending in ENDINGS:
-        if low.endswith(ending) and swears.get(low[:-len(ending)]):
-            return len(word) - len(ending)
-    return len(word)
+def _inflected(low: str, table: dict[str, int]) -> int:
+    """How strong a word is as one of table's, or one of them with an ending ("wankers", "bullshitters")."""
+    found = table.get(low, 0)
+    for ending in MASK_ENDINGS:
+        if low.endswith(ending):
+            found = max(found, table.get(low[:-len(ending)], 0))
+    return found
+
+
+def _stem_length(low: str, swears: dict[str, int], words: dict[str, int]) -> int:
+    for ending in MASK_ENDINGS:
+        stem = low[:-len(ending)]
+        if low.endswith(ending) and (swears.get(stem) or stem in words):
+            return len(stem)
+    return len(low)

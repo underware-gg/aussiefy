@@ -96,11 +96,21 @@ def finish(result: Any, raw: list[dict[str, Any]], dictionary: Dictionary, cap: 
             c["id"] += f"#{n}"
     _cover(changes)
     names: set[str] = set()
+
+    def masked(text: str, rendering: dict[str, Any]) -> list[dict[str, Any]]:
+        """A rendering's maskable words: listed swears, compounds, and its own entries' mask words."""
+        ids = [i for i in [rendering.get("entry_id"), *rendering.pop("_with", ())] if i]
+        words: dict[str, int] = {}
+        for e in (dictionary.entries[i] for i in ids):
+            for w in e.mask:
+                words[w] = max(words.get(w, 0), e.vulgarity)
+        return masks(text, dictionary.swears, dictionary.swear_compounds, words)
+
     for c in changes:
-        c["masks"] = masks(c["output"], dictionary.swears)
         for o in c["alternatives"] + c["locked"]:
-            o["masks"] = masks(o["rendered"], dictionary.swears)
+            o["masks"] = masked(o["rendered"], o)
             names.add(o["entry_id"])
+        c["masks"] = masked(c["output"], c)
         if c["entry_id"]:
             names.add(c["entry_id"])
     return ChangeSet(result, changes, {i: entry_card(dictionary.entries[i], cap) for i in sorted(names)})
@@ -515,13 +525,15 @@ class _Builder:
         total = sum(o.candidate.weight for o in options if o.locked_at is None) or 1.0
         alternatives = [{"entry_id": o.entry.id, "weight": round(o.candidate.weight / total, 4),
                          "rendered": self.restore(o.text, whole=False), "out_span": [a, b],
-                         "vulgarity": self._vulgarity(o), "masks": []}
+                         "vulgarity": self._vulgarity(o), "masks": [], "_with": _stacked(o)}
                         for o in options if o.locked_at is None]
         locked = [{"entry_id": o.entry.id, "vulgarity": max(o.locked_at, self._vulgarity(o)),
-                   "rendered": self.restore(o.text, whole=False), "out_span": [a, b], "masks": []}
+                   "rendered": self.restore(o.text, whole=False), "out_span": [a, b], "masks": [],
+                   "_with": _stacked(o)}
                   for o in options if o.locked_at is not None]
         return self._change("substitution", (toks[region.start].start, toks[region.end - 1].end), (a, b),
-                            pick.entry, self._vulgarity(pick), alternatives=alternatives, locked=locked)
+                            pick.entry, self._vulgarity(pick), alternatives=alternatives, locked=locked,
+                            _with=_stacked(pick))
 
     def _option(self, spot: Spot, candidate: Candidate, locked_at: int | None = None) -> _Option:
         rec = SubstitutionRecord(spot.rec.span, spot.rec.text, spot.rec.det, spot.sent.index)
@@ -808,6 +820,11 @@ def _required(seq) -> set[str] | None:
     if run:
         options.append({"".join(run).casefold()})
     return max(options, key=lambda o: min(map(len, o))) if options else None
+
+
+def _stacked(o: _Option) -> list[str]:
+    """The entry stacked after an option's own, whose mask words its rendering also carries."""
+    return [o.stacked.id] if o.stacked else []
 
 
 def _first_word_end(text: str, at: int) -> int:

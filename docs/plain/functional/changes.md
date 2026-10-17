@@ -76,9 +76,20 @@ output and its seeds are unchanged by any of this: `translate_changes(...).text`
 
 Each rendering lists its maskable words as `{span, ending_start, vulgarity}`: the span in that rendering, where
 its ending starts, and the vulgarity it needs. A page can hide what's stronger than its reader allows, keeping
-the first letter and the ending (`f$%&ed`). An ending is kept only after a stem that is itself a listed swear
-(`-s`, `-es`, `-ed`, `-er`, `-ers`, `-ing`, `-in'`, `-in`, `-y`); otherwise `ending_start` is the word's end.
-Maskable words come from the dictionary's swear list (`aussiefy/data/swears.yaml`).
+the first letter and the ending (`f$%&ed`). Only actual profanity is masked:
+
+- words on the dictionary's swear list (`aussiefy/data/swears.yaml`), with their plurals and dropped g's;
+- compounds built on a listed swear ("fuckwit", "shitfight", "bullshitter"), as the dictionary's own rated
+  entries and riffs use them (`Dictionary.swear_compounds`). An ordinary word that happens to hold one
+  ("cocktail", "cocky") is never one, and nor is a compound in the reader's own text;
+- the mask words an entry authors where its rudeness isn't a listed word (`mask: [wanker]`), in that entry's own
+  renderings (a stacked idiom's too), at the entry's vulgarity.
+
+Innuendo is never masked: an entry marked `innuendo: true` ("rooted", "have a root") shows in full. An ending is
+kept only after a stem that is itself a listed swear or a mask word (`-s`, `-es`, `-ed`, `-er`, `-ers`, `-ing`,
+`-in'`, `-in`, `-y`): "fucked" keeps "ed", "fuckin'" keeps "in'", "arseholes" keeps "s". Any other word, a
+compound included, is masked whole after its first letter, so `ending_start` is its end ("bullshit"). Where a
+word is both listed and authored, it has one mask, at the higher vulgarity.
 
 ## Markdown and markup
 

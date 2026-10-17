@@ -55,6 +55,7 @@ Fair dinkum, how to run them is in the
 | `tests/functional/test_lookup_senses.py`, `tests/functional/test_harness_reliability.py` | Slot/sense lookup, phrase locality and data-driven lint comparisons |
 | `tests/functional/test_markdown_composition.py` | Document-wide garnish and source sentence boundaries |
 | `tests/functional/test_changes.py`, `tests/functional/test_changes_oracle.py` | The `changes` contract, and each rendering against a whole re-render with that pick pinned |
+| `tests/functional/test_masks.py` | Maskable words and their endings, entry mask words and innuendo, and every rated entry masked at its rating |
 | `tests/functional/test_matching.py` | Tokenising, the pattern language and concept detection |
 | `tests/functional/test_schema.py` | Dictionary loading and validation |
 | `tests/architecture/test_golden.py` | Exact outputs per input, level and seed (`tests/corpus/golden.yaml`) |

@@ -18,6 +18,14 @@ from .text import COMMON_STARTERS
 from .terms import fold
 
 
+# the endings a masked word keeps after a stem that is itself a listed swear or a mask word (O23's fixed set)
+MASK_ENDINGS = ("ers", "ing", "in'", "es", "ed", "er", "in", "s", "y")
+
+
+def _find_all(word: str, part: str) -> list[int]:
+    return [i for i in range(len(word) - len(part) + 1) if word.startswith(part, i)]
+
+
 def swear_strength(swears: dict[str, int], word: str) -> int:
     """How strong a swear a word is: as listed, with a dropped g ("fuckin'", "pissin" -> pissing) or a plural
     ("pricks") or a possessive ("bastard's") read as the listed word."""
@@ -120,6 +128,29 @@ class Dictionary:
         return swear_strength(self.swears, word)
 
     # --- derived once, on first use ---------------------------------------------------------------------------
+
+    @cached_property
+    def swear_compounds(self) -> dict[str, int]:
+        """The words in rated entries and riffs that hold a listed swear inside them, with more than an ending
+        around it ("fuckwit", "shitfight", "bullshitter"), and how strong the strongest one held is. Read from
+        the dictionary's own rated words, so an ordinary word that happens to hold one ("cocktail", "Scunthorpe",
+        "cocky") is never taken for one."""
+        stems = {w: v for w, v in self.swears.items() if len(w) >= 4 and v}
+        texts = [f for e in self.entries.values() if e.vulgarity and e.status != "omit" for f in e.all_forms]
+        texts += [r.text for e in self.entries.values() for r in e.riffs if r.vulgarity]
+        out: dict[str, int] = {}
+        for word in {w.lower().replace("\u2019", "'").strip("'") for t in texts for w in re.findall(r"[A-Za-z'\u2019]+", t)}:
+            if swear_strength(self.swears, word):
+                continue
+            held = []
+            for stem, strength in stems.items():
+                for i in _find_all(word, stem):
+                    before, after = word[:i], word[i + len(stem):]
+                    if len(before) >= 2 or (len(after) >= 2 and after not in MASK_ENDINGS):
+                        held.append(strength)
+            if held:
+                out[word] = max(held)
+        return out
 
     @cached_property
     def plain_words(self) -> frozenset[str]:

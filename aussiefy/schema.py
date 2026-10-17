@@ -146,6 +146,10 @@ class Entry:
                                       # text keeps the first it uses
     intensity: int = 3
     vulgarity: int = 0
+    mask: tuple[str, ...] = ()      # words a page may hide in its renderings, at its vulgarity, where none of its
+                                    # rudeness is a listed swear ("wanker"); see masks.py
+    innuendo: bool = False          # its rudeness is innuendo or a rude image in ordinary words ("rooted", "have a
+                                    # root"): nothing in it is masked (O23)
     incoherence: int = 1
     register: str = "current"
     region: tuple[str, ...] = ()
@@ -224,7 +228,7 @@ class Concept:
 # Every key an entry may carry, in the order a written entry lists them.
 ENTRY_KEYS = (
     "id", "form", "variants", "spellings", "insult", "concept", "frame", "class", "plural", "number", "slots", "intensity", "vulgarity",
-    "incoherence", "register", "region", "replaces", "status", "flags", "plain_sense", "type", "placement", "when",
+    "mask", "innuendo", "incoherence", "register", "region", "replaces", "status", "flags", "plain_sense", "type", "placement", "when",
     "stretch",
     "tone", "weight", "gloss", "notes", "sources", "key_sha256",
 )
@@ -336,6 +340,17 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
     if tone not in RIFF_TONES:
         raise SchemaError(f"{entry_id}: tone must be one of {RIFF_TONES}")
 
+    mask = _tuple(raw.get("mask"), "mask", entry_id)
+    innuendo = _bool(raw, "innuendo", entry_id)
+    if (mask or innuendo) and not raw.get("vulgarity"):
+        raise SchemaError(f"{entry_id}: 'mask' and 'innuendo' are for an entry rated vulgarity 1 or more")
+    if mask and innuendo:
+        raise SchemaError(f"{entry_id}: an innuendo entry has nothing to mask; give it 'mask' or 'innuendo', not both")
+    for word in mask:
+        if not re.fullmatch(r"[a-z][a-z'\u2019-]*", word) or not any(
+                re.search(rf"(?<![a-z]){re.escape(word)}", f.lower()) for f in (form,) + variants):
+            raise SchemaError(f"{entry_id}: mask word {word!r} must be a lower-case word in one of its forms")
+
     weight = raw.get("weight", 1.0)
     if not isinstance(weight, (int, float)) or weight <= 0:
         raise SchemaError(f"{entry_id}: weight must be a positive number")
@@ -368,6 +383,8 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
         when=when,
         stretch=_bool(raw, "stretch", entry_id),
         plain_sense=_bool(raw, "plain_sense", entry_id),
+        mask=mask,
+        innuendo=innuendo,
         tone=tone,
         notes=raw.get("notes", "") or "",
         key_sha256=raw.get("key_sha256"),

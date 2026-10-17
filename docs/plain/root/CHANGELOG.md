@@ -5,6 +5,11 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Mask only actual profanity in `changes` renderings: swear-list words, the compounds the dictionary's rated
+  words build on one ("fuckwit"), and the new per-entry `mask` words where an entry's rudeness isn't a listed word
+  ("wanker", "dickhead"), each with the ending a page keeps. The new `innuendo` mark ("rooted", "have a root") is never
+  masked. 28 entries author mask words and 4 are marked innuendo; a test holds every rated entry to a masked word at
+  its rating.
 - Add `aussiefy.translate_changes`: translate's translation with every change it made (swaps, garnish,
   drawl, swear infixes and US/UK swaps) placed in the output. Each swap comes with its alternatives and its
   vulgarity-locked options, rendered in place on the engine's own path, with ids, `covers`, `removed` for garnish,
