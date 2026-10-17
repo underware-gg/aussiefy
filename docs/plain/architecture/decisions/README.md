@@ -48,11 +48,12 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 | [DD-025](../../../architecture/decisions/dd-025-contextual-imagery.md) | Contextual imagery with explicit writer and engine boundaries | Accepted |
 | [DD-026](../../../architecture/decisions/dd-026-finite-clauses-and-sense-boundaries.md) | Preserve finite-clause grammar and ambiguous senses | Accepted |
 | [DD-027](../../../architecture/decisions/dd-027-question-safe-infixes-and-source-capitals.md) | Use canonical question spans for opt-in infix guards and preserve unresolved source capitals | Accepted |
+| [DD-028](../../../architecture/decisions/dd-028-hosted-mcp-capabilities.md) | A hosted MCP server narrows the toolkit by capability, with every tool annotated read-only | Accepted |
 
 ## By topic
 
 - **Engine:** DD-001, DD-003, DD-007
 - **Dictionary and data:** DD-002, DD-010, DD-012, DD-025
 - **The dials:** DD-004, DD-005
-- **Structure and interfaces:** DD-006, DD-008, DD-009, DD-015, DD-016, DD-019, DD-020, DD-021, DD-022, DD-023, DD-024
+- **Structure and interfaces:** DD-006, DD-008, DD-009, DD-015, DD-016, DD-019, DD-020, DD-021, DD-022, DD-023, DD-024, DD-028
 - **Sources, licensing and releases:** DD-011, DD-012, DD-013, DD-014

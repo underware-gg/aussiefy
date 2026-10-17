@@ -6,27 +6,33 @@
 Configure your agent to launch aussiefy-mcp over stdio; see docs/user/agents.md.
 
 Each tool is a thin adapter over the harness function of the same name, with the same parameters (less the
-in-process translator); tests/test_interfaces.py holds the two in step.
+in-process translator); tests/test_interfaces.py holds the two in step. A hosted server narrows them by
+capability (build_server's options; DD-028).
 """
 
 import functools
+import inspect
 from typing import Any
 
+from .engine import Translator
 from .errors import UserError
-from .policy import LEVELS, VULGARITIES
+from .policy import DOCUMENT_TYPES, LEVELS, VULGARITIES
 from .schema import REGISTERS, FLAGS
 
 from . import harness
 from .guide import style_guide_data
 
-INSTRUCTIONS = """Tools for rewriting English as genuine Australian English (levels 1-5).
+_CORE = """Tools for rewriting English as genuine Australian English (levels 1-5).
 Use the shared workflow below for the guide, plan, writing, lint and verification steps.
 aussie_translate gives the plain deterministic output if that's all you need; aussie_verify checks a finished
 translation against its original. Two independent dials, by number
 or name: level 1-5 (tourist, blow-in, local, larrikin, swaggie) and vulgarity 0-3 (nan, dad, uncle-bob, tradie);
 vulgarity defaults to the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5), and tradie is never a default.
 A third, embellishment 0-2 (deadset, dinkum, troppo), controls liberty in the telling. General is the default
-explicit document type, with Dinkum embellishment. Auto opts into detection; named types supply presets;
+explicit document type, with Dinkum embellishment. Auto opts into detection; named types supply presets."""
+
+# what only a server with document_config describes (allow_document_config=False drops it with the Custom type)
+_DOCUMENT_CONFIG = """
 Custom enables only explicitly configured optional behaviours. document_config applies exact overrides after
 the preset and explicit dials. False and empty lists override inherited settings. Its nested profile object
 tunes substitution, frames, garnish rates/limits/spacing, stack, phonetic, stretch, swearing and rewrite
@@ -34,15 +40,40 @@ thresholds; partial objects inherit missing keys from level/vulgarity defaults. 
 complete resolved numeric settings. Custom still requires optional behaviours enabled explicitly."""
 
 
-INSTRUCTIONS += "\n" + style_guide_data().workflow_for("mcp")
+
+def instructions(*, allow_document_config: bool = True) -> str:
+    return _CORE + (_DOCUMENT_CONFIG if allow_document_config else "") + "\n" + style_guide_data().workflow_for("mcp")
 
 
-def build_server():
+INSTRUCTIONS = instructions()
+
+# the line a tool description gives a parameter a hosted server can hide (tests check none is left behind)
+_MENTIONS = {
+    "include_gated": "include_gated also returns entries held back as doubtful (marked as such).\n",
+    "unlock": "unlock (flags whose gated entries become eligible) widens it.\n",
+}
+
+
+def _describe(doc: str, hidden: set[str]) -> str:
+    text = inspect.cleandoc(doc) + "\n"
+    for name in hidden:
+        text = text.replace(_MENTIONS.get(name, "\0"), "")
+    return text.strip()
+
+
+def build_server(*, translator: Translator | None = None, allow_unlock: bool = True,
+                 allow_document_config: bool = True, max_chars: int | None = None,
+                 max_query_chars: int | None = None, lookup_limit: int | None = None):
+    """The MCP server. The defaults serve everything, for a local install; a hosted service passes its
+    capabilities. allow_unlock=False hides unlock and include_gated; allow_document_config=False hides
+    document_config and the custom document type; max_chars caps every text field (text, original);
+    max_query_chars caps aussie_lookup's query; lookup_limit caps its limit. translator is the one every tool uses (default: the toolkit's)."""
     # pydantic and the SDK come with the mcp extra, so they are imported here, not with the package
     from typing import Annotated, Literal
 
     from mcp.server.mcpserver import MCPServer
     from mcp.server.mcpserver.exceptions import ToolError
+    from mcp.types import ToolAnnotations
     from pydantic import Field
 
     def _names(names: dict[str, int]) -> str:
@@ -54,7 +85,13 @@ def build_server():
     Vulgarity = Annotated[Annotated[int, Field(ge=0, le=3)] | Literal[tuple(VULGARITIES)] | None,
                           Field(description=f"How rude, by number or name: {_names(VULGARITIES)}. Omit for the "
                                             "level's own (nan at 1-2, dad at 3-4, uncle-bob at 5).")]
-    Text = Annotated[str, Field(description="The text: plain English to Aussify, or an Aussified draft to lint.")]
+    Text = Annotated[str, Field(max_length=max_chars,
+                                description="The text: plain English to Aussify, or an Aussified draft to lint.")]
+    Original = Annotated[str, Field(max_length=max_chars, description="The original text it was translated from.")]
+    Query = Annotated[str, Field(max_length=max_query_chars, description="A plain-English meaning or an Aussie term.")]
+    Limit = Annotated[int, Field(le=lookup_limit)] if lookup_limit else int
+    limit_default = min(8, lookup_limit) if lookup_limit else 8
+    DocumentType = str if allow_document_config else Literal[tuple(t for t in DOCUMENT_TYPES if t != "custom")]
     Seed = Annotated[int, Field(description="Seed for the weighted choices: the same text, settings and seed give "
                                             "the same output; change it for a different version.")]
     Variety = Annotated[int, Field(ge=0, description="Choose among the N best-fitting slang terms only (1 = always "
@@ -66,36 +103,47 @@ def build_server():
     Unlock = Annotated[list[Literal[(*FLAGS, "all")]] | None,
                        Field(description="Flags whose gated (doubtful) entries become eligible, or ['all'].")]
 
-    server = MCPServer("aussiefy", instructions=INSTRUCTIONS)
+    hidden = ({"unlock", "include_gated"} if not allow_unlock else set()) | \
+        ({"document_config"} if not allow_document_config else set())
+    # every tool only reads: no side effects, same answer for the same call, nothing outside the package
+    read_only = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True,
+                                open_world_hint=False)
+
+    server = MCPServer("aussiefy", instructions=instructions(allow_document_config=allow_document_config))
 
     def tool(fn):
-        """Register a tool whose UserErrors reach the agent as their own message (the SDK hides other errors)."""
+        """Register a tool whose UserErrors reach the agent as their own message (the SDK hides other errors),
+        without the parameters this server doesn't offer (they keep their defaults)."""
         @functools.wraps(fn)
         def run(*args, **kwargs):
             try:
                 return fn(*args, **kwargs)
             except UserError as exc:
                 raise ToolError(str(exc)) from exc
-        return server.tool()(run)
+        signature = inspect.signature(fn)
+        run.__signature__ = signature.replace(
+            parameters=[p for p in signature.parameters.values() if p.name not in hidden])
+        return server.tool(description=_describe(fn.__doc__, hidden & set(signature.parameters)),
+                           annotations=read_only)(run)
 
     @tool
-    def aussie_lookup(query: str, level: Level = 5, vulgarity: Vulgarity = None,
-                      limit: int = 8, include_gated: bool = False, short: bool = False,
-                      embellishment: int | str | None = None, document_type: str = "general",
+    def aussie_lookup(query: Query, level: Level = 5, vulgarity: Vulgarity = None,
+                      limit: Limit = limit_default, include_gated: bool = False, short: bool = False,
+                      embellishment: int | str | None = None, document_type: DocumentType = "general",
                       document_config: dict | None = None) -> dict[str, Any]:
         """Genuine Australian slang for a plain-English meaning ('very busy', 'someone'), or what an Aussie term
         means ('goog'). Filtered to the level and vulgarity, so it never offers what lint would reject.
-        include_gated also returns entries held back as doubtful (marked as such). short: each result as its form,
-        gloss, frame, level and vulgarity only."""
+        include_gated also returns entries held back as doubtful (marked as such).
+        short: each result as its form, gloss, frame, level and vulgarity only."""
         return harness.lookup(query, level=level, vulgarity=vulgarity, limit=limit,
                               include_gated=include_gated, short=short, embellishment=embellishment,
-                              document_type=document_type, document_config=document_config)
+                              document_type=document_type, document_config=document_config, translator=translator)
 
     @tool
     def aussie_lint(text: Text, level: Level = 5, vulgarity: Vulgarity = None,
-                    original: str | None = None, markup: str = "text", english: str | None = None,
+                    original: Original | None = None, markup: str = "text", english: str | None = None,
                     embellishment: int | str | None = None,
-              document_type: str = "general", document_config: dict | None = None,
+                    document_type: DocumentType = "general", document_config: dict | None = None,
                     suggest: bool = True) -> dict[str, Any]:
         """Lint an Aussified draft: flagged or non-Australian phrases, swearing over the cap or overused, US
         spelling, and US and British words (english: us, uk, auto, none, as for aussie_translate). Pass the original text to also check length and that names and numbers survive.
@@ -104,15 +152,17 @@ def build_server():
         troppo; default Dinkum for General): how much longer than the original it may run. suggest=False
         skips the optional suggestions (a whole engine translation), for a faster check."""
         return harness.lint(text, level=level, vulgarity=vulgarity, original=original, markup=markup,
-                            english=english, embellishment=embellishment, document_type=document_type, document_config=document_config, suggest=suggest)
+                            english=english, embellishment=embellishment, document_type=document_type,
+                            document_config=document_config, suggest=suggest, translator=translator)
 
     @tool
     def aussie_guide(level: Level = 5, vulgarity: Vulgarity = None,
                      embellishment: int | str | None = None,
-              document_type: str = "general", document_config: dict | None = None) -> dict[str, Any]:
+                     document_type: DocumentType = "general", document_config: dict | None = None) -> dict[str, Any]:
         """Voice, language limits and craft rules for Aussifying at a level (1-5), and how much liberty to take
         at an embellishment (deadset, dinkum, troppo; default Dinkum for General)."""
-        return harness.guide(level=level, vulgarity=vulgarity, embellishment=embellishment, document_type=document_type, document_config=document_config)
+        return harness.guide(level=level, vulgarity=vulgarity, embellishment=embellishment,
+                             document_type=document_type, document_config=document_config, translator=translator)
 
     @tool
     def aussie_plan(text: Text, level: Level = 5, seed: Seed = 0, vulgarity: Vulgarity = None,
@@ -120,14 +170,15 @@ def build_server():
                     regions: Regions = None, unlock: Unlock = None,
                     markup: str = "text", english: str | None = None,
                     embellishment: int | str | None = None,
-              document_type: str = "general", document_config: dict | None = None) -> dict[str, Any]:
+                    document_type: DocumentType = "general", document_config: dict | None = None) -> dict[str, Any]:
         """The rule engine's draft, the slang it planned (with riffs and suggested openings), and the sentences
         it found too formal to handle, and guidance for the text's genre and embellishment. Takes
         aussie_translate's options. embellishment defaults to dinkum, a retelling's (the plan is for writing
         your own version); pass the genre's own setting for a plan that matches aussie_translate's output."""
         return harness.plan(text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
                             registers=registers, regions=regions, unlock=unlock, markup=markup, english=english,
-                            embellishment=embellishment, document_type=document_type, document_config=document_config)
+                            embellishment=embellishment, document_type=document_type, document_config=document_config,
+                            translator=translator)
 
     @tool
     def aussie_translate(text: Text, level: Level = 5, seed: Seed = 0, vulgarity: Vulgarity = None,
@@ -135,25 +186,27 @@ def build_server():
                          regions: Regions = None, unlock: Unlock = None,
                          markdown: bool = False, markup: str = "text", english: str | None = None,
                          embellishment: int | str | None = None,
-              document_type: str = "general", document_config: dict | None = None) -> dict[str, Any]:
+                         document_type: DocumentType = "general", document_config: dict | None = None) -> dict[str, Any]:
         """Deterministic rule-engine translation (same text, level and seed give the same output). Change the
         seed for a different version. variety N picks among the N best-fitting terms only (1 = always the best
-        fit); 0, the default, weighs every eligible term. registers (current, dated, archaic), regions (e.g. qld)
-        and unlock (flags whose gated entries become eligible) narrow or widen what the level allows. markup
-        (markdown, mdx, auto) translates only the prose of a document, keeping code, tags, links, front matter
+        fit); 0, the default, weighs every eligible term. registers (current, dated, archaic) and regions (e.g.
+        qld) narrow or widen what the level allows.
+        unlock (flags whose gated entries become eligible) widens it.
+        markup (markdown, mdx, auto) translates only the prose of a document, keeping code, tags, links, front matter
         and headings exactly as they were. english (us, uk, auto, none): the English the text is in, for US and
         UK words Australians say differently (faucet -> tap; British pants -> undies only for uk). embellishment
         (0-2 or deadset, dinkum, troppo): how much liberty the telling takes, from none (the words swap, nothing
         added) to a performed yarn; default Dinkum for General; named types supply presets."""
         return harness.translate(text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
                                  registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english,
-                                 embellishment=embellishment, document_type=document_type, document_config=document_config)
+                                 embellishment=embellishment, document_type=document_type,
+                                 document_config=document_config, translator=translator)
 
     @tool
-    def aussie_verify(text: Text, original: str, level: Level = 5, vulgarity: Vulgarity = None,
+    def aussie_verify(text: Text, original: Original, level: Level = 5, vulgarity: Vulgarity = None,
                       markup: str = "text", english: str | None = None,
                       embellishment: int | str | None = None,
-              document_type: str = "general", document_config: dict | None = None) -> dict[str, Any]:
+                      document_type: DocumentType = "general", document_config: dict | None = None) -> dict[str, Any]:
         """Check a finished translation (anyone's: the engine's, yours, a person's) against its original: a log of
         problems, worst first, each with a severity (critical: a lost number, a piece of markup changed, or an
         empty translation; major: breaks the brief; minor: craft, a sentence nothing in the translation says
@@ -161,7 +214,8 @@ def build_server():
         doesn't judge tone or flow. english as for aussie_translate; embellishment sets the length limit (default
         Dinkum for General)."""
         return harness.verify(text, original=original, level=level, vulgarity=vulgarity, markup=markup,
-                              english=english, embellishment=embellishment, document_type=document_type, document_config=document_config)
+                              english=english, embellishment=embellishment, document_type=document_type,
+                              document_config=document_config, translator=translator)
 
     return server
 

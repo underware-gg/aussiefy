@@ -63,6 +63,12 @@ tags or unlock flags unused by the dictionary; invalid register and unlock names
 MCP tools expose parameter descriptions and dial choices in their schemas, and preserve `UserError`
 messages as tool errors. `lookup` requires `limit >= 1` and marks each riff's `best` fit.
 
+A hosted MCP server narrows the tools by capability ([DD-028](../../architecture/decisions/dd-028-hosted-mcp-capabilities.md)).
+`build_server(translator=…, allow_unlock=False, allow_document_config=False, max_chars=…, max_query_chars=…,
+lookup_limit=…)` hides `unlock` and `include_gated`, hides `document_config` and the `custom` document type,
+caps `text` and `original`, and caps lookup's `query` and `limit`. The defaults serve everything. Every tool is annotated read-only,
+non-destructive, idempotent and closed-world.
+
 ## The same toolkit, three more ways
 
 - **MCP server, for any MCP-capable agent.** The `aussiefy-mcp` command (stdio) serves the tools

@@ -28,6 +28,7 @@ python -m pytest -q tests/functional
 | [test_harness.py](test_harness.py) | Toolkit operations and yarn orchestration |
 | [test_retelling.py](test_retelling.py) | Provider-free sessions, neutral tool contracts and real stdio MCP transport |
 | [test_interfaces.py](test_interfaces.py) | Parameter and result parity across surfaces |
+| [test_mcp_capabilities.py](test_mcp_capabilities.py) | Hosted MCP capability options and read-only tool annotations |
 | [test_llm.py](test_llm.py) | Optional surface and rewrite behaviour |
 | [test_local_reference.py](test_local_reference.py) | Local-only reference properties and the two permitted skips |
 | [test_markdown.py](test_markdown.py) | Source protection, inline/block structure, unit offsets and surface parity |

@@ -5,6 +5,9 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Let a hosted MCP server narrow the tools by capability: `build_server()` takes `translator`, `allow_unlock`,
+  `allow_document_config`, `max_chars`, `max_query_chars` and `lookup_limit`, with defaults that serve everything. Annotate every
+  MCP tool as read-only, so clients such as ChatGPT don't ask for confirmation.
 - Stabilise WordNet neighbour selection before training-pair truncation, preserving sense and lemma priority.
   Record current-model trial limits and real portable CLI/MCP integration checks without claiming web deployment.
   The fresh full-data candidate passes 31/33 required checks, so the bundled model remains 1.2.0 (33/33).
