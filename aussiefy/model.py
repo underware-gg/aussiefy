@@ -13,7 +13,7 @@ from typing import Any
 from . import morph
 from .dialect import DialectTable
 from .matcher import Pattern, PatternIndex
-from .schema import Concept, Entry
+from .schema import Concept, Entry, Imagery
 from .text import COMMON_STARTERS
 from .terms import fold
 
@@ -112,6 +112,7 @@ class Dictionary:
     person_roles: frozenset[str] = frozenset()
     adjective_nouns: dict[str, frozenset[str]] = field(default_factory=dict)
     name_aliases: dict[str, tuple[str, ...]] = field(default_factory=dict)
+    imagery: tuple[Imagery, ...] = ()
 
     def swear_strength(self, word: str) -> int:
         """How strong a swear a word is (0 for none), dropped g and plurals read as the listed word."""

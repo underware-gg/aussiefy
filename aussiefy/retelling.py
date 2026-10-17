@@ -247,6 +247,8 @@ def dispatch_tool(session: YarnSession, name: str, args: dict[str, Any]) -> tupl
     if name == "lookup":
         # short: a writer checking a choice wants the term, its sense and how it fits, not the whole card
         return harness.lookup(args["query"], level=s.level, vulgarity=s.vulgarity, short=True,
+                              embellishment=s.embellishment.step, document_type=s.document_type,
+                              document_config=s.document_config,
                               translator=s.translator), False
     if name == "lint":
         out = harness.lint(args["text"], level=s.level, vulgarity=s.vulgarity, markup=s.markup, english=s.english,

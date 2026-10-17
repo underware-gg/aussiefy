@@ -143,6 +143,19 @@ def _subject_text(tok: Token | None) -> str:
     return tok.text if tok.norm == "i" or tok.text[:1].isupper() and tok.norm not in morph.PRONOUNS else tok.norm
 
 
+def noun_slots(det: Detection) -> dict[str, str]:
+    caps = det.captures
+    subj = caps.get("subj")
+    return {
+        "poss": caps["poss"].norm if "poss" in caps else (
+            morph.possessive_of(subj.norm) if subj is not None
+            else morph.possessive_of(caps["agent"].norm) if "agent" in caps else "your"),
+        "obj": caps["obj"].text if "obj" in caps else "",
+        "objposs": morph.possessive_of_object(caps["obj"].text) if "obj" in caps else "their",
+        "np": caps["np"].text if "np" in caps else "",
+    }
+
+
 def realise(entry: Entry, form: str, det: Detection) -> str:
     caps = det.captures
     subj_tok = caps.get("subj")
@@ -189,15 +202,10 @@ def realise(entry: Entry, form: str, det: Detection) -> str:
 
     values = {
         "subj": _subject_text(subj_tok),
-        "poss": caps["poss"].norm if "poss" in caps else (
-            morph.possessive_of(subj) if subj_tok is not None
-            else morph.possessive_of(caps["agent"].norm) if "agent" in caps else "your"),
-        "obj": caps["obj"].text if "obj" in caps else "",
-        "objposs": morph.possessive_of_object(caps["obj"].text) if "obj" in caps else "their",
+        **noun_slots(det),
         "be": morph.agree("be", agree_subj, tense),
         "have": morph.agree("have", agree_subj, tense),
         "do": morph.agree("do", agree_subj, tense),
-        "np": caps["np"].text if "np" in caps else "",
         "will": "would" if tense == "past" else "will",
     }
     out = re.sub(r"\{(\w+)\}", lambda m: values[m.group(1)], text).strip()

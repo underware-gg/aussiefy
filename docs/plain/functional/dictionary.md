@@ -17,6 +17,7 @@ aussiefy/data/
                        and Australian spelling (kind: spelling)
                        optional unless_before regex excludes grammatical contexts before a rule match
   riffs.yaml           the image a term calls up (wheelie bin: bin chickens fightin' over the scraps)
+  imagery.yaml         reviewed contextual images, meaning/frame anchors and writer usage conditions
   guide.yaml           voice, language limits, openings, gated craft, workflow, plan note and yarn rules
   swears.yaml          swear words by strength, for lint and for rating riffs
   dialect.yaml         US/UK patterns, Australian replacements, sense guards and lint-only expressions
@@ -171,3 +172,32 @@ spelling rules cannot declare `reads_as`. Dropped-g words are also normalised du
 These only affect lint fidelity, never translation. Keep them narrowly reviewed: a capitalised common phrase
 such as `Christmas Trees` can have `Chrissy trees` as an alias without exempting `Christmas Island` or words
 inside a person's name. Changed names without an explicit alias retain their warnings.
+
+## Contextual images
+
+`imagery.yaml` is optional for custom data directories. It contains a list of records with unique kebab-case
+`id`, `text`, nonempty `concepts` and `usage`. Concepts must exist in `concepts.yaml`. These include original
+comparisons harvested from creative writing, not only attested traditional sayings. Entries remain the home
+for reusable slang meanings, such as the `DISHONEST` sense of “as crooked as a dog's hind leg”.
+
+| Field | Values and default |
+|---|---|
+| `form` | `suffix` (default, a grammatical appendage) or `rewrite` (writer must weave it in) |
+| `frames` | Nonempty list of engine frames; defaults to predicate, clause and verb phrase |
+| `subject` | `any` (default) or `person`, checked using the existing subject grammar |
+| `unless_after` | Optional lowercase complement words; reject matches followed by these words, ignoring punctuation |
+| `related` | Optional reviewed related concept IDs; conditional writer suggestions only |
+| `exaggeration` | 0–2, default 1; an eligibility ceiling, not a probability |
+| `level` | Minimum level 1–5, default 3 |
+| `tone` | `comic` (default), `grim` or `plain` |
+| `origin` | `original` (default) or `familiar`; editorial provenance, not proof of attestation |
+| `usage` | Required conditions and semantic boundaries for the writer |
+
+Only `{poss}`, `{objposs}` and `{np}` slots are supported. Plans bind them only when the detection supplies
+the required subject, object or noun phrase; bare lookup returns an explicitly unbound `template` card.
+Unknown fields, concepts, frames, slots, invalid ranges and duplicate IDs fail loading. Vulgarity is derived
+from `swears.yaml` and cannot be supplied to bypass the cap. Negative source contexts suppress meaning-based
+imagery. The matching is deterministic and conservative, rather than full logical or discourse analysis.
+See [selection and configuration](translation-controls.md#contextual-imagery) for the distinction between
+writer suggestions and automatic insertion. Historical round replays remove images referencing temporarily
+set-aside concepts in scratch only, while still rejecting genuinely unknown concepts.

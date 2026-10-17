@@ -78,6 +78,13 @@ def _person_noun(word: str, person_nouns: frozenset[str]) -> bool:
             or AGENT_PLURAL.search(word) is not None)
 
 
+def person_subject(det: Detection, person_nouns: frozenset[str]) -> bool:
+    subj, noun = det.captures.get("subj") or det.captures.get("agent"), det.subject_noun
+    return (subj is not None and (subj.norm in morph.PERSON_PRONOUNS or
+                                  (subj.text[:1].isupper() and subj.norm not in morph.PRONOUNS))) or (
+        subj is None and noun is not None and _person_noun(noun.norm, person_nouns))
+
+
 def fit_rejection(entry: Entry, det: Detection, eff: Effective, person_concepts: set[str],
                   person_nouns: frozenset[str]) -> str | None:
     if entry.frame not in COMPATIBLE.get(det.frame, ()):
@@ -87,10 +94,7 @@ def fit_rejection(entry: Entry, det: Detection, eff: Effective, person_concepts:
     if eff.profile.substitution.get(entry.substitution_class, 0) <= 0:
         return f"{entry.substitution_class} substitutions off at level {eff.level}"
     subj = det.captures.get("subj")
-    noun = det.subject_noun
-    is_person = (subj is not None and (subj.norm in morph.PERSON_PRONOUNS or
-                                       (subj.text[:1].isupper() and subj.norm not in morph.PRONOUNS))) or (
-        subj is None and noun is not None and _person_noun(noun.norm, person_nouns))
+    is_person = person_subject(det, person_nouns)
     if (set(entry.concept) & person_concepts and entry.substitution_class == "idiom"
             and det.frame in ("predicate_adj", "clause") and not is_person):
         who = f"'{subj.text}'" if subj is not None else "the subject"

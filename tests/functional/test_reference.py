@@ -111,14 +111,33 @@ def test_fast_asleep_is_not_speed(translated):
         assert "flat chat asleep" not in r.text and "like a rat up a drainpipe asleep" not in r.text
 
 
-def test_benchmark_against_target_translation(translator, translated):
-    """How much of a refined LLM translation's slang the dictionary reproduces. Raise the bar as it improves."""
-    from aussiefy.scrape.harvest import target_recall
-    target = (REF.parent / "targets" / "gettysburg_level5.txt").read_text(encoding="utf-8")
-    outputs = [translated("gettysburg", 5, s).text for s in range(10)]
-    rows = target_recall(TEXTS["gettysburg"], target, outputs, translator.dictionary)
-    recall = sum(hit for *_, hit in rows) / len(rows)
-    assert recall >= 0.6, f"recall {recall:.0%}: " + ", ".join(a for _, a, hit in rows if not hit)
+def test_historical_gettysburg_target_wording_coverage(translated):
+    """Hold the historical 60% wording gate fixed as dictionary descriptions change.
+
+    These were heuristic target spans, including ordinary English, not curated slang labels.
+    Their 25 anchor sets are frozen from 7eae354; do not retune them to current outputs.
+    """
+    import hashlib
+    import yaml
+    from aussiefy.scrape.harvest import harvest_pairs
+    from aussiefy.terms import fold, restore_g
+
+    source = REF / 'gettysburg.txt'
+    target = REF.parent / 'targets/gettysburg_level5.txt'
+    frozen = yaml.safe_load((REF.parents[1] / 'fixtures/gettysburg-wording-anchors.yaml').read_text())
+    assert hashlib.sha256(source.read_bytes()).hexdigest() == frozen['source_sha256']
+    assert hashlib.sha256(target.read_bytes()).hexdigest() == frozen['target_sha256']
+    pairs = {(a, b) for a, b, _ in harvest_pairs(source.read_text(), target.read_text())}
+    anchors = frozen['anchors']
+    assert len(anchors) == 25
+    for a in anchors:
+        assert (a['source'], a['target']) in pairs
+        assert a['content'] and set(a['content']) <= set(a['target'].lower().replace('-', ' ').split())
+    outputs = [restore_g(fold(translated("gettysburg", 5, s).text)).replace('-', ' ') for s in range(10)]
+    hits = [any(all(restore_g(w) in out for w in a['content']) for out in outputs) for a in anchors]
+    coverage = sum(hits) / len(anchors)
+    assert coverage >= 0.6, f"historical wording coverage {coverage:.0%}: " + ", ".join(
+        a['target'] for a, hit in zip(anchors, hits) if not hit)
 
 
 def test_goldilocks_benchmark_vocabulary_overlap(translator, translated):

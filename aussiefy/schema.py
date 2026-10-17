@@ -74,6 +74,66 @@ class Riff:
 
 
 @dataclass(frozen=True)
+class Imagery:
+    id: str
+    text: str
+    concepts: tuple[str, ...]
+    usage: str
+    form: str = "suffix"          # suffix: engine can append; rewrite: writer must weave it in
+    frames: tuple[str, ...] = ("predicate_adj", "clause", "vp")
+    subject: str = "any"
+    related: tuple[str, ...] = ()   # looser associations, available only when explicitly enabled
+    unless_after: tuple[str, ...] = ()  # exclude figurative/complement senses after optional punctuation
+    exaggeration: int = 1
+    level: int = 3
+    tone: str = "comic"
+    origin: str = "original"
+    vulgarity: int = 0
+
+
+def parse_imagery(raw, concepts, strength) -> Imagery:
+    if not isinstance(raw, dict) or any(not isinstance(k, str) for k in raw):
+        raise SchemaError("imagery record must be a mapping")
+    allowed = set(Imagery.__dataclass_fields__) - {"vulgarity"}
+    if set(raw) - allowed:
+        raise SchemaError(f"imagery: unknown fields {sorted(set(raw) - allowed)}")
+    data = dict(raw)
+    owner = data.get("id")
+    if not isinstance(owner, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", owner):
+        raise SchemaError("imagery id must be kebab-case")
+    for key in ("text", "usage"):
+        if not isinstance(data.get(key), str) or not data[key].strip():
+            raise SchemaError(f"{owner}: {key} must be non-empty text")
+    for key in ("concepts", "related", "frames"):
+        values = data.get(key, getattr(Imagery, key, ()))
+        if not isinstance(values, (list, tuple)) or any(not isinstance(x, str) for x in values):
+            raise SchemaError(f"{owner}: {key} must be a list of strings")
+        known = FRAMES if key == "frames" else concepts
+        if any(x not in known for x in values) or (key in ("concepts", "frames") and not values):
+            raise SchemaError(f"{owner}: {key} must name known, non-empty anchors")
+        data[key] = tuple(dict.fromkeys(values))
+    for key, choices in (("form", ("suffix", "rewrite")), ("subject", ("any", "person")),
+                         ("tone", RIFF_TONES), ("origin", ("original", "familiar"))):
+        if data.get(key, getattr(Imagery, key)) not in choices:
+            raise SchemaError(f"{owner}: {key} must be one of {choices}")
+    exclusions = data.get("unless_after", ())
+    if not isinstance(exclusions, (list, tuple)) or any(not isinstance(x, str) or not re.fullmatch(r"[a-z]+", x) for x in exclusions):
+        raise SchemaError(f"{owner}: unless_after must be a list of lowercase words")
+    data["unless_after"] = tuple(dict.fromkeys(exclusions))
+    for key, low, high in (("exaggeration", 0, 2), ("level", 1, 5)):
+        value = data.get(key, getattr(Imagery, key))
+        if type(value) is not int or not low <= value <= high:
+            raise SchemaError(f"{owner}: {key} must be an integer {low}–{high}")
+    slots = set(PLACEHOLDER_RE.findall(data["text"]))
+    # Suffixes have no finite verb to conjugate. Free rewrites remain writer suggestions.
+    if slots - {"poss", "objposs", "np"} or data["text"].count("{") != len(PLACEHOLDER_RE.findall(data["text"])) or "}" in PLACEHOLDER_RE.sub("", data["text"]):
+        raise SchemaError(f"{owner}: imagery slots must be poss, objposs or np")
+    data["vulgarity"] = max((strength(w) for w in re.findall(r"[a-z']+", data["text"].lower())), default=0)
+    return Imagery(**data)
+
+
+
+@dataclass(frozen=True)
 class Entry:
     id: str
     form: str

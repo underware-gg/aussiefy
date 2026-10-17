@@ -19,7 +19,8 @@ Shared resources stay here:
 
 - `conftest.py`: dictionary/translator fixtures, isolated home state and scripted Claude helpers.
 - `_checks.py`: well-formedness checks shared by the public and local reference tests.
-- `fixtures/`: synthetic acquisition inputs.
+- `fixtures/`: synthetic acquisition inputs and frozen historical target-wording anchors; the latter
+  preserve the Gettysburg benchmark denominator independently of dictionary prose.
 - `corpus/`: golden, public/licensed and ignored local reference inputs.
 
 No production behaviour or golden data changes with this layout. Test module basenames are unchanged;

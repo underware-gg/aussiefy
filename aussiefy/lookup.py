@@ -21,6 +21,9 @@ from .morph import pluralise, verb_forms
 from .select import dial_rejection
 from .schema import PLACEHOLDER_RE, Entry
 from .terms import fold, form_key, strip_markup
+from .genre import resolve_document
+from .imagery import lookup_images
+from .policy import parse_embellishment
 
 
 
@@ -106,7 +109,9 @@ GLOSS_FUZZ = (0.7, 0.9)       # n-gram similarity to a gloss, discounted (one wo
 
 
 def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = None, limit: int = 8,
-           include_gated: bool = False, short: bool = False, translator: Translator | None = None) -> dict[str, Any]:
+           include_gated: bool = False, short: bool = False, embellishment: int | str | None = None,
+           document_type: str = "general", document_config: dict | None = None,
+           translator: Translator | None = None) -> dict[str, Any]:
     """Find Aussie options for a plain-English meaning ("very busy"), or explain a slang term ("goog").
     short: each result as only its form, gloss, frame, level and vulgarity (and gating, a dated register), for
     an agent checking a choice.
@@ -118,7 +123,10 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         raise UserError(f"limit must be 1 or more, not {limit}")
     tr = translator or default_translator()
     d: Dictionary = tr.dictionary
-    eff = tr.effective(level=level, vulgarity=vulgarity, unlock=["all"] if include_gated else None)
+    genre = resolve_document(query, config=d.genres, document_type=document_type, document_config=document_config)
+    setting = genre.setting(parse_embellishment(embellishment) if embellishment is not None else None)
+    eff = tr.effective(level=level, vulgarity=vulgarity, unlock=["all"] if include_gated else None,
+                       embellishment=embellishment, document_type=document_type, document_config=document_config)
     cap = eff.vulgarity
     sim = NgramEmbedder()
     model = tr.lookup_embedder   # a meaning model (the bundled one, unless set otherwise); None: n-grams only
@@ -203,9 +211,15 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     else:
         results = [{**_entry_card(e, cap), "match": how, "score": round(s, 2),
                     **({"gated": list(e.flags)} if e.status == "gate" else {})} for s, e, how in scored[:limit]]
+    if not setting.entry_riffs or not setting.takes("riff"):
+        for card in results:
+            card.pop("riffs", None)
     out = {"query": query, **eff.envelope(),
            "results": results}
-    if not results:
+    images = lookup_images(d, query, eff.level, cap, setting, limit)
+    if images:
+        out["imagery"] = images
+    if not results and not images:
         out["note"] = ("No entry. If you're sure Australians say it, it's probably fine but unvetted; "
                        "otherwise rephrase. Consider proposing it for the dictionary.")
     return out

@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from .context import CLOSING_TONES_FOR, riff_weight
 from .model import PhoneticRule
 from .policy import Effective, pick_form, roll, weighted_index
-from .schema import DEFAULT_WHEN, Entry, Riff
+from .schema import DEFAULT_WHEN, Entry
 from .select import policy_rejection
 from .text import OPEN_QUOTES, QUOTES, lower_first_word, match_case
 
@@ -25,6 +25,7 @@ class GarnishRecord:
     text: str | None
     decision: str
     rejected: list[tuple[str, str]]
+    image_id: str | None = None
 
     @classmethod
     def rolled(cls, placement: str, sentence: int, entry: Entry | None, text: str | None, r: float, p: float,
@@ -36,7 +37,8 @@ class GarnishRecord:
     def to_dict(self) -> dict:
         return {"kind": "garnish", "placement": self.placement, "sentence": self.sentence,
                 "entry": self.entry_id, "text": self.text, "decision": self.decision,
-                "rejected": [{"entry": i, "reason": r} for i, r in self.rejected]}
+                "rejected": [{"entry": i, "reason": r} for i, r in self.rejected],
+                **({"image_id": self.image_id} if self.image_id else {})}
 
 
 @dataclass
@@ -252,7 +254,7 @@ def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: i
     return text, records
 
 
-def pick_riff(riffs: list[Riff], mood: str, r: float) -> Riff:
+def pick_riff(riffs, mood: str, r: float):
     """One of an entry's riffs for a roll r in [0, 1). Mood is a lean, not a rule: riffs that suit the text's mood
     weigh more, but a dark text can still take a laugh and a light one a shadow. The first-listed is the best,
     and weighs double."""

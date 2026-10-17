@@ -9,6 +9,74 @@
 # The vocabulary is hand-curated. The LLM tagging pass may propose new IDs, which
 # a human consolidates here (see aussiefy/scrape/tag.py).
 
+# --- contextual imagery and precise senses ----------------------------------
+DISHONEST:
+  description: Dishonest or untrustworthy; not physical bending or poor workmanship.
+  triggers:
+    predicate_adj:
+    - dishonest
+    - untrustworthy
+FUTILE_EFFORT:
+  description: Working without useful effect, despite effort.
+  person: true
+  triggers:
+    vp:
+    - work in vain
+    - labour in vain
+    - labor in vain
+    - toil in vain
+    clause:
+    - '{subj} {be} working in vain'
+    - '{subj} {be} labouring in vain'
+    - '{subj} {be} toiling in vain'
+BREATHLESS:
+  description: Physically short of breath.
+  person: true
+  triggers:
+    predicate_adj:
+    - out of breath ^person
+    - puffing and panting ^person
+RESTLESS_SLEEP:
+  description: Tossing and turning while trying to sleep.
+  person: true
+  triggers:
+    clause:
+    - '{subj} {be} tossing and turning'
+    vp:
+    - toss and turn
+ERRATIC_THINKING:
+  description: Thinking in circles without reaching a conclusion.
+  person: true
+  triggers:
+    clause:
+    - '{subj} {be} thinking in circles'
+SELFISH:
+  description: Selfishly disregarding the needs of other people.
+  person: true
+  triggers:
+    predicate_adj:
+    - selfish ^person
+    - callous ^person
+PERSONAL_ENERGY:
+  description: Personal energy and willingness to take action.
+  triggers:
+    np:
+    - energy and enthusiasm
+    - energy and initiative
+QUIT_COMMAND:
+  description: A command to stop the current activity; not giving up a named object or habit.
+  triggers:
+    imperative:
+    - quit
+    - give up
+NAKED:
+  description: A person without clothes.
+  person: true
+  triggers:
+    predicate_adj:
+    - naked ^person
+    - unclothed ^person
+
 # --- states and traits --------------------------------------------------------
 BUSY:
   description: Having a great deal to do.

@@ -15,6 +15,7 @@ from .embed import Embedder, make_embedder
 from .garnish import (GarnishRecord, PhoneticRecord, add_closer, add_connective, add_opener, add_tag, add_tail,
                       apply_phonetic, ends_in_list, pick_garnish, pick_riff, tag_in_speech)
 from .loader import load_dictionary
+from .imagery import image_offers
 from .dialect import text_english
 from .genre import resolve_document, Embellishment, Genre, form_removes
 from .protected import Masked, protected_runs
@@ -152,6 +153,7 @@ class Result:
 
     variety: int = 0
     profile_config: dict[str, Any] = field(default_factory=dict)
+    imagery: list[dict] = field(default_factory=list)
 
     def envelope(self) -> dict[str, Any]:
         return {**envelope(self.level, self.vulgarity, self.warnings), "profile_config": self.profile_config}
@@ -174,7 +176,8 @@ class Result:
                  "replacement": r.output, "entry": r.chosen.entry.id,
                  "stacked": r.stacked.entry.id if r.stacked else None, "riff": r.riff}
                 for r in self.records if r.substituted],
-            "garnish": [{"placement": g.placement, "sentence": g.sentence, "entry": g.entry_id, "text": g.text}
+            "garnish": [{"placement": g.placement, "sentence": g.sentence, "entry": g.entry_id, "text": g.text,
+                         **({"image_id": g.image_id} if g.image_id else {})}
                         for g in self.garnish if g.text],
             "phonetic": [{"rule": p.rule, "before": p.before, "after": p.after} for p in self.phonetic],
             "dialect": [{"before": d.before, "after": d.after, "english": d.english} for d in self.dialect],
@@ -318,7 +321,7 @@ class Translator:
                       vulgarity=run.eff.vulgarity, mood=run.mood, genre=run.genre,
                       sentences=[(s[0].start, s[-1].end) for s in sents], dialect=run.dialect,
                       english=run.english, embellishment=run.embellishment, variety=pol.variety,
-                      profile_config=run.eff.envelope()["profile_config"])
+                      profile_config=run.eff.envelope()["profile_config"], imagery=run.imagery)
 
     # -- stages -------------------------------------------------------------------------
 
@@ -391,9 +394,41 @@ class Translator:
             replaced |= set(range(s, e))
             said[e] = rec.term
             splices.append((toks[s].start, toks[e - 1].end, out))
+        self._contextual_imagery(records, splices, sent, run)
         if pol.english != "none":
             splices += self._dialect(sent, run, replaced | held, said)
         return records, splices
+
+    def _contextual_imagery(self, records, splices, sent, run):
+        if sent.quiet or sent.prefix_only:
+            return
+        for rec in records:
+            offers = image_offers(self.dictionary, rec.det, sent.tokens, run.eff.level, run.eff.vulgarity,
+                                  run.embellishment)
+            if not offers:
+                continue
+            run.imagery.append({"term": rec.text, "for": rec.text, "riffs": [o.card() for o in offers]})
+            automatic = [o for o in offers if o.image.form == "suffix" and o.association == "direct"
+                         and o.image.id not in run.state.imagery_used]
+            # A dash, slash or opening bracket can continue a phrase rather than close its clause.
+            if rec.det.end < len(sent.tokens) and sent.tokens[rec.det.end].is_punct and sent.tokens[rec.det.end].text not in {".", "!", "?", ",", ";", ":"}:
+                automatic = []
+            if not automatic or not self._riff_room(rec.det.end, rec.det.frame, rec.det.start, sent, run):
+                continue
+            offer = pick_riff(automatic, run.mood, roll(run.pol.seed, "imagery-pick", *sent.key, rec.det.start))
+            run.state.imagery_used.add(offer.image.id)
+            self._note_riff(sent, run)
+            end = sent.tokens[rec.det.end - 1].end
+            following_and = rec.det.end < len(sent.tokens) and sent.tokens[rec.det.end].norm == "and"
+            suffix = ", " + offer.text + ("," if following_and else "")
+            for index, (start, stop, text) in enumerate(splices):
+                if stop == end:
+                    splices[index] = (start, stop, text + suffix)
+                    break
+            else:
+                splices.append((end, end, suffix))
+            run.garnish.append(GarnishRecord("riff", sent.index, None, offer.text,
+                                            "contextual imagery: direct meaning match", [], offer.image.id))
 
     def _yield_to_dialect(self, dets: list[Detection], toks: list[Token], run: "_Run") -> list[Detection]:
         """The detections a longer dialect span holds: "cookie jar" is a biscuit tin, not a bickie jar, and
@@ -439,25 +474,36 @@ class Translator:
         """The image the term calls up ("wheelie bins, overflowin', with the bin chickens fightin' over the
         scraps"), only where the term ends a clause (or is the first of a pair) so the riff can't split a phrase.
         Returns the text to append, or ""."""
-        if sent.quiet or sent.prefix_only or not run.embellishment.takes("riff"):
+        if not run.embellishment.entry_riffs or choice.entry.id in run.state.riffed:
             return ""
         toks, state, eff = sent.tokens, run.state, run.eff
         riffs = choice.entry.riffs_within(eff.vulgarity)
-        p = eff.profile.garnish.get("riff", 0)
-        ends_clause = end >= len(toks) or toks[end].is_punct and toks[end].text not in ("'", "-")
-        before_and = choice.entry.frame == "np" and end < len(toks) and toks[end].norm == "and"
-        ordinal = sent.index + (run.composition.first_sentence if run.composition is not None else 0)
-        last = state.last_placed.get("riff")
-        if not (riffs and p > 0 and (ends_clause or before_and) and len(state.riffed) < eff.profile.limit("riff")
-                and choice.entry.id not in state.riffed and sent.key not in state.riffed_sentences
-                and (last is None or ordinal - last > eff.profile.garnish_gap)
-                and roll(run.pol.seed, "riff", *sent.key, det.start) < p):
+        if not riffs or not self._riff_room(end, choice.entry.frame, det.start, sent, run):
             return ""
         rec.riff = pick_riff(riffs, run.mood, roll(run.pol.seed, "riff-pick", *sent.key, det.start)).text
         state.riffed.add(choice.entry.id)
-        state.riffed_sentences.add(sent.key)
-        state.last_placed["riff"] = ordinal
-        return ", " + rec.riff + ("," if before_and and not ends_clause else "")
+        self._note_riff(sent, run)
+        before_and = end < len(toks) and toks[end].norm == "and"
+        return ", " + rec.riff + ("," if before_and else "")
+
+    def _riff_room(self, end, frame, start, sent, run):
+        if sent.quiet or sent.prefix_only or not run.embellishment.takes("riff"):
+            return False
+        toks, state, eff = sent.tokens, run.state, run.eff
+        p = eff.profile.garnish.get("riff", 0)
+        ends_clause = end >= len(toks) or toks[end].is_punct and toks[end].text not in ("'", "-")
+        before_and = frame == "np" and end < len(toks) and toks[end].norm == "and"
+        ordinal = sent.index + (run.composition.first_sentence if run.composition is not None else 0)
+        last = state.last_placed.get("riff")
+        return (p > 0 and (ends_clause or before_and)
+                and len(state.riffed) + len(state.imagery_used) < eff.profile.limit("riff")
+                and sent.key not in state.riffed_sentences
+                and (last is None or ordinal - last > eff.profile.garnish_gap)
+                and roll(run.pol.seed, "riff", *sent.key, start) < p)
+
+    def _note_riff(self, sent, run):
+        run.state.riffed_sentences.add(sent.key)
+        run.state.last_placed["riff"] = sent.index + (run.composition.first_sentence if run.composition is not None else 0)
 
     def _rewrite(self, sent: "_Sentence", out: str, recs: list[SubstitutionRecord], run: "_Run", rewriter: Rewriter,
                  reason: str | None) -> str:
@@ -696,6 +742,7 @@ class TextState:
     entry_uses: Counter = field(default_factory=Counter)         # idiom entry id -> times used
     garnish_uses: Counter = field(default_factory=Counter)       # garnish entry id -> times used
     riffed: set[str] = field(default_factory=set)                # entries that have brought a riff
+    imagery_used: set[str] = field(default_factory=set)
     riffed_sentences: set[tuple] = field(default_factory=set)    # sentences that carry one
     placed: Counter = field(default_factory=Counter)             # garnish placement -> times placed
     last_placed: dict[str, int] = field(default_factory=dict)    # placement -> sentence it was last placed in
@@ -796,6 +843,7 @@ class _Run:
     difficult: list[DifficultSentence] = field(default_factory=list)
     dialect: list[DialectRecord] = field(default_factory=list)
     _plain: frozenset[str] | None = None
+    imagery: list[dict] = field(default_factory=list)
     _headings: list[tuple[int, int]] | None = None
     _held: list[tuple[int, int]] | None = None
     _datelines: list[tuple[int, int]] | None = None

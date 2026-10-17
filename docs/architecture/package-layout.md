@@ -51,3 +51,7 @@ heaps only in that mode; the plain engine never imports its adapter \([DD-015](d
 Genre configuration'n the POS vocabulary are loaded once into the selected dictionary. Anyway, the classifier and
 model derive values without opening files. Syntax scanners supply opaque source spans to the engine; no bloody way
 Markdown/JSX rules enter its core. See [DD-016](decisions/dd-016-reconcile-source-capabilities.md).
+
+`imagery.py` belongs to the core: it selects reviewed contextual images using dictionary data'n existin'
+subject/slot grammar. Engine insertion'n toolkit suggestions share eligibility; bare lookup exposes
+unbound templates. See [DD-025](decisions/dd-025-contextual-imagery.md).

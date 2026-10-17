@@ -86,6 +86,10 @@ credits:
     expect:
       wordnet: WordNet 3.0
 first_party:
+- glob: tests/fixtures/gettysburg-wording-anchors.yaml
+  reason: Project historical benchmark labels, public-domain source spans and project-authored target spans.
+- glob: research/vocabulary-2026-10-17/contextual-*
+  reason: Project follow-up curation decisions and methodology; phrase references link to the original attributed harvest.
 - glob: research/vocabulary-2026-10-17/README.md
   reason: Project harvesting methodology and limitations, no copied source prose.
 - glob: research/vocabulary-2026-10-17/DECISIONS.md

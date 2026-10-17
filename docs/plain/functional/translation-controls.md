@@ -51,6 +51,10 @@ aussiefy translate "Read the API documentation." --document-type custom --docume
 | `max_length` | Finite number at least 1: retelling length multiplier, plus the existing 20-word allowance |
 | `perform` | Boolean: include performance craft guidance |
 | `embellishment_guidance` | Text: replace embellishment guidance in the brief |
+| `entry_riffs` | Boolean: offer and insert existing entry-attached images; true by default |
+| `contextual_riffs` | Boolean: offer reviewed meaning-attached imagery; Dinkum/Troppo true, Deadset/Custom false |
+| `riff_exaggeration` | Integer 0–2: maximum contextual-image exaggeration; Dinkum 1, Troppo 2, Deadset/Custom 0 |
+| `riff_association` | Integer 0–1: 0 direct meanings only; 1 also offers explicitly curated related meanings to writers; Troppo 1, others 0 |
 | `profile` | Object: override engine probabilities, limits, spacing and thresholds; omitted keys inherit dial defaults |
 
 ## Advanced profile tuning
@@ -136,3 +140,35 @@ even when the draft sounds like a story. Held dialect wording is excused only wi
 and occurrence count; explicitly kept quotes retain their original spelling too. Planning offers riffs only
 where the resolved setting permits them: deadset offers none, and strict news/instructions/docs/official
 forms below troppo offer none. The dinkum guidance preserves the force of obligations and findings.
+
+## Contextual imagery
+
+Entry riffs attach to a chosen Australian term. Contextual images attach to a detected meaning, so the
+engine can add flavour without first replacing a word. Both need `garnish: ["riff"]` permission; contextual
+images additionally need `contextual_riffs`. Custom keeps optional behaviours off until explicitly enabled.
+All document types accept the same exact overrides. Troppo widens the reviewed imagery pool and degree of
+exaggeration; it does not invent arbitrary semantic associations or remove grammar and fact constraints.
+
+Only a directly matched `suffix` image may be inserted automatically. `rewrite` images need a writer to
+weave them into the sentence. An explicitly curated `related` association is always a conditional writer
+suggestion, even when its form is `suffix`: tired does not necessarily mean physically puffing and panting.
+Each card includes `usage`, `association`, `form`, `exaggeration`, and `automatic`. Writers must check the
+usage conditions against the source; a suggestion is not proof that those conditions hold. Ordinary busyness
+never automatically becomes futile work. Negated meanings receive no contextual suggestions in plans.
+
+Automatic imagery shares the existing riff probability, per-document count, sentence limit and spacing with
+entry riffs. Images do not repeat within a document. Plans can still offer eligible suggestions when insertion
+probability or count is zero. Level and vulgarity constrain contextual images independently of embellishment.
+`entry_riffs` controls the older images separately; the new exaggeration and association settings apply only
+to contextual imagery, not retroactively to the legacy riffs.
+
+For an isolated, deterministic example with word substitutions and drawl disabled:
+
+```sh
+aussiefy translate 'He was working in vain.' --document-type custom --document-config '{"garnish":["riff"],"entry_riffs":false,"contextual_riffs":true,"riff_exaggeration":1,"profile":{"frames":[],"phonetic":0,"garnish":{"riff":1},"max_garnish":{"riff":1}}}'
+```
+
+The suffix is “like a bloke sweeping dust in a sandstorm”. It describes the futile effort as a comparison;
+it does not claim a sandstorm occurred. Contextual insertion is reported as garnish with an `image_id`,
+without a fabricated vocabulary substitution or entry ID. Focused tests cover
+[the independent behaviours](../../../tests/functional/test_contextual_imagery.py).

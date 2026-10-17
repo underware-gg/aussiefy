@@ -45,4 +45,6 @@ python -m pytest -q tests/functional
 | [test_dinkum_check.py](test_dinkum_check.py) | Dinkum round senses, literal weather subjects and document corpus |
 | [test_fourth_pass.py](test_fourth_pass.py) | Fourth round vocabulary, rejected senses and cost-sharing semantics |
 
+| [test_contextual_imagery.py](test_contextual_imagery.py) | Context, grammar, imagery dials and shared riff budgets |
+
 Shared fixtures, corpus inputs and helpers live at [tests root](../README.md).

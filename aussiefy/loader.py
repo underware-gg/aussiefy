@@ -21,7 +21,7 @@ from .genre import GenreConfig
 from .matcher import Pattern, PatternIndex, compile_pattern
 from .model import Dictionary, LevelProfile, PhoneticRule, RewriteThresholds, SwearProfile, swear_strength
 from .schema import (CLASSES, FRAMES, GARNISH_KEYS, RIFF_TONES, Concept, Entry, Riff, SchemaError, parse_concept,
-                     parse_entry)
+                     parse_entry, parse_imagery)
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -251,6 +251,18 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
             rated.append(Riff(text.strip(), max((swear_strength(swears, w) for w in words), default=0), tone))
         entries[entry_id] = replace(entries[entry_id], riffs=tuple(rated))
 
+    imagery = []
+    image_ids = set()
+    for raw in _read_optional(data / "imagery.yaml", errors, []):
+        try:
+            image = parse_imagery(raw, concepts, lambda word: swear_strength(swears, word))
+            if image.id in image_ids:
+                raise SchemaError(f"duplicate imagery id {image.id!r}")
+            image_ids.add(image.id)
+            imagery.append(image)
+        except SchemaError as exc:
+            errors.append(f"imagery.yaml: {exc}")
+
     # sources.yaml: extra source URLs per entry id, maintained by the scrape review tool
     # so hand-curated files are never rewritten.
     for entry_id, urls in _read_optional(data / "sources.yaml", errors, {}).items():
@@ -302,7 +314,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
     if errors:
         raise SchemaError("dictionary failed validation:\n  " + "\n  ".join(errors))
     return Dictionary(entries, concepts, profiles, phonetic, prof_raw.get("policy", {}), patterns,
-                      PatternIndex(patterns), PatternIndex(forms), swears, dialect, warnings, swearing, genres, pos.lower_words(), person_roles, adjective_nouns, name_aliases)
+                      PatternIndex(patterns), PatternIndex(forms), swears, dialect, warnings, swearing, genres, pos.lower_words(), person_roles, adjective_nouns, name_aliases, tuple(imagery))
 
 
 def write_validated(data_dir: str | Path, files: dict[str, str], extra: Iterable[str | Path] = ()) -> Dictionary:

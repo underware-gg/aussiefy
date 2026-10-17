@@ -62,15 +62,21 @@ lower case, and the same garnish placement never in adjacent sentences.
 ## Target translations and the benchmark
 
 `tests/corpus/targets/` holds target translations, such as a refined LLM rendering of Gettysburg at level 5.
-`aussiefy compare` measures how much of a target's slang the engine reproduces across seeds, two ways:
+`aussiefy compare` offers exploratory aligned-span and dictionary-vocabulary estimates across seeds. Its
+aligned-span heuristic uses the dictionary's ordinary-word inventory, so description edits can change
+which spans count, and some counted spans are ordinary English. The regression gates are:
 
-- **Aligned spans,** for close translations: `test_benchmark_against_target_translation` holds the engine to
-  60% of the Gettysburg target's spans over 10 seeds.
+- **Historical wording coverage:** `test_historical_gettysburg_target_wording_coverage` preserves the original
+  25 word-anchor sets, ten seeds and 60% threshold. The
+  [fixed fixture](../../../tests/fixtures/gettysburg-wording-anchors.yaml) binds source/target hashes and
+  checks every anchor's span membership. It is a historical target-wording proxy, not curated slang recall;
+  dictionary prose cannot change its denominator. A genuinely curated slang benchmark needs its own baseline.
 - **Vocabulary overlap,** for targets that restructure or extend the text, like the agent's Goldilocks:
   `test_goldilocks_benchmark_vocabulary_overlap` holds it to 60% of the dictionary phrases in that target.
 
-Both bars should rise as the dictionary improves. Running `aussiefy dev harvest` on a target is how its misses become candidate
-entries (see [data acquisition](data-acquisition.md)).
+Raise bars against an unchanged measurement. Running `aussiefy dev harvest` on a target turns its misses
+into candidate entries (see [data acquisition](data-acquisition.md)); these proxies are not evidence of semantic
+fidelity or natural writing quality.
 
 ## Classic Australian texts
 

@@ -1,0 +1,291 @@
+# Contextual images, including invented comparisons: not all are traditional idioms.
+# Only direct suffixes may be inserted automatically; usage conditions still guide writers.
+- id: sandstorm-sweeper
+  text: like a bloke sweeping dust in a sandstorm
+  concepts:
+  - FUTILE_EFFORT
+  usage: Futile work, not merely being busy. The comparison does not add a literal sandstorm.
+  form: suffix
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 1
+- id: compressor-split-hose
+  text: blowing like a compressor with a split hose
+  concepts:
+  - BREATHLESS
+  usage: Physical breathlessness, not emotional surprise or ordinary tiredness.
+  form: suffix
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 2
+  related:
+  - TIRED
+  - WORK_HARD
+- id: busted-bellows
+  text: blowing like a busted bellows
+  concepts:
+  - BREATHLESS
+  usage: Physical puffing and panting; related tiredness needs an exertion context.
+  form: suffix
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 1
+  related:
+  - TIRED
+- id: belly-mixer-rocks
+  text: with a belly growling like a mixer full of rocks
+  concepts:
+  - HUNGRY
+  usage: Hunger with an imagined noisy belly; comparison, not a new event.
+  form: suffix
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 2
+  unless_after:
+  - for
+  - to
+- id: belly-dog-fence
+  text: with a belly growling like a dog behind a fence
+  concepts:
+  - HUNGRY
+  usage: Hunger with comic stomach noise; not a dog entering the scene.
+  form: suffix
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 2
+  unless_after:
+  - for
+  - to
+- id: hungry-low-flying-duck
+  text: hungry enough to eat the crotch out of a low-flying duck
+  concepts:
+  - HUNGRY
+  usage: Extreme hunger; weave into the predicate rather than append a second hungry predicate.
+  form: rewrite
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 2
+  level: 4
+  unless_after:
+  - for
+  - to
+- id: wasp-nest-temper
+  text: like someone who's put a foot through a wasp nest
+  concepts:
+  - ANGRY
+  usage: Sudden, explosive anger; for quiet irritation use a gentler comparison.
+  form: rewrite
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 2
+- id: loose-roof-southerly
+  text: rattling like a loose roof in a southerly
+  concepts:
+  - ANGRY
+  usage: A noisy angry outburst; not every angry person shouts.
+  form: rewrite
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 2
+- id: chew-nails
+  text: mad enough to chew nails
+  concepts:
+  - ANGRY
+  usage: Extreme anger; use as a predicate, not as a literal action.
+  form: rewrite
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 2
+- id: mattress-hole
+  text: worrying a hole through the mattress
+  concepts:
+  - RESTLESS_SLEEP
+  usage: Restless sleep with worry. A rewrite needs the source to establish worry, not only movement.
+  form: rewrite
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 1
+  related:
+  - NERVOUS
+- id: snag-hotplate
+  text: turning like a snag on a hotplate
+  concepts:
+  - RESTLESS_SLEEP
+  usage: Tossing and turning in bed; do not apply to someone simply standing or thinking.
+  form: suffix
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 1
+- id: country-racetrack-mind
+  text: a mind with more doglegs than a country racetrack
+  concepts:
+  - ERRATIC_THINKING
+  usage: A confused train of thought; weave into a noun phrase and preserve whose mind it is.
+  form: rewrite
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 2
+  related:
+  - DAZED
+- id: decency-shoes
+  text: like decency might get on {poss} shoes
+  concepts:
+  - SELFISH
+  usage: Avoiding help or kindness; source must establish selfish disregard. The possessive belongs to the subject.
+  form: rewrite
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 1
+- id: wet-sack-impact
+  text: like being hit with a wet sack
+  concepts:
+  - DISAPPOINTED
+  usage: A heavy, sudden emotional let-down; not a literal assault.
+  form: rewrite
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 2
+  related:
+  - DAZED
+- id: pub-no-beer
+  text: like a pub with no beer
+  concepts:
+  - DISAPPOINTED
+  usage: A let-down or empty prospect; use only where that specific comparison makes sense.
+  form: rewrite
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 2
+- id: starting-gun
+  text: all the starting gun needed
+  concepts:
+  - START_WORK_COMMAND
+  usage: A cue that prompts immediate action, not an arbitrary beginning.
+  form: rewrite
+  frames:
+  - imperative
+  subject: any
+  exaggeration: 1
+  related:
+  - HURRY
+- id: dropped-sausage-dog
+  text: like a dog on a dropped sausage
+  concepts:
+  - EAGER
+  usage: Eager opportunism, not mere speed or an actual dog.
+  form: rewrite
+  frames:
+  - predicate_adj
+  - vp
+  - clause
+  - adv
+  subject: person
+  exaggeration: 2
+  related:
+  - FAST
+- id: whipper-snipper-weeds
+  text: like a whipper-snipper through weeds
+  concepts:
+  - FAST
+  usage: Rapid progress through obstacles; use only with an action that has something to get through.
+  form: rewrite
+  frames:
+  - adv
+  - vp
+  - clause
+  subject: person
+  exaggeration: 2
+- id: busted-main-flow
+  text: like water from a busted main
+  concepts:
+  - FAST
+  usage: A fast uncontrolled flow, such as money or words pouring out; not arbitrary fast movement.
+  form: rewrite
+  frames:
+  - adv
+  - vp
+  - clause
+  subject: any
+  exaggeration: 2
+- id: arse-whistle-run
+  text: running till you'd think {poss} arse would whistle
+  concepts:
+  - FAST
+  usage: Exaggerated running only; a writer must establish running rather than driving or thinking.
+  form: rewrite
+  frames:
+  - adv
+  - vp
+  - clause
+  subject: person
+  exaggeration: 2
+  level: 4
+- id: truth-smells-crook
+  text: even the truth comes out smelling crook
+  concepts:
+  - DISHONEST
+  usage: A reputation so dishonest that truthful statements are doubted; not every isolated lie.
+  form: rewrite
+  frames:
+  - predicate_adj
+  - clause
+  - vp
+  subject: person
+  exaggeration: 2
+- id: wolf-spiel
+  text: a wolf's spiel
+  concepts:
+  - TRICK
+  usage: Predatory persuasion or deceptive sales talk; no literal wolf or invented deception.
+  form: rewrite
+  frames:
+  - vp
+  - clause
+  - np
+  subject: person
+  exaggeration: 2

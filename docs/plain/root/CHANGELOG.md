@@ -5,6 +5,12 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Add reviewed contextual imagery, configurable exaggeration/association defaults, and writer-only
+  suggestions for comparisons needing semantic or grammatical judgement. Direct suffixes share riff budgets.
+- Revisit all 163 previously unadded/rejected reference-harvest rows; add 10 entries and 22 contextual images,
+  including the correct dishonesty sense of “as crooked as a dog's hind leg”. Preserve the original evidence.
+- Share imagery settings and suggestions across plans, lookup, CLI, MCP and retelling-session lookup.
+
 - Add six curated dictionary entries and 25 optional riffs from the X-post writing exercise, editorial
   extrapolations and 45 unharnessed reference retellings in tradie, dockie and Uncle Bob voices. Retain all
   203 candidate decisions, distinguish creative images from established sayings, and localise `yield sign`

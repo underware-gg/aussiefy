@@ -249,6 +249,12 @@ def base_dictionary(config: RoundConfig, data_dir: Path = DATA_DIR) -> Dictionar
         if removed & images.keys():
             riffs.write_text(yaml.safe_dump({k: v for k, v in images.items() if k not in removed},
                                             sort_keys=False, allow_unicode=True), encoding="utf-8")
+        imagery = scratch / "imagery.yaml"
+        if imagery.exists() and ours:
+            records = _yaml(imagery.read_text(encoding="utf-8")) or []
+            kept_images = [{**r, "related": [c for c in r.get("related", []) if c not in ours]}
+                           for r in records if not set(r.get("concepts", [])) & ours]
+            imagery.write_text(yaml.safe_dump(kept_images, sort_keys=False, allow_unicode=True), encoding="utf-8")
         return load_dictionary(data_dir=scratch)
 
 

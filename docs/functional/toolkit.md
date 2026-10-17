@@ -104,3 +104,17 @@ Both are lexical heuristics; a substantially rewritten sentence may need the wri
 Lint compares refrains through the dictionary's drawl annotations. Reviewed whole-phrase `name_aliases` in
 `grammar.yaml` can excuse a known capitalised common phrase, such as `Christmas Trees` becoming `Chrissy trees`.
 Aliases are explicit: neither `John Woods` nor `Christmas Island` is inferred from its individual words.
+
+## Imagery in plans and lookup
+
+`plan` keeps its `riffs` list: entry\-attached cards retain their existin' fields, while contextual cards add
+an image `id`, `concepts`, `frames`, `form`, `subject`, `association`, `exaggeration`, `origin`, `usage` and
+`automatic`. Fair dinkum, contextual cards can be offered even where no word substitution was chosen. A direct suffix
+can pass automatic insertion checks; rewrite'n related cards always require a writer's judgement.
+
+`lookup` also accepts `embellishment`, `document_type` and `document_config` in Python, CLI and MCP. It adds
+an optional `imagery` list when reviewed images match the query, alongside the usual `results`. Image text
+and IDs are searchable too. Bare lookup is not a grammatical fit check: its cards have `template: true`,
+`automatic: false`, and slots may remain unbound. `short=True` keeps this imagery and its usage conditions.
+Session lookup inherits the session's settings. `entry_riffs: false` removes legacy riff cards separately.
+See [contextual controls](translation-controls.md#contextual-imagery) before using a suggestion.

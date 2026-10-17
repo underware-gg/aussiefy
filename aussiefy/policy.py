@@ -78,6 +78,10 @@ class DocumentOverrides:
     max_length: float | None = None
     perform: bool | None = None
     embellishment_guidance: str | None = None
+    contextual_riffs: bool | None = None
+    entry_riffs: bool | None = None
+    riff_exaggeration: int | None = None
+    riff_association: int | None = None
     profile: ProfileOverrides | None = None
 
     @classmethod
@@ -98,12 +102,16 @@ class DocumentOverrides:
             raise UserError(f"unknown document_config settings: {', '.join(sorted(set(raw) - names))}")
         data = dict(raw)
         booleans = {"openings", "formal_to_rework", "person_swears", "keep_quotes", "command_context",
-                    "dateline_context", "draft", "perform", "check_length"}
+                    "dateline_context", "draft", "perform", "check_length", "contextual_riffs", "entry_riffs"}
         for key, value in data.items():
             if key == "profile":
                 data[key] = ProfileOverrides.parse(value)
             if key in booleans and type(value) is not bool:
                 raise UserError(f"document_config.{key} must be true or false")
+            if key in ("riff_exaggeration", "riff_association"):
+                high = 2 if key == "riff_exaggeration" else 1
+                if type(value) is not int or not 0 <= value <= high:
+                    raise UserError(f"document_config.{key} must be an integer 0–{high}")
             if key in ("guidance", "embellishment_guidance") and not isinstance(value, str):
                 raise UserError(f"document_config.{key} must be text")
             if key in ("garnish", "term_domains"):

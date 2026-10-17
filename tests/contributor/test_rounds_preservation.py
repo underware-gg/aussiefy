@@ -192,3 +192,23 @@ def test_explicit_trigger_addition_preserves_distinct_exclusions(prepared):
     before = (data / "concepts.yaml").read_text()
     plan(config, data).write(data)
     assert (data / "concepts.yaml").read_text() == before
+
+
+def test_contextual_images_follow_set_aside_concepts_only_in_scratch(prepared):
+    config, data = prepared
+    plan(config, data).write(data)
+    path = data/'imagery.yaml'
+    original = path.read_bytes()
+    rows = yaml.safe_load(original)
+    rows += [dict(id='own-context', text='like a mower', concepts=['ZZ_META'], usage='Test.'),
+             dict(id='surviving-context', text='like a shovel', concepts=['BUSY'], related=['ZZ_META'], usage='Test.')]
+    path.write_text(yaml.safe_dump(rows))
+    before = path.read_bytes()
+    scratch = rounds.base_dictionary(config, data)
+    assert 'own-context' not in {i.id for i in scratch.imagery}
+    assert next(i for i in scratch.imagery if i.id == 'surviving-context').related == ()
+    assert path.read_bytes() == before
+    rows.append(dict(id='genuine-orphan', text='like a boot', concepts=['MISSING_CONCEPT'], usage='Test.'))
+    path.write_text(yaml.safe_dump(rows))
+    with pytest.raises(SchemaError, match='known'):
+        rounds.base_dictionary(config, data)

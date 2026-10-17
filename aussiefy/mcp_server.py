@@ -80,13 +80,16 @@ def build_server():
 
     @tool
     def aussie_lookup(query: str, level: Level = 5, vulgarity: Vulgarity = None,
-                      limit: int = 8, include_gated: bool = False, short: bool = False) -> dict[str, Any]:
+                      limit: int = 8, include_gated: bool = False, short: bool = False,
+                      embellishment: int | str | None = None, document_type: str = "general",
+                      document_config: dict | None = None) -> dict[str, Any]:
         """Genuine Australian slang for a plain-English meaning ('very busy', 'someone'), or what an Aussie term
         means ('goog'). Filtered to the level and vulgarity, so it never offers what lint would reject.
         include_gated also returns entries held back as doubtful (marked as such). short: each result as its form,
         gloss, frame, level and vulgarity only."""
         return harness.lookup(query, level=level, vulgarity=vulgarity, limit=limit,
-                              include_gated=include_gated, short=short)
+                              include_gated=include_gated, short=short, embellishment=embellishment,
+                              document_type=document_type, document_config=document_config)
 
     @tool
     def aussie_lint(text: Text, level: Level = 5, vulgarity: Vulgarity = None,

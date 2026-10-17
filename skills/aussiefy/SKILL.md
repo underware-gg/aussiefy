@@ -148,3 +148,18 @@ outside this dialect. Do not use plain-text `plan` to infer document-mode decisi
 
 Use the offline ngram/disabled fallback. CLI `--embedder ngram` or `--embedder none` can override a profile;
 MCP/toolkit use profile defaults. Markdown rejects `--surface`, `--rewrite` and model fallbacks before work.
+
+
+## Contextual imagery
+
+Plans can suggest meaning-attached images alongside entry riffs. Troppo permits greater exaggeration and
+explicitly curated related associations; this does not permit invented events or arbitrary changes of meaning.
+Read every image's `usage`, `association`, `form` and `automatic` fields. A `rewrite` or `related` image is a
+conditional suggestion for you to weave in only when the source supports its conditions. Direct suffixes
+still need grammatical fit and share insertion limits with other riffs. Bare lookup returns unbound
+`template` cards, not permission to insert a phrase. Preserve the subject/object when binding slots.
+
+`aussiefy lookup QUERY -e troppo --document-type general --document-config '{"riff_association":1}'`
+uses the same imagery settings as a plan. Advanced controls are `contextual_riffs`, `entry_riffs`,
+`riff_exaggeration` (0–2) and `riff_association` (0–1), with riff insertion probability, spacing and counts in
+`document_config.profile`. Custom requires explicit riff permission and contextual enablement.

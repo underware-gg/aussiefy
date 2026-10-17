@@ -30,3 +30,5 @@ python -m pytest -q tests/contributor
 | [test_third_pass_harness.py](test_third_pass_harness.py) | Third-pass agent payload and workflow contracts |
 
 Shared fixtures, corpus inputs and helpers live at [tests root](../README.md).
+
+- [Contextual curation](test_contextual_curation.py): complete follow-up decisions and valid promotion targets.

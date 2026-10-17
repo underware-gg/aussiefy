@@ -102,10 +102,14 @@ def _riff_offers(r: Result) -> list[dict[str, Any]]:
     engine used or could have used: the chosen one first, each term once."""
     offers: dict[str, dict[str, Any]] = {}
     for x in r.records:
+        if not r.embellishment.entry_riffs:
+            break
         for c in sorted(x.eligible, key=lambda c: (c.entry.id != (x.chosen.entry.id if x.chosen else ""), c.entry.id)):
             cards = riff_cards(c.entry, r.vulgarity)
             if cards and c.entry.form not in offers:
                 offers[c.entry.form] = {"term": c.entry.form, "for": x.text, "riffs": [
                     {**card, "suits_mood": card["tone"] in RIFF_TONES_FOR[r.mood]}
                     for card in cards]}
-    return list(offers.values())
+    return list(offers.values()) + [{**group, "riffs": [
+        {**card, "suits_mood": card["tone"] in RIFF_TONES_FOR[r.mood]} for card in group["riffs"]]}
+        for group in r.imagery]

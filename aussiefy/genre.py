@@ -28,6 +28,7 @@ GARNISH = PLACEMENTS + ("riff", "infix", "insult")
 POLICY_KEYS = ("garnish", "openings", "formal_to_rework", "embellishment", "person_swears", "keep_quotes", "guidance")
 EMBELLISHMENT_KEYS = ("garnish", "follows_form", "openings", "draft", "keep_share", "max_length", "perform",
                       "guidance")
+IMAGERY_KEYS = ("contextual_riffs", "entry_riffs", "riff_exaggeration", "riff_association")
 
 # The cue lexicons and weights stay in code, as context.py's mood lexicons do: they are the classifier, tuned
 # together against the corpus (tests/test_genre.py), not vocabulary a dictionary round grows.
@@ -74,6 +75,10 @@ class Embellishment:
     max_length: float             # a retelling over this many times the original (+20 words) is too long
     perform: bool                 # the style guide's "perform it" block applies
     guidance: str                 # yarn mode's note for the setting
+    contextual_riffs: bool = False
+    entry_riffs: bool = True
+    riff_exaggeration: int = 0
+    riff_association: int = 0
 
     @property
     def name(self) -> str:
@@ -125,7 +130,7 @@ class Genre:
         e = self.config.embellishments[self.policy.default_embellishment if step is None else step]
         if self.name == "custom":
             e = replace(e, garnish=frozenset(), openings=False, draft=False, keep_share=0, max_length=1,
-                        perform=False, guidance="")
+                        perform=False, guidance="", contextual_riffs=False, riff_exaggeration=0, riff_association=0)
         else:
             e = replace(e, openings=e.openings and self.policy.openings)
             if "insult" not in self.policy.garnish:
@@ -214,6 +219,10 @@ def parse_embellishments(data: dict) -> dict[int, Embellishment]:
     out = {}
     for name, e in raw.items():
         _missing(name, e, EMBELLISHMENT_KEYS)
+        try:
+            imagery = DocumentOverrides.parse({k: e[k] for k in IMAGERY_KEYS if k in e}).values()
+        except UserError as exc:
+            raise SchemaError(f"genres.yaml: {name}: {exc}") from exc
         _typed_fields(name, e, ("follows_form", "openings", "draft", "perform"))
         for key in ("keep_share", "max_length"):
             if isinstance(e[key], bool) or not isinstance(e[key], (int, float)) or not math.isfinite(e[key]):
@@ -224,7 +233,7 @@ def parse_embellishments(data: dict) -> dict[int, Embellishment]:
         out[step] = Embellishment(step, _garnish(name, e["garnish"]), e["follows_form"], e["openings"],
                                   e["draft"],
                                   float(e["keep_share"]), float(e["max_length"]), e["perform"],
-                                  " ".join(e["guidance"].split()))
+                                  " ".join(e["guidance"].split()), **imagery)
     return out
 
 

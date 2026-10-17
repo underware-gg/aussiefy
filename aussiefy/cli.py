@@ -305,10 +305,11 @@ def cmd_lookup(args) -> int:
     from . import harness
 
     out = harness.lookup(" ".join(args.query), limit=args.limit, include_gated=args.include_gated,
-                         short=args.short, translator=_translator(args), **_policy(args))
+                         short=args.short, embellishment=args.embellishment, **_document(args),
+                         translator=_translator(args), **_policy(args))
     if args.json:
         _json(out)
-        return 0 if out["results"] else 1
+        return 0 if out["results"] or out.get("imagery") else 1
     _warn(out["policy_warnings"])
     for r in out["results"]:
         extra = f" [vulgarity {r['vulgarity']}]" if r["vulgarity"] else ""
@@ -316,9 +317,11 @@ def cmd_lookup(args) -> int:
         print(f"  {r['form']:<42} L{r['level']} {r['frame']:<13} {r['gloss']}{extra}")
         for riff in r.get("riffs", ()):
             print(f"      riff ({riff['tone']}): {riff['text']}")
-    if not out["results"]:
+    for image in out.get("imagery", ()):
+        print(f"  image ({image['form']}, {image['association']}): {image['text']} — {image['usage']}")
+    if not out["results"] and not out.get("imagery"):
         print(f"  (no match for {out['query']!r} at level {out['level']}) {out['note']}")
-    return 0 if out["results"] else 1
+    return 0 if out["results"] or out.get("imagery") else 1
 
 
 def cmd_lint(args) -> int:
@@ -805,7 +808,7 @@ def build_parser() -> argparse.ArgumentParser:
     yt.add_argument("--log", metavar="FILE", help="append every call and its result to this JSONL file")
     yt.set_defaults(func=cmd_yarn_tools)
 
-    lk = sub.add_parser("lookup", parents=toolkit, help="Aussie options for a meaning, or what a term means")
+    lk = sub.add_parser("lookup", parents=[*toolkit, embellished], help="Aussie options for a meaning, or what a term means")
     lk.add_argument("query", nargs="+")
     lk.add_argument("--limit", type=int, default=8)
     lk.add_argument("--include-gated", action="store_true", help="also show entries held back as doubtful")
