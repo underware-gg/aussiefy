@@ -42,6 +42,12 @@ python scripts/regen_golden.py && git diff tests/corpus/golden.yaml
 Never edit `golden.yaml` by hand, and don't accept a regenerated diff without reading it: an unexpected
 change is a regression until shown otherwise.
 
+The `changes` contract fixtures (`tests/fixtures/changes/`) are golden too:
+`python scripts/regen_changes_fixtures.py` rewrites them, for review in the same way. The renderings themselves are
+checked against whole re-renders with each pick pinned (`tests/functional/test_changes_oracle.py`), and
+`python scripts/benchmark_changes.py` measures what `changes` costs over translate at 5,000 characters (its budget
+is 1.5 times).
+
 ## Reference texts
 
 `tests/corpus/reference/` holds public-domain texts, from fairy tales to the Declaration of Independence and The

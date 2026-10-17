@@ -11,6 +11,7 @@ The Python API is the toolkit every other surface (CLI, MCP server, yarn mode, t
     aussiefy.plan(text)                                      # the engine's draft and planned phrases, for an agent
     aussiefy.verify(translation, original=text)              # problems with severity: facts, policy, markup, drops
     aussiefy.yarn(text)                                      # Claude retells it with the toolkit (needs anthropic)
+    aussiefy.translate_changes(text)                         # translate, with every change and its alternatives
 
 Each takes the same keyword-only dials, by number or name: level 1-5 (tourist, blow-in, local, larrikin,
 swaggie) and vulgarity 0-3 (nan, dad, uncle-bob, tradie; default: the level's own, nan at 1-2, dad at 3-4,
@@ -20,7 +21,8 @@ dictionary: Translator(load_dictionary(["my_entries.yaml"])). Results report bot
 """
 
 from .engine import Result, Translator, default_translator
-from .translation import translate
+from .translation import translate, translate_changes
+from .changes import ChangeSet
 from .markdown import DocumentResult
 from .harness import guide, lint, lookup, plan, verify
 from .loader import load_dictionary
@@ -30,6 +32,6 @@ from .errors import UserError
 from .schema import Entry, SchemaError
 from .yarn import yarn
 
-__all__ = ["translate", "lookup", "lint", "guide", "plan", "verify", "yarn", "Translator", "default_translator", "Result",
+__all__ = ["translate", "translate_changes", "ChangeSet", "lookup", "lint", "guide", "plan", "verify", "yarn", "Translator", "default_translator", "Result",
            "DocumentResult", "Policy", "Dictionary", "load_dictionary", "Entry", "SchemaError", "UserError"]
 __version__ = "0.2.0"

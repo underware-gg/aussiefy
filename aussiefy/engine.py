@@ -363,17 +363,8 @@ class Translator:
             rec = SubstitutionRecord((toks[det.start].start, toks[det.end - 1].end),
                                      run.text[toks[det.start].start: toks[det.end - 1].end], det, sent.index)
             records.append(rec)
-            eligible, rejected = candidates(det, self.dictionary.idioms, eff, state.entry_uses,
-                                            self.dictionary.person_concepts, self.dictionary.person_nouns)
-            keep = []
-            for c in eligible:
-                reason = (_span_rejection(c, det, toks, (occupied - set(range(det.start, det.end))) | replaced)
-                          or _genre_rejection(c, run, self.dictionary.neutral_person_concepts))
-                if reason:
-                    rejected.append((c.entry, reason))
-                else:
-                    keep.append(c)
-            keep = _narrow(keep, rejected, pol.variety, state)
+            keep, rejected = self.eligible(det, sent, run, eff, state,
+                                           (occupied - set(range(det.start, det.end))) | replaced)
             rec.eligible = keep
             rec.rejected = sorted(((e.id, r) for e, r in rejected), key=lambda x: x[0])
             if not keep:
@@ -405,6 +396,25 @@ class Translator:
         if pol.english != "none":
             splices += self._dialect(sent, run, replaced | held, said)
         return records, splices
+
+    def eligible(self, det: Detection, sent: "_Sentence", run: "_Run", eff: Effective, state: TextState,
+                 taken: set[int], entries: list[Entry] | None = None) -> tuple[list[Candidate], list[tuple[Entry, str]]]:
+        """The candidates that can fill a detection under eff, and the rest with why not: the policy and grammar
+        (select.candidates), the span (taken: the tokens other swaps hold), the genre, then what the text has
+        already said and variety. Selection reads it at each spot; the changes builder reads it again with only
+        the vulgarity cap raised, for the options a lock holds back (entries: the idioms naming the detection's
+        concepts, where it has them to hand; candidates passes over the rest)."""
+        eligible, rejected = candidates(det, self.dictionary.idioms if entries is None else entries, eff, state.entry_uses,
+                                        self.dictionary.person_concepts, self.dictionary.person_nouns)
+        keep = []
+        for c in eligible:
+            reason = (_span_rejection(c, det, sent.tokens, taken)
+                      or _genre_rejection(c, run, self.dictionary.neutral_person_concepts))
+            if reason:
+                rejected.append((c.entry, reason))
+            else:
+                keep.append(c)
+        return _narrow(keep, rejected, run.pol.variety, state), rejected
 
     def render_at_spot(self, choice: Candidate, rec: SubstitutionRecord, keep: list[Candidate], sent: "_Sentence",
                        run: "_Run", replaced: set[int], said: dict[int, str]) -> "SpotRendering":
@@ -610,12 +620,14 @@ class Translator:
     def _place(out: str, placement: str, entry: Entry, form: str, sentence: int, run: "_Run",
                lowerable: frozenset[str] = frozenset(), first_replaced: bool = False) -> str | None:
         """Put a picked garnish in (None where a connective doesn't fit), and tell the observer where it went."""
+        if run.observer is not None:
+            form = run.observer.placing(sentence, placement, entry, form)
+            if form is None:
+                return out   # a test hook: the garnish is decided and counted, but its words left out
         placed = place_garnish(out, placement, form, lowerable, first_replaced)
         if placed is None:
             return None
         if run.observer is not None:
-            if not run.observer.placing(sentence, placement, entry):
-                return out   # a test hook: the garnish is decided and counted, but its words left out
             run.observer.garnish(sentence, placement, entry, form, placed[1])
         return placed[0]
 
@@ -854,8 +866,8 @@ class SentenceTrace:
 
 class PassObserver:
     """Watches one translate pass (the changes builder does). Every hook does nothing by default, and none may
-    change the output, except choose and placing, which exist for tests: a test pins a pick or leaves a garnish
-    out to check what the builder renders against a whole re-render."""
+    change the output, except choose and placing, which exist for tests: a test pins a pick, or another
+    garnish's words (None leaves them out), to check what the builder renders against a whole re-render."""
 
     def begin(self, run: "_Run") -> None:
         pass
@@ -863,8 +875,8 @@ class PassObserver:
     def choose(self, sent: "_Sentence", det: Detection, keep: list[Candidate], choice: Candidate) -> Candidate:
         return choice
 
-    def placing(self, sentence: int, placement: str, entry: Entry) -> bool:
-        return True
+    def placing(self, sentence: int, placement: str, entry: Entry, form: str) -> str | None:
+        return form
 
     def spot(self, spot: Spot) -> None:
         pass

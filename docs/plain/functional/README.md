@@ -13,6 +13,7 @@ guarantees. For step-by-step guides, see the [user layer](../user/README.md); fo
 | [cli.md](cli.md) | Every `aussiefy` command and option, with defaults and exit codes |
 | [toolkit.md](toolkit.md) | The six toolkit operations, the Python API, the MCP server's tools and the Claude API tools |
 | [markdown.md](markdown.md) | Explicit prose translation with protected source, stable headings and per-unit results |
+| [changes.md](changes.md) | Every change a translation made, with each spot's alternatives and locked options rendered in place: the `changes` contract |
 | [explain.md](explain.md) | What explain mode records for each decision, with a sample |
 | [verification.md](verification.md) | Deterministic structural and fidelity checks against the original |
 | [llm-modes.md](llm-modes.md) | Model-assisted writing, the optional API client, guarantees and caches |
@@ -49,6 +50,7 @@ How to run them is in the
 | `tests/functional/test_sense_boundaries.py` | Person/adjective sense limits and clothing agreement |
 | `tests/functional/test_lookup_senses.py`, `tests/functional/test_harness_reliability.py` | Slot/sense lookup, phrase locality and data-driven lint comparisons |
 | `tests/functional/test_markdown_composition.py` | Document-wide garnish and source sentence boundaries |
+| `tests/functional/test_changes.py`, `tests/functional/test_changes_oracle.py` | The `changes` contract, and each rendering against a whole re-render with that pick pinned |
 | `tests/functional/test_matching.py` | Tokenising, the pattern language and concept detection |
 | `tests/functional/test_schema.py` | Dictionary loading and validation |
 | `tests/architecture/test_golden.py` | Exact outputs per input, level and seed (`tests/corpus/golden.yaml`) |

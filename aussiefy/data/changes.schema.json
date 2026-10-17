@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/underware-gg/aussiefy/blob/main/aussiefy/data/changes.schema.json",
+  "title": "aussiefy changes, contract version 1",
+  "description": "What aussiefy.translate_changes returns (ChangeSet.to_dict()): a translation's text, every change it made in output order, and the card of every entry the changes name. Spans are [start, end) character offsets: src_span in the source, out_span in this text. Ids are a change's kind and source span, with a placement or rule where those could repeat. See docs/functional/changes.md.",
+  "type": "object",
+  "required": ["version", "text", "changes", "entries"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {"const": 1},
+    "text": {"type": "string"},
+    "changes": {"type": "array", "items": {"$ref": "#/$defs/change"}},
+    "entries": {"type": "object", "additionalProperties": {"$ref": "#/$defs/card"}}
+  },
+  "$defs": {
+    "span": {"type": "array", "items": {"type": "integer", "minimum": 0}, "minItems": 2, "maxItems": 2},
+    "vulgarity": {"type": "integer", "minimum": 0, "maximum": 3},
+    "mask": {
+      "description": "A maskable word in a rendering: its span in that rendering, where its kept ending starts (its end when it keeps none) and the vulgarity it needs.",
+      "type": "object",
+      "required": ["span", "ending_start", "vulgarity"],
+      "additionalProperties": false,
+      "properties": {
+        "span": {"$ref": "#/$defs/span"},
+        "ending_start": {"type": "integer", "minimum": 0},
+        "vulgarity": {"type": "integer", "minimum": 1, "maximum": 3}
+      }
+    },
+    "masks": {"type": "array", "items": {"$ref": "#/$defs/mask"}},
+    "alternative": {
+      "description": "An option at the spot, the pick among them, rendered where it stands; weights share 1 among a change's alternatives.",
+      "type": "object",
+      "required": ["entry_id", "weight", "rendered", "out_span", "vulgarity", "masks"],
+      "additionalProperties": false,
+      "properties": {
+        "entry_id": {"type": "string"},
+        "weight": {"type": "number", "minimum": 0, "maximum": 1},
+        "rendered": {"type": "string"},
+        "out_span": {"$ref": "#/$defs/span"},
+        "vulgarity": {"$ref": "#/$defs/vulgarity"},
+        "masks": {"$ref": "#/$defs/masks"}
+      }
+    },
+    "locked": {
+      "description": "An option that only a higher vulgarity cap lets in, tagged with the lowest that does, rendered where it stands.",
+      "type": "object",
+      "required": ["entry_id", "vulgarity", "rendered", "out_span", "masks"],
+      "additionalProperties": false,
+      "properties": {
+        "entry_id": {"type": "string"},
+        "vulgarity": {"type": "integer", "minimum": 1, "maximum": 3},
+        "rendered": {"type": "string"},
+        "out_span": {"$ref": "#/$defs/span"},
+        "masks": {"$ref": "#/$defs/masks"}
+      }
+    },
+    "removed": {
+      "description": "How a garnish's region reads without it: its words gone (and the word an opener lowered recased).",
+      "type": "object",
+      "required": ["out_span", "rendered"],
+      "additionalProperties": false,
+      "properties": {"out_span": {"$ref": "#/$defs/span"}, "rendered": {"type": "string"}}
+    },
+    "rule": {
+      "type": "object",
+      "required": ["id", "kind", "before", "after"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string"},
+        "kind": {"enum": ["drawl", "spelling", "infix"]},
+        "before": {"type": "string"},
+        "after": {"type": "string"}
+      }
+    },
+    "pair": {
+      "type": "object",
+      "required": ["english", "before", "after"],
+      "additionalProperties": false,
+      "properties": {
+        "english": {"type": ["string", "null"]},
+        "before": {"type": "string"},
+        "after": {"type": "string"}
+      }
+    },
+    "change": {
+      "type": "object",
+      "required": ["id", "kind", "src_span", "out_span", "original", "output", "entry_id", "vulgarity", "masks",
+                   "alternatives", "locked", "covers"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string"},
+        "kind": {"enum": ["substitution", "dialect", "garnish", "swear_infix", "phonetic"]},
+        "src_span": {"$ref": "#/$defs/span"},
+        "out_span": {"$ref": "#/$defs/span"},
+        "original": {"type": "string"},
+        "output": {"type": "string"},
+        "entry_id": {"type": ["string", "null"]},
+        "vulgarity": {"$ref": "#/$defs/vulgarity"},
+        "masks": {"$ref": "#/$defs/masks"},
+        "placement": {"enum": ["connective", "opener", "tag", "aside", "tail", "closer", "riff"]},
+        "image_id": {"type": "string"},
+        "removed": {"$ref": "#/$defs/removed"},
+        "rule": {"$ref": "#/$defs/rule"},
+        "pair": {"$ref": "#/$defs/pair"},
+        "alternatives": {"type": "array", "items": {"$ref": "#/$defs/alternative"}},
+        "locked": {"type": "array", "items": {"$ref": "#/$defs/locked"}},
+        "covers": {"type": "array", "items": {"type": "string"}}
+      },
+      "allOf": [
+        {"if": {"properties": {"kind": {"const": "substitution"}}},
+         "then": {"properties": {"entry_id": {"type": "string"}, "alternatives": {"minItems": 1}}}},
+        {"if": {"properties": {"kind": {"const": "garnish"}}},
+         "then": {"required": ["placement", "removed"], "properties": {"locked": {"maxItems": 0}}}},
+        {"if": {"properties": {"kind": {"enum": ["phonetic", "swear_infix"]}}},
+         "then": {"required": ["rule"], "properties": {"entry_id": {"type": "null"}, "alternatives": {"maxItems": 0},
+                                                         "locked": {"maxItems": 0}}}},
+        {"if": {"properties": {"kind": {"const": "dialect"}}},
+         "then": {"required": ["pair"], "properties": {"entry_id": {"type": "null"}, "alternatives": {"maxItems": 0},
+                                                         "locked": {"maxItems": 0}}}}
+      ]
+    },
+    "card": {
+      "description": "An entry's card (aussiefy/cards.py), as lookup shows it too.",
+      "type": "object",
+      "required": ["id", "form", "gloss", "frame", "concepts", "level", "vulgarity", "register"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string"},
+        "form": {"type": "string"},
+        "gloss": {"type": "string"},
+        "frame": {"type": "string"},
+        "concepts": {"type": "array", "items": {"type": "string"}},
+        "level": {"type": "integer", "minimum": 1, "maximum": 5},
+        "vulgarity": {"$ref": "#/$defs/vulgarity"},
+        "register": {"enum": ["current", "dated", "archaic"]},
+        "placement": {"type": "string"},
+        "riffs": {"type": "array", "items": {"type": "object"}},
+        "variants": {"type": "array", "items": {"type": "string"}},
+        "region": {"type": "array", "items": {"type": "string"}},
+        "notes": {"type": "string"},
+        "sources": {"type": "array", "items": {"type": "string"}},
+        "replaces": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

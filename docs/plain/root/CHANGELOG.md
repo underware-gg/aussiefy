@@ -5,6 +5,11 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Add `aussiefy.translate_changes`: translate's translation with every change it made (swaps, garnish,
+  drawl, swear infixes and US/UK swaps) placed in the output. Each swap comes with its alternatives and its
+  vulgarity-locked options, rendered in place on the engine's own path, with ids, `covers`, `removed` for garnish,
+  maskable words and entry cards. It's built in the same pass, at about 1.1 times translate's cost. The contract's
+  JSON Schema ships in the package. Translation output is unchanged (DD-029).
 - Build entry cards in one place for lookup and the coming `changes` builder: each card carries its entry `id`,
   and full cards their `sources`. Lookup's result reports the dials only, without `profile_config`, which no
   lookup reads.

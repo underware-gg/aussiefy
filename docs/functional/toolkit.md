@@ -35,6 +35,10 @@ tr.translate(text, level="swaggie", seed=1, vulgarity="dad", regions=["vic"], un
 lookup("very tired", translator=tr)   # the toolkit functions take a translator too; the default is shared
 ```
 
+`translate_changes` takes `translate`'s parameters and returns a `ChangeSet`: the same translation, with every
+change it made and each swap's alternatives rendered in place ([changes](changes.md)). It's for a host that lets a
+reader edit a translation, so it's in the Python API only, not the CLI, MCP tools or yarn mode.
+
 Every function takes keyword-only dials, by number or name: `level` (default 5) and `vulgarity` (default: the
 level's own). `translate`, `plan` and `yarn` also take `seed` (default 0). `translate` and `plan` also take
 `variety`, `registers`, `regions` and `unlock`; only `translate` takes `markdown` (default false).

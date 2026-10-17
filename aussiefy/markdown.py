@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from bisect import bisect_left, bisect_right
+from collections.abc import Callable
 import re
 import unicodedata
 
@@ -338,7 +339,87 @@ def _escape(text: str) -> str:
     return re.sub(r"^(\d{1,9})\.([ \t])", r"\1\\.\2", text)
 
 
-def translate_document(source: str, translator: Translator, policy: Policy, effective: Effective) -> DocumentResult:
+_SPECIAL = set("\\`*_{}[]<>()!#|~+-=&")
+
+
+def _escape_map(text: str) -> tuple[str, list[int]]:
+    """_escape(text), with where each position of text lands in it (len(text) + 1 of them)."""
+    norm, at = [], []
+    i = 0
+    while i < len(text):
+        at.append(len(norm))
+        if text.startswith("\r\n", i):
+            at.append(len(norm))
+            i += 1
+        norm.append(" " if text[i] in "\r\n" else text[i])
+        i += 1
+    at.append(len(norm))
+    flat = "".join(norm)
+    lead = len(flat) - len(flat.lstrip(" \t"))
+    kept = flat.strip(" \t")
+    out, moved = [], []
+    for ch in kept:
+        moved.append(len(out))
+        if ch in _SPECIAL:
+            out.append("\\")
+        out.append(ch)
+    moved.append(len(out))
+    escaped = "".join(out)
+    numbered = re.match(r"^(\d{1,9})\.([ \t])", escaped)
+    dot = numbered.end(1) if numbered else None
+    if dot is not None:
+        escaped = escaped[:dot] + "\\" + escaped[dot:]
+    positions = []
+    for x in at:
+        y = moved[min(max(x - lead, 0), len(kept))]
+        positions.append(y + 1 if dot is not None and y > dot else y)
+    return escaped, positions
+
+
+def document_changes(source: str, translator: Translator, policy: Policy, effective: Effective):
+    """translate_document, with every unit's changes placed in the document: each unit's source and output offsets
+    added, its output mapped through the escaping that keeps custom slang from making markup, and each rendering
+    escaped the same way where it stands."""
+    from .changes import collect, finish
+
+    raw_units = []
+
+    def unit(text, **options):
+        result, raw = collect(translator, text, **options)
+        raw_units.append((result, raw))
+        return result
+
+    document = translate_document(source, translator, policy, effective, unit=unit)
+    changes = []
+    for u, (result, raw) in zip(document.units, raw_units):
+        escaped, at = _escape_map(result.text)
+        if escaped != u.text:   # pragma: no cover - _escape_map follows _escape
+            raise AssertionError("the escaping map no longer follows _escape")
+        src, out = u.source_span[0], u.output_span[0]
+        for c in raw:
+            c["src_span"] = [c["src_span"][0] + src, c["src_span"][1] + src]
+            a, b = c["out_span"]
+            for o in c["alternatives"] + c["locked"] + ([c["removed"]] if c.get("removed") else []):
+                o["rendered"] = _escaped_in(result.text, o["out_span"], o["rendered"])
+                oa, ob = o["out_span"]
+                o["out_span"] = [out + at[oa], out + at[ob]]
+            c["out_span"] = [out + at[a], out + at[b]]
+            c["output"] = document.text[c["out_span"][0]:c["out_span"][1]]
+            changes.append(c)
+    return finish(document, changes, translator.dictionary, effective.vulgarity)
+
+
+def _escaped_in(text: str, span: list[int], rendered: str) -> str:
+    """A rendering as it reads once its unit is escaped: the unit with it in place, escaped, over its span."""
+    a, b = span
+    escaped, at = _escape_map(text[:a] + rendered + text[b:])
+    return escaped[at[a]:at[a + len(rendered)]]
+
+
+def translate_document(source: str, translator: Translator, policy: Policy, effective: Effective,
+                       unit: Callable[..., Result] | None = None) -> DocumentResult:
+    """Translate the document's prose units in turn, sharing one document's state. unit translates one unit
+    (Translator.translate's arguments; the changes builder passes its own)."""
     pieces = []
     units = []
     protected = []
@@ -390,7 +471,7 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
                             index == len(spans) - 1, quiet=reading.quiet_at(span.start),
                             last_contexts=source_contexts[last] if last >= 0 else frozenset(),
                             written=written)
-        r = translator.translate(source[span.start:span.end], level=policy.level, seed=policy.seed,
+        r = (unit or translator.translate)(source[span.start:span.end], level=policy.level, seed=policy.seed,
                                  vulgarity=policy.vulgarity, variety=policy.variety, registers=policy.registers,
                                  regions=policy.regions, unlock=policy.unlock, embedder=policy.embedder,
                                  english=policy.english, embellishment=policy.embellishment, document_type=policy.document_type,

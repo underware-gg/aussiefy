@@ -6,13 +6,13 @@ subpackages (see [DD-006](../../architecture/decisions/dd-006-layered-flat-packa
 
 | Layer | Modules |
 |---|---|
-| Public API | `__init__.py` (translate, lookup, lint, guide, plan, yarn, Translator, load_dictionary, verify, and the result and error types) |
+| Public API | `__init__.py` (translate, translate_changes, lookup, lint, guide, plan, yarn, Translator, load_dictionary, verify, and the result and error types) |
 | Surfaces (thin adapters) | `cli.py`, `mcp_server.py`, `skills/aussiefy/SKILL.md` |
 | Toolkit | `harness.py` (six agent operations), `lookup.py`, `lint.py`, `guide.py`, `verify.py` (fidelity and policy checks), `align.py` (shared sentence counterparts), `retelling.py` (agent-neutral briefs, JSON Schema tool contracts, sessions, dispatch and checked submission) |
 | Document translation | `translation.py` (shared surface routing), `markdown.py` (strict source spans and document results), `markup.py` (extended Markdown/MDX scanning) |
 | Optional API clients | `yarn.py` (built-in retelling loop and Anthropic tool adapter), `llm.py` (surface and sentence rewrites), `claude.py` (Anthropic SDK boundary) |
-| Engine | `engine.py` (the pipeline), `text.py`, `matcher.py`, `detect.py`, `select.py`, `realise.py`, `morph.py`, `garnish.py`, `context.py`, `policy.py`, `genre.py` (pure form policy and classification), `dialect.py` (source-English swaps), `pos.py` (bundled tagger), `protected.py` (opaque source spans and restoration) |
-| Dictionary | `schema.py` (entries, concepts), `cards.py` (the entry cards lookup and the changes builder both show), `model.py` (the dictionary as data, and what derives from it), `loader.py` (reading and validating the YAML), `terms.py` (when two spellings are one term), `dump.py` |
+| Engine | `engine.py` (the pipeline), `text.py`, `matcher.py`, `detect.py`, `select.py`, `realise.py`, `morph.py`, `garnish.py`, `context.py`, `policy.py`, `genre.py` (pure form policy and classification), `dialect.py` (source-English swaps), `pos.py` (bundled tagger), `protected.py` (opaque source spans and restoration), `changes.py` (every change, its alternatives rendered in place, in the same pass) |
+| Dictionary | `schema.py` (entries, concepts), `cards.py` (the entry cards lookup and the changes builder both show), `masks.py` (the maskable words in a rendering), `model.py` (the dictionary as data, and what derives from it), `loader.py` (reading and validating the YAML), `terms.py` (when two spellings are one term), `dump.py` |
 | Similarity | `embed.py`, `static.py` (the bundled model), `models.py` (installed ones) |
 | Maintainers | `gaps.py`, `explain.py`, `rounds.py` (research rounds), `judge.py` (blind packets, report validation and optional Claude boundary), `scrape/` (scrape, fragments, harvest, tag, review) |
 | Shared | `errors.py` (`UserError`, the error a user can fix) |

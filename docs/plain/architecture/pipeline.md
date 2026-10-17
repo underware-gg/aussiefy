@@ -54,6 +54,10 @@ has no slang or level logic of its own.
    each one is (dialogue, a question, narration ending on a deed) and the text's mood (solemn, dark or light)
    come from `context.py`.
 
+A pass observer (`PassObserver`) can watch all five stages without changing them. The changes builder
+(`changes.py`) uses one to render each alternative where it stands, in the same pass
+([changes](../functional/changes.md), [DD-029](../../architecture/decisions/dd-029-changes-builder.md)).
+
 With `--rewrite`, a sentence the dictionary couldn't carry goes to an optional rewriter after its
 substitutions and before its garnish; with `--surface`, the finished text goes to Claude as a final pass (see
 [LLM modes](../functional/llm-modes.md)).

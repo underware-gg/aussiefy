@@ -36,7 +36,7 @@ version = {attr = "aussiefy.__version__"}
 include = ["aussiefy*"]
 
 [tool.setuptools.package-data]
-aussiefy = ["data/*.yaml", "data/entries/*.yaml", "data/model/*", "data/pos/*"]
+aussiefy = ["data/*.yaml", "data/*.json", "data/entries/*.yaml", "data/model/*", "data/pos/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

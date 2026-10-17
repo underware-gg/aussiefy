@@ -61,7 +61,9 @@ def stretch_word(text: str, times: int) -> str:
     return text[: m.end()] + m.group() * (times - 1) + text[m.end():]
 
 
-def _realise_garnish(entry: Entry, seed: int, key: tuple, eff: Effective) -> str:
+def realise_garnish(entry: Entry, seed: int, key: tuple, eff: Effective) -> str:
+    """The words a garnish entry says, picked (and stretched) by its key: the same entry, key and seed say the
+    same."""
     forms = entry.all_forms
     form = pick_form(forms, seed, entry.id, *key)
     if entry.stretch:
@@ -116,7 +118,7 @@ def pick_garnish(placement: str, entries: list[Entry], eff: Effective, seed: int
     # swearing sounds like its tier: a closer at tradie leans to "fuck me dead" over "well, I'll be buggered"
     weights = [e.weight * (tier_match(e.vulgarity, eff.vulgarity) if swear else 1.0) for e in pool]
     chosen = pool[weighted_index(weights, roll(seed, "garnish-pick", placement, *key))]
-    return chosen, _realise_garnish(chosen, seed, key, eff), rejected
+    return chosen, realise_garnish(chosen, seed, key, eff), rejected
 
 
 SENT_END_RE = re.compile(r"([.!?]+)([\"'\u201d\u2019)\]]*)\s*$")
@@ -280,15 +282,24 @@ class PhoneticTrace:
     preserve: Callable[[str], list[tuple[int, int]]] | None
     passes: list[PhoneticPass] = field(default_factory=list)
 
+    _cache: dict = field(default_factory=dict)   # the last text each span function read, and its spans
+
     def kept(self, p: PhoneticPass) -> list[tuple[int, int]]:
         if p.kept is None:
-            p.kept = [] if self.keep is None or p.rule.kind == "spelling" else self.keep(p.before)
+            p.kept = [] if self.keep is None or p.rule.kind == "spelling" else self._spans("keep", self.keep, p.before)
         return p.kept
 
     def preserved(self, p: PhoneticPass) -> list[tuple[int, int]]:
         if p.preserved is None:
-            p.preserved = [] if self.preserve is None else self.preserve(p.before)
+            p.preserved = [] if self.preserve is None else self._spans("preserve", self.preserve, p.before)
         return p.preserved
+
+    def _spans(self, name: str, fn: Callable[[str], list[tuple[int, int]]], text: str) -> list[tuple[int, int]]:
+        """fn(text), read again only once a rule has changed the text (as the pass itself does)."""
+        last = self._cache.get(name)
+        if last is None or last[0] != text:
+            last = self._cache[name] = (text, fn(text))
+        return last[1]
 
 
 def phonetic_scale(rule: PhoneticRule, rules: list[PhoneticRule], eff: Effective, infixes: bool) -> float:
