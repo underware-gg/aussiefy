@@ -7,11 +7,11 @@ material product tradeoffs are flagged for shaping while independent work contin
 | Slice | Scope | Status |
 |---|---|---|
 | 1 | Grammar and senses: modal clauses/questions, deliberative shall, restless tossing, object-taking quit, evidentiary establish, wholehearted devotion | Complete |
-| 2 | Seed-listicle intake: acquire through existing pipeline, verify senses, reconcile coverage and retain decisions | Pending |
+| 2 | Seed-listicle intake: acquire through existing pipeline, verify senses, reconcile coverage and retain decisions | Complete |
 | 3 | Curated slang benchmark with independent review, fixed labels and an honest baseline | Pending |
 | 4 | Prose refinement: assess technical/instruction/body voice and fix clear defects while preserving configured flavour | Pending |
 | 5 | Bundled-model maintenance: inspect training environment, retrain on final data and enforce existing quality gates | Pending |
-| 6 | Pre-launch integration: exercise available client/API and local website paths, measure actual routing/latency, document verified limits | Pending website source location |
+| 6 | Pre-launch integration: exercise available client/API paths, measure actual routing/latency, document verified limits | Pending; website not built |
 
 ## Decisions and verification
 
@@ -20,6 +20,8 @@ calibration gates. New benchmark labels must be chosen for meaning, not to produ
 The website and live client are separate integration surfaces; core timing does not establish end-to-end latency.
 
 ### Slice 1: grammar and senses
+
+Committed and pushed as `ee6d948`.
 
 The initial probes reproduced six existing failures. The fixes share question-form eligibility with
 realisation; distinguish perfect-have and possession; decline an independently finite clause under an outer
@@ -44,6 +46,30 @@ Independent preparation: the seed page fetched through the existing scraper (227
 declared-UTF-8/implicit-Latin-1 fetch bug. Correct decoding produces 212 candidates; raw HTML and copied
 definitions remain temporary. The pinned training toolchain, WordNet 3.0 and pinned base model are validated
 in an isolated Python 3.12 environment. No live API key is present in the current process. The user confirmed
-the website is not live; its planned address is `aussiefy.underware.gg`, and its source location is requested
-for local integration checks. Standalone domain options are being researched for shaping; no purchase or
-deployment is authorised by that research request.
+the website is not built; it will live in `underware-gg/aussiefy-web`, initially at
+`aussiefy.underware.gg`. Available engine/toolkit interfaces can be checked now; website routing/browser
+latency needs the future application. Standalone domain options are retained separately for shaping; no
+purchase or deployment is authorised by that research request.
+
+### Slice 2: seed intake
+
+The correctly decoded scrape yields 212 candidates from 227 raw rows. The complete seed ledger accounts
+for ten additions, 88 existing term/variant/component matches, 100 conditional craft/verification notes,
+three declined sense mappings, five metadata rows, two retained gates and four retained omissions. Coverage
+does not claim that a complete row can be substituted grammatically. Manual proposals use our own glosses
+and pass the existing `plan_review`/scratch-validation/apply boundary; no API tagger was called.
+
+Independent curation review corrected two premature classifications: the Malvern Star row actually claims
+slim/wiry, and financial two-bob-watch usage has contextual attestation. Both remain conditional craft,
+rather than asserted wrong meanings. Galah coverage is explicitly a vocative tag/component. New precise
+concepts distinguish brazen effrontery, frantic movement and frugal subsistence from arrogance, busyness
+and stinginess. The shark/shout pun uses passive conditional wording to bind any subject without inventing
+an object pronoun. No actual shark attack is asserted.
+
+The fetch-boundary fix uses the existing HTML decoder only when HTTP omits a charset. Original response
+bytes/hash remain separate from decoded working text; raw source prose is not redistributed. Explicit HTTP
+charsets, legacy HTML and non-HTML line endings are covered by regressions. Independent review converged
+after the evidence corrections above. Final verification: **2,064 passed, two expected local-corpus skips,
+492.36 seconds**; Ruff, whitespace, dictionary validation and generated-publication checks passed.
+The parent also ran 179 current-document/intake checks; the reviewer independently passed 26 intake/fetch
+checks and read the entire golden diff. The fresh CLI scrape reproduced all reviewed candidate forms.

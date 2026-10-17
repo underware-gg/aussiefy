@@ -11,10 +11,11 @@
 - **The built-in API client has not been run against the live API.** Tagging, `--surface`, `--rewrite` and yarn mode
   are tested with fake clients. The yarn workflow itself has been exercised by agents through its research CLI
   (`research/retellings-2026-10-11/yarn_tools.py`), which shares yarn mode's brief and tools.
-- **The seed source hasn't been scraped.** The original build recorded network restrictions reaching
-  learnconversations.com; that historical failure isn't a current connectivity assessment. Mate, the scraper has
-  synthetic fixtures, and the hand\-curated dictionary'n later research rounds use our own glosses.
-  Acquisition remains a separate task: see [data acquisition](../contributor/data-acquisition.md).
+- **The seed listicle is discovery evidence, not dictionary authority.** It was acquired'n reviewed on
+  2026\-10\-17: 212 normalised candidates yielded ten additions, existin' component coverage'n explicit
+  non\-promotion decisions. Mate, some creative comparisons remain conditional craft rather than executable
+  meanings. See [the decisions](../../research/maintenance-2026-10-17/seed-decisions.yaml) and
+  [data acquisition](../contributor/data-acquisition.md).
 - **Waltzing Matilda still needs exact edition verification.** Its lyrics haven't been compared with an
   accessible scan of Cowan's 1903 sheet music. Well, the Gettysburg fixture was checked on 2026\-10\-15 against the
   [Library of Congress's standard Lincoln Memorial transcription](https://www.loc.gov/exhibits/gettysburg-address/ext/trans-nicolay-inscribed.html):

@@ -94,6 +94,11 @@ BUSY:
   triggers:
     predicate_adj: ["busy@2", "swamped@4", "snowed under@4", "run off {poss} feet@4", "flat out@4",
                     "overloaded@3", "up to {poss} eyeballs@4", "rushed off {poss} feet@4", "slammed@4"]
+FRANTIC_ACTIVITY:
+  description: Rushing around in a frenzy of physical activity.
+  person: true
+  triggers:
+    vp: ["rush around frantically ^end", "run around frantically ^end", "rush about frantically ^end"]
 CRAZY:
   description: Mentally unbalanced, irrational, or acting wildly.
   person: true
@@ -1802,6 +1807,12 @@ SAD:
   person: true
   triggers:
     predicate_adj: ["sad", "unhappy", "miserable@4", "depressed@4", "glum", "gloomy", "feeling down", "feeling low", "despondent@4", "dejected", "downcast@3", "down in the mouth"]
+FRUGAL_LIVING:
+  description: Getting by with very little money or other resources.
+  person: true
+  triggers:
+    vp: ["live on very little ^end", "live on a shoestring ^end", "get by on very little ^end",
+         "subsist on very little ^end"]
 RICH:
   description: Wealthy.
   person: true
@@ -1979,6 +1990,11 @@ SUSPICIOUS:
   description: Suspicious; not quite right.
   triggers:
     predicate_adj: [suspicious]
+BRAZEN:
+  description: Shamelessly audacious behaviour by a person.
+  person: true
+  triggers:
+    predicate_adj: ["brazen ^person", "shamelessly audacious ^person"]
 ARROGANT:
   description: Conceited, stuck-up, thinks too highly of themselves.
   triggers:

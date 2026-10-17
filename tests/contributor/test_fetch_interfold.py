@@ -29,6 +29,8 @@ def test_pinned_pages_are_verbatim_cached_and_skipped_when_present(manifest, tmp
     calls = []
 
     class Response:
+        headers = {}
+
         def raise_for_status(self):
             return None
 
@@ -132,6 +134,7 @@ def test_interrupted_fetch_cache_save_never_creates_a_completed_page(manifest, t
     calls = []
 
     class Response:
+        headers = {}
         text = 'Complete new page.\n'
 
         def raise_for_status(self):

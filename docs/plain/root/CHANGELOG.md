@@ -5,6 +5,8 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Review the original seed listicle, add ten curated expressions with precise senses, and retain a complete
+  decision ledger. Honour declared HTML encodings during acquisition without overriding explicit HTTP charsets.
 - Preserve outer auxiliaries and question grammar, distinguish perfect-have from possession, and retain the
   force of `shall`. Keep restless tossing, object-taking quit, evidentiary establish and wholehearted devotion
   separate from misleading slang senses. Add data-owned complete-verb guards and strip pattern annotations

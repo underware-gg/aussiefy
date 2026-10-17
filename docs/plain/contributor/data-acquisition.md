@@ -116,14 +116,25 @@ to add the concept, map the entry to an existing one, or drop it.
 
 ## The seed listicle
 
-The original brief's seed source, a "funny Aussie old sayings" listicle, has not been scraped (see
-[limitations](../functional/limitations.md)). To bring it in, run with access to the source site:
+The original brief's [seed listicle](https://learnconversations.com/funny-aussie-old-sayings-and-phrases/)
+was acquired on 2026-10-17. The fetcher now honours a declared HTML encoding when the HTTP response omits
+its charset; an explicit HTTP charset wins, and non-HTML text retains its existing decoding. Previously
+cached corrupted pages need `--refresh`:
 
 ```sh
-aussiefy dev scrape https://learnconversations.com/funny-aussie-old-sayings-and-phrases/
+aussiefy dev scrape --refresh https://learnconversations.com/funny-aussie-old-sayings-and-phrases/
 ```
 
-then `tag` and `review`. Its known problems are already flagged in `aussiefy/data/entries/flagged.yaml`. "That'll
+The review covered 227 raw rows and 212 normalised candidates. Ten entries were promoted through the normal
+validated review boundary, using manually authored proposals and original glosses; the API tagger was not
+called. Of the remainder, 88 have existing term/variant/component coverage, 100 remain craft or verification
+notes, three proposed senses were declined, five rows were metadata, and six retain existing gate/omit
+decisions. Component coverage does not promise automatic replacement of a whole sentence. The complete
+[decision ledger](../../../research/maintenance-2026-10-17/seed-decisions.yaml) and
+[proposals](../../../research/maintenance-2026-10-17/seed-proposals.yaml) retain the review. Raw HTML,
+copied meanings and usage examples remain temporary, outside the repository.
+
+The source's known problems remain flagged in `aussiefy/data/entries/flagged.yaml`. "That'll
 do, pig", "cruisin' for a bruisin'", "that dog won't hunt" and "throw another shrimp on the barbie" are omitted.
 "All hat and no cattle" (Texan) and "bugger me sideways'n call me the pope" (no attestation found) are gated.
 Both appear in the brief's sample output, so `--unlock not_aussie,fabricated` brings that flavour back.

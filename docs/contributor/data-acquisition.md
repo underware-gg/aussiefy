@@ -62,12 +62,12 @@ Harvestin' is candidate discovery, not attestation. Review each expression again
 triggers'n dialect swaps before adding it. Anyway, a newly written comparison can be useful without being a
 sayin' in common use: keep it as optional colour in `riffs.yaml`, attached to a term whose meaning it suits,
 rather than inventin' a plain\-English trigger for it. Riffs must read naturally after their term'n respect
-the same vulgarity'n document controls as existin' colour. Retain the source, persona and decision for
+the same vulgarity'n document controls as existin' colour. Fair dinkum, retain the source, persona and decision for
 each research candidate; a persona is a writin' brief, not a new engine setting.
 
 ## Research rounds
 
-Fair dinkum, research rounds are the bigger route in: subagents extract or propose candidates, verifiers check each one
+Research rounds are the bigger route in: subagents extract or propose candidates, verifiers check each one
 under a brief, and `aussiefy dev round research/<round>` applies the verdicts. Run it without `--write` first to
 see what it would add'n drop, and why; `--write` validates the result in a scratch copy before touching the
 dictionary. Each round's `README.md` says how it was run'n how to repeat it, and, for a round applied this way,
@@ -120,14 +120,25 @@ to add the concept, map the entry to an existin' one, or drop it.
 
 ## The seed listicle
 
-The original brief's seed source, a "funny Aussie old sayings" listicle, hasn't been scraped \(see
-[limitations](../functional/limitations.md)). To bring it in, run with access to the source site:
+The original brief's [seed listicle](https://learnconversations.com/funny-aussie-old-sayings-and-phrases/)
+was acquired on 2026\-10\-17. The fetcher now honours a declared HTML encodin' when the HTTP response omits
+its charset; an explicit HTTP charset wins, and non\-HTML text retains its existin' decoding. Previously
+cached corrupted pages need `--refresh`:
 
 ```sh
-aussiefy dev scrape https://learnconversations.com/funny-aussie-old-sayings-and-phrases/
+aussiefy dev scrape --refresh https://learnconversations.com/funny-aussie-old-sayings-and-phrases/
 ```
 
-then `tag` and `review`. Its known problems are already flagged in `aussiefy/data/entries/flagged.yaml`. "That'll
+The review covered 227 raw rows and 212 normalised candidates. Ten entries were promoted through the normal
+validated review boundary, using manually authored proposals'n original glosses; the API tagger wasn't
+called. Mate, of the remainder, 88 have existin' term/variant/component coverage, 100 remain craft or verification
+notes, three proposed senses were declined, five rows were metadata, and six retain existin' gate/omit
+decisions. Struth, component coverage doesn't promise automatic replacement of a whole sentence. The complete
+[decision ledger](../../research/maintenance-2026-10-17/seed-decisions.yaml) and
+[proposals](../../research/maintenance-2026-10-17/seed-proposals.yaml) retain the review. Raw HTML,
+copied meanings'n usage examples remain temporary, outside the repository.
+
+The source's known problems remain flagged in `aussiefy/data/entries/flagged.yaml`. "That'll
 do, pig", "cruisin' for a bruisin'", "that dog won't hunt" and "throw another shrimp on the barbie" are omitted.
 "All hat and no cattle" (Texan) and "bugger me sideways'n call me the pope" (no attestation found) are gated.
 Both appear in the brief's sample output, so `--unlock not_aussie,fabricated` brings that flavour back.

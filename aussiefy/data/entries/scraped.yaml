@@ -1,4 +1,123 @@
 # Entries accepted from the scrape/tag/review pipeline. Machine-managed:
 # `aussiefy dev review --apply` rewrites this file. Move an entry to a hand-curated
 # file once you have edited it by hand.
-[]
+
+- id: on-your-bike
+  form: on your bike
+  variants: [on ya bike, on yer bike]
+  concept: [GO_AWAY]
+  frame: imperative
+  incoherence: 3
+  gloss: Go away; a dismissive command.
+  notes: Shared with British English. A dismissal, not an instruction to ride a bicycle.
+  sources:
+  - https://learnconversations.com/funny-aussie-old-sayings-and-phrases/
+  - https://aussieenglish.com.au/ae-1337-the-goss-do-you-know-these-21-common-aussie-slang-terms/
+
+- id: legless
+  form: legless
+  concept: [DRUNK]
+  frame: predicate_adj
+  intensity: 5
+  incoherence: 3
+  gloss: Extremely drunk.
+  notes: Alcohol sense, not a physical disability.
+  sources: ['https://learnconversations.com/funny-aussie-old-sayings-and-phrases/']
+
+- id: blue-arsed-fly
+  form: run around like a blue-arsed fly
+  concept: [FRANTIC_ACTIVITY]
+  frame: vp
+  intensity: 4
+  vulgarity: 2
+  incoherence: 4
+  gloss: Rush about in a frenzy of activity.
+  notes: Shared with British English; requires frantic movement, not merely having work to do.
+  sources:
+  - https://learnconversations.com/funny-aussie-old-sayings-and-phrases/
+  - https://api.pageplace.de/preview/DT0400.9781317372523_A25195626/preview-9781317372523_A25195626.pdf
+
+- id: on-pigs-back
+  form: on the pig's back
+  concept: [RICH]
+  frame: predicate_adj
+  incoherence: 4
+  gloss: In comfortable financial circumstances.
+  notes: Shared with Irish English; financial prosperity sense, not literal pig riding.
+  sources:
+  - https://learnconversations.com/funny-aussie-old-sayings-and-phrases/
+  - https://wordhistories.net/2022/02/08/on-the-pigs-back/
+
+- id: wouldnt-shout-shark
+  form: '{subj} wouldn''t shout if bitten by a shark'
+  concept: [STINGY]
+  frame: clause
+  slots: {subj: pronoun}
+  intensity: 4
+  incoherence: 4
+  gloss: So stingy that buying a round is out of the question.
+  notes: Pun on shouting drinks. The source's couldn't is corrected to wouldn't. Passive wording binds any subject
+    without inventing an object pronoun; no actual shark attack is asserted.
+  sources:
+  - https://learnconversations.com/funny-aussie-old-sayings-and-phrases/
+  - https://www.oup.com.au/__data/assets/file/0026/105686/ozwords_april2016.pdf
+
+- id: live-on-smell-oily-rag
+  form: live on the smell of an oily rag
+  concept: [FRUGAL_LIVING]
+  frame: vp
+  intensity: 4
+  incoherence: 4
+  gloss: Get by with very little money or other resources.
+  notes: Shared with New Zealand English. Living with little is not stinginess, literal odour or mechanical neglect.
+  sources:
+  - https://learnconversations.com/funny-aussie-old-sayings-and-phrases/
+  - https://www.aph.gov.au/parliamentary_business/committees/house_of_representatives_committees?url=cita%2Fcommunity_broadcasting%2Fsubs%2Fsub3.1.pdf
+
+- id: over-the-moon
+  form: over the moon
+  concept: [HAPPY]
+  frame: predicate_adj
+  intensity: 4
+  incoherence: 3
+  gloss: Extremely pleased.
+  notes: Shared English idiom, used in Australia.
+  sources: ['https://learnconversations.com/funny-aussie-old-sayings-and-phrases/']
+
+- id: chuffed-to-bits
+  form: chuffed to bits
+  concept: [HAPPY]
+  frame: predicate_adj
+  intensity: 4
+  incoherence: 3
+  gloss: Very pleased or delighted.
+  notes: Shared with British English.
+  sources: ['https://learnconversations.com/funny-aussie-old-sayings-and-phrases/']
+
+- id: dry-as-nuns-nasty
+  form: dry as a nun's nasty
+  variants: [as dry as a nun's nasty]
+  concept: [THIRSTY]
+  frame: predicate_adj
+  intensity: 4
+  vulgarity: 2
+  incoherence: 4
+  gloss: Very thirsty.
+  notes: Vulgar sexual comparison. Person thirst sense only here; do not convert dry technical prose or literal
+    dryness.
+  sources:
+  - https://learnconversations.com/funny-aussie-old-sayings-and-phrases/
+  - https://alanwood.id.au/aussie-english/n.html
+
+- id: more-front-than-myer
+  form: '{subj} {have} more front than Myer'
+  concept: [BRAZEN]
+  frame: clause
+  slots: {subj: pronoun, have: verb_agree}
+  intensity: 4
+  incoherence: 4
+  gloss: Openly and shamelessly audacious.
+  notes: Front means effrontery, not a shop facade or generic self-confidence. Myer is the store name.
+  sources:
+  - https://learnconversations.com/funny-aussie-old-sayings-and-phrases/
+  - https://hansardsearch.parliament.sa.gov.au/daily/lh/2005-04-12/pdf/download

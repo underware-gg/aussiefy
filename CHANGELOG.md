@@ -9,9 +9,11 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Review the original seed listicle, add ten curated expressions with precise senses, and retain a complete
+  decision ledger. Honour declared HTML encodings during acquisition without overriding explicit HTTP charsets.
 - Preserve outer auxiliaries'n question grammar, distinguish perfect\-have from possession, and retain the
-  force of `shall`. Keep restless chucking, object\-taking pull the pin, evidentiary establish'n wholehearted mateship
-  separate from misleading slang senses. Mate, add data\-owned complete\-verb guards'n strip pattern annotations
+  force of `shall`. Well, keep restless chucking, object\-taking pull the pin, evidentiary establish'n wholehearted mateship
+  separate from misleading slang senses. Jeez Louise, add data\-owned complete\-verb guards'n strip pattern annotations
   consistently before language matching'n model training.
 - Add reviewed contextual imagery, configurable exaggeration/association defaults, and writer\-only
   suggestions for comparisons needin' semantic or grammatical judgement. Direct suffixes share riff budgets.
@@ -113,7 +115,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 - **Dinkum\-check dictionary round** (`research/dinkum-check-round-2026-10-14/DECISIONS.md`): 67 rows from the
   check's yarn agents reviewed. New: stuff up, stuff {obj} up, a stuff\-up, under the pump \(of a person\), not know
   someone from a bar of soap, spitting \(light rain\), a swag of; pull the pin takes pulling the pin, all over the shop
-  `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Fair dinkum, wrong senses
+  `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Crikey, wrong senses
   fixed in data: heaps for counted heaps, every bloke'n his dog and old fella outta the formal genres, littlie
   for a policy's kid, the whole box'n dice for `"everything from"`; rain only for the weather's `"it"` (not fans
   pouring onto a street, tears pouring down, or tea poured\).
@@ -136,7 +138,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   a fair whack\), hire, per cent'n roadworks in the dialect table; 63 covered or skipped. The fourth pass's wrong
   senses fixed in data: bush for a legal bush, Parliament House for a US Congress, knock together for any
   build, pressie for a policy's gift, tucker'n quid in the wrong places, and lint's LEAVE, heaps, bugger all,
-  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Jeez, engine limits found are listed in DECISIONS.
+  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Fair dinkum, engine limits found are listed in DECISIONS.
 - **The fourth pass's next steps:**
   - A storyteller's openings follow the genre's form at every settin', troppo's too \(an obituary isn't opened
     `"Fair dinkum, this happened."`), and `"Okay, so."` is gone from the openings.
@@ -172,7 +174,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
     `judge.yaml`.
 - **Embedder:** a 1.3.0 retrain on the grown dictionary stopped at the reference gate \(32/33: `"a top bloke"` reaches
   a mongrel's gloss\) and wasn't clearly better, so 1.2.0 stays bundled \(`training/README.md`,
-  `training/reports/trials/1.3.0-trial-2026-10-14.json`). Crikey, the third pass's lookup misses \(`"harmless"`, `"probably"`)
+  `training/reports/trials/1.3.0-trial-2026-10-14.json`). The third pass's lookup misses \(`"harmless"`, `"probably"`)
   are in the reference set as known failures.
 - **Third\-pass dictionary round** (`research/third-pass-round-2026-10-13/DECISIONS.md`): 24 entries from the
   terms the third pass's agents reached for \(pull the pin on, drag the chain, nut out, give someone a ring, here's

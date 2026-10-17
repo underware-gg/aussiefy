@@ -86,6 +86,14 @@ def fetch(url: str, cache_dir: str | Path | None = None, delay: float = 2.0, ref
         raise FetchError(f"{url}: {exc}") from exc
     finally:
         _last_fetch = time.monotonic()
+    content_type = resp.headers.get("Content-Type", "")
+    if (content_type.split(";", 1)[0].strip().lower() in {"text/html", "application/xhtml+xml"}
+            and not re.search(r";\s*charset\s*=", content_type, re.I)):
+        from bs4 import UnicodeDammit
+
+        # requests defaults text/html to Latin-1 even when the page declares UTF-8 in a meta tag.
+        # An explicit HTTP charset remains authoritative; non-HTML responses keep requests' decoding.
+        resp.encoding = UnicodeDammit(resp.content, is_html=True).original_encoding
     try:
         save_text(path, resp.text)
     except OSError as exc:
