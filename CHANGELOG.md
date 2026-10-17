@@ -9,9 +9,25 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Mask only actual profanity in `changes` renderings: swear\-list words, the compounds the dictionary's rated
+  words build on one \("fuckwit"\), and the new per\-entry `mask` words for profanity the swear list lacks \("wanker",
+  "dickhead"\), each with the ending a page keeps. Innuendo, insults'n crude words show in full: 25 rated entries
+  with nothing profane \("rooted", "mongrel", "shut your gob"\) are marked `profane: false`, and 5 author mask words.
+  Now, a test holds every other rated entry to a masked word at its rating.
+- Add `aussiefy.translate_changes`: translate's translation with every change it made (swaps, garnish,
+  drawl, swear infixes and US/UK swaps) placed in the output. Each swap comes with its alternatives and its
+  vulgarity-locked options, rendered in place on the engine's own path, with ids, `covers`, `removed` for garnish,
+  maskable words and entry cards. It's built in the same pass, at about 1.1 times translate's cost. The contract's
+  JSON Schema ships in the package. Translation output is unchanged (DD-029).
+- Build entry cards in one place for lookup and the coming `changes` builder: each card carries its entry `id`,
+  and full cards their `sources`. Lookup's result reports the dials only, without `profile_config`, which no
+  lookup reads.
+- Let a hosted MCP server narrow the tools by capability: `build_server()` takes `translator`, `allow_unlock`,
+  `allow_document_config`, `max_chars`, `max_query_chars` and `lookup_limit`, with defaults that serve everything. Annotate every
+  MCP tool as read-only, so clients such as ChatGPT don't ask for confirmation.
 - Stabilise WordNet neighbour selection before trainin'\-pair truncation, preserving sense'n lemma priority.
-  Record current\-model trial limits'n real portable CLI/MCP integration checks without claiming web deployment.
-  So anyway, the fresh full\-data candidate passes 31/33 required checks, so the bundled model remains 1.2.0 \(33/33\).
+  So anyway, record current\-model trial limits'n real portable CLI/MCP integration checks without claiming web deployment.
+  The fresh full\-data candidate passes 31/33 required checks, so the bundled model remains 1.2.0 \(33/33\).
 - Keep negative\-question subjects beside their auxiliary by declinin' the unsafe bloody\-well infix there.
   Preserve capitals such as Australian and English when dictionary vocabulary alone would lowercase them.
   Well, place dialogue tags before punctuation'n curly closing quotes in continued speech.
@@ -134,7 +150,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 - **The dinkum check's fixes** (`research/dinkum-check-2026-10-14/FINDINGS.md`: the voice came back in news and
   official prose, register 3.60 to 4.00, but reached into what the form keeps\):
   - Dinkum's guidance: an obligation, a decision, a finding or a stated aim keeps its verb's weight \(`"we
-    consider you responsible"` Anyway, isn't `"we reckon"`).
+    consider you responsible"` isn't `"we reckon"`).
   - No riffs in news, docs or official prose below troppo, in the engine's draft or the plan's offers: a
     picture of a real thing is a claim \(`"creeks, bone dry half the year"` for Yellowstone\).
   - Lint asks for no dialect swap inside what the original holds as said (a quote news or official prose

@@ -1,8 +1,8 @@
 """Masks (O23): the words in a rendering a reader may not want shown in full, with where each one's ending starts, so
 a page can hide the stem and keep the ending ("f$%&ed") without a swear list of its own. Only actual profanity is
 masked: the dictionary's swear list (swears.yaml), the compounds its rated words build on a listed swear
-(Dictionary.swear_compounds: "fuckwit", "shitfight"), and the mask words an entry authors where its rudeness isn't a
-listed word ("wanker"). Innuendo is never masked."""
+(Dictionary.swear_compounds: "fuckwit", "shitfight"), and the profane words an entry authors that the list lacks
+("wanker"). Innuendo, insults and crude words are never masked (an entry marked `profane: false`)."""
 
 from __future__ import annotations
 

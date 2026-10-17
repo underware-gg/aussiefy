@@ -85,12 +85,12 @@ Further optional fields:
 - `weight` sets an entry's prior.
 - `notes` holds review notes.
 - `key_sha256` lets an omitted entry (for example a slur) block re-scrapes without storing the text.
-- `mask` lists the words a page may hide in the entry's renderings, at its vulgarity, where its rudeness isn't a
-  word on the swear list \(`mask: [wanker]`). Each must be a lower\-case word in one of its forms. They stay outta
-  `swears.yaml` 'cause lint reads that list, and words like "cow" or "gob" would start flaggin' ordinary English.
-- `innuendo: true` marks an entry whose rudeness is innuendo, or a rude image in ordinary words \("rooted", "have a
-  root"\). Nothing in it's masked. Bugger me, a test fails when an active entry rated 1 or more has neither a masked word
-  at its rating nor this mark \([changes](changes.md#masks)).
+- `mask` lists the profane words a page may hide in the entry's renderings, at its vulgarity, where they aren't
+  on the swear list \(`mask: [wanker]`). Each must be a lower\-case word in one of its forms. They stay outta
+  `swears.yaml` 'cause lint reads that list.
+- `profane: false` marks an entry rated 1 or more with no profanity in it: innuendo \("rooted", "have a root"\), an
+  insult \("mongrel"\) or a crude word \("shut your gob"\). Nothing in it's masked. So anyway, a test fails when an active entry
+  rated 1 or more has neither a masked word at its rating nor this mark \([changes](changes.md#masks)).
 - `type: garnish` entries carry `placement` (connective, opener, tag, aside, tail or closer\), an optional
   `when` (the sentence contexts they suit\) and an optional `stretch` (vowel\-stretch the closer, as in
   "Faaaaaark me").

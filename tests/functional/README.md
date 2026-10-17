@@ -23,7 +23,7 @@ python -m pytest -q tests/functional
 | [test_markdown_composition.py](test_markdown_composition.py) | Shared document state and sentence-safe garnish |
 | [test_changes.py](test_changes.py) | The `changes` contract: spans for every kind, ids, locked options, cards, schema, fixtures and Markdown |
 | [test_changes_oracle.py](test_changes_oracle.py) | Every rendered alternative, locked option and garnish removal against a pinned whole re-render |
-| [test_masks.py](test_masks.py) | Maskable words and kept endings, entry mask words, innuendo, and every rated entry masked at its rating |
+| [test_masks.py](test_masks.py) | Maskable words and kept endings, entry mask words, `profane: false`, and every rated entry masked at its rating |
 | [test_engine.py](test_engine.py) | Detection, realisation, dials, drawl and garnish |
 | [test_everyday_reference.py](test_everyday_reference.py) | Bounded everyday corpus regression checks |
 | [test_gaps.py](test_gaps.py) | Gap-finding results |

@@ -82,10 +82,11 @@ the first letter and the ending (`f$%&ed`). Only actual profanity is masked:
 - compounds built on a listed swear ("fuckwit", "shitfight", "bullshitter"), as the dictionary's own rated
   entries and riffs use them (`Dictionary.swear_compounds`). An ordinary word that happens to hold one
   ("cocktail", "cocky") is never one, and nor is a compound in the reader's own text;
-- the mask words an entry authors where its rudeness isn't a listed word (`mask: [wanker]`), in that entry's own
-  renderings (a stacked idiom's too), at the entry's vulgarity.
+- the profane words an entry authors where they aren't listed (`mask: [wanker]`), in that entry's own renderings
+  (a stacked idiom's too), at the entry's vulgarity.
 
-Innuendo is never masked: an entry marked `innuendo: true` ("rooted", "have a root") shows in full. An ending is
+Innuendo, insults and crude words that aren't profanity are never masked: an entry marked `profane: false`
+("rooted", "mongrel", "shut your gob") shows in full. An ending is
 kept only after a stem that is itself a listed swear or a mask word (`-s`, `-es`, `-ed`, `-er`, `-ers`, `-ing`,
 `-in'`, `-in`, `-y`): "fucked" keeps "ed", "fuckin'" keeps "in'", "arseholes" keeps "s". Any other word, a
 compound included, is masked whole after its first letter, so `ending_start` is its end ("bullshit"). Where a

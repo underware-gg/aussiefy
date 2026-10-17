@@ -33,7 +33,9 @@ unchanged text before the spot and reads the whole text's context. A region wide
 its edge or a neighbour's lookaround reads it. A spot's options share one region.
 
 The output is the `changes` contract, version 1, with a JSON Schema in the package. Ids are each change's kind
-and source span. Every rendering lists its maskable words.
+and source span. Every rendering lists its maskable words, and only profanity is masked: swear-list words, the
+compounds the dictionary's rated words build on one, and the profane words an entry authors (`mask`). An entry
+whose rudeness is innuendo, an insult or a crude word is marked `profane: false` and shows in full.
 
 It's offered as `aussiefy.translate_changes`, with translate's parameters, and not on the CLI, the MCP tools or
 yarn mode. This departs from DD-008's surface parity on purpose: the contract serves a host that edits a
