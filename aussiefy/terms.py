@@ -27,9 +27,13 @@ def fold(text: str) -> str:
     return " ".join(t.split())
 
 
+def _pattern_text(text: str) -> str:
+    return re.sub(r"@\d|(?<!\w)(?:!\S+|\^\w+)", " ", fold(text))
+
+
 def strip_markup(text: str) -> str:
     """A trigger or form as plain words: no intensity ("great@4"), sense exclusions ("!war|wars") or slots."""
-    t = re.sub(r"@\d|(?<!\w)!\S+", " ", fold(text))
+    t = _pattern_text(text)
     return " ".join(PLACEHOLDER_RE.sub(" ", t).split())
 
 
@@ -41,8 +45,7 @@ def restore_g(text: str) -> str:
 
 def form_key(text: str) -> str:
     """The spelling-insensitive key of a term or dictionary form."""
-    t = fold(text)
-    t = re.sub(r"@\d|(?<!\w)!\S+", " ", t)                      # trigger markup: "great@4", "!war|wars"
+    t = _pattern_text(text)
     t = re.sub(r"\{poss\}self", "self", t)                      # top {poss}self ~ top yourself
     t = PLACEHOLDER_RE.sub(" ", t)
     t = re.sub(r"\b(?:your|my|him|her|them|our|it)sel(?:f|ves)\b", "self", t)

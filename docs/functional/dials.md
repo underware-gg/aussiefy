@@ -64,9 +64,12 @@ per 100 words are flat across levels 2\-5 at each vulgarity \(`dad` about 1, `un
 Anyway, australian spellin' \(honoured, colour, organise, grey, mum\) applies at every level, whatever the dials say.
 The rules are in `aussiefy/data/phonetic.yaml` with `kind: spelling`, and the Labor Party keeps its name.
 
+The drawl preserves `shall`, including deliberative questions, embedded questions, obligations'n declarations.
+Its force can't safely be inferred from punctuation alone. Ordinary `will` still takes its usual contractions.
+
 ## Embellishment
 
-Fair dinkum, the third dial controls liberty in the tellin': `deadset` (0\) keeps it straight, `dinkum` (1\) permits limited
+Anyway, the third dial controls liberty in the tellin': `deadset` (0\) keeps it straight, `dinkum` (1\) permits limited
 colour, and `troppo` (2\) permits a performance. General defaults to Dinkum. A named document type supplies its
 own default; Auto opts into detectin' that type. So anyway, explicit embellishment wins over the type's default, and
 exact advanced behaviour overrides win after both. Custom enables only explicitly configured behaviours.

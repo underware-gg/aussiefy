@@ -21,9 +21,9 @@ Bugger me, names'n repository paths can't traverse directories; output filenames
 uses the shared home cache'n atomic persistence. Failed pages are reported individually, complete previous
 files keep on kickin' interrupted writes, and a repeated run can recover. Symlinks/directories are rejected as page
 outputs. The dictionary acquisition command `dev scrape` separately enforces the reference\-only source
-policy; generic corpus ingestion doesn't kick off permission to extract or redistribute a source.
+policy; generic corpus ingestion doesn't establish permission to extract or redistribute a source.
 
-Ingesting a source doesn't kick off redistribution rights. Remote\-only manifests write into ignored local
+Ingesting a source doesn't establish redistribution rights. Remote\-only manifests write into ignored local
 storage; committed corpus needs the [provenance gate](licensing.md). Stone the crows, the 15 pinned Interfold MDX pages retain
 LGPL attribution, while Rockwell/Kieran sources'n full research exports remain local.
 

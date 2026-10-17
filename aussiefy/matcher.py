@@ -49,6 +49,7 @@ class Pattern:
     person_only: bool = False     # "^person": the subject must be a person ("the tank is full" isn't)
     before_modifier: bool = False  # "^adj": the next word must be an adjective or adverb ("really cold", not
                                    # "really think" or "really it was")
+    clause_end: bool = False      # "^end": no following complement; adverbial tails may precede the boundary
 
     @property
     def slots(self) -> set[str]:
@@ -72,9 +73,13 @@ def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_in
     if m:
         intensity = int(m.group(1))
         text = text[: m.start()].rstrip()
-    person_only = " ^person" in f" {text}"
-    before_modifier = " ^adj" in f" {text}"
-    text = text.replace("^person", "").replace("^adj", "").strip()
+    directives = {part for part in text.split() if part.startswith("^")}
+    if directives - {"^person", "^adj", "^end"}:
+        raise ValueError(f"unknown pattern directives: {sorted(directives - {'^person', '^adj', '^end'})}")
+    person_only, before_modifier, clause_end = (key in directives for key in ("^person", "^adj", "^end"))
+    text = re.sub(r"(?<!\S)\^(?:person|adj|end)(?=\s|$)", "", text).strip()
+    if clause_end and frame not in {"vp", "clause"}:
+        raise ValueError("^end is only supported for verb-phrase and clause patterns")
     raw_parts = text.split()
     last_word = max((i for i, p in enumerate(raw_parts) if not p.startswith("!")), default=0)
     elements: list[Element] = []
@@ -125,7 +130,7 @@ def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_in
             raise ValueError(f"alternatives must be single words in pattern {text!r}")
     if not any(e.kind == "lit" and not e.optional for e in elements):
         raise ValueError(f"pattern {text!r} needs at least one required literal word")
-    return Pattern(text, tuple(elements), frame, concepts, intensity, entry_id, person_only, before_modifier)
+    return Pattern(text, tuple(elements), frame, concepts, intensity, entry_id, person_only, before_modifier, clause_end)
 
 
 def is_name(tok: Token) -> bool:

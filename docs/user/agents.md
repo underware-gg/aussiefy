@@ -8,7 +8,7 @@ Language models write good Australian English when they have ridgy\-didge source
 gives an agent both, through the same six operations \(lookup, lint, guide, plan, translate, verify\) on every surface.
 The operations themselves are described in the [toolkit reference](../functional/toolkit.md).
 
-The workflow is the same everywhere: knock together the **brief** and dials, read the **guide**, get the engine's
+The workflow is the same everywhere: establish the **brief** and dials, read the **guide**, get the engine's
 **plan**, write the text with **lookups**, **lint** and fix it, **verify** against the original, then
 **deliver**. Run `aussiefy guide` for the canonical workflow'n craft guidance, filtered to yer settings.
 Anyway, use the same dials, document overrides'n markup mode throughout. The plan's `note` explains how to use

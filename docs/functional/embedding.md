@@ -51,5 +51,5 @@ All options are in the [CLI reference](cli.md). State lives in `$AUSSIEFY_HOME` 
 The [2026-10-15 maintenance check](../../research/maintenance-check-2026-10-15/README.md) repeats the bundled
 1.2.0 reference'n gap benchmarks without retraining, and records actual toolkit lookups separately. All 33
 required raw\-model references pass; 16 known failures remain. Crikey, a larger dictionary changes benchmark difficulty,
-so these numbers don't knock together improvement against the older trainin' reports. The current weights remain
+so these numbers don't establish improvement against the older trainin' reports. The current weights remain
 bundled; automatic gap fillin' remains off by default.

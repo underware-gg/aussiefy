@@ -10,7 +10,7 @@ from .matcher import NP_BOUNDARY, is_name
 from .schema import Entry
 from .text import Token, capital_is_positional
 
-QUESTION_RE = re.compile(r"^\{subj\}\s+(?:\{(\w+)\}|(\S+))\s*(.*)$")
+QUESTION_RE = re.compile(r"^\{subj\}\s+\{(be|have|do)\}\s+(.+)$")
 ARTICLES = {"a", "an", "the"}
 
 # --- a noun phrase's determiner and number -------------------------------------------------------------------
@@ -122,6 +122,19 @@ REFLEXIVES = {"hisself": "himself", "theirself": "themselves", "ourself": "ourse
 REFLEXIVE_RE = re.compile(r"\b(" + "|".join(REFLEXIVES) + r")\b", re.I)
 
 
+def question_form(form: str) -> str | None:
+    """Invert a modular clause. Fixed finite/negative idioms need an explicit question form instead."""
+    if form.startswith("there {be} "):
+        return "{be} there " + form[len("there {be} "):]
+    m = QUESTION_RE.fullmatch(form)
+    if not m:
+        return None
+    slot, rest = m.groups()
+    if slot == "be" or slot == "have" and morph.is_participle(rest.split()[0]):
+        return "{" + slot + "} {subj} " + rest
+    return "{do} {subj} " + slot + " " + rest
+
+
 def replacement_span(entry: Entry, det: Detection, sent: list[Token]) -> tuple[int, int]:
     """Token range (sentence-local) the realised entry replaces."""
     if entry.frame == "clause" and det.clause_start is not None:
@@ -188,17 +201,9 @@ def realise(entry: Entry, form: str, det: Detection) -> str:
             and verb.norm in ("are", "were", "'re") and subj not in ("you", "i"):
         text = entry.plural
 
-    if entry.frame == "clause" and det.question and text.startswith("there {be} "):
-        text = "{be} there " + text[len("there {be} "):]
-    elif entry.frame == "clause" and det.question:
-        m = QUESTION_RE.match(text)
-        if m:
-            slot, literal, rest = m.groups()
-            if slot == "be":
-                text = "{be} {subj} " + rest
-            else:
-                base = {"have": "have", "do": "do"}.get(slot, literal)
-                text = "{do} {subj} " + base + (" " + rest if rest else "")
+    if entry.frame == "clause" and det.question:
+        text = question_form(text)
+        assert text is not None, "selection must reject clauses without a supported question form"
 
     values = {
         "subj": _subject_text(subj_tok),

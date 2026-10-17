@@ -205,7 +205,8 @@ def predicate_context(tokens: list[Token], start: int) -> PredicateContext | Non
         verb = tokens[j]
         k = j - 1
         subj = tokens[k] if k >= 0 and SLOT_MATCHERS["subj"](tokens[k]) else None
-        return PredicateContext(absorbed, boost, subj, verb, k if subj else None, False)
+        governed = k > 0 and tokens[k - 1].norm in VERB_LEADERS | VERB_CHAIN
+        return PredicateContext(absorbed, boost, subj, verb, k if subj and not governed else None, False)
     if SLOT_MATCHERS["subj"](tokens[j]) and j >= 1 and tokens[j - 1].norm in morph.BE_FORMS:
         return PredicateContext(absorbed, boost, tokens[j], tokens[j - 1], j - 1, True)
     return None
@@ -229,6 +230,14 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
         # "she sits down": "plonks herself down". Only for {poss}: the subject may not be what later slots agree
         # with ("I believe it has" -> "I reckon it has")
         det.captures.setdefault("agent", tokens[m.start - 1])
+    if p.frame == "clause" and m.start > 0 and tokens[m.start - 1].norm in VERB_LEADERS | VERB_CHAIN:
+        return None  # An outer auxiliary must not be stranded before an independently finite clause.
+    if p.clause_end:
+        end = m.end
+        while end < len(tokens) and tags is not None and tags[end] in {"RB", "RBR", "RBS"}:
+            end += 1
+        if not at_clause_end(tokens, end, conjunctions=True):
+            return None
     if p.frame == "np" and m.end - m.start > 1 and first.norm in morph.POSSESSIVES:
         det.captures.setdefault("poss", first)   # "his wife": the possessive a "{poss} missus" keeps
     noun_limits = (adjective_nouns or {}).get(first.norm)

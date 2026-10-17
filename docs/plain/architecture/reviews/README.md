@@ -6,6 +6,7 @@ commands that have since been renamed. Decisions they led to are recorded in [de
 
 | Review | Summary |
 |---|---|
+| [design-review-2026-10-17-fidelity-maintenance.md](../../../architecture/reviews/design-review-2026-10-17-fidelity-maintenance.md) | Finite questions, modal force, complete-phrase guards and precise senses |
 | [design-review-2026-10-17-contextual-imagery.md](../../../architecture/reviews/design-review-2026-10-17-contextual-imagery.md) | Precise imagery meanings, writer boundaries and shared riff budgets |
 | [design-review-2026-10-17-vocabulary-harvest.md](../../../architecture/reviews/design-review-2026-10-17-vocabulary-harvest.md) | Curated vocabulary and optional imagery, source-linked persona harvest, sign protection and scratch replay |
 | [design-review-2026-10-16-judge-contract-and-heldout.md](../../../architecture/reviews/design-review-2026-10-16-judge-contract-and-heldout.md) | Full production judge settings, legacy protocol compatibility and six-source repeat-judge evidence |

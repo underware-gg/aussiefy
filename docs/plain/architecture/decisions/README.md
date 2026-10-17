@@ -46,6 +46,7 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 | [DD-023](../../../architecture/decisions/dd-023-agent-neutral-retelling.md) | Share agent-neutral retelling contracts and keep client integrations at the edge | Accepted |
 | [DD-024](../../../architecture/decisions/dd-024-contract-aware-judging.md) | Give agent/API judges the complete effective writing contract while preserving legacy protocols | Accepted |
 | [DD-025](../../../architecture/decisions/dd-025-contextual-imagery.md) | Contextual imagery with explicit writer and engine boundaries | Accepted |
+| [DD-026](../../../architecture/decisions/dd-026-finite-clauses-and-sense-boundaries.md) | Preserve finite-clause grammar and ambiguous senses | Accepted |
 
 ## By topic
 

@@ -60,6 +60,9 @@ per 100 words are flat across levels 2-5 at each vulgarity (`dad` about 1, `uncl
 Australian spelling (honoured, colour, organise, grey, mum) applies at every level, whatever the dials say.
 The rules are in `aussiefy/data/phonetic.yaml` with `kind: spelling`, and the Labor Party keeps its name.
 
+The drawl preserves `shall`, including deliberative questions, embedded questions, obligations and declarations.
+Its force cannot safely be inferred from punctuation alone. Ordinary `will` still takes its usual contractions.
+
 ## Embellishment
 
 The third dial controls liberty in the telling: `deadset` (0) keeps it straight, `dinkum` (1) permits limited

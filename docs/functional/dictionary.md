@@ -105,6 +105,9 @@ also start with "there" ("it's impossible" → "there's no bloody way").
 - `word?` for an optional word
 - `!war|deal` to block a sense: neither of the next two words may be one of these, so `great !war` skips "a
   great civil war" but still fires on "a great game"
+- `^person` limits a predicate to a person; `^adj` requires a following modifier
+- `^end` on a verb phrase or clause requires a clause boundary after optional adverbial tails, preservin' complements
+  such as the habit in “quit smoking”; it isn't supported on other frames
 - a trailin' `@N` for intensity
 
 In `vp` patterns the head verb matches any inflection, and in `np` patterns the head noun matches its plural.
@@ -205,3 +208,17 @@ imagery. The matching is deterministic'n conservative, rather than full logical 
 See [selection and configuration](translation-controls.md#contextual-imagery) for the distinction between
 writer suggestions'n automatic insertion. Historical round replays remove images referencing temporarily
 set\-aside concepts in scratch only, while still rejecting genuinely unknown concepts.
+
+## Finite clauses and sense boundaries
+
+Question realisation supports modular subject/be/have/do clauses'n existential there/be clauses. How good is that?
+have inverts directly; lexical possession takes do\-support. Fixed finite or negative clause idioms remain
+available in declarations but are declined in questions when no safe modular question form exists. An outer
+auxiliary such as “could” can't be left before a replacement that brings its own independent finite clause;
+predicate alternatives remain available, preservin' the original auxiliary.
+
+Ambiguous bare “establish” remains unchanged; unambiguous founding phrases retain their idioms. Restless
+“turning and tossing” is held apart from throwing an object. Truthful assurance (“in all honesty”) can use
+“hand on heart”, while wholehearted devotion and bare sincere/solemn manner stay distinct. These are sense
+and grammar rules shared by all document presets; their tests are
+[the fidelity regressions](../../tests/functional/test_fidelity_maintenance.py).

@@ -47,4 +47,6 @@ python -m pytest -q tests/functional
 
 | [test_contextual_imagery.py](test_contextual_imagery.py) | Context, grammar, imagery dials and shared riff budgets |
 
+| [test_fidelity_maintenance.py](test_fidelity_maintenance.py) | Modal/question grammar and meaning boundaries for devotion, tossing, quit and establish |
+
 Shared fixtures, corpus inputs and helpers live at [tests root](../README.md).

@@ -187,6 +187,17 @@ def is_past(word: str) -> bool:
     """A simple past verb form: irregular ("went"), or regular -ed ("consented"; not "need" or "indeed")."""
     w = word.lower()
     return w in PAST_IRREGULAR or (len(w) > 4 and w.endswith("ed") and w not in ("need", "indeed"))
+
+
+PARTICIPLE_IRREGULAR = frozenset(v[2] for v in IRREGULAR.values())
+
+
+def is_participle(word: str) -> bool:
+    w = word.lower()
+    return w in PARTICIPLE_IRREGULAR or (
+        len(w) > 4 and w.endswith("ed") and w not in ("need", "indeed"))
+
+
 VERB_FORMS = ("base", "3sg", "past", "pp", "ing")
 
 

@@ -11,7 +11,7 @@
   prob: 1.0
   min_level: 4
 - id: will-not-wont
-  match: "(?i)\\b(?:will|shall) not\\b"
+  match: "(?i)\\bwill not\\b"
   replace: "won't"
   prob: 1.0
   min_level: 4
@@ -54,16 +54,11 @@
   replace: "\\1's "
   prob: 1.0
   min_level: 4
-- id: shall-will-ll
-  match: "(?i)\\b(I|we|they|you|he|she|it|this \\w+|that \\w+) (?:shall|will)\\b(?! not)"
+- id: shall-will-ll  # historical ID retained for seeded rolls; shall keeps its modal force
+  match: "(?i)\\b(I|we|they|you|he|she|it|this \\w+|that \\w+) will\\b(?! not)"
   replace: "\\1'll"
   prob: 1.0
   min_level: 4
-- id: shall-will
-  match: "(?i)\\bshall\\b"
-  replace: "will"
-  prob: 0.9
-  min_level: 5
 
 # --- drawl ---------------------------------------------------------------------
 - id: dont-know-dunno

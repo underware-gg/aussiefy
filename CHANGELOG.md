@@ -9,6 +9,10 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Preserve outer auxiliaries'n question grammar, distinguish perfect\-have from possession, and retain the
+  force of `shall`. Keep restless chucking, object\-taking pull the pin, evidentiary establish'n wholehearted mateship
+  separate from misleading slang senses. Mate, add data\-owned complete\-verb guards'n strip pattern annotations
+  consistently before language matching'n model training.
 - Add reviewed contextual imagery, configurable exaggeration/association defaults, and writer\-only
   suggestions for comparisons needin' semantic or grammatical judgement. Direct suffixes share riff budgets.
 - Revisit all 163 previously unadded/rejected reference\-harvest rows; add 10 entries and 22 contextual images,
@@ -335,7 +339,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 
 - Translate Markdown prose explicitly through the API/toolkit, CLI and MCP while retaining protected
-  source'n stable headings. Now, report honest per\-unit offsets and explanations; give LLM the flick/model modes
+  source'n stable headings. Report honest per\-unit offsets and explanations; give LLM the flick/model modes
   before loading or calling. Plain engine/plan behaviour remains unchanged.
 
 - Organise tests by user, functional, architecture'n contributor ownership, with layer indexes and

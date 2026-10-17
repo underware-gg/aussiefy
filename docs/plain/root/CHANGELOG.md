@@ -5,6 +5,10 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Preserve outer auxiliaries and question grammar, distinguish perfect-have from possession, and retain the
+  force of `shall`. Keep restless tossing, object-taking quit, evidentiary establish and wholehearted devotion
+  separate from misleading slang senses. Add data-owned complete-verb guards and strip pattern annotations
+  consistently before language matching and model training.
 - Add reviewed contextual imagery, configurable exaggeration/association defaults, and writer-only
   suggestions for comparisons needing semantic or grammatical judgement. Direct suffixes share riff budgets.
 - Revisit all 163 previously unadded/rejected reference-harvest rows; add 10 entries and 22 contextual images,

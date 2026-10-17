@@ -71,8 +71,9 @@ def test_gettysburg_level_five_covers_most_meanings(translated):
         r = translated("gettysburg", 5, seed)
         hit = {c for x in r.records if x.substituted for c in x.det.concepts} & GETTYSBURG_SENSES
         assert len(hit) >= 15, f"s{seed}: only {sorted(hit)}"
-        # full drawl at level 5: no formal uncontracted forms survive
-        assert not re.search(r"\b(can not|shall not|we are|it is|we have come)\b", r.text), r.text
+        # Full drawl contracts ordinary auxiliaries; shall retains its modal force (DD-026).
+        assert not re.search(r"\b(can not|we are|it is|we have come)\b", r.text), r.text
+        assert len(re.findall(r"\bshall\b", r.text)) == len(re.findall(r"\bshall\b", TEXTS['gettysburg']))
 
 
 def test_drawl_starts_at_level_four(translated):

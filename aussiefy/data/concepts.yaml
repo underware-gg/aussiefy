@@ -41,9 +41,19 @@ RESTLESS_SLEEP:
   person: true
   triggers:
     clause:
-    - '{subj} {be} tossing and turning'
+    - '{subj} {be} tossing and turning ^end'
+    - '{subj} {be} turning and tossing ^end'
+    - '{subj} {be} tossing and turning in bed ^end'
+    - '{subj} {be} turning and tossing in bed ^end'
     vp:
-    - toss and turn
+    - toss and turn ^end
+    - turn|turns|turned|turning and toss|tosses|tossed|tossing ^end
+    - toss|tosses|tossed|tossing and turn|turns|turned|turning ^end
+    - turn|turns|turned|turning and toss|tosses|tossed|tossing in bed ^end
+    - toss|tosses|tossed|tossing and turn|turns|turned|turning in bed ^end
+    - toss restlessly ^end
+    - toss about in bed ^end
+    - toss around in bed ^end
 ERRATIC_THINKING:
   description: Thinking in circles without reaching a conclusion.
   person: true
@@ -985,7 +995,7 @@ HEREABOUTS:
 FOUND:
   description: Bring into being; establish.
   triggers:
-    vp: ["bring forth", "establish", "bring into being", "put together",   # not bare "build": "build a house" isn't "kick off"
+    vp: ["bring forth", "bring into being", "put together",   # not bare "build": "build a house" isn't "kick off"
          "throw together"]
 THINK:
   description: Think, believe, suppose.
@@ -1212,9 +1222,13 @@ TACKLE:
   triggers:
     vp: ["get to work on", "tackle", "start on", "dig into", "get going on", "set about"]
 SINCERELY:
-  description: Sincerely, solemnly.
+  description: An explicit assurance of honesty in speaking, not wholehearted effort or affection.
   triggers:
-    adv: ["solemnly", "sincerely", "in all sincerity", "with all {poss} heart", "honestly and truly"]
+    adv: ["in all sincerity", "honestly and truly", "in all honesty"]
+WHOLEHEARTED:
+  description: Wholehearted effort, devotion or affection; not an assertion of truthfulness.
+  triggers:
+    adv: ["with all {poss} heart", "wholeheartedly"]
 EVERYTHING:
   description: The whole lot.
   triggers:
@@ -1576,7 +1590,7 @@ RETIRE:
 QUIT:
   description: Quit, give up.
   triggers:
-    vp: ["quit !of", "give up", "call it quits", "resign", "throw in the towel"]   # "be quit of them": be rid
+    vp: ["quit !of ^end", "give up ^end", "call it quits ^end", "resign ^end", "throw in the towel ^end"]   # "be quit of them": be rid
 FED_UP:
   description: Fed up; had enough.
   triggers:

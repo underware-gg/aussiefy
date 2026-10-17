@@ -24,11 +24,11 @@
   names, but sentence\-initial names can still escape extraction. Slot/inflection matching'n negation anchors
   fix the reproduced toolkit cases; they don't solve general negation or sense disambiguation. So anyway, for example,
   `not out of the question` can still offer refusal phrases. Review suggestions in their actual sentence.
-- **Mechanical acceptance doesn't kick off retelling quality.** The first fresh 20\-text blind comparison
+- **Mechanical acceptance doesn't establish retelling quality.** The first fresh 20\-text blind comparison
   scored meaning 4.95/5 but register 2.00/5: eligible prose was too restrained. All deterministic checks
   passed. Anyway, a further writer revision under contract\-aware evaluation scored meaning 4.95/5 and register
   4.65/5, with some high\-level prose still too light'n a minor forecast narrowin'. Fair dinkum, the packet protocol
-  and judges changed; those rounds don't knock together a causal engine improvement. See
+  and judges changed; those rounds don't establish a causal engine improvement. See
   [the findings](../../research/document-refinement-2026-10-15/FINDINGS.md) for raw results'n limits.
 - **The bundled embeddin' model lags the dictionary.** `aussiefy embedder status` reports the shipped model
   (aussie\-static 1.2.0\) as `stale` after the later research rounds; the next version is described in

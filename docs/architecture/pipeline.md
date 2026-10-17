@@ -15,7 +15,8 @@ has no slang or level logic of its own.
    intensifiers \("extremely busy" scores intensity 4 and is replaced whole\). Look, it also sees through
    coordination \("stupid and all talk"\) and question inversion \("are you crazy"\), and rejects negation
    ("not tired"\) and "so X that" result clauses. Interjections'n imperatives must stand at the start of a
-   clause. The checker records the subject'n verb so that clause idioms can bind `{subj}`.
+   clause. The checker records the subject'n verb so that clause idioms can bind `{subj}`. Outer auxiliaries
+   prevent independently finite clause replacements, and `^end` verb/clause patterns reject following complements.
 2. **Detect concepts** (`matcher.py`, `detect.py`). Trigger patterns come from the concept vocabulary and
    from every entry's `replaces`. Strewth, a match on an entry's own paraphrase earns that entry a bonus. Well, a fallback
    compares predicate spans the triggers missed against those paraphrases by similarity \(`embed.py`;
