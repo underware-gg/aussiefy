@@ -5,6 +5,13 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Cross-reference 130 existing slang entries with sources and retain a meaning-audit ledger. Add the lively-party
+  and excited-reaction senses of “frog in a sock”; separate joblessness, unemployment payments and work avoidance,
+  earnest attempts and hardship, fair treatment and liberty, and exclamations and religious contingency.
+- Gate the three loose true-blue/fair-dinkum consecration paraphrases under `dubious_meaning`, keeping explicit
+  unlock access. Give “christen” a first-use object slot, clarify the supportive “barrack for” gloss and add checked
+  source URLs to lookup/change cards.
+
 - Hold `changes` to its review, amending contract v1 before release: a locked option is only an entry the
   vulgarity cap alone holds back (at any variety); a swap or garnish whose pick wouldn't render true, or whose
   region can't settle, offers its pick alone (a garnish without its removal) and is named under the new

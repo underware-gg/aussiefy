@@ -102,13 +102,15 @@ def test_tag_review_apply_round_trip(data_copy):
     assert "+- id: busier-than-a-one-legged-man" in diff
     assert any(s.startswith("blocked (omitted): 'That'll do, pig' = thatll-do-pig") for s in plan.summary)
     assert any(s.startswith("already present (active): 'Flat out like a lizard drinking'") for s in plan.summary)
-    assert "+flat-out-lizard:" in diff  # new source recorded in the overlay, not in idioms.yaml
+    overlay = yaml.safe_load(plan.new_sources)
+    assert {URL_A, URL_B} <= set(overlay["flat-out-lizard"])
     plan.apply()
 
     d2 = load_dictionary(data_dir=data)
     new = d2.entries["busier-than-a-one-legged-man"]
     assert new.status == "active" and new.sources == (URL_A, URL_B)
-    assert d2.entries["flat-out-lizard"].sources == (URL_A, URL_B)
+    assert d2.entries["flat-out-lizard"].sources == tuple(dict.fromkeys(
+        (*d.entries["flat-out-lizard"].sources, URL_A, URL_B)))
     assert (data / "entries" / "idioms.yaml").read_text() == (DATA_DIR / "entries" / "idioms.yaml").read_text()
 
     # a re-scrape + re-tag never resurrects or overrides; review is idempotent
@@ -195,7 +197,9 @@ def test_tagging_cache_tracks_model_and_item_context(dictionary):
 @pytest.mark.parametrize("url", ["https://www.macquariedictionary.com.au/australian-word-map/",
                                  "https://MacquarieDictionary.com.au/x", "macquariedictionary.com.au/x",
                                  "macquariedictionary.com.au/a//b",
-                                 "http://www.oed.com/view/Entry/1", "https://australiannationaldictionary.oup.com/x"])
+                                 "http://www.oed.com/view/Entry/1", "https://australiannationaldictionary.oup.com/x",
+                                 "https://history.cass.anu.edu.au/centres/andc/australian-words-b",
+                                 "https://slll.cass.anu.edu.au/files/andc/ozwords_oct05.pdf"])
 def test_reference_only_sources_are_matched_by_host(url):
     assert reference_only(url)
 

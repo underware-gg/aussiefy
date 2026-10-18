@@ -73,6 +73,30 @@ PERSONAL_ENERGY:
     np:
     - energy and enthusiasm
     - energy and initiative
+WILD_EXCITEMENT:
+  description: React with exuberant energy or party wildly; not ordinary interest or a fit of anger.
+  triggers:
+    vp: [go wild with excitement, party wildly, party energetically]
+LIVELY_PARTY:
+  description: A lively social party, explicitly described as wild, energetic or in full swing.
+  triggers:
+    np: ["wild party !=conference|conferences|leader|leaders|member|members|candidate|candidates|delegate|delegates|committee|policy|policies|manifesto|platform|headquarters|politics|planner|planners|planning|game|games|trick|tricks",
+         "lively party !=conference|conferences|leader|leaders|member|members|candidate|candidates|delegate|delegates|committee|policy|policies|manifesto|platform|headquarters|politics|planner|planners|planning|game|games|trick|tricks",
+         "energetic party !=conference|conferences|leader|leaders|member|members|candidate|candidates|delegate|delegates|committee|policy|policies|manifesto|platform|headquarters|politics|planner|planners|planning|game|games|trick|tricks",
+         party in full swing]
+WHOLEHEARTED_ATTEMPT:
+  description: Make a serious effort; not suffering hardship or fighting physically.
+  triggers:
+    vp: [give it everything ^end, try hard ^end, make a real effort ^end, give it a real try ^end]
+UNEMPLOYMENT_BENEFIT_RECIPIENT:
+  description: Receiving unemployment payments; joblessness alone does not establish this.
+  person: true
+  triggers:
+    predicate_adj: [on unemployment benefits, receiving unemployment benefits, on jobseeker payments]
+DOLE_BLUDGER:
+  description: An accusation of deliberately avoiding work while living on unemployment payments.
+  triggers:
+    np: [work-shy unemployment benefits claimant, work-shy unemployment benefit claimant]
 QUIT_COMMAND:
   description: A command to stop the current activity; not giving up a named object or habit.
   triggers:
@@ -870,7 +894,7 @@ STRUGGLE:
     # not "struggle to/with/against" (highs that struggle to get out of the 40s, struggle with a lid): doing it
     # tough is hard times, said of people, and takes no infinitive or object
     vp: ["struggle !=to|with|against|for|over|through|up|on|into|across|free|out|along", "have a hard time",
-         "go through hard times", "have it rough", "suffer hardship", "fight hard", "give it everything"]
+         "go through hard times", "have it rough", "suffer hardship"]
 ENDURE:
   description: Keep going in the face of difficulty; last.
   triggers:
@@ -932,10 +956,14 @@ STRUGGLERS:
     np: ["ordinary people", "working people", "working families", "the common man", "the working class",
          "the poor", "struggling families", "ordinary Australians"]
 FREEDOM:
-  description: Freedom, liberty, fairness for all.
+  description: Guard (no entries) - freedom or liberty, not merely fair treatment or an opportunity.
   not_in: [technical]
   triggers:
-    np: ["freedom", "liberty", "equal opportunity", "fairness"]
+    np: ["freedom", "liberty"]
+FAIR_OPPORTUNITY:
+  description: Fair treatment or an equitable opportunity, rather than every sense of liberty.
+  triggers:
+    np: ["equal opportunity", "fairness", "fair treatment", "a fair chance"]
 REASONABLE:
   description: Proper, fitting, reasonable.
   triggers:
@@ -960,10 +988,14 @@ POLITICIAN:
 
 # --- the words that stuck out in Gettysburg, plus everyday filler -------------
 SANCTIFY:
-  description: Make sacred; set apart as something held dear.
+  description: Make sacred. Only loose paraphrases are available, with explicit dubious_meaning unlock.
   triggers:
     vp: ["consecrate {obj}@4", "hallow {obj}@4", "sanctify {obj}@4", "consecrate@4", "hallow@4", "sanctify@4",
          "dedicate", "make sacred", "bless"]
+FIRST_USE:
+  description: Use an object for the first time, rather than consecrating or naming it.
+  triggers:
+    vp: ["use {np} for the first time"]
 DEDICATED_TO:
   description: >-
     Guard (no entries) - "dedicated to" is devoted or allocated to ("a nation dedicated to the proposition",
@@ -1243,9 +1275,9 @@ EVERYTHING:
     np: ["everything !=from|that|which|a|an|the|this|these|those|my|your|our|their|his|her|its|we|you|he|she|it|they", "the whole thing", "the whole lot !=of", "the entire thing", "all of it", "the whole boatload",
          "the whole shooting match"]
 GOD_WILLING:
-  description: Under God; with God's blessing.
+  description: Conditional hope that something will happen if God permits it; not an oath or thanks for past help.
   triggers:
-    adv: ["under God", "God willing", "by the grace of God", "so help me God", "by God"]
+    adv: ["God willing", "if God wills it"]
 
 # --- harvested from a refined LLM Gettysburg (tests/corpus/targets), curated ------
 IN_THE_END:
@@ -1734,9 +1766,9 @@ UNCOOL:
 WELFARE:
   description: Unemployment benefits.
   triggers:
-    np: ["unemployment benefits", "unemployment benefit", "welfare", "jobseeker payments"]
+    np: ["unemployment benefits", "unemployment benefit", "jobseeker payments"]
 UNEMPLOYED:
-  description: Out of work, on benefits.
+  description: Guard (no entries) - out of work; neither benefit receipt nor deliberate avoidance of work is implied.
   person: true
   triggers:
     predicate_adj: ["unemployed", "out of work", "jobless", "on welfare"]

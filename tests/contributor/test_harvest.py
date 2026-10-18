@@ -36,6 +36,8 @@ def test_new_entries_from_fragments_and_harvest(translator):
     assert any("stubby" in o for o in outs("Okay, I'll grab a bottle of beer.", level=3))
     assert any("rocked up" in o for o in outs("They arrived at the party."))
     assert any("every bloke's as good as the next" in o for o in outs("We believe all men are created equal."))
-    assert any("God bloody willing" in o or "by crikey" in o for o in outs("This nation, under God, will last.", level=5))
+    assert any("God bloody willing" in o for o in outs("God willing, this nation will last.", level=5))
+    assert not any("God bloody willing" in o or "by crikey" in o
+                   for o in outs("This nation, under God, will last.", level=5))
     assert any("brand-spankin'-new" in o for o in outs("They built a new nation.", level=5))
     assert not any("spankin" in o for o in outs("She moved to New York.", level=5)), "names are left alone"

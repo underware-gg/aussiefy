@@ -24,6 +24,17 @@ it means. They're copyrighted and the Word Map sits behind a subscription, so
 pass `--permitted`. Use them by hand: look a word up, set its `region` and `register`, and cite the page in
 `sources`.
 
+The [18 October meaning pass](../../../research/slang-meanings-2026-10-18/README.md) cross-references 130
+selected existing entries against named sources, with a ledger of supported meanings, corrections and
+unresolved evidence. It distinguishes party/reaction uses of “frog in a sock”, work avoidance from benefit
+receipt and joblessness, earnest effort from hardship, fair treatment from liberty, and exclamations from religious
+contingency. This is a bounded review, not certification of the entire dictionary. Checked extra URLs live in
+`sources.yaml`; component attestation does not establish a whole invented construction as a traditional idiom.
+
+The original “make [it] true blue” and “make fair dinkum” consecration paraphrases require the existing
+`dubious_meaning` unlock: genuine/loyal is not the same meaning as sacred. Evidence for a further sense should
+produce a precise concept/frame or a review note, rather than a broad trigger that silently changes facts.
+
 ## Finding what's missing
 
 `aussiefy gaps FILE...` runs the engine over a corpus and lists the content words it keeps leaving in plain

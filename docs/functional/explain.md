@@ -33,7 +33,7 @@ substitutions:
       concept CRAZY, frame predicate_adj, intensity 3, via trigger "crazy"; captures subj=you, be=Are
       substituted: roll 0.585 < p 0.9
       chosen roos-top-paddock (p=0.10): w=0.450 (base 1 x intensity-fit 0.50 [4 vs 3] x direct 1 x sources 1.0 x repeat 1.00 x p(idiom) 0.9)
-      other candidates: mad-as-a-cut-snake 0.10, mad-as-a-meat-axe 0.10, off-rocker 0.20, off-tree 0.10, snags-short-of-a-barbie 0.20, troppo 0.19
+      other candidates: mad-as-a-cut-snake 0.11, mad-as-a-meat-axe 0.11, off-rocker 0.19, off-tree 0.10, snags-short-of-a-barbie 0.19, troppo 0.20
       rejected:
         - mad-as-a-gumtree: needs level 5
 

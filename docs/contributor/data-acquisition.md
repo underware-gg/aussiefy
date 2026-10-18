@@ -28,6 +28,17 @@ it means. They're copyrighted and the Word Map sits behind a subscription, so
 pass `--permitted`. Use them by hand: look a word up, set its `region` and `register`, and cite the page in
 `sources`.
 
+The [18 October meaning pass](../../research/slang-meanings-2026-10-18/README.md) cross\-references 130
+selected existin' entries against named sources, with a ledger of supported meanings, corrections and
+unresolved evidence. It distinguishes party/reaction uses of “frog in a sock”, work avoidance from benefit
+receipt'n joblessness, earnest effort from hardship, a fair shake from liberty, and exclamations from religious
+contingency. Well, this is a bounded review, not certification of the entire dictionary. Crikey, checked extra URLs live in
+`sources.yaml`; component attestation doesn't establish a whole invented construction as a traditional idiom.
+
+The original “make [it] true blue” and “make fair dinkum” consecration paraphrases require the existing
+`dubious_meaning` unlock: genuine/loyal is not the same meaning as sacred. Evidence for a further sense should
+produce a precise concept/frame or a review note, rather than a broad trigger that silently changes facts.
+
 ## Finding what's missing
 
 `aussiefy gaps FILE...` runs the engine over a corpus'n lists the content words it keeps leaving in plain
@@ -44,7 +55,7 @@ aussiefy dev review data/staging/tagged.yaml                     # dry run: summ
 aussiefy dev review data/staging/tagged.yaml --apply
 ```
 
-`tag` needs the `llm` extra'n an API key; `scrape` needs the `scrape` extra. Crikey, the staging files under
+`tag` needs the `llm` extra'n an API key; `scrape` needs the `scrape` extra. Fair dinkum, the staging files under
 `data/staging/` are workin' files, not part of the dictionary.
 
 Two more sources feed the same `tag` and `review` steps:
@@ -52,7 +63,7 @@ Two more sources feed the same `tag` and `review` steps:
 - **Fragments.** `aussiefy dev fragments -o data/staging/fragments.yaml` stages slang buried inside our own
   idioms \("dunny" in "stick out like a country dunny").
 - **Harvests.** `aussiefy dev harvest plain.txt aussie.txt` mines an Aussified rewrite \(from an agent, the
-  `--rewrite` cache or a person\) for the spans it changed. Stone the crows, running it on a target translation's misses is how
+  `--rewrite` cache or a person\) for the spans it changed. Struth, running it on a target translation's misses is how
   they become candidate entries.
 
 `aussiefy/data/entries/fragments.yaml` and the "harvested" sections of the other entry files came from running
@@ -62,7 +73,7 @@ Harvestin' is candidate discovery, not attestation. Review each expression again
 triggers'n dialect swaps before adding it. Anyway, a newly written comparison can be useful without being a
 sayin' in common use: keep it as optional colour in `riffs.yaml`, attached to a term whose meaning it suits,
 rather than inventin' a plain\-English trigger for it. Riffs must read naturally after their term'n respect
-the same vulgarity'n document controls as existin' colour. Fair dinkum, retain the source, persona and decision for
+the same vulgarity'n document controls as existin' colour. Stone the crows, retain the source, persona and decision for
 each research candidate; a persona is a writin' brief, not a new engine setting.
 
 ## Research rounds
@@ -133,7 +144,7 @@ The review covered 227 raw rows and 212 normalised candidates. Ten entries were 
 validated review boundary, using manually authored proposals'n original glosses; the API tagger wasn't
 called. Mate, of the remainder, 88 have existin' term/variant/component coverage, 100 remain craft or verification
 notes, three proposed senses were declined, five rows were metadata, and six retain existin' gate/omit
-decisions. Struth, component coverage doesn't promise automatic replacement of a whole sentence. The complete
+decisions. Component coverage doesn't promise automatic replacement of a whole sentence. The complete
 [decision ledger](../../research/maintenance-2026-10-17/seed-decisions.yaml) and
 [proposals](../../research/maintenance-2026-10-17/seed-proposals.yaml) retain the review. Raw HTML,
 copied meanings'n usage examples remain temporary, outside the repository.

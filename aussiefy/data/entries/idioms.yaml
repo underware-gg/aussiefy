@@ -305,11 +305,22 @@
   gloss: Lose your temper (nana = banana = head).
 - id: go-off-like-a-frog-in-a-sock
   form: go off like a frog in a sock
-  concept: [LOSE_TEMPER]
+  concept: [LOSE_TEMPER, WILD_EXCITEMENT]
   frame: vp
   intensity: 5
   incoherence: 5
-  gloss: Become wildly agitated.
+  gloss: React with wild energy, whether angry or excited.
+  notes: Also used of a lively party; the separate party noun phrase keeps ordinary parties and ordinary excitement distinct.
+- id: frog-in-a-sock-party
+  form: a party going off like a frog in a sock
+  plural: parties going off like a frog in a sock
+  concept: [LIVELY_PARTY]
+  frame: np
+  intensity: 4
+  incoherence: 5
+  class: idiom
+  gloss: A wild, energetic party in full swing.
+  notes: Requires an explicitly lively party, not a generic gathering, political party or literal swing.
 - id: whinge
   form: whinge
   concept: [COMPLAIN]
@@ -561,27 +572,35 @@
   frame: vp
   intensity: 4
   incoherence: 4
-  notes: Sacred in the Aussie sense of something you'd stand up for.
+  status: gate
+  flags: [dubious_meaning]
+  notes: Original loose paraphrase. Genuine or loyal differs from sacred; requires explicit dubious_meaning unlock.
   gloss: Make it something held dear; genuine and loyal to the core.
 - id: christen
-  form: christen
-  concept: [SANCTIFY]
+  form: christen {np}
+  concept: [FIRST_USE]
   frame: vp
   incoherence: 3
-  notes: Not exclusively Australian, but the casual "christen the new barbie" sense is everyday Aussie.
-  gloss: Dedicate; mark something's first proper use.
+  notes: Shared informal English first-use sense; keep the object and do not infer sacred dedication.
+  gloss: Use something for the first time.
 - id: make-true-blue-bare
   form: make true blue
   concept: [SANCTIFY]
   frame: vp
   intensity: 4
   incoherence: 4
+  status: gate
+  flags: [dubious_meaning]
+  notes: Original loose paraphrase. Genuine or loyal differs from sacred; requires explicit dubious_meaning unlock.
   gloss: Make something held dear, genuine and loyal to the core.
 - id: make-fair-dinkum
   form: make fair dinkum
   concept: [SANCTIFY]
   frame: vp
   incoherence: 4
+  status: gate
+  flags: [dubious_meaning]
+  notes: Original loose paraphrase. Genuine differs from sacred; requires explicit dubious_meaning unlock.
   gloss: Make genuine; give it real standing.
 - id: swear-blind
   form: swear blind
@@ -777,10 +796,10 @@
   gloss: Keep everything going.
 - id: have-a-proper-crack
   form: have a proper crack
-  concept: [STRUGGLE]
+  concept: [WHOLEHEARTED_ATTEMPT]
   frame: vp
   incoherence: 3
-  gloss: Give it a real go; fight hard.
+  gloss: Make a wholehearted attempt.
 - id: see-the-job-through
   form: see the job through
   concept: [FINISH_JOB]
