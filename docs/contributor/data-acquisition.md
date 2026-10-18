@@ -39,6 +39,10 @@ The original “make [it] true blue” and “make fair dinkum” consecration p
 `dubious_meaning` unlock: genuine/loyal is not the same meaning as sacred. Evidence for a further sense should
 produce a precise concept/frame or a review note, rather than a broad trigger that silently changes facts.
 
+The [focused hunger harvest](../../research/hunger-phrases-2026-10-18/README.md) retains three independent
+generations for `feeling pretty hungry`, source checks'n decisions. Moderate appetite gets grammatical
+verb phrases; colourful clause rewrites'n original exaggerations use the existin' imagery controls.
+
 ## Finding what's missing
 
 `aussiefy gaps FILE...` runs the engine over a corpus'n lists the content words it keeps leaving in plain

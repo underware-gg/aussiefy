@@ -9,6 +9,10 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Handle `feeling pretty hungry` with appetite phrases that preserve tense'n questions. Add six configurable
+  writer\-only hunger images, distinguishin' familiar expressions from original riffs'n ordinary appetite from
+  ravenous exaggeration; retain the three independent candidate generations'n source checks.
+
 - Cross\-reference 130 existin' slang entries with sources'n retain a meanin'\-audit ledger. Add the lively\-party
   and excited\-reaction senses of “frog in a sock”; separate joblessness, unemployment payments'n work avoidance,
   earnest attempts'n hardship, a fair go and liberty, and exclamations'n religious contingency.

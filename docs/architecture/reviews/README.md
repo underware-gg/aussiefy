@@ -10,6 +10,7 @@ commands that have since been renamed. Mate, decisions they led to are recorded 
 
 | Review | Summary |
 |---|---|
+| [design-review-2026-10-18-hunger-phrases.md](design-review-2026-10-18-hunger-phrases.md) | Independent appetite harvest, tense-safe VPs and controlled writer-only hunger imagery |
 | [design-review-2026-10-18-sourced-meanings.md](design-review-2026-10-18-sourced-meanings.md) | Bounded source audit, precise slang senses, explicit loose-paraphrase gates and meaningful-output regressions |
 | [design-review-2026-10-18-package-integration.md](design-review-2026-10-18-package-integration.md) | Installed-wheel stdio/HTTP checks, browser Unicode offsets and bounded changes-cost evidence |
 | [design-review-2026-10-17-training-order-and-integrations.md](design-review-2026-10-17-training-order-and-integrations.md) | Stable WordNet pair selection, honest trial evidence and real CLI/MCP interface checks |
