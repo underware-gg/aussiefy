@@ -140,6 +140,10 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   unlock access. Give “christen” a first-use object slot, clarify the supportive “barrack for” gloss and add checked
   source URLs to lookup/change cards.
 
+- Read the docs publication settings from `docs/publication.yaml` alone, with the package's own checks, and
+  derive each page's settings notice from them. A host can publish the docs at its own vulgarity, with a
+  `document_config` overlay: `python scripts/publish_docs.py export` writes the pages and prints a JSON manifest
+  for rewriting their links (DD-038). The repository's published docs are unchanged.
 - Hold `changes` to its review, amending contract v1 before release: a locked option is only an entry the
   vulgarity cap alone holds back (at any variety); a swap or garnish whose pick wouldn't render true, or whose
   region can't settle, offers its pick alone (a garnish without its removal) and is named under the new

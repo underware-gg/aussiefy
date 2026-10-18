@@ -13,19 +13,23 @@ python scripts/publish_docs.py generate
 python scripts/publish_docs.py check
 ```
 
-Generation uses the strict Markdown adapter at Swaggie (5), Dinkum (1), Dad (1) and seed 0, with the offline
-ngram fallback. It explicitly selects General, protects Technical vocabulary through `term_domains`, and
-disables formal-sentence rework. Its explicit advanced configuration preserves quoted wording, excludes
-person swears, factual riffs, insulting garnish and infixes, and enables conversational connectives, openers
-and tags. Their per-sentence probabilities are 0.35/0.35/0.25; per-document caps are 10/6/4, with two source
-sentences between repeats of the same placement. Stacking is off. These are repository publication choices,
-not changes to the public dial defaults. Every published page has the same settings notice and a link to its own plain
-counterpart: “Prefer docs that are as dry as a dead dingo's donger?” It preserves headings, tables, links, code and displayed command outputs. The generated notice
-links back to the editable source. All outputs are derived from the current dictionary and publication map;
-their exact bytes are checked before promotion. Strict Markdown units share document-wide choice and garnish
-state. A source sentence start can receive a leading opener/connective before an inline boundary, using the
-whole sentence's context. Suffixes and riffs require complete prose; continuation fragments cannot acquire
-an opener. Word-case evidence is shared across the document, and an ambiguous first word can prevent a prefix.
+Generation uses the strict Markdown adapter at the settings in the translation block of `docs/publication.yaml`,
+the only copy the publisher reads. They are currently Swaggie (5), Dinkum (1), Dad (1) and seed 0, with the
+offline ngram fallback. Generation explicitly selects General, protects Technical vocabulary through
+`term_domains`, and disables formal-sentence rework. Its explicit advanced configuration preserves quoted
+wording, excludes person swears, factual riffs, insulting garnish and infixes, and enables conversational
+connectives, openers and tags. Their per-sentence probabilities are 0.35/0.35/0.25; per-document caps are
+10/6/4, with two source sentences between repeats of the same placement. Stacking is off. These are repository
+publication choices, not changes to the public dial defaults. Every published page opens with a settings notice
+that names the level, embellishment and vulgarity it was published at, and a link to its own plain counterpart:
+“Prefer docs that are as dry as a dead dingo's donger?” It preserves headings, tables, links, code and displayed
+command outputs. The generated notice links back to the editable source. All outputs are derived from the
+current dictionary and publication map; their exact bytes are checked before promotion. Strict Markdown units
+share document-wide choice and garnish state. A source sentence start can receive a leading opener/connective
+before an inline boundary, using the whole sentence's context. Suffixes and riffs require complete prose;
+continuation fragments cannot acquire an opener. Word-case evidence is shared across the document, and an
+ambiguous first word can prevent a prefix. The translation block must give every setting publication fixes, and
+the package's own checks apply to it, so an unknown `document_config` setting fails.
 
 Well, relative links in a plain source point to other plain sources where available, or to the actual ungenerated
 repository file. Publication remaps those destinations back to their public paths. External destinations and
@@ -40,6 +44,15 @@ Promotion requires fresh outputs, valid links'n executable examples.
 Crikey, AGENTS/CLAUDE instructions, legal notices'n licence texts, the copied standard, ADR records and historical
 reviews stay plain. Their current indexes may be published. Trainin', research'n corpus READMEs stay at
 their existin' paths. Anyway, publication doesn't recursively translate `docs/plain/`.
+
+The website publishes the docs in its own voices from a checkout of a tagged release. It runs
+`python scripts/publish_docs.py export --root CHECKOUT --out DIR [--vulgarity V] [--overlay FILE]` in its own
+process. The command builds every page at the publication settings, with that vulgarity and the overlay file's
+`document_config` merged in (maps merge, lists replace). It writes the pages into `DIR`, which must be new or
+empty and outside the repository, and prints a JSON manifest of the settings used, each source with its output,
+and the documents kept plain. The website rewrites the pages' links from the manifest. The command refuses to run
+with any engine but the checkout's own. At the yaml's own settings, an export equals the published pages
+([DD-038](../architecture/decisions/dd-038-publication-settings-and-variants.md)).
 
 Add a new current guide to the explicit map. A missing mapped input, an unmapped plain source, a stale or
 unexpected generated output, or a broken link fails with its path'n a correction. Commands resolve the
