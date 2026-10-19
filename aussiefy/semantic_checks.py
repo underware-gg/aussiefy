@@ -34,7 +34,7 @@ def degree_issues(text: str, original: str | None, spans: list[tuple[int, int, E
             if cid in det.degree_conflicts:
                 continue
             band = realised_degree(lexical, det.degree_qualifier)
-            if band not in {'mild', 'strong'}:
+            if band not in {'mild', 'strong'} and not (band == 'unmarked' and det.result_clause):
                 continue
             start = det.start - len(det.degree_qualifier)
             sources.append((cid, band, tuple(t.norm for t in sentence[:start]),

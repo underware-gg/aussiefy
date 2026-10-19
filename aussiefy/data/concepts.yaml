@@ -177,6 +177,7 @@ COMPLAINER:
 TIRED:
   description: Exhausted, worn out.
   person: true
+  unless_after: [of]
   triggers:
     # ^person: said of things too ("the tank was drained", "the data is wiped out", "done in any case")
     predicate_adj: ["tired@2", "exhausted@4", "worn out ^person@4", "wiped out ^person@4", "shattered ^person@4",
@@ -227,6 +228,7 @@ DISAPPOINTED:
 SICK:
   description: Unwell.
   person: true
+  unless_after: [of, to]
   triggers:
     predicate_adj: ["sick", "ill", "unwell", "poorly@2", "under the weather@2", "not well@2"]
 DRUNK:
@@ -1704,6 +1706,8 @@ QUIT:
 FED_UP:
   description: Fed up; had enough.
   triggers:
+    # Capture the object so a replacement cannot silently discard what the speaker is fed up with.
+    predicate_adj: ["sick of {np}", "tired of {np}", "sick and tired of {np}", "sick to death of {np}"]
     clause: ["{subj} {be} fed up", "{subj} {be} sick of it", "{subj} {have} had enough", "{subj} {be} sick and tired of it"]
 GLAD_ALIVE:
   description: Very glad to be alive.

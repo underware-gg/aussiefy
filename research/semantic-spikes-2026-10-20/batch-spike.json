@@ -1,0 +1,95 @@
+{
+  "scope": "Offline, standalone epoch-zero sampler diagnostic, not a captured training schedule or a fit.",
+  "seed": 13,
+  "driver_sha256": "8ed18a6265454bf8d149b5e14328fad055eb6ed3c50ba7fce5bfc09d203d9e21",
+  "sampler_sha256": "6b0521103283359c5f97d12f749a0381967644c48b350f3b740783a661d65f37",
+  "trainer_sha256": "7c3ba95bd496527a423e369e23fa0d4603db060ee74666b9567d6975a5152f8b",
+  "dictionary_sha256": "315c8b32d10ae1c3767d49cda008128cf8f943c17261dbe1422156b706e6136c",
+  "recipe_sha256": "099a736840dd3bc94588fab916ba4d2af226fdb0e8c72f0287e98fbb696ad4de",
+  "pairs_sha256": "5d83065fe66e720b6f3d94f97f3942c54a6c89109879a2cefbf8ced86bfab3ae",
+  "versions": {
+    "torch": "2.14.1",
+    "sentence-transformers": "6.1.0",
+    "datasets": "5.1.0"
+  },
+  "rows": [
+    {
+      "batch_size": 64,
+      "batches": 198,
+      "rows": 12549,
+      "known_positive_negative_logits": 2763,
+      "affected_batches": 195,
+      "examples": [
+        {
+          "anchor": "everybody",
+          "positive": "you mob",
+          "in_batch_negative": "every man and his dog"
+        },
+        {
+          "anchor": "glaringly obvious",
+          "positive": "stick out like a sore thumb",
+          "in_batch_negative": "as obvious as dogs' balls"
+        },
+        {
+          "anchor": "inebriated",
+          "positive": "molo",
+          "in_batch_negative": "half-cut"
+        },
+        {
+          "anchor": "inebriated",
+          "positive": "molo",
+          "in_batch_negative": "pissed as a cunt"
+        },
+        {
+          "anchor": "intoxicated",
+          "positive": "half-cut",
+          "in_batch_negative": "molo"
+        },
+        {
+          "anchor": "intoxicated",
+          "positive": "half-cut",
+          "in_batch_negative": "pissed as a cunt"
+        }
+      ]
+    },
+    {
+      "batch_size": 256,
+      "batches": 56,
+      "rows": 12549,
+      "known_positive_negative_logits": 10998,
+      "affected_batches": 53,
+      "examples": [
+        {
+          "anchor": "everybody",
+          "positive": "you mob",
+          "in_batch_negative": "every man and his dog"
+        },
+        {
+          "anchor": "everybody",
+          "positive": "you mob",
+          "in_batch_negative": "every cunt"
+        },
+        {
+          "anchor": "psycho",
+          "positive": "head case",
+          "in_batch_negative": "a fucked cunt"
+        },
+        {
+          "anchor": "glaringly obvious",
+          "positive": "stick out like a sore thumb",
+          "in_batch_negative": "as obvious as dogs' balls"
+        },
+        {
+          "anchor": "inebriated",
+          "positive": "molo",
+          "in_batch_negative": "half-cut"
+        },
+        {
+          "anchor": "inebriated",
+          "positive": "molo",
+          "in_batch_negative": "pissed as a cunt"
+        }
+      ]
+    }
+  ]
+}

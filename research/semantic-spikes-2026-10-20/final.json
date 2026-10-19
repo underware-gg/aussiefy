@@ -1,0 +1,603 @@
+{
+  "inputs": {
+    "scripts/train_embedder.py": "7c3ba95bd496527a423e369e23fa0d4603db060ee74666b9567d6975a5152f8b",
+    "training/recipe.yaml": "099a736840dd3bc94588fab916ba4d2af226fdb0e8c72f0287e98fbb696ad4de",
+    "aussiefy/__init__.py": "86a3896a45b385e9c2d27de1b11668ecaf6b4a04586425d75c0d833cb8c7d2ec",
+    "aussiefy/align.py": "c81e2d5e2bde60d6cfd80ace84d40ae4cf453a9007cb9b28645ad27ec8a80b0b",
+    "aussiefy/cards.py": "86e6b92d8af644abf56e7412504ae2fc3030b4911a872ee97a86851867640d7f",
+    "aussiefy/changes.py": "73717df82b5bc13b8e65ec9ffc1473ca4854bcf57f0f5b99b14c4b88f247d7ce",
+    "aussiefy/claude.py": "c5d67f3c351006663be3f1095ba0dd27a83c2e2d866ccb38e20bd03de4db49e8",
+    "aussiefy/cli.py": "58aeede257d2b8ac9e86dee2b52b63a7a2a7baeb192edd28c7c16d2076af6b72",
+    "aussiefy/context.py": "85ffb726f2b948870b2da4e6ee31a16ccfa2d553dd64b42cdc8f9fce514a4359",
+    "aussiefy/degree.py": "fc1dfe46d9e9f228088ffe30527ad9d6319a3c2746d18d8a49ac6773690a9f6a",
+    "aussiefy/detect.py": "4d2b75aa5a68f124a0f8194aa36d5dafd13515540bd50c9cea9e5b32b27dbe28",
+    "aussiefy/dialect.py": "8cf34ba9a2bdb86d924351122b4eaa6a2690730f64d1bc0ee97f6a6a8e46eb33",
+    "aussiefy/dump.py": "208fa74cd244718552d8dc2065321f44f604c8ac79937bcabb010fdc030fbf20",
+    "aussiefy/embed.py": "afb78a3624c86492800aa8f639f008d45c8de5906d930827a47f169bd01a737f",
+    "aussiefy/engine.py": "ac975d285b6d5fe6963c3207b09c221046ed2003cae34b174332bd72668ad9fc",
+    "aussiefy/errors.py": "3c565cfe02d93f68f0a57bb1013a0dc799b47bea748c9a38b1639e1483448319",
+    "aussiefy/explain.py": "9027beb88ce242457c772fdef6023308acd9ace3c94c5a17055f42b36eade907",
+    "aussiefy/gaps.py": "715711e7c5eb0d21d48b1a5ce07e51f904ba6bde20be621d7be8f5802bb241c0",
+    "aussiefy/garnish.py": "0255b091a0be93fcbe2f7a4cf98da8049e266f72ef0c9d19d393650af13873fb",
+    "aussiefy/genre.py": "a7dcb46b68f40c76d4c451dbde7810a7752bcf801584c7eace8c77f64074e952",
+    "aussiefy/guide.py": "94f588019ecb5e79165e675d7835cce7c184f886cc06e7e23caff0625810ed97",
+    "aussiefy/harness.py": "a6832bfe3ea2cf3a494db2f1b70d557ad9083c808aac927e2896146834c5ce8a",
+    "aussiefy/imagery.py": "56d4a3198f43097824238150b0876893270f09102a16acce9608ac1ee09de5e7",
+    "aussiefy/judge.py": "6fc1aca4c3e746f8a2dd91690bd46c64ef0981f50a90016283789c1c0119e725",
+    "aussiefy/lint.py": "67b2146ce729f7372b722c154a541a4c6d1c4dcfeb44ef98a7594c26e553b091",
+    "aussiefy/llm.py": "4f7a4aacfa0f6e060417ec6690829c8a764459e205af91924f6a798b3890a7ca",
+    "aussiefy/loader.py": "cd3c9480458ebf9c19c41f3a7d351af4d793191412f14ebfca4a781964697ac3",
+    "aussiefy/lookup.py": "a8c7c1784484a46cfa17a3be4a51e58cf7a5e65789c4cd0733a83b41427b4e11",
+    "aussiefy/markdown.py": "e5ff49bfe9970ae149025f1aa2995911987200d7b2f1731e85ae0586f325b8b2",
+    "aussiefy/markup.py": "9bfe4154dafd8181185c12fb23d130c614b205a4a3ab5b7fc9dcd858ba36ab64",
+    "aussiefy/masks.py": "cc9b6589c82c2d5011ca8824ab9d165bbdc36e2bc611383a27ff68b1a6fcdff2",
+    "aussiefy/matcher.py": "546a28746f1fd20f1727da912ad67328062b2722944d7bdd50349c02a7156332",
+    "aussiefy/mcp_server.py": "2d820e696297ef78997c4d7dde8a81fb0392f1f23a6acbd00e74b198c5e3e488",
+    "aussiefy/model.py": "466b0bcf29051ae86c14fdaf4b8de8cd42e7ebdf996e69264acdf514c3553efe",
+    "aussiefy/models.py": "b8c1e4f03d9d2bbe221fd2382112afb07668e489b50499a51a41995a0afcbf65",
+    "aussiefy/morph.py": "5a40d00019a2b2f016ae1ee0fba9a8b758e88ebc85de640f0d8c3017036ac9b7",
+    "aussiefy/policy.py": "93b2b1a7b44d67c7b6cec238894b6c92a0077d9f8a27f0a4deb646c5538b3bfa",
+    "aussiefy/pos.py": "2dd736bba71f76cab58d0820dea5b48cbcd330b47032a49990b2b84cac3cc50c",
+    "aussiefy/profile.py": "faca5d7b66e4afff461f77ccf7051d9b761e5e9d86487bb21120d3091e1dfc64",
+    "aussiefy/protected.py": "2909130ba76dc405bdc7496929044a81b83ac3efa73c4adc62db1e792dcade03",
+    "aussiefy/realise.py": "4beb8282c0cb6d628b31f82168035256526f1f47fd755ffe4ddefde240541c6f",
+    "aussiefy/retelling.py": "046b6e1a5865c5cde61ba56390773d7e01f2e4de252833b34ed91d5542a65462",
+    "aussiefy/rounds.py": "5cfa13427ceb4a35611370c3d9576f6ccf2532bc01d9b79dd9dd2d420e5636ca",
+    "aussiefy/schema.py": "6269b7f22add09dd86b2a759330eeab2a3a20a52f27c51d674ad86c81b409c08",
+    "aussiefy/select.py": "5ec4ddc9bf3cccd61b971acd21fbcc356c2642277ee40cd38536ca3ed731bc88",
+    "aussiefy/semantic_checks.py": "ba008c2fd8eaf11aa77f9e2d518032a7abc5dc850d59666e5b575e7893145d48",
+    "aussiefy/static.py": "a6490595c3200e89ec71639d85d25b6a2f71f5963ebed75fc47ae343d1f4b150",
+    "aussiefy/terms.py": "c8c12beaeb016bc30cb991d6bbaf99d165f0178c76038788d647b8885a2e7106",
+    "aussiefy/text.py": "a50efc87a2648fd2fc487eff5bea70fb1bb1be61be065eb5145109158e01384a",
+    "aussiefy/translation.py": "2cacf2f53b3c9992e5a4696d9244c9ac155566979ab93156c3bdaf0d4c6398e9",
+    "aussiefy/verify.py": "3e6f872d233162f89db0cc1471829275fcb3f5d7d85129d4440fd3cd5ed44f83",
+    "aussiefy/vocabulary.py": "f8f60fbc59415ddf2a2d61bbedf78736fab12ae976bcd28873f47380311f945f",
+    "aussiefy/yarn.py": "87b31225c0553a02d0f8bc31b59a1af756f117dd03294f75bac5b2906adc8c25",
+    "aussiefy/data/concepts.yaml": "612c8c6d6f3cbcad4badcf3490a3e55b7c3ed458b2dffef4c780d08c31703569",
+    "aussiefy/data/dialect.yaml": "233579ccbf2df852ff0a24267430e795b30033ec4fbab0d0f6e23657f2ef08b8",
+    "aussiefy/data/entries/audit-meaning-extensions.yaml": "fad6c14c4c22b18b21559553cf906ac77208a254245aebe7027c190f2238f8a2",
+    "aussiefy/data/entries/classics.yaml": "274d8b0f27373961abe7bae74cb10b5b58fd346e6739d8f2d711ea1b7f92feb4",
+    "aussiefy/data/entries/contextual-harvest.yaml": "e2c09a5df535712625877362d9f816e63a1592456ab650b6aec3feb2e6a44592",
+    "aussiefy/data/entries/dinkumcheck.yaml": "2f7c4ca793ba5b5de0053b78b548766f0f23be1560bd76354c2197428c8f2980",
+    "aussiefy/data/entries/everyday.yaml": "8b173954ff82a8473b0f3a94ba5de0965180753d73a0ac66c16b2dd2bd01b90a",
+    "aussiefy/data/entries/fairdinkum.yaml": "550a42658e6ad414c7428dab59cf55d7d6f8e9db06ce503710f58ee1d7b393cd",
+    "aussiefy/data/entries/flagged.yaml": "3f4a0ea00ec6394c1dd241f0458a6dbe4beb3247c3d0fa5448642d0e74ad120c",
+    "aussiefy/data/entries/fourthpass.yaml": "d3f4f054429da1ff7dd321e5117a1cfef9514b7429dd07854da00d6aac4aec4c",
+    "aussiefy/data/entries/fragments.yaml": "6c79ea5522929c80081e76546317b817800aa88a6f53b56738da3faec876f05b",
+    "aussiefy/data/entries/gapfill.yaml": "64f99564f67a8a4c07709e11ba66d83b8ab2882a1a2f5fc39c1f3eec5ff68cdd",
+    "aussiefy/data/entries/garnish.yaml": "96817bd2c6858ba5e86f82bceeb9f546ee4b9214efb0ad503a357425096b6cdd",
+    "aussiefy/data/entries/idioms.yaml": "28c20c05a64c774af56d87e955d055c65b4efb48cb7b31685d7197e46d2bb93e",
+    "aussiefy/data/entries/lexical.yaml": "41a9a64e382c0c69ad1846bea3a9d2f939466d20382c6459e0ab4f63d9f7b6e0",
+    "aussiefy/data/entries/meaning-extensions.yaml": "3711526929061676766e6e54ded5334ff17c0b55436cf73272fd5e1fd4fcbabb",
+    "aussiefy/data/entries/phrases.yaml": "3038c25f4870d8a71d92c64ab387d633a6c1f5df2358c37b50851f6ed3a09fea",
+    "aussiefy/data/entries/scraped.yaml": "9bbcb1a35df0e7b033aaa351a05912aa4f0700f831efb5af61619b213361f42e",
+    "aussiefy/data/entries/secondpass.yaml": "97370f97f4e54279a996bb925814f153b9a9d9ecabe9828e361b9148f9d4350c",
+    "aussiefy/data/entries/source-meaning-extensions.yaml": "c2e9ac557263d7eef758ea4c94c9625fb60d416f1be4902428a62cdf499461ff",
+    "aussiefy/data/entries/swearing.yaml": "ea740f6f97077c7e1996db2120fa9c3988a287f99dc78b55432bfab475027304",
+    "aussiefy/data/entries/thirdpass.yaml": "b26bf521efa7c63578a4137b6cc56b0f31b3184091057d947cf23cbe7c006e3e",
+    "aussiefy/data/genres.yaml": "152cb87cbc4ea4ba29c445d019fd1b3abd429826e24e4858f37ef1c6d0800ac4",
+    "aussiefy/data/grammar.yaml": "9c384595403144d446f7823aa6027b014b98c048e07e34fed36e09b5b8b88510",
+    "aussiefy/data/guide.yaml": "4b8b470c83b066d80ce22f63244083ff20cc65e781d63edf38f28655f5e09b8c",
+    "aussiefy/data/imagery.yaml": "ec73cc7e88f02349b9ebd9998f557afc215e15ee910b3fc4c1e409a180c272f8",
+    "aussiefy/data/judge.yaml": "f4122c83d9297c8b359688b23256c62e325df34c7c7c5bac3b593b1bb2596cc2",
+    "aussiefy/data/phonetic.yaml": "c0dd876c6254ec9eb12782719a1e4b074dd5b2dae3fe06227c788e0f18dd39c8",
+    "aussiefy/data/profiles.yaml": "db918602c1978c2c09e22ac72958882cd68133b83839e82efa4ae1419591f284",
+    "aussiefy/data/riffs.yaml": "4fbc61791215f12fb8d0931135c29e0cbe50003e863aca6650a2e69cc0aedf40",
+    "aussiefy/data/source_policy.yaml": "dc803e176f4795ad48a8bc38cf8bcabadbeaab17dc48f83581569a1a6f949234",
+    "aussiefy/data/sources.yaml": "5bb739367f86073b95af230efaab2aac9317dbb0c9d05b684c33adef0307322a",
+    "aussiefy/data/swears.yaml": "48518167f51ac8f0f3ca19c7614439521d41f36a8ef384d683f86e1ae2d971b2"
+  },
+  "counts": {
+    "positive": 12549,
+    "wrong_sense": 6704,
+    "opposite": 3668,
+    "concept_counts_per_entry": {
+      "1": 1172,
+      "2": 34,
+      "3": 2
+    }
+  },
+  "unordered_label_conflicts": [],
+  "multi_concept_bridges": [
+    {
+      "entry": "a-dodgy-cunt",
+      "concepts": [
+        "SWINDLER",
+        "SHADY_PERSON"
+      ]
+    },
+    {
+      "entry": "a-dog-cunt",
+      "concepts": [
+        "BETRAYER",
+        "SCOUNDREL"
+      ]
+    },
+    {
+      "entry": "a-fucked-cunt",
+      "concepts": [
+        "LUNATIC",
+        "SCOUNDREL"
+      ]
+    },
+    {
+      "entry": "a-hoon",
+      "concepts": [
+        "HOON",
+        "LOUT"
+      ]
+    },
+    {
+      "entry": "a-mad-cunt",
+      "concepts": [
+        "GOOD_PERSON",
+        "WILD_ONE"
+      ]
+    },
+    {
+      "entry": "a-sick-cunt",
+      "concepts": [
+        "LEGEND",
+        "GOOD_PERSON"
+      ]
+    },
+    {
+      "entry": "beaut",
+      "concepts": [
+        "GOOD",
+        "EXCELLENT"
+      ]
+    },
+    {
+      "entry": "bloke",
+      "concepts": [
+        "MAN",
+        "FELLOW_MAN"
+      ]
+    },
+    {
+      "entry": "buggered",
+      "concepts": [
+        "TIRED",
+        "BROKEN"
+      ]
+    },
+    {
+      "entry": "cop",
+      "concepts": [
+        "COP_IT",
+        "TOLERATE"
+      ]
+    },
+    {
+      "entry": "cove",
+      "concepts": [
+        "MAN",
+        "FELLOW_MAN"
+      ]
+    },
+    {
+      "entry": "crook",
+      "concepts": [
+        "SICK",
+        "AWFUL",
+        "DODGY"
+      ]
+    },
+    {
+      "entry": "fucked-broken",
+      "concepts": [
+        "BROKEN",
+        "TIRED"
+      ]
+    },
+    {
+      "entry": "full-as-a-goog",
+      "concepts": [
+        "FULL",
+        "DRUNK"
+      ]
+    },
+    {
+      "entry": "go-off-like-a-frog-in-a-sock",
+      "concepts": [
+        "LOSE_TEMPER",
+        "WILD_EXCITEMENT"
+      ]
+    },
+    {
+      "entry": "leg-it",
+      "concepts": [
+        "RUN",
+        "FLEE"
+      ]
+    },
+    {
+      "entry": "mad-as-a-cut-snake",
+      "concepts": [
+        "CRAZY",
+        "ANGRY"
+      ]
+    },
+    {
+      "entry": "off-their-chops",
+      "concepts": [
+        "HIGH",
+        "DRUNK"
+      ]
+    },
+    {
+      "entry": "pull-the-pin",
+      "concepts": [
+        "QUIT",
+        "RETIRE"
+      ]
+    },
+    {
+      "entry": "quid",
+      "concepts": [
+        "MONEY",
+        "STERLING_MONEY"
+      ]
+    },
+    {
+      "entry": "ratbag",
+      "concepts": [
+        "RASCAL",
+        "SCOUNDREL"
+      ]
+    },
+    {
+      "entry": "rooted",
+      "concepts": [
+        "TIRED",
+        "BROKEN"
+      ]
+    },
+    {
+      "entry": "shell-be-right",
+      "concepts": [
+        "IT_WILL_BE_OK",
+        "NO_PROBLEM"
+      ]
+    },
+    {
+      "entry": "shithouse",
+      "concepts": [
+        "AWFUL",
+        "USELESS"
+      ]
+    },
+    {
+      "entry": "shoot-through",
+      "concepts": [
+        "RUN_OFF",
+        "LEAVE"
+      ]
+    },
+    {
+      "entry": "snags-short-of-a-barbie",
+      "concepts": [
+        "STUPID",
+        "CRAZY"
+      ]
+    },
+    {
+      "entry": "spewin",
+      "concepts": [
+        "DISAPPOINTED",
+        "ANGRY"
+      ]
+    },
+    {
+      "entry": "stonkered",
+      "concepts": [
+        "DRUNK",
+        "TIRED"
+      ]
+    },
+    {
+      "entry": "stuffed",
+      "concepts": [
+        "TIRED",
+        "BROKEN",
+        "FULL"
+      ]
+    },
+    {
+      "entry": "swagman",
+      "concepts": [
+        "SWAGMAN",
+        "VAGRANT"
+      ]
+    },
+    {
+      "entry": "sweet-as",
+      "concepts": [
+        "NO_PROBLEM",
+        "EASY"
+      ]
+    },
+    {
+      "entry": "the-oldies",
+      "concepts": [
+        "PARENTS",
+        "ELDERLY"
+      ]
+    },
+    {
+      "entry": "too-easy",
+      "concepts": [
+        "EASY",
+        "NO_PROBLEM"
+      ]
+    },
+    {
+      "entry": "yakka",
+      "concepts": [
+        "WORK",
+        "HARD_WORK"
+      ]
+    },
+    {
+      "entry": "you-mob",
+      "concepts": [
+        "YOU_PLURAL",
+        "PLURAL_ADDRESS"
+      ]
+    },
+    {
+      "entry": "youse",
+      "concepts": [
+        "YOU_PLURAL",
+        "PLURAL_ADDRESS"
+      ]
+    }
+  ],
+  "degree": [
+    {
+      "source": "I am absolutely starving.",
+      "output": "I am hungry enough to eat a horse and chase the jockey.",
+      "predicates": [
+        {
+          "concepts": [
+            "HUNGRY"
+          ],
+          "lexical": {
+            "HUNGRY": "strong"
+          },
+          "qualifier": [
+            "absolutely"
+          ],
+          "relational": false,
+          "realised": {
+            "HUNGRY": "strong"
+          },
+          "eligible": [
+            "hungry-enough-horse-jockey",
+            "hungry-enough-to-eat-the-arse-out-of-a-duck",
+            "starvin"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "I am really starving.",
+      "output": "I am hungry enough to eat the arse out of a low-flyin' duck.",
+      "predicates": [
+        {
+          "concepts": [
+            "HUNGRY"
+          ],
+          "lexical": {
+            "HUNGRY": "strong"
+          },
+          "qualifier": [
+            "really"
+          ],
+          "relational": false,
+          "realised": {
+            "HUNGRY": "strong"
+          },
+          "eligible": [
+            "hungry-enough-horse-jockey",
+            "hungry-enough-to-eat-the-arse-out-of-a-duck",
+            "starvin"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "I am very hungry.",
+      "output": "I am hungry enough to eat a horse and chase the jockey.",
+      "predicates": [
+        {
+          "concepts": [
+            "HUNGRY"
+          ],
+          "lexical": {
+            "HUNGRY": "unmarked"
+          },
+          "qualifier": [
+            "very"
+          ],
+          "relational": false,
+          "realised": {
+            "HUNGRY": "strong"
+          },
+          "eligible": [
+            "hungry-enough-horse-jockey",
+            "hungry-enough-to-eat-the-arse-out-of-a-duck",
+            "starvin"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "I am hungry enough to eat anything.",
+      "output": "I am hungry enough to eat anything.",
+      "predicates": [
+        {
+          "concepts": [
+            "HUNGRY"
+          ],
+          "lexical": {
+            "HUNGRY": "unmarked"
+          },
+          "qualifier": [],
+          "relational": true,
+          "realised": {
+            "HUNGRY": "unmarked"
+          },
+          "eligible": []
+        }
+      ]
+    },
+    {
+      "source": "I am so hungry that I could cry.",
+      "output": "I am so hungry that I could cry.",
+      "predicates": [
+        {
+          "concepts": [
+            "HUNGRY"
+          ],
+          "lexical": {
+            "HUNGRY": "unmarked"
+          },
+          "qualifier": [
+            "so"
+          ],
+          "relational": true,
+          "realised": {
+            "HUNGRY": "unmarked"
+          },
+          "eligible": []
+        }
+      ]
+    },
+    {
+      "source": "I am too hungry to sleep.",
+      "output": "I am too hungry to sleep.",
+      "predicates": []
+    },
+    {
+      "source": "She is slightly drunk.",
+      "output": "She is slightly full.",
+      "predicates": [
+        {
+          "concepts": [
+            "DRUNK"
+          ],
+          "lexical": {
+            "DRUNK": "unmarked"
+          },
+          "qualifier": [
+            "slightly"
+          ],
+          "relational": false,
+          "realised": {
+            "DRUNK": "mild"
+          },
+          "eligible": [
+            "a-bit-full",
+            "full-alcohol",
+            "pissed",
+            "rotten",
+            "shickered",
+            "sloshed",
+            "stonkered"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "She is very tipsy.",
+      "output": "She is very tipsy.",
+      "predicates": [
+        {
+          "concepts": [
+            "DRUNK"
+          ],
+          "lexical": {
+            "DRUNK": "mild"
+          },
+          "qualifier": [
+            "very"
+          ],
+          "relational": false,
+          "realised": {
+            "DRUNK": null
+          },
+          "eligible": []
+        }
+      ]
+    },
+    {
+      "source": "She is drunk enough to fall over.",
+      "output": "She is pissed enough to go arse over tit.",
+      "predicates": [
+        {
+          "concepts": [
+            "DRUNK"
+          ],
+          "lexical": {
+            "DRUNK": "unmarked"
+          },
+          "qualifier": [],
+          "relational": true,
+          "realised": {
+            "DRUNK": "unmarked"
+          },
+          "eligible": [
+            "full-alcohol",
+            "pissed",
+            "rotten",
+            "shickered",
+            "sloshed",
+            "stonkered"
+          ]
+        }
+      ]
+    },
+    {
+      "source": "She is legless enough to fall over.",
+      "output": "She is shit-faced enough to come a gutser.",
+      "predicates": [
+        {
+          "concepts": [
+            "DRUNK"
+          ],
+          "lexical": {
+            "DRUNK": "strong"
+          },
+          "qualifier": [],
+          "relational": true,
+          "realised": {
+            "DRUNK": "strong"
+          },
+          "eligible": [
+            "legless",
+            "shit-faced"
+          ]
+        }
+      ]
+    }
+  ],
+  "lookup": {
+    "absolutely starving": [
+      "starvin",
+      "hungry-enough-horse-jockey",
+      "hungry-enough-to-eat-the-arse-out-of-a-duck"
+    ],
+    "hungry enough to eat anything": [
+      "feel-like-a-decent-feed",
+      "feel-like-some-tucker"
+    ],
+    "sick of work": [
+      "had-a-gutful"
+    ],
+    "tired of life": [
+      "had-a-gutful"
+    ]
+  }
+}

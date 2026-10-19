@@ -5,6 +5,18 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Add an offline training-label audit and reject contradictory or self-negative pairs before model
+  construction. Generate wrong-sense anchors through the canonical exclusion parser and respect a
+  same-concept longer trigger's ownership. Keep the recipe, model weights and reference gates unchanged.
+- Recognise object-bearing annoyance predicates separately from illness and fatigue. Preserve the
+  source when a target cannot retain its object, and share the distinction across model/lexical lookup,
+  automatic translation, plans and editor alternatives.
+
+- Compose reviewed strong-adjective modifiers and let certified targets express a source modifier's
+  degree without duplicating it. Share qualifier ownership across translation and editor alternatives;
+  retain exact raw modifier spelling when it remains. Preserve certified lexical grade inside relational
+  predicates and flag bounded local threshold-grade changes during verification.
+
 - Retain bundled model 1.3.0 after a fresh 1.4.0 trial missed three required full-data reference checks.
   Preserve the rejected trial, diagnostic package-reader comparison and complete base-input integrity
   evidence without changing recipe, cutoffs or required gates. Strengthen the isolated reproduction

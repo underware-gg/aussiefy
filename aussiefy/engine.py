@@ -445,12 +445,22 @@ class Translator:
         form = self._form(choice.entry, det, run, sent.key)
         out = fit_article(realise(choice.entry, form, det), choice.entry, det, toks)
         s, e = replacement_span(choice.entry, det, toks)
+        retained_qualifier = ""
+        if det.degree_qualifier:
+            from .degree import degree_plan
+            if not degree_plan(choice.entry, det, form).absorb:
+                retained_qualifier = run.text[toks[det.start - len(det.degree_qualifier)].start:toks[det.start].start]
         echo = _gloss_echo(toks, s, e, out, spot.said)
         if echo:
             return SpotRendering(s, e, "", "", form, echo=echo)
         stacked, out = self._stack(out, choice, spot.keep, det, sent, run)
         riff, riff_suffix = self._riff(choice, det, e, sent, run)
-        s, out = _fix_article(out + riff_suffix, toks, s, spot.replaced)
+        if retained_qualifier:
+            # Case belongs to the predicate, not to an emphatically capitalised modifier.
+            _, out = _fix_article(out + riff_suffix, toks, det.start, spot.replaced)
+            out = retained_qualifier + out
+        else:
+            s, out = _fix_article(out + riff_suffix, toks, s, spot.replaced)
         return SpotRendering(s, e, out, out[:-len(riff_suffix)] if riff_suffix else out, form, stacked, riff)
 
     def _contextual_imagery(self, records, splices, sent, run):

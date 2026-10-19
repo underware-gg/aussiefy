@@ -39,6 +39,8 @@ from aussiefy.gaps import concept_labels  # noqa: E402
 from aussiefy.loader import load_dictionary  # noqa: E402
 from aussiefy.lookup import meaning_texts  # noqa: E402
 from aussiefy.models import home  # noqa: E402
+from aussiefy.matcher import compile_pattern  # noqa: E402
+from aussiefy.static import dictionary_fingerprint  # noqa: E402
 from aussiefy.terms import strip_markup  # noqa: E402
 
 RECIPE_PATH = ROOT / "training" / "recipe.yaml"
@@ -218,11 +220,27 @@ def sense_negatives(d, train) -> list[tuple[str, str]]:
             forms[cid].append(d.concepts[cid].description)
     out = []
     for cid, c in d.concepts.items():
-        for p in (p for ps in c.triggers.values() for p in ps if "!" in p):
-            base = clean(p)
-            for w in re.search(r"!(\S+)", p).group(1).split("@")[0].split("|"):
-                if len(w) >= 3:
-                    out += [(f"{base} {w}", f) for f in forms.get(cid, [])]
+        if not forms.get(cid):
+            continue
+        positive_triggers = {t.casefold() for t in triggers(d, cid)}
+        for frame, patterns in c.triggers.items():
+            for raw in patterns:
+                if '!' not in raw:
+                    continue
+                compiled = compile_pattern(raw, frame, (cid,), 3)
+                base = clean(raw)
+                for i, element in enumerate(compiled.elements):
+                    if element.kind != 'not':
+                        continue
+                    if any(e.kind in {'lit', 'slot'} for e in compiled.elements[i + 1:]):
+                        raise ValueError(f'Training cannot construct a nonterminal exclusion: {raw!r}')
+                    for word in sorted(element.values):
+                        if len(word) < 3:
+                            continue
+                        anchor = f"{base} {word}"
+                        # A short trigger may exclude a continuation owned by its longer positive trigger.
+                        if anchor.casefold() not in positive_triggers:
+                            out += [(anchor, f) for f in forms.get(cid, [])]
     return out + extra_pairs()[1]
 
 
@@ -247,6 +265,54 @@ def opposite_negatives(d, train) -> list[tuple[str, str]]:
             far += [d.concepts[y].description] if "description" in targets else []
             out += [(t, f) for t in anchors for f in far]
     return out
+
+
+def pair_sets(d, train) -> tuple[list, list, list]:
+    """Generate the exact positive, wrong-sense and opposite rows used by both fitting stages."""
+    return pairs(d, train), sense_negatives(d, train), opposite_negatives(d, train)
+
+
+def pair_conflicts(rows: tuple[list, list, list]) -> dict[str, list[list[str]]]:
+    """An undirected similarity pair cannot simultaneously attract and repel, regardless of case/spacing."""
+    def key(pair):
+        return tuple(sorted(" ".join(text.casefold().split()) for text in pair))
+    positives = {key(pair) for pair in rows[0]}
+    conflicts = {name: [list(pair) for pair in sorted(positives & {key(pair) for pair in negatives})]
+            for name, negatives in zip(('wrong_sense', 'opposite'), rows[1:])}
+    conflicts['negative_self'] = [list(pair) for pair in sorted({key(p) for group in rows[1:] for p in group
+                                                            if key(p)[0] == key(p)[1]})]
+    return conflicts
+
+
+def checked_pairs(d, train) -> tuple[list, list, list]:
+    rows = pair_sets(d, train)
+    conflicts = pair_conflicts(rows)
+    if any(conflicts.values()):
+        raise ValueError('Contradictory training labels; run audit before fitting: ' + json.dumps(conflicts))
+    return rows
+
+
+def audit(holdout: float, report: Path | None = None) -> int:
+    """Inspect generated rows without loading a model; sharing concepts is reported, not called an error."""
+    d = load_dictionary()
+    train, held = split(d, holdout)
+    rows = pair_sets(d, train)
+    conflicts = pair_conflicts(rows)
+    result = {'scope': 'Exact generated label conflicts; not a model-quality or in-batch-negative assessment.',
+              'entries': len(train), 'held': len(held), 'holdout': holdout,
+              'dictionary_sha256': dictionary_fingerprint(), 'recipe_sha256': sha256(RECIPE_PATH),
+              'trainer_sha256': sha256(Path(__file__)),
+              'counts': dict(zip(('positive', 'wrong_sense', 'opposite'), map(len, rows))),
+              'pair_sha256': {name: hashlib.sha256(json.dumps(data, ensure_ascii=False).encode()).hexdigest()
+                              for name, data in zip(('positive', 'wrong_sense', 'opposite'), rows)},
+              'multi_concept_entries': [{'id': e.id, 'concepts': list(e.concept)} for e in train if len(e.concept) > 1],
+              'conflicts': conflicts}
+    encoded = json.dumps(result, indent=2) + '\n'
+    if report is not None:
+        report.write_text(encoded, encoding='utf-8')
+    else:
+        print(encoded, end='')
+    return int(any(conflicts.values()))
 
 
 def vocabulary(es) -> list[str]:
@@ -326,7 +392,7 @@ def base_encoder():
 
 # --- train / distil ---------------------------------------------------------------------------------------
 
-def fit(model, d, train, epochs, lr, batch, path, work: Path) -> None:
+def fit(model, rows, epochs, lr, batch, path, work: Path) -> None:
     """MultipleNegativesRankingLoss on the pairs; ContrastiveLoss pushes the wrong senses apart."""
     from datasets import Dataset
     from sentence_transformers import SentenceTransformerTrainer
@@ -334,8 +400,8 @@ def fit(model, d, train, epochs, lr, batch, path, work: Path) -> None:
     from sentence_transformers.sentence_transformer.training_args import (BatchSamplers,
                                                                           SentenceTransformerTrainingArguments)
 
-    ps, negs, opp = pairs(d, train), sense_negatives(d, train), opposite_negatives(d, train)
-    print(f"{len(train)} training entries, {len(ps)} pairs, {len(negs)} wrong-sense pairs, {len(opp)} opposite pairs")
+    ps, negs, opp = rows
+    print(f"{len(ps)} pairs, {len(negs)} wrong-sense pairs, {len(opp)} opposite pairs")
 
     def apart(rows):
         return Dataset.from_dict({"sentence1": [a for a, _ in rows], "sentence2": [b for _, b in rows],
@@ -364,8 +430,9 @@ def train(work: Path, holdout: float) -> None:
     f = R["finetune"]
     d = load_dictionary()
     tr, _ = split(d, holdout)
+    rows = checked_pairs(d, tr)
     model = SentenceTransformer(R["base"]["model"], device="cpu", revision=R["base"]["revision"])
-    fit(model, d, tr, f["epochs"], f["lr"], f["batch"], work / "aussie-minilm", work)
+    fit(model, rows, f["epochs"], f["lr"], f["batch"], work / "aussie-minilm", work)
 
 
 def distil(work: Path, holdout: float, compare: bool) -> None:
@@ -380,6 +447,7 @@ def distil(work: Path, holdout: float, compare: bool) -> None:
     ds, st = R["distil"], R["static_tune"]
     d = load_dictionary()
     tr, _ = split(d, holdout)
+    rows = checked_pairs(d, tr)
     sources = [("static-aussie", work / "aussie-minilm")]
     if compare:
         sources.insert(0, ("static-stock", snapshot_download(R["base"]["model"], revision=R["base"]["revision"])))
@@ -391,7 +459,7 @@ def distil(work: Path, holdout: float, compare: bool) -> None:
     emb = StaticEmbedding.from_model2vec(str(work / "static-aussie"))
     emb.embedding.float()   # distilled vectors are float16, which overflows at a static model's learning rate
     model = SentenceTransformer(modules=[emb], device="cpu")
-    fit(model, d, tr, st["epochs"], st["lr"], st["batch"], work / "checkpoints" / "static-tuned-st", work)
+    fit(model, rows, st["epochs"], st["lr"], st["batch"], work / "checkpoints" / "static-tuned-st", work)
     vectors = emb.embedding.weight.detach().cpu().numpy()
     a = st.get("blend", 1.0)
     if a < 1.0:   # blend back towards the distilled vectors: one scale per matrix, so relative norms (the
@@ -809,6 +877,8 @@ def main() -> int:
     # (any command also takes --recipe PATH, for experiments with a variant of training/recipe.yaml)
     ck = sub.add_parser("check", parents=[recipe], help="the reference set against the shipped model (no torch)")
     ck.add_argument("--model", help="an exported model folder (default: the shipped one)")
+    au = sub.add_parser("audit", parents=[recipe], help="inspect training labels without loading a model")
+    au.add_argument("--report", type=Path, help="write JSON here instead of stdout")
     sub.add_parser("train", parents=[recipe])
     ds = sub.add_parser("distil", parents=[recipe])
     ds.add_argument("--no-compare", dest="compare", action="store_false", help="skip distilling the base model")
@@ -826,6 +896,7 @@ def main() -> int:
     work = args.out or home() / "train"
     run = {"release": lambda: release(args),
            "check": lambda: check(args.model),
+           "audit": lambda: audit(args.holdout, args.report),
            "train": lambda: train(work, args.holdout),
            "distil": lambda: distil(work, args.holdout, args.compare),
            "eval": lambda: evaluate(work, args.holdout),
