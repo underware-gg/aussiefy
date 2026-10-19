@@ -9,6 +9,13 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Preserve reviewed explicit semantic degree independently of style intensity: share source/target
+  certificates, retained qualifier ownership'n compatible realised forms across translation, plans and
+  automatic alternatives. Calibrate the DRUNK family without guessing unknown grades or removing terms.
+- Distinguish plural direct address from references to everyone: offer “you mob”/“youse” in simple group
+  greetings'n commands; preserve ambiguous parentheticals and coordinated recipients. Stone the flamin' crows, retain ordinary
+  distributive meanings in “Everyone came” and prevent direct dictionary replacements bypassin' usage.
+
 - Enable comic dictionary terms in solemn text at Troppo; other defaults stay off, with explicit
   `solemn_comic_terms` overrides taking precedence.
 
@@ -53,7 +60,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   So anyway, require both travel'n a swag for waltzing Matilda;
   exclude minimising nothing\-much wording from exact zero.
 - Preserve negative\-modal indifference wording'n supermarket location nouns through compatible sourced
-  forms. Fair dinkum, keep all existin' status'n flag gates; retained historical terms remain subject to their registers.
+  forms. Crikey, keep all existin' status'n flag gates; retained historical terms remain subject to their registers.
 - Regenerate change fixtures from the invoking checkout rather than an editable installation of another worktree.
 
 - Amend the unreleased `changes` contract v1 with optional `semantic_effects` entry-card metadata.
@@ -141,12 +148,12 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   Preserve capitals such as Australian and English when dictionary vocabulary alone would lowercase them.
   Place dialogue tags before punctuation'n curly closing quotes in continued speech.
 - Add an independently curated target\-expression benchmark with fixed inputs'n an explicit first baseline.
-  Crikey, share language cleanup with the trainer so grammar directives can't become trainin' words.
+  Fair dinkum, share language cleanup with the trainer so grammar directives can't become trainin' words.
 - Review the original seed listicle, add ten curated expressions with precise senses, and retain a complete
   decision ledger. Honour declared HTML encodings during acquisition without overriding explicit HTTP charsets.
 - Preserve outer auxiliaries'n question grammar, distinguish perfect\-have from possession, and retain the
   force of `shall`. Keep restless chucking, object\-taking pull the pin, evidentiary establish'n wholehearted devotion
-  separate from misleading slang senses. Stone the flamin' crows, add data\-owned complete\-verb guards'n strip pattern annotations
+  separate from misleading slang senses. Add data\-owned complete\-verb guards'n strip pattern annotations
   consistently before language matching'n model training.
 - Add reviewed contextual imagery, configurable exaggeration/association defaults, and writer\-only
   suggestions for comparisons needin' semantic or grammatical judgement. Direct suffixes share riff budgets.

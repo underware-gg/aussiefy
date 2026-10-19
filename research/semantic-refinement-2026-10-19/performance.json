@@ -1,0 +1,41 @@
+{
+  "baseline": "c891945",
+  "current": "uncommitted reviewed degree/address integration based on c891945",
+  "method": "sequential warm runs, lookup_embedder=None, default ngram fallback, 5 batches of180 translations percell; startup/model-loading excluded",
+  "limitations": "12 synthetic sentences, four policy cells, one machine/run; bounded regression evidence, not a website or Smart/Basic benchmark",
+  "rows": [
+    {
+      "corpus": "ordinary",
+      "embellishment": "deadset",
+      "vulgarity": 0,
+      "before_ms": 1.7264990724571463,
+      "after_ms": 1.7600097221374098,
+      "ratio": 1.0194095961097571
+    },
+    {
+      "corpus": "ordinary",
+      "embellishment": "troppo",
+      "vulgarity": 3,
+      "before_ms": 2.6295270835463374,
+      "after_ms": 2.5818782444629402,
+      "ratio": 0.9818793122985693
+    },
+    {
+      "corpus": "degree",
+      "embellishment": "deadset",
+      "vulgarity": 0,
+      "before_ms": 1.5001509280409664,
+      "after_ms": 1.4563650500753687,
+      "ratio": 0.9708123515126725
+    },
+    {
+      "corpus": "degree",
+      "embellishment": "troppo",
+      "vulgarity": 3,
+      "before_ms": 2.476998377824202,
+      "after_ms": 2.493198149992774,
+      "ratio": 1.0065400818642447
+    }
+  ],
+  "refinement": "Initial after-run retained. Removed avoidable ungraded set/band work and separate coordination scanner. Final after-run uses independently reviewed positive role evidence, after focused tests finished."
+}

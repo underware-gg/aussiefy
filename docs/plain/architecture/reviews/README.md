@@ -6,6 +6,7 @@ commands that have since been renamed. Decisions they led to are recorded in [de
 
 | Review | Summary |
 |---|---|
+| [design-review-2026-10-19-degree-and-address.md](../../../architecture/reviews/design-review-2026-10-19-degree-and-address.md) | Reviewed semantic degree, qualifier ownership and plural-address reading; integration verification in progress |
 | [design-review-2026-10-19-model-refresh.md](../../../architecture/reviews/design-review-2026-10-19-model-refresh.md) | Fresh pinned model fit, input provenance, required package-reader checks and bounded lookup evidence; integrated verification passed |
 | [design-review-2026-10-19-tone-controls.md](../../../architecture/reviews/design-review-2026-10-19-tone-controls.md) | Explicit solemn/comic substitution permission, approved Troppo defaults and cross-surface behaviour; focused review converged |
 | [design-review-2026-10-19-dictionary-overlays.md](../../../architecture/reviews/design-review-2026-10-19-dictionary-overlays.md) | Explicit raw vocabulary layers, canonical validation, source inheritance and shared compiled consumers; integrated verification passed |

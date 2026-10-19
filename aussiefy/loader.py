@@ -329,7 +329,9 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
             for t in texts:
                 try:
                     patterns.append(replace(compile_pattern(t, frame, (c.id,), 3),
-                                            guard=c.id not in replacement_concepts))
+                                            guard=c.id not in replacement_concepts,
+                                            semantic_degree={c.id: c.trigger_degrees[frame][t]}
+                                            if t in c.trigger_degrees.get(frame, {}) else {}))
                 except ValueError as exc:
                     errors.append(f"concept {c.id}: {exc}")
     for e in entries.values():
@@ -347,7 +349,8 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
             continue
         for f in e.all_forms:
             try:
-                forms.append(compile_pattern(f.replace("{np}", "{obj}"), e.frame, e.concept, e.intensity, entry_id=e.id))
+                forms.append(replace(compile_pattern(f.replace("{np}", "{obj}"), e.frame, e.concept,
+                                                     e.intensity, entry_id=e.id), semantic_degree=e.semantic_degree))
             except ValueError as exc:
                 errors.append(f"{e.id}: form {f!r}: {exc}")
 

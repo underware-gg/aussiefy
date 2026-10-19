@@ -144,9 +144,10 @@ class RoundPlan:
                        len(lines))
             for frame, ps in frames.items():
                 extra = ", ".join(f'"{p}"' for p in ps)
-                fl = next((i for i in range(start, end) if re.match(rf"^\s+{frame}:", lines[i])), None)
+                tl = next(i for i in range(start, end) if lines[i].strip() == "triggers:")
+                trigger_end = next((i for i in range(tl + 1, end) if re.match(r'^  \S', lines[i])), end)
+                fl = next((i for i in range(tl + 1, trigger_end) if re.match(rf"^\s+{frame}:", lines[i])), None)
                 if fl is None:
-                    tl = next(i for i in range(start, end) if lines[i].strip() == "triggers:")
                     lines.insert(tl + 1, f"    {frame}: [{extra}]")
                     end += 1
                     continue
@@ -169,6 +170,7 @@ class RoundPlan:
             triggers = _fixed_triggers(existing.get("triggers") or {}, cid, c.trigger_fixes)
             if triggers != (existing.get("triggers") or {}):
                 present[cid] = {**existing, "triggers": triggers}
+                _reconcile_trigger_degrees(present[cid])
                 text = _replace_concept(text, cid, present[cid])
         for cid, patch in c.concept_fixes.items():
             existing = present[cid]
@@ -309,7 +311,12 @@ def _collect_new_concepts(plan: RoundPlan, verdicts: list[tuple[str, dict]], d: 
             raw = _concept_patch({k: value for k, value in nc.items() if k != "id"}, f"new concept {cid}")
             parse_concept(cid, raw)
             cur = plan.new_concepts.setdefault(cid, {"description": "", "triggers": {}})
-            cur.update({k: value for k, value in raw.items() if k != "triggers"})
+            cur.update({k: value for k, value in raw.items() if k not in {"triggers", "trigger_degrees"}})
+            for frame, grades in raw.get('trigger_degrees', {}).items():
+                current = cur.setdefault('trigger_degrees', {}).setdefault(frame, {})
+                if any(p in current and current[p] != band for p, band in grades.items()):
+                    raise SchemaError(f'new concept {cid}: conflicting trigger degrees')
+                current.update(grades)
             for frame, ps in (raw.get("triggers") or {}).items():
                 cur["triggers"].setdefault(frame, [])
                 cur["triggers"][frame] += [p for p in ps or () if p not in cur["triggers"][frame]]
@@ -426,6 +433,7 @@ def _guard_new_concept_triggers(plan: RoundPlan, forms: set[str], queries: set[s
                 elif p not in keep:
                     keep.append(p)
             c["triggers"][frame] = keep
+        _reconcile_trigger_degrees(c)
 
 
 def _drop_unused_new_concepts(plan: RoundPlan) -> None:
@@ -455,6 +463,22 @@ def _without_intensity(pattern: str) -> str:
     return re.sub(r"@[1-5]$", "", pattern)
 
 
+def _reconcile_trigger_degrees(concept: dict) -> None:
+    if 'trigger_degrees' not in concept:
+        return
+    reconciled = {}
+    for frame, degrees in concept['trigger_degrees'].items():
+        for old, band in degrees.items():
+            for pattern in concept.get('triggers', {}).get(frame, ()):
+                if _without_intensity(old) != _without_intensity(pattern):
+                    continue
+                target = reconciled.setdefault(frame, {})
+                if pattern in target and target[pattern] != band:
+                    raise SchemaError('trigger rewrite conflicts with reviewed degree annotations')
+                target[pattern] = band
+    concept['trigger_degrees'] = reconciled
+
+
 def _fixed_triggers(triggers: dict, cid: str, fixes: dict, existing: dict | None = None) -> dict:
     """Explicit review instructions applied to proposed or preserved triggers, without regenerating metadata."""
     result = deepcopy(triggers)
@@ -480,6 +504,7 @@ def _fixed_triggers(triggers: dict, cid: str, fixes: dict, existing: dict | None
 def _apply_trigger_fixes(plan: RoundPlan, tf: dict, d: Dictionary) -> None:
     for cid, concept in plan.new_concepts.items():
         concept["triggers"] = _fixed_triggers(concept["triggers"], cid, tf)
+        _reconcile_trigger_degrees(concept)
     targets = set(plan.added_triggers) | set(tf.get("remove") or {}) | set(tf.get("add") or {})
     for cid in targets - plan.new_concepts.keys():
         if cid not in d.concepts:

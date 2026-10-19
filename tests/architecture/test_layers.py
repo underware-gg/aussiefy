@@ -6,7 +6,7 @@ from pathlib import Path
 
 PKG = Path(__file__).resolve().parents[2] / "aussiefy"
 MODULES = {p.stem for p in PKG.glob("*.py")} | {p.parent.name for p in PKG.glob("*/__init__.py")}
-CORE = {"text", "matcher", "detect", "select", "realise", "morph", "garnish", "context", "policy", "schema",
+CORE = {"degree", "text", "matcher", "detect", "select", "realise", "morph", "garnish", "context", "policy", "schema",
         "imagery", "model", "terms", "embed", "engine", "loader", "vocabulary", "static", "dump", "dialect", "genre", "pos", "protected", "profile", "cards", "masks", "changes"}
 UPPER = {"__init__", "harness", "lookup", "lint", "guide", "retelling", "yarn", "llm", "claude", "cli", "mcp_server", "gaps",
          "rounds", "explain", "scrape", "models", "markdown", "translation", "align", "verify", "judge", "markup"}

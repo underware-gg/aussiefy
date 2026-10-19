@@ -768,6 +768,7 @@
   concept:
   - DRUNK
   frame: predicate_adj
+  semantic_degree: {DRUNK: unmarked}
   intensity: 5
   vulgarity: 0
   incoherence: 5
@@ -970,6 +971,7 @@
   concept:
   - DRUNK
   frame: predicate_adj
+  semantic_degree: {DRUNK: unmarked}
   intensity: 3
   vulgarity: 0
   incoherence: 5
@@ -1239,11 +1241,11 @@
   - https://blog.worldsweeper.com/2016/05/27/can-you-identify-these-australian-slang-terms/
 - id: a-bit-full
   form: a bit full
-  variants:
-  - full
+  variants: []
   concept:
   - DRUNK
   frame: predicate_adj
+  semantic_degree: {DRUNK: mild}
   intensity: 2
   vulgarity: 0
   incoherence: 2
@@ -1362,6 +1364,7 @@
   concept:
   - DRUNK
   frame: predicate_adj
+  variants: [half cut]
   intensity: 2
   vulgarity: 0
   incoherence: 2
@@ -1751,6 +1754,7 @@
   concept:
   - DRUNK
   frame: predicate_adj
+  semantic_degree: {DRUNK: unmarked}
   intensity: 3
   vulgarity: 0
   incoherence: 5
@@ -1884,6 +1888,7 @@
   - DRUNK
   - TIRED
   frame: predicate_adj
+  semantic_degree: {DRUNK: unmarked}
   intensity: 4
   vulgarity: 0
   incoherence: 4
@@ -2358,3 +2363,15 @@
   gloss: Asking the listener's view at the end.
   notes: Needs the opinion check for closers (the engine ignores closer contexts today). As a direct swap for "what
     do you think?" it is safe now.
+
+- id: full-alcohol
+  form: full
+  concept: [DRUNK]
+  frame: predicate_adj
+  intensity: 2
+  incoherence: 2
+  register: current
+  gloss: Drunk; intoxicated.
+  notes: 'Australian alcohol sense. Output only: bare full remains ambiguous with food and containers.'
+  sources: ['https://content.vu.edu.au/sites/default/files/aussie-slang.pdf']
+  semantic_degree: {DRUNK: unmarked}

@@ -10,7 +10,8 @@ from typing import Any, Callable, Literal, Protocol, Sequence
 
 from . import pos
 from .context import FORMAL_RE, is_chant, sentence_contexts, text_mood
-from .detect import CODE_CONCEPTS, DETERMINERS, Detection, after_determiner, detect, fallback_scorer, resolve_overlaps
+from .detect import (CODE_CONCEPTS, DETERMINERS, Detection, after_determiner, detect, fallback_scorer,
+                     resolve_overlaps, owned_degree_modifiers, degree_modifier_spans)
 from .embed import Embedder, make_embedder
 from .garnish import (Edit, GarnishOffer, GarnishRecord, PhoneticRecord, PhoneticTrace, apply_phonetic, ends_in_list,
                       garnish_offer, pick_riff, place_garnish, tag_in_speech)
@@ -67,6 +68,8 @@ class SubstitutionRecord:
             "pattern": d.pattern,
             "score": d.score,
             "intensity": d.intensity,
+            **({'semantic_degree': dict(d.semantic_degree), 'degree_qualifier': list(d.degree_qualifier),
+                'degree_conflicts': sorted(d.degree_conflicts)} if d.semantic_degree or d.degree_conflicts else {}),
             "captures": d.describe_captures(),
             "decision": self.decision,
             "p_substitute": round(self.p, 3),
@@ -313,6 +316,9 @@ class Translator:
         keep = partial(_no_drawl, keep_quotes=run.genre.policy.keep_quotes, protected=masked.no_phonetic)
         preserve = partial(document_spans, keep_quotes=run.genre.policy.keep_quotes,
                            datelines=run.genre.policy.dateline_context)
+        if owned_degree_modifiers(tokens, self.dictionary.degree_index.find(tokens)):
+            document_preserve = preserve
+            preserve = lambda current: document_preserve(current) + degree_modifier_spans(current, self.dictionary.degree_index)
         trace = PhoneticTrace(keep, preserve) if _observer is not None else None
         final, phon = apply_phonetic(joined, self.dictionary.phonetic, run.eff, pol.seed,
                                      infixes=run.embellishment.takes("infix"), keep=keep, preserve=preserve,
@@ -350,7 +356,7 @@ class Translator:
         dets = resolve_overlaps(detect(toks, self.dictionary.index, self._fallback_scorer(pol.embedder),
                                        self.dictionary.fallback_patterns, pol.similarity_threshold, sent.tags,
                                        self.dictionary.adjective_nouns, concepts=self.dictionary.concepts,
-                                       complete=sent.complete))
+                                       complete=sent.complete, degree_index=self.dictionary.degree_index))
         held = run.held(toks)
         dets = [d for d in dets if not self._term_of_art(d, run.genre.policy.term_domains)
                 and not held & set(range(d.start, d.end))]
@@ -507,7 +513,7 @@ class Translator:
                   and not uses.get(c.entry.id) and not det.coordinated
                   and len(c.entry.form.split()) <= STACK_MAX_WORDS and len(choice.entry.form.split()) <= STACK_MAX_WORDS
                   and abs(c.entry.intensity - choice.entry.intensity) <= STACK_INTENSITY_SPREAD]
-        if not others or run.eff.profile.stack <= 0 or roll(run.pol.seed, "stack", *sent.key, det.start) >= run.eff.profile.stack:
+        if det.degree_qualifier or not others or run.eff.profile.stack <= 0 or roll(run.pol.seed, "stack", *sent.key, det.start) >= run.eff.profile.stack:
             return None, out
         extra = weighted_pick(others, roll(run.pol.seed, "stack-pick", *sent.key, det.start))
         uses[extra.entry.id] += 1

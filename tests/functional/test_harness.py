@@ -481,6 +481,13 @@ def test_an_entry_used_three_times_is_one_repeat_however_its_forms_overlap(trans
     assert [(w["phrase"], w["times"]) for w in reps] == [("a bit full", 3)]
 
 
+def test_separate_uses_of_an_inner_form_still_count_as_repetition(translator):
+    text = "It's a bit full. He was full. She was full. They were full."
+    reps = [w for w in harness.lint(text, translator=translator)["warnings"]
+            if w["kind"] == "repeated"]
+    assert [(w["phrase"], w["times"]) for w in reps] == [("full", 3)]
+
+
 def test_an_unclosed_template_brace_doesnt_swallow_the_text(translator):
     text = "In Python, write {{ to get a brace. The kids were very tired.\n\nClose it with }} at the end."
     out = __import__("aussiefy").translate(text, translator=translator, level=4, seed=1, markup="markdown").text

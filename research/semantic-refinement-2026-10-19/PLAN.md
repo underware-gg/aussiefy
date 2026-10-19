@@ -122,7 +122,7 @@ Independent source calibration covers all 18 DRUNK entries and 19 forms. See
 [degree calibration](drunk-degree-calibration.md). Implementation remains separate; the evidence does not
 certify unknown ratings, erase terms or change availability for input without an explicit degree.
 
-## Isolated degree implementation
+## Isolated degree implementation (prototype history)
 
 The next slice is implemented in `/private/tmp/aussiefy-degree-prototype-20261019`, outside the model/full-suite
 inputs, and is not yet integrated into this checkout. Optional concept-scoped entry grades and frame/exact-trigger
@@ -139,7 +139,7 @@ The parent observed 106 broader prototype passes before those corrections; final
 source forms and the spaced half-cut variant. Full original-checkout integration,
 corpus readback, performance measurement and verification remain. Do not describe this prototype as shipped.
 
-## Plural address refinement
+## Plural address refinement (prototype history)
 
 The user identified “Hi everyone” becoming “G'day every bugger” in a website showcase. Independent diagnosis
 confirms a missing direct-address versus quantified-reference distinction. Referential “Every bugger came”
@@ -148,3 +148,41 @@ adds concept-scoped noun-use restrictions to shared applicability, reuses greeti
 supplies plural-address meanings/forms. Ambiguous detached phrases stay uncommitted rather than guessing
 from a comma alone. Initial address/schema checks passed 55 cases; independent review and integration
 remain. No website checkout or external agent was contacted.
+
+## Degree/address integration on dev
+
+The reviewed prototypes are integrated locally after c891945. Shared degree checks, source family/qualifier
+ownership and noun-use restrictions retain the normal engine seams. Combined scratch checks passed163;
+independent original-checkout review and complete suite remain. The exact showcase input now starts
+“G'day youse” at the documented website defaults. Canonical golden readback changes only the group-greeting
+and very-drunk sentence families; change fixtures are unchanged. Initial bounded warm timings are in
+performance.json and do not measure the website's Smart/Basic paths. The model's dictionary fingerprint
+correctly becomes stale as new reviewed data lands; retrieval checks remain required.
+
+Research reconciliation of batches7–11 found47 recommendation records: eight already fully resolved,
+two degree entries owned by this slice and37 needing at least one action, including eight wording/source
+corrections. Next apply the clear data repairs, then address shared object/destination/manner/person-reference
+work where needed. Intentional localisation policies and provisional evidence gaps are retained separately.
+
+
+## Integrated review convergence
+
+Independent final review passed150 focused degree/address/schema cases,39 additional role probes and2
+combined changes/plain parity checks. The root reader now requires positive evidence of reference as well
+as address; unparsed commands do not become quantified references merely because no address was proved.
+The separate recipient-list scanner was removed. Final warm timings versus c891945 are retained in
+performance-before.json/performance-after.json: ordinary Deadset1.0194x, ordinary Troppo0.9819x,
+degree Deadset0.9708x and degree Troppo1.0065x. These bounded runs exclude startup and do not measure
+website Smart/Basic latency.
+
+The first full integrated run passed2940 with2 expected skips and1 nested repetition failure. Splitting
+bare full from a-bit-full exposed two warnings for the same occurrence. Canonical lint repetition counting
+now owns the outer recognised span once, retaining separate inner-form uses. Independent follow-on review
+passed57 harness tests and6 extra probes. The final full suite passed2942 with2 expected local-corpus skips in848.75seconds. Ruff, generated
+documentation, provenance and diff checks passed. This completes the integrated degree/address slice.
+
+The user settled quantity policy: preserve facts by default at Deadset, allow reviewed approximation for
+narrative Dinkum/Troppo, retain precision for factual document presets, and let explicit advanced overrides
+win. Source-to-concept annotations, not global labels on yonks/donkey's years, will own the conditional
+precision loss. The next scratch prototype is independently reviewed before adoption. External website
+and design agents have not been contacted.

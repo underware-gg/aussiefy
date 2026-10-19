@@ -5,6 +5,13 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Preserve reviewed explicit semantic degree independently of style intensity: share source/target
+  certificates, retained qualifier ownership and compatible realised forms across translation, plans and
+  automatic alternatives. Calibrate the DRUNK family without guessing unknown grades or removing terms.
+- Distinguish plural direct address from references to everyone: offer “you mob”/“youse” in simple group
+  greetings and commands; preserve ambiguous parentheticals and coordinated recipients. Retain ordinary
+  distributive meanings in “Everyone came” and prevent direct dictionary replacements bypassing usage.
+
 - Enable comic dictionary terms in solemn text at Troppo; other defaults stay off, with explicit
   `solemn_comic_terms` overrides taking precedence.
 

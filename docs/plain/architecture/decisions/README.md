@@ -54,10 +54,12 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 | [DD-031](../../../architecture/decisions/dd-031-narrator-opinion.md) | Configure reviewed added narrator opinion without weakening meaning or role preservation | Accepted |
 | [DD-032](../../../architecture/decisions/dd-032-dictionary-overlays.md) | Explicit ordered vocabulary corrections compiled into one shared dictionary | Accepted |
 | [DD-033](../../../architecture/decisions/dd-033-explicit-solemn-comic-permission.md) | Explicit advanced permission for comic substitutions in solemn text, with an approved Troppo default | Accepted |
+| [DD-034](../../../architecture/decisions/dd-034-reviewed-semantic-degree.md) | Reviewed degree and retained qualifiers, separate from style intensity | Accepted |
+| [DD-035](../../../architecture/decisions/dd-035-noun-reference-and-address.md) | Shared grammatical noun usage distinguishes reference from direct address | Accepted |
 
 ## By topic
 
-- **Engine:** DD-001, DD-003, DD-007, DD-029, DD-030
+- **Engine:** DD-001, DD-003, DD-007, DD-029, DD-030, DD-034, DD-035
 - **Dictionary and data:** DD-002, DD-010, DD-012, DD-025, DD-032
 - **The dials:** DD-004, DD-005
 - **Structure and interfaces:** DD-006, DD-008, DD-009, DD-015, DD-016, DD-019, DD-020, DD-021, DD-022, DD-023, DD-024, DD-028, DD-029

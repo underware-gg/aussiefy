@@ -161,6 +161,7 @@ class Entry:
     flags: tuple[str, ...] = ()
     sources: tuple[str, ...] = ()
     semantic_effects: tuple[str, ...] = ()  # additions made by every meaning mapping and form of this entry
+    semantic_degree: dict[str, str] = field(default_factory=dict)
     gloss: str = ""
     slots: dict[str, str] = field(default_factory=dict)
     type: str = "idiom"
@@ -227,6 +228,9 @@ class Concept:
     not_in: frozenset[str] = frozenset()  # genres where its triggers are terms of art (a browser's cookie, a
                                           # struct's field, a build): left as they are there
     unless_after: tuple[str, ...] = ()  # complements that do not establish this meaning, across soft punctuation
+    trigger_degrees: dict[str, dict[str, str]] = field(default_factory=dict)
+    noun_use: str = "any"          # any | reference | address: grammatical use of a noun phrase
+    takes_addressee: bool = False  # an expression whose following recipient is direct address
 
 
 CONCEPT_KEYS = frozenset(f.name for f in fields(Concept)) - {"id"}
@@ -237,7 +241,7 @@ ENTRY_KEYS = (
     "id", "form", "variants", "spellings", "insult", "concept", "frame", "class", "plural", "number", "slots", "intensity", "vulgarity",
     "mask", "profane", "incoherence", "register", "region", "replaces", "status", "flags", "plain_sense", "type", "placement", "when",
     "stretch",
-    "tone", "weight", "semantic_effects", "gloss", "notes", "sources", "key_sha256",
+    "tone", "weight", "semantic_effects", "semantic_degree", "gloss", "notes", "sources", "key_sha256",
 )
 
 
@@ -344,6 +348,9 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
         raise SchemaError(f"{entry_id}: only clause frames may use {{subj}}")
 
     concept = _tuple(raw.get("concept"), "concept", entry_id)
+    semantic_degree = parse_degrees(raw.get('semantic_degree', {}), entry_id)
+    if set(semantic_degree) - set(concept):
+        raise SchemaError(f'{entry_id}: semantic_degree keys must be mapped concepts')
     if not concept and etype != "garnish" and "untagged" not in flags:
         raise SchemaError(f"{entry_id}: at least one concept is required")
     if "untagged" in flags and status == "active":
@@ -396,6 +403,7 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
         flags=flags,
         sources=_tuple(raw.get("sources"), "sources", entry_id),
         semantic_effects=effects,
+        semantic_degree=semantic_degree,
         gloss=raw.get("gloss", "") or "",
         slots=dict(slots),
         type=etype,
@@ -425,6 +433,13 @@ def parse_not_in(where: str, raw: Any) -> frozenset[str]:
     return not_in
 
 
+def parse_degrees(raw, owner: str) -> dict[str, str]:
+    if not isinstance(raw, dict) or any(not isinstance(k, str) or not isinstance(v, str)
+                                       or v not in {'mild', 'unmarked', 'strong'} for k, v in raw.items()):
+        raise SchemaError(f'{owner}: degree must be a mapping to mild, unmarked or strong')
+    return dict(raw)
+
+
 def parse_concept(cid: str, raw: dict) -> Concept:
     if not isinstance(cid, str):
         raise SchemaError(f"concept id {cid!r} is not a string (YAML reads bare YES/NO/ON/OFF as booleans)")
@@ -442,6 +457,17 @@ def parse_concept(cid: str, raw: dict) -> Concept:
     for frame in triggers:
         if frame not in FRAMES:
             raise SchemaError(f"concept {cid}: unknown trigger frame {frame!r}")
+    triggers = {f: _tuple(v, f'triggers.{f}', f'concept {cid}') for f, v in triggers.items()}
+    trigger_degrees = raw.get('trigger_degrees', {})
+    if not isinstance(trigger_degrees, dict) or set(trigger_degrees) - set(triggers):
+        raise SchemaError(f'concept {cid}: trigger_degrees must name existing trigger frames')
+    trigger_degrees = {f: parse_degrees(v, f'concept {cid}.{f}') for f, v in trigger_degrees.items()}
+    for frame, degrees in trigger_degrees.items():
+        if set(degrees) - set(triggers[frame]):
+            raise SchemaError(f'concept {cid}.{frame}: degree keys must name existing trigger patterns')
+    noun_use = raw.get("noun_use", "any")
+    if not isinstance(noun_use, str) or noun_use not in {"any", "reference", "address"}:
+        raise SchemaError(f"concept {cid}: noun_use must be any, reference or address")
     not_in = parse_not_in(f"concept {cid}", raw.get("not_in"))
     unless_after = _tuple(raw.get("unless_after"), "unless_after", f"concept {cid}")
     if any(not re.fullmatch(r"[a-z]+", word) for word in unless_after):
@@ -449,9 +475,12 @@ def parse_concept(cid: str, raw: dict) -> Concept:
     return Concept(
         id=cid,
         description=raw.get("description", ""),
-        triggers={f: _tuple(v, f"triggers.{f}", f"concept {cid}") for f, v in triggers.items()},
+        triggers=triggers,
         person=_bool(raw, "person", f"concept {cid}"),
         neutral_person=_bool(raw, "neutral_person", f"concept {cid}"),
         not_in=not_in,
         unless_after=unless_after,
+        trigger_degrees=trigger_degrees,
+        noun_use=noun_use,
+        takes_addressee=_bool(raw, "takes_addressee", f"concept {cid}"),
     )

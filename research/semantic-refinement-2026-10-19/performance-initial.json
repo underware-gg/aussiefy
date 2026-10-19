@@ -1,0 +1,79 @@
+{
+  "module": "/Users/robmorris/Development/Underware/aussiefy/aussiefy/__init__.py",
+  "samples": {
+    "ordinary": [
+      "The young man arrived late. His wife had cooked dinner for the children.",
+      "We drove to the service station, bought some food and went to the beach.",
+      "The politician gave a speech about the difficult work ahead.",
+      "My friend said the new house was wonderful, but the car was broken.",
+      "He thanked his fellow Texans and his fellow citizens.",
+      "The engineer carefully checked the pressure before opening the valve."
+    ],
+    "degree": [
+      "She is tipsy, and he is legless.",
+      "She is very drunk. He is slightly drunk.",
+      "She is not very drunk. He is very pissed.",
+      "She was so drunk that she fell asleep.",
+      "They are drunk. She is very sozzled.",
+      "She is very tipsy. He is slightly legless."
+    ]
+  },
+  "timings": [
+    {
+      "corpus": "ordinary",
+      "embellishment": "deadset",
+      "vulgarity": 0,
+      "translations_per_batch": 180,
+      "seconds": [
+        0.4323632080340758,
+        0.3651812499156222,
+        0.3410267080180347,
+        0.3304271250963211,
+        0.3467016249196604
+      ],
+      "median_ms_per_translation": 1.9261201384425577
+    },
+    {
+      "corpus": "ordinary",
+      "embellishment": "troppo",
+      "vulgarity": 3,
+      "translations_per_batch": 180,
+      "seconds": [
+        0.5662627500714734,
+        0.5948055839398876,
+        0.5194643749855459,
+        0.5331496660364792,
+        0.5499538750154898
+      ],
+      "median_ms_per_translation": 3.0552993056416096
+    },
+    {
+      "corpus": "degree",
+      "embellishment": "deadset",
+      "vulgarity": 0,
+      "translations_per_batch": 180,
+      "seconds": [
+        0.28583720803726465,
+        0.3050346670206636,
+        0.2913486249744892,
+        0.2784148750361055,
+        0.2788701249519363
+      ],
+      "median_ms_per_translation": 1.5879844890959147
+    },
+    {
+      "corpus": "degree",
+      "embellishment": "troppo",
+      "vulgarity": 3,
+      "translations_per_batch": 180,
+      "seconds": [
+        0.45902308297809213,
+        0.4571703750407323,
+        0.4545877920463681,
+        0.47817737492732704,
+        0.4792652080068365
+      ],
+      "median_ms_per_translation": 2.5501282387671784
+    }
+  ]
+}

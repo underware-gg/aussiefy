@@ -232,6 +232,18 @@ SICK:
 DRUNK:
   description: Intoxicated by alcohol.
   person: true
+  trigger_degrees:
+    predicate_adj:
+      drunk: unmarked
+      wasted@4: strong
+      hammered@4: strong
+      plastered@4: strong
+      smashed@4: strong
+      tipsy@2: mild
+      intoxicated@3: unmarked
+      legless@5: strong
+      inebriated@4: unmarked
+      tiddly@2: mild
   triggers:
     predicate_adj: ["drunk", "wasted@4", "hammered@4", "plastered@4", "smashed@4", "tipsy@2", "intoxicated@3",
                     "legless@5", "inebriated@4", "tiddly@2"]
@@ -287,12 +299,19 @@ FAR_AWAY:
     np: ["the middle of nowhere", "the back of beyond", "the boondocks", "the sticks"]
 EVERYONE:
   description: Absolutely everybody.
+  noun_use: reference
   neutral_person: true
   # a policy's, a doc's or a report's "everyone" is a plain quantifier ("one price for everyone", "let everyone
   # know" in an obituary): every man and his dog and every bastard are a crowd's hyperbole (dinkum-check round)
   not_in: [official, technical, news, instructions]
   triggers:
     np: ["everyone !=else", "everybody !=else", "the whole world"]   # "every bugger else" isn't said
+PLURAL_ADDRESS:
+  description: Speaking directly to a group of people.
+  noun_use: address
+  neutral_person: true
+  triggers:
+    np: [everyone, everybody]
 NOTHING:
   description: Nothing at all; very little.
   # a policy's or a doc's "nothing" is a logical quantifier ("Nothing in this communication is advice"), not a
@@ -668,6 +687,7 @@ SURPRISE:
                    "goodness me", "gosh", "golly", "oh dear", "blimey", "holy cow", "well I never",
                    "I can't believe it", "unbelievable"]
 GREETING:
+  takes_addressee: true
   description: Hello.
   triggers:
     interjection: ["hello", "hi", "hey", "hi there", "hello there", "good morning", "good day", "greetings"]
@@ -676,11 +696,13 @@ HOW_ARE_YOU:
   triggers:
     interjection: ["how are you", "how are you doing", "how's it going", "how are things", "how have you been"]
 GOODBYE:
+  takes_addressee: true
   description: Farewell.
   triggers:
     interjection: ["goodbye", "bye", "see you later", "see you", "farewell", "bye for now", "catch you later",
                    "see you soon", "take care"]
 THANKS:
+  takes_addressee: true
   description: Thanks.
   triggers:
     interjection: ["thanks", "thank you", "thank you very much", "thanks a lot", "thank you so much", "many thanks",
@@ -2226,6 +2248,7 @@ FAIR_POINT:
   triggers:
     interjection: [fair point, good point, that's a fair point, that's a good point, point taken]
 WELL_DONE:
+  takes_addressee: true
   description: Praise or congratulation for something someone did.
   triggers:
     interjection: [well done, good for you, nice one, bravo, good job]

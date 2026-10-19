@@ -124,7 +124,9 @@ def fit_rejection(entry: Entry, det: Detection, eff: Effective, person_concepts:
     if entry.frame == "clause" and det.question and not any(question_form(f) for f in entry.all_forms):
         return "clause has no supported question form"
     if not usable_forms(entry, det):
-        return "no form fits: " + (form_problem(entry.form, det) or form_problem(entry.all_forms[-1], det) or "")
+        from .degree import degree_problem
+        return "no form fits: " + (form_problem(entry.form, det) or degree_problem(entry, det, entry.form)
+                                  or form_problem(entry.all_forms[-1], det) or "")
     return None
 
 
@@ -160,7 +162,8 @@ def form_problem(form: str, det: Detection) -> str | None:
 def usable_forms(entry: Entry, det: Detection) -> list[str]:
     """The entry's forms (its form and variants) whose slots this span can fill: "his wife" takes "{poss}
     missus", a bare "wife" takes "the missus"."""
-    return [f for f in entry.all_forms if form_problem(f, det) is None
+    from .degree import degree_problem
+    return [f for f in entry.all_forms if form_problem(f, det) is None and degree_problem(entry, det, f) is None
             and (entry.frame != "clause" or not det.question or question_form(f) is not None)]
 
 

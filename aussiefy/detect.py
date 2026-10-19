@@ -15,7 +15,7 @@ triggers missed.
 from __future__ import annotations
 
 from collections import Counter
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from typing import Callable, NamedTuple
 
 from . import morph, pos
@@ -23,17 +23,21 @@ from .context import TIME_ADVERBS, argument_complete, following_context, noun_ar
 from .embed import Embedder, NgramEmbedder, similarity_scorer
 from .matcher import match_at, SLOT_MATCHERS, Match, Pattern, PatternIndex, is_name
 from .schema import Concept
+from .degree import QUALIFIER_WORDS
 from .text import CLAUSE_BREAK, QUOTES, SENTENCE_END, Token
 
 
 def applicable_concepts(concepts: tuple[str, ...], rules: dict[str, Concept] | None,
-                        tokens: list[Token], end: int, complete: bool = True) -> tuple[str, ...]:
+                        tokens: list[Token], end: int, complete: bool = True,
+                        noun_use: str = "reference") -> tuple[str, ...]:
     """Meaning restrictions apply equally to exact triggers, direct entries and similarity matches."""
     if rules is None:
         return concepts
     following = following_context(tokens, end, complete)
-    return tuple(cid for cid in concepts if not rules[cid].unless_after
-                 or following.known and following.word not in rules[cid].unless_after)
+    return tuple(cid for cid in concepts
+                 if rules[cid].noun_use in {"any", noun_use}
+                 and (not rules[cid].unless_after
+                      or following.known and following.word not in rules[cid].unless_after))
 
 DETERMINERS = {"a", "an", "the", "my", "your", "his", "her", "its", "our", "their", "this", "that", "these",
                "those", "some", "any", "no", "every", "each"}
@@ -70,7 +74,12 @@ class Detection:
     person_only: bool = False          # the trigger is said only of people ("full", "drained": not of a tank)
     result_clause: bool = False      # "so X (that) ..." - only single-word swaps keep the grammar
     tense: str = "present"           # narrative tense of the sentence, for slots with no verb of their own
+    noun_use: str = "reference"
     coordinated: bool = False        # shares its verb with another predicate ("tired and hungry")
+    semantic_degree: dict[str, str] = field(default_factory=dict)
+    degree_concepts: frozenset[str] = frozenset()
+    degree_conflicts: frozenset[str] = frozenset()
+    degree_qualifier: tuple[str, ...] = ()
 
     def describe_captures(self) -> dict[str, str]:
         return {k: v.text for k, v in self.captures.items()}
@@ -170,6 +179,117 @@ def at_clause_end(tokens: list[Token], i: int, conjunctions: bool = False) -> bo
     return conjunctions and tokens[i].norm in ("and", "but", "or", "so", "then", "please")
 
 
+class PredicateLead(NamedTuple):
+    start: int
+    boost: int
+    before: int
+    negated: bool
+
+
+def predicate_lead(tokens: list[Token], start: int, reviewed_degree: bool = False) -> PredicateLead:
+    j, absorbed, boost = start - 1, start, 0
+    while j >= 0:
+        two = f"{tokens[j - 1].norm} {tokens[j].norm}" if j >= 1 else ''
+        if two in morph.INTENSIFIERS:
+            boost += morph.INTENSIFIERS[two]
+            absorbed, j = j - 1, j - 2
+        elif tokens[j].norm in morph.INTENSIFIERS:
+            boost += morph.INTENSIFIERS[tokens[j].norm]
+            absorbed, j = j, j - 1
+        elif reviewed_degree and tokens[j].norm in QUALIFIER_WORDS:
+            absorbed, j = j, j - 1
+        elif tokens[j].norm in {'not', 'never', 'hardly'}:
+            return PredicateLead(absorbed, boost, j, True)
+        elif tokens[j].norm in morph.HEDGES:
+            j -= 1
+        else:
+            break
+    return PredicateLead(absorbed, boost, j, False)
+
+
+def owned_degree_modifiers(tokens: list[Token], matches: list[Match]) -> set[int]:
+    return {i for match in matches if match.pattern.frame in {'adj', 'predicate_adj'}
+            for i in range(predicate_lead(tokens, match.start, reviewed_degree=True).start, match.start)}
+
+
+def degree_modifier_spans(text: str, index: PatternIndex) -> list[tuple[int, int]]:
+    from .text import tokenize
+    tokens = tokenize(text)
+    return [(tokens[i].start, tokens[i].end) for i in sorted(owned_degree_modifiers(tokens, index.find(tokens)))]
+
+
+def interjection_recipient(tokens: list[Token], end: int) -> tuple[int, int] | None:
+    start = end + int(end < len(tokens) and tokens[end].text == ',')
+    if start < len(tokens) and (tokens[start].norm in VOCATIVES or is_name(tokens[start])):
+        if at_clause_end(tokens, start + 1):
+            return start, start + 1
+    return None
+
+
+def imperative_start(tokens: list[Token], i: int, tags: list[str]) -> bool:
+    if i >= len(tokens):
+        return False
+    if tags[i] == 'VB':
+        return True
+    return (tokens[i].norm in {'do', 'have'} and tags[i] == 'VBP' and i + 1 < len(tokens)
+            and tokens[i + 1].norm not in (set(morph.PRONOUNS) | morph.PERSON_INDEFINITES))
+
+
+def finite_verb(token: Token, tag: str) -> bool:
+    """A finite tag corroborated by morphology, rather than an ambiguous bare command form."""
+    word = token.norm
+    if tag == 'MD':
+        return word in VERB_LEADERS
+    if tag == 'VBD':
+        return morph.is_past(word) and word not in morph.IRREGULAR
+    if tag == 'VBZ':
+        return word in {'is', 'has', 'does'} or (word.endswith('s') and not word.endswith(('ss', 'us', 'is'))
+                                                and word not in pos.IMPERATIVES)
+    return False
+
+
+def noun_usage(tokens: list[Token], start: int, end: int, tags: list[str],
+               address_starts: set[int]) -> str:
+    """Read the role of the enclosing noun phrase; partial or ambiguous recipients stay uncommitted."""
+    left, right = start, end
+    modifiers = {'JJ', 'JJR', 'JJS', 'RB', 'RBR', 'RBS', 'DT', 'PRP$'}
+    while left > 0 and tags[left - 1] in modifiers:
+        left -= 1
+    while right < len(tokens) and tags[right] in {'RB', 'RBR', 'RBS'}:
+        right += 1
+    qualified = (left, right) != (start, end)
+    if left in address_starts:
+        return 'address' if not qualified and at_clause_end(tokens, right) else 'unknown'
+    if any(origin < left and all(tokens[i].is_word and tokens[i].norm not in morph.PRONOUNS
+                                 for i in range(origin, left)) for origin in address_starts):
+        return 'unknown'  # a tagger guess must not certify an unparsed recipient as a governed object
+    before_comma = left > 0 and tokens[left - 1].text == ','
+    after_comma = right < len(tokens) and tokens[right].text == ','
+    initial = at_clause_start(tokens, left)
+    if after_comma and initial:
+        if any(t.text == ',' for t in tokens[right + 1:]):
+            return 'unknown'  # a balanced detached phrase may be parenthetical rather than a command
+        j = right + 1
+        if j < len(tokens) and tokens[j].norm == 'please':
+            j += 1
+        if imperative_start(tokens, j, tags):
+            return 'unknown' if qualified else 'address'
+    if before_comma and at_clause_end(tokens, right):
+        j = int(tokens[0].norm == 'please')
+        if j < left - 1 and imperative_start(tokens, j, tags):
+            return 'unknown' if qualified else 'address'
+        return 'unknown'
+    if right < len(tokens) and finite_verb(tokens[right], tags[right]):
+        return 'reference'
+    if left > 0:
+        governor = left - 1
+        if tags[governor] in {'IN', 'TO'} or finite_verb(tokens[governor], tags[governor]):
+            return 'reference'
+        if tags[governor] in {'VB', 'VBP'} and verb_subject(tokens, governor, tags) is not None:
+            return 'reference'
+    return 'unknown'
+
+
 class PredicateContext(NamedTuple):
     """What lies left of a predicate: "she's [really] [tired]", "are you [crazy]"."""
     start: int                  # where the span starts once intensifiers before it are absorbed
@@ -180,27 +300,11 @@ class PredicateContext(NamedTuple):
     question: bool              # inverted: "are you crazy"
 
 
-def predicate_context(tokens: list[Token], start: int) -> PredicateContext | None:
+def predicate_context(tokens: list[Token], start: int, reviewed_degree: bool = False) -> PredicateContext | None:
     """The context of a predicate starting at tokens[start], or None when the span isn't in predicate position."""
-    j = start - 1
-    boost = 0
-    absorbed = start
-    while j >= 0:
-        two = f"{tokens[j - 1].norm} {tokens[j].norm}" if j >= 1 else ""
-        if two in morph.INTENSIFIERS:
-            boost += morph.INTENSIFIERS[two]
-            absorbed = j - 1
-            j -= 2
-        elif tokens[j].norm in morph.INTENSIFIERS:
-            boost += morph.INTENSIFIERS[tokens[j].norm]
-            absorbed = j
-            j -= 1
-        elif tokens[j].norm in ("not", "never", "hardly"):
-            return None  # "I'm not tired" negates the concept; leave it alone
-        elif tokens[j].norm in morph.HEDGES:
-            j -= 1   # "you're still busy": skip, but don't swallow it
-        else:
-            break
+    absorbed, boost, j, negated = predicate_lead(tokens, start, reviewed_degree)
+    if negated:
+        return None
     if j < 0:
         return None
     if tokens[j].norm in ("and", "or", ",", "but") and j >= 2:
@@ -225,7 +329,8 @@ def predicate_context(tokens: list[Token], start: int) -> PredicateContext | Non
 
 
 def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozenset[str]] | None = None,
-                tags: list[str] | None = None, *, complete: bool = True) -> Detection | None:
+                tags: list[str] | None = None, *, complete: bool = True,
+                degree_concepts: frozenset[str] | None = None) -> Detection | None:
     p: Pattern = m.pattern
     det = Detection(m.start, m.end, p.concepts, p.frame, p.intensity,
                     "entry" if p.entry_id else "trigger", p.text, p.entry_id,
@@ -233,6 +338,8 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
     if p.entry_id:
         det.direct.add(p.entry_id)
     det.person_only = p.person_only
+    det.semantic_degree = dict(p.semantic_degree)
+    det.degree_concepts = frozenset(p.semantic_degree) if degree_concepts is None else degree_concepts
     det.tense = narrative_tense(tokens, m.start, m.end)
     first, last = tokens[m.start], tokens[m.end - 1]
     if (m.start > 0 and tokens[m.start - 1].text == "-" and tokens[m.start - 1].end == first.start) or \
@@ -271,11 +378,14 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
     if p.frame == "predicate_adj" and noun_limits is not None and next_is_noun:
         return None  # an attributive adjective must pass its noun-sense rule, even after a linking verb
     if p.frame == "predicate_adj":
-        ctx = predicate_context(tokens, m.start)
+        ctx = predicate_context(tokens, m.start, reviewed_degree=bool(det.degree_concepts))
         if ctx is None:
             return None
         absorbed, boost, subj, verb, clause_start, question = ctx
         det.start = absorbed
+        if det.degree_concepts:
+            det.degree_qualifier = tuple(t.norm for t in tokens[absorbed:m.start])
+            det.start = m.start
         det.intensity = max(1, min(5, det.intensity + boost))
         degree = {t.norm for t in tokens[absorbed:m.start]}
         if degree & {"so", "too", "such"} and m.end < len(tokens) and tokens[m.end].is_word \
@@ -293,9 +403,8 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
         det.clause_start = clause_start
         det.question = question
     elif p.frame in ("interjection",):
-        end = m.end
-        if end < len(tokens) and (tokens[end].norm in VOCATIVES or is_name(tokens[end])):
-            end += 1  # "hello mate,", "thanks John."
+        recipient = interjection_recipient(tokens, m.end)
+        end = recipient[1] if recipient is not None else m.end
         if not (at_clause_start(tokens, m.start) and at_clause_end(tokens, end)):
             return None
     elif p.frame == "imperative":
@@ -337,6 +446,9 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
             return None
         if attributive and noun_limits is not None and nxt.norm not in noun_limits:
             return None  # "a great forest", "a great dearth": size, not quality
+        if det.degree_concepts:
+            lead = predicate_lead(tokens, m.start, reviewed_degree=True)
+            det.degree_qualifier = tuple(t.norm for t in tokens[lead.start:m.start])
     elif p.frame == "np":
         # a bare noun swap shouldn't split a compound we can't see ("sausage roll")
         if p.elements[-1].role == "head_noun" and m.end < len(tokens) and tokens[m.end].norm in COMPOUND_HEADS:
@@ -446,21 +558,58 @@ def fallback_scorer(embedder: Embedder, patterns: list[Pattern]) -> Callable[[st
 def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dict[int, float]] | None = None,
            fallback_patterns: list[Pattern] | None = None, threshold: float = 0.72,
            tags: list[str] | None = None, adjective_nouns: dict[str, frozenset[str]] | None = None,
-           concepts: dict[str, Concept] | None = None, complete: bool = True) -> list[Detection]:
+           concepts: dict[str, Concept] | None = None, complete: bool = True,
+           degree_index: PatternIndex | None = None) -> list[Detection]:
     """Every concept the triggers find in the sentence, frame-checked. With a scorer (embed.similarity_scorer over
     the fallback patterns' texts), a predicate after a linking verb that no trigger matched is compared with
     the fallback patterns by similarity ("he was exhaustedd")."""
     found: list[Detection] = []
     tags = tags if tags is not None else pos.tag([t.text for t in tokens])
-    for m in index.find(tokens):
-        det = check_frame(m, tokens, adjective_nouns, tags, complete=complete)
+    matches = index.find(tokens)
+    address_starts = {m.end + int(m.end < len(tokens) and tokens[m.end].text == ',')
+                      for m in matches if m.pattern.frame == 'interjection'
+                      and at_clause_start(tokens, m.start) and concepts is not None
+                      and any(concepts[cid].takes_addressee for cid in m.pattern.concepts)}
+    degree_matches = [m for m in matches if m.pattern.semantic_degree] if degree_index is None else degree_index.find(tokens)
+    owned = owned_degree_modifiers(tokens, degree_matches)
+    evidence: dict[tuple[int, int, str, str], set[str]] = {}
+    families: set[tuple[int, int, str, str]] = set()
+    for match in degree_matches:
+        if check_frame(match, tokens, adjective_nouns, tags, complete=complete,
+                       degree_concepts=frozenset(match.pattern.concepts)) is None:
+            continue
+        families.update((match.start, match.end, cid, match.pattern.frame) for cid in match.pattern.concepts)
+        for cid, band in match.pattern.semantic_degree.items():
+            evidence.setdefault((match.start, match.end, cid, match.pattern.frame), set()).add(band)
+    for m in matches:
+        if set(range(m.start, m.end)) & owned and not m.pattern.semantic_degree:
+            continue
+        bands = {}
+        source_families = frozenset()
+        if families:
+            frames = {'adj', 'predicate_adj'} if m.pattern.frame in {'adj', 'predicate_adj'} else {m.pattern.frame}
+            bands = {cid: set().union(*(evidence.get((m.start, m.end, cid, frame), set()) for frame in frames))
+                     for cid in m.pattern.concepts}
+            bands = {cid: values for cid, values in bands.items() if values}
+            source_families = frozenset(cid for cid in m.pattern.concepts
+                                        if any((m.start, m.end, cid, frame) in families for frame in frames))
+        if bands:
+            m = replace(m, pattern=replace(m.pattern, semantic_degree={cid: sorted(values)[0]
+                                                                      for cid, values in bands.items()}))
+        det = check_frame(m, tokens, adjective_nouns, tags, complete=complete, degree_concepts=source_families)
+        if det and not det.degree_concepts and set(range(det.start, det.end)) & owned:
+            continue
         if det:
-            det.concepts = applicable_concepts(det.concepts, concepts, tokens, det.end, complete)
+            det.degree_conflicts = frozenset(cid for cid, values in bands.items() if len(values) > 1)
+            if det.frame == "np":
+                det.noun_use = noun_usage(tokens, det.start, det.end, tags, address_starts)
+            det.concepts = applicable_concepts(det.concepts, concepts, tokens, det.end, complete, det.noun_use)
         if det and not _in_a_name(tokens, det.start, det.end) and not _possessed(tokens, det) \
                 and det.concepts and not _wrong_part_of_speech(m, tokens, tags):
             found.append(det)
 
     if scorer and fallback_patterns:
+        graded = {cid for p in degree_index.patterns for cid in p.concepts} if degree_index is not None else set()
         covered = {i for d in found for i in range(d.start, d.end)}
         for i, tok in enumerate(tokens):
             if tok.norm not in morph.LINKING_VERBS or i + 1 >= len(tokens):
@@ -483,6 +632,8 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
                     # a misspelling has its trigger's shape: as many words ("working" is not "not working",
                     # "under the" is not "under the weather") and about its length ("less" is not "legless")
                     p = fallback_patterns[k]
+                    if p.semantic_degree or graded.intersection(p.concepts):
+                        continue  # similarity is not exact evidence of a reviewed degree
                     matched = match_at(p, tokens, j, exact=False)
                     literal = _fallback_literal(p)
                     if (matched is None or matched.end != j + n
@@ -521,6 +672,14 @@ def resolve_overlaps(dets: list[Detection]) -> list[Detection]:
         for o in extra:
             d.concepts = tuple(dict.fromkeys(d.concepts + o.concepts))
             d.direct |= o.direct
+            conflicts = set(d.degree_conflicts) | set(o.degree_conflicts)
+            for cid, band in o.semantic_degree.items():
+                if cid in d.semantic_degree and d.semantic_degree[cid] != band:
+                    conflicts.add(cid)
+                else:
+                    d.semantic_degree[cid] = band
+            d.degree_conflicts = frozenset(conflicts)
+            d.degree_concepts |= o.degree_concepts
     mark_coordination(kept)
     return sorted(kept, key=lambda d: d.start)
 

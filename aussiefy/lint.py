@@ -512,12 +512,16 @@ def _style_warnings(text: str, aussie_spans: list, tr: Translator) -> list[dict[
     # and entries sharing a form ("fair dinkum" as a predicate and a question) are one term
     uses: dict[str, list[tuple[int, int]]] = {}
     plain = tr.dictionary.plain_words
+    recognised_end = -1
     for s, t, e in sorted(aussie_spans, key=lambda x: (x[0], -x[1])):
         if e.substitution_class == "lexical":
             continue
         said = fold(text[s:t])
         if said != fold(e.form) and said in plain:
             continue   # a variant that is plain English ("full" for "a bit full") isn't a use of the slang
+        if t <= recognised_end:
+            continue   # a separate entry for an inner form is still the same occurrence
+        recognised_end = t
         spans = uses.setdefault(e.form, [])
         if not spans or s >= spans[-1][1]:
             spans.append((s, t))

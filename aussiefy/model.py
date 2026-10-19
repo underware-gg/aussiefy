@@ -6,7 +6,7 @@ No I/O: loader.py reads and validates the YAML into these; the engine, policy an
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from functools import cached_property
 from typing import Any
 
@@ -132,6 +132,13 @@ class Dictionary:
     def swear_strength(self, word: str) -> int:
         """How strong a swear a word is (0 for none), dropped g and plurals read as the listed word."""
         return swear_strength(self.swears, word)
+
+    @cached_property
+    def degree_index(self) -> PatternIndex:
+        families = {cid for cid, concept in self.concepts.items() if concept.trigger_degrees}
+        families.update(cid for entry in self.entries.values() for cid in entry.semantic_degree)
+        return PatternIndex([replace(p, concepts=tuple(cid for cid in p.concepts if cid in families))
+                             for p in self.patterns + self.form_index.patterns if families.intersection(p.concepts)])
 
     # --- derived once, on first use ---------------------------------------------------------------------------
 

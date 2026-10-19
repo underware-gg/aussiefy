@@ -223,6 +223,60 @@ praise already established by its input without requiring an added-opinion annot
 exact and an opinion-adding sense in one entry under the same metadata. These reviewed annotations cover
 specific entries; they are not an audit or automatic interpretation of every dictionary mapping.
 
+## Reviewed semantic degree
+
+`semantic_degree: {DRUNK: strong}` certifies an entry's degree for a mapped concept. Allowed bands are
+`mild`, `unmarked` and `strong`; omitted metadata means unknown, not an assumed middle grade. A certificate
+covers every form of that entry. Split forms with different degrees into separate entries, as with
+`a bit full` and bare `full`. The map's keys must belong to the entry's concepts.
+
+Concepts certify source wording separately, by exact frame and raw trigger including any `@N` suffix:
+
+```yaml
+trigger_degrees:
+  predicate_adj:
+    drunk: unmarked
+    tipsy@2: mild
+    legless@5: strong
+```
+
+These keys must exist in that concept's `triggers`. An overlay replaces a named map as a whole, so patch
+triggers and their certificates coherently in the same layer. Research-round intensity rewrites retain
+matching certificates; conflicting annotations fail validation. A target grade never certifies arbitrary
+source wording in `replaces`.
+
+Automatic selection compares realised degree, independently of the soft `intensity` weighting and
+`narrator_opinion`. Explicit mild or strong input needs a compatible known output. A retained modifier
+can carry that degree: `very` plus an unmarked predicate is strong, while `slightly`/`a bit` is mild.
+The modifier stays attached through substitution and accent/swear processing. Unsupported or conflicting
+compositions stay as written; negation is retained. Clause expansions cannot silently consume a modifier.
+Ordinary inputs with no stated degree retain unknown-degree options. Plans and automatic change
+alternatives use the same eligibility. Dictionary discovery remains broader.
+
+Initial calibration covers the DRUNK family, with source evidence in
+[the degree ledger](../../../research/semantic-refinement-2026-10-19/drunk-degree-calibration.md).
+The mechanism is generic; it does not certify all concepts, infer missing grades from historical intensity
+numbers or prove the meaning of arbitrary agent-written prose. Similarity alone cannot certify a graded
+source meaning. Extending another family requires reviewed source and target annotations.
+
+## Noun reference and direct address
+
+A concept's `noun_use` is `any` (default), `reference` or `address`. This distinguishes a quantified reference
+such as “Everyone came” from speaking to a group in “Hi everyone”. EVERYONE takes reference; PLURAL_ADDRESS
+takes address and offers plural forms such as `you mob` and `youse`. It keeps the existing noun-phrase frame.
+A direct `replaces` phrase cannot bypass the concept restriction. An unknown grammatical role satisfies
+neither restricted use, leaving the source wording available unchanged.
+
+`takes_addressee: true` declares an expression that introduces a recipient, such as a greeting or thanks.
+It is a boolean meaning capability, not a document setting. The reader combines that data with punctuation,
+known recipient/name shapes and command grammar. An arbitrary interjection or comma does not prove address.
+Simple direct addresses can transform. Ambiguous parentheticals, qualified recipients and unresolved
+coordinated recipients stay as written rather than become distributive phrases. A following reference
+clause with corroborated finite/governor evidence retains its separate reading. Mere absence of an address
+match is not evidence of reference, and a POS guess alone cannot turn a bare command into a finite predicate.
+Other noun concepts default to unrestricted use, so “Hello friend”
+can still offer `mate`; YOU_PLURAL also remains usable as a subject or object.
+
 ## Context and source-English data
 
 `genres.yaml` defines every genre policy and all three embellishment settings. Boolean switches must be

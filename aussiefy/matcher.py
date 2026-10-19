@@ -51,6 +51,7 @@ class Pattern:
                                    # "really think" or "really it was")
     clause_end: bool = False      # "^end": no following complement; adverbial tails may precede the boundary
     guard: bool = False           # a concept without replacement entries only protects the matched span
+    semantic_degree: dict[str, str] = field(default_factory=dict)
 
     @property
     def slots(self) -> set[str]:
