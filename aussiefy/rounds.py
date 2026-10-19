@@ -37,7 +37,7 @@ import yaml
 from .errors import UserError
 from .loader import _YAML_LOADER, DATA_DIR, load_dictionary, write_validated
 from .model import Dictionary
-from .schema import CONCEPT_KEYS, Concept, ENTRY_KEYS, SchemaError, parse_concept, parse_entry
+from .schema import CONCEPT_KEYS, Concept, ENTRY_KEYS, SchemaError, parse_concept, parse_entry, parse_effects
 from .terms import form_key
 
 
@@ -170,7 +170,7 @@ class RoundPlan:
             triggers = _fixed_triggers(existing.get("triggers") or {}, cid, c.trigger_fixes)
             if triggers != (existing.get("triggers") or {}):
                 present[cid] = {**existing, "triggers": triggers}
-                _reconcile_trigger_degrees(present[cid])
+                _reconcile_trigger_annotations(present[cid])
                 text = _replace_concept(text, cid, present[cid])
         for cid, patch in c.concept_fixes.items():
             existing = present[cid]
@@ -311,12 +311,16 @@ def _collect_new_concepts(plan: RoundPlan, verdicts: list[tuple[str, dict]], d: 
             raw = _concept_patch({k: value for k, value in nc.items() if k != "id"}, f"new concept {cid}")
             parse_concept(cid, raw)
             cur = plan.new_concepts.setdefault(cid, {"description": "", "triggers": {}})
-            cur.update({k: value for k, value in raw.items() if k not in {"triggers", "trigger_degrees"}})
+            cur.update({k: value for k, value in raw.items() if k not in {"triggers", "trigger_degrees", "trigger_effects"}})
             for frame, grades in raw.get('trigger_degrees', {}).items():
                 current = cur.setdefault('trigger_degrees', {}).setdefault(frame, {})
                 if any(p in current and current[p] != band for p, band in grades.items()):
                     raise SchemaError(f'new concept {cid}: conflicting trigger degrees')
                 current.update(grades)
+            for frame, mappings in raw.get('trigger_effects', {}).items():
+                current = cur.setdefault('trigger_effects', {}).setdefault(frame, {})
+                for pattern, effects in mappings.items():
+                    current[pattern] = sorted(set(current.get(pattern, ())) | set(parse_effects(effects, f'new concept {cid}')))
             for frame, ps in (raw.get("triggers") or {}).items():
                 cur["triggers"].setdefault(frame, [])
                 cur["triggers"][frame] += [p for p in ps or () if p not in cur["triggers"][frame]]
@@ -336,6 +340,8 @@ def _prepare_concept_fixes(plan: RoundPlan, d: Dictionary) -> None:
             raw = {f.name: getattr(concept, f.name) for f in fields(Concept) if f.name != "id"}
             raw["triggers"] = {frame: list(patterns) for frame, patterns in concept.triggers.items()}
             raw["unless_after"] = list(concept.unless_after)
+            raw["trigger_effects"] = {frame: {pattern: list(effects) for pattern, effects in mappings.items()}
+                                      for frame, mappings in concept.trigger_effects.items()}
             raw.update(patch)
         parse_concept(cid, raw)
 
@@ -433,7 +439,7 @@ def _guard_new_concept_triggers(plan: RoundPlan, forms: set[str], queries: set[s
                 elif p not in keep:
                     keep.append(p)
             c["triggers"][frame] = keep
-        _reconcile_trigger_degrees(c)
+        _reconcile_trigger_annotations(c)
 
 
 def _drop_unused_new_concepts(plan: RoundPlan) -> None:
@@ -463,20 +469,24 @@ def _without_intensity(pattern: str) -> str:
     return re.sub(r"@[1-5]$", "", pattern)
 
 
-def _reconcile_trigger_degrees(concept: dict) -> None:
-    if 'trigger_degrees' not in concept:
-        return
-    reconciled = {}
-    for frame, degrees in concept['trigger_degrees'].items():
-        for old, band in degrees.items():
-            for pattern in concept.get('triggers', {}).get(frame, ()):
-                if _without_intensity(old) != _without_intensity(pattern):
-                    continue
-                target = reconciled.setdefault(frame, {})
-                if pattern in target and target[pattern] != band:
-                    raise SchemaError('trigger rewrite conflicts with reviewed degree annotations')
-                target[pattern] = band
-    concept['trigger_degrees'] = reconciled
+def _reconcile_trigger_annotations(concept: dict) -> None:
+    for metadata_key in ('trigger_degrees', 'trigger_effects'):
+        if metadata_key not in concept:
+            continue
+        reconciled = {}
+        for frame, values in concept[metadata_key].items():
+            for old, value in values.items():
+                for pattern in concept.get('triggers', {}).get(frame, ()):
+                    if _without_intensity(old) != _without_intensity(pattern):
+                        continue
+                    target = reconciled.setdefault(frame, {})
+                    if metadata_key == 'trigger_effects':
+                        target[pattern] = sorted(set(target.get(pattern, ())) | set(parse_effects(value, 'trigger rewrite')))
+                    elif pattern in target and target[pattern] != value:
+                        raise SchemaError('trigger rewrite conflicts with reviewed degree annotations')
+                    else:
+                        target[pattern] = value
+        concept[metadata_key] = reconciled
 
 
 def _fixed_triggers(triggers: dict, cid: str, fixes: dict, existing: dict | None = None) -> dict:
@@ -504,7 +514,7 @@ def _fixed_triggers(triggers: dict, cid: str, fixes: dict, existing: dict | None
 def _apply_trigger_fixes(plan: RoundPlan, tf: dict, d: Dictionary) -> None:
     for cid, concept in plan.new_concepts.items():
         concept["triggers"] = _fixed_triggers(concept["triggers"], cid, tf)
-        _reconcile_trigger_degrees(concept)
+        _reconcile_trigger_annotations(concept)
     targets = set(plan.added_triggers) | set(tf.get("remove") or {}) | set(tf.get("add") or {})
     for cid in targets - plan.new_concepts.keys():
         if cid not in d.concepts:

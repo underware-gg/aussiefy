@@ -84,6 +84,7 @@ class DocumentOverrides:
     riff_association: int | None = None
     narrator_opinion: bool | None = None
     solemn_comic_terms: bool | None = None
+    quantity_approximation: bool | None = None
     profile: ProfileOverrides | None = None
 
     @classmethod
@@ -105,7 +106,7 @@ class DocumentOverrides:
         data = dict(raw)
         booleans = {"openings", "formal_to_rework", "person_swears", "keep_quotes", "command_context",
                     "dateline_context", "draft", "perform", "check_length", "contextual_riffs", "entry_riffs",
-                    "narrator_opinion", "solemn_comic_terms"}
+                    "narrator_opinion", "solemn_comic_terms", "quantity_approximation"}
         for key, value in data.items():
             if key == "profile":
                 data[key] = ProfileOverrides.parse(value)

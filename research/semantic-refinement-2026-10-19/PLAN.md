@@ -1,5 +1,9 @@
 # Semantic engine refinement
 
+Current status: the degree/address slice is committed and pushed as 3ca50cd. Final source-audit and
+quantity integration is complete and verified: 3,093 tests passed, two expected local-corpus skips.
+The sections below retain the implementation/review history; the final completion record is at the end.
+
 User direction: improve the existing engine's shared grammatical and semantic interpretation, including
 tone, without coupling this work to the separate community-dictionary design. No communication with the
 external agent is authorised. Internal research agents continue the source audit separately.
@@ -186,3 +190,46 @@ narrative Dinkum/Troppo, retain precision for factual document presets, and let 
 win. Source-to-concept annotations, not global labels on yonks/donkey's years, will own the conditional
 precision loss. The next scratch prototype is independently reviewed before adoption. External website
 and design agents have not been contacted.
+
+
+## Final audit and quantity integration after 3ca50cd
+
+The reviewed source corrections and configurable quantity policy are integrated locally. Independent
+integrated review closed cross-frame source-effect transfer and nonconsuming assertion/POS/subject gaps;
+247 original-checkout cases passed with no remaining findings. The root observed 532 broader focused
+passes before those final fixes and 195 targeted passes afterwards. All 1,273 entries/statuses/flags/registers
+remain present, and the source delta is exactly the 627 reviewed proposal pairs. The preserved reconciliation
+snapshot and integration note distinguish completed corrections from conservative coverage limits.
+
+Frozen Gettysburg anchors remain unchanged. quantity-wording-benchmark.py/json report Deadset, Dinkum,
+Troppo and factual-preset runs separately; quantity precision has its own meaning regressions. The historical
+Auto/Troppo gate still passes. final-audit-performance-before.json/after.json compare 3ca50cd with the reviewed
+integration in sequential warm batches: ordinary Deadset1.021x, ordinary Troppo0.983x, degree Deadset0.969x
+and degree Troppo1.038x. These are bounded timings, not a whole-application speed claim.
+
+Changes payload v2 records applied mapping effects on renderings, retaining v1's recorded fingerprint and
+existing ID/span rules. Plain/generated docs and service fixtures are updated. Final full-suite verification,
+publication/provenance checks and commit remain; no package release or main promotion is authorised here.
+
+
+The first clean integrated full run was stopped after exposing one remaining old ashcan/riff fixture.
+The related probability fixture was corrected too, with explicitly wheeled referents. A measured writer-check
+regression revealed avoidable full source detection on ordinary originals. The new annotation-only pattern
+prefilter preserves full checks whenever relevant. Independent follow-on review passed 73 cases plus nine
+guard/assertion/overlay probes; the root passed 207 related cases. See writer-check-performance.json for
+sequential baseline/unfiltered/filtered evidence. Runtime inputs are frozen again for clean full verification.
+
+
+## Completion
+
+Final full verification passed **3,093 tests, two expected local-corpus skips, in 883.82 seconds**.
+Independent design reviews converged, and Ruff, publication checks, provenance and isolated wheel
+inspection passed. Package/runtime inputs stayed fixed during the successful full run. The final
+sequential writer-check comparison is 1.0485x the 3ca50cd baseline and 0.5452x the otherwise identical
+unfiltered copy; this is bounded synthetic evidence, not a whole-application speed guarantee.
+
+All implementation slices in this pass are complete. Remaining independent follow-ups are broader
+activity/sense reading, coordinated-object/adjunct coverage, additional reviewed quantity wordings and
+refreshing the embedding model against the settled dictionary. Required retrieval gates passed; default
+automatic gap filling remains off. Website consumers adopting this work must use changes payload v2.
+No release/main promotion or external-agent messages occurred.

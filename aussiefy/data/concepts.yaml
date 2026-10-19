@@ -357,9 +357,9 @@ TRY:
   triggers:
     np: ["a try", "a go", "an attempt", "a real try@4", "a serious attempt@4", "a good try@4"]
 WORK:
-  description: (Hard) work.
-  triggers:
-    np: ["hard work@4", "hard labour@4", "a hard slog@4", "unfinished work@3", "chore@2"]   # not "task": yakka is uncountable
+  description: Work or labour as an activity; context-dependent general work remains discoverable.
+  triggers: {}
+  lookup_only: true
 EXCELLENT:
   description: Very good, first-rate.
   triggers:
@@ -566,8 +566,22 @@ COLLEGE_OTHER_SENSE:
     Guard (no entries) - the Electoral College, a professional college (of surgeons) or a community college isn't a
     university.
   triggers:
-    np: ["electoral college", "Electoral College", "community college", "community colleges", "college of surgeons",
-         "college of physicians", "college of cardinals", "royal college", "college of arms", "college of nursing"]
+    np:
+    - electoral college
+    - Electoral College
+    - community college
+    - community colleges
+    - college of surgeons
+    - college of physicians
+    - college of cardinals
+    - royal college
+    - college of arms
+    - college of nursing
+    - vocational college
+    - secondary college
+    - technical college
+    - sixth-form college
+    - sixth form college
 FOOTBALL:
   description: Football (any code).
   triggers:
@@ -671,10 +685,12 @@ AGREE:
     interjection: ["absolutely", "definitely", "of course !=,|;|—|-", "you bet", "too right", "exactly", "certainly",
                    "for sure", "yes, absolutely@4", "yes, definitely@4", "you're right"]
 DISAGREE:
-  description: No, softened or emphatic.
+  description: Dissent without asserting emphatic refusal.
   triggers:
-    interjection: ["no", "no way@4", "not a chance@4", "absolutely not@5", "I don't think so@2", "nope",
-                   "certainly not@5", "over my dead body@5"]
+    interjection:
+    - 'no'
+    - I don't think so@2
+    - nope
 REALLY_Q:
   description: Expressing disbelief; "really?"
   triggers:
@@ -796,8 +812,13 @@ COOLER:
     # the comparative ("your body stays cooler") is held by COOLER_COMPARATIVE
     # nor the comparative before a noun ("a cooler airmass", "cooler temperatures") or in a pair ("cooler and
     # drier"): the tagger reads it as a noun there
-    np: ["cooler !=than|and|or|air|airmass|airmasses|weather|temperature|temperatures|temps|conditions|climate|day|days|night|nights|morning|mornings|evening|evenings|afternoon|afternoons|month|months|season|seasons|spell|change|water|waters|region|regions|area|areas|part|parts|side|spot|spots|place|places|shade|tones|tone|colours|colors|head|heads|front|pattern|period|periods|summer|summers|winter|winters|still|overnight",
-         "cool box", "cool-box", "ice chest", "ice box"]
+    np:
+    - cooler !=than|and|or|air|airmass|airmasses|weather|temperature|temperatures|temps|conditions|climate|day|days|night|nights|morning|mornings|evening|evenings|afternoon|afternoons|month|months|season|seasons|spell|change|water|waters|region|regions|area|areas|part|parts|side|spot|spots|place|places|shade|tones|tone|colours|colors|head|heads|front|pattern|period|periods|summer|summers|winter|winters|still|overnight
+    - cool box
+    - cool-box
+    - ice chest
+    - portable ice box
+    - insulated ice box
 COOLER_COMPARATIVE:
   description: >-
     Guard (no entries) - "stays cooler", "a bit cooler": the comparative of cool, not an esky. The tagger often
@@ -904,6 +925,9 @@ MOCK:
 # --- added for the Gettysburg reference text (kept general) ---------------------
 LONG_AGO:
   description: A long time ago.
+  trigger_effects:
+    adv:
+      "four score and seven years ago@5": [quantity_approximation]
   triggers:
     adv: ["a long time ago", "ages ago", "long ago", "many years ago", "four score and seven years ago@5"]
 DIE:
@@ -1090,12 +1114,11 @@ CONSPICUOUS:
          "look out of place", "stick out a mile"]
     predicate_adj: ["obvious", "glaringly obvious@4", "out of place", "conspicuous"]
 DOUBT_IT:
-  description: Believe something can't be done or won't happen.
+  description: Doubt that a proposal is feasible, without ruling it out.
   triggers:
-    vp: ["believe {np} to be simply|quite|completely|totally|utterly? impossible@4",
-         "think {np} simply|quite|completely|totally|utterly? impossible@4",
-         "consider {np} to be? simply|quite|completely|totally|utterly? impossible@4",
-         "believe {np} could never happen@4", "doubt {np} could be done@3", "doubt {np} would work@3"]
+    vp:
+    - doubt {np} could be done@3
+    - doubt {np} would work@3
 IMPOSSIBLE:
   description: Something can't happen or be done.
   triggers:
@@ -1317,8 +1340,13 @@ NO_MATTER_WHAT:
 FINISH_JOB:
   description: Finish what was started.
   triggers:
-    vp: ["finish the job", "complete the job", "finish the task", "complete the task", "finish the work",
-         "complete the work", "carry on the work"]
+    vp:
+    - finish the job
+    - complete the job
+    - finish the task
+    - complete the task
+    - finish the work
+    - complete the work
 SECOND_CHANCE:
   description: A fresh chance at something.
   triggers:
@@ -1362,7 +1390,10 @@ TRY_OUT:
   triggers:
     # not "have a go at": it is Australian already, and it is as often criticising ("having a go at popular
     # amusements") as trying
-    vp: ["try {np}", "taste !than|of|for|like|and|is|was|buds|test|tests {np}", "attempt {np}", "give {np} a try"]
+    vp:
+    - try {np}
+    - attempt {np}
+    - give {np} a try
 GOBBLE:
   description: Eat greedily and fast (no object implied).
   triggers:
@@ -1396,7 +1427,9 @@ SCARED:
 BEEN_AT:
   description: Has been interfering with something (eating, using).
   triggers:
-    adv: ["been eating", "been drinking"]
+    adv:
+    - been eating {np} ^object
+    - been drinking {np} ^object
 BEEN_SLEEPING_IN:
   description: Has been sleeping in.
   triggers:
@@ -1442,7 +1475,10 @@ SUBURB:
 ASYLUM:
   description: A psychiatric hospital (colloquial, insensitive).
   triggers:
-    np: ["madhouse", "asylum", "insane asylum", "mental hospital"]
+    np:
+    - madhouse
+    - insane asylum
+    - mental hospital
 CITY:
   description: The city, as seen from the country.
   # a report's or a notice's "the city" names a real place (the city's cultural development), with no bush
@@ -1483,7 +1519,10 @@ SAY_GOODBYE:
 LOUNGE_ROOM:
   description: The living room.
   triggers:
-    np: ["living room", "sitting room", "family room", "den"]
+    np:
+    - living room
+    - sitting room
+    - family room
 SIT_DOWN:
   description: Sit down heavily or casually.
   triggers:
@@ -1536,7 +1575,9 @@ WALK_WEARILY:
 WALK:
   description: Go on foot.
   triggers:
-    vp: ["walk there", "go on foot", "walk home"]
+    vp:
+    - walk ?=home|there
+    - go on foot
 DRESS_WARMLY:
   description: Dress warmly.
   triggers:
@@ -1827,9 +1868,10 @@ BIG_BUSINESS:
     np: ["big business", "the corporations", "corporate america", "the corporate world", "wall street",
          "the wealthy elite", "the top end of town"]
 ANTENNA:
-  description: A radio or TV antenna.
+  description: An electronic receiving/transmitting antenna.
   triggers:
-    np: ["antenna", "antennae", "antennas"]
+    np:
+    - ?<=radio|television|TV|car|wireless|broadcast|satellite antenna
 DISMISS:
   description: Get rid of someone or something; end a relationship.
   triggers:
@@ -1905,7 +1947,12 @@ FUNNY_PERSON:
   description: A very funny person.
   person: true
   triggers:
-    np: [a funny guy, a funny man, a funny person, a joker, a comedian, a real joker]
+    np:
+    - a funny guy
+    - a funny man
+    - a funny person
+    - a joker
+    - a real joker
 WILD_ONE:
   description: Someone wild and reckless, up for anything.
   person: true
@@ -2242,7 +2289,10 @@ DONT_KNOW:
   description: Saying you don't know or have no idea.
   triggers:
     # not a bare "no idea": "she had no idea that..." isn't "I dunno"
-    clause: [I don't know, I have no idea, who knows]
+    clause:
+    - I don't know
+    - I have no idea
+    - who knows ^end
 FAIR_POINT:
   description: Conceding that the other person has made a reasonable point.
   triggers:
@@ -3552,9 +3602,14 @@ ELDERLY:
   triggers:
     np: ["the elderly", "elderly people", "old people", "older people", "the aged !=care|pension|pensions|pensioner|pensioners"]
 EMPHATIC_REFUSAL:
-  description: An emphatic refusal (certainly not, not a chance); not a plain "no" answering a question.
+  description: An emphatic refusal or categorical denial.
   triggers:
-    interjection: ["absolutely not", "certainly not", "no way", "not a chance", "no chance", "over my dead body"]
+    interjection:
+    - no way@4
+    - not a chance@4
+    - absolutely not@5
+    - certainly not@5
+    - over my dead body@5
 DOUBLE_NO:
   description: A doubled no, waving off a misunderstanding ("no, no, that's not it").
   triggers:
@@ -3657,9 +3712,8 @@ MISBEHAVE:
 EMPHATIC_NO:
   description: A scornful, emphatic "certainly not" in answer to a question (lookup only); the form echoes the question's
     subject, which no plain trigger can.
-  triggers:
-    interjection: [most certainly not in any way whatsoever]
-
+  triggers: {}
+  lookup_only: true
 # --- fourth-pass round 2026-10-14 (research/fourth-pass-round-2026-10-14) ----------------------------------
 THATS_ALL:
   description: Saying there is nothing more, at the end of a list or a share-out.
@@ -3984,3 +4038,82 @@ PRODUCE_DEPARTMENT:
   triggers:
     np:
     - produce department
+
+URINATE:
+  description: Pass urine; a specific action rather than a generic bathroom visit.
+  triggers:
+    vp:
+    - urinate ^end
+    - pee ^end
+IMPOSSIBLE_PROPOSAL:
+  description: Judge a proposal impossible rather than merely doubtful.
+  triggers:
+    vp:
+    - believe {np} to be simply|quite|completely|totally|utterly? impossible@4
+    - think {np} simply|quite|completely|totally|utterly? impossible@4
+    - consider {np} to be? simply|quite|completely|totally|utterly? impossible@4
+    - believe {np} could never happen@4
+
+NOISY_CRY:
+  description: Cry noisily or loudly.
+  triggers:
+    vp:
+    - cry loudly
+    - weep loudly
+    - sob loudly
+    - cry noisily
+    - weep noisily
+    - sob noisily
+
+INTENSE_NOISY_CRY:
+  description: Cry loudly and uncontrollably.
+  triggers:
+    vp:
+    - cry loudly and uncontrollably
+    - weep loudly and uncontrollably
+    - sob loudly and uncontrollably
+
+SULK:
+  description: Show peevish displeasure; a sulk rather than neutral tears.
+  triggers:
+    vp:
+    - sulk
+    - have a sulk
+
+IBIS_OTHER_SPECIES:
+  description: Other explicitly identified ibis species, whose identity must be retained.
+  triggers:
+    np:
+    - glossy ibis
+
+WHEELED_BIN:
+  description: A rubbish bin explicitly described as having wheels.
+  triggers:
+    np:
+    - wheeled rubbish bin
+    - wheeled garbage bin
+    - wheeled trash can
+    - wheeled garbage can
+
+PAVEMENT_OTHER_SENSE:
+  description: Road/runway pavement rather than the pedestrian path.
+  triggers:
+    np:
+    - runway pavement
+    - road pavement
+
+HARD_WORK:
+  description: Work explicitly described as arduous.
+  triggers:
+    np:
+    - hard work@4
+    - hard labour@4
+    - a hard slog@4
+
+GOOD_MAN:
+  description: A thoroughly decent man.
+  triggers:
+    np:
+    - a good man
+    - a decent man
+    - a nice man

@@ -22,7 +22,7 @@ asks for a smoother rewrite that keeps every planned phrase and adds no new slan
 - The rewrite is accepted only if every planned phrase survives.
 - Otherwise, or on any API failure or refusal, the deterministic text stands, and `result.surface["status"]`
   says why.
-- With not a sausage planned, there's bugger all to polish: the mode is skipped, which isn't a fallback.
+- With bugger all planned, there isn't a sausage to polish: the mode is skipped, which isn't a fallback.
 - The plan is always in explain mode.
 - Surface rewrites aren't cached: each run asks Claude again.
 
@@ -70,6 +70,9 @@ only if:
 - the effective `keep_share` of undeclined planned phrases survives when the original plan has at least four
   distinct phrases; each decline must name a planned phrase and supply a reason, and
 - configured length checks pass when `check_length` is enabled.
+
+The resolved `DOCUMENT_CONFIG.quantity_approximation` permits only reviewed source quantity mappings;
+false keeps exact quantities, and true does not permit arbitrary numeric loss.
 
 The resolved `DOCUMENT_CONFIG.narrator_opinion` also governs added narrator judgments. False means do not
 introduce praise, pity, luck or blame absent from the original; true permits reaction while preserving facts,

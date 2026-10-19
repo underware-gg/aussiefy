@@ -1,0 +1,44 @@
+{
+  "baseline_commit": "3ca50cd",
+  "scope": "Warm original-aware lint, suggest=false, english=none, identical560-word synthetic prose; sequential runs, startup excluded. Unfiltered copy removes only the source-sentence mapping prefilter.",
+  "runs": {
+    "baseline": {
+      "module": "/private/tmp/aussiefy-final-baseline-3ca50cd/aussiefy/__init__.py",
+      "median_seconds": 0.04048800002783537,
+      "samples": [
+        0.041522916057147086,
+        0.03926300001330674,
+        0.04048800002783537,
+        0.0559180419659242,
+        0.03934516606386751
+      ],
+      "words": 560
+    },
+    "unfiltered": {
+      "module": "/private/tmp/aussiefy-unfiltered-quantity-probe/aussiefy/__init__.py",
+      "median_seconds": 0.0778649999992922,
+      "samples": [
+        0.07746245805174112,
+        0.08148570801131427,
+        0.0778649999992922,
+        0.0762279579648748,
+        0.08014116599224508
+      ],
+      "words": 560
+    },
+    "filtered": {
+      "module": "/Users/robmorris/Development/Underware/aussiefy/aussiefy/__init__.py",
+      "median_seconds": 0.04245141602586955,
+      "samples": [
+        0.04067062505055219,
+        0.04245141602586955,
+        0.047037958982400596,
+        0.04102791706100106,
+        0.04338599997572601
+      ],
+      "words": 560
+    }
+  },
+  "filtered_over_baseline": 1.0484937758517174,
+  "filtered_over_unfiltered": 0.5451925258621388
+}

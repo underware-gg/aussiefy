@@ -35,7 +35,7 @@ def applicable_concepts(concepts: tuple[str, ...], rules: dict[str, Concept] | N
         return concepts
     following = following_context(tokens, end, complete)
     return tuple(cid for cid in concepts
-                 if rules[cid].noun_use in {"any", noun_use}
+                 if not rules[cid].lookup_only and rules[cid].noun_use in {"any", noun_use}
                  and (not rules[cid].unless_after
                       or following.known and following.word not in rules[cid].unless_after))
 
@@ -77,6 +77,7 @@ class Detection:
     noun_use: str = "reference"
     coordinated: bool = False        # shares its verb with another predicate ("tired and hungry")
     semantic_degree: dict[str, str] = field(default_factory=dict)
+    mapping_effects: dict[str, tuple[str, ...]] = field(default_factory=dict)
     degree_concepts: frozenset[str] = frozenset()
     degree_conflicts: frozenset[str] = frozenset()
     degree_qualifier: tuple[str, ...] = ()
@@ -339,6 +340,7 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
         det.direct.add(p.entry_id)
     det.person_only = p.person_only
     det.semantic_degree = dict(p.semantic_degree)
+    det.mapping_effects = dict(p.mapping_effects)
     det.degree_concepts = frozenset(p.semantic_degree) if degree_concepts is None else degree_concepts
     det.tense = narrative_tense(tokens, m.start, m.end)
     first, last = tokens[m.start], tokens[m.end - 1]
@@ -350,8 +352,8 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
     if terminal_argument and not p.guard and not argument_complete(tokens, m.end, tags, complete):
         return None
     if "np" in m.captures and tags is not None:
-        parts = [element for element in p.elements if element.kind != "not"]
-        unanchored = (len(parts) == 2 and parts[0].role == "head_verb"
+        parts = p.consuming
+        unanchored = p.object_argument or (len(parts) == 2 and parts[0].role == "head_verb"
                       and parts[1].kind == "slot" and parts[1].slot == "np")
         if not noun_argument(m.captures["np"], tokens, tags, unanchored_object=unanchored):
             return None
@@ -451,7 +453,8 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
             det.degree_qualifier = tuple(t.norm for t in tokens[lead.start:m.start])
     elif p.frame == "np":
         # a bare noun swap shouldn't split a compound we can't see ("sausage roll")
-        if p.elements[-1].role == "head_noun" and m.end < len(tokens) and tokens[m.end].norm in COMPOUND_HEADS:
+        if p.consuming[-1].role == "head_noun" and m.end < len(tokens) \
+                and tokens[m.end].norm in COMPOUND_HEADS:
             return None
         if (m.end < len(tokens) and tokens[m.end].text == "-") or (m.start > 0 and tokens[m.start - 1].text == "-"):
             return None  # part of a hyphenated compound ("battle-field")
@@ -504,7 +507,7 @@ def _wrong_part_of_speech(m: Match, tokens: list[Token], tags: list[str]) -> boo
         nxt = tags[m.end] if m.end < len(tags) else "."
         if not nxt.startswith(("JJ", "RB", "VBN")):
             return True
-    elements = m.pattern.elements
+    elements = m.pattern.consuming
     if m.pattern.frame == "vp" and elements[0].role == "head_verb":
         before = m.start - 1
         noun_context = before >= 0 and (tags[before] in NOUN_CONTEXT or tokens[before].norm in NOUN_PREPOSITIONS)
@@ -581,7 +584,19 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
         families.update((match.start, match.end, cid, match.pattern.frame) for cid in match.pattern.concepts)
         for cid, band in match.pattern.semantic_degree.items():
             evidence.setdefault((match.start, match.end, cid, match.pattern.frame), set()).add(band)
+    effects: dict[tuple[int, int, str], set[str]] = {}
+    for match in matches:
+        if not match.pattern.mapping_effects:
+            continue
+        if check_frame(match, tokens, adjective_nouns, tags, complete=complete) is None:
+            continue
+        for cid, values in match.pattern.mapping_effects.items():
+            effects.setdefault((match.start, match.end, cid), set()).update(values)
     for m in matches:
+        if effects:
+            mappings = {cid: tuple(sorted(effects.get((m.start, m.end, cid), ())))
+                        for cid in m.pattern.concepts}
+            m = replace(m, pattern=replace(m.pattern, mapping_effects={cid: values for cid, values in mappings.items() if values}))
         if set(range(m.start, m.end)) & owned and not m.pattern.semantic_degree:
             continue
         bands = {}
@@ -672,6 +687,8 @@ def resolve_overlaps(dets: list[Detection]) -> list[Detection]:
         for o in extra:
             d.concepts = tuple(dict.fromkeys(d.concepts + o.concepts))
             d.direct |= o.direct
+            for cid, values in o.mapping_effects.items():
+                d.mapping_effects[cid] = tuple(sorted(set(d.mapping_effects.get(cid, ())) | set(values)))
             conflicts = set(d.degree_conflicts) | set(o.degree_conflicts)
             for cid, band in o.semantic_degree.items():
                 if cid in d.semantic_degree and d.semantic_degree[cid] != band:

@@ -258,7 +258,14 @@ whereabouts ethics athletics gymnastics measles mumps crossroads headquarters ch
 does lazybones shambles mcdonalds""".split())
 
 
+PLURAL_VARIANTS = {"antenna": ("antennae",)}
 SINGULARS = {p: s for s, p in IRREGULAR_PLURALS.items()}
+SINGULARS.update((plural, singular) for singular, forms in PLURAL_VARIANTS.items() for plural in forms)
+
+
+def plural_forms(noun: str) -> tuple[str, ...]:
+    """Accepted plural spellings, retaining pluralise's existing preferred form."""
+    return tuple(dict.fromkeys((pluralise(noun),) + PLURAL_VARIANTS.get(noun, ())))
 
 
 def singular_of(word: str) -> str | None:

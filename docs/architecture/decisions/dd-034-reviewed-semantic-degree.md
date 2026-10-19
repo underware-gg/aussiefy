@@ -1,6 +1,6 @@
 # DD-034: Reviewed semantic degree, separate from style intensity
 
-Status: Accepted; integrated verification in progress.
+Status: Accepted; integrated verification passed.
 Date: 19 October 2026.
 Extends: [DD-030](dd-030-shared-semantic-context.md), [DD-031](dd-031-narrator-opinion.md).
 

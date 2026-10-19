@@ -28,7 +28,7 @@ def test_unanchored_temporal_phrases_are_not_invented_objects(source, translator
 @pytest.mark.parametrize('source,concept,obj', [
     ('I approve every proposal.', 'GO_ALONG', 'every proposal'),
     ('I overcharge every client.', 'OVERCHARGE', 'every client'),
-    ('I taste every dish.', 'TRY_OUT', 'every dish'),
+    ('I try every dish.', 'TRY_OUT', 'every dish'),
     ('I attempt every problem.', 'TRY_OUT', 'every problem'),
 ])
 def test_shared_object_rule_preserves_non_temporal_objects_for_other_verbs(source, concept, obj, translator):
@@ -87,7 +87,7 @@ def test_question_objects_keep_the_question_and_argument(obj, translator):
 @pytest.mark.parametrize('source,concept,obj', [
     ('Every day irritates me.', 'ANNOY', 'every day'),
     ('I give every day a try.', 'TRY_OUT', 'every day'),
-    ('I believe every day to be impossible.', 'DOUBT_IT', 'every day'),
+    ('I believe every day to be impossible.', 'IMPOSSIBLE_PROPOSAL', 'every day'),
     ('I give at least two tools a try.', 'TRY_OUT', 'at least two tools'),
     ('I give at most two tools a try.', 'TRY_OUT', 'at most two tools'),
 ])

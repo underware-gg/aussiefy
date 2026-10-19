@@ -23,7 +23,7 @@ from .protected import Masked, protected_runs
 from .model import Dictionary
 from .policy import Effective, Policy, envelope, pick_form, resolve, roll
 from .realise import ARTICLES, fit_article, number_problem, phrase_continues, realise, replacement_span
-from .select import Candidate, candidates, semantic_rejection, usable_forms, weighted_pick
+from .select import Candidate, candidates, mapping_effects, semantic_rejection, usable_forms, weighted_pick
 from .schema import Entry, SchemaError
 from .terms import form_key
 from .text import (COMMON_STARTERS, DATELINE, MID_SENTENCE_NAME, OPEN_QUOTES, QUOTES, SCRIPT_LINE, Token, capital_is_positional, fix_articles, heading_lines, match_case,
@@ -70,13 +70,16 @@ class SubstitutionRecord:
             "intensity": d.intensity,
             **({'semantic_degree': dict(d.semantic_degree), 'degree_qualifier': list(d.degree_qualifier),
                 'degree_conflicts': sorted(d.degree_conflicts)} if d.semantic_degree or d.degree_conflicts else {}),
+            **({"mapping_effects": {cid: list(values) for cid, values in d.mapping_effects.items()}}
+               if d.mapping_effects else {}),
             "captures": d.describe_captures(),
             "decision": self.decision,
             "p_substitute": round(self.p, 3),
             "roll": None if self.roll is None else round(self.roll, 4),
             "chosen": None if not self.chosen else {
                 "entry": self.chosen.entry.id, "form": self.chosen.entry.form, "why": self.chosen.why,
-                "probability": round(self.chosen.weight / total, 3)},
+                "probability": round(self.chosen.weight / total, 3),
+                **({"semantic_effects": list(self.chosen.semantic_effects)} if self.chosen.semantic_effects else {})},
             "stacked": None if not self.stacked else {"entry": self.stacked.entry.id, "why": self.stacked.why},
             "output": self.output,
             "term": self.term,
@@ -419,7 +422,11 @@ class Translator:
                                         self.dictionary.person_concepts, self.dictionary.person_nouns, mood=run.mood)
         keep = []
         for c in eligible:
-            reason = (semantic_rejection(c.entry, narrator_opinion=run.embellishment.narrator_opinion)
+            c.semantic_effects = mapping_effects(c.entry, det,
+                narrator_opinion=run.embellishment.narrator_opinion,
+                quantity_approximation=run.embellishment.quantity_approximation)
+            reason = (semantic_rejection(c.entry, narrator_opinion=run.embellishment.narrator_opinion,
+                      quantity_approximation=run.embellishment.quantity_approximation, effects=c.semantic_effects)
                       or _span_rejection(c, det, sent.tokens, sent.tags, taken)
                       or _genre_rejection(c, run, self.dictionary.neutral_person_concepts))
             if reason:
@@ -590,7 +597,8 @@ class Translator:
             offer = garnish_offer("closer", self.dictionary.garnish, run.eff, run.pol.seed,
                                   (key, run.text.lower()), run.state.garnish_uses, contexts=contexts,
                                   mood=run.mood, swear=swear, insults=run.embellishment.takes("insult"),
-                                  narrator_opinion=run.embellishment.narrator_opinion)
+                                  narrator_opinion=run.embellishment.narrator_opinion,
+                                  quantity_approximation=run.embellishment.quantity_approximation)
             entry = offer.pick()
             form = entry and offer.words(entry)
             run.garnish.append(GarnishRecord.rolled("closer", len(sents) - 1, entry, form, r, p, offer.rejected))
@@ -620,7 +628,8 @@ class Translator:
             offer = garnish_offer("tail", self.dictionary.garnish, run.eff, run.pol.seed,
                                   (key,) + sent.key, state.garnish_uses, sentence_contexts(sent.tokens, sent.tags),
                                   swear=swear, insults=run.embellishment.takes("insult"),
-                                  narrator_opinion=run.embellishment.narrator_opinion)
+                                  narrator_opinion=run.embellishment.narrator_opinion,
+                                  quantity_approximation=run.embellishment.quantity_approximation)
             entry = offer.pick()
             form, rej = entry and offer.words(entry), offer.rejected
             if entry:
@@ -778,7 +787,8 @@ class Translator:
                                   state.garnish_uses, g.tag_contexts if placement == "tag" else g.contexts,
                                   exclude=recent, mood=run.mood, swear=swear,
                                   insults=run.embellishment.takes("insult"),
-                                  narrator_opinion=run.embellishment.narrator_opinion)
+                                  narrator_opinion=run.embellishment.narrator_opinion,
+                                  quantity_approximation=run.embellishment.quantity_approximation)
             entry = offer.pick()
             form, rej = entry and offer.words(entry), offer.rejected
             if entry:

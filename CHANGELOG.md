@@ -9,11 +9,26 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Advance the changes payload contract to v2 for optional per\-renderin' semantic effects; retain span, ID
+  and renderin' rules, and regenerate service fixtures against the new strict schema.
+
+- Make reviewed quantity approximation configurable: narrative Dinkum/Troppo may approximate the exact
+  duration in a source\-specific mapping; Deadset, factual presets and Custom retain precision unless
+  explicitly overridden. Keep ordinary indefinite wording available. Share mapping effects through
+  selection, lookup, plans, alternatives'n bounded original\-aware verification; retain unrelated numbers.
+- Apply the remainin' clear source\-audit sense repairs: distinguish urination, categorical impossibility,
+  completion, tasting, noisy crying/sulking, explicit noun subtypes'n emphatic refusals. Stone the crows, preserve antenna
+  qualifiers/plurals'n walking destinations, require progressive objects, and retain discovery\-only
+  vocabulary where source wording can't establish a safe automatic readin'. Well, correct eight source/usage
+  records'n merge 627 reviewed source pairs from batches 7–11 without changin' existin' term gates.
+- Add nonconsuming preceding/followin' context assertions'n explicit object\-argument patterns to the
+  shared matcher. Preserve these capabilities in derived vocabulary'n research toolin'.
+
 - Preserve reviewed explicit semantic degree independently of style intensity: share source/target
   certificates, retained qualifier ownership'n compatible realised forms across translation, plans and
   automatic alternatives. Calibrate the DRUNK family without guessing unknown grades or removing terms.
 - Distinguish plural direct address from references to everyone: offer “you mob”/“youse” in simple group
-  greetings'n commands; preserve ambiguous parentheticals and coordinated recipients. Stone the flamin' crows, retain ordinary
+  greetings'n commands; preserve ambiguous parentheticals and coordinated recipients. Oi, retain ordinary
   distributive meanings in “Everyone came” and prevent direct dictionary replacements bypassin' usage.
 
 - Enable comic dictionary terms in solemn text at Troppo; other defaults stay off, with explicit
@@ -142,13 +157,13 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   `allow_document_config`, `max_chars`, `max_query_chars` and `lookup_limit`, with defaults that serve everything. Annotate every
   MCP tool as read-only, so clients such as ChatGPT don't ask for confirmation.
 - Stabilise WordNet neighbour selection before trainin'\-pair truncation, preserving sense'n lemma priority.
-  So anyway, record current\-model trial limits'n real portable CLI/MCP integration checks without claiming web deployment.
+  Record current\-model trial limits'n real portable CLI/MCP integration checks without claiming web deployment.
   The fresh full\-data candidate passes 31/33 required checks, so the bundled model remains 1.2.0 \(33/33\).
 - Keep negative\-question subjects beside their auxiliary by declinin' the unsafe bloody\-well infix there.
   Preserve capitals such as Australian and English when dictionary vocabulary alone would lowercase them.
   Place dialogue tags before punctuation'n curly closing quotes in continued speech.
 - Add an independently curated target\-expression benchmark with fixed inputs'n an explicit first baseline.
-  Fair dinkum, share language cleanup with the trainer so grammar directives can't become trainin' words.
+  Share language cleanup with the trainer so grammar directives can't become trainin' words.
 - Review the original seed listicle, add ten curated expressions with precise senses, and retain a complete
   decision ledger. Honour declared HTML encodings during acquisition without overriding explicit HTTP charsets.
 - Preserve outer auxiliaries'n question grammar, distinguish perfect\-have from possession, and retain the

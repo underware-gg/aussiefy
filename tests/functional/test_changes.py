@@ -31,7 +31,8 @@ from regen_changes_fixtures import CASES, build as fixture  # noqa: E402
 
 KINDS = json.loads((FIXTURES / "every-kind.json").read_text(encoding="utf-8"))["request"]
 # the contract each VERSION names: its schema's sha256 and its id format. Changing either means a new VERSION.
-CONTRACTS = {1: ("4dd5a362", "{kind}:{start}-{end}[:{placement or rule}][#{n}]")}
+CONTRACTS = {1: ("4dd5a362", "{kind}:{start}-{end}[:{placement or rule}][#{n}]"),
+             2: ("70f980e0", "{kind}:{start}-{end}[:{placement or rule}][#{n}]")}
 LIVELY = dict(level=5, vulgarity=2, embellishment=2, document_config={"profile": {
     "stack": 0.9, "garnish": {"riff": 1.0}, "max_garnish": {"riff": 30}, "garnish_gap": 0, "swearing": {"infix": 6.0}}})
 

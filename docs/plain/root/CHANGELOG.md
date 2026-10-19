@@ -5,6 +5,21 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Advance the changes payload contract to v2 for optional per-rendering semantic effects; retain span, ID
+  and rendering rules, and regenerate service fixtures against the new strict schema.
+
+- Make reviewed quantity approximation configurable: narrative Dinkum/Troppo may approximate the exact
+  duration in a source-specific mapping; Deadset, factual presets and Custom retain precision unless
+  explicitly overridden. Keep ordinary indefinite wording available. Share mapping effects through
+  selection, lookup, plans, alternatives and bounded original-aware verification; retain unrelated numbers.
+- Apply the remaining clear source-audit sense repairs: distinguish urination, categorical impossibility,
+  completion, tasting, noisy crying/sulking, explicit noun subtypes and emphatic refusals. Preserve antenna
+  qualifiers/plurals and walking destinations, require progressive objects, and retain discovery-only
+  vocabulary where source wording cannot establish a safe automatic reading. Correct eight source/usage
+  records and merge 627 reviewed source pairs from batches 7–11 without changing existing term gates.
+- Add nonconsuming preceding/following context assertions and explicit object-argument patterns to the
+  shared matcher. Preserve these capabilities in derived vocabulary and research tooling.
+
 - Preserve reviewed explicit semantic degree independently of style intensity: share source/target
   certificates, retained qualifier ownership and compatible realised forms across translation, plans and
   automatic alternatives. Calibrate the DRUNK family without guessing unknown grades or removing terms.

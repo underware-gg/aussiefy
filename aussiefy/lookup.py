@@ -18,7 +18,7 @@ from .errors import UserError
 from .engine import Translator, default_translator
 from .model import Dictionary
 from .morph import pluralise, verb_forms
-from .select import dial_rejection, semantic_rejection
+from .select import mapping_effects, dial_rejection, semantic_rejection
 from .schema import PLACEHOLDER_RE, Entry
 from .cards import entry_card, short_card, shows_riffs
 from .terms import fold, form_key, strip_markup
@@ -108,6 +108,15 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         tokens.pop(0)
     while tokens and tokens[-1].is_punct:
         tokens.pop()
+    from .detect import detect, resolve_overlaps
+    readings = resolve_overlaps(detect(tokens, d.index, concepts=d.concepts, adjective_nouns=d.adjective_nouns,
+                                        degree_index=d.degree_index)) if d.mapping_index.find(tokens) else []
+    def effects_for(entry):
+        connected = [det for det in readings if set(entry.concept).intersection(det.concepts)]
+        return tuple(sorted(set(entry.semantic_effects).union(*(mapping_effects(entry, det,
+            narrator_opinion=setting.narrator_opinion, quantity_approximation=setting.quantity_approximation)
+            for det in connected))))
+
     concept_score: dict[str, float] = {}
     for p in d.patterns:
         text = strip_markup(p.text)
@@ -151,7 +160,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         if " " in qn and any(_in_order(qn.split(), f.split()) for f in forms):
             scored.append((SCORE_IN_ORDER, e, "part of a phrase"))   # "chuck in" ~ "chuck it in", "give the flick"
             continue
-        if semantic_rejection(e, narrator_opinion=setting.narrator_opinion):
+        if semantic_rejection(e, narrator_opinion=setting.narrator_opinion, quantity_approximation=setting.quantity_approximation, effects=effects_for(e)):
             continue
         if parsed_concepts and not parsed_concepts.intersection(e.concept):
             continue
@@ -181,7 +190,11 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         riffs = shows_riffs(setting)
         results = [{**entry_card(e, cap, riffs), "match": how, "score": round(s, 2)} for s, e, how in scored[:limit]]
     for card in results:
-        reason = semantic_rejection(d.entries[card["id"]], narrator_opinion=setting.narrator_opinion)
+        entry = d.entries[card["id"]]
+        effects = effects_for(entry)
+        if effects:
+            card["semantic_effects"] = list(effects)
+        reason = semantic_rejection(entry, narrator_opinion=setting.narrator_opinion, quantity_approximation=setting.quantity_approximation, effects=effects)
         if reason:
             card.update(effects_permitted=False, effect_rejection=reason)
     # a lookup reads no profile settings, so its envelope is the dials alone (no profile_config)

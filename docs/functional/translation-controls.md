@@ -65,7 +65,20 @@ aussiefy translate "Read the API documentation." --document-type custom --docume
 | `riff_association` | Integer 0–1: 0 direct meanings only; 1 also offers explicitly curated related meanings to writers; Troppo 1, others 0 |
 | `narrator_opinion` | Boolean: permit reviewed additions of narrator judgment; Troppo true, Deadset/Dinkum/Custom false; exact overrides win |
 | `solemn_comic_terms` | Boolean: permit comic dictionary terms in solemn source text; Troppo true, Deadset/Dinkum/Custom false; exact overrides win |
+| `quantity_approximation` | Boolean: permit reviewed approximations of exact quantities; General/Story/Personal at Dinkum/Troppo true; Deadset, factual presets and Custom false; exact overrides win |
 | `profile` | Object: override engine probabilities, limits, spacing and thresholds; omitted keys inherit dial defaults |
+
+### Quantity precision
+
+`quantity_approximation` permits reviewed source mappings to trade exact quantities for narrative wording.
+For example, “four score and seven years ago” may become “yonks ago”. It is false at Deadset, true for
+General/Story/Personal at Dinkum and Troppo, and false for News/Instructions/Technical/Official and Custom.
+Document detection only selects these settings. Candidate selection reads the resolved permission.
+An explicit `document_config={"quantity_approximation": true}` or `false` wins over every preset and dial.
+
+The permission supplies no new mappings for arbitrary numbers. Tell ya what, ordinary indefinite “ages ago” → “yonks ago”
+remains available at Deadset. Precision, explicit severity'n narrator opinion are independent controls;
+allowing an approximate duration doesn't allow an unrelated amount or participant to disappear.
 
 ### Meaning and narrator opinion
 
@@ -147,7 +160,7 @@ including in Markdown'n when checking a draft. `guide` has no source text, so Au
 General or a named type. Markdown syntax protection is independent of document behaviour.
 
 `english=` / `--english` selects `us`, `uk`, `auto` or `none`. Anyway, the default comes from the profile \(`auto` in
-the bundled profiles\). Listen, auto uses American spellings to infer US English; ambiguous British words such as
+the bundled profiles\). Jeez, auto uses American spellings to infer US English; ambiguous British words such as
 “pants” need `uk`. `none` disables dialect swaps. Plain Australian equivalents \(faucet → tap\) apply at every
 level, separately from slang. `dialect.yaml` owns the vocabulary'n technical/genre exclusions; source
 quotes'n mentioned words have their own protections. POS tags help distinguish nouns, verbs and names;
@@ -156,13 +169,13 @@ the small bundled tagger runs offline without NLTK.
 ## Document modes
 
 The explicit [`--markdown` / `markdown=True`](markdown.md) mode preserves whole links, tables and HTML,
-returns `DocumentResult`, and permits offline ngram/disabled fallback only. Jeez, it resolves genre and English
+returns `DocumentResult`, and permits offline ngram/disabled fallback only. Crikey, it resolves genre and English
 once for the whole document'n retains separate source/output ranges for each rewritten unit.
 
 The imported `--markup markdown|mdx|auto` / `markup=` contract is an **extended document mode**. It uses opaque
 protected spans while translating sentence context, including eligible link labels, table cells and JSX
 children; attributes, code, headings, paths, maths'n destination syntax stay protected. Anyway, table/list rows
-suppress garnish. Crikey, auto detects the document dialect from the text. It returns the engine's `Result`, with
+suppress garnish. Auto detects the document dialect from the text. It returns the engine's `Result`, with
 source\-relative records restored to the original source. This contract also applies to planning, lint,
 verification'n yarn; a rewrite that drops or duplicates a protected span is refused.
 

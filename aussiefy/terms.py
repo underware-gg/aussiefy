@@ -28,7 +28,7 @@ def fold(text: str) -> str:
 
 
 def _pattern_text(text: str) -> str:
-    return re.sub(r"@\d|(?<!\w)(?:!\S+|\^\w+)", " ", fold(text))
+    return re.sub(r"@\d|(?<!\w)(?:!\S+|\?<=[^\s]+|\?=\S+|\^\w+)", " ", fold(text))
 
 
 def strip_markup(text: str) -> str:

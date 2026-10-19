@@ -26,8 +26,10 @@ keep_quotes is true, preserve quoted wording exactly. When person_swears is fals
 people with swears. Keep terms protected by term_domains and datelines protected by dateline_context unchanged.
 When narrator_opinion is false, add no narrator judgment, praise, pity, luck or blame absent from the original.
 When true, those reactions may colour what is already there; preserve every role, identity, event and claim.
+When quantity_approximation is false, retain exact quantities. When true, reviewed approximation mappings
+may trade precision for narrative wording; preserve quantities outside those mappings.
 Respect check_length/max_length and keep_share as configured. No optional Custom behaviour is implied by its
-embellishment label. Preserve every original fact and the selected markup regardless of the type.
+embellishment label. Preserve every other original fact and the selected markup regardless of the type.
 
 STYLE GUIDE:
 {guide}

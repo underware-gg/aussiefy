@@ -33,6 +33,8 @@ TIME_UNITS = {"second", "minute", "hour", "day", "week", "fortnight", "month", "
               "evening", "night", "time"}
 TIME_MODIFIERS = {"every", "each", "all", "this", "that", "these", "those", "next", "last"}
 RELATIVE_TIMES = {"today", "tomorrow", "yesterday", "tonight"}
+AMOUNT_HEADS = {'lot', 'bit', 'deal', 'amount', 'quantity', 'much', 'more', 'less', 'plenty'}
+AMOUNT_MODIFIERS = {'DT', 'PDT', 'CD', 'JJ', 'JJR', 'JJS', 'RB', 'RBR', 'RBS'}
 FREQUENCY_COUNTS = {"once", "twice", "thrice"}
 
 
@@ -135,6 +137,9 @@ def noun_argument(capture: Token, tokens: list[Token], tags: list[str], *, unanc
     words = tuple(t.norm for t in tokens[start:end])
     head = _noun_argument_head(words, phrase)
     if head is None:
+        return False
+    if unanchored_object and words and (morph.singular_of(words[-1]) or words[-1]) in AMOUNT_HEADS \
+            and all(tag in AMOUNT_MODIFIERS for tag in phrase[:-1]):
         return False
     if head != "VBG" and unanchored_object and _temporal_tail(words, phrase, tokens[end:]):
         return False

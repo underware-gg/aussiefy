@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/underware-gg/aussiefy/blob/main/aussiefy/data/changes.schema.json",
-  "title": "aussiefy changes, contract version 1",
+  "title": "aussiefy changes, contract version 2",
   "description": "What aussiefy.translate_changes returns (ChangeSet.to_dict()): a translation's text, every change it made in output order, the card of every entry the changes name, and the swaps and garnish whose alternatives are withheld. Spans are [start, end) Unicode code-point offsets: src_span in the source, out_span in this text. Alternative regions and mask positions use the same unit; masks refer to their own rendering's text. Ids are a change's kind and source span, with a placement or rule where those could repeat. See docs/functional/changes.md.",
   "type": "object",
   "required": ["version", "text", "changes", "entries", "withheld"],
   "additionalProperties": false,
   "properties": {
-    "version": {"const": 1},
+    "version": {"const": 2},
     "text": {"type": "string"},
     "changes": {"type": "array", "items": {"$ref": "#/$defs/change"}},
     "entries": {"type": "object", "additionalProperties": {"$ref": "#/$defs/card"}},
@@ -43,6 +43,7 @@
       "required": ["entry_id", "weight", "rendered", "out_span", "vulgarity", "masks"],
       "additionalProperties": false,
       "properties": {
+        "semantic_effects": {"type": "array", "items": {"enum": ["opinion", "quantity_approximation"]}, "uniqueItems": true},
         "entry_id": {"type": "string"},
         "weight": {"type": "number", "minimum": 0, "maximum": 1},
         "rendered": {"type": "string"},
@@ -57,6 +58,7 @@
       "required": ["entry_id", "vulgarity", "rendered", "out_span", "masks"],
       "additionalProperties": false,
       "properties": {
+        "semantic_effects": {"type": "array", "items": {"enum": ["opinion", "quantity_approximation"]}, "uniqueItems": true},
         "entry_id": {"type": "string"},
         "vulgarity": {"type": "integer", "minimum": 1, "maximum": 3},
         "rendered": {"type": "string"},
@@ -156,7 +158,7 @@
         "sources": {"type": "array", "items": {"type": "string"}},
         "replaces": {"type": "array", "items": {"type": "string"}},
         "gated": {"type": "array", "items": {"type": "string"}},
-        "semantic_effects": {"type": "array", "items": {"enum": ["opinion"]}, "uniqueItems": true}
+        "semantic_effects": {"type": "array", "items": {"enum": ["opinion", "quantity_approximation"]}, "uniqueItems": true}
       }
     }
   }

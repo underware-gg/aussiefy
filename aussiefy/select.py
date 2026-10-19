@@ -31,6 +31,7 @@ class Candidate:
     entry: Entry
     weight: float
     why: str
+    semantic_effects: tuple[str, ...] = ()
 
 
 class Gated(str):
@@ -58,9 +59,26 @@ def dial_rejection(entry: Entry, eff: Effective) -> str | None:
         return f"vulgarity {entry.vulgarity} exceeds cap {eff.vulgarity}"
     return None
 
-def semantic_rejection(entry: Entry, *, narrator_opinion: bool) -> str | None:
+def mapping_effects(entry: Entry, det: Detection, *, narrator_opinion: bool,
+                    quantity_approximation: bool) -> tuple[str, ...]:
+    """Use an available meaning path; a precise reading need not inherit another reading's loss."""
+    if not det.mapping_effects:
+        return entry.semantic_effects
+    paths = {tuple(sorted(set(entry.semantic_effects) | set(det.mapping_effects.get(cid, ()))))
+             for cid in set(entry.concept).intersection(det.concepts)}
+    return min(paths or {entry.semantic_effects}, key=lambda effects: (
+        bool(semantic_rejection(entry, narrator_opinion=narrator_opinion,
+                                quantity_approximation=quantity_approximation, effects=effects)),
+        len(effects), effects))
+
+
+def semantic_rejection(entry: Entry, *, narrator_opinion: bool, quantity_approximation: bool = False,
+                       effects: tuple[str, ...] | None = None) -> str | None:
     """A reviewed mapping's added meaning needs the corresponding resolved permission."""
-    if "opinion" in entry.semantic_effects and not narrator_opinion:
+    effects = entry.semantic_effects if effects is None else effects
+    if "quantity_approximation" in effects and not quantity_approximation:
+        return "approximates an exact quantity; quantity_approximation is false"
+    if "opinion" in effects and not narrator_opinion:
         return "adds narrator opinion; narrator_opinion is false"
     return None
 

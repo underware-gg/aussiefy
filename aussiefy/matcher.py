@@ -19,6 +19,7 @@ first word is a verb lemma and matches any inflection ("overreact" matches
 from __future__ import annotations
 
 import re
+from functools import cached_property
 from dataclasses import dataclass, field
 
 from . import morph
@@ -29,7 +30,7 @@ INTENSITY_RE = re.compile(r"@([1-5])\s*$")
 
 @dataclass(frozen=True)
 class Element:
-    kind: str                     # "lit" | "slot" | "not"
+    kind: str                     # "lit" | "slot" | "not" | "ahead" | "behind"
     values: frozenset[str] = frozenset()
     optional: bool = False
     slot: str = ""
@@ -52,6 +53,12 @@ class Pattern:
     clause_end: bool = False      # "^end": no following complement; adverbial tails may precede the boundary
     guard: bool = False           # a concept without replacement entries only protects the matched span
     semantic_degree: dict[str, str] = field(default_factory=dict)
+    mapping_effects: dict[str, tuple[str, ...]] = field(default_factory=dict)
+    object_argument: bool = False
+
+    @cached_property
+    def consuming(self) -> tuple[Element, ...]:
+        return tuple(e for e in self.elements if e.kind in {'lit', 'slot'})
 
     @property
     def slots(self) -> set[str]:
@@ -76,14 +83,16 @@ def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_in
         intensity = int(m.group(1))
         text = text[: m.start()].rstrip()
     directives = {part for part in text.split() if part.startswith("^")}
-    if directives - {"^person", "^adj", "^end"}:
-        raise ValueError(f"unknown pattern directives: {sorted(directives - {'^person', '^adj', '^end'})}")
+    if directives - {"^person", "^adj", "^end", "^object"}:
+        raise ValueError(f"unknown pattern directives: {sorted(directives - {'^person', '^adj', '^end', '^object'})}")
     person_only, before_modifier, clause_end = (key in directives for key in ("^person", "^adj", "^end"))
-    text = re.sub(r"(?<!\S)\^(?:person|adj|end)(?=\s|$)", "", text).strip()
+    object_argument = "^object" in directives
+    text = re.sub(r"(?<!\S)\^(?:person|adj|end|object)(?=\s|$)", "", text).strip()
     if clause_end and frame not in {"vp", "clause"}:
         raise ValueError("^end is only supported for verb-phrase and clause patterns")
     raw_parts = text.split()
-    last_word = max((i for i, p in enumerate(raw_parts) if not p.startswith("!")), default=0)
+    words = [i for i, part in enumerate(raw_parts) if not part.startswith(("!", "?=", "?<="))]
+    first_word, last_word = (words[0], words[-1]) if words else (0, 0)
     elements: list[Element] = []
     for idx, part in enumerate(raw_parts):
         slot = re.fullmatch(r"\{(\w+)\}", part)
@@ -91,6 +100,16 @@ def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_in
             if slot.group(1) not in SLOT_MATCHERS:
                 raise ValueError(f"unknown slot {part} in pattern {text!r}")
             elements.append(Element("slot", slot=slot.group(1)))
+            continue
+        if part.startswith(('?=', '?<=')):
+            behind = part.startswith('?<=')
+            body = part[3:] if behind else part[2:]
+            if (not behind and not any(e.kind in {'lit', 'slot'} for e in elements)) or not body:
+                raise ValueError('a following assertion needs a preceding word; assertions need nonempty alternatives')
+            values = [tokenize(w) for w in body.split('|')]
+            if any(len(words) != 1 for words in values):
+                raise ValueError('context assertion alternatives must each be one token')
+            elements.append(Element('behind' if behind else 'ahead', frozenset(words[0].norm for words in values)))
             continue
         if part.startswith("!") and len(part) > 1:
             if idx == 0:
@@ -108,7 +127,7 @@ def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_in
         if all(len(t) == 1 for t in tokenised):
             values = frozenset(t[0] for t in tokenised)
             role, forms = "", ()
-            if frame == "vp" and idx == 0 and len(alts) == 1:
+            if frame == "vp" and idx == first_word and len(alts) == 1:
                 role = "head_verb"
                 forms = tuple(morph.verb_forms(alts[0].lower()).items())
                 values = frozenset(s for s, _ in forms)
@@ -120,7 +139,7 @@ def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_in
                     # and spelling can't tell its number, so the entry says (its `plural:`)
                     forms = ((word, "written_plural"),)
                 else:
-                    forms = ((word, "singular"), (morph.pluralise(word), "plural"))
+                    forms = ((word, "singular"),) + tuple((plural, "plural") for plural in morph.plural_forms(word))
                     if word.endswith("o"):
                         forms += ((word + "es", "plural"),)
                 values = frozenset(s for s, _ in forms)
@@ -132,7 +151,9 @@ def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_in
             raise ValueError(f"alternatives must be single words in pattern {text!r}")
     if not any(e.kind == "lit" and not e.optional for e in elements):
         raise ValueError(f"pattern {text!r} needs at least one required literal word")
-    return Pattern(text, tuple(elements), frame, concepts, intensity, entry_id, person_only, before_modifier, clause_end)
+    if object_argument and not any(e.kind == 'slot' and e.slot == 'np' for e in elements):
+        raise ValueError('^object requires an {np} argument')
+    return Pattern(text, tuple(elements), frame, concepts, intensity, entry_id, person_only, before_modifier, clause_end, object_argument=object_argument)
 
 
 def is_name(tok: Token) -> bool:
@@ -177,6 +198,14 @@ def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = T
         if ei == len(pattern.elements):
             return ti
         el = pattern.elements[ei]
+        if el.kind == 'behind':
+            if ti == 0 or tokens[ti-1].norm not in el.values:
+                return None
+            return rec(ei + 1, ti)
+        if el.kind == 'ahead':
+            if ti >= len(tokens) or tokens[ti].norm not in el.values:
+                return None
+            return rec(ei + 1, ti)
         if el.kind == "not":
             for ahead in tokens[ti:ti + el.reach]:
                 if ahead.norm in el.values:   # a word, or a mark the pattern names ("of course !,")
@@ -224,7 +253,7 @@ def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = T
         return None
     # a clause written with its subject ("it {be} freezing": the weather's it, not fans or tears) has that
     # subject, as a {subj} would, so the form's {subj} and its verb agree with it
-    if pattern.frame == "clause" and "subj" not in captures and pattern.elements[0].kind == "lit" \
+    if pattern.frame == "clause" and "subj" not in captures and pattern.consuming[0].kind == "lit" \
             and tokens[pos].norm in morph.PRONOUNS:
         captures["subj"] = tokens[pos]
     return Match(pattern, pos, end, dict(captures), inflection)
@@ -240,7 +269,7 @@ class PatternIndex:
         self.unindexed: list[tuple[Pattern, tuple[frozenset[str], ...]]] = []
         for p in patterns:
             needs = tuple(e.values for e in p.elements if e.kind == "lit" and not e.optional)
-            first = p.elements[0]
+            first = p.consuming[0]
             if first.kind == "lit" and not first.optional:
                 for v in first.values:
                     self.by_first.setdefault(v, []).append((p, needs[1:]))

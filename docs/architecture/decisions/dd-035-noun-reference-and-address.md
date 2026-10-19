@@ -1,6 +1,6 @@
 # DD-035: Noun reference and direct address
 
-Status: Accepted; integrated verification in progress.
+Status: Accepted; integrated verification passed.
 Date: 19 October 2026.
 Extends: [DD-030](dd-030-shared-semantic-context.md).
 

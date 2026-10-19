@@ -30,7 +30,7 @@ REGISTERS = ("current", "dated", "archaic")
 FLAGS = ("not_aussie", "slur", "dubious_meaning", "archaic", "fabricated", "untagged")
 TYPES = ("idiom", "garnish")
 CLASSES = ("lexical", "phrase", "idiom")
-SEMANTIC_EFFECTS = ("opinion",)
+SEMANTIC_EFFECTS = ("opinion", "quantity_approximation")
 PLACEMENTS = ("connective", "opener", "tag", "aside", "tail", "closer")
 GARNISH_KEYS = (*PLACEMENTS, "riff")   # rate and per-text-limit keys in level profiles
 GENRES = ("story", "personal", "news", "instructions", "technical", "official")   # genre.py reads a text as one
@@ -229,7 +229,9 @@ class Concept:
                                           # struct's field, a build): left as they are there
     unless_after: tuple[str, ...] = ()  # complements that do not establish this meaning, across soft punctuation
     trigger_degrees: dict[str, dict[str, str]] = field(default_factory=dict)
+    trigger_effects: dict[str, dict[str, tuple[str, ...]]] = field(default_factory=dict)
     noun_use: str = "any"          # any | reference | address: grammatical use of a noun phrase
+    lookup_only: bool = False    # retained for discovery; never establishes an automatic meaning
     takes_addressee: bool = False  # an expression whose following recipient is direct address
 
 
@@ -285,6 +287,13 @@ def validate_entry_id(raw: dict, origin: str = "") -> str:
     return entry_id
 
 
+def parse_effects(raw, owner: str) -> tuple[str, ...]:
+    effects = tuple(dict.fromkeys(_tuple(raw, 'semantic_effects', owner)))
+    if set(effects) - set(SEMANTIC_EFFECTS):
+        raise SchemaError(f'{owner}: semantic_effects must be from {SEMANTIC_EFFECTS}')
+    return effects
+
+
 def parse_entry(raw: dict, origin: str = "") -> Entry:
     entry_id = validate_entry_id(raw, origin)
     unknown = set(raw) - set(ENTRY_KEYS)
@@ -310,9 +319,7 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
     bad = set(flags) - set(FLAGS)
     if bad:
         raise SchemaError(f"{entry_id}: unknown flag(s) {sorted(bad)}")
-    effects = tuple(dict.fromkeys(_tuple(raw.get("semantic_effects"), "semantic_effects", entry_id)))
-    if set(effects) - set(SEMANTIC_EFFECTS):
-        raise SchemaError(f"{entry_id}: semantic_effects must be from {SEMANTIC_EFFECTS}")
+    effects = parse_effects(raw.get("semantic_effects"), entry_id)
     cls = raw.get("class")
     if cls is not None and cls not in CLASSES:
         raise SchemaError(f"{entry_id}: class must be one of {CLASSES}")
@@ -465,6 +472,19 @@ def parse_concept(cid: str, raw: dict) -> Concept:
     for frame, degrees in trigger_degrees.items():
         if set(degrees) - set(triggers[frame]):
             raise SchemaError(f'concept {cid}.{frame}: degree keys must name existing trigger patterns')
+    trigger_effects = raw.get('trigger_effects', {})
+    if not isinstance(trigger_effects, dict) or set(trigger_effects) - set(triggers):
+        raise SchemaError(f'concept {cid}: trigger_effects must name existing trigger frames')
+    effects = {}
+    for frame, patterns in trigger_effects.items():
+        if not isinstance(patterns, dict) or set(patterns) - set(triggers[frame]):
+            raise SchemaError(f'concept {cid}.{frame}: effect keys must name existing trigger patterns')
+        effects[frame] = {}
+        for pattern, values in patterns.items():
+            values = parse_effects(values, f'concept {cid}')
+            if not values or set(values) - set(SEMANTIC_EFFECTS):
+                raise SchemaError(f'concept {cid}: trigger_effects must list known semantic effects')
+            effects[frame][pattern] = tuple(dict.fromkeys(values))
     noun_use = raw.get("noun_use", "any")
     if not isinstance(noun_use, str) or noun_use not in {"any", "reference", "address"}:
         raise SchemaError(f"concept {cid}: noun_use must be any, reference or address")
@@ -481,6 +501,8 @@ def parse_concept(cid: str, raw: dict) -> Concept:
         not_in=not_in,
         unless_after=unless_after,
         trigger_degrees=trigger_degrees,
+        trigger_effects=effects,
         noun_use=noun_use,
         takes_addressee=_bool(raw, "takes_addressee", f"concept {cid}"),
+        lookup_only=_bool(raw, "lookup_only", f"concept {cid}"),
     )

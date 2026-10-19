@@ -324,7 +324,7 @@
   frame: vp
   intensity: 4
   incoherence: 4
-  gloss: Lose your temper (nana = banana = head).
+  gloss: Lose your temper.
 - id: go-off-like-a-frog-in-a-sock
   form: go off like a frog in a sock
   concept: [LOSE_TEMPER, WILD_EXCITEMENT]
@@ -370,7 +370,8 @@
   gloss: A coy excuse for leaving, usually for the toilet.
 - id: point-percy
   form: point Percy at the porcelain
-  concept: [TOILET_BREAK]
+  concept:
+  - URINATE
   frame: vp
   vulgarity: 1
   profane: false
@@ -686,14 +687,16 @@
 # --- doubting it, and "no bloody way" ---------------------------------------------
 - id: reckon-had-buckleys
   form: reckon {np} {have} Buckley's
-  concept: [DOUBT_IT]
+  concept:
+  - IMPOSSIBLE_PROPOSAL
   frame: vp
   intensity: 4
   incoherence: 3
   gloss: Think something hasn't a hope.
 - id: reckon-no-bloody-way
   form: reckon there {be} no bloody way {np} {will} come off
-  concept: [DOUBT_IT]
+  concept:
+  - IMPOSSIBLE_PROPOSAL
   frame: vp
   intensity: 5
   vulgarity: 1
@@ -793,7 +796,7 @@
   intensity: 4
   vulgarity: 2
   incoherence: 3
-  gloss: Care about at all (always negated).
+  gloss: Care about at all; usually in negative constructions.
 - id: rabbit-on
   form: rabbit on
   concept: [TALK_ON]
@@ -964,13 +967,15 @@
   gloss: Scream loudly in protest or terror.
 - id: bawl
   form: bawl
-  concept: [CRY]
+  concept:
+  - NOISY_CRY
   frame: vp
   incoherence: 2
   gloss: Cry noisily.
 - id: have-a-sook
   form: have a sook
-  concept: [CRY]
+  concept:
+  - SULK
   frame: vp
   incoherence: 3
   gloss: Cry or sulk like a baby.
@@ -1200,7 +1205,8 @@
   gloss: Is utterly clueless.
 - id: bawl-eyes-out
   form: bawl {poss} eyes out
-  concept: [CRY]
+  concept:
+  - INTENSE_NOISY_CRY
   frame: vp
   intensity: 4
   incoherence: 3
@@ -1254,7 +1260,8 @@
   gloss: Crazy. Also British; common in Australia.
 - id: blubber
   form: blubber
-  concept: [CRY]
+  concept:
+  - NOISY_CRY
   frame: vp
   incoherence: 3
   gloss: Cry noisily and wetly.

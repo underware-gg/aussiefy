@@ -343,12 +343,14 @@
   gloss: An attempt.
 - id: hard-yakka
   form: hard yakka
-  concept: [WORK]
+  concept:
+  - HARD_WORK
   frame: np
   intensity: 4
   incoherence: 2
-  replaces: ["hard work@4", "hard labour@4", "a hard slog@4", "heavy lifting@4"]
+  replaces: []
   gloss: Hard work, especially physical.
+  number: mass
 - id: a-blue
   form: a blue
   concept: [FIGHT]
@@ -401,7 +403,8 @@
   gloss: The remote interior.
 - id: top-bloke
   form: a top bloke
-  concept: [GOOD_PERSON]
+  concept:
+  - GOOD_MAN
   frame: np
   incoherence: 2
   gloss: A thoroughly decent man.
@@ -494,11 +497,14 @@
   gloss: Politicians collectively; a plural reference to political people.
 - id: yakka
   form: yakka
-  concept: [WORK]
+  concept:
+  - WORK
+  - HARD_WORK
   frame: np
   incoherence: 3
   plural: yakka
   gloss: Work, especially hard work.
+  number: mass
 - id: yeah
   form: yeah
   variants: [yep]
@@ -520,7 +526,8 @@
   gloss: Very, as in "dead easy".
 - id: no-bloody-way
   form: no bloody way
-  concept: [DISAGREE]
+  concept:
+  - EMPHATIC_REFUSAL
   frame: interjection
   intensity: 5
   vulgarity: 1
@@ -805,11 +812,11 @@
 
 # --- the big beats of the full Goldilocks (general-purpose) ----------------------------
 - id: been-at
-  form: been at
+  form: been at {np}
   concept: [BEEN_AT]
   frame: adv
   incoherence: 4
-  gloss: Has been helping themselves to.
+  gloss: Has been eating or drinking the specified thing.
 - id: been-kippin-in
   form: been kippin' in
   concept: [BEEN_SLEEPING_IN]

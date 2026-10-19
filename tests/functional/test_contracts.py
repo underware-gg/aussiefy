@@ -40,7 +40,7 @@ def test_plan_shape(translator):
     assert all(set(d) == {"original", "draft", "reason"} for d in p["difficult_sentences"])
     assert p["difficult_sentences"][0]["original"].startswith("The proposition")
     assert p["mood"] in ("solemn", "dark", "light") and all(isinstance(o, str) for o in p["openings"])
-    riffy = harness.plan("The ashcans were full.", translator=translator)
+    riffy = harness.plan("The wheeled rubbish bins were full.", translator=translator)
     assert riffy["riffs"]
     for card in riffy["riffs"]:
         assert set(card) == {"term", "for", "riffs"}

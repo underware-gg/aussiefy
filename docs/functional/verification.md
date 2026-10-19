@@ -24,3 +24,10 @@ provides that separate evaluation. Optional suggestions are disabled during veri
 to avoid an unnecessary full translation. Lint callers can similarly use `suggest=False` / `--no-suggestions`.
 
 Contract tests: [test_verify.py](../../tests/functional/test_verify.py).
+
+
+Source-specific semantic effects are checked only with an original and an unambiguous local edit joining
+a reviewed source mapping to a compatible recognised term. `quantity_approximation` permits those paired
+losses, and exempts only numbers within that occurrence. It never disables general number checking.
+Target-only “yonks ago” is valid indefinite wording. This bounded check cannot establish the numerical
+fidelity of arbitrary paraphrases or ambiguous/reordered retellings.

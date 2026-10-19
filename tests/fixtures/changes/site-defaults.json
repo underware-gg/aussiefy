@@ -8,7 +8,7 @@
   "embellishment": 1
  },
  "response": {
-  "version": 1,
+  "version": 2,
   "text": "I'm exhausted and the dunny is broken. Thanks for brekky, my mate. You're buggered and starvin', and your car is bung, ay. Well, we let a toddler win the game.",
   "changes": [
    {
@@ -162,7 +162,7 @@
     "alternatives": [
      {
       "entry_id": "buggered",
-      "weight": 0.1403,
+      "weight": 0.1454,
       "rendered": "buggered",
       "out_span": [
        74,
@@ -182,7 +182,7 @@
      },
      {
       "entry_id": "knackered",
-      "weight": 0.1403,
+      "weight": 0.1454,
       "rendered": "knackered",
       "out_span": [
        74,
@@ -193,7 +193,7 @@
      },
      {
       "entry_id": "out-on-poss-feet",
-      "weight": 0.0991,
+      "weight": 0.1027,
       "rendered": "out on your feet",
       "out_span": [
        74,
@@ -204,7 +204,7 @@
      },
      {
       "entry_id": "rooted",
-      "weight": 0.0936,
+      "weight": 0.097,
       "rendered": "rooted",
       "out_span": [
        74,
@@ -215,7 +215,7 @@
      },
      {
       "entry_id": "stuffed",
-      "weight": 0.1403,
+      "weight": 0.1454,
       "rendered": "stuffed",
       "out_span": [
        74,
@@ -226,7 +226,7 @@
      },
      {
       "entry_id": "zonked",
-      "weight": 0.3864,
+      "weight": 0.364,
       "rendered": "zonked",
       "out_span": [
        74,
@@ -278,7 +278,7 @@
     "alternatives": [
      {
       "entry_id": "starvin",
-      "weight": 0.3696,
+      "weight": 0.361,
       "rendered": "starvin'",
       "out_span": [
        87,
@@ -289,7 +289,7 @@
      },
      {
       "entry_id": "hungry-enough-horse-jockey",
-      "weight": 0.2609,
+      "weight": 0.278,
       "rendered": "hungry enough to eat a horse and chase the jockey",
       "out_span": [
        87,
@@ -300,7 +300,7 @@
      },
      {
       "entry_id": "peckish",
-      "weight": 0.3696,
+      "weight": 0.361,
       "rendered": "peckish",
       "out_span": [
        87,
@@ -352,7 +352,7 @@
     "alternatives": [
      {
       "entry_id": "bung-broken",
-      "weight": 0.4699,
+      "weight": 0.4463,
       "rendered": "bung",
       "out_span": [
        113,
@@ -363,7 +363,7 @@
      },
      {
       "entry_id": "buggered",
-      "weight": 0.037,
+      "weight": 0.0386,
       "rendered": "buggered",
       "out_span": [
        113,
@@ -383,7 +383,7 @@
      },
      {
       "entry_id": "cactus",
-      "weight": 0.1849,
+      "weight": 0.1932,
       "rendered": "cactus",
       "out_span": [
        113,
@@ -394,7 +394,7 @@
      },
      {
       "entry_id": "rooted",
-      "weight": 0.1233,
+      "weight": 0.1288,
       "rendered": "rooted",
       "out_span": [
        113,
@@ -405,7 +405,7 @@
      },
      {
       "entry_id": "stuffed",
-      "weight": 0.1849,
+      "weight": 0.1932,
       "rendered": "stuffed",
       "out_span": [
        113,
@@ -557,6 +557,9 @@
     "register": "current",
     "variants": [
      "brekky"
+    ],
+    "sources": [
+     "https://promo.mcdonalds.com.au/menu/breakfast"
     ]
    },
    "buggered": {
@@ -570,7 +573,10 @@
     ],
     "level": 2,
     "vulgarity": 1,
-    "register": "current"
+    "register": "current",
+    "sources": [
+     "https://www.oxfordlearnersdictionaries.com/definition/english/buggered"
+    ]
    },
    "bung-broken": {
     "id": "bung-broken",
@@ -597,7 +603,10 @@
     "level": 4,
     "vulgarity": 0,
     "register": "current",
-    "placement": "connective"
+    "placement": "connective",
+    "sources": [
+     "https://dictionary.cambridge.org/grammar/british-grammar/anyway"
+    ]
    },
    "c-mind-you": {
     "id": "c-mind-you",
@@ -623,7 +632,10 @@
     "level": 4,
     "vulgarity": 0,
     "register": "current",
-    "placement": "connective"
+    "placement": "connective",
+    "sources": [
+     "https://dictionary.cambridge.org/grammar/british-grammar/discourse-"
+    ]
    },
    "c-well": {
     "id": "c-well",
@@ -634,7 +646,10 @@
     "level": 4,
     "vulgarity": 0,
     "register": "current",
-    "placement": "connective"
+    "placement": "connective",
+    "sources": [
+     "https://dictionary.cambridge.org/grammar/british-grammar/discourse-"
+    ]
    },
    "cactus": {
     "id": "cactus",
@@ -654,7 +669,10 @@
       "best": true
      }
     ],
-    "notes": "Of machines and things (\"the ute's cactus\"), not tired people. Older-sounding; Macquarie's blog thinks it may be fading, but it is still widely understood."
+    "notes": "Used here of broken or ruined machines and things (\"the ute's cactus\"). This mapping does not cover every other use of the word.",
+    "sources": [
+     "https://www.macquariedictionary.com.au/were-totally-cactus/"
+    ]
    },
    "dunny": {
     "id": "dunny",
@@ -673,12 +691,15 @@
       "tone": "comic",
       "best": true
      }
+    ],
+    "sources": [
+     "https://www.oxfordlearnersdictionaries.com/definition/english/dunny"
     ]
    },
    "fucked-broken": {
     "id": "fucked-broken",
     "form": "fucked",
-    "gloss": "Broken beyond repair; or utterly exhausted.",
+    "gloss": "Broken or not working properly; or very tired.",
     "frame": "predicate_adj",
     "concepts": [
      "BROKEN",
@@ -686,7 +707,10 @@
     ],
     "level": 1,
     "vulgarity": 2,
-    "register": "current"
+    "register": "current",
+    "sources": [
+     "https://dictionary.cambridge.org/dictionary/english/fucked"
+    ]
    },
    "g-ay": {
     "id": "g-ay",
@@ -697,7 +721,10 @@
     "level": 4,
     "vulgarity": 0,
     "register": "current",
-    "placement": "tag"
+    "placement": "tag",
+    "sources": [
+     "https://www.oxfordlearnersdictionaries.com/definition/english/eh"
+    ]
    },
    "g-mate": {
     "id": "g-mate",
@@ -708,7 +735,10 @@
     "level": 4,
     "vulgarity": 0,
     "register": "current",
-    "placement": "tag"
+    "placement": "tag",
+    "sources": [
+     "https://www.oxfordlearnersdictionaries.com/definition/english/mate_1"
+    ]
    },
    "hungry-enough-horse-jockey": {
     "id": "hungry-enough-horse-jockey",
@@ -720,7 +750,11 @@
     ],
     "level": 4,
     "vulgarity": 0,
-    "register": "current"
+    "register": "current",
+    "sources": [
+     "https://warrenfahey.com.au/colloquial-sayings-slangugae/",
+     "https://mythicaustralia.com/wp-content/uploads/2020/01/Mythic-Australia-Book-Land-Of-Adventure.pdf"
+    ]
    },
    "hungry-enough-to-eat-the-arse-out-of-a-duck": {
     "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
@@ -732,7 +766,10 @@
     ],
     "level": 4,
     "vulgarity": 2,
-    "register": "current"
+    "register": "current",
+    "sources": [
+     "https://en.wiktionary.org/wiki/could_eat_the_crotch_out_of_a_low_flying_duck"
+    ]
    },
    "knackered": {
     "id": "knackered",
@@ -751,6 +788,9 @@
       "tone": "plain",
       "best": true
      }
+    ],
+    "sources": [
+     "https://www.collinsdictionary.com/dictionary/english/knackered"
     ]
    },
    "mate": {
@@ -779,7 +819,10 @@
     "level": 2,
     "vulgarity": 0,
     "register": "current",
-    "notes": "Shared English, familiar in Australia."
+    "notes": "Shared English, familiar in Australia.",
+    "sources": [
+     "https://en.wiktionary.org/wiki/out_on_one%27s_feet"
+    ]
    },
    "peckish": {
     "id": "peckish",
@@ -792,7 +835,10 @@
     "level": 2,
     "vulgarity": 0,
     "register": "current",
-    "notes": "Shared with British English."
+    "notes": "Shared with British English.",
+    "sources": [
+     "https://www.collinsdictionary.com/dictionary/english/peckish"
+    ]
    },
    "rooted": {
     "id": "rooted",
@@ -806,7 +852,10 @@
     "level": 3,
     "vulgarity": 1,
     "register": "current",
-    "notes": "\"Root\" is Australian slang for sex, so \"rooted\" (exhausted; broken) is cheeky but Dad-level (Rob, 2026-10-18). Never use \"root\" for US \"root for (a team)\"; Australians say \"barrack for\". \"Get rooted\" is a rude brush-off, a different sense."
+    "notes": "\"Root\" is Australian slang for sex, so \"rooted\" (exhausted; broken) is cheeky but Dad-level (Rob, 2026-10-18). Never use \"root\" for US \"root for (a team)\"; Australians say \"barrack for\". \"Get rooted\" is a rude brush-off, a different sense.",
+    "sources": [
+     "https://ielts.com.au/australia/prepare/article-australian-slang-words-phrases"
+    ]
    },
    "starvin": {
     "id": "starvin",
@@ -818,7 +867,10 @@
     ],
     "level": 2,
     "vulgarity": 0,
-    "register": "current"
+    "register": "current",
+    "sources": [
+     "https://www.collinsdictionary.com/dictionary/english/starving"
+    ]
    },
    "stuffed": {
     "id": "stuffed",
@@ -832,7 +884,10 @@
     ],
     "level": 2,
     "vulgarity": 0,
-    "register": "current"
+    "register": "current",
+    "sources": [
+     "https://en.wiktionary.org/wiki/stuffed"
+    ]
    },
    "zonked": {
     "id": "zonked",

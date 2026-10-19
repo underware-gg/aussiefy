@@ -325,21 +325,28 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
     replacement_concepts = {cid for e in entries.values() if e.type == "idiom" and e.status != "omit"
                             for cid in e.concept}
     for c in concepts.values():
+        if c.lookup_only:
+            continue
         for frame, texts in c.triggers.items():
             for t in texts:
                 try:
                     patterns.append(replace(compile_pattern(t, frame, (c.id,), 3),
                                             guard=c.id not in replacement_concepts,
                                             semantic_degree={c.id: c.trigger_degrees[frame][t]}
-                                            if t in c.trigger_degrees.get(frame, {}) else {}))
+                                            if t in c.trigger_degrees.get(frame, {}) else {},
+                                            mapping_effects={c.id: c.trigger_effects[frame][t]}
+                                            if t in c.trigger_effects.get(frame, {}) else {}))
                 except ValueError as exc:
                     errors.append(f"concept {c.id}: {exc}")
     for e in entries.values():
         if e.type != "idiom" or e.status == "omit":
             continue
+        automatic = tuple(cid for cid in e.concept if cid in concepts and not concepts[cid].lookup_only)
+        if not automatic:
+            continue
         for t in e.replaces:
             try:
-                patterns.append(compile_pattern(t, e.frame, e.concept, e.intensity, entry_id=e.id))
+                patterns.append(compile_pattern(t, e.frame, automatic, e.intensity, entry_id=e.id))
             except ValueError as exc:
                 errors.append(f"{e.id}: {exc}")
 
@@ -356,7 +363,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
 
     detectable = {c for p in patterns for c in p.concepts}
     for c in concepts:
-        if c not in detectable and any(c in e.concept for e in entries.values() if e.type == "idiom"):
+        if c not in detectable and not concepts[c].lookup_only and any(c in e.concept for e in entries.values() if e.type == "idiom"):
             warnings.append(f"concept {c} has entries but no triggers or replaces; it can never be detected")
 
     swearing = {}

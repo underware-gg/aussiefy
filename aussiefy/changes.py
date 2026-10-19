@@ -34,7 +34,7 @@ from .schema import Entry
 from .select import Candidate
 from .text import FIRST_WORD_RE
 
-VERSION = 1          # the changes contract; a change to its shape or to how ids are made bumps it
+VERSION = 2          # the changes contract; a change to its shape or to how ids are made bumps it
 SCHEMA = Path(__file__).resolve().parent / "data" / "changes.schema.json"   # its JSON Schema
 ID_FORMAT = "{kind}:{start}-{end}[:{placement or rule}][#{n}]"   # how a change's id is made ([...]: where it has one)
 CONTEXT = 64         # characters of whole-text context read either side of a region, for the rules' lookaround
@@ -604,9 +604,11 @@ class _Builder:
             self._vulgarity(pick),
             alternatives=[{"entry_id": o.entry.id, "weight": round(o.candidate.weight / total, 4),
                            "rendered": self.restore(o.text, whole=False), "out_span": [a, b],
-                           "vulgarity": self._vulgarity(o)} for o in offered],
+                           "vulgarity": self._vulgarity(o),
+                           **({"semantic_effects": list(o.candidate.semantic_effects)} if o.candidate.semantic_effects else {})} for o in offered],
             locked=[{"entry_id": o.entry.id, "vulgarity": max(o.locked_at, self._vulgarity(o)),
-                     "rendered": self.restore(o.text, whole=False), "out_span": [a, b]} for o in locked])
+                     "rendered": self.restore(o.text, whole=False), "out_span": [a, b],
+                     **({"semantic_effects": list(o.candidate.semantic_effects)} if o.candidate.semantic_effects else {})} for o in locked])
         return Draft(change, "", pick.entries, [o.entries for o in offered + locked], withheld)
 
     def _withheld(self, pick: str, region: tuple[int, int], unsettled: bool) -> str | None:

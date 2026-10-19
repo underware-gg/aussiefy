@@ -22,7 +22,7 @@ dial's settings with a one-line description each, for a page that lists them.
 
 ## The contract
 
-`ChangeSet.to_dict()` is version 1 of the `changes` contract, `{version, text, changes, entries, withheld}`. Its JSON
+`ChangeSet.to_dict()` is version 2 of the `changes` contract, `{version, text, changes, entries, withheld}`. Its JSON
 Schema ships in the package as `aussiefy/data/changes.schema.json` (`aussiefy.changes.SCHEMA`). Example requests
 and responses live in `tests/fixtures/changes/`. Each change has:
 
@@ -39,10 +39,11 @@ and responses live in `tests/fixtures/changes/`. Each change has:
 - `masks`: the maskable words in the output (below).
 - `alternatives`: for a swap, every option the engine weighed at that spot, the pick among them, in the engine's
   order. Each one has its `entry_id`, its `weight` (they share 1), its `rendered` text, its `out_span`, its
-  `vulgarity` and its `masks`. For a garnish, it's the other garnish of that placement the engine weighed there.
+  `vulgarity` and its `masks`. Optional `semantic_effects` records effects of this rendering
+  at this source mapping, such as `quantity_approximation`; entry-card effects remain inherent to an entry. For a garnish, it's the other garnish of that placement the engine weighed there.
 - `locked`: for a swap, the options the vulgarity cap alone holds back, each tagged with the lowest `vulgarity`
   that lets it in. Selection is run again for the spot with only the cap raised, with every other check
-  unchanged: level, registers, gates, grammar, span, document settings (including `narrator_opinion`), what
+  unchanged: level, registers, gates, grammar, span, document settings (including `narrator_opinion` and `quantity_approximation`), what
   the text has already said, and variety.
   Only an entry rated above the cap in effect is locked (a raised cap also reweighs, so variety's best few can take
   in a clean entry, which isn't). Gated entries appear only where the policy unlocks them. A locked option is
@@ -160,3 +161,8 @@ at full rate are reported, not gated.
 Tests: [the contract](../../../tests/functional/test_changes.py),
 [renderings against pinned re-renders](../../../tests/functional/test_changes_oracle.py),
 [the engine hooks](../../../tests/architecture/test_engine_hooks.py).
+
+
+Version2 adds optional applied `semantic_effects` to substitution alternatives and locked options, and
+recognises `quantity_approximation` alongside `opinion`. Existing spans, IDs and rendering rules are unchanged.
+Consumers validating against the strict v1 schema must use the v2 schema for this package version.

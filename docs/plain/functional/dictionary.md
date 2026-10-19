@@ -60,7 +60,7 @@ An entry is one meaning-shape:
   replaces: []           # plain-English paraphrases (patterns); drive matching
   status: active         # active | gate | omit
   flags: []              # not_aussie | slur | dubious_meaning | archaic | fabricated | untagged
-  semantic_effects: []   # reviewed additions to the mapped meaning; currently only opinion
+  semantic_effects: []   # reviewed additions to the mapped meaning; opinion or quantity_approximation
   sources: []
   gloss: Not quite sane; eccentric.   # our own words, never a source's
 ```
@@ -105,6 +105,11 @@ they do not turn every drinking game or rotary clothesline into the named game o
 such as “could do with a feed” and “wouldn't say no to some tucker” have direct mappings for corresponding
 conditional requests, plus writer-only hunger suggestions for contexts requiring tense or modal judgement.
 
+A concept may declare `lookup_only: true` to retain writer discovery while excluding automatic triggers
+and direct entry replacements for that meaning. This is an actual boolean, independent of entry status,
+register and flags. A mixed entry can still serve its other automatic meanings. Source forms remain in
+the recognition index. Intentional discovery-only concepts do not generate unreachable-trigger warnings.
+
 ## Slots
 
 Slots are `{subj} {be} {have} {do} {poss} {obj} {objposs}`, plus `{np}`, which captures a short noun phrase and copies
@@ -133,12 +138,20 @@ its existing plural-only referent meaning, and omitted number metadata remains `
 - `word?` for an optional word
 - `!war|deal` to block a sense: neither of the next two words may be one of these, so `great !war` skips "a
   great civil war" but still fires on "a great game"
+- `?=home|there` requires the next token without consuming it: `walk ?=home|there` preserves the destination
+- `?<=radio|car antenna` requires a preceding token without consuming it: replace the antenna head while
+  retaining its radio/car qualifier. Assertion alternatives each name one token. Following assertions
+  require a preceding consuming element; matching still enforces both assertions in similarity mode
+- `^object` requires an `{np}` argument and applies shared unanchored-object checks, rejecting temporal
+  and quantity-only adjuncts rather than mistaking them for the object of a multiword expression
 - `^person` limits a predicate to a person; `^adj` requires a following modifier
 - `^end` on a verb phrase or clause requires a clause boundary after optional adverbial tails, preserving complements
   such as the habit in “quit smoking”; it is not supported on other frames
 - a trailing `@N` for intensity
 
-In `vp` patterns the head verb matches any inflection, and in `np` patterns the head noun matches its plural.
+In `vp` patterns the head verb matches any inflection, and in `np` patterns the head noun matches its plural,
+including accepted alternative spellings such as antennas/antennae. Assertions do not become head words
+or enter a lookup/training phrase as translated content.
 
 ## Validation
 
@@ -222,6 +235,34 @@ Annotation is about a mapping, not the mere presence of evaluative words. A syno
 praise already established by its input without requiring an added-opinion annotation. Do not combine an
 exact and an opinion-adding sense in one entry under the same metadata. These reviewed annotations cover
 specific entries; they are not an audit or automatic interpretation of every dictionary mapping.
+
+### Source-specific additions
+
+Entry `semantic_effects` applies to every mapping and form of an entry. Where only one source-to-concept
+mapping loses information, annotate the exact raw trigger instead:
+
+```yaml
+LONG_AGO:
+  description: An indefinite distant time.
+  triggers:
+    adv: ["ages ago", "four score and seven years ago@5"]
+  trigger_effects:
+    adv:
+      "four score and seven years ago@5": [quantity_approximation]
+```
+
+Frame and pattern keys must already exist, including their `@N` suffix; effect names use the same vocabulary
+as entries. Effects remain concept-scoped. Exact direct replacements for the same span cannot bypass the
+reviewed source annotation, while a separate precise reading does not inherit another meaning's effect.
+Research-round style rewrites retain annotations under their rewritten trigger keys. Replacing triggers
+through an overlay must also keep or replace their annotation maps coherently.
+
+Plans, explanations and change alternatives expose effects of the applied mapping. A bare term such as
+“yonks ago” is not inherently lossy. Meaning lookup respects source annotations in contextual queries,
+while explicit term discovery remains available. Lint/verify require an original to check these mappings:
+they recognise unambiguous local edits connecting reviewed source spans to compatible dictionary forms.
+Ambiguous edits and arbitrary paraphrases are outside that check. Allowed quantity mappings excuse only
+numbers inside their paired source occurrence; other missing numbers retain fidelity warnings.
 
 ## Reviewed semantic degree
 

@@ -67,6 +67,9 @@ only if:
   distinct phrases; each decline must name a planned phrase and supply a reason, and
 - configured length checks pass when `check_length` is enabled.
 
+The resolved `DOCUMENT_CONFIG.quantity_approximation` permits only reviewed source quantity mappings;
+false keeps exact quantities, and true does not permit arbitrary numeric loss.
+
 The resolved `DOCUMENT_CONFIG.narrator_opinion` also governs added narrator judgments. False means do not
 introduce praise, pity, luck or blame absent from the original; true permits reaction while preserving facts,
 roles and references. The known-term lint check is shared by verification and yarn submission, with original

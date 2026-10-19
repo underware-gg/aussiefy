@@ -391,7 +391,7 @@ def test_infix_skips_ya(translator):
 
 
 def test_riffs_attach_once_per_sentence_where_a_clause_ends(translator):
-    text = "Ashcans and dollars! The ashcans were full. Ashcans everywhere!"
+    text = "Wheeled rubbish bins and dollars! The wheeled rubbish bins were full. Wheeled rubbish bins everywhere!"
     seen = []
     for seed in range(20):
         r = translator.translate(text, level=5, seed=seed)

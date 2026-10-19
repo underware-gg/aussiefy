@@ -15,7 +15,7 @@ from .dialect import DialectTable
 from .matcher import Pattern, PatternIndex
 from .schema import Concept, Entry, Imagery
 from .text import COMMON_STARTERS, MASK_WORD_RE, normalise_word, spoken_word
-from .terms import fold
+from .terms import fold, strip_markup
 
 
 # the endings a masked word keeps after a stem that is itself a listed swear or a mask word (O23's fixed set)
@@ -134,6 +134,10 @@ class Dictionary:
         return swear_strength(self.swears, word)
 
     @cached_property
+    def mapping_index(self) -> PatternIndex:
+        return PatternIndex([p for p in self.patterns if p.mapping_effects])
+
+    @cached_property
     def degree_index(self) -> PatternIndex:
         families = {cid for cid, concept in self.concepts.items() if concept.trigger_degrees}
         families.update(cid for entry in self.entries.values() for cid in entry.semantic_degree)
@@ -176,12 +180,12 @@ class Dictionary:
         texts += [" ".join(ps) for c in self.concepts.values() for ps in c.triggers.values()]
         # a trigger's "!" exclusions are contexts, names among them ("granny !smith"): only those the tagger's
         # lower-case vocabulary knows, or the dictionary writes elsewhere, count
-        bare = [re.sub(r"(?<!\S)![^\s\"',\]]+", " ", t) for t in texts]
+        bare = [re.sub(r"(?<!\S)(?:!|\?<=|\?=)[^\s\"',\]]+", " ", t) for t in texts]
         words = {w for t in bare for w in re.findall(r"\b[a-z][a-z'-]*\b", t)}
         # Compilation folds capitals and expands inflections. Only a lower-case source pattern can supply
         # lower-case evidence for its inferred forms; "an Australian" must not make "australian" ordinary.
         words |= {v for p in self.patterns if p.text.islower() for e in p.elements if e.kind == "lit" for v in e.values}
-        excluded = {v for p in self.patterns for e in p.elements if e.kind == "not" for v in e.values}
+        excluded = {v for p in self.patterns for e in p.elements if e.kind in {"not", "ahead", "behind"} for v in e.values}
         words |= excluded & self.pos_words
         return frozenset(words | COMMON_STARTERS)
 
@@ -210,7 +214,7 @@ class Dictionary:
         for c in self.concepts.values():
             if c.person:
                 for trigger in c.triggers.get("np", ()):
-                    bare = re.sub(r"@\d+$", "", trigger).split("!")[0].split()
+                    bare = strip_markup(trigger).split()
                     if len(bare) == 2 and bare[0] in {"a", "an", "the"}:
                         bare = bare[1:]
                     if len(bare) == 1 and bare[0].isalpha():
@@ -220,7 +224,9 @@ class Dictionary:
     @cached_property
     def fallback_patterns(self) -> list[Pattern]:
         """Slot-free predicate-adjective triggers: what the similarity fallback compares spans against."""
-        return [p for p in self.patterns if p.frame == "predicate_adj" and not p.slots and not any(e.optional for e in p.elements)]
+        effectful = {cid for p in self.patterns for cid in p.mapping_effects}
+        return [p for p in self.patterns if p.frame == "predicate_adj" and not p.slots
+                and not effectful.intersection(p.concepts) and not any(e.optional for e in p.elements)]
 
     @cached_property
     def tag_forms(self) -> frozenset[str]:

@@ -279,7 +279,7 @@ def test_riffs_in_lookup_and_plan(translator):
     # riffs are rated for swearing, so the cap applies to them
     clean = harness.lookup("the pollies", vulgarity=0, translator=translator)["results"]
     assert all("piss" not in r["text"] for c in clean for r in c.get("riffs", []))
-    p = harness.plan("The ashcans were full.", translator=translator)
+    p = harness.plan("The wheeled rubbish bins were full.", translator=translator)
     bins = next(r for r in p["riffs"] if r["term"] == "wheelie bin")
     assert p["mood"] == "light"
     assert all(r["suits_mood"] == (r["tone"] != "grim") for r in bins["riffs"])

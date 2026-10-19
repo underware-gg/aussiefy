@@ -60,11 +60,13 @@ its consequences as they stood when it was made. Anyway, records are numbered in
 | [DD-033](dd-033-explicit-solemn-comic-permission.md) | Explicit advanced permission for comic substitutions in solemn text, with an approved Troppo default | Accepted |
 | [DD-034](dd-034-reviewed-semantic-degree.md) | Reviewed degree and retained qualifiers, separate from style intensity | Accepted |
 | [DD-035](dd-035-noun-reference-and-address.md) | Shared grammatical noun usage distinguishes reference from direct address | Accepted |
+| [DD-036](dd-036-source-mapping-effects.md) | Source-specific semantic effects, resolved quantity precision and changes v2 | Accepted |
+| [DD-037](dd-037-contextual-matching-and-discovery.md) | Nonconsuming context assertions, shared object checks and discovery-only meanings | Accepted |
 
 ## By topic
 
-- **Engine:** DD\-001, DD\-003, DD\-007, DD\-029, DD\-030, DD\-034, DD\-035
-- **Dictionary'n data:** DD\-002, DD\-010, DD\-012, DD\-025, DD\-032
+- **Engine:** DD\-001, DD\-003, DD\-007, DD\-029, DD\-030, DD\-034, DD\-035, DD\-036, DD\-037
+- **Dictionary'n data:** DD\-002, DD\-010, DD\-012, DD\-025, DD\-032, DD\-037
 - **The dials:** DD\-004, DD\-005
 - **Structure'n interfaces:** DD\-006, DD\-008, DD\-009, DD\-015, DD\-016, DD\-019, DD\-020, DD\-021, DD\-022, DD\-023, DD\-024, DD\-028, DD\-029
 - **Sources, licensing'n releases:** DD\-011, DD\-012, DD\-013, DD\-014

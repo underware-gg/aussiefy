@@ -61,7 +61,20 @@ aussiefy translate "Read the API documentation." --document-type custom --docume
 | `riff_association` | Integer 0–1: 0 direct meanings only; 1 also offers explicitly curated related meanings to writers; Troppo 1, others 0 |
 | `narrator_opinion` | Boolean: permit reviewed additions of narrator judgment; Troppo true, Deadset/Dinkum/Custom false; exact overrides win |
 | `solemn_comic_terms` | Boolean: permit comic dictionary terms in solemn source text; Troppo true, Deadset/Dinkum/Custom false; exact overrides win |
+| `quantity_approximation` | Boolean: permit reviewed approximations of exact quantities; General/Story/Personal at Dinkum/Troppo true; Deadset, factual presets and Custom false; exact overrides win |
 | `profile` | Object: override engine probabilities, limits, spacing and thresholds; omitted keys inherit dial defaults |
+
+### Quantity precision
+
+`quantity_approximation` permits reviewed source mappings to trade exact quantities for narrative wording.
+For example, “four score and seven years ago” may become “yonks ago”. It is false at Deadset, true for
+General/Story/Personal at Dinkum and Troppo, and false for News/Instructions/Technical/Official and Custom.
+Document detection only selects these settings. Candidate selection reads the resolved permission.
+An explicit `document_config={"quantity_approximation": true}` or `false` wins over every preset and dial.
+
+The permission supplies no new mappings for arbitrary numbers. Ordinary indefinite “ages ago” → “yonks ago”
+remains available at Deadset. Precision, explicit severity and narrator opinion are independent controls;
+allowing an approximate duration does not allow an unrelated amount or participant to disappear.
 
 ### Meaning and narrator opinion
 

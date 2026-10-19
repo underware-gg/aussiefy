@@ -147,7 +147,7 @@ def test_stack_probability_changes_second_idiom_selection(probability, translato
 
 @pytest.mark.parametrize("probability,limit,expected", [(0, 1, False), (1, 0, False), (1, 1, True)])
 def test_riff_probability_and_limit_control_optional_colour(probability, limit, expected, translator):
-    r = translator.translate("We put out the ashcans.", vulgarity=0, document_type="custom", document_config={
+    r = translator.translate("We put out the wheeled rubbish bins.", vulgarity=0, document_type="custom", document_config={
         "garnish": ["riff"], "profile": {"garnish": {"riff": probability}, "max_garnish": {"riff": limit}}})
     assert any(x.riff for x in r.records) == expected
 

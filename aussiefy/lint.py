@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import re
 from collections import Counter
-from typing import Any
+from typing import Any, Sequence
 
 from .context import sentence_contexts
 from .dialect import Found, text_english
@@ -19,7 +19,7 @@ from .genre import Embellishment, Genre, resolve_document
 from .markup import markup_changed, mask
 from .model import Dictionary
 from .schema import PLACEHOLDER_RE, Entry
-from .select import semantic_rejection
+from .select import mapping_effects, semantic_rejection
 from .terms import fold, strip_markup
 from .text import document_spans, HONORIFICS, Token, capital_is_positional, heading_lines, held_spans, sentences, tokenize
 
@@ -146,8 +146,10 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
                 else original)
     warnings += _repeated_phrases(text, refrains, d.drawl_readings, covered)
     issues += changed
+    mapped_issues, approximated = _mapping_issues(text, original, aussie_spans, tr, read_as.setting(pol.embellishment))
+    issues += mapped_issues
     if original is not None:
-        warnings += fidelity(text, original, check_length=read_as.policy.check_length, max_length=read_as.setting(pol.embellishment).max_length,
+        warnings += fidelity(text, original, approximated_spans=approximated, check_length=read_as.policy.check_length, max_length=read_as.setting(pol.embellishment).max_length,
                              translator=tr)
     return {"ok": not issues, **eff.envelope(), **read_as.envelope(pol.embellishment),
             "issues": issues, "warnings": warnings,
@@ -164,20 +166,76 @@ def _semantic_issues(text: str, original: str | None, spans: list[tuple[int, int
     # Match the dictionary's forms, including slots and inflections, on both sides. Unchanged source uses
     # spend one allowance per occurrence; this is known-term checking, not inference of arbitrary opinions.
     matches = {(a, b, e.id): e for a, b, e in spans
-               if semantic_rejection(e, narrator_opinion=setting.narrator_opinion)}
+               if semantic_rejection(e, narrator_opinion=setting.narrator_opinion, quantity_approximation=setting.quantity_approximation)}
     if not matches:
         return []
     kept = {(e.id, a, b) for a, b, e in _aussie_spans(original or "", translator)}
     remaining = Counter(eid for eid, a, b in kept)
     issues = []
     for (a, b, eid), entry in sorted(matches.items()):
-        reason = semantic_rejection(entry, narrator_opinion=setting.narrator_opinion)
+        reason = semantic_rejection(entry, narrator_opinion=setting.narrator_opinion, quantity_approximation=setting.quantity_approximation)
         if remaining[eid]:
             remaining[eid] -= 1
         else:
             issues.append({"kind": "semantic_effect", "phrase": text[a:b], "entry": eid,
                            "semantic_effects": list(entry.semantic_effects), "why": reason})
     return issues
+
+
+def _mapping_issues(text: str, original: str | None, spans: list[tuple[int, int, Entry]],
+                    translator: Translator, setting: Embellishment) -> tuple[list[dict], list[tuple[int, int]]]:
+    """Check reviewed source mappings paired inside a single unambiguous local edit, not arbitrary paraphrases."""
+    from difflib import SequenceMatcher
+    from .detect import detect, resolve_overlaps
+
+    if original is None:
+        return [], []
+    source = []
+    dictionary = translator.dictionary
+    for sentence in sentences(tokenize(original)):
+        if not dictionary.mapping_index.find(sentence):
+            continue
+        detections = resolve_overlaps(detect(sentence, dictionary.index, concepts=dictionary.concepts,
+                                             adjective_nouns=dictionary.adjective_nouns,
+                                             degree_index=dictionary.degree_index))
+        source.extend((sentence[d.start].start, sentence[d.end-1].end, d)
+                      for d in detections if d.mapping_effects)
+    if not source:
+        return [], []
+    old, new = tokenize(original), tokenize(text)
+    issues, approximated = [], []
+    paired = set()
+    for tag, i, j, k, l in SequenceMatcher(None, [t.norm for t in old], [t.norm for t in new], autojunk=False).get_opcodes():
+        if tag != 'replace' or i == j or k == l:
+            continue
+        a, b, c, d = old[i].start, old[j-1].end, new[k].start, new[l-1].end
+        sources = [(s,t,det) for s,t,det in source if s < b and a < t]
+        if len(sources) != 1:
+            continue
+        s, t, det = sources[0]
+        targets = {}
+        for u, v, entry in spans:
+            if u < d and c < v and set(entry.concept).intersection(det.mapping_effects):
+                targets.setdefault((u,v), []).append(entry)
+        if len(targets) != 1:
+            continue
+        (u,v), entries = next(iter(targets.items()))
+        if (s,t,u,v) in paired:
+            continue
+        paired.add((s,t,u,v))
+        paths = [(mapping_effects(entry, det, narrator_opinion=setting.narrator_opinion,
+                                 quantity_approximation=setting.quantity_approximation), entry) for entry in entries]
+        effects, entry = min(paths, key=lambda path: (bool(semantic_rejection(path[1],
+            narrator_opinion=setting.narrator_opinion, quantity_approximation=setting.quantity_approximation,
+            effects=path[0])), len(path[0]), path[1].id))
+        reason = semantic_rejection(entry, narrator_opinion=setting.narrator_opinion,
+                                    quantity_approximation=setting.quantity_approximation, effects=effects)
+        if reason:
+            issues.append({'kind': 'semantic_effect', 'phrase': text[u:v], 'entry': entry.id,
+                           'semantic_effects': list(effects), 'why': reason})
+        elif 'quantity_approximation' in effects:
+            approximated.append((s,t))
+    return issues, approximated
 
 
 def _suggestions(text: str, low: str, aussie_spans: list, level: int | str, vulgarity: int | str | None,
@@ -359,7 +417,7 @@ DATE_WORDS = {"jan": "january", "feb": "february", "mar": "march", "apr": "april
               "dec": "december", "mon": "monday", "tue": "tuesday", "tues": "tuesday", "wed": "wednesday",
               "thu": "thursday", "thurs": "thursday", "fri": "friday", "sat": "saturday", "sun": "sunday"}
 def fidelity(text: str, original: str, *, max_length: float | None = None, check_length: bool = True,
-             translator: Translator | None = None) -> list[dict[str, Any]]:
+             translator: Translator | None = None, approximated_spans: Sequence[tuple[int, int]] = ()) -> list[dict[str, Any]]:
     """Does the Aussie version tell the same story? Length (up to max_length times the original, plus 20 words:
     the embellishment's; None: the loosest, troppo's), and the original's names and numbers.
 
@@ -378,7 +436,9 @@ def fidelity(text: str, original: str, *, max_length: float | None = None, check
         out.append({"kind": "too_short", "phrase": f"{n_text} words vs {n_orig}", "times": round(n_text / n_orig, 1),
                     "why": "much shorter than the original: keep every event and line"})
     low = text.lower()
-    for num in sorted(set(NUMBER_RE.findall(original))):
+    unmatched_numbers = {m.group() for m in NUMBER_RE.finditer(original)
+                         if not any(a <= m.start() and m.end() <= b for a, b in approximated_spans)}
+    for num in sorted(unmatched_numbers):
         if num.rstrip(".,") not in text:
             out.append({"kind": "number_dropped", "phrase": num.rstrip(".,"), "why": "a number in the original is missing"})
     orig_names = _names(original, tr)

@@ -27,8 +27,17 @@
   4.65/5, with some high-level prose still too light and a minor forecast narrowing. The packet protocol
   and judges changed; those rounds do not establish a causal engine improvement. See
   [the findings](../../../research/document-refinement-2026-10-15/FINDINGS.md) for raw results and limits.
-- **The bundled embedding model lags the dictionary.** `aussiefy embedder status` reports the shipped model
-  (aussie-static 1.2.0) as `stale` after the later research rounds; the next version is described in
-  `training/README.md`. The 2026-10-15 offline check passes 33/33 required references but retains 16 known
-  failures. Current gap-fill precision remains below the 90% bar, so default automatic filling stays off.
-  Default translations are unaffected, since the engine does not use it unless asked.
+- **The bundled embedding model can lag later dictionary corrections.** Shipped aussie-static 1.3.0 was
+  freshly fitted against the reviewed c891945-era inputs; subsequent degree and source-audit changes make
+  its exact dictionary fingerprint stale. The 33 required reference checks remain enforced. Fresh full-fit
+  and export checks passed 33/33; evaluation retained the girl failure at 32/33. Known relevance/certainty
+  problems remain; see [the bounded report](../../../research/semantic-model-2026-10-19/README.md).
+  Default automatic gap filling stays off. This is separate from deterministic dictionary matching.
+- **Conservative source corrections trade coverage for supported meaning.** General work/activity versus
+  artwork or childbirth is not resolved automatically; yakka remains discoverable and available for
+  explicit hard work. Unqualified asylum, den and ice box do not establish psychiatric/domestic/portable
+  senses. Percy supports intransitive clause endings and supported adverbial tails, retaining other
+  complements as written. Coordinated or ambiguous progressive objects can remain plain.
+- **Degree and quantity checking cover reviewed families and mappings.** DRUNK has source/target degree
+  calibration; unknown ratings are not inferred from style intensity. Quantity approximation is explicit
+  and preset-controlled, with bounded source/output checks. It is not general fact checking.
