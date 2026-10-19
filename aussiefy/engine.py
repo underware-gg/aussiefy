@@ -279,7 +279,8 @@ class Translator:
         sents = sentences(tokens)
         genre = _context[0] if _context is not None else resolve_document(masked.prose(), masked.source, config=self.dictionary.genres,
                         document_type=pol.document_type, document_config=pol.document_config)
-        run = _Run(text, pol, resolve(pol, self.dictionary), text_mood(text), is_chant(sents), masked, genre,
+        mood = _composition.mood if _composition is not None and _composition.mood is not None else text_mood(text)
+        run = _Run(text, pol, resolve(pol, self.dictionary), mood, is_chant(sents), masked, genre,
                    _context[1] if _context is not None else text_english(pol.english, masked.prose(), self.dictionary.us_spellings),
                    genre.setting(pol.embellishment), composition=_composition, observer=_observer)
         if _composition is not None:
@@ -348,7 +349,8 @@ class Translator:
         pol, eff, state, toks = run.pol, run.eff, run.state, sent.tokens
         dets = resolve_overlaps(detect(toks, self.dictionary.index, self._fallback_scorer(pol.embedder),
                                        self.dictionary.fallback_patterns, pol.similarity_threshold, sent.tags,
-                                       self.dictionary.adjective_nouns))
+                                       self.dictionary.adjective_nouns, concepts=self.dictionary.concepts,
+                                       complete=sent.complete))
         held = run.held(toks)
         dets = [d for d in dets if not self._term_of_art(d, run.genre.policy.term_domains)
                 and not held & set(range(d.start, d.end))]
@@ -408,7 +410,7 @@ class Translator:
         the vulgarity cap raised, for the options a lock holds back (entries: the idioms naming the detection's
         concepts, where it has them to hand; candidates passes over the rest)."""
         eligible, rejected = candidates(det, self.dictionary.idioms if entries is None else entries, eff, state.entry_uses,
-                                        self.dictionary.person_concepts, self.dictionary.person_nouns)
+                                        self.dictionary.person_concepts, self.dictionary.person_nouns, mood=run.mood)
         keep = []
         for c in eligible:
             reason = (_span_rejection(c, det, sent.tokens, taken)
@@ -921,6 +923,7 @@ class DocumentPart:
     quiet: bool = False
     last_contexts: frozenset[str] = frozenset()
     written: frozenset[str] | None = None
+    mood: str | None = None
 
 
 @dataclass
@@ -936,6 +939,7 @@ class _Sentence:
     tags: list[str] = field(default_factory=list)   # each token's part of speech (pos.tag), tagged once
     prefix_only: bool = False
     source_contexts: frozenset[str] | None = None
+    complete: bool = True
 
     @property
     def end(self) -> int:
@@ -1062,7 +1066,8 @@ class _Run:
                  or self.in_dateline(tokens))
         return _Sentence(i, tokens, text, (text.lower(), self.state.seen_sentences[text]), nxt, para_end, quiet,
                          pos.tag([t.text for t in tokens]), prefix_only=starts and not ends,
-                         source_contexts=part.last_contexts if part is not None and starts and not ends else None)
+                         source_contexts=part.last_contexts if part is not None and starts and not ends else None,
+                         complete=ends)
 
     def in_dateline(self, tokens: list[Token]) -> bool:
         """A sentence starting in a news story's dateline ("MAMMOTH HOT SPRINGS, Wyo. –", which splits at

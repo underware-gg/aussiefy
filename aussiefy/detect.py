@@ -19,9 +19,21 @@ from dataclasses import dataclass, field
 from typing import Callable, NamedTuple
 
 from . import morph, pos
+from .context import following_context, noun_argument, verb_subject
 from .embed import Embedder, NgramEmbedder, similarity_scorer
 from .matcher import match_at, SLOT_MATCHERS, Match, Pattern, PatternIndex, is_name
+from .schema import Concept
 from .text import CLAUSE_BREAK, QUOTES, SENTENCE_END, Token
+
+
+def applicable_concepts(concepts: tuple[str, ...], rules: dict[str, Concept] | None,
+                        tokens: list[Token], end: int, complete: bool = True) -> tuple[str, ...]:
+    """Meaning restrictions apply equally to exact triggers, direct entries and similarity matches."""
+    if rules is None:
+        return concepts
+    following = following_context(tokens, end, complete)
+    return tuple(cid for cid in concepts if not rules[cid].unless_after
+                 or following.known and following.word not in rules[cid].unless_after)
 
 DETERMINERS = {"a", "an", "the", "my", "your", "his", "her", "its", "our", "their", "this", "that", "these",
                "those", "some", "any", "no", "every", "each"}
@@ -226,10 +238,15 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
     if (m.start > 0 and tokens[m.start - 1].text == "-" and tokens[m.start - 1].end == first.start) or \
             (m.end < len(tokens) and tokens[m.end].text == "-" and tokens[m.end].start == last.end):
         return None   # part of a hyphenated word: "good-bye", "battle-field"
-    if p.frame == "vp" and m.start > 0 and tokens[m.start - 1].norm in morph.PERSON_PRONOUNS:
-        # "she sits down": "plonks herself down". Only for {poss}: the subject may not be what later slots agree
-        # with ("I believe it has" -> "I reckon it has")
-        det.captures.setdefault("agent", tokens[m.start - 1])
+    if "np" in m.captures and tags is not None and not noun_argument(m.captures["np"], tokens, tags):
+        return None
+    if p.frame == "vp":
+        subject = verb_subject(tokens, m.start, tags)
+        if subject is not None:
+            if subject.norm in morph.PERSON_PRONOUNS:
+                det.captures.setdefault("agent", subject)
+            else:
+                det.subject_noun = subject
     if p.frame == "clause" and m.start > 0 and tokens[m.start - 1].norm in VERB_LEADERS | VERB_CHAIN:
         return None  # An outer auxiliary must not be stranded before an independently finite clause.
     if p.clause_end:
@@ -261,6 +278,9 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
             det.captures.setdefault("subj", subj)
         else:
             det.subject_noun = _noun_before(tokens, verb)
+            subject = verb_subject(tokens, verb.i - tokens[0].i, tags)
+            if subject is not None and subject.norm in morph.PERSON_PRONOUNS:
+                det.captures.setdefault("agent", subject)
         det.captures.setdefault("be", verb)
         det.clause_start = clause_start
         det.question = question
@@ -417,7 +437,8 @@ def fallback_scorer(embedder: Embedder, patterns: list[Pattern]) -> Callable[[st
 
 def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dict[int, float]] | None = None,
            fallback_patterns: list[Pattern] | None = None, threshold: float = 0.72,
-           tags: list[str] | None = None, adjective_nouns: dict[str, frozenset[str]] | None = None) -> list[Detection]:
+           tags: list[str] | None = None, adjective_nouns: dict[str, frozenset[str]] | None = None,
+           concepts: dict[str, Concept] | None = None, complete: bool = True) -> list[Detection]:
     """Every concept the triggers find in the sentence, frame-checked. With a scorer (embed.similarity_scorer over
     the fallback patterns' texts), a predicate after a linking verb that no trigger matched is compared with
     the fallback patterns by similarity ("he was exhaustedd")."""
@@ -425,8 +446,10 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
     tags = tags if tags is not None else pos.tag([t.text for t in tokens])
     for m in index.find(tokens):
         det = check_frame(m, tokens, adjective_nouns, tags)
+        if det:
+            det.concepts = applicable_concepts(det.concepts, concepts, tokens, det.end, complete)
         if det and not _in_a_name(tokens, det.start, det.end) and not _possessed(tokens, det) \
-                and not _wrong_part_of_speech(m, tokens, tags):
+                and det.concepts and not _wrong_part_of_speech(m, tokens, tags):
             found.append(det)
 
     if scorer and fallback_patterns:
@@ -455,6 +478,7 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
                     matched = match_at(p, tokens, j, exact=False)
                     literal = _fallback_literal(p)
                     if (matched is None or matched.end != j + n
+                            or not applicable_concepts(p.concepts, concepts, tokens, j + n, complete)
                             or abs(len(literal) - len(text)) > FALLBACK_LENGTH_TOLERANCE):
                         continue
                     if best is None or scores[k] > best[0]:
@@ -464,6 +488,7 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
                 m = Match(p, j, j + n)
                 det = check_frame(m, tokens, adjective_nouns, tags)
                 if det:
+                    det.concepts = applicable_concepts(det.concepts, concepts, tokens, det.end, complete)
                     det.method = "embedding"
                     det.score = round(score, 3)
                     found.append(det)

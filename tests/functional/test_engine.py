@@ -402,14 +402,14 @@ def test_riffs_attach_once_per_sentence_where_a_clause_ends(translator):
 
 
 def test_riff_mood_is_a_lean_not_a_rule(translator):
-    from aussiefy.context import riff_weight, text_mood
+    from aussiefy.context import tone_weight, text_mood
 
     solemn = ("We are met to dedicate this ground. We consecrate and hallow it with devotion, for those who "
               "perished here in the war.")
     light = "The happy children ran off into the forest."
     assert text_mood(solemn) == "solemn" and text_mood(light) == "light"
-    assert riff_weight("comic", "solemn") < riff_weight("grim", "solemn") == riff_weight("plain", "solemn")
-    assert 0 < riff_weight("grim", "light") < riff_weight("comic", "light")
+    assert tone_weight("comic", "solemn") < tone_weight("grim", "solemn") == tone_weight("plain", "solemn")
+    assert 0 < tone_weight("grim", "light") < tone_weight("comic", "light")
     tones = {r.text: r.tone for e in translator.dictionary.entries.values() for r in e.riffs}
     picked = [tones[x.riff] for s in range(60) for x in translator.translate(light, level=5, seed=s).records
               if x.riff]

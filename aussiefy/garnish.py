@@ -7,7 +7,7 @@ from bisect import bisect_right
 from collections.abc import Callable
 from dataclasses import dataclass, field
 
-from .context import CLOSING_TONES_FOR, riff_weight
+from .context import CLOSING_TONES_FOR, tone_weight
 from .model import PhoneticRule
 from .policy import Effective, pick_form, roll, weighted_index
 from .schema import DEFAULT_WHEN, Entry
@@ -420,4 +420,4 @@ def pick_riff(riffs, mood: str, r: float):
     """One of an entry's riffs for a roll r in [0, 1). Mood is a lean, not a rule: riffs that suit the text's mood
     weigh more, but a dark text can still take a laugh and a light one a shadow. The first-listed is the best,
     and weighs double."""
-    return riffs[weighted_index([riff_weight(x.tone, mood) * (2 if i == 0 else 1) for i, x in enumerate(riffs)], r)]
+    return riffs[weighted_index([tone_weight(x.tone, mood) * (2 if i == 0 else 1) for i, x in enumerate(riffs)], r)]

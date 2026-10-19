@@ -17,11 +17,18 @@ has no slang or level logic of its own.
    from every entry's `replaces`. A match on an entry's own paraphrase earns that entry a bonus. A fallback
    compares predicate spans the triggers missed against those paraphrases by similarity (`embed.py`;
    character trigrams by default).
+   Meaning restrictions declared by each concept apply to all three matching routes before overlap
+   resolution. Shared clause reading in `context.py` supplies complement boundaries, local auxiliary-chain
+   subjects and noun-argument shape, using the sentence's existing POS tags.
 3. **Select** (`select.py`). Filter candidates by concept, frame compatibility, level, vulgarity,
    register, region, status and slot availability. A clause idiom needs a subject, and a person idiom needs
    a person ("the plan is crazy" never gets a kangaroo loose in its top paddock). Each surviving candidate is
    weighted by intensity fit, direct match, source count, repeat penalty and the level's probability for
-   its class, with a lean towards rude candidates set by the vulgarity. One seeded roll decides whether to
+   its class, with a lean towards rude candidates set by the vulgarity and the existing tone/mood fit.
+   Forms must preserve captured arguments; a syntactically available slotless variant cannot discard an
+   object. Tone fit is applied before variety limits, using the same weight as riffs: off-mood candidates
+   receive a quarter weight, while existing hard exclusions (such as comic terms in solemn prose) remain.
+   One seeded roll decides whether to
    substitute and another picks the candidate.
 4. **Realise** (`realise.py`, `morph.py`). Fill slots and fix agreement: "are you crazy" becomes "do you
    have a kangaroo loose in your top paddock", "was" becomes "had", "lost his temper" becomes "spat the
@@ -57,6 +64,11 @@ has no slang or level logic of its own.
 A pass observer (`PassObserver`) can watch all five stages without changing them. The changes builder
 (`changes.py`) uses one to render each alternative where it stands, in the same pass
 ([changes](../functional/changes.md), [DD-029](../../architecture/decisions/dd-029-changes-builder.md)).
+Plans prefer the selected entry, then the other entries by these same contextual weights. Within each
+optional image group, mood-fitting suggestions come first. Lookup remains a dictionary search rather than
+a guarantee that a result can replace a span in a sentence.
+Strict Markdown units share one mood resolved from the document's eligible prose, so a paragraph or
+formatting boundary cannot reset solemn prose to a light tone. Opaque content does not supply mood cues.
 
 With `--rewrite`, a sentence the dictionary couldn't carry goes to an optional rewriter after its
 substitutions and before its garnish; with `--surface`, the finished text goes to Claude as a final pass (see

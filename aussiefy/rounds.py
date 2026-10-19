@@ -331,6 +331,7 @@ def _prepare_concept_fixes(plan: RoundPlan, d: Dictionary) -> None:
             concept = d.concepts[cid]
             raw = {f.name: getattr(concept, f.name) for f in fields(Concept) if f.name != "id"}
             raw["triggers"] = {frame: list(patterns) for frame, patterns in concept.triggers.items()}
+            raw["unless_after"] = list(concept.unless_after)
             raw.update(patch)
         parse_concept(cid, raw)
 

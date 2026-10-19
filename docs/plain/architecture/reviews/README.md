@@ -6,6 +6,7 @@ commands that have since been renamed. Decisions they led to are recorded in [de
 
 | Review | Summary |
 |---|---|
+| [design-review-2026-10-19-semantic-context.md](../../../architecture/reviews/design-review-2026-10-19-semantic-context.md) | Shared semantic context, preserved arguments, contextual tone, opaque boundaries, YAML portability and bounded source research |
 | [design-review-2026-10-18-hunger-phrases.md](../../../architecture/reviews/design-review-2026-10-18-hunger-phrases.md) | Independent appetite harvest, tense-safe VPs and controlled writer-only hunger imagery |
 | [design-review-2026-10-18-sourced-meanings.md](../../../architecture/reviews/design-review-2026-10-18-sourced-meanings.md) | Bounded source audit, precise slang senses, explicit loose-paraphrase gates and meaningful-output regressions |
 | [design-review-2026-10-18-package-integration.md](../../../architecture/reviews/design-review-2026-10-18-package-integration.md) | Installed-wheel stdio/HTTP checks, browser Unicode offsets and bounded changes-cost evidence |

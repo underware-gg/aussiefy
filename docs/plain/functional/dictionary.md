@@ -147,6 +147,15 @@ See [translation controls](translation-controls.md) and the executable
 [dialect](../../../tests/functional/test_dialect.py), [noun phrase](../../../tests/functional/test_noun_phrase.py)
 and [schema](../../../tests/functional/test_schema.py) specifications.
 
+A concept may declare `unless_after: [for, to]` to exclude complements that do not establish its meaning.
+The same restriction applies to concept triggers, an entry's direct `replaces` triggers and similarity
+fallback. It reads across soft punctuation (commas and dashes), stopping at sentence, semicolon and colon
+boundaries. For example, the food-appetite concept leaves “hungry for success” plain; the conservative
+restriction also leaves “hungry for lunch” plain until a more specific supported construction is supplied.
+The words are dictionary data, not a hunger-specific test in the engine.
+Restricted meanings also stay plain when following context is unknown at an incomplete Markdown unit
+edge or behind protected code. Opaque content is never read as prose to guess a complement.
+
 ## Frame vocabulary
 
 `grammar.yaml` contains `person_nouns` (lower-case noun forms) and `adjective_nouns` (adjective to allowed
@@ -160,6 +169,18 @@ engine selects a compatible singular alternative rather than introducing “is m
 
 Similarity fallback covers slot-free predicate patterns with a fixed literal shape. Optional-word patterns
 remain supported by exact trigger matching; they are not guessed through similarity.
+
+Captured noun arguments need a nominal or supported gerund shape: “try hard cheese” and “try running
+carefully” have objects, while “try hard to finish” does not capture “hard” as an object. A selected form
+must retain captured noun/object arguments, either through its slots or identical literal wording. A
+slotless variant therefore cannot silently drop the tool from “try the tool”.
+Short degree/nominal ambiguities such as “a bit harder” or “a little water” stay plain; the tagger alone
+cannot reliably settle them. Clear nominal constructions such as “a bit of cheese” remain supported.
+
+Local subject binding follows supported auxiliary chains and adverbs, including progressive, perfect and
+question constructions. It stops at another lexical verb or a clause boundary. This makes optional images
+available for “I am feeling hungry” with the correct possessive, without changing its auxiliary or guessing
+a speaker for “feeling hungry”. Writer-only rewrites still require a writer to preserve tense and modality.
 
 ## Drawl comparison
 
@@ -202,7 +223,7 @@ for reusable slang meanings, such as the `DISHONEST` sense of “as crooked as a
 | `form` | `suffix` (default, a grammatical appendage) or `rewrite` (writer must weave it in) |
 | `frames` | Nonempty list of engine frames; defaults to predicate, clause and verb phrase |
 | `subject` | `any` (default) or `person`, checked using the existing subject grammar |
-| `unless_after` | Optional lowercase complement words; reject matches followed by these words, ignoring punctuation |
+| `unless_after` | Optional lowercase complement words; read across soft punctuation within the same clause |
 | `related` | Optional reviewed related concept IDs; conditional writer suggestions only |
 | `exaggeration` | 0–2, default 1; an eligibility ceiling, not a probability |
 | `level` | Minimum level 1–5, default 3 |

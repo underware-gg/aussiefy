@@ -10,6 +10,7 @@ from .detect import Detection
 from .policy import Effective, weighted_index
 from .schema import Entry
 from .realise import question_form
+from .context import tone_weight
 
 # detection frame -> entry frames that can fill it
 COMPATIBLE = {
@@ -120,7 +121,7 @@ def fit_rejection(entry: Entry, det: Detection, eff: Effective, person_concepts:
     return None
 
 
-def form_problem(form: str, det: Detection) -> str | None:
+def binding_problem(form: str, det: Detection) -> str | None:
     """Why this one form of an entry can't fill the span: a slot with nothing to fill it."""
     needs = set(re.findall(r"\{(\w+)\}", form)) - {"subj", "be", "have", "do"}
     if "poss" in needs and not {"poss", "subj", "agent"} & det.captures.keys() and det.frame != "imperative":
@@ -132,6 +133,21 @@ def form_problem(form: str, det: Detection) -> str | None:
     return None
 
 
+def form_problem(form: str, det: Detection) -> str | None:
+    reason = binding_problem(form, det)
+    if reason:
+        return reason
+    needs = set(re.findall(r"\{(\w+)\}", form))
+    for slot in ("np", "obj"):
+        captured = det.captures.get(slot)
+        represented = slot in needs or slot == "obj" and "objposs" in needs
+        if captured is not None and not represented:
+            literal = re.sub(r"\{\w+\}", "", form).lower()
+            if not re.search(r"(?<!\w)" + re.escape(captured.norm) + r"(?!\w)", literal):
+                return f"would discard {{{slot}}}: {captured.text}"
+    return None
+
+
 def usable_forms(entry: Entry, det: Detection) -> list[str]:
     """The entry's forms (its form and variants) whose slots this span can fill: "his wife" takes "{poss}
     missus", a bare "wife" takes "the missus"."""
@@ -140,7 +156,7 @@ def usable_forms(entry: Entry, det: Detection) -> list[str]:
 
 
 def candidates(det: Detection, entries: list[Entry], eff: Effective, used: dict[str, int],
-               person_concepts: set[str], person_nouns: frozenset[str]
+               person_concepts: set[str], person_nouns: frozenset[str], *, mood: str | None = None
                ) -> tuple[list[Candidate], list[tuple[Entry, str]]]:
     eligible: list[Candidate] = []
     rejected: list[tuple[Entry, str]] = []
@@ -164,11 +180,13 @@ def candidates(det: Detection, entries: list[Entry], eff: Effective, used: dict[
         if lean == 0:
             rejected.append((e, "swear weighting disabled"))
             continue
-        w = e.weight * intensity_fit * direct * sources * repeat * regional * p_class * dated * lean
+        tone_fit = tone_weight(e.tone, mood) if mood is not None else 1.0
+        w = e.weight * intensity_fit * direct * sources * repeat * regional * p_class * dated * lean * tone_fit
         why = (f"w={w:.3f} (base {e.weight:g} x intensity-fit {intensity_fit:.2f} [{e.intensity} vs {det.intensity}]"
                f" x direct {direct:g} x sources {sources:.1f} x repeat {repeat:.2f}"
                + (f" x region {regional:g}" if regional != 1 else "") + (f" x {e.register} {dated:g}" if dated != 1 else "")
-               + f" x p({e.substitution_class}) {p_class:g})")
+               + f" x p({e.substitution_class}) {p_class:g}"
+               + (f" x tone-fit {tone_fit:g} ({e.tone}/{mood})" if mood is not None else "") + ")")
         eligible.append(Candidate(e, w, why))
     eligible.sort(key=lambda c: c.entry.id)
     return eligible, rejected

@@ -1,0 +1,1940 @@
+baseline: ee46955aefb1a2181ca80e64f78e7f71d8209e10
+checked: '2026-10-19'
+previous_ledgers:
+- research/slang-meanings-2026-10-18/audit.yaml
+- research/slang-meanings-2026-10-19/audit.yaml
+inventory_entries: 1257
+original_baseline: 5d1fb04
+original_baseline_entries: 1254
+reviewed_entries: 60
+decisions_count:
+  correct_mapping_or_missing_sense: 10
+  selected_sense_supported: 44
+  needs_further_evidence: 3
+  multiple_usages: 3
+cumulative_original_entries_reviewed: 220
+original_entries_remaining: 1034
+inventory_files:
+- path: aussiefy/data/concepts.yaml
+  sha256: c36258822d6ce6017e9917d42c06d18df6710c96191309b0b0e73453559fd4b2
+- path: aussiefy/data/entries/classics.yaml
+  sha256: 0f9ff089d38738375043d6a9a425b240664ad1925653a431f7b33786cacd9fc9
+- path: aussiefy/data/entries/fairdinkum.yaml
+  sha256: bee584203e6c16f70b03a3e072437ea284ec7487be7747495effd9c9207ab6d8
+- path: aussiefy/data/entries/flagged.yaml
+  sha256: 0966e94fe79e9f3d9e86f8c05bf9a3f25834142d645c3d7c15534d42a48c6326
+- path: aussiefy/data/entries/phrases.yaml
+  sha256: 61d9bb5f2b6e9da29fac6bc7af54ba8c5e33d5fefc28323da40aaaccaeff332e
+scope: 'Sixty previously unaudited original-baseline IDs: risky senses and dormant mapping risks first, then
+  systematic occupations, food, clothing and other common vocabulary. Research and proposals only; no runtime,
+  flags or dictionary edits. Trigger snapshots are included for review. This is not exhaustive verification
+  of every sense, trigger, register, morphology or provenance claim.'
+snapshot_note: Parent is concurrently refining semantic selection. File digests describe the working files
+  when this ledger was generated, not necessarily pristine HEAD contents. No selected entry record was edited
+  by this batch.
+sources:
+  afi-babe:
+    url: https://catalog.afi.com/Film/55728-BABE?cxt=filmography
+    publisher: American Film Institute
+    kind: film catalogue and plot synopsis
+    checked: '2026-10-19'
+    locator: Babe (1995), country credits and concluding competition scene
+    access: Search-index catalogue text read; not a film screening
+    support_limit: film quotation, context and Australia/US production; not general agreement
+  oxford-cruising:
+    url: https://www.encyclopedia.com/humanities/dictionaries-thesauruses-pictures-and-press-releases/cruising-bruising
+    publisher: Oxford Dictionary of Phrase and Fable, licensed via Encyclopedia.com
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: cruising for a bruising
+    access: Search-index licensed entry read
+    support_limit: trouble-inviting conduct and chiefly North American association; not anger
+  wilton-dog:
+    url: https://www.wordorigins.org/big-list-entries/that-dog-wont-hunt
+    publisher: Dave Wilton / Wordorigins.org
+    kind: original lexical-history research
+    checked: '2026-10-19'
+    locator: that dog won’t hunt, 1 September 2020
+    access: Public indexed article text read
+    support_limit: unworkable plan or unpersuasive claim; US historical evidence, not exclusive present-day
+      geography
+  martin-hat:
+    url: https://www.phrases.org.uk/meanings/all-hat-and-no-cattle.html
+    publisher: Gary Martin / The Phrase Finder
+    kind: original lexical-history research
+    checked: '2026-10-19'
+    locator: all hat and no cattle
+    access: Public indexed article text read
+    support_limit: empty show or talk; US/Texan association, not absence of Australian adoption
+  nfsa-shrimp:
+    url: https://www.nfsa.gov.au/collection/item/shrimp-barbie-paul-hogan
+    publisher: National Film and Sound Archive of Australia
+    kind: archive commentary on collection item
+    checked: '2026-10-19'
+    locator: Paul Hogan Australian tourism advertisement
+    access: Public indexed archive text read
+    support_limit: actual advertisement wording versus familiar misquotation; US target audience
+  abc-castle:
+    url: https://www.abc.net.au/listen/programs/worldtoday/trading-post-published-for-last-time/1122154
+    publisher: ABC / The World Today
+    kind: broadcast transcript replaying original film dialogue
+    checked: '2026-10-19'
+    locator: Trading Post published for last time, 29 October 2009; chairs, jousting sticks and projector
+      excerpts
+    access: Public indexed transcript read
+    support_limit: film dialogue rejects asking prices; not a low purchase offer
+  nfsa-castle:
+    url: https://www.nfsa.gov.au/stories/deep-dives/muriels-wedding
+    publisher: National Film and Sound Archive of Australia
+    kind: archive cultural commentary
+    checked: '2026-10-19'
+    locator: Australian film catchphrases in introduction
+    access: Public indexed article text read
+    support_limit: Australian catchphrase recognition; not every modern pragmatic use
+  collins-pollies:
+    url: https://www.collinsdictionary.com/dictionary/english/pollies
+    publisher: Collins Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: pollies, plural of polly; politician sense
+    access: Public page and indexed entry text read
+    support_limit: plural politician term; not every institutional-authority trigger
+  cambridge-crack:
+    url: https://dictionary.cambridge.org/us/dictionary/english/crack
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: crack noun, attempt sense
+    access: Public indexed entry section read
+    support_limit: an attempt; not every new-birth or new-lease construction
+  oxford-bugger:
+    url: https://www.oxfordlearnersdictionaries.com/definition/english/bugger_1
+    publisher: Oxford Learner’s Dictionaries
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: person-reference senses of bugger
+    access: Public indexed entry read in preceding batch, reused
+    support_limit: component only; does not establish the complete lucky/still-breathing phrase
+  cambridge-sundowner:
+    url: https://dictionary.cambridge.org/dictionary/english/sundowner
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: person sense, Australia/New Zealand
+    access: Public indexed entry text read
+    support_limit: historical food/lodging-seeking late arrival; not sole possible sense
+  ah-sundowner:
+    url: https://www.ahdictionary.com/word/search.html?q=sundowner
+    publisher: American Heritage Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Australian person sense
+    access: Public indexed entry text read
+    support_limit: broader tramp/vagrant sense; prevents a work-avoidance-only inference
+  macquarie-bevan:
+    url: https://www.macquariedictionary.com.au/westie-is-a-badge-of-honour-to-some-and-for-others-a-stamp-of-shame/
+    publisher: Macquarie Dictionary
+    kind: lexicographic publisher commentary
+    checked: '2026-10-19'
+    locator: 29 March 2019; Queensland regional alternative
+    access: Public page read
+    support_limit: regional bogan-like stereotype; not exact identity with foreign class labels
+  cambridge-yob:
+    url: https://dictionary.cambridge.org/us/dictionary/english/yob
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: yob, also yobbo
+    access: Public indexed entry text read
+    support_limit: rude/offensive person, sometimes violent; no required driving role
+  hansard-grub:
+    url: https://www.aph.gov.au/binaries/hansard/reps/dailys/dr170305.pdf
+    publisher: Parliament of Australia
+    kind: primary speech transcript
+    checked: '2026-10-19'
+    locator: House, 17 March 2005, printed page 96, Dutton contribution
+    access: Public search-index PDF passage read
+    support_limit: disparaging person-reference in political criticism; not a complete definition of scoundrel
+  gpsa-koala:
+    url: https://gpsa.org.au/wp-content/uploads/2024/04/R4.17-Australian-Slang-Dictionary-V3.pdf
+    publisher: KoalaNet glossary, republished by GP Supervision Australia
+    kind: reprinted community glossary
+    checked: '2026-10-19'
+    locator: R4.17 Australian Slang Dictionary V3; KoalaNet 1996–2008 footer
+    access: Public 13-page PDF text read
+    support_limit: selected common-word senses; mirrors are one source family, not independent research
+  museum-dobber:
+    url: https://museumsvictoria.com.au/media/3807/australian-childrens-folklore-issue27-dec1994.pdf
+    publisher: Museums Victoria / Australian Children’s Folklore Newsletter
+    kind: primary collected children’s usage
+    checked: '2026-10-19'
+    locator: issue 27, December 1994; telling a teacher
+    access: Indexed PDF passage read; direct browser fetch failed
+    support_limit: school informer usage; not a technical telltale indicator
+  mmm-tradies:
+    url: https://mmmenglish.com/2018/01/25/australian-slang-real-life-english/
+    publisher: mmmEnglish
+    kind: primary Australian-speaker teaching transcript
+    checked: '2026-10-19'
+    locator: 25 January 2018; Tom discusses trades and finishing work
+    access: Public indexed transcript read
+    support_limit: occupation names and knock-off use in first-person speech, not an etymological study
+  collins-truckie:
+    url: https://www.collinsdictionary.com/dictionary/english/truckie
+    publisher: Collins Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: truckie
+    access: Public indexed entry text read
+    support_limit: Australian truck-driver noun
+  andc-p:
+    url: https://history.cass.anu.edu.au/centres/andc/australian-words-p
+    publisher: Australian National Dictionary Centre, ANU
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: public servant
+    access: Public indexed entry text read
+    support_limit: Australian civil-service employee term; not every government contractor
+  apsc-service:
+    url: https://www.apsc.gov.au/initiatives-and-programs/workforce-information/research-analysis-and-publications/state-service/state-service-report-2024-25/aps-workforce/aps-glance
+    publisher: Australian Public Service Commission
+    kind: primary institution description
+    checked: '2026-10-19'
+    locator: APS at a glance, 2024–25 report
+    access: Public indexed page read
+    support_limit: Australian institution/workforce name; figures and statutory detail outside this audit
+  oxford-yards:
+    url: https://www.oxfordlearnersdictionaries.com/definition/english/yard
+    publisher: Oxford Learner’s Dictionaries
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: do/put in the hard yards idiom
+    access: Public indexed idiom section read
+    support_limit: sustained difficult effort, including beyond sport
+  cambridge-shrapnel:
+    url: https://dictionary.cambridge.org/us/dictionary/english/shrapnel
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: informal coins sense
+    access: Public indexed entry text read
+    support_limit: small/loose coins; British label does not exclude Australian use
+  collins-rego:
+    url: https://www.collinsdictionary.com/dictionary/english/rego
+    publisher: Collins Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Australian registration sense
+    access: Public page read, registration and fee senses
+    support_limit: vehicle-registration abbreviation
+  slq-barra:
+    url: https://www.slq.qld.gov.au/blog/barramundi-whats-name
+    publisher: State Library of Queensland
+    kind: primary library research article
+    checked: '2026-10-19'
+    locator: 'Barramundi: what’s in a name?'
+    access: Public indexed article text read
+    support_limit: barra as fish name; not automotive names
+  andc-dagwood:
+    url: https://slll.cass.anu.edu.au/files/andc/Ozwords_October%2007.pdf
+    publisher: Australian National Dictionary Centre / Oxford University Press
+    kind: lexicographic newsletter
+    checked: '2026-10-19'
+    locator: Ozwords October 2007, Australian Pocket Oxford Dictionary additions
+    access: Public indexed PDF entry passage read
+    support_limit: battered sausage snack on stick; not identical recipes everywhere
+  slq-dagwood:
+    url: https://www.slq.qld.gov.au/blog/ekka-sideshow-alley-and-travelling-showmen-pink-family-and-their-descendants
+    publisher: State Library of Queensland
+    kind: primary library oral-history account
+    checked: '2026-10-19'
+    locator: Pink family and Ekka food
+    access: Public indexed article text read
+    support_limit: Australian food-name use and family account, not exclusive invention proof
+  ric-damper:
+    url: https://www.ricpublications.com.au/contentFiles/wp-files/2018/03/6472RB-An-Aussie-Easter-Bk-8-11-Australian-Slang.pdf
+    publisher: R.I.C. Publications
+    kind: publisher educational glossary
+    checked: '2026-10-19'
+    locator: Australian Slang worksheet, damper
+    access: Public indexed PDF passage read
+    support_limit: simple bush/camp bread; not one mandatory recipe or raising agent
+  dan-drop:
+    url: https://www.danmurphys.com.au/dans-daily/learn/-wine-101--your-definitive-wine-words-glossary
+    publisher: Dan Murphy’s / Dan’s Daily
+    kind: primary Australian wine-trade usage
+    checked: '2026-10-19'
+    locator: Wine 101 introductory good-drop wording
+    access: Public indexed article text read
+    support_limit: wine-context expression; not exclusive wine sense or historical origin
+  collins-lolly:
+    url: https://www.collinsdictionary.com/dictionary/english/lolly-water
+    publisher: Collins Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Australian/New Zealand soft-drink sense
+    access: Public indexed entry text read
+    support_limit: sweet soft drinks; not proof every sugary liquid is equivalent
+  vu-slang:
+    url: https://www.vu.edu.au/about-vu/news-events/vu-blog/australian-slang-dictionary
+    publisher: Victoria University
+    kind: institutional educational glossary
+    checked: '2026-10-19'
+    locator: blowie; ugg boots; sprung
+    access: Public page read
+    support_limit: Australian selected senses, not independent historical lexicography
+  collins-boardies:
+    url: https://www.collinsdictionary.com/dictionary/english/boardies
+    publisher: Collins Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Australian plural noun
+    access: Public indexed entry text read
+    support_limit: board-shorts abbreviation
+  collins-bucks:
+    url: https://www.collinsdictionary.com/us/dictionary/english/bucks-party
+    publisher: Collins Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: bucks party, variant bucks night
+    access: Public indexed entry text read
+    support_limit: Australian pre-wedding celebration
+  cambridge-hens:
+    url: https://dictionary.cambridge.org/us/dictionary/english/hen-night
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: hen night
+    access: Public indexed entry text read
+    support_limit: pre-wedding party; Australian usage corroborated in republished glossary
+  cambridge-nature:
+    url: https://dictionary.cambridge.org/dictionary/english/nature-strip
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Australian grass-strip sense
+    access: Public indexed entry text read
+    support_limit: roadside verge, not every strip of natural land
+  collins-rashie:
+    url: https://www.collinsdictionary.com/dictionary/english/rashie
+    publisher: Collins Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Australian rash-shirt/vest abbreviation
+    access: Public indexed entry text read
+    support_limit: surf/swim protective shirt; not a medical or sun-safety claim
+  school-mufti:
+    url: https://explain.scas.nsw.edu.au/support/uniform-guidelines
+    publisher: St Columba Anglican School
+    kind: primary school policy usage
+    checked: '2026-10-19'
+    locator: Mufti Day (Non-Uniform) Guidelines
+    access: Public indexed policy section read
+    support_limit: school casual-clothes day; no claim the term never applies to offices
+  qld-tuckshop:
+    url: https://education.qld.gov.au/parents-and-carers/school-information/life-at-school/becoming-involved
+    publisher: Queensland Department of Education
+    kind: primary institution usage
+    checked: '2026-10-19'
+    locator: canteen or tuckshop section
+    access: Public indexed page text read
+    support_limit: school food service; not every room where pupils eat
+  macquarie-middy:
+    url: https://www.macquariedictionary.com.au/a-deep-dive-into-aussie-beer-sizes/
+    publisher: Macquarie Dictionary
+    kind: lexicographic publisher commentary
+    checked: '2026-10-19'
+    locator: 11 November 2019, regional beer sizes
+    access: Public page and indexed article text read
+    support_limit: regional beer-glass naming and common 285 mL size
+  collins-middy:
+    url: https://www.dictionary.com/browse/middy
+    publisher: Collins English Dictionary, licensed via Dictionary.com
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Australian/New Zealand beer-glass sense
+    access: Public indexed licensed entry text read
+    support_limit: medium beer glass commonly compared with half a pint; comparison not a global conversion
+      rule
+  museum-yabby:
+    url: https://australian.museum/learn/animals/crustaceans/crayfish/
+    publisher: Australian Museum
+    kind: primary zoological museum explanation
+    checked: '2026-10-19'
+    locator: freshwater crayfish regional common names
+    access: Public indexed article text read
+    support_limit: yabby as regional Australian common name; not exact foreign-species identity
+  museum-joey:
+    url: https://australian.museum/learn/species-identification/ask-an-expert/what-is-a-marsupial/
+    publisher: Australian Museum
+    kind: primary zoological museum explanation
+    checked: '2026-10-19'
+    locator: What is a marsupial? young in pouch
+    access: Public indexed article text read
+    support_limit: joey as marsupial young beyond kangaroos
+  collins-joe:
+    url: https://www.collinsdictionary.com/dictionary/english/joe-blake
+    publisher: Collins Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Australian rhyming-slang snake sense
+    access: Public indexed entry text read
+    support_limit: snake headword, not a particular species
+  collins-aggro:
+    url: https://www.collinsdictionary.com/dictionary/english/aggro
+    publisher: Collins Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Australian/New Zealand adjective sense
+    access: Public indexed entry text read
+    support_limit: aggressive adjective; distinct from trouble/aggression noun
+  wordhist-gutser:
+    url: https://wordhistories.net/2022/02/24/come-a-gutser/
+    publisher: Pascal Tréguer / Word Histories
+    kind: original lexical-history research
+    checked: '2026-10-19'
+    locator: 24 February 2022, historical glosses and quotations
+    access: Public indexed article text read; original quoted books not separately retrieved
+    support_limit: literal fall and figurative failure; cited-source chain is explicit
+  andc-c:
+    url: https://history.cass.anu.edu.au/centres/andc/australian-words-c
+    publisher: Australian National Dictionary Centre, ANU
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: cooee, within cooee
+    access: Public page read
+    support_limit: within hearing distance, with figurative proximity use too
+  macquarie-deadset-use:
+    url: https://www.macquariedictionary.com.au/a-deadset-australianism/
+    publisher: Macquarie Dictionary
+    kind: primary editorial usage
+    checked: '2026-10-19'
+    locator: title and article, 25 June 2020
+    access: Public page read
+    support_limit: 'adjectival deadset usage only: article explains barrack, not deadset’s history or full
+      definition'
+  andc-f:
+    url: https://history.cass.anu.edu.au/centres/andc/australian-words-f
+    publisher: Australian National Dictionary Centre, ANU
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: fossick search/rummage sense
+    access: Public page read
+    support_limit: search/rummage construction and example, not only mineral prospecting
+  poly-fullon:
+    url: https://www.melbournepolytechnic.edu.au/media/5615/2022-international-student-guide.pdf
+    publisher: Melbourne Polytechnic
+    kind: institutional student-language guide
+    checked: '2026-10-19'
+    locator: 2022 International Student Guide, slang section
+    access: Public indexed PDF passage read
+    support_limit: full-on as intense/hectic in student experience; no historical-origin claim
+  ausday-hooley:
+    url: https://www.australiaday.com.au/fun-activities/browse-the-aussie-slang-dictionary/h
+    publisher: AustraliaDay.com.au
+    kind: community-contributed slang glossary
+    checked: '2026-10-19'
+    locator: H, hooley dooley
+    access: Public page read
+    support_limit: exact surprise interjection; lower evidential strength than professionally edited dictionary
+  andc-k:
+    url: https://history.cass.anu.edu.au/centres/andc/australian-words-k
+    publisher: Australian National Dictionary Centre, ANU
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: king-hit
+    access: Public page read
+    support_limit: hard/sudden/unfair blow senses; not every historical use a surprise attack
+  green-kinghit:
+    url: https://greensdictofslang.com/entry/5cax6pi
+    publisher: Green’s Dictionary of Slang
+    kind: historical lexicographic reference
+    checked: '2026-10-19'
+    locator: king hit noun, senses 1 and 2
+    access: Direct browser fetch failed; public search-index senses and quotations read
+    support_limit: hard blow and surprise-attack senses separately attested
+  andc-o:
+    url: https://history.cass.anu.edu.au/centres/andc/australian-words-o
+    publisher: Australian National Dictionary Centre, ANU
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: ocker, adjectival use
+    access: Public page read
+    support_limit: broad/stereotyped Australian adjective alongside noun uses
+  cambridge-pash:
+    url: https://dictionary.cambridge.org/us/dictionary/english/pash?topic=loving-and-in-love
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Australian verb, transitive and intransitive
+    access: Public indexed entry text read
+    support_limit: passionate kissing, distinct from British crush noun
+  cambridge-porky:
+    url: https://dictionary.cambridge.org/us/dictionary/english/porky?q=porky_1
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: noun lie sense
+    access: Public indexed entry text read
+    support_limit: lie noun; shared British/Australian usage, not adjective about body size
+  miller-rough:
+    url: https://flex.flinders.edu.au/file/671cfded-fb6a-4c98-9630-95b8105b6185/1/Thesis-Miller-2011-02whole.pdf
+    publisher: Julia Miller / Flinders University repository
+    kind: primary doctoral language research
+    checked: '2026-10-19'
+    locator: 2011 thesis, printed page 198, rough as guts survey
+    access: Public indexed PDF passage read
+    support_limit: rough/uncouth interpretation among Australian and UK respondents; not Australian exclusivity
+  macquarie-shoey:
+    url: https://www.macquariedictionary.com.au/chuck-a-shoey-in-moderation/
+    publisher: Macquarie Dictionary
+    kind: lexicographic publisher commentary
+    checked: '2026-10-19'
+    locator: 11 February 2021, shoey
+    access: Public indexed article text read
+    support_limit: drinking a beverage from footwear, usually alcoholic but not obligatorily so
+  collins-showpony:
+    url: https://www.dictionary.com/browse/show-pony?q=show+pony
+    publisher: Collins English Dictionary, licensed via Dictionary.com
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Australian/New Zealand attention-seeker sense
+    access: Public indexed licensed entry text read
+    support_limit: broader show-off sense; same Collins publisher family as other licensed pages
+  cambridge-showpony:
+    url: https://dictionary.cambridge.org/us/dictionary/english/show-pony
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Australian show pony
+    access: Public indexed entry text read
+    support_limit: appearance/ability contrast; narrower than Collins’s attention-seeker sense
+  kingpin-hens:
+    url: https://www.kingpinplay.com/en-au/parties-and-events/social/hens-night-packages/
+    publisher: Kingpin Australia
+    kind: primary Australian venue usage
+    checked: '2026-10-19'
+    locator: Hens Night Packages; pre-marriage celebration
+    access: Public indexed venue page read
+    support_limit: Australian commercial usage in pre-wedding context, not lexical history
+decisions:
+- id: thatll-do-pig
+  file: aussiefy/data/entries/flagged.yaml
+  form: that'll do, pig
+  concepts_before:
+  - AGREE
+  frame: interjection
+  status_before: omit
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: afi-babe
+    locator: Babe (1995), country credits and concluding competition scene
+  evidence_scope: exact film quotation and context
+  reasoning: The film’s concluding acknowledgement follows the pig’s successful performance. Its praise/completion
+    context is not interchangeable with every AGREE trigger. The production is catalogued as Australian/US;
+    a story’s apparent farm setting alone cannot decide whether the quotation belongs in Australian repertoire.
+  triggers_before:
+    AGREE:
+      interjection:
+      - absolutely
+      - definitely
+      - of course !=,|;|—|-
+      - you bet
+      - too right
+      - exactly
+      - certainly
+      - for sure
+      - yes, absolutely@4
+      - yes, definitely@4
+      - you're right
+  proposed_action: Keep omitted status pending existing repertoire-policy work. Correct provenance notes;
+    if later enabled, use praise/satisfactory-completion contexts rather than generic yes.
+  limits: A film quotation’s provenance does not establish everyday Australian idiomatic use. No flag change
+    is recommended automatically.
+- id: cruisin-for-a-bruisin
+  file: aussiefy/data/entries/flagged.yaml
+  form: cruisin' for a bruisin'
+  concepts_before:
+  - ANGRY
+  frame: predicate_adj
+  status_before: omit
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: oxford-cruising
+    locator: cruising for a bruising
+  evidence_scope: selected headword sense
+  reasoning: The expression concerns behaviour inviting trouble or retaliation; it does not simply mean the
+    subject is angry.
+  triggers_before:
+    ANGRY:
+      predicate_adj:
+      - angry
+      - furious@4
+      - livid@5
+      - annoyed@2
+      - cross@2
+      - mad at {obj}
+      - fuming@4
+      - irritated@2
+      - pissed off@4
+      - grumpy@2
+      - in a bad mood@2
+      - irate@4
+      - enraged@5
+      - incensed@4
+      - seething@5
+  proposed_action: Keep the currently omitted entry. If enabled later, give courting-trouble conduct its own
+    mapping instead of ANGRY.
+  limits: No present automatic-translation regression is asserted for an omitted record. North American association
+    is not evidence Australians never use it.
+- id: that-dog-wont-hunt
+  file: aussiefy/data/entries/flagged.yaml
+  form: that dog won't hunt
+  concepts_before:
+  - DISAGREE
+  frame: interjection
+  status_before: omit
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: wilton-dog
+    locator: that dog won’t hunt, 1 September 2020
+  evidence_scope: whole idiom meaning and historical US evidence
+  reasoning: The sourced construction rejects a plan’s feasibility or an argument’s persuasiveness. Flat DISAGREE
+    also includes bare no and refusals that assert neither.
+  triggers_before:
+    DISAGREE:
+      interjection:
+      - 'no'
+      - no way@4
+      - not a chance@4
+      - absolutely not@5
+      - I don't think so@2
+      - nope
+      - certainly not@5
+      - over my dead body@5
+  proposed_action: Retain omitted status; before activation, restrict to unworkable-plan or unconvincing-argument
+    contexts.
+  limits: A pragmatic extension may be possible in dialogue; this audit does not ban every broader refusal.
+- id: all-hat-and-no-cattle
+  file: aussiefy/data/entries/flagged.yaml
+  form: all hat and no cattle
+  concepts_before:
+  - ALL_TALK
+  frame: predicate_adj
+  status_before: gate
+  decision: selected_sense_supported
+  evidence:
+  - source: martin-hat
+    locator: all hat and no cattle
+  evidence_scope: selected headword sense
+  reasoning: The display-without-substance meaning fits the selected ALL_TALK use. US/Texan history supports
+    the current provenance caution.
+  triggers_before:
+    ALL_TALK:
+      predicate_adj:
+      - all talk
+      - all talk and no action@4
+      - full of hot air
+      - a big talker
+      - a show-off
+      - full of it
+      - nothing but talk
+  limits: Keep the existing gate while metadata policy is being shaped. Geographic association is not proof
+    of absence from Australian speech.
+- id: shrimp-on-the-barbie
+  file: aussiefy/data/entries/flagged.yaml
+  form: throw another shrimp on the barbie
+  concepts_before:
+  - GREETING
+  frame: interjection
+  status_before: omit
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: nfsa-shrimp
+    locator: Paul Hogan Australian tourism advertisement
+  evidence_scope: advertisement wording and production context
+  reasoning: The archive distinguishes the actual tourism-ad line offering an extra shrimp from the familiar
+    throw-another-shrimp version stored here. Neither construction is a literal hello synonym.
+  triggers_before:
+    GREETING:
+      interjection:
+      - hello
+      - hi
+      - hey
+      - hi there
+      - hello there
+      - good morning
+      - good day
+      - greetings
+  proposed_action: Preserve the omitted cultural-reference entry; label its form as a familiar paraphrase/misquotation
+    of the advertisement. Do not activate a GREETING substitution.
+  limits: The advertisement is Australian-made for US viewers; that fact does not make the ad itself non-Australian.
+- id: tell-him-hes-dreamin
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: tell him he's dreamin'
+  concepts_before:
+  - TELL_HIM_DREAMING
+  frame: interjection
+  status_before: active
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: abc-castle
+    locator: Trading Post published for last time, 29 October 2009; chairs, jousting sticks and projector
+      excerpts
+  - source: nfsa-castle
+    locator: Australian film catchphrases in introduction
+  evidence_scope: exact film construction, original dialogue context and Australian recognition
+  reasoning: The replayed film dialogue rejects sellers’ asking prices, so the gloss’s lowball-offer description
+    reverses the original scenario. The source phrase has also become a broader catchphrase. Independently,
+    the stored form fixes him while its triggers include them.
+  triggers_before:
+    TELL_HIM_DREAMING:
+      interjection:
+      - tell him to dream on
+      - tell them to dream on
+  proposed_action: Correct the gloss to an unrealistic asking price/expectation; preserve legitimate broader
+    dream-on use. Verify and preserve the referenced person/number when applying the them trigger.
+  limits: This is not a claim the expression can only be used about prices. The source does not settle every
+    contemporary pragmatic use.
+- id: the-pollies
+  file: aussiefy/data/entries/phrases.yaml
+  form: the pollies
+  concepts_before:
+  - POLITICIAN
+  frame: np
+  status_before: active
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: collins-pollies
+    locator: pollies, plural of polly; politician sense
+  evidence_scope: headword meaning and grammatical number
+  reasoning: The lexical noun denotes politicians; pollies is plural. The mapping shares singular occupation
+    triggers and collective institution/authority triggers. A senator is not necessarily an entire group,
+    and authorities need not be politicians.
+  triggers_before:
+    POLITICIAN:
+      np:
+      - politician
+      - statesman
+      - senator
+      - congressman
+      - member of parliament
+      - lawmaker
+      - the government
+      - the authorities
+      - the powers that be
+  proposed_action: Check realised output before changing morphology. Preserve singular/plural reference using
+    a singular polly and ordinary inflection where appropriate; separate elected people from generic authorities/institutions.
+  limits: Static mapping risk, not a claimed reproduced output. Localisation of foreign offices is a separate
+    policy from number preservation.
+- id: another-crack-at
+  file: aussiefy/data/entries/phrases.yaml
+  form: another crack at
+  concepts_before:
+  - SECOND_CHANCE
+  frame: adv
+  status_before: active
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: cambridge-crack
+    locator: crack noun, attempt sense
+  evidence_scope: component crack in attempt construction, not every stored variant
+  reasoning: The relevant crack construction denotes another attempt. SECOND_CHANCE mixes this with new-birth
+    and new-lease renewal language, which need not assert an attempt and has a different complement.
+  triggers_before:
+    SECOND_CHANCE:
+      adv:
+      - a new birth of
+      - a second chance at
+      - another chance at
+      - a fresh start at
+      - a new lease of
+  proposed_action: Separate attempt/opportunity contexts from rebirth/renewal contexts. Preserve the complement
+    and preposition instead of allowing a new lease of to become an indiscriminate another crack at.
+  limits: An expression such as another crack at life may be a valid deliberate paraphrase. The finding concerns
+    automatic equivalence across the shared triggers, not a ban on that sentence.
+- id: the-lucky-buggers-still-breathin
+  file: aussiefy/data/entries/phrases.yaml
+  form: the lucky buggers still breathin'
+  concepts_before:
+  - ALIVE
+  frame: np
+  status_before: active
+  decision: needs_further_evidence
+  evidence:
+  - source: oxford-bugger
+    locator: person-reference senses of bugger
+  evidence_scope: component only; complete construction not established
+  reasoning: Bugger has attested informal person-reference uses, but that component source does not establish
+    this complete expression as a conventional idiom. The ALIVE construction adds good fortune and an informal
+    human description to the living.
+  triggers_before:
+    ALIVE:
+      predicate_adj:
+      - alive
+      - still alive
+      - still living
+      np:
+      - the living !room|rooms|area|areas|space|quarters|costs|wage|standard|thing|things|creature|creatures|proof|legend|memory
+  proposed_action: Preserve the expression; identify it as a composed writer option unless existing embellishment/context
+    controls deliberately authorise the added assessment. Shape that policy rather than silently declaring
+    the phrase traditional.
+  limits: An exact-string public search found no sufficient record in this bounded pass. Absence from these
+    results does not show the phrase was invented or never spoken. Existing ALIVE exclusions already avoid
+    several nonhuman/literal senses.
+- id: sundowner
+  file: aussiefy/data/entries/classics.yaml
+  form: sundowner
+  concepts_before:
+  - SWAGMAN
+  frame: np
+  status_before: active
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: cambridge-sundowner
+    locator: person sense, Australia/New Zealand
+  - source: ah-sundowner
+    locator: Australian person sense
+  evidence_scope: independently edited narrow and broad person senses
+  reasoning: Cambridge describes a late arrival seeking food/lodging rather than work; American Heritage also
+    records a broader Australian tramp/vagrant sense. Broad vagrant mappings therefore must not be rejected
+    merely for lacking the narrower narrative. An itinerant worker, however, can be an employed travelling
+    worker and need not fit either vagrant sense.
+  triggers_before:
+    SWAGMAN:
+      np:
+      - hobo
+      - vagrant
+      - drifter
+      - itinerant worker
+      - a hobo
+      - a vagrant
+      - a drifter
+      - an itinerant worker
+  proposed_action: Preserve both demonstrated person readings. Qualify the gloss’s work-avoidance story as
+    a narrower usage; review itinerant-worker contexts rather than automatically assigning vagrancy or motive.
+  limits: The sources differ in breadth. No blanket removal of hobo, vagrant or drifter is proposed.
+- id: a-bevan
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a bevan
+  concepts_before:
+  - BOGAN
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: macquarie-bevan
+    locator: 29 March 2019; Queensland regional alternative
+  evidence_scope: selected headword sense
+  reasoning: Macquarie identifies bevan as a Queensland counterpart in the bogan/westie stereotype family.
+    That supports the selected cultural-localisation sense.
+  triggers_before:
+    BOGAN:
+      np:
+      - redneck
+      - chav
+  limits: Redneck and chav are culturally distinct labels. This supports a local stereotype analogue, not
+    demographic equivalence or Australian exclusivity.
+- id: a-yobbo
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a yobbo
+  concepts_before:
+  - HOON
+  frame: np
+  status_before: active
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: cambridge-yob
+    locator: yob, also yobbo
+  - source: gpsa-koala
+    locator: R4.17 Australian Slang Dictionary V3; KoalaNet 1996–2008 footer
+  evidence_scope: selected headword sense
+  reasoning: The sources support an uncouth/rude lout. HOON also contains specifically reckless-driving and
+    boy-racer triggers; choosing yobbo can lose the stated driving role.
+  triggers_before:
+    HOON:
+      np:
+      - hooligan
+      - lout
+      - a reckless driver
+      - a boy racer
+      - yob
+  proposed_action: Keep lout/yob/hooligan uses. Distinguish a general lout from specifically reckless driving,
+    using shared contextual data rather than a word-specific engine branch.
+  limits: A reckless driver may also be a yobbo; the issue is losing a stated role, not whether the insult
+    can ever apply to that person.
+- id: a-grub
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a grub
+  concepts_before:
+  - SCOUNDREL
+  frame: np
+  status_before: active
+  decision: needs_further_evidence
+  evidence:
+  - source: hansard-grub
+    locator: House, 17 March 2005, printed page 96, Dutton contribution
+  evidence_scope: Australian person-directed insult; exact selected sense provisional
+  reasoning: A primary Australian parliamentary insult attests disparaging person-reference, but one political
+    example is not a sufficiently precise definition for every SCOUNDREL trigger, especially bare troublemaker.
+  triggers_before:
+    SCOUNDREL:
+      np:
+      - scoundrel
+      - lowlife
+      - rotter
+      - troublemaker
+  proposed_action: Retain the term and existing status while seeking an edited lexical source or several well-contextualised
+    uses that distinguish dirty/slovenly from morally contemptible.
+  limits: No claim that the scoundrel sense is false. The primary evidence establishes use, while the exact
+    meaning boundary remains under-supported in this pass.
+- id: a-drop-kick
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a drop-kick
+  concepts_before:
+  - LOSER
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: gpsa-koala
+    locator: R4.17 Australian Slang Dictionary V3; KoalaNet 1996–2008 footer
+  evidence_scope: selected headword sense
+  reasoning: The republished Australian glossary links dropkick through dipstick to an inept/loser insult,
+    supporting the selected LOSER sense.
+  triggers_before:
+    LOSER:
+      np:
+      - a loser
+      - a deadbeat
+      - a hopeless case
+      - a born loser
+  limits: This is a reprinted community glossary, not independently compiled medical-institution lexicography.
+    It does not establish exact intensity or the euphemistic etymology.
+- id: a-show-pony
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a show pony
+  concepts_before:
+  - BOASTER
+  frame: np
+  status_before: active
+  decision: multiple_usages
+  evidence:
+  - source: collins-showpony
+    locator: Australian/New Zealand attention-seeker sense
+  - source: cambridge-showpony
+    locator: Australian show pony
+  evidence_scope: selected headword sense
+  reasoning: Collins records a broad attention-seeking person; Cambridge emphasises apparent performance without
+    underlying ability. The broader show-off mapping has support and should not be narrowed solely to incompetence.
+  triggers_before:
+    BOASTER:
+      np:
+      - show-off
+      - braggart
+      - boaster
+      - big talker
+  proposed_action: Keep the supported BOASTER/show-off sense. A gloss can mention the sometimes-implied lack
+    of substance without making it mandatory.
+  limits: The two dictionaries are genuinely different publishers. This is a supported range of uses, not
+    a discovered false mapping.
+- id: a-dobber
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a dobber
+  concepts_before:
+  - TELLTALE
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: museum-dobber
+    locator: issue 27, December 1994; telling a teacher
+  - source: gpsa-koala
+    locator: R4.17 Australian Slang Dictionary V3; KoalaNet 1996–2008 footer
+  evidence_scope: selected headword sense
+  reasoning: Collected children’s usage and the glossary both support a person who reports another’s misconduct;
+    the selected telltale-person sense fits.
+  triggers_before:
+    TELLTALE:
+      np:
+      - a snitch
+      - a tattletale
+      - a tattle-tale
+      - a telltale !sign|signs|mark|marks|trace|traces|heart|smell|clue|clues
+  limits: The Museums PDF was available in indexed text; direct fetch failed. This does not attest technical
+    telltale-sign usage, which current exclusions already distinguish.
+- id: a-brickie
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a brickie
+  concepts_before:
+  - BRICKLAYER
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: mmm-tradies
+    locator: 25 January 2018; Tom discusses trades and finishing work
+  evidence_scope: selected headword sense
+  reasoning: The Australian speaker explicitly uses this occupation name for a bricklayer; the selected occupation
+    mapping fits.
+  triggers_before:
+    BRICKLAYER:
+      np:
+      - bricklayer
+  limits: Primary speech/teaching attestation, not a frequency study or claim of exclusive Australian origin.
+- id: a-sparky
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a sparky
+  concepts_before:
+  - ELECTRICIAN
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: mmm-tradies
+    locator: 25 January 2018; Tom discusses trades and finishing work
+  evidence_scope: selected headword sense
+  reasoning: The Australian speaker explicitly uses this occupation name for a electrician; the selected occupation
+    mapping fits.
+  triggers_before:
+    ELECTRICIAN:
+      np:
+      - electrician
+  limits: Primary speech/teaching attestation, not a frequency study or claim of exclusive Australian origin.
+- id: a-chippy
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a chippy
+  concepts_before:
+  - CARPENTER
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: mmm-tradies
+    locator: 25 January 2018; Tom discusses trades and finishing work
+  evidence_scope: selected headword sense
+  reasoning: The Australian speaker explicitly uses this occupation name for a carpenter; the selected occupation
+    mapping fits.
+  triggers_before:
+    CARPENTER:
+      np:
+      - carpenter
+  limits: Primary speech/teaching attestation, not a frequency study or claim of exclusive Australian origin.
+- id: a-truckie
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a truckie
+  concepts_before:
+  - TRUCK_DRIVER
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: collins-truckie
+    locator: truckie
+  evidence_scope: selected headword sense
+  reasoning: Collins supports the Australian truck-driver noun; the truck driver/trucker mapping fits.
+  triggers_before:
+    TRUCK_DRIVER:
+      np:
+      - truck driver
+      - trucker
+- id: a-public-servant
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a public servant
+  concepts_before:
+  - PUBLIC_SERVANT
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-p
+    locator: public servant
+  evidence_scope: selected headword sense
+  reasoning: ANDC directly distinguishes the Australian civil-service employee term. The selected civil-servant
+    and government-employee use fits.
+  triggers_before:
+    PUBLIC_SERVANT:
+      np:
+      - civil servant
+      - a civil servant
+      - government employee
+  limits: This lexical audit does not determine statutory coverage or whether a specific government contractor
+    is an employee.
+- id: the-public-service
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: the public service
+  concepts_before:
+  - PUBLIC_SERVICE
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-p
+    locator: public servant
+  - source: apsc-service
+    locator: APS at a glance, 2024–25 report
+  evidence_scope: selected headword sense
+  reasoning: ANDC’s employee terminology and the Australian institution’s own name support the collective
+    civil-service mapping.
+  triggers_before:
+    PUBLIC_SERVICE:
+      np:
+      - the civil service
+  limits: The APS source is a federal institutional example, not evidence all state services are the APS.
+    No legal equivalence or workforce statistics are imported.
+- id: knock-off-work
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: knock off
+  concepts_before:
+  - FINISH_WORK
+  frame: vp
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: mmm-tradies
+    locator: 25 January 2018; Tom discusses trades and finishing work
+  evidence_scope: selected headword sense
+  reasoning: The primary speaker describes finishing the working day with knock off. The selected finish-work
+    construction fits.
+  triggers_before:
+    FINISH_WORK:
+      vp:
+      - finish work !on|for|in|with|by|before
+      - clock off
+      - knock off work
+      - call it a day
+      - finish up for the day
+  limits: The source does not establish every non-work use of call it a day as a finish-work context; contextual
+    selection remains necessary. Other knock-off senses are outside this entry.
+- id: do-the-hard-yards
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: do the hard yards
+  concepts_before:
+  - WORK_HARD
+  frame: vp
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: oxford-yards
+    locator: do/put in the hard yards idiom
+  evidence_scope: selected headword sense
+  reasoning: The idiom denotes sustained difficult effort, fitting the toil/work-hard triggers.
+  triggers_before:
+    WORK_HARD:
+      vp:
+      - break {poss} backs
+      - break {poss} back
+      - work {poss} fingers to the bone
+      - slave away
+      - toil
+  limits: The source includes use beyond sport; no sport-only restriction should be inferred.
+- id: shrapnel-change
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: shrapnel
+  concepts_before:
+  - LOOSE_CHANGE
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: cambridge-shrapnel
+    locator: informal coins sense
+  evidence_scope: selected headword sense
+  reasoning: The informal coin sense supports the loose/spare-change mapping.
+  triggers_before:
+    LOOSE_CHANGE:
+      np:
+      - loose change
+      - spare change
+  limits: Cambridge’s British labelling does not exclude Australian use. This pass supports the meaning, while
+    independent Australian primary attestation remains a possible source-strength improvement.
+- id: rego
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: rego
+  concepts_before:
+  - CAR_REGISTRATION
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: collins-rego
+    locator: Australian registration sense
+  evidence_scope: selected headword sense
+  reasoning: The Australian registration/fee entry supports the selected vehicle-registration noun.
+  triggers_before:
+    CAR_REGISTRATION:
+      np:
+      - car registration
+      - vehicle registration
+      - the car registration
+      - the vehicle registration
+  limits: This is lexical evidence, not vehicle-registration guidance.
+- id: barra
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: barra
+  concepts_before:
+  - BARRAMUNDI
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: slq-barra
+    locator: 'Barramundi: what’s in a name?'
+  evidence_scope: selected headword sense
+  reasoning: The Queensland library article explicitly connects barra with barramundi, supporting the fish-name
+    substitution.
+  triggers_before:
+    BARRAMUNDI:
+      np:
+      - barramundi
+  limits: Other bare barra referents, including vehicles, are not licensed by this fish-only trigger.
+- id: chewie
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: chewie
+  concepts_before:
+  - CHEWING_GUM
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: gpsa-koala
+    locator: R4.17 Australian Slang Dictionary V3; KoalaNet 1996–2008 footer
+  evidence_scope: selected headword sense
+  reasoning: The Australian glossary records the chewing-gum noun, which matches the selected noun frame.
+  triggers_before:
+    CHEWING_GUM:
+      np:
+      - chewing gum
+  limits: Community glossary support only; it does not license a texture adjective or a person’s nickname.
+- id: a-dagwood-dog
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a dagwood dog
+  concepts_before:
+  - CORN_DOG
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-dagwood
+    locator: Ozwords October 2007, Australian Pocket Oxford Dictionary additions
+  - source: slq-dagwood
+    locator: Pink family and Ekka food
+  evidence_scope: selected headword sense
+  reasoning: The edited dictionary-addition entry and Australian show-family account support the battered
+    sausage-on-a-stick food and its local name.
+  triggers_before:
+    CORN_DOG:
+      np:
+      - corn dog
+      - corndog
+  limits: Corn-dog localisation is a culinary analogue, not a promise of identical batter, sausage or recipe.
+    The oral history is not sole-invention proof.
+- id: damper
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: damper
+  concepts_before:
+  - DAMPER
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: ric-damper
+    locator: Australian Slang worksheet, damper
+  evidence_scope: selected headword sense
+  reasoning: The publisher’s Australian slang teaching resource supports simple bread cooked in a bush/camp
+    context, matching the selected camp-bread use.
+  triggers_before:
+    DAMPER:
+      np:
+      - campfire bread
+      - bush bread
+      - camp bread
+  proposed_action: Consider wording the gloss without making soda/leavening a necessary condition.
+  limits: This supports a selected common use, not every Indigenous or modern recipe, nor the claim that all
+    bread cooked at camp is damper.
+- id: a-good-drop
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a good drop
+  concepts_before:
+  - GOOD_WINE
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: dan-drop
+    locator: Wine 101 introductory good-drop wording
+  evidence_scope: selected headword sense
+  reasoning: An Australian wine retailer uses good drop in wine context, supporting the selected favourable-wine
+    phrase.
+  triggers_before:
+    GOOD_WINE:
+      np:
+      - a good wine
+      - a nice wine
+      - a fine wine
+      - a decent wine
+      - a great wine
+      - a lovely wine
+  limits: Primary trade usage, not a professional dictionary definition; the evidence does not restrict drop
+    to wine in all contexts.
+- id: lolly-water
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: lolly water
+  concepts_before:
+  - SUGARY_DRINK
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: collins-lolly
+    locator: Australian/New Zealand soft-drink sense
+  evidence_scope: selected headword sense
+  reasoning: The edited entry supports the sweet soft-drink sense selected here.
+  triggers_before:
+    SUGARY_DRINK:
+      np:
+      - sugary drinks
+      - a sugary drink
+      - sugary soft drink
+  limits: 'Sugary drink is broader than sweet soft drink: juice or another sweet beverage may need context.
+    A non-exhaustive dictionary entry alone does not prove every broader application false.'
+- id: a-blowie
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a blowie
+  concepts_before:
+  - BLOWFLY
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: vu-slang
+    locator: blowie; ugg boots; sprung
+  evidence_scope: selected headword sense
+  reasoning: The university glossary records the Australian blowfly abbreviation, matching the selected insect
+    noun.
+  triggers_before:
+    BLOWFLY:
+      np:
+      - blowfly
+- id: boardies
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: boardies
+  concepts_before:
+  - BOARDSHORTS
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: collins-boardies
+    locator: Australian plural noun
+  evidence_scope: selected headword sense
+  reasoning: Collins supports the plural abbreviation for board shorts; the selected garment mapping fits.
+  triggers_before:
+    BOARDSHORTS:
+      np:
+      - board shorts
+      - boardshorts
+- id: a-bucks-night
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a bucks night
+  concepts_before:
+  - BUCKS_NIGHT
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: collins-bucks
+    locator: bucks party, variant bucks night
+  evidence_scope: selected headword sense
+  reasoning: The edited Australian entry includes bucks night as a variant of the male pre-wedding celebration,
+    matching the selected party triggers.
+  triggers_before:
+    BUCKS_NIGHT:
+      np:
+      - bachelor party
+      - stag party
+      - stag night
+      - stag do
+  limits: This audits the cultural term, not assumptions about every participant’s gender or relationship
+    structure.
+- id: a-hens-night
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a hens night
+  concepts_before:
+  - HENS_NIGHT
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: cambridge-hens
+    locator: hen night
+  - source: kingpin-hens
+    locator: Hens Night Packages; pre-marriage celebration
+  evidence_scope: selected headword sense
+  reasoning: The edited hen-night entry supports the pre-wedding party meaning; an Australian venue uses hens
+    night for a pre-marriage celebration.
+  triggers_before:
+    HENS_NIGHT:
+      np:
+      - bachelorette party
+      - hen party
+      - hen night
+      - hen do
+  limits: The Cambridge page’s UK label does not disprove Australian use. Party conventions are not mandatory
+    rules.
+- id: the-nature-strip
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: the nature strip
+  concepts_before:
+  - VERGE
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: cambridge-nature
+    locator: Australian grass-strip sense
+  evidence_scope: selected headword sense
+  reasoning: The Australian roadside grass-strip sense fits the selected verge/parking-strip localisation.
+  triggers_before:
+    VERGE:
+      np:
+      - the grass verge
+      - the road verge
+      - the tree lawn
+      - the parking strip
+      - the curb strip
+      - the kerb strip
+  limits: Verge wording and local land ownership vary. This is not a landscaping or ownership claim.
+- id: a-rashie
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a rashie
+  concepts_before:
+  - RASH_VEST
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: collins-rashie
+    locator: Australian rash-shirt/vest abbreviation
+  evidence_scope: selected headword sense
+  reasoning: The Australian rash-shirt/vest abbreviation supports the selected swim/surf garment use.
+  triggers_before:
+    RASH_VEST:
+      np:
+      - rash guard
+      - rash vest
+      - rashguard
+      - swim shirt
+  limits: Swim shirt can be broader than a rash vest; protect literal garment specifications in technical
+    contexts. No protection rating is inferred.
+- id: a-mufti-day
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a mufti day
+  concepts_before:
+  - MUFTI_DAY
+  frame: np
+  status_before: active
+  decision: multiple_usages
+  evidence:
+  - source: school-mufti
+    locator: Mufti Day (Non-Uniform) Guidelines
+  evidence_scope: selected headword sense
+  reasoning: A school’s own published policy uses mufti day for an occasion when ordinary uniform is replaced
+    by casual clothes. The shared triggers also allow a general dress-down day.
+  triggers_before:
+    MUFTI_DAY:
+      np:
+      - casual clothes day
+      - non-uniform day
+      - dress-down day
+      - free dress day
+  proposed_action: Retain the attested school use. Seek office/general-context evidence before making either
+    a school-only restriction or an unrestricted every-dress-down-day claim.
+  limits: One school policy cannot establish that the expression is never used in workplaces. This is a scope
+    note, not a correction mandated by absent evidence.
+- id: ugg-boots
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: ugg boots
+  concepts_before:
+  - SHEEPSKIN_BOOTS
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: vu-slang
+    locator: blowie; ugg boots; sprung
+  evidence_scope: selected headword sense
+  reasoning: The Australian university glossary supports the sheepskin-boot garment term.
+  triggers_before:
+    SHEEPSKIN_BOOTS:
+      np:
+      - sheepskin boots
+      - shearling boots
+  limits: This audits ordinary lexical usage, not trademarks, country-of-origin claims or every shearling-lined
+    boot design.
+- id: the-tuckshop
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: the tuckshop
+  concepts_before:
+  - SCHOOL_CANTEEN
+  frame: np
+  status_before: active
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: qld-tuckshop
+    locator: canteen or tuckshop section
+  evidence_scope: selected headword sense
+  reasoning: The primary education source pairs canteen with tuckshop as a school food service. A school lunchroom
+    can instead be only a room for eating packed lunches.
+  triggers_before:
+    SCHOOL_CANTEEN:
+      np:
+      - the school cafeteria
+      - the school canteen
+      - the school lunchroom
+  proposed_action: Keep school-canteen/food-service uses. Require food-selling/service context before replacing
+    the bare school lunchroom trigger; preserve a purely physical eating room.
+  limits: This is a sense distinction, not a claim school cafeterias cannot also contain a tuckshop or that
+    tuckshop always has a separate room.
+- id: a-middy
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a middy
+  concepts_before:
+  - MIDDY_BEER
+  frame: np
+  status_before: active
+  decision: multiple_usages
+  evidence:
+  - source: macquarie-middy
+    locator: 11 November 2019, regional beer sizes
+  - source: collins-middy
+    locator: Australian/New Zealand beer-glass sense
+  evidence_scope: selected headword sense
+  reasoning: The sources support a named beer-glass size with regional variation. Collins explicitly compares
+    it with half a pint, so that existing comparison must not be called false merely because another source
+    gives 285 mL.
+  triggers_before:
+    MIDDY_BEER:
+      np:
+      - a half-pint of beer
+      - a half pint of beer
+      - a small glass of beer
+  proposed_action: Retain attested half-pint usage. Treat an unspecified small glass as ambiguous if exact
+    volume or region matters; use normal technical-context protection rather than a global conversion rule.
+  limits: The sources do not justify making all half-pints worldwide equivalent. Conversely regional measures
+    alone do not invalidate the colloquial comparison.
+- id: a-yabby
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a yabby
+  concepts_before:
+  - FRESHWATER_CRAYFISH
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: museum-yabby
+    locator: freshwater crayfish regional common names
+  evidence_scope: selected headword sense
+  reasoning: The museum supports yabby as an Australian regional common name for freshwater crayfish, fitting
+    the local common-name substitution.
+  triggers_before:
+    FRESHWATER_CRAYFISH:
+      np:
+      - crawfish
+      - crawdad
+      - freshwater crayfish
+  limits: Crawfish/crawdad localisation does not establish that every overseas species is Cherax destructor.
+    Preserve exact species in zoological or technical contexts.
+- id: a-joey
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a joey
+  concepts_before:
+  - JOEY
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: museum-joey
+    locator: What is a marsupial? young in pouch
+  evidence_scope: selected headword sense
+  reasoning: The museum describes joey as marsupial young, supporting the current baby-kangaroo, wallaby,
+    koala, wombat and possum concepts.
+  triggers_before:
+    JOEY:
+      np:
+      - baby kangaroo
+      - baby wallaby
+      - baby koala
+      - baby wombat
+      - baby possum
+  limits: A kangaroo-only restriction would be unjustified. This does not license every juvenile mammal.
+- id: a-joe-blake
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a Joe Blake
+  concepts_before:
+  - SNAKE
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: collins-joe
+    locator: Australian rhyming-slang snake sense
+  evidence_scope: selected headword sense
+  reasoning: The Australian rhyming-slang snake noun supports the selected literal snake construction.
+  triggers_before:
+    SNAKE:
+      np:
+      - a slithering snake
+  limits: The current trigger does not broadly replace deceptive-person or programming-language uses of snake.
+- id: aggro
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: aggro
+  concepts_before:
+  - AGGRESSIVE
+  frame: predicate_adj
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: collins-aggro
+    locator: Australian/New Zealand adjective sense
+  evidence_scope: selected headword sense
+  reasoning: The Australian/New Zealand adjective sense is aggressive; the stored predicate-adjective mapping
+    fits the person-directed triggers.
+  triggers_before:
+    AGGRESSIVE:
+      predicate_adj:
+      - aggressive ^person
+      - belligerent ^person
+      - combative ^person
+      - confrontational ^person
+  limits: Do not confuse the noun trouble/aggression sense with the selected adjective frame.
+- id: come-a-gutser
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: come a gutser
+  concepts_before:
+  - FALL_OVER
+  frame: vp
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: wordhist-gutser
+    locator: 24 February 2022, historical glosses and quotations
+  evidence_scope: selected headword sense
+  reasoning: The lexical-history research documents both a heavy fall and figurative failure. The selected
+    falling use is supported.
+  triggers_before:
+    FALL_OVER:
+      vp:
+      - fall on the floor
+      - fall onto the floor
+      - fall over !=the|a|an|his|her|my|your|their|our|its|it|him|them|me|us|this|that|these|those|each|one|something|someone|nothing|themselves|himself|herself|myself|yourself|backwards|board
+      - fall down !=the|a|an|his|her|my|your|their|our|its|this|that|these|those|stairs|steps
+      - trip over !=the|a|an|his|her|my|your|their|our|its|it|him|them|me|us|this|that|these|those|each|one|something|someone|nothing|themselves|himself|herself|myself|yourself|bugs|problems|issues
+      - fall flat
+  limits: Historical citations were read through the researcher’s article, not independently re-read in every
+    original newspaper/book. The figurative sense is not therefore false or forbidden.
+- id: within-cooee
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: within cooee
+  concepts_before:
+  - WITHIN_EARSHOT
+  frame: adv
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-c
+    locator: cooee, within cooee
+  evidence_scope: selected headword sense
+  reasoning: ANDC supports within hearing distance and broader figurative proximity. The stored earshot/calling-distance
+    use fits.
+  triggers_before:
+    WITHIN_EARSHOT:
+      adv:
+      - within earshot
+      - within shouting distance
+      - within calling distance
+      - within hailing distance
+  proposed_action: An additional figurative-nearness sense is a possible later extension, not a necessary
+    repair.
+  limits: Do not constrain all usage to literal sound or infer every sort of spatial closeness from one idiom.
+- id: deadset-adj
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: deadset
+  concepts_before:
+  - UTTER
+  frame: adj
+  status_before: active
+  decision: needs_further_evidence
+  evidence:
+  - source: macquarie-deadset-use
+    locator: title and article, 25 June 2020
+  - source: gpsa-koala
+    locator: R4.17 Australian Slang Dictionary V3; KoalaNet 1996–2008 footer
+  evidence_scope: primary adjectival use and component certainty meaning; exact trigger boundary provisional
+  reasoning: The Macquarie article title provides primary adjectival usage, while the republished glossary
+    supports truth/certainty. Neither is a direct professionally edited explanation of every UTTER intensifier
+    trigger in this record.
+  triggers_before:
+    UTTER:
+      adj:
+      - utter
+      - out-and-out
+      - absolute !value|values|zero|majority|terms|power|powers|pitch|humidity|path|paths|address|monarchy|monarch|monarchs|minimum|maximum|temperature|magnitude|threshold|risk|number|numbers|despotism|tyranny|tyrant|tyrants|rule|ruler|rulers|authority|control|sovereignty|dictatorship|dictator|discretion|freedom|liberty|right|rights|silence|priority|necessity|requirement|limit|limits|position|location|reference|error|deviation|advantage|poverty|truth|confidence|trust|ownership|immunity|ban|bans|privilege|and
+  proposed_action: Retain the term and current mapping while retrieving an edited intensifier entry or well-contextualised
+    primary examples. Do not cite the Macquarie article as an etymology or definition of deadset.
+  limits: The apparently relevant article actually explains barrack. A secondary page’s link to it does not
+    establish that page’s asserted deadset history. This is insufficient evidence, not proof the intensifier
+    is wrong.
+- id: fossick-around
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: fossick around
+  concepts_before:
+  - RUMMAGE
+  frame: vp
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-f
+    locator: fossick search/rummage sense
+  evidence_scope: selected headword sense
+  reasoning: ANDC documents searching/rummaging and uses a fossick-around construction, supporting the selected
+    rummage-around mapping.
+  triggers_before:
+    RUMMAGE:
+      vp:
+      - rummage around
+      - rummage about
+      - root around
+      - root about
+  limits: Fossick is not confined to mineral prospecting.
+- id: fossick-through
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: fossick through {np}
+  concepts_before:
+  - RUMMAGE_THROUGH
+  frame: vp
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-f
+    locator: fossick search/rummage sense
+  evidence_scope: headword sense applied to object-bearing construction
+  reasoning: The documented search/rummage sense supports searching through an object, fitting the selected
+    object-bearing construction.
+  triggers_before:
+    RUMMAGE_THROUGH:
+      vp:
+      - rummage through {np}
+      - root through {np}
+      - rifle through {np}
+  limits: This is headword-plus-construction support, not a claim the exact placeholder-bearing engine string
+    is a historical quotation.
+- id: full-on
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: full-on
+  concepts_before:
+  - INTENSE
+  frame: predicate_adj
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: poly-fullon
+    locator: 2022 International Student Guide, slang section
+  evidence_scope: selected headword sense
+  reasoning: The Australian student guide directly explains full-on as intense and uses a demanding-assignments
+    example; the hectic/a-lot-to-handle sense is supported.
+  triggers_before:
+    INTENSE:
+      predicate_adj:
+      - hectic
+      - a lot to deal with
+      - a lot to handle
+  limits: A different dictionary’s enthusiasm-focused sense is not an exhaustive exclusion of this demonstrated
+    use.
+- id: hooley-dooley
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: hooley dooley
+  concepts_before:
+  - AMAZED
+  frame: interjection
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: ausday-hooley
+    locator: H, hooley dooley
+  evidence_scope: selected headword sense
+  reasoning: The public community glossary records the exact construction as a surprise exclamation, matching
+    the selected AMAZED use.
+  triggers_before:
+    AMAZED:
+      interjection:
+      - wow
+      - good heavens
+      - goodness me
+      - holy cow
+      - well I never
+      - golly
+      - gosh
+      - my goodness
+  limits: This is lower-strength community evidence, not an edited history or a frequency claim. It supports
+    preservation without certifying all spelling variants.
+- id: a-king-hit
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a king hit
+  concepts_before:
+  - SUCKER_PUNCH
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-k
+    locator: king-hit
+  - source: green-kinghit
+    locator: king hit noun, senses 1 and 2
+  evidence_scope: selected headword sense
+  reasoning: Both references support hard blows, while Green separately records the surprise-attack sense.
+    The selected sucker-punch use is therefore supported.
+  triggers_before:
+    SUCKER_PUNCH:
+      np:
+      - sucker punch
+      - sucker-punch
+  limits: Not every historical king hit was an unannounced attack. Broader knockout and figurative-misfortune
+    readings may also exist; this is not an exhaustive sense audit.
+- id: ocker-adj
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: ocker
+  concepts_before:
+  - BROAD_AUSSIE
+  frame: adj
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-o
+    locator: ocker, adjectival use
+  evidence_scope: selected headword sense
+  reasoning: ANDC describes adjectival use for a broad stereotyped Australian style, supporting the selected
+    adjective construction.
+  triggers_before:
+    BROAD_AUSSIE:
+      adj:
+      - broad Australian
+      - stereotypically Australian
+  limits: The stereotype does not describe every Australian; noun meanings and social judgement are distinct.
+- id: pash-obj
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: pash {obj}
+  concepts_before:
+  - MAKE_OUT
+  frame: vp
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: cambridge-pash
+    locator: Australian verb, transitive and intransitive
+  evidence_scope: selected headword sense
+  reasoning: Cambridge explicitly records Australian passionate-kissing verbs with or without an object, supporting
+    the selected transitive construction.
+  triggers_before:
+    MAKE_OUT:
+      vp:
+      - make out with {obj}
+      - snog {obj}
+      - kiss {obj} passionately
+  limits: The British crush noun is a different frame. This does not audit every phrasal-verb sense of make
+    out.
+- id: a-porky
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a porky
+  concepts_before:
+  - A_LIE
+  frame: np
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: cambridge-porky
+    locator: noun lie sense
+  - source: gpsa-koala
+    locator: R4.17 Australian Slang Dictionary V3; KoalaNet 1996–2008 footer
+  evidence_scope: selected headword sense
+  reasoning: The noun meaning lie is recorded by Cambridge and in the Australian glossary, supporting the
+    selected fib/lie mapping.
+  triggers_before:
+    A_LIE:
+      np:
+      - a fib
+      - a lie !detector|detectors|down|in|to
+  limits: This is shared English, not an exclusively Australian invention. The physical-description adjective
+    is separate.
+- id: rough-as-guts
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: rough as guts
+  concepts_before:
+  - UNCOUTH
+  frame: predicate_adj
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: miller-rough
+    locator: 2011 thesis, printed page 198, rough as guts survey
+  evidence_scope: selected headword sense
+  reasoning: Primary survey research records rough/uncouth interpretations among Australian respondents, supporting
+    the selected uncouth-person use.
+  triggers_before:
+    UNCOUTH:
+      predicate_adj:
+      - uncouth
+      - crude
+      - coarse
+      - ill-mannered
+      - rough around the edges
+      - badly behaved
+      - unruly
+  limits: The study also has UK respondents, so exclusivity is not established. Bare crude/coarse can describe
+    materials; use ordinary contextual protections rather than assuming every occurrence describes manners.
+- id: do-a-shoey
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: do a shoey
+  concepts_before:
+  - SHOEY
+  frame: vp
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: macquarie-shoey
+    locator: 11 February 2021, shoey
+  evidence_scope: selected headword sense
+  reasoning: The lexicographic publisher supports drinking a beverage from footwear, fitting the stored shoe-drinking
+    triggers.
+  triggers_before:
+    SHOEY:
+      vp:
+      - drink out of a shoe
+      - drink from a shoe
+      - drink beer out of a shoe
+      - drink champagne out of a shoe
+  limits: Alcohol is usual, not compulsory in the source; do not add an alcohol-only constraint. Celebration
+    and motorsport are common contexts, not necessary conditions.
+- id: sprung
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: sprung
+  concepts_before:
+  - CAUGHT_OUT
+  frame: predicate_adj
+  status_before: active
+  decision: selected_sense_supported
+  evidence:
+  - source: vu-slang
+    locator: blowie; ugg boots; sprung
+  - source: gpsa-koala
+    locator: R4.17 Australian Slang Dictionary V3; KoalaNet 1996–2008 footer
+  evidence_scope: selected headword sense
+  reasoning: The Australian glossaries support being caught doing something wrong, fitting the caught-out
+    sense.
+  triggers_before:
+    CAUGHT_OUT:
+      predicate_adj:
+      - caught red-handed
+      - caught in the act
+  limits: Caught in the act can be broader outside wrongdoing. The examples do not prove every broader humorous
+    application impossible.

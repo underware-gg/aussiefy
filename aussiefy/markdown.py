@@ -446,7 +446,7 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
     spans = eligible
     from .markup import mask
     from .text import sentences, tokenize
-    from .context import sentence_contexts
+    from .context import sentence_contexts, text_mood
 
     reading = mask(source, "markdown")
     source_sentences = [sent for sent in sentences(tokenize(reading.text)) if any(t.is_word for t in sent)]
@@ -455,6 +455,7 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
     starts = [a for a, _ in boundaries]
     ends = [b for _, b in boundaries]
     state = TextState()
+    mood = text_mood(prose)
     written = frozenset(re.findall(r"(?<![\w'’])[a-z][a-z'’-]*", prose))
     for index, span in enumerate(spans):
         if span.start > source_at:
@@ -469,7 +470,7 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
                             last >= 0 and boundaries[last][1] <= span.end,
                             index == len(spans) - 1, quiet=reading.quiet_at(span.start),
                             last_contexts=source_contexts[last] if last >= 0 else frozenset(),
-                            written=written)
+                            written=written, mood=mood)
         r = (unit or translator.translate)(source[span.start:span.end], level=policy.level, seed=policy.seed,
                                  vulgarity=policy.vulgarity, variety=policy.variety, registers=policy.registers,
                                  regions=policy.regions, unlock=policy.unlock, embedder=policy.embedder,

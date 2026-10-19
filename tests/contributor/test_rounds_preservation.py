@@ -22,6 +22,7 @@ def prepared(tmp_path, data_copy):
             "not_in": ["technical"],
             "person": True,
             "neutral_person": True,
+            "unless_after": ["for"],
         },
     }
     (rd / "verify" / "verdicts-a.yaml").write_text(yaml.safe_dump([verdict]))
@@ -41,6 +42,7 @@ def test_full_metadata_and_explicit_entryless_guard(prepared):
     d = p.write(data)
     assert d.concepts["ZZ_META"].person and d.concepts["ZZ_META"].neutral_person
     assert d.concepts["ZZ_META"].not_in == {"technical"}
+    assert d.concepts["ZZ_META"].unless_after == ("for",)
     assert "ZZ_GUARD" in d.concepts and not d.idioms_for(("ZZ_GUARD",))
     assert p.new_concepts["ZZ_META"]["not_in"] == ["technical"]
 
@@ -81,6 +83,19 @@ def test_fix_for_existing_concept_can_replace_triggers(prepared):
     d = plan(config, data).write(data)
     assert d.concepts["TIRED"].not_in == {"technical"}
     assert d.concepts["TIRED"].triggers == {"predicate_adj": ("zzexhausted",)}
+
+
+@pytest.mark.parametrize("patch,expected", [({}, ("for", "to")),
+    ({"unless_after": ["for"]}, ("for",)), ({"unless_after": []}, ())])
+def test_concept_fixes_preserve_or_explicitly_replace_meaning_constraints(prepared, patch, expected):
+    config, data = prepared
+    config.concept_fixes = {"HUNGRY": {"description": "Reviewed appetite.", **patch}}
+    d = plan(config, data).write(data)
+    assert d.concepts["HUNGRY"].description == "Reviewed appetite."
+    assert d.concepts["HUNGRY"].unless_after == expected
+    after = (data / "concepts.yaml").read_text()
+    assert plan(config, data).write(data).concepts["HUNGRY"].unless_after == expected
+    assert (data / "concepts.yaml").read_text() == after
 
 
 def test_second_sense_requires_explicit_permission_and_a_new_concept(prepared):

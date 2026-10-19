@@ -5,10 +5,12 @@ uses them to decide which garnish fits, lint and the harness to explain it."""
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 
+from . import morph
 from .morph import is_past
 from . import pos
-from .text import QUOTES, Token
+from .text import INLINE_CHAR, QUOTES, Token
 
 # not "must" ("nobody must know it") or "fair" (also the noun: "going to the fair")
 OPINION_WORDS = {"reckon", "reckons", "think", "thinks", "believe", "believes", "should", "ought",
@@ -20,6 +22,73 @@ CLAUSE_JOINS = {"and", "but", "until", "till", "when", "while", "so", "then", "b
 
 FINITE_HINTS = {"am", "is", "are", "was", "were", "have", "has", "had", "do", "does", "did", "will", "would", "can",
                 "could", "shall", "should", "may", "might", "must", "not", "i", "we", "they", "he", "she", "you"}
+
+CLAUSE_END = {".", "!", "?", ";", ":"}
+AUXILIARIES = (morph.BE_FORMS | morph.HAVE_FORMS | morph.DO_FORMS
+               | {"will", "would", "can", "could", "shall", "should", "may", "might", "must"})
+NEGATION = {"not", "n't", "never", "no", "without", "nobody", "nothing", "neither", "none"}
+DEGREE_PREFIXES = tuple(tuple(words.split()) for words in morph.INTENSIFIERS if " " in words)
+
+
+@dataclass(frozen=True)
+class FollowingContext:
+    word: str | None = None
+    known: bool = True
+
+
+def following_context(tokens: list[Token], end: int, complete: bool = True) -> FollowingContext:
+    """The next clause word, an established boundary, or context hidden by markup."""
+    for i in range(end, len(tokens)):
+        token = tokens[i]
+        if token.text in CLAUSE_END:
+            return FollowingContext()
+        if INLINE_CHAR.match(token.text):
+            return FollowingContext(known=False)
+        if token.is_word:
+            return FollowingContext(token.norm)
+    return FollowingContext(known=complete)
+
+
+def positive_context(tokens: list[Token], start: int, end: int) -> bool:
+    while start > 0 and tokens[start - 1].text not in CLAUSE_END and tokens[start - 1].norm not in {"and", "but", "or"}:
+        start -= 1
+    return not any(t.norm in NEGATION for t in tokens[start:end])
+
+
+def verb_subject(tokens: list[Token], start: int, tags: list[str] | None) -> Token | None:
+    """A local subject through auxiliaries and adverbs; never through another lexical verb or clause."""
+    j = start - 1
+    while j >= 0:
+        token = tokens[j]
+        if token.norm in morph.PRONOUNS or token.norm in morph.PERSON_INDEFINITES:
+            return token
+        if token.norm in AUXILIARIES or token.norm in {"not", "n't", "never"} or (
+                tags is not None and tags[j] in {"RB", "RBR", "RBS"}):
+            j -= 1
+            continue
+        if tags is not None and tags[j] in pos.NOUNS | pos.NAMES:
+            return token
+        return None
+    return None
+
+
+def noun_argument(capture: Token, tokens: list[Token], tags: list[str]) -> bool:
+    """A nominal or gerund-headed argument, rather than an adjective/adverb mistaken for an object."""
+    start = capture.i - tokens[0].i
+    end = start
+    while end < len(tokens) and tokens[end].end <= capture.end:
+        end += 1
+    phrase = tags[start:end]
+    words = tuple(t.norm for t in tokens[start:end])
+    # A short degree phrase can be mistagged as nominal ("a bit harder"). Leave ambiguous heads plain.
+    if any(len(words) == len(prefix) + 1 and words[:len(prefix)] == prefix for prefix in DEGREE_PREFIXES):
+        return False
+    nominal = pos.NOUNS | pos.NAMES | {"PRP", "WP", "CD"}
+    head = next((tag for tag in phrase if tag not in {"RB", "RBR", "RBS"}), None)
+    return (bool(phrase) and phrase[-1] in nominal
+            or head == "VBG"
+            or len(phrase) == 1 and tokens[start].norm in {
+                "this", "that", "these", "those", "some", "any", "both", "all", "another", "each", "either", "neither"})
 
 
 def sentence_contexts(sent: list[Token], tags: list[str] | None = None) -> set[str]:
@@ -145,7 +214,7 @@ OFF_MOOD_WEIGHT = 0.25   # a riff against the text's mood is a quarter as likely
 CLOSING_TONES_FOR = {"light": {"comic", "plain", "grim"}, "dark": {"plain", "grim"}, "solemn": {"grim"}}
 
 
-def riff_weight(tone: str, mood: str) -> float:
+def tone_weight(tone: str, mood: str) -> float:
     return 1.0 if tone in RIFF_TONES_FOR[mood] else OFF_MOOD_WEIGHT
 
 

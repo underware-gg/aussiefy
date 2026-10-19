@@ -1,0 +1,714 @@
+baseline: ee46955aefb1a2181ca80e64f78e7f71d8209e10
+checked: '2026-10-19'
+previous_ledger: research/slang-meanings-2026-10-18/audit.yaml
+inventory_entries: 1257
+reviewed_entries: 30
+decisions_count:
+  selected_sense_supported: 21
+  correct_mapping_or_missing_sense: 7
+  needs_further_evidence: 2
+inventory_files:
+- path: aussiefy/data/entries/classics.yaml
+  sha256: 0f9ff089d38738375043d6a9a425b240664ad1925653a431f7b33786cacd9fc9
+- path: aussiefy/data/entries/fairdinkum.yaml
+  sha256: bee584203e6c16f70b03a3e072437ea284ec7487be7747495effd9c9207ab6d8
+- path: aussiefy/data/entries/gapfill.yaml
+  sha256: 66940cb00ce5e694ae898055ea565a66d55e705cd9485a45ed60fca23e274a35
+- path: aussiefy/data/entries/idioms.yaml
+  sha256: 1e028599e3a8a70c670a13d77e04abc67b9c1cbce035591c8fefb9af8a8ef325
+- path: aussiefy/data/entries/phrases.yaml
+  sha256: 61d9bb5f2b6e9da29fac6bc7af54ba8c5e33d5fefc28323da40aaaccaeff332e
+scope: Thirty previously unaudited baseline entries selected for semantic ambiguity, context loss and constructional
+  risk. Recommendations only; no dictionary edits. Not an exhaustive audit of triggers, register, region, inflection
+  or every sense.
+sources:
+  andc-n:
+    url: https://history.cass.anu.edu.au/centres/andc/australian-words-n
+    publisher: Australian National Dictionary Centre, ANU
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Ned Kelly; no worries
+    access: Public page read through browser
+  andc-o:
+    url: https://history.cass.anu.edu.au/centres/andc/australian-words-o
+    publisher: Australian National Dictionary Centre, ANU
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: oil
+    access: Public page read through browser
+  andc-p:
+    url: https://history.cass.anu.edu.au/centres/andc/australian-words-p
+    publisher: Australian National Dictionary Centre, ANU
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: pineapple; possum
+    access: Public page read through browser
+  andc-s:
+    url: https://history.cass.anu.edu.au/centres/andc/australian-words-s
+    publisher: Australian National Dictionary Centre, ANU
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: sledge; sleepout
+    access: Public page read through browser
+  andc-w:
+    url: https://history.cass.anu.edu.au/centres/andc/australian-words-w
+    publisher: Australian National Dictionary Centre, ANU
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: wobbly; wowser
+    access: Public page read through browser
+  collins-swear:
+    url: https://www.collinsdictionary.com/dictionary/english/swear-blind
+    publisher: Collins Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: swear blind
+    access: Publisher search-index text read; includes emphatic assertion and US equivalent
+  cambridge-start:
+    url: https://dictionary.cambridge.org/dictionary/english/kick-off
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: START sense
+    access: Publisher search-index article text read
+  cambridge-knock:
+    url: https://dictionary.cambridge.org/us/dictionary/english/knock-together-up?topic=creating-and-producing
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: knock something together/up
+    access: Publisher search-index article text read
+  oxford-knock:
+    url: https://www.oxfordlearnersdictionaries.com/us/definition/english/knock-together
+    publisher: Oxford Advanced Learner's Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: sense 1
+    access: Publisher search-index article text read
+  macquarie-mates:
+    url: https://www.macquariedictionary.com.au/mateship-and-friendship/
+    publisher: Macquarie Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Mateship and friendship, 20 March 2017
+    access: Publisher search-index article text read
+  macquarie-mates-2021:
+    url: https://www.macquariedictionary.com.au/true-blue-aussie-mateship/
+    publisher: Macquarie Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: True blue Aussie mateship, 10 August 2021
+    access: Publisher search-index article text read; same publisher as 2017 article
+  aiatsis-mob:
+    url: https://aiatsis.gov.au/whats-new/podcasts/understanding-native-title
+    publisher: AIATSIS
+    kind: primary interview; contextual use
+    checked: '2026-10-19'
+    locator: Transcript near 00:04:00, question about mob and origin
+    access: Primary interview transcript read in publisher search index
+  oxford-bugger:
+    url: https://www.oxfordlearnersdictionaries.com/definition/english/bugger_1
+    publisher: Oxford Advanced Learner's Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: sense 2
+    access: Publisher search-index article text read
+  cambridge-bugger:
+    url: https://dictionary.cambridge.org/us/dictionary/english/bugger?q=bugger_1
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: sympathetic-person sense
+    access: Publisher search-index article text read; unsuffixed page returned HTTP 403
+  oxford-bastard:
+    url: https://www.oxfordlearnersdictionaries.com/us/definition/english/bastard
+    publisher: Oxford Advanced Learner's Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: personal reference senses
+    access: Publisher search-index article text read
+  cambridge-brave:
+    url: https://dictionary.cambridge.org/us/dictionary/english/brave?q=brave_1
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: adjective
+    access: Publisher search-index article text read
+  cambridge-for-nothing:
+    url: https://dictionary.cambridge.org/us/dictionary/english/for-nothing
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: payment and purposeless/resultless senses
+    access: Publisher search-index article text read; direct browser fetch returned HTTP 403
+  cambridge-bugger-all:
+    url: https://dictionary.cambridge.org/us/dictionary/english/bugger-all
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: bugger all
+    access: Publisher search-index article text read
+  oxford-bugger-all:
+    url: https://www.oxfordlearnersdictionaries.com/us/definition/english/bugger-all
+    publisher: Oxford Advanced Learner's Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: bugger all
+    access: Publisher search-index article text read
+  collins-head:
+    url: https://www.collinsdictionary.com/dictionary/english/pull-your-head-in
+    publisher: Collins Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: pull your head in
+    access: Publisher search-index article text read
+  farlex-head:
+    url: https://idioms.thefreedictionary.com/pulling%2Bhead%2Bin
+    publisher: Farlex Dictionary of Idioms
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: pull (one's) head in
+    access: Publisher search-index article text read
+  cambridge-yarn:
+    url: https://dictionary.cambridge.org/us/dictionary/english/yarn?topic=accounts-and-stories
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: STORY sense
+    access: Publisher search-index article text read
+  collins-sleepout:
+    url: https://www.collinsdictionary.com/dictionary/english/sleep-out
+    publisher: Collins Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Australian/New Zealand noun sense 3
+    access: Publisher search-index article text read
+  macquarie-wowser:
+    url: https://www.macquariedictionary.com.au/whoa-there-wowser/
+    publisher: Macquarie Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Whoa there, wowser!, 6 May 2020
+    access: Publisher search-index article text read
+  macquarie-piker:
+    url: https://www.macquariedictionary.com.au/are-you-a-piker/
+    publisher: Macquarie Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: Are you a piker?, 25 February 2019
+    access: Publisher search-index article text read
+  cambridge-face:
+    url: https://dictionary.cambridge.org/us/dictionary/english/off-face?topic=drunkenness-and-sobriety
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: off your face
+    access: Publisher search-index article text read
+  vu-slang:
+    url: https://www.vu.edu.au/about-vu/news-events/vu-blog/australian-slang-dictionary
+    publisher: Victoria University
+    kind: Australian university public glossary; explanatory, not historical authority
+    checked: '2026-10-19'
+    locator: 'O: old mate; N: no worries'
+    access: Publisher search-index article text read
+  slang-old-mate:
+    url: https://slang.com.au/o/old-mate/
+    publisher: Aussie Slang Dictionary
+    kind: community glossary; corroboration
+    checked: '2026-10-19'
+    locator: Old Mate
+    access: Publisher search-index article text read
+  collins-quid:
+    url: https://www.collinsdictionary.com/dictionary/english/not-the-full-quid
+    publisher: Collins Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: not the full quid
+    access: Publisher search-index article text read
+  oxford-quid:
+    url: https://www.oxfordlearnersdictionaries.com/definition/english/quid
+    publisher: Oxford Advanced Learner's Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: 'Idioms: not the full quid'
+    access: Publisher search-index article text read
+  macquarie-short:
+    url: https://www.macquariedictionary.com.au/are-you-a-couple-of-lamingtons-short-of-a-cwa-meeting/
+    publisher: Macquarie Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: 13 October 2020; bangers/barbie shortfall construction
+    access: Public article read through browser; related wording, not exact snags form
+  fairdinkum-snags:
+    url: https://fairdinkumslang.au/slang/a-few-snags-short-of-a-barbie
+    publisher: Fair Dinkum
+    kind: secondary slang glossary; exact wording support, historical claims unverified
+    checked: '2026-10-19'
+    locator: A Few Snags Short of a Barbie
+    access: Publisher search-index article text read; cited Green's record not independently retrieved
+  cambridge-scoff:
+    url: https://dictionary.cambridge.org/dictionary/english/scoff
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: EAT sense; full construction in example
+    access: Publisher search-index article text read
+  oxford-flake:
+    url: https://www.oxfordlearnersdictionaries.com/definition/english/flake-out
+    publisher: Oxford Advanced Learner's Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: sense 1
+    access: Publisher search-index article text read
+  cambridge-flake:
+    url: https://dictionary.cambridge.org/us/dictionary/english/flake-out
+    publisher: Cambridge Dictionary
+    kind: lexicographic reference
+    checked: '2026-10-19'
+    locator: UK sense
+    access: Publisher search-index article text read
+  greens-temple-black-tide:
+    url: https://greensdictofslang.com/search/quotation?biblid=9250
+    publisher: Green's Dictionary of Slang
+    kind: primary literary quotation reproduced in lexicographic reference
+    checked: '2026-10-19'
+    locator: 1999 P. Temple, Black Tide (2012 ebook), quotation indexed under bugger all, n.
+    access: Exact-construction quotation read in publisher search index; direct browser fetch returned HTTP
+      403. Full novel not reviewed.
+decisions:
+- id: swear-blind
+  file: aussiefy/data/entries/idioms.yaml
+  form: swear blind
+  concepts_before:
+  - RESOLVE
+  frame: vp
+  decision: selected_sense_supported
+  evidence:
+  - source: collins-swear
+    locator: emphatic assertion; swear up and down
+  reasoning: The RESOLVE concept name is misleading, but its actual assertion triggers fit. Do not change based
+    on the identifier alone.
+  limits: This is shared British English, not an exclusively Australian coinage. Preserve the following that-clause
+    when rendering.
+- id: kick-off
+  file: aussiefy/data/entries/idioms.yaml
+  form: kick off
+  concepts_before:
+  - FOUND
+  frame: vp
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: cambridge-start
+    locator: START
+  reasoning: An activity can begin; a physical object is assembled. FOUND currently conflates those operations.
+  proposed_action: Move this entry to a narrow START_ACTIVITY sense. Do not map 'put together a chair' or literal
+    'bring forth a child' to kick off. Preserve the expression.
+- id: knock-together
+  file: aussiefy/data/entries/idioms.yaml
+  form: knock together
+  concepts_before:
+  - CONSTRUCT
+  - FOUND
+  frame: vp
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: cambridge-knock
+    locator: phrasal verb
+  - source: oxford-knock
+    locator: sense 1
+  reasoning: Its quick, rough assembly sense fits CONSTRUCT examples, but broad FOUND permits neutral creation
+    and birth.
+  proposed_action: Remove FOUND from this entry; review neutral 'put together' separately from explicitly hasty
+    assembly. Retain cobble/slap/throw together mappings.
+  limits: A neutral assembly paraphrase can be an intentional embellishment; classify that as stylistic amplification
+    rather than proof the expression is false.
+- id: mateship
+  file: aussiefy/data/entries/phrases.yaml
+  form: mateship
+  concepts_before:
+  - DEVOTION
+  frame: np
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: macquarie-mates
+    locator: relationship and mutual reliance
+  - source: macquarie-mates-2021
+    locator: friendship bond
+  reasoning: Peer solidarity is narrower than every kind of devotion or loyalty.
+  proposed_action: Use a COMRADESHIP sense with comradeship/camaraderie and explicitly peer-qualified solidarity.
+    Keep devotion to religion, a cause, a brand or a monarch plain without contextual evidence.
+  limits: The two Macquarie pages are one publisher, not independent authorities. Do not infer a mandatory
+    male-only restriction from historical discussion.
+- id: mob
+  file: aussiefy/data/entries/phrases.yaml
+  form: mob
+  concepts_before:
+  - NATION
+  frame: np
+  decision: needs_further_evidence
+  evidence:
+  - source: aiatsis-mob
+    locator: identity linked to family, place, language and Country
+  reasoning: Context supports an Aboriginal English group reference. Bare tribe is not enough to establish
+    that context in every document.
+  proposed_action: Keep the term. Shape whether bare 'tribe' should remain an embellished paraphrase, receive
+    a meaning gate, or require a contextual trigger. Do not replace it globally with a narrower cultural classification.
+  limits: Primary usage is positive evidence for one context, not a dictionary definition or disproof of general
+    Australian group uses. No automatic change recommended from this evidence alone.
+- id: poor-buggers
+  file: aussiefy/data/entries/phrases.yaml
+  form: poor buggers
+  concepts_before:
+  - DEAD_PEOPLE
+  frame: np
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: oxford-bugger
+    locator: sense 2
+  - source: cambridge-bugger
+    locator: sympathetic person
+  reasoning: A sympathetic reference does not itself identify people as dead.
+  proposed_action: Separate sympathetic people from DEAD_PEOPLE. Keep 'poor buggers' as a writer option or
+    map explicit pity-bearing phrases. It must not erase death information from 'the dead' without the surrounding
+    context carrying it.
+  limits: The component is attested; complete sympathetic phrase examples exist. This is a trigger-fit issue,
+    not a claim the phrase is invented.
+- id: brave-bastards
+  file: aussiefy/data/entries/phrases.yaml
+  form: brave bastard
+  concepts_before:
+  - SOLDIERS
+  frame: np
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: oxford-bastard
+    locator: personal reference senses
+  - source: cambridge-brave
+    locator: adjective
+  reasoning: Adding brave asserts courage; replacing a soldier also drops their occupation. Neither component
+    establishes soldier as its lexical meaning.
+  proposed_action: Retain the expression for explicitly courageous people or writer use. Remove unqualified
+    soldier/servicewoman/infantryman/fallen-soldier triggers unless a documented embellishment rule intentionally
+    permits both changes.
+  limits: Compositional phrase; no source found treating it as an established synonym for soldier. Absence
+    of that sense is not proof nobody uses the phrase about soldiers.
+- id: for-nothin
+  file: aussiefy/data/entries/phrases.yaml
+  form: for nothin'
+  concepts_before:
+  - IN_VAIN
+  frame: adv
+  decision: selected_sense_supported
+  evidence:
+  - source: cambridge-for-nothing
+    locator: resultless and purposeless senses
+  reasoning: The abbreviated form keeps the ordinary for-nothing construction.
+  limits: Shared English; word-final spelling is phonetic styling. The payment sense is also real, so do not
+    claim every occurrence means failed effort.
+- id: for-sweet-bugger-all
+  file: aussiefy/data/entries/phrases.yaml
+  form: for sweet bugger-all
+  concepts_before:
+  - IN_VAIN
+  frame: adv
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: cambridge-bugger-all
+    locator: quantity sense
+  - source: oxford-bugger-all
+    locator: noun
+  - source: greens-temple-black-tide
+    locator: Unproductive outing expressed with for sweet bugger all
+  reasoning: The exact construction is attested for an unproductive outing, supporting a non-monetary wasted-result
+    reading as well as the component quantity sense. The remaining concern is ambiguous causeless-action triggers,
+    not a restriction to payment or reward.
+  proposed_action: Preserve the established wasted-result use, including appropriate 'in vain' and 'to no avail'
+    contexts. Review broad 'for no reason' separately because it can describe an unexplained cause rather than
+    an unproductive result; retain the input where context does not resolve that ambiguity. No payment-only
+    remapping is justified.
+  limits: The literary quotation supports the complete expression in one non-monetary context. It does not
+    establish interchangeability with every IN_VAIN trigger. The seven-entry correction count includes this
+    narrower trigger-review recommendation, not a finding that the demonstrated wasted-result sense is wrong.
+- id: pull-your-head-in
+  file: aussiefy/data/entries/phrases.yaml
+  form: pull your head in
+  concepts_before:
+  - MIND_OWN_BUSINESS
+  frame: imperative
+  decision: selected_sense_supported
+  evidence:
+  - source: collins-head
+    locator: imperative quieting
+  - source: farlex-head
+    locator: non-interference imperative
+  reasoning: The current imperative owner covers stopping intrusive or inappropriate behaviour.
+  proposed_action: Optionally add a separate quieting sense without treating every request for silence as a
+    rebuke.
+  limits: The checked meanings overlap but are not exhaustive; literal head movements must remain literal.
+- id: stir-the-possum
+  file: aussiefy/data/entries/gapfill.yaml
+  form: stir the possum
+  concepts_before:
+  - STIR
+  frame: vp
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-p
+    locator: 'possum: stir the possum'
+  reasoning: Current trouble/debate gloss and STIR triggers represent a documented provocative use.
+  proposed_action: Optional new narrow triggers for provoking debate/controversy or enlivening discussion would
+    capture its non-hostile uses.
+  limits: Do not equate every interesting conversation with provocation. Current mapping is supported, not
+    an urgent defect.
+- id: no-worries
+  file: aussiefy/data/entries/phrases.yaml
+  form: no worries
+  concepts_before:
+  - NO_PROBLEM
+  frame: interjection
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-n
+    locator: no worries
+  - source: vu-slang
+    locator: N
+  reasoning: Reassurance, absence of trouble and acknowledgement of thanks fit the existing interjection triggers.
+- id: game-as-ned-kelly
+  file: aussiefy/data/entries/idioms.yaml
+  form: game as Ned Kelly
+  concepts_before:
+  - BRAVE
+  frame: predicate_adj
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-n
+    locator: 'Ned Kelly: as game as Ned Kelly'
+  reasoning: The BRAVE mapping fits the comparison.
+  limits: The source also permits a foolhardy edge; bravery attestation does not require adding recklessness
+    to every translation.
+- id: the-dinkum-oil
+  file: aussiefy/data/entries/classics.yaml
+  form: the dinkum oil
+  concepts_before:
+  - THE_REAL_STORY
+  frame: np
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-o
+    locator: oil; dinkum oil
+  reasoning: Reliable inside information fits THE_REAL_STORY.
+- id: the-good-oil
+  file: aussiefy/data/entries/classics.yaml
+  form: the good oil
+  concepts_before:
+  - THE_REAL_STORY
+  frame: np
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-o
+    locator: oil; good oil
+  reasoning: Useful reliable information fits THE_REAL_STORY.
+  limits: Two entries share a source and meaning family; they are not two independently attested origins.
+- id: a-yarn
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a yarn
+  concepts_before:
+  - TALL_TALE
+  frame: np
+  decision: selected_sense_supported
+  evidence:
+  - source: cambridge-yarn
+    locator: STORY
+  reasoning: Story/anecdote mapping is supported.
+  limits: A yarn can be entertaining without being fabricated. TALL_TALE is a concept label, not evidence every
+    yarn is a lie.
+- id: a-sleep-out
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a sleep-out
+  concepts_before:
+  - SLEEPING_PORCH
+  frame: np
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: andc-s
+    locator: sleepout
+  - source: collins-sleepout
+    locator: noun sense 3
+  reasoning: Sleeping use distinguishes a sleep-out from an arbitrary enclosed porch.
+  proposed_action: Remove or qualify the bare 'enclosed porch' trigger. Keep sleeping porch and add explicit
+    porch/verandah used as a bedroom. Broaden the gloss to allow non-enclosed accommodation used for sleeping.
+- id: sledge
+  file: aussiefy/data/entries/classics.yaml
+  form: sledge {obj}
+  concepts_before:
+  - MOCK
+  frame: vp
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-s
+    locator: sledge
+  reasoning: The documented extension beyond cricket supports general criticism/ridicule triggers, although
+    the current gloss is sport-focused.
+  proposed_action: Clarify the gloss to include the wider critical/ridiculing sense.
+  limits: This is not evidence that all teasing carries sporting intent.
+- id: sledging
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: sledging
+  concepts_before:
+  - TRASH_TALK
+  frame: np
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-s
+    locator: sledge
+  reasoning: The sports trash-talk noun is supported by the same lexical family.
+- id: rough-end-of-the-pineapple
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: get the rough end of the pineapple
+  concepts_before:
+  - RAW_DEAL
+  frame: vp
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-p
+    locator: pineapple
+  reasoning: RAW_DEAL and its current unfair-treatment triggers fit.
+- id: a-wowser
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a wowser
+  concepts_before:
+  - KILLJOY
+  frame: np
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-w
+    locator: wowser
+  - source: macquarie-wowser
+    locator: public article
+  reasoning: The KILLJOY mapping fits the documented range.
+  limits: Puritanical disapproval is a characteristic use; Macquarie also supports the broader spoilsport sense.
+    Do not over-narrow merely to abstainers.
+- id: a-piker
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: a piker
+  concepts_before:
+  - FLAKE
+  frame: np
+  decision: selected_sense_supported
+  evidence:
+  - source: macquarie-piker
+    locator: opting out of arrangements
+  reasoning: The social unreliability/no-show sense supports FLAKE.
+  limits: The unrelated small-stakes gambler sense need not be added to the current concept.
+- id: pike-out
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: pike out
+  concepts_before:
+  - BACK_OUT
+  frame: vp
+  decision: selected_sense_supported
+  evidence:
+  - source: macquarie-piker
+    locator: phrasal variants and opting out
+  reasoning: Pulling out of an arrangement fits BACK_OUT.
+- id: off-their-face
+  file: aussiefy/data/entries/idioms.yaml
+  form: off {poss} face
+  concepts_before:
+  - DRUNK
+  frame: predicate_adj
+  decision: selected_sense_supported
+  evidence:
+  - source: cambridge-face
+    locator: idiom
+  reasoning: The selected extreme intoxication sense supports DRUNK.
+  limits: Source also includes drugs. Its severity should remain distinguishable from mildly tipsy triggers
+    through existing intensity selection; no exclusive-Australian origin claim.
+- id: old-mate
+  file: aussiefy/data/entries/fairdinkum.yaml
+  form: old mate
+  concepts_before:
+  - SOME_BLOKE
+  frame: np
+  decision: selected_sense_supported
+  evidence:
+  - source: vu-slang
+    locator: O
+  - source: slang-old-mate
+    locator: Old Mate
+  reasoning: A contextually identifiable third person, including a stranger, fits SOME_BLOKE.
+  proposed_action: 'Clarify gloss: the person need not be an actual friend or a complete stranger.'
+  limits: Source usage is wider than the current narrow trigger set; keeping a safe subset is valid.
+- id: not-the-full-quid
+  file: aussiefy/data/entries/idioms.yaml
+  form: not the full quid
+  concepts_before:
+  - STUPID
+  frame: predicate_adj
+  decision: selected_sense_supported
+  evidence:
+  - source: collins-quid
+    locator: idiom
+  - source: oxford-quid
+    locator: idiom
+  reasoning: The selected STUPID sense is directly supported.
+  proposed_action: Prefer a clear intelligence gloss over ambiguous all-there wording; retain the term.
+  limits: Do not infer every mental-health diagnosis is an interchangeable trigger.
+- id: snags-short-of-a-barbie
+  file: aussiefy/data/entries/idioms.yaml
+  form: a few snags short of a barbie
+  concepts_before:
+  - STUPID
+  - CRAZY
+  frame: predicate_adj
+  decision: needs_further_evidence
+  evidence:
+  - source: macquarie-short
+    locator: related bangers/barbie construction
+  - source: fairdinkum-snags
+    locator: exact snags form
+  reasoning: The stupidity comparison is supported by an exact secondary record and related primary lexicographic
+    construction. Broad CRAZY coverage needs stronger sense evidence.
+  proposed_action: Preserve active STUPID use. Obtain Green's or Hansard citation before claiming the exact
+    form's history; consider restricting unsupported CRAZY senses only after checking those records.
+  limits: No finding that the expression is fabricated. The unavailable exact primary citation and neighbouring
+    construction cannot prove every CRAZY trigger fits.
+- id: chuck-a-wobbly
+  file: aussiefy/data/entries/idioms.yaml
+  form: chuck a wobbly
+  concepts_before:
+  - LOSE_TEMPER
+  frame: vp
+  decision: selected_sense_supported
+  evidence:
+  - source: andc-w
+    locator: 'wobbly: to chuck a wobbly'
+  reasoning: LOSE_TEMPER fits the documented temper outburst sense.
+- id: scoff-the-lot
+  file: aussiefy/data/entries/idioms.yaml
+  form: scoff the lot
+  concepts_before:
+  - EAT_IT_ALL
+  frame: vp
+  decision: selected_sense_supported
+  evidence:
+  - source: cambridge-scoff
+    locator: EAT; full construction in example
+  reasoning: The source attests the complete construction for eager consumption of all the food.
+  limits: Eagerness/speed is added relative to neutral eat-it-all. This is stylistic intensity, not a new claim
+    the expression is uniquely Australian.
+- id: flake-out
+  file: aussiefy/data/entries/idioms.yaml
+  form: flake out
+  concepts_before:
+  - FALL_ASLEEP
+  frame: vp
+  decision: selected_sense_supported
+  evidence:
+  - source: oxford-flake
+    locator: sense 1
+  - source: cambridge-flake
+    locator: UK sense
+  reasoning: The sleep/exhaustion sense fits the selected FALL_ASLEEP usage.
+  limits: It adds tiredness relative to neutral sleep and also has an unreliability sense elsewhere; neither
+    invalidates the selected sense.

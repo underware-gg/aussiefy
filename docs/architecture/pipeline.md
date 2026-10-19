@@ -21,11 +21,18 @@ has no slang or level logic of its own.
    from every entry's `replaces`. Strewth, a match on an entry's own paraphrase earns that entry a bonus. Well, a fallback
    compares predicate spans the triggers missed against those paraphrases by similarity \(`embed.py`;
    character trigrams by default\).
+   Meaning restrictions declared by each concept apply to all three matching routes before overlap
+   resolution. Shared clause readin' in `context.py` supplies complement boundaries, local auxiliary\-chain
+   subjects'n noun\-argument shape, using the sentence's existin' POS tags.
 3. **Select** (`select.py`). Filter candidates by concept, frame compatibility, level, vulgarity,
    register, region, status'n slot availability. Fair dinkum, a clause idiom needs a subject, and a person idiom needs
    a person \("the plan is crazy" never gets a roo loose in its top paddock\). Each surviving candidate is
    weighted by intensity fit, direct match, source count, repeat penalty'n the level's probability for
-   its class, with a lean towards rude candidates set by the vulgarity. Anyway, one seeded roll decides whether to
+   its class, with a lean towards rude candidates set by the vulgarity'n the existin' tone/mood fit.
+   Forms must preserve captured arguments; a syntactically available slotless variant can't discard an
+   object. Tone fit is applied before variety limits, using the same weight as riffs: off\-mood candidates
+   receive a quarter weight, while existin' hard exclusions \(such as comic terms in solemn prose\) remain.
+   Anyway, one seeded roll decides whether to
    substitute'n another picks the candidate.
 4. **Realise** (`realise.py`, `morph.py`). Fill slots'n fix agreement: "are you crazy" becomes "do you
    have a kangaroo loose in your top paddock", "was" becomes "had", "lost his temper" becomes "spat the
@@ -61,6 +68,11 @@ has no slang or level logic of its own.
 A pass observer \(`PassObserver`) can watch all five stages without changin' them. Mind ya, the changes builder
 (`changes.py`) uses one to render each alternative where it stands, in the same pass
 ([changes](../functional/changes.md), [DD-029](decisions/dd-029-changes-builder.md)).
+Plans prefer the selected entry, then the other entries by these same contextual weights. Within each
+optional image group, mood\-fittin' suggestions come first. Anyway, lookup remains a dictionary search rather than
+a guarantee that a result can replace a span in a sentence.
+Strict Markdown units share one mood resolved from the document's eligible prose, so a paragraph or
+formattin' boundary can't reset solemn prose to a light tone. Opaque content doesn't supply mood cues.
 
 With `--rewrite`, a sentence the dictionary couldn't carry goes to an optional rewriter after its
 substitutions'n before its garnish; with `--surface`, the finished text goes to Claude as a final pass \(see

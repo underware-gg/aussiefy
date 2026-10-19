@@ -65,6 +65,19 @@ def test_builtin_dictionary_loads_cleanly(dictionary):
     assert sorted(dictionary.profiles) == [1, 2, 3, 4, 5]
 
 
+def test_builtin_dictionary_is_identical_without_libyaml(monkeypatch, dictionary):
+    import yaml
+    from aussiefy import loader
+
+    monkeypatch.setattr(loader, '_YAML_LOADER', yaml.SafeLoader)
+    fallback = loader.load_dictionary()
+    assert fallback.entries == dictionary.entries
+    assert fallback.concepts == dictionary.concepts
+    assert fallback.profiles == dictionary.profiles
+    assert fallback.imagery == dictionary.imagery
+    assert fallback.warnings == dictionary.warnings
+
+
 def test_loader_rejects_unknown_concept_and_duplicates(tmp_path):
     f = tmp_path / "extra.yaml"
     f.write_text("- {id: mate, form: cobba, concept: [FRIEND], frame: np}\n"

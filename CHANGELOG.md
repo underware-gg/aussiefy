@@ -9,6 +9,17 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Retain reviewed source research for 90 further existin' entries, with evidence limits'n unapplied
+  mapping recommendations. Coverage now includes 220 of the original 1,254\-entry inventory.
+- Share clause readin''n meanin' restrictions across detection and contextual imagery. Preserve captured
+  objects, reject adverbs mistaken for noun arguments, and bind subjects through supported auxiliary chains.
+  Apply existin' tone/mood weights before candidate variety limits'n order planner suggestions by fit.
+  Share document mood across strict Markdown units rather than resetting it at paragraph boundaries.
+  Anyway, keep figurative hunger complements plain instead of turnin' ambition into appetite.
+  Preserve meaning constraints when replayin' dictionary research rounds.
+- Quote a query\-string URL so the bundled dictionary also loads with PyYAML's pure\-Python SafeLoader;
+  check complete entry, concept, profile'n imagery parity with the normal loader.
+
 - Handle `feeling pretty hungry` with appetite phrases that preserve tense'n questions. Add six configurable
   writer\-only hunger images, distinguishin' familiar expressions from original riffs'n ordinary appetite from
   ravenous exaggeration; retain the three independent candidate generations'n source checks.
@@ -159,7 +170,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   complements remain literal. Stone the flamin' crows, three weather golden variants were intentionally reviewed after narrowin' guards.
 
 - Integrated 91 committed source changes through `Rob-Morris/aussiefy@95036e1`, preservin' this repository's
-  layered API, validation, documentation'n release contracts. Well, genre/embellishment, US/UK dialect and offline
+  layered API, validation, documentation'n release contracts. Genre/embellishment, US/UK dialect and offline
   POS context, extended Markdown/MDX, verification, blind judgin', common corpus ingestion are available.
 - Strict Markdown units share document\-wide context'n expose its controls and policy warnings. Format
   scanners stay above the plain engine; opaque restoration is collision\-safe'n cached per document.

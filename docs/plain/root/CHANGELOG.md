@@ -5,6 +5,17 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Retain reviewed source research for 90 further existing entries, with evidence limits and unapplied
+  mapping recommendations. Coverage now includes 220 of the original 1,254-entry inventory.
+- Share clause reading and meaning restrictions across detection and contextual imagery. Preserve captured
+  objects, reject adverbs mistaken for noun arguments, and bind subjects through supported auxiliary chains.
+  Apply existing tone/mood weights before candidate variety limits and order planner suggestions by fit.
+  Share document mood across strict Markdown units rather than resetting it at paragraph boundaries.
+  Keep figurative hunger complements plain instead of turning ambition into appetite.
+  Preserve meaning constraints when replaying dictionary research rounds.
+- Quote a query-string URL so the bundled dictionary also loads with PyYAML's pure-Python SafeLoader;
+  check complete entry, concept, profile and imagery parity with the normal loader.
+
 - Handle `feeling pretty hungry` with appetite phrases that preserve tense and questions. Add six configurable
   writer-only hunger images, distinguishing familiar expressions from original riffs and ordinary appetite from
   ravenous exaggeration; retain the three independent candidate generations and source checks.

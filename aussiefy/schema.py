@@ -224,6 +224,7 @@ class Concept:
                                           # it only goes where the genre allows person swears
     not_in: frozenset[str] = frozenset()  # genres where its triggers are terms of art (a browser's cookie, a
                                           # struct's field, a build): left as they are there
+    unless_after: tuple[str, ...] = ()  # complements that do not establish this meaning, across soft punctuation
 
 
 # Every key an entry may carry, in the order a written entry lists them.
@@ -417,6 +418,9 @@ def parse_concept(cid: str, raw: dict) -> Concept:
         if frame not in FRAMES:
             raise SchemaError(f"concept {cid}: unknown trigger frame {frame!r}")
     not_in = parse_not_in(f"concept {cid}", raw.get("not_in"))
+    unless_after = _tuple(raw.get("unless_after"), "unless_after", f"concept {cid}")
+    if any(not re.fullmatch(r"[a-z]+", word) for word in unless_after):
+        raise SchemaError(f"concept {cid}: unless_after must contain lowercase words")
     return Concept(
         id=cid,
         description=raw.get("description", ""),
@@ -424,4 +428,5 @@ def parse_concept(cid: str, raw: dict) -> Concept:
         person=_bool(raw, "person", f"concept {cid}"),
         neutral_person=_bool(raw, "neutral_person", f"concept {cid}"),
         not_in=not_in,
+        unless_after=unless_after,
     )

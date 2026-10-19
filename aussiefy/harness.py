@@ -17,7 +17,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from .context import RIFF_TONES_FOR
+from .context import RIFF_TONES_FOR, tone_weight
 from . import translation
 from .engine import Result, Translator, default_translator
 from .guide import guide, openings, style_guide_data
@@ -105,12 +105,13 @@ def _riff_offers(r: Result) -> list[dict[str, Any]]:
     for x in r.records:
         if not r.embellishment.entry_riffs:
             break
-        for c in sorted(x.eligible, key=lambda c: (c.entry.id != (x.chosen.entry.id if x.chosen else ""), c.entry.id)):
+        for c in sorted(x.eligible, key=lambda c: (c.entry.id != (x.chosen.entry.id if x.chosen else ""), -c.weight, c.entry.id)):
             cards = riff_cards(c.entry, r.vulgarity)
             if cards and c.entry.form not in offers:
                 offers[c.entry.form] = {"term": c.entry.form, "for": x.text, "riffs": [
                     {**card, "suits_mood": card["tone"] in RIFF_TONES_FOR[r.mood]}
-                    for card in cards]}
+                    for card in sorted(cards, key=lambda card: -tone_weight(card['tone'], r.mood))]}
     return list(offers.values()) + [{**group, "riffs": [
-        {**card, "suits_mood": card["tone"] in RIFF_TONES_FOR[r.mood]} for card in group["riffs"]]}
+        {**card, "suits_mood": card["tone"] in RIFF_TONES_FOR[r.mood]}
+        for card in sorted(group["riffs"], key=lambda card: -tone_weight(card['tone'], r.mood))]}
         for group in r.imagery]
