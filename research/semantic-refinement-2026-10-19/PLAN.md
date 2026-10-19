@@ -2,56 +2,63 @@
 
 User direction: improve the existing engine's shared grammatical and semantic interpretation, including
 tone, without coupling this work to the separate community-dictionary design. No communication with the
-external agent is authorised. Research agents continue the source audit separately.
+external agent is authorised. Internal research agents continue the source audit separately.
 
-## Current slice
+## Completed foundation
 
-- Keep clause reading in the existing context module: bounded auxiliary-chain subjects, object shape,
-  polarity and complement boundaries. Detection reuses its existing POS tags.
-- Express meaning-specific complement restrictions on concepts in data. Apply them to exact triggers,
-  direct entry triggers and similarity fallback before resolving overlaps; imagery uses the same boundary.
-- Require each selected form to preserve captured arguments. Optional imagery only needs its placeholders
-  bound because a suffix adds colour rather than replacing the original arguments.
-- Reuse the existing tone/mood weighting in candidate selection before variety limits, and rank planner
-  entry suggestions by the same contextual candidate weights. Preserve existing hard policy exclusions.
-- Bind optional imagery through supported auxiliary chains without replacing those auxiliaries or inferring
-  a speaker for fragments. Rewrite-only images remain writer-assisted, with explicit usage conditions.
+Commit `2687d7f` shares clause reading, polarity, nominal arguments and complement restrictions between
+translation and contextual imagery. Tone/mood weighting also reaches planner suggestions, and document
+mood survives strict Markdown segmentation. Concept restrictions survive research-round replay. The
+pure-Python YAML loader reads the complete bundled dictionary.
 
-## Verification and completion
+That slice passed independent review, Ruff, generated-documentation, provenance and whitespace checks,
+and the complete suite: 2,403 passed, two expected local-corpus skips (793.25 seconds).
 
-Pin positive and negative examples across meanings and constructions, including non-hunger concepts,
-gerund and nominal objects, literal argument retention, similarity fallback, punctuation, questions,
-negation, competing subjects, tone ranking and protected text. Run the affected suites, regenerate and
-read goldens and changes fixtures, regenerate public documentation, obtain an independent design review,
-resolve findings, then run Ruff and the complete suite before committing and pushing dev.
+## Completed lexical and argument slice
 
-The parallel source research remains evidence only until its individual recommendations are reviewed;
-it does not migrate metadata, theme policy or attestation scoring.
+The current changes distinguish activity starts, rough assembly, comradeship, political people, driving
+roles, sleeping accommodation and other reviewed senses. Source additions from the earlier 30- and
+60-entry ledgers cover 85 entry records and 110 new URLs. Requested cultural references and conditional
+appetite phrases are implemented, with writer suggestions for constructions needing judgement.
+
+Shared argument reading distinguishes bounded temporal/prepositional adjuncts from unanchored objects.
+It retains quantified noun objects, nominal compounds, gerunds, temporal subjects and anchored arguments.
+It does not claim a complete parser: location-adverb ambiguity and gerund/preposition boundaries remain
+explicit follow-ups.
+
+Independent design review has converged. Focused regressions and generated artefact readback passed.
+The complete final run passed 2,522 tests with two expected local-corpus skips (775.08 seconds); Ruff,
+generated-document freshness, provenance/licensing and whitespace checks also passed.
+See [integration scope](meaning-integration.md) and the
+[review](../../docs/architecture/reviews/design-review-2026-10-19-meaning-extensions.md).
 
 ## Remaining slices
 
-The current semantic/YAML slice passed independent design review and complete pre-commit verification:
-2,403 tests passed, with two expected local-corpus skips (793.25 seconds). Ruff, generated-documentation,
-provenance/licensing and whitespace checks passed. The two new research batches remain evidence and
-unapplied recommendations.
+1. Integrate the independently reviewed narrator-opinion setting and entry annotations. Existing
+   embellishment profiles resolve its default, with exact advanced overrides; role/reference preservation
+   remains independent of permission to add opinion. Translation, lookup, plans, change alternatives,
+   garnish and known-term writer checks share the resolved permission. Full integrated verification remains.
+2. Apply clear source-derived meaning corrections from batches 3 and 4, with source additions and regression
+   tests. The isolated implementation preserves species, construction, quantity, contact chains, location
+   nouns, solitude versus loneliness, scolding versus shouting, and comparative versus absolute indifference.
+   Reconcile later batch 5/6 recommendations against those changes rather than applying duplicate fixes.
+3. Finish explicit listener-role binding. Use the existing object-possessive slot and shared argument
+   retention to prevent a missing listener becoming the speaker; add standard bend/bent morphology.
+   Independent review and full integrated verification remain.
+4. Continue the source audit across the original inventory, cross-review each allocation, then integrate
+   clear supported corrections separately from provisional evidence and intentional stylistic policies.
+   The completed, cross-reviewed batches through 6 cover 700 of 1,254 original entries, leaving 554.
+   Batches 7 and 8 are in progress. The later source candidates and recommendations are not yet
+   runtime changes.
 
-- Integrate the reviewed lexical corrections and source additions in the two new audit batches. Keep
-  occupations, references, relationships and stated meanings intact; retain the vocabulary when a broad
-  automatic trigger is narrowed. Source additions can affect weights and need fixture readback.
-- Refine argument-versus-adjunct interpretation beyond nominal shape, including temporal phrases such
-  as "try every day". Use shared semantic signals rather than individual slang exceptions.
-- Continue bounded research batches across the remaining 1,034 entries of the original inventory. The
-  first three reviewed batches cover 220 distinct baseline entries; later additions are counted separately.
-- Finish the requested vocabulary additions: Goon of Fortune, Hills Hoist, "could do with a feed" and
-  "wouldn't say no to some tucker". Bulldust itself already exists. The separate constructor/theme design
-  does not block independent dictionary improvements.
+## Verification and scope
 
-One product choice remains open for the lexical slice: how much narrator opinion may embellishment add?
-"Soldiers" becoming "brave bastards" both adds praise and loses the military role; "the living" becoming
-"lucky buggers still breathing" preserves its reference but adds an assessment of fortune. Those effects
-should be distinguishable. Evidence metadata establishes attestation; themes permit subject matter;
-semantic fit establishes contextual suitability. Input support for courage is distinct from a citation
-attesting the phrase. The refined proposal lets existing embellishment settings permit increasing
-exaggeration/opinion, with advanced overrides, while separately protecting factual roles and references.
-Entries and generated Bulldust would declare meaning requirements and embellishment effects consumed by
-shared eligibility. This remains a proposal for discussion; the current slice does not implement it.
+Each implementation slice needs meaningful positive/negative tests, generated corpus and change-fixture
+readback where affected, public-document freshness, independent design review with findings resolved,
+Ruff, the complete suite and provenance checks before commit and push to `dev`. No release promotion is
+part of this task. Research coverage counts original-baseline IDs, not later additions, and does not certify
+all triggers, constructions, frequency or origin claims.
+
+The separate constructor, theme and attestation-metadata design remains external to this implementation.
+Ordinary source research and clear dictionary fixes do not depend on completing that design. Prefer
+existing shared context, form compatibility and dictionary concepts to slang-specific engine branches.

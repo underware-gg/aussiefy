@@ -7,7 +7,8 @@ from aussiefy import harness
 
 APPETITE = {'feel-like-a-decent-feed', 'feel-like-some-tucker'}
 HUNGER_IMAGES = {'could-go-a-decent-feed', 'hanging-out-for-a-feed', 'stomach-throat-cut', 'hungry-butter-beer-coaster',
-                 'hungry-tomato-sauce-thong', 'hungry-guts-protest'}
+                 'hungry-tomato-sauce-thong', 'hungry-guts-protest', 'could-do-with-a-feed',
+                 'wouldnt-say-no-to-some-tucker'}
 
 
 def translate(translator, text, seed):
@@ -63,7 +64,8 @@ def test_elaborate_hunger_images_remain_rewrites_with_honest_origins(translator)
 
 def test_hunger_images_respect_exaggeration_and_vulgarity(translator):
     assert HUNGER_IMAGES & images(plan(translator, 'She is hungry.', exaggeration=0)).keys() == {
-        'could-go-a-decent-feed', 'hanging-out-for-a-feed'}
+        'could-go-a-decent-feed', 'hanging-out-for-a-feed', 'could-do-with-a-feed',
+        'wouldnt-say-no-to-some-tucker'}
     assert 'hungry-guts-protest' not in images(plan(translator, 'She is hungry.', vulgarity=0))
 
 

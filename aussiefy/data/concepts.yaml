@@ -985,8 +985,7 @@ POLITICIAN:
   not_in: [official, technical, instructions]
   triggers:
     np: ["politician", "statesman", "senator", "congressman", "member of parliament", "lawmaker",
-         "the government", "the authorities", "the powers that be"]   # not bare "government": "a Form of
-                                                                       # Government" is a system, not pollies
+         "political representative", "elected politician"]
 
 # --- the words that stuck out in Gettysburg, plus everyday filler -------------
 SANCTIFY:
@@ -1015,7 +1014,11 @@ COMMITTED:
 DEVOTION:
   description: Loyal devotion to a cause or to each other.
   triggers:
-    np: ["devotion", "loyalty", "comradeship", "solidarity", "fellowship", "camaraderie"]
+    np: ["devotion", "loyalty", "solidarity", "fellowship"]
+COMRADESHIP:
+  description: Fellowship and solidarity between companions or peers.
+  triggers:
+    np: ["comradeship", "camaraderie", "solidarity between friends", "fellowship between friends"]
 RESOLVE:
   description: Insist with total conviction that something is true ("I'd swear it was him").
   triggers:
@@ -1301,11 +1304,11 @@ FINISH_JOB:
 SECOND_CHANCE:
   description: A fresh chance at something.
   triggers:
-    adv: ["a new birth of", "a second chance at", "another chance at", "a fresh start at", "a new lease of"]
+    adv: ["a second chance at", "another chance at", "a fresh start at"]
 IN_VAIN:
   description: For no result.
   triggers:
-    adv: ["in vain", "for nothing", "to no avail", "for no reason"]
+    adv: ["in vain", "for nothing", "to no avail"]
 LIVE_ON:
   description: Live on; survive.
   triggers:
@@ -1649,7 +1652,7 @@ CONSTRUCT:
     # not a bare "build": knocking together is building quickly and roughly, and most building isn't (a house, a
     # relationship, an auction program, a site; a threat builds; built on infrastructure). The fourth pass's agents
     # declined it in four texts after the third pass's long exclusion list.
-    vp: ["put together", "throw together", "cobble together", "slap together", "rig up"]
+    vp: ["throw together", "cobble together", "slap together", "rig up"]
 EAGER_FOR:
   description: >-
     Dying to do something, dying for something: eager, not dying. No entries on purpose: the longer match keeps
@@ -2058,9 +2061,13 @@ FALSE_RUMOUR:
   triggers:
     np: [a false rumour, an unfounded rumour, a baseless rumour, a false story]
 HOON:
-  description: A hooligan or reckless show-off driver.
+  description: A reckless or show-off driver.
   triggers:
-    np: [hooligan, lout, a reckless driver, a boy racer, "yob"]   # bare, so "some hooligan" and "the louts" count
+    np: [a reckless driver, a boy racer]
+LOUT:
+  description: A rude, badly behaved person, without asserting a driving role.
+  triggers:
+    np: [hooligan, lout, yob]
 RECESS:
   description: The mid-morning school break.
   triggers:
@@ -2243,7 +2250,12 @@ SQUATTER_GRAZIER:
 SWAGMAN:
   description: An itinerant worker or vagrant travelling on foot.
   triggers:
-    np: [hobo, vagrant, drifter, itinerant worker, a hobo, a vagrant, a drifter, an itinerant worker]
+    np: [drifter, itinerant worker, a drifter, an itinerant worker]
+VAGRANT:
+  description: A tramp or vagrant.
+  triggers:
+    np: [hobo, vagrant, "tramp !=steamer|steamers|ship|ships|stamp|stamps|iron", a hobo, a vagrant,
+         "a tramp !=steamer|steamers|ship|ships|stamp|stamps|iron"]
 COOLIBAH:
   description: The coolibah, a eucalypt of inland floodplains (lookup and explanation only).
   triggers:
@@ -3127,9 +3139,9 @@ RASH_VEST:
   triggers:
     np: [rash guard, rash vest, rashguard, swim shirt]
 SLEEPING_PORCH:
-  description: A porch or verandah enclosed as a bedroom.
+  description: A porch, verandah or outbuilding used as sleeping accommodation.
   triggers:
-    np: [sleeping porch, enclosed porch]
+    np: [sleeping porch, sleeping verandah, sleeping veranda, enclosed porch used for sleeping]
 SPORTS_DAY:
   description: A school sports day.
   triggers:
@@ -3157,7 +3169,7 @@ SHEEPSKIN_BOOTS:
 SCHOOL_CANTEEN:
   description: The school shop that sells lunch and snacks to students.
   triggers:
-    np: [the school cafeteria, the school canteen, the school lunchroom]
+    np: [the school cafeteria, the school canteen, the school lunch shop]
 MIDDY_BEER:
   description: A small (about half-pint) glass of beer.
   triggers:
@@ -3345,9 +3357,13 @@ TREASURE_IT:
     interjection: [I'll treasure it forever, I'll treasure it always, I will treasure it forever, I'll treasure
         this forever]
 TELL_HIM_DREAMING:
-  description: Tell him (them) to dream on; the offer is laughable.
+  description: Tell him that his expectation or asking price is unrealistic.
   triggers:
-    interjection: [tell him to dream on, tell them to dream on]
+    interjection: [tell him to dream on]
+TELL_THEM_DREAMING:
+  description: Tell them that their expectation or asking price is unrealistic.
+  triggers:
+    interjection: [tell them to dream on]
 LOYAL:
   description: Loyal and dependable to the core (of a person).
   triggers:
@@ -3762,3 +3778,25 @@ GIVE_WAY_SIGN:
   description: Guard for the road sign; giving way here is not a structure collapsing.
   triggers:
     np: [give way sign]
+
+# --- reviewed meaning extensions, October 2026 -----------------------------------
+START_ACTIVITY:
+  description: Begin or get underway, without consuming an unstated object.
+  triggers:
+    vp: ["get started ^end", "get underway ^end", "begin ^end"]
+WELCOME_MEAL:
+  description: Express a conditional wish for a meal.
+  triggers:
+    vp: ["could do with a meal ^end", "could do with some food ^end", "could do with something to eat ^end"]
+WELCOME_FOOD:
+  description: Express willingness to accept some food.
+  triggers:
+    vp: ["wouldn't say no to some food ^end", "wouldn't say no to something to eat ^end"]
+GOON_OF_FORTUNE:
+  description: The named cask-wine drinking game played using a rotary clothesline.
+  triggers:
+    np: ["goon of fortune", "wheel of goon", "the wine-bag clothesline drinking game"]
+HILLS_HOIST:
+  description: The Hills Hoist rotary clothesline; a named Australian cultural reference.
+  triggers:
+    np: ["Hills Hoist", "Hills Hoists"]

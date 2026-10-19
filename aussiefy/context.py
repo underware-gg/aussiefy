@@ -28,6 +28,11 @@ AUXILIARIES = (morph.BE_FORMS | morph.HAVE_FORMS | morph.DO_FORMS
                | {"will", "would", "can", "could", "shall", "should", "may", "might", "must"})
 NEGATION = {"not", "n't", "never", "no", "without", "nobody", "nothing", "neither", "none"}
 DEGREE_PREFIXES = tuple(tuple(words.split()) for words in morph.INTENSIFIERS if " " in words)
+TIME_UNITS = {"second", "minute", "hour", "day", "week", "fortnight", "month", "year", "morning", "afternoon",
+              "evening", "night", "time"}
+TIME_MODIFIERS = {"every", "each", "all", "this", "that", "these", "those", "next", "last"}
+RELATIVE_TIMES = {"today", "tomorrow", "yesterday", "tonight"}
+FREQUENCY_COUNTS = {"once", "twice", "thrice"}
 
 
 @dataclass(frozen=True)
@@ -72,7 +77,54 @@ def verb_subject(tokens: list[Token], start: int, tags: list[str] | None) -> Tok
     return None
 
 
-def noun_argument(capture: Token, tokens: list[Token], tags: list[str]) -> bool:
+def _noun_argument_head(words: tuple[str, ...], tags: list[str]) -> str | None:
+    if words[:2] in {("at", "least"), ("at", "most")}:
+        words, tags = words[2:], tags[2:]
+    # A short degree phrase can be mistagged as nominal ("a bit harder"). Leave ambiguous heads plain.
+    if any(len(words) == len(prefix) + 1 and words[:len(prefix)] == prefix for prefix in DEGREE_PREFIXES):
+        return None
+    # The tagger can mistake "thrice" for a participle; frequency adverbs do not head a gerund argument.
+    head = next((tag for word, tag in zip(words, tags) if tag not in {"RB", "RBR", "RBS"}
+                 and not (word in FREQUENCY_COUNTS and tag == "VBG")), None)
+    nominal = pos.NOUNS | pos.NAMES | {"PRP", "WP", "CD"}
+    if head in {"IN", "TO"}:
+        return None
+    if (bool(tags) and tags[-1] in nominal or head == "VBG"
+            or len(words) == 1 and words[0] in {
+                "this", "that", "these", "those", "some", "any", "both", "all", "another", "each", "either", "neither"}):
+        return head
+    return None
+
+
+def _temporal_tail(words: tuple[str, ...], tags: list[str], following: list[Token]) -> bool:
+    """A bounded time adjunct, including one swallowed after a nominal object."""
+    if "of" in words:
+        at = words.index("of")
+        if at and _noun_argument_head(words[at + 1:], tags[at + 1:]) is not None \
+                and _temporal_tail(words[:at], tags[:at], []):
+            return True
+    if tags[-1] in pos.NAMES:
+        return False
+    if words[-1] in RELATIVE_TIMES:
+        return True
+    unit = morph.singular_of(words[-1]) or words[-1]
+    if unit not in TIME_UNITS:
+        return False
+    if len(words) >= 3 and words[-3] in FREQUENCY_COUNTS and words[-2] in {"a", "an"}:
+        return True
+    if len(words) >= 4 and words[-2] == "per" and tags[-4] == "CD" \
+            and (morph.singular_of(words[-3]) or words[-3]) in TIME_UNITS:
+        return True
+    tail = tuple(t.norm for t in following[:2])
+    if words[-1] == "time" and tail == ("and", "again") or tail == ("after", words[-1]):
+        return True
+    return any((word in TIME_MODIFIERS or tags[i] == "CD")
+               and all(tag in {"DT", "PDT", "CD", "JJ", "JJR", "JJS", "VBG"} | pos.NOUNS
+                       for tag in tags[i + 1:-1])
+               for i, word in enumerate(words[:-1]))
+
+
+def noun_argument(capture: Token, tokens: list[Token], tags: list[str], *, unanchored_object: bool = False) -> bool:
     """A nominal or gerund-headed argument, rather than an adjective/adverb mistaken for an object."""
     start = capture.i - tokens[0].i
     end = start
@@ -80,15 +132,12 @@ def noun_argument(capture: Token, tokens: list[Token], tags: list[str]) -> bool:
         end += 1
     phrase = tags[start:end]
     words = tuple(t.norm for t in tokens[start:end])
-    # A short degree phrase can be mistagged as nominal ("a bit harder"). Leave ambiguous heads plain.
-    if any(len(words) == len(prefix) + 1 and words[:len(prefix)] == prefix for prefix in DEGREE_PREFIXES):
+    head = _noun_argument_head(words, phrase)
+    if head is None:
         return False
-    nominal = pos.NOUNS | pos.NAMES | {"PRP", "WP", "CD"}
-    head = next((tag for tag in phrase if tag not in {"RB", "RBR", "RBS"}), None)
-    return (bool(phrase) and phrase[-1] in nominal
-            or head == "VBG"
-            or len(phrase) == 1 and tokens[start].norm in {
-                "this", "that", "these", "those", "some", "any", "both", "all", "another", "each", "either", "neither"})
+    if head != "VBG" and unanchored_object and _temporal_tail(words, phrase, tokens[end:]):
+        return False
+    return True
 
 
 def sentence_contexts(sent: list[Token], tags: list[str] | None = None) -> set[str]:

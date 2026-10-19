@@ -9,6 +9,16 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Retain source research for 480 further baseline entries. Cumulative audit coverage is 700 of the original
+  1,254 entries; the new batches retain qualified recommendations'n evidence limits separately from code.
+- Separate mateship, activity starts, rough construction, political people, drivin' roles'n sleepin'
+  accommodation from broader meanings. Preserve “tell them” references'n non\-monetary wasted effort;
+  merge 110 reviewed source URLs across 85 entry records, retaining the evidence limits in research ledgers.
+- Add Goon of Fortune and Hills Hoist as specific cultural references, plus two conditional appetite phrases
+  with direct mappings'n writer suggestions. Now, retain other tense and question constructions as written.
+- Distinguish bounded temporal'n prepositional adjuncts from unanchored objects, so “try every day” and
+  “try at home” stay plain while real objects, temporal subjects'n anchored arguments remain supported.
+
 - Retain reviewed source research for 90 further existin' entries, with evidence limits'n unapplied
   mapping recommendations. Coverage now includes 220 of the original 1,254\-entry inventory.
 - Share clause readin''n meanin' restrictions across detection and contextual imagery. Preserve captured
@@ -77,11 +87,11 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 - Review the original seed listicle, add ten curated expressions with precise senses, and retain a complete
   decision ledger. Honour declared HTML encodings during acquisition without overriding explicit HTTP charsets.
 - Preserve outer auxiliaries'n question grammar, distinguish perfect\-have from possession, and retain the
-  force of `shall`. Well, keep restless chucking, object\-taking pull the pin, evidentiary establish'n wholehearted mateship
+  force of `shall`. Well, keep restless chucking, object\-taking pull the pin, evidentiary establish'n wholehearted devotion
   separate from misleading slang senses. Jeez Louise, add data\-owned complete\-verb guards'n strip pattern annotations
   consistently before language matching'n model training.
 - Add reviewed contextual imagery, configurable exaggeration/association defaults, and writer\-only
-  suggestions for comparisons needin' semantic or grammatical judgement. Direct suffixes share riff budgets.
+  suggestions for comparisons needin' semantic or grammatical judgement. Anyway, direct suffixes share riff budgets.
 - Revisit all 163 previously unadded/rejected reference\-harvest rows; add 10 entries and 22 contextual images,
   including the correct dishonesty sense of “as crooked as a dog's hind leg”. Preserve the original evidence.
 - Share imagery settings'n suggestions across plans, lookup, CLI, MCP and retelling\-session lookup.
@@ -143,7 +153,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 - Fix attributive praise escapin' through predicate frames, capitalised determiners hiding compound guards,
   animal nouns being treated as people, and plural clothin' conflicting with retained singular verbs.
-  Mind ya, frame vocabulary is editable in `grammar.yaml`; similarity fallback enforces zero\-width exclusions.
+  Bugger me, frame vocabulary is editable in `grammar.yaml`; similarity fallback enforces zero\-width exclusions.
 
 - General is the default document type; detection is opt\-in. Named presets and Custom accept the same exact
   behaviour overrides through Python, CLI, MCP'n yarn tools. Explicit values override presets, including
@@ -166,7 +176,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 - Final committed source delta through `c0177d7`: fourth\-pass/dinkum dictionary rounds, held\-word lint,
   original\-context suggestions, literal clause\-subject agreement, form\-aware riffs'n completed research.
-  Anyway, quote exemptions preserve actual wording/counts; halves require explicit equal shares'n liquid\-pouring
+  Quote exemptions preserve actual wording/counts; halves require explicit equal shares'n liquid\-pouring
   complements remain literal. Stone the flamin' crows, three weather golden variants were intentionally reviewed after narrowin' guards.
 
 - Integrated 91 committed source changes through `Rob-Morris/aussiefy@95036e1`, preservin' this repository's
@@ -203,7 +213,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   a fair whack\), hire, per cent'n roadworks in the dialect table; 63 covered or skipped. The fourth pass's wrong
   senses fixed in data: bush for a legal bush, Parliament House for a US Congress, knock together for any
   build, pressie for a policy's gift, tucker'n quid in the wrong places, and lint's LEAVE, heaps, bugger all,
-  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Bugger me, engine limits found are listed in DECISIONS.
+  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Engine limits found are listed in DECISIONS.
 - **The fourth pass's next steps:**
   - A storyteller's openings follow the genre's form at every settin', troppo's too \(an obituary isn't opened
     `"Fair dinkum, this happened."`), and `"Okay, so."` is gone from the openings.

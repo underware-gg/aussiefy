@@ -75,6 +75,8 @@ def test_dials_and_custom_defaults(translator):
     p = harness.plan('He is out of breath.', embellishment='troppo', document_type='custom', translator=translator)
     assert not images(p)
     p = harness.plan('He is hungry.', level=2, document_type='custom', document_config=config(), translator=translator)
+    assert images(p).keys() == {'could-do-with-a-feed', 'wouldnt-say-no-to-some-tucker'}
+    p = harness.plan('He is hungry.', level=1, document_type='custom', document_config=config(), translator=translator)
     assert not images(p)
 
 

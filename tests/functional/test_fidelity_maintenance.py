@@ -111,10 +111,11 @@ def test_bare_establish_is_preserved_without_guessing_its_sense(source, translat
     assert 'establish' in r.text.lower()
 
 
-def test_unambiguous_founding_keeps_its_slang(translator):
+def test_founding_is_distinct_from_starting_or_rough_assembly(translator):
     r = translator.translate('They brought forth a nation.', document_type='custom', vulgarity=0,
                              document_config={'profile':{'substitution':{'idiom':1}}})
-    assert any(s.substituted and 'FOUND' in s.det.concepts for s in r.records)
+    assert r.text == 'They brought forth a nation.'
+    assert not any(s.substituted and s.chosen.entry.id in {'kick-off', 'knock-together'} for s in r.records)
 
 
 @pytest.mark.parametrize('source', ['Love God with all your heart.', 'I support her wholeheartedly.',

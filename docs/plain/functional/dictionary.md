@@ -37,6 +37,7 @@ aussiefy/data/
     fragments.yaml     slang found inside existing idioms
     gapfill.yaml       the gap-fill research round (research/gap-fill-2026-10-11)
     classics.yaml      the classics research round (research/classics-2026-10-11)
+    meaning-extensions.yaml  reviewed sense splits and explicitly requested vocabulary
     flagged.yaml       omitted and gated entries (kept so re-scrapes don't reintroduce them)
     scraped.yaml       machine-managed output of the review tool
 ```
@@ -91,7 +92,20 @@ Further optional fields:
   `when` (the sentence contexts they suit) and an optional `stretch` (vowel-stretch the closer, as in
   "Faaaaaark me").
 
+## Sense boundaries
+
+Keep distinct meanings in distinct concepts. A `lout` is not necessarily a `reckless driver`, and an
+`itinerant worker` is not necessarily a `vagrant`; `comradeship` is narrower than `devotion`. An entry may serve several
+concepts, but its direct `replaces` patterns then introduce all of those concepts: prefer the individual
+concept triggers when those meanings need different candidates.
+
+Named cultural references such as `Goon of Fortune` and `Hills Hoist` are retained with specific meanings;
+they do not turn every drinking game or rotary clothesline into the named game or brand. Appetite phrases
+such as “could do with a feed” and “wouldn't say no to some tucker” have direct mappings for corresponding
+conditional requests, plus writer-only hunger suggestions for contexts requiring tense or modal judgement.
+
 ## Slots
+
 
 Slots are `{subj} {be} {have} {do} {poss} {obj}`, plus `{np}`, which captures a short noun phrase and copies
 it across, and `{will}`, which becomes "will" or "would" by tense. For example, `reckon {np} {have} Buckley's`
@@ -176,6 +190,10 @@ must retain captured noun/object arguments, either through its slots or identica
 slotless variant therefore cannot silently drop the tool from “try the tool”.
 Short degree/nominal ambiguities such as “a bit harder” or “a little water” stay plain; the tagger alone
 cannot reliably settle them. Clear nominal constructions such as “a bit of cheese” remain supported.
+For an unanchored terminal object slot, temporal signals distinguish “try every day” from “try every
+tool”. Preposition-headed phrases such as “at home” are not objects. Time words used in anchored arguments,
+subjects or nominal compounds remain valid: “give every day a try” and “try every day pass”. Mixed object
+and time captures stay plain without trimming their spans. This is bounded grammar reading, not a full parse.
 
 Local subject binding follows supported auxiliary chains and adverbs, including progressive, perfect and
 question constructions. It stops at another lexical verb or a clause boundary. This makes optional images

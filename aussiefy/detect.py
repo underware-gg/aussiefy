@@ -238,8 +238,12 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
     if (m.start > 0 and tokens[m.start - 1].text == "-" and tokens[m.start - 1].end == first.start) or \
             (m.end < len(tokens) and tokens[m.end].text == "-" and tokens[m.end].start == last.end):
         return None   # part of a hyphenated word: "good-bye", "battle-field"
-    if "np" in m.captures and tags is not None and not noun_argument(m.captures["np"], tokens, tags):
-        return None
+    if "np" in m.captures and tags is not None:
+        parts = [element for element in p.elements if element.kind != "not"]
+        unanchored = (len(parts) == 2 and parts[0].role == "head_verb"
+                      and parts[1].kind == "slot" and parts[1].slot == "np")
+        if not noun_argument(m.captures["np"], tokens, tags, unanchored_object=unanchored):
+            return None
     if p.frame == "vp":
         subject = verb_subject(tokens, m.start, tags)
         if subject is not None:

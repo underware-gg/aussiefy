@@ -5,6 +5,16 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Retain source research for 480 further baseline entries. Cumulative audit coverage is 700 of the original
+  1,254 entries; the new batches retain qualified recommendations and evidence limits separately from code.
+- Separate comradeship, activity starts, rough construction, political people, driving roles and sleeping
+  accommodation from broader meanings. Preserve “tell them” references and non-monetary wasted effort;
+  merge 110 reviewed source URLs across 85 entry records, retaining the evidence limits in research ledgers.
+- Add Goon of Fortune and Hills Hoist as specific cultural references, plus two conditional appetite phrases
+  with direct mappings and writer suggestions. Retain other tense and question constructions as written.
+- Distinguish bounded temporal and prepositional adjuncts from unanchored objects, so “try every day” and
+  “try at home” stay plain while real objects, temporal subjects and anchored arguments remain supported.
+
 - Retain reviewed source research for 90 further existing entries, with evidence limits and unapplied
   mapping recommendations. Coverage now includes 220 of the original 1,254-entry inventory.
 - Share clause reading and meaning restrictions across detection and contextual imagery. Preserve captured
