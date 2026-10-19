@@ -1,8 +1,8 @@
 """Lookup: genuine Aussie options for a plain-English meaning, or what a slang term means.
 
 Ranks dictionary entries by whole-word and phrase matches, character n-grams, and (when a model is available)
-meaning similarity against each entry's gloss and its concepts' descriptions. Filtered to the level and cap, so
-lookup never offers what lint would reject.
+meaning similarity against each entry's gloss and its concepts' descriptions. All cards respect the requested
+level and cap; direct term discovery remains broader than contextual meaning inference.
 """
 
 from __future__ import annotations
@@ -12,7 +12,10 @@ from functools import lru_cache
 from typing import Any
 
 from .align import content_words
-from .text import tokenize
+from .text import Token, tokenize
+from . import pos
+from .context import TIME_ADVERBS, positive_context
+from .detect import DETERMINERS, NOUN_PREPOSITIONS, Detection
 from .embed import NgramEmbedder
 from .errors import UserError
 from .engine import Translator, default_translator
@@ -55,10 +58,12 @@ def _in_order(words: list[str], form: list[str]) -> bool:
     return all(w in it for w in words)
 
 
-def meaning_texts(e: Entry, d: Dictionary) -> list[str]:
+def meaning_texts(e: Entry, d: Dictionary, *, concepts: set[str] | None = None) -> list[str]:
     """What a query is compared with to find an entry by meaning: its gloss and its concepts' descriptions.
     scripts/train_embedder.py scores the bundled model's lookup cut-off on these."""
-    return [t for t in [e.gloss, *(d.concepts[c].description for c in e.concept if c in d.concepts)] if t]
+    paths = set(e.concept) if concepts is None else concepts
+    gloss = e.gloss if paths == set(e.concept) else ''
+    return [t for t in [gloss, *(d.concepts[c].description for c in e.concept if c in paths and c in d.concepts)] if t]
 
 
 # Ranking. A query that is itself slang beats one inside a phrase, which beats a match on meaning; meaning
@@ -75,6 +80,35 @@ ONE_WORD_FUZZ = 0.85          # one word is where character n-grams mislead most
 GLOSS_FUZZ = (0.7, 0.9)       # n-gram similarity to a gloss, discounted (one word, a phrase)
 
 
+def _scoped_query(tokens: list[Token], readings: list[Detection], tags: list[str]) -> set[str] | None:
+    """A recognised head can bound a query; an incidental argument or modifier cannot exhaust it."""
+    if not tokens:
+        return None
+    heads = [r for r in readings if r.frame != 'adv' or r.end == len(tokens)]
+    covered = {i for r in heads for i in range(r.start - len(r.degree_qualifier), r.end)}
+    for head in heads:
+        start = head.start - len(head.degree_qualifier)
+        captured = {t.i for t in head.captures.values()}
+        if head.subject_noun is not None:
+            captured.add(head.subject_noun.i)
+        if any(t.norm not in DETERMINERS and t.i not in captured
+               and i not in covered for i, t in enumerate(tokens[:start])):
+            continue
+        # All coordinated heads must be known. A preposition/infinitive may introduce a head's
+        # dependent complement; it cannot swallow another independent finite clause or conjunction.
+        tail = list(range(head.end, len(tokens)))
+        unexplained = [i for i in tail if i not in covered and tokens[i].is_word
+                       and tags[i] != 'CC' and tokens[i].norm not in TIME_ADVERBS]
+        if not unexplained:
+            return {cid for r in heads for cid in r.concepts}
+        first = unexplained[0]
+        if first == head.end and (tags[first] == 'TO' or tokens[first].norm in NOUN_PREPOSITIONS) and not any(
+                tags[i] in {'CC', 'VBD', 'VBP', 'VBZ'} for i in tail) and not any(
+                    r is not head and not set(r.concepts) <= set(head.concepts) for r in heads):
+            return set(head.concepts)
+    return None
+
+
 def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = None, limit: int = 8,
            include_gated: bool = False, short: bool = False, embellishment: int | str | None = None,
            document_type: str = "general", document_config: dict | None = None,
@@ -83,7 +117,8 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     short: each result as only its form, gloss, frame, level and vulgarity (and gating, a dated register), for
     an agent checking a choice.
 
-    Uses the same vulgarity as lint, so lookup never offers what lint would reject.
+    Applies the requested level and vulgarity to every route. Explicit term searches explain vocabulary;
+    they do not certify it as a replacement for the source context.
     `include_gated` also returns entries held back for doubtful origin or meaning (marked as such).
     """
     if limit < 1:
@@ -109,8 +144,34 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     while tokens and tokens[-1].is_punct:
         tokens.pop()
     from .detect import detect, resolve_overlaps
+    tags = pos.tag([t.text for t in tokens]) if tokens else []
     readings = resolve_overlaps(detect(tokens, d.index, concepts=d.concepts, adjective_nouns=d.adjective_nouns,
-                                        degree_index=d.degree_index)) if d.mapping_index.find(tokens) else []
+                                        degree_index=d.degree_index, tags=tags, fragment=True))
+    readings = [r for r in readings if positive_context(tokens, r.start, r.start)]
+    exhaustive = _scoped_query(tokens, readings, tags)
+    established = {cid for det in readings for cid in det.concepts
+                   if det.frame != 'adv' or det.end == len(tokens)}
+    from .detect import applicable_concepts
+    from .degree import realised_degree
+    raw_matches = d.index.find(tokens)
+    blocked = set()
+    for matched in raw_matches:
+        possible = applicable_concepts(matched.pattern.concepts, d.concepts, tokens, matched.end, noun_use=None)
+        blocked.update(set(matched.pattern.concepts) - set(possible))
+        if not positive_context(tokens, matched.start, matched.start):
+            blocked.update(matched.pattern.concepts)
+
+    def degree_fits(entry, concepts):
+        paths = [(cid, det) for det in readings for cid in concepts.intersection(det.degree_concepts)]
+        if not paths:
+            return True
+        for cid, det in paths:
+            if cid in det.degree_conflicts:
+                continue
+            source = realised_degree(det.semantic_degree.get(cid), det.degree_qualifier)
+            if source == 'unmarked' or source in {'mild', 'strong'} and source == entry.semantic_degree.get(cid):
+                return True
+        return False
     def effects_for(entry):
         connected = [det for det in readings if set(entry.concept).intersection(det.concepts)]
         return tuple(sorted(set(entry.semantic_effects).union(*(mapping_effects(entry, det,
@@ -123,7 +184,11 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         score = 1.0 if text == q else sim.similarity(q, text) * fuzz
         for c in p.concepts:
             concept_score[c] = max(concept_score.get(c, 0.0), score)
-    for matched in d.index.find(tokens):
+    for det in readings:
+        if exhaustive is not None or det.frame not in {'np', 'adv'}:
+            for cid in set(det.concepts).intersection(established):
+                concept_score[cid] = max(concept_score.get(cid, 0), 1.0)
+    for matched in raw_matches:
         if matched.start == 0 and matched.end == len(tokens):
             for cid in matched.pattern.concepts:
                 concept_score[cid] = max(concept_score.get(cid, 0), 1.0)
@@ -162,10 +227,17 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
             continue
         if semantic_rejection(e, narrator_opinion=setting.narrator_opinion, quantity_approximation=setting.quantity_approximation, effects=effects_for(e)):
             continue
+        paths = set(e.concept)
+        if exhaustive is not None:
+            paths.intersection_update(exhaustive)
+        if paths.intersection(blocked):
+            paths.intersection_update(established)
+        if not paths or not degree_fits(e, paths):
+            continue
         if parsed_concepts and not parsed_concepts.intersection(e.concept):
             continue
-        best = max((concept_score.get(c, 0.0) for c in e.concept), default=0.0)
-        if e.gloss:
+        best = max((concept_score.get(c, 0.0) for c in paths), default=0.0)
+        if e.gloss and paths == set(e.concept):
             gloss = e.gloss.lower()
             hit = one_word and q in re.findall(r"[a-z']+", gloss)
             best = max(best, GLOSS_NAMES_IT if hit else sim.similarity(q, gloss) * GLOSS_FUZZ[not one_word])
@@ -173,7 +245,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
             # the local model: meaning where n-grams only see spelling. Scored for every entry, not just the
             # ones n-grams missed: otherwise a weak n-gram match (knackered for "very tired", 0.65) keeps its weak
             # score while a model-only one (maggoted, from "Very drunk.") gets the model's, and outranks it
-            texts = meaning_texts(e, d)
+            texts = meaning_texts(e, d, concepts=paths)
             m = max((model.similarity(q, t) for t in texts if t and bool(_NEGATED.search(t.lower())) == negated
                      and (not negated or negative_anchors & {
                          w[:-4] if w.endswith("less") else w for w in content_words(t)})),
@@ -203,6 +275,8 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     if images:
         out["imagery"] = images
     if not results and not images:
-        out["note"] = ("No entry. If you're sure Australians say it, it's probably fine but unvetted; "
+        out["note"] = ("The dictionary recognises this meaning but has no compatible suggestion at these settings. "
+                       "Try another wording or look up a specific term." if exhaustive is not None else
+                       "No entry. If you're sure Australians say it, it's probably fine but unvetted; "
                        "otherwise rephrase. Consider proposing it for the dictionary.")
     return out

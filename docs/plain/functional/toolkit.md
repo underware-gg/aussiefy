@@ -97,11 +97,25 @@ Genre, English, embellishment and extended document controls are described in [t
 ## Lookup sense matching
 
 Lookup matches complete slang forms with grammatical slots, so “give them a bell” reaches the telephone
-sense. When such a complete parse identifies a sense, unrelated meaning-model suggestions are excluded.
-Inflection applies to a noun's head or a verb phrase's head verb, not every word of every frame: “shouted”
-does not become a drinks noun. Negated model queries also need a shared content anchor with the candidate
-meaning; “harmless” is not evidence for “not acceptable”. Conservative filtering may return no result rather
-than an unreliable suggestion. These checks do not make the meaning model a general word-sense classifier.
+sense. Complete form, inflected form and partial-term discovery explain vocabulary broadly; their cards
+do not promise an in-place replacement for the query. Inflection applies to a noun's head or a verb
+phrase's head verb, not every word of every frame: “shouted” does not become a drinks noun.
+
+Meaning inference shares canonical source concepts, polarity, argument restrictions and reviewed degree
+certificates. A recognised query head can exclude unrelated suggestions; “probably” does not establish
+certainty, “wake up” does not establish hurrying, and a beer can is distinct from a small bottle. The
+dictionary can recognise a meaning without having a compatible target, and then explains that abstention.
+Explicit mild/strong source degree needs a compatible certified target for an inferred meaning match.
+
+Local readings are not a whole-query parse. Attributive and coordinated query fragments retain their
+meanings, while unknown modifiers, subordinate content and unresolved structure leave model fallback
+available. External negation is checked before a source phrase, preserving established internally negative
+meanings such as “not bad” and “not working”. An independently supported positive sense can survive another
+sense's denial; an unrelated label cannot rescue a denied meaning. Lexical ranking and model texts use the
+same permitted paths. Negated model fallback also needs a shared content anchor with candidate wording.
+
+These are bounded checks, not a general word-sense classifier. Explicit discovery remains broader, and
+unsupported wording can still receive imperfect model suggestions. See [the scope and evidence](../../../research/semantic-followup-2026-10-20/lookup-context.md).
 
 ### Phrase location and fidelity
 

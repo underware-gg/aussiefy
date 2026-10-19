@@ -259,6 +259,15 @@ HUNGRY:
   triggers:
     predicate_adj: ["hungry@3", "starving@4", "famished@4", "ravenous@5", "peckish@2"]
     vp: ["feel pretty? hungry ^end"]
+  trigger_degrees:
+    predicate_adj:
+      hungry@3: unmarked
+      starving@4: strong
+      famished@4: strong
+      ravenous@5: strong
+      peckish@2: mild
+    vp:
+      "feel pretty? hungry ^end": unmarked
 THIRSTY:
   description: Wanting a drink.
   person: true
@@ -1511,7 +1520,7 @@ FRIGHTEN:
 WORK_HARD:
   description: Work extremely hard.
   triggers:
-    vp: ["break {poss} backs", "break {poss} back", "work {poss} fingers to the bone", "slave away", "toil"]
+    vp: ["work hard ^end", "break {poss} backs", "break {poss} back", "work {poss} fingers to the bone", "slave away", "toil"]
 SAY_GOODBYE:
   description: Say goodbye.
   triggers:
@@ -4117,3 +4126,20 @@ GOOD_MAN:
     - a good man
     - a decent man
     - a nice man
+
+PROBABLE:
+  description: Likely, without asserting certainty. No automatic replacement is certified.
+  triggers:
+    adv: [probably, likely, in all probability]
+WAKE_UP:
+  description: Stop sleeping and become awake. No automatic replacement is certified.
+  triggers:
+    vp: [wake up, awaken]
+POSSIBILITY:
+  description: Possible; not ruled out, without asserting feasibility or certainty.
+  triggers:
+    predicate_adj: [possible, not impossible, not out of the question]
+DIFFICULT:
+  description: Hard to do; not easy. No automatic replacement is certified.
+  triggers:
+    predicate_adj: [difficult, "hard ?=to"]

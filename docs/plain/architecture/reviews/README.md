@@ -6,6 +6,9 @@ commands that have since been renamed. Decisions they led to are recorded in [de
 
 | Review | Summary |
 |---|---|
+| [design-review-2026-10-20-contextual-lookup.md](../../../architecture/reviews/design-review-2026-10-20-contextual-lookup.md) | Shared query meaning, polarity, degree and argument evidence across lexical/model suggestions; preserved explicit discovery |
+| [design-review-2026-10-20-hunger-degree.md](../../../architecture/reviews/design-review-2026-10-20-hunger-degree.md) | Reviewed appetite degrees, generic bounded semantic verification and modifier ownership |
+| [design-review-2026-10-20-predicate-composition.md](../../../architecture/reviews/design-review-2026-10-20-predicate-composition.md) | Dependent predicate complements, form compatibility, safe stack boundaries and original-aware verification |
 | [design-review-2026-10-19-final-source-audit.md](../../../architecture/reviews/design-review-2026-10-19-final-source-audit.md) | Reviewed quantity permissions, source-specific effects and final source-audit repairs; integrated verification passed |
 | [design-review-2026-10-19-degree-and-address.md](../../../architecture/reviews/design-review-2026-10-19-degree-and-address.md) | Reviewed semantic degree, qualifier ownership and plural-address reading; integrated verification passed |
 | [design-review-2026-10-19-model-refresh.md](../../../architecture/reviews/design-review-2026-10-19-model-refresh.md) | Fresh pinned model fit, input provenance, required package-reader checks and bounded lookup evidence; integrated verification passed |

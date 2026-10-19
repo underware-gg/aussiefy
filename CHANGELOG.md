@@ -9,6 +9,15 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Constrain inferred lookup through shared source meanings, external polarity, argument restrictions
+  and reviewed degree. Keep direct term discovery broad, account for query\-head scope conservatively,
+  and use the same permitted concept paths for eligibility, lexical rankin''n model texts. Recognise
+  likelihood, waking, possibility'n difficulty separately; add a bounded hard\-work source trigger.
+
+- Calibrate HUNGRY source'n target severity using the shared degree system, preservin' explicit
+  appetite strength across translation, plans'n editor choices. Add bounded original\-aware degree
+  verification for reviewed hunger'n alcohol predicates; keep unknown and ambiguous evidence distinct.
+
 - Preserve dependent predicate complements'n shared result operators in coordinated predicates.
   Filter every target form for grammatical compatibility, retain safe short variants, and prevent
   comma\-stacked synonyms from splittin' unfinished clauses. Share the restrictions with plans and

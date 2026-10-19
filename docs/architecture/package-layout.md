@@ -12,7 +12,7 @@ subpackages (see [DD-006](decisions/dd-006-layered-flat-package.md)).
 |---|---|
 | Public API | `__init__.py` (translate, translate_changes, lookup, lint, guide, plan, yarn, Translator, load_dictionary, verify, and the result and error types) |
 | Surfaces (thin adapters) | `cli.py`, `mcp_server.py`, `skills/aussiefy/SKILL.md` |
-| Toolkit | `harness.py` (six agent operations), `lookup.py`, `lint.py`, `guide.py`, `verify.py` (fidelity and policy checks), `align.py` (shared sentence counterparts), `retelling.py` (agent-neutral briefs, JSON Schema tool contracts, sessions, dispatch and checked submission) |
+| Toolkit | `harness.py` (six agent operations), `lookup.py`, `lint.py`, `guide.py`, `verify.py` (fidelity and policy checks), `semantic_checks.py` (bounded source-aware meaning and composition checks), `align.py` (shared sentence counterparts), `retelling.py` (agent-neutral briefs, JSON Schema tool contracts, sessions, dispatch and checked submission) |
 | Document translation | `translation.py` (shared surface routing), `markdown.py` (strict source spans and document results), `markup.py` (extended Markdown/MDX scanning) |
 | Optional API clients | `yarn.py` (built-in retelling loop and Anthropic tool adapter), `llm.py` (surface and sentence rewrites), `claude.py` (Anthropic SDK boundary) |
 | Engine | `engine.py` (the pipeline), `text.py`, `matcher.py`, `detect.py`, `degree.py` (reviewed degree composition), `select.py`, `realise.py`, `morph.py`, `garnish.py`, `context.py`, `policy.py`, `genre.py` (pure form policy and classification), `dialect.py` (source-English swaps), `pos.py` (bundled tagger), `protected.py` (opaque source spans and restoration), `changes.py` (every change, its alternatives rendered in place, in the same pass) |
@@ -59,3 +59,7 @@ Markdown/JSX rules enter its core. See [DD-016](decisions/dd-016-reconcile-sourc
 `imagery.py` belongs to the core: it selects reviewed contextual images using dictionary data'n existin'
 subject/slot grammar. Engine insertion'n toolkit suggestions share eligibility; bare lookup exposes
 unbound templates. See [DD-025](decisions/dd-025-contextual-imagery.md).
+
+Crikey, lookup explicitly requests query\-fragment readings from `detect.py`; ordinary replacement detection keeps
+its stricter default. Anyway, lookup owns the bounded whole\-query scope decision'n uses local canonical readings
+as evidence, rather than treatin' every matched noun or modifier as a complete parse.

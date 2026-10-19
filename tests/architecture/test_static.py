@@ -73,10 +73,14 @@ def test_wrong_senses_stay_apart(translator):
     assert not excellent & {r["form"] for r in war}
 
 
-def test_lookup_finds_slang_by_meaning(translator):
-    res = harness.lookup("knackered beyond belief", translator=translator)["results"]
+@pytest.mark.parametrize(("query", "matches"), [
+    ("knackered beyond belief", {"meaning", "meaning (local model)"}),
+    ("physically exhausted beyond endurance", {"meaning (local model)"}),
+])
+def test_lookup_finds_slang_by_meaning(translator, query, matches):
+    res = harness.lookup(query, translator=translator)["results"]
     tired = {e.form for e in translator.dictionary.entries.values() if "TIRED" in e.concept}
-    assert any(r["form"] in tired and r["match"] == "meaning (local model)" for r in res)
+    assert any(r["form"] in tired and r["match"] in matches for r in res)
 
 
 def test_shipped_model_meets_the_reference_set(dictionary):

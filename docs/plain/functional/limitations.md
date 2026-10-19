@@ -26,8 +26,8 @@
   typography is retained; see `tests/corpus/reference/SOURCES.yaml`.
 - **Fidelity and lookup remain heuristic.** Explicit name aliases avoid inferring replacements inside proper
   names, but sentence-initial names can still escape extraction. Slot/inflection matching and negation anchors
-  fix the reproduced toolkit cases; they do not solve general negation or sense disambiguation. For example,
-  `not out of the question` can still offer refusal phrases. Review suggestions in their actual sentence.
+  fix the reproduced toolkit cases; they do not solve general negation or sense disambiguation. Review
+  suggestions in their actual sentence; recognised source guards cover reviewed meanings, not all wording.
 - **Mechanical acceptance does not establish retelling quality.** The first fresh 20-text blind comparison
   scored meaning 4.95/5 but register 2.00/5: eligible prose was too restrained. All deterministic checks
   passed. A further writer revision under contract-aware evaluation scored meaning 4.95/5 and register
@@ -45,6 +45,12 @@
   explicit hard work. Unqualified asylum, den and ice box do not establish psychiatric/domestic/portable
   senses. Percy supports intransitive clause endings and supported adverbial tails, retaining other
   complements as written. Coordinated or ambiguous progressive objects can remain plain.
-- **Degree and quantity checking cover reviewed families and mappings.** DRUNK has source/target degree
-  calibration; unknown ratings are not inferred from style intensity. Quantity approximation is explicit
-  and preset-controlled, with bounded source/output checks. It is not general fact checking.
+- **Degree and quantity checking cover reviewed families and mappings.** DRUNK and HUNGRY have reviewed
+  source/target degree calibration; unknown ratings are not inferred from style intensity. Quantity approximation is explicit
+  and preset-controlled, with bounded source/output checks. Local original-aware checks catch known
+  incompatible grades, with ambiguity and simultaneous edits limiting coverage. It is not general fact checking.
+
+- **Lookup is bounded meaning discovery.** Recognised heads, external polarity and reviewed degree can
+  constrain lexical and model suggestions together. Unknown modifiers, subordinators and unsupported
+  structure retain broader fallback; direct term discovery does not certify an in-place replacement.
+  Figurative senses without corpus restrictions and unsupported-query model errors remain possible.

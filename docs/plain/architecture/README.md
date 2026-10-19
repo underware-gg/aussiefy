@@ -15,7 +15,7 @@ are in the decision records, which are kept as history rather than rewritten.
 ## Decisions and reviews
 
 - [decisions/README.md](decisions/README.md): the decision router, indexing every decision record (DD-001 onwards).
-- [reviews/README.md](reviews/README.md): the whole-repository design reviews of 2026-10-12.
+- [reviews/README.md](reviews/README.md): repository and focused design reviews.
 
 ## Co-located design documents
 

@@ -85,5 +85,5 @@ def test_every_kind_lint_reports_has_a_severity():
     from aussiefy.verify import SEVERITY
 
     pkg = Path(__file__).resolve().parents[2] / "aussiefy"
-    kinds = {k for f in ("lint.py", "markup.py") for k in re.findall(r'"kind": "([a-z_]+)"', (pkg / f).read_text())}
+    kinds = {k for f in ("lint.py", "markup.py", "semantic_checks.py") for k in re.findall(r"""["']kind["']:\s*["']([a-z_]+)["']""", (pkg / f).read_text())}
     assert kinds and kinds <= set(SEVERITY), sorted(kinds - set(SEVERITY))

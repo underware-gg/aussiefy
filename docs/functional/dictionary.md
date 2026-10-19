@@ -105,7 +105,7 @@ concepts, but its direct `replaces` patterns then introduce all of those concept
 concept triggers when those meanings need different candidates.
 
 Now, named cultural references such as `Goon of Fortune` and `Hills Hoist` are retained with specific meanings;
-they don't turn every drinkin' game or rotary clothesline into the named game or brand. Appetite phrases
+they don't turn every drinkin' game or rotary clothesline into the named game or brand. Look, appetite phrases
 such as “could do with a feed” and “wouldn't say no to some tucker” have direct mappings for corresponding
 conditional requests, plus writer\-only hunger suggestions for contexts requirin' tense or modal judgement.
 
@@ -162,7 +162,7 @@ or enter a lookup/trainin' phrase as translated content.
 Now, the loader validates whole box'n dice at load time: field types and ranges, kebab\-case ids, known concepts and
 slots, clause forms starting with `{subj}`, `slur` forcing `omit`, no duplicate ids, and that every form
 compiles as a pattern. It collects every error, with file'n id, and raises one `SchemaError` (the CLI exits
-2\). Strewth, it also warns about concepts that can never be detected'n flagged entries left active.
+2\). It also warns about concepts that can never be detected'n flagged entries left active.
 `aussiefy validate` runs the same checks'n prints stats. Required concepts, profiles, phonetic, swears,
 genre, riffs'n entries files must be present; malformed YAML and missing files are collected
 with the other errors. String\-list fields require strings, `person` and `stretch` require real booleans,
@@ -298,8 +298,11 @@ compositions stay as written; negation is retained. Clause expansions cannot sil
 Ordinary inputs with no stated degree retain unknown-degree options. Plans and automatic change
 alternatives use the same eligibility. Dictionary discovery remains broader.
 
-Initial calibration covers the DRUNK family, with source evidence in
-[the degree ledger](../../research/semantic-refinement-2026-10-19/drunk-degree-calibration.md).
+Calibration covers DRUNK and HUNGRY. Evidence'n limits are recorded in the
+[alcohol degree ledger](../../research/semantic-refinement-2026-10-19/drunk-degree-calibration.md) and
+[hunger degree ledger](../../research/semantic-followup-2026-10-20/hunger-degree-calibration.md).
+Hunger qualifiers stay attached: `very hungry` and `slightly hungry` can remain plain when no compatible
+unmarked single\-word target is available. Strong appetite can't automatically become `peckish`.
 The mechanism is generic; it doesn't certify all concepts, infer missing grades from historical intensity
 numbers or prove the meaning of arbitrary agent\-written prose. Similarity alone can't certify a graded
 source meaning. Extending another family requires reviewed source'n target annotations.

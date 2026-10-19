@@ -294,8 +294,11 @@ compositions stay as written; negation is retained. Clause expansions cannot sil
 Ordinary inputs with no stated degree retain unknown-degree options. Plans and automatic change
 alternatives use the same eligibility. Dictionary discovery remains broader.
 
-Initial calibration covers the DRUNK family, with source evidence in
-[the degree ledger](../../../research/semantic-refinement-2026-10-19/drunk-degree-calibration.md).
+Calibration covers DRUNK and HUNGRY. Evidence and limits are recorded in the
+[alcohol degree ledger](../../../research/semantic-refinement-2026-10-19/drunk-degree-calibration.md) and
+[hunger degree ledger](../../../research/semantic-followup-2026-10-20/hunger-degree-calibration.md).
+Hunger qualifiers stay attached: `very hungry` and `slightly hungry` can remain plain when no compatible
+unmarked single-word target is available. Strong appetite cannot automatically become `peckish`.
 The mechanism is generic; it does not certify all concepts, infer missing grades from historical intensity
 numbers or prove the meaning of arbitrary agent-written prose. Similarity alone cannot certify a graded
 source meaning. Extending another family requires reviewed source and target annotations.

@@ -54,8 +54,9 @@ both pass all 33 required raw\-model checks. The evaluation fit passes 32/33; it
 is retained. Existin' reports'n the earlier
 [maintenance check](../../research/maintenance-check-2026-10-15/README.md) remain historical evidence.
 
-Anyway, the common\-current\-dictionary lookup comparison covers 18 fixed historical queries plus eight source\-audit
-queries. It doesn't establish unseen generalisation or universal superiority: prob'ly can still suggest
-defo, wake\-up results can suggest hurry, and pub can outrank coldie for the cold\-one query. Updated amber fluid
-reference labels follow corrected meanings without changin' queries, ranking rules or required status.
-Automatic gap fillin' remains off by default.
+Anyway, that historical lookup comparison covers 18 fixed historical queries plus eight source\-audit queries under
+the runtime used on 2026\-10\-19. It doesn't establish unseen generalisation or universal superiority: that
+run offered defo for prob'ly'n hurry terms for wake up, and ranked pub above coldie for the cold\-one
+query. Stone the crows, current lookup applies bounded source\-meaning checks before offering lexical or model suggestions;
+see [the toolkit](toolkit.md). Updated amber fluid reference labels follow corrected meanings without
+changin' queries, ranking rules or required status. Automatic gap filling remains off by default.

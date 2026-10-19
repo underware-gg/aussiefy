@@ -29,13 +29,13 @@ from .text import CLAUSE_BREAK, QUOTES, SENTENCE_END, Token
 
 def applicable_concepts(concepts: tuple[str, ...], rules: dict[str, Concept] | None,
                         tokens: list[Token], end: int, complete: bool = True,
-                        noun_use: str = "reference") -> tuple[str, ...]:
+                        noun_use: str | None = "reference") -> tuple[str, ...]:
     """Meaning restrictions apply equally to exact triggers, direct entries and similarity matches."""
     if rules is None:
         return concepts
     following = following_context(tokens, end, complete)
     return tuple(cid for cid in concepts
-                 if not rules[cid].lookup_only and rules[cid].noun_use in {"any", noun_use}
+                 if not rules[cid].lookup_only and (noun_use is None or rules[cid].noun_use in {"any", noun_use})
                  and (not rules[cid].unless_after
                       or following.known and following.word not in rules[cid].unless_after))
 
@@ -331,7 +331,7 @@ def predicate_context(tokens: list[Token], start: int, reviewed_degree: bool = F
 
 def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozenset[str]] | None = None,
                 tags: list[str] | None = None, *, complete: bool = True,
-                degree_concepts: frozenset[str] | None = None) -> Detection | None:
+                degree_concepts: frozenset[str] | None = None, fragment: bool = False) -> Detection | None:
     p: Pattern = m.pattern
     det = Detection(m.start, m.end, p.concepts, p.frame, p.intensity,
                     "entry" if p.entry_id else "trigger", p.text, p.entry_id,
@@ -382,8 +382,18 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
     if p.frame == "predicate_adj":
         ctx = predicate_context(tokens, m.start, reviewed_degree=bool(det.degree_concepts))
         if ctx is None:
-            return None
-        absorbed, boost, subj, verb, clause_start, question = ctx
+            lead = predicate_lead(tokens, m.start, reviewed_degree=bool(det.degree_concepts))
+            following_noun = (m.end < len(tokens) and tags is not None and tags[m.end] in pos.NOUNS
+                              and tokens[m.end].norm not in TIME_ADVERBS)
+            fragment_start = lead.before < 0 or tokens[lead.before].norm in DETERMINERS or (
+                tags is not None and tags[lead.before] == 'CC')
+            if not fragment or not fragment_start or lead.negated:
+                return None
+            if following_noun:
+                det.subject_noun = tokens[m.end]
+            absorbed, boost, subj, verb, clause_start, question = lead.start, lead.boost, None, None, None, False
+        else:
+            absorbed, boost, subj, verb, clause_start, question = ctx
         det.start = absorbed
         if det.degree_concepts:
             det.degree_qualifier = tuple(t.norm for t in tokens[absorbed:m.start])
@@ -398,12 +408,13 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
             det.result_clause = True
         if subj is not None:
             det.captures.setdefault("subj", subj)
-        else:
+        elif verb is not None:
             det.subject_noun = _noun_before(tokens, verb)
             subject = verb_subject(tokens, verb.i - tokens[0].i, tags)
             if subject is not None and subject.norm in morph.PERSON_PRONOUNS:
                 det.captures.setdefault("agent", subject)
-        det.captures.setdefault("be", verb)
+        if verb is not None:
+            det.captures.setdefault("be", verb)
         det.clause_start = clause_start
         det.question = question
     elif p.frame in ("interjection",):
@@ -446,7 +457,8 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
         if m.start > 0 and tokens[m.start].text[:1].isupper():
             return None  # part of a name ("New York", "Great Britain")
         attributive = nxt is not None and nxt.is_word and nxt.norm not in NOT_NOUNS
-        if not attributive and predicate_context(tokens, m.start) is None:
+        if not attributive and predicate_context(tokens, m.start) is None and not (
+                fragment and predicate_lead(tokens, m.start).before < 0):
             return None
         if attributive and noun_limits is not None and nxt.norm not in noun_limits:
             return None  # "a great forest", "a great dearth": size, not quality
@@ -564,10 +576,11 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
            fallback_patterns: list[Pattern] | None = None, threshold: float = 0.72,
            tags: list[str] | None = None, adjective_nouns: dict[str, frozenset[str]] | None = None,
            concepts: dict[str, Concept] | None = None, complete: bool = True,
-           degree_index: PatternIndex | None = None) -> list[Detection]:
+           degree_index: PatternIndex | None = None, *, fragment: bool = False) -> list[Detection]:
     """Every concept the triggers find in the sentence, frame-checked. With a scorer (embed.similarity_scorer over
     the fallback patterns' texts), a predicate after a linking verb that no trigger matched is compared with
-    the fallback patterns by similarity ("he was exhaustedd")."""
+    the fallback patterns by similarity ("he was exhaustedd"). Fragment mode admits query-local adjective
+    readings without inventing a subject or verb; it does not establish safe replacement positions."""
     found: list[Detection] = []
     tags = tags if tags is not None else pos.tag([t.text for t in tokens])
     matches = index.find(tokens)
@@ -581,7 +594,7 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
     families: set[tuple[int, int, str, str]] = set()
     for match in degree_matches:
         if check_frame(match, tokens, adjective_nouns, tags, complete=complete,
-                       degree_concepts=frozenset(match.pattern.concepts)) is None:
+                       degree_concepts=frozenset(match.pattern.concepts), fragment=fragment) is None:
             continue
         families.update((match.start, match.end, cid, match.pattern.frame) for cid in match.pattern.concepts)
         for cid, band in match.pattern.semantic_degree.items():
@@ -590,7 +603,7 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
     for match in matches:
         if not match.pattern.mapping_effects:
             continue
-        if check_frame(match, tokens, adjective_nouns, tags, complete=complete) is None:
+        if check_frame(match, tokens, adjective_nouns, tags, complete=complete, fragment=fragment) is None:
             continue
         for cid, values in match.pattern.mapping_effects.items():
             effects.setdefault((match.start, match.end, cid), set()).update(values)
@@ -613,14 +626,16 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
         if bands:
             m = replace(m, pattern=replace(m.pattern, semantic_degree={cid: sorted(values)[0]
                                                                       for cid, values in bands.items()}))
-        det = check_frame(m, tokens, adjective_nouns, tags, complete=complete, degree_concepts=source_families)
+        det = check_frame(m, tokens, adjective_nouns, tags, complete=complete,
+                          degree_concepts=source_families, fragment=fragment)
         if det and not det.degree_concepts and set(range(det.start, det.end)) & owned:
             continue
         if det:
             det.degree_conflicts = frozenset(cid for cid, values in bands.items() if len(values) > 1)
             if det.frame == "np":
                 det.noun_use = noun_usage(tokens, det.start, det.end, tags, address_starts)
-            det.concepts = applicable_concepts(det.concepts, concepts, tokens, det.end, complete, det.noun_use)
+            usage = None if fragment and det.noun_use == 'unknown' else det.noun_use
+            det.concepts = applicable_concepts(det.concepts, concepts, tokens, det.end, complete, usage)
         if det and not _in_a_name(tokens, det.start, det.end) and not _possessed(tokens, det) \
                 and det.concepts and not _wrong_part_of_speech(m, tokens, tags):
             found.append(det)

@@ -19,7 +19,8 @@ from .genre import Embellishment, Genre, resolve_document
 from .markup import markup_changed, mask
 from .model import Dictionary
 from .schema import PLACEHOLDER_RE, Entry
-from .select import mapping_effects, semantic_rejection
+from .select import semantic_rejection
+from .semantic_checks import composition_issues, degree_issues, mapping_issues
 from .terms import fold, strip_markup
 from .text import document_spans, HONORIFICS, Token, capital_is_positional, heading_lines, held_spans, sentences, tokenize
 
@@ -134,7 +135,8 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     # engine's own matcher, so inflections and slots count ("smashed it to buggery", "kippin'")
     aussie_spans = _aussie_spans(text, tr)
     issues += _semantic_issues(text, original, aussie_spans, tr, read_as.setting(pol.embellishment))
-    issues += _composition_issues(text, original, aussie_spans, tr)
+    issues += composition_issues(text, original, aussie_spans, d)
+    issues += degree_issues(text, original, aussie_spans, d)
 
     suggestions = _suggestions(text, low, aussie_spans, level, vulgarity, tr, read_as, read_english, dial, pol.embellishment) if suggest else []
     fixed = {fold(issue["phrase"]) for issue in issues if issue.get("australian")}
@@ -147,7 +149,7 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
                 else original)
     warnings += _repeated_phrases(text, refrains, d.drawl_readings, covered)
     issues += changed
-    mapped_issues, approximated = _mapping_issues(text, original, aussie_spans, tr, read_as.setting(pol.embellishment))
+    mapped_issues, approximated = mapping_issues(text, original, aussie_spans, d, read_as.setting(pol.embellishment))
     issues += mapped_issues
     if original is not None:
         warnings += fidelity(text, original, approximated_spans=approximated, check_length=read_as.policy.check_length, max_length=read_as.setting(pol.embellishment).max_length,
@@ -160,43 +162,6 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
                       ("; fidelity to the original (length, names, numbers)." if original is not None else
                        ". Pass the original to also check fidelity.") + " Not checked: invented slang or arbitrary added judgments.")}
 
-
-
-def _composition_issues(text: str, original: str | None, spans: list[tuple[int, int, Entry]],
-                        translator: Translator) -> list[dict]:
-    """A local predicate expansion before the source's unchanged result tail, not general grammar checking."""
-    if original is None or text == original:
-        return []
-    suspects = [(a, b, entry) for a, b, entry in spans if entry.frame in {'adj', 'predicate_adj'}
-                and re.search(r'\benough\b', text[a:b], re.I)
-                and re.match(r'\s+enough\b', text[b:], re.I)]
-    if not suspects:
-        return []
-    from .detect import detect, resolve_overlaps
-
-    dictionary = translator.dictionary
-    sources = []
-    for sentence in sentences(tokenize(original)):
-        if not any(t.norm == 'enough' for t in sentence):
-            continue
-        for det in resolve_overlaps(detect(sentence, dictionary.index, concepts=dictionary.concepts,
-                adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index)):
-            if det.result_clause and det.end < len(sentence) and sentence[det.end].norm == 'enough':
-                sources.append((det, tuple(t.norm for t in sentence[:det.start]),
-                                tuple(t.norm for t in sentence[det.end:])))
-    found = {}
-    for sentence in sentences(tokenize(text)):
-        for start, end, entry in suspects:
-            if not sentence[0].start <= start < end <= sentence[-1].end:
-                continue
-            prefix = tuple(t.norm for t in sentence if t.end <= start)
-            tail = tuple(t.norm for t in sentence if t.start >= end)
-            paired = [det for det, before, after in sources if before == prefix and after == tail
-                      and set(entry.concept).intersection(det.concepts)]
-            if len(paired) == 1:
-                found[start, end] = {'kind': 'predicate_composition', 'phrase': text[start:end],
-                    'why': "a local predicate replacement inserted its own 'enough' complement before the source's unchanged 'enough' continuation"}
-    return list(found.values())
 
 
 def _semantic_issues(text: str, original: str | None, spans: list[tuple[int, int, Entry]],
@@ -218,62 +183,6 @@ def _semantic_issues(text: str, original: str | None, spans: list[tuple[int, int
             issues.append({"kind": "semantic_effect", "phrase": text[a:b], "entry": eid,
                            "semantic_effects": list(entry.semantic_effects), "why": reason})
     return issues
-
-
-def _mapping_issues(text: str, original: str | None, spans: list[tuple[int, int, Entry]],
-                    translator: Translator, setting: Embellishment) -> tuple[list[dict], list[tuple[int, int]]]:
-    """Check reviewed source mappings paired inside a single unambiguous local edit, not arbitrary paraphrases."""
-    from difflib import SequenceMatcher
-    from .detect import detect, resolve_overlaps
-
-    if original is None:
-        return [], []
-    source = []
-    dictionary = translator.dictionary
-    for sentence in sentences(tokenize(original)):
-        if not dictionary.mapping_index.find(sentence):
-            continue
-        detections = resolve_overlaps(detect(sentence, dictionary.index, concepts=dictionary.concepts,
-                                             adjective_nouns=dictionary.adjective_nouns,
-                                             degree_index=dictionary.degree_index))
-        source.extend((sentence[d.start].start, sentence[d.end-1].end, d)
-                      for d in detections if d.mapping_effects)
-    if not source:
-        return [], []
-    old, new = tokenize(original), tokenize(text)
-    issues, approximated = [], []
-    paired = set()
-    for tag, i, j, k, l in SequenceMatcher(None, [t.norm for t in old], [t.norm for t in new], autojunk=False).get_opcodes():
-        if tag != 'replace' or i == j or k == l:
-            continue
-        a, b, c, d = old[i].start, old[j-1].end, new[k].start, new[l-1].end
-        sources = [(s,t,det) for s,t,det in source if s < b and a < t]
-        if len(sources) != 1:
-            continue
-        s, t, det = sources[0]
-        targets = {}
-        for u, v, entry in spans:
-            if u < d and c < v and set(entry.concept).intersection(det.mapping_effects):
-                targets.setdefault((u,v), []).append(entry)
-        if len(targets) != 1:
-            continue
-        (u,v), entries = next(iter(targets.items()))
-        if (s,t,u,v) in paired:
-            continue
-        paired.add((s,t,u,v))
-        paths = [(mapping_effects(entry, det, narrator_opinion=setting.narrator_opinion,
-                                 quantity_approximation=setting.quantity_approximation), entry) for entry in entries]
-        effects, entry = min(paths, key=lambda path: (bool(semantic_rejection(path[1],
-            narrator_opinion=setting.narrator_opinion, quantity_approximation=setting.quantity_approximation,
-            effects=path[0])), len(path[0]), path[1].id))
-        reason = semantic_rejection(entry, narrator_opinion=setting.narrator_opinion,
-                                    quantity_approximation=setting.quantity_approximation, effects=effects)
-        if reason:
-            issues.append({'kind': 'semantic_effect', 'phrase': text[u:v], 'entry': entry.id,
-                           'semantic_effects': list(effects), 'why': reason})
-        elif 'quantity_approximation' in effects:
-            approximated.append((s,t))
-    return issues, approximated
 
 
 def _suggestions(text: str, low: str, aussie_spans: list, level: int | str, vulgarity: int | str | None,

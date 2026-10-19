@@ -9,7 +9,7 @@ MODULES = {p.stem for p in PKG.glob("*.py")} | {p.parent.name for p in PKG.glob(
 CORE = {"degree", "text", "matcher", "detect", "select", "realise", "morph", "garnish", "context", "policy", "schema",
         "imagery", "model", "terms", "embed", "engine", "loader", "vocabulary", "static", "dump", "dialect", "genre", "pos", "protected", "profile", "cards", "masks", "changes"}
 UPPER = {"__init__", "harness", "lookup", "lint", "guide", "retelling", "yarn", "llm", "claude", "cli", "mcp_server", "gaps",
-         "rounds", "explain", "scrape", "models", "markdown", "translation", "align", "verify", "judge", "markup"}
+         "rounds", "explain", "scrape", "models", "markdown", "translation", "align", "verify", "judge", "markup", "semantic_checks"}
 NEUTRAL = {"errors"}   # shared by every layer, and imports nothing of the package
 # embed.make_embedder("local") resolves the installed model's config: the one place the core reaches out
 ALLOWED = {("embed", "models")}

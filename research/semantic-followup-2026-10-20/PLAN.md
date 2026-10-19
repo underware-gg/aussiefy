@@ -11,10 +11,10 @@ No historical labels, thresholds or anchors are being weakened or retuned.
    filter each target form rather than its entry's style class. Stack only at established boundaries.
    Keep plans and alternatives on the same selection/rendering path. Add bounded verification for
    recognised duplicate result complements.
-2. **Hunger severity.** Review source and target degrees for HUNGRY using the existing generic degree
+2. **Hunger severity — complete.** Review source and target degrees for HUNGRY using the existing generic degree
    system. Preserve explicit severity, including in original-aware verification, without inferring
    unknown certificates from style intensity.
-3. **Contextual lookup.** Share supported meaning, polarity, degree and argument restrictions across
+3. **Contextual lookup — complete.** Share supported meaning, polarity, degree and argument restrictions across
    lexical and model routes. Preserve explicit term discovery and abstain where evidence is absent.
 4. **Model refresh and repeat measurements.** Fit fresh evaluation/full models after dictionary changes
    settle. Preserve the pinned recipe and historical checks, add distinct relevance checks where needed,
@@ -54,3 +54,22 @@ Independent review converged after raw-formatting, coordinated-operator and boun
 The final full run passed 3,132 tests with two permitted local-corpus skips; Ruff, documentation and notices
 checks passed. Two historical adjacent-swap exceptions disappeared and were removed from the exact
 pinned-render oracle. Hunger and lookup prototypes remain outside this committed checkpoint.
+
+## Hunger and lookup integration checkpoint
+
+Separate focused reviews converged on both adopted slices. Hunger passed 182 focused checks; the
+independent root review repeated 56 checks. The initial combined root run passed 259 tests. Golden review
+then narrowed ambiguous hard to `hard ?=to`; all 97 final lookup/sense tests passed. Golden differences
+retain explicit very hungry rather than consume its qualifier into an incompatible form; the service
+fixture removes peckish from strong-appetite choices and renormalises weights. One incidental drawl
+placement follows existing deterministic choice counts. No historical wording labels or gates change.
+
+This checkpoint integrates these dependent slices together. Plain documentation and generated copies
+are updated. The final full run passed 3,253 tests with two permitted local-corpus skips; Ruff, publication
+and provenance checks passed. Model-fit and repeat-benchmark results remain separate pending evidence.
+
+The initial full integration run passed 3,251 tests with two permitted skips and found one outdated
+model-route assertion. Canonical source evidence now correctly answers its tiredness query before model
+fallback. The reviewed test preserves the original positive query and adds a separate actual-model
+fallback query; 91 focused checks pass. The final full rerun passed 3,253 tests with two permitted local-corpus skips. Documentation's old runtime claims are
+labelled historical, and its stale refusal example is removed; 146 documentation checks pass.

@@ -33,3 +33,11 @@ fidelity of arbitrary paraphrases or ambiguous/reordered retellings.
 predicate with matching concepts and unchanged surrounding sentence tokens. It abstains without an
 original or an unambiguous local pairing; unchanged idioms and legitimate nested constructions are
 not automatically errors. It is not a general grammar checker.
+
+
+`semantic_degree` is a major issue when reviewed source and recognised target grades differ in one
+unambiguous local predicate edit. It shares the engine's degree composition and covers the calibrated
+DRUNK and HUNGRY families. The source must establish mild or strong degree; surrounding sentence tokens
+must match, and every recognised target reading must have a known incompatible grade. Unknown or
+ambiguous certificates, negation and additional edits can make the check abstain. This does not rate
+unreviewed families or prove the severity of arbitrary paraphrases.
