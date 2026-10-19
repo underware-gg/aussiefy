@@ -130,8 +130,6 @@ def fit_rejection(entry: Entry, det: Detection, eff: Effective, person_concepts:
         who = det.subject_noun if subj is None else subj
         if not _person_noun(who.norm, person_nouns):
             return f"said only of people, and '{who.text}' isn't one"
-    if det.result_clause and entry.substitution_class != "lexical":
-        return "'so ... that' construction: only a single-word swap keeps the grammar"
     if entry.frame == "clause" and det.frame != "clause":
         if subj is None or det.clause_start is None:
             return "clause idiom needs a subject to bind {subj}"
@@ -163,6 +161,8 @@ def binding_problem(form: str, det: Detection) -> str | None:
 
 
 def form_problem(form: str, det: Detection) -> str | None:
+    if det.result_clause and not re.fullmatch(r"[A-Za-z]+(?:[-'][A-Za-z]+)*'?", form):
+        return "dependent result complement requires a single-word predicate"
     reason = binding_problem(form, det)
     if reason:
         return reason

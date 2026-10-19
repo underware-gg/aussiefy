@@ -31,3 +31,9 @@ a reviewed source mapping to a compatible recognised term. `quantity_approximati
 losses, and exempts only numbers within that occurrence. It never disables general number checking.
 Target-only “yonks ago” is valid indefinite wording. This bounded check cannot establish the numerical
 fidelity of arbitrary paraphrases or ambiguous/reordered retellings.
+
+`predicate_composition` is a major issue for a recognised predicate expansion that inserts its own
+`enough` complement before the original's retained `enough` tail. The check needs exactly one source
+predicate with matching concepts and unchanged surrounding sentence tokens. It abstains without an
+original or an unambiguous local pairing; unchanged idioms and legitimate nested constructions are
+not automatically errors. It is not a general grammar checker.

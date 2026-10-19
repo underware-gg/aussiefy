@@ -9,7 +9,7 @@ from functools import lru_cache, partial
 from typing import Any, Callable, Literal, Protocol, Sequence
 
 from . import pos
-from .context import FORMAL_RE, is_chant, sentence_contexts, text_mood
+from .context import FORMAL_RE, following_context, is_chant, sentence_contexts, text_mood
 from .detect import (CODE_CONCEPTS, DETERMINERS, Detection, after_determiner, detect, fallback_scorer,
                      resolve_overlaps, owned_degree_modifiers, degree_modifier_spans)
 from .embed import Embedder, make_embedder
@@ -520,7 +520,10 @@ class Translator:
                   and not uses.get(c.entry.id) and not det.coordinated
                   and len(c.entry.form.split()) <= STACK_MAX_WORDS and len(choice.entry.form.split()) <= STACK_MAX_WORDS
                   and abs(c.entry.intensity - choice.entry.intensity) <= STACK_INTENSITY_SPREAD]
-        if det.degree_qualifier or not others or run.eff.profile.stack <= 0 or roll(run.pol.seed, "stack", *sent.key, det.start) >= run.eff.profile.stack:
+        following = following_context(sent.tokens, det.end, sent.complete)
+        if (det.degree_qualifier or det.result_clause or not following.known or following.word is not None
+                or not others or run.eff.profile.stack <= 0
+                or roll(run.pol.seed, "stack", *sent.key, det.start) >= run.eff.profile.stack):
             return None, out
         extra = weighted_pick(others, roll(run.pol.seed, "stack-pick", *sent.key, det.start))
         uses[extra.entry.id] += 1

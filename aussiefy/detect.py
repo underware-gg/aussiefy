@@ -72,7 +72,7 @@ class Detection:
     direct: set[str] = field(default_factory=set)  # entries whose own `replaces` matched here
     subject_noun: Token | None = None  # a predicate's subject when it's a plain noun ("the tank" may be drained)
     person_only: bool = False          # the trigger is said only of people ("full", "drained": not of a tank)
-    result_clause: bool = False      # "so X (that) ..." - only single-word swaps keep the grammar
+    result_clause: bool = False      # dependent result: "so X that ...", "X enough to ..."
     tense: str = "present"           # narrative tense of the sentence, for slots with no verb of their own
     noun_use: str = "reference"
     coordinated: bool = False        # shares its verb with another predicate ("tired and hungry")
@@ -390,10 +390,12 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
             det.start = m.start
         det.intensity = max(1, min(5, det.intensity + boost))
         degree = {t.norm for t in tokens[absorbed:m.start]}
-        if degree & {"so", "too", "such"} and m.end < len(tokens) and tokens[m.end].is_word \
-                and tokens[m.end].norm not in ("and", "but", "or", "today", "now", "lately", "again"):
-            det.result_clause = True  # "so stingy he never pays": the idiom would strand the clause
+        if degree & {"so", "too", "such"}:
+            det.result_clause = True
             det.start = m.start       # keep "so" in place: "he's so tight-arsed he never pays"
+        following = following_context(tokens, m.end, complete)
+        if not following.known or following.word == "enough":
+            det.result_clause = True
         if subj is not None:
             det.captures.setdefault("subj", subj)
         else:
@@ -705,10 +707,12 @@ def mark_coordination(dets: list[Detection]) -> None:
     """Predicates sharing one linking verb ("he was ugly and drunk") are coordinated: a clause idiom would orphan
     the second, and stacking a synonym onto a list reads as a pile-up."""
     shared = Counter(d.captures["be"].i for d in dets if d.frame == "predicate_adj" and "be" in d.captures)
+    result_verbs = {d.captures['be'].i for d in dets if d.result_clause and 'be' in d.captures}
     for d in dets:
         if d.frame == "predicate_adj" and "be" in d.captures and shared[d.captures["be"].i] > 1:
             d.clause_start = None
             d.coordinated = True
+            d.result_clause = d.result_clause or d.captures['be'].i in result_verbs
 
 
 NP_BREAKS = {"of", "to", "with", "in", "on", "at", "by", "for", "from", "and", "or", "but", "that", "who", "which"}

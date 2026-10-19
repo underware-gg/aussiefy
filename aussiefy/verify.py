@@ -30,6 +30,7 @@ SEVERITY = {
     "markup_changed": "critical", "number_dropped": "critical", "empty": "critical", "unmatched": "minor",
     "too_vulgar": "major", "dialect": "major", "spelling": "major", "flagged": "major",
     "too_short": "major", "document_changed": "major", "semantic_effect": "major",
+    "predicate_composition": "major",
     "swear_overuse": "minor", "swear_density": "minor", "tag_in_narration": "minor", "tag_overuse": "minor",
     "pile_up": "minor", "repeated": "minor", "repeated_phrase": "minor", "stock_opener": "minor", "stock_closer": "minor",
     "too_long": "minor", "name_added": "minor", "name_dropped": "minor", "untouched": "info",

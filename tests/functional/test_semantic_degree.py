@@ -150,10 +150,12 @@ def test_unknown_source_degree_keeps_unspecified_availability_but_preserves_expl
 
 
 def test_result_clause_operator_survives(translator):
+    from aussiefy.select import usable_forms
     result = render(translator, 'She was so drunk that she fell asleep.')
     assert ' so ' in result.text and ' that ' in result.text
     record = alcohol_record(result)
-    assert all(c.entry.substitution_class == 'lexical' for c in record.eligible)
+    assert record.eligible
+    assert all(len(form.split()) == 1 for c in record.eligible for form in usable_forms(c.entry, record.det))
 
 
 def test_semantic_degree_is_shared_by_automatic_change_alternatives(translator):

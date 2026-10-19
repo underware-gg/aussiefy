@@ -22,12 +22,9 @@ SETTINGS = {"larrikin-dad": dict(level=4, vulgarity=1), "swaggie-tradie-troppo":
             "stress": STRESS}
 # ... and the website's Swaggie, where it found a garnish region reaching into a swap (test_changes.py's FAUCET)
 COVERS_SETTINGS = {**SETTINGS, "swaggie-dad-dinkum": dict(level=5, vulgarity=1, embellishment=1)}
-# Adjacent swaps where the second reads otherwise once both are pinned, because the first used an entry the
-# second's stacked idiom would have taken (entry_uses): the accepted locality of a swap. Any new one fails.
-SHIFTED_PAIRS = {
-    ("swaggie-tradie-troppo", "self_made_merchant_expense_account.txt", 0),
-    ("stress", "self_made_merchant_expense_account.txt", 7),
-}
+# State-dependent adjacent swaps must be explicitly reviewed. The former stacked-entry exceptions no
+# longer occur with clause-boundary constraints; no exceptions currently remain. Any new one fails.
+SHIFTED_PAIRS = set()
 
 
 class Pinned(Pins, C.Watch):
@@ -140,8 +137,8 @@ def _state(spot):
 @pytest.mark.parametrize("setting", sorted(SETTINGS))
 def test_adjacent_swaps_agree_with_a_pinned_re_render(translator, setting):
     """Two swaps in one sentence, or in neighbouring ones, both pinned at once: their regions don't touch, the
-    first reads as rendered, and so does the second, except in the pairs SHIFTED_PAIRS lists (the first swap used
-    an entry the second's stacked idiom would have taken)."""
+    first reads as rendered, and so does the second. SHIFTED_PAIRS would record reviewed state-dependent
+    exceptions; it is currently empty."""
     pairs, shifted = 0, set()
     for path, seed in ((path, seed) for path in EVERYDAY for seed in (0, 7)):
         text, options = cut(path.read_text(encoding="utf-8")), {**SETTINGS[setting], "seed": seed}

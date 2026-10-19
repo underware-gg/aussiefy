@@ -134,6 +134,7 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     # engine's own matcher, so inflections and slots count ("smashed it to buggery", "kippin'")
     aussie_spans = _aussie_spans(text, tr)
     issues += _semantic_issues(text, original, aussie_spans, tr, read_as.setting(pol.embellishment))
+    issues += _composition_issues(text, original, aussie_spans, tr)
 
     suggestions = _suggestions(text, low, aussie_spans, level, vulgarity, tr, read_as, read_english, dial, pol.embellishment) if suggest else []
     fixed = {fold(issue["phrase"]) for issue in issues if issue.get("australian")}
@@ -159,6 +160,43 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
                       ("; fidelity to the original (length, names, numbers)." if original is not None else
                        ". Pass the original to also check fidelity.") + " Not checked: invented slang or arbitrary added judgments.")}
 
+
+
+def _composition_issues(text: str, original: str | None, spans: list[tuple[int, int, Entry]],
+                        translator: Translator) -> list[dict]:
+    """A local predicate expansion before the source's unchanged result tail, not general grammar checking."""
+    if original is None or text == original:
+        return []
+    suspects = [(a, b, entry) for a, b, entry in spans if entry.frame in {'adj', 'predicate_adj'}
+                and re.search(r'\benough\b', text[a:b], re.I)
+                and re.match(r'\s+enough\b', text[b:], re.I)]
+    if not suspects:
+        return []
+    from .detect import detect, resolve_overlaps
+
+    dictionary = translator.dictionary
+    sources = []
+    for sentence in sentences(tokenize(original)):
+        if not any(t.norm == 'enough' for t in sentence):
+            continue
+        for det in resolve_overlaps(detect(sentence, dictionary.index, concepts=dictionary.concepts,
+                adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index)):
+            if det.result_clause and det.end < len(sentence) and sentence[det.end].norm == 'enough':
+                sources.append((det, tuple(t.norm for t in sentence[:det.start]),
+                                tuple(t.norm for t in sentence[det.end:])))
+    found = {}
+    for sentence in sentences(tokenize(text)):
+        for start, end, entry in suspects:
+            if not sentence[0].start <= start < end <= sentence[-1].end:
+                continue
+            prefix = tuple(t.norm for t in sentence if t.end <= start)
+            tail = tuple(t.norm for t in sentence if t.start >= end)
+            paired = [det for det, before, after in sources if before == prefix and after == tail
+                      and set(entry.concept).intersection(det.concepts)]
+            if len(paired) == 1:
+                found[start, end] = {'kind': 'predicate_composition', 'phrase': text[start:end],
+                    'why': "a local predicate replacement inserted its own 'enough' complement before the source's unchanged 'enough' continuation"}
+    return list(found.values())
 
 
 def _semantic_issues(text: str, original: str | None, spans: list[tuple[int, int, Entry]],

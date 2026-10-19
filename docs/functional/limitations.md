@@ -8,6 +8,13 @@
   [explain mode](explain.md), and most are fixed by tightenin' a trigger pattern in the data rather than the
   code. Now, the hand\-written frame checker now uses a small bundled POS model for noun/verb context;
   [DD-016](../architecture/decisions/dd-016-reconcile-source-capabilities.md) records its offline boundary.
+  Dependent result constructions \(`so … that`, `too … to`, `… enough to`) retain their operators and
+  conservatively admit single\-word predicate forms. Recognised coordinated predicates share that
+  restriction. Comma\-stacked synonyms require established following context; a relative\-clause
+  continuation, punctuation alone or hidden markup doesn't establish room for a stack.
+  With an original, lint/verify flag a recognised predicate expansion before the source's unchanged
+  `enough` tail when the surrounding sentence provides one unambiguous local pairing. They abstain
+  without that evidence; this check doesn't establish grammatical correctness for arbitrary retellings.
 - **The built-in API client has not been run against the live API.** Tagging, `--surface`, `--rewrite` and yarn mode
   are tested with fake clients. The yarn workflow itself has been exercised by agents through its research CLI
   (`research/retellings-2026-10-11/yarn_tools.py`), which shares yarn mode's brief and tools.

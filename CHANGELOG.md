@@ -9,6 +9,11 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Preserve dependent predicate complements'n shared result operators in coordinated predicates.
+  Filter every target form for grammatical compatibility, retain safe short variants, and prevent
+  comma\-stacked synonyms from splittin' unfinished clauses. Share the restrictions with plans and
+  change alternatives; flag recognised duplicate `enough` complements in lint'n verification.
+
 - Advance the changes payload contract to v2 for optional per\-renderin' semantic effects; retain span, ID
   and renderin' rules, and regenerate service fixtures against the new strict schema.
 
