@@ -287,6 +287,28 @@ bounded checks do not demonstrate unseen generalisation. Probably-to-defo and wa
 remain wrong; pub still ranks above coldie for the cold-one query. A known negative-category check passing
 does not prove that every offered alternative has the intended meaning. Automatic gap filling stays off.
 
+## Semantic follow-up trial, 20 October 2026
+
+The fresh 1.4.0 trial is **rejected**. Evaluation passes 29/33 required references; the full-data model
+passes 30/33, missing girl, feeling really down and a good mate of mine. Strict release stops before
+export. A separate diagnostic reader made from those rejected weights reproduces all full-gate outcomes
+and is not adopted. Bundled 1.3.0 remains unchanged and passes 33/33 against the current dictionary;
+its fingerprint remains stale. No reference is reclassified and no cutoff, seed or recipe is retuned.
+
+The full fit uses 1,208 entries, 12,532 positive pairs, 6,860 wrong-sense pairs and 3,654 opposite pairs.
+Evaluation uses 966 training and 242 held entries, with 10,355 positive, 5,998 wrong-sense and 2,678 opposite
+pairs. All fits start from fresh paths. The [execution evidence](../research/semantic-followup-2026-10-20/README.md)
+retains ordered pair digests, the exact executed driver, all six evaluation setups, calibration and failures.
+All 125 frozen repository inputs stayed unchanged through fitting and match checkpoint b9c8b95. The full
+base snapshot validates against pinned blob addresses and is unchanged at the post-fit check. The repaired
+reproduction driver now captures that complete snapshot before and after execution; its archived original
+retains the actual executed bytes.
+
+A same-runtime 49-query comparison distinguishes source-policy effects from weight differences. The
+changed holdout and dictionary prevent treating this trial's retrieval metrics as a causal comparison
+with earlier fits. Unknown wording and concept-sharing failures remain model work; automatic gap filling
+stays off. Existing version reports and trial artifacts remain immutable.
+
 ## Ideas for the next version
 
 - Break the chains between concepts that multi-concept entries create. *stuffed* (TIRED, BROKEN, FULL) and *full
@@ -299,8 +321,9 @@ does not prove that every offered alternative has the intended meaning. Automati
   to go. That's a dictionary call, not a training one.
 - Expand trigger alternations (`it|that|this {be} impossible`) into separate phrases before pairing. Today
   they're paired as written, and the opposite pairs skip them.
-- In lookup, "absolutely starving" is caught by the intensifier n-grams (*bloody*, *too right*) before the
-  model's HUNGRY match. That's lookup ranking, not the model.
+- Review composition of qualifiers with already mild/strong predicates. Lookup currently returns no
+  inferred entry cards for "absolutely starving": HUNGRY is recognised, but strong plus a non-relational
+  qualifier has unknown realised degree. This is conservative degree policy, not a model-ranking failure.
 - Broaden `reference.yaml`, especially with plain queries agents actually send to `lookup`.
 - Repeat the evaluation run over a few seeds, to put error bars on Recall@3.
 
@@ -314,6 +337,7 @@ does not prove that every offered alternative has the intended meaning. Automati
 | 1.2.0 | 2026-10-11 | the gap-fill dictionary (681 entries, 353 concepts), WordNet synonyms (first sense, 6 per trigger), a 0.7 / 0.3 blend of tuned and distilled vectors, wrong senses pushed from glosses too, and five glosses no longer using "great" for excellent. Gap benchmark: right top-1 **0.37**, filled right 0.23, filled wrong 0.09, everyday filled 0.04 (rc1: 0.30 / 0.09 / 0.16) | 0.26 / 0.62 / 0.34; opposites offered 0.09 | 29/29 (and "having a chinwag" fixed); evaluation-run model 27/29 |
 | (1.3.0-trial) | 2026-10-11 | **not released**: retrained on the classics dictionary (893 entries, 493 concepts), with and without `trigger_concepts: first`; blocked by "girl" ranking WOMAN first | 0.25 / 0.57 / 0.35 (first: 0.27 / 0.56 / 0.36); gap right@1 0.42 (first: 0.37) | 29/30 (both) |
 | 1.3.0 (prepared on dev) | 2026-10-19 | Reviewed dictionary, fresh fits, unchanged pinned recipe and cutoffs; 1,206 full-fit entries; scoped input/lookup evidence retained | 0.266 / 0.552 / 0.311; opposites offered 0.064; current difficulty differs from historical rows | 33/33 full fit and package reader; evaluation 32/33 |
+| (1.4.0 trial) | 2026-10-20 | **rejected**: fresh semantic-follow-up fits, unchanged recipe/cutoffs; 1,208 full-fit entries; bundled 1.3.0 retained | 0.252 / 0.558 / 0.293; opposites offered 0.047; changed dictionary/holdout | 30/33 full fit and diagnostic reader; evaluation 29/33 |
 
 ## Maintenance measurement, 2026-10-15
 

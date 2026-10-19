@@ -5,6 +5,11 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Retain bundled model 1.3.0 after a fresh 1.4.0 trial missed three required full-data reference checks.
+  Preserve the rejected trial, diagnostic package-reader comparison and complete base-input integrity
+  evidence without changing recipe, cutoffs or required gates. Strengthen the isolated reproduction
+  driver to detect changes to tokenizer/configuration files as well as weights and WordNet.
+
 - Constrain inferred lookup through shared source meanings, external polarity, argument restrictions
   and reviewed degree. Keep direct term discovery broad, account for query-head scope conservatively,
   and use the same permitted concept paths for eligibility, lexical ranking and model texts. Recognise

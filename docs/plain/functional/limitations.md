@@ -34,12 +34,13 @@
   4.65/5, with some high-level prose still too light and a minor forecast narrowing. The packet protocol
   and judges changed; those rounds do not establish a causal engine improvement. See
   [the findings](../../../research/document-refinement-2026-10-15/FINDINGS.md) for raw results and limits.
-- **The bundled embedding model can lag later dictionary corrections.** Shipped aussie-static 1.3.0 was
-  freshly fitted against the reviewed c891945-era inputs; subsequent degree and source-audit changes make
-  its exact dictionary fingerprint stale. The 33 required reference checks remain enforced. Fresh full-fit
-  and export checks passed 33/33; evaluation retained the girl failure at 32/33. Known relevance/certainty
-  problems remain; see [the bounded report](../../../research/semantic-model-2026-10-19/README.md).
-  Default automatic gap filling stays off. This is separate from deterministic dictionary matching.
+- **The bundled embedding model can lag later dictionary corrections.** Model 1.3.0 remains bundled and
+  passes all 33 frozen required checks, but its dictionary fingerprint is stale. The fresh 2026-10-20
+  evaluation/full-data trial passed 29/33 and 30/33 respectively; the full candidate missed `girl`, `feeling
+  really down` and `a good mate of mine`. It was rejected before release export. A separate diagnostic reader
+  reproduced those outcomes and was not adopted. See the
+  [trial and benchmark evidence](../../../research/semantic-followup-2026-10-20/README.md). Current lookup's
+  bounded source guards do not establish general model relevance. Default automatic gap filling stays off.
 - **Conservative source corrections trade coverage for supported meaning.** General work/activity versus
   artwork or childbirth is not resolved automatically; yakka remains discoverable and available for
   explicit hard work. Unqualified asylum, den and ice box do not establish psychiatric/domestic/portable

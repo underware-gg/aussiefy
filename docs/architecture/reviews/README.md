@@ -10,6 +10,7 @@ commands that have since been renamed. Mate, decisions they led to are recorded 
 
 | Review | Summary |
 |---|---|
+| [design-review-2026-10-20-semantic-benchmarks.md](design-review-2026-10-20-semantic-benchmarks.md) | Rejected pinned model trial, complete input witnesses, exact scorer parity and bounded semantic/performance evidence |
 | [design-review-2026-10-20-contextual-lookup.md](design-review-2026-10-20-contextual-lookup.md) | Shared query meaning, polarity, degree and argument evidence across lexical/model suggestions; preserved explicit discovery |
 | [design-review-2026-10-20-hunger-degree.md](design-review-2026-10-20-hunger-degree.md) | Reviewed appetite degrees, generic bounded semantic verification and modifier ownership |
 | [design-review-2026-10-20-predicate-composition.md](design-review-2026-10-20-predicate-composition.md) | Dependent predicate complements, form compatibility, safe stack boundaries and original-aware verification |

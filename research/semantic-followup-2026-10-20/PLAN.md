@@ -16,7 +16,7 @@ No historical labels, thresholds or anchors are being weakened or retuned.
    unknown certificates from style intensity.
 3. **Contextual lookup — complete.** Share supported meaning, polarity, degree and argument restrictions across
    lexical and model routes. Preserve explicit term discovery and abstain where evidence is absent.
-4. **Model refresh and repeat measurements.** Fit fresh evaluation/full models after dictionary changes
+4. **Model trial and repeat measurements — complete; candidate rejected.** Fit fresh evaluation/full models after dictionary changes
    settle. Preserve the pinned recipe and historical checks, add distinct relevance checks where needed,
    retain failures and exact provenance, and compare the exported reader's actual lookup behaviour.
 
@@ -66,10 +66,26 @@ placement follows existing deterministic choice counts. No historical wording la
 
 This checkpoint integrates these dependent slices together. Plain documentation and generated copies
 are updated. The final full run passed 3,253 tests with two permitted local-corpus skips; Ruff, publication
-and provenance checks passed. Model-fit and repeat-benchmark results remain separate pending evidence.
+and provenance checks passed. Model-fit and repeat-benchmark results were recorded separately after this checkpoint.
 
 The initial full integration run passed 3,251 tests with two permitted skips and found one outdated
 model-route assertion. Canonical source evidence now correctly answers its tiredness query before model
 fallback. The reviewed test preserves the original positive query and adds a separate actual-model
 fallback query; 91 focused checks pass. The final full rerun passed 3,253 tests with two permitted local-corpus skips. Documentation's old runtime claims are
 labelled historical, and its stale refusal example is removed; 146 documentation checks pass.
+
+## Model and benchmark checkpoint
+
+Fresh pinned evaluation/full fits passed 29/33 and 30/33. Strict release rejected the candidate before
+export; bundled 1.3.0 remains unchanged and passes 33/33 with a stale fingerprint. The diagnostic reader
+reproduces all reference outcomes; no failed asset or canonical 1.4.0 report is adopted. All 125 frozen
+source files and the complete 12-file base snapshot have retained integrity evidence. See
+[the report](README.md).
+
+All three known literal signatures fall 9 to 0 in the same 648-row diagnostic cohort. All 90 reference
+outputs pass structural and critical/major checks; all 648 current diagnostics pass verification. The
+checker flags nine of 18 old bad outputs and abstains on nine. Curated wording and frozen anchors remain
+unchanged. All 94 exact scorer comparisons match; supported changes ratios stay below 1.5×. Final focused
+review closed provenance, optimised-mode aggregation and literal publication guards. The final repository
+run passed 3,256 tests with two permitted local-corpus skips; Ruff, publication, provenance and 146 focused
+documentation checks passed. No release promotion.

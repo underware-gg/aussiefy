@@ -1,0 +1,3468 @@
+{
+  "scope": "Compare actual package readers under the same final dictionary and scoped-lookup runtime.",
+  "query_selection": {
+    "selection": "Diagnostic cohorts retained across model trials; explicit follow-ups selected before candidate measurements. Not held-out or independent generalisation evidence.",
+    "historical": [
+      "a shady deal",
+      "sleepy",
+      "under the weather",
+      "a good mate of mine",
+      "fraudulent",
+      "honest",
+      "put up with",
+      "sleep",
+      "dying",
+      "very cold",
+      "girl",
+      "a top bloke",
+      "very tired",
+      "run off my feet",
+      "wake up",
+      "harmless",
+      "probably",
+      "worked very hard"
+    ],
+    "source_audit": [
+      "a cold one at the pub",
+      "feeling lonely in a crowd",
+      "lonely",
+      "alone",
+      "a small bottle of beer",
+      "a can of beer",
+      "beer",
+      "pounds sterling"
+    ],
+    "semantic_followup": [
+      "worked hard",
+      "hard to finish",
+      "not out of the question",
+      "very hungry",
+      "slightly hungry",
+      "a very hungry man",
+      "not drunk",
+      "not tired",
+      "not drunk but tired",
+      "not tired yesterday but tired today",
+      "a tired man",
+      "a very busy man",
+      "hungry and thirsty",
+      "a melancholy man",
+      "very large",
+      "very beautiful",
+      "hungry for power",
+      "hard at work",
+      "sick of work",
+      "tired of life",
+      "hard drive",
+      "not excellent",
+      "not great"
+    ]
+  },
+  "settings": {
+    "level": 5,
+    "vulgarity": "uncle-bob",
+    "limit": 8,
+    "embellishment": "dinkum",
+    "document_type": "general"
+  },
+  "dictionary_sha256": "6b8c11b2a1595e38dfe8beb6be8f45c519584516e02cc3667c1a5f405acd4c9a",
+  "query_sha256": "4e49a85e4c6293680e555b65a3836fd7f304ac9450f958a24c27d4c0f992dbe9",
+  "driver_sha256": "f57ff4faa15179e45f5e42b994ebe06ff0018e5f0483f85fdd7664693873d876",
+  "runtime_sha256": {
+    "lookup.py": "55b9ea4775ed4c54b4a9582a50b91c3454f629877085d8329e2b9991e722b4a1",
+    "detect.py": "4d2b75aa5a68f124a0f8194aa36d5dafd13515540bd50c9cea9e5b32b27dbe28",
+    "static.py": "a6490595c3200e89ec71639d85d25b6a2f71f5963ebed75fc47ae343d1f4b150",
+    "degree.py": "87ef68f9970249cf9eb76650d6de73f98df6dee1ab7d2c43e56ed3945006e247"
+  },
+  "git_commit": "b9c8b95e6376b96cd0cae6055b45536b5be9a199",
+  "models": [
+    {
+      "label": "previous",
+      "version": "1.3.0",
+      "asset_sha256": {
+        "meta.json": "73789e6243e830890131b8762b6acd6c0670c08306beccaa9bcd461e84db3ef8",
+        "vocab.txt": "e5df53a67a6d46e8284325efc070bc887ffef11bd50093bb6a2719e0eee50b1b",
+        "vectors.f16": "4f47c27ecfab0903f557562a5eb351f9a18951f4788e68533c41e8d494cbd840"
+      },
+      "lookups": [
+        {
+          "query": "a shady deal",
+          "results": [
+            {
+              "id": "crook",
+              "concepts": [
+                "SICK",
+                "AWFUL",
+                "DODGY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "dodgy",
+              "concepts": [
+                "DODGY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "shonky",
+              "concepts": [
+                "DODGY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "sleepy",
+          "results": [
+            {
+              "id": "fucked-broken",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66
+            },
+            {
+              "id": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66
+            },
+            {
+              "id": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66
+            },
+            {
+              "id": "out-on-poss-feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66
+            },
+            {
+              "id": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66
+            },
+            {
+              "id": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66
+            },
+            {
+              "id": "rooted",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66
+            },
+            {
+              "id": "stonkered",
+              "concepts": [
+                "DRUNK",
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "under the weather",
+          "results": [
+            {
+              "id": "crook",
+              "concepts": [
+                "SICK",
+                "AWFUL",
+                "DODGY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "crook-as-a-dog",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "crook-as-buggery",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "crook-as-rookwood",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a good mate of mine",
+          "results": [
+            {
+              "id": "mate",
+              "concepts": [
+                "FRIEND"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66
+            },
+            {
+              "id": "cobber",
+              "concepts": [
+                "FRIEND"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "fraudulent",
+          "results": [
+            {
+              "id": "slanter",
+              "concepts": [
+                "DISHONEST_ADJECTIVE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "honest",
+          "results": [
+            {
+              "id": "fair-dinkum-adj",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "fair-dinkum-pred",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "dinkum",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "dinky-di",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "ridgy-didge",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "put up with",
+          "results": [
+            {
+              "id": "cop",
+              "concepts": [
+                "COP_IT",
+                "TOLERATE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "sleep",
+          "results": [
+            {
+              "id": "a-kip",
+              "concepts": [
+                "NAP"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.98
+            },
+            {
+              "id": "a-nana-nap",
+              "concepts": [
+                "NAP"
+              ],
+              "match": "meaning",
+              "score": 0.9
+            },
+            {
+              "id": "flake-out",
+              "concepts": [
+                "FALL_ASLEEP"
+              ],
+              "match": "meaning",
+              "score": 0.9
+            },
+            {
+              "id": "go-out-like-a-light",
+              "concepts": [
+                "FALL_ASLEEP"
+              ],
+              "match": "meaning",
+              "score": 0.9
+            },
+            {
+              "id": "have-a-lie-down",
+              "concepts": [
+                "LIE_DOWN_REST"
+              ],
+              "match": "meaning",
+              "score": 0.75
+            },
+            {
+              "id": "have-a-root",
+              "concepts": [
+                "HAVE_SEX"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.71
+            },
+            {
+              "id": "a-sleep-out",
+              "concepts": [
+                "SLEEPING_PORCH"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "dying",
+          "results": [
+            {
+              "id": "cark-it",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "go-to-meet-maker",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "pass-in-your-cheque",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "toss-in-the-alley",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "very cold",
+          "results": [
+            {
+              "id": "cold-enough-brass-monkey",
+              "concepts": [
+                "FREEZING"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.8
+            },
+            {
+              "id": "colder-than-a-witchs-tit",
+              "concepts": [
+                "FREEZING"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.8
+            },
+            {
+              "id": "cold-as-a-mother-in-laws-kiss",
+              "concepts": [
+                "HEARTLESS"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.79
+            },
+            {
+              "id": "brass-monkeys",
+              "concepts": [
+                "COLD_WEATHER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.77
+            },
+            {
+              "id": "brass-monkey-weather",
+              "concepts": [
+                "FREEZING_WEATHER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.7
+            },
+            {
+              "id": "fuckin-very",
+              "concepts": [
+                "VERY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69
+            },
+            {
+              "id": "coldie",
+              "concepts": [
+                "COLD_BEER_SERVING"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63
+            },
+            {
+              "id": "dead-adv",
+              "concepts": [
+                "VERY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "girl",
+          "results": [],
+          "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary."
+        },
+        {
+          "query": "a top bloke",
+          "results": [
+            {
+              "id": "top-bloke",
+              "concepts": [
+                "GOOD_MAN"
+              ],
+              "match": "slang term",
+              "score": 2.0
+            },
+            {
+              "id": "bloke",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.82
+            },
+            {
+              "id": "cove",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.82
+            },
+            {
+              "id": "a-good-bastard",
+              "concepts": [
+                "GOOD_PERSON"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.74
+            },
+            {
+              "id": "a-legend",
+              "concepts": [
+                "GOOD_PERSON"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.74
+            },
+            {
+              "id": "dead-set-legend",
+              "concepts": [
+                "CHAMPION_PERSON"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69
+            },
+            {
+              "id": "a-spunk",
+              "concepts": [
+                "ATTRACTIVE"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.68
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "very tired",
+          "results": [
+            {
+              "id": "fucked-broken",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "out-on-poss-feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "rooted",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stonkered",
+              "concepts": [
+                "DRUNK",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "run off my feet",
+          "results": [
+            {
+              "id": "flat-chat",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "flat-out",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "flat-out-lizard",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "wake up",
+          "results": [],
+          "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term."
+        },
+        {
+          "query": "harmless",
+          "results": [],
+          "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary."
+        },
+        {
+          "query": "probably",
+          "results": [],
+          "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term."
+        },
+        {
+          "query": "worked very hard",
+          "results": [
+            {
+              "id": "do-the-hard-yards",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67
+            },
+            {
+              "id": "work-arse-off",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67
+            },
+            {
+              "id": "bust-a-gut",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67
+            },
+            {
+              "id": "work-like-billy-o",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67
+            },
+            {
+              "id": "happy-as-larry",
+              "concepts": [
+                "HAPPY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.65
+            },
+            {
+              "id": "filthy",
+              "concepts": [
+                "ANGRY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.64
+            },
+            {
+              "id": "loaded",
+              "concepts": [
+                "RICH"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63
+            },
+            {
+              "id": "rolling-in-it",
+              "concepts": [
+                "RICH"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a cold one at the pub",
+          "results": [
+            {
+              "id": "coldie",
+              "concepts": [
+                "COLD_BEER_SERVING"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "feeling lonely in a crowd",
+          "results": [
+            {
+              "id": "like-a-shag-on-a-rock",
+              "concepts": [
+                "LONELY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "lonely-as-a-shag-on-a-rock",
+              "concepts": [
+                "LONELY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "lonely",
+          "results": [
+            {
+              "id": "lonely-as-a-shag-on-a-rock",
+              "concepts": [
+                "LONELY"
+              ],
+              "match": "slang term",
+              "score": 2.0
+            },
+            {
+              "id": "like-a-shag-on-a-rock",
+              "concepts": [
+                "LONELY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "alone",
+          "results": [
+            {
+              "id": "on-pat-malone",
+              "concepts": [
+                "PHYSICAL_SOLITUDE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "on-your-pat",
+              "concepts": [
+                "PHYSICAL_SOLITUDE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "on-your-pat-predicate",
+              "concepts": [
+                "PHYSICAL_SOLITUDE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a small bottle of beer",
+          "results": [
+            {
+              "id": "stubby",
+              "concepts": [
+                "SMALL_BEER_BOTTLE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a can of beer",
+          "results": [
+            {
+              "id": "tinnie",
+              "concepts": [
+                "BEER_CAN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "beer",
+          "results": [
+            {
+              "id": "all-froth-and-no-beer",
+              "concepts": [
+                "ALL_TALK"
+              ],
+              "match": "slang term",
+              "score": 2.0
+            },
+            {
+              "id": "amber-fluid",
+              "concepts": [
+                "BEER"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "pounds sterling",
+          "results": [
+            {
+              "id": "quid",
+              "concepts": [
+                "MONEY",
+                "STERLING_MONEY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "worked hard",
+          "results": [
+            {
+              "id": "do-the-hard-yards",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "work-arse-off",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "bust-a-gut",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "work-like-billy-o",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "hard to finish",
+          "results": [],
+          "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term."
+        },
+        {
+          "query": "not out of the question",
+          "results": [],
+          "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term."
+        },
+        {
+          "query": "very hungry",
+          "results": [
+            {
+              "id": "starvin",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning (local model)",
+              "score": 1.09
+            },
+            {
+              "id": "hungry-enough-horse-jockey",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "slightly hungry",
+          "results": [
+            {
+              "id": "peckish",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a very hungry man",
+          "results": [
+            {
+              "id": "bloke",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "starvin",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "cove",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "hungry-enough-horse-jockey",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "not drunk",
+          "results": [],
+          "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary."
+        },
+        {
+          "query": "not tired",
+          "results": [],
+          "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary."
+        },
+        {
+          "query": "not drunk but tired",
+          "results": [
+            {
+              "id": "fucked-broken",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "out-on-poss-feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "rooted",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stonkered",
+              "concepts": [
+                "DRUNK",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "not tired yesterday but tired today",
+          "results": [
+            {
+              "id": "fucked-broken",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "out-on-poss-feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "rooted",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stonkered",
+              "concepts": [
+                "DRUNK",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a tired man",
+          "results": [
+            {
+              "id": "bloke",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "fucked-broken",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "out-on-poss-feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "rooted",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a very busy man",
+          "results": [
+            {
+              "id": "bloke",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "flat-chat",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "flat-out",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "flat-out-lizard",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "cove",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "hungry and thirsty",
+          "results": [
+            {
+              "id": "feel-like-a-decent-feed",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "feel-like-some-tucker",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "peckish",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "starvin",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "dry-as-a-dead-dingo",
+              "concepts": [
+                "THIRSTY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "dry-as-nuns-nasty",
+              "concepts": [
+                "THIRSTY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "hungry-enough-horse-jockey",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a melancholy man",
+          "results": [
+            {
+              "id": "bloke",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "very large",
+          "results": [
+            {
+              "id": "built-like-a-brick-shithouse",
+              "concepts": [
+                "BIG_STRONG"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.75
+            },
+            {
+              "id": "bloody-good",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.72
+            },
+            {
+              "id": "high-as-a-kite",
+              "concepts": [
+                "HIGH"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.71
+            },
+            {
+              "id": "flamin",
+              "concepts": [
+                "VERY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.7
+            },
+            {
+              "id": "happy-as-larry",
+              "concepts": [
+                "HAPPY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69
+            },
+            {
+              "id": "beaut",
+              "concepts": [
+                "GOOD",
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67
+            },
+            {
+              "id": "ripper",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67
+            },
+            {
+              "id": "bonza",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "very beautiful",
+          "results": [
+            {
+              "id": "a-cracker-of-a-day",
+              "concepts": [
+                "FINE_DAY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.78
+            },
+            {
+              "id": "pearler-of-a-day",
+              "concepts": [
+                "FINE_DAY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.75
+            },
+            {
+              "id": "bloody-good",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.74
+            },
+            {
+              "id": "beaut",
+              "concepts": [
+                "GOOD",
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.73
+            },
+            {
+              "id": "ripper",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.73
+            },
+            {
+              "id": "bonza",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.73
+            },
+            {
+              "id": "the-ducks-nuts",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.73
+            },
+            {
+              "id": "grouse",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.73
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "hungry for power",
+          "results": [],
+          "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary."
+        },
+        {
+          "query": "hard at work",
+          "results": [
+            {
+              "id": "hard-yakka",
+              "concepts": [
+                "HARD_WORK"
+              ],
+              "match": "meaning",
+              "score": 0.81
+            },
+            {
+              "id": "yakka",
+              "concepts": [
+                "WORK",
+                "HARD_WORK"
+              ],
+              "match": "meaning",
+              "score": 0.81
+            },
+            {
+              "id": "do-the-hard-yards",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.72
+            },
+            {
+              "id": "work-arse-off",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.72
+            },
+            {
+              "id": "bust-a-gut",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.72
+            },
+            {
+              "id": "work-like-billy-o",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.72
+            },
+            {
+              "id": "work-back",
+              "concepts": [
+                "WORK_LATE"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.65
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "sick of work",
+          "results": [
+            {
+              "id": "crook",
+              "concepts": [
+                "SICK",
+                "AWFUL",
+                "DODGY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "crook-as-a-dog",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "crook-as-buggery",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "crook-as-rookwood",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "tired of life",
+          "results": [
+            {
+              "id": "fucked-broken",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "out-on-poss-feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "rooted",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stonkered",
+              "concepts": [
+                "DRUNK",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "hard drive",
+          "results": [
+            {
+              "id": "hoon-around",
+              "concepts": [
+                "HOON_DRIVE"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.76
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "not excellent",
+          "results": [],
+          "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary."
+        },
+        {
+          "query": "not great",
+          "results": [],
+          "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary."
+        }
+      ]
+    },
+    {
+      "label": "candidate",
+      "version": "1.4.0",
+      "asset_sha256": {
+        "meta.json": "993c576391be96aabab8dfc2ba4ee6d686770d7be0e2ac7ef90142a8cd98f8a2",
+        "vocab.txt": "e5df53a67a6d46e8284325efc070bc887ffef11bd50093bb6a2719e0eee50b1b",
+        "vectors.f16": "6c475137b15c464af8a3304af72017c08353a68e507c89e4a23bcbcab692be79"
+      },
+      "lookups": [
+        {
+          "query": "a shady deal",
+          "results": [
+            {
+              "id": "crook",
+              "concepts": [
+                "SICK",
+                "AWFUL",
+                "DODGY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "dodgy",
+              "concepts": [
+                "DODGY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "shonky",
+              "concepts": [
+                "DODGY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "sleepy",
+          "results": [
+            {
+              "id": "a-kip",
+              "concepts": [
+                "NAP"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66
+            },
+            {
+              "id": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66
+            },
+            {
+              "id": "a-nana-nap",
+              "concepts": [
+                "NAP"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.64
+            },
+            {
+              "id": "fucked-broken",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63
+            },
+            {
+              "id": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63
+            },
+            {
+              "id": "out-on-poss-feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63
+            },
+            {
+              "id": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63
+            },
+            {
+              "id": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "under the weather",
+          "results": [
+            {
+              "id": "crook",
+              "concepts": [
+                "SICK",
+                "AWFUL",
+                "DODGY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "crook-as-a-dog",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "crook-as-buggery",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "crook-as-rookwood",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a good mate of mine",
+          "results": [],
+          "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary."
+        },
+        {
+          "query": "fraudulent",
+          "results": [
+            {
+              "id": "slanter",
+              "concepts": [
+                "DISHONEST_ADJECTIVE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "honest",
+          "results": [
+            {
+              "id": "fair-dinkum-adj",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "fair-dinkum-pred",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "dinkum",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "dinky-di",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "ridgy-didge",
+              "concepts": [
+                "GENUINE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "put up with",
+          "results": [
+            {
+              "id": "cop",
+              "concepts": [
+                "COP_IT",
+                "TOLERATE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "swear-blind",
+              "concepts": [
+                "RESOLVE"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.68
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "sleep",
+          "results": [
+            {
+              "id": "a-kip",
+              "concepts": [
+                "NAP"
+              ],
+              "match": "meaning (local model)",
+              "score": 1.02
+            },
+            {
+              "id": "a-nana-nap",
+              "concepts": [
+                "NAP"
+              ],
+              "match": "meaning",
+              "score": 0.9
+            },
+            {
+              "id": "flake-out",
+              "concepts": [
+                "FALL_ASLEEP"
+              ],
+              "match": "meaning",
+              "score": 0.9
+            },
+            {
+              "id": "go-out-like-a-light",
+              "concepts": [
+                "FALL_ASLEEP"
+              ],
+              "match": "meaning",
+              "score": 0.9
+            },
+            {
+              "id": "have-a-lie-down",
+              "concepts": [
+                "LIE_DOWN_REST"
+              ],
+              "match": "meaning",
+              "score": 0.75
+            },
+            {
+              "id": "a-sleep-out",
+              "concepts": [
+                "SLEEPING_PORCH"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.74
+            },
+            {
+              "id": "have-a-root",
+              "concepts": [
+                "HAVE_SEX"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.7
+            },
+            {
+              "id": "been-kippin-in",
+              "concepts": [
+                "BEEN_SLEEPING_IN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.64
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "dying",
+          "results": [
+            {
+              "id": "cark-it",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "go-to-meet-maker",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "pass-in-your-cheque",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "toss-in-the-alley",
+              "concepts": [
+                "DIE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "very cold",
+          "results": [
+            {
+              "id": "cold-enough-brass-monkey",
+              "concepts": [
+                "FREEZING"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.82
+            },
+            {
+              "id": "colder-than-a-witchs-tit",
+              "concepts": [
+                "FREEZING"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.82
+            },
+            {
+              "id": "brass-monkeys",
+              "concepts": [
+                "COLD_WEATHER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.78
+            },
+            {
+              "id": "cold-as-a-mother-in-laws-kiss",
+              "concepts": [
+                "HEARTLESS"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.71
+            },
+            {
+              "id": "just-the-shot",
+              "concepts": [
+                "JUST_RIGHT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69
+            },
+            {
+              "id": "spot-on",
+              "concepts": [
+                "JUST_RIGHT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69
+            },
+            {
+              "id": "just-the-ticket",
+              "concepts": [
+                "JUST_RIGHT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69
+            },
+            {
+              "id": "brass-monkey-weather",
+              "concepts": [
+                "FREEZING_WEATHER"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "girl",
+          "results": [],
+          "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary."
+        },
+        {
+          "query": "a top bloke",
+          "results": [
+            {
+              "id": "top-bloke",
+              "concepts": [
+                "GOOD_MAN"
+              ],
+              "match": "slang term",
+              "score": 2.0
+            },
+            {
+              "id": "bloke",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.82
+            },
+            {
+              "id": "cove",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.82
+            },
+            {
+              "id": "a-good-bastard",
+              "concepts": [
+                "GOOD_PERSON"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66
+            },
+            {
+              "id": "a-legend",
+              "concepts": [
+                "GOOD_PERSON"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.66
+            },
+            {
+              "id": "dead-set-legend",
+              "concepts": [
+                "CHAMPION_PERSON"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.63
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "very tired",
+          "results": [
+            {
+              "id": "fucked-broken",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "out-on-poss-feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "rooted",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stonkered",
+              "concepts": [
+                "DRUNK",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "run off my feet",
+          "results": [
+            {
+              "id": "flat-chat",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "flat-out",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "flat-out-lizard",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "wake up",
+          "results": [],
+          "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term."
+        },
+        {
+          "query": "harmless",
+          "results": [],
+          "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary."
+        },
+        {
+          "query": "probably",
+          "results": [],
+          "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term."
+        },
+        {
+          "query": "worked very hard",
+          "results": [
+            {
+              "id": "do-the-hard-yards",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.75
+            },
+            {
+              "id": "work-arse-off",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.75
+            },
+            {
+              "id": "bust-a-gut",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.75
+            },
+            {
+              "id": "work-like-billy-o",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.75
+            },
+            {
+              "id": "happy-as-larry",
+              "concepts": [
+                "HAPPY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67
+            },
+            {
+              "id": "dead-adv",
+              "concepts": [
+                "VERY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.65
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a cold one at the pub",
+          "results": [
+            {
+              "id": "coldie",
+              "concepts": [
+                "COLD_BEER_SERVING"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "feeling lonely in a crowd",
+          "results": [
+            {
+              "id": "like-a-shag-on-a-rock",
+              "concepts": [
+                "LONELY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "lonely-as-a-shag-on-a-rock",
+              "concepts": [
+                "LONELY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "lonely",
+          "results": [
+            {
+              "id": "lonely-as-a-shag-on-a-rock",
+              "concepts": [
+                "LONELY"
+              ],
+              "match": "slang term",
+              "score": 2.0
+            },
+            {
+              "id": "like-a-shag-on-a-rock",
+              "concepts": [
+                "LONELY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "alone",
+          "results": [
+            {
+              "id": "on-pat-malone",
+              "concepts": [
+                "PHYSICAL_SOLITUDE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "on-your-pat",
+              "concepts": [
+                "PHYSICAL_SOLITUDE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "on-your-pat-predicate",
+              "concepts": [
+                "PHYSICAL_SOLITUDE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a small bottle of beer",
+          "results": [
+            {
+              "id": "stubby",
+              "concepts": [
+                "SMALL_BEER_BOTTLE"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a can of beer",
+          "results": [
+            {
+              "id": "tinnie",
+              "concepts": [
+                "BEER_CAN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "beer",
+          "results": [
+            {
+              "id": "all-froth-and-no-beer",
+              "concepts": [
+                "ALL_TALK"
+              ],
+              "match": "slang term",
+              "score": 2.0
+            },
+            {
+              "id": "amber-fluid",
+              "concepts": [
+                "BEER"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "pounds sterling",
+          "results": [
+            {
+              "id": "quid",
+              "concepts": [
+                "MONEY",
+                "STERLING_MONEY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "worked hard",
+          "results": [
+            {
+              "id": "do-the-hard-yards",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "work-arse-off",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "bust-a-gut",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "work-like-billy-o",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "hard to finish",
+          "results": [],
+          "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term."
+        },
+        {
+          "query": "not out of the question",
+          "results": [],
+          "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term."
+        },
+        {
+          "query": "very hungry",
+          "results": [
+            {
+              "id": "starvin",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning (local model)",
+              "score": 1.1
+            },
+            {
+              "id": "hungry-enough-horse-jockey",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "slightly hungry",
+          "results": [
+            {
+              "id": "peckish",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a very hungry man",
+          "results": [
+            {
+              "id": "bloke",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "starvin",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "cove",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "hungry-enough-horse-jockey",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "not drunk",
+          "results": [],
+          "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary."
+        },
+        {
+          "query": "not tired",
+          "results": [],
+          "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary."
+        },
+        {
+          "query": "not drunk but tired",
+          "results": [
+            {
+              "id": "fucked-broken",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "out-on-poss-feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "rooted",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stonkered",
+              "concepts": [
+                "DRUNK",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "not tired yesterday but tired today",
+          "results": [
+            {
+              "id": "fucked-broken",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "out-on-poss-feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "rooted",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stonkered",
+              "concepts": [
+                "DRUNK",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a tired man",
+          "results": [
+            {
+              "id": "bloke",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "fucked-broken",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "out-on-poss-feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "rooted",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a very busy man",
+          "results": [
+            {
+              "id": "bloke",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "flat-chat",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "flat-out",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "flat-out-lizard",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "cove",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "hungry and thirsty",
+          "results": [
+            {
+              "id": "feel-like-a-decent-feed",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "feel-like-some-tucker",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "peckish",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "starvin",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "dry-as-a-dead-dingo",
+              "concepts": [
+                "THIRSTY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "dry-as-nuns-nasty",
+              "concepts": [
+                "THIRSTY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "hungry-enough-horse-jockey",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+              "concepts": [
+                "HUNGRY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "a melancholy man",
+          "results": [
+            {
+              "id": "bloke",
+              "concepts": [
+                "MAN",
+                "FELLOW_MAN"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "very large",
+          "results": [
+            {
+              "id": "high-as-a-kite",
+              "concepts": [
+                "HIGH"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.78
+            },
+            {
+              "id": "thick-as-shit",
+              "concepts": [
+                "STUPID"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.73
+            },
+            {
+              "id": "thick-as-two-short-planks",
+              "concepts": [
+                "STUPID"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.73
+            },
+            {
+              "id": "built-like-a-brick-shithouse",
+              "concepts": [
+                "BIG_STRONG"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.72
+            },
+            {
+              "id": "happy-as-larry",
+              "concepts": [
+                "HAPPY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.71
+            },
+            {
+              "id": "bloody-good",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.71
+            },
+            {
+              "id": "crook-as-a-dog",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.7
+            },
+            {
+              "id": "crook-as-buggery",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.7
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "very beautiful",
+          "results": [
+            {
+              "id": "bloody-good",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.77
+            },
+            {
+              "id": "happy-as-larry",
+              "concepts": [
+                "HAPPY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.73
+            },
+            {
+              "id": "beaut",
+              "concepts": [
+                "GOOD",
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.71
+            },
+            {
+              "id": "ripper",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.71
+            },
+            {
+              "id": "bonza",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.71
+            },
+            {
+              "id": "the-ducks-nuts",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.71
+            },
+            {
+              "id": "grouse",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.71
+            },
+            {
+              "id": "boshter",
+              "concepts": [
+                "EXCELLENT"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.71
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "hungry for power",
+          "results": [],
+          "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary."
+        },
+        {
+          "query": "hard at work",
+          "results": [
+            {
+              "id": "yakka",
+              "concepts": [
+                "WORK",
+                "HARD_WORK"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.82
+            },
+            {
+              "id": "hard-yakka",
+              "concepts": [
+                "HARD_WORK"
+              ],
+              "match": "meaning",
+              "score": 0.81
+            },
+            {
+              "id": "do-the-hard-yards",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.72
+            },
+            {
+              "id": "work-arse-off",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.72
+            },
+            {
+              "id": "bust-a-gut",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.72
+            },
+            {
+              "id": "work-like-billy-o",
+              "concepts": [
+                "WORK_HARD"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.72
+            },
+            {
+              "id": "flat-chat",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67
+            },
+            {
+              "id": "flat-out",
+              "concepts": [
+                "BUSY"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.67
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "sick of work",
+          "results": [
+            {
+              "id": "crook",
+              "concepts": [
+                "SICK",
+                "AWFUL",
+                "DODGY"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "crook-as-a-dog",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "crook-as-buggery",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "crook-as-rookwood",
+              "concepts": [
+                "SICK"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "tired of life",
+          "results": [
+            {
+              "id": "fucked-broken",
+              "concepts": [
+                "BROKEN",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "knackered",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "buggered",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "out-on-poss-feet",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stuffed",
+              "concepts": [
+                "TIRED",
+                "BROKEN",
+                "FULL"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "zonked",
+              "concepts": [
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "rooted",
+              "concepts": [
+                "TIRED",
+                "BROKEN"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            },
+            {
+              "id": "stonkered",
+              "concepts": [
+                "DRUNK",
+                "TIRED"
+              ],
+              "match": "meaning",
+              "score": 1.0
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "hard drive",
+          "results": [
+            {
+              "id": "hoon-around",
+              "concepts": [
+                "HOON_DRIVE"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.83
+            },
+            {
+              "id": "go-droving",
+              "concepts": [
+                "DROVING"
+              ],
+              "match": "meaning (local model)",
+              "score": 0.69
+            }
+          ],
+          "note": null
+        },
+        {
+          "query": "not excellent",
+          "results": [],
+          "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary."
+        },
+        {
+          "query": "not great",
+          "results": [],
+          "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary."
+        }
+      ]
+    }
+  ]
+}

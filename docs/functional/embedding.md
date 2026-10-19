@@ -48,15 +48,18 @@ All options are in the [CLI reference](cli.md). State lives in `$AUSSIEFY_HOME` 
 
 ## Current measurement
 
-The [2026-10-19 retrain](../../research/semantic-model-2026-10-19/README.md) prepares model 1.3.0 against
-the reviewed dictionary using the unchanged pinned recipe. The full\-data fit'n exported package reader
-both pass all 33 required raw\-model checks. The evaluation fit passes 32/33; its separate girl\-query failure
-is retained. Existin' reports'n the earlier
-[maintenance check](../../research/maintenance-check-2026-10-15/README.md) remain historical evidence.
+Well, bundled model 1.3.0 remains in use. Its full\-data fit'n exported package reader passed all 33 required
+raw\-model checks in the [2026-10-19 retrain](../../research/semantic-model-2026-10-19/README.md), and it
+still passes the current frozen gate. Its dictionary fingerprint is stale after later corrections.
 
-Anyway, that historical lookup comparison covers 18 fixed historical queries plus eight source\-audit queries under
-the runtime used on 2026\-10\-19. It doesn't establish unseen generalisation or universal superiority: that
-run offered defo for prob'ly'n hurry terms for wake up, and ranked pub above coldie for the cold\-one
-query. Stone the crows, current lookup applies bounded source\-meaning checks before offering lexical or model suggestions;
-see [the toolkit](toolkit.md). Updated amber fluid reference labels follow corrected meanings without
-changin' queries, ranking rules or required status. Automatic gap filling remains off by default.
+The [2026-10-20 trial](../../research/semantic-followup-2026-10-20/README.md) used fresh evaluation and
+full\-data fits of the unchanged pinned recipe. Evaluation passed 29/33; the full\-data candidate passed
+30/33, missing `girl`, `feeling really down` and `a good mate of mine`. Anyway, the strict release refused export and
+that candidate wasn't adopted. A separate diagnostic package reader reproduced every full\-gate outcome;
+its weights remain outside the repository. Jeez, historical reports, required checks'n cutoffs are unchanged.
+
+Current lookup applies bounded source\-meaning checks before offering lexical or model suggestions; see
+[the toolkit](toolkit.md). Well, the 49\-query comparison holds that runtime'n dictionary constant while
+comparing old'n rejected weights. It's diagnostic evidence, not unseen generalisation or a reason to
+weaken the raw\-model gate. Unsupported wording can still produce inappropriate model suggestions.
+Automatic gap fillin' remains off by default.

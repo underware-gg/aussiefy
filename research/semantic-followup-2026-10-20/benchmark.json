@@ -1,0 +1,6274 @@
+{
+  "scope": "Known diagnostic reproduction and fixed benchmark comparison; no unseen generalisation or causal speedup claim. Literal signatures require manual output review. Full reference outputs remain local.",
+  "driver_sha256": "830f96726e5e187a90a070cfcd461dd8a7ce4bbbd5a82899315eda8bdfcbd318",
+  "bundled_model_assets_unchanged": true,
+  "before": {
+    "metadata": {
+      "git_head": "112bf2b2516c9eb7d7d2fa6180bf26ea0e682e62",
+      "python": "3.12.13 (main, May 10 2026, 23:27:07) [Clang 17.0.0 (clang-1700.6.3.2)]",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "machine": "arm64",
+      "dictionary_sha256": "65e59404d6b0fb239cf29c710c3b9cdc0a5f05802ea4788db6b9117582c89f06",
+      "purpose": "Fixed known-diagnostic and new composed sentences; not held-out generalisation or a blind judge.",
+      "seeds": [
+        0,
+        1,
+        42
+      ],
+      "level": 5,
+      "vulgarity": 2,
+      "document_type": "auto"
+    },
+    "artifact_sha256": {
+      "bundled-profile.txt": "3fa3b62e7141842d57aaef85b3e600a3aba67e8ab021de79b63c465fb7434fcb",
+      "challenge-outputs.json": "2abe6a2308873a666ced9bdc7b1e9ca9eeeb25bbed4933ce81ae18ae0f903ac7",
+      "changes-confirmation.json": "2952bd64d9fd6ae35c50f2eb49d3c792d93c01edce2bb4d3c6404ded9a6a5bc6",
+      "changes.json": "2ae14467352f84e4c467ed27035f4ba76e88390b3257c6b9c2b0600394b451de",
+      "changes.log": "46df67ce13e5c8e8c743d44ec9f1ea6d882bd350e2385b1d83bcda08e52fc981",
+      "composition-verification.json": "66217c3470aa5b353e2a501a9ac8d86b1e30c6c0b6ca93f8f027803a9d6eca7e",
+      "core-mode-timings.json": "73708d12d01454e8a32560c9d13deb606f81de3530bbf63b8e332843c98b279a",
+      "cpu-baseline.json": "9ed58630ee6481be536c612e8d65beb3f1758ad22797e55168b64401ba276d5d",
+      "cpu-current.json": "9c9b35da961820708be7ff2671f5e33feca934df19d7169c53fa2a8cdc50bc6e",
+      "cpu-warm.py": "0770b64fc4081b2f9e399f38ecd9bec5479592719444e497af3ec1e87b244469",
+      "fallback-readback.json": "0f63e03e59777393e4d6978b039c6d09471d979a629804be8d5f99583e854b91",
+      "lookup.json": "4adedbe5998cea729a1cfef0c4cfc0f85f3bb41a0a8b6f4d02e025b1e5b39aa1",
+      "make-report.py": "68b2b9c5904af350a463e2e9759acef738e7c85da0035f209f848cf8d8f57c5e",
+      "metadata.json": "ecbb163ae39227c7f74fb4787bfa82ab3e5c3cb18d65945377752570251ea2c3",
+      "model.log": "c5071095e1223e866438b8f540b44b2979a5bd293a13096fc1f532fb06e548e1",
+      "probe.log": "23d31e7c4c023aa5102d4288dc85cc573a445c81001b83fcf6dc9f5c44726c37",
+      "probe.py": "af66b2e2ed7942d204f5eee1f622a41fa01afaf186cfc39794c8e7b025f1db0a",
+      "quantity.json": "b9e24bd90fde425de6cd2cea05af6532486ac689d427f698aa28d3c7ae358e71",
+      "reference-outputs.json": "d7d7ffb59fd5309af1730ca90854b18e6b6267e941cd740eada65fe5be738544",
+      "regressions.log": "eddb351568634fbd8f95ad38585dbf41aa71ffb4dd9294629f93ca577edbb4df",
+      "revision-check.json": "5abd226715229d34934055b87814cb869d8d2dd0c0afe2392c6b34b4e6fa201a",
+      "slang.json": "d8040a87342ab07e62ac5083e43400ba3e594e835e4c812614976551360c13c3",
+      "smart.json": "28696d70c963a8a68f6960d7343d1e8c682208db67e161831d980638a6b86fe1",
+      "smart.log": "02d0a2f31abfe4f4747f9d940ab7eb1c5e31c0e749e087d7e6a7d34c9ae0b07c",
+      "startup.json": "205987eec4469f6ad063b7c4bf56ac93a955e78e0a3ae66be3b255d1e1f00cc2",
+      "warm.json": "38c600ddfa67065a1a2f3d87d3e0088c56ca90f39fdb080178dee85c0c4667d4",
+      "writer.json": "e52251e6f79b26929674f47dcb315bdf88e97bed65e4c587f7376477042f2ca5"
+    },
+    "curated": {
+      "labels_sha256": "cf0b79355f69fd59b36a851697bed8a52fe188a95a9cede465e9bea87660c96c",
+      "scorer_sha256": "6a1a1f652a871802b438fe483d5037bcb077b58c5d642398dcd3d75648c7bb41",
+      "contract": {
+        "level": 5,
+        "vulgarity": 2,
+        "embellishment": "troppo",
+        "document_type": "general",
+        "embedder": "none",
+        "seeds": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "documents": [
+        {
+          "id": "gettysburg",
+          "unique_expressions": 10,
+          "unique_hits": 5,
+          "share": 0.5,
+          "labels": [
+            {
+              "id": "brand-new",
+              "forms": [
+                "brand-spankin'-new"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+              ]
+            },
+            {
+              "id": "blokes",
+              "forms": [
+                "blokes"
+              ],
+              "hit_seeds": [
+                0,
+                3,
+                4
+              ],
+              "output_occurrences": [
+                1,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "civil-stoush",
+              "forms": [
+                "civil stoush"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "id": "mob",
+              "forms": [
+                "mob"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "poor-buggers",
+              "forms": [
+                "poor buggers"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "cark-it",
+              "forms": [
+                "carked it",
+                "cark it"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                3,
+                2,
+                2
+              ]
+            },
+            {
+              "id": "keep-kicking",
+              "forms": [
+                "keep on kickin'"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "proper-crack",
+              "forms": [
+                "had a proper crack"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "brave-bastards",
+              "forms": [
+                "brave bastards"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "id": "get-stuck-into",
+              "forms": [
+                "get stuck into"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "output_sha256": [
+            "089f42a465e0e75c070c1de19016718aeb7816d5f546c1ef57fb186fbdf01558",
+            "8567944f2c5de12634a4be18d879978211815d0fd0d2e0c48917c924d9240c24",
+            "d446f40601964d5de377bbe3537574eb133f85505cc46b040d5d5ec0318f6be0",
+            "641e5a3ce2b3fcc138415df8f2652711e4bfef08c9147c96ece6cde76e6f1f27",
+            "363a0ff9bbf50642e5d5c64908fe9645ddc5eb1ff94d1589a4994d6c10482d47",
+            "a671514dc487d34b4093fa738b3a8d91127d42460e728fd3450824b18cbf1e50",
+            "6c73153410885bd800ee22230688b6f6e810fcb7f6f6990e07299c8b48b3e11f",
+            "c886b01d4976ca7e08ddb4b090cf01cd3301e387637acd0e9edffe2dce5af16a",
+            "7e43543ff2e2b413a4cab2fd419f71575ed60a7bc83919d706f12bb6f4269f9b",
+            "008f72507c79a57bae19faaa3c291e5cb0d1618c05b2b6c3b1722e16e7caacd4"
+          ]
+        },
+        {
+          "id": "goldilocks-full",
+          "unique_expressions": 22,
+          "unique_hits": 10,
+          "share": 0.45454545454545453,
+          "labels": [
+            {
+              "id": "bush",
+              "forms": [
+                "bush"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3
+              ]
+            },
+            {
+              "id": "knackered",
+              "forms": [
+                "knackered"
+              ],
+              "hit_seeds": [
+                3,
+                5,
+                7
+              ],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "buggered",
+              "forms": [
+                "Buggered"
+              ],
+              "hit_seeds": [
+                2,
+                3,
+                5,
+                7,
+                8
+              ],
+              "output_occurrences": [
+                0,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            {
+              "id": "horse-jockey",
+              "forms": [
+                "could've eaten a horse and chased the bloody jockey"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "have-crack",
+              "forms": [
+                "Has a crack"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "shearers-armpit",
+              "forms": [
+                "hotter than a shearer's armpit"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "id": "witchs-tit",
+              "forms": [
+                "colder than a witch's tit"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                3,
+                6,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                1,
+                1,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "id": "gets-stuck-into",
+              "forms": [
+                "gets stuck into"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "scoff-lot",
+              "forms": [
+                "scoffs the lot"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "skerrick",
+              "forms": [
+                "skerrick"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "just-ticket",
+              "forms": [
+                "just the ticket"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                1,
+                2,
+                1,
+                1,
+                2,
+                1,
+                1,
+                1,
+                2,
+                1
+              ]
+            },
+            {
+              "id": "plonk-backside",
+              "forms": [
+                "plonk her backside down"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "arse-over-tit",
+              "forms": [
+                "Arse over tit"
+              ],
+              "hit_seeds": [
+                0,
+                8
+              ],
+              "output_occurrences": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            {
+              "id": "rooted",
+              "forms": [
+                "rooted"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "have-kip",
+              "forms": [
+                "have a kip"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "squiz",
+              "forms": [
+                "has a squiz"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "some-bugger",
+              "forms": [
+                "Some bugger"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "id": "shirty",
+              "forms": [
+                "shirty"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "chair-buggery",
+              "forms": [
+                "smashed me chair to buggery"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "spewing",
+              "forms": [
+                "spewin'"
+              ],
+              "hit_seeds": [
+                3,
+                5,
+                7,
+                8
+              ],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            {
+              "id": "some-bastard",
+              "forms": [
+                "Some bastard"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "id": "bondi-tram",
+              "forms": [
+                "shootin' through like a Bondi tram"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "output_sha256": [
+            "4e836327f56ebc94c5382ce760760616dcf43b590b8ecaa306b232222b44e124",
+            "0608131010c1ab5c772d525aa23dd6781327d348876660b65f5019b012f770bc",
+            "c760d5adf7b5a63d6cf62e4578e801e698d8c4be2703c20ec13aeab92fd9f1f7",
+            "7609ebe0a5a0ad958ee55c41570004aed27b2e5306c9d7d62c14e0fe4f08a10d",
+            "2ddcb43bb98c6ef25dfa94fc2158c4d6761106b7a11f67a5e1a4774cef8a5570",
+            "fce1f96b9e296fa1f9185275d3fe45e0bb18dc9b1718b85409848da1ce28232f",
+            "fc3b68459111de0416e937f76b9bd4b45af9783192de1058425d293fefa65a4d",
+            "3139ccf5a77c10fde63a64b7fd036ab437643d1d4805875a15b4d50f46fbd2cb",
+            "b1a1d19b782ccfd9a3a106d95fc4e875e9f16223b5db8fd349a8b2fe252990ad",
+            "a85ce076f32a1731731645bd02e2d1f857926f450d4cce8475a4b477ebdcfc8a"
+          ]
+        }
+      ]
+    },
+    "historical_wording": {
+      "source_sha256": "809838efd41698422636fb2df8bebe2a7e8c29a3baf109b3bdceed6812266903",
+      "anchors_sha256": "5580a5ebe5ef82f3e4b0122079a87691b472ce494908a07c37f0dde68c88f4ab",
+      "level": 5,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "measure": "Frozen historical wording overlap, not a semantic quality score."
+    },
+    "historical_wording_rows": [
+      {
+        "document_type": "auto",
+        "embellishment": "deadset",
+        "hits": 8,
+        "denominator": 25,
+        "quantity_approximation": false
+      },
+      {
+        "document_type": "auto",
+        "embellishment": "dinkum",
+        "hits": 12,
+        "denominator": 25,
+        "quantity_approximation": true
+      },
+      {
+        "document_type": "auto",
+        "embellishment": "troppo",
+        "hits": 15,
+        "denominator": 25,
+        "quantity_approximation": true
+      },
+      {
+        "document_type": "technical",
+        "embellishment": "troppo",
+        "hits": 9,
+        "denominator": 25,
+        "quantity_approximation": false
+      }
+    ],
+    "smart": {
+      "started_utc": "2026-10-19T14:38:05.678039+00:00",
+      "finished_utc": "2026-10-19T14:38:46.094147+00:00",
+      "python": "3.12.13 (main, May 10 2026, 23:27:07) [Clang 17.0.0 (clang-1700.6.3.2)]",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "machine": "arm64",
+      "script_sha256": "5f0ab919d33a393e6b78e823dd5da98d0d491c462b20d0ccf85810d6da4c6b76",
+      "source_hashes": {
+        "aussiefy/__init__.py": "86a3896a45b385e9c2d27de1b11668ecaf6b4a04586425d75c0d833cb8c7d2ec",
+        "aussiefy/align.py": "c81e2d5e2bde60d6cfd80ace84d40ae4cf453a9007cb9b28645ad27ec8a80b0b",
+        "aussiefy/cards.py": "86e6b92d8af644abf56e7412504ae2fc3030b4911a872ee97a86851867640d7f",
+        "aussiefy/changes.py": "73717df82b5bc13b8e65ec9ffc1473ca4854bcf57f0f5b99b14c4b88f247d7ce",
+        "aussiefy/claude.py": "c5d67f3c351006663be3f1095ba0dd27a83c2e2d866ccb38e20bd03de4db49e8",
+        "aussiefy/cli.py": "58aeede257d2b8ac9e86dee2b52b63a7a2a7baeb192edd28c7c16d2076af6b72",
+        "aussiefy/context.py": "85ffb726f2b948870b2da4e6ee31a16ccfa2d553dd64b42cdc8f9fce514a4359",
+        "aussiefy/degree.py": "87ef68f9970249cf9eb76650d6de73f98df6dee1ab7d2c43e56ed3945006e247",
+        "aussiefy/detect.py": "ca8d8b71433375c33e94727e22ee133f4e89fe6723c7d6f5a751a8ece2bb9d5f",
+        "aussiefy/dialect.py": "8cf34ba9a2bdb86d924351122b4eaa6a2690730f64d1bc0ee97f6a6a8e46eb33",
+        "aussiefy/dump.py": "208fa74cd244718552d8dc2065321f44f604c8ac79937bcabb010fdc030fbf20",
+        "aussiefy/embed.py": "afb78a3624c86492800aa8f639f008d45c8de5906d930827a47f169bd01a737f",
+        "aussiefy/engine.py": "56753b2a8dee676b0be4ca4691c5d3d797d4d84e94e7855b02300103db289f0e",
+        "aussiefy/errors.py": "3c565cfe02d93f68f0a57bb1013a0dc799b47bea748c9a38b1639e1483448319",
+        "aussiefy/explain.py": "9027beb88ce242457c772fdef6023308acd9ace3c94c5a17055f42b36eade907",
+        "aussiefy/gaps.py": "715711e7c5eb0d21d48b1a5ce07e51f904ba6bde20be621d7be8f5802bb241c0",
+        "aussiefy/garnish.py": "0255b091a0be93fcbe2f7a4cf98da8049e266f72ef0c9d19d393650af13873fb",
+        "aussiefy/genre.py": "a7dcb46b68f40c76d4c451dbde7810a7752bcf801584c7eace8c77f64074e952",
+        "aussiefy/guide.py": "94f588019ecb5e79165e675d7835cce7c184f886cc06e7e23caff0625810ed97",
+        "aussiefy/harness.py": "a6832bfe3ea2cf3a494db2f1b70d557ad9083c808aac927e2896146834c5ce8a",
+        "aussiefy/imagery.py": "56d4a3198f43097824238150b0876893270f09102a16acce9608ac1ee09de5e7",
+        "aussiefy/judge.py": "6fc1aca4c3e746f8a2dd91690bd46c64ef0981f50a90016283789c1c0119e725",
+        "aussiefy/lint.py": "c6ba0d3a09f2496c9b065d84f9eb23b39a209e8abf89f0fc6ae20fbf0f139269",
+        "aussiefy/llm.py": "4f7a4aacfa0f6e060417ec6690829c8a764459e205af91924f6a798b3890a7ca",
+        "aussiefy/loader.py": "cd3c9480458ebf9c19c41f3a7d351af4d793191412f14ebfca4a781964697ac3",
+        "aussiefy/lookup.py": "25db03914e5f2df8353c377ec0ba5f7d11af000a358272ea169d47afdc4a5fb1",
+        "aussiefy/markdown.py": "e5ff49bfe9970ae149025f1aa2995911987200d7b2f1731e85ae0586f325b8b2",
+        "aussiefy/markup.py": "9bfe4154dafd8181185c12fb23d130c614b205a4a3ab5b7fc9dcd858ba36ab64",
+        "aussiefy/masks.py": "cc9b6589c82c2d5011ca8824ab9d165bbdc36e2bc611383a27ff68b1a6fcdff2",
+        "aussiefy/matcher.py": "546a28746f1fd20f1727da912ad67328062b2722944d7bdd50349c02a7156332",
+        "aussiefy/mcp_server.py": "2d820e696297ef78997c4d7dde8a81fb0392f1f23a6acbd00e74b198c5e3e488",
+        "aussiefy/model.py": "466b0bcf29051ae86c14fdaf4b8de8cd42e7ebdf996e69264acdf514c3553efe",
+        "aussiefy/models.py": "b8c1e4f03d9d2bbe221fd2382112afb07668e489b50499a51a41995a0afcbf65",
+        "aussiefy/morph.py": "54a9b48cc11cb7514f9fdc0f7edf0380e75aa6fff6139bad79d0bf77a59fe8d8",
+        "aussiefy/policy.py": "93b2b1a7b44d67c7b6cec238894b6c92a0077d9f8a27f0a4deb646c5538b3bfa",
+        "aussiefy/pos.py": "2dd736bba71f76cab58d0820dea5b48cbcd330b47032a49990b2b84cac3cc50c",
+        "aussiefy/profile.py": "faca5d7b66e4afff461f77ccf7051d9b761e5e9d86487bb21120d3091e1dfc64",
+        "aussiefy/protected.py": "2909130ba76dc405bdc7496929044a81b83ac3efa73c4adc62db1e792dcade03",
+        "aussiefy/realise.py": "5fad29e9b5336132605c4cd9101df46f2955b5298af43d50c4587b7403afe475",
+        "aussiefy/retelling.py": "046b6e1a5865c5cde61ba56390773d7e01f2e4de252833b34ed91d5542a65462",
+        "aussiefy/rounds.py": "5cfa13427ceb4a35611370c3d9576f6ccf2532bc01d9b79dd9dd2d420e5636ca",
+        "aussiefy/schema.py": "6269b7f22add09dd86b2a759330eeab2a3a20a52f27c51d674ad86c81b409c08",
+        "aussiefy/select.py": "e6159763035b3691617793e51af79f40498bd33b4a856eb1a78ea7d8555abd74",
+        "aussiefy/static.py": "a6490595c3200e89ec71639d85d25b6a2f71f5963ebed75fc47ae343d1f4b150",
+        "aussiefy/terms.py": "c8c12beaeb016bc30cb991d6bbaf99d165f0178c76038788d647b8885a2e7106",
+        "aussiefy/text.py": "a50efc87a2648fd2fc487eff5bea70fb1bb1be61be065eb5145109158e01384a",
+        "aussiefy/translation.py": "2cacf2f53b3c9992e5a4696d9244c9ac155566979ab93156c3bdaf0d4c6398e9",
+        "aussiefy/verify.py": "0ba824d0fdfa4fb763da0ebed0085c6872272fe2b1e829324d1a6c6bd3d36965",
+        "aussiefy/vocabulary.py": "f8f60fbc59415ddf2a2d61bbedf78736fab12ae976bcd28873f47380311f945f",
+        "aussiefy/yarn.py": "87b31225c0553a02d0f8bc31b59a1af756f117dd03294f75bac5b2906adc8c25",
+        "aussiefy/data/changes.schema.json": "70f980e00b88c4a14a633bb2c85053a4ddddf46820836b17a23a4e39b2cd82d0",
+        "aussiefy/data/concepts.yaml": "28a22e8fe443ea56d2557c29ac71fe5861b323da288667e55bc4826773f9e1a8",
+        "aussiefy/data/dialect.yaml": "233579ccbf2df852ff0a24267430e795b30033ec4fbab0d0f6e23657f2ef08b8",
+        "aussiefy/data/entries/audit-meaning-extensions.yaml": "fad6c14c4c22b18b21559553cf906ac77208a254245aebe7027c190f2238f8a2",
+        "aussiefy/data/entries/classics.yaml": "274d8b0f27373961abe7bae74cb10b5b58fd346e6739d8f2d711ea1b7f92feb4",
+        "aussiefy/data/entries/contextual-harvest.yaml": "e2c09a5df535712625877362d9f816e63a1592456ab650b6aec3feb2e6a44592",
+        "aussiefy/data/entries/dinkumcheck.yaml": "2f7c4ca793ba5b5de0053b78b548766f0f23be1560bd76354c2197428c8f2980",
+        "aussiefy/data/entries/everyday.yaml": "8b173954ff82a8473b0f3a94ba5de0965180753d73a0ac66c16b2dd2bd01b90a",
+        "aussiefy/data/entries/fairdinkum.yaml": "550a42658e6ad414c7428dab59cf55d7d6f8e9db06ce503710f58ee1d7b393cd",
+        "aussiefy/data/entries/flagged.yaml": "3f4a0ea00ec6394c1dd241f0458a6dbe4beb3247c3d0fa5448642d0e74ad120c",
+        "aussiefy/data/entries/fourthpass.yaml": "d3f4f054429da1ff7dd321e5117a1cfef9514b7429dd07854da00d6aac4aec4c",
+        "aussiefy/data/entries/fragments.yaml": "6c79ea5522929c80081e76546317b817800aa88a6f53b56738da3faec876f05b",
+        "aussiefy/data/entries/gapfill.yaml": "64f99564f67a8a4c07709e11ba66d83b8ab2882a1a2f5fc39c1f3eec5ff68cdd",
+        "aussiefy/data/entries/garnish.yaml": "96817bd2c6858ba5e86f82bceeb9f546ee4b9214efb0ad503a357425096b6cdd",
+        "aussiefy/data/entries/idioms.yaml": "9c8a178ed9ace02e29d93a5c1ee8ce3f715f5ebb9ca9a5ab2995f709f9ebcff4",
+        "aussiefy/data/entries/lexical.yaml": "cb79c6c609946f8dc1372bfe8dcffea4a7b807d3acf29861206d39f11084fa71",
+        "aussiefy/data/entries/meaning-extensions.yaml": "3711526929061676766e6e54ded5334ff17c0b55436cf73272fd5e1fd4fcbabb",
+        "aussiefy/data/entries/phrases.yaml": "3038c25f4870d8a71d92c64ab387d633a6c1f5df2358c37b50851f6ed3a09fea",
+        "aussiefy/data/entries/scraped.yaml": "9bbcb1a35df0e7b033aaa351a05912aa4f0700f831efb5af61619b213361f42e",
+        "aussiefy/data/entries/secondpass.yaml": "97370f97f4e54279a996bb925814f153b9a9d9ecabe9828e361b9148f9d4350c",
+        "aussiefy/data/entries/source-meaning-extensions.yaml": "c2e9ac557263d7eef758ea4c94c9625fb60d416f1be4902428a62cdf499461ff",
+        "aussiefy/data/entries/swearing.yaml": "18d5989f609b4cd48cb2169e3f09e557fb9726949a7134bebcd8ff70ab393528",
+        "aussiefy/data/entries/thirdpass.yaml": "b26bf521efa7c63578a4137b6cc56b0f31b3184091057d947cf23cbe7c006e3e",
+        "aussiefy/data/genres.yaml": "152cb87cbc4ea4ba29c445d019fd1b3abd429826e24e4858f37ef1c6d0800ac4",
+        "aussiefy/data/grammar.yaml": "9c384595403144d446f7823aa6027b014b98c048e07e34fed36e09b5b8b88510",
+        "aussiefy/data/guide.yaml": "4b8b470c83b066d80ce22f63244083ff20cc65e781d63edf38f28655f5e09b8c",
+        "aussiefy/data/imagery.yaml": "ec73cc7e88f02349b9ebd9998f557afc215e15ee910b3fc4c1e409a180c272f8",
+        "aussiefy/data/judge.yaml": "f4122c83d9297c8b359688b23256c62e325df34c7c7c5bac3b593b1bb2596cc2",
+        "aussiefy/data/model/meta.json": "73789e6243e830890131b8762b6acd6c0670c08306beccaa9bcd461e84db3ef8",
+        "aussiefy/data/model/vectors.f16": "4f47c27ecfab0903f557562a5eb351f9a18951f4788e68533c41e8d494cbd840",
+        "aussiefy/data/model/vocab.txt": "e5df53a67a6d46e8284325efc070bc887ffef11bd50093bb6a2719e0eee50b1b",
+        "aussiefy/data/phonetic.yaml": "c0dd876c6254ec9eb12782719a1e4b074dd5b2dae3fe06227c788e0f18dd39c8",
+        "aussiefy/data/pos/README.md": "d51caf6d3b464e907d4f0337f4126caa2f9b31da64940184ea851d4ff6883ca5",
+        "aussiefy/data/pos/meta.json": "d6df62aecd3971528037cd2f387d944537e8a6ce04be7b7d538ae29cb903dc7b",
+        "aussiefy/data/pos/tagger.json.gz": "3222c88544fbc2600def0686055843f9dccc3f60d485c4b791339ea8af2627f6",
+        "aussiefy/data/profiles.yaml": "db918602c1978c2c09e22ac72958882cd68133b83839e82efa4ae1419591f284",
+        "aussiefy/data/riffs.yaml": "4fbc61791215f12fb8d0931135c29e0cbe50003e863aca6650a2e69cc0aedf40",
+        "aussiefy/data/source_policy.yaml": "dc803e176f4795ad48a8bc38cf8bcabadbeaab17dc48f83581569a1a6f949234",
+        "aussiefy/data/sources.yaml": "5bb739367f86073b95af230efaab2aac9317dbb0c9d05b684c33adef0307322a",
+        "aussiefy/data/swears.yaml": "48518167f51ac8f0f3ca19c7614439521d41f36a8ef384d683f86e1ae2d971b2"
+      },
+      "method": {
+        "warmup_runs_per_mode_per_input": 1,
+        "warm_repetitions": 5,
+        "measurement": "perf_counter translation only; serial modes rotate each repetition",
+        "shared": "same current dictionary, grammar, embedding weights and vector caches",
+        "comparison": "exhaustive candidate scores with original generator dot vs current scorer and dot",
+        "scope": "core backend only; excludes construction, network and website overhead",
+        "options": {
+          "level": 4,
+          "seed": 42,
+          "vulgarity": 1,
+          "embellishment": 1
+        }
+      },
+      "model": {
+        "name": "bundled:aussie-static-1.3.0",
+        "dimensions": 256,
+        "fallback_patterns": 582
+      },
+      "benchmarks": [
+        {
+          "input": "short_known",
+          "path": null,
+          "source": "script literal",
+          "sha256": "1cf807d23a7319fb56c622e0b5e26a2f3bf45dbd3079ab69499460497c96d7dc",
+          "words": 15,
+          "characters": 72,
+          "exact_full_result_parity": true,
+          "modes": {
+            "exhaustive_original_dot": {
+              "seconds": [
+                0.003842499922029674,
+                0.006137583055533469,
+                0.003935917047783732,
+                0.008938500075601041,
+                0.0043869169894605875
+              ],
+              "median_seconds": 0.0043869169894605875,
+              "min_seconds": 0.003842499922029674,
+              "max_seconds": 0.008938500075601041,
+              "output_sha256": "ee8e0c99c395500aaa38b0ffa9c2131feed99c54d5deff0e57395d553b0ed54f"
+            },
+            "shape_first_map_dot": {
+              "seconds": [
+                0.0038807500386610627,
+                0.0039996670093387365,
+                0.004730249987915158,
+                0.00599458406213671,
+                0.004579624976031482
+              ],
+              "median_seconds": 0.004579624976031482,
+              "min_seconds": 0.0038807500386610627,
+              "max_seconds": 0.00599458406213671,
+              "output_sha256": "ee8e0c99c395500aaa38b0ffa9c2131feed99c54d5deff0e57395d553b0ed54f"
+            },
+            "ngram": {
+              "seconds": [
+                0.005986167001537979,
+                0.003936583991162479,
+                0.004335375037044287,
+                0.003958499990403652,
+                0.003691124962642789
+              ],
+              "median_seconds": 0.003958499990403652,
+              "min_seconds": 0.003691124962642789,
+              "max_seconds": 0.005986167001537979,
+              "output_sha256": "ee8e0c99c395500aaa38b0ffa9c2131feed99c54d5deff0e57395d553b0ed54f"
+            }
+          }
+        },
+        {
+          "input": "short_fallback",
+          "path": null,
+          "source": "script literal",
+          "sha256": "df8e670fb99d05eab1240e4dd48e7279a75cf360bd498a482303b614c31fef8b",
+          "words": 12,
+          "characters": 81,
+          "exact_full_result_parity": true,
+          "modes": {
+            "exhaustive_original_dot": {
+              "seconds": [
+                0.03790787502657622,
+                0.04088208393659443,
+                0.037796542048454285,
+                0.039071665960364044,
+                0.03828450001310557
+              ],
+              "median_seconds": 0.03828450001310557,
+              "min_seconds": 0.037796542048454285,
+              "max_seconds": 0.04088208393659443,
+              "output_sha256": "530774a93c9a48f9dfece8f5c6996970c488429ff5226f6331b19c9a0cf84883"
+            },
+            "shape_first_map_dot": {
+              "seconds": [
+                0.005397083004936576,
+                0.005888625048100948,
+                0.005032291985116899,
+                0.0058278749929741025,
+                0.005654416047036648
+              ],
+              "median_seconds": 0.005654416047036648,
+              "min_seconds": 0.005032291985116899,
+              "max_seconds": 0.005888625048100948,
+              "output_sha256": "530774a93c9a48f9dfece8f5c6996970c488429ff5226f6331b19c9a0cf84883"
+            },
+            "ngram": {
+              "seconds": [
+                0.003481500083580613,
+                0.003004583064466715,
+                0.0036826669238507748,
+                0.0042507079197093844,
+                0.003090833080932498
+              ],
+              "median_seconds": 0.003481500083580613,
+              "min_seconds": 0.003004583064466715,
+              "max_seconds": 0.0042507079197093844,
+              "output_sha256": "530774a93c9a48f9dfece8f5c6996970c488429ff5226f6331b19c9a0cf84883"
+            }
+          }
+        },
+        {
+          "input": "story",
+          "path": "tests/corpus/classics/drovers_wife.txt",
+          "source": "file",
+          "sha256": "fbad157d7003523603067b598e36e978d58fb31fbf67df1892be098a5700521d",
+          "words": 3209,
+          "characters": 17315,
+          "exact_full_result_parity": true,
+          "modes": {
+            "exhaustive_original_dot": {
+              "seconds": [
+                1.8636977080022916,
+                2.0640983330085874,
+                1.6495352080091834,
+                1.7199001249391586,
+                1.6403582079801708
+              ],
+              "median_seconds": 1.7199001249391586,
+              "min_seconds": 1.6403582079801708,
+              "max_seconds": 2.0640983330085874,
+              "output_sha256": "52dacbaef700d1abe9c8b715cce0994fb6b21b592db6f1dee472bd21f72b3ad1"
+            },
+            "shape_first_map_dot": {
+              "seconds": [
+                0.578836707980372,
+                0.59287462499924,
+                0.49427304102573544,
+                0.5627628749934956,
+                0.488162541994825
+              ],
+              "median_seconds": 0.5627628749934956,
+              "min_seconds": 0.488162541994825,
+              "max_seconds": 0.59287462499924,
+              "output_sha256": "52dacbaef700d1abe9c8b715cce0994fb6b21b592db6f1dee472bd21f72b3ad1"
+            },
+            "ngram": {
+              "seconds": [
+                0.4187883340055123,
+                0.48193345800973475,
+                0.40020966704469174,
+                0.434526874916628,
+                0.4134086249396205
+              ],
+              "median_seconds": 0.4187883340055123,
+              "min_seconds": 0.40020966704469174,
+              "max_seconds": 0.48193345800973475,
+              "output_sha256": "e64d1490ba96658cc6b0810a0b2ab13b075dd7f849b04a0c52e383a8a4ddaefc"
+            }
+          }
+        },
+        {
+          "input": "technical",
+          "path": "tests/corpus/everyday/workplace/mdn_http_cookies.md",
+          "source": "file",
+          "sha256": "dd58d9893a2e0151d3294e7138b4f75bbc4cccb2eae82494198af8afc92da526",
+          "words": 580,
+          "characters": 3950,
+          "exact_full_result_parity": true,
+          "modes": {
+            "exhaustive_original_dot": {
+              "seconds": [
+                0.5510342090856284,
+                0.5305189170176163,
+                0.5687845000065863,
+                0.4124780830461532,
+                0.3748380000470206
+              ],
+              "median_seconds": 0.5305189170176163,
+              "min_seconds": 0.3748380000470206,
+              "max_seconds": 0.5687845000065863,
+              "output_sha256": "cf774c7abd65f1c0dcd50633153d39e5b1aeff6ae5611ea1d9c8c7d74279616d"
+            },
+            "shape_first_map_dot": {
+              "seconds": [
+                0.17797458299901336,
+                0.20101154199801385,
+                0.1448732919525355,
+                0.20745370804797858,
+                0.2821842919802293
+              ],
+              "median_seconds": 0.20101154199801385,
+              "min_seconds": 0.1448732919525355,
+              "max_seconds": 0.2821842919802293,
+              "output_sha256": "cf774c7abd65f1c0dcd50633153d39e5b1aeff6ae5611ea1d9c8c7d74279616d"
+            },
+            "ngram": {
+              "seconds": [
+                0.20576775004155934,
+                0.09627679095137864,
+                0.11378862499259412,
+                0.11855949996970594,
+                0.09956333297304809
+              ],
+              "median_seconds": 0.11378862499259412,
+              "min_seconds": 0.09627679095137864,
+              "max_seconds": 0.20576775004155934,
+              "output_sha256": "cf774c7abd65f1c0dcd50633153d39e5b1aeff6ae5611ea1d9c8c7d74279616d"
+            }
+          }
+        }
+      ],
+      "parity": {
+        "source": "tests/corpus/golden.yaml",
+        "source_sha256": "d41fc766b01c3613c26cfdb29f52ff8f9654fbb9ae9b7edb055a13f8c72dee0e",
+        "input_hashes": [
+          "2dc07c3f489b21895f7aee4c973175201d9e6520b5b5c96df34a405d11057fab",
+          "e46082e487bcf948eab1837e7ce9967e216f9a7913cf4f64f5ea84b1599a3297",
+          "597003ba59cdc454836f59365142f1334b3c7adc241b9bade64b6764928a8890",
+          "9ac98985b35958dc11675f9c90c3c513bd8cb4fddce02e772c196c587d9d37c3",
+          "043843e9d1371294835ac6f45f2548f465dbd46242f54ad105641c876d6da4c0",
+          "d1a197bde6df9eafe980271a9bbe7fc22bf2dca9b310f71ed29deb52b04594ea",
+          "769094c621fdc961573a54c975e18e75ee2787f155a4212ebdb2611990ba4191",
+          "95d6869065533127def0e361a64bac91217d26fc01fc79773c77b9d1bf49a296",
+          "a2a491d83dbd94b93c7ec00a38e729f87f94577e7a4746edb88003f118ba0c8f",
+          "ae1ffc83f2dc9adda972e690337fe92d426bbb70a0de3998731f013a21c3877e",
+          "6490f2cddc096cab43a8672f28f2cd5d5043478cd0b51acb6c91b6c765119d13",
+          "bc049a1cdc2071dd4dc5d8e5af0bb8cfac8713fccd7fe7a03efad7f854876086",
+          "87ccf94311fd6f409e0b52dff509d50f173d4c0f6df84cd9aefa3b0d97a4cd74",
+          "3ededd18894c1d78f9bde5f35b628cfc7f74e3c135b77ce8714219bef18e0acc",
+          "3475e13ef2c4d43bde3adec871f268abb6019b4d65f1d90bc745b5f4d7b79dd5",
+          "193063141fe0f7563a247d752bc2e941ad8a737b2b5285af10c2974dde205277",
+          "e68e6b95448b139a702f8c8f4c371b21165252c0122778532fb67c6f01b9985d",
+          "031c7f77d226f852ae08d190773e783ce04a1f9cb0499e98c694eecd3ebe030b",
+          "bda042be99cb1073e677373c0293524fc9bc640212e458a54f4578139b75b9f5",
+          "ab1b688275dca60618736743a572734445734f930f50b63d722409ef56fc0b40",
+          "cbedf9204009f347ce11d09b8bc51646a882b4dc3d1b94b33972830c98f77b56",
+          "a8e18b488309ff0a650546b3719642a77ff13eb2853e9c59b27175d5196a1341",
+          "cadbb44f04104499cc2992710423c4c3d3ef6c21bcaa4383a34836137a5b9e7d",
+          "82874bc6e5ffea9fe12260f1abaf43bf7a5da1f233761b1a46d6ffcc3b161253",
+          "5acaa3f77bb23a251b3a097562038f18c5bbb16e9cec043252e80efd96e8b31f",
+          "2afcae9965a5656760e71ea29e87ae8833ee50ed11efe3180fdf767637fc99e6",
+          "202ea44f7172ae6819f59cafe6f324ff70ee0b812ec630fb14824124292db5f7",
+          "44c0c05550b02f7a7c77666fdb7956a01e87e902407e9d0d30e3e8a9142b026f",
+          "371b5ed49d86d65442146ee3479c123764a02ec1a9a3c7e76e11c3669f3c48f4",
+          "2bd5e1c9a6a8e5c54034378d38d47cc307d1274dba57961cb2a498b18ccd4d8b",
+          "3dcae3954566ebc41f3244dc8a5c63cb56699733398a27be09d828e703fbf651",
+          "efa6c257fad87d09913844902211c5eed36691ae3b7b41b745996cd566ffeb7e",
+          "5dd43797c5117d21afd2e2685d5a2a2124a19a038405850704202d262bb80da5",
+          "bef36ca6d03e741ec888321093a154665e8beee7b1f3e91090dccf09a28be824",
+          "809838efd41698422636fb2df8bebe2a7e8c29a3baf109b3bdceed6812266903",
+          "4bf6d606c586eda9b7145c4791b217fb57a28df69dcfa66701f5dee4a0c59bc5",
+          "8d6d20a37470f9333c650c7ca6a036c2403893a167edc7254e27b1d7c3f2dc74",
+          "8919a8c3439487491e2111f9a45fb340a61b1ba08b294e863e53a0ad1da0dd3d",
+          "935fa3f700694f520b5fc85156cccfb5f546908ad54787a60f31c5f96e36bf01",
+          "6e09870fd772fd9bdeb8386564fdfdde4a24223eb17100ce95878879b7e98106",
+          "fa7934e70b4ee99bc61280651b5bae3bd2f9807c7564e926a195db41d5d422e8",
+          "a2778055f5a192cff5ddf6cfb57c3dcd5ab24dcda357a33294512701147d28e4",
+          "c2b7122f02628d69f7cea46344833e2e4daafe6ad942034d8ae635654f9806a9",
+          "831f9ee931202597d4aa2878b9d7d952d21de0026f7e230f4d8f19f6c803a1f7",
+          "a91932c5008598ff47c7af0e87f63495666b9f443ad6078a012c2839bb65c2fb",
+          "fbad157d7003523603067b598e36e978d58fb31fbf67df1892be098a5700521d",
+          "dd58d9893a2e0151d3294e7138b4f75bbc4cccb2eae82494198af8afc92da526"
+        ],
+        "inputs": 47,
+        "source_words": 11555,
+        "level_seed_pairs": [
+          [
+            2,
+            0
+          ],
+          [
+            5,
+            42
+          ]
+        ],
+        "comparisons": 94,
+        "exact_full_result_parity": true
+      },
+      "sources_unchanged_during_run": true
+    },
+    "changes": {
+      "budget": 1.5,
+      "passed": true,
+      "summary": {
+        "site default (larrikin, dinkum, dad)": {
+          "gated": true,
+          "median": 1.1,
+          "max": 1.15
+        },
+        "swaggie, troppo, tradie": {
+          "gated": true,
+          "median": 1.29,
+          "max": 1.46
+        },
+        "site default, auto": {
+          "gated": true,
+          "median": 1.05,
+          "max": 1.18
+        },
+        "site default, story": {
+          "gated": true,
+          "median": 1.13,
+          "max": 1.16
+        },
+        "site default, personal": {
+          "gated": true,
+          "median": 1.12,
+          "max": 1.46
+        },
+        "site default, news": {
+          "gated": true,
+          "median": 1.09,
+          "max": 1.11
+        },
+        "site default, instructions": {
+          "gated": true,
+          "median": 1.08,
+          "max": 1.14
+        },
+        "site default, technical": {
+          "gated": true,
+          "median": 1.03,
+          "max": 1.06
+        },
+        "site default, official": {
+          "gated": true,
+          "median": 1.06,
+          "max": 1.1
+        },
+        "stress (every garnish, stacks, infixes)": {
+          "gated": false,
+          "median": 1.43,
+          "max": 1.53
+        },
+        "site default at 10,000 characters": {
+          "gated": false,
+          "median": 1.13,
+          "max": 1.16
+        },
+        "site default at 15,000 characters": {
+          "gated": false,
+          "median": 1.15,
+          "max": 1.15
+        },
+        "site default, Markdown": {
+          "gated": false,
+          "median": 1.18,
+          "max": 1.27
+        }
+      },
+      "rows": [
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 132.8,
+          "changes_ms": 141.8,
+          "ratio": 1.068,
+          "renderings": 50
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 137.4,
+          "changes_ms": 155.8,
+          "ratio": 1.134,
+          "renderings": 59
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 107.7,
+          "changes_ms": 117.8,
+          "ratio": 1.094,
+          "renderings": 35
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 96.8,
+          "changes_ms": 111.5,
+          "ratio": 1.152,
+          "renderings": 45
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 78.7,
+          "changes_ms": 84.4,
+          "ratio": 1.073,
+          "renderings": 32
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 81.6,
+          "changes_ms": 90.7,
+          "ratio": 1.111,
+          "renderings": 31
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 127.4,
+          "changes_ms": 185.5,
+          "ratio": 1.456,
+          "renderings": 111
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 141.1,
+          "changes_ms": 192.3,
+          "ratio": 1.363,
+          "renderings": 111
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 121.7,
+          "changes_ms": 136.4,
+          "ratio": 1.12,
+          "renderings": 86
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 105.1,
+          "changes_ms": 139.6,
+          "ratio": 1.329,
+          "renderings": 88
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 73.1,
+          "changes_ms": 91.1,
+          "ratio": 1.247,
+          "renderings": 56
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 88.6,
+          "changes_ms": 100.1,
+          "ratio": 1.13,
+          "renderings": 54
+        },
+        {
+          "setting": "site default, auto",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 104.9,
+          "changes_ms": 110.4,
+          "ratio": 1.052,
+          "renderings": 50
+        },
+        {
+          "setting": "site default, auto",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 98.7,
+          "changes_ms": 116.4,
+          "ratio": 1.179,
+          "renderings": 59
+        },
+        {
+          "setting": "site default, auto",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 72.5,
+          "changes_ms": 75.4,
+          "ratio": 1.04,
+          "renderings": 18
+        },
+        {
+          "setting": "site default, auto",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 70.7,
+          "changes_ms": 76.0,
+          "ratio": 1.075,
+          "renderings": 14
+        },
+        {
+          "setting": "site default, auto",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 57.3,
+          "changes_ms": 57.2,
+          "ratio": 0.999,
+          "renderings": 2
+        },
+        {
+          "setting": "site default, auto",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 58.6,
+          "changes_ms": 60.7,
+          "ratio": 1.035,
+          "renderings": 5
+        },
+        {
+          "setting": "site default, story",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 93.8,
+          "changes_ms": 105.2,
+          "ratio": 1.121,
+          "renderings": 51
+        },
+        {
+          "setting": "site default, story",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 92.7,
+          "changes_ms": 106.0,
+          "ratio": 1.143,
+          "renderings": 60
+        },
+        {
+          "setting": "site default, story",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 82.0,
+          "changes_ms": 95.0,
+          "ratio": 1.158,
+          "renderings": 35
+        },
+        {
+          "setting": "site default, story",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 84.1,
+          "changes_ms": 95.4,
+          "ratio": 1.134,
+          "renderings": 45
+        },
+        {
+          "setting": "site default, story",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 64.9,
+          "changes_ms": 71.9,
+          "ratio": 1.107,
+          "renderings": 32
+        },
+        {
+          "setting": "site default, story",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 68.6,
+          "changes_ms": 75.7,
+          "ratio": 1.103,
+          "renderings": 31
+        },
+        {
+          "setting": "site default, personal",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 94.7,
+          "changes_ms": 107.8,
+          "ratio": 1.138,
+          "renderings": 50
+        },
+        {
+          "setting": "site default, personal",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 91.9,
+          "changes_ms": 105.1,
+          "ratio": 1.144,
+          "renderings": 59
+        },
+        {
+          "setting": "site default, personal",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 83.5,
+          "changes_ms": 90.5,
+          "ratio": 1.084,
+          "renderings": 35
+        },
+        {
+          "setting": "site default, personal",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 88.2,
+          "changes_ms": 129.1,
+          "ratio": 1.464,
+          "renderings": 45
+        },
+        {
+          "setting": "site default, personal",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 88.4,
+          "changes_ms": 88.6,
+          "ratio": 1.002,
+          "renderings": 32
+        },
+        {
+          "setting": "site default, personal",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 72.8,
+          "changes_ms": 80.3,
+          "ratio": 1.102,
+          "renderings": 31
+        },
+        {
+          "setting": "site default, news",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 109.3,
+          "changes_ms": 114.3,
+          "ratio": 1.046,
+          "renderings": 16
+        },
+        {
+          "setting": "site default, news",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 102.6,
+          "changes_ms": 113.6,
+          "ratio": 1.107,
+          "renderings": 20
+        },
+        {
+          "setting": "site default, news",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 97.4,
+          "changes_ms": 106.6,
+          "ratio": 1.094,
+          "renderings": 18
+        },
+        {
+          "setting": "site default, news",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 90.6,
+          "changes_ms": 97.9,
+          "ratio": 1.081,
+          "renderings": 11
+        },
+        {
+          "setting": "site default, news",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 67.5,
+          "changes_ms": 73.5,
+          "ratio": 1.09,
+          "renderings": 2
+        },
+        {
+          "setting": "site default, news",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 74.3,
+          "changes_ms": 73.8,
+          "ratio": 0.993,
+          "renderings": 5
+        },
+        {
+          "setting": "site default, instructions",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 86.6,
+          "changes_ms": 91.0,
+          "ratio": 1.051,
+          "renderings": 23
+        },
+        {
+          "setting": "site default, instructions",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 87.3,
+          "changes_ms": 96.6,
+          "ratio": 1.107,
+          "renderings": 30
+        },
+        {
+          "setting": "site default, instructions",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 74.5,
+          "changes_ms": 84.5,
+          "ratio": 1.135,
+          "renderings": 18
+        },
+        {
+          "setting": "site default, instructions",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 72.4,
+          "changes_ms": 77.6,
+          "ratio": 1.072,
+          "renderings": 14
+        },
+        {
+          "setting": "site default, instructions",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 58.8,
+          "changes_ms": 62.3,
+          "ratio": 1.059,
+          "renderings": 4
+        },
+        {
+          "setting": "site default, instructions",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 62.3,
+          "changes_ms": 67.5,
+          "ratio": 1.084,
+          "renderings": 5
+        },
+        {
+          "setting": "site default, technical",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 81.0,
+          "changes_ms": 85.7,
+          "ratio": 1.058,
+          "renderings": 18
+        },
+        {
+          "setting": "site default, technical",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 81.1,
+          "changes_ms": 85.8,
+          "ratio": 1.058,
+          "renderings": 20
+        },
+        {
+          "setting": "site default, technical",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 78.1,
+          "changes_ms": 83.0,
+          "ratio": 1.062,
+          "renderings": 17
+        },
+        {
+          "setting": "site default, technical",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 77.5,
+          "changes_ms": 76.0,
+          "ratio": 0.98,
+          "renderings": 7
+        },
+        {
+          "setting": "site default, technical",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 58.8,
+          "changes_ms": 58.9,
+          "ratio": 1.002,
+          "renderings": 2
+        },
+        {
+          "setting": "site default, technical",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 62.4,
+          "changes_ms": 63.0,
+          "ratio": 1.01,
+          "renderings": 5
+        },
+        {
+          "setting": "site default, official",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 83.6,
+          "changes_ms": 92.4,
+          "ratio": 1.105,
+          "renderings": 16
+        },
+        {
+          "setting": "site default, official",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 95.3,
+          "changes_ms": 93.0,
+          "ratio": 0.975,
+          "renderings": 20
+        },
+        {
+          "setting": "site default, official",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 74.9,
+          "changes_ms": 79.8,
+          "ratio": 1.065,
+          "renderings": 18
+        },
+        {
+          "setting": "site default, official",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 76.7,
+          "changes_ms": 81.9,
+          "ratio": 1.068,
+          "renderings": 7
+        },
+        {
+          "setting": "site default, official",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 57.5,
+          "changes_ms": 59.2,
+          "ratio": 1.029,
+          "renderings": 2
+        },
+        {
+          "setting": "site default, official",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 56.9,
+          "changes_ms": 60.0,
+          "ratio": 1.055,
+          "renderings": 5
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "gated": false,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 111.1,
+          "changes_ms": 170.6,
+          "ratio": 1.535,
+          "renderings": 147
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "gated": false,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 109.5,
+          "changes_ms": 164.6,
+          "ratio": 1.504,
+          "renderings": 163
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "gated": false,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 94.7,
+          "changes_ms": 132.3,
+          "ratio": 1.398,
+          "renderings": 117
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "gated": false,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 101.5,
+          "changes_ms": 146.3,
+          "ratio": 1.441,
+          "renderings": 120
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "gated": false,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 73.2,
+          "changes_ms": 99.8,
+          "ratio": 1.364,
+          "renderings": 84
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "gated": false,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 75.9,
+          "changes_ms": 107.8,
+          "ratio": 1.421,
+          "renderings": 70
+        },
+        {
+          "setting": "site default at 10,000 characters",
+          "gated": false,
+          "text": "conversational-a",
+          "characters": 9750,
+          "translate_ms": 181.4,
+          "changes_ms": 205.6,
+          "ratio": 1.134,
+          "renderings": 95
+        },
+        {
+          "setting": "site default at 10,000 characters",
+          "gated": false,
+          "text": "instructions-a",
+          "characters": 9997,
+          "translate_ms": 185.2,
+          "changes_ms": 188.9,
+          "ratio": 1.02,
+          "renderings": 63
+        },
+        {
+          "setting": "site default at 10,000 characters",
+          "gated": false,
+          "text": "news-a",
+          "characters": 9871,
+          "translate_ms": 144.1,
+          "changes_ms": 167.7,
+          "ratio": 1.164,
+          "renderings": 56
+        },
+        {
+          "setting": "site default at 15,000 characters",
+          "gated": false,
+          "text": "conversational-a",
+          "characters": 14913,
+          "translate_ms": 270.9,
+          "changes_ms": 312.0,
+          "ratio": 1.152,
+          "renderings": 133
+        },
+        {
+          "setting": "site default at 15,000 characters",
+          "gated": false,
+          "text": "instructions-a",
+          "characters": 14927,
+          "translate_ms": 248.0,
+          "changes_ms": 285.8,
+          "ratio": 1.152,
+          "renderings": 109
+        },
+        {
+          "setting": "site default at 15,000 characters",
+          "gated": false,
+          "text": "news-a",
+          "characters": 10132,
+          "translate_ms": 152.5,
+          "changes_ms": 164.0,
+          "ratio": 1.075,
+          "renderings": 56
+        },
+        {
+          "setting": "site default, Markdown",
+          "gated": false,
+          "text": "README.md",
+          "characters": 4751,
+          "translate_ms": 76.3,
+          "changes_ms": 96.6,
+          "ratio": 1.266,
+          "renderings": 16
+        },
+        {
+          "setting": "site default, Markdown",
+          "gated": false,
+          "text": "black_readme.md",
+          "characters": 2479,
+          "translate_ms": 30.0,
+          "changes_ms": 35.2,
+          "ratio": 1.172,
+          "renderings": 6
+        },
+        {
+          "setting": "site default, Markdown",
+          "gated": false,
+          "text": "cloud_gov_pages_why.md",
+          "characters": 2830,
+          "translate_ms": 47.1,
+          "changes_ms": 52.0,
+          "ratio": 1.106,
+          "renderings": 10
+        },
+        {
+          "setting": "site default, Markdown",
+          "gated": false,
+          "text": "github_flow.md",
+          "characters": 3855,
+          "translate_ms": 54.9,
+          "changes_ms": 65.6,
+          "ratio": 1.196,
+          "renderings": 21
+        }
+      ]
+    },
+    "writer": {
+      "module": "/Users/robmorris/Development/Underware/aussiefy/aussiefy/__init__.py",
+      "median_seconds": 0.03973420802503824,
+      "samples": [
+        0.05262183304876089,
+        0.03973420802503824,
+        0.03943116695154458,
+        0.0398775830399245,
+        0.03951966704335064
+      ],
+      "words": 560
+    },
+    "core_mode_timings": [
+      {
+        "input": "showcase",
+        "characters": 143,
+        "words": 23,
+        "options": {
+          "level": 4,
+          "vulgarity": 1,
+          "seed": 42,
+          "embellishment": 1,
+          "document_type": "general"
+        },
+        "modes": {
+          "none": {
+            "median_ms": 5.493249977007508,
+            "seconds": [
+              0.007350208004936576,
+              0.0045064170844852924,
+              0.005358958966098726,
+              0.005825500003993511,
+              0.006479583098553121,
+              0.004981791949830949,
+              0.005493249977007508
+            ],
+            "output_sha256": "df26e4c397f80cb82281f37443341bce06ee3c44888b42e0617a15667d3f3a86"
+          },
+          "ngram": {
+            "median_ms": 5.158332991413772,
+            "seconds": [
+              0.005869666929356754,
+              0.004834917024709284,
+              0.004873582976870239,
+              0.01094587508123368,
+              0.008054082980379462,
+              0.005158332991413772,
+              0.004436834016814828
+            ],
+            "output_sha256": "df26e4c397f80cb82281f37443341bce06ee3c44888b42e0617a15667d3f3a86"
+          },
+          "bundled": {
+            "median_ms": 8.569707977585495,
+            "seconds": [
+              0.008195083006285131,
+              0.008569707977585495,
+              0.007901957957074046,
+              0.013573625008575618,
+              0.010564667056314647,
+              0.008416208904236555,
+              0.022923874901607633
+            ],
+            "output_sha256": "df26e4c397f80cb82281f37443341bce06ee3c44888b42e0617a15667d3f3a86"
+          }
+        }
+      },
+      {
+        "input": "composed",
+        "characters": 2011,
+        "words": 361,
+        "options": {
+          "level": 4,
+          "vulgarity": 1,
+          "seed": 42,
+          "embellishment": 1,
+          "document_type": "general"
+        },
+        "modes": {
+          "none": {
+            "median_ms": 77.00537506025285,
+            "seconds": [
+              0.07700537506025285,
+              0.08900541695766151,
+              0.07696237496566027,
+              0.14210733398795128,
+              0.07046995800919831,
+              0.07979341689497232,
+              0.07668004196602851
+            ],
+            "output_sha256": "f2463756a40f7eb5415bd7142a3151605f5774fe405bec6bf1a8b1118b989e8d"
+          },
+          "ngram": {
+            "median_ms": 76.22808299493045,
+            "seconds": [
+              0.07622808299493045,
+              0.07355737499892712,
+              0.29735983395949006,
+              0.11668733402621001,
+              0.08136358310002834,
+              0.07423208293039352,
+              0.07472062495071441
+            ],
+            "output_sha256": "f2463756a40f7eb5415bd7142a3151605f5774fe405bec6bf1a8b1118b989e8d"
+          },
+          "bundled": {
+            "median_ms": 95.17604194115847,
+            "seconds": [
+              0.10381370899267495,
+              0.09091454092413187,
+              0.09517604194115847,
+              0.34253116592299193,
+              0.09485787502489984,
+              0.09134549996815622,
+              0.09677683305926621
+            ],
+            "output_sha256": "f2463756a40f7eb5415bd7142a3151605f5774fe405bec6bf1a8b1118b989e8d"
+          }
+        }
+      }
+    ],
+    "cpu_warm": {
+      "module": "/Users/robmorris/Development/Underware/aussiefy/aussiefy/__init__.py",
+      "timings": [
+        {
+          "corpus": "ordinary",
+          "embellishment": "deadset",
+          "translations_per_batch": 180,
+          "cpu_seconds": [
+            0.48520699999999994,
+            0.5991040000000001,
+            0.47892100000000015,
+            0.430021,
+            0.40072399999999986
+          ],
+          "wall_seconds": [
+            0.77143033395987,
+            1.7786644160514697,
+            0.70538245793432,
+            0.4880936660338193,
+            0.4185524999629706
+          ],
+          "median_cpu_ms": 2.660672222222223,
+          "median_wall_ms": 3.9187914329684443
+        },
+        {
+          "corpus": "ordinary",
+          "embellishment": "troppo",
+          "translations_per_batch": 180,
+          "cpu_seconds": [
+            0.6392229999999999,
+            0.7338259999999996,
+            0.6009529999999996,
+            0.6626029999999998,
+            0.6368469999999995
+          ],
+          "wall_seconds": [
+            0.7130070419516414,
+            1.1833217079984024,
+            0.670397707959637,
+            0.7882527499459684,
+            0.7364504999713972
+          ],
+          "median_cpu_ms": 3.551238888888888,
+          "median_wall_ms": 4.0913916665077625
+        },
+        {
+          "corpus": "degree",
+          "embellishment": "deadset",
+          "translations_per_batch": 180,
+          "cpu_seconds": [
+            0.31746799999999986,
+            0.32644499999999965,
+            0.3149139999999999,
+            0.31089700000000065,
+            0.3206440000000006
+          ],
+          "wall_seconds": [
+            0.3231101669371128,
+            0.3356317499419674,
+            0.3189862919971347,
+            0.3139273750130087,
+            0.3325638329843059
+          ],
+          "median_cpu_ms": 1.7637111111111103,
+          "median_wall_ms": 1.7950564829839601
+        },
+        {
+          "corpus": "degree",
+          "embellishment": "troppo",
+          "translations_per_batch": 180,
+          "cpu_seconds": [
+            0.5281929999999999,
+            0.5327160000000006,
+            0.6239890000000017,
+            0.6410279999999986,
+            0.6550709999999995
+          ],
+          "wall_seconds": [
+            0.5346855000825599,
+            0.542247207951732,
+            0.7199093750678003,
+            0.7167207089951262,
+            0.832737791002728
+          ],
+          "median_cpu_ms": 3.4666055555555646,
+          "median_wall_ms": 3.98178171663959
+        }
+      ]
+    },
+    "diagnostics": {
+      "rows": 648,
+      "reference_rows": 90,
+      "known_literal_reproductions": {
+        "hunger_complement_repeats_enough": 9,
+        "explicit_very_hungry_to_now_im_peckish": 9,
+        "embedded_knackered_rooted_checked_stack": 9
+      },
+      "structural_failures": 0,
+      "verify_failed": 0,
+      "verify_counts": {
+        "critical": 0,
+        "major": 0,
+        "minor": 126
+      }
+    },
+    "lookup": [
+      {
+        "backend": "lexical",
+        "query": "feeling pretty hungry",
+        "note": null,
+        "results": [
+          {
+            "id": "feel-like-a-decent-feed",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "feel-like-some-tucker",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "peckish",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "starvin",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "hungry-enough-horse-jockey",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "hungry",
+        "note": null,
+        "results": [
+          {
+            "id": "hungry-enough-horse-jockey",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "slang term",
+            "score": 2.0
+          },
+          {
+            "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "slang term",
+            "score": 2.0
+          },
+          {
+            "id": "feel-like-a-decent-feed",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "feel-like-some-tucker",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "peckish",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "could do with some food",
+        "note": null,
+        "results": [
+          {
+            "id": "could-do-with-a-feed",
+            "concepts": [
+              "WELCOME_MEAL"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "a cold one at the pub",
+        "note": null,
+        "results": [
+          {
+            "id": "coldie",
+            "concepts": [
+              "COLD_BEER_SERVING"
+            ],
+            "match": "meaning",
+            "score": 0.66
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "probably",
+        "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary.",
+        "results": []
+      },
+      {
+        "backend": "lexical",
+        "query": "wake up",
+        "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary.",
+        "results": []
+      },
+      {
+        "backend": "lexical",
+        "query": "not out of the question",
+        "note": null,
+        "results": [
+          {
+            "id": "no-bloody-way-clause",
+            "concepts": [
+              "IMPOSSIBLE"
+            ],
+            "match": "meaning",
+            "score": 0.66
+          },
+          {
+            "id": "buckleys-chance-clause",
+            "concepts": [
+              "IMPOSSIBLE"
+            ],
+            "match": "meaning",
+            "score": 0.66
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "very tired",
+        "note": null,
+        "results": [
+          {
+            "id": "fucked-broken",
+            "concepts": [
+              "BROKEN",
+              "TIRED"
+            ],
+            "match": "meaning",
+            "score": 0.65
+          },
+          {
+            "id": "knackered",
+            "concepts": [
+              "TIRED"
+            ],
+            "match": "meaning",
+            "score": 0.65
+          },
+          {
+            "id": "buggered",
+            "concepts": [
+              "TIRED",
+              "BROKEN"
+            ],
+            "match": "meaning",
+            "score": 0.65
+          },
+          {
+            "id": "out-on-poss-feet",
+            "concepts": [
+              "TIRED"
+            ],
+            "match": "meaning",
+            "score": 0.65
+          },
+          {
+            "id": "stuffed",
+            "concepts": [
+              "TIRED",
+              "BROKEN",
+              "FULL"
+            ],
+            "match": "meaning",
+            "score": 0.65
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "hard to finish",
+        "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary.",
+        "results": []
+      },
+      {
+        "backend": "lexical",
+        "query": "worked hard",
+        "note": "No entry. If you're sure Australians say it, it's probably fine but unvetted; otherwise rephrase. Consider proposing it for the dictionary.",
+        "results": []
+      },
+      {
+        "backend": "lexical",
+        "query": "everyone",
+        "note": null,
+        "results": [
+          {
+            "id": "every-bastard",
+            "concepts": [
+              "EVERYONE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "every-bugger",
+            "concepts": [
+              "EVERYONE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "you-mob",
+            "concepts": [
+              "YOU_PLURAL",
+              "PLURAL_ADDRESS"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "every-man-and-his-dog",
+            "concepts": [
+              "EVERYONE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "youse",
+            "concepts": [
+              "YOU_PLURAL",
+              "PLURAL_ADDRESS"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "alone",
+        "note": null,
+        "results": [
+          {
+            "id": "on-pat-malone",
+            "concepts": [
+              "PHYSICAL_SOLITUDE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "on-your-pat",
+            "concepts": [
+              "PHYSICAL_SOLITUDE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "on-your-pat-predicate",
+            "concepts": [
+              "PHYSICAL_SOLITUDE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "gridiron",
+            "concepts": [
+              "GRIDIRON"
+            ],
+            "match": "meaning",
+            "score": 0.9
+          },
+          {
+            "id": "on-the-dole",
+            "concepts": [
+              "UNEMPLOYMENT_BENEFIT_RECIPIENT"
+            ],
+            "match": "meaning",
+            "score": 0.9
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "lonely",
+        "note": null,
+        "results": [
+          {
+            "id": "lonely-as-a-shag-on-a-rock",
+            "concepts": [
+              "LONELY"
+            ],
+            "match": "slang term",
+            "score": 2.0
+          },
+          {
+            "id": "like-a-shag-on-a-rock",
+            "concepts": [
+              "LONELY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "a small bottle of beer",
+        "note": null,
+        "results": [
+          {
+            "id": "stubby",
+            "concepts": [
+              "SMALL_BEER_BOTTLE"
+            ],
+            "match": "meaning",
+            "score": 0.91
+          },
+          {
+            "id": "a-middy",
+            "concepts": [
+              "MIDDY_BEER"
+            ],
+            "match": "meaning",
+            "score": 0.68
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "a can of beer",
+        "note": null,
+        "results": [
+          {
+            "id": "tinnie",
+            "concepts": [
+              "BEER_CAN"
+            ],
+            "match": "meaning",
+            "score": 0.86
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "feeling pretty hungry",
+        "note": null,
+        "results": [
+          {
+            "id": "feel-like-a-decent-feed",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "feel-like-some-tucker",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "peckish",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "starvin",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "hungry-enough-horse-jockey",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "hungry",
+        "note": null,
+        "results": [
+          {
+            "id": "hungry-enough-horse-jockey",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "slang term",
+            "score": 2.0
+          },
+          {
+            "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "slang term",
+            "score": 2.0
+          },
+          {
+            "id": "feel-like-a-decent-feed",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "feel-like-some-tucker",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "peckish",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "could do with some food",
+        "note": null,
+        "results": [
+          {
+            "id": "could-do-with-a-feed",
+            "concepts": [
+              "WELCOME_MEAL"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "wouldnt-say-no-to-some-tucker",
+            "concepts": [
+              "WELCOME_FOOD"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.75
+          },
+          {
+            "id": "feel-like-some-tucker",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.67
+          },
+          {
+            "id": "not-have-a-bar-of",
+            "concepts": [
+              "WANT_NO_PART_OF"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.64
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "a cold one at the pub",
+        "note": null,
+        "results": [
+          {
+            "id": "pub",
+            "concepts": [
+              "PUB"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.68
+          },
+          {
+            "id": "coldie",
+            "concepts": [
+              "COLD_BEER_SERVING"
+            ],
+            "match": "meaning",
+            "score": 0.66
+          },
+          {
+            "id": "a-counter-lunch",
+            "concepts": [
+              "PUB_LUNCH"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.62
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "probably",
+        "note": null,
+        "results": [
+          {
+            "id": "defo",
+            "concepts": [
+              "DEFINITELY"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.63
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "wake up",
+        "note": null,
+        "results": [
+          {
+            "id": "move-your-arse",
+            "concepts": [
+              "HURRY"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.66
+          },
+          {
+            "id": "get-a-wriggle-on",
+            "concepts": [
+              "HURRY"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.66
+          },
+          {
+            "id": "chuck-it-in",
+            "concepts": [
+              "QUIT"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.64
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "not out of the question",
+        "note": null,
+        "results": [
+          {
+            "id": "no-bloody-way-clause",
+            "concepts": [
+              "IMPOSSIBLE"
+            ],
+            "match": "meaning",
+            "score": 0.66
+          },
+          {
+            "id": "buckleys-chance-clause",
+            "concepts": [
+              "IMPOSSIBLE"
+            ],
+            "match": "meaning",
+            "score": 0.66
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "very tired",
+        "note": null,
+        "results": [
+          {
+            "id": "fucked-broken",
+            "concepts": [
+              "BROKEN",
+              "TIRED"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.83
+          },
+          {
+            "id": "knackered",
+            "concepts": [
+              "TIRED"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.83
+          },
+          {
+            "id": "buggered",
+            "concepts": [
+              "TIRED",
+              "BROKEN"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.83
+          },
+          {
+            "id": "out-on-poss-feet",
+            "concepts": [
+              "TIRED"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.83
+          },
+          {
+            "id": "stuffed",
+            "concepts": [
+              "TIRED",
+              "BROKEN",
+              "FULL"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.83
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "hard to finish",
+        "note": null,
+        "results": [
+          {
+            "id": "see-the-job-through",
+            "concepts": [
+              "FINISH_JOB"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.68
+          },
+          {
+            "id": "scoff",
+            "concepts": [
+              "GOBBLE"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.65
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "worked hard",
+        "note": null,
+        "results": [
+          {
+            "id": "het-up",
+            "concepts": [
+              "WORKED_UP"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.63
+          },
+          {
+            "id": "do-the-hard-yards",
+            "concepts": [
+              "WORK_HARD"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.62
+          },
+          {
+            "id": "work-arse-off",
+            "concepts": [
+              "WORK_HARD"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.62
+          },
+          {
+            "id": "bust-a-gut",
+            "concepts": [
+              "WORK_HARD"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.62
+          },
+          {
+            "id": "work-like-billy-o",
+            "concepts": [
+              "WORK_HARD"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.62
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "everyone",
+        "note": null,
+        "results": [
+          {
+            "id": "every-bastard",
+            "concepts": [
+              "EVERYONE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "every-bugger",
+            "concepts": [
+              "EVERYONE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "you-mob",
+            "concepts": [
+              "YOU_PLURAL",
+              "PLURAL_ADDRESS"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "every-man-and-his-dog",
+            "concepts": [
+              "EVERYONE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "youse",
+            "concepts": [
+              "YOU_PLURAL",
+              "PLURAL_ADDRESS"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "alone",
+        "note": null,
+        "results": [
+          {
+            "id": "on-pat-malone",
+            "concepts": [
+              "PHYSICAL_SOLITUDE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "on-your-pat",
+            "concepts": [
+              "PHYSICAL_SOLITUDE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "on-your-pat-predicate",
+            "concepts": [
+              "PHYSICAL_SOLITUDE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "lonely-as-a-shag-on-a-rock",
+            "concepts": [
+              "LONELY"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.92
+          },
+          {
+            "id": "gridiron",
+            "concepts": [
+              "GRIDIRON"
+            ],
+            "match": "meaning",
+            "score": 0.9
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "lonely",
+        "note": null,
+        "results": [
+          {
+            "id": "lonely-as-a-shag-on-a-rock",
+            "concepts": [
+              "LONELY"
+            ],
+            "match": "slang term",
+            "score": 2.0
+          },
+          {
+            "id": "like-a-shag-on-a-rock",
+            "concepts": [
+              "LONELY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "a small bottle of beer",
+        "note": null,
+        "results": [
+          {
+            "id": "stubby",
+            "concepts": [
+              "SMALL_BEER_BOTTLE"
+            ],
+            "match": "meaning",
+            "score": 0.91
+          },
+          {
+            "id": "a-middy",
+            "concepts": [
+              "MIDDY_BEER"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.77
+          },
+          {
+            "id": "tinnie",
+            "concepts": [
+              "BEER_CAN"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.74
+          },
+          {
+            "id": "stop-a-pot",
+            "concepts": [
+              "HAVE_BEER"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.7
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "a can of beer",
+        "note": null,
+        "results": [
+          {
+            "id": "tinnie",
+            "concepts": [
+              "BEER_CAN"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.86
+          },
+          {
+            "id": "stop-a-pot",
+            "concepts": [
+              "HAVE_BEER"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.8
+          },
+          {
+            "id": "stubby",
+            "concepts": [
+              "SMALL_BEER_BOTTLE"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.72
+          },
+          {
+            "id": "slab",
+            "concepts": [
+              "CASE_OF_BEER"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.67
+          },
+          {
+            "id": "piss-grog",
+            "concepts": [
+              "ALCOHOL"
+            ],
+            "match": "meaning (local model)",
+            "score": 0.66
+          }
+        ]
+      }
+    ]
+  },
+  "after": {
+    "metadata": {
+      "git_head": "b9c8b95e6376b96cd0cae6055b45536b5be9a199",
+      "python": "3.12.13 (main, May 10 2026, 23:27:07) [Clang 17.0.0 (clang-1700.6.3.2)]",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "machine": "arm64",
+      "dictionary_sha256": "6b8c11b2a1595e38dfe8beb6be8f45c519584516e02cc3667c1a5f405acd4c9a",
+      "driver_sha256": "36aef017e7892805f6197eb3e9eea16860e80923f940aaf8e21e290f82be6bed",
+      "bundled_model": {
+        "version": "1.3.0",
+        "sha256": {
+          "meta.json": "73789e6243e830890131b8762b6acd6c0670c08306beccaa9bcd461e84db3ef8",
+          "vocab.txt": "e5df53a67a6d46e8284325efc070bc887ffef11bd50093bb6a2719e0eee50b1b",
+          "vectors.f16": "4f47c27ecfab0903f557562a5eb351f9a18951f4788e68533c41e8d494cbd840"
+        }
+      },
+      "purpose": "Fixed known-diagnostic and new composed sentences; not held-out generalisation or a blind judge.",
+      "seeds": [
+        0,
+        1,
+        42
+      ],
+      "level": 5,
+      "vulgarity": 2,
+      "document_type": "auto"
+    },
+    "artifact_sha256": {
+      "aggregate.py": "f5f27fe905e39b5054da68b1d300d7def4d6b8fd4aad41afd56cf628b078998e",
+      "bundled-profile.txt": "7426db4942c406e4922fece829202c6ac8e2b07c23477235d557957b6b03fbca",
+      "challenge-outputs.json": "6d0478e01bff052b282553a50a5d33afd7e04f7beb21b49d142b4f3dfcb8f697",
+      "challenge-verification.json": "1366bd18de83b496007d5a5ff3bcbaef593116b249d16db4241bc3168b815857",
+      "changes.json": "f30b9dc8450c56aaa0183c0e8cd8fa76b1a8a33b245b16d3ab0958d78cb4bbb8",
+      "changes.log": "55c2357be6a76cdea353cc65ad038ced6af5079c1f798c7dd20adb21caeb08da",
+      "changes.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compare-diagnostics.py": "ea718db0e8d91c22831e36416d0e783183c7d85f92b7a1b7055dbf90b5ffea39",
+      "core-mode-timings.json": "bcc63d8bf42f80a89a80490a3a73b53ee10aeebacc503d9db817f4686016475a",
+      "cpu-current.json": "b84dd49edba52476c662c2feb7ea1f1c554b57361cc449e8aa20c004b9c587a3",
+      "cpu-current.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cpu-warm.py": "0770b64fc4081b2f9e399f38ecd9bec5479592719444e497af3ec1e87b244469",
+      "execution.json": "086739a9fe3d3375d5281196fc08959c29aa6062853fb36f7eb3d5ca56009722",
+      "execution.log": "692ef180547cd51b384b266db826f4f729b638b71a26a3411ed84f82fc44a78b",
+      "lookup.json": "ac2a2f4fb5b4161d7d4ea016e963c44874e03b6e3acea0db07474f604dffb8bd",
+      "metadata.json": "7f7313bc0ef661908278f31fc3a999c4e01459a6935ddb23fda486e95f13ee04",
+      "model.log": "c5071095e1223e866438b8f540b44b2979a5bd293a13096fc1f532fb06e548e1",
+      "model.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "probe.log": "23d31e7c4c023aa5102d4288dc85cc573a445c81001b83fcf6dc9f5c44726c37",
+      "probe.py": "af66b2e2ed7942d204f5eee1f622a41fa01afaf186cfc39794c8e7b025f1db0a",
+      "probe.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "quantity.json": "b9e24bd90fde425de6cd2cea05af6532486ac689d427f698aa28d3c7ae358e71",
+      "quantity.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "readback.txt": "22e4514778df20e21281a528dafcd04f54a2f49ae7a7a2c3d621811975b740a8",
+      "reference-outputs.json": "8ea9590c289970a2e41ef603a7edf29e29ca4b50e32e919a61003f3d87692483",
+      "run-benchmarks.py": "eab5450ea3d6d99514c4d392ccffaf517e3aa93e6bb6a191f214316dd7f820fc",
+      "slang.json": "d1eff00a786d0dd7ad3bb3cc5c8487f4779dac29cad730c762b441696157c28e",
+      "slang.log": "e908267acb5b24fcdff95a266a0ccea45ebfeccd9331c6f639077431bdc59af5",
+      "slang.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "smart.json": "18ba43cab139b3e0cfff43826ce630352de7fcc86881167066997a8187142dda",
+      "smart.log": "2d574eec94550170ba4c62dbd2c392b3ba427697db9d60c1d4fc0ca64fcf206f",
+      "smart.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "writer.json": "46af69219f7a661522c6936fd7e4160a41bc3e576a969f54095ba7a8bdd8adcb",
+      "writer.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "curated": {
+      "labels_sha256": "cf0b79355f69fd59b36a851697bed8a52fe188a95a9cede465e9bea87660c96c",
+      "scorer_sha256": "6a1a1f652a871802b438fe483d5037bcb077b58c5d642398dcd3d75648c7bb41",
+      "contract": {
+        "level": 5,
+        "vulgarity": 2,
+        "embellishment": "troppo",
+        "document_type": "general",
+        "embedder": "none",
+        "seeds": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "documents": [
+        {
+          "id": "gettysburg",
+          "unique_expressions": 10,
+          "unique_hits": 5,
+          "share": 0.5,
+          "labels": [
+            {
+              "id": "brand-new",
+              "forms": [
+                "brand-spankin'-new"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+              ]
+            },
+            {
+              "id": "blokes",
+              "forms": [
+                "blokes"
+              ],
+              "hit_seeds": [
+                0,
+                3,
+                4
+              ],
+              "output_occurrences": [
+                1,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "civil-stoush",
+              "forms": [
+                "civil stoush"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "id": "mob",
+              "forms": [
+                "mob"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "poor-buggers",
+              "forms": [
+                "poor buggers"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "cark-it",
+              "forms": [
+                "carked it",
+                "cark it"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                3,
+                2,
+                2
+              ]
+            },
+            {
+              "id": "keep-kicking",
+              "forms": [
+                "keep on kickin'"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "proper-crack",
+              "forms": [
+                "had a proper crack"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "brave-bastards",
+              "forms": [
+                "brave bastards"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "id": "get-stuck-into",
+              "forms": [
+                "get stuck into"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "output_sha256": [
+            "089f42a465e0e75c070c1de19016718aeb7816d5f546c1ef57fb186fbdf01558",
+            "8567944f2c5de12634a4be18d879978211815d0fd0d2e0c48917c924d9240c24",
+            "d446f40601964d5de377bbe3537574eb133f85505cc46b040d5d5ec0318f6be0",
+            "641e5a3ce2b3fcc138415df8f2652711e4bfef08c9147c96ece6cde76e6f1f27",
+            "363a0ff9bbf50642e5d5c64908fe9645ddc5eb1ff94d1589a4994d6c10482d47",
+            "a671514dc487d34b4093fa738b3a8d91127d42460e728fd3450824b18cbf1e50",
+            "6c73153410885bd800ee22230688b6f6e810fcb7f6f6990e07299c8b48b3e11f",
+            "c886b01d4976ca7e08ddb4b090cf01cd3301e387637acd0e9edffe2dce5af16a",
+            "7e43543ff2e2b413a4cab2fd419f71575ed60a7bc83919d706f12bb6f4269f9b",
+            "008f72507c79a57bae19faaa3c291e5cb0d1618c05b2b6c3b1722e16e7caacd4"
+          ]
+        },
+        {
+          "id": "goldilocks-full",
+          "unique_expressions": 22,
+          "unique_hits": 10,
+          "share": 0.45454545454545453,
+          "labels": [
+            {
+              "id": "bush",
+              "forms": [
+                "bush"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3,
+                3
+              ]
+            },
+            {
+              "id": "knackered",
+              "forms": [
+                "knackered"
+              ],
+              "hit_seeds": [
+                3,
+                5,
+                7
+              ],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "buggered",
+              "forms": [
+                "Buggered"
+              ],
+              "hit_seeds": [
+                2,
+                3,
+                5,
+                7,
+                8
+              ],
+              "output_occurrences": [
+                0,
+                0,
+                1,
+                1,
+                0,
+                1,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            {
+              "id": "horse-jockey",
+              "forms": [
+                "could've eaten a horse and chased the bloody jockey"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "have-crack",
+              "forms": [
+                "Has a crack"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "shearers-armpit",
+              "forms": [
+                "hotter than a shearer's armpit"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "id": "witchs-tit",
+              "forms": [
+                "colder than a witch's tit"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                3,
+                6,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                1,
+                1,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                1,
+                1
+              ]
+            },
+            {
+              "id": "gets-stuck-into",
+              "forms": [
+                "gets stuck into"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "scoff-lot",
+              "forms": [
+                "scoffs the lot"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "skerrick",
+              "forms": [
+                "skerrick"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "just-ticket",
+              "forms": [
+                "just the ticket"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                1,
+                2,
+                1,
+                1,
+                2,
+                1,
+                1,
+                1,
+                2,
+                1
+              ]
+            },
+            {
+              "id": "plonk-backside",
+              "forms": [
+                "plonk her backside down"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "arse-over-tit",
+              "forms": [
+                "Arse over tit"
+              ],
+              "hit_seeds": [
+                0,
+                8
+              ],
+              "output_occurrences": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0
+              ]
+            },
+            {
+              "id": "rooted",
+              "forms": [
+                "rooted"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "have-kip",
+              "forms": [
+                "have a kip"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "squiz",
+              "forms": [
+                "has a squiz"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "some-bugger",
+              "forms": [
+                "Some bugger"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "id": "shirty",
+              "forms": [
+                "shirty"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "chair-buggery",
+              "forms": [
+                "smashed me chair to buggery"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "id": "spewing",
+              "forms": [
+                "spewin'"
+              ],
+              "hit_seeds": [
+                3,
+                7,
+                8
+              ],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                1,
+                0
+              ]
+            },
+            {
+              "id": "some-bastard",
+              "forms": [
+                "Some bastard"
+              ],
+              "hit_seeds": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+              ],
+              "output_occurrences": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            {
+              "id": "bondi-tram",
+              "forms": [
+                "shootin' through like a Bondi tram"
+              ],
+              "hit_seeds": [],
+              "output_occurrences": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "output_sha256": [
+            "1fdeb71a90664e04fdf43e4877d3f9aad927770e21da3ab2a90e968ec35835b2",
+            "afbd7459d8ee430f1b033066169e2ff3efd7a4b78ce608fc533859db1303b1f0",
+            "435a476f5bfc35610faff1f04c3ff97a1a9babc2b7dbb0e9fc7246acf6ea5fbc",
+            "7fe39036b0fb7ea76fa0a72dfcf20643184d85e39f3800aa613e9b3339817984",
+            "414cfe4f22aeb90fdf26140059ef83bade025bfd79d4466fd0e0f272c2430eb1",
+            "2b3e190db1c79e35ff7822a936475852da863566404a9d521247eed6deed71d2",
+            "c84da5b6bfae8fdc6ba3246f2011fd7f0aaeb9ce36e51363862b224c24838361",
+            "7d7be7ea1f70d90cc64e7a82d1a55cad2199c4de052f99aa78f141d6201a5b3b",
+            "1c58b80a6ea78caba91a020dcf2b54850484bb6c6b0353c8bca002fe6c7e6a2d",
+            "ae047aeb32c4d757adaeedaba5cf20804158519384bd9655e2a7e250520d09e5"
+          ]
+        }
+      ]
+    },
+    "historical_wording": {
+      "source_sha256": "809838efd41698422636fb2df8bebe2a7e8c29a3baf109b3bdceed6812266903",
+      "anchors_sha256": "5580a5ebe5ef82f3e4b0122079a87691b472ce494908a07c37f0dde68c88f4ab",
+      "level": 5,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "measure": "Frozen historical wording overlap, not a semantic quality score."
+    },
+    "historical_wording_rows": [
+      {
+        "document_type": "auto",
+        "embellishment": "deadset",
+        "hits": 8,
+        "denominator": 25,
+        "quantity_approximation": false
+      },
+      {
+        "document_type": "auto",
+        "embellishment": "dinkum",
+        "hits": 12,
+        "denominator": 25,
+        "quantity_approximation": true
+      },
+      {
+        "document_type": "auto",
+        "embellishment": "troppo",
+        "hits": 15,
+        "denominator": 25,
+        "quantity_approximation": true
+      },
+      {
+        "document_type": "technical",
+        "embellishment": "troppo",
+        "hits": 9,
+        "denominator": 25,
+        "quantity_approximation": false
+      }
+    ],
+    "smart": {
+      "started_utc": "2026-10-19T17:03:46.258357+00:00",
+      "finished_utc": "2026-10-19T17:04:20.618154+00:00",
+      "python": "3.12.13 (main, May 10 2026, 23:27:07) [Clang 17.0.0 (clang-1700.6.3.2)]",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "machine": "arm64",
+      "script_sha256": "5f0ab919d33a393e6b78e823dd5da98d0d491c462b20d0ccf85810d6da4c6b76",
+      "source_hashes": {
+        "aussiefy/__init__.py": "86a3896a45b385e9c2d27de1b11668ecaf6b4a04586425d75c0d833cb8c7d2ec",
+        "aussiefy/align.py": "c81e2d5e2bde60d6cfd80ace84d40ae4cf453a9007cb9b28645ad27ec8a80b0b",
+        "aussiefy/cards.py": "86e6b92d8af644abf56e7412504ae2fc3030b4911a872ee97a86851867640d7f",
+        "aussiefy/changes.py": "73717df82b5bc13b8e65ec9ffc1473ca4854bcf57f0f5b99b14c4b88f247d7ce",
+        "aussiefy/claude.py": "c5d67f3c351006663be3f1095ba0dd27a83c2e2d866ccb38e20bd03de4db49e8",
+        "aussiefy/cli.py": "58aeede257d2b8ac9e86dee2b52b63a7a2a7baeb192edd28c7c16d2076af6b72",
+        "aussiefy/context.py": "85ffb726f2b948870b2da4e6ee31a16ccfa2d553dd64b42cdc8f9fce514a4359",
+        "aussiefy/degree.py": "87ef68f9970249cf9eb76650d6de73f98df6dee1ab7d2c43e56ed3945006e247",
+        "aussiefy/detect.py": "4d2b75aa5a68f124a0f8194aa36d5dafd13515540bd50c9cea9e5b32b27dbe28",
+        "aussiefy/dialect.py": "8cf34ba9a2bdb86d924351122b4eaa6a2690730f64d1bc0ee97f6a6a8e46eb33",
+        "aussiefy/dump.py": "208fa74cd244718552d8dc2065321f44f604c8ac79937bcabb010fdc030fbf20",
+        "aussiefy/embed.py": "afb78a3624c86492800aa8f639f008d45c8de5906d930827a47f169bd01a737f",
+        "aussiefy/engine.py": "1e44bbc90c88f50a8ec0bcbba2e1d240b41ff455c213ff3e0e2810d38b587127",
+        "aussiefy/errors.py": "3c565cfe02d93f68f0a57bb1013a0dc799b47bea748c9a38b1639e1483448319",
+        "aussiefy/explain.py": "9027beb88ce242457c772fdef6023308acd9ace3c94c5a17055f42b36eade907",
+        "aussiefy/gaps.py": "715711e7c5eb0d21d48b1a5ce07e51f904ba6bde20be621d7be8f5802bb241c0",
+        "aussiefy/garnish.py": "0255b091a0be93fcbe2f7a4cf98da8049e266f72ef0c9d19d393650af13873fb",
+        "aussiefy/genre.py": "a7dcb46b68f40c76d4c451dbde7810a7752bcf801584c7eace8c77f64074e952",
+        "aussiefy/guide.py": "94f588019ecb5e79165e675d7835cce7c184f886cc06e7e23caff0625810ed97",
+        "aussiefy/harness.py": "a6832bfe3ea2cf3a494db2f1b70d557ad9083c808aac927e2896146834c5ce8a",
+        "aussiefy/imagery.py": "56d4a3198f43097824238150b0876893270f09102a16acce9608ac1ee09de5e7",
+        "aussiefy/judge.py": "6fc1aca4c3e746f8a2dd91690bd46c64ef0981f50a90016283789c1c0119e725",
+        "aussiefy/lint.py": "67b2146ce729f7372b722c154a541a4c6d1c4dcfeb44ef98a7594c26e553b091",
+        "aussiefy/llm.py": "4f7a4aacfa0f6e060417ec6690829c8a764459e205af91924f6a798b3890a7ca",
+        "aussiefy/loader.py": "cd3c9480458ebf9c19c41f3a7d351af4d793191412f14ebfca4a781964697ac3",
+        "aussiefy/lookup.py": "55b9ea4775ed4c54b4a9582a50b91c3454f629877085d8329e2b9991e722b4a1",
+        "aussiefy/markdown.py": "e5ff49bfe9970ae149025f1aa2995911987200d7b2f1731e85ae0586f325b8b2",
+        "aussiefy/markup.py": "9bfe4154dafd8181185c12fb23d130c614b205a4a3ab5b7fc9dcd858ba36ab64",
+        "aussiefy/masks.py": "cc9b6589c82c2d5011ca8824ab9d165bbdc36e2bc611383a27ff68b1a6fcdff2",
+        "aussiefy/matcher.py": "546a28746f1fd20f1727da912ad67328062b2722944d7bdd50349c02a7156332",
+        "aussiefy/mcp_server.py": "2d820e696297ef78997c4d7dde8a81fb0392f1f23a6acbd00e74b198c5e3e488",
+        "aussiefy/model.py": "466b0bcf29051ae86c14fdaf4b8de8cd42e7ebdf996e69264acdf514c3553efe",
+        "aussiefy/models.py": "b8c1e4f03d9d2bbe221fd2382112afb07668e489b50499a51a41995a0afcbf65",
+        "aussiefy/morph.py": "54a9b48cc11cb7514f9fdc0f7edf0380e75aa6fff6139bad79d0bf77a59fe8d8",
+        "aussiefy/policy.py": "93b2b1a7b44d67c7b6cec238894b6c92a0077d9f8a27f0a4deb646c5538b3bfa",
+        "aussiefy/pos.py": "2dd736bba71f76cab58d0820dea5b48cbcd330b47032a49990b2b84cac3cc50c",
+        "aussiefy/profile.py": "faca5d7b66e4afff461f77ccf7051d9b761e5e9d86487bb21120d3091e1dfc64",
+        "aussiefy/protected.py": "2909130ba76dc405bdc7496929044a81b83ac3efa73c4adc62db1e792dcade03",
+        "aussiefy/realise.py": "5fad29e9b5336132605c4cd9101df46f2955b5298af43d50c4587b7403afe475",
+        "aussiefy/retelling.py": "046b6e1a5865c5cde61ba56390773d7e01f2e4de252833b34ed91d5542a65462",
+        "aussiefy/rounds.py": "5cfa13427ceb4a35611370c3d9576f6ccf2532bc01d9b79dd9dd2d420e5636ca",
+        "aussiefy/schema.py": "6269b7f22add09dd86b2a759330eeab2a3a20a52f27c51d674ad86c81b409c08",
+        "aussiefy/select.py": "44d0316bae6c0980ddeff99eed09c6054a347b941b320f1a5a0fe93a6e052cec",
+        "aussiefy/semantic_checks.py": "a4b642dff8aef940e4f761bdb3823d2ecdb453bb9912c14102f039a5e3368e0d",
+        "aussiefy/static.py": "a6490595c3200e89ec71639d85d25b6a2f71f5963ebed75fc47ae343d1f4b150",
+        "aussiefy/terms.py": "c8c12beaeb016bc30cb991d6bbaf99d165f0178c76038788d647b8885a2e7106",
+        "aussiefy/text.py": "a50efc87a2648fd2fc487eff5bea70fb1bb1be61be065eb5145109158e01384a",
+        "aussiefy/translation.py": "2cacf2f53b3c9992e5a4696d9244c9ac155566979ab93156c3bdaf0d4c6398e9",
+        "aussiefy/verify.py": "3e6f872d233162f89db0cc1471829275fcb3f5d7d85129d4440fd3cd5ed44f83",
+        "aussiefy/vocabulary.py": "f8f60fbc59415ddf2a2d61bbedf78736fab12ae976bcd28873f47380311f945f",
+        "aussiefy/yarn.py": "87b31225c0553a02d0f8bc31b59a1af756f117dd03294f75bac5b2906adc8c25",
+        "aussiefy/data/changes.schema.json": "70f980e00b88c4a14a633bb2c85053a4ddddf46820836b17a23a4e39b2cd82d0",
+        "aussiefy/data/concepts.yaml": "127837d866ba910a4378be9837c93f7e8fc25f13134d6bcb8e986f7567a57b74",
+        "aussiefy/data/dialect.yaml": "233579ccbf2df852ff0a24267430e795b30033ec4fbab0d0f6e23657f2ef08b8",
+        "aussiefy/data/entries/audit-meaning-extensions.yaml": "fad6c14c4c22b18b21559553cf906ac77208a254245aebe7027c190f2238f8a2",
+        "aussiefy/data/entries/classics.yaml": "274d8b0f27373961abe7bae74cb10b5b58fd346e6739d8f2d711ea1b7f92feb4",
+        "aussiefy/data/entries/contextual-harvest.yaml": "e2c09a5df535712625877362d9f816e63a1592456ab650b6aec3feb2e6a44592",
+        "aussiefy/data/entries/dinkumcheck.yaml": "2f7c4ca793ba5b5de0053b78b548766f0f23be1560bd76354c2197428c8f2980",
+        "aussiefy/data/entries/everyday.yaml": "8b173954ff82a8473b0f3a94ba5de0965180753d73a0ac66c16b2dd2bd01b90a",
+        "aussiefy/data/entries/fairdinkum.yaml": "550a42658e6ad414c7428dab59cf55d7d6f8e9db06ce503710f58ee1d7b393cd",
+        "aussiefy/data/entries/flagged.yaml": "3f4a0ea00ec6394c1dd241f0458a6dbe4beb3247c3d0fa5448642d0e74ad120c",
+        "aussiefy/data/entries/fourthpass.yaml": "d3f4f054429da1ff7dd321e5117a1cfef9514b7429dd07854da00d6aac4aec4c",
+        "aussiefy/data/entries/fragments.yaml": "6c79ea5522929c80081e76546317b817800aa88a6f53b56738da3faec876f05b",
+        "aussiefy/data/entries/gapfill.yaml": "64f99564f67a8a4c07709e11ba66d83b8ab2882a1a2f5fc39c1f3eec5ff68cdd",
+        "aussiefy/data/entries/garnish.yaml": "96817bd2c6858ba5e86f82bceeb9f546ee4b9214efb0ad503a357425096b6cdd",
+        "aussiefy/data/entries/idioms.yaml": "28c20c05a64c774af56d87e955d055c65b4efb48cb7b31685d7197e46d2bb93e",
+        "aussiefy/data/entries/lexical.yaml": "41a9a64e382c0c69ad1846bea3a9d2f939466d20382c6459e0ab4f63d9f7b6e0",
+        "aussiefy/data/entries/meaning-extensions.yaml": "3711526929061676766e6e54ded5334ff17c0b55436cf73272fd5e1fd4fcbabb",
+        "aussiefy/data/entries/phrases.yaml": "3038c25f4870d8a71d92c64ab387d633a6c1f5df2358c37b50851f6ed3a09fea",
+        "aussiefy/data/entries/scraped.yaml": "9bbcb1a35df0e7b033aaa351a05912aa4f0700f831efb5af61619b213361f42e",
+        "aussiefy/data/entries/secondpass.yaml": "97370f97f4e54279a996bb925814f153b9a9d9ecabe9828e361b9148f9d4350c",
+        "aussiefy/data/entries/source-meaning-extensions.yaml": "c2e9ac557263d7eef758ea4c94c9625fb60d416f1be4902428a62cdf499461ff",
+        "aussiefy/data/entries/swearing.yaml": "ea740f6f97077c7e1996db2120fa9c3988a287f99dc78b55432bfab475027304",
+        "aussiefy/data/entries/thirdpass.yaml": "b26bf521efa7c63578a4137b6cc56b0f31b3184091057d947cf23cbe7c006e3e",
+        "aussiefy/data/genres.yaml": "152cb87cbc4ea4ba29c445d019fd1b3abd429826e24e4858f37ef1c6d0800ac4",
+        "aussiefy/data/grammar.yaml": "9c384595403144d446f7823aa6027b014b98c048e07e34fed36e09b5b8b88510",
+        "aussiefy/data/guide.yaml": "4b8b470c83b066d80ce22f63244083ff20cc65e781d63edf38f28655f5e09b8c",
+        "aussiefy/data/imagery.yaml": "ec73cc7e88f02349b9ebd9998f557afc215e15ee910b3fc4c1e409a180c272f8",
+        "aussiefy/data/judge.yaml": "f4122c83d9297c8b359688b23256c62e325df34c7c7c5bac3b593b1bb2596cc2",
+        "aussiefy/data/model/meta.json": "73789e6243e830890131b8762b6acd6c0670c08306beccaa9bcd461e84db3ef8",
+        "aussiefy/data/model/vectors.f16": "4f47c27ecfab0903f557562a5eb351f9a18951f4788e68533c41e8d494cbd840",
+        "aussiefy/data/model/vocab.txt": "e5df53a67a6d46e8284325efc070bc887ffef11bd50093bb6a2719e0eee50b1b",
+        "aussiefy/data/phonetic.yaml": "c0dd876c6254ec9eb12782719a1e4b074dd5b2dae3fe06227c788e0f18dd39c8",
+        "aussiefy/data/pos/README.md": "d51caf6d3b464e907d4f0337f4126caa2f9b31da64940184ea851d4ff6883ca5",
+        "aussiefy/data/pos/meta.json": "d6df62aecd3971528037cd2f387d944537e8a6ce04be7b7d538ae29cb903dc7b",
+        "aussiefy/data/pos/tagger.json.gz": "3222c88544fbc2600def0686055843f9dccc3f60d485c4b791339ea8af2627f6",
+        "aussiefy/data/profiles.yaml": "db918602c1978c2c09e22ac72958882cd68133b83839e82efa4ae1419591f284",
+        "aussiefy/data/riffs.yaml": "4fbc61791215f12fb8d0931135c29e0cbe50003e863aca6650a2e69cc0aedf40",
+        "aussiefy/data/source_policy.yaml": "dc803e176f4795ad48a8bc38cf8bcabadbeaab17dc48f83581569a1a6f949234",
+        "aussiefy/data/sources.yaml": "5bb739367f86073b95af230efaab2aac9317dbb0c9d05b684c33adef0307322a",
+        "aussiefy/data/swears.yaml": "48518167f51ac8f0f3ca19c7614439521d41f36a8ef384d683f86e1ae2d971b2"
+      },
+      "method": {
+        "warmup_runs_per_mode_per_input": 1,
+        "warm_repetitions": 5,
+        "measurement": "perf_counter translation only; serial modes rotate each repetition",
+        "shared": "same current dictionary, grammar, embedding weights and vector caches",
+        "comparison": "exhaustive candidate scores with original generator dot vs current scorer and dot",
+        "scope": "core backend only; excludes construction, network and website overhead",
+        "options": {
+          "level": 4,
+          "seed": 42,
+          "vulgarity": 1,
+          "embellishment": 1
+        }
+      },
+      "model": {
+        "name": "bundled:aussie-static-1.3.0",
+        "dimensions": 256,
+        "fallback_patterns": 587
+      },
+      "benchmarks": [
+        {
+          "input": "short_known",
+          "path": null,
+          "source": "script literal",
+          "sha256": "1cf807d23a7319fb56c622e0b5e26a2f3bf45dbd3079ab69499460497c96d7dc",
+          "words": 15,
+          "characters": 72,
+          "exact_full_result_parity": true,
+          "modes": {
+            "exhaustive_original_dot": {
+              "seconds": [
+                0.003632333013229072,
+                0.0035886659752577543,
+                0.004302000044845045,
+                0.003966916934587061,
+                0.003205166896805167
+              ],
+              "median_seconds": 0.003632333013229072,
+              "min_seconds": 0.003205166896805167,
+              "max_seconds": 0.004302000044845045,
+              "output_sha256": "ee8e0c99c395500aaa38b0ffa9c2131feed99c54d5deff0e57395d553b0ed54f"
+            },
+            "shape_first_map_dot": {
+              "seconds": [
+                0.003576457966119051,
+                0.0034373749513179064,
+                0.003437875071540475,
+                0.003427874995395541,
+                0.004056042060256004
+              ],
+              "median_seconds": 0.003437875071540475,
+              "min_seconds": 0.003427874995395541,
+              "max_seconds": 0.004056042060256004,
+              "output_sha256": "ee8e0c99c395500aaa38b0ffa9c2131feed99c54d5deff0e57395d553b0ed54f"
+            },
+            "ngram": {
+              "seconds": [
+                0.0036378339864313602,
+                0.003939749905839562,
+                0.003329708008095622,
+                0.0030467920005321503,
+                0.003703832975588739
+              ],
+              "median_seconds": 0.0036378339864313602,
+              "min_seconds": 0.0030467920005321503,
+              "max_seconds": 0.003939749905839562,
+              "output_sha256": "ee8e0c99c395500aaa38b0ffa9c2131feed99c54d5deff0e57395d553b0ed54f"
+            }
+          }
+        },
+        {
+          "input": "short_fallback",
+          "path": null,
+          "source": "script literal",
+          "sha256": "df8e670fb99d05eab1240e4dd48e7279a75cf360bd498a482303b614c31fef8b",
+          "words": 12,
+          "characters": 81,
+          "exact_full_result_parity": true,
+          "modes": {
+            "exhaustive_original_dot": {
+              "seconds": [
+                0.037282667006365955,
+                0.03740462497808039,
+                0.038039667066186666,
+                0.03795958298724145,
+                0.0377024170011282
+              ],
+              "median_seconds": 0.0377024170011282,
+              "min_seconds": 0.037282667006365955,
+              "max_seconds": 0.038039667066186666,
+              "output_sha256": "530774a93c9a48f9dfece8f5c6996970c488429ff5226f6331b19c9a0cf84883"
+            },
+            "shape_first_map_dot": {
+              "seconds": [
+                0.004757417016662657,
+                0.004858665983192623,
+                0.004740666947327554,
+                0.005363292060792446,
+                0.004911875003017485
+              ],
+              "median_seconds": 0.004858665983192623,
+              "min_seconds": 0.004740666947327554,
+              "max_seconds": 0.005363292060792446,
+              "output_sha256": "530774a93c9a48f9dfece8f5c6996970c488429ff5226f6331b19c9a0cf84883"
+            },
+            "ngram": {
+              "seconds": [
+                0.0030034580267965794,
+                0.0025412499671801925,
+                0.0029614580562338233,
+                0.002952874987386167,
+                0.003500791033729911
+              ],
+              "median_seconds": 0.0029614580562338233,
+              "min_seconds": 0.0025412499671801925,
+              "max_seconds": 0.003500791033729911,
+              "output_sha256": "530774a93c9a48f9dfece8f5c6996970c488429ff5226f6331b19c9a0cf84883"
+            }
+          }
+        },
+        {
+          "input": "story",
+          "path": "tests/corpus/classics/drovers_wife.txt",
+          "source": "file",
+          "sha256": "fbad157d7003523603067b598e36e978d58fb31fbf67df1892be098a5700521d",
+          "words": 3209,
+          "characters": 17315,
+          "exact_full_result_parity": true,
+          "modes": {
+            "exhaustive_original_dot": {
+              "seconds": [
+                1.5746191249927506,
+                1.6093090829672292,
+                1.587847417104058,
+                1.6846099590184167,
+                1.600791750010103
+              ],
+              "median_seconds": 1.600791750010103,
+              "min_seconds": 1.5746191249927506,
+              "max_seconds": 1.6846099590184167,
+              "output_sha256": "ae7fd79b2fb8bae18bc93fdfff3b78e89ed81ece088cf133a8794619c5fd3061"
+            },
+            "shape_first_map_dot": {
+              "seconds": [
+                0.4943347090156749,
+                0.4882658750284463,
+                0.5088323750533164,
+                0.4913912919582799,
+                0.5951445420505479
+              ],
+              "median_seconds": 0.4943347090156749,
+              "min_seconds": 0.4882658750284463,
+              "max_seconds": 0.5951445420505479,
+              "output_sha256": "ae7fd79b2fb8bae18bc93fdfff3b78e89ed81ece088cf133a8794619c5fd3061"
+            },
+            "ngram": {
+              "seconds": [
+                0.36733054206706583,
+                0.4144027919974178,
+                0.3795713749714196,
+                0.3795156660489738,
+                0.38733083405531943
+              ],
+              "median_seconds": 0.3795713749714196,
+              "min_seconds": 0.36733054206706583,
+              "max_seconds": 0.4144027919974178,
+              "output_sha256": "916b6d9b71f0afca28fad525f6173a9721ed943fdb4ba30cf0a4692a2fe61652"
+            }
+          }
+        },
+        {
+          "input": "technical",
+          "path": "tests/corpus/everyday/workplace/mdn_http_cookies.md",
+          "source": "file",
+          "sha256": "dd58d9893a2e0151d3294e7138b4f75bbc4cccb2eae82494198af8afc92da526",
+          "words": 580,
+          "characters": 3950,
+          "exact_full_result_parity": true,
+          "modes": {
+            "exhaustive_original_dot": {
+              "seconds": [
+                0.2812850830378011,
+                0.2856209999881685,
+                0.2814421249786392,
+                0.2810850840760395,
+                0.27768875006586313
+              ],
+              "median_seconds": 0.2812850830378011,
+              "min_seconds": 0.27768875006586313,
+              "max_seconds": 0.2856209999881685,
+              "output_sha256": "cf774c7abd65f1c0dcd50633153d39e5b1aeff6ae5611ea1d9c8c7d74279616d"
+            },
+            "shape_first_map_dot": {
+              "seconds": [
+                0.09364966710563749,
+                0.08931845799088478,
+                0.0934514160035178,
+                0.09215975005645305,
+                0.09006424993276596
+              ],
+              "median_seconds": 0.09215975005645305,
+              "min_seconds": 0.08931845799088478,
+              "max_seconds": 0.09364966710563749,
+              "output_sha256": "cf774c7abd65f1c0dcd50633153d39e5b1aeff6ae5611ea1d9c8c7d74279616d"
+            },
+            "ngram": {
+              "seconds": [
+                0.07031316601205617,
+                0.07254141697194427,
+                0.07452699996065348,
+                0.07023299997672439,
+                0.0705369170755148
+              ],
+              "median_seconds": 0.0705369170755148,
+              "min_seconds": 0.07023299997672439,
+              "max_seconds": 0.07452699996065348,
+              "output_sha256": "cf774c7abd65f1c0dcd50633153d39e5b1aeff6ae5611ea1d9c8c7d74279616d"
+            }
+          }
+        }
+      ],
+      "parity": {
+        "source": "tests/corpus/golden.yaml",
+        "source_sha256": "cc7de416e8a049b5b9edfdda89cb8acfe6e0e9f205c63dc80330990aa739c39e",
+        "input_hashes": [
+          "2dc07c3f489b21895f7aee4c973175201d9e6520b5b5c96df34a405d11057fab",
+          "e46082e487bcf948eab1837e7ce9967e216f9a7913cf4f64f5ea84b1599a3297",
+          "597003ba59cdc454836f59365142f1334b3c7adc241b9bade64b6764928a8890",
+          "9ac98985b35958dc11675f9c90c3c513bd8cb4fddce02e772c196c587d9d37c3",
+          "043843e9d1371294835ac6f45f2548f465dbd46242f54ad105641c876d6da4c0",
+          "d1a197bde6df9eafe980271a9bbe7fc22bf2dca9b310f71ed29deb52b04594ea",
+          "769094c621fdc961573a54c975e18e75ee2787f155a4212ebdb2611990ba4191",
+          "95d6869065533127def0e361a64bac91217d26fc01fc79773c77b9d1bf49a296",
+          "a2a491d83dbd94b93c7ec00a38e729f87f94577e7a4746edb88003f118ba0c8f",
+          "ae1ffc83f2dc9adda972e690337fe92d426bbb70a0de3998731f013a21c3877e",
+          "6490f2cddc096cab43a8672f28f2cd5d5043478cd0b51acb6c91b6c765119d13",
+          "bc049a1cdc2071dd4dc5d8e5af0bb8cfac8713fccd7fe7a03efad7f854876086",
+          "87ccf94311fd6f409e0b52dff509d50f173d4c0f6df84cd9aefa3b0d97a4cd74",
+          "3ededd18894c1d78f9bde5f35b628cfc7f74e3c135b77ce8714219bef18e0acc",
+          "3475e13ef2c4d43bde3adec871f268abb6019b4d65f1d90bc745b5f4d7b79dd5",
+          "193063141fe0f7563a247d752bc2e941ad8a737b2b5285af10c2974dde205277",
+          "e68e6b95448b139a702f8c8f4c371b21165252c0122778532fb67c6f01b9985d",
+          "031c7f77d226f852ae08d190773e783ce04a1f9cb0499e98c694eecd3ebe030b",
+          "bda042be99cb1073e677373c0293524fc9bc640212e458a54f4578139b75b9f5",
+          "ab1b688275dca60618736743a572734445734f930f50b63d722409ef56fc0b40",
+          "cbedf9204009f347ce11d09b8bc51646a882b4dc3d1b94b33972830c98f77b56",
+          "a8e18b488309ff0a650546b3719642a77ff13eb2853e9c59b27175d5196a1341",
+          "cadbb44f04104499cc2992710423c4c3d3ef6c21bcaa4383a34836137a5b9e7d",
+          "82874bc6e5ffea9fe12260f1abaf43bf7a5da1f233761b1a46d6ffcc3b161253",
+          "5acaa3f77bb23a251b3a097562038f18c5bbb16e9cec043252e80efd96e8b31f",
+          "2afcae9965a5656760e71ea29e87ae8833ee50ed11efe3180fdf767637fc99e6",
+          "202ea44f7172ae6819f59cafe6f324ff70ee0b812ec630fb14824124292db5f7",
+          "44c0c05550b02f7a7c77666fdb7956a01e87e902407e9d0d30e3e8a9142b026f",
+          "371b5ed49d86d65442146ee3479c123764a02ec1a9a3c7e76e11c3669f3c48f4",
+          "2bd5e1c9a6a8e5c54034378d38d47cc307d1274dba57961cb2a498b18ccd4d8b",
+          "3dcae3954566ebc41f3244dc8a5c63cb56699733398a27be09d828e703fbf651",
+          "efa6c257fad87d09913844902211c5eed36691ae3b7b41b745996cd566ffeb7e",
+          "5dd43797c5117d21afd2e2685d5a2a2124a19a038405850704202d262bb80da5",
+          "bef36ca6d03e741ec888321093a154665e8beee7b1f3e91090dccf09a28be824",
+          "809838efd41698422636fb2df8bebe2a7e8c29a3baf109b3bdceed6812266903",
+          "4bf6d606c586eda9b7145c4791b217fb57a28df69dcfa66701f5dee4a0c59bc5",
+          "8d6d20a37470f9333c650c7ca6a036c2403893a167edc7254e27b1d7c3f2dc74",
+          "8919a8c3439487491e2111f9a45fb340a61b1ba08b294e863e53a0ad1da0dd3d",
+          "935fa3f700694f520b5fc85156cccfb5f546908ad54787a60f31c5f96e36bf01",
+          "6e09870fd772fd9bdeb8386564fdfdde4a24223eb17100ce95878879b7e98106",
+          "fa7934e70b4ee99bc61280651b5bae3bd2f9807c7564e926a195db41d5d422e8",
+          "a2778055f5a192cff5ddf6cfb57c3dcd5ab24dcda357a33294512701147d28e4",
+          "c2b7122f02628d69f7cea46344833e2e4daafe6ad942034d8ae635654f9806a9",
+          "831f9ee931202597d4aa2878b9d7d952d21de0026f7e230f4d8f19f6c803a1f7",
+          "a91932c5008598ff47c7af0e87f63495666b9f443ad6078a012c2839bb65c2fb",
+          "fbad157d7003523603067b598e36e978d58fb31fbf67df1892be098a5700521d",
+          "dd58d9893a2e0151d3294e7138b4f75bbc4cccb2eae82494198af8afc92da526"
+        ],
+        "inputs": 47,
+        "source_words": 11555,
+        "level_seed_pairs": [
+          [
+            2,
+            0
+          ],
+          [
+            5,
+            42
+          ]
+        ],
+        "comparisons": 94,
+        "exact_full_result_parity": true
+      },
+      "sources_unchanged_during_run": true
+    },
+    "changes": {
+      "budget": 1.5,
+      "passed": true,
+      "summary": {
+        "site default (larrikin, dinkum, dad)": {
+          "gated": true,
+          "median": 1.12,
+          "max": 1.16
+        },
+        "swaggie, troppo, tradie": {
+          "gated": true,
+          "median": 1.28,
+          "max": 1.34
+        },
+        "site default, auto": {
+          "gated": true,
+          "median": 1.04,
+          "max": 1.13
+        },
+        "site default, story": {
+          "gated": true,
+          "median": 1.11,
+          "max": 1.14
+        },
+        "site default, personal": {
+          "gated": true,
+          "median": 1.11,
+          "max": 1.17
+        },
+        "site default, news": {
+          "gated": true,
+          "median": 1.05,
+          "max": 1.07
+        },
+        "site default, instructions": {
+          "gated": true,
+          "median": 1.06,
+          "max": 1.1
+        },
+        "site default, technical": {
+          "gated": true,
+          "median": 1.04,
+          "max": 1.07
+        },
+        "site default, official": {
+          "gated": true,
+          "median": 1.03,
+          "max": 1.1
+        },
+        "stress (every garnish, stacks, infixes)": {
+          "gated": false,
+          "median": 1.4,
+          "max": 1.48
+        },
+        "site default at 10,000 characters": {
+          "gated": false,
+          "median": 1.09,
+          "max": 1.26
+        },
+        "site default at 15,000 characters": {
+          "gated": false,
+          "median": 1.11,
+          "max": 1.13
+        },
+        "site default, Markdown": {
+          "gated": false,
+          "median": 1.2,
+          "max": 1.22
+        }
+      },
+      "rows": [
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 96.6,
+          "changes_ms": 108.8,
+          "ratio": 1.126,
+          "renderings": 50
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 94.7,
+          "changes_ms": 108.0,
+          "ratio": 1.14,
+          "renderings": 58
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 84.1,
+          "changes_ms": 91.7,
+          "ratio": 1.091,
+          "renderings": 35
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 86.9,
+          "changes_ms": 101.2,
+          "ratio": 1.164,
+          "renderings": 45
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 68.6,
+          "changes_ms": 74.2,
+          "ratio": 1.081,
+          "renderings": 32
+        },
+        {
+          "setting": "site default (larrikin, dinkum, dad)",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 67.2,
+          "changes_ms": 74.8,
+          "ratio": 1.114,
+          "renderings": 31
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 105.6,
+          "changes_ms": 141.8,
+          "ratio": 1.342,
+          "renderings": 111
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 104.3,
+          "changes_ms": 138.8,
+          "ratio": 1.331,
+          "renderings": 110
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 91.9,
+          "changes_ms": 116.5,
+          "ratio": 1.268,
+          "renderings": 86
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 97.4,
+          "changes_ms": 125.2,
+          "ratio": 1.285,
+          "renderings": 88
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 74.3,
+          "changes_ms": 88.8,
+          "ratio": 1.194,
+          "renderings": 56
+        },
+        {
+          "setting": "swaggie, troppo, tradie",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 73.8,
+          "changes_ms": 94.4,
+          "ratio": 1.279,
+          "renderings": 54
+        },
+        {
+          "setting": "site default, auto",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 99.5,
+          "changes_ms": 109.4,
+          "ratio": 1.1,
+          "renderings": 50
+        },
+        {
+          "setting": "site default, auto",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 98.3,
+          "changes_ms": 110.7,
+          "ratio": 1.127,
+          "renderings": 58
+        },
+        {
+          "setting": "site default, auto",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 71.0,
+          "changes_ms": 73.7,
+          "ratio": 1.039,
+          "renderings": 18
+        },
+        {
+          "setting": "site default, auto",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 70.7,
+          "changes_ms": 73.4,
+          "ratio": 1.037,
+          "renderings": 14
+        },
+        {
+          "setting": "site default, auto",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 58.0,
+          "changes_ms": 59.8,
+          "ratio": 1.032,
+          "renderings": 2
+        },
+        {
+          "setting": "site default, auto",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 60.0,
+          "changes_ms": 60.5,
+          "ratio": 1.009,
+          "renderings": 5
+        },
+        {
+          "setting": "site default, story",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 96.8,
+          "changes_ms": 108.6,
+          "ratio": 1.121,
+          "renderings": 51
+        },
+        {
+          "setting": "site default, story",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 94.7,
+          "changes_ms": 108.3,
+          "ratio": 1.143,
+          "renderings": 59
+        },
+        {
+          "setting": "site default, story",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 85.3,
+          "changes_ms": 92.1,
+          "ratio": 1.079,
+          "renderings": 35
+        },
+        {
+          "setting": "site default, story",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 85.5,
+          "changes_ms": 97.2,
+          "ratio": 1.136,
+          "renderings": 45
+        },
+        {
+          "setting": "site default, story",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 68.2,
+          "changes_ms": 74.7,
+          "ratio": 1.096,
+          "renderings": 32
+        },
+        {
+          "setting": "site default, story",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 68.1,
+          "changes_ms": 75.2,
+          "ratio": 1.104,
+          "renderings": 31
+        },
+        {
+          "setting": "site default, personal",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 94.8,
+          "changes_ms": 110.8,
+          "ratio": 1.168,
+          "renderings": 50
+        },
+        {
+          "setting": "site default, personal",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 96.2,
+          "changes_ms": 112.2,
+          "ratio": 1.166,
+          "renderings": 58
+        },
+        {
+          "setting": "site default, personal",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 84.7,
+          "changes_ms": 93.7,
+          "ratio": 1.106,
+          "renderings": 35
+        },
+        {
+          "setting": "site default, personal",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 87.0,
+          "changes_ms": 97.7,
+          "ratio": 1.122,
+          "renderings": 45
+        },
+        {
+          "setting": "site default, personal",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 69.8,
+          "changes_ms": 75.6,
+          "ratio": 1.083,
+          "renderings": 32
+        },
+        {
+          "setting": "site default, personal",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 68.6,
+          "changes_ms": 75.9,
+          "ratio": 1.106,
+          "renderings": 31
+        },
+        {
+          "setting": "site default, news",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 81.0,
+          "changes_ms": 82.9,
+          "ratio": 1.023,
+          "renderings": 16
+        },
+        {
+          "setting": "site default, news",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 81.3,
+          "changes_ms": 85.0,
+          "ratio": 1.045,
+          "renderings": 19
+        },
+        {
+          "setting": "site default, news",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 68.8,
+          "changes_ms": 72.3,
+          "ratio": 1.051,
+          "renderings": 18
+        },
+        {
+          "setting": "site default, news",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 73.3,
+          "changes_ms": 78.7,
+          "ratio": 1.074,
+          "renderings": 11
+        },
+        {
+          "setting": "site default, news",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 62.7,
+          "changes_ms": 59.6,
+          "ratio": 0.95,
+          "renderings": 2
+        },
+        {
+          "setting": "site default, news",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 57.0,
+          "changes_ms": 59.9,
+          "ratio": 1.049,
+          "renderings": 5
+        },
+        {
+          "setting": "site default, instructions",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 76.2,
+          "changes_ms": 83.5,
+          "ratio": 1.096,
+          "renderings": 23
+        },
+        {
+          "setting": "site default, instructions",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 78.5,
+          "changes_ms": 83.5,
+          "ratio": 1.063,
+          "renderings": 29
+        },
+        {
+          "setting": "site default, instructions",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 69.3,
+          "changes_ms": 74.7,
+          "ratio": 1.079,
+          "renderings": 18
+        },
+        {
+          "setting": "site default, instructions",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 70.8,
+          "changes_ms": 75.1,
+          "ratio": 1.062,
+          "renderings": 14
+        },
+        {
+          "setting": "site default, instructions",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 55.6,
+          "changes_ms": 57.3,
+          "ratio": 1.029,
+          "renderings": 4
+        },
+        {
+          "setting": "site default, instructions",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 60.2,
+          "changes_ms": 59.4,
+          "ratio": 0.988,
+          "renderings": 5
+        },
+        {
+          "setting": "site default, technical",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 73.8,
+          "changes_ms": 78.6,
+          "ratio": 1.065,
+          "renderings": 18
+        },
+        {
+          "setting": "site default, technical",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 78.1,
+          "changes_ms": 79.0,
+          "ratio": 1.011,
+          "renderings": 19
+        },
+        {
+          "setting": "site default, technical",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 65.1,
+          "changes_ms": 69.0,
+          "ratio": 1.06,
+          "renderings": 17
+        },
+        {
+          "setting": "site default, technical",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 67.0,
+          "changes_ms": 71.5,
+          "ratio": 1.067,
+          "renderings": 7
+        },
+        {
+          "setting": "site default, technical",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 54.5,
+          "changes_ms": 55.6,
+          "ratio": 1.022,
+          "renderings": 2
+        },
+        {
+          "setting": "site default, technical",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 56.8,
+          "changes_ms": 56.6,
+          "ratio": 0.997,
+          "renderings": 5
+        },
+        {
+          "setting": "site default, official",
+          "gated": true,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 77.6,
+          "changes_ms": 80.8,
+          "ratio": 1.041,
+          "renderings": 16
+        },
+        {
+          "setting": "site default, official",
+          "gated": true,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 85.0,
+          "changes_ms": 86.9,
+          "ratio": 1.022,
+          "renderings": 19
+        },
+        {
+          "setting": "site default, official",
+          "gated": true,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 69.7,
+          "changes_ms": 75.9,
+          "ratio": 1.089,
+          "renderings": 18
+        },
+        {
+          "setting": "site default, official",
+          "gated": true,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 72.1,
+          "changes_ms": 79.5,
+          "ratio": 1.102,
+          "renderings": 7
+        },
+        {
+          "setting": "site default, official",
+          "gated": true,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 57.1,
+          "changes_ms": 58.3,
+          "ratio": 1.021,
+          "renderings": 2
+        },
+        {
+          "setting": "site default, official",
+          "gated": true,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 58.8,
+          "changes_ms": 60.0,
+          "ratio": 1.021,
+          "renderings": 5
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "gated": false,
+          "text": "conversational-a",
+          "characters": 4971,
+          "translate_ms": 111.6,
+          "changes_ms": 162.8,
+          "ratio": 1.459,
+          "renderings": 147
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "gated": false,
+          "text": "conversational-b",
+          "characters": 4888,
+          "translate_ms": 108.4,
+          "changes_ms": 153.2,
+          "ratio": 1.414,
+          "renderings": 162
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "gated": false,
+          "text": "instructions-a",
+          "characters": 4993,
+          "translate_ms": 96.6,
+          "changes_ms": 134.0,
+          "ratio": 1.387,
+          "renderings": 117
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "gated": false,
+          "text": "instructions-b",
+          "characters": 4956,
+          "translate_ms": 99.3,
+          "changes_ms": 147.0,
+          "ratio": 1.481,
+          "renderings": 120
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "gated": false,
+          "text": "news-a",
+          "characters": 4943,
+          "translate_ms": 74.5,
+          "changes_ms": 98.7,
+          "ratio": 1.324,
+          "renderings": 84
+        },
+        {
+          "setting": "stress (every garnish, stacks, infixes)",
+          "gated": false,
+          "text": "news-b",
+          "characters": 4852,
+          "translate_ms": 74.1,
+          "changes_ms": 98.7,
+          "ratio": 1.332,
+          "renderings": 70
+        },
+        {
+          "setting": "site default at 10,000 characters",
+          "gated": false,
+          "text": "conversational-a",
+          "characters": 9750,
+          "translate_ms": 165.5,
+          "changes_ms": 209.2,
+          "ratio": 1.264,
+          "renderings": 95
+        },
+        {
+          "setting": "site default at 10,000 characters",
+          "gated": false,
+          "text": "instructions-a",
+          "characters": 9997,
+          "translate_ms": 156.6,
+          "changes_ms": 170.1,
+          "ratio": 1.086,
+          "renderings": 63
+        },
+        {
+          "setting": "site default at 10,000 characters",
+          "gated": false,
+          "text": "news-a",
+          "characters": 9871,
+          "translate_ms": 147.0,
+          "changes_ms": 149.8,
+          "ratio": 1.019,
+          "renderings": 56
+        },
+        {
+          "setting": "site default at 15,000 characters",
+          "gated": false,
+          "text": "conversational-a",
+          "characters": 14913,
+          "translate_ms": 274.0,
+          "changes_ms": 305.3,
+          "ratio": 1.114,
+          "renderings": 133
+        },
+        {
+          "setting": "site default at 15,000 characters",
+          "gated": false,
+          "text": "instructions-a",
+          "characters": 14927,
+          "translate_ms": 252.0,
+          "changes_ms": 284.8,
+          "ratio": 1.13,
+          "renderings": 109
+        },
+        {
+          "setting": "site default at 15,000 characters",
+          "gated": false,
+          "text": "news-a",
+          "characters": 10132,
+          "translate_ms": 147.8,
+          "changes_ms": 161.7,
+          "ratio": 1.094,
+          "renderings": 56
+        },
+        {
+          "setting": "site default, Markdown",
+          "gated": false,
+          "text": "README.md",
+          "characters": 4751,
+          "translate_ms": 69.8,
+          "changes_ms": 84.9,
+          "ratio": 1.215,
+          "renderings": 16
+        },
+        {
+          "setting": "site default, Markdown",
+          "gated": false,
+          "text": "black_readme.md",
+          "characters": 2479,
+          "translate_ms": 30.0,
+          "changes_ms": 35.8,
+          "ratio": 1.192,
+          "renderings": 6
+        },
+        {
+          "setting": "site default, Markdown",
+          "gated": false,
+          "text": "cloud_gov_pages_why.md",
+          "characters": 2830,
+          "translate_ms": 45.5,
+          "changes_ms": 51.1,
+          "ratio": 1.124,
+          "renderings": 10
+        },
+        {
+          "setting": "site default, Markdown",
+          "gated": false,
+          "text": "github_flow.md",
+          "characters": 3855,
+          "translate_ms": 54.4,
+          "changes_ms": 65.6,
+          "ratio": 1.205,
+          "renderings": 21
+        }
+      ]
+    },
+    "writer": {
+      "module": "/Users/robmorris/Development/Underware/aussiefy/aussiefy/__init__.py",
+      "median_seconds": 0.03923745802603662,
+      "samples": [
+        0.03836999996565282,
+        0.03884675004519522,
+        0.039747375063598156,
+        0.03923745802603662,
+        0.03951791697181761
+      ],
+      "words": 560
+    },
+    "core_mode_timings": [
+      {
+        "input": "showcase",
+        "characters": 143,
+        "words": 23,
+        "options": {
+          "level": 4,
+          "vulgarity": 1,
+          "seed": 42,
+          "embellishment": 1,
+          "document_type": "general"
+        },
+        "modes": {
+          "none": {
+            "median_ms": 3.970207995735109,
+            "seconds": [
+              0.003970207995735109,
+              0.003963625058531761,
+              0.0042139580473303795,
+              0.0036444170400500298,
+              0.003952375031076372,
+              0.004005374968983233,
+              0.004139874945394695
+            ],
+            "output_sha256": "df26e4c397f80cb82281f37443341bce06ee3c44888b42e0617a15667d3f3a86"
+          },
+          "ngram": {
+            "median_ms": 4.1533749317750335,
+            "seconds": [
+              0.0037943751085549593,
+              0.0041533749317750335,
+              0.0038417500909417868,
+              0.003859124961309135,
+              0.004304624977521598,
+              0.004293582984246314,
+              0.004187749931588769
+            ],
+            "output_sha256": "df26e4c397f80cb82281f37443341bce06ee3c44888b42e0617a15667d3f3a86"
+          },
+          "bundled": {
+            "median_ms": 7.197791012004018,
+            "seconds": [
+              0.007165541988797486,
+              0.007178875035606325,
+              0.006705416017211974,
+              0.007721833069808781,
+              0.007197791012004018,
+              0.00752558303065598,
+              0.007749999989755452
+            ],
+            "output_sha256": "df26e4c397f80cb82281f37443341bce06ee3c44888b42e0617a15667d3f3a86"
+          }
+        }
+      },
+      {
+        "input": "composed",
+        "characters": 2011,
+        "words": 361,
+        "options": {
+          "level": 4,
+          "vulgarity": 1,
+          "seed": 42,
+          "embellishment": 1,
+          "document_type": "general"
+        },
+        "modes": {
+          "none": {
+            "median_ms": 72.34429102391005,
+            "seconds": [
+              0.0780635840492323,
+              0.0735170419793576,
+              0.07234429102391005,
+              0.0953562919748947,
+              0.06856666703242809,
+              0.07018120889551938,
+              0.07154887507203966
+            ],
+            "output_sha256": "2fb3a6663082e37fa1cfe48c8a3e765786a13ed15b42f4a0c08b26bb3c4a021e"
+          },
+          "ngram": {
+            "median_ms": 71.57562498468906,
+            "seconds": [
+              0.07577258301898837,
+              0.07168633304536343,
+              0.07308095810003579,
+              0.0674179169582203,
+              0.06854333402588964,
+              0.06951504200696945,
+              0.07157562498468906
+            ],
+            "output_sha256": "2fb3a6663082e37fa1cfe48c8a3e765786a13ed15b42f4a0c08b26bb3c4a021e"
+          },
+          "bundled": {
+            "median_ms": 90.55870899464935,
+            "seconds": [
+              0.09668870805762708,
+              0.09055870899464935,
+              0.09435341705102473,
+              0.0893030830193311,
+              0.09066600003279746,
+              0.08612479199655354,
+              0.08679008309263736
+            ],
+            "output_sha256": "2fb3a6663082e37fa1cfe48c8a3e765786a13ed15b42f4a0c08b26bb3c4a021e"
+          }
+        }
+      }
+    ],
+    "cpu_warm": {
+      "module": "/Users/robmorris/Development/Underware/aussiefy/aussiefy/__init__.py",
+      "timings": [
+        {
+          "corpus": "ordinary",
+          "embellishment": "deadset",
+          "translations_per_batch": 180,
+          "cpu_seconds": [
+            0.31634399999999996,
+            0.30823600000000007,
+            0.3141720000000001,
+            0.310184,
+            0.31063399999999985
+          ],
+          "wall_seconds": [
+            0.3172419999027625,
+            0.30889162502717227,
+            0.3150079579791054,
+            0.31097179208882153,
+            0.3177025830373168
+          ],
+          "median_cpu_ms": 1.7257444444444436,
+          "median_wall_ms": 1.75004421099503
+        },
+        {
+          "corpus": "ordinary",
+          "embellishment": "troppo",
+          "translations_per_batch": 180,
+          "cpu_seconds": [
+            0.5080840000000002,
+            0.4742120000000001,
+            0.48154699999999995,
+            0.4806189999999999,
+            0.4673829999999999
+          ],
+          "wall_seconds": [
+            0.5134349169675261,
+            0.4763196250423789,
+            0.48365112498868257,
+            0.48248079093173146,
+            0.46923195803537965
+          ],
+          "median_cpu_ms": 2.6701055555555553,
+          "median_wall_ms": 2.6804488385096192
+        },
+        {
+          "corpus": "degree",
+          "embellishment": "deadset",
+          "translations_per_batch": 180,
+          "cpu_seconds": [
+            0.286041,
+            0.2946150000000003,
+            0.29862699999999975,
+            0.27446700000000046,
+            0.27757200000000015
+          ],
+          "wall_seconds": [
+            0.2891176659613848,
+            0.30119487503543496,
+            0.31008800002746284,
+            0.275479375035502,
+            0.28556533402297646
+          ],
+          "median_cpu_ms": 1.5891166666666667,
+          "median_wall_ms": 1.6062092553410265
+        },
+        {
+          "corpus": "degree",
+          "embellishment": "troppo",
+          "translations_per_batch": 180,
+          "cpu_seconds": [
+            0.4745379999999999,
+            0.4875359999999995,
+            0.4599639999999994,
+            0.4717330000000004,
+            0.46700799999999987
+          ],
+          "wall_seconds": [
+            0.47688162501435727,
+            0.5124816669849679,
+            0.4899662089301273,
+            0.481191458995454,
+            0.4769053750205785
+          ],
+          "median_cpu_ms": 2.620738888888891,
+          "median_wall_ms": 2.6732858833080777
+        }
+      ]
+    },
+    "diagnostics": {
+      "rows": 648,
+      "reference_rows": 90,
+      "known_literal_reproductions": {
+        "hunger_complement_repeats_enough": 0,
+        "explicit_very_hungry_to_now_im_peckish": 0,
+        "embedded_knackered_rooted_checked_stack": 0
+      },
+      "structural_failures": 0,
+      "verify_failed": 0,
+      "verify_counts": {
+        "critical": 0,
+        "major": 0,
+        "minor": 99
+      }
+    },
+    "lookup": [
+      {
+        "backend": "lexical",
+        "query": "feeling pretty hungry",
+        "note": null,
+        "results": [
+          {
+            "id": "feel-like-a-decent-feed",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "feel-like-some-tucker",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "peckish",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "starvin",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "hungry-enough-horse-jockey",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "hungry",
+        "note": null,
+        "results": [
+          {
+            "id": "hungry-enough-horse-jockey",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "slang term",
+            "score": 2.0
+          },
+          {
+            "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "slang term",
+            "score": 2.0
+          },
+          {
+            "id": "feel-like-a-decent-feed",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "feel-like-some-tucker",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "peckish",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "could do with some food",
+        "note": null,
+        "results": [
+          {
+            "id": "could-do-with-a-feed",
+            "concepts": [
+              "WELCOME_MEAL"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "a cold one at the pub",
+        "note": null,
+        "results": [
+          {
+            "id": "coldie",
+            "concepts": [
+              "COLD_BEER_SERVING"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "probably",
+        "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term.",
+        "results": []
+      },
+      {
+        "backend": "lexical",
+        "query": "wake up",
+        "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term.",
+        "results": []
+      },
+      {
+        "backend": "lexical",
+        "query": "not out of the question",
+        "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term.",
+        "results": []
+      },
+      {
+        "backend": "lexical",
+        "query": "very tired",
+        "note": null,
+        "results": [
+          {
+            "id": "fucked-broken",
+            "concepts": [
+              "BROKEN",
+              "TIRED"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "knackered",
+            "concepts": [
+              "TIRED"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "buggered",
+            "concepts": [
+              "TIRED",
+              "BROKEN"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "out-on-poss-feet",
+            "concepts": [
+              "TIRED"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "stuffed",
+            "concepts": [
+              "TIRED",
+              "BROKEN",
+              "FULL"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "hard to finish",
+        "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term.",
+        "results": []
+      },
+      {
+        "backend": "lexical",
+        "query": "worked hard",
+        "note": null,
+        "results": [
+          {
+            "id": "do-the-hard-yards",
+            "concepts": [
+              "WORK_HARD"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "work-arse-off",
+            "concepts": [
+              "WORK_HARD"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "bust-a-gut",
+            "concepts": [
+              "WORK_HARD"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "work-like-billy-o",
+            "concepts": [
+              "WORK_HARD"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "everyone",
+        "note": null,
+        "results": [
+          {
+            "id": "every-bastard",
+            "concepts": [
+              "EVERYONE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "every-bugger",
+            "concepts": [
+              "EVERYONE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "you-mob",
+            "concepts": [
+              "YOU_PLURAL",
+              "PLURAL_ADDRESS"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "every-man-and-his-dog",
+            "concepts": [
+              "EVERYONE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "youse",
+            "concepts": [
+              "YOU_PLURAL",
+              "PLURAL_ADDRESS"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "alone",
+        "note": null,
+        "results": [
+          {
+            "id": "on-pat-malone",
+            "concepts": [
+              "PHYSICAL_SOLITUDE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "on-your-pat",
+            "concepts": [
+              "PHYSICAL_SOLITUDE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "on-your-pat-predicate",
+            "concepts": [
+              "PHYSICAL_SOLITUDE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "lonely",
+        "note": null,
+        "results": [
+          {
+            "id": "lonely-as-a-shag-on-a-rock",
+            "concepts": [
+              "LONELY"
+            ],
+            "match": "slang term",
+            "score": 2.0
+          },
+          {
+            "id": "like-a-shag-on-a-rock",
+            "concepts": [
+              "LONELY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "a small bottle of beer",
+        "note": null,
+        "results": [
+          {
+            "id": "stubby",
+            "concepts": [
+              "SMALL_BEER_BOTTLE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "lexical",
+        "query": "a can of beer",
+        "note": null,
+        "results": [
+          {
+            "id": "tinnie",
+            "concepts": [
+              "BEER_CAN"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "feeling pretty hungry",
+        "note": null,
+        "results": [
+          {
+            "id": "feel-like-a-decent-feed",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "feel-like-some-tucker",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "peckish",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "starvin",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "hungry-enough-horse-jockey",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "hungry",
+        "note": null,
+        "results": [
+          {
+            "id": "hungry-enough-horse-jockey",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "slang term",
+            "score": 2.0
+          },
+          {
+            "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "slang term",
+            "score": 2.0
+          },
+          {
+            "id": "feel-like-a-decent-feed",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "feel-like-some-tucker",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "peckish",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "could do with some food",
+        "note": null,
+        "results": [
+          {
+            "id": "could-do-with-a-feed",
+            "concepts": [
+              "WELCOME_MEAL"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "a cold one at the pub",
+        "note": null,
+        "results": [
+          {
+            "id": "coldie",
+            "concepts": [
+              "COLD_BEER_SERVING"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "probably",
+        "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term.",
+        "results": []
+      },
+      {
+        "backend": "bundled",
+        "query": "wake up",
+        "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term.",
+        "results": []
+      },
+      {
+        "backend": "bundled",
+        "query": "not out of the question",
+        "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term.",
+        "results": []
+      },
+      {
+        "backend": "bundled",
+        "query": "very tired",
+        "note": null,
+        "results": [
+          {
+            "id": "fucked-broken",
+            "concepts": [
+              "BROKEN",
+              "TIRED"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "knackered",
+            "concepts": [
+              "TIRED"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "buggered",
+            "concepts": [
+              "TIRED",
+              "BROKEN"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "out-on-poss-feet",
+            "concepts": [
+              "TIRED"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "stuffed",
+            "concepts": [
+              "TIRED",
+              "BROKEN",
+              "FULL"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "hard to finish",
+        "note": "The dictionary recognises this meaning but has no compatible suggestion at these settings. Try another wording or look up a specific term.",
+        "results": []
+      },
+      {
+        "backend": "bundled",
+        "query": "worked hard",
+        "note": null,
+        "results": [
+          {
+            "id": "do-the-hard-yards",
+            "concepts": [
+              "WORK_HARD"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "work-arse-off",
+            "concepts": [
+              "WORK_HARD"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "bust-a-gut",
+            "concepts": [
+              "WORK_HARD"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "work-like-billy-o",
+            "concepts": [
+              "WORK_HARD"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "everyone",
+        "note": null,
+        "results": [
+          {
+            "id": "every-bastard",
+            "concepts": [
+              "EVERYONE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "every-bugger",
+            "concepts": [
+              "EVERYONE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "you-mob",
+            "concepts": [
+              "YOU_PLURAL",
+              "PLURAL_ADDRESS"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "every-man-and-his-dog",
+            "concepts": [
+              "EVERYONE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "youse",
+            "concepts": [
+              "YOU_PLURAL",
+              "PLURAL_ADDRESS"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "alone",
+        "note": null,
+        "results": [
+          {
+            "id": "on-pat-malone",
+            "concepts": [
+              "PHYSICAL_SOLITUDE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "on-your-pat",
+            "concepts": [
+              "PHYSICAL_SOLITUDE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          },
+          {
+            "id": "on-your-pat-predicate",
+            "concepts": [
+              "PHYSICAL_SOLITUDE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "lonely",
+        "note": null,
+        "results": [
+          {
+            "id": "lonely-as-a-shag-on-a-rock",
+            "concepts": [
+              "LONELY"
+            ],
+            "match": "slang term",
+            "score": 2.0
+          },
+          {
+            "id": "like-a-shag-on-a-rock",
+            "concepts": [
+              "LONELY"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "a small bottle of beer",
+        "note": null,
+        "results": [
+          {
+            "id": "stubby",
+            "concepts": [
+              "SMALL_BEER_BOTTLE"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      },
+      {
+        "backend": "bundled",
+        "query": "a can of beer",
+        "note": null,
+        "results": [
+          {
+            "id": "tinnie",
+            "concepts": [
+              "BEER_CAN"
+            ],
+            "match": "meaning",
+            "score": 1.0
+          }
+        ]
+      }
+    ]
+  },
+  "unchanged_labels_scorer_anchors_and_smart_inputs": true
+}
