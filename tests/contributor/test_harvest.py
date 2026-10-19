@@ -33,7 +33,8 @@ def test_new_entries_from_fragments_and_harvest(translator):
     def outs(text, level=4, n=15, **kw):
         return {translator.translate(text, level=level, seed=s, **kw).text for s in range(n)}
     assert any("Righto" in o for o in outs("Okay, I'll grab a bottle of beer.", level=3))
-    assert any("stubby" in o for o in outs("Okay, I'll grab a bottle of beer.", level=3))
+    assert any("stubby" in o for o in outs("Okay, I'll grab a small bottle of beer.", level=3))
+    assert not any("stubby" in o or "tinnie" in o for o in outs("Okay, I'll grab a bottle of beer.", level=3))
     assert any("rocked up" in o for o in outs("They arrived at the party."))
     assert any("every bloke's as good as the next" in o for o in outs("We believe all men are created equal."))
     assert any("God bloody willing" in o for o in outs("God willing, this nation will last.", level=5))

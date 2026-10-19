@@ -58,6 +58,13 @@ def dial_rejection(entry: Entry, eff: Effective) -> str | None:
         return f"vulgarity {entry.vulgarity} exceeds cap {eff.vulgarity}"
     return None
 
+def semantic_rejection(entry: Entry, *, narrator_opinion: bool) -> str | None:
+    """A reviewed mapping's added meaning needs the corresponding resolved permission."""
+    if "opinion" in entry.semantic_effects and not narrator_opinion:
+        return "adds narrator opinion; narrator_opinion is false"
+    return None
+
+
 def policy_rejection(entry: Entry, eff: Effective) -> str | None:
     """Reasons that depend only on the entry and the policy (shared with garnish)."""
     reason = dial_rejection(entry, eff)
@@ -126,8 +133,10 @@ def binding_problem(form: str, det: Detection) -> str | None:
     needs = set(re.findall(r"\{(\w+)\}", form)) - {"subj", "be", "have", "do"}
     if "poss" in needs and not {"poss", "subj", "agent"} & det.captures.keys() and det.frame != "imperative":
         return "cannot fill {poss}: no subject or possessive in the span"
-    if needs & {"obj", "objposs"} and "obj" not in det.captures:
+    if "obj" in needs and "obj" not in det.captures:
         return "cannot fill {obj}: no object in the span"
+    if "objposs" in needs and not {"obj", "objposs"} & det.captures.keys():
+        return "cannot fill {objposs}: no object or object possessive in the span"
     if "np" in needs and "np" not in det.captures:
         return "cannot fill {np}: no noun phrase in the span"
     return None
@@ -138,7 +147,7 @@ def form_problem(form: str, det: Detection) -> str | None:
     if reason:
         return reason
     needs = set(re.findall(r"\{(\w+)\}", form))
-    for slot in ("np", "obj"):
+    for slot in ("np", "obj", "objposs"):
         captured = det.captures.get(slot)
         represented = slot in needs or slot == "obj" and "objposs" in needs
         if captured is not None and not represented:

@@ -1,0 +1,8516 @@
+{
+ "version": "1.3.0",
+ "started": "2026-10-19T10:02:23+00:00",
+ "finished": "2026-10-19T10:24:22+00:00",
+ "model": {
+  "name": "aussie-static",
+  "version": "1.3.0",
+  "dims": 256,
+  "rows": 30161,
+  "unk_token": "[UNK]",
+  "added_tokens": [
+   "ant's",
+   "bloke's",
+   "blood's",
+   "bride's",
+   "buck's",
+   "buckley's",
+   "bugger's",
+   "bull's",
+   "can't",
+   "couldn't",
+   "day's",
+   "didn't",
+   "dingo's",
+   "doctor's",
+   "dog's",
+   "don't",
+   "donkey's",
+   "duck's",
+   "fish's",
+   "g'day",
+   "goose's",
+   "he's",
+   "hen's",
+   "here's",
+   "how's",
+   "i've",
+   "law's",
+   "macca's",
+   "n't",
+   "nun's",
+   "pig's",
+   "pommy's",
+   "rat's",
+   "robber's",
+   "roll's",
+   "she'll",
+   "she's",
+   "shearer's",
+   "sideways'n",
+   "sparrow's",
+   "that's",
+   "they're",
+   "we'll",
+   "welder's",
+   "what's",
+   "who's",
+   "witch's",
+   "wouldn't",
+   "you're"
+  ],
+  "lookup_threshold": 0.5,
+  "gaps_confident": 0.6,
+  "dictionary_sha256": "d327b4749548662eb86034ec1a82058051ef4e2e059ecbf205c967e3af03830d",
+  "vectors_sha256": "4f47c27ecfab0903f557562a5eb351f9a18951f4788e68533c41e8d494cbd840",
+  "vocab_sha256": "e5df53a67a6d46e8284325efc070bc887ffef11bd50093bb6a2719e0eee50b1b",
+  "trained": "2026-10-19",
+  "about": "scripts/train_embedder.py from training/recipe.yaml; report: training/reports/1.3.0.json",
+  "recipe": {
+   "name": "aussie-static",
+   "base": {
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+   },
+   "seed": 13,
+   "holdout": 0.2,
+   "sources": {
+    "dictionary": true,
+    "opposites": "training/opposites.yaml",
+    "extra_pairs": [],
+    "wordnet": {
+     "enabled": true,
+     "senses": 1,
+     "per_trigger": 6,
+     "forms_per_concept": 2,
+     "exclude": "training/gap_benchmark.yaml"
+    }
+   },
+   "gap_benchmark": "training/gap_benchmark.yaml",
+   "reference": "training/reference.yaml",
+   "pairs": {
+    "placeholders": {
+     "poss": "their",
+     "subj": "",
+     "obj": "them",
+     "refl": "themselves"
+    },
+    "sense_forms_per_concept": 4,
+    "sense_targets": [
+     "forms",
+     "glosses",
+     "description"
+    ],
+    "opposite_anchors_per_concept": 6,
+    "opposite_forms_per_concept": 4,
+    "opposite_targets": [
+     "forms",
+     "glosses",
+     "description"
+    ]
+   },
+   "finetune": {
+    "epochs": 4,
+    "lr": 5e-05,
+    "batch": 64,
+    "warmup": 0.1,
+    "sense_margin": 0.5,
+    "opposite_margin": 0.75
+   },
+   "distil": {
+    "pca_dims": 256,
+    "dictionary_vocabulary": true,
+    "sif_coefficient": 0.0001
+   },
+   "static_tune": {
+    "epochs": 4,
+    "lr": 0.05,
+    "batch": 256,
+    "blend": 0.7
+   },
+   "cutoffs": {
+    "lookup": 0.5,
+    "gaps": 0.6
+   }
+  },
+  "recipe_sha256": "099a736840dd3bc94588fab916ba4d2af226fdb0e8c72f0287e98fbb696ad4de",
+  "reference_sha256": "72f1bd18030553f51e6ceed2b744ab7f04bb9750374fd70b2b897f7c89de7c6b",
+  "opposites_sha256": "d2bea4d42574ce98dc094ac8152d015660ae5933afe13eae69efc9be0563f4f4",
+  "gap_benchmark_sha256": "61f55db88404f3383deebde6998b7b0bf977b7397878ced3233a6e8f338e86e9",
+  "wordnet": "WordNet 3.0",
+  "script_sha256": "ffd3bd090cf845f364fccd673b9403d9d9c9d2d76bf919f5c90561be660fbc88",
+  "git": {
+   "commit": "11aa20c3e6b194bb2de014c314e3f10a8a7783aa",
+   "dirty": true
+  },
+  "toolchain": {
+   "python": "3.12.13",
+   "torch": "2.14.1",
+   "sentence-transformers": "6.1.0",
+   "transformers": "5.3.0",
+   "model2vec": "0.9.0",
+   "tokenizers": "0.22.2",
+   "safetensors": "0.8.0",
+   "datasets": "5.1.0",
+   "nltk": "3.10.3",
+   "accelerate": "1.15.0",
+   "scikit-learn": "1.9.1",
+   "numpy": "2.5.3",
+   "huggingface_hub": "1.33.0"
+  },
+  "training_data": {
+   "entries": 1206,
+   "pairs": 12577,
+   "wrong_sense_pairs": 6910,
+   "opposite_pairs": 3775
+  },
+  "evaluation": {
+   "n-gram": {
+    "gloss->form": 0.199,
+    "gloss->concept's forms": 0.253,
+    "form->concept": 0.124,
+    "opposites offered": 0.024,
+    "gap right@1": 0.023,
+    "gap filled right": 0.023,
+    "gap filled wrong": 0.093,
+    "everyday filled": 0.115,
+    "reference": "24/33"
+   },
+   "stock MiniLM": {
+    "gloss->form": 0.253,
+    "gloss->concept's forms": 0.336,
+    "form->concept": 0.178,
+    "opposites offered": 0.16,
+    "gap right@1": 0.302,
+    "gap filled right": 0.233,
+    "gap filled wrong": 0.256,
+    "everyday filled": 0.231,
+    "reference": "25/33"
+   },
+   "stock MiniLM, static": {
+    "gloss->form": 0.162,
+    "gloss->concept's forms": 0.216,
+    "form->concept": 0.087,
+    "opposites offered": 0.208,
+    "gap right@1": 0.209,
+    "gap filled right": 0.116,
+    "gap filled wrong": 0.209,
+    "everyday filled": 0.192,
+    "reference": "19/33"
+   },
+   "Aussie MiniLM": {
+    "gloss->form": 0.328,
+    "gloss->concept's forms": 0.564,
+    "form->concept": 0.332,
+    "opposites offered": 0.024,
+    "gap right@1": 0.419,
+    "gap filled right": 0.256,
+    "gap filled wrong": 0.093,
+    "everyday filled": 0.115,
+    "reference": "28/33"
+   },
+   "Aussie static, distilled only": {
+    "gloss->form": 0.162,
+    "gloss->concept's forms": 0.328,
+    "form->concept": 0.154,
+    "opposites offered": 0.168,
+    "gap right@1": 0.395,
+    "gap filled right": 0.279,
+    "gap filled wrong": 0.14,
+    "everyday filled": 0.154,
+    "reference": "23/33"
+   },
+   "Aussie static, tuned": {
+    "gloss->form": 0.266,
+    "gloss->concept's forms": 0.552,
+    "form->concept": 0.311,
+    "opposites offered": 0.064,
+    "gap right@1": 0.279,
+    "gap filled right": 0.116,
+    "gap filled wrong": 0.186,
+    "everyday filled": 0.115,
+    "reference": "32/33"
+   }
+  },
+  "reference": "33/33"
+ },
+ "evaluation": [
+  {
+   "setup": "n-gram",
+   "gloss->form": 0.199,
+   "gloss->concept's forms": 0.253,
+   "form->concept": 0.124,
+   "opposites offered": 0.024,
+   "opposite_queries": 125,
+   "gap right@1": 0.023,
+   "gap filled right": 0.023,
+   "gap filled wrong": 0.093,
+   "everyday filled": 0.115,
+   "gap_detail": [
+    {
+     "word": "gleeful",
+     "nearest": "AWFUL",
+     "score": 0.378,
+     "want": "HAPPY"
+    },
+    {
+     "word": "cheerful",
+     "nearest": "EXCELLENT",
+     "score": 0.477,
+     "want": "HAPPY"
+    },
+    {
+     "word": "sorrowful",
+     "nearest": "AWFUL",
+     "score": 0.456,
+     "want": "SAD"
+    },
+    {
+     "word": "melancholy",
+     "nearest": "EASYGOING",
+     "score": 0.306,
+     "want": "SAD"
+    },
+    {
+     "word": "morose",
+     "nearest": "IDIOT",
+     "score": 0.535,
+     "want": "SAD"
+    },
+    {
+     "word": "wrathful",
+     "nearest": "EXCELLENT",
+     "score": 0.381,
+     "want": "ANGRY"
+    },
+    {
+     "word": "indignant",
+     "nearest": "VAGRANT",
+     "score": 0.302,
+     "want": "ANGRY"
+    },
+    {
+     "word": "exasperated",
+     "nearest": "TIRED",
+     "score": 0.418,
+     "want": "ANGRY"
+    },
+    {
+     "word": "fearful",
+     "nearest": "SCOLDING",
+     "score": 0.603,
+     "want": "SCARED"
+    },
+    {
+     "word": "timid",
+     "nearest": "TIRED",
+     "score": 0.429,
+     "want": "SCARED"
+    },
+    {
+     "word": "drowsy",
+     "nearest": "TALK_ON",
+     "score": 0.335,
+     "want": "TIRED"
+    },
+    {
+     "word": "sleepy",
+     "nearest": "HAVE_SEX",
+     "score": 0.51,
+     "want": "TIRED"
+    },
+    {
+     "word": "sozzled",
+     "nearest": "CONTENT",
+     "score": 0.444,
+     "want": "DRUNK"
+    },
+    {
+     "word": "affluent",
+     "nearest": "PENNY",
+     "score": 0.447,
+     "want": "RICH"
+    },
+    {
+     "word": "prosperous",
+     "nearest": "DANGEROUS",
+     "score": 0.435,
+     "want": "RICH"
+    },
+    {
+     "word": "opulent",
+     "nearest": "DISHONEST_ADJECTIVE",
+     "score": 0.481,
+     "want": "RICH"
+    },
+    {
+     "word": "needy",
+     "nearest": "UNCOOL",
+     "score": 0.571,
+     "want": "POOR"
+    },
+    {
+     "word": "starved",
+     "nearest": "SPOOKED",
+     "score": 0.632,
+     "want": "HUNGRY"
+    },
+    {
+     "word": "unclean",
+     "nearest": "NAKED",
+     "score": 0.402,
+     "want": "DIRTY"
+    },
+    {
+     "word": "soiled",
+     "nearest": "CONTENT",
+     "score": 0.471,
+     "want": "DIRTY"
+    },
+    {
+     "word": "mammoth",
+     "nearest": "MAKE_OUT",
+     "score": 0.344,
+     "want": "HUGE"
+    },
+    {
+     "word": "foolish",
+     "nearest": "IDIOT",
+     "score": 0.544,
+     "want": "STUPID"
+    },
+    {
+     "word": "idiotic",
+     "nearest": "IDIOT",
+     "score": 0.63,
+     "want": "STUPID"
+    },
+    {
+     "word": "lethargic",
+     "nearest": "LUNATIC",
+     "score": 0.302,
+     "want": "LAZY"
+    },
+    {
+     "word": "indolent",
+     "nearest": "EXCELLENT",
+     "score": 0.381,
+     "want": "LAZY"
+    },
+    {
+     "word": "slothful",
+     "nearest": "AWFUL",
+     "score": 0.359,
+     "want": "LAZY"
+    },
+    {
+     "word": "deceitful",
+     "nearest": "AWFUL",
+     "score": 0.381,
+     "want": "DODGY"
+    },
+    {
+     "word": "fraudulent",
+     "nearest": "DISHONEST_ADJECTIVE",
+     "score": 1.0,
+     "want": "DODGY"
+    },
+    {
+     "word": "ailing",
+     "nearest": "SCORCHING",
+     "score": 0.589,
+     "want": "SICK"
+    },
+    {
+     "word": "feverish",
+     "nearest": "DIE",
+     "score": 0.559,
+     "want": "SICK"
+    },
+    {
+     "word": "apprehensive",
+     "nearest": "GO_ALONG",
+     "score": 0.535,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "uneasy",
+     "nearest": "EASY",
+     "score": 0.577,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "tense",
+     "nearest": "MOCK",
+     "score": 0.571,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "dehydrated",
+     "nearest": "DISAPPOINTED",
+     "score": 0.5,
+     "want": "THIRSTY"
+    },
+    {
+     "word": "chilly",
+     "nearest": "CHILD",
+     "score": 0.535,
+     "want": "FREEZING"
+    },
+    {
+     "word": "frosty",
+     "nearest": "WINDY",
+     "score": 0.401,
+     "want": "FREEZING"
+    },
+    {
+     "word": "icy",
+     "nearest": "COOLER",
+     "score": 0.298,
+     "want": "FREEZING"
+    },
+    {
+     "word": "sweltering",
+     "nearest": "BRAVE",
+     "score": 0.408,
+     "want": "SCORCHING"
+    },
+    {
+     "word": "torrid",
+     "nearest": "FIELD_OTHER_SENSE",
+     "score": 0.335,
+     "want": "SCORCHING"
+    },
+    {
+     "word": "pricy",
+     "nearest": "EXPENSIVE",
+     "score": 0.668,
+     "want": "EXPENSIVE"
+    },
+    {
+     "word": "tedious",
+     "nearest": "ANGRY",
+     "score": 0.444,
+     "want": "BORED"
+    },
+    {
+     "word": "ungainly",
+     "nearest": "DEFINITELY",
+     "score": 0.477,
+     "want": "CLUMSY"
+    },
+    {
+     "word": "hapless",
+     "nearest": "USELESS",
+     "score": 0.527,
+     "want": "UNLUCKY"
+    },
+    {
+     "word": "table",
+     "nearest": "TACKLE",
+     "score": 0.535,
+     "want": null
+    },
+    {
+     "word": "window",
+     "nearest": "WINDY",
+     "score": 0.535,
+     "want": null
+    },
+    {
+     "word": "pencil",
+     "nearest": "PENIS",
+     "score": 0.401,
+     "want": null
+    },
+    {
+     "word": "yellow",
+     "nearest": "FELLOW_MAN",
+     "score": 0.625,
+     "want": null
+    },
+    {
+     "word": "tuesday",
+     "nearest": "TURN_OUT_FINE",
+     "score": 0.344,
+     "want": null
+    },
+    {
+     "word": "garden",
+     "nearest": "LOUNGE_ROOM",
+     "score": 0.474,
+     "want": null
+    },
+    {
+     "word": "kitchen",
+     "nearest": "FOIL",
+     "score": 0.713,
+     "want": null
+    },
+    {
+     "word": "envelope",
+     "nearest": "DISAGREE",
+     "score": 0.387,
+     "want": null
+    },
+    {
+     "word": "ladder",
+     "nearest": "BOY",
+     "score": 0.474,
+     "want": null
+    },
+    {
+     "word": "umbrella",
+     "nearest": "UMBRELLA",
+     "score": 1.0,
+     "want": null
+    },
+    {
+     "word": "wooden",
+     "nearest": "FOREST",
+     "score": 0.535,
+     "want": null
+    },
+    {
+     "word": "plastic",
+     "nearest": "DRUNK",
+     "score": 0.503,
+     "want": null
+    },
+    {
+     "word": "ceiling",
+     "nearest": "SCORCHING",
+     "score": 0.556,
+     "want": null
+    },
+    {
+     "word": "bicycle",
+     "nearest": "WAR",
+     "score": 0.354,
+     "want": null
+    },
+    {
+     "word": "carpet",
+     "nearest": "CARPENTER",
+     "score": 0.533,
+     "want": null
+    },
+    {
+     "word": "calendar",
+     "nearest": "SELFISH",
+     "score": 0.316,
+     "want": null
+    },
+    {
+     "word": "printer",
+     "nearest": "RASCAL",
+     "score": 0.503,
+     "want": null
+    },
+    {
+     "word": "orange",
+     "nearest": "ON_THE_DRINK",
+     "score": 0.408,
+     "want": null
+    },
+    {
+     "word": "metal",
+     "nearest": "ASYLUM",
+     "score": 0.577,
+     "want": null
+    },
+    {
+     "word": "copper",
+     "nearest": "COOLER",
+     "score": 0.5,
+     "want": null
+    },
+    {
+     "word": "shelf",
+     "nearest": "GO_AHEAD",
+     "score": 0.39,
+     "want": null
+    },
+    {
+     "word": "triangle",
+     "nearest": "NATION",
+     "score": 0.478,
+     "want": null
+    },
+    {
+     "word": "spreadsheet",
+     "nearest": "RUN",
+     "score": 0.392,
+     "want": null
+    },
+    {
+     "word": "cardboard",
+     "nearest": "COWARD",
+     "score": 0.49,
+     "want": null
+    },
+    {
+     "word": "staircase",
+     "nearest": "LUNATIC",
+     "score": 0.402,
+     "want": null
+    },
+    {
+     "word": "lamp",
+     "nearest": "RASCAL",
+     "score": 0.463,
+     "want": null
+    }
+   ],
+   "size_mb": null,
+   "reference": "24/33",
+   "reference_detail": {
+    "passed": 24,
+    "required": 33,
+    "known_fixed": [
+     "very tired",
+     "a heap of money",
+     "wide awake",
+     "put up with",
+     "sleep",
+     "dying",
+     "very cold",
+     "established",
+     "very large",
+     "wake up",
+     "worked very hard",
+     "harmless",
+     "probably"
+    ],
+    "checks": [
+     {
+      "kind": "must_not",
+      "query": "girl",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "QUIT",
+       "GIRLFRIEND",
+       "TRY_OUT"
+      ],
+      "top_forms": [
+       "chuck it in",
+       "a cliner",
+       "give {np} a burl"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a great war",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "A_LOT",
+       "FAST",
+       "BUSY"
+      ],
+      "top_forms": [
+       "heaps",
+       "like the clappers",
+       "flat out"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "rolling in cash",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "BEDROLL",
+       "PUT_IN_CASUAL",
+       "WITHIN_EARSHOT"
+      ],
+      "top_forms": [
+       "a swag",
+       "within cooee",
+       "bung {obj} in"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "completely skint",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "BRAND_NEW",
+       "DEAF",
+       "CRAZY"
+      ],
+      "top_forms": [
+       "brand-spankin'-new",
+       "deaf as a post",
+       "as mad as a meat axe"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a boiling hot day",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HOT_WEATHER",
+       "BILLY",
+       "COOL_CHANGE"
+      ],
+      "top_forms": [
+       "a scorcher",
+       "a stinker",
+       "billy"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a freezing cold morning",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "COLD_WEATHER",
+       "SHILLING",
+       "FOR_A_LIVING"
+      ],
+      "top_forms": [
+       "{subj} {be} brass monkeys",
+       "a deener",
+       "for a crust"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "over the moon about it",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "GOSSIP",
+       "DROVING",
+       "OUT_BUSH"
+      ],
+      "top_forms": [
+       "the goss",
+       "go droving",
+       "out bush"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "feeling really down",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "NAUSEOUS",
+       "KEEP_MUM",
+       "SIT_DOWN"
+      ],
+      "top_forms": [
+       "crook in the guts",
+       "{subj} never cracked a boo",
+       "park {poss} bum"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "absolutely starving",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "AGREE",
+       "DISAGREE",
+       "EMPHATIC_REFUSAL"
+      ],
+      "top_forms": [
+       "too bloody right",
+       "too right",
+       "no fuckin' way"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "stuffed after dinner",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "WORK_LATE",
+       "BOTCH",
+       "DRUNK"
+      ],
+      "top_forms": [
+       "work back",
+       "stuff up",
+       "full as a goog"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "working my guts out",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "NUT_OUT",
+       "CHECK_OUT",
+       "WORN_OUT_THING"
+      ],
+      "top_forms": [
+       "nut out",
+       "suss {obj} out",
+       "clapped-out"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "dead easy",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "VERY",
+       "BROKEN",
+       "EASYGOING"
+      ],
+      "top_forms": [
+       "dead",
+       "cactus",
+       "laid-back"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "hello there",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "GREETING",
+       "SAY_HELLO",
+       "OCCASIONAL"
+      ],
+      "top_forms": [
+       "g'day",
+       "say g'day",
+       "the odd"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a top bloke",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "TOILET",
+       "BLOWFLY",
+       "ONE_CIGARETTE"
+      ],
+      "top_forms": [
+       "dunny",
+       "a blowie",
+       "a dart"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a tiny little thing",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "CHILD",
+       "NOTHING",
+       "CALL_OFF"
+      ],
+      "top_forms": [
+       "littlie",
+       "sweet bugger-all",
+       "fuck all"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "honest",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "REALLY_Q",
+       "SINCERELY",
+       "GENUINE"
+      ],
+      "top_forms": [
+       "fair dinkum",
+       "square an' all",
+       "fair fuckin' dinkum"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a prank",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "VERANDAH",
+       "GO_ALONG",
+       "SWEATER"
+      ],
+      "top_forms": [
+       "verandah",
+       "say righto to {np}",
+       "reckon {np} {be} a goer"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "skull",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HEAD",
+       "ARROGANT",
+       "TRUANT"
+      ],
+      "top_forms": [
+       "noggin",
+       "scone",
+       "{subj} {be} up {poss}self"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "knackered beyond belief",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "TIRED",
+       "BROKEN",
+       "FULL"
+      ],
+      "top_forms": [
+       "rooted",
+       "{subj} {have} carked it",
+       "fucked"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "feeling a bit under the weather",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "NAUSEOUS",
+       "RAINING_HARD",
+       "BARBECUE"
+      ],
+      "top_forms": [
+       "crook in the guts",
+       "{subj} {be} pissing down",
+       "{subj} {be} bucketing down"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "late in the afternoon",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "AFTERNOON",
+       "NAP",
+       "FREO_DOCTOR"
+      ],
+      "top_forms": [
+       "arvo",
+       "a nana nap",
+       "the Fremantle Doctor"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "the bottle shop",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "BOSS",
+       "PRODUCE_AISLE",
+       "SMALL_BEER_BOTTLE"
+      ],
+      "top_forms": [
+       "the head serang",
+       "fruit and veg aisle",
+       "stubby"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "it's pouring down outside",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "CHECK_OUT",
+       "SKOL",
+       "CALM_DOWN"
+      ],
+      "top_forms": [
+       "suss {obj} out",
+       "skol {obj}",
+       "settle, petal"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a quick snooze",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "LOOK",
+       "FAST",
+       "DUVET"
+      ],
+      "top_forms": [
+       "a Captain Cook",
+       "a geek",
+       "a squiz"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "completely skint",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "BRAND_NEW",
+       "DEAF",
+       "CRAZY"
+      ],
+      "top_forms": [
+       "brand-spankin'-new",
+       "deaf as a post",
+       "as mad as a meat axe"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a cold one at the pub",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "COLD_BEER_SERVING",
+       "PUB_MEAL",
+       "CAR_TRUNK"
+      ],
+      "top_forms": [
+       "a coldie",
+       "a counter meal",
+       "boot"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "chucking a wobbly",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "WALKING_TRACK",
+       "FOR_A_LIVING",
+       "LITTER_PICK"
+      ],
+      "top_forms": [
+       "a walking track",
+       "for a crust",
+       "an emu bob"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a shady deal",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "A_LOT",
+       "SHEEP",
+       "SWINDLER"
+      ],
+      "top_forms": [
+       "heaps",
+       "a jumbuck",
+       "a shonky bastard"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "quit your whining",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "LIGHT_RAIN",
+       "MIND_OWN_BUSINESS",
+       "QUIT"
+      ],
+      "top_forms": [
+       "{subj} {be} spitting",
+       "pull your head in",
+       "pull the pin"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a good mate of mine",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "GOOD_PERSON",
+       "WOODPILE",
+       "MEAL"
+      ],
+      "top_forms": [
+       "a legend",
+       "the woodheap",
+       "a feed"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "ages ago",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LONG_AGO",
+       "LONG_TIME",
+       "GO_ALONG"
+      ],
+      "top_forms": [
+       "yonks ago",
+       "yonks",
+       "donkey's years ago"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a complete idiot",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "IDIOT",
+       "MESS",
+       "BRAND_NEW"
+      ],
+      "top_forms": [
+       "a dumb cunt",
+       "a fuckwit",
+       "a dog's breakfast"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "having a chinwag",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "BUSY",
+       "CHAT",
+       "CHILD"
+      ],
+      "top_forms": [
+       "flat chat",
+       "flat out",
+       "flat out like a lizard drinking"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very tired",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "THIRSTY",
+       "DARK",
+       "RICH"
+      ],
+      "top_forms": [
+       "dry as a nun's nasty",
+       "rollin' in it",
+       "like a rat up a drainpipe"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "extremely tired",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "SLOW",
+       "DRUNK",
+       "STINGY"
+      ],
+      "top_forms": [
+       "slow as buggery",
+       "slow as a wet week",
+       "full as a state school"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a heap of money",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "FAIR_AMOUNT",
+       "LOT_OF_MONEY",
+       "BROKE"
+      ],
+      "top_forms": [
+       "a fair whack",
+       "a motza",
+       "a packet"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "wide awake",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "LIQUOR_STORE",
+       "U_TURN",
+       "GET_RICH"
+      ],
+      "top_forms": [
+       "bottle-o",
+       "chuck a uey",
+       "make {poss} pile"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "run off my feet",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "FLEE",
+       "ROUGH_PATCH",
+       "RUN"
+      ],
+      "top_forms": [
+       "do a runner",
+       "a bad trot",
+       "leg it"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "put up with",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "COP_IT",
+       "TOLERATE",
+       "BROKE"
+      ],
+      "top_forms": [
+       "cop {np}",
+       "{subj} {have}n't got a brass razoo",
+       "bare-arsed"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "sleep",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "NAP",
+       "FALL_ASLEEP",
+       "BEEN_SLEEPING_IN"
+      ],
+      "top_forms": [
+       "a kip",
+       "flake out",
+       "been kippin' in"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "dying",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "BEEN_AT",
+       "TRAVEL_WITH_SWAG",
+       "NUISANCE"
+      ],
+      "top_forms": [
+       "been at",
+       "go waltzing Matilda",
+       "a fair cow"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very cold",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "DARK",
+       "RICH",
+       "SICK"
+      ],
+      "top_forms": [
+       "as crook as a dog",
+       "rollin' in it",
+       "like a rat up a drainpipe"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "established",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "PUB",
+       "UNEMPLOYMENT_BENEFIT_RECIPIENT",
+       "CARE_ABOUT"
+      ],
+      "top_forms": [
+       "the pub",
+       "on the dole",
+       "give a rat's arse about"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "stepmother",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "GRANDMOTHER",
+       "STEAL",
+       "MOTHER"
+      ],
+      "top_forms": [
+       "nan",
+       "flog",
+       "nick"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very large",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "LUCKY",
+       "DARK",
+       "RICH"
+      ],
+      "top_forms": [
+       "a lucky bugger",
+       "high as a kite",
+       "like a rat up a drainpipe"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "wake up",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "LOSE_TEMPER",
+       "QUIT",
+       "MOCK"
+      ],
+      "top_forms": [
+       "arc up",
+       "chuck it in",
+       "take the piss out of {obj}"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "worked very hard",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "WORK",
+       "WORK_HARD",
+       "HAPPY"
+      ],
+      "top_forms": [
+       "yakka",
+       "bust {poss} guts",
+       "do the hard yards"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "harmless",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "DRESS_WARMLY",
+       "DAZED",
+       "LOSER"
+      ],
+      "top_forms": [
+       "rug up",
+       "like a stunned mullet",
+       "a no-hoper"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "probably",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "REASONABLE",
+       "LUCKY",
+       "NO_PROBLEM"
+      ],
+      "top_forms": [
+       "fair enough",
+       "a lucky bugger",
+       "luckier than a shithouse rat"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "setup": "stock MiniLM",
+   "gloss->form": 0.253,
+   "gloss->concept's forms": 0.336,
+   "form->concept": 0.178,
+   "opposites offered": 0.16,
+   "opposite_queries": 125,
+   "gap right@1": 0.302,
+   "gap filled right": 0.233,
+   "gap filled wrong": 0.256,
+   "everyday filled": 0.231,
+   "gap_detail": [
+    {
+     "word": "gleeful",
+     "nearest": "HAPPY",
+     "score": 0.558,
+     "want": "HAPPY"
+    },
+    {
+     "word": "cheerful",
+     "nearest": "SAD",
+     "score": 0.64,
+     "want": "HAPPY"
+    },
+    {
+     "word": "sorrowful",
+     "nearest": "CRY",
+     "score": 0.541,
+     "want": "SAD"
+    },
+    {
+     "word": "melancholy",
+     "nearest": "SAD",
+     "score": 0.667,
+     "want": "SAD"
+    },
+    {
+     "word": "morose",
+     "nearest": "IDIOT",
+     "score": 0.536,
+     "want": "SAD"
+    },
+    {
+     "word": "wrathful",
+     "nearest": "DISGUSTING",
+     "score": 0.5,
+     "want": "ANGRY"
+    },
+    {
+     "word": "indignant",
+     "nearest": "DISAPPOINTED",
+     "score": 0.558,
+     "want": "ANGRY"
+    },
+    {
+     "word": "exasperated",
+     "nearest": "WORKED_UP",
+     "score": 0.631,
+     "want": "ANGRY"
+    },
+    {
+     "word": "fearful",
+     "nearest": "SCARED",
+     "score": 0.825,
+     "want": "SCARED"
+    },
+    {
+     "word": "timid",
+     "nearest": "DIRTY",
+     "score": 0.381,
+     "want": "SCARED"
+    },
+    {
+     "word": "drowsy",
+     "nearest": "TIRED",
+     "score": 0.629,
+     "want": "TIRED"
+    },
+    {
+     "word": "sleepy",
+     "nearest": "TIRED",
+     "score": 0.824,
+     "want": "TIRED"
+    },
+    {
+     "word": "sozzled",
+     "nearest": "ASTONISHED",
+     "score": 0.498,
+     "want": "DRUNK"
+    },
+    {
+     "word": "affluent",
+     "nearest": "POOR",
+     "score": 0.797,
+     "want": "RICH"
+    },
+    {
+     "word": "prosperous",
+     "nearest": "RICH",
+     "score": 0.669,
+     "want": "RICH"
+    },
+    {
+     "word": "opulent",
+     "nearest": "POOR",
+     "score": 0.482,
+     "want": "RICH"
+    },
+    {
+     "word": "needy",
+     "nearest": "SELFISH",
+     "score": 0.606,
+     "want": "POOR"
+    },
+    {
+     "word": "starved",
+     "nearest": "HUNGRY",
+     "score": 0.837,
+     "want": "HUNGRY"
+    },
+    {
+     "word": "unclean",
+     "nearest": "DIRTY",
+     "score": 0.465,
+     "want": "DIRTY"
+    },
+    {
+     "word": "soiled",
+     "nearest": "STAGGERED",
+     "score": 0.656,
+     "want": "DIRTY"
+    },
+    {
+     "word": "mammoth",
+     "nearest": "HUGE",
+     "score": 0.486,
+     "want": "HUGE"
+    },
+    {
+     "word": "foolish",
+     "nearest": "IDIOT",
+     "score": 0.665,
+     "want": "STUPID"
+    },
+    {
+     "word": "idiotic",
+     "nearest": "IDIOT",
+     "score": 0.753,
+     "want": "STUPID"
+    },
+    {
+     "word": "lethargic",
+     "nearest": "BORED",
+     "score": 0.429,
+     "want": "LAZY"
+    },
+    {
+     "word": "indolent",
+     "nearest": "NUISANCE",
+     "score": 0.459,
+     "want": "LAZY"
+    },
+    {
+     "word": "slothful",
+     "nearest": "POKIES",
+     "score": 0.62,
+     "want": "LAZY"
+    },
+    {
+     "word": "deceitful",
+     "nearest": "DISHONEST",
+     "score": 0.615,
+     "want": "DODGY"
+    },
+    {
+     "word": "fraudulent",
+     "nearest": "DISHONEST_ADJECTIVE",
+     "score": 1.0,
+     "want": "DODGY"
+    },
+    {
+     "word": "ailing",
+     "nearest": "OGLE",
+     "score": 0.456,
+     "want": "SICK"
+    },
+    {
+     "word": "feverish",
+     "nearest": "WINDY",
+     "score": 0.502,
+     "want": "SICK"
+    },
+    {
+     "word": "apprehensive",
+     "nearest": "AWFUL",
+     "score": 0.566,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "uneasy",
+     "nearest": "SCARED",
+     "score": 0.684,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "tense",
+     "nearest": "TRICKY_QUESTION",
+     "score": 0.447,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "dehydrated",
+     "nearest": "THIRSTY",
+     "score": 0.609,
+     "want": "THIRSTY"
+    },
+    {
+     "word": "chilly",
+     "nearest": "FREEZING",
+     "score": 0.762,
+     "want": "FREEZING"
+    },
+    {
+     "word": "frosty",
+     "nearest": "FREEZING",
+     "score": 0.638,
+     "want": "FREEZING"
+    },
+    {
+     "word": "icy",
+     "nearest": "FREEZING",
+     "score": 0.749,
+     "want": "FREEZING"
+    },
+    {
+     "word": "sweltering",
+     "nearest": "NONSENSE",
+     "score": 0.488,
+     "want": "SCORCHING"
+    },
+    {
+     "word": "torrid",
+     "nearest": "SHARP",
+     "score": 0.435,
+     "want": "SCORCHING"
+    },
+    {
+     "word": "pricy",
+     "nearest": "FREEDOM",
+     "score": 0.445,
+     "want": "EXPENSIVE"
+    },
+    {
+     "word": "tedious",
+     "nearest": "DEAD_EASY",
+     "score": 0.552,
+     "want": "BORED"
+    },
+    {
+     "word": "ungainly",
+     "nearest": "UGLY",
+     "score": 0.5,
+     "want": "CLUMSY"
+    },
+    {
+     "word": "hapless",
+     "nearest": "ANNOY",
+     "score": 0.426,
+     "want": "UNLUCKY"
+    },
+    {
+     "word": "table",
+     "nearest": "FIGHT",
+     "score": 0.638,
+     "want": null
+    },
+    {
+     "word": "window",
+     "nearest": "WHIRLWIND",
+     "score": 0.556,
+     "want": null
+    },
+    {
+     "word": "pencil",
+     "nearest": "SHARP",
+     "score": 0.555,
+     "want": null
+    },
+    {
+     "word": "yellow",
+     "nearest": "PENNY",
+     "score": 0.518,
+     "want": null
+    },
+    {
+     "word": "tuesday",
+     "nearest": "WEEK_FROM_SUNDAY",
+     "score": 0.705,
+     "want": null
+    },
+    {
+     "word": "garden",
+     "nearest": "FIELD",
+     "score": 0.6,
+     "want": null
+    },
+    {
+     "word": "kitchen",
+     "nearest": "KITCHEN_HAND",
+     "score": 0.619,
+     "want": null
+    },
+    {
+     "word": "envelope",
+     "nearest": "POSTMAN",
+     "score": 0.495,
+     "want": null
+    },
+    {
+     "word": "ladder",
+     "nearest": "A_RAFT_OF",
+     "score": 0.477,
+     "want": null
+    },
+    {
+     "word": "umbrella",
+     "nearest": "UMBRELLA",
+     "score": 1.0,
+     "want": null
+    },
+    {
+     "word": "wooden",
+     "nearest": "WOODPILE",
+     "score": 0.687,
+     "want": null
+    },
+    {
+     "word": "plastic",
+     "nearest": "SUNGLASSES",
+     "score": 0.472,
+     "want": null
+    },
+    {
+     "word": "ceiling",
+     "nearest": "A_RAFT_OF",
+     "score": 0.51,
+     "want": null
+    },
+    {
+     "word": "bicycle",
+     "nearest": "BIKIE",
+     "score": 0.699,
+     "want": null
+    },
+    {
+     "word": "carpet",
+     "nearest": "LITTER_PICK",
+     "score": 0.517,
+     "want": null
+    },
+    {
+     "word": "calendar",
+     "nearest": "HAPPY_SNAP",
+     "score": 0.402,
+     "want": null
+    },
+    {
+     "word": "printer",
+     "nearest": "SCREW_UP_FACE",
+     "score": 0.423,
+     "want": null
+    },
+    {
+     "word": "orange",
+     "nearest": "DARK",
+     "score": 0.479,
+     "want": null
+    },
+    {
+     "word": "metal",
+     "nearest": "FOIL",
+     "score": 0.469,
+     "want": null
+    },
+    {
+     "word": "copper",
+     "nearest": "BROKE",
+     "score": 0.479,
+     "want": null
+    },
+    {
+     "word": "shelf",
+     "nearest": "FRIDGE",
+     "score": 0.521,
+     "want": null
+    },
+    {
+     "word": "triangle",
+     "nearest": "GULLY",
+     "score": 0.381,
+     "want": null
+    },
+    {
+     "word": "spreadsheet",
+     "nearest": "FIGHT",
+     "score": 0.398,
+     "want": null
+    },
+    {
+     "word": "cardboard",
+     "nearest": "COOLER",
+     "score": 0.532,
+     "want": null
+    },
+    {
+     "word": "staircase",
+     "nearest": "GULLY",
+     "score": 0.517,
+     "want": null
+    },
+    {
+     "word": "lamp",
+     "nearest": "SUNGLASSES",
+     "score": 0.506,
+     "want": null
+    }
+   ],
+   "size_mb": null,
+   "reference": "25/33",
+   "reference_detail": {
+    "passed": 25,
+    "required": 33,
+    "known_fixed": [
+     "wide awake",
+     "dying",
+     "established",
+     "very large",
+     "worked very hard",
+     "harmless",
+     "probably"
+    ],
+    "checks": [
+     {
+      "kind": "must_not",
+      "query": "girl",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "GIRLFRIEND",
+       "ATTRACTIVE",
+       "PENIS"
+      ],
+      "top_forms": [
+       "a cliner",
+       "a spunk",
+       "donger"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a great war",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "WAR",
+       "AWFUL",
+       "HARD_FOUGHT"
+      ],
+      "top_forms": [
+       "stoush",
+       "a shocker",
+       "a willing affair"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "rolling in cash",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "RICH",
+       "SHILLING",
+       "LOOSE_CHANGE"
+      ],
+      "top_forms": [
+       "cashed up",
+       "a deener",
+       "shrapnel"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "completely skint",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LONELY",
+       "HEARTLESS",
+       "STINGY"
+      ],
+      "top_forms": [
+       "like a shag on a rock",
+       "as cold as a mother-in-law's kiss",
+       "tighter than a fish's arse"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a boiling hot day",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HOT_WEATHER",
+       "FINE_DAY",
+       "COOL_CHANGE"
+      ],
+      "top_forms": [
+       "a stinker",
+       "a scorcher",
+       "a cracker of a day"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a freezing cold morning",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "FREEZING",
+       "FREEZING_WEATHER",
+       "NAP"
+      ],
+      "top_forms": [
+       "cold enough to freeze the balls off a brass monkey",
+       "colder than a witch's tit",
+       "brass monkey weather"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "over the moon about it",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "EVERYWHERE",
+       "LATER_ON",
+       "FAR_AWAY"
+      ],
+      "top_forms": [
+       "all over the shop",
+       "down the track",
+       "Woop Woop"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "feeling really down",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LIE_DOWN_REST",
+       "SIT_DOWN",
+       "NAUSEOUS"
+      ],
+      "top_forms": [
+       "have a lie-down",
+       "park {poss} bum",
+       "crook in the guts"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "absolutely starving",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HUNGRY",
+       "WELCOME_MEAL",
+       "EAT_IT_ALL"
+      ],
+      "top_forms": [
+       "hungry enough to eat the arse out of a low-flyin' duck",
+       "starvin'",
+       "peckish"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "stuffed after dinner",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "HUNGRY",
+       "DRUNK",
+       "FULL"
+      ],
+      "top_forms": [
+       "feel like a decent feed",
+       "full as a goog",
+       "starvin'"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "working my guts out",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "ARROGANT",
+       "WORK_HARD",
+       "PHYSICAL_FIGHT"
+      ],
+      "top_forms": [
+       "{subj} {be} up {poss}self",
+       "work like billy-o",
+       "a bit of biffo"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "dead easy",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "VERY",
+       "BROKEN",
+       "ALIVE"
+      ],
+      "top_forms": [
+       "dead",
+       "cactus",
+       "still kickin'"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "hello there",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "GREETING",
+       "SAY_HELLO",
+       "ENDEARMENT"
+      ],
+      "top_forms": [
+       "g'day",
+       "say g'day",
+       "darl"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a top bloke",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "GOOD_PERSON",
+       "MAN",
+       "FELLOW_MAN"
+      ],
+      "top_forms": [
+       "a good bastard",
+       "bloke",
+       "cove"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a tiny little thing",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "CHILD",
+       "LITTLE_BOY",
+       "CHILDS_PLAY"
+      ],
+      "top_forms": [
+       "littlie",
+       "little tacker",
+       "a little shit"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "honest",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "GENUINE",
+       "REALLY_Q",
+       "SINCERELY"
+      ],
+      "top_forms": [
+       "dinky-di",
+       "fair dinkum",
+       "fair dinkum"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a prank",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "EMBARRASSING",
+       "TRICK",
+       "TANTRUM"
+      ],
+      "top_forms": [
+       "a shame job",
+       "{subj} {be} pulling a swifty",
+       "a tanty"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "skull",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HEAD",
+       "PENIS",
+       "LUNATIC"
+      ],
+      "top_forms": [
+       "noggin",
+       "scone",
+       "donger"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "knackered beyond belief",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "TRICK",
+       "SURPRISE",
+       "INCOMPETENT"
+      ],
+      "top_forms": [
+       "{subj} {be} pulling a swifty",
+       "what the fuck",
+       "a swifty"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "feeling a bit under the weather",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "RAINING_HARD",
+       "LIGHT_RAIN",
+       "FREEZING_WEATHER"
+      ],
+      "top_forms": [
+       "{subj} {be} bucketing down",
+       "{subj} {be} pissing down",
+       "{subj} {be} raining like a cow pissing on a flat rock"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "late in the afternoon",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "AFTERNOON",
+       "EARLY",
+       "NAP"
+      ],
+      "top_forms": [
+       "arvo",
+       "at sparrow's fart",
+       "a nana nap"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "the bottle shop",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LIQUOR_STORE",
+       "SMALL_BEER_BOTTLE",
+       "PHARMACY"
+      ],
+      "top_forms": [
+       "bottle-o",
+       "stubby",
+       "a chemist"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "it's pouring down outside",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "RAINING_HARD",
+       "LIGHT_RAIN",
+       "LET_IT_RAIN"
+      ],
+      "top_forms": [
+       "{subj} {be} bucketing down",
+       "{subj} {be} pissing down",
+       "{subj} {be} raining like a cow pissing on a flat rock"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a quick snooze",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "NAP",
+       "FALL_ASLEEP",
+       "SURPRISE"
+      ],
+      "top_forms": [
+       "a kip",
+       "a nana nap",
+       "go out like a light"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "completely skint",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "LONELY",
+       "HEARTLESS",
+       "STINGY"
+      ],
+      "top_forms": [
+       "like a shag on a rock",
+       "as cold as a mother-in-law's kiss",
+       "tighter than a fish's arse"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a cold one at the pub",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "COLD_BEER_SERVING",
+       "PUB",
+       "PUB_MEAL"
+      ],
+      "top_forms": [
+       "a coldie",
+       "the pub",
+       "a counter meal"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "chucking a wobbly",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "PUT_IN_CASUAL",
+       "FALL_OVER",
+       "WORN_OUT_THING"
+      ],
+      "top_forms": [
+       "bung {obj} in",
+       "come a cropper",
+       "come a gutser"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a shady deal",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "A_LOT",
+       "BUSY",
+       "MONEY"
+      ],
+      "top_forms": [
+       "heaps",
+       "flat out like a lizard drinking",
+       "flat out"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "quit your whining",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "STOP_COMPLAINING",
+       "QUIT",
+       "RETIRE"
+      ],
+      "top_forms": [
+       "stop your whingeing",
+       "chuck it in",
+       "pull the pin"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a good mate of mine",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "EXCELLENT",
+       "GOOD_PERSON",
+       "LOYAL"
+      ],
+      "top_forms": [
+       "bloody good",
+       "a legend",
+       "a good bastard"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "ages ago",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LONG_AGO",
+       "LONG_TIME",
+       "LATER_ON"
+      ],
+      "top_forms": [
+       "yonks ago",
+       "donkey's years ago",
+       "yonks"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a complete idiot",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "IDIOT",
+       "COWARD",
+       "SCOUNDREL"
+      ],
+      "top_forms": [
+       "a dumb cunt",
+       "a fuckwit",
+       "a dickhead"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "having a chinwag",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "EAT",
+       "HUNGRY",
+       "RASCAL"
+      ],
+      "top_forms": [
+       "have a feed",
+       "feel like a decent feed",
+       "a cheeky bastard"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very tired",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "TIRED",
+       "DRUNK",
+       "BROKEN"
+      ],
+      "top_forms": [
+       "knackered",
+       "zonked",
+       "fucked"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "extremely tired",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "TIRED",
+       "DRUNK",
+       "BROKEN"
+      ],
+      "top_forms": [
+       "out on {poss} feet",
+       "knackered",
+       "zonked"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a heap of money",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "LOT_OF_MONEY",
+       "BROKE",
+       "MONEY"
+      ],
+      "top_forms": [
+       "a packet",
+       "a motza",
+       "stony broke"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "wide awake",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "EARLY",
+       "BEEN_SLEEPING_IN",
+       "DAZED"
+      ],
+      "top_forms": [
+       "at sparrow's fart",
+       "been kippin' in",
+       "like a stunned mullet"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "run off my feet",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "RUN",
+       "FLEE",
+       "WALK"
+      ],
+      "top_forms": [
+       "leg it",
+       "belt",
+       "hoof it"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "put up with",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "QUIT",
+       "ARROGANT",
+       "FED_UP"
+      ],
+      "top_forms": [
+       "chuck it in",
+       "{subj} {be} up {poss}self",
+       "cheesed off"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "sleep",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "NAP",
+       "FALL_ASLEEP",
+       "LIE_DOWN_REST"
+      ],
+      "top_forms": [
+       "a kip",
+       "a nana nap",
+       "go out like a light"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "dying",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "DIE",
+       "SUICIDE",
+       "ALIVE"
+      ],
+      "top_forms": [
+       "pass in {poss} cheque",
+       "go to meet {poss} maker",
+       "top {poss}self"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very cold",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "FREEZING",
+       "FREEZING_WEATHER",
+       "COLD_WEATHER"
+      ],
+      "top_forms": [
+       "cold enough to freeze the balls off a brass monkey",
+       "colder than a witch's tit",
+       "brass monkey weather"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "established",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "SECOND_CHANCE",
+       "NATION",
+       "COMMITTED"
+      ],
+      "top_forms": [
+       "another crack at",
+       "mob",
+       "dead set on"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "stepmother",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "GRANDMOTHER",
+       "MOTHER",
+       "RELATIVES"
+      ],
+      "top_forms": [
+       "nan",
+       "mum",
+       "rello"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very large",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "HUGE",
+       "BIG_STRONG",
+       "A_LOT"
+      ],
+      "top_forms": [
+       "whopping",
+       "bloody great",
+       "ginormous"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "wake up",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "FALL_ASLEEP",
+       "BEEN_SLEEPING_IN",
+       "LIE_DOWN_REST"
+      ],
+      "top_forms": [
+       "flake out",
+       "go out like a light",
+       "been kippin' in"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "worked very hard",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "WORK_HARD",
+       "WORK",
+       "UNLUCKY"
+      ],
+      "top_forms": [
+       "bust {poss} guts",
+       "work {poss} arse off",
+       "work like billy-o"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "harmless",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "DANGEROUS",
+       "CLUMSY",
+       "FUSS"
+      ],
+      "top_forms": [
+       "hairy",
+       "dicey",
+       "unco"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "probably",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "DEFINITELY",
+       "A_LOT",
+       "AGREE"
+      ],
+      "top_forms": [
+       "defo",
+       "heaps",
+       "too right"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "setup": "stock MiniLM, static",
+   "gloss->form": 0.162,
+   "gloss->concept's forms": 0.216,
+   "form->concept": 0.087,
+   "opposites offered": 0.208,
+   "opposite_queries": 125,
+   "gap right@1": 0.209,
+   "gap filled right": 0.116,
+   "gap filled wrong": 0.209,
+   "everyday filled": 0.192,
+   "gap_detail": [
+    {
+     "word": "gleeful",
+     "nearest": "SAD",
+     "score": 0.427,
+     "want": "HAPPY"
+    },
+    {
+     "word": "cheerful",
+     "nearest": "SAD",
+     "score": 0.534,
+     "want": "HAPPY"
+    },
+    {
+     "word": "sorrowful",
+     "nearest": "CRY",
+     "score": 0.521,
+     "want": "SAD"
+    },
+    {
+     "word": "melancholy",
+     "nearest": "SAD",
+     "score": 0.531,
+     "want": "SAD"
+    },
+    {
+     "word": "morose",
+     "nearest": "IDIOT",
+     "score": 0.728,
+     "want": "SAD"
+    },
+    {
+     "word": "wrathful",
+     "nearest": "WHOLEHEARTED",
+     "score": 0.377,
+     "want": "ANGRY"
+    },
+    {
+     "word": "indignant",
+     "nearest": "BRAVE",
+     "score": 0.399,
+     "want": "ANGRY"
+    },
+    {
+     "word": "exasperated",
+     "nearest": "WORKED_UP",
+     "score": 0.495,
+     "want": "ANGRY"
+    },
+    {
+     "word": "fearful",
+     "nearest": "SCARED",
+     "score": 0.797,
+     "want": "SCARED"
+    },
+    {
+     "word": "timid",
+     "nearest": "ANNOY",
+     "score": 0.338,
+     "want": "SCARED"
+    },
+    {
+     "word": "drowsy",
+     "nearest": "LIGHT_RAIN",
+     "score": 0.533,
+     "want": "TIRED"
+    },
+    {
+     "word": "sleepy",
+     "nearest": "TIRED",
+     "score": 0.784,
+     "want": "TIRED"
+    },
+    {
+     "word": "sozzled",
+     "nearest": "FLAKE",
+     "score": 0.958,
+     "want": "DRUNK"
+    },
+    {
+     "word": "affluent",
+     "nearest": "POOR",
+     "score": 0.768,
+     "want": "RICH"
+    },
+    {
+     "word": "prosperous",
+     "nearest": "RICH",
+     "score": 0.583,
+     "want": "RICH"
+    },
+    {
+     "word": "opulent",
+     "nearest": "ODD_PERSON",
+     "score": 0.353,
+     "want": "RICH"
+    },
+    {
+     "word": "needy",
+     "nearest": "SELFISH",
+     "score": 0.551,
+     "want": "POOR"
+    },
+    {
+     "word": "starved",
+     "nearest": "HUNGRY",
+     "score": 0.8,
+     "want": "HUNGRY"
+    },
+    {
+     "word": "unclean",
+     "nearest": "RELATIVES",
+     "score": 0.476,
+     "want": "DIRTY"
+    },
+    {
+     "word": "soiled",
+     "nearest": "DIRT_CHEAP",
+     "score": 0.388,
+     "want": "DIRTY"
+    },
+    {
+     "word": "mammoth",
+     "nearest": "HUGE",
+     "score": 0.322,
+     "want": "HUGE"
+    },
+    {
+     "word": "foolish",
+     "nearest": "IDIOT",
+     "score": 0.667,
+     "want": "STUPID"
+    },
+    {
+     "word": "idiotic",
+     "nearest": "IDIOT",
+     "score": 0.858,
+     "want": "STUPID"
+    },
+    {
+     "word": "lethargic",
+     "nearest": "INFORM_ON",
+     "score": 0.476,
+     "want": "LAZY"
+    },
+    {
+     "word": "indolent",
+     "nearest": "ANNOY",
+     "score": 0.323,
+     "want": "LAZY"
+    },
+    {
+     "word": "slothful",
+     "nearest": "POKIES",
+     "score": 0.605,
+     "want": "LAZY"
+    },
+    {
+     "word": "deceitful",
+     "nearest": "PRETENCE",
+     "score": 0.349,
+     "want": "DODGY"
+    },
+    {
+     "word": "fraudulent",
+     "nearest": "DISHONEST_ADJECTIVE",
+     "score": 1.001,
+     "want": "DODGY"
+    },
+    {
+     "word": "ailing",
+     "nearest": "VERY",
+     "score": 0.37,
+     "want": "SICK"
+    },
+    {
+     "word": "feverish",
+     "nearest": "FLUSTERED",
+     "score": 0.46,
+     "want": "SICK"
+    },
+    {
+     "word": "apprehensive",
+     "nearest": "AWFUL",
+     "score": 0.511,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "uneasy",
+     "nearest": "SCARED",
+     "score": 0.608,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "tense",
+     "nearest": "GONE_FOR_GOOD",
+     "score": 0.385,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "dehydrated",
+     "nearest": "OVERCHARGE",
+     "score": 0.497,
+     "want": "THIRSTY"
+    },
+    {
+     "word": "chilly",
+     "nearest": "FREEZING",
+     "score": 0.716,
+     "want": "FREEZING"
+    },
+    {
+     "word": "frosty",
+     "nearest": "COLD_WEATHER",
+     "score": 0.582,
+     "want": "FREEZING"
+    },
+    {
+     "word": "icy",
+     "nearest": "FREEZING",
+     "score": 0.758,
+     "want": "FREEZING"
+    },
+    {
+     "word": "sweltering",
+     "nearest": "STEAL",
+     "score": 0.626,
+     "want": "SCORCHING"
+    },
+    {
+     "word": "torrid",
+     "nearest": "UNLUCKY_PERSON",
+     "score": 0.293,
+     "want": "SCORCHING"
+    },
+    {
+     "word": "pricy",
+     "nearest": "EXPENSIVE",
+     "score": 0.402,
+     "want": "EXPENSIVE"
+    },
+    {
+     "word": "tedious",
+     "nearest": "DANGEROUS",
+     "score": 0.398,
+     "want": "BORED"
+    },
+    {
+     "word": "ungainly",
+     "nearest": "UNLUCKY",
+     "score": 0.504,
+     "want": "CLUMSY"
+    },
+    {
+     "word": "hapless",
+     "nearest": "TOILET",
+     "score": 0.404,
+     "want": "UNLUCKY"
+    },
+    {
+     "word": "table",
+     "nearest": "FIGHT",
+     "score": 0.588,
+     "want": null
+    },
+    {
+     "word": "window",
+     "nearest": "WHIRLWIND",
+     "score": 0.556,
+     "want": null
+    },
+    {
+     "word": "pencil",
+     "nearest": "STOCKYARD",
+     "score": 0.435,
+     "want": null
+    },
+    {
+     "word": "yellow",
+     "nearest": "PENNY",
+     "score": 0.427,
+     "want": null
+    },
+    {
+     "word": "tuesday",
+     "nearest": "WEEK_FROM_SUNDAY",
+     "score": 0.729,
+     "want": null
+    },
+    {
+     "word": "garden",
+     "nearest": "VERGE",
+     "score": 0.593,
+     "want": null
+    },
+    {
+     "word": "kitchen",
+     "nearest": "KITCHEN_HAND",
+     "score": 0.66,
+     "want": null
+    },
+    {
+     "word": "envelope",
+     "nearest": "POSTMAN",
+     "score": 0.498,
+     "want": null
+    },
+    {
+     "word": "ladder",
+     "nearest": "A_RAFT_OF",
+     "score": 0.406,
+     "want": null
+    },
+    {
+     "word": "umbrella",
+     "nearest": "UMBRELLA",
+     "score": 1.001,
+     "want": null
+    },
+    {
+     "word": "wooden",
+     "nearest": "WOODPILE",
+     "score": 0.615,
+     "want": null
+    },
+    {
+     "word": "plastic",
+     "nearest": "FOIL",
+     "score": 0.444,
+     "want": null
+    },
+    {
+     "word": "ceiling",
+     "nearest": "FALL_OVER",
+     "score": 0.375,
+     "want": null
+    },
+    {
+     "word": "bicycle",
+     "nearest": "BIKIE",
+     "score": 0.637,
+     "want": null
+    },
+    {
+     "word": "carpet",
+     "nearest": "WOODPILE",
+     "score": 0.412,
+     "want": null
+    },
+    {
+     "word": "calendar",
+     "nearest": "HOLIDAY_HOUSE",
+     "score": 0.395,
+     "want": null
+    },
+    {
+     "word": "printer",
+     "nearest": "POKIES",
+     "score": 0.369,
+     "want": null
+    },
+    {
+     "word": "orange",
+     "nearest": "SANDY_BLIGHT",
+     "score": 0.464,
+     "want": null
+    },
+    {
+     "word": "metal",
+     "nearest": "FOIL",
+     "score": 0.488,
+     "want": null
+    },
+    {
+     "word": "copper",
+     "nearest": "FOIL",
+     "score": 0.45,
+     "want": null
+    },
+    {
+     "word": "shelf",
+     "nearest": "LIQUOR_STORE",
+     "score": 0.424,
+     "want": null
+    },
+    {
+     "word": "triangle",
+     "nearest": "FISHERMAN",
+     "score": 0.427,
+     "want": null
+    },
+    {
+     "word": "spreadsheet",
+     "nearest": "SPIFFY",
+     "score": 0.421,
+     "want": null
+    },
+    {
+     "word": "cardboard",
+     "nearest": "CASK_WINE",
+     "score": 0.452,
+     "want": null
+    },
+    {
+     "word": "staircase",
+     "nearest": "GULLY",
+     "score": 0.369,
+     "want": null
+    },
+    {
+     "word": "lamp",
+     "nearest": "SUNGLASSES",
+     "score": 0.389,
+     "want": null
+    }
+   ],
+   "size_mb": 15.8,
+   "reference": "19/33",
+   "reference_detail": {
+    "passed": 19,
+    "required": 33,
+    "known_fixed": [
+     "wide awake",
+     "sleep",
+     "dying",
+     "wake up",
+     "harmless"
+    ],
+    "checks": [
+     {
+      "kind": "must_not",
+      "query": "girl",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "BOY",
+       "GIRLFRIEND",
+       "CHILD"
+      ],
+      "top_forms": [
+       "young fella",
+       "a cliner",
+       "littlie"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a great war",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "WAR",
+       "EXCELLENT",
+       "A_LOT"
+      ],
+      "top_forms": [
+       "stoush",
+       "ripper",
+       "heaps"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "rolling in cash",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "BEDROLL",
+       "BROKE",
+       "CIGARETTE"
+      ],
+      "top_forms": [
+       "a swag",
+       "stony broke",
+       "{subj} {have}n't got a brass razoo"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "completely skint",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "DONT_KNOW",
+       "AFFIRM",
+       "PAVEMENT"
+      ],
+      "top_forms": [
+       "I dunno",
+       "goodo",
+       "footpath"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a boiling hot day",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "BILLY",
+       "HOT_WEATHER",
+       "SAVELOY"
+      ],
+      "top_forms": [
+       "billy",
+       "a scorcher",
+       "a stinker"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a freezing cold morning",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "COLD_WEATHER",
+       "FREEZING_WEATHER",
+       "FREEZING"
+      ],
+      "top_forms": [
+       "{subj} {be} brass monkeys",
+       "brass monkey weather",
+       "cold enough to freeze the balls off a brass monkey"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "over the moon about it",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "FINISH_LINE",
+       "HOT_BUTTON_ISSUE",
+       "HEREABOUTS"
+      ],
+      "top_forms": [
+       "get {obj} over the line",
+       "a barbecue stopper",
+       "this neck of the woods"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "feeling really down",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "LIE_DOWN_REST",
+       "KEEP_MUM",
+       "RELAXED_ATTITUDE"
+      ],
+      "top_forms": [
+       "have a lie-down",
+       "{subj} never cracked a boo",
+       "a she'll-be-right attitude"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "absolutely starving",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HUNGRY",
+       "EAT_IT_ALL",
+       "AGREE"
+      ],
+      "top_forms": [
+       "hungry enough to eat the arse out of a low-flyin' duck",
+       "starvin'",
+       "peckish"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "stuffed after dinner",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "DRUNK",
+       "FULL",
+       "BOTCH"
+      ],
+      "top_forms": [
+       "full as a goog",
+       "stuff up",
+       "have a feed"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "working my guts out",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "NAUSEOUS",
+       "BEER_GUT",
+       "WORN_OUT_THING"
+      ],
+      "top_forms": [
+       "crook in the guts",
+       "a verandah over the toy shop",
+       "clapped-out"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "dead easy",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "VERY",
+       "BROKEN",
+       "ALIVE"
+      ],
+      "top_forms": [
+       "dead",
+       "{subj} {have} carked it",
+       "the ones still kickin'"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "hello there",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "GREETING",
+       "SAY_HELLO",
+       "STUPID"
+      ],
+      "top_forms": [
+       "g'day",
+       "say g'day",
+       "a stubby short of a six-pack"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a top bloke",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "PAVEMENT",
+       "DONT_KNOW",
+       "AFFIRM"
+      ],
+      "top_forms": [
+       "footpath",
+       "I dunno",
+       "goodo"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a tiny little thing",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "CHILD",
+       "LITTLE_BOY",
+       "NOTHING"
+      ],
+      "top_forms": [
+       "a little bugger",
+       "nipper",
+       "littlie"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "honest",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "GENUINE",
+       "SINCERELY",
+       "REALLY_Q"
+      ],
+      "top_forms": [
+       "fair dinkum",
+       "fair dinkum",
+       "dinkum"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a prank",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "JUST_JOKING",
+       "TRICK",
+       "SCREAM"
+      ],
+      "top_forms": [
+       "gammon",
+       "a swifty",
+       "scream blue murder"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "skull",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HEAD",
+       "LUNATIC",
+       "DRUNK"
+      ],
+      "top_forms": [
+       "noggin",
+       "scone",
+       "a cooked cunt"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "knackered beyond belief",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "REALLY_Q",
+       "PAVEMENT",
+       "REAL_STORY"
+      ],
+      "top_forms": [
+       "pull the other one",
+       "footpath",
+       "what's the strength of it?"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "feeling a bit under the weather",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "GOOD",
+       "EXCELLENT",
+       "RAINING_HARD"
+      ],
+      "top_forms": [
+       "beaut",
+       "{subj} {be} bucketing down",
+       "{subj} {be} raining like a cow pissing on a flat rock"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "late in the afternoon",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "AFTERNOON",
+       "EARLY",
+       "WEEK_FROM_SUNDAY"
+      ],
+      "top_forms": [
+       "arvo",
+       "at sparrow's fart",
+       "Sunday week"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "the bottle shop",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LIQUOR_STORE",
+       "SMALL_BEER_BOTTLE",
+       "PRODUCE_DEPARTMENT"
+      ],
+      "top_forms": [
+       "bottle-o",
+       "stubby",
+       "fruit and veg department"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "it's pouring down outside",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LIGHT_RAIN",
+       "RAINING_HARD",
+       "HAVE_BEER"
+      ],
+      "top_forms": [
+       "{subj} {be} spitting",
+       "{subj} {be} bucketing down",
+       "{subj} {be} pissing down"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a quick snooze",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "LOOK",
+       "UNCOOL",
+       "DORK"
+      ],
+      "top_forms": [
+       "a squiz",
+       "a Captain Cook",
+       "a geek"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "completely skint",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "DONT_KNOW",
+       "AFFIRM",
+       "PAVEMENT"
+      ],
+      "top_forms": [
+       "I dunno",
+       "goodo",
+       "footpath"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a cold one at the pub",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "PUB",
+       "NOBODY",
+       "PUB_LUNCH"
+      ],
+      "top_forms": [
+       "the pub",
+       "no bugger",
+       "no bastard"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "chucking a wobbly",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "PAVEMENT",
+       "DONT_KNOW",
+       "AFFIRM"
+      ],
+      "top_forms": [
+       "footpath",
+       "I dunno",
+       "goodo"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a shady deal",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "A_LOT",
+       "SUCKER",
+       "BUSY"
+      ],
+      "top_forms": [
+       "heaps",
+       "some poor mug",
+       "flat chat"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "quit your whining",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "REALLY_Q",
+       "DONT_KNOW",
+       "HERES_THE_DEAL"
+      ],
+      "top_forms": [
+       "pull the other one",
+       "I dunno",
+       "I've got no fuckin' idea"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a good mate of mine",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "MAN",
+       "FELLOW_MAN",
+       "EXCELLENT"
+      ],
+      "top_forms": [
+       "cove",
+       "bloody good",
+       "youse"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "ages ago",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LONG_AGO",
+       "LONG_TIME",
+       "OLD_MAN"
+      ],
+      "top_forms": [
+       "yonks ago",
+       "yonks",
+       "donkey's years ago"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a complete idiot",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "IDIOT",
+       "REPLY_TO_THANKS",
+       "STUPID"
+      ],
+      "top_forms": [
+       "a fuckwit",
+       "a dumb cunt",
+       "a dickhead"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "having a chinwag",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "DONT_KNOW",
+       "A_LOT",
+       "AFFIRM"
+      ],
+      "top_forms": [
+       "I dunno",
+       "whips of {np}",
+       "goodo"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very tired",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "TIRED",
+       "SICK",
+       "DRUNK"
+      ],
+      "top_forms": [
+       "knackered",
+       "out on {poss} feet",
+       "as crook as a dog"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "extremely tired",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "TIRED",
+       "WORK_HARD",
+       "SLOW"
+      ],
+      "top_forms": [
+       "out on {poss} feet",
+       "knackered",
+       "do the hard yards"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a heap of money",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "BROKE",
+       "MONEY",
+       "STERLING_MONEY"
+      ],
+      "top_forms": [
+       "stony broke",
+       "{subj} {have}n't got a brass razoo",
+       "on the bones of {poss} arse"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "wide awake",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "TIRED",
+       "NAP",
+       "BEEN_SLEEPING_IN"
+      ],
+      "top_forms": [
+       "out on {poss} feet",
+       "a kip",
+       "been kippin' in"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "run off my feet",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "RUN",
+       "FLEE",
+       "WALK"
+      ],
+      "top_forms": [
+       "leg it",
+       "belt",
+       "hoof it"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "put up with",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "QUIT",
+       "MOCK",
+       "CONCEDE_DEFEAT"
+      ],
+      "top_forms": [
+       "chuck it in",
+       "take the piss out of {obj}",
+       "give {obj} best"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "sleep",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "NAP",
+       "BEEN_SLEEPING_IN",
+       "FALL_ASLEEP"
+      ],
+      "top_forms": [
+       "a kip",
+       "a nana nap",
+       "been kippin' in"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "dying",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "DIE",
+       "ALIVE",
+       "SCARED"
+      ],
+      "top_forms": [
+       "go to meet {poss} maker",
+       "pass in {poss} cheque",
+       "the lucky buggers still breathin'"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very cold",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "FREEZING",
+       "COLD_WEATHER",
+       "FREEZING_WEATHER"
+      ],
+      "top_forms": [
+       "colder than a witch's tit",
+       "cold enough to freeze the balls off a brass monkey",
+       "{subj} {be} brass monkeys"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "established",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "CONTENT",
+       "ALL_DONE",
+       "COMMITTED"
+      ],
+      "top_forms": [
+       "snug as a bug in a rug",
+       "a happy little Vegemite",
+       "like a koala up a gum tree"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "stepmother",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "GRANDMOTHER",
+       "FATHER",
+       "BUCKS_NIGHT"
+      ],
+      "top_forms": [
+       "nan",
+       "{poss} old pot",
+       "old man"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very large",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "HUGE",
+       "A_LOT",
+       "HIGH"
+      ],
+      "top_forms": [
+       "whopping",
+       "bloody great",
+       "ginormous"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "wake up",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "NAP",
+       "FALL_ASLEEP",
+       "ARRIVE"
+      ],
+      "top_forms": [
+       "a kip",
+       "flake out",
+       "go out like a light"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "worked very hard",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "WORK_HARD",
+       "WORK",
+       "VERY"
+      ],
+      "top_forms": [
+       "do the hard yards",
+       "bust {poss} guts",
+       "work {poss} arse off"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "harmless",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "USELESS",
+       "SCOUNDREL",
+       "DANGEROUS"
+      ],
+      "top_forms": [
+       "as useless as tits on a bull",
+       "a mean bastard",
+       "hairy"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "probably",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "DEFINITELY",
+       "DISAGREE",
+       "EMPHATIC_REFUSAL"
+      ],
+      "top_forms": [
+       "defo",
+       "not on your nelly",
+       "no fuckin' way"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "setup": "Aussie MiniLM",
+   "gloss->form": 0.328,
+   "gloss->concept's forms": 0.564,
+   "form->concept": 0.332,
+   "opposites offered": 0.024,
+   "opposite_queries": 125,
+   "gap right@1": 0.419,
+   "gap filled right": 0.256,
+   "gap filled wrong": 0.093,
+   "everyday filled": 0.115,
+   "gap_detail": [
+    {
+     "word": "gleeful",
+     "nearest": "HAPPY",
+     "score": 0.525,
+     "want": "HAPPY"
+    },
+    {
+     "word": "cheerful",
+     "nearest": "HAPPY",
+     "score": 0.716,
+     "want": "HAPPY"
+    },
+    {
+     "word": "sorrowful",
+     "nearest": "SAD",
+     "score": 0.561,
+     "want": "SAD"
+    },
+    {
+     "word": "melancholy",
+     "nearest": "SAD",
+     "score": 0.643,
+     "want": "SAD"
+    },
+    {
+     "word": "morose",
+     "nearest": "DONE_FOR",
+     "score": 0.502,
+     "want": "SAD"
+    },
+    {
+     "word": "wrathful",
+     "nearest": "DISGUSTING",
+     "score": 0.579,
+     "want": "ANGRY"
+    },
+    {
+     "word": "indignant",
+     "nearest": "DISAPPOINTED",
+     "score": 0.549,
+     "want": "ANGRY"
+    },
+    {
+     "word": "exasperated",
+     "nearest": "ANGRY",
+     "score": 0.571,
+     "want": "ANGRY"
+    },
+    {
+     "word": "fearful",
+     "nearest": "SCARED",
+     "score": 0.776,
+     "want": "SCARED"
+    },
+    {
+     "word": "timid",
+     "nearest": "HYPER",
+     "score": 0.433,
+     "want": "SCARED"
+    },
+    {
+     "word": "drowsy",
+     "nearest": "NERVOUS",
+     "score": 0.575,
+     "want": "TIRED"
+    },
+    {
+     "word": "sleepy",
+     "nearest": "TIRED",
+     "score": 0.701,
+     "want": "TIRED"
+    },
+    {
+     "word": "sozzled",
+     "nearest": "DRUNK",
+     "score": 0.622,
+     "want": "DRUNK"
+    },
+    {
+     "word": "affluent",
+     "nearest": "RICH",
+     "score": 0.822,
+     "want": "RICH"
+    },
+    {
+     "word": "prosperous",
+     "nearest": "RICH",
+     "score": 0.725,
+     "want": "RICH"
+    },
+    {
+     "word": "opulent",
+     "nearest": "EASYGOING",
+     "score": 0.455,
+     "want": "RICH"
+    },
+    {
+     "word": "needy",
+     "nearest": "SELFISH",
+     "score": 0.452,
+     "want": "POOR"
+    },
+    {
+     "word": "starved",
+     "nearest": "HUNGRY",
+     "score": 0.719,
+     "want": "HUNGRY"
+    },
+    {
+     "word": "unclean",
+     "nearest": "DIRTY",
+     "score": 0.523,
+     "want": "DIRTY"
+    },
+    {
+     "word": "soiled",
+     "nearest": "STAGGERED",
+     "score": 0.532,
+     "want": "DIRTY"
+    },
+    {
+     "word": "mammoth",
+     "nearest": "HUGE",
+     "score": 0.451,
+     "want": "HUGE"
+    },
+    {
+     "word": "foolish",
+     "nearest": "STUPID",
+     "score": 0.763,
+     "want": "STUPID"
+    },
+    {
+     "word": "idiotic",
+     "nearest": "IDIOT",
+     "score": 0.662,
+     "want": "STUPID"
+    },
+    {
+     "word": "lethargic",
+     "nearest": "EASYGOING",
+     "score": 0.553,
+     "want": "LAZY"
+    },
+    {
+     "word": "indolent",
+     "nearest": "PATHETIC",
+     "score": 0.466,
+     "want": "LAZY"
+    },
+    {
+     "word": "slothful",
+     "nearest": "HEARTLESS",
+     "score": 0.429,
+     "want": "LAZY"
+    },
+    {
+     "word": "deceitful",
+     "nearest": "DISHONEST",
+     "score": 0.679,
+     "want": "DODGY"
+    },
+    {
+     "word": "fraudulent",
+     "nearest": "DISHONEST_ADJECTIVE",
+     "score": 1.0,
+     "want": "DODGY"
+    },
+    {
+     "word": "ailing",
+     "nearest": "ANGRY",
+     "score": 0.403,
+     "want": "SICK"
+    },
+    {
+     "word": "feverish",
+     "nearest": "NAUSEOUS",
+     "score": 0.536,
+     "want": "SICK"
+    },
+    {
+     "word": "apprehensive",
+     "nearest": "NERVOUS",
+     "score": 0.483,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "uneasy",
+     "nearest": "SCARED",
+     "score": 0.595,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "tense",
+     "nearest": "COMMITTED",
+     "score": 0.433,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "dehydrated",
+     "nearest": "TIRED",
+     "score": 0.655,
+     "want": "THIRSTY"
+    },
+    {
+     "word": "chilly",
+     "nearest": "FREEZING",
+     "score": 0.614,
+     "want": "FREEZING"
+    },
+    {
+     "word": "frosty",
+     "nearest": "SHOWY",
+     "score": 0.543,
+     "want": "FREEZING"
+    },
+    {
+     "word": "icy",
+     "nearest": "FREEZING",
+     "score": 0.529,
+     "want": "FREEZING"
+    },
+    {
+     "word": "sweltering",
+     "nearest": "DRUNK",
+     "score": 0.49,
+     "want": "SCORCHING"
+    },
+    {
+     "word": "torrid",
+     "nearest": "ANGRY",
+     "score": 0.519,
+     "want": "SCORCHING"
+    },
+    {
+     "word": "pricy",
+     "nearest": "SELFISH",
+     "score": 0.491,
+     "want": "EXPENSIVE"
+    },
+    {
+     "word": "tedious",
+     "nearest": "CANT_BE_BOTHERED",
+     "score": 0.564,
+     "want": "BORED"
+    },
+    {
+     "word": "ungainly",
+     "nearest": "CLUMSY",
+     "score": 0.626,
+     "want": "CLUMSY"
+    },
+    {
+     "word": "hapless",
+     "nearest": "ANGRILY",
+     "score": 0.427,
+     "want": "UNLUCKY"
+    },
+    {
+     "word": "table",
+     "nearest": "FIGHT",
+     "score": 0.458,
+     "want": null
+    },
+    {
+     "word": "window",
+     "nearest": "WHIRLWIND",
+     "score": 0.497,
+     "want": null
+    },
+    {
+     "word": "pencil",
+     "nearest": "STOCKYARD",
+     "score": 0.534,
+     "want": null
+    },
+    {
+     "word": "yellow",
+     "nearest": "DARK",
+     "score": 0.36,
+     "want": null
+    },
+    {
+     "word": "tuesday",
+     "nearest": "WEEK_FROM_SUNDAY",
+     "score": 0.596,
+     "want": null
+    },
+    {
+     "word": "garden",
+     "nearest": "FIELD",
+     "score": 0.654,
+     "want": null
+    },
+    {
+     "word": "kitchen",
+     "nearest": "LOUNGE_ROOM",
+     "score": 0.644,
+     "want": null
+    },
+    {
+     "word": "envelope",
+     "nearest": "POSTMAN",
+     "score": 0.559,
+     "want": null
+    },
+    {
+     "word": "ladder",
+     "nearest": "GULLY",
+     "score": 0.368,
+     "want": null
+    },
+    {
+     "word": "umbrella",
+     "nearest": "UMBRELLA",
+     "score": 1.0,
+     "want": null
+    },
+    {
+     "word": "wooden",
+     "nearest": "WOODPILE",
+     "score": 0.433,
+     "want": null
+    },
+    {
+     "word": "plastic",
+     "nearest": "IDIOT",
+     "score": 0.408,
+     "want": null
+    },
+    {
+     "word": "ceiling",
+     "nearest": "LOUNGE_ROOM",
+     "score": 0.464,
+     "want": null
+    },
+    {
+     "word": "bicycle",
+     "nearest": "BIKIE",
+     "score": 0.529,
+     "want": null
+    },
+    {
+     "word": "carpet",
+     "nearest": "LITTER_PICK",
+     "score": 0.525,
+     "want": null
+    },
+    {
+     "word": "calendar",
+     "nearest": "MUFTI_DAY",
+     "score": 0.456,
+     "want": null
+    },
+    {
+     "word": "printer",
+     "nearest": "JOURNALIST",
+     "score": 0.378,
+     "want": null
+    },
+    {
+     "word": "orange",
+     "nearest": "DARK",
+     "score": 0.393,
+     "want": null
+    },
+    {
+     "word": "metal",
+     "nearest": "UNCOOL",
+     "score": 0.448,
+     "want": null
+    },
+    {
+     "word": "copper",
+     "nearest": "STERLING_MONEY",
+     "score": 0.407,
+     "want": null
+    },
+    {
+     "word": "shelf",
+     "nearest": "FRIDGE",
+     "score": 0.497,
+     "want": null
+    },
+    {
+     "word": "triangle",
+     "nearest": "WAR",
+     "score": 0.336,
+     "want": null
+    },
+    {
+     "word": "spreadsheet",
+     "nearest": "FIGHT",
+     "score": 0.315,
+     "want": null
+    },
+    {
+     "word": "cardboard",
+     "nearest": "COOLER",
+     "score": 0.462,
+     "want": null
+    },
+    {
+     "word": "staircase",
+     "nearest": "TROUSERS",
+     "score": 0.465,
+     "want": null
+    },
+    {
+     "word": "lamp",
+     "nearest": "MIDDY_BEER",
+     "score": 0.46,
+     "want": null
+    }
+   ],
+   "size_mb": 91.6,
+   "reference": "28/33",
+   "reference_detail": {
+    "passed": 28,
+    "required": 33,
+    "known_fixed": [
+     "a heap of money",
+     "put up with",
+     "sleep",
+     "dying",
+     "very cold",
+     "very large",
+     "worked very hard",
+     "harmless",
+     "probably"
+    ],
+    "checks": [
+     {
+      "kind": "must_not",
+      "query": "girl",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "WOMAN",
+       "GIRLFRIEND",
+       "CHILD"
+      ],
+      "top_forms": [
+       "sheila",
+       "a cliner",
+       "littlie"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a great war",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "WAR",
+       "A_LOT",
+       "HARD_FOUGHT"
+      ],
+      "top_forms": [
+       "stoush",
+       "heaps",
+       "a willing affair"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "rolling in cash",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "RICH",
+       "ROLL_UP",
+       "ON_THE_TOOLS"
+      ],
+      "top_forms": [
+       "cashed up",
+       "loaded",
+       "on the pig's back"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "completely skint",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "BROKE",
+       "LONELY",
+       "DRUNK"
+      ],
+      "top_forms": [
+       "stony broke",
+       "{subj} {have}n't got a brass razoo",
+       "skint"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a boiling hot day",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HOT_WEATHER",
+       "FINE_DAY",
+       "COOL_CHANGE"
+      ],
+      "top_forms": [
+       "a stinker",
+       "a scorcher",
+       "a pearler of a day"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a freezing cold morning",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "RECESS",
+       "NAP",
+       "FREEZING"
+      ],
+      "top_forms": [
+       "little lunch",
+       "a nana nap",
+       "cold enough to freeze the balls off a brass monkey"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "over the moon about it",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HAPPY",
+       "GLAD_ALIVE",
+       "INFATUATED"
+      ],
+      "top_forms": [
+       "stoked",
+       "rapt",
+       "chuffed to bits"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "feeling really down",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "SAD",
+       "GONE_FOR_GOOD",
+       "NAUSEOUS"
+      ],
+      "top_forms": [
+       "as miserable as a bandicoot",
+       "flat as a tack",
+       "down in the dumps"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "absolutely starving",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HUNGRY",
+       "THIRSTY",
+       "VERY_EAGER"
+      ],
+      "top_forms": [
+       "hungry enough to eat the arse out of a low-flyin' duck",
+       "starvin'",
+       "hungry enough to eat a horse and chase the jockey"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "stuffed after dinner",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "TIRED",
+       "BROKEN",
+       "FULL"
+      ],
+      "top_forms": [
+       "stuffed",
+       "knackered",
+       "fucked"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "working my guts out",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "WORK_HARD",
+       "NUT_OUT",
+       "CHECK_OUT"
+      ],
+      "top_forms": [
+       "bust {poss} guts",
+       "do the hard yards",
+       "work {poss} arse off"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "dead easy",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "VERY",
+       "DEAD_EASY",
+       "BROKEN"
+      ],
+      "top_forms": [
+       "dead",
+       "easy as",
+       "cactus"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "hello there",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "GREETING",
+       "SAY_HELLO",
+       "SURPRISE"
+      ],
+      "top_forms": [
+       "g'day",
+       "say g'day",
+       "strewth"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a top bloke",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "GOOD_PERSON",
+       "WILD_ONE",
+       "LEGEND"
+      ],
+      "top_forms": [
+       "a good bastard",
+       "a top bloke",
+       "a good cunt"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a tiny little thing",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "CHILD",
+       "LITTLE_BOY",
+       "CHILDS_PLAY"
+      ],
+      "top_forms": [
+       "littlie",
+       "little tacker",
+       "nipper"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "honest",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "GENUINE",
+       "SINCERELY",
+       "REALLY_Q"
+      ],
+      "top_forms": [
+       "fair dinkum",
+       "ridgy-didge",
+       "fair dinkum"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a prank",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "CHILDS_PLAY",
+       "TANTRUM",
+       "EMBARRASSING"
+      ],
+      "top_forms": [
+       "a doddle",
+       "a tanty",
+       "a shame job"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "skull",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HEAD",
+       "PENIS",
+       "IDIOT"
+      ],
+      "top_forms": [
+       "noggin",
+       "scone",
+       "donger"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "knackered beyond belief",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "TIRED",
+       "BROKEN",
+       "FULL"
+      ],
+      "top_forms": [
+       "out on {poss} feet",
+       "stuffed",
+       "fucked"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "feeling a bit under the weather",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "SAD",
+       "NAUSEOUS",
+       "AWFUL"
+      ],
+      "top_forms": [
+       "as miserable as a bandicoot",
+       "down in the dumps",
+       "flat as a tack"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "late in the afternoon",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "AFTERNOON",
+       "EARLY",
+       "NAP"
+      ],
+      "top_forms": [
+       "arvo",
+       "at sparrow's fart",
+       "a nana nap"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "the bottle shop",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "SCHOOL_CANTEEN",
+       "LIQUOR_STORE",
+       "PRODUCE_DEPARTMENT"
+      ],
+      "top_forms": [
+       "the tuckshop",
+       "bottle-o",
+       "fruit and veg department"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "it's pouring down outside",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LIGHT_RAIN",
+       "RAINING_HARD",
+       "LET_IT_RAIN"
+      ],
+      "top_forms": [
+       "{subj} {be} spitting",
+       "{subj} {be} raining like a cow pissing on a flat rock",
+       "{subj} {be} bucketing down"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a quick snooze",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "NAP",
+       "MOMENT",
+       "FALL_ASLEEP"
+      ],
+      "top_forms": [
+       "a nana nap",
+       "a kip",
+       "a mo"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "completely skint",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "BROKE",
+       "LONELY",
+       "DRUNK"
+      ],
+      "top_forms": [
+       "stony broke",
+       "{subj} {have}n't got a brass razoo",
+       "skint"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a cold one at the pub",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "COLD_BEER_SERVING",
+       "COLD_WEATHER",
+       "OCCASIONAL"
+      ],
+      "top_forms": [
+       "a coldie",
+       "{subj} {be} brass monkeys",
+       "the odd"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "chucking a wobbly",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LOSE_TEMPER",
+       "STAGGER_SOMEONE",
+       "GO_MAD"
+      ],
+      "top_forms": [
+       "chuck a mental",
+       "knock {obj} for six",
+       "go troppo"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a shady deal",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "FALSE_RUMOUR",
+       "ROUGH_PATCH",
+       "LOT_OF_MONEY"
+      ],
+      "top_forms": [
+       "a furphy",
+       "a bad trot",
+       "a motza"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "quit your whining",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "STOP_COMPLAINING",
+       "LOSE_TEMPER",
+       "QUIT_COMMAND"
+      ],
+      "top_forms": [
+       "stop your whingeing",
+       "do {poss} block",
+       "chuck a micky"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a good mate of mine",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "GOOD_PERSON",
+       "WILD_ONE",
+       "LEGEND"
+      ],
+      "top_forms": [
+       "a top bloke",
+       "a mad cunt",
+       "a sick cunt"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "ages ago",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LONG_AGO",
+       "LONG_TIME",
+       "OLD_MAN"
+      ],
+      "top_forms": [
+       "yonks ago",
+       "donkey's years ago",
+       "yonks"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a complete idiot",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "IDIOT",
+       "STUPID",
+       "OLD_MAN"
+      ],
+      "top_forms": [
+       "a fuckwit",
+       "a dumb cunt",
+       "a dickhead"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "having a chinwag",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "BUSY",
+       "TEASE",
+       "TRASH_TALK"
+      ],
+      "top_forms": [
+       "flat out",
+       "flat out like a lizard drinking",
+       "flat chat"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very tired",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "TIRED",
+       "BROKEN",
+       "FULL"
+      ],
+      "top_forms": [
+       "out on {poss} feet",
+       "knackered",
+       "stuffed"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "extremely tired",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "TIRED",
+       "BROKEN",
+       "FULL"
+      ],
+      "top_forms": [
+       "out on {poss} feet",
+       "knackered",
+       "stuffed"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a heap of money",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "LOT_OF_MONEY",
+       "FAIR_AMOUNT",
+       "A_LOT"
+      ],
+      "top_forms": [
+       "a motza",
+       "a packet",
+       "a fair whack"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "wide awake",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "FALL_ASLEEP",
+       "NAP",
+       "BEEN_SLEEPING_IN"
+      ],
+      "top_forms": [
+       "go out like a light",
+       "a kip",
+       "a nana nap"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "run off my feet",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "RUN",
+       "FLEE",
+       "WALK"
+      ],
+      "top_forms": [
+       "leg it",
+       "belt",
+       "do a runner"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "put up with",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "COP_IT",
+       "TOLERATE",
+       "GO_ALONG"
+      ],
+      "top_forms": [
+       "cop {np}",
+       "go along with {np}",
+       "sprag {obj}"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "sleep",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "NAP",
+       "FALL_ASLEEP",
+       "LIE_DOWN_REST"
+      ],
+      "top_forms": [
+       "a kip",
+       "flake out",
+       "have a lie-down"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "dying",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "NAUSEOUS",
+       "NERVOUS",
+       "ALIVE"
+      ],
+      "top_forms": [
+       "crook in the guts",
+       "toey",
+       "the lucky buggers still breathin'"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very cold",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "FREEZING",
+       "FREEZING_WEATHER",
+       "HEARTLESS"
+      ],
+      "top_forms": [
+       "colder than a witch's tit",
+       "cold enough to freeze the balls off a brass monkey",
+       "brass monkey weather"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "established",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "CONTENT",
+       "COMMITTED",
+       "ALL_DONE"
+      ],
+      "top_forms": [
+       "a happy little Vegemite",
+       "like a koala up a gum tree",
+       "snug as a bug in a rug"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "stepmother",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "GRANDMOTHER",
+       "MOTHER",
+       "GIRLFRIEND"
+      ],
+      "top_forms": [
+       "nan",
+       "mum",
+       "a cliner"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very large",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "HUGE",
+       "BIG_STRONG",
+       "EXCELLENT"
+      ],
+      "top_forms": [
+       "whopping",
+       "built like a brick shithouse",
+       "bloody great"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "wake up",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "FALL_ASLEEP",
+       "NAP",
+       "SURPRISE"
+      ],
+      "top_forms": [
+       "flake out",
+       "go out like a light",
+       "a kip"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "worked very hard",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "WORK_HARD",
+       "WORK",
+       "BUSY"
+      ],
+      "top_forms": [
+       "bust {poss} guts",
+       "work {poss} arse off",
+       "do the hard yards"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "harmless",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "UGLY",
+       "DANGEROUS",
+       "DAMN_EXCLAIM"
+      ],
+      "top_forms": [
+       "{subj} {have} a face like a smashed crab",
+       "{subj} {have} a head like a robber's dog",
+       "as ugly as a hatful of arseholes"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "probably",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "DEFINITELY",
+       "AGREE",
+       "DREAM_ON"
+      ],
+      "top_forms": [
+       "defo",
+       "too right",
+       "too bloody right"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "setup": "Aussie static, distilled only",
+   "gloss->form": 0.162,
+   "gloss->concept's forms": 0.328,
+   "form->concept": 0.154,
+   "opposites offered": 0.168,
+   "opposite_queries": 125,
+   "gap right@1": 0.395,
+   "gap filled right": 0.279,
+   "gap filled wrong": 0.14,
+   "everyday filled": 0.154,
+   "gap_detail": [
+    {
+     "word": "gleeful",
+     "nearest": "LAUGH_HARD",
+     "score": 0.554,
+     "want": "HAPPY"
+    },
+    {
+     "word": "cheerful",
+     "nearest": "HAPPY",
+     "score": 0.726,
+     "want": "HAPPY"
+    },
+    {
+     "word": "sorrowful",
+     "nearest": "SAD",
+     "score": 0.626,
+     "want": "SAD"
+    },
+    {
+     "word": "melancholy",
+     "nearest": "SAD",
+     "score": 0.616,
+     "want": "SAD"
+    },
+    {
+     "word": "morose",
+     "nearest": "IDIOT",
+     "score": 0.764,
+     "want": "SAD"
+    },
+    {
+     "word": "wrathful",
+     "nearest": "ANGRY",
+     "score": 0.523,
+     "want": "ANGRY"
+    },
+    {
+     "word": "indignant",
+     "nearest": "OUT_OF_LINE",
+     "score": 0.381,
+     "want": "ANGRY"
+    },
+    {
+     "word": "exasperated",
+     "nearest": "ANGRY",
+     "score": 0.568,
+     "want": "ANGRY"
+    },
+    {
+     "word": "fearful",
+     "nearest": "SCARED",
+     "score": 0.792,
+     "want": "SCARED"
+    },
+    {
+     "word": "timid",
+     "nearest": "POSH_PERSON",
+     "score": 0.483,
+     "want": "SCARED"
+    },
+    {
+     "word": "drowsy",
+     "nearest": "TIRED",
+     "score": 0.497,
+     "want": "TIRED"
+    },
+    {
+     "word": "sleepy",
+     "nearest": "TIRED",
+     "score": 0.726,
+     "want": "TIRED"
+    },
+    {
+     "word": "sozzled",
+     "nearest": "DRUNK",
+     "score": 0.669,
+     "want": "DRUNK"
+    },
+    {
+     "word": "affluent",
+     "nearest": "RICH",
+     "score": 0.818,
+     "want": "RICH"
+    },
+    {
+     "word": "prosperous",
+     "nearest": "RICH",
+     "score": 0.715,
+     "want": "RICH"
+    },
+    {
+     "word": "opulent",
+     "nearest": "CLEVER_PERSON",
+     "score": 0.452,
+     "want": "RICH"
+    },
+    {
+     "word": "needy",
+     "nearest": "UNEMPLOYED",
+     "score": 0.498,
+     "want": "POOR"
+    },
+    {
+     "word": "starved",
+     "nearest": "HUNGRY",
+     "score": 0.728,
+     "want": "HUNGRY"
+    },
+    {
+     "word": "unclean",
+     "nearest": "FATHER",
+     "score": 0.6,
+     "want": "DIRTY"
+    },
+    {
+     "word": "soiled",
+     "nearest": "STAGGERED",
+     "score": 0.445,
+     "want": "DIRTY"
+    },
+    {
+     "word": "mammoth",
+     "nearest": "HUGE",
+     "score": 0.412,
+     "want": "HUGE"
+    },
+    {
+     "word": "foolish",
+     "nearest": "STUPID",
+     "score": 0.784,
+     "want": "STUPID"
+    },
+    {
+     "word": "idiotic",
+     "nearest": "IDIOT",
+     "score": 0.887,
+     "want": "STUPID"
+    },
+    {
+     "word": "lethargic",
+     "nearest": "GO_WRONG_BADLY",
+     "score": 0.472,
+     "want": "LAZY"
+    },
+    {
+     "word": "indolent",
+     "nearest": "ANNOY",
+     "score": 0.324,
+     "want": "LAZY"
+    },
+    {
+     "word": "slothful",
+     "nearest": "POKIES",
+     "score": 0.484,
+     "want": "LAZY"
+    },
+    {
+     "word": "deceitful",
+     "nearest": "SICK",
+     "score": 0.453,
+     "want": "DODGY"
+    },
+    {
+     "word": "fraudulent",
+     "nearest": "DISHONEST_ADJECTIVE",
+     "score": 0.999,
+     "want": "DODGY"
+    },
+    {
+     "word": "ailing",
+     "nearest": "WELL_INFORMED",
+     "score": 0.39,
+     "want": "SICK"
+    },
+    {
+     "word": "feverish",
+     "nearest": "FLUSTERED",
+     "score": 0.439,
+     "want": "SICK"
+    },
+    {
+     "word": "apprehensive",
+     "nearest": "AWFUL",
+     "score": 0.498,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "uneasy",
+     "nearest": "SCARED",
+     "score": 0.628,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "tense",
+     "nearest": "RELAXED_ATTITUDE",
+     "score": 0.44,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "dehydrated",
+     "nearest": "DRUNK",
+     "score": 0.575,
+     "want": "THIRSTY"
+    },
+    {
+     "word": "chilly",
+     "nearest": "FREEZING",
+     "score": 0.673,
+     "want": "FREEZING"
+    },
+    {
+     "word": "frosty",
+     "nearest": "FREEZING",
+     "score": 0.53,
+     "want": "FREEZING"
+    },
+    {
+     "word": "icy",
+     "nearest": "FREEZING",
+     "score": 0.634,
+     "want": "FREEZING"
+    },
+    {
+     "word": "sweltering",
+     "nearest": "STEAL",
+     "score": 0.657,
+     "want": "SCORCHING"
+    },
+    {
+     "word": "torrid",
+     "nearest": "DODGY",
+     "score": 0.335,
+     "want": "SCORCHING"
+    },
+    {
+     "word": "pricy",
+     "nearest": "DISHONEST",
+     "score": 0.366,
+     "want": "EXPENSIVE"
+    },
+    {
+     "word": "tedious",
+     "nearest": "DANGEROUS",
+     "score": 0.49,
+     "want": "BORED"
+    },
+    {
+     "word": "ungainly",
+     "nearest": "SICK",
+     "score": 0.534,
+     "want": "CLUMSY"
+    },
+    {
+     "word": "hapless",
+     "nearest": "QUITE_A_FEW",
+     "score": 0.509,
+     "want": "UNLUCKY"
+    },
+    {
+     "word": "table",
+     "nearest": "FIGHT",
+     "score": 0.503,
+     "want": null
+    },
+    {
+     "word": "window",
+     "nearest": "WHIRLWIND",
+     "score": 0.438,
+     "want": null
+    },
+    {
+     "word": "pencil",
+     "nearest": "STOCKYARD",
+     "score": 0.376,
+     "want": null
+    },
+    {
+     "word": "yellow",
+     "nearest": "SANDY_BLIGHT",
+     "score": 0.377,
+     "want": null
+    },
+    {
+     "word": "tuesday",
+     "nearest": "WEEK_FROM_SUNDAY",
+     "score": 0.7,
+     "want": null
+    },
+    {
+     "word": "garden",
+     "nearest": "FIELD",
+     "score": 0.628,
+     "want": null
+    },
+    {
+     "word": "kitchen",
+     "nearest": "KITCHEN_HAND",
+     "score": 0.687,
+     "want": null
+    },
+    {
+     "word": "envelope",
+     "nearest": "POSTMAN",
+     "score": 0.566,
+     "want": null
+    },
+    {
+     "word": "ladder",
+     "nearest": "GULLY",
+     "score": 0.326,
+     "want": null
+    },
+    {
+     "word": "umbrella",
+     "nearest": "UMBRELLA",
+     "score": 0.999,
+     "want": null
+    },
+    {
+     "word": "wooden",
+     "nearest": "SLAB_HUT",
+     "score": 0.489,
+     "want": null
+    },
+    {
+     "word": "plastic",
+     "nearest": "IDIOT",
+     "score": 0.367,
+     "want": null
+    },
+    {
+     "word": "ceiling",
+     "nearest": "SLAB_HUT",
+     "score": 0.43,
+     "want": null
+    },
+    {
+     "word": "bicycle",
+     "nearest": "BIKIE",
+     "score": 0.485,
+     "want": null
+    },
+    {
+     "word": "carpet",
+     "nearest": "LITTER_PICK",
+     "score": 0.394,
+     "want": null
+    },
+    {
+     "word": "calendar",
+     "nearest": "HOLIDAY_HOUSE",
+     "score": 0.386,
+     "want": null
+    },
+    {
+     "word": "printer",
+     "nearest": "BOMB_DIVE",
+     "score": 0.366,
+     "want": null
+    },
+    {
+     "word": "orange",
+     "nearest": "SANDY_BLIGHT",
+     "score": 0.374,
+     "want": null
+    },
+    {
+     "word": "metal",
+     "nearest": "FOIL",
+     "score": 0.427,
+     "want": null
+    },
+    {
+     "word": "copper",
+     "nearest": "FOIL",
+     "score": 0.461,
+     "want": null
+    },
+    {
+     "word": "shelf",
+     "nearest": "FRIDGE",
+     "score": 0.447,
+     "want": null
+    },
+    {
+     "word": "triangle",
+     "nearest": "STOCKYARD",
+     "score": 0.367,
+     "want": null
+    },
+    {
+     "word": "spreadsheet",
+     "nearest": "A_LOT",
+     "score": 0.48,
+     "want": null
+    },
+    {
+     "word": "cardboard",
+     "nearest": "COOLER",
+     "score": 0.383,
+     "want": null
+    },
+    {
+     "word": "staircase",
+     "nearest": "GULLY",
+     "score": 0.419,
+     "want": null
+    },
+    {
+     "word": "lamp",
+     "nearest": "SANDY_BLIGHT",
+     "score": 0.452,
+     "want": null
+    }
+   ],
+   "size_mb": 15.8,
+   "reference": "23/33",
+   "reference_detail": {
+    "passed": 23,
+    "required": 33,
+    "known_fixed": [
+     "sleep",
+     "dying",
+     "very cold"
+    ],
+    "checks": [
+     {
+      "kind": "must_not",
+      "query": "girl",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "WOMAN",
+       "CHILD",
+       "GIRLFRIEND"
+      ],
+      "top_forms": [
+       "sheila",
+       "ankle biter",
+       "littlie"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a great war",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "WAR",
+       "EXCELLENT",
+       "GREAT_EXCLAIM"
+      ],
+      "top_forms": [
+       "stoush",
+       "ripper",
+       "you little ripper"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "rolling in cash",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "BEDROLL",
+       "MONEY",
+       "STERLING_MONEY"
+      ],
+      "top_forms": [
+       "a swag",
+       "the folding stuff",
+       "dosh"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "completely skint",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "SAD",
+       "LONELY",
+       "BROKE"
+      ],
+      "top_forms": [
+       "flat as a tack",
+       "like a shag on a rock",
+       "as lonely as a shag on a rock"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a boiling hot day",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HOT_WEATHER",
+       "BILLY",
+       "FINE_DAY"
+      ],
+      "top_forms": [
+       "a scorcher",
+       "a stinker",
+       "billy"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a freezing cold morning",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "COLD_WEATHER",
+       "FREEZING_WEATHER",
+       "FREEZING"
+      ],
+      "top_forms": [
+       "{subj} {be} brass monkeys",
+       "brass monkey weather",
+       "colder than a witch's tit"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "over the moon about it",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "FINISH_LINE",
+       "KEEN_ON",
+       "INTENSE"
+      ],
+      "top_forms": [
+       "get {obj} over the line",
+       "keen on",
+       "full-on"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "feeling really down",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "HAPPY",
+       "KEEP_MUM",
+       "NAUSEOUS"
+      ],
+      "top_forms": [
+       "happy as Larry",
+       "{subj} never cracked a boo",
+       "crook in the guts"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "absolutely starving",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HUNGRY",
+       "GOBBLE",
+       "EAT_IT_ALL"
+      ],
+      "top_forms": [
+       "hungry enough to eat the arse out of a low-flyin' duck",
+       "starvin'",
+       "peckish"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "stuffed after dinner",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "TIRED",
+       "BROKEN",
+       "FULL"
+      ],
+      "top_forms": [
+       "stuffed",
+       "knackered",
+       "full as a goog"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "working my guts out",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "WORN_OUT_THING",
+       "NAUSEOUS",
+       "FOR_A_LIVING"
+      ],
+      "top_forms": [
+       "clapped-out",
+       "crook in the guts",
+       "for a crust"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "dead easy",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "VERY",
+       "DEAD_EASY",
+       "BROKEN"
+      ],
+      "top_forms": [
+       "dead",
+       "easy as",
+       "cactus"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "hello there",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "GREETING",
+       "SAY_HELLO",
+       "SURPRISE"
+      ],
+      "top_forms": [
+       "g'day",
+       "say g'day",
+       "far out"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a top bloke",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "MAN",
+       "FELLOW_MAN",
+       "HUSBAND"
+      ],
+      "top_forms": [
+       "bloke",
+       "cove",
+       "{poss} fella"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a tiny little thing",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "CHILD",
+       "LITTLE_BOY",
+       "STREAM"
+      ],
+      "top_forms": [
+       "ankle biter",
+       "little tacker",
+       "nipper"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "honest",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "GENUINE",
+       "SINCERELY",
+       "AWFUL"
+      ],
+      "top_forms": [
+       "dinkum",
+       "dinky-di",
+       "fair dinkum"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a prank",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "JUST_JOKING",
+       "SHADY_PERSON",
+       "TRICK"
+      ],
+      "top_forms": [
+       "gammon",
+       "a sneaky bastard",
+       "a sneaky cunt"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "skull",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HEAD",
+       "PENIS",
+       "IDIOT"
+      ],
+      "top_forms": [
+       "noggin",
+       "scone",
+       "donger"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "knackered beyond belief",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "TIRED",
+       "BROKEN",
+       "DRUNK"
+      ],
+      "top_forms": [
+       "buggered",
+       "zonked",
+       "stuffed"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "feeling a bit under the weather",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "LIGHT_RAIN",
+       "RAINING_HARD",
+       "NAUSEOUS"
+      ],
+      "top_forms": [
+       "{subj} {be} spitting",
+       "{subj} {be} pissing down",
+       "{subj} {be} raining like a cow pissing on a flat rock"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "late in the afternoon",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "AFTERNOON",
+       "EARLY",
+       "WEEK_FROM_SUNDAY"
+      ],
+      "top_forms": [
+       "arvo",
+       "at sparrow's fart",
+       "Sunday week"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "the bottle shop",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LIQUOR_STORE",
+       "PRODUCE_DEPARTMENT",
+       "PRODUCE_SECTION"
+      ],
+      "top_forms": [
+       "bottle-o",
+       "fruit and veg department",
+       "fruit and veg section"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "it's pouring down outside",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LIGHT_RAIN",
+       "RAINING_HARD",
+       "BOMB_DIVE"
+      ],
+      "top_forms": [
+       "{subj} {be} spitting",
+       "{subj} {be} bucketing down",
+       "{subj} {be} pissing down"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a quick snooze",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "SMALL_BEER_BOTTLE",
+       "SHARP",
+       "LOOK"
+      ],
+      "top_forms": [
+       "stubby",
+       "there {be} no flies on {obj}",
+       "a geek"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "completely skint",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "SAD",
+       "LONELY",
+       "BROKE"
+      ],
+      "top_forms": [
+       "flat as a tack",
+       "like a shag on a rock",
+       "as lonely as a shag on a rock"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a cold one at the pub",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "PUB",
+       "PUB_LUNCH",
+       "PUB_MEAL"
+      ],
+      "top_forms": [
+       "the pub",
+       "a counter lunch",
+       "a counter meal"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "chucking a wobbly",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LOSE_TEMPER",
+       "WILD_EXCITEMENT",
+       "STAGGERED"
+      ],
+      "top_forms": [
+       "crack the shits",
+       "chuck a berko",
+       "chuck a micky"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a shady deal",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "DANGEROUS",
+       "DIRT_CHEAP",
+       "AWFUL"
+      ],
+      "top_forms": [
+       "dicey",
+       "cheap as chips",
+       "dodgy"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "quit your whining",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "QUIT",
+       "RETIRE",
+       "STOP_COMPLAINING"
+      ],
+      "top_forms": [
+       "pull the pin",
+       "chuck it in",
+       "stop your whingeing"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a good mate of mine",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "FRIEND",
+       "SOMEONE",
+       "YOU_PLURAL"
+      ],
+      "top_forms": [
+       "mate",
+       "cobber",
+       "some mongrel"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "ages ago",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LONG_AGO",
+       "LONG_TIME",
+       "PARENTS"
+      ],
+      "top_forms": [
+       "yonks ago",
+       "donkey's years ago",
+       "yonks"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a complete idiot",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "IDIOT",
+       "STUPID",
+       "NOT_NAIVE"
+      ],
+      "top_forms": [
+       "a fuckwit",
+       "a dumb cunt",
+       "a dickhead"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "having a chinwag",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "TEASE",
+       "SHILLING",
+       "HAVE_SEX"
+      ],
+      "top_forms": [
+       "{subj} {be} taking the piss",
+       "a deener",
+       "have a root"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very tired",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "TIRED",
+       "BROKEN",
+       "DRUNK"
+      ],
+      "top_forms": [
+       "knackered",
+       "out on {poss} feet",
+       "rooted"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "extremely tired",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "TIRED",
+       "BROKEN",
+       "DRUNK"
+      ],
+      "top_forms": [
+       "out on {poss} feet",
+       "knackered",
+       "rooted"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a heap of money",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "FAIR_AMOUNT",
+       "LOT_OF_MONEY",
+       "A_LOT"
+      ],
+      "top_forms": [
+       "a fair whack",
+       "a motza",
+       "a packet"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "wide awake",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "FALL_ASLEEP",
+       "TIRED",
+       "BEEN_SLEEPING_IN"
+      ],
+      "top_forms": [
+       "go out like a light",
+       "out on {poss} feet",
+       "been kippin' in"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "run off my feet",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "RUN",
+       "FLEE",
+       "WALK"
+      ],
+      "top_forms": [
+       "leg it",
+       "belt",
+       "do a runner"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "put up with",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "QUIT",
+       "COMMITTED",
+       "CONCEDE_DEFEAT"
+      ],
+      "top_forms": [
+       "chuck it in",
+       "dead set on",
+       "give {obj} best"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "sleep",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "NAP",
+       "FALL_ASLEEP",
+       "LIE_DOWN_REST"
+      ],
+      "top_forms": [
+       "a kip",
+       "flake out",
+       "a nana nap"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "dying",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "NAUSEOUS",
+       "SAD",
+       "DRUNK"
+      ],
+      "top_forms": [
+       "crook in the guts",
+       "as miserable as a bandicoot",
+       "down in the dumps"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very cold",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "FREEZING",
+       "COLD_WEATHER",
+       "FREEZING_WEATHER"
+      ],
+      "top_forms": [
+       "colder than a witch's tit",
+       "cold enough to freeze the balls off a brass monkey",
+       "{subj} {be} brass monkeys"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "established",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "CONTENT",
+       "COMMITTED",
+       "AFFIRM"
+      ],
+      "top_forms": [
+       "a happy little Vegemite",
+       "snug as a bug in a rug",
+       "like a koala up a gum tree"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "stepmother",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "GRANDMOTHER",
+       "WOMAN",
+       "VERANDAH"
+      ],
+      "top_forms": [
+       "nan",
+       "sheila",
+       "verandah"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very large",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "HUGE",
+       "BIG_STRONG",
+       "HIGH"
+      ],
+      "top_forms": [
+       "whopping",
+       "built like a brick shithouse",
+       "high as a kite"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "wake up",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "NAP",
+       "FALL_ASLEEP",
+       "LIE_DOWN_REST"
+      ],
+      "top_forms": [
+       "a kip",
+       "go out like a light",
+       "flake out"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "worked very hard",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "WORK_HARD",
+       "WORK",
+       "VERY"
+      ],
+      "top_forms": [
+       "do the hard yards",
+       "bust {poss} guts",
+       "work like billy-o"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "harmless",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "DANGEROUS",
+       "SCOUNDREL",
+       "DISGUSTING"
+      ],
+      "top_forms": [
+       "dicey",
+       "hairy",
+       "a mean bastard"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "probably",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "DEFINITELY",
+       "DISAGREE",
+       "EMPHATIC_REFUSAL"
+      ],
+      "top_forms": [
+       "defo",
+       "no fuckin' way",
+       "not on your nelly"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "setup": "Aussie static, tuned",
+   "gloss->form": 0.266,
+   "gloss->concept's forms": 0.552,
+   "form->concept": 0.311,
+   "opposites offered": 0.064,
+   "opposite_queries": 125,
+   "gap right@1": 0.279,
+   "gap filled right": 0.116,
+   "gap filled wrong": 0.186,
+   "everyday filled": 0.115,
+   "gap_detail": [
+    {
+     "word": "gleeful",
+     "nearest": "HAPPY",
+     "score": 0.501,
+     "want": "HAPPY"
+    },
+    {
+     "word": "cheerful",
+     "nearest": "HAPPY",
+     "score": 0.592,
+     "want": "HAPPY"
+    },
+    {
+     "word": "sorrowful",
+     "nearest": "SAD",
+     "score": 0.541,
+     "want": "SAD"
+    },
+    {
+     "word": "melancholy",
+     "nearest": "SAD",
+     "score": 0.543,
+     "want": "SAD"
+    },
+    {
+     "word": "morose",
+     "nearest": "IDIOT",
+     "score": 0.795,
+     "want": "SAD"
+    },
+    {
+     "word": "wrathful",
+     "nearest": "DIRTY",
+     "score": 0.458,
+     "want": "ANGRY"
+    },
+    {
+     "word": "indignant",
+     "nearest": "SICK",
+     "score": 0.49,
+     "want": "ANGRY"
+    },
+    {
+     "word": "exasperated",
+     "nearest": "ANGRY",
+     "score": 0.494,
+     "want": "ANGRY"
+    },
+    {
+     "word": "fearful",
+     "nearest": "SCARED",
+     "score": 0.737,
+     "want": "SCARED"
+    },
+    {
+     "word": "timid",
+     "nearest": "ANGRY",
+     "score": 0.593,
+     "want": "SCARED"
+    },
+    {
+     "word": "drowsy",
+     "nearest": "NAP",
+     "score": 0.628,
+     "want": "TIRED"
+    },
+    {
+     "word": "sleepy",
+     "nearest": "TIRED",
+     "score": 0.667,
+     "want": "TIRED"
+    },
+    {
+     "word": "sozzled",
+     "nearest": "DRUNK",
+     "score": 0.728,
+     "want": "DRUNK"
+    },
+    {
+     "word": "affluent",
+     "nearest": "RICH",
+     "score": 0.733,
+     "want": "RICH"
+    },
+    {
+     "word": "prosperous",
+     "nearest": "BIG_BUSINESS",
+     "score": 0.652,
+     "want": "RICH"
+    },
+    {
+     "word": "opulent",
+     "nearest": "CLEVER_PERSON",
+     "score": 0.382,
+     "want": "RICH"
+    },
+    {
+     "word": "needy",
+     "nearest": "UNEMPLOYED",
+     "score": 0.46,
+     "want": "POOR"
+    },
+    {
+     "word": "starved",
+     "nearest": "HUNGRY",
+     "score": 0.633,
+     "want": "HUNGRY"
+    },
+    {
+     "word": "unclean",
+     "nearest": "FATHER",
+     "score": 0.481,
+     "want": "DIRTY"
+    },
+    {
+     "word": "soiled",
+     "nearest": "STAGGERED",
+     "score": 0.54,
+     "want": "DIRTY"
+    },
+    {
+     "word": "mammoth",
+     "nearest": "HUGE",
+     "score": 0.363,
+     "want": "HUGE"
+    },
+    {
+     "word": "foolish",
+     "nearest": "IDIOT",
+     "score": 0.704,
+     "want": "STUPID"
+    },
+    {
+     "word": "idiotic",
+     "nearest": "IDIOT",
+     "score": 0.831,
+     "want": "STUPID"
+    },
+    {
+     "word": "lethargic",
+     "nearest": "KEEP_MUM",
+     "score": 0.453,
+     "want": "LAZY"
+    },
+    {
+     "word": "indolent",
+     "nearest": "REIMBURSE_PERSON",
+     "score": 0.247,
+     "want": "LAZY"
+    },
+    {
+     "word": "slothful",
+     "nearest": "DIRTY",
+     "score": 0.427,
+     "want": "LAZY"
+    },
+    {
+     "word": "deceitful",
+     "nearest": "DANGEROUS",
+     "score": 0.437,
+     "want": "DODGY"
+    },
+    {
+     "word": "fraudulent",
+     "nearest": "DISHONEST_ADJECTIVE",
+     "score": 1.001,
+     "want": "DODGY"
+    },
+    {
+     "word": "ailing",
+     "nearest": "STIRRER",
+     "score": 0.388,
+     "want": "SICK"
+    },
+    {
+     "word": "feverish",
+     "nearest": "DIE",
+     "score": 0.583,
+     "want": "SICK"
+    },
+    {
+     "word": "apprehensive",
+     "nearest": "AWFUL",
+     "score": 0.543,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "uneasy",
+     "nearest": "SCARED",
+     "score": 0.56,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "tense",
+     "nearest": "COMMITTED",
+     "score": 0.374,
+     "want": "NERVOUS"
+    },
+    {
+     "word": "dehydrated",
+     "nearest": "SHARP",
+     "score": 0.463,
+     "want": "THIRSTY"
+    },
+    {
+     "word": "chilly",
+     "nearest": "FREEZING_WEATHER",
+     "score": 0.634,
+     "want": "FREEZING"
+    },
+    {
+     "word": "frosty",
+     "nearest": "SAD",
+     "score": 0.553,
+     "want": "FREEZING"
+    },
+    {
+     "word": "icy",
+     "nearest": "FREEZING",
+     "score": 0.51,
+     "want": "FREEZING"
+    },
+    {
+     "word": "sweltering",
+     "nearest": "STEAL",
+     "score": 0.671,
+     "want": "SCORCHING"
+    },
+    {
+     "word": "torrid",
+     "nearest": "DODGY",
+     "score": 0.347,
+     "want": "SCORCHING"
+    },
+    {
+     "word": "pricy",
+     "nearest": "DAYDREAMY",
+     "score": 0.404,
+     "want": "EXPENSIVE"
+    },
+    {
+     "word": "tedious",
+     "nearest": "DANGEROUS",
+     "score": 0.462,
+     "want": "BORED"
+    },
+    {
+     "word": "ungainly",
+     "nearest": "DIRTY",
+     "score": 0.551,
+     "want": "CLUMSY"
+    },
+    {
+     "word": "hapless",
+     "nearest": "BACKSIDE",
+     "score": 0.392,
+     "want": "UNLUCKY"
+    },
+    {
+     "word": "table",
+     "nearest": "PRODUCE_AISLE",
+     "score": 0.276,
+     "want": null
+    },
+    {
+     "word": "window",
+     "nearest": "BEER_GUT",
+     "score": 0.5,
+     "want": null
+    },
+    {
+     "word": "pencil",
+     "nearest": "CARPENTER",
+     "score": 0.426,
+     "want": null
+    },
+    {
+     "word": "yellow",
+     "nearest": "SANDY_BLIGHT",
+     "score": 0.334,
+     "want": null
+    },
+    {
+     "word": "tuesday",
+     "nearest": "WEEK_FROM_SUNDAY",
+     "score": 0.515,
+     "want": null
+    },
+    {
+     "word": "garden",
+     "nearest": "FIELD",
+     "score": 0.463,
+     "want": null
+    },
+    {
+     "word": "kitchen",
+     "nearest": "FOIL",
+     "score": 0.722,
+     "want": null
+    },
+    {
+     "word": "envelope",
+     "nearest": "POSTMAN",
+     "score": 0.579,
+     "want": null
+    },
+    {
+     "word": "ladder",
+     "nearest": "SLAB_HUT",
+     "score": 0.27,
+     "want": null
+    },
+    {
+     "word": "umbrella",
+     "nearest": "UMBRELLA",
+     "score": 1.0,
+     "want": null
+    },
+    {
+     "word": "wooden",
+     "nearest": "SOAPBOX_CART",
+     "score": 0.47,
+     "want": null
+    },
+    {
+     "word": "plastic",
+     "nearest": "ELECTRICIAN",
+     "score": 0.244,
+     "want": null
+    },
+    {
+     "word": "ceiling",
+     "nearest": "SLAB_HUT",
+     "score": 0.385,
+     "want": null
+    },
+    {
+     "word": "bicycle",
+     "nearest": "BIKIE",
+     "score": 0.486,
+     "want": null
+    },
+    {
+     "word": "carpet",
+     "nearest": "CLOTHES",
+     "score": 0.345,
+     "want": null
+    },
+    {
+     "word": "calendar",
+     "nearest": "FINISH_WORK",
+     "score": 0.318,
+     "want": null
+    },
+    {
+     "word": "printer",
+     "nearest": "BOMB_DIVE",
+     "score": 0.326,
+     "want": null
+    },
+    {
+     "word": "orange",
+     "nearest": "MIXED_BREED_DOG",
+     "score": 0.355,
+     "want": null
+    },
+    {
+     "word": "metal",
+     "nearest": "UNLUCKY",
+     "score": 0.326,
+     "want": null
+    },
+    {
+     "word": "copper",
+     "nearest": "POLICE_OFFICER",
+     "score": 0.698,
+     "want": null
+    },
+    {
+     "word": "shelf",
+     "nearest": "APARTMENT",
+     "score": 0.389,
+     "want": null
+    },
+    {
+     "word": "triangle",
+     "nearest": "STOCKYARD",
+     "score": 0.273,
+     "want": null
+    },
+    {
+     "word": "spreadsheet",
+     "nearest": "LOT_OF_MONEY",
+     "score": 0.354,
+     "want": null
+    },
+    {
+     "word": "cardboard",
+     "nearest": "BOARDSHORTS",
+     "score": 0.311,
+     "want": null
+    },
+    {
+     "word": "staircase",
+     "nearest": "TROUSERS",
+     "score": 0.376,
+     "want": null
+    },
+    {
+     "word": "lamp",
+     "nearest": "GOANNA",
+     "score": 0.404,
+     "want": null
+    }
+   ],
+   "size_mb": 15.8,
+   "reference": "32/33",
+   "reference_detail": {
+    "passed": 32,
+    "required": 33,
+    "known_fixed": [
+     "put up with",
+     "sleep",
+     "dying",
+     "very cold"
+    ],
+    "checks": [
+     {
+      "kind": "must_not",
+      "query": "girl",
+      "pass": false,
+      "known": false,
+      "top_concepts": [
+       "WOMAN",
+       "WIFE",
+       "LITTLE_BOY"
+      ],
+      "top_forms": [
+       "sheila",
+       "the trouble and strife",
+       "the missus"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a great war",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "WAR",
+       "MAN_O_WAR",
+       "A_LOT"
+      ],
+      "top_forms": [
+       "stoush",
+       "a bluebottle",
+       "heaps"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "rolling in cash",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "RICH",
+       "BEDROLL",
+       "MONEY"
+      ],
+      "top_forms": [
+       "cashed up",
+       "loaded",
+       "rollin' in it"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "completely skint",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "BROKE",
+       "TIRED",
+       "BRAND_NEW"
+      ],
+      "top_forms": [
+       "stony broke",
+       "{subj} {have}n't got a brass razoo",
+       "skint"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a boiling hot day",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HOT_WEATHER",
+       "FINE_DAY",
+       "COOL_CHANGE"
+      ],
+      "top_forms": [
+       "a stinker",
+       "a scorcher",
+       "a pearler of a day"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a freezing cold morning",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "COLD_WEATHER",
+       "FREEZING",
+       "FREEZING_WEATHER"
+      ],
+      "top_forms": [
+       "{subj} {be} brass monkeys",
+       "cold enough to freeze the balls off a brass monkey",
+       "colder than a witch's tit"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "over the moon about it",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HAPPY",
+       "DEAD_EASY",
+       "FINISH_LINE"
+      ],
+      "top_forms": [
+       "chuffed to bits",
+       "over the moon",
+       "stoked"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "feeling really down",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "SAD",
+       "NAUSEOUS",
+       "VERY"
+      ],
+      "top_forms": [
+       "as miserable as a bandicoot",
+       "crook in the guts",
+       "{subj} {have} a face like a wet week"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "absolutely starving",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HUNGRY",
+       "AGREE",
+       "DISAGREE"
+      ],
+      "top_forms": [
+       "hungry enough to eat the arse out of a low-flyin' duck",
+       "starvin'",
+       "too right"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "stuffed after dinner",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "DRUNK",
+       "TIRED",
+       "BROKEN"
+      ],
+      "top_forms": [
+       "zonked",
+       "out on {poss} feet",
+       "cooked"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "working my guts out",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "WORK_HARD",
+       "NAUSEOUS",
+       "NUT_OUT"
+      ],
+      "top_forms": [
+       "bust {poss} guts",
+       "crook in the guts",
+       "nut out"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "dead easy",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "VERY",
+       "DEAD_EASY",
+       "DONE_FOR"
+      ],
+      "top_forms": [
+       "dead",
+       "easy as",
+       "cooked"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "hello there",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "GREETING",
+       "SAY_HELLO",
+       "STUPID"
+      ],
+      "top_forms": [
+       "g'day",
+       "say g'day",
+       "a stubby short of a six-pack"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a top bloke",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "MAN",
+       "FELLOW_MAN",
+       "GOOD_PERSON"
+      ],
+      "top_forms": [
+       "cove",
+       "bloke",
+       "a top bloke"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a tiny little thing",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "CHILD",
+       "LITTLE_BOY",
+       "SMALL_BEER_BOTTLE"
+      ],
+      "top_forms": [
+       "nipper",
+       "little tacker",
+       "a little shit"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "honest",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "GENUINE",
+       "SINCERELY",
+       "THE_REAL_STORY"
+      ],
+      "top_forms": [
+       "dinkum",
+       "ridgy-didge",
+       "fair dinkum"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a prank",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LOUT",
+       "RASCAL",
+       "SCOUNDREL"
+      ],
+      "top_forms": [
+       "a peb",
+       "a cheeky little shit",
+       "a cheeky bastard"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "skull",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "HEAD",
+       "HANDS",
+       "PENIS"
+      ],
+      "top_forms": [
+       "noggin",
+       "scone",
+       "mitts"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "knackered beyond belief",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "DRUNK",
+       "TIRED",
+       "BROKEN"
+      ],
+      "top_forms": [
+       "zonked",
+       "buggered",
+       "cooked"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "feeling a bit under the weather",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "AWFUL",
+       "SICK",
+       "DODGY"
+      ],
+      "top_forms": [
+       "as crook as a dog",
+       "crook as buggery",
+       "crook as Rookwood"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "late in the afternoon",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "AFTERNOON",
+       "EARLY",
+       "RECESS"
+      ],
+      "top_forms": [
+       "arvo",
+       "at sparrow's fart",
+       "little lunch"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "the bottle shop",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "SCHOOL_CANTEEN",
+       "LIQUOR_STORE",
+       "SMALL_BEER_BOTTLE"
+      ],
+      "top_forms": [
+       "the tuckshop",
+       "bottle-o",
+       "stubby"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "it's pouring down outside",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LIGHT_RAIN",
+       "RAINING_HARD",
+       "SIT_DOWN"
+      ],
+      "top_forms": [
+       "{subj} {be} spitting",
+       "{subj} {be} pissing down",
+       "{subj} {be} bucketing down"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a quick snooze",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "NAP",
+       "LOOK",
+       "FAST"
+      ],
+      "top_forms": [
+       "a kip",
+       "a nana nap",
+       "a Captain Cook"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "completely skint",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "BROKE",
+       "TIRED",
+       "BRAND_NEW"
+      ],
+      "top_forms": [
+       "stony broke",
+       "{subj} {have}n't got a brass razoo",
+       "skint"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a cold one at the pub",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "PUB",
+       "COLD_BEER_SERVING",
+       "PUB_LUNCH"
+      ],
+      "top_forms": [
+       "the pub",
+       "a coldie",
+       "a counter lunch"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "chucking a wobbly",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "THROW_TANTRUM",
+       "LOSE_TEMPER",
+       "WILD_EXCITEMENT"
+      ],
+      "top_forms": [
+       "chuck a tanty",
+       "crack the shits",
+       "arc up"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a shady deal",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "AWFUL",
+       "SICK",
+       "DODGY"
+      ],
+      "top_forms": [
+       "crook",
+       "dodgy",
+       "shonky"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "quit your whining",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "STOP_COMPLAINING",
+       "QUIT",
+       "RETIRE"
+      ],
+      "top_forms": [
+       "stop your whingeing",
+       "chuck it in",
+       "pull the pin"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a good mate of mine",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "FRIEND",
+       "REPLY_TO_THANKS",
+       "GOOD_PERSON"
+      ],
+      "top_forms": [
+       "cobber",
+       "mate",
+       "all good"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "ages ago",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "LONG_AGO",
+       "LONG_TIME",
+       "TAKE_FOREVER"
+      ],
+      "top_forms": [
+       "yonks ago",
+       "donkey's years ago",
+       "yonks"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "a complete idiot",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "IDIOT",
+       "SHARP",
+       "STUPID"
+      ],
+      "top_forms": [
+       "a dumb cunt",
+       "a fuckwit",
+       "a dickhead"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "having a chinwag",
+      "pass": true,
+      "known": false,
+      "top_concepts": [
+       "CHAT",
+       "BUSY",
+       "TEASE"
+      ],
+      "top_forms": [
+       "have a chinwag",
+       "flat out",
+       "flat out like a lizard drinking"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very tired",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "DRUNK",
+       "TIRED",
+       "VERY"
+      ],
+      "top_forms": [
+       "stonkered",
+       "dead",
+       "out on {poss} feet"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "extremely tired",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "TIRED",
+       "DRUNK",
+       "BROKEN"
+      ],
+      "top_forms": [
+       "out on {poss} feet",
+       "zonked",
+       "cooked"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "a heap of money",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "FAIR_AMOUNT",
+       "LOT_OF_MONEY",
+       "BROKE"
+      ],
+      "top_forms": [
+       "a fair whack",
+       "a packet",
+       "a motza"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "wide awake",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "FALL_ASLEEP",
+       "TIRED",
+       "DRUNK"
+      ],
+      "top_forms": [
+       "go out like a light",
+       "out on {poss} feet",
+       "stonkered"
+      ]
+     },
+     {
+      "kind": "should",
+      "query": "run off my feet",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "RUN",
+       "FLEE",
+       "RUN_OFF"
+      ],
+      "top_forms": [
+       "leg it",
+       "do a runner",
+       "belt"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "put up with",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "COP_IT",
+       "TOLERATE",
+       "COURT"
+      ],
+      "top_forms": [
+       "cop {np}",
+       "track with {obj}",
+       "bung {obj} in"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "sleep",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "NAP",
+       "FALL_ASLEEP",
+       "SLEEPING_PORCH"
+      ],
+      "top_forms": [
+       "a kip",
+       "a nana nap",
+       "flake out"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "dying",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "EAGER",
+       "KEEN_ON",
+       "VERY_EAGER"
+      ],
+      "top_forms": [
+       "keen",
+       "keen on",
+       "keen as mustard"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very cold",
+      "pass": true,
+      "known": true,
+      "top_concepts": [
+       "FREEZING",
+       "COLD_WEATHER",
+       "HEARTLESS"
+      ],
+      "top_forms": [
+       "colder than a witch's tit",
+       "cold enough to freeze the balls off a brass monkey",
+       "{subj} {be} brass monkeys"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "established",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "CONTENT",
+       "HAPPY",
+       "COMMITTED"
+      ],
+      "top_forms": [
+       "a happy little Vegemite",
+       "snug as a bug in a rug",
+       "like a koala up a gum tree"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "stepmother",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "GRANDMOTHER",
+       "RELATIVES",
+       "WIFE"
+      ],
+      "top_forms": [
+       "nan",
+       "rello",
+       "the missus"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "very large",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "BIG_STRONG",
+       "HIGH",
+       "SICK"
+      ],
+      "top_forms": [
+       "built like a brick shithouse",
+       "high as a kite",
+       "crook as buggery"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "wake up",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "FALL_ASLEEP",
+       "NAP",
+       "HURRY"
+      ],
+      "top_forms": [
+       "flake out",
+       "go out like a light",
+       "a kip"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "worked very hard",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "WORK_HARD",
+       "BUSY",
+       "BIG_STRONG"
+      ],
+      "top_forms": [
+       "bust {poss} guts",
+       "work like billy-o",
+       "work {poss} arse off"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "harmless",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "DANGEROUS",
+       "SCOUNDREL",
+       "CHILD"
+      ],
+      "top_forms": [
+       "dicey",
+       "hairy",
+       "a mean bastard"
+      ]
+     },
+     {
+      "kind": "must_not",
+      "query": "probably",
+      "pass": false,
+      "known": true,
+      "top_concepts": [
+       "DISAGREE",
+       "EMPHATIC_REFUSAL",
+       "DEFINITELY"
+      ],
+      "top_forms": [
+       "not on your nelly",
+       "no fuckin' way",
+       "no bloody way"
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "calibration": {
+  "lookup_random": {
+   "related": {
+    "p25": 0.429,
+    "median": 0.632
+   },
+   "unrelated": {
+    "median": 0.054,
+    "p90": 0.174,
+    "max": 0.227
+   },
+   "best_threshold": 0.23,
+   "balanced_accuracy": 0.967,
+   "at": {
+    "0.4": {
+     "related_kept": 0.767,
+     "unrelated_kept": 0.0
+    },
+    "0.45": {
+     "related_kept": 0.733,
+     "unrelated_kept": 0.0
+    },
+    "0.5": {
+     "related_kept": 0.733,
+     "unrelated_kept": 0.0
+    },
+    "0.55": {
+     "related_kept": 0.6,
+     "unrelated_kept": 0.0
+    },
+    "0.6": {
+     "related_kept": 0.533,
+     "unrelated_kept": 0.0
+    }
+   }
+  },
+  "lookup_hardest": {
+   "related": {
+    "p25": 0.429,
+    "median": 0.632
+   },
+   "unrelated": {
+    "median": 0.471,
+    "p90": 0.576,
+    "max": 0.797
+   },
+   "best_threshold": 0.58,
+   "balanced_accuracy": 0.717,
+   "at": {
+    "0.4": {
+     "related_kept": 0.767,
+     "unrelated_kept": 0.8
+    },
+    "0.45": {
+     "related_kept": 0.733,
+     "unrelated_kept": 0.6
+    },
+    "0.5": {
+     "related_kept": 0.733,
+     "unrelated_kept": 0.467
+    },
+    "0.55": {
+     "related_kept": 0.6,
+     "unrelated_kept": 0.267
+    },
+    "0.6": {
+     "related_kept": 0.533,
+     "unrelated_kept": 0.1
+    }
+   }
+  },
+  "gaps": {
+   "related": {
+    "p25": 0.0,
+    "median": 0.625
+   },
+   "unrelated": {
+    "median": 0.342,
+    "p90": 0.483,
+    "max": 0.581
+   },
+   "best_threshold": 0.5,
+   "balanced_accuracy": 0.783,
+   "at": {
+    "0.4": {
+     "related_kept": 0.6,
+     "unrelated_kept": 0.333
+    },
+    "0.45": {
+     "related_kept": 0.6,
+     "unrelated_kept": 0.167
+    },
+    "0.5": {
+     "related_kept": 0.6,
+     "unrelated_kept": 0.033
+    },
+    "0.55": {
+     "related_kept": 0.567,
+     "unrelated_kept": 0.033
+    },
+    "0.6": {
+     "related_kept": 0.567,
+     "unrelated_kept": 0.0
+    }
+   }
+  },
+  "gaps_nearest_right": 0.6
+ },
+ "reference": {
+  "passed": 33,
+  "required": 33,
+  "known_fixed": [
+   "wide awake",
+   "run off my feet",
+   "put up with",
+   "wake up"
+  ],
+  "checks": [
+   {
+    "kind": "must_not",
+    "query": "girl",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "LITTLE_BOY",
+     "WOMAN",
+     "BOY"
+    ],
+    "top_forms": [
+     "little fella",
+     "sheila",
+     "young fella"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "a great war",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "WAR",
+     "GREAT_EXCLAIM",
+     "FIGHT"
+    ],
+    "top_forms": [
+     "stoush",
+     "you little bottler",
+     "a stoush"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "rolling in cash",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "RICH",
+     "MONEY",
+     "STERLING_MONEY"
+    ],
+    "top_forms": [
+     "loaded",
+     "on the pig's back",
+     "rollin' in it"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "completely skint",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "BROKE",
+     "TIRED",
+     "FLUSTERED"
+    ],
+    "top_forms": [
+     "stony broke",
+     "{subj} {have}n't got a brass razoo",
+     "on the bones of {poss} arse"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "a boiling hot day",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "HOT_WEATHER",
+     "FINE_DAY",
+     "COOL_CHANGE"
+    ],
+    "top_forms": [
+     "a scorcher",
+     "a stinker",
+     "a cracker of a day"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "a freezing cold morning",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "COLD_WEATHER",
+     "FREEZING",
+     "FREEZING_WEATHER"
+    ],
+    "top_forms": [
+     "{subj} {be} brass monkeys",
+     "cold enough to freeze the balls off a brass monkey",
+     "colder than a witch's tit"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "over the moon about it",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "HAPPY",
+     "KEEN_ON",
+     "PERSONAL_ENERGY"
+    ],
+    "top_forms": [
+     "chuffed to bits",
+     "happy as Larry",
+     "stoked"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "feeling really down",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "SAD",
+     "NAUSEOUS",
+     "JUST_RIGHT"
+    ],
+    "top_forms": [
+     "as miserable as a bandicoot",
+     "{subj} {have} a face like a wet week",
+     "crook in the guts"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "absolutely starving",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "HUNGRY",
+     "AGREE",
+     "WELCOME_FOOD"
+    ],
+    "top_forms": [
+     "hungry enough to eat the arse out of a low-flyin' duck",
+     "starvin'",
+     "peckish"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "stuffed after dinner",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "TIRED",
+     "BROKEN",
+     "FULL"
+    ],
+    "top_forms": [
+     "stuffed",
+     "zonked",
+     "cooked"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "working my guts out",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "STRUGGLERS",
+     "NUT_OUT",
+     "WORK_HARD"
+    ],
+    "top_forms": [
+     "battlers",
+     "nut out",
+     "bust {poss} guts"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "dead easy",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "VERY",
+     "DEAD_EASY",
+     "NO_PROBLEM"
+    ],
+    "top_forms": [
+     "dead",
+     "easy as",
+     "sweet as"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "hello there",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "GREETING",
+     "SAY_HELLO",
+     "DOUBT_IT"
+    ],
+    "top_forms": [
+     "g'day",
+     "say g'day",
+     "reckon {np} {have} Buckley's"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "a top bloke",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "MAN",
+     "FELLOW_MAN",
+     "GOOD_PERSON"
+    ],
+    "top_forms": [
+     "cove",
+     "bloke",
+     "a top bloke"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "a tiny little thing",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "CHILD",
+     "LITTLE_BOY",
+     "NOTHING"
+    ],
+    "top_forms": [
+     "littlie",
+     "ankle biter",
+     "nipper"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "honest",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "GENUINE",
+     "SINCERELY",
+     "LOYAL"
+    ],
+    "top_forms": [
+     "dinkum",
+     "dinky-di",
+     "fair dinkum"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "a prank",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "RASCAL",
+     "LOUT",
+     "ODD_PERSON"
+    ],
+    "top_forms": [
+     "a cheeky little shit",
+     "a hard case",
+     "a cheeky bastard"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "skull",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "HEAD",
+     "HANDS",
+     "PENIS"
+    ],
+    "top_forms": [
+     "noggin",
+     "scone",
+     "mitts"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "knackered beyond belief",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "TIRED",
+     "BROKEN",
+     "DRUNK"
+    ],
+    "top_forms": [
+     "fucked",
+     "zonked",
+     "rooted"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "feeling a bit under the weather",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "AWFUL",
+     "SICK",
+     "DODGY"
+    ],
+    "top_forms": [
+     "crook",
+     "crook as Rookwood",
+     "crook as buggery"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "late in the afternoon",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "AFTERNOON",
+     "EARLY",
+     "NAP"
+    ],
+    "top_forms": [
+     "arvo",
+     "at sparrow's fart",
+     "a nana nap"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "the bottle shop",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "LIQUOR_STORE",
+     "PHARMACY",
+     "PRODUCE_SECTION"
+    ],
+    "top_forms": [
+     "bottle-o",
+     "a chemist",
+     "fruit and veg section"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "it's pouring down outside",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "LIGHT_RAIN",
+     "RAINING_HARD",
+     "SIT_DOWN"
+    ],
+    "top_forms": [
+     "{subj} {be} spitting",
+     "{subj} {be} bucketing down",
+     "{subj} {be} pissing down"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "a quick snooze",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "NAP",
+     "TAKE_FOREVER",
+     "LOOK"
+    ],
+    "top_forms": [
+     "a kip",
+     "a nana nap",
+     "take longer than a wet week"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "completely skint",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "BROKE",
+     "TIRED",
+     "FLUSTERED"
+    ],
+    "top_forms": [
+     "stony broke",
+     "{subj} {have}n't got a brass razoo",
+     "on the bones of {poss} arse"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "a cold one at the pub",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "PUB",
+     "PUB_LUNCH",
+     "COLD_BEER_SERVING"
+    ],
+    "top_forms": [
+     "the pub",
+     "a counter lunch",
+     "a coldie"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "chucking a wobbly",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "LOSE_TEMPER",
+     "THROW_TANTRUM",
+     "WILD_EXCITEMENT"
+    ],
+    "top_forms": [
+     "chuck a micky",
+     "chuck a tanty",
+     "crack the shits"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "a shady deal",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "AWFUL",
+     "SICK",
+     "DODGY"
+    ],
+    "top_forms": [
+     "dodgy",
+     "crook",
+     "shonky"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "quit your whining",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "STOP_COMPLAINING",
+     "LOSE_TEMPER",
+     "MIND_OWN_BUSINESS"
+    ],
+    "top_forms": [
+     "stop your whingeing",
+     "do {poss} block",
+     "pull your head in"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "a good mate of mine",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "FRIEND",
+     "SWINDLER",
+     "SHADY_PERSON"
+    ],
+    "top_forms": [
+     "cobber",
+     "mate",
+     "a sneaky cunt"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "ages ago",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "LONG_AGO",
+     "LONG_TIME",
+     "TAKE_FOREVER"
+    ],
+    "top_forms": [
+     "yonks ago",
+     "donkey's years ago",
+     "yonks"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "a complete idiot",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "IDIOT",
+     "SCOUNDREL",
+     "LUNATIC"
+    ],
+    "top_forms": [
+     "a dumb cunt",
+     "a fuckwit",
+     "a dickhead"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "having a chinwag",
+    "pass": true,
+    "known": false,
+    "top_concepts": [
+     "CHAT",
+     "BUSY",
+     "TEASE"
+    ],
+    "top_forms": [
+     "have a chinwag",
+     "flat out like a lizard drinking",
+     "flat out"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "very tired",
+    "pass": false,
+    "known": true,
+    "top_concepts": [
+     "DRUNK",
+     "TIRED",
+     "BROKEN"
+    ],
+    "top_forms": [
+     "zonked",
+     "knackered",
+     "rooted"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "extremely tired",
+    "pass": false,
+    "known": true,
+    "top_concepts": [
+     "TIRED",
+     "DRUNK",
+     "BROKEN"
+    ],
+    "top_forms": [
+     "out on {poss} feet",
+     "zonked",
+     "stonkered"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "a heap of money",
+    "pass": false,
+    "known": true,
+    "top_concepts": [
+     "LOT_OF_MONEY",
+     "FAIR_AMOUNT",
+     "BROKE"
+    ],
+    "top_forms": [
+     "a motza",
+     "a packet",
+     "a fair whack"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "wide awake",
+    "pass": true,
+    "known": true,
+    "top_concepts": [
+     "ASTONISHED",
+     "FALL_ASLEEP",
+     "TIRED"
+    ],
+    "top_forms": [
+     "gobsmacked",
+     "go out like a light",
+     "out on {poss} feet"
+    ]
+   },
+   {
+    "kind": "should",
+    "query": "run off my feet",
+    "pass": true,
+    "known": true,
+    "top_concepts": [
+     "FLEE",
+     "RUN",
+     "BUSY"
+    ],
+    "top_forms": [
+     "do a runner",
+     "leg it",
+     "belt"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "put up with",
+    "pass": true,
+    "known": true,
+    "top_concepts": [
+     "COP_IT",
+     "TOLERATE",
+     "CONSTRUCT"
+    ],
+    "top_forms": [
+     "cop {np}",
+     "knock together",
+     "go crook at {obj}"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "sleep",
+    "pass": false,
+    "known": true,
+    "top_concepts": [
+     "NAP",
+     "FALL_ASLEEP",
+     "HAVE_SEX"
+    ],
+    "top_forms": [
+     "a kip",
+     "flake out",
+     "a nana nap"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "dying",
+    "pass": false,
+    "known": true,
+    "top_concepts": [
+     "NERVOUS",
+     "EAGER",
+     "VERY_EAGER"
+    ],
+    "top_forms": [
+     "toey",
+     "keen",
+     "keen as mustard"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "very cold",
+    "pass": false,
+    "known": true,
+    "top_concepts": [
+     "FREEZING",
+     "HEARTLESS",
+     "COLD_WEATHER"
+    ],
+    "top_forms": [
+     "cold enough to freeze the balls off a brass monkey",
+     "colder than a witch's tit",
+     "as cold as a mother-in-law's kiss"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "established",
+    "pass": false,
+    "known": true,
+    "top_concepts": [
+     "CONTENT",
+     "HAPPY",
+     "COMMITTED"
+    ],
+    "top_forms": [
+     "snug as a bug in a rug",
+     "like a koala up a gum tree",
+     "a happy little Vegemite"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "stepmother",
+    "pass": false,
+    "known": true,
+    "top_concepts": [
+     "GRANDMOTHER",
+     "PARENTS",
+     "ELDERLY"
+    ],
+    "top_forms": [
+     "nan",
+     "the olds",
+     "the oldies"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "very large",
+    "pass": false,
+    "known": true,
+    "top_concepts": [
+     "BIG_STRONG",
+     "EXCELLENT",
+     "HIGH"
+    ],
+    "top_forms": [
+     "built like a brick shithouse",
+     "bloody good",
+     "high as a kite"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "wake up",
+    "pass": true,
+    "known": true,
+    "top_concepts": [
+     "HURRY",
+     "QUIT",
+     "FALL_ASLEEP"
+    ],
+    "top_forms": [
+     "move yer arse",
+     "get a wriggle on",
+     "chuck it in"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "worked very hard",
+    "pass": false,
+    "known": true,
+    "top_concepts": [
+     "WORK_HARD",
+     "HAPPY",
+     "ANGRY"
+    ],
+    "top_forms": [
+     "do the hard yards",
+     "work like billy-o",
+     "work {poss} arse off"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "harmless",
+    "pass": false,
+    "known": true,
+    "top_concepts": [
+     "DANGEROUS",
+     "SCOUNDREL",
+     "DINGO"
+    ],
+    "top_forms": [
+     "dicey",
+     "hairy",
+     "a mean bastard"
+    ]
+   },
+   {
+    "kind": "must_not",
+    "query": "probably",
+    "pass": false,
+    "known": true,
+    "top_concepts": [
+     "DEFINITELY",
+     "DISAGREE",
+     "EMPHATIC_REFUSAL"
+    ],
+    "top_forms": [
+     "defo",
+     "not on your nelly",
+     "no bloody way"
+    ]
+   }
+  ]
+ }
+}

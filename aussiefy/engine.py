@@ -22,7 +22,7 @@ from .protected import Masked, protected_runs
 from .model import Dictionary
 from .policy import Effective, Policy, envelope, pick_form, resolve, roll
 from .realise import ARTICLES, fit_article, number_problem, phrase_continues, realise, replacement_span
-from .select import Candidate, candidates, usable_forms, weighted_pick
+from .select import Candidate, candidates, semantic_rejection, usable_forms, weighted_pick
 from .schema import Entry, SchemaError
 from .terms import form_key
 from .text import (COMMON_STARTERS, DATELINE, MID_SENTENCE_NAME, OPEN_QUOTES, QUOTES, SCRIPT_LINE, Token, capital_is_positional, fix_articles, heading_lines, match_case,
@@ -413,7 +413,8 @@ class Translator:
                                         self.dictionary.person_concepts, self.dictionary.person_nouns, mood=run.mood)
         keep = []
         for c in eligible:
-            reason = (_span_rejection(c, det, sent.tokens, taken)
+            reason = (semantic_rejection(c.entry, narrator_opinion=run.embellishment.narrator_opinion)
+                      or _span_rejection(c, det, sent.tokens, sent.tags, taken)
                       or _genre_rejection(c, run, self.dictionary.neutral_person_concepts))
             if reason:
                 rejected.append((c.entry, reason))
@@ -582,7 +583,8 @@ class Translator:
                 continue
             offer = garnish_offer("closer", self.dictionary.garnish, run.eff, run.pol.seed,
                                   (key, run.text.lower()), run.state.garnish_uses, contexts=contexts,
-                                  mood=run.mood, swear=swear, insults=run.embellishment.takes("insult"))
+                                  mood=run.mood, swear=swear, insults=run.embellishment.takes("insult"),
+                                  narrator_opinion=run.embellishment.narrator_opinion)
             entry = offer.pick()
             form = entry and offer.words(entry)
             run.garnish.append(GarnishRecord.rolled("closer", len(sents) - 1, entry, form, r, p, offer.rejected))
@@ -611,7 +613,8 @@ class Translator:
                 continue
             offer = garnish_offer("tail", self.dictionary.garnish, run.eff, run.pol.seed,
                                   (key,) + sent.key, state.garnish_uses, sentence_contexts(sent.tokens, sent.tags),
-                                  swear=swear, insults=run.embellishment.takes("insult"))
+                                  swear=swear, insults=run.embellishment.takes("insult"),
+                                  narrator_opinion=run.embellishment.narrator_opinion)
             entry = offer.pick()
             form, rej = entry and offer.words(entry), offer.rejected
             if entry:
@@ -768,7 +771,8 @@ class Translator:
             offer = garnish_offer(placement, self.dictionary.garnish, eff, run.pol.seed, (key,) + sent.key,
                                   state.garnish_uses, g.tag_contexts if placement == "tag" else g.contexts,
                                   exclude=recent, mood=run.mood, swear=swear,
-                                  insults=run.embellishment.takes("insult"))
+                                  insults=run.embellishment.takes("insult"),
+                                  narrator_opinion=run.embellishment.narrator_opinion)
             entry = offer.pick()
             form, rej = entry and offer.words(entry), offer.rejected
             if entry:
@@ -1146,18 +1150,18 @@ def _no_drawl(text: str, keep_quotes: bool, protected=None) -> list[tuple[int, i
 def _genre_rejection(c: Candidate, run: "_Run", neutral_people: frozenset[str]) -> str | None:
     """A swear standing in for someone named neutrally ("some bastard" for someone) needs a genre that takes it:
     not a safety notice, an obituary or a policy. A swear intensifier needs an embellishment that takes infixes,
-    and a comic term a text that isn't solemn."""
+    and a comic term in solemn prose needs an explicit setting."""
     genre = run.genre
     if c.entry.vulgarity and not genre.policy.person_swears and set(c.entry.concept) & neutral_people:
         return f"a swear for a person, and a {genre.name} text doesn't name people that way"
     if c.entry.vulgarity and c.entry.frame == "adv" and not run.embellishment.takes("infix"):
         return f"a swear as an intensifier (\"bloody stale\"), and {run.embellishment.name} takes none"
-    if c.entry.tone == "comic" and run.mood == "solemn":
-        return "a comic term (\"carked it\"), and the text is solemn (an obituary, a eulogy)"
+    if c.entry.tone == "comic" and run.mood == "solemn" and not run.embellishment.solemn_comic_terms:
+        return "a comic term in solemn text; solemn_comic_terms is false"
     return None
 
 
-def _span_rejection(c: Candidate, det: Detection, toks: list[Token], taken: set[int]) -> str | None:
+def _span_rejection(c: Candidate, det: Detection, toks: list[Token], tags: list[str], taken: set[int]) -> str | None:
     """Why a candidate can't go in this span: it would overlap another swap, a noun phrase goes on past it, it
     brings a determiner the phrase has, or its number doesn't fit."""
     s, e = replacement_span(c.entry, det, toks)
@@ -1168,7 +1172,7 @@ def _span_rejection(c: Candidate, det: Detection, toks: list[Token], taken: set[
     if c.entry.frame == "np" and c.entry.form.lower().startswith("some ") and toks[det.start].norm not in DETERMINERS \
             and after_determiner(toks, det.start):
         return "brings its own 'some', but the phrase already has a determiner"
-    return number_problem(c.entry, det, toks)
+    return number_problem(c.entry, det, toks, tags)
 
 
 def _narrow(keep: list[Candidate], rejected: list, variety: int, state: TextState) -> list[Candidate]:

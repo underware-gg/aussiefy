@@ -27,7 +27,7 @@ Well, from a clone, install in editable mode instead: `pip install -e '.[llm]'`.
 
 ## Translate a text
 
-Give `aussiefy` the text itself, a file path, or nothing to read stdin:
+Give `aussiefy` the text itself, a file path, or sweet bugger\-all to read stdin:
 
 ```sh
 aussiefy "I'm extremely busy." -l 4 -s 7          # → I'm flat out like a lizard drinking.
@@ -127,6 +127,11 @@ tr = Translator(load_dictionary(["my-entries.yaml"]))
 tr.translate("I'm extremely busy.", level=4).text
 lookup("very tired", translator=tr)
 ```
+
+To correct an existin' entry or meanin' pattern without editin' the package, use a versioned
+[dictionary overlay](../functional/dictionary.md#dictionary-overlays) with the same `--dict` option.
+Explicit patch operations replace the named fields; simply adding another entry leaves old candidates
+available. `validate` and `show` report which overlay made each correction.
 
 ## Use it from Python
 

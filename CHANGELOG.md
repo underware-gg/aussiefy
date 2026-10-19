@@ -9,8 +9,66 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
-- Retain source research for 480 further baseline entries. Cumulative audit coverage is 700 of the original
-  1,254 entries; the new batches retain qualified recommendations'n evidence limits separately from code.
+- Enable comic dictionary terms in solemn text at Troppo; other defaults stay off, with explicit
+  `solemn_comic_terms` overrides taking precedence.
+
+- Prepare bundled model 1.3.0 from fresh evaluation/full fits of the unchanged pinned recipe against the
+  reviewed dictionary. Retain exact input provenance, all prior trials, the unchanged reference rules and
+  33/33 full\-model/export checks. Record bounded lookup comparisons'n remainin' certainty/relevance
+  errors; automatic gap fillin' stays off. Well, this is a model update, not a package release promotion.
+
+- Make comic substitutions in solemn text explicitly configurable with `solemn_comic_terms`. Preserve
+  detected mood, other dial restrictions and image/closing preferences.
+- Retain protective dictionary guards across coordinated noun phrases, while keeping complete\-argument
+  checks for actual replacements; extension entries automatically change the derived guard status.
+- Keep positive physical\-solitude meaning in its gloss'n explanatory loneliness contrasts in notes,
+  avoiding a contrastive keyword being treated as a synonym. Migrate amber fluid reference labels to their
+  reviewed servin'/container senses while preserving queries, ranking rules'n required status.
+
+- Add explicit versioned dictionary overlays through existin' `--dict` files: add concepts/entries or patch
+  existin' records in deterministic order, retaining the normal engine'n dial checks. Jeez Louise, preserve raw fields,
+  replace named lists/maps rather than append, allow clearing inherited source references, reject malformed
+  or shadowed invalid operations, and report correction origins through validate/show'n dictionary metadata.
+  Keep behaviour settings separate from vocabulary corrections; tighten canonical concept'n text/boolean
+  validation used by these operations.
+
+- Preserve beer containers, currency, morning references, animal species, have a goss grammar, pub mealtimes,
+  dance\-event settings'n weather identity in the next source\-reviewed mappings. Add attested amber fluid
+  for mass beer wording, and explicit mass\-noun metadata so goss'n kid stakes keep grammatical agreement.
+  Well, preserve count selectors'n named root\-beer/ginger\-beer identity instead of forcing mass wording into them.
+  Merge the 237 source proposals from batches 5 and 6 alongside the 239 from batches 3 and 4.
+
+- Preserve explicit listener possessives through shared binding'n form compatibility, and require a
+  listener for “bend someone's ear”. Struth, add standard bend/bent morphology instead of inventin' a listener
+  or producing “bended”.
+- Apply 239 reviewed source records from the next two 120\-entry audit batches, retaining historical,
+  component'n source\-chain evidence limits rather than certifying every trigger or full construction.
+- Separate physical solitude from loneliness, aimless wandering from weary walkin', scolding from shouting,
+  exact zero from small amounts, explicit pretence from easy work, and alcoholic drinks from technical alcohol.
+  Now, require stated swag baggage, mounted\-police context, named tree/animal identity'n slab construction;
+  preserve bank\-full versus overflow events'n require explicit twenty\-four\-unit beer packages. Keep historical eye
+  terminology outta explicitly protected technical, official'n instruction domains.
+- Preserve terminal object/NP arguments through shared completion checks; decline partial or coordinated
+  nominal captures, including “as well as” coordination, while retaining finite verb/clause continuations.
+  So anyway, require both travel'n a swag for waltzing Matilda;
+  exclude minimising nothing\-much wording from exact zero.
+- Preserve negative\-modal indifference wording'n supermarket location nouns through compatible sourced
+  forms. Fair dinkum, keep all existin' status'n flag gates; retained historical terms remain subject to their registers.
+- Regenerate change fixtures from the invoking checkout rather than an editable installation of another worktree.
+
+- Amend the unreleased `changes` contract v1 with optional `semantic_effects` entry-card metadata.
+
+- Make reviewed narrator opinion explicit'n configurable: Troppo permits it, Deadset/Dinkum and Custom
+  keep it off unless overridden. Mate, share eligibility across translation, plans, change alternatives and
+  meaning lookup; retain explicit term discovery with effect annotations. Lint, verify'n yarn submission
+  check recognised added opinion terms while permittin' original occurrences.
+- Preserve roles'n meanings: brave bastards describes brave bastards, not diggers generally;
+  poor buggers expresses sympathy for unfortunate people, not death. Tell ya what, add opinion metadata to the living's
+  "lucky buggers" expression rather than silently adding good fortune at every embellishment setting.
+
+- Complete source cross\-reference research for all 1,254 original entries. Batches 3–11 add 1,034 records
+  with independent cross\-reviews'n scoped evidence. Proposed corrections remain separate from applied
+  engine changes; missing exact\-expression evidence alone doesn't prompt removal or a new gate.
 - Separate mateship, activity starts, rough construction, political people, drivin' roles'n sleepin'
   accommodation from broader meanings. Preserve “tell them” references'n non\-monetary wasted effort;
   merge 110 reviewed source URLs across 85 entry records, retaining the evidence limits in research ledgers.
@@ -63,7 +121,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 - Mask only actual profanity in `changes` renderings: swear\-list words, the compounds the dictionary's rated
   words build on one \("fuckwit"\), and the new per\-entry `mask` words for profanity the swear list lacks \("wanker",
   "dickhead"\), each with the ending a page keeps. Innuendo, insults'n crude words show in full: 25 rated entries
-  with nothing profane \("rooted", "mongrel", "shut your gob"\) are marked `profane: false`, and 5 author mask words.
+  with not a sausage profane \("rooted", "mongrel", "shut your gob"\) are marked `profane: false`, and 5 author mask words.
   Mind ya, a test holds every other rated entry to a masked word at its rating.
 - Add `aussiefy.translate_changes`: translate's translation with every change it made (swaps, garnish,
   drawl, swear infixes and US/UK swaps) placed in the output. Each swap comes with its alternatives and its
@@ -81,17 +139,17 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   The fresh full\-data candidate passes 31/33 required checks, so the bundled model remains 1.2.0 \(33/33\).
 - Keep negative\-question subjects beside their auxiliary by declinin' the unsafe bloody\-well infix there.
   Preserve capitals such as Australian and English when dictionary vocabulary alone would lowercase them.
-  Well, place dialogue tags before punctuation'n curly closing quotes in continued speech.
+  Place dialogue tags before punctuation'n curly closing quotes in continued speech.
 - Add an independently curated target\-expression benchmark with fixed inputs'n an explicit first baseline.
   Crikey, share language cleanup with the trainer so grammar directives can't become trainin' words.
 - Review the original seed listicle, add ten curated expressions with precise senses, and retain a complete
   decision ledger. Honour declared HTML encodings during acquisition without overriding explicit HTTP charsets.
 - Preserve outer auxiliaries'n question grammar, distinguish perfect\-have from possession, and retain the
-  force of `shall`. Well, keep restless chucking, object\-taking pull the pin, evidentiary establish'n wholehearted devotion
-  separate from misleading slang senses. Jeez Louise, add data\-owned complete\-verb guards'n strip pattern annotations
+  force of `shall`. Keep restless chucking, object\-taking pull the pin, evidentiary establish'n wholehearted devotion
+  separate from misleading slang senses. Stone the flamin' crows, add data\-owned complete\-verb guards'n strip pattern annotations
   consistently before language matching'n model training.
 - Add reviewed contextual imagery, configurable exaggeration/association defaults, and writer\-only
-  suggestions for comparisons needin' semantic or grammatical judgement. Anyway, direct suffixes share riff budgets.
+  suggestions for comparisons needin' semantic or grammatical judgement. Direct suffixes share riff budgets.
 - Revisit all 163 previously unadded/rejected reference\-harvest rows; add 10 entries and 22 contextual images,
   including the correct dishonesty sense of “as crooked as a dog's hind leg”. Preserve the original evidence.
 - Share imagery settings'n suggestions across plans, lookup, CLI, MCP and retelling\-session lookup.
@@ -113,7 +171,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   compatibility smoke checks before release CI, and consolidate duplicate toolkit contract tests.
 
 - Document the portable skill and MCP setup for both Claude Code and Codex; add `.agents/skills` discovery
-  alongside the existin' Claude link. So anyway, keep agent\-neutral retelling briefs, schemas, validation'n dispatch
+  alongside the existin' Claude link. Keep agent\-neutral retelling briefs, schemas, validation'n dispatch
   in `retelling.py`, with API\-specific formats at the client edge'n existin' Python imports supported.
 - Verify cached yarns against current session/dictionary rules before reuse, and report malformed cache
   records with their path. Preserve ordinary generation'n deterministic fallback for stale replies.
@@ -121,7 +179,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   workflow with verification before delivery'n reconcile CLI options, MCP tools and research/licensing docs.
 
 - Remove duplicated ungated infix advice from guide/yarn prompts; swear\-infix guidance now follows placement
-  permission'n the effective multiplier, including zero. Struth, retain both controlled retelling comparisons,
+  permission'n the effective multiplier, including zero. Retain both controlled retelling comparisons,
   including the initial weak\-register result'n the contract\-aware writer revision with remaining limits.
 - Preserve straight double\-quoted documents across paragraph breaks, matching curly quotes. Translation,
   lint, verification'n yarn submission now share that recognition while retaining ordinary dialect checks.
@@ -129,7 +187,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   wording. Strict Markdown permits leadin' garnish at real sentence starts across inline boundaries, with
   whole\-sentence context'n shared casing evidence; suffixes and riffs stay outta partial units.
 - Preserve stressed be\-verbs in fronted predicates'n comparisons; distinguish finite present\-tense clauses
-  from noun, gerund, rellie'n subordinate fragments. Well, guard relative links, technical liberty and
+  from noun, gerund, rellie'n subordinate fragments. Guard relative links, technical liberty and
   everythin'\-relative clauses from wrong\-sense swaps. Decline uncertain\-case prefixes'n pin isolated cases.
 - Speed up semantic concept fallback by scorin' only patterns that satisfy the existin' token\-count and
   character\-length rules, preservin' exact scores, candidate order'n complete translation results.
@@ -153,7 +211,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 - Fix attributive praise escapin' through predicate frames, capitalised determiners hiding compound guards,
   animal nouns being treated as people, and plural clothin' conflicting with retained singular verbs.
-  Bugger me, frame vocabulary is editable in `grammar.yaml`; similarity fallback enforces zero\-width exclusions.
+  Frame vocabulary is editable in `grammar.yaml`; similarity fallback enforces zero\-width exclusions.
 
 - General is the default document type; detection is opt\-in. Named presets and Custom accept the same exact
   behaviour overrides through Python, CLI, MCP'n yarn tools. Explicit values override presets, including
@@ -177,7 +235,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 - Final committed source delta through `c0177d7`: fourth\-pass/dinkum dictionary rounds, held\-word lint,
   original\-context suggestions, literal clause\-subject agreement, form\-aware riffs'n completed research.
   Quote exemptions preserve actual wording/counts; halves require explicit equal shares'n liquid\-pouring
-  complements remain literal. Stone the flamin' crows, three weather golden variants were intentionally reviewed after narrowin' guards.
+  complements remain literal. Three weather golden variants were intentionally reviewed after narrowin' guards.
 
 - Integrated 91 committed source changes through `Rob-Morris/aussiefy@95036e1`, preservin' this repository's
   layered API, validation, documentation'n release contracts. Genre/embellishment, US/UK dialect and offline
@@ -190,7 +248,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 - **Dinkum\-check dictionary round** (`research/dinkum-check-round-2026-10-14/DECISIONS.md`): 67 rows from the
   check's yarn agents reviewed. New: stuff up, stuff {obj} up, a stuff\-up, under the pump \(of a person\), not know
   someone from a bar of soap, spitting \(light rain\), a swag of; pull the pin takes pulling the pin, all over the shop
-  `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Fair dinkum, wrong senses
+  `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Wrong senses
   fixed in data: heaps for counted heaps, every bloke'n his dog and old fella outta the formal genres, littlie
   for a policy's kid, the whole box'n dice for `"everything from"`; rain only for the weather's `"it"` (not fans
   pouring onto a street, tears pouring down, or tea poured\).
@@ -416,7 +474,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 
 - Translate Markdown prose explicitly through the API/toolkit, CLI and MCP while retaining protected
-  source'n stable headings. Report honest per\-unit offsets and explanations; give LLM the flick/model modes
+  source'n stable headings. Report honest per\-unit offsets and explanations; reject LLM/model modes
   before loading or calling. Plain engine/plan behaviour remains unchanged.
 
 - Organise tests by user, functional, architecture'n contributor ownership, with layer indexes and

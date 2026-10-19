@@ -15,6 +15,10 @@ aussiefy translate "I am very tired." --english uk --embellishment troppo --expl
 
 ## Document types and exact behaviour overrides
 
+Fair dinkum, these are behaviour settings, not phrase\-to\-phrase replacements. For additions'n corrections to the
+vocabulary itself, use [dictionary overlays](dictionary.md#dictionary-overlays), which feed the normal
+compiled dictionary'n retain all engine checks.
+
 Document behaviour is explicit. `document_type="general"` / `--document-type general` is the default, with
 Dinkum embellishment. It applies no genre-specific restrictions. `auto` opts into deterministic detection of
 story, personal, news, instructions, technical or official prose. A named type selects that preset directly.
@@ -59,7 +63,38 @@ aussiefy translate "Read the API documentation." --document-type custom --docume
 | `contextual_riffs` | Boolean: offer reviewed meaning-attached imagery; Dinkum/Troppo true, Deadset/Custom false |
 | `riff_exaggeration` | Integer 0–2: maximum contextual-image exaggeration; Dinkum 1, Troppo 2, Deadset/Custom 0 |
 | `riff_association` | Integer 0–1: 0 direct meanings only; 1 also offers explicitly curated related meanings to writers; Troppo 1, others 0 |
+| `narrator_opinion` | Boolean: permit reviewed additions of narrator judgment; Troppo true, Deadset/Dinkum/Custom false; exact overrides win |
+| `solemn_comic_terms` | Boolean: permit comic dictionary terms in solemn source text; Troppo true, Deadset/Dinkum/Custom false; exact overrides win |
 | `profile` | Object: override engine probabilities, limits, spacing and thresholds; omitted keys inherit dial defaults |
+
+### Meaning and narrator opinion
+
+`narrator_opinion` allows editorial colour beyond the input: for example, calling the living "the lucky
+buggers still breathin'" adds the narrator's judgment of good fortune. Deadset and Dinkum keep that addition
+off; Troppo permits it. Custom keeps it off at every embellishment label until explicitly enabled.
+`document_config={"narrator_opinion": true}` enables it for any preset, and `false` disables it at Troppo.
+
+The engine detects source mood independently of document type. `solemn_comic_terms` controls the hard
+restriction on comic dictionary substitutions in solemn prose, such as using “carked it” in a eulogy.
+Set `document_config={"solemn_comic_terms": true}` to permit those candidates at any preset. Other
+meaning, grammar, vulgarity and setting restrictions still apply. This setting does not enable garnish,
+change the detected mood or remove the existing tone preferences for images and closings. The default
+is true at Troppo for deliberate comic performance, and false at Deadset and Dinkum. Custom keeps it
+off at every embellishment label until explicitly enabled. An explicit false disables it at Troppo.
+Other requirements still apply: a sweary term needs its vulgarity cap and `person_swears`, and its grammar,
+meaning and tone must fit. This permission does not enable unrelated garnish or images.
+
+A permission for added opinion never permits dropping a person's role, changing an event or inventing a
+fact. "Brave bastards" describes courageous people, not soldiers in general; "poor buggers" conveys sympathy,
+not that those people died. Their mappings require those meanings in the input. Existing contextual-image
+exaggeration and association retain their separate `riff_exaggeration` and `riff_association` controls.
+
+The engine enforces reviewed entry metadata, not a complete model of every possible semantic change.
+Lookup still explains an explicitly searched term when its opinion effect is disabled, marking it
+`effects_permitted: false`; it withholds that term from meaning-based suggestions. Lint, verify and yarn
+submission check recognised newly introduced effect-bearing terms. An original occurrence may remain,
+but an additional occurrence needs permission. These checks cannot detect arbitrary invented judgments or
+infer every judgment already supported by different wording in the input.
 
 ## Advanced profile tuning
 
@@ -112,7 +147,7 @@ including in Markdown'n when checking a draft. `guide` has no source text, so Au
 General or a named type. Markdown syntax protection is independent of document behaviour.
 
 `english=` / `--english` selects `us`, `uk`, `auto` or `none`. Anyway, the default comes from the profile \(`auto` in
-the bundled profiles\). Jeez, auto uses American spellings to infer US English; ambiguous British words such as
+the bundled profiles\). Listen, auto uses American spellings to infer US English; ambiguous British words such as
 “pants” need `uk`. `none` disables dialect swaps. Plain Australian equivalents \(faucet → tap\) apply at every
 level, separately from slang. `dialect.yaml` owns the vocabulary'n technical/genre exclusions; source
 quotes'n mentioned words have their own protections. POS tags help distinguish nouns, verbs and names;
@@ -121,7 +156,7 @@ the small bundled tagger runs offline without NLTK.
 ## Document modes
 
 The explicit [`--markdown` / `markdown=True`](markdown.md) mode preserves whole links, tables and HTML,
-returns `DocumentResult`, and permits offline ngram/disabled fallback only. Fair dinkum, it resolves genre and English
+returns `DocumentResult`, and permits offline ngram/disabled fallback only. Jeez, it resolves genre and English
 once for the whole document'n retains separate source/output ranges for each rewritten unit.
 
 The imported `--markup markdown|mdx|auto` / `markup=` contract is an **extended document mode**. It uses opaque

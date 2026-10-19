@@ -24,14 +24,16 @@
 
 - id: quid
   form: quid
-  concept: [DOLLAR]
+  concept:
+  - MONEY
+  - STERLING_MONEY
   frame: np
   incoherence: 2
-  replaces: ["dollar !bill|bills|note|notes|sign|signs|store|stores|amount|amounts|value|coin|coins", "buck !=stops|stopped|stop|up"]
+  replaces: []
   plural: quid
-  notes: 'fragment of: not-the-full-quid. Once a pound; now used loosely for a dollar or money generally. Proposed
-    by the fragment pass; reviewed.'
-  gloss: A dollar; money in general.
+  notes: Pounds sterling and loose generic-money usage are supported. Literal dollars and weight units are
+    separate meanings.
+  gloss: A pound sterling; loosely, money.
 
 - id: sav
   form: sav
@@ -53,10 +55,11 @@
 
 - id: stubby
   form: stubby
-  concept: [BEER]
+  concept:
+  - SMALL_BEER_BOTTLE
   frame: np
   incoherence: 2
-  replaces: [small bottle of beer, bottle of beer]
+  replaces: []
   plural: stubbies
   notes: 'fragment of: stubby-short-of-a-six-pack Proposed by the fragment pass; reviewed.'
   gloss: A short, squat bottle of beer.
@@ -160,10 +163,11 @@
 
 - id: a-goer
   form: a goer
-  concept: [VIABLE]
+  concept:
+  - VIABLE
   frame: predicate_adj
   incoherence: 3
-  replaces: [viable, feasible, going ahead, a viable option]
+  replaces: []
   notes: 'fragment of: reckon-a-goer Proposed by the fragment pass; reviewed.'
   gloss: Workable and likely to go ahead.
 
@@ -251,11 +255,13 @@
 
 - id: piss-grog
   form: piss
-  concept: [ALCOHOL]
+  concept:
+  - ALCOHOL
   frame: np
   vulgarity: 2
   incoherence: 3
-  replaces: [booze, alcohol]
+  replaces:
+  - booze
   plural: piss
   notes: 'fragment of: all-piss-and-wind, piss-off. Separate sense: grog, beer, as in ''on the piss''. Proposed
     by the fragment pass; reviewed.'

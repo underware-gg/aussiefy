@@ -466,6 +466,11 @@ def cmd_plan(args) -> int:
 
 # --- the dictionary, and how the engine does on texts ----------------------------------------------------------
 
+def _overlay_summary(change: dict) -> str:
+    return (f"overlay {change['origin']}: {change['operation']} {change['kind']} {change['id']}"
+            + (f" ({', '.join(change['fields'])})" if change.get("fields") else ""))
+
+
 def cmd_validate(args) -> int:
     d = _translator(args).dictionary
     load_genres()   # genres.yaml: raises on a missing setting, genre or key, or an unknown placement
@@ -476,6 +481,8 @@ def cmd_validate(args) -> int:
           f"{len(d.patterns)} trigger patterns, {len(d.phonetic)} phonetic rules")
     print(f"idiom frames: {dict(sorted(by_frame.items()))}")
     print(f"active idioms by minimum level: {dict(sorted(by_level.items()))}")
+    for change in d.overlay_changes:
+        print(_overlay_summary(change))
     unused = [c for c in d.concepts if not any(c in e.concept for e in d.idioms)]
     if unused:
         print(f"concepts with no entries (guard concepts hold a longer match on purpose): {', '.join(unused)}")
@@ -490,6 +497,11 @@ def cmd_show(args) -> int:
     if hits:
         from .dump import dump_entries
 
+        ids = {e.id for e in hits}
+        concepts = {cid for e in hits for cid in e.concept}
+        for change in d.overlay_changes:
+            if change['id'] in (ids if change['kind'] == 'entry' else concepts):
+                print("# " + _overlay_summary(change))
         print(dump_entries(hits).rstrip())
     else:
         print(f"no entry matches {args.query!r} (by id, form or concept)", file=sys.stderr)
@@ -731,7 +743,7 @@ def build_parser() -> argparse.ArgumentParser:
                                 epilog=EPILOG.format(workflow=workflow))
     dictionary = argparse.ArgumentParser(add_help=False)
     dictionary.add_argument("--dict", action="append", default=[], metavar="PATH",
-                            help="extra entry file or directory (repeatable)")
+                            help="extra entry or dictionary overlay file/directory (repeatable; applied in order)")
     level = argparse.ArgumentParser(add_help=False)
     level.add_argument("-l", "--level", type=_dial(parse_level), default=5, metavar="LEVEL",
                        help="how Aussie: 1-5 or tourist, blow-in, local, larrikin, swaggie (default 5, swaggie)")

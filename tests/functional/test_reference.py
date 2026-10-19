@@ -50,7 +50,7 @@ def test_well_formed_at_every_level(translated, name):
 GETTYSBURG_SENSES = {"LONG_AGO", "FATHER", "FREEDOM", "MAN", "WAR", "ENDURE", "FIELD", "DIE", "REASONABLE",
                      "SOLDIERS", "STRUGGLE", "PEOPLE", "WORK", "SANCTIFY", "COMMITTED", "DEVOTION", "RESOLVE",
                      "NATION", "HEREABOUTS", "FOUND", "IN_THE_MIDDLE", "GOD_WILLING", "EQUALITY", "DEAD_PEOPLE",
-                     "ALIVE", "BRAND_NEW", "LIVE_ON", "IN_THE_END", "SECOND_CHANCE", "IN_VAIN"}
+                     "ALIVE", "BRAND_NEW", "LIVE_ON", "IN_THE_END", "SECOND_CHANCE", "IN_VAIN", "BRAVE"}
 
 
 def test_gettysburg_only_its_real_meanings(translated):

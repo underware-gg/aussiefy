@@ -46,12 +46,13 @@ and responses live in `tests/fixtures/changes/`. Each change has:
   `vulgarity` and its `masks`. For a garnish, it's the other garnish of that placement the engine weighed there.
 - `locked`: for a swap, the options the vulgarity cap alone holds back, each tagged with the lowest `vulgarity`
   that lets it in. Selection is run again for the spot with only the cap raised, with every other check
-  unchanged: level, registers, gates, grammar, span, document type, what the text has already said, and variety.
-  So anyway, only an entry rated above the cap in effect is locked \(a raised cap also reweighs, so variety's best few can take
-  in a clean entry, which isn't\). Strewth, gated entries appear only where the policy unlocks them. A locked option is
-  rendered like the others, at the reader's cap: its riffs'n swear infixes are the ones the reader's vulgarity
+  unchanged: level, registers, gates, grammar, span, document settings (including `narrator_opinion`), what
+  the text has already said, and variety.
+  Only an entry rated above the cap in effect is locked (a raised cap also reweighs, so variety's best few can take
+  in a clean entry, which isn't). Gated entries appear only where the policy unlocks them. A locked option is
+  rendered like the others, at the reader's cap: its riffs and swear infixes are the ones the reader's vulgarity
   allows, as the page shows it before it's unlocked. At Dad, "very cold" as fuckin' reads "fuckin'", though a
-  whole re\-translation at Uncle Bob would read "cold as fuck".
+  whole re-translation at Uncle Bob would read "cold as fuck".
 - `removed` (garnish): `{out_span, rendered}`, how its region reads without it. An opener or connective's region
   takes in the next word, whose capital it lowered. Every garnish has one unless it's named under `withheld`.
 - `rule` (phonetic and swear infix): `{id, kind, min_level, before, after}`. `min_level` is the level a drawl or
@@ -67,10 +68,11 @@ and responses live in `tests/fixtures/changes/`. Each change has:
   "Anyway, he's" and the swap's starts at "he's". Removing the connective rewrites "he's", and swappin' in "he
   isn't the full quid" rewrites part of the connective's region, so each covers the other. A garnish region that
   takes in a whole swap is another such pair. Now, a change with no region \(a drawl, an infix, a US word swapped\) covers
-  nothing.
+  sweet bugger\-all.
 
 `entries` maps each entry id the changes name to its card, built as `lookup` builds it under the same dials
-(`aussiefy/cards.py`): riffs under the vulgarity cap where the embellishment takes riffs at all, and a gated
+(`aussiefy/cards.py`): optional `semantic_effects` lists reviewed additions such as `opinion`; riffs appear
+under the vulgarity cap where the embellishment takes riffs at all, and a gated
 entry's flags where the policy unlocked it.
 
 `withheld` lists, as `{id, reason}`, the swaps'n garnish whose renderings are left out, with the pick alone
@@ -95,7 +97,7 @@ emoji sequence can occupy several positions.
 
 ## How a swap is rendered
 
-Fair dinkum, every alternative is rendered as the engine would render it at that spot, with the rest of the output held
+Jeez, every alternative is rendered as the engine would render it at that spot, with the rest of the output held
 fixed. It takes the engine's own path: the form'n the spellin' the text keeps, the article fitted \("a toddler"
 becomes "an ankle biter"\), the entry's own replacement span, a stacked second idiom, a riff, and capitals. The
 sentence's garnish is put back as it was decided. Then the drawl, spellin''n swear infixes run over the spot
@@ -106,7 +108,7 @@ All of a spot's options share one region, so swappin' one in replaces the same s
 where a drawl or infix match crosses its edge \("have not" becoming "haven't"\) or a neighbourin' match's
 lookaround reads it \("won't bloody well have").
 
-Jeez Louise, a garnish's region widens the same way. An opener's or connective's region takes in the next word, whose capital
+Struth, a garnish's region widens the same way. An opener's or connective's region takes in the next word, whose capital
 it lowered, and a word more where a match runs on: in "Well, it is easy", a swap or removal of "Well" replaces
 "Well, it is", since the drawl's "it is" match crosses "it". A region never cuts the words another swap or
 garnish put in: it takes in the whole of one it reaches. Tell ya what, two regions can still share a word they both widened
@@ -147,7 +149,7 @@ word is both listed and authored, it has one mask, at the higher vulgarity.
 
 With `markup`, protected spans \(code, links, tags\) are masked through the pass'n restored after, keeping their
 length, so offsets'n renderings hold. With `markdown=True`, each prose unit's changes are placed in the
-document. Source offsets are document positions. Mate, each renderin' is escaped as its unit is, so custom slang can't
+document. Crikey, source offsets are document positions. Mate, each renderin' is escaped as its unit is, so custom slang can't
 make markup. A whole re\-render with a swap pinned inside its unit reads the same.
 
 ## Cost

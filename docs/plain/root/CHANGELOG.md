@@ -5,8 +5,66 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
-- Retain source research for 480 further baseline entries. Cumulative audit coverage is 700 of the original
-  1,254 entries; the new batches retain qualified recommendations and evidence limits separately from code.
+- Enable comic dictionary terms in solemn text at Troppo; other defaults stay off, with explicit
+  `solemn_comic_terms` overrides taking precedence.
+
+- Prepare bundled model 1.3.0 from fresh evaluation/full fits of the unchanged pinned recipe against the
+  reviewed dictionary. Retain exact input provenance, all prior trials, the unchanged reference rules and
+  33/33 full-model/export checks. Record bounded lookup comparisons and remaining certainty/relevance
+  errors; automatic gap filling stays off. This is a model update, not a package release promotion.
+
+- Make comic substitutions in solemn text explicitly configurable with `solemn_comic_terms`. Preserve
+  detected mood, other dial restrictions and image/closing preferences.
+- Retain protective dictionary guards across coordinated noun phrases, while keeping complete-argument
+  checks for actual replacements; extension entries automatically change the derived guard status.
+- Keep positive physical-solitude meaning in its gloss and explanatory loneliness contrasts in notes,
+  avoiding a contrastive keyword being treated as a synonym. Migrate beer reference labels to their
+  reviewed serving/container senses while preserving queries, ranking rules and required status.
+
+- Add explicit versioned dictionary overlays through existing `--dict` files: add concepts/entries or patch
+  existing records in deterministic order, retaining the normal engine and dial checks. Preserve raw fields,
+  replace named lists/maps rather than append, allow clearing inherited source references, reject malformed
+  or shadowed invalid operations, and report correction origins through validate/show and dictionary metadata.
+  Keep behaviour settings separate from vocabulary corrections; tighten canonical concept and text/boolean
+  validation used by these operations.
+
+- Preserve beer containers, currency, morning references, animal species, gossip grammar, pub mealtimes,
+  dance-event settings and weather identity in the next source-reviewed mappings. Add attested amber fluid
+  for mass beer wording, and explicit mass-noun metadata so goss and kid stakes keep grammatical agreement.
+  Preserve count selectors and named root-beer/ginger-beer identity instead of forcing mass wording into them.
+  Merge the 237 source proposals from batches 5 and 6 alongside the 239 from batches 3 and 4.
+
+- Preserve explicit listener possessives through shared binding and form compatibility, and require a
+  listener for “bend someone's ear”. Add standard bend/bent morphology instead of inventing a listener
+  or producing “bended”.
+- Apply 239 reviewed source records from the next two 120-entry audit batches, retaining historical,
+  component and source-chain evidence limits rather than certifying every trigger or full construction.
+- Separate physical solitude from loneliness, aimless wandering from weary walking, scolding from shouting,
+  exact zero from small amounts, explicit pretence from easy work, and alcoholic drinks from technical alcohol.
+  Require stated swag baggage, mounted-police context, named tree/animal identity and slab construction;
+  preserve bank-full versus overflow events and require explicit twenty-four-unit beer packages. Keep historical eye
+  terminology out of explicitly protected technical, official and instruction domains.
+- Preserve terminal object/NP arguments through shared completion checks; decline partial or coordinated
+  nominal captures, including “as well as” coordination, while retaining finite verb/clause continuations.
+  Require both travel and a swag for waltzing Matilda;
+  exclude minimising nothing-much wording from exact zero.
+- Preserve negative-modal indifference wording and supermarket location nouns through compatible sourced
+  forms. Keep all existing status and flag gates; retained historical terms remain subject to their registers.
+- Regenerate change fixtures from the invoking checkout rather than an editable installation of another worktree.
+
+- Amend the unreleased `changes` contract v1 with optional `semantic_effects` entry-card metadata.
+
+- Make reviewed narrator opinion explicit and configurable: Troppo permits it, Deadset/Dinkum and Custom
+  keep it off unless overridden. Share eligibility across translation, plans, change alternatives and
+  meaning lookup; retain explicit term discovery with effect annotations. Lint, verify and yarn submission
+  check recognised added opinion terms while permitting original occurrences.
+- Preserve roles and meanings: brave bastards describes courageous people, not soldiers generally;
+  poor buggers expresses sympathy for unfortunate people, not death. Add opinion metadata to the living's
+  "lucky buggers" expression rather than silently adding good fortune at every embellishment setting.
+
+- Complete source cross-reference research for all 1,254 original entries. Batches 3–11 add 1,034 records
+  with independent cross-reviews and scoped evidence. Proposed corrections remain separate from applied
+  engine changes; missing exact-expression evidence alone does not prompt removal or a new gate.
 - Separate comradeship, activity starts, rough construction, political people, driving roles and sleeping
   accommodation from broader meanings. Preserve “tell them” references and non-monetary wasted effort;
   merge 110 reviewed source URLs across 85 entry records, retaining the evidence limits in research ledgers.

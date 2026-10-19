@@ -31,7 +31,7 @@ from regen_changes_fixtures import CASES, build as fixture  # noqa: E402
 
 KINDS = json.loads((FIXTURES / "every-kind.json").read_text(encoding="utf-8"))["request"]
 # the contract each VERSION names: its schema's sha256 and its id format. Changing either means a new VERSION.
-CONTRACTS = {1: ("0f752529", "{kind}:{start}-{end}[:{placement or rule}][#{n}]")}
+CONTRACTS = {1: ("4dd5a362", "{kind}:{start}-{end}[:{placement or rule}][#{n}]")}
 LIVELY = dict(level=5, vulgarity=2, embellishment=2, document_config={"profile": {
     "stack": 0.9, "garnish": {"riff": 1.0}, "max_garnish": {"riff": 30}, "garnish_gap": 0, "swearing": {"infix": 6.0}}})
 
@@ -164,7 +164,7 @@ def test_a_changes_renderings_share_its_region(translator):
     ("You are very tired and hungry, and your car is broken.", {**LIVELY, "seed": 0}, "broken",
      {"cactus": "cactus, like a flat-pack in a cyclone"}),
     ("The toilet is broken and I am exhausted.", {**LIVELY, "seed": 2}, "exhausted",
-     {"buggered": "buggered, rooted", "fucked-broken": "fucked, out on my bloody feet"}),
+     {"buggered": "buggered, rooted", "fucked-broken": "fucked, stonkered"}),
     # "very cold" as "cold as fuck": the intensifier rule takes the place of the entry's own word
     ("The weather was very cold and the beer was very good.", {**LIVELY, "seed": 0}, "very cold",
      {"flamin": "cold as fuck", "bloody": "cold as fuck"}),

@@ -64,6 +64,7 @@ An entry is one meaning\-shape:
   replaces: []           # plain-English paraphrases (patterns); drive matching
   status: active         # active | gate | omit
   flags: []              # not_aussie | slur | dubious_meaning | archaic | fabricated | untagged
+  semantic_effects: []   # reviewed additions to the mapped meaning; currently only opinion
   sources: []
   gloss: Not quite sane; eccentric.   # our own words, never a source's
 ```
@@ -90,7 +91,7 @@ Further optional fields:
   on the swear list \(`mask: [wanker]`). Each must be a lower\-case word in one of its forms. They stay outta
   `swears.yaml` 'cause lint reads that list.
 - `profane: false` marks an entry rated 1 or more with no profanity in it: innuendo \("rooted", "have a root"\), an
-  insult \("mongrel"\) or a crude word \("shut your gob"\). Nothing in it's masked. So anyway, a test fails when an active entry
+  insult \("mongrel"\) or a crude word \("shut your gob"\). Not a sausage in it's masked. So anyway, a test fails when an active entry
   rated 1 or more has neither a masked word at its rating nor this mark \([changes](changes.md#masks)).
 - `type: garnish` entries carry `placement` (connective, opener, tag, aside, tail or closer\), an optional
   `when` (the sentence contexts they suit\) and an optional `stretch` (vowel\-stretch the closer, as in
@@ -110,12 +111,22 @@ conditional requests, plus writer\-only hunger suggestions for contexts requirin
 
 ## Slots
 
-
-Slots are `{subj} {be} {have} {do} {poss} {obj}`, plus `{np}`, which captures a short noun phrase'n copies
+Slots are `{subj} {be} {have} {do} {poss} {obj} {objposs}`, plus `{np}`, which captures a short noun phrase'n copies
 it across, and `{will}`, which becomes "will" or "would" by tense. For example, `reckon {np} {have} Buckley's`
 turns "believing her assertion to be simply impossible" into "reckoning her assertion had Buckley's". When an
 entry has no verb of its own to take tense from, it uses the rest of the sentence's tense. Stone the flamin' crows, clause forms can
 also start with "there" ("it's impossible" → "there's no bloody way").
+
+`{objposs}` identifies another participant's possessive. It uses an explicit captured possessive or
+derives one from `{obj}`; it never falls back to the speaking agent. Bloody hell, for example, “she talked his ear
+off” can become “she bent his ear”, while bare “she rambled” supplies no listener. Selected forms must
+retain an explicitly captured object possessive, just as they retain other captured arguments.
+
+`number: mass` marks an uncountable noun, overriding spelling heuristics for forms such as `kid stakes`.
+Crikey, mass terms are withheld for explicitly plural source spans'n counted noun phrases outside the match
+(such as `one warm beer`, `another beer` or `each beer`). Mass\-compatible quantifiers such as `some`,
+`much` and `no` remain valid; the engine doesn't rewrite surrounding agreement to force a term in. `number: plural` retains
+its existin' plural\-only referent meanin', and omitted number metadata remains `any`.
 
 ## Pattern language
 
@@ -138,7 +149,7 @@ In `vp` patterns the head verb matches any inflection, and in `np` patterns the 
 Now, the loader validates whole box'n dice at load time: field types and ranges, kebab\-case ids, known concepts and
 slots, clause forms starting with `{subj}`, `slur` forcing `omit`, no duplicate ids, and that every form
 compiles as a pattern. It collects every error, with file'n id, and raises one `SchemaError` (the CLI exits
-2\). Fair dinkum, it also warns about concepts that can never be detected'n flagged entries left active.
+2\). Strewth, it also warns about concepts that can never be detected'n flagged entries left active.
 `aussiefy validate` runs the same checks'n prints stats. Required concepts, profiles, phonetic, swears,
 genre, riffs'n entries files must be present; malformed YAML and missing files are collected
 with the other errors. String\-list fields require strings, `person` and `stretch` require real booleans,
@@ -149,6 +160,72 @@ and profile garnish keys must name known placements. Mate, the guide validates i
 To extend the dictionary without touching the package, pass `--dict my-entries.yaml` (a file or a directory;
 repeatable) to any command, or `load_dictionary(["my-entries.yaml"])` in Python. A step-by-step guide is in
 [getting-started.md](../user/getting-started.md#add-your-own-entries).
+
+### Dictionary overlays
+
+Anyway, an ordinary entry\-list file remains addition\-only: duplicate IDs are errors. Fair dinkum, a versioned overlay uses the
+same `--dict` option to add or patch vocabulary records explicitly. This changes the dictionary compiled
+for that translator; it doesn't replace strings in rendered output or bypass meaning, grammar or dial checks.
+
+```yaml
+format: aussiefy-dictionary-overlay/v1
+patch_entries:
+  brave-bastards:
+    concept: [BRAVE]
+    replaces: []
+```
+
+Mate, this example records the current bravery\-only mapping'n clears any entry\-specific direct triggers. It
+doesn't make every digger brave. A faulty shared concept trigger must also be corrected in that concept's
+`triggers` field; adding a better candidate alone doesn't disable the old mapping.
+
+The optional sections are `add_concepts` (a map of new IDs to concept records), `add_entries` (an entry list),
+`patch_concepts` and `patch_entries` (maps of existing IDs to changed fields). Additions reject existing IDs;
+patches require a target already present and cannot rename its ID. New records use the ordinary schemas.
+An overlay may add a narrower meaning and move an existing entry to it, with reusable patterns and slots.
+
+Composition order is built\-in records with their source sidecar, then `--dict` arguments in command order.
+Well, a directory expands nonrecursively: sorted `*.yaml` files, followed by sorted `*.yml` files, preservin' the
+existin' custom\-dictionary order. Within an overlay, add concepts, add entries, patch concepts, then patch
+entries. Cross\-record references resolve against the final dictionary before its indexes are built once.
+
+Omitted fields inherit. Supplied fields replace the entire field: `variants: []` clears variants,
+`replaces: []` clears direct triggers, and `triggers: {}` clears a concept's triggers. So anyway, a supplied `triggers`
+map replaces all its old frames; it doesn't append to them. Later files win for fields they explicitly set.
+Invalid operations remain errors even if a later file would overwrite them. Unknown keys, formats, targets
+and duplicate explicit YAML keys are errors. Standard YAML anchors'n merge keys remain supported.
+Normal schema validation applies to every operation'n the final data.
+
+Sources inherit unless explicitly replaced. `sources: []` clears inline and sidecar references for that entry;
+the bundled sidecar is not reapplied afterward. When changing a meaning or form, review whether inherited
+sources still support it. Overlay origin identifies the correction file, not evidence that a term is attested.
+Entries first introduced by extra files inherit applicable sidecar references when they are added, before
+patch operations. This also preserves source inheritance when loading a custom entry inventory with
+`include_builtin=False`; an explicit source patch still wins.
+`aussiefy validate --dict corrections.yaml` reports operations, `show` adds origin comments, and Python callers
+can inspect `dictionary.overlay_changes` and an entry's effective `origin_file`.
+
+V1 overlays cover entries'n concepts. Riffs, imagery, grammar, dial presets and other auxiliary files keep
+their existin' formats; this isn't a general patch format for every package file. Load failures change no
+shipped files, and separate translators retain independent dictionaries.
+
+Behaviour overrides in `document_config` are separate: they choose which engine behaviours a run permits.
+Dictionary overlays provide vocabulary knowledge; behaviour settings control its use. Corpus tests and
+the research/review tools should drive corrections. Shared grammar defects belong in the engine with
+positive and negative regressions, rather than an accumulating list of phrase-specific exceptions.
+
+## Reviewed semantic additions
+
+`semantic_effects: [opinion]` declares that every meaning mapping and form of an entry adds narrator judgment
+beyond its input meaning. The default empty list adds no declared effect; the loader rejects unknown effects.
+The ALIVE mapping for "the lucky buggers still breathin'" adds a judgment of good fortune and requires the
+resolved `narrator_opinion` permission. The ordinary meaning, grammar, vulgarity and tone checks still apply.
+Annotated garnish extensions use the same permission and are included in the existing form index for known-term writer checks.
+
+Annotation is about a mapping, not the mere presence of evaluative words. A synonym for GOOD_PERSON can carry
+praise already established by its input without requiring an added-opinion annotation. Do not combine an
+exact and an opinion-adding sense in one entry under the same metadata. These reviewed annotations cover
+specific entries; they are not an audit or automatic interpretation of every dictionary mapping.
 
 ## Context and source-English data
 
@@ -182,27 +259,27 @@ disappointments” cannot evade it through a predicate frame. Multiword person t
 head a person: “a party animal” does not make an animal a person. Bare person triggers and explicit role nouns
 supply the person's vocabulary. Keep genuinely human singular and plural roles in the list.
 
-Plural\-only clothin' forms remain available where they fit. Crikey, where a singular agreeing verb must remain, the
+Plural\-only clothin' forms remain available where they fit. Where a singular agreeing verb must remain, the
 engine selects a compatible singular alternative rather than introducing “is my togs”.
 
-Well, similarity fallback covers slot\-free predicate patterns with a fixed literal shape. Optional\-word patterns
+Similarity fallback covers slot\-free predicate patterns with a fixed literal shape. Optional\-word patterns
 remain supported by exact trigger matching; they aren't guessed through similarity.
 
 Captured noun arguments need a nominal or supported gerund shape: “try hard cheese” and “try running
-carefully” have objects, while “try hard to finish” doesn't capture “hard” as an object. Strewth, a selected form
+carefully” have objects, while “try hard to finish” doesn't capture “hard” as an object. A selected form
 must retain captured noun/object arguments, either through its slots or identical literal wording. A
 slotless variant therefore can't silently drop the tool from “try the tool”.
 Short degree/nominal ambiguities such as “a bit harder” or “a little water” stay plain; the tagger alone
 can't reliably settle them. Clear nominal constructions such as “a bit of cheese” remain supported.
-Look, for an unanchored terminal object slot, temporal signals distinguish “try every day” from “try every
+For an unanchored terminal object slot, temporal signals distinguish “try every day” from “try every
 tool”. Preposition\-headed phrases such as “at home” aren't objects. Time words used in anchored arguments,
 subjects or nominal compounds remain valid: “give every day a try” and “try every day pass”. Mixed object
-and time captures stay plain without trimmin' their spans. Anyway, this is bounded grammar readin', not a full parse.
+and time captures stay plain without trimmin' their spans. This is bounded grammar readin', not a full parse.
 
 Local subject binding follows supported auxiliary chains'n adverbs, including progressive, perfect and
 question constructions. It stops at another lexical verb or a clause boundary. This makes optional images
 available for “I am feeling hungry” with the correct possessive, without changin' its auxiliary or guessing
-a speaker for “feeling hungry”. Mate, writer\-only rewrites still require a writer to preserve tense'n modality.
+a speaker for “feeling hungry”. Writer\-only rewrites still require a writer to preserve tense'n modality.
 
 ## Drawl comparison
 
@@ -236,7 +313,7 @@ inside a person's name. Changed names without an explicit alias retain their war
 ## Contextual images
 
 `imagery.yaml` is optional for custom data directories. It contains a list of records with unique kebab\-case
-`id`, `text`, nonempty `concepts` and `usage`. Mind ya, concepts must exist in `concepts.yaml`. These include original
+`id`, `text`, nonempty `concepts` and `usage`. Concepts must exist in `concepts.yaml`. These include original
 comparisons harvested from creative writin', not only attested traditional sayings. Entries remain the home
 for reusable slang meanings, such as the `DISHONEST` sense of “as crooked as a dog's hind leg”.
 
@@ -275,3 +352,31 @@ Ambiguous bare “establish” remains unchanged; unambiguous founding phrases r
 “hand on heart”, while wholehearted devotion and bare sincere/solemn manner stay distinct. These are sense
 and grammar rules shared by all document presets; their tests are
 [the fidelity regressions](../../tests/functional/test_fidelity_maintenance.py).
+
+## Reviewed sense boundaries
+
+A shared concept expresses the meaning actually established by its triggers. Physical solitude doesn't
+establish emotional loneliness; a shout doesn't establish a reprimand; very little isn't exactly zero.
+Named tree species, animals, baggage, package contents'n construction methods need explicit support in
+the input. Compatible grammatical entries preserve source modals, object/reference slots'n location nouns
+rather than silently droppin' them. These distinctions live in dictionary data'n reuse the existin'
+meaning'n frame checks; optional writer imagery doesn't redefine a literal mapping.
+
+Historical `sandy blight` remains available for casual eye-inflammation wording. Its concept declares
+`not_in: [technical, official, instructions]`, honoured when those domains appear in resolved
+`document_config.term_domains`. A document classifier supplies presets; no separate hidden type-specific
+rule is added. Exact terms and precise protected wording keep their ordinary document-policy behaviour.
+
+Automatic beer\-package mappings require an explicit twenty\-four\-unit amber fluid package: a 24\-pack, twenty\-four
+pack, or case/carton of 24 beers. A bare case/carton may carry a different count, including in a later
+qualifier, so it stays plain. The slab expression remains in the dictionary'n discoverable by lookup;
+this factual boundary doesn't introduce a quantity parser.
+
+Terminal object'n noun captures must reach a complete argument. A coordinated listener, partial multiword
+name, possessive noun head or of\-qualified name stays plain when the capture can't retain it. A following
+coordinated verb or fresh finite clause remains independent. The same bounded check protects speech,
+scolding'n other verb constructions; it doesn't claim a full parser for arbitrary coordination.
+
+Waltzing Matilda requires an explicitly travellin' swag carrier. Carryin' a swag alone can use the separate
+baggage expression; walking country roads alone doesn't establish baggage. Exact\-zero mappings also
+exclude minimising nothing\-much constructions, which may describe a small amount rather than none.

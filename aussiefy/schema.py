@@ -6,8 +6,9 @@ understands the fields defined here.
 
 from __future__ import annotations
 
+import math
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, fields
 from typing import Any
 
 from .errors import UserError
@@ -29,6 +30,7 @@ REGISTERS = ("current", "dated", "archaic")
 FLAGS = ("not_aussie", "slur", "dubious_meaning", "archaic", "fabricated", "untagged")
 TYPES = ("idiom", "garnish")
 CLASSES = ("lexical", "phrase", "idiom")
+SEMANTIC_EFFECTS = ("opinion",)
 PLACEMENTS = ("connective", "opener", "tag", "aside", "tail", "closer")
 GARNISH_KEYS = (*PLACEMENTS, "riff")   # rate and per-text-limit keys in level profiles
 GENRES = ("story", "personal", "news", "instructions", "technical", "official")   # genre.py reads a text as one
@@ -158,12 +160,12 @@ class Entry:
     status: str = "active"
     flags: tuple[str, ...] = ()
     sources: tuple[str, ...] = ()
+    semantic_effects: tuple[str, ...] = ()  # additions made by every meaning mapping and form of this entry
     gloss: str = ""
     slots: dict[str, str] = field(default_factory=dict)
     type: str = "idiom"
     plural: str | None = None
-    number: str = "any"             # np only: "plural" for a term that names many (the pollies, punters), which
-                                    # doesn't stand for one; "any" for the rest (togs and strides are one garment)
+    number: str = "any"             # np only: plural-only referents, mass nouns, or unrestricted (any)
     weight: float = 1.0
     plain_sense: bool = False       # the form has an ordinary English sense too ("shame", "a bit rough"): lint
                                     # doesn't flag it when gated, since it can't tell the senses apart
@@ -227,12 +229,15 @@ class Concept:
     unless_after: tuple[str, ...] = ()  # complements that do not establish this meaning, across soft punctuation
 
 
+CONCEPT_KEYS = frozenset(f.name for f in fields(Concept)) - {"id"}
+
+
 # Every key an entry may carry, in the order a written entry lists them.
 ENTRY_KEYS = (
     "id", "form", "variants", "spellings", "insult", "concept", "frame", "class", "plural", "number", "slots", "intensity", "vulgarity",
     "mask", "profane", "incoherence", "register", "region", "replaces", "status", "flags", "plain_sense", "type", "placement", "when",
     "stretch",
-    "tone", "weight", "gloss", "notes", "sources", "key_sha256",
+    "tone", "weight", "semantic_effects", "gloss", "notes", "sources", "key_sha256",
 )
 
 
@@ -262,20 +267,25 @@ def _int_range(raw: dict, name: str, lo: int, hi: int, default: int, entry_id: s
 
 def _number(raw: dict, entry_id: str) -> str:
     number = raw.get("number", "any")
-    if number not in ("any", "plural"):
-        raise SchemaError(f"{entry_id}: 'number' must be any or plural, got {number!r}")
+    if number not in ("any", "plural", "mass"):
+        raise SchemaError(f"{entry_id}: 'number' must be any, plural or mass, got {number!r}")
     return number
 
 
-def parse_entry(raw: dict, origin: str = "") -> Entry:
+def validate_entry_id(raw: dict, origin: str = "") -> str:
     if not isinstance(raw, dict):
         raise SchemaError(f"{origin}: entry must be a mapping, got {type(raw).__name__}")
     entry_id = raw.get("id")
     if not entry_id or not isinstance(entry_id, str) or not re.fullmatch(r"[a-z0-9][a-z0-9-]*", entry_id):
         raise SchemaError(f"{origin}: entry id must be kebab-case, got {entry_id!r}")
+    return entry_id
+
+
+def parse_entry(raw: dict, origin: str = "") -> Entry:
+    entry_id = validate_entry_id(raw, origin)
     unknown = set(raw) - set(ENTRY_KEYS)
     if unknown:
-        raise SchemaError(f"{entry_id}: unknown field(s) {sorted(unknown)}")
+        raise SchemaError(f"{entry_id}: unknown field(s) {sorted(unknown, key=str)}")
     form = raw.get("form")
     if not form or not isinstance(form, str):
         raise SchemaError(f"{entry_id}: 'form' is required")
@@ -296,6 +306,9 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
     bad = set(flags) - set(FLAGS)
     if bad:
         raise SchemaError(f"{entry_id}: unknown flag(s) {sorted(bad)}")
+    effects = tuple(dict.fromkeys(_tuple(raw.get("semantic_effects"), "semantic_effects", entry_id)))
+    if set(effects) - set(SEMANTIC_EFFECTS):
+        raise SchemaError(f"{entry_id}: semantic_effects must be from {SEMANTIC_EFFECTS}")
     cls = raw.get("class")
     if cls is not None and cls not in CLASSES:
         raise SchemaError(f"{entry_id}: class must be one of {CLASSES}")
@@ -309,7 +322,7 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
     if set(when) - set(CONTEXTS):
         raise SchemaError(f"{entry_id}: 'when' must be from {CONTEXTS}")
 
-    slots = raw.get("slots") or {}
+    slots = raw.get("slots", {})
     if not isinstance(slots, dict):
         raise SchemaError(f"{entry_id}: 'slots' must be a mapping")
     slots = dict(slots)
@@ -357,15 +370,20 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
             raise SchemaError(f"{entry_id}: mask word {word!r} must be a lower-case word in one of its forms")
 
     weight = raw.get("weight", 1.0)
-    if not isinstance(weight, (int, float)) or weight <= 0:
-        raise SchemaError(f"{entry_id}: weight must be a positive number")
+    if type(weight) not in (int, float) or not math.isfinite(weight) or weight <= 0:
+        raise SchemaError(f"{entry_id}: weight must be a positive finite number")
+    for name in ("gloss", "notes"):
+        if raw.get(name) is not None and not isinstance(raw[name], str):
+            raise SchemaError(f"{entry_id}: '{name}' must be text")
+    if raw.get("plural") is not None and (not isinstance(raw["plural"], str) or not raw["plural"].strip()):
+        raise SchemaError(f"{entry_id}: 'plural' must be non-empty text")
 
     return Entry(
         id=entry_id,
         form=form,
         variants=variants,
         spellings=spellings,
-        insult=bool(raw.get("insult", False)),
+        insult=_bool(raw, "insult", entry_id),
         concept=concept,
         frame=frame,
         intensity=_int_range(raw, "intensity", 1, 5, 3, entry_id),
@@ -377,6 +395,7 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
         status=status,
         flags=flags,
         sources=_tuple(raw.get("sources"), "sources", entry_id),
+        semantic_effects=effects,
         gloss=raw.get("gloss", "") or "",
         slots=dict(slots),
         type=etype,
@@ -411,7 +430,13 @@ def parse_concept(cid: str, raw: dict) -> Concept:
         raise SchemaError(f"concept id {cid!r} is not a string (YAML reads bare YES/NO/ON/OFF as booleans)")
     if not re.fullmatch(r"[A-Z][A-Z0-9_]*", cid):
         raise SchemaError(f"concept id must be UPPER_SNAKE, got {cid!r}")
-    triggers = raw.get("triggers") or {}
+    if not isinstance(raw, dict):
+        raise SchemaError(f"concept {cid}: expected a mapping")
+    if set(raw) - CONCEPT_KEYS:
+        raise SchemaError(f"concept {cid}: unknown field(s) {sorted(set(raw) - CONCEPT_KEYS, key=str)}")
+    if not isinstance(raw.get("description", ""), str):
+        raise SchemaError(f"concept {cid}: description must be text")
+    triggers = raw.get("triggers", {})
     if not isinstance(triggers, dict):
         raise SchemaError(f"concept {cid}: 'triggers' must be a mapping of frame to patterns")
     for frame in triggers:

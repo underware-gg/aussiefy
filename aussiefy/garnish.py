@@ -11,7 +11,7 @@ from .context import CLOSING_TONES_FOR, tone_weight
 from .model import PhoneticRule
 from .policy import Effective, pick_form, roll, weighted_index
 from .schema import DEFAULT_WHEN, Entry
-from .select import policy_rejection
+from .select import policy_rejection, semantic_rejection
 from .text import OPEN_QUOTES, QUOTES, lower_first_word, match_case, sentences, tokenize
 
 VOWEL_RE = re.compile(r"[aeiou]", re.I)
@@ -104,7 +104,8 @@ class GarnishOffer:
 
 def garnish_pool(placement: str, entries: list[Entry], eff: Effective, used: dict[str, int],
                  contexts: set[str] | None = None, exclude: set[str] = frozenset(), mood: str = "light",
-                 swear: bool | None = None, insults: bool = True) -> tuple[list[Entry], list[tuple[str, str]]]:
+                 swear: bool | None = None, insults: bool = True,
+                 narrator_opinion: bool = False) -> tuple[list[Entry], list[tuple[str, str]]]:
     """The garnish entries eligible for a placement, in the order they're weighed, and the rest with why not. swear
     picks the channel: False the level's clean garnish, True the swearing (vulgarity 1 and up), None both. insults:
     whether a garnish may call someone names ("ya galah"; not in a safety notice)."""
@@ -113,7 +114,7 @@ def garnish_pool(placement: str, entries: list[Entry], eff: Effective, used: dic
     for e in entries:
         if e.placement != placement:
             continue
-        reason = policy_rejection(e, eff)
+        reason = policy_rejection(e, eff) or semantic_rejection(e, narrator_opinion=narrator_opinion)
         if reason is None and swear is not None and (e.vulgarity > 0) != swear:
             reason = "clean garnish comes with the level" if not e.vulgarity else "swearing comes with the vulgarity"
         if reason is None and not insults and e.insult:
@@ -145,9 +146,11 @@ def garnish_weights(pool: list[Entry], eff: Effective, swear: bool | None) -> li
 
 def garnish_offer(placement: str, entries: list[Entry], eff: Effective, seed: int, key: tuple,
                   used: dict[str, int], contexts: set[str] | None = None, exclude: set[str] = frozenset(),
-                  mood: str = "light", swear: bool | None = None, insults: bool = True) -> GarnishOffer:
+                  mood: str = "light", swear: bool | None = None, insults: bool = True,
+                  narrator_opinion: bool = False) -> GarnishOffer:
     """What the engine weighs for a placement (garnish_pool, garnish_weights), keyed for its roll and words."""
-    pool, rejected = garnish_pool(placement, entries, eff, used, contexts, exclude, mood, swear, insults)
+    pool, rejected = garnish_pool(placement, entries, eff, used, contexts, exclude, mood, swear, insults,
+                                  narrator_opinion)
     return GarnishOffer(placement, tuple(pool), tuple(garnish_weights(pool, eff, swear)), key, seed, eff, rejected)
 
 

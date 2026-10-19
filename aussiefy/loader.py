@@ -8,6 +8,7 @@ import re
 import shutil
 import tempfile
 from dataclasses import replace
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -22,6 +23,7 @@ from .matcher import Pattern, PatternIndex, compile_pattern
 from .model import Dictionary, LevelProfile, PhoneticRule, RewriteThresholds, SwearProfile, swear_strength
 from .schema import (CLASSES, FRAMES, GARNISH_KEYS, RIFF_TONES, Concept, Entry, Riff, SchemaError, parse_concept,
                      parse_entry, parse_imagery)
+from .vocabulary import Vocabulary
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -30,16 +32,44 @@ DATA_DIR = Path(__file__).parent / "data"
 _YAML_LOADER = getattr(yaml, "CSafeLoader", yaml.SafeLoader)
 
 
-def _read_yaml(path: Path) -> Any:
+@lru_cache(maxsize=2)
+def _unique_loader(base):
+    class UniqueLoader(base):
+        def flatten_mapping(self, node):
+            checked = getattr(self, "_checked_mappings", None)
+            if checked is None:
+                checked = self._checked_mappings = set()
+            # Flattening mutates nodes and may revisit aliases. Check their explicit keys only once,
+            # before inherited keys are inserted; inherited overrides retain standard YAML precedence.
+            if id(node) not in checked:
+                explicit = set()
+                for key_node, _ in node.value:
+                    key = ("<<" if key_node.tag == "tag:yaml.org,2002:merge"
+                           else self.construct_object(key_node))
+                    try:
+                        duplicate = key in explicit
+                    except TypeError as exc:
+                        raise yaml.constructor.ConstructorError(None, None, "unhashable mapping key", key_node.start_mark) from exc
+                    if duplicate:
+                        raise yaml.constructor.ConstructorError(None, None, f"duplicate mapping key {key!r}", key_node.start_mark)
+                    explicit.add(key)
+                checked.add(id(node))
+            return super().flatten_mapping(node)
+
+    return UniqueLoader
+
+
+def _read_yaml(path: Path, *, unique_keys: bool = False) -> Any:
     with path.open(encoding="utf-8") as fh:
-        return yaml.load(fh, Loader=_YAML_LOADER)
+        return yaml.load(fh, Loader=_unique_loader(_YAML_LOADER) if unique_keys else _YAML_LOADER)
 
 
-def _read(path: Path, errors: list[str], empty: list | dict) -> Any:
+def _read(path: Path, errors: list[str], empty: list | dict, *, kinds: tuple[type, ...] | None = None,
+          unique_keys: bool = False) -> Any:
     """A data file's YAML, of the same type as `empty`; a missing file, invalid YAML or the wrong top level is
     collected as an error and reads as `empty`, so one load reports every problem."""
     try:
-        data = _read_yaml(path)
+        data = _read_yaml(path, unique_keys=unique_keys)
     except FileNotFoundError:
         errors.append(f"{path}: missing")
         return empty
@@ -51,8 +81,10 @@ def _read(path: Path, errors: list[str], empty: list | dict) -> Any:
         return empty
     if data is None:
         return empty
-    if not isinstance(data, type(empty)):
-        errors.append(f"{path}: top level must be a {'list' if isinstance(empty, list) else 'mapping'}")
+    kinds = kinds or (type(empty),)
+    if not isinstance(data, kinds):
+        expected = " or ".join("list" if kind is list else "mapping" for kind in kinds)
+        errors.append(f"{path}: top level must be a {expected}")
         return empty
     return data
 
@@ -76,6 +108,25 @@ def _entry_files(paths: Iterable[Path]) -> list[Path]:
 def entry_files(data_dir: str | Path = DATA_DIR) -> list[Path]:
     """The entry files a data directory's dictionary is built from (entries/*.yaml and *.yml)."""
     return _entry_files([Path(data_dir) / "entries"])
+
+
+def _vocabulary(data: Path, extra: Iterable[str | Path], include_builtin: bool,
+                errors: list[str], warnings: list[str]) -> Vocabulary:
+    sources = _read_optional(data / "sources.yaml", errors, {})
+    vocabulary = Vocabulary(_read(data / "concepts.yaml", errors, {}), sources=sources)
+    builtin = [data / "entries"] if include_builtin else []
+    for directory in builtin:
+        if not directory.is_dir():
+            errors.append(f"{directory}: missing")
+    for path in _entry_files(d for d in builtin if d.is_dir()):
+        vocabulary.add_entries(_read(path, errors, []), path.name, errors)
+    for path in _entry_files(Path(p) for p in extra):
+        raw = _read(path, errors, [], kinds=(list, dict), unique_keys=True)
+        vocabulary.apply(raw, str(path), errors)
+    for eid in sources:
+        if eid not in vocabulary.entries:
+            warnings.append(f"sources.yaml: unknown entry {eid!r}")
+    return vocabulary
 
 
 def _thresholds(level: int, raw: dict) -> RewriteThresholds:
@@ -123,10 +174,11 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
     errors: list[str] = []
     warnings: list[str] = []
 
+    vocabulary = _vocabulary(data, extra, include_builtin, errors, warnings)
     concepts: dict[str, Concept] = {}
-    for cid, raw in _read(data / "concepts.yaml", errors, {}).items():
+    for cid, raw in vocabulary.concepts.items():
         try:
-            concepts[cid] = parse_concept(cid, raw or {})
+            concepts[cid] = parse_concept(cid, {} if raw is None else raw)
         except SchemaError as exc:
             errors.append(str(exc))
 
@@ -212,27 +264,20 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         except (KeyError, TypeError, ValueError, re.error) as exc:
             errors.append(f"phonetic rule {raw!r}: {exc}")
 
-    builtin = [data / "entries"] if include_builtin else []
-    for missing in (d for d in builtin if not d.is_dir()):
-        errors.append(f"{missing}: missing")
-    sources = [d for d in builtin if d.is_dir()] + [Path(p) for p in extra]
     entries: dict[str, Entry] = {}
-    for path in _entry_files(sources):
-        for raw in _read(path, errors, []):
-            try:
-                entry = parse_entry(raw, origin=path.name)
-            except SchemaError as exc:
-                errors.append(f"{path.name}: {exc}")
-                continue
-            if entry.id in entries:
-                errors.append(f"{path.name}: duplicate id {entry.id!r} (first in {entries[entry.id].origin_file})")
-                continue
-            for c in entry.concept:
-                if c not in concepts:
-                    errors.append(f"{entry.id}: unknown concept {c!r} (add it to concepts.yaml)")
-            if entry.status == "active" and {"not_aussie", "fabricated", "dubious_meaning"} & set(entry.flags):
-                warnings.append(f"{entry.id}: flagged {list(entry.flags)} but status is active")
-            entries[entry.id] = entry
+    for eid, raw in vocabulary.entries.items():
+        origin = vocabulary.origins[eid]
+        try:
+            entry = parse_entry(raw, origin=origin)
+        except SchemaError as exc:
+            errors.append(f"{origin}: {exc}")
+            continue
+        for c in entry.concept:
+            if c not in concepts:
+                errors.append(f"{entry.id}: unknown concept {c!r} (add it to concepts.yaml)")
+        if entry.status == "active" and {"not_aussie", "fabricated", "dubious_meaning"} & set(entry.flags):
+            warnings.append(f"{entry.id}: flagged {list(entry.flags)} but status is active")
+        entries[entry.id] = entry
 
     # riffs.yaml: the images a term calls up (wheelie bin -> bin chickens fightin' over the scraps), rated for
     # swearing word by word from swears.yaml so the vulgarity cap applies to them too
@@ -276,21 +321,15 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         except SchemaError as exc:
             errors.append(f"imagery.yaml: {exc}")
 
-    # sources.yaml: extra source URLs per entry id, maintained by the scrape review tool
-    # so hand-curated files are never rewritten.
-    for entry_id, urls in _read_optional(data / "sources.yaml", errors, {}).items():
-        if entry_id not in entries:
-            warnings.append(f"sources.yaml: unknown entry {entry_id!r}")
-            continue
-        merged = tuple(dict.fromkeys(entries[entry_id].sources + tuple(urls or ())))
-        entries[entry_id] = replace(entries[entry_id], sources=merged)
-
     patterns: list[Pattern] = []
+    replacement_concepts = {cid for e in entries.values() if e.type == "idiom" and e.status != "omit"
+                            for cid in e.concept}
     for c in concepts.values():
         for frame, texts in c.triggers.items():
             for t in texts:
                 try:
-                    patterns.append(compile_pattern(t, frame, (c.id,), 3))
+                    patterns.append(replace(compile_pattern(t, frame, (c.id,), 3),
+                                            guard=c.id not in replacement_concepts))
                 except ValueError as exc:
                     errors.append(f"concept {c.id}: {exc}")
     for e in entries.values():
@@ -304,7 +343,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
 
     forms: list[Pattern] = []
     for e in entries.values():
-        if e.type != "idiom" or e.status == "omit":
+        if (e.type != "idiom" and not e.semantic_effects) or e.status == "omit":
             continue
         for f in e.all_forms:
             try:
@@ -327,7 +366,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
     if errors:
         raise SchemaError("dictionary failed validation:\n  " + "\n  ".join(errors))
     return Dictionary(entries, concepts, profiles, phonetic, prof_raw.get("policy", {}), patterns,
-                      PatternIndex(patterns), PatternIndex(forms), swears, dialect, warnings, swearing, genres, pos.lower_words(), person_roles, adjective_nouns, name_aliases, tuple(imagery))
+                      PatternIndex(patterns), PatternIndex(forms), swears, dialect, warnings, swearing, genres, pos.lower_words(), person_roles, adjective_nouns, name_aliases, tuple(imagery), tuple(vocabulary.changes))
 
 
 def write_validated(data_dir: str | Path, files: dict[str, str], extra: Iterable[str | Path] = ()) -> Dictionary:

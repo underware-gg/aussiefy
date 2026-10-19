@@ -44,8 +44,14 @@ All options are in the [CLI reference](cli.md). State lives in `$AUSSIEFY_HOME` 
 
 ## Current measurement
 
-The [2026-10-15 maintenance check](../../../research/maintenance-check-2026-10-15/README.md) repeats the bundled
-1.2.0 reference and gap benchmarks without retraining, and records actual toolkit lookups separately. All 33
-required raw-model references pass; 16 known failures remain. A larger dictionary changes benchmark difficulty,
-so these numbers do not establish improvement against the older training reports. The current weights remain
-bundled; automatic gap filling remains off by default.
+The [2026-10-19 retrain](../../../research/semantic-model-2026-10-19/README.md) prepares model 1.3.0 against
+the reviewed dictionary using the unchanged pinned recipe. The full-data fit and exported package reader
+both pass all 33 required raw-model checks. The evaluation fit passes 32/33; its separate girl-query failure
+is retained. Existing reports and the earlier
+[maintenance check](../../../research/maintenance-check-2026-10-15/README.md) remain historical evidence.
+
+The common-current-dictionary lookup comparison covers 18 fixed historical queries plus eight source-audit
+queries. It does not establish unseen generalisation or universal superiority: probably can still suggest
+defo, wake-up results can suggest hurry, and pub can outrank coldie for the cold-one query. Updated beer
+reference labels follow corrected meanings without changing queries, ranking rules or required status.
+Automatic gap filling remains off by default.

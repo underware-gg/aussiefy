@@ -48,7 +48,7 @@ This gives the most natural result: it can change tense, pace'n dialogue, which 
 
 ## If Claude isn't available
 
-Nothing is lost: each mode falls back to the engine's own draft, prints the reason on stderr \(for example
+Not a sausage is lost: each mode falls back to the engine's own draft, prints the reason on stderr \(for example
 `[yarn] kept draft: ...`) and exits with code 4.
 
 Accepted sentence rewrites and yarns are cached in `cache/rewrite/` and `cache/yarn/` under

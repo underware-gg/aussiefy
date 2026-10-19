@@ -24,6 +24,8 @@ DOCUMENT_CONFIG is the effective behaviour contract and takes precedence over ge
 guidance. Use only the listed garnish placements; offer no talker's openings when openings is false. When
 keep_quotes is true, preserve quoted wording exactly. When person_swears is false, do not replace neutral
 people with swears. Keep terms protected by term_domains and datelines protected by dateline_context unchanged.
+When narrator_opinion is false, add no narrator judgment, praise, pity, luck or blame absent from the original.
+When true, those reactions may colour what is already there; preserve every role, identity, event and claim.
 Respect check_length/max_length and keep_share as configured. No optional Custom behaviour is implied by its
 embellishment label. Preserve every original fact and the selected markup regardless of the type.
 
@@ -167,10 +169,12 @@ def brief(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | st
     setting = context.setting(the_plan["embellishment"])
     guide = harness.guide(level=level, vulgarity=vulgarity, embellishment=setting.step, document_type=context.name, document_config=document_config, translator=tr)
     # each phrase once, with what it stands for, so a wrong sense shows at a glance
-    phrases: dict[str, dict[str, str]] = {}
+    phrases: dict[str, dict[str, Any]] = {}
     for p in the_plan["planned"]:
         phrases.setdefault(form_key(p["aussie"]), {"phrase": p["aussie"], "replaces": p["original"],
-                                                     "means": p["gloss"]})
+                                                     "means": p["gloss"],
+                                                     **({"semantic_effects": p["semantic_effects"]}
+                                                        if p.get("semantic_effects") else {})})
     planned = [p["phrase"] for p in phrases.values()]
     guide_text = "\n".join([f"Voice: {guide['voice']}", f"Language: {guide['language']}", "Craft:", guide["craft"]])
     payload = {"ORIGINAL": text, "LEVEL": guide["level"], "VULGARITY": guide["vulgarity"],

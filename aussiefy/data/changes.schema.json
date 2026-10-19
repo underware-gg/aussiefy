@@ -155,7 +155,8 @@
         "notes": {"type": "string"},
         "sources": {"type": "array", "items": {"type": "string"}},
         "replaces": {"type": "array", "items": {"type": "string"}},
-        "gated": {"type": "array", "items": {"type": "string"}}
+        "gated": {"type": "array", "items": {"type": "string"}},
+        "semantic_effects": {"type": "array", "items": {"enum": ["opinion"]}, "uniqueItems": true}
       }
     }
   }

@@ -551,12 +551,13 @@
   gloss: The living.
 - id: poor-buggers
   form: poor buggers
-  concept: [DEAD_PEOPLE]
+  concept: [UNLUCKY_PERSON]
   frame: np
   vulgarity: 1
   incoherence: 2
   plural: poor buggers
-  gloss: Those who died; said with sympathy.
+  number: plural
+  gloss: People deserving sympathy for their bad luck or hardship.
 - id: hand-on-heart
   form: hand on heart
   concept: [SINCERELY]
@@ -681,12 +682,16 @@
   gloss: For no return or result, whether money or wasted effort.
 - id: the-lucky-buggers-still-breathin
   form: the lucky buggers still breathin'
+  variants: [the lucky buggers still breathing]
+  spellings: [the lucky buggers still breathing]
+  semantic_effects: [opinion]
   concept: [ALIVE]
   frame: np
   vulgarity: 1
   incoherence: 4
   plural: the lucky buggers still breathin'
-  gloss: The living.
+  gloss: The living, with the narrator judging them fortunate.
+  notes: Adds a judgment of good fortune; does not establish that the people survived a particular event.
 - id: old-fella
   form: old fella
   concept: [FATHER]
@@ -696,13 +701,13 @@
   gloss: Father; in the plural, the old generation.
 - id: brave-bastards
   form: brave bastard
-  concept: [SOLDIERS]
+  concept: [BRAVE]
   frame: np
   vulgarity: 1
   incoherence: 2
   plural: brave bastards
   notes: Affectionate. In Australian usage "bastard" is often admiring.
-  gloss: A courageous soldier.
+  gloss: A courageous person; said admiringly.
 
 # --- the f-word (vulgarity 2: common, not polite) and the c-word (vulgarity 3) ---------
 # The c-word is only reachable when asked for (vulgarity 3, tradie); no level defaults to it. Both are far more offensive in the US;

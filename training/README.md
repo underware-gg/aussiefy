@@ -76,7 +76,7 @@ The work folder (`$AUSSIEFY_HOME/train/X.Y.Z`) holds the intermediate models and
 ### Versioning
 
 `MAJOR.MINOR.PATCH`, shown by `aussiefy embedder status` and in the embedder's name
-(`bundled:aussie-static-1.2.0`).
+(`bundled:aussie-static-1.3.0`).
 
 - **MAJOR**: a change the reading code or the cut-offs' meaning depends on: the export format, the
   tokenizer, the base model, or the dimensions. It needs a matching change to `aussiefy/static.py`.
@@ -268,6 +268,25 @@ passes 33/33. The recipe, cut-offs and required checks remain unchanged. See the
 [maintenance evidence](../research/maintenance-2026-10-17/model-maintenance.md) for both trials, fixed-query
 lookup comparisons and the separate meaning-specific training questions.
 
+## Reviewed dictionary retrain, 19 October 2026
+
+Model 1.3.0 is prepared on `dev` after the source-meaning corrections. It uses the unchanged pinned recipe,
+base revision and cutoffs, with fresh evaluation and full-data fits. No earlier checkpoint is reused.
+The full fit and exported package reader both pass **33/33** required references; the evaluation fit passes
+32/33, with its girl failure retained. Correct beer-serving/container labels follow the old checks' meanings
+without changing their queries, top-three rule or required status. All historical reports remain unchanged.
+
+The full fit uses 1,206 entries, 12,577 positive pairs, 6,910 wrong-sense pairs and 3,775 opposite pairs.
+The dictionary could not be committed while its required model gate failed, so the driver records exact
+dirty-input hashes and verifies that every frozen input stayed unchanged throughout both fits. The model,
+reviewed data and report must land together after the remaining repository gates pass.
+
+[Execution and lookup evidence](../research/semantic-model-2026-10-19/README.md) retains all six evaluation
+setups and a current-dictionary comparison on the fixed 18-query cohort plus eight audit queries. These
+bounded checks do not demonstrate unseen generalisation. Probably-to-defo and wake-up-to-hurry suggestions
+remain wrong; pub still ranks above coldie for the cold-one query. A known negative-category check passing
+does not prove that every offered alternative has the intended meaning. Automatic gap filling stays off.
+
 ## Ideas for the next version
 
 - Break the chains between concepts that multi-concept entries create. *stuffed* (TIRED, BROKEN, FULL) and *full
@@ -294,6 +313,7 @@ lookup comparisons and the separate meaning-specific training questions.
 | (1.2.0-rc1) | 2026-10-11 | **not released**: retrained on the gap-fill dictionary; blocked by the reference gate (rolling in cash, under the weather, a good mate of mine) and real-lookup regressions | 0.30 / 0.66 / 0.28; opposites offered 0.06 (larger dictionary: not comparable with the rows above) | 27/29 |
 | 1.2.0 | 2026-10-11 | the gap-fill dictionary (681 entries, 353 concepts), WordNet synonyms (first sense, 6 per trigger), a 0.7 / 0.3 blend of tuned and distilled vectors, wrong senses pushed from glosses too, and five glosses no longer using "great" for excellent. Gap benchmark: right top-1 **0.37**, filled right 0.23, filled wrong 0.09, everyday filled 0.04 (rc1: 0.30 / 0.09 / 0.16) | 0.26 / 0.62 / 0.34; opposites offered 0.09 | 29/29 (and "having a chinwag" fixed); evaluation-run model 27/29 |
 | (1.3.0-trial) | 2026-10-11 | **not released**: retrained on the classics dictionary (893 entries, 493 concepts), with and without `trigger_concepts: first`; blocked by "girl" ranking WOMAN first | 0.25 / 0.57 / 0.35 (first: 0.27 / 0.56 / 0.36); gap right@1 0.42 (first: 0.37) | 29/30 (both) |
+| 1.3.0 (prepared on dev) | 2026-10-19 | Reviewed dictionary, fresh fits, unchanged pinned recipe and cutoffs; 1,206 full-fit entries; scoped input/lookup evidence retained | 0.266 / 0.552 / 0.311; opposites offered 0.064; current difficulty differs from historical rows | 33/33 full fit and package reader; evaluation 32/33 |
 
 ## Maintenance measurement, 2026-10-15
 

@@ -124,6 +124,11 @@ tr.translate("I'm extremely busy.", level=4).text
 lookup("very tired", translator=tr)
 ```
 
+To correct an existing entry or meaning pattern without editing the package, use a versioned
+[dictionary overlay](../functional/dictionary.md#dictionary-overlays) with the same `--dict` option.
+Explicit patch operations replace the named fields; simply adding another entry leaves old candidates
+available. `validate` and `show` report which overlay made each correction.
+
 ## Use it from Python
 
 ```python

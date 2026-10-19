@@ -25,15 +25,16 @@ has no slang or level logic of its own.
    resolution. Shared clause readin' in `context.py` supplies complement boundaries, local auxiliary\-chain
    subjects'n noun\-argument shape, using the sentence's existin' POS tags.
 3. **Select** (`select.py`). Filter candidates by concept, frame compatibility, level, vulgarity,
-   register, region, status'n slot availability. Fair dinkum, a clause idiom needs a subject, and a person idiom needs
-   a person \("the plan is crazy" never gets a roo loose in its top paddock\). Each surviving candidate is
-   weighted by intensity fit, direct match, source count, repeat penalty'n the level's probability for
-   its class, with a lean towards rude candidates set by the vulgarity'n the existin' tone/mood fit.
-   Forms must preserve captured arguments; a syntactically available slotless variant can't discard an
-   object. Tone fit is applied before variety limits, using the same weight as riffs: off\-mood candidates
-   receive a quarter weight, while existin' hard exclusions \(such as comic terms in solemn prose\) remain.
-   Anyway, one seeded roll decides whether to
-   substitute'n another picks the candidate.
+   register, region, status and slot availability. A clause idiom needs a subject, and a person idiom needs
+   a person ("the plan is crazy" never gets a kangaroo loose in its top paddock). Each surviving candidate is
+   weighted by intensity fit, direct match, source count, repeat penalty and the level's probability for
+   its class, with a lean towards rude candidates set by the vulgarity and the existing tone/mood fit.
+   Forms must preserve captured arguments; a syntactically available slotless variant cannot discard an
+   object. Tone fit is applied before variety limits, using the same weight as riffs: off-mood candidates
+   receive a quarter weight. Comic terms in solemn prose are excluded when `solemn_comic_terms` is false;
+   Troppo enables that permission by default, and exact overrides win.
+   One seeded roll decides whether to
+   substitute and another picks the candidate.
 4. **Realise** (`realise.py`, `morph.py`). Fill slots'n fix agreement: "are you crazy" becomes "do you
    have a kangaroo loose in your top paddock", "was" becomes "had", "lost his temper" becomes "spat the
    dummy" and "overreacting" becomes "carrying on like a pork chop". Crikey, this step also handles plurals
@@ -45,7 +46,7 @@ has no slang or level logic of its own.
      questions, exclamations, or "you".
    - **The pub aside** ("no matter what some drongo reckons"\) goes only after an opinion.
    - **Asides** ("What a dog's breakfast!", "Gawd help us."\) close a stanza of a chant, and rhetorical
-     follow\-ups \("Search me."\) answer the narrator's own question. Far out, in a story the engine can't judge
+     follow\-ups \("Search me."\) answer the narrator's own question. Fair dinkum, in a story the engine can't judge
      whether "What a shocker!" fits what just happened, so asides stay outta story narration.
    - **Riffs** (`aussiefy/data/riffs.yaml`): at level 5 a swapped term may bring its image along where it ends a
      clause, once per sentence'n twice per text: "Wheelie bins, overflowin', bin chickens fightin' over
@@ -61,7 +62,7 @@ has no slang or level logic of its own.
    Jeez, the swear channel adds sweary openers, asides, tags, tails'n closers at the vulgarity's own rate, apart
    from the level's clean garnish \(see [the dials](../functional/dials.md#how-swearing-comes)). Repeats and
    synonym pile\-ups are held back. The step also stacks idioms on predicate slots'n applies the drawl rules
-   in `aussiefy/data/phonetic.yaml`, including the swear infixes and Australian spelling. What kind of sentence
+   in `aussiefy/data/phonetic.yaml`, including the swear infixes and Australian spelling. Bloody hell, what kind of sentence
    each one is \(dialogue, a question, narration ending on a deed\) and the text's mood \(solemn, dark or light\)
    come from `context.py`.
 
@@ -90,3 +91,13 @@ choices'n garnish state across its prose units, retains source sentence position
 suffix garnish'n riffs on incomplete fragments, while allowing a leadin' opener/connective only at a
 known source sentence start. Extended markup sends one masked document through the pipeline with opaque
 protected spans. See [translation controls](../functional/translation-controls.md).
+
+## Added narrator opinion
+
+Resolved embellishment includes `narrator_opinion`: false at Deadset/Dinkum and for unconfigured Custom,
+true at Troppo, with exact overrides applied last. `select.semantic_rejection` checks reviewed Entry
+`semantic_effects` at canonical translation eligibility and dictionary-meaning offers; garnish extensions
+use the same rule. Tone remains a fit weight and separate hard exclusions, not a permission for added meaning.
+Exact term discovery retains disabled terms with an explanation. Cards and plan payloads expose annotations;
+yarn's brief shares the resolved setting, and known-term lint checking also reaches verify and submission.
+Meaning mappings preserve facts and roles independently of the editorial permission.

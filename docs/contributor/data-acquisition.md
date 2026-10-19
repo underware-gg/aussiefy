@@ -160,9 +160,49 @@ Both appear in the brief's sample output, so `--unlock not_aussie,fabricated` br
 
 ## After changing the dictionary
 
+Use corpus examples to identify whether a correction belongs in a shared grammar rule, a concept's meaning
+patterns, or an entry's forms and constraints. Fix broadly applicable errors in the canonical data or engine;
+an overlay is useful for testing a reviewed correction and for local vocabulary policies, not a replacement
+for improving the bundled dictionary. The [runtime overlay format](../functional/dictionary.md#dictionary-overlays)
+can add or patch concepts and entries through the existing loader. It is separate from research-round
+`concept_fixes.yaml`, whose workflow writes reviewed changes back to the maintained source files.
+
+Now, for each proposed correction, keep a positive example, a close wrong\-sense example'n a grammar variant
+such as tense, plural, negation or a changed participant. Check candidate eligibility as well as selected
+outputs, so a faulty route is removed rather than merely losin' one seeded roll. Run lookup, plans'n change
+alternatives over the same loaded dictionary where affected. Don't copy entire reference queries into
+special\-case mappings to raise a benchmark score; existin' research\-round checks reject that practice.
+
 1. `aussiefy validate` must pass with no new warnings.
 2. Run the test suite, regenerate the golden corpus if translations changed on purpose, and review its diff
    ([testing](testing.md)).
 3. The bundled embeddin' model is now `stale`; retraining it's a separate release, described in
    [training/README.md](../../training/README.md).
 4. Record the change under `[Unreleased]` in `CHANGELOG.md`.
+
+## Integrating a source-meaning audit
+
+So anyway, research under `research/slang-meanings-2026-10-19-batch3/` and `batch4/` distinguishes selected meanings,
+complete constructions, components, historical contexts, source chains'n access limitations. Their 239
+proposed source records are merged into `aussiefy/data/sources.yaml` without replacing existin' URLs.
+A source on a public card supports that reviewed scope; it doesn't certify every trigger, every form,
+current frequency or Australian exclusivity. Multiple editions or mirrors of one work remain one witness.
+
+Anyway, apply clear lexical distinctions as dictionary concepts'n compatible forms, with positive eligibility and
+negative meaning tests. The latest integration preserves quantities, location nouns, physical reference,
+polarity'n activity purpose without slang\-specific engine checks. New fruit\-and\-veg location phrases cite
+the food component'n explicitly state that their location wording is compositional, rather than claiming
+independent fixed\-idiom attestation. Existin' gates'n flags stay in force.
+
+The `give best` object\-binding availability question remains a separate grammatical investigation.
+Listener\-role handling now binds the listener explicitly'n declines partial terminal arguments rather than
+borrowing the speaker or dropping another coordinated listener.
+
+The next reviewed mappings also distinguish cans, small bottles'n unquantified amber fluid; keep stated
+currency, animal species, meal time'n event identity. Information nouns and have a goss activities 'ave
+separate grammatical forms. Uncountable terms use `number: mass`, so spellin' alone doesn't classify
+`kid stakes` as plural'n a plural subject doesn't become `the goss were`. Ambiguous source plurals
+are withheld rather than repaired by rewriting neighbouring agreement. Count selectors, includin' numerals
+across modifiers, remain countable; mass\-compatible quantifiers'n container complements remain available.
+`Amber fluid` has edited Australian\-English mass\-noun evidence; container\-specific terms remain restricted
+to their source shapes. Longer named\-beverage concepts preserve compounds such as root beer'n ginger beer.

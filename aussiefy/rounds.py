@@ -37,7 +37,7 @@ import yaml
 from .errors import UserError
 from .loader import _YAML_LOADER, DATA_DIR, load_dictionary, write_validated
 from .model import Dictionary
-from .schema import Concept, ENTRY_KEYS, SchemaError, parse_concept, parse_entry
+from .schema import CONCEPT_KEYS, Concept, ENTRY_KEYS, SchemaError, parse_concept, parse_entry
 from .terms import form_key
 
 
@@ -293,9 +293,6 @@ def _trigger_rejection(phrase: str, forms: set[str], queries: set[str], own_form
     if key in queries:
         return "copies a reference query"
     return None
-
-
-CONCEPT_KEYS = frozenset(f.name for f in fields(Concept)) - {"id"}
 
 
 def _concept_patch(raw: dict, where: str) -> dict:

@@ -1,5 +1,5 @@
-# The training toolchain the current version was built with (Python 3.13, x86_64, CPU). Only maintainers
-# retraining the bundled model need it; aussiefy itself never imports any of this.
+# Pinned maintainer training dependencies. Each build's actual Python and package versions are recorded
+# in aussiefy/data/model/meta.json and training/reports/. aussiefy itself never imports these dependencies.
 #   python3 -m venv .venv && .venv/bin/pip install torch==2.14.1 --index-url https://download.pytorch.org/whl/cpu
 #   .venv/bin/pip install -r training/requirements.txt -e .
 # WordNet 3.0 data for nltk (a direct download: nltk's own downloader refuses to go through a proxy):

@@ -50,6 +50,7 @@ class Pattern:
     before_modifier: bool = False  # "^adj": the next word must be an adjective or adverb ("really cold", not
                                    # "really think" or "really it was")
     clause_end: bool = False      # "^end": no following complement; adverbial tails may precede the boundary
+    guard: bool = False           # a concept without replacement entries only protects the matched span
 
     @property
     def slots(self) -> set[str]:

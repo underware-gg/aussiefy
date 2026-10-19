@@ -212,7 +212,8 @@
   - https://www.urban.com.au/news/nostalgic-fibro-holiday-home-shacks-from-75000-plus
 - id: sparrows-fart
   form: at sparrow's fart
-  spellings: [at sparrow fart]
+  spellings:
+  - at sparrow fart
   variants:
   - sparrow's fart
   - at sparrow fart
@@ -224,11 +225,7 @@
   profane: false
   incoherence: 4
   register: current
-  replaces:
-  - at dawn
-  - at the crack of dawn
-  - first thing in the morning
-  - very early
+  replaces: []
   gloss: At the crack of dawn.
   sources:
   - https://aussieenglish.com.au/?p=153775
@@ -312,7 +309,8 @@
   gloss: Someone who habitually spins lies or exaggerates.
 - id: a-bitzer
   form: a bitzer
-  spellings: [a bitser]
+  spellings:
+  - a bitser
   variants:
   - a bitser
   concept:
@@ -322,11 +320,7 @@
   vulgarity: 0
   incoherence: 4
   register: current
-  replaces:
-  - a mongrel dog
-  - a mutt
-  - a mixed breed
-  - a crossbreed
+  replaces: []
   gloss: A mixed-breed dog of no particular pedigree.
   sources:
   - https://en.wiktionary.com/wiki/bitzer
@@ -396,10 +390,8 @@
   - dubious_meaning
   gloss: A woman's husband or partner.
 - id: a-goss
-  form: a goss
-  variants:
-  - the goss
-  - have a goss
+  form: the goss
+  variants: []
   concept:
   - GOSSIP
   frame: np
@@ -409,10 +401,11 @@
   register: current
   replaces:
   - the latest gossip
-  gloss: A gossip session; the latest about people.
+  gloss: Gossip or the latest information about other people; the session sense is separate.
   sources:
   - https://en.wiktionary.com/wiki/goss
   - https://www.macquariedictionary.com.au/?p=10949
+  number: mass
 - id: a-durry
   form: a durry
   spellings: [a durrie]
@@ -613,7 +606,7 @@
   - biffo
   - a biffo
   concept:
-  - FIGHT
+  - PHYSICAL_FIGHT
   frame: np
   intensity: 3
   vulgarity: 0
@@ -701,20 +694,16 @@
   - https://macquariedictionary.com.au/?p=10941
 - id: a-counter-lunch
   form: a counter lunch
-  variants:
-  - a counter meal
+  variants: []
   concept:
-  - PUB_MEAL
+  - PUB_LUNCH
   frame: np
   intensity: 3
   vulgarity: 0
   incoherence: 3
   register: dated
-  replaces:
-  - a pub lunch
-  - a pub meal
-  - a bistro meal
-  gloss: A cheap, hearty pub meal.
+  replaces: []
+  gloss: A lunch served at the pub counter; other mealtimes remain distinct.
   sources:
   - https://grantourismotravels.com/the-renaissance-of-the-great-australian-pub-counter-meal/
   - https://www.ipswichfirst.com.au/counter-meals-are-they-a-thing-of-the-past
@@ -750,7 +739,6 @@
   incoherence: 4
   register: current
   replaces:
-  - a rave
   - an outdoor rave
   - a bush rave
   gloss: An outdoor electronic dance party, often in the bush.
@@ -769,7 +757,7 @@
   incoherence: 3
   register: current
   replaces:
-  - talk {poss} ear off
+  - talk {objposs} ear off
   - talk at {obj}
   gloss: Talk at someone non-stop.
   sources:
@@ -1573,7 +1561,7 @@
   - https://www.switchliving.com.au/student-guide/g-day-mate-a-guide-to-aussie-slang/
   - https://www.remitly.com/blog/immigration/australian-idioms-and-expressions/
 - id: bend-ear
-  form: bend {poss} ear
+  form: bend {objposs} ear
   concept:
   - TALK_ON
   frame: vp
@@ -1581,8 +1569,9 @@
   vulgarity: 0
   incoherence: 2
   register: current
-  gloss: Talk at someone at length; {poss} is the listener.
-  notes: '{poss} refers to the listener, not the subject.'
+  gloss: Talk at someone at length; {objposs} is the listener.
+  notes: '{objposs} requires the listener''s object or explicit possessive; the speaking agent cannot supply
+    it.'
   sources:
   - https://greensdictofslang.com/entry/k63cu4y
   - https://dictionary.dogonews.com/definitions/bend%20someone's%20ear

@@ -483,9 +483,9 @@ VEGETABLES:
   triggers:
     np: ["vegetables", "veggies"]
 BEER:
-  description: A beer, especially a cold one.
+  description: Beer as a beverage, without asserting a particular package or count.
   triggers:
-    np: ["beer", "cold beer", "cold one", "can of beer", "bottle of beer"]
+    np: [beer]
 TEA:
   description: A cup of tea.
   triggers:
@@ -735,10 +735,9 @@ EAT:
   triggers:
     vp: ["grab a bite", "get something to eat", "have something to eat", "grab some food", "have lunch", "have dinner", "grab something to eat"]
 SCOLD:
-  description: Scold or get angry at someone.
+  description: Scold or reprimand someone; anger and volume alone do not establish a reprimand.
   triggers:
-    vp: ["tell {obj} off", "yell at {obj}", "get angry at {obj}", "have a go at {obj}", "scold {obj}",
-         "shout at {obj}"]
+    vp: ['tell {obj} off', 'scold {obj}', 'reprimand {obj}']
 CHAT:
   description: Have a long chat.
   triggers:
@@ -908,13 +907,13 @@ SOLDIERS:
   description: Soldiers, especially in remembrance.
   neutral_person: true
   triggers:
-    # head-noun matching makes "brave man" also match "brave men"
-    np: ["soldier", "serviceman", "servicewoman", "infantryman", "brave man@4", "fallen soldier"]
+    np: ["soldier", "serviceman", "servicewoman", "infantryman", "fallen soldier"]
 BRAVE:
   description: Courageous, willing to take risks.
   person: true
   triggers:
     predicate_adj: ["brave", "courageous", "fearless", "plucky", "gutsy", "daring"]
+    np: ["brave person", "brave man", "brave woman", "courageous person"]
 WAR:
   description: A war, battle or major conflict.
   triggers:
@@ -1144,9 +1143,9 @@ LONG_TIME:
   triggers:
     np: [a long time, ages and ages]
 VIABLE:
-  description: Workable; going ahead.
+  description: A workable proposal or feasible plan, rather than biological viability.
   triggers:
-    predicate_adj: [viable, feasible, going ahead, a viable option]
+    predicate_adj: [feasible, going ahead, a viable option, a viable proposal, a workable proposal]
 VIABLE_OF_LOOKS:
   description: >-
     Guard (no entries) - "she looked feasible" (an old word for presentable) and "he seems viable" are said of
@@ -1186,10 +1185,9 @@ CAR_TRUNK:
   triggers:
     np: [car trunk]
 ALCOHOL:
-  description: Alcoholic drink generally.
+  description: Alcoholic drink, rather than technical alcohol used as solvent, fuel or disinfectant.
   triggers:
-    # not "the drink": it caught "the drinks" (beverages)
-    np: [booze, alcohol, liquor, "strong drink", "the demon drink", "rotgut", "hooch"]
+    np: [booze, liquor, strong drink, the demon drink, rotgut, hooch, an alcoholic drink]
 
 # --- harvested from an agent's Aussie Gettysburg (aussiefy harvest), curated ------
 ARRIVE:
@@ -1249,16 +1247,14 @@ WAKE_THE_DEAD:
   triggers:
     vp: ["wake the dead", "raise the dead"]
 CARE_ABOUT:
-  description: Care at all about something, said in the negative (couldn't care less about it).
+  description: Care about something; comparative caring-less does not establish indifference.
   triggers:
-    # every entry is said in the negative ("didn't give a stuff about"), so only triggers that are themselves
-    # negative-polarity: not "care about" ("we care about your privacy"), "pay attention to" (an instruction to
-    # the reader) or "take notice of". "couldn't care less about" becomes "couldn't give a stuff about".
-    vp: ["care less about", "give a damn about", "give a hoot about"]
+    vp: [give a damn about, give a hoot about]
 TALK_ON:
   description: Talk at length.
   triggers:
-    vp: ["ramble", "go on and on", "talk at length", "babble", "prattle", "drone on", "talk {poss} ear off", "natter on"]
+    vp: [ramble, go on and on, talk at length !=to, babble, prattle, drone on, 'talk {objposs} ear off', 'talk at
+        length to {obj}', natter on]
 TACKLE:
   description: Start on something with energy.
   triggers:
@@ -1438,10 +1434,10 @@ PRISON:
   triggers:
     np: ["prison", "jail", "jailhouse", "gaol", "penitentiary"]
 LONELY:
-  description: Lonely; all alone.
+  description: Emotional loneliness, distinct from being physically alone.
   person: true
   triggers:
-    predicate_adj: ["lonely", "all alone", "alone", "isolated", "on {poss} own", "by {poss}self"]
+    predicate_adj: [lonely, feeling lonely]
 SCREAM:
   description: Scream, shriek.
   triggers:
@@ -1512,9 +1508,9 @@ NAP:
     vp: ["doze", "dozing", "have a doze"]
     np: ["a nap", "a short sleep", "a snooze", "forty winks", "a siesta"]
 WALK_WEARILY:
-  description: Walk wearily or aimlessly.
+  description: Walk wearily, without necessarily wandering aimlessly.
   triggers:
-    vp: ["trudge", "plod", "wander along", "walk wearily", "trek"]
+    vp: [trudge, plod, walk wearily]
 WALK:
   description: Go on foot.
   triggers:
@@ -1958,10 +1954,10 @@ HOLIDAY_HOUSE:
   triggers:
     np: [holiday house, beach house, holiday home]
 EARLY:
-  description: Very early in the morning.
+  description: Very early in the morning, rather than early in any activity or part of the day.
   triggers:
-    adv: [at dawn, at the crack of dawn, very early, first thing, at daybreak, at first light, very early in the
-        morning]
+    adv: [at dawn, at the crack of dawn, first thing in the morning, at daybreak, at first light, very early in
+        the morning]
 ATTRACTIVE:
   description: Good-looking, sexually attractive.
   triggers:
@@ -1993,9 +1989,9 @@ LIAR:
   triggers:
     np: [a liar, a fibber, a teller of tall tales, liar, fibber, bluffer, a bluffer]
 MIXED_BREED_DOG:
-  description: A dog of mixed or unknown breed.
+  description: A dog of mixed or unknown breed; other animals are separate.
   triggers:
-    np: [a mutt, a mongrel dog, a mixed breed, a crossbreed, a mixed-breed dog]
+    np: [a mutt, a mongrel dog, a mixed-breed dog, a crossbred dog]
 LIE:
   description: Tell lies.
   triggers:
@@ -2015,9 +2011,9 @@ ANNOY:
     clause: ['{np} drives {obj} mad', '{np} gets on {poss} nerves', '{np} really annoys {obj}', '{np} irritates
         {obj}', '{np} bugs {obj}']
 GOSSIP:
-  description: Gossip; talk about other people.
+  description: Gossip about other people, as information or an activity.
   triggers:
-    np: [the latest gossip, the latest, rumours, scuttlebutt]
+    np: [the latest gossip, rumours, scuttlebutt]
     vp: [have a gossip, gossip]
 EMBARRASSING:
   description: Embarrassing; causing embarrassment.
@@ -2049,13 +2045,13 @@ BOMB_DIVE:
   triggers:
     vp: [do a cannonball, cannonball, dive-bomb, do a dive bomb]
 PUB_MEAL:
-  description: A meal at the pub.
+  description: A meal at a pub or bistro, with its time unspecified or explicit.
   triggers:
-    np: [a pub lunch, a pub meal, a pub dinner]
+    np: [a pub meal, a bistro meal, a pub dinner, a pub lunch]
 RAVE:
-  description: A rave or outdoor dance party.
+  description: An explicitly outdoor electronic-dance event, often in the bush.
   triggers:
-    np: [a rave, an outdoor rave, a dance party]
+    np: [an outdoor rave, a bush rave, an outdoor electronic dance party, a bush dance party]
 FALSE_RUMOUR:
   description: An untrue rumour.
   triggers:
@@ -2159,13 +2155,13 @@ LOT_OF_MONEY:
   triggers:
     np: [a fortune, a lot of money, a small fortune, a pretty penny, a pile of cash, a pile of money]
 BOOZE_UP:
-  description: A party or session built around drinking.
+  description: A party or session built around drinking alcohol.
   triggers:
-    np: [a booze-up, a drinking session, a drinking party, a binge, a bender]
+    np: [a booze-up, a drinking session, a drinking party, a drinking binge, an alcohol binge, a bender]
 COOL_CHANGE:
-  description: A sudden, gusty cool wind change after a hot day (NSW coast).
+  description: An abrupt gusty southerly cold change of the southerly-buster kind.
   triggers:
-    np: [a sudden cool change, a cold front, a sudden southerly wind, a gusty southerly change]
+    np: [a gusty southerly change, a sudden southerly cold change, a sudden cold southerly change]
 NERVOUS:
   description: Nervous, on edge, jumpy.
   triggers:
@@ -2257,13 +2253,13 @@ VAGRANT:
     np: [hobo, vagrant, "tramp !=steamer|steamers|ship|ships|stamp|stamps|iron", a hobo, a vagrant,
          "a tramp !=steamer|steamers|ship|ships|stamp|stamps|iron"]
 COOLIBAH:
-  description: The coolibah, a eucalypt of inland floodplains (lookup and explanation only).
+  description: The named coolibah/coolabah eucalypt group, not every waterside gum.
   triggers:
-    np: [a eucalyptus by the water, a eucalypt by the water, a gum tree by the waterhole]
+    np: [a Eucalyptus coolabah]
 COLONIAL_MOUNTED_POLICE:
-  description: Colonial mounted police (lookup and explanation only).
+  description: Mounted police, including historical colonial mounted police.
   triggers:
-    np: [the mounted police, the colonial police]
+    np: [the mounted police, the colonial mounted police]
 WILDFIRE:
   description: An uncontrolled fire in forest, scrub or grassland.
   triggers:
@@ -2348,7 +2344,7 @@ RIVER_FLAT:
   triggers:
     np: [bottomland, the bottomland]
 GOANNA:
-  description: An Australian monitor lizard.
+  description: A monitor lizard; Australian usage is not restricted to Australian species.
   triggers:
     np: [monitor lizard, a monitor lizard, the monitor lizard]
 HARD_WORKER:
@@ -2364,7 +2360,7 @@ HOMESTEAD:
   triggers:
     np: [the ranch house, the main ranch house, the main house on the ranch]
 TRAMP_ROADS:
-  description: Travel on foot through the country as a swagman.
+  description: Travel the country roads on foot; baggage and motive are not implied.
   triggers:
     vp: [tramp the roads, be on the tramp, tramp the country roads, travel the roads on foot]
 POLICE_OFFICER:
@@ -2397,9 +2393,9 @@ KILLJOY:
   triggers:
     np: [a killjoy, a spoilsport, a wet blanket, a party pooper]
 DINGO:
-  description: The Australian wild dog.
+  description: The named dingo, rather than an arbitrary wild or feral dog.
   triggers:
-    np: [wild dog, a wild dog]
+    np: [a dingo, an Australian native dog]
 LOSER:
   description: A hopeless, useless person.
   triggers:
@@ -2421,13 +2417,14 @@ HILL_COUNTRY:
   triggers:
     np: [the hill country, hill country, the foothills]
 IN_FLOOD:
-  description: 'Of a river: flowing bank-high, in flood.'
+  description: 'Of a river: flowing bank-high, without necessarily overflowing.'
   triggers:
-    vp: [burst its banks, overflow its banks, run high to its banks]
+    vp: [run high to its banks, flow bank-high]
 SANDY_BLIGHT:
-  description: Outback conjunctivitis.
+  description: Historical, non-technical eye-inflammation terminology.
+  not_in: [technical, official, instructions]
   triggers:
-    np: [conjunctivitis, pink eye]
+    np: [sandy blight, conjunctivitis, pink eye]
 SWINDLER:
   description: A swindler or dishonest operator.
   triggers:
@@ -2437,9 +2434,10 @@ CALL_OUT:
   triggers:
     vp: [holler, give a holler, 'give {obj} a holler', 'give {obj} a shout', yell out]
 CASE_OF_BEER:
-  description: A carton of 24 beers.
+  description: An explicitly twenty-four-unit package of beer, rather than a package with an unknown count.
   triggers:
-    np: [a case of beer, a carton of beer, a 24-pack of beer, a twenty-four pack, a 24-pack]
+    np: [a 24-pack of beer !=bottle|bottles|label|labels, a twenty-four pack of beer !=bottle|bottles|label|labels,
+      a case of 24 beers, a carton of 24 beers]
 SET_DOG_ON:
   description: Set a dog on someone.
   triggers:
@@ -2489,9 +2487,9 @@ LUG:
   triggers:
     vp: ['lug {obj}', 'lug {obj} around', 'carry {obj} on {poss} back']
 SLAB_HUT:
-  description: A rough pioneer hut built of split timber slabs.
+  description: A hut built of timber slabs; not every timber or log cabin.
   triggers:
-    np: [a rough timber hut, a rough timber cabin, a crude log cabin]
+    np: [a timber slab hut, a split-timber slab hut, a slab-built hut]
 EVERYWHERE:
   description: Everywhere, scattered about; or disorganised.
   triggers:
@@ -2549,9 +2547,9 @@ PESSIMIST:
   triggers:
     np: [a pessimist, a prophet of doom, a doom-monger, a doomsayer]
 HAVE_CONTACT:
-  description: Having an indirect contact who can arrange something.
+  description: An explicitly stated contact chain through another intermediary.
   triggers:
-    clause: [I know a guy, I know a guy who knows a guy]
+    clause: [I know a guy who knows a guy]
 EVER_IN_LIFE:
   description: Ever, in all one's life.
   triggers:
@@ -2586,9 +2584,9 @@ PUT_ON_AIRS:
   triggers:
     vp: [put on airs, 'give {poss}self airs', act high and mighty]
 RINGBARK:
-  description: Kill a tree by girdling its bark.
+  description: Girdle the bark of trees, rather than any kind of encircling.
   triggers:
-    vp: ['girdle {obj}', girdle the trees]
+    vp: [girdle the trees, ringbark the trees]
 ARREST:
   description: Arrest someone.
   triggers:
@@ -2854,10 +2852,9 @@ LIE_DOWN_REST:
   triggers:
     vp: [go and lie down, go lie down, lie down for a while, lie down for a bit, take a lie-down]
 ICE_BRICK:
-  description: A reusable freezer block for a cooler.
+  description: A rigid reusable freezer block for cooling food and drink.
   triggers:
-    np: [gel pack, gel packs, freezer pack, freezer packs, cooler pack, cooler packs, freezer block, freezer blocks,
-      blue ice]
+    np: [a freezer block, a rigid cooler pack, a rigid freezer pack]
 SUCKER:
   description: A gullible person; a dupe (some poor sucker).
   triggers:
@@ -2867,10 +2864,9 @@ STAY_OUT_OF_TROUBLE:
   triggers:
     vp: [stay out of trouble, keep out of trouble]
 FRUIT_AND_VEG:
-  description: Fresh fruit and vegetables; produce.
+  description: Fresh fruit and vegetables as goods; the location selling them is separate.
   triggers:
-    np: [fruits and vegetables, fruit and vegetables, fresh produce, the produce section, the produce aisle, produce
-        department]
+    np: [fruits and vegetables, fruit and vegetables, fresh produce]
 MARGARINE:
   description: Margarine.
   triggers:
@@ -3119,9 +3115,9 @@ HENS_NIGHT:
   triggers:
     np: [bachelorette party, hen party, hen night, hen do]
 SPORTS_OVAL:
-  description: A grassed sports ground for football and cricket.
+  description: An explicitly named football or cricket oval.
   triggers:
-    np: [the sports field, the sports ground, the school sports field, the school playing field]
+    np: [the football oval, the cricket oval, the Australian football ground]
 HOPE_CHEST:
   description: A chest of linen and household goods kept for marriage.
   triggers:
@@ -3800,3 +3796,168 @@ HILLS_HOIST:
   description: The Hills Hoist rotary clothesline; a named Australian cultural reference.
   triggers:
     np: ["Hills Hoist", "Hills Hoists"]
+
+COMPOUND_BEER_BEVERAGE:
+  description: Named beverage compounds whose identity must survive generic beer wording.
+  triggers:
+    np:
+    - root beer
+    - ginger beer
+
+BEER_BOTTLE:
+  description: 'An unspecified beer bottle: guard against silently choosing a particular bottle shape or a
+    can.'
+  triggers:
+    np:
+    - bottle of beer
+
+SMALL_BEER_BOTTLE:
+  description: A small or short beer bottle.
+  triggers:
+    np:
+    - small bottle of beer
+    - short bottle of beer
+    - short squat bottle of beer
+
+BEER_CAN:
+  description: A can of beer; bottle and can remain distinct.
+  triggers:
+    np:
+    - can of beer
+
+STERLING_MONEY:
+  description: Explicit pounds sterling; not dollars or a measure of weight.
+  triggers:
+    np:
+    - pound sterling
+    - pounds sterling
+    - British pound
+    - British pounds
+
+PHYSICAL_FIGHT:
+  description: A physical fight or aggressive scuffle, rather than any disagreement.
+  triggers:
+    np:
+    - a brawl
+    - a scuffle
+    - a punch-up
+    - fisticuffs
+
+PUB_LUNCH:
+  description: An explicitly stated lunch at the pub or bistro.
+  triggers:
+    np:
+    - a pub lunch
+    - a bistro lunch
+
+GOSSIP_SESSION:
+  description: An explicitly named session of gossip.
+  triggers:
+    np:
+    - a gossip session
+
+COLD_BEER_SERVING:
+  description: An explicitly stated cold serving of beer.
+  triggers:
+    np:
+    - a cold beer
+    - a cold one
+
+TRAVEL_WITH_SWAG:
+  description: Travel on foot carrying a swag or bedroll; neither walking alone nor carrying baggage in place
+    suffices.
+  triggers:
+    vp:
+    - travel on foot carrying a swag
+    - walk carrying a swag
+    - tramp the roads carrying a swag
+
+CARRY_SWAG:
+  description: Carry a swag or bedroll, often while travelling on foot.
+  triggers:
+    vp:
+    - carry {poss} swag
+    - carry a swag
+
+DRESSED_SHOWILY:
+  description: A person wearing showy clothes.
+  person: true
+  triggers:
+    predicate_adj:
+    - showily dressed ^person
+    - dressed showily ^person
+    - dressed up flashily ^person
+
+DISHONEST_ADJECTIVE:
+  description: Dishonest, fraudulent or rigged, rather than merely low quality.
+  triggers:
+    adj:
+    - dishonest
+    - fraudulent
+    - rigged
+
+AIMLESS_WALK:
+  description: Wander or hang around without a purpose.
+  triggers:
+    vp:
+    - wander around aimlessly
+    - wander about aimlessly
+    - mope around
+    - hang around aimlessly
+
+ZERO_AMOUNT:
+  description: Exactly none, rather than a small positive amount.
+  unless_after:
+  - but
+  - else
+  - more
+  - less
+  - like
+  - short
+  - much
+  triggers:
+    np:
+    - nothing
+    - nothing at all
+    - none at all
+
+PHYSICAL_SOLITUDE:
+  description: Physically alone or acting without company; emotional loneliness is not implied.
+  person: true
+  triggers:
+    predicate_adj:
+    - alone
+    - all alone
+    - on {poss} own
+
+LOW_SPIRITS_NOUN:
+  description: A noun referring to a low mood.
+  triggers:
+    np:
+    - low spirits
+    - the blues
+
+INDIFFERENCE_MODAL:
+  description: Explicit could-not-care-less wording, preserving the whole negative modal.
+  triggers:
+    vp:
+    - couldn't care less about
+    - could not care less about
+
+PRODUCE_SECTION:
+  description: The shop section selling fruit and vegetables.
+  triggers:
+    np:
+    - produce section
+
+PRODUCE_AISLE:
+  description: The shop aisle selling fruit and vegetables.
+  triggers:
+    np:
+    - produce aisle
+
+PRODUCE_DEPARTMENT:
+  description: The shop department selling fruit and vegetables.
+  triggers:
+    np:
+    - produce department

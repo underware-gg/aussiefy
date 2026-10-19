@@ -67,6 +67,11 @@ only if:
   distinct phrases; each decline must name a planned phrase and supply a reason, and
 - configured length checks pass when `check_length` is enabled.
 
+The resolved `DOCUMENT_CONFIG.narrator_opinion` also governs added narrator judgments. False means do not
+introduce praise, pity, luck or blame absent from the original; true permits reaction while preserving facts,
+roles and references. The known-term lint check is shared by verification and yarn submission, with original
+occurrences allowed through. This is not general semantic validation of arbitrary generated prose.
+
 General/Deadset/Dinkum normally require a 0.6 share; Troppo and bare Custom use zero. A zero share disables
 retention and moved-phrase checks. Exact `document_config` overrides apply to every preset, including
 `keep_share`, `check_length` and `max_length`. Lint issues, selected factual/style checks and markup integrity

@@ -25,6 +25,10 @@ subpackages (see [DD-006](decisions/dd-006-layered-flat-package.md)).
 selected level'n swearin' profiles without changing dictionary data. The data the engine reads is in
 `aussiefy/data/` (see [the dictionary](../functional/dictionary.md)).
 
+`vocabulary.py` belongs to the Dictionary layer. It composes raw entry/concept additions'n explicit
+versioned patches before the loader builds one validated dictionary'n its indexes. Anyway, it performs no I/O;
+the loader owns files, source sidecars'n diagnostics. No overlay matching occurs during translation.
+
 ## The layering rule
 
 The core (the engine, the dictionary and the similarity modules other than `models.py`) imports nothing from

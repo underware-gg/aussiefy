@@ -267,7 +267,9 @@ def test_lookup_single_words_avoid_lookalikes(translator):
     cry = [r["form"] for r in harness.lookup("cry", translator=translator)["results"]]
     assert "bawl" in cry and "have a sook" in cry
     lonely = [r["form"] for r in harness.lookup("lonely", translator=translator)["results"]]
-    assert "beaut" not in lonely and "on {poss} Pat Malone" in lonely
+    assert "beaut" not in lonely and "as lonely as a shag on a rock" in lonely
+    alone = [r["form"] for r in harness.lookup("alone", translator=translator)["results"]]
+    assert "on {poss} Pat Malone" in alone
 
 
 def test_riffs_in_lookup_and_plan(translator):

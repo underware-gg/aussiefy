@@ -28,6 +28,8 @@ def short_card(e: Entry) -> dict[str, Any]:
     register)."""
     card = {"id": e.id, "form": e.form, "gloss": e.gloss, "frame": e.frame, "level": e.incoherence,
             "vulgarity": e.vulgarity}
+    if e.semantic_effects:
+        card["semantic_effects"] = list(e.semantic_effects)
     if e.register != "current":
         card["register"] = e.register
     if e.status == "gate":
@@ -41,6 +43,8 @@ def entry_card(e: Entry, cap: int = 3, riffs: bool = True) -> dict[str, Any]:
     (shown only where the policy unlocked it)."""
     card = {"id": e.id, "form": e.form, "gloss": e.gloss, "frame": e.frame, "concepts": list(e.concept),
             "level": e.incoherence, "vulgarity": e.vulgarity, "register": e.register}
+    if e.semantic_effects:
+        card["semantic_effects"] = list(e.semantic_effects)
     if e.placement:
         card["placement"] = e.placement
     if riffs and e.riffs_within(cap):

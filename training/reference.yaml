@@ -46,7 +46,7 @@ should:
   - {query: it's pouring down outside, concepts: [RAINING_HARD]}
   - {query: a quick snooze, concepts: [NAP]}
   - {query: completely skint, concepts: [BROKE]}
-  - {query: a cold one at the pub, concepts: [BEER, ALCOHOL]}
+  - {query: a cold one at the pub, concepts: [BEER, ALCOHOL, COLD_BEER_SERVING]}
   - {query: chucking a wobbly, concepts: [TANTRUM, LOSE_TEMPER, OVERREACT]}
   - {query: a shady deal, concepts: [DODGY]}
   - {query: quit your whining, concepts: [STOP_COMPLAINING, COMPLAIN]}
@@ -79,7 +79,7 @@ known:
      why: "sleep, not sex. Added 2026-10-12 from the yarn agents' lookups; 1.2.0 ranks NAP, FALL_ASLEEP, HAVE_SEX"}
   - {kind: must_not, query: dying, concepts: [NERVOUS],
      why: "dying, not toey. Added 2026-10-12 from the yarn agents' lookups; 1.2.0 ranks NERVOUS, BORED, DRUNK"}
-  - {kind: must_not, query: very cold, concepts: [BEER],
+  - {kind: must_not, query: very cold, concepts: [BEER, COLD_BEER_SERVING, SMALL_BEER_BOTTLE, BEER_CAN],
      why: "cold weather, not a coldie. Added 2026-10-12 from the yarn agents' lookups; 1.2.0 ranks FREEZING, BEER, HEARTLESS"}
   - {kind: must_not, query: established, concepts: [CONTENT],
      why: "set up long ago, not snug. Added 2026-10-12 from the yarn agents' lookups; 1.2.0 ranks CONTENT, COMMITTED, INFATUATED"}

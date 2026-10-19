@@ -78,7 +78,9 @@ def plan(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str
         "seed": seed,
         # a riff is optional colour: the planned phrase is the term, not "bush, miles from the nearest servo"
         "planned": [{"original": r.source[slice(*x.out_span)], "span": list(x.out_span), "entry": x.chosen.entry.id,
-                     "aussie": x.term, "gloss": x.chosen.entry.gloss or ""} for x in r.records if x.substituted],
+                     "aussie": x.term, "gloss": x.chosen.entry.gloss or "",
+                     **({"semantic_effects": list(x.chosen.entry.semantic_effects)}
+                        if x.chosen.entry.semantic_effects else {})} for x in r.records if x.substituted],
         "garnish": decided["garnish"],
         # plain Australian for US and British words (faucet -> tap): not slang, so not planned phrases
         "dialect": decided["dialect"],

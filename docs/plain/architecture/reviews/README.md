@@ -6,6 +6,11 @@ commands that have since been renamed. Decisions they led to are recorded in [de
 
 | Review | Summary |
 |---|---|
+| [design-review-2026-10-19-model-refresh.md](../../../architecture/reviews/design-review-2026-10-19-model-refresh.md) | Fresh pinned model fit, input provenance, required package-reader checks and bounded lookup evidence; integrated verification passed |
+| [design-review-2026-10-19-tone-controls.md](../../../architecture/reviews/design-review-2026-10-19-tone-controls.md) | Explicit solemn/comic substitution permission, approved Troppo defaults and cross-surface behaviour; focused review converged |
+| [design-review-2026-10-19-dictionary-overlays.md](../../../architecture/reviews/design-review-2026-10-19-dictionary-overlays.md) | Explicit raw vocabulary layers, canonical validation, source inheritance and shared compiled consumers; integrated verification passed |
+| [design-review-2026-10-19-sourced-extensions.md](../../../architecture/reviews/design-review-2026-10-19-sourced-extensions.md) | Reviewed source-meaning distinctions, preserved roles and quantity, compatible forms and 476 scoped provenance records; integration review converged |
+| [design-review-2026-10-19-semantic-effects.md](../../../architecture/reviews/design-review-2026-10-19-semantic-effects.md) | Resolved narrator opinion, precise person mappings and consistent deterministic/writer surfaces; integrated verification passed |
 | [design-review-2026-10-19-meaning-extensions.md](../../../architecture/reviews/design-review-2026-10-19-meaning-extensions.md) | Precise lexical senses, conditional appetite phrases, cultural references, source integration and bounded argument reading |
 | [design-review-2026-10-19-semantic-context.md](../../../architecture/reviews/design-review-2026-10-19-semantic-context.md) | Shared semantic context, preserved arguments, contextual tone, opaque boundaries, YAML portability and bounded source research |
 | [design-review-2026-10-18-hunger-phrases.md](../../../architecture/reviews/design-review-2026-10-18-hunger-phrases.md) | Independent appetite harvest, tense-safe VPs and controlled writer-only hunger imagery |

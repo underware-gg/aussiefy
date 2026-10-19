@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 
-from . import morph
+from . import morph, pos
 from .detect import DETERMINERS, VERB_LEADERS, NP_BREAKS, Detection, after_determiner, opening_determiner
 from .matcher import NP_BOUNDARY, is_name
 from .schema import Entry
@@ -27,6 +27,8 @@ NOT_AFTER_DETERMINER = NP_BOUNDARY | NP_BREAKS | {"beyond", "out", "up", "down",
 # punters") and adjectives used as nouns ("the dead" -> "the poor buggers", "the poor" -> "the battlers")
 SINGULAR_VERBS = {"is", "was", "has", "does", "seems", "appears", "remains", "wants", "needs", "says", "thinks",
                   "knows", "feels", "likes", "loves", "hates", "deserves", "expects"}
+COUNT_DETERMINERS = {"a", "an", "another", "each", "every", "few", "fewer", "fewest", "many", "several"}
+NOUN_MODIFIERS = pos.NOUNS | pos.NAMES | {"JJ", "JJR", "JJS", "RB", "RBR", "RBS"}
 COLLECTIVES = {"public", "people", "folk", "crowd", "audience", "family", "team", "staff", "police", "government",
                "mob", "community", "population", "electorate", "everyone", "everybody", "masses", "populace",
                "dead", "fallen", "departed", "living", "wounded", "poor", "rich", "young", "old", "elderly",
@@ -47,6 +49,8 @@ def has_own_article(form: str) -> bool:
 
 def is_plural_term(entry: Entry) -> bool:
     """A term already plural in form ("strides", "the olds", "togs"), which a plural span leaves as it is."""
+    if entry.number == "mass":
+        return False
     head = entry.form.split()[-1]
     return not entry.form.lower().startswith(("a ", "an ")) and morph.singular_of(head) is not None
 
@@ -60,11 +64,27 @@ def phrase_continues(det: Detection, toks: list[Token], end: int) -> bool:
     return nxt.is_word and nxt.norm not in NP_ENDS and not nxt.text[:1].isupper()
 
 
-def number_problem(entry: Entry, det: Detection, toks: list[Token]) -> str | None:
-    """Why a term can't go in this span for its number: a term plural in form after "a" ("a togs"), or a
-    plural-only term for one ("a young politician" isn't "a young pollies"),
-    unless the span names a body of people ("the public" -> "the punters")."""
-    if entry.frame != "np" or det.inflection in ("plural", "written_plural"):
+def counted_noun(toks: list[Token], start: int, tags: list[str]) -> bool:
+    """A count selector before the noun, across its adjectival or nominal modifiers."""
+    for i in range(start - 1, -1, -1):
+        if tags[i] == "CD" or toks[i].norm in COUNT_DETERMINERS:
+            return True
+        if tags[i] not in NOUN_MODIFIERS:
+            break
+    return False
+
+
+def number_problem(entry: Entry, det: Detection, toks: list[Token], tags: list[str]) -> str | None:
+    """Why a noun's mass/count or number requirements conflict with its source phrase or agreeing verb."""
+    if entry.frame != "np":
+        return None
+    if entry.number == "mass":
+        if det.inflection in ("plural", "written_plural"):
+            return "a mass noun for an explicitly plural span"
+        if counted_noun(toks, det.start, tags):
+            return "a mass noun in a counted noun phrase"
+        return None
+    if det.inflection in ("plural", "written_plural"):
         return None
     # "my togs", but not "a togs": the span's own "a" goes with it ("a long time" -> "yonks"), so only an "a"
     # before the span counts
@@ -164,7 +184,8 @@ def noun_slots(det: Detection) -> dict[str, str]:
             morph.possessive_of(subj.norm) if subj is not None
             else morph.possessive_of(caps["agent"].norm) if "agent" in caps else "your"),
         "obj": caps["obj"].text if "obj" in caps else "",
-        "objposs": morph.possessive_of_object(caps["obj"].text) if "obj" in caps else "their",
+        "objposs": caps["objposs"].text if "objposs" in caps else (
+            morph.possessive_of_object(caps["obj"].text) if "obj" in caps else "their"),
         "np": caps["np"].text if "np" in caps else "",
     }
 

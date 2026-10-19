@@ -9,7 +9,7 @@ keeps its own licences; canonical texts are in [LICENSES/](LICENSES/).
 
 Bundled files: `aussiefy/data/model/vectors.f16`, `aussiefy/data/model/vocab.txt`.
 
-Reviewed metadata: `name` = `aussie-static`; `recipe.base.model` = `sentence-transformers/all-MiniLM-L6-v2`; `recipe.base.revision` = `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`; `version` = `1.2.0`.
+Reviewed metadata: `name` = `aussie-static`; `recipe.base.model` = `sentence-transformers/all-MiniLM-L6-v2`; `recipe.base.revision` = `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`; `version` = `1.3.0`.
 
 - [sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2/tree/1110a243fdf4706b3f48f1d95db1a4f5529b4d41): Upstream contributors; no separate NOTICE file identified in the 2026-10-13 audit. [Apache-2.0](LICENSES/Apache-2.0.txt).
 - [nreimers/MiniLM-L6-H384-uncased](https://huggingface.co/nreimers/MiniLM-L6-H384-uncased): Upstream contributors. [MIT](LICENSES/MIT.txt).

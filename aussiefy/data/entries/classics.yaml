@@ -458,7 +458,7 @@
   vulgarity: 0
   incoherence: 1
   register: current
-  gloss: An Australian monitor lizard.
+  gloss: A monitor lizard; especially familiar in Australian usage, but not confined to Australian species.
   sources:
   - https://en.wiktionary.org/wiki/goanna
   - https://en.wikisource.org/wiki/On_Our_Selection/Chapter_1
@@ -524,7 +524,7 @@
   - hump the bluey
   - hump {poss} bluey
   concept:
-  - TRAMP_ROADS
+  - CARRY_SWAG
   frame: vp
   intensity: 3
   vulgarity: 0
@@ -533,7 +533,7 @@
   status: gate
   flags:
   - archaic
-  gloss: To tramp the bush on foot carrying your swag, looking for work.
+  gloss: Carry a swag or bedroll, often while walking the country.
   sources:
   - https://en.wikipedia.org/wiki/Swagman
   - https://greensdictofslang.com/entry/dc7mavy
@@ -806,9 +806,11 @@
   vulgarity: 0
   incoherence: 3
   register: current
-  gloss: A dishonest operator, a con man (from shonky).
+  gloss: A dishonest operator or con man.
   sources:
   - https://en.wiktionary.org/wiki/shonk
+  notes: The derivation is uncertain. The dated antisemitic sense is separate from this neutral dishonest-operator
+    mapping.
 - id: sing-out
   form: sing out
   concept:
@@ -1318,7 +1320,7 @@
   variants:
   - dressed up like a pox doctor's clerk
   concept:
-  - SHOWY
+  - DRESSED_SHOWILY
   frame: predicate_adj
   intensity: 3
   vulgarity: 1
@@ -1461,7 +1463,7 @@
   status: gate
   flags:
   - dubious_meaning
-  gloss: I have a contact who can sort it.
+  gloss: I have a contact who has another contact; an explicitly indirect chain.
   sources:
   - https://www.gutenberg.org/ebooks/4730
 - id: in-all-my-natural
@@ -1578,14 +1580,14 @@
 - id: on-your-pat
   form: on {poss} pat
   concept:
-  - LONELY
+  - PHYSICAL_SOLITUDE
   frame: adv
   intensity: 3
   vulgarity: 0
   incoherence: 5
   register: dated
   gloss: On your own (short for Pat Malone).
-  notes: LONELY mixes 'alone' with 'lonely'; this form means alone, not sad.
+  notes: Physical solitude or single-handed action; emotional loneliness is a separate sense.
   sources:
   - https://en.wiktionary.org/wiki/on_one's_pat
   - https://www.gutenberg.org/ebooks/4730
@@ -1624,8 +1626,7 @@
   incoherence: 1
   register: current
   gloss: 'The poor devil: said with sympathy for someone hard done by.'
-  notes: Never trigger on 'the poor man' (poverty sense). The plural is the existing DEAD_PEOPLE form 'poor buggers'
-    (a different sense).
+  notes: Never trigger on 'the poor man' (poverty sense). The plural 'poor buggers' shares the sympathy sense.
   sources:
   - https://en.wiktionary.org/wiki/bugger
 - id: pub
@@ -1710,6 +1711,8 @@
   gloss: Kill a tree by cutting a ring of bark from its trunk.
   sources:
   - https://en.wiktionary.org/wiki/ring-bark
+  variants:
+  - ringbark the trees
 - id: run-in-arrest
   form: run {obj} in
   concept:
@@ -1783,7 +1786,7 @@
   variants:
   - schlenter
   concept:
-  - DODGY
+  - DISHONEST_ADJECTIVE
   frame: adj
   intensity: 3
   vulgarity: 0
@@ -1815,7 +1818,7 @@
   vulgarity: 0
   incoherence: 5
   register: archaic
-  gloss: Rough, strong grog.
+  gloss: Strong alcoholic drink; historically often rough liquor.
   sources:
   - https://www.gutenberg.org/ebooks/4730
 - id: snouted
@@ -2131,7 +2134,7 @@
 - id: go-waltzing-matilda
   form: go waltzing Matilda
   concept:
-  - TRAMP_ROADS
+  - TRAVEL_WITH_SWAG
   frame: vp
   intensity: 3
   vulgarity: 0
@@ -2513,7 +2516,7 @@
 - id: the-joes
   form: the joes
   concept:
-  - SAD
+  - LOW_SPIRITS_NOUN
   frame: np
   intensity: 3
   vulgarity: 0
@@ -2530,17 +2533,18 @@
   variants:
   - kidstakes
   concept:
-  - CHILDS_PLAY
+  - PRETENCE
   frame: np
   intensity: 3
   vulgarity: 0
   incoherence: 4
   register: dated
-  gloss: Kids' stuff; child's play, or mere pretence.
+  gloss: Bluff, joking or pretence; not merely an easy task.
   sources:
   - https://www.macquariedictionary.com.au/?p=10990
   - https://greensdictofslang.com/entry/5dsgtha
   - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+  number: mass
 - id: give-a-knock-down
   form: give {obj} a knock-down to {np}
   concept:
@@ -2581,7 +2585,7 @@
 - id: mooch-around
   form: mooch around
   concept:
-  - WALK_WEARILY
+  - AIMLESS_WALK
   frame: vp
   intensity: 3
   vulgarity: 0

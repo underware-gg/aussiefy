@@ -22,7 +22,7 @@ asks for a smoother rewrite that keeps every planned phrase and adds no new slan
 - The rewrite is accepted only if every planned phrase survives.
 - Otherwise, or on any API failure or refusal, the deterministic text stands, and `result.surface["status"]`
   says why.
-- With nothing planned, there's nothin' to polish: the mode is skipped, which isn't a fallback.
+- With not a sausage planned, there's bugger all to polish: the mode is skipped, which isn't a fallback.
 - The plan is always in explain mode.
 - Surface rewrites aren't cached: each run asks Claude again.
 
@@ -70,6 +70,11 @@ only if:
 - the effective `keep_share` of undeclined planned phrases survives when the original plan has at least four
   distinct phrases; each decline must name a planned phrase and supply a reason, and
 - configured length checks pass when `check_length` is enabled.
+
+The resolved `DOCUMENT_CONFIG.narrator_opinion` also governs added narrator judgments. False means do not
+introduce praise, pity, luck or blame absent from the original; true permits reaction while preserving facts,
+roles and references. The known-term lint check is shared by verification and yarn submission, with original
+occurrences allowed through. This is not general semantic validation of arbitrary generated prose.
 
 General/Deadset/Dinkum normally require a 0.6 share; Troppo and bare Custom use zero. A zero share disables
 retention and moved-phrase checks. Exact `document_config` overrides apply to every preset, including

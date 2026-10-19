@@ -47,7 +47,7 @@ checked against plain sources while development outputs may be stale. See
   `aussiefy/data/profiles.yaml` ([DD-002](docs/architecture/decisions/dd-002-slang-is-data.md)).
 - **Keep output deterministic.** Random choices are seeded rolls keyed by context, so the same text, level and
   seed always give the same result \([DD-003](docs/architecture/decisions/dd-003-deterministic-context-keyed-rolls.md)).
-- **Respect the layering.** The engine'n the dictionary import nothing from the toolkit, the LLM modes, the
+- **Respect the layering.** The engine'n the dictionary import sweet bugger\-all from the toolkit, the LLM modes, the
   surfaces or the maintainer tools \([package layout](docs/architecture/package-layout.md)).
 - **Change every surface together.** A toolkit parameter has the same name and default in the Python API, the
   CLI, the MCP server and yarn mode's tools; `tests/functional/test_interfaces.py` checks this.

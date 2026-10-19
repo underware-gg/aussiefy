@@ -82,6 +82,8 @@ class DocumentOverrides:
     entry_riffs: bool | None = None
     riff_exaggeration: int | None = None
     riff_association: int | None = None
+    narrator_opinion: bool | None = None
+    solemn_comic_terms: bool | None = None
     profile: ProfileOverrides | None = None
 
     @classmethod
@@ -102,7 +104,8 @@ class DocumentOverrides:
             raise UserError(f"unknown document_config settings: {', '.join(sorted(set(raw) - names))}")
         data = dict(raw)
         booleans = {"openings", "formal_to_rework", "person_swears", "keep_quotes", "command_context",
-                    "dateline_context", "draft", "perform", "check_length", "contextual_riffs", "entry_riffs"}
+                    "dateline_context", "draft", "perform", "check_length", "contextual_riffs", "entry_riffs",
+                    "narrator_opinion", "solemn_comic_terms"}
         for key, value in data.items():
             if key == "profile":
                 data[key] = ProfileOverrides.parse(value)

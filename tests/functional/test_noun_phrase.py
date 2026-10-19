@@ -45,7 +45,7 @@ def test_never(translator, text, never):
 
 
 @pytest.mark.parametrize("text, sometimes", [
-    ("We mourn the dead.", "the poor buggers"),                          # the article kept
+    ("We comfort the poor devils.", "the poor buggers"),                 # the article kept
     ("His wife was cooking.", "his missus"),                             # the possessive fills {poss}
     ("They camped by the old waterhole.", "the old billabong"),          # the term's own article goes
     ("The wild horses ran past.", "the brumbies"),                       # the entry's plural

@@ -15,10 +15,11 @@ from .context import sentence_contexts
 from .dialect import Found, text_english
 from .engine import Translator, default_translator
 from . import morph
-from .genre import Genre, resolve_document
+from .genre import Embellishment, Genre, resolve_document
 from .markup import markup_changed, mask
 from .model import Dictionary
 from .schema import PLACEHOLDER_RE, Entry
+from .select import semantic_rejection
 from .terms import fold, strip_markup
 from .text import document_spans, HONORIFICS, Token, capital_is_positional, heading_lines, held_spans, sentences, tokenize
 
@@ -132,6 +133,7 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     # where the text already uses dictionary slang (so we don't suggest replacing it): matched with the
     # engine's own matcher, so inflections and slots count ("smashed it to buggery", "kippin'")
     aussie_spans = _aussie_spans(text, tr)
+    issues += _semantic_issues(text, original, aussie_spans, tr, read_as.setting(pol.embellishment))
 
     suggestions = _suggestions(text, low, aussie_spans, level, vulgarity, tr, read_as, read_english, dial, pol.embellishment) if suggest else []
     fixed = {fold(issue["phrase"]) for issue in issues if issue.get("australian")}
@@ -150,11 +152,32 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     return {"ok": not issues, **eff.envelope(), **read_as.envelope(pol.embellishment),
             "issues": issues, "warnings": warnings,
             "suggestions": suggestions[:20],
-            "scope": ("Issues: flagged phrases, swearing over the cap, US spelling and US words. Warnings: the "
+            "scope": ("Issues: flagged phrases, known added semantic effects, swearing over the cap, US spelling and US words. Warnings: the "
                       "guide's style rules and swearing density" +
                       ("; fidelity to the original (length, names, numbers)." if original is not None else
-                       ". Pass the original to also check fidelity.") + " Not checked: invented slang.")}
+                       ". Pass the original to also check fidelity.") + " Not checked: invented slang or arbitrary added judgments.")}
 
+
+
+def _semantic_issues(text: str, original: str | None, spans: list[tuple[int, int, Entry]],
+                     translator: Translator, setting: Embellishment) -> list[dict[str, Any]]:
+    # Match the dictionary's forms, including slots and inflections, on both sides. Unchanged source uses
+    # spend one allowance per occurrence; this is known-term checking, not inference of arbitrary opinions.
+    matches = {(a, b, e.id): e for a, b, e in spans
+               if semantic_rejection(e, narrator_opinion=setting.narrator_opinion)}
+    if not matches:
+        return []
+    kept = {(e.id, a, b) for a, b, e in _aussie_spans(original or "", translator)}
+    remaining = Counter(eid for eid, a, b in kept)
+    issues = []
+    for (a, b, eid), entry in sorted(matches.items()):
+        reason = semantic_rejection(entry, narrator_opinion=setting.narrator_opinion)
+        if remaining[eid]:
+            remaining[eid] -= 1
+        else:
+            issues.append({"kind": "semantic_effect", "phrase": text[a:b], "entry": eid,
+                           "semantic_effects": list(entry.semantic_effects), "why": reason})
+    return issues
 
 
 def _suggestions(text: str, low: str, aussie_spans: list, level: int | str, vulgarity: int | str | None,

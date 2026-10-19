@@ -127,6 +127,7 @@ class Dictionary:
     adjective_nouns: dict[str, frozenset[str]] = field(default_factory=dict)
     name_aliases: dict[str, tuple[str, ...]] = field(default_factory=dict)
     imagery: tuple[Imagery, ...] = ()
+    overlay_changes: tuple[dict[str, Any], ...] = ()
 
     def swear_strength(self, word: str) -> int:
         """How strong a swear a word is (0 for none), dropped g and plurals read as the listed word."""

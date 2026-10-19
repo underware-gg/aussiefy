@@ -96,7 +96,7 @@ def test_never(translator, text, never):
     ("Families are struggling.", ["doing it tough"]),
     ("She gave me a gift for my birthday.", ["pressie", "prezzie"]),
     ("We need food for the trip.", ["tucker"]),
-    ("I need fifty bucks.", ["quid"]),
+    ("I need fifty pounds sterling.", ["quid"]),
     ("He turned up at the party.", ["rocked up", "lobbed"]),
     ("We swam in the stream.", ["creek"]),
     ("I couldn't care less about the score.", ["give a stuff", "give two hoots", "give a shit", "rat's arse"]),
@@ -159,8 +159,10 @@ def test_lint_leaves_other_senses_alone():
     assert not _suggested("The buck stops here.", "buck")
     assert not _suggested("It came down to a coin toss.", "toss")
     assert not _suggested("The ciphertext bytes head off to Avail.", "head off")
+    assert not _suggested("I need fifty bucks.", "bucks")  # dollars are not pounds sterling
     # and the plain senses are still suggested
-    assert _suggested("He turned up at the party.", "turned up") and _suggested("I need fifty bucks.", "bucks")
+    assert _suggested("He turned up at the party.", "turned up")
+    assert _suggested("I need fifty pounds sterling.", "pounds sterling")
 
 
 @pytest.mark.parametrize("text, wanted", [

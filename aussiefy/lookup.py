@@ -18,7 +18,7 @@ from .errors import UserError
 from .engine import Translator, default_translator
 from .model import Dictionary
 from .morph import pluralise, verb_forms
-from .select import dial_rejection
+from .select import dial_rejection, semantic_rejection
 from .schema import PLACEHOLDER_RE, Entry
 from .cards import entry_card, short_card, shows_riffs
 from .terms import fold, form_key, strip_markup
@@ -151,6 +151,8 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         if " " in qn and any(_in_order(qn.split(), f.split()) for f in forms):
             scored.append((SCORE_IN_ORDER, e, "part of a phrase"))   # "chuck in" ~ "chuck it in", "give the flick"
             continue
+        if semantic_rejection(e, narrator_opinion=setting.narrator_opinion):
+            continue
         if parsed_concepts and not parsed_concepts.intersection(e.concept):
             continue
         best = max((concept_score.get(c, 0.0) for c in e.concept), default=0.0)
@@ -178,6 +180,10 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     else:
         riffs = shows_riffs(setting)
         results = [{**entry_card(e, cap, riffs), "match": how, "score": round(s, 2)} for s, e, how in scored[:limit]]
+    for card in results:
+        reason = semantic_rejection(d.entries[card["id"]], narrator_opinion=setting.narrator_opinion)
+        if reason:
+            card.update(effects_permitted=False, effect_rejection=reason)
     # a lookup reads no profile settings, so its envelope is the dials alone (no profile_config)
     out = {"query": query, **envelope(eff.level, eff.vulgarity, eff.warnings), "results": results}
     images = lookup_images(d, query, eff.level, cap, setting, limit)

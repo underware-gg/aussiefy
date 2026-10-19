@@ -24,6 +24,7 @@ FINITE_HINTS = {"am", "is", "are", "was", "were", "have", "has", "had", "do", "d
                 "could", "shall", "should", "may", "might", "must", "not", "i", "we", "they", "he", "she", "you"}
 
 CLAUSE_END = {".", "!", "?", ";", ":"}
+TIME_ADVERBS = frozenset({"today", "tomorrow", "yesterday", "tonight"})
 AUXILIARIES = (morph.BE_FORMS | morph.HAVE_FORMS | morph.DO_FORMS
                | {"will", "would", "can", "could", "shall", "should", "may", "might", "must"})
 NEGATION = {"not", "n't", "never", "no", "without", "nobody", "nothing", "neither", "none"}
@@ -139,6 +140,42 @@ def noun_argument(capture: Token, tokens: list[Token], tags: list[str], *, unanc
         return False
     return True
 
+
+
+def argument_complete(tokens: list[Token], end: int, tags: list[str] | None, complete: bool = True) -> bool:
+    """A terminal object must not stop inside a name, possessive noun phrase or coordinated argument."""
+    if end == len(tokens):
+        return complete
+    nominal = pos.NOUNS | pos.NAMES | {"PRP", "PRP$", "WP", "DT", "CD", "JJ", "JJR", "JJS", "POS", "VBG", "VBN"}
+    i = end
+    if INLINE_CHAR.match(tokens[i].text):
+        return False
+    if tokens[i].norm in TIME_ADVERBS:
+        return True
+    coordinated = tokens[i].text == ","
+    if coordinated:
+        i += 1
+    for words in (("as", "well", "as"), ("and",), ("or",), ("'n",)):
+        if tuple(t.norm for t in tokens[i:i + len(words)]) == words:
+            i += len(words)
+            coordinated = True
+            break
+    if coordinated:
+        while i < len(tokens) and tags is not None and tags[i] in {"RB", "RBR", "RBS"}:
+            i += 1
+        if i == len(tokens) or tokens[i].is_punct:
+            return False
+        if tags is not None and tags[i] in {"VB", "VBD", "VBP", "VBZ", "MD"}:
+            return True
+        # A fresh subject followed by a finite verb starts another clause, rather than another object.
+        if i + 1 < len(tokens) and tags is not None and tags[i] in nominal and tags[i + 1] in {"VBD", "VBP", "VBZ", "MD"}:
+            return True
+        return tags is not None and tags[i] not in nominal
+    if tokens[i].norm == "of":
+        return False
+    if tokens[i].is_punct:
+        return tokens[i].text not in {"'", "’", "-", "—", "–", "(", "[", "{", "/"}
+    return tags is not None and tags[i] not in nominal
 
 def sentence_contexts(sent: list[Token], tags: list[str] | None = None) -> set[str]:
     """What kind of sentence this is, for garnish that only suits some ("mate" needs someone addressed)."""

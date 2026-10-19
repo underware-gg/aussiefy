@@ -1,0 +1,3298 @@
+baseline: 11aa20c3e6b194bb2de014c314e3f10a8a7783aa
+checked: '2026-10-19'
+original_baseline: 5d1fb04
+original_baseline_entries: 1254
+manifest:
+  path: /private/tmp/aussiefy-audit-batch11.json
+  sha256: 92a91a167a4a28be26478f05805e41981602fb81adfcadeed9f475acfebaf57b
+previous_ledgers:
+- research/slang-meanings-2026-10-18/audit.yaml
+- research/slang-meanings-2026-10-19/audit.yaml
+- research/slang-meanings-2026-10-19-batch2/audit.yaml
+- research/slang-meanings-2026-10-19-batch3/audit.yaml
+- research/slang-meanings-2026-10-19-batch4/audit.yaml
+- research/slang-meanings-2026-10-19-batch5/audit.yaml
+- research/slang-meanings-2026-10-19-batch6/audit.yaml
+- research/slang-meanings-2026-10-19-batch7/audit.yaml
+- research/slang-meanings-2026-10-19-batch8/audit.yaml
+parallel_manifests:
+- path: /private/tmp/aussiefy-audit-batch9.json
+  sha256: d8d3c95360d51cd97c5f0e941b36b271d487e452e25cb61b24448140446ab479
+- path: /private/tmp/aussiefy-audit-batch10.json
+  sha256: c81decdfae8da89efd1ab195efbc5375f26767f3324a1c9f1cd6099c366854cc
+reviewed_entries: 74
+prior_original_entries_reviewed: 940
+prior_plus_this_batch: 1014
+original_entries_outside_this_review_chain: 240
+parallel_original_entries_assigned: 240
+original_union_after_parallel_reconciliation: 1254
+coverage_note: 940 prior original IDs plus74 in this ledger plus240 assigned to parallel9/10 exactly partition
+  the original1254 IDs. Assignment coverage is not completion of independent source review, source application
+  or runtime fixes. New entries after the original baseline are outside these counts.
+decisions_count:
+  selected_sense_supported: 41
+  needs_further_evidence: 2
+  multiple_usages: 25
+  correct_mapping_or_missing_sense: 6
+scope: 'Research only: exact assigned74 original IDs in manifest order. No vocabulary/runtime/provenance/docs/gate/theme/status
+  edits.'
+snapshot_note: File hashes and before fields describe bytes captured from a concurrently edited working tree
+  at contextual HEAD11aa20c. The parent has staged semantic-effects integration and a full suite running. No
+  clean/pristine-HEAD claim is made. Recheck probes and triggers before implementation.
+inventory_files:
+- path: aussiefy/data/concepts.yaml
+  sha256: 50d9ab910041aaddd514caea0c02ec0a03dd7e5191897c05cd57de24eb17584d
+- path: aussiefy/data/entries/swearing.yaml
+  sha256: adf7cc5b0e2ba47563a31c12ab4f3fa91b1dbedabdddea57ef763f9f0874a073
+- path: aussiefy/data/entries/thirdpass.yaml
+  sha256: 988d5a6b1a23c8e0e352da86777825c9429772964bbdf222982b209a54b28169
+source_policy: Source catalogue includes component comparators and leads. Per-entry scopes control what each
+  supports. Provisional cooked and rat-luck records are omitted from sources-proposed. Proposed sources are
+  unapplied evidence, never certificates for all mapped triggers, fixed-idiom status, automatic activation
+  or metadata scores.
+sources:
+  crook-oral:
+    url: https://australiansatwarfilmarchive.unsw.edu.au/archive/htmlTranscript/1844?asPdf=y
+    publisher: Australians at War Film Archive, UNSW
+    kind: primary Australian oral-history transcript
+    checked: '2026-10-19'
+    locator: 'William Gleeson (Bill), interview 16 April 2004, transcript p19, tape passage around07:00–07:30:
+      appendicitis on the Kokoda Trail'
+    access: Full public PDF passage read
+    support_limit: Exact whole construction in illness context. One speaker; not a frequency study or origin
+      claim.
+  rat-luck-lead:
+    url: https://www.reddit.com/r/NoStupidQuestions/comments/16wrr0c/what_phrase_in_a_foreign_country_caught_you_off/
+    publisher: Reddit contributor
+    kind: community testimony
+    checked: '2026-10-19'
+    locator: 1 October 2023 comment self-identifying the luck expression as possibly Canadian
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Exact lucky-rat comparison is reported, but no Australian setting independently established.
+      This is a lead, omitted from candidate provenance.
+  pissed-comparison:
+    url: https://trepo.tuni.fi/bitstream/handle/10024/98712/GRADU-1458133704.pdf?sequence=1
+    publisher: Tampere University repository, thesis
+    kind: scholarly lexical study
+    checked: '2026-10-19'
+    locator: 'Table19: intoxication expressions, exact comparison listed with UK1961 label'
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: A lexical-study table, not a fresh 1961 primary witness or proof of exclusive origin. Supports
+      the drunk rather than angry reading.
+  cword-context:
+    url: https://opus.lib.uts.edu.au/rest/bitstreams/18478d99-a8d9-4465-a52a-ec4226846294/retrieve
+    publisher: Elyse Methven, Current Issues in Criminal Justice36(2),2024, pp135–156, DOI10.1080/10345329.2024.2327742
+    kind: scholarly Australian pragmatics analysis
+    checked: '2026-10-19'
+    locator: 'pp137,144–145: interactional context and selected Macquarie2023 phrase senses'
+    access: Full public PDF passages read
+    support_limit: Australian address/person use has context-dependent solidarity, admiration and abuse. Sick-cunt
+      admiration is explicitly discussed. Most other stored adjective combinations are productive analyses,
+      not separately attested fixed idioms. Macquarie/Burridge/McLeod witnesses reported here were not independently
+      read; journal and repository copies are one family.
+  bastard-bugger-context:
+    url: https://www.boobookeducation.com.au/images/Bastards_and_Buggers.pdf
+    publisher: 'Simon Musgrave and Kate Burridge, Monash University, Bastards and buggers: Historical snapshots
+      of Australian English swearing patterns, in Wrestling with Words and Meanings'
+    kind: primary corpus-based scholarly analysis
+    checked: '2026-10-19'
+    locator: 'chapter1, pp14–15,21–23,28–29: adjective collocations and address terms'
+    access: Full public PDF passages read
+    support_limit: Corpus-based contextual analysis, not attestation of every stored phrase. Old can soften
+      or intensify without stating age; bastard/bugger connotations vary. Quoted underlying corpora are not
+      additional independently retrieved witnesses.
+  bullshit-oxford:
+    url: https://www.encyclopedia.com/literature-and-arts/language-linguistics-and-literary-terms/english-vocabulary-d/bullshit
+    publisher: The Oxford Pocket Dictionary of Current English, licensed reproduction at Encyclopedia.com
+    kind: licensed edited lexical reference
+    checked: '2026-10-19'
+    locator: bullshit noun/verb
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Licensed Oxford reproduction, one source family. The nonsense/false-talk noun does not require
+      proving conscious dishonesty.
+  bloody:
+    url: https://dictionary.cambridge.org/dictionary/english/bloody
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: emphatic adjective, including bloody-good example
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  fuck-off:
+    url: https://dictionary.cambridge.org/dictionary/english/fuck-off
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: departure/dismissal, contrasted with inserted-object annoyance
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  fuck-off-aus:
+    url: https://www.suebutler.com.au/new-words/2023/6/24/fuck-off
+    publisher: Sue Butler, Australian lexicographer
+    kind: original Australian lexicographic commentary
+    checked: '2026-10-19'
+    locator: '24 June2023: phrasal departure/dismissal and newer attributive impressive use'
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: First-hand lexicographic commentary on Australian uses; adjectival fuck-off is separate
+      from this command. No contemporary prevalence statistic.
+  move-arse:
+    url: https://dictionary.cambridge.org/ru/словарь/англо-китайский-традиционный/move-shift-arse
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: 'English definition displayed above translation: hurry or move aside'
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  shit:
+    url: https://www.ahdictionary.com/word/search.html?q=SHIT
+    publisher: American Heritage Dictionary of the English Language, Fifth Edition
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: interjection, person noun, give-a-shit and scare-the-shit idioms
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Edited general-English definitions, not proof of Australian origin. Interjection polarity
+      varies; scare is idiomatic, not literal incontinence.
+  not-give-shit:
+    url: https://dictionary.cambridge.org/us/dictionary/english/not-give-a-shit
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: negative caring idiom
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Supports indifference under negation, not every positive care-less construction. Positive
+      questions/conditionals are not globally forbidden.
+  take-piss:
+    url: https://en.wiktionary.org/wiki/take_the_piss
+    publisher: Wiktionary contributors
+    kind: community-edited lexical reference
+    checked: '2026-10-19'
+    locator: mocking sense with out-of complement
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: The unreasonable-demand and literal urination readings are distinct. Unkind and joking mockery
+      both occur. Community-edited; named older quotations are not independently retrieved witnesses.
+  no-way:
+    url: https://dictionary.cambridge.org/us/dictionary/english/no-way
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: forceful no and separate surprised response
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  fucking:
+    url: https://www.dictionary.com/browse/fucking
+    publisher: Dictionary.com, Random House and licensed Collins entries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: fuckin’ spelling and intensifier uses
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Component intensifier evidence only for expanded phrases; not exact attestation of no-fuckin-way
+      or no-fuckin-idea. Licensed dictionaries and copies are not independent families.
+  fuck:
+    url: https://www.dictionary.com/browse/fuck
+    publisher: Dictionary.com, Random House and licensed Collins entries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: expletive/interjection usage discussion
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Covers anger, shock, dismay and intensification, including interrogative constructions.
+      Does not make every inserted swear an independent inherited idiom.
+  oath-speakers:
+    url: https://aussieenglish.com.au/ae-1429-do-aussies-actually-use-these-10-slang-terms-does-dad-know-it-ep-2/
+    publisher: Aussie English, Pete and Ian
+    kind: primary Australian speaker discussion
+    checked: '2026-10-19'
+    locator: 'episode1429 transcript: ken-oath/fucking-oath agreement; duck’s-nuts/guts praise'
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Australian speaker explanation of selected meanings only. Do not inherit speculative etymologies
+      or blanket claims about gender or frequency.
+  loose-context:
+    url: https://www.australiangeographic.com.au/history-culture/2023/09/the-a-z-of-aussie-slang/
+    publisher: Australian Geographic
+    kind: original Australian language commentary
+    checked: '2026-10-19'
+    locator: Loose-unit section
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Related loose-unit person construction only; not exact evidence for loose-cunt, and conjectural
+      origin discussion is not a proven derivation.
+  cooked-lead:
+    url: https://english.stackexchange.com/questions/341262/popular-usage-of-cnt-as-a-reference-to-a-mate
+    publisher: English Language & Usage Stack Exchange contributor
+    kind: community discussion quoting another source
+    checked: '2026-10-19'
+    locator: '5 August2016 answer quoting an external slang guide: cooked-cunt tired/high'
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: The answer explicitly quotes another guide; not an independent lexical authority. It raises
+      competing readings, but cannot settle the full mental-state range. Stronger evidence remains necessary.
+  cooked-mental-lead:
+    url: https://www.reddit.com/r/AusMemes/comments/z8bcpy
+    publisher: Reddit contributors
+    kind: community usage testimony
+    checked: '2026-10-19'
+    locator: 2022 cooked/cooker discussion
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: First-person discussion connects cooked-in-the-head, intoxication and cooker. Not a controlled
+      dictionary or proof of clinical meaning.
+  weird:
+    url: https://www.oxfordlearnersdictionaries.com/us/definition/english/weird_1
+    publisher: Oxford University Press, Oxford Advanced Learner’s Dictionary
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: strange-person sense
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  suss:
+    url: https://www.collinsdictionary.com/us/dictionary/english/sus
+    publisher: HarperCollins, Collins dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: 'adjective sus/suss: suspicious'
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Adjective sense only; distinguish transitive suss-out cognition. Shared international use
+      does not exclude Australian use.
+  dumb:
+    url: https://dictionary.cambridge.org/us/dictionary/english/dumb?topic=stupid-and-silly
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: stupid sense, distinguished from speechlessness and technical device senses
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  fucked:
+    url: https://dictionary.cambridge.org/us/dictionary/english/fucked
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: broken, in trouble and exhausted senses
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Component only. These predicates do not by themselves establish the stored attributive moral/mental
+      readings.
+  fucked-range:
+    url: https://en.wiktionary.org/wiki/fucked
+    publisher: Wiktionary contributors
+    kind: community-edited lexical reference
+    checked: '2026-10-19'
+    locator: adjective senses and attributive/predicative usage note
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Reprehensible/disturbing is explicitly listed; predicate fatigue and trouble do not automatically
+      license every attributive person phrase. Community-edited; named older quotations are not independently
+      retrieved witnesses.
+  dodgy:
+    url: https://dictionary.cambridge.org/us/dictionary/english/dodgy?q=%40word
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: dishonest/suspicious person and separate unreliable-object senses
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  shitcunt:
+    url: https://en.wiktionary.org/wiki/shitcunt
+    publisher: Wiktionary contributors
+    kind: community-edited lexical reference
+    checked: '2026-10-19'
+    locator: abusive person noun
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Closed spelling is an orthographic comparator to the stored open compound; no fixed severity
+      ranking across communities is inferred. Community-edited; named older quotations are not independently
+      retrieved witnesses.
+  sneaky:
+    url: https://www.oxfordlearnersdictionaries.com/definition/english/sneaky
+    publisher: Oxford University Press, Oxford Advanced Learner’s Dictionary
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: 'adjective: secretive, sometimes dishonest/unpleasant'
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Component adjective only; secretive conduct need not prove a particular crime or motive.
+  clever:
+    url: https://dictionary.cambridge.org/us/dictionary/english/clever?topic=intelligence
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: intelligence and skill, with smart as synonym
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Adjective component only; cheeky or little need not assert physical size, youth, sex or
+      a new identity.
+  funny-range:
+    url: https://dictionaryblog.cambridge.org/2019/11/13/12261/?amp=1
+    publisher: Kate Woodford, Cambridge Dictionary blog
+    kind: original edited vocabulary commentary
+    checked: '2026-10-19'
+    locator: '13 November2019: humorous vs peculiar person readings'
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Component funny only. Does not independently attest every compound or prescribe one mandatory
+      interpretation.
+  shonky:
+    url: https://www.collinsdictionary.com/dictionary/english/shonky
+    publisher: HarperCollins, Collins dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: Australian/NewZealand unreliable or dubious-integrity adjective
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  mean:
+    url: https://www.oxfordlearnersdictionaries.com/definition/english/mean_2
+    publisher: Oxford University Press, Oxford Advanced Learner’s Dictionary
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: unkind, ungenerous and separate skilled senses
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Component adjective only. Generic contempt does not entail a specific cruel act; mean can
+      denote stinginess in a different context.
+  slow-exact:
+    url: https://www.metafilter.com/168015/This-is-not-a-furphy
+    publisher: MetaFilter contributor toycamera
+    kind: primary informal usage
+    checked: '2026-10-19'
+    locator: 3 July2017 opening post on Australian National Dictionary website speed
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Exact whole comparison in performance-speed context. Speaker nationality not established;
+      Australian topic is not proof of Australian origin.
+  duck-hunger:
+    url: https://en.wiktionary.org/wiki/could_eat_the_crotch_out_of_a_low_flying_duck
+    publisher: Wiktionary contributors
+    kind: community-edited lexical reference
+    checked: '2026-10-19'
+    locator: Australian hunger idiom; explicit arse alternative; hungry-enough wrapper in quoted citation
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Evidence for the low-flying-duck construction family and arse variant. G-dropping and exact
+      full stored wording are grammatical/phonetic adaptations. Community-edited; named older quotations are
+      not independently retrieved witnesses.
+  arse-nowhere:
+    url: https://en.wiktionary.org/wiki/arse_end_of_nowhere
+    publisher: Wiktionary contributors
+    kind: community-edited lexical reference
+    checked: '2026-10-19'
+    locator: remote-place noun, hyphenated alternatives
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence. Community-edited; named older quotations are not independently retrieved
+      witnesses.
+  arse-component:
+    url: https://www.oxfordlearnersdictionaries.com/us/definition/english/ass
+    publisher: Oxford University Press, Oxford Advanced Learner’s Dictionary
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: body-part sense explicitly cross-referencing British arse; kick-ass idiom
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Edited spelling/cross-reference and construction comparator. Kick-ass source is not exact
+      kick-arse attestation; the body-part sense is separate from idiot/donkey.
+  piss-off:
+    url: https://dictionary.cambridge.org/us/dictionary/english/piss-off?topic=departing
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: intransitive departure vs inserted-object annoyance
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  piss-about:
+    url: https://www.oxfordlearnersdictionaries.com/definition/english/piss-about
+    publisher: Oxford University Press, Oxford Advanced Learner’s Dictionary
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: intransitive silliness vs transitive time-wasting treatment
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  work-arse:
+    url: https://dictionary.cambridge.org/dictionary/english/work-laugh-freeze-etc-arse-off
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: work-hard idiom and inflected subject examples
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  no-idea:
+    url: https://dictionary.cambridge.org/us/dictionary/english/have-no-idea
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: personal lack of knowledge
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  cheeky:
+    url: https://dictionary.cambridge.org/dictionary/english/cheeky
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: impudent/playfully rude adjective
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  cocky:
+    url: https://www.oxfordlearnersdictionaries.com/us/definition/english/cocky
+    publisher: Oxford University Press, Oxford Advanced Learner’s Dictionary
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: overconfident-person sense
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Component only. Cocky need not literally boast aloud; noun cocky farmer/bird is a distinct
+      reading.
+  comedian:
+    url: https://www.oxfordlearnersdictionaries.com/us/definition/english/comedian
+    publisher: Oxford University Press, Oxford Advanced Learner’s Dictionary
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: profession and separate often-ironic funny-person senses
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: The profession is not a guarantee of successful humour. Bare comedian is ambiguous, not
+      always an error.
+  pull-pin:
+    url: https://www.dictionary.com/browse/pin
+    publisher: Dictionary.com, edited licensed dictionary entries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: 'pull-the-pin phrase: end a relationship/project/program'
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Cancellation selected here; retirement/withdrawal and literal grenade uses remain separate.
+      No exclusive origin claim.
+  drag-chain:
+    url: https://www.collinsdictionary.com/dictionary/english/drag-the-chain
+    publisher: HarperCollins, Collins dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: Australian lag-behind or shirk-work construction
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected meaning supported; does not establish the slowest-shearer origin story in the repository
+      gloss.
+  nut-out:
+    url: https://www.oxfordlearnersdictionaries.com/definition/english/nut-out
+    publisher: Oxford University Press, Oxford Advanced Learner’s Dictionary
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: Australian/NewZealand transitive answer-finding
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: No requirement for a group discussion. Distinguish unrelated US intransitive lose-control
+      usage.
+  give-ring:
+    url: https://en.wiktionary.org/wiki/give_someone_a_ring
+    publisher: Wiktionary contributors
+    kind: community-edited lexical reference
+    checked: '2026-10-19'
+    locator: telephone-call construction and bell alternative
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Telephone meaning selected. Literal jewellery/engagement is separate; preserve the called
+      person. Community-edited; named older quotations are not independently retrieved witnesses.
+  heres-go:
+    url: https://hamiltonanglican.org.au/wp-content/uploads/2026/04/5-April-2026-Easter-Day.pdf
+    publisher: Anglican Parish of Hamilton, Victoria
+    kind: primary Australian publication
+    checked: '2026-10-19'
+    locator: 5 April2026 bulletin p6, daylight-saving announcement heading
+    access: Full public PDF passage read
+    support_limit: Primary exact Australian discourse use introducing practical arrangements; one local text,
+      not an edited exhaustive lexical definition.
+  whats-go:
+    url: https://www.theguardian.com/australia-news/2018/dec/28/whats-the-go-with-the-memes-a-roundup-of-australias-best-in-2018
+    publisher: Guardian Australia
+    kind: primary Australian editorial usage
+    checked: '2026-10-19'
+    locator: 28 December2018 article title and au-pair subsection
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Primary Australian question construction in context; not a frequency survey.
+  first-in:
+    url: https://en.wiktionary.org/wiki/first_in%2C_best_dressed
+    publisher: Wiktionary contributors
+    kind: community-edited lexical reference
+    checked: '2026-10-19'
+    locator: first-arrival advantage and usage note
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Better-choice and broader priority readings coexist. Do not require literal clothing or
+      restrict all use to quality rather than service. Community-edited; named older quotations are not independently
+      retrieved witnesses.
+  first-in-primary:
+    url: https://www.hansard.act.gov.au/Hansard/9th-assembly/Committee-transcripts/planning06a.pdf
+    publisher: ACT Legislative Assembly, Planning and Urban Renewal Committee
+    kind: primary Australian parliamentary transcript
+    checked: '2026-10-19'
+    locator: 18 October2017, p87 solar-access priority discussion
+    access: Full public PDF passage read
+    support_limit: Primary Australian earliest-priority use; not evidence for a clothing-based origin.
+  workmate:
+    url: https://www.oxfordlearnersdictionaries.com/us/definition/english/workmate
+    publisher: Oxford University Press, Oxford Advanced Learner’s Dictionary
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: fellow-worker noun
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  fisho:
+    url: https://en.wiktionary.org/wiki/fisho
+    publisher: Wiktionary contributors
+    kind: community-edited lexical reference
+    checked: '2026-10-19'
+    locator: fisherman AND fishmonger noun senses
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Both senses retained. Seller’s cry is a different syntactic use; no state-exclusive preference
+      inferred. Community-edited; named older quotations are not independently retrieved witnesses.
+  yank:
+    url: https://dictionary.cambridge.org/us/dictionary/english/yank
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: capitalised noun for a US person
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Distinguish verb forceful-pull and within-US regional Yankee senses. Label may be dismissive
+      in context.
+  tragic:
+    url: https://en.wiktionary.org/wiki/tragic
+    publisher: Wiktionary contributors
+    kind: community-edited lexical reference
+    checked: '2026-10-19'
+    locator: Australian obsessive-fan noun
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Noun sense, not sadness adjective. Sport is a documented setting, not a necessary restriction
+      to sport. Community-edited; named older quotations are not independently retrieved witnesses.
+  cheap-chips:
+    url: https://www.collinsdictionary.com/dictionary/english/cheap-as-chips
+    publisher: HarperCollins, Collins dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: inexpensive/good-value construction
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  on-song:
+    url: https://www.collinsdictionary.com/us/dictionary/english/on-song
+    publisher: HarperCollins, Collins dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: performing well
+    access: Full public edited dictionary passage read
+    support_limit: Shared British use is not grounds to remove Australian use. No literal singing requirement.
+  on-song-aus:
+    url: https://www.justracing.com.au/horse-racing/written-by-on-song-for-group-one-assault/39315/amp
+    publisher: AAP report republished by JustRacing
+    kind: primary Australian reported usage
+    checked: '2026-10-19'
+    locator: trainer Grahame Begg on Written By before the William Reid
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Primary Australian reported speech in racing performance context; republications of the
+      AAP story are one family.
+  streets:
+    url: https://dictionary.cambridge.org/dictionary/english/be-streets-ahead
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: better or more advanced than comparator
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Meaning and of-complement structure; runtime probe is clean. No mandatory literal street
+      distance.
+  pear:
+    url: https://dictionary.cambridge.org/dictionary/english/go-pear-shaped
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: plan failure
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected figurative sense; literal pear shape is distinct. UK label does not exclude Australian
+      usage.
+  innings:
+    url: https://dictionary.cambridge.org/us/dictionary/english/have-a-good-innings
+    publisher: Cambridge University Press, English dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: long successful life
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Life sense is conventional, with death common but not compulsory. No implication that only
+      dead people can say this.
+  innings-career:
+    url: https://www.collinsdictionary.com/us/dictionary/english/have-a-good
+    publisher: HarperCollins, Collins dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: long successful run and life senses
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Career and living-speaker examples support broader range; this source and other Collins
+      copies are one family.
+  all-up:
+    url: https://www.abc.net.au/btn/newsbreak/btn-newsbreak-20240409/103687496
+    publisher: ABC Behind the News
+    kind: primary Australian broadcast transcript
+    checked: '2026-10-19'
+    locator: 9 April2024, Dressed Like The Sun segment
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Primary adverbial total-number use; separate all-up adjective and all-up-with hopelessness
+      do not disprove it.
+  fair-few:
+    url: https://en.wiktionary.org/wiki/a_fair_few
+    publisher: Wiktionary contributors
+    kind: community-edited lexical reference
+    checked: '2026-10-19'
+    locator: indefinite sizeable count, determiner/pronoun
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Count expression, not a mass quantifier or a claim of an exact numerical threshold. Community-edited;
+      named older quotations are not independently retrieved witnesses.
+  brolly:
+    url: https://www.oxfordlearnersdictionaries.com/definition/english/brolly
+    publisher: Oxford University Press, Oxford Advanced Learner’s Dictionary
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: umbrella noun, plural brollies
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  out-bush:
+    url: https://www.abc.net.au/btn/resources/teacher/episode/20080624-package.pdf
+    publisher: ABC Behind the News
+    kind: primary Australian broadcast transcript
+    checked: '2026-10-19'
+    locator: 24 June2008 transcript, station-work passage
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Primary Australian out-bush location use; no requirement for desert or a fixed distance
+      threshold.
+  tanty-whole:
+    url: https://www.parliament.tas.gov.au/__data/assets/pdf_file/0022/73282/HA-Thursday-17-August-2023.pdf
+    publisher: Parliament of Tasmania, House of Assembly
+    kind: primary Australian parliamentary transcript
+    checked: '2026-10-19'
+    locator: 17 August2023, p7, Elise Archer speech
+    access: Full public PDF passage read
+    support_limit: Exact chuck-a-tanty construction about adults. Rhetorical allegation is not endorsement
+      or proof of the political claim.
+  tanty:
+    url: https://www.collinsdictionary.com/dictionary/english/tanty
+    publisher: HarperCollins, Collins dictionaries
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: Australian tantrum noun
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Selected sense only; not exclusive Australian origin, population frequency or compatibility
+      with every source sentence.
+  muck-up:
+    url: https://www.dictionary.com/browse/muck-up
+    publisher: Dictionary.com, licensed Collins English Dictionary2012
+    kind: edited lexical reference
+    checked: '2026-10-19'
+    locator: intransitive misbehave vs transitive spoil senses
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Edited licensed entry, one Collins family; the current MISBEHAVE mapping selects only the
+      intransitive sense.
+  buggery-denial:
+    url: https://en.wiktionary.org/wiki/buggery
+    publisher: Wiktionary contributors
+    kind: community-edited lexical reference
+    checked: '2026-10-19'
+    locator: 'adverb: inverted subject plus auxiliary/copula in denial'
+    access: Public search-index entry passage read; not a claim that the entire page was fetched
+    support_limit: Construction evidence; matching auxiliary and subject matters. Repository already has he/she
+      variants; no claim that those variants are absent. Community-edited; named older quotations are not independently
+      retrieved witnesses.
+probe_settings:
+  level: 5
+  vulgarity: 3
+  embellishment: deadset
+  embedder: none
+  lookup_embedder: null
+  unlock:
+  - all
+  registers:
+  - current
+  - dated
+  - archaic
+  seed_search: first named target selection in0–24; additional probes explicitly seed0
+runtime_probes:
+- entry: give-a-shit-about
+  source: I could care less about the prize.
+  seed: 0
+  output: I could give a shit about the prize.
+- entry: give-a-shit-about
+  source: I couldn't care less about the prize.
+  seed: 7
+  output: I couldn't give a fuck about the prize.
+- entry: no-fuckin-way
+  source: I don't think so.
+  seed: 5
+  output: No fuckin' way.
+- entry: no-fuckin-idea
+  source: Who knows?
+  seed: 0
+  output: I've got no fuckin' idea?
+- entry: a-sick-cunt
+  source: He is a decent person, but not outstanding.
+  seed: 9
+  output: He's a sick cunt, but not outstanding.
+- entry: a-funny-cunt
+  source: He is a comedian, but not funny.
+  seed: 1
+  output: He's a funny cunt, but not funny.
+- entry: a-smart-little-cunt
+  source: She is a clever person.
+  seed: 8
+  output: She's a smart little cunt.
+- entry: a-mean-bastard
+  source: He is a troublemaker, but kind.
+  seed: null
+  output: He's a stirrer, but kind.
+  observation: Target not selected in seeds0-24; no automatic failure asserted.
+- entry: a-dog-cunt
+  source: He is a scoundrel but never betrayed anyone.
+  seed: 6
+  output: He's a dog cunt but never betrayed anyone.
+- entry: a-cocky-bastard
+  source: He is a boaster.
+  seed: 1
+  output: He's a cocky bastard.
+- entry: streets-ahead
+  source: This car is far superior to that car.
+  seed: 0
+  output: This car is streets ahead of that car.
+- entry: a-good-innings
+  source: She lived a long life and is still alive.
+  seed: 0
+  output: She had a good innings'n is still kickin'.
+- entry: nut-out
+  source: We figured out the answer.
+  seed: 0
+  output: We nutted out the answer.
+- entry: give-a-ring
+  source: I gave Mary and Jane a call.
+  seed: null
+  output: I gave Mary and Jane a call.
+  observation: Target not selected in seeds0-24; no automatic failure asserted.
+- entry: is-it-buggery
+  source: Most certainly not in any way whatsoever.
+  seed: 0
+  output: Is it buggery.
+- source: Who knows the answer?
+  seed: 0
+  output: I've got no fuckin' idea the answer?
+  selected:
+  - no-fuckin-idea
+- source: Who knows? I do.
+  seed: 0
+  output: I've got no fuckin' idea? I do.
+  selected:
+  - no-fuckin-idea
+- source: She lived a long life but it was unhappy.
+  seed: 0
+  output: She had a good innings but it was unhappy.
+  selected:
+  - a-good-innings
+- source: They were a shady character, but not sneaky.
+  seed: 0
+  output: They were a dodgy cunt, but not sneaky.
+  selected:
+  - a-dodgy-cunt
+- source: He was a good person, but I never admired him.
+  seed: 0
+  output: He was a good cunt, but I never admired him.
+  selected:
+  - a-good-cunt
+decisions:
+- id: crook-as-buggery
+  file: aussiefy/data/entries/swearing.yaml
+  form: crook as buggery
+  forms_before:
+  - crook as buggery
+  concepts_before:
+  - SICK
+  frame: predicate_adj
+  status_before: active
+  register_before: current
+  gloss_before: Very sick.
+  vulgarity_before: 1
+  intensity_before: 5
+  incoherence_before: 3
+  decision: selected_sense_supported
+  evidence:
+  - source: crook-oral
+    locator: 'William Gleeson (Bill), interview 16 April 2004, transcript p19, tape passage around07:00–07:30:
+      appendicitis on the Kokoda Trail'
+  evidence_scope: exact whole expression
+  reasoning: Illness rather than dishonesty is directly established in the primary appendicitis passage.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    SICK:
+      predicate_adj:
+      - sick
+      - ill
+      - unwell
+      - poorly@2
+      - under the weather@2
+      - not well@2
+- id: luckier-than-a-shithouse-rat
+  file: aussiefy/data/entries/swearing.yaml
+  form: luckier than a shithouse rat
+  forms_before:
+  - luckier than a shithouse rat
+  concepts_before:
+  - LUCKY
+  frame: predicate_adj
+  status_before: active
+  register_before: current
+  gloss_before: Extraordinarily lucky.
+  vulgarity_before: 2
+  intensity_before: 5
+  incoherence_before: 4
+  decision: needs_further_evidence
+  evidence:
+  - source: rat-luck-lead
+    locator: 1 October 2023 comment self-identifying the luck expression as possibly Canadian
+  evidence_scope: exact-form community lead; Australian setting unresolved
+  reasoning: The luck comparison does exist in testimony. The retrieved speaker suggests Canada, while the
+    more familiar crazy/cunning rat comparisons cannot stand in as evidence for this luck meaning.
+  limits: No removal, invented-origin label or not-Australian flag follows from this search gap. Candidate
+    source list omits this provisional record.
+  proposed_action: Seek an Australian luck-context witness; retain provisionally.
+  triggers_before:
+    LUCKY:
+      predicate_adj:
+      - lucky !=if|to
+      - very lucky@4
+      - so lucky@4
+      - fortunate !=if|to@3
+      - incredibly lucky@5
+- id: pissed-as-a-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: pissed as a cunt
+  forms_before:
+  - pissed as a cunt
+  concepts_before:
+  - DRUNK
+  frame: predicate_adj
+  status_before: active
+  register_before: current
+  gloss_before: Blind drunk.
+  vulgarity_before: 3
+  intensity_before: 5
+  incoherence_before: 3
+  notes_before: Vulgar intensifying simile; not a slur. Strongly offensive to American ears.
+  decision: selected_sense_supported
+  evidence:
+  - source: pissed-comparison
+    locator: 'Table19: intoxication expressions, exact comparison listed with UK1961 label'
+  evidence_scope: whole comparison listed in a scholarly lexical table
+  reasoning: The comparison is catalogued under intoxication. The UK tag is an origin/variety clue rather than
+    proof that Australians cannot use it.
+  limits: The thesis cites lexicographic data rather than reproducing a primary1961 utterance. No exact first-attested
+    date is established here.
+  proposed_action: Keep DRUNK and avoid anger-only reinterpretation.
+  triggers_before:
+    DRUNK:
+      predicate_adj:
+      - drunk
+      - wasted@4
+      - hammered@4
+      - plastered@4
+      - smashed@4
+      - tipsy@2
+      - intoxicated@3
+      - legless@5
+      - inebriated@4
+      - tiddly@2
+- id: bullshit
+  file: aussiefy/data/entries/swearing.yaml
+  form: bullshit
+  forms_before:
+  - bullshit
+  concepts_before:
+  - NONSENSE
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: Nonsense, lies.
+  vulgarity_before: 2
+  intensity_before: 4
+  incoherence_before: 1
+  sources_before:
+  - https://en.wiktionary.org/wiki/bullshit
+  decision: selected_sense_supported
+  evidence:
+  - source: bullshit-oxford
+    locator: bullshit noun/verb
+  evidence_scope: selected lexical sense
+  reasoning: Nonsense and untrue talk fit NONSENSE. Deliberate lying is possible but need not be proved in
+    every use.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    NONSENSE:
+      np:
+      - nonsense
+      - baloney
+      - hogwash
+      - a load of rubbish
+      - a load of nonsense
+      - a load of garbage
+      - bullshit
+      - a load of bullshit
+- id: bloody-good
+  file: aussiefy/data/entries/swearing.yaml
+  form: bloody good
+  forms_before:
+  - bloody good
+  concepts_before:
+  - EXCELLENT
+  frame: predicate_adj
+  status_before: active
+  register_before: current
+  gloss_before: Very good indeed.
+  vulgarity_before: 1
+  intensity_before: 4
+  incoherence_before: 1
+  decision: selected_sense_supported
+  evidence:
+  - source: bloody
+    locator: emphatic adjective, including bloody-good example
+  evidence_scope: whole collocation in an edited example
+  reasoning: Positive evaluation plus emphatic bloody preserves EXCELLENT, unlike literal blood-covered readings.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    EXCELLENT:
+      adj:
+      - great !big|little|huge|large|war|wars|battle|battles|battle-field|task|deal|many|number|majority|extent|length|distance|sense|care|pains|importance|power|powers|nation|nations|man|men|leader|leaders|depression|wall|lakes|plains|barrier|britain|grandfather|grandmother|aunt|uncle|fire|flood|famine|loss|danger|cause
+      - excellent@4
+      - fantastic@4
+      - wonderful@4
+      - terrific@4
+      - awesome@4
+      - brilliant !=young|mind|minds|scientist|scientists|student|students|mathematician|mathematicians|engineer|engineers|coder|coders|programmer|programmers|thinker|thinkers|scholar|scholars|lawyer|lawyers|doctor|doctors|writer|writers|man|men|woman|women|people|person|boy|boys|girl|girls|kid|kids|child|children|light|lights|sunshine|sunlight|sun|white|blue|red|green|yellow|colour|colours|color|colors|flash|star|stars@4
+      - superb@4
+      - amazing@4
+      - first-rate@4
+      - splendid@4
+      predicate_adj:
+      - great
+      - excellent@4
+      - fantastic@4
+      - awesome@4
+      - amazing@4
+      - brilliant@4
+- id: fuck-off
+  file: aussiefy/data/entries/swearing.yaml
+  form: fuck off
+  forms_before:
+  - fuck off
+  concepts_before:
+  - GO_AWAY
+  frame: imperative
+  status_before: active
+  register_before: current
+  gloss_before: Go away (forcefully).
+  vulgarity_before: 2
+  intensity_before: 5
+  incoherence_before: 1
+  sources_before:
+  - https://en.wiktionary.org/wiki/fuck_off
+  decision: multiple_usages
+  evidence:
+  - source: fuck-off
+    locator: departure/dismissal, contrasted with inserted-object annoyance
+  - source: fuck-off-aus
+    locator: '24 June2023: phrasal departure/dismissal and newer attributive impressive use'
+  evidence_scope: whole phrasal verb plus Australian lexicographic commentary
+  reasoning: Imperative dismissal is supported. Inserted-object annoyance and newer impressive adjective are
+    separate constructions. Current imperative frame chooses the departure command.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Keep the command sense; do not collapse all fuck-off uses into GO_AWAY.
+  triggers_before:
+    GO_AWAY:
+      imperative:
+      - go away
+      - get lost
+      - leave me alone
+      - buzz off
+      - clear off
+      - get out of here
+      - shoo
+- id: move-your-arse
+  file: aussiefy/data/entries/swearing.yaml
+  form: move yer arse
+  forms_before:
+  - move yer arse
+  concepts_before:
+  - HURRY
+  frame: imperative
+  status_before: active
+  register_before: current
+  gloss_before: Hurry up.
+  vulgarity_before: 2
+  intensity_before: 4
+  incoherence_before: 2
+  decision: selected_sense_supported
+  evidence:
+  - source: move-arse
+    locator: 'English definition displayed above translation: hurry or move aside'
+  evidence_scope: whole command with phonetic yer adaptation
+  reasoning: Hurrying is a documented reading; the expression can also tell someone to clear the way. Current
+    HURRY mapping selects the former.
+  limits: No literal motion of a body part, physical disability claim or universal impatience context is required.
+  proposed_action: Retain command function.
+  triggers_before:
+    HURRY:
+      imperative:
+      - hurry up
+      - hurry
+      - get a move on
+      - move it
+      - be quick
+      - speed up
+      - step on it
+- id: give-a-shit-about
+  file: aussiefy/data/entries/swearing.yaml
+  form: give a shit about
+  forms_before:
+  - give a shit about
+  - give a fuck about
+  concepts_before:
+  - CARE_ABOUT
+  frame: vp
+  status_before: active
+  register_before: current
+  gloss_before: Care about (usually in the negative).
+  vulgarity_before: 2
+  intensity_before: 4
+  incoherence_before: 2
+  sources_before:
+  - https://en.wiktionary.org/wiki/give_a_shit
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: shit
+    locator: interjection, person noun, give-a-shit and scare-the-shit idioms
+  - source: not-give-shit
+    locator: negative caring idiom
+  - source: fucking
+    locator: fuckin’ spelling and intensifier uses
+  evidence_scope: care idiom; strengthened fuck variant is productive
+  reasoning: 'The indifferent construction works under negation. The shared CARE_ABOUT pattern consumes care-less
+    in the unnegated US idiom and leaves a positive caring assertion: the read-only seed0 probe gives I could
+    give a shit about the prize. The negative control remains coherent.'
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Refine the shared polarity/comparative trigger boundary while preserving legitimate positive
+    questions, conditional and contrastive uses. This is the same care-less issue as batch8, not a new slang-specific
+    rule.
+  triggers_before:
+    CARE_ABOUT:
+      vp:
+      - care less about
+      - give a damn about
+      - give a hoot about
+- id: take-the-piss-out-of
+  file: aussiefy/data/entries/swearing.yaml
+  form: take the piss out of {obj}
+  forms_before:
+  - take the piss out of {obj}
+  concepts_before:
+  - MOCK
+  frame: vp
+  status_before: active
+  register_before: current
+  gloss_before: Make fun of, send up.
+  vulgarity_before: 2
+  intensity_before: 3
+  incoherence_before: 3
+  sources_before:
+  - https://en.wiktionary.org/wiki/take_the_piss
+  decision: multiple_usages
+  evidence:
+  - source: take-piss
+    locator: mocking sense with out-of complement
+  evidence_scope: whole mocking construction with out-of argument
+  reasoning: MOCK is supported and can describe playful or cutting ridicule. Standalone taking-the-piss can
+    also mean unreasonable conduct; taking-a-piss is urination.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Keep these constructions distinct; retain the target of the mockery.
+  triggers_before:
+    MOCK:
+      vp:
+      - ridicule
+      - make fun of
+      - mock
+      - poke fun at
+      - laugh at
+      - tease
+- id: no-fuckin-way
+  file: aussiefy/data/entries/swearing.yaml
+  form: no fuckin' way
+  forms_before:
+  - no fuckin' way
+  - not a fuckin' chance
+  concepts_before:
+  - DISAGREE
+  frame: interjection
+  status_before: active
+  register_before: current
+  gloss_before: Absolutely not.
+  vulgarity_before: 2
+  intensity_before: 5
+  incoherence_before: 1
+  decision: multiple_usages
+  evidence:
+  - source: no-way
+    locator: forceful no and separate surprised response
+  - source: fucking
+    locator: fuckin’ spelling and intensifier uses
+  evidence_scope: whole no-way meaning plus productive emphatic insertion
+  reasoning: Forceful refusal and surprised disbelief are both established for no-way. Seed5 turns I don’t
+    think so into categorical No fuckin’ way; this is a force/degree choice, not proof that the vocabulary
+    is wrong.
+  limits: The inserted swear does not establish a new fact by itself; intensity may be an intentional configured
+    effect. No unconditional runtime restriction inferred.
+  proposed_action: Review degree and certainty preservation through the shared semantic policy, particularly
+    under Deadset. Do not treat all disagreement as emphatic refusal.
+  triggers_before:
+    DISAGREE:
+      interjection:
+      - 'no'
+      - no way@4
+      - not a chance@4
+      - absolutely not@5
+      - I don't think so@2
+      - nope
+      - certainly not@5
+      - over my dead body@5
+- id: fuckin-oath
+  file: aussiefy/data/entries/swearing.yaml
+  form: fuckin' oath
+  forms_before:
+  - fuckin' oath
+  concepts_before:
+  - AGREE
+  frame: interjection
+  status_before: active
+  register_before: current
+  gloss_before: Absolutely; too right (the stronger "bloody oath").
+  vulgarity_before: 2
+  intensity_before: 5
+  incoherence_before: 3
+  decision: selected_sense_supported
+  evidence:
+  - source: oath-speakers
+    locator: 'episode1429 transcript: ken-oath/fucking-oath agreement; duck’s-nuts/guts praise'
+  evidence_scope: whole phrase with phonetic shortening
+  reasoning: Emphatic agreement is directly explained by Australian speakers; AGREE is the chosen reading.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    AGREE:
+      interjection:
+      - absolutely
+      - definitely
+      - of course !=,|;|—|-
+      - you bet
+      - too right
+      - exactly
+      - certainly
+      - for sure
+      - yes, absolutely@4
+      - yes, definitely@4
+      - you're right
+- id: shit-damn
+  file: aussiefy/data/entries/swearing.yaml
+  form: shit
+  forms_before:
+  - shit
+  concepts_before:
+  - DAMN_EXCLAIM
+  frame: interjection
+  status_before: active
+  register_before: current
+  gloss_before: An exclamation at a setback.
+  vulgarity_before: 2
+  intensity_before: 3
+  incoherence_before: 1
+  decision: selected_sense_supported
+  evidence:
+  - source: shit
+    locator: interjection, person noun, give-a-shit and scare-the-shit idioms
+  evidence_scope: edited interjection sense
+  reasoning: Setback/displeasure is supported. A word that can also express surprise need not be restricted
+    to one emotion globally.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    DAMN_EXCLAIM:
+      interjection:
+      - damn
+      - darn
+      - blast
+      - oh no
+      - dammit
+      - damn it
+- id: fuck-damn
+  file: aussiefy/data/entries/swearing.yaml
+  form: fuck
+  forms_before:
+  - fuck
+  concepts_before:
+  - DAMN_EXCLAIM
+  frame: interjection
+  status_before: active
+  register_before: current
+  gloss_before: A stronger exclamation at a setback.
+  vulgarity_before: 2
+  intensity_before: 5
+  incoherence_before: 1
+  decision: selected_sense_supported
+  evidence:
+  - source: fuck
+    locator: expletive/interjection usage discussion
+  evidence_scope: edited interjection sense
+  reasoning: Anger/dismay at a setback fits the current interjection mapping; nonliteral use is distinct from
+    sexual activity.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    DAMN_EXCLAIM:
+      interjection:
+      - damn
+      - darn
+      - blast
+      - oh no
+      - dammit
+      - damn it
+- id: g-oh-shit
+  file: aussiefy/data/entries/swearing.yaml
+  form: oh, shit
+  forms_before:
+  - oh, shit
+  concepts_before: []
+  frame: interjection
+  status_before: active
+  register_before: current
+  gloss_before: Dismay at what's coming.
+  type_before: garnish
+  vulgarity_before: 2
+  incoherence_before: 1
+  placement_before: opener
+  decision: multiple_usages
+  evidence:
+  - source: shit
+    locator: interjection, person noun, give-a-shit and scare-the-shit idioms
+  - source: fuck
+    locator: expletive/interjection usage discussion
+  evidence_scope: interjection composition
+  reasoning: Dismay is a valid reading; the small opener does not always predict a future setback and can react
+    to an event already noticed.
+  limits: The sources describe components and use, not a fixed universal time reference.
+  proposed_action: Keep reaction/emotion context rather than inventing an impending event.
+  triggers_before: {}
+- id: g-ya-old-bastard
+  file: aussiefy/data/entries/swearing.yaml
+  form: ya old bastard
+  forms_before:
+  - ya old bastard
+  concepts_before: []
+  frame: tag
+  status_before: active
+  register_before: current
+  gloss_before: Fond address for a mate.
+  type_before: garnish
+  vulgarity_before: 1
+  incoherence_before: 2
+  insult_before: true
+  when_before:
+  - second_person
+  - question
+  placement_before: tag
+  decision: multiple_usages
+  evidence:
+  - source: bastard-bugger-context
+    locator: 'chapter1, pp14–15,21–23,28–29: adjective collocations and address terms'
+  evidence_scope: address construction; phonetic ya is a productive adaptation
+  reasoning: A friendly address reading is available, but question/second-person context alone does not establish
+    friendship. Old can be a discourse softener rather than a literal age statement.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Qualify the gloss/notes as context-dependent; retain the affectionate use without claiming
+    that Australians universally find it harmless.
+  triggers_before: {}
+- id: g-ya-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: ya cunt
+  forms_before:
+  - ya cunt
+  concepts_before: []
+  frame: tag
+  status_before: active
+  register_before: current
+  gloss_before: Fond address for a mate.
+  type_before: garnish
+  vulgarity_before: 3
+  incoherence_before: 3
+  insult_before: true
+  notes_before: Affectionate between mates in Australia. Strongly offensive to American ears.
+  when_before:
+  - second_person
+  - question
+  placement_before: tag
+  decision: multiple_usages
+  evidence:
+  - source: cword-context
+    locator: 'pp137,144–145: interactional context and selected Macquarie2023 phrase senses'
+  evidence_scope: address pragmatics
+  reasoning: Fond use is possible. The repository’s second-person/question conditions establish an addressee,
+    not a trusted relationship. Its notes single out American reception without explaining context-dependent
+    Australian reception.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Describe possible offence in Australian contexts too; any stronger familiarity policy should
+    be shared and configurable, not special-cased for this phrase.
+  triggers_before: {}
+- id: a-sick-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: a sick cunt
+  forms_before:
+  - a sick cunt
+  concepts_before:
+  - LEGEND
+  - GOOD_PERSON
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: High praise; someone who is simply the best.
+  vulgarity_before: 3
+  intensity_before: 5
+  incoherence_before: 3
+  notes_before: 1 of 13, best cunts to worst. "Sick" is high praise. Strongly offensive to American ears.
+  decision: multiple_usages
+  evidence:
+  - source: cword-context
+    locator: 'pp137,144–145: interactional context and selected Macquarie2023 phrase senses'
+  evidence_scope: whole admiration phrase, as reported in scholarly discussion
+  reasoning: LEGEND matches high praise. GOOD_PERSON also permits ordinary decency, so the seed9 decent-but-not-outstanding
+    probe adds admiration/intensity in Deadset.
+  limits: This is a semantic fit observation, not a claim that sick is literal illness or that all praise has
+    one mandatory intensity.
+  proposed_action: Consider admiration/degree permission or a narrower meaning association for ordinary GOOD_PERSON;
+    retain the full praise vocabulary.
+  triggers_before:
+    LEGEND:
+      np:
+      - a great guy@4
+      - a wonderful person
+      - an amazing person
+      - an outstanding person
+      - a fantastic person
+    GOOD_PERSON:
+      np:
+      - a nice guy
+      - a good guy
+      - a decent person
+      - a good person
+      - a good man
+      - a top person
+      - a great guy@4
+- id: a-funny-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: a funny cunt
+  forms_before:
+  - a funny cunt
+  concepts_before:
+  - FUNNY_PERSON
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: A very funny person.
+  vulgarity_before: 3
+  intensity_before: 4
+  incoherence_before: 2
+  notes_before: 2 of 13, best cunts to worst. Praise. Strongly offensive to American ears.
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: cword-context
+    locator: 'pp137,144–145: interactional context and selected Macquarie2023 phrase senses'
+  - source: funny-range
+    locator: '13 November2019: humorous vs peculiar person readings'
+  - source: comedian
+    locator: profession and separate often-ironic funny-person senses
+  evidence_scope: component construction and occupation/evaluation distinction
+  reasoning: The humour reading is coherent. FUNNY_PERSON also contains bare comedian; seed1 turns He is a
+    comedian, but not funny into He’s a funny cunt, but not funny. The profession and successful humour are
+    distinguishable.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Separate occupation from humour judgement in shared concepts/context, preserving the colloquial
+    comedian/joker readings where clear.
+  triggers_before:
+    FUNNY_PERSON:
+      np:
+      - a funny guy
+      - a funny man
+      - a funny person
+      - a joker
+      - a comedian
+      - a real joker
+- id: a-loose-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: a loose cunt
+  forms_before:
+  - a loose cunt
+  concepts_before:
+  - WILD_ONE
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: Someone wild and reckless, up for anything.
+  vulgarity_before: 3
+  intensity_before: 4
+  incoherence_before: 3
+  notes_before: 5 of 13, best cunts to worst. Fond; wild, up for anything, no brakes. Strongly offensive to
+    American ears.
+  decision: multiple_usages
+  evidence:
+  - source: cword-context
+    locator: 'pp137,144–145: interactional context and selected Macquarie2023 phrase senses'
+  - source: loose-context
+    locator: Loose-unit section
+  evidence_scope: person-head construction; related loose-unit adjective comparator
+  reasoning: Wild/reckless behaviour fits the selected mapping. The related loose-unit source does not attest
+    this exact compound, and a positive fond tone is contextual rather than compulsory.
+  limits: No drinking, drug-taking or particular act is entailed merely by the adjective. Component evidence
+    does not certify a fixed inherited idiom.
+  proposed_action: Retain WILD_ONE and qualify any universal praise/affection wording.
+  triggers_before:
+    WILD_ONE:
+      np:
+      - a wild one
+      - a party animal
+      - a wild man
+      - a wild woman
+      - a daredevil
+- id: a-cooked-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: a cooked cunt
+  forms_before:
+  - a cooked cunt
+  concepts_before:
+  - LUNATIC
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: Someone not right in the head; fried.
+  vulgarity_before: 3
+  intensity_before: 4
+  incoherence_before: 3
+  notes_before: 6 of 13, best cunts to worst. "Cooked" is not right in the head, fried. Strongly offensive
+    to American ears.
+  decision: needs_further_evidence
+  evidence:
+  - source: cooked-lead
+    locator: '5 August2016 answer quoting an external slang guide: cooked-cunt tired/high'
+  - source: cooked-mental-lead
+    locator: 2022 cooked/cooker discussion
+  - source: cword-context
+    locator: 'pp137,144–145: interactional context and selected Macquarie2023 phrase senses'
+  evidence_scope: competing community readings, not a settled exhaustive lexical entry
+  reasoning: Tired, intoxicated and mentally fried readings occur in the leads. LUNATIC may be plausible slang
+    hyperbole, but this pass did not obtain sufficiently strong direct evidence to certify the current unqualified
+    mental-state gloss.
+  limits: No clinical diagnosis or slang removal is proposed. Component/guidance sources are omitted from applied-source
+    candidates for this unresolved record.
+  proposed_action: Seek stronger contextual witnesses and preserve the competing tired/high and mental-fried
+    possibilities; retain provisionally.
+  triggers_before:
+    LUNATIC:
+      np:
+      - lunatic
+      - madman
+      - maniac
+      - nutcase
+      - crazy person
+      - psycho@4
+      - basket case
+- id: a-weird-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: a weird cunt
+  forms_before:
+  - a weird cunt
+  concepts_before:
+  - ODD_PERSON
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: A strange person.
+  vulgarity_before: 3
+  intensity_before: 4
+  incoherence_before: 2
+  notes_before: 7 of 13, best cunts to worst. Strongly offensive to American ears.
+  decision: selected_sense_supported
+  evidence:
+  - source: cword-context
+    locator: 'pp137,144–145: interactional context and selected Macquarie2023 phrase senses'
+  - source: weird
+    locator: strange-person sense
+  evidence_scope: productive adjective plus person head
+  reasoning: The odd-person adjective is consistent with ODD_PERSON; no claim of exact fixed-idiom status or
+    literal genital reference is needed.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    ODD_PERSON:
+      np:
+      - an eccentric
+      - an odd person
+      - a strange person
+      - an oddball
+      - a weirdo
+- id: a-suss-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: a suss cunt
+  forms_before:
+  - a suss cunt
+  concepts_before:
+  - SHADY_PERSON
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: Someone who seems untrustworthy.
+  vulgarity_before: 3
+  intensity_before: 4
+  incoherence_before: 3
+  notes_before: 8 of 13, best cunts to worst. "Suss" is suspicious. Strongly offensive to American ears.
+  decision: selected_sense_supported
+  evidence:
+  - source: cword-context
+    locator: 'pp137,144–145: interactional context and selected Macquarie2023 phrase senses'
+  - source: suss
+    locator: 'adjective sus/suss: suspicious'
+  evidence_scope: productive adjective plus person head
+  reasoning: Suspicious-person reading fits SHADY_PERSON; cognitive suss-out and proof of guilt are different
+    meanings.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    SHADY_PERSON:
+      np:
+      - a shady character
+      - a suspicious person
+      - a sneaky person
+      - a sneak
+      - a suspicious character
+- id: a-dumb-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: a dumb cunt
+  forms_before:
+  - a dumb cunt
+  concepts_before:
+  - IDIOT
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: A complete idiot.
+  vulgarity_before: 3
+  intensity_before: 5
+  incoherence_before: 2
+  notes_before: 9 of 13, best cunts to worst. Strongly offensive to American ears.
+  decision: selected_sense_supported
+  evidence:
+  - source: cword-context
+    locator: 'pp137,144–145: interactional context and selected Macquarie2023 phrase senses'
+  - source: dumb
+    locator: stupid sense, distinguished from speechlessness and technical device senses
+  evidence_scope: productive adjective plus person head
+  reasoning: The selected foolish-person insult matches IDIOT. Speechlessness, electronics and disability senses
+    are not the target.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    IDIOT:
+      np:
+      - idiot
+      - fool
+      - moron@4
+      - dimwit
+      - nitwit@2
+      - dummy@2
+      - twit@2
+- id: a-fucked-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: a fucked cunt
+  forms_before:
+  - a fucked cunt
+  concepts_before:
+  - LUNATIC
+  - SCOUNDREL
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: Someone deranged or thoroughly rotten.
+  vulgarity_before: 3
+  intensity_before: 5
+  incoherence_before: 3
+  notes_before: 10 of 13, best cunts to worst. Messed up past saving, or vile. Strongly offensive to American
+    ears.
+  decision: multiple_usages
+  evidence:
+  - source: cword-context
+    locator: 'pp137,144–145: interactional context and selected Macquarie2023 phrase senses'
+  - source: fucked
+    locator: broken, in trouble and exhausted senses
+  - source: fucked-range
+    locator: adjective senses and attributive/predicative usage note
+  evidence_scope: component adjective range; full compound not independently established
+  reasoning: Disturbing/reprehensible provides a route to SCOUNDREL. Exhaustion, damage and intoxication are
+    other readings; component predicate definitions alone do not establish the stronger LUNATIC association.
+  limits: Not a confirmed mapping bug or proposal to erase the phrase. Sources are component-only candidates,
+    not certificates for both stored concepts.
+  proposed_action: Keep the range and seek exact attributive witnesses before treating mental incapacity and
+    moral badness as interchangeable.
+  triggers_before:
+    LUNATIC:
+      np:
+      - lunatic
+      - madman
+      - maniac
+      - nutcase
+      - crazy person
+      - psycho@4
+      - basket case
+    SCOUNDREL:
+      np:
+      - scoundrel
+      - lowlife
+      - rotter
+      - troublemaker
+- id: a-dodgy-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: a dodgy cunt
+  forms_before:
+  - a dodgy cunt
+  concepts_before:
+  - SWINDLER
+  - SHADY_PERSON
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: A crook; someone not to be trusted an inch.
+  vulgarity_before: 3
+  intensity_before: 5
+  incoherence_before: 3
+  notes_before: 11 of 13, best cunts to worst. Strongly offensive to American ears.
+  decision: multiple_usages
+  evidence:
+  - source: cword-context
+    locator: 'pp137,144–145: interactional context and selected Macquarie2023 phrase senses'
+  - source: dodgy
+    locator: dishonest/suspicious person and separate unreliable-object senses
+  evidence_scope: productive suspicious/dishonest person construction
+  reasoning: SHADY_PERSON and dishonest-operator SWINDLER are compatible readings. Vague suspicion need not
+    imply a specific fraud, and choosing a broader epithet from a proven fraudster is not itself a contradiction.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Preserve both mappings, documenting direction/specificity rather than requiring evidence
+    of a particular crime for every suspicious-person use.
+  triggers_before:
+    SWINDLER:
+      np:
+      - a swindler
+      - a con man
+      - a con artist
+      - a fraudster
+    SHADY_PERSON:
+      np:
+      - a shady character
+      - a suspicious person
+      - a sneaky person
+      - a sneak
+      - a suspicious character
+- id: a-shit-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: a shit cunt
+  forms_before:
+  - a shit cunt
+  concepts_before:
+  - SCOUNDREL
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: A thoroughly bad person.
+  vulgarity_before: 3
+  intensity_before: 5
+  incoherence_before: 2
+  notes_before: 12 of 13, best cunts to worst. Strongly offensive to American ears.
+  decision: selected_sense_supported
+  evidence:
+  - source: shitcunt
+    locator: abusive person noun
+  - source: shit
+    locator: interjection, person noun, give-a-shit and scare-the-shit idioms
+  evidence_scope: whole closed compound and open-spelling adaptation
+  reasoning: A contemptuous person epithet fits SCOUNDREL; the open/closed spelling difference is orthographic.
+    No worldwide severity ranking is asserted.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    SCOUNDREL:
+      np:
+      - scoundrel
+      - lowlife
+      - rotter
+      - troublemaker
+- id: a-dog-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: a dog cunt
+  forms_before:
+  - a dog cunt
+  concepts_before:
+  - BETRAYER
+  - SCOUNDREL
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: A traitor to his mates; the lowest of the low.
+  vulgarity_before: 3
+  intensity_before: 5
+  incoherence_before: 3
+  notes_before: '13 of 13, best cunts to worst: the lowest. A "dog" betrays mates or informs on them. Strongly
+    offensive to American ears.'
+  decision: multiple_usages
+  evidence:
+  - source: cword-context
+    locator: 'pp137,144–145: interactional context and selected Macquarie2023 phrase senses'
+  evidence_scope: whole dog-cunts usage noted; betrayal specificity unresolved
+  reasoning: The source records the exact abuse family, without making betrayal its necessary defining feature.
+    A generic SCOUNDREL use is not disproved by the seed6 never-betrayed-anyone sentence.
+  limits: Further exact betrayal-context evidence would strengthen that particular sense. Generic insult evidence
+    does not certify a mandatory betrayal history.
+  proposed_action: Keep broad contempt and betrayal-associated usage; do not make the repository’s traitor
+    gloss an exclusive meaning.
+  triggers_before:
+    BETRAYER:
+      np:
+      - a traitor
+      - a backstabber
+      - a turncoat
+    SCOUNDREL:
+      np:
+      - scoundrel
+      - lowlife
+      - rotter
+      - troublemaker
+- id: a-smart-little-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: a smart little cunt
+  forms_before:
+  - a smart little cunt
+  concepts_before:
+  - CLEVER_PERSON
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: A clever, cheeky person.
+  vulgarity_before: 3
+  intensity_before: 4
+  incoherence_before: 3
+  notes_before: Grudging admiration. Strongly offensive to American ears.
+  decision: multiple_usages
+  evidence:
+  - source: cword-context
+    locator: 'pp137,144–145: interactional context and selected Macquarie2023 phrase senses'
+  - source: clever
+    locator: intelligence and skill, with smart as synonym
+  - source: cheeky
+    locator: impudent/playfully rude adjective
+  evidence_scope: productive adjective/person construction
+  reasoning: Cleverness is preserved; cheeky is a possible nuance, not forced by intelligence alone. Little
+    can be evaluative/colloquial rather than a new claim about physical size or age.
+  limits: Seed8 selects it for She is a clever person. This is not itself proof of physical-size or gender
+    alteration.
+  proposed_action: Qualify the cheeky nuance and retain the phrase; do not add arbitrary age/sex restrictions.
+  triggers_before:
+    CLEVER_PERSON:
+      np:
+      - a clever one
+      - a clever fellow
+      - a clever person
+      - a smart cookie
+      - a crafty one
+      - a sly fox
+- id: a-sneaky-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: a sneaky cunt
+  forms_before:
+  - a sneaky cunt
+  concepts_before:
+  - SHADY_PERSON
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: A sly, sneaky person.
+  vulgarity_before: 3
+  intensity_before: 4
+  incoherence_before: 2
+  notes_before: Strongly offensive to American ears.
+  decision: multiple_usages
+  evidence:
+  - source: cword-context
+    locator: 'pp137,144–145: interactional context and selected Macquarie2023 phrase senses'
+  - source: sneaky
+    locator: 'adjective: secretive, sometimes dishonest/unpleasant'
+  evidence_scope: productive adjective/person construction
+  reasoning: Secretive/sly conduct is narrower than bare suspicion but a valid SHADY_PERSON reading. Different
+    SHADY_PERSON triggers may support it to different degrees.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Use available trait/manner context for selection; no requirement to prove a specific criminal
+    motive.
+  triggers_before:
+    SHADY_PERSON:
+      np:
+      - a shady character
+      - a suspicious person
+      - a sneaky person
+      - a sneak
+      - a suspicious character
+- id: g-ya-beautiful-cunt
+  file: aussiefy/data/entries/swearing.yaml
+  form: ya beautiful cunt
+  forms_before:
+  - ya beautiful cunt
+  concepts_before: []
+  frame: tag
+  status_before: active
+  register_before: current
+  gloss_before: Fond address, in thanks or delight.
+  type_before: garnish
+  vulgarity_before: 3
+  incoherence_before: 3
+  insult_before: true
+  notes_before: Warm thanks or praise to a mate. Strongly offensive to American ears.
+  when_before:
+  - second_person
+  - question
+  placement_before: tag
+  decision: multiple_usages
+  evidence:
+  - source: cword-context
+    locator: 'pp137,144–145: interactional context and selected Macquarie2023 phrase senses'
+  evidence_scope: productive appreciative vocative
+  reasoning: An appreciative tag is plausible. Beautiful here need not report physical attractiveness, while
+    friendly reception still depends on the relationship.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Keep appreciative delivery available and qualify the gloss as a context-dependent address,
+    not universal harmlessness.
+  triggers_before: {}
+- id: a-funny-bugger
+  file: aussiefy/data/entries/swearing.yaml
+  form: a funny bugger
+  forms_before:
+  - a funny bugger
+  concepts_before:
+  - FUNNY_PERSON
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: A funny person, or an odd one.
+  vulgarity_before: 1
+  intensity_before: 3
+  incoherence_before: 2
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: bastard-bugger-context
+    locator: 'chapter1, pp14–15,21–23,28–29: adjective collocations and address terms'
+  - source: funny-range
+    locator: '13 November2019: humorous vs peculiar person readings'
+  - source: comedian
+    locator: profession and separate often-ironic funny-person senses
+  evidence_scope: productive adjective/person construction and ambiguous occupation trigger
+  reasoning: Both humorous and peculiar readings can be genuine. The shared FUNNY_PERSON bare-comedian trigger
+    has the same occupation/evaluation conflation demonstrated by a-funny-cunt.
+  limits: This entry itself was not separately selected in the contradictory probe; its association uses the
+    same trigger. No second independent runtime failure claimed.
+  proposed_action: Fix the shared concept boundary once; preserve both funny senses and avoid treating all
+    comedians as successful jokers.
+  triggers_before:
+    FUNNY_PERSON:
+      np:
+      - a funny guy
+      - a funny man
+      - a funny person
+      - a joker
+      - a comedian
+      - a real joker
+- id: a-smart-bugger
+  file: aussiefy/data/entries/swearing.yaml
+  form: a smart bugger
+  forms_before:
+  - a smart bugger
+  - a cunning bastard
+  - a cunning little bugger
+  concepts_before:
+  - CLEVER_PERSON
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: A clever, crafty person.
+  vulgarity_before: 1
+  intensity_before: 3
+  incoherence_before: 2
+  decision: selected_sense_supported
+  evidence:
+  - source: bastard-bugger-context
+    locator: 'chapter1, pp14–15,21–23,28–29: adjective collocations and address terms'
+  - source: clever
+    locator: intelligence and skill, with smart as synonym
+  evidence_scope: productive adjective plus person head
+  reasoning: Clever/crafty meaning is compositionally coherent. Bugger does not force a literal sexual reading
+    or an unkind judgement.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    CLEVER_PERSON:
+      np:
+      - a clever one
+      - a clever fellow
+      - a clever person
+      - a smart cookie
+      - a crafty one
+      - a sly fox
+- id: a-sneaky-bastard
+  file: aussiefy/data/entries/swearing.yaml
+  form: a sneaky bastard
+  forms_before:
+  - a sneaky bastard
+  concepts_before:
+  - SHADY_PERSON
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: A sly, sneaky person.
+  vulgarity_before: 1
+  intensity_before: 3
+  incoherence_before: 2
+  decision: multiple_usages
+  evidence:
+  - source: bastard-bugger-context
+    locator: 'chapter1, pp14–15,21–23,28–29: adjective collocations and address terms'
+  - source: sneaky
+    locator: 'adjective: secretive, sometimes dishonest/unpleasant'
+  evidence_scope: productive trait/person construction; related sneaky-conniving-bastard witness
+  reasoning: The sly-person reading is coherent; secrecy can be less specific than wrongdoing, and some contexts
+    are playful.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Retain the trait and permit contextual tone; do not infer a definite fraud from mere sneakiness.
+  triggers_before:
+    SHADY_PERSON:
+      np:
+      - a shady character
+      - a suspicious person
+      - a sneaky person
+      - a sneak
+      - a suspicious character
+- id: a-shonky-bastard
+  file: aussiefy/data/entries/swearing.yaml
+  form: a shonky bastard
+  forms_before:
+  - a shonky bastard
+  concepts_before:
+  - SWINDLER
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: A swindler, a shonk.
+  vulgarity_before: 1
+  intensity_before: 4
+  incoherence_before: 3
+  decision: multiple_usages
+  evidence:
+  - source: bastard-bugger-context
+    locator: 'chapter1, pp14–15,21–23,28–29: adjective collocations and address terms'
+  - source: shonky
+    locator: Australian/NewZealand unreliable or dubious-integrity adjective
+  evidence_scope: productive dubious-integrity/person construction
+  reasoning: Dishonest-operator meaning supports SWINDLER, alongside unreliable/shoddy uses of shonky. A specific
+    swindle is not required for every broader noun use.
+  limits: The entire compound was not established as an independently lexicalised idiom; no exclusive-origin
+    claim.
+  proposed_action: Retain the selected person sense and acknowledge broader adjective range.
+  triggers_before:
+    SWINDLER:
+      np:
+      - a swindler
+      - a con man
+      - a con artist
+      - a fraudster
+- id: a-mean-bastard
+  file: aussiefy/data/entries/swearing.yaml
+  form: a mean bastard
+  forms_before:
+  - a mean bastard
+  concepts_before:
+  - SCOUNDREL
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: A cruel, nasty person.
+  vulgarity_before: 1
+  intensity_before: 4
+  incoherence_before: 1
+  decision: multiple_usages
+  evidence:
+  - source: bastard-bugger-context
+    locator: 'chapter1, pp14–15,21–23,28–29: adjective collocations and address terms'
+  - source: mean
+    locator: unkind, ungenerous and separate skilled senses
+  evidence_scope: productive unkind-person construction
+  reasoning: Cruel/unkind is plausible; stinginess is another mean reading. Generic contempt or troublemaking
+    is not identical to either, so context matters.
+  limits: The diagnostic troublemaker-but-kind probe did not select this entry in seeds0–24, so no observed
+    automatic contradiction is claimed.
+  proposed_action: Consider trait/tone specificity in future SCOUNDREL selection, retaining both genuine mean
+    senses.
+  triggers_before:
+    SCOUNDREL:
+      np:
+      - scoundrel
+      - lowlife
+      - rotter
+      - troublemaker
+- id: slow-as-buggery
+  file: aussiefy/data/entries/swearing.yaml
+  form: slow as buggery
+  forms_before:
+  - slow as buggery
+  concepts_before:
+  - SLOW
+  frame: predicate_adj
+  status_before: active
+  register_before: current
+  gloss_before: Painfully slow.
+  vulgarity_before: 1
+  intensity_before: 5
+  incoherence_before: 2
+  decision: selected_sense_supported
+  evidence:
+  - source: slow-exact
+    locator: 3 July2017 opening post on Australian National Dictionary website speed
+  evidence_scope: exact whole construction in informal use
+  reasoning: The speed complaint directly supports SLOW. Machine speed also fits; no human-only or literal-sex
+    reading follows.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    SLOW:
+      predicate_adj:
+      - very slow
+      - painfully slow
+      - sluggish
+      - slow as a snail
+      - slow as molasses
+- id: the-ducks-nuts
+  file: aussiefy/data/entries/swearing.yaml
+  form: the duck's nuts
+  forms_before:
+  - the duck's nuts
+  concepts_before:
+  - EXCELLENT
+  frame: predicate_adj
+  status_before: active
+  register_before: current
+  gloss_before: The very best.
+  vulgarity_before: 1
+  intensity_before: 5
+  incoherence_before: 3
+  decision: selected_sense_supported
+  evidence:
+  - source: oath-speakers
+    locator: 'episode1429 transcript: ken-oath/fucking-oath agreement; duck’s-nuts/guts praise'
+  evidence_scope: whole phrase explained in Australian speaker discussion
+  reasoning: The phrase is evaluative praise and fits EXCELLENT. No anatomical fact or proven etymology follows.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    EXCELLENT:
+      adj:
+      - great !big|little|huge|large|war|wars|battle|battles|battle-field|task|deal|many|number|majority|extent|length|distance|sense|care|pains|importance|power|powers|nation|nations|man|men|leader|leaders|depression|wall|lakes|plains|barrier|britain|grandfather|grandmother|aunt|uncle|fire|flood|famine|loss|danger|cause
+      - excellent@4
+      - fantastic@4
+      - wonderful@4
+      - terrific@4
+      - awesome@4
+      - brilliant !=young|mind|minds|scientist|scientists|student|students|mathematician|mathematicians|engineer|engineers|coder|coders|programmer|programmers|thinker|thinkers|scholar|scholars|lawyer|lawyers|doctor|doctors|writer|writers|man|men|woman|women|people|person|boy|boys|girl|girls|kid|kids|child|children|light|lights|sunshine|sunlight|sun|white|blue|red|green|yellow|colour|colours|color|colors|flash|star|stars@4
+      - superb@4
+      - amazing@4
+      - first-rate@4
+      - splendid@4
+      predicate_adj:
+      - great
+      - excellent@4
+      - fantastic@4
+      - awesome@4
+      - amazing@4
+      - brilliant@4
+- id: hungry-enough-to-eat-the-arse-out-of-a-duck
+  file: aussiefy/data/entries/swearing.yaml
+  form: hungry enough to eat the arse out of a low-flyin' duck
+  forms_before:
+  - hungry enough to eat the arse out of a low-flyin' duck
+  concepts_before:
+  - HUNGRY
+  frame: predicate_adj
+  status_before: active
+  register_before: current
+  gloss_before: Starving.
+  vulgarity_before: 2
+  intensity_before: 5
+  incoherence_before: 4
+  decision: selected_sense_supported
+  evidence:
+  - source: duck-hunger
+    locator: Australian hunger idiom; explicit arse alternative; hungry-enough wrapper in quoted citation
+  evidence_scope: documented construction family plus arse alternative
+  reasoning: Extreme hunger is directly supported. Stored hungry-enough wording and dropped-g pronunciation
+    are productive variants of the documented family.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Keep food hunger and existing intensity policy; do not substitute this evidence for appetite-for-power
+    uses.
+  triggers_before:
+    HUNGRY:
+      predicate_adj:
+      - hungry@3
+      - starving@4
+      - famished@4
+      - ravenous@5
+      - peckish@2
+      vp:
+      - feel pretty? hungry ^end
+- id: the-arse-end-of-nowhere
+  file: aussiefy/data/entries/swearing.yaml
+  form: the arse-end of nowhere
+  forms_before:
+  - the arse-end of nowhere
+  concepts_before:
+  - FAR_AWAY
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: The most remote place imaginable.
+  vulgarity_before: 2
+  intensity_before: 5
+  incoherence_before: 2
+  decision: selected_sense_supported
+  evidence:
+  - source: arse-nowhere
+    locator: remote-place noun, hyphenated alternatives
+  evidence_scope: whole remote-place expression
+  reasoning: Remote-place noun fits FAR_AWAY; not every distant object is a location in the middle of nowhere.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    FAR_AWAY:
+      np:
+      - the middle of nowhere
+      - the back of beyond
+      - the boondocks
+      - the sticks
+- id: arse
+  file: aussiefy/data/entries/swearing.yaml
+  form: arse
+  forms_before:
+  - arse
+  concepts_before:
+  - BACKSIDE
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: The backside.
+  vulgarity_before: 2
+  intensity_before: 3
+  incoherence_before: 1
+  decision: selected_sense_supported
+  evidence:
+  - source: arse-component
+    locator: body-part sense explicitly cross-referencing British arse; kick-ass idiom
+  evidence_scope: edited body-part cross-reference
+  reasoning: BACKSIDE is supported; ass-as-donkey/idiot is not the intended target.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    BACKSIDE:
+      np:
+      - backside
+      - rear end
+      - buttocks@4
+- id: piss-off-leave
+  file: aussiefy/data/entries/swearing.yaml
+  form: piss off
+  forms_before:
+  - piss off
+  concepts_before:
+  - LEAVE
+  frame: vp
+  status_before: active
+  register_before: current
+  gloss_before: Leave, clear off.
+  vulgarity_before: 2
+  intensity_before: 3
+  incoherence_before: 2
+  decision: selected_sense_supported
+  evidence:
+  - source: piss-off
+    locator: intransitive departure vs inserted-object annoyance
+  evidence_scope: whole intransitive departure phrasal verb
+  reasoning: Current LEAVE mapping chooses departure. Inserted-object annoyance and emotional pissed-off are
+    distinct constructions.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    LEAVE:
+      vp:
+      - head off !=to|for|into|towards|toward|down|up|home|across|through|back|out|the|a|an|any|it|this|that|them|trouble
+      - get going !=on|with|again|at|in|early|soon
+      - make a move
+      - make {poss}self scarce
+- id: kick-arse
+  file: aussiefy/data/entries/swearing.yaml
+  form: kick {objposs} arse
+  forms_before:
+  - kick {objposs} arse
+  concepts_before:
+  - THRASH
+  frame: vp
+  status_before: active
+  register_before: current
+  gloss_before: Beat someone soundly.
+  vulgarity_before: 2
+  intensity_before: 4
+  incoherence_before: 2
+  decision: multiple_usages
+  evidence:
+  - source: arse-component
+    locator: body-part sense explicitly cross-referencing British arse; kick-ass idiom
+  evidence_scope: kick-ass idiom plus explicit arse spelling comparator
+  reasoning: Defeat/punish meaning supports the figurative THRASH use. Physical kicking, motivation and punishment
+    can coexist in the wider expression.
+  limits: Comparator rather than independently retrieved exact arse spelling. No claim that every beating was
+    delivered by kicking.
+  proposed_action: Preserve the defeated object/possessor; distinguish bare adjectival kick-arse from this
+    transitive VP.
+  triggers_before:
+    THRASH:
+      vp:
+      - thrash {obj}
+      - beat {obj} up
+      - give {obj} a beating
+      - trounce {obj}
+      - beat {obj} soundly
+      - wallop {obj}
+      - clobber {obj}
+- id: piss-about
+  file: aussiefy/data/entries/swearing.yaml
+  form: piss about
+  forms_before:
+  - piss about
+  - fart-arse around
+  concepts_before:
+  - FOOL_AROUND
+  frame: vp
+  status_before: active
+  register_before: current
+  gloss_before: Muck about, waste time.
+  vulgarity_before: 2
+  intensity_before: 3
+  incoherence_before: 2
+  decision: selected_sense_supported
+  evidence:
+  - source: piss-about
+    locator: intransitive silliness vs transitive time-wasting treatment
+  evidence_scope: whole intransitive phrasal verb
+  reasoning: Silly time-wasting fits FOOL_AROUND; piss-someone-about is a different construction that needs
+    its object.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    FOOL_AROUND:
+      vp:
+      - fool around
+      - mess about
+      - mess around
+      - kid around
+      - horse around
+      - play the fool
+- id: work-arse-off
+  file: aussiefy/data/entries/swearing.yaml
+  form: work {poss} arse off
+  forms_before:
+  - work {poss} arse off
+  concepts_before:
+  - WORK_HARD
+  frame: vp
+  status_before: active
+  register_before: current
+  gloss_before: Work extremely hard.
+  vulgarity_before: 2
+  intensity_before: 4
+  incoherence_before: 2
+  decision: selected_sense_supported
+  evidence:
+  - source: work-arse
+    locator: work-hard idiom and inflected subject examples
+  evidence_scope: whole construction with inflected example
+  reasoning: Extreme work is supported; the possessor follows the worker. Hyperbole does not imply literal
+    injury.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    WORK_HARD:
+      vp:
+      - break {poss} backs
+      - break {poss} back
+      - work {poss} fingers to the bone
+      - slave away
+      - toil
+- id: scare-the-shit-out-of
+  file: aussiefy/data/entries/swearing.yaml
+  form: scare the shit out of {obj}
+  forms_before:
+  - scare the shit out of {obj}
+  concepts_before:
+  - FRIGHTEN
+  frame: vp
+  status_before: active
+  register_before: current
+  gloss_before: Frighten badly.
+  vulgarity_before: 2
+  intensity_before: 5
+  incoherence_before: 1
+  decision: selected_sense_supported
+  evidence:
+  - source: shit
+    locator: interjection, person noun, give-a-shit and scare-the-shit idioms
+  evidence_scope: whole idiom explicitly listed in an edited entry
+  reasoning: Strong fright is supported. The frightened object must remain the object, and literal loss of
+    bowel control is not entailed.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    FRIGHTEN:
+      vp:
+      - frighten
+      - scare
+      - terrify
+- id: no-fuckin-idea
+  file: aussiefy/data/entries/swearing.yaml
+  form: I've got no fuckin' idea
+  forms_before:
+  - I've got no fuckin' idea
+  concepts_before:
+  - DONT_KNOW
+  frame: clause
+  status_before: active
+  register_before: current
+  gloss_before: I don't know at all.
+  vulgarity_before: 2
+  intensity_before: 5
+  incoherence_before: 1
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: no-idea
+    locator: personal lack of knowledge
+  - source: fucking
+    locator: fuckin’ spelling and intensifier uses
+  evidence_scope: personal no-idea clause plus productive intensifier
+  reasoning: 'Fixed first-person ignorance fits I-don’t-know. The shared clause trigger who-knows also consumes
+    the start of a real information question: seed0 produces I’ve got no fuckin’ idea the answer? from Who
+    knows the answer?'
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Distinguish complete rhetorical ignorance from information-seeking who questions; protect
+    person and complements through the shared clause matcher.
+  triggers_before:
+    DONT_KNOW:
+      clause:
+      - I don't know
+      - I have no idea
+      - who knows
+- id: what-the-fuck
+  file: aussiefy/data/entries/swearing.yaml
+  form: what the fuck
+  forms_before:
+  - what the fuck
+  concepts_before:
+  - SURPRISE
+  frame: interjection
+  status_before: active
+  register_before: current
+  gloss_before: Disbelief or shock.
+  vulgarity_before: 2
+  intensity_before: 5
+  incoherence_before: 1
+  decision: multiple_usages
+  evidence:
+  - source: fuck
+    locator: expletive/interjection usage discussion
+  - source: fucking
+    locator: fuckin’ spelling and intensifier uses
+  evidence_scope: productive wh-interrogative intensification
+  reasoning: Surprise/disbelief is supported; the wording can also request an explanation or react angrily.
+    It is not limited to a single emotional valence.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Keep the interjection reading without converting every genuine what question into a contentless
+    exclamation.
+  triggers_before:
+    SURPRISE:
+      interjection:
+      - wow
+      - good grief
+      - goodness
+      - my goodness
+      - oh my god@4
+      - oh my gosh
+      - good heavens
+      - goodness me
+      - gosh
+      - golly
+      - oh dear
+      - blimey
+      - holy cow
+      - well I never
+      - I can't believe it
+      - unbelievable
+- id: a-cheeky-bastard
+  file: aussiefy/data/entries/swearing.yaml
+  form: a cheeky bastard
+  forms_before:
+  - a cheeky bastard
+  concepts_before:
+  - RASCAL
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: A cheeky, likeable rascal.
+  vulgarity_before: 1
+  intensity_before: 3
+  incoherence_before: 2
+  decision: multiple_usages
+  evidence:
+  - source: bastard-bugger-context
+    locator: 'chapter1, pp14–15,21–23,28–29: adjective collocations and address terms'
+  - source: cheeky
+    locator: impudent/playfully rude adjective
+  evidence_scope: productive impudent-person construction
+  reasoning: RASCAL’s mischievous likeable person fits the playful reading. The phrase can also be reproach,
+    so likeability is contextual.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Retain both teasing and irritated tone possibilities; do not require literal parentage or
+    a particular sex.
+  triggers_before:
+    RASCAL:
+      np:
+      - rascal
+      - prankster
+      - joker
+      - mischief-maker
+      - scamp
+- id: a-cheeky-little-shit
+  file: aussiefy/data/entries/swearing.yaml
+  form: a cheeky little shit
+  forms_before:
+  - a cheeky little shit
+  concepts_before:
+  - RASCAL
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: An impudent rascal, often a kid.
+  vulgarity_before: 2
+  intensity_before: 4
+  incoherence_before: 2
+  decision: multiple_usages
+  evidence:
+  - source: shit
+    locator: interjection, person noun, give-a-shit and scare-the-shit idioms
+  - source: cheeky
+    locator: impudent/playfully rude adjective
+  evidence_scope: productive adjective/person construction
+  reasoning: Impudent rascal is coherent. Shit contributes contempt; little and cheeky need not require an
+    actual child in every bantering use.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Keep the rascal mapping and contextual age/tone notes; do not assert that all such addresses
+    are affectionate.
+  triggers_before:
+    RASCAL:
+      np:
+      - rascal
+      - prankster
+      - joker
+      - mischief-maker
+      - scamp
+- id: a-cocky-bastard
+  file: aussiefy/data/entries/swearing.yaml
+  form: a cocky bastard
+  forms_before:
+  - a cocky bastard
+  concepts_before:
+  - BOASTER
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: An arrogant show-off.
+  vulgarity_before: 1
+  intensity_before: 4
+  incoherence_before: 2
+  decision: selected_sense_supported
+  evidence:
+  - source: bastard-bugger-context
+    locator: 'chapter1, pp14–15,21–23,28–29: adjective collocations and address terms'
+  - source: cocky
+    locator: overconfident-person sense
+  evidence_scope: productive overconfident-person construction
+  reasoning: Arrogant showing-off is compatible with BOASTER. This is not the Australian noun cocky meaning
+    farmer or bird.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Keep person evaluation; no necessity to infer a spoken boast in every cocky-person use.
+  triggers_before:
+    BOASTER:
+      np:
+      - show-off
+      - braggart
+      - boaster
+      - big talker
+- id: pull-the-pin-on
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: pull the pin on {np}
+  forms_before:
+  - pull the pin on {np}
+  - pull the pin on {obj}
+  concepts_before:
+  - CALL_OFF
+  frame: vp
+  status_before: active
+  register_before: current
+  gloss_before: Call something off, cancel it (they pulled the pin on the trip).
+  intensity_before: 3
+  incoherence_before: 3
+  sources_before:
+  - https://en.wiktionary.org/wiki/pull_the_pin
+  decision: selected_sense_supported
+  evidence:
+  - source: pull-pin
+    locator: 'pull-the-pin phrase: end a relationship/project/program'
+  evidence_scope: whole cancellation phrase with productive object frame
+  reasoning: Cancelling the trip/project fits CALL_OFF. The repository keeps the named object through the on-complement.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Retain cancellation separately from retirement and literal grenade handling.
+  triggers_before:
+    CALL_OFF:
+      vp:
+      - call off {np}
+      - call {obj} off
+- id: drag-the-chain
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: drag the chain
+  forms_before:
+  - drag the chain
+  concepts_before:
+  - DRAG_FEET
+  frame: vp
+  status_before: active
+  register_before: current
+  gloss_before: Lag behind the rest, go slow on something that should be getting done (from the slowest shearer).
+  intensity_before: 3
+  incoherence_before: 3
+  sources_before:
+  - https://en.wiktionary.org/wiki/drag_the_chain
+  decision: multiple_usages
+  evidence:
+  - source: drag-chain
+    locator: Australian lag-behind or shirk-work construction
+  evidence_scope: whole Australian phrase
+  reasoning: Lagging/shirking fits DRAG_FEET. The retrieved edited entry does not establish the repository’s
+    slowest-shearer history as settled.
+  limits: No literal chain or manual-labour setting is mandatory.
+  proposed_action: Keep the meaning; qualify or separately source the origin aside.
+  triggers_before:
+    DRAG_FEET:
+      vp:
+      - drag {poss} feet
+      - lag behind !=the|a|an|his|her|their|its|my|our|your|everyone|everybody|us|them|him|schedule|others
+- id: nut-out
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: nut out
+  forms_before:
+  - nut out
+  concepts_before:
+  - NUT_OUT
+  frame: vp
+  status_before: active
+  register_before: current
+  gloss_before: Work out a problem or a plan by hard thinking (nut out a deal, nut out how it works).
+  intensity_before: 3
+  incoherence_before: 3
+  sources_before:
+  - https://en.wiktionary.org/wiki/nut_out
+  decision: selected_sense_supported
+  evidence:
+  - source: nut-out
+    locator: Australian/NewZealand transitive answer-finding
+  evidence_scope: whole Australian/NewZealand transitive phrasal verb
+  reasoning: Answer-finding fits NUT_OUT. Seed0 correctly keeps the answer complement and inflects nutted.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Keep the problem-solving reading and complements; do not import unrelated US lose-control
+    meaning.
+  triggers_before:
+    NUT_OUT:
+      vp:
+      - figure out
+      - hammer out
+      - thrash out
+      - puzzle out
+- id: give-a-ring
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: give {obj} a ring
+  forms_before:
+  - give {obj} a ring
+  - give {obj} a bell
+  concepts_before:
+  - RING_UP
+  frame: vp
+  status_before: active
+  register_before: current
+  gloss_before: Phone someone (give us a ring).
+  intensity_before: 3
+  incoherence_before: 2
+  sources_before:
+  - https://en.wiktionary.org/wiki/give_someone_a_ring
+  decision: multiple_usages
+  evidence:
+  - source: give-ring
+    locator: telephone-call construction and bell alternative
+  evidence_scope: whole telephone-call construction and bell variant
+  reasoning: RING_UP is supported. Jewellery and engagement readings are separate. Shared argument-completion
+    protection conservatively leaves the coordinated Mary-and-Jane probe unchanged.
+  limits: No coordinated-name loss is claimed; the target was not selected in seeds0–24.
+  proposed_action: Preserve the called party and keep literal ring-giving distinct.
+  triggers_before:
+    RING_UP:
+      vp:
+      - give {obj} a call
+      - give {obj} a phone call
+- id: heres-the-go
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: here's the go
+  forms_before:
+  - here's the go
+  concepts_before:
+  - HERES_THE_DEAL
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: This is how things stand, or what we'll do (here's the go, we leave at six).
+  intensity_before: 3
+  incoherence_before: 3
+  decision: selected_sense_supported
+  evidence:
+  - source: heres-go
+    locator: 5 April2026 bulletin p6, daylight-saving announcement heading
+  evidence_scope: exact primary Australian discourse-marker use
+  reasoning: The heading introduces practical arrangements rather than physical movement. HERES_THE_DEAL’s
+    plan/situation reading is supported.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    HERES_THE_DEAL:
+      np:
+      - here's the deal
+      - here is the deal
+      - here's the plan
+      - here is the plan
+- id: whats-the-go
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: what's the go
+  forms_before:
+  - what's the go
+  concepts_before:
+  - WHATS_THE_DEAL
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: What's happening, what's the plan or the story (what's the go with the car?).
+  intensity_before: 3
+  incoherence_before: 3
+  decision: selected_sense_supported
+  evidence:
+  - source: whats-go
+    locator: 28 December2018 article title and au-pair subsection
+  evidence_scope: exact primary Australian question construction
+  reasoning: Situation enquiry is supported in the reported Australian discourse. The selected frame does not
+    imply a literal negotiated commercial deal.
+  limits: Only the title/construction observation is derived from this newspaper page; no longer passage or
+    quoted meme collection is reproduced.
+  proposed_action: Keep current literal-deal exclusions; retain plan/status enquiry.
+  triggers_before:
+    WHATS_THE_DEAL:
+      np:
+      - what's the deal !=worth|for|between|on|size
+      - what is the deal !=worth|for|between|on|size
+      - what's the plan !=for
+      - what is the plan !=for
+- id: first-in-best-dressed
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: first in, best dressed
+  forms_before:
+  - first in, best dressed
+  concepts_before:
+  - FIRST_COME
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: Whoever gets there first gets the pick.
+  intensity_before: 3
+  incoherence_before: 2
+  sources_before:
+  - https://en.wiktionary.org/wiki/first_in
+  - _best_dressed
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: first-in
+    locator: first-arrival advantage and usage note
+  - source: first-in-primary
+    locator: 18 October2017, p87 solar-access priority discussion
+  evidence_scope: whole phrase and broader Australian priority use; malformed source record
+  reasoning: First-arrival advantage supports FIRST_COME. The current source list is split into a truncated
+    URL and _best_dressed; the intended comma-bearing canonical path needs to be one URL.
+  limits: This is a source-record defect, not a reason to remove the term or require literal dress or exclusively
+    better-quality goods.
+  proposed_action: Repair provenance to the complete percent-encoded URL; retain the broad first-come advantage
+    meaning.
+  triggers_before:
+    FIRST_COME:
+      np:
+      - first come, first served
+      - first-come, first-served
+      - first come first served
+- id: workmate
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: workmate
+  forms_before:
+  - workmate
+  concepts_before:
+  - COWORKER
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: Someone you work with.
+  intensity_before: 3
+  incoherence_before: 1
+  sources_before:
+  - https://en.wiktionary.org/wiki/workmate
+  decision: selected_sense_supported
+  evidence:
+  - source: workmate
+    locator: fellow-worker noun
+  evidence_scope: whole noun
+  reasoning: Coworker sense matches COWORKER. Shared British use does not make it inauthentic in Australia.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    COWORKER:
+      np:
+      - coworker
+      - co-worker
+- id: fisho
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: fisho
+  forms_before:
+  - fisho
+  concepts_before:
+  - FISHERMAN
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: Someone who fishes, for sport or a living.
+  intensity_before: 3
+  incoherence_before: 3
+  sources_before:
+  - https://en.wiktionary.org/wiki/fisho
+  decision: multiple_usages
+  evidence:
+  - source: fisho
+    locator: fisherman AND fishmonger noun senses
+  evidence_scope: whole Australian noun with two senses
+  reasoning: Fisherman/angler is explicitly supported; fishmonger is also genuine. One sense does not invalidate
+    the other.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  proposed_action: Retain FISHERMAN and record the seller sense for future dictionary discovery rather than
+    narrowing globally to either role.
+  triggers_before:
+    FISHERMAN:
+      np:
+      - fisherman
+      - fishermen
+      - angler
+- id: yank
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: Yank
+  forms_before:
+  - Yank
+  concepts_before:
+  - AMERICANS
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: An American (any American, not only a northerner).
+  intensity_before: 3
+  incoherence_before: 4
+  sources_before:
+  - https://en.wiktionary.org/wiki/Yank
+  decision: selected_sense_supported
+  evidence:
+  - source: yank
+    locator: capitalised noun for a US person
+  evidence_scope: edited capitalised nationality noun
+  reasoning: The external-American sense supports Americans from anywhere in the US; not just northerners.
+    The lowercase pulling verb is separate.
+  limits: No claim that every American welcomes the label or that it originated in Australia.
+  proposed_action: Preserve plural Yanks and contextual tone.
+  triggers_before:
+    AMERICANS:
+      np:
+      - Americans
+- id: a-tragic
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: tragic
+  forms_before:
+  - tragic
+  concepts_before:
+  - DIEHARD_FAN
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: An obsessive fan (a footy tragic, a cricket tragic).
+  intensity_before: 4
+  incoherence_before: 3
+  sources_before:
+  - https://en.wiktionary.org/wiki/tragic
+  decision: selected_sense_supported
+  evidence:
+  - source: tragic
+    locator: Australian obsessive-fan noun
+  evidence_scope: whole Australian obsessive-fan noun
+  reasoning: DIEHARD_FAN matches the noun. Cricket/footy are examples, not mandatory topics; the sadness adjective
+    is separate.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    DIEHARD_FAN:
+      np:
+      - die-hard fan !=of
+      - diehard fan !=of
+      - die-hard supporter !=of
+      - diehard supporter !=of
+- id: cheap-as-chips
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: cheap as chips
+  forms_before:
+  - cheap as chips
+  concepts_before:
+  - DIRT_CHEAP
+  frame: predicate_adj
+  status_before: active
+  register_before: current
+  gloss_before: Very cheap, a bargain.
+  intensity_before: 4
+  incoherence_before: 2
+  sources_before:
+  - https://en.wiktionary.org/wiki/cheap_as_chips
+  decision: selected_sense_supported
+  evidence:
+  - source: cheap-chips
+    locator: inexpensive/good-value construction
+  evidence_scope: whole price comparison
+  reasoning: Low purchase price supports DIRT_CHEAP; it does not mean a stingy person or require literal chips.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    DIRT_CHEAP:
+      predicate_adj:
+      - dirt cheap
+      - dirt-cheap
+      - very inexpensive
+      - really inexpensive
+- id: on-song
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: on song
+  forms_before:
+  - on song
+  concepts_before:
+  - IN_TOP_FORM
+  frame: predicate_adj
+  status_before: active
+  register_before: current
+  gloss_before: Playing or performing at their best (the team was on song).
+  intensity_before: 4
+  incoherence_before: 3
+  sources_before:
+  - https://en.wiktionary.org/wiki/on_song
+  decision: selected_sense_supported
+  evidence:
+  - source: on-song
+    locator: performing well
+  - source: on-song-aus
+    locator: trainer Grahame Begg on Written By before the William Reid
+  evidence_scope: whole edited phrase plus Australian trainer usage
+  reasoning: Strong performance fits IN_TOP_FORM and is not restricted to music. The racing witness also demonstrates
+    nonhuman performance use.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    IN_TOP_FORM:
+      predicate_adj:
+      - in top form
+      - in fine form
+      - in great form
+      - on top form
+      - in peak form
+- id: streets-ahead
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: streets ahead of
+  forms_before:
+  - streets ahead of
+  concepts_before:
+  - FAR_BETTER
+  frame: predicate_adj
+  status_before: active
+  register_before: current
+  gloss_before: Far better than, way out in front of (streets ahead of the rest).
+  intensity_before: 4
+  incoherence_before: 3
+  sources_before:
+  - https://en.wiktionary.org/wiki/streets_ahead
+  decision: selected_sense_supported
+  evidence:
+  - source: streets
+    locator: better or more advanced than comparator
+  evidence_scope: whole comparative construction
+  reasoning: Much better/more advanced fits FAR_BETTER, including the of-complement. Seed0 correctly preserves
+    that-car comparison.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    FAR_BETTER:
+      predicate_adj:
+      - far superior to
+      - vastly superior to
+      - miles ahead of
+- id: go-pear-shaped
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: go pear-shaped
+  forms_before:
+  - go pear-shaped
+  concepts_before:
+  - GO_WRONG_BADLY
+  frame: vp
+  status_before: active
+  register_before: current
+  gloss_before: Go badly wrong, fall apart (of a plan or a night out).
+  intensity_before: 4
+  incoherence_before: 3
+  sources_before:
+  - https://en.wiktionary.org/wiki/go_pear-shaped
+  decision: selected_sense_supported
+  evidence:
+  - source: pear
+    locator: plan failure
+  evidence_scope: whole figurative failure construction
+  reasoning: Plan/situation failure fits GO_WRONG_BADLY. Literal geometry is another sense, not the target.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    GO_WRONG_BADLY:
+      vp:
+      - go awry
+      - go haywire
+      - go badly wrong
+      - go horribly wrong
+      - go terribly wrong
+- id: a-good-innings
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: have a good innings
+  forms_before:
+  - have a good innings
+  concepts_before:
+  - GOOD_INNINGS
+  frame: vp
+  status_before: active
+  register_before: current
+  gloss_before: Have a long life (or career), said kindly of someone who has died or retired (from cricket).
+  intensity_before: 3
+  incoherence_before: 3
+  sources_before:
+  - https://en.wiktionary.org/wiki/innings
+  decision: multiple_usages
+  evidence:
+  - source: innings
+    locator: long successful life
+  - source: innings-career
+    locator: long successful run and life senses
+  evidence_scope: whole life/career/run idiom
+  reasoning: Long life is supported alongside career or prolonged success. Living speakers can use it; the
+    repository’s died-or-retired gloss should not be read as an eligibility requirement.
+  limits: Seed0 permits a still-alive continuation and an unhappy-life continuation. These are contextual observations,
+    not proof the idiom necessarily asserts death or happiness in every use.
+  proposed_action: Broaden wording to include living retrospection and career/run contexts. Review quality-of-life
+    contrasts without a rigid death-only gate.
+  triggers_before:
+    GOOD_INNINGS:
+      vp:
+      - live a long and full life
+      - live a long and happy life
+      - live a long life
+      - live a full and long life
+- id: all-up
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: all up
+  forms_before:
+  - all up
+  concepts_before:
+  - IN_TOTAL
+  frame: adv
+  status_before: active
+  register_before: current
+  gloss_before: Altogether, in total (it cost fifty bucks all up).
+  intensity_before: 3
+  incoherence_before: 2
+  decision: selected_sense_supported
+  evidence:
+  - source: all-up
+    locator: 9 April2024, Dressed Like The Sun segment
+  evidence_scope: exact Australian adverbial total-number use
+  reasoning: The broadcast’s sum/count context supports IN_TOTAL. This is not all-up-with hopelessness or an
+    adjective-only inference.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    IN_TOTAL:
+      adv:
+      - in total !=darkness|silence|control|contrast|disregard|agreement|chaos|confusion|secrecy|isolation|despair|awe|shock|disbelief|denial|ignorance|freedom|safety|comfort|war|eclipse|failure|charge|command|recall
+- id: a-fair-few
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: a fair few
+  forms_before:
+  - a fair few
+  concepts_before:
+  - QUITE_A_FEW
+  frame: adj
+  status_before: active
+  register_before: current
+  gloss_before: Quite a few, a sizeable number (a fair few people turned up).
+  intensity_before: 3
+  incoherence_before: 2
+  sources_before:
+  - https://en.wiktionary.org/wiki/a_fair_few
+  decision: selected_sense_supported
+  evidence:
+  - source: fair-few
+    locator: indefinite sizeable count, determiner/pronoun
+  evidence_scope: whole count-quantifier construction
+  reasoning: A sizeable indefinite count supports QUITE_A_FEW; it should not be conflated with a tiny amount
+    or a precise number.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    QUITE_A_FEW:
+      adj:
+      - quite a few
+- id: brolly
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: brolly
+  forms_before:
+  - brolly
+  concepts_before:
+  - UMBRELLA
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: An umbrella.
+  intensity_before: 3
+  incoherence_before: 2
+  sources_before:
+  - https://en.wiktionary.org/wiki/brolly
+  decision: selected_sense_supported
+  evidence:
+  - source: brolly
+    locator: umbrella noun, plural brollies
+  evidence_scope: whole umbrella noun and plural
+  reasoning: UMBRELLA is supported. Shared British use is not evidence against Australian use; metaphorical
+    umbrella organisations remain separate.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    UMBRELLA:
+      np:
+      - umbrella !=term|terms|organisation|organisations|organization|organizations|group|groups|body|bodies|policy|policies|insurance|fund|funds|company|companies|brand|brands|agreement|agreements|union|unions|of|for|stand|stands|movement|structure
+- id: out-bush
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: out bush
+  forms_before:
+  - out bush
+  concepts_before:
+  - OUT_BUSH
+  frame: adv
+  status_before: active
+  register_before: current
+  gloss_before: Out in the bush, away from the towns.
+  intensity_before: 3
+  incoherence_before: 2
+  sources_before:
+  - https://en.wiktionary.org/wiki/bush
+  decision: selected_sense_supported
+  evidence:
+  - source: out-bush
+    locator: 24 June2008 transcript, station-work passage
+  evidence_scope: exact Australian location construction
+  reasoning: The station-work transcript supports OUT_BUSH as a place away from town. A fixed remoteness threshold
+    or desert landscape is unnecessary.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    OUT_BUSH:
+      adv:
+      - out in the countryside
+      - out in the sticks
+      - out in the boondocks
+      - in the boondocks
+      - out in the backwoods
+- id: chuck-a-tanty
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: chuck a tanty
+  forms_before:
+  - chuck a tanty
+  concepts_before:
+  - THROW_TANTRUM
+  frame: vp
+  status_before: active
+  register_before: current
+  gloss_before: Throw a tantrum, have a childish fit of temper.
+  intensity_before: 4
+  incoherence_before: 3
+  sources_before:
+  - https://en.wiktionary.org/wiki/tanty
+  decision: selected_sense_supported
+  evidence:
+  - source: tanty-whole
+    locator: 17 August2023, p7, Elise Archer speech
+  - source: tanty
+    locator: Australian tantrum noun
+  evidence_scope: exact whole construction plus edited noun sense
+  reasoning: Throwing a tantrum is directly supported, including an adult rhetorical example. Ordinary disagreement
+    or a legitimate complaint alone does not entail a tanty.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    THROW_TANTRUM:
+      vp:
+      - throw a tantrum
+      - have a tantrum
+      - throw a hissy fit
+      - have a hissy fit
+      - pitch a fit
+- id: a-tanty
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: a tanty
+  forms_before:
+  - a tanty
+  concepts_before:
+  - TANTRUM
+  frame: np
+  status_before: active
+  register_before: current
+  gloss_before: A tantrum.
+  intensity_before: 4
+  incoherence_before: 3
+  sources_before:
+  - https://en.wiktionary.org/wiki/tanty
+  decision: selected_sense_supported
+  evidence:
+  - source: tanty
+    locator: Australian tantrum noun
+  evidence_scope: whole Australian noun
+  reasoning: TANTRUM matches the edited noun sense. The childish evaluation is part of the chosen tantrum concept,
+    not any expression of anger.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    TANTRUM:
+      np:
+      - a tantrum
+      - a hissy fit
+      - a fit of temper
+- id: muck-up
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: muck up
+  forms_before:
+  - muck up
+  concepts_before:
+  - MISBEHAVE
+  frame: vp
+  status_before: active
+  register_before: current
+  gloss_before: Misbehave, get up to mischief (of kids, mostly).
+  intensity_before: 3
+  incoherence_before: 2
+  sources_before:
+  - https://en.wiktionary.org/wiki/muck_up
+  decision: selected_sense_supported
+  evidence:
+  - source: muck-up
+    locator: intransitive misbehave vs transitive spoil senses
+  evidence_scope: whole intransitive misbehaviour sense
+  reasoning: MISBEHAVE is supported. Transitive spoiling, a bungled result and a malfunctioning machine are
+    different constructions.
+  limits: Selected reading only; other meanings, tone and productive variants remain available. No automatic
+    gate/status change proposed.
+  triggers_before:
+    MISBEHAVE:
+      vp:
+      - misbehave
+- id: is-it-buggery
+  file: aussiefy/data/entries/thirdpass.yaml
+  form: is it buggery
+  forms_before:
+  - is it buggery
+  - is she buggery
+  - is he buggery
+  concepts_before:
+  - EMPHATIC_NO
+  frame: interjection
+  status_before: active
+  register_before: current
+  gloss_before: An emphatic, scornful no to a question, echoing its subject (is he coming? no way).
+  vulgarity_before: 1
+  intensity_before: 5
+  incoherence_before: 4
+  sources_before:
+  - https://en.wiktionary.org/wiki/buggery
+  decision: correct_mapping_or_missing_sense
+  evidence:
+  - source: buggery-denial
+    locator: 'adverb: inverted subject plus auxiliary/copula in denial'
+  evidence_scope: whole denial construction with subject/auxiliary echo
+  reasoning: The phrase is genuine; the repository even stores he/she variants. Its concept says lookup-only
+    yet has a fake long-no trigger. Seed0 translates that trigger into Is it buggery without a source copula
+    or antecedent.
+  limits: This is a placeholder-trigger inconsistency and construction issue; normal no responses are not currently
+    triggers. No claim that an absent variant alone causes the problem.
+  proposed_action: Use an actual lookup-only representation, or bind the source question’s subject and auxiliary
+    before automatic use. Do not activate arbitrary he/she/it variants as interchangeable no responses.
+  triggers_before:
+    EMPHATIC_NO:
+      interjection:
+      - most certainly not in any way whatsoever

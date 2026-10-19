@@ -106,6 +106,7 @@ IRREGULAR = {
     "sit": ("sits", "sat", "sat", "sitting"),
     "swim": ("swims", "swam", "swum", "swimming"),
     "begin": ("begins", "began", "begun", "beginning"),
+    "bend": ("bends", "bent", "bent", "bending"),
     "spin": ("spins", "spun", "spun", "spinning"),
     "sting": ("stings", "stung", "stung", "stinging"),
     "dig": ("digs", "dug", "dug", "digging"),

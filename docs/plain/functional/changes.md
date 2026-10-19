@@ -42,7 +42,8 @@ and responses live in `tests/fixtures/changes/`. Each change has:
   `vulgarity` and its `masks`. For a garnish, it's the other garnish of that placement the engine weighed there.
 - `locked`: for a swap, the options the vulgarity cap alone holds back, each tagged with the lowest `vulgarity`
   that lets it in. Selection is run again for the spot with only the cap raised, with every other check
-  unchanged: level, registers, gates, grammar, span, document type, what the text has already said, and variety.
+  unchanged: level, registers, gates, grammar, span, document settings (including `narrator_opinion`), what
+  the text has already said, and variety.
   Only an entry rated above the cap in effect is locked (a raised cap also reweighs, so variety's best few can take
   in a clean entry, which isn't). Gated entries appear only where the policy unlocks them. A locked option is
   rendered like the others, at the reader's cap: its riffs and swear infixes are the ones the reader's vulgarity
@@ -66,7 +67,8 @@ and responses live in `tests/fixtures/changes/`. Each change has:
   nothing.
 
 `entries` maps each entry id the changes name to its card, built as `lookup` builds it under the same dials
-(`aussiefy/cards.py`): riffs under the vulgarity cap where the embellishment takes riffs at all, and a gated
+(`aussiefy/cards.py`): optional `semantic_effects` lists reviewed additions such as `opinion`; riffs appear
+under the vulgarity cap where the embellishment takes riffs at all, and a gated
 entry's flags where the policy unlocked it.
 
 `withheld` lists, as `{id, reason}`, the swaps and garnish whose renderings are left out, with the pick alone

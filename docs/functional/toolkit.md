@@ -125,6 +125,12 @@ an image `id`, `concepts`, `frames`, `form`, `subject`, `association`, `exaggera
 `automatic`. Fair dinkum, contextual cards can be offered even where no word substitution was chosen. A direct suffix
 can pass automatic insertion checks; rewrite'n related cards always require a writer's judgement.
 
+Full and short entry cards include nonempty `semantic_effects`. Meaning suggestions respect the resolved
+`narrator_opinion` permission. Explicit term searches remain discoverable when the effect is disabled,
+with `effects_permitted: false` and `effect_rejection`; discovery does not promise that the term can fill a
+particular sentence. Plan's selected phrases also carry nonempty effect metadata. Change alternatives share
+the translation eligibility check, including alternatives whose vulgarity cap alone is raised.
+
 `lookup` also accepts `embellishment`, `document_type` and `document_config` in Python, CLI and MCP. It adds
 an optional `imagery` list when reviewed images match the query, alongside the usual `results`. Image text
 and IDs are searchable too. Bare lookup is not a grammatical fit check: its cards have `template: true`,

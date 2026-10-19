@@ -19,7 +19,7 @@ from dataclasses import dataclass, field
 from typing import Callable, NamedTuple
 
 from . import morph, pos
-from .context import following_context, noun_argument, verb_subject
+from .context import TIME_ADVERBS, argument_complete, following_context, noun_argument, verb_subject
 from .embed import Embedder, NgramEmbedder, similarity_scorer
 from .matcher import match_at, SLOT_MATCHERS, Match, Pattern, PatternIndex, is_name
 from .schema import Concept
@@ -225,7 +225,7 @@ def predicate_context(tokens: list[Token], start: int) -> PredicateContext | Non
 
 
 def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozenset[str]] | None = None,
-                tags: list[str] | None = None) -> Detection | None:
+                tags: list[str] | None = None, *, complete: bool = True) -> Detection | None:
     p: Pattern = m.pattern
     det = Detection(m.start, m.end, p.concepts, p.frame, p.intensity,
                     "entry" if p.entry_id else "trigger", p.text, p.entry_id,
@@ -238,6 +238,10 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
     if (m.start > 0 and tokens[m.start - 1].text == "-" and tokens[m.start - 1].end == first.start) or \
             (m.end < len(tokens) and tokens[m.end].text == "-" and tokens[m.end].start == last.end):
         return None   # part of a hyphenated word: "good-bye", "battle-field"
+    terminal_argument = any(capture.end == last.end for slot, capture in m.captures.items()
+                            if slot in {"obj", "objposs", "np"})
+    if terminal_argument and not p.guard and not argument_complete(tokens, m.end, tags, complete):
+        return None
     if "np" in m.captures and tags is not None:
         parts = [element for element in p.elements if element.kind != "not"]
         unanchored = (len(parts) == 2 and parts[0].role == "head_verb"
@@ -263,7 +267,7 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
         det.captures.setdefault("poss", first)   # "his wife": the possessive a "{poss} missus" keeps
     noun_limits = (adjective_nouns or {}).get(first.norm)
     next_is_noun = m.end < len(tokens) and (tags is not None and tags[m.end] in pos.NOUNS) \
-        and tokens[m.end].norm not in {"today", "tomorrow", "yesterday", "tonight"}
+        and tokens[m.end].norm not in TIME_ADVERBS
     if p.frame == "predicate_adj" and noun_limits is not None and next_is_noun:
         return None  # an attributive adjective must pass its noun-sense rule, even after a linking verb
     if p.frame == "predicate_adj":
@@ -449,7 +453,7 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
     found: list[Detection] = []
     tags = tags if tags is not None else pos.tag([t.text for t in tokens])
     for m in index.find(tokens):
-        det = check_frame(m, tokens, adjective_nouns, tags)
+        det = check_frame(m, tokens, adjective_nouns, tags, complete=complete)
         if det:
             det.concepts = applicable_concepts(det.concepts, concepts, tokens, det.end, complete)
         if det and not _in_a_name(tokens, det.start, det.end) and not _possessed(tokens, det) \
@@ -490,7 +494,7 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
             if best:
                 score, n, p = best
                 m = Match(p, j, j + n)
-                det = check_frame(m, tokens, adjective_nouns, tags)
+                det = check_frame(m, tokens, adjective_nouns, tags, complete=complete)
                 if det:
                     det.concepts = applicable_concepts(det.concepts, concepts, tokens, det.end, complete)
                     det.method = "embedding"

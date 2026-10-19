@@ -155,11 +155,13 @@ def test_dev_scrape_refuses_reference_only_sources(capsys, tmp_path):
 
 
 def test_dev_round_dry_run_reproduces_the_classics_round(capsys):
-    """Re-planning a shipped round adds nothing new: its entries are all there and its triggers are in place.
-    The counts are the classics round's (210 verdict entries + the-good-oil, 30 gated, 139 concepts): they change
-    only if the round's own files do."""
+    """Replanning retains the round's inventory, subject to forms already supplied by later dictionary work.
+    The physical-solitude predicate now supplies on-your-pat, so the old NP entry is also deduplicated."""
     assert main(["dev", "round", "research/classics-2026-10-11"]) == 0
-    assert capsys.readouterr().out.startswith("211 entries (30 gated), 139 new concepts, 0 triggers")
+    output = capsys.readouterr().out
+    assert output.startswith("210 entries (30 gated), 139 new concepts, 0 triggers")
+    assert "drop entry on-your-pat form already in the dictionary" in output
+    assert "drop entry sing-out-gf form already in the dictionary" in output
 
 
 def test_every_command_the_package_names_exists():

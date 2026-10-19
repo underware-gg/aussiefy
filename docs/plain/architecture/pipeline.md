@@ -27,7 +27,8 @@ has no slang or level logic of its own.
    its class, with a lean towards rude candidates set by the vulgarity and the existing tone/mood fit.
    Forms must preserve captured arguments; a syntactically available slotless variant cannot discard an
    object. Tone fit is applied before variety limits, using the same weight as riffs: off-mood candidates
-   receive a quarter weight, while existing hard exclusions (such as comic terms in solemn prose) remain.
+   receive a quarter weight. Comic terms in solemn prose are excluded when `solemn_comic_terms` is false;
+   Troppo enables that permission by default, and exact overrides win.
    One seeded roll decides whether to
    substitute and another picks the candidate.
 4. **Realise** (`realise.py`, `morph.py`). Fill slots and fix agreement: "are you crazy" becomes "do you
@@ -86,3 +87,13 @@ choices and garnish state across its prose units, retains source sentence positi
 suffix garnish and riffs on incomplete fragments, while allowing a leading opener/connective only at a
 known source sentence start. Extended markup sends one masked document through the pipeline with opaque
 protected spans. See [translation controls](../functional/translation-controls.md).
+
+## Added narrator opinion
+
+Resolved embellishment includes `narrator_opinion`: false at Deadset/Dinkum and for unconfigured Custom,
+true at Troppo, with exact overrides applied last. `select.semantic_rejection` checks reviewed Entry
+`semantic_effects` at canonical translation eligibility and dictionary-meaning offers; garnish extensions
+use the same rule. Tone remains a fit weight and separate hard exclusions, not a permission for added meaning.
+Exact term discovery retains disabled terms with an explanation. Cards and plan payloads expose annotations;
+yarn's brief shares the resolved setting, and known-term lint checking also reaches verify and submission.
+Meaning mappings preserve facts and roles independently of the editorial permission.

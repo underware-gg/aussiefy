@@ -48,8 +48,14 @@ All options are in the [CLI reference](cli.md). State lives in `$AUSSIEFY_HOME` 
 
 ## Current measurement
 
-The [2026-10-15 maintenance check](../../research/maintenance-check-2026-10-15/README.md) repeats the bundled
-1.2.0 reference'n gap benchmarks without retraining, and records actual toolkit lookups separately. All 33
-required raw\-model references pass; 16 known failures remain. Crikey, a larger dictionary changes benchmark difficulty,
-so these numbers don't establish improvement against the older trainin' reports. The current weights remain
-bundled; automatic gap fillin' remains off by default.
+The [2026-10-19 retrain](../../research/semantic-model-2026-10-19/README.md) prepares model 1.3.0 against
+the reviewed dictionary using the unchanged pinned recipe. The full\-data fit'n exported package reader
+both pass all 33 required raw\-model checks. The evaluation fit passes 32/33; its separate girl\-query failure
+is retained. Existin' reports'n the earlier
+[maintenance check](../../research/maintenance-check-2026-10-15/README.md) remain historical evidence.
+
+Anyway, the common\-current\-dictionary lookup comparison covers 18 fixed historical queries plus eight source\-audit
+queries. It doesn't establish unseen generalisation or universal superiority: prob'ly can still suggest
+defo, wake\-up results can suggest hurry, and pub can outrank coldie for the cold\-one query. Updated amber fluid
+reference labels follow corrected meanings without changin' queries, ranking rules or required status.
+Automatic gap fillin' remains off by default.
