@@ -1,0 +1,346 @@
+{
+  "scope": "Raw reference-ranking probes for the three rejected-fit failures; no runtime lookup filters.",
+  "assets": {
+    "bundled": {
+      "meta.json": "73789e6243e830890131b8762b6acd6c0670c08306beccaa9bcd461e84db3ef8",
+      "vocab.txt": "e5df53a67a6d46e8284325efc070bc887ffef11bd50093bb6a2719e0eee50b1b",
+      "vectors.f16": "4f47c27ecfab0903f557562a5eb351f9a18951f4788e68533c41e8d494cbd840"
+    },
+    "rejected": {
+      "meta.json": "993c576391be96aabab8dfc2ba4ee6d686770d7be0e2ac7ef90142a8cd98f8a2",
+      "vocab.txt": "e5df53a67a6d46e8284325efc070bc887ffef11bd50093bb6a2719e0eee50b1b",
+      "vectors.f16": "6c475137b15c464af8a3304af72017c08353a68e507c89e4a23bcbcab692be79"
+    }
+  },
+  "dictionary_sha256": "315c8b32d10ae1c3767d49cda008128cf8f943c17261dbe1422156b706e6136c",
+  "driver_sha256": "a8a8b1072ccc70e62da16001759241d680144c4f420895479f4dcddf2914cdb4",
+  "trainer_sha256": "7c3ba95bd496527a423e369e23fa0d4603db060ee74666b9567d6975a5152f8b",
+  "rows": [
+    {
+      "reader": "bundled",
+      "query": "girl",
+      "top_entries": [
+        {
+          "entry": "little-fella",
+          "concepts": [
+            "LITTLE_BOY"
+          ],
+          "winning_text": "A small boy (a pet name for one), not any child (\"your kid\", \"small children\" in a safety step).",
+          "score": 0.359018
+        },
+        {
+          "entry": "sheila",
+          "concepts": [
+            "WOMAN"
+          ],
+          "winning_text": "A woman.",
+          "score": 0.279975
+        },
+        {
+          "entry": "young-fella",
+          "concepts": [
+            "BOY"
+          ],
+          "winning_text": "A boy or young man.",
+          "score": 0.274065
+        },
+        {
+          "entry": "a-cliner",
+          "concepts": [
+            "GIRLFRIEND"
+          ],
+          "winning_text": "A man's girlfriend or sweetheart.",
+          "score": 0.268522
+        },
+        {
+          "entry": "a-spunk",
+          "concepts": [
+            "ATTRACTIVE"
+          ],
+          "winning_text": "A good-looking person, any gender.",
+          "score": 0.252888
+        },
+        {
+          "entry": "ankle-biter",
+          "concepts": [
+            "CHILD"
+          ],
+          "winning_text": "A small child.",
+          "score": 0.244671
+        }
+      ]
+    },
+    {
+      "reader": "bundled",
+      "query": "feeling really down",
+      "top_entries": [
+        {
+          "entry": "miserable-as-a-bandicoot",
+          "concepts": [
+            "SAD"
+          ],
+          "winning_text": "Thoroughly miserable.",
+          "score": 0.631776
+        },
+        {
+          "entry": "face-like-a-wet-week",
+          "concepts": [
+            "SAD"
+          ],
+          "winning_text": "Look thoroughly glum.",
+          "score": 0.599192
+        },
+        {
+          "entry": "crook-in-the-guts",
+          "concepts": [
+            "NAUSEOUS"
+          ],
+          "winning_text": "Feeling sick in the stomach.",
+          "score": 0.48328
+        },
+        {
+          "entry": "just-the-shot",
+          "concepts": [
+            "JUST_RIGHT"
+          ],
+          "winning_text": "Exactly what is wanted; just right for the purpose.",
+          "score": 0.479148
+        },
+        {
+          "entry": "over-the-moon",
+          "concepts": [
+            "HAPPY"
+          ],
+          "winning_text": "Extremely pleased.",
+          "score": 0.461404
+        },
+        {
+          "entry": "happy-as-larry",
+          "concepts": [
+            "HAPPY"
+          ],
+          "winning_text": "Very happy.",
+          "score": 0.452356
+        }
+      ]
+    },
+    {
+      "reader": "bundled",
+      "query": "a good mate of mine",
+      "top_entries": [
+        {
+          "entry": "cobber",
+          "concepts": [
+            "FRIEND"
+          ],
+          "winning_text": "A friend or companion.",
+          "score": 0.538109
+        },
+        {
+          "entry": "mate",
+          "concepts": [
+            "FRIEND"
+          ],
+          "winning_text": "A friend or companion.",
+          "score": 0.538109
+        },
+        {
+          "entry": "a-dodgy-cunt",
+          "concepts": [
+            "SWINDLER",
+            "SHADY_PERSON"
+          ],
+          "winning_text": "Someone who seems untrustworthy or up to no good.",
+          "score": 0.500054
+        },
+        {
+          "entry": "a-sneaky-bastard",
+          "concepts": [
+            "SHADY_PERSON"
+          ],
+          "winning_text": "Someone who seems untrustworthy or up to no good.",
+          "score": 0.500054
+        },
+        {
+          "entry": "a-sneaky-cunt",
+          "concepts": [
+            "SHADY_PERSON"
+          ],
+          "winning_text": "Someone who seems untrustworthy or up to no good.",
+          "score": 0.500054
+        },
+        {
+          "entry": "a-suss-cunt",
+          "concepts": [
+            "SHADY_PERSON"
+          ],
+          "winning_text": "Someone who seems untrustworthy or up to no good.",
+          "score": 0.500054
+        }
+      ]
+    },
+    {
+      "reader": "rejected",
+      "query": "girl",
+      "top_entries": [
+        {
+          "entry": "sheila",
+          "concepts": [
+            "WOMAN"
+          ],
+          "winning_text": "A woman.",
+          "score": 0.337133
+        },
+        {
+          "entry": "little-fella",
+          "concepts": [
+            "LITTLE_BOY"
+          ],
+          "winning_text": "A small boy (a pet name for one), not any child (\"your kid\", \"small children\" in a safety step).",
+          "score": 0.305934
+        },
+        {
+          "entry": "the-missus",
+          "concepts": [
+            "WIFE"
+          ],
+          "winning_text": "A man's wife or female partner.",
+          "score": 0.302171
+        },
+        {
+          "entry": "trouble-and-strife",
+          "concepts": [
+            "WIFE"
+          ],
+          "winning_text": "A man's wife or female partner.",
+          "score": 0.302171
+        },
+        {
+          "entry": "a-cliner",
+          "concepts": [
+            "GIRLFRIEND"
+          ],
+          "winning_text": "A man's girlfriend or sweetheart.",
+          "score": 0.298916
+        },
+        {
+          "entry": "sun-shines-out-of-arse",
+          "concepts": [
+            "ADORE"
+          ],
+          "winning_text": "Adore someone and think they can do no wrong (\"her nan thought the sun shone out of her arse\").",
+          "score": 0.272075
+        }
+      ]
+    },
+    {
+      "reader": "rejected",
+      "query": "feeling really down",
+      "top_entries": [
+        {
+          "entry": "miserable-as-a-bandicoot",
+          "concepts": [
+            "SAD"
+          ],
+          "winning_text": "Thoroughly miserable.",
+          "score": 0.634304
+        },
+        {
+          "entry": "face-like-a-wet-week",
+          "concepts": [
+            "SAD"
+          ],
+          "winning_text": "Look thoroughly glum.",
+          "score": 0.572485
+        },
+        {
+          "entry": "flat-as-a-tack",
+          "concepts": [
+            "SAD"
+          ],
+          "winning_text": "Utterly low and flat.",
+          "score": 0.503499
+        },
+        {
+          "entry": "over-the-moon",
+          "concepts": [
+            "HAPPY"
+          ],
+          "winning_text": "Extremely pleased.",
+          "score": 0.501051
+        },
+        {
+          "entry": "crook-in-the-guts",
+          "concepts": [
+            "NAUSEOUS"
+          ],
+          "winning_text": "Feeling sick in the stomach.",
+          "score": 0.495453
+        },
+        {
+          "entry": "fair-dinkum-q",
+          "concepts": [
+            "REALLY_Q"
+          ],
+          "winning_text": "Really? Honestly?",
+          "score": 0.491336
+        }
+      ]
+    },
+    {
+      "reader": "rejected",
+      "query": "a good mate of mine",
+      "top_entries": [
+        {
+          "entry": "all-good",
+          "concepts": [
+            "REPLY_TO_THANKS"
+          ],
+          "winning_text": "No problem, it's fine (reply to thanks or an apology).",
+          "score": 0.529735
+        },
+        {
+          "entry": "a-dodgy-cunt",
+          "concepts": [
+            "SWINDLER",
+            "SHADY_PERSON"
+          ],
+          "winning_text": "Someone who seems untrustworthy or up to no good.",
+          "score": 0.495893
+        },
+        {
+          "entry": "a-sneaky-bastard",
+          "concepts": [
+            "SHADY_PERSON"
+          ],
+          "winning_text": "Someone who seems untrustworthy or up to no good.",
+          "score": 0.495893
+        },
+        {
+          "entry": "a-sneaky-cunt",
+          "concepts": [
+            "SHADY_PERSON"
+          ],
+          "winning_text": "Someone who seems untrustworthy or up to no good.",
+          "score": 0.495893
+        },
+        {
+          "entry": "a-suss-cunt",
+          "concepts": [
+            "SHADY_PERSON"
+          ],
+          "winning_text": "Someone who seems untrustworthy or up to no good.",
+          "score": 0.495893
+        },
+        {
+          "entry": "a-legend",
+          "concepts": [
+            "GOOD_PERSON"
+          ],
+          "winning_text": "A thoroughly good sort; someone who has done you a good turn.",
+          "score": 0.492089
+        }
+      ]
+    }
+  ]
+}

@@ -91,8 +91,8 @@ def test_direct_triggers_and_long_primary_forms_cannot_bypass_the_tail(tmp_path)
     tr = Translator(load_dictionary([path]), lookup_embedder=None)
     result = tr.translate('She is hungry enough to eat anything.', **OPTIONS, seed=42)
     record = next(r for r in result.records if 'HUNGRY' in r.det.concepts)
-    assert any(c.entry.id == 'test-long-primary' for c in record.eligible)
-    assert usable_forms(next(c.entry for c in record.eligible if c.entry.id == 'test-long-primary'), record.det) == ['ravenous']
+    # Neither a direct trigger nor a short variant supplies a missing threshold-grade certificate.
+    assert not any(c.entry.id == 'test-long-primary' for c in record.eligible)
 
 
 def test_verification_rejects_the_reproduced_duplicate_complement(translator):

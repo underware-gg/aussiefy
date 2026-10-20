@@ -105,7 +105,7 @@ concepts, but its direct `replaces` patterns then introduce all of those concept
 concept triggers when those meanings need different candidates.
 
 Now, named cultural references such as `Goon of Fortune` and `Hills Hoist` are retained with specific meanings;
-they don't turn every drinkin' game or rotary clothesline into the named game or brand. Look, appetite phrases
+they don't turn every drinkin' game or rotary clothesline into the named game or brand. Appetite phrases
 such as “could do with a feed” and “wouldn't say no to some tucker” have direct mappings for corresponding
 conditional requests, plus writer\-only hunger suggestions for contexts requirin' tense or modal judgement.
 
@@ -162,7 +162,7 @@ or enter a lookup/trainin' phrase as translated content.
 Now, the loader validates whole box'n dice at load time: field types and ranges, kebab\-case ids, known concepts and
 slots, clause forms starting with `{subj}`, `slur` forcing `omit`, no duplicate ids, and that every form
 compiles as a pattern. It collects every error, with file'n id, and raises one `SchemaError` (the CLI exits
-2\). It also warns about concepts that can never be detected'n flagged entries left active.
+2\). Strewth, it also warns about concepts that can never be detected'n flagged entries left active.
 `aussiefy validate` runs the same checks'n prints stats. Required concepts, profiles, phonetic, swears,
 genre, riffs'n entries files must be present; malformed YAML and missing files are collected
 with the other errors. String\-list fields require strings, `person` and `stretch` require real booleans,
@@ -293,19 +293,25 @@ source wording in `replaces`.
 Automatic selection compares realised degree, independently of the soft `intensity` weighting and
 `narrator_opinion`. Explicit mild or strong input needs a compatible known output. A retained modifier
 can carry that degree: `very` plus an unmarked predicate is strong, while `slightly`/`a bit` is mild.
-The modifier stays attached through substitution and accent/swear processing. Unsupported or conflicting
-compositions stay as written; negation is retained. Clause expansions cannot silently consume a modifier.
-Ordinary inputs with no stated degree retain unknown-degree options. Plans and automatic change
-alternatives use the same eligibility. Dictionary discovery remains broader.
+A compatible modifier stays attached through substitution and accent/swear processing. Alternatively,
+a certified adjective predicate may express a reviewed modifier's degree itself: `slightly hungry` can become
+`peckish`, and `very hungry` can become `starvin'`. Selection, replacement spans and editor alternatives
+share this decision, so the modifier is retained or absorbed exactly once. Strong predicates support
+reviewed intensifiers including `absolutely` and `really`; `very` plus a lexically mild adjective and
+unknown or conflicting compositions still stay as written. Negation is retained. Absorption does not newly enable wider clause expansions, which might discard
+frequency or aspect words outside the owned modifier span.
+
+Threshold\-bearing predicates \(`so`, `too`, or a following `enough`) preserve the source's certified
+lexical grade even when it's unmarked. An unmarked `hungry enough to…` can't become mild
+`peckish enough to…`. Compatible grade is necessary, not proof of exact threshold equivalence across
+arbitrary predicates; unsupported or opaque contexts remain conservative. Ordinary inputs with no
+stated degree retain unknown\-degree options. Plans'n automatic change alternatives use the same
+eligibility. Dictionary discovery remains broader than in\-place grammatical substitution.
 
 Calibration covers DRUNK and HUNGRY. Evidence'n limits are recorded in the
-[alcohol degree ledger](../../research/semantic-refinement-2026-10-19/drunk-degree-calibration.md) and
-[hunger degree ledger](../../research/semantic-followup-2026-10-20/hunger-degree-calibration.md).
-Hunger qualifiers stay attached: `very hungry` and `slightly hungry` can remain plain when no compatible
-unmarked single\-word target is available. Strong appetite can't automatically become `peckish`.
-The mechanism is generic; it doesn't certify all concepts, infer missing grades from historical intensity
-numbers or prove the meaning of arbitrary agent\-written prose. Similarity alone can't certify a graded
-source meaning. Extending another family requires reviewed source'n target annotations.
+[alcohol degree ledger](../../research/semantic-refinement-2026-10-19/drunk-degree-calibration.md),
+[hunger degree ledger](../../research/semantic-followup-2026-10-20/hunger-degree-calibration.md) and
+[composition spike](../../research/semantic-spikes-2026-10-20/README.md).
 
 ## Noun reference and direct address
 
@@ -478,3 +484,11 @@ scolding'n other verb constructions; it doesn't claim a full parser for arbitrar
 Waltzing Matilda requires an explicitly travellin' swag carrier. Carryin' a swag alone can use the separate
 baggage expression; walking country roads alone doesn't establish baggage. Exact\-zero mappings also
 exclude minimising nothing\-much constructions, which may describe a small amount rather than none.
+
+### Figurative predicate objects
+
+Source triggers can capture the object of a figurative predicate through `{np}`. `sick of work` and
+`tired of life` resolve to FED_UP; literal SICK/TIRED readings are restricted through `unless_after`.
+Their object must survive automatic substitution. If a current target cannot bind it, translation and
+plans keep the source; lookup can still explain a relevant standalone idiom. `tired from work` and
+`sick with flu` retain their literal readings. See the [source spike](../../research/semantic-spikes-2026-10-20/README.md).

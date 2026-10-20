@@ -152,7 +152,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     established = {cid for det in readings for cid in det.concepts
                    if det.frame != 'adv' or det.end == len(tokens)}
     from .detect import applicable_concepts
-    from .degree import realised_degree
+    from .degree import degree_matches, realised_degree
     raw_matches = d.index.find(tokens)
     blocked = set()
     for matched in raw_matches:
@@ -169,7 +169,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
             if cid in det.degree_conflicts:
                 continue
             source = realised_degree(det.semantic_degree.get(cid), det.degree_qualifier)
-            if source == 'unmarked' or source in {'mild', 'strong'} and source == entry.semantic_degree.get(cid):
+            if degree_matches(source, entry.semantic_degree.get(cid), relational=det.result_clause):
                 return True
         return False
     def effects_for(entry):

@@ -8,6 +8,12 @@ from __future__ import annotations
 
 import re
 
+
+def single_word_form(form: str) -> bool:
+    """One predicate word, including internal hyphens/apostrophes and a dropped final letter."""
+    return re.fullmatch(r"[A-Za-z]+(?:[-'][A-Za-z]+)*'?", form) is not None
+
+
 # subject -> (person, number, object, possessive)
 PRONOUNS = {
     "i": (1, "sg", "me", "my"),

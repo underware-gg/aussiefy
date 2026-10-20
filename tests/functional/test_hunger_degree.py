@@ -21,8 +21,7 @@ def test_explicit_appetite_grade_is_preserved(translator, source, band, backend)
         assert all(c.entry.semantic_degree.get('HUNGRY') == band for c in record.eligible)
 
 
-@pytest.mark.parametrize('source', ['She is very hungry.', 'She is slightly hungry.',
-    'She is not very hungry.', 'She is very peckish.', 'She is barely hungry.'])
+@pytest.mark.parametrize('source', ['She is not very hungry.', 'She is very peckish.', 'She is barely hungry.'])
 def test_unsupported_modifier_and_target_compositions_remain_plain(translator, source):
     assert translator.translate(source, **OPTIONS).text == source
 
@@ -45,7 +44,7 @@ def test_plans_and_editor_choices_cannot_downgrade_appetite(translator):
     assert offered
     assert all(translator.dictionary.entries[o['entry_id']].semantic_degree.get('HUNGRY') == 'strong'
                for o in offered)
-    assert translate_changes('She is very hungry.', translator=translator, **OPTIONS).text == 'She is very hungry.'
+    assert translate_changes('She is very hungry.', translator=translator, **OPTIONS).text != 'She is very hungry.'
 
 
 @pytest.mark.parametrize('source,target', [

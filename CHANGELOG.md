@@ -9,6 +9,18 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
 
 ## [Unreleased]
 
+- Add an offline trainin'\-label audit'n reject contradictory or self\-negative pairs before model
+  construction. Generate wrong\-sense anchors through the canonical exclusion parser'n respect a
+  same\-concept longer trigger's ownership. Mate, keep the recipe, model weights'n reference gates unchanged.
+- Recognise object\-bearing annoyance predicates separately from illness'n fatigue. Preserve the
+  source when a target can't retain its object, and share the distinction across model/lexical lookup,
+  automatic translation, plans'n editor alternatives.
+
+- Compose reviewed strong\-adjective modifiers'n let certified targets express a source modifier's
+  degree without duplicatin' it. Anyway, share qualifier ownership across translation'n editor alternatives;
+  retain exact raw modifier spellin' when it remains. Preserve certified lexical grade inside relational
+  predicates'n flag bounded local threshold\-grade changes during verification.
+
 - Retain bundled model 1.3.0 after a fresh 1.4.0 trial missed three required full\-data reference checks.
   Preserve the rejected trial, diagnostic package\-reader comparison'n complete base\-input integrity
   evidence without changin' recipe, cutoffs or required gates. Strengthen the isolated reproduction
@@ -124,7 +136,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   objects, reject adverbs mistaken for noun arguments, and bind subjects through supported auxiliary chains.
   Apply existin' tone/mood weights before candidate variety limits'n order planner suggestions by fit.
   Share document mood across strict Markdown units rather than resetting it at paragraph boundaries.
-  Anyway, keep figurative hunger complements plain instead of turnin' ambition into appetite.
+  Keep figurative hunger complements plain instead of turnin' ambition into appetite.
   Preserve meaning constraints when replayin' dictionary research rounds.
 - Quote a query\-string URL so the bundled dictionary also loads with PyYAML's pure\-Python SafeLoader;
   check complete entry, concept, profile'n imagery parity with the normal loader.
@@ -167,7 +179,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   words build on one \("fuckwit"\), and the new per\-entry `mask` words for profanity the swear list lacks \("wanker",
   "dickhead"\), each with the ending a page keeps. Innuendo, insults'n crude words show in full: 25 rated entries
   with not a sausage profane \("rooted", "mongrel", "shut your gob"\) are marked `profane: false`, and 5 author mask words.
-  Mind ya, a test holds every other rated entry to a masked word at its rating.
+  A test holds every other rated entry to a masked word at its rating.
 - Add `aussiefy.translate_changes`: translate's translation with every change it made (swaps, garnish,
   drawl, swear infixes and US/UK swaps) placed in the output. Each swap comes with its alternatives and its
   vulgarity-locked options, rendered in place on the engine's own path, with ids, `covers`, `removed` for garnish,

@@ -67,8 +67,8 @@ STORY = "She was tired and very hungry. She went into the woods. The porridge wa
 
 def test_yarn_loop_lookup_check_reject_then_accept(tmp_path, translator):
     # pinned to nan: the scripted good text keeps the clean plan, so the loop is tested, not the dictionary
-    good = ("Struth, she was stonkered and hungry enough to eat a horse and chase the jockey, so off she went "
-            "into the bush. And the porridge? Hotter than a shearer's armpit.")
+    from aussiefy.yarn import brief
+    good = brief(STORY, level=5, vulgarity="nan", translator=translator).plan["draft"]
     client = Scripted([
         _resp(_use(1, "lookup", query="too hot")),
         _resp(_use(2, "lint", text="She was tired. Y'all know the porridge was hot.")),
@@ -376,8 +376,8 @@ def test_validate_counts_declined_phrases_with_reasons(translator):
 
 
 def test_yarn_returns_malformed_tool_calls_to_the_model(tmp_path, translator):
-    good = ("Struth, she was stonkered and hungry enough to eat a horse and chase the jockey, so off she went "
-            "into the bush. And the porridge? Hotter than a shearer's armpit.")
+    from aussiefy.yarn import brief
+    good = brief(STORY, level=5, vulgarity="nan", translator=translator).plan["draft"]
     client = Scripted([_resp(_use(1, "lookup")), _resp(_use(2, "submit", text=good, declined=[]))])
     r = yarn(STORY, level=5, vulgarity="nan", client=client, translator=translator, cache_dir=str(tmp_path))
     assert r.status == "yarned"

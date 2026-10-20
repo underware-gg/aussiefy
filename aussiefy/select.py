@@ -140,8 +140,8 @@ def fit_rejection(entry: Entry, det: Detection, eff: Effective, person_concepts:
     if entry.frame == "clause" and det.question and not any(question_form(f) for f in entry.all_forms):
         return "clause has no supported question form"
     if not usable_forms(entry, det):
-        from .degree import degree_problem
-        return "no form fits: " + (form_problem(entry.form, det) or degree_problem(entry, det, entry.form)
+        from .degree import degree_plan
+        return "no form fits: " + (form_problem(entry.form, det) or degree_plan(entry, det, entry.form).problem
                                   or form_problem(entry.all_forms[-1], det) or "")
     return None
 
@@ -161,7 +161,7 @@ def binding_problem(form: str, det: Detection) -> str | None:
 
 
 def form_problem(form: str, det: Detection) -> str | None:
-    if det.result_clause and not re.fullmatch(r"[A-Za-z]+(?:[-'][A-Za-z]+)*'?", form):
+    if det.result_clause and not morph.single_word_form(form):
         return "dependent result complement requires a single-word predicate"
     reason = binding_problem(form, det)
     if reason:
@@ -180,8 +180,8 @@ def form_problem(form: str, det: Detection) -> str | None:
 def usable_forms(entry: Entry, det: Detection) -> list[str]:
     """The entry's forms (its form and variants) whose slots this span can fill: "his wife" takes "{poss}
     missus", a bare "wife" takes "the missus"."""
-    from .degree import degree_problem
-    return [f for f in entry.all_forms if form_problem(f, det) is None and degree_problem(entry, det, f) is None
+    from .degree import degree_plan
+    return [f for f in entry.all_forms if form_problem(f, det) is None and degree_plan(entry, det, f).problem is None
             and (entry.frame != "clause" or not det.question or question_form(f) is not None)]
 
 

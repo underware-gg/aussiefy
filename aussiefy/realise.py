@@ -167,7 +167,7 @@ def replacement_span(entry: Entry, det: Detection, sent: list[Token]) -> tuple[i
     if entry.frame == "predicate_adj" and det.frame == "clause":
         after = max(det.captures[k].i for k in ("subj", "be")) - sent[0].i + 1
         return after, det.end
-    return det.start, det.end
+    return det.start - len(det.degree_qualifier), det.end
 
 
 def _subject_text(tok: Token | None) -> str:

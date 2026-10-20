@@ -20,6 +20,29 @@ timing is not an estimate for the current larger dictionary.
 | `reports/X.Y.Z.json` | each version's evaluation, reference results, calibration and full provenance (never edited) |
 | `research.md` | the study that chose the approach, with the comparison of setups |
 
+## Audit generated labels before fitting
+
+```sh
+python scripts/train_embedder.py audit --holdout 0 --report /tmp/aussiefy-pair-audit.json
+```
+
+This generates the recipe's actual rows without constructing a model. It needs the configured generation
+sources, including WordNet when enabled. Reports include effective holdout, dictionary/recipe/trainer
+hashes, ordered pair digests, row counts, multi-concept entries and contradictions. Conflicts return exit
+1; both fitting stages reject them before model construction or distillation. Positive/negative pairs
+are compared without direction, case or whitespace differences, and negative self-pairs are invalid.
+
+Wrong-sense anchors use the matcher's parsed exclusion values, including immediate `!=` exclusions.
+A complete positive trigger of the same concept is not generated as that concept's wrong sense: a short
+trigger can exclude a continuation precisely so a longer positive trigger owns it. Unrelated concepts'
+positives do not suppress negatives. Unsupported nonterminal exclusion construction is refused only when
+the concept has targets to generate; guard-only/held-out concepts do not block a fit.
+
+A clean audit is not a semantic-quality gate. It does not establish correct sense selection or solve
+same-meaning positives competing as in-batch negatives. The [20 October spikes](../research/semantic-spikes-2026-10-20/README.md)
+retain those limitations and the rejected model's distinct failure modes. Bundled 1.3.0 and the frozen
+reference gates remain unchanged; no fresh model is fitted by these tooling changes.
+
 ## The approach
 
 1. **Pairs from the dictionary.** Each concept trigger and each `replaces` is paired with the entry's form;
