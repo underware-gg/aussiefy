@@ -24,6 +24,7 @@ from .model import Dictionary, LevelProfile, PhoneticRule, RewriteThresholds, Sw
 from .schema import (CLASSES, FRAMES, GARNISH_KEYS, RIFF_TONES, Concept, Entry, Riff, SchemaError, parse_concept,
                      parse_entry, parse_imagery)
 from .vocabulary import Vocabulary
+from .evidence import METADATA_KEYS, assess, parse_metadata, parse_weights
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -275,8 +276,6 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         for c in entry.concept:
             if c not in concepts:
                 errors.append(f"{entry.id}: unknown concept {c!r} (add it to concepts.yaml)")
-        if entry.status == "active" and {"not_aussie", "fabricated", "dubious_meaning"} & set(entry.flags):
-            warnings.append(f"{entry.id}: flagged {list(entry.flags)} but status is active")
         entries[entry.id] = entry
 
     # riffs.yaml: the images a term calls up (wheelie bin -> bin chickens fightin' over the scraps), rated for
@@ -302,11 +301,16 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         for riff in riffs or ():
             text, tone = (riff, "plain") if isinstance(riff, str) else \
                 ((riff.get("text"), riff.get("tone", "plain")) if isinstance(riff, dict) else (None, None))
-            if not isinstance(text, str) or not text.strip() or tone not in RIFF_TONES:
+            if (not isinstance(text, str) or not text.strip() or tone not in RIFF_TONES
+                    or isinstance(riff, dict) and set(riff) - {"text", "tone", *METADATA_KEYS}):
                 errors.append(f"riffs.yaml: {entry_id}: each riff needs text and a tone in {RIFF_TONES}")
                 continue
             words = re.findall(r"[a-z']+", text.lower())
-            rated.append(Riff(text.strip(), max((swear_strength(swears, w) for w in words), default=0), tone))
+            try:
+                metadata = parse_metadata(riff if isinstance(riff, dict) else {}, f"riff {entry_id}")
+                rated.append(Riff(text.strip(), max((swear_strength(swears, w) for w in words), default=0), tone, **metadata))
+            except SchemaError as exc:
+                errors.append(f"riffs.yaml: {exc}")
         entries[entry_id] = replace(entries[entry_id], riffs=tuple(rated))
 
     imagery = []
@@ -314,12 +318,27 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
     for raw in _read_optional(data / "imagery.yaml", errors, []):
         try:
             image = parse_imagery(raw, concepts, lambda word: swear_strength(swears, word))
+            if image.entry_id is not None and image.entry_id not in entries:
+                raise SchemaError(f"{image.id}: unknown linked entry {image.entry_id!r}")
             if image.id in image_ids:
                 raise SchemaError(f"duplicate imagery id {image.id!r}")
             image_ids.add(image.id)
             imagery.append(image)
         except SchemaError as exc:
             errors.append(f"imagery.yaml: {exc}")
+
+    weights = None
+    try:
+        weights = parse_weights(_read(data / "attestation.yaml", errors, {}))
+        def assessed(term):
+            assessment = assess(term, weights)
+            return replace(term, attestation=assessment.attestation, evidence=assessment.evidence,
+                           first_attested=assessment.first_attested)
+        entries = {eid: assessed(replace(entry, riffs=tuple(assessed(r) for r in entry.riffs)))
+                   for eid, entry in entries.items()}
+        imagery = [assessed(image) for image in imagery]
+    except SchemaError as exc:
+        errors.append(str(exc))
 
     patterns: list[Pattern] = []
     replacement_concepts = {cid for e in entries.values() if e.type == "idiom" and e.status != "omit"
@@ -376,7 +395,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
     if errors:
         raise SchemaError("dictionary failed validation:\n  " + "\n  ".join(errors))
     return Dictionary(entries, concepts, profiles, phonetic, prof_raw.get("policy", {}), patterns,
-                      PatternIndex(patterns), PatternIndex(forms), swears, dialect, warnings, swearing, genres, pos.lower_words(), person_roles, adjective_nouns, name_aliases, tuple(imagery), tuple(vocabulary.changes))
+                      PatternIndex(patterns), PatternIndex(forms), swears, dialect, warnings, swearing, genres, pos.lower_words(), person_roles, adjective_nouns, name_aliases, tuple(imagery), tuple(vocabulary.changes), weights)
 
 
 def write_validated(data_dir: str | Path, files: dict[str, str], extra: Iterable[str | Path] = ()) -> Dictionary:

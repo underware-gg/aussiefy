@@ -40,8 +40,9 @@ dictionary.
   person. A word-level diff pairs each changed span with its plain-English counterpart ("arrived" → "rocked
   up"). It skips anything the dictionary already has, including inflected forms, and stages the rest.
 - **`dev tag`** asks Claude to propose concept, frame, intensity, vulgarity, `replaces`, flags and a gloss,
-  using structured JSON output that is validated against the schema. Flags set the status: `slur` and
-  `not_aussie` become `omit`, while `fabricated`, `dubious_meaning` and `archaic` become `gate`. A phrase
+  using structured JSON output that is validated against the schema. `slur` forces `omit`; perceived
+  variety, Australian usage, definition doubt and modern misreading get separate fields. Currency goes in
+  `register`. Scraped citations have structured sources with empty support until reviewed. A phrase
   with no known concept is gated as `untagged`, and its proposed concept goes in the review notes for a
   human to add to `aussiefy/data/concepts.yaml`. Source meanings are given to the model as context only. A
   gloss that is too similar to a source description is blanked and flagged for a rewrite. Refused or
@@ -58,6 +59,11 @@ dictionary.
   `round.yaml`. It plans against the dictionary as it was before the round, prints what it would add and what
   it drops and why (a form already present, a trigger that is itself slang or copies a reference query), and
   with `--write` validates the result in a scratch copy before touching the dictionary.
+  Archived proposals are adapted after the round's explicit entry fixes: URL strings become unreviewed
+  citations, retired flags become usage, meaning or currency fields, and non-URL source annotations stay
+  in notes. A former `fabricated` flag requires manual review without claiming known coinage. This leaves
+  the archives intact and does not relax the current dictionary schema; a gate alone never implies a
+  doubtful definition.
 
 
 ## Corpus acquisition

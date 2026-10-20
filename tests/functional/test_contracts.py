@@ -85,7 +85,7 @@ def test_lookup_cards_come_from_the_shared_card_builder(translator):
     for r in harness.lookup("very tired", short=True, translator=translator)["results"]:
         assert r == short_card(d.entries[r["id"]])
     sourced = next(e for e in d.idioms if e.sources)
-    assert entry_card(sourced)["sources"] == list(sourced.sources)
+    assert entry_card(sourced)["sources"] == [s.url for s in sourced.sources if s.url]
 
 
 def test_brief_is_what_yarn_sends(translator):
@@ -195,7 +195,7 @@ def test_lookup_offers_what_translate_may_use_and_marks_gates(translator):
     plain = harness.lookup("all talk", translator=translator)["results"]
     gated = harness.lookup("all talk", include_gated=True, translator=translator)["results"]
     assert not any("gated" in r for r in plain)
-    assert any(r.get("gated") == ["not_aussie"] for r in gated)
+    assert any("reads_as" in r.get("gated", []) for r in gated)
     assert all(r["level"] <= 2 and r["vulgarity"] == 0 for r in harness.lookup("very tired", level="blow-in",
                                                                                  translator=translator)["results"])
 

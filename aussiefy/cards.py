@@ -7,6 +7,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 from .schema import Entry
+from .evidence import metadata_dict
 
 if TYPE_CHECKING:
     from .genre import Embellishment
@@ -19,7 +20,7 @@ def shows_riffs(setting: "Embellishment") -> bool:
 
 def riff_cards(e: Entry, cap: int) -> list[dict[str, str]]:
     """An entry's riffs under the cap, as the toolkit shows them (best first)."""
-    return [{"text": r.text, "tone": r.tone, **({"best": True} if i == 0 else {})}
+    return [{"text": r.text, "tone": r.tone, **metadata_dict(r, derived=True), **({"best": True} if i == 0 else {})}
             for i, r in enumerate(e.riffs_within(cap))]
 
 
@@ -32,8 +33,8 @@ def short_card(e: Entry) -> dict[str, Any]:
         card["semantic_effects"] = list(e.semantic_effects)
     if e.register != "current":
         card["register"] = e.register
-    if e.status == "gate":
-        card["gated"] = list(e.flags)
+    if e.held_back:
+        card["gated"] = list(e.held_back)
     return card
 
 
@@ -56,9 +57,9 @@ def entry_card(e: Entry, cap: int = 3, riffs: bool = True) -> dict[str, Any]:
     if e.notes:
         card["notes"] = e.notes
     if e.sources:
-        card["sources"] = list(e.sources)
+        card["sources"] = [s.url for s in e.sources if s.url]
     if e.replaces:
         card["replaces"] = [r.split("@")[0] for r in e.replaces]
-    if e.status == "gate":
-        card["gated"] = list(e.flags)
+    if e.held_back:
+        card["gated"] = list(e.held_back)
     return card

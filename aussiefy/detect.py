@@ -52,6 +52,7 @@ CLAUSE_VERBS = {"am", "is", "are", "was", "were", "be", "been", "being", "have",
 VOCATIVES = {"mate", "mates", "everyone", "everybody", "all", "guys", "folks", "there", "team", "love",
              "darling", "sir", "mum", "dad", "buddy", "pal"}
 CLAUSE_OPENERS = {"and", "but", "so", "oh", "well", "because", "then", "or", "please", "just", "now"}
+DIALOGUE_QUOTES = frozenset((*QUOTES, "'", "‘", "’"))
 
 
 @dataclass
@@ -171,11 +172,19 @@ def at_clause_start(tokens: list[Token], i: int) -> bool:
     j = i - 1
     while j >= 0 and tokens[j].norm in CLAUSE_OPENERS:
         j -= 1
-    return j < 0 or tokens[j].text in CLAUSE_BREAK or tokens[j].text in SENTENCE_END
+    if j < 0:
+        return True
+    previous = tokens[j]
+    if previous.text in DIALOGUE_QUOTES:
+        return (previous.text in {"“", "‘"} or j == 0
+                or tokens[j - 1].text in CLAUSE_BREAK | SENTENCE_END
+                or previous.text in {'"', "'"} and tokens[j - 1].end < previous.start)
+    return previous.text in CLAUSE_BREAK or previous.text in SENTENCE_END
 
 
 def at_clause_end(tokens: list[Token], i: int, conjunctions: bool = False) -> bool:
-    if i >= len(tokens) or tokens[i].text in CLAUSE_BREAK or tokens[i].text in SENTENCE_END:
+    if (i >= len(tokens) or tokens[i].text in CLAUSE_BREAK or tokens[i].text in SENTENCE_END
+            or tokens[i].text in DIALOGUE_QUOTES):
         return True
     return conjunctions and tokens[i].norm in ("and", "but", "or", "so", "then", "please")
 

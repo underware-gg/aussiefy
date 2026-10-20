@@ -38,6 +38,7 @@ from .errors import UserError
 from .loader import _YAML_LOADER, DATA_DIR, load_dictionary, write_validated
 from .model import Dictionary
 from .schema import CONCEPT_KEYS, Concept, ENTRY_KEYS, SchemaError, parse_concept, parse_entry, parse_effects
+from .evidence import unreviewed_source
 from .terms import form_key
 
 
@@ -346,6 +347,46 @@ def _prepare_concept_fixes(plan: RoundPlan, d: Dictionary) -> None:
         parse_concept(cid, raw)
 
 
+def _current_entry_metadata(raw: dict) -> dict:
+    """Adapt archived round proposals; the canonical dictionary schema remains strict."""
+    entry = deepcopy(raw)
+    notes = []
+    sources = entry.get("sources")
+    if isinstance(sources, list):
+        citations = []
+        for source in sources:
+            if isinstance(source, str):
+                if source.lower().startswith(("http://", "https://")):
+                    citations.append(unreviewed_source(source, owner=entry.get("id", "round proposal"),
+                        note="Historical round citation; full-expression support awaits curator review.").to_dict())
+                else:
+                    notes.append(f"Historical source annotation: {source}")
+            else:
+                citations.append(source)
+        entry["sources"] = citations
+    flags = entry.get("flags", [])
+    if isinstance(flags, (list, tuple)) and all(isinstance(flag, str) for flag in flags):
+        retired = set(flags) & {"archaic", "not_aussie", "dubious_meaning", "fabricated"}
+        entry["flags"] = [flag for flag in flags if flag not in retired]
+        if "archaic" in retired and entry.get("register", "current") == "current":
+            entry["register"] = "archaic"
+            notes.append("Legacy archaic annotation takes precedence over absent/current currency; review before promotion.")
+        if "not_aussie" in retired:
+            entry.setdefault("reads_as", "unknown")
+        if "dubious_meaning" in retired:
+            entry.setdefault("doubtful_definition", True)
+        if "fabricated" in retired and entry.get("status") != "omit":
+            entry["status"] = "gate"
+        if retired:
+            notes.append("Historical flags: " + ", ".join(sorted(retired)) + "; migrated for curator review.")
+    if notes:
+        previous = entry.get("notes")
+        if previous is not None and not isinstance(previous, str):
+            raise SchemaError(f"{entry.get('id', 'round proposal')}: notes must be text")
+        entry["notes"] = "; ".join([previous or "", *notes]).strip("; ")
+    return entry
+
+
 def _accept_entries(plan: RoundPlan, config: RoundConfig, d: Dictionary, name, forms: set[str]) -> None:
     """The proposed entries, with fixes applied, minus any whose form or id is taken or whose concepts are unknown.
     Accepted forms are added to forms."""
@@ -363,9 +404,8 @@ def _accept_entries(plan: RoundPlan, config: RoundConfig, d: Dictionary, name, f
             raise SchemaError(f"{src}: allow_existing_form must be a boolean")
         e["concept"] = list(dict.fromkeys(name(c) for c in e.get("concept") or ()))
         e.update(config.entry_fixes.get(e.get("id"), {}))
-        if v.get("decision") == "gate" or v.get("confidence") == "low":   # a low-confidence accept ships gated
+        if e.get("status") != "omit" and (v.get("decision") == "gate" or v.get("confidence") == "low"):
             e["status"] = "gate"
-            e.setdefault("flags", ["dubious_meaning"])
         e = {k: e[k] for k in ENTRY_KEYS if k in e and e[k] not in (None, [], "")}
         if e.get("id") in ids:
             e["id"] += config.id_suffix
@@ -373,6 +413,7 @@ def _accept_entries(plan: RoundPlan, config: RoundConfig, d: Dictionary, name, f
                 plan.dropped.append(("entry", e.get("id"), "id taken", src))
                 continue
         try:
+            e = _current_entry_metadata(e)
             parse_entry(e, config.output)
         except SchemaError as exc:
             plan.dropped.append(("entry", e.get("id"), f"schema: {exc}", src))

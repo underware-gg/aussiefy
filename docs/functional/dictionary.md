@@ -30,7 +30,8 @@ aussiefy/data/
   judge.yaml           blind comparison rubric and report schema
   pos/                 licensed English POS weights and provenance metadata
   source_policy.yaml   sites the scraper must not bulk-extract (reference-only)
-  sources.yaml         extra source URLs per entry (written by `dev review --apply`)
+  sources.yaml         structured supplemental citations per entry (also written by `dev review --apply`)
+  attestation.yaml     versioned provisional evidence weights and selection factors
   model/               the bundled static embedding model
   entries/
     lexical.yaml       one-word swaps: nouns, adjectives, adverbs
@@ -63,15 +64,78 @@ An entry is one meaning\-shape:
   region: []             # e.g. [qld]
   replaces: []           # plain-English paraphrases (patterns); drive matching
   status: active         # active | gate | omit
-  flags: []              # not_aussie | slur | dubious_meaning | archaic | fabricated | untagged
+  flags: []              # slur | untagged; evidence and usage have separate fields
   semantic_effects: []   # reviewed additions to the mapped meaning; opinion or quantity_approximation
   sources: []
   gloss: Not quite sane; eccentric.   # our own words, never a source's
 ```
 
-An entry's `incoherence` (its minimum level\) says how hard it is to follow, never how rude it is; rudeness is
-its `vulgarity`. A `gate` entry is held back until all its flags are unlocked \(`--unlock`, or `--unlock all`); an
-`omit` entry is never used, and is kept only so that re\-scrapes recognise it.
+An entry's `incoherence` is its minimum level: how distinctly'n colourfully Australian its wording is.
+Generic/imported words sit low; thick vernacular'n opaque local idioms sit high. Rudeness is independently
+its `vulgarity`. `status: gate` is a curator's manual gate; `--unlock all` can lift it. `omit` is never offered,
+even when unlocked. The `slur` flag requires `omit`; `untagged` requires a non\-active status.
+
+Origin, use and meaning are separate from that manual status. `reads_as` other than `australian` or `general`,
+`australian_use: uncommon`, or `doubtful_definition: true` keeps a term out of automatic choices. These apply
+to entries, riffs and imagery. `misreadable: true` marks a real sense modern readers could mistake: an entry
+can be permitted with `--unlock misreadable`; a foreign-sounding or doubtful term stays held back even with
+`--unlock all`. The register filter independently controls current, dated and archaic entries. General
+English is eligible and receives a named weight factor of 0.5, rather than an exclusion.
+
+## Evidence and term metadata
+
+Well, entries, riffs'n imagery share these stored fields:
+
+| Fields | Meaning |
+|---|---|
+| `sources` | Structured citations: `url`, `kind`, `publisher`, `supports`, optional `cited_date` and `note` |
+| `searched` | Last search's ISO `date`, `outcome` (`found`, `nothing_found`, `inconclusive`), optional limits in `note` |
+| `produced_by`, `coined_by` | Agent output (`produced_by: agent`) is not proof of invention; deliberate coinage records `person`, `agent` or `constructor` |
+| `caught_on`, `spoken_use` | Curator records with `date` and `note`, supported by the term's sources or testimony summary |
+| `testimony` | Counts of `people`, `independent` people and `places`, with `first_date`, `last_date` and `summary_date`; no personal identities |
+| `credit` | Contributor credit, separate from who coined it |
+| `origin`, `origin_language` | Australian, British, Irish, American, Aboriginal, other or unknown; language where known |
+| `australian_use`, `reads_as` | Common/uncommon here, and the variety it feels like (`australian`, `general`, or another variety) |
+| `dated_by_curator`, `register` | A curator's year/decade/range fallback, and current/dated/archaic currency |
+| `themes` | Explicit subject matter tags; tier permissions arrive in the next package slice |
+| `doubtful_definition`, `misreadable` | Definition uncertainty versus a real sense liable to modern misreading |
+
+Sources use kinds `scholarly_dictionary`, `slang_dictionary`, `crowd_dictionary`, `literature`, `media`,
+`testimony` and `community`. `publisher` identifies the independent publisher or work: mirrors and copies
+must retain that identity. A community citation additionally names its underlying `basis` kind, so community
+attribution never turns testimony into documentary evidence. Testimony citations require the canonical
+summary. `supports` lists `term`, `meaning`, `australian_use` and/or `date`; the last requires `cited_date`.
+An empty list explicitly retains an unreviewed or component-only citation without attesting the full expression.
+
+```yaml
+sources:
+- url: https://en.wiktionary.org/wiki/arvo
+  kind: crowd_dictionary
+  publisher: Wiktionary
+  supports: [term, meaning, australian_use]
+  note: Selected afternoon sense; no claim of exclusive Australian use.
+```
+
+The loader derives `attestation` (score, five bars, counts and weights version), `evidence` and
+`first_attested`; authors must not store those judgements. `aussiefy.evidence.assess(term, weights,
+testimony=live_summary)` is the pure scoring operation. A supplied live summary replaces the exported one.
+Further sources of one kind have diminishing weight; the same publisher/work counts once. Testimony alone
+stops one bar below attested unless a curator confirms `spoken_use`. Deliberate coinage remains bulldust
+until a supported `caught_on` record exists; unfound agent output with no independent testimony is also
+bulldust. Otherwise the score decides attested versus unverified. Supported citation dates take precedence
+over `dated_by_curator`; absent evidence means unknown, rather than the date of the latest web page.
+
+`attestation.yaml` is explicitly provisional pendin' expression\-level source research. Crikey, substitution and
+garnish entry selection read its continuous score'n general\-wording factor, replacing raw URL\-count
+weightin'. Riffs'n contextual imagery retain their shared tone/signature weightin', with the first curated
+option weighted double; the usage/meaning gates'n evidence labels apply to them too.
+Anyway, existin' citation links are retained with empty support
+lists where their whole\-expression scope hasn't been checked; an old sense audit isn't an origin or
+frequency survey. This work doesn't declare the source hunt complete.
+
+Changes contract version 2 still carries URL strings in entry cards. The coordinated new card'n changes
+contract lands in package slice 6; internal source objects are already structured. So anyway, riff'n imagery offers
+carry their own evidence metadata. See [DD-040](../architecture/decisions/dd-040-term-evidence-and-usage.md).
 
 `riffs.yaml` maps entry IDs to optional images, each with `text` and `tone` (`comic`, `grim` or `plain`).
 Anyway, these can include original comparisons as well as familiar imagery; they aren't additional meanings or
@@ -119,7 +183,7 @@ the recognition index. Intentional discovery-only concepts do not generate unrea
 Slots are `{subj} {be} {have} {do} {poss} {obj} {objposs}`, plus `{np}`, which captures a short noun phrase'n copies
 it across, and `{will}`, which becomes "will" or "would" by tense. For example, `reckon {np} {have} Buckley's`
 turns "believing her assertion to be simply impossible" into "reckoning her assertion had Buckley's". When an
-entry has no verb of its own to take tense from, it uses the rest of the sentence's tense. Stone the flamin' crows, clause forms can
+entry has no verb of its own to take tense from, it uses the rest of the sentence's tense. Struth, clause forms can
 also start with "there" ("it's impossible" → "there's no bloody way").
 
 `{objposs}` identifies another participant's possessive. It uses an explicit captured possessive or
@@ -128,7 +192,7 @@ off” can become “she bent his ear”, while bare “she rambled” supplies 
 retain an explicitly captured object possessive, just as they retain other captured arguments.
 
 `number: mass` marks an uncountable noun, overriding spelling heuristics for forms such as `kid stakes`.
-Crikey, mass terms are withheld for explicitly plural source spans'n counted noun phrases outside the match
+Fair dinkum, mass terms are withheld for explicitly plural source spans'n counted noun phrases outside the match
 (such as `one warm beer`, `another beer` or `each beer`). Mass\-compatible quantifiers such as `some`,
 `much` and `no` remain valid; the engine doesn't rewrite surrounding agreement to force a term in. `number: plural` retains
 its existin' plural\-only referent meanin', and omitted number metadata remains `any`.
@@ -144,7 +208,7 @@ its existin' plural\-only referent meanin', and omitted number metadata remains 
   great civil war" but still fires on "a great game"
 - `?=home|there` requires the next token without consumin' it: `walk ?=home|there` preserves the destination
 - `?<=radio|car antenna` requires a precedin' token without consuming it: replace the antenna head while
-  retaining its wireless/car qualifier. Assertion alternatives each name one token. Fair dinkum, following assertions
+  retaining its wireless/car qualifier. Assertion alternatives each name one token. Stone the flamin' crows, following assertions
   require a precedin' consuming element; matchin' still enforces both assertions in similarity mode
 - `^object` requires an `{np}` argument'n applies shared unanchored\-object checks, rejecting temporal
   and quantity\-only adjuncts rather than mistaking them for the object of a multiword expression
@@ -159,10 +223,10 @@ or enter a lookup/trainin' phrase as translated content.
 
 ## Validation
 
-Now, the loader validates whole box'n dice at load time: field types and ranges, kebab\-case ids, known concepts and
+Mind ya, the loader validates whole bloody show at load time: field types'n ranges, kebab\-case ids, known concepts and
 slots, clause forms starting with `{subj}`, `slur` forcing `omit`, no duplicate ids, and that every form
 compiles as a pattern. It collects every error, with file'n id, and raises one `SchemaError` (the CLI exits
-2\). Strewth, it also warns about concepts that can never be detected'n flagged entries left active.
+2\). It also warns about concepts that can never be detected'n flagged entries left active.
 `aussiefy validate` runs the same checks'n prints stats. Required concepts, profiles, phonetic, swears,
 genre, riffs'n entries files must be present; malformed YAML and missing files are collected
 with the other errors. String\-list fields require strings, `person` and `stretch` require real booleans,
@@ -188,7 +252,7 @@ patch_entries:
     replaces: []
 ```
 
-Mate, this example records the current bravery\-only mapping'n clears any entry\-specific direct triggers. It
+This example records the current bravery\-only mapping'n clears any entry\-specific direct triggers. It
 doesn't make every digger brave. A faulty shared concept trigger must also be corrected in that concept's
 `triggers` field; adding a better candidate alone doesn't disable the old mapping.
 
@@ -198,12 +262,12 @@ patches require a target already present and cannot rename its ID. New records u
 An overlay may add a narrower meaning and move an existing entry to it, with reusable patterns and slots.
 
 Composition order is built\-in records with their source sidecar, then `--dict` arguments in command order.
-Well, a directory expands nonrecursively: sorted `*.yaml` files, followed by sorted `*.yml` files, preservin' the
+A directory expands nonrecursively: sorted `*.yaml` files, followed by sorted `*.yml` files, preservin' the
 existin' custom\-dictionary order. Within an overlay, add concepts, add entries, patch concepts, then patch
 entries. Cross\-record references resolve against the final dictionary before its indexes are built once.
 
 Omitted fields inherit. Supplied fields replace the entire field: `variants: []` clears variants,
-`replaces: []` clears direct triggers, and `triggers: {}` clears a concept's triggers. So anyway, a supplied `triggers`
+`replaces: []` clears direct triggers, and `triggers: {}` clears a concept's triggers. A supplied `triggers`
 map replaces all its old frames; it doesn't append to them. Later files win for fields they explicitly set.
 Invalid operations remain errors even if a later file would overwrite them. Unknown keys, formats, targets
 and duplicate explicit YAML keys are errors. Standard YAML anchors'n merge keys remain supported.
@@ -445,7 +509,7 @@ set\-aside concepts in scratch only, while still rejecting genuinely unknown con
 
 ## Finite clauses and sense boundaries
 
-Question realisation supports modular subject/be/have/do clauses'n existential there/be clauses. How good is that?
+Question realisation supports modular subject/be/have/do clauses'n existential there/be clauses. Ya bewdy
 have inverts directly; lexical possession takes do\-support. Fixed finite or negative clause idioms remain
 available in declarations but are declined in questions when no safe modular question form exists. An outer
 auxiliary such as “could” can't be left before a replacement that brings its own independent finite clause;
@@ -481,7 +545,7 @@ name, possessive noun head or of\-qualified name stays plain when the capture ca
 coordinated verb or fresh finite clause remains independent. The same bounded check protects speech,
 scolding'n other verb constructions; it doesn't claim a full parser for arbitrary coordination.
 
-Waltzing Matilda requires an explicitly travellin' swag carrier. Carryin' a swag alone can use the separate
+Waltzing Matilda requires an explicitly travellin' swag carrier. Humpin' the bluey alone can use the separate
 baggage expression; walking country roads alone doesn't establish baggage. Exact\-zero mappings also
 exclude minimising nothing\-much constructions, which may describe a small amount rather than none.
 

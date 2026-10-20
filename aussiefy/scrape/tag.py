@@ -2,8 +2,8 @@
 
 The model proposes concept, frame, intensity, vulgarity, `replaces`, flags and
 a fresh gloss. Nothing it says is trusted blindly. Proposals are validated
-against the schema, the flags set the status (slur/not_aussie -> omit; dubious,
-fabricated, archaic -> gate), and `aussiefy dev review` shows everything as a diff
+against the schema, slurs are omitted and untagged terms are gated.
+Evidence and usage metadata stay separate; `aussiefy dev review` shows everything as a diff
 before it lands.
 """
 
@@ -18,11 +18,18 @@ from ..embed import NgramEmbedder
 from ..errors import UserError
 from ..model import Dictionary
 from ..schema import FLAGS, FRAMES, REGISTERS, SchemaError, parse_entry
+from ..evidence import unreviewed_source
 from .normalise import Staged
 
 
-FLAG_STATUS = {"slur": "omit", "not_aussie": "omit", "fabricated": "gate", "dubious_meaning": "gate",
-               "archaic": "gate"}
+FLAG_STATUS = {"slur": "omit"}
+
+
+def staged_sources(urls: list[str]) -> list[dict]:
+    """Scraped citations await review of their support, even when a model proposes a definition."""
+    return [unreviewed_source(url, owner="scraped citation",
+                             note="Scraped citation; support awaits curator review.").to_dict()
+            for url in urls if url.lower().startswith(("http://", "https://"))]
 
 TAG_SCHEMA = {
     "type": "object",
@@ -49,9 +56,14 @@ TAG_SCHEMA = {
         "flags": {"type": "array", "items": {"type": "string", "enum": [f for f in FLAGS if f != "untagged"]}},
         "gloss": {"type": "string"},
         "review_note": {"type": "string"},
+        "reads_as": {"type": "string", "enum": ["australian", "general", "british", "american", "irish", "other", "unknown"]},
+        "australian_use": {"type": "string", "enum": ["common", "uncommon"]},
+        "doubtful_definition": {"type": "boolean"},
+        "misreadable": {"type": "boolean"},
     },
     "required": ["form", "variants", "concept", "new_concept", "frame", "intensity", "vulgarity", "incoherence",
-                 "register", "region", "replaces", "flags", "gloss", "review_note"],
+                 "register", "region", "replaces", "flags", "gloss", "review_note", "reads_as", "australian_use",
+                 "doubtful_definition", "misreadable"],
     "additionalProperties": False,
 }
 
@@ -76,8 +88,11 @@ Return the fields of one dictionary entry:
 - register: current, dated or archaic.
 - replaces: 2-5 plain-English paraphrases that the phrase can stand in for, in the same frame,
   e.g. ["very busy", "swamped"]. Append @N to set the intensity a paraphrase expresses.
-- flags: not_aussie (not of Australian origin or use), slur, dubious_meaning (the source's meaning
-  looks wrong), archaic, fabricated (no evidence anyone says this).
+- flags: slur only (never usable). Currency belongs in register.
+- reads_as: australian, general, british, american, irish, other or unknown: what variety the term
+  feels like here, independently of origin. australian_use: common or uncommon here.
+- doubtful_definition: true if the proposed definition is in doubt. misreadable: true if modern
+  readers would mistake this real sense for another. Lack of sources never proves invention.
 - gloss: a short meaning in YOUR OWN WORDS. Never copy or lightly reword the source text.
 - review_note: one sentence for the human reviewer about anything uncertain.
 """
@@ -140,7 +155,8 @@ def proposal_to_entry(item: Staged, proposal: dict, dictionary: Dictionary) -> t
         "replaces": proposal["replaces"],
         "status": status,
         "flags": flags,
-        "sources": item.sources,
+        "sources": staged_sources(item.sources),
+        **{k: proposal[k] for k in ("reads_as", "australian_use", "doubtful_definition", "misreadable") if k in proposal},
         "gloss": gloss,
         "notes": "; ".join(n for n in notes if n),
     }
@@ -178,7 +194,7 @@ def tag_all(items: list[Staged], dictionary: Dictionary, client: Any = None, mod
         except (claude.Refused, claude.BadReply, SchemaError) as exc:   # this phrase only
             log(f"  ! {item.form}: {exc}")
             raw = {"id": item.id, "form": item.form, "concept": [], "frame": "interjection",
-                   "status": "gate", "flags": ["untagged"], "sources": item.sources,
+                   "status": "gate", "flags": ["untagged"], "sources": staged_sources(item.sources),
                    "notes": f"tagging failed: {exc}"}
         out.append(raw)
         log(f"  {raw['status']:<6} {raw['id']}  {raw.get('notes', '')}")

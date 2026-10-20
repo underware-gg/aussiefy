@@ -141,7 +141,8 @@ def garnish_pool(placement: str, entries: list[Entry], eff: Effective, used: dic
 def garnish_weights(pool: list[Entry], eff: Effective, swear: bool | None) -> list[float]:
     """Each entry's weight; swearing sounds like its tier, so a closer at tradie leans to "fuck me dead" over "well,
     I'll be buggered"."""
-    return [e.weight * (tier_match(e.vulgarity, eff.vulgarity) if swear else 1.0) for e in pool]
+    return [e.weight * eff.metadata_weight(e) * (tier_match(e.vulgarity, eff.vulgarity) if swear else 1.0)
+            for e in pool]
 
 
 def garnish_offer(placement: str, entries: list[Entry], eff: Effective, seed: int, key: tuple,

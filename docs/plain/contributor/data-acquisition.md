@@ -31,8 +31,8 @@ receipt and joblessness, earnest effort from hardship, fair treatment from liber
 contingency. This is a bounded review, not certification of the entire dictionary. Checked extra URLs live in
 `sources.yaml`; component attestation does not establish a whole invented construction as a traditional idiom.
 
-The original “make [it] true blue” and “make fair dinkum” consecration paraphrases require the existing
-`dubious_meaning` unlock: genuine/loyal is not the same meaning as sacred. Evidence for a further sense should
+The original “make [it] true blue” and “make fair dinkum” consecration paraphrases carry
+`doubtful_definition: true` and remain out of automatic translation: genuine/loyal is not sacred. Evidence for a further sense should
 produce a precise concept/frame or a review note, rather than a broad trigger that silently changes facts.
 
 The [focused hunger harvest](../../../research/hunger-phrases-2026-10-18/README.md) retains three independent
@@ -149,10 +149,11 @@ decisions. Component coverage does not promise automatic replacement of a whole 
 [proposals](../../../research/maintenance-2026-10-17/seed-proposals.yaml) retain the review. Raw HTML,
 copied meanings and usage examples remain temporary, outside the repository.
 
-The source's known problems remain flagged in `aussiefy/data/entries/flagged.yaml`. "That'll
-do, pig", "cruisin' for a bruisin'", "that dog won't hunt" and "throw another shrimp on the barbie" are omitted.
-"All hat and no cattle" (Texan) and "bugger me sideways'n call me the pope" (no attestation found) are gated.
-Both appear in the brief's sample output, so `--unlock not_aussie,fabricated` brings that flavour back.
+The reviewed decisions remain in `aussiefy/data/entries/flagged.yaml`. American-sounding or uncommon
+expressions, including “all hat and no cattle”, are held back through their usage fields and remain
+available to marked dictionary lookup. “That'll do, pig” keeps a manual context gate. The historical
+“bugger me sideways'n call me the pope” composite keeps a manual gate until the constructor slice replaces
+it. The removed flags cannot be unlocked; origin is recorded separately from usage and perceived variety.
 
 ## After changing the dictionary
 

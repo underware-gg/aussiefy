@@ -17,7 +17,7 @@ from typing import Any
 from .engine import Translator
 from .errors import UserError
 from .policy import DOCUMENT_TYPES, LEVELS, VULGARITIES
-from .schema import REGISTERS, FLAGS
+from .schema import REGISTERS, UNLOCKS
 
 from . import harness
 from .guide import style_guide_data
@@ -100,7 +100,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                           Field(description="Registers allowed; omit for the level's own (current, plus dated at 5).")]
     Regions = Annotated[list[str] | None, Field(description="Region tags to prefer, e.g. ['qld']; entries tagged "
                                                             "with other regions are left out.")]
-    Unlock = Annotated[list[Literal[(*FLAGS, "all")]] | None,
+    Unlock = Annotated[list[Literal[(*UNLOCKS,)]] | None,
                        Field(description="Flags whose gated (doubtful) entries become eligible, or ['all'].")]
 
     hidden = ({"unlock", "include_gated"} if not allow_unlock else set()) | \

@@ -12,7 +12,7 @@
   placement: opener
   concept: [SURPRISE]
   frame: interjection
-  incoherence: 4
+  incoherence: 3
   gloss: Surprise.
 - id: g-crikey
   form: crikey
@@ -20,7 +20,7 @@
   placement: opener
   concept: [SURPRISE]
   frame: interjection
-  incoherence: 4
+  incoherence: 3
   gloss: Surprise or alarm.
 - id: g-stone-the-crows
   form: stone the crows
@@ -29,7 +29,7 @@
   placement: opener
   concept: [SURPRISE]
   frame: interjection
-  incoherence: 5
+  incoherence: 3
   register: dated
   gloss: Astonishment.
 - id: g-bugger-me
@@ -56,7 +56,7 @@
   placement: opener
   concept: [REALLY_Q]
   frame: interjection
-  incoherence: 4
+  incoherence: 3
   gloss: Honestly.
 - id: g-oi
   form: oi
@@ -64,7 +64,7 @@
   placement: opener
   when: [dialogue, exclamation, second_person]
   frame: interjection
-  incoherence: 5
+  incoherence: 3
   weight: 0.5
   gloss: Hey, listen.
 - id: g-jeez
@@ -74,8 +74,9 @@
   placement: opener
   concept: [SURPRISE]
   frame: interjection
-  incoherence: 4
+  incoherence: 1
   gloss: Exasperation.
+  reads_as: general
 - id: g-bugger-me-sideways
   form: bugger me sideways'n call me the pope
   type: garnish
@@ -85,16 +86,17 @@
   vulgarity: 1
   incoherence: 5
   status: gate
-  flags: [fabricated]
-  notes: From the project brief's sample output; no attestation found. Unlock with --unlock fabricated.
+  notes: From the project brief's sample output; no attestation found. Held behind a manual gate until the composite replaces this historical record.
   gloss: Extravagant astonishment.
-
+  produced_by: agent
+  coined_by: person
+  credit: Rob
 - id: g-mate
   form: mate
   type: garnish
   placement: tag
   frame: tag
-  incoherence: 4
+  incoherence: 3
   weight: 3
   gloss: Friendly (or pointedly unfriendly) address.
 - id: g-ay
@@ -110,7 +112,7 @@
   type: garnish
   placement: tag
   frame: tag
-  incoherence: 5
+  incoherence: 3
   register: dated
   gloss: Old-fashioned "mate".
 - id: g-ya-galah
@@ -120,7 +122,7 @@
   placement: tag
   when: [second_person, question]
   frame: tag
-  incoherence: 5
+  incoherence: 3
   gloss: Affectionate insult.
 - id: g-ya-drongo
   form: ya drongo
@@ -129,7 +131,7 @@
   placement: tag
   when: [second_person, question]
   frame: tag
-  incoherence: 5
+  incoherence: 3
   gloss: You fool.
 - id: g-ya-flamin-mongrel
   form: ya flamin' mongrel
@@ -161,7 +163,7 @@
   type: garnish
   placement: closer
   frame: interjection
-  incoherence: 5
+  incoherence: 3
   stretch: true
   gloss: Drawn-out surprise.
 - id: g-bugger-me-dead
@@ -179,7 +181,7 @@
   type: garnish
   placement: closer
   frame: interjection
-  incoherence: 5
+  incoherence: 3
   gloss: Cheerful sign-off.
 - id: g-stone-the-flamin-crows
   form: stone the flamin' crows
@@ -187,7 +189,7 @@
   type: garnish
   placement: closer
   frame: interjection
-  incoherence: 5
+  incoherence: 4
   register: dated
   gloss: Astonishment.
 - id: g-no-matter-what-some-drongo-reckons
@@ -197,7 +199,7 @@
   placement: tag
   when: [opinion]
   frame: tag
-  incoherence: 5
+  incoherence: 4
   weight: 0.5
   gloss: A pub aside dismissing the doubters.
 
@@ -249,37 +251,41 @@
   type: garnish
   placement: connective
   frame: interjection
-  incoherence: 4
+  incoherence: 1
   weight: 2
   gloss: Moving the story along.
+  reads_as: general
 - id: c-well
   form: well
   type: garnish
   placement: connective
   frame: interjection
-  incoherence: 4
+  incoherence: 1
   weight: 2
   gloss: Setting up the next bit.
+  reads_as: general
 - id: c-now
   form: now
   type: garnish
   placement: connective
   frame: interjection
-  incoherence: 4
+  incoherence: 1
   gloss: Turning to the next part.
+  reads_as: general
 - id: c-so-anyway
   form: so anyway
   type: garnish
   placement: connective
   frame: interjection
-  incoherence: 5
+  incoherence: 1
   gloss: Getting back to it.
+  reads_as: general
 - id: c-mate
   form: mate
   type: garnish
   placement: connective
   frame: interjection
-  incoherence: 5
+  incoherence: 3
   weight: 0.6
   gloss: The storyteller nudging the listener.
 - id: g-aw
@@ -288,8 +294,9 @@
   placement: opener
   when: [dialogue]
   frame: interjection
-  incoherence: 4
+  incoherence: 1
   gloss: Dismay, in speech.
+  reads_as: general
 - id: g-well-bugger-me
   form: well, bugger me
   type: garnish
@@ -306,7 +313,7 @@
   placement: tag
   when: [second_person, question]
   frame: tag
-  incoherence: 5
+  incoherence: 3
   gloss: You fool.
 - id: g-well-ill-be-buggered
   form: well, I'll be buggered
@@ -324,17 +331,18 @@
   type: garnish
   placement: aside
   frame: interjection
-  incoherence: 5
+  incoherence: 3
   when: [paragraph_end]
   gloss: That was terrible.
-  sources: [llm-moloch-unharnessed]
+  sources: []
+  produced_by: agent
 - id: g-aside-wouldnt-ya-know-it
   form: wouldn't ya know it.
   tone: comic
   type: garnish
   placement: aside
   frame: interjection
-  incoherence: 5
+  incoherence: 3
   gloss: Just as you'd expect; typical.
 - id: g-aside-dogs-breakfast
   form: what a dog's breakfast!
@@ -342,7 +350,7 @@
   type: garnish
   placement: aside
   frame: interjection
-  incoherence: 5
+  incoherence: 3
   when: [paragraph_end]
   gloss: What a mess.
 - id: g-aside-fair-dinkum
@@ -350,7 +358,7 @@
   type: garnish
   placement: aside
   frame: interjection
-  incoherence: 5
+  incoherence: 3
   when: [paragraph_end]
   gloss: Honestly, truly.
 - id: g-aside-true-story
@@ -358,15 +366,16 @@
   type: garnish
   placement: aside
   frame: interjection
-  incoherence: 5
+  incoherence: 1
   when: [paragraph_end]
   gloss: No word of a lie.
+  reads_as: general
 - id: g-aside-no-word-of-a-lie
   form: no word of a lie.
   type: garnish
   placement: aside
   frame: interjection
-  incoherence: 5
+  incoherence: 3
   when: [paragraph_end]
   gloss: Honestly.
 - id: g-aside-strike-me-pink
@@ -375,7 +384,7 @@
   type: garnish
   placement: aside
   frame: interjection
-  incoherence: 5
+  incoherence: 4
   when: [paragraph_end]
   register: dated
   gloss: Astonishment.
@@ -385,7 +394,7 @@
   type: garnish
   placement: aside
   frame: interjection
-  incoherence: 5
+  incoherence: 3
   when: [paragraph_end]
   gloss: Take that; how about that.
 - id: g-aside-bloody-shambles
@@ -398,14 +407,15 @@
   incoherence: 2
   when: [paragraph_end]
   gloss: What a mess.
-  sources: [llm-moloch-unharnessed]
+  sources: []
+  produced_by: agent
 - id: g-aside-carry-on
   form: strewth, what a carry-on!
   tone: comic
   type: garnish
   placement: aside
   frame: interjection
-  incoherence: 5
+  incoherence: 3
   when: [paragraph_end]
   gloss: What a fuss; what a performance.
 - id: g-aside-gawd-help-us
@@ -414,7 +424,7 @@
   type: garnish
   placement: aside
   frame: interjection
-  incoherence: 5
+  incoherence: 3
   when: [paragraph_end]
   gloss: Heaven help us.
 # rhetorical follow-ups: the narrator answers their own question
@@ -423,9 +433,10 @@
   type: garnish
   placement: aside
   frame: interjection
-  incoherence: 5
+  incoherence: 1
   when: [question]
   gloss: I've no idea (after a rhetorical question).
+  reads_as: general
 - id: g-aside-buggered-if-i-know
   form: buggered if I know.
   type: garnish
@@ -440,10 +451,11 @@
   type: garnish
   placement: aside
   frame: interjection
-  incoherence: 5
+  incoherence: 1
   when: [question]
   gloss: I've no idea.
 # tails: round off a closing list
+  reads_as: general
 - id: g-tail-whole-bloody-works
   form: the whole bloody works
   type: garnish
@@ -452,28 +464,30 @@
   vulgarity: 1
   incoherence: 2
   gloss: All of it.
-  sources: [llm-moloch-unharnessed]
+  sources: []
+  produced_by: agent
 - id: g-tail-box-and-dice
   form: the whole box 'n dice
   type: garnish
   placement: tail
   frame: np
-  incoherence: 4
+  incoherence: 3
   gloss: All of it.
 - id: g-tail-kit-and-caboodle
   form: the whole kit 'n caboodle
   type: garnish
   placement: tail
   frame: np
-  incoherence: 4
+  incoherence: 3
   gloss: All of it.
 - id: g-tail-the-lot
   form: the lot
   type: garnish
   placement: tail
   frame: np
-  incoherence: 4
+  incoherence: 1
   gloss: All of it.
+  reads_as: general
 - id: g-like-a-drongo
   form: like a drongo
   insult: true
@@ -481,7 +495,7 @@
   placement: tag
   when: [action_end]
   frame: tag
-  incoherence: 5
+  incoherence: 3
   gloss: 'Foolishly ("... until he gave in, like a drongo"); a narrator''s jibe at what someone just did.'
   notes: 'The project owner''s suggestion (2026-10-11), for narration where a vocative "ya drongo" has nobody to address.'
 - id: g-like-a-right-galah
@@ -491,7 +505,7 @@
   placement: tag
   when: [action_end]
   frame: tag
-  incoherence: 5
+  incoherence: 3
   gloss: "Foolishly, like an idiot; a narrator's jibe at what someone just did."
 - id: g-like-a-mug
   form: like a mug
@@ -500,5 +514,5 @@
   placement: tag
   when: [action_end]
   frame: tag
-  incoherence: 4
+  incoherence: 3
   gloss: "Like a sucker; a narrator's jibe at someone who's been had or gave in."

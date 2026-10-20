@@ -16,8 +16,18 @@
   register: current
   gloss: A long, friendly natter.
   sources:
-  - https://www.wiktionary.com/wiki/chinwag
-  - https://www.visualthesaurus.com/cm/wordroutes/down-under-obama-has-a-chinwag/
+  - url: https://www.wiktionary.com/wiki/chinwag
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.visualthesaurus.com/cm/wordroutes/down-under-obama-has-a-chinwag/
+    kind: media
+    publisher: visualthesaurus.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: flat-out
   form: flat out
   concept:
@@ -29,8 +39,18 @@
   register: current
   gloss: Busy as can be, no let-up.
   sources:
-  - https://wordhistories.net/2021/11/29/flat-out-lizard-drinking/
-  - https://macquariedictionary.com.au/?p=11033
+  - url: https://wordhistories.net/2021/11/29/flat-out-lizard-drinking/
+    kind: media
+    publisher: wordhistories.net
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://macquariedictionary.com.au/?p=11033
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: the-missus
   form: the missus
   variants:
@@ -48,8 +68,18 @@
   - my wife
   gloss: Informal for a man's wife or female partner.
   sources:
-  - https://greensdictofslang.com/entry/vxhzbvq
-  - https://www.oxfordlearnersdictionaries.com/definition/english/missus
+  - url: https://greensdictofslang.com/entry/vxhzbvq
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.oxfordlearnersdictionaries.com/definition/english/missus
+    kind: scholarly_dictionary
+    publisher: oxfordlearnersdictionaries.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: the-oldies
   form: the oldies
   number: plural
@@ -68,8 +98,18 @@
   gloss: One's mum and dad; also old people in general (at the bowls club, say).
   notes: The general sense added in the fourth-pass round (ELDERLY), out of news and official prose.
   sources:
-  - https://pvt.fr/pvt-australie/dictionnaire-slang-australie
-  - https://www.deseret.com/2000/9/10/20679388/australian-slang/
+  - url: https://pvt.fr/pvt-australie/dictionnaire-slang-australie
+    kind: media
+    publisher: pvt.fr
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.deseret.com/2000/9/10/20679388/australian-slang/
+    kind: media
+    publisher: deseret.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: stiff-unlucky
   form: stiff
   variants:
@@ -86,8 +126,18 @@
   - hard done by
   gloss: Out of luck, hard done by.
   sources:
-  - https://dictionary.dogonews.com/definitions/stiff
-  - https://www.dictionary.com/browse/stiff
+  - url: https://dictionary.dogonews.com/definitions/stiff
+    kind: media
+    publisher: dictionary.dogonews.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.dictionary.com/browse/stiff
+    kind: scholarly_dictionary
+    publisher: dictionary.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: bored-shitless
   form: bored shitless
   concept:
@@ -99,8 +149,18 @@
   register: current
   gloss: Utterly bored.
   sources:
-  - https://manofmany.com/lifestyle/advice/australian-slang-dictionary
-  - https://greensdictofslang.com/entry/yvel3ya
+  - url: https://manofmany.com/lifestyle/advice/australian-slang-dictionary
+    kind: media
+    publisher: manofmany.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/yvel3ya
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: a-ciggie
   form: a ciggie
   variants:
@@ -133,7 +193,12 @@
   - a gorgeous day
   gloss: A beautiful, fine day.
   sources:
-  - https://www.csu.edu.au/current-students/support/international-students/english-language-support/aussie-slang-words-and-phrases
+  - url: https://www.csu.edu.au/current-students/support/international-students/english-language-support/aussie-slang-words-and-phrases
+    kind: media
+    publisher: csu.edu.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: a-do
   form: a do
   concept:
@@ -144,12 +209,15 @@
   incoherence: 1
   register: current
   replaces:
-  - a party
-  - a function
-  status: gate
-  flags:
-  - not_aussie
+  - a get-together
+  - a social gathering
+  - a social function
+  status: active
   gloss: A party or social function.
+  notes: Bare party can mean a group or political organisation; function can be mathematical. Automatic mappings require an explicit social-event sense.
+  origin: british
+  reads_as: general
+  australian_use: common
 - id: a-good-sort
   form: a good sort
   concept:
@@ -159,15 +227,23 @@
   vulgarity: 0
   incoherence: 3
   register: dated
-  status: gate
-  flags:
-  - dubious_meaning
-  - archaic
+  status: active
   plain_sense: true
   gloss: A good-looking person (older use; also a decent person).
   sources:
-  - https://boards.straightdope.com/t/a-good-sort/595647
-  - https://greensdictofslang.com/entry/muv4fki
+  - url: https://boards.straightdope.com/t/a-good-sort/595647
+    kind: media
+    publisher: boards.straightdope.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/muv4fki
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  misreadable: true
 - id: hairy-risky
   form: hairy
   concept:
@@ -179,13 +255,24 @@
   register: current
   replaces:
   - touch-and-go
-  status: gate
-  flags:
-  - not_aussie
+  status: active
   gloss: Risky, scary, touch-and-go.
   sources:
-  - https://listserv.linguistlist.org/pipermail/ads-l/2008-July/082843.html
-  - https://www.vocafy.net/dictionary/en/hairy
+  - url: https://listserv.linguistlist.org/pipermail/ads-l/2008-July/082843.html
+    kind: media
+    publisher: listserv.linguistlist.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.vocafy.net/dictionary/en/hairy
+    kind: media
+    publisher: vocafy.net
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  origin: unknown
+  reads_as: general
+  australian_use: common
 - id: shack-holiday
   form: the shack
   concept:
@@ -202,14 +289,23 @@
   - the holiday house
   - our holiday house
   - the beach house
-  status: gate
-  flags:
-  - dubious_meaning
+  status: active
   plain_sense: true
   gloss: A simple holiday house, often by the water.
   sources:
-  - https://www.australiantraveller.com/tas/south-tasmania/tassie-shack-holiday-home
-  - https://www.urban.com.au/news/nostalgic-fibro-holiday-home-shacks-from-75000-plus
+  - url: https://www.australiantraveller.com/tas/south-tasmania/tassie-shack-holiday-home
+    kind: media
+    publisher: australiantraveller.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.urban.com.au/news/nostalgic-fibro-holiday-home-shacks-from-75000-plus
+    kind: media
+    publisher: urban.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  misreadable: true
 - id: sparrows-fart
   form: at sparrow's fart
   spellings:
@@ -228,9 +324,24 @@
   replaces: []
   gloss: At the crack of dawn.
   sources:
-  - https://aussieenglish.com.au/?p=153775
-  - https://wordhistories.net/2026/03/02/sparrowfart/
-  - https://www.phrases.org.uk/idioms/sparrow-fart.html
+  - url: https://aussieenglish.com.au/?p=153775
+    kind: media
+    publisher: aussieenglish.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://wordhistories.net/2026/03/02/sparrowfart/
+    kind: media
+    publisher: wordhistories.net
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.phrases.org.uk/idioms/sparrow-fart.html
+    kind: slang_dictionary
+    publisher: phrases.org.uk
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: a-spunk
   form: a spunk
   concept:
@@ -247,8 +358,18 @@
   - a hottie
   gloss: A good-looking person, any gender.
   sources:
-  - https://lens.monash.edu/orright-you-spunkrats-heres-where-all-our-aussie-summertime-language-came-from-howard-manns-senior-lecturer-in-linguistics-monash-university/
-  - https://www.wiktionary.com/wiki/spunk
+  - url: https://lens.monash.edu/orright-you-spunkrats-heres-where-all-our-aussie-summertime-language-came-from-howard-manns-senior-lecturer-in-linguistics-monash-university/
+    kind: media
+    publisher: lens.monash.edu
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.wiktionary.com/wiki/spunk
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: tea-evening-meal
   form: tea
   concept:
@@ -266,9 +387,24 @@
   notes: The replaces carry DINNER's exclusions (fourth-pass round); a bare "dinner" made "a reasonably priced dinner
     in town" tea.
   sources:
-  - https://www.wikipedia.org/wiki/Teatime
-  - https://blog.englishteastore.com/2010/12/14/tea-traditions-australia
-  - https://lemmy.4d2.org/post/4357291/5789029
+  - url: https://www.wikipedia.org/wiki/Teatime
+    kind: media
+    publisher: wikipedia.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://blog.englishteastore.com/2010/12/14/tea-traditions-australia
+    kind: media
+    publisher: blog.englishteastore.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://lemmy.4d2.org/post/4357291/5789029
+    kind: media
+    publisher: lemmy.4d2.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: a-bad-trot
   form: a bad trot
   variants:
@@ -288,9 +424,24 @@
   - a bad patch
   gloss: A run of bad luck.
   sources:
-  - https://macquariedictionary.com.au/?p=11126
-  - https://greensdictofslang.com/entry/wqzopya
-  - https://aussieenglish.com.au/ae-882-aussie-slang-a-bad-trot
+  - url: https://macquariedictionary.com.au/?p=11126
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/wqzopya
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://aussieenglish.com.au/ae-882-aussie-slang-a-bad-trot
+    kind: media
+    publisher: aussieenglish.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: a-bullshitter
   form: a bullshitter
   variants:
@@ -323,9 +474,24 @@
   replaces: []
   gloss: A mixed-breed dog of no particular pedigree.
   sources:
-  - https://en.wiktionary.com/wiki/bitzer
-  - https://greensdictofslang.com/entry/t2sttci
-  - https://waywordradio.org/bitza_1
+  - url: https://en.wiktionary.com/wiki/bitzer
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/t2sttci
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://waywordradio.org/bitza_1
+    kind: media
+    publisher: waywordradio.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: a-bull-artist
   form: a bull artist
   concept:
@@ -335,13 +501,21 @@
   vulgarity: 0
   incoherence: 4
   register: dated
-  status: gate
-  flags:
-  - archaic
+  status: active
   gloss: A champion exaggerator or teller of tall tales.
   sources:
-  - https://thekeenans.id.au/aussieslang.htm
-  - https://greensdictofslang.com/entry/kkqg26i
+  - url: https://thekeenans.id.au/aussieslang.htm
+    kind: media
+    publisher: thekeenans.id.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/kkqg26i
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: tell-porkies
   form: tell porkies
   variants:
@@ -359,9 +533,24 @@
   - tell a lie
   gloss: Tell fibs.
   sources:
-  - https://greensdictofslang.com/entry/zpa2phq
-  - https://www.oxfordlearnersdictionaries.com/definition/english/porky_1
-  - https://wordhistories.net/2022/05/03/porky-rhyming-slang/
+  - url: https://greensdictofslang.com/entry/zpa2phq
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.oxfordlearnersdictionaries.com/definition/english/porky_1
+    kind: scholarly_dictionary
+    publisher: oxfordlearnersdictionaries.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://wordhistories.net/2022/05/03/porky-rhyming-slang/
+    kind: media
+    publisher: wordhistories.net
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: dear-expensive
   form: dear
   concept:
@@ -371,10 +560,11 @@
   vulgarity: 0
   incoherence: 1
   register: current
-  status: gate
-  flags:
-  - not_aussie
+  status: active
   gloss: Costly.
+  origin: unknown
+  reads_as: general
+  australian_use: common
 - id: her-fella
   form: '{poss} fella'
   concept:
@@ -382,13 +572,14 @@
   frame: np
   intensity: 3
   vulgarity: 0
-  incoherence: 2
+  incoherence: 1
   register: current
-  status: gate
-  flags:
-  - not_aussie
-  - dubious_meaning
+  status: active
   gloss: A woman's husband or partner.
+  origin: unknown
+  reads_as: general
+  australian_use: common
+  misreadable: true
 - id: a-goss
   form: the goss
   variants: []
@@ -403,8 +594,18 @@
   - the latest gossip
   gloss: Gossip or the latest information about other people; the session sense is separate.
   sources:
-  - https://en.wiktionary.com/wiki/goss
-  - https://www.macquariedictionary.com.au/?p=10949
+  - url: https://en.wiktionary.com/wiki/goss
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.macquariedictionary.com.au/?p=10949
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
   number: mass
 - id: a-durry
   form: a durry
@@ -423,8 +624,18 @@
   - a smoke
   gloss: A cigarette, often a roll-your-own.
   sources:
-  - https://www.wiktionary.com/wiki/durry
-  - https://greensdictofslang.com/entry/qjjdlrq
+  - url: https://www.wiktionary.com/wiki/durry
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/qjjdlrq
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: on-the-bones-of-arse
   form: on the bones of {poss} arse
   concept:
@@ -434,12 +645,18 @@
   vulgarity: 2
   incoherence: 4
   register: current
-  status: gate
-  flags:
-  - not_aussie
+  status: active
   gloss: Flat broke, with nothing left.
   sources:
-  - https://en.fmyly.com/article/how-do-you-say-poor-in-british-slang/
+  - url: https://en.fmyly.com/article/how-do-you-say-poor-in-british-slang/
+    kind: media
+    publisher: en.fmyly.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  origin: unknown
+  reads_as: australian
+  australian_use: common
 - id: packing-death
   form: packing death
   concept:
@@ -453,10 +670,9 @@
   - terrified
   - petrified
   - scared to death
-  status: gate
-  flags:
-  - dubious_meaning
+  status: active
   gloss: Terrified.
+  doubtful_definition: true
 - id: shame-job
   form: a shame job
   concept:
@@ -466,13 +682,22 @@
   vulgarity: 0
   incoherence: 4
   register: current
-  status: gate
-  flags:
-  - dubious_meaning
+  status: active
   gloss: An embarrassing situation.
   sources:
-  - https://ewave-atlas.org/sentences/3903
-  - https://blog.linguisten.de/post/105433923749/ae-speakers-the-concept-of-shame
+  - url: https://ewave-atlas.org/sentences/3903
+    kind: media
+    publisher: ewave-atlas.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://blog.linguisten.de/post/105433923749/ae-speakers-the-concept-of-shame
+    kind: media
+    publisher: blog.linguisten.de
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  doubtful_definition: true
 - id: spunky
   form: spunky
   concept:
@@ -489,8 +714,18 @@
   - handsome
   gloss: Good-looking, sexy.
   sources:
-  - https://www.oxfordlearnersdictionaries.com/definition/english/spunky
-  - https://lens.monash.edu/orright-you-spunkrats-heres-where-all-our-aussie-summertime-language-came-from-howard-manns-senior-lecturer-in-linguistics-monash-university/
+  - url: https://www.oxfordlearnersdictionaries.com/definition/english/spunky
+    kind: scholarly_dictionary
+    publisher: oxfordlearnersdictionaries.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://lens.monash.edu/orright-you-spunkrats-heres-where-all-our-aussie-summertime-language-came-from-howard-manns-senior-lecturer-in-linguistics-monash-university/
+    kind: media
+    publisher: lens.monash.edu
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: suss-suspicious
   form: suss
   spellings: [sus]
@@ -507,8 +742,18 @@
   - suspicious
   gloss: Dodgy-looking, not quite right.
   sources:
-  - https://kaikki.org/dictionary/English/meaning/s/su/suss.html
-  - https://ruk.ca/comment/3414
+  - url: https://kaikki.org/dictionary/English/meaning/s/su/suss.html
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://ruk.ca/comment/3414
+    kind: media
+    publisher: ruk.ca
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: trouble-and-strife
   form: the trouble and strife
   concept:
@@ -518,14 +763,24 @@
   vulgarity: 0
   incoherence: 5
   register: dated
-  status: gate
-  flags:
-  - not_aussie
-  - archaic
+  status: active
   gloss: The wife (rhyming slang).
   sources:
-  - https://greensdictofslang.com/entry/rs4zika
-  - https://www.diqt.net/en/words/2050972
+  - url: https://greensdictofslang.com/entry/rs4zika
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.diqt.net/en/words/2050972
+    kind: media
+    publisher: diqt.net
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  origin: british
+  reads_as: australian
+  australian_use: common
 - id: up-yourself
   form: '{subj} {be} up {poss}self'
   concept:
@@ -541,7 +796,12 @@
   - '{subj} {be} conceited'
   gloss: Stuck-up, full of yourself.
   sources:
-  - https://kangaeroo.com/2010/11/03/up-yourself-up-someone/
+  - url: https://kangaeroo.com/2010/11/03/up-yourself-up-someone/
+    kind: media
+    publisher: kangaeroo.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: face-like-a-wet-week
   form: '{subj} {have} a face like a wet week'
   concept:
@@ -560,7 +820,12 @@
   - looks dejected
   gloss: Look thoroughly glum.
   sources:
-  - https://greensdictofslang.com/entry/qacz4ha
+  - url: https://greensdictofslang.com/entry/qacz4ha
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: arc-up
   form: arc up
   variants:
@@ -578,9 +843,24 @@
   - get angry
   gloss: Flare up angrily.
   sources:
-  - https://en.wiktionary.com/wiki/arc_up
-  - https://www.macquariedictionary.com.au/arcing-up/
-  - https://greensdictofslang.com/entry/yggdwia
+  - url: https://en.wiktionary.com/wiki/arc_up
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.macquariedictionary.com.au/arcing-up/
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/yggdwia
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: bags-claim
   form: bags {np}
   variants:
@@ -598,8 +878,18 @@
   - I call {np}
   gloss: Claim something first ("I bags the front seat").
   sources:
-  - https://www.wiktionary.com/wiki/bags
-  - https://www.writerscentre.com.au/blog/qa-bags-dibs-and-calling-shotgun/
+  - url: https://www.wiktionary.com/wiki/bags
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.writerscentre.com.au/blog/qa-bags-dibs-and-calling-shotgun/
+    kind: media
+    publisher: writerscentre.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: biffo
   form: a bit of biffo
   variants:
@@ -618,9 +908,24 @@
   - fisticuffs
   gloss: Punch-ups, physical fighting.
   sources:
-  - https://en.wiktionary.com/wiki/biffo
-  - https://greensdictofslang.com/entry/uq4enqq
-  - https://platform.aussieenglish.com.au/blog/ae-999-aussie-slang-biffo
+  - url: https://en.wiktionary.com/wiki/biffo
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/uq4enqq
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://platform.aussieenglish.com.au/blog/ae-999-aussie-slang-biffo
+    kind: media
+    publisher: platform.aussieenglish.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: blowing-a-dog-off-its-chain
   form: '{subj} {be} blowing a dog off its chain'
   variants:
@@ -638,8 +943,18 @@
   - '{subj} {be} blowing hard'
   gloss: The wind is ferocious.
   sources:
-  - https://weatherzone.com.au/news/dry-as-a-dead-dingos-your-favourite-aussie-weather-phrases/534944
-  - https://phrases.org.uk/bulletin_board/52/messages/55.html
+  - url: https://weatherzone.com.au/news/dry-as-a-dead-dingos-your-favourite-aussie-weather-phrases/534944
+    kind: media
+    publisher: weatherzone.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://phrases.org.uk/bulletin_board/52/messages/55.html
+    kind: slang_dictionary
+    publisher: phrases.org.uk
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: cheesed-off
   form: cheesed off
   concept:
@@ -647,16 +962,26 @@
   frame: predicate_adj
   intensity: 3
   vulgarity: 0
-  incoherence: 3
-  register: dated
-  status: gate
-  flags:
-  - not_aussie
-  - archaic
+  incoherence: 1
+  register: current
+  status: active
   gloss: Fed up and irritated.
   sources:
-  - https://www.macquariedictionary.com.au/?p=11012
-  - https://icis-2014.m.asnevents.com.au/information/page/53
+  - url: https://www.macquariedictionary.com.au/?p=11012
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://icis-2014.m.asnevents.com.au/information/page/53
+    kind: media
+    publisher: icis-2014.m.asnevents.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  origin: british
+  reads_as: general
+  australian_use: common
 - id: chuck-a-bombie
   form: chuck a bombie
   variants:
@@ -675,7 +1000,12 @@
   - cannonball into the pool
   gloss: Jump into water tucked up for a big splash.
   sources:
-  - https://www.macquariedictionary.com.au/?p=11070
+  - url: https://www.macquariedictionary.com.au/?p=11070
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: chuck-a-micky
   form: chuck a micky
   spellings: [chuck a mickey]
@@ -690,8 +1020,18 @@
   register: current
   gloss: Throw a tantrum.
   sources:
-  - https://blog.oup.com.au/?p=3928
-  - https://macquariedictionary.com.au/?p=10941
+  - url: https://blog.oup.com.au/?p=3928
+    kind: media
+    publisher: blog.oup.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://macquariedictionary.com.au/?p=10941
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: a-counter-lunch
   form: a counter lunch
   variants: []
@@ -705,8 +1045,18 @@
   replaces: []
   gloss: A lunch served at the pub counter; other mealtimes remain distinct.
   sources:
-  - https://grantourismotravels.com/the-renaissance-of-the-great-australian-pub-counter-meal/
-  - https://www.ipswichfirst.com.au/counter-meals-are-they-a-thing-of-the-past
+  - url: https://grantourismotravels.com/the-renaissance-of-the-great-australian-pub-counter-meal/
+    kind: media
+    publisher: grantourismotravels.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.ipswichfirst.com.au/counter-meals-are-they-a-thing-of-the-past
+    kind: media
+    publisher: ipswichfirst.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: crook-on
   form: '{subj} {be} crook on {obj}'
   variants:
@@ -724,9 +1074,24 @@
   - '{subj} {be} mad at {obj}'
   gloss: Angry with someone.
   sources:
-  - https://www.inyourpocket.com/australia/goldcoast/articles/australian-english-glossary
-  - https://www.wiktionary.com/wiki/crook
-  - https://www.macquariedictionary.com.au/catching-a-crook/
+  - url: https://www.inyourpocket.com/australia/goldcoast/articles/australian-english-glossary
+    kind: media
+    publisher: inyourpocket.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.wiktionary.com/wiki/crook
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.macquariedictionary.com.au/catching-a-crook/
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: a-bush-doof
   form: a bush doof
   variants:
@@ -743,8 +1108,18 @@
   - a bush rave
   gloss: An outdoor electronic dance party, often in the bush.
   sources:
-  - https://en.wikipedia.org/wiki/Doof_(disambiguation)
-  - https://kaweah.freedombox.rocks/kiwix/wiktionary_en_all_maxi_2023-04/doof
+  - url: https://en.wikipedia.org/wiki/Doof_(disambiguation)
+    kind: crowd_dictionary
+    publisher: en.wikipedia.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://kaweah.freedombox.rocks/kiwix/wiktionary_en_all_maxi_2023-04/doof
+    kind: media
+    publisher: kaweah.freedombox.rocks
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: earbash
   form: earbash {obj}
   variants:
@@ -761,8 +1136,18 @@
   - talk at {obj}
   gloss: Talk at someone non-stop.
   sources:
-  - https://slll.cass.anu.edu.au/centres/andc/meanings-origins/e
-  - https://greensdictofslang.com/entry/k63cu4y
+  - url: https://slll.cass.anu.edu.au/centres/andc/meanings-origins/e
+    kind: scholarly_dictionary
+    publisher: Australian National Dictionary Centre
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/k63cu4y
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: full-as-a-state-school
   form: full as a state school
   concept:
@@ -775,7 +1160,12 @@
   register: dated
   gloss: Extremely drunk.
   sources:
-  - https://greensdictofslang.com/entry/wtdg3di
+  - url: https://greensdictofslang.com/entry/wtdg3di
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: a-furphy
   form: a furphy
   concept:
@@ -791,8 +1181,18 @@
   - a baseless rumour
   gloss: A rumour or tall story passed off as fact.
   sources:
-  - https://en.wikipedia.org/wiki/Furphy
-  - https://en.wiktionary.com/wiki/furphy
+  - url: https://en.wikipedia.org/wiki/Furphy
+    kind: crowd_dictionary
+    publisher: en.wikipedia.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://en.wiktionary.com/wiki/furphy
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: goodo
   form: goodo
   spellings: [good-oh]
@@ -811,8 +1211,18 @@
   - good, that's settled
   gloss: Righto, good, that's settled.
   sources:
-  - https://greensdictofslang.com/entry/o5rhdpy
-  - https://www.wiktionary.com/wiki/goodo
+  - url: https://greensdictofslang.com/entry/o5rhdpy
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.wiktionary.com/wiki/goodo
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: a-hoon
   form: a hoon
   concept:
@@ -825,9 +1235,24 @@
   register: current
   gloss: A lout, especially a loud, reckless driver.
   sources:
-  - https://en.wikipedia.org/wiki/Hoon
-  - https://slll.cass.anu.edu.au/files/andc/Word%20of%20the%20Month%20July%202015.pdf
-  - https://en.wiktionary.com/wiki/hoon
+  - url: https://en.wikipedia.org/wiki/Hoon
+    kind: crowd_dictionary
+    publisher: en.wikipedia.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://slll.cass.anu.edu.au/files/andc/Word%20of%20the%20Month%20July%202015.pdf
+    kind: scholarly_dictionary
+    publisher: Australian National Dictionary Centre
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://en.wiktionary.com/wiki/hoon
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: little-lunch
   form: little lunch
   concept:
@@ -843,8 +1268,18 @@
   - the morning break at school
   gloss: The morning snack break at primary school.
   sources:
-  - https://childmags.com.au/5-reasons-we-love-little-lunch/
-  - https://actf.com.au/news/10185/hey-it-s-almost-time-for-little-lunch
+  - url: https://childmags.com.au/5-reasons-we-love-little-lunch/
+    kind: media
+    publisher: childmags.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://actf.com.au/news/10185/hey-it-s-almost-time-for-little-lunch
+    kind: media
+    publisher: actf.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: make-a-good-quid
   form: make a good quid
   variants:
@@ -863,8 +1298,18 @@
   - do well for {poss}self
   gloss: Earn good money.
   sources:
-  - https://boards.straightdope.com/t/quid-anyone/194090
-  - https://greensdictofslang.com/entry/jsrihyi
+  - url: https://boards.straightdope.com/t/quid-anyone/194090
+    kind: media
+    publisher: boards.straightdope.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/jsrihyi
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: muck-around
   form: muck around
   variants:
@@ -885,8 +1330,18 @@
   - horse around
   gloss: Fool about, not be serious.
   sources:
-  - https://www.wiktionary.com/wiki/muck_up
-  - https://www.oxfordlearnersdictionaries.com/definition/english/muck-around
+  - url: https://www.wiktionary.com/wiki/muck_up
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.oxfordlearnersdictionaries.com/definition/english/muck-around
+    kind: scholarly_dictionary
+    publisher: oxfordlearnersdictionaries.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: off-with-the-fairies
   form: off with the fairies
   variants:
@@ -907,7 +1362,12 @@
   - miles away
   gloss: Daydreaming, away in your own world.
   sources:
-  - https://aussieenglish.com.au/?p=150557
+  - url: https://aussieenglish.com.au/?p=150557
+    kind: media
+    publisher: aussieenglish.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: perv-on
   form: perv on {obj}
   variants:
@@ -925,8 +1385,18 @@
   - leer at {obj}
   gloss: Ogle someone (or jokingly have a good look).
   sources:
-  - https://www.oxfordlearnersdictionaries.com/definition/english/perv_1
-  - https://www.wiktionary.com/wiki/perv
+  - url: https://www.oxfordlearnersdictionaries.com/definition/english/perv_1
+    kind: scholarly_dictionary
+    publisher: oxfordlearnersdictionaries.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.wiktionary.com/wiki/perv
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: pull-the-other-one
   form: pull the other one
   concept:
@@ -940,13 +1410,24 @@
   - come off it
   - yeah right
   - I don't believe you
-  status: gate
-  flags:
-  - not_aussie
+  status: active
   gloss: I don't believe you.
   sources:
-  - https://en.wiktionary.org/wiki/my_arse
-  - https://waywordradio.org/idioms-for-expressing-doubt/
+  - url: https://en.wiktionary.org/wiki/my_arse
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://waywordradio.org/idioms-for-expressing-doubt/
+    kind: media
+    publisher: waywordradio.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  origin: british
+  reads_as: australian
+  australian_use: common
 - id: rough-as-bags
   form: rough as bags
   concept:
@@ -964,8 +1445,18 @@
   - rough around the edges
   gloss: Crude and unpolished.
   sources:
-  - https://greensdictofslang.com/entry/j45brmy
-  - https://www.funtrivia.com/trivia-quiz/Humanities/Aussie-Lingo-98647.html
+  - url: https://greensdictofslang.com/entry/j45brmy
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.funtrivia.com/trivia-quiz/Humanities/Aussie-Lingo-98647.html
+    kind: media
+    publisher: funtrivia.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: shickered
   form: shickered
   concept:
@@ -978,7 +1469,12 @@
   register: dated
   gloss: Drunk.
   sources:
-  - https://greensdictofslang.com/entry/cgqa7ra
+  - url: https://greensdictofslang.com/entry/cgqa7ra
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: your-shout
   form: '{subj} {be} {poss} shout'
   variants:
@@ -995,9 +1491,24 @@
   - '{subj} {be} {poss} treat'
   gloss: It's someone's turn to pay or treat.
   sources:
-  - https://en.wikipedia.org/wiki/Round_of_drinks
-  - https://en.wiktionary.com/wiki/shout
-  - https://greensdictofslang.com/entry/o6v3rgi
+  - url: https://en.wikipedia.org/wiki/Round_of_drinks
+    kind: crowd_dictionary
+    publisher: en.wikipedia.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://en.wiktionary.com/wiki/shout
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/o6v3rgi
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: a-spunkrat
   form: a spunkrat
   concept:
@@ -1013,7 +1524,12 @@
   - a good-looking person
   gloss: An attractive person (jokey).
   sources:
-  - https://lens.monash.edu/orright-you-spunkrats-heres-where-all-our-aussie-summertime-language-came-from-howard-manns-senior-lecturer-in-linguistics-monash-university/
+  - url: https://lens.monash.edu/orright-you-spunkrats-heres-where-all-our-aussie-summertime-language-came-from-howard-manns-senior-lecturer-in-linguistics-monash-university/
+    kind: media
+    publisher: lens.monash.edu
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: stir-the-possum
   form: stir the possum
   concept:
@@ -1030,8 +1546,18 @@
   - make waves
   gloss: Deliberately stir up trouble or debate.
   sources:
-  - https://macquariedictionary.com.au/?p=11032
-  - https://wordhistories.net/2024/06/25/stir-the-possum/
+  - url: https://macquariedictionary.com.au/?p=11032
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://wordhistories.net/2024/06/25/stir-the-possum/
+    kind: media
+    publisher: wordhistories.net
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: suss-out
   form: suss {obj} out
   concept:
@@ -1049,8 +1575,18 @@
   notes: 'Not "work {obj} out" (fourth pass): "we''ll work it out" is mostly calculating or settling a thing, not
     sizing it up.'
   sources:
-  - https://en.wiktionary.com/wiki/suss
-  - https://www.wordnik.com/words/suss
+  - url: https://en.wiktionary.com/wiki/suss
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.wordnik.com/words/suss
+    kind: crowd_dictionary
+    publisher: wordnik.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: tickets-on-yourself
   form: '{subj} {have} tickets on {poss}self'
   concept:
@@ -1066,9 +1602,24 @@
   - '{subj} {be} full of {poss}self'
   gloss: Think too highly of yourself.
   sources:
-  - https://slll.cass.anu.edu.au/centres/andc/meanings-origins/t
-  - https://aussieenglish.com.au/?p=124458
-  - https://greensdictofslang.com/entry/lz6clga
+  - url: https://slll.cass.anu.edu.au/centres/andc/meanings-origins/t
+    kind: scholarly_dictionary
+    publisher: Australian National Dictionary Centre
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://aussieenglish.com.au/?p=124458
+    kind: media
+    publisher: aussieenglish.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/lz6clga
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: unco
   form: unco
   concept:
@@ -1084,8 +1635,18 @@
   - bumbling
   gloss: Clumsy, poorly coordinated.
   sources:
-  - https://www.macquariedictionary.com.au/?p=11104
-  - https://www.wiktionary.com/wiki/unco
+  - url: https://www.macquariedictionary.com.au/?p=11104
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.wiktionary.com/wiki/unco
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: a-willy-willy
   form: a willy-willy
   concept:
@@ -1100,8 +1661,18 @@
   - a whirlwind
   gloss: A small dust whirlwind.
   sources:
-  - https://dictionary.com/browse/willy-willy
-  - https://wordnik.com/words/willy%20willy
+  - url: https://dictionary.com/browse/willy-willy
+    kind: scholarly_dictionary
+    publisher: dictionary.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://wordnik.com/words/willy%20willy
+    kind: crowd_dictionary
+    publisher: wordnik.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: dart-cigarette
   form: a dart
   concept:
@@ -1113,8 +1684,18 @@
   register: current
   gloss: A cigarette; casual, a bit blokey.
   sources:
-  - https://blog.matetranslate.com/from-darts-to-cigarettes-unraveling-the-slang-behind-smoking-darts/
-  - https://matadornetwork.com/read/20-australian-expressions-will-make-smile/
+  - url: https://blog.matetranslate.com/from-darts-to-cigarettes-unraveling-the-slang-behind-smoking-darts/
+    kind: media
+    publisher: blog.matetranslate.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://matadornetwork.com/read/20-australian-expressions-will-make-smile/
+    kind: media
+    publisher: matadornetwork.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: hubby
   form: hubby
   concept:
@@ -1126,12 +1707,18 @@
   register: current
   replaces:
   - my husband
-  status: gate
-  flags:
-  - not_aussie
+  status: active
   gloss: Husband (general informal English, very common in Australia).
   sources:
-  - https://vocafy.net/dictionary/en/husband
+  - url: https://vocafy.net/dictionary/en/husband
+    kind: media
+    publisher: vocafy.net
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  origin: unknown
+  reads_as: general
+  australian_use: common
 - id: odd-bod
   form: an odd bod
   concept:
@@ -1139,15 +1726,26 @@
   frame: np
   intensity: 3
   vulgarity: 0
-  incoherence: 2
+  incoherence: 1
   register: current
-  status: gate
-  flags:
-  - not_aussie
+  status: active
   gloss: A gently odd or eccentric person.
   sources:
-  - https://greensdictofslang.com/entry/ik5wkyq
-  - https://wordwebonline.com/en/ODDBOD
+  - url: https://greensdictofslang.com/entry/ik5wkyq
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://wordwebonline.com/en/ODDBOD
+    kind: media
+    publisher: wordwebonline.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  origin: british
+  reads_as: general
+  australian_use: common
 - id: the-olds
   form: the olds
   number: plural
@@ -1162,8 +1760,18 @@
   register: current
   gloss: One's parents (casual, younger speakers).
   sources:
-  - https://greensdictofslang.com/entry/pt6m63q
-  - https://kaweah.freedombox.rocks/kiwix/wiktionary_en_all_maxi_2023-04/olds
+  - url: https://greensdictofslang.com/entry/pt6m63q
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://kaweah.freedombox.rocks/kiwix/wiktionary_en_all_maxi_2023-04/olds
+    kind: media
+    publisher: kaweah.freedombox.rocks
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: a-bit-off
   form: a bit off
   concept:
@@ -1171,14 +1779,15 @@
   frame: predicate_adj
   intensity: 3
   vulgarity: 0
-  incoherence: 3
+  incoherence: 1
   register: current
-  status: gate
-  flags:
-  - not_aussie
-  - dubious_meaning
+  status: active
   plain_sense: true
   gloss: 'Of behaviour: rude, unfair or not on.'
+  origin: unknown
+  reads_as: general
+  australian_use: common
+  misreadable: true
 - id: dicey
   form: dicey
   concept:
@@ -1188,10 +1797,11 @@
   vulgarity: 0
   incoherence: 1
   register: current
-  status: gate
-  flags:
-  - not_aussie
+  status: active
   gloss: Risky, a bit dangerous.
+  origin: british
+  reads_as: general
+  australian_use: common
 - id: exy
   form: exy
   spellings: [exxy]
@@ -1206,8 +1816,18 @@
   register: current
   gloss: Expensive (clipped, Aussie -y ending).
   sources:
-  - https://www.wiktionary.com/wiki/exy
-  - https://greensdictofslang.com/entry/vr4qyry
+  - url: https://www.wiktionary.com/wiki/exy
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/vr4qyry
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: rollie
   form: a rollie
   variants:
@@ -1221,7 +1841,12 @@
   register: current
   gloss: A hand-rolled cigarette.
   sources:
-  - https://en.wiktionary.org/wiki/rollie
+  - url: https://en.wiktionary.org/wiki/rollie
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: slow-as-a-wet-week
   form: slow as a wet week
   variants:
@@ -1233,12 +1858,16 @@
   vulgarity: 0
   incoherence: 4
   register: current
-  status: gate
-  flags:
-  - dubious_meaning
+  status: active
   gloss: Extremely slow.
   sources:
-  - https://blog.worldsweeper.com/2016/05/27/can-you-identify-these-australian-slang-terms/
+  - url: https://blog.worldsweeper.com/2016/05/27/can-you-identify-these-australian-slang-terms/
+    kind: media
+    publisher: blog.worldsweeper.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  doubtful_definition: true
 - id: a-bit-full
   form: a bit full
   variants: []
@@ -1253,7 +1882,12 @@
   gloss: Mildly drunk; tipsy.
   notes: Ambiguous with FULL (having eaten); fine as output, never use 'full' alone as a trigger for DRUNK.
   sources:
-  - https://content.vu.edu.au/sites/default/files/aussie-slang.pdf
+  - url: https://content.vu.edu.au/sites/default/files/aussie-slang.pdf
+    kind: media
+    publisher: content.vu.edu.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: pain-in-the-arse
   form: a pain in the arse
   variants:
@@ -1275,14 +1909,18 @@
   vulgarity: 0
   incoherence: 2
   register: current
-  status: gate
-  flags:
-  - dubious_meaning
+  status: active
   plain_sense: true
   gloss: Exhausted, done in (sport and youth usage).
   notes: Youth slang 'cooked' also = mad/doomed ('he's cooked'). Use only for physical exhaustion.
   sources:
-  - https://www.mentalfloss.com/language/slang/slang-terms-for-tired
+  - url: https://www.mentalfloss.com/language/slang/slang-terms-for-tired
+    kind: media
+    publisher: mentalfloss.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  misreadable: true
 - id: cooked-done-for
   form: cooked
   concept:
@@ -1296,7 +1934,12 @@
   notes: 'Added by hand in the fairdinkum round (research/fairdinkum-round-2026-10-13): the doomed sense that
     cooked-tired''s note points at. Its form is cooked-tired''s, which the round tooling won''t add twice.'
   sources:
-  - https://en.wiktionary.org/wiki/cooked
+  - url: https://en.wiktionary.org/wiki/cooked
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: deadly
   form: deadly
   concept:
@@ -1308,15 +1951,24 @@
   register: current
   region:
   - aboriginal_english
-  status: gate
-  flags:
-  - dubious_meaning
+  status: active
   plain_sense: true
   gloss: Excellent (Aboriginal English compliment).
   notes: Also an interjection 'Deadly!'. Never use for 'boring'.
   sources:
-  - https://www.sbs.com.au/language/english/audio/minipod-welcome-to-aboriginal-english-1_1
-  - https://en.wiktionary.com/wiki/deadly
+  - url: https://www.sbs.com.au/language/english/audio/minipod-welcome-to-aboriginal-english-1_1
+    kind: media
+    publisher: sbs.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://en.wiktionary.com/wiki/deadly
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  misreadable: true
 - id: not-a-brass-razoo
   form: '{subj} {have}n''t got a brass razoo'
   variants:
@@ -1348,7 +2000,12 @@
   gloss: Annoyed with or hostile to someone; aggrieved.
   notes: Collides with DIRTY (grubby); keep bare "dirty" to clear angry contexts.
   sources:
-  - https://dictionary.dogonews.com/definitions/dirty
+  - url: https://dictionary.dogonews.com/definitions/dirty
+    kind: media
+    publisher: dictionary.dogonews.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: give-a-hiding
   form: give {obj} a hiding
   concept:
@@ -1371,8 +2028,18 @@
   register: current
   gloss: Fairly drunk.
   sources:
-  - https://greensdictofslang.com/entry/cgqa7ra
-  - https://greensdictofslang.com/entry/g3aiuvi
+  - url: https://greensdictofslang.com/entry/cgqa7ra
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/g3aiuvi
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: have-a-barney
   form: have a barney
   variants:
@@ -1386,9 +2053,24 @@
   register: current
   gloss: Have a row or argument (can tip into a scuffle).
   sources:
-  - https://en.wiktionary.com/wiki/barney
-  - https://greensdictofslang.com/entry/icdgxta
-  - https://www.macquariedictionary.com.au/?p=11190
+  - url: https://en.wiktionary.com/wiki/barney
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/icdgxta
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.macquariedictionary.com.au/?p=11190
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: a-mo
   form: a mo
   variants:
@@ -1401,10 +2083,11 @@
   vulgarity: 0
   incoherence: 1
   register: current
-  status: gate
-  flags:
-  - not_aussie
+  status: active
   gloss: A moment ("just a mo", "half a mo").
+  origin: british
+  reads_as: general
+  australian_use: common
 - id: struggle-street
   form: on struggle street
   variants:
@@ -1418,8 +2101,18 @@
   register: current
   gloss: Doing it tough financially; poor and struggling.
   sources:
-  - https://www.spectator.com.au/2021/12/aussie-language-39/
-  - https://ilikekillnerds.com/2015/05/07/sbs-struggle-street-the-truth-hurts/
+  - url: https://www.spectator.com.au/2021/12/aussie-language-39/
+    kind: media
+    publisher: spectator.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://ilikekillnerds.com/2015/05/07/sbs-struggle-street-the-truth-hurts/
+    kind: media
+    publisher: ilikekillnerds.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: other-half
   form: the other half
   variants:
@@ -1432,10 +2125,11 @@
   vulgarity: 0
   incoherence: 1
   register: current
-  status: gate
-  flags:
-  - not_aussie
+  status: active
   gloss: One's husband, wife or partner.
+  origin: unknown
+  reads_as: general
+  australian_use: common
 - id: a-packet
   form: a packet
   concept:
@@ -1445,10 +2139,11 @@
   vulgarity: 0
   incoherence: 1
   register: current
-  status: gate
-  flags:
-  - not_aussie
+  status: active
   gloss: A lot of money ("cost a packet", "made a packet").
+  origin: unknown
+  reads_as: general
+  australian_use: common
 - id: packing-it
   form: packing it
   variants:
@@ -1461,10 +2156,9 @@
   vulgarity: 0
   incoherence: 4
   register: current
-  status: gate
-  flags:
-  - dubious_meaning
+  status: active
   gloss: Very scared (short for packing death/shit).
+  doubtful_definition: true
 - id: piss-up
   form: a piss-up
   concept:
@@ -1476,7 +2170,12 @@
   register: current
   gloss: A drinking party or session.
   sources:
-  - https://ielts.co.nz/newzealand/prepare/article-australian-slang-words-phrases
+  - url: https://ielts.co.nz/newzealand/prepare/article-australian-slang-words-phrases
+    kind: media
+    publisher: ielts.co.nz
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: shitty-angry
   form: shitty
   variants:
@@ -1490,7 +2189,12 @@
   register: current
   gloss: Cross, in a foul mood ("get shitty with someone").
   sources:
-  - https://en.wiktionary.org/wiki/shitty
+  - url: https://en.wiktionary.org/wiki/shitty
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: southerly-buster
   form: a southerly buster
   concept:
@@ -1504,8 +2208,18 @@
   - nsw
   gloss: A sudden, gusty southerly change after a hot day.
   sources:
-  - https://media.bom.gov.au/social/blog/18/the-big-bust-southerly-busters-explained/
-  - https://weatherzone.com.au/news/southerly-buster-rolls-through-sydney/416648
+  - url: https://media.bom.gov.au/social/blog/18/the-big-bust-southerly-busters-explained/
+    kind: media
+    publisher: media.bom.gov.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://weatherzone.com.au/news/southerly-buster-rolls-through-sydney/416648
+    kind: media
+    publisher: weatherzone.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: toey
   form: toey
   concept:
@@ -1518,9 +2232,24 @@
   gloss: Nervous, jumpy, on edge (originally of racehorses).
   notes: Also 'eager to get going' and 'feeling randy'; avoid in sexual contexts.
   sources:
-  - https://greensdictofslang.com/entry/l6fkkyq
-  - https://www.oxfordlearnersdictionaries.com/definition/english/toey
-  - https://en.wiktionary.com/wiki/toey
+  - url: https://greensdictofslang.com/entry/l6fkkyq
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.oxfordlearnersdictionaries.com/definition/english/toey
+    kind: scholarly_dictionary
+    publisher: oxfordlearnersdictionaries.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://en.wiktionary.com/wiki/toey
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: work-back
   form: work back
   variants:
@@ -1545,8 +2274,18 @@
   gloss: Completely worn out.
   notes: General English, noted as such.
   sources:
-  - https://en.wiktionary.com/wiki/zonked
-  - https://www.deseret.com/2000/9/10/20679388/australian-slang/
+  - url: https://en.wiktionary.com/wiki/zonked
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.deseret.com/2000/9/10/20679388/australian-slang/
+    kind: media
+    publisher: deseret.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: all-good
   form: all good
   variants:
@@ -1561,8 +2300,19 @@
   register: current
   gloss: No problem, it's fine (reply to thanks or an apology).
   sources:
-  - https://www.switchliving.com.au/student-guide/g-day-mate-a-guide-to-aussie-slang/
-  - https://www.remitly.com/blog/immigration/australian-idioms-and-expressions/
+  - url: https://www.switchliving.com.au/student-guide/g-day-mate-a-guide-to-aussie-slang/
+    kind: media
+    publisher: switchliving.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.remitly.com/blog/immigration/australian-idioms-and-expressions/
+    kind: media
+    publisher: remitly.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  reads_as: general
 - id: bend-ear
   form: bend {objposs} ear
   concept:
@@ -1576,8 +2326,18 @@
   notes: '{objposs} requires the listener''s object or explicit possessive; the speaking agent cannot supply
     it.'
   sources:
-  - https://greensdictofslang.com/entry/k63cu4y
-  - https://dictionary.dogonews.com/definitions/bend%20someone's%20ear
+  - url: https://greensdictofslang.com/entry/k63cu4y
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://dictionary.dogonews.com/definitions/bend%20someone's%20ear
+    kind: media
+    publisher: dictionary.dogonews.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: bush-telegraph
   form: the bush telegraph
   concept:
@@ -1590,7 +2350,12 @@
   gloss: The informal word-of-mouth network.
   notes: For the gossip network, not for a gossip (person).
   sources:
-  - https://www.macquariedictionary.com.au/?p=10949
+  - url: https://www.macquariedictionary.com.au/?p=10949
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: chuck-a-berko
   form: chuck a berko
   concept:
@@ -1602,7 +2367,12 @@
   register: dated
   gloss: Go berserk with rage.
   sources:
-  - https://blog.oup.com.au/?p=3928
+  - url: https://blog.oup.com.au/?p=3928
+    kind: media
+    publisher: blog.oup.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: chuck-a-mental
   form: chuck a mental
   concept:
@@ -1613,12 +2383,15 @@
   incoherence: 3
   register: current
   status: gate
-  flags:
-  - dubious_meaning
   gloss: Have a furious outburst.
   notes: 'Gated: ''mental'' can read as mocking mental illness; prefer ''chuck a wobbly'' / ''chuck a berko''.'
   sources:
-  - https://macquariedictionary.com.au/?p=10941
+  - url: https://macquariedictionary.com.au/?p=10941
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: cost-a-bucketload
   form: cost {obj} a bucketload
   concept:
@@ -1626,14 +2399,20 @@
   frame: vp
   intensity: 3
   vulgarity: 0
-  incoherence: 2
+  incoherence: 1
   register: current
-  status: gate
-  flags:
-  - not_aussie
+  status: active
   gloss: Cost a huge amount.
   sources:
-  - https://aussieenglish.com.au/?p=123717
+  - url: https://aussieenglish.com.au/?p=123717
+    kind: media
+    publisher: aussieenglish.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  origin: unknown
+  reads_as: general
+  australian_use: common
 - id: crack-the-shits
   form: crack the shits
   variants:
@@ -1648,8 +2427,18 @@
   register: current
   gloss: Get cranky, lose patience or sulk.
   sources:
-  - https://www.tckpublishing.com/australian-slang-words/
-  - https://aussieenglish.com.au/?p=124882
+  - url: https://www.tckpublishing.com/australian-slang-words/
+    kind: media
+    publisher: tckpublishing.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://aussieenglish.com.au/?p=124882
+    kind: media
+    publisher: aussieenglish.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: cut-upset
   form: cut
   variants:
@@ -1661,13 +2450,17 @@
   vulgarity: 0
   incoherence: 3
   register: current
-  status: gate
-  flags:
-  - dubious_meaning
+  status: active
   plain_sense: true
   gloss: Upset, hurt or annoyed about something.
   sources:
-  - https://greensdictofslang.com/entry/nckso2i
+  - url: https://greensdictofslang.com/entry/nckso2i
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  misreadable: true
 - id: feral
   form: feral
   concept:
@@ -1679,9 +2472,24 @@
   register: current
   gloss: Wild, out of control and uncouth (esp. kids).
   sources:
-  - https://www.onelook.com/?w=ferals
-  - https://www.berlitz.com/blog/australian-slang-words-phrases-expressions-insults
-  - https://greensdictofslang.com/entry/eag52zq
+  - url: https://www.onelook.com/?w=ferals
+    kind: media
+    publisher: onelook.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.berlitz.com/blog/australian-slang-words-phrases-expressions-insults
+    kind: media
+    publisher: berlitz.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/eag52zq
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: full-bottle-on
   form: a full bottle on {np}
   concept:
@@ -1690,14 +2498,17 @@
   intensity: 3
   vulgarity: 0
   incoherence: 5
-  register: dated
-  status: gate
-  flags:
-  - dubious_meaning
-  - archaic
+  register: current
+  status: active
   gloss: Thoroughly informed about a subject.
   sources:
-  - https://commisceo-global.com/resources/quizzes/quiz/12
+  - url: https://commisceo-global.com/resources/quizzes/quiz/12
+    kind: media
+    publisher: commisceo-global.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  misreadable: true
 - id: gammon
   form: gammon
   spellings: [gammin]
@@ -1714,13 +2525,22 @@
   - aboriginal_english
   - qld
   - nt
-  status: gate
-  flags:
-  - dubious_meaning
+  status: active
   gloss: Fake, pretend, only joking (Aboriginal English).
   sources:
-  - https://en.wikipedia.org/wiki/Gammon
-  - https://www.sbs.com.au/language/english/audio/minipod-welcome-to-aboriginal-english-1_1
+  - url: https://en.wikipedia.org/wiki/Gammon
+    kind: crowd_dictionary
+    publisher: en.wikipedia.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.sbs.com.au/language/english/audio/minipod-welcome-to-aboriginal-english-1_1
+    kind: media
+    publisher: sbs.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  misreadable: true
 - id: hang-on-a-tick
   form: hang on a tick
   variants:
@@ -1735,8 +2555,19 @@
   register: current
   gloss: Wait a moment.
   sources:
-  - https://greensdictofslang.com/entry/42xvuni
-  - https://www.oxfordlearnersdictionaries.com/definition/english/tick_2
+  - url: https://greensdictofslang.com/entry/42xvuni
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.oxfordlearnersdictionaries.com/definition/english/tick_2
+    kind: scholarly_dictionary
+    publisher: oxfordlearnersdictionaries.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  reads_as: general
 - id: kick-on
   form: kick on
   concept:
@@ -1748,7 +2579,12 @@
   register: current
   gloss: Keep the party or night going.
   sources:
-  - https://www.macquariedictionary.com.au/skol-these-drinking-words/
+  - url: https://www.macquariedictionary.com.au/skol-these-drinking-words/
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: molo
   form: molo
   concept:
@@ -1759,12 +2595,15 @@
   vulgarity: 0
   incoherence: 5
   register: dated
-  status: gate
-  flags:
-  - archaic
+  status: active
   gloss: Drunk.
   sources:
-  - https://greensdictofslang.com/entry/cgqa7ra
+  - url: https://greensdictofslang.com/entry/cgqa7ra
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: no-wukkas
   form: no wukkas
   spellings: [no wuckas, no wuckers]
@@ -1782,8 +2621,18 @@
   register: current
   gloss: No worries, no problem.
   sources:
-  - https://www.macquariedictionary.com.au/no-wucking-furries-mate/
-  - https://aussieenglish.com.au/?p=124761
+  - url: https://www.macquariedictionary.com.au/no-wucking-furries-mate/
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://aussieenglish.com.au/?p=124761
+    kind: media
+    publisher: aussieenglish.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: pearler-of-a-day
   form: a pearler of a day
   variants:
@@ -1798,9 +2647,24 @@
   register: dated
   gloss: A beautiful day; more broadly, a first-rate one.
   sources:
-  - https://wordwebonline.com/en/PEARLER
-  - https://greensdictofslang.com/entry/cmx6sea
-  - https://www.jayco.com.au/community/article/top-10-aussie-sayings-and-what-they-mean
+  - url: https://wordwebonline.com/en/PEARLER
+    kind: media
+    publisher: wordwebonline.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/cmx6sea
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.jayco.com.au/community/article/top-10-aussie-sayings-and-what-they-mean
+    kind: media
+    publisher: jayco.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: pres
   form: pres
   variants:
@@ -1814,7 +2678,12 @@
   register: current
   gloss: Drinks at someone's place before going out.
   sources:
-  - https://www.macquariedictionary.com.au/skol-these-drinking-words/
+  - url: https://www.macquariedictionary.com.au/skol-these-drinking-words/
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: put-the-mozz-on
   form: put the mozz on {obj}
   spellings: ["put the moz on {obj}"]
@@ -1829,9 +2698,24 @@
   register: dated
   gloss: Jinx someone or something.
   sources:
-  - https://macquariedictionary.com.au/?p=11126
-  - https://slll.cass.anu.edu.au/centres/andc/meanings-origins/m
-  - https://dictionary.com/browse/moz
+  - url: https://macquariedictionary.com.au/?p=11126
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://slll.cass.anu.edu.au/centres/andc/meanings-origins/m
+    kind: scholarly_dictionary
+    publisher: Australian National Dictionary Centre
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://dictionary.com/browse/moz
+    kind: scholarly_dictionary
+    publisher: dictionary.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: shame-ae
   form: shame
   variants:
@@ -1845,14 +2729,23 @@
   register: current
   region:
   - aboriginal_english
-  status: gate
-  flags:
-  - dubious_meaning
+  status: active
   plain_sense: true
   gloss: Embarrassed or shy at being singled out (Aboriginal English).
   sources:
-  - https://blog.linguisten.de/post/105433923749/ae-speakers-the-concept-of-shame
-  - https://nsm-approach.net/?p=824
+  - url: https://blog.linguisten.de/post/105433923749/ae-speakers-the-concept-of-shame
+    kind: media
+    publisher: blog.linguisten.de
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://nsm-approach.net/?p=824
+    kind: media
+    publisher: nsm-approach.net
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  misreadable: true
 - id: shit-stirrer
   form: a shit-stirrer
   variants:
@@ -1866,7 +2759,12 @@
   register: current
   gloss: Someone who stirs up trouble or teases for fun.
   sources:
-  - https://macquariedictionary.com.au/?p=11032
+  - url: https://macquariedictionary.com.au/?p=11032
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: skol
   form: skol {obj}
   variants:
@@ -1881,7 +2779,12 @@
   gloss: Down a drink in one go.
   notes: Don't trigger on bare 'down' or 'drink'.
   sources:
-  - https://www.macquariedictionary.com.au/skol-these-drinking-words/
+  - url: https://www.macquariedictionary.com.au/skol-these-drinking-words/
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: stonkered
   form: stonkered
   concept:
@@ -1895,9 +2798,24 @@
   register: dated
   gloss: 'Done in: very drunk, or knocked flat with exhaustion.'
   sources:
-  - https://macquariedictionary.com.au/?p=11172
-  - https://www.merriam-webster.com/dictionary/stonkered
-  - https://www.worldwidewords.org/qa-sto3.html
+  - url: https://macquariedictionary.com.au/?p=11172
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.merriam-webster.com/dictionary/stonkered
+    kind: scholarly_dictionary
+    publisher: merriam-webster.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.worldwidewords.org/qa-sto3.html
+    kind: slang_dictionary
+    publisher: worldwidewords.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: no-flies-on
   form: there {be} no flies on {obj}
   variants:
@@ -1911,7 +2829,12 @@
   register: current
   gloss: Someone is sharp and hard to fool.
   sources:
-  - https://www.macquariedictionary.com.au/no-flies-on-you-mate/
+  - url: https://www.macquariedictionary.com.au/no-flies-on-you-mate/
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: towel-up
   form: towel {obj} up
   variants:
@@ -1925,8 +2848,18 @@
   register: current
   gloss: Thrash someone, physically or on the scoreboard.
   sources:
-  - https://greensdictofslang.com/entry/z67pa7a
-  - https://grammarist.com/?p=24303
+  - url: https://greensdictofslang.com/entry/z67pa7a
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://grammarist.com/?p=24303
+    kind: media
+    publisher: grammarist.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: g-aside-dunno
   form: dunno.
   concept:
@@ -1943,7 +2876,12 @@
   gloss: A shrug, I've no idea (the narrator answering their own question).
   notes: General informal English, very common in Australia. Same slot as the existing "search me." and "beats me."
   sources:
-  - https://www.goodreads.com/author_blog_posts/5923084-series-glossary?tab=author
+  - url: https://www.goodreads.com/author_blog_posts/5923084-series-glossary?tab=author
+    kind: media
+    publisher: goodreads.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: g-tag-hey
   form: hey
   frame: tag
@@ -1951,9 +2889,7 @@
   vulgarity: 0
   incoherence: 2
   register: current
-  status: gate
-  flags:
-  - dubious_meaning
+  status: active
   type: garnish
   placement: tag
   when:
@@ -1964,7 +2900,13 @@
   gloss: Sentence-final "hey", asking for agreement or adding emphasis ("Good night, hey?").
   notes: 'Gated: low confidence; sources document the tag only generally, not as Australian.'
   sources:
-  - https://www.wiktionary.com/wiki/hey
+  - url: https://www.wiktionary.com/wiki/hey
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  doubtful_definition: true
 - id: a-motza
   form: a motza
   spellings: [a motser, a motzer]
@@ -1985,15 +2927,30 @@
   - a lot of money
   gloss: A huge sum of money, often a win or a windfall ("made a motza").
   sources:
-  - https://dictionary.com/browse/motser
-  - https://greensdictofslang.com/entry/kzfzcvi
-  - https://www.wordnik.com/words/motza
+  - url: https://dictionary.com/browse/motser
+    kind: scholarly_dictionary
+    publisher: dictionary.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/kzfzcvi
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.wordnik.com/words/motza
+    kind: crowd_dictionary
+    publisher: wordnik.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: g-look
   form: look
   frame: interjection
   intensity: 2
   vulgarity: 0
-  incoherence: 2
+  incoherence: 1
   register: current
   type: garnish
   placement: opener
@@ -2005,13 +2962,19 @@
   notes: 'A well-known Australian speech habit (politicians, footballers: "Yeah, look, ..."), but it isn''t documented;
     the web researcher found only a forum aside. Not on questions or plain narration.'
   sources:
-  - https://singletrackworld.com/forum/off-topic/starting-every-sentence-with-so/paged/2/
+  - url: https://singletrackworld.com/forum/off-topic/starting-every-sentence-with-so/paged/2/
+    kind: media
+    publisher: singletrackworld.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  reads_as: general
 - id: c-mind-you
   form: mind you
   frame: interjection
   intensity: 2
   vulgarity: 0
-  incoherence: 2
+  incoherence: 1
   register: current
   type: garnish
   placement: connective
@@ -2022,6 +2985,7 @@
   gloss: Adds a qualifying afterthought ("Mind you, his brother turned up").
   notes: Shared with British English, and very natural in an Australian yarn. Best on a sentence that qualifies
     the one before it, so keep the weight low.
+  reads_as: general
 - id: nah-nah
   form: nah, nah
   concept:
@@ -2053,7 +3017,12 @@
   notes: General English. The UWA study finds it the most common utterance-final tag in Australian English. Speech
     only, not on questions.
   sources:
-  - https://research-repository.uwa.edu.au/en/publications/utterance-final-tags-in-aboriginal-and-non-aboriginal-english/
+  - url: https://research-repository.uwa.edu.au/en/publications/utterance-final-tags-in-aboriginal-and-non-aboriginal-english/
+    kind: media
+    publisher: research-repository.uwa.edu.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: g-tag-but
   form: but
   frame: tag
@@ -2062,8 +3031,6 @@
   incoherence: 3
   register: current
   status: gate
-  flags:
-  - dubious_meaning
   type: garnish
   placement: tag
   when:
@@ -2073,8 +3040,18 @@
   gloss: Sentence-final "but", meaning "though" ("A boat, but?").
   notes: 'Gated: sentence-final ''but'' needs a contrast with the sentence before, which the engine can''t check.'
   sources:
-  - https://www.jbe-platform.com/content/books/9789027289407-veaw.g39.19mul
-  - https://ewave-atlas.org/valuesets/59-211
+  - url: https://www.jbe-platform.com/content/books/9789027289407-veaw.g39.19mul
+    kind: media
+    publisher: jbe-platform.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://ewave-atlas.org/valuesets/59-211
+    kind: media
+    publisher: ewave-atlas.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: a-fair-whack
   form: a fair whack
   concept:
@@ -2091,8 +3068,18 @@
     money), not A_LOT, whose "a lot" and "very much" are adverbs too ("I travel quite a lot" isn't "a fair
     whack"); the sizeable-amount sense is the everyday one, and "your fair whack" (a share) reads as it too.
   sources:
-  - https://merriam-webster.com/dictionary/fair whack
-  - https://greensdictofslang.com/entry/kstxt3y
+  - url: https://merriam-webster.com/dictionary/fair whack
+    kind: scholarly_dictionary
+    publisher: merriam-webster.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://greensdictofslang.com/entry/kstxt3y
+    kind: slang_dictionary
+    publisher: greensdictofslang.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: i-dunno
   form: I dunno
   variants:
@@ -2113,7 +3100,7 @@
   frame: interjection
   intensity: 2
   vulgarity: 0
-  incoherence: 2
+  incoherence: 1
   register: current
   type: garnish
   placement: opener
@@ -2123,6 +3110,7 @@
   weight: 0.4
   gloss: '"Listen, ...": getting someone''s attention before a point.'
   notes: General English. Lower weight than "look", which is the more Australian-sounding opener.
+  reads_as: general
 - id: g-two-bobs-worth
   form: that's my two bob's worth.
   variants:
@@ -2145,7 +3133,12 @@
     an opinion piece. The engine ignores closer contexts today, so it needs a text-level opinion check before it
     can be enabled.
   sources:
-  - https://en.wikipedia.org/wiki/My_two_cents
+  - url: https://en.wikipedia.org/wiki/My_two_cents
+    kind: crowd_dictionary
+    publisher: en.wikipedia.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: g-tail-and-stuff
   form: and stuff
   frame: np
@@ -2160,8 +3153,18 @@
   notes: General English, well documented in Australian corpus studies; it adds a casual rhythm rather than Aussie
     colour.
   sources:
-  - https://assets.cambridge.org/97811088/37231/excerpt/9781108837231_excerpt.pdf
-  - https://ldaca.edu.au/resources/general-resources/case-studies/masters-research-project
+  - url: https://assets.cambridge.org/97811088/37231/excerpt/9781108837231_excerpt.pdf
+    kind: scholarly_dictionary
+    publisher: Cambridge Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://ldaca.edu.au/resources/general-resources/case-studies/masters-research-project
+    kind: media
+    publisher: ldaca.edu.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: fair-call
   form: fair call
   concept:
@@ -2178,7 +3181,12 @@
   - point taken
   gloss: Conceding someone has a point.
   sources:
-  - https://aussieenglish.com.au/like-native-fair-call
+  - url: https://aussieenglish.com.au/like-native-fair-call
+    kind: media
+    publisher: aussieenglish.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: g-far-out
   form: far out
   concept:
@@ -2196,8 +3204,18 @@
   gloss: Exasperation or amazement ("Far out, that's expensive!").
   notes: Not the US hippie "cool" sense. A clean alternative to "jeez"/"strewth".
   sources:
-  - https://aussieenglish.com.au/ep014-aussie-english-expression-far-out/
-  - https://kvia.com/entertainment/cnn-style/2024/08/20/australian-slang-terms-every-visitor-should-know/
+  - url: https://aussieenglish.com.au/ep014-aussie-english-expression-far-out/
+    kind: media
+    publisher: aussieenglish.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://kvia.com/entertainment/cnn-style/2024/08/20/australian-slang-terms-every-visitor-should-know/
+    kind: media
+    publisher: kvia.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: good-on-ya
   form: good on ya
   variants:
@@ -2218,8 +3236,18 @@
   gloss: Well done; good for you (sometimes wry).
   notes: Use only as an interjection; "well done" as a steak doneness must not trigger it.
   sources:
-  - https://www.babbel.com/en/magazine/21-essential-australian-expressions
-  - https://languagehat.com/good-on-you/
+  - url: https://www.babbel.com/en/magazine/21-essential-australian-expressions
+    kind: media
+    publisher: babbel.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://languagehat.com/good-on-you/
+    kind: media
+    publisher: languagehat.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: hang-on
   form: hang on
   concept:
@@ -2239,7 +3267,13 @@
   notes: Shared with British English; the OED's first citation for this sense is Australian (via blog summary).
     Pairs with "hang on a tick" from the content slice.
   sources:
-  - https://notoneoffbritishisms.com/2012/02/16/hang-on/
+  - url: https://notoneoffbritishisms.com/2012/02/16/hang-on/
+    kind: media
+    publisher: notoneoffbritishisms.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  reads_as: general
 - id: how-good-is-that
   form: how good is that?
   variants: []
@@ -2260,7 +3294,12 @@
   notes: Strongly linked to Scott Morrison and often used in mock imitation of him; gives a political, slightly
     ironic flavour.
   sources:
-  - https://www.hachette.co.uk/titles/peter-van-onselen/how-good-is-scott-morrison/9780733645747/
+  - url: https://www.hachette.co.uk/titles/peter-van-onselen/how-good-is-scott-morrison/9780733645747/
+    kind: media
+    publisher: hachette.co.uk
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: youre-dreamin
   form: you're dreamin'
   variants:
@@ -2281,8 +3320,18 @@
   notes: From The Castle (1997). The film line "Tell him he's dreamin'" is the third-person version and suits reported
     haggling; the direct form generalises.
   sources:
-  - https://theconversation.com/straight-to-the-pool-room-a-love-letter-to-the-castle-on-its-25th-anniversary-176361
-  - https://www.screenaustralia.gov.au/sa/Screen-News/2015/10-11-The-Castle-top-10-quotes
+  - url: https://theconversation.com/straight-to-the-pool-room-a-love-letter-to-the-castle-on-its-25th-anniversary-176361
+    kind: media
+    publisher: theconversation.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.screenaustralia.gov.au/sa/Screen-News/2015/10-11-The-Castle-top-10-quotes
+    kind: media
+    publisher: screenaustralia.gov.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: g-tag-unna
   form: unna
   frame: tag
@@ -2302,8 +3351,18 @@
   notes: Aboriginal English (WA, also NT, Qld, NSW). Genuine, but never put it in a generic speaker's mouth; unlock
     only for an Aboriginal English voice. No current flag fits (it is not doubtful), so it's gated by region.
   sources:
-  - https://ewave-atlas.org/valuesets/61-165
-  - https://www.uwa.edu.au/news/article/2021/july/10-ways-aboriginal-australians-made-english-their-own
+  - url: https://ewave-atlas.org/valuesets/61-165
+    kind: media
+    publisher: ewave-atlas.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.uwa.edu.au/news/article/2021/july/10-ways-aboriginal-australians-made-english-their-own
+    kind: media
+    publisher: uwa.edu.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: g-yeah-no
   form: yeah, no
   frame: interjection
@@ -2312,8 +3371,6 @@
   incoherence: 3
   register: current
   status: gate
-  flags:
-  - dubious_meaning
   type: garnish
   placement: opener
   when:
@@ -2322,8 +3379,18 @@
   gloss: Acknowledges what was said before making your own point.
   notes: 'Gated: ''yeah, no'' signals (polite) disagreement, so as a free opener it can change what''s said.'
   sources:
-  - https://www.ingentaconnect.com/content/routledg/cajl/2002/00000022/00000002/art00001
-  - https://blog.oup.com/2019/03/where-phrase-yeah-no-come-from/
+  - url: https://www.ingentaconnect.com/content/routledg/cajl/2002/00000022/00000002/art00001
+    kind: media
+    publisher: ingentaconnect.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://blog.oup.com/2019/03/where-phrase-yeah-no-come-from/
+    kind: media
+    publisher: blog.oup.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: bugger-damn
   form: bugger
   variants:
@@ -2343,8 +3410,18 @@
   gloss: A mild curse at a setback ("Bugger, I've left my wallet at home").
   notes: Also British. Famous here from the 1999 Toyota ad. SURPRISE has "bugger me" but not plain "bugger".
   sources:
-  - https://aussieenglish.com.au/ep019-aussie-expressions-when-hearing-bad-news
-  - https://st.japantimes.co.jp/writer/up_close/1997/ac19970314/ac19970314main.htm
+  - url: https://aussieenglish.com.au/ep019-aussie-expressions-when-hearing-bad-news
+    kind: media
+    publisher: aussieenglish.com.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://st.japantimes.co.jp/writer/up_close/1997/ac19970314/ac19970314main.htm
+    kind: media
+    publisher: st.japantimes.co.jp
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: g-what-dya-reckon
   form: what d'ya reckon?
   variants:
@@ -2373,5 +3450,11 @@
   register: current
   gloss: Drunk; intoxicated.
   notes: 'Australian alcohol sense. Output only: bare full remains ambiguous with food and containers.'
-  sources: ['https://content.vu.edu.au/sites/default/files/aussie-slang.pdf']
+  sources:
+  - url: https://content.vu.edu.au/sites/default/files/aussie-slang.pdf
+    kind: media
+    publisher: content.vu.edu.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
   semantic_degree: {DRUNK: unmarked}

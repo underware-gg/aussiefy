@@ -54,8 +54,9 @@ def test_conditional_related_images_are_never_automatically_inserted(translator)
 
 def test_direct_rewrites_still_require_a_writer(translator):
     p = harness.plan("He is angry.", translator=translator, document_type="custom", document_config=config())
-    assert images(p)['chew-nails']['form'] == 'rewrite'
-    assert not images(p)['chew-nails']['automatic'] and p['draft'] == 'He is angry.'
+    assert images(p)['wasp-nest-temper']['form'] == 'rewrite'
+    assert not images(p)['wasp-nest-temper']['automatic'] and p['draft'] == 'He is angry.'
+    assert 'chew-nails' not in images(p)  # American/uncommon imagery now shares the term-usage gate.
 
 
 @pytest.mark.parametrize("kind", ["general", "custom", "technical", "news", "instructions"])

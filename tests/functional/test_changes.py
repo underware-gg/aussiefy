@@ -165,7 +165,7 @@ def test_a_changes_renderings_share_its_region(translator):
     ("You are very tired and hungry, and your car is broken.", {**LIVELY, "seed": 0}, "broken",
      {"cactus": "cactus, like a flat-pack in a cyclone"}),
     ("The toilet is broken and I am exhausted.", {**LIVELY, "seed": 2}, "exhausted",
-     {"buggered": "buggered, rooted", "fucked-broken": "fucked, stonkered"}),
+     {"buggered": "buggered, rooted", "fucked-broken": "fucked, out on my bloody feet"}),
     # "very cold" as "cold as fuck": the intensifier rule takes the place of the entry's own word
     ("The weather was very cold and the beer was very good.", {**LIVELY, "seed": 0}, "very cold",
      {"flamin": "cold as fuck", "bloody": "cold as fuck"}),
@@ -360,14 +360,21 @@ def test_locked_options_are_held_back_by_the_cap_alone(translator, dictionary, n
 
 def test_locked_options_follow_the_gates_in_effect(translator):
     """A gated entry is never offered behind a lock, unless the caller unlocked it (a local --unlock)."""
+    from dataclasses import replace
+    from aussiefy import Translator
     d = translator.dictionary
+    entries = {**d.entries}
+    for eid in ("cheeky-bugger", "on-the-bones-of-arse"):
+        entries[eid] = replace(entries[eid], status="gate")
+    d = replace(d, entries=entries)
+    translator = Translator(d)
     for text, gated in (("He's a rascal.", "cheeky-bugger"), ("I am broke this week.", "on-the-bones-of-arse")):
         plain = aussiefy.translate_changes(text, translator=translator, level=5, vulgarity=0)
         unlocked = aussiefy.translate_changes(text, translator=translator, level=5, vulgarity=0, unlock=["all"])
         assert d.entries[gated].status == "gate"
         assert gated not in {o["entry_id"] for c in plain.changes for o in c["alternatives"] + c["locked"]}
         assert gated in {o["entry_id"] for c in unlocked.changes for o in c["locked"]}
-        assert unlocked.entries[gated]["gated"] == list(d.entries[gated].flags)
+        assert unlocked.entries[gated]["gated"] == ["status"]
         _valid(unlocked)
 
 

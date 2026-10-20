@@ -1045,7 +1045,7 @@ POLITICIAN:
 
 # --- the words that stuck out in Gettysburg, plus everyday filler -------------
 SANCTIFY:
-  description: Make sacred. Only loose paraphrases are available, with explicit dubious_meaning unlock.
+  description: Make sacred. Only loose paraphrases are available, held back by doubtful_definition until the mapping is checked.
   triggers:
     vp: ["consecrate {obj}@4", "hallow {obj}@4", "sanctify {obj}@4", "consecrate@4", "hallow@4", "sanctify@4",
          "dedicate", "make sacred", "bless"]
@@ -2026,7 +2026,7 @@ FINE_DAY:
 PARTY:
   description: A party or social gathering.
   triggers:
-    np: [a party, the party, a function, a get-together]
+    np: [a get-together, the get-together, a social gathering, the social gathering, a social function, the social function]
 DANGEROUS:
   description: Risky or dangerous.
   triggers:

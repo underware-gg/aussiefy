@@ -4,3 +4,7 @@
 class UserError(Exception):
     """A problem the user can fix: a bad dictionary, setting or argument. The message says what and how; the
     CLI prints it and exits 2."""
+
+
+class SchemaError(UserError):
+    """Dictionary data fails validation."""

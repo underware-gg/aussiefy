@@ -27,7 +27,7 @@ aussiefy embedder enable bundled
 
 ## Try a bigger model
 
-Jeez, a sentence\-transformers model can replace the bundled one. It's installed'n enabled only when ya ask:, mate
+Fair dinkum, a sentence\-transformers model can replace the bundled one. It's installed'n enabled only when ya ask:, mate
 
 ```sh
 aussiefy embedder install --dry-run   # print the steps first

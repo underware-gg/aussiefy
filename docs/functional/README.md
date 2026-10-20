@@ -5,7 +5,7 @@
 # Functional documentation
 
 What aussiefy does, as reference: every command, option, dial, data file and API, and what each one
-guarantees. So anyway, for step\-by\-step guides, see the [user layer](../user/README.md); for how it works inside, the
+guarantees. Now, for step\-by\-step guides, see the [user layer](../user/README.md); for how it works inside, the
 [architecture layer](../architecture/README.md).
 
 ## Reference

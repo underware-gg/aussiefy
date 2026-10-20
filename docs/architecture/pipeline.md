@@ -12,7 +12,7 @@ has no slang or level logic of its own.
 1. **Parse** (`text.py`, `detect.py`). Tokenise with character offsets'n split contractions
    (`you're` → `you` + `are`). Anyway, a frame checker then decides whether each candidate span is in a position its
    frame allows. A predicate adjective needs a linking verb \("he's ___"), and the checker absorbs
-   intensifiers \("extremely busy" scores intensity 4 and is replaced whole\). Look, it also sees through
+   intensifiers \("extremely busy" scores intensity 4 and is replaced whole\). Oi, it also sees through
    coordination \("stupid and all talk"\) and question inversion \("are you crazy"\), and rejects negation
    ("not tired"\) and "so X that" result clauses. Interjections'n imperatives must stand at the start of a
    clause. The checker records the subject'n verb so that clause idioms can bind `{subj}`. Outer auxiliaries
@@ -27,8 +27,11 @@ has no slang or level logic of its own.
 3. **Select** (`select.py`). Filter candidates by concept, frame compatibility, level, vulgarity,
    register, region, status and slot availability. A clause idiom needs a subject, and a person idiom needs
    a person ("the plan is crazy" never gets a kangaroo loose in its top paddock). Each surviving candidate is
-   weighted by intensity fit, direct match, source count, repeat penalty and the level's probability for
+   weighted by intensity fit, direct match, continuous attestation score, repeat penalty and the level's probability for
    its class, with a lean towards rude candidates set by the vulgarity and the existing tone/mood fit.
+   General-English wording stays eligible with a named weight factor of 0.5; origin never excludes a term.
+   Shared usage/meaning metadata holds back foreign-sounding, uncommon or doubtful terms, independently
+   of manual gates. See [term evidence](../functional/dictionary.md#evidence-and-term-metadata).
    Forms must preserve captured arguments; a syntactically available slotless variant cannot discard an
    object. Tone fit is applied before variety limits, using the same weight as riffs: off-mood candidates
    receive a quarter weight. Comic terms in solemn prose are excluded when `solemn_comic_terms` is false;
@@ -66,7 +69,7 @@ has no slang or level logic of its own.
    each one is \(dialogue, a question, narration ending on a deed\) and the text's mood \(solemn, dark or light\)
    come from `context.py`.
 
-A pass observer \(`PassObserver`) can watch all five stages without changin' them. Mind ya, the changes builder
+A pass observer \(`PassObserver`) can watch all five stages without changin' them. Mate, the changes builder
 (`changes.py`) uses one to render each alternative where it stands, in the same pass
 ([changes](../functional/changes.md), [DD-029](decisions/dd-029-changes-builder.md)).
 Plans prefer the selected entry, then the other entries by these same contextual weights. Within each

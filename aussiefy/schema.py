@@ -11,7 +11,8 @@ import re
 from dataclasses import dataclass, field, fields
 from typing import Any
 
-from .errors import UserError
+from .errors import SchemaError
+from .evidence import METADATA_KEYS, REGISTERS, TermMetadata, metadata_dict, metadata_rejections, parse_metadata
 from .text import MASK_WORD_RE, normalise_word
 
 FRAMES = (
@@ -26,8 +27,8 @@ FRAMES = (
     "tag",            # garnish tag-on: ", mate"
 )
 STATUSES = ("active", "gate", "omit")
-REGISTERS = ("current", "dated", "archaic")
-FLAGS = ("not_aussie", "slur", "dubious_meaning", "archaic", "fabricated", "untagged")
+FLAGS = ("slur", "untagged")
+UNLOCKS = (*FLAGS, "misreadable", "all")
 TYPES = ("idiom", "garnish")
 CLASSES = ("lexical", "phrase", "idiom")
 SEMANTIC_EFFECTS = ("opinion", "quantity_approximation")
@@ -61,15 +62,11 @@ PLACEHOLDER_RE = re.compile(r"\{(\w+)\}")
 IDIOM_FRAMES = ("predicate_adj", "vp", "clause")
 
 
-class SchemaError(UserError):
-    """The dictionary (or an entry) doesn't validate."""
-
-
 RIFF_TONES = ("comic", "grim", "plain")
 
 
 @dataclass(frozen=True)
-class Riff:
+class Riff(TermMetadata):
     """The image a term calls up ("wheelie bins" -> "overflowin', bin chickens fightin' over the scraps")."""
     text: str
     vulgarity: int = 0
@@ -77,7 +74,7 @@ class Riff:
 
 
 @dataclass(frozen=True)
-class Imagery:
+class Imagery(TermMetadata):
     id: str
     text: str
     concepts: tuple[str, ...]
@@ -90,20 +87,24 @@ class Imagery:
     exaggeration: int = 1
     level: int = 3
     tone: str = "comic"
-    origin: str = "original"
     vulgarity: int = 0
+    entry_id: str | None = None
 
 
 def parse_imagery(raw, concepts, strength) -> Imagery:
     if not isinstance(raw, dict) or any(not isinstance(k, str) for k in raw):
         raise SchemaError("imagery record must be a mapping")
-    allowed = set(Imagery.__dataclass_fields__) - {"vulgarity"}
+    allowed = set(Imagery.__dataclass_fields__) - {"vulgarity", "attestation", "evidence", "first_attested"}
     if set(raw) - allowed:
         raise SchemaError(f"imagery: unknown fields {sorted(set(raw) - allowed)}")
     data = dict(raw)
+    data.update(parse_metadata(raw, raw.get("id", "imagery")))
     owner = data.get("id")
     if not isinstance(owner, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", owner):
         raise SchemaError("imagery id must be kebab-case")
+    if data.get("entry_id") is not None and (not isinstance(data["entry_id"], str)
+            or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", data["entry_id"])):
+        raise SchemaError(f"{owner}: entry_id must name a dictionary entry")
     for key in ("text", "usage"):
         if not isinstance(data.get(key), str) or not data[key].strip():
             raise SchemaError(f"{owner}: {key} must be non-empty text")
@@ -116,7 +117,7 @@ def parse_imagery(raw, concepts, strength) -> Imagery:
             raise SchemaError(f"{owner}: {key} must name known, non-empty anchors")
         data[key] = tuple(dict.fromkeys(values))
     for key, choices in (("form", ("suffix", "rewrite")), ("subject", ("any", "person")),
-                         ("tone", RIFF_TONES), ("origin", ("original", "familiar"))):
+                         ("tone", RIFF_TONES), ("register", REGISTERS)):
         if data.get(key, getattr(Imagery, key)) not in choices:
             raise SchemaError(f"{owner}: {key} must be one of {choices}")
     exclusions = data.get("unless_after", ())
@@ -137,7 +138,7 @@ def parse_imagery(raw, concepts, strength) -> Imagery:
 
 
 @dataclass(frozen=True)
-class Entry:
+class Entry(TermMetadata):
     id: str
     form: str
     concept: tuple[str, ...]
@@ -154,12 +155,10 @@ class Entry:
     profane: bool = True            # False: rated above nan, but nothing in it is profanity (innuendo, an insult or
                                     # a crude word: "rooted", "mongrel", "gob"), so nothing in it is masked (O23)
     incoherence: int = 1
-    register: str = "current"
     region: tuple[str, ...] = ()
     replaces: tuple[str, ...] = ()
     status: str = "active"
     flags: tuple[str, ...] = ()
-    sources: tuple[str, ...] = ()
     semantic_effects: tuple[str, ...] = ()  # additions made by every meaning mapping and form of this entry
     semantic_degree: dict[str, str] = field(default_factory=dict)
     gloss: str = ""
@@ -193,7 +192,11 @@ class Entry:
 
     def riffs_within(self, cap: int) -> tuple["Riff", ...]:
         """The riffs offered under a vulgarity cap, best first (riffs.yaml lists the best first)."""
-        return tuple(r for r in self.riffs if r.vulgarity <= cap)
+        return tuple(r for r in self.riffs if r.vulgarity <= cap and not metadata_rejections(r))
+
+    @property
+    def held_back(self) -> tuple[str, ...]:
+        return (("status",) if self.status == "gate" else ()) + metadata_rejections(self)
 
     @property
     def spelling_group(self) -> frozenset[str]:
@@ -208,12 +211,13 @@ class Entry:
         """Canonical, minimal dict for writing back to YAML: defaults omitted, keys in ENTRY_KEYS order."""
         out: dict[str, Any] = {}
         defaults = Entry(id="", form="", concept=(), frame="np")
+        metadata = metadata_dict(self)
         for key in ENTRY_KEYS:
             name = "cls" if key == "class" else key
             value = getattr(self, name)
             if key not in ("id", "form", "concept", "frame") and value == getattr(defaults, name):
                 continue
-            out[key] = list(value) if isinstance(value, tuple) else value
+            out[key] = metadata[key] if key in METADATA_KEYS else list(value) if isinstance(value, tuple) else value
         return out
 
 
@@ -239,12 +243,12 @@ CONCEPT_KEYS = frozenset(f.name for f in fields(Concept)) - {"id"}
 
 
 # Every key an entry may carry, in the order a written entry lists them.
-ENTRY_KEYS = (
+ENTRY_KEYS = tuple(dict.fromkeys((
     "id", "form", "variants", "spellings", "insult", "concept", "frame", "class", "plural", "number", "slots", "intensity", "vulgarity",
     "mask", "profane", "incoherence", "register", "region", "replaces", "status", "flags", "plain_sense", "type", "placement", "when",
     "stretch",
-    "tone", "weight", "semantic_effects", "semantic_degree", "gloss", "notes", "sources", "key_sha256",
-)
+    "tone", "weight", "semantic_effects", "semantic_degree", "gloss", "notes", "key_sha256", *METADATA_KEYS,
+)))
 
 
 def _tuple(value: Any, name: str, entry_id: str) -> tuple[str, ...]:
@@ -403,12 +407,11 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
         intensity=_int_range(raw, "intensity", 1, 5, 3, entry_id),
         vulgarity=_int_range(raw, "vulgarity", 0, 3, 0, entry_id),
         incoherence=_int_range(raw, "incoherence", 1, 5, 1, entry_id),
-        register=register,
         region=_tuple(raw.get("region"), "region", entry_id),
         replaces=_tuple(raw.get("replaces"), "replaces", entry_id),
         status=status,
         flags=flags,
-        sources=_tuple(raw.get("sources"), "sources", entry_id),
+        **parse_metadata(raw, entry_id),
         semantic_effects=effects,
         semantic_degree=semantic_degree,
         gloss=raw.get("gloss", "") or "",

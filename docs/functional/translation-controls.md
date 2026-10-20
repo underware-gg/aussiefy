@@ -133,7 +133,7 @@ variety and embedder arguments keep their existing roles; these are not duplicat
 | `rewrite` | Object: integer `min_level` 1–5; nonnegative integer `min_words`, `min_formal_words`; positive integer `formal_length`; `max_coverage` 0–1; controls difficult-sentence detection and requested sentence rewrites |
 
 For flavour around exact technical wording, enable only suitable garnish, protect terminology'n tune the
-rates independently. Anyway, sentence/markup grammar guards still apply, even at probability 1. Stone the flamin' crows, in strict Markdown,
+rates independently. Mate, sentence/markup grammar guards still apply, even at probability 1. Stone the flamin' crows, in strict Markdown,
 leading garnish may precede an inline boundary only at the original sentence start, with whole\-sentence
 context; suffix garnish'n riffs require a complete prose sentence. Ambiguous capitalisation can also
 prevent a prefix, rather than change a possible name:
@@ -214,7 +214,7 @@ probability or count is zero. Level and vulgarity constrain contextual images in
 `entry_riffs` controls the older images separately; the new exaggeration and association settings apply only
 to contextual imagery, not retroactively to the legacy riffs.
 
-Now, for an isolated, deterministic example with word substitutions'n drawl disabled:
+Mind ya, for an isolated, deterministic example with word substitutions'n drawl disabled:
 
 ```sh
 aussiefy translate 'He was working in vain.' --document-type custom --document-config '{"garnish":["riff"],"entry_riffs":false,"contextual_riffs":true,"riff_exaggeration":1,"profile":{"frames":[],"phonetic":0,"garnish":{"riff":1},"max_garnish":{"riff":1}}}'

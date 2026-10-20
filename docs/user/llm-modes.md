@@ -8,7 +8,7 @@ The rule engine runs offline'n produces repeatable drafts, but they can read lik
 can use the toolkit to polish or retell them, with the dictionary supplying dinkum slang. Claude, Codex
 and other agents follow the same [writing workflow](agents.md).
 
-So anyway, the commands below use the optional built\-in API client to run that work automatically. Fair dinkum, its guarantees are
+Now, the commands below use the optional built\-in API client to run that work automatically. Fair dinkum, its guarantees are
 in the [LLM modes reference](../functional/llm-modes.md); it's one client of the shared harness.
 
 ## Before you start
@@ -17,7 +17,7 @@ in the [LLM modes reference](../functional/llm-modes.md); it's one client of the
    (or `pip install -e '.[llm]'` from a clone\).
 2. Set `ANTHROPIC_API_KEY`, or log in with an `ant auth login` profile.
 
-Stone the crows, every mode uses `claude-opus-5-5` unless ya pass `--model`.
+Struth, every mode uses `claude-opus-5-5` unless ya pass `--model`.
 
 ## Smooth the joins
 

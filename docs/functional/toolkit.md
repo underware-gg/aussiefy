@@ -5,7 +5,7 @@
 # The toolkit and its surfaces
 
 Language models are good at Australian English when they have quality source material'n clear guidance.
-Mind ya, the toolkit gives them both, as six plain functions that return JSON\-ready dicts. `aussiefy.harness` gathers
+Mate, the toolkit gives them both, as six plain functions that return JSON\-ready dicts. `aussiefy.harness` gathers
 them; `lookup`, `lint` and `guide` each live in their own module \(`lookup.py`, `lint.py`, `guide.py`).
 
 | Function | CLI | What it does |
@@ -101,7 +101,7 @@ Genre, English, embellishment'n extended document controls are described in [tra
 ## Lookup sense matching
 
 Lookup matches complete slang forms with grammatical slots, so “give them a bell” reaches the telephone
-sense. Fair dinkum, complete form, inflected form'n partial\-term discovery explain vocabulary broadly; their cards
+sense. Crikey, complete form, inflected form'n partial\-term discovery explain vocabulary broadly; their cards
 don't promise an in\-place replacement for the query. Inflection applies to a noun's head or a verb
 phrase's head verb, not every word of every frame: “shouted” doesn't become a drinks noun.
 
@@ -109,12 +109,12 @@ Meaning inference shares canonical source concepts, polarity, argument restricti
 certificates. Aw, a recognised query head can exclude unrelated suggestions; “probably” doesn't establish
 certainty, “wake up” doesn't establish hurrying, and a beer can is distinct from a small bottle. The
 dictionary can recognise a meaning without having a compatible target, and then explains that abstention.
-Mind ya, explicit mild/strong source degree needs a compatible certified target for an inferred meaning match.
+Mate, explicit mild/strong source degree needs a compatible certified target for an inferred meaning match.
 
 Local readings aren't a whole\-query parse. Attributive'n coordinated query fragments retain their
 meanings, while unknown modifiers, subordinate content'n unresolved structure leave model fallback
 available. External negation is checked before a source phrase, preservin' established internally negative
-meanings such as “not bad” and “not working”. Jeez, an independently supported positive sense can keep on kickin' another
+meanings such as “not bad” and “not working”. Stone the crows, an independently supported positive sense can keep on kickin' another
 sense's denial; an unrelated label can't rescue a denied meaning. Well, lexical ranking'n model texts use the
 same permitted paths. Negated model fallback also needs a shared content anchor with candidate wording.
 
@@ -136,7 +136,7 @@ Aliases are explicit: neither `John Woods` nor `Christmas Island` is inferred fr
 
 `plan` keeps its `riffs` list: entry\-attached cards retain their existin' fields, while contextual cards add
 an image `id`, `concepts`, `frames`, `form`, `subject`, `association`, `exaggeration`, `origin`, `usage` and
-`automatic`. Crikey, contextual cards can be offered even where no word substitution was chosen. A direct suffix
+`automatic`. Fair dinkum, contextual cards can be offered even where no word substitution was chosen. A direct suffix
 can pass automatic insertion checks; rewrite'n related cards always require a writer's judgement.
 
 Full and short entry cards include nonempty `semantic_effects`. Meaning suggestions respect the resolved

@@ -64,11 +64,12 @@ its consequences as they stood when it was made. Anyway, records are numbered in
 | [DD-037](dd-037-contextual-matching-and-discovery.md) | Nonconsuming context assertions, shared object checks and discovery-only meanings | Accepted |
 | [DD-038](dd-038-publication-settings-and-variants.md) | Publication settings live only in `publication.yaml`; a host can export the docs at its own vulgarity | Accepted |
 | [DD-039](dd-039-certified-modifier-composition.md) | Certified modifier composition and replacement ownership | Accepted |
+| [DD-040](dd-040-term-evidence-and-usage.md) | Store term facts; derive attestation and usage eligibility | Accepted |
 
 ## By topic
 
 - **Engine:** DD\-001, DD\-003, DD\-007, DD\-029, DD\-030, DD\-034, DD\-035, DD\-036, DD\-037, DD\-039
-- **Dictionary'n data:** DD\-002, DD\-010, DD\-012, DD\-025, DD\-032, DD\-037
+- **Dictionary'n data:** DD\-002, DD\-010, DD\-012, DD\-025, DD\-032, DD\-037, DD\-040
 - **The dials:** DD\-004, DD\-005
 - **Structure'n interfaces:** DD\-006, DD\-008, DD\-009, DD\-015, DD\-016, DD\-019, DD\-020, DD\-021, DD\-022, DD\-023, DD\-024, DD\-028, DD\-029, DD\-038
 - **Sources, licensing'n releases:** DD\-011, DD\-012, DD\-013, DD\-014

@@ -12,6 +12,7 @@ from ..dump import dump_entries, dump_yaml
 from ..loader import DATA_DIR, write_validated
 from ..model import Dictionary
 from ..schema import parse_entry
+from ..evidence import parse_sources, unreviewed_source
 
 SCRAPED_HEADER = """# Entries accepted from the scrape/tag/review pipeline. Machine-managed:
 # `aussiefy dev review --apply` rewrites this file. Move an entry to a hand-curated
@@ -61,12 +62,15 @@ def plan_review(tagged: list[dict], dictionary: Dictionary, data_dir: str | Path
         known = item.get("known_as")
         if known:
             entry = dictionary.entries.get(known)
-            have = set(entry.sources if entry else ()) | set(overlay.get(known, []))
-            new_urls = [u for u in item.get("sources", []) if u not in have]
+            have = {s.url for s in entry.sources if s.url} if entry else set()
+            have.update(s.url for s in parse_sources(overlay.get(known, []), known) if s.url)
+            new_urls = [unreviewed_source(url, owner=known,
+                         note="Scraped citation; support awaits curator review.").to_dict()
+                        for url in item.get("sources", []) if url not in have]
             if known in by_id:
-                by_id[known]["sources"] = list(dict.fromkeys(by_id[known].get("sources", []) + new_urls))
+                by_id[known]["sources"] = by_id[known].get("sources", []) + new_urls
             elif new_urls:
-                overlay[known] = list(dict.fromkeys(overlay.get(known, []) + new_urls))
+                overlay[known] = overlay.get(known, []) + new_urls
             status = item.get("known_status")
             verb = "blocked (omitted)" if status == "omit" else f"already present ({status})"
             summary.append(f"{verb}: '{item['form']}' = {known}" + (f", +{len(new_urls)} source(s)" if new_urls else ""))
@@ -82,7 +86,8 @@ def plan_review(tagged: list[dict], dictionary: Dictionary, data_dir: str | Path
             # a re-tag never overrides human edits: only fill blanks and merge sources/variants
             for key, value in item.items():
                 if key in ("sources", "variants"):
-                    current[key] = list(dict.fromkeys(current.get(key, []) + value))
+                    current[key] = [v for i, v in enumerate(current.get(key, []) + value)
+                                    if v not in (current.get(key, []) + value)[:i]]
                 elif not current.get(key) and value:
                     current[key] = value
             summary.append(f"updated: {item['id']} (sources/variants merged, human edits kept)")

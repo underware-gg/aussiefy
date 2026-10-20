@@ -125,6 +125,10 @@
   frame: interjection
   incoherence: 1
   gloss: Hello.
+  searched:
+    date: '2026-10-20'
+    outcome: found
+    note: ANDC headword and independent Wiktionary sense checked; no exhaustive search claim.
 - id: how-ya-goin
   form: how ya goin'
   variants: ["how's it goin'"]
@@ -169,7 +173,7 @@
   concept: [THANKS]
   frame: interjection
   intensity: 4
-  incoherence: 4
+  incoherence: 2
   gloss: Thanks very much, jokingly.
 - id: fair-go
   form: fair go
@@ -254,7 +258,7 @@
   form: stop your whingeing
   concept: [STOP_COMPLAINING]
   frame: imperative
-  incoherence: 3
+  incoherence: 2
   gloss: Stop complaining.
 - id: put-a-sock-in-it
   form: put a sock in it
@@ -317,6 +321,10 @@
   frame: np
   incoherence: 2
   gloss: Nonsense.
+  searched:
+    date: '2026-10-20'
+    outcome: found
+    note: ANDC headword and independent Wiktionary sense checked; no exhaustive search claim.
 - id: a-squiz
   form: a squiz
   concept: [LOOK]
@@ -428,7 +436,7 @@
   form: yonks ago
   concept: [LONG_AGO]
   frame: adv
-  incoherence: 3
+  incoherence: 2
   gloss: Ages ago.
 - id: a-fair-go
   form: a fair go
@@ -492,7 +500,7 @@
   number: plural
   concept: [POLITICIAN]
   frame: np
-  incoherence: 3
+  incoherence: 2
   plural: the pollies
   gloss: Politicians collectively; a plural reference to political people.
 - id: yakka
@@ -569,8 +577,9 @@
   form: hand on heart
   concept: [SINCERELY]
   frame: adv
-  incoherence: 3
+  incoherence: 1
   gloss: Sincerely; I swear it.
+  reads_as: general
 - id: not-on-your-nelly
   form: not on your nelly
   variants: ["not on your bloody nelly"]
@@ -604,9 +613,10 @@
   form: the whole shebang
   concept: [EVERYTHING]
   frame: np
-  incoherence: 3
+  incoherence: 2
   notes: Shared English, common in Australia.
   gloss: Everything.
+  reads_as: general
 - id: the-whole-bloody-show
   form: the whole bloody show
   concept: [EVERYTHING]
@@ -627,14 +637,14 @@
   frame: interjection
   intensity: 5
   vulgarity: 1
-  incoherence: 3
+  incoherence: 2
   gloss: Absolutely.
 - id: god-bloody-willing
   form: God bloody willing
   concept: [GOD_WILLING]
   frame: adv
   vulgarity: 1
-  incoherence: 3
+  incoherence: 2
   gloss: Hopefully, if God permits it.
 - id: by-crikey
   form: by crikey
@@ -656,29 +666,32 @@
   form: at the end of the day
   concept: [IN_THE_END]
   frame: adv
-  incoherence: 2
+  incoherence: 1
   notes: Shared English; an Australian favourite.
   gloss: Ultimately.
+  reads_as: general
 - id: come-hell-or-high-water
   form: come hell or high water
   concept: [NO_MATTER_WHAT]
   frame: adv
   intensity: 4
-  incoherence: 3
+  incoherence: 1
   notes: Shared English, common in Australia.
   gloss: Whatever happens.
+  reads_as: general
 - id: another-crack-at
   form: another crack at
   concept: [SECOND_CHANCE]
   frame: adv
-  incoherence: 3
+  incoherence: 2
   gloss: A fresh attempt at.
 - id: for-nothin
   form: for nothin'
   concept: [IN_VAIN]
   frame: adv
-  incoherence: 3
+  incoherence: 1
   gloss: For no result.
+  reads_as: general
 - id: for-sweet-bugger-all
   form: for sweet bugger-all
   concept: [IN_VAIN]
@@ -703,7 +716,7 @@
   form: old fella
   concept: [FATHER]
   frame: np
-  incoherence: 3
+  incoherence: 2
   plural: old fellas
   gloss: Father; in the plural, the old generation.
 - id: brave-bastards
@@ -725,7 +738,7 @@
   frame: np
   intensity: 4
   vulgarity: 3
-  incoherence: 3
+  incoherence: 2
   notes: Affectionate. High praise for a decent bloke. Strongly offensive to American ears.
   gloss: A thoroughly decent person.
 - id: a-mad-cunt
@@ -734,7 +747,7 @@
   frame: np
   intensity: 5
   vulgarity: 3
-  incoherence: 3
+  incoherence: 2
   notes: Admiring. A legend, someone wild and fun. Strongly offensive to American ears.
   gloss: An absolute legend.
 - id: fuck-me
@@ -768,16 +781,17 @@
   frame: np
   vulgarity: 1
   profane: false
-  incoherence: 3
+  incoherence: 2
   gloss: Somebody, and you're not happy with them.
 - id: just-the-ticket
   form: just the ticket
   concept: [JUST_RIGHT]
   frame: predicate_adj
-  incoherence: 3
+  incoherence: 1
   class: phrase
   notes: Shared English; common in Australia.
   gloss: Exactly what was needed.
+  reads_as: general
 - id: spot-on
   form: spot on
   concept: [JUST_RIGHT]
@@ -804,11 +818,23 @@
   form: properly
   concept: [VERY]
   frame: adv
-  incoherence: 3
-  status: gate
-  flags: [not_aussie]
-  notes: Shared with British English. "Properly knackered".
+  incoherence: 1
+  status: active
+  notes: Colloquial intensifier, distinct from correctness or appropriateness. Australian vernacular currency remains unresolved; preserved for marked discovery.
   gloss: Thoroughly.
+  origin: unknown
+  reads_as: unknown
+  australian_use: common
+  searched:
+    date: '2026-10-21'
+    outcome: inconclusive
+    note: Wiktionary records the colloquial extreme sense; Oxford's selected senses do not establish this intensifier's Australian vernacular currency.
+  sources:
+  - url: https://en.wiktionary.org/wiki/properly
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: [term, meaning]
+    note: Colloquial intensifier sense, not a claim of Australian frequency.
 
 # --- the big beats of the full Goldilocks (general-purpose) ----------------------------
 - id: been-at
@@ -829,9 +855,10 @@
   concept: [ANGRILY]
   frame: adv
   intensity: 4
-  incoherence: 3
+  incoherence: 1
   notes: Shared English.
   gloss: In a foul mood.
+  reads_as: general
 - id: some-bastard
   form: some bastard
   concept: [SOMEONE]

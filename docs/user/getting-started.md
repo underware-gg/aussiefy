@@ -23,7 +23,7 @@ pip install "aussiefy[llm] @ git+https://github.com/underware-gg/aussiefy@v0.2.0
 | `scrape` | requests, beautifulsoup4 | `dev scrape`, and fetching the local reference texts |
 | `dev` | pytest, ruff, mcp, numpy, requests, beautifulsoup4, tokenizers | working on aussiefy itself: see [CONTRIBUTING.md](../../CONTRIBUTING.md) |
 
-Well, from a clone, install in editable mode instead: `pip install -e '.[llm]'`.
+So anyway, from a clone, install in editable mode instead: `pip install -e '.[llm]'`.
 
 ## Translate a text
 
@@ -39,7 +39,7 @@ Crikey, at level 5 the engine goes all out:
 
 ```
 $ aussiefy "Good grief, are you crazy? You're overreacting, you're stupid and all talk, and I'm extremely busy cleaning up after you." -l 5 -s 1
-Strewth, do ya 'ave kangaroos loose in yer bloody top paddock? Oi, yer carryin' on like a pork chop, yer thick as two short planks and a big-noter, and I'm flat out cleaning up after you.
+Strewth, do ya 'ave kangaroos loose in yer bloody top paddock? Stone the crows, yer carryin' on like a pork chop, yer thick as two short planks and a big-noter, and I'm flat out cleaning up after you.
 ```
 
 ## Choose how Aussie, how rude, and how much liberty
@@ -95,10 +95,12 @@ What the explain report contains is described in [explain.md](../functional/expl
 ```sh
 aussiefy "..." --region qld                     # prefer regional words (togs, not cozzie)
 aussiefy "..." --registers current,dated        # allow dated slang as well as current
-aussiefy "..." --unlock not_aussie,fabricated   # allow entries held back for those flags
+aussiefy "..." --unlock misreadable            # allow real entry senses prone to modern misreading
 ```
 
-Gated entries are held back for a reason, such as doubtful attestation; `--unlock all` allows every one.
+`--unlock all` lifts manual entry gates'n permits misreadable senses. Foreign\-soundin' terms, uncommon
+Australian usage'n doubtful definitions remain held back; omitted entries never appear. Evidence alone
+doesn't exclude a term: unverified'n labelled bulldust material can remain eligible.
 
 ## Look up a word or check a draft
 
@@ -141,7 +143,7 @@ from aussiefy import translate
 translate("I'm extremely busy.", level=4, seed=7).text   # "I'm flat out like a lizard drinking."
 ```
 
-Jeez Louise, the full API is in [toolkit.md](../functional/toolkit.md).
+Stone the flamin' crows, the full API is in [toolkit.md](../functional/toolkit.md).
 
 ## When something goes wrong
 

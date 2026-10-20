@@ -46,7 +46,7 @@ commit. Main must require PRs'n strict/up\-to\-date checks, enforce them for adm
 review bypass actors, force pushes or deletion. Existin' incompatible protection is retained for explicit
 maintainer review rather than weakened automatically. Additional required checks remain enforced by GitHub.
 
-Automated finish refuses if this enforcement can't be verified. Anyway, private repositories need a GitHub plan
+Automated finish refuses if this enforcement can't be verified. Mate, private repositories need a GitHub plan
 that supports protection; HTTP 403 is a platform limitation, not an unprotected\-rule result. Keep the
 repository private until a separate visibility decision, or arrange a suitable plan. Don't substitute
 administrator bypass or a direct push for this gate.

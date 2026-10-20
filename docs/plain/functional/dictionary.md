@@ -26,7 +26,8 @@ aussiefy/data/
   judge.yaml           blind comparison rubric and report schema
   pos/                 licensed English POS weights and provenance metadata
   source_policy.yaml   sites the scraper must not bulk-extract (reference-only)
-  sources.yaml         extra source URLs per entry (written by `dev review --apply`)
+  sources.yaml         structured supplemental citations per entry (also written by `dev review --apply`)
+  attestation.yaml     versioned provisional evidence weights and selection factors
   model/               the bundled static embedding model
   entries/
     lexical.yaml       one-word swaps: nouns, adjectives, adverbs
@@ -59,15 +60,78 @@ An entry is one meaning-shape:
   region: []             # e.g. [qld]
   replaces: []           # plain-English paraphrases (patterns); drive matching
   status: active         # active | gate | omit
-  flags: []              # not_aussie | slur | dubious_meaning | archaic | fabricated | untagged
+  flags: []              # slur | untagged; evidence and usage have separate fields
   semantic_effects: []   # reviewed additions to the mapped meaning; opinion or quantity_approximation
   sources: []
   gloss: Not quite sane; eccentric.   # our own words, never a source's
 ```
 
-An entry's `incoherence` (its minimum level) says how hard it is to follow, never how rude it is; rudeness is
-its `vulgarity`. A `gate` entry is held back until all its flags are unlocked (`--unlock`, or `--unlock all`); an
-`omit` entry is never used, and is kept only so that re-scrapes recognise it.
+An entry's `incoherence` is its minimum level: how distinctly and colourfully Australian its wording is.
+Generic/imported words sit low; thick vernacular and opaque local idioms sit high. Rudeness is independently
+its `vulgarity`. `status: gate` is a curator's manual gate; `--unlock all` can lift it. `omit` is never offered,
+even when unlocked. The `slur` flag requires `omit`; `untagged` requires a non-active status.
+
+Origin, use and meaning are separate from that manual status. `reads_as` other than `australian` or `general`,
+`australian_use: uncommon`, or `doubtful_definition: true` keeps a term out of automatic choices. These apply
+to entries, riffs and imagery. `misreadable: true` marks a real sense modern readers could mistake: an entry
+can be permitted with `--unlock misreadable`; a foreign-sounding or doubtful term stays held back even with
+`--unlock all`. The register filter independently controls current, dated and archaic entries. General
+English is eligible and receives a named weight factor of 0.5, rather than an exclusion.
+
+## Evidence and term metadata
+
+Entries, riffs and imagery share these stored fields:
+
+| Fields | Meaning |
+|---|---|
+| `sources` | Structured citations: `url`, `kind`, `publisher`, `supports`, optional `cited_date` and `note` |
+| `searched` | Last search's ISO `date`, `outcome` (`found`, `nothing_found`, `inconclusive`), optional limits in `note` |
+| `produced_by`, `coined_by` | Agent output (`produced_by: agent`) is not proof of invention; deliberate coinage records `person`, `agent` or `constructor` |
+| `caught_on`, `spoken_use` | Curator records with `date` and `note`, supported by the term's sources or testimony summary |
+| `testimony` | Counts of `people`, `independent` people and `places`, with `first_date`, `last_date` and `summary_date`; no personal identities |
+| `credit` | Contributor credit, separate from who coined it |
+| `origin`, `origin_language` | Australian, British, Irish, American, Aboriginal, other or unknown; language where known |
+| `australian_use`, `reads_as` | Common/uncommon here, and the variety it feels like (`australian`, `general`, or another variety) |
+| `dated_by_curator`, `register` | A curator's year/decade/range fallback, and current/dated/archaic currency |
+| `themes` | Explicit subject matter tags; tier permissions arrive in the next package slice |
+| `doubtful_definition`, `misreadable` | Definition uncertainty versus a real sense liable to modern misreading |
+
+Sources use kinds `scholarly_dictionary`, `slang_dictionary`, `crowd_dictionary`, `literature`, `media`,
+`testimony` and `community`. `publisher` identifies the independent publisher or work: mirrors and copies
+must retain that identity. A community citation additionally names its underlying `basis` kind, so community
+attribution never turns testimony into documentary evidence. Testimony citations require the canonical
+summary. `supports` lists `term`, `meaning`, `australian_use` and/or `date`; the last requires `cited_date`.
+An empty list explicitly retains an unreviewed or component-only citation without attesting the full expression.
+
+```yaml
+sources:
+- url: https://en.wiktionary.org/wiki/arvo
+  kind: crowd_dictionary
+  publisher: Wiktionary
+  supports: [term, meaning, australian_use]
+  note: Selected afternoon sense; no claim of exclusive Australian use.
+```
+
+The loader derives `attestation` (score, five bars, counts and weights version), `evidence` and
+`first_attested`; authors must not store those judgements. `aussiefy.evidence.assess(term, weights,
+testimony=live_summary)` is the pure scoring operation. A supplied live summary replaces the exported one.
+Further sources of one kind have diminishing weight; the same publisher/work counts once. Testimony alone
+stops one bar below attested unless a curator confirms `spoken_use`. Deliberate coinage remains bulldust
+until a supported `caught_on` record exists; unfound agent output with no independent testimony is also
+bulldust. Otherwise the score decides attested versus unverified. Supported citation dates take precedence
+over `dated_by_curator`; absent evidence means unknown, rather than the date of the latest web page.
+
+`attestation.yaml` is explicitly provisional pending expression-level source research. Substitution and
+garnish entry selection read its continuous score and general-wording factor, replacing raw URL-count
+weighting. Riffs and contextual imagery retain their shared tone/signature weighting, with the first curated
+option weighted double; the usage/meaning gates and evidence labels apply to them too.
+Existing citation links are retained with empty support
+lists where their whole-expression scope has not been checked; an old sense audit is not an origin or
+frequency survey. This work does not declare the source hunt complete.
+
+Changes contract version 2 still carries URL strings in entry cards. The coordinated new card and changes
+contract lands in package slice 6; internal source objects are already structured. Riff and imagery offers
+carry their own evidence metadata. See [DD-040](../../architecture/decisions/dd-040-term-evidence-and-usage.md).
 
 `riffs.yaml` maps entry IDs to optional images, each with `text` and `tone` (`comic`, `grim` or `plain`).
 These can include original comparisons as well as familiar imagery; they are not additional meanings or

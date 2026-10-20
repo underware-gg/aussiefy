@@ -1,5 +1,7 @@
 """aussiefy dev round: a research round's verdicts planned against the dictionary, then written only once valid."""
 
+from copy import deepcopy
+
 import pytest
 import yaml
 
@@ -41,6 +43,7 @@ def test_plan_applies_the_guards(setup):
     plan = _plan(config, data)
     assert [e["id"] for e in plan.entries] == ["zzbonzer", "zzmaybe"]
     assert plan.entries[1]["status"] == "gate"                        # a low-confidence accept ships gated
+    assert not plan.entries[1].get("doubtful_definition", False)
     assert plan.new_concepts["ZZ_GREAT"]["triggers"] == {"predicate_adj": ["zzsuperb"]}
     assert plan.added_triggers == {"TIRED": {"predicate_adj": ["zzworn"]}}
     reasons = {(kind, why) for kind, _, why, _ in plan.dropped}
@@ -49,6 +52,75 @@ def test_plan_applies_the_guards(setup):
     assert ("replaces", "is an Aussie form") in reasons and plan.entries[0]["replaces"] == ["very good"]
     assert plan.style_guide == [("a habit", "Say it plain.")]
     assert list(plan.entries[0])[:3] == ["id", "form", "concept"]    # written in the schema's key order
+
+
+def test_archived_round_metadata_is_adapted_after_fixes_without_mutating_inputs(setup):
+    config, data = setup
+    modern = {"kind": "slang_dictionary", "publisher": "Reviewed work", "supports": ["term", "meaning"],
+              "url": "https://reviewed.example/entry", "note": "Exact expression."}
+    config.verdicts = [("archive", {"decision": "add_entry", "entry": {
+        "id": "zzarchive", "form": "zzarchive", "concept": ["TIRED"], "frame": "predicate_adj",
+        "sources": ["HTTPS://legacy.example/entry", modern, "_best_dressed"],
+        "flags": ["not_aussie", "dubious_meaning", "archaic", "fabricated"], "notes": "Original note."}})]
+    config.entry_fixes = {"zzarchive": {"register": "dated", "reads_as": "general",
+                                         "doubtful_definition": False}}
+    before = deepcopy(config)
+    archive_bytes = (config.directory / "verify" / "verdicts-a.yaml").read_bytes()
+    plan = _plan(config, data)
+    raw = plan.entries[0]
+    assert raw["sources"][0]["url"] == "HTTPS://legacy.example/entry"
+    assert raw["sources"][0]["supports"] == []
+    assert raw["sources"][1] == modern and len(raw["sources"]) == 2
+    assert "_best_dressed" in raw["notes"] and raw["notes"].startswith("Original note.")
+    assert raw["flags"] == [] and raw["status"] == "gate"
+    assert raw["register"] == "dated" and raw["reads_as"] == "general"
+    assert not raw["doubtful_definition"]
+    assert "coined_by" not in raw and "produced_by" not in raw
+    assert rounds._current_entry_metadata(raw) == raw
+    entry = plan.write(data).entries["zzarchive"]
+    assert entry.evidence == "unverified" and entry.attestation.score == 4
+    assert config == before
+    assert (config.directory / "verify" / "verdicts-a.yaml").read_bytes() == archive_bytes
+
+
+@pytest.mark.parametrize("flags, extra, decision, expected", [
+    (["not_aussie"], {"notes": None}, "add_entry", {"reads_as": "unknown"}),
+    (["dubious_meaning"], {}, "add_entry", {"doubtful_definition": True}),
+    (["archaic"], {}, "add_entry", {"register": "archaic"}),
+    (["archaic"], {"register": "current"}, "add_entry", {"register": "archaic"}),
+    (["archaic"], {"register": "archaic"}, "add_entry", {"register": "archaic"}),
+    (["archaic"], {"register": "dated"}, "add_entry", {"register": "dated"}),
+    (["fabricated"], {}, "add_entry", {"status": "gate"}),
+    (["fabricated"], {"status": "omit"}, "gate", {"status": "omit"}),
+    ([], {"status": "gate"}, "add_entry", {"status": "gate"}),
+])
+def test_archived_flags_preserve_independent_meanings(setup, flags, extra, decision, expected):
+    config, data = setup
+    config.verdicts = [("archive", {"decision": decision, "entry": {
+        "id": "zzarchive", "form": "zzarchive", "concept": ["TIRED"], "frame": "predicate_adj",
+        "flags": flags, **extra}})]
+    raw = _plan(config, data).entries[0]
+    assert all(raw.get(key) == value for key, value in expected.items())
+    if "dubious_meaning" not in flags:
+        assert not raw.get("doubtful_definition", False)
+    if "archaic" in flags and extra.get("register", "current") == "current":
+        assert "takes precedence" in raw["notes"]
+    assert "coined_by" not in raw and "produced_by" not in raw
+
+
+@pytest.mark.parametrize("bad, reason", [
+    ({"sources": ["https://[broken"]}, "source URL"),
+    ({"flags": ["not_a_real_flag"]}, "unknown flag"),
+    ({"flags": ["archaic"], "notes": 123}, "notes must be text"),
+])
+def test_archived_import_keeps_invalid_metadata_errors_contextual(setup, bad, reason):
+    config, data = setup
+    config.verdicts = [("archive", {"decision": "add_entry", "entry": {
+        "id": "zzarchive", "form": "zzarchive", "concept": ["TIRED"], "frame": "predicate_adj", **bad}})]
+    plan = _plan(config, data)
+    assert not plan.entries
+    assert len(plan.dropped) == 1
+    assert "zzarchive" in plan.dropped[0][2] and reason in plan.dropped[0][2]
 
 
 def test_invalid_candidate_cannot_reserve_a_form_or_leave_a_concept(setup):

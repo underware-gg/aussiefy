@@ -1,158 +1,310 @@
-# Riffs: the image an Aussie term brings to mind, beyond what it means.
-#
-# A wheelie bin means a rubbish bin, but to an Australian it calls up the bin chickens raiding it. That
-# association is what makes "Wheelie bins overflowin', bin chickens fightin' over the scraps!" land, and
-# it isn't translation: it's colour that hangs off a word already in the text.
-#
-# Keyed by entry id. Each riff is written to follow its term after a comma ("wheelie bins, <riff>"), and
-# works for one or many. Each has a tone: comic (a laugh), grim (bleak) or plain (just a picture). The
-# text's mood pulls the choice like gravity, not a fence: in a solemn text (Gettysburg) a comic riff is a
-# quarter as likely, likewise a grim one in a light text, and plan marks which riffs suit the mood.
-# lookup and plan offer them as optional colour; at level 5 the engine may attach one where the term ends
-# a clause (profiles.yaml `riff`). Swearing in a riff is rated from swears.yaml,
-# so riffs over the vulgarity cap are never offered.
-
+# Persona-harvest colour; agent output is not itself attestation. Source hunt pending.
 wheelie-bin:
-  - {text: "overflowin', bin chickens fightin' over the scraps", tone: comic}
-  - {text: "tipped over in the gutter", tone: plain}
-  - {text: "rottin' in the heat", tone: grim}
+- text: overflowin', bin chickens fightin' over the scraps
+  tone: comic
+  produced_by: agent
+- text: tipped over in the gutter
+  tone: plain
+  produced_by: agent
+- text: rottin' in the heat
+  tone: grim
+  produced_by: agent
 bin-chicken:
-  - {text: "headfirst in a wheelie bin", tone: comic}
-  - {text: "nickin' chips off some poor bugger's plate", tone: comic}
+- text: headfirst in a wheelie bin
+  tone: comic
+  produced_by: agent
+- text: nickin' chips off some poor bugger's plate
+  tone: comic
+  produced_by: agent
 footpath:
-  - {text: "cracked to buggery", tone: plain}
-  - {text: "hot enough to fry an egg on", tone: comic}
+- text: cracked to buggery
+  tone: plain
+  produced_by: agent
+- text: hot enough to fry an egg on
+  tone: comic
+  produced_by: agent
 the-pollies:
-  - {text: "standin' about like stunned mullets", tone: comic}
-  - {text: "all piss and wind", tone: comic}
-  - {text: "with their snouts in the trough", tone: comic}
+- text: standin' about like stunned mullets
+  tone: comic
+  produced_by: agent
+- text: all piss and wind
+  tone: comic
+  produced_by: agent
+- text: with their snouts in the trough
+  tone: comic
+  produced_by: agent
 pollie:
-  - {text: "standin' about like stunned mullets", tone: comic}
-  - {text: "all mouth and no trousers", tone: comic}
+- text: standin' about like stunned mullets
+  tone: comic
+  produced_by: agent
+- text: all mouth and no trousers
+  tone: comic
+  produced_by: agent
 parliament-house:
-  - {text: "full of pollies flappin' their gums", tone: comic}
+- text: full of pollies flappin' their gums
+  tone: comic
+  produced_by: agent
 the-big-smoke:
-  - {text: "all traffic, tolls and coffee at six bucks a pop", tone: comic}
-  - {text: "choked in its own smog", tone: grim}
+- text: all traffic, tolls and coffee at six bucks a pop
+  tone: comic
+  produced_by: agent
+- text: choked in its own smog
+  tone: grim
+  produced_by: agent
 the-bush:
-  - {text: "miles from the nearest servo", tone: plain}
-  - {text: "nothin' but flies and gum trees", tone: plain}
-  - {text: "burnt black as far as ya can see", tone: grim}
+- text: miles from the nearest servo
+  tone: plain
+  produced_by: agent
+- text: nothin' but flies and gum trees
+  tone: plain
+  produced_by: agent
+- text: burnt black as far as ya can see
+  tone: grim
+  produced_by: agent
 creek:
-  - {text: "bone dry half the year", tone: plain}
+- text: bone dry half the year
+  tone: plain
+  produced_by: agent
 the-tip:
-  - {text: "with the seagulls and the bin chickens havin' a field day", tone: comic}
-  - {text: "smoulderin' away", tone: grim}
+- text: with the seagulls and the bin chickens havin' a field day
+  tone: comic
+  produced_by: agent
+- text: smoulderin' away
+  tone: grim
+  produced_by: agent
 clink:
-  - {text: "where they throw away the key", tone: grim}
+- text: where they throw away the key
+  tone: grim
+  produced_by: agent
 slammer:
-  - {text: "where they throw away the key", tone: grim}
+- text: where they throw away the key
+  tone: grim
+  produced_by: agent
 lock-up:
-  - {text: "where they throw away the key", tone: grim}
+- text: where they throw away the key
+  tone: grim
+  produced_by: agent
 loony-bin:
-  - {text: "with the walls padded and the doors locked", tone: grim}
+- text: with the walls padded and the doors locked
+  tone: grim
+  produced_by: agent
 ankle-biter:
-  - {text: "sticky fingers and all", tone: comic}
-  - {text: "runnin' rings round their mum", tone: comic}
-  - {text: "snotty-nosed and barefoot", tone: grim}
+- text: sticky fingers and all
+  tone: comic
+  produced_by: agent
+- text: runnin' rings round their mum
+  tone: comic
+  produced_by: agent
+- text: snotty-nosed and barefoot
+  tone: grim
+  produced_by: agent
 old-codger:
-  - {text: "complainin' it was better in his day", tone: comic}
-  - {text: "sittin' on his own on a park bench", tone: grim}
+- text: complainin' it was better in his day
+  tone: comic
+  produced_by: agent
+- text: sittin' on his own on a park bench
+  tone: grim
+  produced_by: agent
 young-fella:
-  - {text: "barely out of short pants", tone: grim}
+- text: barely out of short pants
+  tone: grim
+  produced_by: agent
 burb:
-  - {text: "all brick veneer and Hills Hoists", tone: plain}
-  - {text: "every house the same and every blind drawn", tone: grim}
+- text: all brick veneer and Hills Hoists
+  tone: plain
+  produced_by: agent
+- text: every house the same and every blind drawn
+  tone: grim
+  produced_by: agent
 unit:
-  - {text: "walls so thin ya can hear next door clip their toenails", tone: comic}
-  - {text: "stacked up like battery hens", tone: grim}
+- text: walls so thin ya can hear next door clip their toenails
+  tone: comic
+  produced_by: agent
+- text: stacked up like battery hens
+  tone: grim
+  produced_by: agent
 esky:
-  - {text: "full of tinnies and half a bag of ice", tone: plain}
-  - {text: "guarded like the last shady spot at the cricket", tone: comic}
+- text: full of tinnies and half a bag of ice
+  tone: plain
+  produced_by: agent
+- text: guarded like the last shady spot at the cricket
+  tone: comic
+  produced_by: agent
 stubby:
-  - {text: "sweatin' in the heat", tone: plain}
+- text: sweatin' in the heat
+  tone: plain
+  produced_by: agent
 grog:
-  - {text: "enough to sink a battleship", tone: comic}
+- text: enough to sink a battleship
+  tone: comic
+  produced_by: agent
 barbie:
-  - {text: "snags burnin' and the flies havin' a go", tone: comic}
+- text: snags burnin' and the flies havin' a go
+  tone: comic
+  produced_by: agent
 servo:
-  - {text: "with a pie that's been in the warmer since Tuesday", tone: comic}
-  - {text: "where the sausage roll's hotter than the coffee", tone: comic}
+- text: with a pie that's been in the warmer since Tuesday
+  tone: comic
+  produced_by: agent
+- text: where the sausage roll's hotter than the coffee
+  tone: comic
+  produced_by: agent
 ute:
-  - {text: "with a kelpie in the tray", tone: plain}
+- text: with a kelpie in the tray
+  tone: plain
+  produced_by: agent
 mozzie:
-  - {text: "big enough to carry off a small dog", tone: comic}
-  - {text: "whinin' like an angle grinder outside the bedroom window", tone: comic}
+- text: big enough to carry off a small dog
+  tone: comic
+  produced_by: agent
+- text: whinin' like an angle grinder outside the bedroom window
+  tone: comic
+  produced_by: agent
 dunny:
-  - {text: "out the back with a redback under the seat", tone: comic}
+- text: out the back with a redback under the seat
+  tone: comic
+  produced_by: agent
 wireless:
-  - {text: "crackling away in the corner", tone: plain}
+- text: crackling away in the corner
+  tone: plain
+  produced_by: agent
 quid:
-  - {text: "not a brass razoo to yer name", tone: plain}    # not "to rub together": that's two bob
+- text: not a brass razoo to yer name
+  tone: plain
+  produced_by: agent
 the-folding-stuff:
-  - {text: "pumpin' through its veins", tone: grim}
+- text: pumpin' through its veins
+  tone: grim
+  produced_by: agent
 dosh:
-  - {text: "burnin' a hole in their pocket", tone: comic}
+- text: burnin' a hole in their pocket
+  tone: comic
+  produced_by: agent
 skint:
-  - {text: "not two bob to rub together", tone: plain}
+- text: not two bob to rub together
+  tone: plain
+  produced_by: agent
 ticker:
-  - {text: "goin' like the clappers", tone: comic}
-  - {text: "goin' like a rabbit trapped behind the skirting", tone: comic}
-  - {text: "hammerin' like boots on corrugated iron", tone: comic}
+- text: goin' like the clappers
+  tone: comic
+  produced_by: agent
+- text: goin' like a rabbit trapped behind the skirting
+  tone: comic
+  produced_by: agent
+- text: hammerin' like boots on corrugated iron
+  tone: comic
+  produced_by: agent
 drongo:
-  - {text: "couldn't organise a piss-up in a brewery", tone: comic}
-  - {text: "with the brains of a fence post", tone: comic}
-  - {text: "with the brains of a fucking fence post", tone: comic}
-  - {text: "with the brains of a fucking wheelie bin", tone: comic}
+- text: couldn't organise a piss-up in a brewery
+  tone: comic
+  produced_by: agent
+- text: with the brains of a fence post
+  tone: comic
+  produced_by: agent
+- text: with the brains of a fucking fence post
+  tone: comic
+  produced_by: agent
+- text: with the brains of a fucking wheelie bin
+  tone: comic
+  produced_by: agent
 galah:
-  - {text: "squawkin' its head off", tone: comic}
-  - {text: "couldn't organise a fucking chook raffle", tone: comic}
+- text: squawkin' its head off
+  tone: comic
+  produced_by: agent
+- text: couldn't organise a fucking chook raffle
+  tone: comic
+  produced_by: agent
 bludger:
-  - {text: "never done a day's yakka in their life", tone: comic}
+- text: never done a day's yakka in their life
+  tone: comic
+  produced_by: agent
 roo:
-  - {text: "starin' down the headlights", tone: grim}
+- text: starin' down the headlights
+  tone: grim
+  produced_by: agent
 footy:
-  - {text: "with the whole town down at the oval", tone: plain}
+- text: with the whole town down at the oval
+  tone: plain
+  produced_by: agent
 bucketing-down:
-  - {text: "like a cow pissin' on a flat rock", tone: comic}
+- text: like a cow pissin' on a flat rock
+  tone: comic
+  produced_by: agent
 like-a-stunned-mullet:
-  - {text: "mouth open, not a thought in its head", tone: comic}
+- text: mouth open, not a thought in its head
+  tone: comic
+  produced_by: agent
 hard-yakka:
-  - {text: "sun on yer neck and blisters on yer hands", tone: plain}
-  - {text: "goin' at it like a bloke startin' a mower that owes him money", tone: comic}
-  - {text: "goin' at it like an apprentice doin' up a sump plug", tone: comic}
+- text: sun on yer neck and blisters on yer hands
+  tone: plain
+  produced_by: agent
+- text: goin' at it like a bloke startin' a mower that owes him money
+  tone: comic
+  produced_by: agent
+- text: goin' at it like an apprentice doin' up a sump plug
+  tone: comic
+  produced_by: agent
 stoush-war:
-  - {text: "fists flyin' and nobody backin' down", tone: plain}
-  - {text: "with the young blokes comin' home in boxes", tone: grim}
+- text: fists flyin' and nobody backin' down
+  tone: plain
+  produced_by: agent
+- text: with the young blokes comin' home in boxes
+  tone: grim
+  produced_by: agent
 the-joint:
-  - {text: "like they owned the place", tone: comic}
-
-# X-post harvest, 2026-10-17, and curated extrapolations. These are creative images,
-# not claims of established sayings; decisions: research/vocabulary-2026-10-17/DECISIONS.md.
+- text: like they owned the place
+  tone: comic
+  produced_by: agent
 ropeable:
-  - {text: "like a chippy who's found the good chisel bein' used to stir paint", tone: comic}
-  - {text: "like a concreter with a boot full of wet cement", tone: comic}
+- text: like a chippy who's found the good chisel bein' used to stir paint
+  tone: comic
+  produced_by: agent
+- text: like a concreter with a boot full of wet cement
+  tone: comic
+  produced_by: agent
 spitting-chips:
-  - {text: "like a brickie who's dropped the pie face-down", tone: comic}
-  - {text: "like a roofer who's put a nail through a thong", tone: comic}
+- text: like a brickie who's dropped the pie face-down
+  tone: comic
+  produced_by: agent
+- text: like a roofer who's put a nail through a thong
+  tone: comic
+  produced_by: agent
 a-chippy:
-  - {text: "with a pencil behind each ear and neither one sharp", tone: comic}
+- text: with a pencil behind each ear and neither one sharp
+  tone: comic
+  produced_by: agent
 a-brickie:
-  - {text: "with mortar on the cuffs and a pie balanced on the scaffold", tone: plain}
+- text: with mortar on the cuffs and a pie balanced on the scaffold
+  tone: plain
+  produced_by: agent
 tradie:
-  - {text: "with more tools in the ute than room for the driver", tone: comic}
-
-# Unharnessed reference-persona harvest; invented images remain optional riffs.
+- text: with more tools in the ute than room for the driver
+  tone: comic
+  produced_by: agent
 whinge:
-  - {text: "like a loose sheet of tin in the wind", tone: comic}
-  - {text: "like a loose gate in a gale", tone: comic}
+- text: like a loose sheet of tin in the wind
+  tone: comic
+  produced_by: agent
+- text: like a loose gate in a gale
+  tone: comic
+  produced_by: agent
 knackered:
-  - {text: "eyelids heavy as wet blankets", tone: plain}
+- text: eyelids heavy as wet blankets
+  tone: plain
+  produced_by: agent
 cactus:
-  - {text: "like a flat-pack in a cyclone", tone: comic}
+- text: like a flat-pack in a cyclone
+  tone: comic
+  produced_by: agent
 skite:
-  - {text: "cocky as a rooster on a new fence", tone: comic}
+- text: cocky as a rooster on a new fence
+  tone: comic
+  produced_by: agent
 gobsmacked:
-  - {text: "eyes as wide as dinner plates", tone: comic}
+- text: eyes as wide as dinner plates
+  tone: comic
+  produced_by: agent
 cranky:
-  - {text: "with a temper that turns like milk in the sun", tone: comic}
+- text: with a temper that turns like milk in the sun
+  tone: comic
+  produced_by: agent

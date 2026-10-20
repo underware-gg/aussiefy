@@ -5,19 +5,27 @@
 # Changelog
 
 Each release is one squashed commit on `main`, tagged `vX.Y.Z` (semver\), made by `scripts/promote.py`.
-Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py prepare major|minor|patch` dates it.
+Mate, add changes under [Unreleased] as they land; `python scripts/promote.py prepare major|minor|patch` dates it.
 
 ## [Unreleased]
 
+- Separate term evidence, origin, Australian use'n modern misreadin' from manual entry gates.
+  Migrate citations to structured records, add provisional attestation scorin' with live testimony replacement,
+  and use the continuous score'n a general\-English weight in selection. Re\-review the old foreign/archaic
+  flags'n minimum wording levels; label existin' agent\-produced riffs and contextual imagery honestly.
+  Keep changes contract version 2 until the coordinated community\-dictionary contract slice.
+- Recognise agreement consistently across straight'n curly dialogue quotes without treatin' a quoted
+  word as a new clause. Mind ya, require explicit social\-event wording for party/function substitutions.
+
 - Add an offline trainin'\-label audit'n reject contradictory or self\-negative pairs before model
   construction. Generate wrong\-sense anchors through the canonical exclusion parser'n respect a
-  same\-concept longer trigger's ownership. Mate, keep the recipe, model weights'n reference gates unchanged.
+  same\-concept longer trigger's ownership. Anyway, keep the recipe, model weights'n reference gates unchanged.
 - Recognise object\-bearing annoyance predicates separately from illness'n fatigue. Preserve the
   source when a target can't retain its object, and share the distinction across model/lexical lookup,
   automatic translation, plans'n editor alternatives.
 
 - Compose reviewed strong\-adjective modifiers'n let certified targets express a source modifier's
-  degree without duplicatin' it. Anyway, share qualifier ownership across translation'n editor alternatives;
+  degree without duplicatin' it. Mate, share qualifier ownership across translation'n editor alternatives;
   retain exact raw modifier spellin' when it remains. Preserve certified lexical grade inside relational
   predicates'n flag bounded local threshold\-grade changes during verification.
 
@@ -48,7 +56,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   explicitly overridden. Keep ordinary indefinite wording available. Share mapping effects through
   selection, lookup, plans, alternatives'n bounded original\-aware verification; retain unrelated numbers.
 - Apply the remainin' clear source\-audit sense repairs: distinguish urination, categorical impossibility,
-  completion, tasting, noisy crying/sulking, explicit noun subtypes'n emphatic refusals. Stone the crows, preserve antenna
+  completion, tasting, noisy crying/sulking, explicit noun subtypes'n emphatic refusals. Struth, preserve antenna
   qualifiers/plurals'n walking destinations, require progressive objects, and retain discovery\-only
   vocabulary where source wording can't establish a safe automatic readin'. Well, correct eight source/usage
   records'n merge 627 reviewed source pairs from batches 7–11 without changin' existin' term gates.
@@ -79,7 +87,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   reviewed servin'/container senses while preserving queries, ranking rules'n required status.
 
 - Add explicit versioned dictionary overlays through existin' `--dict` files: add concepts/entries or patch
-  existin' records in deterministic order, retaining the normal engine'n dial checks. Jeez Louise, preserve raw fields,
+  existin' records in deterministic order, retaining the normal engine'n dial checks. Fair dinkum, preserve raw fields,
   replace named lists/maps rather than append, allow clearing inherited source references, reject malformed
   or shadowed invalid operations, and report correction origins through validate/show'n dictionary metadata.
   Keep behaviour settings separate from vocabulary corrections; tighten canonical concept'n text/boolean
@@ -92,7 +100,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   Merge the 237 source proposals from batches 5 and 6 alongside the 239 from batches 3 and 4.
 
 - Preserve explicit listener possessives through shared binding'n form compatibility, and require a
-  listener for “bend someone's ear”. Struth, add standard bend/bent morphology instead of inventin' a listener
+  listener for “bend someone's ear”. Tell ya what, add standard bend/bent morphology instead of inventin' a listener
   or producing “bended”.
 - Apply 239 reviewed source records from the next two 120\-entry audit batches, retaining historical,
   component'n source\-chain evidence limits rather than certifying every trigger or full construction.
@@ -116,7 +124,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   meaning lookup; retain explicit term discovery with effect annotations. Lint, verify'n yarn submission
   check recognised added opinion terms while permittin' original occurrences.
 - Preserve roles'n meanings: brave bastards describes brave bastards, not diggers generally;
-  poor buggers expresses sympathy for unfortunate people, not death. Tell ya what, add opinion metadata to the living's
+  poor buggers expresses sympathy for unfortunate people, not death. Stone the flamin' crows, add opinion metadata to the living's
   "lucky buggers" expression rather than silently adding good fortune at every embellishment setting.
 
 - Complete source cross\-reference research for all 1,254 original entries. Batches 3–11 add 1,034 records
@@ -126,7 +134,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py 
   accommodation from broader meanings. Preserve “tell them” references'n non\-monetary wasted effort;
   merge 110 reviewed source URLs across 85 entry records, retaining the evidence limits in research ledgers.
 - Add Goon of Fortune and Hills Hoist as specific cultural references, plus two conditional appetite phrases
-  with direct mappings'n writer suggestions. Now, retain other tense and question constructions as written.
+  with direct mappings'n writer suggestions. Retain other tense and question constructions as written.
 - Distinguish bounded temporal'n prepositional adjuncts from unanchored objects, so “try every day” and
   “try at home” stay plain while real objects, temporal subjects'n anchored arguments remain supported.
 

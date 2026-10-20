@@ -134,22 +134,22 @@ def test_clinical_precision_is_an_explicit_document_setting(reviewed, domain):
     assert protected.text == source
 
 
-def test_gated_historical_low_spirits_is_available_only_when_unlocked(reviewed):
+def test_historical_low_spirits_obeys_register_without_duplicate_flag(reviewed):
     source = 'The low spirits passed.'
-    blocked = reviewed.translate(source, level=5, vulgarity=0, registers=['current','dated','archaic'],
+    blocked = reviewed.translate(source, level=5, vulgarity=0, registers=['current','dated'],
                                  embedder='none', embellishment=0)
     assert 'the-joes' not in eligible(blocked)
     assert 'the-joes' in eligible(render(reviewed, source))
 
 
 def test_reviewed_sidecar_sources_reach_cards_without_becoming_whole_construction_claims(dictionary):
-    assert 'https://downloads.bbc.co.uk/learningenglish/features/tews/170606_tews_not_a_sausage.pdf' in dictionary.entries['not-a-sausage'].sources
+    assert 'https://downloads.bbc.co.uk/learningenglish/features/tews/170606_tews_not_a_sausage.pdf' in [s.url for s in dictionary.entries['not-a-sausage'].sources]
     for eid in ['fruit-and-veg-section', 'fruit-and-veg-aisle', 'fruit-and-veg-department']:
         entry = dictionary.entries[eid]
-        assert entry.sources == ('https://dictionary.cambridge.org/dictionary/english/veg',)
+        assert tuple(s.url for s in entry.sources) == ('https://dictionary.cambridge.org/dictionary/english/veg',)
         assert 'compositional' in entry.notes
     sidecar = yaml.safe_load((Path(__file__).resolve().parents[2] / 'aussiefy/data/sources.yaml').read_text())
-    assert all(len(urls) == len(set(urls)) for urls in sidecar.values())
+    assert all(len(urls) == len({s["url"] for s in urls}) for urls in sidecar.values())
 
 
 @pytest.mark.parametrize('source', [

@@ -10,7 +10,8 @@ from .dialect import ENGLISHES
 from .errors import UserError
 from .model import Dictionary, LevelProfile, SwearProfile
 from .profile import ProfileOverrides, profile_config
-from .schema import FLAGS, REGISTERS
+from .schema import REGISTERS, UNLOCKS
+from .evidence import TermMetadata
 
 
 # The dials, by number or by name. Names are aliases: everything inside works in numbers. The level is how thick
@@ -174,7 +175,7 @@ class Policy:
             if value is not None:
                 object.__setattr__(self, name, tuple(value))
         _closed_set("register", self.registers or (), REGISTERS)
-        _closed_set("unlock flag", self.unlock, (*FLAGS, "all"))
+        _closed_set("unlock flag", self.unlock, UNLOCKS)
 
     @classmethod
     def from_mapping(cls, raw: dict[str, Any], **overrides) -> "Policy":
@@ -208,10 +209,18 @@ class Effective:
     unlock: frozenset[str]
     warnings: tuple[str, ...] = ()
     swearing: SwearProfile = SwearProfile()   # how often swearing comes at this vulgarity
+    general_pick_factor: float = 0.5
+    attestation_pick_bonus: float = 0.5
+    attestation_max_score: float = 10.0
 
     def envelope(self) -> dict[str, Any]:
         return {**envelope(self.level, self.vulgarity, self.warnings),
                 "profile_config": profile_config(self.profile, self.swearing)}
+
+    def metadata_weight(self, term: TermMetadata) -> float:
+        evidence = 1.0 + self.attestation_pick_bonus * term.attestation.score / self.attestation_max_score
+        wording = self.general_pick_factor if term.reads_as == "general" else 1.0
+        return evidence * wording
 
 
 def resolve(policy: Policy, dictionary: Dictionary) -> Effective:
@@ -225,7 +234,10 @@ def resolve(policy: Policy, dictionary: Dictionary) -> Effective:
         profile, swearing = policy.document_config.profile.apply(profile, swearing)
     return Effective(policy.level, profile, vulgarity, tuple(registers), tuple(policy.regions),
                      frozenset(policy.unlock), _warnings(policy, dictionary),
-                     swearing=swearing)
+                     swearing=swearing,
+                     general_pick_factor=dictionary.evidence_weights.general_pick_factor,
+                     attestation_pick_bonus=dictionary.evidence_weights.attestation_pick_bonus,
+                     attestation_max_score=5 * dictionary.evidence_weights.bar_width)
 
 
 def _warnings(policy: Policy, dictionary: Dictionary) -> tuple[str, ...]:

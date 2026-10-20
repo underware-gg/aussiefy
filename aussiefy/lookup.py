@@ -205,7 +205,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     parsed_concepts = {cid for eid in slotted for cid in d.entries[eid].concept}
     negative_anchors = {w[:-4] if w.endswith("less") else w for w in content_words(q)}
     for e in d.idioms + d.garnish:
-        if dial_rejection(e, eff):
+        if dial_rejection(e, eff, include_gated=include_gated):
             continue
         forms = [form_key(f) for f in e.all_forms]
         if e.id in slotted or qn in forms or any(qn in f.split() for f in forms):

@@ -35,7 +35,7 @@ At level 5 the engine goes all out:
 
 ```
 $ aussiefy "Good grief, are you crazy? You're overreacting, you're stupid and all talk, and I'm extremely busy cleaning up after you." -l 5 -s 1
-Strewth, do ya 'ave kangaroos loose in yer bloody top paddock? Oi, yer carryin' on like a pork chop, yer thick as two short planks and a big-noter, and I'm flat out cleaning up after you.
+Strewth, do ya 'ave kangaroos loose in yer bloody top paddock? Stone the crows, yer carryin' on like a pork chop, yer thick as two short planks and a big-noter, and I'm flat out cleaning up after you.
 ```
 
 ## Choose how Aussie, how rude, and how much liberty
@@ -91,10 +91,12 @@ What the explain report contains is described in [explain.md](../functional/expl
 ```sh
 aussiefy "..." --region qld                     # prefer regional words (togs, not cozzie)
 aussiefy "..." --registers current,dated        # allow dated slang as well as current
-aussiefy "..." --unlock not_aussie,fabricated   # allow entries held back for those flags
+aussiefy "..." --unlock misreadable            # allow real entry senses prone to modern misreading
 ```
 
-Gated entries are held back for a reason, such as doubtful attestation; `--unlock all` allows every one.
+`--unlock all` lifts manual entry gates and permits misreadable senses. Foreign-sounding terms, uncommon
+Australian usage and doubtful definitions remain held back; omitted entries never appear. Evidence alone
+does not exclude a term: unverified and labelled bulldust material can remain eligible.
 
 ## Look up a word or check a draft
 

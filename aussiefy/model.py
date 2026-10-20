@@ -14,6 +14,7 @@ from . import morph
 from .dialect import DialectTable
 from .matcher import Pattern, PatternIndex
 from .schema import Concept, Entry, Imagery
+from .evidence import EvidenceWeights
 from .text import COMMON_STARTERS, MASK_WORD_RE, normalise_word, spoken_word
 from .terms import fold, strip_markup
 
@@ -128,6 +129,7 @@ class Dictionary:
     name_aliases: dict[str, tuple[str, ...]] = field(default_factory=dict)
     imagery: tuple[Imagery, ...] = ()
     overlay_changes: tuple[dict[str, Any], ...] = ()
+    evidence_weights: EvidenceWeights | None = None
 
     def swear_strength(self, word: str) -> int:
         """How strong a swear a word is (0 for none), dropped g and plurals read as the listed word."""
@@ -271,4 +273,5 @@ class Dictionary:
     @cached_property
     def gate_flags(self) -> frozenset[str]:
         """Every flag a gated entry carries: what unlocking can act on."""
-        return frozenset(f for e in self.entries.values() if e.status == "gate" for f in e.flags)
+        return frozenset(f for e in self.entries.values() for f in
+                         ((*e.flags, "misreadable") if e.misreadable else e.flags))

@@ -48,7 +48,7 @@ All options are in the [CLI reference](cli.md). State lives in `$AUSSIEFY_HOME` 
 
 ## Current measurement
 
-Well, bundled model 1.3.0 remains in use. Its full\-data fit'n exported package reader passed all 33 required
+So anyway, bundled model 1.3.0 remains in use. Its full\-data fit'n exported package reader passed all 33 required
 raw\-model checks in the [2026-10-19 retrain](../../research/semantic-model-2026-10-19/README.md), and it
 still passes the current frozen gate. Its dictionary fingerprint is stale after later corrections.
 
@@ -56,7 +56,7 @@ The [2026-10-20 trial](../../research/semantic-followup-2026-10-20/README.md) us
 full\-data fits of the unchanged pinned recipe. Evaluation passed 29/33; the full\-data candidate passed
 30/33, missing `girl`, `feeling really down` and `a good mate of mine`. Anyway, the strict release refused export and
 that candidate wasn't adopted. A separate diagnostic package reader reproduced every full\-gate outcome;
-its weights remain outside the repository. Jeez, historical reports, required checks'n cutoffs are unchanged.
+its weights remain outside the repository. Crikey, historical reports, required checks'n cutoffs are unchanged.
 
 Current lookup applies bounded source\-meaning checks before offering lexical or model suggestions; see
 [the toolkit](toolkit.md). Well, the 49\-query comparison holds that runtime'n dictionary constant while

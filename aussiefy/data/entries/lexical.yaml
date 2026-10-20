@@ -16,6 +16,10 @@
   frame: np
   incoherence: 1
   gloss: The afternoon.
+  searched:
+    date: '2026-10-20'
+    outcome: found
+    note: ANDC headword and independent Wiktionary sense checked; no exhaustive search claim.
 - id: mate
   form: mate
   concept: [FRIEND]
@@ -648,7 +652,13 @@
   gloss: Quite a lot, considerably (it's a fair bit heavier; she travels a fair bit).
   notes: The adverb beside the second-pass round's noun (entries/secondpass.yaml), by hand since a round can't add
     a second entry with one form.
-  sources: [https://en.wiktionary.org/wiki/a_fair_bit]
+  sources:
+  - url: https://en.wiktionary.org/wiki/a_fair_bit
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: defo
   form: defo
   concept: [DEFINITELY]
@@ -673,7 +683,7 @@
   form: bush
   concept: [FOREST]
   frame: np
-  incoherence: 1
+  incoherence: 2
   plural: bush
   gloss: Wooded or uncleared country; anywhere outside town.
 
@@ -1059,8 +1069,9 @@
   concept: [HUGE]
   frame: adj
   intensity: 5
-  incoherence: 3
+  incoherence: 1
   gloss: Enormous.
+  reads_as: general
 - id: pokie
   form: pokie
   concept: [POKIES]
@@ -1143,8 +1154,9 @@
   form: loaded
   concept: [RICH]
   frame: predicate_adj
-  incoherence: 2
+  incoherence: 1
   gloss: Very rich.
+  reads_as: general
 - id: the-boss-cocky
   form: the boss cocky
   concept: [BOSS]

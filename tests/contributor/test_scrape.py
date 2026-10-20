@@ -11,10 +11,16 @@ from aussiefy.scrape.fetch import reference_only
 from aussiefy.scrape.normalise import Staged, merge_key, merge
 from aussiefy.scrape.parse import extract_phrases
 from aussiefy.scrape.review import plan_review
-from aussiefy.scrape.tag import SYSTEM, proposal_to_entry, tag_all
+from aussiefy.scrape.tag import SYSTEM, proposal_to_entry, staged_sources, tag_all
 
 FIX = Path(__file__).parents[1] / "fixtures"
 URL_A, URL_B = "https://example.test/a", "https://example.test/b"
+
+
+def test_staged_citations_do_not_bypass_contextual_validation():
+    with pytest.raises(SchemaError, match="scraped citation: malformed source URL"):
+        staged_sources(["https://[broken"])
+    assert staged_sources(["HTTPS://EXAMPLE.COM/term"])[0]["supports"] == []
 
 
 def parsed(name, url):
@@ -57,7 +63,7 @@ def test_merge_across_sources_and_dictionary(dictionary):
     lizard = staged["Flat out like a lizard drinking"]
     assert lizard.known_as == "flat-out-lizard" and lizard.variants == ["Flat out like a lizard drinkin'"]
     pig = staged["That'll do, pig"]
-    assert pig.known_as == "thatll-do-pig" and pig.known_status == "omit"
+    assert pig.known_as == "thatll-do-pig" and pig.known_status == "gate"
     assert len(busier.source_meanings) == 2
 
 
@@ -65,16 +71,17 @@ def proposal(**kw):
     base = {"form": "busier than a one-legged man in a bum-kicking contest", "variants": [], "concept": ["BUSY"],
             "new_concept": None, "frame": "predicate_adj", "intensity": 5, "vulgarity": 1, "incoherence": 5,
             "register": "current", "region": [], "replaces": ["incredibly busy@5"], "flags": [],
+            "reads_as": "australian", "australian_use": "common", "doubtful_definition": False, "misreadable": False,
             "gloss": "Rushed off one's feet.", "review_note": ""}
     return {**base, **kw}
 
 
 def test_proposal_flags_set_status(dictionary):
     item = merge(raw_phrases(), dictionary)[1]
-    raw, _ = proposal_to_entry(item, proposal(flags=["not_aussie"]), dictionary)
+    raw, _ = proposal_to_entry(item, proposal(flags=["slur"]), dictionary)
     assert raw["status"] == "omit"
-    raw, _ = proposal_to_entry(item, proposal(flags=["fabricated"]), dictionary)
-    assert raw["status"] == "gate"
+    raw, _ = proposal_to_entry(item, proposal(doubtful_definition=True), dictionary)
+    assert raw["status"] == "active" and raw["doubtful_definition"]
     raw, notes = proposal_to_entry(item, proposal(concept=["NOPE"], new_concept={
         "id": "RUSHED", "description": "x", "trigger": "rushed"}), dictionary)
     assert raw["status"] == "gate" and "untagged" in raw["flags"] and any("RUSHED" in n for n in notes)
@@ -91,7 +98,7 @@ def test_tag_review_apply_round_trip(data_copy):
     d = load_dictionary(data_dir=data)
     staged = [s for s in merge(raw_phrases(), d)]
     fresh = [s for s in staged if not s.known_as]
-    client = FakeClaude(*[json_reply(proposal()), *[json_reply(proposal(form=s.form, flags=["fabricated"]))
+    client = FakeClaude(*[json_reply(proposal()), *[json_reply(proposal(form=s.form, doubtful_definition=True))
                                                     for s in fresh[1:]]])
     tagged = tag_all(staged, d, client=client, log=lambda m: None)
     assert len(client.calls) == len(fresh) and client.calls[0]["model"] == "claude-opus-5-5"
@@ -100,17 +107,17 @@ def test_tag_review_apply_round_trip(data_copy):
     plan = plan_review(yaml.safe_load(yaml.safe_dump(tagged)), d, data)
     diff = plan.diff()
     assert "+- id: busier-than-a-one-legged-man" in diff
-    assert any(s.startswith("blocked (omitted): 'That'll do, pig' = thatll-do-pig") for s in plan.summary)
+    assert any(s.startswith("already present (gate): 'That'll do, pig' = thatll-do-pig") for s in plan.summary)
     assert any(s.startswith("already present (active): 'Flat out like a lizard drinking'") for s in plan.summary)
     overlay = yaml.safe_load(plan.new_sources)
-    assert {URL_A, URL_B} <= set(overlay["flat-out-lizard"])
+    assert {URL_A, URL_B} <= {s["url"] for s in overlay["flat-out-lizard"]}
     plan.apply()
 
     d2 = load_dictionary(data_dir=data)
     new = d2.entries["busier-than-a-one-legged-man"]
-    assert new.status == "active" and new.sources == (URL_A, URL_B)
-    assert d2.entries["flat-out-lizard"].sources == tuple(dict.fromkeys(
-        (*d.entries["flat-out-lizard"].sources, URL_A, URL_B)))
+    assert new.status == "active" and tuple(s.url for s in new.sources) == (URL_A, URL_B)
+    assert tuple(s.url for s in d2.entries["flat-out-lizard"].sources) == tuple(dict.fromkeys(
+        (*(s.url for s in d.entries["flat-out-lizard"].sources), URL_A, URL_B)))
     assert (data / "entries" / "idioms.yaml").read_text() == (DATA_DIR / "entries" / "idioms.yaml").read_text()
 
     # a re-scrape + re-tag never resurrects or overrides; review is idempotent
@@ -189,7 +196,7 @@ def test_tagging_cache_tracks_model_and_item_context(dictionary):
     for items, model in (([BUSIER], "different-model"), ([changed], claude.DEFAULT_MODEL)):
         client = FakeClaude(json_reply(proposal()))
         result = tag_all(items, dictionary, client=client, model=model, log=lambda m: None)
-        assert len(client.calls) == 1 and result[0]["sources"] == items[0].sources
+        assert len(client.calls) == 1 and [s["url"] for s in result[0]["sources"]] == items[0].sources
 
 
 # --- the reference-only gate ---------------------------------------------------------------------------------------

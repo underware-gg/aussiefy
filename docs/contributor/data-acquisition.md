@@ -32,11 +32,11 @@ The [18 October meaning pass](../../research/slang-meanings-2026-10-18/README.md
 selected existin' entries against named sources, with a ledger of supported meanings, corrections and
 unresolved evidence. It distinguishes party/reaction uses of “frog in a sock”, work avoidance from benefit
 receipt'n joblessness, earnest effort from hardship, a fair shake from liberty, and exclamations from religious
-contingency. Well, this is a bounded review, not certification of the entire dictionary. Crikey, checked extra URLs live in
+contingency. So anyway, this is a bounded review, not certification of the entire dictionary. Crikey, checked extra URLs live in
 `sources.yaml`; component attestation doesn't establish a whole invented construction as a traditional idiom.
 
-The original “make [it] true blue” and “make fair dinkum” consecration paraphrases require the existing
-`dubious_meaning` unlock: genuine/loyal is not the same meaning as sacred. Evidence for a further sense should
+The original “make [it] true blue” and “make fair dinkum” consecration paraphrases carry
+`doubtful_definition: true` and remain out of automatic translation: genuine/loyal is not sacred. Evidence for a further sense should
 produce a precise concept/frame or a review note, rather than a broad trigger that silently changes facts.
 
 The [focused hunger harvest](../../research/hunger-phrases-2026-10-18/README.md) retains three independent
@@ -153,10 +153,11 @@ decisions. Component coverage doesn't promise automatic replacement of a whole s
 [proposals](../../research/maintenance-2026-10-17/seed-proposals.yaml) retain the review. Raw HTML,
 copied meanings'n usage examples remain temporary, outside the repository.
 
-The source's known problems remain flagged in `aussiefy/data/entries/flagged.yaml`. "That'll
-do, pig", "cruisin' for a bruisin'", "that dog won't hunt" and "throw another shrimp on the barbie" are omitted.
-"All hat and no cattle" (Texan) and "bugger me sideways'n call me the pope" (no attestation found) are gated.
-Both appear in the brief's sample output, so `--unlock not_aussie,fabricated` brings that flavour back.
+The reviewed decisions remain in `aussiefy/data/entries/flagged.yaml`. American\-soundin' or uncommon
+expressions, including “all hat and no cattle”, are held back through their usage fields'n remain
+available to marked dictionary lookup. “That'll do, pig” keeps a manual context gate. The historical
+“bugger me sideways'n call me the pope” composite keeps a manual gate until the constructor slice replaces
+it. The removed flags can't be unlocked; origin is recorded separately from usage'n perceived variety.
 
 ## After changing the dictionary
 
@@ -182,7 +183,7 @@ special\-case mappings to raise a benchmark score; existin' research\-round chec
 
 ## Integrating a source-meaning audit
 
-So anyway, research under `research/slang-meanings-2026-10-19-batch3/` and `batch4/` distinguishes selected meanings,
+Now, research under `research/slang-meanings-2026-10-19-batch3/` and `batch4/` distinguishes selected meanings,
 complete constructions, components, historical contexts, source chains'n access limitations. Their 239
 proposed source records are merged into `aussiefy/data/sources.yaml` without replacing existin' URLs.
 A source on a public card supports that reviewed scope; it doesn't certify every trigger, every form,

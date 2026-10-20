@@ -11,6 +11,7 @@ from .context import following_context, positive_context
 from .detect import applicable_concepts
 from .terms import form_key
 from .text import tokenize
+from .evidence import metadata_dict, metadata_rejections
 
 
 @dataclass(frozen=True)
@@ -29,7 +30,7 @@ class ImageOffer:
                 "association": self.association, "subject": i.subject, "exaggeration": i.exaggeration,
                 "frames": list(i.frames),
                 "unless_after": list(i.unless_after),
-                "origin": i.origin, "usage": i.usage,
+                **metadata_dict(i, derived=True), "usage": i.usage,
                 "automatic": i.form == "suffix" and self.association == "direct"}
 
 
@@ -43,7 +44,8 @@ def image_association(image, concepts, setting):
 
 def permitted(image, level, cap, setting):
     return (setting.takes("riff") and setting.contextual_riffs and image.level <= level
-            and image.vulgarity <= cap and image.exaggeration <= setting.riff_exaggeration)
+            and image.vulgarity <= cap and image.exaggeration <= setting.riff_exaggeration
+            and not metadata_rejections(image))
 
 
 def excluded_complement(image, tokens, end):

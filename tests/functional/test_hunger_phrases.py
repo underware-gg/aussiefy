@@ -56,9 +56,9 @@ def test_elaborate_hunger_images_remain_rewrites_with_honest_origins(translator)
     assert HUNGER_IMAGES <= offered.keys()
     assert all(not offered[i]['automatic'] and offered[i]['form'] == 'rewrite' for i in HUNGER_IMAGES)
     assert offered['stomach-throat-cut']['text'] == "her stomach thinks her throat's been cut"
-    assert offered['stomach-throat-cut']['origin'] == 'familiar'
+    assert offered['stomach-throat-cut']['reads_as'] == 'general'
     assert offered['could-go-a-decent-feed']['exaggeration'] == 0
-    assert all(offered[i]['origin'] == 'original' for i in HUNGER_IMAGES if i.startswith('hungry-'))
+    assert all(offered[i]['evidence'] == 'bulldust' for i in HUNGER_IMAGES if i.startswith('hungry-'))
     assert result['draft'] == 'She is hungry.'
 
 

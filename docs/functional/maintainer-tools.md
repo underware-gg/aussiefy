@@ -41,11 +41,12 @@ dictionary.
   in "stick out like a country dunny", "goog" in "full as a goog", "frog and toad" in "hit the frog and toad".
   It stages them with the parent idiom as context, so `tag` can infer what each one means on its own.
 - **`dev harvest ORIGINAL REWRITE`** mines an Aussified rewrite, from an agent, the `--rewrite` cache or a
-  person. Jeez Louise, a word\-level diff pairs each changed span with its plain\-English counterpart \("arrived" → "rocked
+  person. Listen, a word\-level diff pairs each changed span with its plain\-English counterpart \("arrived" → "rocked
   up"\). It skips anything the dictionary already has, including inflected forms, and stages the rest.
 - **`dev tag`** asks Claude to propose concept, frame, intensity, vulgarity, `replaces`, flags and a gloss,
-  using structured JSON output that is validated against the schema. Flags set the status: `slur` and
-  `not_aussie` become `omit`, while `fabricated`, `dubious_meaning` and `archaic` become `gate`. A phrase
+  using structured JSON output that is validated against the schema. `slur` forces `omit`; perceived
+  variety, Australian usage, definition doubt and modern misreading get separate fields. Currency goes in
+  `register`. Scraped citations have structured sources with empty support until reviewed. A phrase
   with no known concept is gated as `untagged`, and its proposed concept goes in the review notes for a
   human to add to `aussiefy/data/concepts.yaml`. Source meanings are given to the model as context only. A
   gloss that is too similar to a source description is blanked and flagged for a rewrite. Refused or
@@ -62,13 +63,18 @@ dictionary.
   `round.yaml`. Now, it plans against the dictionary as it was before the round, prints what it would add'n what
   it drops'n why \(a form already present, a trigger that's itself slang or copies a reference query\), and
   with `--write` validates the result in a scratch copy before touching the dictionary.
+  Archived proposals are adapted after the round's explicit entry fixes: URL strings become unreviewed
+  citations, pulled the pin flags become usage, meaning or currency fields, and non\-URL source annotations stay
+  in notes. Stone the flamin' crows, a former `fabricated` flag requires manual review without claiming known coinage. This leaves
+  the archives intact'n doesn't relax the current dictionary schema; a gate alone never implies a
+  doubtful definition.
 
 
 ## Corpus acquisition
 
 `aussiefy dev ingest tests/corpus/everyday/interfold.yaml` reads the pinned 15\-page
 [Interfold manifest](../../tests/corpus/everyday/interfold.yaml) and saves missing MDX sources verbatim as
-`.mdx` files in `tests/corpus/everyday/interfold/`, with pinned LGPL attribution. Stone the crows, it needs the `scrape` extra. `--force` refreshes
+`.mdx` files in `tests/corpus/everyday/interfold/`, with pinned LGPL attribution. Jeez, it needs the `scrape` extra. `--force` refreshes
 existin' pages; `--ref REF` selects another upstream ref for a local experiment. Mind ya, it uses the shared home
 cache'n user agent. Other remote\-only manifests write to ignored local storage.
 Exit status is 0 for success, 1 for page fetch/write failures \(other pages continue\), or 2 for an invalid

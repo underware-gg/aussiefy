@@ -6,7 +6,8 @@ from copy import deepcopy
 from dataclasses import dataclass, field
 from typing import Any
 
-from .schema import CONCEPT_KEYS, ENTRY_KEYS, SchemaError, _tuple, parse_concept, parse_entry, validate_entry_id
+from .schema import CONCEPT_KEYS, ENTRY_KEYS, SchemaError, parse_concept, parse_entry, validate_entry_id
+from .evidence import parse_sources
 
 
 @dataclass
@@ -15,7 +16,7 @@ class Vocabulary:
     entries: dict[str, dict] = field(default_factory=dict)
     origins: dict[str, str] = field(default_factory=dict)
     changes: list[dict[str, Any]] = field(default_factory=list)
-    sources: dict[str, list[str]] = field(default_factory=dict)
+    sources: dict[str, list[dict]] = field(default_factory=dict)
 
     def add_entries(self, records: list, origin: str, errors: list[str], *, validate: bool = False) -> None:
         for raw in records:
@@ -27,9 +28,9 @@ class Vocabulary:
                     parse_entry(raw, origin)
                 record = deepcopy(raw)
                 if eid in self.sources:
-                    inline = _tuple(record.get("sources"), "sources", eid)
-                    inherited = _tuple(self.sources[eid], "sources.yaml", eid)
-                    record["sources"] = list(dict.fromkeys(inline + inherited))
+                    inline = parse_sources(record.get("sources"), eid)
+                    inherited = parse_sources(self.sources[eid], f"sources.yaml {eid}")
+                    record["sources"] = [s.to_dict() for s in dict.fromkeys(inline + inherited)]
                 self.entries[eid] = record
                 self.origins[eid] = origin
             except SchemaError as exc:

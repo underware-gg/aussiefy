@@ -6,44 +6,73 @@
   form: that'll do, pig
   concept: [AGREE]
   frame: interjection
-  status: omit
-  flags: [not_aussie]
-  sources: ["https://learnconversations.com/funny-aussie-old-sayings-and-phrases/"]
-  notes: From the Australian-US film Babe; praise or satisfactory completion. Existing omission policy is unchanged.
+  status: gate
+  sources:
+  - url: https://learnconversations.com/funny-aussie-old-sayings-and-phrases/
+    kind: media
+    publisher: learnconversations.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  notes: From the Australian-US film Babe; praise or satisfactory completion. Held behind a manual context gate; not a free-standing synonym in ordinary prose.
   gloss: Well done (film quotation).
+  origin: australian
+  reads_as: australian
+  australian_use: common
 - id: cruisin-for-a-bruisin
   form: cruisin' for a bruisin'
   concept: [ANGRY]
   frame: predicate_adj
-  status: omit
-  flags: [not_aussie]
-  sources: ["https://learnconversations.com/funny-aussie-old-sayings-and-phrases/"]
+  status: active
+  sources:
+  - url: https://learnconversations.com/funny-aussie-old-sayings-and-phrases/
+    kind: media
+    publisher: learnconversations.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
   notes: American slang.
   gloss: Asking for trouble.
+  origin: american
+  reads_as: american
+  australian_use: uncommon
 - id: that-dog-wont-hunt
   form: that dog won't hunt
   concept: [DISAGREE]
   frame: interjection
-  status: omit
-  flags: [not_aussie]
-  sources: ["https://learnconversations.com/funny-aussie-old-sayings-and-phrases/"]
+  status: active
+  sources:
+  - url: https://learnconversations.com/funny-aussie-old-sayings-and-phrases/
+    kind: media
+    publisher: learnconversations.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
   notes: US Southern idiom.
   gloss: That argument doesn't work.
+  origin: american
+  reads_as: american
+  australian_use: uncommon
 - id: all-hat-and-no-cattle
   form: all hat and no cattle
   concept: [ALL_TALK]
   frame: predicate_adj
   intensity: 3
   incoherence: 4
-  status: gate
-  flags: [not_aussie]
-  notes: Texan in origin. It appears in the project brief's sample output; unlock with --unlock not_aussie.
+  status: active
+  notes: Texan in origin. It appears in the project brief's sample output; held back because it reads as American and is uncommon here.
   gloss: All show, no substance.
+  origin: american
+  reads_as: american
+  australian_use: uncommon
 - id: shrimp-on-the-barbie
   form: throw another shrimp on the barbie
   concept: [GREETING]
   frame: interjection
-  status: omit
-  flags: [not_aussie, dubious_meaning]
+  status: active
   notes: The stored wording paraphrases a 1980s Australian tourism advertisement aimed at Americans. It is not a general greeting.
   gloss: A familiar paraphrase of an Australian tourism advertising line.
+  origin: american
+  reads_as: american
+  australian_use: uncommon
+  doubtful_definition: true

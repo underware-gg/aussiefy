@@ -9,7 +9,7 @@
  },
  "response": {
   "version": 2,
-  "text": "I'm exhausted and the dunny is broken. Thanks for brekky, my mate. You're buggered and starvin', and your car is bung, ay. Well, we let a toddler win the game.",
+  "text": "I'm exhausted and the dunny is broken. Thanks for brekky, my mate. You're buggered and starvin', and your car is bung, mate. Well, we let a toddler win the game.",
   "changes": [
    {
     "id": "substitution:22-28",
@@ -162,7 +162,7 @@
     "alternatives": [
      {
       "entry_id": "buggered",
-      "weight": 0.1454,
+      "weight": 0.1541,
       "rendered": "buggered",
       "out_span": [
        74,
@@ -182,7 +182,7 @@
      },
      {
       "entry_id": "knackered",
-      "weight": 0.1454,
+      "weight": 0.1541,
       "rendered": "knackered",
       "out_span": [
        74,
@@ -193,7 +193,7 @@
      },
      {
       "entry_id": "out-on-poss-feet",
-      "weight": 0.1027,
+      "weight": 0.1088,
       "rendered": "out on your feet",
       "out_span": [
        74,
@@ -204,7 +204,7 @@
      },
      {
       "entry_id": "rooted",
-      "weight": 0.097,
+      "weight": 0.1027,
       "rendered": "rooted",
       "out_span": [
        74,
@@ -215,7 +215,7 @@
      },
      {
       "entry_id": "stuffed",
-      "weight": 0.1454,
+      "weight": 0.1541,
       "rendered": "stuffed",
       "out_span": [
        74,
@@ -226,7 +226,7 @@
      },
      {
       "entry_id": "zonked",
-      "weight": 0.364,
+      "weight": 0.3263,
       "rendered": "zonked",
       "out_span": [
        74,
@@ -278,7 +278,7 @@
     "alternatives": [
      {
       "entry_id": "starvin",
-      "weight": 0.361,
+      "weight": 0.3696,
       "rendered": "starvin'",
       "out_span": [
        87,
@@ -289,7 +289,7 @@
      },
      {
       "entry_id": "hungry-enough-horse-jockey",
-      "weight": 0.278,
+      "weight": 0.2609,
       "rendered": "hungry enough to eat a horse and chase the jockey",
       "out_span": [
        87,
@@ -300,7 +300,7 @@
      },
      {
       "entry_id": "peckish",
-      "weight": 0.361,
+      "weight": 0.3696,
       "rendered": "peckish",
       "out_span": [
        87,
@@ -352,7 +352,7 @@
     "alternatives": [
      {
       "entry_id": "bung-broken",
-      "weight": 0.4463,
+      "weight": 0.4249,
       "rendered": "bung",
       "out_span": [
        113,
@@ -363,7 +363,7 @@
      },
      {
       "entry_id": "buggered",
-      "weight": 0.0386,
+      "weight": 0.0401,
       "rendered": "buggered",
       "out_span": [
        113,
@@ -383,7 +383,7 @@
      },
      {
       "entry_id": "cactus",
-      "weight": 0.1932,
+      "weight": 0.2006,
       "rendered": "cactus",
       "out_span": [
        113,
@@ -394,7 +394,7 @@
      },
      {
       "entry_id": "rooted",
-      "weight": 0.1288,
+      "weight": 0.1338,
       "rendered": "rooted",
       "out_span": [
        113,
@@ -405,7 +405,7 @@
      },
      {
       "entry_id": "stuffed",
-      "weight": 0.1932,
+      "weight": 0.2006,
       "rendered": "stuffed",
       "out_span": [
        113,
@@ -427,40 +427,73 @@
     ],
     "out_span": [
      117,
-     121
+     123
     ],
     "original": "",
-    "output": ", ay",
-    "entry_id": "g-ay",
+    "output": ", mate",
+    "entry_id": "g-mate",
     "vulgarity": 0,
     "masks": [],
     "placement": "tag",
     "removed": {
      "out_span": [
       117,
-      121
+      123
      ],
      "rendered": ""
     },
     "alternatives": [
      {
       "entry_id": "g-ay",
-      "weight": 0.3333,
+      "weight": 0.2,
       "rendered": ", ay",
       "out_span": [
        117,
-       121
+       123
       ],
       "vulgarity": 0,
       "masks": []
      },
      {
       "entry_id": "g-mate",
-      "weight": 0.6667,
+      "weight": 0.4,
       "rendered": ", mate",
       "out_span": [
        117,
-       121
+       123
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-ya-drongo",
+      "weight": 0.1333,
+      "rendered": ", ya drongo",
+      "out_span": [
+       117,
+       123
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-ya-galah",
+      "weight": 0.1333,
+      "rendered": ", ya galah",
+      "out_span": [
+       117,
+       123
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-ya-mug",
+      "weight": 0.1333,
+      "rendered": ", ya mug",
+      "out_span": [
+       117,
+       123
       ],
       "vulgarity": 0,
       "masks": []
@@ -477,8 +510,8 @@
      128
     ],
     "out_span": [
-     123,
-     129
+     125,
+     131
     ],
     "original": "",
     "output": "Well, ",
@@ -488,52 +521,74 @@
     "placement": "connective",
     "removed": {
      "out_span": [
-      123,
-      131
+      125,
+      133
      ],
      "rendered": "We"
     },
     "alternatives": [
      {
       "entry_id": "c-anyway",
-      "weight": 0.3636,
+      "weight": 0.2597,
       "rendered": "Anyway, we",
       "out_span": [
-       123,
-       131
+       125,
+       133
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-mate",
+      "weight": 0.1558,
+      "rendered": "Mate, we",
+      "out_span": [
+       125,
+       133
       ],
       "vulgarity": 0,
       "masks": []
      },
      {
       "entry_id": "c-mind-you",
-      "weight": 0.0909,
+      "weight": 0.0649,
       "rendered": "Mind you, we",
       "out_span": [
-       123,
-       131
+       125,
+       133
       ],
       "vulgarity": 0,
       "masks": []
      },
      {
       "entry_id": "c-now",
-      "weight": 0.1818,
+      "weight": 0.1299,
       "rendered": "Now, we",
       "out_span": [
-       123,
-       131
+       125,
+       133
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-so-anyway",
+      "weight": 0.1299,
+      "rendered": "So anyway, we",
+      "out_span": [
+       125,
+       133
       ],
       "vulgarity": 0,
       "masks": []
      },
      {
       "entry_id": "c-well",
-      "weight": 0.3636,
+      "weight": 0.2597,
       "rendered": "Well, we",
       "out_span": [
-       123,
-       131
+       125,
+       133
       ],
       "vulgarity": 0,
       "masks": []
@@ -600,12 +655,26 @@
     "gloss": "Moving the story along.",
     "frame": "interjection",
     "concepts": [],
-    "level": 4,
+    "level": 1,
     "vulgarity": 0,
     "register": "current",
     "placement": "connective",
     "sources": [
      "https://dictionary.cambridge.org/grammar/british-grammar/anyway"
+    ]
+   },
+   "c-mate": {
+    "id": "c-mate",
+    "form": "mate",
+    "gloss": "The storyteller nudging the listener.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "connective",
+    "sources": [
+     "https://www.oxfordlearnersdictionaries.com/definition/english/mate_1"
     ]
    },
    "c-mind-you": {
@@ -614,7 +683,7 @@
     "gloss": "Adds a qualifying afterthought (\"Mind you, his brother turned up\").",
     "frame": "interjection",
     "concepts": [],
-    "level": 2,
+    "level": 1,
     "vulgarity": 0,
     "register": "current",
     "placement": "connective",
@@ -629,12 +698,27 @@
     "gloss": "Turning to the next part.",
     "frame": "interjection",
     "concepts": [],
-    "level": 4,
+    "level": 1,
     "vulgarity": 0,
     "register": "current",
     "placement": "connective",
     "sources": [
      "https://dictionary.cambridge.org/grammar/british-grammar/discourse-"
+    ]
+   },
+   "c-so-anyway": {
+    "id": "c-so-anyway",
+    "form": "so anyway",
+    "gloss": "Getting back to it.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 1,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "connective",
+    "sources": [
+     "https://dictionary.cambridge.org/grammar/british-grammar/discourse-",
+     "https://dictionary.cambridge.org/grammar/british-grammar/anyway"
     ]
    },
    "c-well": {
@@ -643,7 +727,7 @@
     "gloss": "Setting up the next bit.",
     "frame": "interjection",
     "concepts": [],
-    "level": 4,
+    "level": 1,
     "vulgarity": 0,
     "register": "current",
     "placement": "connective",
@@ -666,6 +750,25 @@
      {
       "text": "like a flat-pack in a cyclone",
       "tone": "comic",
+      "sources": [],
+      "produced_by": "agent",
+      "origin": "unknown",
+      "register": "current",
+      "australian_use": "common",
+      "reads_as": "australian",
+      "themes": [],
+      "doubtful_definition": false,
+      "misreadable": false,
+      "attestation": {
+       "score": 0.0,
+       "bars": 0,
+       "counts": {},
+       "people": 0,
+       "independent": 0,
+       "places": 0,
+       "weights_version": "provisional-1"
+      },
+      "evidence": "unverified",
       "best": true
      }
     ],
@@ -689,6 +792,25 @@
      {
       "text": "out the back with a redback under the seat",
       "tone": "comic",
+      "sources": [],
+      "produced_by": "agent",
+      "origin": "unknown",
+      "register": "current",
+      "australian_use": "common",
+      "reads_as": "australian",
+      "themes": [],
+      "doubtful_definition": false,
+      "misreadable": false,
+      "attestation": {
+       "score": 0.0,
+       "bars": 0,
+       "counts": {},
+       "people": 0,
+       "independent": 0,
+       "places": 0,
+       "weights_version": "provisional-1"
+      },
+      "evidence": "unverified",
       "best": true
      }
     ],
@@ -732,12 +854,54 @@
     "gloss": "Friendly (or pointedly unfriendly) address.",
     "frame": "tag",
     "concepts": [],
-    "level": 4,
+    "level": 3,
     "vulgarity": 0,
     "register": "current",
     "placement": "tag",
     "sources": [
      "https://www.oxfordlearnersdictionaries.com/definition/english/mate_1"
+    ]
+   },
+   "g-ya-drongo": {
+    "id": "g-ya-drongo",
+    "form": "ya drongo",
+    "gloss": "You fool.",
+    "frame": "tag",
+    "concepts": [],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "tag",
+    "sources": [
+     "https://history.cass.anu.edu.au/centres/andc/australian-words-d"
+    ]
+   },
+   "g-ya-galah": {
+    "id": "g-ya-galah",
+    "form": "ya galah",
+    "gloss": "Affectionate insult.",
+    "frame": "tag",
+    "concepts": [],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "tag",
+    "sources": [
+     "https://www.collinsdictionary.com/dictionary/english/galah"
+    ]
+   },
+   "g-ya-mug": {
+    "id": "g-ya-mug",
+    "form": "ya mug",
+    "gloss": "You fool.",
+    "frame": "tag",
+    "concepts": [],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "tag",
+    "sources": [
+     "https://www.collinsdictionary.com/dictionary/english/mug"
     ]
    },
    "hungry-enough-horse-jockey": {
@@ -786,6 +950,25 @@
      {
       "text": "eyelids heavy as wet blankets",
       "tone": "plain",
+      "sources": [],
+      "produced_by": "agent",
+      "origin": "unknown",
+      "register": "current",
+      "australian_use": "common",
+      "reads_as": "australian",
+      "themes": [],
+      "doubtful_definition": false,
+      "misreadable": false,
+      "attestation": {
+       "score": 0.0,
+       "bars": 0,
+       "counts": {},
+       "people": 0,
+       "independent": 0,
+       "places": 0,
+       "weights_version": "provisional-1"
+      },
+      "evidence": "unverified",
       "best": true
      }
     ],

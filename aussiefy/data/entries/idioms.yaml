@@ -216,7 +216,13 @@
   incoherence: 2
   gloss: Keen to have something to eat.
   notes: Composed appetite phrase using feed for a meal; preserves feeling and its tense rather than asserting starvation.
-  sources: [https://www.oxfordlearnersdictionaries.com/definition/english/feed_2]
+  sources:
+  - url: https://www.oxfordlearnersdictionaries.com/definition/english/feed_2
+    kind: scholarly_dictionary
+    publisher: oxfordlearnersdictionaries.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: feel-like-some-tucker
   form: feel like some tucker
   concept: [HUNGRY]
@@ -227,7 +233,13 @@
   incoherence: 2
   gloss: Have an appetite for food.
   notes: A composed appetite phrase using tucker for food, rather than a separately attested traditional idiom.
-  sources: [https://www.collinsdictionary.com/us/dictionary/english/tucker]
+  sources:
+  - url: https://www.collinsdictionary.com/us/dictionary/english/tucker
+    kind: scholarly_dictionary
+    publisher: Collins Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: dry-as-a-dead-dingo
   form: dry as a dead dingo's donger
   concept: [THIRSTY]
@@ -488,7 +500,7 @@
   frame: clause
   intensity: 4
   vulgarity: 2
-  incoherence: 3
+  incoherence: 2
   gloss: Raining heavily.
 - id: cow-on-a-flat-rock
   form: "{subj} {be} raining like a cow pissing on a flat rock"
@@ -567,19 +579,21 @@
   form: game
   concept: [BRAVE]
   frame: predicate_adj
-  incoherence: 2
+  incoherence: 1
   class: lexical
   gloss: Plucky; willing to have a go.
+  reads_as: general
 - id: fair-enough
   form: fair enough
   concept: [REASONABLE]
   frame: predicate_adj
-  incoherence: 2
+  incoherence: 1
   class: phrase
   gloss: Reasonable; justified.
 
 # --- by hand from the dinkum-check round: stuff up's object form, in its own concept (BOTCH_IT) so
 # "screwed it up" keeps its object. Here, not in dinkumcheck.yaml, because the round tool reads it as stuff up
+  reads_as: general
 - id: stuff-it-up
   form: stuff {obj} up
   concept: [BOTCH_IT]
@@ -589,8 +603,13 @@
   incoherence: 2
   register: current
   gloss: Ruin something by getting it wrong (don't stuff it up).
-  sources: [https://en.wiktionary.org/wiki/stuff_up]
-
+  sources:
+  - url: https://en.wiktionary.org/wiki/stuff_up
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 # --- the words that stuck out in Gettysburg ------------------------------------
 - id: make-true-blue
   form: make {obj} true blue
@@ -598,49 +617,52 @@
   frame: vp
   intensity: 4
   incoherence: 4
-  status: gate
-  flags: [dubious_meaning]
-  notes: Original loose paraphrase. Genuine or loyal differs from sacred; requires explicit dubious_meaning unlock.
+  status: active
+  notes: Original loose paraphrase. Genuine or loyal differs from sacred; held back by doubtful_definition until the mapping is corrected.
   gloss: Make it something held dear; genuine and loyal to the core.
+  doubtful_definition: true
 - id: christen
   form: christen {np}
   concept: [FIRST_USE]
   frame: vp
-  incoherence: 3
+  incoherence: 2
   notes: Shared informal English first-use sense; keep the object and do not infer sacred dedication.
   gloss: Use something for the first time.
+  reads_as: general
 - id: make-true-blue-bare
   form: make true blue
   concept: [SANCTIFY]
   frame: vp
   intensity: 4
   incoherence: 4
-  status: gate
-  flags: [dubious_meaning]
-  notes: Original loose paraphrase. Genuine or loyal differs from sacred; requires explicit dubious_meaning unlock.
+  status: active
+  notes: Original loose paraphrase. Genuine or loyal differs from sacred; held back by doubtful_definition until the mapping is corrected.
   gloss: Make something held dear, genuine and loyal to the core.
+  doubtful_definition: true
 - id: make-fair-dinkum
   form: make fair dinkum
   concept: [SANCTIFY]
   frame: vp
   incoherence: 4
-  status: gate
-  flags: [dubious_meaning]
-  notes: Original loose paraphrase. Genuine differs from sacred; requires explicit dubious_meaning unlock.
+  status: active
+  notes: Original loose paraphrase. Genuine differs from sacred; held back by doubtful_definition until the mapping is corrected.
   gloss: Make genuine; give it real standing.
+  doubtful_definition: true
 - id: swear-blind
   form: swear blind
   concept: [RESOLVE]
   frame: vp
   intensity: 4
-  incoherence: 3
+  incoherence: 2
   gloss: Declare something with total conviction.
+  reads_as: general
 - id: kick-off
   form: kick off
   concept: [START_ACTIVITY]
   frame: vp
-  incoherence: 3
+  incoherence: 2
   gloss: Start or get underway.
+  reads_as: general
 - id: reckon
   form: reckon
   concept: [THINK]
@@ -711,7 +733,7 @@
   frame: clause
   intensity: 5
   vulgarity: 1
-  incoherence: 3
+  incoherence: 2
   gloss: It can't happen.
 - id: buckleys-chance-clause
   form: there {be} Buckley's chance of that
@@ -731,10 +753,11 @@
   form: go along with {np}
   concept: [GO_ALONG]
   frame: vp
-  incoherence: 2
+  incoherence: 1
   class: phrase
   weight: 0.5
   gloss: Agree to something without fuss.
+  reads_as: general
 - id: reckon-a-goer
   form: reckon {np} {be} a goer
   concept: [GO_ALONG]
@@ -782,16 +805,18 @@
   form: go to meet {poss} maker
   concept: [DIE]
   frame: vp
-  incoherence: 4
+  incoherence: 2
   notes: Shared English, common in Australia.
   gloss: Die.
+  reads_as: general
 - id: give-two-hoots-about
   form: give two hoots about
   concept: [CARE_ABOUT]
   frame: vp
-  incoherence: 3
+  incoherence: 2
   notes: Shared English, common in Australia.
   gloss: Care about (usually negated).
+  reads_as: general
 - id: give-a-rats-arse-about
   form: give a rat's arse about
   concept: [CARE_ABOUT]
@@ -834,6 +859,7 @@
   frame: vp
   incoherence: 2
   gloss: Finish what was started.
+  reads_as: general
 - id: keep-on-kickin
   form: keep on kickin'
   concept: [LIVE_ON]
@@ -873,9 +899,10 @@
   concept: [FALL_ASLEEP]
   frame: vp
   intensity: 4
-  incoherence: 3
+  incoherence: 2
   notes: Shared English.
   gloss: Fall asleep instantly.
+  reads_as: general
 - id: have-a-crack-at
   form: have a crack at {np}
   concept: [TRY_OUT]
@@ -902,8 +929,9 @@
   form: fall to bits
   concept: [BREAK_APART]
   frame: vp
-  incoherence: 2
+  incoherence: 1
   gloss: Fall apart.
+  reads_as: general
 - id: smash-to-buggery
   form: smash {obj} to buggery
   concept: [SMASH]
@@ -933,9 +961,10 @@
   concept: [SCARED]
   frame: predicate_adj
   intensity: 4
-  incoherence: 2
+  incoherence: 1
   class: phrase
   gloss: Terrified.
+  reads_as: general
 - id: shit-scared
   form: shit-scared
   concept: [SCARED]
@@ -949,10 +978,11 @@
   form: spooked
   concept: [SPOOKED]
   frame: predicate_adj
-  incoherence: 2
+  incoherence: 1
   gloss: Startled or rattled (by something).
 
 # --- from testing on "Meditations on Moloch" (general-purpose) ------------------------
+  reads_as: general
 - id: like-a-shag-on-a-rock
   form: like a shag on a rock
   concept: [LONELY]
@@ -965,16 +995,18 @@
   concept: [SCREAM]
   frame: vp
   intensity: 4
-  incoherence: 3
+  incoherence: 1
   notes: Shared with British English.
   gloss: Scream loudly in protest or terror.
+  reads_as: general
 - id: bawl
   form: bawl
   concept:
   - NOISY_CRY
   frame: vp
-  incoherence: 2
+  incoherence: 1
   gloss: Cry noisily.
+  reads_as: general
 - id: have-a-sook
   form: have a sook
   concept:
@@ -986,8 +1018,9 @@
   form: spook
   concept: [FRIGHTEN]
   frame: vp
-  incoherence: 2
+  incoherence: 1
   gloss: Frighten.
+  reads_as: general
 - id: bust-a-gut
   form: bust {poss} guts
   concept: [WORK_HARD]
@@ -1034,14 +1067,16 @@
   form: traipse
   concept: [WALK_WEARILY]
   frame: vp
-  incoherence: 3
+  incoherence: 1
   gloss: Walk wearily or aimlessly.
+  reads_as: general
 - id: hoof-it
   form: hoof it
   concept: [WALK]
   frame: vp
-  incoherence: 3
+  incoherence: 1
   gloss: Walk; go on foot.
+  reads_as: general
 - id: rug-up
   form: rug up
   concept: [DRESS_WARMLY]
@@ -1076,9 +1111,10 @@
   concept: [DEAF]
   frame: predicate_adj
   intensity: 5
-  incoherence: 3
+  incoherence: 1
   notes: Shared English.
   gloss: Completely deaf.
+  reads_as: general
 - id: blind-as-a-welders-dog
   form: blind as a welder's dog
   concept: [BLIND]
@@ -1092,9 +1128,10 @@
   frame: predicate_adj
   intensity: 5
   vulgarity: 2
-  incoherence: 4
+  incoherence: 2
   notes: Shared with British English.
   gloss: Massive and solid.
+  reads_as: general
 - id: enough-to-make-a-brown-dog-spew
   form: enough to make a brown dog spew
   concept: [DISGUSTING]
@@ -1114,9 +1151,10 @@
   concept: [HIGH]
   frame: predicate_adj
   intensity: 4
-  incoherence: 3
+  incoherence: 1
   notes: Shared English.
   gloss: Very high.
+  reads_as: general
 - id: gone-for-six
   form: gone for six
   concept: [GONE_FOR_GOOD]
@@ -1214,7 +1252,8 @@
   intensity: 4
   incoherence: 3
   gloss: Cry hard and loudly.
-  sources: [llm-moloch-unharnessed]
+  sources: []
+  produced_by: agent
 - id: dob-in
   form: dob {obj} in
   concept: [INFORM_ON]
@@ -1259,15 +1298,17 @@
   form: off {poss} rocker
   concept: [CRAZY]
   frame: predicate_adj
-  incoherence: 3
+  incoherence: 2
   gloss: Crazy. Also British; common in Australia.
+  reads_as: general
 - id: blubber
   form: blubber
   concept:
   - NOISY_CRY
   frame: vp
-  incoherence: 3
+  incoherence: 1
   gloss: Cry noisily and wetly.
+  reads_as: general
 - id: piss-self-laughing
   form: piss {poss}self laughing
   concept: [LAUGH_HARD]
@@ -1281,12 +1322,14 @@
   frame: vp
   incoherence: 2
   gloss: Burst out laughing.
+  reads_as: general
 - id: down-in-the-dumps
   form: down in the dumps
   concept: [SAD]
   frame: predicate_adj
-  incoherence: 2
+  incoherence: 1
   gloss: Sad, low.
+  reads_as: general
 - id: flat-as-a-tack
   form: flat as a tack
   concept: [SAD]
@@ -1311,8 +1354,9 @@
   form: grotty
   concept: [DIRTY]
   frame: adj
-  incoherence: 3
+  incoherence: 2
   gloss: Dirty, grubby, run-down.
+  reads_as: general
 - id: like-a-koala-up-a-gum-tree
   form: like a koala up a gum tree
   plural: like koalas up a gum tree
@@ -1321,8 +1365,17 @@
   intensity: 4
   incoherence: 4
   gloss: Perfectly content and settled; all's well, she'll be right.
-  sources: [personal:heard at Coolangatta airport, QLD]
-  notes: Attested by the project owner (heard at Coolangatta airport, Queensland).
+  sources: []
+  notes: 'Attested by the project owner (heard at Coolangatta airport, Queensland). Historical testimony attribution:
+    personal:heard at Coolangatta airport. Dates record the repository report, not first use. Original source annotation
+    (not a citation): QLD.'
+  testimony:
+    people: 1
+    independent: 1
+    places: 1
+    first_date: '2026-10-19'
+    last_date: '2026-10-19'
+    summary_date: '2026-10-20'
 - id: better-than-a-poke-in-the-eye
   form: better than a poke in the eye with a burnt stick
   spellings: [better than a poke in the eye with a burned stick]
@@ -1331,21 +1384,39 @@
   frame: interjection
   incoherence: 4
   gloss: It's alright, all things considered; could be worse.
-  sources: [personal:the project owner's dad]
-  notes: Attested by the project owner, from their dad. "Sharp stick" is also common.
+  sources: []
+  notes: 'Attested by the project owner, from their dad. "Sharp stick" is also common. Historical testimony attribution:
+    personal:the project owner''s dad. Dates record the repository report, not first use.'
+  testimony:
+    people: 1
+    independent: 1
+    places: 0
+    first_date: '2026-10-19'
+    last_date: '2026-10-19'
+    summary_date: '2026-10-20'
 - id: better-than-a-poke-in-the-eye-pred
   form: better than a poke in the eye with a burnt stick
   concept: [NOT_BAD]
   frame: predicate_adj
   incoherence: 4
   gloss: Alright, all things considered ("it's better than a poke in the eye with a burnt stick").
-  sources: [personal:the project owner's dad]
+  sources: []
+  testimony:
+    people: 1
+    independent: 1
+    places: 0
+    first_date: '2026-10-19'
+    last_date: '2026-10-19'
+    summary_date: '2026-10-20'
+  notes: 'Historical testimony attribution: personal:the project owner''s dad. Dates record the repository report,
+    not first use.'
 - id: snug-as-a-bug
   form: snug as a bug in a rug
   concept: [CONTENT]
   frame: predicate_adj
-  incoherence: 3
+  incoherence: 1
   gloss: Cosy and content. Common in Australia, not exclusive.
+  reads_as: general
 - id: sun-shines-out-of-arse
   form: think the sun shines|shone out of {objposs} arse
   concept: [ADORE]
@@ -1354,19 +1425,36 @@
   vulgarity: 2
   incoherence: 2
   gloss: Adore someone and think they can do no wrong ("her nan thought the sun shone out of her arse").
-  sources: [personal:the project owner]
-
+  sources: []
+  testimony:
+    people: 1
+    independent: 1
+    places: 0
+    first_date: '2026-10-19'
+    last_date: '2026-10-19'
+    summary_date: '2026-10-20'
+  notes: 'Historical testimony attribution: personal:the project owner. Dates record the repository report, not first
+    use.'
+  reads_as: general
 # Reference-persona harvest, 17 October 2026. Reviewed meanings and decisions:
 # research/vocabulary-2026-10-17/DECISIONS.md. Shared English is noted explicitly.
 - id: square-person-up
+  produced_by: agent
   form: square {obj} up
   concept: [REIMBURSE_PERSON]
   frame: vp
   incoherence: 2
   gloss: Repay someone money owed to them.
   notes: Shared colloquial English; only financial reimbursement, not fighting or revenge.
-  sources: [https://en.wiktionary.org/wiki/square_up]
+  sources:
+  - url: https://en.wiktionary.org/wiki/square_up
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: just-the-shot
+  produced_by: agent
   form: just the shot
   concept: [JUST_RIGHT]
   frame: predicate_adj
@@ -1374,14 +1462,22 @@
   gloss: Exactly what is wanted; just right for the purpose.
   notes: Familiar Australian usage; curated from the dockie reference retellings, evidence own.
 - id: crook-in-the-guts
+  produced_by: agent
   form: crook in the guts
   concept: [NAUSEOUS]
   frame: predicate_adj
   incoherence: 3
   gloss: Feeling sick in the stomach.
   notes: Does not imply that every sick person has a stomach illness.
-  sources: ["https://australiansatwarfilmarchive.unsw.edu.au/archive/htmlTranscript/399?asPdf=y"]
+  sources:
+  - url: https://australiansatwarfilmarchive.unsw.edu.au/archive/htmlTranscript/399?asPdf=y
+    kind: media
+    publisher: australiansatwarfilmarchive.unsw.edu.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: out-on-poss-feet
+  produced_by: agent
   form: out on {poss} feet
   concept: [TIRED]
   frame: predicate_adj
@@ -1390,6 +1486,7 @@
   gloss: Extremely tired, almost unable to stay upright.
   notes: Shared English, familiar in Australia.
 - id: work-like-billy-o
+  produced_by: agent
   form: work like billy-o
   concept: [WORK_HARD]
   frame: vp
@@ -1398,12 +1495,26 @@
   register: dated
   gloss: Work with great effort and energy.
   notes: Shared with British English; older conversational flavour.
-  sources: [https://en.wiktionary.org/wiki/billy-o]
+  sources:
+  - url: https://en.wiktionary.org/wiki/billy-o
+    kind: crowd_dictionary
+    publisher: Wiktionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
 - id: get-cracking
+  produced_by: agent
   form: get cracking
   concept: [START_WORK_COMMAND]
   frame: imperative
   incoherence: 2
   gloss: Start work promptly.
   notes: Shared English, familiar in Australia; command matching avoids mechanical starting senses.
-  sources: [https://www.abc.net.au/listen/programs/radionational-breakfast/-get-cracking-david-pocock-s-call-to-action-post-election/105256648]
+  sources:
+  - url: https://www.abc.net.au/listen/programs/radionational-breakfast/-get-cracking-david-pocock-s-call-to-action-post-election/105256648
+    kind: media
+    publisher: abc.net.au
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  reads_as: general

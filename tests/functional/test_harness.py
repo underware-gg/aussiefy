@@ -500,7 +500,7 @@ def test_lint_custom_gated_forms_use_canonical_apostrophe_matching(translator, a
     from aussiefy import Translator
     from aussiefy.schema import Entry
 
-    entry = Entry(id="private-test", concept=("TIRED",), frame="np", form="somebody’s special slang", status="gate", flags=("fabricated",))
+    entry = Entry(id="private-test", concept=("TIRED",), frame="np", form="somebody’s special slang", status="gate")
     tr = Translator(replace(translator.dictionary, entries={**translator.dictionary.entries, entry.id: entry}))
     text = "somebody" + apostrophe + "s special slang"
     result = harness.lint(text, translator=tr, suggest=False)
@@ -512,8 +512,8 @@ def test_lookup_honours_selected_dictionary_default_unlock(translator):
     from aussiefy import Translator
 
     tr = Translator(replace(translator.dictionary, policy_defaults={**translator.dictionary.policy_defaults, "unlock": ["all"]}))
-    results = harness.lookup("take a pull at {poss}self", translator=tr, level=5, vulgarity=3)["results"]
-    assert any(r["form"] == "take a pull at {poss}self" for r in results)
+    results = harness.lookup("bugger me sideways'n call me the pope", translator=tr, level=5, vulgarity=3)["results"]
+    assert any(r["form"] == "bugger me sideways'n call me the pope" for r in results)
 def test_lint_suggests_in_the_originals_genre(translator):
     # a voiced retelling of a policy can read as a story, but its gift is still no pressie
     original = "Employees must not accept a gift from a vendor. Any gift over $150 must be reported to Legal."

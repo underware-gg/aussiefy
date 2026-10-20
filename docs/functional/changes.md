@@ -83,7 +83,7 @@ where a drawl or infix match still reads across the region's edge after it has w
 has happened over the test corpora. They're there so a renderin' that might read wrong is never offered, and a
 page can tell why a spot has no alternatives.
 
-Stone the crows, all offsets count Unicode code points, including source/output spans, alternative regions'n mask positions.
+Strewth, all offsets count Unicode code points, including source/output spans, alternative regions'n mask positions.
 Well, for example, `🦘 toilet` becomes `🦘 dunny`: the source span is `[2, 8)` and the output span is `[2, 7)`.
 JavaScript clients can slice'n splice by code point with `Array.from(text)`:
 
@@ -109,7 +109,7 @@ All of a spot's options share one region, so swappin' one in replaces the same s
 where a drawl or infix match crosses its edge \("have not" becoming "haven't"\) or a neighbourin' match's
 lookaround reads it \("won't bloody well have").
 
-Struth, a garnish's region widens the same way. An opener's or connective's region takes in the next word, whose capital
+Stone the crows, a garnish's region widens the same way. An opener's or connective's region takes in the next word, whose capital
 it lowered, and a word more where a match runs on: in "Well, it is easy", a swap or removal of "Well" replaces
 "Well, it is", since the drawl's "it is" match crosses "it". A region never cuts the words another swap or
 garnish put in: it takes in the whole of one it reaches. Tell ya what, two regions can still share a word they both widened

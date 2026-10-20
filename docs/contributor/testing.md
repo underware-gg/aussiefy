@@ -99,7 +99,7 @@ historical heuristic gates. Labels were chosen without consulting engine outputs
 scores; source/target hashes and transcription are checked. Wrong-meaning paraphrases and invented target
 events remain explicit exclusions.
 
-Well, the score is unique target\-expression reproduction, with raw unaligned output counts reported separately.
+So anyway, the score is unique target\-expression reproduction, with raw unaligned output counts reported separately.
 Strewth, different valid slang can miss, and incorrectly used wording can hit. This isn't semantic fidelity or an
 aligned event score. Anyway, no new pass threshold is derived from the first result; existin' gates remain.
 

@@ -15,7 +15,7 @@ TOOLS = {"aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_g
 
 # a non-default value for every toolkit parameter, so a surface that drops or renames one is caught
 VALUES = {"level": 4, "seed": 7, "vulgarity": 1, "variety": 2,
-          "registers": ["current", "dated"], "regions": ["qld"], "unlock": ["archaic"], "limit": 3,
+          "registers": ["current", "dated"], "regions": ["qld"], "unlock": ["misreadable"], "limit": 3,
           "include_gated": True, "original": "She was tired.", "markup": "markdown", "english": "uk", "short": True,
           "document_type": "custom", "document_config": {"garnish": [], "keep_quotes": True, "narrator_opinion": True,
               "profile": {"garnish": {"opener": 1}, "max_garnish": {"opener": 1}}},
@@ -26,7 +26,7 @@ SUBJECT = {"lookup": ("query", "very tired"), "lint": ("text", "G'day mate."), "
 # CLI flags for each parameter (the CLI says --region for one region list, as people type it)
 FLAGS = {"level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity", "1"],
          "variety": ["--variety", "2"], "registers": ["--registers", "current,dated"],
-         "regions": ["--region", "qld"], "unlock": ["--unlock", "archaic"], "limit": ["--limit", "3"],
+         "regions": ["--region", "qld"], "unlock": ["--unlock", "misreadable"], "limit": ["--limit", "3"],
          "include_gated": ["--include-gated"], "markup": ["--markup", "markdown"],
          "english": ["--english", "uk"], "document_type": ["--document-type", "custom"],
          "document_config": ["--document-config", '{"garnish": [], "keep_quotes": true, "narrator_opinion": true, "profile": {"garnish": {"opener": 1}, "max_garnish": {"opener": 1}}}'], "short": ["--short"], "embellishment": ["--embellishment", "2"], "suggest": ["--no-suggestions"]}

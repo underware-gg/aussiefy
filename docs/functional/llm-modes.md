@@ -34,9 +34,9 @@ along with the draft'n the phrases the dictionary already planned. Claude says t
 Australian would at the requested level'n vulgarity.
 
 - **What counts as difficult:** the sentence still has formal, Latinate words the dictionary left alone
-  (proposition, assertion, comfortably, honoured\). Mind ya, the thresholds are under `rewrite:` in
+  (proposition, assertion, comfortably, honoured\). Mate, the thresholds are under `rewrite:` in
   `aussiefy/data/profiles.yaml`.
-- **Rewriting the whole shebang:** `--rewrite all` sends every sentence.
+- **Rewriting the whole box'n dice:** `--rewrite all` sends every sentence.
 - **Guarantees:** planned phrases must keep on kickin' the rewrite, and the result must be a single sentence of
   sane length. Anyway, otherwise the dictionary's draft stands.
 - **Reproducibility:** rewrites are cached in `$AUSSIEFY_HOME/cache/rewrite/` (default `~/.aussiefy/cache/rewrite/`), keyed by

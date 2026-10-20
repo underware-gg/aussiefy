@@ -2,6 +2,51 @@
 import pytest
 
 
+@pytest.mark.parametrize('opening,closing', [('"', '"'), ('“', '”'), ("'", "'"), ('‘', '’')])
+def test_agreement_detection_is_independent_of_dialogue_quotes(dictionary, opening, closing):
+    from aussiefy.detect import detect, resolve_overlaps
+    from aussiefy.text import tokenize
+    tokens = tokenize(f'He said {opening}Very well,{closing} and left.')
+    found = resolve_overlaps(detect(tokens, dictionary.index, concepts=dictionary.concepts))
+    assert any('OK_THEN' in d.concepts for d in found)
+    assert not any('VERY' in d.concepts for d in found)
+
+
+def test_quoted_agreement_fix_preserves_real_intensifiers_and_possessives(dictionary):
+    from aussiefy.detect import at_clause_start, detect, resolve_overlaps
+    from aussiefy.text import tokenize
+    found = resolve_overlaps(detect(tokenize('She sang very well.'), dictionary.index,
+                                    concepts=dictionary.concepts))
+    assert any('VERY' in d.concepts for d in found)
+    assert not any('OK_THEN' in d.concepts for d in found)
+    tokens = tokenize("The walkers' very tired guide stopped.")
+    assert not at_clause_start(tokens, next(i for i, t in enumerate(tokens) if t.norm == 'very'))
+
+
+@pytest.mark.parametrize('opening,closing', [('"', '"'), ('“', '”'), ("'", "'"), ('‘', '’')])
+def test_quoted_word_object_does_not_turn_manner_into_agreement(dictionary, opening, closing):
+    from aussiefy.detect import detect, resolve_overlaps
+    from aussiefy.text import tokenize
+    found = resolve_overlaps(detect(tokenize(f'He said {opening}go{closing} very well.'), dictionary.index,
+                                    concepts=dictionary.concepts))
+    assert any('VERY' in d.concepts for d in found)
+    assert not any('OK_THEN' in d.concepts for d in found)
+
+
+@pytest.mark.parametrize('text', ['She was the best of the party.', 'A party of five arrived.',
+                                 'The party won the election.', 'A function returns a number.'])
+def test_ambiguous_groups_and_functions_do_not_establish_a_social_event(translator, text):
+    for seed in range(8):
+        r = translator.translate(text, level=5, seed=seed, vulgarity=0, embellishment='deadset')
+        assert not any('PARTY' in record.det.concepts for record in r.records)
+
+
+def test_explicit_social_events_keep_the_imported_general_option(translator):
+    out = {translator.translate('We held a social gathering.', level=4, seed=s, vulgarity=0,
+                                embellishment='deadset').text for s in range(8)}
+    assert any('a do' in text for text in out)
+
+
 def outputs(translator, text, **kwargs):
     return {translator.translate(text, level=5, vulgarity=0, embellishment='deadset', seed=s, **kwargs).text
             for s in range(12)}

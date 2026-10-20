@@ -367,6 +367,7 @@ def _check_digest(root: Path, name: str, value, errors: list[str]) -> None:
 
 def _scraped(root: Path, errors: list[str]) -> None:
     from aussiefy.errors import UserError
+    from aussiefy.evidence import parse_sources
     from aussiefy.scrape.fetch import reference_only
     from urllib.parse import urlsplit
 
@@ -374,10 +375,14 @@ def _scraped(root: Path, errors: list[str]) -> None:
     overlays = _mapping(_yaml(root, "aussiefy/data/sources.yaml"), "sources.yaml")
     for row in _rows(_yaml(root, name), name):
         ident = _text(row.get("id"), f"{name}: id")
-        urls = _strings(row.get("sources"), f"{name}:{ident}: sources")
+        try:
+            urls = [s.url for s in parse_sources(row.get("sources"), f"{name}:{ident}") if s.url]
+            supplemental = [s.url for s in parse_sources(overlays.get(ident, []), f"sources.yaml:{ident}") if s.url]
+        except UserError as exc:
+            raise NoticeError(str(exc)) from exc
         if not urls:
             errors.append(f"{name}:{ident}: scraped entries must name a source URL")
-        for url in urls + _strings(overlays.get(ident, []), f"sources.yaml:{ident}"):
+        for url in urls + supplemental:
             try:
                 parsed = urlsplit(url)
                 host = parsed.hostname

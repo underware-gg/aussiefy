@@ -76,10 +76,10 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
                 remaining[phrase] -= 1
 
     for e in d.entries.values():
-        if e.status == "active" and e.vulgarity <= cap:
+        if e.status == "active" and not e.held_back and e.vulgarity <= cap:
             continue
         # gated as general English ("dear" for expensive, "dicey"): not wrong, just not Aussie-specific
-        if e.status == "gate" and "not_aussie" in e.flags:
+        if e.reads_as == "general":
             continue
         # gated for a doubtful slang sense, in words with a plain sense too ("a bit rough", "shame"): lint can't
         # tell the senses apart, and the plain one is fine
@@ -90,13 +90,13 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
             # "{poss} fella" stripped to "fella" would flag every fella
             if PLACEHOLDER_RE.search(form) and " " not in f:
                 continue
-            if e.status == "gate" and " " not in f and f in d.plain_words:
+            if e.held_back and " " not in f and f in d.plain_words:
                 continue   # a gated "blow" (boast) would flag every "blow over"
             word_re = r"(?<![a-z])" + re.escape(f) + r"(?![a-z])"
             # the original's own uses are its own; more than it has are the translator's
             if len(f) < 4 or len(re.findall(word_re, low)) <= len(re.findall(word_re, orig_low)):
                 continue
-            if e.status != "active":
+            if e.status != "active" or e.held_back:
                 issues.append({"kind": "flagged", "phrase": form, "status": e.status, "flags": list(e.flags),
                                "why": e.notes or "flagged in the dictionary"})
             elif e.vulgarity > cap:

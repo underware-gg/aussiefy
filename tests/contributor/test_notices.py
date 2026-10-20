@@ -285,20 +285,20 @@ def test_remote_excerpts_are_exact_exceptions(repo, change):
 @pytest.mark.parametrize("sources", [[], ["https://www.macquariedictionary.com.au/entry/thing"],
                                      ["HTTPS://WWW.OED.COM/entry/thing"], ["not a URL"]])
 def test_scraped_sources_must_be_present_and_permitted(repo, sources):
-    put(repo, "aussiefy/data/entries/scraped.yaml", yaml.safe_dump([{"id": "fixture", "sources": sources}]))
+    put(repo, "aussiefy/data/entries/scraped.yaml", yaml.safe_dump([{"id": "fixture", "sources": [{"url": u, "kind": "media", "publisher": "Fixture", "supports": []} for u in sources]}]))
     with pytest.raises(n.NoticeError, match="source"):
         n.check(repo)
 
 
 def test_scraped_source_overlays_cannot_bypass_policy(repo):
-    put(repo, "aussiefy/data/entries/scraped.yaml", yaml.safe_dump([{"id": "fixture", "sources": ["https://example.com"]}]))
-    put(repo, "aussiefy/data/sources.yaml", yaml.safe_dump({"fixture": ["https://oed.com/entry/x"]}))
+    put(repo, "aussiefy/data/entries/scraped.yaml", yaml.safe_dump([{"id": "fixture", "sources": [{"url": "https://example.com", "kind": "media", "publisher": "Fixture", "supports": []}]}]))
+    put(repo, "aussiefy/data/sources.yaml", yaml.safe_dump({"fixture": [{"url": "https://oed.com/entry/x", "kind": "scholarly_dictionary", "publisher": "OED", "supports": []}]}))
     with pytest.raises(n.NoticeError, match="reference-only"):
         n.check(repo)
 
 
 def test_permitted_scraped_source_passes(repo):
-    put(repo, "aussiefy/data/entries/scraped.yaml", yaml.safe_dump([{"id": "fixture", "sources": ["https://example.com"]}]))
+    put(repo, "aussiefy/data/entries/scraped.yaml", yaml.safe_dump([{"id": "fixture", "sources": [{"url": "https://example.com", "kind": "media", "publisher": "Fixture", "supports": []}]}]))
     n.check(repo)
 
 
@@ -306,7 +306,7 @@ def test_permitted_scraped_source_passes(repo):
                                    {"reference_only": [{"domain": "example.com", "reason": None}]},
                                    {"reference_only": [{"domain": " ", "reason": "Broken rule"}]}])
 def test_malformed_source_policy_is_contextual(repo, policy):
-    put(repo, "aussiefy/data/entries/scraped.yaml", yaml.safe_dump([{"id": "fixture", "sources": ["https://example.com"]}]))
+    put(repo, "aussiefy/data/entries/scraped.yaml", yaml.safe_dump([{"id": "fixture", "sources": [{"url": "https://example.com", "kind": "media", "publisher": "Fixture", "supports": []}]}]))
     put(repo, "aussiefy/data/source_policy.yaml", yaml.safe_dump(policy))
     with pytest.raises(n.NoticeError, match="source_policy.yaml"):
         n.check(repo)
@@ -343,7 +343,7 @@ def test_missing_tracked_input_fails_without_a_build(repo):
 
 @pytest.mark.parametrize("url", ["https://[broken", "http://[:::]"])
 def test_malformed_source_url_is_contextual(repo, url):
-    put(repo, "aussiefy/data/entries/scraped.yaml", yaml.safe_dump([{"id": "fixture", "sources": [url]}]))
+    put(repo, "aussiefy/data/entries/scraped.yaml", yaml.safe_dump([{"id": "fixture", "sources": [{"url": url, "kind": "media", "publisher": "Fixture", "supports": []}]}]))
     with pytest.raises(n.NoticeError, match="malformed source URL"):
         n.check(repo)
 

@@ -5,7 +5,7 @@
 # Committed source integration, 14 October 2026
 
 The reviewed baseline was `Rob-Morris/aussiefy@2d13cf8b41e446ec10539cafa22f49ee6de370fa`.
-So anyway, this integration pins its active branch at `95036e146da88fb497dae94e8532000913d92bcd`, bringin' across
+Now, this integration pins its active branch at `95036e146da88fb497dae94e8532000913d92bcd`, bringin' across
 91 commits'n accounting for all 4,422 changed paths. This initial accounting is retained as historical
 evidence; the completed final delta below extends the pin.
 
@@ -36,7 +36,7 @@ ownership, source links, exclusions'n modifications. These changes import eviden
 paid judgin', corpus fetching or model trainin'.
 
 The authoritative plain/published documentation'n checked PR release workflow are now implemented and
-verified. Jeez Louise, each integration'n subsequent slice receives a design review and the repository's full gates
+verified. Stone the crows, each integration'n subsequent slice receives a design review and the repository's full gates
 before commit. The first real release is separate from this completed setup.
 
 
@@ -48,7 +48,7 @@ lint, quote preservation, clause agreement, form-aware riff offers and completed
 retain their assertions except the generic bill-split case corrected to establish actual equal halves; document
 fixtures use the public adapter and their existing layer owner.
 
-Stone the crows, review caught three soundness issues: changed quoted inflections/slots must not borrow a held\-word allowance;
+Jeez Louise, review caught three soundness issues: changed quoted inflections/slots must not borrow a held\-word allowance;
 multiparty/Dutch cost sharing must not become halves; liquid pouring onto/from somethin' must not become rain.
 The fixes use canonical folded surfaces'n data triggers rather than special cases in the engine. The round
 replay data carries the same cost restriction. The regenerated golden corpus differs from final source at
@@ -61,4 +61,4 @@ and sanitised historical exports remain intact. Historical judge scores describe
 a new evaluation of the integrated fixes.
 
 Crikey, the existin' repeated\-city/non\-nestin' regression retains every assertion; its catalogue\-dependent witness
-uses seed 10 instead of 9 after the dictionary growth. Well, the same behaviour is directly reproduced.
+uses seed 10 instead of 9 after the dictionary growth. So anyway, the same behaviour is directly reproduced.

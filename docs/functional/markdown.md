@@ -40,7 +40,7 @@ newlines in custom slang are flattened within the unit. Original protected bytes
 
 Markdown permits only `ngram` or disabled fallback \(`none`, including profiles with no fallback\). Bugger me, the CLI's
 existin' `--embedder ngram`/`--embedder none` can override a profile; API/toolkit/MCP callers use the translator's
-profile defaults. Well, no embeddin' parameter is added to the toolkit. LLM modes \(`--rewrite`, `--surface`) and
+profile defaults. So anyway, no embeddin' parameter is added to the toolkit. LLM modes \(`--rewrite`, `--surface`) and
 model fallbacks raise `UserError` (CLI exit 2\) before a model loads or Claude is called.
 
 ## Results and explanations
@@ -61,7 +61,7 @@ relative to that child's source. Rendered unit text may differ from raw engine t
 `--explain` names document source/output ranges before reporting the local engine decisions; there are no
 fake document\-wide engine records. Markdown text output adds no terminal newline to the document.
 
-`Translator.translate` and `aussiefy.engine.translate` remain the core text operations. Well, plan can read extended
+`Translator.translate` and `aussiefy.engine.translate` remain the core text operations. So anyway, plan can read extended
 `markup`, but doesn't describe strict Markdown's per\-unit output. Yarn tools use their selected markup route;
 strict `markdown=True` remains a translation\-only option.
 

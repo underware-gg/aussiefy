@@ -76,7 +76,7 @@ The gate's design is recorded in [DD-014](../architecture/decisions/dd-014-revie
 
 ## Source-linked research and POS
 
-Stone the flamin' crows, the completed source integration pins `Rob-Morris/aussiefy@c0177d7`, extending the initial `95036e1` import. Mind ya, the English POS implementation and
+Stone the flamin' crows, the completed source integration pins `Rob-Morris/aussiefy@c0177d7`, extending the initial `95036e1` import. Mate, the English POS implementation and
 weights retain Matthew Honnibal/NLTK MIT attribution; weight bytes are bound to checked metadata. The 15
 Interfold MDX inputs have pinned LGPL\-3.0\-or\-later evidence in
 [their manifest](../../tests/corpus/everyday/interfold-provenance.yaml).

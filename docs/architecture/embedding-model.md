@@ -5,7 +5,7 @@
 # The bundled embedding model
 
 `aussiefy/data/model` holds a 15 MB static embeddin' model, aussie\-static, which `lookup` and `gaps` use to
-match by meaning. Now, what uses it, and how to switch it, is in the
+match by meaning. Mind ya, what uses it, and how to switch it, is in the
 [functional reference](../functional/embedding.md); the decision to make similarity pluggable'n local is
 [DD-007](decisions/dd-007-pluggable-local-embeddings.md).
 
@@ -33,6 +33,6 @@ The model is versioned (`aussiefy embedder status` shows which), and each versio
 from `training/recipe.yaml` with one command. After dictionary changes, `status` reports the model as `stale`.
 Licensing of the base models is in [THIRD_PARTY_NOTICES.md](../../THIRD_PARTY_NOTICES.md).
 
-Jeez, the full approach, how to retrain'n release, the lessons from each version and the version history are in
+Fair dinkum, the full approach, how to retrain'n release, the lessons from each version and the version history are in
 [training/README.md](../../training/README.md); the study that chose the approach is
 [training/research.md](../../training/research.md).

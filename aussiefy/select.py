@@ -44,15 +44,20 @@ class Gated(str):
         return reason
 
 
-def dial_rejection(entry: Entry, eff: Effective) -> str | None:
+def dial_rejection(entry: Entry, eff: Effective, *, include_gated: bool = False) -> str | None:
     """What no surface may offer under this policy: omitted entries, gated ones still locked, and ones above
     the level or the vulgarity (shared with lookup)."""
     if entry.status == "omit":
         return f"status omit (flags: {', '.join(entry.flags) or 'none'})"
-    if entry.status == "gate" and "all" not in eff.unlock:
+    if not include_gated and entry.status == "gate" and "all" not in eff.unlock:
         locked = tuple(sorted(set(entry.flags) - eff.unlock))
         if locked or not entry.flags:
             return Gated(locked)
+    if not include_gated:
+        blocked = tuple(r for r in entry.held_back if r != "status" and
+                        not (r == "misreadable" and {"misreadable", "all"} & eff.unlock))
+        if blocked:
+            return Gated(blocked)
     if entry.incoherence > eff.level:
         return f"needs level {entry.incoherence}"
     if entry.vulgarity > eff.vulgarity:
@@ -201,7 +206,7 @@ def candidates(det: Detection, entries: list[Entry], eff: Effective, used: dict[
         p_class = eff.profile.substitution[e.substitution_class]
         intensity_fit = 1.0 / (1.0 + abs(e.intensity - det.intensity))
         direct = 2.0 if e.id in det.direct else 1.0
-        sources = 1.0 + 0.1 * min(len(e.sources), 5)
+        metadata = eff.metadata_weight(e)
         repeat = 0.2 ** used.get(e.id, 0)
         regional = 1.5 if eff.regions and set(e.region) & set(eff.regions) else 1.0
         # where a level allows dated words they're colour, not the default: "bloke" over "cove"
@@ -211,9 +216,9 @@ def candidates(det: Detection, entries: list[Entry], eff: Effective, used: dict[
             rejected.append((e, "swear weighting disabled"))
             continue
         tone_fit = tone_weight(e.tone, mood) if mood is not None else 1.0
-        w = e.weight * intensity_fit * direct * sources * repeat * regional * p_class * dated * lean * tone_fit
+        w = e.weight * intensity_fit * direct * metadata * repeat * regional * p_class * dated * lean * tone_fit
         why = (f"w={w:.3f} (base {e.weight:g} x intensity-fit {intensity_fit:.2f} [{e.intensity} vs {det.intensity}]"
-               f" x direct {direct:g} x sources {sources:.1f} x repeat {repeat:.2f}"
+               f" x direct {direct:g} x metadata {metadata:.2f} [score {e.attestation.score:g}; {e.reads_as}] x repeat {repeat:.2f}"
                + (f" x region {regional:g}" if regional != 1 else "") + (f" x {e.register} {dated:g}" if dated != 1 else "")
                + f" x p({e.substitution_class}) {p_class:g}"
                + (f" x tone-fit {tone_fit:g} ({e.tone}/{mood})" if mood is not None else "") + ")")

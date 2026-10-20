@@ -5,6 +5,14 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Separate term evidence, origin, Australian use and modern misreading from manual entry gates.
+  Migrate citations to structured records, add provisional attestation scoring with live testimony replacement,
+  and use the continuous score and a general-English weight in selection. Re-review the old foreign/archaic
+  flags and minimum wording levels; label existing agent-produced riffs and contextual imagery honestly.
+  Keep changes contract version 2 until the coordinated community-dictionary contract slice.
+- Recognise agreement consistently across straight and curly dialogue quotes without treating a quoted
+  word as a new clause. Require explicit social-event wording for party/function substitutions.
+
 - Add an offline training-label audit and reject contradictory or self-negative pairs before model
   construction. Generate wrong-sense anchors through the canonical exclusion parser and respect a
   same-concept longer trigger's ownership. Keep the recipe, model weights and reference gates unchanged.

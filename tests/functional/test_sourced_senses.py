@@ -97,7 +97,7 @@ def test_loose_consecration_paraphrases_need_explicit_unlock(dictionary):
         assert not loose & {e['id'] for e in plain['results']}
         unlocked = lookup(query, translator=tr, limit=100, include_gated=True)
         held = [e for e in unlocked['results'] if e['id'] in loose]
-        assert held and all(e['gated'] == ['dubious_meaning'] for e in held)
+        assert held and all(e['gated'] == ['doubtful_definition'] for e in held)
     for seed in range(8):
         assert not loose & picks(render(tr, 'We consecrated it.', seed))
 
