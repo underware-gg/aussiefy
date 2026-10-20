@@ -1,0 +1,135 @@
+# The toolkit and its surfaces
+
+Language models are good at Australian English when they have quality source material and clear guidance.
+The toolkit gives them both, as six plain functions that return JSON-ready dicts. `aussiefy.harness` gathers
+them; `lookup`, `lint` and `guide` each live in their own module (`lookup.py`, `lint.py`, `guide.py`).
+
+| Function | CLI | What it does |
+|---|---|---|
+| `lookup(query)` | `aussiefy lookup "very busy"` | Genuine Aussie options for a meaning, or what a term means ("goog"), filtered to the level and vulgarity |
+| `lint(text)` | `aussiefy lint < draft.txt` | Lints a draft for flagged non-Aussie phrases, swearing over the cap (via `aussiefy/data/swears.yaml`), US spelling and US/UK words (`aussiefy/data/dialect.yaml`), plus optional "could be more Aussie" suggestions. With `original=`, also checks fidelity: length, and names and numbers kept or invented |
+| `guide(level)` | `aussiefy guide -l 5` | Voice, language limits and the craft rules learned from good translations (swear inside sentences, tag-ons only in dialogue, connectives in narration, no pile-ups, Australian spelling); craft is filtered to the requested dials; `aussiefy/data/guide.yaml` also owns the workflow, plan note and yarn rules |
+| `plan(text)` | `aussiefy plan < in.txt` | The engine's draft, its planned phrases, riffs and suggested openings, and the sentences it found too formal |
+| `translate(text)` | `aussiefy "text"` | The deterministic rule-engine output |
+| `verify(text, original=...)` | `aussiefy verify draft.txt --original original.txt` | Severity-based fidelity, structure and policy checks; [reference](verification.md) |
+
+How an agent uses them, step by step, is in [skills/aussiefy/SKILL.md](../../../skills/aussiefy/SKILL.md),
+which also explains each kind of lint issue (`!`), warning (`?`) and suggestion (`~`).
+
+## The Python API
+
+```python
+from aussiefy import Translator, translate, lookup, lint, guide, plan, yarn, load_dictionary
+
+r = translate("I'm extremely busy.", level=4, seed=7)
+r.text          # "I'm flat out like a lizard drinking."
+r.decisions()   # spans, chosen entries and garnish: what the engine decided
+r.to_dict()     # the policy envelope, decisions, explain records and difficult_sentences
+
+tr = Translator()   # reuse for many calls; Translator(load_dictionary(["my-extra.yaml"])) to extend
+tr.translate(text, level="swaggie", seed=1, vulgarity="dad", regions=["vic"], unlock=["archaic"])
+lookup("very tired", translator=tr)   # the toolkit functions take a translator too; the default is shared
+```
+
+`translate_changes` takes `translate`'s parameters, plus `embedder` (the similarity fallback), and returns a
+`ChangeSet`: the same translation, with every change it made and each swap's alternatives rendered in place
+([changes](changes.md)). It's for a host that lets a reader edit a translation, so it's in the Python API only, not
+the CLI, MCP tools or yarn mode. `aussiefy.guide.dial_descriptions()` lists every setting of the level, vulgarity
+and embellishment dials and every document type, each with a one-line description from `aussiefy/data/guide.yaml`.
+
+Every function takes keyword-only dials, by number or name: `level` (default 5) and `vulgarity` (default: the
+level's own). `translate`, `plan` and `yarn` also take `seed` (default 0). `translate` and `plan` also take
+`variety`, `registers`, `regions` and `unlock`; only `translate` takes `markdown` (default false).
+The core engine/Translator consumes plain text or internally masked text. `translate`, `plan`, `lint`, `verify`
+and `yarn` support the extended `markup` route; strict `markdown=True` source units belong only to translation.
+`lookup` takes `limit` (default 8) and `include_gated`; `lint` takes `original`. Every function takes an optional
+`translator` for a non-default dictionary.
+
+Document operations (`translate`, `plan`, `lint`, `verify`, `guide`, `yarn`) also take `document_type="general"`
+and `document_config=None`, plus the `embellishment` dial (0–2 or its name; omitted uses the selected preset).
+General defaults to Dinkum; Auto opts into detection; named types select presets;
+Custom enables only configured optional behaviours. The shared override object replaces inherited values after
+explicit dials, including false and empty lists. See [translation controls](translation-controls.md).
+Its nested `profile` tunes engine rates, limits, spacing, frames, drawl, swearing and rewrite thresholds.
+Partial maps inherit missing keys. Every document operation's result includes the resolved `profile_config`
+(lookup reads no profile settings, so its result reports the dials alone); document operations accept that snapshot back as `document_config.profile`. Custom still needs optional document
+behaviours enabled explicitly, even when their numeric settings are supplied.
+
+`translate` returns a `Result`, or `DocumentResult` with explicit `markdown=True`
+([Markdown contract](markdown.md)); the other toolkit functions return dicts, and `yarn` returns a result whose
+`outcome` is `applied` or `fell_back`. The package also exports `Policy`, `Dictionary`, `Entry`,
+`default_translator`, and the two errors it raises on purpose: `SchemaError` (an invalid dictionary) and
+`UserError` (a problem the user can fix; the CLI prints it and exits 2).
+
+`Result.to_dict()` is a superset of the toolkit translate dict: `text`, `level`, `level_name`, `vulgarity`,
+`vulgarity_name`, `policy_warnings`, `profile_config`, `seed`, `variety`, `decisions` and `difficult_sentences`, plus `source`
+and `explain`. The old `difficult` and duplicate `warnings` JSON keys are gone. Policy warnings name region
+tags or unlock flags unused by the dictionary; invalid register and unlock names raise `UserError`.
+
+MCP tools expose parameter descriptions and dial choices in their schemas, and preserve `UserError`
+messages as tool errors. `lookup` requires `limit >= 1` and marks each riff's `best` fit.
+
+A hosted MCP server narrows the tools by capability ([DD-028](../../architecture/decisions/dd-028-hosted-mcp-capabilities.md)).
+`build_server(translator=…, allow_unlock=False, allow_document_config=False, max_chars=…, max_query_chars=…,
+lookup_limit=…)` hides `unlock` and `include_gated`, hides `document_config` and the `custom` document type,
+caps `text` and `original`, and caps lookup's `query` and `limit`. The defaults serve everything. Every tool is annotated read-only,
+non-destructive, idempotent and closed-world.
+
+## The same toolkit, three more ways
+
+- **MCP server, for any MCP-capable agent.** The `aussiefy-mcp` command (stdio) serves the tools
+  `aussie_lookup`, `aussie_lint`, `aussie_guide`, `aussie_plan`, `aussie_translate` and `aussie_verify`. Setup is in the
+  [user guide](../user/agents.md).
+- **Portable CLI skill.** [skills/aussiefy/SKILL.md](../../../skills/aussiefy/SKILL.md) walks an agent through
+  brief → guide → plan → write with lookups → lint and fix → verify → deliver, using the CLI.
+- **Shared retelling session.** `aussiefy.retelling` owns `brief()`, `dispatch_tool()` and `tool_contracts()`:
+  model-independent briefs, checked tool calls and neutral JSON Schemas for `lookup`, `lint` and `submit`.
+  Clients adapt those contracts to their own transport. The optional `aussiefy.yarn` API driver derives its
+  Anthropic `tool_definitions()` from them. Existing `from aussiefy.yarn import brief, dispatch_tool` imports
+  remain supported. On the package, `aussiefy.yarn` is the convenience function, not the module.
+
+Every surface takes the same parameters by the same names and defaults; `tests/functional/test_interfaces.py` holds them
+in step (see [DD-008](../../architecture/decisions/dd-008-one-toolkit-thin-surfaces.md)).
+
+Genre, English, embellishment and extended document controls are described in [translation controls](translation-controls.md). Lookup's cards each carry the entry's `id` (full cards also its `sources`), built by `aussiefy/cards.py`, which the
+`changes` builder's entries share. `lookup(short=True)` offers compact cards; `lint(suggest=False)` skips optional engine suggestions.
+
+## Lookup sense matching
+
+Lookup matches complete slang forms with grammatical slots, so “give them a bell” reaches the telephone
+sense. When such a complete parse identifies a sense, unrelated meaning-model suggestions are excluded.
+Inflection applies to a noun's head or a verb phrase's head verb, not every word of every frame: “shouted”
+does not become a drinks noun. Negated model queries also need a shared content anchor with the candidate
+meaning; “harmless” is not evidence for “not acceptable”. Conservative filtering may return no result rather
+than an unreliable suggestion. These checks do not make the meaning model a general word-sense classifier.
+
+### Phrase location and fidelity
+
+Yarn's moved-phrase check compares a planned spot with one counterpart sentence, preferring its expected
+position when lexical scores tie. This prevents nearby sentences from collectively claiming a correctly
+placed phrase. The broader verification alignment still permits up to three sentences for splits and merges.
+Both are lexical heuristics; a substantially rewritten sentence may need the writer's explicit review.
+
+Lint compares refrains through the dictionary's drawl annotations. Reviewed whole-phrase `name_aliases` in
+`grammar.yaml` can excuse a known capitalised common phrase, such as `Christmas Trees` becoming `Chrissy trees`.
+Aliases are explicit: neither `John Woods` nor `Christmas Island` is inferred from its individual words.
+
+## Imagery in plans and lookup
+
+`plan` keeps its `riffs` list: entry-attached cards retain their existing fields, while contextual cards add
+an image `id`, `concepts`, `frames`, `form`, `subject`, `association`, `exaggeration`, `origin`, `usage` and
+`automatic`. Contextual cards can be offered even where no word substitution was chosen. A direct suffix
+can pass automatic insertion checks; rewrite and related cards always require a writer's judgement.
+
+Full and short entry cards include nonempty `semantic_effects`. Meaning suggestions respect the resolved
+`narrator_opinion` permission. Explicit term searches remain discoverable when the effect is disabled,
+with `effects_permitted: false` and `effect_rejection`; discovery does not promise that the term can fill a
+particular sentence. Plan's selected phrases also carry nonempty effect metadata. Change alternatives share
+the translation eligibility check, including alternatives whose vulgarity cap alone is raised.
+
+`lookup` also accepts `embellishment`, `document_type` and `document_config` in Python, CLI and MCP. It adds
+an optional `imagery` list when reviewed images match the query, alongside the usual `results`. Image text
+and IDs are searchable too. Bare lookup is not a grammatical fit check: its cards have `template: true`,
+`automatic: false`, and slots may remain unbound. `short=True` keeps this imagery and its usage conditions.
+Session lookup inherits the session's settings. `entry_riffs: false` removes legacy riff cards separately.
+See [contextual controls](translation-controls.md#contextual-imagery) before using a suggestion.

@@ -1,0 +1,3308 @@
+{
+ "about": "Every kind of change: swaps with alternatives, locked options and their masks, a stacked idiom and a riff; garnish of each placement, with removals; drawl and a swear infix inside a swap's region (covers); a US word swapped.",
+ "request": {
+  "text": "Good grief, are you crazy? You're overreacting, you're stupid and all talk, and I'm extremely busy cleaning up after you. I'm starving, let's get something to eat at McDonald's. The faucet in my apartment is broken. Then they lost their tents and chairs. He is an idiot and a liar. Calm down and stop complaining. I am going to the store.",
+  "level": 5,
+  "vulgarity": 1,
+  "seed": 10,
+  "embellishment": 2,
+  "english": "us",
+  "document_type": "general",
+  "document_config": {
+   "profile": {
+    "stack": 0.9,
+    "garnish": {
+     "riff": 1.0,
+     "opener": 0.8,
+     "tag": 0.8,
+     "tail": 1.0,
+     "connective": 0.6,
+     "aside": 1.0
+    },
+    "max_garnish": {
+     "riff": 30,
+     "opener": 20,
+     "tag": 20,
+     "tail": 10,
+     "aside": 10
+    },
+    "garnish_gap": 0,
+    "swearing": {
+     "infix": 6.0,
+     "exclaim": 0.5
+    }
+   }
+  }
+ },
+ "response": {
+  "version": 1,
+  "text": "Strewth, are ya mad as a cut snake? Beats me. Yer carrying on like a pork chop, you're a stubby short of a six-pack'n a big-noter, and I'm flat chat, flat out cleaning up after ya, ya drongo. Fair dinkum, I'm starvin', with a belly growling like a mixer full of rocks, let's 'ave a feed at Macca's. Well, the tap in my bloody unit is cactus, buggered, like a flat-pack in a cyclone. Stone the flamin' crows, then they lost their bloody tents and chairs, the whole kit 'n caboodle. So anyway, he's thick as two short planks and a liar. Now, 'ave a cup of tea, a Bex'n a bloody good lie-down'n stop whingeing, like a loose sheet of tin in the wind. Anyway, I'm going to the store. Streeeewth.",
+  "changes": [
+   {
+    "id": "substitution:0-10",
+    "kind": "substitution",
+    "src_span": [
+     0,
+     10
+    ],
+    "out_span": [
+     0,
+     7
+    ],
+    "original": "Good grief",
+    "output": "Strewth",
+    "entry_id": "strewth",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "strewth",
+      "weight": 0.2978,
+      "rendered": "Strewth",
+      "out_span": [
+       0,
+       7
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "bugger-me",
+      "weight": 0.1489,
+      "rendered": "Bugger me",
+      "out_span": [
+       0,
+       7
+      ],
+      "vulgarity": 1,
+      "masks": [
+       {
+        "span": [
+         0,
+         6
+        ],
+        "ending_start": 6,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "bugger-me-dead",
+      "weight": 0.0993,
+      "rendered": "Bugger me bloody dead",
+      "out_span": [
+       0,
+       7
+      ],
+      "vulgarity": 1,
+      "masks": [
+       {
+        "span": [
+         0,
+         6
+        ],
+        "ending_start": 6,
+        "vulgarity": 1
+       },
+       {
+        "span": [
+         10,
+         16
+        ],
+        "ending_start": 16,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "by-crikey",
+      "weight": 0.0893,
+      "rendered": "By crikey",
+      "out_span": [
+       0,
+       7
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "crikey",
+      "weight": 0.3275,
+      "rendered": "Crikey",
+      "out_span": [
+       0,
+       7
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "stone-the-crows",
+      "weight": 0.0372,
+      "rendered": "Stone the flamin' crows",
+      "out_span": [
+       0,
+       7
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [
+     {
+      "entry_id": "fuck-me",
+      "vulgarity": 2,
+      "rendered": "Fuck me",
+      "out_span": [
+       0,
+       7
+      ],
+      "masks": [
+       {
+        "span": [
+         0,
+         4
+        ],
+        "ending_start": 4,
+        "vulgarity": 2
+       }
+      ]
+     },
+     {
+      "entry_id": "what-the-fuck",
+      "vulgarity": 2,
+      "rendered": "What the fuck",
+      "out_span": [
+       0,
+       7
+      ],
+      "masks": [
+       {
+        "span": [
+         9,
+         13
+        ],
+        "ending_start": 13,
+        "vulgarity": 2
+       }
+      ]
+     }
+    ],
+    "covers": []
+   },
+   {
+    "id": "substitution:12-25",
+    "kind": "substitution",
+    "src_span": [
+     12,
+     25
+    ],
+    "out_span": [
+     9,
+     34
+    ],
+    "original": "are you crazy",
+    "output": "are ya mad as a cut snake",
+    "entry_id": "mad-as-a-cut-snake",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "mad-as-a-cut-snake",
+      "weight": 0.0988,
+      "rendered": "are ya mad as a cut snake",
+      "out_span": [
+       9,
+       34
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "mad-as-a-gumtree",
+      "weight": 0.0659,
+      "rendered": "are ya as mad as a gumtree full of galahs",
+      "out_span": [
+       9,
+       34
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "mad-as-a-meat-axe",
+      "weight": 0.0988,
+      "rendered": "are ya as mad as a meat axe",
+      "out_span": [
+       9,
+       34
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "off-rocker",
+      "weight": 0.1796,
+      "rendered": "are ya off yer bloody rocker",
+      "out_span": [
+       9,
+       34
+      ],
+      "vulgarity": 1,
+      "masks": [
+       {
+        "span": [
+         15,
+         21
+        ],
+        "ending_start": 21,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "off-tree",
+      "weight": 0.0898,
+      "rendered": "are ya off yer bloody tree",
+      "out_span": [
+       9,
+       34
+      ],
+      "vulgarity": 1,
+      "masks": [
+       {
+        "span": [
+         15,
+         21
+        ],
+        "ending_start": 21,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "roos-top-paddock",
+      "weight": 0.0898,
+      "rendered": "do ya 'ave a few roos loose in yer bloody top paddock",
+      "out_span": [
+       9,
+       34
+      ],
+      "vulgarity": 1,
+      "masks": [
+       {
+        "span": [
+         35,
+         41
+        ],
+        "ending_start": 41,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "snags-short-of-a-barbie",
+      "weight": 0.1796,
+      "rendered": "are ya a few snags short of a barbie",
+      "out_span": [
+       9,
+       34
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "troppo",
+      "weight": 0.1976,
+      "rendered": "are ya troppo",
+      "out_span": [
+       9,
+       34
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [
+     "phonetic:16-19:you-ya"
+    ]
+   },
+   {
+    "id": "phonetic:16-19:you-ya",
+    "kind": "phonetic",
+    "src_span": [
+     16,
+     19
+    ],
+    "out_span": [
+     13,
+     15
+    ],
+    "original": "you",
+    "output": "ya",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "you-ya",
+     "kind": "drawl",
+     "min_level": 5,
+     "before": "you",
+     "after": "ya"
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "garnish:26-26:aside",
+    "kind": "garnish",
+    "src_span": [
+     26,
+     26
+    ],
+    "out_span": [
+     35,
+     45
+    ],
+    "original": "",
+    "output": " Beats me.",
+    "entry_id": "g-aside-beats-me",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "aside",
+    "removed": {
+     "out_span": [
+      35,
+      45
+     ],
+     "rendered": ""
+    },
+    "alternatives": [
+     {
+      "entry_id": "g-aside-beats-me",
+      "weight": 0.3333,
+      "rendered": " Beats me.",
+      "out_span": [
+       35,
+       45
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-aside-dunno",
+      "weight": 0.3333,
+      "rendered": " Dunno.",
+      "out_span": [
+       35,
+       45
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-aside-search-me",
+      "weight": 0.3333,
+      "rendered": " Search me.",
+      "out_span": [
+       35,
+       45
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "phonetic:27-33:youre-yer",
+    "kind": "phonetic",
+    "src_span": [
+     27,
+     33
+    ],
+    "out_span": [
+     46,
+     49
+    ],
+    "original": "You're",
+    "output": "Yer",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "youre-yer",
+     "kind": "drawl",
+     "min_level": 5,
+     "before": "You're",
+     "after": "Yer"
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "substitution:34-46",
+    "kind": "substitution",
+    "src_span": [
+     34,
+     46
+    ],
+    "out_span": [
+     50,
+     78
+    ],
+    "original": "overreacting",
+    "output": "carrying on like a pork chop",
+    "entry_id": "carry-on-like-a-pork-chop",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "carry-on-like-a-pork-chop",
+      "weight": 1.0,
+      "rendered": "carrying on like a pork chop",
+      "out_span": [
+       50,
+       78
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "substitution:55-61",
+    "kind": "substitution",
+    "src_span": [
+     55,
+     61
+    ],
+    "out_span": [
+     87,
+     115
+    ],
+    "original": "stupid",
+    "output": "a stubby short of a six-pack",
+    "entry_id": "stubby-short-of-a-six-pack",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "stubby-short-of-a-six-pack",
+      "weight": 0.2391,
+      "rendered": "a stubby short of a six-pack",
+      "out_span": [
+       87,
+       115
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "dilly",
+      "weight": 0.0652,
+      "rendered": "dilly",
+      "out_span": [
+       87,
+       115
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "not-the-full-quid",
+      "weight": 0.2174,
+      "rendered": "not the full quid",
+      "out_span": [
+       87,
+       115
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "snags-short-of-a-barbie",
+      "weight": 0.2174,
+      "rendered": "a few snags short of a barbie",
+      "out_span": [
+       87,
+       115
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "thick-as-two-short-planks",
+      "weight": 0.2609,
+      "rendered": "thick as two short planks",
+      "out_span": [
+       87,
+       115
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [
+     {
+      "entry_id": "thick-as-shit",
+      "vulgarity": 2,
+      "rendered": "thick as shit",
+      "out_span": [
+       87,
+       115
+      ],
+      "masks": [
+       {
+        "span": [
+         9,
+         13
+        ],
+        "ending_start": 13,
+        "vulgarity": 2
+       }
+      ]
+     }
+    ],
+    "covers": []
+   },
+   {
+    "id": "phonetic:61-66:and-n",
+    "kind": "phonetic",
+    "src_span": [
+     61,
+     66
+    ],
+    "out_span": [
+     115,
+     118
+    ],
+    "original": " and ",
+    "output": "'n ",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "and-n",
+     "kind": "drawl",
+     "min_level": 5,
+     "before": " and ",
+     "after": "'n "
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "substitution:66-74",
+    "kind": "substitution",
+    "src_span": [
+     66,
+     74
+    ],
+    "out_span": [
+     118,
+     129
+    ],
+    "original": "all talk",
+    "output": "a big-noter",
+    "entry_id": "a-big-noter-pred",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "a-big-noter-pred",
+      "weight": 0.5238,
+      "rendered": "a big-noter",
+      "out_span": [
+       118,
+       129
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "all-froth-and-no-beer",
+      "weight": 0.4762,
+      "rendered": "all froth and no beer",
+      "out_span": [
+       118,
+       129
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [
+     {
+      "entry_id": "all-piss-and-wind",
+      "vulgarity": 2,
+      "rendered": "all piss and wind",
+      "out_span": [
+       118,
+       129
+      ],
+      "masks": [
+       {
+        "span": [
+         4,
+         8
+        ],
+        "ending_start": 8,
+        "vulgarity": 2
+       }
+      ]
+     }
+    ],
+    "covers": []
+   },
+   {
+    "id": "substitution:84-98",
+    "kind": "substitution",
+    "src_span": [
+     84,
+     98
+    ],
+    "out_span": [
+     139,
+     158
+    ],
+    "original": "extremely busy",
+    "output": "flat chat, flat out",
+    "entry_id": "flat-chat",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "flat-chat",
+      "weight": 0.3929,
+      "rendered": "flat chat, flat out",
+      "out_span": [
+       139,
+       158
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "flat-out",
+      "weight": 0.2143,
+      "rendered": "flat out, flat chat",
+      "out_span": [
+       139,
+       158
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "flat-out-lizard",
+      "weight": 0.3929,
+      "rendered": "flat out like a lizard drinking",
+      "out_span": [
+       139,
+       158
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "phonetic:117-120:you-ya",
+    "kind": "phonetic",
+    "src_span": [
+     117,
+     120
+    ],
+    "out_span": [
+     177,
+     179
+    ],
+    "original": "you",
+    "output": "ya",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "you-ya",
+     "kind": "drawl",
+     "min_level": 5,
+     "before": "you",
+     "after": "ya"
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "garnish:120-120:tag",
+    "kind": "garnish",
+    "src_span": [
+     120,
+     120
+    ],
+    "out_span": [
+     179,
+     190
+    ],
+    "original": "",
+    "output": ", ya drongo",
+    "entry_id": "g-ya-drongo",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "tag",
+    "removed": {
+     "out_span": [
+      179,
+      190
+     ],
+     "rendered": ""
+    },
+    "alternatives": [
+     {
+      "entry_id": "g-ay",
+      "weight": 0.1765,
+      "rendered": ", ay",
+      "out_span": [
+       179,
+       190
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-cobber",
+      "weight": 0.1176,
+      "rendered": ", cobber",
+      "out_span": [
+       179,
+       190
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-mate",
+      "weight": 0.3529,
+      "rendered": ", mate",
+      "out_span": [
+       179,
+       190
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-ya-drongo",
+      "weight": 0.1176,
+      "rendered": ", ya drongo",
+      "out_span": [
+       179,
+       190
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-ya-galah",
+      "weight": 0.1176,
+      "rendered": ", ya galah",
+      "out_span": [
+       179,
+       190
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-ya-mug",
+      "weight": 0.1176,
+      "rendered": ", ya mug",
+      "out_span": [
+       179,
+       190
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "garnish:122-122:opener",
+    "kind": "garnish",
+    "src_span": [
+     122,
+     122
+    ],
+    "out_span": [
+     192,
+     205
+    ],
+    "original": "",
+    "output": "Fair dinkum, ",
+    "entry_id": "g-fair-dinkum",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "opener",
+    "removed": {
+     "out_span": [
+      192,
+      208
+     ],
+     "rendered": "I'm"
+    },
+    "alternatives": [
+     {
+      "entry_id": "g-crikey",
+      "weight": 0.2,
+      "rendered": "Crikey, I'm",
+      "out_span": [
+       192,
+       208
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-fair-dinkum",
+      "weight": 0.2,
+      "rendered": "Fair dinkum, I'm",
+      "out_span": [
+       192,
+       208
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-jeez",
+      "weight": 0.2,
+      "rendered": "Jeez, I'm",
+      "out_span": [
+       192,
+       208
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-stone-the-crows",
+      "weight": 0.2,
+      "rendered": "Stone the crows, I'm",
+      "out_span": [
+       192,
+       208
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-strewth",
+      "weight": 0.2,
+      "rendered": "Struth, I'm",
+      "out_span": [
+       192,
+       208
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "substitution:126-134",
+    "kind": "substitution",
+    "src_span": [
+     126,
+     134
+    ],
+    "out_span": [
+     209,
+     217
+    ],
+    "original": "starving",
+    "output": "starvin'",
+    "entry_id": "starvin",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "starvin",
+      "weight": 0.5455,
+      "rendered": "starvin'",
+      "out_span": [
+       209,
+       217
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "hungry-enough-horse-jockey",
+      "weight": 0.2727,
+      "rendered": "hungry enough to eat a horse and chase the jockey",
+      "out_span": [
+       209,
+       217
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "peckish",
+      "weight": 0.1818,
+      "rendered": "peckish",
+      "out_span": [
+       209,
+       217
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [
+     {
+      "entry_id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+      "vulgarity": 2,
+      "rendered": "hungry enough to eat the arse out of a low-flyin' duck",
+      "out_span": [
+       209,
+       217
+      ],
+      "masks": [
+       {
+        "span": [
+         25,
+         29
+        ],
+        "ending_start": 29,
+        "vulgarity": 2
+       }
+      ]
+     }
+    ],
+    "covers": []
+   },
+   {
+    "id": "garnish:134-134:riff",
+    "kind": "garnish",
+    "src_span": [
+     134,
+     134
+    ],
+    "out_span": [
+     217,
+     267
+    ],
+    "original": "",
+    "output": ", with a belly growling like a mixer full of rocks",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "riff",
+    "image_id": "belly-mixer-rocks",
+    "removed": {
+     "out_span": [
+      217,
+      267
+     ],
+     "rendered": ""
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "phonetic:142-162:have-ave",
+    "kind": "phonetic",
+    "src_span": [
+     142,
+     162
+    ],
+    "out_span": [
+     275,
+     279
+    ],
+    "original": "get something to eat",
+    "output": "'ave",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "have-ave",
+     "kind": "drawl",
+     "min_level": 5,
+     "before": "have",
+     "after": "'ave"
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "substitution:142-162",
+    "kind": "substitution",
+    "src_span": [
+     142,
+     162
+    ],
+    "out_span": [
+     275,
+     286
+    ],
+    "original": "get something to eat",
+    "output": "'ave a feed",
+    "entry_id": "have-a-feed",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "have-a-feed",
+      "weight": 1.0,
+      "rendered": "'ave a feed",
+      "out_span": [
+       275,
+       286
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [
+     "phonetic:142-162:have-ave"
+    ]
+   },
+   {
+    "id": "substitution:166-176",
+    "kind": "substitution",
+    "src_span": [
+     166,
+     176
+    ],
+    "out_span": [
+     290,
+     297
+    ],
+    "original": "McDonald's",
+    "output": "Macca's",
+    "entry_id": "maccas",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "maccas",
+      "weight": 1.0,
+      "rendered": "Macca's",
+      "out_span": [
+       290,
+       297
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "garnish:178-178:connective",
+    "kind": "garnish",
+    "src_span": [
+     178,
+     178
+    ],
+    "out_span": [
+     299,
+     305
+    ],
+    "original": "",
+    "output": "Well, ",
+    "entry_id": "c-well",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "connective",
+    "removed": {
+     "out_span": [
+      299,
+      308
+     ],
+     "rendered": "The"
+    },
+    "alternatives": [
+     {
+      "entry_id": "c-anyway",
+      "weight": 0.2817,
+      "rendered": "Anyway, the",
+      "out_span": [
+       299,
+       308
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-mate",
+      "weight": 0.0845,
+      "rendered": "Mate, the",
+      "out_span": [
+       299,
+       308
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-mind-you",
+      "weight": 0.0704,
+      "rendered": "Mind you, the",
+      "out_span": [
+       299,
+       308
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-now",
+      "weight": 0.1408,
+      "rendered": "Now, the",
+      "out_span": [
+       299,
+       308
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-so-anyway",
+      "weight": 0.1408,
+      "rendered": "So anyway, the",
+      "out_span": [
+       299,
+       308
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-well",
+      "weight": 0.2817,
+      "rendered": "Well, the",
+      "out_span": [
+       299,
+       308
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "dialect:182-188",
+    "kind": "dialect",
+    "src_span": [
+     182,
+     188
+    ],
+    "out_span": [
+     309,
+     312
+    ],
+    "original": "faucet",
+    "output": "tap",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "pair": {
+     "english": "us",
+     "before": "faucet",
+     "after": "tap"
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "swear_infix:192-195:infix-bloody-possession",
+    "kind": "swear_infix",
+    "src_span": [
+     192,
+     195
+    ],
+    "out_span": [
+     316,
+     326
+    ],
+    "original": "my ",
+    "output": "my bloody ",
+    "entry_id": null,
+    "vulgarity": 1,
+    "masks": [
+     {
+      "span": [
+       3,
+       9
+      ],
+      "ending_start": 9,
+      "vulgarity": 1
+     }
+    ],
+    "rule": {
+     "id": "infix-bloody-possession",
+     "kind": "infix",
+     "min_level": null,
+     "before": "my ",
+     "after": "my bloody "
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "substitution:195-204",
+    "kind": "substitution",
+    "src_span": [
+     195,
+     204
+    ],
+    "out_span": [
+     326,
+     330
+    ],
+    "original": "apartment",
+    "output": "unit",
+    "entry_id": "unit",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "unit",
+      "weight": 1.0,
+      "rendered": "unit",
+      "out_span": [
+       326,
+       330
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "substitution:208-214",
+    "kind": "substitution",
+    "src_span": [
+     208,
+     214
+    ],
+    "out_span": [
+     334,
+     381
+    ],
+    "original": "broken",
+    "output": "cactus, buggered, like a flat-pack in a cyclone",
+    "entry_id": "cactus",
+    "vulgarity": 1,
+    "masks": [
+     {
+      "span": [
+       8,
+       16
+      ],
+      "ending_start": 14,
+      "vulgarity": 1
+     }
+    ],
+    "alternatives": [
+     {
+      "entry_id": "cactus",
+      "weight": 0.1648,
+      "rendered": "cactus, buggered, like a flat-pack in a cyclone",
+      "out_span": [
+       334,
+       381
+      ],
+      "vulgarity": 1,
+      "masks": [
+       {
+        "span": [
+         8,
+         16
+        ],
+        "ending_start": 14,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "buggered",
+      "weight": 0.1648,
+      "rendered": "buggered, cactus",
+      "out_span": [
+       334,
+       381
+      ],
+      "vulgarity": 1,
+      "masks": [
+       {
+        "span": [
+         0,
+         8
+        ],
+        "ending_start": 6,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "bung-broken",
+      "weight": 0.3956,
+      "rendered": "bung",
+      "out_span": [
+       334,
+       381
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "rooted",
+      "weight": 0.1099,
+      "rendered": "rooted, buggered",
+      "out_span": [
+       334,
+       381
+      ],
+      "vulgarity": 1,
+      "masks": [
+       {
+        "span": [
+         8,
+         16
+        ],
+        "ending_start": 14,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "stuffed",
+      "weight": 0.1648,
+      "rendered": "stuffed, buggered",
+      "out_span": [
+       334,
+       381
+      ],
+      "vulgarity": 1,
+      "masks": [
+       {
+        "span": [
+         9,
+         17
+        ],
+        "ending_start": 15,
+        "vulgarity": 1
+       }
+      ]
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "garnish:216-216:opener",
+    "kind": "garnish",
+    "src_span": [
+     216,
+     216
+    ],
+    "out_span": [
+     383,
+     408
+    ],
+    "original": "",
+    "output": "Stone the flamin' crows, ",
+    "entry_id": "g-stone-the-crows",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "opener",
+    "removed": {
+     "out_span": [
+      383,
+      412
+     ],
+     "rendered": "Then"
+    },
+    "alternatives": [
+     {
+      "entry_id": "g-crikey",
+      "weight": 0.25,
+      "rendered": "Crikey, then",
+      "out_span": [
+       383,
+       412
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-jeez",
+      "weight": 0.25,
+      "rendered": "Jeez, then",
+      "out_span": [
+       383,
+       412
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-stone-the-crows",
+      "weight": 0.25,
+      "rendered": "Stone the flamin' crows, then",
+      "out_span": [
+       383,
+       412
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-strewth",
+      "weight": 0.25,
+      "rendered": "Strewth, then",
+      "out_span": [
+       383,
+       412
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "swear_infix:231-237:infix-bloody-possession",
+    "kind": "swear_infix",
+    "src_span": [
+     231,
+     237
+    ],
+    "out_span": [
+     423,
+     436
+    ],
+    "original": "their ",
+    "output": "their bloody ",
+    "entry_id": null,
+    "vulgarity": 1,
+    "masks": [
+     {
+      "span": [
+       6,
+       12
+      ],
+      "ending_start": 12,
+      "vulgarity": 1
+     }
+    ],
+    "rule": {
+     "id": "infix-bloody-possession",
+     "kind": "infix",
+     "min_level": null,
+     "before": "their ",
+     "after": "their bloody "
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "garnish:253-253:tail",
+    "kind": "garnish",
+    "src_span": [
+     253,
+     253
+    ],
+    "out_span": [
+     452,
+     479
+    ],
+    "original": "",
+    "output": ", the whole kit 'n caboodle",
+    "entry_id": "g-tail-kit-and-caboodle",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "tail",
+    "removed": {
+     "out_span": [
+      452,
+      479
+     ],
+     "rendered": ""
+    },
+    "alternatives": [
+     {
+      "entry_id": "g-tail-and-stuff",
+      "weight": 0.1429,
+      "rendered": ", and stuff",
+      "out_span": [
+       452,
+       479
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-tail-box-and-dice",
+      "weight": 0.2857,
+      "rendered": ", the whole box 'n dice",
+      "out_span": [
+       452,
+       479
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-tail-kit-and-caboodle",
+      "weight": 0.2857,
+      "rendered": ", the whole kit 'n caboodle",
+      "out_span": [
+       452,
+       479
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-tail-the-lot",
+      "weight": 0.2857,
+      "rendered": ", the lot",
+      "out_span": [
+       452,
+       479
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "garnish:255-255:connective",
+    "kind": "garnish",
+    "src_span": [
+     255,
+     255
+    ],
+    "out_span": [
+     481,
+     492
+    ],
+    "original": "",
+    "output": "So anyway, ",
+    "entry_id": "c-so-anyway",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "connective",
+    "removed": {
+     "out_span": [
+      481,
+      496
+     ],
+     "rendered": "He's"
+    },
+    "alternatives": [
+     {
+      "entry_id": "c-anyway",
+      "weight": 0.3922,
+      "rendered": "Anyway, he's",
+      "out_span": [
+       481,
+       496
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-mate",
+      "weight": 0.1176,
+      "rendered": "Mate, he's",
+      "out_span": [
+       481,
+       496
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-mind-you",
+      "weight": 0.098,
+      "rendered": "Mind you, he's",
+      "out_span": [
+       481,
+       496
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-now",
+      "weight": 0.1961,
+      "rendered": "Now, he's",
+      "out_span": [
+       481,
+       496
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-so-anyway",
+      "weight": 0.1961,
+      "rendered": "So anyway, he's",
+      "out_span": [
+       481,
+       496
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [
+     "phonetic:255-260:pronoun-be",
+     "substitution:255-269"
+    ]
+   },
+   {
+    "id": "phonetic:255-260:pronoun-be",
+    "kind": "phonetic",
+    "src_span": [
+     255,
+     260
+    ],
+    "out_span": [
+     492,
+     496
+    ],
+    "original": "He is",
+    "output": "he's",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "pronoun-be",
+     "kind": "drawl",
+     "min_level": 4,
+     "before": "he is",
+     "after": "he's"
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "substitution:255-269",
+    "kind": "substitution",
+    "src_span": [
+     255,
+     269
+    ],
+    "out_span": [
+     492,
+     522
+    ],
+    "original": "He is an idiot",
+    "output": "he's thick as two short planks",
+    "entry_id": "thick-as-two-short-planks",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "thick-as-two-short-planks",
+      "weight": 0.3226,
+      "rendered": "he's thick as two short planks",
+      "out_span": [
+       492,
+       522
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "dilly",
+      "weight": 0.0806,
+      "rendered": "he's dilly",
+      "out_span": [
+       492,
+       522
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "not-the-full-quid",
+      "weight": 0.2688,
+      "rendered": "he isn't the full quid",
+      "out_span": [
+       492,
+       522
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "snags-short-of-a-barbie",
+      "weight": 0.2688,
+      "rendered": "he's a few snags short of a barbie",
+      "out_span": [
+       492,
+       522
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "stubby-short-of-a-six-pack",
+      "weight": 0.0591,
+      "rendered": "he's a stubby short of a six-pack",
+      "out_span": [
+       492,
+       522
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [
+     {
+      "entry_id": "thick-as-shit",
+      "vulgarity": 2,
+      "rendered": "he's thick as shit",
+      "out_span": [
+       492,
+       522
+      ],
+      "masks": [
+       {
+        "span": [
+         14,
+         18
+        ],
+        "ending_start": 18,
+        "vulgarity": 2
+       }
+      ]
+     },
+     {
+      "entry_id": "wouldnt-know-arse-from-elbow",
+      "vulgarity": 2,
+      "rendered": "he wouldn't bloody well know his arse from his elbow",
+      "out_span": [
+       492,
+       522
+      ],
+      "masks": [
+       {
+        "span": [
+         12,
+         18
+        ],
+        "ending_start": 18,
+        "vulgarity": 1
+       },
+       {
+        "span": [
+         33,
+         37
+        ],
+        "ending_start": 37,
+        "vulgarity": 2
+       }
+      ]
+     }
+    ],
+    "covers": [
+     "garnish:255-255:connective",
+     "phonetic:255-260:pronoun-be"
+    ]
+   },
+   {
+    "id": "garnish:282-282:connective",
+    "kind": "garnish",
+    "src_span": [
+     282,
+     282
+    ],
+    "out_span": [
+     535,
+     540
+    ],
+    "original": "",
+    "output": "Now, ",
+    "entry_id": "c-now",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "connective",
+    "removed": {
+     "out_span": [
+      535,
+      589
+     ],
+     "rendered": "'ave a cup of tea, a Bex'n a bloody good lie-down"
+    },
+    "alternatives": [
+     {
+      "entry_id": "c-anyway",
+      "weight": 0.4878,
+      "rendered": "Anyway, 'ave a cup of tea, a Bex'n a bloody good lie-down",
+      "out_span": [
+       535,
+       589
+      ],
+      "vulgarity": 0,
+      "masks": [
+       {
+        "span": [
+         37,
+         43
+        ],
+        "ending_start": 43,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "c-mate",
+      "weight": 0.1463,
+      "rendered": "Mate, 'ave a cup of tea, a Bex'n a bloody good lie-down",
+      "out_span": [
+       535,
+       589
+      ],
+      "vulgarity": 0,
+      "masks": [
+       {
+        "span": [
+         35,
+         41
+        ],
+        "ending_start": 41,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "c-mind-you",
+      "weight": 0.122,
+      "rendered": "Mind you, 'ave a cup of tea, a Bex'n a bloody good lie-down",
+      "out_span": [
+       535,
+       589
+      ],
+      "vulgarity": 0,
+      "masks": [
+       {
+        "span": [
+         39,
+         45
+        ],
+        "ending_start": 45,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "c-now",
+      "weight": 0.2439,
+      "rendered": "Now, 'ave a cup of tea, a Bex'n a bloody good lie-down",
+      "out_span": [
+       535,
+       589
+      ],
+      "vulgarity": 0,
+      "masks": [
+       {
+        "span": [
+         34,
+         40
+        ],
+        "ending_start": 40,
+        "vulgarity": 1
+       }
+      ]
+     }
+    ],
+    "locked": [],
+    "covers": [
+     "phonetic:282-291:have-ave",
+     "substitution:282-291",
+     "phonetic:282-291:and-n",
+     "swear_infix:282-291:infix-bloody-adjective"
+    ]
+   },
+   {
+    "id": "phonetic:282-291:have-ave",
+    "kind": "phonetic",
+    "src_span": [
+     282,
+     291
+    ],
+    "out_span": [
+     540,
+     544
+    ],
+    "original": "Calm down",
+    "output": "'ave",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "have-ave",
+     "kind": "drawl",
+     "min_level": 5,
+     "before": "have",
+     "after": "'ave"
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "substitution:282-291",
+    "kind": "substitution",
+    "src_span": [
+     282,
+     291
+    ],
+    "out_span": [
+     540,
+     589
+    ],
+    "original": "Calm down",
+    "output": "'ave a cup of tea, a Bex'n a bloody good lie-down",
+    "entry_id": "cup-of-tea-bex-lie-down",
+    "vulgarity": 1,
+    "masks": [
+     {
+      "span": [
+       29,
+       35
+      ],
+      "ending_start": 35,
+      "vulgarity": 1
+     }
+    ],
+    "alternatives": [
+     {
+      "entry_id": "cup-of-tea-bex-lie-down",
+      "weight": 0.2,
+      "rendered": "'ave a cup of tea, a Bex'n a bloody good lie-down",
+      "out_span": [
+       540,
+       589
+      ],
+      "vulgarity": 1,
+      "masks": [
+       {
+        "span": [
+         29,
+         35
+        ],
+        "ending_start": 35,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "settle-petal",
+      "weight": 0.8,
+      "rendered": "settle, petal",
+      "out_span": [
+       540,
+       589
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [
+     "garnish:282-282:connective",
+     "phonetic:282-291:have-ave",
+     "phonetic:282-291:and-n",
+     "swear_infix:282-291:infix-bloody-adjective"
+    ]
+   },
+   {
+    "id": "phonetic:282-291:and-n",
+    "kind": "phonetic",
+    "src_span": [
+     282,
+     291
+    ],
+    "out_span": [
+     564,
+     567
+    ],
+    "original": "Calm down",
+    "output": "'n ",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "and-n",
+     "kind": "drawl",
+     "min_level": 5,
+     "before": " and ",
+     "after": "'n "
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "swear_infix:282-291:infix-bloody-adjective",
+    "kind": "swear_infix",
+    "src_span": [
+     282,
+     291
+    ],
+    "out_span": [
+     569,
+     576
+    ],
+    "original": "Calm down",
+    "output": "bloody ",
+    "entry_id": null,
+    "vulgarity": 1,
+    "masks": [
+     {
+      "span": [
+       0,
+       6
+      ],
+      "ending_start": 6,
+      "vulgarity": 1
+     }
+    ],
+    "rule": {
+     "id": "infix-bloody-adjective",
+     "kind": "infix",
+     "min_level": null,
+     "before": "",
+     "after": "bloody "
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "phonetic:291-296:and-n",
+    "kind": "phonetic",
+    "src_span": [
+     291,
+     296
+    ],
+    "out_span": [
+     589,
+     592
+    ],
+    "original": " and ",
+    "output": "'n ",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "and-n",
+     "kind": "drawl",
+     "min_level": 5,
+     "before": " and ",
+     "after": "'n "
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "substitution:301-312",
+    "kind": "substitution",
+    "src_span": [
+     301,
+     312
+    ],
+    "out_span": [
+     597,
+     645
+    ],
+    "original": "complaining",
+    "output": "whingeing, like a loose sheet of tin in the wind",
+    "entry_id": "whinge",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "whinge",
+      "weight": 1.0,
+      "rendered": "whingeing, like a loose sheet of tin in the wind",
+      "out_span": [
+       597,
+       645
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "garnish:314-314:connective",
+    "kind": "garnish",
+    "src_span": [
+     314,
+     314
+    ],
+    "out_span": [
+     647,
+     655
+    ],
+    "original": "",
+    "output": "Anyway, ",
+    "entry_id": "c-anyway",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "connective",
+    "removed": {
+     "out_span": [
+      647,
+      658
+     ],
+     "rendered": "I'm"
+    },
+    "alternatives": [
+     {
+      "entry_id": "c-anyway",
+      "weight": 0.6452,
+      "rendered": "Anyway, I'm",
+      "out_span": [
+       647,
+       658
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-mate",
+      "weight": 0.1935,
+      "rendered": "Mate, I'm",
+      "out_span": [
+       647,
+       658
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-mind-you",
+      "weight": 0.1613,
+      "rendered": "Mind you, I'm",
+      "out_span": [
+       647,
+       658
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [
+     "phonetic:314-318:i-am"
+    ]
+   },
+   {
+    "id": "phonetic:314-318:i-am",
+    "kind": "phonetic",
+    "src_span": [
+     314,
+     318
+    ],
+    "out_span": [
+     655,
+     658
+    ],
+    "original": "I am",
+    "output": "I'm",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "i-am",
+     "kind": "drawl",
+     "min_level": 4,
+     "before": "I am",
+     "after": "I'm"
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "garnish:338-338:closer",
+    "kind": "garnish",
+    "src_span": [
+     338,
+     338
+    ],
+    "out_span": [
+     678,
+     690
+    ],
+    "original": "",
+    "output": " Streeeewth.",
+    "entry_id": "g-strewth-closer",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "closer",
+    "removed": {
+     "out_span": [
+      678,
+      690
+     ],
+     "rendered": ""
+    },
+    "alternatives": [
+     {
+      "entry_id": "g-stone-the-flamin-crows",
+      "weight": 0.3333,
+      "rendered": " Stone the flamin' crows.",
+      "out_span": [
+       678,
+       690
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-strewth-closer",
+      "weight": 0.3333,
+      "rendered": " Streeeewth.",
+      "out_span": [
+       678,
+       690
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-too-easy",
+      "weight": 0.3333,
+      "rendered": " Too easy.",
+      "out_span": [
+       678,
+       690
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   }
+  ],
+  "entries": {
+   "a-big-noter-pred": {
+    "id": "a-big-noter-pred",
+    "form": "a big-noter",
+    "gloss": "A show-off.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "ALL_TALK"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     "https://history.cass.anu.edu.au/centres/andc/australian-words-b"
+    ]
+   },
+   "all-froth-and-no-beer": {
+    "id": "all-froth-and-no-beer",
+    "form": "all froth and no beer",
+    "gloss": "All show, no substance.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "ALL_TALK"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current"
+   },
+   "all-piss-and-wind": {
+    "id": "all-piss-and-wind",
+    "form": "all piss and wind",
+    "gloss": "Nothing but empty talk.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "ALL_TALK"
+    ],
+    "level": 3,
+    "vulgarity": 2,
+    "register": "current"
+   },
+   "bugger-me": {
+    "id": "bugger-me",
+    "form": "bugger me",
+    "gloss": "Well, I never.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 2,
+    "vulgarity": 1,
+    "register": "current"
+   },
+   "bugger-me-dead": {
+    "id": "bugger-me-dead",
+    "form": "bugger me dead",
+    "gloss": "Astonishment, with feeling.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 3,
+    "vulgarity": 1,
+    "register": "current"
+   },
+   "buggered": {
+    "id": "buggered",
+    "form": "buggered",
+    "gloss": "Exhausted, or broken beyond use.",
+    "frame": "adj",
+    "concepts": [
+     "TIRED",
+     "BROKEN"
+    ],
+    "level": 2,
+    "vulgarity": 1,
+    "register": "current"
+   },
+   "bung-broken": {
+    "id": "bung-broken",
+    "form": "bung",
+    "gloss": "Broken, not working, crook (\"the telly's gone bung\", \"a bung knee\").",
+    "frame": "predicate_adj",
+    "concepts": [
+     "BROKEN"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     "https://en.wiktionary.org/wiki/bung",
+     "https://history.cass.anu.edu.au/centres/andc/australian-words-b"
+    ]
+   },
+   "by-crikey": {
+    "id": "by-crikey",
+    "form": "by crikey",
+    "gloss": "An emphatic exclamation of surprise or dismay.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "dated",
+    "notes": "A euphemistic exclamation, shared with other Englishes; its religious origin does not mean God willing.",
+    "sources": [
+     "https://greensdictofslang.com/entry/ghmqtca",
+     "https://dictionary.cambridge.org/dictionary/english/crikey"
+    ]
+   },
+   "c-anyway": {
+    "id": "c-anyway",
+    "form": "anyway",
+    "gloss": "Moving the story along.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "connective"
+   },
+   "c-mate": {
+    "id": "c-mate",
+    "form": "mate",
+    "gloss": "The storyteller nudging the listener.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 5,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "connective"
+   },
+   "c-mind-you": {
+    "id": "c-mind-you",
+    "form": "mind you",
+    "gloss": "Adds a qualifying afterthought (\"Mind you, his brother turned up\").",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "connective",
+    "notes": "Shared with British English, and very natural in an Australian yarn. Best on a sentence that qualifies the one before it, so keep the weight low."
+   },
+   "c-now": {
+    "id": "c-now",
+    "form": "now",
+    "gloss": "Turning to the next part.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "connective"
+   },
+   "c-so-anyway": {
+    "id": "c-so-anyway",
+    "form": "so anyway",
+    "gloss": "Getting back to it.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 5,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "connective"
+   },
+   "c-well": {
+    "id": "c-well",
+    "form": "well",
+    "gloss": "Setting up the next bit.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "connective"
+   },
+   "cactus": {
+    "id": "cactus",
+    "form": "cactus",
+    "gloss": "Dead, broken, finished.",
+    "frame": "adj",
+    "concepts": [
+     "BROKEN"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "riffs": [
+     {
+      "text": "like a flat-pack in a cyclone",
+      "tone": "comic",
+      "best": true
+     }
+    ],
+    "notes": "Of machines and things (\"the ute's cactus\"), not tired people. Older-sounding; Macquarie's blog thinks it may be fading, but it is still widely understood."
+   },
+   "carry-on-like-a-pork-chop": {
+    "id": "carry-on-like-a-pork-chop",
+    "form": "carry on like a pork chop",
+    "gloss": "Behave in a ridiculously overwrought way.",
+    "frame": "vp",
+    "concepts": [
+     "OVERREACT"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     "https://history.cass.anu.edu.au/centres/andc/australian-words-p"
+    ]
+   },
+   "crikey": {
+    "id": "crikey",
+    "form": "crikey",
+    "gloss": "An exclamation of surprise or alarm.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     "https://greensdictofslang.com/entry/ghmqtca"
+    ]
+   },
+   "cup-of-tea-bex-lie-down": {
+    "id": "cup-of-tea-bex-lie-down",
+    "form": "have a cup of tea, a Bex and a good lie-down",
+    "gloss": "Settle down, you're overwrought (Bex was a headache powder; the line is from a 1950s revue).",
+    "frame": "imperative",
+    "concepts": [
+     "CALM_DOWN"
+    ],
+    "level": 5,
+    "vulgarity": 0,
+    "register": "dated"
+   },
+   "dilly": {
+    "id": "dilly",
+    "form": "dilly",
+    "gloss": "Silly, foolish, a bit dopey.",
+    "frame": "adj",
+    "concepts": [
+     "STUPID"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "dated",
+    "sources": [
+     "https://en.wiktionary.org/wiki/dilly",
+     "https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary"
+    ],
+    "replaces": [
+     "daft"
+    ]
+   },
+   "flat-chat": {
+    "id": "flat-chat",
+    "form": "flat chat",
+    "gloss": "Going as hard as possible; very busy.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "BUSY"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     "https://www.australiaday.com.au/fun-activities/browse-the-aussie-slang-dictionary/f"
+    ]
+   },
+   "flat-out": {
+    "id": "flat-out",
+    "form": "flat out",
+    "gloss": "Busy as can be, no let-up.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "BUSY"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     "https://wordhistories.net/2021/11/29/flat-out-lizard-drinking/",
+     "https://macquariedictionary.com.au/?p=11033"
+    ]
+   },
+   "flat-out-lizard": {
+    "id": "flat-out-lizard",
+    "form": "flat out like a lizard drinking",
+    "gloss": "Extremely busy, like a lizard lapping water flat on its belly.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "BUSY"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     "https://www.australiaday.com.au/fun-activities/browse-the-aussie-slang-dictionary/f"
+    ],
+    "replaces": [
+     "very busy",
+     "swamped",
+     "run off {poss} feet"
+    ]
+   },
+   "fuck-me": {
+    "id": "fuck-me",
+    "form": "fuck me",
+    "gloss": "Astonishment.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 2,
+    "vulgarity": 2,
+    "register": "current"
+   },
+   "g-aside-beats-me": {
+    "id": "g-aside-beats-me",
+    "form": "beats me.",
+    "gloss": "I've no idea.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 5,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "aside"
+   },
+   "g-aside-dunno": {
+    "id": "g-aside-dunno",
+    "form": "dunno.",
+    "gloss": "A shrug, I've no idea (the narrator answering their own question).",
+    "frame": "interjection",
+    "concepts": [
+     "DONT_KNOW"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "aside",
+    "notes": "General informal English, very common in Australia. Same slot as the existing \"search me.\" and \"beats me.\"",
+    "sources": [
+     "https://www.goodreads.com/author_blog_posts/5923084-series-glossary?tab=author"
+    ]
+   },
+   "g-aside-search-me": {
+    "id": "g-aside-search-me",
+    "form": "search me.",
+    "gloss": "I've no idea (after a rhetorical question).",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 5,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "aside"
+   },
+   "g-ay": {
+    "id": "g-ay",
+    "form": "ay",
+    "gloss": "Sentence-final \"eh\", inviting agreement.",
+    "frame": "tag",
+    "concepts": [],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "tag"
+   },
+   "g-cobber": {
+    "id": "g-cobber",
+    "form": "cobber",
+    "gloss": "Old-fashioned \"mate\".",
+    "frame": "tag",
+    "concepts": [],
+    "level": 5,
+    "vulgarity": 0,
+    "register": "dated",
+    "placement": "tag"
+   },
+   "g-crikey": {
+    "id": "g-crikey",
+    "form": "crikey",
+    "gloss": "Surprise or alarm.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "opener"
+   },
+   "g-fair-dinkum": {
+    "id": "g-fair-dinkum",
+    "form": "fair dinkum",
+    "gloss": "Honestly.",
+    "frame": "interjection",
+    "concepts": [
+     "REALLY_Q"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "opener"
+   },
+   "g-jeez": {
+    "id": "g-jeez",
+    "form": "jeez",
+    "gloss": "Exasperation.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "opener",
+    "variants": [
+     "jeez Louise"
+    ]
+   },
+   "g-mate": {
+    "id": "g-mate",
+    "form": "mate",
+    "gloss": "Friendly (or pointedly unfriendly) address.",
+    "frame": "tag",
+    "concepts": [],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "tag"
+   },
+   "g-stone-the-crows": {
+    "id": "g-stone-the-crows",
+    "form": "stone the crows",
+    "gloss": "Astonishment.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 5,
+    "vulgarity": 0,
+    "register": "dated",
+    "placement": "opener",
+    "variants": [
+     "stone the flamin' crows"
+    ]
+   },
+   "g-stone-the-flamin-crows": {
+    "id": "g-stone-the-flamin-crows",
+    "form": "stone the flamin' crows",
+    "gloss": "Astonishment.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 5,
+    "vulgarity": 0,
+    "register": "dated",
+    "placement": "closer"
+   },
+   "g-strewth": {
+    "id": "g-strewth",
+    "form": "strewth",
+    "gloss": "Surprise.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "opener",
+    "variants": [
+     "struth"
+    ]
+   },
+   "g-strewth-closer": {
+    "id": "g-strewth-closer",
+    "form": "strewth",
+    "gloss": "Drawn-out surprise.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 5,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "closer"
+   },
+   "g-tail-and-stuff": {
+    "id": "g-tail-and-stuff",
+    "form": "and stuff",
+    "gloss": "A vague \"and the like\" after a list.",
+    "frame": "np",
+    "concepts": [],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "tail",
+    "notes": "General English, well documented in Australian corpus studies; it adds a casual rhythm rather than Aussie colour.",
+    "sources": [
+     "https://assets.cambridge.org/97811088/37231/excerpt/9781108837231_excerpt.pdf",
+     "https://ldaca.edu.au/resources/general-resources/case-studies/masters-research-project"
+    ]
+   },
+   "g-tail-box-and-dice": {
+    "id": "g-tail-box-and-dice",
+    "form": "the whole box 'n dice",
+    "gloss": "All of it.",
+    "frame": "np",
+    "concepts": [],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "tail"
+   },
+   "g-tail-kit-and-caboodle": {
+    "id": "g-tail-kit-and-caboodle",
+    "form": "the whole kit 'n caboodle",
+    "gloss": "All of it.",
+    "frame": "np",
+    "concepts": [],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "tail"
+   },
+   "g-tail-the-lot": {
+    "id": "g-tail-the-lot",
+    "form": "the lot",
+    "gloss": "All of it.",
+    "frame": "np",
+    "concepts": [],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "tail"
+   },
+   "g-too-easy": {
+    "id": "g-too-easy",
+    "form": "too easy",
+    "gloss": "Cheerful sign-off.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 5,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "closer"
+   },
+   "g-ya-drongo": {
+    "id": "g-ya-drongo",
+    "form": "ya drongo",
+    "gloss": "You fool.",
+    "frame": "tag",
+    "concepts": [],
+    "level": 5,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "tag"
+   },
+   "g-ya-galah": {
+    "id": "g-ya-galah",
+    "form": "ya galah",
+    "gloss": "Affectionate insult.",
+    "frame": "tag",
+    "concepts": [],
+    "level": 5,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "tag"
+   },
+   "g-ya-mug": {
+    "id": "g-ya-mug",
+    "form": "ya mug",
+    "gloss": "You fool.",
+    "frame": "tag",
+    "concepts": [],
+    "level": 5,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "tag"
+   },
+   "have-a-feed": {
+    "id": "have-a-feed",
+    "form": "have a feed",
+    "gloss": "Have a meal.",
+    "frame": "vp",
+    "concepts": [
+     "EAT"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current"
+   },
+   "hungry-enough-horse-jockey": {
+    "id": "hungry-enough-horse-jockey",
+    "form": "hungry enough to eat a horse and chase the jockey",
+    "gloss": "Ravenous.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current"
+   },
+   "hungry-enough-to-eat-the-arse-out-of-a-duck": {
+    "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+    "form": "hungry enough to eat the arse out of a low-flyin' duck",
+    "gloss": "Starving.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 4,
+    "vulgarity": 2,
+    "register": "current"
+   },
+   "maccas": {
+    "id": "maccas",
+    "form": "Macca's",
+    "gloss": "McDonald's.",
+    "frame": "np",
+    "concepts": [
+     "MCDONALDS"
+    ],
+    "level": 1,
+    "vulgarity": 0,
+    "register": "current"
+   },
+   "mad-as-a-cut-snake": {
+    "id": "mad-as-a-cut-snake",
+    "form": "mad as a cut snake",
+    "gloss": "Wildly crazy, or furious.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "CRAZY",
+     "ANGRY"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     "https://history.cass.anu.edu.au/centres/andc/australian-words-m"
+    ]
+   },
+   "mad-as-a-gumtree": {
+    "id": "mad-as-a-gumtree",
+    "form": "madder than a gumtree full of galahs",
+    "gloss": "Utterly mad, like a tree of shrieking cockatoos.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "CRAZY"
+    ],
+    "level": 5,
+    "vulgarity": 0,
+    "register": "current",
+    "variants": [
+     "as mad as a gumtree full of galahs"
+    ],
+    "sources": [
+     "https://history.cass.anu.edu.au/centres/andc/australian-words-m"
+    ]
+   },
+   "mad-as-a-meat-axe": {
+    "id": "mad-as-a-meat-axe",
+    "form": "as mad as a meat axe",
+    "gloss": "Completely crazy.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "CRAZY"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     "https://history.cass.anu.edu.au/centres/andc/australian-words-m"
+    ]
+   },
+   "not-the-full-quid": {
+    "id": "not-the-full-quid",
+    "form": "not the full quid",
+    "gloss": "Not quite all there mentally.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "STUPID"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "notes": "Aus/NZ; means not very bright or a bit odd. Predicative only (\"he's not the full quid\")."
+   },
+   "off-rocker": {
+    "id": "off-rocker",
+    "form": "off {poss} rocker",
+    "gloss": "Crazy. Also British; common in Australia.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "CRAZY"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current"
+   },
+   "off-tree": {
+    "id": "off-tree",
+    "form": "off {poss} tree",
+    "gloss": "Crazy, out of control.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "CRAZY"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current"
+   },
+   "peckish": {
+    "id": "peckish",
+    "form": "peckish",
+    "gloss": "A bit hungry.",
+    "frame": "adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "notes": "Shared with British English."
+   },
+   "roos-top-paddock": {
+    "id": "roos-top-paddock",
+    "form": "{subj} {have} a kangaroo loose in {poss} top paddock",
+    "gloss": "Not quite sane; eccentric.",
+    "frame": "clause",
+    "concepts": [
+     "CRAZY"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "variants": [
+     "{subj} {have} kangaroos loose in {poss} top paddock",
+     "{subj} {have} a few roos loose in {poss} top paddock"
+    ]
+   },
+   "rooted": {
+    "id": "rooted",
+    "form": "rooted",
+    "gloss": "Completely done for.",
+    "frame": "adj",
+    "concepts": [
+     "TIRED",
+     "BROKEN"
+    ],
+    "level": 3,
+    "vulgarity": 1,
+    "register": "current",
+    "notes": "\"Root\" is Australian slang for sex, so \"rooted\" (exhausted; broken) is cheeky but Dad-level (Rob, 2026-10-18). Never use \"root\" for US \"root for (a team)\"; Australians say \"barrack for\". \"Get rooted\" is a rude brush-off, a different sense."
+   },
+   "settle-petal": {
+    "id": "settle-petal",
+    "form": "settle, petal",
+    "gloss": "Calm down.",
+    "frame": "imperative",
+    "concepts": [
+     "CALM_DOWN"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current"
+   },
+   "snags-short-of-a-barbie": {
+    "id": "snags-short-of-a-barbie",
+    "form": "a few snags short of a barbie",
+    "gloss": "Not very bright.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "STUPID",
+     "CRAZY"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current"
+   },
+   "starvin": {
+    "id": "starvin",
+    "form": "starvin'",
+    "gloss": "Very hungry.",
+    "frame": "adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current"
+   },
+   "stone-the-crows": {
+    "id": "stone-the-crows",
+    "form": "stone the crows",
+    "gloss": "Expressing astonishment.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "dated",
+    "variants": [
+     "stone the flamin' crows"
+    ]
+   },
+   "strewth": {
+    "id": "strewth",
+    "form": "strewth",
+    "gloss": "An exclamation of surprise.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "variants": [
+     "struth"
+    ]
+   },
+   "stubby-short-of-a-six-pack": {
+    "id": "stubby-short-of-a-six-pack",
+    "form": "a stubby short of a six-pack",
+    "gloss": "Not all there.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "STUPID"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     "https://history.cass.anu.edu.au/centres/andc/australian-words-s"
+    ]
+   },
+   "stuffed": {
+    "id": "stuffed",
+    "form": "stuffed",
+    "gloss": "Exhausted, broken, or full of food.",
+    "frame": "adj",
+    "concepts": [
+     "TIRED",
+     "BROKEN",
+     "FULL"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current"
+   },
+   "thick-as-shit": {
+    "id": "thick-as-shit",
+    "form": "thick as shit",
+    "gloss": "Very stupid.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "STUPID"
+    ],
+    "level": 2,
+    "vulgarity": 2,
+    "register": "current"
+   },
+   "thick-as-two-short-planks": {
+    "id": "thick-as-two-short-planks",
+    "form": "thick as two short planks",
+    "gloss": "Very stupid.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "STUPID"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "notes": "UK/Aus.",
+    "sources": [
+     "https://en.wiktionary.org/wiki/thick_as_two_short_planks",
+     "https://dictionary.cambridge.org/dictionary/english/as-thick-as-two-short-planks"
+    ]
+   },
+   "troppo": {
+    "id": "troppo",
+    "form": "troppo",
+    "gloss": "Crazy, as if from too long in the tropics.",
+    "frame": "adj",
+    "concepts": [
+     "CRAZY"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     "https://history.cass.anu.edu.au/centres/andc/australian-words-t"
+    ]
+   },
+   "unit": {
+    "id": "unit",
+    "form": "unit",
+    "gloss": "A flat; the usual Australian word for an apartment.",
+    "frame": "np",
+    "concepts": [
+     "APARTMENT"
+    ],
+    "level": 1,
+    "vulgarity": 0,
+    "register": "current",
+    "riffs": [
+     {
+      "text": "walls so thin ya can hear next door clip their toenails",
+      "tone": "comic",
+      "best": true
+     },
+     {
+      "text": "stacked up like battery hens",
+      "tone": "grim"
+     }
+    ]
+   },
+   "what-the-fuck": {
+    "id": "what-the-fuck",
+    "form": "what the fuck",
+    "gloss": "Disbelief or shock.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 1,
+    "vulgarity": 2,
+    "register": "current"
+   },
+   "whinge": {
+    "id": "whinge",
+    "form": "whinge",
+    "gloss": "Complain, especially at length.",
+    "frame": "vp",
+    "concepts": [
+     "COMPLAIN"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "riffs": [
+     {
+      "text": "like a loose sheet of tin in the wind",
+      "tone": "comic",
+      "best": true
+     },
+     {
+      "text": "like a loose gate in a gale",
+      "tone": "comic"
+     }
+    ]
+   },
+   "wouldnt-know-arse-from-elbow": {
+    "id": "wouldnt-know-arse-from-elbow",
+    "form": "{subj} wouldn't know {poss} arse from {poss} elbow",
+    "gloss": "Is utterly clueless.",
+    "frame": "clause",
+    "concepts": [
+     "STUPID"
+    ],
+    "level": 3,
+    "vulgarity": 2,
+    "register": "current",
+    "notes": "Shared with British English."
+   }
+  },
+  "withheld": []
+ }
+}

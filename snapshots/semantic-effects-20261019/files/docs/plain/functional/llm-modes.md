@@ -1,0 +1,91 @@
+# LLM modes
+
+The [shared retelling harness](toolkit.md) is agent-neutral. This page covers the optional built-in API
+client and its three convenience modes. Each keeps the deterministic engine's output as its fallback: see
+[DD-009](../../architecture/decisions/dd-009-llm-output-accepted-only-when-checked.md). All three need the `llm`
+extra and an `ANTHROPIC_API_KEY` (or an `ant auth login` profile), and use `claude-opus-5-5` unless
+`--model` (or `model=`) says otherwise. How to run them is in the
+[user guide](../user/llm-modes.md).
+
+When a mode falls back, the CLI says why on stderr (`[surface] ...`, `[rewrite] ...`, `[yarn] ...`) and exits 4.
+
+## Fluent surface (`--surface`)
+
+At level 5 the deterministic output is right but can sound clunky at the joins. `--surface`
+(`aussiefy.llm.surface_rewrite`) sends the original, the draft and the list of planned phrases to Claude, and
+asks for a smoother rewrite that keeps every planned phrase and adds no new slang.
+
+- The rewrite is accepted only if every planned phrase survives.
+- Otherwise, or on any API failure or refusal, the deterministic text stands, and `result.surface["status"]`
+  says why.
+- With nothing planned, there is nothing to polish: the mode is skipped, which is not a fallback.
+- The plan is always in explain mode.
+- Surface rewrites are not cached: each run asks Claude again.
+
+## Whole-sentence rewrites (`--rewrite hard|all`)
+
+Some sentences are too formal for a phrase dictionary to carry, such as "conceived in Liberty, and dedicated to
+the proposition…". With `--rewrite hard`, the engine detects those and hands just that sentence to Claude,
+along with the draft and the phrases the dictionary already planned. Claude says the sentence the way an
+Australian would at the requested level and vulgarity.
+
+- **What counts as difficult:** the sentence still has formal, Latinate words the dictionary left alone
+  (proposition, assertion, comfortably, honored). The thresholds are under `rewrite:` in
+  `aussiefy/data/profiles.yaml`.
+- **Rewriting everything:** `--rewrite all` sends every sentence.
+- **Guarantees:** planned phrases must survive the rewrite, and the result must be a single sentence of
+  sane length. Otherwise the dictionary's draft stands.
+- **Reproducibility:** rewrites are cached in `$AUSSIEFY_HOME/cache/rewrite/` (default `~/.aussiefy/cache/rewrite/`), keyed by
+  the sentence, its draft, the planned phrases, the level and vulgarity, the seed, the model and the
+  instructions, so a run can be repeated offline. Cached replies are checked against the current
+  acceptance rules too; an older invalid reply triggers a fresh attempt.
+- **Explain mode** shows which sentences were rewritten and why.
+
+In Python, pass a rewriter to the engine, with the same translator so custom phonetic rules are honoured:
+
+```python
+from aussiefy import Translator
+from aussiefy.llm import ClaudeRewriter
+
+tr = Translator()
+rewriter = ClaudeRewriter(translator=tr, cache=False)   # cache_dir overrides the default when caching is on
+tr.translate(text, rewriter=rewriter, rewrite_mode="hard")
+```
+
+Phrase checks allow inflection, dropped g's and the dictionary's phonetic respellings. This rule is shared
+by sentence rewriting, surface polishing and yarn acceptance. `surface_rewrite` also accepts the translator
+that made the draft.
+
+## Yarn mode (`aussiefy yarn`, `aussiefy.yarn()`)
+
+Yarn mode is the reference agent built on the [toolkit](toolkit.md). Claude gets the engine's plan and the
+style guide, uses `lookup` and `lint` as tools, and hands in the result with `submit`. A submission is accepted
+only if:
+
+- the lint passes,
+- the effective `keep_share` of undeclined planned phrases survives when the original plan has at least four
+  distinct phrases; each decline must name a planned phrase and supply a reason, and
+- configured length checks pass when `check_length` is enabled.
+
+The resolved `DOCUMENT_CONFIG.narrator_opinion` also governs added narrator judgments. False means do not
+introduce praise, pity, luck or blame absent from the original; true permits reaction while preserving facts,
+roles and references. The known-term lint check is shared by verification and yarn submission, with original
+occurrences allowed through. This is not general semantic validation of arbitrary generated prose.
+
+General/Deadset/Dinkum normally require a 0.6 share; Troppo and bare Custom use zero. A zero share disables
+retention and moved-phrase checks. Exact `document_config` overrides apply to every preset, including
+`keep_share`, `check_length` and `max_length`. Lint issues, selected factual/style checks and markup integrity
+remain enforced. An engine draft appears in the brief only when the effective `draft` setting enables it.
+
+Otherwise Claude gets the reasons and tries again, for up to 12 turns. If nothing passes, or the API is
+unavailable, the deterministic draft stands. Accepted yarns are cached in `$AUSSIEFY_HOME/cache/yarn/`
+(default `~/.aussiefy/cache/yarn/`), keyed by everything that decides the reply, so a run can be repeated
+offline. `--no-cache` (Python: `cache=False`) bypasses reading and writing; `cache_dir` overrides the
+Python cache location. Cached yarns pass the same validation against the current session and dictionary
+before reuse; an old reply that no longer passes triggers a fresh attempt and the ordinary draft fallback
+if no new reply is accepted. Malformed cache records name the file to delete and exit 2.
+Yarn also uses API prompt caching for the shared brief and growing conversation;
+this reduces repeated prompt processing and is separate from the on-disk accepted-result cache.
+
+Yarn mode can do what rules can't (the present tense, short beats, restructured dialogue) while the dictionary
+keeps it genuine.

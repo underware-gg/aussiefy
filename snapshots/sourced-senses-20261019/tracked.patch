@@ -1,0 +1,2072 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 47068b3..b340e8f 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -9,6 +9,22 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py
+ 
+ ## [Unreleased]
+ 
++- Preserve explicit listener possessives through shared binding'n form compatibility, and require a
++  listener for “bend someone's ear”. Struth, add standard bend/bent morphology instead of inventin' a listener
++  or producing “bended”.
++- Apply 239 reviewed source records from the next two 120\-entry audit batches, retaining historical,
++  component'n source\-chain evidence limits rather than certifying every trigger or full construction.
++- Separate physical solitude from loneliness, aimless wandering from weary walkin', scolding from shouting,
++  exact zero from small amounts, explicit pretence from easy work, and alcoholic drinks from technical alcohol.
++  Now, require stated swag baggage, mounted\-police context, named tree/animal identity'n slab construction;
++  preserve bank\-full versus overflow events'n require explicit twenty\-four\-unit tinnie packages. Keep historical eye
++  terminology outta explicitly protected technical, official'n instruction domains.
++- Preserve terminal object/NP arguments through shared completion checks; decline partial or coordinated
++  nominal captures while retaining coordinated verbs. So anyway, require both travel'n a swag for waltzing Matilda;
++  exclude minimising nothing\-much wording from exact zero.
++- Preserve negative\-modal indifference wording'n supermarket location nouns through compatible sourced
++  forms. Fair dinkum, keep all existin' status'n flag gates; retained historical terms remain subject to their registers.
++
+ - Retain reviewed source research for 90 further existin' entries, with evidence limits'n unapplied
+   mapping recommendations. Coverage now includes 220 of the original 1,254\-entry inventory.
+ - Share clause readin''n meanin' restrictions across detection and contextual imagery. Preserve captured
+@@ -53,7 +69,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py
+ - Mask only actual profanity in `changes` renderings: swear\-list words, the compounds the dictionary's rated
+   words build on one \("fuckwit"\), and the new per\-entry `mask` words for profanity the swear list lacks \("wanker",
+   "dickhead"\), each with the ending a page keeps. Innuendo, insults'n crude words show in full: 25 rated entries
+-  with nothing profane \("rooted", "mongrel", "shut your gob"\) are marked `profane: false`, and 5 author mask words.
++  with not a sausage profane \("rooted", "mongrel", "shut your gob"\) are marked `profane: false`, and 5 author mask words.
+   Mind ya, a test holds every other rated entry to a masked word at its rating.
+ - Add `aussiefy.translate_changes`: translate's translation with every change it made (swaps, garnish,
+   drawl, swear infixes and US/UK swaps) placed in the output. Each swap comes with its alternatives and its
+@@ -111,7 +127,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py
+   workflow with verification before delivery'n reconcile CLI options, MCP tools and research/licensing docs.
+ 
+ - Remove duplicated ungated infix advice from guide/yarn prompts; swear\-infix guidance now follows placement
+-  permission'n the effective multiplier, including zero. Struth, retain both controlled retelling comparisons,
++  permission'n the effective multiplier, including zero. Stone the flamin' crows, retain both controlled retelling comparisons,
+   including the initial weak\-register result'n the contract\-aware writer revision with remaining limits.
+ - Preserve straight double\-quoted documents across paragraph breaks, matching curly quotes. Translation,
+   lint, verification'n yarn submission now share that recognition while retaining ordinary dialect checks.
+@@ -143,7 +159,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py
+ 
+ - Fix attributive praise escapin' through predicate frames, capitalised determiners hiding compound guards,
+   animal nouns being treated as people, and plural clothin' conflicting with retained singular verbs.
+-  Mind ya, frame vocabulary is editable in `grammar.yaml`; similarity fallback enforces zero\-width exclusions.
++  Bugger me, frame vocabulary is editable in `grammar.yaml`; similarity fallback enforces zero\-width exclusions.
+ 
+ - General is the default document type; detection is opt\-in. Named presets and Custom accept the same exact
+   behaviour overrides through Python, CLI, MCP'n yarn tools. Explicit values override presets, including
+@@ -166,8 +182,8 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py
+ 
+ - Final committed source delta through `c0177d7`: fourth\-pass/dinkum dictionary rounds, held\-word lint,
+   original\-context suggestions, literal clause\-subject agreement, form\-aware riffs'n completed research.
+-  Anyway, quote exemptions preserve actual wording/counts; halves require explicit equal shares'n liquid\-pouring
+-  complements remain literal. Stone the flamin' crows, three weather golden variants were intentionally reviewed after narrowin' guards.
++  Quote exemptions preserve actual wording/counts; halves require explicit equal shares'n liquid\-pouring
++  complements remain literal. Three weather golden variants were intentionally reviewed after narrowin' guards.
+ 
+ - Integrated 91 committed source changes through `Rob-Morris/aussiefy@95036e1`, preservin' this repository's
+   layered API, validation, documentation'n release contracts. Genre/embellishment, US/UK dialect and offline
+@@ -180,7 +196,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py
+ - **Dinkum\-check dictionary round** (`research/dinkum-check-round-2026-10-14/DECISIONS.md`): 67 rows from the
+   check's yarn agents reviewed. New: stuff up, stuff {obj} up, a stuff\-up, under the pump \(of a person\), not know
+   someone from a bar of soap, spitting \(light rain\), a swag of; pull the pin takes pulling the pin, all over the shop
+-  `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Fair dinkum, wrong senses
++  `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Wrong senses
+   fixed in data: heaps for counted heaps, every bloke'n his dog and old fella outta the formal genres, littlie
+   for a policy's kid, the whole box'n dice for `"everything from"`; rain only for the weather's `"it"` (not fans
+   pouring onto a street, tears pouring down, or tea poured\).
+@@ -203,7 +219,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py
+   a fair whack\), hire, per cent'n roadworks in the dialect table; 63 covered or skipped. The fourth pass's wrong
+   senses fixed in data: bush for a legal bush, Parliament House for a US Congress, knock together for any
+   build, pressie for a policy's gift, tucker'n quid in the wrong places, and lint's LEAVE, heaps, bugger all,
+-  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Bugger me, engine limits found are listed in DECISIONS.
++  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Engine limits found are listed in DECISIONS.
+ - **The fourth pass's next steps:**
+   - A storyteller's openings follow the genre's form at every settin', troppo's too \(an obituary isn't opened
+     `"Fair dinkum, this happened."`), and `"Okay, so."` is gone from the openings.
+@@ -406,7 +422,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py
+ 
+ 
+ - Translate Markdown prose explicitly through the API/toolkit, CLI and MCP while retaining protected
+-  source'n stable headings. Report honest per\-unit offsets and explanations; give LLM the flick/model modes
++  source'n stable headings. Report honest per\-unit offsets and explanations; reject LLM/model modes
+   before loading or calling. Plain engine/plan behaviour remains unchanged.
+ 
+ - Organise tests by user, functional, architecture'n contributor ownership, with layer indexes and
+diff --git a/CONTRIBUTING.md b/CONTRIBUTING.md
+index fe14f0f..23b86f4 100644
+--- a/CONTRIBUTING.md
++++ b/CONTRIBUTING.md
+@@ -47,7 +47,7 @@ checked against plain sources while development outputs may be stale. See
+   `aussiefy/data/profiles.yaml` ([DD-002](docs/architecture/decisions/dd-002-slang-is-data.md)).
+ - **Keep output deterministic.** Random choices are seeded rolls keyed by context, so the same text, level and
+   seed always give the same result \([DD-003](docs/architecture/decisions/dd-003-deterministic-context-keyed-rolls.md)).
+-- **Respect the layering.** The engine'n the dictionary import nothing from the toolkit, the LLM modes, the
++- **Respect the layering.** The engine'n the dictionary import sweet bugger\-all from the toolkit, the LLM modes, the
+   surfaces or the maintainer tools \([package layout](docs/architecture/package-layout.md)).
+ - **Change every surface together.** A toolkit parameter has the same name and default in the Python API, the
+   CLI, the MCP server and yarn mode's tools; `tests/functional/test_interfaces.py` checks this.
+diff --git a/aussiefy/context.py b/aussiefy/context.py
+index 2f398f0..923728d 100644
+--- a/aussiefy/context.py
++++ b/aussiefy/context.py
+@@ -24,6 +24,7 @@ FINITE_HINTS = {"am", "is", "are", "was", "were", "have", "has", "had", "do", "d
+                 "could", "shall", "should", "may", "might", "must", "not", "i", "we", "they", "he", "she", "you"}
+ 
+ CLAUSE_END = {".", "!", "?", ";", ":"}
++TIME_ADVERBS = frozenset({"today", "tomorrow", "yesterday", "tonight"})
+ AUXILIARIES = (morph.BE_FORMS | morph.HAVE_FORMS | morph.DO_FORMS
+                | {"will", "would", "can", "could", "shall", "should", "may", "might", "must"})
+ NEGATION = {"not", "n't", "never", "no", "without", "nobody", "nothing", "neither", "none"}
+@@ -91,6 +92,35 @@ def noun_argument(capture: Token, tokens: list[Token], tags: list[str]) -> bool:
+                 "this", "that", "these", "those", "some", "any", "both", "all", "another", "each", "either", "neither"})
+ 
+ 
++
++def argument_complete(tokens: list[Token], end: int, tags: list[str] | None, complete: bool = True) -> bool:
++    """A terminal object must not stop inside a name, possessive noun phrase or coordinated argument."""
++    if end == len(tokens):
++        return complete
++    nominal = pos.NOUNS | pos.NAMES | {"PRP", "PRP$", "WP", "DT", "CD", "JJ", "JJR", "JJS", "POS", "VBG", "VBN"}
++    i = end
++    if INLINE_CHAR.match(tokens[i].text):
++        return False
++    if tokens[i].norm in TIME_ADVERBS:
++        return True
++    if tokens[i].norm in {"and", "or", "'n"} or tokens[i].text == ",":
++        i += 1
++        while i < len(tokens) and tags is not None and tags[i] in {"RB", "RBR", "RBS"}:
++            i += 1
++        if i == len(tokens) or tokens[i].is_punct:
++            return False
++        if tags is not None and tags[i] in {"VB", "VBD", "VBP", "VBZ", "MD"}:
++            return True
++        # A fresh subject followed by a finite verb starts another clause, rather than another object.
++        if i + 1 < len(tokens) and tags is not None and tags[i] in nominal and tags[i + 1] in {"VBD", "VBP", "VBZ", "MD"}:
++            return True
++        return tags is not None and tags[i] not in nominal
++    if tokens[i].norm == "of":
++        return False
++    if tokens[i].is_punct:
++        return tokens[i].text not in {"'", "’", "-", "—", "–", "(", "[", "{", "/"}
++    return tags is not None and tags[i] not in nominal
++
+ def sentence_contexts(sent: list[Token], tags: list[str] | None = None) -> set[str]:
+     """What kind of sentence this is, for garnish that only suits some ("mate" needs someone addressed)."""
+     norms = [t.norm for t in sent]
+diff --git a/aussiefy/data/concepts.yaml b/aussiefy/data/concepts.yaml
+index 3800f21..31458cd 100644
+--- a/aussiefy/data/concepts.yaml
++++ b/aussiefy/data/concepts.yaml
+@@ -735,10 +735,9 @@ EAT:
+   triggers:
+     vp: ["grab a bite", "get something to eat", "have something to eat", "grab some food", "have lunch", "have dinner", "grab something to eat"]
+ SCOLD:
+-  description: Scold or get angry at someone.
++  description: Scold or reprimand someone; anger and volume alone do not establish a reprimand.
+   triggers:
+-    vp: ["tell {obj} off", "yell at {obj}", "get angry at {obj}", "have a go at {obj}", "scold {obj}",
+-         "shout at {obj}"]
++    vp: ['tell {obj} off', 'scold {obj}', 'reprimand {obj}']
+ CHAT:
+   description: Have a long chat.
+   triggers:
+@@ -1183,10 +1182,9 @@ CAR_TRUNK:
+   triggers:
+     np: [car trunk]
+ ALCOHOL:
+-  description: Alcoholic drink generally.
++  description: Alcoholic drink, rather than technical alcohol used as solvent, fuel or disinfectant.
+   triggers:
+-    # not "the drink": it caught "the drinks" (beverages)
+-    np: [booze, alcohol, liquor, "strong drink", "the demon drink", "rotgut", "hooch"]
++    np: [booze, liquor, strong drink, the demon drink, rotgut, hooch, an alcoholic drink]
+ 
+ # --- harvested from an agent's Aussie Gettysburg (aussiefy harvest), curated ------
+ ARRIVE:
+@@ -1246,16 +1244,14 @@ WAKE_THE_DEAD:
+   triggers:
+     vp: ["wake the dead", "raise the dead"]
+ CARE_ABOUT:
+-  description: Care at all about something, said in the negative (couldn't care less about it).
++  description: Care about something; comparative caring-less does not establish indifference.
+   triggers:
+-    # every entry is said in the negative ("didn't give a stuff about"), so only triggers that are themselves
+-    # negative-polarity: not "care about" ("we care about your privacy"), "pay attention to" (an instruction to
+-    # the reader) or "take notice of". "couldn't care less about" becomes "couldn't give a stuff about".
+-    vp: ["care less about", "give a damn about", "give a hoot about"]
++    vp: [give a damn about, give a hoot about]
+ TALK_ON:
+   description: Talk at length.
+   triggers:
+-    vp: ["ramble", "go on and on", "talk at length", "babble", "prattle", "drone on", "talk {poss} ear off", "natter on"]
++    vp: [ramble, go on and on, talk at length !=to, babble, prattle, drone on, 'talk {objposs} ear off', 'talk at length
++        to {obj}', natter on]
+ TACKLE:
+   description: Start on something with energy.
+   triggers:
+@@ -1435,10 +1431,10 @@ PRISON:
+   triggers:
+     np: ["prison", "jail", "jailhouse", "gaol", "penitentiary"]
+ LONELY:
+-  description: Lonely; all alone.
++  description: Emotional loneliness, distinct from being physically alone.
+   person: true
+   triggers:
+-    predicate_adj: ["lonely", "all alone", "alone", "isolated", "on {poss} own", "by {poss}self"]
++    predicate_adj: [lonely, feeling lonely]
+ SCREAM:
+   description: Scream, shriek.
+   triggers:
+@@ -1509,9 +1505,9 @@ NAP:
+     vp: ["doze", "dozing", "have a doze"]
+     np: ["a nap", "a short sleep", "a snooze", "forty winks", "a siesta"]
+ WALK_WEARILY:
+-  description: Walk wearily or aimlessly.
++  description: Walk wearily, without necessarily wandering aimlessly.
+   triggers:
+-    vp: ["trudge", "plod", "wander along", "walk wearily", "trek"]
++    vp: [trudge, plod, walk wearily]
+ WALK:
+   description: Go on foot.
+   triggers:
+@@ -2245,13 +2241,13 @@ SWAGMAN:
+   triggers:
+     np: [hobo, vagrant, drifter, itinerant worker, a hobo, a vagrant, a drifter, an itinerant worker]
+ COOLIBAH:
+-  description: The coolibah, a eucalypt of inland floodplains (lookup and explanation only).
++  description: The named coolibah/coolabah eucalypt group, not every waterside gum.
+   triggers:
+-    np: [a eucalyptus by the water, a eucalypt by the water, a gum tree by the waterhole]
++    np: [a coolibah tree, a coolabah tree, a Eucalyptus coolabah]
+ COLONIAL_MOUNTED_POLICE:
+-  description: Colonial mounted police (lookup and explanation only).
++  description: Mounted police, including historical colonial mounted police.
+   triggers:
+-    np: [the mounted police, the colonial police]
++    np: [the mounted police, the colonial mounted police]
+ WILDFIRE:
+   description: An uncontrolled fire in forest, scrub or grassland.
+   triggers:
+@@ -2336,7 +2332,7 @@ RIVER_FLAT:
+   triggers:
+     np: [bottomland, the bottomland]
+ GOANNA:
+-  description: An Australian monitor lizard.
++  description: A monitor lizard; Australian usage is not restricted to Australian species.
+   triggers:
+     np: [monitor lizard, a monitor lizard, the monitor lizard]
+ HARD_WORKER:
+@@ -2352,7 +2348,7 @@ HOMESTEAD:
+   triggers:
+     np: [the ranch house, the main ranch house, the main house on the ranch]
+ TRAMP_ROADS:
+-  description: Travel on foot through the country as a swagman.
++  description: Travel the country roads on foot; baggage and motive are not implied.
+   triggers:
+     vp: [tramp the roads, be on the tramp, tramp the country roads, travel the roads on foot]
+ POLICE_OFFICER:
+@@ -2385,9 +2381,9 @@ KILLJOY:
+   triggers:
+     np: [a killjoy, a spoilsport, a wet blanket, a party pooper]
+ DINGO:
+-  description: The Australian wild dog.
++  description: The named dingo, rather than an arbitrary wild or feral dog.
+   triggers:
+-    np: [wild dog, a wild dog]
++    np: [a dingo, an Australian native dog]
+ LOSER:
+   description: A hopeless, useless person.
+   triggers:
+@@ -2409,13 +2405,14 @@ HILL_COUNTRY:
+   triggers:
+     np: [the hill country, hill country, the foothills]
+ IN_FLOOD:
+-  description: 'Of a river: flowing bank-high, in flood.'
++  description: 'Of a river: flowing bank-high, without necessarily overflowing.'
+   triggers:
+-    vp: [burst its banks, overflow its banks, run high to its banks]
++    vp: [run high to its banks, flow bank-high]
+ SANDY_BLIGHT:
+-  description: Outback conjunctivitis.
++  description: Historical, non-technical eye-inflammation terminology.
++  not_in: [technical, official, instructions]
+   triggers:
+-    np: [conjunctivitis, pink eye]
++    np: [sandy blight, conjunctivitis, pink eye]
+ SWINDLER:
+   description: A swindler or dishonest operator.
+   triggers:
+@@ -2425,9 +2422,10 @@ CALL_OUT:
+   triggers:
+     vp: [holler, give a holler, 'give {obj} a holler', 'give {obj} a shout', yell out]
+ CASE_OF_BEER:
+-  description: A carton of 24 beers.
++  description: An explicitly twenty-four-unit package of beer, rather than a package with an unknown count.
+   triggers:
+-    np: [a case of beer, a carton of beer, a 24-pack of beer, a twenty-four pack, a 24-pack]
++    np: [a 24-pack of beer !=bottle|bottles|label|labels, a twenty-four pack of beer !=bottle|bottles|label|labels,
++         a case of 24 beers, a carton of 24 beers]
+ SET_DOG_ON:
+   description: Set a dog on someone.
+   triggers:
+@@ -2477,9 +2475,9 @@ LUG:
+   triggers:
+     vp: ['lug {obj}', 'lug {obj} around', 'carry {obj} on {poss} back']
+ SLAB_HUT:
+-  description: A rough pioneer hut built of split timber slabs.
++  description: A hut built of timber slabs; not every timber or log cabin.
+   triggers:
+-    np: [a rough timber hut, a rough timber cabin, a crude log cabin]
++    np: [a timber slab hut, a split-timber slab hut, a slab-built hut]
+ EVERYWHERE:
+   description: Everywhere, scattered about; or disorganised.
+   triggers:
+@@ -2537,9 +2535,9 @@ PESSIMIST:
+   triggers:
+     np: [a pessimist, a prophet of doom, a doom-monger, a doomsayer]
+ HAVE_CONTACT:
+-  description: Having an indirect contact who can arrange something.
++  description: An explicitly stated contact chain through another intermediary.
+   triggers:
+-    clause: [I know a guy, I know a guy who knows a guy]
++    clause: [I know a guy who knows a guy]
+ EVER_IN_LIFE:
+   description: Ever, in all one's life.
+   triggers:
+@@ -2574,9 +2572,9 @@ PUT_ON_AIRS:
+   triggers:
+     vp: [put on airs, 'give {poss}self airs', act high and mighty]
+ RINGBARK:
+-  description: Kill a tree by girdling its bark.
++  description: Girdle the bark of trees, rather than any kind of encircling.
+   triggers:
+-    vp: ['girdle {obj}', girdle the trees]
++    vp: [girdle the trees, ringbark the trees]
+ ARREST:
+   description: Arrest someone.
+   triggers:
+@@ -2842,10 +2840,9 @@ LIE_DOWN_REST:
+   triggers:
+     vp: [go and lie down, go lie down, lie down for a while, lie down for a bit, take a lie-down]
+ ICE_BRICK:
+-  description: A reusable freezer block for a cooler.
++  description: A rigid reusable freezer block for cooling food and drink.
+   triggers:
+-    np: [gel pack, gel packs, freezer pack, freezer packs, cooler pack, cooler packs, freezer block, freezer blocks,
+-      blue ice]
++    np: [a freezer block, a rigid cooler pack, a rigid freezer pack]
+ SUCKER:
+   description: A gullible person; a dupe (some poor sucker).
+   triggers:
+@@ -2855,10 +2852,9 @@ STAY_OUT_OF_TROUBLE:
+   triggers:
+     vp: [stay out of trouble, keep out of trouble]
+ FRUIT_AND_VEG:
+-  description: Fresh fruit and vegetables; produce.
++  description: Fresh fruit and vegetables as goods; the location selling them is separate.
+   triggers:
+-    np: [fruits and vegetables, fruit and vegetables, fresh produce, the produce section, the produce aisle, produce
+-        department]
++    np: [fruits and vegetables, fruit and vegetables, fresh produce]
+ MARGARINE:
+   description: Margarine.
+   triggers:
+@@ -3762,3 +3758,81 @@ GIVE_WAY_SIGN:
+   description: Guard for the road sign; giving way here is not a structure collapsing.
+   triggers:
+     np: [give way sign]
++
++# --- source-reviewed lexical distinctions ---------------------------------
++TRAVEL_WITH_SWAG:
++  description: Travel on foot carrying a swag or bedroll; neither walking alone nor carrying baggage in place suffices.
++  triggers:
++    vp: [travel on foot carrying a swag, walk carrying a swag, tramp the roads carrying a swag]
++CARRY_SWAG:
++  description: Carry a swag or bedroll, often while travelling on foot.
++  triggers:
++    vp:
++    - carry {poss} swag
++    - carry a swag
++DRESSED_SHOWILY:
++  description: A person wearing showy clothes.
++  person: true
++  triggers:
++    predicate_adj:
++    - showily dressed ^person
++    - dressed showily ^person
++    - dressed up flashily ^person
++DISHONEST_ADJECTIVE:
++  description: Dishonest, fraudulent or rigged, rather than merely low quality.
++  triggers:
++    adj:
++    - dishonest
++    - fraudulent
++    - rigged
++AIMLESS_WALK:
++  description: Wander or hang around without a purpose.
++  triggers:
++    vp:
++    - wander around aimlessly
++    - wander about aimlessly
++    - mope around
++    - hang around aimlessly
++ZERO_AMOUNT:
++  description: Exactly none, rather than a small positive amount.
++  unless_after: [but, else, more, less, like, short, much]
++  triggers:
++    np:
++    - nothing
++    - nothing at all
++    - none at all
++PHYSICAL_SOLITUDE:
++  description: Physically alone or acting without company; emotional loneliness is not implied.
++  person: true
++  triggers:
++    predicate_adj:
++    - alone
++    - all alone
++    - on {poss} own
++LOW_SPIRITS_NOUN:
++  description: A noun referring to a low mood.
++  triggers:
++    np:
++    - low spirits
++    - the blues
++INDIFFERENCE_MODAL:
++  description: Explicit could-not-care-less wording, preserving the whole negative modal.
++  triggers:
++    vp:
++    - couldn't care less about
++    - could not care less about
++PRODUCE_SECTION:
++  description: The shop section selling fruit and vegetables.
++  triggers:
++    np:
++    - produce section
++PRODUCE_AISLE:
++  description: The shop aisle selling fruit and vegetables.
++  triggers:
++    np:
++    - produce aisle
++PRODUCE_DEPARTMENT:
++  description: The shop department selling fruit and vegetables.
++  triggers:
++    np:
++    - produce department
+diff --git a/aussiefy/data/entries/classics.yaml b/aussiefy/data/entries/classics.yaml
+index 2abd38f..d64bc22 100644
+--- a/aussiefy/data/entries/classics.yaml
++++ b/aussiefy/data/entries/classics.yaml
+@@ -450,17 +450,14 @@
+   - https://en.wikisource.org/wiki/On_Our_Selection/Chapter_1
+ - id: goanna
+   form: a goanna
+-  concept:
+-  - GOANNA
++  concept: [GOANNA]
+   frame: np
+   intensity: 3
+   vulgarity: 0
+   incoherence: 1
+   register: current
+-  gloss: An Australian monitor lizard.
+-  sources:
+-  - https://en.wiktionary.org/wiki/goanna
+-  - https://en.wikisource.org/wiki/On_Our_Selection/Chapter_1
++  gloss: A monitor lizard; especially familiar in Australian usage, but not confined to Australian species.
++  sources: ['https://en.wiktionary.org/wiki/goanna', 'https://en.wikisource.org/wiki/On_Our_Selection/Chapter_1']
+ - id: grafter
+   form: a grafter
+   concept:
+@@ -519,24 +516,17 @@
+   - https://en.wikisource.org/wiki/The_Man_from_Snowy_River_and_Other_Verses/The_Man_from_Snowy_River
+ - id: hump-the-swag
+   form: hump {poss} swag
+-  variants:
+-  - hump the bluey
+-  - hump {poss} bluey
+-  concept:
+-  - TRAMP_ROADS
++  variants: [hump the bluey, 'hump {poss} bluey']
++  concept: [CARRY_SWAG]
+   frame: vp
+   intensity: 3
+   vulgarity: 0
+   incoherence: 4
+   register: dated
+   status: gate
+-  flags:
+-  - archaic
+-  gloss: To tramp the bush on foot carrying your swag, looking for work.
+-  sources:
+-  - https://en.wikipedia.org/wiki/Swagman
+-  - https://greensdictofslang.com/entry/dc7mavy
+-  - https://en.wiktionary.org/wiki/hump
++  flags: [archaic]
++  gloss: Carry a swag or bedroll, often while walking the country.
++  sources: ['https://en.wikipedia.org/wiki/Swagman', 'https://greensdictofslang.com/entry/dc7mavy', 'https://en.wiktionary.org/wiki/hump']
+ - id: john-hop
+   form: a John Hop
+   variants:
+@@ -798,16 +788,16 @@
+   - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+ - id: a-shonk
+   form: a shonk
+-  concept:
+-  - SWINDLER
++  concept: [SWINDLER]
+   frame: np
+   intensity: 3
+   vulgarity: 0
+   incoherence: 3
+   register: current
+-  gloss: A dishonest operator, a con man (from shonky).
+-  sources:
+-  - https://en.wiktionary.org/wiki/shonk
++  gloss: A dishonest operator or con man.
++  sources: ['https://en.wiktionary.org/wiki/shonk']
++  notes: The derivation is uncertain. The dated antisemitic sense is separate from this neutral dishonest-operator
++    mapping.
+ - id: sing-out
+   form: sing out
+   concept:
+@@ -1314,10 +1304,8 @@
+   - https://en.wiktionary.org/wiki/do_someone's_head_in
+ - id: pox-doctors-clerk
+   form: done up like a pox doctor's clerk
+-  variants:
+-  - dressed up like a pox doctor's clerk
+-  concept:
+-  - SHOWY
++  variants: [dressed up like a pox doctor's clerk]
++  concept: [DRESSED_SHOWILY]
+   frame: predicate_adj
+   intensity: 3
+   vulgarity: 1
+@@ -1325,8 +1313,7 @@
+   incoherence: 5
+   register: dated
+   gloss: Dressed up loudly and flashily.
+-  sources:
+-  - https://en.wiktionary.org/wiki/pox_doctor's_clerk
++  sources: ['https://en.wiktionary.org/wiki/pox_doctor''s_clerk']
+ - id: drop-your-bundle
+   form: drop {poss} bundle
+   concept:
+@@ -1450,19 +1437,16 @@
+   - https://www.gutenberg.org/ebooks/4730
+ - id: know-a-bloke
+   form: I know a bloke who knows a bloke
+-  concept:
+-  - HAVE_CONTACT
++  concept: [HAVE_CONTACT]
+   frame: clause
+   intensity: 3
+   vulgarity: 0
+   incoherence: 3
+   register: current
+   status: gate
+-  flags:
+-  - dubious_meaning
+-  gloss: I have a contact who can sort it.
+-  sources:
+-  - https://www.gutenberg.org/ebooks/4730
++  flags: [dubious_meaning]
++  gloss: I have a contact who has another contact; an explicitly indirect chain.
++  sources: ['https://www.gutenberg.org/ebooks/4730']
+ - id: in-all-my-natural
+   form: in all {poss} natural
+   concept:
+@@ -1576,18 +1560,15 @@
+   - https://www.gutenberg.org/ebooks/4730
+ - id: on-your-pat
+   form: on {poss} pat
+-  concept:
+-  - LONELY
++  concept: [PHYSICAL_SOLITUDE]
+   frame: adv
+   intensity: 3
+   vulgarity: 0
+   incoherence: 5
+   register: dated
+   gloss: On your own (short for Pat Malone).
+-  notes: LONELY mixes 'alone' with 'lonely'; this form means alone, not sad.
+-  sources:
+-  - https://en.wiktionary.org/wiki/on_one's_pat
+-  - https://www.gutenberg.org/ebooks/4730
++  notes: Physical solitude or single-handed action; emotional loneliness is a separate sense.
++  sources: ['https://en.wiktionary.org/wiki/on_one''s_pat', 'https://www.gutenberg.org/ebooks/4730']
+ - id: pass-in-your-cheque
+   form: pass in {poss} cheque
+   concept:
+@@ -1699,16 +1680,15 @@
+   - https://www.gutenberg.org/ebooks/4730
+ - id: ringbark
+   form: ringbark {obj}
+-  concept:
+-  - RINGBARK
++  concept: [RINGBARK]
+   frame: vp
+   intensity: 3
+   vulgarity: 0
+   incoherence: 3
+   register: current
+   gloss: Kill a tree by cutting a ring of bark from its trunk.
+-  sources:
+-  - https://en.wiktionary.org/wiki/ring-bark
++  sources: ['https://en.wiktionary.org/wiki/ring-bark']
++  variants: [ringbark the trees]
+ - id: run-in-arrest
+   form: run {obj} in
+   concept:
+@@ -1779,19 +1759,15 @@
+   - https://www.gutenberg.org/ebooks/4730
+ - id: slanter
+   form: slanter
+-  variants:
+-  - schlenter
+-  concept:
+-  - DODGY
++  variants: [schlenter]
++  concept: [DISHONEST_ADJECTIVE]
+   frame: adj
+   intensity: 3
+   vulgarity: 0
+   incoherence: 5
+   register: archaic
+   gloss: Fake, crooked, rigged.
+-  sources:
+-  - https://www.gutenberg.org/ebooks/4730
+-  - https://greensdictofslang.com/entry/2cqpaji
++  sources: ['https://www.gutenberg.org/ebooks/4730', 'https://greensdictofslang.com/entry/2cqpaji']
+ - id: a-slushy
+   form: a slushy
+   concept:
+@@ -1807,16 +1783,14 @@
+   - https://www.gutenberg.org/ebooks/4730
+ - id: snake-juice
+   form: snake juice
+-  concept:
+-  - ALCOHOL
++  concept: [ALCOHOL]
+   frame: np
+   intensity: 3
+   vulgarity: 0
+   incoherence: 5
+   register: archaic
+-  gloss: Rough, strong grog.
+-  sources:
+-  - https://www.gutenberg.org/ebooks/4730
++  gloss: Strong alcoholic drink; historically often rough liquor.
++  sources: ['https://www.gutenberg.org/ebooks/4730']
+ - id: snouted
+   form: have a snout on {obj}
+   concept:
+@@ -2130,7 +2104,7 @@
+ - id: go-waltzing-matilda
+   form: go waltzing Matilda
+   concept:
+-  - TRAMP_ROADS
++  - TRAVEL_WITH_SWAG
+   frame: vp
+   intensity: 3
+   vulgarity: 0
+@@ -2511,35 +2485,27 @@
+   - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+ - id: the-joes
+   form: the joes
+-  concept:
+-  - SAD
++  concept: [LOW_SPIRITS_NOUN]
+   frame: np
+   intensity: 3
+   vulgarity: 0
+   incoherence: 5
+   register: archaic
+   status: gate
+-  flags:
+-  - archaic
++  flags: [archaic]
+   gloss: Low spirits; the blues (Dennis).
+-  sources:
+-  - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++  sources: ['https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary']
+ - id: kid-stakes
+   form: kid stakes
+-  variants:
+-  - kidstakes
+-  concept:
+-  - CHILDS_PLAY
++  variants: [kidstakes]
++  concept: [PRETENCE]
+   frame: np
+   intensity: 3
+   vulgarity: 0
+   incoherence: 4
+   register: dated
+-  gloss: Kids' stuff; child's play, or mere pretence.
+-  sources:
+-  - https://www.macquariedictionary.com.au/?p=10990
+-  - https://greensdictofslang.com/entry/5dsgtha
+-  - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++  gloss: Bluff, joking or pretence; not merely an easy task.
++  sources: ['https://www.macquariedictionary.com.au/?p=10990', 'https://greensdictofslang.com/entry/5dsgtha', 'https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary']
+ - id: give-a-knock-down
+   form: give {obj} a knock-down to {np}
+   concept:
+@@ -2579,20 +2545,15 @@
+   - https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
+ - id: mooch-around
+   form: mooch around
+-  concept:
+-  - WALK_WEARILY
++  concept: [AIMLESS_WALK]
+   frame: vp
+   intensity: 3
+   vulgarity: 0
+   incoherence: 2
+   register: current
+-  replaces:
+-  - wander around aimlessly
+-  - mope around
+-  - hang around aimlessly
++  replaces: [wander around aimlessly, mope around, hang around aimlessly]
+   gloss: Wander about aimlessly.
+-  sources:
+-  - https://en.wiktionary.org/wiki/mooch
++  sources: ['https://en.wiktionary.org/wiki/mooch']
+ - id: mum
+   form: mum
+   concept:
+diff --git a/aussiefy/data/entries/contextual-harvest.yaml b/aussiefy/data/entries/contextual-harvest.yaml
+index f508eaf..2545109 100644
+--- a/aussiefy/data/entries/contextual-harvest.yaml
++++ b/aussiefy/data/entries/contextual-harvest.yaml
+@@ -57,8 +57,7 @@
+   notes: Command only; not a verb replacement in give up smoking or pack an object.
+ - id: not-a-sausage
+   form: not a sausage
+-  concept:
+-  - NOTHING
++  concept: [ZERO_AMOUNT]
+   frame: np
+   intensity: 3
+   incoherence: 3
+diff --git a/aussiefy/data/entries/fragments.yaml b/aussiefy/data/entries/fragments.yaml
+index 2d9b4a1..f0286bc 100644
+--- a/aussiefy/data/entries/fragments.yaml
++++ b/aussiefy/data/entries/fragments.yaml
+@@ -255,7 +255,7 @@
+   frame: np
+   vulgarity: 2
+   incoherence: 3
+-  replaces: [booze, alcohol]
++  replaces: [booze]
+   plural: piss
+   notes: 'fragment of: all-piss-and-wind, piss-off. Separate sense: grog, beer, as in ''on the piss''. Proposed
+     by the fragment pass; reviewed.'
+diff --git a/aussiefy/data/entries/gapfill.yaml b/aussiefy/data/entries/gapfill.yaml
+index 7bd0951..54b2916 100644
+--- a/aussiefy/data/entries/gapfill.yaml
++++ b/aussiefy/data/entries/gapfill.yaml
+@@ -769,7 +769,7 @@
+   incoherence: 3
+   register: current
+   replaces:
+-  - talk {poss} ear off
++  - talk {objposs} ear off
+   - talk at {obj}
+   gloss: Talk at someone non-stop.
+   sources:
+@@ -1577,7 +1577,7 @@
+   - https://www.switchliving.com.au/student-guide/g-day-mate-a-guide-to-aussie-slang/
+   - https://www.remitly.com/blog/immigration/australian-idioms-and-expressions/
+ - id: bend-ear
+-  form: bend {poss} ear
++  form: bend {objposs} ear
+   concept:
+   - TALK_ON
+   frame: vp
+@@ -1585,8 +1585,8 @@
+   vulgarity: 0
+   incoherence: 2
+   register: current
+-  gloss: Talk at someone at length; {poss} is the listener.
+-  notes: '{poss} refers to the listener, not the subject.'
++  gloss: Talk at someone at length; {objposs} is the listener.
++  notes: "{objposs} requires the listener's object or explicit possessive; the speaking agent cannot supply it."
+   sources:
+   - https://greensdictofslang.com/entry/k63cu4y
+   - https://dictionary.dogonews.com/definitions/bend%20someone's%20ear
+diff --git a/aussiefy/data/entries/idioms.yaml b/aussiefy/data/entries/idioms.yaml
+index eb7b6ba..b30d76d 100644
+--- a/aussiefy/data/entries/idioms.yaml
++++ b/aussiefy/data/entries/idioms.yaml
+@@ -1042,7 +1042,7 @@
+ # --- vernacular harvested from an unharnessed LLM's Moloch, curated ----------------------
+ - id: on-pat-malone
+   form: on {poss} Pat Malone
+-  concept: [LONELY]
++  concept: [PHYSICAL_SOLITUDE]
+   frame: predicate_adj
+   incoherence: 4
+   gloss: Alone (rhyming slang).
+diff --git a/aussiefy/data/sources.yaml b/aussiefy/data/sources.yaml
+index c4a5c7b..2da0f16 100644
+--- a/aussiefy/data/sources.yaml
++++ b/aussiefy/data/sources.yaml
+@@ -1,5 +1,7 @@
+ # Reviewed extra source URLs per entry; also maintained by `dev review --apply`.
+-# Sources attest the reviewed senses, not every trigger or every possible meaning.
++# Sources attest the reviewed senses or components, not every trigger or a fixed whole construction.
++# See research/slang-meanings-2026-10-19-batch3/audit.yaml and
++# research/slang-meanings-2026-10-19-batch4/audit.yaml for evidence limits.
+ put-the-acid-on:
+ - https://history.cass.anu.edu.au/centres/andc/australian-words-a
+ aerial-ping-pong:
+@@ -261,3 +263,508 @@ a-fair-shake:
+ christen:
+ - https://dictionary.cambridge.org/dictionary/english/christen
+ - https://www.collinsdictionary.com/dictionary/english/christen
++squatter:
++- https://history.cass.anu.edu.au/centres/andc/australian-words-s
++swagman:
++- https://history.cass.anu.edu.au/centres/andc/australian-words-s
++coolibah-tree:
++- https://apps.lucidcentral.org/euclid/text/entities/eucalyptus_coolabah.htm
++troopers:
++- https://www.collinsdictionary.com/us/dictionary/english/trooper
++flash:
++- https://www.collinsdictionary.com/dictionary/english/flash
++bushfire:
++- https://dictionary.cambridge.org/dictionary/english/bushfire
++drover:
++- https://dictionary.cambridge.org/dictionary/english/drover
++- https://en.wikisource.org/wiki/While_the_Billy_Boils/The_Drover%27s_Wife
++selection:
++- https://www.collinsdictionary.com/dictionary/english/free-selection
++take-a-pull:
++- https://en.wikisource.org/wiki/Wisdom_of_Hafiz
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++stockyard:
++- https://www.oxfordlearnersdictionaries.com/definition/english/stockyard
++- https://www.gutenberg.net.au/ebooks09/0900231h.html
++all-the-go:
++- https://www.collinsdictionary.com/dictionary/english/all-the-go
++bag:
++- https://dictionary.cambridge.org/dictionary/english/bag
++blanky:
++- https://en.wiktionary.org/wiki/blanky
++- https://en.wikisource.org/wiki/While_the_Billy_Boils/The_Drover%27s_Wife
++bloomin:
++- https://dictionary.cambridge.org/dictionary/english/blooming
++bosker:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++the-brush:
++- https://www.nationalparks.nsw.gov.au/-/media/visitor/files/pdf/education/rainforests-of-nsw/under-the-canopy-a-guide-to-the-rainforests-of-nsw.pdf?rev=7e667c619f8c4c88b7e424ed96ed35a1
++bullock:
++- https://www.oxfordlearnersdictionaries.com/definition/english/bullock
++- https://en.wikisource.org/wiki/While_the_Billy_Boils/The_Drover%27s_Wife
++bushwoman:
++- https://www.collinsdictionary.com/dictionary/english/bushwoman
++- https://en.wikisource.org/wiki/While_the_Billy_Boils/The_Drover%27s_Wife
++chew-the-rag:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++cop:
++- https://www.collinsdictionary.com/dictionary/english/cop
++crack-hardy:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++cruel-pitch:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++darl:
++- https://en.wiktionary.org/wiki/darl
++have-a-derry-on:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++dilly:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++do-a-break:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++do-a-guy:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++a-dog:
++- https://arpi.unipi.it/bitstream/11568/764101/1/An%20Introduction%20to%20English%20Slang_2008.pdf
++river-flats:
++- https://www.bushlandperth.org.au/treasures/ashfield-flats/
++- https://www.finedictionary.com/River-flat
++goanna:
++- https://australian.museum/learn/animals/reptiles/australian-goannas-evolution-and-radiation/
++- https://australian.museum/learn/australia-over-time/extinct-animals/megalania-prisca/
++grafter:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++gutless-wonder:
++- https://en.wiktionary.org/wiki/gutless_wonder
++head-over-turkey:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++homestead:
++- https://dictionary.cambridge.org/dictionary/english/homestead
++hump-the-swag:
++- https://history.cass.anu.edu.au/centres/andc/australian-words-s
++- https://dictionary.cambridge.org/dictionary/english/hump
++john-hop:
++- https://www.collinsdictionary.com/dictionary/english/john-hop
++kick-in-the-guts:
++- https://www.sbs.com.au/news/article/long-tan-cancellation-kick-in-the-guts/zc5d1oh02
++kipsie:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++knock-back:
++- https://dictionary.cambridge.org/dictionary/english/knockback
++line-up-to:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++the-mulga:
++- https://www.collinsdictionary.com/dictionary/english/mulga
++muster:
++- https://www.collinsdictionary.com/dictionary/english/muster
++a-nark:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++native-dog:
++- https://australian.museum/learn/animals/mammals/dingo/
++no-hoper:
++- https://dictionary.cambridge.org/dictionary/english/no-hoper
++not-much-chop:
++- https://www.collinsdictionary.com/us/dictionary/english/not-much-chop
++poke-mullock-at:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++the-push:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++put-the-boot-in:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++the-ranges:
++- https://en.wikisource.org/wiki/While_the_Billy_Boils/The_Drover%27s_Wife
++a-bit-red-hot:
++- https://www.dictionary.com/browse/red-hot
++run-a-banker:
++- https://www.dictionary.com/browse/banker
++sandy-blight:
++- https://scrabble.m-w.com/dictionary/blight
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++a-shonk:
++- https://en.wiktionary.org/wiki/shonk
++- https://billmitchell.org/blog/?p=36591
++sing-out:
++- https://dictionary.cambridge.org/us/dictionary/english-italian/sing-out
++slab:
++- https://www.collinsdictionary.com/dictionary/english/slab
++sling-off-at:
++- https://www.oxfordlearnersdictionaries.com/definition/english/sling-off-at
++sool-onto:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++sprag:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++stockwhip:
++- https://www.nma.gov.au/about/corporate/reports-reviews/annual-reports/annual-report-2014-15/part-five-appendices/appendix-3-national-historical-collection-material-approved-by-council-1-july-2014-30-june-2015
++- https://en.wiktionary.org/wiki/stockwhip
++the-straight-griffin:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++strides:
++- https://www.collinsdictionary.com/dictionary/english/strides
++sunday-week:
++- https://www.oxfordlearnersdictionaries.com/us/definition/english/sunday
++take-a-spell:
++- https://www.collinsdictionary.com/dictionary/english/spell
++whips-of:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++willing:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++billy:
++- https://history.cass.anu.edu.au/centres/andc/australian-words-b
++gone-walkabout:
++- https://www.vu.edu.au/about-vu/news-events/vu-blog/australian-slang-dictionary
++tucker-bag:
++- https://www.collinsdictionary.com/dictionary/english/tucker-bag
++bushman:
++- https://www.collinsdictionary.com/dictionary/english/bushman
++hump-carry:
++- https://dictionary.cambridge.org/dictionary/english/hump
++slab-hut:
++- https://www.collinsdictionary.com/dictionary/english/slab
++- https://en.wikisource.org/wiki/While_the_Billy_Boils/The_Drover%27s_Wife
++all-over-the-shop:
++- https://dictionary.cambridge.org/dictionary/english/all-over-the-place
++bang-on:
++- https://dictionary.cambridge.org/dictionary/english/bang-on
++give-a-big-wrap:
++- https://api.collinsdictionary.com/dictionary/english/wrapped
++you-bloody-beauty:
++- https://www.dictionary.com/browse/beauty
++blow-boast:
++- https://www.collinsdictionary.com/dictionary/english/blow
++bong-tong:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++a-burn-off:
++- https://cfs.geohub.sa.gov.au/server/rest/services/CFS_Incident_Read/CFS_Incidents/FeatureServer/0
++cheeky-bugger:
++- https://www.oxfordlearnersdictionaries.com/definition/english/bugger_1
++chuck-off-at:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++cove:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++cray:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++- https://dictionary.cambridge.org/dictionary/english/cray
++for-a-crust:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++dicken:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++dingo:
++- https://australian.museum/learn/animals/mammals/dingo/
++dip-your-lid:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++do-a-duck:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++do-the-block:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++do-your-head-in:
++- https://dictionary.cambridge.org/dictionary/english/do-head-in
++pox-doctors-clerk:
++- https://en.wiktionary.org/wiki/pox_doctor%27s_clerk
++drop-your-bundle:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++go-droving:
++- https://dictionary.cambridge.org/dictionary/english/drover
++- https://en.wikisource.org/wiki/While_the_Billy_Boils/The_Drover%27s_Wife
++finger-character:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++front-up:
++- https://www.abc.net.au/news/2007-03-05/accused-officers-front-up-to-committal-hearing/2208370
++- https://www.collinsdictionary.com/dictionary/english/front-up
++gazob:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++give-best:
++- https://www.gutenberg.net.au/ebooks09/0900231h.html
++guyver:
++- https://www.dictionary.com/browse/guyver
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++a-hanrahan:
++- https://en.wikisource.org/wiki/Said_Hanrahan
++- https://www.wnbull.com.au/content/dam/invocare/wn-bull/dialogue-pdfs/Dialogue-Issue-71-Autumn-2016.pdf
++head-serang:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++know-a-bloke:
++- https://www.gutenberg.org/cache/epub/4730/pg4730-images.html
++in-all-my-natural:
++- https://cms.nationalmuseumsni.org/sites/default/files/2022-10/Concise-Ulster-Dictionary-Letters-A-Z.pdf
++job-punch:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++have-a-lash:
++- https://www.collinsdictionary.com/dictionary/english/have-a-lash
++little-fella:
++- https://dictionary.cambridge.org/dictionary/english/fella
++a-lurk:
++- https://www.collinsdictionary.com/dictionary/english/lurk
++make-your-pile:
++- https://www.oxfordlearnersdictionaries.com/us/definition/american_english/pile_1
++in-good-nick:
++- https://www.collinsdictionary.com/dictionary/english/in-good-nick
++old-pot:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++on-your-pat:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++pass-in-your-cheque:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++pitch-a-tale:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++the-poor-bugger:
++- https://www.oxfordlearnersdictionaries.com/definition/english/bugger_1
++pub:
++- https://dictionary.cambridge.org/dictionary/english/pub
++put-on-dog:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++put-the-wind-up:
++- https://dictionary.cambridge.org/dictionary/english/put-get-the-wind-up
++quick-smart:
++- https://en.wiktionary.org/wiki/quicksmart
++ribuck:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++ringbark:
++- https://www.collinsdictionary.com/us/dictionary/english/ringbark
++run-in-arrest:
++- https://www.collinsdictionary.com/dictionary/english-thesaurus/run-someone-in
++say-gday:
++- https://history.cass.anu.edu.au/centres/andc/meanings-origins/all
++she-oak:
++- https://www.collinsdictionary.com/dictionary/english/she-oak
++shook-on:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++cant-sight:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++slanter:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++a-slushy:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++snake-juice:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++snouted:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++- https://apt.org.au/wp-content/uploads/2022/05/2584_CP_Summer-of-the-Seventeenth-Doll-STATE_THEATRE_SA_EDUCATION_RESOURCE.pdf
++a-bit-solid:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++spare-me-days:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++spruik:
++- https://www.collinsdictionary.com/us/dictionary/english/spruik
++- https://www.abc.net.au/news/2013-11-01/wa-mining-representative-in-china-to-spruik-companies/5063910
++square-and-all:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++station:
++- https://www.collinsdictionary.com/us/dictionary/english/sheep-station
++- https://en.wikisource.org/wiki/A_Dictionary_of_Australian_Words_and_Terms
++stock-horse:
++- https://www.collinsdictionary.com/dictionary/english/stock-horse
++- https://en.wikisource.org/wiki/A_Dictionary_of_Australian_Words_and_Terms
++stop-a-pot:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++strength-of-it:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++in-strife:
++- https://www.oxfordlearnersdictionaries.com/definition/english/strife
++g-tell-ya-what:
++- https://dictionary.cambridge.org/us/dictionary/english/i-ll-tell-you-what
++movement-at-the-station:
++- https://www2.sl.nsw.gov.au/archive/curio/exhibit/472/close_up2123.html?from_collection=2&page=15
++thick-as-two-short-planks:
++- https://dictionary.cambridge.org/dictionary/english/as-thick-as-two-short-planks
++tick-of-approval:
++- https://www.abc.net.au/news/2016-07-08/budgie-smugglers-officially-added-to-oxford-english-dictionary/7580368
++toss-in-the-alley:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++track-with:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++well-all-be-rooned:
++- https://history.cass.anu.edu.au/centres/andc/meanings-origins/all
++whip-the-cat:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++work-the-oracle:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++a-swag:
++- https://history.cass.anu.edu.au/centres/andc/australian-words-s
++a-jumbuck:
++- https://history.cass.anu.edu.au/centres/andc/australian-words-j
++go-waltzing-matilda:
++- https://history.cass.anu.edu.au/centres/andc/australian-words-w
++clobber-clothes:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++a-dam-farm:
++- https://agriculture.vic.gov.au/farm-management/water/managing-dams/maintaining-your-farm-dam
++a-mob-of:
++- https://www.collinsdictionary.com/us/dictionary/english/mob
++a-walking-track:
++- https://www.environment.nsw.gov.au/topics/parks-reserves-and-protected-areas/park-policies/walking-tracks
++back-the-barrow:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++a-blow-in:
++- https://www.collinsdictionary.com/dictionary/english/blow-in
++boshter:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++breast-up-to:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++brums:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++chiack:
++- https://www.collinsdictionary.com/dictionary/english/chiack
++a-cliner:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++- https://gutenberg.net.au/ebooks/e00018.html
++an-old-coot:
++- https://grammarphobia.com/blog/2020/06/coot.html
++cop-it-sweet:
++- https://www.collinsdictionary.com/us/dictionary/english/cop-it-sweet
++couldnt-be-buggered:
++- https://www.collinsdictionary.com/es/diccionario/aleman-ingles/bock
++- https://forums.whirlpool.net.au/archive/9qrr1mrr
++never-cracked-a-boo:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++a-deener:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++give-a-stuff-about:
++- https://www.oxfordlearnersdictionaries.com/us/definition/english/stuff_1
++do-a-get:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++done-ones-dash:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++dot-one:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++- https://classic.net.bible.org/lexicon.php/lexicon.php?word=dot
++a-dray:
++- https://www.collinsdictionary.com/dictionary/english/dray
++a-fair-cow:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++get-your-gear-off:
++- https://dictionary.cambridge.org/dictionary/english/gear?topic=clothing-general-words
++a-gully:
++- https://dictionary.cambridge.org/dictionary/english/gully
++a-hard-case:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++how-ya-travellin:
++- https://howyatravellin.podbean.com/
++imshi:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++the-joes:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++kid-stakes:
++- https://history.cass.anu.edu.au/centres/andc/annotated-glossary/k
++give-a-knock-down:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++lob:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++mix-it:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++mooch-around:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++mum:
++- https://www.collinsdictionary.com/dictionary/english/mum
++nan:
++- https://dictionary.cambridge.org/dictionary/english/nan
++never-have-picked-it:
++- https://d3pbdxdl8c65wb.cloudfront.net/n/497/2025/Jul/15/PI%20%26%20SR%20Advertiser%202025-07-16%20Web.pdf
++nick-over:
++- https://www.aph.gov.au/~/media/wopapub/senate/committee/indig_ctte/hearings/RRIC_Cherbourg_pdf.ashx
++give-the-office:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++a-peb:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++give-the-pip:
++- https://www.encyclopedia.com/social-sciences-and-law/economics-business-and-labor/businesses-and-occupations/pip
++play-up:
++- https://dictionary.cambridge.org/dictionary/english/play-up?topic=functioning
++prad:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++a-punter:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++rouse-on:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++the-scrub:
++- https://en.wikisource.org/wiki/A_Dictionary_of_Australian_Words_and_Terms
++a-shanty:
++- https://www.wehd.com/farmer/Shanty.html
++skite:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++smoodge:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++snake-headed:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++stirring-obj:
++- https://www.researchgate.net/publication/301730608_%27Taking_the_mickey%27_a_brave_Australian_tradition
++a-stockman:
++- https://www.collinsdictionary.com/dictionary/english/stockman
++a-toff:
++- https://en.wikisource.org/wiki/The_Songs_of_a_Sentimental_Bloke/The_Glossary
++verandah:
++- https://dictionary.cambridge.org/dictionary/english/veranda
++the-woodheap:
++- https://gutenberg.net.au/ebooks06/0607911p.pdf
++as-crooked-as-a-dogs-hind-leg:
++- https://www.usingenglish.com/reference/idioms/crooked%2Bas%2Ba%2Bdog%27s%2Bhind%2Bleg.html
++shirty:
++- https://dictionary.cambridge.org/dictionary/english/shirty
++like-the-clappers:
++- https://dictionary.cambridge.org/dictionary/english/like-the-clappers
++like-a-scalded-cat:
++- https://www.collinsdictionary.com/dictionary/english/like-a-scalded-cat
++get-up-and-go:
++- https://dictionary.cambridge.org/dictionary/english/get-up-and-go
++pack-it-in-command:
++- https://dictionary.cambridge.org/dictionary/english/pack-in?topic=wrapping-packing-and-loading
++not-a-sausage:
++- https://downloads.bbc.co.uk/learningenglish/features/tews/170606_tews_not_a_sausage.pdf
++shit-or-go-blind:
++- https://metanexus.net/spit-or-go-blind-slang-cosmic-implications/
++bare-arsed:
++- https://www.merriam-webster.com/dictionary/bare-assed
++- https://api.research-repository.uwa.edu.au/ws/portalfiles/portal/9888813/Scott_Kim_2009.pdf
++park-poss-bum:
++- https://www.abc.net.au/news/2008-09-25/32328
++stuff-up:
++- https://www.usingenglish.com/reference/phrasal-verbs/stuff.html
++a-stuff-up:
++- https://www.abc.net.au/news/2010-09-15/leaked-budget-report-a-stuff-up/2261598
++under-the-pump:
++- https://dictionary.cambridge.org/dictionary/english/under-the-pump
++not-know-from-a-bar-of-soap:
++- https://slll.cass.anu.edu.au/files/andc/ozwords_april09.pdf
++spitting-rain:
++- https://dictionary.cambridge.org/dictionary/english/spit?topic=rain
++a-swag-of:
++- https://www.collinsdictionary.com/us/dictionary/english/swag
++chemist-shop:
++- https://dictionary.cambridge.org/dictionary/english/chemist
++chuck-out:
++- https://www.oxfordlearnersdictionaries.com/us/definition/english/chuck-out
++taking-the-mickey:
++- https://www.oxfordlearnersdictionaries.com/us/definition/english/mickey
++sloshed:
++- https://dictionary.cambridge.org/us/dictionary/english/sloshed?topic=drunkenness-and-sobriety
++southerly:
++- https://dictionary.cambridge.org/us/dictionary/english/southerly?topic=wind-and-winds
++taking-the-piss:
++- https://dictionary.cambridge.org/dictionary/english/take-the-piss-out-of?q=take-the-piss-out-of-sb-or-sth_1
++carry-on-fuss:
++- https://api.collinsdictionary.com/dictionary/english-spanish/carry-on_1
++bushwalker:
++- https://www.collinsdictionary.com/dictionary/english/bushwalker
++bung-in:
++- https://dictionary.cambridge.org/dictionary/english/bung
++chock-a-block:
++- https://dictionary.cambridge.org/us/dictionary/english/chock-a-block
++block-of-chocolate:
++- https://www.cadbury.com.au/about/community/baking-faqs/
++clapped-out:
++- https://dictionary.cambridge.org/us/dictionary/english/clapped-out?topic=tired-and-making-tired
++have-a-lie-down:
++- https://dictionary.cambridge.org/us/dictionary/english/lie-down
++ice-brick:
++- https://www.esky.com.au/ice-bricks-ice-packs/
++some-poor-mug:
++- https://dictionary.cambridge.org/us/dictionary/english/mug
++sozzled:
++- https://dictionary.cambridge.org/dictionary/english/sozzled
++- https://en.wikisource.org/wiki/A_Dictionary_of_Australian_Words_and_Terms
++stay-out-of-strife:
++- https://www.oxfordlearnersdictionaries.com/definition/english/strife
++fruit-and-veg:
++- https://dictionary.cambridge.org/dictionary/english/veg
++a-bit-rough:
++- https://api.collinsdictionary.com/dictionary/english/rough
++marg:
++- https://dictionary.cambridge.org/us/dictionary/english/margarine
+diff --git a/aussiefy/detect.py b/aussiefy/detect.py
+index d106e8a..0ddac2a 100644
+--- a/aussiefy/detect.py
++++ b/aussiefy/detect.py
+@@ -19,7 +19,7 @@ from dataclasses import dataclass, field
+ from typing import Callable, NamedTuple
+ 
+ from . import morph, pos
+-from .context import following_context, noun_argument, verb_subject
++from .context import TIME_ADVERBS, argument_complete, following_context, noun_argument, verb_subject
+ from .embed import Embedder, NgramEmbedder, similarity_scorer
+ from .matcher import match_at, SLOT_MATCHERS, Match, Pattern, PatternIndex, is_name
+ from .schema import Concept
+@@ -225,7 +225,7 @@ def predicate_context(tokens: list[Token], start: int) -> PredicateContext | Non
+ 
+ 
+ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozenset[str]] | None = None,
+-                tags: list[str] | None = None) -> Detection | None:
++                tags: list[str] | None = None, *, complete: bool = True) -> Detection | None:
+     p: Pattern = m.pattern
+     det = Detection(m.start, m.end, p.concepts, p.frame, p.intensity,
+                     "entry" if p.entry_id else "trigger", p.text, p.entry_id,
+@@ -238,6 +238,10 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
+     if (m.start > 0 and tokens[m.start - 1].text == "-" and tokens[m.start - 1].end == first.start) or \
+             (m.end < len(tokens) and tokens[m.end].text == "-" and tokens[m.end].start == last.end):
+         return None   # part of a hyphenated word: "good-bye", "battle-field"
++    terminal_argument = any(capture.end == last.end for slot, capture in m.captures.items()
++                            if slot in {"obj", "objposs", "np"})
++    if terminal_argument and not argument_complete(tokens, m.end, tags, complete):
++        return None
+     if "np" in m.captures and tags is not None and not noun_argument(m.captures["np"], tokens, tags):
+         return None
+     if p.frame == "vp":
+@@ -259,7 +263,7 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
+         det.captures.setdefault("poss", first)   # "his wife": the possessive a "{poss} missus" keeps
+     noun_limits = (adjective_nouns or {}).get(first.norm)
+     next_is_noun = m.end < len(tokens) and (tags is not None and tags[m.end] in pos.NOUNS) \
+-        and tokens[m.end].norm not in {"today", "tomorrow", "yesterday", "tonight"}
++        and tokens[m.end].norm not in TIME_ADVERBS
+     if p.frame == "predicate_adj" and noun_limits is not None and next_is_noun:
+         return None  # an attributive adjective must pass its noun-sense rule, even after a linking verb
+     if p.frame == "predicate_adj":
+@@ -445,7 +449,7 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
+     found: list[Detection] = []
+     tags = tags if tags is not None else pos.tag([t.text for t in tokens])
+     for m in index.find(tokens):
+-        det = check_frame(m, tokens, adjective_nouns, tags)
++        det = check_frame(m, tokens, adjective_nouns, tags, complete=complete)
+         if det:
+             det.concepts = applicable_concepts(det.concepts, concepts, tokens, det.end, complete)
+         if det and not _in_a_name(tokens, det.start, det.end) and not _possessed(tokens, det) \
+@@ -486,7 +490,7 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
+             if best:
+                 score, n, p = best
+                 m = Match(p, j, j + n)
+-                det = check_frame(m, tokens, adjective_nouns, tags)
++                det = check_frame(m, tokens, adjective_nouns, tags, complete=complete)
+                 if det:
+                     det.concepts = applicable_concepts(det.concepts, concepts, tokens, det.end, complete)
+                     det.method = "embedding"
+diff --git a/aussiefy/morph.py b/aussiefy/morph.py
+index 6d66ad2..7ce577d 100644
+--- a/aussiefy/morph.py
++++ b/aussiefy/morph.py
+@@ -106,6 +106,7 @@ IRREGULAR = {
+     "sit": ("sits", "sat", "sat", "sitting"),
+     "swim": ("swims", "swam", "swum", "swimming"),
+     "begin": ("begins", "began", "begun", "beginning"),
++    "bend": ("bends", "bent", "bent", "bending"),
+     "spin": ("spins", "spun", "spun", "spinning"),
+     "sting": ("stings", "stung", "stung", "stinging"),
+     "dig": ("digs", "dug", "dug", "digging"),
+diff --git a/aussiefy/realise.py b/aussiefy/realise.py
+index ffa4403..1bb0bb5 100644
+--- a/aussiefy/realise.py
++++ b/aussiefy/realise.py
+@@ -164,7 +164,8 @@ def noun_slots(det: Detection) -> dict[str, str]:
+             morph.possessive_of(subj.norm) if subj is not None
+             else morph.possessive_of(caps["agent"].norm) if "agent" in caps else "your"),
+         "obj": caps["obj"].text if "obj" in caps else "",
+-        "objposs": morph.possessive_of_object(caps["obj"].text) if "obj" in caps else "their",
++        "objposs": caps["objposs"].text if "objposs" in caps else (
++            morph.possessive_of_object(caps["obj"].text) if "obj" in caps else "their"),
+         "np": caps["np"].text if "np" in caps else "",
+     }
+ 
+diff --git a/aussiefy/select.py b/aussiefy/select.py
+index 3958e1f..a331cd9 100644
+--- a/aussiefy/select.py
++++ b/aussiefy/select.py
+@@ -126,8 +126,10 @@ def binding_problem(form: str, det: Detection) -> str | None:
+     needs = set(re.findall(r"\{(\w+)\}", form)) - {"subj", "be", "have", "do"}
+     if "poss" in needs and not {"poss", "subj", "agent"} & det.captures.keys() and det.frame != "imperative":
+         return "cannot fill {poss}: no subject or possessive in the span"
+-    if needs & {"obj", "objposs"} and "obj" not in det.captures:
++    if "obj" in needs and "obj" not in det.captures:
+         return "cannot fill {obj}: no object in the span"
++    if "objposs" in needs and not {"obj", "objposs"} & det.captures.keys():
++        return "cannot fill {objposs}: no object or object possessive in the span"
+     if "np" in needs and "np" not in det.captures:
+         return "cannot fill {np}: no noun phrase in the span"
+     return None
+@@ -138,7 +140,7 @@ def form_problem(form: str, det: Detection) -> str | None:
+     if reason:
+         return reason
+     needs = set(re.findall(r"\{(\w+)\}", form))
+-    for slot in ("np", "obj"):
++    for slot in ("np", "obj", "objposs"):
+         captured = det.captures.get(slot)
+         represented = slot in needs or slot == "obj" and "objposs" in needs
+         if captured is not None and not represented:
+diff --git a/docs/architecture/reviews/README.md b/docs/architecture/reviews/README.md
+index 3674bea..33f2930 100644
+--- a/docs/architecture/reviews/README.md
++++ b/docs/architecture/reviews/README.md
+@@ -10,6 +10,7 @@ commands that have since been renamed. Mate, decisions they led to are recorded
+ 
+ | Review | Summary |
+ |---|---|
++| [design-review-2026-10-19-sourced-extensions.md](design-review-2026-10-19-sourced-extensions.md) | Reviewed source-meaning distinctions, preserved roles and quantity, compatible forms and 239 scoped provenance records; integration review pending |
+ | [design-review-2026-10-19-semantic-context.md](design-review-2026-10-19-semantic-context.md) | Shared semantic context, preserved arguments, contextual tone, opaque boundaries, YAML portability and bounded source research |
+ | [design-review-2026-10-18-hunger-phrases.md](design-review-2026-10-18-hunger-phrases.md) | Independent appetite harvest, tense-safe VPs and controlled writer-only hunger imagery |
+ | [design-review-2026-10-18-sourced-meanings.md](design-review-2026-10-18-sourced-meanings.md) | Bounded source audit, precise slang senses, explicit loose-paraphrase gates and meaningful-output regressions |
+diff --git a/docs/contributor/data-acquisition.md b/docs/contributor/data-acquisition.md
+index c3e4e9c..341a696 100644
+--- a/docs/contributor/data-acquisition.md
++++ b/docs/contributor/data-acquisition.md
+@@ -166,3 +166,25 @@ Both appear in the brief's sample output, so `--unlock not_aussie,fabricated` br
+ 3. The bundled embeddin' model is now `stale`; retraining it's a separate release, described in
+    [training/README.md](../../training/README.md).
+ 4. Record the change under `[Unreleased]` in `CHANGELOG.md`.
++
++## Integrating a source-meaning audit
++
++So anyway, research under `research/slang-meanings-2026-10-19-batch3/` and `batch4/` distinguishes selected meanings,
++complete constructions, components, historical contexts, source chains'n access limitations. Their 239
++proposed source records are merged into `aussiefy/data/sources.yaml` without replacing existin' URLs.
++A source on a public card supports that reviewed scope; it doesn't certify every trigger, every form,
++current frequency or Australian exclusivity. Multiple editions or mirrors of one work remain one witness.
++
++Anyway, apply clear lexical distinctions as dictionary concepts'n compatible forms, with positive eligibility and
++negative meaning tests. The latest integration preserves quantities, location nouns, physical reference,
++polarity'n activity purpose without slang\-specific engine checks. New fruit\-and\-veg location phrases cite
++the food component'n explicitly state that their location wording is compositional, rather than claiming
++independent fixed\-idiom attestation. Existin' gates'n flags stay in force.
++
++One bounded availability limit remains: the existin' spelling heuristic treats final `stakes` as plural,
++so the mass idiom `kid stakes` is withheld after a singular agreeing verb, although it remains eligible in
++other explicit pretence contexts. Well, this is conservative rejection, not evidence of wrong agreement being
++emitted. A general mass\-number annotation is a separate grammar change; the lexical correction doesn't
++need a special exception namin' this phrase. The `give best` object\-binding availability question remains a separate grammatical investigation.
++Listener\-role handling now binds the listener explicitly'n declines partial terminal arguments rather than
++borrowing the speaker or dropping another coordinated listener.
+diff --git a/docs/functional/changes.md b/docs/functional/changes.md
+index b8ffeb4..8a13e66 100644
+--- a/docs/functional/changes.md
++++ b/docs/functional/changes.md
+@@ -67,7 +67,7 @@ and responses live in `tests/fixtures/changes/`. Each change has:
+   "Anyway, he's" and the swap's starts at "he's". Removing the connective rewrites "he's", and swappin' in "he
+   isn't the full quid" rewrites part of the connective's region, so each covers the other. A garnish region that
+   takes in a whole swap is another such pair. Now, a change with no region \(a drawl, an infix, a US word swapped\) covers
+-  nothing.
++  sweet bugger\-all.
+ 
+ `entries` maps each entry id the changes name to its card, built as `lookup` builds it under the same dials
+ (`aussiefy/cards.py`): riffs under the vulgarity cap where the embellishment takes riffs at all, and a gated
+diff --git a/docs/functional/dials.md b/docs/functional/dials.md
+index aa444f2..87ed5e8 100644
+--- a/docs/functional/dials.md
++++ b/docs/functional/dials.md
+@@ -47,7 +47,7 @@ take a level by number or name, and no vulgarity: see the [CLI reference](cli.md
+ 
+ Swearin' comes three ways, each driven by the vulgarity, whatever the level:
+ 
+-- **Swaps:** plain\-word swears compete with clean slang for a meaning \(very → fuckin', nothing → fuck all, go
++- **Swaps:** plain\-word swears compete with clean slang for a meaning \(very → fuckin', bugger all → fuck all, go
+   away → fuck off, a galah → a dickhead\). Crikey, an entry's level says how hard it is to follow, never how rude it is.
+ - **The swear channel:** sweary openers, asides, tags, tails'n closers \("Fuck me dead."\) at the vulgarity's
+   rate \(`swearing:` in `aussiefy/data/profiles.yaml`); the level's own garnish is clean.
+diff --git a/docs/functional/dictionary.md b/docs/functional/dictionary.md
+index 86518dd..7af956e 100644
+--- a/docs/functional/dictionary.md
++++ b/docs/functional/dictionary.md
+@@ -89,7 +89,7 @@ Further optional fields:
+   on the swear list \(`mask: [wanker]`). Each must be a lower\-case word in one of its forms. They stay outta
+   `swears.yaml` 'cause lint reads that list.
+ - `profane: false` marks an entry rated 1 or more with no profanity in it: innuendo \("rooted", "have a root"\), an
+-  insult \("mongrel"\) or a crude word \("shut your gob"\). Nothing in it's masked. So anyway, a test fails when an active entry
++  insult \("mongrel"\) or a crude word \("shut your gob"\). Not a sausage in it's masked. So anyway, a test fails when an active entry
+   rated 1 or more has neither a masked word at its rating nor this mark \([changes](changes.md#masks)).
+ - `type: garnish` entries carry `placement` (connective, opener, tag, aside, tail or closer\), an optional
+   `when` (the sentence contexts they suit\) and an optional `stretch` (vowel\-stretch the closer, as in
+@@ -97,12 +97,17 @@ Further optional fields:
+ 
+ ## Slots
+ 
+-Slots are `{subj} {be} {have} {do} {poss} {obj}`, plus `{np}`, which captures a short noun phrase'n copies
++Slots are `{subj} {be} {have} {do} {poss} {obj} {objposs}`, plus `{np}`, which captures a short noun phrase'n copies
+ it across, and `{will}`, which becomes "will" or "would" by tense. For example, `reckon {np} {have} Buckley's`
+ turns "believing her assertion to be simply impossible" into "reckoning her assertion had Buckley's". When an
+ entry has no verb of its own to take tense from, it uses the rest of the sentence's tense. Stone the flamin' crows, clause forms can
+ also start with "there" ("it's impossible" → "there's no bloody way").
+ 
++`{objposs}` identifies another participant's possessive. It uses an explicit captured possessive or
++derives one from `{obj}`; it never falls back to the speaking agent. Bloody hell, for example, “she talked his ear
++off” can become “she bent his ear”, while bare “she rambled” supplies no listener. Selected forms must
++retain an explicitly captured object possessive, just as they retain other captured arguments.
++
+ ## Pattern language
+ 
+ `replaces` and concept triggers share a small pattern language:
+@@ -257,3 +262,31 @@ Ambiguous bare “establish” remains unchanged; unambiguous founding phrases r
+ “hand on heart”, while wholehearted devotion and bare sincere/solemn manner stay distinct. These are sense
+ and grammar rules shared by all document presets; their tests are
+ [the fidelity regressions](../../tests/functional/test_fidelity_maintenance.py).
++
++## Reviewed sense boundaries
++
++Now, a shared concept expresses the meaning actually established by its triggers. Physical solitude doesn't
++establish emotional loneliness; a shout doesn't establish a reprimand; very little isn't exactly zero.
++Named tree species, animals, baggage, package contents'n construction methods need explicit support in
++the input. Compatible grammatical entries preserve source modals, object/reference slots'n location nouns
++rather than silently droppin' them. These distinctions live in dictionary data'n reuse the existin'
++meaning'n frame checks; optional writer imagery doesn't redefine a literal mapping.
++
++Historical `sandy blight` remains available for casual eye-inflammation wording. Its concept declares
++`not_in: [technical, official, instructions]`, honoured when those domains appear in resolved
++`document_config.term_domains`. A document classifier supplies presets; no separate hidden type-specific
++rule is added. Exact terms and precise protected wording keep their ordinary document-policy behaviour.
++
++Anyway, automatic beer\-package mappings require an explicit twenty\-four\-unit tinnie package: a 24\-pack, twenty\-four
++pack, or case/carton of 24 coldies. A bare case/carton may carry a different count, including in a later
++qualifier, so it stays plain. The slab expression remains in the dictionary'n discoverable by lookup;
++this factual boundary doesn't introduce a quantity parser.
++
++Terminal object'n noun captures must reach a complete argument. A coordinated listener, partial multiword
++name, possessive noun head or of\-qualified name stays plain when the capture can't retain it. A following
++coordinated verb or fresh finite clause remains independent. The same bounded check protects speech,
++scolding'n other verb constructions; it doesn't claim a full parser for arbitrary coordination.
++
++Waltzing Matilda requires an explicitly travellin' swag carrier. Carryin' a swag alone can use the separate
++baggage expression; walking country roads alone doesn't establish baggage. Exact\-zero mappings also
++exclude minimising nothing\-much constructions, which may describe a small amount rather than none.
+diff --git a/docs/functional/llm-modes.md b/docs/functional/llm-modes.md
+index 7a703a6..a779adb 100644
+--- a/docs/functional/llm-modes.md
++++ b/docs/functional/llm-modes.md
+@@ -22,7 +22,7 @@ asks for a smoother rewrite that keeps every planned phrase and adds no new slan
+ - The rewrite is accepted only if every planned phrase survives.
+ - Otherwise, or on any API failure or refusal, the deterministic text stands, and `result.surface["status"]`
+   says why.
+-- With nothing planned, there's nothin' to polish: the mode is skipped, which isn't a fallback.
++- With not a sausage planned, there's bugger all to polish: the mode is skipped, which isn't a fallback.
+ - The plan is always in explain mode.
+ - Surface rewrites aren't cached: each run asks Claude again.
+ 
+diff --git a/docs/plain/architecture/reviews/README.md b/docs/plain/architecture/reviews/README.md
+index fe75f6f..f1fe1be 100644
+--- a/docs/plain/architecture/reviews/README.md
++++ b/docs/plain/architecture/reviews/README.md
+@@ -6,6 +6,7 @@ commands that have since been renamed. Decisions they led to are recorded in [de
+ 
+ | Review | Summary |
+ |---|---|
++| [design-review-2026-10-19-sourced-extensions.md](../../../architecture/reviews/design-review-2026-10-19-sourced-extensions.md) | Reviewed source-meaning distinctions, preserved roles and quantity, compatible forms and 239 scoped provenance records; integration review pending |
+ | [design-review-2026-10-19-semantic-context.md](../../../architecture/reviews/design-review-2026-10-19-semantic-context.md) | Shared semantic context, preserved arguments, contextual tone, opaque boundaries, YAML portability and bounded source research |
+ | [design-review-2026-10-18-hunger-phrases.md](../../../architecture/reviews/design-review-2026-10-18-hunger-phrases.md) | Independent appetite harvest, tense-safe VPs and controlled writer-only hunger imagery |
+ | [design-review-2026-10-18-sourced-meanings.md](../../../architecture/reviews/design-review-2026-10-18-sourced-meanings.md) | Bounded source audit, precise slang senses, explicit loose-paraphrase gates and meaningful-output regressions |
+diff --git a/docs/plain/contributor/data-acquisition.md b/docs/plain/contributor/data-acquisition.md
+index ac60749..d3d314e 100644
+--- a/docs/plain/contributor/data-acquisition.md
++++ b/docs/plain/contributor/data-acquisition.md
+@@ -162,3 +162,25 @@ Both appear in the brief's sample output, so `--unlock not_aussie,fabricated` br
+ 3. The bundled embedding model is now `stale`; retraining it is a separate release, described in
+    [training/README.md](../../../training/README.md).
+ 4. Record the change under `[Unreleased]` in `CHANGELOG.md`.
++
++## Integrating a source-meaning audit
++
++Research under `research/slang-meanings-2026-10-19-batch3/` and `batch4/` distinguishes selected meanings,
++complete constructions, components, historical contexts, source chains and access limitations. Their 239
++proposed source records are merged into `aussiefy/data/sources.yaml` without replacing existing URLs.
++A source on a public card supports that reviewed scope; it does not certify every trigger, every form,
++current frequency or Australian exclusivity. Multiple editions or mirrors of one work remain one witness.
++
++Apply clear lexical distinctions as dictionary concepts and compatible forms, with positive eligibility and
++negative meaning tests. The latest integration preserves quantities, location nouns, physical reference,
++polarity and activity purpose without slang-specific engine checks. New fruit-and-veg location phrases cite
++the food component and explicitly state that their location wording is compositional, rather than claiming
++independent fixed-idiom attestation. Existing gates and flags stay in force.
++
++One bounded availability limit remains: the existing spelling heuristic treats final `stakes` as plural,
++so the mass idiom `kid stakes` is withheld after a singular agreeing verb, although it remains eligible in
++other explicit pretence contexts. This is conservative rejection, not evidence of wrong agreement being
++emitted. A general mass-number annotation is a separate grammar change; the lexical correction does not
++need a special exception naming this phrase. The `give best` object-binding availability question remains a separate grammatical investigation.
++Listener-role handling now binds the listener explicitly and declines partial terminal arguments rather than
++borrowing the speaker or dropping another coordinated listener.
+diff --git a/docs/plain/functional/dictionary.md b/docs/plain/functional/dictionary.md
+index d231b04..ce17a19 100644
+--- a/docs/plain/functional/dictionary.md
++++ b/docs/plain/functional/dictionary.md
+@@ -93,12 +93,17 @@ Further optional fields:
+ 
+ ## Slots
+ 
+-Slots are `{subj} {be} {have} {do} {poss} {obj}`, plus `{np}`, which captures a short noun phrase and copies
++Slots are `{subj} {be} {have} {do} {poss} {obj} {objposs}`, plus `{np}`, which captures a short noun phrase and copies
+ it across, and `{will}`, which becomes "will" or "would" by tense. For example, `reckon {np} {have} Buckley's`
+ turns "believing her assertion to be simply impossible" into "reckoning her assertion had Buckley's". When an
+ entry has no verb of its own to take tense from, it uses the rest of the sentence's tense. Clause forms can
+ also start with "there" ("it's impossible" → "there's no bloody way").
+ 
++`{objposs}` identifies another participant's possessive. It uses an explicit captured possessive or
++derives one from `{obj}`; it never falls back to the speaking agent. For example, “she talked his ear
++off” can become “she bent his ear”, while bare “she rambled” supplies no listener. Selected forms must
++retain an explicitly captured object possessive, just as they retain other captured arguments.
++
+ ## Pattern language
+ 
+ `replaces` and concept triggers share a small pattern language:
+@@ -253,3 +258,31 @@ Ambiguous bare “establish” remains unchanged; unambiguous founding phrases r
+ “hand on heart”, while wholehearted devotion and bare sincere/solemn manner stay distinct. These are sense
+ and grammar rules shared by all document presets; their tests are
+ [the fidelity regressions](../../../tests/functional/test_fidelity_maintenance.py).
++
++## Reviewed sense boundaries
++
++A shared concept expresses the meaning actually established by its triggers. Physical solitude does not
++establish emotional loneliness; a shout does not establish a reprimand; very little is not exactly zero.
++Named tree species, animals, baggage, package contents and construction methods need explicit support in
++the input. Compatible grammatical entries preserve source modals, object/reference slots and location nouns
++rather than silently dropping them. These distinctions live in dictionary data and reuse the existing
++meaning and frame checks; optional writer imagery does not redefine a literal mapping.
++
++Historical `sandy blight` remains available for casual eye-inflammation wording. Its concept declares
++`not_in: [technical, official, instructions]`, honoured when those domains appear in resolved
++`document_config.term_domains`. A document classifier supplies presets; no separate hidden type-specific
++rule is added. Exact terms and precise protected wording keep their ordinary document-policy behaviour.
++
++Automatic beer-package mappings require an explicit twenty-four-unit beer package: a 24-pack, twenty-four
++pack, or case/carton of 24 beers. A bare case/carton may carry a different count, including in a later
++qualifier, so it stays plain. The slab expression remains in the dictionary and discoverable by lookup;
++this factual boundary does not introduce a quantity parser.
++
++Terminal object and noun captures must reach a complete argument. A coordinated listener, partial multiword
++name, possessive noun head or of-qualified name stays plain when the capture cannot retain it. A following
++coordinated verb or fresh finite clause remains independent. The same bounded check protects speech,
++scolding and other verb constructions; it does not claim a full parser for arbitrary coordination.
++
++Waltzing Matilda requires an explicitly travelling swag carrier. Carrying a swag alone can use the separate
++baggage expression; walking country roads alone does not establish baggage. Exact-zero mappings also
++exclude minimising nothing-much constructions, which may describe a small amount rather than none.
+diff --git a/docs/plain/root/CHANGELOG.md b/docs/plain/root/CHANGELOG.md
+index 95f23cb..9562c89 100644
+--- a/docs/plain/root/CHANGELOG.md
++++ b/docs/plain/root/CHANGELOG.md
+@@ -5,6 +5,22 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare
+ 
+ ## [Unreleased]
+ 
++- Preserve explicit listener possessives through shared binding and form compatibility, and require a
++  listener for “bend someone's ear”. Add standard bend/bent morphology instead of inventing a listener
++  or producing “bended”.
++- Apply 239 reviewed source records from the next two 120-entry audit batches, retaining historical,
++  component and source-chain evidence limits rather than certifying every trigger or full construction.
++- Separate physical solitude from loneliness, aimless wandering from weary walking, scolding from shouting,
++  exact zero from small amounts, explicit pretence from easy work, and alcoholic drinks from technical alcohol.
++  Require stated swag baggage, mounted-police context, named tree/animal identity and slab construction;
++  preserve bank-full versus overflow events and require explicit twenty-four-unit beer packages. Keep historical eye
++  terminology out of explicitly protected technical, official and instruction domains.
++- Preserve terminal object/NP arguments through shared completion checks; decline partial or coordinated
++  nominal captures while retaining coordinated verbs. Require both travel and a swag for waltzing Matilda;
++  exclude minimising nothing-much wording from exact zero.
++- Preserve negative-modal indifference wording and supermarket location nouns through compatible sourced
++  forms. Keep all existing status and flag gates; retained historical terms remain subject to their registers.
++
+ - Retain reviewed source research for 90 further existing entries, with evidence limits and unapplied
+   mapping recommendations. Coverage now includes 220 of the original 1,254-entry inventory.
+ - Share clause reading and meaning restrictions across detection and contextual imagery. Preserve captured
+diff --git a/docs/user/getting-started.md b/docs/user/getting-started.md
+index 075c157..a682b8f 100644
+--- a/docs/user/getting-started.md
++++ b/docs/user/getting-started.md
+@@ -27,7 +27,7 @@ Well, from a clone, install in editable mode instead: `pip install -e '.[llm]'`.
+ 
+ ## Translate a text
+ 
+-Give `aussiefy` the text itself, a file path, or nothing to read stdin:
++Give `aussiefy` the text itself, a file path, or sweet bugger\-all to read stdin:
+ 
+ ```sh
+ aussiefy "I'm extremely busy." -l 4 -s 7          # → I'm flat out like a lizard drinking.
+diff --git a/docs/user/llm-modes.md b/docs/user/llm-modes.md
+index cb209b6..449dac4 100644
+--- a/docs/user/llm-modes.md
++++ b/docs/user/llm-modes.md
+@@ -48,7 +48,7 @@ This gives the most natural result: it can change tense, pace'n dialogue, which
+ 
+ ## If Claude isn't available
+ 
+-Nothing is lost: each mode falls back to the engine's own draft, prints the reason on stderr \(for example
++Not a sausage is lost: each mode falls back to the engine's own draft, prints the reason on stderr \(for example
+ `[yarn] kept draft: ...`) and exits with code 4.
+ 
+ Accepted sentence rewrites and yarns are cached in `cache/rewrite/` and `cache/yarn/` under
+diff --git a/tests/corpus/golden.yaml b/tests/corpus/golden.yaml
+index 5c4e333..3f33f31 100644
+--- a/tests/corpus/golden.yaml
++++ b/tests/corpus/golden.yaml
+@@ -19,7 +19,7 @@
+     L4s1: Strewth, do you have kangaroos loose in your top paddock? You're carrying on like a pork chop, you're
+       thick as two short planks and a big-noter, and I'm flat out cleaning up after you.
+     L5s0: Bugger me dead, do ya have kangaroos loose in yer bloody top paddock? Yer carrying on like a pork chop,
+-      yer a stubby short of a six-pack'n a big-noter, and I'm flat out cleanin' up after ya.
++      yer thick as shit'n a big-noter, and I'm flat out cleanin' up after ya.
+     L5s1: Strewth, do ya 'ave kangaroos loose in yer bloody top paddock? Oi, yer carryin' on like a pork chop, yer
+       thick as two short planks and a big-noter, and I'm flat out cleaning up after you.
+ - input: Thanks for breakfast, my friend.
+@@ -1263,9 +1263,9 @@
+ 
+       "I should heaps like to know how they are getting on with the cloth," thought the emperor. But he felt rather
+       uneasy when he remembered that he who was not fit for his office could not see it. Personally, he was of opinion
+-      that he had not a sausage to fear, yet he reckoned it advisable to send some bastard else first to see how
+-      matters stood. Every bugger in the town knew what a remarkable quality the stuff possessed, and all were anxious
+-      to see how bad or stupid their neighbours were.
++      that he had nothing to fear, yet he reckoned it advisable to send some bastard else first to see how matters
++      stood. Every bugger in the town knew what a remarkable quality the stuff possessed, and all were anxious to
++      see how bad or stupid their neighbours were.
+ 
+ 
+       "I shall send my honest old minister to the weavers," thought the emperor. "He can judge best how the stuff
+@@ -1276,12 +1276,12 @@
+       us!" he reckoned, and opened his eyes wide, "I cannot see anything at all," but he did not say so. Both swindlers
+       requested him to come near, and asked him if he did not admire the exquisite pattern and the bloody beautiful
+       colours, pointing to the empty looms. The poor old minister tried his very best, but he could see sweet bugger-all,
+-      for there was nothing to be seen. "Crikey," he reckoned, "can I be so stupid? I should never have thought
++      for there was bugger all to be seen. "Crikey," he reckoned, "can I be so stupid? I should never have thought
+       so, and no bugger must know it! Is it possible that I am not fit for my office? Nah, nah, I cannot say that
+       I was unable to see the cloth."
+ 
+ 
+-      "Now, have you got nothing to say?" said one of the swindlers, while he pretended to be busily weaving.
++      "Now, have you got not a sausage to say?" said one of the swindlers, while he pretended to be busily weaving.
+ 
+ 
+       "Oh, it is dead pretty, exceedingly bloody beautiful," replied the old minister looking through his glasses.
+@@ -1300,8 +1300,8 @@
+ 
+ 
+       Soon afterwards the emperor sent another honest courtier to the weavers to see how they were getting on, and
+-      if the cloth was nearly finished. Like the old minister, he looked and looked but could see bugger all, as
+-      there was nothing to be seen.
++      if the cloth was nearly finished. Like the old minister, he looked and looked but could see nothing, as there
++      was nothing to be seen.
+ 
+ 
+       "Is it not a bloody beautiful piece of cloth?" asked the two swindlers, showing and explaining the magnificent
+@@ -1414,9 +1414,9 @@
+ 
+       "I should heaps like to know how they are getting on with the cloth," reckoned the emperor. But he felt rather
+       uneasy when he remembered that he who wasn''t fit for his office could not see it. Personally, he was of opinion
+-      that he had not a sausage to fear, yet he reckoned it advisable to send some bastard else first to see how
+-      matters stood. Every bugger in the town knew what a remarkable quality the stuff possessed, and all were toey
+-      to see how bad or stupid their neighbours were.
++      that he had nothing to fear, yet he reckoned it advisable to send some bastard else first to see how matters
++      stood. Every bugger in the town knew what a remarkable quality the stuff possessed, and all were toey to see
++      how bad or stupid their neighbours were.
+ 
+ 
+       "I shall send my honest old minister to the weavers," reckoned the emperor. "He can judge best how the stuff
+@@ -1427,12 +1427,12 @@
+       us, ay!" he reckoned, and opened his eyes wide, "I can''t bloody well see anything at all," but he didn''t
+       say so. Both swindlers requested him to come near, and asked him if he didn''t admire the exquisite pattern
+       and the bloody beautiful colours, pointing to the empty looms. Mind you, the poor old minister tried his very
+-      best, but he could see sweet bugger-all, for there was nothing to be seen. "Crikey," he reckoned, "can I be
+-      thick as two short planks? I should never have reckoned so, and no bugger must know it! Is it possible that
+-      I am not fit for my office? Nah, nah, I cannot say that I was unable to see the cloth."
++      best, but he could see sweet bugger-all, for there was bugger all to be seen. "Crikey," he reckoned, "can
++      I be thick as two short planks? I should never have reckoned so, and no bugger must know it! Is it possible
++      that I am not fit for my office? Nah, nah, I cannot say that I was unable to see the cloth."
+ 
+ 
+-      "Now, have you got nothing to say?" said one of the swindlers, while he pretended to be busily weaving.
++      "Now, have you got not a sausage to say?" said one of the swindlers, while he pretended to be busily weaving.
+ 
+ 
+       "Oh, it is dead pretty, exceedingly beautiful," replied the old minister looking through his glasses. "What
+@@ -1450,12 +1450,12 @@
+ 
+ 
+       Soon afterwards the emperor sent another honest courtier to the weavers to see how they were getting on, and
+-      if the cloth was nearly finished. Now, like the old minister, he looked and looked but could see bugger all,
++      if the cloth was nearly finished. Now, like the old minister, he looked and looked but could see nothing,
+       as there was nothing to be seen.
+ 
+ 
+       "Is it not a beautiful piece of cloth?" asked the two swindlers, showing and explaining the magnificent pattern,
+-      which, however, did not exist.
++      which, however, didn''t exist.
+ 
+ 
+       "I am not bloody stupid," said the bloke. "It''s therefore my good appointment for which I''m not fit. It
+@@ -1519,7 +1519,7 @@
+       were ready.
+ 
+ 
+-      "I''m ready," said the emperor. "Does not my suit fit me marvellously?" Then he turned once more to the looking-glass,
++      "I''m ready," said the emperor. "Doesn''t my suit fit me marvellously?" Then he turned once more to the looking-glass,
+       that people should think he admired his garments.
+ 
+ 
+@@ -1538,7 +1538,7 @@
+       littlie," said the old fella, and one whispered to the other what the nipper had said. "But he has nothing
+       on at all," cried at last the whole people. That made a deep impression upon the emperor, for it seemed to
+       him that they were right; but he reckoned to himself, "Now I must bear up to the end." And the chamberlains
+-      walked with still greater dignity, as if they carried the train which did not exist.
++      walked with still greater dignity, as if they carried the train which didn''t bloody well exist.
+ 
+       '
+     L5s0: 'Many, yonks ago lived an emperor, who reckoned so much of brand-spankin''-new clobber that he spent all
+@@ -1559,15 +1559,15 @@
+       should be able to find out which blokes in me bloody empire were unfit for their places, and I could distinguish
+       the clever from the stupid. Mind ya, I must have this cloth woven for me without delay." And he gave a large
+       sum of dosh to the swindlers, in advance, that they should set to work without any loss of time. They set
+-      up two looms, and pretended to be flamin'' hard at work, but they did bugger all whatever on the looms. They
++      up two looms, and pretended to be flamin'' hard at work, but they did fuck all whatever on the looms. They
+       asked for the finest silk''n the most precious gold-cloth; all they got they did away with, and worked at
+       the empty looms till late at night.
+ 
+ 
+       "Oh, shit, I should heaps like to know how they are gettin'' on with the cloth," reckoned the emperor. But
+       he felt rather uneasy when he remembered that he who wasn''t fit for his office couldn''t see it. Personally,
+-      he was of opinion that he hadn''t a sausage to fear, yet he reckoned it advisable to send some bastard else
+-      first to see how matters stood. Well, every bugger in the town knew what a remarkable quality the stuff possessed,
++      he was of opinion that he had bugger all to fear, yet he reckoned it advisable to send some bastard else first
++      to see how matters stood. Well, every bugger in the town knew what a remarkable quality the stuff possessed,
+       and all were toey to see how bad or dilly their neighbours were.
+ 
+ 
+@@ -1579,8 +1579,8 @@
+       us, cobber!" he reckoned, and opened his eyes wide, "I can''t see anythin'' at all," but he didn''t say so.
+       Both swindlers requested him to come near, and asked him if he didn''t admire the exquisite pattern and the
+       fuckin'' beautiful colours, pointing to the empty looms. Mind ya, the poor old minister tried his very best,
+-      but he could see sweet bugger-all, for there was fuck all to be seen. "Crikey," he reckoned, "can I be thick
+-      as shit? I should never ''ave reckoned so, and no bugger must know it, no matter what some drongo reckons!
++      but he could see sweet bugger-all, for there wasn''t a sausage to be seen. "Crikey," he reckoned, "can I be
++      thick as shit? I should never ''ave reckoned so, and no bugger must know it, no matter what some drongo reckons!
+       Is it possible that I''m not fit for me office? Nah, nah, I can''t say that I was unable to see the cloth."
+ 
+ 
+@@ -3078,7 +3078,7 @@
+ 
+       '
+     L3s0: 'NEAR a bloody great forest there lived a poor woodcutter and his missus, and his two nippers; the young
+-      fella''s name was Hansel and the girl''s Grethel. They had not a sausage to bite or to sup, and once, when
++      fella''s name was Hansel and the girl''s Grethel. They had sweet bugger-all to bite or to sup, and once, when
+       there was great dearth in the land, the man could not even gain the daily bread. As he lay in bed one night
+       thinking of this, and turning and tossing, he sighed heavily, and said to his wife,
+ 
+@@ -3187,9 +3187,9 @@
+ 
+       '
+     L4s0: 'NEAR a bloody great forest there lived a poor woodcutter and his missus, and his two nippers; the young
+-      fella''s name was Hansel and the girl''s Grethel. Strewth, they had not a sausage to bite or to sup, and once,
+-      when there was great dearth in the land, the bloke could not even gain the daily bread. As he lay in bed one
+-      night thinking of this, and turning and tossing, he sighed heavily, and said to his wife,
++      fella''s name was Hansel and the girl''s Grethel. Strewth, they had sweet bugger-all to bite or to sup, and
++      once, when there was great dearth in the land, the bloke could not even gain the daily bread. As he lay in
++      bed one night thinking of this, and turning and tossing, he sighed heavily, and said to his wife,
+ 
+ 
+       "What will become of us, mate? we can''t even feed our bloody little buggers; there is bugger all left for
+@@ -3213,7 +3213,7 @@
+       "But I really pity the poor children," said the bloke.
+ 
+ 
+-      The two littlies had not been able to sleep for hunger, and had heard what their step-mother had said to their
++      The two littlies hadn''t been able to sleep for hunger, and had heard what their step-mother had said to their
+       old man. Grethel blubbered bitterly, and said to Hansel,
+ 
+ 
+@@ -3254,7 +3254,7 @@
+       good-bye."
+ 
+ 
+-      "You young mug," said the woman, "that isn''t your bloody kitten, but the sunshine on the chimney-pot."
++      "You young mug," said the woman, "that''s not your bloody kitten, but the sunshine on the chimney-pot."
+ 
+ 
+       Anyway, of course Hansel had not been looking at his kitten, but had been taking every now and then a flint
+@@ -3296,12 +3296,12 @@
+ 
+       '
+     L5s0: 'Jeez, NEAR a bloody great bush there lived a poor woodcutter''n his missus, and his two nippers; the
+-      young fella''s name was Hansel and the girl''s Grethel. They hadn''t a sausage to bite or to sup, and once,
+-      when there was fuckin'' great dearth in the land, the bloke couldn''t even gain the daily bread. Struth, as
+-      he lay in bed one night thinking of this, and turning''n tossin'', he sighed heavily, and said to his wife,
++      young fella''s name was Hansel and the girl''s Grethel. They had fuck all to bite or to sup, and once, when
++      there was fuckin'' great dearth in the land, the bloke couldn''t even gain the daily bread. Struth, as he
++      lay in bed one night thinking of this, and turning''n tossin'', he sighed heavily, and said to his wife,
+ 
+ 
+-      "What will become of us? we can''t even feed our bloody little buggers; there''s bugger all left for ourselves."
++      "What will become of us? we can''t even feed our bloody little buggers; there ain''t a sausage left for ourselves."
+ 
+ 
+       "I''ll tell ya what, husband," answered the wife; "we''ll take the little tackers early in the morning into
+@@ -3363,7 +3363,7 @@
+       good-bye."
+ 
+ 
+-      "Ya young mug," said the sheila, "that ain''t yer kitten, but the sunshine on the chimney-pot."
++      "Ya young mug," said the sheila, "that isn''t yer kitten, but the sunshine on the chimney-pot."
+ 
+ 
+       Anyway, of course Hansel hadn''t been lookin'' at his kitten, but had been taking every now and then a flint
+@@ -6593,7 +6593,7 @@
+       '
+     L4s0: 'Aw, once a jolly swagman camped by a billabong,
+ 
+-      Under the shade of a coolibah tree,
++      Under the shade of a coolabah tree,
+ 
+       And he sang as he watched and waited till his billy boiled,
+ 
+@@ -6638,7 +6638,7 @@
+       '
+     L5s0: 'Aw, once a jolly swagman camped by a billabong,
+ 
+-      Under the shade of a coolibah tree,
++      Under the shade of a coolabah tree,
+ 
+       And he sang as he watched''n waited till his billy boiled,
+ 
+diff --git a/tests/fixtures/changes/every-kind.json b/tests/fixtures/changes/every-kind.json
+index 7dc2e37..4298326 100644
+--- a/tests/fixtures/changes/every-kind.json
++++ b/tests/fixtures/changes/every-kind.json
+@@ -495,7 +495,7 @@
+     "alternatives": [
+      {
+       "entry_id": "stubby-short-of-a-six-pack",
+-      "weight": 0.2444,
++      "weight": 0.2391,
+       "rendered": "a stubby short of a six-pack",
+       "out_span": [
+        87,
+@@ -506,7 +506,7 @@
+      },
+      {
+       "entry_id": "dilly",
+-      "weight": 0.0667,
++      "weight": 0.0652,
+       "rendered": "dilly",
+       "out_span": [
+        87,
+@@ -517,7 +517,7 @@
+      },
+      {
+       "entry_id": "not-the-full-quid",
+-      "weight": 0.2222,
++      "weight": 0.2174,
+       "rendered": "not the full quid",
+       "out_span": [
+        87,
+@@ -528,7 +528,7 @@
+      },
+      {
+       "entry_id": "snags-short-of-a-barbie",
+-      "weight": 0.2222,
++      "weight": 0.2174,
+       "rendered": "a few snags short of a barbie",
+       "out_span": [
+        87,
+@@ -539,7 +539,7 @@
+      },
+      {
+       "entry_id": "thick-as-two-short-planks",
+-      "weight": 0.2444,
++      "weight": 0.2609,
+       "rendered": "thick as two short planks",
+       "out_span": [
+        87,
+@@ -1742,7 +1742,7 @@
+     "alternatives": [
+      {
+       "entry_id": "thick-as-two-short-planks",
+-      "weight": 0.3039,
++      "weight": 0.3226,
+       "rendered": "he's thick as two short planks",
+       "out_span": [
+        492,
+@@ -1753,7 +1753,7 @@
+      },
+      {
+       "entry_id": "dilly",
+-      "weight": 0.0829,
++      "weight": 0.0806,
+       "rendered": "he's dilly",
+       "out_span": [
+        492,
+@@ -1764,7 +1764,7 @@
+      },
+      {
+       "entry_id": "not-the-full-quid",
+-      "weight": 0.2762,
++      "weight": 0.2688,
+       "rendered": "he isn't the full quid",
+       "out_span": [
+        492,
+@@ -1775,7 +1775,7 @@
+      },
+      {
+       "entry_id": "snags-short-of-a-barbie",
+-      "weight": 0.2762,
++      "weight": 0.2688,
+       "rendered": "he's a few snags short of a barbie",
+       "out_span": [
+        492,
+@@ -1786,7 +1786,7 @@
+      },
+      {
+       "entry_id": "stubby-short-of-a-six-pack",
+-      "weight": 0.0608,
++      "weight": 0.0591,
+       "rendered": "he's a stubby short of a six-pack",
+       "out_span": [
+        492,
+@@ -3212,7 +3212,8 @@
+     "register": "current",
+     "notes": "UK/Aus.",
+     "sources": [
+-     "https://en.wiktionary.org/wiki/thick_as_two_short_planks"
++     "https://en.wiktionary.org/wiki/thick_as_two_short_planks",
++     "https://dictionary.cambridge.org/dictionary/english/as-thick-as-two-short-planks"
+     ]
+    },
+    "troppo": {

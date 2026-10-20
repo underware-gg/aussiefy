@@ -1,0 +1,1097 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index 47068b3..eb43845 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -9,6 +9,18 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py
+ 
+ ## [Unreleased]
+ 
++- Regenerate change fixtures from the invoking checkout rather than an editable installation of another worktree.
++
++- Amend the unreleased `changes` contract v1 with optional `semantic_effects` entry-card metadata.
++
++- Make reviewed narrator opinion explicit'n configurable: Troppo permits it, Deadset/Dinkum and Custom
++  keep it off unless overridden. Now, share eligibility across translation, plans, change alternatives and
++  meaning lookup; retain explicit term discovery with effect annotations. Lint, verify'n yarn submission
++  check recognised added opinion terms while permittin' original occurrences.
++- Preserve roles'n meanings: brave bastards describes brave bastards, not diggers generally;
++  poor buggers expresses sympathy for unfortunate people, not death. Tell ya what, add opinion metadata to the living's
++  "lucky buggers" expression rather than silently adding good fortune at every embellishment setting.
++
+ - Retain reviewed source research for 90 further existin' entries, with evidence limits'n unapplied
+   mapping recommendations. Coverage now includes 220 of the original 1,254\-entry inventory.
+ - Share clause readin''n meanin' restrictions across detection and contextual imagery. Preserve captured
+@@ -166,7 +178,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py
+ 
+ - Final committed source delta through `c0177d7`: fourth\-pass/dinkum dictionary rounds, held\-word lint,
+   original\-context suggestions, literal clause\-subject agreement, form\-aware riffs'n completed research.
+-  Anyway, quote exemptions preserve actual wording/counts; halves require explicit equal shares'n liquid\-pouring
++  Quote exemptions preserve actual wording/counts; halves require explicit equal shares'n liquid\-pouring
+   complements remain literal. Stone the flamin' crows, three weather golden variants were intentionally reviewed after narrowin' guards.
+ 
+ - Integrated 91 committed source changes through `Rob-Morris/aussiefy@95036e1`, preservin' this repository's
+@@ -203,7 +215,7 @@ Anyway, add changes under [Unreleased] as they land; `python scripts/promote.py
+   a fair whack\), hire, per cent'n roadworks in the dialect table; 63 covered or skipped. The fourth pass's wrong
+   senses fixed in data: bush for a legal bush, Parliament House for a US Congress, knock together for any
+   build, pressie for a policy's gift, tucker'n quid in the wrong places, and lint's LEAVE, heaps, bugger all,
+-  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Bugger me, engine limits found are listed in DECISIONS.
++  the pollies'n brekkie suggestions. `"sting"` is an irregular verb. Engine limits found are listed in DECISIONS.
+ - **The fourth pass's next steps:**
+   - A storyteller's openings follow the genre's form at every settin', troppo's too \(an obituary isn't opened
+     `"Fair dinkum, this happened."`), and `"Okay, so."` is gone from the openings.
+diff --git a/aussiefy/cards.py b/aussiefy/cards.py
+index 7a84c95..f26c923 100644
+--- a/aussiefy/cards.py
++++ b/aussiefy/cards.py
+@@ -28,6 +28,8 @@ def short_card(e: Entry) -> dict[str, Any]:
+     register)."""
+     card = {"id": e.id, "form": e.form, "gloss": e.gloss, "frame": e.frame, "level": e.incoherence,
+             "vulgarity": e.vulgarity}
++    if e.semantic_effects:
++        card["semantic_effects"] = list(e.semantic_effects)
+     if e.register != "current":
+         card["register"] = e.register
+     if e.status == "gate":
+@@ -41,6 +43,8 @@ def entry_card(e: Entry, cap: int = 3, riffs: bool = True) -> dict[str, Any]:
+     (shown only where the policy unlocked it)."""
+     card = {"id": e.id, "form": e.form, "gloss": e.gloss, "frame": e.frame, "concepts": list(e.concept),
+             "level": e.incoherence, "vulgarity": e.vulgarity, "register": e.register}
++    if e.semantic_effects:
++        card["semantic_effects"] = list(e.semantic_effects)
+     if e.placement:
+         card["placement"] = e.placement
+     if riffs and e.riffs_within(cap):
+diff --git a/aussiefy/data/changes.schema.json b/aussiefy/data/changes.schema.json
+index a43ac60..bfe1e78 100644
+--- a/aussiefy/data/changes.schema.json
++++ b/aussiefy/data/changes.schema.json
+@@ -155,7 +155,8 @@
+         "notes": {"type": "string"},
+         "sources": {"type": "array", "items": {"type": "string"}},
+         "replaces": {"type": "array", "items": {"type": "string"}},
+-        "gated": {"type": "array", "items": {"type": "string"}}
++        "gated": {"type": "array", "items": {"type": "string"}},
++        "semantic_effects": {"type": "array", "items": {"enum": ["opinion"]}, "uniqueItems": true}
+       }
+     }
+   }
+diff --git a/aussiefy/data/concepts.yaml b/aussiefy/data/concepts.yaml
+index 3800f21..d117c1c 100644
+--- a/aussiefy/data/concepts.yaml
++++ b/aussiefy/data/concepts.yaml
+@@ -908,13 +908,13 @@ SOLDIERS:
+   description: Soldiers, especially in remembrance.
+   neutral_person: true
+   triggers:
+-    # head-noun matching makes "brave man" also match "brave men"
+-    np: ["soldier", "serviceman", "servicewoman", "infantryman", "brave man@4", "fallen soldier"]
++    np: ["soldier", "serviceman", "servicewoman", "infantryman", "fallen soldier"]
+ BRAVE:
+   description: Courageous, willing to take risks.
+   person: true
+   triggers:
+     predicate_adj: ["brave", "courageous", "fearless", "plucky", "gutsy", "daring"]
++    np: ["brave person", "brave man", "brave woman", "courageous person"]
+ WAR:
+   description: A war, battle or major conflict.
+   triggers:
+diff --git a/aussiefy/data/entries/classics.yaml b/aussiefy/data/entries/classics.yaml
+index 2abd38f..db9c686 100644
+--- a/aussiefy/data/entries/classics.yaml
++++ b/aussiefy/data/entries/classics.yaml
+@@ -1623,8 +1623,7 @@
+   incoherence: 1
+   register: current
+   gloss: 'The poor devil: said with sympathy for someone hard done by.'
+-  notes: Never trigger on 'the poor man' (poverty sense). The plural is the existing DEAD_PEOPLE form 'poor buggers'
+-    (a different sense).
++  notes: Never trigger on 'the poor man' (poverty sense). The plural 'poor buggers' shares the sympathy sense.
+   sources:
+   - https://en.wiktionary.org/wiki/bugger
+ - id: pub
+diff --git a/aussiefy/data/entries/phrases.yaml b/aussiefy/data/entries/phrases.yaml
+index 93e083c..146426c 100644
+--- a/aussiefy/data/entries/phrases.yaml
++++ b/aussiefy/data/entries/phrases.yaml
+@@ -551,12 +551,13 @@
+   gloss: The living.
+ - id: poor-buggers
+   form: poor buggers
+-  concept: [DEAD_PEOPLE]
++  concept: [UNLUCKY_PERSON]
+   frame: np
+   vulgarity: 1
+   incoherence: 2
+   plural: poor buggers
+-  gloss: Those who died; said with sympathy.
++  number: plural
++  gloss: People deserving sympathy for their bad luck or hardship.
+ - id: hand-on-heart
+   form: hand on heart
+   concept: [SINCERELY]
+@@ -681,12 +682,16 @@
+   gloss: For absolutely nothing.
+ - id: the-lucky-buggers-still-breathin
+   form: the lucky buggers still breathin'
++  variants: [the lucky buggers still breathing]
++  spellings: [the lucky buggers still breathing]
++  semantic_effects: [opinion]
+   concept: [ALIVE]
+   frame: np
+   vulgarity: 1
+   incoherence: 4
+   plural: the lucky buggers still breathin'
+-  gloss: The living.
++  gloss: The living, with the narrator judging them fortunate.
++  notes: Adds a judgment of good fortune; does not establish that the people survived a particular event.
+ - id: old-fella
+   form: old fella
+   concept: [FATHER]
+@@ -696,13 +701,13 @@
+   gloss: Father; in the plural, the old generation.
+ - id: brave-bastards
+   form: brave bastard
+-  concept: [SOLDIERS]
++  concept: [BRAVE]
+   frame: np
+   vulgarity: 1
+   incoherence: 2
+   plural: brave bastards
+   notes: Affectionate. In Australian usage "bastard" is often admiring.
+-  gloss: A courageous soldier.
++  gloss: A courageous person; said admiringly.
+ 
+ # --- the f-word (vulgarity 2: common, not polite) and the c-word (vulgarity 3) ---------
+ # The c-word is only reachable when asked for (vulgarity 3, tradie); no level defaults to it. Both are far more offensive in the US;
+diff --git a/aussiefy/data/genres.yaml b/aussiefy/data/genres.yaml
+index a256f69..c985e04 100644
+--- a/aussiefy/data/genres.yaml
++++ b/aussiefy/data/genres.yaml
+@@ -72,6 +72,7 @@ embellishments:
+       obligation, a decision, a finding or a stated aim keeps its verb's weight ("we consider you responsible"
+       isn't "we reckon"; "reaffirmed" isn't "doubled down"; a goal isn't "while they're at it").
+   troppo:
++    narrator_opinion: true
+     contextual_riffs: true
+     riff_exaggeration: 2
+     riff_association: 1
+diff --git a/aussiefy/engine.py b/aussiefy/engine.py
+index 378a3fd..cf46252 100644
+--- a/aussiefy/engine.py
++++ b/aussiefy/engine.py
+@@ -22,7 +22,7 @@ from .protected import Masked, protected_runs
+ from .model import Dictionary
+ from .policy import Effective, Policy, envelope, pick_form, resolve, roll
+ from .realise import ARTICLES, fit_article, number_problem, phrase_continues, realise, replacement_span
+-from .select import Candidate, candidates, usable_forms, weighted_pick
++from .select import Candidate, candidates, semantic_rejection, usable_forms, weighted_pick
+ from .schema import Entry, SchemaError
+ from .terms import form_key
+ from .text import (COMMON_STARTERS, DATELINE, MID_SENTENCE_NAME, OPEN_QUOTES, QUOTES, SCRIPT_LINE, Token, capital_is_positional, fix_articles, heading_lines, match_case,
+@@ -413,7 +413,8 @@ class Translator:
+                                         self.dictionary.person_concepts, self.dictionary.person_nouns, mood=run.mood)
+         keep = []
+         for c in eligible:
+-            reason = (_span_rejection(c, det, sent.tokens, taken)
++            reason = (semantic_rejection(c.entry, narrator_opinion=run.embellishment.narrator_opinion)
++                      or _span_rejection(c, det, sent.tokens, taken)
+                       or _genre_rejection(c, run, self.dictionary.neutral_person_concepts))
+             if reason:
+                 rejected.append((c.entry, reason))
+@@ -582,7 +583,8 @@ class Translator:
+                 continue
+             offer = garnish_offer("closer", self.dictionary.garnish, run.eff, run.pol.seed,
+                                   (key, run.text.lower()), run.state.garnish_uses, contexts=contexts,
+-                                  mood=run.mood, swear=swear, insults=run.embellishment.takes("insult"))
++                                  mood=run.mood, swear=swear, insults=run.embellishment.takes("insult"),
++                                  narrator_opinion=run.embellishment.narrator_opinion)
+             entry = offer.pick()
+             form = entry and offer.words(entry)
+             run.garnish.append(GarnishRecord.rolled("closer", len(sents) - 1, entry, form, r, p, offer.rejected))
+@@ -611,7 +613,8 @@ class Translator:
+                 continue
+             offer = garnish_offer("tail", self.dictionary.garnish, run.eff, run.pol.seed,
+                                   (key,) + sent.key, state.garnish_uses, sentence_contexts(sent.tokens, sent.tags),
+-                                  swear=swear, insults=run.embellishment.takes("insult"))
++                                  swear=swear, insults=run.embellishment.takes("insult"),
++                                  narrator_opinion=run.embellishment.narrator_opinion)
+             entry = offer.pick()
+             form, rej = entry and offer.words(entry), offer.rejected
+             if entry:
+@@ -768,7 +771,8 @@ class Translator:
+             offer = garnish_offer(placement, self.dictionary.garnish, eff, run.pol.seed, (key,) + sent.key,
+                                   state.garnish_uses, g.tag_contexts if placement == "tag" else g.contexts,
+                                   exclude=recent, mood=run.mood, swear=swear,
+-                                  insults=run.embellishment.takes("insult"))
++                                  insults=run.embellishment.takes("insult"),
++                                  narrator_opinion=run.embellishment.narrator_opinion)
+             entry = offer.pick()
+             form, rej = entry and offer.words(entry), offer.rejected
+             if entry:
+diff --git a/aussiefy/garnish.py b/aussiefy/garnish.py
+index 2f8ae89..e146a5e 100644
+--- a/aussiefy/garnish.py
++++ b/aussiefy/garnish.py
+@@ -11,7 +11,7 @@ from .context import CLOSING_TONES_FOR, tone_weight
+ from .model import PhoneticRule
+ from .policy import Effective, pick_form, roll, weighted_index
+ from .schema import DEFAULT_WHEN, Entry
+-from .select import policy_rejection
++from .select import policy_rejection, semantic_rejection
+ from .text import OPEN_QUOTES, QUOTES, lower_first_word, match_case, sentences, tokenize
+ 
+ VOWEL_RE = re.compile(r"[aeiou]", re.I)
+@@ -104,7 +104,8 @@ class GarnishOffer:
+ 
+ def garnish_pool(placement: str, entries: list[Entry], eff: Effective, used: dict[str, int],
+                  contexts: set[str] | None = None, exclude: set[str] = frozenset(), mood: str = "light",
+-                 swear: bool | None = None, insults: bool = True) -> tuple[list[Entry], list[tuple[str, str]]]:
++                 swear: bool | None = None, insults: bool = True,
++                 narrator_opinion: bool = False) -> tuple[list[Entry], list[tuple[str, str]]]:
+     """The garnish entries eligible for a placement, in the order they're weighed, and the rest with why not. swear
+     picks the channel: False the level's clean garnish, True the swearing (vulgarity 1 and up), None both. insults:
+     whether a garnish may call someone names ("ya galah"; not in a safety notice)."""
+@@ -113,7 +114,7 @@ def garnish_pool(placement: str, entries: list[Entry], eff: Effective, used: dic
+     for e in entries:
+         if e.placement != placement:
+             continue
+-        reason = policy_rejection(e, eff)
++        reason = policy_rejection(e, eff) or semantic_rejection(e, narrator_opinion=narrator_opinion)
+         if reason is None and swear is not None and (e.vulgarity > 0) != swear:
+             reason = "clean garnish comes with the level" if not e.vulgarity else "swearing comes with the vulgarity"
+         if reason is None and not insults and e.insult:
+@@ -145,9 +146,11 @@ def garnish_weights(pool: list[Entry], eff: Effective, swear: bool | None) -> li
+ 
+ def garnish_offer(placement: str, entries: list[Entry], eff: Effective, seed: int, key: tuple,
+                   used: dict[str, int], contexts: set[str] | None = None, exclude: set[str] = frozenset(),
+-                  mood: str = "light", swear: bool | None = None, insults: bool = True) -> GarnishOffer:
++                  mood: str = "light", swear: bool | None = None, insults: bool = True,
++                  narrator_opinion: bool = False) -> GarnishOffer:
+     """What the engine weighs for a placement (garnish_pool, garnish_weights), keyed for its roll and words."""
+-    pool, rejected = garnish_pool(placement, entries, eff, used, contexts, exclude, mood, swear, insults)
++    pool, rejected = garnish_pool(placement, entries, eff, used, contexts, exclude, mood, swear, insults,
++                                  narrator_opinion)
+     return GarnishOffer(placement, tuple(pool), tuple(garnish_weights(pool, eff, swear)), key, seed, eff, rejected)
+ 
+ 
+diff --git a/aussiefy/genre.py b/aussiefy/genre.py
+index c7e66c6..a9fb2ee 100644
+--- a/aussiefy/genre.py
++++ b/aussiefy/genre.py
+@@ -28,7 +28,7 @@ GARNISH = PLACEMENTS + ("riff", "infix", "insult")
+ POLICY_KEYS = ("garnish", "openings", "formal_to_rework", "embellishment", "person_swears", "keep_quotes", "guidance")
+ EMBELLISHMENT_KEYS = ("garnish", "follows_form", "openings", "draft", "keep_share", "max_length", "perform",
+                       "guidance")
+-IMAGERY_KEYS = ("contextual_riffs", "entry_riffs", "riff_exaggeration", "riff_association")
++OPTIONAL_EMBELLISHMENT_KEYS = ("contextual_riffs", "entry_riffs", "riff_exaggeration", "riff_association", "narrator_opinion")
+ 
+ # The cue lexicons and weights stay in code, as context.py's mood lexicons do: they are the classifier, tuned
+ # together against the corpus (tests/test_genre.py), not vocabulary a dictionary round grows.
+@@ -79,6 +79,7 @@ class Embellishment:
+     entry_riffs: bool = True
+     riff_exaggeration: int = 0
+     riff_association: int = 0
++    narrator_opinion: bool = False
+ 
+     @property
+     def name(self) -> str:
+@@ -130,7 +131,8 @@ class Genre:
+         e = self.config.embellishments[self.policy.default_embellishment if step is None else step]
+         if self.name == "custom":
+             e = replace(e, garnish=frozenset(), openings=False, draft=False, keep_share=0, max_length=1,
+-                        perform=False, guidance="", contextual_riffs=False, riff_exaggeration=0, riff_association=0)
++                        perform=False, guidance="", contextual_riffs=False, riff_exaggeration=0, riff_association=0,
++                        narrator_opinion=False)
+         else:
+             e = replace(e, openings=e.openings and self.policy.openings)
+             if "insult" not in self.policy.garnish:
+@@ -220,7 +222,7 @@ def parse_embellishments(data: dict) -> dict[int, Embellishment]:
+     for name, e in raw.items():
+         _missing(name, e, EMBELLISHMENT_KEYS)
+         try:
+-            imagery = DocumentOverrides.parse({k: e[k] for k in IMAGERY_KEYS if k in e}).values()
++            optional = DocumentOverrides.parse({k: e[k] for k in OPTIONAL_EMBELLISHMENT_KEYS if k in e}).values()
+         except UserError as exc:
+             raise SchemaError(f"genres.yaml: {name}: {exc}") from exc
+         _typed_fields(name, e, ("follows_form", "openings", "draft", "perform"))
+@@ -233,7 +235,7 @@ def parse_embellishments(data: dict) -> dict[int, Embellishment]:
+         out[step] = Embellishment(step, _garnish(name, e["garnish"]), e["follows_form"], e["openings"],
+                                   e["draft"],
+                                   float(e["keep_share"]), float(e["max_length"]), e["perform"],
+-                                  " ".join(e["guidance"].split()), **imagery)
++                                  " ".join(e["guidance"].split()), **optional)
+     return out
+ 
+ 
+diff --git a/aussiefy/harness.py b/aussiefy/harness.py
+index 8252caa..8ae1e8c 100644
+--- a/aussiefy/harness.py
++++ b/aussiefy/harness.py
+@@ -78,7 +78,9 @@ def plan(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str
+         "seed": seed,
+         # a riff is optional colour: the planned phrase is the term, not "bush, miles from the nearest servo"
+         "planned": [{"original": r.source[slice(*x.out_span)], "span": list(x.out_span), "entry": x.chosen.entry.id,
+-                     "aussie": x.term, "gloss": x.chosen.entry.gloss or ""} for x in r.records if x.substituted],
++                     "aussie": x.term, "gloss": x.chosen.entry.gloss or "",
++                     **({"semantic_effects": list(x.chosen.entry.semantic_effects)}
++                        if x.chosen.entry.semantic_effects else {})} for x in r.records if x.substituted],
+         "garnish": decided["garnish"],
+         # plain Australian for US and British words (faucet -> tap): not slang, so not planned phrases
+         "dialect": decided["dialect"],
+diff --git a/aussiefy/lint.py b/aussiefy/lint.py
+index 47c07c7..03ca255 100644
+--- a/aussiefy/lint.py
++++ b/aussiefy/lint.py
+@@ -15,10 +15,11 @@ from .context import sentence_contexts
+ from .dialect import Found, text_english
+ from .engine import Translator, default_translator
+ from . import morph
+-from .genre import Genre, resolve_document
++from .genre import Embellishment, Genre, resolve_document
+ from .markup import markup_changed, mask
+ from .model import Dictionary
+ from .schema import PLACEHOLDER_RE, Entry
++from .select import semantic_rejection
+ from .terms import fold, strip_markup
+ from .text import document_spans, HONORIFICS, Token, capital_is_positional, heading_lines, held_spans, sentences, tokenize
+ 
+@@ -132,6 +133,7 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
+     # where the text already uses dictionary slang (so we don't suggest replacing it): matched with the
+     # engine's own matcher, so inflections and slots count ("smashed it to buggery", "kippin'")
+     aussie_spans = _aussie_spans(text, tr)
++    issues += _semantic_issues(text, original, aussie_spans, tr, read_as.setting(pol.embellishment))
+ 
+     suggestions = _suggestions(text, low, aussie_spans, level, vulgarity, tr, read_as, read_english, dial, pol.embellishment) if suggest else []
+     fixed = {fold(issue["phrase"]) for issue in issues if issue.get("australian")}
+@@ -150,13 +152,34 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
+     return {"ok": not issues, **eff.envelope(), **read_as.envelope(pol.embellishment),
+             "issues": issues, "warnings": warnings,
+             "suggestions": suggestions[:20],
+-            "scope": ("Issues: flagged phrases, swearing over the cap, US spelling and US words. Warnings: the "
++            "scope": ("Issues: flagged phrases, known added semantic effects, swearing over the cap, US spelling and US words. Warnings: the "
+                       "guide's style rules and swearing density" +
+                       ("; fidelity to the original (length, names, numbers)." if original is not None else
+-                       ". Pass the original to also check fidelity.") + " Not checked: invented slang.")}
++                       ". Pass the original to also check fidelity.") + " Not checked: invented slang or arbitrary added judgments.")}
+ 
+ 
+ 
++def _semantic_issues(text: str, original: str | None, spans: list[tuple[int, int, Entry]],
++                     translator: Translator, setting: Embellishment) -> list[dict[str, Any]]:
++    # Match the dictionary's forms, including slots and inflections, on both sides. Unchanged source uses
++    # spend one allowance per occurrence; this is known-term checking, not inference of arbitrary opinions.
++    matches = {(a, b, e.id): e for a, b, e in spans
++               if semantic_rejection(e, narrator_opinion=setting.narrator_opinion)}
++    if not matches:
++        return []
++    kept = {(e.id, a, b) for a, b, e in _aussie_spans(original or "", translator)}
++    remaining = Counter(eid for eid, a, b in kept)
++    issues = []
++    for (a, b, eid), entry in sorted(matches.items()):
++        reason = semantic_rejection(entry, narrator_opinion=setting.narrator_opinion)
++        if remaining[eid]:
++            remaining[eid] -= 1
++        else:
++            issues.append({"kind": "semantic_effect", "phrase": text[a:b], "entry": eid,
++                           "semantic_effects": list(entry.semantic_effects), "why": reason})
++    return issues
++
++
+ def _suggestions(text: str, low: str, aussie_spans: list, level: int | str, vulgarity: int | str | None,
+                  tr: Translator, genre: Genre, english: str | None, dial: str, embellishment: int | None = None) -> list[dict[str, Any]]:
+     """What the rule engine would still Aussify in a draft: optional, ranked by how sure it is. A whole engine
+diff --git a/aussiefy/loader.py b/aussiefy/loader.py
+index 2dd8580..31cdb33 100644
+--- a/aussiefy/loader.py
++++ b/aussiefy/loader.py
+@@ -304,7 +304,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
+ 
+     forms: list[Pattern] = []
+     for e in entries.values():
+-        if e.type != "idiom" or e.status == "omit":
++        if (e.type != "idiom" and not e.semantic_effects) or e.status == "omit":
+             continue
+         for f in e.all_forms:
+             try:
+diff --git a/aussiefy/lookup.py b/aussiefy/lookup.py
+index bde3183..0f466d4 100644
+--- a/aussiefy/lookup.py
++++ b/aussiefy/lookup.py
+@@ -18,7 +18,7 @@ from .errors import UserError
+ from .engine import Translator, default_translator
+ from .model import Dictionary
+ from .morph import pluralise, verb_forms
+-from .select import dial_rejection
++from .select import dial_rejection, semantic_rejection
+ from .schema import PLACEHOLDER_RE, Entry
+ from .cards import entry_card, short_card, shows_riffs
+ from .terms import fold, form_key, strip_markup
+@@ -151,6 +151,8 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
+         if " " in qn and any(_in_order(qn.split(), f.split()) for f in forms):
+             scored.append((SCORE_IN_ORDER, e, "part of a phrase"))   # "chuck in" ~ "chuck it in", "give the flick"
+             continue
++        if semantic_rejection(e, narrator_opinion=setting.narrator_opinion):
++            continue
+         if parsed_concepts and not parsed_concepts.intersection(e.concept):
+             continue
+         best = max((concept_score.get(c, 0.0) for c in e.concept), default=0.0)
+@@ -178,6 +180,10 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
+     else:
+         riffs = shows_riffs(setting)
+         results = [{**entry_card(e, cap, riffs), "match": how, "score": round(s, 2)} for s, e, how in scored[:limit]]
++    for card in results:
++        reason = semantic_rejection(d.entries[card["id"]], narrator_opinion=setting.narrator_opinion)
++        if reason:
++            card.update(effects_permitted=False, effect_rejection=reason)
+     # a lookup reads no profile settings, so its envelope is the dials alone (no profile_config)
+     out = {"query": query, **envelope(eff.level, eff.vulgarity, eff.warnings), "results": results}
+     images = lookup_images(d, query, eff.level, cap, setting, limit)
+diff --git a/aussiefy/policy.py b/aussiefy/policy.py
+index 890bac4..f9adebf 100644
+--- a/aussiefy/policy.py
++++ b/aussiefy/policy.py
+@@ -82,6 +82,7 @@ class DocumentOverrides:
+     entry_riffs: bool | None = None
+     riff_exaggeration: int | None = None
+     riff_association: int | None = None
++    narrator_opinion: bool | None = None
+     profile: ProfileOverrides | None = None
+ 
+     @classmethod
+@@ -102,7 +103,7 @@ class DocumentOverrides:
+             raise UserError(f"unknown document_config settings: {', '.join(sorted(set(raw) - names))}")
+         data = dict(raw)
+         booleans = {"openings", "formal_to_rework", "person_swears", "keep_quotes", "command_context",
+-                    "dateline_context", "draft", "perform", "check_length", "contextual_riffs", "entry_riffs"}
++                    "dateline_context", "draft", "perform", "check_length", "contextual_riffs", "entry_riffs", "narrator_opinion"}
+         for key, value in data.items():
+             if key == "profile":
+                 data[key] = ProfileOverrides.parse(value)
+diff --git a/aussiefy/retelling.py b/aussiefy/retelling.py
+index 4308289..efee8ce 100644
+--- a/aussiefy/retelling.py
++++ b/aussiefy/retelling.py
+@@ -24,6 +24,8 @@ DOCUMENT_CONFIG is the effective behaviour contract and takes precedence over ge
+ guidance. Use only the listed garnish placements; offer no talker's openings when openings is false. When
+ keep_quotes is true, preserve quoted wording exactly. When person_swears is false, do not replace neutral
+ people with swears. Keep terms protected by term_domains and datelines protected by dateline_context unchanged.
++When narrator_opinion is false, add no narrator judgment, praise, pity, luck or blame absent from the original.
++When true, those reactions may colour what is already there; preserve every role, identity, event and claim.
+ Respect check_length/max_length and keep_share as configured. No optional Custom behaviour is implied by its
+ embellishment label. Preserve every original fact and the selected markup regardless of the type.
+ 
+@@ -167,10 +169,12 @@ def brief(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | st
+     setting = context.setting(the_plan["embellishment"])
+     guide = harness.guide(level=level, vulgarity=vulgarity, embellishment=setting.step, document_type=context.name, document_config=document_config, translator=tr)
+     # each phrase once, with what it stands for, so a wrong sense shows at a glance
+-    phrases: dict[str, dict[str, str]] = {}
++    phrases: dict[str, dict[str, Any]] = {}
+     for p in the_plan["planned"]:
+         phrases.setdefault(form_key(p["aussie"]), {"phrase": p["aussie"], "replaces": p["original"],
+-                                                     "means": p["gloss"]})
++                                                     "means": p["gloss"],
++                                                     **({"semantic_effects": p["semantic_effects"]}
++                                                        if p.get("semantic_effects") else {})})
+     planned = [p["phrase"] for p in phrases.values()]
+     guide_text = "\n".join([f"Voice: {guide['voice']}", f"Language: {guide['language']}", "Craft:", guide["craft"]])
+     payload = {"ORIGINAL": text, "LEVEL": guide["level"], "VULGARITY": guide["vulgarity"],
+diff --git a/aussiefy/schema.py b/aussiefy/schema.py
+index 135b9d4..7671785 100644
+--- a/aussiefy/schema.py
++++ b/aussiefy/schema.py
+@@ -29,6 +29,7 @@ REGISTERS = ("current", "dated", "archaic")
+ FLAGS = ("not_aussie", "slur", "dubious_meaning", "archaic", "fabricated", "untagged")
+ TYPES = ("idiom", "garnish")
+ CLASSES = ("lexical", "phrase", "idiom")
++SEMANTIC_EFFECTS = ("opinion",)
+ PLACEMENTS = ("connective", "opener", "tag", "aside", "tail", "closer")
+ GARNISH_KEYS = (*PLACEMENTS, "riff")   # rate and per-text-limit keys in level profiles
+ GENRES = ("story", "personal", "news", "instructions", "technical", "official")   # genre.py reads a text as one
+@@ -158,6 +159,7 @@ class Entry:
+     status: str = "active"
+     flags: tuple[str, ...] = ()
+     sources: tuple[str, ...] = ()
++    semantic_effects: tuple[str, ...] = ()  # additions made by every meaning mapping and form of this entry
+     gloss: str = ""
+     slots: dict[str, str] = field(default_factory=dict)
+     type: str = "idiom"
+@@ -232,7 +234,7 @@ ENTRY_KEYS = (
+     "id", "form", "variants", "spellings", "insult", "concept", "frame", "class", "plural", "number", "slots", "intensity", "vulgarity",
+     "mask", "profane", "incoherence", "register", "region", "replaces", "status", "flags", "plain_sense", "type", "placement", "when",
+     "stretch",
+-    "tone", "weight", "gloss", "notes", "sources", "key_sha256",
++    "tone", "weight", "semantic_effects", "gloss", "notes", "sources", "key_sha256",
+ )
+ 
+ 
+@@ -296,6 +298,9 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
+     bad = set(flags) - set(FLAGS)
+     if bad:
+         raise SchemaError(f"{entry_id}: unknown flag(s) {sorted(bad)}")
++    effects = tuple(dict.fromkeys(_tuple(raw.get("semantic_effects"), "semantic_effects", entry_id)))
++    if set(effects) - set(SEMANTIC_EFFECTS):
++        raise SchemaError(f"{entry_id}: semantic_effects must be from {SEMANTIC_EFFECTS}")
+     cls = raw.get("class")
+     if cls is not None and cls not in CLASSES:
+         raise SchemaError(f"{entry_id}: class must be one of {CLASSES}")
+@@ -377,6 +382,7 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
+         status=status,
+         flags=flags,
+         sources=_tuple(raw.get("sources"), "sources", entry_id),
++        semantic_effects=effects,
+         gloss=raw.get("gloss", "") or "",
+         slots=dict(slots),
+         type=etype,
+diff --git a/aussiefy/select.py b/aussiefy/select.py
+index 3958e1f..551bfc2 100644
+--- a/aussiefy/select.py
++++ b/aussiefy/select.py
+@@ -58,6 +58,13 @@ def dial_rejection(entry: Entry, eff: Effective) -> str | None:
+         return f"vulgarity {entry.vulgarity} exceeds cap {eff.vulgarity}"
+     return None
+ 
++def semantic_rejection(entry: Entry, *, narrator_opinion: bool) -> str | None:
++    """A reviewed mapping's added meaning needs the corresponding resolved permission."""
++    if "opinion" in entry.semantic_effects and not narrator_opinion:
++        return "adds narrator opinion; narrator_opinion is false"
++    return None
++
++
+ def policy_rejection(entry: Entry, eff: Effective) -> str | None:
+     """Reasons that depend only on the entry and the policy (shared with garnish)."""
+     reason = dial_rejection(entry, eff)
+diff --git a/aussiefy/verify.py b/aussiefy/verify.py
+index 4a8ea41..b2579a1 100644
+--- a/aussiefy/verify.py
++++ b/aussiefy/verify.py
+@@ -29,7 +29,7 @@ SEVERITIES = ("critical", "major", "minor", "info")
+ SEVERITY = {
+     "markup_changed": "critical", "number_dropped": "critical", "empty": "critical", "unmatched": "minor",
+     "too_vulgar": "major", "dialect": "major", "spelling": "major", "flagged": "major",
+-    "too_short": "major", "document_changed": "major",
++    "too_short": "major", "document_changed": "major", "semantic_effect": "major",
+     "swear_overuse": "minor", "swear_density": "minor", "tag_in_narration": "minor", "tag_overuse": "minor",
+     "pile_up": "minor", "repeated": "minor", "repeated_phrase": "minor", "stock_opener": "minor", "stock_closer": "minor",
+     "too_long": "minor", "name_added": "minor", "name_dropped": "minor", "untouched": "info",
+diff --git a/docs/architecture/decisions/README.md b/docs/architecture/decisions/README.md
+index 722f172..f2ac0e5 100644
+--- a/docs/architecture/decisions/README.md
++++ b/docs/architecture/decisions/README.md
+@@ -55,6 +55,7 @@ its consequences as they stood when it was made. Anyway, records are numbered in
+ | [DD-028](dd-028-hosted-mcp-capabilities.md) | A hosted MCP server narrows the toolkit by capability, with every tool annotated read-only | Accepted |
+ | [DD-029](dd-029-changes-builder.md) | Render each alternative in place, in the same pass, behind a pass observer; Python API only | Accepted |
+ | [DD-030](dd-030-shared-semantic-context.md) | Shared clause reading, concept restrictions, preserved arguments and contextual tone weights | Accepted |
++| [DD-031](dd-031-narrator-opinion.md) | Configure reviewed added narrator opinion without weakening meaning or role preservation | Accepted |
+ 
+ ## By topic
+ 
+diff --git a/docs/architecture/pipeline.md b/docs/architecture/pipeline.md
+index 47d526b..0d48064 100644
+--- a/docs/architecture/pipeline.md
++++ b/docs/architecture/pipeline.md
+@@ -90,3 +90,13 @@ choices'n garnish state across its prose units, retains source sentence position
+ suffix garnish'n riffs on incomplete fragments, while allowing a leadin' opener/connective only at a
+ known source sentence start. Extended markup sends one masked document through the pipeline with opaque
+ protected spans. See [translation controls](../functional/translation-controls.md).
++
++## Added narrator opinion
++
++Resolved embellishment includes `narrator_opinion`: false at Deadset/Dinkum and for unconfigured Custom,
++true at Troppo, with exact overrides applied last. `select.semantic_rejection` checks reviewed Entry
++`semantic_effects` at canonical translation eligibility and dictionary-meaning offers; garnish extensions
++use the same rule. Tone remains a fit weight and separate hard exclusions, not a permission for added meaning.
++Exact term discovery retains disabled terms with an explanation. Cards and plan payloads expose annotations;
++yarn's brief shares the resolved setting, and known-term lint checking also reaches verify and submission.
++Meaning mappings preserve facts and roles independently of the editorial permission.
+diff --git a/docs/architecture/reviews/README.md b/docs/architecture/reviews/README.md
+index 3674bea..9eed5fd 100644
+--- a/docs/architecture/reviews/README.md
++++ b/docs/architecture/reviews/README.md
+@@ -10,6 +10,7 @@ commands that have since been renamed. Mate, decisions they led to are recorded
+ 
+ | Review | Summary |
+ |---|---|
++| [design-review-2026-10-19-semantic-effects.md](design-review-2026-10-19-semantic-effects.md) | Resolved narrator opinion, precise person mappings and consistent deterministic/writer surfaces; verification pending integration |
+ | [design-review-2026-10-19-semantic-context.md](design-review-2026-10-19-semantic-context.md) | Shared semantic context, preserved arguments, contextual tone, opaque boundaries, YAML portability and bounded source research |
+ | [design-review-2026-10-18-hunger-phrases.md](design-review-2026-10-18-hunger-phrases.md) | Independent appetite harvest, tense-safe VPs and controlled writer-only hunger imagery |
+ | [design-review-2026-10-18-sourced-meanings.md](design-review-2026-10-18-sourced-meanings.md) | Bounded source audit, precise slang senses, explicit loose-paraphrase gates and meaningful-output regressions |
+diff --git a/docs/functional/changes.md b/docs/functional/changes.md
+index b8ffeb4..def3979 100644
+--- a/docs/functional/changes.md
++++ b/docs/functional/changes.md
+@@ -46,12 +46,13 @@ and responses live in `tests/fixtures/changes/`. Each change has:
+   `vulgarity` and its `masks`. For a garnish, it's the other garnish of that placement the engine weighed there.
+ - `locked`: for a swap, the options the vulgarity cap alone holds back, each tagged with the lowest `vulgarity`
+   that lets it in. Selection is run again for the spot with only the cap raised, with every other check
+-  unchanged: level, registers, gates, grammar, span, document type, what the text has already said, and variety.
+-  So anyway, only an entry rated above the cap in effect is locked \(a raised cap also reweighs, so variety's best few can take
+-  in a clean entry, which isn't\). Strewth, gated entries appear only where the policy unlocks them. A locked option is
+-  rendered like the others, at the reader's cap: its riffs'n swear infixes are the ones the reader's vulgarity
++  unchanged: level, registers, gates, grammar, span, document settings (including `narrator_opinion`), what
++  the text has already said, and variety.
++  Only an entry rated above the cap in effect is locked (a raised cap also reweighs, so variety's best few can take
++  in a clean entry, which isn't). Gated entries appear only where the policy unlocks them. A locked option is
++  rendered like the others, at the reader's cap: its riffs and swear infixes are the ones the reader's vulgarity
+   allows, as the page shows it before it's unlocked. At Dad, "very cold" as fuckin' reads "fuckin'", though a
+-  whole re\-translation at Uncle Bob would read "cold as fuck".
++  whole re-translation at Uncle Bob would read "cold as fuck".
+ - `removed` (garnish): `{out_span, rendered}`, how its region reads without it. An opener or connective's region
+   takes in the next word, whose capital it lowered. Every garnish has one unless it's named under `withheld`.
+ - `rule` (phonetic and swear infix): `{id, kind, min_level, before, after}`. `min_level` is the level a drawl or
+@@ -70,7 +71,8 @@ and responses live in `tests/fixtures/changes/`. Each change has:
+   nothing.
+ 
+ `entries` maps each entry id the changes name to its card, built as `lookup` builds it under the same dials
+-(`aussiefy/cards.py`): riffs under the vulgarity cap where the embellishment takes riffs at all, and a gated
++(`aussiefy/cards.py`): optional `semantic_effects` lists reviewed additions such as `opinion`; riffs appear
++under the vulgarity cap where the embellishment takes riffs at all, and a gated
+ entry's flags where the policy unlocked it.
+ 
+ `withheld` lists, as `{id, reason}`, the swaps'n garnish whose renderings are left out, with the pick alone
+@@ -95,7 +97,7 @@ emoji sequence can occupy several positions.
+ 
+ ## How a swap is rendered
+ 
+-Fair dinkum, every alternative is rendered as the engine would render it at that spot, with the rest of the output held
++Jeez, every alternative is rendered as the engine would render it at that spot, with the rest of the output held
+ fixed. It takes the engine's own path: the form'n the spellin' the text keeps, the article fitted \("a toddler"
+ becomes "an ankle biter"\), the entry's own replacement span, a stacked second idiom, a riff, and capitals. The
+ sentence's garnish is put back as it was decided. Then the drawl, spellin''n swear infixes run over the spot
+@@ -106,7 +108,7 @@ All of a spot's options share one region, so swappin' one in replaces the same s
+ where a drawl or infix match crosses its edge \("have not" becoming "haven't"\) or a neighbourin' match's
+ lookaround reads it \("won't bloody well have").
+ 
+-Jeez Louise, a garnish's region widens the same way. An opener's or connective's region takes in the next word, whose capital
++Struth, a garnish's region widens the same way. An opener's or connective's region takes in the next word, whose capital
+ it lowered, and a word more where a match runs on: in "Well, it is easy", a swap or removal of "Well" replaces
+ "Well, it is", since the drawl's "it is" match crosses "it". A region never cuts the words another swap or
+ garnish put in: it takes in the whole of one it reaches. Tell ya what, two regions can still share a word they both widened
+@@ -147,7 +149,7 @@ word is both listed and authored, it has one mask, at the higher vulgarity.
+ 
+ With `markup`, protected spans \(code, links, tags\) are masked through the pass'n restored after, keeping their
+ length, so offsets'n renderings hold. With `markdown=True`, each prose unit's changes are placed in the
+-document. Source offsets are document positions. Mate, each renderin' is escaped as its unit is, so custom slang can't
++document. Crikey, source offsets are document positions. Mate, each renderin' is escaped as its unit is, so custom slang can't
+ make markup. A whole re\-render with a swap pinned inside its unit reads the same.
+ 
+ ## Cost
+diff --git a/docs/functional/dictionary.md b/docs/functional/dictionary.md
+index 86518dd..22152e3 100644
+--- a/docs/functional/dictionary.md
++++ b/docs/functional/dictionary.md
+@@ -63,6 +63,7 @@ An entry is one meaning\-shape:
+   replaces: []           # plain-English paraphrases (patterns); drive matching
+   status: active         # active | gate | omit
+   flags: []              # not_aussie | slur | dubious_meaning | archaic | fabricated | untagged
++  semantic_effects: []   # reviewed additions to the mapped meaning; currently only opinion
+   sources: []
+   gloss: Not quite sane; eccentric.   # our own words, never a source's
+ ```
+@@ -136,6 +137,19 @@ To extend the dictionary without touching the package, pass `--dict my-entries.y
+ repeatable) to any command, or `load_dictionary(["my-entries.yaml"])` in Python. A step-by-step guide is in
+ [getting-started.md](../user/getting-started.md#add-your-own-entries).
+ 
++## Reviewed semantic additions
++
++`semantic_effects: [opinion]` declares that every meaning mapping and form of an entry adds narrator judgment
++beyond its input meaning. The default empty list adds no declared effect; the loader rejects unknown effects.
++The ALIVE mapping for "the lucky buggers still breathin'" adds a judgment of good fortune and requires the
++resolved `narrator_opinion` permission. The ordinary meaning, grammar, vulgarity and tone checks still apply.
++Annotated garnish extensions use the same permission and are included in the existing form index for known-term writer checks.
++
++Annotation is about a mapping, not the mere presence of evaluative words. A synonym for GOOD_PERSON can carry
++praise already established by its input without requiring an added-opinion annotation. Do not combine an
++exact and an opinion-adding sense in one entry under the same metadata. These reviewed annotations cover
++specific entries; they are not an audit or automatic interpretation of every dictionary mapping.
++
+ ## Context and source-English data
+ 
+ `genres.yaml` defines every genre policy and all three embellishment settings. Boolean switches must be
+diff --git a/docs/functional/explain.md b/docs/functional/explain.md
+index 8425a33..bcf403f 100644
+--- a/docs/functional/explain.md
++++ b/docs/functional/explain.md
+@@ -25,7 +25,7 @@ Crikey, do you have a kangaroo loose in your top paddock?
+ 
+ level 4, seed 0, mood light
+ document type general -> general (); embellishment dinkum: garnish connective, infix, insult, opener, riff, tag, tail
+-document behaviours: {"check_length": true, "command_context": false, "contextual_riffs": true, "dateline_context": false, "draft": true, "entry_riffs": true, "formal_to_rework": true, "garnish": ["connective", "infix", "insult", "opener", "riff", "tag", "tail"], "keep_quotes": false, "keep_share": 0.6, "max_length": 1.6, "openings": true, "perform": false, "person_swears": true, "riff_association": 0, "riff_exaggeration": 1, "term_domains": []}
++document behaviours: {"check_length": true, "command_context": false, "contextual_riffs": true, "dateline_context": false, "draft": true, "entry_riffs": true, "formal_to_rework": true, "garnish": ["connective", "infix", "insult", "opener", "riff", "tag", "tail"], "keep_quotes": false, "keep_share": 0.6, "max_length": 1.6, "narrator_opinion": false, "openings": true, "perform": false, "person_swears": true, "riff_association": 0, "riff_exaggeration": 1, "term_domains": []}
+ profile settings: {"frames": ["np", "adj", "adv", "interjection", "imperative", "predicate_adj", "vp", "clause"], "garnish": {"aside": 0.0, "closer": 0.0, "connective": 0.2, "opener": 0.2, "riff": 0.0, "tag": 0.3, "tail": 0.3}, "garnish_gap": 1, "garnish_per_sentence": 1, "max_garnish": {"aside": 99, "closer": 0, "connective": 99, "opener": 1, "riff": 1, "tag": 2, "tail": 1}, "phonetic": 0.5, "rewrite": {"formal_length": 7, "max_coverage": 0.1, "min_formal_words": 2, "min_level": 3, "min_words": 6}, "stack": 0.0, "stretch": [3, 5], "substitution": {"idiom": 0.9, "lexical": 0.85, "phrase": 0.85}, "swearing": {"closer": 0.12, "exclaim": 0.06, "infix": 0.5, "lean": 1.0}}
+ 
+ substitutions:
+diff --git a/docs/functional/llm-modes.md b/docs/functional/llm-modes.md
+index 7a703a6..c979353 100644
+--- a/docs/functional/llm-modes.md
++++ b/docs/functional/llm-modes.md
+@@ -71,6 +71,11 @@ only if:
+   distinct phrases; each decline must name a planned phrase and supply a reason, and
+ - configured length checks pass when `check_length` is enabled.
+ 
++The resolved `DOCUMENT_CONFIG.narrator_opinion` also governs added narrator judgments. False means do not
++introduce praise, pity, luck or blame absent from the original; true permits reaction while preserving facts,
++roles and references. The known-term lint check is shared by verification and yarn submission, with original
++occurrences allowed through. This is not general semantic validation of arbitrary generated prose.
++
+ General/Deadset/Dinkum normally require a 0.6 share; Troppo and bare Custom use zero. A zero share disables
+ retention and moved-phrase checks. Exact `document_config` overrides apply to every preset, including
+ `keep_share`, `check_length` and `max_length`. Lint issues, selected factual/style checks and markup integrity
+diff --git a/docs/functional/toolkit.md b/docs/functional/toolkit.md
+index dbdc39a..feeb9de 100644
+--- a/docs/functional/toolkit.md
++++ b/docs/functional/toolkit.md
+@@ -125,6 +125,12 @@ an image `id`, `concepts`, `frames`, `form`, `subject`, `association`, `exaggera
+ `automatic`. Fair dinkum, contextual cards can be offered even where no word substitution was chosen. A direct suffix
+ can pass automatic insertion checks; rewrite'n related cards always require a writer's judgement.
+ 
++Full and short entry cards include nonempty `semantic_effects`. Meaning suggestions respect the resolved
++`narrator_opinion` permission. Explicit term searches remain discoverable when the effect is disabled,
++with `effects_permitted: false` and `effect_rejection`; discovery does not promise that the term can fill a
++particular sentence. Plan's selected phrases also carry nonempty effect metadata. Change alternatives share
++the translation eligibility check, including alternatives whose vulgarity cap alone is raised.
++
+ `lookup` also accepts `embellishment`, `document_type` and `document_config` in Python, CLI and MCP. It adds
+ an optional `imagery` list when reviewed images match the query, alongside the usual `results`. Image text
+ and IDs are searchable too. Bare lookup is not a grammatical fit check: its cards have `template: true`,
+diff --git a/docs/functional/translation-controls.md b/docs/functional/translation-controls.md
+index 276e033..fdb80d0 100644
+--- a/docs/functional/translation-controls.md
++++ b/docs/functional/translation-controls.md
+@@ -59,8 +59,30 @@ aussiefy translate "Read the API documentation." --document-type custom --docume
+ | `contextual_riffs` | Boolean: offer reviewed meaning-attached imagery; Dinkum/Troppo true, Deadset/Custom false |
+ | `riff_exaggeration` | Integer 0–2: maximum contextual-image exaggeration; Dinkum 1, Troppo 2, Deadset/Custom 0 |
+ | `riff_association` | Integer 0–1: 0 direct meanings only; 1 also offers explicitly curated related meanings to writers; Troppo 1, others 0 |
++| `narrator_opinion` | Boolean: permit reviewed additions of narrator judgment; Troppo true, Deadset/Dinkum/Custom false; exact overrides win |
+ | `profile` | Object: override engine probabilities, limits, spacing and thresholds; omitted keys inherit dial defaults |
+ 
++### Meaning and narrator opinion
++
++`narrator_opinion` allows editorial colour beyond the input: for example, calling the living "the lucky
++buggers still breathin'" adds the narrator's judgment of good fortune. Deadset and Dinkum keep that addition
++off; Troppo permits it. Custom keeps it off at every embellishment label until explicitly enabled.
++`document_config={"narrator_opinion": true}` enables it for any preset, and `false` disables it at Troppo.
++Other requirements still apply: a sweary term needs its vulgarity cap and `person_swears`, and its grammar,
++meaning and tone must fit. This permission does not enable unrelated garnish or images.
++
++A permission for added opinion never permits dropping a person's role, changing an event or inventing a
++fact. "Brave bastards" describes courageous people, not soldiers in general; "poor buggers" conveys sympathy,
++not that those people died. Their mappings require those meanings in the input. Existing contextual-image
++exaggeration and association retain their separate `riff_exaggeration` and `riff_association` controls.
++
++The engine enforces reviewed entry metadata, not a complete model of every possible semantic change.
++Lookup still explains an explicitly searched term when its opinion effect is disabled, marking it
++`effects_permitted: false`; it withholds that term from meaning-based suggestions. Lint, verify and yarn
++submission check recognised newly introduced effect-bearing terms. An original occurrence may remain,
++but an additional occurrence needs permission. These checks cannot detect arbitrary invented judgments or
++infer every judgment already supported by different wording in the input.
++
+ ## Advanced profile tuning
+ 
+ Every document type accepts the same `document_config.profile`. Map keys merge with the selected profile;
+diff --git a/docs/plain/architecture/decisions/README.md b/docs/plain/architecture/decisions/README.md
+index 5b4d9dc..26d0dad 100644
+--- a/docs/plain/architecture/decisions/README.md
++++ b/docs/plain/architecture/decisions/README.md
+@@ -51,6 +51,7 @@ its consequences as they stood when it was made. Records are numbered in sequenc
+ | [DD-028](../../../architecture/decisions/dd-028-hosted-mcp-capabilities.md) | A hosted MCP server narrows the toolkit by capability, with every tool annotated read-only | Accepted |
+ | [DD-029](../../../architecture/decisions/dd-029-changes-builder.md) | Render each alternative in place, in the same pass, behind a pass observer; Python API only | Accepted |
+ | [DD-030](../../../architecture/decisions/dd-030-shared-semantic-context.md) | Shared clause reading, concept restrictions, preserved arguments and contextual tone weights | Accepted |
++| [DD-031](../../../architecture/decisions/dd-031-narrator-opinion.md) | Configure reviewed added narrator opinion without weakening meaning or role preservation | Accepted |
+ 
+ ## By topic
+ 
+diff --git a/docs/plain/architecture/pipeline.md b/docs/plain/architecture/pipeline.md
+index cfe8de0..2be9235 100644
+--- a/docs/plain/architecture/pipeline.md
++++ b/docs/plain/architecture/pipeline.md
+@@ -86,3 +86,13 @@ choices and garnish state across its prose units, retains source sentence positi
+ suffix garnish and riffs on incomplete fragments, while allowing a leading opener/connective only at a
+ known source sentence start. Extended markup sends one masked document through the pipeline with opaque
+ protected spans. See [translation controls](../functional/translation-controls.md).
++
++## Added narrator opinion
++
++Resolved embellishment includes `narrator_opinion`: false at Deadset/Dinkum and for unconfigured Custom,
++true at Troppo, with exact overrides applied last. `select.semantic_rejection` checks reviewed Entry
++`semantic_effects` at canonical translation eligibility and dictionary-meaning offers; garnish extensions
++use the same rule. Tone remains a fit weight and separate hard exclusions, not a permission for added meaning.
++Exact term discovery retains disabled terms with an explanation. Cards and plan payloads expose annotations;
++yarn's brief shares the resolved setting, and known-term lint checking also reaches verify and submission.
++Meaning mappings preserve facts and roles independently of the editorial permission.
+diff --git a/docs/plain/architecture/reviews/README.md b/docs/plain/architecture/reviews/README.md
+index fe75f6f..a0168dc 100644
+--- a/docs/plain/architecture/reviews/README.md
++++ b/docs/plain/architecture/reviews/README.md
+@@ -6,6 +6,7 @@ commands that have since been renamed. Decisions they led to are recorded in [de
+ 
+ | Review | Summary |
+ |---|---|
++| [design-review-2026-10-19-semantic-effects.md](../../../architecture/reviews/design-review-2026-10-19-semantic-effects.md) | Resolved narrator opinion, precise person mappings and consistent deterministic/writer surfaces; verification pending integration |
+ | [design-review-2026-10-19-semantic-context.md](../../../architecture/reviews/design-review-2026-10-19-semantic-context.md) | Shared semantic context, preserved arguments, contextual tone, opaque boundaries, YAML portability and bounded source research |
+ | [design-review-2026-10-18-hunger-phrases.md](../../../architecture/reviews/design-review-2026-10-18-hunger-phrases.md) | Independent appetite harvest, tense-safe VPs and controlled writer-only hunger imagery |
+ | [design-review-2026-10-18-sourced-meanings.md](../../../architecture/reviews/design-review-2026-10-18-sourced-meanings.md) | Bounded source audit, precise slang senses, explicit loose-paraphrase gates and meaningful-output regressions |
+diff --git a/docs/plain/functional/changes.md b/docs/plain/functional/changes.md
+index 75c2f93..64d47b9 100644
+--- a/docs/plain/functional/changes.md
++++ b/docs/plain/functional/changes.md
+@@ -42,7 +42,8 @@ and responses live in `tests/fixtures/changes/`. Each change has:
+   `vulgarity` and its `masks`. For a garnish, it's the other garnish of that placement the engine weighed there.
+ - `locked`: for a swap, the options the vulgarity cap alone holds back, each tagged with the lowest `vulgarity`
+   that lets it in. Selection is run again for the spot with only the cap raised, with every other check
+-  unchanged: level, registers, gates, grammar, span, document type, what the text has already said, and variety.
++  unchanged: level, registers, gates, grammar, span, document settings (including `narrator_opinion`), what
++  the text has already said, and variety.
+   Only an entry rated above the cap in effect is locked (a raised cap also reweighs, so variety's best few can take
+   in a clean entry, which isn't). Gated entries appear only where the policy unlocks them. A locked option is
+   rendered like the others, at the reader's cap: its riffs and swear infixes are the ones the reader's vulgarity
+@@ -66,7 +67,8 @@ and responses live in `tests/fixtures/changes/`. Each change has:
+   nothing.
+ 
+ `entries` maps each entry id the changes name to its card, built as `lookup` builds it under the same dials
+-(`aussiefy/cards.py`): riffs under the vulgarity cap where the embellishment takes riffs at all, and a gated
++(`aussiefy/cards.py`): optional `semantic_effects` lists reviewed additions such as `opinion`; riffs appear
++under the vulgarity cap where the embellishment takes riffs at all, and a gated
+ entry's flags where the policy unlocked it.
+ 
+ `withheld` lists, as `{id, reason}`, the swaps and garnish whose renderings are left out, with the pick alone
+diff --git a/docs/plain/functional/dictionary.md b/docs/plain/functional/dictionary.md
+index d231b04..5dd00d6 100644
+--- a/docs/plain/functional/dictionary.md
++++ b/docs/plain/functional/dictionary.md
+@@ -59,6 +59,7 @@ An entry is one meaning-shape:
+   replaces: []           # plain-English paraphrases (patterns); drive matching
+   status: active         # active | gate | omit
+   flags: []              # not_aussie | slur | dubious_meaning | archaic | fabricated | untagged
++  semantic_effects: []   # reviewed additions to the mapped meaning; currently only opinion
+   sources: []
+   gloss: Not quite sane; eccentric.   # our own words, never a source's
+ ```
+@@ -132,6 +133,19 @@ To extend the dictionary without touching the package, pass `--dict my-entries.y
+ repeatable) to any command, or `load_dictionary(["my-entries.yaml"])` in Python. A step-by-step guide is in
+ [getting-started.md](../user/getting-started.md#add-your-own-entries).
+ 
++## Reviewed semantic additions
++
++`semantic_effects: [opinion]` declares that every meaning mapping and form of an entry adds narrator judgment
++beyond its input meaning. The default empty list adds no declared effect; the loader rejects unknown effects.
++The ALIVE mapping for "the lucky buggers still breathin'" adds a judgment of good fortune and requires the
++resolved `narrator_opinion` permission. The ordinary meaning, grammar, vulgarity and tone checks still apply.
++Annotated garnish extensions use the same permission and are included in the existing form index for known-term writer checks.
++
++Annotation is about a mapping, not the mere presence of evaluative words. A synonym for GOOD_PERSON can carry
++praise already established by its input without requiring an added-opinion annotation. Do not combine an
++exact and an opinion-adding sense in one entry under the same metadata. These reviewed annotations cover
++specific entries; they are not an audit or automatic interpretation of every dictionary mapping.
++
+ ## Context and source-English data
+ 
+ `genres.yaml` defines every genre policy and all three embellishment settings. Boolean switches must be
+diff --git a/docs/plain/functional/explain.md b/docs/plain/functional/explain.md
+index b244150..344eed7 100644
+--- a/docs/plain/functional/explain.md
++++ b/docs/plain/functional/explain.md
+@@ -21,7 +21,7 @@ Crikey, do you have a kangaroo loose in your top paddock?
+ 
+ level 4, seed 0, mood light
+ document type general -> general (); embellishment dinkum: garnish connective, infix, insult, opener, riff, tag, tail
+-document behaviours: {"check_length": true, "command_context": false, "contextual_riffs": true, "dateline_context": false, "draft": true, "entry_riffs": true, "formal_to_rework": true, "garnish": ["connective", "infix", "insult", "opener", "riff", "tag", "tail"], "keep_quotes": false, "keep_share": 0.6, "max_length": 1.6, "openings": true, "perform": false, "person_swears": true, "riff_association": 0, "riff_exaggeration": 1, "term_domains": []}
++document behaviours: {"check_length": true, "command_context": false, "contextual_riffs": true, "dateline_context": false, "draft": true, "entry_riffs": true, "formal_to_rework": true, "garnish": ["connective", "infix", "insult", "opener", "riff", "tag", "tail"], "keep_quotes": false, "keep_share": 0.6, "max_length": 1.6, "narrator_opinion": false, "openings": true, "perform": false, "person_swears": true, "riff_association": 0, "riff_exaggeration": 1, "term_domains": []}
+ profile settings: {"frames": ["np", "adj", "adv", "interjection", "imperative", "predicate_adj", "vp", "clause"], "garnish": {"aside": 0.0, "closer": 0.0, "connective": 0.2, "opener": 0.2, "riff": 0.0, "tag": 0.3, "tail": 0.3}, "garnish_gap": 1, "garnish_per_sentence": 1, "max_garnish": {"aside": 99, "closer": 0, "connective": 99, "opener": 1, "riff": 1, "tag": 2, "tail": 1}, "phonetic": 0.5, "rewrite": {"formal_length": 7, "max_coverage": 0.1, "min_formal_words": 2, "min_level": 3, "min_words": 6}, "stack": 0.0, "stretch": [3, 5], "substitution": {"idiom": 0.9, "lexical": 0.85, "phrase": 0.85}, "swearing": {"closer": 0.12, "exclaim": 0.06, "infix": 0.5, "lean": 1.0}}
+ 
+ substitutions:
+diff --git a/docs/plain/functional/llm-modes.md b/docs/plain/functional/llm-modes.md
+index 6e931b3..2d5ea79 100644
+--- a/docs/plain/functional/llm-modes.md
++++ b/docs/plain/functional/llm-modes.md
+@@ -67,6 +67,11 @@ only if:
+   distinct phrases; each decline must name a planned phrase and supply a reason, and
+ - configured length checks pass when `check_length` is enabled.
+ 
++The resolved `DOCUMENT_CONFIG.narrator_opinion` also governs added narrator judgments. False means do not
++introduce praise, pity, luck or blame absent from the original; true permits reaction while preserving facts,
++roles and references. The known-term lint check is shared by verification and yarn submission, with original
++occurrences allowed through. This is not general semantic validation of arbitrary generated prose.
++
+ General/Deadset/Dinkum normally require a 0.6 share; Troppo and bare Custom use zero. A zero share disables
+ retention and moved-phrase checks. Exact `document_config` overrides apply to every preset, including
+ `keep_share`, `check_length` and `max_length`. Lint issues, selected factual/style checks and markup integrity
+diff --git a/docs/plain/functional/toolkit.md b/docs/plain/functional/toolkit.md
+index 15c7c52..4ffc66f 100644
+--- a/docs/plain/functional/toolkit.md
++++ b/docs/plain/functional/toolkit.md
+@@ -121,6 +121,12 @@ an image `id`, `concepts`, `frames`, `form`, `subject`, `association`, `exaggera
+ `automatic`. Contextual cards can be offered even where no word substitution was chosen. A direct suffix
+ can pass automatic insertion checks; rewrite and related cards always require a writer's judgement.
+ 
++Full and short entry cards include nonempty `semantic_effects`. Meaning suggestions respect the resolved
++`narrator_opinion` permission. Explicit term searches remain discoverable when the effect is disabled,
++with `effects_permitted: false` and `effect_rejection`; discovery does not promise that the term can fill a
++particular sentence. Plan's selected phrases also carry nonempty effect metadata. Change alternatives share
++the translation eligibility check, including alternatives whose vulgarity cap alone is raised.
++
+ `lookup` also accepts `embellishment`, `document_type` and `document_config` in Python, CLI and MCP. It adds
+ an optional `imagery` list when reviewed images match the query, alongside the usual `results`. Image text
+ and IDs are searchable too. Bare lookup is not a grammatical fit check: its cards have `template: true`,
+diff --git a/docs/plain/functional/translation-controls.md b/docs/plain/functional/translation-controls.md
+index 6cdb37f..4c41b07 100644
+--- a/docs/plain/functional/translation-controls.md
++++ b/docs/plain/functional/translation-controls.md
+@@ -55,8 +55,30 @@ aussiefy translate "Read the API documentation." --document-type custom --docume
+ | `contextual_riffs` | Boolean: offer reviewed meaning-attached imagery; Dinkum/Troppo true, Deadset/Custom false |
+ | `riff_exaggeration` | Integer 0–2: maximum contextual-image exaggeration; Dinkum 1, Troppo 2, Deadset/Custom 0 |
+ | `riff_association` | Integer 0–1: 0 direct meanings only; 1 also offers explicitly curated related meanings to writers; Troppo 1, others 0 |
++| `narrator_opinion` | Boolean: permit reviewed additions of narrator judgment; Troppo true, Deadset/Dinkum/Custom false; exact overrides win |
+ | `profile` | Object: override engine probabilities, limits, spacing and thresholds; omitted keys inherit dial defaults |
+ 
++### Meaning and narrator opinion
++
++`narrator_opinion` allows editorial colour beyond the input: for example, calling the living "the lucky
++buggers still breathin'" adds the narrator's judgment of good fortune. Deadset and Dinkum keep that addition
++off; Troppo permits it. Custom keeps it off at every embellishment label until explicitly enabled.
++`document_config={"narrator_opinion": true}` enables it for any preset, and `false` disables it at Troppo.
++Other requirements still apply: a sweary term needs its vulgarity cap and `person_swears`, and its grammar,
++meaning and tone must fit. This permission does not enable unrelated garnish or images.
++
++A permission for added opinion never permits dropping a person's role, changing an event or inventing a
++fact. "Brave bastards" describes courageous people, not soldiers in general; "poor buggers" conveys sympathy,
++not that those people died. Their mappings require those meanings in the input. Existing contextual-image
++exaggeration and association retain their separate `riff_exaggeration` and `riff_association` controls.
++
++The engine enforces reviewed entry metadata, not a complete model of every possible semantic change.
++Lookup still explains an explicitly searched term when its opinion effect is disabled, marking it
++`effects_permitted: false`; it withholds that term from meaning-based suggestions. Lint, verify and yarn
++submission check recognised newly introduced effect-bearing terms. An original occurrence may remain,
++but an additional occurrence needs permission. These checks cannot detect arbitrary invented judgments or
++infer every judgment already supported by different wording in the input.
++
+ ## Advanced profile tuning
+ 
+ Every document type accepts the same `document_config.profile`. Map keys merge with the selected profile;
+diff --git a/docs/plain/root/CHANGELOG.md b/docs/plain/root/CHANGELOG.md
+index 95f23cb..399850c 100644
+--- a/docs/plain/root/CHANGELOG.md
++++ b/docs/plain/root/CHANGELOG.md
+@@ -5,6 +5,18 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare
+ 
+ ## [Unreleased]
+ 
++- Regenerate change fixtures from the invoking checkout rather than an editable installation of another worktree.
++
++- Amend the unreleased `changes` contract v1 with optional `semantic_effects` entry-card metadata.
++
++- Make reviewed narrator opinion explicit and configurable: Troppo permits it, Deadset/Dinkum and Custom
++  keep it off unless overridden. Share eligibility across translation, plans, change alternatives and
++  meaning lookup; retain explicit term discovery with effect annotations. Lint, verify and yarn submission
++  check recognised added opinion terms while permitting original occurrences.
++- Preserve roles and meanings: brave bastards describes courageous people, not soldiers generally;
++  poor buggers expresses sympathy for unfortunate people, not death. Add opinion metadata to the living's
++  "lucky buggers" expression rather than silently adding good fortune at every embellishment setting.
++
+ - Retain reviewed source research for 90 further existing entries, with evidence limits and unapplied
+   mapping recommendations. Coverage now includes 220 of the original 1,254-entry inventory.
+ - Share clause reading and meaning restrictions across detection and contextual imagery. Preserve captured
+diff --git a/scripts/regen_changes_fixtures.py b/scripts/regen_changes_fixtures.py
+index c464e76..ef147a4 100644
+--- a/scripts/regen_changes_fixtures.py
++++ b/scripts/regen_changes_fixtures.py
+@@ -10,6 +10,7 @@ import sys
+ from pathlib import Path
+ 
+ ROOT = Path(__file__).resolve().parents[1]
++sys.path.insert(0, str(ROOT))
+ FIXTURES = ROOT / "tests" / "fixtures" / "changes"
+ 
+ STRESS = {"stack": 0.9, "garnish": {"riff": 1.0, "opener": 0.8, "tag": 0.8, "tail": 1.0, "connective": 0.6, "aside": 1.0},
+diff --git a/tests/corpus/golden.yaml b/tests/corpus/golden.yaml
+index 5c4e333..794d0a8 100644
+--- a/tests/corpus/golden.yaml
++++ b/tests/corpus/golden.yaml
+@@ -1772,9 +1772,9 @@
+       to add or detract. The world will little note, nor long remember what we say here, but it can never forget
+       what they did here. It is for us the living, rather, to be dedicated here to the unfinished work which they
+       who fought here have thus far so nobly advanced. It is rather for us to be here dedicated to the bloody great
+-      task remaining before us—that from these poor buggers we take increased mateship to that cause for which they
+-      gave the last full measure of devotion—that we here highly resolve that these dead shall not have died for
+-      nothin''—that this nation, under God, shall have another crack at freedom—and that government of the people,
++      task remaining before us—that from these honoured dead we take increased mateship to that cause for which
++      they gave the last full measure of devotion—that we here highly resolve that these dead shall not have died
++      for nothin''—that this nation, under God, shall have another crack at freedom—and that government of the people,
+       by the people, for the people, shall not bloody well perish from the earth.
+ 
+       '
+@@ -1791,12 +1791,12 @@
+       But, at the end of the day, we can not bloody well dedicate—we can''t bloody well consecrate—we can not bloody
+       well hallow—this ground. The brave men, living and dead, who did it tough here, have consecrated it, far above
+       our poor power to add or detract. Well, the world will little note, nor long remember what we say here, but
+-      it can never forget what they did here. It is for us the lucky buggers still breathin'', rather, to be dedicated
+-      here to the hard yakka which they who fought here have thus far so nobly advanced. It is rather for us to
+-      be here dedicated to the great task remaining before us—that from these poor buggers we take increased mateship
+-      to that cause for which they gave the last full measure of devotion—that we here highly resolve that these
+-      dead shall not have died for nothin''—that this nation, under God, shall have another crack at freedom—and
+-      that government of the people, by the people, for the people, shall not bloody well perish from the earth.
++      it can never forget what they did here. It is for us the ones still kickin'', rather, to be dedicated here
++      to the hard yakka which they who fought here have thus far so nobly advanced. It is rather for us to be here
++      dedicated to the great task remaining before us—that from these honoured dead we take increased mateship to
++      that cause for which they gave the last full measure of devotion—that we here highly resolve that these dead
++      shall not have died for nothin''—that this nation, under God, shall have another crack at freedom—and that
++      government of the people, by the people, for the people, shall not bloody well perish from the earth.
+ 
+       '
+     L5s0: 'Donkey''s years ago our old men knocked together in this neck of the woods, a brand-spankin''-new nation,
+@@ -1812,14 +1812,14 @@
+ 
+ 
+       But, at the end of the day, we can''t dedicate—we can''t bloody well consecrate—we can''t hallow—this ground.
+-      The diggers, living and dead, who did it tough here, have consecrated it, far above our poor power to add
+-      or detract. So anyway, the world will little note, nor long remember what we say here, but it can never forget
+-      what they did here. It''s for us the lucky buggers still breathin'', rather, to be dedicated here to the hard
++      The brave bastards, living and dead, who did it tough here, have consecrated it, far above our poor power
++      to add or detract. So anyway, the world will little note, nor long remember what we say here, but it can never
++      forget what they did here. It''s for us the ones still kickin'', rather, to be dedicated here to the hard
+       yakka which they who fought here ''ave thus far so nobly advanced. Crikey, it''s rather for us to be here
+-      dedicated to the great task remainin'' before us—that from these poor buggers we take increased mateship to
+-      that cause for which they gave the last full measure of mateship—that we here highly resolve that these dead
+-      shall not have died for nothin''—that this nation, under God, shall have another crack at freedom—and that
+-      government of the people, by the people, for the people, shall not bloody well perish from the earth.
++      dedicated to the great task remainin'' before us—that from these honoured dead we take increased mateship
++      to that cause for which they gave the last full measure of mateship—that we here highly resolve that these
++      dead shall not have died for nothin''—that this nation, under God, shall have another crack at freedom—and
++      that government of the people, by the people, for the people, shall not bloody well perish from the earth.
+ 
+       '
+ - input: 'Once upon a time a little girl called Goldilocks went for a walk in the woods. She was tired and very
+diff --git a/tests/functional/test_changes.py b/tests/functional/test_changes.py
+index 2512013..1536217 100644
+--- a/tests/functional/test_changes.py
++++ b/tests/functional/test_changes.py
+@@ -31,7 +31,7 @@ from regen_changes_fixtures import CASES, build as fixture  # noqa: E402
+ 
+ KINDS = json.loads((FIXTURES / "every-kind.json").read_text(encoding="utf-8"))["request"]
+ # the contract each VERSION names: its schema's sha256 and its id format. Changing either means a new VERSION.
+-CONTRACTS = {1: ("0f752529", "{kind}:{start}-{end}[:{placement or rule}][#{n}]")}
++CONTRACTS = {1: ("4dd5a362", "{kind}:{start}-{end}[:{placement or rule}][#{n}]")}
+ LIVELY = dict(level=5, vulgarity=2, embellishment=2, document_config={"profile": {
+     "stack": 0.9, "garnish": {"riff": 1.0}, "max_garnish": {"riff": 30}, "garnish_gap": 0, "swearing": {"infix": 6.0}}})
+ 
+diff --git a/tests/functional/test_interfaces.py b/tests/functional/test_interfaces.py
+index 7ad0434..ad23b9d 100644
+--- a/tests/functional/test_interfaces.py
++++ b/tests/functional/test_interfaces.py
+@@ -17,7 +17,7 @@ TOOLS = {"aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_g
+ VALUES = {"level": 4, "seed": 7, "vulgarity": 1, "variety": 2,
+           "registers": ["current", "dated"], "regions": ["qld"], "unlock": ["archaic"], "limit": 3,
+           "include_gated": True, "original": "She was tired.", "markup": "markdown", "english": "uk", "short": True,
+-          "document_type": "custom", "document_config": {"garnish": [], "keep_quotes": True,
++          "document_type": "custom", "document_config": {"garnish": [], "keep_quotes": True, "narrator_opinion": True,
+               "profile": {"garnish": {"opener": 1}, "max_garnish": {"opener": 1}}},
+           "embellishment": 2, "suggest": False, "markdown": False}
+ SUBJECT = {"lookup": ("query", "very tired"), "lint": ("text", "G'day mate."), "plan": ("text", "She was tired."),
+@@ -29,7 +29,7 @@ FLAGS = {"level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity",
+          "regions": ["--region", "qld"], "unlock": ["--unlock", "archaic"], "limit": ["--limit", "3"],
+          "include_gated": ["--include-gated"], "markup": ["--markup", "markdown"],
+          "english": ["--english", "uk"], "document_type": ["--document-type", "custom"],
+-         "document_config": ["--document-config", '{"garnish": [], "keep_quotes": true, "profile": {"garnish": {"opener": 1}, "max_garnish": {"opener": 1}}}'], "short": ["--short"], "embellishment": ["--embellishment", "2"], "suggest": ["--no-suggestions"]}
++         "document_config": ["--document-config", '{"garnish": [], "keep_quotes": true, "narrator_opinion": true, "profile": {"garnish": {"opener": 1}, "max_garnish": {"opener": 1}}}'], "short": ["--short"], "embellishment": ["--embellishment", "2"], "suggest": ["--no-suggestions"]}
+ 
+ 
+ def _params(fn):

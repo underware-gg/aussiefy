@@ -1,0 +1,483 @@
+# Changelog
+
+Each release is one squashed commit on `main`, tagged `vX.Y.Z` (semver), made by `scripts/promote.py`.
+Add changes under [Unreleased] as they land; `python scripts/promote.py prepare major|minor|patch` dates it.
+
+## [Unreleased]
+
+- Preserve explicit listener possessives through shared binding and form compatibility, and require a
+  listener for “bend someone's ear”. Add standard bend/bent morphology instead of inventing a listener
+  or producing “bended”.
+- Apply 239 reviewed source records from the next two 120-entry audit batches, retaining historical,
+  component and source-chain evidence limits rather than certifying every trigger or full construction.
+- Separate physical solitude from loneliness, aimless wandering from weary walking, scolding from shouting,
+  exact zero from small amounts, explicit pretence from easy work, and alcoholic drinks from technical alcohol.
+  Require stated swag baggage, mounted-police context, named tree/animal identity and slab construction;
+  preserve bank-full versus overflow events and require explicit twenty-four-unit beer packages. Keep historical eye
+  terminology out of explicitly protected technical, official and instruction domains.
+- Preserve terminal object/NP arguments through shared completion checks; decline partial or coordinated
+  nominal captures while retaining coordinated verbs. Require both travel and a swag for waltzing Matilda;
+  exclude minimising nothing-much wording from exact zero.
+- Preserve negative-modal indifference wording and supermarket location nouns through compatible sourced
+  forms. Keep all existing status and flag gates; retained historical terms remain subject to their registers.
+
+- Retain reviewed source research for 90 further existing entries, with evidence limits and unapplied
+  mapping recommendations. Coverage now includes 220 of the original 1,254-entry inventory.
+- Share clause reading and meaning restrictions across detection and contextual imagery. Preserve captured
+  objects, reject adverbs mistaken for noun arguments, and bind subjects through supported auxiliary chains.
+  Apply existing tone/mood weights before candidate variety limits and order planner suggestions by fit.
+  Share document mood across strict Markdown units rather than resetting it at paragraph boundaries.
+  Keep figurative hunger complements plain instead of turning ambition into appetite.
+  Preserve meaning constraints when replaying dictionary research rounds.
+- Quote a query-string URL so the bundled dictionary also loads with PyYAML's pure-Python SafeLoader;
+  check complete entry, concept, profile and imagery parity with the normal loader.
+
+- Handle `feeling pretty hungry` with appetite phrases that preserve tense and questions. Add six configurable
+  writer-only hunger images, distinguishing familiar expressions from original riffs and ordinary appetite from
+  ravenous exaggeration; retain the three independent candidate generations and source checks.
+
+- Cross-reference 130 existing slang entries with sources and retain a meaning-audit ledger. Add the lively-party
+  and excited-reaction senses of “frog in a sock”; separate joblessness, unemployment payments and work avoidance,
+  earnest attempts and hardship, fair treatment and liberty, and exclamations and religious contingency.
+- Gate the three loose true-blue/fair-dinkum consecration paraphrases under `dubious_meaning`, keeping explicit
+  unlock access. Give “christen” a first-use object slot, clarify the supportive “barrack for” gloss and add checked
+  source URLs to lookup/change cards.
+
+- Hold `changes` to its review, amending contract v1 before release: a locked option is only an entry the
+  vulgarity cap alone holds back (at any variety); a swap or garnish whose pick wouldn't render true, or whose
+  region can't settle, offers its pick alone (a garnish without its removal) and is named under the new
+  `withheld`; a garnish's region widens over a drawl or infix match as a swap's does; garnish alternatives come
+  from what the engine weighed (`GarnishOffer`); each drawl and infix match in a spot is gated as the engine gates
+  it; cards are built as lookup builds them (riffs only where the embellishment takes them, flags for an unlocked
+  gated entry). Fix a drawl change's output span that took in part of the next word. Add `embedder` to `translate_changes`, and a one-line description of each
+  embellishment and document type (`aussiefy.guide.dial_descriptions()`). The benchmark gates every setting the
+  website allows, per text.
+- Specify Unicode code-point offsets for change regions and profanity masks, with a JavaScript slicing example.
+- Amend `changes` contract v1 again before release: `covers` lists every change whose output or region overlaps
+  one of the change's regions, so two changes whose regions overlap (a connective and the swap that shares its
+  "he's", or a garnish region that took in a whole swap) cover each other, and a drawl, infix or US word swapped
+  covers nothing. A drawl, spelling or infix change's `rule` gains `min_level`, the level the rule starts at
+  (`null` for a swear infix, which the vulgarity and the embellishment let in at any level). The loader checks a
+  phonetic rule's `min_level` (1-5) and `vulgarity` (0-3) and refuses a `min_level` on an infix.
+
+- Rate "bugger me dead" (phrase and garnish), "rooted" and "have a root" at Dad, matching "bugger" in the swear
+  list: cheeky, not profane.
+- Mask only actual profanity in `changes` renderings: swear-list words, the compounds the dictionary's rated
+  words build on one ("fuckwit"), and the new per-entry `mask` words for profanity the swear list lacks ("wanker",
+  "dickhead"), each with the ending a page keeps. Innuendo, insults and crude words show in full: 25 rated entries
+  with nothing profane ("rooted", "mongrel", "shut your gob") are marked `profane: false`, and 5 author mask words.
+  A test holds every other rated entry to a masked word at its rating.
+- Add `aussiefy.translate_changes`: translate's translation with every change it made (swaps, garnish,
+  drawl, swear infixes and US/UK swaps) placed in the output. Each swap comes with its alternatives and its
+  vulgarity-locked options, rendered in place on the engine's own path, with ids, `covers`, `removed` for garnish,
+  maskable words and entry cards. It's built in the same pass, at about 1.1 times translate's cost. The contract's
+  JSON Schema ships in the package. Translation output is unchanged (DD-029).
+- Build entry cards in one place for lookup and the coming `changes` builder: each card carries its entry `id`,
+  and full cards their `sources`. Lookup's result reports the dials only, without `profile_config`, which no
+  lookup reads.
+- Let a hosted MCP server narrow the tools by capability: `build_server()` takes `translator`, `allow_unlock`,
+  `allow_document_config`, `max_chars`, `max_query_chars` and `lookup_limit`, with defaults that serve everything. Annotate every
+  MCP tool as read-only, so clients such as ChatGPT don't ask for confirmation.
+- Stabilise WordNet neighbour selection before training-pair truncation, preserving sense and lemma priority.
+  Record current-model trial limits and real portable CLI/MCP integration checks without claiming web deployment.
+  The fresh full-data candidate passes 31/33 required checks, so the bundled model remains 1.2.0 (33/33).
+- Keep negative-question subjects beside their auxiliary by declining the unsafe bloody-well infix there.
+  Preserve capitals such as Australian and English when dictionary vocabulary alone would lowercase them.
+  Place dialogue tags before punctuation and curly closing quotes in continued speech.
+- Add an independently curated target-expression benchmark with fixed inputs and an explicit first baseline.
+  Share language cleanup with the trainer so grammar directives cannot become training words.
+- Review the original seed listicle, add ten curated expressions with precise senses, and retain a complete
+  decision ledger. Honour declared HTML encodings during acquisition without overriding explicit HTTP charsets.
+- Preserve outer auxiliaries and question grammar, distinguish perfect-have from possession, and retain the
+  force of `shall`. Keep restless tossing, object-taking quit, evidentiary establish and wholehearted devotion
+  separate from misleading slang senses. Add data-owned complete-verb guards and strip pattern annotations
+  consistently before language matching and model training.
+- Add reviewed contextual imagery, configurable exaggeration/association defaults, and writer-only
+  suggestions for comparisons needing semantic or grammatical judgement. Direct suffixes share riff budgets.
+- Revisit all 163 previously unadded/rejected reference-harvest rows; add 10 entries and 22 contextual images,
+  including the correct dishonesty sense of “as crooked as a dog's hind leg”. Preserve the original evidence.
+- Share imagery settings and suggestions across plans, lookup, CLI, MCP and retelling-session lookup.
+
+- Add six curated dictionary entries and 25 optional riffs from the X-post writing exercise, editorial
+  extrapolations and 45 unharnessed reference retellings in tradie, dockie and Uncle Bob voices. Retain all
+  203 candidate decisions, distinguish creative images from established sayings, and localise `yield sign`
+  to `give way sign` without changing other yield senses.
+- Preserve riffs when replaying dictionary research rounds: set aside only images belonging to temporarily
+  removed entries in the scratch base, while still rejecting genuine orphan references.
+
+## [0.2.0] - 2026-10-16
+
+- Carry the complete effective writing contract through agent/API judging and reference retelling, preserve
+  legacy judgement protocols, and add held-out repeat-judge evidence plus an attributed public-domain
+  Good Samaritan Bible passage.
+
+- Verify real optional SDK HTTP serialization offline, require Python 3.10/minimum-SDK and current-SDK
+  compatibility smoke checks before release CI, and consolidate duplicate toolkit contract tests.
+
+- Document the portable skill and MCP setup for both Claude Code and Codex; add `.agents/skills` discovery
+  alongside the existing Claude link. Keep agent-neutral retelling briefs, schemas, validation and dispatch
+  in `retelling.py`, with API-specific formats at the client edge and existing Python imports supported.
+- Verify cached yarns against current session/dictionary rules before reuse, and report malformed cache
+  records with their path. Preserve ordinary generation and deterministic fallback for stale replies.
+- Fix partial slang lookup for standard `-ing` spellings alongside dropped-g forms. Align the shared agent
+  workflow with verification before delivery and reconcile CLI options, MCP tools and research/licensing docs.
+
+- Remove duplicated ungated infix advice from guide/yarn prompts; swear-infix guidance now follows placement
+  permission and the effective multiplier, including zero. Retain both controlled retelling comparisons,
+  including the initial weak-register result and the contract-aware writer revision with remaining limits.
+- Preserve straight double-quoted documents across paragraph breaks, matching curly quotes. Translation,
+  lint, verification and yarn submission now share that recognition while retaining ordinary dialect checks.
+- Refine documentation flavour with explicit publication controls, exact quoted examples and neutral person
+  wording. Strict Markdown permits leading garnish at real sentence starts across inline boundaries, with
+  whole-sentence context and shared casing evidence; suffixes and riffs stay out of partial units.
+- Preserve stressed be-verbs in fronted predicates and comparisons; distinguish finite present-tense clauses
+  from noun, gerund, relative and subordinate fragments. Guard relative links, technical liberty and
+  everything-relative clauses from wrong-sense swaps. Decline uncertain-case prefixes and pin isolated cases.
+- Speed up semantic concept fallback by scoring only patterns that satisfy the existing token-count and
+  character-length rules, preserving exact scores, candidate order and complete translation results.
+
+- Tune request-local profile probabilities, frames, limits, spacing, drawl, swearing and rewrite thresholds
+  through `document_config.profile` on every document surface; expose complete reusable `profile_config`.
+  Omitted keys inherit dial defaults for both General and Custom. Combined garnish budgets/limits now cover
+  clean and swearing channels, and zero swear weighting excludes candidates even without clean alternatives.
+  Isolated behaviour tests cover flavour alongside technical and markup protection.
+
+- Share Markdown document choices, garnish limits and sentence spacing; prevent mid-sentence fragment openers and repeated per-unit closers.
+- Reconcile documentation and test indexes, verify Gettysburg wording provenance, and record the offline model baseline and independent retelling study.
+
+- Preserve concept metadata and hand edits when reapplying dictionary rounds; support explicit concept fixes, entryless guards and reviewed second senses.
+
+- Prevent adjacent-sentence reuse from producing yarn moved-phrase false warnings; keep broader fidelity alignment.
+- Read lint's drawl comparison from dictionary annotations, recognise known swaps in capitalised phrases and pin strict-preset/name behaviour.
+
+- Lookup recognises filled pronoun slots, confines inflection to grammatical heads and excludes unrelated
+  model suggestions after a complete slot parse. Negated model matches need a shared content anchor.
+
+- Fix attributive praise escaping through predicate frames, capitalised determiners hiding compound guards,
+  animal nouns being treated as people, and plural clothing conflicting with retained singular verbs.
+  Frame vocabulary is editable in `grammar.yaml`; similarity fallback enforces zero-width exclusions.
+
+- General is the default document type; detection is opt-in. Named presets and Custom accept the same exact
+  behaviour overrides through Python, CLI, MCP and yarn tools. Explicit values override presets, including
+  false and empty lists; Markdown protection remains independent.
+- Public docs use Swaggie/Dinkum/Dad with explicit technical-term protection and a shared notice linking to
+  each plain counterpart.
+
+## [0.1.0] - 2026-10-15
+
+- First Underware release from a clean development baseline, with the complete pre-cutover history
+  preserved in Rob-Morris main. Subsequent development history is retained normally.
+- Public installation examples select `v0.1.0`; package metadata and setup guides reflect all three
+  controls and current dependencies.
+
+- Releases use checked GitHub squash PRs, strict main protection, exact release-head CI and resumable
+  tag/publication/dev reconciliation. Preparation preserves failed work for review.
+
+- Documentation now derives from authoritative plain sources, with deterministic Aussie prose, repository
+  link remapping, preserved examples and promotion freshness checks.
+
+- Final committed source delta through `c0177d7`: fourth-pass/dinkum dictionary rounds, held-word lint,
+  original-context suggestions, literal clause-subject agreement, form-aware riffs and completed research.
+  Quote exemptions preserve actual wording/counts; halves require explicit equal shares and liquid-pouring
+  complements remain literal. Three weather golden variants were intentionally reviewed after narrowing guards.
+
+- Integrated 91 committed source changes through `Rob-Morris/aussiefy@95036e1`, preserving this repository's
+  layered API, validation, documentation and release contracts. Genre/embellishment, US/UK dialect and offline
+  POS context, extended Markdown/MDX, verification, blind judging, common corpus ingestion are available.
+- Strict Markdown units share document-wide context and expose its controls and policy warnings. Format
+  scanners stay above the plain engine; opaque restoration is collision-safe and cached per document.
+- Licensed POS/Interfold and source-linked research have checked attribution and digest bindings. Private
+  source-bearing research and unsanitised exports stay local; published candidate exports are sanitised.
+
+- **Dinkum-check dictionary round** (`research/dinkum-check-round-2026-10-14/DECISIONS.md`): 67 rows from the
+  check's yarn agents reviewed. New: stuff up, stuff {obj} up, a stuff-up, under the pump (of a person), not know
+  someone from a bar of soap, spitting (light rain), a swag of; pull the pin takes retiring, all over the shop
+  `"all over the map"`; 29 skipped as general English or for a wrong sense (knock up, get it up). Wrong senses
+  fixed in data: heaps for counted lots, every man and his dog and old fella out of the formal genres, littlie
+  for a policy's kid, the whole box and dice for `"everything from"`; rain only for the weather's `"it"` (not fans
+  pouring onto a street, tears pouring down, or tea poured).
+- **A clause trigger's own opening pronoun is its subject** (`"it {be} freezing"`): `"It's freezing"` is `"it's brass
+  monkeys"`, no longer `"yer brass monkeys"`.
+- **Lint suggests in the original's genre** (the engine's existing document-context seam): a voiced retelling of a policy
+  can read as a story, but its gift is still no pressie.
+- **The dinkum check's fixes** (`research/dinkum-check-2026-10-14/FINDINGS.md`: the voice came back in news and
+  official prose, register 3.60 to 4.00, but reached into what the form keeps):
+  - Dinkum's guidance: an obligation, a decision, a finding or a stated aim keeps its verb's weight (`"we
+    consider you responsible"` isn't `"we reckon"`).
+  - No riffs in news, docs or official prose below troppo, in the engine's draft or the plan's offers: a
+    picture of a real thing is a claim (`"creeks, bone dry half the year"` for Yellowstone).
+  - Lint asks for no dialect swap inside what the original holds as said (a quote news or official prose
+    keeps, a word mentioned), as the engine makes none; a quote the draft adds is still checked, and spelling
+    inside a quote is still Australian. `held_spans` moves to `text.py`.
+- **Fourth-pass dictionary round** (`research/fourth-pass-round-2026-10-14/DECISIONS.md`): 93 candidates from the
+  fourth pass's agents reviewed. 19 new entries (give a hoy, the drum, the go, come good, sting, go halves, down
+  tools, down the track, that mob, a gong and more), 4 lookup-only, 4 senses added by hand (cop, the oldies, crook,
+  a fair whack), hire, per cent and roadworks in the dialect table; 63 covered or skipped. The fourth pass's wrong
+  senses fixed in data: bush for a legal wilderness, Parliament House for a US Congress, knock together for any
+  build, pressie for a policy's gift, tucker and quid in the wrong places, and lint's LEAVE, heaps, bugger all,
+  the pollies and brekkie suggestions. `"sting"` is an irregular verb. Engine limits found are listed in DECISIONS.
+- **The fourth pass's next steps:**
+  - A storyteller's openings follow the genre's form at every setting, troppo's too (an obituary isn't opened
+    `"Fair dinkum, this happened."`), and `"Okay, so."` is gone from the openings.
+  - No swear infixes or intensifiers in news, instructions, technical docs or official prose below troppo
+    (`genres.yaml`); the warning says when the genre's form, not the setting, took them out.
+  - Dinkum's guidance puts the voice into the connecting prose where the form is strict; the docs say troppo
+    suits levels 4-5.
+  - A plan lists no difficult sentences in docs and official prose (`formal_to_rework`), whose formal words are
+    terms of art.
+  - Lint: no `name_added` for a people or an adjective made from a name the original has (`"Colombian"`,
+    `"New Englanders"`) or for the dictionary's own word (`"Yanks"`); a bracketed unit conversion is no repeat.
+- **Fourth everyday pass** (`research/fourth-pass-2026-10-14/FINDINGS.md`): the same 59 texts after these changes,
+  with the third pass's dinkum retellings as an anchor in the same packets. New dinkum ties the old (4.64 against
+  4.63, 26 wins each), with no critical or major problem but less register; troppo rises from 4.08 to 4.23
+  (majors 39 to 21) and edges dinkum at levels 4-5; the engine 3.14 to 3.18.
+- **Design review of the work since 5b385b4** (six reviewers; follow-ups in `research/OPEN_ISSUES.md`):
+  - Fixed: `detect.PREPOSITIONS` was defined twice, so a subject wasn't stopped at `"near"`, `"inside"`, `"outside"`
+    or `"like"` (now `SUBJECT_STOPS` and `NOUN_PREPOSITIONS`); the CLI's broken-pipe handler re-raised in the very
+    case it was for (now the Python docs' recipe, tested with a real pipe).
+  - Boundaries: a hand-written judge report of the wrong shape, or a declined file with a non-string reason, is
+    sent back with reasons instead of crashing; a misspelt genre in dialect.yaml's `not_in` is refused (one
+    `schema.parse_not_in`); manifest markers are checked when the manifest loads; ingest catches only the
+    failures it recovers from (`FetchError`, moved markers).
+  - Faster: lint's suggestions (a whole engine translation) are skipped by verify and yarn's submit
+    (`suggest=False`, `lint --no-suggestions`), about half their time; the mention scan's look-back is bounded and
+    the drawl's kept spans are read once per text, not per rule (40% of a long MDX translate); sentence
+    alignment searches at most 40 sentences either side and builds its windows once.
+  - One rule, one place: the decline rule (yarn), sentence spans (`align.sentence_spans`), mid-sentence names
+    (`text.MID_SENTENCE_NAME`), held spans (`engine.held_spans`), the person-noun check (`select._person_noun`),
+    dialect's claim loop, the problem keys (judge), the inline placeholder range (markup).
+  - verify indexes its severity table (a test checks every kind lint reports has one); the rubric is version 3,
+    whose only change is `"as rude"` to `"as vulgar"` in register's question; the unharnessed brief is data in
+    `judge.yaml`.
+- **Embedder:** a 1.3.0 retrain on the grown dictionary stopped at the reference gate (32/33: `"a top bloke"` reaches
+  a scoundrel's gloss) and wasn't clearly better, so 1.2.0 stays bundled (`training/README.md`,
+  `training/reports/trials/1.3.0-trial-2026-10-14.json`). The third pass's lookup misses (`"harmless"`, `"probably"`)
+  are in the reference set as known failures.
+- **Third-pass dictionary round** (`research/third-pass-round-2026-10-13/DECISIONS.md`): 24 entries from the
+  terms the third pass's agents reached for (pull the pin on, drag the chain, nut out, give someone a ring, here's
+  the go, what's the go, first in best dressed, workmate, fisho, Yank, tragic, cheap as chips, on song, streets
+  ahead of, go pear-shaped, have a good innings, all up, a fair few, brolly, out bush, chuck a tanty, a tanty,
+  muck up, active; is it buggery for lookup only) and punnet in the dialect table. Guards and narrower triggers for the
+  pass's wrong senses: beaut for any `"good"`, young fellas for `"the boys"`, little fella for any child, bush for
+  US land and `"neck of the woods"`, dead set on for `"dedicated to"`, swear blind for `"resolve"`, a goer for
+  `"feasible"`, esky for `"a cooler airmass"`, the punters in `"public, private sector"`, paddock for a field of study
+  or data, scared stiff for `"I'm afraid your"`, and lint's dosh, mitts and come a cropper.
+- **From the third everyday pass** (`research/embellishment-pass-2026-10-13/FINDINGS.md`):
+  - A retelling defaults to `dinkum` whatever the genre (`genres.yaml` `retelling`): yarn mode, and the `plan`,
+    `lint`, `verify` and `guide` a writer works with. Dinkum yarn mode scored best in every genre and at every level (4.73
+    against the unharnessed agent's 4.51). The engine's own translation keeps the genre's default; pass the genre's
+    own setting to `plan` (`-e`) for a plan that matches the translation. `guide` without a setting now gives dinkum's note (no `perform_at_troppo`).
+  - The genre's form narrows the garnish below troppo (`genres.yaml` genre `garnish` and `openings`): no
+    talker's openings, openers, connectives or tag-ons in news, instructions, docs or official prose, and no
+    name-calling at the reader anywhere but a story or something personal (garnish marked `insult: true`), at any
+    setting. Otherwise troppo (`follows_form: false`) still performs whatever the text.
+  - No garnish on a dateline (`"DETROIT, Dec. 13 (AP).—"` now reads as one) or in a quote the genre keeps.
+  - Troppo's guidance keeps the original's claims and form (`"a won't stays a won't"`, a letter a letter, a
+    hazard never the joke) without boxing the performance in; its `"perform it"` examples are clean, since it
+    applies at vulgarity 0 too.
+  - The moved-phrase check looks only at the spot a phrase was planned for (the plan's phrases carry their
+    `span`), so the original's word used again in the writer's own wording isn't sent back.
+  - The brief says which rule holds for headings: Aussified in plain text, exact in Markdown or MDX.
+  - A text that talks about words (`"the word 'guys'"`) holds its other short quotes and list items' terms too
+    (`"- boys: too patronizing"`, `"“gals.”"`).
+  - A text keeps one spelling of a word (bikkies throughout, not bikkies then bickies): an entry's new
+    `spellings` lists which of its variants only spell it another way (41 entries).
+  - A first word tagged a name stays capitalised after an opener (`"Crikey, Cook sailed in"`); in instructions a
+    command is lowered (`"Well, pour the batter"`), unless the text capitalises it mid-sentence.
+  - Sentence alignment moved to `align.py` (verify and yarn mode share it); DATELINE and SCRIPT_LINE to
+    `text.py`, IMPERATIVES to `pos.py`.
+  - The style guide's general craft rules (tag-ons only where someone is addressed, connectives in narration,
+    the drawl heaviest in dialogue at levels 4-5, no pile-ups, Australian spelling) are in every setting's craft,
+    with clean examples, not only
+    troppo's perform block, so the dinkum default carries them.
+  - A term plural in form isn't swapped in after `"a"` (`"a swimsuit"` isn't `"a togs"`; `"my togs"` still is, and
+    `"a long time"` is still yonks), and the
+    CLI exits quietly when its output pipe closes (`aussiefy lookup ... | head`).
+  - Lookup finds an inflected term's base (`"coves"`, `"playing up"`) and doesn't offer a term's opposite from the
+    meaning model (`"probably"` isn't `"no bloody way"`).
+
+- **The last of the second pass:**
+  - A bracketed gloss no longer echoes its word: a gloss on a swapped word stays as the author wrote it
+    (`"lunch or tea (supper)"`, `"bickies (biscuits)"`, not `"tea (tea)"`), and a word whose bracket already says it in
+    Australian stays too (`"the elevator (lift)"`, not `"lift (lift)"`). Lint doesn't flag the original's own gloss.
+  - Yarn mode's lint doesn't offer a planned phrase the agent has declined with a reason, in its suggestions or
+    its fixes (`yarn-tools lint --declined FILE` too).
+  - A submit is sent back when a planned phrase was put somewhere else (every `"turned up"` it was planned for is
+    still there), below troppo; the yarn cache key carries a validation version, so a yarn cached under older
+    rules is asked for again.
+- **Second-pass dictionary round** (`research/second-pass-round-2026-10-13/DECISIONS.md`): 19 entries from the
+  terms the second pass's agents reached for (keen, keen on, keen as mustard, meant to, the odd, a fair bit, easy
+  as, done and dusted, het up, knocked for six, fridge, a happy snap, get on the blower, go off, a lair, gridiron;
+  wouldn't it rot your socks for lookup only), on narrow triggers tested against their other senses; a guard so
+  `"an American football player"` isn't footy; and dialect swaps for comp time (time in lieu), electrical outlet
+  (power point), granulated sugar (white sugar), cake/loaf/baking pan (tin), dishtowel (tea towel),
+  old-fashioned oats and council member (councillor); and `"done for the day"` isn't doomed.
+- **Wrong senses and register, from the second pass:**
+  - Terms of art: a concept's `not_in: [technical]` leaves its triggers alone in docs (an HTTP cookie, a
+    struct's field, a build, new, a bug), as the dialect table's `not_in` does.
+  - Quotes: a genre's `keep_quotes` (news, official prose) keeps quoted speech and documents as said, words,
+    drawl and contractions alike, in double or single quotes; and a word mentioned rather than used (`"the word
+    'guys'"`, `"Americans call it a 'faucet'"`) is never swapped.
+  - Mood: an obituary reads as solemn (a death and the age at death, with its rites or the family left), and a
+    `tone: comic` term (`"carked it"`) skips solemn texts.
+  - Triggers: `"punters"` no longer for any `"people"`, nor before a singular verb (`"the punters is"`); `"esky"` not
+    for the comparative (`"stays cooler"`, `"cooler than"`: a guard concept holds it); a browser's cookie stays a
+    cookie in a how-to too (guards in the dictionary and the dialect table), and a form's field a field; `"the
+    drink"` out of ALCOHOL (`"the drinks"` -> `"the grogs"`), grog a mass noun; `"I'm afraid"` and `"afraid so"` left alone, and `"spooked"` its own
+    concept (not `"spooked of"`); `"supposed to"` isn't `"reckoned to"`; `"of course,"` before a comma is the adverb,
+    not a yes; `"righto"` is `"okay"`, not a yes to a question; `"properly"` gated (`not_aussie`); a term's article
+    goes after a proper modifier (`"American muso Bob Weir"`).
+  - The matcher: an exclusion may name a mark (`"of course !=,"`), `!=x` looks at the next token only (`!x` at
+    the next two), exclusion values are read as the tokeniser reads them (`"it's"` is `"it"`), and `^adj` needs an
+    adjective or adverb next (`"really ^adj"`: `"really cold"`, not `"really think"` or `"really it was"`).
+  - The brief: the swearing craft only where swearing is allowed and the setting takes infixes; DIFFICULT_SENTENCES keep a genre's terms;
+    headings keep their place; a US unit may carry the metric in brackets.
+- **Second-pass fixes** (`research/everyday-pass-2026-10-13/FINDINGS.md`):
+  - Engine: `"war"` is no longer found inside a dialect `"warn't"`; `"1/4"`, `"4.5"` and `"10:30"` are one token each; a
+    blank line ends a sentence (a heading no longer merges into the next one) unless the line before leads in
+    with a comma or colon; a plain-text heading takes no garnish or drawl, nor does a link's text; no opener
+    before a play's speaker label (`"So anyway, HALE:"`). A bare `"meter"` becomes `"metre"` only after a quantity
+    (`"if the meter changes"` stays, `"the 100-meter sprint"` changes).
+  - Lint: a plain-English variant (`"full"` for `"a bit full"`) isn't counted as a use of the slang; `"y'all"` in
+    the original isn't the translator's; a gated entry in ordinary English words (`"a bit rough"`, `"shame"`) isn't
+    flagged (entries marked `plain_sense`, a new field); names match across `"Mr."`/`"Mr"`, the drawl
+    (`"Thanksgivin'"`), bold labels and datelines; a phrase the original says in American (`"skillet or"`) isn't a
+    repeat when the retelling says it in Australian (`"frying pan or"`).
+  - Genre: old-style datelines (`"WASHINGTON, Dec. 27.—"`), verse read as a story (The Raven, the Sentimental
+    Bloke: no longer `"personal"`), a fable's Capitalised Nouns not taken for names, a letter that speaks to
+    `"you"`, and a long text needing narrative cues to be a story. On the labelled corpus: told/not told 93% ->
+    97%, exact 79% -> 88%.
+- **Embellishment**, a third dial (`-e/--embellishment`, `embellishment=`): how much liberty the telling
+  takes, `deadset` (0, straight: the words swap, nothing added), `dinkum` (1, a genuine voice: the odd opener,
+  connective, tag-on, tail, riff and swear infix) or `troppo` (2, a yarn performed: all the garnish). The genre sets its
+  default and the form (a story `troppo`, a letter `dinkum`, news, instructions, docs and official prose
+  `deadset`); the level still sets how thick the slang is. In yarn mode it sets the brief and validation: `troppo` writes first, without the engine's
+  draft, treats the planned phrases as vocabulary, and may run to twice the original; `deadset` keeps to 1.3
+  times. The style guide's `"perform it"` block now goes with `troppo`, not levels 4-5, and the level voices
+  speak only of slang, idiom and drawl; `guide` gives the setting's note, and the perform block at `troppo`.
+  News no longer takes
+  connectives. Results and plans report `genre`, `embellishment` and `embellishment_name`; a plan's `genre`
+  is now its name, with `guidance` for the genre and the embellishment.
+- **Genre** (`genre.py`, `data/genres.yaml`): the engine reads a text as a story, something personal, news,
+  instructions, technical docs or official prose, and the genre decides which garnish it takes, whether a
+  swear may stand in for a person named neutrally, and (new) whether swear infixes and swearing intensifiers
+  go in. A safety notice keeps its swapped words but gets no `"Crikey!"`, `"some mongrel"` or `"bloody stale"`; an
+  explicit `--vulgarity` the genre limits is reported in the warnings. Yarn mode briefs the genre.
+- **US and British English** (`dialect.py`, `data/dialect.yaml`, replacing `americanisms.yaml`): faucet ->
+  tap, bell pepper -> capsicum, courgette -> zucchini at every level, with plurals, inflections and articles;
+  words Australians use in another sense swap only for a known source (`--english us|uk|auto|none`). Lint's
+  `americanism` kind is now `dialect`.
+- **A dictionary round** from the everyday pass's retellings: 40 entries, 29 concepts, and triggers that
+  caught the wrong sense taken out with their reasons.
+- **The fairdinkum round** (`research/fairdinkum-round-2026-10-13`): 615 headwords from a reference-only list,
+  judged by hand for the engine: 148 entries (bogan, bingle, sparky, chunder, rego, within cooee, deadset,
+  couldn't organise a chook raffle; a few lookup-only, such as drop bear and banana bender; laid-back gated
+  not_aussie), variants on 10 existing entries, and existing triggers fixed: `"has a beer belly"` was a beer,
+  `"at a glance"` and `"a look of horror"` were a squiz, and HOON's needed an `"a"` (`"the louts"` went unseen).
+- **Rails audit:** swaps the guards refused for no good reason now go in (`"his missus"`, `"the poor buggers"`,
+  `"the old billabong"`, `"brumbies"`), with number from the data (`number: plural` on terms such as `"the
+  pollies"`) and determiners fitted, not refused.
+- **Part of speech** (`pos.py`): NLTK's averaged-perceptron tagger, vendored (MIT weights in `data/pos/`). A
+  verb idiom no longer takes a noun (`"the pale cast of thought"`), a noun term no longer takes a verb, and an
+  opener lower-cases a sentence's first word only when it isn't a name (`"Well, residents said"`, `"Well, Smith
+  said"`).
+- a/an by sound: `"a ute"`, `"a uni"`, `"an FBI agent"`, `"an RSL"`, `"a UFO"`, `"an 18th"`.
+- **Lint:** reads a dropped g and plurals in swears (`"pissin'"`); exempts the original's own words only as
+  many times as the original has them; warns of a phrase said over and over (`repeated_phrase`); name checks
+  understand headings, localised dates and names broken across lines; `too_rude` is now `too_vulgar`.
+- `lookup --short` (`short=` in the API and MCP): each result as its form, gloss, frame, level and
+  vulgarity; yarn mode's lookup uses it. `{{ macros }}` and `{% tags %}` are kept in Markdown. yarn-tools
+  explains a bad declined-phrases file.
+- **Terms:** `"vulgarity"` is the scale, a `"swear"` a word with vulgarity 1 or more (README, Terms).
+
+- `aussiefy yarn-tools brief|lookup|lint|submit`: yarn mode's loop by hand, any agent as the model, at any
+  level and markup.
+- `dev harvest` keeps numbers in the diff, so `"Oct. 11"` against `"the 11th of October"` no longer stages `"the th"`.
+
+- `verify(text, original=)` (`aussiefy verify`, `aussie_verify`): a deterministic check of any translation
+  against its original. Problems come worst first with a severity (critical, major, minor, info): lost
+  markup, numbers or sentences, policy and spelling breaches, craft problems, and sentences nothing in the
+  translation says again (`unmatched`), plus coverage metrics.
+- `aussiefy judge`: a blind, rubric-scored comparison of 2-8 translations of one original
+  (`data/judge.yaml`: eight criteria scored 1-5 with evidence first, quoted problems with severity, and
+  rankings). Reports are validated (quotes must be verbatim) and unblinded into verdicts that `judge tally`
+  averages. It runs with the API (`run`, optionally with an unharnessed reference retelling), or with any
+  agent as the judge (`brief`, then `read`).
+
+- Markdown and MDX documents: `--markup markdown|mdx|auto` (`markup=` in the API, MCP tools and yarn mode)
+  translates only the prose and keeps code, tags and props, front matter, imports, maths, links, URLs,
+  identifiers, headings, tables and list markers exactly. Table cells and list items take swaps but no
+  garnish. `lint --markup` lints the prose only and reports code or markup that changed.
+- An opener lower-cases a sentence's first word when the text itself writes it in lower case (`"Anyway,
+  install the CLI"` when the text also says `"installed"`).
+- An everyday reference corpus (`tests/corpus/everyday/`): 55 openly licensed texts (and 2 pointer-only news texts) across instructions,
+  news, conversation and workplace writing, plus 15 Interfold docs pages (MDX, by the founder's permission).
+- `aussiefy dev ingest MANIFEST...`: one manifest format for every source (HTML pages cut between markers,
+  files from a GitHub repo at a pinned ref), replacing `scripts/fetch_reference_texts.py` and
+  `scripts/fetch_interfold_docs.py`.
+
+
+- Translate Markdown prose explicitly through the API/toolkit, CLI and MCP while retaining protected
+  source and stable headings. Report honest per-unit offsets and explanations; reject LLM/model modes
+  before loading or calling. Plain engine/plan behaviour remains unchanged.
+
+- Organise tests by user, functional, architecture and contributor ownership, with layer indexes and
+  updated source/fixture paths; keep the release skip exception exact after the move.
+
+- Expand the reference corpus with 53 everyday texts across instructions, news, conversation and workplace
+  registers, with provenance and local-only pointers. Add the pinned Interfold MDX fetcher using the shared
+  home cache; cached fetches retain original newlines.
+
+- Generate third-party notices from reviewed declarations; check bundled-model metadata, tracked corpus
+  provenance, remote-only text exceptions and scrape sources. Promotion also inspects the licences and
+  package contents of an isolated wheel.
+- Reorganise documentation into user, functional, architecture and contributor layers, with decision
+  records and checks for documented commands and example outputs.
+- Report missing files, corrupt caches and configs, invalid policy names and failed model installs as
+  actionable errors (exit 2). MCP tools retain those messages and describe their parameters.
+- Accept named levels in compare and gaps, `plan --json`, and `yarn --no-cache`; improve CLI help, stdin
+  hints, near-command notices, no-match messages and lint warning output.
+- Align translation JSON across surfaces, including dial names, policy warnings, variety and
+  `difficult_sentences`; remove the duplicate `warnings` and old `difficult` keys.
+- Share workflow and craft guidance from `guide.yaml`, filtered to the requested level and vulgarity;
+  share phrase-retention rules across Claude modes and preserve custom dictionary respellings.
+- Keep rewrite, yarn and scrape caches under `$AUSSIEFY_HOME` (default `~/.aussiefy`), and cache shared
+  Claude prompts and yarn conversations. The LLM extra now requires anthropic 0.120 or newer.
+- Retain validated tag proposals across retries so an outage does not repeat completed paid work.
+- Reject malformed guide/staging/config fields with contextual errors, avoid mutating supplied slots,
+  reject multi-sentence sentence rewrites, and prevent invalid research candidates from blocking valid ones.
+  The trainer now parses and documents `--recipe` without mutating argv.
+- Stop tagging on an API outage; require saved scrape pages to declare their source URL and apply the
+  same reference-source policy to URLs and local copies.
+- Reject malformed or missing dictionary data with collected errors. Explicit local embedding selection
+  requires an installed usable model.
+- Speed up idiom selection and research-round loading; share garnish mechanics while preserving the
+  golden translations. Clarify that local substitution rolls do not guarantee unchanged phrase choices
+  or garnish elsewhere after an edit.
+- Define the package version once, include all test dependencies in the dev extra, and refuse promotion
+  on skipped checks except the local copyrighted-corpus tests.
+
+### Imported initial capabilities
+
+The first release.
+
+- Two independent dials, by number or name: level 1-5 (tourist, blow-in, local, larrikin, swaggie) and
+  vulgarity 0-3 (nan, dad, uncle-bob, tradie), orthogonal: the level is how intensively a text is Aussified,
+  the vulgarity how rude it may be and how often the swearing comes (plain-word swaps, a swear channel of
+  openers, asides, tags and closers, and infixes). Each level sets only a default vulgarity.
+- Plain-word swears (`entries/swearing.yaml`): bloody, bastard, bugger, shit, piss, arse, fuck and the
+  descriptive c-word scale, best cunts to worst (a sick cunt ... a dog cunt), each at its own vulgarity tier.
+- A deterministic rule engine that rewrites English as Australian slang at levels 1 to 5: concept detection
+  with frame checking, seeded selection, realisation with agreement and tense, garnish (connectives,
+  openers, tag-ons, asides, riffs, closers), the drawl, and Australian spelling. The same text, level and seed
+  always give the same output.
+- A validated YAML dictionary of about 900 entries over about 500 concepts, grown by hand curation and two
+  verified research rounds (gap-fill and classics), with vulgarity tiers, registers, regions and gating.
+- A toolkit of five operations (lookup, lint, guide, plan, translate), the same in the Python API, the CLI,
+  the MCP server (`aussiefy-mcp`) and a Claude Code skill.
+- Yarn mode: Claude writes the translation using the toolkit as tools, and a submission is accepted only when
+  it lints clean and keeps the plan. Optional `--surface` and `--rewrite` LLM modes.
+- A bundled static embedding model (aussie-static 1.2.0), reproducibly trained from `training/recipe.yaml`,
+  for meaning-based lookup and gap finding.
+- Maintainer tools: `aussiefy gaps`, `aussiefy compare`, and `aussiefy dev` (scrape, fragments, harvest,
+  tag, review, round).

@@ -1,0 +1,858 @@
+{
+ "about": "The website's defaults: Larrikin, Dinkum, Dad, seed 0.",
+ "request": {
+  "text": "I'm exhausted and the toilet is broken. Thanks for breakfast, my friend. You are very tired and hungry, and your car is broken. We let a toddler win the game.",
+  "level": 4,
+  "vulgarity": 1,
+  "seed": 0,
+  "embellishment": 1
+ },
+ "response": {
+  "version": 1,
+  "text": "I'm exhausted and the dunny is broken. Thanks for brekky, my mate. You're buggered and starvin', and your car is bung, ay. Well, we let a toddler win the game.",
+  "changes": [
+   {
+    "id": "substitution:22-28",
+    "kind": "substitution",
+    "src_span": [
+     22,
+     28
+    ],
+    "out_span": [
+     22,
+     27
+    ],
+    "original": "toilet",
+    "output": "dunny",
+    "entry_id": "dunny",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "dunny",
+      "weight": 1.0,
+      "rendered": "dunny",
+      "out_span": [
+       22,
+       27
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "substitution:51-60",
+    "kind": "substitution",
+    "src_span": [
+     51,
+     60
+    ],
+    "out_span": [
+     50,
+     56
+    ],
+    "original": "breakfast",
+    "output": "brekky",
+    "entry_id": "brekkie",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "brekkie",
+      "weight": 1.0,
+      "rendered": "brekky",
+      "out_span": [
+       50,
+       56
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "substitution:65-71",
+    "kind": "substitution",
+    "src_span": [
+     65,
+     71
+    ],
+    "out_span": [
+     61,
+     65
+    ],
+    "original": "friend",
+    "output": "mate",
+    "entry_id": "mate",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "mate",
+      "weight": 1.0,
+      "rendered": "mate",
+      "out_span": [
+       61,
+       65
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "phonetic:73-80:pronoun-are",
+    "kind": "phonetic",
+    "src_span": [
+     73,
+     80
+    ],
+    "out_span": [
+     67,
+     73
+    ],
+    "original": "You are",
+    "output": "You're",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "pronoun-are",
+     "kind": "drawl",
+     "min_level": 4,
+     "before": "You are",
+     "after": "You're"
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "substitution:81-91",
+    "kind": "substitution",
+    "src_span": [
+     81,
+     91
+    ],
+    "out_span": [
+     74,
+     82
+    ],
+    "original": "very tired",
+    "output": "buggered",
+    "entry_id": "buggered",
+    "vulgarity": 1,
+    "masks": [
+     {
+      "span": [
+       0,
+       8
+      ],
+      "ending_start": 6,
+      "vulgarity": 1
+     }
+    ],
+    "alternatives": [
+     {
+      "entry_id": "buggered",
+      "weight": 0.1403,
+      "rendered": "buggered",
+      "out_span": [
+       74,
+       82
+      ],
+      "vulgarity": 1,
+      "masks": [
+       {
+        "span": [
+         0,
+         8
+        ],
+        "ending_start": 6,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "knackered",
+      "weight": 0.1403,
+      "rendered": "knackered",
+      "out_span": [
+       74,
+       82
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "out-on-poss-feet",
+      "weight": 0.0991,
+      "rendered": "out on your feet",
+      "out_span": [
+       74,
+       82
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "rooted",
+      "weight": 0.0936,
+      "rendered": "rooted",
+      "out_span": [
+       74,
+       82
+      ],
+      "vulgarity": 1,
+      "masks": []
+     },
+     {
+      "entry_id": "stuffed",
+      "weight": 0.1403,
+      "rendered": "stuffed",
+      "out_span": [
+       74,
+       82
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "zonked",
+      "weight": 0.3864,
+      "rendered": "zonked",
+      "out_span": [
+       74,
+       82
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [
+     {
+      "entry_id": "fucked-broken",
+      "vulgarity": 2,
+      "rendered": "fucked",
+      "out_span": [
+       74,
+       82
+      ],
+      "masks": [
+       {
+        "span": [
+         0,
+         6
+        ],
+        "ending_start": 4,
+        "vulgarity": 2
+       }
+      ]
+     }
+    ],
+    "covers": []
+   },
+   {
+    "id": "substitution:96-102",
+    "kind": "substitution",
+    "src_span": [
+     96,
+     102
+    ],
+    "out_span": [
+     87,
+     95
+    ],
+    "original": "hungry",
+    "output": "starvin'",
+    "entry_id": "starvin",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "starvin",
+      "weight": 0.3696,
+      "rendered": "starvin'",
+      "out_span": [
+       87,
+       95
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "hungry-enough-horse-jockey",
+      "weight": 0.2609,
+      "rendered": "hungry enough to eat a horse and chase the jockey",
+      "out_span": [
+       87,
+       95
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "peckish",
+      "weight": 0.3696,
+      "rendered": "peckish",
+      "out_span": [
+       87,
+       95
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [
+     {
+      "entry_id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+      "vulgarity": 2,
+      "rendered": "hungry enough to eat the arse out of a low-flyin' duck",
+      "out_span": [
+       87,
+       95
+      ],
+      "masks": [
+       {
+        "span": [
+         25,
+         29
+        ],
+        "ending_start": 29,
+        "vulgarity": 2
+       }
+      ]
+     }
+    ],
+    "covers": []
+   },
+   {
+    "id": "substitution:120-126",
+    "kind": "substitution",
+    "src_span": [
+     120,
+     126
+    ],
+    "out_span": [
+     113,
+     117
+    ],
+    "original": "broken",
+    "output": "bung",
+    "entry_id": "bung-broken",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "bung-broken",
+      "weight": 0.4699,
+      "rendered": "bung",
+      "out_span": [
+       113,
+       117
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "buggered",
+      "weight": 0.037,
+      "rendered": "buggered",
+      "out_span": [
+       113,
+       117
+      ],
+      "vulgarity": 1,
+      "masks": [
+       {
+        "span": [
+         0,
+         8
+        ],
+        "ending_start": 6,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "cactus",
+      "weight": 0.1849,
+      "rendered": "cactus",
+      "out_span": [
+       113,
+       117
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "rooted",
+      "weight": 0.1233,
+      "rendered": "rooted",
+      "out_span": [
+       113,
+       117
+      ],
+      "vulgarity": 1,
+      "masks": []
+     },
+     {
+      "entry_id": "stuffed",
+      "weight": 0.1849,
+      "rendered": "stuffed",
+      "out_span": [
+       113,
+       117
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "garnish:126-126:tag",
+    "kind": "garnish",
+    "src_span": [
+     126,
+     126
+    ],
+    "out_span": [
+     117,
+     121
+    ],
+    "original": "",
+    "output": ", ay",
+    "entry_id": "g-ay",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "tag",
+    "removed": {
+     "out_span": [
+      117,
+      121
+     ],
+     "rendered": ""
+    },
+    "alternatives": [
+     {
+      "entry_id": "g-ay",
+      "weight": 0.3333,
+      "rendered": ", ay",
+      "out_span": [
+       117,
+       121
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "g-mate",
+      "weight": 0.6667,
+      "rendered": ", mate",
+      "out_span": [
+       117,
+       121
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   },
+   {
+    "id": "garnish:128-128:connective",
+    "kind": "garnish",
+    "src_span": [
+     128,
+     128
+    ],
+    "out_span": [
+     123,
+     129
+    ],
+    "original": "",
+    "output": "Well, ",
+    "entry_id": "c-well",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "connective",
+    "removed": {
+     "out_span": [
+      123,
+      131
+     ],
+     "rendered": "We"
+    },
+    "alternatives": [
+     {
+      "entry_id": "c-anyway",
+      "weight": 0.3636,
+      "rendered": "Anyway, we",
+      "out_span": [
+       123,
+       131
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-mind-you",
+      "weight": 0.0909,
+      "rendered": "Mind you, we",
+      "out_span": [
+       123,
+       131
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-now",
+      "weight": 0.1818,
+      "rendered": "Now, we",
+      "out_span": [
+       123,
+       131
+      ],
+      "vulgarity": 0,
+      "masks": []
+     },
+     {
+      "entry_id": "c-well",
+      "weight": 0.3636,
+      "rendered": "Well, we",
+      "out_span": [
+       123,
+       131
+      ],
+      "vulgarity": 0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": []
+   }
+  ],
+  "entries": {
+   "brekkie": {
+    "id": "brekkie",
+    "form": "brekkie",
+    "gloss": "Breakfast.",
+    "frame": "np",
+    "concepts": [
+     "BREAKFAST"
+    ],
+    "level": 1,
+    "vulgarity": 0,
+    "register": "current",
+    "variants": [
+     "brekky"
+    ]
+   },
+   "buggered": {
+    "id": "buggered",
+    "form": "buggered",
+    "gloss": "Exhausted, or broken beyond use.",
+    "frame": "adj",
+    "concepts": [
+     "TIRED",
+     "BROKEN"
+    ],
+    "level": 2,
+    "vulgarity": 1,
+    "register": "current"
+   },
+   "bung-broken": {
+    "id": "bung-broken",
+    "form": "bung",
+    "gloss": "Broken, not working, crook (\"the telly's gone bung\", \"a bung knee\").",
+    "frame": "predicate_adj",
+    "concepts": [
+     "BROKEN"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     "https://en.wiktionary.org/wiki/bung",
+     "https://history.cass.anu.edu.au/centres/andc/australian-words-b"
+    ]
+   },
+   "c-anyway": {
+    "id": "c-anyway",
+    "form": "anyway",
+    "gloss": "Moving the story along.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "connective"
+   },
+   "c-mind-you": {
+    "id": "c-mind-you",
+    "form": "mind you",
+    "gloss": "Adds a qualifying afterthought (\"Mind you, his brother turned up\").",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "connective",
+    "notes": "Shared with British English, and very natural in an Australian yarn. Best on a sentence that qualifies the one before it, so keep the weight low.",
+    "sources": [
+     "https://www.collinsdictionary.com/dictionary/english/mind-you_1"
+    ]
+   },
+   "c-now": {
+    "id": "c-now",
+    "form": "now",
+    "gloss": "Turning to the next part.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "connective"
+   },
+   "c-well": {
+    "id": "c-well",
+    "form": "well",
+    "gloss": "Setting up the next bit.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "connective"
+   },
+   "cactus": {
+    "id": "cactus",
+    "form": "cactus",
+    "gloss": "Dead, broken, finished.",
+    "frame": "adj",
+    "concepts": [
+     "BROKEN"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "riffs": [
+     {
+      "text": "like a flat-pack in a cyclone",
+      "tone": "comic",
+      "best": true
+     }
+    ],
+    "notes": "Of machines and things (\"the ute's cactus\"), not tired people. Older-sounding; Macquarie's blog thinks it may be fading, but it is still widely understood."
+   },
+   "dunny": {
+    "id": "dunny",
+    "form": "dunny",
+    "gloss": "A toilet, especially an outdoor one.",
+    "frame": "np",
+    "concepts": [
+     "TOILET"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "riffs": [
+     {
+      "text": "out the back with a redback under the seat",
+      "tone": "comic",
+      "best": true
+     }
+    ]
+   },
+   "fucked-broken": {
+    "id": "fucked-broken",
+    "form": "fucked",
+    "gloss": "Broken beyond repair; or utterly exhausted.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "BROKEN",
+     "TIRED"
+    ],
+    "level": 1,
+    "vulgarity": 2,
+    "register": "current"
+   },
+   "g-ay": {
+    "id": "g-ay",
+    "form": "ay",
+    "gloss": "Sentence-final \"eh\", inviting agreement.",
+    "frame": "tag",
+    "concepts": [],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "tag"
+   },
+   "g-mate": {
+    "id": "g-mate",
+    "form": "mate",
+    "gloss": "Friendly (or pointedly unfriendly) address.",
+    "frame": "tag",
+    "concepts": [],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "tag"
+   },
+   "hungry-enough-horse-jockey": {
+    "id": "hungry-enough-horse-jockey",
+    "form": "hungry enough to eat a horse and chase the jockey",
+    "gloss": "Ravenous.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current"
+   },
+   "hungry-enough-to-eat-the-arse-out-of-a-duck": {
+    "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+    "form": "hungry enough to eat the arse out of a low-flyin' duck",
+    "gloss": "Starving.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 4,
+    "vulgarity": 2,
+    "register": "current"
+   },
+   "knackered": {
+    "id": "knackered",
+    "form": "knackered",
+    "gloss": "Exhausted.",
+    "frame": "adj",
+    "concepts": [
+     "TIRED"
+    ],
+    "level": 1,
+    "vulgarity": 0,
+    "register": "current",
+    "riffs": [
+     {
+      "text": "eyelids heavy as wet blankets",
+      "tone": "plain",
+      "best": true
+     }
+    ]
+   },
+   "mate": {
+    "id": "mate",
+    "form": "mate",
+    "gloss": "A friend; also a general form of address.",
+    "frame": "np",
+    "concepts": [
+     "FRIEND"
+    ],
+    "level": 1,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     "https://history.cass.anu.edu.au/centres/andc/australian-words-m"
+    ]
+   },
+   "out-on-poss-feet": {
+    "id": "out-on-poss-feet",
+    "form": "out on {poss} feet",
+    "gloss": "Extremely tired, almost unable to stay upright.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "TIRED"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "notes": "Shared English, familiar in Australia."
+   },
+   "peckish": {
+    "id": "peckish",
+    "form": "peckish",
+    "gloss": "A bit hungry.",
+    "frame": "adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "notes": "Shared with British English."
+   },
+   "rooted": {
+    "id": "rooted",
+    "form": "rooted",
+    "gloss": "Completely done for.",
+    "frame": "adj",
+    "concepts": [
+     "TIRED",
+     "BROKEN"
+    ],
+    "level": 3,
+    "vulgarity": 1,
+    "register": "current",
+    "notes": "\"Root\" is Australian slang for sex, so \"rooted\" (exhausted; broken) is cheeky but Dad-level (Rob, 2026-10-18). Never use \"root\" for US \"root for (a team)\"; Australians say \"barrack for\". \"Get rooted\" is a rude brush-off, a different sense."
+   },
+   "starvin": {
+    "id": "starvin",
+    "form": "starvin'",
+    "gloss": "Very hungry.",
+    "frame": "adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current"
+   },
+   "stuffed": {
+    "id": "stuffed",
+    "form": "stuffed",
+    "gloss": "Exhausted, broken, or full of food.",
+    "frame": "adj",
+    "concepts": [
+     "TIRED",
+     "BROKEN",
+     "FULL"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current"
+   },
+   "zonked": {
+    "id": "zonked",
+    "form": "zonked",
+    "gloss": "Completely worn out.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "TIRED"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "notes": "General English, noted as such.",
+    "sources": [
+     "https://en.wiktionary.com/wiki/zonked",
+     "https://www.deseret.com/2000/9/10/20679388/australian-slang/",
+     "https://dictionary.cambridge.org/dictionary/english/zonked"
+    ]
+   }
+  },
+  "withheld": []
+ }
+}
