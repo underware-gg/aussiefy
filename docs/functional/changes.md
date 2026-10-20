@@ -167,6 +167,6 @@ Tests: [the contract](../../tests/functional/test_changes.py),
 [the engine hooks](../../tests/architecture/test_engine_hooks.py).
 
 
-Version2 adds optional applied `semantic_effects` to substitution alternatives and locked options, and
+Version 2 adds optional applied `semantic_effects` to substitution alternatives and locked options, and
 recognises `quantity_approximation` alongside `opinion`. Existing spans, IDs and rendering rules are unchanged.
 Consumers validating against the strict v1 schema must use the v2 schema for this package version.
