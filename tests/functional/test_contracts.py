@@ -9,7 +9,7 @@ from aussiefy import harness
 from aussiefy.terms import fold, form_key, phrase_kept, restore_g, strip_markup
 
 DIALS = {"level", "level_name", "vulgarity", "vulgarity_name", "policy_warnings"}
-ENVELOPE = DIALS | {"profile_config"}   # a document operation's; lookup reads no profile settings, so carries DIALS
+ENVELOPE = DIALS | {"profile_config", "theme_permissions"}   # lookup carries themes but no numeric profile
 DOCUMENT = {"document_type", "document_type_source", "genre", "genre_scores", "document_config", "document_overrides"}
 TEXT = ('She was very tired and hungry. "Are you crazy?" he asked. The proposition was conceived with considerable '
         "deliberation and dedicated to posterity.")
@@ -22,7 +22,7 @@ def test_every_toolkit_result_carries_the_policy_envelope(translator):
     for r in results:
         assert ENVELOPE <= set(r), sorted(r)
     looked_up = harness.lookup("very tired", translator=translator)
-    assert DIALS <= set(looked_up) and "profile_config" not in looked_up
+    assert DIALS | {"theme_permissions"} <= set(looked_up) and "profile_config" not in looked_up
     # the dials are independent: a level's default vulgarity, overridden either way, by number or name
     assert harness.guide(level="blow-in", translator=translator)["vulgarity_name"] == "nan"
     assert harness.guide(level=2, vulgarity="tradie", translator=translator)["vulgarity"] == 3
@@ -62,7 +62,7 @@ def test_lint_shape(translator):
 
 def test_lookup_shape(translator):
     out = harness.lookup("very tired", translator=translator)
-    assert set(out) == DIALS | {"query", "results"}
+    assert set(out) == DIALS | {"theme_permissions", "query", "results"}
     assert all({"id", "form", "gloss", "frame", "level", "vulgarity", "register", "concepts", "match", "score"}
                <= set(r) for r in out["results"])
     assert "note" in harness.lookup("zzqqxx", translator=translator)
@@ -93,7 +93,7 @@ def test_brief_is_what_yarn_sends(translator):
 
     s = brief("She was very tired.", level=4, seed=3, embellishment="troppo", translator=translator)
     assert set(s.payload) == {"ORIGINAL", "LEVEL", "VULGARITY", "EMBELLISHMENT", "GENRE", "PLANNED_PHRASES",
-                              "RIFFS", "OPENINGS", "DIFFICULT_SENTENCES", "DOCUMENT_CONFIG", "PROFILE_CONFIG"}   # troppo writes first: no draft
+                              "RIFFS", "OPENINGS", "DIFFICULT_SENTENCES", "DOCUMENT_CONFIG", "PROFILE_CONFIG", "THEME_PERMISSIONS"}   # troppo writes first: no draft
     assert set(brief("She was very tired.", translator=translator).payload) == (   # a retelling's dinkum
         set(s.payload) | {"ENGINE_DRAFT"})
     assert s.payload["LEVEL"] == 4 and s.vulgarity == s.payload["VULGARITY"]

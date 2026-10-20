@@ -57,7 +57,8 @@ def test_a_second_concept_cannot_rescue_an_unsupported_negated_sense(translator,
 @pytest.mark.parametrize('query', ['not drunk but tired', 'not tired yesterday but tired today'])
 def test_an_independent_positive_occurrence_supplies_its_own_meaning_path(translator, query):
     found = results(translator, query)
-    assert any(r['id'] == 'stonkered' for r in found)
+    assert any(r['id'] == 'stonkered-tired' for r in found)
+    assert all(r['id'] != 'stonkered' for r in found)
     assert 'TIRED' in concepts(found)
 
 

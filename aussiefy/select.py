@@ -11,6 +11,7 @@ from .policy import Effective, weighted_index
 from .schema import Entry
 from .realise import question_form
 from .context import tone_weight
+from .evidence import theme_rejection
 
 # detection frame -> entry frames that can fill it
 COMPATIBLE = {
@@ -49,6 +50,8 @@ def dial_rejection(entry: Entry, eff: Effective, *, include_gated: bool = False)
     the level or the vulgarity (shared with lookup)."""
     if entry.status == "omit":
         return f"status omit (flags: {', '.join(entry.flags) or 'none'})"
+    if reason := theme_rejection(entry, eff.permitted_themes):
+        return reason
     if not include_gated and entry.status == "gate" and "all" not in eff.unlock:
         locked = tuple(sorted(set(entry.flags) - eff.unlock))
         if locked or not entry.flags:

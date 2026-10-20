@@ -31,7 +31,7 @@ from .errors import UserError
 from .loader import DATA_DIR
 from .markup import detect_markup
 from .terms import fold
-from .policy import DocumentOverrides
+from .policy import DocumentOverrides, theme_permissions
 from .profile import PROFILE_KEYS, ProfileOverrides
 from .markup import MARKUPS
 from .schema import CLASSES, GARNISH_KEYS
@@ -51,6 +51,8 @@ within the original propositions; preserving facts does not require leaving all 
 Respect exact quotes, protected technical terms, markup and headings where the contract requires them to
 stay unchanged. Bold prose labels are not automatically headings. Vulgarity is a cap, not a quota. Disabled
 behaviours stay disabled; profile probabilities are not exact output quotas.
+When theme_permissions is recorded, respect every subject permission independently of profanity while
+preserving original subject matter. Older snapshots without it did not record a theme policy.
 """
 CONTRACT_INSTRUCTIONS = ("Apply EVALUATION_CONTRACT to every anonymous candidate.\n" + CONTRACT_GUIDANCE
                          + "Do not penalise required preservation. Keep the eight rubric criteria and score "
@@ -187,13 +189,13 @@ class Packet:
 def _check_contract(contract, where: str) -> None:
     required = {"level", "vulgarity", "document_type", "genre", "document_config", "profile_config", "embellishment", "markup",
                 "markup_rules", "english"}
-    if not isinstance(contract, dict) or set(contract) != required:
+    if not isinstance(contract, dict) or set(contract) not in (required, required | {"theme_permissions"}):
         raise UserError(f"{where}: evaluation_contract needs {', '.join(sorted(required))}")
     if (type(contract["level"]) is not int or contract["level"] not in range(1, 6)
             or type(contract["vulgarity"]) is not int or contract["vulgarity"] not in range(4)):
         raise UserError(f"{where}: invalid evaluation_contract dials")
     document, profile = contract["document_config"], contract["profile_config"]
-    if (not isinstance(document, dict) or set(document) != {f.name for f in fields(DocumentOverrides)} - {"profile"}
+    if (not isinstance(document, dict) or set(document) != {f.name for f in fields(DocumentOverrides)} - {"profile", "themes"}
             or not isinstance(profile, dict) or set(profile) != set(PROFILE_KEYS)):
         raise UserError(f"{where}: evaluation_contract needs complete document_config and profile_config")
     nested = {"substitution": CLASSES, "garnish": GARNISH_KEYS, "max_garnish": GARNISH_KEYS,
@@ -202,6 +204,12 @@ def _check_contract(contract, where: str) -> None:
     if any(not isinstance(profile[key], dict) or set(profile[key]) != set(keys) for key, keys in nested.items()):
         raise UserError(f"{where}: evaluation_contract needs complete nested profile_config maps")
     try:
+        if "theme_permissions" in contract:
+            from .evidence import THEMES
+            themes = contract["theme_permissions"]
+            if not isinstance(themes, dict) or set(themes) != set(THEMES):
+                raise UserError("theme_permissions must record all nine themes")
+            DocumentOverrides.parse({"themes": themes})
         DocumentOverrides.parse(document)
         ProfileOverrides.parse(profile)
     except UserError as exc:
@@ -238,6 +246,7 @@ def _evaluation_contract(original: str, *, level: int | str, vulgarity: int | st
                 "genre": {"name": result.genre.name, "guidance": result.genre.policy.guidance},
                 "document_config": result.genre.envelope(result.embellishment.step)["document_config"],
                 "profile_config": result.profile_config,
+                "theme_permissions": theme_permissions(result.permitted_themes),
                 "embellishment": {"name": result.embellishment.name, "guidance": result.embellishment.guidance},
                 "markup": markup, "markup_rules": MARKUP_RULE.format(markup=markup) if markup != "text" else None,
                 "english": result.english}

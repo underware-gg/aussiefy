@@ -47,6 +47,7 @@
   incoherence: 3
   gloss: Not very bright.
 - id: stubby-short-of-a-six-pack
+  themes: [drinking]
   form: a stubby short of a six-pack
   concept: [STUPID]
   frame: predicate_adj
@@ -62,6 +63,7 @@
   gloss: Not very bright or sensible.
   notes: "Aus/NZ; means not very bright or a bit odd. Predicative only (\"he's not the full quid\")."
 - id: all-froth-and-no-beer
+  themes: [drinking]
   form: all froth and no beer
   concept: [ALL_TALK]
   frame: predicate_adj
@@ -120,6 +122,7 @@
   incoherence: 5
   gloss: Pointless.
 - id: tits-on-a-bull
+  themes: [sex]
   form: as useless as tits on a bull
   concept: [USELESS]
   frame: predicate_adj
@@ -150,6 +153,7 @@
   incoherence: 3
   gloss: Very happy.
 - id: grinning-like-a-shot-fox
+  themes: [death, violence]
   form: grinning like a shot fox
   concept: [HAPPY]
   frame: predicate_adj
@@ -157,6 +161,7 @@
   incoherence: 4
   gloss: Smugly delighted.
 - id: crook-as-rookwood
+  themes: [death]
   form: crook as Rookwood
   concept: [SICK]
   frame: predicate_adj
@@ -172,16 +177,32 @@
   incoherence: 3
   gloss: Very sick.
 - id: full-as-a-goog
+  themes: [drinking]
   form: full as a goog
-  concept: [FULL, DRUNK]
+  concept: [DRUNK]
   frame: predicate_adj
   semantic_degree: {DRUNK: strong}
   intensity: 4
   incoherence: 4
-  gloss: Stuffed with food, or drunk; a goog is an egg.
-  register: "dated"
-  notes: "Australian since at least the 1920s (a 1927 Qld newspaper). The main recorded sense is very drunk; \"stuffed with food\" is the other. Old-timer flavour: younger speakers say \"maggoted\" or \"smashed\"."
+  gloss: Very drunk; a goog is an egg.
+  register: dated
+  notes: The historical id retains the alcohol sense. Food fullness has its own sense record, so disabling alcohol does not suppress it. The earlier unsourced 1927 date claim is not retained.
+- id: full-as-a-goog-food
+  form: full as a goog
+  concept: [FULL]
+  frame: predicate_adj
+  intensity: 4
+  incoherence: 4
+  gloss: Completely full after eating; a goog is an egg.
+  register: dated
+  sources:
+  - url: https://history.cass.anu.edu.au/centres/andc/australian-words-g
+    kind: scholarly_dictionary
+    publisher: Australian National Dictionary Centre
+    supports: [term, meaning, australian_use]
+    note: The goog section records food fullness separately from drunkenness and includes an Australian meal example. No first-use date is inferred for this sense.
 - id: full-as-a-boot
+  themes: [drinking]
   form: full as a boot
   concept: [DRUNK]
   frame: predicate_adj
@@ -189,6 +210,7 @@
   incoherence: 4
   gloss: Very drunk.
 - id: off-their-face
+  themes: [drinking]
   form: off {poss} face
   concept: [DRUNK]
   frame: predicate_adj
@@ -197,7 +219,7 @@
   vulgarity: 1
   profane: false
   incoherence: 4
-  gloss: Extremely drunk or high.
+  gloss: Extremely drunk.
 - id: hungry-enough-horse-jockey
   form: hungry enough to eat a horse and chase the jockey
   concept: [HUNGRY]
@@ -241,6 +263,7 @@
     note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
       hunt.'
 - id: dry-as-a-dead-dingo
+  themes: [death, sex]
   form: dry as a dead dingo's donger
   concept: [THIRSTY]
   frame: predicate_adj
@@ -378,12 +401,14 @@
   incoherence: 2
   gloss: Take a day off claiming to be ill.
 - id: see-a-man-about-a-dog
+  themes: [bodily_functions]
   form: see a man about a dog
   concept: [TOILET_BREAK]
   frame: vp
   incoherence: 3
   gloss: A coy excuse for leaving, usually for the toilet.
 - id: point-percy
+  themes: [bodily_functions, sex]
   form: point Percy at the porcelain
   concept:
   - URINATE
@@ -503,6 +528,7 @@
   incoherence: 2
   gloss: Raining heavily.
 - id: cow-on-a-flat-rock
+  themes: [bodily_functions]
   form: "{subj} {be} raining like a cow pissing on a flat rock"
   concept: [RAINING_HARD]
   frame: clause
@@ -548,6 +574,8 @@
 
 # --- added for the meanings in the Gettysburg Address (general-purpose) -----------
 - id: cark-it
+  plain_sense: true
+  themes: [death]
   form: cark it
   concept: [DIE]
   frame: vp
@@ -680,6 +708,7 @@
   notes: Shared with other Englishes, but everyday in Australia.
   gloss: Be glaringly obvious or out of place.
 - id: stick-out-like-a-country-dunny
+  themes: [bodily_functions]
   form: stick out like a country dunny
   concept: [CONSPICUOUS]
   frame: vp
@@ -687,6 +716,7 @@
   incoherence: 4
   gloss: Be impossible to miss, like an outhouse alone in a paddock.
 - id: stick-out-like-dogs-balls
+  themes: [sex]
   form: stick out like dogs' balls
   concept: [CONSPICUOUS]
   frame: vp
@@ -701,6 +731,7 @@
   incoherence: 3
   gloss: Glaringly obvious.
 - id: obvious-dogs-balls-pred
+  themes: [sex]
   form: as obvious as dogs' balls
   concept: [CONSPICUOUS]
   frame: predicate_adj
@@ -802,6 +833,7 @@
   class: phrase
   gloss: Alive and going.
 - id: go-to-meet-maker
+  themes: [religion, death]
   form: go to meet {poss} maker
   concept: [DIE]
   frame: vp
@@ -886,6 +918,7 @@
   notes: Shared English (originally American), well used in Australia.
   gloss: Bitterly cold.
 - id: cold-enough-brass-monkey
+  themes: [sex]
   form: cold enough to freeze the balls off a brass monkey
   concept: [FREEZING]
   frame: predicate_adj
@@ -1123,6 +1156,7 @@
   incoherence: 4
   gloss: Can't see a thing.
 - id: built-like-a-brick-shithouse
+  themes: [bodily_functions]
   form: built like a brick shithouse
   concept: [BIG_STRONG]
   frame: predicate_adj
@@ -1133,6 +1167,7 @@
   gloss: Massive and solid.
   reads_as: general
 - id: enough-to-make-a-brown-dog-spew
+  themes: [bodily_functions]
   form: enough to make a brown dog spew
   concept: [DISGUSTING]
   frame: predicate_adj
@@ -1140,13 +1175,23 @@
   incoherence: 4
   gloss: Revolting.
 - id: off-their-chops
+  themes: [drinking]
   form: off {poss} chops
-  concept: [HIGH, DRUNK]
+  concept: [DRUNK]
   frame: predicate_adj
   intensity: 5
   incoherence: 4
-  gloss: Out of it on drink or drugs.
+  gloss: Out of it on alcohol.
+- id: off-their-chops-high
+  themes: [drugs]
+  form: off {poss} chops
+  concept: [HIGH]
+  frame: predicate_adj
+  intensity: 5
+  incoherence: 4
+  gloss: Out of it on drugs.
 - id: high-as-a-kite
+  themes: [drugs]
   form: high as a kite
   concept: [HIGH]
   frame: predicate_adj
@@ -1213,6 +1258,7 @@
   incoherence: 3
   gloss: Has had more than enough.
 - id: wouldnt-be-dead-for-quids
+  themes: [death]
   form: "{subj} wouldn't be dead for quids"
   concept: [GLAD_ALIVE]
   frame: clause
@@ -1268,6 +1314,7 @@
   incoherence: 4
   gloss: Utterly cold and loveless.
 - id: have-a-root
+  themes: [sex]
   form: have a root
   concept: [HAVE_SEX]
   frame: vp
@@ -1276,6 +1323,7 @@
   incoherence: 4
   gloss: Have sex. "Root" is the everyday Aussie verb; mind it doesn't mean cheer for a team here.
 - id: top-oneself
+  themes: [death, violence]
   form: top {poss}self
   concept: [SUICIDE]
   frame: vp
@@ -1310,6 +1358,7 @@
   gloss: Cry noisily and wetly.
   reads_as: general
 - id: piss-self-laughing
+  themes: [bodily_functions]
   form: piss {poss}self laughing
   concept: [LAUGH_HARD]
   frame: vp
@@ -1377,6 +1426,7 @@
     last_date: '2026-10-19'
     summary_date: '2026-10-20'
 - id: better-than-a-poke-in-the-eye
+  themes: [violence]
   form: better than a poke in the eye with a burnt stick
   spellings: [better than a poke in the eye with a burned stick]
   variants: [better than a poke in the eye with a burned stick, better than a poke in the eye with a sharp stick]
@@ -1395,6 +1445,7 @@
     last_date: '2026-10-19'
     summary_date: '2026-10-20'
 - id: better-than-a-poke-in-the-eye-pred
+  themes: [violence]
   form: better than a poke in the eye with a burnt stick
   concept: [NOT_BAD]
   frame: predicate_adj

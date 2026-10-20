@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import inspect
 from collections import Counter
 from dataclasses import dataclass, field, fields
 from functools import lru_cache, partial
@@ -21,10 +22,11 @@ from .dialect import text_english
 from .genre import resolve_document, Embellishment, Genre, form_removes
 from .protected import Masked, protected_runs
 from .model import Dictionary
-from .policy import Effective, Policy, envelope, pick_form, resolve, roll
+from .policy import Effective, Policy, envelope, pick_form, resolve, roll, theme_permissions
 from .realise import ARTICLES, fit_article, number_problem, phrase_continues, realise, replacement_span
 from .select import Candidate, candidates, mapping_effects, semantic_rejection, usable_forms, weighted_pick
 from .schema import Entry, SchemaError
+from .semantic_checks import theme_issues
 from .terms import form_key
 from .text import (COMMON_STARTERS, DATELINE, MID_SENTENCE_NAME, OPEN_QUOTES, QUOTES, SCRIPT_LINE, Token, capital_is_positional, fix_articles, heading_lines, match_case,
                    document_spans, mentioned_spans, held_spans, sentences, tokenize)
@@ -145,6 +147,7 @@ class Result:
     garnish: list[GarnishRecord]
     phonetic: list[PhoneticRecord]
     warnings: list[str]
+    permitted_themes: frozenset[str]
     deterministic_text: str = ""
     surface: dict[str, Any] | None = None
     rewrites: list[RewriteRecord] = field(default_factory=list)
@@ -162,7 +165,8 @@ class Result:
     imagery: list[dict] = field(default_factory=list)
 
     def envelope(self) -> dict[str, Any]:
-        return {**envelope(self.level, self.vulgarity, self.warnings), "profile_config": self.profile_config}
+        return {**envelope(self.level, self.vulgarity, self.warnings), "profile_config": self.profile_config,
+                "theme_permissions": theme_permissions(self.permitted_themes)}
 
     def sentence_text(self, i: int) -> str:
         return self.source[slice(*self.sentences[i])]
@@ -286,7 +290,8 @@ class Translator:
         genre = _context[0] if _context is not None else resolve_document(masked.prose(), masked.source, config=self.dictionary.genres,
                         document_type=pol.document_type, document_config=pol.document_config)
         mood = _composition.mood if _composition is not None and _composition.mood is not None else text_mood(text)
-        run = _Run(text, pol, resolve(pol, self.dictionary), mood, is_chant(sents), masked, genre,
+        effective = _composition.effective if _composition is not None else resolve(pol, self.dictionary)
+        run = _Run(text, pol, effective, mood, is_chant(sents), masked, genre,
                    _context[1] if _context is not None else text_english(pol.english, masked.prose(), self.dictionary.us_spellings),
                    genre.setting(pol.embellishment), composition=_composition, observer=_observer)
         if _composition is not None:
@@ -339,6 +344,7 @@ class Translator:
             warnings.append(f"{why} no swear infixes, intensifiers or sweary garnish: vulgarity "
                             f"{run.eff.vulgarity} reaches its word swaps only")
         return Result(final, source, pol.level, pol.seed, run.records, run.garnish, phon, warnings,
+                      permitted_themes=run.eff.permitted_themes,
                       deterministic_text=final, rewrites=run.rewrites, difficult=run.difficult,
                       vulgarity=run.eff.vulgarity, mood=run.mood, genre=run.genre,
                       sentences=[(s[0].start, s[-1].end) for s in sents], dialect=run.dialect,
@@ -467,8 +473,7 @@ class Translator:
         if sent.quiet or sent.prefix_only:
             return
         for rec in records:
-            offers = image_offers(self.dictionary, rec.det, sent.tokens, run.eff.level, run.eff.vulgarity,
-                                  run.embellishment)
+            offers = image_offers(self.dictionary, rec.det, sent.tokens, run.eff, run.embellishment)
             if not offers:
                 continue
             run.imagery.append({"term": rec.text, "for": rec.text, "riffs": [o.card() for o in offers]})
@@ -547,7 +552,7 @@ class Translator:
         if not run.embellishment.entry_riffs or choice.entry.id in run.state.riffed:
             return None, ""
         toks, state, eff = sent.tokens, run.state, run.eff
-        riffs = choice.entry.riffs_within(eff.vulgarity)
+        riffs = choice.entry.riffs_within(eff.vulgarity, eff.permitted_themes)
         if not riffs or not self._riff_room(end, choice.entry.frame, det.start, sent, run):
             return None, ""
         riff = pick_riff(riffs, run.mood, roll(run.pol.seed, "riff-pick", *sent.key, det.start)).text
@@ -581,10 +586,16 @@ class Translator:
         if not reason:
             return out
         planned = [r.output for r in recs if r.substituted]
-        new, status = rewriter.rewrite(sent.text, out, planned, level=run.pol.level,
-                                       vulgarity=run.eff.vulgarity, seed=run.pol.seed)
+        settings = {"level": run.pol.level, "vulgarity": run.eff.vulgarity, "seed": run.pol.seed}
+        parameters = inspect.signature(rewriter.rewrite).parameters
+        # Existing custom hooks have an explicit old signature; policy-aware hooks opt into the new input.
+        if "permitted_themes" in parameters or any(p.kind == inspect.Parameter.VAR_KEYWORD for p in parameters.values()):
+            settings["permitted_themes"] = run.eff.permitted_themes
+        new, status = rewriter.rewrite(sent.text, out, planned, **settings)
         if new and protected_runs(new) != protected_runs(out):
             new, status = None, "rejected: it changed protected markup (code, a link, a tag)"
+        if new and theme_issues(new, sent.text, self.dictionary, run.eff.permitted_themes):
+            new, status = None, "rejected: it introduced known wording with forbidden themes"
         put_back = partial(run.masked.restore, whole=False)
         run.rewrites.append(RewriteRecord(sent.index, put_back(sent.text), put_back(out), new and put_back(new),
                                           reason, status, rewriter.model))
@@ -953,6 +964,7 @@ class DocumentPart:
     starts_sentence: bool
     ends_sentence: bool
     last: bool
+    effective: Effective
     quiet: bool = False
     last_contexts: frozenset[str] = frozenset()
     written: frozenset[str] | None = None

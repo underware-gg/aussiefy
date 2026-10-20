@@ -27,7 +27,7 @@ from .cards import entry_card, short_card, shows_riffs
 from .terms import fold, form_key, strip_markup
 from .genre import resolve_document
 from .imagery import lookup_images
-from .policy import envelope, parse_embellishment
+from .policy import envelope, parse_embellishment, theme_permissions
 
 
 
@@ -260,7 +260,8 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         results = [short_card(e) for _, e, _ in scored[:limit]]
     else:
         riffs = shows_riffs(setting)
-        results = [{**entry_card(e, cap, riffs), "match": how, "score": round(s, 2)} for s, e, how in scored[:limit]]
+        results = [{**entry_card(e, cap, riffs, permitted_themes=eff.permitted_themes),
+                    "match": how, "score": round(s, 2)} for s, e, how in scored[:limit]]
     for card in results:
         entry = d.entries[card["id"]]
         effects = effects_for(entry)
@@ -270,8 +271,9 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         if reason:
             card.update(effects_permitted=False, effect_rejection=reason)
     # a lookup reads no profile settings, so its envelope is the dials alone (no profile_config)
-    out = {"query": query, **envelope(eff.level, eff.vulgarity, eff.warnings), "results": results}
-    images = lookup_images(d, query, eff.level, cap, setting, limit)
+    out = {"query": query, **envelope(eff.level, eff.vulgarity, eff.warnings),
+           "theme_permissions": theme_permissions(eff.permitted_themes), "results": results}
+    images = lookup_images(d, query, eff, setting, limit)
     if images:
         out["imagery"] = images
     if not results and not images:

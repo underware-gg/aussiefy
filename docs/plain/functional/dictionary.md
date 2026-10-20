@@ -28,6 +28,7 @@ aussiefy/data/
   source_policy.yaml   sites the scraper must not bulk-extract (reference-only)
   sources.yaml         structured supplemental citations per entry (also written by `dev review --apply`)
   attestation.yaml     versioned provisional evidence weights and selection factors
+  themes.yaml          complete subject permissions for each vulgarity tier
   model/               the bundled static embedding model
   entries/
     lexical.yaml       one-word swaps: nouns, adjectives, adverbs
@@ -93,7 +94,7 @@ Entries, riffs and imagery share these stored fields:
 | `origin`, `origin_language` | Australian, British, Irish, American, Aboriginal, other or unknown; language where known |
 | `australian_use`, `reads_as` | Common/uncommon here, and the variety it feels like (`australian`, `general`, or another variety) |
 | `dated_by_curator`, `register` | A curator's year/decade/range fallback, and current/dated/archaic currency |
-| `themes` | Explicit subject matter tags; tier permissions arrive in the next package slice |
+| `themes` | Explicit reviewed subject tags; exact tier defaults and overrides are described under [subject permissions](translation-controls.md#subject-permissions) |
 | `doubtful_definition`, `misreadable` | Definition uncertainty versus a real sense liable to modern misreading |
 
 Sources use kinds `scholarly_dictionary`, `slang_dictionary`, `crowd_dictionary`, `literature`, `media`,

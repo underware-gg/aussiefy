@@ -97,6 +97,7 @@
   plural: veggies
   gloss: Vegetables.
 - id: coldie
+  themes: [drinking]
   form: a coldie
   concept:
   - COLD_BEER_SERVING
@@ -106,6 +107,8 @@
   plural: coldies
   class: lexical
 - id: tinnie
+  plain_sense: true
+  themes: [drinking]
   form: tinnie
   concept:
   - BEER_CAN
@@ -126,6 +129,7 @@
   plural: Macca's
   gloss: McDonald's.
 - id: bottle-o
+  themes: [drinking]
   form: bottle-o
   concept: [LIQUOR_STORE]
   frame: np
@@ -238,6 +242,7 @@
   plural: rellos
   gloss: A relative.
 - id: dunny
+  themes: [bodily_functions]
   form: dunny
   concept: [TOILET]
   frame: np
@@ -283,6 +288,8 @@
   incoherence: 1
   gloss: A journalist.
 - id: chrissie
+  plain_sense: true
+  themes: [religion]
   form: Chrissie
   spellings: [Chrissy]
   variants: [Chrissy]
@@ -577,6 +584,7 @@
   incoherence: 3
   gloss: Crazy, as if from too long in the tropics.
 - id: pissed
+  themes: [drinking]
   form: pissed
   concept: [DRUNK]
   frame: adj
@@ -588,6 +596,8 @@
   notes: Often used for drunk in Australian English; angry senses also occur. This mapping supplies intoxication,
     while "pissed off" belongs to ANGRY. Bare ambiguous "pissed" is not an automatic DRUNK trigger.
 - id: maggoted
+  plain_sense: true
+  themes: [drinking]
   form: maggoted
   concept: [DRUNK]
   frame: adj
@@ -597,6 +607,8 @@
   incoherence: 3
   gloss: Very drunk.
 - id: rotten
+  plain_sense: true
+  themes: [drinking]
   form: rotten
   concept: [DRUNK]
   frame: adj
@@ -732,6 +744,7 @@
 
 # --- strength calibrated to Australian ears ----------------------------------------
 - id: donger
+  themes: [sex]
   form: donger
   concept: [PENIS]
   frame: np
@@ -1000,6 +1013,7 @@
   gloss: Terrible; a disaster.
 # --- basics a yarn-mode agent looked up and didn't find -------------------------
 - id: grog
+  themes: [drinking]
   form: grog
   concept: [ALCOHOL]
   frame: np
@@ -1073,6 +1087,7 @@
   gloss: Enormous.
   reads_as: general
 - id: pokie
+  themes: [gambling]
   form: pokie
   concept: [POKIES]
   frame: np

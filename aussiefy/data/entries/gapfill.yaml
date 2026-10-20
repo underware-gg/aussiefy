@@ -307,6 +307,7 @@
       hunt.'
   misreadable: true
 - id: sparrows-fart
+  themes: [bodily_functions]
   form: at sparrow's fart
   spellings:
   - at sparrow fart
@@ -891,6 +892,7 @@
     note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
       hunt.'
 - id: biffo
+  themes: [violence]
   form: a bit of biffo
   variants:
   - biffo
@@ -1033,6 +1035,7 @@
     note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
       hunt.'
 - id: a-counter-lunch
+  themes: [drinking]
   form: a counter lunch
   variants: []
   concept:
@@ -1149,6 +1152,7 @@
     note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
       hunt.'
 - id: full-as-a-state-school
+  themes: [drinking]
   form: full as a state school
   concept:
   - DRUNK
@@ -1369,6 +1373,7 @@
     note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
       hunt.'
 - id: perv-on
+  themes: [sex]
   form: perv on {obj}
   variants:
   - have a perv at {obj}
@@ -1458,6 +1463,7 @@
     note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
       hunt.'
 - id: shickered
+  themes: [drinking]
   form: shickered
   concept:
   - DRUNK
@@ -1869,6 +1875,8 @@
       hunt.'
   doubtful_definition: true
 - id: a-bit-full
+  plain_sense: true
+  themes: [drinking]
   form: a bit full
   variants: []
   concept:
@@ -2007,6 +2015,7 @@
     note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
       hunt.'
 - id: give-a-hiding
+  themes: [violence]
   form: give {obj} a hiding
   concept:
   - THRASH
@@ -2017,6 +2026,8 @@
   register: current
   gloss: Beat someone soundly, in a fight or on the scoreboard.
 - id: half-cut
+  plain_sense: true
+  themes: [drinking]
   form: half-cut
   concept:
   - DRUNK
@@ -2160,6 +2171,7 @@
   gloss: Very scared (short for packing death/shit).
   doubtful_definition: true
 - id: piss-up
+  themes: [drinking]
   form: a piss-up
   concept:
   - BOOZE_UP
@@ -2586,6 +2598,7 @@
     note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
       hunt.'
 - id: molo
+  themes: [drinking]
   form: molo
   concept:
   - DRUNK
@@ -2666,6 +2679,7 @@
     note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
       hunt.'
 - id: pres
+  themes: [drinking]
   form: pres
   variants:
   - pre-drinks
@@ -2766,6 +2780,7 @@
     note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
       hunt.'
 - id: skol
+  themes: [drinking]
   form: skol {obj}
   variants:
   - scull {obj}
@@ -2786,17 +2801,46 @@
     note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
       hunt.'
 - id: stonkered
+  themes: [drinking]
   form: stonkered
   concept:
   - DRUNK
-  - TIRED
   frame: predicate_adj
   semantic_degree: {DRUNK: unmarked}
   intensity: 4
   vulgarity: 0
   incoherence: 4
   register: dated
-  gloss: 'Done in: very drunk, or knocked flat with exhaustion.'
+  gloss: Drunk; done in by alcohol.
+  sources:
+  - url: https://macquariedictionary.com.au/?p=11172
+    kind: scholarly_dictionary
+    publisher: Macquarie Dictionary
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.merriam-webster.com/dictionary/stonkered
+    kind: scholarly_dictionary
+    publisher: merriam-webster.com
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+  - url: https://www.worldwidewords.org/qa-sto3.html
+    kind: slang_dictionary
+    publisher: worldwidewords.org
+    supports: []
+    note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
+      hunt.'
+- id: stonkered-tired
+  form: stonkered
+  concept:
+  - TIRED
+  frame: predicate_adj
+  intensity: 4
+  vulgarity: 0
+  incoherence: 4
+  register: dated
+  gloss: Knocked flat with exhaustion.
   sources:
   - url: https://macquariedictionary.com.au/?p=11172
     kind: scholarly_dictionary
@@ -3442,6 +3486,8 @@
     do you think?" it is safe now.
 
 - id: full-alcohol
+  plain_sense: true
+  themes: [drinking]
   form: full
   concept: [DRUNK]
   frame: predicate_adj

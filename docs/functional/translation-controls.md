@@ -152,15 +152,60 @@ the same immutable snapshot.
 Tests isolate [advanced profile behaviours](../../tests/functional/test_profile_overrides.py), including
 zero/one probabilities, shared limits, spacing, drawl, swearing, rewrite dispatch, markup and surface parity.
 
+## Subject permissions
+
+Vulgarity sets both the swear limit and defaults for reviewed subject tags. These are independent controls:
+`document_config.themes` changes subject permissions without raising the swear limit. Each expression must
+have permission for every theme it carries. The defaults live in `aussiefy/data/themes.yaml`:
+
+| Theme key | Nan (0) | Dad (1) | Uncle Bob (2) | Tradie (3) |
+|---|---|---|---|---|
+| `drinking` | yes | yes | yes | yes |
+| `gambling` | yes | yes | yes | yes |
+| `religion` | yes | yes | yes | yes |
+| `death` | yes | yes | yes | yes |
+| `drinking_games` | no | yes | yes | yes |
+| `bodily_functions` | no | yes | yes | yes |
+| `violence` | no | no | yes | yes |
+| `sex` | no | no | yes | yes |
+| `drugs` | no | no | yes | yes |
+
+Pass exact booleans for known keys. Omitted keys inherit the tier's defaults, including in Custom; `{}`
+changes sweet bugger\-all. Crikey, subject filtering is a core eligibility check, rather than an optional document performance.
+Enablin' a theme can't raise the swear cap, enable garnish or unlock a held\-back meanin'.
+
+```sh
+aussiefy translate 'He was very drunk.' --vulgarity nan --document-config '{"themes":{"drinking":false}}'
+```
+
+The resolved nine booleans appear as `theme_permissions` in results, plans, lookup, lint, verification and
+explain output; agent briefs include `THEME_PERMISSIONS`. Copy the reported object into
+`document_config.themes` to reproduce it. Permission resolves once per operation, including strict Markdown
+units. Editor probes for alternatives at a higher swear cap retain the original theme restrictions.
+Entries, garnish, entry riffs and contextual images share the check. Neither Troppo nor `include_gated`
+bypasses it; labelled Bulldust still follows its existing embellishment permissions.
+
+Tags describe a reviewed expression's subject or concrete image, rather than its word origins: *donger* and
+*perv on* concern sex; *wanker* used solely as a contemptuous insult doesn't. A lizard drinkin' water is
+not an alcohol reference. Food'n alcohol senses of *full as a goog*, exhaustion'n alcohol senses of
+*stonkered*, and drug'n alcohol senses of *off one's chops* have separate records.
+
+Restrictions prevent newly chosen wording; they don't censor original subject matter. So anyway, lint, verification
+and model acceptance additionally check recognised dictionary forms'n fixed riff/image text, preservin'
+source occurrence counts. Jeez, longer known expressions own their nested words; genuinely ambiguous readings
+stay unresolved. This bounded check doesn't classify arbitrary prose or recognise every slotted image.
+Agents'n model prompts receive the same permissions; the package rejects recognised forbidden additions
+and keeps the deterministic draft if a model violates them.
+
 ## Shared document contract
 
-Now, all controls have the same names'n meaning in Python, CLI, MCP and yarn sessions. Results'n explain mode
+Mind ya, all controls have the same names'n meaning in Python, CLI, MCP and yarn sessions. Results'n explain mode
 report the requested type, resolved type'n effective behaviours. Auto resolves against the complete original,
 including in Markdown'n when checking a draft. `guide` has no source text, so Auto is an error there; select
 General or a named type. Markdown syntax protection is independent of document behaviour.
 
 `english=` / `--english` selects `us`, `uk`, `auto` or `none`. Anyway, the default comes from the profile \(`auto` in
-the bundled profiles\). Jeez, auto uses American spellings to infer US English; ambiguous British words such as
+the bundled profiles\). Auto uses American spellings to infer US English; ambiguous British words such as
 “pants” need `uk`. `none` disables dialect swaps. Plain Australian equivalents \(faucet → tap\) apply at every
 level, separately from slang. `dialect.yaml` owns the vocabulary'n technical/genre exclusions; source
 quotes'n mentioned words have their own protections. POS tags help distinguish nouns, verbs and names;
@@ -169,7 +214,7 @@ the small bundled tagger runs offline without NLTK.
 ## Document modes
 
 The explicit [`--markdown` / `markdown=True`](markdown.md) mode preserves whole links, tables and HTML,
-returns `DocumentResult`, and permits offline ngram/disabled fallback only. Crikey, it resolves genre and English
+returns `DocumentResult`, and permits offline ngram/disabled fallback only. It resolves genre and English
 once for the whole document'n retains separate source/output ranges for each rewritten unit.
 
 The imported `--markup markdown|mdx|auto` / `markup=` contract is an **extended document mode**. It uses opaque

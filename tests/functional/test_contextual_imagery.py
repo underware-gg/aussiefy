@@ -95,13 +95,15 @@ def test_lookup_exposes_unbound_templates_and_honours_settings(translator):
 def test_slot_templates_require_actual_captures(dictionary):
     # Use the public configuration resolver, then probe the grammatical boundary directly.
     from aussiefy.genre import resolve_document
+    from aussiefy.policy import Policy, resolve
+    eff = resolve(Policy(vulgarity=3), dictionary)
     setting = resolve_document('', config=dictionary.genres, document_type='custom', document_config=config()).setting(2)
     det = Detection(0, 1, ('SELFISH',), 'imperative', 3, 'trigger', 'test', captures={})
-    assert not image_offers(dictionary, det, tokenize('selfish'), 5, 3, setting)
+    assert not image_offers(dictionary, det, tokenize('selfish'), eff, setting)
     image = next(i for i in dictionary.imagery if i.id == 'decency-shoes')
     d = replace(dictionary, imagery=(replace(image, frames=('predicate_adj',)),))
     det = Detection(0, 1, ('SELFISH',), 'predicate_adj', 3, 'trigger', 'test', captures={'subj':tokenize('she')[0]})
-    offered = image_offers(d, det, tokenize('selfish'), 5, 3, setting)
+    offered = image_offers(d, det, tokenize('selfish'), eff, setting)
     assert offered[0].text.endswith('her shoes')
 
 
@@ -194,13 +196,14 @@ def test_imagery_root_is_validated_at_loader_boundary(root, data_copy):
 
 def test_imagery_does_not_bypass_swear_cap(dictionary):
     from aussiefy.genre import resolve_document
+    from aussiefy.policy import Policy, resolve
     setting = resolve_document('', config=dictionary.genres, document_type='custom', document_config=config()).setting(2)
     image = parse_imagery(dict(id='strong', text='like a fucking mower', concepts=['BUSY'], usage='Test.'),
                           dictionary.concepts, lambda w: 2 if w == 'fucking' else 0)
     d = replace(dictionary, imagery=(image,))
     det = Detection(0, 1, ('BUSY',), 'predicate_adj', 3, 'trigger', 'test', captures={'subj':tokenize('he')[0]})
-    assert not image_offers(d, det, tokenize('busy'), 5, 1, setting)
-    assert image_offers(d, det, tokenize('busy'), 5, 2, setting)
+    assert not image_offers(d, det, tokenize('busy'), resolve(Policy(vulgarity=1), d), setting)
+    assert image_offers(d, det, tokenize('busy'), resolve(Policy(vulgarity=2), d), setting)
 
 
 def test_lookup_cli_reports_images_and_uses_the_same_configuration(capsys):

@@ -5,6 +5,11 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Add nine reviewed subject themes with data-driven vulgarity defaults and exact boolean overrides,
+  independent of the swear cap. Share resolved permissions across translation, lookup, plans, suggestions,
+  change alternatives and agent/model checks; preserve source subject matter and separate mixed senses.
+  Report the resolved permissions and reject recognised forbidden additions from fresh or cached model output.
+
 - Separate term evidence, origin, Australian use and modern misreading from manual entry gates.
   Migrate citations to structured records, add provisional attestation scoring with live testimony replacement,
   and use the continuous score and a general-English weight in selection. Re-review the old foreign/archaic

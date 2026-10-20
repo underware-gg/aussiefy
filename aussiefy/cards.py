@@ -18,10 +18,10 @@ def shows_riffs(setting: "Embellishment") -> bool:
     return setting.entry_riffs and setting.takes("riff")
 
 
-def riff_cards(e: Entry, cap: int) -> list[dict[str, str]]:
+def riff_cards(e: Entry, cap: int, permitted_themes: frozenset[str] | None = None) -> list[dict[str, str]]:
     """An entry's riffs under the cap, as the toolkit shows them (best first)."""
     return [{"text": r.text, "tone": r.tone, **metadata_dict(r, derived=True), **({"best": True} if i == 0 else {})}
-            for i, r in enumerate(e.riffs_within(cap))]
+            for i, r in enumerate(e.riffs_within(cap, permitted_themes))]
 
 
 def short_card(e: Entry) -> dict[str, Any]:
@@ -38,7 +38,8 @@ def short_card(e: Entry) -> dict[str, Any]:
     return card
 
 
-def entry_card(e: Entry, cap: int = 3, riffs: bool = True) -> dict[str, Any]:
+def entry_card(e: Entry, cap: int = 3, riffs: bool = True, *,
+               permitted_themes: frozenset[str] | None = None) -> dict[str, Any]:
     """The full card: meaning, level and vulgarity, register and region, notes, sources, the riffs under the
     vulgarity cap (riffs: whether the embellishment takes the entry's riffs at all), and a gated entry's flags
     (shown only where the policy unlocked it)."""
@@ -48,8 +49,8 @@ def entry_card(e: Entry, cap: int = 3, riffs: bool = True) -> dict[str, Any]:
         card["semantic_effects"] = list(e.semantic_effects)
     if e.placement:
         card["placement"] = e.placement
-    if riffs and e.riffs_within(cap):
-        card["riffs"] = riff_cards(e, cap)
+    if riffs and (cards := riff_cards(e, cap, permitted_themes)):
+        card["riffs"] = cards
     if e.variants:
         card["variants"] = list(e.variants)
     if e.region:

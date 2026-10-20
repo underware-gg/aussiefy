@@ -41,3 +41,8 @@ DRUNK and HUNGRY families. The source must establish mild or strong degree; surr
 must match, and every recognised target reading must have a known incompatible grade. Unknown or
 ambiguous certificates, negation and additional edits can make the check abstain. This does not rate
 unreviewed families or prove the severity of arbitrary paraphrases.
+
+Known forbidden-theme wording is a major `theme` problem. Checks use the resolved
+[subject permissions](translation-controls.md#subject-permissions), preserve original occurrence counts,
+and leave ambiguous readings unresolved. The same rule applies to checked agent submissions and optional
+model output; it is not a general topic classifier.

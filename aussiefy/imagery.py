@@ -11,7 +11,7 @@ from .context import following_context, positive_context
 from .detect import applicable_concepts
 from .terms import form_key
 from .text import tokenize
-from .evidence import metadata_dict, metadata_rejections
+from .evidence import metadata_dict, metadata_rejections, theme_rejection
 
 
 @dataclass(frozen=True)
@@ -42,10 +42,10 @@ def image_association(image, concepts, setting):
     return None
 
 
-def permitted(image, level, cap, setting):
-    return (setting.takes("riff") and setting.contextual_riffs and image.level <= level
-            and image.vulgarity <= cap and image.exaggeration <= setting.riff_exaggeration
-            and not metadata_rejections(image))
+def permitted(image, eff, setting):
+    return (setting.takes("riff") and setting.contextual_riffs and image.level <= eff.level
+            and image.vulgarity <= eff.vulgarity and image.exaggeration <= setting.riff_exaggeration
+            and not metadata_rejections(image) and not theme_rejection(image, eff.permitted_themes))
 
 
 def excluded_complement(image, tokens, end):
@@ -53,13 +53,13 @@ def excluded_complement(image, tokens, end):
     return bool(image.unless_after) and (not following.known or following.word in image.unless_after)
 
 
-def image_offers(dictionary, det, tokens, level, cap, setting):
+def image_offers(dictionary, det, tokens, eff, setting):
     if not setting.contextual_riffs or not setting.takes("riff") or not positive_context(tokens, det.start, det.end):
         return ()
     out = []
     for image in dictionary.imagery:
         association = image_association(image, det.concepts, setting)
-        if not association or not permitted(image, level, cap, setting) or det.frame not in image.frames:
+        if not association or not permitted(image, eff, setting) or det.frame not in image.frames:
             continue
         if excluded_complement(image, tokens, det.end):
             continue
@@ -73,14 +73,14 @@ def image_offers(dictionary, det, tokens, level, cap, setting):
     return tuple(out)
 
 
-def lookup_images(dictionary, query, level, cap, setting, limit):
+def lookup_images(dictionary, query, eff, setting, limit):
     tokens = tokenize(query)
     matches = list(dictionary.index.find(tokens))
     positive = positive_context(tokens, 0, len(tokens))
     key = form_key(query)
     out = []
     for image in dictionary.imagery:
-        if not permitted(image, level, cap, setting):
+        if not permitted(image, eff, setting):
             continue
         concepts = {cid for m in matches if not excluded_complement(image, tokens, m.end)
                     for cid in applicable_concepts(m.pattern.concepts, dictionary.concepts, tokens, m.end)}

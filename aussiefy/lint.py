@@ -20,7 +20,7 @@ from .markup import markup_changed, mask
 from .model import Dictionary
 from .schema import PLACEHOLDER_RE, Entry
 from .select import semantic_rejection
-from .semantic_checks import composition_issues, degree_issues, mapping_issues
+from .semantic_checks import composition_issues, degree_issues, form_spans, mapping_issues, theme_issues
 from .terms import fold, strip_markup
 from .text import document_spans, HONORIFICS, Token, capital_is_positional, heading_lines, held_spans, sentences, tokenize
 
@@ -134,6 +134,7 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     # where the text already uses dictionary slang (so we don't suggest replacing it): matched with the
     # engine's own matcher, so inflections and slots count ("smashed it to buggery", "kippin'")
     aussie_spans = _aussie_spans(text, tr)
+    issues += theme_issues(text, original, d, eff.permitted_themes, spans=aussie_spans)
     issues += _semantic_issues(text, original, aussie_spans, tr, read_as.setting(pol.embellishment))
     issues += composition_issues(text, original, aussie_spans, d)
     issues += degree_issues(text, original, aussie_spans, d)
@@ -157,7 +158,7 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     return {"ok": not issues, **eff.envelope(), **read_as.envelope(pol.embellishment),
             "issues": issues, "warnings": warnings,
             "suggestions": suggestions[:20],
-            "scope": ("Issues: flagged phrases, known added semantic effects, swearing over the cap, US spelling and US words. Warnings: the "
+            "scope": ("Issues: flagged phrases, known forbidden-theme wording, known added semantic effects, swearing over the cap, US spelling and US words. Warnings: the "
                       "guide's style rules and swearing density" +
                       ("; fidelity to the original (length, names, numbers)." if original is not None else
                        ". Pass the original to also check fidelity.") + " Not checked: invented slang or arbitrary added judgments.")}
@@ -481,12 +482,7 @@ def _names(text: str, tr: Translator) -> set[str]:
 
 
 def _aussie_spans(text: str, tr: Translator) -> list[tuple[int, int, Entry]]:
-    index = tr.dictionary.form_index
-    spans = []
-    for sent in sentences(tokenize(text)):
-        for m in index.find(sent):
-            spans.append((sent[m.start].start, sent[m.end - 1].end, tr.dictionary.entries[m.pattern.entry_id]))
-    return spans
+    return form_spans(text, tr.dictionary)
 
 
 def _inside_quote(text: str, pos: int) -> bool:

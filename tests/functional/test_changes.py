@@ -106,7 +106,7 @@ def test_changes_leave_the_translation_as_translate_gives_it(translator):
 @pytest.mark.parametrize("prefix", ["🦘", "e\u0301", "👨‍👩‍👧‍👦"])
 def test_change_offsets_count_unicode_code_points(translator, mode, prefix):
     cs = aussiefy.translate_changes(prefix + " toilet", translator=translator, level=4, vulgarity=0,
-                                    embellishment=0, **mode)
+                                    embellishment=0, document_config={"themes": {"bodily_functions": True}}, **mode)
     assert cs.text == prefix + " dunny"
     change, = cs.changes
     start = len(prefix) + 1

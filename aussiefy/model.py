@@ -14,7 +14,7 @@ from . import morph
 from .dialect import DialectTable
 from .matcher import Pattern, PatternIndex
 from .schema import Concept, Entry, Imagery
-from .evidence import EvidenceWeights
+from .evidence import EvidenceWeights, TermMetadata
 from .text import COMMON_STARTERS, MASK_WORD_RE, normalise_word, spoken_word
 from .terms import fold, strip_markup
 
@@ -119,6 +119,7 @@ class Dictionary:
     form_index: PatternIndex                    # the Aussie forms themselves -> entries (lint finds slang)
     swears: dict[str, int]                      # word -> vulgarity 1-3 (swears.yaml)
     dialect: DialectTable                       # US and UK words Australians say differently (dialect.yaml)
+    theme_defaults: dict[int, frozenset[str]]     # subject permissions by vulgarity tier (themes.yaml)
     warnings: list[str] = field(default_factory=list)
     swearing: dict[int, SwearProfile] = field(default_factory=dict)   # vulgarity -> how often swearing comes
 
@@ -147,6 +148,11 @@ class Dictionary:
                              for p in self.patterns + self.form_index.patterns if families.intersection(p.concepts)])
 
     # --- derived once, on first use ---------------------------------------------------------------------------
+
+    @cached_property
+    def themed_terms(self) -> tuple[TermMetadata, ...]:
+        return tuple(term for entry in self.entries.values() for term in (entry, *entry.riffs) if term.themes) + tuple(
+            image for image in self.imagery if image.themes)
 
     @cached_property
     def swear_compounds(self) -> dict[str, int]:

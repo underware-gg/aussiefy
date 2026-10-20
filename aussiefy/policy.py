@@ -11,7 +11,7 @@ from .errors import UserError
 from .model import Dictionary, LevelProfile, SwearProfile
 from .profile import ProfileOverrides, profile_config
 from .schema import REGISTERS, UNLOCKS
-from .evidence import TermMetadata
+from .evidence import THEMES, TermMetadata
 
 
 # The dials, by number or by name. Names are aliases: everything inside works in numbers. The level is how thick
@@ -87,6 +87,7 @@ class DocumentOverrides:
     solemn_comic_terms: bool | None = None
     quantity_approximation: bool | None = None
     profile: ProfileOverrides | None = None
+    themes: tuple[tuple[str, bool], ...] | None = None
 
     @classmethod
     def parse(cls, raw):
@@ -111,6 +112,11 @@ class DocumentOverrides:
         for key, value in data.items():
             if key == "profile":
                 data[key] = ProfileOverrides.parse(value)
+            if key == "themes":
+                if (not isinstance(value, dict) or any(not isinstance(k, str) or k not in THEMES for k in value)
+                        or any(type(v) is not bool for v in value.values())):
+                    raise UserError(f"document_config.themes must map names from {', '.join(THEMES)} to true or false")
+                data[key] = tuple((name, value[name]) for name in THEMES if name in value)
             if key in booleans and type(value) is not bool:
                 raise UserError(f"document_config.{key} must be true or false")
             if key in ("riff_exaggeration", "riff_association"):
@@ -135,6 +141,8 @@ class DocumentOverrides:
         values = {f.name: getattr(self, f.name) for f in fields(self) if getattr(self, f.name) is not None}
         if self.profile is not None:
             values["profile"] = self.profile.values()
+        if self.themes is not None:
+            values["themes"] = dict(self.themes)
         return values
 
 
@@ -198,6 +206,10 @@ def envelope(level: int, vulgarity: int, warnings: Sequence[str]) -> dict[str, A
             "vulgarity_name": VULGARITY_NAMES[vulgarity], "policy_warnings": list(warnings)}
 
 
+def theme_permissions(permitted: frozenset[str]) -> dict[str, bool]:
+    return {name: name in permitted for name in THEMES}
+
+
 @dataclass(frozen=True)
 class Effective:
     """The policy resolved against a level profile; what selection actually checks."""
@@ -207,6 +219,7 @@ class Effective:
     registers: tuple[str, ...]
     regions: tuple[str, ...]
     unlock: frozenset[str]
+    permitted_themes: frozenset[str]
     warnings: tuple[str, ...] = ()
     swearing: SwearProfile = SwearProfile()   # how often swearing comes at this vulgarity
     general_pick_factor: float = 0.5
@@ -215,7 +228,8 @@ class Effective:
 
     def envelope(self) -> dict[str, Any]:
         return {**envelope(self.level, self.vulgarity, self.warnings),
-                "profile_config": profile_config(self.profile, self.swearing)}
+                "profile_config": profile_config(self.profile, self.swearing),
+                "theme_permissions": theme_permissions(self.permitted_themes)}
 
     def metadata_weight(self, term: TermMetadata) -> float:
         evidence = 1.0 + self.attestation_pick_bonus * term.attestation.score / self.attestation_max_score
@@ -232,8 +246,11 @@ def resolve(policy: Policy, dictionary: Dictionary) -> Effective:
     swearing = dictionary.swearing.get(vulgarity, SwearProfile())
     if policy.document_config.profile is not None:
         profile, swearing = policy.document_config.profile.apply(profile, swearing)
+    defaults = dictionary.theme_defaults[vulgarity]
+    overrides = dict(policy.document_config.themes or ())
+    permitted = frozenset(name for name in THEMES if overrides.get(name, name in defaults))
     return Effective(policy.level, profile, vulgarity, tuple(registers), tuple(policy.regions),
-                     frozenset(policy.unlock), _warnings(policy, dictionary),
+                     frozenset(policy.unlock), permitted, _warnings(policy, dictionary),
                      swearing=swearing,
                      general_pick_factor=dictionary.evidence_weights.general_pick_factor,
                      attestation_pick_bonus=dictionary.evidence_weights.attestation_pick_bonus,

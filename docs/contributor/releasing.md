@@ -84,12 +84,12 @@ expected\-head lease; ordinary promotion never force\-updates dev or main.
 
 A failed preparation stays on its release branch with reviewable changes. Fix the reported issue and
 resume the same `prepare` command on that branch. Anyway, an existin' candidate is checked again; it's never
-silently rebuilt from another source. Repeated pushes/PR creation reuse matching state'n reject stoushes.
+silently rebuilt from another source. Repeated pushes/PR creation reuse matching state'n reject conflicts.
 
 Resume finish with the same PR/head/base. Well, it inspects the existin' merged PR, immutable tag and GitHub
 release before continuing; matching completed actions are reused, mismatched provenance/tags/notes fail.
 If later dev work arrives, stop'n retain it. After publication, merge the release into dev, resolve any
-stoushes, reconcile verified main with `git merge -s ours origin/main`, push dev, then resume cleanup.
+conflicts, reconcile verified main with `git merge -s ours origin/main`, push dev, then resume cleanup.
 The completed reconciliation must contain both the checked release source'n verified squash commit.
 Don't reset later commits or roll back a published release. A moved main requires explicit inspection.
 

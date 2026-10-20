@@ -96,3 +96,11 @@ this reduces repeated prompt processing and is separate from the on-disk accepte
 
 Yarn mode can do what rules can't \(the present tense, short beats, restructured dialogue\) while the dictionary
 keeps it genuine.
+
+Sentence hooks may accept an optional keyword `permitted_themes` (a frozen set), or `**kwargs`, to receive
+the resolved subject policy. The existing explicit `level`, `vulgarity`, `seed` signature still works;
+the engine checks all hook output for recognised forbidden additions. The built-in sentence and surface
+adapters include `THEME_PERMISSIONS` in prompts and check replies. Sentence cache identity includes those
+permissions, and cached replies pass the same acceptance checks as fresh replies. These checks recognise
+dictionary forms and fixed colour, rather than arbitrary subject matter; see
+[subject permissions](translation-controls.md#subject-permissions).

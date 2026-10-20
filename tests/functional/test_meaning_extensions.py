@@ -76,7 +76,8 @@ def test_a_finite_start_after_a_noun_subject_still_has_its_verb_reading(translat
 
 def test_named_cultural_terms_are_discoverable_without_inventing_their_context(translator):
     for query, entry in [('Goon of Fortune', 'goon-of-fortune'), ('Hills Hoist', 'hills-hoist')]:
-        cards = harness.lookup(query, translator=translator, level=5, vulgarity=0, limit=20)['results']
+        cards = harness.lookup(query, translator=translator, level=5, vulgarity=0, limit=20,
+                               document_config={'themes': {'drinking_games': True}})['results']
         assert entry in {c['id'] for c in cards}
     for source in ['We played a drinking game.', 'They held a party.', 'She bought a rotary clothesline.']:
         assert not selected(render(translator, source)) & {'goon-of-fortune', 'hills-hoist'}

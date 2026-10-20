@@ -3,15 +3,71 @@
 from __future__ import annotations
 
 import re
+from collections import Counter, defaultdict
 from typing import Iterable
 
 from .degree import realised_degree
 from .detect import detect, predicate_lead, resolve_overlaps
 from .genre import Embellishment
 from .model import Dictionary
-from .schema import Entry
+from .schema import Entry, PLACEHOLDER_RE
+from .evidence import theme_rejection
+from .terms import fold, strip_markup
 from .select import mapping_effects, semantic_rejection
 from .text import Token, sentences, tokenize
+
+
+def form_spans(text: str, dictionary: Dictionary) -> list[tuple[int, int, Entry]]:
+    return [(sentence[m.start].start, sentence[m.end - 1].end, dictionary.entries[m.pattern.entry_id])
+            for sentence in sentences(tokenize(text)) for m in dictionary.form_index.find(sentence)]
+
+
+def theme_issues(text: str, original: str | None, dictionary: Dictionary,
+                 permitted: frozenset[str], *, spans: list[tuple[int, int, Entry]] | None = None) -> list[dict]:
+    """Known terms only: preserve source occurrences and leave ambiguous/literal readings unresolved."""
+    if not any(theme_rejection(term, permitted) for term in dictionary.themed_terms):
+        return []
+    fixed = defaultdict(list)
+    for entry in dictionary.entries.values():
+        if entry.type == "garnish":
+            for form in entry.all_forms:
+                fixed[form].append((entry, entry.plain_sense))
+        for riff in entry.riffs:
+            fixed[riff.text].append((riff, False))
+    for image in dictionary.imagery:
+        fixed[image.text].append((image, False))
+    patterns = [(re.compile(r"(?<!\w)" + re.escape(strip_markup(form).replace("’", "'")).replace(r"\ ", r"\s+") + r"(?!\w)", re.I), terms)
+                for form, terms in fixed.items() if not PLACEHOLDER_RE.search(form)]
+
+    def matches(source, known):
+        groups = defaultdict(list)
+        for a, b, entry in known:
+            groups[a, b].append((entry, entry.plain_sense))
+        for pattern, terms in patterns:
+            for match in pattern.finditer(source.replace("’", "'")):
+                groups[match.span()].extend(terms)
+        owned = {}
+        for (a, b), terms in sorted(groups.items(), key=lambda item: (-(item[0][1] - item[0][0]), item[0][0])):
+            if not any(c <= a and b <= d for c, d in owned):
+                owned[a, b] = terms
+        return owned
+
+    current = matches(text, spans if spans is not None else form_spans(text, dictionary))
+    source = original or ""
+    retained = Counter(fold(source[a:b]) for (a, b), terms in matches(source, form_spans(source, dictionary)).items()
+                       if all(not plain and theme_rejection(term, permitted) for term, plain in terms))
+    issues = []
+    for (a, b), terms in sorted(current.items()):
+        if any(plain or not theme_rejection(term, permitted) for term, plain in terms):
+            continue
+        key = fold(text[a:b])
+        if retained[key]:
+            retained[key] -= 1
+            continue
+        blocked = sorted({name for term, _ in terms for name in term.themes if name not in permitted})
+        issues.append({"kind": "theme", "phrase": text[a:b], "themes": blocked,
+                       "why": "introduces known wording with forbidden themes: " + ", ".join(blocked)})
+    return issues
 
 
 def _readings(candidates: Iterable[list[Token]], dictionary: Dictionary):

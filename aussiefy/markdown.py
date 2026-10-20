@@ -10,7 +10,7 @@ import unicodedata
 
 from .engine import DocumentPart, Result, TextState, Translator
 from .genre import Genre, Embellishment
-from .policy import Effective, Policy, envelope
+from .policy import Effective, Policy, envelope, theme_permissions
 
 
 @dataclass(frozen=True)
@@ -55,9 +55,11 @@ class DocumentResult:
     english: str | None
     embellishment: Embellishment
     profile_config: dict
+    permitted_themes: frozenset[str]
 
     def envelope(self) -> dict:
-        return {**envelope(self.level, self.vulgarity, self.warnings), "profile_config": self.profile_config}
+        return {**envelope(self.level, self.vulgarity, self.warnings), "profile_config": self.profile_config,
+                "theme_permissions": theme_permissions(self.permitted_themes)}
 
     def to_dict(self) -> dict:
         return {"format": "markdown", "text": self.text, "source": self.source, **self.envelope(),
@@ -468,7 +470,7 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
         part = DocumentPart(state, first,
                             first < len(boundaries) and boundaries[first][0] >= span.start,
                             last >= 0 and boundaries[last][1] <= span.end,
-                            index == len(spans) - 1, quiet=reading.quiet_at(span.start),
+                            index == len(spans) - 1, effective, quiet=reading.quiet_at(span.start),
                             last_contexts=source_contexts[last] if last >= 0 else frozenset(),
                             written=written, mood=mood)
         r = (unit or translator.translate)(source[span.start:span.end], level=policy.level, seed=policy.seed,
@@ -488,4 +490,4 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
     warnings = list(dict.fromkeys([*effective.warnings, *(w for u in units for w in u.result.warnings)]))
     return DocumentResult("".join(pieces), source, effective.level, policy.seed, effective.vulgarity,
                           policy.variety, warnings, units, protected, genre, context[1], genre.setting(policy.embellishment),
-                          effective.envelope()["profile_config"])
+                          effective.envelope()["profile_config"], effective.permitted_themes)

@@ -144,7 +144,8 @@ def finish(result: Any, drafts: list[Draft], dictionary: Dictionary) -> ChangeSe
             o["masks"] = _masked(dictionary, o["rendered"], entries)
         names.update(i for es in [d.entries, *d.rendering_entries] for i in es)
     riffs = shows_riffs(result.embellishment)
-    entries = {i: entry_card(dictionary.entries[i], result.vulgarity, riffs) for i in sorted(names)}
+    entries = {i: entry_card(dictionary.entries[i], result.vulgarity, riffs,
+                             permitted_themes=result.permitted_themes) for i in sorted(names)}
     withheld = [{"id": d.change["id"], "reason": d.withheld} for d in drafts if d.withheld]
     changes = [{k: d.change[k] for k in _FIELDS if k in d.change} for d in drafts]
     return ChangeSet(result, changes, entries, withheld)
@@ -639,7 +640,8 @@ class _Builder:
         out = []
         for v in range(cap + 1, 4):
             if v not in self._raised:
-                self._raised[v] = resolve(replace(self.run.pol, vulgarity=v), self.translator.dictionary)
+                raised = resolve(replace(self.run.pol, vulgarity=v), self.translator.dictionary)
+                self._raised[v] = replace(raised, permitted_themes=self.run.eff.permitted_themes)
             keep, _ = self.translator.eligible(det, spot.sent, self.run, self._raised[v], spot.state, spot.taken,
                                                self.translator.dictionary.idioms_for(det.concepts))
             for c in keep:

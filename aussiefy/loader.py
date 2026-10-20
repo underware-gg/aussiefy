@@ -24,7 +24,7 @@ from .model import Dictionary, LevelProfile, PhoneticRule, RewriteThresholds, Sw
 from .schema import (CLASSES, FRAMES, GARNISH_KEYS, RIFF_TONES, Concept, Entry, Riff, SchemaError, parse_concept,
                      parse_entry, parse_imagery)
 from .vocabulary import Vocabulary
-from .evidence import METADATA_KEYS, assess, parse_metadata, parse_weights
+from .evidence import METADATA_KEYS, THEMES, assess, parse_metadata, parse_weights
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -137,6 +137,19 @@ def _thresholds(level: int, raw: dict) -> RewriteThresholds:
     return RewriteThresholds(**raw)
 
 
+def _theme_defaults(raw: dict) -> dict[int, frozenset[str]]:
+    if any(type(key) is not int for key in raw) or set(raw) != {0, 1, 2, 3}:
+        raise SchemaError("themes.yaml: define vulgarity tiers 0–3")
+    out = {}
+    for tier, values in raw.items():
+        if not isinstance(values, dict) or set(values) != set(THEMES):
+            raise SchemaError(f"themes.yaml: tier {tier} must define every theme: {', '.join(THEMES)}")
+        if any(type(value) is not bool for value in values.values()):
+            raise SchemaError(f"themes.yaml: tier {tier} permissions must be true or false")
+        out[tier] = frozenset(name for name, allowed in values.items() if allowed)
+    return out
+
+
 def _profile(level: int, raw: dict, base: dict) -> LevelProfile:
     merged = {**base, **raw}
     sub = merged.get("substitution", {})
@@ -193,6 +206,12 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
             errors.append(str(exc))
     if sorted(profiles) != [1, 2, 3, 4, 5]:
         errors.append(f"profiles.yaml must define levels 1-5, found {sorted(profiles)}")
+
+    theme_defaults = {}
+    try:
+        theme_defaults = _theme_defaults(_read(data / "themes.yaml", errors, {}, unique_keys=True))
+    except SchemaError as exc:
+        errors.append(str(exc))
 
     grammar = _read_optional(data / "grammar.yaml", errors, {})
     person_roles, adjective_nouns, name_aliases = frozenset(), {}, {}
@@ -394,8 +413,12 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         swearing[int(v)] = SwearProfile(**{k: float(x) for k, x in (raw or {}).items()})
     if errors:
         raise SchemaError("dictionary failed validation:\n  " + "\n  ".join(errors))
-    return Dictionary(entries, concepts, profiles, phonetic, prof_raw.get("policy", {}), patterns,
-                      PatternIndex(patterns), PatternIndex(forms), swears, dialect, warnings, swearing, genres, pos.lower_words(), person_roles, adjective_nouns, name_aliases, tuple(imagery), tuple(vocabulary.changes), weights)
+    return Dictionary(entries=entries, concepts=concepts, profiles=profiles, phonetic=phonetic,
+                      policy_defaults=prof_raw.get("policy", {}), patterns=patterns, index=PatternIndex(patterns),
+                      form_index=PatternIndex(forms), swears=swears, dialect=dialect, theme_defaults=theme_defaults,
+                      warnings=warnings, swearing=swearing, genres=genres, pos_words=pos.lower_words(),
+                      person_roles=person_roles, adjective_nouns=adjective_nouns, name_aliases=name_aliases,
+                      imagery=tuple(imagery), overlay_changes=tuple(vocabulary.changes), evidence_weights=weights)
 
 
 def write_validated(data_dir: str | Path, files: dict[str, str], extra: Iterable[str | Path] = ()) -> Dictionary:

@@ -12,7 +12,7 @@ aussiefy judge tally verdict-one.json verdict-two.json
 ```
 
 `judge brief`/`read` let an agent supply the report without a paid API. New packets use evaluation protocol 2:
-the same effective document behaviours, full numeric profile, embellishment guidance, resolved markup and
+the same effective document behaviours, full numeric profile, resolved subject permissions, embellishment guidance, resolved markup and
 source-English context used for writing. `judge.blind()` and CLI `judge brief`/`run` accept `markup`, `english`,
 `embellishment`, `document_type` and `document_config`; the reference `unharnessed` routes accept them too.
 For example, add `--document-type custom --document-config '{"keep_quotes":true,"profile":{"phonetic":0}}'`
@@ -24,7 +24,8 @@ and types are checked; deliberately unconventional combinations remain the calle
 or the API. `Packet.to_dict(rubric)` also includes originals, candidates and the unblinding key: keep that
 file away from blind judges. Historical packets/verdicts without protocol metadata remain protocol 1;
 settings are not inferred, and tallying protocol 1 with protocol 2 raises an error. The API cache includes
-both instructions and the effective contract.
+both instructions and the effective contract. Older protocol-2 snapshots without `theme_permissions` remain
+readable and retain that absence; their unrecorded theme policy is never inferred from current defaults.
 
  `judge run` uses the shared Claude
 client, validates the response, sends an invalid report back once and caches accepted results. `judge

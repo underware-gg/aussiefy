@@ -19,6 +19,8 @@ from .errors import UserError
 from .guide import style_guide_data
 from .terms import phrase_kept
 from .text import sentences, tokenize
+from .policy import theme_permissions
+from .semantic_checks import theme_issues
 
 
 SURFACE_SCHEMA = {
@@ -38,6 +40,7 @@ Rules:
   but keep its words.
 - Do not add slang, idioms, openers, tag-ons or swears that are not in the plan.
 - Keep the meaning of the ORIGINAL. Do not add or remove claims.
+- Respect THEME_PERMISSIONS independently of swearing; retain the original's own subject matter.
 - Return only the rewritten text."""
 
 
@@ -50,7 +53,8 @@ def surface_rewrite(result: Result, client: Any = None, model: str = DEFAULT_MOD
                     translator: Translator | None = None) -> Result:
     """Polish the joins of result's text in place; translator is the one that made it (its phonetic rules say
     which respellings of a planned phrase still count as keeping it)."""
-    phonetic = (translator or default_translator()).dictionary.phonetic
+    dictionary = (translator or default_translator()).dictionary
+    phonetic = dictionary.phonetic
     plan = result.decisions()
     planned = [s["replacement"] for s in plan["substitutions"]] + [g["text"] for g in plan["garnish"]]
     surface: dict[str, Any] = {"model": model, "planned": planned}
@@ -62,7 +66,8 @@ def surface_rewrite(result: Result, client: Any = None, model: str = DEFAULT_MOD
     try:
         text = claude.call_json(client or claude.client(), model=model, system=SYSTEM, max_tokens=8000,
                                 schema=SURFACE_SCHEMA, prompt=json.dumps(
-                                    {"ORIGINAL": result.source, "DRAFT": result.text, "PLANNED": planned},
+                                    {"ORIGINAL": result.source, "DRAFT": result.text, "PLANNED": planned,
+                                     "THEME_PERMISSIONS": theme_permissions(result.permitted_themes)},
                                     ensure_ascii=False))["text"].strip()
     except claude.Error as exc:  # offline, no key, declined, a bad reply: the deterministic output stands
         surface.update(outcome="fell_back", status=f"kept deterministic: {type(exc).__name__}: {exc}")
@@ -71,6 +76,10 @@ def surface_rewrite(result: Result, client: Any = None, model: str = DEFAULT_MOD
     if missing:
         surface.update(outcome="fell_back", rejected_text=text,
                        status=f"kept deterministic: rewrite dropped planned phrase(s) {missing}")
+        return result
+    if theme_issues(text, result.source, dictionary, result.permitted_themes):
+        surface.update(outcome="fell_back", rejected_text=text,
+                       status="kept deterministic: rewrite introduced known wording with forbidden themes")
         return result
     surface.update(outcome="applied", status="applied")
     result.text = text
@@ -100,7 +109,8 @@ Use Australian spelling (honoured, colour, organise).
 
 You are also given a DRAFT in which a rule-based engine has already inserted some PLANNED phrases. Keep
 every planned phrase (inflection may change). Don't add openers, tag-ons or swears at the start or
-end of the sentence (no "Strewth," no ", mate"), because the engine adds those separately. Return one
+end of the sentence (no "Strewth," no ", mate"), because the engine adds those separately.
+Respect THEME_PERMISSIONS independently of swearing; retain the original's own subject matter. Return one
 sentence only."""
 
 
@@ -115,19 +125,22 @@ class ClaudeRewriter:
         self.client = client
         self.model = model
         self.cache = claude.Cache((cache_dir or claude.default_cache_dir("rewrite")) if cache else None)
-        self.phonetic = (translator or default_translator()).dictionary.phonetic
+        self.translator = translator or default_translator()
+        self.phonetic = self.translator.dictionary.phonetic
 
     def rewrite(self, original: str, draft: str, planned: list[str], *, level: int, vulgarity: int,
-                seed: int = 0) -> tuple[str | None, str]:
+                seed: int = 0, permitted_themes: frozenset[str] | None = None) -> tuple[str | None, str]:
+        if permitted_themes is None:
+            permitted_themes = self.translator.effective(level=level, vulgarity=vulgarity).permitted_themes
         payload = {"ORIGINAL": original, "DRAFT": draft, "PLANNED": planned,
-                   "VOICE": _voice(level, vulgarity)}
+                   "VOICE": _voice(level, vulgarity), "THEME_PERMISSIONS": theme_permissions(permitted_themes)}
         key = claude.Cache.key(self.model, seed, payload, REWRITE_SYSTEM)
         cached = self.cache.get(key)
         if cached is not None:
             if (not isinstance(cached, dict) or not isinstance(cached.get("text"), str)
                     or not isinstance(cached.get("status"), str)):
                 raise UserError(f"{self.cache.directory / (key + '.json')}: invalid rewrite cache entry; delete it")
-            if self._problem(cached["text"], original, planned) is None:
+            if self._problem(cached["text"], original, planned, permitted_themes) is None:
                 return cached["text"], f"{cached['status']} (cached)"
         try:
             self.client = self.client or claude.client()
@@ -136,13 +149,14 @@ class ClaudeRewriter:
         except claude.Error as exc:  # offline, no key, declined, a bad reply: the dictionary's draft stands
             return None, f"kept draft: {type(exc).__name__}: {exc}"
 
-        problem = self._problem(text, original, planned)
+        problem = self._problem(text, original, planned, permitted_themes)
         if problem:
             return None, f"kept draft: rewrite {problem}"
         self.cache.put(key, {"text": text, "status": "rewritten", "payload": payload})
         return text, "rewritten"
 
-    def _problem(self, text: str, original: str, planned: list[str]) -> str | None:
+    def _problem(self, text: str, original: str, planned: list[str],
+                 permitted_themes: frozenset[str] | None = None) -> str | None:
         """The acceptance rule for both fresh and cached replies, including older cache entries."""
         missing = [p for p in planned if not phrase_kept(text, p, self.phonetic)]
         if not text or "\n" in text or len(sentences(tokenize(text))) != 1:
@@ -151,4 +165,6 @@ class ClaudeRewriter:
             return "far longer than the original"
         if missing:
             return f"dropped planned phrase(s) {missing}"
+        if permitted_themes is not None and theme_issues(text, original, self.translator.dictionary, permitted_themes):
+            return "introduced known wording with forbidden themes"
         return None

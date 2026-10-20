@@ -99,7 +99,7 @@ def test_invalid_complement_rules_fail_at_the_data_boundary(raw):
 
 def offered(translator, source):
     result = harness.plan(source, translator=translator, level=5, vulgarity=1, document_type='custom',
-        document_config={'garnish': ['riff'], 'contextual_riffs': True, 'entry_riffs': False,
+        document_config={'themes': {'violence': True}, 'garnish': ['riff'], 'contextual_riffs': True, 'entry_riffs': False,
             'riff_exaggeration': 2, 'profile': {'frames': [], 'phonetic': 0}})
     return {c['id']: c for group in result['riffs'] for c in group['riffs'] if 'id' in c}
 

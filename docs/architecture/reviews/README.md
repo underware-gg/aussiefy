@@ -10,6 +10,7 @@ commands that have since been renamed. Mate, decisions they led to are recorded 
 
 | Review | Summary |
 |---|---|
+| [design-review-2026-10-21-subject-permissions.md](design-review-2026-10-21-subject-permissions.md) | Shared subject policy, source-aware acceptance, reviewed data and preserved consumer contracts |
 | [design-review-2026-10-21-community-metadata.md](design-review-2026-10-21-community-metadata.md) | Structured term evidence, preserved citations, usage gates and shared selection weights |
 | [design-review-2026-10-20-dev-integration.md](design-review-2026-10-20-dev-integration.md) | Combine publication and semantic refinements, retain the separate spacing fix and reconcile decision numbering |
 | [design-review-2026-10-20-training-labels-and-figuratives.md](design-review-2026-10-20-training-labels-and-figuratives.md) | Canonical exclusion parsing, preflight label integrity and object-preserving annoyance meanings |

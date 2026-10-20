@@ -266,7 +266,7 @@ def test_judge_contract_matches_effective_writer_settings(translator, document_t
     contract = packet.evaluation_contract
     assert packet.evaluation_protocol == 2
     assert (contract["level"], contract["vulgarity"]) == (writer.level, writer.vulgarity)
-    for key in ("document_config", "profile_config", "embellishment", "genre"):
+    for key in ("document_config", "profile_config", "embellishment", "genre", "theme_permissions"):
         assert contract[key] == writer.payload[key.upper()]
     assert contract["markup"] == writer.markup == "markdown"
     assert contract["markup_rules"] == writer.payload["MARKUP"]
@@ -416,3 +416,25 @@ def test_cli_judge_routes_carry_advanced_writing_settings(tmp_path, capsys, monk
     assert '"phonetic": 0.2' in prompt and '"keep_quotes": true' in prompt
     assert main(["judge", "unharnessed", str(original), *flags]) == 0
     assert capsys.readouterr().out.strip() == source.strip()
+
+
+@pytest.mark.parametrize("fault", ["missing", "unknown", "not-boolean"])
+def test_judge_theme_snapshot_is_complete_and_exact(packet, fault):
+    data = json.loads(json.dumps(packet.to_dict(j.Rubric.load())))
+    themes = data["evaluation_contract"]["theme_permissions"]
+    if fault == "missing":
+        del themes["drugs"]
+    elif fault == "unknown":
+        themes["unknown"] = True
+    else:
+        themes["drugs"] = 1
+    with pytest.raises(j.UserError, match="theme"):
+        j.Packet.from_dict(data)
+
+
+def test_pre_theme_contract_keeps_its_unrecorded_policy(packet):
+    data = json.loads(json.dumps(packet.to_dict(j.Rubric.load())))
+    del data["evaluation_contract"]["theme_permissions"]
+    restored = j.Packet.from_dict(data)
+    assert "theme_permissions" not in restored.evaluation_contract
+    assert "theme_permissions" not in restored.to_dict(j.Rubric.load())["evaluation_contract"]

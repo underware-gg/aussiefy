@@ -39,9 +39,9 @@ def test_appetite_phrases_do_not_consume_other_complements(translator, source):
     assert not APPETITE & {r.chosen.entry.id for r in result.records if r.substituted}
 
 
-def plan(translator, text, exaggeration=2, vulgarity=1):
+def plan(translator, text, exaggeration=2, vulgarity=1, themes=None):
     return harness.plan(text, translator=translator, level=5, vulgarity=vulgarity, document_type='custom',
-        document_config={'garnish': ['riff'], 'contextual_riffs': True, 'entry_riffs': False,
+        document_config={'themes': themes or {}, 'garnish': ['riff'], 'contextual_riffs': True, 'entry_riffs': False,
             'riff_exaggeration': exaggeration, 'profile': {'frames': [], 'phonetic': 0,
                 'garnish': {'riff': 1}, 'max_garnish': {'riff': 0}}})
 
@@ -51,7 +51,7 @@ def images(result):
 
 
 def test_elaborate_hunger_images_remain_rewrites_with_honest_origins(translator):
-    result = plan(translator, 'She is hungry.')
+    result = plan(translator, 'She is hungry.', themes={'violence': True})
     offered = images(result)
     assert HUNGER_IMAGES <= offered.keys()
     assert all(not offered[i]['automatic'] and offered[i]['form'] == 'rewrite' for i in HUNGER_IMAGES)
@@ -70,7 +70,8 @@ def test_hunger_images_respect_exaggeration_and_vulgarity(translator):
 
 
 def test_all_new_templates_are_discoverable_for_a_writer(translator):
-    result = harness.lookup('hungry', translator=translator, level=5, vulgarity=1, embellishment='troppo', limit=20)
+    result = harness.lookup('hungry', translator=translator, level=5, vulgarity=1, embellishment='troppo', limit=20,
+                            document_config={'themes': {'violence': True}})
     offered = {i['id']: i for i in result['imagery']}
     assert HUNGER_IMAGES <= offered.keys()
     assert all(offered[i]['template'] and not offered[i]['automatic'] for i in HUNGER_IMAGES)
@@ -79,3 +80,9 @@ def test_all_new_templates_are_discoverable_for_a_writer(translator):
 @pytest.mark.parametrize('source', ['She is not hungry.', "She isn't hungry.", 'She is hungry for success.'])
 def test_images_do_not_invent_appetite_or_turn_metaphors_into_food(translator, source):
     assert not HUNGER_IMAGES & images(plan(translator, source)).keys()
+
+
+def test_hunger_writer_material_respects_subject_permissions(translator):
+    assert 'stomach-throat-cut' not in images(plan(translator, 'She is hungry.'))
+    assert 'stomach-throat-cut' in images(plan(translator, 'She is hungry.', themes={'violence': True}))
+    assert 'hungry-butter-beer-coaster' not in images(plan(translator, 'She is hungry.', themes={'drinking': False}))

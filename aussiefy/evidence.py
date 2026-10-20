@@ -351,3 +351,9 @@ def metadata_rejections(term: TermMetadata, *, allow_misreadable: bool = False) 
     if term.misreadable and not allow_misreadable:
         reasons.append("misreadable")
     return tuple(reasons)
+
+
+def theme_rejection(term: TermMetadata, permitted: frozenset[str] | None) -> str | None:
+    if permitted is not None and (blocked := set(term.themes) - permitted):
+        return "themes not permitted: " + ", ".join(sorted(blocked))
+    return None
