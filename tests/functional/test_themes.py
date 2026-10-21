@@ -67,7 +67,7 @@ def themed(dictionary):
                term("zzboth", themes=("drugs", "religion")),
                term("zzlocked", themes=("violence",), vulgarity=2)]
     forms = PatternIndex([compile_pattern(e.form, e.frame, e.concept, e.intensity, entry_id=e.id) for e in entries])
-    return Translator(replace(dictionary, entries={e.id: e for e in entries}, imagery=(), form_index=forms), lookup_embedder=None)
+    return Translator(replace(dictionary, entries={e.id: e for e in entries}, imagery=(), form_index=forms, construction_catalog=None), lookup_embedder=None)
 
 
 def eligible(result):
@@ -381,8 +381,8 @@ def test_term_tiers_and_exact_theme_overrides_share_one_policy(translator):
     enabled = translator.effective(vulgarity=0, document_config={"themes": {"violence": True}}).theme_policy
     assert not theme_rejection(throat, enabled)
     # A term tier can also raise a theme which is otherwise enabled for Nan.
-    assert theme_rejection(d.entries["g-bugger-me-sideways"], dad)
-    assert not theme_rejection(d.entries["g-bugger-me-sideways"], translator.effective(vulgarity=2).theme_policy)
+    assert theme_rejection(next(f.metadata for f in d.construction_catalog.families if f.id == "sideways-call-title"), dad)
+    assert not theme_rejection(next(f.metadata for f in d.construction_catalog.families if f.id == "sideways-call-title"), translator.effective(vulgarity=2).theme_policy)
 
 
 @pytest.mark.parametrize("eid,theme", [

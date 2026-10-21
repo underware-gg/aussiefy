@@ -6,6 +6,7 @@ The Python API is the toolkit every other surface (CLI, MCP server, yarn mode, t
     aussiefy.translate("I'm extremely busy", level=4).text   # the rule engine (a Result, with explain records)
     aussiefy.translate(markdown_source, markdown=True)      # DocumentResult: prose units and protected spans
     aussiefy.lookup("very tired")                            # Aussie options for a meaning, or what a term means
+    aussiefy.bulldust("HUNGRY", seed=7)                      # labelled idiom constructions and part evidence
     aussiefy.lint(draft, original=text)                      # what's wrong with a draft, and what could be more Aussie
     aussiefy.guide(level=5)                                  # voice, language limits and craft rules
     aussiefy.plan(text)                                      # the engine's draft and planned phrases, for an agent
@@ -25,6 +26,7 @@ from .translation import translate, translate_changes
 from .changes import ChangeSet
 from .markdown import DocumentResult
 from .harness import guide, lint, lookup, plan, verify
+from .bulldust import bulldust
 from .loader import load_dictionary
 from .model import Dictionary
 from .policy import Policy
@@ -32,6 +34,6 @@ from .errors import UserError
 from .schema import Entry, SchemaError
 from .yarn import yarn
 
-__all__ = ["translate", "translate_changes", "ChangeSet", "lookup", "lint", "guide", "plan", "verify", "yarn", "Translator", "default_translator", "Result",
+__all__ = ["translate", "translate_changes", "ChangeSet", "lookup", "lint", "guide", "plan", "verify", "bulldust", "yarn", "Translator", "default_translator", "Result",
            "DocumentResult", "Policy", "Dictionary", "load_dictionary", "Entry", "SchemaError", "UserError"]
 __version__ = "0.2.0"

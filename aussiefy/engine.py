@@ -27,6 +27,7 @@ from .model import Dictionary
 from .policy import Effective, Policy, envelope, pick_form, resolve, roll, theme_permissions
 from .realise import ARTICLES, fit_article, number_problem, phrase_continues, realise, replacement_span
 from .select import Candidate, candidates, mapping_effects, semantic_rejection, usable_forms, weighted_pick
+from .constructions import Construction
 from .schema import Entry, SchemaError
 from .semantic_checks import theme_issues
 from .terms import form_key
@@ -629,11 +630,11 @@ class Translator:
             r = roll(run.pol.seed, key, run.text.lower())
             if r >= p:
                 continue
-            offer = garnish_offer("closer", self.dictionary.garnish, run.eff, run.pol.seed,
+            offer = garnish_offer("closer", self.dictionary, run.eff, run.pol.seed,
                                   (key, run.text.lower()), run.state.garnish_uses, contexts=contexts,
                                   mood=run.mood, swear=swear, insults=run.embellishment.takes("insult"),
                                   narrator_opinion=run.embellishment.narrator_opinion,
-                                  quantity_approximation=run.embellishment.quantity_approximation)
+                                  quantity_approximation=run.embellishment.quantity_approximation, setting=run.embellishment)
             entry = offer.pick()
             form = entry and offer.words(entry)
             run.garnish.append(GarnishRecord.rolled("closer", len(sents) - 1, entry, form, r, p, offer.rejected))
@@ -660,11 +661,11 @@ class Translator:
             r = roll(run.pol.seed, "garnish", key, *sent.key)
             if r >= p:
                 continue
-            offer = garnish_offer("tail", self.dictionary.garnish, run.eff, run.pol.seed,
+            offer = garnish_offer("tail", self.dictionary, run.eff, run.pol.seed,
                                   (key,) + sent.key, state.garnish_uses, sentence_contexts(sent.tokens, sent.tags),
                                   swear=swear, insults=run.embellishment.takes("insult"),
                                   narrator_opinion=run.embellishment.narrator_opinion,
-                                  quantity_approximation=run.embellishment.quantity_approximation)
+                                  quantity_approximation=run.embellishment.quantity_approximation, setting=run.embellishment)
             entry = offer.pick()
             form, rej = entry and offer.words(entry), offer.rejected
             if entry:
@@ -678,7 +679,7 @@ class Translator:
         return out
 
     @staticmethod
-    def _place(out: str, offer: GarnishOffer, entry: Entry, form: str, sentence: int, run: "_Run",
+    def _place(out: str, offer: GarnishOffer, entry: Entry | Construction, form: str, sentence: int, run: "_Run",
                lowerable: frozenset[str] = frozenset(), first_replaced: bool = False) -> str | None:
         """Put a picked garnish in (None where a connective doesn't fit), and tell the observer where it went and
         what it was picked from."""
@@ -818,12 +819,12 @@ class Translator:
             if r >= p:
                 continue
             recent = {cid for cid, at in state.connectives.items() if ordinal - at <= CONNECTIVE_REPEAT_GAP}
-            offer = garnish_offer(placement, self.dictionary.garnish, eff, run.pol.seed, (key,) + sent.key,
+            offer = garnish_offer(placement, self.dictionary, eff, run.pol.seed, (key,) + sent.key,
                                   state.garnish_uses, g.tag_contexts if placement == "tag" else g.contexts,
                                   exclude=recent, mood=run.mood, swear=swear,
                                   insults=run.embellishment.takes("insult"),
                                   narrator_opinion=run.embellishment.narrator_opinion,
-                                  quantity_approximation=run.embellishment.quantity_approximation)
+                                  quantity_approximation=run.embellishment.quantity_approximation, setting=run.embellishment)
             entry = offer.pick()
             form, rej = entry and offer.words(entry), offer.rejected
             if entry:
@@ -948,7 +949,7 @@ class PassObserver:
     def choose(self, sent: "_Sentence", det: Detection, keep: list[Candidate], choice: Candidate) -> Candidate:
         return choice
 
-    def placing(self, sentence: int, placement: str, entry: Entry, form: str) -> str | None:
+    def placing(self, sentence: int, placement: str, entry: Entry | Construction, form: str) -> str | None:
         return form
 
     def spot(self, spot: Spot) -> None:
@@ -957,7 +958,7 @@ class PassObserver:
     def imagery(self, sentence: int, image_id: str, splice: int, suffix: str) -> None:
         pass
 
-    def garnish(self, sentence: int, entry: Entry, form: str, edit: Edit, offer: GarnishOffer) -> None:
+    def garnish(self, sentence: int, entry: Entry | Construction, form: str, edit: Edit, offer: GarnishOffer) -> None:
         pass
 
     def sentence(self, trace: SentenceTrace) -> None:

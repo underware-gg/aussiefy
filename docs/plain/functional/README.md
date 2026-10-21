@@ -11,7 +11,8 @@ guarantees. For step-by-step guides, see the [user layer](../user/README.md); fo
 | [dials.md](dials.md) | Level (1-5), vulgarity (0-3) and embellishment (0-2): what each setting does, how they combine, how swearing comes, and Australian spelling |
 | [translation-controls.md](translation-controls.md) | General, Auto, named presets and Custom with exact behaviour overrides |
 | [cli.md](cli.md) | Every `aussiefy` command and option, with defaults and exit codes |
-| [toolkit.md](toolkit.md) | The six toolkit operations, the Python API, the MCP server's tools and the Claude API tools |
+| [toolkit.md](toolkit.md) | The toolkit operations, the Python API, the MCP server's tools and shared retelling tools |
+| [bulldust.md](bulldust.md) | Seeded composition, ingredient evidence, compatible variations and bounded generation |
 | [markdown.md](markdown.md) | Explicit prose translation with protected source, stable headings and per-unit results |
 | [changes.md](changes.md) | Every change a translation made, with each spot's alternatives and locked options rendered in place: the `changes` contract |
 | [explain.md](explain.md) | What explain mode records for each decision, with a sample |
@@ -41,6 +42,7 @@ How to run them is in the
 
 | Test module | Behaviour it pins |
 |---|---|
+| `tests/functional/test_constructions.py` | Constructor policy, bounded sampling, template spans, part evidence and changes compatibility |
 | `tests/functional/test_engine.py` | The engine: detection, selection, realisation, garnish, drawl and the dials |
 | `tests/functional/test_document_policy.py` | Document presets, exact overrides and shared-surface behaviour |
 | `tests/functional/test_document_refinement.py` | Sentence-safe flavour, contractions, casing and technical-example fidelity |

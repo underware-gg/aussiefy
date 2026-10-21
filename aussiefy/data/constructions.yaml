@@ -1,0 +1,74 @@
+# Reviewed typed composition; fields and bounds: docs/functional/bulldust.md.
+# Endings own their linking words. Family tags can raise the composite's subject tier.
+version: aussiefy-constructions/v1
+settings: {search_budget: 64, max_results: 20, cadence_penalty: 0.1}
+ingredients:
+- id: bugger-sideways
+  kind: personal-surprise-oath
+  entry_id: bugger-me-sideways
+- id: fuck-sideways
+  kind: personal-surprise-oath
+  entry_id: fuck-me-sideways
+- id: rusty-spanner
+  kind: implement-ending
+  text: with a rusty spanner
+  reads_as: general
+- id: broomstick
+  kind: implement-ending
+  text: with a broomstick
+  reads_as: general
+- id: call-me-the-pope
+  kind: title-ending
+  text: "'n call me the pope"
+  themes: [{name: religion, tier: 0}]
+  coined_by: person
+  credit: Rob
+- id: hungry
+  kind: hunger-state
+  text: hungry
+  reads_as: general
+- id: sausage-shadow
+  kind: absurd-food-act
+  text: eat the shadow off a sausage
+  coined_by: agent
+- id: pie-warmer-grease
+  kind: absurd-food-act
+  text: lick the grease out of a pie warmer
+  coined_by: agent
+- id: fence-post-sauce
+  kind: absurd-food-act
+  text: eat a fence post with tomato sauce
+  coined_by: agent
+families:
+- id: sideways-with-implement
+  template: '{stem} {ending}'
+  slots: {stem: personal-surprise-oath, ending: implement-ending}
+  concept: SURPRISE
+  frame: interjection
+  level: 5
+  exaggeration: 1
+  themes: [{name: sex, tier: 2}]
+  placement: opener
+  tone: comic
+  preferred_words: [7, 11]
+- id: sideways-call-title
+  template: '{stem}{ending}'
+  slots: {stem: personal-surprise-oath, ending: title-ending}
+  concept: SURPRISE
+  frame: interjection
+  level: 5
+  exaggeration: 1
+  themes: [{name: religion, tier: 2}]
+  placement: opener
+  tone: comic
+  preferred_words: [7, 11]
+- id: hungry-enough-to
+  template: '{state} enough to {act}'
+  slots: {state: hunger-state, act: absurd-food-act}
+  concept: HUNGRY
+  frame: predicate_adj
+  level: 5
+  exaggeration: 1
+  tone: comic
+  preferred_words: [6, 12]
+  semantic_degree: {HUNGRY: strong}

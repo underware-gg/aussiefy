@@ -38,7 +38,7 @@ claude mcp add aussiefy -- aussiefy-mcp
 
 Other MCP clients launch the same `aussiefy-mcp` command with no arguments. See the
 [agent guide](https://github.com/underware-gg/aussiefy/blob/main/docs/user/agents.md) for installation and
-the six tools. The shared workflow does not require the built-in API client or its credentials.
+the seven tools. The shared workflow does not require the built-in API client or its credentials.
 
 ## Workflow
 
@@ -129,7 +129,7 @@ original propositions, while protected quotes, terms, facts and grammar remain i
 - `aussiefy yarn -l 5 < input.txt`: runs the optional API client; see its setup in the
   [model-assisted writing guide](https://github.com/underware-gg/aussiefy/blob/main/docs/user/llm-modes.md).
 - MCP: configure your client's stdio server command as `aussiefy-mcp`. It exposes `aussie_lookup`, `aussie_lint`,
-  `aussie_guide`, `aussie_plan`, `aussie_translate` and `aussie_verify`.
+  `aussie_guide`, `aussie_plan`, `aussie_translate`, `aussie_verify` and `aussie_bulldust`.
 
 ## Quality bar
 
@@ -163,3 +163,11 @@ still need grammatical fit and share insertion limits with other riffs. Bare loo
 uses the same imagery settings as a plan. Advanced controls are `contextual_riffs`, `entry_riffs`,
 `riff_exaggeration` (0–2) and `riff_association` (0–1), with riff insertion probability, spacing and counts in
 `document_config.profile`. Custom requires explicit riff permission and contextual enablement.
+
+## Deliberate idiom construction
+
+`aussiefy bulldust HUNGRY --vulgarity nan --json` constructs sayings from reviewed typed families.
+Keep the `bulldust` label: a familiar stem does not attest the assembled expression. Inspect each part's
+evidence and credit. Use `--family ID` and `--parts JSON` to keep compatible parts while varying others.
+This is an explicit generation operation; automatic substitution fallback and the shared yarn scaffold
+are separate integration work. See [the reference](https://github.com/underware-gg/aussiefy/blob/main/docs/functional/bulldust.md).

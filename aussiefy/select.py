@@ -8,10 +8,10 @@ from dataclasses import dataclass
 from . import morph
 from .detect import Detection
 from .policy import Effective, weighted_index
+from .policy import Gated as Gated, dial_rejection as dial_rejection, policy_rejection as policy_rejection
 from .schema import Entry
 from .realise import question_form
 from .context import tone_weight
-from .evidence import theme_rejection
 
 # detection frame -> entry frames that can fill it
 COMPATIBLE = {
@@ -35,38 +35,6 @@ class Candidate:
     semantic_effects: tuple[str, ...] = ()
 
 
-class Gated(str):
-    """The reason a gated entry was passed over, and the flags that would lift the gate (none: only "all")."""
-    locked: tuple[str, ...]
-
-    def __new__(cls, locked: tuple[str, ...]) -> "Gated":
-        reason = super().__new__(cls, f"gated by {', '.join(locked) or 'status'}")
-        reason.locked = locked
-        return reason
-
-
-def dial_rejection(entry: Entry, eff: Effective, *, include_gated: bool = False) -> str | None:
-    """What no surface may offer under this policy: omitted entries, gated ones still locked, and ones above
-    the level or the vulgarity (shared with lookup)."""
-    if entry.status == "omit":
-        return f"status omit (flags: {', '.join(entry.flags) or 'none'})"
-    if reason := theme_rejection(entry, eff.theme_policy):
-        return reason
-    if not include_gated and entry.status == "gate" and "all" not in eff.unlock:
-        locked = tuple(sorted(set(entry.flags) - eff.unlock))
-        if locked or not entry.flags:
-            return Gated(locked)
-    if not include_gated:
-        blocked = tuple(r for r in entry.held_back if r != "status" and
-                        not (r == "misreadable" and {"misreadable", "all"} & eff.unlock))
-        if blocked:
-            return Gated(blocked)
-    if entry.incoherence > eff.level:
-        return f"needs level {entry.incoherence}"
-    if entry.vulgarity > eff.vulgarity:
-        return f"vulgarity {entry.vulgarity} exceeds cap {eff.vulgarity}"
-    return None
-
 def mapping_effects(entry: Entry, det: Detection, *, narrator_opinion: bool,
                     quantity_approximation: bool) -> tuple[str, ...]:
     """Use an available meaning path; a precise reading need not inherit another reading's loss."""
@@ -88,18 +56,6 @@ def semantic_rejection(entry: Entry, *, narrator_opinion: bool, quantity_approxi
         return "approximates an exact quantity; quantity_approximation is false"
     if "opinion" in effects and not narrator_opinion:
         return "adds narrator opinion; narrator_opinion is false"
-    return None
-
-
-def policy_rejection(entry: Entry, eff: Effective) -> str | None:
-    """Reasons that depend only on the entry and the policy (shared with garnish)."""
-    reason = dial_rejection(entry, eff)
-    if reason:
-        return reason
-    if entry.register not in eff.registers:
-        return f"register '{entry.register}' not allowed (allowed: {', '.join(eff.registers)})"
-    if eff.regions and entry.region and not set(entry.region) & set(eff.regions):
-        return f"region {', '.join(entry.region)} outside {', '.join(eff.regions)}"
     return None
 
 

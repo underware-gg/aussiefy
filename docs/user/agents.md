@@ -5,7 +5,7 @@
 # Using aussiefy from an agent
 
 Language models write good Australian English when they have ridgy\-didge source material'n a check. aussiefy
-gives an agent both, through the same six operations \(lookup, lint, guide, plan, translate, verify\) on every surface.
+gives an agent both, through the same seven operations \(lookup, lint, guide, plan, translate, verify, bulldust\) on every surface.
 The operations themselves are described in the [toolkit reference](../functional/toolkit.md).
 
 The workflow is the same everywhere: establish the **brief** and dials, read the **guide**, get the engine's
@@ -47,7 +47,7 @@ codex mcp add aussiefy -- aussiefy-mcp      # Codex
 ```
 
 Configure other clients to launch `aussiefy-mcp` as a stdio server, with no command arguments. The tools
-are `aussie_lookup`, `aussie_lint`, `aussie_guide`, `aussie_plan`, `aussie_translate` and `aussie_verify`.
+are `aussie_lookup`, `aussie_lint`, `aussie_guide`, `aussie_plan`, `aussie_translate`, `aussie_verify` and `aussie_bulldust`.
 The server's instructions supply the same workflow; the server itself needs no model credentials.
 
 ## In an agent you build
@@ -84,3 +84,6 @@ aussiefy verify -l 5 --original story.txt draft.txt   # exit 1 means critical or
 For the complete checked submission loop without a built\-in model call, use
 `aussiefy yarn-tools brief story.txt`, then its `lookup`, `lint` and `submit` steps. Fair dinkum, see the
 [CLI reference](../functional/cli.md#command-options) for retained logs, declines'n accepted\-output files.
+
+For deliberately invented sayings, use [Bulldust](../functional/bulldust.md). Mate, it returns seeded constructions
+from reviewed families, labelled as invented, with evidence retained on each ingredient.

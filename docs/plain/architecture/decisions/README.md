@@ -63,6 +63,7 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 | [DD-040](../../../architecture/decisions/dd-040-term-evidence-and-usage.md) | Store term facts; derive attestation and usage eligibility | Accepted |
 | [DD-041](../../../architecture/decisions/dd-041-subject-permissions.md) | Resolve reviewed subject permissions once, independently of profanity | Accepted |
 | [DD-042](../../../architecture/decisions/dd-042-reviewed-tag-tiers.md) | Reviewed tag tiers, exact overrides and a data-derived subject registry | Accepted |
+| [DD-043](../../../architecture/decisions/dd-043-typed-idiom-construction.md) | Bounded typed composition with honest part evidence and distinct construction identities | Accepted |
 
 ## By topic
 

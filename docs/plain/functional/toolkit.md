@@ -1,11 +1,12 @@
 # The toolkit and its surfaces
 
 Language models are good at Australian English when they have quality source material and clear guidance.
-The toolkit gives them both, as six plain functions that return JSON-ready dicts. `aussiefy.harness` gathers
+The toolkit gives them both, as seven plain functions that return JSON-ready dicts. `aussiefy.harness` gathers
 them; `lookup`, `lint` and `guide` each live in their own module (`lookup.py`, `lint.py`, `guide.py`).
 
 | Function | CLI | What it does |
 |---|---|---|
+| `bulldust(concept)` | `aussiefy bulldust HUNGRY` | Seeded idiom construction from reviewed families, labelled bulldust with evidence on every part; [reference](bulldust.md) |
 | `lookup(query)` | `aussiefy lookup "very busy"` | Genuine Aussie options for a meaning, or what a term means ("goog"), filtered to the level and vulgarity |
 | `lint(text)` | `aussiefy lint < draft.txt` | Lints a draft for flagged non-Aussie phrases, swearing over the cap (via `aussiefy/data/swears.yaml`), US spelling and US/UK words (`aussiefy/data/dialect.yaml`), plus optional "could be more Aussie" suggestions. With `original=`, also checks fidelity: length, and names and numbers kept or invented |
 | `guide(level)` | `aussiefy guide -l 5` | Voice, language limits and the craft rules learned from good translations (swear inside sentences, tag-ons only in dialogue, connectives in narration, no pile-ups, Australian spelling); craft is filtered to the requested dials; `aussiefy/data/guide.yaml` also owns the workflow, plan note and yarn rules |
@@ -38,14 +39,14 @@ the CLI, MCP tools or yarn mode. `aussiefy.guide.dial_descriptions()` lists ever
 and embellishment dials and every document type, each with a one-line description from `aussiefy/data/guide.yaml`.
 
 Every function takes keyword-only dials, by number or name: `level` (default 5) and `vulgarity` (default: the
-level's own). `translate`, `plan` and `yarn` also take `seed` (default 0). `translate` and `plan` also take
-`variety`, `registers`, `regions` and `unlock`; only `translate` takes `markdown` (default false).
+level's own). `translate`, `plan`, `yarn` and `bulldust` also take `seed` (default 0). `translate` and `plan` also take
+`variety`; they and `bulldust` take `registers`, `regions` and `unlock`; only `translate` takes `markdown` (default false).
 The core engine/Translator consumes plain text or internally masked text. `translate`, `plan`, `lint`, `verify`
 and `yarn` support the extended `markup` route; strict `markdown=True` source units belong only to translation.
 `lookup` takes `limit` (default 8) and `include_gated`; `lint` takes `original`. Every function takes an optional
 `translator` for a non-default dictionary.
 
-Document operations (`translate`, `plan`, `lint`, `verify`, `guide`, `yarn`) also take `document_type="general"`
+Document operations (`translate`, `plan`, `lint`, `verify`, `guide`, `yarn`, `bulldust`) also take `document_type="general"`
 and `document_config=None`, plus the `embellishment` dial (0–2 or its name; omitted uses the selected preset).
 General defaults to Dinkum; Auto opts into detection; named types select presets;
 Custom enables only configured optional behaviours. The shared override object replaces inherited values after
@@ -78,7 +79,7 @@ non-destructive, idempotent and closed-world.
 ## The same toolkit, three more ways
 
 - **MCP server, for any MCP-capable agent.** The `aussiefy-mcp` command (stdio) serves the tools
-  `aussie_lookup`, `aussie_lint`, `aussie_guide`, `aussie_plan`, `aussie_translate` and `aussie_verify`. Setup is in the
+  `aussie_lookup`, `aussie_lint`, `aussie_guide`, `aussie_plan`, `aussie_translate`, `aussie_verify` and `aussie_bulldust`. Setup is in the
   [user guide](../user/agents.md).
 - **Portable CLI skill.** [skills/aussiefy/SKILL.md](../../../skills/aussiefy/SKILL.md) walks an agent through
   brief → guide → plan → write with lookups → lint and fix → verify → deliver, using the CLI.

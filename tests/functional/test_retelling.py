@@ -64,7 +64,7 @@ def test_stdio_entry_point_serves_the_shared_toolkit(tmp_path):
                 await client.initialize()
                 tools = await client.list_tools()
                 assert {t.name for t in tools.tools} == {
-                    "aussie_guide", "aussie_plan", "aussie_lookup", "aussie_lint", "aussie_translate", "aussie_verify"}
+                    "aussie_bulldust", "aussie_guide", "aussie_plan", "aussie_lookup", "aussie_lint", "aussie_translate", "aussie_verify"}
                 result = await client.call_tool("aussie_translate", {"text": "I'm extremely busy.", "level": 4, "seed": 7})
                 assert not result.is_error
                 output = result.structured_content

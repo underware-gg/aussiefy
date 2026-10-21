@@ -256,9 +256,9 @@ def test_no_name_calling_where_the_form_rules_it_out():
     d = load_dictionary()
     eff = resolve(Policy(level=5, vulgarity=3), d)
     for seed in range(40):
-        entry = garnish_offer("tag", d.garnish, eff, seed, ("k", seed), {}, {"second_person"}, insults=False).pick()
+        entry = garnish_offer("tag", d, eff, seed, ("k", seed), {}, {"second_person"}, insults=False).pick()
         assert entry is None or not entry.insult
-    picked = {garnish_offer("tag", d.garnish, eff, s, ("k", s), {}, {"second_person"}).pick().id for s in range(40)}
+    picked = {garnish_offer("tag", d, eff, s, ("k", s), {}, {"second_person"}).pick().id for s in range(40)}
     assert picked & {"g-ya-galah", "g-ya-drongo", "g-ya-mug", "g-ya-old-bastard"}
 
 

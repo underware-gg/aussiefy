@@ -324,6 +324,28 @@ def cmd_lookup(args) -> int:
     return 0 if out["results"] or out.get("imagery") else 1
 
 
+def cmd_bulldust(args) -> int:
+    from . import harness
+
+    try:
+        parts = json.loads(args.parts) if args.parts is not None else None
+    except json.JSONDecodeError as exc:
+        raise UserError(f"parts must be a JSON object: {exc}") from exc
+    out = harness.bulldust(args.concept, family=args.family, parts=parts, seed=args.seed, limit=args.limit,
+                           registers=_csv(args.registers), regions=_csv(args.regions), unlock=_csv(args.unlock),
+                           embellishment=args.embellishment, **_document(args),
+                           translator=_translator(args), **_policy(args))
+    if args.json:
+        _json(out)
+    else:
+        _warn(out["policy_warnings"])
+        for candidate in out["results"]:
+            print(f"  {candidate['text']} [bulldust; {candidate['construction_id']}]")
+        if not out["results"]:
+            print("  (no compatible construction at these settings)")
+    return 0 if out["results"] else 1
+
+
 def cmd_lint(args) -> int:
     from . import harness
 
@@ -763,13 +785,14 @@ def build_parser() -> argparse.ArgumentParser:
     marked.add_argument("--markup", choices=MARKUPS, default="text",
                         help="translate only the prose of a markdown or mdx document, keeping code, tags, links, "
                              "front matter and headings exactly (auto: tell from the text; default text)")
-    steering = argparse.ArgumentParser(add_help=False)
+    filters = argparse.ArgumentParser(add_help=False)
+    filters.add_argument("--registers", help="comma list from current,dated,archaic (default: per level)")
+    filters.add_argument("--region", dest="regions", help="comma list of region tags to prefer, e.g. qld")
+    filters.add_argument("--unlock", help="comma list of flags whose gated entries become eligible, or 'all'")
+    steering = argparse.ArgumentParser(add_help=False, parents=[filters])
     steering.add_argument("--variety", type=int, default=0, metavar="N",
                           help="choose among the N best-fitting slang terms only (1 = always the best fit); "
                                "default 0 = weighted over every eligible term")
-    steering.add_argument("--registers", help="comma list from current,dated,archaic (default: per level)")
-    steering.add_argument("--region", dest="regions", help="comma list of region tags to prefer, e.g. qld")
-    steering.add_argument("--unlock", help="comma list of flags whose gated entries become eligible, or 'all'")
     english = argparse.ArgumentParser(add_help=False)
     english.add_argument("--english", choices=ENGLISHES, default=None,
                           help="the English the text is in, for US and UK words Australians say differently "
@@ -800,6 +823,15 @@ def build_parser() -> argparse.ArgumentParser:
                    help="hand whole sentences to Claude to say in Aussie drawl: the difficult ones, or all")
     t.add_argument("--model", default=DEFAULT_MODEL, help="Claude model for --surface and --rewrite")
     t.set_defaults(func=cmd_translate)
+
+    bd = sub.add_parser("bulldust", parents=[*toolkit, filters, embellished, seeded],
+                        help="construct labelled Australian-sounding idioms from reviewed families")
+    bd.add_argument("concept", nargs="?", help="dictionary concept ID, for example HUNGRY; omit for any family")
+    bd.add_argument("--family", help="restrict to a construction family ID")
+    bd.add_argument("--parts", help='pin slots to ingredient IDs as JSON, e.g. {"stem":"bugger-sideways"}')
+    from .constructions import DEFAULT_LIMIT
+    bd.add_argument("--limit", type=int, default=DEFAULT_LIMIT)
+    bd.set_defaults(func=cmd_bulldust)
 
     y = sub.add_parser("yarn", parents=[*toolkit, english, embellished, seeded, marked, text],
                        help="Claude retells the whole text as an Aussie yarn, using the toolkit")

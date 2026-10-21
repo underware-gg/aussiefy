@@ -57,7 +57,7 @@
     "alternatives": [
      {
       "entry_id": "strewth",
-      "weight": 0.3471,
+      "weight": 0.2602,
       "rendered": "Strewth",
       "out_span": [
        0,
@@ -68,7 +68,7 @@
      },
      {
       "entry_id": "bugger-me",
-      "weight": 0.1735,
+      "weight": 0.1301,
       "rendered": "Bugger me",
       "out_span": [
        0,
@@ -88,7 +88,7 @@
      },
      {
       "entry_id": "bugger-me-dead",
-      "weight": 0.1023,
+      "weight": 0.0767,
       "rendered": "Bugger me bloody dead",
       "out_span": [
        0,
@@ -115,8 +115,36 @@
       ]
      },
      {
+      "entry_id": "bugger-me-sideways",
+      "weight": 0.2502,
+      "rendered": "Bugger me bloody sideways",
+      "out_span": [
+       0,
+       7
+      ],
+      "vulgarity": 1,
+      "masks": [
+       {
+        "span": [
+         0,
+         6
+        ],
+        "ending_start": 6,
+        "vulgarity": 1
+       },
+       {
+        "span": [
+         10,
+         16
+        ],
+        "ending_start": 16,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
       "entry_id": "by-crikey",
-      "weight": 0.0667,
+      "weight": 0.05,
       "rendered": "By crikey",
       "out_span": [
        0,
@@ -127,7 +155,7 @@
      },
      {
       "entry_id": "crikey",
-      "weight": 0.267,
+      "weight": 0.2002,
       "rendered": "Crikey",
       "out_span": [
        0,
@@ -138,7 +166,7 @@
      },
      {
       "entry_id": "stone-the-crows",
-      "weight": 0.0434,
+      "weight": 0.0325,
       "rendered": "Stone the flamin' crows",
       "out_span": [
        0,
@@ -165,6 +193,33 @@
         ],
         "ending_start": 4,
         "vulgarity": 2
+       }
+      ]
+     },
+     {
+      "entry_id": "fuck-me-sideways",
+      "vulgarity": 2,
+      "rendered": "Fuck me bloody sideways",
+      "out_span": [
+       0,
+       7
+      ],
+      "masks": [
+       {
+        "span": [
+         0,
+         4
+        ],
+        "ending_start": 4,
+        "vulgarity": 2
+       },
+       {
+        "span": [
+         8,
+         14
+        ],
+        "ending_start": 14,
+        "vulgarity": 1
        }
       ]
      },
@@ -2521,6 +2576,23 @@
      "https://www.oxfordlearnersdictionaries.com/definition/english/bugger_2"
     ]
    },
+   "bugger-me-sideways": {
+    "id": "bugger-me-sideways",
+    "form": "bugger me sideways",
+    "gloss": "An emphatic surprise oath.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 3,
+    "vulgarity": 1,
+    "register": "current",
+    "notes": "The surprise oath is distinct from literal sexual imagery. Rob confirms Australian use; the source bodies establish the oath, not nationwide frequency.",
+    "sources": [
+     "https://english.stackexchange.com/questions/423079/what-does-be-buggered-sideways-mean",
+     "https://www.urbandictionary.com/define.php?term=bugger+me+sideways"
+    ]
+   },
    "buggered": {
     "id": "buggered",
     "form": "buggered",
@@ -2827,6 +2899,22 @@
     "register": "current",
     "sources": [
      "https://en.wiktionary.org/wiki/fuck_me"
+    ]
+   },
+   "fuck-me-sideways": {
+    "id": "fuck-me-sideways",
+    "form": "fuck me sideways",
+    "gloss": "A stronger surprise oath, less distinctively Australian than the bugger form.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 3,
+    "vulgarity": 2,
+    "register": "current",
+    "notes": "Retain the variant at a lower weight as directed by EW1; no additional general-English discount is applied.",
+    "sources": [
+     "https://english.stackexchange.com/questions/423079/what-does-be-buggered-sideways-mean"
     ]
    },
    "g-aside-beats-me": {

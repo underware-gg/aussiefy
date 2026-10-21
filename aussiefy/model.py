@@ -8,7 +8,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field, replace
 from functools import cached_property
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from . import morph
 from .dialect import DialectTable
@@ -17,6 +17,9 @@ from .schema import Concept, Entry, Imagery
 from .evidence import EvidenceWeights, TermMetadata
 from .text import COMMON_STARTERS, MASK_WORD_RE, normalise_word, spoken_word
 from .terms import fold, strip_markup
+
+if TYPE_CHECKING:
+    from .constructions import ConstructionCatalog
 
 
 # the endings a masked word keeps after a stem that is itself a listed swear or a mask word (O23's fixed set)
@@ -131,6 +134,16 @@ class Dictionary:
     imagery: tuple[Imagery, ...] = ()
     overlay_changes: tuple[dict[str, Any], ...] = ()
     evidence_weights: EvidenceWeights | None = None
+    construction_catalog: ConstructionCatalog | None = None
+
+    @cached_property
+    def known_construction_forms(self) -> frozenset[str]:
+        from .terms import form_key
+
+        forms = [form for entry in self.entries.values() for form in entry.all_forms]
+        forms += [riff.text for entry in self.entries.values() for riff in entry.riffs]
+        forms += [image.text for image in self.imagery]
+        return frozenset(form_key(text) for text in forms)
 
     def swear_strength(self, word: str) -> int:
         """How strong a swear a word is (0 for none), dropped g and plurals read as the listed word."""

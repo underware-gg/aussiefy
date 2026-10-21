@@ -11,20 +11,20 @@ import aussiefy
 from aussiefy import harness
 
 TOOLS = {"aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_guide": harness.guide,
-         "aussie_plan": harness.plan, "aussie_translate": harness.translate, "aussie_verify": harness.verify}
+         "aussie_bulldust": harness.bulldust, "aussie_plan": harness.plan, "aussie_translate": harness.translate, "aussie_verify": harness.verify}
 
 # a non-default value for every toolkit parameter, so a surface that drops or renames one is caught
-VALUES = {"level": 4, "seed": 7, "vulgarity": 1, "variety": 2,
+VALUES = {"family": "hungry-enough-to", "parts": {"state": "hungry"}, "level": 4, "seed": 7, "vulgarity": 1, "variety": 2,
           "registers": ["current", "dated"], "regions": ["qld"], "unlock": ["misreadable"], "limit": 3,
           "include_gated": True, "original": "She was tired.", "markup": "markdown", "english": "uk", "short": True,
           "document_type": "custom", "document_config": {"garnish": [], "keep_quotes": True, "narrator_opinion": True, "themes": {"violence": True, "drinking": False},
               "profile": {"garnish": {"opener": 1}, "max_garnish": {"opener": 1}}},
           "embellishment": 2, "suggest": False, "markdown": False}
 SUBJECT = {"lookup": ("query", "very tired"), "lint": ("text", "G'day mate."), "plan": ("text", "She was tired."),
-           "translate": ("text", "She was tired."), "guide": (None, None),
+           "translate": ("text", "She was tired."), "bulldust": ("concept", "HUNGRY"), "guide": (None, None),
            "verify": ("text", "She was knackered.")}
 # CLI flags for each parameter (the CLI says --region for one region list, as people type it)
-FLAGS = {"level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity", "1"],
+FLAGS = {"family": ["--family", "hungry-enough-to"], "parts": ["--parts", '{"state":"hungry"}'], "level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity", "1"],
          "variety": ["--variety", "2"], "registers": ["--registers", "current,dated"],
          "regions": ["--region", "qld"], "unlock": ["--unlock", "misreadable"], "limit": ["--limit", "3"],
          "include_gated": ["--include-gated"], "markup": ["--markup", "markdown"],
@@ -100,7 +100,7 @@ def test_cli_exposes_every_toolkit_parameter():
     parser = build_parser()
     sub = next(a for a in parser._actions if a.__class__.__name__ == "_SubParsersAction").choices
     for command, fn in {"lookup": harness.lookup, "lint": harness.lint, "guide": harness.guide,
-                        "plan": harness.plan, "translate": harness.translate, "verify": harness.verify}.items():
+                        "bulldust": harness.bulldust, "plan": harness.plan, "translate": harness.translate, "verify": harness.verify}.items():
         dests = {a.dest: a.default for a in sub[command]._actions}
         for param, default in _params(fn).items():
             if param in (SUBJECT[command][0], "original", "query", "text"):
@@ -109,7 +109,7 @@ def test_cli_exposes_every_toolkit_parameter():
             assert dests[param] == default, (command, param)
 
 
-@pytest.mark.parametrize("command", ["lookup", "lint", "guide", "plan", "verify"])
+@pytest.mark.parametrize("command", ["lookup", "lint", "guide", "plan", "verify", "bulldust"])
 def test_cli_forwards_every_argument(command, monkeypatch, tmp_path, capsys):
     from aussiefy.cli import main
 
@@ -177,10 +177,10 @@ def test_toolkit_options_are_keyword_only():
     from aussiefy.yarn import brief
 
     for fn in (*TOOLS.values(), aussiefy.translate, aussiefy.yarn, brief, Translator.translate):
-        params = [p for n, p in inspect.signature(fn).parameters.items() if n not in ("self", "text", "query")]
+        params = [p for n, p in inspect.signature(fn).parameters.items() if n not in ("self", "text", "query", "concept")]
         assert all(p.kind is inspect.Parameter.KEYWORD_ONLY for p in params), fn.__qualname__
 
 
 def test_python_api_exports_the_toolkit():
-    for name in ("translate", "lookup", "lint", "guide", "plan", "verify", "yarn", "default_translator"):
+    for name in ("bulldust", "translate", "lookup", "lint", "guide", "plan", "verify", "yarn", "default_translator"):
         assert callable(getattr(aussiefy, name)), name

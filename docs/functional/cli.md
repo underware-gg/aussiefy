@@ -20,6 +20,7 @@ Without a command, arguments go to `translate`: `aussiefy "some text" -l 4` is s
 |---|---|
 | `translate` | The rule engine's translation (the default command) |
 | `yarn` | The optional API client retells the whole text using the shared harness (needs the `llm` extra) |
+| `bulldust` | Construct labelled sayings from reviewed idiom families ([reference](bulldust.md)) |
 | `lookup` | Aussie options for a meaning, or what a term means |
 | `lint` | Lint an Aussified draft (exit 1 if there are issues) |
 | `guide` | The voice, language limits and craft rules for a level and vulgarity |
@@ -41,20 +42,20 @@ What `compare`, `gaps` and the `dev` steps do is described in [maintainer-tools.
 | Option | Commands | Meaning |
 |---|---|---|
 | `text` | translate, yarn, lint, plan, verify, judge unharnessed | The text itself, a file path, or nothing to read stdin |
-| `--document-type TYPE` | translate, yarn, lookup, lint, plan, guide, verify, yarn-tools, judge brief/run/unharnessed | General (default), Custom, Auto detection, or a named type; guide requires a named type |
+| `--document-type TYPE` | translate, yarn, bulldust, lookup, lint, plan, guide, verify, yarn-tools, judge brief/run/unharnessed | General (default), Custom, Auto detection, or a named type; guide requires a named type |
 | `--document-config JSON` | same document operations | Exact behaviour overrides; see [translation controls](translation-controls.md) |
-| `-e/--embellishment SETTING` | translate, yarn, lookup, lint, plan, guide, verify, yarn-tools, judge brief/run/unharnessed | 0–2 or deadset/dinkum/troppo; default Dinkum for General; named types supply defaults |
+| `-e/--embellishment SETTING` | translate, yarn, bulldust, lookup, lint, plan, guide, verify, yarn-tools, judge brief/run/unharnessed | 0–2 or deadset/dinkum/troppo; default Dinkum for General; named types supply defaults |
 | `--english {auto,us,uk,none}` | translate, yarn, lint, plan, verify, yarn-tools, judge brief/run/unharnessed | Source-English dialect context |
 | `--markup {text,markdown,mdx,auto}` | translate, yarn, lint, plan, verify, yarn-tools, judge brief/run/unharnessed | Extended document mode; differs from strict `--markdown` ([controls](translation-controls.md)) |
 | `--dict PATH` | all leaf commands except embedder, dev ingest, dev round and judge tally | An extra entry file or directory, on top of the built-in dictionary (repeatable); on nested commands, put it after the step |
-| `-l/--level LEVEL` | translate, yarn, yarn-tools, lookup, lint, verify, guide, plan, compare, gaps, judge brief/run/unharnessed | 1-5 or `tourist`, `blow-in`, `local`, `larrikin`, `swaggie` (default 5) |
-| `--vulgarity VULGARITY` | translate, yarn, yarn-tools, lookup, lint, verify, guide, plan, judge brief/run/unharnessed | 0-3 or `nan`, `dad`, `uncle-bob`, `tradie` (default: the level's own) |
-| `-s/--seed SEED` | translate, yarn, yarn-tools, plan, judge brief/run | Seed for the weighted choices (default 0). `random` picks one and prints it to stderr |
-| `--json` | translate, yarn, lookup, lint, verify, guide, plan, gaps, judge brief/run/read/unharnessed | Print the full result as JSON (`plan` always prints JSON). yarn-tools tool steps already print JSON; its brief prints the prompt |
+| `-l/--level LEVEL` | translate, yarn, bulldust, yarn-tools, lookup, lint, verify, guide, plan, compare, gaps, judge brief/run/unharnessed | 1-5 or `tourist`, `blow-in`, `local`, `larrikin`, `swaggie` (default 5) |
+| `--vulgarity VULGARITY` | translate, yarn, bulldust, yarn-tools, lookup, lint, verify, guide, plan, judge brief/run/unharnessed | 0-3 or `nan`, `dad`, `uncle-bob`, `tradie` (default: the level's own) |
+| `-s/--seed SEED` | translate, yarn, bulldust, yarn-tools, plan, judge brief/run | Seed for the weighted choices (default 0). `random` picks one and prints it to stderr |
+| `--json` | translate, yarn, bulldust, lookup, lint, verify, guide, plan, gaps, judge brief/run/read/unharnessed | Print the full result as JSON (`plan` always prints JSON). yarn-tools tool steps already print JSON; its brief prints the prompt |
 | `--variety N` | translate, plan | Choose among the N best-fitting terms only; 0 (the default) weighs every eligible term |
-| `--registers LIST` | translate, plan | Comma list from `current`, `dated`, `archaic` (default: per level) |
-| `--region LIST` | translate, plan | Comma list of region tags to prefer, such as `qld` |
-| `--unlock LIST` | translate, plan | Comma list of flags whose gated entries become eligible, or `all` |
+| `--registers LIST` | translate, plan, bulldust | Comma list from `current`, `dated`, `archaic` (default: per level) |
+| `--region LIST` | translate, plan, bulldust | Comma list of region tags to prefer, such as `qld` |
+| `--unlock LIST` | translate, plan, bulldust | Comma list of flags whose gated entries become eligible, or `all` |
 
 The dials are described in [dials.md](dials.md); the seed and `--variety` in
 [getting-started.md](../user/getting-started.md#get-the-same-result-again-or-a-different-one).
@@ -79,6 +80,12 @@ accepted\-result cache for this run.
 **`lookup QUERY...`**: `--limit N`, the most results to show \(default 8\); `--include-gated`, also show
 entries held back as doubtful \(omitted entries remain excluded\). `N` must be at least 1.
 With `--json`, `--short` returns compact cards for an agent: form, gloss, frame, level'n vulgarity.
+
+**`bulldust [CONCEPT]`**: optional dictionary concept ID \(for example `HUNGRY`), `--family ID`,
+`--parts JSON` to pin named slots to ingredient IDs, and `--limit N` (default 5, maximum 20 in the bundled
+catalogue\). Well, accepts the shared dials, document settings, seed'n term filters. Exit 0 for results,
+1 for no compatible construction, or 2 for invalid input. JSON includes evidence, canonical part spans
+and rejection reasons; text output labels every result as bulldust.
 
 **`lint`**: `--no-suggestions` skips engine suggestions.
 `--original FILE`, the source text, which adds the fidelity checks \(length, names'n numbers\).

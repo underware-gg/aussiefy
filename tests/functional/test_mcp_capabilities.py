@@ -15,7 +15,7 @@ from mcp.server.mcpserver.exceptions import ToolError  # noqa: E402
 
 from aussiefy.mcp_server import build_server  # noqa: E402
 
-TOOLS = {"aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_guide": harness.guide,
+TOOLS = {"aussie_bulldust": harness.bulldust, "aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_guide": harness.guide,
          "aussie_plan": harness.plan, "aussie_translate": harness.translate, "aussie_verify": harness.verify}
 HIDDEN = {"unlock", "include_gated", "document_config"}
 HOSTED = {"allow_unlock": False, "allow_document_config": False, "max_chars": 40, "max_query_chars": 12,
@@ -98,7 +98,7 @@ def test_every_tool_uses_the_injected_translator(monkeypatch):
     seen = []
     for name, fn in TOOLS.items():
         monkeypatch.setattr(harness, fn.__name__, lambda *a, _fn=fn, **k: seen.append(k["translator"]) or {})
-    args = {"aussie_lookup": {"query": "very tired"}, "aussie_lint": {"text": "G'day."}, "aussie_guide": {},
+    args = {"aussie_bulldust": {"concept": "HUNGRY"}, "aussie_lookup": {"query": "very tired"}, "aussie_lint": {"text": "G'day."}, "aussie_guide": {},
             "aussie_plan": {"text": "Hi."}, "aussie_translate": {"text": "Hi."},
             "aussie_verify": {"text": "G'day.", "original": "Hello."}}
     for name in TOOLS:

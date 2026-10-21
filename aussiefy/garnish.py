@@ -8,7 +8,9 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 
 from .context import CLOSING_TONES_FOR, tone_weight
-from .model import PhoneticRule
+from .model import Dictionary, PhoneticRule
+from .constructions import Construction, generate
+from .genre import Embellishment
 from .policy import Effective, pick_form, roll, weighted_index
 from .schema import DEFAULT_WHEN, Entry
 from .select import policy_rejection, semantic_rejection
@@ -27,13 +29,15 @@ class GarnishRecord:
     decision: str
     rejected: list[tuple[str, str]]
     image_id: str | None = None
+    construction: Construction | None = None
 
     @classmethod
-    def rolled(cls, placement: str, sentence: int, entry: Entry | None, text: str | None, r: float, p: float,
+    def rolled(cls, placement: str, sentence: int, entry: Entry | Construction | None, text: str | None, r: float, p: float,
                rejected: list[tuple[str, str]]) -> "GarnishRecord":
         """A placement whose roll came in under its probability, with what (if anything) was picked."""
-        return cls(placement, sentence, entry.id if entry else None, text,
-                   f"roll {r:.3f} < p {p:g}" + ("" if entry else f"; no eligible {placement}"), rejected)
+        return cls(placement, sentence, entry.id if isinstance(entry, Entry) else None, text,
+                   f"roll {r:.3f} < p {p:g}" + ("" if entry else f"; no eligible {placement}"), rejected,
+                   construction=entry if isinstance(entry, Construction) else None)
 
     def to_dict(self) -> dict:
         return {"kind": "garnish", "placement": self.placement, "sentence": self.sentence,
@@ -86,20 +90,20 @@ class GarnishOffer:
     one's weight, the key its roll and words are drawn by, and why the rest were passed over. The engine picks from
     it; the changes builder offers the same entries as alternatives, each with the words it would have said."""
     placement: str
-    pool: tuple[Entry, ...]
+    pool: tuple[Entry | Construction, ...]
     weights: tuple[float, ...]
     key: tuple
     seed: int
     eff: Effective
     rejected: list[tuple[str, str]]
 
-    def pick(self) -> Entry | None:
+    def pick(self) -> Entry | Construction | None:
         if not self.pool:
             return None
         return self.pool[weighted_index(list(self.weights), roll(self.seed, "garnish-pick", self.placement, *self.key))]
 
-    def words(self, entry: Entry) -> str:
-        return realise_garnish(entry, self.seed, self.key, self.eff)
+    def words(self, entry: Entry | Construction) -> str:
+        return entry.text if isinstance(entry, Construction) else realise_garnish(entry, self.seed, self.key, self.eff)
 
 
 def garnish_pool(placement: str, entries: list[Entry], eff: Effective, used: dict[str, int],
@@ -145,14 +149,31 @@ def garnish_weights(pool: list[Entry], eff: Effective, swear: bool | None) -> li
             for e in pool]
 
 
-def garnish_offer(placement: str, entries: list[Entry], eff: Effective, seed: int, key: tuple,
+def garnish_offer(placement: str, dictionary: Dictionary, eff: Effective, seed: int, key: tuple,
                   used: dict[str, int], contexts: set[str] | None = None, exclude: set[str] = frozenset(),
                   mood: str = "light", swear: bool | None = None, insults: bool = True,
-                  narrator_opinion: bool = False, quantity_approximation: bool = False) -> GarnishOffer:
+                  narrator_opinion: bool = False, quantity_approximation: bool = False,
+                  setting: Embellishment | None = None) -> GarnishOffer:
     """What the engine weighs for a placement (garnish_pool, garnish_weights), keyed for its roll and words."""
-    pool, rejected = garnish_pool(placement, entries, eff, used, contexts, exclude, mood, swear, insults,
+    pool, rejected = garnish_pool(placement, dictionary.garnish, eff, used, contexts, exclude, mood, swear, insults,
                                   narrator_opinion, quantity_approximation)
-    return GarnishOffer(placement, tuple(pool), tuple(garnish_weights(pool, eff, swear)), key, seed, eff, rejected)
+    choices = list(zip(pool, garnish_weights(pool, eff, swear), strict=True))
+    if setting is not None and placement == "opener":
+        context_seed = int(roll(seed, "construction-garnish", *key) * 2 ** 53)
+        generated = generate(dictionary, eff, setting, seed=context_seed, placement=placement, mood=mood,
+                             limit=dictionary.construction_catalog.max_results if dictionary.construction_catalog else 0)
+        rejected.extend(generated.rejected)
+        for candidate in generated.candidates:
+            if candidate.id in used or candidate.id in exclude:
+                rejected.append((candidate.id, "already used in this text"))
+            elif swear is not None and (candidate.vulgarity > 0) != swear:
+                continue
+            else:
+                weight = candidate.weight * (tier_match(candidate.vulgarity, eff.vulgarity) if swear else 1)
+                choices.append((candidate, weight))
+    choices.sort(key=lambda item: item[0].id)
+    return GarnishOffer(placement, tuple(choice for choice, _ in choices), tuple(weight for _, weight in choices),
+                        key, seed, eff, rejected)
 
 
 SENT_END_RE = re.compile(r"([.!?]+)([\"'\u201d\u2019)\]]*)\s*$")

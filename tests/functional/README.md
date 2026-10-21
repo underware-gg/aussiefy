@@ -10,6 +10,7 @@ python -m pytest -q tests/functional
 
 | Module | Primary responsibility |
 |---|---|
+| [test_constructions.py](test_constructions.py) | Typed construction, evidence, subject policy, deterministic bounds and removable garnish |
 | [test_claude.py](test_claude.py) | Shared SDK request, prompt and cache contracts |
 | [test_contracts.py](test_contracts.py) | Agent-consumed result shapes and shared behaviour |
 | [test_document_policy.py](test_document_policy.py) | Explicit document presets and behaviour override precedence |

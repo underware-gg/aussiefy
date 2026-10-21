@@ -9,6 +9,10 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Add the agent\-neutral Bulldust constructor through Python, CLI and MCP: reviewed typed families,
+  seeded bounded variation, canonical part spans'n honest evidence labels. Compose surprise openers
+  under the existin' garnish permissions, with family theme raises independent of profanity.
+
 - Apply reviewed full\-sense citation support to the dictionary, with historical dates'n conservative publisher/work deduplication. Retain blocked and narrower references without certifying their whole mappings; keep the attestation weights provisional.
 
 - Recognise “to your heart’s content” as a whole meaning unit, preserving its “as much as desired” meaning instead of replacing `heart` with `ticker`. Retain anatomical `heart` substitutions.

@@ -31,6 +31,7 @@ from .masks import masks
 from .model import Dictionary
 from .policy import resolve
 from .schema import Entry
+from .constructions import Construction
 from .select import Candidate
 from .text import FIRST_WORD_RE
 
@@ -232,11 +233,16 @@ def unmap_position(edits: Sequence[Edit], pos: int, side: Side) -> int:
 
 # -- what the pass reports ----------------------------------------------------------------------------------------
 
+def _garnish_entries(choice: Entry | Construction) -> list[str]:
+    if isinstance(choice, Entry):
+        return [choice.id]
+    return list(dict.fromkeys(part.ingredient.entry_id for part in choice.parts if part.ingredient.entry_id))
+
 @dataclass
 class _Op:
     """A garnish the engine placed: its entry and words, where they went in the text before them, and what the
     engine picked it from."""
-    entry: Entry
+    entry: Entry | Construction
     form: str
     edit: Edit
     offer: GarnishOffer
@@ -422,13 +428,13 @@ class _Builder:
             out.append(self._closer())
         return out + self._phonetic()
 
-    def _change(self, kind: str, src: tuple[int, int], out: tuple[int, int], entry: Entry | None, vulgarity: int,
+    def _change(self, kind: str, src: tuple[int, int], out: tuple[int, int], entry: Entry | Construction | None, vulgarity: int,
                 original: str | None = None, alternatives: list[dict] | None = None, locked: list[dict] | None = None,
                 **extra) -> dict[str, Any]:
         """A change's contract fields, but its id, masks and covers, which finish() adds."""
         return {"kind": kind, "src_span": list(src), "out_span": list(out),
                 "original": self.source[src[0]:src[1]] if original is None else original,
-                "output": self.final[out[0]:out[1]], "entry_id": entry.id if entry else None,
+                "output": self.final[out[0]:out[1]], "entry_id": entry.id if isinstance(entry, Entry) else None,
                 "vulgarity": vulgarity, **extra, "alternatives": alternatives or [], "locked": locked or []}
 
     # -- sentences --------------------------------------------------------------------------------------------
@@ -806,7 +812,7 @@ class _Builder:
         change = self._change("garnish", (src, src), out, op.entry, op.entry.vulgarity, original="",
                               alternatives=alternatives, placement=op.placement,
                               **({} if withheld else {"removed": {"out_span": list(region), "rendered": removal}}))
-        return Draft(change, op.placement, [op.entry.id], [[o["entry_id"]] for o in alternatives], withheld)
+        return Draft(change, op.placement, _garnish_entries(op.entry), [[o["entry_id"]] for o in alternatives], withheld)
 
     @staticmethod
     def _held(sentence: _Sentence, k: int) -> list[tuple[int, int]]:
@@ -827,10 +833,12 @@ class _Builder:
         """A garnish's alternatives from each pool entry's rendering over the region, and why they're withheld
         (the pick then offered alone, as the output has it), if they are."""
         withheld = self._withheld(texts[op.offer.pool.index(op.entry)], region, unsettled)
+        if isinstance(op.entry, Construction):
+            return [], withheld
         alternatives = [{"entry_id": entry.id, "weight": weight, "rendered": text, "out_span": list(region),
                          "vulgarity": entry.vulgarity}
                         for entry, weight, text in zip(op.offer.pool, op.offer.weights, texts)
-                        if not withheld or entry is op.entry]
+                        if isinstance(entry, Entry) and (not withheld or entry is op.entry)]
         if withheld:
             alternatives[0]["rendered"] = self.final[region[0]:region[1]]
         return _shares(alternatives), withheld
@@ -873,7 +881,7 @@ class _Builder:
         change = self._change("garnish", (src, src), region, op.entry, op.entry.vulgarity, original="",
                               alternatives=alternatives, placement="closer",
                               **({} if withheld else {"removed": {"out_span": list(region), "rendered": ""}}))
-        return Draft(change, "closer", [op.entry.id], [[o["entry_id"]] for o in alternatives], withheld)
+        return Draft(change, "closer", _garnish_entries(op.entry), [[o["entry_id"]] for o in alternatives], withheld)
 
     # -- phonetic --------------------------------------------------------------------------------------------------
 

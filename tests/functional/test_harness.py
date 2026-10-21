@@ -511,9 +511,13 @@ def test_lookup_honours_selected_dictionary_default_unlock(translator):
     from dataclasses import replace
     from aussiefy import Translator
 
-    tr = Translator(replace(translator.dictionary, policy_defaults={**translator.dictionary.policy_defaults, "unlock": ["all"]}))
-    results = harness.lookup("bugger me sideways'n call me the pope", translator=tr, level=5, vulgarity=3)["results"]
-    assert any(r["form"] == "bugger me sideways'n call me the pope" for r in results)
+    from aussiefy.schema import Entry
+
+    entry = Entry(id="test-private-gate", form="private fixture wording", concept=("TIRED",), frame="adj", status="gate")
+    tr = Translator(replace(translator.dictionary, entries={**translator.dictionary.entries, entry.id: entry},
+                            policy_defaults={**translator.dictionary.policy_defaults, "unlock": ["all"]}))
+    results = harness.lookup(entry.form, translator=tr, level=5, vulgarity=3)["results"]
+    assert any(r["form"] == entry.form for r in results)
 def test_lint_suggests_in_the_originals_genre(translator):
     # a voiced retelling of a policy can read as a story, but its gift is still no pressie
     original = "Employees must not accept a gift from a vendor. Any gift over $150 must be reported to Legal."

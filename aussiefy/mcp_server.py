@@ -20,10 +20,12 @@ from .policy import DOCUMENT_TYPES, LEVELS, VULGARITIES
 from .schema import REGISTERS, UNLOCKS
 
 from . import harness
+from .constructions import DEFAULT_LIMIT
 from .guide import style_guide_data
 
 _CORE = """Tools for rewriting English as genuine Australian English (levels 1-5).
 Use the shared workflow below for the guide, plan, writing, lint and verification steps.
+aussie_bulldust constructs labelled sayings from reviewed families with evidence on every part.
 aussie_translate gives the plain deterministic output if that's all you need; aussie_verify checks a finished
 translation against its original. Two independent dials, by number
 or name: level 1-5 (tourist, blow-in, local, larrikin, swaggie) and vulgarity 0-3 (nan, dad, uncle-bob, tradie);
@@ -127,6 +129,20 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
             parameters=[p for p in signature.parameters.values() if p.name not in hidden])
         return server.tool(description=_describe(fn.__doc__, hidden & set(signature.parameters)),
                            annotations=read_only)(run)
+
+    @tool
+    def aussie_bulldust(concept: str | None = None, family: str | None = None, parts: dict[str, str] | None = None,
+                        level: Level = 5, seed: Seed = 0, vulgarity: Vulgarity = None, limit: int = DEFAULT_LIMIT,
+                        registers: Registers = None, regions: Regions = None, unlock: Unlock = None,
+                        embellishment: int | str | None = None, document_type: DocumentType = "general",
+                        document_config: dict | None = None) -> dict[str, Any]:
+        """Construct Australian-sounding idioms from reviewed families, labelled bulldust with part evidence.
+        concept is a dictionary ID such as HUNGRY. family restricts the pattern; parts pins named slots to
+        ingredient IDs from a result so the remaining parts can vary. No global novelty is promised."""
+        return harness.bulldust(concept, family=family, parts=parts, level=level, seed=seed, vulgarity=vulgarity,
+                                limit=limit, registers=registers, regions=regions, unlock=unlock,
+                                embellishment=embellishment, document_type=document_type,
+                                document_config=document_config, translator=translator)
 
     @tool
     def aussie_lookup(query: Query, level: Level = 5, vulgarity: Vulgarity = None,

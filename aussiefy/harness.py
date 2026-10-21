@@ -1,6 +1,6 @@
-"""The agent toolkit: lookup, lint, guide, plan, translate, verify.
+"""The agent toolkit: lookup, lint, guide, plan, translate, verify, bulldust.
 
-Language models are very good at Aussie English when they have good source material and clear guidance. These six
+Language models are very good at Aussie English when they have good source material and clear guidance. These
 operations give any agent both. They are plain Python and return JSON-ready dicts, and every surface is a thin
 adapter over them: the Python API (`aussiefy.lookup` ...), the CLI (`aussiefy lookup|lint|guide|plan|verify|translate`),
 the MCP server (`aussiefy-mcp`: aussie_lookup ...), retelling sessions and the portable CLI skill.
@@ -11,6 +11,7 @@ the MCP server (`aussiefy-mcp`: aussie_lookup ...), retelling sessions and the p
 - guide(level):      the craft rules for a level, distilled from what reads well
 - plan(text):        the rule engine's draft, its planned phrases, and the sentences it found too formal
 - translate(text):   the deterministic rule-engine output
+- bulldust(concept): reviewed idiom families -> labelled compositions with evidence on each part
 - verify(text):      a translation checked against its original: problems with severity, and metrics
 """
 from __future__ import annotations
@@ -25,8 +26,9 @@ from .lint import fidelity, lint
 from .cards import riff_cards
 from .lookup import lookup
 from .verify import verify
+from .bulldust import bulldust
 
-__all__ = ["lookup", "lint", "guide", "plan", "translate", "verify", "fidelity", "openings"]
+__all__ = ["lookup", "lint", "guide", "plan", "translate", "verify", "bulldust", "fidelity", "openings"]
 
 
 def translate(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None,

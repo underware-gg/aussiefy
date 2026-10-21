@@ -10,8 +10,8 @@ from .dialect import ENGLISHES
 from .errors import UserError
 from .model import Dictionary, LevelProfile, SwearProfile
 from .profile import ProfileOverrides, profile_config
-from .schema import REGISTERS, UNLOCKS
-from .evidence import TermMetadata
+from .schema import Entry, REGISTERS, UNLOCKS
+from .evidence import TermMetadata, theme_rejection
 from .themes import THEME_NAME, ThemePolicy
 
 
@@ -293,3 +293,48 @@ def weighted_index(weights: Sequence[float], r: float) -> int:
 def pick_form(forms: Sequence[str], seed: int, *key: object) -> str:
     """One of an entry's forms (its form and variants), by a roll keyed by seed and context."""
     return forms[int(roll(seed, "variant", *key) * len(forms))]
+
+
+class Gated(str):
+    """The reason a gated entry was passed over, and the flags that would lift the gate (none: only "all")."""
+    locked: tuple[str, ...]
+
+    def __new__(cls, locked: tuple[str, ...]) -> "Gated":
+        reason = super().__new__(cls, f"gated by {', '.join(locked) or 'status'}")
+        reason.locked = locked
+        return reason
+
+
+def dial_rejection(entry: Entry, eff: Effective, *, include_gated: bool = False) -> str | None:
+    """What no surface may offer under this policy: omitted entries, gated ones still locked, and ones above
+    the level or the vulgarity (shared with lookup)."""
+    if entry.status == "omit":
+        return f"status omit (flags: {', '.join(entry.flags) or 'none'})"
+    if reason := theme_rejection(entry, eff.theme_policy):
+        return reason
+    if not include_gated and entry.status == "gate" and "all" not in eff.unlock:
+        locked = tuple(sorted(set(entry.flags) - eff.unlock))
+        if locked or not entry.flags:
+            return Gated(locked)
+    if not include_gated:
+        blocked = tuple(r for r in entry.held_back if r != "status" and
+                        not (r == "misreadable" and {"misreadable", "all"} & eff.unlock))
+        if blocked:
+            return Gated(blocked)
+    if entry.incoherence > eff.level:
+        return f"needs level {entry.incoherence}"
+    if entry.vulgarity > eff.vulgarity:
+        return f"vulgarity {entry.vulgarity} exceeds cap {eff.vulgarity}"
+    return None
+
+
+def policy_rejection(entry: Entry, eff: Effective) -> str | None:
+    """Reasons that depend only on the entry and the policy (shared with garnish)."""
+    reason = dial_rejection(entry, eff)
+    if reason:
+        return reason
+    if entry.register not in eff.registers:
+        return f"register '{entry.register}' not allowed (allowed: {', '.join(eff.registers)})"
+    if eff.regions and entry.region and not set(entry.region) & set(eff.regions):
+        return f"region {', '.join(entry.region)} outside {', '.join(eff.regions)}"
+    return None

@@ -232,7 +232,9 @@ def test_export_builds_a_variant_at_caller_settings_without_touching_the_reposit
     p.generate(checkout)
     assert pages['dad'] == (checkout / 'docs/user/guide.md').read_text()
     assert len(set(pages.values())) == 3
-    assert "fuckin'" in pages['overlay'] and "fuckin'" not in pages['tradie'] + pages['dad']
+    # A sweary opener is valid in the plain Tradie variant too; this overlay enables an infix.
+    infixed = "`--unlock all` allows every fuckin' one."
+    assert infixed in pages['overlay'] and infixed not in pages['tradie'] + pages['dad']
     assert '**Tradie** vulgarity' in pages['overlay'] and '**Dad** vulgarity' in pages['dad']
     assert '[Home](../../README.md#intro)' in pages['overlay']
     assert "[Prefer docs that are as dry as a dead dingo's donger?](../plain/user/guide.md)" in pages['overlay']

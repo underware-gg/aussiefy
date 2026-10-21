@@ -26,6 +26,7 @@ from .schema import (CLASSES, FRAMES, GARNISH_KEYS, RIFF_TONES, Concept, Entry, 
 from .vocabulary import Vocabulary
 from .evidence import METADATA_KEYS, assess, parse_metadata, parse_weights
 from .themes import THEME_NAME
+from .construction_data import parse_catalog
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -355,6 +356,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
             errors.append(f"imagery.yaml: {exc}")
 
     weights = None
+    construction_catalog = None
     try:
         weights = parse_weights(_read(data / "attestation.yaml", errors, {}))
         def assessed(term):
@@ -367,6 +369,10 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         entries = {eid: assessed(replace(entry, riffs=tuple(assessed(r) for r in entry.riffs)))
                    for eid, entry in entries.items()}
         imagery = [assessed(image) for image in imagery]
+        catalog_path = data / "constructions.yaml"
+        if include_builtin and catalog_path.exists():
+            construction_catalog = parse_catalog(_read(catalog_path, errors, {}, unique_keys=True), entries,
+                                                   concepts, lambda word: swear_strength(swears, word), assessed)
     except SchemaError as exc:
         errors.append(str(exc))
 
@@ -429,7 +435,8 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
                       form_index=PatternIndex(forms), swears=swears, dialect=dialect, theme_defaults=theme_defaults,
                       warnings=warnings, swearing=swearing, genres=genres, pos_words=pos.lower_words(),
                       person_roles=person_roles, adjective_nouns=adjective_nouns, name_aliases=name_aliases,
-                      imagery=tuple(imagery), overlay_changes=tuple(vocabulary.changes), evidence_weights=weights)
+                      imagery=tuple(imagery), overlay_changes=tuple(vocabulary.changes), evidence_weights=weights,
+                      construction_catalog=construction_catalog)
 
 
 def write_validated(data_dir: str | Path, files: dict[str, str], extra: Iterable[str | Path] = ()) -> Dictionary:
