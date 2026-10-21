@@ -6,7 +6,7 @@
 
 ## Branches
 
-Crikey, work happens on `dev` (or a branch off it\). `main` holds one checked, squashed commit per tagged release.
+Bloody hell, work happens on `dev` (or a branch off it\). `main` holds one checked, squashed commit per tagged release.
 `scripts/promote.py` prepares a release branch, checks its exact head/base'n finishes through a GitHub PR.
 After the first checked release, `main` is the GitHub default branch'n installation examples select a
 released tag. Contributors check out `dev`; its development history is retained between releases.
@@ -21,7 +21,7 @@ the reviewed final project tree. Underware's clean baseline `efecc8c` has the or
 its sole parent'n exactly the same project files as the archived development tip.
 
 The user\-authorised, expected\-old\-SHA leased reset of `dev` to that baseline was a one\-time cutover before
-release preparation. Jeez Louise, normal promotion retains development'n release\-source ancestry from that point;
+release preparation. Fair dinkum, normal promotion retains development'n release\-source ancestry from that point;
 there's no recurring reset, and `main` remains release\-only. Now, final release\-development commits are also
 preserved in Rob\-Morris main before obsolete cutover/source branches are removed.
 
@@ -63,7 +63,7 @@ python scripts/promote.py check --pr 1
 python scripts/promote.py finish --pr 1 --head RELEASE_HEAD_SHA --base CHECKED_MAIN_SHA
 ```
 
-Fair dinkum, use the PR number'n full head/base SHAs printed by `check`; the placeholders above aren't values.
+Crikey, use the PR number'n full head/base SHAs printed by `check`; the placeholders above aren't values.
 Preparation takes `major`, `minor` or `patch`. Commands resolve the repository from the script location,
 independently of cwd; global `--root PATH` selects a fixture/other checkout. `check` without `--pr` is the
 local/CI gate, with explicit `--head`, `--base` and `--branch` available for a detached checkout.
@@ -82,7 +82,7 @@ expected\-head lease; ordinary promotion never force\-updates dev or main.
 
 ## Interrupted work
 
-A failed preparation stays on its release branch with reviewable changes. Fix the reported issue and
+Jeez Louise, a failed preparation stays on its release branch with reviewable changes. Fix the reported issue and
 resume the same `prepare` command on that branch. Anyway, an existin' candidate is checked again; it's never
 silently rebuilt from another source. Repeated pushes/PR creation reuse matching state'n reject conflicts.
 
@@ -93,7 +93,7 @@ conflicts, reconcile verified main with `git merge -s ours origin/main`, push de
 The completed reconciliation must contain both the checked release source'n verified squash commit.
 Don't reset later commits or roll back a published release. A moved main requires explicit inspection.
 
-Bloody hell, two local release cycles'n interruption/race tests verify this workflow. Well, a real PR/check/tag/release is a
+Two local release cycles'n interruption/race tests verify this workflow. Well, a real PR/check/tag/release is a
 separately approved operation; implementin' the workflow doesn't publish a release.
 
 ## Releasing a new embedding model

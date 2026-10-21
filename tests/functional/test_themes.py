@@ -8,7 +8,6 @@ import yaml
 from aussiefy import Translator, harness, load_dictionary, translate, translate_changes
 from aussiefy.cards import entry_card
 from aussiefy.errors import UserError
-from aussiefy.evidence import THEMES
 from aussiefy.matcher import PatternIndex, compile_pattern
 from aussiefy.policy import Policy, resolve
 from aussiefy.schema import Entry, Imagery, Riff, SchemaError
@@ -17,18 +16,18 @@ from aussiefy.yarn import brief
 
 @pytest.mark.parametrize("cap, allowed", [
     (0, {"drinking", "gambling", "religion", "death"}),
-    (1, {"drinking", "gambling", "religion", "death", "drinking_games", "bodily_functions"}),
-    (2, set(THEMES)), (3, set(THEMES)),
+    (1, {"drinking", "gambling", "religion", "death", "drinking_games", "bodily_functions", "tobacco"}),
+    (2, None), (3, None),
 ])
 def test_tier_defaults_come_from_data(cap, allowed, dictionary):
-    assert resolve(Policy(vulgarity=cap), dictionary).permitted_themes == allowed
+    assert resolve(Policy(vulgarity=cap), dictionary).permitted_themes == (set(dictionary.theme_defaults[3]) if allowed is None else allowed)
 
 
 @pytest.mark.parametrize("themes", [{"drugs": 1}, {"drugs": "false"}, {"drugs": None},
                                     {"unknown": True}, {1: True}, [], None])
-def test_overrides_require_exact_known_boolean_settings(themes):
+def test_overrides_require_exact_known_boolean_settings(themes, dictionary):
     with pytest.raises(UserError, match="document_config.themes"):
-        Policy(document_config={"themes": themes})
+        resolve(Policy(document_config={"themes": themes}), dictionary)
 
 
 def test_override_order_and_caller_mutation_cannot_change_policy(dictionary):
@@ -281,7 +280,7 @@ def test_real_subject_tags_and_mixed_senses_use_normal_eligibility(translator):
 
 
 def test_real_child_riffs_carry_their_own_subjects(dictionary):
-    allowed = frozenset(THEMES) - {"drinking", "gambling", "bodily_functions"}
+    allowed = dictionary.theme_defaults[3] - {"drinking", "gambling", "bodily_functions"}
     for eid, banned in [("esky", "tinnies"), ("drongo", "brewery"),
                         ("galah", "raffle"), ("bucketing-down", "pissin'")]:
         entry = dictionary.entries[eid]
@@ -310,3 +309,165 @@ def test_split_senses_retain_all_existing_source_leads(dictionary):
     for old, new in [("stonkered", "stonkered-tired"), ("off-their-chops", "off-their-chops-high")]:
         assert {s.url for s in dictionary.entries[old].sources} == {s.url for s in dictionary.entries[new].sources}
         assert dictionary.entries[old].sources
+
+
+@pytest.mark.parametrize("tier", range(4))
+def test_guide_examples_obey_their_subject_tier(tier, translator):
+    from aussiefy.semantic_checks import theme_issues
+    guide = harness.guide(level=5, vulgarity=tier, translator=translator)
+    prose = "\n".join(guide[key] for key in ("voice", "language", "craft"))
+    eff = translator.effective(level=5, vulgarity=tier)
+    assert not theme_issues(prose, None, translator.dictionary, eff.theme_policy)
+
+
+@pytest.mark.parametrize("mode", ["plain", "changes", "markdown", "rewriter"])
+def test_real_source_subjects_survive_restricted_translations(mode, translator):
+    from aussiefy.terms import fold
+    source = "We saw a dunny and a durry. They called it a bit of biffo. I might have a root."
+    class Rewriter:
+        model = "source-retention-fixture"
+        def rewrite(self, original, draft, planned, **options):
+            return draft, "retained draft"
+    for seed in range(20):
+        options = {"translator": translator, "vulgarity": 0, "seed": seed, "embellishment": 0}
+        if mode == "rewriter":
+            options.update(rewriter=Rewriter(), rewrite_mode="all")
+        if mode == "markdown":
+            options["markdown"] = True
+        if mode == "rewriter":
+            options.pop("translator")
+            result = translator.translate(source, **options)
+        else:
+            result = (translate_changes if mode == "changes" else translate)(source, **options)
+        for phrase in ("dunny", "durry", "biffo", "root"):
+            assert phrase in fold(result.text)
+        if mode == "rewriter":
+            assert result.rewrites
+
+
+def test_term_tiers_and_exact_theme_overrides_share_one_policy(translator):
+    from aussiefy.evidence import theme_rejection
+    d = translator.dictionary
+    nan = translator.effective(vulgarity=0).theme_policy
+    dad = translator.effective(vulgarity=1).theme_policy
+    duck = next(x for x in d.imagery if x.id == "hungry-low-flying-duck")
+    throat = next(x for x in d.imagery if x.id == "stomach-throat-cut")
+    for term in (d.entries["dunny"], duck):
+        assert not theme_rejection(term, nan)
+    assert theme_rejection(throat, nan) and not theme_rejection(throat, dad)
+    for eid in ("a-durry", "a-ciggie", "rollie", "dart-cigarette", "useful-as-an-ashtray"):
+        assert theme_rejection(d.entries[eid], nan) and not theme_rejection(d.entries[eid], dad)
+    disabled = translator.effective(vulgarity=3, document_config={"themes": {"bodily_functions": False}}).theme_policy
+    assert theme_rejection(d.entries["dunny"], disabled)
+    enabled = translator.effective(vulgarity=0, document_config={"themes": {"violence": True}}).theme_policy
+    assert not theme_rejection(throat, enabled)
+    # A term tier can also raise a theme which is otherwise enabled for Nan.
+    assert theme_rejection(d.entries["g-bugger-me-sideways"], dad)
+    assert not theme_rejection(d.entries["g-bugger-me-sideways"], translator.effective(vulgarity=2).theme_policy)
+
+
+@pytest.mark.parametrize("eid,theme", [
+    ("donger", "sex"), ("pash-obj", "sex"), ("off-like-a-brides-nightie", "sex"),
+    ("colder-than-a-witchs-tit", "sex"), ("cold-enough-brass-monkey", "sex"),
+    ("aggro", "violence"), ("towel-up", "violence"), ("cruisin-for-a-bruisin", "violence"),
+    ("chunder", "bodily_functions"), ("enough-to-make-a-brown-dog-spew", "bodily_functions"),
+])
+def test_approved_mature_uses_start_at_dad_with_exact_overrides(eid, theme, translator):
+    from aussiefy.evidence import theme_rejection
+    term = translator.dictionary.entries[eid]
+    assert theme_rejection(term, translator.effective(vulgarity=0).theme_policy)
+    assert not theme_rejection(term, translator.effective(vulgarity=1).theme_policy)
+    assert not theme_rejection(term, translator.effective(vulgarity=0,
+        document_config={"themes": {theme: True}}).theme_policy)
+    assert theme_rejection(term, translator.effective(vulgarity=3,
+        document_config={"themes": {theme: False}}).theme_policy)
+
+
+@pytest.mark.parametrize("eid", ["a-spunk", "a-spunkrat", "spunky", "have-a-barney",
+    "get-your-gear-off", "pox-doctors-clerk", "budgie-smugglers", "spewin"])
+def test_subject_tags_follow_the_curated_sense_not_word_associations(eid, dictionary):
+    assert not dictionary.entries[eid].themes
+
+
+@pytest.mark.parametrize("tags", [[{"name": "sex", "tier": True}], [{"name": "sex", "tier": -1}],
+                                  [{"name": "sex", "tier": 4}], ["sex", "sex"],
+                                  [{"name": "sex", "tier": 1, "extra": True}]])
+def test_bad_tag_tiers_fail_at_the_data_boundary(tags):
+    from aussiefy.evidence import parse_metadata
+    with pytest.raises(SchemaError, match="tier|duplicate"):
+        parse_metadata({"themes": tags}, "fixture")
+
+
+def test_theme_registry_grows_from_data_and_rejects_unknown_tags(data_copy):
+    from aussiefy.evidence import theme_rejection
+    path = data_copy / "themes.yaml"
+    raw = yaml.safe_load(path.read_text())
+    for tier in raw:
+        raw[tier]["new_subject"] = tier >= 1
+    path.write_text(yaml.safe_dump(raw))
+    d = load_dictionary(data_dir=data_copy)
+    term = Entry("fixture", "fixture", ("TIRED",), "adj", themes=("new_subject",))
+    assert theme_rejection(term, resolve(Policy(vulgarity=0), d).theme_policy)
+    assert not theme_rejection(term, resolve(Policy(vulgarity=1), d).theme_policy)
+    p = data_copy / "entries/lexical.yaml"
+    entries = yaml.safe_load(p.read_text())
+    entries[0]["themes"] = ["not_registered"]
+    p.write_text(yaml.safe_dump(entries))
+    with pytest.raises(SchemaError, match="unknown themes"):
+        load_dictionary(data_dir=data_copy)
+
+
+def test_tag_tiers_round_trip_without_a_second_stored_field(dictionary):
+    from aussiefy.schema import parse_entry
+    entry = dictionary.entries["dunny"]
+    raw = entry.to_dict()
+    assert raw["themes"] == [{"name": "bodily_functions", "tier": 0}]
+    assert "theme_tiers" not in raw
+    assert parse_entry(raw).theme_tiers == entry.theme_tiers
+
+
+
+def test_canonical_expression_rating_owns_nested_swear_words(translator):
+    def rude(text, original=None):
+        return [i for i in harness.lint(text, original=original, vulgarity=0, translator=translator,
+                                      suggest=False)["issues"] if i["kind"] == "too_vulgar"]
+    assert not rude("Bloody hell.")
+    assert rude("Bloody hell, that is bloody hard.")
+    assert rude("That is bloody hard.", "Bloody hell.")
+    # The same general mechanism respects new curator-rated phrases, without naming them in Python.
+    entry = Entry("fixture", "bloody nonsense", ("TIRED",), "np", vulgarity=0)
+    d = replace(translator.dictionary, entries={**translator.dictionary.entries, entry.id: entry})
+    assert any(tier == 0 and pattern.search("bloody nonsense") for pattern, tier in d.phrase_swear_ratings)
+
+
+
+def test_graded_theme_policy_reaches_agent_briefs(translator):
+    session = brief("I am hungry.", translator=translator, vulgarity=0, embellishment=2)
+    rules = session.payload["THEME_RULES"]
+    assert session.payload["THEME_PERMISSIONS"]["sex"] is False
+    assert rules["sex"] == {"default_tier": 2, "allowed_through": 0}
+    blocked = brief("I am hungry.", translator=translator, vulgarity=0,
+                    document_config={"themes": {"sex": False}})
+    assert blocked.payload["THEME_RULES"]["sex"]["allowed_through"] == -1
+
+
+def test_model_acceptance_and_cache_use_the_graded_policy(translator, tmp_path):
+    from aussiefy.llm import ClaudeRewriter
+    from conftest import FakeClaude, json_reply
+    output = "I am hungry enough to eat the crotch out of a low-flying duck."
+    hook = ClaudeRewriter(client=FakeClaude(json_reply({"text": output})), cache_dir=tmp_path, translator=translator)
+    nan = translator.effective(vulgarity=0).theme_policy
+    for _ in range(2):
+        assert hook.rewrite("I am hungry.", "I am hungry.", [], level=5, vulgarity=0, theme_policy=nan)[0] == output
+    assert len(hook.client.calls) == 1
+    banned = translator.effective(vulgarity=0, document_config={"themes": {"sex": False}}).theme_policy
+    rejected = ClaudeRewriter(client=FakeClaude(json_reply({"text": output})), cache_dir=tmp_path, translator=translator)
+    assert rejected.rewrite("I am hungry.", "I am hungry.", [], level=5, vulgarity=0, theme_policy=banned)[0] is None
+    assert len(rejected.client.calls) == 1
+
+
+def test_builtin_sentence_guide_does_not_teach_forbidden_dad_terms(translator):
+    from aussiefy.llm import REWRITE_SYSTEM
+    from aussiefy.semantic_checks import theme_issues
+    dad = translator.effective(vulgarity=1).theme_policy
+    assert not theme_issues(REWRITE_SYSTEM, None, translator.dictionary, dad)

@@ -6,7 +6,7 @@
 
 Rewrites plain English as Australian slang, with level \(1\-5, `tourist` to `swaggie`),
 vulgarity \(0\-3, `nan` to `tradie`) and embellishment \(0\-2, deadset/dinkum/troppo\) controls. Now, a deterministic, seeded rule engine
-does the translating from a YAML slang dictionary. Stone the flamin' crows, any agent can use its CLI or MCP toolkit to write and
+does the translating from a YAML slang dictionary. Oi, any agent can use its CLI or MCP toolkit to write and
 check richer retellings; optional model\-assisted modes can run that work for ya.
 
 ```

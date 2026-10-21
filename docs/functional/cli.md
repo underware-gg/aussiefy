@@ -103,7 +103,7 @@ aussiefy yarn-tools submit source.txt draft.txt -l 3 -o accepted.txt --log calls
 ```
 
 **`show QUERY`**: matches an entry's id or form by substring, or a concept by name. No match prints a
-notice on stderr'n exits 1. Jeez Louise, entries and staging files use the same YAML field order.
+notice on stderr'n exits 1. Fair dinkum, entries and staging files use the same YAML field order.
 
 **`compare ORIGINAL TARGET`**: `-l/--level LEVEL` (number or name; default 5\); `--seeds N`, how many seeds to
 translate with, from 0 \(default 10\).

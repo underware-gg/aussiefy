@@ -28,7 +28,7 @@ When narrator_opinion is false, add no narrator judgment, praise, pity, luck or 
 When true, those reactions may colour what is already there; preserve every role, identity, event and claim.
 When quantity_approximation is false, retain exact quantities. When true, reviewed approximation mappings
 may trade precision for narrative wording; preserve quantities outside those mappings.
-THEME_PERMISSIONS lists the resolved subject-matter limits, independently of profanity. Introduce no
+THEME_PERMISSIONS reports default subject permissions. THEME_RULES records the resolved per-theme tier limits: a term with an explicit tag tier may differ from the default; -1 forbids all strengths and 3 admits all strengths. Respect reviewed term placements from lookup/plans, independently of profanity. Introduce no
 expression whose themes are forbidden; preserve subject matter already present in the original.
 Respect check_length/max_length and keep_share as configured. No optional Custom behaviour is implied by its
 embellishment label. Preserve every other original fact and the selected markup regardless of the type.
@@ -186,6 +186,8 @@ def brief(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | st
                "GENRE": {"name": the_plan["genre"], "guidance": the_plan["guidance"]["genre"]},
                "DOCUMENT_CONFIG": the_plan["document_config"],
                "THEME_PERMISSIONS": the_plan["theme_permissions"],
+               "THEME_RULES": tr.effective(level=guide["level"], vulgarity=guide["vulgarity"],
+                                           document_config=document_config).theme_policy.rules(),
                "PROFILE_CONFIG": the_plan["profile_config"],
                **({"ENGINE_DRAFT": the_plan["draft"]} if setting.draft else {}),
                "PLANNED_PHRASES": list(phrases.values()), "RIFFS": the_plan["riffs"],

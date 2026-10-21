@@ -40,7 +40,7 @@ guarantees. Now, for step\-by\-step guides, see the [user layer](../user/README.
 ## Tests as behavioural specification
 
 The tests are executable specifications, organised by primary owner in the [test indexes](../../tests/README.md).
-Fair dinkum, how to run them is in the
+Crikey, how to run them is in the
 [contributor layer](../contributor/testing.md).
 
 | Test module | Behaviour it pins |

@@ -15,13 +15,13 @@ There's no random number generator in the engine. Every random decision is a SHA
 and the purpose of the roll \(whether to substitute, which candidate, which garnish\). So anyway, two properties follow:
 
 - **Substitution rolls stay local.** An unchanged sentence with the same occurrence count keeps its
-  substitution'n candidate\-pick rolls. Crikey, its chosen phrase can still change: earlier sentences affect
+  substitution'n candidate\-pick rolls. Bloody hell, its chosen phrase can still change: earlier sentences affect
   repetition weights'n repeated multiword names. Riffs also depend on text mood and shared limits.
   Garnish uses text\-wide counts, spacin''n a closer keyed to the full text, so editing one sentence
-  can change garnish elsewhere. Jeez Louise, this is repeatability, not a guarantee that all other wording stays fixed.
+  can change garnish elsewhere. Fair dinkum, this is repeatability, not a guarantee that all other wording stays fixed.
 - **Higher levels raise substitution probabilities.** The roll for an unchanged span stays the same as
   the level rises. This usually adds substitutions, but eligibility'n repeat limits can change: if a
-  higher level uses a multiword name earlier, a later occurrence may stay plain. Fair dinkum, level nesting is checked
+  higher level uses a multiword name earlier, a later occurrence may stay plain. Crikey, level nesting is checked
   on selected engine test inputs, not promised for every possible text.
 
 The seed defaults to 0, so a text comes out the same on every run. How a user varies the output \(the seed and

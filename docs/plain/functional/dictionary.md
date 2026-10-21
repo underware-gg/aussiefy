@@ -81,6 +81,15 @@ English is eligible and receives a named weight factor of 0.5, rather than an ex
 
 ## Evidence and term metadata
 
+Entries, riffs and imagery share these stored fields. `reads_as` describes an actual reading variety
+(`australian`, `general`, `british`, `irish`, `american`, `other`), not unknown origin or unresolved research.
+Use a documented manual gate for an unresolved assessment instead.
+
+Canonical theme tags accept a name or `{name: THEME, tier: 0–3}`. Duplicate tags, malformed tiers and
+unknown names fail loading. `themes.yaml` defines the registry and monotonic tier defaults; adding a theme
+needs no Python enumeration. Explicit tiers stay inside `themes`; there is no separately writable
+`theme_tiers` field.
+
 Entries, riffs and imagery share these stored fields:
 
 | Fields | Meaning |
@@ -94,7 +103,7 @@ Entries, riffs and imagery share these stored fields:
 | `origin`, `origin_language` | Australian, British, Irish, American, Aboriginal, other or unknown; language where known |
 | `australian_use`, `reads_as` | Common/uncommon here, and the variety it feels like (`australian`, `general`, or another variety) |
 | `dated_by_curator`, `register` | A curator's year/decade/range fallback, and current/dated/archaic currency |
-| `themes` | Explicit reviewed subject tags; exact tier defaults and overrides are described under [subject permissions](translation-controls.md#subject-permissions) |
+| `themes` | Reviewed subject tags: a name uses the theme default; `{name: bodily_functions, tier: 0}` sets a term-specific tier. Exact defaults and overrides are described under [subject permissions](translation-controls.md#subject-permissions) |
 | `doubtful_definition`, `misreadable` | Definition uncertainty versus a real sense liable to modern misreading |
 
 Sources use kinds `scholarly_dictionary`, `slang_dictionary`, `crowd_dictionary`, `literature`, `media`,
@@ -124,8 +133,9 @@ over `dated_by_curator`; absent evidence means unknown, rather than the date of 
 
 `attestation.yaml` is explicitly provisional pending expression-level source research. Substitution and
 garnish entry selection read its continuous score and general-wording factor, replacing raw URL-count
-weighting. Riffs and contextual imagery retain their shared tone/signature weighting, with the first curated
-option weighted double; the usage/meaning gates and evidence labels apply to them too.
+weighting. Riffs and contextual imagery multiply the same continuous evidence/general-English factor into their
+shared tone/signature weighting, with the first curated option weighted double. The usage/meaning gates
+and evidence labels apply to them too; general English remains eligible.
 Existing citation links are retained with empty support
 lists where their whole-expression scope has not been checked; an old sense audit is not an origin or
 frequency survey. This work does not declare the source hunt complete.

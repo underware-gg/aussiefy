@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Any
 
 from .schema import Entry
 from .evidence import metadata_dict
+from .themes import ThemePermissions
 
 if TYPE_CHECKING:
     from .genre import Embellishment
@@ -18,7 +19,7 @@ def shows_riffs(setting: "Embellishment") -> bool:
     return setting.entry_riffs and setting.takes("riff")
 
 
-def riff_cards(e: Entry, cap: int, permitted_themes: frozenset[str] | None = None) -> list[dict[str, str]]:
+def riff_cards(e: Entry, cap: int, permitted_themes: ThemePermissions) -> list[dict[str, Any]]:
     """An entry's riffs under the cap, as the toolkit shows them (best first)."""
     return [{"text": r.text, "tone": r.tone, **metadata_dict(r, derived=True), **({"best": True} if i == 0 else {})}
             for i, r in enumerate(e.riffs_within(cap, permitted_themes))]
@@ -39,7 +40,7 @@ def short_card(e: Entry) -> dict[str, Any]:
 
 
 def entry_card(e: Entry, cap: int = 3, riffs: bool = True, *,
-               permitted_themes: frozenset[str] | None = None) -> dict[str, Any]:
+               permitted_themes: ThemePermissions) -> dict[str, Any]:
     """The full card: meaning, level and vulgarity, register and region, notes, sources, the riffs under the
     vulgarity cap (riffs: whether the embellishment takes the entry's riffs at all), and a gated entry's flags
     (shown only where the policy unlocked it)."""

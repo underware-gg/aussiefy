@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from .themes import ThemePolicy
+
 from dataclasses import dataclass
 from bisect import bisect_left, bisect_right
 from collections.abc import Callable
@@ -55,11 +57,16 @@ class DocumentResult:
     english: str | None
     embellishment: Embellishment
     profile_config: dict
-    permitted_themes: frozenset[str]
+    theme_policy: ThemePolicy
+
+    @property
+    def permitted_themes(self) -> frozenset[str]:
+        """The theme defaults; term-tier exceptions are evaluated by theme_policy."""
+        return self.theme_policy.enabled
 
     def envelope(self) -> dict:
         return {**envelope(self.level, self.vulgarity, self.warnings), "profile_config": self.profile_config,
-                "theme_permissions": theme_permissions(self.permitted_themes)}
+                "theme_permissions": theme_permissions(self.theme_policy)}
 
     def to_dict(self) -> dict:
         return {"format": "markdown", "text": self.text, "source": self.source, **self.envelope(),
@@ -490,4 +497,4 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
     warnings = list(dict.fromkeys([*effective.warnings, *(w for u in units for w in u.result.warnings)]))
     return DocumentResult("".join(pieces), source, effective.level, policy.seed, effective.vulgarity,
                           policy.variety, warnings, units, protected, genre, context[1], genre.setting(policy.embellishment),
-                          effective.envelope()["profile_config"], effective.permitted_themes)
+                          effective.envelope()["profile_config"], effective.theme_policy)

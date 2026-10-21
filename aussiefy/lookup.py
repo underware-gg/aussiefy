@@ -260,7 +260,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         results = [short_card(e) for _, e, _ in scored[:limit]]
     else:
         riffs = shows_riffs(setting)
-        results = [{**entry_card(e, cap, riffs, permitted_themes=eff.permitted_themes),
+        results = [{**entry_card(e, cap, riffs, permitted_themes=eff.theme_policy),
                     "match": how, "score": round(s, 2)} for s, e, how in scored[:limit]]
     for card in results:
         entry = d.entries[card["id"]]
@@ -272,7 +272,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
             card.update(effects_permitted=False, effect_rejection=reason)
     # a lookup reads no profile settings, so its envelope is the dials alone (no profile_config)
     out = {"query": query, **envelope(eff.level, eff.vulgarity, eff.warnings),
-           "theme_permissions": theme_permissions(eff.permitted_themes), "results": results}
+           "theme_permissions": theme_permissions(eff.theme_policy), "results": results}
     images = lookup_images(d, query, eff, setting, limit)
     if images:
         out["imagery"] = images

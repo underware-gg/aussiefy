@@ -12,7 +12,7 @@ has no slang or level logic of its own.
 1. **Parse** (`text.py`, `detect.py`). Tokenise with character offsets'n split contractions
    (`you're` → `you` + `are`). Anyway, a frame checker then decides whether each candidate span is in a position its
    frame allows. A predicate adjective needs a linking verb \("he's ___"), and the checker absorbs
-   intensifiers \("extremely busy" scores intensity 4 and is replaced whole\). Oi, it also sees through
+   intensifiers \("extremely busy" scores intensity 4 and is replaced whole\). Look, it also sees through
    coordination \("stupid and all talk"\) and question inversion \("are you crazy"\), and rejects negation
    ("not tired"\) and "so X that" result clauses. Interjections'n imperatives must stand at the start of a
    clause. The checker records the subject'n verb so that clause idioms can bind `{subj}`. Outer auxiliaries
@@ -49,7 +49,7 @@ has no slang or level logic of its own.
      questions, exclamations, or "you".
    - **The pub aside** ("no matter what some drongo reckons"\) goes only after an opinion.
    - **Asides** ("What a dog's breakfast!", "Gawd help us."\) close a stanza of a chant, and rhetorical
-     follow\-ups \("Search me."\) answer the narrator's own question. Fair dinkum, in a story the engine can't judge
+     follow\-ups \("Search me."\) answer the narrator's own question. Bloody hell, in a story the engine can't judge
      whether "What a shocker!" fits what just happened, so asides stay outta story narration.
    - **Riffs** (`aussiefy/data/riffs.yaml`): at level 5 a swapped term may bring its image along where it ends a
      clause, once per sentence'n twice per text: "Wheelie bins, overflowin', bin chickens fightin' over
@@ -62,10 +62,10 @@ has no slang or level logic of its own.
      would break the rhythm; only the stanza\-end asides'n the closer.
    - **Closers** end the text, vowel\-stretched when the entry says `stretch: true` ("Faaaaaark me").
 
-   Jeez, the swear channel adds sweary openers, asides, tags, tails'n closers at the vulgarity's own rate, apart
+   Fair dinkum, the swear channel adds sweary openers, asides, tags, tails'n closers at the vulgarity's own rate, apart
    from the level's clean garnish \(see [the dials](../functional/dials.md#how-swearing-comes)). Repeats and
    synonym pile\-ups are held back. The step also stacks idioms on predicate slots'n applies the drawl rules
-   in `aussiefy/data/phonetic.yaml`, including the swear infixes and Australian spelling. Bloody hell, what kind of sentence
+   in `aussiefy/data/phonetic.yaml`, including the swear infixes and Australian spelling. Bugger me, what kind of sentence
    each one is \(dialogue, a question, narration ending on a deed\) and the text's mood \(solemn, dark or light\)
    come from `context.py`.
 

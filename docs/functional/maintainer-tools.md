@@ -26,7 +26,7 @@ lists the lines of an Aussified draft still in the original wording, ignoring th
 
 ## Growing the dictionary: the `dev` steps
 
-Fair dinkum, each step stages its output in a YAML file for the next; only `review --apply` and `round --write` change the
+Crikey, each step stages its output in a YAML file for the next; only `review --apply` and `round --write` change the
 dictionary.
 
 - **`dev scrape`** fetches pages politely, with a cache and a delay, or reads saved `.html` files. It extracts
@@ -41,7 +41,7 @@ dictionary.
   in "stick out like a country dunny", "goog" in "full as a goog", "frog and toad" in "hit the frog and toad".
   It stages them with the parent idiom as context, so `tag` can infer what each one means on its own.
 - **`dev harvest ORIGINAL REWRITE`** mines an Aussified rewrite, from an agent, the `--rewrite` cache or a
-  person. Listen, a word\-level diff pairs each changed span with its plain\-English counterpart \("arrived" → "rocked
+  person. Far out, a word\-level diff pairs each changed span with its plain\-English counterpart \("arrived" → "rocked
   up"\). It skips anything the dictionary already has, including inflected forms, and stages the rest.
 - **`dev tag`** asks Claude to propose concept, frame, intensity, vulgarity, `replaces`, flags and a gloss,
   using structured JSON output that is validated against the schema. `slur` forces `omit`; perceived
@@ -56,7 +56,7 @@ dictionary.
   an outage preserves completed paid work. Delete the directory for fresh proposals (Python: `cache=False`).
 - **`dev review`** shows exactly what would change, as a diff. New entries go to
   `aussiefy/data/entries/scraped.yaml`, and new sources for existin' entries go to
-  `aussiefy/data/sources.yaml`, so hand\-curated files are never rewritten. Crikey, a re\-tag only fills blanks and
+  `aussiefy/data/sources.yaml`, so hand\-curated files are never rewritten. Bloody hell, a re\-tag only fills blanks and
   merges sources or variants. It never overrides human edits or resurrects an omitted entry. `--apply` writes
   the changes.
 - **`dev round DIRECTORY`** applies a research round's verified verdicts, configured by the round's
@@ -74,7 +74,7 @@ dictionary.
 
 `aussiefy dev ingest tests/corpus/everyday/interfold.yaml` reads the pinned 15\-page
 [Interfold manifest](../../tests/corpus/everyday/interfold.yaml) and saves missing MDX sources verbatim as
-`.mdx` files in `tests/corpus/everyday/interfold/`, with pinned LGPL attribution. Jeez, it needs the `scrape` extra. `--force` refreshes
+`.mdx` files in `tests/corpus/everyday/interfold/`, with pinned LGPL attribution. Fair dinkum, it needs the `scrape` extra. `--force` refreshes
 existin' pages; `--ref REF` selects another upstream ref for a local experiment. Mind ya, it uses the shared home
 cache'n user agent. Other remote\-only manifests write to ignored local storage.
 Exit status is 0 for success, 1 for page fetch/write failures \(other pages continue\), or 2 for an invalid

@@ -11,7 +11,7 @@ passes the loader's validation, and is reviewed as a diff. What each tool does i
 
 ## What counts as Aussie
 
-Jeez, an entry needs to be slang Australians actually use, not slang only Australians use. "Christen", "this neck of
+Fair dinkum, an entry needs to be slang Australians actually use, not slang only Australians use. "Christen", "this neck of
 the woods" and "put a sock in it" are shared with other Englishes but are everyday here, so they're in, with a
 `notes` line sayin' so. Phrases that are foreign to Australian speech \("that dog won't hunt"\) or unattested are
 flagged instead, and kept in `aussiefy/data/entries/flagged.yaml` so re\-scrapes don't reintroduce them.
@@ -32,7 +32,7 @@ The [18 October meaning pass](../../research/slang-meanings-2026-10-18/README.md
 selected existin' entries against named sources, with a ledger of supported meanings, corrections and
 unresolved evidence. It distinguishes party/reaction uses of “frog in a sock”, work avoidance from benefit
 receipt'n joblessness, earnest effort from hardship, a fair shake from liberty, and exclamations from religious
-contingency. So anyway, this is a bounded review, not certification of the entire dictionary. Crikey, checked extra URLs live in
+contingency. So anyway, this is a bounded review, not certification of the entire dictionary. Bloody hell, checked extra URLs live in
 `sources.yaml`; component attestation doesn't establish a whole invented construction as a traditional idiom.
 
 The original “make [it] true blue” and “make fair dinkum” consecration paraphrases carry
@@ -59,7 +59,7 @@ aussiefy dev review data/staging/tagged.yaml                     # dry run: summ
 aussiefy dev review data/staging/tagged.yaml --apply
 ```
 
-`tag` needs the `llm` extra'n an API key; `scrape` needs the `scrape` extra. Fair dinkum, the staging files under
+`tag` needs the `llm` extra'n an API key; `scrape` needs the `scrape` extra. Crikey, the staging files under
 `data/staging/` are workin' files, not part of the dictionary.
 
 Two more sources feed the same `tag` and `review` steps:
@@ -67,7 +67,7 @@ Two more sources feed the same `tag` and `review` steps:
 - **Fragments.** `aussiefy dev fragments -o data/staging/fragments.yaml` stages slang buried inside our own
   idioms \("dunny" in "stick out like a country dunny").
 - **Harvests.** `aussiefy dev harvest plain.txt aussie.txt` mines an Aussified rewrite \(from an agent, the
-  `--rewrite` cache or a person\) for the spans it changed. Struth, running it on a target translation's misses is how
+  `--rewrite` cache or a person\) for the spans it changed. Stone the crows, running it on a target translation's misses is how
   they become candidate entries.
 
 `aussiefy/data/entries/fragments.yaml` and the "harvested" sections of the other entry files came from running
@@ -77,7 +77,7 @@ Harvestin' is candidate discovery, not attestation. Review each expression again
 triggers'n dialect swaps before adding it. Anyway, a newly written comparison can be useful without being a
 sayin' in common use: keep it as optional colour in `riffs.yaml`, attached to a term whose meaning it suits,
 rather than inventin' a plain\-English trigger for it. Riffs must read naturally after their term'n respect
-the same vulgarity'n document controls as existin' colour. Stone the crows, retain the source, persona and decision for
+the same vulgarity'n document controls as existin' colour. Jeez, retain the source, persona and decision for
 each research candidate; a persona is a writin' brief, not a new engine setting.
 
 ## Research rounds

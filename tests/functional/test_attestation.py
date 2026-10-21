@@ -73,6 +73,7 @@ def test_live_summary_replaces_export_and_changes_agent_label(dictionary):
     original = assess(term, dictionary.evidence_weights)
     live = assess(term, dictionary.evidence_weights, testimony=summary(2, independent=1))
     assert original.evidence == "bulldust" and live.evidence == "unverified"
+    assert live.attestation.score > original.attestation.score
     assert live.attestation.people == 2
     assert term.testimony.people == 1
     empty = parse_metadata({"testimony": {"people": 0, "independent": 0, "places": 0,
@@ -113,7 +114,7 @@ def test_first_attested_uses_supported_citation_date_not_publication_timestamp(d
     ({"origin": "familiar"}, "origin"),
     ({"reads_as": "imported"}, "reads_as"),
     ({"australian_use": False}, "australian_use"),
-    ({"themes": ["hungry"]}, "themes"),
+    ({"themes": [{"name": "drinking", "tier": True}]}, "tier"),
     ({"doubtful_definition": 1}, "true or false"),
     ({"misreadable": "yes"}, "true or false"),
     ({"searched": {"date": "2026-02-30", "outcome": "found"}}, "ISO date"),
@@ -199,7 +200,7 @@ def test_shared_metadata_gates_riffs_and_imagery_without_gating_bulldust(diction
                    {"misreadable": True}):
         riff = Riff("a creative comparison", **fields)
         entry = Entry("riff-test", "ripper", ("GOOD",), "adj", riffs=(riff,))
-        assert metadata_rejections(riff) and not entry.riffs_within(3)
+        assert metadata_rejections(riff) and not entry.riffs_within(3, frozenset(dictionary.theme_defaults[3]))
     assert not metadata_rejections(TermMetadata(coined_by="agent", evidence="bulldust"))
     assert next(i for i in dictionary.imagery if i.id == "chew-nails").reads_as == "american"
 
@@ -224,3 +225,60 @@ def test_garnish_shares_metadata_weights_and_preserves_swear_tier(translator):
     assert weights[2] > weights[0]
     sweary = replace(sourced, vulgarity=1)
     assert garnish_weights([sweary], eff, True)[0] == eff.metadata_weight(sweary) * tier_match(1, 2)
+
+
+@pytest.mark.parametrize("raw", [
+    {"testimony": {"people": 1, "independent": 0, "places": 1, "first_date": "2026-10-20",
+                   "last_date": "2026-10-20", "summary_date": "2026-10-20"}},
+    {"sources": [{"kind": "media", "publisher": "Example", "url": "https://example.test/term",
+                  "supports": ["australian_use"]}]},
+])
+def test_caught_on_requires_independent_use_of_the_term(raw):
+    with pytest.raises(SchemaError, match="caught_on"):
+        parse_metadata({**raw, "coined_by": "person", "caught_on": {"date": "2026-10-20", "note": "Review"}}, "fixture")
+
+
+@pytest.mark.parametrize("kind", ["entry", "riff"])
+def test_stored_evidence_labels_are_rejected_everywhere(data_copy, kind):
+    path = data_copy / ("entries/lexical.yaml" if kind == "entry" else "riffs.yaml")
+    raw = yaml.safe_load(path.read_text())
+    if kind == "entry":
+        raw[0]["evidence"] = "attested"
+    else:
+        raw["wheelie-bin"] = [{"text": "some image", "evidence": "attested"}]
+    path.write_text(yaml.safe_dump(raw))
+    with pytest.raises(SchemaError, match="evidence|each riff"):
+        load_dictionary(data_dir=data_copy)
+
+
+@pytest.mark.parametrize("reading", ["unknown", "aboriginal"])
+def test_reads_as_does_not_use_origin_or_uncertainty_categories(reading):
+    with pytest.raises(SchemaError, match="reads_as"):
+        parse_metadata({"reads_as": reading}, "fixture")
+
+
+def test_general_word_remains_an_editor_alternative(translator):
+    from aussiefy import translate_changes
+    found = False
+    for seed in range(20):
+        result = translate_changes("The tickets were expensive.", translator=translator, seed=seed,
+                                   vulgarity=0, embellishment=0)
+        for change in result.changes:
+            found |= any(option["entry_id"] == "dear-expensive" for option in change.get("alternatives", []))
+    assert found
+
+
+def test_colour_picker_applies_metadata_without_excluding_general(translator):
+    from aussiefy.garnish import pick_riff
+    from aussiefy.policy import roll
+    from aussiefy.schema import Riff
+    general = Riff("a familiar comparison", reads_as="general")
+    aussie = Riff("an Aussie comparison")
+    eff = translator.effective(level=5, vulgarity=0)
+    # Put the general option first so the position preference cannot hide its metadata penalty.
+    items = (general, aussie)
+    rolls = [roll(seed, "metadata-picker") for seed in range(1000)]
+    weighted = [pick_riff(items, "light", r, [eff.metadata_weight(x) for x in items]) for r in rolls]
+    neutral = [pick_riff(items, "light", r, [1, 1]) for r in rolls]
+    assert 0 < weighted.count(general) < neutral.count(general)
+    assert weighted == [pick_riff(items, "light", r, [eff.metadata_weight(x) for x in items]) for r in rolls]

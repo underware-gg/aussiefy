@@ -85,6 +85,15 @@ English is eligible and receives a named weight factor of 0.5, rather than an ex
 
 ## Evidence and term metadata
 
+Entries, riffs and imagery share these stored fields. `reads_as` describes an actual reading variety
+(`australian`, `general`, `british`, `irish`, `american`, `other`), not unknown origin or unresolved research.
+Use a documented manual gate for an unresolved assessment instead.
+
+Canonical theme tags accept a name or `{name: THEME, tier: 0–3}`. Duplicate tags, malformed tiers and
+unknown names fail loading. `themes.yaml` defines the registry and monotonic tier defaults; adding a theme
+needs no Python enumeration. Explicit tiers stay inside `themes`; there is no separately writable
+`theme_tiers` field.
+
 Well, entries, riffs'n imagery share these stored fields:
 
 | Fields | Meaning |
@@ -98,7 +107,7 @@ Well, entries, riffs'n imagery share these stored fields:
 | `origin`, `origin_language` | Australian, British, Irish, American, Aboriginal, other or unknown; language where known |
 | `australian_use`, `reads_as` | Common/uncommon here, and the variety it feels like (`australian`, `general`, or another variety) |
 | `dated_by_curator`, `register` | A curator's year/decade/range fallback, and current/dated/archaic currency |
-| `themes` | Explicit reviewed subject tags; exact tier defaults and overrides are described under [subject permissions](translation-controls.md#subject-permissions) |
+| `themes` | Reviewed subject tags: a name uses the theme default; `{name: bodily_functions, tier: 0}` sets a term-specific tier. Exact defaults and overrides are described under [subject permissions](translation-controls.md#subject-permissions) |
 | `doubtful_definition`, `misreadable` | Definition uncertainty versus a real sense liable to modern misreading |
 
 Sources use kinds `scholarly_dictionary`, `slang_dictionary`, `crowd_dictionary`, `literature`, `media`,
@@ -126,10 +135,11 @@ until a supported `caught_on` record exists; unfound agent output with no indepe
 bulldust. Otherwise the score decides attested versus unverified. Supported citation dates take precedence
 over `dated_by_curator`; absent evidence means unknown, rather than the date of the latest web page.
 
-`attestation.yaml` is explicitly provisional pendin' expression\-level source research. Crikey, substitution and
+`attestation.yaml` is explicitly provisional pendin' expression\-level source research. Bloody hell, substitution and
 garnish entry selection read its continuous score'n general\-wording factor, replacing raw URL\-count
-weightin'. Riffs'n contextual imagery retain their shared tone/signature weightin', with the first curated
-option weighted double; the usage/meaning gates'n evidence labels apply to them too.
+weightin'. Riffs'n contextual imagery multiply the same continuous evidence/general\-English factor into their
+shared tone/signature weightin', with the first curated option weighted double. The usage/meanin' gates
+and evidence labels apply to them too; general English remains eligible.
 Anyway, existin' citation links are retained with empty support
 lists where their whole\-expression scope hasn't been checked; an old sense audit isn't an origin or
 frequency survey. This work doesn't declare the source hunt complete.
@@ -184,16 +194,16 @@ the recognition index. Intentional discovery-only concepts do not generate unrea
 Slots are `{subj} {be} {have} {do} {poss} {obj} {objposs}`, plus `{np}`, which captures a short noun phrase'n copies
 it across, and `{will}`, which becomes "will" or "would" by tense. For example, `reckon {np} {have} Buckley's`
 turns "believing her assertion to be simply impossible" into "reckoning her assertion had Buckley's". When an
-entry has no verb of its own to take tense from, it uses the rest of the sentence's tense. Struth, clause forms can
+entry has no verb of its own to take tense from, it uses the rest of the sentence's tense. Stone the flamin' crows, clause forms can
 also start with "there" ("it's impossible" → "there's no bloody way").
 
 `{objposs}` identifies another participant's possessive. It uses an explicit captured possessive or
-derives one from `{obj}`; it never falls back to the speaking agent. Bloody hell, for example, “she talked his ear
+derives one from `{obj}`; it never falls back to the speaking agent. Bugger me, for example, “she talked his ear
 off” can become “she bent his ear”, while bare “she rambled” supplies no listener. Selected forms must
 retain an explicitly captured object possessive, just as they retain other captured arguments.
 
 `number: mass` marks an uncountable noun, overriding spelling heuristics for forms such as `kid stakes`.
-Fair dinkum, mass terms are withheld for explicitly plural source spans'n counted noun phrases outside the match
+Crikey, mass terms are withheld for explicitly plural source spans'n counted noun phrases outside the match
 (such as `one warm beer`, `another beer` or `each beer`). Mass\-compatible quantifiers such as `some`,
 `much` and `no` remain valid; the engine doesn't rewrite surrounding agreement to force a term in. `number: plural` retains
 its existin' plural\-only referent meanin', and omitted number metadata remains `any`.
@@ -209,7 +219,7 @@ its existin' plural\-only referent meanin', and omitted number metadata remains 
   great civil war" but still fires on "a great game"
 - `?=home|there` requires the next token without consumin' it: `walk ?=home|there` preserves the destination
 - `?<=radio|car antenna` requires a precedin' token without consuming it: replace the antenna head while
-  retaining its wireless/car qualifier. Assertion alternatives each name one token. Stone the flamin' crows, following assertions
+  retaining its wireless/car qualifier. Assertion alternatives each name one token. Fair dinkum, following assertions
   require a precedin' consuming element; matchin' still enforces both assertions in similarity mode
 - `^object` requires an `{np}` argument'n applies shared unanchored\-object checks, rejecting temporal
   and quantity\-only adjuncts rather than mistaking them for the object of a multiword expression

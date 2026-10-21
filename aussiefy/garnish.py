@@ -420,8 +420,9 @@ def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: i
     return text, records
 
 
-def pick_riff(riffs, mood: str, r: float):
+def pick_riff(riffs, mood: str, r: float, metadata_weights):
     """One of an entry's riffs for a roll r in [0, 1). Mood is a lean, not a rule: riffs that suit the text's mood
     weigh more, but a dark text can still take a laugh and a light one a shadow. The first-listed is the best,
     and weighs double."""
-    return riffs[weighted_index([tone_weight(x.tone, mood) * (2 if i == 0 else 1) for i, x in enumerate(riffs)], r)]
+    return riffs[weighted_index([tone_weight(x.tone, mood) * (2 if i == 0 else 1) * weight
+                                for i, (x, weight) in enumerate(zip(riffs, metadata_weights, strict=True))], r)]

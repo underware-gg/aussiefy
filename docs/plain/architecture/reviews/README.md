@@ -6,6 +6,7 @@ commands that have since been renamed. Decisions they led to are recorded in [de
 
 | Review | Summary |
 |---|---|
+- [Tag-tier foundations and acceptance fixes, 21 October 2026](../../../architecture/reviews/design-review-2026-10-21-tag-tier-refinement.md).
 | [design-review-2026-10-21-subject-permissions.md](../../../architecture/reviews/design-review-2026-10-21-subject-permissions.md) | Shared subject policy, source-aware acceptance, reviewed data and preserved consumer contracts |
 | [design-review-2026-10-21-community-metadata.md](../../../architecture/reviews/design-review-2026-10-21-community-metadata.md) | Structured term evidence, preserved citations, usage gates and shared selection weights |
 | [design-review-2026-10-20-dev-integration.md](../../../architecture/reviews/design-review-2026-10-20-dev-integration.md) | Combine publication and semantic refinements, retain the separate spacing fix and reconcile decision numbering |

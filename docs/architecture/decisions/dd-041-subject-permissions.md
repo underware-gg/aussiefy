@@ -4,6 +4,9 @@ Status: accepted
 Date: 2026-10-21
 Extends: DD-005, DD-026, DD-040
 
+Refined by [DD-042](dd-042-reviewed-tag-tiers.md): term-specific tiers, tobacco, vernacular tagging and a
+data-derived registry supersede the binary-only policy and literal-subject interpretation below.
+
 ## Context
 
 Swear strength does not describe subject matter: a drinking-game reference can be clean, while a swear

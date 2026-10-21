@@ -11,7 +11,8 @@ from .errors import UserError
 from .model import Dictionary, LevelProfile, SwearProfile
 from .profile import ProfileOverrides, profile_config
 from .schema import REGISTERS, UNLOCKS
-from .evidence import THEMES, TermMetadata
+from .evidence import TermMetadata
+from .themes import THEME_NAME, ThemePolicy
 
 
 # The dials, by number or by name. Names are aliases: everything inside works in numbers. The level is how thick
@@ -113,10 +114,10 @@ class DocumentOverrides:
             if key == "profile":
                 data[key] = ProfileOverrides.parse(value)
             if key == "themes":
-                if (not isinstance(value, dict) or any(not isinstance(k, str) or k not in THEMES for k in value)
+                if (not isinstance(value, dict) or any(not isinstance(k, str) or not THEME_NAME.fullmatch(k) for k in value)
                         or any(type(v) is not bool for v in value.values())):
-                    raise UserError(f"document_config.themes must map names from {', '.join(THEMES)} to true or false")
-                data[key] = tuple((name, value[name]) for name in THEMES if name in value)
+                    raise UserError("document_config.themes must map canonical theme names to true or false")
+                data[key] = tuple((name, value[name]) for name in sorted(value))
             if key in booleans and type(value) is not bool:
                 raise UserError(f"document_config.{key} must be true or false")
             if key in ("riff_exaggeration", "riff_association"):
@@ -206,8 +207,8 @@ def envelope(level: int, vulgarity: int, warnings: Sequence[str]) -> dict[str, A
             "vulgarity_name": VULGARITY_NAMES[vulgarity], "policy_warnings": list(warnings)}
 
 
-def theme_permissions(permitted: frozenset[str]) -> dict[str, bool]:
-    return {name: name in permitted for name in THEMES}
+def theme_permissions(permitted: ThemePolicy) -> dict[str, bool]:
+    return permitted.to_dict()
 
 
 @dataclass(frozen=True)
@@ -219,17 +220,22 @@ class Effective:
     registers: tuple[str, ...]
     regions: tuple[str, ...]
     unlock: frozenset[str]
-    permitted_themes: frozenset[str]
+    theme_policy: ThemePolicy
     warnings: tuple[str, ...] = ()
     swearing: SwearProfile = SwearProfile()   # how often swearing comes at this vulgarity
     general_pick_factor: float = 0.5
     attestation_pick_bonus: float = 0.5
     attestation_max_score: float = 10.0
 
+    @property
+    def permitted_themes(self) -> frozenset[str]:
+        """The theme defaults; term-tier exceptions are evaluated by theme_policy."""
+        return self.theme_policy.enabled
+
     def envelope(self) -> dict[str, Any]:
         return {**envelope(self.level, self.vulgarity, self.warnings),
                 "profile_config": profile_config(self.profile, self.swearing),
-                "theme_permissions": theme_permissions(self.permitted_themes)}
+                "theme_permissions": theme_permissions(self.theme_policy)}
 
     def metadata_weight(self, term: TermMetadata) -> float:
         evidence = 1.0 + self.attestation_pick_bonus * term.attestation.score / self.attestation_max_score
@@ -246,9 +252,11 @@ def resolve(policy: Policy, dictionary: Dictionary) -> Effective:
     swearing = dictionary.swearing.get(vulgarity, SwearProfile())
     if policy.document_config.profile is not None:
         profile, swearing = policy.document_config.profile.apply(profile, swearing)
-    defaults = dictionary.theme_defaults[vulgarity]
-    overrides = dict(policy.document_config.themes or ())
-    permitted = frozenset(name for name in THEMES if overrides.get(name, name in defaults))
+    overrides = policy.document_config.themes or ()
+    unknown = set(dict(overrides)) - set(dictionary.theme_defaults[3])
+    if unknown:
+        raise UserError(f"document_config.themes has unknown themes: {', '.join(sorted(unknown))}")
+    permitted = ThemePolicy(vulgarity, dictionary.theme_starts, overrides)
     return Effective(policy.level, profile, vulgarity, tuple(registers), tuple(policy.regions),
                      frozenset(policy.unlock), permitted, _warnings(policy, dictionary),
                      swearing=swearing,

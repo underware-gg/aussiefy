@@ -24,7 +24,8 @@ from .model import Dictionary, LevelProfile, PhoneticRule, RewriteThresholds, Sw
 from .schema import (CLASSES, FRAMES, GARNISH_KEYS, RIFF_TONES, Concept, Entry, Riff, SchemaError, parse_concept,
                      parse_entry, parse_imagery)
 from .vocabulary import Vocabulary
-from .evidence import METADATA_KEYS, THEMES, assess, parse_metadata, parse_weights
+from .evidence import METADATA_KEYS, assess, parse_metadata, parse_weights
+from .themes import THEME_NAME
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -140,13 +141,20 @@ def _thresholds(level: int, raw: dict) -> RewriteThresholds:
 def _theme_defaults(raw: dict) -> dict[int, frozenset[str]]:
     if any(type(key) is not int for key in raw) or set(raw) != {0, 1, 2, 3}:
         raise SchemaError("themes.yaml: define vulgarity tiers 0–3")
+    names = raw[0]
+    if not isinstance(names, dict) or not names or any(not isinstance(n, str) or not THEME_NAME.fullmatch(n) for n in names):
+        raise SchemaError("themes.yaml: define canonical theme names")
     out = {}
     for tier, values in raw.items():
-        if not isinstance(values, dict) or set(values) != set(THEMES):
-            raise SchemaError(f"themes.yaml: tier {tier} must define every theme: {', '.join(THEMES)}")
+        if not isinstance(values, dict) or set(values) != set(names):
+            raise SchemaError(f"themes.yaml: tier {tier} must define every theme")
         if any(type(value) is not bool for value in values.values()):
             raise SchemaError(f"themes.yaml: tier {tier} permissions must be true or false")
         out[tier] = frozenset(name for name, allowed in values.items() if allowed)
+    for name in names:
+        enabled = [tier for tier in range(4) if name in out[tier]]
+        if not enabled or enabled != list(range(enabled[0], 4)):
+            raise SchemaError(f"themes.yaml: {name} must start at one tier and stay on above it")
     return out
 
 
@@ -350,6 +358,9 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
     try:
         weights = parse_weights(_read(data / "attestation.yaml", errors, {}))
         def assessed(term):
+            unknown = set(term.themes) - set(theme_defaults.get(3, ())) if theme_defaults else set()
+            if unknown:
+                raise SchemaError(f"{getattr(term, 'id', getattr(term, 'text', 'term'))}: unknown themes {sorted(unknown)}")
             assessment = assess(term, weights)
             return replace(term, attestation=assessment.attestation, evidence=assessment.evidence,
                            first_attested=assessment.first_attested)

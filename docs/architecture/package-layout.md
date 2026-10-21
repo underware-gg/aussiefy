@@ -16,7 +16,7 @@ subpackages (see [DD-006](decisions/dd-006-layered-flat-package.md)).
 | Document translation | `translation.py` (shared surface routing), `markdown.py` (strict source spans and document results), `markup.py` (extended Markdown/MDX scanning) |
 | Optional API clients | `yarn.py` (built-in retelling loop and Anthropic tool adapter), `llm.py` (surface and sentence rewrites), `claude.py` (Anthropic SDK boundary) |
 | Engine | `engine.py` (the pipeline), `text.py`, `matcher.py`, `detect.py`, `degree.py` (reviewed degree composition), `semantic_checks.py` (pure bounded source-aware meaning, composition and known-theme checks), `select.py`, `realise.py`, `morph.py`, `garnish.py`, `context.py`, `policy.py`, `genre.py` (pure form policy and classification), `dialect.py` (source-English swaps), `pos.py` (bundled tagger), `protected.py` (opaque source spans and restoration), `changes.py` (every change, its alternatives rendered in place, in the same pass) |
-| Dictionary | `schema.py` (entries, concepts), `evidence.py` (stored evidence, pure attestation scoring and shared usage gates), `cards.py` (the entry cards lookup and the changes builder both show), `masks.py` (the maskable words in a rendering), `model.py` (the dictionary as data, and what derives from it), `loader.py` (reading and validating the YAML), `terms.py` (when two spellings are one term), `dump.py` |
+| Dictionary | `schema.py` (entries, concepts), `evidence.py` (stored evidence, pure attestation scoring and shared usage gates), `themes.py` (reviewed tag tiers and immutable subject policy), `cards.py` (the entry cards lookup and the changes builder both show), `masks.py` (the maskable words in a rendering), `model.py` (the dictionary as data, and what derives from it), `loader.py` (reading and validating the YAML), `terms.py` (when two spellings are one term), `dump.py` |
 | Similarity | `embed.py`, `static.py` (the bundled model), `models.py` (installed ones) |
 | Maintainers | `gaps.py`, `explain.py`, `rounds.py` (research rounds), `judge.py` (blind packets, report validation and optional Claude boundary), `scrape/` (scrape, fragments, harvest, tag, review) |
 | Shared | `errors.py` (`UserError`, the error a user can fix) |
@@ -60,6 +60,6 @@ Markdown/JSX rules enter its core. See [DD-016](decisions/dd-016-reconcile-sourc
 subject/slot grammar. Engine insertion'n toolkit suggestions share eligibility; bare lookup exposes
 unbound templates. See [DD-025](decisions/dd-025-contextual-imagery.md).
 
-Crikey, lookup explicitly requests query\-fragment readings from `detect.py`; ordinary replacement detection keeps
+Bloody hell, lookup explicitly requests query\-fragment readings from `detect.py`; ordinary replacement detection keeps
 its stricter default. Anyway, lookup owns the bounded whole\-query scope decision'n uses local canonical readings
 as evidence, rather than treatin' every matched noun or modifier as a complete parse.

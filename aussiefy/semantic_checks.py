@@ -12,6 +12,7 @@ from .genre import Embellishment
 from .model import Dictionary
 from .schema import Entry, PLACEHOLDER_RE
 from .evidence import theme_rejection
+from .themes import ThemePermissions, blocked_themes
 from .terms import fold, strip_markup
 from .select import mapping_effects, semantic_rejection
 from .text import Token, sentences, tokenize
@@ -23,7 +24,7 @@ def form_spans(text: str, dictionary: Dictionary) -> list[tuple[int, int, Entry]
 
 
 def theme_issues(text: str, original: str | None, dictionary: Dictionary,
-                 permitted: frozenset[str], *, spans: list[tuple[int, int, Entry]] | None = None) -> list[dict]:
+                 permitted: ThemePermissions, *, spans: list[tuple[int, int, Entry]] | None = None) -> list[dict]:
     """Known terms only: preserve source occurrences and leave ambiguous/literal readings unresolved."""
     if not any(theme_rejection(term, permitted) for term in dictionary.themed_terms):
         return []
@@ -64,7 +65,7 @@ def theme_issues(text: str, original: str | None, dictionary: Dictionary,
         if retained[key]:
             retained[key] -= 1
             continue
-        blocked = sorted({name for term, _ in terms for name in term.themes if name not in permitted})
+        blocked = sorted({name for term, _ in terms for name in blocked_themes(term, permitted)})
         issues.append({"kind": "theme", "phrase": text[a:b], "themes": blocked,
                        "why": "introduces known wording with forbidden themes: " + ", ".join(blocked)})
     return issues

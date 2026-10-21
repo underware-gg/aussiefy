@@ -11,6 +11,7 @@ from typing import Any
 from urllib.parse import urlsplit
 
 from .errors import SchemaError
+from .themes import ThemePermissions, blocked_themes, parse_tags
 
 SOURCE_KINDS = ("scholarly_dictionary", "slang_dictionary", "crowd_dictionary", "literature", "media",
                 "testimony", "community")
@@ -18,8 +19,7 @@ DOCUMENTARY_KINDS = SOURCE_KINDS[:-2]
 SUPPORTS = ("term", "meaning", "australian_use", "date")
 VARIETIES = ("australian", "british", "irish", "american", "aboriginal", "other", "unknown")
 REGISTERS = ("current", "dated", "archaic")
-THEMES = ("drinking", "gambling", "religion", "death", "drinking_games", "bodily_functions", "violence",
-          "sex", "drugs")
+READINGS = ("australian", "general", "british", "irish", "american", "other")
 
 
 @dataclass(frozen=True)
@@ -113,6 +113,7 @@ class TermMetadata:
     reads_as: str = "australian"
     dated_by_curator: str | None = None
     themes: tuple[str, ...] = ()
+    theme_tiers: tuple[tuple[str, int], ...] = ()   # parsed from explicit tiers within themes; never a separate YAML field
     doubtful_definition: bool = False
     misreadable: bool = False
     attestation: Attestation = field(default_factory=Attestation)
@@ -121,7 +122,8 @@ class TermMetadata:
 
 
 DERIVED_FIELDS = {"attestation", "evidence", "first_attested"}
-METADATA_KEYS = tuple(f.name for f in fields(TermMetadata) if f.name not in DERIVED_FIELDS)
+INTERNAL_FIELDS = {"theme_tiers"}
+METADATA_KEYS = tuple(f.name for f in fields(TermMetadata) if f.name not in DERIVED_FIELDS | INTERNAL_FIELDS)
 
 
 @dataclass(frozen=True)
@@ -216,7 +218,7 @@ def parse_metadata(raw: dict, owner: str) -> dict:
     out = {k: raw[k] for k in METADATA_KEYS if k in raw}
     out["sources"] = parse_sources(raw.get("sources"), owner)
     for key, choices in (("coined_by", ("person", "agent", "constructor")), ("produced_by", ("agent",)),
-                         ("origin", VARIETIES), ("reads_as", (*VARIETIES, "general")),
+                         ("origin", VARIETIES), ("reads_as", READINGS),
                          ("register", REGISTERS),
                          ("australian_use", ("common", "uncommon"))):
         if key in out and out[key] not in choices:
@@ -230,9 +232,7 @@ def parse_metadata(raw: dict, owner: str) -> dict:
     if "dated_by_curator" in out:
         out["dated_by_curator"] = _period(out["dated_by_curator"], f"{owner}.dated_by_curator")
     if "themes" in out:
-        if not isinstance(out["themes"], list) or any(not isinstance(v, str) or v not in THEMES for v in out["themes"]):
-            raise SchemaError(f"{owner}: themes must list known themes {THEMES}")
-        out["themes"] = tuple(dict.fromkeys(out["themes"]))
+        out["themes"], out["theme_tiers"] = parse_tags(out["themes"], owner)
     if "searched" in out:
         r = dict(_object(out["searched"], ("date", "outcome", "note"), f"{owner}.searched"))
         r["date"] = _date(r.get("date"), f"{owner}.searched.date")
@@ -334,6 +334,8 @@ def metadata_dict(term: TermMetadata, *, derived: bool = False) -> dict[str, Any
     names = (*METADATA_KEYS, *sorted(DERIVED_FIELDS)) if derived else METADATA_KEYS
     out = {k: asdict(v) if hasattr(v, "__dataclass_fields__") else list(v) if isinstance(v, tuple) else v
            for k in names if (v := getattr(term, k)) is not None}
+    tiers = dict(term.theme_tiers)
+    out["themes"] = [{"name": name, "tier": tiers[name]} if name in tiers else name for name in term.themes]
     out["sources"] = [s.to_dict() for s in term.sources]
     if derived:
         out["attestation"] = term.attestation.to_dict()
@@ -353,7 +355,7 @@ def metadata_rejections(term: TermMetadata, *, allow_misreadable: bool = False) 
     return tuple(reasons)
 
 
-def theme_rejection(term: TermMetadata, permitted: frozenset[str] | None) -> str | None:
-    if permitted is not None and (blocked := set(term.themes) - permitted):
+def theme_rejection(term: TermMetadata, permitted: ThemePermissions) -> str | None:
+    if blocked := blocked_themes(term, permitted):
         return "themes not permitted: " + ", ".join(sorted(blocked))
     return None

@@ -41,7 +41,7 @@ read each authoritative current source once, along with ungenerated current docs
 to preview the published result, and review its readability before committin' a publication update.
 Promotion requires fresh outputs, valid links'n executable examples.
 
-Crikey, AGENTS/CLAUDE instructions, legal notices'n licence texts, the copied standard, ADR records and historical
+Bloody hell, AGENTS/CLAUDE instructions, legal notices'n licence texts, the copied standard, ADR records and historical
 reviews stay plain. Their current indexes may be published. Trainin', research'n corpus READMEs stay at
 their existin' paths. Anyway, publication doesn't recursively translate `docs/plain/`.
 

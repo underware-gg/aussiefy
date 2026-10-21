@@ -75,6 +75,15 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
                 kept_spelling.append((a, b))
                 remaining[phrase] -= 1
 
+    def covered(prose):
+        return [match.span() for pattern, tier in d.phrase_swear_ratings if tier <= cap
+                for match in pattern.finditer(prose)]
+
+    mild_current, mild_source = covered(low), covered(orig_low)
+
+    def outside(match, spans):
+        return not any(a <= match.start() and match.end() <= b for a, b in spans)
+
     for e in d.entries.values():
         if e.status == "active" and not e.held_back and e.vulgarity <= cap:
             continue
@@ -94,7 +103,9 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
                 continue   # a gated "blow" (boast) would flag every "blow over"
             word_re = r"(?<![a-z])" + re.escape(f) + r"(?![a-z])"
             # the original's own uses are its own; more than it has are the translator's
-            if len(f) < 4 or len(re.findall(word_re, low)) <= len(re.findall(word_re, orig_low)):
+            current = sum(outside(m, mild_current) or e.vulgarity <= cap for m in re.finditer(word_re, low))
+            source_count = sum(outside(m, mild_source) or e.vulgarity <= cap for m in re.finditer(word_re, orig_low))
+            if len(f) < 4 or current <= source_count:
                 continue
             if e.status != "active" or e.held_back:
                 issues.append({"kind": "flagged", "phrase": form, "status": e.status, "flags": list(e.flags),
@@ -106,9 +117,12 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     # single swear words over the cap
     d = tr.dictionary
     # the source's own language isn't the translator's swearing ("Cocksucker in Moloch!"), unless it says more
-    source_words = Counter(re.findall(r"[a-z']+", orig_low))
+    def swear_words(prose, spans):
+        return Counter(match.group() for match in re.finditer(r"[a-z']+", prose) if outside(match, spans))
+
+    source_words = swear_words(orig_low, mild_source)
     flagged = {i["phrase"].lower() for i in issues}
-    for word, n in sorted(Counter(re.findall(r"[a-z']+", low)).items()):
+    for word, n in sorted(swear_words(low, mild_current).items()):
         strength = d.swear_strength(word)
         if strength > cap and n > source_words[word] and word not in flagged:
             issues.append({"kind": "too_vulgar", "phrase": word, "vulgarity": strength, "cap": cap})
@@ -134,7 +148,7 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     # where the text already uses dictionary slang (so we don't suggest replacing it): matched with the
     # engine's own matcher, so inflections and slots count ("smashed it to buggery", "kippin'")
     aussie_spans = _aussie_spans(text, tr)
-    issues += theme_issues(text, original, d, eff.permitted_themes, spans=aussie_spans)
+    issues += theme_issues(text, original, d, eff.theme_policy, spans=aussie_spans)
     issues += _semantic_issues(text, original, aussie_spans, tr, read_as.setting(pol.embellishment))
     issues += composition_issues(text, original, aussie_spans, d)
     issues += degree_issues(text, original, aussie_spans, d)

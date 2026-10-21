@@ -84,7 +84,10 @@ def test_archived_round_metadata_is_adapted_after_fixes_without_mutating_inputs(
 
 
 @pytest.mark.parametrize("flags, extra, decision, expected", [
-    (["not_aussie"], {"notes": None}, "add_entry", {"reads_as": "unknown"}),
+    (["not_aussie"], {"notes": None}, "add_entry", {"status": "gate"}),
+    (["not_aussie"], {"reads_as": "unknown"}, "add_entry", {"status": "gate"}),
+    (["not_aussie"], {"status": "omit"}, "add_entry", {"status": "omit"}),
+    (["not_aussie"], {"reads_as": "general"}, "add_entry", {"reads_as": "general"}),
     (["dubious_meaning"], {}, "add_entry", {"doubtful_definition": True}),
     (["archaic"], {}, "add_entry", {"register": "archaic"}),
     (["archaic"], {"register": "current"}, "add_entry", {"register": "archaic"}),
@@ -101,6 +104,10 @@ def test_archived_flags_preserve_independent_meanings(setup, flags, extra, decis
         "flags": flags, **extra}})]
     raw = _plan(config, data).entries[0]
     assert all(raw.get(key) == value for key, value in expected.items())
+    if "not_aussie" in flags and extra.get("reads_as") in (None, "unknown"):
+        assert "no reviewed reading variety" in raw["notes"]
+        assert "reads_as" not in raw
+        assert rounds._current_entry_metadata(raw) == raw
     if "dubious_meaning" not in flags:
         assert not raw.get("doubtful_definition", False)
     if "archaic" in flags and extra.get("register", "current") == "current":

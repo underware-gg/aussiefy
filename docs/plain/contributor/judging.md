@@ -54,3 +54,8 @@ The [held-out comparison](../../../research/heldout-2026-10-16/README.md) uses s
 two fresh independent blind judges over the same frozen outputs. The existing study driver accepts a
 `--plan` when preparing a new run, records its path/hash, and reuses the production judge contract. It does
 not rewrite historical packets or reports. Each repeat has its own frozen report manifest and summary.
+
+New protocol-2 snapshots also record graded `theme_rules` alongside default `theme_permissions`, preserving
+the registry used for the evaluation. Historical snapshots retain only their recorded fields. Per-expression
+placements are not in this snapshot: judges must not infer those tiers or phrase bans from literal topics;
+the deterministic toolkit owns reviewed-form theme checks.

@@ -371,8 +371,11 @@ def _current_entry_metadata(raw: dict) -> dict:
         if "archaic" in retired and entry.get("register", "current") == "current":
             entry["register"] = "archaic"
             notes.append("Legacy archaic annotation takes precedence over absent/current currency; review before promotion.")
-        if "not_aussie" in retired:
-            entry.setdefault("reads_as", "unknown")
+        if "not_aussie" in retired and entry.get("reads_as") in (None, "unknown"):
+            entry.pop("reads_as", None)
+            if entry.get("status") != "omit":
+                entry["status"] = "gate"
+            notes.append("Legacy not_aussie annotation has no reviewed reading variety; manual review is required.")
         if "dubious_meaning" in retired:
             entry.setdefault("doubtful_definition", True)
         if "fabricated" in retired and entry.get("status") != "omit":

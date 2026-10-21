@@ -35,7 +35,7 @@
 - **Mechanical acceptance doesn't establish retelling quality.** The first fresh 20\-text blind comparison
   scored meaning 4.95/5 but register 2.00/5: eligible prose was too restrained. All deterministic checks
   passed. Anyway, a further writer revision under contract\-aware evaluation scored meaning 4.95/5 and register
-  4.65/5, with some high\-level prose still too light'n a minor forecast narrowin'. Fair dinkum, the packet protocol
+  4.65/5, with some high\-level prose still too light'n a minor forecast narrowin'. Crikey, the packet protocol
   and judges changed; those rounds don't establish a causal engine improvement. See
   [the findings](../../research/document-refinement-2026-10-15/FINDINGS.md) for raw results'n limits.
 - **The bundled embeddin' model can lag later dictionary corrections.** Model 1.3.0 remains bundled and
@@ -52,7 +52,7 @@
   complements as written. Coordinated or ambiguous progressive objects can remain plain.
 - **Degree'n quantity checking cover reviewed families and mappings.** DRUNK and HUNGRY have reviewed
   source/target degree calibration; unknown ratings aren't inferred from style intensity. Well, quantity approximation is explicit
-  and preset\-controlled, with bounded source/output checks. Bloody hell, local original\-aware checks catch known
+  and preset\-controlled, with bounded source/output checks. Bugger me, local original\-aware checks catch known
   incompatible grades, with ambiguity'n simultaneous edits limiting coverage. It isn't general fact checking.
 
 - **Lookup is bounded meaning discovery.** Recognised heads, external polarity'n reviewed degree can

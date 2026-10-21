@@ -30,7 +30,7 @@ Both must pass before a commit. The suite includes golden outputs and the refere
 `python scripts/regen_golden.py` and review the diff rather than accepting it blindly (see
 [testing](docs/contributor/testing.md)).
 
-Strewth, the suite also checks tracked provenance'n generated third\-party notices. Stage new files/declarations
+Stone the flamin' crows, the suite also checks tracked provenance'n generated third\-party notices. Stage new files/declarations
 before checking; promotion checks the exact committed checkout'n additionally inspects a built wheel.
 See [licensing and provenance](docs/contributor/licensing.md) for the commands'n evidence requirements.
 
@@ -60,7 +60,7 @@ checked against plain sources while development outputs may be stale. See
   [docs/architecture/decisions/](docs/architecture/decisions/README.md).
 - **Record user\-visible changes** under `[Unreleased]` in [CHANGELOG.md](CHANGELOG.md) as they land.
 - **Write Australian spellin'** in documentation'n user\-facin' messages \(colour, organise, licence as a
-  noun\). Crikey, data is different: trigger patterns and `aussiefy/data/dialect.yaml` must match plain and US
+  noun\). Bloody hell, data is different: trigger patterns and `aussiefy/data/dialect.yaml` must match plain and US
   English as written.
 
 ## Branches and releases

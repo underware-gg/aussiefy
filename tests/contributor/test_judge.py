@@ -435,6 +435,31 @@ def test_judge_theme_snapshot_is_complete_and_exact(packet, fault):
 def test_pre_theme_contract_keeps_its_unrecorded_policy(packet):
     data = json.loads(json.dumps(packet.to_dict(j.Rubric.load())))
     del data["evaluation_contract"]["theme_permissions"]
+    del data["evaluation_contract"]["theme_rules"]
     restored = j.Packet.from_dict(data)
     assert "theme_permissions" not in restored.evaluation_contract
     assert "theme_permissions" not in restored.to_dict(j.Rubric.load())["evaluation_contract"]
+
+
+
+def test_graded_theme_rules_are_frozen_in_judge_snapshots(packet):
+    data = packet.to_dict(j.Rubric.load())
+    rules = data["evaluation_contract"]["theme_rules"]
+    assert "tobacco" in rules and rules["tobacco"]["default_tier"] == 1
+    restored = j.Packet.from_dict(json.loads(json.dumps(data)))
+    assert restored.evaluation_contract["theme_rules"] == rules
+    # A pre-tiers snapshot retains only what it recorded, even with the old nine-theme registry.
+    old = json.loads(json.dumps(data))
+    del old["evaluation_contract"]["theme_rules"]
+    old["evaluation_contract"]["theme_permissions"].pop("tobacco")
+    historical = j.Packet.from_dict(old)
+    assert "theme_rules" not in historical.evaluation_contract
+    assert "tobacco" not in historical.evaluation_contract["theme_permissions"]
+
+
+@pytest.mark.parametrize("bad", [True, -2, 4])
+def test_judge_rejects_invalid_graded_theme_rules(packet, bad):
+    data = json.loads(json.dumps(packet.to_dict(j.Rubric.load())))
+    data["evaluation_contract"]["theme_rules"]["sex"]["allowed_through"] = bad
+    with pytest.raises(j.UserError, match="theme"):
+        j.Packet.from_dict(data)

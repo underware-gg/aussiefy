@@ -17,7 +17,7 @@ Garnish and phonetic edits are logged too. For example:
 
 ```
 $ aussiefy "Are you crazy?" -l 4 -s 0 --explain
-Crikey, do you have a kangaroo loose in your top paddock?
+Bloody hell, do you have a kangaroo loose in your top paddock?
 
 level 4, seed 0, mood light
 document type general -> general (); embellishment dinkum: garnish connective, infix, insult, opener, riff, tag, tail
@@ -34,7 +34,7 @@ substitutions:
         - mad-as-a-gumtree: needs level 5
 
 garnish:
-  opener sentence 0: "crikey" (g-crikey); roll 0.044 < p 0.2
+  opener sentence 0: "bloody hell" (g-bloody-hell); roll 0.044 < p 0.2
 ```
 
 The weight factors are described in [the pipeline](../architecture/pipeline.md), step 3. With `--rewrite`,

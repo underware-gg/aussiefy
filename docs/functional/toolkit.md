@@ -106,7 +106,7 @@ don't promise an in\-place replacement for the query. Inflection applies to a no
 phrase's head verb, not every word of every frame: “shouted” doesn't become a drinks noun.
 
 Meaning inference shares canonical source concepts, polarity, argument restrictions'n reviewed degree
-certificates. Aw, a recognised query head can exclude unrelated suggestions; “probably” doesn't establish
+certificates. Bloody hell, a recognised query head can exclude unrelated suggestions; “probably” doesn't establish
 certainty, “wake up” doesn't establish hurrying, and a beer can is distinct from a small bottle. The
 dictionary can recognise a meaning without having a compatible target, and then explains that abstention.
 Mate, explicit mild/strong source degree needs a compatible certified target for an inferred meaning match.

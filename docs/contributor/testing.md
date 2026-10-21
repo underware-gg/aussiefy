@@ -9,7 +9,7 @@ python -m pytest -q        # the full suite, including golden outputs and the re
 ruff check .               # unused and undefined names (pyflakes rules only; layout is left to the author)
 ```
 
-Jeez, tests have one primary owner in `tests/{user,functional,architecture,contributor}/`, matching the
+Fair dinkum, tests have one primary owner in `tests/{user,functional,architecture,contributor}/`, matching the
 documentation layers. [The test indexes](../../tests/README.md) list every module'n its responsibility;
 the [functional specification](../functional/README.md#tests-as-behavioural-specification) links behaviour to
 its checks. Shared corpus, fixtures, `conftest.py` and reference helpers remain at tests root.
@@ -67,7 +67,7 @@ checks them at every level across 20 seeds. Four of them, for example:
 | The Hare and the Tortoise (Aesop, Townsend 1867) | Archaic syntax: "fell fast asleep" is not about speed |
 | Waltzing Matilda (popular 1903 lyrics) | Existing slang: swagman, billabong and jumbuck survive, with nothing to translate and line breaks intact |
 
-Fair dinkum, every run is also checked for well\-formed output: no broken punctuation, correct a/an, openers followed by
+Crikey, every run is also checked for well\-formed output: no broken punctuation, correct a/an, openers followed by
 lower case, and the same garnish placement never in adjacent sentences.
 
 ## Target translations and the benchmark
@@ -100,7 +100,7 @@ scores; source/target hashes and transcription are checked. Wrong-meaning paraph
 events remain explicit exclusions.
 
 So anyway, the score is unique target\-expression reproduction, with raw unaligned output counts reported separately.
-Strewth, different valid slang can miss, and incorrectly used wording can hit. This isn't semantic fidelity or an
+Jeez, different valid slang can miss, and incorrectly used wording can hit. This isn't semantic fidelity or an
 aligned event score. Anyway, no new pass threshold is derived from the first result; existin' gates remain.
 
 ## Classic Australian texts
@@ -117,7 +117,7 @@ bounded three\-case level/seed check covers each committed input for repeatabili
 integrity; plain `.txt` inputs also retain line counts. Strict Markdown tests cover syntax, hard wraps,
 whole\-document context, unit offsets'n public warnings; extended markup tests include the MDX corpus. This doesn't extend the original 20\-seed, five\-level reference sweep.
 
-Crikey, the 15 pinned Interfold MDX pages now have confirmed LGPL redistribution evidence'n committed attribution.
+Struth, the 15 pinned Interfold MDX pages now have confirmed LGPL redistribution evidence'n committed attribution.
 Remote\-only Rockwell/Kieran material'n full research exports stay local. Anyway, only the
 existin' two local\-corpus tests can skip; new corpus checks run without private files or network access.
 

@@ -26,7 +26,7 @@ from the network. An error names the broken declaration or file; stale notices n
 `check --wheel` additionally builds from an isolated copy of tracked files, using installed build tools
 without build isolation or dependency downloads. It compares the wheel's actual package files, licence
 bytes, `License-Expression` and `License-File` metadata with the reviewed inputs. Promotion runs this on its
-exact committed checkout. Now, build outputs never enter the workin' tree. Fair dinkum, ordinary pytest tests wheel inspection
+exact committed checkout. Now, build outputs never enter the workin' tree. Crikey, ordinary pytest tests wheel inspection
 with fixture archives'n doesn't build a wheel.
 
 ## Bundled components
@@ -45,7 +45,7 @@ files under the package are automatically the project's own work.
 ## Corpus and research texts
 
 Tracked `.txt`, `.html` and `.md` files under `tests/corpus/`, `tests/fixtures/` and `research/` need exactly one
-provenance claim. Crikey, existin' reference/classics manifests own their records; rows declare a file, title,
+provenance claim. Bloody hell, existin' reference/classics manifests own their records; rows declare a file, title,
 author, licence'n notes. A declared file must be tracked and present. Narrow first\-party claims describe
 synthetic fixtures, project analyses'n renderings of public\-domain/own texts; a new research directory is
 not implicitly first\-party.
@@ -53,7 +53,7 @@ not implicitly first\-party.
 Copyrighted works without confirmed redistribution permission stay in ignored `tests/corpus/local/`, which
 tracks only its README. [remote.yaml](../../tests/corpus/remote.yaml) explicitly declares an `excerpts` list
 for each work: `[]` means no committed excerpt. The previously audited Howl retelling has one exact path,
-its required notice header'n a 256\-word cap **including the header**. Jeez, the gate enforces that existin'
+its required notice header'n a 256\-word cap **including the header**. Fair dinkum, the gate enforces that existin'
 decision; it doesn't approve new exceptions. Anyway, other files named for a remote\-only work fail as a backstop.
 
 The everyday groups add manifests requiring title, author, licence, evidence and source URL. Their
@@ -84,6 +84,6 @@ Interfold MDX inputs have pinned LGPL\-3.0\-or\-later evidence in
 [research/PROVENANCE.yaml](../../research/PROVENANCE.yaml) links each source\-bearing research group to its
 redistributable corpus originals. Derived originals, retellings, packets'n logs retain source attribution;
 short evidence in sanitised candidate exports is declared separately. So anyway, four research passes' Rockwell/Kieran
-artefacts'n unsanitised mixed exports remain ignored locally. Bugger me, the GNU texts in `research/licences/` support
+artefacts'n unsanitised mixed exports remain ignored locally. Jeez, the GNU texts in `research/licences/` support
 corpus/research attribution'n don't alter the package wheel's MIT/Apache licence metadata. The gate rejects
 unknown/local sources, empty research patterns, overlappin' ownership'n changed declared digests.

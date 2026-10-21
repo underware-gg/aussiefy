@@ -62,11 +62,12 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 | [DD-039](../../../architecture/decisions/dd-039-certified-modifier-composition.md) | Certified modifier composition and replacement ownership | Accepted |
 | [DD-040](../../../architecture/decisions/dd-040-term-evidence-and-usage.md) | Store term facts; derive attestation and usage eligibility | Accepted |
 | [DD-041](../../../architecture/decisions/dd-041-subject-permissions.md) | Resolve reviewed subject permissions once, independently of profanity | Accepted |
+| [DD-042](../../../architecture/decisions/dd-042-reviewed-tag-tiers.md) | Reviewed tag tiers, exact overrides and a data-derived subject registry | Accepted |
 
 ## By topic
 
 - **Engine:** DD-001, DD-003, DD-007, DD-029, DD-030, DD-034, DD-035, DD-036, DD-037, DD-039, DD-041
-- **Dictionary and data:** DD-002, DD-010, DD-012, DD-025, DD-032, DD-037, DD-040, DD-041
-- **The dials:** DD-004, DD-005, DD-041
+- **Dictionary and data:** DD-002, DD-010, DD-012, DD-025, DD-032, DD-037, DD-040, DD-041, DD-042
+- **The dials:** DD-004, DD-005, DD-041, DD-042
 - **Structure and interfaces:** DD-006, DD-008, DD-009, DD-015, DD-016, DD-019, DD-020, DD-021, DD-022, DD-023, DD-024, DD-028, DD-029, DD-038
 - **Sources, licensing and releases:** DD-011, DD-012, DD-013, DD-014

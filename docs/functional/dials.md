@@ -17,7 +17,7 @@ may be \(the vulgarity, 0\-3\). Both take a number or a name.
 | 4 | `larrikin` | Aggressive idiom use, light garnish (openers, ", mate"), and the drawl begins: about half of "can not", "it is" and "we are" become "can't", "it's" and "we're" |
 | 5 | `swaggie` | Everything: idiom stacking, full contractions, drawl respelling (yer, ya, 'n, -in', dunno, 'cause), expletive infixes ("a bloody great stoush", "can't bloody well"), heavy garnish, a closing expletive |
 
-The default level is 5 \(`swaggie`). Jeez Louise, each level is a profile in `aussiefy/data/profiles.yaml`.
+The default level is 5 \(`swaggie`). Fair dinkum, each level is a profile in `aussiefy/data/profiles.yaml`.
 
 ## Vulgarity
 

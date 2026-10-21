@@ -491,7 +491,16 @@ def _swears(translator, **kw):
 def test_swearing_follows_the_vulgarity_not_the_level(translator):
     """The dials are orthogonal: a tourist can swear like a tradie, and a swaggie can talk like your nan."""
     for level in (1, 3, 5):
-        assert not _swears(translator, level=level, vulgarity="nan"), level
+        from aussiefy import harness
+        for seed in range(8):
+            result = translator.translate(SWEARY, seed=seed, level=level, vulgarity="nan")
+            # Curator-rated polite expressions may contain a word which is rude on its own.
+            assert all(candidate.entry.vulgarity == 0 for rec in result.records if rec.substituted
+                       for candidate in (rec.chosen, rec.stacked) if candidate)
+            assert all(translator.dictionary.entries[g.entry_id].vulgarity == 0 for g in result.garnish if g.entry_id and g.text)
+            assert not [i for i in harness.lint(result.text, original=SWEARY, level=level,
+                                               vulgarity="nan", translator=translator, suggest=False)["issues"]
+                        if i["kind"] == "too_vulgar"]
         assert _swears(translator, level=level, vulgarity="tradie"), level
     tourist, swaggie = (len(_swears(translator, level=lv, vulgarity="uncle-bob")) for lv in ("tourist", "swaggie"))
     assert tourist >= swaggie / 3, (tourist, swaggie)   # the level changes how much is Aussified, not how vulgar

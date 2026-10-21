@@ -36,7 +36,7 @@
  },
  "response": {
   "version": 2,
-  "text": "Strewth, are ya mad as a cut snake? Beats me. Yer carrying on like a pork chop, you're a stubby short of a six-pack'n a big-noter, and I'm flat chat cleaning up after ya, ya drongo. Fair dinkum, I'm starvin', with a belly growling like a mixer full of rocks, let's 'ave a feed at Macca's. Well, the tap in my bloody unit is cactus, buggered, like a flat-pack in a cyclone. Stone the flamin' crows, then they lost their bloody tents and chairs, the whole kit 'n caboodle. So anyway, he's thick as two short planks and a bull artist. Now, 'ave a cup of tea, a Bex'n a bloody good lie-down'n stop whingeing, like a loose sheet of tin in the wind. Anyway, I'm going to the store. Streeeewth.",
+  "text": "Strewth, are ya mad as a cut snake? Beats me. Yer carrying on like a pork chop, you're a stubby short of a six-pack'n a big-noter, and I'm flat chat cleaning up after ya, ya drongo. Crikey, I'm starvin', with a belly growling like a mixer full of rocks, let's 'ave a feed at Macca's. Well, the tap in my bloody unit is cactus, buggered, like a flat-pack in a cyclone. Jeez, then they lost their bloody tents and chairs, the whole kit 'n caboodle. So anyway, he's thick as two short planks and a bull artist. Now, 'ave a cup of tea, a Bex'n a bloody good lie-down'n stop whingeing, like a loose sheet of tin in the wind. Anyway, I'm going to the store. Streeeewth.",
   "changes": [
    {
     "id": "substitution:0-10",
@@ -847,73 +847,93 @@
     ],
     "out_span": [
      182,
-     195
+     190
     ],
     "original": "",
-    "output": "Fair dinkum, ",
-    "entry_id": "g-fair-dinkum",
+    "output": "Crikey, ",
+    "entry_id": "g-crikey",
     "vulgarity": 0,
     "masks": [],
     "placement": "opener",
     "removed": {
      "out_span": [
       182,
-      198
+      193
      ],
      "rendered": "I'm"
     },
     "alternatives": [
      {
+      "entry_id": "g-bloody-hell",
+      "weight": 0.1818,
+      "rendered": "Bloody hell, I'm",
+      "out_span": [
+       182,
+       193
+      ],
+      "vulgarity": 0,
+      "masks": [
+       {
+        "span": [
+         0,
+         6
+        ],
+        "ending_start": 6,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
       "entry_id": "g-crikey",
-      "weight": 0.2222,
+      "weight": 0.1818,
       "rendered": "Crikey, I'm",
       "out_span": [
        182,
-       198
+       193
       ],
       "vulgarity": 0,
       "masks": []
      },
      {
       "entry_id": "g-fair-dinkum",
-      "weight": 0.2222,
+      "weight": 0.1818,
       "rendered": "Fair dinkum, I'm",
       "out_span": [
        182,
-       198
+       193
       ],
       "vulgarity": 0,
       "masks": []
      },
      {
       "entry_id": "g-jeez",
-      "weight": 0.1111,
+      "weight": 0.0909,
       "rendered": "Jeez, I'm",
       "out_span": [
        182,
-       198
+       193
       ],
       "vulgarity": 0,
       "masks": []
      },
      {
       "entry_id": "g-stone-the-crows",
-      "weight": 0.2222,
+      "weight": 0.1818,
       "rendered": "Stone the crows, I'm",
       "out_span": [
        182,
-       198
+       193
       ],
       "vulgarity": 0,
       "masks": []
      },
      {
       "entry_id": "g-strewth",
-      "weight": 0.2222,
+      "weight": 0.1818,
       "rendered": "Struth, I'm",
       "out_span": [
        182,
-       198
+       193
       ],
       "vulgarity": 0,
       "masks": []
@@ -930,8 +950,8 @@
      134
     ],
     "out_span": [
-     199,
-     207
+     194,
+     202
     ],
     "original": "starving",
     "output": "starvin'",
@@ -944,8 +964,8 @@
       "weight": 0.6667,
       "rendered": "starvin'",
       "out_span": [
-       199,
-       207
+       194,
+       202
       ],
       "vulgarity": 0,
       "masks": []
@@ -955,8 +975,8 @@
       "weight": 0.3333,
       "rendered": "hungry enough to eat a horse and chase the jockey",
       "out_span": [
-       199,
-       207
+       194,
+       202
       ],
       "vulgarity": 0,
       "masks": []
@@ -968,8 +988,8 @@
       "vulgarity": 2,
       "rendered": "hungry enough to eat the arse out of a low-flyin' duck",
       "out_span": [
-       199,
-       207
+       194,
+       202
       ],
       "masks": [
        {
@@ -993,8 +1013,8 @@
      134
     ],
     "out_span": [
-     207,
-     257
+     202,
+     252
     ],
     "original": "",
     "output": ", with a belly growling like a mixer full of rocks",
@@ -1005,8 +1025,8 @@
     "image_id": "belly-mixer-rocks",
     "removed": {
      "out_span": [
-      207,
-      257
+      202,
+      252
      ],
      "rendered": ""
     },
@@ -1022,8 +1042,8 @@
      162
     ],
     "out_span": [
-     265,
-     269
+     260,
+     264
     ],
     "original": "get something to eat",
     "output": "'ave",
@@ -1049,8 +1069,8 @@
      162
     ],
     "out_span": [
-     265,
-     276
+     260,
+     271
     ],
     "original": "get something to eat",
     "output": "'ave a feed",
@@ -1063,8 +1083,8 @@
       "weight": 1.0,
       "rendered": "'ave a feed",
       "out_span": [
-       265,
-       276
+       260,
+       271
       ],
       "vulgarity": 0,
       "masks": []
@@ -1083,8 +1103,8 @@
      176
     ],
     "out_span": [
-     280,
-     287
+     275,
+     282
     ],
     "original": "McDonald's",
     "output": "Macca's",
@@ -1097,8 +1117,8 @@
       "weight": 1.0,
       "rendered": "Macca's",
       "out_span": [
-       280,
-       287
+       275,
+       282
       ],
       "vulgarity": 0,
       "masks": []
@@ -1115,8 +1135,8 @@
      178
     ],
     "out_span": [
-     289,
-     295
+     284,
+     290
     ],
     "original": "",
     "output": "Well, ",
@@ -1126,8 +1146,8 @@
     "placement": "connective",
     "removed": {
      "out_span": [
-      289,
-      298
+      284,
+      293
      ],
      "rendered": "The"
     },
@@ -1137,8 +1157,8 @@
       "weight": 0.2597,
       "rendered": "Anyway, the",
       "out_span": [
-       289,
-       298
+       284,
+       293
       ],
       "vulgarity": 0,
       "masks": []
@@ -1148,8 +1168,8 @@
       "weight": 0.1558,
       "rendered": "Mate, the",
       "out_span": [
-       289,
-       298
+       284,
+       293
       ],
       "vulgarity": 0,
       "masks": []
@@ -1159,8 +1179,8 @@
       "weight": 0.0649,
       "rendered": "Mind you, the",
       "out_span": [
-       289,
-       298
+       284,
+       293
       ],
       "vulgarity": 0,
       "masks": []
@@ -1170,8 +1190,8 @@
       "weight": 0.1299,
       "rendered": "Now, the",
       "out_span": [
-       289,
-       298
+       284,
+       293
       ],
       "vulgarity": 0,
       "masks": []
@@ -1181,8 +1201,8 @@
       "weight": 0.1299,
       "rendered": "So anyway, the",
       "out_span": [
-       289,
-       298
+       284,
+       293
       ],
       "vulgarity": 0,
       "masks": []
@@ -1192,8 +1212,8 @@
       "weight": 0.2597,
       "rendered": "Well, the",
       "out_span": [
-       289,
-       298
+       284,
+       293
       ],
       "vulgarity": 0,
       "masks": []
@@ -1210,8 +1230,8 @@
      188
     ],
     "out_span": [
-     299,
-     302
+     294,
+     297
     ],
     "original": "faucet",
     "output": "tap",
@@ -1235,8 +1255,8 @@
      195
     ],
     "out_span": [
-     306,
-     316
+     301,
+     311
     ],
     "original": "my ",
     "output": "my bloody ",
@@ -1271,8 +1291,8 @@
      204
     ],
     "out_span": [
-     316,
-     320
+     311,
+     315
     ],
     "original": "apartment",
     "output": "unit",
@@ -1285,8 +1305,8 @@
       "weight": 1.0,
       "rendered": "unit",
       "out_span": [
-       316,
-       320
+       311,
+       315
       ],
       "vulgarity": 0,
       "masks": []
@@ -1303,8 +1323,8 @@
      214
     ],
     "out_span": [
-     324,
-     371
+     319,
+     366
     ],
     "original": "broken",
     "output": "cactus, buggered, like a flat-pack in a cyclone",
@@ -1326,8 +1346,8 @@
       "weight": 0.1765,
       "rendered": "cactus, buggered, like a flat-pack in a cyclone",
       "out_span": [
-       324,
-       371
+       319,
+       366
       ],
       "vulgarity": 1,
       "masks": [
@@ -1346,8 +1366,8 @@
       "weight": 0.1765,
       "rendered": "buggered, cactus",
       "out_span": [
-       324,
-       371
+       319,
+       366
       ],
       "vulgarity": 1,
       "masks": [
@@ -1366,8 +1386,8 @@
       "weight": 0.3529,
       "rendered": "bung",
       "out_span": [
-       324,
-       371
+       319,
+       366
       ],
       "vulgarity": 0,
       "masks": []
@@ -1377,8 +1397,8 @@
       "weight": 0.1176,
       "rendered": "rooted, buggered",
       "out_span": [
-       324,
-       371
+       319,
+       366
       ],
       "vulgarity": 1,
       "masks": [
@@ -1397,8 +1417,8 @@
       "weight": 0.1765,
       "rendered": "stuffed, buggered",
       "out_span": [
-       324,
-       371
+       319,
+       366
       ],
       "vulgarity": 1,
       "masks": [
@@ -1424,63 +1444,83 @@
      216
     ],
     "out_span": [
-     373,
-     398
+     368,
+     374
     ],
     "original": "",
-    "output": "Stone the flamin' crows, ",
-    "entry_id": "g-stone-the-crows",
+    "output": "Jeez, ",
+    "entry_id": "g-jeez",
     "vulgarity": 0,
     "masks": [],
     "placement": "opener",
     "removed": {
      "out_span": [
-      373,
-      402
+      368,
+      378
      ],
      "rendered": "Then"
     },
     "alternatives": [
      {
-      "entry_id": "g-crikey",
-      "weight": 0.2857,
-      "rendered": "Crikey, then",
+      "entry_id": "g-bloody-hell",
+      "weight": 0.2222,
+      "rendered": "Bloody hell, then",
       "out_span": [
-       373,
-       402
+       368,
+       378
+      ],
+      "vulgarity": 0,
+      "masks": [
+       {
+        "span": [
+         0,
+         6
+        ],
+        "ending_start": 6,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "g-fair-dinkum",
+      "weight": 0.2222,
+      "rendered": "Fair dinkum, then",
+      "out_span": [
+       368,
+       378
       ],
       "vulgarity": 0,
       "masks": []
      },
      {
       "entry_id": "g-jeez",
-      "weight": 0.1429,
+      "weight": 0.1111,
       "rendered": "Jeez, then",
       "out_span": [
-       373,
-       402
+       368,
+       378
       ],
       "vulgarity": 0,
       "masks": []
      },
      {
       "entry_id": "g-stone-the-crows",
-      "weight": 0.2857,
+      "weight": 0.2222,
       "rendered": "Stone the flamin' crows, then",
       "out_span": [
-       373,
-       402
+       368,
+       378
       ],
       "vulgarity": 0,
       "masks": []
      },
      {
       "entry_id": "g-strewth",
-      "weight": 0.2857,
+      "weight": 0.2222,
       "rendered": "Strewth, then",
       "out_span": [
-       373,
-       402
+       368,
+       378
       ],
       "vulgarity": 0,
       "masks": []
@@ -1497,8 +1537,8 @@
      237
     ],
     "out_span": [
-     413,
-     426
+     389,
+     402
     ],
     "original": "their ",
     "output": "their bloody ",
@@ -1533,8 +1573,8 @@
      253
     ],
     "out_span": [
-     442,
-     469
+     418,
+     445
     ],
     "original": "",
     "output": ", the whole kit 'n caboodle",
@@ -1544,8 +1584,8 @@
     "placement": "tail",
     "removed": {
      "out_span": [
-      442,
-      469
+      418,
+      445
      ],
      "rendered": ""
     },
@@ -1555,8 +1595,8 @@
       "weight": 0.1667,
       "rendered": ", and stuff",
       "out_span": [
-       442,
-       469
+       418,
+       445
       ],
       "vulgarity": 0,
       "masks": []
@@ -1566,8 +1606,8 @@
       "weight": 0.3333,
       "rendered": ", the whole box 'n dice",
       "out_span": [
-       442,
-       469
+       418,
+       445
       ],
       "vulgarity": 0,
       "masks": []
@@ -1577,8 +1617,8 @@
       "weight": 0.3333,
       "rendered": ", the whole kit 'n caboodle",
       "out_span": [
-       442,
-       469
+       418,
+       445
       ],
       "vulgarity": 0,
       "masks": []
@@ -1588,8 +1628,8 @@
       "weight": 0.1667,
       "rendered": ", the lot",
       "out_span": [
-       442,
-       469
+       418,
+       445
       ],
       "vulgarity": 0,
       "masks": []
@@ -1606,8 +1646,8 @@
      255
     ],
     "out_span": [
-     471,
-     482
+     447,
+     458
     ],
     "original": "",
     "output": "So anyway, ",
@@ -1617,8 +1657,8 @@
     "placement": "connective",
     "removed": {
      "out_span": [
-      471,
-      486
+      447,
+      462
      ],
      "rendered": "He's"
     },
@@ -1628,8 +1668,8 @@
       "weight": 0.3509,
       "rendered": "Anyway, he's",
       "out_span": [
-       471,
-       486
+       447,
+       462
       ],
       "vulgarity": 0,
       "masks": []
@@ -1639,8 +1679,8 @@
       "weight": 0.2105,
       "rendered": "Mate, he's",
       "out_span": [
-       471,
-       486
+       447,
+       462
       ],
       "vulgarity": 0,
       "masks": []
@@ -1650,8 +1690,8 @@
       "weight": 0.0877,
       "rendered": "Mind you, he's",
       "out_span": [
-       471,
-       486
+       447,
+       462
       ],
       "vulgarity": 0,
       "masks": []
@@ -1661,8 +1701,8 @@
       "weight": 0.1754,
       "rendered": "Now, he's",
       "out_span": [
-       471,
-       486
+       447,
+       462
       ],
       "vulgarity": 0,
       "masks": []
@@ -1672,8 +1712,8 @@
       "weight": 0.1754,
       "rendered": "So anyway, he's",
       "out_span": [
-       471,
-       486
+       447,
+       462
       ],
       "vulgarity": 0,
       "masks": []
@@ -1693,8 +1733,8 @@
      260
     ],
     "out_span": [
-     482,
-     486
+     458,
+     462
     ],
     "original": "He is",
     "output": "he's",
@@ -1720,8 +1760,8 @@
      269
     ],
     "out_span": [
-     482,
-     512
+     458,
+     488
     ],
     "original": "He is an idiot",
     "output": "he's thick as two short planks",
@@ -1734,8 +1774,8 @@
       "weight": 0.2899,
       "rendered": "he's thick as two short planks",
       "out_span": [
-       482,
-       512
+       458,
+       488
       ],
       "vulgarity": 0,
       "masks": []
@@ -1745,8 +1785,8 @@
       "weight": 0.0725,
       "rendered": "he's dilly",
       "out_span": [
-       482,
-       512
+       458,
+       488
       ],
       "vulgarity": 0,
       "masks": []
@@ -1756,8 +1796,8 @@
       "weight": 0.2899,
       "rendered": "he isn't the full quid",
       "out_span": [
-       482,
-       512
+       458,
+       488
       ],
       "vulgarity": 0,
       "masks": []
@@ -1767,8 +1807,8 @@
       "weight": 0.2899,
       "rendered": "he's a few snags short of a barbie",
       "out_span": [
-       482,
-       512
+       458,
+       488
       ],
       "vulgarity": 0,
       "masks": []
@@ -1778,8 +1818,8 @@
       "weight": 0.058,
       "rendered": "he's a stubby short of a six-pack",
       "out_span": [
-       482,
-       512
+       458,
+       488
       ],
       "vulgarity": 0,
       "masks": []
@@ -1791,8 +1831,8 @@
       "vulgarity": 2,
       "rendered": "he's thick as shit",
       "out_span": [
-       482,
-       512
+       458,
+       488
       ],
       "masks": [
        {
@@ -1810,8 +1850,8 @@
       "vulgarity": 2,
       "rendered": "he wouldn't bloody well know his arse from his elbow",
       "out_span": [
-       482,
-       512
+       458,
+       488
       ],
       "masks": [
        {
@@ -1846,8 +1886,8 @@
      280
     ],
     "out_span": [
-     517,
-     530
+     493,
+     506
     ],
     "original": "a liar",
     "output": "a bull artist",
@@ -1860,8 +1900,8 @@
       "weight": 1.0,
       "rendered": "a bull artist",
       "out_span": [
-       517,
-       530
+       493,
+       506
       ],
       "vulgarity": 0,
       "masks": []
@@ -1873,8 +1913,8 @@
       "vulgarity": 2,
       "rendered": "a bullshitter",
       "out_span": [
-       517,
-       530
+       493,
+       506
       ],
       "masks": [
        {
@@ -1898,8 +1938,8 @@
      282
     ],
     "out_span": [
-     532,
-     537
+     508,
+     513
     ],
     "original": "",
     "output": "Now, ",
@@ -1909,8 +1949,8 @@
     "placement": "connective",
     "removed": {
      "out_span": [
-      532,
-      586
+      508,
+      562
      ],
      "rendered": "'ave a cup of tea, a Bex'n a bloody good lie-down"
     },
@@ -1920,8 +1960,8 @@
       "weight": 0.4255,
       "rendered": "Anyway, 'ave a cup of tea, a Bex'n a bloody good lie-down",
       "out_span": [
-       532,
-       586
+       508,
+       562
       ],
       "vulgarity": 0,
       "masks": [
@@ -1940,8 +1980,8 @@
       "weight": 0.2553,
       "rendered": "Mate, 'ave a cup of tea, a Bex'n a bloody good lie-down",
       "out_span": [
-       532,
-       586
+       508,
+       562
       ],
       "vulgarity": 0,
       "masks": [
@@ -1960,8 +2000,8 @@
       "weight": 0.1064,
       "rendered": "Mind you, 'ave a cup of tea, a Bex'n a bloody good lie-down",
       "out_span": [
-       532,
-       586
+       508,
+       562
       ],
       "vulgarity": 0,
       "masks": [
@@ -1980,8 +2020,8 @@
       "weight": 0.2128,
       "rendered": "Now, 'ave a cup of tea, a Bex'n a bloody good lie-down",
       "out_span": [
-       532,
-       586
+       508,
+       562
       ],
       "vulgarity": 0,
       "masks": [
@@ -2012,8 +2052,8 @@
      291
     ],
     "out_span": [
-     537,
-     541
+     513,
+     517
     ],
     "original": "Calm down",
     "output": "'ave",
@@ -2039,8 +2079,8 @@
      291
     ],
     "out_span": [
-     537,
-     586
+     513,
+     562
     ],
     "original": "Calm down",
     "output": "'ave a cup of tea, a Bex'n a bloody good lie-down",
@@ -2062,8 +2102,8 @@
       "weight": 0.2,
       "rendered": "'ave a cup of tea, a Bex'n a bloody good lie-down",
       "out_span": [
-       537,
-       586
+       513,
+       562
       ],
       "vulgarity": 1,
       "masks": [
@@ -2082,8 +2122,8 @@
       "weight": 0.8,
       "rendered": "settle, petal",
       "out_span": [
-       537,
-       586
+       513,
+       562
       ],
       "vulgarity": 0,
       "masks": []
@@ -2105,8 +2145,8 @@
      291
     ],
     "out_span": [
-     561,
-     564
+     537,
+     540
     ],
     "original": "Calm down",
     "output": "'n ",
@@ -2132,8 +2172,8 @@
      291
     ],
     "out_span": [
-     566,
-     573
+     542,
+     549
     ],
     "original": "Calm down",
     "output": "bloody ",
@@ -2168,8 +2208,8 @@
      296
     ],
     "out_span": [
-     586,
-     589
+     562,
+     565
     ],
     "original": " and ",
     "output": "'n ",
@@ -2195,8 +2235,8 @@
      312
     ],
     "out_span": [
-     594,
-     642
+     570,
+     618
     ],
     "original": "complaining",
     "output": "whingeing, like a loose sheet of tin in the wind",
@@ -2209,8 +2249,8 @@
       "weight": 1.0,
       "rendered": "whingeing, like a loose sheet of tin in the wind",
       "out_span": [
-       594,
-       642
+       570,
+       618
       ],
       "vulgarity": 0,
       "masks": []
@@ -2227,8 +2267,8 @@
      314
     ],
     "out_span": [
-     644,
-     652
+     620,
+     628
     ],
     "original": "",
     "output": "Anyway, ",
@@ -2238,8 +2278,8 @@
     "placement": "connective",
     "removed": {
      "out_span": [
-      644,
-      655
+      620,
+      631
      ],
      "rendered": "I'm"
     },
@@ -2249,8 +2289,8 @@
       "weight": 0.5405,
       "rendered": "Anyway, I'm",
       "out_span": [
-       644,
-       655
+       620,
+       631
       ],
       "vulgarity": 0,
       "masks": []
@@ -2260,8 +2300,8 @@
       "weight": 0.3243,
       "rendered": "Mate, I'm",
       "out_span": [
-       644,
-       655
+       620,
+       631
       ],
       "vulgarity": 0,
       "masks": []
@@ -2271,8 +2311,8 @@
       "weight": 0.1351,
       "rendered": "Mind you, I'm",
       "out_span": [
-       644,
-       655
+       620,
+       631
       ],
       "vulgarity": 0,
       "masks": []
@@ -2291,8 +2331,8 @@
      318
     ],
     "out_span": [
-     652,
-     655
+     628,
+     631
     ],
     "original": "I am",
     "output": "I'm",
@@ -2318,8 +2358,8 @@
      338
     ],
     "out_span": [
-     675,
-     687
+     651,
+     663
     ],
     "original": "",
     "output": " Streeeewth.",
@@ -2329,8 +2369,8 @@
     "placement": "closer",
     "removed": {
      "out_span": [
-      675,
-      687
+      651,
+      663
      ],
      "rendered": ""
     },
@@ -2340,8 +2380,8 @@
       "weight": 0.3333,
       "rendered": " Stone the flamin' crows.",
       "out_span": [
-       675,
-       687
+       651,
+       663
       ],
       "vulgarity": 0,
       "masks": []
@@ -2351,8 +2391,8 @@
       "weight": 0.3333,
       "rendered": " Streeeewth.",
       "out_span": [
-       675,
-       687
+       651,
+       663
       ],
       "vulgarity": 0,
       "masks": []
@@ -2362,8 +2402,8 @@
       "weight": 0.3333,
       "rendered": " Too easy.",
       "out_span": [
-       675,
-       687
+       651,
+       663
       ],
       "vulgarity": 0,
       "masks": []
@@ -2856,6 +2896,23 @@
     "placement": "tag",
     "sources": [
      "https://www.oxfordlearnersdictionaries.com/definition/english/eh"
+    ]
+   },
+   "g-bloody-hell": {
+    "id": "g-bloody-hell",
+    "form": "bloody hell",
+    "gloss": "Dismay.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 1,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "opener",
+    "sources": [
+     "https://en.wiktionary.org/wiki/bloody_hell",
+     "https://www.oxfordlearnersdictionaries.com/definition/english/hell"
     ]
    },
    "g-cobber": {

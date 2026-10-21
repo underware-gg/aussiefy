@@ -9,8 +9,10 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Refine shared subject permissions with reviewed per\-term tiers'n tobacco from Dad; exact overrides remain independent of the swear cap. Apply evidence/general\-English weightin' to imagery and riffs, align guide examples, and strengthen metadata/source\-preservation checks.
+
 - Add nine reviewed subject themes with data\-driven vulgarity defaults'n exact boolean overrides,
-  independent of the swear cap. Share resolved permissions across translation, lookup, plans, suggestions,
+  independent of the swear cap. Well, share resolved permissions across translation, lookup, plans, suggestions,
   change alternatives'n agent/model checks; preserve source subject matter and separate mixed senses.
   Report the resolved permissions'n reject recognised forbidden additions from fresh or cached model output.
 
@@ -61,7 +63,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   explicitly overridden. Keep ordinary indefinite wording available. Share mapping effects through
   selection, lookup, plans, alternatives'n bounded original\-aware verification; retain unrelated numbers.
 - Apply the remainin' clear source\-audit sense repairs: distinguish urination, categorical impossibility,
-  completion, tasting, noisy crying/sulking, explicit noun subtypes'n emphatic refusals. Struth, preserve antenna
+  completion, tasting, noisy crying/sulking, explicit noun subtypes'n emphatic refusals. Stone the crows, preserve antenna
   qualifiers/plurals'n walking destinations, require progressive objects, and retain discovery\-only
   vocabulary where source wording can't establish a safe automatic readin'. Well, correct eight source/usage
   records'n merge 627 reviewed source pairs from batches 7–11 without changin' existin' term gates.
@@ -105,7 +107,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   Merge the 237 source proposals from batches 5 and 6 alongside the 239 from batches 3 and 4.
 
 - Preserve explicit listener possessives through shared binding'n form compatibility, and require a
-  listener for “bend someone's ear”. Tell ya what, add standard bend/bent morphology instead of inventin' a listener
+  listener for “bend someone's ear”. Struth, add standard bend/bent morphology instead of inventin' a listener
   or producing “bended”.
 - Apply 239 reviewed source records from the next two 120\-entry audit batches, retaining historical,
   component'n source\-chain evidence limits rather than certifying every trigger or full construction.
@@ -119,17 +121,17 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   So anyway, require both travel'n a swag for waltzing Matilda;
   exclude minimising nothing\-much wording from exact zero.
 - Preserve negative\-modal indifference wording'n supermarket location nouns through compatible sourced
-  forms. Crikey, keep all existin' status'n flag gates; retained historical terms remain subject to their registers.
+  forms. Bloody hell, keep all existin' status'n flag gates; retained historical terms remain subject to their registers.
 - Regenerate change fixtures from the invoking checkout rather than an editable installation of another worktree.
 
 - Amend the unreleased `changes` contract v1 with optional `semantic_effects` entry-card metadata.
 
 - Make reviewed narrator opinion explicit'n configurable: Troppo permits it, Deadset/Dinkum and Custom
-  keep it off unless overridden. Mate, share eligibility across translation, plans, change alternatives and
+  keep it off unless overridden. Share eligibility across translation, plans, change alternatives and
   meaning lookup; retain explicit term discovery with effect annotations. Lint, verify'n yarn submission
   check recognised added opinion terms while permittin' original occurrences.
 - Preserve roles'n meanings: brave bastards describes brave bastards, not diggers generally;
-  poor buggers expresses sympathy for unfortunate people, not death. Stone the flamin' crows, add opinion metadata to the living's
+  poor buggers expresses sympathy for unfortunate people, not death. Tell ya what, add opinion metadata to the living's
   "lucky buggers" expression rather than silently adding good fortune at every embellishment setting.
 
 - Complete source cross\-reference research for all 1,254 original entries. Batches 3–11 add 1,034 records

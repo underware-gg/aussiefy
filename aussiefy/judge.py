@@ -52,7 +52,7 @@ Respect exact quotes, protected technical terms, markup and headings where the c
 stay unchanged. Bold prose labels are not automatically headings. Vulgarity is a cap, not a quota. Disabled
 behaviours stay disabled; profile probabilities are not exact output quotas.
 When theme_permissions is recorded, respect every subject permission independently of profanity while
-preserving original subject matter. Older snapshots without it did not record a theme policy.
+preserving original subject matter. When theme_rules is recorded, allowed_through is each theme's maximum tag tier (-1 forbids all; 3 allows all), while default_tier is its usual starting tier. Reviewed term tiers can differ, but this snapshot does not record per-expression placements. Do not infer a term tier or diagnose phrase eligibility from literal subject words, the default map or your own intuition; deterministic reviewed-form toolkit checks own that judgement. Older snapshots lack these finer rules; never infer them from current defaults.
 """
 CONTRACT_INSTRUCTIONS = ("Apply EVALUATION_CONTRACT to every anonymous candidate.\n" + CONTRACT_GUIDANCE
                          + "Do not penalise required preservation. Keep the eight rubric criteria and score "
@@ -189,7 +189,7 @@ class Packet:
 def _check_contract(contract, where: str) -> None:
     required = {"level", "vulgarity", "document_type", "genre", "document_config", "profile_config", "embellishment", "markup",
                 "markup_rules", "english"}
-    if not isinstance(contract, dict) or set(contract) not in (required, required | {"theme_permissions"}):
+    if not isinstance(contract, dict) or set(contract) not in (required, required | {"theme_permissions"}, required | {"theme_permissions", "theme_rules"}):
         raise UserError(f"{where}: evaluation_contract needs {', '.join(sorted(required))}")
     if (type(contract["level"]) is not int or contract["level"] not in range(1, 6)
             or type(contract["vulgarity"]) is not int or contract["vulgarity"] not in range(4)):
@@ -205,11 +205,20 @@ def _check_contract(contract, where: str) -> None:
         raise UserError(f"{where}: evaluation_contract needs complete nested profile_config maps")
     try:
         if "theme_permissions" in contract:
-            from .evidence import THEMES
             themes = contract["theme_permissions"]
-            if not isinstance(themes, dict) or set(themes) != set(THEMES):
-                raise UserError("theme_permissions must record all nine themes")
+            if not isinstance(themes, dict) or not themes:
+                raise UserError("theme_permissions must record a nonempty theme map")
             DocumentOverrides.parse({"themes": themes})
+            if "theme_rules" in contract:
+                rules = contract["theme_rules"]
+                if not isinstance(rules, dict) or set(rules) != set(themes):
+                    raise UserError("theme_rules must match the recorded theme registry")
+                for name, rule in rules.items():
+                    if (not isinstance(rule, dict) or set(rule) != {"default_tier", "allowed_through"}
+                            or type(rule["default_tier"]) is not int or rule["default_tier"] not in range(4)
+                            or type(rule["allowed_through"]) is not int or rule["allowed_through"] not in range(-1, 4)
+                            or themes[name] != (rule["allowed_through"] >= rule["default_tier"])):
+                        raise UserError(f"invalid theme_rules for {name}")
         DocumentOverrides.parse(document)
         ProfileOverrides.parse(profile)
     except UserError as exc:
@@ -246,7 +255,8 @@ def _evaluation_contract(original: str, *, level: int | str, vulgarity: int | st
                 "genre": {"name": result.genre.name, "guidance": result.genre.policy.guidance},
                 "document_config": result.genre.envelope(result.embellishment.step)["document_config"],
                 "profile_config": result.profile_config,
-                "theme_permissions": theme_permissions(result.permitted_themes),
+                "theme_permissions": theme_permissions(result.theme_policy),
+                "theme_rules": result.theme_policy.rules(),
                 "embellishment": {"name": result.embellishment.name, "guidance": result.embellishment.guidance},
                 "markup": markup, "markup_rules": MARKUP_RULE.format(markup=markup) if markup != "text" else None,
                 "english": result.english}

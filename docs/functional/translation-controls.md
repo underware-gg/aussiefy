@@ -15,7 +15,7 @@ aussiefy translate "I am very tired." --english uk --embellishment troppo --expl
 
 ## Document types and exact behaviour overrides
 
-Fair dinkum, these are behaviour settings, not phrase\-to\-phrase replacements. For additions'n corrections to the
+Crikey, these are behaviour settings, not phrase\-to\-phrase replacements. For additions'n corrections to the
 vocabulary itself, use [dictionary overlays](dictionary.md#dictionary-overlays), which feed the normal
 compiled dictionary'n retain all engine checks.
 
@@ -156,7 +156,7 @@ zero/one probabilities, shared limits, spacing, drawl, swearing, rewrite dispatc
 
 Vulgarity sets both the swear limit and defaults for reviewed subject tags. These are independent controls:
 `document_config.themes` changes subject permissions without raising the swear limit. Each expression must
-have permission for every theme it carries. The defaults live in `aussiefy/data/themes.yaml`:
+have permission for every theme it carries. A tag may set its own starting tier; otherwise it uses its theme’s default. The defaults live in `aussiefy/data/themes.yaml`:
 
 | Theme key | Nan (0) | Dad (1) | Uncle Bob (2) | Tradie (3) |
 |---|---|---|---|---|
@@ -169,30 +169,38 @@ have permission for every theme it carries. The defaults live in `aussiefy/data/
 | `violence` | no | no | yes | yes |
 | `sex` | no | no | yes | yes |
 | `drugs` | no | no | yes | yes |
+| `tobacco` | no | yes | yes | yes |
 
 Pass exact booleans for known keys. Omitted keys inherit the tier's defaults, including in Custom; `{}`
-changes sweet bugger\-all. Crikey, subject filtering is a core eligibility check, rather than an optional document performance.
+changes sweet bugger\-all. Bloody hell, subject filtering is a core eligibility check, rather than an optional document performance.
 Enablin' a theme can't raise the swear cap, enable garnish or unlock a held\-back meanin'.
 
 ```sh
 aussiefy translate 'He was very drunk.' --vulgarity nan --document-config '{"themes":{"drinking":false}}'
 ```
 
-The resolved nine booleans appear as `theme_permissions` in results, plans, lookup, lint, verification and
-explain output; agent briefs include `THEME_PERMISSIONS`. Copy the reported object into
-`document_config.themes` to reproduce it. Permission resolves once per operation, including strict Markdown
-units. Editor probes for alternatives at a higher swear cap retain the original theme restrictions.
+The default-permission booleans appear as `theme_permissions` in results, plans, lookup, lint, verification and
+explain output. Individual tag tiers can differ: dunny is bodily functions from Nan; the stomach/throat comparison
+is violence from Dad. An exact `true` override admits all strengths of a theme, while `false` excludes every
+strength, even a Nan-rated term. Consequently, copying the reported default booleans back as overrides is
+not a replay of the original graded policy; preserve the original vulgarity and caller overrides instead.
+Agent/model briefs carry both `THEME_PERMISSIONS` and graded `THEME_RULES`. Permission resolves once per
+operation, including strict Markdown units. Editor probes for alternatives at a higher swear cap retain
+the original graded theme restrictions.
 Entries, garnish, entry riffs and contextual images share the check. Neither Troppo nor `include_gated`
 bypasses it; labelled Bulldust still follows its existing embellishment permissions.
 
-Tags describe a reviewed expression's subject or concrete image, rather than its word origins: *donger* and
-*perv on* concern sex; *wanker* used solely as a contemptuous insult doesn't. A lizard drinkin' water is
+Anyway, tags follow an expression’s vernacular meaning'n use in Straya, rather than literal word associations
+or etymology. Nan is polite colloquial Australian, with familiar cultural exceptions such as dunny and
+budgie smugglers. Fair dinkum, politeness is relative to Australian alternatives: the duck’s crotch form is Nan’s, while
+its arse form stays higher. Chunder'n spew are crass enough for Dad. Placement is reviewed data, not a
+word\-based politeness detector. *Wanker* used solely as a contemptuous insult doesn't carry a sex tag. A lizard drinkin' water is
 not an alcohol reference. Food'n alcohol senses of *full as a goog*, exhaustion'n alcohol senses of
 *stonkered*, and drug'n alcohol senses of *off one's chops* have separate records.
 
 Restrictions prevent newly chosen wording; they don't censor original subject matter. So anyway, lint, verification
 and model acceptance additionally check recognised dictionary forms'n fixed riff/image text, preservin'
-source occurrence counts. Jeez, longer known expressions own their nested words; genuinely ambiguous readings
+source occurrence counts. Longer known expressions own their nested words; genuinely ambiguous readings
 stay unresolved. This bounded check doesn't classify arbitrary prose or recognise every slotted image.
 Agents'n model prompts receive the same permissions; the package rejects recognised forbidden additions
 and keeps the deterministic draft if a model violates them.

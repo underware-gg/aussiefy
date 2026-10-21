@@ -38,7 +38,7 @@ unharnessed --prompt-only` Anyway, produces the reference retelling brief; a liv
 checks versus rubric\-scored tone, flow'n essence.
 
 `yarn-tools brief|lookup|lint|submit` exposes yarn's existin' loop by hand, with the same policy, markup rules
-and checked submission as the API loop. Bloody hell, research drivers'n their manifests remain under `research/`, with
+and checked submission as the API loop. Bugger me, research drivers'n their manifests remain under `research/`, with
 historical results from the pinned source snapshot. Their source\-bearing originals, retellings, packets and
 logs inherit corpus attribution through [PROVENANCE.yaml](../../research/PROVENANCE.yaml); full local\-only
 exports stay ignored. Sanitised harvests omit entries that reproduce those works.
@@ -49,12 +49,17 @@ The [maintenance comparison](../../research/maintenance-check-2026-10-15/README.
 20\-text Dinkum remeasurement: original source hashes, dials'n named document presets, with Dinkum\-3 and
 pre\-fix yarn as unchanged anchors. The [refinement findings](../../research/document-refinement-2026-10-15/FINDINGS.md)
 retain the weak first result'n subsequent writer revision, with independent blind judges. Research
-evaluation protocol 2 included the effective contract before the public judge API. Crikey, current public packets
+evaluation protocol 2 included the effective contract before the public judge API. Bloody hell, current public packets
 now carry that contract through every judge route; historical evidence stays unchanged. Don't compare scores across those packet protocols as a causal engine improvement.
 For a new study, use new outputs'n independent judges rather than recyclin' verdicts.
 
 
 The [held-out comparison](../../research/heldout-2026-10-16/README.md) uses six new\-to\-refinement texts and
 two fresh independent blind judges over the same frozen outputs. Anyway, the existin' study driver accepts a
-`--plan` when preparing a new run, records its path/hash, and reuses the production judge contract. Fair dinkum, it does
+`--plan` when preparing a new run, records its path/hash, and reuses the production judge contract. Crikey, it does
 not rewrite historical packets or reports. Each repeat has its own frozen report manifest'n summary.
+
+New protocol-2 snapshots also record graded `theme_rules` alongside default `theme_permissions`, preserving
+the registry used for the evaluation. Historical snapshots retain only their recorded fields. Per-expression
+placements are not in this snapshot: judges must not infer those tiers or phrase bans from literal topics;
+the deterministic toolkit owns reviewed-form theme checks.

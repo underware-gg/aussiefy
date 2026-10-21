@@ -82,5 +82,5 @@ aussiefy verify -l 5 --original story.txt draft.txt   # exit 1 means critical or
 ```
 
 For the complete checked submission loop without a built\-in model call, use
-`aussiefy yarn-tools brief story.txt`, then its `lookup`, `lint` and `submit` steps. Jeez, see the
+`aussiefy yarn-tools brief story.txt`, then its `lookup`, `lint` and `submit` steps. Fair dinkum, see the
 [CLI reference](../functional/cli.md#command-options) for retained logs, declines'n accepted\-output files.

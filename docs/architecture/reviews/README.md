@@ -10,40 +10,41 @@ commands that have since been renamed. Mate, decisions they led to are recorded 
 
 | Review | Summary |
 |---|---|
-| [design-review-2026-10-21-subject-permissions.md](design-review-2026-10-21-subject-permissions.md) | Shared subject policy, source-aware acceptance, reviewed data and preserved consumer contracts |
-| [design-review-2026-10-21-community-metadata.md](design-review-2026-10-21-community-metadata.md) | Structured term evidence, preserved citations, usage gates and shared selection weights |
-| [design-review-2026-10-20-dev-integration.md](design-review-2026-10-20-dev-integration.md) | Combine publication and semantic refinements, retain the separate spacing fix and reconcile decision numbering |
-| [design-review-2026-10-20-training-labels-and-figuratives.md](design-review-2026-10-20-training-labels-and-figuratives.md) | Canonical exclusion parsing, preflight label integrity and object-preserving annoyance meanings |
-| [design-review-2026-10-20-degree-composition.md](design-review-2026-10-20-degree-composition.md) | Shared modifier ownership, certified absorption, relational grade and bounded verification |
-| [design-review-2026-10-20-semantic-benchmarks.md](design-review-2026-10-20-semantic-benchmarks.md) | Rejected pinned model trial, complete input witnesses, exact scorer parity and bounded semantic/performance evidence |
-| [design-review-2026-10-20-contextual-lookup.md](design-review-2026-10-20-contextual-lookup.md) | Shared query meaning, polarity, degree and argument evidence across lexical/model suggestions; preserved explicit discovery |
-| [design-review-2026-10-20-hunger-degree.md](design-review-2026-10-20-hunger-degree.md) | Reviewed appetite degrees, generic bounded semantic verification and modifier ownership |
-| [design-review-2026-10-20-predicate-composition.md](design-review-2026-10-20-predicate-composition.md) | Dependent predicate complements, form compatibility, safe stack boundaries and original-aware verification |
-| [design-review-2026-10-19-final-source-audit.md](design-review-2026-10-19-final-source-audit.md) | Reviewed quantity permissions, source-specific effects and final source-audit repairs; integrated verification passed |
-| [design-review-2026-10-19-degree-and-address.md](design-review-2026-10-19-degree-and-address.md) | Reviewed semantic degree, qualifier ownership and plural-address reading; integrated verification passed |
-| [design-review-2026-10-19-model-refresh.md](design-review-2026-10-19-model-refresh.md) | Fresh pinned model fit, input provenance, required package-reader checks and bounded lookup evidence; integrated verification passed |
-| [design-review-2026-10-19-tone-controls.md](design-review-2026-10-19-tone-controls.md) | Explicit solemn/comic substitution permission, approved Troppo defaults and cross-surface behaviour; focused review converged |
-| [design-review-2026-10-19-dictionary-overlays.md](design-review-2026-10-19-dictionary-overlays.md) | Explicit raw vocabulary layers, canonical validation, source inheritance and shared compiled consumers; integrated verification passed |
-| [design-review-2026-10-19-sourced-extensions.md](design-review-2026-10-19-sourced-extensions.md) | Reviewed source-meaning distinctions, preserved roles and quantity, compatible forms and 476 scoped provenance records; integration review converged |
-| [design-review-2026-10-19-semantic-effects.md](design-review-2026-10-19-semantic-effects.md) | Resolved narrator opinion, precise person mappings and consistent deterministic/writer surfaces; integrated verification passed |
-| [design-review-2026-10-19-meaning-extensions.md](design-review-2026-10-19-meaning-extensions.md) | Precise lexical senses, conditional appetite phrases, cultural references, source integration and bounded argument reading |
-| [design-review-2026-10-19-semantic-context.md](design-review-2026-10-19-semantic-context.md) | Shared semantic context, preserved arguments, contextual tone, opaque boundaries, YAML portability and bounded source research |
-| [design-review-2026-10-18-hunger-phrases.md](design-review-2026-10-18-hunger-phrases.md) | Independent appetite harvest, tense-safe VPs and controlled writer-only hunger imagery |
-| [design-review-2026-10-18-sourced-meanings.md](design-review-2026-10-18-sourced-meanings.md) | Bounded source audit, precise slang senses, explicit loose-paraphrase gates and meaningful-output regressions |
-| [design-review-2026-10-18-package-integration.md](design-review-2026-10-18-package-integration.md) | Installed-wheel stdio/HTTP checks, browser Unicode offsets and bounded changes-cost evidence |
-| [design-review-2026-10-17-training-order-and-integrations.md](design-review-2026-10-17-training-order-and-integrations.md) | Stable WordNet pair selection, honest trial evidence and real CLI/MCP interface checks |
-| [design-review-2026-10-17-prose-refinement.md](design-review-2026-10-17-prose-refinement.md) | Question-safe infixes, source capitals, continued-dialogue punctuation and bounded prose readback |
-| [design-review-2026-10-17-curated-benchmark.md](design-review-2026-10-17-curated-benchmark.md) | Independent fixed labels, honest wording measurement and shared training cleanup |
-| [design-review-2026-10-17-seed-intake.md](design-review-2026-10-17-seed-intake.md) | Declared encodings, complete seed curation and narrow new senses |
-| [design-review-2026-10-17-fidelity-maintenance.md](design-review-2026-10-17-fidelity-maintenance.md) | Finite questions, modal force, complete-phrase guards and precise senses |
-| [design-review-2026-10-17-contextual-imagery.md](design-review-2026-10-17-contextual-imagery.md) | Precise imagery meanings, writer boundaries and shared riff budgets |
-| [design-review-2026-10-17-vocabulary-harvest.md](design-review-2026-10-17-vocabulary-harvest.md) | Curated vocabulary and optional imagery, source-linked persona harvest, sign protection and scratch replay |
-| [design-review-2026-10-16-judge-contract-and-heldout.md](design-review-2026-10-16-judge-contract-and-heldout.md) | Full production judge settings, legacy protocol compatibility and six-source repeat-judge evidence |
-| [design-review-2026-10-16-verification-maintenance.md](design-review-2026-10-16-verification-maintenance.md) | Offline real-SDK serialization, minimum-Python CI and consolidated toolkit contracts |
-| [design-review-2026-10-16-whole-repository.md](design-review-2026-10-16-whole-repository.md) | Six-concern whole-repository audit, agent-neutral retelling, cache/lookup fixes and readiness evidence |
-| [design-review-2026-10-16-retelling-results.md](design-review-2026-10-16-retelling-results.md) | Controlled writer refinement, source-linked evidence and contract-aware blind comparison |
-| [design-review-2026-10-16-retelling-contract.md](design-review-2026-10-16-retelling-contract.md) | Configuration-consistent craft guidance, retained negative results and contract-aware research evaluation |
-| [design-review-2026-10-16-multiline-quotes.md](design-review-2026-10-16-multiline-quotes.md) | Shared quote recognition and preserved evidence across frozen refinement rounds |
-| [design-review-2026-10-15-document-refinement.md](design-review-2026-10-15-document-refinement.md) | Sentence-safe document flavour, bounded grammar inference, semantic performance and study integrity |
-| [design-review-2026-10-12.md](design-review-2026-10-12.md) | The first review, by six parallel reviewers: consolidated the toolkit (harness, lookup, lint, guide), the yarn core and the Claude client, and fixed CLI options that were ignored |
-| [design-review-2-2026-10-12.md](design-review-2-2026-10-12.md) | The second, architectural review: one policy vocabulary, the Claude error contract, named engine stages, derived data on the dictionary, and parity, contract and layering tests |
+- [Tag-tier foundations and acceptance fixes, 21 October 2026](design-review-2026-10-21-tag-tier-refinement.md).
+| [design-review-2026-10-21-subject-permissions.md](design-review-2026-10-21-subject-permissions.md) | Shared subject policy, source\-aware acceptance, reviewed data'n preserved consumer contracts \|
+| [design-review-2026-10-21-community-metadata.md](design-review-2026-10-21-community-metadata.md) | Structured term evidence, preserved citations, usage gates'n shared selection weights \|
+| [design-review-2026-10-20-dev-integration.md](design-review-2026-10-20-dev-integration.md) | Combine publication'n semantic refinements, retain the separate spacin' fix and reconcile decision numbering \|
+| [design-review-2026-10-20-training-labels-and-figuratives.md](design-review-2026-10-20-training-labels-and-figuratives.md) | Canonical exclusion parsing, preflight label integrity'n object\-preserving annoyance meanings \|
+| [design-review-2026-10-20-degree-composition.md](design-review-2026-10-20-degree-composition.md) | Shared modifier ownership, certified absorption, relational grade'n bounded verification \|
+| [design-review-2026-10-20-semantic-benchmarks.md](design-review-2026-10-20-semantic-benchmarks.md) | Rejected pinned model trial, complete input witnesses, exact scorer parity'n bounded semantic/performance evidence \|
+| [design-review-2026-10-20-contextual-lookup.md](design-review-2026-10-20-contextual-lookup.md) | Shared query meaning, polarity, degree'n argument evidence across lexical/model suggestions; preserved explicit discovery \|
+| [design-review-2026-10-20-hunger-degree.md](design-review-2026-10-20-hunger-degree.md) | Reviewed appetite degrees, generic bounded semantic verification'n modifier ownership \|
+| [design-review-2026-10-20-predicate-composition.md](design-review-2026-10-20-predicate-composition.md) | Dependent predicate complements, form compatibility, safe stack boundaries'n original\-aware verification \|
+| [design-review-2026-10-19-final-source-audit.md](design-review-2026-10-19-final-source-audit.md) | Reviewed quantity permissions, source\-specific effects'n final source\-audit repairs; integrated verification passed \|
+| [design-review-2026-10-19-degree-and-address.md](design-review-2026-10-19-degree-and-address.md) | Reviewed semantic degree, qualifier ownership'n plural\-address readin'; integrated verification passed \|
+| [design-review-2026-10-19-model-refresh.md](design-review-2026-10-19-model-refresh.md) | Fresh pinned model fit, input provenance, required package\-reader checks'n bounded lookup evidence; integrated verification passed \|
+| [design-review-2026-10-19-tone-controls.md](design-review-2026-10-19-tone-controls.md) | Explicit solemn/comic substitution permission, approved Troppo defaults'n cross\-surface behaviour; focused review converged \|
+| [design-review-2026-10-19-dictionary-overlays.md](design-review-2026-10-19-dictionary-overlays.md) | Explicit raw vocabulary layers, canonical validation, source inheritance'n shared compiled consumers; integrated verification passed \|
+| [design-review-2026-10-19-sourced-extensions.md](design-review-2026-10-19-sourced-extensions.md) | Reviewed source\-meaning distinctions, preserved roles'n quantity, compatible forms and 476 scoped provenance records; integration review converged \|
+| [design-review-2026-10-19-semantic-effects.md](design-review-2026-10-19-semantic-effects.md) | Resolved narrator opinion, precise person mappings'n consistent deterministic/writer surfaces; integrated verification passed \|
+| [design-review-2026-10-19-meaning-extensions.md](design-review-2026-10-19-meaning-extensions.md) | Precise lexical senses, conditional appetite phrases, cultural references, source integration'n bounded argument readin' \|
+| [design-review-2026-10-19-semantic-context.md](design-review-2026-10-19-semantic-context.md) | Shared semantic context, preserved arguments, contextual tone, opaque boundaries, YAML portability'n bounded source research \|
+| [design-review-2026-10-18-hunger-phrases.md](design-review-2026-10-18-hunger-phrases.md) | Independent appetite harvest, tense\-safe VPs'n controlled writer\-only hunger imagery \|
+| [design-review-2026-10-18-sourced-meanings.md](design-review-2026-10-18-sourced-meanings.md) | Bounded source audit, precise slang senses, explicit loose\-paraphrase gates'n meaningful\-output regressions \|
+| [design-review-2026-10-18-package-integration.md](design-review-2026-10-18-package-integration.md) | Installed\-wheel stdio/HTTP checks, browser Unicode offsets'n bounded changes\-cost evidence \|
+| [design-review-2026-10-17-training-order-and-integrations.md](design-review-2026-10-17-training-order-and-integrations.md) | Stable WordNet pair selection, honest trial evidence'n real CLI/MCP interface checks \|
+| [design-review-2026-10-17-prose-refinement.md](design-review-2026-10-17-prose-refinement.md) | Question\-safe infixes, source capitals, continued\-dialogue punctuation'n bounded prose readback \|
+| [design-review-2026-10-17-curated-benchmark.md](design-review-2026-10-17-curated-benchmark.md) | Independent fixed labels, honest wording measurement'n shared training cleanup \|
+| [design-review-2026-10-17-seed-intake.md](design-review-2026-10-17-seed-intake.md) | Declared encodings, complete seed curation'n narrow new senses \|
+| [design-review-2026-10-17-fidelity-maintenance.md](design-review-2026-10-17-fidelity-maintenance.md) | Finite questions, modal force, complete\-phrase guards'n precise senses \|
+| [design-review-2026-10-17-contextual-imagery.md](design-review-2026-10-17-contextual-imagery.md) | Precise imagery meanings, writer boundaries'n shared riff budgets \|
+| [design-review-2026-10-17-vocabulary-harvest.md](design-review-2026-10-17-vocabulary-harvest.md) | Curated vocabulary'n optional imagery, source\-linked persona harvest, sign protection and scratch replay \|
+| [design-review-2026-10-16-judge-contract-and-heldout.md](design-review-2026-10-16-judge-contract-and-heldout.md) | Full production judge settings, legacy protocol compatibility'n six\-source repeat\-judge evidence \|
+| [design-review-2026-10-16-verification-maintenance.md](design-review-2026-10-16-verification-maintenance.md) | Offline real\-SDK serialization, minimum\-Python CI'n consolidated toolkit contracts \|
+| [design-review-2026-10-16-whole-repository.md](design-review-2026-10-16-whole-repository.md) | Six\-concern whole\-repository audit, agent\-neutral retelling, cache/lookup fixes'n readiness evidence \|
+| [design-review-2026-10-16-retelling-results.md](design-review-2026-10-16-retelling-results.md) | Controlled writer refinement, source\-linked evidence'n contract\-aware blind comparison \|
+| [design-review-2026-10-16-retelling-contract.md](design-review-2026-10-16-retelling-contract.md) | Configuration\-consistent craft guidance, retained negative results'n contract\-aware research evaluation \|
+| [design-review-2026-10-16-multiline-quotes.md](design-review-2026-10-16-multiline-quotes.md) | Shared quote recognition'n preserved evidence across frozen refinement rounds \|
+| [design-review-2026-10-15-document-refinement.md](design-review-2026-10-15-document-refinement.md) | Sentence\-safe document flavour, bounded grammar inference, semantic performance'n study integrity \|
+| [design-review-2026-10-12.md](design-review-2026-10-12.md) | The first review, by six parallel reviewers: consolidated the toolkit \(harness, lookup, lint, guide\), the yarn core'n the Claude client, and fixed CLI options that were ignored \|
+| [design-review-2-2026-10-12.md](design-review-2-2026-10-12.md) | The second, architectural review: one policy vocabulary, the Claude error contract, named engine stages, derived data on the dictionary, and parity, contract'n layering tests \|

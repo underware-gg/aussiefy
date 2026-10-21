@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from .themes import ThemePolicy
+
 import re
 import inspect
 from collections import Counter
@@ -147,7 +149,7 @@ class Result:
     garnish: list[GarnishRecord]
     phonetic: list[PhoneticRecord]
     warnings: list[str]
-    permitted_themes: frozenset[str]
+    theme_policy: ThemePolicy
     deterministic_text: str = ""
     surface: dict[str, Any] | None = None
     rewrites: list[RewriteRecord] = field(default_factory=list)
@@ -164,9 +166,14 @@ class Result:
     profile_config: dict[str, Any] = field(default_factory=dict)
     imagery: list[dict] = field(default_factory=list)
 
+    @property
+    def permitted_themes(self) -> frozenset[str]:
+        """The theme defaults; term-tier exceptions are evaluated by theme_policy."""
+        return self.theme_policy.enabled
+
     def envelope(self) -> dict[str, Any]:
         return {**envelope(self.level, self.vulgarity, self.warnings), "profile_config": self.profile_config,
-                "theme_permissions": theme_permissions(self.permitted_themes)}
+                "theme_permissions": theme_permissions(self.theme_policy)}
 
     def sentence_text(self, i: int) -> str:
         return self.source[slice(*self.sentences[i])]
@@ -344,7 +351,7 @@ class Translator:
             warnings.append(f"{why} no swear infixes, intensifiers or sweary garnish: vulgarity "
                             f"{run.eff.vulgarity} reaches its word swaps only")
         return Result(final, source, pol.level, pol.seed, run.records, run.garnish, phon, warnings,
-                      permitted_themes=run.eff.permitted_themes,
+                      theme_policy=run.eff.theme_policy,
                       deterministic_text=final, rewrites=run.rewrites, difficult=run.difficult,
                       vulgarity=run.eff.vulgarity, mood=run.mood, genre=run.genre,
                       sentences=[(s[0].start, s[-1].end) for s in sents], dialect=run.dialect,
@@ -484,7 +491,8 @@ class Translator:
                 automatic = []
             if not automatic or not self._riff_room(rec.det.end, rec.det.frame, rec.det.start, sent, run):
                 continue
-            offer = pick_riff(automatic, run.mood, roll(run.pol.seed, "imagery-pick", *sent.key, rec.det.start))
+            offer = pick_riff(automatic, run.mood, roll(run.pol.seed, "imagery-pick", *sent.key, rec.det.start),
+                              [run.eff.metadata_weight(o.image) for o in automatic])
             run.state.imagery_used.add(offer.image.id)
             self._note_riff(sent, run)
             end = sent.tokens[rec.det.end - 1].end
@@ -552,10 +560,11 @@ class Translator:
         if not run.embellishment.entry_riffs or choice.entry.id in run.state.riffed:
             return None, ""
         toks, state, eff = sent.tokens, run.state, run.eff
-        riffs = choice.entry.riffs_within(eff.vulgarity, eff.permitted_themes)
+        riffs = choice.entry.riffs_within(eff.vulgarity, eff.theme_policy)
         if not riffs or not self._riff_room(end, choice.entry.frame, det.start, sent, run):
             return None, ""
-        riff = pick_riff(riffs, run.mood, roll(run.pol.seed, "riff-pick", *sent.key, det.start)).text
+        riff = pick_riff(riffs, run.mood, roll(run.pol.seed, "riff-pick", *sent.key, det.start),
+                         [eff.metadata_weight(r) for r in riffs]).text
         state.riffed.add(choice.entry.id)
         self._note_riff(sent, run)
         before_and = end < len(toks) and toks[end].norm == "and"
@@ -591,10 +600,12 @@ class Translator:
         # Existing custom hooks have an explicit old signature; policy-aware hooks opt into the new input.
         if "permitted_themes" in parameters or any(p.kind == inspect.Parameter.VAR_KEYWORD for p in parameters.values()):
             settings["permitted_themes"] = run.eff.permitted_themes
+        if "theme_policy" in parameters or any(p.kind == inspect.Parameter.VAR_KEYWORD for p in parameters.values()):
+            settings["theme_policy"] = run.eff.theme_policy
         new, status = rewriter.rewrite(sent.text, out, planned, **settings)
         if new and protected_runs(new) != protected_runs(out):
             new, status = None, "rejected: it changed protected markup (code, a link, a tag)"
-        if new and theme_issues(new, sent.text, self.dictionary, run.eff.permitted_themes):
+        if new and theme_issues(new, sent.text, self.dictionary, run.eff.theme_policy):
             new, status = None, "rejected: it introduced known wording with forbidden themes"
         put_back = partial(run.masked.restore, whole=False)
         run.rewrites.append(RewriteRecord(sent.index, put_back(sent.text), put_back(out), new and put_back(new),

@@ -45,7 +45,7 @@ def image_association(image, concepts, setting):
 def permitted(image, eff, setting):
     return (setting.takes("riff") and setting.contextual_riffs and image.level <= eff.level
             and image.vulgarity <= eff.vulgarity and image.exaggeration <= setting.riff_exaggeration
-            and not metadata_rejections(image) and not theme_rejection(image, eff.permitted_themes))
+            and not metadata_rejections(image) and not theme_rejection(image, eff.theme_policy))
 
 
 def excluded_complement(image, tokens, end):

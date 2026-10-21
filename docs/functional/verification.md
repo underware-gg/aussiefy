@@ -5,7 +5,7 @@
 # Verify a translation
 
 `verify(text, original=...)` checks any translation against its original, using the same level, vulgarity,
-English, embellishment'n extended\-markup controls as lint. Jeez Louise, it's deterministic and requires no paid API.
+English, embellishment'n extended\-markup controls as lint. Fair dinkum, it's deterministic and requires no paid API.
 
 ```sh
 aussiefy verify draft.txt --original original.txt -l 4 --embellishment dinkum
@@ -20,7 +20,7 @@ major problem; CLI exit 1 reports failure. `--json` exposes the complete evidenc
 Verification reuses lint'n fidelity, then aligns original sentences against nearby windows of translated
 sentences, allowing a retelling to split or merge them. Mate, this is a bounded heuristic, not a proof of meaning
 or literary quality. It can miss wrong senses'n can't judge tone/flow; [the judge](../contributor/judging.md)
-provides that separate evaluation. Crikey, optional suggestions are disabled during verification'n yarn submission
+provides that separate evaluation. Bloody hell, optional suggestions are disabled during verification'n yarn submission
 to avoid an unnecessary full translation. Lint callers can similarly use `suggest=False` / `--no-suggestions`.
 
 Contract tests: [test_verify.py](../../tests/functional/test_verify.py).

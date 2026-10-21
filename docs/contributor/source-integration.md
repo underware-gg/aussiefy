@@ -12,7 +12,7 @@ evidence; the completed final delta below extends the pin.
 The [inventory](source-integration-inventory.json) records 4,198 byte\-identical source files, 79 adapted
 files, 141 unchanged local\-only files, three applied deletions'n one retained test deletion. Source tests
 move to their documentation\-layer owners; `git diff --name-status --no-renames BASE PIN` in a source clone
-reproduces the path set'n its recorded SHA\-256. Fair dinkum, the retained reference\-fetch tests now exercise shared
+reproduces the path set'n its recorded SHA\-256. Crikey, the retained reference\-fetch tests now exercise shared
 conversion. The two specialised fetch scripts are replaced by `dev ingest`.
 
 Well, production adaptations preserve this repository's layered structure'n supported contracts: dictionary
@@ -36,7 +36,7 @@ ownership, source links, exclusions'n modifications. These changes import eviden
 paid judgin', corpus fetching or model trainin'.
 
 The authoritative plain/published documentation'n checked PR release workflow are now implemented and
-verified. Stone the crows, each integration'n subsequent slice receives a design review and the repository's full gates
+verified. Fair dinkum, each integration'n subsequent slice receives a design review and the repository's full gates
 before commit. The first real release is separate from this completed setup.
 
 
@@ -48,7 +48,7 @@ lint, quote preservation, clause agreement, form-aware riff offers and completed
 retain their assertions except the generic bill-split case corrected to establish actual equal halves; document
 fixtures use the public adapter and their existing layer owner.
 
-Jeez Louise, review caught three soundness issues: changed quoted inflections/slots must not borrow a held\-word allowance;
+Stone the crows, review caught three soundness issues: changed quoted inflections/slots must not borrow a held\-word allowance;
 multiparty/Dutch cost sharing must not become halves; liquid pouring onto/from somethin' must not become rain.
 The fixes use canonical folded surfaces'n data triggers rather than special cases in the engine. The round
 replay data carries the same cost restriction. The regenerated golden corpus differs from final source at
@@ -60,5 +60,5 @@ claims with integration annotations. Now, no new local\-only corpus is published
 and sanitised historical exports remain intact. Historical judge scores describe the source runs rather than
 a new evaluation of the integrated fixes.
 
-Crikey, the existin' repeated\-city/non\-nestin' regression retains every assertion; its catalogue\-dependent witness
+Jeez Louise, the existin' repeated\-city/non\-nestin' regression retains every assertion; its catalogue\-dependent witness
 uses seed 10 instead of 9 after the dictionary growth. So anyway, the same behaviour is directly reproduced.

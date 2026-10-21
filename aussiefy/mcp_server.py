@@ -38,8 +38,8 @@ the preset and explicit dials. False and empty lists override inherited settings
 tunes substitution, frames, garnish rates/limits/spacing, stack, phonetic, stretch, swearing and rewrite
 thresholds; partial objects inherit missing keys from level/vulgarity defaults. profile_config reports the
 complete resolved numeric settings. Custom still requires optional behaviours enabled explicitly. themes overrides exact per-theme booleans
-independently of profanity; omitted themes inherit tier defaults, and theme_permissions reports all nine.
-Every expression needs all its themes allowed. Restriction never deletes original subject matter."""
+independently of profanity; omitted themes inherit term-tier placement, and theme_permissions reports all default permissions.
+Every expression needs all its reviewed tag tiers allowed; true admits every strength and false forbids all. Restriction never deletes original subject matter."""
 
 
 

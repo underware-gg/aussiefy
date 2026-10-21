@@ -83,6 +83,7 @@ def test_images_do_not_invent_appetite_or_turn_metaphors_into_food(translator, s
 
 
 def test_hunger_writer_material_respects_subject_permissions(translator):
-    assert 'stomach-throat-cut' not in images(plan(translator, 'She is hungry.'))
+    assert 'stomach-throat-cut' not in images(plan(translator, 'She is hungry.', vulgarity=0))
+    assert 'stomach-throat-cut' in images(plan(translator, 'She is hungry.'))
     assert 'stomach-throat-cut' in images(plan(translator, 'She is hungry.', themes={'violence': True}))
     assert 'hungry-butter-beer-coaster' not in images(plan(translator, 'She is hungry.', themes={'drinking': False}))

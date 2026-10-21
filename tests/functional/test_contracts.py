@@ -81,11 +81,11 @@ def test_lookup_cards_come_from_the_shared_card_builder(translator):
     d = translator.dictionary
     for r in harness.lookup("very tired", vulgarity=2, translator=translator)["results"]:
         card = {k: v for k, v in r.items() if k not in ("match", "score")}
-        assert card == entry_card(d.entries[r["id"]], 2)
+        assert card == entry_card(d.entries[r["id"]], 2, permitted_themes=translator.effective(vulgarity=2).theme_policy)
     for r in harness.lookup("very tired", short=True, translator=translator)["results"]:
         assert r == short_card(d.entries[r["id"]])
     sourced = next(e for e in d.idioms if e.sources)
-    assert entry_card(sourced)["sources"] == [s.url for s in sourced.sources if s.url]
+    assert entry_card(sourced, permitted_themes=frozenset())["sources"] == [s.url for s in sourced.sources if s.url]
 
 
 def test_brief_is_what_yarn_sends(translator):
@@ -93,7 +93,7 @@ def test_brief_is_what_yarn_sends(translator):
 
     s = brief("She was very tired.", level=4, seed=3, embellishment="troppo", translator=translator)
     assert set(s.payload) == {"ORIGINAL", "LEVEL", "VULGARITY", "EMBELLISHMENT", "GENRE", "PLANNED_PHRASES",
-                              "RIFFS", "OPENINGS", "DIFFICULT_SENTENCES", "DOCUMENT_CONFIG", "PROFILE_CONFIG", "THEME_PERMISSIONS"}   # troppo writes first: no draft
+                              "RIFFS", "OPENINGS", "DIFFICULT_SENTENCES", "DOCUMENT_CONFIG", "PROFILE_CONFIG", "THEME_PERMISSIONS", "THEME_RULES"}   # troppo writes first: no draft
     assert set(brief("She was very tired.", translator=translator).payload) == (   # a retelling's dinkum
         set(s.payload) | {"ENGINE_DRAFT"})
     assert s.payload["LEVEL"] == 4 and s.vulgarity == s.payload["VULGARITY"]

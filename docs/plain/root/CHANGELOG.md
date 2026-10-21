@@ -5,6 +5,8 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Refine shared subject permissions with reviewed per-term tiers and tobacco from Dad; exact overrides remain independent of the swear cap. Apply evidence/general-English weighting to imagery and riffs, align guide examples, and strengthen metadata/source-preservation checks.
+
 - Add nine reviewed subject themes with data-driven vulgarity defaults and exact boolean overrides,
   independent of the swear cap. Share resolved permissions across translation, lookup, plans, suggestions,
   change alternatives and agent/model checks; preserve source subject matter and separate mixed senses.

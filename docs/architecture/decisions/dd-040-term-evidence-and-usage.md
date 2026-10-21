@@ -40,10 +40,10 @@ wording without effectively removing common general expressions. Level remains a
 re-graded by how distinctly and colourfully Australian the wording is, independently of swearing,
 placement or uncertainty. Reviewed individual grades are retained in the migration ledger.
 
-These preference factors apply to substitution and garnish Entry candidates. Entry riffs and contextual
-imagery keep their shared tone-and-signature sampler (the first curated option weighs double), as the
-design's unchanged colour-selection behaviour requires. They gain the same usage/meaning gates and
-evidence labels; evidence alone does not reorder that editorial signature.
+These preference factors apply to substitution, garnish, entry riffs and contextual imagery. Colour
+selection multiplies the metadata factor into its tone-and-signature sampler (the first curated option
+weighs double). The slice 0–1 spec review corrected the original implementation’s reading of “keeps its
+current permissions”: that preserves eligibility permissions, not an exemption from ED7 weighting.
 
 Only manual gates and omission remain in status; `slur` and `untagged` remain flags. Foreign-sounding terms,
 uncommon Australian usage and doubtful definitions are held back independently of status, even with all

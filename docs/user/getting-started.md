@@ -35,11 +35,11 @@ aussiefy story.txt -l 3
 echo "I'm exhausted." | aussiefy -l 4
 ```
 
-Crikey, at level 5 the engine goes all out:
+Bloody hell, at level 5 the engine goes all out:
 
 ```
 $ aussiefy "Good grief, are you crazy? You're overreacting, you're stupid and all talk, and I'm extremely busy cleaning up after you." -l 5 -s 1
-Strewth, do ya 'ave kangaroos loose in yer bloody top paddock? Stone the crows, yer carryin' on like a pork chop, yer thick as two short planks and a big-noter, and I'm flat out cleaning up after you.
+Strewth, do ya 'ave kangaroos loose in yer bloody top paddock? Oi, yer carryin' on like a pork chop, yer thick as two short planks and a big-noter, and I'm flat out cleaning up after you.
 ```
 
 ## Choose how Aussie, how rude, and how much liberty
@@ -53,7 +53,7 @@ Three dials control the tellin', each by number or name:
   colour\) to 2 \(`troppo`, a performance\). General defaults to `dinkum` across translation'n retelling.
   Mate, auto'n named document types use their preset's default; an explicit dial overrides it. See [translation controls](../functional/translation-controls.md).
 
-Fair dinkum, level'n vulgarity are independent, so ya can have either without the other:
+Crikey, level'n vulgarity are independent, so ya can have either without the other:
 
 ```sh
 aussiefy "..." -l swaggie --vulgarity nan      # full Aussie, no swearing
@@ -143,7 +143,7 @@ from aussiefy import translate
 translate("I'm extremely busy.", level=4, seed=7).text   # "I'm flat out like a lizard drinking."
 ```
 
-Stone the flamin' crows, the full API is in [toolkit.md](../functional/toolkit.md).
+Fair dinkum, the full API is in [toolkit.md](../functional/toolkit.md).
 
 ## When something goes wrong
 

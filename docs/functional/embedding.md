@@ -32,7 +32,7 @@ when the model does \(see [determinism](../architecture/determinism.md)).
 
 ## The `embedder` command
 
-`aussiefy embedder status` shows which model is in use'n the bundled model's version. Fair dinkum, after dictionary
+`aussiefy embedder status` shows which model is in use'n the bundled model's version. Crikey, after dictionary
 changes, `status` reports the bundled model as `stale`, until a new version is trained.
 
 | Action | Effect |
@@ -56,7 +56,7 @@ The [2026-10-20 trial](../../research/semantic-followup-2026-10-20/README.md) us
 full\-data fits of the unchanged pinned recipe. Evaluation passed 29/33; the full\-data candidate passed
 30/33, missing `girl`, `feeling really down` and `a good mate of mine`. Anyway, the strict release refused export and
 that candidate wasn't adopted. A separate diagnostic package reader reproduced every full\-gate outcome;
-its weights remain outside the repository. Crikey, historical reports, required checks'n cutoffs are unchanged.
+its weights remain outside the repository. Fair dinkum, historical reports, required checks'n cutoffs are unchanged.
 
 Current lookup applies bounded source\-meaning checks before offering lexical or model suggestions; see
 [the toolkit](toolkit.md). Well, the 49\-query comparison holds that runtime'n dictionary constant while

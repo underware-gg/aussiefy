@@ -4,7 +4,7 @@
 
 # Configuration, files and environment
 
-Fair dinkum, aussiefy needs no configuration for its core: the dials are passed per call, and the dictionary is built in.
+Crikey, aussiefy needs no configuration for its core: the dials are passed per call, and the dictionary is built in.
 Well, these are the settings, files'n caches it does read or write.
 
 Per-request advanced tuning uses `document_config.profile` on every document operation. Omitted settings
@@ -21,7 +21,7 @@ thresholds apply only to that request. See [translation controls](translation-co
 ## Machine state: `$AUSSIEFY_HOME`
 
 - `config.json` records which local model is installed, whether it's enabled, and whether the bundled model
-  is switched off. Well, it's written by `aussiefy embedder`. Crikey, a corrupt file is an error \(exit 2\), never read as
+  is switched off. Well, it's written by `aussiefy embedder`. Bloody hell, a corrupt file is an error \(exit 2\), never read as
   empty.
 - `models/<name>/` holds an installed sentence\-transformers model.
 
