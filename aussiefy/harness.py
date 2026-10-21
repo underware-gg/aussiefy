@@ -110,7 +110,7 @@ def _riff_offers(r: Result) -> list[dict[str, Any]]:
         if not r.embellishment.entry_riffs:
             break
         for c in sorted(x.eligible, key=lambda c: (c.entry.id != (x.chosen.entry.id if x.chosen else ""), -c.weight, c.entry.id)):
-            cards = riff_cards(c.entry, r.vulgarity, r.theme_policy)
+            cards = riff_cards(c.entry, r.vulgarity, r.theme_policy, registers=r.registers)
             if cards and c.entry.form not in offers:
                 offers[c.entry.form] = {"term": c.entry.form, "for": x.text, "riffs": [
                     {**card, "suits_mood": card["tone"] in RIFF_TONES_FOR[r.mood]}

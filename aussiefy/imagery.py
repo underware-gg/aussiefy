@@ -11,7 +11,7 @@ from .context import following_context, positive_context
 from .detect import applicable_concepts
 from .terms import form_key
 from .text import tokenize
-from .evidence import metadata_dict, metadata_rejections, theme_rejection
+from .evidence import metadata_dict, metadata_rejections, theme_rejection, register_rejection
 
 
 @dataclass(frozen=True)
@@ -45,7 +45,8 @@ def image_association(image, concepts, setting):
 def permitted(image, eff, setting):
     return (setting.takes("riff") and setting.contextual_riffs and image.level <= eff.level
             and image.vulgarity <= eff.vulgarity and image.exaggeration <= setting.riff_exaggeration
-            and not metadata_rejections(image) and not theme_rejection(image, eff.theme_policy))
+            and not metadata_rejections(image) and not theme_rejection(image, eff.theme_policy)
+            and not register_rejection(image, eff.registers))
 
 
 def excluded_complement(image, tokens, end):

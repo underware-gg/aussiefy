@@ -27,6 +27,7 @@ from .vocabulary import Vocabulary
 from .evidence import METADATA_KEYS, assess, parse_metadata, parse_weights
 from .themes import THEME_NAME
 from .construction_data import parse_catalog
+from .masks import profanity_rating
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -369,10 +370,6 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         entries = {eid: assessed(replace(entry, riffs=tuple(assessed(r) for r in entry.riffs)))
                    for eid, entry in entries.items()}
         imagery = [assessed(image) for image in imagery]
-        catalog_path = data / "constructions.yaml"
-        if include_builtin and catalog_path.exists():
-            construction_catalog = parse_catalog(_read(catalog_path, errors, {}, unique_keys=True), entries,
-                                                   concepts, lambda word: swear_strength(swears, word), assessed)
     except SchemaError as exc:
         errors.append(str(exc))
 
@@ -430,13 +427,23 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         swearing[int(v)] = SwearProfile(**{k: float(x) for k, x in (raw or {}).items()})
     if errors:
         raise SchemaError("dictionary failed validation:\n  " + "\n  ".join(errors))
-    return Dictionary(entries=entries, concepts=concepts, profiles=profiles, phonetic=phonetic,
+    dictionary = Dictionary(entries=entries, concepts=concepts, profiles=profiles, phonetic=phonetic,
                       policy_defaults=prof_raw.get("policy", {}), patterns=patterns, index=PatternIndex(patterns),
                       form_index=PatternIndex(forms), swears=swears, dialect=dialect, theme_defaults=theme_defaults,
                       warnings=warnings, swearing=swearing, genres=genres, pos_words=pos.lower_words(),
                       person_roles=person_roles, adjective_nouns=adjective_nouns, name_aliases=name_aliases,
                       imagery=tuple(imagery), overlay_changes=tuple(vocabulary.changes), evidence_weights=weights,
                       construction_catalog=construction_catalog)
+    catalog_path = data / "constructions.yaml"
+    if include_builtin and catalog_path.exists():
+        try:
+            dictionary.construction_catalog = parse_catalog(_read(catalog_path, errors, {}, unique_keys=True), entries,
+                concepts, lambda text: profanity_rating(text, dictionary), assessed)
+        except SchemaError as exc:
+            errors.append(str(exc))
+    if errors:
+        raise SchemaError("dictionary failed validation:\n  " + "\n  ".join(errors))
+    return dictionary
 
 
 def write_validated(data_dir: str | Path, files: dict[str, str], extra: Iterable[str | Path] = ()) -> Dictionary:

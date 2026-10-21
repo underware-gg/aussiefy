@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
+from collections import defaultdict
 from dataclasses import dataclass, replace
 from math import gcd, prod
 from string import Formatter
@@ -11,7 +13,8 @@ from typing import TYPE_CHECKING
 
 from .context import tone_weight
 from .errors import SchemaError
-from .evidence import TermMetadata, assess, metadata_dict, metadata_rejections, theme_rejection
+from .masks import profanity_rating
+from .evidence import TermMetadata, assess, metadata_dict, metadata_rejections, theme_rejection, register_rejection
 from .policy import policy_rejection, roll, weighted_index
 from .terms import form_key
 from .text import tokenize
@@ -21,6 +24,7 @@ if TYPE_CHECKING:
     from .model import Dictionary
     from .policy import Effective
     from .schema import Entry
+    from .themes import ThemePermissions
 
 DEFAULT_LIMIT = 5
 
@@ -135,9 +139,22 @@ def _rejection(metadata: TermMetadata, level: int, vulgarity: int, eff: Effectiv
         return f"needs level {level}"
     if vulgarity > eff.vulgarity:
         return f"vulgarity {vulgarity} exceeds cap {eff.vulgarity}"
-    if metadata.register not in eff.registers:
-        return f"register {metadata.register!r} not allowed"
-    return None
+    return register_rejection(metadata, eff.registers)
+
+
+def composite_metadata(family: ConstructionFamily, parts, dictionary: Dictionary) -> TermMetadata:
+    tiers = {}
+    starts = dict(dictionary.theme_starts)
+    for term in (family.metadata, *(part.metadata for part in parts)):
+        explicit = dict(term.theme_tiers)
+        for theme in term.themes:
+            tiers[theme] = max(tiers.get(theme, 0), explicit.get(theme, starts[theme]))
+    metadata = TermMetadata(coined_by="constructor", themes=tuple(sorted(tiers)),
+                            theme_tiers=tuple(sorted(tiers.items())))
+    assessment = assess(metadata, dictionary.evidence_weights)
+    metadata = replace(metadata, attestation=assessment.attestation, evidence=assessment.evidence,
+                       first_attested=assessment.first_attested)
+    return metadata
 
 
 def compose(family: ConstructionFamily, chosen: dict[str, Ingredient], dictionary: Dictionary,
@@ -162,17 +179,7 @@ def compose(family: ConstructionFamily, chosen: dict[str, Ingredient], dictionar
     payload = json.dumps(["construction-expression/v1", family.id, family.template, identity],
                          ensure_ascii=False, separators=(",", ":")).encode()
     cid = "construction/" + family.id + "/" + hashlib.sha256(payload).hexdigest()[:24]
-    tiers = {}
-    starts = dict(dictionary.theme_starts)
-    for term in (family.metadata, *(part.metadata for part in chosen.values())):
-        explicit = dict(term.theme_tiers)
-        for theme in term.themes:
-            tiers[theme] = max(tiers.get(theme, 0), explicit.get(theme, starts[theme]))
-    metadata = TermMetadata(coined_by="constructor", themes=tuple(sorted(tiers)),
-                            theme_tiers=tuple(sorted(tiers.items())))
-    assessment = assess(metadata, dictionary.evidence_weights)
-    metadata = replace(metadata, attestation=assessment.attestation, evidence=assessment.evidence,
-                       first_attested=assessment.first_attested)
+    metadata = composite_metadata(family, chosen.values(), dictionary)
     words = sum(token.is_word for token in tokenize(text))
     lo, hi = family.preferred_words
     distance = max(lo - words, 0, words - hi)
@@ -181,7 +188,10 @@ def compose(family: ConstructionFamily, chosen: dict[str, Ingredient], dictionar
     weight = family.weight * eff.metadata_weight(family.metadata) * part_weight * tone_weight(family.tone, mood)
     return Construction(cid, family, text, tuple(parts), metadata,
                         max(family.level, *(part.level for part in chosen.values())),
-                        max(family.vulgarity, *(part.vulgarity for part in chosen.values())), cadence, weight)
+                        max(family.vulgarity, *(part.vulgarity for part in chosen.values()),
+                            profanity_rating(text, dictionary, canonical_spans=[
+                                (*part.span, part.ingredient.vulgarity) for part in parts if part.ingredient.entry_id])),
+                        cadence, weight)
 
 
 def generate(dictionary: Dictionary, eff: Effective, setting: Embellishment, *, seed: int = 0,
@@ -237,6 +247,9 @@ def generate(dictionary: Dictionary, eff: Effective, setting: Embellishment, *, 
                 index, remainder = divmod(index, len(pool))
                 chosen[name] = pool[remainder]
             candidate = compose(pattern, chosen, dictionary, eff, mood)
+            if candidate.vulgarity > eff.vulgarity:
+                rejected.append((candidate.id, f"vulgarity {candidate.vulgarity} exceeds cap {eff.vulgarity}"))
+                continue
             key = form_key(candidate.text)
             if key in dictionary.known_construction_forms or key in seen:
                 continue
@@ -251,3 +264,84 @@ def generate(dictionary: Dictionary, eff: Effective, setting: Embellishment, *, 
         ranked.append(candidate)
         found.remove(candidate)
     return Generation(tuple(ranked), attempts, tuple(dict.fromkeys(rejected)))
+
+
+@dataclass(frozen=True)
+class ConstructionPattern:
+    family: ConstructionFamily
+    steps: tuple[tuple[tuple[re.Pattern, Ingredient | None], ...], ...]
+
+
+def _literal_pattern(text: str) -> str:
+    return "".join(r"\s+" if chunk.isspace() else re.escape(chunk)
+                   for chunk in re.split(r"(\s+)", text.replace("’", "'")))
+
+
+def construction_patterns(dictionary: Dictionary) -> tuple[ConstructionPattern, ...]:
+    catalog = dictionary.construction_catalog
+    if catalog is None:
+        return ()
+    pools = defaultdict(list)
+    for spec in catalog.ingredients:
+        part = spec.resolve(dictionary.entries)
+        pools[part.kind].append((re.compile(_literal_pattern(part.text), re.I), part))
+    patterns = []
+    for family in catalog.families:
+        kinds, steps = dict(family.slots), []
+        for literal, name in family.fragments:
+            if literal:
+                steps.append(((re.compile(_literal_pattern(literal), re.I), None),))
+            if name is not None:
+                steps.append(tuple(pools[kinds[name]]))
+        patterns.append(ConstructionPattern(family, tuple(steps)))
+    return tuple(patterns)
+
+
+def _step_matches(options, text, position):
+    for pattern, part in options:
+        match = pattern.match(text, position)
+        if match is None:
+            continue
+        first_end = match.end()
+        if pattern.pattern.endswith(r"\s+"):
+            # Leave possible whitespace for the next step instead of committing to a greedy split.
+            while first_end > position and text[first_end - 1].isspace():
+                first_end -= 1
+            first_end += 1
+        for end in range(first_end, match.end() + 1):
+            yield end, part
+
+
+def construction_matches(text: str, dictionary: Dictionary, permitted: ThemePermissions):
+    """Match recipes by text position, merging ambiguous paths rather than enumerating combinations.
+
+    At each step/position, an allowed reading dominates a blocked one: adding later parts can only
+    raise theme tiers. Transition work is cached per call and bounded by text length and recipe size.
+    """
+    normalized = text.replace("’", "'")
+    for recipe in dictionary.construction_patterns:
+        transitions = {}
+        blocked = {part.id: bool(theme_rejection(part.metadata, permitted))
+                   for step in recipe.steps for _, part in step if part is not None}
+        family_blocked = bool(theme_rejection(recipe.family.metadata, permitted))
+        for start in range(len(normalized)):
+            if start and re.match(r"\w", normalized[start - 1]):
+                continue
+            states = {start: (family_blocked, ())}
+            for stage, options in enumerate(recipe.steps):
+                next_states = {}
+                for position, (held, chosen) in states.items():
+                    key = stage, position
+                    if key not in transitions:
+                        transitions[key] = tuple(_step_matches(options, normalized, position))
+                    for end, part in transitions[key]:
+                        path = held or (part is not None and blocked[part.id]), chosen + ((part,) if part else ())
+                        previous = next_states.get(end)
+                        if previous is None or previous[0] and not path[0]:
+                            next_states[end] = path
+                states = next_states
+                if not states:
+                    break
+            for end, (_, chosen) in states.items():
+                if end > start and (end == len(normalized) or not re.match(r"\w", normalized[end])):
+                    yield start, end, composite_metadata(recipe.family, chosen, dictionary)

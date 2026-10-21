@@ -306,11 +306,10 @@ def assess(term: TermMetadata, weights: EvidenceWeights, *, testimony: Testimony
         if previous is None or (source_weights.get(source.evidence_kind, 0), source.evidence_kind, source.url or "") > (
                 source_weights.get(previous.evidence_kind, 0), previous.evidence_kind, previous.url or ""):
             independent[publisher] = source
-    counts = Counter(s.kind for s in independent.values())
-    scoring_counts = Counter(s.evidence_kind for s in independent.values())
+    counts = Counter(s.evidence_kind for s in independent.values())
     score = sum(source_weights[kind] * sum(weights.diminishing ** i for i in range(count))
-                for kind, count in scoring_counts.items() if kind != "testimony")
-    documentary = any(kind != "testimony" for kind in scoring_counts)
+                for kind, count in counts.items() if kind != "testimony")
+    documentary = any(kind != "testimony" for kind in counts)
     people, places, outsiders = (summary.people, summary.places, summary.independent) if summary else (0, 0, 0)
     testimony_score = weights.testimony_scale * (1 - math.exp(-people / weights.testimony_saturation))
     testimony_score += weights.place_bonus * math.log1p(places)
@@ -353,6 +352,12 @@ def metadata_rejections(term: TermMetadata, *, allow_misreadable: bool = False) 
     if term.misreadable and not allow_misreadable:
         reasons.append("misreadable")
     return tuple(reasons)
+
+
+def register_rejection(term: TermMetadata, registers) -> str | None:
+    if term.register not in registers:
+        return f"register '{term.register}' not allowed (allowed: {', '.join(registers)})"
+    return None
 
 
 def theme_rejection(term: TermMetadata, permitted: ThemePermissions) -> str | None:

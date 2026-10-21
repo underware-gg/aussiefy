@@ -7,6 +7,7 @@ from collections import Counter, defaultdict
 from typing import Iterable
 
 from .degree import realised_degree
+from .constructions import construction_matches
 from .detect import detect, predicate_lead, resolve_overlaps
 from .genre import Embellishment
 from .model import Dictionary
@@ -47,6 +48,8 @@ def theme_issues(text: str, original: str | None, dictionary: Dictionary,
         for pattern, terms in patterns:
             for match in pattern.finditer(source.replace("’", "'")):
                 groups[match.span()].extend(terms)
+        for a, b, term in construction_matches(source, dictionary, permitted):
+            groups[a, b].append((term, False))
         owned = {}
         for (a, b), terms in sorted(groups.items(), key=lambda item: (-(item[0][1] - item[0][0]), item[0][0])):
             if not any(c <= a and b <= d for c, d in owned):

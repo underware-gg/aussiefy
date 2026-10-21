@@ -137,6 +137,12 @@ class Dictionary:
     construction_catalog: ConstructionCatalog | None = None
 
     @cached_property
+    def construction_patterns(self):
+        from .constructions import construction_patterns
+
+        return construction_patterns(self)
+
+    @cached_property
     def known_construction_forms(self) -> frozenset[str]:
         from .terms import form_key
 
@@ -148,6 +154,16 @@ class Dictionary:
     def swear_strength(self, word: str) -> int:
         """How strong a swear a word is (0 for none), dropped g and plurals read as the listed word."""
         return swear_strength(self.swears, word)
+
+    @cached_property
+    def authored_swears(self) -> dict[str, int]:
+        words = {}
+        for entry in self.entries.values():
+            if entry.status != "omit" and entry.profane:
+                for word in entry.mask:
+                    key = normalise_word(word)
+                    words[key] = max(words.get(key, 0), entry.vulgarity)
+        return words
 
     @cached_property
     def mapping_index(self) -> PatternIndex:
@@ -165,7 +181,7 @@ class Dictionary:
     @cached_property
     def phrase_swear_ratings(self):
         """Whole-expression curator ratings can be milder than a word read on its own."""
-        return tuple((re.compile(r"(?<![a-z'])" + re.escape(strip_markup(form).lower()) + r"(?![a-z'])"), entry.vulgarity)
+        return tuple((re.compile(r"(?<![a-z'])" + re.escape(strip_markup(form).lower()) + r"(?![a-z'])", re.I), entry.vulgarity)
                      for entry in self.entries.values() if entry.status == "active" and not entry.held_back
                      for form in entry.all_forms if "{" not in form and len(form.split()) > 1 and entry.vulgarity < max(
                          (self.swear_strength(word) for word in re.findall(r"[a-z']+", form.lower())), default=0))
@@ -177,8 +193,13 @@ class Dictionary:
 
     @cached_property
     def themed_terms(self) -> tuple[TermMetadata, ...]:
-        return tuple(term for entry in self.entries.values() for term in (entry, *entry.riffs) if term.themes) + tuple(
+        terms = tuple(term for entry in self.entries.values() for term in (entry, *entry.riffs) if term.themes) + tuple(
             image for image in self.imagery if image.themes)
+        catalog = self.construction_catalog
+        if catalog is not None:
+            terms += tuple(family.metadata for family in catalog.families if family.metadata.themes)
+            terms += tuple(part.metadata for part in catalog.ingredients if not part.entry_id and part.metadata.themes)
+        return terms
 
     @cached_property
     def swear_compounds(self) -> dict[str, int]:

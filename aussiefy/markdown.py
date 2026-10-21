@@ -58,6 +58,7 @@ class DocumentResult:
     embellishment: Embellishment
     profile_config: dict
     theme_policy: ThemePolicy
+    registers: tuple[str, ...]
 
     @property
     def permitted_themes(self) -> frozenset[str]:
@@ -497,4 +498,4 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
     warnings = list(dict.fromkeys([*effective.warnings, *(w for u in units for w in u.result.warnings)]))
     return DocumentResult("".join(pieces), source, effective.level, policy.seed, effective.vulgarity,
                           policy.variety, warnings, units, protected, genre, context[1], genre.setting(policy.embellishment),
-                          effective.envelope()["profile_config"], effective.theme_policy)
+                          effective.envelope()["profile_config"], effective.theme_policy, effective.registers)

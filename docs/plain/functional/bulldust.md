@@ -40,7 +40,13 @@ These are samples of construction, not a claim that every combination is funny o
 Families and ingredients must pass the selected level, theme, swear, register and usage/meaning gates.
 Entry-backed ingredients retain manual gates, regional rules, wording, weight and evidence from the entry.
 A composite takes the highest theme tier among its parts and family; a family can raise a tier but cannot
-lower a part's tier. Exact theme overrides remain independent of the swear cap.
+lower a part's tier. Exact theme overrides remain independent of the swear cap. Lint and model-output
+checks recognise reviewed combinations under these same theme tiers, preserving occurrences already in
+the source. Ambiguous wording stays unresolved if any complete reviewed reading is allowed.
+
+The constructor rates the actual assembled words, including known profane compounds and words formed
+where parts join. Slot names are not spoken text. Reviewed whole-expression ratings still apply; ordinary
+words are not swears merely because they contain the same letters.
 
 Bare “bugger me sideways” is Dad's surprise oath. Implement combinations such as “with a rusty spanner”
 start at Uncle Bob for sex and innuendo; the title combination starts at Uncle Bob for religion. The

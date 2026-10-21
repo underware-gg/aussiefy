@@ -260,7 +260,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         results = [short_card(e) for _, e, _ in scored[:limit]]
     else:
         riffs = shows_riffs(setting)
-        results = [{**entry_card(e, cap, riffs, permitted_themes=eff.theme_policy),
+        results = [{**entry_card(e, cap, riffs, permitted_themes=eff.theme_policy, registers=eff.registers),
                     "match": how, "score": round(s, 2)} for s, e, how in scored[:limit]]
     for card in results:
         entry = d.entries[card["id"]]

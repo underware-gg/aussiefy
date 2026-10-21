@@ -13,7 +13,7 @@ from typing import Any
 
 from .errors import SchemaError
 from .themes import ThemePermissions
-from .evidence import (METADATA_KEYS, REGISTERS, TermMetadata, metadata_dict, metadata_rejections, parse_metadata,
+from .evidence import (METADATA_KEYS, REGISTERS, TermMetadata, metadata_dict, metadata_rejections, register_rejection, parse_metadata,
                        theme_rejection)
 from .text import MASK_WORD_RE, normalise_word
 
@@ -192,10 +192,10 @@ class Entry(TermMetadata):
             return "phrase"
         return "lexical"
 
-    def riffs_within(self, cap: int, permitted_themes: ThemePermissions) -> tuple["Riff", ...]:
+    def riffs_within(self, cap: int, permitted_themes: ThemePermissions, *, registers) -> tuple["Riff", ...]:
         """The riffs offered under a vulgarity cap, best first (riffs.yaml lists the best first)."""
         return tuple(r for r in self.riffs if r.vulgarity <= cap and not metadata_rejections(r)
-                     and not theme_rejection(r, permitted_themes))
+                     and not theme_rejection(r, permitted_themes) and not register_rejection(r, registers))
 
     @property
     def held_back(self) -> tuple[str, ...]:

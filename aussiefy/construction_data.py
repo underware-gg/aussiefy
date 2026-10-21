@@ -36,11 +36,7 @@ def _number(value, owner):
     return value
 
 
-def _rating(text, rate_word):
-    return max((rate_word(word) for word in re.findall(r"[a-z']+", text.lower())), default=0)
-
-
-def parse_catalog(raw, entries, concepts, rate_word: Callable[[str], int],
+def parse_catalog(raw, entries, concepts, rate_text: Callable[[str], int],
                   assessed: Callable[[TermMetadata], TermMetadata]) -> ConstructionCatalog | None:
     if raw == {}:
         return None
@@ -77,7 +73,7 @@ def parse_catalog(raw, entries, concepts, rate_word: Callable[[str], int],
         if not isinstance(text, str) or not text.strip():
             raise SchemaError(f"{pid}: an ingredient needs text or entry_id")
         level = _integer(row.get("level", 1), 1, 5, f"{pid}.level")
-        vulgarity = max(_rating(text, rate_word), _integer(row.get("vulgarity", 0), 0, 3, f"{pid}.vulgarity"))
+        vulgarity = max(rate_text(text), _integer(row.get("vulgarity", 0), 0, 3, f"{pid}.vulgarity"))
         weight = _number(row.get("weight", 1), f"{pid}.weight")
         metadata = assessed(TermMetadata(**parse_metadata(row, pid)))
         ingredients.append(Ingredient(pid, kind, text, metadata=metadata, level=level, vulgarity=vulgarity, weight=weight))
@@ -106,7 +102,7 @@ def parse_catalog(raw, entries, concepts, rate_word: Callable[[str], int],
         if not isinstance(frame, str) or frame not in FRAMES:
             raise SchemaError(f"{fid}: unknown frame {frame!r}")
         level = _integer(row.get("level", 5), 1, 5, f"{fid}.level")
-        vulgarity = max(_rating(template, rate_word), _integer(row.get("vulgarity", 0), 0, 3, f"{fid}.vulgarity"))
+        vulgarity = max(max((rate_text(literal) for literal, _ in fragments), default=0), _integer(row.get("vulgarity", 0), 0, 3, f"{fid}.vulgarity"))
         weight = _number(row.get("weight", 1), f"{fid}.weight")
         exaggeration = _integer(row.get("exaggeration", 1), 0, 2, f"{fid}.exaggeration")
         tone = row.get("tone", "comic")

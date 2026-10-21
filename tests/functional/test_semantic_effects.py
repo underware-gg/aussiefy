@@ -122,7 +122,7 @@ def test_cap_raised_alternatives_do_not_bypass_effect_permission(local):
 
 def test_cards_report_effects_without_claiming_grammatical_applicability(dictionary):
     entry = dictionary.entries[LUCKY]
-    assert entry_card(entry, permitted_themes=frozenset())['semantic_effects'] == ['opinion']
+    assert entry_card(entry, permitted_themes=frozenset(), registers=("current",))['semantic_effects'] == ['opinion']
     assert short_card(entry)['semantic_effects'] == ['opinion']
 
 

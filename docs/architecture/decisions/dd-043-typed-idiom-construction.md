@@ -25,7 +25,9 @@ IDs and wording, independently of mutable evidence. Construction IDs occupy thei
 
 Entry references inherit canonical metadata and limits; literal parts own theirs. Eligibility precedes
 composition. The result combines maximum theme tiers across parts and family, and the family may raise
-but not lower them. Profanity is the maximum independent rating. Whole-expression evidence is freshly
+but not lower them. Profanity is the maximum independent part/family rating and the realised wording rating. Known compound
+and mask rules rate literal text, and composition rechecks complete words across joins; slot identifiers
+do not count as wording. Canonical whole-expression exceptions survive. Whole-expression evidence is freshly
 assessed as constructor coinage with no sources; citations and contributor credit stay on the parts.
 
 Sample at most the configured budget per family with seeded affine mixed-radix enumeration. Do not
@@ -54,3 +56,17 @@ its join is data and can be refined without a code exception.
 Standalone generation and opener composition are now available. Fallback substitution, the shared agent
 scaffold, contextual variations, extension identities and the new changes/card contract remain separate
 planned slices. A caller may pin compatible slots now without copying a sentence-specific exception.
+
+
+## Conformance refinement, 22 October 2026
+
+Lint and model-output acceptance recognise complete reviewed family combinations as well as individual
+entries. They share composite theme derivation with generation and preserve source occurrences. Cached
+immutable steps contain escaped literal/ingredient matchers; a call advances text-position states through
+the recipe, retaining an allowed reading when ambiguous slot partitions meet at the same position.
+Transition work is bounded by recipe and text size, without enumerating combinations or using a
+backtracking expression across the whole family. Matching retains original Unicode offsets.
+
+Resolved register permissions also reach riff and imagery selection, offers and cards. The internal
+result carries those permissions so card builders do not reconstruct a weaker default. This adds no
+public changes-contract fields; its coordinated version remains a later slice.

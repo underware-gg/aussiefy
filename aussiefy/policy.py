@@ -11,7 +11,7 @@ from .errors import UserError
 from .model import Dictionary, LevelProfile, SwearProfile
 from .profile import ProfileOverrides, profile_config
 from .schema import Entry, REGISTERS, UNLOCKS
-from .evidence import TermMetadata, theme_rejection
+from .evidence import TermMetadata, theme_rejection, register_rejection
 from .themes import THEME_NAME, ThemePolicy
 
 
@@ -333,8 +333,8 @@ def policy_rejection(entry: Entry, eff: Effective) -> str | None:
     reason = dial_rejection(entry, eff)
     if reason:
         return reason
-    if entry.register not in eff.registers:
-        return f"register '{entry.register}' not allowed (allowed: {', '.join(eff.registers)})"
+    if reason := register_rejection(entry, eff.registers):
+        return reason
     if eff.regions and entry.region and not set(entry.region) & set(eff.regions):
         return f"region {', '.join(entry.region)} outside {', '.join(eff.regions)}"
     return None

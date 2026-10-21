@@ -10,6 +10,7 @@ python -m pytest -q tests/functional
 
 | Module | Primary responsibility |
 |---|---|
+| [test_dictionary_conformance.py](test_dictionary_conformance.py) | Cross-surface register filters, realised construction profanity, composite recognition and evidence attribution |
 | [test_constructions.py](test_constructions.py) | Typed construction, evidence, subject policy, deterministic bounds and removable garnish |
 | [test_claude.py](test_claude.py) | Shared SDK request, prompt and cache contracts |
 | [test_contracts.py](test_contracts.py) | Agent-consumed result shapes and shared behaviour |

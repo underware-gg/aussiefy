@@ -5,6 +5,11 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Enforce reviewed composite themes in lint and model-output checks, rate the constructor’s actual
+  wording (including compounds and joined words), and respect register filters for imagery and riffs
+  across selection and cards. Keep community evidence counts tied to source kind and record scoped
+  Australian-use testimony for the bare surprise stem.
+
 - Add the agent-neutral Bulldust constructor through Python, CLI and MCP: reviewed typed families,
   seeded bounded variation, canonical part spans and honest evidence labels. Compose surprise openers
   under the existing garnish permissions, with family theme raises independent of profanity.

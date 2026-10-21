@@ -151,6 +151,7 @@ class Result:
     phonetic: list[PhoneticRecord]
     warnings: list[str]
     theme_policy: ThemePolicy
+    registers: tuple[str, ...]
     deterministic_text: str = ""
     surface: dict[str, Any] | None = None
     rewrites: list[RewriteRecord] = field(default_factory=list)
@@ -352,7 +353,7 @@ class Translator:
             warnings.append(f"{why} no swear infixes, intensifiers or sweary garnish: vulgarity "
                             f"{run.eff.vulgarity} reaches its word swaps only")
         return Result(final, source, pol.level, pol.seed, run.records, run.garnish, phon, warnings,
-                      theme_policy=run.eff.theme_policy,
+                      theme_policy=run.eff.theme_policy, registers=run.eff.registers,
                       deterministic_text=final, rewrites=run.rewrites, difficult=run.difficult,
                       vulgarity=run.eff.vulgarity, mood=run.mood, genre=run.genre,
                       sentences=[(s[0].start, s[-1].end) for s in sents], dialect=run.dialect,
@@ -561,7 +562,7 @@ class Translator:
         if not run.embellishment.entry_riffs or choice.entry.id in run.state.riffed:
             return None, ""
         toks, state, eff = sent.tokens, run.state, run.eff
-        riffs = choice.entry.riffs_within(eff.vulgarity, eff.theme_policy)
+        riffs = choice.entry.riffs_within(eff.vulgarity, eff.theme_policy, registers=eff.registers)
         if not riffs or not self._riff_room(end, choice.entry.frame, det.start, sent, run):
             return None, ""
         riff = pick_riff(riffs, run.mood, roll(run.pol.seed, "riff-pick", *sent.key, det.start),

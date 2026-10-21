@@ -6,10 +6,14 @@ masked: the dictionary's swear list (swears.yaml), the compounds its rated words
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, TYPE_CHECKING
 
 from .model import MASK_ENDINGS, swear_strength
 from .text import MASK_WORD_RE, normalise_word, spoken_word
+
+
+if TYPE_CHECKING:
+    from .model import Dictionary
 
 
 def masks(text: str, swears: dict[str, int], compounds: dict[str, int],
@@ -29,6 +33,22 @@ def masks(text: str, swears: dict[str, int], compounds: dict[str, int],
             out.append({"span": [start, start + len(word)], "ending_start": start + _stem_length(low, swears, words),
                         "vulgarity": strength})
     return out
+
+
+def profanity_rating(text: str, dictionary: Dictionary, *, canonical_spans=()) -> int:
+    """Rate actual words, preserving reviewed whole-expression ratings and canonical entry parts.
+
+    A word formed across a part boundary belongs to neither part and is rated as the new word it is.
+    """
+    normalized = text.replace("’", "'")
+    reviewed = [(*match.span(), tier) for pattern, tier in dictionary.phrase_swear_ratings
+                for match in pattern.finditer(normalized)] + list(canonical_spans)
+    ratings = []
+    for word in masks(text, dictionary.swears, dictionary.swear_compounds, dictionary.authored_swears):
+        start, end = word["span"]
+        owners = [tier for a, b, tier in reviewed if a <= start and end <= b]
+        ratings.append(min([word["vulgarity"], *owners]))
+    return max(ratings, default=0)
 
 
 def _inflected(low: str, table: dict[str, int]) -> int:

@@ -44,7 +44,13 @@ So anyway, these are samples of construction, not a claim that every combination
 Bloody hell, families'n ingredients must pass the selected level, theme, swear, register and usage/meaning gates.
 Entry\-backed ingredients retain manual gates, regional rules, wording, weight'n evidence from the entry.
 A composite takes the highest theme tier among its parts'n family; a family can raise a tier but can't
-lower a part's tier. Exact theme overrides remain independent of the swear cap.
+lower a part's tier. Exact theme overrides remain independent of the swear cap. Lint'n model\-output
+checks recognise reviewed combinations under these same theme tiers, preservin' occurrences already in
+the source. Ambiguous wording stays unresolved if any complete reviewed readin' is allowed.
+
+The constructor rates the actual assembled words, including known profane compounds'n words formed
+where parts join. Slot names aren't spoken text. So anyway, reviewed whole\-expression ratings still apply; ordinary
+words aren't swears merely 'cause they contain the same letters.
 
 Bare “bugger me sideways” is Dad's surprise oath. Implement combinations such as “with a rusty spanner”
 start at Uncle Bob for sex'n innuendo; the title combination starts at Uncle Bob for religion. The

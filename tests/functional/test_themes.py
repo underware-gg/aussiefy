@@ -110,7 +110,7 @@ def test_riffs_cards_and_agent_plan_reuse_the_same_permissions(themed):
     assert [r["text"] for group in plan["riffs"] for r in group["riffs"]] == ["a plain image"]
     changes = translate_changes("I am tired.", **opts)
     assert [r["text"] for r in changes.entries["zzplain"]["riffs"]] == ["a plain image"]
-    card = entry_card(entries["zzplain"], permitted_themes=result.permitted_themes)
+    card = entry_card(entries["zzplain"], permitted_themes=result.permitted_themes, registers=result.registers)
     assert [r["text"] for r in card["riffs"]] == ["a plain image"]
     session = brief("I am tired.", **opts)
     assert session.payload["THEME_PERMISSIONS"] == result.envelope()["theme_permissions"]
@@ -285,11 +285,11 @@ def test_real_child_riffs_carry_their_own_subjects(dictionary):
                         ("galah", "raffle"), ("bucketing-down", "pissin'")]:
         entry = dictionary.entries[eid]
         assert any(banned in riff.text for riff in entry.riffs)
-        assert all(banned not in riff.text for riff in entry.riffs_within(3, allowed))
-        card = entry_card(entry, permitted_themes=allowed)
+        assert all(banned not in riff.text for riff in entry.riffs_within(3, allowed, registers=("current",)))
+        card = entry_card(entry, permitted_themes=allowed, registers=("current",))
         assert all(banned not in riff["text"] for riff in card.get("riffs", []))
     nan = resolve(Policy(vulgarity=0), dictionary).permitted_themes
-    assert not dictionary.entries["bucketing-down"].riffs_within(0, nan)
+    assert not dictionary.entries["bucketing-down"].riffs_within(0, nan, registers=("current",))
 
 
 @pytest.mark.parametrize("text", ["The box is full.", "The apples are rotten.", "The lizard is legless.",

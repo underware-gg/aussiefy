@@ -146,7 +146,7 @@ def finish(result: Any, drafts: list[Draft], dictionary: Dictionary) -> ChangeSe
         names.update(i for es in [d.entries, *d.rendering_entries] for i in es)
     riffs = shows_riffs(result.embellishment)
     entries = {i: entry_card(dictionary.entries[i], result.vulgarity, riffs,
-                             permitted_themes=result.theme_policy) for i in sorted(names)}
+                             permitted_themes=result.theme_policy, registers=result.registers) for i in sorted(names)}
     withheld = [{"id": d.change["id"], "reason": d.withheld} for d in drafts if d.withheld]
     changes = [{k: d.change[k] for k in _FIELDS if k in d.change} for d in drafts]
     return ChangeSet(result, changes, entries, withheld)

@@ -200,7 +200,7 @@ def test_shared_metadata_gates_riffs_and_imagery_without_gating_bulldust(diction
                    {"misreadable": True}):
         riff = Riff("a creative comparison", **fields)
         entry = Entry("riff-test", "ripper", ("GOOD",), "adj", riffs=(riff,))
-        assert metadata_rejections(riff) and not entry.riffs_within(3, frozenset(dictionary.theme_defaults[3]))
+        assert metadata_rejections(riff) and not entry.riffs_within(3, frozenset(dictionary.theme_defaults[3]), registers=("current",))
     assert not metadata_rejections(TermMetadata(coined_by="agent", evidence="bulldust"))
     assert next(i for i in dictionary.imagery if i.id == "chew-nails").reads_as == "american"
 
