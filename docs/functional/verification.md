@@ -5,7 +5,7 @@
 # Verify a translation
 
 `verify(text, original=...)` checks any translation against its original, using the same level, vulgarity,
-English, embellishment'n extended\-markup controls as lint. Fair dinkum, it's deterministic and requires no paid API.
+English, embellishment'n extended\-markup controls as lint. Jeez Louise, it's deterministic and requires no paid API.
 
 ```sh
 aussiefy verify draft.txt --original original.txt -l 4 --embellishment dinkum

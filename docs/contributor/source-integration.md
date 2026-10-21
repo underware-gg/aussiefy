@@ -36,7 +36,7 @@ ownership, source links, exclusions'n modifications. These changes import eviden
 paid judgin', corpus fetching or model trainin'.
 
 The authoritative plain/published documentation'n checked PR release workflow are now implemented and
-verified. Fair dinkum, each integration'n subsequent slice receives a design review and the repository's full gates
+verified. Jeez Louise, each integration'n subsequent slice receives a design review and the repository's full gates
 before commit. The first real release is separate from this completed setup.
 
 
@@ -60,5 +60,5 @@ claims with integration annotations. Now, no new local\-only corpus is published
 and sanitised historical exports remain intact. Historical judge scores describe the source runs rather than
 a new evaluation of the integrated fixes.
 
-Jeez Louise, the existin' repeated\-city/non\-nestin' regression retains every assertion; its catalogue\-dependent witness
+Fair dinkum, the existin' repeated\-city/non\-nestin' regression retains every assertion; its catalogue\-dependent witness
 uses seed 10 instead of 9 after the dictionary growth. So anyway, the same behaviour is directly reproduced.

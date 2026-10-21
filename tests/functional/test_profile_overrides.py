@@ -139,8 +139,11 @@ def test_swear_lean_changes_candidate_weight_without_bypassing_cap(translator):
 
 @pytest.mark.parametrize("probability", [0, 1])
 def test_stack_probability_changes_second_idiom_selection(probability, translator):
-    r = translator.translate("She is crazy.", vulgarity=0, document_type="custom",
-                             document_config={"profile": {"stack": probability}})
+    entries = [Entry("stack-rocker", "off {poss} rocker", ("CRAZY",), "predicate_adj"),
+               Entry("stack-twist", "round the twist", ("CRAZY",), "predicate_adj")]
+    tr = Translator(replace(translator.dictionary, entries={entry.id: entry for entry in entries}))
+    r = tr.translate("She is crazy.", vulgarity=0, document_type="custom",
+                     document_config={"profile": {"stack": probability}})
     assert any(x.substituted for x in r.records)
     assert any(x.stacked for x in r.records) == bool(probability)
 

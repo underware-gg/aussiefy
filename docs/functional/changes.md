@@ -68,7 +68,7 @@ and responses live in `tests/fixtures/changes/`. Each change has:
   one, and then each covers the other. In "Anyway, he's a few snags short of a barbie", the connective's region is
   "Anyway, he's" and the swap's starts at "he's". Removing the connective rewrites "he's", and swappin' in "he
   isn't the full quid" rewrites part of the connective's region, so each covers the other. A garnish region that
-  takes in a whole swap is another such pair. Now, a change with no region \(a drawl, an infix, a US word swapped\) covers
+  takes in a whole swap is another such pair. Mind ya, a change with no region \(a drawl, an infix, a US word swapped\) covers
   sweet bugger\-all.
 
 `entries` maps each entry id the changes name to its card, built as `lookup` builds it under the same dials

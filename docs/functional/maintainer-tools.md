@@ -26,7 +26,7 @@ lists the lines of an Aussified draft still in the original wording, ignoring th
 
 ## Growing the dictionary: the `dev` steps
 
-Crikey, each step stages its output in a YAML file for the next; only `review --apply` and `round --write` change the
+Fair dinkum, each step stages its output in a YAML file for the next; only `review --apply` and `round --write` change the
 dictionary.
 
 - **`dev scrape`** fetches pages politely, with a cache and a delay, or reads saved `.html` files. It extracts
@@ -41,7 +41,7 @@ dictionary.
   in "stick out like a country dunny", "goog" in "full as a goog", "frog and toad" in "hit the frog and toad".
   It stages them with the parent idiom as context, so `tag` can infer what each one means on its own.
 - **`dev harvest ORIGINAL REWRITE`** mines an Aussified rewrite, from an agent, the `--rewrite` cache or a
-  person. Far out, a word\-level diff pairs each changed span with its plain\-English counterpart \("arrived" → "rocked
+  person. Jeez Louise, a word\-level diff pairs each changed span with its plain\-English counterpart \("arrived" → "rocked
   up"\). It skips anything the dictionary already has, including inflected forms, and stages the rest.
 - **`dev tag`** asks Claude to propose concept, frame, intensity, vulgarity, `replaces`, flags and a gloss,
   using structured JSON output that is validated against the schema. `slur` forces `omit`; perceived
@@ -60,7 +60,7 @@ dictionary.
   merges sources or variants. It never overrides human edits or resurrects an omitted entry. `--apply` writes
   the changes.
 - **`dev round DIRECTORY`** applies a research round's verified verdicts, configured by the round's
-  `round.yaml`. Now, it plans against the dictionary as it was before the round, prints what it would add'n what
+  `round.yaml`. Mind ya, it plans against the dictionary as it was before the round, prints what it would add'n what
   it drops'n why \(a form already present, a trigger that's itself slang or copies a reference query\), and
   with `--write` validates the result in a scratch copy before touching the dictionary.
   Archived proposals are adapted after the round's explicit entry fixes: URL strings become unreviewed
@@ -74,7 +74,7 @@ dictionary.
 
 `aussiefy dev ingest tests/corpus/everyday/interfold.yaml` reads the pinned 15\-page
 [Interfold manifest](../../tests/corpus/everyday/interfold.yaml) and saves missing MDX sources verbatim as
-`.mdx` files in `tests/corpus/everyday/interfold/`, with pinned LGPL attribution. Fair dinkum, it needs the `scrape` extra. `--force` refreshes
+`.mdx` files in `tests/corpus/everyday/interfold/`, with pinned LGPL attribution. Crikey, it needs the `scrape` extra. `--force` refreshes
 existin' pages; `--ref REF` selects another upstream ref for a local experiment. Mind ya, it uses the shared home
 cache'n user agent. Other remote\-only manifests write to ignored local storage.
 Exit status is 0 for success, 1 for page fetch/write failures \(other pages continue\), or 2 for an invalid

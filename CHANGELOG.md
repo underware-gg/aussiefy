@@ -9,6 +9,8 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Apply reviewed full\-sense citation support to the dictionary, with historical dates'n conservative publisher/work deduplication. Retain blocked and narrower references without certifying their whole mappings; keep the attestation weights provisional.
+
 - Recognise “to your heart’s content” as a whole meaning unit, preserving its “as much as desired” meaning instead of replacing `heart` with `ticker`. Retain anatomical `heart` substitutions.
 
 - Refine shared subject permissions with reviewed per\-term tiers'n tobacco from Dad; exact overrides remain independent of the swear cap. Apply evidence/general\-English weightin' to imagery and riffs, align guide examples, and strengthen metadata/source\-preservation checks.
@@ -67,7 +69,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 - Apply the remainin' clear source\-audit sense repairs: distinguish urination, categorical impossibility,
   completion, tasting, noisy crying/sulking, explicit noun subtypes'n emphatic refusals. Stone the crows, preserve antenna
   qualifiers/plurals'n walking destinations, require progressive objects, and retain discovery\-only
-  vocabulary where source wording can't establish a safe automatic readin'. Well, correct eight source/usage
+  vocabulary where source wording can't establish a safe automatic readin'. So anyway, correct eight source/usage
   records'n merge 627 reviewed source pairs from batches 7–11 without changin' existin' term gates.
 - Add nonconsuming preceding/followin' context assertions'n explicit object\-argument patterns to the
   shared matcher. Preserve these capabilities in derived vocabulary'n research toolin'.

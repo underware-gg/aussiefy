@@ -109,7 +109,7 @@ Meaning inference shares canonical source concepts, polarity, argument restricti
 certificates. Bloody hell, a recognised query head can exclude unrelated suggestions; “probably” doesn't establish
 certainty, “wake up” doesn't establish hurrying, and a beer can is distinct from a small bottle. The
 dictionary can recognise a meaning without having a compatible target, and then explains that abstention.
-Mate, explicit mild/strong source degree needs a compatible certified target for an inferred meaning match.
+Mind ya, explicit mild/strong source degree needs a compatible certified target for an inferred meaning match.
 
 Local readings aren't a whole\-query parse. Attributive'n coordinated query fragments retain their
 meanings, while unknown modifiers, subordinate content'n unresolved structure leave model fallback

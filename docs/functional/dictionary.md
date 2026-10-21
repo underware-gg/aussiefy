@@ -144,8 +144,15 @@ Anyway, existin' citation links are retained with empty support
 lists where their whole\-expression scope hasn't been checked; an old sense audit isn't an origin or
 frequency survey. This work doesn't declare the source hunt complete.
 
-Changes contract version 2 still carries URL strings in entry cards. The coordinated new card'n changes
-contract lands in package slice 6; internal source objects are already structured. So anyway, riff'n imagery offers
+The inherited\-citation disposition pass is complete: `2,141` distinct term/URL pairs have inspection or
+access\-failure records. A conservative complete\-sense cohort now contributes to the existin' score;
+partial constructions, narrower senses, stored variants'n blocked references remain available for
+review. Well, historical witnesses don't establish current commonness. The research ledger'n integration
+decisions are in [the source-audit checkpoint](../../research/community-dictionary-2026-10-20/inherited-source-audit.md).
+These checks preserve usage/meaning holds'n don't change the provisional scorin' threshold.
+
+Anyway, changes contract version 2 still carries URL strings in entry cards. The coordinated new card'n changes
+contract lands in package slice 6; internal source objects are already structured. Riff'n imagery offers
 carry their own evidence metadata. See [DD-040](../architecture/decisions/dd-040-term-evidence-and-usage.md).
 
 `riffs.yaml` maps entry IDs to optional images, each with `text` and `tone` (`comic`, `grim` or `plain`).
@@ -251,7 +258,7 @@ repeatable) to any command, or `load_dictionary(["my-entries.yaml"])` in Python.
 
 ### Dictionary overlays
 
-Anyway, an ordinary entry\-list file remains addition\-only: duplicate IDs are errors. A versioned overlay uses the
+An ordinary entry\-list file remains addition\-only: duplicate IDs are errors. A versioned overlay uses the
 same `--dict` option to add or patch vocabulary records explicitly. This changes the dictionary compiled
 for that translator; it doesn't replace strings in rendered output or bypass meaning, grammar or dial checks.
 
@@ -520,7 +527,7 @@ set\-aside concepts in scratch only, while still rejecting genuinely unknown con
 
 ## Finite clauses and sense boundaries
 
-Question realisation supports modular subject/be/have/do clauses'n existential there/be clauses. Ya bewdy
+Question realisation supports modular subject/be/have/do clauses'n existential there/be clauses. How good is that?
 have inverts directly; lexical possession takes do\-support. Fixed finite or negative clause idioms remain
 available in declarations but are declined in questions when no safe modular question form exists. An outer
 auxiliary such as “could” can't be left before a replacement that brings its own independent finite clause;

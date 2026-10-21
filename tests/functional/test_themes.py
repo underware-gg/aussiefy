@@ -306,9 +306,28 @@ def test_real_ordinary_readings_are_not_treated_as_forbidden_subjects(text, tran
 
 
 def test_split_senses_retain_all_existing_source_leads(dictionary):
-    for old, new in [("stonkered", "stonkered-tired"), ("off-their-chops", "off-their-chops-high")]:
-        assert {s.url for s in dictionary.entries[old].sources} == {s.url for s in dictionary.entries[new].sources}
-        assert dictionary.entries[old].sources
+    inherited = [
+        (("stonkered", "stonkered-tired"), {
+            "https://macquariedictionary.com.au/?p=11172",
+            "https://www.merriam-webster.com/dictionary/stonkered",
+            "https://www.worldwidewords.org/qa-sto3.html",
+            "https://dictionary.cambridge.org/dictionary/english/stonkered",
+            "https://www.abc.net.au/news/2009-04-26/starkers-show-stopper-tops-japanese-news/1662714",
+        }),
+        (("off-their-chops", "off-their-chops-high"), {
+            "https://www.abc.net.au/news/2016-08-13/police-investigated-for-wrongly-detain-brisbane-abc-reporter/7731906",
+            "https://slang.com.au/c/chops-off/",
+        }),
+    ]
+    for senses, urls in inherited:
+        for eid in senses:
+            assert urls <= {source.url for source in dictionary.entries[eid].sources}
+
+    collins = "https://www.collinsdictionary.com/dictionary/english/stonkered"
+    assert any(source.url == collins and "meaning" in source.supports
+               for source in dictionary.entries["stonkered-tired"].sources)
+    assert not any(source.url == collins and "meaning" in source.supports
+                   for source in dictionary.entries["stonkered"].sources)
 
 
 @pytest.mark.parametrize("tier", range(4))

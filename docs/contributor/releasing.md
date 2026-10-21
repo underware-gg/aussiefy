@@ -55,7 +55,7 @@ administrator bypass or a direct push for this gate.
 
 Use a clean `dev` identical to `origin/dev`. `prepare` fetches refs, creates `release/vX.Y.Z`, bumps the
 plain source, generates publication/notices, checks an isolated exact candidate, commits preparation and
-checks the committed tree again before pushing or openin' a PR. So anyway, no force updates occur.
+checks the committed tree again before pushing or openin' a PR. Now, no force updates occur.
 
 ```sh
 python scripts/promote.py prepare minor
@@ -83,10 +83,10 @@ expected\-head lease; ordinary promotion never force\-updates dev or main.
 ## Interrupted work
 
 Jeez Louise, a failed preparation stays on its release branch with reviewable changes. Fix the reported issue and
-resume the same `prepare` command on that branch. Anyway, an existin' candidate is checked again; it's never
+resume the same `prepare` command on that branch. Mate, an existin' candidate is checked again; it's never
 silently rebuilt from another source. Repeated pushes/PR creation reuse matching state'n reject conflicts.
 
-Resume finish with the same PR/head/base. Well, it inspects the existin' merged PR, immutable tag and GitHub
+Resume finish with the same PR/head/base. So anyway, it inspects the existin' merged PR, immutable tag and GitHub
 release before continuing; matching completed actions are reused, mismatched provenance/tags/notes fail.
 If later dev work arrives, stop'n retain it. After publication, merge the release into dev, resolve any
 conflicts, reconcile verified main with `git merge -s ours origin/main`, push dev, then resume cleanup.

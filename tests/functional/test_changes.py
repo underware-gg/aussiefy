@@ -165,7 +165,7 @@ def test_a_changes_renderings_share_its_region(translator):
     ("You are very tired and hungry, and your car is broken.", {**LIVELY, "seed": 0}, "broken",
      {"cactus": "cactus, like a flat-pack in a cyclone"}),
     ("The toilet is broken and I am exhausted.", {**LIVELY, "seed": 2}, "exhausted",
-     {"buggered": "buggered, rooted", "fucked-broken": "fucked, out on my bloody feet"}),
+     {"buggered": "buggered, rooted", "fucked-broken": "fucked, stonkered"}),
     # "very cold" as "cold as fuck": the intensifier rule takes the place of the entry's own word
     ("The weather was very cold and the beer was very good.", {**LIVELY, "seed": 0}, "very cold",
      {"flamin": "cold as fuck", "bloody": "cold as fuck"}),

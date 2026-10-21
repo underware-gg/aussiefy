@@ -140,6 +140,13 @@ Existing citation links are retained with empty support
 lists where their whole-expression scope has not been checked; an old sense audit is not an origin or
 frequency survey. This work does not declare the source hunt complete.
 
+The inherited-citation disposition pass is complete: `2,141` distinct term/URL pairs have inspection or
+access-failure records. A conservative complete-sense cohort now contributes to the existing score;
+partial constructions, narrower senses, stored variants and blocked references remain available for
+review. Historical witnesses do not establish current commonness. The research ledger and integration
+decisions are in [the source-audit checkpoint](../../../research/community-dictionary-2026-10-20/inherited-source-audit.md).
+These checks preserve usage/meaning holds and do not change the provisional scoring threshold.
+
 Changes contract version 2 still carries URL strings in entry cards. The coordinated new card and changes
 contract lands in package slice 6; internal source objects are already structured. Riff and imagery offers
 carry their own evidence metadata. See [DD-040](../../architecture/decisions/dd-040-term-evidence-and-usage.md).

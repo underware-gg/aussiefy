@@ -56,7 +56,7 @@ CLI `--json` include the document structure:
 | `units` | Each unit's `source_span`, `output_span`, rendered `text` and original engine `result` |
 | `protected` | Corresponding source/output ranges copied exactly |
 
-So anyway, ranges are half\-open Python string character offsets, not UTF\-8 byte positions. Child engine records remain
+Now, ranges are half\-open Python string character offsets, not UTF\-8 byte positions. Child engine records remain
 relative to that child's source. Rendered unit text may differ from raw engine text 'cause of escapin'.
 `--explain` names document source/output ranges before reporting the local engine decisions; there are no
 fake document\-wide engine records. Markdown text output adds no terminal newline to the document.

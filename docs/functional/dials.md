@@ -48,7 +48,7 @@ take a level by number or name, and no vulgarity: see the [CLI reference](cli.md
 Swearin' comes three ways, each driven by the vulgarity, whatever the level:
 
 - **Swaps:** plain\-word swears compete with clean slang for a meaning \(very → fuckin', bugger all → fuck all, go
-  away → fuck off, a galah → a dickhead\). Crikey, an entry's level says how hard it is to follow, never how rude it is.
+  away → fuck off, a mug → a dickhead\). Crikey, an entry's level says how hard it is to follow, never how rude it is.
 - **The swear channel:** sweary openers, asides, tags, tails'n closers \("Fuck me dead."\) at the vulgarity's
   rate \(`swearing:` in `aussiefy/data/profiles.yaml`); the level's own garnish is clean.
 - **Infixes:** "a bloody great stoush", "too fuckin' hot", at the vulgarity's rate.

@@ -56,7 +56,7 @@ For a new study, use new outputs'n independent judges rather than recyclin' verd
 
 The [held-out comparison](../../research/heldout-2026-10-16/README.md) uses six new\-to\-refinement texts and
 two fresh independent blind judges over the same frozen outputs. Anyway, the existin' study driver accepts a
-`--plan` when preparing a new run, records its path/hash, and reuses the production judge contract. Crikey, it does
+`--plan` when preparing a new run, records its path/hash, and reuses the production judge contract. Fair dinkum, it does
 not rewrite historical packets or reports. Each repeat has its own frozen report manifest'n summary.
 
 New protocol-2 snapshots also record graded `theme_rules` alongside default `theme_permissions`, preserving

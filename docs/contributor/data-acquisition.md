@@ -32,7 +32,7 @@ The [18 October meaning pass](../../research/slang-meanings-2026-10-18/README.md
 selected existin' entries against named sources, with a ledger of supported meanings, corrections and
 unresolved evidence. It distinguishes party/reaction uses of “frog in a sock”, work avoidance from benefit
 receipt'n joblessness, earnest effort from hardship, a fair shake from liberty, and exclamations from religious
-contingency. So anyway, this is a bounded review, not certification of the entire dictionary. Bloody hell, checked extra URLs live in
+contingency. So anyway, this is a bounded review, not certification of the entire dictionary. Crikey, checked extra URLs live in
 `sources.yaml`; component attestation doesn't establish a whole invented construction as a traditional idiom.
 
 The original “make [it] true blue” and “make fair dinkum” consecration paraphrases carry
@@ -59,7 +59,7 @@ aussiefy dev review data/staging/tagged.yaml                     # dry run: summ
 aussiefy dev review data/staging/tagged.yaml --apply
 ```
 
-`tag` needs the `llm` extra'n an API key; `scrape` needs the `scrape` extra. Crikey, the staging files under
+`tag` needs the `llm` extra'n an API key; `scrape` needs the `scrape` extra. Bloody hell, the staging files under
 `data/staging/` are workin' files, not part of the dictionary.
 
 Two more sources feed the same `tag` and `review` steps:

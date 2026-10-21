@@ -41,6 +41,34 @@ Initial independently checked anchors are g'day, arvo and bulldust: ANDC headwor
 with supported usage and the earliest periods reported by ANDC. They provide real fixed scoring examples;
 the broader hunt still prioritises the previously unsourced entries, riffs and crowd-only terms.
 
+### Inherited-source integration, 21 October 2026
+
+The immutable `inherited-source-audit.json` and companion Markdown supersede earlier partial checkpoints:
+all 2,141 inherited entry/URL pairs have dispositions (1,570 inspected, 571 blocked). The extra 41 lead
+records are separate. This is coverage of citations, not a finding that every mapping is sound or attested.
+
+`apply_source_audit.py` applies only the frozen audit's complete-sense entry cohort, with the explicit
+deferrals and publisher/work identities in `source-integration-policy.json`. Other statuses, including
+partial meanings, frames and stored variants, remain reference-only; the six imagery rows are reserved for
+the imagery cohort. No source URL, concept, frame, trigger, theme, usage or meaning gate is removed.
+The manifest records each included pair. Run without `--apply` to preview from the immutable inventory
+commit; repeated applications of the same policy are byte identical. This is a one-off research migration,
+not a general update command: `--apply` refuses any other HEAD. The writer validates the resulting complete
+dictionary before changing its data files. Trial policy changes also rebuild from the immutable baseline,
+so a newly deferred pair cannot retain support from an earlier trial.
+
+Same-work mirrors retain separate URLs but share one scoring identity. Lexicographic articles use media
+weight, not a dictionary weight just because of the publisher; the contributor-reported Word Map uses
+crowd weight. An exact ANDC lexicon page uses scholarly-dictionary weight. Dates retain their witness/sense
+scope; a phrase such as "late 19th century" stays in the note rather than becoming an invented exact year.
+No score thresholds are recalibrated. The stored distribution records the resulting scores and labels.
+Goldens change because the existing continuous evidence preference now has reviewed inputs; the source
+review file records affected outputs. Remaining mapping candidates, partial-support integration and the
+191 IDs whose inherited sources were all blocked are deliberate follow-through work, not proof of false
+or invented language. The separate `unsourced-ew4-audit.json`/`.md` and URL-only `unsourced-ew4-searches.json` now record the first
+hunt for all 23 uncited entries, 25 imagery records and 85 riffs (133 targets). Search coverage does not
+mean successful attestation; their scoped proposals and mapping questions still await integration.
+
 Imagery incorporates `20261019-report~Imagery Source Search` from the Brain, preserving its partial-coverage
 limits: sampled web/Trove/Books, no keyed Trove full text, ANDC or Macquarie subscription search. Its 20
 unfound agent comparisons carry provisional nothing-found records; the three explicitly original hunger
@@ -71,3 +99,14 @@ imagery/riff ambiguity during implementation: usage/meaning gates apply to all t
 follows existing embellishment permissions. Theme-policy resolution is slice 1; the constructor and the
 manual historical composite replacement are slice 2. New full cards and changes contract fields land
 together in slice 6. The three separately briefed website vocabulary fixes are subsequent independent work.
+
+### Mapping-question follow-through
+
+`mapping-followthrough.json` and `.md` add 13 inspected bodies and four blocked attempts, separately from
+the frozen audits. These later sources settle several earlier *questions*, not established errors: actual
+Australian use supports flat-as-a-tack for low mood and country-dunny for conspicuousness, and admiring
+nonsexual perv-on is documented. Keep those mappings/gloss scope. Just-gammon/gammin supplies a better
+supported complete joking form; bare gammon is unconfirmed, not disproved. Little-shit warrants the existing
+opinion permission when it replaces neutral CHILD. Too-easy as an acceptance response is supported; the
+unrestricted closer is still a pragmatic-context question. These findings await a separate scoped data
+refinement; this source-support cohort changes no mappings or gates.

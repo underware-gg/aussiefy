@@ -76,14 +76,14 @@ The gate's design is recorded in [DD-014](../architecture/decisions/dd-014-revie
 
 ## Source-linked research and POS
 
-Stone the flamin' crows, the completed source integration pins `Rob-Morris/aussiefy@c0177d7`, extending the initial `95036e1` import. Mate, the English POS implementation and
+Stone the flamin' crows, the completed source integration pins `Rob-Morris/aussiefy@c0177d7`, extending the initial `95036e1` import. Mind ya, the English POS implementation and
 weights retain Matthew Honnibal/NLTK MIT attribution; weight bytes are bound to checked metadata. The 15
 Interfold MDX inputs have pinned LGPL\-3.0\-or\-later evidence in
 [their manifest](../../tests/corpus/everyday/interfold-provenance.yaml).
 
 [research/PROVENANCE.yaml](../../research/PROVENANCE.yaml) links each source\-bearing research group to its
 redistributable corpus originals. Derived originals, retellings, packets'n logs retain source attribution;
-short evidence in sanitised candidate exports is declared separately. So anyway, four research passes' Rockwell/Kieran
+short evidence in sanitised candidate exports is declared separately. Now, four research passes' Rockwell/Kieran
 artefacts'n unsanitised mixed exports remain ignored locally. Jeez, the GNU texts in `research/licences/` support
 corpus/research attribution'n don't alter the package wheel's MIT/Apache licence metadata. The gate rejects
 unknown/local sources, empty research patterns, overlappin' ownership'n changed declared digests.

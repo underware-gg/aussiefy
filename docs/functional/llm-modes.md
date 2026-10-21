@@ -22,7 +22,7 @@ asks for a smoother rewrite that keeps every planned phrase and adds no new slan
 - The rewrite is accepted only if every planned phrase survives.
 - Otherwise, or on any API failure or refusal, the deterministic text stands, and `result.surface["status"]`
   says why.
-- With bugger all planned, there isn't a sausage to polish: the mode is skipped, which isn't a fallback.
+- With not a sausage planned, there's bugger all to polish: the mode is skipped, which isn't a fallback.
 - The plan is always in explain mode.
 - Surface rewrites aren't cached: each run asks Claude again.
 
