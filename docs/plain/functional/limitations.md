@@ -11,6 +11,10 @@
   With an original, lint/verify flag a recognised predicate expansion before the source's unchanged
   `enough` tail when the surrounding sentence provides one unambiguous local pairing. They abstain
   without that evidence; this check does not establish grammatical correctness for arbitrary retellings.
+- **Reviewed fixed expressions are meaning units.** Recognised idioms take precedence over a nested word’s
+  literal sense, such as `heart` inside “to your heart’s content”. This depends on reviewed vocabulary; it
+  does not recognise arbitrary idioms. Strict Markdown translates separate prose units, so formatting
+  inserted inside an idiom can hide its full expression. Whole-phrase formatting retains the protection.
 - **The built-in API client has not been run against the live API.** Tagging, `--surface`, `--rewrite` and yarn mode
   are tested with fake clients. The yarn workflow itself has been exercised by agents through its research CLI
   (`research/retellings-2026-10-11/yarn_tools.py`), which shares yarn mode's brief and tools.

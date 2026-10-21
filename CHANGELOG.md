@@ -9,6 +9,8 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Recognise “to your heart’s content” as a whole meaning unit, preserving its “as much as desired” meaning instead of replacing `heart` with `ticker`. Retain anatomical `heart` substitutions.
+
 - Refine shared subject permissions with reviewed per\-term tiers'n tobacco from Dad; exact overrides remain independent of the swear cap. Apply evidence/general\-English weightin' to imagery and riffs, align guide examples, and strengthen metadata/source\-preservation checks.
 
 - Add nine reviewed subject themes with data\-driven vulgarity defaults'n exact boolean overrides,

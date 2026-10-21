@@ -1,6 +1,10 @@
 """Meaning and agreement boundaries reproduced from the inherited research backlog."""
 import pytest
 
+from aussiefy import harness, translate, translate_changes
+from aussiefy.detect import detect, resolve_overlaps
+from aussiefy.text import tokenize
+
 
 @pytest.mark.parametrize('opening,closing', [('"', '"'), ('“', '”'), ("'", "'"), ('‘', '’')])
 def test_agreement_detection_is_independent_of_dialogue_quotes(dictionary, opening, closing):
@@ -114,3 +118,56 @@ def test_bad_frame_vocabulary_is_a_dictionary_error(data_copy):
                                  'Which swimsuit is Bob wearing?'])
 def test_object_question_auxiliary_does_not_agree_with_clothing(translator, text):
     assert any(any(word in out for word in ['togs', 'bathers', 'swimmers']) for out in outputs(translator, text))
+
+
+@pytest.mark.parametrize('possessive', ['my', 'your', 'his', 'her', 'its', 'our', 'their', "one's"])
+@pytest.mark.parametrize('apostrophe', ["'", '’'])
+def test_heart_content_is_one_meaning_unit(possessive, apostrophe, translator):
+    source = f'Use it to {possessive} heart{apostrophe}s content.'
+    found = resolve_overlaps(detect(tokenize(source), translator.dictionary.index,
+                                   concepts=translator.dictionary.concepts))
+    assert any('AS_MUCH_AS_DESIRED' in d.concepts for d in found)
+    assert not any('HEART_ORGAN' in d.concepts for d in found)
+    for seed in range(4):
+        result = translator.translate(source, level=5, vulgarity=1, seed=seed,
+            document_type='custom', document_config={'profile': {'phonetic': 0,
+                'substitution': {'lexical': 1, 'phrase': 1, 'idiom': 1}}}, embellishment=0)
+        assert source == result.text
+
+
+@pytest.mark.parametrize('source', ["We ate to our hearts' content.", 'They danced to their hearts’ content.'])
+def test_plural_possessive_heart_content_keeps_its_whole_meaning(source, translator):
+    result = translator.translate(source, level=5, vulgarity=1, embellishment=0,
+                                  document_type='custom', document_config={'profile': {'phonetic': 0}})
+    assert source == result.text
+
+
+def test_idiom_unit_is_shared_by_translation_tools(translator):
+    source = "Use it to your heart's content."
+    options = {'translator': translator, 'level': 5, 'vulgarity': 1, 'embellishment': 0,
+               'document_type': 'custom', 'document_config': {'profile': {'phonetic': 0}}}
+    assert translate(source, **options).text == source
+    changes = translate_changes(source, **options)
+    assert changes.text == source
+    assert not changes.changes
+    assert harness.plan(source, **options)['draft'] == source
+    assert 'ticker' not in {e['id'] for e in harness.lookup(source, **options)['results']}
+    markdown = "Use it *to your heart's content*."
+    assert translate(markdown, markdown=True, **options).text == markdown
+
+
+def test_literal_heart_is_still_available(translator):
+    result = translator.translate('The doctor listened to my heart.', level=5, vulgarity=1,
+        embellishment=0, document_type='custom', document_config={'profile': {'phonetic': 0,
+            'substitution': {'lexical': 1, 'phrase': 1, 'idiom': 1}}})
+    assert any(r.substituted and r.chosen.entry.id == 'ticker' for r in result.records)
+    assert 'ticker' in result.text
+
+
+def test_idiom_ownership_does_not_hide_a_literal_heart_in_the_same_sentence(translator):
+    source = "Use it to your heart's content while the doctor listens to my heart."
+    result = translator.translate(source, level=5, vulgarity=1, embellishment=0,
+        document_type='custom', document_config={'profile': {'phonetic': 0,
+            'substitution': {'lexical': 1, 'phrase': 1, 'idiom': 1}}})
+    assert "to your heart's content" in result.text
+    assert 'my ticker' in result.text
