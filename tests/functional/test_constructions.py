@@ -50,7 +50,7 @@ def test_hunger_families_are_clean_and_readable(translator):
 def test_family_can_raise_theme_without_changing_swear_cap(translator, family, theme):
     assert not bulldust(family=family, vulgarity=1, translator=translator)["results"]
     bob = bulldust(family=family, vulgarity=2, translator=translator)["results"]
-    assert bob and all(dict((tag["name"], tag["tier"]) for tag in item["themes"])[theme] == 2 for item in bob)
+    assert bob and all(theme in item["themes"] and all(isinstance(tag, str) for tag in item["themes"]) for item in bob)
     dad = bulldust(family=family, vulgarity=1, document_config={"themes": {theme: True}}, translator=translator)["results"]
     assert dad and all(item["vulgarity"] == 1 for item in dad)
     assert not bulldust(family=family, vulgarity=0, document_config={"themes": {theme: True}}, translator=translator)["results"]
@@ -141,6 +141,8 @@ def test_part_tiers_survive_weaker_family_and_exact_override(dictionary):
     (lambda r: r["families"][0]["slots"].update(ending="missing"), "unknown ingredient kind"),
     (lambda r: r["settings"].update(search_budget=True), "integer"),
     (lambda r: r["families"][0].update(placement=[]), "only opener"),
+    (lambda r: r["families"][0].update(converted_parts={"stem": "bugger-sideways"}), "pin every slot"),
+    (lambda r: r["families"][0].update(converted_parts={"stem": "bugger-sideways", "ending": "hungry"}), "incompatible ingredient"),
     (lambda r: r["ingredients"].append(r["ingredients"][0]), "duplicate ingredient"),
 ])
 def test_catalogue_validation_at_load(data_copy, change, match):

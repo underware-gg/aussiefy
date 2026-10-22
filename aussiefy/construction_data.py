@@ -81,7 +81,8 @@ def parse_catalog(raw, entries, concepts, rate_text: Callable[[str], int],
     families, ids = [], set()
     for row in raw["families"]:
         _record(row, {"id", "template", "slots", "concept", "frame", "level", "vulgarity", "weight",
-                      "exaggeration", "tone", "preferred_words", "placement", "semantic_degree", *METADATA_KEYS}, "family")
+                      "exaggeration", "tone", "preferred_words", "placement", "semantic_degree", "converted_parts",
+                      *METADATA_KEYS}, "family")
         fid = _identifier(row.get("id"), "family id")
         if fid in ids:
             raise SchemaError(f"duplicate family id {fid!r}")
@@ -117,11 +118,18 @@ def parse_catalog(raw, entries, concepts, rate_text: Callable[[str], int],
             raise SchemaError(f"{fid}: only opener construction garnish is supported")
         if placement == "opener" and frame != "interjection":
             raise SchemaError(f"{fid}: an opener needs an interjection frame")
+        converted = row.get("converted_parts", {})
+        if not isinstance(converted, dict) or converted and (placement != "opener" or set(converted) != set(slots)):
+            raise SchemaError(f"{fid}: converted_parts must pin every slot of an opener")
+        by_id = {part.id: part for part in ingredients}
+        for name, ingredient in converted.items():
+            if not isinstance(ingredient, str) or ingredient not in by_id or by_id[ingredient].kind != slots[name]:
+                raise SchemaError(f"{fid}: converted_parts has an incompatible ingredient for {name}")
         degrees = parse_degrees(row.get("semantic_degree", {}), fid)
         if set(degrees) - {concept}:
             raise SchemaError(f"{fid}: semantic_degree must describe the family's concept")
         metadata = assessed(TermMetadata(**parse_metadata(row, fid)))
         families.append(ConstructionFamily(fid, template, tuple(slots.items()), fragments, concept, frame,
                                            metadata, level, vulgarity, weight, exaggeration, tone, tuple(words),
-                                           placement, tuple(degrees.items())))
+                                           placement, tuple(degrees.items()), tuple(converted.items())))
     return ConstructionCatalog(tuple(ingredients), tuple(families), **settings)

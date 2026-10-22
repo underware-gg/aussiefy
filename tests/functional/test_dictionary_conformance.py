@@ -1,16 +1,126 @@
 """Cross-surface invariants from the community dictionary design conformance review."""
 
 from dataclasses import replace
+import json
+from pathlib import Path
 from time import perf_counter
 
 import pytest
 import yaml
 
 from aussiefy import Translator, bulldust, harness, load_dictionary, translate, translate_changes
-from aussiefy.constructions import construction_matches
+from aussiefy.constructions import Construction, construction_matches, generate
 from aussiefy.evidence import Source, TermMetadata, Testimony as EvidenceTestimony, assess
-from aussiefy.masks import profanity_rating
+from aussiefy.masks import masks, profanity_rating
+from aussiefy.garnish import garnish_offer
+from aussiefy.genre import resolve_document
 from aussiefy.semantic_checks import theme_issues
+
+
+def test_narrow_think_definition_does_not_index_its_excluded_senses(dictionary):
+    tr = Translator(dictionary, lookup_embedder=None)
+    for query in ("trusting", "imagining", "valuing"):
+        assert "reckon" not in {entry["id"] for entry in harness.lookup(query, translator=tr, limit=100)["results"]}
+    for query in ("think", "believe", "suppose"):
+        assert "reckon" in {entry["id"] for entry in harness.lookup(query, translator=tr, limit=100)["results"]}
+
+
+@pytest.mark.parametrize("text", ["eat a fuckwit's sandwich", "eat a fuckwit’s sandwich", "eat like a fuckwits' mate"])
+def test_possessive_compounds_obey_constructor_and_mask_caps(data_copy, text):
+    tr = _catalogue(data_copy, acts=[{"id": "state", "kind": "hunger-state", "text": "hungry"},
+                                   {"id": "act", "kind": "absurd-food-act", "text": text}])
+    assert not bulldust("HUNGRY", vulgarity=0, translator=tr)["results"]
+    item = bulldust("HUNGRY", vulgarity=2, translator=tr)["results"][0]
+    assert item["vulgarity"] == 2
+    d = tr.dictionary
+    assert any(mask["vulgarity"] == 2 for mask in masks(
+        item["text"], d.swears, d.swear_compounds, d.authored_swears))
+
+
+def _opener_offer(dictionary, cap, *, used=None):
+    tr = Translator(dictionary)
+    setting = resolve_document(None, config=dictionary.genres, document_type="general").setting(2)
+    return garnish_offer("opener", dictionary, tr.effective(level=5, vulgarity=cap), 0, (0,),
+                         used or {}, contexts={"any"}, swear=True, setting=setting)
+
+
+@pytest.mark.parametrize("cap", [2, 3])
+def test_variant_preference_survives_composition_and_garnish_weighting(dictionary, cap):
+    family = next(f for f in dictionary.construction_catalog.families if f.id == "sideways-call-title")
+    weights = {}
+    for stem in ("bugger-sideways", "fuck-sideways"):
+        pinned = replace(family, converted_parts=(("stem", stem), ("ending", "call-me-the-pope")))
+        d = replace(dictionary, construction_catalog=replace(dictionary.construction_catalog, families=(pinned,)))
+        offer = _opener_offer(d, cap)
+        weights[stem] = next(weight for candidate, weight in zip(offer.pool, offer.weights, strict=True)
+                             if isinstance(candidate, Construction))
+    assert weights["bugger-sideways"] > weights["fuck-sideways"]
+
+
+def test_only_converted_expression_reaches_translation_before_invention(dictionary):
+    for cap in (2, 3):
+        candidates = [c for c in _opener_offer(dictionary, cap).pool if isinstance(c, Construction)]
+        assert [c.text for c in candidates] == ["bugger me sideways'n call me the pope"]
+    tr = Translator(dictionary)
+    setting = resolve_document(None, config=dictionary.genres, document_type="general").setting(2)
+    # The standalone operation still exposes other reviewed constructions.
+    generated = generate(dictionary, tr.effective(vulgarity=2), setting, placement="opener")
+    assert {c.family.id for c in generated.candidates} == {"sideways-call-title", "sideways-with-implement"}
+    assert any(c.parts[0].ingredient.entry_id == "fuck-me-sideways" for c in generated.candidates)
+
+
+def test_stem_reuse_and_construction_identity_survive_translation_and_plans(dictionary):
+    family = next(f for f in dictionary.construction_catalog.families if f.id == "sideways-call-title")
+    alternate = replace(family, id="same-stem-other-recipe")
+    entries = {key: entry for key, entry in dictionary.entries.items() if entry.type != "garnish"}
+    d = replace(dictionary, entries=entries,
+                construction_catalog=replace(dictionary.construction_catalog, families=(family, alternate)))
+    choices = [c for c in _opener_offer(d, 2).pool if isinstance(c, Construction)]
+    assert len(choices) == 2 and len({c.id for c in choices}) == 2
+    assert not _opener_offer(d, 2, used={"bugger-me-sideways": 1}).pool
+    tr = Translator(d)
+    source = "The river is flowing through the valley. The house stands beside the road."
+    config = {"garnish": ["opener"], "profile": {"garnish": {"opener": 1}, "garnish_gap": 0,
+              "max_garnish": {"opener": 20}, "swearing": {"exclaim": 1}, "phonetic": 0}}
+    opts = dict(translator=tr, vulgarity=2, embellishment=2, seed=2, document_config=config)
+    result = translate(source, **opts)
+    made = [g for g in result.garnish if g.construction]
+    assert len(made) == 1
+    identity = made[0].construction.id
+    assert any(g.get("construction_id") == identity for g in result.to_dict()["explain"])
+    assert [g["construction_id"] for g in harness.plan(source, **opts)["garnish"]] == [identity]
+    first = translate("Wow! " + source, **opts)
+    assert any(r.substituted and r.chosen.entry.id == "bugger-me-sideways" for r in first.records)
+    assert not any(g.construction for g in first.garnish)
+    exercised = False
+    for seed in range(8):
+        later = translate(source + " Wow!", **{**opts, "seed": seed})
+        if not any(g.construction for g in later.garnish):
+            continue
+        exercised = True
+        assert not any(r.substituted and r.chosen.entry.id == "bugger-me-sideways" for r in later.records)
+        assert any(entry_id == "bugger-me-sideways" and "already used" in reason
+                   for r in later.records for entry_id, reason in r.rejected)
+    assert exercised
+
+
+def test_re_review_records_individual_readings_and_applied_tiers(dictionary):
+    path = Path(__file__).parents[2] / "research/community-dictionary-2026-10-20/theme-review.json"
+    ledger = json.loads(path.read_text())
+    assert len(ledger["records"]) == 145 and not ledger["pending_ids"]
+    assert len({r["reason"] for r in ledger["records"]}) == 145
+    starts = dict(dictionary.theme_starts)
+    for record in ledger["records"]:
+        if record["id"] == "g-bugger-me-sideways":
+            term = next(f.metadata for f in dictionary.construction_catalog.families if f.id == "sideways-call-title")
+        elif record["kind"] == "entry":
+            term = dictionary.entries[record["id"]]
+        elif record["kind"] == "imagery":
+            term = next(i for i in dictionary.imagery if i.id == record["id"])
+        else:
+            term = next(r for r in dictionary.entries[record["id"]].riffs if r.text == record["form"])
+        actual = {name: dict(term.theme_tiers).get(name, starts[name]) for name in term.themes}
+        assert actual == {tag["name"]: tag["tier"] for tag in record["after"]}, record["key"]
 
 
 @pytest.mark.parametrize("kind", ["scholarly_dictionary", "slang_dictionary", "crowd_dictionary", "media", "testimony"])
@@ -88,6 +198,8 @@ def test_constructor_rating_preserves_curated_whole_expressions_and_ordinary_sub
 @pytest.mark.parametrize("wording,theme", [
     ("Bugger me sideways with a broomstick.", "sex"),
     ("Bugger me sideways'n call me the pope.", "religion"),
+    ("Bugger me sideways 'n call me the pope.", "religion"),
+    ("Bugger me sideways ’n call me the pope.", "religion"),
 ])
 def test_reviewed_composites_share_lint_and_rewriter_theme_policy(translator, wording, theme):
     dad = translator.effective(vulgarity=1).theme_policy

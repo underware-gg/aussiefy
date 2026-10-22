@@ -70,3 +70,23 @@ backtracking expression across the whole family. Matching retains original Unico
 Resolved register permissions also reach riff and imagery selection, offers and cards. The internal
 result carries those permissions so card builders do not reconstruct a weaker default. This adds no
 public changes-contract fields; its coordinated version remains a later slice.
+
+## Closure refinement, 23 October 2026
+
+Part weights multiply rather than taking a geometric mean. Constructed garnish does not reapply the
+ordinary swear-tier preference: that would reverse the reviewed preference for the bugger stem inside
+a composite. Canonical entry IDs participate in within-text repeat tracking alongside construction IDs.
+Garnish consults ordinary substitution usage as well as garnish usage, and ordinary selection excludes
+entries already spoken as construction parts. Both directions use the existing text-state histories.
+
+Keep invention out of translations until its controls and contract are integrated. The catalogue's
+`converted_parts` pins every slot of a migrated opener to compatible ingredients. Only those exact
+recipes reach translation garnish; standalone generation retains the wider catalogue. This records the
+existing expression as data, without hard-coding a family or phrase in the engine. The current recipe
+pins the bugger stem and Rob's pope ending; neither the stronger variant nor the implement family is
+implicitly authorised by preserving that opener.
+
+Derived public metadata keeps theme names until the coordinated contract update. Canonical data
+serialisation still retains explicit tiers. Trace construction identities survive independently of the
+changes v2 entry field, which remains null. Possessive compounds use the same profanity rating and mask
+path; reviewed apostrophe-led endings accept an optional space at their join.

@@ -16,6 +16,9 @@ Start at [docs/README.md](docs/README.md). Each layer has its own index:
 - [Contributor](docs/contributor/README.md): how to work in this repository. Read
   [plain CONTRIBUTING.md](docs/plain/root/CONTRIBUTING.md) before changing anything.
 
+Before changing dictionary meanings, themes or tiers, read the
+[Australian interpretation policy](docs/plain/contributor/data-acquisition.md#interpret-terms-as-an-australian-would).
+
 ## Other files
 
 - [CHANGELOG.md](CHANGELOG.md): release notes.

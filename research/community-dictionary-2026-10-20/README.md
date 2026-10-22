@@ -1,5 +1,15 @@
 # Community dictionary package: slice 0
 
+## Australian-use re-review, 23 October 2026
+
+`theme-review.json` now records 145 individual readings, including the ruder low-flying duck omitted
+from the original 144-record ledger. It preserves the previous review separately and distinguishes Rob's
+explicit rulings, preserved rulings and curator decisions under his contextual-reading delegation.
+Thirty-one clear tag corrections are applied without changing wording vulgarity. There are no pending
+owner tag questions. Seven mixed-sense records retain their existing conservative tags pending shared
+sense separation; they are explicitly listed and must not be mistaken for completed semantic fixes.
+The governing policy is [Australian interpretation](../../docs/plain/contributor/data-acquisition.md#interpret-terms-as-an-australian-would).
+
 Original implementation analysis, 20 October 2026. Spec: the approved Community Dictionary Package Brief,
 Build plan and Engine design in the Brain. Starting commit: `dddf3cc` on local `dev`; no website files edited.
 

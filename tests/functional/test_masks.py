@@ -24,6 +24,9 @@ def _masked(dictionary, text, words=None):
     ("He's bloody pissed, the bastard's ute", [("bloody", "", 1), ("piss", "ed", 2), ("bastard's", "", 1)]),
     ("a fuckwit in a shitfight", [("fuckwit", "", 2), ("shitfight", "", 2)]),   # compounds: masked whole
     ("bullshitters", [("bullshitters", "", 2)]),
+    ("a fuckwit's sandwich", [("fuckwit's", "", 2)]),
+    ("a fuckwit’s sandwich", [("fuckwit’s", "", 2)]),
+    ("bullshitters' claims", [("bullshitters", "", 2)]),
     ("a cocky with a cocktail and a cockatoo", []),   # ordinary words that hold a listed one
 ])
 def test_maskable_words_and_the_endings_they_keep(dictionary, text, expected):
@@ -33,6 +36,12 @@ def test_maskable_words_and_the_endings_they_keep(dictionary, text, expected):
 def test_mask_offsets_count_unicode_code_points(dictionary):
     assert masks("🦘 e\u0301 fucked", dictionary.swears, dictionary.swear_compounds, {}) == [
         {"span": [5, 11], "ending_start": 9, "vulgarity": 2}]
+
+
+@pytest.mark.parametrize("compounds, authored", [({"fuckwit's": 2}, {}), ({}, {"fuckwit's": 2})])
+def test_exact_possessive_mask_survives_inflection_lookup(compounds, authored):
+    assert masks("fuckwit's sandwich", {}, compounds, authored) == [
+        {"span": [0, 9], "ending_start": 9, "vulgarity": 2}]
 
 
 def test_an_entrys_mask_words_keep_their_endings_in_its_renderings(dictionary):

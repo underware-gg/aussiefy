@@ -94,6 +94,9 @@ unknown names fail loading. `themes.yaml` defines the registry and monotonic tie
 needs no Python enumeration. Explicit tiers stay inside `themes`; there is no separately writable
 `theme_tiers` field.
 
+Public derived metadata currently lists theme names without tier objects. Canonical YAML serialisation
+retains explicit tiers; the coordinated community\-dictionary contract update will expose resolved tiers.
+
 Well, entries, riffs'n imagery share these stored fields:
 
 | Fields | Meaning |

@@ -19,6 +19,35 @@ flagged instead, and kept in `aussiefy/data/entries/flagged.yaml` so re\-scrapes
 Every gloss is written in our own words, never a source's
 ([DD-012](../architecture/decisions/dd-012-reference-dictionaries-are-reference-only.md)).
 
+## Interpret terms as an Australian would
+
+Well, this is core dictionary curation policy. Judge the whole expression as an Aussie would understand it
+in context: its meaning, use, register'n politeness compared with other Australian expressions. A literal
+component, a foreign readin' or an expression's etymology isn't enough to assign a theme, tier or wording level.
+
+Choose the semantic unit before substitutin'. When words form a shared idiomatic meanin', translate the
+phrase by its meaning'n grammatical role rather than replacing a component in isolation. Translate a
+word independently when it carries that independent meaning in context'n the change preserves the
+surrounding expression. Mind ya, this requires interpretation, not an automatic longest\-string rule. Agent curation
+supplies the judgement; dictionary data'n shared meaning/context mechanisms carry it into the engine.
+
+Bugger me, figurative wording isn't automatically exempt from subject permissions. Consider whether its subject or
+crude joke remains part of the Australian readin'. Equally, don't add a subject tag merely 'cause an
+idiom contains a word associated with that subject. Keep evidence status, wording vulgarity'n theme
+permissions separate; none is a substitute for reviewing the others.
+
+Compare politeness among Australian expressions rather than applyin' a deadset taboo\-word rule.
+Mind ya, existin' rulings illustrate the distinction: `dunny` is familiar polite slang with bodily functions
+permitted from Nan; `budgie smugglers` isn't automatically sexual 'cause it names cossie; the historical
+associations of `done up like a pox doctor's clerk` don't change its conspicuous\-dressing meanin'.
+These rulings don't decide other expressions that happen to share a word.
+
+Review each stored sense'n record its own interpretation, proposed tags and minimum tiers, reason,
+and rulin' authority. Distinguish a curator's proposal from an approved ruling. If the Australian reading
+is unclear, bring a contextual proposal to the project owner'n leave it pendin'. Anyway, a repeated explanation
+that a phrase retains its literal imagery isn't a completed review. Represent supported distinctions in
+dictionary data through the shared mechanisms, rather than adding phrase\-specific engine exceptions.
+
 ## Reference dictionaries
 
 The Macquarie Dictionary, including its Australian Word Map of regional words, and the Australian National
@@ -103,7 +132,7 @@ ZZ_GUARD:
 Field overrides replace the named field, so `triggers` replaces the complete trigger mapping. They apply last,
 after `trigger_fixes.yaml`'s additions/removals/intensities, and the dry run lists their IDs and fields.
 
-Reapplication preserves previously written concept records'n their hand edits. Bugger me, new definitions are appended
+Reapplication preserves previously written concept records'n their hand edits. New definitions are appended
 to the round's own section. Well, explicit trigger fixes update triggers while keeping other metadata; explicit
 concept fixes rewrite only affected records, whose internal formattin'/comments may change. Neighbouring
 records'n section comments remain intact. Move an intentional change into a fix file rather than relyin'
@@ -168,7 +197,7 @@ for improving the bundled dictionary. The [runtime overlay format](../functional
 can add or patch concepts and entries through the existing loader. It is separate from research-round
 `concept_fixes.yaml`, whose workflow writes reviewed changes back to the maintained source files.
 
-Now, for each proposed correction, keep a positive example, a close wrong\-sense example'n a grammar variant
+For each proposed correction, keep a positive example, a close wrong\-sense example'n a grammar variant
 such as tense, plural, negation or a changed participant. Check candidate eligibility as well as selected
 outputs, so a faulty route is removed rather than merely losin' one seeded roll. Run lookup, plans'n change
 alternatives over the same loaded dictionary where affected. Don't copy entire reference queries into
@@ -183,13 +212,13 @@ special\-case mappings to raise a benchmark score; existin' research\-round chec
 
 ## Integrating a source-meaning audit
 
-Now, research under `research/slang-meanings-2026-10-19-batch3/` and `batch4/` distinguishes selected meanings,
+Research under `research/slang-meanings-2026-10-19-batch3/` and `batch4/` distinguishes selected meanings,
 complete constructions, components, historical contexts, source chains'n access limitations. Their 239
 proposed source records are merged into `aussiefy/data/sources.yaml` without replacing existin' URLs.
 A source on a public card supports that reviewed scope; it doesn't certify every trigger, every form,
 current frequency or Australian exclusivity. Multiple editions or mirrors of one work remain one witness.
 
-Anyway, apply clear lexical distinctions as dictionary concepts'n compatible forms, with positive eligibility and
+Apply clear lexical distinctions as dictionary concepts'n compatible forms, with positive eligibility and
 negative meaning tests. The latest integration preserves quantities, location nouns, physical reference,
 polarity'n activity purpose without slang\-specific engine checks. New fruit\-and\-veg location phrases cite
 the food component'n explicitly state that their location wording is compositional, rather than claiming

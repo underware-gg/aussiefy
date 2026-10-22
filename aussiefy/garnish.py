@@ -43,7 +43,8 @@ class GarnishRecord:
         return {"kind": "garnish", "placement": self.placement, "sentence": self.sentence,
                 "entry": self.entry_id, "text": self.text, "decision": self.decision,
                 "rejected": [{"entry": i, "reason": r} for i, r in self.rejected],
-                **({"image_id": self.image_id} if self.image_id else {})}
+                **({"image_id": self.image_id} if self.image_id else {}),
+                **({"construction_id": self.construction.id} if self.construction else {})}
 
 
 @dataclass
@@ -158,19 +159,22 @@ def garnish_offer(placement: str, dictionary: Dictionary, eff: Effective, seed: 
     pool, rejected = garnish_pool(placement, dictionary.garnish, eff, used, contexts, exclude, mood, swear, insults,
                                   narrator_opinion, quantity_approximation)
     choices = list(zip(pool, garnish_weights(pool, eff, swear), strict=True))
-    if setting is not None and placement == "opener":
+    catalog = dictionary.construction_catalog
+    if setting is not None and placement == "opener" and catalog:
         context_seed = int(roll(seed, "construction-garnish", *key) * 2 ** 53)
-        generated = generate(dictionary, eff, setting, seed=context_seed, placement=placement, mood=mood,
-                             limit=dictionary.construction_catalog.max_results if dictionary.construction_catalog else 0)
-        rejected.extend(generated.rejected)
-        for candidate in generated.candidates:
-            if candidate.id in used or candidate.id in exclude:
-                rejected.append((candidate.id, "already used in this text"))
-            elif swear is not None and (candidate.vulgarity > 0) != swear:
+        for family in catalog.families:
+            if family.placement != placement or not family.converted_parts:
                 continue
-            else:
-                weight = candidate.weight * (tier_match(candidate.vulgarity, eff.vulgarity) if swear else 1)
-                choices.append((candidate, weight))
+            generated = generate(dictionary, eff, setting, seed=context_seed, placement=placement, mood=mood,
+                                 family=family.id, parts=dict(family.converted_parts), limit=catalog.max_results)
+            rejected.extend(generated.rejected)
+            for candidate in generated.candidates:
+                if any(identity in used or identity in exclude for identity in candidate.usage_ids):
+                    rejected.append((candidate.id, "already used in this text"))
+                elif swear is not None and (candidate.vulgarity > 0) != swear:
+                    continue
+                else:
+                    choices.append((candidate, candidate.weight))
     choices.sort(key=lambda item: item[0].id)
     return GarnishOffer(placement, tuple(choice for choice, _ in choices), tuple(weight for _, weight in choices),
                         key, seed, eff, rejected)

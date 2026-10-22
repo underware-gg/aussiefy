@@ -54,6 +54,9 @@ def profanity_rating(text: str, dictionary: Dictionary, *, canonical_spans=()) -
 def _inflected(low: str, table: dict[str, int]) -> int:
     """How strong a word is as one of table's, or one of them with an ending ("wankers", "bullshitters")."""
     found = table.get(low, 0)
+    if low.endswith("'s"):
+        low = low[:-2]
+    found = max(found, table.get(low, 0))
     for ending in MASK_ENDINGS:
         if low.endswith(ending):
             found = max(found, table.get(low[:-len(ending)], 0))

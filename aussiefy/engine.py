@@ -196,7 +196,8 @@ class Result:
                  "stacked": r.stacked.entry.id if r.stacked else None, "riff": r.riff}
                 for r in self.records if r.substituted],
             "garnish": [{"placement": g.placement, "sentence": g.sentence, "entry": g.entry_id, "text": g.text,
-                         **({"image_id": g.image_id} if g.image_id else {})}
+                         **({"image_id": g.image_id} if g.image_id else {}),
+                         **({"construction_id": g.construction.id} if g.construction else {})}
                         for g in self.garnish if g.text],
             "phonetic": [{"rule": p.rule, "before": p.before, "after": p.after} for p in self.phonetic],
             "dialect": [{"before": d.before, "after": d.after, "english": d.english} for d in self.dialect],
@@ -821,7 +822,8 @@ class Translator:
                 continue
             recent = {cid for cid, at in state.connectives.items() if ordinal - at <= CONNECTIVE_REPEAT_GAP}
             offer = garnish_offer(placement, self.dictionary, eff, run.pol.seed, (key,) + sent.key,
-                                  state.garnish_uses, g.tag_contexts if placement == "tag" else g.contexts,
+                                  state.garnish_uses + state.entry_uses,
+                                  g.tag_contexts if placement == "tag" else g.contexts,
                                   exclude=recent, mood=run.mood, swear=swear,
                                   insults=run.embellishment.takes("insult"),
                                   narrator_opinion=run.embellishment.narrator_opinion,
@@ -838,7 +840,8 @@ class Translator:
             if entry:
                 # connectives are plain storytelling words, so the same one can come back later
                 if placement != "connective":
-                    state.garnish_uses[entry.id] += 1
+                    for identity in entry.usage_ids if isinstance(entry, Construction) else (entry.id,):
+                        state.garnish_uses[identity] += 1
                 else:
                     state.connectives[entry.id] = ordinal
                 state.placed[placement] += 1
@@ -1234,7 +1237,8 @@ def _narrow(keep: list[Candidate], rejected: list, variety: int, state: TextStat
     # a multi-word name for a thing reads as a tic the second time ("the Big Smoke ... the Big Smoke"): say it
     # once and let the plain word stand after that. (Letting it back after a gap was tried: a long yarn then
     # leans on "bugger all" and "some bastard" over and over.)
-    again = [c for c in keep if c.entry.frame == "np" and len(c.entry.form.split()) > 1 and state.entry_uses.get(c.entry.id)]
+    again = [c for c in keep if state.garnish_uses.get(c.entry.id)
+             or c.entry.frame == "np" and len(c.entry.form.split()) > 1 and state.entry_uses.get(c.entry.id)]
     keep = [c for c in keep if c not in again]
     rejected += [(c.entry, "already used in this text; the plain word can stand the second time") for c in again]
     if variety and len(keep) > variety:

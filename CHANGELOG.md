@@ -9,9 +9,15 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Apply Australian\-use readings to reviewed subject tags, with individual reasons'n recorded authority;
+  preserve separate wording caps. Well, bugger me, tighten the documented opinion/belief sense of “reckon”. Fix possessive
+  profanity masks, spaced composite recognition, composite variant preferences'n stem reuse. Retain only
+  the converted opener in translations pendin' invention controls; preserve plain public theme names,
+  construction trace IDs'n precise derived\-label validation.
+
 - Enforce reviewed composite themes in lint'n model\-output checks, rate the constructor’s actual
   wording \(including compounds'n joined words\), and respect register filters for imagery and riffs
-  across selection'n cards. Fair dinkum, keep community evidence counts tied to source kind and record scoped
+  across selection'n cards. Well, keep community evidence counts tied to source kind and record scoped
   Australian\-use testimony for the bare surprise stem.
 
 - Add the agent\-neutral Bulldust constructor through Python, CLI and MCP: reviewed typed families,
@@ -76,7 +82,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   explicitly overridden. Keep ordinary indefinite wording available. Share mapping effects through
   selection, lookup, plans, alternatives'n bounded original\-aware verification; retain unrelated numbers.
 - Apply the remainin' clear source\-audit sense repairs: distinguish urination, categorical impossibility,
-  completion, tasting, noisy crying/sulking, explicit noun subtypes'n emphatic refusals. Struth, preserve antenna
+  completion, tasting, noisy crying/sulking, explicit noun subtypes'n emphatic refusals. Stone the crows, preserve antenna
   qualifiers/plurals'n walking destinations, require progressive objects, and retain discovery\-only
   vocabulary where source wording can't establish a safe automatic readin'. So anyway, correct eight source/usage
   records'n merge 627 reviewed source pairs from batches 7–11 without changin' existin' term gates.
@@ -87,7 +93,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   certificates, retained qualifier ownership'n compatible realised forms across translation, plans and
   automatic alternatives. Calibrate the DRUNK family without guessing unknown grades or removing terms.
 - Distinguish plural direct address from references to everyone: offer “you mob”/“youse” in simple group
-  greetings'n commands; preserve ambiguous parentheticals and coordinated recipients. Stone the flamin' crows, retain ordinary
+  greetings'n commands; preserve ambiguous parentheticals and coordinated recipients. Oi, retain ordinary
   distributive meanings in “Everyone came” and prevent direct dictionary replacements bypassin' usage.
 
 - Enable comic dictionary terms in solemn text at Troppo; other defaults stay off, with explicit
@@ -107,7 +113,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   reviewed servin'/container senses while preserving queries, ranking rules'n required status.
 
 - Add explicit versioned dictionary overlays through existin' `--dict` files: add concepts/entries or patch
-  existin' records in deterministic order, retaining the normal engine'n dial checks. Crikey, preserve raw fields,
+  existin' records in deterministic order, retaining the normal engine'n dial checks. Fair dinkum, preserve raw fields,
   replace named lists/maps rather than append, allow clearing inherited source references, reject malformed
   or shadowed invalid operations, and report correction origins through validate/show'n dictionary metadata.
   Keep behaviour settings separate from vocabulary corrections; tighten canonical concept'n text/boolean
@@ -120,7 +126,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   Merge the 237 source proposals from batches 5 and 6 alongside the 239 from batches 3 and 4.
 
 - Preserve explicit listener possessives through shared binding'n form compatibility, and require a
-  listener for “bend someone's ear”. Tell ya what, add standard bend/bent morphology instead of inventin' a listener
+  listener for “bend someone's ear”. Struth, add standard bend/bent morphology instead of inventin' a listener
   or producing “bended”.
 - Apply 239 reviewed source records from the next two 120\-entry audit batches, retaining historical,
   component'n source\-chain evidence limits rather than certifying every trigger or full construction.
@@ -131,7 +137,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   terminology outta explicitly protected technical, official'n instruction domains.
 - Preserve terminal object/NP arguments through shared completion checks; decline partial or coordinated
   nominal captures, including “as well as” coordination, while retaining finite verb/clause continuations.
-  So anyway, require both travel'n a swag for waltzing Matilda;
+  Require both travel'n a swag for waltzing Matilda;
   exclude minimising nothing\-much wording from exact zero.
 - Preserve negative\-modal indifference wording'n supermarket location nouns through compatible sourced
   forms. Bloody hell, keep all existin' status'n flag gates; retained historical terms remain subject to their registers.

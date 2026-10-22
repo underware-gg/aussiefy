@@ -281,13 +281,15 @@ def test_real_subject_tags_and_mixed_senses_use_normal_eligibility(translator):
 
 def test_real_child_riffs_carry_their_own_subjects(dictionary):
     allowed = dictionary.theme_defaults[3] - {"drinking", "gambling", "bodily_functions"}
-    for eid, banned in [("esky", "tinnies"), ("drongo", "brewery"),
-                        ("galah", "raffle"), ("bucketing-down", "pissin'")]:
+    for eid, banned in [("esky", "tinnies"), ("bucketing-down", "pissin'")]:
         entry = dictionary.entries[eid]
         assert any(banned in riff.text for riff in entry.riffs)
         assert all(banned not in riff.text for riff in entry.riffs_within(3, allowed, registers=("current",)))
         card = entry_card(entry, permitted_themes=allowed, registers=("current",))
         assert all(banned not in riff["text"] for riff in card.get("riffs", []))
+    for eid, image in [("drongo", "brewery"), ("galah", "raffle"), ("ankle-biter", "snotty-nosed")]:
+        entry = dictionary.entries[eid]
+        assert any(image in riff.text for riff in entry.riffs_within(3, allowed, registers=("current",)))
     nan = resolve(Policy(vulgarity=0), dictionary).permitted_themes
     assert not dictionary.entries["bucketing-down"].riffs_within(0, nan, registers=("current",))
 
@@ -374,8 +376,9 @@ def test_term_tiers_and_exact_theme_overrides_share_one_policy(translator):
     for term in (d.entries["dunny"], duck):
         assert not theme_rejection(term, nan)
     assert theme_rejection(throat, nan) and not theme_rejection(throat, dad)
-    for eid in ("a-durry", "a-ciggie", "rollie", "dart-cigarette", "useful-as-an-ashtray"):
+    for eid in ("a-durry", "a-ciggie", "rollie", "dart-cigarette"):
         assert theme_rejection(d.entries[eid], nan) and not theme_rejection(d.entries[eid], dad)
+    assert not theme_rejection(d.entries["useful-as-an-ashtray"], nan)
     disabled = translator.effective(vulgarity=3, document_config={"themes": {"bodily_functions": False}}).theme_policy
     assert theme_rejection(d.entries["dunny"], disabled)
     enabled = translator.effective(vulgarity=0, document_config={"themes": {"violence": True}}).theme_policy

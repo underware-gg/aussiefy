@@ -239,15 +239,16 @@ def test_caught_on_requires_independent_use_of_the_term(raw):
 
 
 @pytest.mark.parametrize("kind", ["entry", "riff"])
-def test_stored_evidence_labels_are_rejected_everywhere(data_copy, kind):
+@pytest.mark.parametrize("field", ["evidence", "attestation", "first_attested"])
+def test_stored_evidence_labels_are_rejected_everywhere(data_copy, kind, field):
     path = data_copy / ("entries/lexical.yaml" if kind == "entry" else "riffs.yaml")
     raw = yaml.safe_load(path.read_text())
     if kind == "entry":
-        raw[0]["evidence"] = "attested"
+        raw[0][field] = "attested"
     else:
-        raw["wheelie-bin"] = [{"text": "some image", "evidence": "attested"}]
+        raw["wheelie-bin"] = [{"text": "some image", field: "attested"}]
     path.write_text(yaml.safe_dump(raw))
-    with pytest.raises(SchemaError, match="evidence|each riff"):
+    with pytest.raises(SchemaError, match=field if kind == "entry" else f"derived fields.*{field}"):
         load_dictionary(data_dir=data_copy)
 
 

@@ -86,4 +86,5 @@ def test_hunger_writer_material_respects_subject_permissions(translator):
     assert 'stomach-throat-cut' not in images(plan(translator, 'She is hungry.', vulgarity=0))
     assert 'stomach-throat-cut' in images(plan(translator, 'She is hungry.'))
     assert 'stomach-throat-cut' in images(plan(translator, 'She is hungry.', themes={'violence': True}))
-    assert 'hungry-butter-beer-coaster' not in images(plan(translator, 'She is hungry.', themes={'drinking': False}))
+    assert 'hungry-butter-beer-coaster' in images(plan(translator, 'She is hungry.', themes={'drinking': False}))
+    assert 'stomach-throat-cut' not in images(plan(translator, 'She is hungry.', themes={'violence': False}))

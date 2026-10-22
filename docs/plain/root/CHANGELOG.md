@@ -5,6 +5,12 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Apply Australian-use readings to reviewed subject tags, with individual reasons and recorded authority;
+  preserve separate wording caps. Tighten the documented opinion/belief sense of “reckon”. Fix possessive
+  profanity masks, spaced composite recognition, composite variant preferences and stem reuse. Retain only
+  the converted opener in translations pending invention controls; preserve plain public theme names,
+  construction trace IDs and precise derived-label validation.
+
 - Enforce reviewed composite themes in lint and model-output checks, rate the constructor’s actual
   wording (including compounds and joined words), and respect register filters for imagery and riffs
   across selection and cards. Keep community evidence counts tied to source kind and record scoped

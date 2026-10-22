@@ -24,7 +24,7 @@ from .model import Dictionary, LevelProfile, PhoneticRule, RewriteThresholds, Sw
 from .schema import (CLASSES, FRAMES, GARNISH_KEYS, RIFF_TONES, Concept, Entry, Riff, SchemaError, parse_concept,
                      parse_entry, parse_imagery)
 from .vocabulary import Vocabulary
-from .evidence import METADATA_KEYS, assess, parse_metadata, parse_weights
+from .evidence import DERIVED_FIELDS, METADATA_KEYS, assess, parse_metadata, parse_weights
 from .themes import THEME_NAME
 from .construction_data import parse_catalog
 from .masks import profanity_rating
@@ -328,6 +328,9 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
             continue
         rated = []
         for riff in riffs or ():
+            if isinstance(riff, dict) and (derived := set(riff) & DERIVED_FIELDS):
+                errors.append(f"riffs.yaml: {entry_id}: derived fields cannot be supplied: {', '.join(sorted(derived))}")
+                continue
             text, tone = (riff, "plain") if isinstance(riff, str) else \
                 ((riff.get("text"), riff.get("tone", "plain")) if isinstance(riff, dict) else (None, None))
             if (not isinstance(text, str) or not text.strip() or tone not in RIFF_TONES

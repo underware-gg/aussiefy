@@ -78,6 +78,7 @@ class ConstructionFamily:
     preferred_words: tuple[int, int] = (6, 12)
     placement: str | None = None
     semantic_degree: tuple[tuple[str, str], ...] = ()
+    converted_parts: tuple[tuple[str, str], ...] = ()
 
 
 @dataclass(frozen=True)
@@ -113,6 +114,11 @@ class Construction:
     vulgarity: int
     cadence: float
     weight: float
+
+    @property
+    def usage_ids(self) -> tuple[str, ...]:
+        return tuple(dict.fromkeys((self.id, *(part.ingredient.entry_id for part in self.parts
+                                              if part.ingredient.entry_id))))
 
     def to_dict(self) -> dict:
         return {"construction_id": self.id, "entry_id": None, "family": self.family.id,
@@ -184,7 +190,7 @@ def compose(family: ConstructionFamily, chosen: dict[str, Ingredient], dictionar
     lo, hi = family.preferred_words
     distance = max(lo - words, 0, words - hi)
     cadence = 1 / (1 + dictionary.construction_catalog.cadence_penalty * distance)
-    part_weight = prod(part.weight * eff.metadata_weight(part.metadata) for part in chosen.values()) ** (1 / len(chosen))
+    part_weight = prod(part.weight * eff.metadata_weight(part.metadata) for part in chosen.values())
     weight = family.weight * eff.metadata_weight(family.metadata) * part_weight * tone_weight(family.tone, mood)
     return Construction(cid, family, text, tuple(parts), metadata,
                         max(family.level, *(part.level for part in chosen.values())),
@@ -273,8 +279,9 @@ class ConstructionPattern:
 
 
 def _literal_pattern(text: str) -> str:
-    return "".join(r"\s+" if chunk.isspace() else re.escape(chunk)
-                   for chunk in re.split(r"(\s+)", text.replace("’", "'")))
+    normalized = text.replace("’", "'")
+    return (r"\s*" if normalized.startswith("'") else "") + "".join(
+        r"\s+" if chunk.isspace() else re.escape(chunk) for chunk in re.split(r"(\s+)", normalized))
 
 
 def construction_patterns(dictionary: Dictionary) -> tuple[ConstructionPattern, ...]:

@@ -15,6 +15,35 @@ flagged instead, and kept in `aussiefy/data/entries/flagged.yaml` so re-scrapes 
 Every gloss is written in our own words, never a source's
 ([DD-012](../../architecture/decisions/dd-012-reference-dictionaries-are-reference-only.md)).
 
+## Interpret terms as an Australian would
+
+This is core dictionary curation policy. Judge the whole expression as an Australian would understand it
+in context: its meaning, use, register and politeness compared with other Australian expressions. A literal
+component, a foreign reading or an expression's etymology is not enough to assign a theme, tier or wording level.
+
+Choose the semantic unit before substituting. When words form a shared idiomatic meaning, translate the
+phrase by its meaning and grammatical role rather than replacing a component in isolation. Translate a
+word independently when it carries that independent meaning in context and the change preserves the
+surrounding expression. This requires interpretation, not an automatic longest-string rule. Agent curation
+supplies the judgement; dictionary data and shared meaning/context mechanisms carry it into the engine.
+
+Figurative wording is not automatically exempt from subject permissions. Consider whether its subject or
+crude joke remains part of the Australian reading. Equally, do not add a subject tag merely because an
+idiom contains a word associated with that subject. Keep evidence status, wording vulgarity and theme
+permissions separate; none is a substitute for reviewing the others.
+
+Compare politeness among Australian expressions rather than applying an absolute taboo-word rule.
+Existing rulings illustrate the distinction: `dunny` is familiar polite slang with bodily functions
+permitted from Nan; `budgie smugglers` is not automatically sexual because it names swimwear; the historical
+associations of `done up like a pox doctor's clerk` do not change its conspicuous-dressing meaning.
+These rulings do not decide other expressions that happen to share a word.
+
+Review each stored sense and record its own interpretation, proposed tags and minimum tiers, reason,
+and ruling authority. Distinguish a curator's proposal from an approved ruling. If the Australian reading
+is unclear, bring a contextual proposal to the project owner and leave it pending. A repeated explanation
+that a phrase retains its literal imagery is not a completed review. Represent supported distinctions in
+dictionary data through the shared mechanisms, rather than adding phrase-specific engine exceptions.
+
 ## Reference dictionaries
 
 The Macquarie Dictionary, including its Australian Word Map of regional words, and the Australian National

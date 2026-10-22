@@ -47,7 +47,6 @@
   incoherence: 3
   gloss: Not very bright.
 - id: stubby-short-of-a-six-pack
-  themes: [drinking]
   form: a stubby short of a six-pack
   concept: [STUPID]
   frame: predicate_adj
@@ -63,7 +62,6 @@
   gloss: Not very bright or sensible.
   notes: "Aus/NZ; means not very bright or a bit odd. Predicative only (\"he's not the full quid\")."
 - id: all-froth-and-no-beer
-  themes: [drinking]
   form: all froth and no beer
   concept: [ALL_TALK]
   frame: predicate_adj
@@ -108,7 +106,6 @@
   incoherence: 4
   gloss: Totally useless.
 - id: useful-as-an-ashtray
-  themes: [tobacco]
   form: about as useful as an ashtray on a motorbike
   concept: [USELESS]
   frame: predicate_adj
@@ -123,7 +120,7 @@
   incoherence: 5
   gloss: Pointless.
 - id: tits-on-a-bull
-  themes: [sex]
+  themes: [{name: sex, tier: 1}]
   form: as useless as tits on a bull
   concept: [USELESS]
   frame: predicate_adj
@@ -154,7 +151,6 @@
   incoherence: 3
   gloss: Very happy.
 - id: grinning-like-a-shot-fox
-  themes: [death, violence]
   form: grinning like a shot fox
   concept: [HAPPY]
   frame: predicate_adj
@@ -162,7 +158,6 @@
   incoherence: 4
   gloss: Smugly delighted.
 - id: crook-as-rookwood
-  themes: [death]
   form: crook as Rookwood
   concept: [SICK]
   frame: predicate_adj
@@ -266,7 +261,7 @@
     note: 'Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source
       hunt.'
 - id: dry-as-a-dead-dingo
-  themes: [death, sex]
+  themes: [{name: sex, tier: 1}]
   form: dry as a dead dingo's donger
   concept: [THIRSTY]
   frame: predicate_adj
@@ -404,14 +399,13 @@
   incoherence: 2
   gloss: Take a day off claiming to be ill.
 - id: see-a-man-about-a-dog
-  themes: [bodily_functions]
   form: see a man about a dog
   concept: [TOILET_BREAK]
   frame: vp
   incoherence: 3
   gloss: A coy excuse for leaving, usually for the toilet.
 - id: point-percy
-  themes: [bodily_functions, sex]
+  themes: [{name: bodily_functions, tier: 1}, {name: sex, tier: 1}]
   form: point Percy at the porcelain
   concept:
   - URINATE
@@ -699,7 +693,7 @@
   frame: vp
   incoherence: 1
   weight: 3
-  gloss: Think; believe; suppose. Perhaps the most Australian verb there is.
+  gloss: Hold or express an opinion or belief; suppose ("I reckon he's right").
 
 # --- sticks out like ... ---------------------------------------------------------
 - id: stick-out-like-a-sore-thumb
@@ -718,7 +712,7 @@
   incoherence: 4
   gloss: Be impossible to miss, like an outhouse alone in a paddock.
 - id: stick-out-like-dogs-balls
-  themes: [sex]
+  themes: [{name: sex, tier: 1}]
   form: stick out like dogs' balls
   concept: [CONSPICUOUS]
   frame: vp
@@ -733,7 +727,7 @@
   incoherence: 3
   gloss: Glaringly obvious.
 - id: obvious-dogs-balls-pred
-  themes: [sex]
+  themes: [{name: sex, tier: 1}]
   form: as obvious as dogs' balls
   concept: [CONSPICUOUS]
   frame: predicate_adj
@@ -1159,7 +1153,6 @@
   incoherence: 4
   gloss: Can't see a thing.
 - id: built-like-a-brick-shithouse
-  themes: [bodily_functions]
   form: built like a brick shithouse
   concept: [BIG_STRONG]
   frame: predicate_adj
@@ -1261,7 +1254,6 @@
   incoherence: 3
   gloss: Has had more than enough.
 - id: wouldnt-be-dead-for-quids
-  themes: [death]
   form: "{subj} wouldn't be dead for quids"
   concept: [GLAD_ALIVE]
   frame: clause
@@ -1429,7 +1421,6 @@
     last_date: '2026-10-19'
     summary_date: '2026-10-20'
 - id: better-than-a-poke-in-the-eye
-  themes: [violence]
   form: better than a poke in the eye with a burnt stick
   spellings: [better than a poke in the eye with a burned stick]
   variants: [better than a poke in the eye with a burned stick, better than a poke in the eye with a sharp stick]
@@ -1448,7 +1439,6 @@
     last_date: '2026-10-19'
     summary_date: '2026-10-20'
 - id: better-than-a-poke-in-the-eye-pred
-  themes: [violence]
   form: better than a poke in the eye with a burnt stick
   concept: [NOT_BAD]
   frame: predicate_adj

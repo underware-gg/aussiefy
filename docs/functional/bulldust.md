@@ -57,10 +57,16 @@ start at Uncle Bob for sex'n innuendo; the title combination starts at Uncle Bob
 ordinary implement endings don't acquire a sexual tag in isolation. Anyway, the stronger oath has its own swear
 rating'n a lower pick weight.
 
+Stone the flamin' crows, part weights multiply, so adding neutral ingredients doesn't dilute a variant's preference. Constructed
+openers use that composite weight without a second preference for the stronger swear. Reusin' an
+entry\-backed stem in a different construction doesn't evade the within\-text repeat check. Now, the check
+also covers a bare stem used as an ordinary substitution, in either order.
+
 Families declare a maximum exaggeration requirement, compared with `riff_exaggeration`. Comic constructions
-in solemn text require `solemn_comic_terms`. In translation, the two surprise families may enter the opener
-pool under the existing garnish permissions and rates. This slice does not enable constructed substitutions
-as a fallback; that is a separate integration step.
+in solemn text require `solemn_comic_terms`. Translation currently retains only the previously available
+“bugger me sideways'n call me the pope” opener, under the existing garnish permissions and rates. Other
+combinations remain available through the standalone operation. Additional invented translation wording
+and constructed substitution fallback require the planned invention controls.
 
 ## Evidence, identities and spans
 
@@ -76,6 +82,10 @@ entry is created. Existing changes version 2 reports constructed garnish with a 
 alternatives and a removal when locally renderable. Full public construction cards and in-translation part
 spans are reserved for the coordinated contract update.
 
+Public metadata currently reports `themes` as plain names. Stored YAML still preserves explicit per-term
+tiers, and all eligibility checks use those tiers. Plan and explanation traces retain a `construction_id`
+for a constructed opener, independently of its null dictionary entry ID.
+
 ## Data and bounds
 
 `aussiefy/data/constructions.yaml` declares `aussiefy-constructions/v1`, `settings`, `ingredients` and `families`.
@@ -85,6 +95,10 @@ Families declare `id`, `template`, named `slots` mapped to kinds, `concept` and 
 term metadata, level, vulgarity, weight, exaggeration, tone, `preferred_words`, `semantic_degree` and opener
 `placement`. The loader validates them before generation. Each slot occurs exactly once; format directives,
 attribute access and indexing are not accepted. Inserted ingredient text is opaque, even if it contains braces.
+
+An opener family's optional `converted_parts` pins every slot to a compatible ingredient, identifying an
+existing opener retained during migration. Translation uses only these pinned recipes until invention is
+enabled; standalone generation can still vary their parts. Unknown or incompatible pins fail loading.
 
 The core attempts at most 64 combinations per compatible family, without buildin' the Cartesian product.
 Well, seeded mixed\-radix samplin' visits distinct combinations. Known full entry forms, riffs'n imagery, and

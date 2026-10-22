@@ -333,8 +333,9 @@ def metadata_dict(term: TermMetadata, *, derived: bool = False) -> dict[str, Any
     names = (*METADATA_KEYS, *sorted(DERIVED_FIELDS)) if derived else METADATA_KEYS
     out = {k: asdict(v) if hasattr(v, "__dataclass_fields__") else list(v) if isinstance(v, tuple) else v
            for k in names if (v := getattr(term, k)) is not None}
-    tiers = dict(term.theme_tiers)
-    out["themes"] = [{"name": name, "tier": tiers[name]} if name in tiers else name for name in term.themes]
+    if not derived:
+        tiers = dict(term.theme_tiers)
+        out["themes"] = [{"name": name, "tier": tiers[name]} if name in tiers else name for name in term.themes]
     out["sources"] = [s.to_dict() for s in term.sources]
     if derived:
         out["attestation"] = term.attestation.to_dict()
