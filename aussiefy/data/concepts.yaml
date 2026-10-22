@@ -1119,8 +1119,9 @@ REGARD_HIGHLY:
     vp: ["think so|very|that|as? much of ?={np}", "think so|very|really? highly|well|kindly of ?={np}",
          "think a lot of ?={np}", "think a great deal of ?={np}", "think the world of ?={np}",
          # negated, "too" is understatement: "I don't think too highly of him" thinks poorly of him, and
-         # the negation's context outranks the bare OVERVALUE reading
-         "?<=not|never think too much|highly of ?={np}"]
+         # the negation's context outranks the bare OVERVALUE and CONCEITED readings
+         "?<=not|never think too|so|very|that? much of ?={np}", "?<=not|never think too|so|very? highly of ?={np}",
+         "?<=not|never think a lot of ?={np}"]
 REGARD_POORLY:
   description: Think poorly of, disparage (think little or ill of); an evaluation, not a supposition.
   triggers:
@@ -1129,6 +1130,13 @@ OVERVALUE:
   description: Value too highly (think too much of); of oneself, conceit. An evaluation, not a supposition.
   triggers:
     vp: ["think too much|highly of ?={np}"]
+CONCEITED:
+  description: Think too highly of oneself (he thinks too much of himself); conceit, not regard for another.
+  triggers:
+    vp: ["think too|so|very? much of himself|herself|themselves|themself|myself|yourself|yourselves|ourselves|oneself",
+         "think too|so|very? highly of himself|herself|themselves|themself|myself|yourself|yourselves|ourselves|oneself",
+         "think a lot of himself|herself|themselves|themself|myself|yourself|yourselves|ourselves|oneself",
+         "think the world of himself|herself|themselves|themself|myself|yourself|yourselves|ourselves|oneself"]
 NO_HARDSHIP:
   description: Treat as unremarkable or no hardship (think nothing of walking ten miles); not a supposition
     and not an amount.
@@ -1633,9 +1641,22 @@ HEAD:
   triggers:
     np: ["skull", "cranium"]
 HEART_ORGAN:
-  description: The heart (the organ).
+  description: The heart (the organ), right after a determiner or possessive ("my heart", "the heart"). Bare
+    heart is spirit or courage (take heart, showed real heart, a lot of heart), which ticker does not mean.
   triggers:
-    np: ["heart !attack|attacks|disease|failure|surgery|rate|of|and|felt|sank|broke|out|set"]
+    # literal physical modifiers; "brave", "big", "strong" or "kind" hearts are spirit
+    np: ["?<=weak|healthy|failing|dodgy|damaged|enlarged|diseased|beating|pounding|racing|thumping heart !attack|attacks|disease|failure|surgery|rate|of|and|felt|sank|broke|out|set",
+         "?<=my|your|his|her|its|our|their|the|a|an|this|that|whose heart !attack|attacks|disease|failure|surgery|rate|of|and|felt|sank|broke|out|set"]
+HEART_SPIRIT:
+  description: Compassion asked for, or effort and enthusiasm (have a heart, put your heart into it, her heart
+    wasn't in it); not the organ.
+  triggers:
+    vp: ["have a heart ^end", "put {poss} heart into", "put {poss} heart and soul into"]
+    np: ["heart {be} not|never? really? in it", "heart's not|never? really? in it"]
+UNRESOLVED_SENSE:
+  description: Context leaves these words' sense undecided (an object, or a clause's subject?), so they stay as
+    written. The engine assigns it; it has no triggers.
+  triggers: {}
 AS_MUCH_AS_DESIRED:
   description: As much as desired, to complete satisfaction; the fixed expression has no anatomical meaning.
   triggers:

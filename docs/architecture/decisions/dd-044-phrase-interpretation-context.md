@@ -22,10 +22,17 @@ Keep one detection stage and one overlap resolution. Distinguish a reading's spa
 and may replace) from its evidence (the span plus the context it rests on).
 
 - The matcher records the context its zero-width assertions read. The new `?={np}` ends a pattern and
-  reads a following nominal object without consuming or capturing it. The shared clause reader validates it
-  with the unanchored-object checks. Trailing adverbs stay outside the object. Clause and non-nominal
-  complements are rejected, and so is the subject of an infinitive. The similarity fallback does not use
-  such patterns.
+  marks where a following object starts, without consuming or capturing it. The shared clause reader then
+  reads the object's extent from part-of-speech tags, with no word cap since nothing is replaced. It
+  validates the object with the unanchored-object checks. Trailing adverbs stay outside the object. A
+  phrase that is the subject of a clause's verb, past its prepositional, adverbial and relative
+  post-modifiers, is rejected. So are non-nominal complements, the subject of an infinitive and a pronoun
+  opening a coordinated subject. The similarity fallback does not use such patterns.
+- Where the tags cannot settle the question, the uncertainty is explicit. A run of nouns met by a verb
+  could be an object with a relative clause (“the stories people tell”) or a clause (“the bus driver
+  lied”). The reading becomes `UNRESOLVED_SENSE`, which holds the words and supersedes the rival senses
+  but has no candidates, so the words stay as written. A run of names before a verb is a clause, and an
+  object after a preposition cannot be a clause's subject, so neither is unresolved.
 - Overlap resolution ranks readings by evidence width, then span length and the existing tie-breaks.
   Spans still decide which words a reading holds, so a reading's context remains available to the
   context's own readings. Identical spans merge only on identical evidence; wider evidence supersedes
@@ -36,8 +43,11 @@ and may replace) from its evidence (the span plus the context it rests on).
   must appear in any replacement form. Negation, tense and objects outside the span keep the existing controls.
 - Linguistic knowledge stays in data. `ACCEPT_AS_TRUE`, `FANCIFUL` and the evaluative “think … of”
   concepts are entryless concepts with context triggers. The evaluative concepts are `REGARD_HIGHLY`,
-  `REGARD_POORLY`, `OVERVALUE` and `NO_HARDSHIP`. Each keeps one polarity, so a future entry cannot flip
-  or flatten the source's regard. No slang ID, sentence or reference text enters the engine.
+  `REGARD_POORLY`, `OVERVALUE`, `CONCEITED` and `NO_HARDSHIP`. Each keeps one polarity, so an entry
+  cannot flip or flatten the source's regard; negated forms read as regard, never as conceit or
+  overvaluing. CONCEITED shares Rob's sun-shines-out-of-arse entry through a `{poss} own arse` variant.
+  `HEART_ORGAN` requires a determiner or possessive, so bare spirit or courage (`take heart`, `showed
+  real heart`) is never `ticker`. No slang ID, sentence or reference text enters the engine.
 
 ## Consequences
 
@@ -48,4 +58,6 @@ established this way need reviewed patterns, and mixed evidence prefers preserva
 A whole-phrase entry that captures an `{np}` re-inserts it as written. Composing inner swaps into a
 captured argument is not implemented. Dictionaries and overlays that use `?={np}` need an engine
 with this decision. The `supersedes` key in explain records is additive. The changes
-contract is unchanged. Whether to ship replacement entries for the new senses is a curatorial decision.
+contract is unchanged. Changing a trigger's text also re-keys its seeded rolls, so some unrelated
+substitute-or-keep decisions for that concept move. Whether to ship further replacement entries is a
+curatorial decision.

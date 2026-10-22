@@ -45,7 +45,7 @@ def test_context_object_is_read_but_not_consumed():
     tokens = tokenize('You cannot believe a liar.')
     match = match_at(pattern, tokens, 2)
     assert (match.start, match.end) == (2, 3)
-    assert match.object_context == (3, 5) and match.context == (2, 5)
+    assert match.object_start == 3 and match.context == (2, 4)   # detection reads the object's extent
     assert not match.captures
     assert not pattern.consuming[1:]
 
@@ -74,7 +74,11 @@ def test_same_span_senses_compete_by_evidence_instead_of_merging(dictionary):
 
 @pytest.mark.parametrize('source', ['I believe he is lying.', 'She believed the rumours were true.',
                                     'I believe so.', 'I believed him to be honest.',
-                                    'They believed the earth to be flat.'])
+                                    'They believed the earth to be flat.', 'I believe the man in the car is lying.',
+                                    'I believe the people here are lying.', 'I believe the man who called was lying.',
+                                    'I believe everyone here knows.', 'I believe the story that he told was true.',
+                                    'I believe the story he told was true.', 'I believe the man who has called was lying.',
+                                    'I believe John Smith lied.'])
 def test_clause_and_non_nominal_complements_are_not_objects(source, dictionary):
     assert concepts(source, dictionary) & {'ACCEPT_AS_TRUE', 'THINK'} == {'THINK'}
 
@@ -88,12 +92,14 @@ def test_prepositional_and_clausal_believe_take_no_object_reading(source, dictio
 @pytest.mark.parametrize('source,sense', [('She thought highly of him.', 'REGARD_HIGHLY'),
                                           ('She thought a lot of him.', 'REGARD_HIGHLY'),
                                           ('He thinks very highly of her.', 'REGARD_HIGHLY'),
+                                          ('He thought highly of the stories people tell.', 'REGARD_HIGHLY'),
                                           ('He thought so highly of her that he wrote.', 'REGARD_HIGHLY'),
-                                          ('He thinks too highly of himself.', 'OVERVALUE'),
+                                          ('He thinks too highly of himself.', 'CONCEITED'),
                                           ("I don't think too highly of him.", 'REGARD_HIGHLY'),
                                           ("He doesn't think too much of the plan.", 'REGARD_HIGHLY'),
                                           ('They thought ill of him.', 'REGARD_POORLY'),
-                                          ('He thinks too much of himself.', 'OVERVALUE'),
+                                          ('He thinks too much of himself.', 'CONCEITED'),
+                                          ('He thinks too much of the plan.', 'OVERVALUE'),
                                           ('She thinks nothing of walking ten miles.', 'NO_HARDSHIP')])
 def test_evaluative_think_of_keeps_its_polarity(source, sense, dictionary):
     found = concepts(source, dictionary)
@@ -241,3 +247,56 @@ def test_a_later_clause_is_not_a_result_complement(translator):
     assert any(text.startswith('Ta') for text in outputs(translator, "Thank you so much, that's excellent."))
     assert any('armpit' in text for text in outputs(translator, 'It was too hot and we went to the beach.',
                                                     vulgarity=1))
+
+
+# --- object extent, self-regard and the heart's other senses ------------------------------------------------
+
+@pytest.mark.parametrize('source', ['I believe the old man next door completely.',
+                                    "You can't believe a word the old man next door says.",
+                                    "I believe the man's story.", 'I believe a very old man.',
+                                    'You cannot believe a liar who tells lies.', 'I believe the man that I met.',
+                                    'I believe the man who said he was lying.', 'I believe the people who say it is safe.'])
+def test_a_context_object_is_read_by_its_tags_not_a_word_count(source, translator):
+    assert 'ACCEPT_AS_TRUE' in concepts(source, translator.dictionary)
+    assert not any('reckon' in text for text in outputs(translator, source))
+
+
+@pytest.mark.parametrize('source,expected', [
+    ('He thinks too much of himself.', 'He thinks the sun shines out of his own arse.'),
+    ('She thought so highly of herself.', 'She thought the sun shone out of her own arse.'),
+])
+def test_self_regard_takes_the_sun_shining_out_of_ones_own_arse(source, expected, translator):
+    assert expected in outputs(translator, source, vulgarity=2)
+
+
+@pytest.mark.parametrize('source', ["He doesn't think much of himself.", 'He thinks too much of the plan.',
+                                    'John thinks too much of himself.'])
+def test_self_regard_needs_a_reflexive_affirmative_and_a_pronoun_to_agree_with(source, translator):
+    assert not any('arse' in text for text in outputs(translator, source, vulgarity=2))
+
+
+def test_adoring_someone_else_keeps_their_arse(translator):
+    assert 'She thinks the sun shines out of his arse.' in outputs(translator, 'She adores him.', vulgarity=2)
+
+
+@pytest.mark.parametrize('source', ['Have heart, the team is still in it.', 'He has a lot of heart.',
+                                    'Take heart, it will pass.', 'She showed real heart in the final.',
+                                    'Have a heart, mate.', 'Put your heart into it.', "Her heart wasn't in it.",
+                                    "My heart's not in it.", 'His heart was never in it.'])
+def test_heart_as_spirit_or_courage_is_never_ticker(source, translator):
+    assert not any('ticker' in text for text in outputs(translator, source))
+
+
+@pytest.mark.parametrize('source', ['The doctor listened to my heart.', 'I cannot find in my heart to leave them.',
+                                    'Ah, distinctly I remember, the beating of my heart.', 'He has a weak heart.',
+                                    'He has a heart murmur.'])
+def test_a_determined_heart_still_takes_ticker(source, translator):
+    assert all('ticker' in text for text in outputs(translator, source))
+
+
+@pytest.mark.parametrize('source', ['I believe the stories people tell.', 'I believe the bus driver lied.'])
+def test_an_object_or_clause_the_tags_cannot_settle_stays_as_written(source, translator):
+    found = readings(source, translator.dictionary)
+    held = next(d for d in found if d.concepts == ('UNRESOLVED_SENSE',))
+    assert held.supersedes == ('THINK',)
+    assert all(text.startswith('I believe the') for text in outputs(translator, source))

@@ -16,14 +16,19 @@
   does not recognise arbitrary idioms. Strict Markdown translates separate prose units, so formatting
   inserted inside an idiom can hide its full expression. Whole-phrase formatting retains the protection.
 - **Phrase readings come from reviewed patterns, not general understanding.** Context patterns establish a
-  few senses: believing a person or report, evaluative “think … of” (high, low or excessive regard, or no
-  hardship), and fanciful `fantastic` before nouns of fear, vision and apparition. Readings the patterns
-  cannot establish fall back to the word's own triggers. An object the matcher cannot delimit within five
-  words (“believe the old man next door completely”) still reads as supposition. Where evidence is mixed,
-  the patterns prefer preservation: `fantastic dreams` and `fantastic creatures` stay plain even when
-  praise was meant. These readings have no replacement entries yet, so they hold their words unchanged. A
-  whole-phrase replacement that captures an `{np}` argument re-inserts it as written: inner swaps survive
-  only where the argument is context outside the replaced span.
+  few senses: believing a person or report, and evaluative “think … of” (high, low or excessive regard,
+  conceit, or no hardship). They also cover fanciful `fantastic` before nouns of fear, vision and
+  apparition, and `heart` as spirit or courage. Readings the patterns cannot establish fall back to the
+  word's own triggers. Context objects are read from part-of-speech tags, so a tagger error can still
+  misplace an object's end (a verb tagged as a noun can join it). Where the tags cannot tell an object
+  from a clause's subject (“believe the stories people tell”), the words stay as written and explain mode
+  records `UNRESOLVED_SENSE`. Where evidence is mixed, the patterns prefer preservation: `fantastic dreams`
+  and `fantastic creatures` stay plain even when praise was meant. `ticker` replaces only a heart directly
+  after a determiner or possessive (“my heart”), so “the patient's heart” and “her poor heart” stay plain.
+  Conceit (“thinks the sun shines out of his own arse”) needs a pronoun subject to agree with, so “John
+  thinks too much of himself” stays plain. Most of these readings have no replacement entries, so they
+  hold their words unchanged. A whole-phrase replacement that captures an `{np}` argument re-inserts it as
+  written: inner swaps survive only where the argument is context outside the replaced span.
 - **The built-in API client has not been run against the live API.** Tagging, `--surface`, `--rewrite` and yarn mode
   are tested with fake clients. The yarn workflow itself has been exercised by agents through its research CLI
   (`research/retellings-2026-10-11/yarn_tools.py`), which shares yarn mode's brief and tools.

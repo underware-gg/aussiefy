@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from typing import NamedTuple
 
 from . import morph
 from .morph import is_past
@@ -70,23 +71,134 @@ def claimed_result_degree(tokens: list[Token], start: int, end: int, reading_end
     return degree if degree and reading_end < len(tokens) and tokens[reading_end].norm in {"that", "to"} else ""
 
 
-def context_object_end(tokens: list[Token], start: int, end: int, tags: list[str]) -> int | None:
-    """Where a nominal object read as context ends, short of trailing adverbs ("believe a liar even when ...");
-    None when the words are not a nominal object ("believe so", "believe he is lying", "believe in"), are
-    the subject of an infinitive ("believed him to be honest" is supposing, not taking his word) or open a
-    coordinated clause subject."""
-    while end - start > 1 and tags[end - 1] in {"RB", "RBR", "RBS"}:
-        end -= 1
-    # a lone object pronoun is an object whatever the tagger says ("her" before "that" reads as possessive)
-    pronoun = end - start == 1 and tokens[start].norm in morph.OBJECT_PRONOUNS
+NP_DETERMINER_TAGS = frozenset({"DT", "PDT", "PRP$", "CD"})
+NP_MODIFIER_TAGS = frozenset({"JJ", "JJR", "JJS", "CD"}) | pos.NOUNS | pos.NAMES
+FINITE_TAGS = frozenset({"VBD", "VBP", "VBZ", "MD"})
+
+
+SUBORDINATORS = frozenset({"when", "whenever", "because", "if", "although", "though", "while", "since", "unless",
+                           "until", "before", "after", "as", "where", "than"})
+RELATIVES = frozenset({"who", "whom", "which", "that"})
+
+
+def lone_pronoun_object(tokens: list[Token], start: int, tags: list[str]) -> bool:
+    """A pronoun is a phrase on its own, and an object pronoun is one whatever the tagger says ("her" before
+    "that" reads as possessive); "her" before a nominal is a possessive determiner ("her dog")."""
+    possessive = tokens[start].norm == "her" and start + 1 < len(tokens) and tags[start + 1] in NP_MODIFIER_TAGS
+    return tags[start] == "PRP" or (tokens[start].norm in morph.OBJECT_PRONOUNS and not possessive)
+
+
+def noun_phrase_end(tokens: list[Token], start: int, tags: list[str]) -> int:
+    """Where the noun phrase starting at tokens[start] ends, read from its tags: determiners, then modifiers
+    and nouns, with genitives carrying it on ("the old man next door", "the man's story")."""
+    if lone_pronoun_object(tokens, start, tags):
+        return start + 1
+    i, n = start, len(tokens)
+    while i < n and tags[i] in NP_DETERMINER_TAGS:
+        i += 1
+    while i < n:
+        before_modifier = i + 1 < n and tags[i + 1] in NP_MODIFIER_TAGS
+        if tags[i] in NP_MODIFIER_TAGS or (tags[i] == "POS" and i > start):
+            i += 1
+        elif tags[i] in {"RB", "VBG", "VBN"} and before_modifier:
+            i += 1   # "a very old man", "a running joke"
+        else:
+            break
+    return i
+
+
+def _finite(tokens: list[Token], i: int, tags: list[str]) -> bool:
+    return tags[i] in FINITE_TAGS or tokens[i].norm in AUXILIARIES
+
+
+SUBJECT_PRONOUNS = frozenset({"i", "you", "he", "she", "we", "they"})
+
+
+def _past_relative(tokens: list[Token], j: int, tags: list[str]) -> int | None:
+    """Past a relative clause opening at tokens[j], with its subject, verb group and object ("who called",
+    "that he told", "he told", and a result clause such as "that he spent all his money"); None when it has
+    no verb of its own, so it is not one."""
+    n = len(tokens)
+    if tokens[j].norm in RELATIVES:
+        j += 1
+    if j < n and not _finite(tokens, j, tags) and (tags[j] == "PRP" or tags[j] in NP_DETERMINER_TAGS | NP_MODIFIER_TAGS):
+        j = noun_phrase_end(tokens, j, tags)
+    if j >= n or not _finite(tokens, j, tags):
+        return None
+    j += 1
+    j = _past_verb_group(tokens, j, tags)
+    if j < n and (tags[j] == "PRP" or tags[j] in NP_DETERMINER_TAGS | NP_MODIFIER_TAGS):
+        j = noun_phrase_end(tokens, j, tags)
+        if j < n and _finite(tokens, j, tags):
+            # its complement clause ("who said [he was lying]"), not the main clause's verb
+            j = _past_verb_group(tokens, j + 1, tags)
+            if j < n and (tags[j] == "PRP" or tags[j] in NP_DETERMINER_TAGS | NP_MODIFIER_TAGS):
+                j = noun_phrase_end(tokens, j, tags)
+    return j
+
+
+def _past_verb_group(tokens: list[Token], j: int, tags: list[str]) -> int:
+    """Past the non-finite rest of a verb group ("who has [called]"), short of any finite verb."""
+    while j < len(tokens) and tags[j] in {"VB", "VBN", "VBG", "RB", "RBR", "RBS"} and not _finite(tokens, j, tags):
+        j += 1
+    return j
+
+
+def _clause_verb_after(tokens: list[Token], end: int, tags: list[str]) -> int | None:
+    """The finite verb a noun phrase is the subject of, past its post-modifiers ("the man [in the car] is",
+    "the people [here] are", "the man [who called] was", "the story [he told] was"); None when the clause
+    moves on without one ("believe a liar even when he ...", "believe a liar who tells lies")."""
+    j, n = end, len(tokens)
+    while j < n and not tokens[j].is_punct and tokens[j].norm not in SUBORDINATORS | {"and", "or", "but"}:
+        if _finite(tokens, j, tags):
+            return j
+        if tags[j] in {"RB", "RBR", "RBS"} or tokens[j].norm in {"here", "there"}:
+            j += 1
+        elif tokens[j].norm in RELATIVES | SUBJECT_PRONOUNS:
+            after = _past_relative(tokens, j, tags)
+            if after is None:
+                return None
+            j = after
+        elif tags[j] == "IN" and j + 1 < n and noun_phrase_end(tokens, j + 1, tags) > j + 1:
+            j = noun_phrase_end(tokens, j + 1, tags)
+        else:
+            return None
+    return None
+
+
+class ObjectReading(NamedTuple):
+    end: int
+    settled: bool   # False: the words could as well be a clause's subject, so neither reading is safe
+
+
+def context_object(tokens: list[Token], start: int, tags: list[str]) -> ObjectReading | None:
+    """A nominal object read as context ("believe a liar even when ...", "believe the old man next door
+    completely"). None when the words are not one: not nominal ("believe so", "believe in"), the subject of a
+    complement clause ("believe he is lying", "believe the man in the car is lying"), of an infinitive
+    ("believed him to be honest" is supposing, not taking his word) or of a coordinated clause ("believe
+    you and he were friends"). Unsettled when a run of nouns meets a verb: "the stories people tell" is an
+    object with a relative clause, "the bus driver lied" a clause, and the tags cannot tell them apart."""
+    pronoun = lone_pronoun_object(tokens, start, tags)
+    end = noun_phrase_end(tokens, start, tags)
+    if end == start:
+        return None
     if not pronoun and not noun_argument(phrase_token(tokens[start:end]), tokens, tags, unanchored_object=True):
         return None
-    if end + 1 < len(tokens) and tokens[end].norm == "to" and tags[end + 1] == "VB":
+    following = tokens[end].norm if end < len(tokens) else ""
+    if following == "to" and end + 1 < len(tokens) and tags[end + 1] == "VB":
         return None
-    if pronoun and tokens[start].norm in {"you", "it"} and end + 1 < len(tokens) and tokens[end].norm in {"and", "or"} \
-            and tokens[end + 1].norm in {"i", "he", "she", "we", "they"}:
-        return None   # "believe you and he were friends": the pronoun opens a coordinated clause subject
-    return end
+    if pronoun and tokens[start].norm in {"you", "it"} and following in {"and", "or"} \
+            and end + 1 < len(tokens) and tokens[end + 1].norm in {"i", "he", "she", "we", "they"}:
+        return None
+    verb = _clause_verb_after(tokens, end, tags)
+    if verb is None:
+        return ObjectReading(end, True)
+    run = tags[start:end]
+    nouns = next((i for i, tag in enumerate(reversed(run)) if tag not in pos.NOUNS | pos.NAMES), len(run))
+    if verb != end or nouns < 2 or all(tag in pos.NAMES for tag in run[-nouns:]):
+        return None   # a clause, its subject a name ("John Smith lied") or plainly ended
+    # after a preposition ("think highly of the stories people tell") the phrase cannot be a clause's subject
+    return ObjectReading(end, start > 0 and tags[start - 1] in {"IN", "TO"})
 
 
 def positive_context(tokens: list[Token], start: int, end: int) -> bool:

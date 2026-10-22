@@ -11,7 +11,8 @@ Pattern syntax (used in concept `triggers` and entry `replaces`):
                        sense, so "great !war" skips both "great war" and "great civil war")
     ?=home|there       the next word must be one of these (zero-width context; ?<= checks the word before)
     believe ?={np}     a nominal object must follow, ending the pattern (zero-width context: it establishes
-                       the reading without joining the replaced span, so its own words keep their meaning)
+                       the reading without joining the replaced span, so its own words keep their meaning;
+                       detection reads the object's extent from the sentence's tags)
     snowed under@4     trailing @N sets the intensity this paraphrase expresses
 
 In `np` patterns the last word also matches its plural; in `vp` patterns the
@@ -77,7 +78,8 @@ class Match:
     inflection: str = ""          # verb form name, or "plural" / "singular" / "written_plural" (a trigger
                                   # written as a plural, "wild horses": its number comes from the entry)
     context: tuple[int, int] | None = None         # the tokens the reading rests on, assertions included
-    object_context: tuple[int, int] | None = None  # a ?={np} object, read but not consumed
+                                                   # (a ?={np} object's first token: detection reads the rest)
+    object_start: int | None = None                # where a ?={np} object starts; read, not consumed
 
 
 def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_intensity: int,
@@ -215,10 +217,10 @@ def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = T
     captures: dict[str, Token] = {}
     inflection = ""
     context = [pos, pos]
-    object_context: tuple[int, int] | None = None
+    object_start: int | None = None
 
     def rec(ei: int, ti: int) -> int | None:
-        nonlocal inflection, object_context
+        nonlocal inflection, object_start
         if ei == len(pattern.elements):
             return ti
         el = pattern.elements[ei]
@@ -232,22 +234,22 @@ def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = T
                 context[0] = saved
             return end
         if el.kind == 'ahead':
-            if el.slot == 'np':
-                lengths = np_lengths(tokens, ti, last=True)
-            elif ti < len(tokens) and tokens[ti].norm in el.values:
-                lengths = iter((1,))
-            else:
+            if ti >= len(tokens):
                 return None
-            for n in lengths:
-                saved = context[1], object_context
-                context[1] = max(context[1], ti + n)
-                if el.slot:
-                    object_context = (ti, ti + n)
-                end = rec(ei + 1, ti)
-                if end is not None:
-                    return end
-                context[1], object_context = saved
-            return None
+            if el.slot == 'np':
+                # the object's extent needs the sentence's tags: detection reads it (context.context_object_end)
+                if not tokens[ti].is_word or tokens[ti].norm in NP_STOP:
+                    return None
+                object_start = ti
+            elif tokens[ti].norm not in el.values:
+                return None
+            saved = context[1]
+            context[1] = max(saved, ti + 1)
+            end = rec(ei + 1, ti)
+            if end is None:
+                context[1] = saved
+                object_start = None
+            return end
         if el.kind == "not":
             for ahead in tokens[ti:ti + el.reach]:
                 if ahead.norm in el.values:   # a word, or a mark the pattern names ("of course !,")
@@ -292,7 +294,7 @@ def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = T
             and tokens[pos].norm in morph.PRONOUNS:
         captures["subj"] = tokens[pos]
     return Match(pattern, pos, end, dict(captures), inflection,
-                 (min(context[0], pos), max(context[1], end)), object_context)
+                 (min(context[0], pos), max(context[1], end)), object_start)
 
 
 class PatternIndex:

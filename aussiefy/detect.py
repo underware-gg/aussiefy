@@ -19,7 +19,7 @@ from dataclasses import dataclass, field, replace
 from typing import Callable, NamedTuple
 
 from . import morph, pos
-from .context import (RESULT_DEGREE, TIME_ADVERBS, argument_complete, claimed_result_degree, context_object_end,
+from .context import (RESULT_DEGREE, TIME_ADVERBS, argument_complete, claimed_result_degree, context_object,
                       following_context, noun_argument, verb_subject)
 from .embed import Embedder, NgramEmbedder, similarity_scorer
 from .matcher import match_at, SLOT_MATCHERS, Match, Pattern, PatternIndex, is_name
@@ -100,8 +100,9 @@ class Detection:
 
 
 SPEECH_SENSE = {"SCREAM", "CRY"}
+UNRESOLVED = "UNRESOLVED_SENSE"   # context leaves the sense open: the words stay as written
 # concept ids the grammar rules here name; the loader checks they exist
-CODE_CONCEPTS = SPEECH_SENSE | {"VERY"}
+CODE_CONCEPTS = SPEECH_SENSE | {"VERY", UNRESOLVED}
 
 
 def _speech_tag(tokens: list[Token], start: int, end: int) -> bool:
@@ -363,11 +364,13 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
     det.mapping_effects = dict(p.mapping_effects)
     det.degree_concepts = frozenset(p.semantic_degree) if degree_concepts is None else degree_concepts
     det.tense = narrative_tense(tokens, m.start, m.end)
-    if m.object_context is not None:
-        object_end = context_object_end(tokens, *m.object_context, tags)
-        if object_end is None:
+    if m.object_start is not None:
+        reading = context_object(tokens, m.object_start, tags)
+        if reading is None:
             return None
-        det.context = (m.context[0], max(m.end, object_end))
+        det.context = (m.context[0], max(m.end, reading.end))
+        if not reading.settled:
+            det.concepts = (UNRESOLVED,)   # hold the words without choosing between the readings
     elif m.context != (m.start, m.end):
         det.context = m.context
     det.result_degree = claimed_result_degree(tokens, m.start, m.end, det.evidence_extent[1])

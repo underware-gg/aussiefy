@@ -10,7 +10,9 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
   words now compete by that evidence instead of pooling incompatible senses. “Believe a liar” no longer
   becomes “reckon” but still allows “a bullshitter”; “thought so much of” is valuing, not reckoning; and
   “fantastic terrors” is no longer praised as “ripper”. Genuine belief, praise and the physical heart are
-  unchanged. Explain mode lists superseded readings. A replacement can no longer drop a claimed
+  unchanged. “Thinks too much of himself” can become “thinks the sun shines out of his own arse”, and
+  `heart` as spirit or courage (“take heart”, “showed real heart”) is no longer “ticker”. Explain mode
+  lists superseded readings. A replacement can no longer drop a claimed
   `so`/`too`/`such` before its result complement (“too hot to sleep”, “such a fuss that …”).
 
 - Apply Australian-use readings to reviewed subject tags, with individual reasons and recorded authority;

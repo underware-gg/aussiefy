@@ -231,11 +231,15 @@ its existin' plural\-only referent meanin', and omitted number metadata remains 
 - `?<=radio|car antenna` requires a precedin' token without consuming it: replace the antenna head while
   retaining its wireless/car qualifier. Assertion alternatives each name one token. Fair dinkum, following assertions
   require a precedin' consuming element; matchin' still enforces both assertions in similarity mode
-- `?={np}` requires a following nominal object without consuming it. The same object checks apply, trailin'
-  adverbs stay outside it \(“believe a liar even when …”\), and clause complements \(“believe he is lying”\) do
-  not qualify, nor does the subject of an infinitive \(“believed him to be honest”\). Mind ya, it establishes a readin' of the words before it while the object keeps its own readings:
-  `believe ?={np}` reads “believe a liar” as acceptin' testimony, and `a liar` can still become
-  `a bullshitter`. It must end the pattern
+- `?={np}` requires a following nominal object without consuming it, and must end the pattern. The object's
+  extent is read from the sentence's part-of-speech tags rather than a word count: determiners, then
+  modifiers and nouns (“the old man next door”, “the man's story”). Trailing adverbs stay outside it
+  (“believe a liar even when …”). The same object checks apply, so clause complements do not qualify,
+  including a subject behind its post-modifiers (“believe the man in the car is lying”). Neither does the
+  subject of an infinitive (“believed him to be honest”). Where the tags cannot settle it, the reading
+  becomes `UNRESOLVED_SENSE` and the words stay as written. It
+  establishes a reading of the words before it while the object keeps its own readings: `believe ?={np}`
+  reads “believe a liar” as accepting testimony, and `a liar` can still become `a bullshitter`
 - `^object` requires an `{np}` argument'n applies shared unanchored\-object checks, rejecting temporal
   and quantity\-only adjuncts rather than mistaking them for the object of a multiword expression
 - `^person` limits a predicate to a person; `^adj` requires a following modifier
@@ -256,7 +260,7 @@ a candidate, whatever the dials or rolls. Explain mode lists the readings each o
 
 ## Validation
 
-The loader validates whole bloody show at load time: field types'n ranges, kebab\-case ids, known concepts and
+Mind ya, the loader validates whole bloody show at load time: field types'n ranges, kebab\-case ids, known concepts and
 slots, clause forms starting with `{subj}`, `slur` forcing `omit`, no duplicate ids, and that every form
 compiles as a pattern. It collects every error, with file'n id, and raises one `SchemaError` (the CLI exits
 2\). It also warns about concepts that can never be detected'n flagged entries left active.
