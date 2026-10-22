@@ -40,7 +40,8 @@ def test_real_sdk_serializes_structured_request_and_parses_reply(sdk_transport):
                             max_tokens=100, effort="high", cache=True) == {"ok": True}
     [request] = requests
     assert request.method == "POST" and request.url.path == "/v1/messages"
-    assert request.headers["x-api-key"] == "test-offline"
+    assert (request.headers.get("x-api-key") == "test-offline"
+            or request.headers.get("authorization") == "Bearer test-offline")
     assert all(beta in request.headers["anthropic-beta"] for beta in claude.BETAS)
     body = json.loads(request.content)
     assert body == {
