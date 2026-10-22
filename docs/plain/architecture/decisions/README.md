@@ -64,11 +64,12 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 | [DD-041](../../../architecture/decisions/dd-041-subject-permissions.md) | Resolve reviewed subject permissions once, independently of profanity | Accepted |
 | [DD-042](../../../architecture/decisions/dd-042-reviewed-tag-tiers.md) | Reviewed tag tiers, exact overrides and a data-derived subject registry | Accepted |
 | [DD-043](../../../architecture/decisions/dd-043-typed-idiom-construction.md) | Bounded typed composition with honest part evidence and distinct construction identities | Accepted |
+| [DD-044](../../../architecture/decisions/dd-044-phrase-interpretation-context.md) | Phrase readings compete by evidence; context establishes a sense without joining the replaced span | Accepted |
 
 ## By topic
 
-- **Engine:** DD-001, DD-003, DD-007, DD-029, DD-030, DD-034, DD-035, DD-036, DD-037, DD-039, DD-041
-- **Dictionary and data:** DD-002, DD-010, DD-012, DD-025, DD-032, DD-037, DD-040, DD-041, DD-042
+- **Engine:** DD-001, DD-003, DD-007, DD-029, DD-030, DD-034, DD-035, DD-036, DD-037, DD-039, DD-041, DD-044
+- **Dictionary and data:** DD-002, DD-010, DD-012, DD-025, DD-032, DD-037, DD-040, DD-041, DD-042, DD-044
 - **The dials:** DD-004, DD-005, DD-041, DD-042
 - **Structure and interfaces:** DD-006, DD-008, DD-009, DD-015, DD-016, DD-019, DD-020, DD-021, DD-022, DD-023, DD-024, DD-028, DD-029, DD-038
 - **Sources, licensing and releases:** DD-011, DD-012, DD-013, DD-014

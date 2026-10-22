@@ -381,6 +381,10 @@ EXCELLENT:
           "brilliant !=young|mind|minds|scientist|scientists|student|students|mathematician|mathematicians|engineer|engineers|coder|coders|programmer|programmers|thinker|thinkers|scholar|scholars|lawyer|lawyers|doctor|doctors|writer|writers|man|men|woman|women|people|person|boy|boys|girl|girls|kid|kids|child|children|light|lights|sunshine|sunlight|sun|white|blue|red|green|yellow|colour|colours|color|colors|flash|star|stars@4",
           "superb@4", "amazing@4", "first-rate@4", "splendid@4"]
     predicate_adj: ["great", "excellent@4", "fantastic@4", "awesome@4", "amazing@4", "brilliant@4"]
+FANCIFUL:
+  description: Fanciful, imagined or uncanny, of fears, visions and apparitions (fantastic terrors); not praise.
+  triggers:
+    adj: ["fantastic ?=terror|terrors|horror|horrors|fear|fears|dread|dreads|phantom|phantoms|phantasm|phantasms|spectre|spectres|specter|specters|apparition|apparitions|ghost|ghosts|shapes|vision|visions|imaginings|fancy|fancies|delusion|delusions|nightmare|nightmares|dream|dreams|monster|monsters|beast|beasts|creature|creatures|tale|tales|legend|legends|myth|myths"]
 GOOD:
   description: Pleasing, nice (of a thing, a day, the weather).
   triggers:
@@ -1102,6 +1106,34 @@ THINK:
   triggers:
     vp: ["think !about|of|over|through|up|back|ahead|twice|again", "believe !in|me|you|it",
          "suppose !to"]   # not "figure" (a noun as often) or "expect" ("thunderstorms are expected")
+# Readings of think and believe that their complements establish. They hold the verb without claiming its
+# object, which keeps its own words and their swaps ("believe a liar": a bullshitter is still one).
+ACCEPT_AS_TRUE:
+  description: Accept a person, their word or a report as true (believe a liar, believe the story); not suppose.
+  triggers:
+    vp: ["believe ?={np}"]
+# Each keeps one polarity, so an entry cannot flip or flatten the source's regard; negation stays outside.
+REGARD_HIGHLY:
+  description: Think well of, value (think highly, a lot or so much of); an evaluation, not a supposition.
+  triggers:
+    vp: ["think so|very|that|as? much of ?={np}", "think so|very|really? highly|well|kindly of ?={np}",
+         "think a lot of ?={np}", "think a great deal of ?={np}", "think the world of ?={np}",
+         # negated, "too" is understatement: "I don't think too highly of him" thinks poorly of him, and
+         # the negation's context outranks the bare OVERVALUE reading
+         "?<=not|never think too much|highly of ?={np}"]
+REGARD_POORLY:
+  description: Think poorly of, disparage (think little or ill of); an evaluation, not a supposition.
+  triggers:
+    vp: ["think little|ill|poorly|badly of ?={np}"]
+OVERVALUE:
+  description: Value too highly (think too much of); of oneself, conceit. An evaluation, not a supposition.
+  triggers:
+    vp: ["think too much|highly of ?={np}"]
+NO_HARDSHIP:
+  description: Treat as unremarkable or no hardship (think nothing of walking ten miles); not a supposition
+    and not an amount.
+  triggers:
+    vp: ["think nothing of ?={np}"]
 AFFIRM:
   description: A plain yes.
   triggers:

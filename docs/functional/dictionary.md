@@ -231,6 +231,11 @@ its existin' plural\-only referent meanin', and omitted number metadata remains 
 - `?<=radio|car antenna` requires a precedin' token without consuming it: replace the antenna head while
   retaining its wireless/car qualifier. Assertion alternatives each name one token. Fair dinkum, following assertions
   require a precedin' consuming element; matchin' still enforces both assertions in similarity mode
+- `?={np}` requires a following nominal object without consuming it. The same object checks apply, trailin'
+  adverbs stay outside it \(“believe a liar even when …”\), and clause complements \(“believe he is lying”\) do
+  not qualify, nor does the subject of an infinitive \(“believed him to be honest”\). Mind ya, it establishes a readin' of the words before it while the object keeps its own readings:
+  `believe ?={np}` reads “believe a liar” as acceptin' testimony, and `a liar` can still become
+  `a bullshitter`. It must end the pattern
 - `^object` requires an `{np}` argument'n applies shared unanchored\-object checks, rejecting temporal
   and quantity\-only adjuncts rather than mistaking them for the object of a multiword expression
 - `^person` limits a predicate to a person; `^adj` requires a following modifier
@@ -242,16 +247,23 @@ In `vp` patterns the head verb matches any inflection, and in `np` patterns the 
 including accepted alternative spellings such as antennas/antennae. Assertions don't become head words
 or enter a lookup/trainin' phrase as translated content.
 
+A readin''s evidence is its matched words plus the context its assertions read. So anyway, readings that claim the
+same words compete by that evidence before selection, rather than poolin' their concepts: `fantastic
+?=terrors|…` (FANCIFUL\) rules out the bare `fantastic` praise readin' of “fantastic terrors”, and a longer
+expression rules out readings of the words inside it. Only readings of the same words on the same evidence
+merge. A concept without replacement entries still holds its readin', so the excluded sense never becomes
+a candidate, whatever the dials or rolls. Explain mode lists the readings each one superseded.
+
 ## Validation
 
-Mind ya, the loader validates whole bloody show at load time: field types'n ranges, kebab\-case ids, known concepts and
+The loader validates whole bloody show at load time: field types'n ranges, kebab\-case ids, known concepts and
 slots, clause forms starting with `{subj}`, `slur` forcing `omit`, no duplicate ids, and that every form
 compiles as a pattern. It collects every error, with file'n id, and raises one `SchemaError` (the CLI exits
 2\). It also warns about concepts that can never be detected'n flagged entries left active.
 `aussiefy validate` runs the same checks'n prints stats. Required concepts, profiles, phonetic, swears,
 genre, riffs'n entries files must be present; malformed YAML and missing files are collected
 with the other errors. String\-list fields require strings, `person` and `stretch` require real booleans,
-and profile garnish keys must name known placements. Mate, the guide validates its own structure'n dial keys.
+and profile garnish keys must name known placements. The guide validates its own structure'n dial keys.
 
 ## Extending it
 

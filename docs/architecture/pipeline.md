@@ -22,7 +22,12 @@ has no slang or level logic of its own.
    compares predicate spans the triggers missed against those paraphrases by similarity \(`embed.py`;
    character trigrams by default\).
    Meaning restrictions declared by each concept apply to all three matching routes before overlap
-   resolution. Shared clause readin' in `context.py` supplies complement boundaries, local auxiliary\-chain
+   resolution. Overlap resolution then keeps one readin' of each word. Mate, a readin''s evidence is its span
+   plus the context it rests on \(a `?=` neighbour or a `?={np}` object\). Wider evidence wins, and only
+   readings with the same span'n evidence merge. So “believe a liar” holds `believe` as acceptin'
+   testimony without claiming `a liar`, which keeps its own readin'. Stone the flamin' crows, a readin''s span stays the span it may
+   replace; its context is never replaced by it. A claimed `so`/`too`/`such` whose `that`/`to` complement
+   follows must keep on kickin' into any replacement. Shared clause readin' in `context.py` supplies complement boundaries, local auxiliary\-chain
    subjects'n noun\-argument shape, using the sentence's existin' POS tags.
 3. **Select** (`select.py`). Filter candidates by concept, frame compatibility, level, vulgarity,
    register, region, status and slot availability. A clause idiom needs a subject, and a person idiom needs
@@ -40,7 +45,7 @@ has no slang or level logic of its own.
    substitute and another picks the candidate.
 4. **Realise** (`realise.py`, `morph.py`). Fill slots'n fix agreement: "are you crazy" becomes "do you
    have a kangaroo loose in your top paddock", "was" becomes "had", "lost his temper" becomes "spat the
-   dummy" and "overreacting" becomes "carrying on like a pork chop". Crikey, this step also handles plurals
+   dummy" and "overreacting" becomes "carrying on like a pork chop". Bloody hell, this step also handles plurals
    ("mosquitoes" becomes "mozzies"\), a/an, capitalisation, and keeps contractions \("it's bucketing down").
 5. **Garnish** (`garnish.py`). Each sentence gets at most one item, chosen to suit it:
    - **Connectives** ("Anyway,", "Well,", "Now,"\) go on narration, to move a yarn along.
@@ -49,7 +54,7 @@ has no slang or level logic of its own.
      questions, exclamations, or "you".
    - **The pub aside** ("no matter what some drongo reckons"\) goes only after an opinion.
    - **Asides** ("What a dog's breakfast!", "Gawd help us."\) close a stanza of a chant, and rhetorical
-     follow\-ups \("Search me."\) answer the narrator's own question. Bloody hell, in a story the engine can't judge
+     follow\-ups \("Search me."\) answer the narrator's own question. Crikey, in a story the engine can't judge
      whether "What a shocker!" fits what just happened, so asides stay outta story narration.
    - **Riffs** (`aussiefy/data/riffs.yaml`): at level 5 a swapped term may bring its image along where it ends a
      clause, once per sentence'n twice per text: "Wheelie bins, overflowin', bin chickens fightin' over
@@ -65,7 +70,7 @@ has no slang or level logic of its own.
    Fair dinkum, the swear channel adds sweary openers, asides, tags, tails'n closers at the vulgarity's own rate, apart
    from the level's clean garnish \(see [the dials](../functional/dials.md#how-swearing-comes)). Repeats and
    synonym pile\-ups are held back. The step also stacks idioms on predicate slots'n applies the drawl rules
-   in `aussiefy/data/phonetic.yaml`, including the swear infixes and Australian spelling. Bugger me, what kind of sentence
+   in `aussiefy/data/phonetic.yaml`, including the swear infixes and Australian spelling. What kind of sentence
    each one is \(dialogue, a question, narration ending on a deed\) and the text's mood \(solemn, dark or light\)
    come from `context.py`.
 

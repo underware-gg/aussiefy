@@ -9,6 +9,9 @@ Pattern syntax (used in concept `triggers` and entry `replaces`):
     really?            optional word
     !war|deal          neither of the next two words may be one of these (zero-width; blocks a
                        sense, so "great !war" skips both "great war" and "great civil war")
+    ?=home|there       the next word must be one of these (zero-width context; ?<= checks the word before)
+    believe ?={np}     a nominal object must follow, ending the pattern (zero-width context: it establishes
+                       the reading without joining the replaced span, so its own words keep their meaning)
     snowed under@4     trailing @N sets the intensity this paraphrase expresses
 
 In `np` patterns the last word also matches its plural; in `vp` patterns the
@@ -73,6 +76,8 @@ class Match:
     captures: dict[str, Token] = field(default_factory=dict)
     inflection: str = ""          # verb form name, or "plural" / "singular" / "written_plural" (a trigger
                                   # written as a plural, "wild horses": its number comes from the entry)
+    context: tuple[int, int] | None = None         # the tokens the reading rests on, assertions included
+    object_context: tuple[int, int] | None = None  # a ?={np} object, read but not consumed
 
 
 def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_intensity: int,
@@ -106,6 +111,11 @@ def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_in
             body = part[3:] if behind else part[2:]
             if (not behind and not any(e.kind in {'lit', 'slot'} for e in elements)) or not body:
                 raise ValueError('a following assertion needs a preceding word; assertions need nonempty alternatives')
+            if body == '{np}':
+                if behind or idx != len(raw_parts) - 1:
+                    raise ValueError('a context {np} must end the pattern: it reads, but does not consume, the object')
+                elements.append(Element('ahead', slot='np'))
+                continue
             values = [tokenize(w) for w in body.split('|')]
             if any(len(words) != 1 for words in values):
                 raise ValueError('context assertion alternatives must each be one token')
@@ -188,24 +198,56 @@ SLOT_MATCHERS = {
 }
 
 
+def np_lengths(tokens: list[Token], ti: int, last: bool):
+    """The lengths a noun phrase starting at tokens[ti] may take; a trailing one runs to a natural boundary."""
+    for n in range(1, 6):
+        span = tokens[ti:ti + n]
+        if len(span) < n or span[-1].is_punct or span[0].norm in NP_STOP:
+            return
+        nxt = tokens[ti + n] if ti + n < len(tokens) else None
+        if last and not (nxt is None or nxt.is_punct or nxt.norm in NP_BOUNDARY):
+            continue
+        yield n
+
+
 def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = True) -> Match | None:
     """Match pattern starting at tokens[pos]; tokens is one sentence."""
     captures: dict[str, Token] = {}
     inflection = ""
+    context = [pos, pos]
+    object_context: tuple[int, int] | None = None
 
     def rec(ei: int, ti: int) -> int | None:
-        nonlocal inflection
+        nonlocal inflection, object_context
         if ei == len(pattern.elements):
             return ti
         el = pattern.elements[ei]
         if el.kind == 'behind':
             if ti == 0 or tokens[ti-1].norm not in el.values:
                 return None
-            return rec(ei + 1, ti)
+            saved = context[0]
+            context[0] = min(saved, ti - 1)
+            end = rec(ei + 1, ti)
+            if end is None:
+                context[0] = saved
+            return end
         if el.kind == 'ahead':
-            if ti >= len(tokens) or tokens[ti].norm not in el.values:
+            if el.slot == 'np':
+                lengths = np_lengths(tokens, ti, last=True)
+            elif ti < len(tokens) and tokens[ti].norm in el.values:
+                lengths = iter((1,))
+            else:
                 return None
-            return rec(ei + 1, ti)
+            for n in lengths:
+                saved = context[1], object_context
+                context[1] = max(context[1], ti + n)
+                if el.slot:
+                    object_context = (ti, ti + n)
+                end = rec(ei + 1, ti)
+                if end is not None:
+                    return end
+                context[1], object_context = saved
+            return None
         if el.kind == "not":
             for ahead in tokens[ti:ti + el.reach]:
                 if ahead.norm in el.values:   # a word, or a mark the pattern names ("of course !,")
@@ -216,15 +258,8 @@ def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = T
         if ti < len(tokens):
             tok = tokens[ti]
             if el.kind == "slot" and el.slot == "np":
-                last = ei == len(pattern.elements) - 1
-                for n in range(1, 6):
-                    span = tokens[ti:ti + n]
-                    if len(span) < n or span[-1].is_punct or span[0].norm in NP_STOP:
-                        break
-                    nxt = tokens[ti + n] if ti + n < len(tokens) else None
-                    if last and not (nxt is None or nxt.is_punct or nxt.norm in NP_BOUNDARY):
-                        continue  # a trailing {np} runs to a natural boundary, not one word
-                    captures["np"] = phrase_token(span)
+                for n in np_lengths(tokens, ti, last=ei == len(pattern.elements) - 1):
+                    captures["np"] = phrase_token(tokens[ti:ti + n])
                     end = rec(ei + 1, ti + n)
                     if end is not None:
                         return end
@@ -256,7 +291,8 @@ def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = T
     if pattern.frame == "clause" and "subj" not in captures and pattern.consuming[0].kind == "lit" \
             and tokens[pos].norm in morph.PRONOUNS:
         captures["subj"] = tokens[pos]
-    return Match(pattern, pos, end, dict(captures), inflection)
+    return Match(pattern, pos, end, dict(captures), inflection,
+                 (min(context[0], pos), max(context[1], end)), object_context)
 
 
 class PatternIndex:

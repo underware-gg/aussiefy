@@ -278,10 +278,11 @@ class Dictionary:
 
     @cached_property
     def fallback_patterns(self) -> list[Pattern]:
-        """Slot-free predicate-adjective triggers: what the similarity fallback compares spans against."""
+        """Slot-free predicate-adjective triggers: what the similarity fallback compares spans against. A context
+        object needs the exact reader, so its readings stay with exact matching."""
         effectful = {cid for p in self.patterns for cid in p.mapping_effects}
         return [p for p in self.patterns if p.frame == "predicate_adj" and not p.slots
-                and not effectful.intersection(p.concepts) and not any(e.optional for e in p.elements)]
+                and not effectful.intersection(p.concepts) and not any(e.optional or e.slot for e in p.elements)]
 
     @cached_property
     def tag_forms(self) -> frozenset[str]:

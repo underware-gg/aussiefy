@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from . import morph
 from .morph import is_past
 from . import pos
+from .matcher import phrase_token
 from .text import INLINE_CHAR, QUOTES, Token
 
 # not "must" ("nobody must know it") or "fair" (also the noun: "going to the fair")
@@ -55,6 +56,37 @@ def following_context(tokens: list[Token], end: int, complete: bool = True) -> F
         if token.is_word:
             return FollowingContext(token.norm)
     return FollowingContext(known=complete)
+
+
+RESULT_DEGREE = frozenset({"so", "too", "such"})   # degree words that license a "that"/"to" result complement
+
+
+def claimed_result_degree(tokens: list[Token], start: int, end: int, reading_end: int) -> str:
+    """A so/too/such inside the span whose result complement comes straight after the reading ("thought so
+    much of new clothes that he spent ...", "too hot to sleep"): a replacement must keep it, or the
+    complement dangles. A later "to" or "that" ("too hot and we went to the beach", "thank you so much,
+    that's ...") is not its complement."""
+    degree = next((t.norm for t in tokens[start:end] if t.norm in RESULT_DEGREE), "")
+    return degree if degree and reading_end < len(tokens) and tokens[reading_end].norm in {"that", "to"} else ""
+
+
+def context_object_end(tokens: list[Token], start: int, end: int, tags: list[str]) -> int | None:
+    """Where a nominal object read as context ends, short of trailing adverbs ("believe a liar even when ...");
+    None when the words are not a nominal object ("believe so", "believe he is lying", "believe in"), are
+    the subject of an infinitive ("believed him to be honest" is supposing, not taking his word) or open a
+    coordinated clause subject."""
+    while end - start > 1 and tags[end - 1] in {"RB", "RBR", "RBS"}:
+        end -= 1
+    # a lone object pronoun is an object whatever the tagger says ("her" before "that" reads as possessive)
+    pronoun = end - start == 1 and tokens[start].norm in morph.OBJECT_PRONOUNS
+    if not pronoun and not noun_argument(phrase_token(tokens[start:end]), tokens, tags, unanchored_object=True):
+        return None
+    if end + 1 < len(tokens) and tokens[end].norm == "to" and tags[end + 1] == "VB":
+        return None
+    if pronoun and tokens[start].norm in {"you", "it"} and end + 1 < len(tokens) and tokens[end].norm in {"and", "or"} \
+            and tokens[end + 1].norm in {"i", "he", "she", "we", "they"}:
+        return None   # "believe you and he were friends": the pronoun opens a coordinated clause subject
+    return end
 
 
 def positive_context(tokens: list[Token], start: int, end: int) -> bool:

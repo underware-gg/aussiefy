@@ -127,6 +127,8 @@ def binding_problem(form: str, det: Detection) -> str | None:
 def form_problem(form: str, det: Detection) -> str | None:
     if det.result_clause and not morph.single_word_form(form):
         return "dependent result complement requires a single-word predicate"
+    if det.result_degree and det.result_degree not in form.lower().split():
+        return f"would discard '{det.result_degree}', which its result complement depends on"
     reason = binding_problem(form, det)
     if reason:
         return reason

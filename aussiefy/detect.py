@@ -19,7 +19,8 @@ from dataclasses import dataclass, field, replace
 from typing import Callable, NamedTuple
 
 from . import morph, pos
-from .context import TIME_ADVERBS, argument_complete, following_context, noun_argument, verb_subject
+from .context import (RESULT_DEGREE, TIME_ADVERBS, argument_complete, claimed_result_degree, context_object_end,
+                      following_context, noun_argument, verb_subject)
 from .embed import Embedder, NgramEmbedder, similarity_scorer
 from .matcher import match_at, SLOT_MATCHERS, Match, Pattern, PatternIndex, is_name
 from .schema import Concept
@@ -74,6 +75,7 @@ class Detection:
     subject_noun: Token | None = None  # a predicate's subject when it's a plain noun ("the tank" may be drained)
     person_only: bool = False          # the trigger is said only of people ("full", "drained": not of a tank)
     result_clause: bool = False      # dependent result: "so X that ...", "X enough to ..."
+    result_degree: str = ""          # a so/too/such the span claims, whose "that"/"to" complement follows it
     tense: str = "present"           # narrative tense of the sentence, for slots with no verb of their own
     noun_use: str = "reference"
     coordinated: bool = False        # shares its verb with another predicate ("tired and hungry")
@@ -82,6 +84,15 @@ class Detection:
     degree_concepts: frozenset[str] = frozenset()
     degree_conflicts: frozenset[str] = frozenset()
     degree_qualifier: tuple[str, ...] = ()
+    context: tuple[int, int] | None = None   # the matched tokens plus what its assertions read (a ?={np} object)
+    supersedes: tuple[str, ...] = ()           # concepts of overlapping readings this one outranked
+
+    @property
+    def evidence_extent(self) -> tuple[int, int]:
+        """The tokens the reading rests on: its span, which frame checks may widen, and its context."""
+        if self.context is None:
+            return self.start, self.end
+        return min(self.start, self.context[0]), max(self.end, self.context[1])
 
     def describe_captures(self) -> dict[str, str]:
         return {k: v.text for k, v in self.captures.items()}
@@ -352,6 +363,14 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
     det.mapping_effects = dict(p.mapping_effects)
     det.degree_concepts = frozenset(p.semantic_degree) if degree_concepts is None else degree_concepts
     det.tense = narrative_tense(tokens, m.start, m.end)
+    if m.object_context is not None:
+        object_end = context_object_end(tokens, *m.object_context, tags)
+        if object_end is None:
+            return None
+        det.context = (m.context[0], max(m.end, object_end))
+    elif m.context != (m.start, m.end):
+        det.context = m.context
+    det.result_degree = claimed_result_degree(tokens, m.start, m.end, det.evidence_extent[1])
     first, last = tokens[m.start], tokens[m.end - 1]
     if (m.start > 0 and tokens[m.start - 1].text == "-" and tokens[m.start - 1].end == first.start) or \
             (m.end < len(tokens) and tokens[m.end].text == "-" and tokens[m.end].start == last.end):
@@ -409,7 +428,7 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
             det.start = m.start
         det.intensity = max(1, min(5, det.intensity + boost))
         degree = {t.norm for t in tokens[absorbed:m.start]}
-        if degree & {"so", "too", "such"}:
+        if degree & RESULT_DEGREE:
             det.result_clause = True
             det.start = m.start       # keep "so" in place: "he's so tight-arsed he never pays"
         following = following_context(tokens, m.end, complete)
@@ -696,20 +715,34 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
 
 
 def resolve_overlaps(dets: list[Detection]) -> list[Detection]:
-    """Keep the longest, most specific non-overlapping detections."""
+    """Keep one reading of each word: the best-evidenced, longest, most specific non-overlapping detections.
+
+    Evidence is a reading's span plus the context it rests on, so "believe ?={np}" (believe a liar) rules
+    out a bare "believe" without claiming "a liar", which keeps its own reading. Readings of the same span
+    merge only on the same evidence: a sense that context establishes is not pooled with one it rules out."""
     method_rank = {"entry": 0, "trigger": 1, "embedding": 2}
-    ordered = sorted(dets, key=lambda d: (-(d.end - d.start), method_rank[d.method], -d.score, d.start, d.pattern))
-    taken: set[int] = set()
+
+    def width(d: Detection) -> int:
+        start, end = d.evidence_extent
+        return end - start
+
+    ordered = sorted(dets, key=lambda d: (-width(d), -(d.end - d.start), method_rank[d.method], -d.score,
+                                          d.start, d.pattern))
+    owner: dict[int, Detection] = {}
     kept: list[Detection] = []
     for d in ordered:
-        span = set(range(d.start, d.end))
-        if span & taken:
+        span = range(d.start, d.end)
+        rivals = {id(owner[i]): owner[i] for i in span if i in owner}
+        if rivals:
+            for rival in rivals.values():
+                rival.supersedes = tuple(dict.fromkeys(rival.supersedes + d.concepts))
             continue
-        taken |= span
+        owner.update((i, d) for i in span)
         kept.append(d)
-    # Merge concept sets of identical spans so selection sees every reading.
+    # Merge concept sets of identical readings so selection sees every equally supported sense.
     for d in kept:
-        extra = [o for o in dets if o is not d and (o.start, o.end, o.frame) == (d.start, d.end, d.frame)]
+        extra = [o for o in dets if o is not d and (o.start, o.end, o.frame, o.evidence_extent)
+                 == (d.start, d.end, d.frame, d.evidence_extent)]
         for o in extra:
             d.concepts = tuple(dict.fromkeys(d.concepts + o.concepts))
             d.direct |= o.direct
@@ -723,6 +756,7 @@ def resolve_overlaps(dets: list[Detection]) -> list[Detection]:
                     d.semantic_degree[cid] = band
             d.degree_conflicts = frozenset(conflicts)
             d.degree_concepts |= o.degree_concepts
+        d.supersedes = tuple(c for c in d.supersedes if c not in d.concepts)
     mark_coordination(kept)
     return sorted(kept, key=lambda d: d.start)
 

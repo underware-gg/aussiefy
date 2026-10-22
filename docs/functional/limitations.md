@@ -19,6 +19,15 @@
   literal sense, such as `heart` inside “to your heart’s content”. This depends on reviewed vocabulary; it
   doesn't recognise arbitrary idioms. Strict Markdown translates separate prose units, so formattin'
   inserted inside an idiom can hide its full expression. Whole\-phrase formattin' retains the protection.
+- **Phrase readings come from reviewed patterns, not general understanding.** Context patterns establish a
+  few senses: believing a person or report, evaluative “think … of” \(high, low or excessive regard, or yeah, nah
+  hardship\), and fanciful `fantastic` before nouns of fear, vision'n apparition. So anyway, readings the patterns
+  can't establish fall back to the word's own triggers. Bloody hell, an object the matcher can't delimit within five
+  words \(“believe the old man next door completely”\) still reads as supposition. Where evidence is mixed,
+  the patterns prefer preservation: `fantastic dreams` and `fantastic creatures` stay plain even when
+  praise was meant. These readings have no replacement entries yet, so they hold their words unchanged. A
+  whole\-phrase replacement that captures an `{np}` argument re\-inserts it as written: inner swaps keep on kickin'
+  only where the argument is context outside the replaced span.
 - **The built-in API client has not been run against the live API.** Tagging, `--surface`, `--rewrite` and yarn mode
   are tested with fake clients. The yarn workflow itself has been exercised by agents through its research CLI
   (`research/retellings-2026-10-11/yarn_tools.py`), which shares yarn mode's brief and tools.
@@ -39,7 +48,7 @@
 - **Mechanical acceptance doesn't establish retelling quality.** The first fresh 20\-text blind comparison
   scored meaning 4.95/5 but register 2.00/5: eligible prose was too restrained. All deterministic checks
   passed. Anyway, a further writer revision under contract\-aware evaluation scored meaning 4.95/5 and register
-  4.65/5, with some high\-level prose still too light'n a minor forecast narrowin'. Crikey, the packet protocol
+  4.65/5, with some high\-level prose still too light'n a minor forecast narrowin'. Fair dinkum, the packet protocol
   and judges changed; those rounds don't establish a causal engine improvement. See
   [the findings](../../research/document-refinement-2026-10-15/FINDINGS.md) for raw results'n limits.
 - **The bundled embeddin' model can lag later dictionary corrections.** Model 1.3.0 remains bundled and

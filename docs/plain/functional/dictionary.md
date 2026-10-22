@@ -227,6 +227,11 @@ its existing plural-only referent meaning, and omitted number metadata remains `
 - `?<=radio|car antenna` requires a preceding token without consuming it: replace the antenna head while
   retaining its radio/car qualifier. Assertion alternatives each name one token. Following assertions
   require a preceding consuming element; matching still enforces both assertions in similarity mode
+- `?={np}` requires a following nominal object without consuming it. The same object checks apply, trailing
+  adverbs stay outside it (“believe a liar even when …”), and clause complements (“believe he is lying”) do
+  not qualify, nor does the subject of an infinitive (“believed him to be honest”). It establishes a reading of the words before it while the object keeps its own readings:
+  `believe ?={np}` reads “believe a liar” as accepting testimony, and `a liar` can still become
+  `a bullshitter`. It must end the pattern
 - `^object` requires an `{np}` argument and applies shared unanchored-object checks, rejecting temporal
   and quantity-only adjuncts rather than mistaking them for the object of a multiword expression
 - `^person` limits a predicate to a person; `^adj` requires a following modifier
@@ -237,6 +242,13 @@ its existing plural-only referent meaning, and omitted number metadata remains `
 In `vp` patterns the head verb matches any inflection, and in `np` patterns the head noun matches its plural,
 including accepted alternative spellings such as antennas/antennae. Assertions do not become head words
 or enter a lookup/training phrase as translated content.
+
+A reading's evidence is its matched words plus the context its assertions read. Readings that claim the
+same words compete by that evidence before selection, rather than pooling their concepts: `fantastic
+?=terrors|…` (FANCIFUL) rules out the bare `fantastic` praise reading of “fantastic terrors”, and a longer
+expression rules out readings of the words inside it. Only readings of the same words on the same evidence
+merge. A concept without replacement entries still holds its reading, so the excluded sense never becomes
+a candidate, whatever the dials or rolls. Explain mode lists the readings each one superseded.
 
 ## Validation
 

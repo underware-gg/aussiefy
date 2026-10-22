@@ -5,6 +5,14 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Establish phrase meanings before choosing replacements. A pattern's context (`?={np}` objects and `?=`
+  neighbours) can decide a word's sense without becoming part of what it replaces. Readings of the same
+  words now compete by that evidence instead of pooling incompatible senses. “Believe a liar” no longer
+  becomes “reckon” but still allows “a bullshitter”; “thought so much of” is valuing, not reckoning; and
+  “fantastic terrors” is no longer praised as “ripper”. Genuine belief, praise and the physical heart are
+  unchanged. Explain mode lists superseded readings. A replacement can no longer drop a claimed
+  `so`/`too`/`such` before its result complement (“too hot to sleep”, “such a fuss that …”).
+
 - Apply Australian-use readings to reviewed subject tags, with individual reasons and recorded authority;
   preserve separate wording caps. Tighten the documented opinion/belief sense of “reckon”. Fix possessive
   profanity masks, spaced composite recognition, composite variant preferences and stem reuse. Retain only

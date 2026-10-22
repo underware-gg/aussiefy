@@ -18,7 +18,12 @@ has no slang or level logic of its own.
    compares predicate spans the triggers missed against those paraphrases by similarity (`embed.py`;
    character trigrams by default).
    Meaning restrictions declared by each concept apply to all three matching routes before overlap
-   resolution. Shared clause reading in `context.py` supplies complement boundaries, local auxiliary-chain
+   resolution. Overlap resolution then keeps one reading of each word. A reading's evidence is its span
+   plus the context it rests on (a `?=` neighbour or a `?={np}` object). Wider evidence wins, and only
+   readings with the same span and evidence merge. So “believe a liar” holds `believe` as accepting
+   testimony without claiming `a liar`, which keeps its own reading. A reading's span stays the span it may
+   replace; its context is never replaced by it. A claimed `so`/`too`/`such` whose `that`/`to` complement
+   follows must survive into any replacement. Shared clause reading in `context.py` supplies complement boundaries, local auxiliary-chain
    subjects and noun-argument shape, using the sentence's existing POS tags.
 3. **Select** (`select.py`). Filter candidates by concept, frame compatibility, level, vulgarity,
    register, region, status and slot availability. A clause idiom needs a subject, and a person idiom needs

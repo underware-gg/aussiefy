@@ -78,6 +78,7 @@ class SubstitutionRecord:
             **({"mapping_effects": {cid: list(values) for cid, values in d.mapping_effects.items()}}
                if d.mapping_effects else {}),
             "captures": d.describe_captures(),
+            **({"supersedes": list(d.supersedes)} if d.supersedes else {}),
             "decision": self.decision,
             "p_substitute": round(self.p, 3),
             "roll": None if self.roll is None else round(self.roll, 4),

@@ -9,8 +9,16 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Establish phrase meanings before choosin' replacements. A pattern's context \(`?={np}` objects and `?=`
+  neighbours\) can decide a word's sense without becoming part of what it replaces. Readings of the same
+  words now compete by that evidence instead of poolin' incompatible senses. “Believe a liar” no longer
+  becomes “reckon” but still allows “a bullshitter”; “thought so much of” is valuin', not reckoning; and
+  “fantastic terrors” is no longer praised as “ripper”. Well, Ridgy\-didge belief, praise'n the physical ticker are
+  unchanged. Explain mode lists superseded readings. Well, bugger me, a replacement can no longer drop a claimed
+  `so`/`too`/`such` before its result complement \(“too hot to sleep”, “such a fuss that …”).
+
 - Apply Australian\-use readings to reviewed subject tags, with individual reasons'n recorded authority;
-  preserve separate wording caps. Well, bugger me, tighten the documented opinion/belief sense of “reckon”. Fix possessive
+  preserve separate wording caps. Tighten the documented opinion/belief sense of “reckon”. Fix possessive
   profanity masks, spaced composite recognition, composite variant preferences'n stem reuse. Retain only
   the converted opener in translations pendin' invention controls; preserve plain public theme names,
   construction trace IDs'n precise derived\-label validation.
@@ -132,7 +140,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   component'n source\-chain evidence limits rather than certifying every trigger or full construction.
 - Separate physical solitude from loneliness, aimless wandering from weary walkin', scolding from shouting,
   exact zero from small amounts, explicit pretence from easy work, and alcoholic drinks from technical alcohol.
-  Now, require stated swag baggage, mounted\-police context, named tree/animal identity'n slab construction;
+  Require stated swag baggage, mounted\-police context, named tree/animal identity'n slab construction;
   preserve bank\-full versus overflow events'n require explicit twenty\-four\-unit beer packages. Keep historical eye
   terminology outta explicitly protected technical, official'n instruction domains.
 - Preserve terminal object/NP arguments through shared completion checks; decline partial or coordinated

@@ -15,6 +15,15 @@
   literal sense, such as `heart` inside “to your heart’s content”. This depends on reviewed vocabulary; it
   does not recognise arbitrary idioms. Strict Markdown translates separate prose units, so formatting
   inserted inside an idiom can hide its full expression. Whole-phrase formatting retains the protection.
+- **Phrase readings come from reviewed patterns, not general understanding.** Context patterns establish a
+  few senses: believing a person or report, evaluative “think … of” (high, low or excessive regard, or no
+  hardship), and fanciful `fantastic` before nouns of fear, vision and apparition. Readings the patterns
+  cannot establish fall back to the word's own triggers. An object the matcher cannot delimit within five
+  words (“believe the old man next door completely”) still reads as supposition. Where evidence is mixed,
+  the patterns prefer preservation: `fantastic dreams` and `fantastic creatures` stay plain even when
+  praise was meant. These readings have no replacement entries yet, so they hold their words unchanged. A
+  whole-phrase replacement that captures an `{np}` argument re-inserts it as written: inner swaps survive
+  only where the argument is context outside the replaced span.
 - **The built-in API client has not been run against the live API.** Tagging, `--surface`, `--rewrite` and yarn mode
   are tested with fake clients. The yarn workflow itself has been exercised by agents through its research CLI
   (`research/retellings-2026-10-11/yarn_tools.py`), which shares yarn mode's brief and tools.
