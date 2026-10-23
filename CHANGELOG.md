@@ -15,7 +15,16 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 - Make a readin' said only of people \(`^person`) only of a person or an unknown subject. “The money
   was wasted”, “the wine was drunk” and “the glass was smashed” are no longer read as drunk, in
   translation, explanations or lookup. `drunk`, `wasted`, `hammered`, `plastered` and `smashed` now carry
-  `^person`, and the person nouns include mate, cove, boss'n other everyday people.
+  `^person`, and the person nouns include mate, cove, boss'n other everyday people. Plural nouns are
+  no longer guessed to be people from their suffix \(fees, trees, letters\), and a sentence\-opening common
+  word is no longer taken for a name \(“Time was wasted”).
+- Lookup no longer offers senses a reading ruled out: “fantastic terrors” offers no praise and “take
+  heart” no `ticker`. `--explain` text lists superseded readings. Dictionary entries cannot target
+  `UNRESOLVED_SENSE`, and malformed context objects in patterns are refused.
+- Read an imperative “think what/how” (“Only think what a use it would be”\) as imagining, not reckoning.
+  Keep “thought nothing of her” or “of the cold” as written, and read only “thought nothing of walking
+  ten miles” as no hardship. Patterns gain `?={ing}` (a gerund object\) and `^start` (opens a clause\).
+  `?={np}` no longer accepts a gerund heading its own phrase as an object.
 - Inflect a verb idiom's head once: “He tells porkies”, not “He tellings porkies”.
 
 - Establish phrase meanings before choosin' replacements. A pattern's context \(`?={np}` objects and `?=`

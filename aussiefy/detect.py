@@ -14,7 +14,6 @@ triggers missed.
 
 from __future__ import annotations
 
-import re
 from collections import Counter
 from dataclasses import dataclass, field, replace
 from typing import Callable, NamedTuple
@@ -24,7 +23,7 @@ from .context import (RESULT_DEGREE, TIME_ADVERBS, argument_complete, claimed_re
                       following_context, noun_argument, verb_subject)
 from .embed import Embedder, NgramEmbedder, similarity_scorer
 from .matcher import match_at, SLOT_MATCHERS, Match, Pattern, PatternIndex, is_name
-from .schema import Concept
+from .schema import HOLDING_CONCEPT, Concept
 from .degree import QUALIFIER_WORDS
 from .text import CLAUSE_BREAK, QUOTES, SENTENCE_END, Token
 
@@ -87,6 +86,8 @@ class Detection:
     degree_qualifier: tuple[str, ...] = ()
     context: tuple[int, int] | None = None   # the matched tokens plus what its assertions read (a ?={np} object)
     supersedes: tuple[str, ...] = ()           # concepts of overlapping readings this one outranked
+    object_start: int | None = None            # where a context object it reads starts: those words keep
+                                               # their own readings ("believe [my mate]")
 
     @property
     def evidence_extent(self) -> tuple[int, int]:
@@ -101,7 +102,7 @@ class Detection:
 
 
 SPEECH_SENSE = {"SCREAM", "CRY"}
-UNRESOLVED = "UNRESOLVED_SENSE"   # context leaves the sense open: the words stay as written
+UNRESOLVED = HOLDING_CONCEPT   # context leaves the sense open: the words stay as written
 # concept ids the grammar rules here name; the loader checks they exist
 CODE_CONCEPTS = SPEECH_SENSE | {"VERY", UNRESOLVED}
 
@@ -128,6 +129,12 @@ VERB_CHAIN = (morph.BE_FORMS | morph.HAVE_FORMS | morph.DO_FORMS
 CLAUSE_JOINS = {"and", "or", "but", "so", "then", "yet", "nor"}
 
 
+def opening_common_word(tokens: list[Token], k: int) -> bool:
+    """tokens[k] opens the sentence and the tagger's lexicon writes it in lower case: a capitalised common
+    word ("Time", "Nothing"), not a name. A name that is also a word ("Bill", "Rose") reads as the word."""
+    return all(t.is_punct for t in tokens[:k]) and tokens[k].norm in pos.lower_words()
+
+
 def _noun_before(tokens: list[Token], verb: Token) -> Token | None:
     """The word a linking verb's subject ends on, past modals and hedges ("the tank may be drained"): a plain
     lower-case word or a pronoun; None for a name or when the subject reaches back past a preposition."""
@@ -139,8 +146,8 @@ def _noun_before(tokens: list[Token], verb: Token) -> Token | None:
         return None   # "... and was comfortably asleep": the subject is the clause before's
     if tokens[k].norm in morph.PRONOUNS or tokens[k].norm in morph.PERSON_INDEFINITES:
         return tokens[k]   # past a modal the subject slot misses it: "this should be done in any case"
-    if tokens[k].text[:1].isupper():
-        return None        # a name, or a sentence's first word: can't tell
+    if tokens[k].text[:1].isupper() and not opening_common_word(tokens, k):
+        return None        # a name, or a sentence's first word the lexicon doesn't know: can't tell
     if k >= 1 and tokens[k - 1].norm in SUBJECT_STOPS:
         return None   # "everyone at university is lazy": the subject is earlier than its last word
     return tokens[k]
@@ -366,10 +373,11 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
     det.degree_concepts = frozenset(p.semantic_degree) if degree_concepts is None else degree_concepts
     det.tense = narrative_tense(tokens, m.start, m.end)
     if m.object_start is not None:
-        reading = context_object(tokens, m.object_start, tags)
+        reading = context_object(tokens, m.object_start, tags, kind=p.object_kind)
         if reading is None:
             return None
         det.context = (m.context[0], max(m.end, reading.end))
+        det.object_start = m.object_start
         if not reading.settled:
             det.concepts = (UNRESOLVED,)   # hold the words without choosing between the readings
     elif m.context != (m.start, m.end):
@@ -398,6 +406,9 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
                 det.subject_noun = subject
     if p.frame == "clause" and m.start > 0 and tokens[m.start - 1].norm in VERB_LEADERS | VERB_CHAIN:
         return None  # An outer auxiliary must not be stranded before an independently finite clause.
+    if p.clause_start and not at_clause_start(tokens, m.start if m.context is None else m.context[0]):
+        # the evidence opens the clause, look-behind included ("Only think what ...")
+        return None
     if p.clause_end:
         end = m.end
         while end < len(tokens) and tags is not None and tags[end] in {"RB", "RBR", "RBS"}:
@@ -604,14 +615,10 @@ def fallback_scorer(embedder: Embedder, patterns: list[Pattern]) -> Callable[[st
     return score
 
 
-AGENT_PLURAL = re.compile(r"(?:er|or|ist|ian|ent|ant|ee)s$")
-
-
 def person_noun(word: str, person_nouns: frozenset[str]) -> bool:
-    """A subject word that names a person: a person noun (the dictionary's), a person pronoun or indefinite
-    ("she", "everyone"), or a plural agent noun."""
-    return (word in person_nouns or word in morph.PERSON_PRONOUNS or word in morph.PERSON_INDEFINITES
-            or AGENT_PLURAL.search(word) is not None)
+    """A subject word that names a person: a person noun (the dictionary's) or a person pronoun or indefinite
+    ("she", "everyone"). No suffix guess: fees, trees, letters and documents are not people."""
+    return word in person_nouns or word in morph.PERSON_PRONOUNS or word in morph.PERSON_INDEFINITES
 
 
 def person_subject(det: Detection, person_nouns: frozenset[str]) -> bool:
@@ -621,18 +628,15 @@ def person_subject(det: Detection, person_nouns: frozenset[str]) -> bool:
         subj is None and noun is not None and person_noun(noun.norm, person_nouns))
 
 
-def said_of_a_thing(det: Detection, person_nouns: frozenset[str], tokens: list[Token], tags: list[str]) -> bool:
+def said_of_a_thing(det: Detection, person_nouns: frozenset[str], tokens: list[Token]) -> bool:
     """A reading said only of people whose subject is known and isn't one ("the money was wasted"), so the
-    words keep their other meanings. A capital opening the sentence is not a name unless the tags say so
-    ("Time was wasted")."""
+    words keep their other meanings. A capital opening the sentence may be a common word (opening_common_word)."""
     who = det.captures.get("subj")
     who = det.subject_noun if who is None else who
     if not det.person_only or who is None or person_noun(who.norm, person_nouns):
         return False
-    at = who.i - tokens[0].i
-    opening = all(t.is_punct for t in tokens[:at])
-    if opening and tags[at] not in pos.NAMES:
-        return True   # a common noun or a pronoun of a thing: "Time was wasted", "It was wasted"
+    if opening_common_word(tokens, who.i - tokens[0].i):
+        return True   # a common noun or a pronoun of a thing: "Time was wasted", "Nothing was wasted"
     return not person_subject(det, person_nouns)
 
 
@@ -751,7 +755,7 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
                     det.score = round(score, 3)
                     found.append(det)
     if person_nouns is not None:
-        found = [d for d in found if not said_of_a_thing(d, person_nouns, tokens, tags)]
+        found = [d for d in found if not said_of_a_thing(d, person_nouns, tokens)]
     return found
 
 

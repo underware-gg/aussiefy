@@ -21,7 +21,7 @@ from .dialect import parse_dialect
 from .genre import GenreConfig
 from .matcher import Pattern, PatternIndex, compile_pattern
 from .model import Dictionary, LevelProfile, PhoneticRule, RewriteThresholds, SwearProfile, swear_strength
-from .schema import (CLASSES, FRAMES, GARNISH_KEYS, RIFF_TONES, Concept, Entry, Riff, SchemaError, parse_concept,
+from .schema import (HOLDING_CONCEPT, CLASSES, FRAMES, GARNISH_KEYS, RIFF_TONES, Concept, Entry, Riff, SchemaError, parse_concept,
                      parse_entry, parse_imagery)
 from .vocabulary import Vocabulary
 from .evidence import DERIVED_FIELDS, METADATA_KEYS, assess, parse_metadata, parse_weights
@@ -305,6 +305,8 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         for c in entry.concept:
             if c not in concepts:
                 errors.append(f"{entry.id}: unknown concept {c!r} (add it to concepts.yaml)")
+            elif c == HOLDING_CONCEPT:
+                errors.append(f"{entry.id}: {c} holds words whose sense is undecided; it takes no entries")
         entries[entry.id] = entry
 
     # riffs.yaml: the images a term calls up (wheelie bin -> bin chickens fightin' over the scraps), rated for

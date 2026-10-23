@@ -1139,10 +1139,15 @@ CONCEITED:
          "think a lot of himself|herself|themselves|themself|myself|yourself|yourselves|ourselves|oneself",
          "think the world of himself|herself|themselves|themself|myself|yourself|yourselves|ourselves|oneself"]
 NO_HARDSHIP:
-  description: Treat as unremarkable or no hardship (think nothing of walking ten miles); not a supposition
-    and not an amount.
+  description: Treat doing something as unremarkable or no hardship (think nothing of walking ten miles); not
+    a supposition, not an amount and not low regard for a person.
   triggers:
-    vp: ["think nothing of ?={np}"]
+    vp: ["think nothing of ?={ing}"]
+IMAGINE:
+  description: Imagine, picture (only think what it would be; think how lucky we are); an invitation to
+    picture something, not a supposition.
+  triggers:
+    vp: ["think ?=what|how ^start", "?<=only think ?=what|how ^start"]
 AFFIRM:
   description: A plain yes.
   triggers:
@@ -1649,15 +1654,20 @@ HEART_ORGAN:
     np: ["?<=weak|healthy|failing|dodgy|damaged|enlarged|diseased|beating|pounding|racing|thumping heart !attack|attacks|disease|failure|surgery|rate|of|and|felt|sank|broke|out|set",
          "?<=my|your|his|her|its|our|their|the|a|an|this|that|whose heart !attack|attacks|disease|failure|surgery|rate|of|and|felt|sank|broke|out|set"]
 HEART_SPIRIT:
-  description: Compassion asked for, or effort and enthusiasm (have a heart, put your heart into it, her heart
-    wasn't in it); not the organ.
+  description: Compassion asked for, effort and enthusiasm, or courage (have a heart, put your heart into it,
+    her heart wasn't in it, take heart); not the organ.
   triggers:
-    vp: ["have a heart ^end", "put {poss} heart into", "put {poss} heart and soul into"]
+    vp: ["have a heart ^end", "put {poss} heart into", "put {poss} heart and soul into",
+         "take heart !medication|medications|tablets|pills|drugs|rate|surgery", "have heart ^end"]
     np: ["heart {be} not|never? really? in it", "heart's not|never? really? in it"]
 UNRESOLVED_SENSE:
-  description: Context leaves these words' sense undecided (an object, or a clause's subject?), so they stay as
-    written. The engine assigns it; it has no triggers.
-  triggers: {}
+  description: Context leaves these words' sense undecided, so they stay as written. The engine assigns it
+    where tags cannot settle an object (an object, or a clause's subject?); triggers name phrases whose sense
+    their object leaves open.
+  triggers:
+    # low regard ("thought nothing of her") or no bother ("thought nothing of the cold", "of it")
+    # believing ("think what you like") or working out ("think how to fix it"), not picturing
+    vp: ["think nothing of ?={np}", "think what you like|want|please|will", "think what|how to"]
 AS_MUCH_AS_DESIRED:
   description: As much as desired, to complete satisfaction; the fixed expression has no anatomical meaning.
   triggers:

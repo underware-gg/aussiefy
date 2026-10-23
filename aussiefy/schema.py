@@ -17,6 +17,9 @@ from .evidence import (METADATA_KEYS, REGISTERS, TermMetadata, metadata_dict, me
                        theme_rejection)
 from .text import MASK_WORD_RE, normalise_word
 
+# the reading that holds words whose sense is undecided, so they stay as written: it never takes entries
+HOLDING_CONCEPT = "UNRESOLVED_SENSE"
+
 FRAMES = (
     "predicate_adj",  # complement of a linking verb: "he's [flat out like a lizard drinking]"
     "np",             # noun phrase: "[brekkie]", "[a dog's breakfast]"

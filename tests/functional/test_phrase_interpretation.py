@@ -9,6 +9,7 @@ import yaml
 
 from aussiefy import Translator, harness, load_dictionary, translate, translate_changes
 from aussiefy.detect import detect, resolve_overlaps
+from aussiefy.explain import format_explain
 from aussiefy.matcher import compile_pattern, match_at
 from aussiefy.text import tokenize
 
@@ -55,6 +56,38 @@ def test_context_object_is_read_but_not_consumed():
                                   'think ?={np} of', 'believe ?={np} ?=even'])
 def test_context_object_placement_is_validated(text):
     with pytest.raises(ValueError):
+        compile_pattern(text, 'vp', ('TEST',), 3)
+
+
+@pytest.mark.parametrize('text', ['believe ?~{np}', 'believe ?<{np}', 'believe ={np}', 'believe ?={vp}',
+                                  'believe !{np}', 'believe !={np}', 'believe ?={ing} ^end'])
+def test_a_malformed_context_object_is_refused(text):
+    with pytest.raises(ValueError, match='context object|cannot follow'):
+        compile_pattern(text, 'vp', ('TEST',), 3)
+
+
+def test_the_holding_reading_takes_no_entries(tmp_path):
+    with pytest.raises(Exception, match='takes no entries'):
+        overlay(tmp_path, [{'id': 'test-hold', 'form': 'whatsit', 'concept': ['UNRESOLVED_SENSE'], 'frame': 'vp'}])
+
+
+@pytest.mark.parametrize('query,wrong', [('fantastic terrors', {'EXCELLENT', 'GOOD', 'GREAT_EXCLAIM'}),
+                                         ('fantastic terrors and good food', {'EXCELLENT', 'GREAT_EXCLAIM'}),
+                                         ('take heart', {'HEART_ORGAN'}),
+                                         ("to your heart's content", {'HEART_ORGAN'})])
+def test_lookup_offers_nothing_a_reading_ruled_out(query, wrong):
+    assert not wrong & {cid for result in harness.lookup(query, level=5)['results'] for cid in result['concepts']}
+
+
+@pytest.mark.parametrize('query,kept', [('believe a liar', 'a bullshitter'), ('believe my mate', 'mate'),
+                                        ('believe the old man', 'old fella')])
+def test_lookup_still_offers_the_context_objects_own_swaps(query, kept):
+    assert kept in {result['form'] for result in harness.lookup(query, level=5)['results']}
+
+
+@pytest.mark.parametrize('text', ['think nothing of ?={ing} again', 'think ?<={ing}'])
+def test_a_gerund_object_must_end_the_pattern_too(text):
+    with pytest.raises(ValueError, match='must end the pattern'):
         compile_pattern(text, 'vp', ('TEST',), 3)
 
 
@@ -113,6 +146,7 @@ def test_explanation_reports_the_superseded_reading(translator):
     explained = next(r for r in result.to_dict()['explain'] if r['concepts'] == ['ACCEPT_AS_TRUE'])
     assert explained['supersedes'] == ['THINK']
     assert explained['decision'] == 'kept original: no eligible entry'
+    assert 'concept ACCEPT_AS_TRUE' in format_explain(result) and 'supersedes THINK' in format_explain(result)
 
 
 # --- the agreed examples ----------------------------------------------------------------------------------
@@ -346,3 +380,57 @@ def test_a_relative_clause_complement_the_tags_cannot_settle_stays_as_written(so
     found = concepts(source, translator.dictionary)
     assert 'UNRESOLVED_SENSE' in found and 'ACCEPT_AS_TRUE' not in found
     assert all(text.startswith('I believe') for text in outputs(translator, source))
+
+
+# --- imagining, and what "think nothing of" leaves open ------------------------------------------------------
+
+@pytest.mark.parametrize('source', ['Only think what a use it would be to our kingdom!',
+                                    'Think what we could do with the money.', 'Just think how lucky we are.'])
+def test_an_invitation_to_picture_is_not_reckoning(source, translator):
+    assert 'IMAGINE' in concepts(source, translator.dictionary)
+    assert not any('reckon' in text.lower() for text in outputs(translator, source))
+
+
+@pytest.mark.parametrize('source,kept', [('I think what he did was wrong.', 'reckon what he did'),
+                                         ('They only think what they are told.', 'only reckon what')])
+def test_a_subject_keeps_think_what_a_supposition(source, kept, translator):
+    assert all(kept in text for text in outputs(translator, source))
+
+
+@pytest.mark.parametrize('source', ["Think what you like, I'm off.", 'Think how to fix it.', 'Think what to do next.',
+                                    'Think what you will.'])
+def test_believing_or_working_out_is_not_picturing(source, translator):
+    assert 'IMAGINE' not in concepts(source, translator.dictionary)
+    assert all(text.startswith('Think') for text in outputs(translator, source))
+
+
+@pytest.mark.parametrize('source', ['He thought nothing of her.', 'She thinks nothing of it.',
+                                    'He thought nothing of the cold.'])
+def test_think_nothing_of_a_nominal_is_left_open(source, tmp_path):
+    """Low regard ("of her") or no bother ("of the cold"): only a gerund settles it as no hardship."""
+    tr = overlay(tmp_path, [{'id': 'test-no-trouble', 'form': 'have no trouble with', 'concept': ['NO_HARDSHIP'],
+                             'frame': 'vp'}])
+    found = concepts(source, tr.dictionary)
+    assert 'UNRESOLVED_SENSE' in found and 'NO_HARDSHIP' not in found
+    assert not any('trouble' in text for text in outputs(tr, source))
+
+
+@pytest.mark.parametrize('source', ['He thought nothing of walking ten miles.',
+                                    'He thought nothing of driving all night.',
+                                    'He thought nothing of walking to the shops every day.'])
+def test_think_nothing_of_doing_is_no_hardship(source, dictionary):
+    assert 'NO_HARDSHIP' in concepts(source, dictionary)
+    assert 'UNRESOLVED_SENSE' not in concepts(source, dictionary)
+
+
+@pytest.mark.parametrize('source,sense', [('She thinks a lot of working mums.', 'REGARD_HIGHLY'),
+                                          ('She thinks highly of working mothers.', 'REGARD_HIGHLY'),
+                                          ('You cannot believe running commentary.', 'ACCEPT_AS_TRUE')])
+def test_a_participle_modifying_a_noun_is_still_a_nominal_object(source, sense, translator):
+    assert sense in concepts(source, translator.dictionary)
+    assert not any('reckon' in text for text in outputs(translator, source))
+
+
+def test_heart_medication_is_not_courage(dictionary):
+    assert 'HEART_SPIRIT' not in concepts('Take heart medication daily.', dictionary)
+    assert 'HEART_SPIRIT' in concepts('Take heart, it will pass.', dictionary)

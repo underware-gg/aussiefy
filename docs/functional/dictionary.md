@@ -239,11 +239,18 @@ its existin' plural\-only referent meanin', and omitted number metadata remains 
   subject of an infinitive (“believed him to be honest”). Where the tags cannot settle it, the reading
   becomes `UNRESOLVED_SENSE` and the words stay as written. It
   establishes a reading of the words before it while the object keeps its own readings: `believe ?={np}`
-  reads “believe a liar” as accepting testimony, and `a liar` can still become `a bullshitter`
+  reads “believe a liar” as accepting testimony, and `a liar` can still become `a bullshitter`. A gerund
+  heading its own phrase (“walking ten miles”) is not a nominal object; a participle modifying a noun
+  (“working mums”) still is
+- `?={ing}` requires a following gerund in the same way \(`think nothing of ?={ing}`: “thought nothing of
+  walking ten miles”\); a gerund before a bare noun \(“eating apples”\) leaves the readin' unresolved
 - `^object` requires an `{np}` argument'n applies shared unanchored\-object checks, rejecting temporal
   and quantity\-only adjuncts rather than mistaking them for the object of a multiword expression
 - `^person` limits a predicate to a person: where its subject is known'n isn't one \(“the money was
   wasted”\), the readin' isn't made, so the words keep their other senses; `^adj` requires a following modifier
+- `^start` requires the match, with any look\-behind, to open a clause after any opener such as “just” or
+  “and”, as an imperative does \(`think ?=what|how ^start`: “Think what we could do”, not “I think what he
+  did”; `?<=only think ?=what|how ^start`: “Only think what …”, not “They only think what they are told”)
 - `^end` on a verb phrase or clause requires a clause boundary after optional adverbial tails, preservin' complements
   such as the habit in “quit smoking”; it isn't supported on other frames
 - a trailin' `@N` for intensity

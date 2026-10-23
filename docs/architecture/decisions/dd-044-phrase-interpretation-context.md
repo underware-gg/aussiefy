@@ -28,7 +28,11 @@ and may replace) from its evidence (the span plus the context it rests on).
   validates the object with the unanchored-object checks. Trailing adverbs stay outside the object. A
   phrase that is the subject of a clause's verb, past its prepositional, adverbial and relative
   post-modifiers, is rejected. So are non-nominal complements, the subject of an infinitive and a pronoun
-  opening a coordinated subject. The similarity fallback does not use such patterns.
+  opening a coordinated subject. A gerund heading its own phrase (“walking ten miles”) is not a nominal
+  object, though a participle modifying a noun (“working mums”) is; `?={ing}` reads a gerund instead, and
+  leaves one before a bare noun (“eating apples”) unresolved. `^start` requires a match's evidence to open a
+  clause, which tells an imperative (“Think what we could do”) from a subject's supposition (“I think what
+  he did …”, “They only think what they are told”). The similarity fallback does not use such patterns.
 - Where the tags cannot settle the question, the uncertainty is explicit. A run of nouns met by a verb
   could be an object with a relative clause (“the stories people tell”) or a clause (“the bus driver
   lied”). The reading becomes `UNRESOLVED_SENSE`, which holds the words and supersedes the rival senses
@@ -41,12 +45,20 @@ and may replace) from its evidence (the span plus the context it rests on).
   “who said the man was lying”): telling them apart needs each verb's own grammar, which the tags do not carry.
 - A reading said only of people (`^person`) is not made when its subject is known and isn't known to be a
   person (“the money was wasted”, “the wine was drunk”). The words keep their other senses, and lookup
-  treats the sense as ruled out rather than unestablished. People are recognised as before: the
-  dictionary's person nouns (`grammar.yaml`, extended with mate, bloke, boss and other everyday people),
-  person pronouns, names and plural agent nouns. The rule is only as good as that recognition: a person
-  noun missing from the list keeps the words as written, a plural thing ending in an agent suffix
-  (“the computers were smashed”) still reads as people, and a sentence-opening common noun the tagger takes
-  for a name (“Time was wasted”) does too. Explain mode does not list a reading ruled out this way.
+  treats the sense as ruled out rather than unestablished. People are the dictionary's person nouns
+  (`grammar.yaml`, extended with mate, bloke, boss and other everyday people), person pronouns and
+  indefinites, and names. There is no suffix guess, which read fees, trees and letters as people. A
+  capital opening the sentence is a common word when the tagger's lexicon writes it in lower case (“Time
+  was wasted”, “Nothing was wasted”). The rule is only as good as that recognition: a person noun missing
+  from the list keeps the words as written, a name that is also a word reads as the word (“Bill was
+  drunk” stays as written), and an opening common noun outside the lexicon still reads as a name (“Wine
+  was drunk”). Explain mode does not list a reading ruled out this way.
+- Lookup follows the same readings. A superseded sense is ruled out, and so is any other sense of words a
+  reading holds. A reading's assertion words count as part of what it explains, so “fantastic terrors” and
+  “take heart” offer no praise or `ticker`. A context object it reads does not: its words keep their own
+  senses, so “believe a liar” and “believe my mate” still offer the object's own swaps.
+- `UNRESOLVED_SENSE` takes no dictionary entries; the loader refuses them, so held words cannot be replaced.
+  A malformed or unknown context object (`?~{np}`, `?={vp}`) is refused rather than read as a word.
 - Overlap resolution ranks readings by evidence width, then span length and the existing tie-breaks.
   Spans still decide which words a reading holds, so a reading's context remains available to the
   context's own readings. Identical spans merge only on identical evidence; wider evidence supersedes
@@ -55,13 +67,17 @@ and may replace) from its evidence (the span plus the context it rests on).
   missing candidates, dials nor substitution rolls can restore an excluded sense.
 - A `so`/`too`/`such` inside a claimed span, with its `that`/`to` complement immediately after the reading,
   must appear in any replacement form. Negation, tense and objects outside the span keep the existing controls.
-- Linguistic knowledge stays in data. `ACCEPT_AS_TRUE`, `FANCIFUL` and the evaluative “think … of”
-  concepts are entryless concepts with context triggers. The evaluative concepts are `REGARD_HIGHLY`,
+- Linguistic knowledge stays in data. `ACCEPT_AS_TRUE`, `FANCIFUL`, `IMAGINE` and the evaluative “think … of”
+  concepts are entryless concepts with context triggers. `UNRESOLVED_SENSE` can also carry triggers, for
+  phrases whose sense their object leaves open: “thought nothing of her” (low regard) and “thought nothing of
+  the cold” (no bother) stay as written, while `NO_HARDSHIP` takes only a gerund. “Think what you like”
+  and “think how to” are not invitations to picture something, and stay as written too. The evaluative concepts are `REGARD_HIGHLY`,
   `REGARD_POORLY`, `OVERVALUE`, `CONCEITED` and `NO_HARDSHIP`. Each keeps one polarity, so an entry
   cannot flip or flatten the source's regard; negated forms read as regard, never as conceit or
   overvaluing. CONCEITED shares Rob's sun-shines-out-of-arse entry through a `{poss} own arse` variant.
   `HEART_ORGAN` requires a determiner or possessive, so bare spirit or courage (`take heart`, `showed
-  real heart`) is never `ticker`. No slang ID, sentence or reference text enters the engine.
+  real heart`) is never `ticker`; `HEART_SPIRIT` holds compassion, effort and courage (`take heart`,
+  `lose heart`). No slang ID, sentence or reference text enters the engine.
 
 ## Consequences
 

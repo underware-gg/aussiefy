@@ -180,7 +180,8 @@ def _readings(source, dictionary):
 
 
 @pytest.mark.parametrize('source', ['Much of the time is wasted.', 'It was wasted.', 'The money was wasted.',
-                                    'Money was wasted.', '"Money was wasted," he said.',
+                                    'Money was wasted.', '"Money was wasted," he said.', 'Time was wasted.',
+                                    'Nothing was wasted.', 'The fees were wasted.', 'The trees were smashed.',
                                     'The wine was drunk.', 'The glass was smashed.', 'The tank is full.'])
 def test_a_person_only_sense_is_not_read_of_a_thing(source, dictionary):
     """Drunk (or full) is said only of people: of time, money or a glass the word keeps its other meanings,
@@ -191,7 +192,8 @@ def test_a_person_only_sense_is_not_read_of_a_thing(source, dictionary):
 
 @pytest.mark.parametrize('source', ['I was wasted last night.', 'They were wasted.', 'We got smashed.',
                                     'He was drunk.', 'The man was plastered.', 'My mate was drunk.',
-                                    'The boss was wasted.', 'John was hammered.'])
+                                    'The boss was wasted.', 'John was hammered.', 'The students were drunk.',
+                                    'The tourists were plastered.'])
 def test_a_person_only_sense_still_reads_of_a_person(source, dictionary):
     assert 'DRUNK' in {cid for d in _readings(source, dictionary) for cid in d.concepts}
 

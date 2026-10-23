@@ -30,6 +30,9 @@ from . import morph
 from .text import COMMON_STARTERS, Token, tokenize
 
 INTENSITY_RE = re.compile(r"@([1-5])\s*$")
+# objects a pattern reads without consuming: a nominal ("believe ?={np}") or a gerund
+# ("think nothing of ?={ing}": of walking ten miles)
+CONTEXT_OBJECTS = frozenset({"{np}", "{ing}"})
 
 
 @dataclass(frozen=True)
@@ -55,6 +58,7 @@ class Pattern:
     before_modifier: bool = False  # "^adj": the next word must be an adjective or adverb ("really cold", not
                                    # "really think" or "really it was")
     clause_end: bool = False      # "^end": no following complement; adverbial tails may precede the boundary
+    clause_start: bool = False    # "^start": the match opens a clause, as an imperative does ("think what ...")
     guard: bool = False           # a concept without replacement entries only protects the matched span
     semantic_degree: dict[str, str] = field(default_factory=dict)
     mapping_effects: dict[str, tuple[str, ...]] = field(default_factory=dict)
@@ -63,6 +67,12 @@ class Pattern:
     @cached_property
     def consuming(self) -> tuple[Element, ...]:
         return tuple(e for e in self.elements if e.kind in {'lit', 'slot'})
+
+    @property
+    def object_kind(self) -> str:
+        """The kind of context object the pattern reads ("np", "ing"), which always ends it; "" for none."""
+        last = self.elements[-1]
+        return last.slot if last.kind == 'ahead' else ""
 
     @property
     def slots(self) -> set[str]:
@@ -78,8 +88,8 @@ class Match:
     inflection: str = ""          # verb form name, or "plural" / "singular" / "written_plural" (a trigger
                                   # written as a plural, "wild horses": its number comes from the entry)
     context: tuple[int, int] | None = None         # the tokens the reading rests on, assertions included
-                                                   # (a ?={np} object's first token: detection reads the rest)
-    object_start: int | None = None                # where a ?={np} object starts; read, not consumed
+                                                   # (a context object's first token: detection reads the rest)
+    object_start: int | None = None                # where a ?={np} or ?={ing} object starts; read, not consumed
 
 
 def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_intensity: int,
@@ -90,14 +100,21 @@ def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_in
         intensity = int(m.group(1))
         text = text[: m.start()].rstrip()
     directives = {part for part in text.split() if part.startswith("^")}
-    if directives - {"^person", "^adj", "^end", "^object"}:
-        raise ValueError(f"unknown pattern directives: {sorted(directives - {'^person', '^adj', '^end', '^object'})}")
-    person_only, before_modifier, clause_end = (key in directives for key in ("^person", "^adj", "^end"))
+    known = {"^person", "^adj", "^end", "^start", "^object"}
+    if directives - known:
+        raise ValueError(f"unknown pattern directives: {sorted(directives - known)}")
+    person_only, before_modifier, clause_end, clause_start = (
+        key in directives for key in ("^person", "^adj", "^end", "^start"))
     object_argument = "^object" in directives
-    text = re.sub(r"(?<!\S)\^(?:person|adj|end|object)(?=\s|$)", "", text).strip()
+    text = re.sub(r"(?<!\S)\^(?:person|adj|end|start|object)(?=\s|$)", "", text).strip()
     if clause_end and frame not in {"vp", "clause"}:
         raise ValueError("^end is only supported for verb-phrase and clause patterns")
+    if clause_end and any(f"?={kind}" in text.split() for kind in CONTEXT_OBJECTS):
+        raise ValueError("^end cannot follow a context object: the boundary would fall before the object")
     raw_parts = text.split()
+    malformed = [part for part in raw_parts if re.match(r"[?=<~!]+\{", part) and not part.startswith(("?=", "?<="))]
+    if malformed:
+        raise ValueError(f"malformed context object {malformed[0]!r} in pattern {text!r}: write ?={{np}} or ?={{ing}}")
     words = [i for i, part in enumerate(raw_parts) if not part.startswith(("!", "?=", "?<="))]
     first_word, last_word = (words[0], words[-1]) if words else (0, 0)
     elements: list[Element] = []
@@ -113,10 +130,12 @@ def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_in
             body = part[3:] if behind else part[2:]
             if (not behind and not any(e.kind in {'lit', 'slot'} for e in elements)) or not body:
                 raise ValueError('a following assertion needs a preceding word; assertions need nonempty alternatives')
-            if body == '{np}':
+            if body.startswith('{') and body not in CONTEXT_OBJECTS:
+                raise ValueError(f'unknown context object {body!r}: use one of {sorted(CONTEXT_OBJECTS)}')
+            if body in CONTEXT_OBJECTS:
                 if behind or idx != len(raw_parts) - 1:
-                    raise ValueError('a context {np} must end the pattern: it reads, but does not consume, the object')
-                elements.append(Element('ahead', slot='np'))
+                    raise ValueError(f'a context {body} must end the pattern: it reads, but does not consume, the object')
+                elements.append(Element('ahead', slot=body[1:-1]))
                 continue
             values = [tokenize(w) for w in body.split('|')]
             if any(len(words) != 1 for words in values):
@@ -165,7 +184,8 @@ def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_in
         raise ValueError(f"pattern {text!r} needs at least one required literal word")
     if object_argument and not any(e.kind == 'slot' and e.slot == 'np' for e in elements):
         raise ValueError('^object requires an {np} argument')
-    return Pattern(text, tuple(elements), frame, concepts, intensity, entry_id, person_only, before_modifier, clause_end, object_argument=object_argument)
+    return Pattern(text, tuple(elements), frame, concepts, intensity, entry_id, person_only, before_modifier, clause_end,
+                   clause_start, object_argument=object_argument)
 
 
 def is_name(tok: Token) -> bool:
@@ -236,7 +256,7 @@ def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = T
         if el.kind == 'ahead':
             if ti >= len(tokens):
                 return None
-            if el.slot == 'np':
+            if el.slot:
                 # the object's extent needs the sentence's tags: detection reads it (context.context_object)
                 if not tokens[ti].is_word or tokens[ti].norm in NP_STOP:
                     return None

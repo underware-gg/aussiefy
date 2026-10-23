@@ -80,12 +80,20 @@ ONE_WORD_FUZZ = 0.85          # one word is where character n-grams mislead most
 GLOSS_FUZZ = (0.7, 0.9)       # n-gram similarity to a gloss, discounted (one word, a phrase)
 
 
+def _explained(reading: Detection) -> tuple[int, int]:
+    """The tokens a reading explains: its span, degree qualifier and assertion words ("fantastic [terrors]"
+    is one reading), but not a context object it reads, whose words keep their own senses ("believe [my mate]")."""
+    start = min(reading.start - len(reading.degree_qualifier), reading.evidence_extent[0])
+    end = reading.evidence_extent[1] if reading.object_start is None else max(reading.end, reading.object_start)
+    return start, end
+
+
 def _scoped_query(tokens: list[Token], readings: list[Detection], tags: list[str]) -> set[str] | None:
     """A recognised head can bound a query; an incidental argument or modifier cannot exhaust it."""
     if not tokens:
         return None
     heads = [r for r in readings if r.frame != 'adv' or r.end == len(tokens)]
-    covered = {i for r in heads for i in range(r.start - len(r.degree_qualifier), r.end)}
+    covered = {i for r in heads for i in range(*_explained(r))}
     for head in heads:
         start = head.start - len(head.degree_qualifier)
         captured = {t.i for t in head.captures.values()}
@@ -101,8 +109,10 @@ def _scoped_query(tokens: list[Token], readings: list[Detection], tags: list[str
                        and tags[i] != 'CC' and tokens[i].norm not in TIME_ADVERBS]
         if not unexplained:
             return {cid for r in heads for cid in r.concepts}
-        first = unexplained[0]
-        if first == head.end and (tags[first] == 'TO' or tokens[first].norm in NOUN_PREPOSITIONS) and not any(
+        first, lead = unexplained[0], head.end
+        # "hard [to] finish": the complement opens right after the span, its marker perhaps the reading's context
+        if first in {lead, head.evidence_extent[1]} and lead < len(tokens) and (
+                tags[lead] == 'TO' or tokens[lead].norm in NOUN_PREPOSITIONS) and not any(
                 tags[i] in {'CC', 'VBD', 'VBP', 'VBZ'} for i in tail) and not any(
                     r is not head and not set(r.concepts) <= set(head.concepts) for r in heads):
             return set(head.concepts)
@@ -150,7 +160,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     kept, of_things = [], set()
     for det in detect(tokens, d.index, concepts=d.concepts, adjective_nouns=d.adjective_nouns,
                       degree_index=d.degree_index, tags=tags, fragment=True, person_nouns=None):
-        if said_of_a_thing(det, d.person_nouns, tokens, tags):
+        if said_of_a_thing(det, d.person_nouns, tokens):
             of_things.update(det.concepts)
         else:
             kept.append(det)
@@ -162,12 +172,17 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     from .detect import applicable_concepts
     from .degree import degree_matches, realised_degree
     raw_matches = d.index.find(tokens)
-    blocked = set(of_things)
+    # ruled out: a sense said only of people of a thing, or one a wider reading superseded
+    blocked = of_things.union(*(det.supersedes for det in readings))
     for matched in raw_matches:
         possible = applicable_concepts(matched.pattern.concepts, d.concepts, tokens, matched.end, noun_use=None)
         blocked.update(set(matched.pattern.concepts) - set(possible))
         if not positive_context(tokens, matched.start, matched.start):
             blocked.update(matched.pattern.concepts)
+        # words a reading holds carry only its senses: "fantastic" in "fantastic terrors" is no exclamation
+        for held in readings:
+            if held.start <= matched.start and matched.end <= held.end:
+                blocked.update(set(matched.pattern.concepts) - set(held.concepts))
 
     def degree_fits(entry, concepts):
         paths = [(cid, det) for det in readings for cid in concepts.intersection(det.degree_concepts)]

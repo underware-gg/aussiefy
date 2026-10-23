@@ -221,12 +221,49 @@ def _clause_verb_after(tokens: list[Token], end: int, tags: list[str]) -> Clause
     return _unsettled(maybe_main)
 
 
+VERBAL_FOLLOWERS = frozenset({"DT", "PDT", "PRP", "PRP$", "CD", "RB", "RBR", "RBS", "IN", "TO"})
+# counts the tagger may read as adjectives ("walking [ten] miles"): they open a noun phrase like a determiner
+QUANTITY_WORDS = frozenset({"two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven",
+                            "twelve", "twenty", "thirty", "forty", "fifty", "hundred", "hundreds", "thousand",
+                            "thousands", "dozen", "dozens", "few", "several", "many"})
+
+
+def _opens_gerund(tokens: list[Token], start: int, tags: list[str]) -> bool:
+    """A VBG heading its own verbal phrase ("walking [ten miles]", "driving [all night]", "spending [a
+    fortune]"), not a participle modifying a noun ("working mums", "running water")."""
+    after = start + 1
+    return tags[start] == "VBG" and (after >= len(tokens) or tokens[after].is_punct or tags[after] in VERBAL_FOLLOWERS
+                                     or tokens[after].norm in QUANTITY_WORDS)
+
+
 class ObjectReading(NamedTuple):
     end: int
     settled: bool   # False: the words could as well be a clause's subject, so neither reading is safe
 
 
-def context_object(tokens: list[Token], start: int, tags: list[str]) -> ObjectReading | None:
+def _gerund_object(tokens: list[Token], start: int, tags: list[str]) -> ObjectReading | None:
+    """A gerund object read as context ("think nothing of walking ten miles"): the verb, its non-finite rest
+    and one object. Unsettled when a bare noun follows ("eating apples": a gerund or a noun phrase)."""
+    if tags[start] != "VBG":
+        return None
+    end = _past_verb_group(tokens, start + 1, tags)
+    if end < len(tokens) and (tags[end] == "PRP" or tags[end] in NP_DETERMINER_TAGS | NP_MODIFIER_TAGS):
+        end = noun_phrase_end(tokens, end, tags)
+    return ObjectReading(end, _opens_gerund(tokens, start, tags))
+
+
+def context_object(tokens: list[Token], start: int, tags: list[str], kind: str = "np") -> ObjectReading | None:
+    """The object a pattern reads as context: a gerund for kind "ing", else a nominal. See _gerund_object."""
+    if kind == "ing":
+        return _gerund_object(tokens, start, tags)
+    if kind != "np":
+        raise ValueError(f"unknown context object kind {kind!r}")
+    if _opens_gerund(tokens, start, tags):
+        return None   # a gerund heading its own phrase is a clause, not a nominal object
+    return _nominal_object(tokens, start, tags)
+
+
+def _nominal_object(tokens: list[Token], start: int, tags: list[str]) -> ObjectReading | None:
     """A nominal object read as context ("believe a liar even when ...", "believe the old man next door
     completely", "believe what he says"). None when the words are not one: not nominal ("believe so", "believe in"), the subject of a
     complement clause ("believe he is lying", "believe the man in the car is lying"), of an infinitive

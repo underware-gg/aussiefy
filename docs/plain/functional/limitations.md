@@ -16,8 +16,8 @@
   does not recognise arbitrary idioms. Strict Markdown translates separate prose units, so formatting
   inserted inside an idiom can hide its full expression. Whole-phrase formatting retains the protection.
 - **Phrase readings come from reviewed patterns, not general understanding.** Context patterns establish a
-  few senses: believing a person or report, and evaluative “think … of” (high, low or excessive regard,
-  conceit, or no hardship). They also cover fanciful `fantastic` before nouns of fear, vision and
+  few senses: believing a person or report, imagining (“only think what …”), and evaluative “think … of”
+  (high, low or excessive regard, conceit, or no hardship). They also cover fanciful `fantastic` before nouns of fear, vision and
   apparition, and `heart` as spirit or courage. Readings the patterns cannot establish fall back to the
   word's own triggers. Context objects are read from part-of-speech tags, so a tagger error can still
   misplace an object's end (a verb tagged as a noun can join it). Where the tags cannot tell an object
@@ -29,6 +29,12 @@
   thinks too much of himself” stays plain. Most of these readings have no replacement entries, so they
   hold their words unchanged. A whole-phrase replacement that captures an `{np}` argument re-inserts it as
   written: inner swaps survive only where the argument is context outside the replaced span.
+- **People are recognised from a word list.** A sense said only of people (drunk, wasted, full, tired) is
+  read only of a person or an unknown subject. People are the dictionary's person nouns, person pronouns
+  and names, so a person noun missing from `grammar.yaml` keeps the words as written. A capital opening a
+  sentence is read as a common word when the tagger's lexicon knows it in lower case, so a name that is
+  also a word (“Bill was drunk”, “Rose was hammered”) stays as written, while a common word the lexicon
+  lacks is taken for a name (“Wine was drunk” still reads as drunk).
 - **The built-in API client has not been run against the live API.** Tagging, `--surface`, `--rewrite` and yarn mode
   are tested with fake clients. The yarn workflow itself has been exercised by agents through its research CLI
   (`research/retellings-2026-10-11/yarn_tools.py`), which shares yarn mode's brief and tools.

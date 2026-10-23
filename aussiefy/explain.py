@@ -50,6 +50,8 @@ def format_explain(result: Result | DocumentResult, show_rejected: bool = True, 
         caps = ", ".join(f"{k}={v}" for k, v in d.describe_captures().items())
         lines.append(f"      concept {'/'.join(d.concepts)}, frame {d.frame}, intensity {d.intensity}, via {how}"
                      + (f"; captures {caps}" if caps else ""))
+        if d.supersedes:
+            lines.append(f"      supersedes {', '.join(d.supersedes)}")
         lines.append(f"      {r.decision}")
         total = sum(c.weight for c in r.eligible) or 1.0
         if r.chosen:

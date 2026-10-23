@@ -5,7 +5,9 @@ The same records are in `result.to_dict()["explain"]` and in `--json` output.
 
 For every detected span it records:
 
-- the span and the concept found
+- the span and the concept found, with any readings of the same words it superseded (`supersedes`, as in
+  “believe a liar”: trusting supersedes THINK). `UNRESOLVED_SENSE` marks words whose sense the context leaves
+  open; they stay as written
 - how it was detected (trigger, entry paraphrase, or similarity score)
 - the frame, the intensity and the captured slots
 - the roll and the probability
