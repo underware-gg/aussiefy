@@ -6,7 +6,7 @@ import re
 from dataclasses import dataclass
 
 from . import morph
-from .detect import Detection
+from .detect import Detection, person_subject
 from .policy import Effective, weighted_index
 from .policy import Gated as Gated, dial_rejection as dial_rejection, policy_rejection as policy_rejection
 from .schema import Entry
@@ -59,23 +59,6 @@ def semantic_rejection(entry: Entry, *, narrator_opinion: bool, quantity_approxi
     return None
 
 
-AGENT_PLURAL = re.compile(r"(?:er|or|ist|ian|ent|ant|ee)s$")
-
-
-def _person_noun(word: str, person_nouns: frozenset[str]) -> bool:
-    """A subject word that names a person: a person noun (the dictionary's), a person pronoun or indefinite
-    ("she", "everyone"), or a plural agent noun."""
-    return (word in person_nouns or word in morph.PERSON_PRONOUNS or word in morph.PERSON_INDEFINITES
-            or AGENT_PLURAL.search(word) is not None)
-
-
-def person_subject(det: Detection, person_nouns: frozenset[str]) -> bool:
-    subj, noun = det.captures.get("subj") or det.captures.get("agent"), det.subject_noun
-    return (subj is not None and (subj.norm in morph.PERSON_PRONOUNS or
-                                  (subj.text[:1].isupper() and subj.norm not in morph.PRONOUNS))) or (
-        subj is None and noun is not None and _person_noun(noun.norm, person_nouns))
-
-
 def fit_rejection(entry: Entry, det: Detection, eff: Effective, person_concepts: set[str],
                   person_nouns: frozenset[str]) -> str | None:
     if entry.frame not in COMPATIBLE.get(det.frame, ()):
@@ -90,10 +73,6 @@ def fit_rejection(entry: Entry, det: Detection, eff: Effective, person_concepts:
             and det.frame in ("predicate_adj", "clause") and not is_person):
         who = f"'{subj.text}'" if subj is not None else "the subject"
         return f"idiom describes a person but {who} isn't one"
-    if det.person_only and not is_person and (subj is not None or det.subject_noun is not None):
-        who = det.subject_noun if subj is None else subj
-        if not _person_noun(who.norm, person_nouns):
-            return f"said only of people, and '{who.text}' isn't one"
     if entry.frame == "clause" and det.frame != "clause":
         if subj is None or det.clause_start is None:
             return "clause idiom needs a subject to bind {subj}"

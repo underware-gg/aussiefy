@@ -236,19 +236,20 @@ DRUNK:
   person: true
   trigger_degrees:
     predicate_adj:
-      drunk: unmarked
-      wasted@4: strong
-      hammered@4: strong
-      plastered@4: strong
-      smashed@4: strong
+      drunk ^person: unmarked
+      wasted ^person@4: strong
+      hammered ^person@4: strong
+      plastered ^person@4: strong
+      smashed ^person@4: strong
       tipsy@2: mild
       intoxicated@3: unmarked
       legless@5: strong
       inebriated@4: unmarked
       tiddly@2: mild
   triggers:
-    predicate_adj: ["drunk", "wasted@4", "hammered@4", "plastered@4", "smashed@4", "tipsy@2", "intoxicated@3",
-                    "legless@5", "inebriated@4", "tiddly@2"]
+    # ^person: said of things too ("the time was wasted", "the wine was drunk", "the wall was plastered")
+    predicate_adj: ["drunk ^person", "wasted ^person@4", "hammered ^person@4", "plastered ^person@4",
+                    "smashed ^person@4", "tipsy@2", "intoxicated@3", "legless@5", "inebriated@4", "tiddly@2"]
 FULL:
   description: Having eaten as much as one can.
   person: true

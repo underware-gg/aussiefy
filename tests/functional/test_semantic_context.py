@@ -87,7 +87,7 @@ def test_similarity_matches_obey_the_same_meaning_boundary():
     pattern = compile_pattern('hungry', 'predicate_adj', ('APPETITE',), 3)
     concepts = {'APPETITE': Concept('APPETITE', '', {}, unless_after=('for',))}
     for text, allowed in [('I am hungryy.', True), ('I am hungryy—for success.', False)]:
-        hits = detect(tokenize(text), PatternIndex([]), lambda query: {0: 1}, [pattern], concepts=concepts)
+        hits = detect(tokenize(text), PatternIndex([]), lambda query: {0: 1}, [pattern], concepts=concepts, person_nouns=None)
         assert bool(hits) is allowed
 
 

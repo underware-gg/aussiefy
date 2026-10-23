@@ -376,7 +376,8 @@ class Translator:
         dets = resolve_overlaps(detect(toks, self.dictionary.index, self._fallback_scorer(pol.embedder),
                                        self.dictionary.fallback_patterns, pol.similarity_threshold, sent.tags,
                                        self.dictionary.adjective_nouns, concepts=self.dictionary.concepts,
-                                       complete=sent.complete, degree_index=self.dictionary.degree_index))
+                                       complete=sent.complete, degree_index=self.dictionary.degree_index,
+                                       person_nouns=self.dictionary.person_nouns))
         held = run.held(toks)
         dets = [d for d in dets if not self._term_of_art(d, run.genre.policy.term_domains)
                 and not held & set(range(d.start, d.end))]

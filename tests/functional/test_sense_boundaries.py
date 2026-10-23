@@ -11,7 +11,7 @@ def test_agreement_detection_is_independent_of_dialogue_quotes(dictionary, openi
     from aussiefy.detect import detect, resolve_overlaps
     from aussiefy.text import tokenize
     tokens = tokenize(f'He said {opening}Very well,{closing} and left.')
-    found = resolve_overlaps(detect(tokens, dictionary.index, concepts=dictionary.concepts))
+    found = resolve_overlaps(detect(tokens, dictionary.index, concepts=dictionary.concepts, person_nouns=dictionary.person_nouns))
     assert any('OK_THEN' in d.concepts for d in found)
     assert not any('VERY' in d.concepts for d in found)
 
@@ -20,7 +20,7 @@ def test_quoted_agreement_fix_preserves_real_intensifiers_and_possessives(dictio
     from aussiefy.detect import at_clause_start, detect, resolve_overlaps
     from aussiefy.text import tokenize
     found = resolve_overlaps(detect(tokenize('She sang very well.'), dictionary.index,
-                                    concepts=dictionary.concepts))
+                                    concepts=dictionary.concepts, person_nouns=dictionary.person_nouns))
     assert any('VERY' in d.concepts for d in found)
     assert not any('OK_THEN' in d.concepts for d in found)
     tokens = tokenize("The walkers' very tired guide stopped.")
@@ -32,7 +32,7 @@ def test_quoted_word_object_does_not_turn_manner_into_agreement(dictionary, open
     from aussiefy.detect import detect, resolve_overlaps
     from aussiefy.text import tokenize
     found = resolve_overlaps(detect(tokenize(f'He said {opening}go{closing} very well.'), dictionary.index,
-                                    concepts=dictionary.concepts))
+                                    concepts=dictionary.concepts, person_nouns=dictionary.person_nouns))
     assert any('VERY' in d.concepts for d in found)
     assert not any('OK_THEN' in d.concepts for d in found)
 
@@ -101,8 +101,8 @@ def test_similarity_fallback_enforces_zero_width_exclusions():
     from aussiefy.text import tokenize
     p = compile_pattern('terrible !about', 'predicate_adj', ('BAD',), 3)
     scorer = lambda text: {0: .99}
-    assert not detect(tokenize('She felt terribl about it.'), PatternIndex([]), scorer, [p])
-    got = detect(tokenize('She felt terribl yesterday.'), PatternIndex([]), scorer, [p])
+    assert not detect(tokenize('She felt terribl about it.'), PatternIndex([]), scorer, [p], person_nouns=None)
+    got = detect(tokenize('She felt terribl yesterday.'), PatternIndex([]), scorer, [p], person_nouns=None)
     assert got and got[0].method == 'embedding'
 
 
@@ -125,7 +125,7 @@ def test_object_question_auxiliary_does_not_agree_with_clothing(translator, text
 def test_heart_content_is_one_meaning_unit(possessive, apostrophe, translator):
     source = f'Use it to {possessive} heart{apostrophe}s content.'
     found = resolve_overlaps(detect(tokenize(source), translator.dictionary.index,
-                                   concepts=translator.dictionary.concepts))
+                                   concepts=translator.dictionary.concepts, person_nouns=translator.dictionary.person_nouns))
     assert any('AS_MUCH_AS_DESIRED' in d.concepts for d in found)
     assert not any('HEART_ORGAN' in d.concepts for d in found)
     for seed in range(4):
@@ -171,3 +171,32 @@ def test_idiom_ownership_does_not_hide_a_literal_heart_in_the_same_sentence(tran
             'substitution': {'lexical': 1, 'phrase': 1, 'idiom': 1}}})
     assert "to your heart's content" in result.text
     assert 'my ticker' in result.text
+
+
+def _readings(source, dictionary):
+    return resolve_overlaps(detect(tokenize(source), dictionary.index, concepts=dictionary.concepts,
+                                   adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index,
+                                   person_nouns=dictionary.person_nouns))
+
+
+@pytest.mark.parametrize('source', ['Much of the time is wasted.', 'It was wasted.', 'The money was wasted.',
+                                    'Money was wasted.', '"Money was wasted," he said.',
+                                    'The wine was drunk.', 'The glass was smashed.', 'The tank is full.'])
+def test_a_person_only_sense_is_not_read_of_a_thing(source, dictionary):
+    """Drunk (or full) is said only of people: of time, money or a glass the word keeps its other meanings,
+    so the sense is never established, explained or looked up."""
+    assert not {'DRUNK', 'FULL'} & {cid for d in _readings(source, dictionary) for cid in d.concepts}
+    assert not any({'DRUNK', 'FULL'} & set(r['concepts']) for r in harness.lookup(source, level=5)['results'])
+
+
+@pytest.mark.parametrize('source', ['I was wasted last night.', 'They were wasted.', 'We got smashed.',
+                                    'He was drunk.', 'The man was plastered.', 'My mate was drunk.',
+                                    'The boss was wasted.', 'John was hammered.'])
+def test_a_person_only_sense_still_reads_of_a_person(source, dictionary):
+    assert 'DRUNK' in {cid for d in _readings(source, dictionary) for cid in d.concepts}
+
+
+@pytest.mark.parametrize('source,inflected', [('He tells lies.', 'tellings'), ('He fools around.', 'muckings')])
+def test_verb_idiom_heads_are_inflected_once(source, inflected, translator):
+    for seed in range(8):
+        assert inflected not in translator.translate(source, level=5, vulgarity=3, embellishment=0, seed=seed).text

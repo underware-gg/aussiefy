@@ -9,6 +9,15 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Read “believe what he says” as taking it as true, while “believe what he says is true” still reckons.
+  Leave a relative clause's next verb to the main clause after an object pronoun \(“believe the man who
+  told us was honest” reckons\), and keep “believe” as written where the tags can't tell.
+- Make a readin' said only of people \(`^person`) only of a person or an unknown subject. “The money
+  was wasted”, “the wine was drunk” and “the glass was smashed” are no longer read as drunk, in
+  translation, explanations or lookup. `drunk`, `wasted`, `hammered`, `plastered` and `smashed` now carry
+  `^person`, and the person nouns include mate, cove, boss'n other everyday people.
+- Inflect a verb idiom's head once: “He tells porkies”, not “He tellings porkies”.
+
 - Establish phrase meanings before choosin' replacements. A pattern's context \(`?={np}` objects and `?=`
   neighbours\) can decide a word's sense without becoming part of what it replaces. Readings of the same
   words now compete by that evidence instead of poolin' incompatible senses. “Believe a liar” no longer
@@ -501,7 +510,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
     (`"Thanksgivin'"`), bold labels and datelines; a phrase the original says in American (`"skillet or"`) isn't a
     repeat when the retelling says it in Australian (`"frying pan or"`).
   - Genre: old\-style datelines \(`"WASHINGTON, Dec. 27.—"`), verse read as a story \(The Raven, the Sentimental
-    Cove: no longer `"personal"`), a fable's Capitalised Nouns not taken for names, a letter that speaks to
+    Bloke: no longer `"personal"`), a fable's Capitalised Nouns not taken for names, a letter that speaks to
     `"you"`, and a long text needin' narrative cues to be a story. On the labelled corpus: told/not told 93% \-\>
     97%, exact 79% \-\> 88%.
 - **Embellishment**, a third dial (`-e/--embellishment`, `embellishment=`): how much liberty the telling

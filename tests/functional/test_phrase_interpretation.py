@@ -19,7 +19,8 @@ SEEDS = range(8)
 
 def readings(source, dictionary):
     return resolve_overlaps(detect(tokenize(source), dictionary.index, concepts=dictionary.concepts,
-                                   adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index))
+                                   adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index,
+                                   person_nouns=dictionary.person_nouns))
 
 
 def concepts(source, dictionary):
@@ -300,3 +301,48 @@ def test_an_object_or_clause_the_tags_cannot_settle_stays_as_written(source, tra
     held = next(d for d in found if d.concepts == ('UNRESOLVED_SENSE',))
     assert held.supersedes == ('THINK',)
     assert all(text.startswith('I believe the') for text in outputs(translator, source))
+
+
+@pytest.mark.parametrize('source', ['I believe what he says.', 'I believe what you told me.',
+                                    'I believe what happened.'])
+def test_believing_what_was_said_is_taking_it_as_true(source, translator):
+    assert 'ACCEPT_AS_TRUE' in concepts(source, translator.dictionary)
+    assert not any('reckon' in text for text in outputs(translator, source))
+
+
+def test_a_free_relative_subject_keeps_supposition(translator):
+    assert all('I reckon what he says is true.' == text for text in outputs(translator, 'I believe what he says is true.'))
+
+
+@pytest.mark.parametrize('source', ['I believe what she told me was true.', 'I believe what they told us was a lie.',
+                                    'I believe the man who told us was honest.',
+                                    'I believe the man who told you was lying.',
+                                    'I believe the woman who said the man was lying is honest.',
+                                    'I believe the man who was sick is right.',
+                                    'I believe the man who seemed nice was lying.'])
+def test_a_relative_clause_object_leaves_the_next_verb_to_the_main_clause(source, dictionary):
+    """An object pronoun, or one that disagrees with the verb, cannot be a complement clause's subject."""
+    assert concepts(source, dictionary) & {'ACCEPT_AS_TRUE', 'THINK', 'UNRESOLVED_SENSE'} == {'THINK'}
+
+
+@pytest.mark.parametrize('source', ['I believe the woman who said he was lying.',
+                                    'I believe the man who said she was right.',
+                                    'I believe the men who said the boss was lying.'])
+def test_a_subject_or_disagreement_opens_the_relative_clauses_own_complement(source, dictionary):
+    """"he was lying" has a subject pronoun; "the men ... was" cannot be the main clause."""
+    assert 'ACCEPT_AS_TRUE' in concepts(source, dictionary)
+
+
+@pytest.mark.parametrize('source', ['I believe the man who told the police was lying.',
+                                    'I believe the woman who saw the doctor was ill.',
+                                    'I believe the woman who said the man was lying.',
+                                    'I believe the people who told you were lying.',
+                                    'I believe what he told the police was true.',
+                                    'I believe the man who told her story was lying.',
+                                    'I believe the police who told the man were lying.'])
+def test_a_relative_clause_complement_the_tags_cannot_settle_stays_as_written(source, translator):
+    """"who told the police [was lying]" and "who said the man [was lying]" differ only in the verb's own
+    grammar, which the tags do not carry."""
+    found = concepts(source, translator.dictionary)
+    assert 'UNRESOLVED_SENSE' in found and 'ACCEPT_AS_TRUE' not in found
+    assert all(text.startswith('I believe') for text in outputs(translator, source))

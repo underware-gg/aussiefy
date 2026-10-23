@@ -76,7 +76,7 @@ def test_preceding_assertion_cannot_bypass_verb_noun_context_checks():
     from aussiefy.detect import detect
 
     p = compile_pattern("?<=the taste", "vp", ("TASTE",), 3)
-    assert not detect(tokenize("The taste was odd."), PatternIndex([p]))
+    assert not detect(tokenize("The taste was odd."), PatternIndex([p]), person_nouns=None)
 
 
 def test_preceding_assertion_preserves_literal_clause_subject():

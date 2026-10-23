@@ -83,7 +83,7 @@ def test_query_scope_does_not_treat_an_incidental_reading_as_the_whole_query(dic
     ts = tokenize(query)
     tags = pos.tag([t.text for t in ts])
     readings = resolve_overlaps(detect(ts, dictionary.index, concepts=dictionary.concepts,
-        adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index, fragment=True))
+        adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index, fragment=True, person_nouns=dictionary.person_nouns))
     assert _scoped_query(ts, readings, tags) == expected
 
 
@@ -122,7 +122,7 @@ def test_complements_cannot_swallow_other_recognised_predicates(dictionary, quer
     ts = tokenize(query)
     tags = pos.tag([t.text for t in ts])
     readings = resolve_overlaps(detect(ts, dictionary.index, concepts=dictionary.concepts,
-        adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index, fragment=True))
+        adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index, fragment=True, person_nouns=dictionary.person_nouns))
     assert _scoped_query(ts, readings, tags) is None
 
 
@@ -130,7 +130,7 @@ def test_coordinated_head_scope_includes_owned_degree_qualifiers(dictionary):
     ts = tokenize('very drunk and slightly hungry')
     tags = pos.tag([t.text for t in ts])
     readings = resolve_overlaps(detect(ts, dictionary.index, concepts=dictionary.concepts,
-        adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index, fragment=True))
+        adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index, fragment=True, person_nouns=dictionary.person_nouns))
     assert _scoped_query(ts, readings, tags) == {'DRUNK', 'HUNGRY'}
 
 
@@ -176,5 +176,5 @@ def test_lookup_only_meanings_remain_discoverable_without_becoming_automatic(tmp
 def test_ambiguous_hard_without_an_infinitive_does_not_establish_difficulty(dictionary, query):
     ts = tokenize(query)
     readings = detect(ts, dictionary.index, concepts=dictionary.concepts,
-        adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index, fragment=True)
+        adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index, fragment=True, person_nouns=dictionary.person_nouns)
     assert not any('DIFFICULT' in r.concepts for r in readings)

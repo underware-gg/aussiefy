@@ -77,7 +77,8 @@ def theme_issues(text: str, original: str | None, dictionary: Dictionary,
 def _readings(candidates: Iterable[list[Token]], dictionary: Dictionary):
     for sentence in candidates:
         detections = resolve_overlaps(detect(sentence, dictionary.index, concepts=dictionary.concepts,
-            adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index))
+            adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index,
+            person_nouns=dictionary.person_nouns))
         for det in detections:
             yield sentence, det
 

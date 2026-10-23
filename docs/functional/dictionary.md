@@ -233,7 +233,7 @@ its existin' plural\-only referent meanin', and omitted number metadata remains 
   require a precedin' consuming element; matchin' still enforces both assertions in similarity mode
 - `?={np}` requires a following nominal object without consuming it, and must end the pattern. The object's
   extent is read from the sentence's part-of-speech tags rather than a word count: determiners, then
-  modifiers and nouns (“the old man next door”, “the man's story”). Trailing adverbs stay outside it
+  modifiers and nouns (“the old man next door”, “the man's story”), or a free relative (“what he says”). Trailing adverbs stay outside it
   (“believe a liar even when …”). The same object checks apply, so clause complements do not qualify,
   including a subject behind its post-modifiers (“believe the man in the car is lying”). Neither does the
   subject of an infinitive (“believed him to be honest”). Where the tags cannot settle it, the reading
@@ -242,7 +242,8 @@ its existin' plural\-only referent meanin', and omitted number metadata remains 
   reads “believe a liar” as accepting testimony, and `a liar` can still become `a bullshitter`
 - `^object` requires an `{np}` argument'n applies shared unanchored\-object checks, rejecting temporal
   and quantity\-only adjuncts rather than mistaking them for the object of a multiword expression
-- `^person` limits a predicate to a person; `^adj` requires a following modifier
+- `^person` limits a predicate to a person: where its subject is known'n isn't one \(“the money was
+  wasted”\), the readin' isn't made, so the words keep their other senses; `^adj` requires a following modifier
 - `^end` on a verb phrase or clause requires a clause boundary after optional adverbial tails, preservin' complements
   such as the habit in “quit smoking”; it isn't supported on other frames
 - a trailin' `@N` for intensity

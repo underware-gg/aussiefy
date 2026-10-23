@@ -23,7 +23,8 @@ and may replace) from its evidence (the span plus the context it rests on).
 
 - The matcher records the context its zero-width assertions read. The new `?={np}` ends a pattern and
   marks where a following object starts, without consuming or capturing it. The shared clause reader then
-  reads the object's extent from part-of-speech tags, with no word cap since nothing is replaced. It
+  reads the object's extent from part-of-speech tags, with no word cap since nothing is replaced. A free
+  relative (“believe what he says”) is an object too, unless a verb follows it (“what he says is true”). It
   validates the object with the unanchored-object checks. Trailing adverbs stay outside the object. A
   phrase that is the subject of a clause's verb, past its prepositional, adverbial and relative
   post-modifiers, is rejected. So are non-nominal complements, the subject of an infinitive and a pronoun
@@ -32,7 +33,20 @@ and may replace) from its evidence (the span plus the context it rests on).
   could be an object with a relative clause (“the stories people tell”) or a clause (“the bus driver
   lied”). The reading becomes `UNRESOLVED_SENSE`, which holds the words and supersedes the rival senses
   but has no candidates, so the words stay as written. A run of names before a verb is a clause, and an
-  object after a preposition cannot be a clause's subject, so neither is unresolved.
+  object after a preposition cannot be a clause's subject, so neither is unresolved. Inside a relative
+  clause, a subject pronoun opens the clause's own complement (“the woman who said he was lying”). An
+  object pronoun, or one that disagrees with the next verb, leaves that verb to the main clause (“the man
+  who told us was honest”), and so does a phrase that cannot be the main clause's subject (“the people who
+  say it is safe” is a complement). A full noun phrase is unresolved (“who told the police was lying” against
+  “who said the man was lying”): telling them apart needs each verb's own grammar, which the tags do not carry.
+- A reading said only of people (`^person`) is not made when its subject is known and isn't known to be a
+  person (“the money was wasted”, “the wine was drunk”). The words keep their other senses, and lookup
+  treats the sense as ruled out rather than unestablished. People are recognised as before: the
+  dictionary's person nouns (`grammar.yaml`, extended with mate, bloke, boss and other everyday people),
+  person pronouns, names and plural agent nouns. The rule is only as good as that recognition: a person
+  noun missing from the list keeps the words as written, a plural thing ending in an agent suffix
+  (“the computers were smashed”) still reads as people, and a sentence-opening common noun the tagger takes
+  for a name (“Time was wasted”) does too. Explain mode does not list a reading ruled out this way.
 - Overlap resolution ranks readings by evidence width, then span length and the existing tie-breaks.
   Spans still decide which words a reading holds, so a reading's context remains available to the
   context's own readings. Identical spans merge only on identical evidence; wider evidence supersedes

@@ -6,9 +6,9 @@ from dataclasses import dataclass
 
 from .realise import noun_slots
 from .schema import Imagery, PLACEHOLDER_RE
-from .select import binding_problem, person_subject
+from .select import binding_problem
 from .context import following_context, positive_context
-from .detect import applicable_concepts
+from .detect import applicable_concepts, person_subject
 from .terms import form_key
 from .text import tokenize
 from .evidence import metadata_dict, metadata_rejections, theme_rejection, register_rejection

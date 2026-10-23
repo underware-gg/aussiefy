@@ -237,7 +237,7 @@ def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = T
             if ti >= len(tokens):
                 return None
             if el.slot == 'np':
-                # the object's extent needs the sentence's tags: detection reads it (context.context_object_end)
+                # the object's extent needs the sentence's tags: detection reads it (context.context_object)
                 if not tokens[ti].is_word or tokens[ti].norm in NP_STOP:
                     return None
                 object_start = ti

@@ -14,6 +14,7 @@ triggers missed.
 
 from __future__ import annotations
 
+import re
 from collections import Counter
 from dataclasses import dataclass, field, replace
 from typing import Callable, NamedTuple
@@ -603,15 +604,50 @@ def fallback_scorer(embedder: Embedder, patterns: list[Pattern]) -> Callable[[st
     return score
 
 
+AGENT_PLURAL = re.compile(r"(?:er|or|ist|ian|ent|ant|ee)s$")
+
+
+def person_noun(word: str, person_nouns: frozenset[str]) -> bool:
+    """A subject word that names a person: a person noun (the dictionary's), a person pronoun or indefinite
+    ("she", "everyone"), or a plural agent noun."""
+    return (word in person_nouns or word in morph.PERSON_PRONOUNS or word in morph.PERSON_INDEFINITES
+            or AGENT_PLURAL.search(word) is not None)
+
+
+def person_subject(det: Detection, person_nouns: frozenset[str]) -> bool:
+    subj, noun = det.captures.get("subj") or det.captures.get("agent"), det.subject_noun
+    return (subj is not None and (subj.norm in morph.PERSON_PRONOUNS or
+                                  (subj.text[:1].isupper() and subj.norm not in morph.PRONOUNS))) or (
+        subj is None and noun is not None and person_noun(noun.norm, person_nouns))
+
+
+def said_of_a_thing(det: Detection, person_nouns: frozenset[str], tokens: list[Token], tags: list[str]) -> bool:
+    """A reading said only of people whose subject is known and isn't one ("the money was wasted"), so the
+    words keep their other meanings. A capital opening the sentence is not a name unless the tags say so
+    ("Time was wasted")."""
+    who = det.captures.get("subj")
+    who = det.subject_noun if who is None else who
+    if not det.person_only or who is None or person_noun(who.norm, person_nouns):
+        return False
+    at = who.i - tokens[0].i
+    opening = all(t.is_punct for t in tokens[:at])
+    if opening and tags[at] not in pos.NAMES:
+        return True   # a common noun or a pronoun of a thing: "Time was wasted", "It was wasted"
+    return not person_subject(det, person_nouns)
+
+
 def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dict[int, float]] | None = None,
            fallback_patterns: list[Pattern] | None = None, threshold: float = 0.72,
            tags: list[str] | None = None, adjective_nouns: dict[str, frozenset[str]] | None = None,
            concepts: dict[str, Concept] | None = None, complete: bool = True,
-           degree_index: PatternIndex | None = None, *, fragment: bool = False) -> list[Detection]:
+           degree_index: PatternIndex | None = None, *, fragment: bool = False,
+           person_nouns: frozenset[str] | None) -> list[Detection]:
     """Every concept the triggers find in the sentence, frame-checked. With a scorer (embed.similarity_scorer over
     the fallback patterns' texts), a predicate after a linking verb that no trigger matched is compared with
     the fallback patterns by similarity ("he was exhaustedd"). Fragment mode admits query-local adjective
-    readings without inventing a subject or verb; it does not establish safe replacement positions."""
+    readings without inventing a subject or verb; it does not establish safe replacement positions. With the
+    dictionary's person nouns, a reading said only of people is not made of a known thing; None leaves that
+    to the caller (said_of_a_thing)."""
     found: list[Detection] = []
     tags = tags if tags is not None else pos.tag([t.text for t in tokens])
     matches = index.find(tokens)
@@ -714,6 +750,8 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
                     det.method = "embedding"
                     det.score = round(score, 3)
                     found.append(det)
+    if person_nouns is not None:
+        found = [d for d in found if not said_of_a_thing(d, person_nouns, tokens, tags)]
     return found
 
 

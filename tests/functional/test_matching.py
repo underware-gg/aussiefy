@@ -7,7 +7,7 @@ from aussiefy.text import sentences, tokenize
 
 def dets(text, dictionary):
     sent = sentences(tokenize(text))[0]
-    return sent, resolve_overlaps(detect(sent, dictionary.index))
+    return sent, resolve_overlaps(detect(sent, dictionary.index, person_nouns=dictionary.person_nouns))
 
 
 def test_tokenizer_splits_contractions_and_keeps_offsets():
@@ -90,10 +90,10 @@ def test_embedding_fallback_catches_misspelling(dictionary):
 
     sent = sentences(tokenize("He is exhaustedd."))[0]
     scorer = similarity_scorer(NgramEmbedder(), [p.text for p in dictionary.fallback_patterns])
-    found = detect(sent, dictionary.index, scorer, dictionary.fallback_patterns)
+    found = detect(sent, dictionary.index, scorer, dictionary.fallback_patterns, person_nouns=dictionary.person_nouns)
     hit = [x for x in found if x.method == "embedding"]
     assert hit and "TIRED" in hit[0].concepts and hit[0].score >= 0.72
-    assert not [x for x in detect(sent, dictionary.index) if x.method == "embedding"]
+    assert not [x for x in detect(sent, dictionary.index, person_nouns=dictionary.person_nouns) if x.method == "embedding"]
 
 
 def test_ngram_index_scores_equal_the_embedders(dictionary):

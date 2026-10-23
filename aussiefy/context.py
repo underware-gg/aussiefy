@@ -79,6 +79,7 @@ FINITE_TAGS = frozenset({"VBD", "VBP", "VBZ", "MD"})
 SUBORDINATORS = frozenset({"when", "whenever", "because", "if", "although", "though", "while", "since", "unless",
                            "until", "before", "after", "as", "where", "than"})
 RELATIVES = frozenset({"who", "whom", "which", "that"})
+FREE_RELATIVES = frozenset({"what", "whatever"})   # a relative clause with no noun: "believe what he says"
 
 
 def lone_pronoun_object(tokens: list[Token], start: int, tags: list[str]) -> bool:
@@ -112,29 +113,68 @@ def _finite(tokens: list[Token], i: int, tags: list[str]) -> bool:
 
 
 SUBJECT_PRONOUNS = frozenset({"i", "you", "he", "she", "we", "they"})
+NOMINATIVE_ONLY = SUBJECT_PRONOUNS - morph.OBJECT_PRONOUNS    # "i", "he", "she", "we", "they"
+ACCUSATIVE_ONLY = morph.OBJECT_PRONOUNS - SUBJECT_PRONOUNS - {"it"}   # "me", "him", "her", "us", "them"
 
 
-def _past_relative(tokens: list[Token], j: int, tags: list[str]) -> int | None:
+def _agrees(tokens: list[Token], subject: int, verb: int, tags: list[str]) -> bool:
+    """False when the word at tokens[subject] plainly cannot be the subject of the finite verb at tokens[verb]
+    ("you was", "it were", "the people is"); True whenever it could. A singular noun may take a plural verb
+    ("the police were", "the team are"), so only a pronoun or a plural noun is reliable evidence."""
+    singular_verb = tags[verb] == "VBZ" or tokens[verb].norm == "was"
+    plural_verb = tags[verb] == "VBP" or tokens[verb].norm == "were"
+    word = tokens[subject].norm
+    plural = tags[subject] in {"NNS", "NNPS"} or word in {"we", "they", "you"}
+    return not (plural and singular_verb or word in {"he", "she", "it"} and plural_verb)
+
+
+class RelativeReach(NamedTuple):
+    end: int
+    maybe_main: int | None = None   # a finite verb read as its complement's that could as well be the main clause's
+
+
+def _complement_subject(tokens: list[Token], subject: int, end: int, tags: list[str]) -> bool | None:
+    """Whether the phrase tokens[subject:end] is the subject of the finite verb at tokens[end] in a relative
+    clause's complement ("who said [he] was lying"), rather than the relative verb's object with the main
+    clause's verb following ("who told [us] was honest"). None when either holds: "who said the man was lying"
+    and "who told the police was lying" differ only in the relative verb's own grammar."""
+    if end != subject + 1 or not lone_pronoun_object(tokens, subject, tags):
+        return None
+    word = tokens[subject].norm
+    if word in NOMINATIVE_ONLY:
+        return True
+    if word in ACCUSATIVE_ONLY:
+        return False
+    return None if _agrees(tokens, subject, end, tags) else False   # "who told you was lying"
+
+
+def _past_relative(tokens: list[Token], j: int, tags: list[str]) -> RelativeReach | None:
     """Past a relative clause opening at tokens[j], with its subject, verb group and object ("who called",
     "that he told", "he told", and a result clause such as "that he spent all his money"); None when it has
     no verb of its own, so it is not one."""
     n = len(tokens)
-    if tokens[j].norm in RELATIVES:
+    if tokens[j].norm in RELATIVES | FREE_RELATIVES:
         j += 1
     if j < n and not _finite(tokens, j, tags) and (tags[j] == "PRP" or tags[j] in NP_DETERMINER_TAGS | NP_MODIFIER_TAGS):
         j = noun_phrase_end(tokens, j, tags)
     if j >= n or not _finite(tokens, j, tags):
         return None
-    j += 1
-    j = _past_verb_group(tokens, j, tags)
+    j = _past_verb_group(tokens, j + 1, tags)
+    if j >= n or not (tags[j] == "PRP" or tags[j] in NP_DETERMINER_TAGS | NP_MODIFIER_TAGS):
+        return RelativeReach(j)
+    subject, j = j, noun_phrase_end(tokens, j, tags)
+    nominal = tags[j - 1] in pos.NOUNS | pos.NAMES or lone_pronoun_object(tokens, subject, tags)
+    if j >= n or not _finite(tokens, j, tags) or not nominal:
+        return RelativeReach(j)
+    role = _complement_subject(tokens, subject, j, tags)
+    if role is False:
+        return RelativeReach(j)
+    verb = j
+    # its complement clause ("who said [he was lying]"), not the main clause's verb
+    j = _past_verb_group(tokens, j + 1, tags)
     if j < n and (tags[j] == "PRP" or tags[j] in NP_DETERMINER_TAGS | NP_MODIFIER_TAGS):
         j = noun_phrase_end(tokens, j, tags)
-        if j < n and _finite(tokens, j, tags):
-            # its complement clause ("who said [he was lying]"), not the main clause's verb
-            j = _past_verb_group(tokens, j + 1, tags)
-            if j < n and (tags[j] == "PRP" or tags[j] in NP_DETERMINER_TAGS | NP_MODIFIER_TAGS):
-                j = noun_phrase_end(tokens, j, tags)
-    return j
+    return RelativeReach(j, verb if role is None else None)
 
 
 def _past_verb_group(tokens: list[Token], j: int, tags: list[str]) -> int:
@@ -144,26 +184,41 @@ def _past_verb_group(tokens: list[Token], j: int, tags: list[str]) -> int:
     return j
 
 
-def _clause_verb_after(tokens: list[Token], end: int, tags: list[str]) -> int | None:
+class ClauseVerb(NamedTuple):
+    at: int
+    settled: bool   # False: it may instead end a relative clause's complement ("who told the police [was] lying")
+
+
+def _unsettled(maybe_main: int | None) -> ClauseVerb | None:
+    return None if maybe_main is None else ClauseVerb(maybe_main, False)
+
+
+def _clause_verb_after(tokens: list[Token], end: int, tags: list[str]) -> ClauseVerb | None:
     """The finite verb a noun phrase is the subject of, past its post-modifiers ("the man [in the car] is",
     "the people [here] are", "the man [who called] was", "the story [he told] was"); None when the clause
-    moves on without one ("believe a liar even when he ...", "believe a liar who tells lies")."""
+    moves on without one ("believe a liar even when he ...", "believe a liar who tells lies"). A relative
+    clause's complement that could be read either way leaves the verb unsettled, unless a later verb is the
+    main clause's under both readings ("the woman who said the man was lying [is] honest") or the phrase
+    cannot be its subject ("the people who say it [is] safe")."""
     j, n = end, len(tokens)
+    maybe_main = None
     while j < n and not tokens[j].is_punct and tokens[j].norm not in SUBORDINATORS | {"and", "or", "but"}:
         if _finite(tokens, j, tags):
-            return j
+            return ClauseVerb(j, True)
         if tags[j] in {"RB", "RBR", "RBS"} or tokens[j].norm in {"here", "there"}:
             j += 1
         elif tokens[j].norm in RELATIVES | SUBJECT_PRONOUNS:
             after = _past_relative(tokens, j, tags)
             if after is None:
-                return None
-            j = after
+                break
+            j = after.end
+            if maybe_main is None and after.maybe_main is not None and _agrees(tokens, end - 1, after.maybe_main, tags):
+                maybe_main = after.maybe_main
         elif tags[j] == "IN" and j + 1 < n and noun_phrase_end(tokens, j + 1, tags) > j + 1:
             j = noun_phrase_end(tokens, j + 1, tags)
         else:
-            return None
-    return None
+            break
+    return _unsettled(maybe_main)
 
 
 class ObjectReading(NamedTuple):
@@ -173,11 +228,19 @@ class ObjectReading(NamedTuple):
 
 def context_object(tokens: list[Token], start: int, tags: list[str]) -> ObjectReading | None:
     """A nominal object read as context ("believe a liar even when ...", "believe the old man next door
-    completely"). None when the words are not one: not nominal ("believe so", "believe in"), the subject of a
+    completely", "believe what he says"). None when the words are not one: not nominal ("believe so", "believe in"), the subject of a
     complement clause ("believe he is lying", "believe the man in the car is lying"), of an infinitive
     ("believed him to be honest" is supposing, not taking his word) or of a coordinated clause ("believe
     you and he were friends"). Unsettled when a run of nouns meets a verb: "the stories people tell" is an
     object with a relative clause, "the bus driver lied" a clause, and the tags cannot tell them apart."""
+    if tokens[start].norm in FREE_RELATIVES:
+        reach = _past_relative(tokens, start, tags)
+        if reach is None:
+            return None
+        verb = _clause_verb_after(tokens, reach.end, tags) or _unsettled(reach.maybe_main)
+        if verb is None or not verb.settled:
+            return ObjectReading(reach.end, verb is None)
+        return None
     pronoun = lone_pronoun_object(tokens, start, tags)
     end = noun_phrase_end(tokens, start, tags)
     if end == start:
@@ -191,11 +254,11 @@ def context_object(tokens: list[Token], start: int, tags: list[str]) -> ObjectRe
             and end + 1 < len(tokens) and tokens[end + 1].norm in {"i", "he", "she", "we", "they"}:
         return None
     verb = _clause_verb_after(tokens, end, tags)
-    if verb is None:
-        return ObjectReading(end, True)
+    if verb is None or not verb.settled:
+        return ObjectReading(end, verb is None)
     run = tags[start:end]
     nouns = next((i for i, tag in enumerate(reversed(run)) if tag not in pos.NOUNS | pos.NAMES), len(run))
-    if verb != end or nouns < 2 or all(tag in pos.NAMES for tag in run[-nouns:]):
+    if verb.at != end or nouns < 2 or all(tag in pos.NAMES for tag in run[-nouns:]):
         return None   # a clause, its subject a name ("John Smith lied") or plainly ended
     # after a preposition ("think highly of the stories people tell") the phrase cannot be a clause's subject
     return ObjectReading(end, start > 0 and tags[start - 1] in {"IN", "TO"})

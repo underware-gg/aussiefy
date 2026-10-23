@@ -143,10 +143,18 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         tokens.pop(0)
     while tokens and tokens[-1].is_punct:
         tokens.pop()
-    from .detect import detect, resolve_overlaps
+    from .detect import detect, resolve_overlaps, said_of_a_thing
     tags = pos.tag([t.text for t in tokens]) if tokens else []
-    readings = resolve_overlaps(detect(tokens, d.index, concepts=d.concepts, adjective_nouns=d.adjective_nouns,
-                                        degree_index=d.degree_index, tags=tags, fragment=True))
+    # person_nouns=None: lookup sorts the readings said of a thing itself, since "the money was wasted"
+    # rules DRUNK out rather than merely leaving it unestablished
+    kept, of_things = [], set()
+    for det in detect(tokens, d.index, concepts=d.concepts, adjective_nouns=d.adjective_nouns,
+                      degree_index=d.degree_index, tags=tags, fragment=True, person_nouns=None):
+        if said_of_a_thing(det, d.person_nouns, tokens, tags):
+            of_things.update(det.concepts)
+        else:
+            kept.append(det)
+    readings = resolve_overlaps(kept)
     readings = [r for r in readings if positive_context(tokens, r.start, r.start)]
     exhaustive = _scoped_query(tokens, readings, tags)
     established = {cid for det in readings for cid in det.concepts
@@ -154,7 +162,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     from .detect import applicable_concepts
     from .degree import degree_matches, realised_degree
     raw_matches = d.index.find(tokens)
-    blocked = set()
+    blocked = set(of_things)
     for matched in raw_matches:
         possible = applicable_concepts(matched.pattern.concepts, d.concepts, tokens, matched.end, noun_use=None)
         blocked.update(set(matched.pattern.concepts) - set(possible))
