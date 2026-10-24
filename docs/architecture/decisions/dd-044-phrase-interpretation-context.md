@@ -73,15 +73,16 @@ and may replace) from its evidence (the span plus the context it rests on).
   the cold” (no bother) stay as written, while `NO_HARDSHIP` takes only a gerund. “Think what you like”
   and “think how to” are not invitations to picture something, and stay as written too. The evaluative concepts are `REGARD_HIGHLY`,
   `REGARD_POORLY`, `OVERVALUE`, `CONCEITED` and `NO_HARDSHIP`. Each keeps one polarity, so an entry
-  cannot flip or flatten the source's regard; negated forms (“does not think the world of herself”) read
-  as regard, never as conceit or overvaluing. CONCEITED shares Rob's sun-shines-out-of-arse entry through a `{poss} own arse` variant.
-  `HEART_ORGAN` requires a determiner or possessive, so bare spirit or courage (`take heart`, `showed
-  real heart`) is never `ticker`; `HEART_SPIRIT` holds compassion, effort and courage (`take heart`,
-  `lose heart`, `cannot find it in my heart to`), and the `HEARTBREAK` guard holds a broken heart as
-  written (`she broke my heart`, `my heart is breaking`). Rob ruled that an emotional heart should not be
-  `ticker`, while an image that relies on the physical heart (`from the bottom of my heart`) may be;
-  reviewed patterns hold heartbreak and compassion, and an unreviewed figurative heart (`set his heart
-  on`) remains a known limitation. No slang ID, sentence or reference text enters the engine.
+  cannot flip or flatten the source's regard; negated forms (“does not think the world of herself”) read as
+  regard, never as conceit or overvaluing. CONCEITED shares Rob's sun-shines-out-of-arse entry through a
+  `{poss} own arse` variant. `HEART_ORGAN` requires a determiner or possessive, so bare spirit or courage
+  (`take heart`, `showed real heart`) is never `ticker`; `HEART_SPIRIT` holds compassion, effort and courage
+  (`take heart`, `have heart`, `cannot find it in my heart to`; `lose heart` reads as `LOSE_NERVE`), and the
+  `HEARTBREAK` guard holds a broken heart as written (`she broke my heart`, `my heart is breaking`). Rob
+  ruled that an emotional heart should not be `ticker`, while an image that relies on the physical heart
+  (`from the bottom of my heart`) may be; reviewed patterns hold heartbreak and compassion, and an
+  unreviewed figurative heart (`set his heart on`) remains a known limitation. No slang ID, sentence or
+  reference text enters the engine.
 
 ## Consequences
 
