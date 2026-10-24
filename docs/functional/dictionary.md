@@ -199,6 +199,13 @@ and direct entry replacements for that meaning. This is an actual boolean, indep
 register and flags. A mixed entry can still serve its other automatic meanings. Source forms remain in
 the recognition index. Intentional discovery-only concepts do not generate unreachable-trigger warnings.
 
+A concept that keeps its words as written by design, a guard or the holding concept for undecided senses,
+declares `no_entries: true`. The loader refuses an entry, image or construction for it, and it is never
+listed as a meaning waiting for a word. The holding concept must keep the marker. A concept may give `plain`
+wording a reader understands (`plain: think highly of`) and `examples`, sentences that read as that meaning;
+a test proves every bundled example detects its concept. A meaning with no word yet needs both, since
+[exploration](exploring.md#meanings-without-a-word-yet) lists them: the loader warns when one lacks them.
+
 ## Slots
 
 Slots are `{subj} {be} {have} {do} {poss} {obj} {objposs}`, plus `{np}`, which captures a short noun phrase'n copies

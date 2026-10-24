@@ -8,6 +8,12 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 - Add dictionary exploration across Python, CLI and MCP: stable entry pages, full metadata cards, seeded
   random entries, clean Aussie handle suggestions and complete construction variations. Lookup now
   distinguishes unknown meanings from settings with no compatible result using machine-readable outcomes.
+- List the meanings the dictionary recognises but has no Aussie word for yet, with plain wording and
+  examples (`list_wordless_meanings`, `aussiefy wordless-meanings`, `aussie_wordless_meanings`). Lookup
+  reports such a meaning as `no_word_yet`, so “take heart” or “probably” no longer reads as merely nothing
+  fitting. Guards and the holding concept declare `no_entries: true`; the loader refuses entries, images and
+  constructions for them. Fetching an omitted entry by ID reports it as not in the dictionary, without its
+  flags, and a blank `names.yaml` fails to load instead of disabling name suggestions.
 - Read “believe what he says” as taking it as true, while “believe what he says is true” still reckons.
   Leave a relative clause's next verb to the main clause after an object pronoun (“believe the man who
   told us was honest” reckons), and keep “believe” as written where the tags cannot tell.

@@ -25,12 +25,30 @@ with their reasons, never omitted entries; it does not unlock translation. New d
 existing evidence/attestation metadata and public theme names. Tag tiers, lowest default tier and dictionary
 identity join the shared contract in their planned slices. No second eligibility system is introduced.
 
-Lookup reports `matched`, `nothing_fits` or `not_in_dictionary` alongside existing prose. Recognition uses
-its existing bounded source readings and the same direct-form matcher used for ranking, evaluated before
-policy rejection for non-omitted terms. Policy-blocked entries are scored only when no eligible offer or prior recognition exists, using the same
-entry scorer. Imagery matching likewise records recognition before permissions. No second ranking logic
-or general semantic parser is introduced.
+Lookup reports `matched`, `nothing_fits`, `no_word_yet` or `not_in_dictionary` alongside existing prose.
+Recognition uses its existing bounded source readings and the same direct-form matcher used for ranking.
+Entries the dials reject are matched and scored only when no eligible offer or prior recognition exists,
+using the same matcher and entry scorer, so an offered result pays nothing for them. Imagery matching
+likewise records recognition before permissions. No second ranking logic or general semantic parser is
+introduced.
 A filtered page may additionally be `page_exhausted`, distinct from an empty eligible set.
+
+Meanings waiting for a word (ED13) are concepts that no non-omitted entry, image or construction family
+expresses, and none of whose triggers the dialect table swaps for the Australian word ("trash can" becomes
+"bin"). Rob ruled on 25 October that an image, a construction or a dialect swap counts as a word. The set is
+computed once on the loaded dictionary so extension concepts count. Only genuine meanings are
+listed (Rob, 24 October): a concept that keeps its words as written by design, a guard or the holding
+concept, declares `no_entries: true`. That data marker replaces a name or description heuristic: the loader
+refuses an entry, image or construction for any such concept. The engine itself assigns the holding concept,
+so the loader also refuses a dictionary, overlay included, that removes its marker. Each listed meaning
+carries `plain` wording and `examples`, which a test proves detect it for the bundled dictionary; the loader
+warns about a listed meaning without them, since extension dictionaries may add concepts. Rob approved the
+bundled wording and examples on 25 October. The listing shares `list_entries`'
+paging. Lookup claims `no_word_yet` only on evidence, for a meaning established in context, or matched
+across the whole query and not ruled out there; fuzzy similarity never claims it. Policy-blocked entries
+are checked for recognition cheapest first: a held term, then its meaning by spelling, then by the model. Its
+precedence is `matched`, `nothing_fits`, `no_word_yet`, then `not_in_dictionary`, so a meaning with a
+word that the settings block is still `nothing_fits`.
 
 `names.py` owns catalogue validation and deterministic handle assembly, with no I/O, translator factory or
 account state. The loader reads `names.yaml`. Clean dictionary entries supply adjectives and phrase parts;
@@ -55,6 +73,8 @@ work; this operation does not infer an arbitrary sentence's meaning from a const
 
 ## Consequences
 
+Whether a borderline concept is a genuine meaning or a guard is curation, recorded in data and open to
+review; a meaning whose words sit under a neighbouring concept is listed until a curator tags them.
 Pages are stable for a fixed dictionary/settings snapshot; offsets do not promise stability across updates.
 Random choices are reproducible, and held-back vocabulary is discoverable without changing translation
 permissions. The shared contract's later update still has one coordinated place to add tier fields.

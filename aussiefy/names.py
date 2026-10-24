@@ -34,7 +34,7 @@ def _safe(text, dictionary):
 
 
 def parse_name_catalog(raw, dictionary):
-    if raw == {}:
+    if raw is None:   # no names.yaml: a custom dictionary without one suggests nothing
         return None
     keys = {"version", "descriptors", "things", "nicknames", "places", "phrases"}
     if not isinstance(raw, dict) or set(raw) != keys or raw.get("version") != "aussiefy-names/v1":

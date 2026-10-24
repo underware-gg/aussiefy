@@ -41,6 +41,8 @@ from .loader import load_dictionary
 from . import claude
 from .errors import UserError
 from .dialect import ENGLISHES
+from .explore import DEFAULT_PAGE_SIZE
+from .names import SHAPES
 from .loader import load_genres
 from .markup import MARKUPS
 from .policy import DOCUMENT_TYPES, parse_embellishment, parse_level, parse_vulgarity
@@ -321,6 +323,8 @@ def cmd_lookup(args) -> int:
         print(f"  image ({image['form']}, {image['association']}): {image['text']} — {image['usage']}")
     if not out["results"] and not out.get("imagery"):
         print(f"  (no match for {out['query']!r} at level {out['level']}) {out['note']}")
+        for meaning in out.get("meanings", ()):
+            print(f"  meaning {meaning['concept']}: {meaning['plain']}")
     return 0 if out["results"] or out.get("imagery") else 1
 
 
@@ -383,6 +387,22 @@ def cmd_name(args) -> int:
     else:
         print(out["name"] or f"({out['outcome']})")
     return 0 if out["name"] else 1
+
+
+def cmd_wordless(args) -> int:
+    from . import harness
+    out = harness.list_wordless_meanings(offset=args.offset, limit=args.limit, translator=_translator(args))
+    if args.json:
+        _json(out)
+    else:
+        for row in out["results"]:
+            example = f" (“{row['examples'][0]}”)" if row["examples"] else ""
+            print(f"  {row['concept']}: {row['plain']}{example}")
+        if out["next_offset"] is not None:
+            print(f"  (next offset: {out['next_offset']})")
+        if not out["results"]:
+            print(f"  ({out['outcome']})")
+    return 0 if out["results"] else 1
 
 
 def cmd_variations(args) -> int:
@@ -566,9 +586,11 @@ def cmd_validate(args) -> int:
     print(f"active idioms by minimum level: {dict(sorted(by_level.items()))}")
     for change in d.overlay_changes:
         print(_overlay_summary(change))
-    unused = [c for c in d.concepts if not any(c in e.concept for e in d.idioms)]
-    if unused:
-        print(f"concepts with no entries (guard concepts hold a longer match on purpose): {', '.join(unused)}")
+    guards = [c for c, concept in d.concepts.items() if concept.no_entries]
+    if guards:
+        print(f"concepts that keep their words as written (no entries by design): {', '.join(guards)}")
+    if d.wordless_meanings:
+        print(f"meanings with no word yet: {', '.join(d.wordless_meanings)}")
     _warn(d.warnings)
     return 0
 
@@ -931,13 +953,19 @@ def build_parser() -> argparse.ArgumentParser:
             ex.add_argument("--theme")
         if command == "entries":
             ex.add_argument("--offset", type=int, default=0)
-            ex.add_argument("--limit", type=int, default=20)
+            ex.add_argument("--limit", type=int, default=DEFAULT_PAGE_SIZE)
         ex.set_defaults(func=cmd_explore)
 
     nm = sub.add_parser("suggest-name", parents=[dictionary, as_json, seeded],
                         help="a clean Aussie handle; check uniqueness before using it")
-    nm.add_argument("--shape", choices=("descriptive", "place", "phrase"))
+    nm.add_argument("--shape", choices=SHAPES)
     nm.set_defaults(func=cmd_name)
+
+    wm = sub.add_parser("wordless-meanings", parents=[dictionary, as_json],
+                        help="meanings the dictionary recognises but has no Aussie word for yet")
+    wm.add_argument("--offset", type=int, default=0)
+    wm.add_argument("--limit", type=int, default=DEFAULT_PAGE_SIZE)
+    wm.set_defaults(func=cmd_wordless)
 
     va = sub.add_parser("variations", parents=[*toolkit, filters, embellished, seeded],
                         help="compatible part changes for a constructed expression")

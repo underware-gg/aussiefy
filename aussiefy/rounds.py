@@ -341,6 +341,7 @@ def _prepare_concept_fixes(plan: RoundPlan, d: Dictionary) -> None:
             raw = {f.name: getattr(concept, f.name) for f in fields(Concept) if f.name != "id"}
             raw["triggers"] = {frame: list(patterns) for frame, patterns in concept.triggers.items()}
             raw["unless_after"] = list(concept.unless_after)
+            raw["examples"] = list(concept.examples)
             raw["trigger_effects"] = {frame: {pattern: list(effects) for pattern, effects in mappings.items()}
                                       for frame, mappings in concept.trigger_effects.items()}
             raw.update(patch)

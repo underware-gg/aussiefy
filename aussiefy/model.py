@@ -15,7 +15,7 @@ from .dialect import DialectTable
 from .matcher import Pattern, PatternIndex, compile_pattern
 from .schema import Concept, Entry, Imagery
 from .evidence import EvidenceWeights, TermMetadata
-from .text import COMMON_STARTERS, MASK_WORD_RE, normalise_word, spoken_word
+from .text import COMMON_STARTERS, MASK_WORD_RE, normalise_word, spoken_word, tokenize
 from .terms import fold, strip_markup, name_slug
 
 if TYPE_CHECKING:
@@ -152,6 +152,23 @@ class Dictionary:
         forms += [riff.text for entry in self.entries.values() for riff in entry.riffs]
         forms += [image.text for image in self.imagery]
         return frozenset(form_key(text) for text in forms)
+
+    @cached_property
+    def wordless_meanings(self) -> tuple[str, ...]:
+        """Recognised meanings with no Aussie word yet, by ID: no entry, image or construction expresses them, and
+        the dialect table swaps none of their triggers for the Australian word ("trash can" is a bin). Concepts
+        that take no entries by design (guards, the holding concept) are not meanings waiting (Rob, 25 October)."""
+        expressed = {cid for entry in self.entries.values() if entry.status != "omit" for cid in entry.concept}
+        expressed.update(cid for image in self.imagery for cid in image.concepts)
+        if self.construction_catalog is not None:
+            expressed.update(family.concept for family in self.construction_catalog.families)
+
+        def swapped(text):
+            tokens = tokenize(text)
+            return (0, len(tokens)) in self.dialect.spans(tokens, None, "general")
+        return tuple(sorted(cid for cid, concept in self.concepts.items()
+                            if not concept.no_entries and cid not in expressed
+                            and not any(swapped(t) for texts in concept.triggers.values() for t in texts)))
 
     def swear_strength(self, word: str) -> int:
         """How strong a swear a word is (0 for none), dropped g and plurals read as the listed word."""

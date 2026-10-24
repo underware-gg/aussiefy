@@ -153,7 +153,7 @@ def test_known_meaning_without_an_equivalent_explains_abstention(dictionary):
     tr = Translator(dictionary, lookup_embedder=None)
     known = harness.lookup('probably', translator=tr)
     unknown = harness.lookup('zzqqxx', translator=tr)
-    assert 'no compatible suggestion' in known['note']
+    assert known['outcome'] == 'no_word_yet' and 'no Aussie word for it yet' in known['note']
     assert 'unvetted' not in known['note']
     assert 'unvetted' in unknown['note']
 

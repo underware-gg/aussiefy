@@ -13,6 +13,7 @@ perform a translation or change the caller's text.
 | `list_entries(...)` | `aussiefy entries` | `aussie_entries` |
 | `get_entry(entry_id, ...)` | `aussiefy entry stoked` | `aussie_entry` |
 | `random_entry(seed=0, ...)` | `aussiefy random-entry --seed 0` | `aussie_random_entry` |
+| `list_wordless_meanings(...)` | `aussiefy wordless-meanings` | `aussie_wordless_meanings` |
 | `suggest_name(seed=0, ...)` | `aussiefy suggest-name --seed 0` | `aussie_suggest_name` |
 | `variations(family, parts=..., ...)` | `aussiefy variations FAMILY --parts JSON` | `aussie_variations` |
 
@@ -52,14 +53,31 @@ card/changes contract update.
 | Code | Meaning |
 |---|---|
 | `matched` | A card, name or variation is available |
-| `nothing_fits` | A known term or meaning has no compatible offer under these settings, or an explicit filter has no eligible entries |
+| `nothing_fits` | A known term or meaning has no compatible offer under these settings, an explicit filter has no eligible entries, or no meaning is waiting for a word |
+| `no_word_yet` | The meaning is recognised, but the dictionary has no Aussie word for it yet (lookup only) |
 | `not_in_dictionary` | No term/meaning was recognised; the dictionary may be incomplete |
 | `page_exhausted` | Eligible entries exist, but this offset is beyond their final page |
 
-`lookup` now reports these codes in `outcome` (`matched`, `nothing_fits`, `not_in_dictionary`) beside its
-existing note. Recognition uses the same bounded meaning readings and direct-form matching as ranking;
+`lookup` reports these codes in `outcome` (`matched`, `nothing_fits`, `no_word_yet`, `not_in_dictionary`)
+beside its existing note. `no_word_yet` also returns `meanings`, each with its `concept` and `plain` wording.
+It is claimed only for a meaning the query establishes in context, or that a pattern matches across the whole
+query without being ruled out there, never from spelling similarity alone. Recognition uses the same bounded meaning readings and direct-form matching as ranking;
 this is not a claim that an unknown meaning cannot be Australian. A known term held back by policy is
 recognised even when its card cannot be offered. Cards and imagery count as a successful lookup.
+
+## Meanings without a word yet
+
+`list_wordless_meanings` pages through the meanings the dictionary recognises but has no Aussie word for:
+no entry, image or construction expresses them (omitted entries don't count), and the dialect table doesn't
+already swap their words for the Australian one (“trash can” becomes “bin”). It takes `offset` and `limit`,
+paged as `list_entries` is, and an optional translator, so extension dictionaries' meanings are included.
+No dials apply. Results are ordered by concept ID; each has its `concept`, `plain` wording and `examples`,
+sentences in which translation reads that meaning (a test proves each for the bundled dictionary). The
+outcome is `nothing_fits` when no meaning is waiting at all.
+
+Only genuine meanings are listed. Guards, which keep words as written in another sense, and the holding
+concept for undecided senses take no entries by design: their concepts say `no_entries: true` and never
+appear. See the [dictionary format](dictionary.md).
 
 ## Clean name suggestions
 

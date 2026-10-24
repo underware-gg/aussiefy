@@ -102,7 +102,10 @@ def test_guard_status_follows_available_replacements(tmp_path):
 
     base = load_dictionary()
     path = tmp_path / 'entry.yaml'
-    path.write_text('- {id: test-fellow, form: companion, concept: [FELLOW_BEFORE_NAME], frame: np}\n')
+    # a curator who gives a guard a replacement unmarks it first: the loader refuses entries for a marked guard
+    path.write_text('format: aussiefy-dictionary-overlay/v1\n'
+                    'patch_concepts: {FELLOW_BEFORE_NAME: {no_entries: false}}\n'
+                    'add_entries: [{id: test-fellow, form: companion, concept: [FELLOW_BEFORE_NAME], frame: np}]\n')
     extended = load_dictionary([path])
     tokens = tokenize('fellow Texans and Australians')
     tags = pos.tag([t.text for t in tokens])

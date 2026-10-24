@@ -49,7 +49,8 @@ def test_discovery_marks_holds_and_never_returns_omitted_entries(dictionary):
     assert get_entry("foreign", translator=tr)["outcome"] == "nothing_fits"
     assert get_entry("missing", translator=tr)["outcome"] == "not_in_dictionary"
     assert get_entry("foreign", include_gated=True, translator=tr)["entry"] == shown["foreign"]
-    assert get_entry("omitted", include_gated=True, translator=tr)["entry"] is None
+    hidden = get_entry("omitted", include_gated=True, translator=tr)
+    assert hidden["entry"] is None and hidden["outcome"] == "not_in_dictionary" and "reason" not in hidden
 
 
 def test_filters_and_exact_permissions_share_the_existing_policy(translator):
@@ -124,6 +125,7 @@ def test_no_match_codes_preserve_meaning_and_direct_term_recognition(dictionary)
         "held": Entry("held", "testnoun", ("HUNGRY",), "predicate_adj", status="gate", gloss="xylophone"),
     }, imagery=()), lookup_embedder=None)
     assert lookup("hungry", translator=tr)["outcome"] == "nothing_fits"
+    assert "no compatible suggestion" in lookup("hungry", translator=tr)["note"]
     assert lookup("testnoun", translator=tr)["outcome"] == "nothing_fits"
     assert lookup("testnoun", include_gated=True, translator=tr)["outcome"] == "matched"
     assert lookup("xylophone", translator=tr)["outcome"] == "nothing_fits"
@@ -168,6 +170,7 @@ def test_variations_validate_whole_expressions_and_keep_other_parts_fixed(transl
     ("suggest-name", "suggest_name", ["--seed", "9", "--shape", "place"], {"seed": 9, "shape": "place"}),
     ("variations", "variations", ["hungry-enough-to", "--parts", '{"state":"hungry","act":"sausage-shadow"}'],
      {"family": "hungry-enough-to", "parts": {"state": "hungry", "act": "sausage-shadow"}}),
+    ("wordless-meanings", "list_wordless_meanings", ["--limit", "5", "--offset", "3"], {"limit": 5, "offset": 3}),
 ])
 def test_exploration_cli_returns_the_python_result(command, function, args, kwargs, capsys):
     import json
@@ -184,10 +187,11 @@ def test_exploration_page_cap_is_enforced_by_hosted_mcp():
     from aussiefy.mcp_server import build_server
     from mcp.server.mcpserver.exceptions import ToolError
     server = build_server(lookup_limit=3)
-    response = asyncio.run(server.call_tool("aussie_entries", {})).structured_content
-    assert response["limit"] == 3 and len(response["results"]) <= 3
-    with pytest.raises(ToolError):
-        asyncio.run(server.call_tool("aussie_entries", {"limit": 4}))
+    for tool in ("aussie_entries", "aussie_wordless_meanings"):
+        response = asyncio.run(server.call_tool(tool, {})).structured_content
+        assert response["limit"] == 3 and len(response["results"]) <= 3
+        with pytest.raises(ToolError):
+            asyncio.run(server.call_tool(tool, {"limit": 4}))
 
 
 def test_names_never_use_known_garnish_insults_or_themed_literal_parts(data_copy):
@@ -260,3 +264,121 @@ def test_name_safety_includes_known_themed_riffs_and_imagery(dictionary):
 def test_slotted_imagery_keeps_its_hazard_after_handle_punctuation_changes(dictionary):
     from aussiefy.names import _safe
     assert not _safe("her-stomach-thinks-her-throat-s-been-cut", dictionary)
+
+
+def _readings(source, dictionary):
+    from aussiefy.detect import detect, resolve_overlaps
+    from aussiefy.text import tokenize
+    found = resolve_overlaps(detect(tokenize(source), dictionary.index, concepts=dictionary.concepts,
+                                    adjective_nouns=dictionary.adjective_nouns, degree_index=dictionary.degree_index,
+                                    person_nouns=dictionary.person_nouns))
+    return {cid for reading in found for cid in reading.concepts}
+
+
+def test_wordless_meanings_page_only_genuine_meanings_with_plain_wording(translator):
+    from aussiefy.explore import list_wordless_meanings
+    from aussiefy.schema import HOLDING_CONCEPT
+    d = translator.dictionary
+    seen, offset = [], 0
+    while offset is not None:
+        page = list_wordless_meanings(offset=offset, limit=7, translator=translator)
+        assert page["total"] == len(d.wordless_meanings) and page["outcome"] == "matched"
+        seen.extend(page["results"])
+        offset = page["next_offset"]
+    ids = [row["concept"] for row in seen]
+    assert ids == sorted(ids) and {"ACCEPT_AS_TRUE", "HEART_SPIRIT", "FANCIFUL"} <= set(ids)
+    assert not {HOLDING_CONCEPT, "HEARTBREAK", "BROKEN_OTHER_SENSE"} & set(ids)
+    assert "BIN" not in ids   # the dialect table already swaps "trash can" for the Australian "bin"
+    assert all(not d.concepts[cid].no_entries for cid in ids)
+    assert all(row["plain"] and row["examples"] for row in seen)
+    assert not {cid for e in d.entries.values() if e.status != "omit" for cid in e.concept} & set(ids)
+    end = list_wordless_meanings(offset=len(ids), translator=translator)
+    assert end["outcome"] == "page_exhausted" and end["next_offset"] is None
+    assert d.concepts[HOLDING_CONCEPT].no_entries
+
+
+@pytest.mark.parametrize("options", [{"limit": True}, {"limit": 0}, {"limit": 101}, {"offset": True}, {"offset": -1}])
+def test_invalid_wordless_meaning_pages_raise(options, translator):
+    from aussiefy.explore import list_wordless_meanings
+    with pytest.raises(UserError):
+        list_wordless_meanings(translator=translator, **options)
+
+
+def test_every_concept_example_reads_as_its_meaning(dictionary):
+    for cid, concept in dictionary.concepts.items():
+        for example in concept.examples:
+            assert cid in _readings(example, dictionary), (cid, example)
+
+
+def test_a_word_for_a_meaning_takes_it_off_the_waiting_list(dictionary):
+    from aussiefy import lookup
+    from aussiefy.explore import list_wordless_meanings
+    word = Entry("test-heart", "testheart", ("HEART_SPIRIT",), "vp")
+    tr = Translator(replace(dictionary, entries={**dictionary.entries, word.id: word}), lookup_embedder=None)
+    assert "HEART_SPIRIT" not in tr.dictionary.wordless_meanings
+    assert "HEART_SPIRIT" not in {row["concept"] for row in list_wordless_meanings(limit=100, translator=tr)["results"]}
+    assert lookup("take heart", translator=tr)["outcome"] == "matched"
+
+
+def test_an_image_or_construction_for_a_meaning_takes_it_off_the_waiting_list(dictionary):
+    from aussiefy.schema import Imagery
+    image = Imagery("test-heart-image", "like a lion", ("HEART_SPIRIT",), "comparison")
+    assert "HEART_SPIRIT" not in replace(dictionary, imagery=(*dictionary.imagery, image)).wordless_meanings
+    catalog = dictionary.construction_catalog
+    family = replace(catalog.families[0], concept="HEART_SPIRIT")
+    with_family = replace(dictionary, construction_catalog=replace(catalog, families=(*catalog.families, family)))
+    assert "HEART_SPIRIT" not in with_family.wordless_meanings
+
+
+def _overlay(tmp_path, document):
+    path = tmp_path / "overlay.yaml"
+    path.write_text(yaml.safe_dump({"format": "aussiefy-dictionary-overlay/v1", **document}), encoding="utf-8")
+    return path
+
+
+def test_the_holding_concept_cannot_be_unmarked_to_take_entries(tmp_path):
+    path = _overlay(tmp_path, {"patch_concepts": {"UNRESOLVED_SENSE": {"no_entries": False}}})
+    with pytest.raises(SchemaError, match="must keep no_entries"):
+        load_dictionary([path])
+
+
+def test_an_extension_meaning_without_plain_wording_is_flagged(tmp_path):
+    path = _overlay(tmp_path, {"add_concepts": {"TEST_WAITING": {
+        "description": "A test meaning.", "triggers": {"vp": ["zorbulate"]}}}})
+    d = load_dictionary([path])
+    assert "TEST_WAITING" in d.wordless_meanings
+    assert any("TEST_WAITING" in warning and "plain wording" in warning for warning in d.warnings)
+
+
+def test_images_and_constructions_cannot_target_a_guard(data_copy):
+    path = data_copy / "imagery.yaml"
+    raw = yaml.safe_load(path.read_text())
+    raw[0]["concepts"] = ["HEARTBREAK"]
+    path.write_text(yaml.safe_dump(raw))
+    with pytest.raises(SchemaError, match="takes no images or constructions"):
+        load_dictionary(data_dir=data_copy)
+
+
+def test_a_blank_names_catalogue_fails_to_load(data_copy):
+    (data_copy / "names.yaml").write_text("")
+    with pytest.raises(SchemaError, match="names.yaml"):
+        load_dictionary(data_dir=data_copy)
+
+
+def test_lookup_says_when_a_recognised_meaning_has_no_word_yet(translator):
+    from aussiefy import lookup
+    waiting = lookup("take heart", translator=translator)
+    assert waiting["outcome"] == "no_word_yet" and not waiting["results"]
+    assert waiting["meanings"] == [{"concept": "HEART_SPIRIT",
+                                    "plain": translator.dictionary.concepts["HEART_SPIRIT"].plain}]
+    assert lookup("fantastic terrors", translator=translator)["outcome"] == "no_word_yet"
+    # a waiting meaning's trigger negated or embedded in more than it explains is not claimed, nor is a guard
+    for query in ("not the fallen", "I never bring into being", "not loyalty", "she broke my heart", "harpsichord"):
+        assert lookup(query, translator=translator)["outcome"] != "no_word_yet", query
+    assert lookup("very busy", translator=translator)["outcome"] == "matched"
+
+
+def test_cli_lookup_names_the_meaning_with_no_word_yet(capsys):
+    from aussiefy.cli import main
+    assert main(["lookup", "take", "heart"]) == 1
+    assert "meaning HEART_SPIRIT: compassion, courage or wholehearted effort" in capsys.readouterr().out

@@ -231,10 +231,10 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         if exhaustive is not None or det.frame not in {'np', 'adv'}:
             for cid in set(det.concepts).intersection(established):
                 concept_score[cid] = max(concept_score.get(cid, 0), 1.0)
-    for matched in raw_matches:
-        if matched.start == 0 and matched.end == len(tokens):
-            for cid in matched.pattern.concepts:
-                concept_score[cid] = max(concept_score.get(cid, 0), 1.0)
+    whole_query = [m for m in raw_matches if m.start == 0 and m.end == len(tokens)]
+    for matched in whole_query:
+        for cid in matched.pattern.concepts:
+            concept_score[cid] = max(concept_score.get(cid, 0), 1.0)
     if one_word:   # "cry": the concept's own description names it even where no trigger does
         variants = {q, re.sub(r"ying$", "y", q), re.sub(r"ing$", "", q), re.sub(r"ing$", "e", q),
                     re.sub(r"ies$", "y", q), re.sub(r"s$", "", q)}
@@ -247,7 +247,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
                if m.start == 0 and m.end == len(tokens) and m.pattern.slots}
     parsed_concepts = {cid for eid in slotted for cid in d.entries[eid].concept}
     negative_anchors = {w[:-4] if w.endswith("less") else w for w in content_words(q)}
-    def score_entry(e, term_match):
+    def score_entry(e, term_match, use_model=True):
         if term_match:
             return term_match[0], e, term_match[1]
         paths = set(e.concept)
@@ -264,7 +264,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
             gloss = e.gloss.lower()
             hit = one_word and q in re.findall(r"[a-z']+", gloss)
             best = max(best, GLOSS_NAMES_IT if hit else sim.similarity(q, gloss) * GLOSS_FUZZ[not one_word])
-        if model is not None:
+        if model is not None and use_model:
             # the local model: meaning where n-grams only see spelling. Scored for every entry, not just the
             # ones n-grams missed: otherwise a weak n-gram match (knackered for "very tired", 0.65) keeps its weak
             # score while a model-only one (maggoted, from "Very drunk.") gets the model's, and outranks it
@@ -279,17 +279,24 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
             return best, e, "meaning"
         return None
 
-    recognised = exhaustive is not None
+    # a meaning with no Aussie word yet is claimed on evidence only: established in context, or the whole query
+    wordless = set(d.wordless_meanings)
+    evident = established.union(*(m.pattern.concepts for m in whole_query))
+    waiting = sorted(cid for cid in wordless.intersection(evident if exhaustive is None else exhaustive)
+                     if cid in evident and (cid not in blocked or cid in established))
+    recognised = exhaustive is not None and bool(exhaustive - wordless)
     deferred = []
     for e in d.idioms + d.garnish:
         if e.status == "omit":
             continue
+        if dial_rejection(e, eff, include_gated=include_gated):
+            deferred.append(e)   # term-matched only if nothing is offered: most entries, at the lowest dials
+            continue
         term_match = _term_match(e, qn, slotted)
         recognised |= term_match is not None
-        if (dial_rejection(e, eff, include_gated=include_gated)
-                or not term_match and semantic_rejection(e, narrator_opinion=setting.narrator_opinion,
-                    quantity_approximation=setting.quantity_approximation, effects=effects_for(e))):
-            deferred.append((e, term_match))
+        if not term_match and semantic_rejection(e, narrator_opinion=setting.narrator_opinion,
+                quantity_approximation=setting.quantity_approximation, effects=effects_for(e)):
+            deferred.append(e)
         elif match := score_entry(e, term_match):
             scored.append(match)
     scored.sort(key=lambda t: (-t[0], t[1].incoherence, t[1].id))
@@ -313,13 +320,22 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     images, recognised_image = lookup_images(d, query, eff, setting, limit)
     recognised |= recognised_image
     if not results and not images and not recognised:
-        recognised = any(score_entry(e, term_match) is not None for e, term_match in deferred)
+        # cheapest evidence first: a held term itself, then its meaning by spelling, then by the model
+        recognised = (any(_term_match(e, qn, slotted) for e in deferred)
+                      or any(score_entry(e, None, use_model=False) for e in deferred)
+                      or any(score_entry(e, None) for e in deferred))
     if images:
         out["imagery"] = images
-    out["outcome"] = "matched" if results or images else "nothing_fits" if recognised else "not_in_dictionary"
+    out["outcome"] = ("matched" if results or images else "nothing_fits" if recognised
+                      else "no_word_yet" if waiting else "not_in_dictionary")
+    if out["outcome"] == "no_word_yet":
+        out["meanings"] = [{"concept": cid, "plain": d.concepts[cid].plain} for cid in waiting]
     if not results and not images:
-        out["note"] = ("The dictionary recognises this meaning but has no compatible suggestion at these settings. "
-                       "Try another wording or look up a specific term." if recognised else
-                       "No entry. If you're sure Australians say it, it's probably fine but unvetted; "
-                       "otherwise rephrase. Consider proposing it for the dictionary.")
+        out["note"] = {
+            "nothing_fits": "The dictionary recognises this meaning but has no compatible suggestion at these "
+                            "settings. Try another wording or look up a specific term.",
+            "no_word_yet": "The dictionary recognises this meaning but has no Aussie word for it yet. "
+                           "Consider proposing one.",
+            "not_in_dictionary": "No entry. If you're sure Australians say it, it's probably fine but unvetted; "
+                                 "otherwise rephrase. Consider proposing it for the dictionary."}[out["outcome"]]
     return out

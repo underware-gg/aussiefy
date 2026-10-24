@@ -48,25 +48,45 @@ def _card(entry, eff, setting):
             "held_back": list(entry.held_back)}
 
 
+def _page(items, offset, limit):
+    """A stable page of items: the page, and the next offset if any items remain."""
+    if type(offset) is not int or offset < 0:
+        raise UserError("offset must be a non-negative integer")
+    if type(limit) is not int or not 1 <= limit <= MAX_PAGE_SIZE:
+        raise UserError(f"limit must be an integer from 1 to {MAX_PAGE_SIZE}")
+    page = items[offset:offset + limit]
+    return page, offset + len(page) if offset + len(page) < len(items) else None
+
+
+def _outcome(page, items):
+    return "matched" if page else "page_exhausted" if items else "nothing_fits"
+
+
 def list_entries(*, concept: str | None = None, theme: str | None = None, offset: int = 0,
                  limit: int = DEFAULT_PAGE_SIZE, level: int | str = 5, vulgarity: int | str | None = None,
                  include_gated: bool = False, embellishment: int | str | None = None,
                  document_type: str = "general", document_config: dict | None = None,
                  translator: Translator | None = None) -> dict:
     """List a stable page of entries; concept and theme filters intersect. Omitted entries never appear."""
-    if type(offset) is not int or offset < 0:
-        raise UserError("offset must be a non-negative integer")
-    if type(limit) is not int or not 1 <= limit <= MAX_PAGE_SIZE:
-        raise UserError(f"limit must be an integer from 1 to {MAX_PAGE_SIZE}")
     d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
     concept, theme = _filters(d, concept, theme)
     entries = _entries(d, eff, concept, theme, include_gated)
-    page = entries[offset:offset + limit]
-    next_offset = offset + len(page) if offset + len(page) < len(entries) else None
+    page, next_offset = _page(entries, offset, limit)
     return {**envelope, "concept": concept, "theme": theme, "offset": offset, "limit": limit,
-            "total": len(entries), "next_offset": next_offset,
-            "outcome": "matched" if page else "page_exhausted" if entries else "nothing_fits",
+            "total": len(entries), "next_offset": next_offset, "outcome": _outcome(page, entries),
             "results": [_card(entry, eff, setting) for entry in page]}
+
+
+def list_wordless_meanings(*, offset: int = 0, limit: int = DEFAULT_PAGE_SIZE,
+                           translator: Translator | None = None) -> dict:
+    """List a stable page of the meanings the dictionary recognises but has no Aussie word for yet, each with
+    its plain wording and reviewed example sentences. Guards and the holding concept never appear."""
+    d = (translator or default_translator()).dictionary
+    page, next_offset = _page(d.wordless_meanings, offset, limit)
+    return {"offset": offset, "limit": limit, "total": len(d.wordless_meanings), "next_offset": next_offset,
+            "outcome": _outcome(page, d.wordless_meanings),
+            "results": [{"concept": cid, "plain": d.concepts[cid].plain, "examples": list(d.concepts[cid].examples)}
+                        for cid in page]}
 
 
 def get_entry(entry_id: str, *, level: int | str = 5, vulgarity: int | str | None = None,
@@ -78,12 +98,12 @@ def get_entry(entry_id: str, *, level: int | str = 5, vulgarity: int | str | Non
         raise UserError("entry_id must be a non-empty string")
     d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
     entry = d.entries.get(entry_id)
-    reason = (dial_rejection(entry, eff, include_gated=include_gated)
-              or register_rejection(entry, eff.registers)) if entry is not None else None
-    card = _card(entry, eff, setting) if entry is not None and reason is None else None
-    return {**envelope, "entry_id": entry_id, "entry": card,
-            "outcome": "matched" if card else "nothing_fits" if entry is not None else "not_in_dictionary",
-            **({"reason": str(reason)} if reason else {})}
+    if entry is None or entry.status == "omit":   # an omitted entry is never shown, nor its flags
+        return {**envelope, "entry_id": entry_id, "entry": None, "outcome": "not_in_dictionary"}
+    reason = dial_rejection(entry, eff, include_gated=include_gated) or register_rejection(entry, eff.registers)
+    if reason:
+        return {**envelope, "entry_id": entry_id, "entry": None, "outcome": "nothing_fits", "reason": str(reason)}
+    return {**envelope, "entry_id": entry_id, "entry": _card(entry, eff, setting), "outcome": "matched"}
 
 
 def random_entry(*, seed: int = 0, concept: str | None = None, theme: str | None = None,

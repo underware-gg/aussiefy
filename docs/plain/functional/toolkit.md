@@ -7,7 +7,7 @@ them; `lookup`, `lint` and `guide` each live in their own module (`lookup.py`, `
 | Function | CLI | What it does |
 |---|---|---|
 | `bulldust(concept)` | `aussiefy bulldust HUNGRY` | Seeded idiom construction from reviewed families, labelled bulldust with evidence on every part; [reference](bulldust.md) |
-| `list_entries`, `get_entry`, `random_entry`, `suggest_name`, `variations` | `entries`, `entry`, `random-entry`, `suggest-name`, `variations` | [Dictionary exploration](exploring.md), clean handles and construction variations |
+| `list_entries`, `get_entry`, `random_entry`, `list_wordless_meanings`, `suggest_name`, `variations` | `entries`, `entry`, `random-entry`, `wordless-meanings`, `suggest-name`, `variations` | [Dictionary exploration](exploring.md), meanings without a word yet, clean handles and construction variations |
 | `lookup(query)` | `aussiefy lookup "very busy"` | Genuine Aussie options for a meaning, or what a term means ("goog"), filtered to the level and vulgarity |
 | `lint(text)` | `aussiefy lint < draft.txt` | Lints a draft for flagged non-Aussie phrases, swearing over the cap (via `aussiefy/data/swears.yaml`), US spelling and US/UK words (`aussiefy/data/dialect.yaml`), plus optional "could be more Aussie" suggestions. With `original=`, also checks fidelity: length, and names and numbers kept or invented |
 | `guide(level)` | `aussiefy guide -l 5` | Voice, language limits and the craft rules learned from good translations (swear inside sentences, tag-ons only in dialogue, connectives in narration, no pile-ups, Australian spelling); craft is filtered to the requested dials; `aussiefy/data/guide.yaml` also owns the workflow, plan note and yarn rules |

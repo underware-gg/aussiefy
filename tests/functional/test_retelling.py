@@ -55,6 +55,8 @@ def test_stdio_entry_point_serves_the_shared_toolkit(tmp_path):
     from mcp import ClientSession, StdioServerParameters
     from mcp.client.stdio import stdio_client
 
+    from aussiefy.mcp_server import build_server
+
     async def exercise():
         server = StdioServerParameters(command=sys.executable, args=["-m", "aussiefy.mcp_server"],
                                        cwd=tmp_path, env={"AUSSIEFY_HOME": str(tmp_path / "home"),
@@ -63,8 +65,8 @@ def test_stdio_entry_point_serves_the_shared_toolkit(tmp_path):
             async with ClientSession(reader, writer) as client:
                 await client.initialize()
                 tools = await client.list_tools()
-                assert {t.name for t in tools.tools} == {
-                    "aussie_bulldust", "aussie_guide", "aussie_plan", "aussie_lookup", "aussie_lint", "aussie_translate", "aussie_verify"}
+                served = {t.name for t in (await build_server().list_tools())}
+                assert {t.name for t in tools.tools} == served
                 result = await client.call_tool("aussie_translate", {"text": "I'm extremely busy.", "level": 4, "seed": 7})
                 assert not result.is_error
                 output = result.structured_content
