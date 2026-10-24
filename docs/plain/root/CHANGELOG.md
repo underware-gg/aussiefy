@@ -22,6 +22,9 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
   ten miles” as no hardship. Patterns gain `?={ing}` (a gerund object) and `^start` (opens a clause).
   `?={np}` no longer accepts a gerund heading its own phrase as an object.
 - Inflect a verb idiom's head once: “He tells porkies”, not “He tellings porkies”.
+- Keep an emotional heart as written: “she broke my heart” and “I cannot find it in my heart to” are no
+  longer “ticker”, while “from the bottom of my heart” still can be. “She does not think the world of
+  herself” is regard, not conceit.
 
 - Establish phrase meanings before choosing replacements. A pattern's context (`?={np}` objects and `?=`
   neighbours) can decide a word's sense without becoming part of what it replaces. Readings of the same

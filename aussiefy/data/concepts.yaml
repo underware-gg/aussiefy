@@ -189,11 +189,10 @@ BROKEN:
     predicate_adj: ["broken", "ruined@4", "busted", "not working@2", "beyond repair@5", "wrecked@4"]
 BROKEN_OTHER_SENSE:
   description: >-
-    Guard (no entries) - a heart, a silence, a record, a promise or the law broken isn't out of order. An np
-    frame, so the noun that starts each phrase isn't refused as a verb.
+    Guard (no entries) - a silence, a record, a promise or the law broken isn't out of order (a broken heart
+    is HEARTBREAK). An np frame, so the noun that starts each phrase isn't refused as a verb.
   triggers:
-    np: ["heart was broken", "heart is broken", "hearts were broken", "hearts are broken", "heart had been broken",
-         "silence was broken", "silence is broken", "spell was broken", "spell is broken", "record was broken",
+    np: ["silence was broken", "silence is broken", "spell was broken", "spell is broken", "record was broken",
          "record is broken", "records were broken", "promise was broken", "promises were broken",
          "law was broken", "laws were broken", "rules were broken", "rule was broken", "ice was broken",
          "news was broken", "deadlock was broken", "fast was broken", "will was broken", "spirit was broken",
@@ -1122,7 +1121,7 @@ REGARD_HIGHLY:
          # negated, "too" is understatement: "I don't think too highly of him" thinks poorly of him, and
          # the negation's context outranks the bare OVERVALUE and CONCEITED readings
          "?<=not|never think too|so|very|that? much of ?={np}", "?<=not|never think too|so|very? highly of ?={np}",
-         "?<=not|never think a lot of ?={np}"]
+         "?<=not|never think a lot of ?={np}", "?<=not|never think the world of ?={np}"]
 REGARD_POORLY:
   description: Think poorly of, disparage (think little or ill of); an evaluation, not a supposition.
   triggers:
@@ -1651,15 +1650,23 @@ HEART_ORGAN:
     heart is spirit or courage (take heart, showed real heart, a lot of heart), which ticker does not mean.
   triggers:
     # literal physical modifiers; "brave", "big", "strong" or "kind" hearts are spirit
-    np: ["?<=weak|healthy|failing|dodgy|damaged|enlarged|diseased|beating|pounding|racing|thumping heart !attack|attacks|disease|failure|surgery|rate|of|and|felt|sank|broke|out|set",
-         "?<=my|your|his|her|its|our|their|the|a|an|this|that|whose heart !attack|attacks|disease|failure|surgery|rate|of|and|felt|sank|broke|out|set"]
+    np: ["?<=weak|healthy|failing|dodgy|damaged|enlarged|diseased|beating|pounding|racing|thumping heart !attack|attacks|disease|failure|surgery|rate|of|and|felt|sank|out|set",
+         "?<=my|your|his|her|its|our|their|the|a|an|this|that|whose heart !attack|attacks|disease|failure|surgery|rate|of|and|felt|sank|out|set"]
 HEART_SPIRIT:
-  description: Compassion asked for, effort and enthusiasm, or courage (have a heart, put your heart into it,
-    her heart wasn't in it, take heart); not the organ.
+  description: Compassion asked for or found (have a heart, cannot find it in my heart to), effort and
+    enthusiasm (put your heart into it, her heart wasn't in it), or courage (take heart); not the organ.
   triggers:
     vp: ["have a heart ^end", "put {poss} heart into", "put {poss} heart and soul into",
-         "take heart !medication|medications|tablets|pills|drugs|rate|surgery", "have heart ^end"]
+         "find it? in {poss} heart ?=to", "take heart !medication|medications|tablets|pills|drugs|rate|surgery", "have heart ^end"]
     np: ["heart {be} not|never? really? in it", "heart's not|never? really? in it"]
+HEARTBREAK:
+  description: >-
+    Guard (no entries) - a broken heart is grief, not the organ or something out of order, so the words stay
+    as written (she broke my heart, my heart is breaking, her heart was broken); never ticker.
+  triggers:
+    vp: ["break all? {poss} heart|hearts", "break a|every|any heart"]
+    np: ["heart|hearts break|breaks|broke !down", "heart|hearts {be} breaking|broken", "heart's breaking|broken",
+         "heart|hearts had|has|have been broken", "heart|hearts will|would|could|might|can break"]
 UNRESOLVED_SENSE:
   description: Context leaves these words' sense undecided, so they stay as written. The engine assigns it
     where tags cannot settle an object (an object, or a clause's subject?); triggers name phrases whose sense

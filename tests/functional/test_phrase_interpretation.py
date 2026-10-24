@@ -310,6 +310,22 @@ def test_self_regard_needs_a_reflexive_affirmative_and_a_pronoun_to_agree_with(s
     assert not any('arse' in text for text in outputs(translator, source, vulgarity=2))
 
 
+@pytest.mark.parametrize('subject,reflexive', [('She', 'herself'), ('He', 'himself'), ('They', 'themselves')])
+@pytest.mark.parametrize('evaluation', ['the world', 'a lot', 'too much', 'too highly'])
+def test_negated_self_regard_does_not_claim_conceit(subject, reflexive, evaluation, translator):
+    auxiliary = 'do' if subject == 'They' else 'does'
+    source = f'{subject} {auxiliary} not think {evaluation} of {reflexive}.'
+    found = concepts(source, translator.dictionary)
+    assert 'REGARD_HIGHLY' in found and not found & {'CONCEITED', 'OVERVALUE'}
+    assert not any('arse' in text for text in outputs(translator, source, vulgarity=2))
+
+
+@pytest.mark.parametrize('source', ["She doesn't think the world of herself.", 'He never thinks the world of himself.'])
+def test_contracted_or_never_negated_self_regard_is_not_conceit(source, dictionary):
+    found = concepts(source, dictionary)
+    assert 'REGARD_HIGHLY' in found and 'CONCEITED' not in found
+
+
 def test_adoring_someone_else_keeps_their_arse(translator):
     assert 'She thinks the sun shines out of his arse.' in outputs(translator, 'She adores him.', vulgarity=2)
 
@@ -317,12 +333,24 @@ def test_adoring_someone_else_keeps_their_arse(translator):
 @pytest.mark.parametrize('source', ['Have heart, the team is still in it.', 'He has a lot of heart.',
                                     'Take heart, it will pass.', 'She showed real heart in the final.',
                                     'Have a heart, mate.', 'Put your heart into it.', "Her heart wasn't in it.",
-                                    "My heart's not in it.", 'His heart was never in it.'])
+                                    "My heart's not in it.", 'His heart was never in it.',
+                                    'I cannot find in my heart to leave them.',
+                                    'I cannot find it in my heart to forgive him.'])
 def test_heart_as_spirit_or_courage_is_never_ticker(source, translator):
     assert not any('ticker' in text for text in outputs(translator, source))
 
 
-@pytest.mark.parametrize('source', ['The doctor listened to my heart.', 'I cannot find in my heart to leave them.',
+@pytest.mark.parametrize('source', ['She broke my heart.', 'It breaks my heart to see it.',
+                                    'You have broken his heart.', 'Breaking her heart was cruel.',
+                                    'She broke all our hearts.', 'My heart breaks for them.',
+                                    'My heart is breaking.', 'His heart has been broken.', "My heart's broken.",
+                                    'My heart will break.', 'She will break a heart or two.'])
+def test_a_broken_heart_is_grief_not_ticker(source, translator):
+    assert 'HEARTBREAK' in concepts(source, translator.dictionary)
+    assert not any('ticker' in text for text in outputs(translator, source))
+
+
+@pytest.mark.parametrize('source', ['The doctor listened to my heart.', 'From the bottom of my heart, thanks.',
                                     'Ah, distinctly I remember, the beating of my heart.', 'He has a weak heart.',
                                     'He has a heart murmur.'])
 def test_a_determined_heart_still_takes_ticker(source, translator):
@@ -338,7 +366,8 @@ def test_an_object_or_clause_the_tags_cannot_settle_stays_as_written(source, tra
 
 
 @pytest.mark.parametrize('source', ['I believe what he says.', 'I believe what you told me.',
-                                    'I believe what happened.'])
+                                    'I believe what happened.', 'I believe whatever she told me.',
+                                    'They believe what the report says.'])
 def test_believing_what_was_said_is_taking_it_as_true(source, translator):
     assert 'ACCEPT_AS_TRUE' in concepts(source, translator.dictionary)
     assert not any('reckon' in text for text in outputs(translator, source))
@@ -346,6 +375,11 @@ def test_believing_what_was_said_is_taking_it_as_true(source, translator):
 
 def test_a_free_relative_subject_keeps_supposition(translator):
     assert all('I reckon what he says is true.' == text for text in outputs(translator, 'I believe what he says is true.'))
+
+
+def test_a_free_relative_subject_of_a_past_clause_keeps_supposition(dictionary):
+    found = concepts('I believe whatever she told me was false.', dictionary)
+    assert found & {'ACCEPT_AS_TRUE', 'THINK'} == {'THINK'}
 
 
 @pytest.mark.parametrize('source', ['I believe what she told me was true.', 'I believe what they told us was a lie.',

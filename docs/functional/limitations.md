@@ -22,13 +22,14 @@
 - **Phrase readings come from reviewed patterns, not general understanding.** Context patterns establish a
   few senses: believing a person or report, imagining (“only think what …”), and evaluative “think … of”
   (high, low or excessive regard, conceit, or no hardship). They also cover fanciful `fantastic` before nouns of fear, vision and
-  apparition, and `heart` as spirit or courage. Readings the patterns cannot establish fall back to the
+  apparition, and `heart` as compassion, spirit, courage or heartbreak. Readings the patterns cannot establish fall back to the
   word's own triggers. Context objects are read from part-of-speech tags, so a tagger error can still
   misplace an object's end (a verb tagged as a noun can join it). Where the tags cannot tell an object
   from a clause's subject (“believe the stories people tell”), the words stay as written and explain mode
   records `UNRESOLVED_SENSE`. Where evidence is mixed, the patterns prefer preservation: `fantastic dreams`
   and `fantastic creatures` stay plain even when praise was meant. `ticker` replaces only a heart directly
   after a determiner or possessive (“my heart”), so “the patient's heart” and “her poor heart” stay plain.
+  A figurative possessive heart that no pattern reviews still takes `ticker` (“set his heart on it”).
   Conceit (“thinks the sun shines out of his own arse”) needs a pronoun subject to agree with, so “John
   thinks too much of himself” stays plain. Most of these readings have no replacement entries, so they
   hold their words unchanged. A whole-phrase replacement that captures an `{np}` argument re-inserts it as
