@@ -11,6 +11,12 @@ a leading article, curly quotes, punctuation, "'n" and the dropped g all fall aw
 from __future__ import annotations
 
 import re
+
+
+def name_slug(text: str, *, preserve_slots: bool = False) -> str:
+    """The same name spelling for generation and hazardous-form recognition."""
+    text = re.sub(r"^(?:a|an|the)\s+", "", text.lower())
+    return re.sub(r"[^a-z0-9{}]+" if preserve_slots else r"[^a-z0-9]+", "-", text).strip("-")
 from typing import TYPE_CHECKING, Iterable
 
 from .schema import PLACEHOLDER_RE

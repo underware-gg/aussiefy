@@ -346,6 +346,67 @@ def cmd_bulldust(args) -> int:
     return 0 if out["results"] else 1
 
 
+def cmd_explore(args) -> int:
+    from . import harness
+
+    tr = _translator(args)
+    common = dict(translator=tr, embellishment=args.embellishment, include_gated=args.include_gated,
+                  **_document(args), **_policy(args))
+    if args.command == "entry":
+        out = harness.get_entry(args.entry_id, **common)
+        rows = [out["entry"]] if out["entry"] else []
+    elif args.command == "random-entry":
+        out = harness.random_entry(seed=args.seed, concept=args.concept, theme=args.theme, **common)
+        rows = [out["entry"]] if out["entry"] else []
+    else:
+        out = harness.list_entries(concept=args.concept, theme=args.theme, offset=args.offset, limit=args.limit, **common)
+        rows = out["results"]
+    if args.json:
+        _json(out)
+    else:
+        _warn(out["policy_warnings"])
+        for row in rows:
+            held = f" [held back: {', '.join(row['held_back'])}]" if row["held_back"] else ""
+            print(f"  {row['id']}: {row['form']} — {row['gloss']}{held}")
+        if out.get("next_offset") is not None:
+            print(f"  (next offset: {out['next_offset']})")
+        if not rows:
+            print(f"  ({out['outcome']})")
+    return 0 if rows else 1
+
+
+def cmd_name(args) -> int:
+    from . import harness
+    out = harness.suggest_name(seed=args.seed, shape=args.shape, translator=_translator(args))
+    if args.json:
+        _json(out)
+    else:
+        print(out["name"] or f"({out['outcome']})")
+    return 0 if out["name"] else 1
+
+
+def cmd_variations(args) -> int:
+    from . import harness
+    try:
+        parts = json.loads(args.parts)
+    except json.JSONDecodeError as exc:
+        raise UserError(f"parts must be a JSON object: {exc}") from exc
+    out = harness.variations(args.family, parts=parts, seed=args.seed, registers=_csv(args.registers),
+                             regions=_csv(args.regions), unlock=_csv(args.unlock),
+                             embellishment=args.embellishment, **_document(args),
+                             translator=_translator(args), **_policy(args))
+    if args.json:
+        _json(out)
+    else:
+        _warn(out["policy_warnings"])
+        for group in out["variations"]:
+            for option in group["options"]:
+                print(f"  {group['role']}={option['ingredient_id']}: {option['text']} [bulldust]")
+        if out["outcome"] != "matched":
+            print("  (nothing fits)")
+    return 0 if out["outcome"] == "matched" else 1
+
+
 def cmd_lint(args) -> int:
     from . import harness
 
@@ -858,6 +919,31 @@ def build_parser() -> argparse.ArgumentParser:
     lk.add_argument("--include-gated", action="store_true", help="also show entries held back as doubtful")
     lk.add_argument("--short", action="store_true", help="each result as its form, gloss, frame, level and vulgarity")
     lk.set_defaults(func=cmd_lookup)
+
+    for command in ("entries", "entry", "random-entry"):
+        ex = sub.add_parser(command, parents=[*toolkit, embellished, *([seeded] if command == "random-entry" else [])],
+                            help="explore the dictionary under the requested settings")
+        ex.add_argument("--include-gated", action="store_true", help="show held-back terms with their reasons")
+        if command == "entry":
+            ex.add_argument("entry_id")
+        else:
+            ex.add_argument("--concept")
+            ex.add_argument("--theme")
+        if command == "entries":
+            ex.add_argument("--offset", type=int, default=0)
+            ex.add_argument("--limit", type=int, default=20)
+        ex.set_defaults(func=cmd_explore)
+
+    nm = sub.add_parser("suggest-name", parents=[dictionary, as_json, seeded],
+                        help="a clean Aussie handle; check uniqueness before using it")
+    nm.add_argument("--shape", choices=("descriptive", "place", "phrase"))
+    nm.set_defaults(func=cmd_name)
+
+    va = sub.add_parser("variations", parents=[*toolkit, filters, embellished, seeded],
+                        help="compatible part changes for a constructed expression")
+    va.add_argument("family")
+    va.add_argument("--parts", required=True, help="complete role-to-ingredient mapping as JSON")
+    va.set_defaults(func=cmd_variations)
 
     ln = sub.add_parser("lint", parents=[*toolkit, marked, english, embellished, text], help="lint an Aussified draft (exit 1 if issues)")
     ln.add_argument("--original", metavar="FILE", help="the source text: also check length, names and numbers")

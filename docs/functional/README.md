@@ -16,6 +16,7 @@ guarantees. Now, for step\-by\-step guides, see the [user layer](../user/README.
 | [translation-controls.md](translation-controls.md) | General, Auto, named presets and Custom with exact behaviour overrides |
 | [cli.md](cli.md) | Every `aussiefy` command and option, with defaults and exit codes |
 | [toolkit.md](toolkit.md) | The toolkit operations, the Python API, the MCP server's tools and shared retelling tools |
+| [exploring.md](exploring.md) | Stable dictionary pages, full cards, random entries, clean names, variation discovery and no-match codes |
 | [bulldust.md](bulldust.md) | Seeded composition, ingredient evidence, compatible variations and bounded generation |
 | [markdown.md](markdown.md) | Explicit prose translation with protected source, stable headings and per-unit results |
 | [changes.md](changes.md) | Every change a translation made, with each spot's alternatives and locked options rendered in place: the `changes` contract |
@@ -46,6 +47,7 @@ Crikey, how to run them is in the
 
 | Test module | Behaviour it pins |
 |---|---|
+| `tests/functional/test_exploration.py` | Stable pages, explicit holds, seeded names, construction variations and adapter parity |
 | `tests/functional/test_constructions.py` | Constructor policy, bounded sampling, template spans, part evidence and changes compatibility |
 | `tests/functional/test_engine.py` | The engine: detection, selection, realisation, garnish, drawl and the dials |
 | `tests/functional/test_document_policy.py` | Document presets, exact overrides and shared-surface behaviour |

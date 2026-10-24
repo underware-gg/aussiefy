@@ -62,7 +62,8 @@ def test_lint_shape(translator):
 
 def test_lookup_shape(translator):
     out = harness.lookup("very tired", translator=translator)
-    assert set(out) == DIALS | {"theme_permissions", "query", "results"}
+    assert set(out) == DIALS | {"theme_permissions", "query", "results", "outcome"}
+    assert out["outcome"] == "matched"
     assert all({"id", "form", "gloss", "frame", "level", "vulgarity", "register", "concepts", "match", "score"}
                <= set(r) for r in out["results"])
     assert "note" in harness.lookup("zzqqxx", translator=translator)

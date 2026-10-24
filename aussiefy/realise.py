@@ -138,8 +138,7 @@ def _after_proper_modifier(toks: list[Token], start: int) -> bool:
         and toks[start - 1].text != "I" and not capital_is_positional(toks, start - 1)
 
 
-REFLEXIVES = {"hisself": "himself", "theirself": "themselves", "ourself": "ourselves", "itsself": "itself"}
-REFLEXIVE_RE = re.compile(r"\b(" + "|".join(REFLEXIVES) + r")\b", re.I)
+REFLEXIVE_RE = re.compile(r"\b(" + "|".join(morph.REFLEXIVES) + r")\b", re.I)
 
 
 def question_form(form: str) -> str | None:
@@ -235,7 +234,7 @@ def realise(entry: Entry, form: str, det: Detection) -> str:
         "will": "would" if tense == "past" else "will",
     }
     out = re.sub(r"\{(\w+)\}", lambda m: values[m.group(1)], text).strip()
-    out = REFLEXIVE_RE.sub(lambda m: REFLEXIVES[m.group(1).lower()], out)   # "{poss}self" for they: themselves
+    out = REFLEXIVE_RE.sub(lambda m: morph.REFLEXIVES[m.group(1).lower()], out)   # "{poss}self" for they: themselves
     if entry.frame == "clause" and not det.question and subj_tok is not None and verb is not None:
         # "it's pouring" -> "it's bucketing down", not "it is bucketing down"
         m = re.match(r"\{subj\}\s+\{(be|have)\}", form)

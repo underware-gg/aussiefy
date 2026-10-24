@@ -171,3 +171,14 @@ Keep the `bulldust` label: a familiar stem does not attest the assembled express
 evidence and credit. Use `--family ID` and `--parts JSON` to keep compatible parts while varying others.
 This is an explicit generation operation; automatic substitution fallback and the shared yarn scaffold
 are separate integration work. See [the reference](https://github.com/underware-gg/aussiefy/blob/main/docs/functional/bulldust.md).
+
+## Explicit dictionary exploration
+
+Use `aussiefy entries --concept HUNGRY --limit 20 --json` for stable pages, `entry ID --json` for a full
+card, and `random-entry --seed 7 --json` to sample the whole eligible dictionary. `--theme` intersects the
+concept filter. `--include-gated` shows held-back terms with reasons; it never bypasses the dials or themes.
+A lookup's `outcome` distinguishes `not_in_dictionary` from `nothing_fits`; neither licenses an unsuitable
+substitution. `suggest-name --seed 7 --shape place --json` suggests a clean handle whose availability the
+caller must check. `variations FAMILY --parts JSON --json` lists complete, labelled construction options
+with one part varied at a time. These also have Python and MCP equivalents; see
+[exploration](https://github.com/underware-gg/aussiefy/blob/main/docs/functional/exploring.md).

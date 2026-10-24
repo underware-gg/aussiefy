@@ -32,6 +32,7 @@ PERSON_PRONOUNS = {"i", "you", "he", "she", "we", "they"}
 PERSON_INDEFINITES = {"everybody", "everyone", "somebody", "someone", "anybody", "anyone", "nobody", "no-one"}
 OBJECT_PRONOUNS = {"me", "you", "him", "her", "it", "us", "them"}
 POSSESSIVES = {"my", "your", "his", "her", "its", "our", "their"}
+REFLEXIVES = {"hisself": "himself", "theirself": "themselves", "ourself": "ourselves", "itsself": "itself"}
 BE_FORMS = {"am", "is", "are", "was", "were", "be", "been", "being"}
 HAVE_FORMS = {"have", "has", "had"}
 DO_FORMS = {"do", "does", "did"}

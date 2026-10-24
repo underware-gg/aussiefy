@@ -74,15 +74,14 @@ def image_offers(dictionary, det, tokens, eff, setting):
     return tuple(out)
 
 
-def lookup_images(dictionary, query, eff, setting, limit):
+def lookup_images(dictionary, query, eff, setting, limit) -> tuple[list[dict], bool]:
+    """Eligible image cards and whether the query recognised any image before policy gates."""
     tokens = tokenize(query)
     matches = list(dictionary.index.find(tokens))
     positive = positive_context(tokens, 0, len(tokens))
     key = form_key(query)
-    out = []
+    out, recognised = [], False
     for image in dictionary.imagery:
-        if not permitted(image, eff, setting):
-            continue
         concepts = {cid for m in matches if not excluded_complement(image, tokens, m.end)
                     for cid in applicable_concepts(m.pattern.concepts, dictionary.concepts, tokens, m.end)}
         association = image_association(image, concepts, setting) if positive else None
@@ -90,7 +89,10 @@ def lookup_images(dictionary, query, eff, setting, limit):
         literal = key == words or (len(key) >= 4 and f" {key} " in f" {words} ") or key == form_key(image.id.replace("-", " "))
         if not association and not literal:
             continue
+        recognised = True
+        if not permitted(image, eff, setting):
+            continue
         card = ImageOffer(image, image.text, association or "image search").card()
         card.update(template=True, automatic=False)
         out.append(card)
-    return out[:limit]
+    return out[:limit], recognised

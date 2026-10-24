@@ -119,6 +119,24 @@ def _scoped_query(tokens: list[Token], readings: list[Detection], tags: list[str
     return None
 
 
+def _term_match(e: Entry, qn: str, slotted: set[str]) -> tuple[float, str] | None:
+    forms = [form_key(f) for f in e.all_forms]
+    if e.id in slotted or qn in forms or any(qn in f.split() for f in forms):
+        return SCORE_TERM, "slang term"
+    if any(qn in _inflected(fold(PLACEHOLDER_RE.sub("", f)).strip(), e.frame) for f in e.all_forms):
+        return SCORE_INFLECTED, "the slang term, inflected"
+    stems = set()
+    raw = [fold(PLACEHOLDER_RE.sub("", f)) for f in e.all_forms]
+    for w in (w for f in raw for w in f.split() if len(w) > 3):
+        st = w.rstrip("'").removesuffix("g").removesuffix("in") if w.endswith(("in'", "ing")) else w
+        stems |= {st, st[:-1] if len(st) > 2 and st[-1] == st[-2] else st}   # kippin' -> kipp -> kip
+    if len(qn) >= 3 and (any(f" {qn} " in f" {f} " for f in forms) or (" " not in qn and qn in stems)):
+        return SCORE_IN_PHRASE, "part of a phrase"
+    if " " in qn and any(_in_order(qn.split(), f.split()) for f in forms):
+        return SCORE_IN_ORDER, "part of a phrase"   # "chuck in" ~ "chuck it in", "give the flick"
+    return None
+
+
 def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = None, limit: int = 8,
            include_gated: bool = False, short: bool = False, embellishment: int | str | None = None,
            document_type: str = "general", document_config: dict | None = None,
@@ -131,7 +149,9 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     they do not certify it as a replacement for the source context.
     `include_gated` also returns entries held back for doubtful origin or meaning (marked as such).
     """
-    if limit < 1:
+    if not isinstance(query, str) or not query.strip():
+        raise UserError("query must be a non-empty string")
+    if type(limit) is not int or limit < 1:
         raise UserError(f"limit must be 1 or more, not {limit}")
     tr = translator or default_translator()
     d: Dictionary = tr.dictionary
@@ -227,38 +247,18 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
                if m.start == 0 and m.end == len(tokens) and m.pattern.slots}
     parsed_concepts = {cid for eid in slotted for cid in d.entries[eid].concept}
     negative_anchors = {w[:-4] if w.endswith("less") else w for w in content_words(q)}
-    for e in d.idioms + d.garnish:
-        if dial_rejection(e, eff, include_gated=include_gated):
-            continue
-        forms = [form_key(f) for f in e.all_forms]
-        if e.id in slotted or qn in forms or any(qn in f.split() for f in forms):
-            scored.append((SCORE_TERM, e, "slang term"))
-            continue
-        if any(qn in _inflected(fold(PLACEHOLDER_RE.sub("", f)).strip(), e.frame) for f in e.all_forms):
-            scored.append((SCORE_INFLECTED, e, "the slang term, inflected"))
-            continue
-        stems = set()
-        raw = [fold(PLACEHOLDER_RE.sub("", f)) for f in e.all_forms]
-        for w in (w for f in raw for w in f.split() if len(w) > 3):
-            st = w.rstrip("'").removesuffix("g").removesuffix("in") if w.endswith(("in'", "ing")) else w
-            stems |= {st, st[:-1] if len(st) > 2 and st[-1] == st[-2] else st}   # kippin' -> kipp -> kip
-        if len(qn) >= 3 and (any(f" {qn} " in f" {f} " for f in forms) or (" " not in qn and qn in stems)):
-            scored.append((SCORE_IN_PHRASE, e, "part of a phrase"))
-            continue
-        if " " in qn and any(_in_order(qn.split(), f.split()) for f in forms):
-            scored.append((SCORE_IN_ORDER, e, "part of a phrase"))   # "chuck in" ~ "chuck it in", "give the flick"
-            continue
-        if semantic_rejection(e, narrator_opinion=setting.narrator_opinion, quantity_approximation=setting.quantity_approximation, effects=effects_for(e)):
-            continue
+    def score_entry(e, term_match):
+        if term_match:
+            return term_match[0], e, term_match[1]
         paths = set(e.concept)
         if exhaustive is not None:
             paths.intersection_update(exhaustive)
         if paths.intersection(blocked):
             paths.intersection_update(established)
         if not paths or not degree_fits(e, paths):
-            continue
+            return None
         if parsed_concepts and not parsed_concepts.intersection(e.concept):
-            continue
+            return None
         best = max((concept_score.get(c, 0.0) for c in paths), default=0.0)
         if e.gloss and paths == set(e.concept):
             gloss = e.gloss.lower()
@@ -274,10 +274,24 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
                          w[:-4] if w.endswith("less") else w for w in content_words(t)})),
                     default=0.0)
             if m >= model.lookup_threshold and MEANING_FLOOR + (m - model.lookup_threshold) > best:
-                scored.append((round(MEANING_FLOOR + (m - model.lookup_threshold), 3), e, "meaning (local model)"))
-                continue
+                return round(MEANING_FLOOR + (m - model.lookup_threshold), 3), e, "meaning (local model)"
         if best >= MEANING_FLOOR:
-            scored.append((best, e, "meaning"))
+            return best, e, "meaning"
+        return None
+
+    recognised = exhaustive is not None
+    deferred = []
+    for e in d.idioms + d.garnish:
+        if e.status == "omit":
+            continue
+        term_match = _term_match(e, qn, slotted)
+        recognised |= term_match is not None
+        if (dial_rejection(e, eff, include_gated=include_gated)
+                or not term_match and semantic_rejection(e, narrator_opinion=setting.narrator_opinion,
+                    quantity_approximation=setting.quantity_approximation, effects=effects_for(e))):
+            deferred.append((e, term_match))
+        elif match := score_entry(e, term_match):
+            scored.append(match)
     scored.sort(key=lambda t: (-t[0], t[1].incoherence, t[1].id))
     if short:
         results = [short_card(e) for _, e, _ in scored[:limit]]
@@ -296,12 +310,16 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     # a lookup reads no profile settings, so its envelope is the dials alone (no profile_config)
     out = {"query": query, **envelope(eff.level, eff.vulgarity, eff.warnings),
            "theme_permissions": theme_permissions(eff.theme_policy), "results": results}
-    images = lookup_images(d, query, eff, setting, limit)
+    images, recognised_image = lookup_images(d, query, eff, setting, limit)
+    recognised |= recognised_image
+    if not results and not images and not recognised:
+        recognised = any(score_entry(e, term_match) is not None for e, term_match in deferred)
     if images:
         out["imagery"] = images
+    out["outcome"] = "matched" if results or images else "nothing_fits" if recognised else "not_in_dictionary"
     if not results and not images:
         out["note"] = ("The dictionary recognises this meaning but has no compatible suggestion at these settings. "
-                       "Try another wording or look up a specific term." if exhaustive is not None else
+                       "Try another wording or look up a specific term." if recognised else
                        "No entry. If you're sure Australians say it, it's probably fine but unvetted; "
                        "otherwise rephrase. Consider proposing it for the dictionary.")
     return out

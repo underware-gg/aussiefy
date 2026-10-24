@@ -5,6 +5,9 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Add dictionary exploration across Python, CLI and MCP: stable entry pages, full metadata cards, seeded
+  random entries, clean Aussie handle suggestions and complete construction variations. Lookup now
+  distinguishes unknown meanings from settings with no compatible result using machine-readable outcomes.
 - Read “believe what he says” as taking it as true, while “believe what he says is true” still reckons.
   Leave a relative clause's next verb to the main clause after an object pronoun (“believe the man who
   told us was honest” reckons), and keep “believe” as written where the tags cannot tell.

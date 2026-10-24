@@ -59,3 +59,8 @@ unbound templates. See [DD-025](../../architecture/decisions/dd-025-contextual-i
 Lookup explicitly requests query-fragment readings from `detect.py`; ordinary replacement detection keeps
 its stricter default. Lookup owns the bounded whole-query scope decision and uses local canonical readings
 as evidence, rather than treating every matched noun or modifier as a complete parse.
+
+`names.py` owns the reviewed name catalogue and deterministic, clean handle assembly in the core.
+`explore.py` is the toolkit boundary for stable pages, full cards, random entries and name suggestions.
+Construction variations reuse the constructor boundary in `bulldust.py`, validating each complete expression
+with the other parts held fixed. They do not create a second policy or splice implementation.

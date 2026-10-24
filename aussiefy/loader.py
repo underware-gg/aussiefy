@@ -28,6 +28,7 @@ from .evidence import DERIVED_FIELDS, METADATA_KEYS, assess, parse_metadata, par
 from .themes import THEME_NAME
 from .construction_data import parse_catalog
 from .masks import profanity_rating
+from .names import parse_name_catalog
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -444,6 +445,15 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         try:
             dictionary.construction_catalog = parse_catalog(_read(catalog_path, errors, {}, unique_keys=True), entries,
                 concepts, lambda text: profanity_rating(text, dictionary), assessed)
+        except SchemaError as exc:
+            errors.append(str(exc))
+    if errors:
+        raise SchemaError("dictionary failed validation:\n  " + "\n  ".join(errors))
+    if include_builtin:
+        try:
+            names_path = data / "names.yaml"
+            dictionary.name_catalog = parse_name_catalog(
+                _read(names_path, errors, {}, unique_keys=True) if names_path.exists() else {}, dictionary)
         except SchemaError as exc:
             errors.append(str(exc))
     if errors:

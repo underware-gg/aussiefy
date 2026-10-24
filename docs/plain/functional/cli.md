@@ -17,6 +17,7 @@ Without a command, arguments go to `translate`: `aussiefy "some text" -l 4` is s
 | `translate` | The rule engine's translation (the default command) |
 | `yarn` | The optional API client retells the whole text using the shared harness (needs the `llm` extra) |
 | `bulldust` | Construct labelled sayings from reviewed idiom families ([reference](bulldust.md)) |
+| `entries`, `entry`, `random-entry`, `suggest-name`, `variations` | [Dictionary exploration](exploring.md), clean handles and compatible construction variations |
 | `lookup` | Aussie options for a meaning, or what a term means |
 | `lint` | Lint an Aussified draft (exit 1 if there are issues) |
 | `guide` | The voice, language limits and craft rules for a level and vulgarity |

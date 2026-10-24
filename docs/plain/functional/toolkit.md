@@ -1,12 +1,13 @@
 # The toolkit and its surfaces
 
 Language models are good at Australian English when they have quality source material and clear guidance.
-The toolkit gives them both, as seven plain functions that return JSON-ready dicts. `aussiefy.harness` gathers
+The toolkit gives them both, as plain functions that return JSON-ready dicts. `aussiefy.harness` gathers
 them; `lookup`, `lint` and `guide` each live in their own module (`lookup.py`, `lint.py`, `guide.py`).
 
 | Function | CLI | What it does |
 |---|---|---|
 | `bulldust(concept)` | `aussiefy bulldust HUNGRY` | Seeded idiom construction from reviewed families, labelled bulldust with evidence on every part; [reference](bulldust.md) |
+| `list_entries`, `get_entry`, `random_entry`, `suggest_name`, `variations` | `entries`, `entry`, `random-entry`, `suggest-name`, `variations` | [Dictionary exploration](exploring.md), clean handles and construction variations |
 | `lookup(query)` | `aussiefy lookup "very busy"` | Genuine Aussie options for a meaning, or what a term means ("goog"), filtered to the level and vulgarity |
 | `lint(text)` | `aussiefy lint < draft.txt` | Lints a draft for flagged non-Aussie phrases, swearing over the cap (via `aussiefy/data/swears.yaml`), US spelling and US/UK words (`aussiefy/data/dialect.yaml`), plus optional "could be more Aussie" suggestions. With `original=`, also checks fidelity: length, and names and numbers kept or invented |
 | `guide(level)` | `aussiefy guide -l 5` | Voice, language limits and the craft rules learned from good translations (swear inside sentences, tag-ons only in dialogue, connectives in narration, no pile-ups, Australian spelling); craft is filtered to the requested dials; `aussiefy/data/guide.yaml` also owns the workflow, plan note and yarn rules |
@@ -38,7 +39,7 @@ lookup("very tired", translator=tr)   # the toolkit functions take a translator 
 the CLI, MCP tools or yarn mode. `aussiefy.guide.dial_descriptions()` lists every setting of the level, vulgarity
 and embellishment dials and every document type, each with a one-line description from `aussiefy/data/guide.yaml`.
 
-Every function takes keyword-only dials, by number or name: `level` (default 5) and `vulgarity` (default: the
+Except for clean name suggestions, toolkit operations take keyword-only dials, by number or name: `level` (default 5) and `vulgarity` (default: the
 level's own). `translate`, `plan`, `yarn` and `bulldust` also take `seed` (default 0). `translate` and `plan` also take
 `variety`; they and `bulldust` take `registers`, `regions` and `unlock`; only `translate` takes `markdown` (default false).
 The core engine/Translator consumes plain text or internally masked text. `translate`, `plan`, `lint`, `verify`
@@ -73,13 +74,13 @@ messages as tool errors. `lookup` requires `limit >= 1` and marks each riff's `b
 A hosted MCP server narrows the tools by capability ([DD-028](../../architecture/decisions/dd-028-hosted-mcp-capabilities.md)).
 `build_server(translator=…, allow_unlock=False, allow_document_config=False, max_chars=…, max_query_chars=…,
 lookup_limit=…)` hides `unlock` and `include_gated`, hides `document_config` and the `custom` document type,
-caps `text` and `original`, and caps lookup's `query` and `limit`. The defaults serve everything. Every tool is annotated read-only,
+caps `text` and `original`, and caps lookup's `query` and `limit`, along with entry-page sizes. The defaults serve everything. Every tool is annotated read-only,
 non-destructive, idempotent and closed-world.
 
 ## The same toolkit, three more ways
 
 - **MCP server, for any MCP-capable agent.** The `aussiefy-mcp` command (stdio) serves the tools
-  `aussie_lookup`, `aussie_lint`, `aussie_guide`, `aussie_plan`, `aussie_translate`, `aussie_verify` and `aussie_bulldust`. Setup is in the
+  `aussie_lookup`, `aussie_lint`, `aussie_guide`, `aussie_plan`, `aussie_translate`, `aussie_verify` and `aussie_bulldust`, plus the [exploration tools](exploring.md). Setup is in the
   [user guide](../user/agents.md).
 - **Portable CLI skill.** [skills/aussiefy/SKILL.md](../../../skills/aussiefy/SKILL.md) walks an agent through
   brief → guide → plan → write with lookups → lint and fix → verify → deliver, using the CLI.

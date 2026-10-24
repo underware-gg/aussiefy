@@ -15,7 +15,9 @@ from mcp.server.mcpserver.exceptions import ToolError  # noqa: E402
 
 from aussiefy.mcp_server import build_server  # noqa: E402
 
-TOOLS = {"aussie_bulldust": harness.bulldust, "aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_guide": harness.guide,
+TOOLS = {"aussie_entries": harness.list_entries, "aussie_entry": harness.get_entry,
+         "aussie_random_entry": harness.random_entry, "aussie_suggest_name": harness.suggest_name,
+         "aussie_variations": harness.variations, "aussie_bulldust": harness.bulldust, "aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_guide": harness.guide,
          "aussie_plan": harness.plan, "aussie_translate": harness.translate, "aussie_verify": harness.verify}
 HIDDEN = {"unlock", "include_gated", "document_config"}
 HOSTED = {"allow_unlock": False, "allow_document_config": False, "max_chars": 40, "max_query_chars": 12,
@@ -38,7 +40,8 @@ def _params(fn):
 def test_hosted_schemas_drop_what_the_server_does_not_offer(hosted):
     for name, tool in _tools(hosted).items():
         assert set(tool.input_schema["properties"]) == _params(TOOLS[name]) - HIDDEN, name
-        assert "custom" not in tool.input_schema["properties"]["document_type"]["enum"], name
+        if "document_type" in _params(TOOLS[name]):
+            assert "custom" not in tool.input_schema["properties"]["document_type"]["enum"], name
 
 
 def test_hosted_descriptions_and_instructions_never_mention_what_is_hidden(hosted):
@@ -98,7 +101,9 @@ def test_every_tool_uses_the_injected_translator(monkeypatch):
     seen = []
     for name, fn in TOOLS.items():
         monkeypatch.setattr(harness, fn.__name__, lambda *a, _fn=fn, **k: seen.append(k["translator"]) or {})
-    args = {"aussie_bulldust": {"concept": "HUNGRY"}, "aussie_lookup": {"query": "very tired"}, "aussie_lint": {"text": "G'day."}, "aussie_guide": {},
+    args = {"aussie_entries": {}, "aussie_entry": {"entry_id": "stoked"}, "aussie_random_entry": {},
+            "aussie_suggest_name": {}, "aussie_variations": {"family": "sideways-call-title",
+            "parts": {"stem": "bugger-sideways", "ending": "call-me-the-pope"}}, "aussie_bulldust": {"concept": "HUNGRY"}, "aussie_lookup": {"query": "very tired"}, "aussie_lint": {"text": "G'day."}, "aussie_guide": {},
             "aussie_plan": {"text": "Hi."}, "aussie_translate": {"text": "Hi."},
             "aussie_verify": {"text": "G'day.", "original": "Hello."}}
     for name in TOOLS:

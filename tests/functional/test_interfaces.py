@@ -10,21 +10,25 @@ import pytest
 import aussiefy
 from aussiefy import harness
 
-TOOLS = {"aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_guide": harness.guide,
+TOOLS = {"aussie_entries": harness.list_entries, "aussie_entry": harness.get_entry,
+         "aussie_random_entry": harness.random_entry, "aussie_suggest_name": harness.suggest_name,
+         "aussie_variations": harness.variations, "aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_guide": harness.guide,
          "aussie_bulldust": harness.bulldust, "aussie_plan": harness.plan, "aussie_translate": harness.translate, "aussie_verify": harness.verify}
 
 # a non-default value for every toolkit parameter, so a surface that drops or renames one is caught
-VALUES = {"family": "hungry-enough-to", "parts": {"state": "hungry"}, "level": 4, "seed": 7, "vulgarity": 1, "variety": 2,
+VALUES = {"family": "hungry-enough-to", "parts": {"state": "hungry", "act": "sausage-shadow"}, "level": 4, "seed": 7, "vulgarity": 1, "variety": 2,
           "registers": ["current", "dated"], "regions": ["qld"], "unlock": ["misreadable"], "limit": 3,
           "include_gated": True, "original": "She was tired.", "markup": "markdown", "english": "uk", "short": True,
           "document_type": "custom", "document_config": {"garnish": [], "keep_quotes": True, "narrator_opinion": True, "themes": {"violence": True, "drinking": False},
               "profile": {"garnish": {"opener": 1}, "max_garnish": {"opener": 1}}},
-          "embellishment": 2, "suggest": False, "markdown": False}
-SUBJECT = {"lookup": ("query", "very tired"), "lint": ("text", "G'day mate."), "plan": ("text", "She was tired."),
+          "embellishment": 2, "suggest": False, "markdown": False, "concept": "HUNGRY", "theme": "sex",
+          "entry_id": "stoked", "offset": 2, "shape": "place"}
+SUBJECT = {"list_entries": (None, None), "random_entry": (None, None), "suggest_name": (None, None),
+           "get_entry": ("entry_id", "stoked"), "variations": ("family", "hungry-enough-to"), "lookup": ("query", "very tired"), "lint": ("text", "G'day mate."), "plan": ("text", "She was tired."),
            "translate": ("text", "She was tired."), "bulldust": ("concept", "HUNGRY"), "guide": (None, None),
            "verify": ("text", "She was knackered.")}
 # CLI flags for each parameter (the CLI says --region for one region list, as people type it)
-FLAGS = {"family": ["--family", "hungry-enough-to"], "parts": ["--parts", '{"state":"hungry"}'], "level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity", "1"],
+FLAGS = {"family": ["--family", "hungry-enough-to"], "parts": ["--parts", '{"state":"hungry","act":"sausage-shadow"}'], "level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity", "1"],
          "variety": ["--variety", "2"], "registers": ["--registers", "current,dated"],
          "regions": ["--region", "qld"], "unlock": ["--unlock", "misreadable"], "limit": ["--limit", "3"],
          "include_gated": ["--include-gated"], "markup": ["--markup", "markdown"],
@@ -44,7 +48,7 @@ def _spy(monkeypatch, name):
     calls = []
 
     def spy(*args, **kwargs):
-        calls.append(kwargs)
+        calls.append(dict(inspect.signature(real).bind_partial(*args, **kwargs).arguments))
         return real(*args, **kwargs)
 
     monkeypatch.setattr(harness, name, spy)
@@ -167,7 +171,8 @@ def test_every_surface_defaults_to_level_5():
     from aussiefy.engine import Translator
 
     for fn in (*TOOLS.values(), aussiefy.translate, aussiefy.yarn):
-        assert inspect.signature(fn).parameters["level"].default == 5, fn.__name__
+        if "level" in inspect.signature(fn).parameters:
+            assert inspect.signature(fn).parameters["level"].default == 5, fn.__name__
     assert inspect.signature(Translator.translate).parameters["level"].default == 5
 
 
@@ -177,10 +182,11 @@ def test_toolkit_options_are_keyword_only():
     from aussiefy.yarn import brief
 
     for fn in (*TOOLS.values(), aussiefy.translate, aussiefy.yarn, brief, Translator.translate):
-        params = [p for n, p in inspect.signature(fn).parameters.items() if n not in ("self", "text", "query", "concept")]
+        subject = SUBJECT.get(fn.__name__, ("text", None))[0]
+        params = [p for n, p in inspect.signature(fn).parameters.items() if n not in ("self", subject)]
         assert all(p.kind is inspect.Parameter.KEYWORD_ONLY for p in params), fn.__qualname__
 
 
 def test_python_api_exports_the_toolkit():
-    for name in ("bulldust", "translate", "lookup", "lint", "guide", "plan", "verify", "yarn", "default_translator"):
+    for name in ("list_entries", "get_entry", "random_entry", "suggest_name", "variations", "bulldust", "translate", "lookup", "lint", "guide", "plan", "verify", "yarn", "default_translator"):
         assert callable(getattr(aussiefy, name)), name

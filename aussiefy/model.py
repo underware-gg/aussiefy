@@ -12,14 +12,15 @@ from typing import TYPE_CHECKING, Any
 
 from . import morph
 from .dialect import DialectTable
-from .matcher import Pattern, PatternIndex
+from .matcher import Pattern, PatternIndex, compile_pattern
 from .schema import Concept, Entry, Imagery
 from .evidence import EvidenceWeights, TermMetadata
 from .text import COMMON_STARTERS, MASK_WORD_RE, normalise_word, spoken_word
-from .terms import fold, strip_markup
+from .terms import fold, strip_markup, name_slug
 
 if TYPE_CHECKING:
     from .constructions import ConstructionCatalog
+    from .names import NameCatalog
 
 
 # the endings a masked word keeps after a stem that is itself a listed swear or a mask word (O23's fixed set)
@@ -135,6 +136,7 @@ class Dictionary:
     overlay_changes: tuple[dict[str, Any], ...] = ()
     evidence_weights: EvidenceWeights | None = None
     construction_catalog: ConstructionCatalog | None = None
+    name_catalog: NameCatalog | None = None
 
     @cached_property
     def construction_patterns(self):
@@ -190,6 +192,27 @@ class Dictionary:
     def theme_starts(self) -> tuple[tuple[str, int], ...]:
         return tuple((name, min(tier for tier in range(4) if name in self.theme_defaults[tier]))
                      for name in sorted(self.theme_defaults[3]))
+
+    @cached_property
+    def name_safety_index(self) -> PatternIndex:
+        """Known rude, themed or insulting wording across entries, riffs and imagery."""
+        hazards = [(form, entry.frame) for entry in self.entries.values()
+                   if entry.vulgarity or entry.themes or entry.insult or entry.status == "omit"
+                   for form in entry.all_forms]
+        hazards += [(riff.text, "clause") for entry in self.entries.values() for riff in entry.riffs
+                    if riff.vulgarity or riff.themes]
+        hazards += [(image.text, "clause") for image in self.imagery if image.vulgarity or image.themes]
+        reflexives = sorted({"oneself", *(morph.REFLEXIVES.get(word + "self", word + "self")
+                                           for word in morph.POSSESSIVES)})
+        patterns = []
+        for form, frame in hazards:
+            forms = [form.replace("{poss}self", word) for word in reflexives] if "{poss}self" in form else [form]
+            for realised in forms:
+                bare = re.sub(r"^(?:a|an|the)\s+", "", realised, flags=re.I)
+                normalised = name_slug(realised, preserve_slots=True).replace("-", " ")
+                for variant in dict.fromkeys((realised, bare, normalised)):
+                    patterns.append(compile_pattern(variant.replace("{np}", "{obj}"), frame, (), 3))
+        return PatternIndex(patterns)
 
     @cached_property
     def themed_terms(self) -> tuple[TermMetadata, ...]:

@@ -25,6 +25,8 @@ from .guide import style_guide_data
 
 _CORE = """Tools for rewriting English as genuine Australian English (levels 1-5).
 Use the shared workflow below for the guide, plan, writing, lint and verification steps.
+aussie_entries lists stable pages; aussie_entry fetches a card and aussie_random_entry samples the dictionary.
+aussie_suggest_name suggests clean handles; aussie_variations offers compatible changes to constructed expressions.
 aussie_bulldust constructs labelled sayings from reviewed families with evidence on every part.
 aussie_translate gives the plain deterministic output if that's all you need; aussie_verify checks a finished
 translation against its original. Two independent dials, by number
@@ -156,6 +158,59 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         return harness.lookup(query, level=level, vulgarity=vulgarity, limit=limit,
                               include_gated=include_gated, short=short, embellishment=embellishment,
                               document_type=document_type, document_config=document_config, translator=translator)
+
+    PageLimit = Annotated[int, Field(ge=1, le=min(100, lookup_limit) if lookup_limit else 100)]
+    Offset = Annotated[int, Field(ge=0)]
+
+    @tool
+    def aussie_entries(concept: str | None = None, theme: str | None = None, offset: Offset = 0,
+                       limit: PageLimit = min(20, lookup_limit) if lookup_limit else 20,
+                       level: Level = 5, vulgarity: Vulgarity = None, include_gated: bool = False,
+                       embellishment: int | str | None = None, document_type: DocumentType = "general",
+                       document_config: dict | None = None) -> dict[str, Any]:
+        """List a stable page of entry cards by concept and/or theme. Filters intersect.
+        include_gated also returns entries held back as doubtful (marked as such)."""
+        return harness.list_entries(concept=concept, theme=theme, offset=offset, limit=limit, level=level,
+                                    vulgarity=vulgarity, include_gated=include_gated, embellishment=embellishment,
+                                    document_type=document_type, document_config=document_config, translator=translator)
+
+    @tool
+    def aussie_entry(entry_id: str, level: Level = 5, vulgarity: Vulgarity = None,
+                     include_gated: bool = False, embellishment: int | str | None = None,
+                     document_type: DocumentType = "general", document_config: dict | None = None) -> dict[str, Any]:
+        """Fetch a full entry card by ID under the requested dials.
+        include_gated also returns entries held back as doubtful (marked as such)."""
+        return harness.get_entry(entry_id, level=level, vulgarity=vulgarity, include_gated=include_gated,
+                                 embellishment=embellishment, document_type=document_type,
+                                 document_config=document_config, translator=translator)
+
+    @tool
+    def aussie_random_entry(seed: Seed = 0, concept: str | None = None, theme: str | None = None,
+                            level: Level = 5, vulgarity: Vulgarity = None, include_gated: bool = False,
+                            embellishment: int | str | None = None, document_type: DocumentType = "general",
+                            document_config: dict | None = None) -> dict[str, Any]:
+        """Pick a seeded entry from the whole eligible dictionary, optionally by concept and theme.
+        include_gated also returns entries held back as doubtful (marked as such)."""
+        return harness.random_entry(seed=seed, concept=concept, theme=theme, level=level, vulgarity=vulgarity,
+                                    include_gated=include_gated, embellishment=embellishment,
+                                    document_type=document_type, document_config=document_config, translator=translator)
+
+    @tool
+    def aussie_suggest_name(seed: Seed = 0, shape: str | None = None) -> dict[str, Any]:
+        """Suggest a clean Aussie handle: descriptive, place or phrase. No themes or insults.
+        The caller checks uniqueness and asks again on a clash."""
+        return harness.suggest_name(seed=seed, shape=shape, translator=translator)
+
+    @tool
+    def aussie_variations(family: str, parts: dict[str, str], level: Level = 5, seed: Seed = 0,
+                          vulgarity: Vulgarity = None, registers: Registers = None, regions: Regions = None,
+                          unlock: Unlock = None, embellishment: int | str | None = None,
+                          document_type: DocumentType = "general", document_config: dict | None = None) -> dict[str, Any]:
+        """Compatible part changes for a constructed expression, keeping the other parts fixed.
+        Pass its family and complete role-to-ingredient mapping. Options include the whole expression and spans."""
+        return harness.variations(family, parts=parts, level=level, seed=seed, vulgarity=vulgarity, registers=registers,
+                                  regions=regions, unlock=unlock, embellishment=embellishment,
+                                  document_type=document_type, document_config=document_config, translator=translator)
 
     @tool
     def aussie_lint(text: Text, level: Level = 5, vulgarity: Vulgarity = None,

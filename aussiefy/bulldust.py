@@ -22,6 +22,8 @@ def bulldust(concept: str | None = None, *, family: str | None = None, parts: di
     and canonical output spans. Collision checks cover this dictionary, not every expression ever spoken.
     """
     tr = translator or default_translator()
+    if type(seed) is not int:
+        raise UserError("seed must be an integer")
     dictionary, requested = tr.dictionary, parts or {}
     catalog = dictionary.construction_catalog
     if concept is not None:
@@ -55,3 +57,41 @@ def bulldust(concept: str | None = None, *, family: str | None = None, parts: di
             "outcome": "constructed" if generated.candidates else "no-compatible-construction",
             "results": [candidate.to_dict() for candidate in generated.candidates], "attempts": generated.attempts,
             "rejected": [{"id": pid, "reason": reason} for pid, reason in generated.rejected]}
+
+
+def variations(family: str, *, parts: dict[str, str], level: int | str = 5, seed: int = 0,
+               vulgarity: int | str | None = None, registers: list[str] | None = None,
+               regions: list[str] | None = None, unlock: list[str] | None = None,
+               embellishment: int | str | None = None, document_type: str = "general",
+               document_config: dict | None = None, translator: Translator | None = None) -> dict:
+    """Vary one part of a construction while keeping every other part fixed.
+
+    Pass the family and complete role-to-ingredient mapping from a constructed expression. Each option is
+    a complete, validated construction, including its evidence and spans; it is not a word to splice blindly.
+    """
+    if not isinstance(family, str) or not family or not isinstance(parts, dict):
+        raise UserError("variations needs a family ID and a complete parts mapping")
+    tr = translator or default_translator()
+    options = dict(level=level, seed=seed, vulgarity=vulgarity, registers=registers, regions=regions,
+                   unlock=unlock, embellishment=embellishment, document_type=document_type,
+                   document_config=document_config, translator=tr)
+    base = bulldust(family=family, parts=parts, limit=1, **options)
+    pattern = next(pattern for pattern in tr.dictionary.construction_catalog.families if pattern.id == family)
+    if set(parts) != {role for role, _ in pattern.slots}:
+        raise UserError("variations needs every slot in the construction family")
+    ingredients = {part.id: part for part in tr.dictionary.construction_catalog.ingredients}
+    if any(ingredients[parts[role]].kind != kind for role, kind in pattern.slots):
+        raise UserError("parts contains an ingredient incompatible with its slot")
+    groups = []
+    for role, kind in pattern.slots:
+        choices = []
+        for ingredient in sorted(ingredients.values(), key=lambda part: part.id):
+            if ingredient.kind != kind:
+                continue
+            result = bulldust(family=family, parts={**parts, role: ingredient.id}, limit=1, **options)
+            if result["results"]:
+                choices.append({"ingredient_id": ingredient.id, **result["results"][0]})
+        groups.append({"role": role, "current": parts[role], "options": choices})
+    return {key: value for key, value in base.items() if key not in {"results", "attempts", "rejected", "outcome"}} | {
+        "family": family, "parts": parts, "variations": groups,
+        "outcome": "matched" if any(group["options"] for group in groups) else "nothing_fits"}
