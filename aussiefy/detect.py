@@ -88,6 +88,11 @@ class Detection:
     supersedes: tuple[str, ...] = ()           # concepts of overlapping readings this one outranked
     object_start: int | None = None            # where a context object it reads starts: those words keep
                                                # their own readings ("believe [my mate]")
+    source_pattern: Pattern | None = None  # dictionary evidence, before candidate expansion or abstention
+
+    @property
+    def source_concepts(self) -> tuple[str, ...]:
+        return self.source_pattern.concepts if self.source_pattern is not None else self.concepts
 
     @property
     def evidence_extent(self) -> tuple[int, int]:
@@ -365,6 +370,7 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
     det = Detection(m.start, m.end, p.concepts, p.frame, p.intensity,
                     "entry" if p.entry_id else "trigger", p.text, p.entry_id,
                     captures=dict(m.captures), inflection=m.inflection)
+    det.source_pattern = p
     if p.entry_id:
         det.direct.add(p.entry_id)
     det.person_only = p.person_only

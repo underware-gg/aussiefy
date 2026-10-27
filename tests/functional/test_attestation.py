@@ -12,7 +12,7 @@ from aussiefy.schema import SchemaError, parse_entry
 
 
 def source(kind="scholarly_dictionary", publisher="Dictionary A", **kwargs):
-    return Source(kind, publisher, ("term", "meaning"), url="https://example.test/term", **kwargs)
+    return Source(kind, publisher, ("term", "meaning"), url="https://example.org/term", **kwargs)
 
 
 def summary(people=1, independent=None, places=1):
@@ -36,7 +36,7 @@ def test_hand_checked_score_goldens(dictionary):
 
 def test_copies_and_publisher_aliases_do_not_multiply_evidence(dictionary):
     a = source(publisher="  Dictionary A ")
-    copy = replace(a, publisher="dictionary a", url="https://example.test/copy")
+    copy = replace(a, publisher="dictionary a", url="https://example.org/copy")
     one = assess(TermMetadata(sources=(a,)), dictionary.evidence_weights)
     many = assess(TermMetadata(sources=(a, copy, a)), dictionary.evidence_weights)
     assert one == many
@@ -106,7 +106,7 @@ def test_first_attested_uses_supported_citation_date_not_publication_timestamp(d
 
 @pytest.mark.parametrize("raw, message", [
     ({"sources": ["https://example.test"]}, "structured|object"),
-    ({"sources": [{"kind": "crowd_dictionary", "publisher": "X", "supports": ["date"], "url": "https://example.test"}]}, "cited_date"),
+    ({"sources": [{"kind": "crowd_dictionary", "publisher": "X", "supports": ["date"], "url": "https://example.org"}]}, "cited_date"),
     ({"coined_by": "constructor", "sources": [source().to_dict()]}, "constructor"),
     ({"spoken_use": {"date": "2026-10-20", "note": "Confirmed"}}, "testimony"),
     ({"caught_on": {"date": "2026-10-20", "note": "Confirmed"}}, "independent testimony"),
@@ -230,7 +230,7 @@ def test_garnish_shares_metadata_weights_and_preserves_swear_tier(translator):
 @pytest.mark.parametrize("raw", [
     {"testimony": {"people": 1, "independent": 0, "places": 1, "first_date": "2026-10-20",
                    "last_date": "2026-10-20", "summary_date": "2026-10-20"}},
-    {"sources": [{"kind": "media", "publisher": "Example", "url": "https://example.test/term",
+    {"sources": [{"kind": "media", "publisher": "Example", "url": "https://example.org/term",
                   "supports": ["australian_use"]}]},
 ])
 def test_caught_on_requires_independent_use_of_the_term(raw):

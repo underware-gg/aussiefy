@@ -57,10 +57,10 @@ def test_plan_applies_the_guards(setup):
 def test_archived_round_metadata_is_adapted_after_fixes_without_mutating_inputs(setup):
     config, data = setup
     modern = {"kind": "slang_dictionary", "publisher": "Reviewed work", "supports": ["term", "meaning"],
-              "url": "https://reviewed.example/entry", "note": "Exact expression."}
+              "url": "https://reviewed.example.org/entry", "note": "Exact expression."}
     config.verdicts = [("archive", {"decision": "add_entry", "entry": {
         "id": "zzarchive", "form": "zzarchive", "concept": ["TIRED"], "frame": "predicate_adj",
-        "sources": ["HTTPS://legacy.example/entry", modern, "_best_dressed"],
+        "sources": ["HTTPS://legacy.example.org/entry", modern, "_best_dressed"],
         "flags": ["not_aussie", "dubious_meaning", "archaic", "fabricated"], "notes": "Original note."}})]
     config.entry_fixes = {"zzarchive": {"register": "dated", "reads_as": "general",
                                          "doubtful_definition": False}}
@@ -68,7 +68,7 @@ def test_archived_round_metadata_is_adapted_after_fixes_without_mutating_inputs(
     archive_bytes = (config.directory / "verify" / "verdicts-a.yaml").read_bytes()
     plan = _plan(config, data)
     raw = plan.entries[0]
-    assert raw["sources"][0]["url"] == "HTTPS://legacy.example/entry"
+    assert raw["sources"][0]["url"] == "HTTPS://legacy.example.org/entry"
     assert raw["sources"][0]["supports"] == []
     assert raw["sources"][1] == modern and len(raw["sources"]) == 2
     assert "_best_dressed" in raw["notes"] and raw["notes"].startswith("Original note.")

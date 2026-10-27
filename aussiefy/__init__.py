@@ -28,6 +28,7 @@ from .markdown import DocumentResult
 from .harness import guide, lint, lookup, plan, verify
 from .bulldust import bulldust, variations
 from .explore import get_entry, list_entries, list_wordless_meanings, random_entry, suggest_name
+from .source_urls import validate_source_url
 from .loader import load_dictionary
 from .model import Dictionary
 from .policy import Policy
@@ -35,6 +36,6 @@ from .errors import UserError
 from .schema import Entry, SchemaError
 from .yarn import yarn
 
-__all__ = ["list_entries", "list_wordless_meanings", "get_entry", "random_entry", "suggest_name", "variations", "translate", "translate_changes", "ChangeSet", "lookup", "lint", "guide", "plan", "verify", "bulldust", "yarn", "Translator", "default_translator", "Result",
+__all__ = ["validate_source_url", "list_entries", "list_wordless_meanings", "get_entry", "random_entry", "suggest_name", "variations", "translate", "translate_changes", "ChangeSet", "lookup", "lint", "guide", "plan", "verify", "bulldust", "yarn", "Translator", "default_translator", "Result",
            "DocumentResult", "Policy", "Dictionary", "load_dictionary", "Entry", "SchemaError", "UserError"]
 __version__ = "0.2.0"

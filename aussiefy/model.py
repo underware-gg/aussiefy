@@ -195,6 +195,14 @@ class Dictionary:
         return words
 
     @cached_property
+    def source_match_patterns(self):
+        from .match_keys import pattern_fingerprint
+        out = {}
+        for pattern in self.patterns + self.form_index.patterns:
+            out.setdefault((pattern.frame, pattern_fingerprint(pattern.frame, pattern)), []).append(pattern)
+        return {key: tuple(patterns) for key, patterns in out.items()}
+
+    @cached_property
     def mapping_index(self) -> PatternIndex:
         return PatternIndex([p for p in self.patterns if p.mapping_effects])
 

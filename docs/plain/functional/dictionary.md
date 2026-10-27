@@ -116,6 +116,11 @@ attribution never turns testimony into documentary evidence. Testimony citations
 summary. `supports` lists `term`, `meaning`, `australian_use` and/or `date`; the last requires `cited_date`.
 An empty list explicitly retains an unreviewed or component-only citation without attesting the full expression.
 
+Citation URLs use the shared offline `validate_source_url` shape check: HTTP(S), a public hostname,
+at most 2048 characters, no credentials, IP literals, non-default ports, spaces or controls. Valid URLs
+are retained unchanged. This validates link syntax, not source content or network destinations. Archived
+acquisition rounds also validate their adapted records; they do not rewrite the archived originals.
+
 ```yaml
 sources:
 - url: https://en.wiktionary.org/wiki/arvo

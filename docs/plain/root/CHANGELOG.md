@@ -5,6 +5,11 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Repair slice 5 foundations: share offline citation-link validation across loading and submission use;
+  preserve contextual pattern grammar in source-match keys, with no semantic key for unresolved readings;
+  and declare the unapplied source-followthrough research's provenance. Extension composition and tuning
+  remain in progress.
+
 - Make lookup follow translation's resolved meanings. Exact meaning names and plain wording recognise
   wordless meanings as `no_word_yet` before unrelated model guesses or dial rejections, while preserving
   independently understood object suggestions. Imagery discovery also respects superseded readings.

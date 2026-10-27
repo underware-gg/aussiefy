@@ -10,7 +10,8 @@ from datetime import date
 from typing import Any
 from urllib.parse import urlsplit
 
-from .errors import SchemaError
+from .errors import SchemaError, UserError
+from .source_urls import validate_source_url
 from .themes import ThemePermissions, blocked_themes, parse_tags
 
 SOURCE_KINDS = ("scholarly_dictionary", "slang_dictionary", "crowd_dictionary", "literature", "media",
@@ -197,13 +198,10 @@ def parse_sources(raw, owner: str) -> tuple[Source, ...]:
         elif r.get("basis") is not None:
             raise SchemaError(f"{owner}: basis is only valid for community sources")
         if r.get("basis", r["kind"]) != "testimony" or r.get("url") is not None:
-            url = r.get("url")
             try:
-                parsed = urlsplit(url) if isinstance(url, str) else None
-            except ValueError as exc:
-                raise SchemaError(f"{owner}: malformed source URL") from exc
-            if parsed is None or parsed.scheme not in {"http", "https"} or not parsed.hostname:
-                raise SchemaError(f"{owner}: source url must be HTTP(S)")
+                validate_source_url(r.get("url"))
+            except UserError as exc:
+                raise SchemaError(f"{owner}: {exc}") from exc
         if r.get("cited_date") is not None:
             r["cited_date"] = _period(r["cited_date"], f"{owner}.source.cited_date")
         if "date" in r["supports"] and not r.get("cited_date"):

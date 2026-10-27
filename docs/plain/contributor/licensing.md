@@ -40,6 +40,11 @@ files under the package are automatically the project's own work.
 
 ## Corpus and research texts
 
+The source-followthrough reports and ledgers declare their original analysis, MIT licence and cited-source
+catalogues under `authored` in `research/PROVENANCE.yaml`. Their exact file claims are registered in
+`third_party.yaml`. Cited publications are not imported source pages and are outside that project licence
+declaration; applying research citations to the dictionary still requires source-policy and scope review.
+
 Tracked `.txt`, `.html` and `.md` files under `tests/corpus/`, `tests/fixtures/` and `research/` need exactly one
 provenance claim. Existing reference/classics manifests own their records; rows declare a file, title,
 author, licence and notes. A declared file must be tracked and present. Narrow first-party claims describe

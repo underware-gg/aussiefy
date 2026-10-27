@@ -14,7 +14,7 @@ from aussiefy.scrape.review import plan_review
 from aussiefy.scrape.tag import SYSTEM, proposal_to_entry, staged_sources, tag_all
 
 FIX = Path(__file__).parents[1] / "fixtures"
-URL_A, URL_B = "https://example.test/a", "https://example.test/b"
+URL_A, URL_B = "https://example.org/a", "https://example.org/b"
 
 
 def test_staged_citations_do_not_bypass_contextual_validation():
@@ -192,7 +192,7 @@ def test_tagging_retry_reuses_validated_paid_work(dictionary, api_error, monkeyp
 
 def test_tagging_cache_tracks_model_and_item_context(dictionary):
     tag_all([BUSIER], dictionary, client=FakeClaude(json_reply(proposal())), log=lambda m: None)
-    changed = Staged(BUSIER.id, BUSIER.form, sources=["https://new.example"])
+    changed = Staged(BUSIER.id, BUSIER.form, sources=["https://new.example.org"])
     for items, model in (([BUSIER], "different-model"), ([changed], claude.DEFAULT_MODEL)):
         client = FakeClaude(json_reply(proposal()))
         result = tag_all(items, dictionary, client=client, model=model, log=lambda m: None)

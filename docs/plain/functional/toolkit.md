@@ -98,6 +98,11 @@ Genre, English, embellishment and extended document controls are described in [t
 
 ## Lookup sense matching
 
+`validate_source_url(url)` is an exported Python helper for citation links. It returns the unchanged URL
+or raises `UserError`. It checks HTTP(S), public hostname syntax, the 2048-character limit, and rejects
+credentials, IP literals, non-default ports, spaces and controls. It performs no fetch or DNS resolution
+and does not certify the cited content. Dictionary citation loading uses the same check.
+
 Lookup matches complete slang forms with grammatical slots, so “give them a bell” reaches the telephone
 sense. Complete form, inflected form and partial-term discovery explain vocabulary broadly; their cards
 do not promise an in-place replacement for the query. Inflection applies to a noun's head or a verb
