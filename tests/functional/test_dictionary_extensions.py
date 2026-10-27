@@ -94,6 +94,31 @@ def test_entryless_extension_concept_is_listed_as_waiting_not_a_guard(tmp_path, 
     assert any(row["concept"] == "community:ZZ_WAITING" for row in result["results"])
 
 
+@pytest.mark.parametrize("backend", ["none", "bundled"])
+@pytest.mark.parametrize("level,vulgarity,embellishment", [(1, 0, 0), (5, 3, 2)])
+def test_qualified_waiting_meaning_shares_core_lookup_readings(tmp_path, backend, level, vulgarity, embellishment):
+    from aussiefy import lookup
+    from aussiefy.detect import read_meanings
+    cid = "community:ZZ_REPORTED_CLAIM"
+    path = extension(tmp_path, concepts={cid: {
+        "description": "Synthetic meaning whose object supplies context.", "plain": "accept a synthetic claim",
+        "examples": ["She trusts the story.", "I trust what he says."],
+        "triggers": {"vp": ["trust ?={np}"]}}})
+    d = load_dictionary([path])
+    tr = Translator(d, lookup_embedder=backend)
+    for meaning in ("ACCEPT_AS_TRUE", cid):
+        concept = d.concepts[meaning]
+        for query in (concept.plain, *concept.examples):
+            result = lookup(query, translator=tr, level=level, vulgarity=vulgarity,
+                            embellishment=embellishment)
+            assert result["outcome"] == "no_word_yet", (meaning, query, result)
+            assert meaning in {row["concept"] for row in result["meanings"]}
+    for query in d.concepts[cid].examples:
+        reading = next(r for r in read_meanings(tokenize(query), d, fragment=True).detections if cid in r.concepts)
+        match = detection_match(reading)
+        assert match and known_match(match.key, d) and match.root.startswith(cid + "/")
+
+
 def test_qualified_entry_uses_the_existing_translation_and_changes_pipeline(tmp_path):
     import json
     import jsonschema
