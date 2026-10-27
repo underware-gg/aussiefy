@@ -244,7 +244,6 @@ class Concept:
     noun_use: str = "any"          # any | reference | address: grammatical use of a noun phrase
     lookup_only: bool = False    # retained for discovery; never establishes an automatic meaning
     takes_addressee: bool = False  # an expression whose following recipient is direct address
-    no_entries: bool = False     # by design takes no entries: a guard, or the holding concept, keeps its words
     plain: str = ""              # plain wording a reader understands ("think highly of")
     examples: tuple[str, ...] = ()  # sentences that read as this meaning; tests prove each one does
     credit: str | tuple[Credit, ...] | None = None
@@ -532,7 +531,6 @@ def parse_concept(cid: str, raw: dict) -> Concept:
         noun_use=noun_use,
         takes_addressee=_bool(raw, "takes_addressee", f"concept {cid}"),
         lookup_only=_bool(raw, "lookup_only", f"concept {cid}"),
-        no_entries=_bool(raw, "no_entries", f"concept {cid}"),
         plain=plain,
         examples=_tuple(raw.get("examples"), "examples", f"concept {cid}"),
         credit=parse_credit_value(raw["credit"], f"concept {cid}") if raw.get("credit") is not None else None,

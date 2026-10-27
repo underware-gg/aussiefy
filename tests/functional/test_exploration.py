@@ -287,14 +287,12 @@ def test_wordless_meanings_page_only_genuine_meanings_with_plain_wording(transla
         offset = page["next_offset"]
     ids = [row["concept"] for row in seen]
     assert ids == sorted(ids) and {"ACCEPT_AS_TRUE", "HEART_SPIRIT", "FANCIFUL"} <= set(ids)
-    assert not {HOLDING_CONCEPT, "HEARTBREAK", "BROKEN_OTHER_SENSE"} & set(ids)
+    assert not {HOLDING_CONCEPT, "BROKEN_OTHER_SENSE"} & set(ids)
     assert "BIN" not in ids   # the dialect table already swaps "trash can" for the Australian "bin"
-    assert all(not d.concepts[cid].no_entries for cid in ids)
     assert all(row["plain"] and row["examples"] for row in seen)
     assert not {cid for e in d.entries.values() if e.status != "omit" for cid in e.concept} & set(ids)
     end = list_wordless_meanings(offset=len(ids), translator=translator)
     assert end["outcome"] == "page_exhausted" and end["next_offset"] is None
-    assert not d.concepts[HOLDING_CONCEPT].no_entries
 
 
 @pytest.mark.parametrize("options", [{"limit": True}, {"limit": 0}, {"limit": 101}, {"offset": True}, {"offset": -1}])
@@ -338,7 +336,7 @@ def _overlay(tmp_path, document):
 
 def test_the_holding_concept_cannot_be_unmarked_to_take_entries(tmp_path):
     path = _overlay(tmp_path, {"patch_concepts": {"UNRESOLVED_SENSE": {"no_entries": True}}})
-    with pytest.raises(SchemaError, match="abstention is recognised by name"):
+    with pytest.raises(SchemaError, match="unknown fields.*no_entries"):
         load_dictionary([path])
 
 
@@ -350,10 +348,10 @@ def test_an_extension_meaning_without_plain_wording_is_flagged(tmp_path):
     assert any("TEST_WAITING" in warning and "plain wording" in warning for warning in d.warnings)
 
 
-def test_images_and_constructions_cannot_target_a_guard(data_copy):
+def test_images_and_constructions_cannot_target_abstention(data_copy):
     path = data_copy / "imagery.yaml"
     raw = yaml.safe_load(path.read_text())
-    raw[0]["concepts"] = ["HEARTBREAK"]
+    raw[0]["concepts"] = ["UNRESOLVED_SENSE"]
     path.write_text(yaml.safe_dump(raw))
     with pytest.raises(SchemaError, match="takes no images or constructions"):
         load_dictionary(data_dir=data_copy)
@@ -373,7 +371,7 @@ def test_lookup_says_when_a_recognised_meaning_has_no_word_yet(translator):
                                     "plain": translator.dictionary.concepts["HEART_SPIRIT"].plain}]
     assert lookup("fantastic terrors", translator=translator)["outcome"] == "no_word_yet"
     # a waiting meaning's trigger negated or embedded in more than it explains is not claimed, nor is a guard
-    for query in ("not the fallen", "I never bring into being", "not loyalty", "she broke my heart", "harpsichord"):
+    for query in ("not the fallen", "I never bring into being", "not loyalty", "harpsichord"):
         assert lookup(query, translator=translator)["outcome"] != "no_word_yet", query
     assert lookup("very busy", translator=translator)["outcome"] == "matched"
 

@@ -78,3 +78,4 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 - **Structure and interfaces:** DD-006, DD-008, DD-009, DD-015, DD-016, DD-019, DD-020, DD-021, DD-022, DD-023, DD-024, DD-028, DD-029, DD-038, DD-045
 - **Sources, licensing and releases:** DD-011, DD-012, DD-013, DD-014
 | [DD-049](../../../architecture/decisions/dd-049-phrase-fences.md) | One scoped phrase-fence list, separate from meanings and named abstention | Accepted for ED16 phase A |
+| [DD-050](../../../architecture/decisions/dd-050-wordless-meaning-migration.md) | Approved ordinary waiting meanings, contextual eager readings and complete marker retirement | Accepted for ED16 phase A2 |

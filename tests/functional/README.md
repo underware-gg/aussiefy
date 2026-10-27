@@ -10,6 +10,7 @@ python -m pytest -q tests/functional
 
 | Module | Primary responsibility |
 |---|---|
+| [test_ed16_meanings.py](test_ed16_meanings.py) | Approved waiting meanings, eagerness, literal context sequences and evidence boundaries |
 | [test_fences.py](test_fences.py) | Scoped phrase protection, deduplication, dialect separation and entry-overlap lint |
 | [test_dictionary_extensions.py](test_dictionary_extensions.py) | Namespaced additions, evidence snapshots, credit, promotion, bounded adjustments and dictionary identity |
 | [test_dictionary_conformance.py](test_dictionary_conformance.py) | Cross-surface register filters, realised construction profanity, composite recognition and evidence attribution |

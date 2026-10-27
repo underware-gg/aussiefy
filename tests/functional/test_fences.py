@@ -63,9 +63,9 @@ def test_meaning_fence_does_not_disable_a_legitimate_dialect_swap(dictionary):
 def test_core_concepts_are_meanings_and_one_named_abstention(dictionary):
     assert not {'WEB_COOKIE', 'A_PEOPLE', 'FELLOW_BEFORE_NAME'} & dictionary.concepts.keys()
     assert HOLDING_CONCEPT not in dictionary.wordless_meanings
-    assert not dictionary.concepts[HOLDING_CONCEPT].no_entries
-    assert {c.id for c in dictionary.concepts.values() if c.no_entries} == {
-        'HEARTBREAK', 'FREEDOM', 'FEEL_SORRY', 'UNEMPLOYED', 'GET_EXCITED', 'GIFT_TALENT', 'EAGER_FOR'}
+    assert 'EAGER_FOR' not in dictionary.concepts
+    assert {'HEARTBREAK', 'FREEDOM', 'FEEL_SORRY', 'UNEMPLOYED', 'GET_EXCITED', 'GIFT_TALENT'} <= set(dictionary.wordless_meanings)
+
 
 
 def test_deliberate_partial_entry_overlaps_are_reported_across_frames(dictionary):

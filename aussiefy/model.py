@@ -176,8 +176,8 @@ class Dictionary:
     @cached_property
     def wordless_meanings(self) -> tuple[str, ...]:
         """Recognised meanings with no Aussie word yet, by ID: no entry, image or construction expresses them, and
-        the dialect table swaps none of their triggers for the Australian word ("trash can" is a bin). Concepts
-        that take no entries by design (guards, the holding concept) are not meanings waiting (Rob, 25 October)."""
+        the dialect table swaps none of their triggers for the Australian word ("trash can" is a bin). The named
+        abstention concept is not a meaning waiting for a word."""
         expressed = {cid for entry in self.entries.values() if entry.status != "omit" for cid in entry.concept}
         expressed.update(cid for image in self.imagery for cid in image.concepts)
         if self.construction_catalog is not None:
@@ -187,7 +187,7 @@ class Dictionary:
             tokens = tokenize(text)
             return (0, len(tokens)) in self.dialect.spans(tokens, None, "general")
         return tuple(sorted(cid for cid, concept in self.concepts.items()
-                            if cid != HOLDING_CONCEPT and not concept.no_entries and cid not in expressed
+                            if cid != HOLDING_CONCEPT and cid not in expressed
                             and not any(swapped(t) for texts in concept.triggers.values() for t in texts)))
 
     def swear_strength(self, word: str) -> int:

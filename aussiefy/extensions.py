@@ -42,8 +42,8 @@ def parse_extension(raw, owner) -> Extension:
     for cid in concepts:
         if not in_namespace(cid, ns) or not CONCEPT_ID.fullmatch(cid):
             raise SchemaError(f"{owner}: extension concept ids must be qualified with {ns}:")
-        if isinstance(concepts[cid], dict) and concepts[cid].get("no_entries") is True:
-            raise SchemaError(f"{owner}: concept {cid}: guards are core-only until ED16 settles")
+        if isinstance(concepts[cid], dict) and "no_entries" in concepts[cid]:
+            raise SchemaError(f"{owner}: concept {cid}: no_entries is retired; concepts are meanings, and fences are core-only")
     for entry in entries:
         if (not isinstance(entry, dict) or not in_namespace(entry.get("id"), ns)
                 or not ENTRY_ID.fullmatch(entry["id"]) or "promoted_from" in entry):

@@ -85,8 +85,9 @@ sentences in which translation reads that meaning (a test proves each for the bu
 outcome is `nothing_fits` when no meaning is waiting at all.
 
 Only genuine meanings are listed. Phrase fences are separate from concepts. The named abstention
-concept `UNRESOLVED_SENSE` never appears. Seven legacy real meanings remain temporarily unlisted pending
-the approved ED16 meaning migration. See the [dictionary format](dictionary.md).
+concept `UNRESOLVED_SENSE` never appears. Heartbreak, freedom, remorse, being out of work, getting worked up and having a talent are ordinary
+meanings waiting for a word. The gift of the gab is a separate set-phrase fence, not the
+general talent meaning. See the [dictionary format](dictionary.md).
 
 ## Clean name suggestions
 

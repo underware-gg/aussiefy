@@ -219,8 +219,6 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
             errors.append(str(exc))
     if include_builtin and HOLDING_CONCEPT not in concepts:
         errors.append(f'concept {HOLDING_CONCEPT}: the single abstention concept is required')
-    if HOLDING_CONCEPT in concepts and concepts[HOLDING_CONCEPT].no_entries:
-        errors.append(f'concept {HOLDING_CONCEPT}: abstention is recognised by name, not no_entries')
 
     prof_raw = _read(data / "profiles.yaml", errors, {})
     base = prof_raw.get("base", {})
@@ -321,7 +319,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         for c in entry.concept:
             if c not in concepts:
                 errors.append(f"{entry.id}: unknown concept {c!r} (add it to concepts.yaml)")
-            elif c == HOLDING_CONCEPT or concepts[c].no_entries:
+            elif c == HOLDING_CONCEPT:
                 errors.append(f"{entry.id}: {c} keeps its words as written; it takes no entries")
         entries[entry.id] = entry
 
@@ -485,7 +483,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
     families = dictionary.construction_catalog.families if dictionary.construction_catalog else ()
     for owner, cids in [*((image.id, image.concepts) for image in imagery), *((f.id, (f.concept,)) for f in families)]:
         errors.extend(f"{owner}: {c} keeps its words as written; it takes no images or constructions"
-                      for c in cids if c in concepts and (c == HOLDING_CONCEPT or concepts[c].no_entries))
+                      for c in cids if c in concepts and (c == HOLDING_CONCEPT))
     if errors:
         raise SchemaError("dictionary failed validation:\n  " + "\n  ".join(errors))
     warnings.extend(f"concept {c} has no word yet but no plain wording or examples to list it with"

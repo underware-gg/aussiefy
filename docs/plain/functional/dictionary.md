@@ -41,6 +41,7 @@ aussiefy/data/
     gapfill.yaml       the gap-fill research round (research/gap-fill-2026-10-11)
     classics.yaml      the classics research round (research/classics-2026-10-11)
     meaning-extensions.yaml  reviewed sense splits and explicitly requested vocabulary
+    ed16.yaml          sourced eager verb phrases behind an explicit curation gate
     flagged.yaml       omitted and gated entries (kept so re-scrapes don't reintroduce them)
     scraped.yaml       machine-managed output of the review tool
 ```
@@ -72,6 +73,10 @@ An entry's `incoherence` is its minimum level: how distinctly and colourfully Au
 Generic/imported words sit low; thick vernacular and opaque local idioms sit high. Rudeness is independently
 its `vulgarity`. `status: gate` is a curator's manual gate; `--unlock all` can lift it. `omit` is never offered,
 even when unlocked. The `slur` flag requires `omit`; `untagged` requires a non-active status.
+
+The sourced “hang out for/to” verb phrases use that manual gate while their output-complement grammar
+is reviewed. Inspect them with `lookup("eager", include_gated=True)` for writer use. Their gate is
+separate from their evidence labels; do not treat them as bare-adjective replacements.
 
 Origin, use and meaning are separate from that manual status. `reads_as` other than `australian` or `general`,
 `australian_use: uncommon`, or `doubtful_definition: true` keeps a term out of automatic choices. These apply
@@ -202,8 +207,9 @@ register and flags. A mixed entry can still serve its other automatic meanings. 
 the recognition index. Intentional discovery-only concepts do not generate unreachable-trigger warnings.
 
 A concept names a meaning. `UNRESOLVED_SENSE` is the single abstention concept, recognised by name:
-it takes no entries, images or constructions and is not listed as waiting for a word. Seven legacy
-meaning records temporarily retain `no_entries: true` until their approved ED16 meaning migration.
+it takes no entries, images or constructions and is not listed as waiting for a word. Concepts without a
+word are ordinary meanings waiting for one. The retired `no_entries` field is
+rejected in core records, maintainer overlays and community extensions, even when set to false.
 A concept may give `plain` wording a reader understands (`plain: think highly of`) and `examples`,
 sentences that read as that meaning; a test proves every bundled example detects its concept. A meaning
 with no word yet needs both, since [exploration](exploring.md#meanings-without-a-word-yet) lists them:
@@ -261,8 +267,12 @@ its existing plural-only referent meaning, and omitted number metadata remains `
 - `!war|deal` to block a sense: neither of the next two words may be one of these, so `great !war` skips "a
   great civil war" but still fires on "a great game"
 - `?=home|there` requires the next token without consuming it: `walk ?=home|there` preserves the destination
+- `+` joins words inside a literal context assertion: `dying ?=for+a@4` reads “for a” without consuming
+  either word. Alternatives may mix lengths (`?=to|for+a`); the longest matching alternative supplies the
+  evidence span. The same syntax works before a pattern (`?<=we+all wish`). Missing or interrupted
+  words do not match. This is distinct from `?={np}`, which reads a grammatically established object.
 - `?<=radio|car antenna` requires a preceding token without consuming it: replace the antenna head while
-  retaining its radio/car qualifier. Assertion alternatives each name one token. Following assertions
+  retaining its radio/car qualifier. Alternatives name one token or a `+`-joined sequence. Following assertions
   require a preceding consuming element; matching still enforces both assertions in similarity mode
 - `?={np}` requires a following nominal object without consuming it, and must end the pattern. The object's
   extent is read from the sentence's part-of-speech tags rather than a word count: determiners, then

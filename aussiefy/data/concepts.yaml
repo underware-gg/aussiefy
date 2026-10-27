@@ -213,12 +213,18 @@ HAPPY:
     predicate_adj: ["happy@2", "delighted@4", "thrilled@4", "over the moon@4", "very pleased@3", "ecstatic@5",
                     "pleased@2", "excited@3", "chuffed@3", "elated@4", "jubilant@4", "overjoyed@4", "euphoric@5"]
 GET_EXCITED:
-  no_entries: true
-  description: >-
-    Guard (no entries) - "get excited" is getting worked up or enthused (a mare gets excited and desperate near the
-    end of a race; young coders get excited by learning), not delighted at how something turned out.
+  description: Become worked up or enthused, rather than pleased at an outcome.
   triggers:
-    vp: ["get excited", "get all excited", "get so excited", "get too excited", "get overexcited"]
+    vp:
+    - get excited
+    - get all excited
+    - get so excited
+    - get too excited
+    - get overexcited
+  plain: getting worked up or enthused
+  examples:
+  - They get excited about learning.
+  - He gets all excited about the game.
 DISAPPOINTED:
   description: Upset or disappointed about an outcome.
   person: true
@@ -888,11 +894,18 @@ STRUGGLERS:
     np: ["ordinary people", "working people", "working families", "the common man", "the working class",
          "the poor", "struggling families", "ordinary Australians"]
 FREEDOM:
-  no_entries: true
-  description: Guard (no entries) - freedom or liberty, not merely fair treatment or an opportunity.
-  not_in: [technical]
+  # Curation: a fair go is fair treatment, not freedom.
+  description: Freedom or liberty, rather than fair treatment or an opportunity.
+  not_in:
+  - technical
   triggers:
-    np: ["freedom", "liberty"]
+    np:
+    - freedom
+    - liberty
+  plain: freedom or liberty
+  examples:
+  - They fought for freedom.
+  - They demanded liberty.
 FAIR_OPPORTUNITY:
   description: Fair treatment or an equitable opportunity, rather than every sense of liberty.
   triggers:
@@ -1181,13 +1194,23 @@ FRONT_UP:
   triggers:
     vp: ["present yourself in person to face the music"]
 GIFT_TALENT:
-  no_entries: true
-  description: Guard (no entries) - a gift for something (a talent) and the gift of the gab aren't a present.
+  description: A natural aptitude for something, not a present.
   triggers:
-    # with its subject too: a noun-phrase match right after a pronoun is refused as a verb ("she has a gift for")
-    np: ["{subj} {have} a gift for", "has a gift for", "have a gift for", "had a gift for", "having a gift for",
-         "a natural gift for",
-         "a real gift for", "a rare gift for", "a special gift for", "a great gift for", "the gift of the gab"]
+    np:
+    - '{subj} {have} a gift for'
+    - has a gift for
+    - have a gift for
+    - had a gift for
+    - having a gift for
+    - a natural gift for
+    - a real gift for
+    - a rare gift for
+    - a special gift for
+    - a great gift for
+  plain: a talent
+  examples:
+  - She has a gift for music.
+  - He has a natural gift for numbers.
 BRAND_NEW:
   description: Completely new.
   not_in: [technical]   # a term of art in docs
@@ -1508,14 +1531,21 @@ HEART_SPIRIT:
          "find it? in {poss} heart ?=to", "take heart !medication|medications|tablets|pills|drugs|rate|surgery", "have heart ^end"]
     np: ["heart {be} not|never? really? in it", "heart's not|never? really? in it"]
 HEARTBREAK:
-  no_entries: true
-  description: >-
-    Guard (no entries) - a broken heart is grief, not the organ or something out of order, so the words stay
-    as written (she broke my heart, my heart is breaking, her heart was broken); never ticker.
+  description: Grief or deep emotional hurt expressed as a broken heart, not the physical organ or mechanical breakage.
   triggers:
-    vp: ["break all? {poss} heart|hearts", "break a|every|any heart"]
-    np: ["heart|hearts break|breaks|broke !down", "heart|hearts {be} breaking|broken", "heart's breaking|broken",
-         "heart|hearts had|has|have been broken", "heart|hearts will|would|could|might|can break"]
+    vp:
+    - break all? {poss} heart|hearts
+    - break a|every|any heart
+    np:
+    - heart|hearts break|breaks|broke !down
+    - heart|hearts {be} breaking|broken
+    - heart's breaking|broken
+    - heart|hearts had|has|have been broken
+    - heart|hearts will|would|could|might|can break
+  plain: heartbreak
+  examples:
+  - She broke my heart.
+  - Her heart was broken.
 UNRESOLVED_SENSE:
   description: Context leaves these words' sense undecided, so they stay as written. The engine assigns it
     where tags cannot settle an object (an object, or a clause's subject?); triggers name phrases whose sense
@@ -1569,13 +1599,21 @@ AWFUL:
   triggers:
     predicate_adj: ["terrible", "awful", "dreadful", "appalling", "horrendous"]
 FEEL_SORRY:
-  no_entries: true
-  description: >-
-    Guard (no entries) - feeling terrible about something is remorse ("I felt terrible about stealing the
-    blanket"), not feeling ill or a thing being bad.
+  description: Remorse or regret about something one has done, not illness or poor quality.
   triggers:
-    vp: ["feel terrible about", "feel awful about", "feel bad about", "feel terrible for", "feel awful for",
-         "feel terrible that", "feel awful that", "feel dreadful about"]
+    vp:
+    - feel terrible about
+    - feel awful about
+    - feel bad about
+    - feel terrible for
+    - feel awful for
+    - feel terrible that
+    - feel awful that
+    - feel dreadful about
+  plain: remorse
+  examples:
+  - I feel terrible about taking it.
+  - She felt awful about lying.
 BIG_STRONG:
   description: Very big and solidly built.
   triggers:
@@ -1647,13 +1685,6 @@ CONSTRUCT:
     # relationship, an auction program, a site; a threat builds; built on infrastructure). The fourth pass's agents
     # declined it in four texts after the third pass's long exclusion list.
     vp: ["throw together", "cobble together", "slap together", "rig up"]
-EAGER_FOR:
-  no_entries: true
-  description: >-
-    Dying to do something, dying for something: eager, not dying. No entries on purpose: the longer match keeps
-    DIE's "cark it" off "dying to see it" (a "!to" exclusion would also catch "To die, to sleep").
-  triggers:
-    vp: ["die to", "die for a"]
 PLACE:
   description: A place or premises (colloquial).
   # dismissive of a real place in a report, a notice or a doc ("the place" for a city in a news story)
@@ -1745,11 +1776,19 @@ WELFARE:
   triggers:
     np: ["unemployment benefits", "unemployment benefit", "jobseeker payments"]
 UNEMPLOYED:
-  no_entries: true
-  description: Guard (no entries) - out of work; neither benefit receipt nor deliberate avoidance of work is implied.
+  # Curation: dole bludger and other put-downs are not words for this meaning; neither benefits nor work avoidance is implied.
+  description: Without paid work; says nothing about receiving benefits or choosing not to work.
   person: true
   triggers:
-    predicate_adj: ["unemployed", "out of work", "jobless", "on welfare"]
+    predicate_adj:
+    - unemployed
+    - out of work
+    - jobless
+    - on welfare
+  plain: out of work
+  examples:
+  - She is unemployed.
+  - He is out of work.
 DODGY:
   description: Of dubious honesty or quality.
   person: true
@@ -3416,7 +3455,11 @@ MIND_YOUR_OWN:
 EAGER:
   description: Eager to do or have something (of a person); "keen" is the everyday Australian word.
   triggers:
-    predicate_adj: [eager ^person]
+    predicate_adj:
+    - eager ^person
+    vp:
+    - die ?=to@4
+    - die ?=for+a@4
 VERY_EAGER:
   description: Very eager, raring to go (of a person). Apart from EAGER, so a plain "eager" isn't overstated.
   triggers:

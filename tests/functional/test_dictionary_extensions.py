@@ -71,18 +71,19 @@ def test_namespaced_entries_and_entryless_context_meanings_load(tmp_path):
     assert any(r["id"] == "community:zz-test" for r in list_entries(concept="HUNGRY", translator=tr)["results"])
 
 
-def test_extension_guard_is_refused_with_extension_concept_and_reason(tmp_path):
+@pytest.mark.parametrize("marker", [True, False])
+def test_extension_guard_is_refused_with_extension_concept_and_reason(tmp_path, marker):
     path = extension(tmp_path, concepts={"community:ZZ_GUARD": {
-        "description": "Synthetic rejection fixture.", "no_entries": True,
+        "description": "Synthetic rejection fixture.", "no_entries": marker,
         "triggers": {"vp": ["trust ?={np}"]}}})
     with pytest.raises(SchemaError) as error:
         load_dictionary([path])
     message = str(error.value)
     assert str(path) in message and "community:ZZ_GUARD" in message
-    assert "guards are core-only until ED16 settles" in message
+    assert "no_entries is retired; concepts are meanings" in message
 
 
-@pytest.mark.parametrize("options", [{}, {"no_entries": False}])
+@pytest.mark.parametrize("options", [{}])
 def test_entryless_extension_concept_is_listed_as_waiting_not_a_guard(tmp_path, options):
     from aussiefy import list_wordless_meanings
     path = extension(tmp_path, concepts={"community:ZZ_WAITING": {
@@ -90,7 +91,6 @@ def test_entryless_extension_concept_is_listed_as_waiting_not_a_guard(tmp_path, 
         "examples": ["She trusts the story."], "triggers": {"vp": ["trust ?={np}"]}, **options}})
     d = load_dictionary([path])
     result = list_wordless_meanings(limit=100, translator=Translator(d, lookup_embedder=None))
-    assert not d.concepts["community:ZZ_WAITING"].no_entries
     assert any(row["concept"] == "community:ZZ_WAITING" for row in result["results"])
 
 

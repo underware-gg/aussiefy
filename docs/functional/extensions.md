@@ -37,10 +37,10 @@ References may name core ids or another loaded namespace. Unknown concepts and p
 at load, including on concepts without entries. Such concepts participate in contextual interpretation
 and the existing wordless-meaning listing.
 
-An entryless extension concept is a meaning waiting for a word, not a guard. An extension declaring
-`no_entries: true` fails with its filename, concept id and the reason “guards are core-only until ED16
-settles”. Omitting the field or setting it to false keeps the waiting meaning. Core phrase fences now have a separate file; seven legacy meaning markers remain only until the next
-ED16 migration. Extensions cannot define fences.
+An entryless extension concept is a meaning waiting for a word, not a guard. `no_entries` is retired
+throughout the core and extensions: declaring it, even as false, fails. An extension error names its
+filename, concept and the reason. Omit the field and supply the meaning's plain wording and examples.
+Phrase fences are core-only and live in a separate file; extensions cannot define them.
 
 Duplicate ids fail. Sharing a namespace across files does not permit overwriting a record. A new entry
 with a core form, frame and a shared concept fails with an instruction to use `evidence_for`. A different

@@ -5,10 +5,17 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- List six approved meanings as waiting for a word: heartbreak, freedom, remorse, being out of work,
+  getting worked up and a talent. Retire `no_entries` throughout core and extension schemas. Read
+  “dying to” and “dying for a” as strong eagerness, retaining their complements for “keen”; keep
+  other verb forms as eager readings without forcing adjective replacements, and the gift of the gab
+  as a set phrase. Add sourced “hang out for/to” verb phrases behind the manual curation gate pending
+  output-complement grammar, without pretending they fit bare adjective slots.
+  Literal context assertions may read word sequences joined with `+` without consuming them.
+
 - Consolidate phrase protections into one scoped fence list shared by meaning detection and dialect
   conversion, with plain reasons and duplicate validation. Recognise the single abstention concept by
-  name. Translation and discovery fixtures remain unchanged; the approved meaning migration follows
-  separately.
+  name. The reorganisation preserved translation and discovery fixtures.
 
 - Load additive community extension manifests with qualified entry/concept ids, evidence on existing
   entries, term/definition credit, aggregate testimony snapshots and explicit promotion checks. Validate
@@ -30,8 +37,8 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 - List the meanings the dictionary recognises but has no Aussie word for yet, with plain wording and
   examples (`list_wordless_meanings`, `aussiefy wordless-meanings`, `aussie_wordless_meanings`). Lookup
   reports such a meaning as `no_word_yet`, so “take heart” or “probably” no longer reads as merely nothing
-  fitting. Guards and the holding concept declare `no_entries: true`; the loader refuses entries, images and
-  constructions for them. Fetching an omitted entry by ID reports it as not in the dictionary, without its
+  fitting. Phrase fences are separate from meanings; the single named abstention concept takes no entries,
+  images or constructions. Fetching an omitted entry by ID reports it as not in the dictionary, without its
   flags, and a blank `names.yaml` fails to load instead of disabling name suggestions.
 - Read “believe what he says” as taking it as true, while “believe what he says is true” still reckons.
   Leave a relative clause's next verb to the main clause after an object pronoun (“believe the man who

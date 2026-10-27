@@ -3,6 +3,7 @@
 Status: Accepted for ED16 phase A; seven legacy meaning markers remain until phase A2
 Date: 2026-10-27
 Extends: [DD-044](dd-044-phrase-interpretation-context.md), [DD-048](dd-048-community-extension-composition.md)
+Extended by: [DD-050](dd-050-wordless-meaning-migration.md)
 
 ## Context
 

@@ -66,8 +66,8 @@ def test_a_malformed_context_object_is_refused(text):
         compile_pattern(text, 'vp', ('TEST',), 3)
 
 
-@pytest.mark.parametrize('concept', ['UNRESOLVED_SENSE', 'HEARTBREAK'])
-def test_the_holding_reading_and_guards_take_no_entries(concept, tmp_path):
+@pytest.mark.parametrize('concept', ['UNRESOLVED_SENSE'])
+def test_the_holding_reading_takes_no_entries(concept, tmp_path):
     with pytest.raises(Exception, match='takes no entries'):
         overlay(tmp_path, [{'id': 'test-hold', 'form': 'whatsit', 'concept': [concept], 'frame': 'vp'}])
 

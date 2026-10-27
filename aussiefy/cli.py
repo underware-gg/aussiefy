@@ -588,9 +588,8 @@ def cmd_validate(args) -> int:
     print(f"active idioms by minimum level: {dict(sorted(by_level.items()))}")
     for change in d.overlay_changes:
         print(_overlay_summary(change))
-    guards = [c for c, concept in d.concepts.items() if concept.no_entries]
-    if guards:
-        print(f"concepts that keep their words as written (no entries by design): {', '.join(guards)}")
+    if d.fences:
+        print(f"phrase fences: {len(d.fences)} ({dict(sorted(Counter(f.kind for f in d.fences).items()))})")
     if d.wordless_meanings:
         print(f"meanings with no word yet: {', '.join(d.wordless_meanings)}")
     _warn(d.warnings)

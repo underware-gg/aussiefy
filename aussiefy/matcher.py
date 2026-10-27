@@ -14,6 +14,7 @@ Pattern syntax (used in concept `triggers` and entry `replaces`):
                        the reading without joining the replaced span, so its own words keep their meaning;
                        detection reads the object's extent from the sentence's tags)
     snowed under@4     trailing @N sets the intensity this paraphrase expresses
+    dying ?=for+a      read several following words, joined by +, without consuming them
 
 In `np` patterns the last word also matches its plural; in `vp` patterns the
 first word is a verb lemma and matches any inflection ("overreact" matches
@@ -48,6 +49,10 @@ class Element:
     role: str = ""                # "head_verb" | "head_noun" | ""
     forms: tuple[tuple[str, str], ...] = ()   # surface -> inflection name, for heads
     reach: int = 2                # "not" only: how many tokens ahead it looks ("!x" two, "!=x" the next one)
+
+    @cached_property
+    def assertion_sequences(self) -> tuple[tuple[str, ...], ...]:
+        return tuple(sorted((tuple(v.split()) for v in self.values if ' ' in v), key=lambda w: (-len(w), w)))
 
 
 @dataclass(frozen=True)
@@ -142,10 +147,15 @@ def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_in
                     raise ValueError(f'a context {body} must end the pattern: it reads, but does not consume, the object')
                 elements.append(Element('ahead', slot=body[1:-1]))
                 continue
-            values = [tokenize(w) for w in body.split('|')]
-            if any(len(words) != 1 for words in values):
+            alternatives = body.split('|')
+            if any(not part for word in alternatives for part in word.split('+')):
+                raise ValueError('context assertion sequences need nonempty words joined by +')
+            values = [tokenize(w.replace('+', ' ')) for w in alternatives]
+            if any(not words or '+' not in word and len(words) != 1
+                   for word, words in zip(alternatives, values)):
                 raise ValueError('context assertion alternatives must each be one token')
-            elements.append(Element('behind' if behind else 'ahead', frozenset(words[0].norm for words in values)))
+            elements.append(Element('behind' if behind else 'ahead',
+                                    frozenset(' '.join(t.norm for t in words) for words in values)))
             continue
         if part.startswith("!") and len(part) > 1:
             if idx == 0:
@@ -237,6 +247,15 @@ def np_lengths(tokens: list[Token], ti: int, last: bool):
         yield n
 
 
+def _assertion_width(element: Element, tokens: list[Token], boundary: int, *, behind: bool = False) -> int:
+    for words in element.assertion_sequences:
+        start, end = (boundary - len(words), boundary) if behind else (boundary, boundary + len(words))
+        if start >= 0 and tuple(t.norm for t in tokens[start:end]) == words:
+            return len(words)
+    index = boundary - 1 if behind else boundary
+    return int(0 <= index < len(tokens) and tokens[index].norm in element.values)
+
+
 def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = True) -> Match | None:
     """Match pattern starting at tokens[pos]; tokens is one sentence."""
     captures: dict[str, Token] = {}
@@ -250,10 +269,11 @@ def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = T
             return ti
         el = pattern.elements[ei]
         if el.kind == 'behind':
-            if ti == 0 or tokens[ti-1].norm not in el.values:
+            width = _assertion_width(el, tokens, ti, behind=True)
+            if not width:
                 return None
             saved = context[0]
-            context[0] = min(saved, ti - 1)
+            context[0] = min(saved, ti - width)
             end = rec(ei + 1, ti)
             if end is None:
                 context[0] = saved
@@ -266,10 +286,13 @@ def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = T
                 if not tokens[ti].is_word or tokens[ti].norm in NP_STOP:
                     return None
                 object_start = ti
-            elif tokens[ti].norm not in el.values:
-                return None
+                width = 1
+            else:
+                width = _assertion_width(el, tokens, ti)
+                if not width:
+                    return None
             saved = context[1]
-            context[1] = max(saved, ti + 1)
+            context[1] = max(saved, ti + width)
             end = rec(ei + 1, ti)
             if end is None:
                 context[1] = saved

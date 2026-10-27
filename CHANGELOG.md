@@ -9,10 +9,17 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- List six approved meanings as waiting for a word: heartbreak, freedom, remorse, being out of work,
+  getting worked up and a talent. Retire `no_entries` throughout core and extension schemas. Read
+  “dying to” and “dying for a” as strong eagerness, retaining their complements for “keen”; keep
+  other verb forms as eager readings without forcing adjective replacements, and the gift of the gab
+  as a set phrase. Add sourced “hang out for/to” verb phrases behind the manual curation gate pending
+  output-complement grammar, without pretending they fit bare adjective slots.
+  Literal context assertions may read word sequences joined with `+` without consuming them.
+
 - Consolidate phrase protections into one scoped fence list shared by meaning detection'n dialect
   conversion, with plain reasons'n duplicate validation. Recognise the single abstention concept by
-  name. Translation'n discovery fixtures remain unchanged; the approved meaning migration follows
-  separately.
+  name. Bloody hell, the reorganisation preserved translation'n discovery fixtures.
 
 - Load additive community extension manifests with qualified entry/concept ids, evidence on existin'
   entries, term/definition credit, aggregate testimony snapshots'n explicit promotion checks. Validate
@@ -34,8 +41,8 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 - List the meanings the dictionary recognises but has no Aussie word for yet, with plain wording and
   examples (`list_wordless_meanings`, `aussiefy wordless-meanings`, `aussie_wordless_meanings`). Lookup
   reports such a meaning as `no_word_yet`, so “take heart” or “probably” no longer reads as merely nothing
-  fitting. Guards and the holding concept declare `no_entries: true`; the loader refuses entries, images and
-  constructions for them. Fetching an omitted entry by ID reports it as not in the dictionary, without its
+  fitting. Phrase fences are separate from meanings; the single named abstention concept takes no entries,
+  images or constructions. Fetching an omitted entry by ID reports it as not in the dictionary, without its
   flags, and a blank `names.yaml` fails to load instead of disabling name suggestions.
 - Read “believe what he says” as taking it as true, while “believe what he says is true” still reckons.
   Leave a relative clause's next verb to the main clause after an object pronoun \(“believe the man who
@@ -141,7 +148,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   explicitly overridden. Keep ordinary indefinite wording available. Share mapping effects through
   selection, lookup, plans, alternatives'n bounded original\-aware verification; retain unrelated numbers.
 - Apply the remainin' clear source\-audit sense repairs: distinguish urination, categorical impossibility,
-  completion, tasting, noisy crying/sulking, explicit noun subtypes'n emphatic refusals. Stone the crows, preserve antenna
+  completion, tasting, noisy crying/sulking, explicit noun subtypes'n emphatic refusals. Struth, preserve antenna
   qualifiers/plurals'n walking destinations, require progressive objects, and retain discovery\-only
   vocabulary where source wording can't establish a safe automatic readin'. So anyway, correct eight source/usage
   records'n merge 627 reviewed source pairs from batches 7–11 without changin' existin' term gates.
@@ -172,7 +179,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   reviewed servin'/container senses while preserving queries, ranking rules'n required status.
 
 - Add explicit versioned dictionary overlays through existin' `--dict` files: add concepts/entries or patch
-  existin' records in deterministic order, retaining the normal engine'n dial checks. Fair dinkum, preserve raw fields,
+  existin' records in deterministic order, retaining the normal engine'n dial checks. Jeez Louise, preserve raw fields,
   replace named lists/maps rather than append, allow clearing inherited source references, reject malformed
   or shadowed invalid operations, and report correction origins through validate/show'n dictionary metadata.
   Keep behaviour settings separate from vocabulary corrections; tighten canonical concept'n text/boolean
@@ -185,7 +192,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   Merge the 237 source proposals from batches 5 and 6 alongside the 239 from batches 3 and 4.
 
 - Preserve explicit listener possessives through shared binding'n form compatibility, and require a
-  listener for “bend someone's ear”. Struth, add standard bend/bent morphology instead of inventin' a listener
+  listener for “bend someone's ear”. Stone the flamin' crows, add standard bend/bent morphology instead of inventin' a listener
   or producing “bended”.
 - Apply 239 reviewed source records from the next two 120\-entry audit batches, retaining historical,
   component'n source\-chain evidence limits rather than certifying every trigger or full construction.
@@ -199,7 +206,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   Require both travel'n a swag for waltzing Matilda;
   exclude minimising nothing\-much wording from exact zero.
 - Preserve negative\-modal indifference wording'n supermarket location nouns through compatible sourced
-  forms. Bloody hell, keep all existin' status'n flag gates; retained historical terms remain subject to their registers.
+  forms. Keep all existin' status'n flag gates; retained historical terms remain subject to their registers.
 - Regenerate change fixtures from the invoking checkout rather than an editable installation of another worktree.
 
 - Amend the unreleased `changes` contract v1 with optional `semantic_effects` entry-card metadata.
