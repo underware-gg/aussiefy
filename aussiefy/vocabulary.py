@@ -8,6 +8,7 @@ from typing import Any
 
 from .schema import CONCEPT_KEYS, ENTRY_KEYS, SchemaError, parse_concept, parse_entry, validate_entry_id
 from .evidence import parse_sources
+from .extensions import FORMAT, parse_extension
 
 
 @dataclass
@@ -17,6 +18,7 @@ class Vocabulary:
     origins: dict[str, str] = field(default_factory=dict)
     changes: list[dict[str, Any]] = field(default_factory=list)
     sources: dict[str, list[dict]] = field(default_factory=dict)
+    extensions: list = field(default_factory=list)
 
     def add_entries(self, records: list, origin: str, errors: list[str], *, validate: bool = False) -> None:
         for raw in records:
@@ -40,6 +42,15 @@ class Vocabulary:
         if isinstance(raw, list):
             self.add_entries(raw, origin, errors, validate=True)
             return
+        if raw.get("format") == FORMAT:
+            try:
+                extension = parse_extension(raw, origin)
+            except SchemaError as exc:
+                errors.append(str(exc))
+                return
+            self._additions(extension.concepts, extension.entries, origin, errors)
+            self.extensions.append((origin, extension))
+            return
         allowed = {"format", "add_concepts", "add_entries", "patch_concepts", "patch_entries"}
         if set(raw) - allowed:
             errors.append(f"{origin}: unknown overlay fields {sorted(set(raw) - allowed, key=str)}")
@@ -47,7 +58,11 @@ class Vocabulary:
         if raw.get("format") != "aussiefy-dictionary-overlay/v1":
             errors.append(f"{origin}: format must be aussiefy-dictionary-overlay/v1")
             return
-        additions = raw.get("add_concepts", {})
+        self._additions(raw.get("add_concepts", {}), raw.get("add_entries", []), origin, errors)
+        self._patch(raw.get("patch_concepts", {}), self.concepts, CONCEPT_KEYS, "concept", origin, errors)
+        self._patch(raw.get("patch_entries", {}), self.entries, set(ENTRY_KEYS) - {"id"}, "entry", origin, errors)
+
+    def _additions(self, additions, entries, origin, errors):
         if not isinstance(additions, dict):
             errors.append(f"{origin}: add_concepts must be a mapping")
         else:
@@ -62,7 +77,6 @@ class Vocabulary:
                         continue
                     self.concepts[cid] = deepcopy(record)
                     self.changes.append(dict(origin=origin, kind="concept", id=cid, operation="add"))
-        entries = raw.get("add_entries", [])
         if not isinstance(entries, list):
             errors.append(f"{origin}: add_entries must be a list")
         else:
@@ -70,8 +84,6 @@ class Vocabulary:
             self.add_entries(entries, origin, errors, validate=True)
             self.changes.extend(dict(origin=origin, kind="entry", id=eid, operation="add")
                                 for eid in self.entries if eid not in existing)
-        self._patch(raw.get("patch_concepts", {}), self.concepts, CONCEPT_KEYS, "concept", origin, errors)
-        self._patch(raw.get("patch_entries", {}), self.entries, set(ENTRY_KEYS) - {"id"}, "entry", origin, errors)
 
     def _patch(self, patches, records, allowed, kind, origin, errors) -> None:
         section = "patch_entries" if kind == "entry" else "patch_concepts"

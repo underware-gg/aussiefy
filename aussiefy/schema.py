@@ -13,7 +13,7 @@ from typing import Any
 
 from .errors import SchemaError
 from .themes import ThemePermissions
-from .evidence import (METADATA_KEYS, REGISTERS, TermMetadata, metadata_dict, metadata_rejections, register_rejection, parse_metadata,
+from .evidence import (Credit, METADATA_KEYS, REGISTERS, TermMetadata, credit_records, metadata_dict, metadata_rejections, register_rejection, parse_metadata, parse_credit_value,
                        theme_rejection)
 from .text import MASK_WORD_RE, normalise_word
 
@@ -183,6 +183,7 @@ class Entry(TermMetadata):
     notes: str = ""
     key_sha256: str | None = None   # for redacted omit entries (e.g. slurs) so re-scrapes stay blocked
     origin_file: str = ""
+    promoted_from: str | None = None
     riffs: tuple["Riff", ...] = ()   # the images it calls up, from riffs.yaml
 
     @property
@@ -246,6 +247,7 @@ class Concept:
     no_entries: bool = False     # by design takes no entries: a guard, or the holding concept, keeps its words
     plain: str = ""              # plain wording a reader understands ("think highly of")
     examples: tuple[str, ...] = ()  # sentences that read as this meaning; tests prove each one does
+    credit: str | tuple[Credit, ...] | None = None
 
 
 CONCEPT_KEYS = frozenset(f.name for f in fields(Concept)) - {"id"}
@@ -256,7 +258,7 @@ ENTRY_KEYS = tuple(dict.fromkeys((
     "id", "form", "variants", "spellings", "insult", "concept", "frame", "class", "plural", "number", "slots", "intensity", "vulgarity",
     "mask", "profane", "incoherence", "register", "region", "replaces", "status", "flags", "plain_sense", "type", "placement", "when",
     "stretch",
-    "tone", "weight", "semantic_effects", "semantic_degree", "gloss", "notes", "key_sha256", *METADATA_KEYS,
+    "tone", "weight", "semantic_effects", "semantic_degree", "gloss", "notes", "key_sha256", "promoted_from", *METADATA_KEYS,
 )))
 
 
@@ -295,7 +297,8 @@ def validate_entry_id(raw: dict, origin: str = "") -> str:
     if not isinstance(raw, dict):
         raise SchemaError(f"{origin}: entry must be a mapping, got {type(raw).__name__}")
     entry_id = raw.get("id")
-    if not entry_id or not isinstance(entry_id, str) or not re.fullmatch(r"[a-z0-9][a-z0-9-]*", entry_id):
+    from .identifiers import ENTRY_ID
+    if not isinstance(entry_id, str) or not ENTRY_ID.fullmatch(entry_id):
         raise SchemaError(f"{origin}: entry id must be kebab-case, got {entry_id!r}")
     return entry_id
 
@@ -404,6 +407,13 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
             raise SchemaError(f"{entry_id}: '{name}' must be text")
     if raw.get("plural") is not None and (not isinstance(raw["plural"], str) or not raw["plural"].strip()):
         raise SchemaError(f"{entry_id}: 'plural' must be non-empty text")
+    metadata = parse_metadata(raw, entry_id)
+    promoted = raw.get("promoted_from")
+    if promoted is not None:
+        from .identifiers import ENTRY_ID
+        if (not isinstance(promoted, str) or not ENTRY_ID.fullmatch(promoted) or ":" not in promoted
+                or ":" in entry_id or not any(c.scope == "term" for c in credit_records(metadata.get("credit")))):
+            raise SchemaError(f"{entry_id}: promoted_from needs a qualified old id, a core id and contributor credit")
 
     return Entry(
         id=entry_id,
@@ -420,7 +430,7 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
         replaces=_tuple(raw.get("replaces"), "replaces", entry_id),
         status=status,
         flags=flags,
-        **parse_metadata(raw, entry_id),
+        **metadata,
         semantic_effects=effects,
         semantic_degree=semantic_degree,
         gloss=raw.get("gloss", "") or "",
@@ -440,6 +450,7 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
         notes=raw.get("notes", "") or "",
         key_sha256=raw.get("key_sha256"),
         origin_file=origin,
+        promoted_from=promoted,
     )
 
 
@@ -460,9 +471,10 @@ def parse_degrees(raw, owner: str) -> dict[str, str]:
 
 
 def parse_concept(cid: str, raw: dict) -> Concept:
+    from .identifiers import CONCEPT_ID
     if not isinstance(cid, str):
         raise SchemaError(f"concept id {cid!r} is not a string (YAML reads bare YES/NO/ON/OFF as booleans)")
-    if not re.fullmatch(r"[A-Z][A-Z0-9_]*", cid):
+    if not CONCEPT_ID.fullmatch(cid):
         raise SchemaError(f"concept id must be UPPER_SNAKE, got {cid!r}")
     if not isinstance(raw, dict):
         raise SchemaError(f"concept {cid}: expected a mapping")
@@ -523,4 +535,5 @@ def parse_concept(cid: str, raw: dict) -> Concept:
         no_entries=_bool(raw, "no_entries", f"concept {cid}"),
         plain=plain,
         examples=_tuple(raw.get("examples"), "examples", f"concept {cid}"),
+        credit=parse_credit_value(raw["credit"], f"concept {cid}") if raw.get("credit") is not None else None,
     )

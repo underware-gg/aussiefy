@@ -15,6 +15,7 @@ from .dialect import DialectTable
 from .matcher import Pattern, PatternIndex, compile_pattern
 from .schema import Concept, Entry, Imagery
 from .evidence import EvidenceWeights, TermMetadata
+from .adjustments import Adjustments
 from .text import COMMON_STARTERS, MASK_WORD_RE, normalise_word, spoken_word, tokenize
 from .terms import fold, strip_markup, name_slug
 
@@ -137,6 +138,13 @@ class Dictionary:
     evidence_weights: EvidenceWeights | None = None
     construction_catalog: ConstructionCatalog | None = None
     name_catalog: NameCatalog | None = None
+    identity: str = ""
+    extensions: tuple[str, ...] = ()
+    adjustments: Adjustments = field(default_factory=Adjustments)
+
+    @cached_property
+    def promoted_entries(self) -> dict[str, str]:
+        return {e.promoted_from: e.id for e in self.entries.values() if e.promoted_from is not None}
 
     @cached_property
     def construction_patterns(self):

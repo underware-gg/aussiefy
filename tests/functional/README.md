@@ -10,6 +10,7 @@ python -m pytest -q tests/functional
 
 | Module | Primary responsibility |
 |---|---|
+| [test_dictionary_extensions.py](test_dictionary_extensions.py) | Namespaced additions, evidence snapshots, credit, promotion, bounded adjustments and dictionary identity |
 | [test_dictionary_conformance.py](test_dictionary_conformance.py) | Cross-surface register filters, realised construction profanity, composite recognition and evidence attribution |
 | [test_exploration.py](test_exploration.py) | Stable dictionary discovery, clean names, variation policy and surface parity |
 | [test_constructions.py](test_constructions.py) | Typed construction, evidence, subject policy, deterministic bounds and removable garnish |

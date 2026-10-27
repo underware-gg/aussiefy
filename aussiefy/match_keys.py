@@ -11,10 +11,10 @@ from .degree import realised_degree
 from .errors import UserError
 from .matcher import Pattern, compile_pattern
 from .schema import FRAMES, HOLDING_CONCEPT
+from .identifiers import CONCEPT_ID
 
 QUALIFIERS = ("degree",)
 DEGREES = {"mild", "unmarked", "strong"}
-CONCEPT_ID = re.compile(r"[A-Z][A-Z0-9_]*")
 FINGERPRINT = re.compile(r"[0-9a-f]{64}")
 
 

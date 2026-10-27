@@ -5,6 +5,11 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Load additive community extension manifests with qualified entry/concept ids, evidence on existing
+  entries, term/definition credit, aggregate testimony snapshots and explicit promotion checks. Validate
+  bounded per-match adjustment data and compute a content identity for each dictionary load. Public
+  response identity and tuning integration remain with the coordinated contract update.
+
 - Repair slice 5 foundations: share offline citation-link validation across loading and submission use;
   preserve contextual pattern grammar in source-match keys, with no semantic key for unresolved readings;
   and declare the unapplied source-followthrough research's provenance. Extension composition and tuning

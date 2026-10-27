@@ -291,6 +291,10 @@ and profile garnish keys must name known placements. The guide validates its own
 
 ## Extending it
 
+For additive community exports, see [extension dictionaries](extensions.md): qualified ids, evidence and
+credit composition, promotion, bounded adjustment data'n dictionary identity. Maintainer overlays below
+remain a separate way to make reviewed core corrections.
+
 To extend the dictionary without touching the package, pass `--dict my-entries.yaml` (a file or a directory;
 repeatable) to any command, or `load_dictionary(["my-entries.yaml"])` in Python. A step-by-step guide is in
 [getting-started.md](../user/getting-started.md#add-your-own-entries).

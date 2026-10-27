@@ -38,6 +38,11 @@ resolves the installed model's settings through `models.py`, the one place the c
 keeps the dictionary model (`model.py`, `schema.py`, `cards.py`, `policy.py`, `matcher.py`, `text.py`, `genre.py`) free of the loader's
 file I/O.
 
+`extensions.py` composes additive community evidence and validates same-sense collisions, while
+`identifiers.py` owns the shared id grammar. `adjustments.py` validates contextual weight data and performs
+pure bounded queries; it imports no selection or evidence-scoring code. `dictionary_identity.py` is loader
+I/O and fingerprints file inputs. The model stores its result and never imports that I/O module.
+
 Optional heavy dependencies \(anthropic, mcp, sentence\-transformers, torch\) are imported lazily, inside the
 functions that need them, so the core imports'n runs with its core dependencies, offline. Markdown's light parser
 heaps only in that mode; the plain engine never imports its adapter \([DD-015](decisions/dd-015-source-preserving-markdown.md)).

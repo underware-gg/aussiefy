@@ -77,6 +77,12 @@ class CuratorRecord:
 
 
 @dataclass(frozen=True)
+class Credit:
+    name: str
+    scope: str
+
+
+@dataclass(frozen=True)
 class Attestation:
     score: float = 0.0
     bars: int = 0
@@ -106,7 +112,7 @@ class TermMetadata:
     caught_on: CuratorRecord | None = None
     spoken_use: CuratorRecord | None = None
     testimony: Testimony | None = None
-    credit: str | None = None
+    credit: str | tuple[Credit, ...] | None = None
     origin: str = "unknown"
     register: str = "current"
     origin_language: str | None = None
@@ -224,9 +230,11 @@ def parse_metadata(raw: dict, owner: str) -> dict:
     for key in ("doubtful_definition", "misreadable"):
         if key in out and type(out[key]) is not bool:
             raise SchemaError(f"{owner}: {key} must be true or false")
-    for key in ("credit", "origin_language"):
+    for key in ("origin_language",):
         if key in out:
             _text(out[key], f"{owner}.{key}")
+    if "credit" in out:
+        out["credit"] = parse_credit_value(out["credit"], owner)
     if "dated_by_curator" in out:
         out["dated_by_curator"] = _period(out["dated_by_curator"], f"{owner}.dated_by_curator")
     if "themes" in out:
@@ -267,6 +275,32 @@ def parse_metadata(raw: dict, owner: str) -> dict:
     if out.get("caught_on") and not (documentary or testimony and testimony.independent):
         raise SchemaError(f"{owner}: caught_on needs a non-testimony source or independent testimony")
     return out
+
+
+def parse_credit(raw, owner: str) -> tuple[Credit, ...]:
+    if not isinstance(raw, list):
+        raise SchemaError(f"{owner}: credit must be text or a list of name/scope records")
+    out = []
+    for record in raw:
+        r = _object(record, ("name", "scope"), f"{owner}.credit")
+        name = _text(r.get("name"), f"{owner}.credit.name")
+        if r.get("scope") not in {"term", "definition"}:
+            raise SchemaError(f"{owner}: credit scope must be term or definition")
+        out.append(Credit(name, r["scope"]))
+    return tuple(dict.fromkeys(out))
+
+
+def credit_records(credit: str | tuple[Credit, ...] | None) -> tuple[Credit, ...]:
+    """Legacy credit text names the term's contributor; new records distinguish definition credit."""
+    return (Credit(credit, "term"),) if isinstance(credit, str) else credit or ()
+
+
+def parse_credit_value(raw, owner):
+    return _text(raw, f"{owner}.credit") if isinstance(raw, str) else parse_credit(raw, owner)
+
+
+def credit_data(credit):
+    return [asdict(c) for c in credit] if isinstance(credit, tuple) else credit
 
 
 def parse_weights(raw) -> EvidenceWeights:
@@ -335,6 +369,8 @@ def metadata_dict(term: TermMetadata, *, derived: bool = False) -> dict[str, Any
         tiers = dict(term.theme_tiers)
         out["themes"] = [{"name": name, "tier": tiers[name]} if name in tiers else name for name in term.themes]
     out["sources"] = [s.to_dict() for s in term.sources]
+    if term.credit is not None:
+        out["credit"] = credit_data(term.credit)
     if derived:
         out["attestation"] = term.attestation.to_dict()
     return out

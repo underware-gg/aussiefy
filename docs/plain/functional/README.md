@@ -20,6 +20,7 @@ guarantees. For step-by-step guides, see the [user layer](../user/README.md); fo
 | [verification.md](verification.md) | Deterministic structural and fidelity checks against the original |
 | [llm-modes.md](llm-modes.md) | Model-assisted writing, the optional API client, guarantees and caches |
 | [dictionary.md](dictionary.md) | The data files, the entry format, slots, the pattern language, validation and extending the dictionary |
+| [extensions.md](extensions.md) | Additive community manifests, qualified ids, evidence, credit, promotion, adjustment data and content identity |
 | [embedding.md](embedding.md) | Which features use a similarity model, the choices, and the `embedder` command |
 | [configuration.md](configuration.md) | Environment variables, machine state, caches, working files and tunable data |
 | [maintainer-tools.md](maintainer-tools.md) | What `compare`, `gaps` and the `dev` steps (scrape, fragments, harvest, tag, review, round) do |

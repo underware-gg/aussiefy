@@ -29,6 +29,9 @@ from .themes import THEME_NAME
 from .construction_data import parse_catalog
 from .masks import profanity_rating
 from .names import parse_name_catalog
+from .adjustments import load_adjustments
+from .extensions import compose_evidence, validate_extension_forms
+from .dictionary_identity import dictionary_identity
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -196,10 +199,16 @@ def _profile(level: int, raw: dict, base: dict) -> LevelProfile:
 def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | None = None,
                     include_builtin: bool = True) -> Dictionary:
     data = Path(data_dir) if data_dir else DATA_DIR
+    extra = tuple(extra)
     errors: list[str] = []
     warnings: list[str] = []
 
     vocabulary = _vocabulary(data, extra, include_builtin, errors, warnings)
+    if not errors:
+        try:
+            compose_evidence(vocabulary.entries, vocabulary.extensions)
+        except SchemaError as exc:
+            errors.append(str(exc))
     concepts: dict[str, Concept] = {}
     for cid, raw in vocabulary.concepts.items():
         try:
@@ -311,6 +320,12 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
             elif concepts[c].no_entries:
                 errors.append(f"{entry.id}: {c} keeps its words as written; it takes no entries")
         entries[entry.id] = entry
+
+    if not errors:
+        try:
+            validate_extension_forms(entries, vocabulary.extensions)
+        except SchemaError as exc:
+            errors.append(str(exc))
 
     # riffs.yaml: the images a term calls up (wheelie bin -> bin chickens fightin' over the scraps), rated for
     # swearing word by word from swears.yaml so the vulgarity cap applies to them too
@@ -466,6 +481,10 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
             errors.append(str(exc))
     if errors:
         raise SchemaError("dictionary failed validation:\n  " + "\n  ".join(errors))
+    dictionary.adjustments = load_adjustments(
+        [(origin, e.adjustments) for origin, e in vocabulary.extensions if e.adjustments is not None], dictionary)
+    dictionary.extensions = tuple(e.namespace for _, e in vocabulary.extensions)
+    dictionary.identity = dictionary_identity(data, _entry_files(Path(p) for p in extra), include_builtin=include_builtin)
     return dictionary
 
 

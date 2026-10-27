@@ -72,6 +72,7 @@ its consequences as they stood when it was made. Anyway, records are numbered in
 | [DD-045](dd-045-explicit-dictionary-exploration.md) | Stable explicit discovery, clean handles and validated construction variations | Accepted |
 | [DD-046](dd-046-lookup-meaning-evidence.md) | Shared meaning evidence and exact authored wording take precedence over lookup guesses | Accepted |
 | [DD-047](dd-047-source-links-and-match-identity.md) | Shared citation-link validation and contextual source-match identity; slice 5 foundations | Accepted |
+| [DD-048](dd-048-community-extension-composition.md) | Additive community manifests, aggregate testimony, bounded adjustment data and content identity | Accepted |
 
 ## By topic
 

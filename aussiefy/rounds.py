@@ -38,7 +38,7 @@ from .errors import UserError
 from .loader import _YAML_LOADER, DATA_DIR, load_dictionary, write_validated
 from .model import Dictionary
 from .schema import CONCEPT_KEYS, Concept, ENTRY_KEYS, SchemaError, parse_concept, parse_entry, parse_effects
-from .evidence import unreviewed_source
+from .evidence import credit_data, unreviewed_source
 from .terms import form_key
 
 
@@ -342,6 +342,7 @@ def _prepare_concept_fixes(plan: RoundPlan, d: Dictionary) -> None:
             raw["triggers"] = {frame: list(patterns) for frame, patterns in concept.triggers.items()}
             raw["unless_after"] = list(concept.unless_after)
             raw["examples"] = list(concept.examples)
+            raw["credit"] = credit_data(concept.credit)
             raw["trigger_effects"] = {frame: {pattern: list(effects) for pattern, effects in mappings.items()}
                                       for frame, mappings in concept.trigger_effects.items()}
             raw.update(patch)
