@@ -368,6 +368,8 @@ class Translator:
         """Whether every concept a span was read as is a term of art in this genre (a browser's cookie, a
         struct's field, a build): then the span stays as it is, and no shorter match takes it either."""
         known = [self.dictionary.concepts[c] for c in det.concepts if c in self.dictionary.concepts]
+        if det.source_pattern is not None and (fence := det.source_pattern.fence) is not None:
+            return bool(set(domains) & fence.not_in)
         return bool(known) and all(set(domains) & c.not_in for c in known)
 
     def _substitute(self, sent: "_Sentence", run: "_Run") -> tuple[list[SubstitutionRecord], list[tuple[int, int, str]]]:

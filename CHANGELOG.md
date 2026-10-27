@@ -9,6 +9,11 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Consolidate phrase protections into one scoped fence list shared by meaning detection'n dialect
+  conversion, with plain reasons'n duplicate validation. Recognise the single abstention concept by
+  name. Translation'n discovery fixtures remain unchanged; the approved meaning migration follows
+  separately.
+
 - Load additive community extension manifests with qualified entry/concept ids, evidence on existin'
   entries, term/definition credit, aggregate testimony snapshots'n explicit promotion checks. Validate
   bounded per\-match adjustment data'n compute a content identity for each dictionary load. Public

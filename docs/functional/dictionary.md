@@ -25,7 +25,8 @@ aussiefy/data/
   imagery.yaml         reviewed contextual images, meaning/frame anchors and writer usage conditions
   guide.yaml           voice, language limits, openings, gated craft, workflow, plan note and yarn rules
   swears.yaml          swear words by strength, for lint and for rating riffs
-  dialect.yaml         US/UK patterns, Australian replacements, sense guards and lint-only expressions
+  dialect.yaml         US/UK patterns, Australian replacements and lint-only expressions
+  fences.yaml          Set phrases, other senses and grammar fences, with scopes and plain reasons
   genres.yaml          explicit document presets and embellishment settings
   judge.yaml           blind comparison rubric and report schema
   pos/                 licensed English POS weights and provenance metadata
@@ -204,12 +205,36 @@ and direct entry replacements for that meaning. This is an actual boolean, indep
 register and flags. A mixed entry can still serve its other automatic meanings. Source forms remain in
 the recognition index. Intentional discovery-only concepts do not generate unreachable-trigger warnings.
 
-A concept that keeps its words as written by design, a guard or the holding concept for undecided senses,
-declares `no_entries: true`. The loader refuses an entry, image or construction for it, and it is never
-listed as a meaning waiting for a word. The holding concept must keep the marker. A concept may give `plain`
-wording a reader understands (`plain: think highly of`) and `examples`, sentences that read as that meaning;
-a test proves every bundled example detects its concept. A meaning with no word yet needs both, since
-[exploration](exploring.md#meanings-without-a-word-yet) lists them: the loader warns when one lacks them.
+A concept names a meaning. `UNRESOLVED_SENSE` is the single abstention concept, recognised by name:
+it takes no entries, images or constructions and is not listed as waiting for a word. Seven legacy
+meaning records temporarily retain `no_entries: true` until their approved ED16 meaning migration.
+A concept may give `plain` wording a reader understands (`plain: think highly of`) and `examples`,
+sentences that read as that meaning; a test proves every bundled example detects its concept. A meaning
+with no word yet needs both, since [exploration](exploring.md#meanings-without-a-word-yet) lists them:
+the loader warns when one lacks them.
+
+Phrase protections live in `fences.yaml`, not in concepts or dialect self-swaps. Every fence has a
+`phrase`, `frame`, `kind` (`set_phrase`, `other_sense` or `grammar`), plain `reason`, and explicit `scope`:
+
+```yaml
+- phrase: petroleum jelly
+  frame: np
+  kind: set_phrase
+  scope:
+    meanings: false
+    dialect: [unknown, us, uk]
+    not_in: []
+  reason: Petroleum jelly is an ointment, not jam.
+```
+
+`meanings` enables competition with the shared meaning reader. `dialect` lists the resolved Englishes
+whose dialect claims the fence participates in; an empty list disables that projection. `unknown` is
+unidentified English, not the raw `auto` dial. `english=none` still disables the dialect pass altogether.
+`not_in` carries document domains under the same term-of-art rules as concepts and dialect records.
+A meaning-only fence can protect “parking lots” from amount slang while allowing “car parks”.
+Duplicates must combine scopes in one record. Self-swaps and dialect replacements repeating a dialect
+fence are errors. Entry replacements overlapping a fence are allowed and reported as loader warnings,
+since some overlaps deliberately protect phrases at settings where their entries cannot be used.
 
 ## Slots
 

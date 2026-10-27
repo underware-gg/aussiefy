@@ -18,6 +18,7 @@ from .errors import UserError
 from .terms import fold
 from . import pos
 from .dialect import parse_dialect
+from .fences import parse_fences, pattern_key
 from .genre import GenreConfig
 from .matcher import Pattern, PatternIndex, compile_pattern
 from .model import Dictionary, LevelProfile, PhoneticRule, RewriteThresholds, SwearProfile, swear_strength
@@ -32,6 +33,7 @@ from .names import parse_name_catalog
 from .adjustments import load_adjustments
 from .extensions import compose_evidence, validate_extension_forms
 from .dictionary_identity import dictionary_identity
+from .text import tokenize
 
 DATA_DIR = Path(__file__).parent / "data"
 
@@ -215,8 +217,10 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
             concepts[cid] = parse_concept(cid, {} if raw is None else raw)
         except SchemaError as exc:
             errors.append(str(exc))
-    if HOLDING_CONCEPT in concepts and not concepts[HOLDING_CONCEPT].no_entries:
-        errors.append(f"concept {HOLDING_CONCEPT}: the engine holds undecided words with it; it must keep no_entries")
+    if include_builtin and HOLDING_CONCEPT not in concepts:
+        errors.append(f'concept {HOLDING_CONCEPT}: the single abstention concept is required')
+    if HOLDING_CONCEPT in concepts and concepts[HOLDING_CONCEPT].no_entries:
+        errors.append(f'concept {HOLDING_CONCEPT}: abstention is recognised by name, not no_entries')
 
     prof_raw = _read(data / "profiles.yaml", errors, {})
     base = prof_raw.get("base", {})
@@ -317,7 +321,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         for c in entry.concept:
             if c not in concepts:
                 errors.append(f"{entry.id}: unknown concept {c!r} (add it to concepts.yaml)")
-            elif concepts[c].no_entries:
+            elif c == HOLDING_CONCEPT or concepts[c].no_entries:
                 errors.append(f"{entry.id}: {c} keeps its words as written; it takes no entries")
         entries[entry.id] = entry
 
@@ -330,8 +334,13 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
     # riffs.yaml: the images a term calls up (wheelie bin -> bin chickens fightin' over the scraps), rated for
     # swearing word by word from swears.yaml so the vulgarity cap applies to them too
     swears = {str(k).lower(): int(v) for k, v in _read(data / "swears.yaml", errors, {}).items()}
+    fences = ()
     try:
-        dialect = parse_dialect(_read_optional(data / "dialect.yaml", errors, {}))
+        fences = parse_fences(_read_optional(data / 'fences.yaml', errors, []))
+    except SchemaError as exc:
+        errors.append(str(exc))
+    try:
+        dialect = parse_dialect(_read_optional(data / "dialect.yaml", errors, {}), fences)
     except SchemaError as exc:
         errors.append(str(exc))
         dialect = parse_dialect(None)
@@ -413,6 +422,9 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
                                             if t in c.trigger_effects.get(frame, {}) else {}))
                 except ValueError as exc:
                     errors.append(f"concept {c.id}: {exc}")
+    patterns.extend(f.pattern for f in fences if f.meanings)
+    fenced_patterns = {pattern_key(f.pattern): f for f in fences}
+    fence_index = PatternIndex([f.pattern for f in fences])
     for e in entries.values():
         if e.type != "idiom" or e.status == "omit":
             continue
@@ -421,7 +433,10 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
             continue
         for t in e.replaces:
             try:
-                patterns.append(compile_pattern(t, e.frame, automatic, e.intensity, entry_id=e.id))
+                pattern = compile_pattern(t, e.frame, automatic, e.intensity, entry_id=e.id)
+                if pattern_key(pattern) in fenced_patterns:
+                    warnings.append(f'{e.id}: replacement {t!r} overlaps a phrase fence; check the intended settings')
+                patterns.append(pattern)
             except ValueError as exc:
                 errors.append(f"{e.id}: {exc}")
 
@@ -431,8 +446,11 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
             continue
         for f in e.all_forms:
             try:
-                forms.append(replace(compile_pattern(f.replace("{np}", "{obj}"), e.frame, e.concept,
-                                                     e.intensity, entry_id=e.id), semantic_degree=e.semantic_degree))
+                pattern = replace(compile_pattern(f.replace("{np}", "{obj}"), e.frame, e.concept,
+                                                  e.intensity, entry_id=e.id), semantic_degree=e.semantic_degree)
+                if fence_index.find(tokenize(f)):
+                    warnings.append(f'{e.id}: form {f!r} overlaps a phrase fence; check the intended settings')
+                forms.append(pattern)
             except ValueError as exc:
                 errors.append(f"{e.id}: form {f!r}: {exc}")
 
@@ -453,7 +471,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
     dictionary = Dictionary(entries=entries, concepts=concepts, profiles=profiles, phonetic=phonetic,
                       policy_defaults=prof_raw.get("policy", {}), patterns=patterns, index=PatternIndex(patterns),
                       form_index=PatternIndex(forms), swears=swears, dialect=dialect, theme_defaults=theme_defaults,
-                      warnings=warnings, swearing=swearing, genres=genres, pos_words=pos.lower_words(),
+                      warnings=warnings, fences=fences, swearing=swearing, genres=genres, pos_words=pos.lower_words(),
                       person_roles=person_roles, adjective_nouns=adjective_nouns, name_aliases=name_aliases,
                       imagery=tuple(imagery), overlay_changes=tuple(vocabulary.changes), evidence_weights=weights,
                       construction_catalog=construction_catalog)
@@ -467,7 +485,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
     families = dictionary.construction_catalog.families if dictionary.construction_catalog else ()
     for owner, cids in [*((image.id, image.concepts) for image in imagery), *((f.id, (f.concept,)) for f in families)]:
         errors.extend(f"{owner}: {c} keeps its words as written; it takes no images or constructions"
-                      for c in cids if c in concepts and concepts[c].no_entries)
+                      for c in cids if c in concepts and (c == HOLDING_CONCEPT or concepts[c].no_entries))
     if errors:
         raise SchemaError("dictionary failed validation:\n  " + "\n  ".join(errors))
     warnings.extend(f"concept {c} has no word yet but no plain wording or examples to list it with"

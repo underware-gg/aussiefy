@@ -196,17 +196,6 @@ BROKEN:
   description: Not working; ruined or beyond repair.
   triggers:
     predicate_adj: ["broken", "ruined@4", "busted", "not working@2", "beyond repair@5", "wrecked@4"]
-BROKEN_OTHER_SENSE:
-  no_entries: true
-  description: >-
-    Guard (no entries) - a silence, a record, a promise or the law broken isn't out of order (a broken heart
-    is HEARTBREAK). An np frame, so the noun that starts each phrase isn't refused as a verb.
-  triggers:
-    np: ["silence was broken", "silence is broken", "spell was broken", "spell is broken", "record was broken",
-         "record is broken", "records were broken", "promise was broken", "promises were broken",
-         "law was broken", "laws were broken", "rules were broken", "rule was broken", "ice was broken",
-         "news was broken", "deadlock was broken", "fast was broken", "will was broken", "spirit was broken",
-         "was broken-hearted", "was heartbroken"]
 USELESS:
   description: Of no use or help at all.
   person: true
@@ -358,14 +347,6 @@ BOTCH_IT:
   description: Get something badly wrong, with what was spoiled between the verb and its particle ("screwed it up").
   triggers:
     vp: ["screw {obj} up", "foul {obj} up", "make a mess of {obj}"]
-SCREW_UP_FACE:
-  no_entries: true
-  description: >-
-    Guard (no entries) - screwing up a face or the eyes (squinting, grimacing) or one's courage isn't getting
-    something wrong.
-  triggers:
-    vp: ["screw up {poss} face|eyes|nose|mouth|courage", "screw {poss} face|eyes|nose|mouth up",
-         "screw up the paper", "screw up the letter"]
 NONSENSE:
   description: Untrue or foolish talk.
   triggers:
@@ -417,17 +398,6 @@ A_LOT:
   triggers:
     np: ["a lot@3", "lots@3", "loads@3", "tons@3", "plenty@3", "a great deal@3", "masses@4"]
     adv: ["a lot", "very much"]
-COUNTED_LOTS:
-  no_entries: true
-  description: >-
-    Guard (no entries) - loads and lots that are counted units (60 loads of dishes, a load of washing, parking
-    lots, lots at an auction), not "a large amount".
-  triggers:
-    np: ["loads of dishes", "loads of washing", "loads of laundry", "loads of wash", "loads of washing-up",
-         "parking lots", "car lots", "vacant lots", "empty lots", "building lots", "auction lots",
-         # a counted number of lots is groups (split into four lots), not a large amount (dinkum-check round)
-         "two lots", "three lots", "four lots", "five lots", "six lots", "seven lots", "eight lots", "nine lots",
-         "ten lots", "both lots", "several lots", "separate lots", "multiple lots"]
 DEFINITELY:
   description: Certainly, without doubt.
   triggers:
@@ -458,13 +428,6 @@ FELLOW_MAN:
     # is held by FELLOW_BEFORE_NAME. Before a longer name ("fellow Grateful Dead alumni") nothing holds it: a span
     # that holds part of a multi-word name is refused, guards too (DECISIONS.md, needs engine changes)
     np: ["fellow !=alumni|alumnus|members|member|citizens|citizen|countrymen|students|student|workers|worker|travellers|travelers|traveller|traveler|passengers|soldiers|officers|players|musicians|artists|writers|parishioners|competitors|human|humans|feeling|employees|colleagues|team|band|americans|australians|residents|veterans|believers|scientists|researchers|creatures|sufferers|survivors|inmates|prisoners|delegates|candidates|nominees"]
-FELLOW_BEFORE_NAME:
-  no_entries: true
-  description: >-
-    Guard (no entries) - "fellow" before a one-word name is the adjective (fellow Texans, fellow Democrats), not a
-    man.
-  triggers:
-    np: ["fellow {obj}"]
 WOMAN:
   description: A woman.
   triggers:
@@ -483,11 +446,6 @@ BREAKFAST:
   description: Breakfast.
   triggers:
     np: ["breakfast"]
-BREAKFAST_IDIOM:
-  no_entries: true
-  description: Guard (no entries) - a dog's breakfast is a mess (its own entry), not the morning meal.
-  triggers:
-    np: ["dog's breakfast", "dogs breakfast", "dog’s breakfast"]
 AFTERNOON:
   description: The afternoon.
   triggers:
@@ -509,18 +467,6 @@ BISCUIT:
   not_in: [technical]   # a term of art in docs
   triggers:
     np: ["biscuit", "cookie"]
-WEB_COOKIE:
-  no_entries: true
-  description: >-
-    Guard (no entries) - a browser's cookie, in a how-to as in the docs ("delete the session cookie"), isn't a
-    bickie. The phrases a web cookie comes in hold it.
-  triggers:
-    np: ["session cookie", "session cookies", "browser cookie", "browser cookies", "tracking cookie",
-         "tracking cookies", "third-party cookie", "third-party cookies", "first-party cookies", "http cookie",
-         "http cookies", "cookie settings", "cookie banner", "cookie policy", "cookie consent", "cookie file",
-         "cookie files", "accept cookies", "accept all cookies", "delete cookies", "clear cookies",
-         "clear your cookies", "enable cookies", "block cookies", "disable cookies", "cookies and site data", "uses cookies",
-         "use cookies", "store cookies", "set cookies", "sets a cookie", "set a cookie"]
 CHOCOLATE:
   description: Chocolate.
   # a box of chocolates as a corporate gift in a policy, or a cookie's value in a doc, isn't choccy
@@ -595,28 +541,6 @@ UNIVERSITY:
   description: University.
   triggers:
     np: ["university", "college"]
-COLLEGE_OTHER_SENSE:
-  no_entries: true
-  description: >-
-    Guard (no entries) - the Electoral College, a professional college (of surgeons) or a community college isn't a
-    university.
-  triggers:
-    np:
-    - electoral college
-    - Electoral College
-    - community college
-    - community colleges
-    - college of surgeons
-    - college of physicians
-    - college of cardinals
-    - royal college
-    - college of arms
-    - college of nursing
-    - vocational college
-    - secondary college
-    - technical college
-    - sixth-form college
-    - sixth form college
 FOOTBALL:
   description: Football (any code).
   triggers:
@@ -679,27 +603,6 @@ AMERICANS:
   not_in: [news, official, technical, instructions]   # casual talk about Americans, not a report's
   triggers:
     np: [Americans]
-AMERICANS_GROUP:
-  no_entries: true
-  description: >-
-    Guard (no entries) - Americans named as a group within the country (African Americans, Native Americans,
-    black Americans) or of the other Americas (South Americans) aren't Yanks.
-  triggers:
-    np: ["African Americans", "Native Americans", "Asian Americans", "Latin Americans", "Hispanic Americans",
-         "Mexican Americans", "Japanese Americans", "Chinese Americans", "Korean Americans", "Indian Americans",
-         "Arab Americans", "Muslim Americans", "Jewish Americans", "Irish Americans", "Italian Americans",
-         "Filipino Americans", "Cuban Americans", "Latino Americans", "Indigenous Americans", "black Americans",
-         "Black Americans", "white Americans", "White Americans", "South Americans", "Central Americans",
-         "North Americans", "LGBT Americans", "LGBTQ Americans", "Americans with Disabilities"]
-AMERICAN_FOOTBALL_COMPOUND:
-  no_entries: true
-  description: >-
-    Guard (no entries) - "an American football player": the game's name before a noun, which GRIDIRON's np
-    doesn't take, so FOOTBALL's footy can't land on the American game (second-pass round 2026-10-13).
-  triggers:
-    np: ["American football player|players|team|teams|league|leagues|game|games|coach|coaches|fan|fans|field|fields|season|seasons|star|stars"]
-
-# --- speech acts --------------------------------------------------------------
 NO_PROBLEM:
   description: Reassurance; no trouble at all; you're welcome.
   triggers:
@@ -856,20 +759,6 @@ COOLER:
     - ice chest
     - portable ice box
     - insulated ice box
-COOLER_COMPARATIVE:
-  no_entries: true
-  description: >-
-    Guard (no entries) - "stays cooler", "a bit cooler": the comparative of cool, not an esky. The tagger often
-    reads it as a noun, so the phrases a comparative comes in hold it.
-  triggers:
-    np: ["stay cooler", "stays cooler", "stayed cooler", "keep cooler", "keeps cooler", "is cooler", "was cooler",
-         "are cooler", "were cooler", "be cooler", "been cooler", "feel cooler", "feels cooler", "felt cooler",
-         "get cooler", "gets cooler", "getting cooler", "got cooler", "grow cooler", "turn cooler", "turns cooler",
-         "become cooler", "remain cooler", "run cooler", "runs cooler", "much cooler", "a bit cooler",
-         "slightly cooler", "even cooler", "far cooler", "a lot cooler", "little cooler", "cooler weather",
-         "cooler temperatures", "cooler days", "cooler nights", "cooler air", "cooler water", "cooler months",
-         "cooler parts", "cooler part", "cooler times", "cooler hours", "cooler conditions", "cooler climate",
-         "cooler, drier", "cooler, wetter", "cooler, cloudier", "cooler, windier", "cooler, calmer"]
 DUVET:
   description: A quilt or duvet.
   triggers:
@@ -904,27 +793,10 @@ CHILD:
     # not the verb "kid" (don't kid yourself, just kidding around)
     np: ["kid !=yourself|yerself|yourselves|himself|herself|themselves|myself|ourselves|around|me|you", "child",
          "toddler", "little one", "youngster", "little kid", "little boy", "small child"]
-OLDER_CHILD:
-  no_entries: true
-  description: >-
-    Guard (no entries) - kids who aren't small (teenagers, high-school and college kids, grown and adult
-    children, older kids): not small children.
-  triggers:
-    np: ["high school kids", "high-school kids", "high school kid", "college kids", "college kid", "teenage kids",
-         "teenage kid", "teenage children", "teen kids", "grown kids", "grown-up kids", "grown children",
-         "grown-up children", "adult children", "adult child", "older kids", "older children", "older kid",
-         "older child", "big kids", "university kids"]
 LITTLE_BOY:
   description: A small boy (a pet name for one), not any child ("your kid", "small children" in a safety step).
   triggers:
     np: ["little boy", "small boy", "little lad"]
-BOLTED_TOO_LATE:
-  no_entries: true
-  description: >-
-    Guard (no entries) - "the horse has bolted" is an idiom (too late to act), not anyone running off.
-  triggers:
-    np: ["the horse has bolted", "horse has bolted", "the horse had bolted", "horse had bolted",
-         "the horse has already bolted", "horse has already bolted", "the horse is bolted"]
 RUN_OFF:
   description: Leave in a hurry; flee.
   triggers:
@@ -945,19 +817,6 @@ FOREST:
   description: Wooded country.
   triggers:
     np: ["woods", "forest", "wilderness", "countryside", "the backcountry", "the backwoods"]
-FOREST_OTHER_SENSE:
-  no_entries: true
-  description: >-
-    Guard (no entries) - US land categories and agencies (a national forest, the Forest Service, a wilderness
-    area) are terms of art, and "neck of the woods" and "out of the woods" are idioms: none is the bush.
-  triggers:
-    np: ["national forest", "national forests", "state forest", "state forests", "forest service",
-         "forest ranger", "forest rangers", "forest district", "forest districts", "forest land", "forest lands",
-         "forest road", "forest roads", "wilderness area", "wilderness areas", "wilderness study area",
-         "neck of the woods", "out of the woods", "rain forest", "rainforest", "forest floor", "forest canopy",
-         # fourth pass: a legal designation and forestry terms of art
-         "designated wilderness", "federally designated wilderness", "wilderness designation", "wilderness act",
-         "forest health", "forest management", "forest plan", "forest products", "forest supervisor"]
 MOCK:
   description: Make fun of someone.
   triggers:
@@ -1014,22 +873,6 @@ FIELD:
     # not a field of study or work, a field trip, a struct's or form's fields
     np: ["field !of|trip|trips|day|test|tests|goal|goals|work|marshal|hockey|hospital|covered|name|names|value|values|type|types|data|study|studies|research|experience|expertise|engineering|science|sciences|office|offices|notes|guide|manual|level|levels|is|are|in|that|which|for|with|to|(|show|shows|showed|indicate|indicates|suggest|suggests",
          "meadow", "pasture"]
-FIELD_OTHER_SENSE:
-  no_entries: true
-  description: >-
-    Guard (no entries) - a field of study or work ("a social science field", "experts in the field", "her
-    field"), of data ("RH fields", "a text field") or of physics ("a magnetic field") isn't a paddock.
-  triggers:
-    np: ["{poss} field", "{poss} fields", "to {poss} field", "to {poss} fields", "science field", "science fields", "scientific field", "technical field",
-         "related field", "related fields", "relevant field", "appropriate field", "chosen field", "same field",
-         "medical field", "legal field", "academic field", "professional field", "data field", "data fields",
-         "RH field", "RH fields", "wind field", "wind fields", "temperature field", "pressure field",
-         "moisture field", "text field", "input field", "form field", "search field", "required field",
-         "magnetic field", "electric field", "electromagnetic field", "gravitational field", "force field",
-         "playing field", "oil field", "oil fields", "gas field", "gas fields", "experts in the field",
-         "leaders in the field", "professionals in the field", "researchers in the field", "others in the field",
-         "work in the field", "working in the field", "years in the field", "experience in the field",
-         "career in the field"]
 PEOPLE:
   description: Ordinary people; the public.
   triggers:
@@ -1085,13 +928,6 @@ FIRST_USE:
   description: Use an object for the first time, rather than consecrating or naming it.
   triggers:
     vp: ["use {np} for the first time"]
-DEDICATED_TO:
-  no_entries: true
-  description: >-
-    Guard (no entries) - "dedicated to" is devoted or allocated to ("a nation dedicated to the proposition",
-    "proceeds dedicated to liquidity"), not consecrated or set on.
-  triggers:
-    np: ["dedicated to", "dedicated here to", "dedicated there to", "here dedicated to"]
 COMMITTED:
   description: Set on having or doing something, determined on it.
   triggers:
@@ -1262,18 +1098,6 @@ DOLLAR:
   triggers:
     # "the buck stops here" is responsibility (a guard ending on the verb would be read as a verb, so it is held here)
     np: ["dollar !bill|bills|note|notes|sign|signs|store|stores|amount|amounts|value|coin|coins", "buck !=stops|stopped|stop|up"]
-MONEY_IDIOM_OTHER_SENSE:
-  no_entries: true
-  description: >-
-    Guard (no entries) - "pass the buck" is about responsibility (and "the buck stops here", held on DOLLAR's own
-    trigger), "buck the trend" is a verb, and cents on the dollar or what a dollar is worth is an exact sum: none
-    is money in slang.
-  triggers:
-    # the verbs as verb phrases: a noun-phrase guard right after a pronoun ("they pass the buck") is refused
-    vp: ["pass the buck", "buck the trend"]
-    np: ["bang for {poss} buck", "bang for the buck", "cents on the dollar", "cents on any dollar",
-         "cents in the dollar", "cents to the dollar", "a dollar is worth", "the dollar is worth",
-         "dollar is worth", "dollars are worth", "the US dollar", "the U.S. dollar", "the Australian dollar"]
 SAVELOY:
   description: A saveloy / frankfurt sausage.
   triggers:
@@ -1311,15 +1135,6 @@ VIABLE:
   description: A workable proposal or feasible plan, rather than biological viability.
   triggers:
     predicate_adj: [feasible, going ahead, a viable option, a viable proposal, a workable proposal]
-VIABLE_OF_LOOKS:
-  no_entries: true
-  description: >-
-    Guard (no entries) - "she looked feasible" (an old word for presentable) and "he seems viable" are said of
-    how someone looks, and the slang for a workable plan said of a woman is a sexual slur. The verbs of appearance hold it, with a
-    pronoun before them where there is one (a guard right after "she" is read as a verb and refused).
-  triggers:
-    np: ["looked|looks|look|looking|seemed|seems|appeared feasible|viable",
-         "{subj} looked|looks|seemed|seems|appeared feasible|viable", "she was|is feasible|viable"]
 SCOLDING:
   description: A telling-off (noun).
   triggers:
@@ -1341,12 +1156,6 @@ THROW:
   triggers:
     # not tossing in a recipe (toss to coat, toss with the dressing)
     vp: [throw, "toss !=to|with|together|gently|well|lightly|until"]
-TOSS_OTHER_SENSE:
-  no_entries: true
-  description: Guard (no entries) - a coin toss, the toss (cricket) and a toss-up are nouns, not throwing.
-  triggers:
-    np: ["coin toss", "toss of a coin", "toss-up", "toss up", "the toss"]
-    vp: ["win the toss", "lose the toss", "toss the salad", "toss a salad", "toss the salads"]
 CAR_TRUNK:
   description: Luggage space of a car.
   triggers:
@@ -1409,16 +1218,6 @@ DEAD_PEOPLE:
   neutral_person: true
   triggers:
     np: ["honored dead", "honoured dead", "the fallen", "the dead", "the departed"]
-DOWN_IN_THE_DUMPS:
-  no_entries: true
-  description: Guard (no entries) - "down in the dumps" is low spirits, not the tip.
-  triggers:
-    np: ["in the dumps"]
-WAKE_THE_DEAD:
-  no_entries: true
-  description: Guard (no entries) - "loud enough to wake the dead" is about noise, not the dead.
-  triggers:
-    vp: ["wake the dead", "raise the dead"]
 CARE_ABOUT:
   description: Care about something; comparative caring-less does not establish indifference.
   triggers:
@@ -1573,30 +1372,10 @@ BOY:
   description: A boy or young man.
   triggers:
     np: ["boy", "lad", "young man"]
-BOYS_OTHER_SENSE:
-  no_entries: true
-  description: >-
-    Guard (no entries) - "the boys" and "one of the boys" are a man's friends, a team or a crew of any age, not
-    youths; "boys and girls" is children; "old boy", "baby boy", "oh boy" aren't a young man either.
-  triggers:
-    np: ["the boys", "one of the boys", "all the boys", "of the boys", "boys and girls", "girls and boys",
-         "old boy", "old boys", "baby boy", "baby boys", "boys will be boys", "oh boy", "boy oh boy",
-         "good old boy", "good ol' boy", "the boys in blue", "the old boys"]
 MONEY:
   description: Money.
   triggers:
     np: ["money", "cash"]
-MONEY_COMPOUND:
-  no_entries: true
-  description: >-
-    Guard (no entries) - money and cash inside a name for a kind of it (pocket money, prize money, petty cash,
-    a money order, cash flow): the slang can't go inside the compound.
-  triggers:
-    np: ["pocket money", "prize money", "seed money", "hush money", "protection money", "danger money",
-         "spending money", "lunch money", "pin money", "blood money", "smart money", "money order",
-         "money orders", "money market", "money markets", "money laundering", "petty cash", "cash flow",
-         "cash flows", "cash register", "cash registers", "cash cow", "cash crop", "cash crops", "cash machine",
-         "cash advance", "cash prize", "cash prizes"]
 APARTMENT:
   description: A flat in a building.
   triggers:
@@ -1670,20 +1449,6 @@ FOOD:
   triggers:
     np: ["food !coloring|colouring|safety|poisoning|processor|processors|chain|bank|banks|court|truck|stamps|service|industry|label|labels|allergy|allergies|group|groups|grade|science|handling|supply|waste|storage|packaging|thermometer|additives|dye|dyes|production|prices|security|preparation|contact|temperature|temperatures|item|items|product|products|container|containers|type|types|borne|and",
          "provisions"]
-FOODS_PLURAL:
-  no_entries: true
-  description: >-
-    Guard (no entries) - "foods" is kinds of food, counted ("thick foods are cooked", "processed foods"); the swap
-    is a mass noun, which breaks the agreement and the sense ("thick ... are cooked").
-  triggers:
-    np: ["thick foods", "thin foods", "these foods", "those foods", "some foods", "certain foods", "many foods",
-         "most foods", "all foods", "other foods", "such foods", "frozen foods", "processed foods", "raw foods",
-         "cooked foods", "fried foods", "solid foods", "perishable foods", "fatty foods", "fresh foods",
-         "cold foods", "hot foods", "healthy foods", "whole foods", "junk foods", "dense foods", "large foods",
-         "packaged foods", "canned foods", "dried foods", "baby foods", "starchy foods", "sugary foods",
-         "salty foods", "acidic foods", "leftover foods", "different foods", "favourite foods", "favorite foods",
-         "of foods", "the foods", "foods such as", "foods like", "foods that", "foods which", "foods are",
-         "foods were"]
 NOSY_PERSON:
   description: A nosy person.
   triggers:
@@ -1752,7 +1517,6 @@ HEARTBREAK:
     np: ["heart|hearts break|breaks|broke !down", "heart|hearts {be} breaking|broken", "heart's breaking|broken",
          "heart|hearts had|has|have been broken", "heart|hearts will|would|could|might|can break"]
 UNRESOLVED_SENSE:
-  no_entries: true
   description: Context leaves these words' sense undecided, so they stay as written. The engine assigns it
     where tags cannot settle an object (an object, or a clause's subject?); triggers name phrases whose sense
     their object leaves open.
@@ -1848,18 +1612,6 @@ GO_MAD:
     # not "go mad with the salt" or "go nuts for it" (overdo, love)
     vp: ["go mad !=with|on|for|over", "go crazy !=with|on|for|over", "lose {poss} mind", "go insane",
          "go nuts !=with|on|for|over"]
-RETIRED_STATE:
-  no_entries: true
-  description: >-
-    Guard (no entries) - being retired is a state ("she is retired now") or a passive ("the ship was retired"),
-    not the act ("she is pulled the pin" isn't English); and "retiring" is also shy.
-  triggers:
-    # a pronoun subject's state ("they are retired"), and a passive with any subject ("the ship was retired in 1990")
-    clause: ["{subj} {be} retired", "{subj} {be} now retired", "{subj} {be} long retired", "{subj} {be} semi-retired"]
-    # (a vp's "be" inflects to is/was/been/being only, so "are" and "were" are their own)
-    vp: ["be retired", "be now retired", "be long retired", "be semi-retired", "are retired", "were retired"]
-    # and the adjective "retiring", shy
-    np: ["shy and retiring", "quiet and retiring", "modest and retiring", "a retiring nature", "a retiring type"]
 RETIRE:
   # dinkum-check round: carries pull the pin (also QUIT), so by hand
   description: Retire from work or from playing, for good.
@@ -1902,13 +1654,6 @@ EAGER_FOR:
     DIE's "cark it" off "dying to see it" (a "!to" exclusion would also catch "To die, to sleep").
   triggers:
     vp: ["die to", "die for a"]
-A_PEOPLE:
-  no_entries: true
-  description: >-
-    A people, a nation ("one people", "a free people"). No entries on purpose: the longer match keeps "people"
-    here from PEOPLE's "battlers" and "punters", so the original stands.
-  triggers:
-    np: ["one people", "a people", "a free people", "a whole people"]
 PLACE:
   description: A place or premises (colloquial).
   # dismissive of a real place in a report, a notice or a doc ("the place" for a city in a news story)
@@ -1924,16 +1669,6 @@ CONGRESS:
     # verbs are held here
     np: ["Congress !=has|have|had|passed|acted|voted|approved|rejected|will|would|must|should|can|could|is|was|did|does|enacted|created|established|authorized|authorised|declared",
          "the Capitol", "the legislature"]
-CONGRESS_ACTING:
-  no_entries: true
-  description: >-
-    Guard (no entries) - the US Congress as the body that acts (it passed a bill, has not acted, its members) and
-    institutions named after it (the Library of Congress): a fact about the US, which Parliament House misstates.
-  triggers:
-    vp: ["pass Congress"]   # "it passed Congress": a verb phrase, so the pronoun before it doesn't refuse it
-    # "of Congress" holds members of, an act of and the Library of Congress
-    np: ["U.S. Congress", "US Congress", "United States Congress", "of Congress", "through Congress", "by Congress",
-         "in Congress", "to Congress"]
 PAVEMENT:
   description: A footpath.
   triggers:
@@ -1975,15 +1710,6 @@ STREAM:
   description: A small river.
   triggers:
     np: ["stream !of|on|live|online|shortwave|trough|flow|energy|pattern", "brook"]   # not a stream of data
-STREAM_OTHER_SENSE:
-  no_entries: true
-  description: >-
-    Guard (no entries) - the jet stream and a forecast's northern and southern stream are air, and an income,
-    revenue or data stream isn't water: none is a watercourse.
-  triggers:
-    np: ["jet stream", "the jet stream", "northern stream", "southern stream", "polar stream", "subtropical stream",
-         "Gulf Stream", "income stream", "income streams", "revenue stream", "revenue streams", "data stream",
-         "data streams", "audio stream", "video stream", "event stream", "work stream", "workstream"]
 HUGE:
   description: Enormous.
   triggers:
@@ -2072,17 +1798,6 @@ HANDS:
     # not the verb, with its object after it ("it hands you back a ciphertext", "the CCA hands tokens out")
     np: ["hands !=me|you|him|her|them|us|it|the|a|an|his|its|their|our|my|your|this|that|these|those|over|out|back|down|each|every|tokens",
          "fists@4"]
-HANDS_OTHER_SENSE:
-  no_entries: true
-  description: >-
-    Guard (no entries) - hands as workers (farm hands, all hands), in idioms (in good hands, change hands, time
-    on your hands) or a contest won hands down aren't the body part.
-  triggers:
-    np: ["farm hands", "farmhands", "deck hands", "hired hands", "ranch hands", "factory hands", "stage hands",
-         "all hands", "old hands", "in good hands", "in safe hands", "in capable hands", "change hands",
-         "changed hands", "changes hands", "changing hands", "time on {poss} hands", "blood on {poss} hands",
-         "{poss} hands are tied", "{poss} hands were tied", "hands down", "with {poss} bare hands",
-         "on {poss} hands and knees", "{poss} hands full", "hands full"]
 LAUGH_HARD:
   description: Laugh uncontrollably.
   triggers:
@@ -2229,16 +1944,6 @@ DINNER:
   triggers:
     np: ["dinner !=party|parties|jacket|jackets|dance|guests|guest|meeting|meetings|theatre|theater|service|in|at", supper,
          the evening meal]
-DINNER_OUT:
-  no_entries: true
-  description: >-
-    Guard (no entries) - a dinner out, a formal or business dinner, or the Southern US midday "dinner" (lunch or
-    dinner (supper)): not tea, the evening meal at home.
-  triggers:
-    np: ["out for dinner", "out to dinner", "a dinner", "business dinner", "client dinner", "state dinner",
-         "gala dinner", "formal dinner", "awards dinner", "charity dinner", "fundraising dinner", "rehearsal dinner",
-         "anniversary dinner", "lunch or dinner", "dinner or supper", "Christmas dinner", "Thanksgiving dinner",
-         "Sunday dinner"]
 ROUGH_PATCH:
   description: A run of bad luck or hard times.
   triggers:
@@ -4040,13 +3745,6 @@ START_WORK_COMMAND:
   description: An instruction to begin working.
   triggers:
     imperative: [start work, begin work]
-GIVE_WAY_SIGN:
-  no_entries: true
-  description: Guard for the road sign; giving way here is not a structure collapsing.
-  triggers:
-    np: [give way sign]
-
-# --- reviewed meaning extensions, October 2026 -----------------------------------
 START_ACTIVITY:
   description: Begin or get underway, without consuming an unstated object.
   triggers:
@@ -4067,22 +3765,6 @@ HILLS_HOIST:
   description: The Hills Hoist rotary clothesline; a named Australian cultural reference.
   triggers:
     np: ["Hills Hoist", "Hills Hoists"]
-
-COMPOUND_BEER_BEVERAGE:
-  no_entries: true
-  description: Named beverage compounds whose identity must survive generic beer wording.
-  triggers:
-    np:
-    - root beer
-    - ginger beer
-
-BEER_BOTTLE:
-  no_entries: true
-  description: 'An unspecified beer bottle: guard against silently choosing a particular bottle shape or a
-    can.'
-  triggers:
-    np:
-    - bottle of beer
 
 SMALL_BEER_BOTTLE:
   description: A small or short beer bottle.
@@ -4276,13 +3958,6 @@ SULK:
     - sulk
     - have a sulk
 
-IBIS_OTHER_SPECIES:
-  no_entries: true
-  description: Other explicitly identified ibis species, whose identity must be retained.
-  triggers:
-    np:
-    - glossy ibis
-
 WHEELED_BIN:
   description: A rubbish bin explicitly described as having wheels.
   triggers:
@@ -4291,14 +3966,6 @@ WHEELED_BIN:
     - wheeled garbage bin
     - wheeled trash can
     - wheeled garbage can
-
-PAVEMENT_OTHER_SENSE:
-  no_entries: true
-  description: Road/runway pavement rather than the pedestrian path.
-  triggers:
-    np:
-    - runway pavement
-    - road pavement
 
 HARD_WORK:
   description: Work explicitly described as arduous.

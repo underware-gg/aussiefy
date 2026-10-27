@@ -12,8 +12,9 @@ from typing import TYPE_CHECKING, Any
 
 from . import morph
 from .dialect import DialectTable
+from .fences import Fence
 from .matcher import Pattern, PatternIndex, compile_pattern
-from .schema import Concept, Entry, Imagery
+from .schema import HOLDING_CONCEPT, Concept, Entry, Imagery
 from .evidence import EvidenceWeights, TermMetadata
 from .adjustments import Adjustments
 from .text import COMMON_STARTERS, MASK_WORD_RE, normalise_word, spoken_word, tokenize
@@ -126,6 +127,7 @@ class Dictionary:
     dialect: DialectTable                       # US and UK words Australians say differently (dialect.yaml)
     theme_defaults: dict[int, frozenset[str]]     # subject permissions by vulgarity tier (themes.yaml)
     warnings: list[str] = field(default_factory=list)
+    fences: tuple[Fence, ...] = ()
     swearing: dict[int, SwearProfile] = field(default_factory=dict)   # vulgarity -> how often swearing comes
 
     genres: Any = None
@@ -185,7 +187,7 @@ class Dictionary:
             tokens = tokenize(text)
             return (0, len(tokens)) in self.dialect.spans(tokens, None, "general")
         return tuple(sorted(cid for cid, concept in self.concepts.items()
-                            if not concept.no_entries and cid not in expressed
+                            if cid != HOLDING_CONCEPT and not concept.no_entries and cid not in expressed
                             and not any(swapped(t) for texts in concept.triggers.values() for t in texts)))
 
     def swear_strength(self, word: str) -> int:

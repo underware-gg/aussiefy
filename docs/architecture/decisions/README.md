@@ -81,3 +81,4 @@ its consequences as they stood when it was made. Anyway, records are numbered in
 - **The dials:** DD\-004, DD\-005, DD\-041, DD\-042
 - **Structure'n interfaces:** DD\-006, DD\-008, DD\-009, DD\-015, DD\-016, DD\-019, DD\-020, DD\-021, DD\-022, DD\-023, DD\-024, DD\-028, DD\-029, DD\-038, DD\-045
 - **Sources, licensing'n releases:** DD\-011, DD\-012, DD\-013, DD\-014
+| [DD-049](dd-049-phrase-fences.md) | One scoped phrase\-fence list, separate from meanings'n named abstention \| Accepted for ED16 phase A \|

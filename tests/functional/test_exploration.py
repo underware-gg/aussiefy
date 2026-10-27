@@ -294,7 +294,7 @@ def test_wordless_meanings_page_only_genuine_meanings_with_plain_wording(transla
     assert not {cid for e in d.entries.values() if e.status != "omit" for cid in e.concept} & set(ids)
     end = list_wordless_meanings(offset=len(ids), translator=translator)
     assert end["outcome"] == "page_exhausted" and end["next_offset"] is None
-    assert d.concepts[HOLDING_CONCEPT].no_entries
+    assert not d.concepts[HOLDING_CONCEPT].no_entries
 
 
 @pytest.mark.parametrize("options", [{"limit": True}, {"limit": 0}, {"limit": 101}, {"offset": True}, {"offset": -1}])
@@ -337,8 +337,8 @@ def _overlay(tmp_path, document):
 
 
 def test_the_holding_concept_cannot_be_unmarked_to_take_entries(tmp_path):
-    path = _overlay(tmp_path, {"patch_concepts": {"UNRESOLVED_SENSE": {"no_entries": False}}})
-    with pytest.raises(SchemaError, match="must keep no_entries"):
+    path = _overlay(tmp_path, {"patch_concepts": {"UNRESOLVED_SENSE": {"no_entries": True}}})
+    with pytest.raises(SchemaError, match="abstention is recognised by name"):
         load_dictionary([path])
 
 

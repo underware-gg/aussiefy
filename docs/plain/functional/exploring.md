@@ -80,9 +80,9 @@ No dials apply. Results are ordered by concept ID; each has its `concept`, `plai
 sentences in which translation reads that meaning (a test proves each for the bundled dictionary). The
 outcome is `nothing_fits` when no meaning is waiting at all.
 
-Only genuine meanings are listed. Guards, which keep words as written in another sense, and the holding
-concept for undecided senses take no entries by design: their concepts say `no_entries: true` and never
-appear. See the [dictionary format](dictionary.md).
+Only genuine meanings are listed. Phrase fences are separate from concepts. The named abstention
+concept `UNRESOLVED_SENSE` never appears. Seven legacy real meanings remain temporarily unlisted pending
+the approved ED16 meaning migration. See the [dictionary format](dictionary.md).
 
 ## Clean name suggestions
 

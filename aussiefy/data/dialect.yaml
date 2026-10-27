@@ -14,9 +14,7 @@
 #                `english` dial, or for American, its spelling (color, gray)
 #   not_in:      genres where the word is a term of art (a browser's cookies)
 #
-# A swap to itself is a guard: it claims its words so a shorter swap inside can't ("petroleum jelly" keeps
-# its jelly). Overlapping swaps go longest first. The table is checked at load: no Australian it writes may be
-# swapped again by another entry.
+# Fences in fences.yaml claim expressions before shorter dialect swaps.
 #
 # `both` holds what American and British English share and Australia doesn't. `lint_only` is for lint: words
 # with no plain swap ("y'all" -> youse is slang).
@@ -27,7 +25,6 @@ both:
   duvet: doona
   butternut squash: butternut pumpkin
   bicarbonate of soda: bicarb soda
-  real estate agent: real estate agent
 
 us:
   # food and the kitchen
@@ -49,7 +46,6 @@ us:
   pint of grape tomatoes: punnet of cherry tomatoes
   garbanzo bean: chickpea
   beet !greens: {to: beetroot, plural: beetroot}
-  sugar beet: sugar beet
   ground beef: beef mince
   ground pork: pork mince
   ground turkey: turkey mince
@@ -58,16 +54,11 @@ us:
   candy apple: toffee apple
   candy store: lolly shop
   candy !bar|bars|apple|apples|store|stores|cane|canes|crush|floss: {to: lollies, plural: lollies}
-  eye candy: eye candy
-  arm candy: arm candy
-  rock candy: rock candy
   cotton candy: fairy floss
   popsicle: icy pole
   jell-o: jelly
   jello: jelly
   jelly !bean|beans|baby|babies|fish|roll|rolls: {to: jam, known_only: true}
-  petroleum jelly: petroleum jelly
-  royal jelly: royal jelly
   jelly roll: Swiss roll
   peanut butter and jelly: peanut butter and jam
   biscuits and gravy: {to: scones and gravy, known_only: true}
@@ -86,36 +77,7 @@ us:
   with sprinkles: with hundreds and thousands
   rainbow sprinkles: hundreds and thousands
   cookie !jar|jars|cutter|cutters|dough: {to: biscuit, not_in: [technical]}
-  fortune cookie: fortune cookie
   # a browser's cookie, in a how-to as in the docs (the dictionary's guard is WEB_COOKIE)
-  session cookie: session cookie
-  browser cookie: browser cookie
-  tracking cookie: tracking cookie
-  third-party cookie: third-party cookie
-  first-party cookie: first-party cookie
-  http cookie: http cookie
-  cookie settings: cookie settings
-  cookie banner: cookie banner
-  cookie policy: cookie policy
-  cookie consent: cookie consent
-  cookie file: cookie file
-  accept cookies: accept cookies
-  accept all cookies: accept all cookies
-  delete cookies: delete cookies
-  clear cookies: clear cookies
-  clear your cookies: clear your cookies
-  enable cookies: enable cookies
-  block cookies: block cookies
-  disable cookies: disable cookies
-  cookies and site data: cookies and site data
-  uses cookies: uses cookies
-  use cookies: use cookies
-  store cookies: store cookies
-  set cookies: set cookies
-  sets a cookie: sets a cookie
-  set a cookie: set a cookie
-  tough cookie: tough cookie
-  smart cookie: smart cookie
   cookie jar: biscuit tin
   cookie sheet: baking tray
   cookie cutter: biscuit cutter
@@ -124,9 +86,6 @@ us:
   takeout: takeaway
   take-out: takeaway
   soda !water|bread|fountain|ash|can|cans|crystals: {to: soft drink, known_only: true}
-  bicarb soda: bicarb soda
-  caustic soda: caustic soda
-  washing soda: washing soda
   club soda: soda water
   baking soda: bicarb soda
   baking sheet: baking tray
@@ -258,7 +217,6 @@ us:
   new hire: new starter
   comp time: time in lieu
   compensatory time: time in lieu
-  travel comp time: travel comp time   # a US federal entitlement's name (tts_travel_comp_time): kept
   council member: councillor
   councilman: councillor
   councilwoman: councillor
@@ -271,12 +229,8 @@ us:
   fanny pack: bum bag
   bangs !on|against|into|the|a|his|her|their: {to: fringe, known_only: true}
   suspenders: {to: braces, known_only: true, plural: braces}
-  braces and suspenders: braces and suspenders
   vest: {to: waistcoat, known_only: true}
   life vest: life jacket
-  bulletproof vest: bulletproof vest
-  safety vest: safety vest
-  high-vis vest: high-vis vest
   "{poss} purse": {to: "{poss} handbag", known_only: true}   # not "purse her lips"
   a purse: {to: a handbag, known_only: true}
   the purse !strings: {to: the handbag, known_only: true}
@@ -324,7 +278,6 @@ uk:
   estate agent: real estate agent
   off-licence: bottle shop
   chip shop: fish and chip shop
-  fish and chip shop: fish and chip shop
   chippy: {to: fish and chip shop, known_only: true}
   high street: main street
   wellies: {to: gumboots, plural: gumboots}
@@ -334,7 +287,6 @@ uk:
   pants: {to: undies, plural: undies, known_only: true}
   vest: {to: singlet, known_only: true}
   life vest: life jacket
-  high-vis vest: high-vis vest
   thong: {to: g-string, known_only: true}
   sweets: {to: lollies, plural: lollies, known_only: true}
   sellotape: sticky tape

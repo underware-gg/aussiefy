@@ -25,6 +25,10 @@ from __future__ import annotations
 import re
 from functools import cached_property
 from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .fences import Fence
 
 from . import morph
 from .text import COMMON_STARTERS, Token, tokenize
@@ -59,10 +63,11 @@ class Pattern:
                                    # "really think" or "really it was")
     clause_end: bool = False      # "^end": no following complement; adverbial tails may precede the boundary
     clause_start: bool = False    # "^start": the match opens a clause, as an imperative does ("think what ...")
-    guard: bool = False           # a concept without replacement entries only protects the matched span
+    guard: bool = False           # a fence or wordless reading may protect a span with an unfinished argument
     semantic_degree: dict[str, str] = field(default_factory=dict)
     mapping_effects: dict[str, tuple[str, ...]] = field(default_factory=dict)
     object_argument: bool = False
+    fence: Fence | None = None
 
     @cached_property
     def consuming(self) -> tuple[Element, ...]:

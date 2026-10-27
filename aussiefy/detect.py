@@ -714,7 +714,7 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
             usage = None if fragment and det.noun_use == 'unknown' else det.noun_use
             det.concepts = applicable_concepts(det.concepts, concepts, tokens, det.end, complete, usage)
         if det and not _in_a_name(tokens, det.start, det.end) and not _possessed(tokens, det) \
-                and det.concepts and not _wrong_part_of_speech(m, tokens, tags):
+                and (det.concepts or m.pattern.fence is not None) and not _wrong_part_of_speech(m, tokens, tags):
             found.append(det)
 
     if scorer and fallback_patterns:

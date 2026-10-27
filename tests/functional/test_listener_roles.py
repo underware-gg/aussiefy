@@ -100,17 +100,18 @@ def test_guard_status_follows_available_replacements(tmp_path):
     from aussiefy.text import tokenize
     from aussiefy import pos
 
-    base = load_dictionary()
-    path = tmp_path / 'entry.yaml'
-    # a curator who gives a guard a replacement unmarks it first: the loader refuses entries for a marked guard
+    path = tmp_path / 'meaning.yaml'
     path.write_text('format: aussiefy-dictionary-overlay/v1\n'
-                    'patch_concepts: {FELLOW_BEFORE_NAME: {no_entries: false}}\n'
-                    'add_entries: [{id: test-fellow, form: companion, concept: [FELLOW_BEFORE_NAME], frame: np}]\n')
-    extended = load_dictionary([path])
+                    'add_concepts: {TEST_FELLOW: {description: Test meaning, triggers: {np: ["fellow {np}"]}}}\n')
+    base = load_dictionary([path])
+    entry = tmp_path / 'entry.yaml'
+    entry.write_text('format: aussiefy-dictionary-overlay/v1\n'
+                     'add_entries: [{id: test-fellow, form: companion, concept: [TEST_FELLOW], frame: np}]\n')
+    extended = load_dictionary([path, entry])
     tokens = tokenize('fellow Texans and Australians')
     tags = pos.tag([t.text for t in tokens])
     for dictionary, guard in [(base, True), (extended, False)]:
-        pattern = next(p for p in dictionary.patterns if p.concepts == ('FELLOW_BEFORE_NAME',))
+        pattern = next(p for p in dictionary.patterns if p.concepts == ('TEST_FELLOW',))
         assert pattern.guard is guard
         match = match_at(pattern, tokens, 0)
         assert match is not None

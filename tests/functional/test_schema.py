@@ -61,7 +61,12 @@ def test_substitution_class():
 
 def test_builtin_dictionary_loads_cleanly(dictionary):
     assert len(dictionary.entries) > 200
-    assert not dictionary.warnings, dictionary.warnings
+    assert set(dictionary.warnings) == {
+        "down-in-the-dumps: form 'down in the dumps' overlaps a phrase fence; check the intended settings",
+        'dogs-breakfast: form "a dog\'s breakfast" overlaps a phrase fence; check the intended settings',
+        "this-neck-of-the-woods: form 'this neck of the woods' overlaps a phrase fence; check the intended settings",
+        "in-this-neck-of-the-woods: form 'in this neck of the woods' overlaps a phrase fence; check the intended settings",
+    }
     assert sorted(dictionary.profiles) == [1, 2, 3, 4, 5]
 
 

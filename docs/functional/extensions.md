@@ -39,8 +39,8 @@ and the existing wordless-meaning listing.
 
 An entryless extension concept is a meaning waiting for a word, not a guard. An extension declaring
 `no_entries: true` fails with its filename, concept id and the reason “guards are core-only until ED16
-settles”. Omitting the field or setting it to false keeps the waiting meaning. Core guards and the
-core concept schema are unchanged; guard design is reserved for ED16.
+settles”. Omitting the field or setting it to false keeps the waiting meaning. Core phrase fences now have a separate file; seven legacy meaning markers remain only until the next
+ED16 migration. Extensions cannot define fences.
 
 Duplicate ids fail. Sharing a namespace across files does not permit overwriting a record. A new entry
 with a core form, frame and a shared concept fails with an instruction to use `evidence_for`. A different

@@ -8,8 +8,8 @@ is known to be in that English: by the `english` dial, or for American, by its s
 British spelling is Australian spelling (and -ize is Oxford British too), so a British text can't be told
 from an Australian one: "uk" is only ever the caller's say-so.
 
-A swap whose Australian is its own pattern ("petroleum jelly: petroleum jelly") is a guard: it claims its
-words, so a shorter swap inside it ("jelly" -> jam) can't take them. The table's way to see a word before.
+Fences share the table's longest-match competition, so a phrase such as "petroleum jelly" claims its
+words before a shorter swap inside it ("jelly" -> jam).
 """
 
 from __future__ import annotations
@@ -19,6 +19,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from . import morph
+from .fences import Fence, pattern_key
 from .matcher import Pattern, PatternIndex, compile_pattern
 from .schema import FRAMES, SchemaError, parse_not_in
 from .text import Token, capital_is_positional, tokenize
@@ -68,12 +69,18 @@ class Found:
 
 
 class DialectTable:
-    def __init__(self, swaps: list[DialectSwap], lint_only: dict[str, str]):
+    def __init__(self, swaps: list[DialectSwap], lint_only: dict[str, str], fences: tuple[Fence, ...] = ()):
         self.swaps = tuple(swaps)
         self.lint_only = lint_only
         # by identity: two sections can hold equal patterns ("vest" in us and uk) for different swaps
         self._by_pattern = {id(s.pattern): s for s in self.swaps}
-        self._index = PatternIndex([s.pattern for s in self.swaps])
+        patterns = [s.pattern for s in self.swaps]
+        for fence in fences:
+            if fence.dialect:
+                pattern = fence.pattern
+                patterns.append(pattern)
+                self._by_pattern[id(pattern)] = fence
+        self._index = PatternIndex(patterns)
 
     def find(self, tokens: list[Token], english: str | None, genre: str | tuple[str, ...], taken: set[int] = frozenset()) -> list[Found]:
         """The swaps in one sentence: longest first where they overlap ("trash can" before "the trash"), none
@@ -83,8 +90,8 @@ class DialectTable:
                        and not tokens[i].text.isupper() for i in span)
 
         out = [Found(m.start, m.end, text, swap) for m, swap in self._claims(tokens, english, genre, taken, named)
-               # a guard's Australian is its own words, as is a word already Australian
-               if (text := swap.realise(m.inflection, m.captures)).lower() != _surface(tokens[m.start:m.end]).lower()]
+               if isinstance(swap, DialectSwap)
+               and (text := swap.realise(m.inflection, m.captures)).lower() != _surface(tokens[m.start:m.end]).lower()]
         return sorted(out, key=lambda f: f.start)
 
     def spans(self, tokens: list[Token], english: str | None, genre: str | tuple[str, ...]) -> list[tuple[int, int]]:
@@ -131,7 +138,7 @@ def _surface(span: list[Token]) -> str:
     return out
 
 
-def parse_dialect(raw: dict[str, Any] | None) -> DialectTable:
+def parse_dialect(raw: dict[str, Any] | None, fences: tuple[Fence, ...] = ()) -> DialectTable:
     """dialect.yaml's table, checked: known sections and keys, patterns that compile, slots the pattern fills,
     and no Australian that the table would swap again."""
     raw = {} if raw is None else raw
@@ -141,6 +148,7 @@ def parse_dialect(raw: dict[str, Any] | None) -> DialectTable:
     if unknown:
         raise SchemaError(f"dialect.yaml: unknown sections {sorted(unknown)} (use {', '.join(SECTIONS)}, lint_only)")
     swaps = []
+    fenced_patterns = {pattern_key(f.pattern) for f in fences if f.dialect}
     for section in SECTIONS:
         rows = raw.get(section, {})
         if not isinstance(rows, dict):
@@ -169,13 +177,17 @@ def parse_dialect(raw: dict[str, Any] | None) -> DialectTable:
             missing = set(re.findall(r"\{(\w+)\}", spec["to"])) - pattern.slots
             if missing:
                 raise SchemaError(f"{where}: `to` uses {sorted(missing)}, which the pattern doesn't capture")
+            if text.strip().casefold() == spec['to'].strip().casefold():
+                raise SchemaError(f'{where}: self-swaps belong in fences.yaml')
+            if pattern_key(pattern) in fenced_patterns:
+                raise SchemaError(f'{where}: repeats a dialect fence')
             swaps.append(DialectSwap(section, pattern, spec["to"], spec.get("plural"),
                                      bool(spec.get("known_only")), parse_not_in(where, spec.get("not_in"))))
     lint_only = raw.get("lint_only", {})
     if not isinstance(lint_only, dict) or any(not isinstance(k, str) or not k.strip() or not isinstance(v, str) or not v.strip()
                                              for k, v in lint_only.items()):
         raise SchemaError("dialect.yaml: lint_only must map non-empty text to non-empty text")
-    table = DialectTable(swaps, lint_only)
+    table = DialectTable(swaps, lint_only, fences)
     problems = table.check_outputs()
     if problems:
         raise SchemaError("\n  ".join(problems))
