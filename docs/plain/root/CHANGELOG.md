@@ -5,6 +5,10 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Make lookup follow translation's resolved meanings. Exact meaning names and plain wording recognise
+  wordless meanings as `no_word_yet` before unrelated model guesses or dial rejections, while preserving
+  independently understood object suggestions. Imagery discovery also respects superseded readings.
+
 - Add dictionary exploration across Python, CLI and MCP: stable entry pages, full metadata cards, seeded
   random entries, clean Aussie handle suggestions and complete construction variations. Lookup now
   distinguishes unknown meanings from settings with no compatible result using machine-readable outcomes.

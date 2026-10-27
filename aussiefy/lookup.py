@@ -15,7 +15,7 @@ from .align import content_words
 from .text import Token, tokenize
 from . import pos
 from .context import TIME_ADVERBS, positive_context
-from .detect import DETERMINERS, NOUN_PREPOSITIONS, Detection
+from .detect import DETERMINERS, NOUN_PREPOSITIONS, Detection, check_frame
 from .embed import NgramEmbedder
 from .errors import UserError
 from .engine import Translator, default_translator
@@ -137,6 +137,18 @@ def _term_match(e: Entry, qn: str, slotted: set[str]) -> tuple[float, str] | Non
     return None
 
 
+def _object_terms(matches, readings, tokens, tags, dictionary):
+    """An unclaimed context object can itself contain Aussie wording worth explaining.
+
+    This is direct dictionary discovery inside that object, not an automatic sense assertion for it.
+    """
+    objects = [(r.object_start, r.evidence_extent[1]) for r in readings if r.object_start is not None]
+    return {m.pattern.entry_id for m in matches
+            if any(start <= m.start and m.end <= end for start, end in objects)
+            and positive_context(tokens, m.start, m.start)
+            and check_frame(m, tokens, dictionary.adjective_nouns, tags, fragment=True) is not None}
+
+
 def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = None, limit: int = 8,
            include_gated: bool = False, short: bool = False, embellishment: int | str | None = None,
            document_type: str = "general", document_config: dict | None = None,
@@ -160,8 +172,6 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     eff = tr.effective(level=level, vulgarity=vulgarity, unlock=["all"] if include_gated else None,
                        embellishment=embellishment, document_type=document_type, document_config=document_config)
     cap = eff.vulgarity
-    sim = NgramEmbedder()
-    model = tr.lookup_embedder   # a meaning model (the bundled one, unless set otherwise); None: n-grams only
     q = query.lower().strip()
     # one word ("lonely") is where character n-grams mislead most (lovely, miser), so for a single word trust
     # whole-word hits and discount fuzzy ones
@@ -173,27 +183,19 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         tokens.pop(0)
     while tokens and tokens[-1].is_punct:
         tokens.pop()
-    from .detect import detect, resolve_overlaps, said_of_a_thing
+    from .detect import read_meanings
     tags = pos.tag([t.text for t in tokens]) if tokens else []
-    # person_nouns=None: lookup sorts the readings said of a thing itself, since "the money was wasted"
-    # rules DRUNK out rather than merely leaving it unestablished
-    kept, of_things = [], set()
-    for det in detect(tokens, d.index, concepts=d.concepts, adjective_nouns=d.adjective_nouns,
-                      degree_index=d.degree_index, tags=tags, fragment=True, person_nouns=None):
-        if said_of_a_thing(det, d.person_nouns, tokens):
-            of_things.update(det.concepts)
-        else:
-            kept.append(det)
-    readings = resolve_overlaps(kept)
+    interpreted = read_meanings(tokens, d, tags=tags, fragment=True)
+    readings = interpreted.detections
     readings = [r for r in readings if positive_context(tokens, r.start, r.start)]
-    exhaustive = _scoped_query(tokens, readings, tags)
-    established = {cid for det in readings for cid in det.concepts
-                   if det.frame != 'adv' or det.end == len(tokens)}
+    named = set(d.named_meanings.get(fold(query.replace("_", " ")), ()))
+    exhaustive = named or _scoped_query(tokens, readings, tags)
+    established = named | {cid for det in readings for cid in det.concepts}
     from .detect import applicable_concepts
     from .degree import degree_matches, realised_degree
     raw_matches = d.index.find(tokens)
     # ruled out: a sense said only of people of a thing, or one a wider reading superseded
-    blocked = of_things.union(*(det.supersedes for det in readings))
+    blocked = set(interpreted.ruled_out).union(*(det.supersedes for det in readings))
     for matched in raw_matches:
         possible = applicable_concepts(matched.pattern.concepts, d.concepts, tokens, matched.end, noun_use=None)
         blocked.update(set(matched.pattern.concepts) - set(possible))
@@ -203,6 +205,25 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         for held in readings:
             if held.start <= matched.start and matched.end <= held.end:
                 blocked.update(set(matched.pattern.concepts) - set(held.concepts))
+
+    out = {"query": query, **envelope(eff.level, eff.vulgarity, eff.warnings),
+           "theme_permissions": theme_permissions(eff.theme_policy)}
+    waiting = sorted(set(d.wordless_meanings).intersection(established))
+    if waiting:
+        out.update(outcome="no_word_yet",
+                   meanings=[{"concept": cid, "plain": d.concepts[cid].plain} for cid in waiting],
+                   note="The dictionary recognises this meaning but has no Aussie word for it yet. "
+                        "Consider proposing one.")
+    form_matches = d.form_index.find(tokens)
+    object_terms = _object_terms(form_matches, readings, tokens, tags, d) if waiting else set()
+    object_concepts = {cid for eid in object_terms for cid in d.entries[eid].concept}
+    if waiting and not established.difference(waiting) and not object_terms:
+        return {**out, "results": []}
+
+    sim = NgramEmbedder()
+    model = None if waiting else tr.lookup_embedder
+    if waiting:
+        exhaustive = named or established | object_concepts
 
     def degree_fits(entry, concepts):
         paths = [(cid, det) for det in readings for cid in concepts.intersection(det.degree_concepts)]
@@ -231,6 +252,8 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         if exhaustive is not None or det.frame not in {'np', 'adv'}:
             for cid in set(det.concepts).intersection(established):
                 concept_score[cid] = max(concept_score.get(cid, 0), 1.0)
+    for cid in object_concepts:
+        concept_score[cid] = max(concept_score.get(cid, 0), 1.0)
     whole_query = [m for m in raw_matches if m.start == 0 and m.end == len(tokens)]
     for matched in whole_query:
         for cid in matched.pattern.concepts:
@@ -243,11 +266,15 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
                 concept_score[cid] = max(concept_score.get(cid, 0.0), DESCRIPTION_NAMES_IT)
     scored: list[tuple[float, Entry, str]] = []
     qn = form_key(q)
-    slotted = {m.pattern.entry_id for m in d.form_index.find(tokens)
+    slotted = {m.pattern.entry_id for m in form_matches
                if m.start == 0 and m.end == len(tokens) and m.pattern.slots}
     parsed_concepts = {cid for eid in slotted for cid in d.entries[eid].concept}
     negative_anchors = {w[:-4] if w.endswith("less") else w for w in content_words(q)}
     def score_entry(e, term_match, use_model=True):
+        if waiting and not set(e.concept).intersection(exhaustive):
+            return None
+        if e.id in object_terms:
+            return SCORE_TERM, e, "slang term in context object"
         if term_match:
             return term_match[0], e, term_match[1]
         paths = set(e.concept)
@@ -279,12 +306,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
             return best, e, "meaning"
         return None
 
-    # a meaning with no Aussie word yet is claimed on evidence only: established in context, or the whole query
-    wordless = set(d.wordless_meanings)
-    evident = established.union(*(m.pattern.concepts for m in whole_query))
-    waiting = sorted(cid for cid in wordless.intersection(evident if exhaustive is None else exhaustive)
-                     if cid in evident and (cid not in blocked or cid in established))
-    recognised = exhaustive is not None and bool(exhaustive - wordless)
+    recognised = exhaustive is not None
     deferred = []
     for e in d.idioms + d.garnish:
         if e.status == "omit":
@@ -315,9 +337,8 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         if reason:
             card.update(effects_permitted=False, effect_rejection=reason)
     # a lookup reads no profile settings, so its envelope is the dials alone (no profile_config)
-    out = {"query": query, **envelope(eff.level, eff.vulgarity, eff.warnings),
-           "theme_permissions": theme_permissions(eff.theme_policy), "results": results}
-    images, recognised_image = lookup_images(d, query, eff, setting, limit)
+    out["results"] = results
+    images, recognised_image = lookup_images(d, query, eff, setting, limit, tokens=tokens, readings=readings)
     recognised |= recognised_image
     if not results and not images and not recognised:
         # cheapest evidence first: a held term itself, then its meaning by spelling, then by the model
@@ -326,16 +347,12 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
                       or any(score_entry(e, None) for e in deferred))
     if images:
         out["imagery"] = images
-    out["outcome"] = ("matched" if results or images else "nothing_fits" if recognised
-                      else "no_word_yet" if waiting else "not_in_dictionary")
-    if out["outcome"] == "no_word_yet":
-        out["meanings"] = [{"concept": cid, "plain": d.concepts[cid].plain} for cid in waiting]
-    if not results and not images:
+    out["outcome"] = ("no_word_yet" if waiting else "matched" if results or images
+                      else "nothing_fits" if recognised else "not_in_dictionary")
+    if not results and not images and not waiting:
         out["note"] = {
             "nothing_fits": "The dictionary recognises this meaning but has no compatible suggestion at these "
                             "settings. Try another wording or look up a specific term.",
-            "no_word_yet": "The dictionary recognises this meaning but has no Aussie word for it yet. "
-                           "Consider proposing one.",
             "not_in_dictionary": "No entry. If you're sure Australians say it, it's probably fine but unvetted; "
                                  "otherwise rephrase. Consider proposing it for the dictionary."}[out["outcome"]]
     return out

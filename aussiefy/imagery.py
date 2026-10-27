@@ -8,9 +8,8 @@ from .realise import noun_slots
 from .schema import Imagery, PLACEHOLDER_RE
 from .select import binding_problem
 from .context import following_context, positive_context
-from .detect import applicable_concepts, person_subject
+from .detect import person_subject
 from .terms import form_key
-from .text import tokenize
 from .evidence import metadata_dict, metadata_rejections, theme_rejection, register_rejection
 
 
@@ -74,17 +73,14 @@ def image_offers(dictionary, det, tokens, eff, setting):
     return tuple(out)
 
 
-def lookup_images(dictionary, query, eff, setting, limit) -> tuple[list[dict], bool]:
+def lookup_images(dictionary, query, eff, setting, limit, *, tokens, readings) -> tuple[list[dict], bool]:
     """Eligible image cards and whether the query recognised any image before policy gates."""
-    tokens = tokenize(query)
-    matches = list(dictionary.index.find(tokens))
-    positive = positive_context(tokens, 0, len(tokens))
     key = form_key(query)
     out, recognised = [], False
     for image in dictionary.imagery:
-        concepts = {cid for m in matches if not excluded_complement(image, tokens, m.end)
-                    for cid in applicable_concepts(m.pattern.concepts, dictionary.concepts, tokens, m.end)}
-        association = image_association(image, concepts, setting) if positive else None
+        concepts = {cid for reading in readings if not excluded_complement(image, tokens, reading.end)
+                    and positive_context(tokens, reading.start, reading.end) for cid in reading.concepts}
+        association = image_association(image, concepts, setting)
         words = form_key(image.text)
         literal = key == words or (len(key) >= 4 and f" {key} " in f" {words} ") or key == form_key(image.id.replace("-", " "))
         if not association and not literal:

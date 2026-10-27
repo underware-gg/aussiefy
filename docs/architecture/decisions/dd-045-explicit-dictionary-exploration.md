@@ -47,8 +47,9 @@ bundled wording and examples on 25 October. The listing shares `list_entries`'
 paging. Lookup claims `no_word_yet` only on evidence, for a meaning established in context, or matched
 across the whole query and not ruled out there; fuzzy similarity never claims it. Policy-blocked entries
 are checked for recognition cheapest first: a held term, then its meaning by spelling, then by the model. Its
-precedence is `matched`, `nothing_fits`, `no_word_yet`, then `not_in_dictionary`, so a meaning with a
-word that the settings block is still `nothing_fits`.
+original precedence was `matched`, `nothing_fits`, `no_word_yet`, then `not_in_dictionary`.
+[DD-046](dd-046-lookup-meaning-evidence.md) supersedes that precedence for established wordless meanings;
+a meaning with an existing word that the settings block is still `nothing_fits`.
 
 `names.py` owns catalogue validation and deterministic handle assembly, with no I/O, translator factory or
 account state. The loader reads `names.yaml`. Clean dictionary entries supply adjectives and phrase parts;

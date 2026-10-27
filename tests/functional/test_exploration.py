@@ -382,3 +382,76 @@ def test_cli_lookup_names_the_meaning_with_no_word_yet(capsys):
     from aussiefy.cli import main
     assert main(["lookup", "take", "heart"]) == 1
     assert "meaning HEART_SPIRIT: compassion, courage or wholehearted effort" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize("backend", ["none", "bundled"])
+@pytest.mark.parametrize("level,vulgarity,embellishment", [(1, 0, 0), (5, 3, 2)])
+def test_every_waiting_meaning_round_trips_through_lookup(dictionary, backend, level, vulgarity, embellishment):
+    from aussiefy import lookup
+    tr = Translator(dictionary, lookup_embedder=backend)
+    for cid in dictionary.wordless_meanings:
+        concept = dictionary.concepts[cid]
+        for wording in (concept.plain, *concept.examples):
+            result = lookup(wording, translator=tr, level=level, vulgarity=vulgarity,
+                            embellishment=embellishment)
+            assert result["outcome"] == "no_word_yet", (cid, wording, result)
+            assert cid in {row["concept"] for row in result["meanings"]}, (cid, wording, result)
+            assert all(row.get("match") != "meaning (local model)" for row in result["results"])
+
+
+def test_exact_plain_wording_is_authored_evidence_not_a_fuzzy_guess(tmp_path):
+    from aussiefy import lookup
+    path = _overlay(tmp_path, {"add_concepts": {"TEST_WAITING": {
+        "description": "A synthetic meaning.", "plain": "an inexplicably adequate situation", "triggers": {}}}})
+    tr = Translator(load_dictionary([path]), lookup_embedder=None)
+    result = lookup("  AN  inexplicably adequate situation  ", translator=tr)
+    assert result["outcome"] == "no_word_yet"
+    assert result["meanings"] == [{"concept": "TEST_WAITING", "plain": "an inexplicably adequate situation"}]
+    assert lookup("not an inexplicably adequate situation", translator=tr)["outcome"] != "no_word_yet"
+
+
+def test_a_wordless_reading_needs_no_model_and_cannot_be_rescued_by_unrelated_dial_rejections(dictionary):
+    from aussiefy import lookup
+
+    class UnusedModel:
+        lookup_threshold = .5
+
+        def similarity(self, query, text):
+            raise AssertionError("A settled wordless reading must not fall back to the model")
+
+    tr = Translator(dictionary, lookup_embedder=UnusedModel())
+    for query in ("fantastic terrors", "loyal devotion", "It will probably rain.", "think highly of"):
+        result = lookup(query, translator=tr, level=1, vulgarity=0)
+        assert result["outcome"] == "no_word_yet" and not result["results"]
+
+
+def test_a_wordless_verb_preserves_its_objects_independent_meaning():
+    from aussiefy import lookup
+    result = lookup("believe a liar", level=5, vulgarity=3)
+    assert result["outcome"] == "no_word_yet"
+    assert {row["concept"] for row in result["meanings"]} == {"ACCEPT_AS_TRUE"}
+    assert any(row["form"] == "a bullshitter" for row in result["results"])
+
+
+@pytest.mark.parametrize("query,cid", [("accept as true", "ACCEPT_AS_TRUE"), ("fanciful", "FANCIFUL"),
+                                      ("ACCEPT_AS_TRUE", "ACCEPT_AS_TRUE")])
+def test_an_explicit_meaning_name_is_discovery_evidence(query, cid, translator):
+    from aussiefy import lookup
+    result = lookup(query, translator=translator)
+    assert result["outcome"] == "no_word_yet"
+    assert cid in {row["concept"] for row in result["meanings"]}
+    assert not result["results"]
+
+
+@pytest.mark.parametrize("json_output", [False, True])
+def test_cli_preserves_wordless_outcome_with_independent_object_offers(capsys, json_output):
+    import json
+    from aussiefy.cli import main
+    options = ["--json"] if json_output else []
+    assert main(["lookup", "believe a liar", "--level", "5", *options]) == 1
+    output = capsys.readouterr().out
+    if json_output:
+        result = json.loads(output)
+        assert result["outcome"] == "no_word_yet" and result["results"] and result["meanings"]
+    else:
+        assert "a bullshitter" in output and "meaning ACCEPT_AS_TRUE" in output

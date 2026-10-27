@@ -21,6 +21,8 @@ Pass an optional `translator` to each Python operation to reuse a loaded diction
 `--dict`; MCP uses the translator injected into `build_server`. All results are JSON-ready dictionaries;
 CLI commands print their complete response with `--json`. Exit 0 means a result was found, 1 means none,
 and 2 means invalid input.
+For lookup, the status follows its primary outcome: `no_word_yet` exits 1 even when the response includes
+suggestions for independently understood object words. Both text and JSON output retain the missing meaning.
 
 ## Pages, cards and random entries
 
@@ -60,10 +62,17 @@ card/changes contract update.
 
 `lookup` reports these codes in `outcome` (`matched`, `nothing_fits`, `no_word_yet`, `not_in_dictionary`)
 beside its existing note. `no_word_yet` also returns `meanings`, each with its `concept` and `plain` wording.
-It is claimed only for a meaning the query establishes in context, or that a pattern matches across the whole
-query without being ruled out there, never from spelling similarity alone. Recognition uses the same bounded meaning readings and direct-form matching as ranking;
-this is not a claim that an unknown meaning cannot be Australian. A known term held back by policy is
-recognised even when its card cannot be offered. Cards and imagery count as a successful lookup.
+It is claimed for a meaning established by the shared contextual readings, or an exact match on its authored
+plain wording or name (`ACCEPT_AS_TRUE` or `accept as true`), never from spelling similarity alone. Names
+ignore case and accept spaces instead of underscores; plain wording also uses the usual apostrophe and
+whitespace folding. These discovery names do not add automatic translation triggers.
+
+A recognised wordless meaning takes precedence over unrelated model guesses and dial rejections. Its
+`results` can still explain an independently understood object: “believe a liar” reports the testimony
+meaning as wordless while offering “a bullshitter” for the object. Such offers do not supply a word for the
+missing verb meaning. The model remains a fallback when meaning is unsettled. A known term whose existing
+words are blocked by policy still reports `nothing_fits`; this is distinct from having no word at any setting.
+Otherwise, cards and imagery count as a successful lookup. An unknown meaning may still be Australian.
 
 ## Meanings without a word yet
 

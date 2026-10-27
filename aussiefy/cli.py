@@ -311,7 +311,7 @@ def cmd_lookup(args) -> int:
                          translator=_translator(args), **_policy(args))
     if args.json:
         _json(out)
-        return 0 if out["results"] or out.get("imagery") else 1
+        return 0 if out["outcome"] == "matched" else 1
     _warn(out["policy_warnings"])
     for r in out["results"]:
         extra = f" [vulgarity {r['vulgarity']}]" if r["vulgarity"] else ""
@@ -323,9 +323,11 @@ def cmd_lookup(args) -> int:
         print(f"  image ({image['form']}, {image['association']}): {image['text']} — {image['usage']}")
     if not out["results"] and not out.get("imagery"):
         print(f"  (no match for {out['query']!r} at level {out['level']}) {out['note']}")
-        for meaning in out.get("meanings", ()):
-            print(f"  meaning {meaning['concept']}: {meaning['plain']}")
-    return 0 if out["results"] or out.get("imagery") else 1
+    elif out["outcome"] == "no_word_yet":
+        print(f"  {out['note']}")
+    for meaning in out.get("meanings", ()):
+        print(f"  meaning {meaning['concept']}: {meaning['plain']}")
+    return 0 if out["outcome"] == "matched" else 1
 
 
 def cmd_bulldust(args) -> int:

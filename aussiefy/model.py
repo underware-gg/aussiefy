@@ -154,6 +154,16 @@ class Dictionary:
         return frozenset(form_key(text) for text in forms)
 
     @cached_property
+    def named_meanings(self) -> dict[str, tuple[str, ...]]:
+        """Exact meaning names and authored wording, for explicit dictionary discovery only."""
+        out = {}
+        for cid, concept in sorted(self.concepts.items()):
+            for name in (cid.replace("_", " "), concept.plain):
+                if key := fold(name):
+                    out.setdefault(key, set()).add(cid)
+        return {key: tuple(sorted(cids)) for key, cids in out.items()}
+
+    @cached_property
     def wordless_meanings(self) -> tuple[str, ...]:
         """Recognised meanings with no Aussie word yet, by ID: no entry, image or construction expresses them, and
         the dialect table swaps none of their triggers for the Australian word ("trash can" is a bin). Concepts

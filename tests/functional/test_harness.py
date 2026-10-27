@@ -264,8 +264,9 @@ def test_lint_exempts_the_sources_own_language(translator):
 
 
 def test_lookup_single_words_avoid_lookalikes(translator):
-    cry = [r["form"] for r in harness.lookup("cry", translator=translator)["results"]]
-    assert "bawl" in cry and "have a sook" in cry
+    cry = harness.lookup("cry", translator=translator)
+    # Generic crying is not necessarily noisy crying or complaining; CRY is deliberately wordless.
+    assert cry["outcome"] == "no_word_yet" and not cry["results"]
     lonely = [r["form"] for r in harness.lookup("lonely", translator=translator)["results"]]
     assert "beaut" not in lonely and "as lonely as a shag on a rock" in lonely
     alone = [r["form"] for r in harness.lookup("alone", translator=translator)["results"]]

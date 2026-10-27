@@ -66,6 +66,7 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 | [DD-043](../../../architecture/decisions/dd-043-typed-idiom-construction.md) | Bounded typed composition with honest part evidence and distinct construction identities | Accepted |
 | [DD-044](../../../architecture/decisions/dd-044-phrase-interpretation-context.md) | Phrase readings compete by evidence; context establishes a sense without joining the replaced span | Accepted |
 | [DD-045](../../../architecture/decisions/dd-045-explicit-dictionary-exploration.md) | Stable explicit discovery, clean handles and validated construction variations | Accepted |
+| [DD-046](../../../architecture/decisions/dd-046-lookup-meaning-evidence.md) | Shared meaning evidence and exact authored wording take precedence over lookup guesses | Accepted |
 
 ## By topic
 

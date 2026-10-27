@@ -13,8 +13,8 @@ from typing import Any, Callable, Literal, Protocol, Sequence
 
 from . import pos
 from .context import FORMAL_RE, following_context, is_chant, sentence_contexts, text_mood
-from .detect import (CODE_CONCEPTS, DETERMINERS, Detection, after_determiner, detect, fallback_scorer,
-                     resolve_overlaps, owned_degree_modifiers, degree_modifier_spans)
+from .detect import (CODE_CONCEPTS, DETERMINERS, Detection, after_determiner, fallback_scorer,
+                     read_meanings, owned_degree_modifiers, degree_modifier_spans)
 from .embed import Embedder, make_embedder
 from .garnish import (Edit, GarnishOffer, GarnishRecord, PhoneticRecord, PhoneticTrace, apply_phonetic, ends_in_list,
                       garnish_offer, pick_riff, place_garnish, tag_in_speech)
@@ -373,11 +373,8 @@ class Translator:
     def _substitute(self, sent: "_Sentence", run: "_Run") -> tuple[list[SubstitutionRecord], list[tuple[int, int, str]]]:
         """Detect the sentence's concepts and swap in Aussie terms: one record per detected span."""
         pol, eff, state, toks = run.pol, run.eff, run.state, sent.tokens
-        dets = resolve_overlaps(detect(toks, self.dictionary.index, self._fallback_scorer(pol.embedder),
-                                       self.dictionary.fallback_patterns, pol.similarity_threshold, sent.tags,
-                                       self.dictionary.adjective_nouns, concepts=self.dictionary.concepts,
-                                       complete=sent.complete, degree_index=self.dictionary.degree_index,
-                                       person_nouns=self.dictionary.person_nouns))
+        dets = read_meanings(toks, self.dictionary, tags=sent.tags, scorer=self._fallback_scorer(pol.embedder),
+                             threshold=pol.similarity_threshold, complete=sent.complete).detections
         held = run.held(toks)
         dets = [d for d in dets if not self._term_of_art(d, run.genre.policy.term_domains)
                 and not held & set(range(d.start, d.end))]

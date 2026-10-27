@@ -70,6 +70,7 @@ its consequences as they stood when it was made. Anyway, records are numbered in
 | [DD-043](dd-043-typed-idiom-construction.md) | Bounded typed composition with honest part evidence and distinct construction identities | Accepted |
 | [DD-044](dd-044-phrase-interpretation-context.md) | Phrase readings compete by evidence; context establishes a sense without joining the replaced span | Accepted |
 | [DD-045](dd-045-explicit-dictionary-exploration.md) | Stable explicit discovery, clean handles and validated construction variations | Accepted |
+| [DD-046](dd-046-lookup-meaning-evidence.md) | Shared meaning evidence and exact authored wording take precedence over lookup guesses | Accepted |
 
 ## By topic
 

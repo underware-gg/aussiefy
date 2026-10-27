@@ -759,6 +759,27 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
     return found
 
 
+class MeaningReadings(NamedTuple):
+    detections: list[Detection]
+    ruled_out: frozenset[str]
+
+
+def read_meanings(tokens: list[Token], dictionary, *, tags: list[str] | None = None,
+                  scorer=None, threshold: float = 0.72, complete: bool = True,
+                  fragment: bool = False) -> MeaningReadings:
+    """Resolve contextual meanings once, retaining contradicted senses for discovery to rule out too."""
+    possible = detect(tokens, dictionary.index, scorer, dictionary.fallback_patterns, threshold, tags,
+                      dictionary.adjective_nouns, concepts=dictionary.concepts, complete=complete,
+                      degree_index=dictionary.degree_index, person_nouns=None, fragment=fragment)
+    accepted, ruled_out = [], set()
+    for reading in possible:
+        if said_of_a_thing(reading, dictionary.person_nouns, tokens):
+            ruled_out.update(reading.concepts)
+        else:
+            accepted.append(reading)
+    return MeaningReadings(resolve_overlaps(accepted), frozenset(ruled_out))
+
+
 def resolve_overlaps(dets: list[Detection]) -> list[Detection]:
     """Keep one reading of each word: the best-evidenced, longest, most specific non-overlapping detections.
 
