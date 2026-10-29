@@ -9,6 +9,10 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Preserve whole\-phrase protection when a partial entry overlaps it: “road pavement” no longer becomes
+  “road footpath”. Whole\-expression entries'n words read only as context retain their independent
+  readings; lookup also retains the senses overlappin' fences ruled out.
+
 - List six approved meanings as waiting for a word: heartbreak, freedom, remorse, being out of work,
   getting worked up and a talent. Retire `no_entries` throughout core and extension schemas. Read
   “dying to” and “dying for a” as strong eagerness, retaining their complements for “keen”; keep

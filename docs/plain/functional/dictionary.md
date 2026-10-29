@@ -229,7 +229,9 @@ Phrase protections live in `fences.yaml`, not in concepts or dialect self-swaps.
   reason: Petroleum jelly is an ointment, not jam.
 ```
 
-`meanings` enables competition with the shared meaning reader. `dialect` lists the resolved Englishes
+`meanings` constrains the shared meaning reader: partial or crossing matches cannot discard a protected
+phrase, while a supported whole-expression reading may still translate it. Words read only as context
+are not automatically protected. `dialect` lists the resolved Englishes
 whose dialect claims the fence participates in; an empty list disables that projection. `unknown` is
 unidentified English, not the raw `auto` dial. `english=none` still disables the dialect pass altogether.
 `not_in` carries document domains under the same term-of-art rules as concepts and dialect records.

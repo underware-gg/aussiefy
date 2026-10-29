@@ -791,14 +791,29 @@ def resolve_overlaps(dets: list[Detection]) -> list[Detection]:
 
     Evidence is a reading's span plus the context it rests on, so "believe ?={np}" (believe a liar) rules
     out a bare "believe" without claiming "a liar", which keeps its own reading. Readings of the same span
-    merge only on the same evidence: a sense that context establishes is not pooled with one it rules out."""
+    merge only on the same evidence: a sense that context establishes is not pooled with one it rules out.
+    A fence constrains every overlapping component before readings compete. A whole-expression reading
+    may cover it; a partial or crossing match cannot discard its protection."""
+    fences = [d for d in dets if d.source_pattern is not None and d.source_pattern.fence is not None]
+    available = []
+    for d in dets:
+        if d.source_pattern is not None and d.source_pattern.fence is not None:
+            available.append(d)
+            continue
+        blockers = [f for f in fences if f is not d and d.start < f.end and f.start < d.end
+                    and not (d.start <= f.start and f.end <= d.end)]
+        if blockers:
+            for fence in blockers:
+                fence.supersedes = tuple(dict.fromkeys(fence.supersedes + d.concepts))
+        else:
+            available.append(d)
     method_rank = {"entry": 0, "trigger": 1, "embedding": 2}
 
     def width(d: Detection) -> int:
         start, end = d.evidence_extent
         return end - start
 
-    ordered = sorted(dets, key=lambda d: (-width(d), -(d.end - d.start), method_rank[d.method], -d.score,
+    ordered = sorted(available, key=lambda d: (-width(d), -(d.end - d.start), method_rank[d.method], -d.score,
                                           d.start, d.pattern))
     owner: dict[int, Detection] = {}
     kept: list[Detection] = []
@@ -807,13 +822,13 @@ def resolve_overlaps(dets: list[Detection]) -> list[Detection]:
         rivals = {id(owner[i]): owner[i] for i in span if i in owner}
         if rivals:
             for rival in rivals.values():
-                rival.supersedes = tuple(dict.fromkeys(rival.supersedes + d.concepts))
+                rival.supersedes = tuple(dict.fromkeys(rival.supersedes + d.concepts + d.supersedes))
             continue
         owner.update((i, d) for i in span)
         kept.append(d)
     # Merge concept sets of identical readings so selection sees every equally supported sense.
     for d in kept:
-        extra = [o for o in dets if o is not d and (o.start, o.end, o.frame, o.evidence_extent)
+        extra = [o for o in available if o is not d and (o.start, o.end, o.frame, o.evidence_extent)
                  == (d.start, d.end, d.frame, d.evidence_extent)]
         for o in extra:
             d.concepts = tuple(dict.fromkeys(d.concepts + o.concepts))

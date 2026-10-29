@@ -8,6 +8,10 @@ from aussiefy.dialect import parse_dialect
 from aussiefy.fences import parse_fences
 from aussiefy.schema import HOLDING_CONCEPT, SchemaError
 from aussiefy.text import tokenize
+from aussiefy.detect import Detection, read_meanings, resolve_overlaps
+from aussiefy.matcher import compile_pattern
+from aussiefy.lookup import lookup
+from aussiefy.engine import Translator
 
 
 def row(**changes):
@@ -65,6 +69,44 @@ def test_core_concepts_are_meanings_and_one_named_abstention(dictionary):
     assert HOLDING_CONCEPT not in dictionary.wordless_meanings
     assert 'EAGER_FOR' not in dictionary.concepts
     assert {'HEARTBREAK', 'FREEDOM', 'FEEL_SORRY', 'UNEMPLOYED', 'GET_EXCITED', 'GIFT_TALENT'} <= set(dictionary.wordless_meanings)
+
+
+def test_partial_entry_cannot_discard_a_crossing_phrase_fence(dictionary):
+    text = 'They repaired the road pavement.'
+    tr = Translator(dictionary, lookup_embedder=None)
+    result = tr.translate(text, level=5, vulgarity=3, embellishment=0, embedder='none', english='us')
+    assert result.text == text
+    readings = read_meanings(tokenize(text), dictionary).detections
+    assert not {'ROAD', 'PAVEMENT'} & {cid for reading in readings for cid in reading.concepts}
+    assert not {'footpath', 'on-the-frog-and-toad'} & {r['id'] for r in lookup(text, translator=tr)['results']}
+
+
+def test_whole_phrase_entry_can_own_the_protected_expression():
+    fence = parse_fences([row()])[0]
+    protected = Detection(1, 3, (), 'np', 3, 'trigger', fence.phrase, source_pattern=fence.pattern)
+    partial = Detection(0, 2, ('PARTIAL',), 'np', 3, 'entry', 'the petroleum')
+    whole = Detection(0, 3, ('WHOLE',), 'np', 3, 'entry', 'the petroleum jelly')
+    assert resolve_overlaps([partial, protected, whole]) == [whole]
+    assert 'PARTIAL' not in whole.concepts
+
+
+def test_reading_context_does_not_freeze_its_independent_object():
+    fence = parse_fences([row(phrase='believe ?=a+liar', frame='vp')])[0]
+    protected = Detection(0, 1, (), 'vp', 3, 'trigger', fence.phrase,
+                          source_pattern=fence.pattern, context=(0, 3))
+    object_reading = Detection(2, 3, ('LIAR',), 'np', 3, 'trigger', 'liar',
+                               source_pattern=compile_pattern('liar', 'np', ('LIAR',), 3))
+    assert resolve_overlaps([protected, object_reading]) == [protected, object_reading]
+
+
+def test_overlapping_fences_retain_the_senses_they_ruled_out():
+    first, second = parse_fences([row(), row(phrase='jelly jar')])
+    left = Detection(0, 2, (), 'np', 3, 'trigger', first.phrase, source_pattern=first.pattern)
+    right = Detection(1, 3, (), 'np', 3, 'trigger', second.phrase, source_pattern=second.pattern)
+    component = Detection(2, 3, ('CONTAINER',), 'np', 3, 'entry', 'jar')
+    kept = resolve_overlaps([left, right, component])
+    assert len(kept) == 1
+    assert 'CONTAINER' in kept[0].supersedes
 
 
 
