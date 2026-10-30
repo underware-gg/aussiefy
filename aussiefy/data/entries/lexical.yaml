@@ -30,6 +30,7 @@
   form: cobber
   concept: [FRIEND]
   frame: np
+  number: count
   incoherence: 4
   register: dated
   gloss: A friend or companion; old-fashioned.
@@ -37,6 +38,11 @@
   form: bloke
   concept: [MAN, FELLOW_MAN]
   frame: np
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+  number: count
   incoherence: 1
   gloss: A man.
 - id: sheila
@@ -273,6 +279,7 @@
   form: garbo
   concept: [GARBAGE_COLLECTOR]
   frame: np
+  number: count
   incoherence: 1
   gloss: A rubbish collector.
 - id: postie
@@ -306,6 +313,11 @@
   form: esky
   concept: [COOLER]
   frame: np
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+  number: count
   incoherence: 1
   plural: eskies
   gloss: A portable insulated cooler.
@@ -839,6 +851,11 @@
   form: tucker
   concept: [FOOD]
   frame: np
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+  number: mass
   incoherence: 2
   plural: tucker
   gloss: Food.
@@ -872,6 +889,10 @@
   form: chockers
   concept: [CROWDED]
   frame: predicate_adj
+  grammar:
+    following: null
+    aspect: state
+    voice: unknown
   intensity: 4
   incoherence: 3
   class: lexical
@@ -936,6 +957,7 @@
   form: mug
   concept: [IDIOT]
   frame: np
+  number: count
   incoherence: 3
   gloss: A fool; someone easily taken in.
 - id: prick

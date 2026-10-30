@@ -16,7 +16,7 @@ import yaml
 
 from .errors import UserError
 from .terms import fold
-from . import pos
+from . import morph, pos
 from .dialect import parse_dialect
 from .fences import parse_fences, pattern_key
 from .genre import GenreConfig
@@ -238,9 +238,10 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         errors.append(str(exc))
 
     grammar = _read_optional(data / "grammar.yaml", errors, {})
-    person_roles, adjective_nouns, name_aliases = frozenset(), {}, {}
-    if set(grammar) - {"person_nouns", "adjective_nouns", "name_aliases"}:
-        errors.append("grammar.yaml: expected person_nouns, adjective_nouns and name_aliases")
+    person_roles, adjective_nouns, name_aliases, adjective_roots = frozenset(), {}, {}, frozenset()
+    comparative_predicates = frozenset()
+    if set(grammar) - {"person_nouns", "adjective_nouns", "name_aliases", "adjectives", "comparative_predicates"}:
+        errors.append("grammar.yaml: unknown grammar vocabulary field")
     else:
         def words(raw, where):
             if not isinstance(raw, list) or any(not isinstance(w, str) or not re.fullmatch(r"[a-z]+", w) for w in raw):
@@ -248,6 +249,9 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
                 return frozenset()
             return frozenset(raw)
         person_roles = words(grammar.get("person_nouns", []), "person_nouns")
+        adjective_roots = words(grammar.get("adjectives", []), "adjectives")
+        comparative_predicates = frozenset(form for root in words(grammar.get('comparative_predicates', []),
+            'comparative_predicates') for form in morph.verb_forms(root))
         adjectives = grammar.get("adjective_nouns", {})
         if not isinstance(adjectives, dict) or any(not isinstance(w, str) or not re.fullmatch(r"[a-z]+", w) for w in adjectives):
             errors.append("grammar.yaml: adjective_nouns must map lower-case adjectives to noun lists")
@@ -471,6 +475,8 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
                       form_index=PatternIndex(forms), swears=swears, dialect=dialect, theme_defaults=theme_defaults,
                       warnings=warnings, fences=fences, swearing=swearing, genres=genres, pos_words=pos.lower_words(),
                       person_roles=person_roles, adjective_nouns=adjective_nouns, name_aliases=name_aliases,
+                      adjectives=adjective_roots,
+                      comparative_predicates=comparative_predicates,
                       imagery=tuple(imagery), overlay_changes=tuple(vocabulary.changes), evidence_weights=weights,
                       construction_catalog=construction_catalog)
     catalog_path = data / "constructions.yaml"

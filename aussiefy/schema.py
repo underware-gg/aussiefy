@@ -12,6 +12,8 @@ from dataclasses import dataclass, field, fields
 from typing import Any
 
 from .errors import SchemaError
+from .grammar import GrammarRequirements, parse_requirements
+from .meaning_context import MeaningContext, parse_meaning_context
 from .themes import ThemePermissions
 from .evidence import (Credit, METADATA_KEYS, REGISTERS, TermMetadata, credit_records, metadata_dict, metadata_rejections, register_rejection, parse_metadata, parse_credit_value,
                        theme_rejection)
@@ -170,7 +172,8 @@ class Entry(TermMetadata):
     slots: dict[str, str] = field(default_factory=dict)
     type: str = "idiom"
     plural: str | None = None
-    number: str = "any"             # np only: plural-only referents, mass nouns, or unrestricted (any)
+    number: str = "any"             # np only: count, mass, plural-only referents, or unrestricted (any)
+    grammar: GrammarRequirements = field(default_factory=GrammarRequirements)
     weight: float = 1.0
     plain_sense: bool = False       # the form has an ordinary English sense too ("shame", "a bit rough"): lint
                                     # doesn't flag it when gated, since it can't tell the senses apart
@@ -224,7 +227,8 @@ class Entry(TermMetadata):
             value = getattr(self, name)
             if key not in ("id", "form", "concept", "frame") and value == getattr(defaults, name):
                 continue
-            out[key] = metadata[key] if key in METADATA_KEYS else list(value) if isinstance(value, tuple) else value
+            out[key] = (value.to_dict() if key == 'grammar' else metadata[key] if key in METADATA_KEYS
+                        else list(value) if isinstance(value, tuple) else value)
         return out
 
 
@@ -242,10 +246,13 @@ class Concept:
     trigger_degrees: dict[str, dict[str, str]] = field(default_factory=dict)
     trigger_effects: dict[str, dict[str, tuple[str, ...]]] = field(default_factory=dict)
     noun_use: str = "any"          # any | reference | address: grammatical use of a noun phrase
+    nominal_roles: tuple[str, ...] = ()  # empty: unspecified; otherwise supported source head/modifier/possessor uses
+    source_context: MeaningContext | None = None
     lookup_only: bool = False    # retained for discovery; never establishes an automatic meaning
     takes_addressee: bool = False  # an expression whose following recipient is direct address
     plain: str = ""              # plain wording a reader understands ("think highly of")
     examples: tuple[str, ...] = ()  # sentences that read as this meaning; tests prove each one does
+    negative_examples: tuple[str, ...] = ()  # reviewed contrasts that must not establish this meaning
     credit: str | tuple[Credit, ...] | None = None
 
 
@@ -254,7 +261,7 @@ CONCEPT_KEYS = frozenset(f.name for f in fields(Concept)) - {"id"}
 
 # Every key an entry may carry, in the order a written entry lists them.
 ENTRY_KEYS = tuple(dict.fromkeys((
-    "id", "form", "variants", "spellings", "insult", "concept", "frame", "class", "plural", "number", "slots", "intensity", "vulgarity",
+    "id", "form", "variants", "spellings", "insult", "concept", "frame", "class", "plural", "number", "grammar", "slots", "intensity", "vulgarity",
     "mask", "profane", "incoherence", "register", "region", "replaces", "status", "flags", "plain_sense", "type", "placement", "when",
     "stretch",
     "tone", "weight", "semantic_effects", "semantic_degree", "gloss", "notes", "key_sha256", "promoted_from", *METADATA_KEYS,
@@ -287,8 +294,8 @@ def _int_range(raw: dict, name: str, lo: int, hi: int, default: int, entry_id: s
 
 def _number(raw: dict, entry_id: str) -> str:
     number = raw.get("number", "any")
-    if number not in ("any", "plural", "mass"):
-        raise SchemaError(f"{entry_id}: 'number' must be any, plural or mass, got {number!r}")
+    if number not in ("any", "plural", "mass", "count"):
+        raise SchemaError(f"{entry_id}: 'number' must be any, plural, mass or count, got {number!r}")
     return number
 
 
@@ -437,6 +444,7 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
         type=etype,
         plural=raw.get("plural"),
         number=_number(raw, entry_id),
+        grammar=parse_requirements(raw.get('grammar'), entry_id),
         weight=float(weight),
         cls=cls,
         placement=placement,
@@ -511,6 +519,9 @@ def parse_concept(cid: str, raw: dict) -> Concept:
     noun_use = raw.get("noun_use", "any")
     if not isinstance(noun_use, str) or noun_use not in {"any", "reference", "address"}:
         raise SchemaError(f"concept {cid}: noun_use must be any, reference or address")
+    nominal_roles = _tuple(raw.get('nominal_roles'), 'nominal_roles', f'concept {cid}')
+    if set(nominal_roles) - {'head', 'modifier', 'possessor'}:
+        raise SchemaError(f'concept {cid}: nominal_roles must list head, modifier or possessor')
     not_in = parse_not_in(f"concept {cid}", raw.get("not_in"))
     unless_after = _tuple(raw.get("unless_after"), "unless_after", f"concept {cid}")
     if any(not re.fullmatch(r"[a-z]+", word) for word in unless_after):
@@ -529,9 +540,12 @@ def parse_concept(cid: str, raw: dict) -> Concept:
         trigger_degrees=trigger_degrees,
         trigger_effects=effects,
         noun_use=noun_use,
+        nominal_roles=nominal_roles,
+        source_context=parse_meaning_context(raw.get('source_context'), f'concept {cid}'),
         takes_addressee=_bool(raw, "takes_addressee", f"concept {cid}"),
         lookup_only=_bool(raw, "lookup_only", f"concept {cid}"),
         plain=plain,
         examples=_tuple(raw.get("examples"), "examples", f"concept {cid}"),
+        negative_examples=_tuple(raw.get('negative_examples'), 'negative_examples', f'concept {cid}'),
         credit=parse_credit_value(raw["credit"], f"concept {cid}") if raw.get("credit") is not None else None,
     )

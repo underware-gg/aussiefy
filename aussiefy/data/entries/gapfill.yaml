@@ -60,6 +60,7 @@
   concept:
   - WIFE
   frame: np
+  number: count
   intensity: 3
   vulgarity: 0
   incoherence: 1
@@ -386,7 +387,7 @@
   incoherence: 2
   register: current
   replaces:
-  - dinner !=party|parties|jacket|jackets|dance|guests|guest|meeting|meetings|theatre|theater|service|in|at
+  - "dinner !=guests|guest|meeting|meetings|service|in|at"
   - supper
   - the evening meal
   gloss: The evening meal.
@@ -1135,6 +1136,12 @@
   concept:
   - TALK_ON
   frame: vp
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+    not_following:
+    - np
   intensity: 3
   vulgarity: 0
   incoherence: 3
@@ -1806,6 +1813,8 @@
   concept:
   - DANGEROUS
   frame: predicate_adj
+  grammar:
+    aspect: state
   intensity: 3
   vulgarity: 0
   incoherence: 1
@@ -1942,6 +1951,10 @@
   concept:
   - DONE_FOR
   frame: predicate_adj
+  grammar:
+    following: null
+    aspect: state
+    voice: unknown
   intensity: 4
   vulgarity: 0
   incoherence: 3
@@ -2006,6 +2019,8 @@
   concept:
   - ANGRY
   frame: predicate_adj
+  grammar:
+    aspect: state
   intensity: 3
   vulgarity: 0
   incoherence: 3
@@ -2340,6 +2355,12 @@
   concept:
   - TALK_ON
   frame: vp
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+    not_following:
+    - np
   intensity: 3
   vulgarity: 0
   incoherence: 2

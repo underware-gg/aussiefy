@@ -1,17 +1,18 @@
 # ED16 meaning migration, 2026-10-27. Original glosses and source notes; cited pages are references only.
-# These are verb phrases. Do not give them an adjective frame just to put them in a bare "eager" slot:
-# their for/to complements need the output-grammar work being trialled in ED16 B.
-# The existing manual gate retains these for include_gated writer discovery pending that work.
+# These are participial predicates: the existing linking verb carries tense, while the shared output
+# contract proves the external complement. Keep the independent evidence for each use separate.
 - id: hang-out-for
-  form: hang out for
+  form: hanging out
   concept: [EAGER]
-  frame: vp
-  status: gate
+  frame: predicate_adj
+  grammar:
+    following: ['prep:for']
+    aspect: state
   intensity: 4
   incoherence: 1
   reads_as: australian
   gloss: Eagerly await or crave something, as in hanging out for the weekend.
-  notes: Manual gate pending output-complement grammar; use for writer review, not automated unlocking. Anticipation sense; not holding out for a price or spending time socially. For takes a noun phrase.
+  notes: Anticipation sense; not holding out for a price or spending time socially. The source must establish an external for + noun phrase; the existing verb carries tense. A bare eager slot does not fit.
   sources:
   - url: https://www.abc.net.au/news/2015-04-25/postcards-from-soldiers-to-nurse-reveal-tales-of-love-and-lonel/6420106
     kind: media
@@ -24,15 +25,17 @@
     supports: [term, meaning]
     note: 'Reviewed 2026-10-27: HANG OUT FOR in the Australian slang index supports anticipation. No first-attested date or exclusive origin inferred.'
 - id: hang-out-to
-  form: hang out to
+  form: hanging out
   concept: [EAGER]
-  frame: vp
-  status: gate
+  frame: predicate_adj
+  grammar:
+    following: [infinitive]
+    aspect: state
   intensity: 4
   incoherence: 1
   reads_as: australian
   gloss: Be eager to do something, as in hanging out to see your mates.
-  notes: Manual gate pending output-complement grammar; use for writer review, not automated unlocking. Anticipation sense; to takes an action, not a noun naming company to socialise with.
+  notes: Anticipation sense; to takes an action, not a noun naming company to socialise with. The source must establish an external to + action; the existing verb carries tense. A bare eager slot does not fit.
   sources:
   - url: https://www.abc.net.au/news/2020-10-28/regional-victorians-hit-gyms-and-yoga-class-as-cinemas-feel-pain/12820826
     kind: media

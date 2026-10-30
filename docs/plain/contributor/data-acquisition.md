@@ -44,6 +44,27 @@ is unclear, bring a contextual proposal to the project owner and leave it pendin
 that a phrase retains its literal imagery is not a completed review. Represent supported distinctions in
 dictionary data through the shared mechanisms, rather than adding phrase-specific engine exceptions.
 
+## Refining a reported translation
+
+Capture the input, settings, seed and dictionary revision, then identify the source meaning, matched
+phrase and candidate. Interpret the whole semantic unit using the Australian policy above. Check the
+reported failure alongside valid neighbouring uses before choosing the correction:
+
+- Wrong source meaning: refine its authored patterns, `nominal_roles` or reviewed `source_context`.
+- An established expression needs ownership: put the full unit in `fences.yaml`, with a true reason and
+  the required meaning/dialect/document scope. Preserve intentional whole-expression translations.
+- Correct meaning, incompatible output: declare the entry's grammatical requirement. Uncertain evidence
+  excludes that candidate rather than inventing a successful fit.
+
+Add the failure and positive/negative contrasts as executable regressions, checking translation, lookup,
+eligible alternatives and rendered grammar. Retire an older protection only when its replacement passes
+both sides. Feedback supplies review cases; it never directly mutates the dictionary. Avoid sentence
+replacement patches, global compound bans and assumptions that increased coverage guarantees accuracy.
+
+The [ED16 pilot](../../../research/ed16-grammar-2026-10-30/README.md) retains a fixed mixed 20-entry sample,
+review decisions, synthetic contrasts, field coverage and unresolved cases. It is a bounded trial, not
+certification of the whole dictionary or a human curation-time study.
+
 ## Reference dictionaries
 
 The Macquarie Dictionary, including its Australian Word Map of regional words, and the Australian National

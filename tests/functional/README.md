@@ -60,3 +60,11 @@ python -m pytest -q tests/functional
 | [test_fidelity_maintenance.py](test_fidelity_maintenance.py) | Modal/question grammar and meaning boundaries for devotion, tossing, quit and establish |
 
 Shared fixtures, corpus inputs and helpers live at [tests root](../README.md).
+
+| Module | Behaviour |
+|---|---|
+| [test_source_roles.py](test_source_roles.py) | Shared adjective/noun-role evidence without a compound ban |
+| [test_meaning_context.py](test_meaning_context.py) | Reviewed contextual meaning conditions and rejected-sense discovery |
+| [test_output_grammar.py](test_output_grammar.py) | Declared whole-output requirements and uncertain fit |
+| [test_ed16_regressions.py](test_ed16_regressions.py) | All 704 retained source/grammar cases and honest baseline controls |
+| [test_ed16_curation.py](test_ed16_curation.py) | Fixed pilot examples, migrated lexical units and anticipation rendering |

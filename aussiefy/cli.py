@@ -586,6 +586,8 @@ def cmd_validate(args) -> int:
           f"{len(d.patterns)} trigger patterns, {len(d.phonetic)} phonetic rules")
     print(f"idiom frames: {dict(sorted(by_frame.items()))}")
     print(f"active idioms by minimum level: {dict(sorted(by_level.items()))}")
+    from .grammar import grammar_coverage
+    print(f"grammar coverage: {grammar_coverage(d.idioms)}")
     for change in d.overlay_changes:
         print(_overlay_summary(change))
     if d.fences:

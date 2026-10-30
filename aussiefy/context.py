@@ -59,6 +59,57 @@ def following_context(tokens: list[Token], end: int, complete: bool = True) -> F
     return FollowingContext(known=complete)
 
 
+def following_shape(tokens: list[Token], end: int, tags: list[str], *, complete: bool = True) -> str | None:
+    """The whole phrase's next grammatical boundary; None is insufficient or ambiguous source evidence."""
+    if end >= len(tokens):
+        return 'none' if complete else None
+    token = tokens[end]
+    if INLINE_CHAR.match(token.text):
+        return None
+    if token.text in CLAUSE_END:
+        return 'none'
+    if token.text == ',' and end + 1 < len(tokens) and tokens[end + 1].norm in CLAUSE_JOINS:
+        return 'none'
+    if token.text == ',' and end + 1 < len(tokens):
+        subject_end = noun_phrase_end(tokens, end + 1, tags)
+        verb = _clause_verb_after(tokens, subject_end, tags) if subject_end > end + 1 else None
+        if verb is not None and verb.settled:
+            return 'none'
+    if token.is_punct:
+        return None
+    word = token.norm
+    if word in CLAUSE_JOINS:
+        return 'none'
+    if word in {'that', 'whether', 'if'}:
+        return 'content'
+    if word == 'to' and end + 1 < len(tokens) and tags[end + 1] == 'VB':
+        return 'infinitive'
+    if tags[end] in {'IN', 'TO'} or word in NOUN_PREPOSITIONS_FOR_BOUNDARY:
+        if end + 1 < len(tokens):
+            argument = context_object(tokens, end + 1, tags)
+            if argument is not None and argument.settled:
+                return 'prep:' + word
+        return None
+    if tags[end] == 'VB':
+        return 'verb_base'
+    if tags[end].startswith('RB') or word in TIME_ADVERBS:
+        return 'adverb'
+    nominal_end = noun_phrase_end(tokens, end, tags)
+    if word in TIME_MODIFIERS and nominal_end > end and tokens[nominal_end - 1].norm in TIME_UNITS:
+        return 'adverb'
+    argument = context_object(tokens, end, tags)
+    if argument is not None and argument.settled:
+        if word in TIME_MODIFIERS and tokens[argument.end - 1].norm in TIME_UNITS:
+            return 'adverb'
+        return 'np'
+    verb = _clause_verb_after(tokens, nominal_end, tags) if nominal_end > end else None
+    return 'content' if verb is not None and verb.settled else None
+
+
+NOUN_PREPOSITIONS_FOR_BOUNDARY = frozenset({'for', 'from', 'with', 'about', 'at', 'on', 'in', 'into', 'of', 'to',
+                                          'through', 'by', 'over', 'against'})
+
+
 RESULT_DEGREE = frozenset({"so", "too", "such"})   # degree words that license a "that"/"to" result complement
 
 
@@ -74,6 +125,53 @@ def claimed_result_degree(tokens: list[Token], start: int, end: int, reading_end
 NP_DETERMINER_TAGS = frozenset({"DT", "PDT", "PRP$", "CD"})
 NP_MODIFIER_TAGS = frozenset({"JJ", "JJR", "JJS", "CD"}) | pos.NOUNS | pos.NAMES
 FINITE_TAGS = frozenset({"VBD", "VBP", "VBZ", "MD"})
+COMPARATIVE_MODIFIERS = frozenset({'much', 'far'})
+
+
+def _comparative_adjective(word: str, adjective_words: frozenset[str]) -> bool:
+    if not word.endswith('er'):
+        return False
+    stems = {word[:-2], word[:-1], word[:-3] + 'y'}
+    if len(word) > 3 and word[-3] == word[-4]:
+        stems.add(word[:-3])
+    return bool(stems & adjective_words)
+
+
+def nominal_role(tokens: list[Token], start: int, end: int, tags: list[str], *,
+                 predicate: bool = False, adjective_words: frozenset[str] = frozenset()) -> str:
+    """A nominal span's grammatical role, without treating a noun modifier as an unsafe substitution."""
+    head = end - 1
+    after = tags[end] if end < len(tags) else None
+    if after == 'POS' or (end < len(tokens) and tokens[end].norm in {"'s", "'"}
+                         and tokens[end].start == tokens[head].end):
+        return 'possessor'
+    word = tokens[head].norm
+    comparative = _comparative_adjective(word, adjective_words)
+    nominal_end = noun_phrase_end(tokens, end, tags) if end < len(tokens) else end
+    before_noun = nominal_end > end and tags[nominal_end - 1] in pos.NOUNS | pos.NAMES
+    temporal = end < len(tokens) and (tokens[end].norm in TIME_ADVERBS
+        or tokens[end].norm in TIME_MODIFIERS and nominal_end > end
+        and tokens[nominal_end - 1].norm in TIME_UNITS)
+    if temporal:
+        before_noun = False
+    if comparative and before_noun and (morph.singular_of(tokens[nominal_end - 1].norm)
+                                        or tokens[nominal_end - 1].norm) in TIME_UNITS:
+        return 'adjective'
+    if before_noun:
+        return 'modifier'
+    determined = any(tags[i] in NP_DETERMINER_TAGS for i in range(start, head)) or (
+        start > 0 and tags[start - 1] in NP_DETERMINER_TAGS)
+    if comparative and end + 1 < len(tokens) and tokens[end].text == ',':
+        if _comparative_adjective(tokens[end + 1].norm, adjective_words) and (
+                not determined or noun_phrase_end(tokens, end + 2, tags) > end + 2):
+            return 'adjective'
+    if determined:
+        return 'head'
+    if (tags[head].startswith('JJ') or comparative) and predicate:
+        return 'adjective'
+    if tags[head] in pos.NOUNS | pos.NAMES:
+        return 'head'
+    return 'unknown'
 
 
 SUBORDINATORS = frozenset({"when", "whenever", "because", "if", "although", "though", "while", "since", "unless",

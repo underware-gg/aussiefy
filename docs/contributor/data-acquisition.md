@@ -48,6 +48,27 @@ is unclear, bring a contextual proposal to the project owner'n leave it pendin'.
 that a phrase retains its literal imagery isn't a completed review. Represent supported distinctions in
 dictionary data through the shared mechanisms, rather than adding phrase\-specific engine exceptions.
 
+## Refining a reported translation
+
+Capture the input, settings, seed'n dictionary revision, then identify the source meaning, matched
+phrase'n candidate. Interpret the whole semantic unit using the Australian policy above. Now, check the
+reported failure alongside valid neighbourin' uses before choosing the correction:
+
+- Wrong source meaning: refine its authored patterns, `nominal_roles` or reviewed `source_context`.
+- An established expression needs ownership: put the full unit in `fences.yaml`, with a true reason and
+  the required meaning/dialect/document scope. Well, preserve intentional whole\-expression translations.
+- Correct meaning, incompatible output: declare the entry's grammatical requirement. Uncertain evidence
+  excludes that candidate rather than inventin' a successful fit.
+
+So anyway, add the failure'n positive/negative contrasts as executable regressions, checking translation, lookup,
+eligible alternatives'n rendered grammar. Retire an older protection only when its replacement passes
+both sides. Feedback supplies review cases; it never directly mutates the dictionary. Avoid sentence
+replacement patches, global compound bans'n assumptions that increased coverage guarantees accuracy.
+
+The [ED16 pilot](../../research/ed16-grammar-2026-10-30/README.md) retains a fixed mixed 20\-entry sample,
+review decisions, synthetic contrasts, field coverage'n unresolved cases. Mind ya, it's a bounded trial, not
+certification of the whole dictionary or a human curation\-time study.
+
 ## Reference dictionaries
 
 The Macquarie Dictionary, including its Australian Word Map of regional words, and the Australian National
@@ -103,10 +124,10 @@ Two more sources feed the same `tag` and `review` steps:
 both over our own idioms'n over an agent's Aussie Gettysburg, then curatin' by hand.
 
 Harvestin' is candidate discovery, not attestation. Review each expression against existin' forms, variants,
-triggers'n dialect swaps before adding it. Anyway, a newly written comparison can be useful without being a
+triggers'n dialect swaps before adding it. Jeez, a newly written comparison can be useful without being a
 sayin' in common use: keep it as optional colour in `riffs.yaml`, attached to a term whose meaning it suits,
 rather than inventin' a plain\-English trigger for it. Riffs must read naturally after their term'n respect
-the same vulgarity'n document controls as existin' colour. Jeez, retain the source, persona and decision for
+the same vulgarity'n document controls as existin' colour. Retain the source, persona and decision for
 each research candidate; a persona is a writin' brief, not a new engine setting.
 
 ## Research rounds
@@ -133,7 +154,7 @@ Field overrides replace the named field, so `triggers` replaces the complete tri
 after `trigger_fixes.yaml`'s additions/removals/intensities, and the dry run lists their IDs and fields.
 
 Reapplication preserves previously written concept records'n their hand edits. New definitions are appended
-to the round's own section. Well, explicit trigger fixes update triggers while keeping other metadata; explicit
+to the round's own section. Explicit trigger fixes update triggers while keeping other metadata; explicit
 concept fixes rewrite only affected records, whose internal formattin'/comments may change. Neighbouring
 records'n section comments remain intact. Move an intentional change into a fix file rather than relyin'
 on edited verifier verdicts to overwrite a concept already written.
@@ -157,7 +178,7 @@ The retellings study compared the engine, yarn mode'n an unharnessed agent on th
 
 ## Concepts
 
-Now, the concept vocabulary in `aussiefy/data/concepts.yaml` is hand\-curated
+The concept vocabulary in `aussiefy/data/concepts.yaml` is hand\-curated
 ([DD-010](../architecture/decisions/dd-010-hand-curated-concept-vocabulary.md)). When `tag` proposes a concept
 that doesn't exist, the entry is gated as `untagged` and the proposal goes in its review notes: decide whether
 to add the concept, map the entry to an existin' one, or drop it.
@@ -175,7 +196,7 @@ aussiefy dev scrape --refresh https://learnconversations.com/funny-aussie-old-sa
 
 The review covered 227 raw rows and 212 normalised candidates. Ten entries were promoted through the normal
 validated review boundary, using manually authored proposals'n original glosses; the API tagger wasn't
-called. Mate, of the remainder, 88 have existin' term/variant/component coverage, 100 remain craft or verification
+called. Of the remainder, 88 have existin' term/variant/component coverage, 100 remain craft or verification
 notes, three proposed senses were declined, five rows were metadata, and six retain existin' gate/omit
 decisions. Component coverage doesn't promise automatic replacement of a whole sentence. The complete
 [decision ledger](../../research/maintenance-2026-10-17/seed-decisions.yaml) and

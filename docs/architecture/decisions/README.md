@@ -84,3 +84,4 @@ its consequences as they stood when it was made. Anyway, records are numbered in
 | [DD-049](dd-049-phrase-fences.md) | One scoped phrase\-fence list, separate from meanings'n named abstention \| Accepted for ED16 phase A \|
 | [DD-050](dd-050-wordless-meaning-migration.md) | Approved ordinary waitin' meanings, contextual eager readings'n complete marker retirement \| Accepted for ED16 phase A2 \|
 | [DD-051](dd-051-independent-phrase-ownership.md) | Whole\-phrase constraints keep on kickin' partial overlaps without freezin' contextual objects \| Accepted for ED16 phase C \|
+| [DD-052](dd-052-source-evidence-and-output-grammar.md) | Shared source\-role/context evidence, independent output grammar'n measured refinement \| Accepted for ED16 phase C \|

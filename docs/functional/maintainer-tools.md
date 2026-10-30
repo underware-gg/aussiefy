@@ -64,7 +64,7 @@ dictionary.
   it drops'n why \(a form already present, a trigger that's itself slang or copies a reference query\), and
   with `--write` validates the result in a scratch copy before touching the dictionary.
   Archived proposals are adapted after the round's explicit entry fixes: URL strings become unreviewed
-  citations, pulled the pin flags become usage, meaning or currency fields, and non\-URL source annotations stay
+  citations, retired flags become usage, meaning or currency fields, and non\-URL source annotations stay
   in notes. Stone the flamin' crows, a former `fabricated` flag requires manual review without claiming known coinage. This leaves
   the archives intact'n doesn't relax the current dictionary schema; a gate alone never implies a
   doubtful definition.

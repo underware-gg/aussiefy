@@ -134,6 +134,8 @@ class Dictionary:
     pos_words: frozenset[str] = frozenset()
     person_roles: frozenset[str] = frozenset()
     adjective_nouns: dict[str, frozenset[str]] = field(default_factory=dict)
+    adjectives: frozenset[str] = frozenset()
+    comparative_predicates: frozenset[str] = frozenset()
     name_aliases: dict[str, tuple[str, ...]] = field(default_factory=dict)
     imagery: tuple[Imagery, ...] = ()
     overlay_changes: tuple[dict[str, Any], ...] = ()
@@ -211,6 +213,12 @@ class Dictionary:
         for pattern in self.patterns + self.form_index.patterns:
             out.setdefault((pattern.frame, pattern_fingerprint(pattern.frame, pattern)), []).append(pattern)
         return {key: tuple(patterns) for key, patterns in out.items()}
+
+    @cached_property
+    def adjective_words(self) -> frozenset[str]:
+        return self.adjectives | frozenset(word for pattern in self.patterns if pattern.frame in {'adj', 'predicate_adj'}
+                         and len(pattern.consuming) == 1 and pattern.consuming[0].kind == 'lit'
+                         for word in pattern.consuming[0].values if word.isalpha())
 
     @cached_property
     def mapping_index(self) -> PatternIndex:

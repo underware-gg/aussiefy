@@ -342,6 +342,9 @@ def _prepare_concept_fixes(plan: RoundPlan, d: Dictionary) -> None:
             raw["triggers"] = {frame: list(patterns) for frame, patterns in concept.triggers.items()}
             raw["unless_after"] = list(concept.unless_after)
             raw["examples"] = list(concept.examples)
+            raw["negative_examples"] = list(concept.negative_examples)
+            raw["nominal_roles"] = list(concept.nominal_roles)
+            raw["source_context"] = concept.source_context.to_dict() if concept.source_context is not None else None
             raw["credit"] = credit_data(concept.credit)
             raw["trigger_effects"] = {frame: {pattern: list(effects) for pattern, effects in mappings.items()}
                                       for frame, mappings in concept.trigger_effects.items()}

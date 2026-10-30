@@ -86,6 +86,10 @@ credits:
     expect:
       wordnet: WordNet 3.0
 first_party:
+- glob: research/ed16-grammar-2026-10-30/*
+  reason: Original ED16 synthetic trials, reviewed metadata and lexical-unit migration decisions; MIT authorship and limits are recorded in research/PROVENANCE.yaml.
+- glob: tests/corpus/ed16/*
+  reason: Project-authored synthetic ED16 regression cases and baseline controls; no imported source passages.
 - glob: research/pending-source-followthrough-2026-10-23/*/REPORT.md
   reason: Project-authored reference-research reports; sources, scope and MIT declaration are recorded in research/PROVENANCE.yaml.
 - glob: research/pending-source-followthrough-2026-10-23/*/ledger.json

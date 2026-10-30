@@ -78,9 +78,39 @@ Generic/imported words sit low; thick vernacular'n opaque local idioms sit high.
 its `vulgarity`. `status: gate` is a curator's manual gate; `--unlock all` can lift it. `omit` is never offered,
 even when unlocked. The `slur` flag requires `omit`; `untagged` requires a non\-active status.
 
-The sourced “hang out for/to” verb phrases use that manual gate while their output-complement grammar
-is reviewed. Inspect them with `lookup("eager", include_gated=True)` for writer use. Their gate is
-separate from their evidence labels; do not treat them as bare-adjective replacements.
+Well, the sourced anticipation terms use `hanging out` as a participial predicate. Tell ya what, their declared grammar
+requires an established `for` + noun phrase or `to` + action: “She was eager for the weekend” can become
+“She was hanging out for the weekend”. The existin' verb carries tense'n the complement stays in place.
+Bare “He is eager” can use keen; social hanging out'n thirst remain distinct. Strewth, existin' abstention on
+negated predicate readings is unchanged. Now, evidence for the `for` and `to` uses stays separate.
+
+### Output grammar
+
+An entry can declare the sentence position its whole output needs:
+
+```yaml
+grammar:
+  following: [infinitive, 'prep:for']
+  aspect: state
+```
+
+`following` accepts `none`, `adverb`, `np`, `content`, `infinitive`, `verb_base` and `prep:<word>`.
+The boundary follows the **whole consumed phrase**, including its captured arguments. Prepositions need
+an established noun-phrase object; `to` + a base verb is an infinitive. `content` also accepts a noun phrase.
+`not_following` lists known incompatible shapes, for example `[np]` for an intransitive whole expression.
+`nominal_roles` can require `head`, `modifier` or `possessor`. `aspect` is `state`, `event`, `either` or
+`unknown`; `voice` is `active`, `passive`, `either` or `unknown`.
+
+Now, an omitted annotation, `following: null`, or an `unknown` field adds no requirement. A declared
+requirement whose source fit is uncertain excludes that candidate; other fittin' candidates remain
+available. If none fits, the words remain as written. This doesn't erase the recognised meaning or
+promise that an isolated lookup result can replace a sentence span. Boundary'n verbal evidence are
+bounded grammatical checks, not a complete parse; avoid speculative whitelists of every possible adjunct.
+
+`number` is independent: `any` (default\), `count`, `mass` or `plural`. Existin' mass/plural agreement
+checks remain; `count` additionally rejects an explicitly mass phrase introduced by much. Bloody hell, state and
+voice requirements prevent an active\-event expression such as “pull the pin” from fillin' “is retired”.
+They don't block an unannotated passive\-compatible expression such as “was chucked”.
 
 Origin, use and meaning are separate from that manual status. `reads_as` other than `australian` or `general`,
 `australian_use: uncommon`, or `doubtful_definition: true` keeps a term out of automatic choices. These apply
@@ -149,7 +179,7 @@ until a supported `caught_on` record exists; unfound agent output with no indepe
 bulldust. Otherwise the score decides attested versus unverified. Supported citation dates take precedence
 over `dated_by_curator`; absent evidence means unknown, rather than the date of the latest web page.
 
-`attestation.yaml` is explicitly provisional pendin' expression\-level source research. Bloody hell, substitution and
+`attestation.yaml` is explicitly provisional pendin' expression\-level source research. Crikey, substitution and
 garnish entry selection read its continuous score'n general\-wording factor, replacing raw URL\-count
 weightin'. Riffs'n contextual imagery multiply the same continuous evidence/general\-English factor into their
 shared tone/signature weightin', with the first curated option weighted double. The usage/meanin' gates
@@ -200,7 +230,7 @@ Keep distinct meanings in distinct concepts. A `lout` isn't necessarily a `reckl
 concepts, but its direct `replaces` patterns then introduce all of those concepts: prefer the individual
 concept triggers when those meanings need different candidates.
 
-Now, named cultural references such as `Goon of Fortune` and `Hills Hoist` are retained with specific meanings;
+Named cultural references such as `Goon of Fortune` and `Hills Hoist` are retained with specific meanings;
 they don't turn every drinkin' game or rotary clothesline into the named game or brand. Appetite phrases
 such as “could do with a feed” and “wouldn't say no to some tucker” have direct mappings for corresponding
 conditional requests, plus writer\-only hunger suggestions for contexts requirin' tense or modal judgement.
@@ -218,6 +248,40 @@ A concept may give `plain` wording a reader understands (`plain: think highly of
 sentences that read as that meaning; a test proves every bundled example detects its concept. A meaning
 with no word yet needs both, since [exploration](exploring.md#meanings-without-a-word-yet) lists them:
 the loader warns when one lacks them.
+
+A source concept can declare `nominal_roles: [head, possessor]` when its noun meaning excludes an
+attributive use: a fellow differs from fellow members. This is a meaning condition, separate from the
+output entry's grammar. Shared role evidence combines tags, determiners, possessives, adjective roots and
+predicate position. It permits ordinary noun modifiers and possessors: footy match, choccy bickies and nan's
+bed. No default ban on compounds applies. `grammar.yaml` supplements adjective roots and comparative
+predicate verbs where the dictionary patterns do not already provide them.
+An established noun head or possessor also prevents the older partial-adjective-phrase check from
+rejecting a complete noun phrase before an ordinary finite verb. A true modifier, such as the poor in
+the poor old minister, retains that protection.
+
+Reviewed contextual meanings can use `source_context`:
+
+```yaml
+source_context:
+  preposition: for
+  argument: nominal
+  heads: [music, numbers, singing]
+  person: false
+```
+
+`argument` is `np`, `ing` or `nominal` (noun phrase or gerund). Optional lowercase `heads` constrain the
+argument head; `not_heads` supplies reviewed contradictory heads, such as birthday for the aptitude sense
+of gift. An unlisted head remains uncertain rather than automatically becoming a present. Positive and
+negative head lists must not overlap. `person` uses the existing person/name evidence. For a gerund, `control: subject` requires
+a bound source subject, and `actions` can list reviewed literal/slot VP patterns. For example, remorse
+requires an established own-action context; sympathy does not establish it. Talent needs aptitude evidence;
+a gift for a person does not establish it, and being on welfare does not establish unemployment.
+
+These conditions distinguish supported, contradicted and uncertain readings. Contradicted senses are
+excluded; uncertain contexts use the single holding concept to prevent a misleading component fallback.
+Context arguments are evidence, not automatically consumed words. Lookup and translation share the reader
+and its rejected senses. These deliberately bounded checks do not infer arbitrary domains or agency.
+`negative_examples` records reviewed contrasts alongside existing positive `examples`; keep both executable.
 
 Phrase protections live in `fences.yaml`, not in concepts or dialect self-swaps. Every fence has a
 `phrase`, `frame`, `kind` (`set_phrase`, `other_sense` or `grammar`), plain `reason`, and explicit `scope`:
@@ -249,16 +313,16 @@ since some overlaps deliberately protect phrases at settings where their entries
 Slots are `{subj} {be} {have} {do} {poss} {obj} {objposs}`, plus `{np}`, which captures a short noun phrase'n copies
 it across, and `{will}`, which becomes "will" or "would" by tense. For example, `reckon {np} {have} Buckley's`
 turns "believing her assertion to be simply impossible" into "reckoning her assertion had Buckley's". When an
-entry has no verb of its own to take tense from, it uses the rest of the sentence's tense. Stone the flamin' crows, clause forms can
+entry has no verb of its own to take tense from, it uses the rest of the sentence's tense. Oi, clause forms can
 also start with "there" ("it's impossible" → "there's no bloody way").
 
 `{objposs}` identifies another participant's possessive. It uses an explicit captured possessive or
-derives one from `{obj}`; it never falls back to the speaking agent. Bugger me, for example, “she talked his ear
+derives one from `{obj}`; it never falls back to the speaking agent. For example, “she talked his ear
 off” can become “she bent his ear”, while bare “she rambled” supplies no listener. Selected forms must
 retain an explicitly captured object possessive, just as they retain other captured arguments.
 
 `number: mass` marks an uncountable noun, overriding spelling heuristics for forms such as `kid stakes`.
-Crikey, mass terms are withheld for explicitly plural source spans'n counted noun phrases outside the match
+Mass terms are withheld for explicitly plural source spans'n counted noun phrases outside the match
 (such as `one warm beer`, `another beer` or `each beer`). Mass\-compatible quantifiers such as `some`,
 `much` and `no` remain valid; the engine doesn't rewrite surrounding agreement to force a term in. `number: plural` retains
 its existin' plural\-only referent meanin', and omitted number metadata remains `any`.
@@ -275,10 +339,10 @@ its existin' plural\-only referent meanin', and omitted number metadata remains 
 - `?=home|there` requires the next token without consumin' it: `walk ?=home|there` preserves the destination
 - `+` joins words inside a literal context assertion: `dying ?=for+a@4` reads “for a” without consumin'
   either word. Alternatives may mix lengths \(`?=to|for+a`); the longest matching alternative supplies the
-  evidence span. The same syntax works before a pattern \(`?<=we+all wish`). Mate, missing or interrupted
+  evidence span. The same syntax works before a pattern \(`?<=we+all wish`). Missing or interrupted
   words don't match. This is distinct from `?={np}`, which reads a grammatically established object.
 - `?<=radio|car antenna` requires a precedin' token without consuming it: replace the antenna head while
-  retaining its wireless/car qualifier. Alternatives name one token or a `+`-joined sequence. Fair dinkum, following assertions
+  retaining its wireless/car qualifier. Alternatives name one token or a `+`-joined sequence. Following assertions
   require a precedin' consuming element; matchin' still enforces both assertions in similarity mode
 - `?={np}` requires a following nominal object without consuming it, and must end the pattern. The object's
   extent is read from the sentence's part-of-speech tags rather than a word count: determiners, then
@@ -308,7 +372,7 @@ In `vp` patterns the head verb matches any inflection, and in `np` patterns the 
 including accepted alternative spellings such as antennas/antennae. Assertions don't become head words
 or enter a lookup/trainin' phrase as translated content.
 
-A readin''s evidence is its matched words plus the context its assertions read. So anyway, readings that claim the
+A readin''s evidence is its matched words plus the context its assertions read. Readings that claim the
 same words compete by that evidence before selection, rather than poolin' their concepts: `fantastic
 ?=terrors|…` (FANCIFUL\) rules out the bare `fantastic` praise readin' of “fantastic terrors”, and a longer
 expression rules out readings of the words inside it. Only readings of the same words on the same evidence
@@ -325,6 +389,8 @@ compiles as a pattern. It collects every error, with file'n id, and raises one `
 genre, riffs'n entries files must be present; malformed YAML and missing files are collected
 with the other errors. String\-list fields require strings, `person` and `stretch` require real booleans,
 and profile garnish keys must name known placements. The guide validates its own structure'n dial keys.
+Validation also reports output\-grammar coverage by field. A coverage count measures authored annotations,
+not certified sentence accuracy. Unknown fields remain visible as incomplete curation.
 
 ## Extending it
 

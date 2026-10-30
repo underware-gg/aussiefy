@@ -281,6 +281,8 @@
   form: tighter than a fish's arse
   concept: [STINGY]
   frame: predicate_adj
+  grammar:
+    aspect: state
   intensity: 5
   vulgarity: 2
   incoherence: 5
@@ -374,6 +376,7 @@
   plural: parties going off like a frog in a sock
   concept: [LIVELY_PARTY]
   frame: np
+  number: count
   intensity: 4
   incoherence: 5
   class: idiom
@@ -418,6 +421,12 @@
   form: hit the frog and toad
   concept: [LEAVE]
   frame: vp
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+    not_following:
+    - np
   incoherence: 4
   gloss: Hit the road (rhyming slang).
 - id: have-a-feed
@@ -546,6 +555,12 @@
   form: shoot through
   concept: [RUN_OFF, LEAVE]
   frame: vp
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+    not_following:
+    - np
   intensity: 3
   incoherence: 3
   gloss: Leave, often in a hurry.
@@ -591,6 +606,12 @@
   form: battle on
   concept: [ENDURE]
   frame: vp
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+    not_following:
+    - np
   incoherence: 3
   gloss: Keep going against the odds, as a true battler does.
 - id: game-as-ned-kelly
@@ -691,6 +712,10 @@
   form: reckon
   concept: [THINK]
   frame: vp
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
   incoherence: 1
   weight: 3
   gloss: Hold or express an opinion or belief; suppose ("I reckon he's right").
@@ -857,6 +882,12 @@
   form: rabbit on
   concept: [TALK_ON]
   frame: vp
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+    not_following:
+    - np
   incoherence: 3
   gloss: Talk on and on.
 - id: get-stuck-into
@@ -871,6 +902,12 @@
   form: keep the whole bloody show goin'
   concept: [ENDURE]
   frame: vp
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+    not_following:
+    - np
   intensity: 4
   vulgarity: 1
   incoherence: 4
@@ -1072,6 +1109,9 @@
   form: plonk {poss}self down
   concept: [SIT_DOWN]
   frame: vp
+  grammar:
+    not_following:
+    - np
   incoherence: 3
   gloss: Sit down heavily and casually.
 - id: do-a-runner
@@ -1111,6 +1151,12 @@
   form: rug up
   concept: [DRESS_WARMLY]
   frame: vp
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+    not_following:
+    - np
   incoherence: 2
   gloss: Dress warmly.
 
@@ -1200,18 +1246,32 @@
   form: gone for six
   concept: [GONE_FOR_GOOD]
   frame: predicate_adj
+  grammar:
+    following: null
+    aspect: state
+    voice: unknown
   incoherence: 3
   gloss: Lost, ruined or done for (from cricket).
 - id: down-the-gurgler-pred
   form: down the gurgler
   concept: [GONE_FOR_GOOD]
   frame: predicate_adj
+  grammar:
+    following: null
+    aspect: state
+    voice: unknown
   incoherence: 3
   gloss: Lost for good, down the drain.
 - id: go-down-the-gurgler
   form: go down the gurgler
   concept: [GONE_FOR_GOOD]
   frame: vp
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+    not_following:
+    - np
   incoherence: 3
   gloss: Be wasted or lost.
 - id: blacker-than-a-dogs-guts
@@ -1238,6 +1298,12 @@
   form: pull the pin
   concept: [QUIT, RETIRE]   # RETIRE: the dinkum-check round ("he retired in 2020" -> "he pulled the pin in 2020")
   frame: vp
+  grammar:
+    following: null
+    aspect: event
+    voice: active
+    not_following:
+    - np
   incoherence: 3
   gloss: Quit, call it a day; or retire for good.
 - id: chuck-it-in
@@ -1442,6 +1508,8 @@
   form: better than a poke in the eye with a burnt stick
   concept: [NOT_BAD]
   frame: predicate_adj
+  grammar:
+    aspect: state
   incoherence: 4
   gloss: Alright, all things considered ("it's better than a poke in the eye with a burnt stick").
   sources: []

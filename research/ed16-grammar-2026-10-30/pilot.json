@@ -1,0 +1,886 @@
+{
+  "version": 1,
+  "selection_seed": 20261029,
+  "timing": {
+    "curation_started_epoch": 1793333196.736164,
+    "selection": "/private/tmp/aussiefy-ed16-c-pilot-selection.json",
+    "timing": "Elapsed agent curation time, not human labour; setup and automated checks excluded.",
+    "initial_review_ended_epoch": 1793333386.093817,
+    "elapsed_initial_review_seconds": 189.35765290260315,
+    "limits": "Agent wall-clock review session includes code/data reading and command overhead; it is not a human-time study. Subsequent annotation, automated trials and engineering are separately recorded."
+  },
+  "entries": [
+    {
+      "id": "frog-in-a-sock-party",
+      "form": "a party going off like a frog in a sock",
+      "frame": "np",
+      "concepts": [
+        "LIVELY_PARTY"
+      ],
+      "origin_file": "idioms.yaml",
+      "selection": "structurally complex",
+      "state": "reviewed",
+      "annotation": {
+        "number": "count"
+      },
+      "positive": "They attended lively parties.",
+      "contrast": "They attended a political party conference.",
+      "decision": "The explicit plural already inflects party rather than sock; political party remains a different meaning.",
+      "unresolved": false,
+      "existing_plural": "parties going off like a frog in a sock",
+      "trials": {
+        "positive": {
+          "text": "They attended parties going off like a frog in a sock.",
+          "eligible": [
+            "frog-in-a-sock-party"
+          ],
+          "readings": [
+            [
+              "LIVELY_PARTY"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "They attended a political party conference.",
+          "eligible": [],
+          "readings": [
+            []
+          ],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "a-mob-of",
+      "form": "a mob of {np}",
+      "frame": "np",
+      "concepts": [
+        "HERD_OF"
+      ],
+      "origin_file": "classics.yaml",
+      "selection": "structurally complex",
+      "state": "reviewed",
+      "annotation": {
+        "number": "count"
+      },
+      "positive": "They saw a herd of cattle.",
+      "contrast": "The herd instinct was strong.",
+      "decision": "The existing captured NP owns the herd members; no new external-complement requirement.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "They saw a mob of cattle.",
+          "eligible": [
+            "a-mob-of"
+          ],
+          "readings": [
+            [
+              "HERD_OF"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "The herd instinct was strong.",
+          "eligible": [],
+          "readings": [],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "the-missus",
+      "form": "the missus",
+      "frame": "np",
+      "concepts": [
+        "WIFE"
+      ],
+      "origin_file": "gapfill.yaml",
+      "selection": "structurally complex",
+      "state": "reviewed",
+      "annotation": {
+        "number": "count"
+      },
+      "positive": "His wife was here.",
+      "contrast": "They read an old wives tale.",
+      "decision": "Existing possessive variants and plural handling remain authoritative; no invented spouse or owner.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "His missus was here.",
+          "eligible": [
+            "the-missus"
+          ],
+          "readings": [
+            [
+              "WIFE"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "They read an old wives tale.",
+          "eligible": [],
+          "readings": [],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "old-pot",
+      "form": "{poss} old pot",
+      "frame": "np",
+      "concepts": [
+        "FATHER"
+      ],
+      "origin_file": "classics.yaml",
+      "selection": "structurally complex",
+      "state": "reviewed",
+      "annotation": {
+        "number": "count"
+      },
+      "positive": "My father was here.",
+      "contrast": "Father was here.",
+      "decision": "The default profile excludes this archaic entry. An explicit-register trial proved the missing possessive capture. Existing {poss} father/dad patterns now bind owners, including plural fathers, without inventing an owner for bare father.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "My old pot was here.",
+          "eligible": [
+            "old-pot"
+          ],
+          "readings": [
+            [
+              "FATHER"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "Father was here.",
+          "eligible": [],
+          "readings": [
+            [
+              "FATHER"
+            ]
+          ],
+          "rejected": [
+            [
+              "old-pot",
+              "no form fits: cannot fill {poss}: no subject or possessive in the span"
+            ]
+          ]
+        }
+      },
+      "reported_failure": {
+        "text": "My father was here.",
+        "rejected": [
+          [
+            "old-pot",
+            "no form fits: cannot fill {poss}: no subject or possessive in the span"
+          ]
+        ]
+      },
+      "settings_override": {
+        "registers": [
+          "current",
+          "dated",
+          "archaic"
+        ]
+      },
+      "default_register_trial": {
+        "text": "My father was here.",
+        "eligible": []
+      }
+    },
+    {
+      "id": "garbo",
+      "form": "garbo",
+      "frame": "np",
+      "concepts": [
+        "GARBAGE_COLLECTOR"
+      ],
+      "origin_file": "lexical.yaml",
+      "selection": "seeded random",
+      "state": "reviewed",
+      "annotation": {
+        "number": "count"
+      },
+      "positive": "The garbage collectors arrived.",
+      "contrast": "The stamp collectors arrived.",
+      "decision": "Count occupation noun; plural garbos is supported.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "The garbos arrived.",
+          "eligible": [
+            "garbo"
+          ],
+          "readings": [
+            [
+              "GARBAGE_COLLECTOR"
+            ],
+            [
+              "ARRIVE"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "The stamp collectors arrived.",
+          "eligible": [],
+          "readings": [
+            [
+              "ARRIVE"
+            ]
+          ],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "cobber",
+      "form": "cobber",
+      "frame": "np",
+      "concepts": [
+        "FRIEND"
+      ],
+      "origin_file": "lexical.yaml",
+      "selection": "seeded random",
+      "state": "reviewed",
+      "annotation": {
+        "number": "count"
+      },
+      "positive": "My friends arrived.",
+      "contrast": "They sent a friend request.",
+      "decision": "Count friend noun. The observed cobber-request error is a fixed-expression boundary, corrected by a shared friend-request fence; ordinary friends and possessive requests remain independent.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "My cobbers arrived.",
+          "eligible": [
+            "cobber"
+          ],
+          "readings": [
+            [
+              "FRIEND"
+            ],
+            [
+              "ARRIVE"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "They sent a friend request.",
+          "eligible": [],
+          "readings": [
+            []
+          ],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "a-serve",
+      "form": "a serve",
+      "frame": "np",
+      "concepts": [
+        "SCOLDING"
+      ],
+      "origin_file": "fragments.yaml",
+      "selection": "seeded random",
+      "state": "reviewed",
+      "annotation": {
+        "number": "count"
+      },
+      "positive": "She got an earful.",
+      "contrast": "She has a full ear.",
+      "decision": "Count scolding noun; no evidence for adding an external complement contract.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "She got a serve.",
+          "eligible": [
+            "a-serve"
+          ],
+          "readings": [
+            [
+              "SCOLDING"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "She has a full ear.",
+          "eligible": [],
+          "readings": [],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "mug",
+      "form": "mug",
+      "frame": "np",
+      "concepts": [
+        "IDIOT"
+      ],
+      "origin_file": "lexical.yaml",
+      "selection": "seeded random",
+      "state": "reviewed",
+      "annotation": {
+        "number": "count"
+      },
+      "positive": "They were idiots.",
+      "contrast": "The design was foolproof.",
+      "decision": "Count foolish-person noun, not a physical mug or a property of a design.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "They were mugs.",
+          "eligible": [
+            "mug"
+          ],
+          "readings": [
+            [
+              "IDIOT"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "The design was foolproof.",
+          "eligible": [],
+          "readings": [],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "reckon-no-bloody-way",
+      "form": "reckon there {be} no bloody way {np} {will} come off",
+      "frame": "vp",
+      "concepts": [
+        "IMPOSSIBLE_PROPOSAL"
+      ],
+      "origin_file": "idioms.yaml",
+      "selection": "structurally complex",
+      "state": "reviewed",
+      "annotation": {},
+      "positive": "They believe the proposal to be impossible.",
+      "contrast": "They believe Mary.",
+      "decision": "Existing proposition capture preserves judged proposition; external argument grammar remains unknown.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "They reckon there is no bloody way the proposal will come off.",
+          "eligible": [
+            "reckon-no-bloody-way"
+          ],
+          "readings": [
+            [
+              "IMPOSSIBLE_PROPOSAL"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "They believe Mary.",
+          "eligible": [],
+          "readings": [
+            [
+              "ACCEPT_AS_TRUE"
+            ]
+          ],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "sun-shines-out-of-arse",
+      "form": "think the sun shines|shone out of {objposs} arse",
+      "frame": "vp",
+      "concepts": [
+        "ADORE",
+        "CONCEITED"
+      ],
+      "origin_file": "idioms.yaml",
+      "selection": "structurally complex",
+      "state": "reviewed",
+      "annotation": {},
+      "positive": "She adores Mary.",
+      "contrast": "She adores the weather.",
+      "decision": "Object/self-regard forms keep separate captures. Inanimate adoration needs semantic review; do not infer a new person-only policy. The inanimate contrast is already excluded; no policy or source-term change was made. The inanimate contrast is already excluded; no policy or source-term change was made.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "She thinks the sun shines out of Mary's arse.",
+          "eligible": [
+            "sun-shines-out-of-arse"
+          ],
+          "readings": [
+            [
+              "ADORE"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "She adores the weather.",
+          "eligible": [],
+          "readings": [],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "put-the-hard-word-on",
+      "form": "put the hard word on {obj} for {np}",
+      "frame": "vp",
+      "concepts": [
+        "HIT_UP_FOR"
+      ],
+      "origin_file": "fairdinkum.yaml",
+      "selection": "structurally complex",
+      "state": "reviewed",
+      "annotation": {},
+      "positive": "They hit me up for a loan.",
+      "contrast": "They tapped the water pipe.",
+      "decision": "Existing object and favour captures carry the internal prepositions and arguments.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "They put the hard word on me for a loan.",
+          "eligible": [
+            "put-the-hard-word-on"
+          ],
+          "readings": [
+            [
+              "HIT_UP_FOR"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "They tapped the water pipe.",
+          "eligible": [],
+          "readings": [],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "plonk-down",
+      "form": "plonk {poss}self down",
+      "frame": "vp",
+      "concepts": [
+        "SIT_DOWN"
+      ],
+      "origin_file": "idioms.yaml",
+      "selection": "seeded random",
+      "state": "reviewed",
+      "annotation": {
+        "grammar": {
+          "not_following": [
+            "np"
+          ]
+        }
+      },
+      "positive": "She sat down.",
+      "contrast": "They sat down the delegates.",
+      "decision": "Intransitive whole output; cannot accept an unconsumed direct NP.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "She plonked herself down.",
+          "eligible": [
+            "plonk-down"
+          ],
+          "readings": [
+            [
+              "SIT_DOWN"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "They sat down the delegates.",
+          "eligible": [],
+          "readings": [
+            [
+              "SIT_DOWN"
+            ]
+          ],
+          "rejected": [
+            [
+              "plonk-down",
+              "following np conflicts with the declared grammar"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "stuff-it-up",
+      "form": "stuff {obj} up",
+      "frame": "vp",
+      "concepts": [
+        "BOTCH_IT"
+      ],
+      "origin_file": "idioms.yaml",
+      "selection": "seeded random",
+      "state": "reviewed",
+      "annotation": {},
+      "positive": "They screwed it up.",
+      "contrast": "They screwed the lid onto the jar.",
+      "decision": "Existing object/particle patterns distinguish botching from literal fastening.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "They stuffed it up.",
+          "eligible": [
+            "stuff-it-up"
+          ],
+          "readings": [
+            [
+              "BOTCH_IT"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "They screwed the lid onto the jar.",
+          "eligible": [],
+          "readings": [],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "knock-for-six",
+      "form": "knock {obj} for six",
+      "frame": "vp",
+      "concepts": [
+        "STAGGER_SOMEONE"
+      ],
+      "origin_file": "secondpass.yaml",
+      "selection": "seeded random",
+      "state": "reviewed",
+      "annotation": {},
+      "positive": "The news threw her for a loop.",
+      "contrast": "They threw the ball.",
+      "decision": "Existing affected-object capture belongs to the emotional impact idiom.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "The news knocked her for six.",
+          "eligible": [
+            "knock-for-six"
+          ],
+          "readings": [
+            [
+              "STAGGER_SOMEONE"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "They threw the ball.",
+          "eligible": [],
+          "readings": [
+            [
+              "THROW"
+            ]
+          ],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "dirty-on",
+      "form": "dirty on {obj}",
+      "frame": "predicate_adj",
+      "concepts": [
+        "ANGRY"
+      ],
+      "origin_file": "gapfill.yaml",
+      "selection": "structurally complex",
+      "state": "reviewed",
+      "annotation": {
+        "grammar": {
+          "aspect": "state"
+        }
+      },
+      "positive": "He is mad at Mary.",
+      "contrast": "The floor is dirty.",
+      "decision": "Predicate state; existing forms preserve the object or use the bare form when no object is bound.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "He is dirty on Mary.",
+          "eligible": [
+            "dirty-on"
+          ],
+          "readings": [
+            [
+              "ANGRY"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "The floor is dirty.",
+          "eligible": [],
+          "readings": [
+            [
+              "DIRTY"
+            ]
+          ],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "better-than-a-poke-in-the-eye-pred",
+      "form": "better than a poke in the eye with a burnt stick",
+      "frame": "predicate_adj",
+      "concepts": [
+        "NOT_BAD"
+      ],
+      "origin_file": "idioms.yaml",
+      "selection": "structurally complex",
+      "state": "reviewed",
+      "annotation": {
+        "grammar": {
+          "aspect": "state"
+        }
+      },
+      "positive": "It is better than nothing.",
+      "contrast": "It is not bad at painting.",
+      "decision": "Predicate state; ability-complement uses require a separate sense-boundary review. The ability-complement contrast is already excluded; no broader inference was added. The ability-complement contrast is already excluded; no broader inference was added.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "It is better than a poke in the eye with a burnt stick.",
+          "eligible": [
+            "better-than-a-poke-in-the-eye-pred"
+          ],
+          "readings": [
+            [
+              "NOT_BAD"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "It is not bad at painting.",
+          "eligible": [],
+          "readings": [],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "dicey",
+      "form": "dicey",
+      "frame": "predicate_adj",
+      "concepts": [
+        "DANGEROUS"
+      ],
+      "origin_file": "gapfill.yaml",
+      "selection": "seeded random",
+      "state": "reviewed",
+      "annotation": {
+        "grammar": {
+          "aspect": "state"
+        }
+      },
+      "positive": "The plan is risky.",
+      "contrast": "They analysed the risks.",
+      "decision": "Predicate state; no new complement evidence to declare.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "The plan is dicey.",
+          "eligible": [
+            "dicey"
+          ],
+          "readings": [
+            [
+              "DANGEROUS"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "They analysed the risks.",
+          "eligible": [],
+          "readings": [],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "tighter-than-a-fishs-arse",
+      "form": "tighter than a fish's arse",
+      "frame": "predicate_adj",
+      "concepts": [
+        "STINGY"
+      ],
+      "origin_file": "idioms.yaml",
+      "selection": "seeded random",
+      "state": "reviewed",
+      "annotation": {
+        "grammar": {
+          "aspect": "state"
+        }
+      },
+      "positive": "He is stingy.",
+      "contrast": "The shirt is tight.",
+      "decision": "Predicate stinginess state, not physical tightness.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "He is tighter than a fish's arse.",
+          "eligible": [
+            "tighter-than-a-fishs-arse"
+          ],
+          "readings": [
+            [
+              "STINGY"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "The shirt is tight.",
+          "eligible": [],
+          "readings": [],
+          "rejected": []
+        }
+      }
+    },
+    {
+      "id": "your-shout",
+      "form": "{subj} {be} {poss} shout",
+      "frame": "clause",
+      "concepts": [
+        "SHOUT"
+      ],
+      "origin_file": "gapfill.yaml",
+      "selection": "structurally complex",
+      "state": "reviewed",
+      "annotation": {},
+      "positive": "It is my round.",
+      "contrast": "They bought a round table.",
+      "decision": "Clause keeps subject, copula and possessive; variant binding already rejects missing objects.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "It is my shout.",
+          "eligible": [
+            "your-shout"
+          ],
+          "readings": [
+            [
+              "SHOUT"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "They bought a round table.",
+          "eligible": [],
+          "readings": [
+            [
+              "SHOUT"
+            ]
+          ],
+          "rejected": [
+            [
+              "your-shout",
+              "frame clause cannot fill a vp span"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "wouldnt-shout-shark",
+      "form": "{subj} wouldn't shout if bitten by a shark",
+      "frame": "clause",
+      "concepts": [
+        "STINGY"
+      ],
+      "origin_file": "scraped.yaml",
+      "selection": "seeded random",
+      "state": "reviewed",
+      "annotation": {},
+      "positive": "He is stingy.",
+      "contrast": "He was bitten by a shark.",
+      "decision": "Clause reframes stinginess, not an actual attack; existing compatible predicate conversion supplies subject and tense.",
+      "unresolved": false,
+      "existing_plural": null,
+      "trials": {
+        "positive": {
+          "text": "He wouldn't shout if bitten by a shark.",
+          "eligible": [
+            "wouldnt-shout-shark"
+          ],
+          "readings": [
+            [
+              "STINGY"
+            ]
+          ],
+          "rejected": []
+        },
+        "contrast": {
+          "text": "He was bitten by a shark.",
+          "eligible": [],
+          "readings": [],
+          "rejected": []
+        }
+      }
+    }
+  ],
+  "limits": "Review and annotations are bounded. Positive rendering and negative contrast results are separate; unresolved contrasts are not counted as passing.",
+  "automated_trial_seconds": 0.07578370906412601,
+  "settings": {
+    "level": 5,
+    "vulgarity": 3,
+    "embellishment": 0,
+    "seed": 0,
+    "embedder": "none",
+    "document_type": "custom",
+    "document_config": {
+      "profile": {
+        "phonetic": 0,
+        "substitution": {
+          "idiom": 1,
+          "phrase": 1,
+          "lexical": 1
+        }
+      }
+    }
+  }
+}

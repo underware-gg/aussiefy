@@ -52,7 +52,7 @@ def test_core_concepts_cannot_reintroduce_no_entries(tmp_path, marker):
 def test_eagerness_keeps_its_complement_and_strong_reading(translator, source, expected):
     for seed in range(8):
         result = translator.translate(source, seed=seed, **EVERY_SWAP)
-        assert result.text == expected
+        assert result.text in {expected, expected.replace('keen', 'hanging out')}
         reading = next(r.det for r in result.records if 'EAGER' in r.det.concepts)
         assert reading.intensity == 4
 
@@ -75,8 +75,9 @@ def test_gift_of_the_gab_is_a_fence_not_a_talent_or_present(dictionary):
 def test_hanging_out_terms_keep_their_grammar_and_publisher_weight(dictionary):
     for eid, score in [('hang-out-for', 7), ('hang-out-to', 3)]:
         entry = dictionary.entries[eid]
-        assert entry.concept == ('EAGER',) and entry.frame == 'vp'
-        assert entry.status == 'gate'
+        assert entry.concept == ('EAGER',) and entry.frame == 'predicate_adj'
+        assert entry.form == 'hanging out' and entry.status == 'active'
+        assert entry.grammar.following == (('prep:for',) if eid.endswith('for') else ('infinitive',))
         assert entry.evidence == 'unverified' and entry.attestation.score == score
     tr = Translator(dictionary, lookup_embedder=None)
     result = tr.translate('He is eager.', **EVERY_SWAP)

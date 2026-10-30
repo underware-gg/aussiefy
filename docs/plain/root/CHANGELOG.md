@@ -5,6 +5,14 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Separate source-meaning conditions from output grammar. Shared role evidence rejects adjective-as-noun
+  readings without banning natural compounds. Reviewed context distinguishes remorse, aptitude and
+  unemployment from sympathy, presents and welfare status. Declared boundary, number and state/voice
+  requirements reject incompatible candidates while retaining fitting alternatives and meaning discovery.
+- Enable anticipation “hanging out for/to” with a fitting complement; retain distinct source evidence.
+  Replace 110 grammar fences with measured shared checks, move reviewed lexical-unit exclusions into
+  the central fence list, and retain the 704-case trial suite plus a fixed 20-entry curation pilot.
+
 - Preserve whole-phrase protection when a partial entry overlaps it: “road pavement” no longer becomes
   “road footpath”. Whole-expression entries and words read only as context retain their independent
   readings; lookup also retains the senses overlapping fences ruled out.

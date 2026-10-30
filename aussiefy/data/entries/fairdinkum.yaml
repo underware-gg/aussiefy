@@ -365,6 +365,12 @@
   concept:
   - FINISH_WORK
   frame: vp
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+    not_following:
+    - np
   intensity: 3
   incoherence: 2
   register: current
@@ -1290,6 +1296,10 @@
   concept:
   - VOMIT
   frame: vp
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
   intensity: 3
   incoherence: 3
   register: current
@@ -1744,6 +1754,13 @@
   concept:
   - FLAKE
   frame: np
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+    not_following:
+    - prep:of
+  number: count
   intensity: 3
   incoherence: 3
   register: current
@@ -2019,6 +2036,12 @@
   concept:
   - TALK_ON
   frame: vp
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+    not_following:
+    - np
   intensity: 3
   incoherence: 3
   register: current
@@ -2078,6 +2101,13 @@
   concept:
   - LOOK
   frame: np
+  grammar:
+    following: null
+    aspect: unknown
+    voice: unknown
+    not_following:
+    - prep:of
+  number: count
   intensity: 3
   incoherence: 4
   register: current

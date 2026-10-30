@@ -62,6 +62,8 @@ def test_substitution_class():
 def test_builtin_dictionary_loads_cleanly(dictionary):
     assert len(dictionary.entries) > 200
     assert set(dictionary.warnings) == {
+        "a-public-servant: form 'a public servant' overlaps a phrase fence; check the intended settings",
+        "the-public-service: form 'the public service' overlaps a phrase fence; check the intended settings",
         "down-in-the-dumps: form 'down in the dumps' overlaps a phrase fence; check the intended settings",
         'dogs-breakfast: form "a dog\'s breakfast" overlaps a phrase fence; check the intended settings',
         "this-neck-of-the-woods: form 'this neck of the woods' overlaps a phrase fence; check the intended settings",

@@ -89,9 +89,9 @@ WILD_EXCITEMENT:
 LIVELY_PARTY:
   description: A lively social party, explicitly described as wild, energetic or in full swing.
   triggers:
-    np: ["wild party !=conference|conferences|leader|leaders|member|members|candidate|candidates|delegate|delegates|committee|policy|policies|manifesto|platform|headquarters|politics|planner|planners|planning|game|games|trick|tricks",
-         "lively party !=conference|conferences|leader|leaders|member|members|candidate|candidates|delegate|delegates|committee|policy|policies|manifesto|platform|headquarters|politics|planner|planners|planning|game|games|trick|tricks",
-         "energetic party !=conference|conferences|leader|leaders|member|members|candidate|candidates|delegate|delegates|committee|policy|policies|manifesto|platform|headquarters|politics|planner|planners|planning|game|games|trick|tricks",
+    np: ["wild party",
+         "lively party",
+         "energetic party",
          party in full swing]
 WHOLEHEARTED_ATTEMPT:
   description: Make a serious effort; not suffering hardship or fighting physically.
@@ -374,7 +374,7 @@ EXCELLENT:
   description: Very good, first-rate.
   triggers:
     # "great" also means large or eminent ("a great war", "a great deal", "a great man"); block those senses
-    adj: ["great !big|little|huge|large|war|wars|battle|battles|battle-field|task|deal|many|number|majority|extent|length|distance|sense|care|pains|importance|power|powers|nation|nations|man|men|leader|leaders|depression|wall|lakes|plains|barrier|britain|grandfather|grandmother|aunt|uncle|fire|flood|famine|loss|danger|cause",
+    adj: ["great !big|little|huge|large|battle|battles|battle-field|task|deal|many|number|majority|extent|length|distance|sense|care|pains|importance|power|powers|nation|nations|man|men|leader|leaders|loss|danger|cause",
           "excellent@4", "fantastic@4", "wonderful@4", "terrific@4", "awesome@4",
           # "brilliant" of a person or a mind is clever, and of a light or a colour is bright: neither is beaut
           "brilliant !=young|mind|minds|scientist|scientists|student|students|mathematician|mathematicians|engineer|engineers|coder|coders|programmer|programmers|thinker|thinkers|scholar|scholars|lawyer|lawyers|doctor|doctors|writer|writers|man|men|woman|women|people|person|boy|boys|girl|girls|kid|kids|child|children|light|lights|sunshine|sunlight|sun|white|blue|red|green|yellow|colour|colours|color|colors|flash|star|stars@4",
@@ -426,6 +426,7 @@ MAN:
     np: ["man", "guy", "chap", "bloke"]
 FELLOW_MAN:
   description: The noun "fellow", a man.
+  nominal_roles: [head, possessor]
   # in a report, a policy or a doc "fellow" is nearly always the adjective (fellow Grateful Dead alumni, fellow
   # members), and a multi-word name after it can't be held by a guard
   not_in: [news, official, technical]
@@ -433,7 +434,7 @@ FELLOW_MAN:
     # not the adjective before a noun (fellow alumni, fellow citizens); before a one-word name ("fellow Texans") it
     # is held by FELLOW_BEFORE_NAME. Before a longer name ("fellow Grateful Dead alumni") nothing holds it: a span
     # that holds part of a multi-word name is refused, guards too (DECISIONS.md, needs engine changes)
-    np: ["fellow !=alumni|alumnus|members|member|citizens|citizen|countrymen|students|student|workers|worker|travellers|travelers|traveller|traveler|passengers|soldiers|officers|players|musicians|artists|writers|parishioners|competitors|human|humans|feeling|employees|colleagues|team|band|americans|australians|residents|veterans|believers|scientists|researchers|creatures|sufferers|survivors|inmates|prisoners|delegates|candidates|nominees"]
+    np: ["fellow"]
 WOMAN:
   description: A woman.
   triggers:
@@ -542,7 +543,7 @@ PRESENT:
   triggers:
     # not the fixed compounds (gift card, gift shop, gift tax) or a donation ("a gift of $5m"); a talent ("a gift
     # for music") is held by GIFT_TALENT
-    np: ["gift !=card|cards|shop|shops|tax|taxes|certificate|certificates|voucher|vouchers|aid|economy|horse|of|basket|baskets|registry|policy|policies|rule|rules|exceeding|worth|valued"]
+    np: ["gift !=of|policy|policies|rule|rules|exceeding|worth|valued"]
 UNIVERSITY:
   description: University.
   triggers:
@@ -877,7 +878,7 @@ FIELD:
   not_in: [technical, instructions]   # a form's field, in docs and how-tos alike
   triggers:
     # not a field of study or work, a field trip, a struct's or form's fields
-    np: ["field !of|trip|trips|day|test|tests|goal|goals|work|marshal|hockey|hospital|covered|name|names|value|values|type|types|data|study|studies|research|experience|expertise|engineering|science|sciences|office|offices|notes|guide|manual|level|levels|is|are|in|that|which|for|with|to|(|show|shows|showed|indicate|indicates|suggest|suggests",
+    np: ["field !of|covered|name|names|value|values|type|types|data|study|studies|research|experience|expertise|engineering|science|sciences|level|levels|is|are|in|that|which|for|with|to|(|show|shows|showed|indicate|indicates|suggest|suggests",
          "meadow", "pasture"]
 PEOPLE:
   description: Ordinary people; the public.
@@ -886,7 +887,7 @@ PEOPLE:
     # not bare "people": "punters" took contributors, park staff, colleagues, a nation (the second pass)
     # nor "the public, private or ..." and "the public and private sectors": the public sector (a mark stops the
     # look-ahead, so the comma is named)
-    np: ["the public !sector|sectors|service|servant|servants|interest|record|records|domain|health|holiday|holidays|transport|school|schools|hospital|hospitals|library|libraries|eye|purse|good|square|space|spaces|land|lands|broadcaster|liability|policy|debate|consultation|comment|comments|hearing|private|,|/",
+    np: ["the public !private|,|/",
          "members of the public", "the general public", "ordinary folk", "the masses", "the paying public"]
 STRUGGLERS:
   description: Ordinary working people doing it tough.
@@ -921,7 +922,7 @@ FATHER:
   # are fond but irreverent (dinkum-check round)
   not_in: [news, official, technical]
   triggers:
-    np: ["father", "dad"]
+    np: ["father", "dad", "{poss} father", "{poss} dad"]
 POLITICIAN:
   description: A politician.
   # "the government" in a notice or a policy is the agency and its staff (scammers pretending to be from the
@@ -1110,7 +1111,7 @@ DOLLAR:
   description: A dollar; money loosely.
   triggers:
     # "the buck stops here" is responsibility (a guard ending on the verb would be read as a verb, so it is held here)
-    np: ["dollar !bill|bills|note|notes|sign|signs|store|stores|amount|amounts|value|coin|coins", "buck !=stops|stopped|stop|up"]
+    np: ["dollar !amount|amounts|value", "buck !=stops|stopped|stop|up"]
 SAVELOY:
   description: A saveloy / frankfurt sausage.
   triggers:
@@ -1195,28 +1196,34 @@ FRONT_UP:
     vp: ["present yourself in person to face the music"]
 GIFT_TALENT:
   description: A natural aptitude for something, not a present.
+  source_context:
+    preposition: for
+    argument: nominal
+    heads: [music, number, numbers, maths, mathematics, language, languages, art, sport, singing, dancing, writing, drawing]
+    not_heads: [birthday, christmas, wedding, anniversary, graduation]
+    person: false
   triggers:
     np:
-    - '{subj} {have} a gift for'
-    - has a gift for
-    - have a gift for
-    - had a gift for
-    - having a gift for
-    - a natural gift for
-    - a real gift for
-    - a rare gift for
-    - a special gift for
-    - a great gift for
+    - 'gift ?=for'
+    - 'a natural gift ?=for'
+    - 'a real gift ?=for'
+    - 'a rare gift ?=for'
+    - 'a special gift ?=for'
+    - 'a great gift ?=for'
   plain: a talent
   examples:
   - She has a gift for music.
   - He has a natural gift for numbers.
+  negative_examples:
+  - She has a gift for Mary.
+  - She has a gift for music lovers.
+  - She has a gift for my birthday.
 BRAND_NEW:
   description: Completely new.
   not_in: [technical]   # a term of art in docs
   triggers:
     adj: ["brand new@4", "brand-new@4", "shiny new@4",
-          "new !york|zealand|south|year|years|england|guinea|delhi|orleans|jersey|mexico|hampshire|testament|wave|age|moon|world@2"]
+          "new !south@2"]
 EQUALITY:
   description: Everyone is equal.
   triggers:
@@ -1232,7 +1239,7 @@ ALIVE:
   person: true
   triggers:
     predicate_adj: ["alive", "still alive", "still living"]
-    np: ["the living !room|rooms|area|areas|space|quarters|costs|wage|standard|thing|things|creature|creatures|proof|legend|memory"]
+    np: ["the living !thing|things|creature|creatures|proof|legend|memory"]
 DEAD_PEOPLE:
   plain: "the dead"
   examples:
@@ -1470,7 +1477,7 @@ FOOD:
   # a doc's or a policy's food is a term (food safety rules, food products), not tucker
   not_in: [technical, official]
   triggers:
-    np: ["food !coloring|colouring|safety|poisoning|processor|processors|chain|bank|banks|court|truck|stamps|service|industry|label|labels|allergy|allergies|group|groups|grade|science|handling|supply|waste|storage|packaging|thermometer|additives|dye|dyes|production|prices|security|preparation|contact|temperature|temperatures|item|items|product|products|container|containers|type|types|borne|and",
+    np: ["food !and",
          "provisions"]
 NOSY_PERSON:
   description: A nosy person.
@@ -1517,8 +1524,8 @@ HEART_ORGAN:
     heart is spirit or courage (take heart, showed real heart, a lot of heart), which ticker does not mean.
   triggers:
     # literal physical modifiers; "brave", "big", "strong" or "kind" hearts are spirit
-    np: ["?<=weak|healthy|failing|dodgy|damaged|enlarged|diseased|beating|pounding|racing|thumping heart !attack|attacks|disease|failure|surgery|rate|of|and|felt|sank|out|set",
-         "?<=my|your|his|her|its|our|their|the|a|an|this|that|whose heart !attack|attacks|disease|failure|surgery|rate|of|and|felt|sank|out|set"]
+    np: ["?<=weak|healthy|failing|dodgy|damaged|enlarged|diseased|beating|pounding|racing|thumping heart !of|and|felt|sank|out|set",
+         "?<=my|your|his|her|its|our|their|the|a|an|this|that|whose heart !of|and|felt|sank|out|set"]
 HEART_SPIRIT:
   plain: "compassion, courage or wholehearted effort"
   examples:
@@ -1600,20 +1607,25 @@ AWFUL:
     predicate_adj: ["terrible", "awful", "dreadful", "appalling", "horrendous"]
 FEEL_SORRY:
   description: Remorse or regret about something one has done, not illness or poor quality.
+  source_context:
+    preposition: about
+    argument: ing
+    control: subject
+    actions: ['take {obj}', lie, 'steal {np}', 'cheat {obj}', 'hurt {obj}']
   triggers:
     vp:
-    - feel terrible about
-    - feel awful about
-    - feel bad about
-    - feel terrible for
-    - feel awful for
-    - feel terrible that
-    - feel awful that
-    - feel dreadful about
+    - 'feel terrible ?=about|for|that'
+    - 'feel awful ?=about|for|that'
+    - 'feel bad ?=about|for|that'
+    - 'feel dreadful ?=about|for|that'
   plain: remorse
   examples:
   - I feel terrible about taking it.
   - She felt awful about lying.
+  negative_examples:
+  - I feel terrible for my neighbour.
+  - She felt awful about his illness.
+  - I feel bad about seeing her cry.
 BIG_STRONG:
   description: Very big and solidly built.
   triggers:
@@ -1784,11 +1796,12 @@ UNEMPLOYED:
     - unemployed
     - out of work
     - jobless
-    - on welfare
   plain: out of work
   examples:
   - She is unemployed.
   - He is out of work.
+  negative_examples:
+  - She is on welfare.
 DODGY:
   description: Of dubious honesty or quality.
   person: true
@@ -1981,7 +1994,7 @@ DINNER:
   # tea is the meal at home: a policy's or a report's dinner is a client's or a formal one
   not_in: [official, technical, news]
   triggers:
-    np: ["dinner !=party|parties|jacket|jackets|dance|guests|guest|meeting|meetings|theatre|theater|service|in|at", supper,
+    np: ["dinner !=guests|guest|meeting|meetings|service|in|at", supper,
          the evening meal]
 ROUGH_PATCH:
   description: A run of bad luck or hard times.
@@ -2257,8 +2270,8 @@ SWAGMAN:
 VAGRANT:
   description: A tramp or vagrant.
   triggers:
-    np: [hobo, vagrant, "tramp !=steamer|steamers|ship|ships|stamp|stamps|iron", a hobo, a vagrant,
-         "a tramp !=steamer|steamers|ship|ships|stamp|stamps|iron"]
+    np: [hobo, vagrant, "tramp", a hobo, a vagrant,
+         "a tramp"]
 COOLIBAH:
   description: The named coolibah/coolabah eucalypt group, not every waterside gum.
   triggers:
@@ -2446,7 +2459,7 @@ CALL_OUT:
 CASE_OF_BEER:
   description: An explicitly twenty-four-unit package of beer, rather than a package with an unknown count.
   triggers:
-    np: [a 24-pack of beer !=bottle|bottles|label|labels, a twenty-four pack of beer !=bottle|bottles|label|labels,
+    np: ["a 24-pack of beer", "a twenty-four pack of beer",
       a case of 24 beers, a carton of 24 beers]
 SET_DOG_ON:
   description: Set a dog on someone.
@@ -2628,7 +2641,7 @@ PROMOTE:
 STATION:
   description: A large pastoral property (ranch).
   triggers:
-    np: [ranch !dressing|style|slider|sliders|house|hand|hands, a ranch, the ranch, a cattle ranch, a sheep ranch]
+    np: ["ranch !style|slider|sliders|house|hand|hands", a ranch, the ranch, a cattle ranch, a sheep ranch]
 STOCK_HORSE:
   description: A horse trained to work livestock.
   triggers:
@@ -2636,7 +2649,7 @@ STOCK_HORSE:
 HAVE_BEER:
   description: Have a beer.
   triggers:
-    vp: ["have a beer !belly|bellies|gut|guts|garden|gardens", grab a beer, down a beer]   # not "has a beer belly"
+    vp: ["have a beer", grab a beer, down a beer]   # not "has a beer belly"
 REAL_STORY:
   description: Asking for the truth of a matter.
   triggers:
@@ -2684,7 +2697,7 @@ SHEEP:
 CLOTHES:
   description: Clothes; what one is wearing.
   triggers:
-    np: [clothes !line|lines|peg|pegs|horse|hanger|hangers|basket|baskets|dryer|dryers|shop|shops|store|stores|brush|rack|racks]
+    np: ["clothes"]
 FARM_DAM:
   description: A farm pond or stock pond (an Australian "dam").
   triggers:
@@ -2769,7 +2782,7 @@ MOTHER:
 GRANDMOTHER:
   description: One's grandmother.
   triggers:
-    np: [grandma, grandmother, granny !flat|flats|smith|smiths|knot|knots]
+    np: [grandma, grandmother, "granny"]
 GUESS_RIGHT:
   description: Guess or foresee something.
   triggers:
@@ -2827,7 +2840,7 @@ WOODPILE:
 PHARMACY:
   description: A retail pharmacy (the shop, not the academic field).
   triggers:
-    np: [drugstore, drug store, pharmacy !school|schools|degree|degrees|student|students|technician|technicians|benefits|board|course|courses|faculty|studies|practice|law|program|programs|programme,
+    np: [drugstore, drug store, "pharmacy",
       retail pharmacy, community pharmacy]
 DISCARD:
   description: Throw something away; get rid of it as rubbish.
@@ -2892,7 +2905,7 @@ MAGISTRATE:
 HIKING:
   description: Recreational walking in natural country.
   triggers:
-    np: [hiking !trail|trails|path|paths]
+    np: ["hiking"]
     vp: [go hiking, went hiking, going hiking]
 HOUSEHOLD_BUDGET:
   description: Personal or household finances.
@@ -2923,16 +2936,16 @@ CLOGGED:
 MEAL:
   description: A (good, filling) meal, as a countable noun.
   triggers:
-    np: [a good meal, a hearty meal, a decent meal, a square meal, a big meal, a filling meal, a quick meal !plan|plans|kit|kits|prep|deal|deals]
+    np: [a good meal, a hearty meal, a decent meal, a square meal, a big meal, a filling meal, "a quick meal"]
 GET_DUMPED:
   description: Be dumped, rejected or sacked (passive of DISMISS).
   triggers:
-    vp: [get dumped, got dumped, get ditched, got ditched, get the boot !camp|camps, get the elbow, get the push,
+    vp: [get dumped, got dumped, get ditched, got ditched, "get the boot", get the elbow, get the push,
       get the sack, got the sack, get sacked, got sacked]
 COMMON_SENSE:
   description: Practical good sense, savvy (as a mass noun).
   triggers:
-    np: [common sense !approach|approaches|solution|solutions|reform|reforms|measure|measures|rule|rules|policy|policies|test|view|thing,
+    np: ["common sense",
       gumption, horse sense, street smarts]
 FOIL:
   description: Aluminium foil for cooking and wrapping food.
@@ -2959,7 +2972,7 @@ BOGAN:
 TELLTALE:
   description: Someone who tells on others to an authority; a snitch (the noun).
   triggers:
-    np: [a snitch, a tattletale, a tattle-tale, a telltale !sign|signs|mark|marks|trace|traces|heart|smell|clue|clues]
+    np: [a snitch, a tattletale, a tattle-tale, "a telltale"]
 SOME_BLOKE:
   description: Some random person whose name doesn't matter (some guy, this random guy).
   triggers:
@@ -3071,7 +3084,7 @@ WINE_CASK:
 CHEAP_WINE:
   description: Cheap, ordinary wine.
   triggers:
-    np: [cheap wine !list|lists|bar|bars|glass|glasses|shop|shops|store|stores, rotgut wine]
+    np: ["cheap wine", rotgut wine]
 GOOD_WINE:
   description: A good wine, something worth drinking.
   triggers:
@@ -3087,7 +3100,7 @@ BRING_A_PLATE:
 BIKIE:
   description: A member of a motorcycle gang; a biker.
   triggers:
-    np: [biker !shorts|jacket|jackets|boots|chick|chicks|bar|bars, biker gang, a motorcycle gang member]
+    np: ["biker", biker gang, a motorcycle gang member]
 SOAPBOX_CART:
   description: A homemade unpowered cart raced downhill.
   triggers:
@@ -3238,7 +3251,7 @@ INCOMPETENT:
 UTTER:
   description: Complete, out-and-out (before a noun, as in an utter disaster).
   triggers:
-    adj: [utter, out-and-out, absolute !value|values|zero|majority|terms|power|powers|pitch|humidity|path|paths|address|monarchy|monarch|monarchs|minimum|maximum|temperature|magnitude|threshold|risk|number|numbers|despotism|tyranny|tyrant|tyrants|rule|ruler|rulers|authority|control|sovereignty|dictatorship|dictator|discretion|freedom|liberty|right|rights|silence|priority|necessity|requirement|limit|limits|position|location|reference|error|deviation|advantage|poverty|truth|confidence|trust|ownership|immunity|ban|bans|privilege|and]
+    adj: [utter, out-and-out, "absolute !terms|power|powers|minimum|maximum|threshold|risk|number|numbers|despotism|tyranny|tyrant|tyrants|rule|ruler|rulers|authority|control|sovereignty|dictatorship|dictator|discretion|freedom|liberty|right|rights|silence|priority|necessity|requirement|limit|limits|position|location|reference|confidence|trust|ownership|ban|bans|privilege|and"]
 NOT_NAIVE:
   description: Not gullible; not easily fooled.
   triggers:
@@ -3329,7 +3342,7 @@ PATHETIC:
 A_LIE:
   description: A lie, a fib (the noun).
   triggers:
-    np: [a fib, a lie !detector|detectors|down|in|to]
+    np: [a fib, "a lie !down|in|to"]
 DONT_FOOL_ME:
   description: Don't try to fool me; do you take me for a fool?
   triggers:
@@ -3505,7 +3518,7 @@ STAGGER_SOMEONE:
 FRIDGE:
   description: A refrigerator (the appliance, not a refrigerated truck or rail car).
   triggers:
-    np: [refrigerator !=car|cars|truck|trucks|van|vans|ship|ships]
+    np: ["refrigerator"]
 GET_ON_THE_PHONE:
   description: Get on the phone, ring someone up.
   triggers:
@@ -3531,7 +3544,7 @@ MEDAL_AWARD:
   # an award in official or technical prose is a pay agreement or a contract (the industrial award)
   not_in: [official, technical]
   triggers:
-    np: ["a medal !=of", "an award !=of|ceremony|ceremonies|winning|winner|winners|rate|rates|wage|wages"]
+    np: ["a medal !=of", "an award !=of"]
 TOLERATE:
   description: Tolerate, put up with something unwelcome.
   triggers:
@@ -3541,7 +3554,7 @@ ELDERLY:
   # casual for a group of people: not in a report, a notice, a doc or a policy
   not_in: [news, official, technical, instructions]
   triggers:
-    np: ["the elderly", "elderly people", "old people", "older people", "the aged !=care|pension|pensions|pensioner|pensioners"]
+    np: ["the elderly", "elderly people", "old people", "older people", "the aged"]
 EMPHATIC_REFUSAL:
   description: An emphatic refusal or categorical denial.
   triggers:

@@ -74,9 +74,39 @@ Generic/imported words sit low; thick vernacular and opaque local idioms sit hig
 its `vulgarity`. `status: gate` is a curator's manual gate; `--unlock all` can lift it. `omit` is never offered,
 even when unlocked. The `slur` flag requires `omit`; `untagged` requires a non-active status.
 
-The sourced “hang out for/to” verb phrases use that manual gate while their output-complement grammar
-is reviewed. Inspect them with `lookup("eager", include_gated=True)` for writer use. Their gate is
-separate from their evidence labels; do not treat them as bare-adjective replacements.
+The sourced anticipation terms use `hanging out` as a participial predicate. Their declared grammar
+requires an established `for` + noun phrase or `to` + action: “She was eager for the weekend” can become
+“She was hanging out for the weekend”. The existing verb carries tense and the complement stays in place.
+Bare “He is eager” can use keen; social hanging out and thirst remain distinct. Existing abstention on
+negated predicate readings is unchanged. Evidence for the `for` and `to` uses stays separate.
+
+### Output grammar
+
+An entry can declare the sentence position its whole output needs:
+
+```yaml
+grammar:
+  following: [infinitive, 'prep:for']
+  aspect: state
+```
+
+`following` accepts `none`, `adverb`, `np`, `content`, `infinitive`, `verb_base` and `prep:<word>`.
+The boundary follows the **whole consumed phrase**, including its captured arguments. Prepositions need
+an established noun-phrase object; `to` + a base verb is an infinitive. `content` also accepts a noun phrase.
+`not_following` lists known incompatible shapes, for example `[np]` for an intransitive whole expression.
+`nominal_roles` can require `head`, `modifier` or `possessor`. `aspect` is `state`, `event`, `either` or
+`unknown`; `voice` is `active`, `passive`, `either` or `unknown`.
+
+An omitted annotation, `following: null`, or an `unknown` field adds no requirement. A declared
+requirement whose source fit is uncertain excludes that candidate; other fitting candidates remain
+available. If none fits, the words remain as written. This does not erase the recognised meaning or
+promise that an isolated lookup result can replace a sentence span. Boundary and verbal evidence are
+bounded grammatical checks, not a complete parse; avoid speculative whitelists of every possible adjunct.
+
+`number` is independent: `any` (default), `count`, `mass` or `plural`. Existing mass/plural agreement
+checks remain; `count` additionally rejects an explicitly mass phrase introduced by much. State and
+voice requirements prevent an active-event expression such as “pull the pin” from filling “is retired”.
+They do not block an unannotated passive-compatible expression such as “was chucked”.
 
 Origin, use and meaning are separate from that manual status. `reads_as` other than `australian` or `general`,
 `australian_use: uncommon`, or `doubtful_definition: true` keeps a term out of automatic choices. These apply
@@ -215,6 +245,40 @@ sentences that read as that meaning; a test proves every bundled example detects
 with no word yet needs both, since [exploration](exploring.md#meanings-without-a-word-yet) lists them:
 the loader warns when one lacks them.
 
+A source concept can declare `nominal_roles: [head, possessor]` when its noun meaning excludes an
+attributive use: a fellow differs from fellow members. This is a meaning condition, separate from the
+output entry's grammar. Shared role evidence combines tags, determiners, possessives, adjective roots and
+predicate position. It permits ordinary noun modifiers and possessors: footy match, choccy bickies and nan's
+bed. No default ban on compounds applies. `grammar.yaml` supplements adjective roots and comparative
+predicate verbs where the dictionary patterns do not already provide them.
+An established noun head or possessor also prevents the older partial-adjective-phrase check from
+rejecting a complete noun phrase before an ordinary finite verb. A true modifier, such as the poor in
+the poor old minister, retains that protection.
+
+Reviewed contextual meanings can use `source_context`:
+
+```yaml
+source_context:
+  preposition: for
+  argument: nominal
+  heads: [music, numbers, singing]
+  person: false
+```
+
+`argument` is `np`, `ing` or `nominal` (noun phrase or gerund). Optional lowercase `heads` constrain the
+argument head; `not_heads` supplies reviewed contradictory heads, such as birthday for the aptitude sense
+of gift. An unlisted head remains uncertain rather than automatically becoming a present. Positive and
+negative head lists must not overlap. `person` uses the existing person/name evidence. For a gerund, `control: subject` requires
+a bound source subject, and `actions` can list reviewed literal/slot VP patterns. For example, remorse
+requires an established own-action context; sympathy does not establish it. Talent needs aptitude evidence;
+a gift for a person does not establish it, and being on welfare does not establish unemployment.
+
+These conditions distinguish supported, contradicted and uncertain readings. Contradicted senses are
+excluded; uncertain contexts use the single holding concept to prevent a misleading component fallback.
+Context arguments are evidence, not automatically consumed words. Lookup and translation share the reader
+and its rejected senses. These deliberately bounded checks do not infer arbitrary domains or agency.
+`negative_examples` records reviewed contrasts alongside existing positive `examples`; keep both executable.
+
 Phrase protections live in `fences.yaml`, not in concepts or dialect self-swaps. Every fence has a
 `phrase`, `frame`, `kind` (`set_phrase`, `other_sense` or `grammar`), plain `reason`, and explicit `scope`:
 
@@ -321,6 +385,8 @@ compiles as a pattern. It collects every error, with file and id, and raises one
 genre, riffs and entries files must be present; malformed YAML and missing files are collected
 with the other errors. String-list fields require strings, `person` and `stretch` require real booleans,
 and profile garnish keys must name known placements. The guide validates its own structure and dial keys.
+Validation also reports output-grammar coverage by field. A coverage count measures authored annotations,
+not certified sentence accuracy. Unknown fields remain visible as incomplete curation.
 
 ## Extending it
 

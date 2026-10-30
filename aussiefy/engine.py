@@ -22,6 +22,7 @@ from .loader import load_dictionary
 from .imagery import image_offers
 from .dialect import text_english
 from .genre import resolve_document, Embellishment, Genre, form_removes
+from .grammar import GrammarEvidence, grammar_evidence, grammar_problem
 from .protected import Masked, protected_runs
 from .model import Dictionary
 from .policy import Effective, Policy, envelope, pick_form, resolve, roll, theme_permissions
@@ -437,6 +438,8 @@ class Translator:
         concepts, where it has them to hand; candidates passes over the rest)."""
         eligible, rejected = candidates(det, self.dictionary.idioms if entries is None else entries, eff, state.entry_uses,
                                         self.dictionary.person_concepts, self.dictionary.person_nouns, mood=run.mood)
+        grammar = grammar_evidence((c.entry.grammar for c in eligible), det, sent.tokens, sent.tags,
+                                   complete=sent.complete)
         keep = []
         for c in eligible:
             c.semantic_effects = mapping_effects(c.entry, det,
@@ -444,7 +447,7 @@ class Translator:
                 quantity_approximation=run.embellishment.quantity_approximation)
             reason = (semantic_rejection(c.entry, narrator_opinion=run.embellishment.narrator_opinion,
                       quantity_approximation=run.embellishment.quantity_approximation, effects=c.semantic_effects)
-                      or _span_rejection(c, det, sent.tokens, sent.tags, taken)
+                      or _span_rejection(c, det, sent.tokens, sent.tags, taken, complete=sent.complete, grammar=grammar)
                       or _genre_rejection(c, run, self.dictionary.neutral_person_concepts))
             if reason:
                 rejected.append((c.entry, reason))
@@ -1219,7 +1222,8 @@ def _genre_rejection(c: Candidate, run: "_Run", neutral_people: frozenset[str]) 
     return None
 
 
-def _span_rejection(c: Candidate, det: Detection, toks: list[Token], tags: list[str], taken: set[int]) -> str | None:
+def _span_rejection(c: Candidate, det: Detection, toks: list[Token], tags: list[str], taken: set[int],
+                    *, complete: bool = True, grammar: GrammarEvidence | None = None) -> str | None:
     """Why a candidate can't go in this span: it would overlap another swap, a noun phrase goes on past it, it
     brings a determiner the phrase has, or its number doesn't fit."""
     s, e = replacement_span(c.entry, det, toks)
@@ -1230,7 +1234,8 @@ def _span_rejection(c: Candidate, det: Detection, toks: list[Token], tags: list[
     if c.entry.frame == "np" and c.entry.form.lower().startswith("some ") and toks[det.start].norm not in DETERMINERS \
             and after_determiner(toks, det.start):
         return "brings its own 'some', but the phrase already has a determiner"
-    return number_problem(c.entry, det, toks, tags)
+    return number_problem(c.entry, det, toks, tags) or grammar_problem(c.entry, det, toks, tags,
+        complete=complete, evidence=grammar)
 
 
 def _narrow(keep: list[Candidate], rejected: list, variety: int, state: TextState) -> list[Candidate]:

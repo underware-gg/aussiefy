@@ -1,4 +1,9 @@
 # Frame-checker vocabulary. Person nouns and adjective senses are data, not slang in engine code.
+# Adjective roots not already supplied by a dictionary adjective pattern. They establish word class,
+# not meaning: a noun use such as "a cooler" remains a noun.
+adjectives: [cool, dry, wet, cloudy, windy, calm]
+# Copular uses consulted only for comparative word-class evidence, not new predicate rewrites.
+comparative_predicates: [keep, grow, turn, run]
 person_nouns:
 - anybody
 - anyone

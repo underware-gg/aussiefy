@@ -9,6 +9,14 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Separate source\-meaning conditions from output grammar. Shared role evidence rejects adjective\-as\-noun
+  readings without banning natural compounds. Reviewed context distinguishes remorse, aptitude and
+  unemployment from sympathy, presents'n welfare status. Declared boundary, number and state/voice
+  requirements reject incompatible candidates while retaining fitting alternatives'n meaning discovery.
+- Enable anticipation “hanging out for/to” with a fittin' complement; retain distinct source evidence.
+  Replace 110 grammar fences with measured shared checks, move reviewed lexical\-unit exclusions into
+  the central fence list, and retain the 704\-case trial suite plus a fixed 20\-entry curation pilot.
+
 - Preserve whole\-phrase protection when a partial entry overlaps it: “road pavement” no longer becomes
   “road footpath”. Whole\-expression entries'n words read only as context retain their independent
   readings; lookup also retains the senses overlappin' fences ruled out.
@@ -306,7 +314,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 - Review the original seed listicle, add ten curated expressions with precise senses, and retain a complete
   decision ledger. Honour declared HTML encodings during acquisition without overriding explicit HTTP charsets.
 - Preserve outer auxiliaries'n question grammar, distinguish perfect\-have from possession, and retain the
-  force of `shall`. Keep restless chucking, object\-taking pull the pin, evidentiary establish'n wholehearted devotion
+  force of `shall`. Keep restless chucking, object\-taking chuck it in, evidentiary establish'n wholehearted devotion
   separate from misleading slang senses. Add data\-owned complete\-verb guards'n strip pattern annotations
   consistently before language matching'n model training.
 - Add reviewed contextual imagery, configurable exaggeration/association defaults, and writer\-only
@@ -408,7 +416,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 - **Dinkum\-check dictionary round** (`research/dinkum-check-round-2026-10-14/DECISIONS.md`): 67 rows from the
   check's yarn agents reviewed. New: stuff up, stuff {obj} up, a stuff\-up, under the pump \(of a person\), not know
-  someone from a bar of soap, spitting \(light rain\), a swag of; pull the pin takes pulling the pin, all over the shop
+  someone from a bar of soap, spitting \(light rain\), a swag of; pull the pin takes retirin', all over the shop
   `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Wrong senses
   fixed in data: heaps for counted heaps, every bloke'n his dog and old fella outta the formal genres, littlie
   for a policy's kid, the whole box'n dice for `"everything from"`; rain only for the weather's `"it"` (not fans

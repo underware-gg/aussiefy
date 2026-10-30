@@ -1,0 +1,5691 @@
+{
+  "version": 1,
+  "new_fences": [
+    {
+      "phrase": "party candidate|candidates|committee|conference|conferences|delegate|delegates|game|games|headquarters|leader|leaders|manifesto|member|members|planner|planners|planning|platform|policies|policy|politics|trick|tricks",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "great aunt|barrier|britain|depression|famine|fire|flood|grandfather|grandmother|lakes|plains|uncle|wall|war|wars",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "gift aid|basket|baskets|card|cards|certificate|certificates|economy|horse|registry|shop|shops|tax|taxes|voucher|vouchers",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "field day|goal|goals|guide|hockey|hospital|manual|marshal|notes|office|offices|test|tests|trip|trips|work",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "public broadcaster|comment|comments|consultation|debate|domain|eye|good|health|hearing|holiday|holidays|hospital|hospitals|interest|land|lands|liability|libraries|library|policy|purse|record|records|school|schools|sector|sectors|servant|servants|service|space|spaces|square|transport",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "dollar bill|bills|coin|coins|note|notes|sign|signs|store|stores",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Dollar belongs to the named currency object or shop expression here."
+    },
+    {
+      "phrase": "new age|delhi|england|guinea|hampshire|jersey|mexico|moon|orleans|testament|wave|world|year|years|york|zealand",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "living area|areas|costs|quarters|room|rooms|space|standard|wage",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Living is part of the named place, cost or standard expression, rather than a group of living people."
+    },
+    {
+      "phrase": "food additives|allergies|allergy|bank|banks|borne|chain|coloring|colouring|contact|container|containers|court|dye|dyes|grade|group|groups|handling|industry|item|items|label|labels|packaging|poisoning|preparation|prices|processor|processors|product|production|products|safety|science|security|service|stamps|storage|supply|temperature|temperatures|thermometer|truck|type|types|waste",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "heart attack|attacks|disease|failure|rate|surgery",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Heart belongs to the medical expression here; preserve the expression as a unit."
+    },
+    {
+      "phrase": "dinner dance|jacket|jackets|parties|party|theater|theatre",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Dinner belongs to this named social occasion, clothing or entertainment expression."
+    },
+    {
+      "phrase": "tramp iron|ship|ships|stamp|stamps|steamer|steamers",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Tramp belongs to a ship, mark or tool expression here, not a wandering person."
+    },
+    {
+      "phrase": "ranch dressing",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Ranch dressing names a food, not a rural property."
+    },
+    {
+      "phrase": "clothes basket|baskets|brush|dryer|dryers|hanger|hangers|horse|line|lines|peg|pegs|rack|racks|shop|shops|store|stores",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "granny flat|flats|knot|knots|smith|smiths",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Granny belongs to a dwelling, apple name or knot expression here, not an independent grandmother reference."
+    },
+    {
+      "phrase": "hiking path|paths|trail|trails",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Hiking describes the trail or path here, rather than naming a walking activity independently."
+    },
+    {
+      "phrase": "meal deal|deals|kit|kits|plan|plans|prep",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Meal belongs to the named planning, preparation or purchase expression here."
+    },
+    {
+      "phrase": "boot camp|camps",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Boot camp names a training programme; boot is not a dismissal here."
+    },
+    {
+      "phrase": "wine bar|bars|glass|glasses|list|lists|shop|shops|store|stores",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Wine modifies a named venue, object or list here; the phrase does not name the drink alone."
+    },
+    {
+      "phrase": "biker bar|bars|boots|chick|chicks|jacket|jackets|shorts",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Biker modifies the named clothing, person or venue here, rather than naming a motorcycle rider independently."
+    },
+    {
+      "phrase": "lie detector|detectors",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Lie detector names a device, rather than an independent falsehood."
+    },
+    {
+      "phrase": "refrigerator car|cars|ship|ships|truck|trucks|van|vans",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Refrigerator describes a refrigerated vehicle here, rather than a household appliance."
+    },
+    {
+      "phrase": "aged care|pension|pensioner|pensioners|pensions",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": [
+          "news",
+          "official",
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Aged belongs to the named care or pension expression here, rather than naming older people as a group."
+    },
+    {
+      "phrase": "beer bottle|bottles|label|labels",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Beer describes bottles or labels here; the expression does not name the drink alone."
+    },
+    {
+      "phrase": "beer bellies|belly|garden|gardens|gut|guts",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Beer belongs to a body or place expression here; it does not independently name a drink."
+    },
+    {
+      "phrase": "pharmacy benefits|board|course|courses|degree|degrees|faculty|law|practice|program|programme|programs|school|schools|student|students|studies|technician|technicians",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "common sense approach|approaches|measure|measures|policies|policy|reform|reforms|rule|rules|solution|solutions|test|thing|view",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "telltale clue|clues|heart|mark|marks|sign|signs|smell|trace|traces",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Telltale describes a sign or clue here, rather than naming a person who tells on someone."
+    },
+    {
+      "phrase": "absolute address|advantage|deviation|error|humidity|immunity|magnitude|majority|monarch|monarchs|monarchy|path|paths|pitch|poverty|temperature|truth|value|values|zero",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "award ceremonies|ceremony|rate|rates|wage|wages|winner|winners|winning",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "dialect": [],
+        "meanings": true,
+        "not_in": [
+          "official",
+          "technical"
+        ]
+      },
+      "reason": "Award belongs to the named ceremony, recipient or employment expression here, rather than an independent prize."
+    }
+  ],
+  "changes": [
+    {
+      "origin": "concept:LIVELY_PARTY",
+      "concept": "LIVELY_PARTY",
+      "before": "wild party !=conference|conferences|leader|leaders|member|members|candidate|candidates|delegate|delegates|committee|policy|policies|manifesto|platform|headquarters|politics|planner|planners|planning|game|games|trick|tricks",
+      "after": "wild party",
+      "moved": [
+        "candidate",
+        "candidates",
+        "committee",
+        "conference",
+        "conferences",
+        "delegate",
+        "delegates",
+        "game",
+        "games",
+        "headquarters",
+        "leader",
+        "leaders",
+        "manifesto",
+        "member",
+        "members",
+        "planner",
+        "planners",
+        "planning",
+        "platform",
+        "policies",
+        "policy",
+        "politics",
+        "trick",
+        "tricks"
+      ],
+      "residual": [],
+      "reach_before": 1,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:LIVELY_PARTY",
+      "concept": "LIVELY_PARTY",
+      "before": "lively party !=conference|conferences|leader|leaders|member|members|candidate|candidates|delegate|delegates|committee|policy|policies|manifesto|platform|headquarters|politics|planner|planners|planning|game|games|trick|tricks",
+      "after": "lively party",
+      "moved": [
+        "candidate",
+        "candidates",
+        "committee",
+        "conference",
+        "conferences",
+        "delegate",
+        "delegates",
+        "game",
+        "games",
+        "headquarters",
+        "leader",
+        "leaders",
+        "manifesto",
+        "member",
+        "members",
+        "planner",
+        "planners",
+        "planning",
+        "platform",
+        "policies",
+        "policy",
+        "politics",
+        "trick",
+        "tricks"
+      ],
+      "residual": [],
+      "reach_before": 1,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:LIVELY_PARTY",
+      "concept": "LIVELY_PARTY",
+      "before": "energetic party !=conference|conferences|leader|leaders|member|members|candidate|candidates|delegate|delegates|committee|policy|policies|manifesto|platform|headquarters|politics|planner|planners|planning|game|games|trick|tricks",
+      "after": "energetic party",
+      "moved": [
+        "candidate",
+        "candidates",
+        "committee",
+        "conference",
+        "conferences",
+        "delegate",
+        "delegates",
+        "game",
+        "games",
+        "headquarters",
+        "leader",
+        "leaders",
+        "manifesto",
+        "member",
+        "members",
+        "planner",
+        "planners",
+        "planning",
+        "platform",
+        "policies",
+        "policy",
+        "politics",
+        "trick",
+        "tricks"
+      ],
+      "residual": [],
+      "reach_before": 1,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:EXCELLENT",
+      "concept": "EXCELLENT",
+      "before": "great !big|little|huge|large|war|wars|battle|battles|battle-field|task|deal|many|number|majority|extent|length|distance|sense|care|pains|importance|power|powers|nation|nations|man|men|leader|leaders|depression|wall|lakes|plains|barrier|britain|grandfather|grandmother|aunt|uncle|fire|flood|famine|loss|danger|cause",
+      "after": "great !big|little|huge|large|battle|battles|battle-field|task|deal|many|number|majority|extent|length|distance|sense|care|pains|importance|power|powers|nation|nations|man|men|leader|leaders|loss|danger|cause",
+      "moved": [
+        "aunt",
+        "barrier",
+        "britain",
+        "depression",
+        "famine",
+        "fire",
+        "flood",
+        "grandfather",
+        "grandmother",
+        "lakes",
+        "plains",
+        "uncle",
+        "wall",
+        "war",
+        "wars"
+      ],
+      "residual": [
+        "big",
+        "little",
+        "huge",
+        "large",
+        "battle",
+        "battles",
+        "battle-field",
+        "task",
+        "deal",
+        "many",
+        "number",
+        "majority",
+        "extent",
+        "length",
+        "distance",
+        "sense",
+        "care",
+        "pains",
+        "importance",
+        "power",
+        "powers",
+        "nation",
+        "nations",
+        "man",
+        "men",
+        "leader",
+        "leaders",
+        "loss",
+        "danger",
+        "cause"
+      ],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:PRESENT",
+      "concept": "PRESENT",
+      "before": "gift !=card|cards|shop|shops|tax|taxes|certificate|certificates|voucher|vouchers|aid|economy|horse|of|basket|baskets|registry|policy|policies|rule|rules|exceeding|worth|valued",
+      "after": "gift !=of|policy|policies|rule|rules|exceeding|worth|valued",
+      "moved": [
+        "aid",
+        "basket",
+        "baskets",
+        "card",
+        "cards",
+        "certificate",
+        "certificates",
+        "economy",
+        "horse",
+        "registry",
+        "shop",
+        "shops",
+        "tax",
+        "taxes",
+        "voucher",
+        "vouchers"
+      ],
+      "residual": [
+        "of",
+        "policy",
+        "policies",
+        "rule",
+        "rules",
+        "exceeding",
+        "worth",
+        "valued"
+      ],
+      "reach_before": 1,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:FIELD",
+      "concept": "FIELD",
+      "before": "field !of|trip|trips|day|test|tests|goal|goals|work|marshal|hockey|hospital|covered|name|names|value|values|type|types|data|study|studies|research|experience|expertise|engineering|science|sciences|office|offices|notes|guide|manual|level|levels|is|are|in|that|which|for|with|to|(|show|shows|showed|indicate|indicates|suggest|suggests",
+      "after": "field !of|covered|name|names|value|values|type|types|data|study|studies|research|experience|expertise|engineering|science|sciences|level|levels|is|are|in|that|which|for|with|to|(|show|shows|showed|indicate|indicates|suggest|suggests",
+      "moved": [
+        "day",
+        "goal",
+        "goals",
+        "guide",
+        "hockey",
+        "hospital",
+        "manual",
+        "marshal",
+        "notes",
+        "office",
+        "offices",
+        "test",
+        "tests",
+        "trip",
+        "trips",
+        "work"
+      ],
+      "residual": [
+        "of",
+        "covered",
+        "name",
+        "names",
+        "value",
+        "values",
+        "type",
+        "types",
+        "data",
+        "study",
+        "studies",
+        "research",
+        "experience",
+        "expertise",
+        "engineering",
+        "science",
+        "sciences",
+        "level",
+        "levels",
+        "is",
+        "are",
+        "in",
+        "that",
+        "which",
+        "for",
+        "with",
+        "to",
+        "(",
+        "show",
+        "shows",
+        "showed",
+        "indicate",
+        "indicates",
+        "suggest",
+        "suggests"
+      ],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:PEOPLE",
+      "concept": "PEOPLE",
+      "before": "the public !sector|sectors|service|servant|servants|interest|record|records|domain|health|holiday|holidays|transport|school|schools|hospital|hospitals|library|libraries|eye|purse|good|square|space|spaces|land|lands|broadcaster|liability|policy|debate|consultation|comment|comments|hearing|private|,|/",
+      "after": "the public !private|,|/",
+      "moved": [
+        "broadcaster",
+        "comment",
+        "comments",
+        "consultation",
+        "debate",
+        "domain",
+        "eye",
+        "good",
+        "health",
+        "hearing",
+        "holiday",
+        "holidays",
+        "hospital",
+        "hospitals",
+        "interest",
+        "land",
+        "lands",
+        "liability",
+        "libraries",
+        "library",
+        "policy",
+        "purse",
+        "record",
+        "records",
+        "school",
+        "schools",
+        "sector",
+        "sectors",
+        "servant",
+        "servants",
+        "service",
+        "space",
+        "spaces",
+        "square",
+        "transport"
+      ],
+      "residual": [
+        "private",
+        ",",
+        "/"
+      ],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:DOLLAR",
+      "concept": "DOLLAR",
+      "before": "dollar !bill|bills|note|notes|sign|signs|store|stores|amount|amounts|value|coin|coins",
+      "after": "dollar !amount|amounts|value",
+      "moved": [
+        "bill",
+        "bills",
+        "coin",
+        "coins",
+        "note",
+        "notes",
+        "sign",
+        "signs",
+        "store",
+        "stores"
+      ],
+      "residual": [
+        "amount",
+        "amounts",
+        "value"
+      ],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:BRAND_NEW",
+      "concept": "BRAND_NEW",
+      "before": "new !york|zealand|south|year|years|england|guinea|delhi|orleans|jersey|mexico|hampshire|testament|wave|age|moon|world@2",
+      "after": "new !south@2",
+      "moved": [
+        "age",
+        "delhi",
+        "england",
+        "guinea",
+        "hampshire",
+        "jersey",
+        "mexico",
+        "moon",
+        "orleans",
+        "testament",
+        "wave",
+        "world",
+        "year",
+        "years",
+        "york",
+        "zealand"
+      ],
+      "residual": [
+        "south"
+      ],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:ALIVE",
+      "concept": "ALIVE",
+      "before": "the living !room|rooms|area|areas|space|quarters|costs|wage|standard|thing|things|creature|creatures|proof|legend|memory",
+      "after": "the living !thing|things|creature|creatures|proof|legend|memory",
+      "moved": [
+        "area",
+        "areas",
+        "costs",
+        "quarters",
+        "room",
+        "rooms",
+        "space",
+        "standard",
+        "wage"
+      ],
+      "residual": [
+        "thing",
+        "things",
+        "creature",
+        "creatures",
+        "proof",
+        "legend",
+        "memory"
+      ],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:FOOD",
+      "concept": "FOOD",
+      "before": "food !coloring|colouring|safety|poisoning|processor|processors|chain|bank|banks|court|truck|stamps|service|industry|label|labels|allergy|allergies|group|groups|grade|science|handling|supply|waste|storage|packaging|thermometer|additives|dye|dyes|production|prices|security|preparation|contact|temperature|temperatures|item|items|product|products|container|containers|type|types|borne|and",
+      "after": "food !and",
+      "moved": [
+        "additives",
+        "allergies",
+        "allergy",
+        "bank",
+        "banks",
+        "borne",
+        "chain",
+        "coloring",
+        "colouring",
+        "contact",
+        "container",
+        "containers",
+        "court",
+        "dye",
+        "dyes",
+        "grade",
+        "group",
+        "groups",
+        "handling",
+        "industry",
+        "item",
+        "items",
+        "label",
+        "labels",
+        "packaging",
+        "poisoning",
+        "preparation",
+        "prices",
+        "processor",
+        "processors",
+        "product",
+        "production",
+        "products",
+        "safety",
+        "science",
+        "security",
+        "service",
+        "stamps",
+        "storage",
+        "supply",
+        "temperature",
+        "temperatures",
+        "thermometer",
+        "truck",
+        "type",
+        "types",
+        "waste"
+      ],
+      "residual": [
+        "and"
+      ],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:HEART_ORGAN",
+      "concept": "HEART_ORGAN",
+      "before": "?<=weak|healthy|failing|dodgy|damaged|enlarged|diseased|beating|pounding|racing|thumping heart !attack|attacks|disease|failure|surgery|rate|of|and|felt|sank|out|set",
+      "after": "?<=weak|healthy|failing|dodgy|damaged|enlarged|diseased|beating|pounding|racing|thumping heart !of|and|felt|sank|out|set",
+      "moved": [
+        "attack",
+        "attacks",
+        "disease",
+        "failure",
+        "rate",
+        "surgery"
+      ],
+      "residual": [
+        "of",
+        "and",
+        "felt",
+        "sank",
+        "out",
+        "set"
+      ],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:HEART_ORGAN",
+      "concept": "HEART_ORGAN",
+      "before": "?<=my|your|his|her|its|our|their|the|a|an|this|that|whose heart !attack|attacks|disease|failure|surgery|rate|of|and|felt|sank|out|set",
+      "after": "?<=my|your|his|her|its|our|their|the|a|an|this|that|whose heart !of|and|felt|sank|out|set",
+      "moved": [
+        "attack",
+        "attacks",
+        "disease",
+        "failure",
+        "rate",
+        "surgery"
+      ],
+      "residual": [
+        "of",
+        "and",
+        "felt",
+        "sank",
+        "out",
+        "set"
+      ],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:DINNER",
+      "concept": "DINNER",
+      "before": "dinner !=party|parties|jacket|jackets|dance|guests|guest|meeting|meetings|theatre|theater|service|in|at",
+      "after": "dinner !=guests|guest|meeting|meetings|service|in|at",
+      "moved": [
+        "dance",
+        "jacket",
+        "jackets",
+        "parties",
+        "party",
+        "theater",
+        "theatre"
+      ],
+      "residual": [
+        "guests",
+        "guest",
+        "meeting",
+        "meetings",
+        "service",
+        "in",
+        "at"
+      ],
+      "reach_before": 1,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:VAGRANT",
+      "concept": "VAGRANT",
+      "before": "tramp !=steamer|steamers|ship|ships|stamp|stamps|iron",
+      "after": "tramp",
+      "moved": [
+        "iron",
+        "ship",
+        "ships",
+        "stamp",
+        "stamps",
+        "steamer",
+        "steamers"
+      ],
+      "residual": [],
+      "reach_before": 1,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:VAGRANT",
+      "concept": "VAGRANT",
+      "before": "a tramp !=steamer|steamers|ship|ships|stamp|stamps|iron",
+      "after": "a tramp",
+      "moved": [
+        "iron",
+        "ship",
+        "ships",
+        "stamp",
+        "stamps",
+        "steamer",
+        "steamers"
+      ],
+      "residual": [],
+      "reach_before": 1,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:STATION",
+      "concept": "STATION",
+      "before": "ranch !dressing|style|slider|sliders|house|hand|hands",
+      "after": "ranch !style|slider|sliders|house|hand|hands",
+      "moved": [
+        "dressing"
+      ],
+      "residual": [
+        "style",
+        "slider",
+        "sliders",
+        "house",
+        "hand",
+        "hands"
+      ],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:CLOTHES",
+      "concept": "CLOTHES",
+      "before": "clothes !line|lines|peg|pegs|horse|hanger|hangers|basket|baskets|dryer|dryers|shop|shops|store|stores|brush|rack|racks",
+      "after": "clothes",
+      "moved": [
+        "basket",
+        "baskets",
+        "brush",
+        "dryer",
+        "dryers",
+        "hanger",
+        "hangers",
+        "horse",
+        "line",
+        "lines",
+        "peg",
+        "pegs",
+        "rack",
+        "racks",
+        "shop",
+        "shops",
+        "store",
+        "stores"
+      ],
+      "residual": [],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:GRANDMOTHER",
+      "concept": "GRANDMOTHER",
+      "before": "granny !flat|flats|smith|smiths|knot|knots",
+      "after": "granny",
+      "moved": [
+        "flat",
+        "flats",
+        "knot",
+        "knots",
+        "smith",
+        "smiths"
+      ],
+      "residual": [],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:HIKING",
+      "concept": "HIKING",
+      "before": "hiking !trail|trails|path|paths",
+      "after": "hiking",
+      "moved": [
+        "path",
+        "paths",
+        "trail",
+        "trails"
+      ],
+      "residual": [],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:MEAL",
+      "concept": "MEAL",
+      "before": "a quick meal !plan|plans|kit|kits|prep|deal|deals",
+      "after": "a quick meal",
+      "moved": [
+        "deal",
+        "deals",
+        "kit",
+        "kits",
+        "plan",
+        "plans",
+        "prep"
+      ],
+      "residual": [],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:GET_DUMPED",
+      "concept": "GET_DUMPED",
+      "before": "get the boot !camp|camps",
+      "after": "get the boot",
+      "moved": [
+        "camp",
+        "camps"
+      ],
+      "residual": [],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:CHEAP_WINE",
+      "concept": "CHEAP_WINE",
+      "before": "cheap wine !list|lists|bar|bars|glass|glasses|shop|shops|store|stores",
+      "after": "cheap wine",
+      "moved": [
+        "bar",
+        "bars",
+        "glass",
+        "glasses",
+        "list",
+        "lists",
+        "shop",
+        "shops",
+        "store",
+        "stores"
+      ],
+      "residual": [],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:BIKIE",
+      "concept": "BIKIE",
+      "before": "biker !shorts|jacket|jackets|boots|chick|chicks|bar|bars",
+      "after": "biker",
+      "moved": [
+        "bar",
+        "bars",
+        "boots",
+        "chick",
+        "chicks",
+        "jacket",
+        "jackets",
+        "shorts"
+      ],
+      "residual": [],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:A_LIE",
+      "concept": "A_LIE",
+      "before": "a lie !detector|detectors|down|in|to",
+      "after": "a lie !down|in|to",
+      "moved": [
+        "detector",
+        "detectors"
+      ],
+      "residual": [
+        "down",
+        "in",
+        "to"
+      ],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:FRIDGE",
+      "concept": "FRIDGE",
+      "before": "refrigerator !=car|cars|truck|trucks|van|vans|ship|ships",
+      "after": "refrigerator",
+      "moved": [
+        "car",
+        "cars",
+        "ship",
+        "ships",
+        "truck",
+        "trucks",
+        "van",
+        "vans"
+      ],
+      "residual": [],
+      "reach_before": 1,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:ELDERLY",
+      "concept": "ELDERLY",
+      "before": "the aged !=care|pension|pensions|pensioner|pensioners",
+      "after": "the aged",
+      "moved": [
+        "care",
+        "pension",
+        "pensioner",
+        "pensioners",
+        "pensions"
+      ],
+      "residual": [],
+      "reach_before": 1,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "entry:tea-evening-meal",
+      "concept": "DINNER",
+      "before": "dinner !=party|parties|jacket|jackets|dance|guests|guest|meeting|meetings|theatre|theater|service|in|at",
+      "after": "dinner !=guests|guest|meeting|meetings|service|in|at",
+      "moved": [
+        "dance",
+        "jacket",
+        "jackets",
+        "parties",
+        "party",
+        "theater",
+        "theatre"
+      ],
+      "residual": [
+        "guests",
+        "guest",
+        "meeting",
+        "meetings",
+        "service",
+        "in",
+        "at"
+      ],
+      "reach_before": 1,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:CASE_OF_BEER",
+      "concept": "CASE_OF_BEER",
+      "before": "a 24-pack of beer !=bottle|bottles|label|labels",
+      "after": "a 24-pack of beer",
+      "moved": [
+        "bottle",
+        "bottles",
+        "label",
+        "labels"
+      ],
+      "residual": [],
+      "reach_before": 1,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:CASE_OF_BEER",
+      "concept": "CASE_OF_BEER",
+      "before": "a twenty-four pack of beer !=bottle|bottles|label|labels",
+      "after": "a twenty-four pack of beer",
+      "moved": [
+        "bottle",
+        "bottles",
+        "label",
+        "labels"
+      ],
+      "residual": [],
+      "reach_before": 1,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:HAVE_BEER",
+      "concept": "HAVE_BEER",
+      "before": "have a beer !belly|bellies|gut|guts|garden|gardens",
+      "after": "have a beer",
+      "moved": [
+        "bellies",
+        "belly",
+        "garden",
+        "gardens",
+        "gut",
+        "guts"
+      ],
+      "residual": [],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:PHARMACY",
+      "concept": "PHARMACY",
+      "before": "pharmacy !school|schools|degree|degrees|student|students|technician|technicians|benefits|board|course|courses|faculty|studies|practice|law|program|programs|programme",
+      "after": "pharmacy",
+      "moved": [
+        "benefits",
+        "board",
+        "course",
+        "courses",
+        "degree",
+        "degrees",
+        "faculty",
+        "law",
+        "practice",
+        "program",
+        "programme",
+        "programs",
+        "school",
+        "schools",
+        "student",
+        "students",
+        "studies",
+        "technician",
+        "technicians"
+      ],
+      "residual": [],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:COMMON_SENSE",
+      "concept": "COMMON_SENSE",
+      "before": "common sense !approach|approaches|solution|solutions|reform|reforms|measure|measures|rule|rules|policy|policies|test|view|thing",
+      "after": "common sense",
+      "moved": [
+        "approach",
+        "approaches",
+        "measure",
+        "measures",
+        "policies",
+        "policy",
+        "reform",
+        "reforms",
+        "rule",
+        "rules",
+        "solution",
+        "solutions",
+        "test",
+        "thing",
+        "view"
+      ],
+      "residual": [],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:TELLTALE",
+      "concept": "TELLTALE",
+      "before": "a telltale !sign|signs|mark|marks|trace|traces|heart|smell|clue|clues",
+      "after": "a telltale",
+      "moved": [
+        "clue",
+        "clues",
+        "heart",
+        "mark",
+        "marks",
+        "sign",
+        "signs",
+        "smell",
+        "trace",
+        "traces"
+      ],
+      "residual": [],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:UTTER",
+      "concept": "UTTER",
+      "before": "absolute !value|values|zero|majority|terms|power|powers|pitch|humidity|path|paths|address|monarchy|monarch|monarchs|minimum|maximum|temperature|magnitude|threshold|risk|number|numbers|despotism|tyranny|tyrant|tyrants|rule|ruler|rulers|authority|control|sovereignty|dictatorship|dictator|discretion|freedom|liberty|right|rights|silence|priority|necessity|requirement|limit|limits|position|location|reference|error|deviation|advantage|poverty|truth|confidence|trust|ownership|immunity|ban|bans|privilege|and",
+      "after": "absolute !terms|power|powers|minimum|maximum|threshold|risk|number|numbers|despotism|tyranny|tyrant|tyrants|rule|ruler|rulers|authority|control|sovereignty|dictatorship|dictator|discretion|freedom|liberty|right|rights|silence|priority|necessity|requirement|limit|limits|position|location|reference|confidence|trust|ownership|ban|bans|privilege|and",
+      "moved": [
+        "address",
+        "advantage",
+        "deviation",
+        "error",
+        "humidity",
+        "immunity",
+        "magnitude",
+        "majority",
+        "monarch",
+        "monarchs",
+        "monarchy",
+        "path",
+        "paths",
+        "pitch",
+        "poverty",
+        "temperature",
+        "truth",
+        "value",
+        "values",
+        "zero"
+      ],
+      "residual": [
+        "terms",
+        "power",
+        "powers",
+        "minimum",
+        "maximum",
+        "threshold",
+        "risk",
+        "number",
+        "numbers",
+        "despotism",
+        "tyranny",
+        "tyrant",
+        "tyrants",
+        "rule",
+        "ruler",
+        "rulers",
+        "authority",
+        "control",
+        "sovereignty",
+        "dictatorship",
+        "dictator",
+        "discretion",
+        "freedom",
+        "liberty",
+        "right",
+        "rights",
+        "silence",
+        "priority",
+        "necessity",
+        "requirement",
+        "limit",
+        "limits",
+        "position",
+        "location",
+        "reference",
+        "confidence",
+        "trust",
+        "ownership",
+        "ban",
+        "bans",
+        "privilege",
+        "and"
+      ],
+      "reach_before": 2,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    },
+    {
+      "origin": "concept:MEDAL_AWARD",
+      "concept": "MEDAL_AWARD",
+      "before": "an award !=of|ceremony|ceremonies|winning|winner|winners|rate|rates|wage|wages",
+      "after": "an award !=of",
+      "moved": [
+        "ceremonies",
+        "ceremony",
+        "rate",
+        "rates",
+        "wage",
+        "wages",
+        "winner",
+        "winners",
+        "winning"
+      ],
+      "residual": [
+        "of"
+      ],
+      "reach_before": 1,
+      "policy": "Fixed lexical units own their whole phrase; residual exclusions retain their original reach. No blanket modifier rule."
+    }
+  ],
+  "limits": "Only reviewed lexical units moved. Remaining exclusions include source senses, argument restrictions and unresolved uses; they are not all set phrases. Former two-token lookahead is intentionally replaced with actual phrase ownership. Grouped alternatives share a reason and scope; expanded_new_fences preserves the individually reviewed units.",
+  "expanded_new_fences": [
+    {
+      "phrase": "party candidate",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party candidates",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party committee",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party conference",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party conferences",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party delegate",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party delegates",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party game",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party games",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party headquarters",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party leader",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party leaders",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party manifesto",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party member",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party members",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party planner",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party planners",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party planning",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party platform",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party policies",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party policy",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party politics",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party trick",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "party tricks",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This party expression names a political, planning or game-related use, not a lively social gathering."
+    },
+    {
+      "phrase": "great aunt",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "great barrier",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "great britain",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "great depression",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "great famine",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "great fire",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "great flood",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "great grandfather",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "great grandmother",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "great lakes",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "great plains",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "great uncle",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "great wall",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "great war",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "great wars",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "This great expression names a particular reference or relationship; great does not independently mean excellent here."
+    },
+    {
+      "phrase": "gift aid",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "gift basket",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "gift baskets",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "gift card",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "gift cards",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "gift certificate",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "gift certificates",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "gift economy",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "gift horse",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "gift registry",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "gift shop",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "gift shops",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "gift tax",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "gift taxes",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "gift voucher",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "gift vouchers",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "news",
+          "technical"
+        ]
+      },
+      "reason": "This gift expression names a particular object, practice or service; preserve its full wording."
+    },
+    {
+      "phrase": "field day",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "field goal",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "field goals",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "field guide",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "field hockey",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "field hospital",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "field manual",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "field marshal",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "field notes",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "field office",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "field offices",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "field test",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "field tests",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "field trip",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "field trips",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "field work",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Field is part of this established expression, rather than an independent paddock reference."
+    },
+    {
+      "phrase": "public broadcaster",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public comment",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public comments",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public consultation",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public debate",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public domain",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public eye",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public good",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public health",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public hearing",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public holiday",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public holidays",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public hospital",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public hospitals",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public interest",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public land",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public lands",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public liability",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public libraries",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public library",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public policy",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public purse",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public record",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public records",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public school",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public schools",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public sector",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public sectors",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public servant",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public servants",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public service",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public space",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public spaces",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public square",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "public transport",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Public modifies the named thing here; it does not name a group of people."
+    },
+    {
+      "phrase": "dollar bill",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dollar belongs to the named currency object or shop expression here."
+    },
+    {
+      "phrase": "dollar bills",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dollar belongs to the named currency object or shop expression here."
+    },
+    {
+      "phrase": "dollar coin",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dollar belongs to the named currency object or shop expression here."
+    },
+    {
+      "phrase": "dollar coins",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dollar belongs to the named currency object or shop expression here."
+    },
+    {
+      "phrase": "dollar note",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dollar belongs to the named currency object or shop expression here."
+    },
+    {
+      "phrase": "dollar notes",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dollar belongs to the named currency object or shop expression here."
+    },
+    {
+      "phrase": "dollar sign",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dollar belongs to the named currency object or shop expression here."
+    },
+    {
+      "phrase": "dollar signs",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dollar belongs to the named currency object or shop expression here."
+    },
+    {
+      "phrase": "dollar store",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dollar belongs to the named currency object or shop expression here."
+    },
+    {
+      "phrase": "dollar stores",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dollar belongs to the named currency object or shop expression here."
+    },
+    {
+      "phrase": "new age",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "new delhi",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "new england",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "new guinea",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "new hampshire",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "new jersey",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "new mexico",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "new moon",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "new orleans",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "new testament",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "new wave",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "new world",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "new year",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "new years",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "new york",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "new zealand",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical"
+        ]
+      },
+      "reason": "New belongs to this established name or expression, rather than an independent claim of newness."
+    },
+    {
+      "phrase": "living area",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Living is part of the named place, cost or standard expression, rather than a group of living people."
+    },
+    {
+      "phrase": "living areas",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Living is part of the named place, cost or standard expression, rather than a group of living people."
+    },
+    {
+      "phrase": "living costs",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Living is part of the named place, cost or standard expression, rather than a group of living people."
+    },
+    {
+      "phrase": "living quarters",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Living is part of the named place, cost or standard expression, rather than a group of living people."
+    },
+    {
+      "phrase": "living room",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Living is part of the named place, cost or standard expression, rather than a group of living people."
+    },
+    {
+      "phrase": "living rooms",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Living is part of the named place, cost or standard expression, rather than a group of living people."
+    },
+    {
+      "phrase": "living space",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Living is part of the named place, cost or standard expression, rather than a group of living people."
+    },
+    {
+      "phrase": "living standard",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Living is part of the named place, cost or standard expression, rather than a group of living people."
+    },
+    {
+      "phrase": "living wage",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Living is part of the named place, cost or standard expression, rather than a group of living people."
+    },
+    {
+      "phrase": "food additives",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food allergies",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food allergy",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food bank",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food banks",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food borne",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food chain",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food coloring",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food colouring",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food contact",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food container",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food containers",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food court",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food dye",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food dyes",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food grade",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food group",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food groups",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food handling",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food industry",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food item",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food items",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food label",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food labels",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food packaging",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food poisoning",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food preparation",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food prices",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food processor",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food processors",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food product",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food production",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food products",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food safety",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food science",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food security",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food service",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food stamps",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food storage",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food supply",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food temperature",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food temperatures",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food thermometer",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food truck",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food type",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food types",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "food waste",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "technical",
+          "official"
+        ]
+      },
+      "reason": "Food belongs to this named expression; keep its established wording."
+    },
+    {
+      "phrase": "heart attack",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Heart belongs to the medical expression here; preserve the expression as a unit."
+    },
+    {
+      "phrase": "heart attacks",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Heart belongs to the medical expression here; preserve the expression as a unit."
+    },
+    {
+      "phrase": "heart disease",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Heart belongs to the medical expression here; preserve the expression as a unit."
+    },
+    {
+      "phrase": "heart failure",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Heart belongs to the medical expression here; preserve the expression as a unit."
+    },
+    {
+      "phrase": "heart rate",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Heart belongs to the medical expression here; preserve the expression as a unit."
+    },
+    {
+      "phrase": "heart surgery",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Heart belongs to the medical expression here; preserve the expression as a unit."
+    },
+    {
+      "phrase": "dinner dance",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dinner belongs to this named social occasion, clothing or entertainment expression."
+    },
+    {
+      "phrase": "dinner jacket",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dinner belongs to this named social occasion, clothing or entertainment expression."
+    },
+    {
+      "phrase": "dinner jackets",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dinner belongs to this named social occasion, clothing or entertainment expression."
+    },
+    {
+      "phrase": "dinner parties",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dinner belongs to this named social occasion, clothing or entertainment expression."
+    },
+    {
+      "phrase": "dinner party",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dinner belongs to this named social occasion, clothing or entertainment expression."
+    },
+    {
+      "phrase": "dinner theater",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dinner belongs to this named social occasion, clothing or entertainment expression."
+    },
+    {
+      "phrase": "dinner theatre",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Dinner belongs to this named social occasion, clothing or entertainment expression."
+    },
+    {
+      "phrase": "tramp iron",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Tramp belongs to a ship, mark or tool expression here, not a wandering person."
+    },
+    {
+      "phrase": "tramp ship",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Tramp belongs to a ship, mark or tool expression here, not a wandering person."
+    },
+    {
+      "phrase": "tramp ships",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Tramp belongs to a ship, mark or tool expression here, not a wandering person."
+    },
+    {
+      "phrase": "tramp stamp",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Tramp belongs to a ship, mark or tool expression here, not a wandering person."
+    },
+    {
+      "phrase": "tramp stamps",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Tramp belongs to a ship, mark or tool expression here, not a wandering person."
+    },
+    {
+      "phrase": "tramp steamer",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Tramp belongs to a ship, mark or tool expression here, not a wandering person."
+    },
+    {
+      "phrase": "tramp steamers",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Tramp belongs to a ship, mark or tool expression here, not a wandering person."
+    },
+    {
+      "phrase": "ranch dressing",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Ranch dressing names a food, not a rural property."
+    },
+    {
+      "phrase": "clothes basket",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes baskets",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes brush",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes dryer",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes dryers",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes hanger",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes hangers",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes horse",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes line",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes lines",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes peg",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes pegs",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes rack",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes racks",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes shop",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes shops",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes store",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "clothes stores",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Clothes belongs to the named equipment, container or shop expression here."
+    },
+    {
+      "phrase": "granny flat",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Granny belongs to a dwelling, apple name or knot expression here, not an independent grandmother reference."
+    },
+    {
+      "phrase": "granny flats",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Granny belongs to a dwelling, apple name or knot expression here, not an independent grandmother reference."
+    },
+    {
+      "phrase": "granny knot",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Granny belongs to a dwelling, apple name or knot expression here, not an independent grandmother reference."
+    },
+    {
+      "phrase": "granny knots",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Granny belongs to a dwelling, apple name or knot expression here, not an independent grandmother reference."
+    },
+    {
+      "phrase": "granny smith",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Granny belongs to a dwelling, apple name or knot expression here, not an independent grandmother reference."
+    },
+    {
+      "phrase": "granny smiths",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Granny belongs to a dwelling, apple name or knot expression here, not an independent grandmother reference."
+    },
+    {
+      "phrase": "hiking path",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Hiking describes the trail or path here, rather than naming a walking activity independently."
+    },
+    {
+      "phrase": "hiking paths",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Hiking describes the trail or path here, rather than naming a walking activity independently."
+    },
+    {
+      "phrase": "hiking trail",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Hiking describes the trail or path here, rather than naming a walking activity independently."
+    },
+    {
+      "phrase": "hiking trails",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Hiking describes the trail or path here, rather than naming a walking activity independently."
+    },
+    {
+      "phrase": "meal deal",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Meal belongs to the named planning, preparation or purchase expression here."
+    },
+    {
+      "phrase": "meal deals",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Meal belongs to the named planning, preparation or purchase expression here."
+    },
+    {
+      "phrase": "meal kit",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Meal belongs to the named planning, preparation or purchase expression here."
+    },
+    {
+      "phrase": "meal kits",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Meal belongs to the named planning, preparation or purchase expression here."
+    },
+    {
+      "phrase": "meal plan",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Meal belongs to the named planning, preparation or purchase expression here."
+    },
+    {
+      "phrase": "meal plans",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Meal belongs to the named planning, preparation or purchase expression here."
+    },
+    {
+      "phrase": "meal prep",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Meal belongs to the named planning, preparation or purchase expression here."
+    },
+    {
+      "phrase": "boot camp",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Boot camp names a training programme; boot is not a dismissal here."
+    },
+    {
+      "phrase": "boot camps",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Boot camp names a training programme; boot is not a dismissal here."
+    },
+    {
+      "phrase": "wine bar",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Wine modifies a named venue, object or list here; the phrase does not name the drink alone."
+    },
+    {
+      "phrase": "wine bars",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Wine modifies a named venue, object or list here; the phrase does not name the drink alone."
+    },
+    {
+      "phrase": "wine glass",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Wine modifies a named venue, object or list here; the phrase does not name the drink alone."
+    },
+    {
+      "phrase": "wine glasses",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Wine modifies a named venue, object or list here; the phrase does not name the drink alone."
+    },
+    {
+      "phrase": "wine list",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Wine modifies a named venue, object or list here; the phrase does not name the drink alone."
+    },
+    {
+      "phrase": "wine lists",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Wine modifies a named venue, object or list here; the phrase does not name the drink alone."
+    },
+    {
+      "phrase": "wine shop",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Wine modifies a named venue, object or list here; the phrase does not name the drink alone."
+    },
+    {
+      "phrase": "wine shops",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Wine modifies a named venue, object or list here; the phrase does not name the drink alone."
+    },
+    {
+      "phrase": "wine store",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Wine modifies a named venue, object or list here; the phrase does not name the drink alone."
+    },
+    {
+      "phrase": "wine stores",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Wine modifies a named venue, object or list here; the phrase does not name the drink alone."
+    },
+    {
+      "phrase": "biker bar",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Biker modifies the named clothing, person or venue here, rather than naming a motorcycle rider independently."
+    },
+    {
+      "phrase": "biker bars",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Biker modifies the named clothing, person or venue here, rather than naming a motorcycle rider independently."
+    },
+    {
+      "phrase": "biker boots",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Biker modifies the named clothing, person or venue here, rather than naming a motorcycle rider independently."
+    },
+    {
+      "phrase": "biker chick",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Biker modifies the named clothing, person or venue here, rather than naming a motorcycle rider independently."
+    },
+    {
+      "phrase": "biker chicks",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Biker modifies the named clothing, person or venue here, rather than naming a motorcycle rider independently."
+    },
+    {
+      "phrase": "biker jacket",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Biker modifies the named clothing, person or venue here, rather than naming a motorcycle rider independently."
+    },
+    {
+      "phrase": "biker jackets",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Biker modifies the named clothing, person or venue here, rather than naming a motorcycle rider independently."
+    },
+    {
+      "phrase": "biker shorts",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Biker modifies the named clothing, person or venue here, rather than naming a motorcycle rider independently."
+    },
+    {
+      "phrase": "lie detector",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Lie detector names a device, rather than an independent falsehood."
+    },
+    {
+      "phrase": "lie detectors",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Lie detector names a device, rather than an independent falsehood."
+    },
+    {
+      "phrase": "refrigerator car",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Refrigerator describes a refrigerated vehicle here, rather than a household appliance."
+    },
+    {
+      "phrase": "refrigerator cars",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Refrigerator describes a refrigerated vehicle here, rather than a household appliance."
+    },
+    {
+      "phrase": "refrigerator ship",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Refrigerator describes a refrigerated vehicle here, rather than a household appliance."
+    },
+    {
+      "phrase": "refrigerator ships",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Refrigerator describes a refrigerated vehicle here, rather than a household appliance."
+    },
+    {
+      "phrase": "refrigerator truck",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Refrigerator describes a refrigerated vehicle here, rather than a household appliance."
+    },
+    {
+      "phrase": "refrigerator trucks",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Refrigerator describes a refrigerated vehicle here, rather than a household appliance."
+    },
+    {
+      "phrase": "refrigerator van",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Refrigerator describes a refrigerated vehicle here, rather than a household appliance."
+    },
+    {
+      "phrase": "refrigerator vans",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Refrigerator describes a refrigerated vehicle here, rather than a household appliance."
+    },
+    {
+      "phrase": "aged care",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "news",
+          "official",
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Aged belongs to the named care or pension expression here, rather than naming older people as a group."
+    },
+    {
+      "phrase": "aged pension",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "news",
+          "official",
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Aged belongs to the named care or pension expression here, rather than naming older people as a group."
+    },
+    {
+      "phrase": "aged pensioner",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "news",
+          "official",
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Aged belongs to the named care or pension expression here, rather than naming older people as a group."
+    },
+    {
+      "phrase": "aged pensioners",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "news",
+          "official",
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Aged belongs to the named care or pension expression here, rather than naming older people as a group."
+    },
+    {
+      "phrase": "aged pensions",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "news",
+          "official",
+          "technical",
+          "instructions"
+        ]
+      },
+      "reason": "Aged belongs to the named care or pension expression here, rather than naming older people as a group."
+    },
+    {
+      "phrase": "beer bottle",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Beer describes bottles or labels here; the expression does not name the drink alone."
+    },
+    {
+      "phrase": "beer bottles",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Beer describes bottles or labels here; the expression does not name the drink alone."
+    },
+    {
+      "phrase": "beer label",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Beer describes bottles or labels here; the expression does not name the drink alone."
+    },
+    {
+      "phrase": "beer labels",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Beer describes bottles or labels here; the expression does not name the drink alone."
+    },
+    {
+      "phrase": "beer bellies",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Beer belongs to a body or place expression here; it does not independently name a drink."
+    },
+    {
+      "phrase": "beer belly",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Beer belongs to a body or place expression here; it does not independently name a drink."
+    },
+    {
+      "phrase": "beer garden",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Beer belongs to a body or place expression here; it does not independently name a drink."
+    },
+    {
+      "phrase": "beer gardens",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Beer belongs to a body or place expression here; it does not independently name a drink."
+    },
+    {
+      "phrase": "beer gut",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Beer belongs to a body or place expression here; it does not independently name a drink."
+    },
+    {
+      "phrase": "beer guts",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Beer belongs to a body or place expression here; it does not independently name a drink."
+    },
+    {
+      "phrase": "pharmacy benefits",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy board",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy course",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy courses",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy degree",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy degrees",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy faculty",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy law",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy practice",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy program",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy programme",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy programs",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy school",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy schools",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy student",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy students",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy studies",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy technician",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "pharmacy technicians",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Pharmacy describes an educational, professional or regulatory expression here, rather than a shop."
+    },
+    {
+      "phrase": "common sense approach",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "common sense approaches",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "common sense measure",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "common sense measures",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "common sense policies",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "common sense policy",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "common sense reform",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "common sense reforms",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "common sense rule",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "common sense rules",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "common sense solution",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "common sense solutions",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "common sense test",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "common sense thing",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "common sense view",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Common sense modifies this expression; it does not name someone\u2019s judgement on its own."
+    },
+    {
+      "phrase": "telltale clue",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Telltale describes a sign or clue here, rather than naming a person who tells on someone."
+    },
+    {
+      "phrase": "telltale clues",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Telltale describes a sign or clue here, rather than naming a person who tells on someone."
+    },
+    {
+      "phrase": "telltale heart",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Telltale describes a sign or clue here, rather than naming a person who tells on someone."
+    },
+    {
+      "phrase": "telltale mark",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Telltale describes a sign or clue here, rather than naming a person who tells on someone."
+    },
+    {
+      "phrase": "telltale marks",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Telltale describes a sign or clue here, rather than naming a person who tells on someone."
+    },
+    {
+      "phrase": "telltale sign",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Telltale describes a sign or clue here, rather than naming a person who tells on someone."
+    },
+    {
+      "phrase": "telltale signs",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Telltale describes a sign or clue here, rather than naming a person who tells on someone."
+    },
+    {
+      "phrase": "telltale smell",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Telltale describes a sign or clue here, rather than naming a person who tells on someone."
+    },
+    {
+      "phrase": "telltale trace",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Telltale describes a sign or clue here, rather than naming a person who tells on someone."
+    },
+    {
+      "phrase": "telltale traces",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Telltale describes a sign or clue here, rather than naming a person who tells on someone."
+    },
+    {
+      "phrase": "absolute address",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute advantage",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute deviation",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute error",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute humidity",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute immunity",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute magnitude",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute majority",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute monarch",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute monarchs",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute monarchy",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute path",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute paths",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute pitch",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute poverty",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute temperature",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute truth",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute value",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute values",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "absolute zero",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": []
+      },
+      "reason": "Absolute belongs to this established technical or social expression, rather than serving as a free intensifier."
+    },
+    {
+      "phrase": "award ceremonies",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "technical"
+        ]
+      },
+      "reason": "Award belongs to the named ceremony, recipient or employment expression here, rather than an independent prize."
+    },
+    {
+      "phrase": "award ceremony",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "technical"
+        ]
+      },
+      "reason": "Award belongs to the named ceremony, recipient or employment expression here, rather than an independent prize."
+    },
+    {
+      "phrase": "award rate",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "technical"
+        ]
+      },
+      "reason": "Award belongs to the named ceremony, recipient or employment expression here, rather than an independent prize."
+    },
+    {
+      "phrase": "award rates",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "technical"
+        ]
+      },
+      "reason": "Award belongs to the named ceremony, recipient or employment expression here, rather than an independent prize."
+    },
+    {
+      "phrase": "award wage",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "technical"
+        ]
+      },
+      "reason": "Award belongs to the named ceremony, recipient or employment expression here, rather than an independent prize."
+    },
+    {
+      "phrase": "award wages",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "technical"
+        ]
+      },
+      "reason": "Award belongs to the named ceremony, recipient or employment expression here, rather than an independent prize."
+    },
+    {
+      "phrase": "award winner",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "technical"
+        ]
+      },
+      "reason": "Award belongs to the named ceremony, recipient or employment expression here, rather than an independent prize."
+    },
+    {
+      "phrase": "award winners",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "technical"
+        ]
+      },
+      "reason": "Award belongs to the named ceremony, recipient or employment expression here, rather than an independent prize."
+    },
+    {
+      "phrase": "award winning",
+      "frame": "np",
+      "kind": "set_phrase",
+      "scope": {
+        "meanings": true,
+        "dialect": [],
+        "not_in": [
+          "official",
+          "technical"
+        ]
+      },
+      "reason": "Award belongs to the named ceremony, recipient or employment expression here, rather than an independent prize."
+    }
+  ]
+}

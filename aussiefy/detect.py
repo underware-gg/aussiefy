@@ -19,24 +19,26 @@ from dataclasses import dataclass, field, replace
 from typing import Callable, NamedTuple
 
 from . import morph, pos
-from .context import (RESULT_DEGREE, TIME_ADVERBS, argument_complete, claimed_result_degree, context_object,
-                      following_context, noun_argument, verb_subject)
+from .context import (COMPARATIVE_MODIFIERS, RESULT_DEGREE, TIME_ADVERBS, argument_complete, claimed_result_degree, context_object,
+                      following_context, nominal_role, noun_argument, verb_subject)
 from .embed import Embedder, NgramEmbedder, similarity_scorer
 from .matcher import match_at, SLOT_MATCHERS, Match, Pattern, PatternIndex, is_name
 from .schema import HOLDING_CONCEPT, Concept
 from .degree import QUALIFIER_WORDS
+from .meaning_context import meaning_context
 from .text import CLAUSE_BREAK, QUOTES, SENTENCE_END, Token
 
 
 def applicable_concepts(concepts: tuple[str, ...], rules: dict[str, Concept] | None,
                         tokens: list[Token], end: int, complete: bool = True,
-                        noun_use: str | None = "reference") -> tuple[str, ...]:
+                        noun_use: str | None = "reference", nominal_use: str | None = None) -> tuple[str, ...]:
     """Meaning restrictions apply equally to exact triggers, direct entries and similarity matches."""
     if rules is None:
         return concepts
     following = following_context(tokens, end, complete)
     return tuple(cid for cid in concepts
                  if not rules[cid].lookup_only and (noun_use is None or rules[cid].noun_use in {"any", noun_use})
+                 and (nominal_use is None or not rules[cid].nominal_roles or nominal_use in rules[cid].nominal_roles)
                  and (not rules[cid].unless_after
                       or following.known and following.word not in rules[cid].unless_after))
 
@@ -78,6 +80,7 @@ class Detection:
     result_degree: str = ""          # a so/too/such the span claims, whose "that"/"to" complement follows it
     tense: str = "present"           # narrative tense of the sentence, for slots with no verb of their own
     noun_use: str = "reference"
+    nominal_role: str = "unknown"
     coordinated: bool = False        # shares its verb with another predicate ("tired and hungry")
     semantic_degree: dict[str, str] = field(default_factory=dict)
     mapping_effects: dict[str, tuple[str, ...]] = field(default_factory=dict)
@@ -560,12 +563,12 @@ SUBJECT_TAGS = frozenset({"NN", "NNS", "NNP", "NNPS", "PRP", "WDT"})
 NOT_AFTER_A_VERB = frozenset({"CD", ".", ",", ":", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "MD"})
 
 
-def _wrong_part_of_speech(m: Match, tokens: list[Token], tags: list[str]) -> bool:
+def _wrong_part_of_speech(m: Match, tokens: list[Token], tags: list[str], noun_role: str = 'unknown') -> bool:
     """A trigger matched a word in another part of speech: a verb idiom on a noun ("a taste of it", "more
     taste than") or a noun term on a verb ("that kids meself"). The tagger slips on rare words ("stop
     complaining" as a noun, "long endure"), so a verb trigger is refused only where the word before makes it a
-    noun, and a noun trigger never after a determiner. (Refusing a noun before a noun, "food colouring", was
-    tried: it lost "choccy bickies" and "the nan's bed"; the dictionary's triggers carry those exclusions.)"""
+    noun. Source-role evidence also distinguishes adjective/comparative readings from nouns; being a noun
+    modifier alone does not refuse a match ("choccy bickies" is valid)."""
     if m.pattern.before_modifier:   # "really ^adj": "really cold", "really fast", not "really think"
         nxt = tags[m.end] if m.end < len(tags) else "."
         if not nxt.startswith(("JJ", "RB", "VBN")):
@@ -576,6 +579,8 @@ def _wrong_part_of_speech(m: Match, tokens: list[Token], tags: list[str]) -> boo
         noun_context = before >= 0 and (tags[before] in NOUN_CONTEXT or tokens[before].norm in NOUN_PREPOSITIONS)
         return tags[m.start] in pos.NOUNS and noun_context
     if m.pattern.frame == "np" and any(e.role == "head_noun" for e in elements):
+        if noun_role == 'adjective':
+            return True
         head = m.end - 1
         if tags[head] not in pos.VERBS - {"VBG", "VBN"}:
             return False
@@ -646,12 +651,29 @@ def said_of_a_thing(det: Detection, person_nouns: frozenset[str], tokens: list[T
     return not person_subject(det, person_nouns)
 
 
+class MeaningReadings(NamedTuple):
+    detections: list[Detection]
+    ruled_out: frozenset[str]
+
+
 def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dict[int, float]] | None = None,
            fallback_patterns: list[Pattern] | None = None, threshold: float = 0.72,
            tags: list[str] | None = None, adjective_nouns: dict[str, frozenset[str]] | None = None,
            concepts: dict[str, Concept] | None = None, complete: bool = True,
            degree_index: PatternIndex | None = None, *, fragment: bool = False,
            person_nouns: frozenset[str] | None) -> list[Detection]:
+    """Frame-checked candidates; read_meanings also resolves their source evidence and ownership."""
+    return _detection_evidence(tokens, index, scorer, fallback_patterns, threshold, tags, adjective_nouns,
+        concepts, complete, degree_index, fragment=fragment, person_nouns=person_nouns).detections
+
+
+def _detection_evidence(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dict[int, float]] | None = None,
+           fallback_patterns: list[Pattern] | None = None, threshold: float = 0.72,
+           tags: list[str] | None = None, adjective_nouns: dict[str, frozenset[str]] | None = None,
+           concepts: dict[str, Concept] | None = None, complete: bool = True,
+           degree_index: PatternIndex | None = None, *, fragment: bool = False,
+           person_nouns: frozenset[str] | None, adjective_words: frozenset[str] = frozenset(),
+           comparative_predicates: frozenset[str] = frozenset()) -> MeaningReadings:
     """Every concept the triggers find in the sentence, frame-checked. With a scorer (embed.similarity_scorer over
     the fallback patterns' texts), a predicate after a linking verb that no trigger matched is compared with
     the fallback patterns by similarity ("he was exhaustedd"). Fragment mode admits query-local adjective
@@ -659,6 +681,7 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
     dictionary's person nouns, a reading said only of people is not made of a known thing; None leaves that
     to the caller (said_of_a_thing)."""
     found: list[Detection] = []
+    ruled_out: set[str] = set()
     tags = tags if tags is not None else pos.tag([t.text for t in tokens])
     matches = index.find(tokens)
     address_starts = {m.end + int(m.end < len(tokens) and tokens[m.end].text == ',')
@@ -703,18 +726,38 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
         if bands:
             m = replace(m, pattern=replace(m.pattern, semantic_degree={cid: sorted(values)[0]
                                                                       for cid, values in bands.items()}))
+        predicate_start = m.start
+        if m.pattern.frame == 'np':
+            while predicate_start > 0 and (tags[predicate_start - 1].startswith('RB')
+                                           or tokens[predicate_start - 1].norm in COMPARATIVE_MODIFIERS):
+                predicate_start -= 1
+            if predicate_start >= 2 and tuple(t.norm for t in tokens[predicate_start - 2:predicate_start]) == ('a', 'lot'):
+                predicate_start -= 2
+        comparison_predicate = (predicate_start > 0 and tokens[predicate_start - 1].norm in comparative_predicates
+                                and tags[predicate_start - 1] in pos.VERBS)
+        role = nominal_role(tokens, m.start, m.end, tags,
+                            predicate=comparison_predicate or predicate_context(tokens, predicate_start) is not None,
+                            adjective_words=adjective_words) if m.pattern.frame == 'np' else 'unknown'
+        if not m.pattern.guard and _wrong_part_of_speech(m, tokens, tags, role):
+            ruled_out.update(m.pattern.concepts)
+            continue
         det = check_frame(m, tokens, adjective_nouns, tags, complete=complete,
                           degree_concepts=source_families, fragment=fragment)
         if det and not det.degree_concepts and set(range(det.start, det.end)) & owned:
             continue
         if det:
             det.degree_conflicts = frozenset(cid for cid, values in bands.items() if len(values) > 1)
+            det.nominal_role = role
             if det.frame == "np":
                 det.noun_use = noun_usage(tokens, det.start, det.end, tags, address_starts)
             usage = None if fragment and det.noun_use == 'unknown' else det.noun_use
-            det.concepts = applicable_concepts(det.concepts, concepts, tokens, det.end, complete, usage)
+            nominal_use = role if det.frame == 'np' else None
+            if concepts is not None and nominal_use is not None:
+                ruled_out.update(cid for cid in det.concepts if concepts[cid].nominal_roles
+                                 and nominal_use not in concepts[cid].nominal_roles)
+            det.concepts = applicable_concepts(det.concepts, concepts, tokens, det.end, complete, usage, nominal_use)
         if det and not _in_a_name(tokens, det.start, det.end) and not _possessed(tokens, det) \
-                and (det.concepts or m.pattern.fence is not None) and not _wrong_part_of_speech(m, tokens, tags):
+                and (det.concepts or m.pattern.fence is not None):
             found.append(det)
 
     if scorer and fallback_patterns:
@@ -760,30 +803,48 @@ def detect(tokens: list[Token], index: PatternIndex, scorer: Callable[[str], dic
                     det.method = "embedding"
                     det.score = round(score, 3)
                     found.append(det)
-    if person_nouns is not None:
-        found = [d for d in found if not said_of_a_thing(d, person_nouns, tokens)]
-    return found
-
-
-class MeaningReadings(NamedTuple):
-    detections: list[Detection]
-    ruled_out: frozenset[str]
+    contextual = []
+    for reading in found:
+        if concepts is None or not any(concepts[cid].source_context for cid in reading.concepts):
+            contextual.append(reading)
+            continue
+        groups = {}
+        for cid in reading.concepts:
+            requirement = concepts[cid].source_context
+            if requirement is None:
+                key = (True, reading.evidence_extent[1])
+            else:
+                evidence = meaning_context(requirement, tokens, reading.end, tags, person_nouns or frozenset(),
+                    subject=reading.captures.get('agent') or reading.captures.get('subj') or reading.subject_noun)
+                key = (evidence.supported, max(evidence.end, reading.evidence_extent[1]))
+            if key[0] is not True:
+                ruled_out.add(cid)
+            groups.setdefault(key, []).append(cid)
+        for (supported, end), cids in groups.items():
+            if supported is False:
+                continue
+            contextual.append(replace(reading, concepts=tuple(cids) if supported else (UNRESOLVED,),
+                context=(reading.evidence_extent[0], end), direct=set(reading.direct),
+                semantic_degree=dict(reading.semantic_degree), mapping_effects=dict(reading.mapping_effects),
+                supersedes=reading.supersedes + (() if supported else tuple(cids))))
+    found = []
+    for reading in contextual:
+        if person_nouns is not None and said_of_a_thing(reading, person_nouns, tokens):
+            ruled_out.update(reading.concepts)
+        else:
+            found.append(reading)
+    return MeaningReadings(found, frozenset(ruled_out))
 
 
 def read_meanings(tokens: list[Token], dictionary, *, tags: list[str] | None = None,
                   scorer=None, threshold: float = 0.72, complete: bool = True,
                   fragment: bool = False) -> MeaningReadings:
     """Resolve contextual meanings once, retaining contradicted senses for discovery to rule out too."""
-    possible = detect(tokens, dictionary.index, scorer, dictionary.fallback_patterns, threshold, tags,
+    possible = _detection_evidence(tokens, dictionary.index, scorer, dictionary.fallback_patterns, threshold, tags,
                       dictionary.adjective_nouns, concepts=dictionary.concepts, complete=complete,
-                      degree_index=dictionary.degree_index, person_nouns=None, fragment=fragment)
-    accepted, ruled_out = [], set()
-    for reading in possible:
-        if said_of_a_thing(reading, dictionary.person_nouns, tokens):
-            ruled_out.update(reading.concepts)
-        else:
-            accepted.append(reading)
-    return MeaningReadings(resolve_overlaps(accepted), frozenset(ruled_out))
+                      degree_index=dictionary.degree_index, person_nouns=dictionary.person_nouns, fragment=fragment,
+                      adjective_words=dictionary.adjective_words, comparative_predicates=dictionary.comparative_predicates)
+    return MeaningReadings(resolve_overlaps(possible.detections), possible.ruled_out)
 
 
 def resolve_overlaps(dets: list[Detection]) -> list[Detection]:

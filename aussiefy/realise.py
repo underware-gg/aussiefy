@@ -58,6 +58,8 @@ def is_plural_term(entry: Entry) -> bool:
 def phrase_continues(det: Detection, toks: list[Token], end: int) -> bool:
     """A word after a "the X" span carries the noun phrase on ("the poor [old] minister"): the trigger caught an
     adjective, not the noun it stands for."""
+    if det.nominal_role in {'head', 'possessor'}:
+        return False
     if kept_determiner(det, toks) is None or end >= len(toks):
         return False
     nxt = toks[end]
@@ -78,6 +80,12 @@ def number_problem(entry: Entry, det: Detection, toks: list[Token], tags: list[s
     """Why a noun's mass/count or number requirements conflict with its source phrase or agreeing verb."""
     if entry.frame != "np":
         return None
+    if entry.number == 'count':
+        for i in range(det.start - 1, -1, -1):
+            if toks[i].norm == 'much':
+                return 'a count noun in an explicitly mass phrase'
+            if tags[i] not in NOUN_MODIFIERS:
+                break
     if entry.number == "mass":
         if det.inflection in ("plural", "written_plural"):
             return "a mass noun for an explicitly plural span"
