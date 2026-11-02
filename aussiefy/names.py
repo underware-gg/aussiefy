@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from . import discovery_outcomes as outcomes
+
 import re
 from dataclasses import dataclass
 
@@ -95,7 +97,7 @@ def generate_name(dictionary, *, seed: int = 0, shape: str | None = None) -> dic
         raise UserError(f"shape must be one of {', '.join(SHAPES)}")
     catalog = dictionary.name_catalog
     result = {"seed": seed, "shape": shape, "vulgarity": 0, "themes": [], "name": None,
-              "outcome": "nothing_fits"}
+              "outcome": outcomes.NOTHING_FITS}
     if catalog is None:
         return result
     catalog = _eligible_catalog(catalog, dictionary)
@@ -117,5 +119,5 @@ def generate_name(dictionary, *, seed: int = 0, shape: str | None = None) -> dic
         else:
             name = "-".join(_slug(dictionary.entries[value].form) for value in catalog.phrases[index])
         if _safe(name, dictionary):
-            return {**result, "shape": selected, "name": name, "outcome": "matched"}
+            return {**result, "shape": selected, "name": name, "outcome": outcomes.MATCHED}
     return {**result, "shape": selected}

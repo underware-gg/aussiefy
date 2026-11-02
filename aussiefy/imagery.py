@@ -82,13 +82,15 @@ def lookup_images(dictionary, query, eff, setting, limit, *, tokens, readings) -
                     and positive_context(tokens, reading.start, reading.end) for cid in reading.concepts}
         association = image_association(image, concepts, setting)
         words = form_key(image.text)
-        literal = key == words or (len(key) >= 4 and f" {key} " in f" {words} ") or key == form_key(image.id.replace("-", " "))
+        exact = key in {words, form_key(image.id.replace('-', ' '))}
+        literal = exact or (len(key) >= 4 and f" {key} " in f" {words} ")
         if not association and not literal:
             continue
         recognised = True
         if not permitted(image, eff, setting):
             continue
         card = ImageOffer(image, image.text, association or "image search").card()
-        card.update(template=True, automatic=False)
+        card.update(template=True, automatic=False,
+                    match_kind='meaning' if association else 'term' if exact else 'phrase')
         out.append(card)
     return out[:limit], recognised

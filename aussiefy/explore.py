@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
-from .cards import entry_card, shows_riffs
+from . import discovery_outcomes as outcomes
+from .cards import full_entry_card, shows_riffs
 from .engine import Translator, default_translator
 from .errors import UserError
-from .evidence import metadata_dict, register_rejection
+from .evidence import register_rejection
 from .genre import resolve_document
 from .policy import dial_rejection, parse_embellishment, roll
 
@@ -20,7 +21,8 @@ def _context(translator, level, vulgarity, embellishment, document_type, documen
     setting = genre.setting(parse_embellishment(embellishment) if embellishment is not None else None)
     eff = tr.effective(level=level, vulgarity=vulgarity, embellishment=embellishment,
                        document_type=document_type, document_config=document_config)
-    return tr.dictionary, eff, setting, {**eff.envelope(), **genre.envelope(setting.step)}
+    return tr.dictionary, eff, setting, {**eff.envelope(), **genre.envelope(setting.step),
+                                        'dictionary_id': tr.dictionary.identity}
 
 
 def _filters(dictionary, concept, theme):
@@ -42,10 +44,8 @@ def _entries(dictionary, eff, concept, theme, include_gated):
 
 
 def _card(entry, eff, setting):
-    return {**entry_card(entry, eff.vulgarity, shows_riffs(setting), permitted_themes=eff.theme_policy,
-                         registers=eff.registers),
-            **metadata_dict(entry, derived=True), "type": entry.type, "status": entry.status,
-            "held_back": list(entry.held_back)}
+    return full_entry_card(entry, eff.vulgarity, shows_riffs(setting), permitted_themes=eff.theme_policy,
+                           registers=eff.registers)
 
 
 def _page(items, offset, limit):
@@ -59,7 +59,7 @@ def _page(items, offset, limit):
 
 
 def _outcome(page, items):
-    return "matched" if page else "page_exhausted" if items else "nothing_fits"
+    return outcomes.MATCHED if page else outcomes.PAGE_EXHAUSTED if items else outcomes.NOTHING_FITS
 
 
 def list_entries(*, concept: str | None = None, theme: str | None = None, offset: int = 0,
@@ -83,7 +83,7 @@ def list_wordless_meanings(*, offset: int = 0, limit: int = DEFAULT_PAGE_SIZE,
     its plain wording and reviewed example sentences. Guards and the holding concept never appear."""
     d = (translator or default_translator()).dictionary
     page, next_offset = _page(d.wordless_meanings, offset, limit)
-    return {"offset": offset, "limit": limit, "total": len(d.wordless_meanings), "next_offset": next_offset,
+    return {"dictionary_id": d.identity, "offset": offset, "limit": limit, "total": len(d.wordless_meanings), "next_offset": next_offset,
             "outcome": _outcome(page, d.wordless_meanings),
             "results": [{"concept": cid, "plain": d.concepts[cid].plain, "examples": list(d.concepts[cid].examples)}
                         for cid in page]}
@@ -99,11 +99,11 @@ def get_entry(entry_id: str, *, level: int | str = 5, vulgarity: int | str | Non
     d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
     entry = d.entries.get(entry_id)
     if entry is None or entry.status == "omit":   # an omitted entry is never shown, nor its flags
-        return {**envelope, "entry_id": entry_id, "entry": None, "outcome": "not_in_dictionary"}
+        return {**envelope, "entry_id": entry_id, "entry": None, "outcome": outcomes.NOT_IN_DICTIONARY}
     reason = dial_rejection(entry, eff, include_gated=include_gated) or register_rejection(entry, eff.registers)
     if reason:
-        return {**envelope, "entry_id": entry_id, "entry": None, "outcome": "nothing_fits", "reason": str(reason)}
-    return {**envelope, "entry_id": entry_id, "entry": _card(entry, eff, setting), "outcome": "matched"}
+        return {**envelope, "entry_id": entry_id, "entry": None, "outcome": outcomes.NOTHING_FITS, "reason": str(reason)}
+    return {**envelope, "entry_id": entry_id, "entry": _card(entry, eff, setting), "outcome": outcomes.MATCHED}
 
 
 def random_entry(*, seed: int = 0, concept: str | None = None, theme: str | None = None,
@@ -118,10 +118,11 @@ def random_entry(*, seed: int = 0, concept: str | None = None, theme: str | None
     entries = _entries(d, eff, concept, theme, include_gated)
     chosen = entries[int(roll(seed, "dictionary-random", concept or "", theme or "") * len(entries))] if entries else None
     return {**envelope, "seed": seed, "concept": concept, "theme": theme,
-            "outcome": "matched" if chosen else "nothing_fits", "entry": _card(chosen, eff, setting) if chosen else None}
+            "outcome": outcomes.MATCHED if chosen else outcomes.NOTHING_FITS, "entry": _card(chosen, eff, setting) if chosen else None}
 
 
 def suggest_name(*, seed: int = 0, shape: str | None = None, translator: Translator | None = None) -> dict:
     """Suggest a clean Aussie handle; the caller checks uniqueness and retries with a different seed."""
     from .names import generate_name
-    return generate_name((translator or default_translator()).dictionary, seed=seed, shape=shape)
+    dictionary = (translator or default_translator()).dictionary
+    return {**generate_name(dictionary, seed=seed, shape=shape), 'dictionary_id': dictionary.identity}

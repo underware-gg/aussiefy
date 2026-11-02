@@ -68,7 +68,10 @@ unbound templates. See [DD-025](decisions/dd-025-contextual-imagery.md).
 `fence_readings.py` builds counterfactual explanation evidence in the core, using the shared engine's
 source readings and eligible candidates. It performs no I/O and never changes the dictionary or removes
 a protection. The maintainer command `scripts/audit_fences.py` serialises its results and missing-effect
-diagnostics. Ordinary translation does not invoke this build.
+diagnostics. Lookup builds and reuses individual protections through a dictionary-local bounded index;
+the batch audit uses the same evidence. Ordinary translation does not invoke this build.
+`discovery_outcomes.py` owns the shared discovery codes and imports no package modules. Rich discovery
+cards are shared by lookup and entry details; changes-v2 retains its existing card until the coordinated bump.
 
 Bloody hell, lookup explicitly requests query\-fragment readings from `detect.py`; ordinary replacement detection keeps
 its stricter default. Anyway, lookup owns the bounded whole\-query scope decision'n uses local canonical readings

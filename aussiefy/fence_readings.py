@@ -36,16 +36,55 @@ class FenceTrial:
 
 
 @dataclass(frozen=True)
+class FenceVariant:
+    signature: tuple[str, ...]
+    meanings: tuple[RuledOutMeaning, ...]
+    dialect: tuple[RuledOutDialect, ...]
+
+
+@dataclass(frozen=True)
 class FenceReadings:
     fence: Fence
     meanings: tuple[RuledOutMeaning, ...]
     dialect: tuple[RuledOutDialect, ...]
     trials: tuple[FenceTrial, ...]
     generated_examples_truncated: bool = False
+    variants: tuple[FenceVariant, ...] = ()
 
     @property
     def needs_audit(self) -> bool:
         return not self.meanings and not self.dialect
+
+    def for_span(self, text: str, span: list[int]) -> FenceReadings:
+        tokens = tokenize(text)
+        for match in PatternIndex([self.fence.pattern]).find(tokens):
+            if [tokens[match.start].start, tokens[match.end - 1].end] != span:
+                continue
+            signature = _variant_signature(match, tokens)
+            for variant in self.variants:
+                if variant.signature == signature:
+                    return replace(self, meanings=variant.meanings, dialect=variant.dialect)
+        return replace(self, meanings=(), dialect=())
+
+
+def _variant_signature(match, tokens):
+    start, end = match.context or (match.start, match.end)
+    if match.object_start is not None:
+        # Match marks only the object's first token. Keep its remaining context
+        # conservatively rather than treating all "the ..." objects as one witness.
+        end = len(tokens)
+        while end > match.end and tokens[end - 1].is_punct:
+            end -= 1
+    slots = match.pattern.slots
+    captures = [(name, token.start, token.end) for name, token in match.captures.items() if name in slots]
+    out = []
+    for token in tokens[start:end]:
+        slot = next(((name, first) for name, first, last in captures if first <= token.start < last), None)
+        if slot is None:
+            out.append(token.norm)
+        elif token.start == slot[1]:
+            out.append('{' + slot[0] + '}')
+    return tuple(out)
 
 
 class _WithoutFences:
@@ -158,34 +197,64 @@ def _dialect_readings(table, unfenced, fence, text, tokens, hit):
     return out
 
 
-def derive_fence_readings(dictionary: Dictionary) -> tuple[FenceReadings, ...]:
-    """Build a dictionary's explanation evidence and audit, without changing its protections.
+def _derive_fence(fence, probe, table, unfenced):
+    index = PatternIndex([fence.pattern])
+    meanings, words, dialect, trials = set(), set(), set(), []
+    variants = {}
+    examples, truncated = _examples(fence)
+    for text in examples:
+        tokens = tokenize(text)
+        for hit in index.find(tokens):
+            new_meanings, new_words, effect = (probe.compare(text, tokens, hit) if fence.meanings
+                                               else (set(), set(), 'no_dialect_swap'))
+            blocked_dialect = _dialect_readings(table, unfenced, fence, text, tokens, hit)
+            meanings.update(new_meanings)
+            words.update(new_words)
+            dialect.update(blocked_dialect)
+            signature = _variant_signature(hit, tokens)
+            variant_meanings, variant_words, variant_dialect = variants.setdefault(signature, (set(), set(), set()))
+            variant_meanings.update(new_meanings)
+            variant_words.update(new_words)
+            variant_dialect.update(blocked_dialect)
+            if blocked_dialect:
+                effect = f'{effect}+dialect' if fence.meanings else 'dialect'
+            trials.append(FenceTrial(text, effect))
+    return FenceReadings(fence, _meaning_records(meanings, words), _dialect_records(dialect),
+        tuple(dict.fromkeys(trials)), truncated,
+        tuple(FenceVariant(signature, _meaning_records(cids, entries), _dialect_records(swaps))
+              for signature, (cids, entries, swaps) in sorted(variants.items())))
 
-    The bounded generated witnesses supplement authored examples. Missing evidence
-    is diagnostic (R71), never a reason to remove a fence or invent a source reading.
+
+def _meaning_records(meanings, words):
+    return tuple(RuledOutMeaning(cid, tuple(sorted(eid for meaning, eid in words if meaning == cid)))
+                 for cid in sorted(meanings))
+
+
+def _dialect_records(dialect):
+    return tuple(sorted(dialect, key=lambda row: (row.english, row.before, row.after)))
+
+
+class FenceReadingIndex:
+    """Bounded, dictionary-local evidence builds, shared by lookup and the batch audit."""
+
+    def __init__(self, dictionary: Dictionary):
+        self.dictionary = dictionary
+        self._fences = frozenset(dictionary.fences)
+        self._probe = _MeaningProbe(dictionary)
+        self._unfenced = DialectTable(list(dictionary.dialect.swaps), dictionary.dialect.lint_only)
+        self._built: dict[Fence, FenceReadings] = {}
+
+    def __getitem__(self, fence: Fence) -> FenceReadings:
+        if fence not in self._fences:
+            raise KeyError(fence)
+        if fence not in self._built:
+            self._built[fence] = _derive_fence(fence, self._probe, self.dictionary.dialect, self._unfenced)
+        return self._built[fence]
+
+
+def derive_fence_readings(dictionary: Dictionary) -> tuple[FenceReadings, ...]:
+    """Build the full evidence/audit using the same lazy index as reader-facing lookup.
+
+    Missing evidence is diagnostic (R71), never grounds to remove a protection.
     """
-    probe = _MeaningProbe(dictionary)
-    dialect_without = DialectTable(list(dictionary.dialect.swaps), dictionary.dialect.lint_only)
-    out = []
-    for fence in dictionary.fences:
-        index = PatternIndex([fence.pattern])
-        meanings, words, dialect, trials = set(), set(), set(), []
-        examples, truncated = _examples(fence)
-        for text in examples:
-            tokens = tokenize(text)
-            for hit in index.find(tokens):
-                new_meanings, new_words, effect = (probe.compare(text, tokens, hit) if fence.meanings
-                                                   else (set(), set(), 'no_dialect_swap'))
-                blocked_dialect = _dialect_readings(dictionary.dialect, dialect_without, fence, text, tokens, hit)
-                meanings.update(new_meanings)
-                words.update(new_words)
-                dialect.update(blocked_dialect)
-                if blocked_dialect:
-                    effect = f'{effect}+dialect' if fence.meanings else 'dialect'
-                trials.append(FenceTrial(text, effect))
-        out.append(FenceReadings(fence,
-            tuple(RuledOutMeaning(cid, tuple(sorted(eid for meaning, eid in words if meaning == cid)))
-                  for cid in sorted(meanings)),
-            tuple(sorted(dialect, key=lambda row: (row.english, row.before, row.after))),
-            tuple(dict.fromkeys(trials)), truncated))
-    return tuple(out)
+    return tuple(dictionary.fence_readings[fence] for fence in dictionary.fences)

@@ -57,7 +57,7 @@ def test_filters_and_exact_permissions_share_the_existing_policy(translator):
     opts = {"translator": translator, "vulgarity": 1, "concept": "THIRSTY", "theme": "sex"}
     rows = list_entries(**opts)["results"]
     assert "dry-as-a-dead-dingo" in {row["id"] for row in rows}
-    assert all("THIRSTY" in row["concepts"] and "sex" in row["themes"] for row in rows)
+    assert all("THIRSTY" in row["concepts"] and "sex" in {tag['name'] for tag in row["themes"]} for row in rows)
     disabled = {**opts, "document_config": {"themes": {"sex": False}}}
     assert list_entries(**disabled)["outcome"] == "nothing_fits"
     assert random_entry(**disabled)["entry"] is None

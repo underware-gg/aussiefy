@@ -21,8 +21,10 @@ Pass an optional `translator` to each Python operation to reuse a loaded diction
 `--dict`; MCP uses the translator injected into `build_server`. All results are JSON-ready dictionaries;
 CLI commands print their complete response with `--json`. Exit 0 means a result was found, 1 means none,
 and 2 means invalid input.
-For lookup, the status follows its primary outcome: `no_word_yet` exits 1 even when the response includes
+For lookup, the status follows its primary outcome: `left_as_written` exits 1; `no_word_yet` exits 1 even when the response includes
 suggestions for independently understood object words. Both text and JSON output retain the missing meaning.
+Lookup, entry details, pages, random entries, name suggestions and variations carry `dictionary_id`, the
+loaded dictionary's content identity, so callers can associate results with the same data revision.
 
 ## Pages, cards and random entries
 
@@ -47,8 +49,17 @@ reasons; it does not bypass level, vulgarity, register or theme restrictions. Om
 Full discovery cards include the term's type, status, gloss, concepts, frame, form, permitted riffs,
 metadata and structured sources, plus evidence and attestation fields. `held_back` names the fields that
 keep an entry out of automatic translations, even when the caller permits discovery. Public `themes`
-remain names in this slice; reporting each tag's tier and the lowest default tier belongs to the coordinated
-card/changes contract update.
+contain `{name, tier}` objects, including resolved default tiers for tags with no explicit override.
+`minimum_vulgarity` is the lowest default vulgarity tier that permits both the word and every tag.
+It describes default placement, independently of the current request's exact theme overrides.
+Full lookup results use this same card builder. Changes-v2 entry cards retain their previous shape until
+the coordinated changes-contract bump.
+
+Lookup results add `match_kind`: `term` (including inflection), `phrase`, `meaning` or `model`.
+`model` means that only the model cleared the matching threshold; a model boosting an already qualifying
+meaning match remains `meaning`. The existing `match` sentence and `score` remain on full results;
+compact results retain `match_kind`. Image results use the same applicable codes and retain their
+separate `association`. Use codes for branching rather than interpreting display prose.
 
 ## Outcomes
 
@@ -57,10 +68,11 @@ card/changes contract update.
 | `matched` | A card, name or variation is available |
 | `nothing_fits` | A known term or meaning has no compatible offer under these settings, an explicit filter has no eligible entries, or no meaning is waiting for a word |
 | `no_word_yet` | The meaning is recognised, but the dictionary has no Aussie word for it yet (lookup only) |
+| `left_as_written` | The query is deliberately protected, or its meaning is unclear; changing the dials does not turn it into a missing-word request |
 | `not_in_dictionary` | No term/meaning was recognised; the dictionary may be incomplete |
 | `page_exhausted` | Eligible entries exist, but this offset is beyond their final page |
 
-`lookup` reports these codes in `outcome` (`matched`, `nothing_fits`, `no_word_yet`, `not_in_dictionary`)
+`aussiefy.discovery_outcomes` owns this vocabulary. `lookup` reports these codes in `outcome` (`matched`, `nothing_fits`, `no_word_yet`, `left_as_written`, `not_in_dictionary`)
 beside its existing note. `no_word_yet` also returns `meanings`, each with its `concept` and `plain` wording.
 It is claimed for a meaning established by the shared contextual readings, or an exact match on its authored
 plain wording or name (`ACCEPT_AS_TRUE` or `accept as true`), never from spelling similarity alone. Names
@@ -73,6 +85,42 @@ meaning as wordless while offering “a bullshitter” for the object. Such offe
 missing verb meaning. The model remains a fallback when meaning is unsettled. A known term whose existing
 words are blocked by policy still reports `nothing_fits`; this is distinct from having no word at any setting.
 Otherwise, cards and imagery count as a successful lookup. An unknown meaning may still be Australian.
+
+### Phrases deliberately kept as written
+
+`left_as_written` has empty `results`, a `note`, span-scoped `protections` and a merged `ruled_out` list.
+Each protection carries its `original` wording, `span` (Unicode character offsets in the original query),
+its current `reason` and its own `ruled_out`. Several protections keep their separate reasons; the merged
+list combines repeated meanings and words. An incidental protection cannot decide the outcome of a query
+with another independently recognised meaning. A directly recognised dictionary expression, such as
+“dog's breakfast”, still explains itself through normal discovery.
+
+Well, a ruled\-out item has one of these shapes:
+
+- Meaning: `{kind: "meaning", concept: "FOREST", words: [...]}`. `words` contains eligible discovery cards,
+  or compact cards under `short=True`, capped at `limit` per meaning. These are cited dictionary headwords,
+  not instructions to replace a component of the protected phrase. Meaning IDs remain when no word fits.
+  Display names will follow with the separately reviewed meaning\-label work.
+- Dialect: `{kind: "dialect", english: "uk", original: "estate agent", output: "real estate agent"}`,
+  namin' the guarded swap rather than inventing a meaning ID.
+
+An intentionally retained protection may have empty `ruled_out`, as “a people” does. Its current sentence
+stands alone; no “Not read as” line or invented reading is added. Unclear source wording uses the same
+outcome with a reason asking for more context, and is not listed as a meaning waiting for a word.
+The CLI prints current reasons and any supported citations. No existing reason text is rewritten by lookup.
+
+The dictionary builds evidence lazily for each requested protection and reuses it within that dictionary.
+Evidence is retained per matched phrase within a grouped pattern: “gift shop” cannot inherit the HORSE
+reading established for “gift horse”. Captured grammar slots are normalised while literal words and
+context assertions remain part of that phrase's signature. Dialect citations also respect the request's
+document domains and the source's actual singular/plural form.
+It does not run the full audit per lookup, cache request-specific cards, invoke a model for a fully protected
+query or share evidence across dictionary instances. Every request reapplies its dial and metadata checks.
+The [audit command](dictionary.md#sense-boundaries) reports missing effects for curation without removing
+protections automatically.
+Its additive `variants` records expose these signatures and their readings, with `needs_audit` on each
+variant and a `variants_needing_audit` total. The older per-pattern aggregates and totals remain available;
+a grouped pattern having some evidence does not prove every one of its forms.
 
 ## Meanings without a word yet
 

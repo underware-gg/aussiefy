@@ -55,25 +55,18 @@ def instructions(*, allow_document_config: bool = True) -> str:
 
 INSTRUCTIONS = instructions()
 
-# the line a tool description gives a parameter a hosted server can hide (tests check none is left behind)
-_MENTIONS = {
-    "include_gated": "include_gated also returns entries held back as doubtful (marked as such).\n",
-    "unlock": "unlock (flags whose gated entries become eligible) widens it.\n",
-}
-
-
 def _describe(doc: str, hidden: set[str]) -> str:
-    text = inspect.cleandoc(doc) + "\n"
-    for name in hidden:
-        text = text.replace(_MENTIONS.get(name, "\0"), "")
-    return text.strip()
+    # Optional parameter descriptions occupy their own lines in the tool docs.
+    return '\n'.join(line for line in inspect.cleandoc(doc).splitlines()
+                     if not any(line.startswith(name + ' ') for name in hidden)).strip()
 
 
-def build_server(*, translator: Translator | None = None, allow_unlock: bool = True,
+def build_server(*, translator: Translator | None = None, allow_unlock: bool = True, allow_include_gated: bool = True,
                  allow_document_config: bool = True, max_chars: int | None = None,
                  max_query_chars: int | None = None, lookup_limit: int | None = None):
     """The MCP server. The defaults serve everything, for a local install; a hosted service passes its
-    capabilities. allow_unlock=False hides unlock and include_gated; allow_document_config=False hides
+    capabilities. allow_unlock=False hides unlock; allow_include_gated=False hides include_gated independently;
+    allow_document_config=False hides
     document_config and the custom document type; max_chars caps every text field (text, original);
     max_query_chars caps aussie_lookup's query; lookup_limit caps its limit. translator is the one every tool uses (default: the toolkit's)."""
     # pydantic and the SDK come with the mcp extra, so they are imported here, not with the package
@@ -111,7 +104,8 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
     Unlock = Annotated[list[Literal[(*UNLOCKS,)]] | None,
                        Field(description="Flags whose gated (doubtful) entries become eligible, or ['all'].")]
 
-    hidden = ({"unlock", "include_gated"} if not allow_unlock else set()) | \
+    hidden = ({"unlock"} if not allow_unlock else set()) | \
+        ({"include_gated"} if not allow_include_gated else set()) | \
         ({"document_config"} if not allow_document_config else set())
     # every tool only reads: no side effects, same answer for the same call, nothing outside the package
     read_only = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True,
@@ -155,8 +149,10 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                       document_config: dict | None = None) -> dict[str, Any]:
         """Genuine Australian slang for a plain-English meaning ('very busy', 'someone'), or what an Aussie term
         means ('goog'). Filtered to the level and vulgarity, so it never offers what lint would reject.
-        include_gated also returns entries held back as doubtful (marked as such).
-        short: each result as its form, gloss, frame, level and vulgarity only."""
+        include_gated also returns held-back entries for discovery, marked with their reasons.
+        Results name their match kind and dictionary identity; protected phrases return left_as_written
+        with their current reasons and derived ruled-out readings, possibly empty.
+        short: compact entry cards with match-kind codes."""
         return harness.lookup(query, level=level, vulgarity=vulgarity, limit=limit,
                               include_gated=include_gated, short=short, embellishment=embellishment,
                               document_type=document_type, document_config=document_config, translator=translator)

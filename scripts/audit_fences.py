@@ -26,12 +26,16 @@ def main():
                   'Dialect evidence comes from guarded swaps. Generated examples are bounded, not exhaustive.',
         'fences': len(rows),
         'needs_audit': sum(row.needs_audit for row in rows),
+        'variants_needing_audit': sum(not variant.meanings and not variant.dialect
+                                     for row in rows for variant in row.variants),
         'diagnostics': dict(sorted(Counter(trial.effect for row in rows for trial in row.trials).items())),
         'results': [{'phrase': row.fence.phrase, 'frame': row.fence.frame, 'reason': row.fence.reason,
                      'ruled_out': [asdict(meaning) for meaning in row.meanings],
                      'dialect': [asdict(swap) for swap in row.dialect],
                      'needs_audit': row.needs_audit,
                      'generated_examples_truncated': row.generated_examples_truncated,
+                     'variants': [{**asdict(variant), 'needs_audit': not variant.meanings and not variant.dialect}
+                                  for variant in row.variants],
                      'trials': [asdict(trial) for trial in row.trials]} for row in rows],
     }
     text = json.dumps(report, ensure_ascii=False, indent=2) + '\n'

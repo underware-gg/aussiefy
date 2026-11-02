@@ -54,9 +54,12 @@ class ThemePolicy:
     def enabled(self) -> frozenset[str]:
         return frozenset(name for name, tier in self.starts if self.limits[name] >= tier)
 
-    def blocked(self, term: TermMetadata) -> tuple[str, ...]:
+    def tag_tiers(self, term: TermMetadata) -> dict[str, int]:
         tiers = dict(term.theme_tiers)
-        return tuple(name for name in term.themes if self.limits[name] < tiers.get(name, self.defaults[name]))
+        return {name: tiers.get(name, self.defaults[name]) for name in term.themes}
+
+    def blocked(self, term: TermMetadata) -> tuple[str, ...]:
+        return tuple(name for name, tier in self.tag_tiers(term).items() if self.limits[name] < tier)
 
     def to_dict(self) -> dict[str, bool]:
         return {name: name in self.enabled for name, _ in self.starts}

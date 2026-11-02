@@ -380,9 +380,8 @@ def test_locked_options_follow_the_gates_in_effect(translator):
 
 @pytest.mark.parametrize("options", [{"embellishment": 0}, {"embellishment": 1}, {"embellishment": 2},
                                      {"embellishment": 2, "unlock": ["all"], "text": "He's a rascal and a liar."}])
-def test_cards_are_lookups(translator, dictionary, options):
-    """The entries a changes response sends are the cards lookup shows for the same entries under the same policy
-    (aussiefy.cards): riffs only where the embellishment takes them, flags for an unlocked gated entry."""
+def test_changes_v2_preserves_its_card_while_lookup_adds_provenance(translator, dictionary, options):
+    """V2 retains its shape; common data and riffs match discovery under the same policy (DD-053)."""
     options = {**{k: v for k, v in KINDS.items() if k != "text"}, **options}
     text = options.pop("text", KINDS["text"])
     cs = aussiefy.translate_changes(text, translator=translator, **options)
@@ -393,7 +392,11 @@ def test_cards_are_lookups(translator, dictionary, options):
         found = [r for r in harness.lookup(query, limit=100, include_gated=bool(options.get("unlock")), **looked,
                                            translator=translator)["results"] if r["id"] == entry_id]
         if found:
-            assert {k: v for k, v in found[0].items() if k not in ("match", "score")} == card, entry_id
+            assert not {'attestation', 'evidence', 'minimum_vulgarity', 'themes', 'held_back'} & card.keys()
+            for key, value in card.items():
+                actual = ([source['url'] for source in found[0]['sources'] if source.get('url')]
+                          if key == 'sources' else found[0][key])
+                assert actual == value, (entry_id, key)
             matched += 1
     assert matched >= 0.8 * len(cs.entries), (matched, len(cs.entries))
     if not options["embellishment"]:   # deadset takes no riffs, so its cards show none

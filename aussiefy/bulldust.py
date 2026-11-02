@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from . import discovery_outcomes as outcomes
+
 from .constructions import DEFAULT_LIMIT, generate
 from .engine import Translator, default_translator
 from .errors import UserError
@@ -93,5 +95,6 @@ def variations(family: str, *, parts: dict[str, str], level: int | str = 5, seed
                 choices.append({"ingredient_id": ingredient.id, **result["results"][0]})
         groups.append({"role": role, "current": parts[role], "options": choices})
     return {key: value for key, value in base.items() if key not in {"results", "attempts", "rejected", "outcome"}} | {
+        'dictionary_id': tr.dictionary.identity,
         "family": family, "parts": parts, "variations": groups,
-        "outcome": "matched" if any(group["options"] for group in groups) else "nothing_fits"}
+        "outcome": outcomes.MATCHED if any(group["options"] for group in groups) else outcomes.NOTHING_FITS}

@@ -62,7 +62,7 @@ def test_lint_shape(translator):
 
 def test_lookup_shape(translator):
     out = harness.lookup("very tired", translator=translator)
-    assert set(out) == DIALS | {"theme_permissions", "query", "results", "outcome"}
+    assert set(out) == DIALS | {"theme_permissions", "query", "results", "outcome", "dictionary_id"}
     assert out["outcome"] == "matched"
     assert all({"id", "form", "gloss", "frame", "level", "vulgarity", "register", "concepts", "match", "score"}
                <= set(r) for r in out["results"])
@@ -76,15 +76,15 @@ def test_lookup_shape(translator):
 
 
 def test_lookup_cards_come_from_the_shared_card_builder(translator):
-    """The changes builder's entries and lookup's results are the same cards (aussiefy.cards), by entry id."""
-    from aussiefy.cards import entry_card, short_card
+    """Rich discovery cards are shared; changes v2 retains its legacy card until the coordinated bump."""
+    from aussiefy.cards import entry_card, full_entry_card, short_card
 
     d = translator.dictionary
     for r in harness.lookup("very tired", vulgarity=2, translator=translator)["results"]:
-        card = {k: v for k, v in r.items() if k not in ("match", "score")}
-        assert card == entry_card(d.entries[r["id"]], 2, permitted_themes=translator.effective(vulgarity=2).theme_policy, registers=translator.effective(vulgarity=2).registers)
+        card = {k: v for k, v in r.items() if k not in ("match", "score", "match_kind")}
+        assert card == full_entry_card(d.entries[r["id"]], 2, permitted_themes=translator.effective(vulgarity=2).theme_policy, registers=translator.effective(vulgarity=2).registers)
     for r in harness.lookup("very tired", short=True, translator=translator)["results"]:
-        assert r == short_card(d.entries[r["id"]])
+        assert {k: v for k, v in r.items() if k != 'match_kind'} == short_card(d.entries[r["id"]])
     sourced = next(e for e in d.idioms if e.sources)
     assert entry_card(sourced, permitted_themes=frozenset(), registers=("current",))["sources"] == [s.url for s in sourced.sources if s.url]
 

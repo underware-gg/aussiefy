@@ -8,12 +8,14 @@ level and cap; direct term discovery remains broader than contextual meaning inf
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
 from functools import lru_cache
 from typing import Any
 
 from .align import content_words
 from .text import Token, tokenize
 from . import pos
+from . import discovery_outcomes as outcomes
 from .context import TIME_ADVERBS, positive_context
 from .detect import DETERMINERS, NOUN_PREPOSITIONS, Detection, check_frame
 from .embed import NgramEmbedder
@@ -22,12 +24,13 @@ from .engine import Translator, default_translator
 from .model import Dictionary
 from .morph import pluralise, verb_forms
 from .select import mapping_effects, dial_rejection, semantic_rejection
-from .schema import PLACEHOLDER_RE, Entry
-from .cards import entry_card, short_card, shows_riffs
+from .schema import PLACEHOLDER_RE, HOLDING_CONCEPT, Entry
+from .cards import full_entry_card, short_card, shows_riffs
+from .evidence import register_rejection
 from .terms import fold, form_key, strip_markup
-from .genre import resolve_document
+from .genre import Embellishment, resolve_document
 from .imagery import lookup_images
-from .policy import envelope, parse_embellishment, theme_permissions
+from .policy import Effective, envelope, parse_embellishment, theme_permissions
 
 
 
@@ -119,21 +122,21 @@ def _scoped_query(tokens: list[Token], readings: list[Detection], tags: list[str
     return None
 
 
-def _term_match(e: Entry, qn: str, slotted: set[str]) -> tuple[float, str] | None:
+def _term_match(e: Entry, qn: str, slotted: set[str]) -> tuple[float, str, str] | None:
     forms = [form_key(f) for f in e.all_forms]
     if e.id in slotted or qn in forms or any(qn in f.split() for f in forms):
-        return SCORE_TERM, "slang term"
+        return SCORE_TERM, 'term', "slang term"
     if any(qn in _inflected(fold(PLACEHOLDER_RE.sub("", f)).strip(), e.frame) for f in e.all_forms):
-        return SCORE_INFLECTED, "the slang term, inflected"
+        return SCORE_INFLECTED, 'term', "the slang term, inflected"
     stems = set()
     raw = [fold(PLACEHOLDER_RE.sub("", f)) for f in e.all_forms]
     for w in (w for f in raw for w in f.split() if len(w) > 3):
         st = w.rstrip("'").removesuffix("g").removesuffix("in") if w.endswith(("in'", "ing")) else w
         stems |= {st, st[:-1] if len(st) > 2 and st[-1] == st[-2] else st}   # kippin' -> kipp -> kip
     if len(qn) >= 3 and (any(f" {qn} " in f" {f} " for f in forms) or (" " not in qn and qn in stems)):
-        return SCORE_IN_PHRASE, "part of a phrase"
+        return SCORE_IN_PHRASE, 'phrase', "part of a phrase"
     if " " in qn and any(_in_order(qn.split(), f.split()) for f in forms):
-        return SCORE_IN_ORDER, "part of a phrase"   # "chuck in" ~ "chuck it in", "give the flick"
+        return SCORE_IN_ORDER, 'phrase', "part of a phrase"   # "chuck in" ~ "chuck it in", "give the flick"
     return None
 
 
@@ -149,13 +152,100 @@ def _object_terms(matches, readings, tokens, tags, dictionary):
             and check_frame(m, tokens, dictionary.adjective_nouns, tags, fragment=True) is not None}
 
 
+@dataclass(frozen=True)
+class _LookupCards:
+    dictionary: Dictionary
+    effective: Effective
+    setting: Embellishment
+    domains: tuple[str, ...]
+    short: bool
+    limit: int
+
+    def entry(self, entry: Entry):
+        return short_card(entry) if self.short else full_entry_card(entry, self.effective.vulgarity,
+            shows_riffs(self.setting), permitted_themes=self.effective.theme_policy,
+            registers=self.effective.registers)
+
+    def ruled_out(self, evidence, original):
+        out = []
+        for reading in evidence.meanings:
+            words = []
+            for eid in reading.entries:
+                entry = self.dictionary.entries[eid]
+                if (dial_rejection(entry, self.effective) or register_rejection(entry, self.effective.registers)
+                        or semantic_rejection(entry, narrator_opinion=self.setting.narrator_opinion,
+                                              quantity_approximation=self.setting.quantity_approximation)):
+                    continue
+                words.append(self.entry(entry))
+                if len(words) == self.limit:
+                    break
+            out.append({'kind': 'meaning', 'concept': reading.concept, 'words': words})
+        if evidence.fence.applies(None, self.domains):
+            source = tuple(token.norm for token in tokenize(original))
+            for swap in evidence.dialect:
+                part = tuple(token.norm for token in tokenize(swap.before))
+                if any(source[i:i + len(part)] == part for i in range(len(source) - len(part) + 1)):
+                    out.append({'kind': 'dialect', 'english': swap.english, 'original': swap.before, 'output': swap.after})
+        return out
+
+    def protection(self, query, tokens, start, end, reason, evidence=None):
+        offset = len(query) - len(query.lstrip())
+        span = [tokens[start].start + offset, tokens[end - 1].end + offset]
+        original = query[slice(*span)]
+        return {'span': span, 'original': original, 'reason': reason,
+                'ruled_out': self.ruled_out(evidence.for_span(query, span), original) if evidence is not None else []}
+
+
+def _protected_query(query, tokens, readings, exhaustive, cards):
+    """Explain a wholly protected query; incidental fences cannot decide its whole outcome."""
+    if exhaustive is None or exhaustive - {HOLDING_CONCEPT}:
+        return []
+    out = []
+    for reading in readings:
+        fence = reading.source_pattern.fence if reading.source_pattern else None
+        if reading.concepts == (HOLDING_CONCEPT,):
+            reason = 'The meaning is unclear here, so try adding words around the phrase.'
+            evidence = None
+        elif fence is not None and not reading.concepts:
+            reason = fence.reason
+            evidence = cards.dictionary.fence_readings[fence]
+        else:
+            continue
+        out.append(cards.protection(query, tokens, reading.start, reading.end, reason, evidence))
+    return out
+
+
+def _dialect_protected_query(query, tokens, cards):
+    out = []
+    for match in cards.dictionary.fence_index.find(tokens):
+        fence = match.pattern.fence
+        if (fence.meanings or not fence.applies(None, cards.domains)
+                or match.end != len(tokens) or any(t.norm not in DETERMINERS for t in tokens[:match.start])):
+            continue
+        evidence = cards.dictionary.fence_readings[fence]
+        out.append(cards.protection(query, tokens, match.start, match.end, fence.reason, evidence))
+    return out
+
+
+def _merge_ruled_out(protections, limit):
+    meanings, dialects = {}, []
+    for protection in protections:
+        for reading in protection['ruled_out']:
+            if reading['kind'] == 'meaning':
+                words = meanings.setdefault(reading['concept'], {})
+                words.update((word['id'], word) for word in reading['words'])
+            elif reading not in dialects:
+                dialects.append(reading)
+    return ([{'kind': 'meaning', 'concept': cid, 'words': [words[eid] for eid in sorted(words)[:limit]]}
+             for cid, words in sorted(meanings.items())] + dialects)
+
+
 def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = None, limit: int = 8,
            include_gated: bool = False, short: bool = False, embellishment: int | str | None = None,
            document_type: str = "general", document_config: dict | None = None,
            translator: Translator | None = None) -> dict[str, Any]:
     """Find Aussie options for a plain-English meaning ("very busy"), or explain a slang term ("goog").
-    short: each result as only its form, gloss, frame, level and vulgarity (and gating, a dated register), for
-    an agent checking a choice.
+    short: compact cards with match-kind codes for an agent checking a choice.
 
     Applies the requested level and vulgarity to every route. Explicit term searches explain vocabulary;
     they do not certify it as a replacement for the source context.
@@ -171,7 +261,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     setting = genre.setting(parse_embellishment(embellishment) if embellishment is not None else None)
     eff = tr.effective(level=level, vulgarity=vulgarity, unlock=["all"] if include_gated else None,
                        embellishment=embellishment, document_type=document_type, document_config=document_config)
-    cap = eff.vulgarity
+    cards = _LookupCards(d, eff, setting, genre.policy.term_domains, short, limit)
     q = query.lower().strip()
     # one word ("lonely") is where character n-grams mislead most (lovely, miser), so for a single word trust
     # whole-word hits and discount fuzzy ones
@@ -206,11 +296,11 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
             if held.start <= matched.start and matched.end <= held.end:
                 blocked.update(set(matched.pattern.concepts) - set(held.concepts))
 
-    out = {"query": query, **envelope(eff.level, eff.vulgarity, eff.warnings),
+    out = {"query": query, "dictionary_id": d.identity, **envelope(eff.level, eff.vulgarity, eff.warnings),
            "theme_permissions": theme_permissions(eff.theme_policy)}
     waiting = sorted(set(d.wordless_meanings).intersection(established))
     if waiting:
-        out.update(outcome="no_word_yet",
+        out.update(outcome=outcomes.NO_WORD_YET,
                    meanings=[{"concept": cid, "plain": d.concepts[cid].plain} for cid in waiting],
                    note="The dictionary recognises this meaning but has no Aussie word for it yet. "
                         "Consider proposing one.")
@@ -219,6 +309,21 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     object_concepts = {cid for eid in object_terms for cid in d.entries[eid].concept}
     if waiting and not established.difference(waiting) and not object_terms:
         return {**out, "results": []}
+
+    qn = form_key(q)
+    slotted = {m.pattern.entry_id for m in form_matches
+               if m.start == 0 and m.end == len(tokens) and m.pattern.slots}
+    term_matches = {e.id: matched for e in d.idioms + d.garnish if e.status != 'omit'
+                    and (matched := _term_match(e, qn, slotted))}
+    whole_terms = any(match[0] >= SCORE_INFLECTED for match in term_matches.values())
+    if not waiting and not named and not whole_terms:
+        protections = _protected_query(query, tokens, readings, exhaustive, cards)
+        if not protections and (not established or exhaustive is None):
+            protections = _dialect_protected_query(query, tokens, cards)
+        if protections:
+            return {**out, 'outcome': outcomes.LEFT_AS_WRITTEN, 'results': [], 'protections': protections,
+                    'ruled_out': _merge_ruled_out(protections, limit),
+                    'note': ' '.join(dict.fromkeys(protection['reason'] for protection in protections))}
 
     sim = NgramEmbedder()
     model = None if waiting else tr.lookup_embedder
@@ -264,19 +369,16 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         for cid, concept in d.concepts.items():
             if variants & set(re.findall(r"[a-z']+", (concept.description or "").lower())):
                 concept_score[cid] = max(concept_score.get(cid, 0.0), DESCRIPTION_NAMES_IT)
-    scored: list[tuple[float, Entry, str]] = []
-    qn = form_key(q)
-    slotted = {m.pattern.entry_id for m in form_matches
-               if m.start == 0 and m.end == len(tokens) and m.pattern.slots}
+    scored: list[tuple[float, Entry, str, str]] = []
     parsed_concepts = {cid for eid in slotted for cid in d.entries[eid].concept}
     negative_anchors = {w[:-4] if w.endswith("less") else w for w in content_words(q)}
     def score_entry(e, term_match, use_model=True):
         if waiting and not set(e.concept).intersection(exhaustive):
             return None
         if e.id in object_terms:
-            return SCORE_TERM, e, "slang term in context object"
+            return SCORE_TERM, e, 'term', "slang term in context object"
         if term_match:
-            return term_match[0], e, term_match[1]
+            return term_match[0], e, term_match[1], term_match[2]
         paths = set(e.concept)
         if exhaustive is not None:
             paths.intersection_update(exhaustive)
@@ -301,9 +403,10 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
                          w[:-4] if w.endswith("less") else w for w in content_words(t)})),
                     default=0.0)
             if m >= model.lookup_threshold and MEANING_FLOOR + (m - model.lookup_threshold) > best:
-                return round(MEANING_FLOOR + (m - model.lookup_threshold), 3), e, "meaning (local model)"
+                return (round(MEANING_FLOOR + (m - model.lookup_threshold), 3), e,
+                        'model' if best < MEANING_FLOOR else 'meaning', "meaning (local model)")
         if best >= MEANING_FLOOR:
-            return best, e, "meaning"
+            return best, e, 'meaning', "meaning"
         return None
 
     recognised = exhaustive is not None
@@ -314,7 +417,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         if dial_rejection(e, eff, include_gated=include_gated):
             deferred.append(e)   # term-matched only if nothing is offered: most entries, at the lowest dials
             continue
-        term_match = _term_match(e, qn, slotted)
+        term_match = term_matches.get(e.id)
         recognised |= term_match is not None
         if not term_match and semantic_rejection(e, narrator_opinion=setting.narrator_opinion,
                 quantity_approximation=setting.quantity_approximation, effects=effects_for(e)):
@@ -322,12 +425,8 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         elif match := score_entry(e, term_match):
             scored.append(match)
     scored.sort(key=lambda t: (-t[0], t[1].incoherence, t[1].id))
-    if short:
-        results = [short_card(e) for _, e, _ in scored[:limit]]
-    else:
-        riffs = shows_riffs(setting)
-        results = [{**entry_card(e, cap, riffs, permitted_themes=eff.theme_policy, registers=eff.registers),
-                    "match": how, "score": round(s, 2)} for s, e, how in scored[:limit]]
+    results = [{**cards.entry(e), 'match_kind': kind, **({} if short else {'match': how, 'score': round(s, 2)})}
+               for s, e, kind, how in scored[:limit]]
     for card in results:
         entry = d.entries[card["id"]]
         effects = effects_for(entry)
@@ -342,17 +441,17 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     recognised |= recognised_image
     if not results and not images and not recognised:
         # cheapest evidence first: a held term itself, then its meaning by spelling, then by the model
-        recognised = (any(_term_match(e, qn, slotted) for e in deferred)
+        recognised = (any(e.id in term_matches for e in deferred)
                       or any(score_entry(e, None, use_model=False) for e in deferred)
                       or any(score_entry(e, None) for e in deferred))
     if images:
         out["imagery"] = images
-    out["outcome"] = ("no_word_yet" if waiting else "matched" if results or images
-                      else "nothing_fits" if recognised else "not_in_dictionary")
+    out["outcome"] = (outcomes.NO_WORD_YET if waiting else outcomes.MATCHED if results or images
+                      else outcomes.NOTHING_FITS if recognised else outcomes.NOT_IN_DICTIONARY)
     if not results and not images and not waiting:
         out["note"] = {
-            "nothing_fits": "The dictionary recognises this meaning but has no compatible suggestion at these "
+            outcomes.NOTHING_FITS: "The dictionary recognises this meaning but has no compatible suggestion at these "
                             "settings. Try another wording or look up a specific term.",
-            "not_in_dictionary": "No entry. If you're sure Australians say it, it's probably fine but unvetted; "
+            outcomes.NOT_IN_DICTIONARY: "No entry. If you're sure Australians say it, it's probably fine but unvetted; "
                                  "otherwise rephrase. Consider proposing it for the dictionary."}[out["outcome"]]
     return out

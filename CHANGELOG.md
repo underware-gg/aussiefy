@@ -9,8 +9,16 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Report deliberately protected and unclear lookup queries as `left_as_written`, with unchanged reasons,
+  source spans and derived ruled-out readings, including honest empty lists. Reuse bounded evidence
+  per matched phrase within each dictionary, expose variant evidence in the audit and reapply the caller's dials to cited words. Preserve direct dictionary
+  expressions, wordless outcomes and established-meaning ranking.
+- Share rich discovery cards with structured provenance, resolved tag tiers'n default placement;
+  report match\-kind codes'n dictionary identity. Decouple hosted discovery of held\-back entries
+  from translation unlocks. Changes\-v2 cards remain unchanged until the coordinated contract bump.
+
 - Add counterfactual evidence'n an audit command for protected phrases, including overlappin'
-  protections, wordless readings'n guarded dialect swaps. Stone the flamin' crows, allow checked contextual examples.
+  protections, wordless readings'n guarded dialect swaps. Well, allow checked contextual examples.
   Protections without established alternative readings remain in place'n are reported for review.
 
 - Separate source\-meaning conditions from output grammar. Shared role evidence rejects adjective\-as\-noun
@@ -175,7 +183,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   certificates, retained qualifier ownership'n compatible realised forms across translation, plans and
   automatic alternatives. Calibrate the DRUNK family without guessing unknown grades or removing terms.
 - Distinguish plural direct address from references to everyone: offer “you mob”/“youse” in simple group
-  greetings'n commands; preserve ambiguous parentheticals and coordinated recipients. Look, retain ordinary
+  greetings'n commands; preserve ambiguous parentheticals and coordinated recipients. Oi, retain ordinary
   distributive meanings in “Everyone came” and prevent direct dictionary replacements bypassin' usage.
 
 - Enable comic dictionary terms in solemn text at Troppo; other defaults stay off, with explicit
@@ -195,7 +203,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   reviewed servin'/container senses while preserving queries, ranking rules'n required status.
 
 - Add explicit versioned dictionary overlays through existin' `--dict` files: add concepts/entries or patch
-  existin' records in deterministic order, retaining the normal engine'n dial checks. Fair dinkum, preserve raw fields,
+  existin' records in deterministic order, retaining the normal engine'n dial checks. Jeez Louise, preserve raw fields,
   replace named lists/maps rather than append, allow clearing inherited source references, reject malformed
   or shadowed invalid operations, and report correction origins through validate/show'n dictionary metadata.
   Keep behaviour settings separate from vocabulary corrections; tighten canonical concept'n text/boolean
@@ -204,11 +212,11 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 - Preserve beer containers, currency, morning references, animal species, have a goss grammar, pub mealtimes,
   dance\-event settings'n weather identity in the next source\-reviewed mappings. Add attested amber fluid
   for mass beer wording, and explicit mass\-noun metadata so goss'n kid stakes keep grammatical agreement.
-  Well, preserve count selectors'n named root\-beer/ginger\-beer identity instead of forcing mass wording into them.
+  Preserve count selectors'n named root\-beer/ginger\-beer identity instead of forcing mass wording into them.
   Merge the 237 source proposals from batches 5 and 6 alongside the 239 from batches 3 and 4.
 
 - Preserve explicit listener possessives through shared binding'n form compatibility, and require a
-  listener for “bend someone's ear”. Add standard bend/bent morphology instead of inventin' a listener
+  listener for “bend someone's ear”. Stone the flamin' crows, add standard bend/bent morphology instead of inventin' a listener
   or producing “bended”.
 - Apply 239 reviewed source records from the next two 120\-entry audit batches, retaining historical,
   component'n source\-chain evidence limits rather than certifying every trigger or full construction.

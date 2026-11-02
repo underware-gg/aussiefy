@@ -72,10 +72,13 @@ MCP tools expose parameter descriptions and dial choices in their schemas, and p
 messages as tool errors. `lookup` requires `limit >= 1` and marks each riff's `best` fit.
 
 A hosted MCP server narrows the tools by capability ([DD-028](../../architecture/decisions/dd-028-hosted-mcp-capabilities.md)).
-`build_server(translator=…, allow_unlock=False, allow_document_config=False, max_chars=…, max_query_chars=…,
-lookup_limit=…)` hides `unlock` and `include_gated`, hides `document_config` and the `custom` document type,
+`build_server(translator=…, allow_unlock=False, allow_include_gated=False, allow_document_config=False, max_chars=…, max_query_chars=…,
+lookup_limit=…)` independently hides translation's `unlock` and discovery's `include_gated`, hides `document_config` and the `custom` document type,
 caps `text` and `original`, and caps lookup's `query` and `limit`, along with entry-page sizes. The defaults serve everything. Every tool is annotated read-only,
 non-destructive, idempotent and closed-world.
+`allow_include_gated` defaults to true even when `allow_unlock` is false, so a host can show held-back
+terms with their provenance without unlocking automatic translations. Hidden options keep their closed
+defaults even when sent anyway. Lookup's limit also caps cited word cards per ruled-out meaning.
 
 ## The same toolkit, three more ways
 
@@ -93,8 +96,12 @@ non-destructive, idempotent and closed-world.
 Every surface takes the same parameters by the same names and defaults; `tests/functional/test_interfaces.py` holds them
 in step (see [DD-008](../../architecture/decisions/dd-008-one-toolkit-thin-surfaces.md)).
 
-Genre, English, embellishment and extended document controls are described in [translation controls](translation-controls.md). Lookup's cards each carry the entry's `id` (full cards also its `sources`), built by `aussiefy/cards.py`, which the
-`changes` builder's entries share. `lookup(short=True)` offers compact cards; `lint(suggest=False)` skips optional engine suggestions.
+Genre, English, embellishment and extended document controls are described in [translation controls](translation-controls.md).
+Lookup's full cards share the discovery builder in `aussiefy/cards.py`, including structured sources,
+attestation, evidence and tag placement. Changes-v2 cards retain their existing representation until the
+coordinated contract bump. `lookup(short=True)` offers compact cards with match-kind codes;
+`lint(suggest=False)` skips optional engine suggestions. Lookup also reports the dictionary identity and
+structured preservation outcomes; see [exploration contracts](exploring.md#outcomes).
 
 ## Lookup sense matching
 

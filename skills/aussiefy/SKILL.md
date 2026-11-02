@@ -177,8 +177,12 @@ are separate integration work. See [the reference](https://github.com/underware-
 Use `aussiefy entries --concept HUNGRY --limit 20 --json` for stable pages, `entry ID --json` for a full
 card, and `random-entry --seed 7 --json` to sample the whole eligible dictionary. `--theme` intersects the
 concept filter. `--include-gated` shows held-back terms with reasons; it never bypasses the dials or themes.
-A lookup's `outcome` distinguishes `not_in_dictionary`, `nothing_fits` and `no_word_yet` (a recognised meaning
-with no Aussie word); none licenses an unsuitable substitution, and a meaning with no word stays plain.
+A lookup's `outcome` distinguishes `not_in_dictionary`, `nothing_fits`, `no_word_yet` (a recognised meaning
+with no Aussie word) and `left_as_written` (protected or unclear wording). None licenses an unsuitable
+substitution. A wordless meaning stays plain; preserve protected wording and ask for context when it is
+unclear. `protections` carries current reasons and derived `ruled_out` citations; an empty list is valid.
+Those cited headwords are explanations, not replacement instructions. Full cards carry structured sources,
+attestation and tag tiers; `match_kind` is the matching code, and `dictionary_id` identifies the loaded data.
 `wordless-meanings --json` lists those meanings with plain wording and examples. `suggest-name --seed 7 --shape place --json` suggests a clean handle whose availability the
 caller must check. `variations FAMILY --parts JSON --json` lists complete, labelled construction options
 with one part varied at a time. These also have Python and MCP equivalents; see

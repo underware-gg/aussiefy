@@ -5,6 +5,14 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Report deliberately protected and unclear lookup queries as `left_as_written`, with unchanged reasons,
+  source spans and derived ruled-out readings, including honest empty lists. Reuse bounded evidence
+  per matched phrase within each dictionary, expose variant evidence in the audit and reapply the caller's dials to cited words. Preserve direct dictionary
+  expressions, wordless outcomes and established-meaning ranking.
+- Share rich discovery cards with structured provenance, resolved tag tiers and default placement;
+  report match-kind codes and dictionary identity. Decouple hosted discovery of held-back entries
+  from translation unlocks. Changes-v2 cards remain unchanged until the coordinated contract bump.
+
 - Add counterfactual evidence and an audit command for protected phrases, including overlapping
   protections, wordless readings and guarded dialect swaps. Allow checked contextual examples.
   Protections without established alternative readings remain in place and are reported for review.

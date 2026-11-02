@@ -25,6 +25,8 @@ dictionary, setting or argument; 3 refused by the source policy; 4 an LLM mode f
 
 from __future__ import annotations
 
+from . import discovery_outcomes as outcomes
+
 import argparse
 import difflib
 import json
@@ -311,7 +313,7 @@ def cmd_lookup(args) -> int:
                          translator=_translator(args), **_policy(args))
     if args.json:
         _json(out)
-        return 0 if out["outcome"] == "matched" else 1
+        return 0 if out["outcome"] == outcomes.MATCHED else 1
     _warn(out["policy_warnings"])
     for r in out["results"]:
         extra = f" [vulgarity {r['vulgarity']}]" if r["vulgarity"] else ""
@@ -321,13 +323,22 @@ def cmd_lookup(args) -> int:
             print(f"      riff ({riff['tone']}): {riff['text']}")
     for image in out.get("imagery", ()):
         print(f"  image ({image['form']}, {image['association']}): {image['text']} — {image['usage']}")
-    if not out["results"] and not out.get("imagery"):
+    if out['outcome'] == outcomes.LEFT_AS_WRITTEN:
+        for protection in out['protections']:
+            print(f"  {protection['original']}: {protection['reason']}")
+            for reading in protection['ruled_out']:
+                if reading['kind'] == 'meaning':
+                    words = ', '.join(word['form'] for word in reading['words'])
+                    print(f"      Not read as: {reading['concept']}" + (f" ({words})" if words else ''))
+                else:
+                    print(f"      Not swapped: {reading['original']} → {reading['output']}")
+    elif not out["results"] and not out.get("imagery"):
         print(f"  (no match for {out['query']!r} at level {out['level']}) {out['note']}")
-    elif out["outcome"] == "no_word_yet":
+    elif out["outcome"] == outcomes.NO_WORD_YET:
         print(f"  {out['note']}")
     for meaning in out.get("meanings", ()):
         print(f"  meaning {meaning['concept']}: {meaning['plain']}")
-    return 0 if out["outcome"] == "matched" else 1
+    return 0 if out["outcome"] == outcomes.MATCHED else 1
 
 
 def cmd_bulldust(args) -> int:

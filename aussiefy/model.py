@@ -147,6 +147,16 @@ class Dictionary:
     adjustments: Adjustments = field(default_factory=Adjustments)
 
     @cached_property
+    def fence_index(self) -> PatternIndex:
+        return PatternIndex([fence.pattern for fence in self.fences])
+
+    @cached_property
+    def fence_readings(self):
+        from .fence_readings import FenceReadingIndex
+
+        return FenceReadingIndex(self)
+
+    @cached_property
     def promoted_entries(self) -> dict[str, str]:
         return {e.promoted_from: e.id for e in self.entries.values() if e.promoted_from is not None}
 

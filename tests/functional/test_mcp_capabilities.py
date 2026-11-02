@@ -21,7 +21,7 @@ TOOLS = {"aussie_entries": harness.list_entries, "aussie_wordless_meanings": har
          "aussie_variations": harness.variations, "aussie_bulldust": harness.bulldust, "aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_guide": harness.guide,
          "aussie_plan": harness.plan, "aussie_translate": harness.translate, "aussie_verify": harness.verify}
 HIDDEN = {"unlock", "include_gated", "document_config"}
-HOSTED = {"allow_unlock": False, "allow_document_config": False, "max_chars": 40, "max_query_chars": 12,
+HOSTED = {"allow_unlock": False, "allow_include_gated": False, "allow_document_config": False, "max_chars": 40, "max_query_chars": 12,
           "lookup_limit": 5}
 
 
@@ -58,6 +58,43 @@ def test_every_tool_is_read_only_on_every_server(hosted):
             a = tool.annotations
             assert (a.read_only_hint, a.destructive_hint, a.idempotent_hint, a.open_world_hint) == \
                 (True, False, True, False), tool.name
+
+
+@pytest.mark.parametrize('allow_unlock', [True, False])
+@pytest.mark.parametrize('allow_include_gated', [True, False])
+def test_discovery_of_held_terms_is_independent_of_translation_unlock(allow_unlock, allow_include_gated):
+    tools = _tools(build_server(allow_unlock=allow_unlock, allow_include_gated=allow_include_gated))
+    assert ('unlock' in tools['aussie_translate'].input_schema['properties']) == allow_unlock
+    for name in ['aussie_lookup', 'aussie_entries', 'aussie_entry', 'aussie_random_entry']:
+        assert ('include_gated' in tools[name].input_schema['properties']) == allow_include_gated
+        assert ('include_gated' in tools[name].description) == allow_include_gated
+
+
+def test_hosted_discovery_can_show_held_terms_without_translation_unlock(translator):
+    server = build_server(translator=translator, allow_unlock=False)
+    plain = asyncio.run(server.call_tool('aussie_lookup', {'query': 'all talk'})).structured_content
+    shown = asyncio.run(server.call_tool('aussie_lookup', {'query': 'all talk', 'include_gated': True})).structured_content
+    assert len(shown['results']) > len(plain['results'])
+    assert any(row['held_back'] for row in shown['results'])
+    assert 'unlock' not in _tools(server)['aussie_translate'].input_schema['properties']
+
+
+def test_hidden_discovery_permission_sent_anyway_uses_its_closed_default(hosted, monkeypatch):
+    seen = []
+    real = harness.lookup
+    monkeypatch.setattr(harness, 'lookup', lambda *a, **k: seen.append(k) or real(*a, **k))
+    asyncio.run(hosted.call_tool('aussie_lookup', {'query': 'all talk', 'include_gated': True}))
+    assert seen[-1]['include_gated'] is False
+
+
+@pytest.mark.parametrize('query', ['national forest', 'a people', 'real estate agent'])
+def test_mcp_lookup_reports_the_same_protected_contract_as_python(query, translator):
+    import json
+
+    server = build_server(translator=translator)
+    actual = asyncio.run(server.call_tool('aussie_lookup', {'query': query})).structured_content
+    expected = json.loads(json.dumps(harness.lookup(query, translator=translator)))
+    assert actual == expected and actual['outcome'] == 'left_as_written'
 
 
 @pytest.mark.parametrize("tool, field", [("aussie_translate", "text"), ("aussie_plan", "text"),

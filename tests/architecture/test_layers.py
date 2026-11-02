@@ -10,7 +10,7 @@ CORE = {"grammar", "meaning_context", "fences", "fence_readings", "dictionary_id
         "imagery", "model", "terms", "embed", "engine", "loader", "vocabulary", "static", "dump", "dialect", "genre", "pos", "protected", "profile", "cards", "masks", "changes"}
 UPPER = {"explore", "bulldust", "__init__", "harness", "lookup", "lint", "guide", "retelling", "yarn", "llm", "claude", "cli", "mcp_server", "gaps",
          "rounds", "explain", "scrape", "models", "markdown", "translation", "align", "verify", "judge", "markup"}
-NEUTRAL = {"errors"}   # shared by every layer, and imports nothing of the package
+NEUTRAL = {"errors", "discovery_outcomes"}   # imports nothing of the package
 # embed.make_embedder("local") resolves the installed model's config: the one place the core reaches out
 ALLOWED = {("embed", "models")}
 

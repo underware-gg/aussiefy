@@ -81,3 +81,4 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 | [DD-050](../../../architecture/decisions/dd-050-wordless-meaning-migration.md) | Approved ordinary waiting meanings, contextual eager readings and complete marker retirement | Accepted for ED16 phase A2 |
 | [DD-051](../../../architecture/decisions/dd-051-independent-phrase-ownership.md) | Whole-phrase constraints survive partial overlaps without freezing contextual objects | Accepted for ED16 phase C |
 | [DD-052](../../../architecture/decisions/dd-052-source-evidence-and-output-grammar.md) | Shared source-role/context evidence, independent output grammar and measured refinement | Accepted for ED16 phase C |
+| [DD-053](../../../architecture/decisions/dd-053-discovery-reading-contract.md) | Protected-query explanations, shared discovery cards, dictionary-local evidence and independent hosted discovery | Accepted for slice 6 |

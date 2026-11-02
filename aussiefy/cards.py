@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Any
 
 from .schema import Entry
 from .evidence import metadata_dict
-from .themes import ThemePermissions
+from .themes import ThemePermissions, ThemePolicy
 
 if TYPE_CHECKING:
     from .genre import Embellishment
@@ -65,3 +65,17 @@ def entry_card(e: Entry, cap: int = 3, riffs: bool = True, *,
     if e.held_back:
         card["gated"] = list(e.held_back)
     return card
+
+
+def full_entry_card(e: Entry, cap: int = 3, riffs: bool = True, *,
+                    permitted_themes: ThemePolicy, registers) -> dict[str, Any]:
+    """The discovery card, with structured provenance and default subject placement.
+
+    Changes v2 retains entry_card until the coordinated changes-contract bump.
+    """
+    tiers = permitted_themes.tag_tiers(e)
+    return {**entry_card(e, cap, riffs, permitted_themes=permitted_themes, registers=registers),
+            **metadata_dict(e, derived=True), 'type': e.type, 'status': e.status,
+            'held_back': list(e.held_back),
+            'themes': [{'name': name, 'tier': tier} for name, tier in tiers.items()],
+            'minimum_vulgarity': max([e.vulgarity, *tiers.values()])}
