@@ -3,8 +3,9 @@
 from dataclasses import dataclass, replace
 from functools import cached_property
 
-from .matcher import Pattern, compile_pattern
+from .matcher import Pattern, PatternIndex, compile_pattern
 from .schema import FRAMES, SchemaError, parse_not_in
+from .text import tokenize
 
 KINDS = frozenset({'set_phrase', 'other_sense', 'grammar'})
 ENGLISHES = frozenset({'unknown', 'us', 'uk'})
@@ -19,6 +20,7 @@ class Fence:
     meanings: bool
     dialect: frozenset[str]
     not_in: frozenset[str] = frozenset()
+    examples: tuple[str, ...] = ()
 
     @cached_property
     def pattern(self) -> Pattern:
@@ -41,7 +43,8 @@ def parse_fences(raw) -> tuple[Fence, ...]:
     fences, seen = [], set()
     for i, row in enumerate(raw):
         where = f'fences.yaml: item {i + 1}'
-        if not isinstance(row, dict) or set(row) != {'phrase', 'frame', 'kind', 'scope', 'reason'}:
+        required = {'phrase', 'frame', 'kind', 'scope', 'reason'}
+        if not isinstance(row, dict) or not required <= row.keys() or row.keys() - required - {'examples'}:
             raise SchemaError(f'{where}: needs phrase, frame, kind, scope and reason')
         if any(not isinstance(row[key], str) or not row[key].strip() for key in ('phrase', 'frame', 'kind', 'reason')):
             raise SchemaError(f'{where}: phrase, frame, kind and reason must be non-empty text')
@@ -57,10 +60,18 @@ def parse_fences(raw) -> tuple[Fence, ...]:
             raise SchemaError(f'{where}: scope needs a boolean meanings and distinct dialects from {sorted(ENGLISHES)}')
         if not isinstance(scope['not_in'], list) or any(not isinstance(v, str) for v in scope['not_in']):
             raise SchemaError(f'{where}: not_in must be a list of document domains')
+        examples = row.get('examples', [])
+        if (not isinstance(examples, list) or any(not isinstance(v, str) or not v.strip() for v in examples)
+                or len(set(examples)) != len(examples)):
+            raise SchemaError(f'{where}: examples must be distinct non-empty strings')
         fence = Fence(row['phrase'], row['frame'], row['kind'], row['reason'], scope['meanings'],
-                      frozenset(dialect), parse_not_in(where, scope['not_in']))
+                      frozenset(dialect), parse_not_in(where, scope['not_in']), tuple(examples))
         try:
             key = pattern_key(fence.pattern)
+            index = PatternIndex([fence.pattern])
+            for example in fence.examples:
+                if not index.find(tokenize(example)):
+                    raise SchemaError(f'{where}: example {example!r} does not match the fence')
         except ValueError as exc:
             raise SchemaError(f'{where}: {exc}') from exc
         if key in seen:

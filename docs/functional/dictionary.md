@@ -308,6 +308,23 @@ Duplicates must combine scopes in one record. Self-swaps and dialect replacement
 fence are errors. Entry replacements overlapping a fence are allowed and reported as loader warnings,
 since some overlaps deliberately protect phrases at settings where their entries cannot be used.
 
+A fence may also supply `examples`, a list of distinct non\-empty sentences containing its pattern.
+The loader checks those matches. Add an example when the surrounding words are needed to demonstrate
+what the protection prevents; examples don't change its scope or make new source triggers.
+
+`python scripts/audit_fences.py --output audit.json` builds counterfactual explanation evidence. It
+forces substitution with and without each protection, retaining normal meaning and candidate checks,
+and separately checks overlapping protections and guarded dialect rules. It records the established
+meaning IDs, eligible entry IDs and blocked dialect swaps. A meaning with no fitting word still has
+its ID. Generated grammar scaffolds supplement authored examples; they are bounded probes, not
+reviewed usage examples or proof about every possible sentence. Truncated generation is reported.
+
+An intentionally retained protection may have no established alternative readin'. Such a phrase uses
+its plain sentence alone, without a “Not read as” line. The audit reports missing effects, including
+overlap, other checks'n absent source patterns, for review. A rejected fuzzy lookup guess isn't an
+established readin'. Missing evidence never removes a protection automatically. The audit builder
+doesn't run as part of ordinary translation.
+
 ## Slots
 
 Slots are `{subj} {be} {have} {do} {poss} {obj} {objposs}`, plus `{np}`, which captures a short noun phrase'n copies

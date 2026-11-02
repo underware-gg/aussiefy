@@ -65,6 +65,11 @@ Markdown/JSX rules enter its core. See [DD-016](decisions/dd-016-reconcile-sourc
 subject/slot grammar. Engine insertion'n toolkit suggestions share eligibility; bare lookup exposes
 unbound templates. See [DD-025](decisions/dd-025-contextual-imagery.md).
 
+`fence_readings.py` builds counterfactual explanation evidence in the core, using the shared engine's
+source readings and eligible candidates. It performs no I/O and never changes the dictionary or removes
+a protection. The maintainer command `scripts/audit_fences.py` serialises its results and missing-effect
+diagnostics. Ordinary translation does not invoke this build.
+
 Bloody hell, lookup explicitly requests query\-fragment readings from `detect.py`; ordinary replacement detection keeps
 its stricter default. Anyway, lookup owns the bounded whole\-query scope decision'n uses local canonical readings
 as evidence, rather than treatin' every matched noun or modifier as a complete parse.

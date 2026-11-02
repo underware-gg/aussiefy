@@ -5,6 +5,10 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Add counterfactual evidence and an audit command for protected phrases, including overlapping
+  protections, wordless readings and guarded dialect swaps. Allow checked contextual examples.
+  Protections without established alternative readings remain in place and are reported for review.
+
 - Separate source-meaning conditions from output grammar. Shared role evidence rejects adjective-as-noun
   readings without banning natural compounds. Reviewed context distinguishes remorse, aptitude and
   unemployment from sympathy, presents and welfare status. Declared boundary, number and state/voice
