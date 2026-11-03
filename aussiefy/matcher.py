@@ -103,7 +103,7 @@ class Match:
 
 
 def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_intensity: int,
-                    entry_id: str | None = None) -> Pattern:
+                    entry_id: str | None = None, *, inflect_head: bool = True) -> Pattern:
     intensity = default_intensity
     m = INTENSITY_RE.search(text)
     if m:
@@ -175,15 +175,16 @@ def compile_pattern(text: str, frame: str, concepts: tuple[str, ...], default_in
             role, forms = "", ()
             if frame == "vp" and idx == first_word and len(alts) == 1:
                 role = "head_verb"
-                forms = tuple(morph.verb_forms(alts[0].lower()).items())
+                forms = (tuple(morph.verb_forms(alts[0].lower()).items()) if inflect_head
+                         else ((alts[0].lower(), 'base'),))
                 values = frozenset(s for s, _ in forms)
             elif frame == "np" and idx == last_word and len(alts) == 1:
                 role = "head_noun"
                 word = alts[0].lower()
-                if morph.singular_of(word):
-                    # written as a plural ("wild horses", but also "a shambles", "the sticks"): matches only itself,
-                    # and spelling can't tell its number, so the entry says (its `plural:`)
-                    forms = ((word, "written_plural"),)
+                written_plural = bool(morph.singular_of(word))
+                if written_plural or not inflect_head:
+                    # Written plurals and exact fixed heads have only their authored surface.
+                    forms = ((word, "written_plural" if written_plural else "singular"),)
                 else:
                     forms = ((word, "singular"),) + tuple((plural, "plural") for plural in morph.plural_forms(word))
                     if word.endswith("o"):

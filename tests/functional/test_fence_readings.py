@@ -66,6 +66,49 @@ def test_every_protection_gets_an_audit_record_without_mutation(evidence, dictio
     assert all(eid in dictionary.entries for row in evidence.values() for meaning in row.meanings for eid in meaning.entries)
 
 
+def test_every_audited_real_form_has_a_sentence_or_a_derived_reading(evidence):
+    unexplained = [(row.fence.phrase, variant.signature) for row in evidence.values()
+                   for variant in row.variants if not row.fence.reason and not variant.meanings and not variant.dialect]
+    assert unexplained == []
+
+
+@pytest.mark.parametrize('phrase,real,nonword', [
+    ('silence was broken', 'silence was broken', 'silence was brokens'),
+    ('a dollar is worth', 'a dollar is worth', 'a dollar is worths'),
+    ('hands down', 'hands down', 'hands downs'),
+    ('{poss} hands are tied', 'their hands are tied', 'their hands are tieds'),
+])
+def test_fixed_expression_witnesses_do_not_generate_nonwords(evidence, phrase, real, nonword):
+    assert any(trial.text == real for trial in evidence[phrase].trials)
+    assert not any(nonword in trial.text for trial in evidence[phrase].trials)
+
+
+@pytest.mark.parametrize('phrase,signature', [
+    ('hands down', ('hands', 'down')),
+    ('buck the trend', ('bucked', 'the', 'trend')),
+    ('buck the trend', ('bucking', 'the', 'trend')),
+    ('coin toss', ('coin', 'tosses')),
+    ('dinner dance|jacket|jackets|parties|party|theater|theatre', ('dinner', 'party')),
+])
+def test_preexisting_meaning_checks_are_not_bypassed_to_manufacture_evidence(evidence, phrase, signature):
+    row = evidence[phrase]
+    variant = next(variant for variant in row.variants if variant.signature == signature)
+    assert not variant.meanings and not variant.dialect
+    assert row.fence.reason
+
+
+def test_possession_context_exposes_the_crossing_beer_reading(evidence):
+    row = evidence['beer bellies|belly|garden|gardens|gut|guts']
+    for head in ['belly', 'gut']:
+        variant = next(v for v in row.variants if v.signature == ('beer', head))
+        assert any(meaning.concept == 'HAVE_BEER' for meaning in variant.meanings)
+        assert any(trial.text == f'He has a beer {head}.' and trial.effect == 'direct' for trial in row.trials)
+    for head in ['bellies', 'guts']:
+        variant = next(v for v in row.variants if v.signature == ('beer', head))
+        assert not variant.meanings and not variant.dialect
+    assert row.fence.reason
+
+
 def test_generated_possessive_examples_preserve_token_spacing(evidence):
     assert any(trial.text == "dog's breakfast" for trial in evidence["dog's breakfast"].trials)
 

@@ -323,7 +323,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         if protections:
             return {**out, 'outcome': outcomes.LEFT_AS_WRITTEN, 'results': [], 'protections': protections,
                     'ruled_out': _merge_ruled_out(protections, limit),
-                    'note': ' '.join(dict.fromkeys(protection['reason'] for protection in protections))}
+                    'note': ' '.join(dict.fromkeys(p['reason'] for p in protections if p['reason']))}
 
     sim = NgramEmbedder()
     model = None if waiting else tr.lookup_embedder

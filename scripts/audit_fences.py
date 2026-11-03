@@ -28,6 +28,8 @@ def main():
         'needs_audit': sum(row.needs_audit for row in rows),
         'variants_needing_audit': sum(not variant.meanings and not variant.dialect
                                      for row in rows for variant in row.variants),
+        'unexplained_variants': sum(not row.fence.reason and not variant.meanings and not variant.dialect
+                                   for row in rows for variant in row.variants),
         'diagnostics': dict(sorted(Counter(trial.effect for row in rows for trial in row.trials).items())),
         'results': [{'phrase': row.fence.phrase, 'frame': row.fence.frame, 'reason': row.fence.reason,
                      'ruled_out': [asdict(meaning) for meaning in row.meanings],

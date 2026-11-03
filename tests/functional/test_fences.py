@@ -21,7 +21,8 @@ def row(**changes):
 
 
 @pytest.mark.parametrize('changes', [
-    {'kind': 'guard'}, {'reason': ''}, {'scope': {}}, {'frame': 'noun'},
+    {'kind': 'guard'}, {'reason': None}, {'reason': ' '}, {'scope': {}}, {'frame': 'noun'},
+    {'inflect_head': 'false'}, {'inflect_head': 0},
     {'scope': {'meanings': 'yes', 'dialect': [], 'not_in': []}},
     {'scope': {'meanings': False, 'dialect': [], 'not_in': []}},
     {'scope': {'meanings': False, 'dialect': ['auto'], 'not_in': []}},
@@ -36,6 +37,24 @@ def test_fences_require_complete_valid_copy_and_scope(changes):
 def test_duplicates_must_combine_scopes():
     with pytest.raises(SchemaError, match='duplicate fence'):
         parse_fences([row(), row(scope={'meanings': False, 'dialect': ['us'], 'not_in': []})])
+
+
+def test_a_reason_can_be_empty_for_a_derived_line():
+    assert parse_fences([row(reason='')])[0].reason == ''
+
+
+@pytest.mark.parametrize('phrase,frame,ordinary,inflected', [
+    ('the result is ready', 'np', 'the result is ready', 'the result is readies'),
+    ('give a wave', 'vp', 'give a wave', 'gave a wave'),
+])
+def test_exact_head_control_does_not_invent_inflections(phrase, frame, ordinary, inflected):
+    from aussiefy.matcher import PatternIndex
+
+    exact, = parse_fences([row(phrase=phrase, frame=frame, inflect_head=False)])
+    automatic, = parse_fences([row(phrase=phrase, frame=frame)])
+    assert PatternIndex([exact.pattern]).find(tokenize(ordinary))
+    assert not PatternIndex([exact.pattern]).find(tokenize(inflected))
+    assert PatternIndex([automatic.pattern]).find(tokenize(inflected))
 
 
 def test_fences_cannot_repeat_dialect_swaps():
@@ -88,6 +107,36 @@ def test_whole_phrase_entry_can_own_the_protected_expression():
     whole = Detection(0, 3, ('WHOLE',), 'np', 3, 'entry', 'the petroleum jelly')
     assert resolve_overlaps([partial, protected, whole]) == [whole]
     assert 'PARTIAL' not in whole.concepts
+
+
+@pytest.mark.parametrize('via_entry', [False, True])
+def test_curator_whole_phrase_addition_translates_and_looks_up_without_freeing_parts(tmp_path, via_entry):
+    from aussiefy.matcher import PatternIndex
+
+    phrase = 'the gift of the gab'
+    path = tmp_path / 'accepted.yaml'
+    path.write_text(yaml.safe_dump({
+        'format': 'aussiefy-dictionary-overlay/v1',
+        'add_concepts': {
+            'TEST_GAB': {'description': 'A knack for talking.',
+                         'triggers': {} if via_entry else {'np': [phrase]}}},
+        'add_entries': [{'id': 'test-gab', 'form': 'the knack for yarning', 'concept': ['TEST_GAB'],
+                         'frame': 'np', 'vulgarity': 1, 'replaces': [phrase] if via_entry else []}]}))
+    dictionary = load_dictionary([path])
+    tr = Translator(dictionary, lookup_embedder=None)
+    fence = next(f for f in dictionary.fences if f.phrase == phrase)
+    assert PatternIndex([fence.pattern]).find(tokenize(phrase))
+    assert lookup(phrase, translator=tr, vulgarity=1)['outcome'] == 'matched'
+    assert any(word['id'] == 'test-gab' for word in lookup(phrase, translator=tr, vulgarity=1)['results'])
+    result = tr.translate('She has the gift of the gab.', level=5, vulgarity=1, embellishment=0,
+                          embedder='none', english='none',
+                          document_config={'profile': {'substitution': {'lexical': 1, 'phrase': 1, 'idiom': 1}}})
+    assert 'the knack for yarning' in result.text
+    assert any(record.chosen and record.chosen.entry.id == 'test-gab' for record in result.records)
+    mild = tr.translate('She has the gift of the gab.', level=5, vulgarity=0, embellishment=0,
+                        embedder='none', english='none')
+    assert not any(record.chosen for record in mild.records)
+    assert not any(cid == 'PRESENT' for record in mild.records for cid in record.det.concepts)
 
 
 def test_reading_context_does_not_freeze_its_independent_object():

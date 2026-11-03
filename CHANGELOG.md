@@ -9,6 +9,11 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Apply the 14 approved kept\-phrase sentences'n use derived readings alone where every audited form
+  is covered. Keep the six pendin' reason groups'n sentence\-only curation cases. Add contextual
+  `beer belly` and `beer gut` evidence, report unexplained forms, and let fixed\-expression fences suppress invented head
+  inflections. Confirm accepted whole\-phrase additions translate without freeing their protected parts.
+
 - Report deliberately protected and unclear lookup queries as `left_as_written`, with unchanged reasons,
   source spans and derived ruled-out readings, including honest empty lists. Reuse bounded evidence
   per matched phrase within each dictionary, expose variant evidence in the audit and reapply the caller's dials to cited words. Preserve direct dictionary

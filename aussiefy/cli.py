@@ -325,7 +325,7 @@ def cmd_lookup(args) -> int:
         print(f"  image ({image['form']}, {image['association']}): {image['text']} — {image['usage']}")
     if out['outcome'] == outcomes.LEFT_AS_WRITTEN:
         for protection in out['protections']:
-            print(f"  {protection['original']}: {protection['reason']}")
+            print(f"  {protection['original']}" + (f": {protection['reason']}" if protection['reason'] else ''))
             for reading in protection['ruled_out']:
                 if reading['kind'] == 'meaning':
                     words = ', '.join(word['form'] for word in reading['words'])

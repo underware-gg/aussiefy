@@ -21,10 +21,12 @@ class Fence:
     dialect: frozenset[str]
     not_in: frozenset[str] = frozenset()
     examples: tuple[str, ...] = ()
+    inflect_head: bool = True
 
     @cached_property
     def pattern(self) -> Pattern:
-        return replace(compile_pattern(self.phrase, self.frame, (), 3), guard=True, fence=self)
+        return replace(compile_pattern(self.phrase, self.frame, (), 3, inflect_head=self.inflect_head),
+                       guard=True, fence=self)
 
     def applies(self, english: str | None, genre: str | tuple[str, ...]) -> bool:
         domains = (genre,) if isinstance(genre, str) else genre
@@ -44,10 +46,16 @@ def parse_fences(raw) -> tuple[Fence, ...]:
     for i, row in enumerate(raw):
         where = f'fences.yaml: item {i + 1}'
         required = {'phrase', 'frame', 'kind', 'scope', 'reason'}
-        if not isinstance(row, dict) or not required <= row.keys() or row.keys() - required - {'examples'}:
+        if (not isinstance(row, dict) or not required <= row.keys()
+                or row.keys() - required - {'examples', 'inflect_head'}):
             raise SchemaError(f'{where}: needs phrase, frame, kind, scope and reason')
-        if any(not isinstance(row[key], str) or not row[key].strip() for key in ('phrase', 'frame', 'kind', 'reason')):
-            raise SchemaError(f'{where}: phrase, frame, kind and reason must be non-empty text')
+        if any(not isinstance(row[key], str) or not row[key].strip() for key in ('phrase', 'frame', 'kind')):
+            raise SchemaError(f'{where}: phrase, frame and kind must be non-empty text')
+        if not isinstance(row['reason'], str) or row['reason'] and not row['reason'].strip():
+            raise SchemaError(f'{where}: reason must be text, or empty when derived evidence explains every form')
+        inflect_head = row.get('inflect_head', True)
+        if type(inflect_head) is not bool:
+            raise SchemaError(f'{where}: inflect_head must be a boolean')
         if row['kind'] not in KINDS or row['frame'] not in FRAMES:
             raise SchemaError(f'{where}: unknown kind or frame')
         scope = row['scope']
@@ -65,7 +73,7 @@ def parse_fences(raw) -> tuple[Fence, ...]:
                 or len(set(examples)) != len(examples)):
             raise SchemaError(f'{where}: examples must be distinct non-empty strings')
         fence = Fence(row['phrase'], row['frame'], row['kind'], row['reason'], scope['meanings'],
-                      frozenset(dialect), parse_not_in(where, scope['not_in']), tuple(examples))
+                      frozenset(dialect), parse_not_in(where, scope['not_in']), tuple(examples), inflect_head)
         try:
             key = pattern_key(fence.pattern)
             index = PatternIndex([fence.pattern])

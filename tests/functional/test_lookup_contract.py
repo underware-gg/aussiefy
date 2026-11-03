@@ -27,6 +27,7 @@ def test_protected_phrase_returns_its_current_reason_and_actual_reading(dictiona
     protection, = out['protections']
     fence = next(f for f in dictionary.fences if f.phrase == 'national forest')
     assert protection['reason'] == fence.reason
+    assert protection['reason'] == out['note'] == ''
     assert protection['span'] == [0, 15] and protection['original'] == 'national forest'
     assert out['ruled_out'] == protection['ruled_out']
     reading, = out['ruled_out']
@@ -262,6 +263,8 @@ def test_plain_cli_reports_preservation_without_calling_it_no_match(query, has_c
     text = capsys.readouterr().out
     assert query in text and 'no match for' not in text
     assert ('Not read as:' in text) == has_citation
+    if has_citation:
+        assert f'{query}:' not in text
 
 
 def test_json_cli_reports_the_protected_outcome(capsys):

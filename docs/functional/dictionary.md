@@ -312,12 +312,29 @@ A fence may also supply `examples`, a list of distinct non\-empty sentences cont
 The loader checks those matches. Add an example when the surrounding words are needed to demonstrate
 what the protection prevents; examples don't change its scope or make new source triggers.
 
+`inflect_head` defaults to `true`, retaining normal noun plurals or verb tenses. Set it to `false` for a
+fixed expression whose first/last word is not a grammatical head that can take those inflections. For
+example, an NP fence for “silence was broken” must not invent “brokens”. The written words, alternatives
+and grammar slots still match as declared; its scope and frame checks do not change. Use explicit
+alternatives where a fixed expression has more than one accepted form.
+
 `python scripts/audit_fences.py --output audit.json` builds counterfactual explanation evidence. It
 forces substitution with and without each protection, retaining normal meaning and candidate checks,
 and separately checks overlapping protections and guarded dialect rules. It records the established
 meaning IDs, eligible entry IDs and blocked dialect swaps. A meaning with no fitting word still has
 its ID. Generated grammar scaffolds supplement authored examples; they are bounded probes, not
 reviewed usage examples or proof about every possible sentence. Truncated generation is reported.
+
+Evidence belongs to each matched phrase, not every alternative in its pattern. `reason` may be `""`
+only after every real form has its own derived reading. Such a lookup result shows the derived line
+alone, with an empty `note` if no protection needs a sentence. Retain a sentence for a form whose effect
+cannot be established, even if a neighbouring inflection has evidence. The audit's `unexplained_variants`
+counts forms with neither a sentence nor a reading; the bundled dictionary's tests require zero.
+Do not loosen meaning or grammar checks just to produce an explanation.
+
+A curator can add a supported whole\-phrase concept trigger or entry replacement through the normal
+dictionary or overlay format. Stone the flamin' crows, that whole readin' can replace the protected phrase; the fence continues
+to constrain partial'n crossing readings, including at dials that exclude the accepted entry.
 
 An intentionally retained protection may have no established alternative readin'. Such a phrase uses
 its plain sentence alone, without a “Not read as” line. The audit reports missing effects, including
@@ -330,7 +347,7 @@ doesn't run as part of ordinary translation.
 Slots are `{subj} {be} {have} {do} {poss} {obj} {objposs}`, plus `{np}`, which captures a short noun phrase'n copies
 it across, and `{will}`, which becomes "will" or "would" by tense. For example, `reckon {np} {have} Buckley's`
 turns "believing her assertion to be simply impossible" into "reckoning her assertion had Buckley's". When an
-entry has no verb of its own to take tense from, it uses the rest of the sentence's tense. Oi, clause forms can
+entry has no verb of its own to take tense from, it uses the rest of the sentence's tense. Clause forms can
 also start with "there" ("it's impossible" → "there's no bloody way").
 
 `{objposs}` identifies another participant's possessive. It uses an explicit captured possessive or

@@ -108,6 +108,9 @@ An intentionally retained protection may have empty `ruled_out`, as “a people�
 stands alone; no “Not read as” line or invented reading is added. Unclear source wording uses the same
 outcome with a reason asking for more context, and is not listed as a meaning waiting for a word.
 The CLI prints current reasons and any supported citations. No existing reason text is rewritten by lookup.
+Where the approved copy calls for the derived line alone, `reason` is `""`; `note` is empty when none
+of the query's protections needs a sentence. A missing reading requires a sentence instead. Curators
+check this for every real phrase form, rather than borrowing another alternative's evidence.
 
 The dictionary builds evidence lazily for each requested protection and reuses it within that dictionary.
 Evidence is retained per matched phrase within a grouped pattern: “gift shop” cannot inherit the HORSE
