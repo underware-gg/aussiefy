@@ -112,13 +112,18 @@ Where the approved copy calls for the derived line alone, `reason` is `""`; `not
 of the query's protections needs a sentence. A missing reading requires a sentence instead. Curators
 check this for every real phrase form, rather than borrowing another alternative's evidence.
 
-The dictionary builds evidence lazily for each requested protection and reuses it within that dictionary.
-Evidence is retained per matched phrase within a grouped pattern: “gift shop” cannot inherit the HORSE
-reading established for “gift horse”. Captured grammar slots are normalised while literal words and
+Stone the crows, the dictionary builds evidence lazily for each requested protection'n reuses it within that dictionary.
+Evidence is retained per matched phrase within a grouped pattern: “gift shop” can't inherit the HORSE
+readin' established for “gift horse”. Captured grammar slots are normalised while literal words and
 context assertions remain part of that phrase's signature. Dialect citations also respect the request's
-document domains and the source's actual singular/plural form.
-It does not run the full audit per lookup, cache request-specific cards, invoke a model for a fully protected
-query or share evidence across dictionary instances. Every request reapplies its dial and metadata checks.
+document domains'n the source's actual singular/plural form.
+
+Authored protections also apply when a query uses capitals, as in `Native Americans`, `US Congress`
+or `National Forest`. The shared reader retains the protection while keeping ordinary replacement
+readings out of names. Lookup preserves the query's original spelling and character offsets; whole
+dictionary expressions can still own their complete phrase.
+Evidence building does not run the full audit per lookup, cache request-specific cards, invoke a model
+for a fully protected query or share evidence across dictionary instances. Every request reapplies its dial and metadata checks.
 The [audit command](dictionary.md#sense-boundaries) reports missing effects for curation without removing
 protections automatically.
 Its additive `variants` records expose these signatures and their readings, with `needs_audit` on each
@@ -155,13 +160,13 @@ necessary for unknown meanings. Ineligible references are skipped at generation,
 a name word in a valid translation overlay does not prevent the dictionary from loading.
 A missing catalogue yields `nothing_fits`, preserving custom dictionaries that do not supply one.
 
-Well, the catalogue is finite. Jeez Louise, the host checks availability'n requests another seed on a clash; this function
+Well, the catalogue is finite. Fair dinkum, the host checks availability'n requests another seed on a clash; this function
 reserves no name'n promises no uniqueness. It returns the selected shape, seed, name, fixed policy and
 outcome. An unsafe assembly is skipped within a bounded search of at most 32 candidates of that shape.
 
 ## Construction variations
 
-Pass a family ID'n the complete role\-to\-ingredient mapping from a `bulldust` result. Stone the crows, each role's options
+Pass a family ID'n the complete role\-to\-ingredient mapping from a `bulldust` result. Strewth, each role's options
 vary only that role, holding the other ingredients fixed. Now, every returned option is a complete construction
 with its label, part evidence'n output spans. This checks the assembled expression's profanity and family
 policy, not just the proposed word. Missing slots, unknown IDs'n incompatible ingredient kinds raise.

@@ -314,6 +314,11 @@ example, an NP fence for “silence was broken” must not invent “brokens”.
 and grammar slots still match as declared; its scope and frame checks do not change. Use explicit
 alternatives where a fixed expression has more than one accepted form.
 
+Check the converse as well: every real form must remain protected. For example, the noun expression
+`toss up` has a real plural, `toss ups`, so it keeps normal head inflection. The independently reviewed
+forms in `tests/functional/test_fence_forms.py` must be updated when a new fixed-head decision is made;
+do not generate those acceptance cases from the already-restricted pattern.
+
 `python scripts/audit_fences.py --output audit.json` builds counterfactual explanation evidence. It
 forces substitution with and without each protection, retaining normal meaning and candidate checks,
 and separately checks overlapping protections and guarded dialect rules. It records the established

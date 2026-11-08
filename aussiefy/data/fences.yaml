@@ -2199,7 +2199,14 @@
   reason: Toss belongs to a chance expression or a cooking instruction here, not an ordinary throw.
 - phrase: toss up
   frame: np
-  inflect_head: false
+  kind: set_phrase
+  scope:
+    meanings: true
+    dialect: []
+    not_in: []
+  reason: Toss belongs to a chance expression or a cooking instruction here, not an ordinary throw.
+- phrase: toss-ups
+  frame: np
   kind: set_phrase
   scope:
     meanings: true

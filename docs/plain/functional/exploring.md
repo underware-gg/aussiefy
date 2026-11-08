@@ -113,8 +113,13 @@ Evidence is retained per matched phrase within a grouped pattern: “gift shop�
 reading established for “gift horse”. Captured grammar slots are normalised while literal words and
 context assertions remain part of that phrase's signature. Dialect citations also respect the request's
 document domains and the source's actual singular/plural form.
-It does not run the full audit per lookup, cache request-specific cards, invoke a model for a fully protected
-query or share evidence across dictionary instances. Every request reapplies its dial and metadata checks.
+
+Authored protections also apply when a query uses capitals, as in `Native Americans`, `US Congress`
+or `National Forest`. The shared reader retains the protection while keeping ordinary replacement
+readings out of names. Lookup preserves the query's original spelling and character offsets; whole
+dictionary expressions can still own their complete phrase.
+Evidence building does not run the full audit per lookup, cache request-specific cards, invoke a model
+for a fully protected query or share evidence across dictionary instances. Every request reapplies its dial and metadata checks.
 The [audit command](dictionary.md#sense-boundaries) reports missing effects for curation without removing
 protections automatically.
 Its additive `variants` records expose these signatures and their readings, with `needs_audit` on each

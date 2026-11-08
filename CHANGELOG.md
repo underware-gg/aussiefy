@@ -9,8 +9,12 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Restore protection of the real plural `toss ups` and cover the spellin' `toss-ups`. Keep authored phrase protections inside capitalised
+  names, so lookup recognises `Native Americans`, `US Congress` and `Gulf Stream` without offering
+  slang for their component words. Check real fixed\-expression forms'n simple phrase casing/inflections.
+
 - Apply the 14 approved kept\-phrase sentences'n use derived readings alone where every audited form
-  is covered. Keep the six pendin' reason groups'n sentence\-only curation cases. Add contextual
+  is covered. Mate, keep the six pendin' reason groups'n sentence\-only curation cases. Add contextual
   `beer belly` and `beer gut` evidence, report unexplained forms, and let fixed\-expression fences suppress invented head
   inflections. Confirm accepted whole\-phrase additions translate without freeing their protected parts.
 
@@ -197,7 +201,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 - Prepare bundled model 1.3.0 from fresh evaluation/full fits of the unchanged pinned recipe against the
   reviewed dictionary. Retain exact input provenance, all prior trials, the unchanged reference rules and
   33/33 full\-model/export checks. Record bounded lookup comparisons'n remainin' certainty/relevance
-  errors; automatic gap fillin' stays off. Well, this is a model update, not a package release promotion.
+  errors; automatic gap fillin' stays off. This is a model update, not a package release promotion.
 
 - Make comic substitutions in solemn text explicitly configurable with `solemn_comic_terms`. Preserve
   detected mood, other dial restrictions and image/closing preferences.

@@ -5,6 +5,10 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Restore protection of the real plural `toss ups` and cover the spelling `toss-ups`. Keep authored phrase protections inside capitalised
+  names, so lookup recognises `Native Americans`, `US Congress` and `Gulf Stream` without offering
+  slang for their component words. Check real fixed-expression forms and simple phrase casing/inflections.
+
 - Apply the 14 approved kept-phrase sentences and use derived readings alone where every audited form
   is covered. Keep the six pending reason groups and sentence-only curation cases. Add contextual
   `beer belly` and `beer gut` evidence, report unexplained forms, and let fixed-expression fences suppress invented head

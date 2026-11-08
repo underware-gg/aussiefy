@@ -756,7 +756,9 @@ def _detection_evidence(tokens: list[Token], index: PatternIndex, scorer: Callab
                 ruled_out.update(cid for cid in det.concepts if concepts[cid].nominal_roles
                                  and nominal_use not in concepts[cid].nominal_roles)
             det.concepts = applicable_concepts(det.concepts, concepts, tokens, det.end, complete, usage, nominal_use)
-        if det and not _in_a_name(tokens, det.start, det.end) and not _possessed(tokens, det) \
+        # Names suppress replacement readings, but must not discard authored protections.
+        if det and (m.pattern.fence is not None or not _in_a_name(tokens, det.start, det.end)) \
+                and not _possessed(tokens, det) \
                 and (det.concepts or m.pattern.fence is not None):
             found.append(det)
 
