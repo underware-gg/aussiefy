@@ -92,7 +92,7 @@ def test_a_term_plural_in_form_takes_no_a(translator):
     assert "It took yonks." in out("It took a long time.") and "We ate heaps of tucker." in out("We ate a lot of food.")
     assert "I caught a barra." in out("I caught a barramundi.")
     assert "It cost a quid." in out("It cost a British pound.")
-    assert out("It cost a dollar.") == {"It cost a dollar."}
+    assert out("It cost a dollar.") == {"It cost a buck."}
     assert any("thongs" in o for o in out("A man in sunglasses and flip-flops walked in."))
 
 

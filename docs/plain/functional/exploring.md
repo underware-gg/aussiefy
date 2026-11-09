@@ -118,6 +118,13 @@ Authored protections also apply when a query uses capitals, as in `Native Americ
 or `National Forest`. The shared reader retains the protection while keeping ordinary replacement
 readings out of names. Lookup preserves the query's original spelling and character offsets; whole
 dictionary expressions can still own their complete phrase.
+That exception requires a whole dictionary form or its inflection. A component word from a longer
+idiom cannot override the phrase protection: `the toss` stays as written, while the complete idiom
+can still be looked up directly. Singular/plural identity forms are explicitly authored together,
+as in `Native American|Americans`; neither form borrows the other's explanation evidence.
+
+Recognised noun phrases include their determiners and counts. Queries such as `five dollars` and
+`two biscuits` use the known noun meaning; a count does not claim unknown words or another clause.
 Evidence building does not run the full audit per lookup, cache request-specific cards, invoke a model
 for a fully protected query or share evidence across dictionary instances. Every request reapplies its dial and metadata checks.
 The [audit command](dictionary.md#sense-boundaries) reports missing effects for curation without removing

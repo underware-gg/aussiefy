@@ -16,7 +16,7 @@ from .align import content_words
 from .text import Token, tokenize
 from . import pos
 from . import discovery_outcomes as outcomes
-from .context import TIME_ADVERBS, positive_context
+from .context import NP_DETERMINER_TAGS, TIME_ADVERBS, positive_context
 from .detect import DETERMINERS, NOUN_PREPOSITIONS, Detection, check_frame
 from .embed import NgramEmbedder
 from .errors import UserError
@@ -103,6 +103,7 @@ def _scoped_query(tokens: list[Token], readings: list[Detection], tags: list[str
         if head.subject_noun is not None:
             captured.add(head.subject_noun.i)
         if any(t.norm not in DETERMINERS and t.i not in captured
+               and not (head.frame == 'np' and tags[i] in NP_DETERMINER_TAGS)
                and i not in covered for i, t in enumerate(tokens[:start])):
             continue
         # All coordinated heads must be known. A preposition/infinitive may introduce a head's
@@ -122,21 +123,32 @@ def _scoped_query(tokens: list[Token], readings: list[Detection], tags: list[str
     return None
 
 
-def _term_match(e: Entry, qn: str, slotted: set[str]) -> tuple[float, str, str] | None:
+@dataclass(frozen=True)
+class _TermMatch:
+    score: float
+    kind: str
+    description: str
+    whole: bool = False
+
+
+def _term_match(e: Entry, qn: str, slotted: set[str]) -> _TermMatch | None:
     forms = [form_key(f) for f in e.all_forms]
-    if e.id in slotted or qn in forms or any(qn in f.split() for f in forms):
-        return SCORE_TERM, 'term', "slang term"
-    if any(qn in _inflected(fold(PLACEHOLDER_RE.sub("", f)).strip(), e.frame) for f in e.all_forms):
-        return SCORE_INFLECTED, 'term', "the slang term, inflected"
+    exact = e.id in slotted or qn in forms
+    inflected = not exact and any(qn in _inflected(fold(PLACEHOLDER_RE.sub("", f)).strip(), e.frame)
+                                  for f in e.all_forms)
+    if exact or any(qn in f.split() for f in forms):
+        return _TermMatch(SCORE_TERM, 'term', "slang term", whole=exact or inflected)
+    if inflected:
+        return _TermMatch(SCORE_INFLECTED, 'term', "the slang term, inflected", whole=True)
     stems = set()
     raw = [fold(PLACEHOLDER_RE.sub("", f)) for f in e.all_forms]
     for w in (w for f in raw for w in f.split() if len(w) > 3):
         st = w.rstrip("'").removesuffix("g").removesuffix("in") if w.endswith(("in'", "ing")) else w
         stems |= {st, st[:-1] if len(st) > 2 and st[-1] == st[-2] else st}   # kippin' -> kipp -> kip
     if len(qn) >= 3 and (any(f" {qn} " in f" {f} " for f in forms) or (" " not in qn and qn in stems)):
-        return SCORE_IN_PHRASE, 'phrase', "part of a phrase"
+        return _TermMatch(SCORE_IN_PHRASE, 'phrase', "part of a phrase")
     if " " in qn and any(_in_order(qn.split(), f.split()) for f in forms):
-        return SCORE_IN_ORDER, 'phrase', "part of a phrase"   # "chuck in" ~ "chuck it in", "give the flick"
+        return _TermMatch(SCORE_IN_ORDER, 'phrase', "part of a phrase")   # "chuck in" ~ "chuck it in", "give the flick"
     return None
 
 
@@ -315,7 +327,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
                if m.start == 0 and m.end == len(tokens) and m.pattern.slots}
     term_matches = {e.id: matched for e in d.idioms + d.garnish if e.status != 'omit'
                     and (matched := _term_match(e, qn, slotted))}
-    whole_terms = any(match[0] >= SCORE_INFLECTED for match in term_matches.values())
+    whole_terms = any(match.whole for match in term_matches.values())
     if not waiting and not named and not whole_terms:
         protections = _protected_query(query, tokens, readings, exhaustive, cards)
         if not protections and (not established or exhaustive is None):
@@ -378,7 +390,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         if e.id in object_terms:
             return SCORE_TERM, e, 'term', "slang term in context object"
         if term_match:
-            return term_match[0], e, term_match[1], term_match[2]
+            return term_match.score, e, term_match.kind, term_match.description
         paths = set(e.concept)
         if exhaustive is not None:
             paths.intersection_update(exhaustive)

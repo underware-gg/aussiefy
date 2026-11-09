@@ -5,6 +5,11 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Protect singular and plural identity names such as `Native American` and `South Americans` in lookup.
+  Keep a word inside a longer idiom from overriding a protected phrase: `the toss` stays as written,
+  while the complete death idiom remains discoverable. Add the countable dollar word `buck`/`bucks`
+  from R75, retaining quantities and currency labels; recognise counted noun queries such as `five dollars`.
+
 - Restore protection of the real plural `toss ups` and cover the spelling `toss-ups`. Keep authored phrase protections inside capitalised
   names, so lookup recognises `Native Americans`, `US Congress` and `Gulf Stream` without offering
   slang for their component words. Check real fixed-expression forms and simple phrase casing/inflections.

@@ -57,30 +57,37 @@ def test_plural_toss_up_is_not_a_throw(dictionary, seed, phrase):
 
 def _simple_forms(fence):
     """Literal/possessive expressions and head forms; reviewed fixed forms remain independent."""
-    if any(c in fence.phrase for c in '|?!@^'):
+    if any(c in fence.phrase for c in '?!@^'):
         return ()
     phrase = fence.phrase.replace('{poss}', 'their')
     if any(c in phrase for c in '{}'):
         return ()
-    forms = {phrase}
-    if fence.inflect_head and fence.frame == 'np':
+    bases = (phrase,)
+    if '|' in phrase:
         stem, _, head = phrase.rpartition(' ')
-        if head.isalpha() and not singular_of(head):
-            forms.update(f'{stem} {form}'.strip() for form in plural_forms(head))
-    elif fence.inflect_head and fence.frame == 'vp':
-        head, _, tail = phrase.partition(' ')
-        forms.update(f'{form} {tail}'.strip() for form in verb_forms(head.lower()))
+        pair = head.split('|')
+        if ('|' in stem or len(pair) != 2 or fence.frame != 'np'
+                or singular_of(pair[1]) != pair[0].lower()):
+            return ()
+        bases = tuple(f'{stem} {form}'.strip() for form in pair)
+    forms = set(bases)
+    for phrase in bases:
+        if fence.inflect_head and fence.frame == 'np':
+            stem, _, head = phrase.rpartition(' ')
+            if head.isalpha() and not singular_of(head):
+                forms.update(f'{stem} {form}'.strip() for form in plural_forms(head))
+        elif fence.inflect_head and fence.frame == 'vp':
+            head, _, tail = phrase.partition(' ')
+            forms.update(f'{form} {tail}'.strip() for form in verb_forms(head.lower()))
     return tuple(sorted(forms))
 
 
-# Explicit reviewed whole-expression exceptions, never inferred from a failing
-# lookup. The held "the toss" curation issue is preserved until ruled separately.
+# Explicit reviewed whole-expression exceptions, never inferred from a failing lookup.
 WHOLE_EXPRESSION_ENTRIES = {
     "dog's breakfast": {'dogs-breakfast', 'g-aside-dogs-breakfast'},
     "dog's breakfasts": {'dogs-breakfast', 'g-aside-dogs-breakfast'},
     'rainforest': {'the-brush'},
     'rainforests': {'the-brush'},
-    'the toss': {'toss-in-the-alley'},
     'ranch hands': {'a-stockman'},
 }
 
@@ -90,7 +97,7 @@ def test_every_simple_fence_and_inflection_survives_lookup_casing(dictionary):
     failures = []
     for fence in dictionary.fences:
         for phrase in _simple_forms(fence):
-            for query in dict.fromkeys((phrase, phrase.lower(), phrase.title())):
+            for query in dict.fromkeys((phrase, phrase.lower(), phrase.title(), phrase.upper())):
                 result = lookup(query, translator=tr, vulgarity=2)
                 if result['outcome'] == 'left_as_written':
                     assert not result['results'], query
@@ -103,6 +110,30 @@ def test_every_simple_fence_and_inflection_survives_lookup_casing(dictionary):
                             or not {r['id'] for r in result['results']} <= allowed):
                         failures.append((query, result['outcome'], [r['id'] for r in result['results']]))
     assert failures == []
+
+
+AMERICAN_GROUP_PREFIXES = (
+    'African', 'Native', 'Asian', 'Latin', 'Hispanic', 'Mexican', 'Japanese', 'Chinese', 'Korean',
+    'Indian', 'Arab', 'Muslim', 'Jewish', 'Irish', 'Italian', 'Filipino', 'Cuban', 'Latino',
+    'Indigenous', 'black', 'white', 'South', 'Central', 'North', 'LGBT', 'LGBTQ',
+)
+
+
+@pytest.mark.parametrize('prefix', AMERICAN_GROUP_PREFIXES)
+def test_every_american_identity_has_both_number_forms(dictionary, prefix):
+    fence = next(f for f in dictionary.fences if f.phrase == f'{prefix} American|Americans')
+    tr = Translator(dictionary, lookup_embedder=None)
+    for number in ('American', 'Americans'):
+        phrase = f'{prefix} {number}'
+        for query in dict.fromkeys((phrase, phrase.lower(), phrase.title(), phrase.upper())):
+            result = lookup(query, translator=tr, vulgarity=2)
+            assert result['outcome'] == 'left_as_written' and result['results'] == [], query
+            protection, = result['protections']
+            assert query[slice(*protection['span'])] == query, query
+            assert protection['reason'] == fence.reason and (protection['reason'] or protection['ruled_out'])
+    source = f'They met a {prefix} American yesterday.'
+    result = tr.translate(source, level=5, vulgarity=2, embellishment=0, embedder='none', english='none')
+    assert f'{prefix} American' in result.text
 
 
 @pytest.mark.parametrize('query', ['Native Americans and hungry', 'National Forest and hungry'])
@@ -124,6 +155,20 @@ def test_capitalised_query_spans_preserve_original_offsets(dictionary):
     protection, = result['protections']
     assert protection['original'] == 'Native Americans' and protection['span'] == [2, 18]
     assert protection['ruled_out']
+
+
+@pytest.mark.parametrize('query', ['the toss', 'The Toss', 'THE TOSS', 'The toss'])
+def test_the_toss_is_not_the_death_idiom(dictionary, query):
+    result = lookup(query, translator=Translator(dictionary, lookup_embedder=None), vulgarity=2)
+    assert result['outcome'] == 'left_as_written' and not result['results']
+
+
+def test_complete_death_idiom_remains_discoverable(dictionary):
+    result = lookup('toss in the alley', translator=Translator(dictionary, lookup_embedder=None),
+                    vulgarity=2, include_gated=True)
+    assert result['outcome'] == 'matched'
+    assert any(word['id'] == 'toss-in-the-alley' and word['match_kind'] == 'term'
+               for word in result['results'])
 
 
 @pytest.mark.parametrize('source', [

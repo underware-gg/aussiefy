@@ -9,6 +9,11 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Protect singular'n plural identity names such as `Native American` and `South Americans` in lookup.
+  Keep a word inside a longer idiom from overriding a protected phrase: `the toss` stays as written,
+  while the complete death idiom remains discoverable. Stone the flamin' crows, add the countable buck word `buck`/`bucks`
+  from R75, retaining quantities'n currency labels; recognise counted noun queries such as `five dollars`.
+
 - Restore protection of the real plural `toss ups` and cover the spellin' `toss-ups`. Keep authored phrase protections inside capitalised
   names, so lookup recognises `Native Americans`, `US Congress` and `Gulf Stream` without offering
   slang for their component words. Check real fixed\-expression forms'n simple phrase casing/inflections.
@@ -192,7 +197,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   certificates, retained qualifier ownership'n compatible realised forms across translation, plans and
   automatic alternatives. Calibrate the DRUNK family without guessing unknown grades or removing terms.
 - Distinguish plural direct address from references to everyone: offer “you mob”/“youse” in simple group
-  greetings'n commands; preserve ambiguous parentheticals and coordinated recipients. Oi, retain ordinary
+  greetings'n commands; preserve ambiguous parentheticals and coordinated recipients. Look, retain ordinary
   distributive meanings in “Everyone came” and prevent direct dictionary replacements bypassin' usage.
 
 - Enable comic dictionary terms in solemn text at Troppo; other defaults stay off, with explicit
@@ -212,7 +217,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   reviewed servin'/container senses while preserving queries, ranking rules'n required status.
 
 - Add explicit versioned dictionary overlays through existin' `--dict` files: add concepts/entries or patch
-  existin' records in deterministic order, retaining the normal engine'n dial checks. Jeez Louise, preserve raw fields,
+  existin' records in deterministic order, retaining the normal engine'n dial checks. Fair dinkum, preserve raw fields,
   replace named lists/maps rather than append, allow clearing inherited source references, reject malformed
   or shadowed invalid operations, and report correction origins through validate/show'n dictionary metadata.
   Keep behaviour settings separate from vocabulary corrections; tighten canonical concept'n text/boolean
@@ -225,7 +230,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   Merge the 237 source proposals from batches 5 and 6 alongside the 239 from batches 3 and 4.
 
 - Preserve explicit listener possessives through shared binding'n form compatibility, and require a
-  listener for “bend someone's ear”. Stone the flamin' crows, add standard bend/bent morphology instead of inventin' a listener
+  listener for “bend someone's ear”. Add standard bend/bent morphology instead of inventin' a listener
   or producing “bended”.
 - Apply 239 reviewed source records from the next two 120\-entry audit batches, retaining historical,
   component'n source\-chain evidence limits rather than certifying every trigger or full construction.
