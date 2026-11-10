@@ -9,8 +9,12 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Apply loaded community adjustments to eligible substitution weights within their normal band'n exact
+  source\-match/dial context, before variety pruning. Keep meanin', permissions, evidence'n substitution
+  rolls unchanged; share the weightin' with plans, Markdown'n change alternatives.
+
 - Protect singular'n plural identity names such as `Native American` and `South Americans` in lookup.
-  Keep a word inside a longer idiom from overriding a protected phrase: `the toss` stays as written,
+  Well, keep a word inside a longer idiom from overriding a protected phrase: `the toss` stays as written,
   while the complete death idiom remains discoverable. Stone the flamin' crows, add the countable buck word `buck`/`bucks`
   from R75, retaining quantities'n currency labels; recognise counted noun queries such as `five dollars`.
 
@@ -188,7 +192,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 - Apply the remainin' clear source\-audit sense repairs: distinguish urination, categorical impossibility,
   completion, tasting, noisy crying/sulking, explicit noun subtypes'n emphatic refusals. Struth, preserve antenna
   qualifiers/plurals'n walking destinations, require progressive objects, and retain discovery\-only
-  vocabulary where source wording can't establish a safe automatic readin'. So anyway, correct eight source/usage
+  vocabulary where source wording can't establish a safe automatic readin'. Correct eight source/usage
   records'n merge 627 reviewed source pairs from batches 7–11 without changin' existin' term gates.
 - Add nonconsuming preceding/followin' context assertions'n explicit object\-argument patterns to the
   shared matcher. Preserve these capabilities in derived vocabulary'n research toolin'.

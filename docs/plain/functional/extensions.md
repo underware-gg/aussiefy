@@ -110,10 +110,16 @@ band; popularity uses the wider band. Factors from matching extensions multiply,
 the intersection of those extensions' bands. Only records for the exact key, term and three dials
 participate. Duplicate contexts within one export fail. Community adjustments have no root fallback.
 
-The pure `dictionary.adjustments.factor(…)` query supplies a weight multiplier. Loading it changes no
-score, evidence label, eligibility, roll or current translation. Applying it to substitution weights,
-the popularity option and personal preferences belong to slice 6, with the coordinated response contract.
-It cannot make a term with the wrong meaning eligible.
+Automatic substitution applies the normal-band multiplier after meaning, policy and grammar checks,
+before the variety cut and seeded candidate pick. It changes neither eligibility nor the substitution
+roll: a failed roll still keeps the original. Garnish receives no adjustment. Candidate explanations
+report the factor and the resulting normalised weight; a common rescaling preserves candidate odds
+without overflowing on large finite factors. Unmatched contexts leave weights unchanged.
+
+The pure `dictionary.adjustments.factor(…)` query exposes the same calculation for inspection, including
+the wider band with `popularity=True`. The runtime popularity option, personal preferences and coordinated
+response reporting remain in development. No adjustment changes a score or evidence label or makes a term
+with the wrong meaning eligible.
 
 ## Dictionary identity
 

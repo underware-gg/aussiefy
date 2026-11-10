@@ -60,3 +60,17 @@ not a new file-load snapshot. The manifest is not a source-fetching or account-m
 
 Public contract version, lookup ranking, near meanings and open vocabulary rulings do not change here.
 Source application, searched outcomes and empirical attestation calibration remain gate-4 obligations.
+
+## Normal-band selection checkpoint, 10 November 2026
+
+Selection now applies the loaded normal-band factor to eligible substitution weights using the detected
+source match and the run's resolved three dials. This happens after semantic, permission and grammar
+checks, and before variety pruning. The substitution roll, evidence and garnish are unchanged.
+
+For an actually adjusted spot, combine weights and factors in log space, then apply one common
+normalisation before the pick. This preserves odds/order without overflowing on large finite factors;
+weights already reduced to zero by repeat penalties stay zero. Unmatched spots retain their original
+weights and explanations. Plans, changes and document adapters share the same selection owner.
+
+This checkpoint does not expose popularity or preferences, report tuning on every response, or change
+the changes-v2 contract. Those remain with the coordinated slices 3+6 contract work.

@@ -5,6 +5,10 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Apply loaded community adjustments to eligible substitution weights within their normal band and exact
+  source-match/dial context, before variety pruning. Keep meaning, permissions, evidence and substitution
+  rolls unchanged; share the weighting with plans, Markdown and change alternatives.
+
 - Protect singular and plural identity names such as `Native American` and `South Americans` in lookup.
   Keep a word inside a longer idiom from overriding a protected phrase: `the toss` stays as written,
   while the complete death idiom remains discoverable. Add the countable dollar word `buck`/`bucks`

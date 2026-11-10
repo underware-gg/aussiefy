@@ -6,6 +6,7 @@ from .themes import ThemePolicy
 
 import re
 import inspect
+import math
 from collections import Counter
 from dataclasses import dataclass, field, fields
 from functools import lru_cache, partial
@@ -25,6 +26,7 @@ from .genre import resolve_document, Embellishment, Genre, form_removes
 from .grammar import GrammarEvidence, grammar_evidence, grammar_problem
 from .protected import Masked, protected_runs
 from .model import Dictionary
+from .match_keys import detection_match
 from .policy import Effective, Policy, envelope, pick_form, resolve, roll, theme_permissions
 from .realise import ARTICLES, fit_article, number_problem, phrase_continues, realise, replacement_span
 from .select import Candidate, candidates, mapping_effects, semantic_rejection, usable_forms, weighted_pick
@@ -453,6 +455,21 @@ class Translator:
                 rejected.append((c.entry, reason))
             else:
                 keep.append(c)
+        if keep and self.dictionary.adjustments.by_context:
+            match = detection_match(det)
+            if match is not None:
+                factors = [self.dictionary.adjustments.factor(match.key, c.entry.id, level=eff.level,
+                    vulgarity=eff.vulgarity, embellishment=run.embellishment.step) for c in keep]
+                if any(factor != 1 for factor in factors):
+                    log_weights = [math.log(c.weight) + math.log(factor) if c.weight else -math.inf
+                                   for c, factor in zip(keep, factors, strict=True)]
+                    peak = max(log_weights)
+                    if peak == -math.inf:
+                        # Repeat penalties can underflow every remaining weight to zero.
+                        peak = 0.0
+                    for c, factor, weight in zip(keep, factors, log_weights, strict=True):
+                        c.weight = math.exp(weight - peak)
+                        c.why += f"; community adjustment x {factor:g} (normal band), normalised w={c.weight:.3g}"
         return _narrow(keep, rejected, run.pol.variety, state), rejected
 
     def render_at_spot(self, choice: Candidate, spot: "Spot", run: "_Run") -> "SpotRendering":

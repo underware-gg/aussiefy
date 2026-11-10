@@ -263,9 +263,10 @@ def test_adjustments_are_exact_scoped_bounded_and_do_not_change_evidence(tmp_pat
     assert d.adjustments.factor(key, "stoked", **{**args, "level": 4}) == 1
     assert d.adjustments.factor(key, "other:missing", **args) == 1
     assert d.entries == dictionary.entries
-    # Loading the data does not turn tuning on ahead of slice 6's call contract.
+    # A weight for an unrelated meaning cannot make its term eligible.
     a, b = Translator(dictionary), Translator(d)
-    assert a.translate("I am hungry.", seed=2).text == b.translate("I am hungry.", seed=2).text
+    options = dict(seed=2, level=5, vulgarity=1, embellishment=2, embedder="none")
+    assert a.translate("I am hungry.", **options).text == b.translate("I am hungry.", **options).text
 
 
 @pytest.mark.parametrize("changes", [{"factor": 4}, {"factor": float("nan")}, {"factor": True},
