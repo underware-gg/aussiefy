@@ -20,6 +20,26 @@ host sets explicitly. It's part of the Python API only: the CLI, the MCP tools a
 ([DD-029](../../architecture/decisions/dd-029-changes-builder.md)). `aussiefy.guide.dial_descriptions()` gives every
 dial's settings with a one-line description each, for a page that lists them.
 
+## Draft v3 for review
+
+The [v3 changes schema](../../drafts/changes-v3/changes.schema.json),
+[shared card schema](../../drafts/changes-v3/cards.schema.json) and
+[six review examples](../../drafts/changes-v3/examples.json) are **review drafts**, revision `20261111-r1`.
+They are outside package data and do not change the active v2 schema or emitter. Consuming clients review this draft
+before it is frozen or becomes the active contract.
+
+The draft adds `dictionary_id`, `tuning`, warnings, rich provenance cards, construction/imagery maps,
+source matches and rendered part/riff spans. Canonical construction-card part spans are local to the
+card's text. Occurrence spans are global output coordinates; for an alternative they describe the
+hypothetical output after that option replaces its region, even when its length differs. Mask spans stay
+local to their rendering. Non-lexical changes carry null evidence. The examples label illustrative v3
+projections explicitly; they are not a claim that the engine already emits v3 or that a construction
+meets the fallback rule at those particular words. `kept`, `held` and personal terms remain slice 7 work.
+
+JSON Schema validates shape; map-key equality, reference resolution, span bounds/text, canonical match
+round trips and consistency with card evidence need semantic checks too. The offline draft tests exercise
+both, with negative controls. Contract v3 remains subject to consumer review.
+
 ## The contract
 
 `ChangeSet.to_dict()` is version 2 of the `changes` contract, `{version, text, changes, entries, withheld}`. Its JSON

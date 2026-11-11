@@ -5,6 +5,10 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Prepare internal document tuning once, retain immutable per-unit usage, and count a preference only once
+  across a whole Markdown document. Validate and report unknown preferences even without prose. Add
+  non-active v3 changes/card schema review assets and examples; active public output remains v2.
+
 - Implement the remaining internal selection tuning: popularity uses the wider community band, and
   latest-first personal preferences use an exact source key before a same-root fallback. Validate
   weights, warn about unknown records, and preserve eligibility, evidence, repeats and substitution

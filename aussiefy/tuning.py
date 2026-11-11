@@ -20,6 +20,15 @@ class Preference:
 
 
 @dataclass(frozen=True)
+class TuningReport:
+    popularity: bool = False
+    used: frozenset[int] = frozenset()
+
+    def to_dict(self) -> dict:
+        return {"popularity": self.popularity, "preferences": len(self.used)}
+
+
+@dataclass(frozen=True)
 class Tuning:
     adjustments: Adjustments = field(default_factory=Adjustments)
     popularity: bool = False

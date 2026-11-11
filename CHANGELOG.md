@@ -9,6 +9,10 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Prepare internal document tunin' once, retain immutable per\-unit usage, and count a preference only once
+  across a whole Markdown document. Validate'n report unknown preferences even without prose. Add
+  non\-active v3 changes/card schema review assets'n examples; active public output remains v2.
+
 - Implement the remainin' internal selection tunin': popularity uses the wider community band, and
   latest\-first personal preferences use an exact source key before a same\-root fallback. Validate
   weights, warn about unknown records, and preserve eligibility, evidence, repeats'n substitution

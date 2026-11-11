@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 from .themes import ThemePolicy
+from .tuning import Tuning, TuningReport
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from bisect import bisect_left, bisect_right
 from collections.abc import Callable
 import re
@@ -59,6 +60,11 @@ class DocumentResult:
     profile_config: dict
     theme_policy: ThemePolicy
     registers: tuple[str, ...]
+    _tuning_report: TuningReport = field(default_factory=TuningReport)
+
+    @property
+    def _tuning(self) -> dict:
+        return self._tuning_report.to_dict()
 
     @property
     def permitted_themes(self) -> frozenset[str]:
@@ -387,7 +393,7 @@ def _escape_map(text: str) -> tuple[str, list[int]]:
 
 
 def document_changes(source: str, translator: Translator, policy: Policy, effective: Effective,
-                     _watch: Callable[[int], object] | None = None):
+                     _watch: Callable[[int], object] | None = None, *, _tuning: dict | None = None):
     """translate_document, with every unit's changes placed in the document: each unit's source offset added, its
     output mapped through the escaping that keeps custom slang from making markup, and each rendering escaped where
     it stands. _watch: the changes builder's watch for each unit, by index (a test pins one unit's picks)."""
@@ -400,7 +406,7 @@ def document_changes(source: str, translator: Translator, policy: Policy, effect
         units.append((result, drafts))
         return result
 
-    document = translate_document(source, translator, policy, effective, unit=unit)
+    document = translate_document(source, translator, policy, effective, unit=unit, _tuning=_tuning)
     drafts = []
     for u, (result, unit_drafts) in zip(document.units, units):
         _, at = _escape_map(result.text)
@@ -426,9 +432,10 @@ def _escaped_in(text: str, span: list[int], rendered: str) -> str:
 
 
 def translate_document(source: str, translator: Translator, policy: Policy, effective: Effective,
-                       unit: Callable[..., Result] | None = None) -> DocumentResult:
+                       unit: Callable[..., Result] | None = None, *, _tuning: dict | None = None) -> DocumentResult:
     """Translate the document's prose units in turn, sharing one document's state. unit translates one unit
     (Translator.translate's arguments; the changes builder passes its own)."""
+    tuning = Tuning.prepare(_tuning, translator.dictionary)
     pieces = []
     units = []
     protected = []
@@ -480,7 +487,7 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
                             last >= 0 and boundaries[last][1] <= span.end,
                             index == len(spans) - 1, effective, quiet=reading.quiet_at(span.start),
                             last_contexts=source_contexts[last] if last >= 0 else frozenset(),
-                            written=written, mood=mood)
+                            written=written, mood=mood, tuning=tuning)
         r = (unit or translator.translate)(source[span.start:span.end], level=policy.level, seed=policy.seed,
                                  vulgarity=policy.vulgarity, variety=policy.variety, registers=policy.registers,
                                  regions=policy.regions, unlock=policy.unlock, embedder=policy.embedder,
@@ -495,7 +502,10 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
         piece = source[source_at:]
         pieces.append(piece)
         protected.append(ProtectedSpan((source_at, len(source)), (output_at, output_at + len(piece))))
-    warnings = list(dict.fromkeys([*effective.warnings, *(w for u in units for w in u.result.warnings)]))
+    warnings = list(dict.fromkeys([*effective.warnings, *tuning.warnings,
+                                   *(w for u in units for w in u.result.warnings)]))
+    used = frozenset(i for u in units for i in u.result._tuning_report.used)
     return DocumentResult("".join(pieces), source, effective.level, policy.seed, effective.vulgarity,
                           policy.variety, warnings, units, protected, genre, context[1], genre.setting(policy.embellishment),
-                          effective.envelope()["profile_config"], effective.theme_policy, effective.registers)
+                          effective.envelope()["profile_config"], effective.theme_policy, effective.registers,
+                          _tuning_report=TuningReport(tuning.popularity, used))

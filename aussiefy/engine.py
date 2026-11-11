@@ -26,7 +26,7 @@ from .grammar import GrammarEvidence, grammar_evidence, grammar_problem
 from .protected import Masked, protected_runs
 from .model import Dictionary
 from .match_keys import detection_match
-from .tuning import Tuning
+from .tuning import Tuning, TuningReport
 from .policy import Effective, Policy, envelope, pick_form, resolve, roll, theme_permissions
 from .realise import ARTICLES, fit_article, number_problem, phrase_continues, realise, replacement_span
 from .select import Candidate, candidates, mapping_effects, semantic_rejection, usable_forms, weighted_pick
@@ -171,7 +171,11 @@ class Result:
     variety: int = 0
     profile_config: dict[str, Any] = field(default_factory=dict)
     imagery: list[dict] = field(default_factory=list)
-    _tuning: dict[str, Any] = field(default_factory=dict)
+    _tuning_report: TuningReport = field(default_factory=TuningReport)
+
+    @property
+    def _tuning(self) -> dict:
+        return self._tuning_report.to_dict()
 
     @property
     def permitted_themes(self) -> frozenset[str]:
@@ -311,7 +315,8 @@ class Translator:
         run = _Run(text, pol, effective, mood, is_chant(sents), masked, genre,
                    _context[1] if _context is not None else text_english(pol.english, masked.prose(), self.dictionary.us_spellings),
                    genre.setting(pol.embellishment), composition=_composition, observer=_observer,
-                   tuning=Tuning.prepare(_tuning, self.dictionary))
+                   tuning=(_composition.tuning if _composition is not None and _composition.tuning is not None
+                           else Tuning.prepare(_tuning, self.dictionary)))
         if _composition is not None:
             run.state = _composition.state
         if _observer is not None:
@@ -368,7 +373,7 @@ class Translator:
                       sentences=[(s[0].start, s[-1].end) for s in sents], dialect=run.dialect,
                       english=run.english, embellishment=run.embellishment, variety=pol.variety,
                       profile_config=run.eff.envelope()["profile_config"], imagery=run.imagery,
-                      _tuning={"popularity": run.tuning.popularity, "preferences": len(run.preferences_used)})
+                      _tuning_report=TuningReport(run.tuning.popularity, frozenset(run.preferences_used)))
 
     # -- stages -------------------------------------------------------------------------
 
@@ -1005,6 +1010,7 @@ class DocumentPart:
     last_contexts: frozenset[str] = frozenset()
     written: frozenset[str] | None = None
     mood: str | None = None
+    tuning: Tuning | None = None
 
 
 @dataclass

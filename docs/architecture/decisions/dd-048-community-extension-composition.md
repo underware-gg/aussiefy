@@ -107,3 +107,20 @@ the coordinated surface pass.
 next pass. No public option, hosted hook, changes/card version, identity envelope or invented output is
 released by this checkpoint. The normal untuned output and changes-v2 fixtures remain unchanged. The
 remaining combined-slice work is not complete, and the agreed 3+6 then 7 order is unchanged.
+
+
+## Document tuning and draft contract checkpoint, 11 November 2026
+
+One document prepares and snapshots its tuning input before processing any prose. Its internal composition
+context supplies that prepared value to each plain/changes unit. Per-unit usage is frozen in TuningReport;
+the document unions input positions rather than summing counts, while each unit retains its local report.
+Warnings include preparation failures to resolve preferences even when a document has no eligible prose.
+Public v2 envelopes remain unchanged. No account state or dial-scoping policy enters this aggregation.
+
+Rob accepted the preceding runtime checkpoint and requested a draft schema before changes/card v3 freezes.
+Review-only schemas/examples live under docs/drafts/changes-v3, outside package data. They retain v2's
+Unicode code-point regions, masks and change identifiers, with new provenance and source-match fields.
+JSON Schema alone does not establish reference, span/text or canonical-key equality; separate checks cover
+those properties. Consumer review precedes freeze; deployment coordination belongs to the host
+and is recorded in the project plan, not implemented in the package. This checkpoint grants no contract
+freeze, publication or deployment by itself.

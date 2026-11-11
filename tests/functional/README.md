@@ -28,6 +28,7 @@ python -m pytest -q tests/functional
 | [test_lookup_senses.py](test_lookup_senses.py) | Slots, head inflection and conservative negation matching |
 | [test_harness_reliability.py](test_harness_reliability.py) | Phrase locality, drawl annotations and reviewed name aliases |
 | [test_markdown_composition.py](test_markdown_composition.py) | Shared document state and sentence-safe garnish |
+| [test_changes_v3_draft.py](test_changes_v3_draft.py) | Non-active v3 review schemas, real rich-card conformance, example references and Unicode spans |
 | [test_changes.py](test_changes.py) | The `changes` contract: spans for every kind, ids, locked options, cards, schema, fixtures and Markdown |
 | [test_changes_oracle.py](test_changes_oracle.py) | Every rendered alternative, locked option and garnish removal against a pinned whole re-render |
 | [test_masks.py](test_masks.py) | Maskable words and kept endings, entry mask words, `profane: false`, and every rated entry masked at its rating |

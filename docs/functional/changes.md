@@ -24,6 +24,26 @@ host sets explicitly. It's part of the Python API only: the CLI, the MCP tools a
 ([DD-029](../architecture/decisions/dd-029-changes-builder.md)). `aussiefy.guide.dial_descriptions()` gives every
 dial's settings with a one-line description each, for a page that lists them.
 
+## Draft v3 for review
+
+The [v3 changes schema](../drafts/changes-v3/changes.schema.json),
+[shared card schema](../drafts/changes-v3/cards.schema.json) and
+[six review examples](../drafts/changes-v3/examples.json) are **review drafts**, revision `20261111-r1`.
+Fair dinkum, they're outside package data'n don't change the active v2 schema or emitter. Consumin' clients review this draft
+before it's frozen or becomes the active contract.
+
+The draft adds `dictionary_id`, `tuning`, warnings, rich provenance cards, construction/imagery maps,
+source matches and rendered part/riff spans. Canonical construction-card part spans are local to the
+card's text. Occurrence spans are global output coordinates; for an alternative they describe the
+hypothetical output after that option replaces its region, even when its length differs. Mask spans stay
+local to their rendering. Non-lexical changes carry null evidence. The examples label illustrative v3
+projections explicitly; they are not a claim that the engine already emits v3 or that a construction
+meets the fallback rule at those particular words. `kept`, `held` and personal terms remain slice 7 work.
+
+JSON Schema validates shape; map\-key equality, reference resolution, span bounds/text, canonical match
+round trips'n consistency with card evidence need semantic checks too. Mind ya, the offline draft tests exercise
+both, with negative controls. Contract v3 remains subject to consumer review.
+
 ## The contract
 
 `ChangeSet.to_dict()` is version 2 of the `changes` contract, `{version, text, changes, entries, withheld}`. Its JSON
@@ -83,7 +103,7 @@ where a drawl or infix match still reads across the region's edge after it has w
 has happened over the test corpora. They're there so a renderin' that might read wrong is never offered, and a
 page can tell why a spot has no alternatives.
 
-Stone the crows, all offsets count Unicode code points, including source/output spans, alternative regions'n mask positions.
+Strewth, all offsets count Unicode code points, including source/output spans, alternative regions'n mask positions.
 Well, for example, `🦘 toilet` becomes `🦘 dunny`: the source span is `[2, 8)` and the output span is `[2, 7)`.
 JavaScript clients can slice'n splice by code point with `Array.from(text)`:
 
@@ -98,7 +118,7 @@ emoji sequence can occupy several positions.
 
 ## How a swap is rendered
 
-Fair dinkum, every alternative is rendered as the engine would render it at that spot, with the rest of the output held
+Jeez, every alternative is rendered as the engine would render it at that spot, with the rest of the output held
 fixed. It takes the engine's own path: the form'n the spellin' the text keeps, the article fitted \("a toddler"
 becomes "an ankle biter"\), the entry's own replacement span, a stacked second idiom, a riff, and capitals. The
 sentence's garnish is put back as it was decided. Then the drawl, spellin''n swear infixes run over the spot
@@ -109,7 +129,7 @@ All of a spot's options share one region, so swappin' one in replaces the same s
 where a drawl or infix match crosses its edge \("have not" becoming "haven't"\) or a neighbourin' match's
 lookaround reads it \("won't bloody well have").
 
-Struth, a garnish's region widens the same way. An opener's or connective's region takes in the next word, whose capital
+Stone the crows, a garnish's region widens the same way. An opener's or connective's region takes in the next word, whose capital
 it lowered, and a word more where a match runs on: in "Well, it is easy", a swap or removal of "Well" replaces
 "Well, it is", since the drawl's "it is" match crosses "it". A region never cuts the words another swap or
 garnish put in: it takes in the whole of one it reaches. Tell ya what, two regions can still share a word they both widened
@@ -150,7 +170,7 @@ word is both listed and authored, it has one mask, at the higher vulgarity.
 
 With `markup`, protected spans \(code, links, tags\) are masked through the pass'n restored after, keeping their
 length, so offsets'n renderings hold. With `markdown=True`, each prose unit's changes are placed in the
-document. Bloody hell, source offsets are document positions. Mate, each renderin' is escaped as its unit is, so custom slang can't
+document. Source offsets are document positions. Mate, each renderin' is escaped as its unit is, so custom slang can't
 make markup. A whole re\-render with a swap pinned inside its unit reads the same.
 
 ## Cost

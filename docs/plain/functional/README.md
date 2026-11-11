@@ -56,6 +56,7 @@ How to run them is in the
 | `tests/functional/test_sense_boundaries.py` | Person/adjective sense limits and clothing agreement |
 | `tests/functional/test_lookup_senses.py`, `tests/functional/test_harness_reliability.py` | Slot/sense lookup, phrase locality and data-driven lint comparisons |
 | `tests/functional/test_markdown_composition.py` | Document-wide garnish and source sentence boundaries |
+| `tests/functional/test_changes_v3_draft.py` | Non-active v3 schemas, rich cards and review-example invariants |
 | `tests/functional/test_changes.py`, `tests/functional/test_changes_oracle.py` | The `changes` contract, and each rendering against a whole re-render with that pick pinned |
 | `tests/functional/test_masks.py` | Maskable words and their endings, entry mask words, `profane: false`, and every rated entry masked at its rating |
 | `tests/functional/test_matching.py` | Tokenising, the pattern language and concept detection |

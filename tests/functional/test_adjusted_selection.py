@@ -408,7 +408,6 @@ def test_personal_factor_does_not_restore_an_exhausted_repeat_weight(adjusted_di
 
 
 def test_markdown_units_share_the_runtime_without_public_contract_changes(adjusted_dictionary):
-    from functools import partial
     from aussiefy.markdown import translate_document
     from aussiefy.policy import resolve
 
@@ -417,8 +416,132 @@ def test_markdown_units_share_the_runtime_without_public_contract_changes(adjust
     tuning = {'popularity': True, 'preferences': [personal(adjusted_dictionary)]}
     result = translate_document('She is zzstate.\n\nHe is really zzstate.', tr, policy,
                                 resolve(policy, adjusted_dictionary),
-                                unit=partial(tr.translate, _tuning=tuning))
+                                _tuning=tuning)
     assert len(result.units) == 2
     assert all(spot(unit.result).chosen.entry.id == 'zz-choice-a' for unit in result.units)
     assert all(unit.result._tuning['preferences'] == 1 for unit in result.units)
     assert 'tuning' not in result.to_dict()
+
+
+def tuned_document(dictionary, source, tuning, *, changes=False, unit=None):
+    from aussiefy.markdown import document_changes, translate_document
+    from aussiefy.policy import resolve
+
+    tr = Translator(dictionary, lookup_embedder=None)
+    policy = tr.policy(**{**OPTIONS, 'variety': 1})
+    effective = resolve(policy, dictionary)
+    if changes:
+        return document_changes(source, tr, policy, effective, _tuning=tuning)
+    return translate_document(source, tr, policy, effective, unit=unit, _tuning=tuning)
+
+
+@pytest.mark.parametrize('changes', [False, True])
+def test_document_counts_one_preference_once_across_prose_units(adjusted_dictionary, changes):
+    result = tuned_document(adjusted_dictionary, 'She is zzstate.\n\nHe is really zzstate.',
+                            {'popularity': True, 'preferences': [personal(adjusted_dictionary)]}, changes=changes)
+    document = result.result if changes else result
+    assert len(document.units) == 2
+    assert [u.result._tuning['preferences'] for u in document.units] == [1, 1]
+    assert document._tuning == {'popularity': True, 'preferences': 1}
+    assert all(spot(u.result).chosen.entry.id == 'zz-choice-a' for u in document.units)
+    assert 'tuning' not in result.to_dict()
+    if changes:
+        assert result.to_dict()['version'] == 2
+
+
+def test_document_preserves_distinct_exact_and_root_preferences_without_double_counting(adjusted_dictionary):
+    preferences = [personal(adjusted_dictionary), personal(adjusted_dictionary, 'zz-choice-b', 20, degree='strong')]
+    doc = tuned_document(adjusted_dictionary, 'She is zzstate.\n\nHe is really zzstate.\n\nThey are zzstate.',
+                         {'preferences': preferences})
+    assert [spot(u.result).chosen.entry.id for u in doc.units] == ['zz-choice-a', 'zz-choice-b', 'zz-choice-a']
+    assert [u.result._tuning['preferences'] for u in doc.units] == [1, 1, 1]
+    assert doc._tuning['preferences'] == 2
+
+
+@pytest.mark.parametrize('source', ['', '```text\nShe is zzstate.\n```\n', 'She is zzstate.\n\nHe is zzstate.'])
+def test_document_reports_unknown_preferences_once_even_without_prose(adjusted_dictionary, source):
+    pref = personal(adjusted_dictionary, 'unknown-term')
+    doc = tuned_document(adjusted_dictionary, source, {'popularity': True, 'preferences': [pref]})
+    warnings = [w for w in doc.warnings if 'unknown term' in w]
+    assert len(warnings) == 1
+    assert doc._tuning == {'popularity': True, 'preferences': 0}
+    if source.startswith('```') or not source:
+        assert doc.units == [] and doc.text == source
+
+
+@pytest.mark.parametrize('changes', [False, True])
+def test_a_document_prepares_tuning_once_including_change_probes(adjusted_dictionary, monkeypatch, changes):
+    from aussiefy.tuning import Tuning
+
+    prepare = Tuning.prepare
+    calls = []
+
+    def counted(cls, raw, dictionary):
+        calls.append(raw)
+        return prepare(raw, dictionary)
+
+    monkeypatch.setattr(Tuning, 'prepare', classmethod(counted))
+    tuning = {'preferences': [personal(adjusted_dictionary)]}
+    tuned_document(adjusted_dictionary, 'She is zzstate.\n\nHe is zzstate.', tuning, changes=changes)
+    assert calls == [tuning]
+
+
+def test_invalid_document_tuning_fails_before_processing_any_unit(adjusted_dictionary):
+    from aussiefy.errors import UserError
+
+    called = []
+    with pytest.raises(UserError, match='finite number'):
+        tuned_document(adjusted_dictionary, 'She is zzstate.',
+                        {'preferences': [personal(adjusted_dictionary, weight=float('inf'))]},
+                        unit=lambda *args, **kwargs: called.append(args))
+    assert not called
+
+
+def test_document_tuning_snapshots_inputs_before_unit_callbacks(adjusted_dictionary):
+    row = personal(adjusted_dictionary)
+    raw = {'preferences': [row]}
+    tr = Translator(adjusted_dictionary, lookup_embedder=None)
+
+    def unit(text, **options):
+        row['term'] = 'zz-choice-b'
+        row['weight'] = 1e308
+        raw['preferences'].clear()
+        return tr.translate(text, **options)
+
+    doc = tuned_document(adjusted_dictionary, 'She is zzstate.\n\nHe is zzstate.', raw, unit=unit)
+    assert all(spot(u.result).chosen.entry.id == 'zz-choice-a' for u in doc.units)
+    assert doc._tuning['preferences'] == 1
+
+
+def test_document_change_probes_cannot_inflate_aggregate_preference_counts(adjusted_dictionary):
+    result = tuned_document(adjusted_dictionary, 'She is zzstate.\n\nHe is zzstate.',
+                            {'preferences': [personal(adjusted_dictionary, 'zz-crude', 100)]}, changes=True)
+    assert result.result._tuning['preferences'] == 0
+    assert all(u.result._tuning_report.used == frozenset() for u in result.result.units)
+    assert any(o['entry_id'] == 'zz-crude' for c in result.changes for o in c['locked'])
+
+
+def test_tuning_reports_are_immutable_and_summaries_are_detached(adjusted_dictionary):
+    from dataclasses import FrozenInstanceError
+
+    doc = tuned_document(adjusted_dictionary, 'She is zzstate.\n\nHe is zzstate.',
+                         {'preferences': [personal(adjusted_dictionary)]})
+    summary = doc._tuning
+    summary['preferences'] = 999
+    assert doc._tuning['preferences'] == 1
+    unit_summary = doc.units[0].result._tuning
+    unit_summary['preferences'] = 999
+    assert doc.units[0].result._tuning['preferences'] == 1
+    with pytest.raises(FrozenInstanceError):
+        doc._tuning_report.popularity = True
+    assert doc._tuning_report.used == frozenset({0})
+
+
+def test_untuned_document_calls_stay_isolated_after_tuned_calls(adjusted_dictionary):
+    source = 'She is zzstate.\n\nHe is zzstate.'
+    original = tuned_document(adjusted_dictionary, source, None).to_dict()
+    tuning = {'popularity': True, 'preferences': [personal(adjusted_dictionary)]}
+    a = tuned_document(adjusted_dictionary, source, tuning, changes=True)
+    b = tuned_document(adjusted_dictionary, source, tuning, changes=True)
+    assert a.to_dict() == b.to_dict() and a.result._tuning == b.result._tuning
+    assert tuned_document(adjusted_dictionary, source, None).to_dict() == original
