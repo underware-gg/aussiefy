@@ -12,6 +12,7 @@ python -m pytest -q tests/functional
 |---|---|
 | [test_ed16_meanings.py](test_ed16_meanings.py) | Approved waiting meanings, eagerness, literal context sequences and evidence boundaries |
 | [test_fences.py](test_fences.py) | Scoped phrase protection, deduplication, dialect separation and entry-overlap lint |
+| [test_adjusted_selection.py](test_adjusted_selection.py) | Contextual community weights, popularity, personal-preference precedence, validation and repeat-safe engine integration |
 | [test_dictionary_extensions.py](test_dictionary_extensions.py) | Namespaced additions, evidence snapshots, credit, promotion, bounded adjustments and dictionary identity |
 | [test_dictionary_conformance.py](test_dictionary_conformance.py) | Cross-surface register filters, realised construction profanity, composite recognition and evidence attribution |
 | [test_exploration.py](test_exploration.py) | Stable dictionary discovery, clean names, variation policy and surface parity |

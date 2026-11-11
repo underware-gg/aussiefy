@@ -6,7 +6,7 @@ from pathlib import Path
 
 PKG = Path(__file__).resolve().parents[2] / "aussiefy"
 MODULES = {p.stem for p in PKG.glob("*.py")} | {p.parent.name for p in PKG.glob("*/__init__.py")}
-CORE = {"grammar", "meaning_context", "fences", "fence_readings", "dictionary_identity", "extensions", "identifiers", "adjustments", "match_keys", "source_urls", "names", "constructions", "construction_data", "themes", "evidence", "semantic_checks", "degree", "text", "matcher", "detect", "select", "realise", "morph", "garnish", "context", "policy", "schema",
+CORE = {"grammar", "meaning_context", "fences", "fence_readings", "dictionary_identity", "extensions", "identifiers", "adjustments", "tuning", "match_keys", "source_urls", "names", "constructions", "construction_data", "themes", "evidence", "semantic_checks", "degree", "text", "matcher", "detect", "select", "realise", "morph", "garnish", "context", "policy", "schema",
         "imagery", "model", "terms", "embed", "engine", "loader", "vocabulary", "static", "dump", "dialect", "genre", "pos", "protected", "profile", "cards", "masks", "changes"}
 UPPER = {"explore", "bulldust", "__init__", "harness", "lookup", "lint", "guide", "retelling", "yarn", "llm", "claude", "cli", "mcp_server", "gaps",
          "rounds", "explain", "scrape", "models", "markdown", "translation", "align", "verify", "judge", "markup"}
@@ -71,5 +71,5 @@ def test_the_shared_modules_import_nothing_of_the_package():
 
 def test_the_dictionary_model_does_no_io():
     for module in ("model", "schema", "policy", "matcher", "text", "genre", "profile", "cards", "masks", "vocabulary",
-                   "extensions", "identifiers", "adjustments", "match_keys"):
+                   "extensions", "identifiers", "adjustments", "tuning", "match_keys"):
         assert not {"loader", "dictionary_identity"} & _imports(module), module

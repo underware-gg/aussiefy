@@ -74,3 +74,36 @@ weights and explanations. Plans, changes and document adapters share the same se
 
 This checkpoint does not expose popularity or preferences, report tuning on every response, or change
 the changes-v2 contract. Those remain with the coordinated slices 3+6 contract work.
+
+
+## Popularity and personal selection runtime checkpoint, 11 November 2026
+
+`tuning.py` now owns per-call selection tuning. It reuses the existing adjustment factors and canonical
+match parser, with the popularity band when requested. Personal inputs are a latest-first list of
+`{match, term, weight}` records, with no account or dial fields: the caller supplies only preferences for
+the current dials. Weights are finite, representable numbers at least 1; booleans are not weights.
+Malformed record shapes fail with UserError. Unknown or obsolete matches and unknown term IDs warn and
+are ignored, including malformed historical key strings; bad weights still fail on such rows.
+
+There is one effective preference per source match, not one per candidate. The first valid exact-key
+record wins, even if its term is not eligible here. Only when there is no exact record does the first
+valid same-root record apply, including one made at another degree. An ineligible preferred term cannot
+fall back to an older preference, unlock itself or change the source reading. Neutral weight 1 can be an
+explicit exact choice and prevents fallback too. These choices follow engine Verification and website S13.
+
+Community and personal factors combine with candidate weights in log space before variety, without
+clipping personal weights to a band. The existing repeat penalty and substitution roll stay independent.
+Factors cannot restore a weight already exhausted to zero. Inputs are snapshotted once per plain engine
+call, without a per-text scan of all preferences at every spot.
+
+The private runtime records the number of distinct input preferences used by positive-weight candidates
+that survive repeat exclusions and variety in the actual selection pass. A preference repeated across
+spots counts once; an eligible neutral preference counts, and a failed substitution roll does not erase
+that the candidate pool was tuned. Raised-cap and alternative-rendering probes never increment it.
+This is the chosen reporting interpretation; public reporting and document-wide aggregation remain with
+the coordinated surface pass.
+
+`Translator.translate` takes the internal `_tuning` input and retains a private result summary for that
+next pass. No public option, hosted hook, changes/card version, identity envelope or invented output is
+released by this checkpoint. The normal untuned output and changes-v2 fixtures remain unchanged. The
+remaining combined-slice work is not complete, and the agreed 3+6 then 7 order is unchanged.

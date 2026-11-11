@@ -46,6 +46,7 @@ How to run them is in the
 |---|---|
 | `tests/functional/test_exploration.py` | Stable pages, explicit holds, seeded names, construction variations and adapter parity |
 | `tests/functional/test_constructions.py` | Constructor policy, bounded sampling, template spans, part evidence and changes compatibility |
+| `tests/functional/test_adjusted_selection.py` | Loaded adjustment bands, personal-preference precedence and selection boundaries |
 | `tests/functional/test_engine.py` | The engine: detection, selection, realisation, garnish, drawl and the dials |
 | `tests/functional/test_document_policy.py` | Document presets, exact overrides and shared-surface behaviour |
 | `tests/functional/test_document_refinement.py` | Sentence-safe flavour, contractions, casing and technical-example fidelity |

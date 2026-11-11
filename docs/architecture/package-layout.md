@@ -40,7 +40,10 @@ file I/O.
 
 `extensions.py` composes additive community evidence and validates same-sense collisions, while
 `identifiers.py` owns the shared id grammar. `adjustments.py` validates contextual weight data and performs
-pure bounded queries; it imports no selection or evidence-scoring code. `dictionary_identity.py` is loader
+pure bounded queries; it imports no selection or evidence-scoring code. `tuning.py` belongs to the Engine
+layer: it validates per-call preference inputs, resolves exact keys before latest same-root fallbacks, and
+combines personal weights with community factors on already eligible candidates. It performs no I/O and
+changes no evidence or eligibility. `dictionary_identity.py` is loader
 I/O and fingerprints file inputs. The model stores its result and never imports that I/O module.
 
 Optional heavy dependencies \(anthropic, mcp, sentence\-transformers, torch\) are imported lazily, inside the

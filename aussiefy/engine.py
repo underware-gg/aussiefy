@@ -6,7 +6,6 @@ from .themes import ThemePolicy
 
 import re
 import inspect
-import math
 from collections import Counter
 from dataclasses import dataclass, field, fields
 from functools import lru_cache, partial
@@ -27,6 +26,7 @@ from .grammar import GrammarEvidence, grammar_evidence, grammar_problem
 from .protected import Masked, protected_runs
 from .model import Dictionary
 from .match_keys import detection_match
+from .tuning import Tuning
 from .policy import Effective, Policy, envelope, pick_form, resolve, roll, theme_permissions
 from .realise import ARTICLES, fit_article, number_problem, phrase_continues, realise, replacement_span
 from .select import Candidate, candidates, mapping_effects, semantic_rejection, usable_forms, weighted_pick
@@ -171,6 +171,7 @@ class Result:
     variety: int = 0
     profile_config: dict[str, Any] = field(default_factory=dict)
     imagery: list[dict] = field(default_factory=list)
+    _tuning: dict[str, Any] = field(default_factory=dict)
 
     @property
     def permitted_themes(self) -> frozenset[str]:
@@ -276,6 +277,7 @@ class Translator:
                   rewrite_mode: Literal["hard", "all"] = "hard",
                   embellishment: int | str | None = None,
                   document_type: str = "general", document_config: dict | None = None,
+                  _tuning: dict | None = None,
                   _protected: Masked | None = None, _context: tuple | None = None,
                   _composition: DocumentPart | None = None, _observer: PassObserver | None = None) -> Result:
         """Translate text: the same text, policy and seed always give the same Result.
@@ -292,7 +294,8 @@ class Translator:
         can't carry: the difficult ones (rewrite_mode="hard", thresholds in profiles.yaml `rewrite:`) or every
         one ("all"). Document adapters supply opaque protected spans and whole-text context through the
         internal composition parameters; format selection belongs to the public translation route. _observer
-        watches the pass (the changes builder) without changing it."""
+        watches the pass (the changes builder) without changing it. _tuning carries the internal runtime
+        inputs until popularity/preferences and response reporting join the coordinated contract update."""
         pol = self.policy(level=level, seed=seed, vulgarity=vulgarity,
                           variety=variety, registers=registers, regions=regions, unlock=unlock, embedder=embedder,
                           english=english, embellishment=embellishment,
@@ -307,7 +310,8 @@ class Translator:
         effective = _composition.effective if _composition is not None else resolve(pol, self.dictionary)
         run = _Run(text, pol, effective, mood, is_chant(sents), masked, genre,
                    _context[1] if _context is not None else text_english(pol.english, masked.prose(), self.dictionary.us_spellings),
-                   genre.setting(pol.embellishment), composition=_composition, observer=_observer)
+                   genre.setting(pol.embellishment), composition=_composition, observer=_observer,
+                   tuning=Tuning.prepare(_tuning, self.dictionary))
         if _composition is not None:
             run.state = _composition.state
         if _observer is not None:
@@ -348,7 +352,7 @@ class Translator:
         if _observer is not None:
             _observer.phonetic(joined, trace, final)
         final = masked.restore(final)
-        warnings = list(run.eff.warnings)
+        warnings = [*run.eff.warnings, *run.tuning.warnings]
         if pol.vulgarity is not None and run.eff.vulgarity and not run.embellishment.takes("infix"):
             if form_removes(run.genre, "infix", run.embellishment.step):   # the setting does; the form doesn't
                 why = f"the {run.genre.name} form takes"
@@ -363,7 +367,8 @@ class Translator:
                       vulgarity=run.eff.vulgarity, mood=run.mood, genre=run.genre,
                       sentences=[(s[0].start, s[-1].end) for s in sents], dialect=run.dialect,
                       english=run.english, embellishment=run.embellishment, variety=pol.variety,
-                      profile_config=run.eff.envelope()["profile_config"], imagery=run.imagery)
+                      profile_config=run.eff.envelope()["profile_config"], imagery=run.imagery,
+                      _tuning={"popularity": run.tuning.popularity, "preferences": len(run.preferences_used)})
 
     # -- stages -------------------------------------------------------------------------
 
@@ -395,7 +400,7 @@ class Translator:
                                      run.text[toks[det.start].start: toks[det.end - 1].end], det, sent.index)
             records.append(rec)
             taken = (occupied - set(range(det.start, det.end))) | replaced
-            keep, rejected = self.eligible(det, sent, run, eff, state, taken)
+            keep, rejected = self.eligible(det, sent, run, eff, state, taken, record_tuning=True)
             rec.eligible = keep
             rec.rejected = sorted(((e.id, r) for e, r in rejected), key=lambda x: x[0])
             if not keep:
@@ -432,7 +437,8 @@ class Translator:
         return records, splices
 
     def eligible(self, det: Detection, sent: "_Sentence", run: "_Run", eff: Effective, state: TextState,
-                 taken: set[int], entries: list[Entry] | None = None) -> tuple[list[Candidate], list[tuple[Entry, str]]]:
+                 taken: set[int], entries: list[Entry] | None = None, *,
+                 record_tuning: bool = False) -> tuple[list[Candidate], list[tuple[Entry, str]]]:
         """The candidates that can fill a detection under eff, and the rest with why not: the policy and grammar
         (select.candidates), the span (taken: the tokens other swaps hold), the genre, then what the text has
         already said and variety. Selection reads it at each spot; the changes builder reads it again with only
@@ -455,22 +461,15 @@ class Translator:
                 rejected.append((c.entry, reason))
             else:
                 keep.append(c)
-        if keep and self.dictionary.adjustments.by_context:
-            match = detection_match(det)
-            if match is not None:
-                factors = [self.dictionary.adjustments.factor(match.key, c.entry.id, level=eff.level,
-                    vulgarity=eff.vulgarity, embellishment=run.embellishment.step) for c in keep]
-                if any(factor != 1 for factor in factors):
-                    log_weights = [math.log(c.weight) + math.log(factor) if c.weight else -math.inf
-                                   for c, factor in zip(keep, factors, strict=True)]
-                    peak = max(log_weights)
-                    if peak == -math.inf:
-                        # Repeat penalties can underflow every remaining weight to zero.
-                        peak = 0.0
-                    for c, factor, weight in zip(keep, factors, log_weights, strict=True):
-                        c.weight = math.exp(weight - peak)
-                        c.why += f"; community adjustment x {factor:g} (normal band), normalised w={c.weight:.3g}"
-        return _narrow(keep, rejected, run.pol.variety, state), rejected
+        preference = None
+        if keep and (run.tuning.adjustments.by_context or run.tuning.exact):
+            preference = run.tuning.apply(keep, detection_match(det), level=eff.level,
+                                         vulgarity=eff.vulgarity, embellishment=run.embellishment.step)
+        keep = _narrow(keep, rejected, run.pol.variety, state)
+        if record_tuning and preference is not None and any(
+                c.entry.id == preference.term and c.weight > 0 for c in keep):
+            run.preferences_used.add(preference.position)
+        return keep, rejected
 
     def render_at_spot(self, choice: Candidate, spot: "Spot", run: "_Run") -> "SpotRendering":
         """A candidate rendered at its spot, as the splice puts it in: a form (and the spelling the text keeps), its
@@ -1083,6 +1082,8 @@ class _Run:
     state: TextState = field(default_factory=TextState)
     composition: DocumentPart | None = None
     observer: PassObserver | None = None
+    tuning: Tuning = field(default_factory=Tuning)
+    preferences_used: set[int] = field(default_factory=set)
     records: list[SubstitutionRecord] = field(default_factory=list)
     garnish: list[GarnishRecord] = field(default_factory=list)
     rewrites: list[RewriteRecord] = field(default_factory=list)

@@ -5,6 +5,11 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Implement the remaining internal selection tuning: popularity uses the wider community band, and
+  latest-first personal preferences use an exact source key before a same-root fallback. Validate
+  weights, warn about unknown records, and preserve eligibility, evidence, repeats and substitution
+  rolls. Public controls and reporting remain with the coordinated contract update.
+
 - Apply loaded community adjustments to eligible substitution weights within their normal band and exact
   source-match/dial context, before variety pruning. Keep meaning, permissions, evidence and substitution
   rolls unchanged; share the weighting with plans, Markdown and change alternatives.

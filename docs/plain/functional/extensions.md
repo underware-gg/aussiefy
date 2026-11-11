@@ -117,9 +117,13 @@ report the factor and the resulting normalised weight; a common rescaling preser
 without overflowing on large finite factors. Unmatched contexts leave weights unchanged.
 
 The pure `dictionary.adjustments.factor(…)` query exposes the same calculation for inspection, including
-the wider band with `popularity=True`. The runtime popularity option, personal preferences and coordinated
-response reporting remain in development. No adjustment changes a score or evidence label or makes a term
-with the wrong meaning eligible.
+the wider band with `popularity=True`. The selection runtime also supports latest-first personal
+weights: the exact source key wins before the most recent same-root preference, and an ineligible
+preferred term never gains access or causes a fallback to an older choice. Invalid weights fail; unknown
+matches and terms warn. These internal mechanisms share the actual candidate weighting before variety,
+with repeat penalties retained. Public popularity/preference options, hosted hooks and coordinated
+response reporting remain in development for the combined contract update. No adjustment changes a
+score or evidence label or makes a term with the wrong meaning eligible.
 
 ## Dictionary identity
 
