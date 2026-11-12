@@ -1,5 +1,5 @@
 {
-  "draft": "20261111-r1",
+  "draft": "20261112-r2",
   "base": "05977d5",
   "cases": [
     {
@@ -122,10 +122,10 @@
               "weights_version": "provisional-1"
             },
             "evidence": "unverified",
+            "minimum_vulgarity": 2,
             "type": "idiom",
             "status": "active",
-            "held_back": [],
-            "minimum_vulgarity": 2
+            "held_back": []
           },
           "peckish": {
             "id": "peckish",
@@ -169,10 +169,10 @@
               "weights_version": "provisional-1"
             },
             "evidence": "unverified",
+            "minimum_vulgarity": 0,
             "type": "idiom",
             "status": "active",
-            "held_back": [],
-            "minimum_vulgarity": 0
+            "held_back": []
           }
         },
         "withheld": [],
@@ -185,8 +185,24 @@
           "deadset (as set) takes no swear infixes, intensifiers or sweary garnish: vulgarity 1 reaches its word swaps only"
         ],
         "constructions": {},
-        "imagery": {}
-      }
+        "imagery": {},
+        "card_version": 3,
+        "warning_details": [
+          {
+            "code": "engine_warning",
+            "message": "deadset (as set) takes no swear infixes, intensifiers or sweary garnish: vulgarity 1 reaches its word swaps only"
+          }
+        ]
+      },
+      "result_warnings": [
+        "deadset (as set) takes no swear infixes, intensifiers or sweary garnish: vulgarity 1 reaches its word swaps only"
+      ],
+      "result_warning_details": [
+        {
+          "code": "engine_warning",
+          "message": "deadset (as set) takes no swear infixes, intensifiers or sweary garnish: vulgarity 1 reaches its word swaps only"
+        }
+      ]
     },
     {
       "name": "construction-parts",
@@ -229,8 +245,8 @@
                     "entry_id": null,
                     "text": "hungry",
                     "out_span": [
-                      7,
-                      13
+                      0,
+                      6
                     ],
                     "evidence": "unverified",
                     "coined_by": null
@@ -241,8 +257,8 @@
                     "entry_id": null,
                     "text": "eat the shadow off a sausage",
                     "out_span": [
-                      24,
-                      52
+                      17,
+                      45
                     ],
                     "evidence": "bulldust",
                     "coined_by": "agent"
@@ -269,8 +285,8 @@
                     "entry_id": null,
                     "text": "hungry",
                     "out_span": [
-                      7,
-                      13
+                      0,
+                      6
                     ],
                     "evidence": "unverified",
                     "coined_by": null
@@ -281,8 +297,8 @@
                     "entry_id": null,
                     "text": "lick the grease out of a pie warmer",
                     "out_span": [
-                      24,
-                      59
+                      17,
+                      52
                     ],
                     "evidence": "bulldust",
                     "coined_by": "agent"
@@ -312,8 +328,8 @@
                 "entry_id": null,
                 "text": "hungry",
                 "out_span": [
-                  7,
-                  13
+                  0,
+                  6
                 ],
                 "evidence": "unverified",
                 "coined_by": null
@@ -324,8 +340,8 @@
                 "entry_id": null,
                 "text": "eat the shadow off a sausage",
                 "out_span": [
-                  24,
-                  52
+                  17,
+                  45
                 ],
                 "evidence": "bulldust",
                 "coined_by": "agent"
@@ -345,6 +361,7 @@
             "entry_id": null,
             "family": "hungry-enough-to",
             "text": "hungry enough to eat the shadow off a sausage",
+            "gloss": "Wanting food.",
             "concepts": [
               "HUNGRY"
             ],
@@ -371,6 +388,7 @@
               "weights_version": "provisional-1"
             },
             "evidence": "bulldust",
+            "minimum_vulgarity": 0,
             "parts": [
               {
                 "role": "state",
@@ -400,7 +418,8 @@
                   "places": 0,
                   "weights_version": "provisional-1"
                 },
-                "evidence": "unverified"
+                "evidence": "unverified",
+                "minimum_vulgarity": 0
               },
               {
                 "role": "act",
@@ -431,16 +450,17 @@
                   "places": 0,
                   "weights_version": "provisional-1"
                 },
-                "evidence": "bulldust"
+                "evidence": "bulldust",
+                "minimum_vulgarity": 0
               }
-            ],
-            "minimum_vulgarity": 0
+            ]
           },
           "construction/hungry-enough-to/caf68cc2cda085c29637c668": {
             "construction_id": "construction/hungry-enough-to/caf68cc2cda085c29637c668",
             "entry_id": null,
             "family": "hungry-enough-to",
             "text": "hungry enough to lick the grease out of a pie warmer",
+            "gloss": "Wanting food.",
             "concepts": [
               "HUNGRY"
             ],
@@ -467,6 +487,7 @@
               "weights_version": "provisional-1"
             },
             "evidence": "bulldust",
+            "minimum_vulgarity": 0,
             "parts": [
               {
                 "role": "state",
@@ -496,7 +517,8 @@
                   "places": 0,
                   "weights_version": "provisional-1"
                 },
-                "evidence": "unverified"
+                "evidence": "unverified",
+                "minimum_vulgarity": 0
               },
               {
                 "role": "act",
@@ -527,15 +549,19 @@
                   "places": 0,
                   "weights_version": "provisional-1"
                 },
-                "evidence": "bulldust"
+                "evidence": "bulldust",
+                "minimum_vulgarity": 0
               }
-            ],
-            "minimum_vulgarity": 0
+            ]
           }
         },
         "imagery": {},
-        "withheld": []
-      }
+        "withheld": [],
+        "card_version": 3,
+        "warning_details": []
+      },
+      "result_warnings": [],
+      "result_warning_details": []
     },
     {
       "name": "imagery-card",
@@ -571,7 +597,7 @@
             "locked": [],
             "covers": [],
             "evidence": "bulldust",
-            "coined_by": null,
+            "coined_by": "agent",
             "image_id": "belly-mixer-rocks",
             "placement": "riff",
             "removed": {
@@ -587,6 +613,28 @@
         "constructions": {},
         "imagery": {
           "belly-mixer-rocks": {
+            "id": "belly-mixer-rocks",
+            "text": "with a belly growling like a mixer full of rocks",
+            "usage": "Hunger with an imagined noisy belly; comparison, not a new event.",
+            "form": "suffix",
+            "subject": "person",
+            "exaggeration": 2,
+            "level": 3,
+            "vulgarity": 0,
+            "tone": "comic",
+            "concepts": [
+              "HUNGRY"
+            ],
+            "frames": [
+              "predicate_adj",
+              "clause",
+              "vp"
+            ],
+            "related": [],
+            "unless_after": [
+              "for",
+              "to"
+            ],
             "sources": [],
             "searched": {
               "date": "2026-10-19",
@@ -611,33 +659,16 @@
               "weights_version": "provisional-1"
             },
             "evidence": "bulldust",
-            "minimum_vulgarity": 0,
-            "id": "belly-mixer-rocks",
-            "text": "with a belly growling like a mixer full of rocks",
-            "usage": "Hunger with an imagined noisy belly; comparison, not a new event.",
-            "form": "suffix",
-            "subject": "person",
-            "exaggeration": 2,
-            "level": 3,
-            "vulgarity": 0,
-            "tone": "comic",
-            "concepts": [
-              "HUNGRY"
-            ],
-            "frames": [
-              "predicate_adj",
-              "clause",
-              "vp"
-            ],
-            "related": [],
-            "unless_after": [
-              "for",
-              "to"
-            ]
+            "coined_by": "agent",
+            "minimum_vulgarity": 0
           }
         },
-        "withheld": []
-      }
+        "withheld": [],
+        "card_version": 3,
+        "warning_details": []
+      },
+      "result_warnings": [],
+      "result_warning_details": []
     },
     {
       "name": "entry-riff-span",
@@ -687,8 +718,8 @@
                     "riff_index": 0,
                     "text": "like a brickie who's dropped the pie face-down",
                     "out_span": [
-                      20,
-                      66
+                      16,
+                      62
                     ],
                     "evidence": "unverified",
                     "coined_by": null
@@ -714,8 +745,8 @@
                 "riff_index": 0,
                 "text": "like a brickie who's dropped the pie face-down",
                 "out_span": [
-                  20,
-                  66
+                  16,
+                  62
                 ],
                 "evidence": "unverified",
                 "coined_by": null
@@ -735,55 +766,6 @@
             "level": 3,
             "vulgarity": 0,
             "register": "current",
-            "riffs": [
-              {
-                "text": "like a brickie who's dropped the pie face-down",
-                "tone": "comic",
-                "sources": [],
-                "produced_by": "agent",
-                "origin": "unknown",
-                "register": "current",
-                "australian_use": "common",
-                "reads_as": "australian",
-                "themes": [],
-                "doubtful_definition": false,
-                "misreadable": false,
-                "attestation": {
-                  "score": 0.0,
-                  "bars": 0,
-                  "counts": {},
-                  "people": 0,
-                  "independent": 0,
-                  "places": 0,
-                  "weights_version": "provisional-1"
-                },
-                "evidence": "unverified",
-                "best": true
-              },
-              {
-                "text": "like a roofer who's put a nail through a thong",
-                "tone": "comic",
-                "sources": [],
-                "produced_by": "agent",
-                "origin": "unknown",
-                "register": "current",
-                "australian_use": "common",
-                "reads_as": "australian",
-                "themes": [],
-                "doubtful_definition": false,
-                "misreadable": false,
-                "attestation": {
-                  "score": 0.0,
-                  "bars": 0,
-                  "counts": {},
-                  "people": 0,
-                  "independent": 0,
-                  "places": 0,
-                  "weights_version": "provisional-1"
-                },
-                "evidence": "unverified"
-              }
-            ],
             "sources": [
               {
                 "kind": "scholarly_dictionary",
@@ -809,16 +791,71 @@
               "weights_version": "provisional-1"
             },
             "evidence": "unverified",
+            "minimum_vulgarity": 0,
             "type": "idiom",
             "status": "active",
             "held_back": [],
-            "minimum_vulgarity": 0
+            "riffs": [
+              {
+                "text": "like a brickie who's dropped the pie face-down",
+                "tone": "comic",
+                "sources": [],
+                "produced_by": "agent",
+                "origin": "unknown",
+                "register": "current",
+                "australian_use": "common",
+                "reads_as": "australian",
+                "themes": [],
+                "doubtful_definition": false,
+                "misreadable": false,
+                "attestation": {
+                  "score": 0.0,
+                  "bars": 0,
+                  "counts": {},
+                  "people": 0,
+                  "independent": 0,
+                  "places": 0,
+                  "weights_version": "provisional-1"
+                },
+                "evidence": "unverified",
+                "minimum_vulgarity": 0,
+                "best": true
+              },
+              {
+                "text": "like a roofer who's put a nail through a thong",
+                "tone": "comic",
+                "sources": [],
+                "produced_by": "agent",
+                "origin": "unknown",
+                "register": "current",
+                "australian_use": "common",
+                "reads_as": "australian",
+                "themes": [],
+                "doubtful_definition": false,
+                "misreadable": false,
+                "attestation": {
+                  "score": 0.0,
+                  "bars": 0,
+                  "counts": {},
+                  "people": 0,
+                  "independent": 0,
+                  "places": 0,
+                  "weights_version": "provisional-1"
+                },
+                "evidence": "unverified",
+                "minimum_vulgarity": 0
+              }
+            ]
           }
         },
         "constructions": {},
         "imagery": {},
-        "withheld": []
-      }
+        "withheld": [],
+        "card_version": 3,
+        "warning_details": []
+      },
+      "result_warnings": [],
+      "result_warning_details": []
     },
     {
       "name": "non-lexical-evidence-null",
@@ -865,8 +902,12 @@
         "entries": {},
         "constructions": {},
         "imagery": {},
-        "withheld": []
-      }
+        "withheld": [],
+        "card_version": 3,
+        "warning_details": []
+      },
+      "result_warnings": [],
+      "result_warning_details": []
     },
     {
       "name": "tuning-and-warnings",
@@ -887,8 +928,24 @@
         "entries": {},
         "constructions": {},
         "imagery": {},
-        "withheld": []
-      }
+        "withheld": [],
+        "card_version": 3,
+        "warning_details": [
+          {
+            "code": "unknown_preference_term",
+            "message": "preferences[0]: unknown term 'missing'; preference ignored"
+          }
+        ]
+      },
+      "result_warnings": [
+        "preferences[0]: unknown term 'missing'; preference ignored"
+      ],
+      "result_warning_details": [
+        {
+          "code": "unknown_preference_term",
+          "message": "preferences[0]: unknown term 'missing'; preference ignored"
+        }
+      ]
     }
   ]
 }

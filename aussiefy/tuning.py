@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 import math
 
 from .adjustments import Adjustments
-from .errors import UserError
+from .errors import UserError, WarningMessage
 from .match_keys import SourceMatch, known_match, parse_match_key
 
 
@@ -69,9 +69,11 @@ class Tuning:
             except UserError:
                 known = False
             if not known:
-                warnings.append(f"{owner}: unknown source match {row['match']!r}; preference ignored")
+                warnings.append(WarningMessage(f"{owner}: unknown source match {row['match']!r}; preference ignored",
+                                               code="unknown_preference_match"))
             if row["term"] not in dictionary.entries:
-                warnings.append(f"{owner}: unknown term {row['term']!r}; preference ignored")
+                warnings.append(WarningMessage(f"{owner}: unknown term {row['term']!r}; preference ignored",
+                                               code="unknown_preference_term"))
             if not known or row["term"] not in dictionary.entries:
                 continue
             root = parse_match_key(row["match"]).root

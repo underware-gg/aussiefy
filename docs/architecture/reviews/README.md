@@ -10,6 +10,7 @@ commands that have since been renamed. Mate, decisions they led to are recorded 
 
 | Review | Summary |
 |---|---|
+| [design-review-2026-11-12-v3-draft-r2.md](design-review-2026-11-12-v3-draft-r2.md) | Local review of option identity, provenance, spans, warning compatibility and the non-active v3 boundary |
 - [Tag-tier foundations and acceptance fixes, 21 October 2026](design-review-2026-10-21-tag-tier-refinement.md).
 | [design-review-2026-10-21-subject-permissions.md](design-review-2026-10-21-subject-permissions.md) | Shared subject policy, source\-aware acceptance, reviewed data'n preserved consumer contracts \|
 | [design-review-2026-10-21-community-metadata.md](design-review-2026-10-21-community-metadata.md) | Structured term evidence, preserved citations, usage gates'n shared selection weights \|

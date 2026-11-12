@@ -124,3 +124,22 @@ JSON Schema alone does not establish reference, span/text or canonical-key equal
 those properties. Consumer review precedes freeze; deployment coordination belongs to the host
 and is recorded in the project plan, not implemented in the package. This checkpoint grants no contract
 freeze, publication or deployment by itself.
+
+
+## Site review and r2 checkpoint, 12 November 2026
+
+The site accepted r1's bytes and shape, conditional on option identity and attribution invariants. R2
+specifies one entry_id-or-construction_id per change's combined alternatives/locked options, selected
+construction membership and persistent construction content identity for a fixed dictionary identity.
+The identity algorithm is extracted unchanged from compose and reused by semantic validation. Riffs do
+not create duplicate entry options. Persistent expression identity does not imply availability in an
+untuned request; request-side replay/pinning, including a persistent riff selector, remains required before
+sharing tuned construction/riff picks ships.
+
+Part/riff occurrence spans are local to their owner rendering, independently of document replacement
+regions. The part join is (role, ingredient_id). Rich cards share theme objects and minimum vulgarity;
+construction glosses come from existing concept descriptions. Shared review-stage projections derive an
+agent coiner only for agent-produced bulldust with no explicit coiner and leave stored evidence intact.
+Every bulldust location requires a non-null maker. Warning strings remain unchanged, with codes assigned
+at the diagnostic origin and exposed through a parallel warning_details array in the v3 draft. Both
+changes and every lookup outcome carry card_version at activation. None activates public v3 piecemeal.

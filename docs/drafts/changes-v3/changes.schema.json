@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "REVIEW DRAFT 20261111-r1. Not frozen, not the active packaged schema. Active changes.VERSION remains 2.",
-  "title": "DRAFT aussiefy changes contract v3 — site review r1",
-  "description": "Review-only schema. Span/id/mask/covers semantics retained from v2. Construction part-card spans are local to canonical card text; occurrence spans are document output coordinates, including alternatives. Non-lexical changes have null evidence, never a false evidence claim.",
+  "$comment": "REVIEW DRAFT 20261112-r2. Not frozen, not the active packaged schema. Active changes.VERSION remains 2.",
+  "title": "DRAFT aussiefy changes contract v3 — site review r2",
+  "description": "Review-only v3 contract. Change/option out_span is a document replacement region. Nested part/riff spans and masks are local to their owner rendering; canonical part spans are local to card.text. All offsets are Unicode code points. Semantic rules are normative in README.",
   "type": "object",
   "required": [
     "version",
@@ -14,7 +14,9 @@
     "entries",
     "constructions",
     "imagery",
-    "withheld"
+    "withheld",
+    "card_version",
+    "warning_details"
   ],
   "additionalProperties": false,
   "properties": {
@@ -35,7 +37,8 @@
       "type": "array",
       "items": {
         "type": "string"
-      }
+      },
+      "description": "Exactly list(Result.warnings), or list(DocumentResult.warnings) for a document; no client or service messages are added here."
     },
     "changes": {
       "type": "array",
@@ -95,6 +98,16 @@
           }
         }
       }
+    },
+    "card_version": {
+      "const": 3
+    },
+    "warning_details": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/warning_detail"
+      },
+      "description": "One detail per warning in the same order. Its message equals warnings[i]. Codes are engine diagnostics; services may filter these from reader-facing text."
     }
   },
   "$defs": {
@@ -351,7 +364,8 @@
         "evidence",
         "attestation",
         "text",
-        "tone"
+        "tone",
+        "minimum_vulgarity"
       ],
       "additionalProperties": false,
       "properties": {
@@ -398,8 +412,7 @@
         "themes": {
           "type": "array",
           "items": {
-            "type": "string",
-            "minLength": 1
+            "$ref": "#/$defs/tag"
           },
           "uniqueItems": true
         },
@@ -445,12 +458,14 @@
             "person",
             "agent",
             "constructor"
-          ]
+          ],
+          "description": "Who coined this wording. Required and non-null for bulldust. Explicit coiner wins; otherwise agent is derived only from a bulldust assessment with produced_by agent."
         },
         "produced_by": {
           "enum": [
             "agent"
-          ]
+          ],
+          "description": "Who prepared the stored record, not generally who invented the wording. It implies agent coinage only when the evidence assessment is bulldust and no explicit coiner is recorded."
         },
         "caught_on": {
           "type": "object",
@@ -568,6 +583,9 @@
         },
         "best": {
           "const": true
+        },
+        "minimum_vulgarity": {
+          "$ref": "#/$defs/vulgarity"
         }
       },
       "allOf": [
@@ -589,6 +607,32 @@
               },
               "evidence": {
                 "const": "bulldust"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
               }
             }
           }
@@ -666,7 +710,8 @@
           "type": "array",
           "items": {
             "$ref": "#/$defs/tag"
-          }
+          },
+          "uniqueItems": true
         },
         "doubtful_definition": {
           "type": "boolean"
@@ -710,12 +755,14 @@
             "person",
             "agent",
             "constructor"
-          ]
+          ],
+          "description": "Who coined this wording. Required and non-null for bulldust. Explicit coiner wins; otherwise agent is derived only from a bulldust assessment with produced_by agent."
         },
         "produced_by": {
           "enum": [
             "agent"
-          ]
+          ],
+          "description": "Who prepared the stored record, not generally who invented the wording. It implies agent coinage only when the evidence assessment is bulldust and no explicit coiner is recorded."
         },
         "caught_on": {
           "type": "object",
@@ -974,6 +1021,32 @@
               }
             }
           }
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
         }
       ]
     },
@@ -996,7 +1069,8 @@
         "text",
         "out_span",
         "level",
-        "vulgarity"
+        "vulgarity",
+        "minimum_vulgarity"
       ],
       "additionalProperties": false,
       "properties": {
@@ -1043,8 +1117,7 @@
         "themes": {
           "type": "array",
           "items": {
-            "type": "string",
-            "minLength": 1
+            "$ref": "#/$defs/tag"
           },
           "uniqueItems": true
         },
@@ -1090,12 +1163,14 @@
             "person",
             "agent",
             "constructor"
-          ]
+          ],
+          "description": "Who coined this wording. Required and non-null for bulldust. Explicit coiner wins; otherwise agent is derived only from a bulldust assessment with produced_by agent."
         },
         "produced_by": {
           "enum": [
             "agent"
-          ]
+          ],
+          "description": "Who prepared the stored record, not generally who invented the wording. It implies agent coinage only when the evidence assessment is bulldust and no explicit coiner is recorded."
         },
         "caught_on": {
           "type": "object",
@@ -1233,6 +1308,9 @@
         },
         "vulgarity": {
           "$ref": "#/$defs/vulgarity"
+        },
+        "minimum_vulgarity": {
+          "$ref": "#/$defs/vulgarity"
         }
       },
       "allOf": [
@@ -1257,8 +1335,35 @@
               }
             }
           }
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
         }
-      ]
+      ],
+      "description": "Canonical part; out_span is local to construction_card.text. Join an occurrence using the unique pair (role, ingredient_id) within that construction card."
     },
     "construction_card": {
       "type": "object",
@@ -1283,7 +1388,8 @@
         "level",
         "vulgarity",
         "cadence",
-        "parts"
+        "parts",
+        "gloss"
       ],
       "additionalProperties": false,
       "properties": {
@@ -1331,7 +1437,8 @@
           "type": "array",
           "items": {
             "$ref": "#/$defs/tag"
-          }
+          },
+          "uniqueItems": true
         },
         "doubtful_definition": {
           "type": "boolean"
@@ -1375,12 +1482,14 @@
             "person",
             "agent",
             "constructor"
-          ]
+          ],
+          "description": "Who coined this wording. Required and non-null for bulldust. Explicit coiner wins; otherwise agent is derived only from a bulldust assessment with produced_by agent."
         },
         "produced_by": {
           "enum": [
             "agent"
-          ]
+          ],
+          "description": "Who prepared the stored record, not generally who invented the wording. It implies agent coinage only when the evidence assessment is bulldust and no explicit coiner is recorded."
         },
         "caught_on": {
           "type": "object",
@@ -1543,6 +1652,11 @@
             "$ref": "#/$defs/construction_part"
           },
           "minItems": 1
+        },
+        "gloss": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The family concept description: a plain-English explanation, independent of display names."
         }
       },
       "allOf": [
@@ -1583,8 +1697,35 @@
           "required": [
             "coined_by"
           ]
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
         }
-      ]
+      ],
+      "description": "construction_id is persistent for a given dictionary_id, independent of sampling and tuning; presence in any later request is not guaranteed. See README for its content identity algorithm."
     },
     "imagery_card": {
       "type": "object",
@@ -1660,7 +1801,8 @@
           "type": "array",
           "items": {
             "$ref": "#/$defs/tag"
-          }
+          },
+          "uniqueItems": true
         },
         "doubtful_definition": {
           "type": "boolean"
@@ -1704,12 +1846,14 @@
             "person",
             "agent",
             "constructor"
-          ]
+          ],
+          "description": "Who coined this wording. Required and non-null for bulldust. Explicit coiner wins; otherwise agent is derived only from a bulldust assessment with produced_by agent."
         },
         "produced_by": {
           "enum": [
             "agent"
-          ]
+          ],
+          "description": "Who prepared the stored record, not generally who invented the wording. It implies agent coinage only when the evidence assessment is bulldust and no explicit coiner is recorded."
         },
         "caught_on": {
           "type": "object",
@@ -1919,6 +2063,32 @@
               },
               "evidence": {
                 "const": "bulldust"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
               }
             }
           }
@@ -2193,7 +2363,35 @@
           ]
         }
       },
-      "description": "A construction part in final rendered output. Spans are global Unicode code-point output coordinates. In an alternative or locked option, coordinates describe the text after that single option replaces its out_span, so may extend beyond the old region. Canonical construction-card parts instead use spans local to card.text."
+      "description": "out_span is local to this owner's rendered (option) or output (change), like masks; never document coordinates. Join constructions[owner.construction_id].parts by the unique pair (role, ingredient_id).",
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
+        }
+      ]
     },
     "riff_occurrence": {
       "oneOf": [
@@ -2239,7 +2437,35 @@
               "type": "integer",
               "minimum": 0
             }
-          }
+          },
+          "allOf": [
+            {
+              "if": {
+                "required": [
+                  "evidence"
+                ],
+                "properties": {
+                  "evidence": {
+                    "const": "bulldust"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "coined_by"
+                ],
+                "properties": {
+                  "coined_by": {
+                    "enum": [
+                      "person",
+                      "agent",
+                      "constructor"
+                    ]
+                  }
+                }
+              }
+            }
+          ]
         },
         {
           "type": "object",
@@ -2278,10 +2504,38 @@
               "type": "string",
               "minLength": 1
             }
-          }
+          },
+          "allOf": [
+            {
+              "if": {
+                "required": [
+                  "evidence"
+                ],
+                "properties": {
+                  "evidence": {
+                    "const": "bulldust"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "coined_by"
+                ],
+                "properties": {
+                  "coined_by": {
+                    "enum": [
+                      "person",
+                      "agent",
+                      "constructor"
+                    ]
+                  }
+                }
+              }
+            }
+          ]
         }
       ],
-      "description": "A riff in final rendered output. Coordinates follow part_occurrence, including the hypothetical output for an alternative. riff_index is response-local, indexing entries[entry_id].riffs; it is not a persistent dictionary id."
+      "description": "out_span is local to the owner's rendered/output, like masks. riff_index indexes entries[entry_id].riffs within this response only; it is not a persistent selector or a replay guarantee."
     },
     "alternative": {
       "type": "object",
@@ -2407,8 +2661,35 @@
               }
             }
           ]
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
         }
-      ]
+      ],
+      "description": "Key is entry_id ?? construction_id; it appears at most once across this change's alternatives and locked options, regardless of riffs. out_span is the document replacement region; nested part/riff spans are local to rendered."
     },
     "locked": {
       "type": "object",
@@ -2530,8 +2811,35 @@
               }
             }
           ]
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
         }
-      ]
+      ],
+      "description": "Key is entry_id ?? construction_id; it appears at most once across this change's alternatives and locked options, regardless of riffs. out_span is the document replacement region; nested part/riff spans are local to rendered."
     },
     "change": {
       "type": "object",
@@ -3064,6 +3372,32 @@
               "rule"
             ]
           }
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
         }
       ]
     },
@@ -3084,6 +3418,26 @@
         }
       },
       "description": "Popularity requested and the number of distinct input preferences used by actual positive-weight candidates after repeat exclusions/variety. Includes eligible neutral weights and pools whose substitution roll failed; excludes counterfactual probes. Deduplicated across document units."
+    },
+    "warning_detail": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "engine_warning",
+            "unknown_preference_match",
+            "unknown_preference_term"
+          ]
+        },
+        "message": {
+          "type": "string"
+        }
+      }
     }
   }
 }

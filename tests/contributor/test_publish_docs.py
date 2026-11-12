@@ -123,6 +123,7 @@ def test_link_checks_use_rendered_heading_ids_and_actual_targets(repo):
 def test_discovery_has_each_authoritative_source_once_and_no_published_copies(repo):
     put(repo, 'skills/test/SKILL.md', '# Toolkit\n')
     put(repo, 'docs/architecture/decisions/dd-001-example.md', '# Historical ADR\n')
+    put(repo, 'docs/drafts/contract/README.md', '# Normative review draft\n')
     docs = p.authoritative_docs(repo, p.load(repo))
     assert docs == ['docs/plain/root/README.md', 'docs/plain/user/guide.md', 'skills/test/SKILL.md']
     assert len(docs) == len(set(docs))
@@ -324,10 +325,11 @@ def test_export_options_belong_to_export(repo):
 
 def test_kept_plain_lists_the_documents_publication_never_translates(repo):
     for name in ('docs/architecture/decisions/dd-001-example.md', 'docs/architecture/reviews/design-review-1.md',
-                 'docs/standards/agent-ready-documentation.md', 'docs/architecture/current.md'):
+                 'docs/standards/agent-ready-documentation.md', 'docs/drafts/contract/README.md', 'docs/architecture/current.md'):
         put(repo, name, '# Plain\n')
     assert p.kept_plain(repo) == ['docs/architecture/decisions/dd-001-example.md',
                                   'docs/architecture/reviews/design-review-1.md',
+                                  'docs/drafts/contract/README.md',
                                   'docs/standards/agent-ready-documentation.md']
 
 

@@ -163,11 +163,19 @@ def composite_metadata(family: ConstructionFamily, parts, dictionary: Dictionary
     return metadata
 
 
+def construction_identity(family: ConstructionFamily, chosen: dict[str, Ingredient]) -> str:
+    """Content identity, independent of seed, weights, sampling order and request state."""
+    identity = [(name, chosen[name].id, chosen[name].text) for _, name in family.fragments if name is not None]
+    payload = json.dumps(["construction-expression/v1", family.id, family.template, identity],
+                         ensure_ascii=False, separators=(",", ":")).encode()
+    return "construction/" + family.id + "/" + hashlib.sha256(payload).hexdigest()[:24]
+
+
 def compose(family: ConstructionFamily, chosen: dict[str, Ingredient], dictionary: Dictionary,
             eff: Effective, mood: str = "light") -> Construction:
     """A canonical expression; ingredient text is opaque, and spans are code-point offsets in it."""
     kinds = dict(family.slots)
-    chunks, parts, identity = [], [], []
+    chunks, parts = [], []
     position = 0
     for literal, name in family.fragments:
         chunks.append(literal)
@@ -180,11 +188,8 @@ def compose(family: ConstructionFamily, chosen: dict[str, Ingredient], dictionar
         chunks.append(part.text)
         parts.append(ConstructionPart(name, part, (position, position + len(part.text))))
         position += len(part.text)
-        identity.append((name, part.id, part.text))
     text = "".join(chunks)
-    payload = json.dumps(["construction-expression/v1", family.id, family.template, identity],
-                         ensure_ascii=False, separators=(",", ":")).encode()
-    cid = "construction/" + family.id + "/" + hashlib.sha256(payload).hexdigest()[:24]
+    cid = construction_identity(family, chosen)
     metadata = composite_metadata(family, chosen.values(), dictionary)
     words = sum(token.is_word for token in tokenize(text))
     lo, hi = family.preferred_words

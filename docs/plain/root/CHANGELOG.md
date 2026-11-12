@@ -5,6 +5,10 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Revise the non-active v3 review draft after site feedback: local part/riff spans, unique persistent option
+  keys, explicit bulldust makers, uniform themes, construction glosses, card versions and coded warning
+  details. Add full-card lookup projections. Active changes remain v2; runtime warning strings are preserved.
+
 - Prepare internal document tuning once, retain immutable per-unit usage, and count a preference only once
   across a whole Markdown document. Validate and report unknown preferences even without prose. Add
   non-active v3 changes/card schema review assets and examples; active public output remains v2.

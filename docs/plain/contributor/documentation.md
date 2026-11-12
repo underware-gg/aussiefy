@@ -37,8 +37,8 @@ read each authoritative current source once, along with ungenerated current docs
 to preview the published result, and review its readability before committing a publication update.
 Promotion requires fresh outputs, valid links and executable examples.
 
-AGENTS/CLAUDE instructions, legal notices and licence texts, the copied standard, ADR records and historical
-reviews stay plain. Their current indexes may be published. Training, research and corpus READMEs stay at
+AGENTS/CLAUDE instructions, legal notices and licence texts, the copied standard, ADR records, historical
+reviews and review-stage contract documents under `docs/drafts/` stay plain. Their current indexes may be published. Training, research and corpus READMEs stay at
 their existing paths. Publication does not recursively translate `docs/plain/`.
 
 The website publishes the docs in its own voices from a checkout of a tagged release. It runs

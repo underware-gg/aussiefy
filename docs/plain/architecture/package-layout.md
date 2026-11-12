@@ -80,3 +80,10 @@ as evidence, rather than treating every matched noun or modifier as a complete p
 `explore.py` is the toolkit boundary for stable pages, full cards, random entries and name suggestions.
 Construction variations reuse the constructor boundary in `bulldust.py`, validating each complete expression
 with the other parts held fixed. They do not create a second policy or splice implementation.
+
+
+`v3_contract.py` holds pure review-stage card projections and semantic checks shared by the draft change
+and lookup envelopes. It normalises theme display, derives bulldust presentation attribution without
+rewriting evidence, and uses `constructions.py`'s unchanged content identity algorithm. No active producer
+imports it before the coordinated v3 upgrade. `errors.py` also owns string-compatible coded warning values;
+`tuning.py` assigns preference diagnostic codes at their origin.

@@ -22,23 +22,31 @@ dial's settings with a one-line description each, for a page that lists them.
 
 ## Draft v3 for review
 
-The [v3 changes schema](../../drafts/changes-v3/changes.schema.json),
+The [v3 review bundle](../../drafts/changes-v3/README.md),
+[changes schema](../../drafts/changes-v3/changes.schema.json),
 [shared card schema](../../drafts/changes-v3/cards.schema.json) and
-[six review examples](../../drafts/changes-v3/examples.json) are **review drafts**, revision `20261111-r1`.
-They are outside package data and do not change the active v2 schema or emitter. Consuming clients review this draft
+[lookup card projection](../../drafts/changes-v3/lookup-cards.schema.json) are **review drafts**,
+revision `20261112-r2`. The [six changes examples](../../drafts/changes-v3/examples.json) and
+[two lookup examples](../../drafts/changes-v3/lookup-examples.json) validate offline. These assets live outside
+package data and do not change the active v2 schema or emitter. Consuming clients review this draft
 before it is frozen or becomes the active contract.
 
-The draft adds `dictionary_id`, `tuning`, warnings, rich provenance cards, construction/imagery maps,
-source matches and rendered part/riff spans. Canonical construction-card part spans are local to the
-card's text. Occurrence spans are global output coordinates; for an alternative they describe the
-hypothetical output after that option replaces its region, even when its length differs. Mask spans stay
-local to their rendering. Non-lexical changes carry null evidence. The examples label illustrative v3
-projections explicitly; they are not a claim that the engine already emits v3 or that a construction
-meets the fallback rule at those particular words. `kept`, `held` and personal terms remain slice 7 work.
+R2 makes nested part/riff spans local to their own rendered/output text, like masks. Canonical part spans
+remain local to card text; change/option replacement regions remain document coordinates. Option keys
+are unique across alternatives and locked options, chosen constructions occur among alternatives, and
+content-derived construction identities persist for a dictionary identity. That does not guarantee an
+untuned replay: construction/riff sharing needs a request-side pin input before it ships.
 
-JSON Schema validates shape; map-key equality, reference resolution, span bounds/text, canonical match
-round trips and consistency with card evidence need semantic checks too. The offline draft tests exercise
-both, with negative controls. Contract v3 remains subject to consumer review.
+Every bulldust rendering names a maker. Shared projections retain explicit coiners and derive agent coinage
+only for agent-produced bulldust without an explicit coiner, preserving stored evidence. R2 also adds
+construction glosses, uniform theme objects, explicit card versions on changes and lookup, and coded
+warning details alongside the exact Result/DocumentResult warning strings. The bundle specifies joins,
+attribution and the warning-code registry. Active lookup also waits for the coordinated upgrade.
+
+JSON Schema checks shape; shared semantic checks cover IDs, references, option keys, warning parity,
+local spans and card provenance. Illustrative projections are not claims that the engine already emits
+v3 or that those constructions meet the source fallback rule. Public integration and replay pinning remain
+3+6 work; `kept`, `held` and personal terms remain slice 7 work.
 
 ## The contract
 
