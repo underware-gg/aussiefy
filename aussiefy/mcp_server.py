@@ -167,12 +167,14 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                         level: Level = 5, seed: Seed = 0, vulgarity: Vulgarity = None, limit: BulldustLimit = bulldust_default,
                         registers: Registers = None, regions: Regions = None, unlock: Unlock = None,
                         embellishment: int | str | None = None, document_type: DocumentType = "general",
-                        document_config: dict | None = None, themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
+                        document_config: dict | None = None, themes: Themes = None, invention: Invention = None,
+                        include_scaffold: bool = False) -> dict[str, Any]:
         """Construct Australian-sounding idioms from reviewed families, labelled bulldust with part evidence.
         concept is a dictionary ID such as HUNGRY. family restricts the pattern; parts pins named slots to
-        ingredient IDs from a result so the remaining parts can vary. No global novelty is promised."""
+        ingredient IDs from a result so the remaining parts can vary. No global novelty is promised.
+        include_scaffold adds the full agent scaffold; the default returns only construction results."""
         return harness.bulldust(concept, family=family, parts=parts, level=level, seed=seed, vulgarity=vulgarity,
-                                limit=limit, registers=registers, regions=regions, unlock=unlock,
+                                limit=limit, include_scaffold=include_scaffold, registers=registers, regions=regions, unlock=unlock,
                                 embellishment=embellishment, document_type=document_type,
                                 document_config=document_config, translator=translator, themes=themes, invention=invention)
 
@@ -222,7 +224,8 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                      include_gated: bool = False, embellishment: int | str | None = None,
                      document_type: DocumentType = "general", document_config: dict | None = None,
                      themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
-        """Fetch a full entry card by ID under the requested dials.
+        """Resolve a permanent ID to its current card under the requested dials.
+        entry_id retains the requested key; entry.id is canonical for redirects. Removed IDs report removed.
         include_gated also returns entries held back as doubtful (marked as such)."""
         return harness.get_entry(entry_id, level=level, vulgarity=vulgarity, include_gated=include_gated,
                                  embellishment=embellishment, document_type=document_type,

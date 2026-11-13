@@ -20,18 +20,21 @@ def bulldust(concept: str | None = None, *, family: str | None = None, parts: di
              registers: list[str] | None = None, regions: list[str] | None = None, unlock: list[str] | None = None,
              embellishment: int | str | None = None, document_type: str = "general", document_config: dict | None = None,
              themes: dict[str, bool] | None = None, invention: bool | None = None,
-             translator: Translator | None = None) -> dict:
+             include_scaffold: bool = False, translator: Translator | None = None) -> dict:
     """Construct seeded Australian-sounding idioms from reviewed families. Results are labelled bulldust.
 
     concept is a dictionary concept ID (for example HUNGRY); omit it to sample compatible families.
     family restricts the construction pattern. parts pins named slots to ingredient IDs from a previous
     result, such as {"stem": "bugger-sideways"}; unpinned slots vary. Each result retains its part evidence
     and canonical output spans. Collision checks cover this dictionary, not every expression ever spoken.
+    include_scaffold opts into the full agent guidance; ordinary responses omit it.
     """
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     tr = translator
     if type(seed) is not int:
         raise UserError("seed must be an integer")
+    if type(include_scaffold) is not bool:
+        raise UserError("include_scaffold must be a boolean")
     dictionary, requested = tr.dictionary, parts or {}
     catalog = dictionary.construction_catalog
     if concept is not None:
@@ -61,9 +64,9 @@ def bulldust(concept: str | None = None, *, family: str | None = None, parts: di
                        embellishment=embellishment, document_type=document_type, document_config=document_config)
     generated = generate(dictionary, eff, setting, seed=seed, concept=concept, family=family, parts=requested, limit=limit)
     return {**eff.envelope(), "card_version": CARD_VERSION, **genre.envelope(setting.step), "seed": seed,
-            "scaffold": scaffold(dictionary, eff, setting),
+            **({"scaffold": scaffold(dictionary, eff, setting)} if include_scaffold else {}),
             "embellishment": setting.step, "embellishment_name": setting.name,
-            "outcome": "constructed" if generated.candidates else "no-compatible-construction",
+            "outcome": outcomes.MATCHED if generated.candidates else outcomes.NOTHING_FITS,
             "results": [construction_card(candidate,dictionary,permitted_themes=eff.theme_policy) for candidate in generated.candidates], "attempts": generated.attempts,
             "rejected": [{"id": pid, "reason": reason} for pid, reason in generated.rejected]}
 

@@ -5,11 +5,16 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Make published core entry IDs permanent: retain rename/merge aliases, reserve removed IDs, resolve
+  old URLs across Python/CLI/MCP, and check continuity against the exact previous release and dev baseline.
+- Omit the full Bulldust scaffold by default, with an explicit include_scaffold opt-in on Python/CLI/MCP;
+  align constructor outcomes to matched/nothing_fits. Plans and Yarn retain their scaffold.
+
 - Add seeded meaning quizzes across Python, CLI and MCP: four gloss options, bidirectional lookup
   exclusions, ranked distractor bands, a reveal card and an explicit trigram ranking fallback.
 
 - Correct Explore letter buckets, counts and page ordering to use headwords with a leading a/an/the
-  removed, retaining entry IDs and random-entry seed ordering. Document current ID/URL compatibility limits.
+  removed, retaining entry IDs and random-entry seed ordering. Retain entry IDs independently of their display wording.
 
 - Preserve qualified currency names as written, including country/region qualifiers, across translation,
   planning, lookup and change alternatives. Keep buck/bucks for bare dollars, retaining counts and the

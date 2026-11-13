@@ -68,6 +68,15 @@ Preparation takes `major`, `minor` or `patch`. Commands resolve the repository f
 independently of cwd; global `--root PATH` selects a fixture/other checkout. `check` without `--pr` is the
 local/CI gate, with explicit `--head`, `--base` and `--branch` available for a detached checkout.
 
+Published core entry IDs are permanent. Register new IDs in `aussiefy/data/entry_ids.yaml` before a
+checkpoint. Keep all published keys; use aliases for renames/merges and null tombstones for removals.
+Never use an existing ID for an unrelated entry, even if its old card is no longer listed. The release
+gate compares the exact previous release's register (or legacy entry inventory) with the candidate;
+missing keys, dangling aliases, cycles and reused retired IDs fail. Every current core ID must be
+registered. The checked-in `tests/fixtures/entry-id-baseline.json` additionally protects the inventory
+already used by the site before the next release. Preserve this baseline; extend history rather than
+regenerating it from a reduced current dictionary.
+
 Checks require valid semver, a dated published changelog, current main ancestry and previous release
 provenance, an equal squash/head tree, fresh publication and links, Ruff, full pytest and the actual
 wheel/provenance/licence gate. Only the two local-corpus tests in `tests/functional/test_local_reference.py`

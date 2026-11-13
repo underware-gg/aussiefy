@@ -31,7 +31,7 @@ The other parameters are `level=5`, `seed=0`, `vulgarity=None`, `registers=None`
 `embellishment=None`, `document_type="general"`, `document_config=None`, and Python's `translator=None`.
 Vulgarity inherits the level's default; embellishment inherits the selected document preset. Auto detection
 requires source text, which this operation does not have: select General or another explicit preset.
-The operation reports `constructed` or `no-compatible-construction`, with `results`, attempted combinations,
+The operation reports shared discovery outcomes `matched` or `nothing_fits`, with `results`, attempted combinations,
 rejection reasons and the effective policy envelope. CLI exit codes are 0, 1 and 2 respectively for results,
 no compatible construction and invalid input.
 
@@ -85,9 +85,9 @@ are tracked separately for occurrences. [Contract and replay](changes.md) define
 
 All rich themes use `{name, tier}` objects with `minimum_vulgarity`. Every assessed bulldust rendering
 has an attributable maker, including derived agent coinage where the evidence assessment establishes
-it. Plans include canonical construction cards and labelled local parts. The operation also returns
-the shared agent-neutral `scaffold`, with eligible meanings/examples, family slots, ingredients and
-constraints; Yarn receives the same material without depending on a provider SDK.
+it. Plans include canonical construction cards and labelled local parts. The operation optionally returns
+the shared agent-neutral `scaffold` when `include_scaffold=True` (CLI `--include-scaffold`, MCP
+`include_scaffold: true`); the default omits it without building it. The scaffold supplies eligible meanings/examples, family slots, ingredients and constraints; plans and Yarn retain the same full material without depending on a provider SDK.
 
 ## Data and bounds
 

@@ -33,6 +33,7 @@ from .names import parse_name_catalog
 from .adjustments import load_adjustments
 from .extensions import compose_evidence, validate_extension_forms
 from .dictionary_identity import dictionary_identity
+from .entry_ids import parse_entry_ids
 from .text import tokenize
 
 DATA_DIR = Path(__file__).parent / "data"
@@ -501,6 +502,14 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
             names_path = data / "names.yaml"
             dictionary.name_catalog = parse_name_catalog(
                 _read(names_path, errors, {}, unique_keys=True) if names_path.exists() else None, dictionary)
+        except SchemaError as exc:
+            errors.append(str(exc))
+    if errors:
+        raise SchemaError("dictionary failed validation:\n  " + "\n  ".join(errors))
+    if include_builtin and (data / "entry_ids.yaml").exists():
+        try:
+            dictionary.entry_ids = parse_entry_ids(
+                _read(data / "entry_ids.yaml", errors, {}, unique_keys=True), entries)
         except SchemaError as exc:
             errors.append(str(exc))
     if errors:

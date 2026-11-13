@@ -234,6 +234,8 @@ def base_dictionary(config: RoundConfig, data_dir: Path = DATA_DIR) -> Dictionar
     with tempfile.TemporaryDirectory() as tmp:
         scratch = Path(tmp) / "data"
         shutil.copytree(data_dir, scratch)
+        # This pre-round scratch snapshot is not published; the final write validates public ID history.
+        (scratch / "entry_ids.yaml").unlink(missing_ok=True)
         output = scratch / "entries" / config.output
         removed = {e["id"] for e in (_yaml(output.read_text(encoding="utf-8")) or [])} if output.exists() else set()
         output.unlink(missing_ok=True)

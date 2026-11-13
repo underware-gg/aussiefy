@@ -17,7 +17,7 @@ TOOLS = {"aussie_entries": harness.list_entries, "aussie_wordless_meanings": har
          "aussie_bulldust": harness.bulldust, "aussie_plan": harness.plan, "aussie_translate": harness.translate, "aussie_verify": harness.verify}
 
 # a non-default value for every toolkit parameter, so a surface that drops or renames one is caught
-VALUES = {"family": "hungry-enough-to", "parts": {"state": "hungry", "act": "sausage-shadow"}, "level": 4, "seed": 7, "vulgarity": 1, "variety": 2,
+VALUES = {"include_scaffold": True, "family": "hungry-enough-to", "parts": {"state": "hungry", "act": "sausage-shadow"}, "level": 4, "seed": 7, "vulgarity": 1, "variety": 2,
           "registers": ["current", "dated"], "regions": ["qld"], "unlock": ["misreadable"], "limit": 3,
           "include_gated": True, "original": "She was tired.", "markup": "markdown", "english": "uk", "short": True,
           "document_type": "custom", "document_config": {"garnish": [], "keep_quotes": True, "narrator_opinion": True, "themes": {"violence": True, "drinking": False},
@@ -30,7 +30,7 @@ SUBJECT = {"meaning_quiz": (None, None), "list_entries": (None, None), "list_wor
            "translate": ("text", "She was tired."), "bulldust": ("concept", "HUNGRY"), "guide": (None, None),
            "verify": ("text", "She was knackered.")}
 # CLI flags for each parameter (the CLI says --region for one region list, as people type it)
-FLAGS = {"initial": ["--initial", "k"], "family": ["--family", "hungry-enough-to"], "parts": ["--parts", '{"state":"hungry","act":"sausage-shadow"}'], "level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity", "1"],
+FLAGS = {"include_scaffold": ["--include-scaffold"], "initial": ["--initial", "k"], "family": ["--family", "hungry-enough-to"], "parts": ["--parts", '{"state":"hungry","act":"sausage-shadow"}'], "level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity", "1"],
          "themes": ["--themes", '{"drinking":false}'], "invention": ["--invention"], "popularity": ["--popularity"], "preferences": ["--preferences", "[]"],
          "variety": ["--variety", "2"], "registers": ["--registers", "current,dated"],
          "regions": ["--region", "qld"], "unlock": ["--unlock", "misreadable"], "limit": ["--limit", "3"],

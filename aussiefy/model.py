@@ -142,6 +142,7 @@ class Dictionary:
     evidence_weights: EvidenceWeights | None = None
     construction_catalog: ConstructionCatalog | None = None
     name_catalog: NameCatalog | None = None
+    entry_ids: dict[str, str | None] = field(default_factory=dict)
     identity: str = ""
     extensions: tuple[str, ...] = ()
     adjustments: Adjustments = field(default_factory=Adjustments)

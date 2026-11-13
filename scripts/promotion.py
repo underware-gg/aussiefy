@@ -145,8 +145,36 @@ def plan(git: Git, head: str, base: str, branch: str) -> Release:
     tree = git.run("merge-tree", "--write-tree", base, source).splitlines()[0]
     if tree != git.run("rev-parse", f"{source}^{{tree}}"):
         raise PromotionError("proposed squash tree differs from the checked release head")
+    check_entry_ids(git, source, base)
     notes = changelog_section(git.show(source, "CHANGELOG.md") or "", version)
     return Release(version, previous, source, base, notes)
+
+
+def check_entry_ids(git: Git, source: str, base: str) -> None:
+    """Check the exact candidate against its release base, including pre-register releases."""
+    import yaml
+    from aussiefy.entry_ids import parse_entry_ids, preserve_entry_ids
+    from aussiefy.errors import SchemaError
+
+    path = 'aussiefy/data/entry_ids.yaml'
+    current, previous = git.show(source, path), git.show(base, path)
+    if current is None and previous is None:  # releases before permanent IDs, and minimal release fixtures
+        return
+    def entries(ref):
+        paths = git.run('ls-tree', '-r', '--name-only', ref, 'aussiefy/data/entries').splitlines()
+        return {row['id'] for name in paths if name.endswith(('.yaml', '.yml'))
+                for row in yaml.safe_load(git.show(ref, name)) or []}
+    try:
+        raw = yaml.safe_load(current or '')
+        active = entries(source)
+        resolved = parse_entry_ids(raw, active)
+        missing = active - resolved.keys()
+        if missing:
+            raise SchemaError(f'entry_ids.yaml: unregistered entries {sorted(missing)}')
+        old = yaml.safe_load(previous)['ids'] if previous else {key:key for key in entries(base)}
+        preserve_entry_ids(old, raw['ids'])
+    except (SchemaError, yaml.YAMLError) as exc:
+        raise PromotionError(f'public entry ID continuity failed: {exc}') from exc
 
 
 def run_checks(git: Git, source: str, commands=CHECKS) -> None:

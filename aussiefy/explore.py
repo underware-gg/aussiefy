@@ -117,12 +117,15 @@ def get_entry(entry_id: str, *, level: int | str = 5, vulgarity: int | str | Non
               include_gated: bool = False, embellishment: int | str | None = None,
               document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None,
               translator: Translator | None = None) -> dict:
-    """Fetch one entry card under the caller's dials and discovery permissions."""
+    """Resolve a permanent ID to its current card; entry_id retains the requested key, including aliases."""
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     if not isinstance(entry_id, str) or not entry_id:
         raise UserError("entry_id must be a non-empty string")
     d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
-    entry = d.entries.get(entry_id)
+    current_id = d.entry_ids.get(entry_id, entry_id)
+    if current_id is None:
+        return {**envelope, "entry_id": entry_id, "entry": None, "outcome": outcomes.REMOVED}
+    entry = d.entries.get(current_id)
     if entry is None or entry.status == "omit":   # an omitted entry is never shown, nor its flags
         return {**envelope, "entry_id": entry_id, "entry": None, "outcome": outcomes.NOT_IN_DICTIONARY}
     reason = dial_rejection(entry, eff, include_gated=include_gated) or register_rejection(entry, eff.registers)

@@ -61,7 +61,8 @@ def test_stdio_entry_point_serves_the_shared_toolkit(tmp_path):
         server = StdioServerParameters(command=sys.executable, args=["-m", "aussiefy.mcp_server"],
                                        cwd=tmp_path, env={"AUSSIEFY_HOME": str(tmp_path / "home"),
                                                           "PYTHONPATH": str(ROOT)})
-        async with stdio_client(server) as (reader, writer):
+        # The SDK binds its default stderr at import time, sometimes inside another test's capture.
+        async with stdio_client(server, errlog=sys.__stderr__) as (reader, writer):
             async with ClientSession(reader, writer) as client:
                 await client.initialize()
                 tools = await client.list_tools()

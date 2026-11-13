@@ -381,3 +381,34 @@ def test_pr_readiness_refuses_before_expensive_gate(repo, prerequisite):
     with pytest.raises(p.PromotionError):
         flow.check_pull(local, server, pr['number'], lambda *args: observed.append(args))
     assert observed == []
+
+
+def test_release_entry_ids_are_checked_against_the_exact_last_release(tmp_path):
+    root = tmp_path / 'ids'
+    root.mkdir()
+    git(root, 'init', '-q')
+    git(root, 'config', 'user.name', 'Test')
+    git(root, 'config', 'user.email', 'test@example.org')
+    write(root, 'aussiefy/data/entries/core.yaml', '- id: original\n')
+    base = commit(root, 'last release before ID register')
+    write(root, 'aussiefy/data/entries/core.yaml', '- id: current\n')
+    def candidate(ids):
+        write(root, 'aussiefy/data/entry_ids.yaml', yaml.safe_dump({'format':'aussiefy-entry-ids/v1','ids':ids}))
+        return commit(root, 'candidate history')
+    broken = candidate({'current':'current'})
+    with pytest.raises(p.PromotionError, match='original.*disappeared'):
+        p.check_entry_ids(p.Git(root), broken, base)
+    renamed = candidate({'original':'current','current':'current'})
+    p.check_entry_ids(p.Git(root), renamed, base)
+    removed = candidate({'original':None,'current':'current'})
+    p.check_entry_ids(p.Git(root), removed, base)
+    write(root, 'aussiefy/data/entries/core.yaml', '- id: current\n- id: original\n')
+    reused = candidate({'original':'original','current':'current'})
+    with pytest.raises(p.PromotionError, match='cannot be reused'):
+        p.check_entry_ids(p.Git(root), reused, renamed)
+    with pytest.raises(p.PromotionError, match='cannot be reused'):
+        p.check_entry_ids(p.Git(root), reused, removed)
+    (root / 'aussiefy/data/entry_ids.yaml').unlink()
+    missing = commit(root, 'drop history')
+    with pytest.raises(p.PromotionError, match='continuity failed'):
+        p.check_entry_ids(p.Git(root), missing, removed)

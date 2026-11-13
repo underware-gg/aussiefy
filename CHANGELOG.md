@@ -9,15 +9,20 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Make published core entry IDs permanent: retain rename/merge aliases, reserve removed IDs, resolve
+  old URLs across Python/CLI/MCP, and check continuity against the exact previous release'n dev baseline.
+- Omit the full Bulldust scaffold by default, with an explicit include_scaffold opt-in on Python/CLI/MCP;
+  align constructor outcomes to matched/nothing_fits. Plans and Yarn retain their scaffold.
+
 - Add seeded meaning quizzes across Python, CLI and MCP: four gloss options, bidirectional lookup
   exclusions, ranked distractor bands, a reveal card'n an explicit trigram rankin' fallback.
 
 - Correct Explore letter buckets, counts'n page ordering to use headwords with a leadin' a/an/the
-  removed, retaining entry IDs'n random\-entry seed ordering. Anyway, document current ID/URL compatibility limits.
+  removed, retaining entry IDs'n random\-entry seed ordering. Retain entry IDs independently of their display wordin'.
 
 - Preserve qualified currency names as written, including country/region qualifiers, across translation,
   planning, lookup'n change alternatives. Keep buck/bucks for bare dollars, retaining counts and the
-  distinction between acronym US'n recipient pronoun us. Well, add shared lexical\-modifier source grammar
+  distinction between acronym US'n recipient pronoun us. So anyway, add shared lexical\-modifier source grammar
   and exclusive phrase protections for whole\-expression readings.
 - Recognise written cardinal counts in nominal lookup even when tagged as nouns, for both currency and
   other dictionary words; keep unrelated prefix words outside that scope. Preserve the whole expression
@@ -181,7 +186,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 - Refine shared subject permissions with reviewed per\-term tiers'n tobacco from Dad; exact overrides remain independent of the swear cap. Apply evidence/general\-English weightin' to imagery and riffs, align guide examples, and strengthen metadata/source\-preservation checks.
 
 - Add nine reviewed subject themes with data\-driven vulgarity defaults'n exact boolean overrides,
-  independent of the swear cap. Share resolved permissions across translation, lookup, plans, suggestions,
+  independent of the swear cap. Well, share resolved permissions across translation, lookup, plans, suggestions,
   change alternatives'n agent/model checks; preserve source subject matter and separate mixed senses.
   Report the resolved permissions'n reject recognised forbidden additions from fresh or cached model output.
 

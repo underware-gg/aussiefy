@@ -6,7 +6,7 @@ from pathlib import Path
 
 PKG = Path(__file__).resolve().parents[2] / "aussiefy"
 MODULES = {p.stem for p in PKG.glob("*.py")} | {p.parent.name for p in PKG.glob("*/__init__.py")}
-CORE = {"quiz", "nominal_modifiers", "pins", "offsets", "v3_contract", "grammar", "meaning_context", "fences", "fence_readings", "dictionary_identity", "extensions", "identifiers", "adjustments", "tuning", "match_keys", "source_urls", "names", "constructions", "construction_data", "themes", "evidence", "semantic_checks", "degree", "text", "matcher", "detect", "select", "realise", "morph", "garnish", "context", "policy", "schema",
+CORE = {"entry_ids", "quiz", "nominal_modifiers", "pins", "offsets", "v3_contract", "grammar", "meaning_context", "fences", "fence_readings", "dictionary_identity", "extensions", "identifiers", "adjustments", "tuning", "match_keys", "source_urls", "names", "constructions", "construction_data", "themes", "evidence", "semantic_checks", "degree", "text", "matcher", "detect", "select", "realise", "morph", "garnish", "context", "policy", "schema",
         "imagery", "model", "terms", "embed", "engine", "loader", "vocabulary", "static", "dump", "dialect", "genre", "pos", "protected", "profile", "cards", "masks", "changes"}
 UPPER = {"explore", "bulldust", "__init__", "harness", "lookup", "lint", "guide", "retelling", "yarn", "llm", "claude", "cli", "mcp_server", "gaps",
          "rounds", "explain", "scrape", "models", "markdown", "translation", "align", "verify", "judge", "markup"}

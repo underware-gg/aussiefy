@@ -384,6 +384,7 @@ def cmd_bulldust(args) -> int:
     except json.JSONDecodeError as exc:
         raise UserError(f"parts must be a JSON object: {exc}") from exc
     out = harness.bulldust(args.concept, family=args.family, parts=parts, seed=args.seed, limit=args.limit,
+                           include_scaffold=args.include_scaffold,
                            registers=_csv(args.registers), regions=_csv(args.regions), unlock=_csv(args.unlock),
                            embellishment=args.embellishment, **_document(args),
                            translator=_translator(args), **_policy(args))
@@ -436,6 +437,8 @@ def cmd_explore(args) -> int:
         _json(out)
     else:
         _warn(out["policy_warnings"])
+        if args.command == "entry" and rows and out['entry_id'] != rows[0]['id']:
+            print(f"  {out['entry_id']} -> {rows[0]['id']}")
         for row in rows:
             held = f" [held back: {', '.join(row['held_back'])}]" if row["held_back"] else ""
             print(f"  {row['id']}: {row['form']} — {row['gloss']}{held}")
@@ -989,6 +992,7 @@ def build_parser() -> argparse.ArgumentParser:
     bd.add_argument("--parts", help='pin slots to ingredient IDs as JSON, e.g. {"stem":"bugger-sideways"}')
     from .constructions import DEFAULT_LIMIT
     bd.add_argument("--limit", type=int, default=DEFAULT_LIMIT)
+    bd.add_argument("--include-scaffold", action="store_true", help="include the full agent construction scaffold")
     bd.set_defaults(func=cmd_bulldust)
 
     y = sub.add_parser("yarn", parents=[*toolkit, english, embellished, tuned, seeded, marked, text],

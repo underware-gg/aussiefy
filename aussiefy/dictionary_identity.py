@@ -10,7 +10,7 @@ def dictionary_identity(data: Path, extra_files: list[Path], *, include_builtin:
     digest = hashlib.sha256(b"aussiefy-dictionary/v1\0" + bytes([include_builtin]))
     inputs = [(p.relative_to(data).as_posix(), p) for p in sorted(data.rglob("*")) if p.is_file()
               and p.suffix in {".yaml", ".yml", ".json", ".txt", ".f16", ".gz"}
-              and (include_builtin or not (p.parent.name == "entries" or p.name == "constructions.yaml"))]
+              and (include_builtin or not (p.parent.name == "entries" or p.name in {"constructions.yaml", "entry_ids.yaml"}))]
     inputs += [(f"extension/{i}", p) for i, p in enumerate(extra_files)]
     for name, path in inputs:
         try:

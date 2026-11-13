@@ -78,6 +78,8 @@ its consequences as they stood when it was made. Anyway, records are numbered in
 
 | [DD-056](dd-056-meaning-wording-and-negative-vps.md) | Separate meaning wording, exact discovery'n grammatical negative verb phrases \| Accepted for slice 7 foundation \|
 
+| [DD-057](dd-057-permanent-public-entry-ids.md) | Permanent public entry keys, aliases, tombstones'n release continuity \| Accepted \|
+
 ## By topic
 
 - **Engine:** DD\-001, DD\-003, DD\-007, DD\-029, DD\-030, DD\-034, DD\-035, DD\-036, DD\-037, DD\-039, DD\-041, DD\-044

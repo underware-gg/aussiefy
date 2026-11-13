@@ -63,7 +63,7 @@ def test_pinned_parts_only_vary_compatible_slots(translator):
     assert len(result["results"]) == 2
     assert all(item["parts"][0]["ingredient_id"] == "bugger-sideways" for item in result["results"])
     mismatch = bulldust(family="sideways-with-implement", parts={"stem": "hungry"}, vulgarity=2, translator=translator)
-    assert mismatch["outcome"] == "no-compatible-construction"
+    assert mismatch["outcome"] == "nothing_fits"
     for args in ({"parts": {"nonesuch": "hungry"}}, {"parts": {"state": "nonesuch"}}, {"family": "nonesuch"},
                  {"concept": "nonesuch"}, {"parts": []}, {"limit": True}, {"limit": 21}):
         with pytest.raises(UserError):
@@ -157,7 +157,7 @@ def test_catalogue_validation_at_load(data_copy, change, match):
 def test_missing_catalogue_is_compatible_with_existing_custom_data(data_copy):
     (data_copy / "constructions.yaml").unlink()
     tr = Translator(load_dictionary(data_dir=data_copy))
-    assert bulldust("HUNGRY", translator=tr)["outcome"] == "no-compatible-construction"
+    assert bulldust("HUNGRY", translator=tr)["outcome"] == "nothing_fits"
 
 
 def test_constructed_garnish_is_removable_and_valid_under_existing_changes_contract(dictionary):
@@ -230,3 +230,19 @@ def test_cadence_prefers_reviewed_length_band_before_weight(dictionary):
     generated = generate(tr.dictionary, tr.effective(vulgarity=0), setting(tr))
     assert generated.candidates[0].text == "left0 then right0"
     assert generated.candidates[0].cadence > generated.candidates[1].cadence
+
+
+def test_constructor_payload_is_compact_unless_scaffold_is_requested(translator, monkeypatch):
+    import importlib
+    module = importlib.import_module('aussiefy.bulldust')
+    original = module.scaffold
+    def unexpected(*args, **kwargs):
+        raise AssertionError('default construction must not build the scaffold')
+    monkeypatch.setattr(module, 'scaffold', unexpected)
+    compact = bulldust('HUNGRY', translator=translator)
+    assert compact['outcome'] == 'matched' and 'scaffold' not in compact
+    monkeypatch.setattr(module, 'scaffold', original)
+    rich = bulldust('HUNGRY', translator=translator, include_scaffold=True)
+    assert rich.pop('scaffold')['families'] and rich == compact
+    with pytest.raises(UserError, match='include_scaffold'):
+        bulldust(translator=translator, include_scaffold='yes')

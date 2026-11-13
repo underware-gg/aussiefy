@@ -241,3 +241,22 @@ def test_concept_fixes_preserve_and_replace_distinct_wording_fields(prepared):
     before=(data/'concepts.yaml').read_text()
     plan(config,data).write(data)
     assert (data/'concepts.yaml').read_text()==before
+
+
+def test_pre_round_snapshot_sets_aside_public_history_but_final_write_preserves_it(prepared):
+    config, data = prepared
+    plan(config, data).write(data)
+    path = data / "entry_ids.yaml"
+    raw = yaml.safe_load(path.read_text())
+    raw['ids']['zzmeta'] = 'zzmeta'
+    path.write_text(yaml.safe_dump(raw))
+    before = path.read_bytes()
+    baseline = rounds.base_dictionary(config, data)
+    assert 'zzmeta' not in baseline.entries and not baseline.entry_ids
+    assert path.read_bytes() == before
+    restored = rounds.plan_round(config, baseline).write(data)
+    assert restored.entry_ids['zzmeta'] == 'zzmeta' and path.read_bytes() == before
+    (data / 'entries' / config.output).write_text('[]')
+    with pytest.raises(SchemaError, match='missing target'):
+        from aussiefy import load_dictionary
+        load_dictionary(data_dir=data)

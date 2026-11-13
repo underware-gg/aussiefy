@@ -29,14 +29,26 @@ loaded dictionary's content identity, so callers can associate results with the 
 
 ## Entry IDs and URLs
 
-An entry ID is an opaque dictionary key, separate from its headword: changing display wording need not
-change the ID, and collation never rewrites it. Overlay patches cannot rename IDs. The current contract
-does not guarantee permanent IDs across releases and has no compatibility alias or redirect resolver.
-If a maintainer removes or renames an ID, `get_entry(old_id)` returns `not_in_dictionary`; there is no
-rename target in that response. Compare ID inventories across pinned `dictionary_id` revisions to see
-additions and removals; a rename cannot be distinguished from a deletion plus an addition automatically.
-Hosts publishing permanent entry URLs must retain their own redirect history or arrange compatibility
-aliases before an ID migration. Headword changes alone should retain the existing ID.
+Entry IDs are permanent public keys from this checkpoint. A released or already published core ID is
+never reused for a different entry. Editing a headword normally keeps its ID. A rename or merge retains
+old IDs as aliases to the current entry; chains resolve directly to the final card. `get_entry(old_id)`
+returns the requested key in `entry_id` and the current key in `entry.id`, so a host can redirect when
+those differ. CLI `entry` and MCP `aussie_entry` use exactly this resolution and the current entry's dials,
+permissions and held-back policy. Aliases are not duplicate entries in lists, counts, random picks or quizzes.
+
+A deliberately removed ID is reserved permanently and returns `outcome: "removed"`, the requested
+`entry_id` and `entry: null`. An alias of a removed entry also reports `removed`. An unknown ID still
+returns `not_in_dictionary`; an existing entry blocked by dials returns `nothing_fits`. Omitted entries
+remain undiscoverable under the existing policy.
+
+The bundled `entry_ids.yaml` register includes the last release and the already published dev pin.
+Keep its keys forever: an ID maps to itself while current, to another ID after a rename/merge, or to null
+after removal. Validation rejects cycles, missing targets and reuse of an alias or tombstone as an entry.
+Release checks compare the candidate with the exact previous release; a checked-in baseline also protects
+the currently published development inventory. This reserves identity, not exact wording: curators must
+never repurpose an existing key for an unrelated term. Community/other extension publishers own their
+ID histories; a core alias or tombstone cannot be taken by an extension. Custom data directories may
+supply their own register; `include_builtin=False` excludes the core register.
 
 ## Pages, cards and random entries
 
@@ -91,6 +103,7 @@ separate `association`. Use codes for branching rather than interpreting display
 | `no_word_yet` | The meaning is recognised, but the dictionary has no Aussie word for it yet (lookup only) |
 | `left_as_written` | The query is deliberately protected, or its meaning is unclear; changing the dials does not turn it into a missing-word request |
 | `not_in_dictionary` | No term/meaning was recognised; the dictionary may be incomplete |
+| `removed` | A previously published entry ID was deliberately retired (entry detail only) |
 | `page_exhausted` | Eligible entries exist, but this offset is beyond their final page |
 
 `aussiefy.discovery_outcomes` owns this vocabulary. `lookup` reports these codes in `outcome` (`matched`, `nothing_fits`, `no_word_yet`, `left_as_written`, `not_in_dictionary`)
