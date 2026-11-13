@@ -46,7 +46,7 @@ combines personal weights with community factors on already eligible candidates.
 changes no evidence or eligibility. `dictionary_identity.py` is loader
 I/O and fingerprints file inputs. The model stores its result and never imports that I/O module.
 
-Optional heavy dependencies \(anthropic, mcp, sentence\-transformers, torch\) are imported lazily, inside the
+Well, optional heavy dependencies \(anthropic, mcp, sentence\-transformers, torch\) are imported lazily, inside the
 functions that need them, so the core imports'n runs with its core dependencies, offline. Markdown's light parser
 heaps only in that mode; the plain engine never imports its adapter \([DD-015](decisions/dd-015-source-preserving-markdown.md)).
 
@@ -74,7 +74,7 @@ a protection. The maintainer command `scripts/audit_fences.py` serialises its re
 diagnostics. Lookup builds and reuses individual protections through a dictionary-local bounded index;
 the batch audit uses the same evidence. Ordinary translation does not invoke this build.
 `discovery_outcomes.py` owns the shared discovery codes and imports no package modules. Rich discovery
-cards are shared by lookup and entry details; changes-v2 retains its existing card until the coordinated bump.
+cards are shared by lookup and entry details; changes-v3 uses the same card projection, themes and maker rules.
 
 Bloody hell, lookup explicitly requests query\-fragment readings from `detect.py`; ordinary replacement detection keeps
 its stricter default. Anyway, lookup owns the bounded whole\-query scope decision'n uses local canonical readings
@@ -86,8 +86,15 @@ Fair dinkum, construction variations reuse the constructor boundary in `bulldust
 with the other parts held fixed. They don't create a second policy or splice implementation.
 
 
-`v3_contract.py` holds pure review-stage card projections and semantic checks shared by the draft change
-and lookup envelopes. It normalises theme display, derives bulldust presentation attribution without
-rewriting evidence, and uses `constructions.py`'s unchanged content identity algorithm. No active producer
-imports it before the coordinated v3 upgrade. `errors.py` also owns string-compatible coded warning values;
-`tuning.py` assigns preference diagnostic codes at their origin.
+`cards.py` owns rich entry/riff metadata and attributable maker projection. `v3_contract.py` owns
+construction/imagery cards and semantic response checks: source/dictionary identity, unique option keys,
+selected membership, local span joins and provenance. The accepted draft assets remain historical;
+real producers share these functions. `errors.py` owns string-compatible coded warnings and `tuning.py`
+assigns preference codes at their origin.
+
+`pins.py` is pure engine data'n validation for exact\-source replay packets. It retains immutable
+entry forms, complete construction recipes'n canonical riffs. Stone the crows, it doesn't choose meanings, render
+text, store share links or import the toolkit. Well, the ordinary engine rechecks hard eligibility; the
+changes builder exposes optional replay sidecars outside the v3 response. `offsets.py` owns exact
+edit\-coordinate maps shared by article/case/phonetic trackin''n change restoration. Document adapters
+own Markdown escapin''n global source offsets.

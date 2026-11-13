@@ -1,164 +1,3442 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/underware-gg/aussiefy/blob/main/aussiefy/data/changes.schema.json",
-  "title": "aussiefy changes, contract version 2",
-  "description": "What aussiefy.translate_changes returns (ChangeSet.to_dict()): a translation's text, every change it made in output order, the card of every entry the changes name, and the swaps and garnish whose alternatives are withheld. Spans are [start, end) Unicode code-point offsets: src_span in the source, out_span in this text. Alternative regions and mask positions use the same unit; masks refer to their own rendering's text. Ids are a change's kind and source span, with a placement or rule where those could repeat. See docs/functional/changes.md.",
+  "$comment": "Frozen v3, accepted 20261112-r2 response fields; activated with the coordinated engine producers.",
+  "title": "aussiefy changes contract v3",
+  "description": "Change/option out_span is a document replacement region. Nested part/riff spans and masks are local to their owner rendering; canonical part spans are local to card.text. All offsets are Unicode code points. Semantic rules are normative in docs/functional/changes.md.",
   "type": "object",
-  "required": ["version", "text", "changes", "entries", "withheld"],
+  "required": [
+    "version",
+    "text",
+    "dictionary_id",
+    "tuning",
+    "warnings",
+    "changes",
+    "entries",
+    "constructions",
+    "imagery",
+    "withheld",
+    "card_version",
+    "warning_details"
+  ],
   "additionalProperties": false,
   "properties": {
-    "version": {"const": 2},
-    "text": {"type": "string"},
-    "changes": {"type": "array", "items": {"$ref": "#/$defs/change"}},
-    "entries": {"type": "object", "additionalProperties": {"$ref": "#/$defs/card"}},
+    "version": {
+      "const": 3
+    },
+    "text": {
+      "type": "string"
+    },
+    "dictionary_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "tuning": {
+      "$ref": "#/$defs/tuning"
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Exactly list(Result.warnings), or list(DocumentResult.warnings) for a document; no client or service messages are added here."
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/change"
+      }
+    },
+    "entries": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/entry_card"
+      },
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^(?:[a-z][a-z0-9-]*:)?[a-z0-9][a-z0-9-]*$"
+      }
+    },
+    "constructions": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/construction_card"
+      },
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^construction/[a-z0-9-]+/[0-9a-f]{24}$"
+      }
+    },
+    "imagery": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/imagery_card"
+      },
+      "propertyNames": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      }
+    },
     "withheld": {
       "description": "Swaps and garnish whose renderings are withheld, the pick alone offered: a swap's other alternatives and locked options, a garnish's other alternatives and its removal. pick-differs where the pick, rendered over its region, isn't the output there; region-unsettled where a drawl or infix match still reads across the region's edge after widening.",
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "reason"],
+        "required": [
+          "id",
+          "reason"
+        ],
         "additionalProperties": false,
-        "properties": {"id": {"type": "string"}, "reason": {"enum": ["pick-differs", "region-unsettled"]}}
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "reason": {
+            "enum": [
+              "pick-differs",
+              "region-unsettled"
+            ]
+          }
+        }
       }
+    },
+    "card_version": {
+      "const": 3
+    },
+    "warning_details": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/warning_detail"
+      },
+      "description": "One detail per warning in the same order. Its message equals warnings[i]. Codes are engine diagnostics; services may filter these from reader-facing text."
     }
   },
   "$defs": {
-    "span": {"type": "array", "items": {"type": "integer", "minimum": 0}, "minItems": 2, "maxItems": 2},
-    "vulgarity": {"type": "integer", "minimum": 0, "maximum": 3},
+    "span": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "integer",
+          "minimum": 0
+        }
+      ],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Half-open Unicode code-point offsets. Order and bounds are semantic checks."
+    },
+    "vulgarity": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3
+    },
+    "evidence": {
+      "enum": [
+        "attested",
+        "unverified",
+        "bulldust"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "kind",
+        "publisher",
+        "supports"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "scholarly_dictionary",
+            "slang_dictionary",
+            "crowd_dictionary",
+            "literature",
+            "media",
+            "testimony",
+            "community"
+          ]
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "supports": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "term",
+              "meaning",
+              "australian_use",
+              "date"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://"
+        },
+        "cited_date": {
+          "type": "string",
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+        },
+        "note": {
+          "type": "string"
+        },
+        "basis": {
+          "enum": [
+            "scholarly_dictionary",
+            "slang_dictionary",
+            "crowd_dictionary",
+            "literature",
+            "media",
+            "testimony"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "const": "community"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "basis"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "not": {
+                  "const": "community"
+                }
+              }
+            }
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "basis"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "attestation": {
+      "type": "object",
+      "required": [
+        "score",
+        "bars",
+        "counts",
+        "people",
+        "independent",
+        "places",
+        "weights_version"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0
+        },
+        "bars": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "counts": {
+          "type": "object",
+          "propertyNames": {
+            "enum": [
+              "scholarly_dictionary",
+              "slang_dictionary",
+              "crowd_dictionary",
+              "literature",
+              "media",
+              "testimony",
+              "community"
+            ]
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "people": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "independent": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "places": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "weights_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "credit": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "scope"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "scope": {
+                "enum": [
+                  "term",
+                  "definition"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "tag": {
+      "type": "object",
+      "required": [
+        "name",
+        "tier"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^(?:[a-z]+(?:_[a-z]+)*)$"
+        },
+        "tier": {
+          "$ref": "#/$defs/vulgarity"
+        }
+      }
+    },
+    "riff_card": {
+      "type": "object",
+      "required": [
+        "sources",
+        "origin",
+        "register",
+        "australian_use",
+        "reads_as",
+        "themes",
+        "doubtful_definition",
+        "misreadable",
+        "evidence",
+        "attestation",
+        "text",
+        "tone",
+        "minimum_vulgarity"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          }
+        },
+        "origin": {
+          "enum": [
+            "australian",
+            "british",
+            "irish",
+            "american",
+            "aboriginal",
+            "other",
+            "unknown"
+          ]
+        },
+        "register": {
+          "enum": [
+            "current",
+            "dated",
+            "archaic"
+          ]
+        },
+        "australian_use": {
+          "enum": [
+            "common",
+            "uncommon"
+          ]
+        },
+        "reads_as": {
+          "enum": [
+            "australian",
+            "general",
+            "british",
+            "irish",
+            "american",
+            "other"
+          ]
+        },
+        "themes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tag"
+          },
+          "uniqueItems": true
+        },
+        "doubtful_definition": {
+          "type": "boolean"
+        },
+        "misreadable": {
+          "type": "boolean"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "attestation": {
+          "$ref": "#/$defs/attestation"
+        },
+        "searched": {
+          "type": "object",
+          "required": [
+            "date",
+            "outcome",
+            "note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "outcome": {
+              "enum": [
+                "found",
+                "nothing_found",
+                "inconclusive"
+              ]
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "coined_by": {
+          "enum": [
+            "person",
+            "agent",
+            "constructor"
+          ],
+          "description": "Who coined this wording. Required and non-null for bulldust. Explicit coiner wins; otherwise agent is derived only from a bulldust assessment with produced_by agent."
+        },
+        "produced_by": {
+          "enum": [
+            "agent"
+          ],
+          "description": "Who prepared the stored record, not generally who invented the wording. It implies agent coinage only when the evidence assessment is bulldust and no explicit coiner is recorded."
+        },
+        "caught_on": {
+          "type": "object",
+          "required": [
+            "date",
+            "note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "note": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "spoken_use": {
+          "type": "object",
+          "required": [
+            "date",
+            "note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "note": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "testimony": {
+          "type": "object",
+          "required": [
+            "people",
+            "independent",
+            "places",
+            "first_date",
+            "last_date",
+            "summary_date"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "people": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "independent": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "places": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "first_date": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "last_date": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "summary_date": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        },
+        "credit": {
+          "$ref": "#/$defs/credit"
+        },
+        "origin_language": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dated_by_curator": {
+          "type": "string",
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+        },
+        "first_attested": {
+          "type": "string",
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tone": {
+          "enum": [
+            "plain",
+            "comic",
+            "grim"
+          ]
+        },
+        "best": {
+          "const": true
+        },
+        "minimum_vulgarity": {
+          "$ref": "#/$defs/vulgarity"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "const": "constructor"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "sources": {
+                "maxItems": 0
+              },
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "entry_card": {
+      "type": "object",
+      "required": [
+        "sources",
+        "origin",
+        "register",
+        "australian_use",
+        "reads_as",
+        "themes",
+        "doubtful_definition",
+        "misreadable",
+        "evidence",
+        "attestation",
+        "minimum_vulgarity",
+        "id",
+        "form",
+        "gloss",
+        "frame",
+        "concepts",
+        "level",
+        "vulgarity",
+        "type",
+        "status",
+        "held_back"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          }
+        },
+        "origin": {
+          "enum": [
+            "australian",
+            "british",
+            "irish",
+            "american",
+            "aboriginal",
+            "other",
+            "unknown"
+          ]
+        },
+        "register": {
+          "enum": [
+            "current",
+            "dated",
+            "archaic"
+          ]
+        },
+        "australian_use": {
+          "enum": [
+            "common",
+            "uncommon"
+          ]
+        },
+        "reads_as": {
+          "enum": [
+            "australian",
+            "general",
+            "british",
+            "irish",
+            "american",
+            "other"
+          ]
+        },
+        "themes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tag"
+          },
+          "uniqueItems": true
+        },
+        "doubtful_definition": {
+          "type": "boolean"
+        },
+        "misreadable": {
+          "type": "boolean"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "attestation": {
+          "$ref": "#/$defs/attestation"
+        },
+        "searched": {
+          "type": "object",
+          "required": [
+            "date",
+            "outcome",
+            "note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "outcome": {
+              "enum": [
+                "found",
+                "nothing_found",
+                "inconclusive"
+              ]
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "coined_by": {
+          "enum": [
+            "person",
+            "agent",
+            "constructor"
+          ],
+          "description": "Who coined this wording. Required and non-null for bulldust. Explicit coiner wins; otherwise agent is derived only from a bulldust assessment with produced_by agent."
+        },
+        "produced_by": {
+          "enum": [
+            "agent"
+          ],
+          "description": "Who prepared the stored record, not generally who invented the wording. It implies agent coinage only when the evidence assessment is bulldust and no explicit coiner is recorded."
+        },
+        "caught_on": {
+          "type": "object",
+          "required": [
+            "date",
+            "note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "note": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "spoken_use": {
+          "type": "object",
+          "required": [
+            "date",
+            "note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "note": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "testimony": {
+          "type": "object",
+          "required": [
+            "people",
+            "independent",
+            "places",
+            "first_date",
+            "last_date",
+            "summary_date"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "people": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "independent": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "places": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "first_date": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "last_date": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "summary_date": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        },
+        "credit": {
+          "$ref": "#/$defs/credit"
+        },
+        "origin_language": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dated_by_curator": {
+          "type": "string",
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+        },
+        "first_attested": {
+          "type": "string",
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+        },
+        "minimum_vulgarity": {
+          "$ref": "#/$defs/vulgarity"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^(?:[a-z][a-z0-9-]*:)?[a-z0-9][a-z0-9-]*$"
+        },
+        "form": {
+          "type": "string",
+          "minLength": 1
+        },
+        "gloss": {
+          "type": "string"
+        },
+        "frame": {
+          "enum": [
+            "predicate_adj",
+            "np",
+            "adj",
+            "adv",
+            "vp",
+            "clause",
+            "interjection",
+            "imperative",
+            "tag"
+          ]
+        },
+        "concepts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(?:[a-z][a-z0-9-]*:)?[A-Z][A-Z0-9_]*$"
+          }
+        },
+        "level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "vulgarity": {
+          "$ref": "#/$defs/vulgarity"
+        },
+        "type": {
+          "enum": [
+            "idiom",
+            "garnish"
+          ]
+        },
+        "status": {
+          "enum": [
+            "active",
+            "gate"
+          ]
+        },
+        "held_back": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "placement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "riffs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/riff_card"
+          }
+        },
+        "variants": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "region": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "notes": {
+          "type": "string"
+        },
+        "replaces": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "gated": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "semantic_effects": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "opinion",
+              "quantity_approximation"
+            ]
+          },
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "const": "constructor"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "sources": {
+                "maxItems": 0
+              },
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "const": "idiom"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "concepts": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "construction_part": {
+      "type": "object",
+      "required": [
+        "sources",
+        "origin",
+        "register",
+        "australian_use",
+        "reads_as",
+        "themes",
+        "doubtful_definition",
+        "misreadable",
+        "evidence",
+        "attestation",
+        "role",
+        "ingredient_id",
+        "entry_id",
+        "text",
+        "out_span",
+        "level",
+        "vulgarity",
+        "minimum_vulgarity"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          }
+        },
+        "origin": {
+          "enum": [
+            "australian",
+            "british",
+            "irish",
+            "american",
+            "aboriginal",
+            "other",
+            "unknown"
+          ]
+        },
+        "register": {
+          "enum": [
+            "current",
+            "dated",
+            "archaic"
+          ]
+        },
+        "australian_use": {
+          "enum": [
+            "common",
+            "uncommon"
+          ]
+        },
+        "reads_as": {
+          "enum": [
+            "australian",
+            "general",
+            "british",
+            "irish",
+            "american",
+            "other"
+          ]
+        },
+        "themes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tag"
+          },
+          "uniqueItems": true
+        },
+        "doubtful_definition": {
+          "type": "boolean"
+        },
+        "misreadable": {
+          "type": "boolean"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "attestation": {
+          "$ref": "#/$defs/attestation"
+        },
+        "searched": {
+          "type": "object",
+          "required": [
+            "date",
+            "outcome",
+            "note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "outcome": {
+              "enum": [
+                "found",
+                "nothing_found",
+                "inconclusive"
+              ]
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "coined_by": {
+          "enum": [
+            "person",
+            "agent",
+            "constructor"
+          ],
+          "description": "Who coined this wording. Required and non-null for bulldust. Explicit coiner wins; otherwise agent is derived only from a bulldust assessment with produced_by agent."
+        },
+        "produced_by": {
+          "enum": [
+            "agent"
+          ],
+          "description": "Who prepared the stored record, not generally who invented the wording. It implies agent coinage only when the evidence assessment is bulldust and no explicit coiner is recorded."
+        },
+        "caught_on": {
+          "type": "object",
+          "required": [
+            "date",
+            "note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "note": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "spoken_use": {
+          "type": "object",
+          "required": [
+            "date",
+            "note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "note": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "testimony": {
+          "type": "object",
+          "required": [
+            "people",
+            "independent",
+            "places",
+            "first_date",
+            "last_date",
+            "summary_date"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "people": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "independent": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "places": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "first_date": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "last_date": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "summary_date": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        },
+        "credit": {
+          "$ref": "#/$defs/credit"
+        },
+        "origin_language": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dated_by_curator": {
+          "type": "string",
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+        },
+        "first_attested": {
+          "type": "string",
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ingredient_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "entry_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(?:[a-z][a-z0-9-]*:)?[a-z0-9][a-z0-9-]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "out_span": {
+          "$ref": "#/$defs/span"
+        },
+        "level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "vulgarity": {
+          "$ref": "#/$defs/vulgarity"
+        },
+        "minimum_vulgarity": {
+          "$ref": "#/$defs/vulgarity"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "const": "constructor"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "sources": {
+                "maxItems": 0
+              },
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "description": "Canonical part; out_span is local to construction_card.text. Join an occurrence using the unique pair (role, ingredient_id) within that construction card."
+    },
+    "construction_card": {
+      "type": "object",
+      "required": [
+        "sources",
+        "origin",
+        "register",
+        "australian_use",
+        "reads_as",
+        "themes",
+        "doubtful_definition",
+        "misreadable",
+        "evidence",
+        "attestation",
+        "minimum_vulgarity",
+        "construction_id",
+        "entry_id",
+        "family",
+        "text",
+        "concepts",
+        "frame",
+        "level",
+        "vulgarity",
+        "cadence",
+        "parts",
+        "gloss"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          }
+        },
+        "origin": {
+          "enum": [
+            "australian",
+            "british",
+            "irish",
+            "american",
+            "aboriginal",
+            "other",
+            "unknown"
+          ]
+        },
+        "register": {
+          "enum": [
+            "current",
+            "dated",
+            "archaic"
+          ]
+        },
+        "australian_use": {
+          "enum": [
+            "common",
+            "uncommon"
+          ]
+        },
+        "reads_as": {
+          "enum": [
+            "australian",
+            "general",
+            "british",
+            "irish",
+            "american",
+            "other"
+          ]
+        },
+        "themes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tag"
+          },
+          "uniqueItems": true
+        },
+        "doubtful_definition": {
+          "type": "boolean"
+        },
+        "misreadable": {
+          "type": "boolean"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "attestation": {
+          "$ref": "#/$defs/attestation"
+        },
+        "searched": {
+          "type": "object",
+          "required": [
+            "date",
+            "outcome",
+            "note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "outcome": {
+              "enum": [
+                "found",
+                "nothing_found",
+                "inconclusive"
+              ]
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "coined_by": {
+          "enum": [
+            "person",
+            "agent",
+            "constructor"
+          ],
+          "description": "Who coined this wording. Required and non-null for bulldust. Explicit coiner wins; otherwise agent is derived only from a bulldust assessment with produced_by agent."
+        },
+        "produced_by": {
+          "enum": [
+            "agent"
+          ],
+          "description": "Who prepared the stored record, not generally who invented the wording. It implies agent coinage only when the evidence assessment is bulldust and no explicit coiner is recorded."
+        },
+        "caught_on": {
+          "type": "object",
+          "required": [
+            "date",
+            "note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "note": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "spoken_use": {
+          "type": "object",
+          "required": [
+            "date",
+            "note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "note": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "testimony": {
+          "type": "object",
+          "required": [
+            "people",
+            "independent",
+            "places",
+            "first_date",
+            "last_date",
+            "summary_date"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "people": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "independent": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "places": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "first_date": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "last_date": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "summary_date": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        },
+        "credit": {
+          "$ref": "#/$defs/credit"
+        },
+        "origin_language": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dated_by_curator": {
+          "type": "string",
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+        },
+        "first_attested": {
+          "type": "string",
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+        },
+        "minimum_vulgarity": {
+          "$ref": "#/$defs/vulgarity"
+        },
+        "construction_id": {
+          "type": "string",
+          "pattern": "^construction/[a-z0-9-]+/[0-9a-f]{24}$"
+        },
+        "entry_id": {
+          "type": "null"
+        },
+        "family": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "concepts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(?:[a-z][a-z0-9-]*:)?[A-Z][A-Z0-9_]*$"
+          },
+          "minItems": 1
+        },
+        "frame": {
+          "enum": [
+            "predicate_adj",
+            "np",
+            "adj",
+            "adv",
+            "vp",
+            "clause",
+            "interjection",
+            "imperative",
+            "tag"
+          ]
+        },
+        "level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "vulgarity": {
+          "$ref": "#/$defs/vulgarity"
+        },
+        "cadence": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/construction_part"
+          },
+          "minItems": 1
+        },
+        "gloss": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The family concept description: a plain-English explanation, independent of display names."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "const": "constructor"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "sources": {
+                "maxItems": 0
+              },
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "coined_by": {
+              "const": "constructor"
+            },
+            "evidence": {
+              "const": "bulldust"
+            },
+            "sources": {
+              "maxItems": 0
+            }
+          },
+          "required": [
+            "coined_by"
+          ]
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "description": "construction_id is persistent for a given dictionary_id, independent of sampling and tuning; presence in any later request is not guaranteed. See README for its content identity algorithm."
+    },
+    "imagery_card": {
+      "type": "object",
+      "required": [
+        "sources",
+        "origin",
+        "register",
+        "australian_use",
+        "reads_as",
+        "themes",
+        "doubtful_definition",
+        "misreadable",
+        "evidence",
+        "attestation",
+        "minimum_vulgarity",
+        "id",
+        "text",
+        "concepts",
+        "usage",
+        "form",
+        "frames",
+        "subject",
+        "related",
+        "unless_after",
+        "exaggeration",
+        "level",
+        "vulgarity",
+        "tone"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          }
+        },
+        "origin": {
+          "enum": [
+            "australian",
+            "british",
+            "irish",
+            "american",
+            "aboriginal",
+            "other",
+            "unknown"
+          ]
+        },
+        "register": {
+          "enum": [
+            "current",
+            "dated",
+            "archaic"
+          ]
+        },
+        "australian_use": {
+          "enum": [
+            "common",
+            "uncommon"
+          ]
+        },
+        "reads_as": {
+          "enum": [
+            "australian",
+            "general",
+            "british",
+            "irish",
+            "american",
+            "other"
+          ]
+        },
+        "themes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tag"
+          },
+          "uniqueItems": true
+        },
+        "doubtful_definition": {
+          "type": "boolean"
+        },
+        "misreadable": {
+          "type": "boolean"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "attestation": {
+          "$ref": "#/$defs/attestation"
+        },
+        "searched": {
+          "type": "object",
+          "required": [
+            "date",
+            "outcome",
+            "note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "outcome": {
+              "enum": [
+                "found",
+                "nothing_found",
+                "inconclusive"
+              ]
+            },
+            "note": {
+              "type": "string"
+            }
+          }
+        },
+        "coined_by": {
+          "enum": [
+            "person",
+            "agent",
+            "constructor"
+          ],
+          "description": "Who coined this wording. Required and non-null for bulldust. Explicit coiner wins; otherwise agent is derived only from a bulldust assessment with produced_by agent."
+        },
+        "produced_by": {
+          "enum": [
+            "agent"
+          ],
+          "description": "Who prepared the stored record, not generally who invented the wording. It implies agent coinage only when the evidence assessment is bulldust and no explicit coiner is recorded."
+        },
+        "caught_on": {
+          "type": "object",
+          "required": [
+            "date",
+            "note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "note": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "spoken_use": {
+          "type": "object",
+          "required": [
+            "date",
+            "note"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "note": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "testimony": {
+          "type": "object",
+          "required": [
+            "people",
+            "independent",
+            "places",
+            "first_date",
+            "last_date",
+            "summary_date"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "people": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "independent": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "places": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "first_date": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "last_date": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "summary_date": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        },
+        "credit": {
+          "$ref": "#/$defs/credit"
+        },
+        "origin_language": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dated_by_curator": {
+          "type": "string",
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+        },
+        "first_attested": {
+          "type": "string",
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+        },
+        "minimum_vulgarity": {
+          "$ref": "#/$defs/vulgarity"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "concepts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(?:[a-z][a-z0-9-]*:)?[A-Z][A-Z0-9_]*$"
+          },
+          "minItems": 1
+        },
+        "usage": {
+          "type": "string",
+          "minLength": 1
+        },
+        "form": {
+          "enum": [
+            "suffix",
+            "rewrite"
+          ]
+        },
+        "frames": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "predicate_adj",
+              "np",
+              "adj",
+              "adv",
+              "vp",
+              "clause",
+              "interjection",
+              "imperative",
+              "tag"
+            ]
+          }
+        },
+        "subject": {
+          "enum": [
+            "any",
+            "person"
+          ]
+        },
+        "related": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^(?:[a-z][a-z0-9-]*:)?[A-Z][A-Z0-9_]*$"
+          }
+        },
+        "unless_after": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "exaggeration": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "vulgarity": {
+          "$ref": "#/$defs/vulgarity"
+        },
+        "tone": {
+          "enum": [
+            "plain",
+            "comic",
+            "grim"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "const": "constructor"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "sources": {
+                "maxItems": 0
+              },
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
     "mask": {
       "description": "A maskable word in a rendering: its span in that rendering, where its kept ending starts (its end when it keeps none) and the vulgarity it needs.",
       "type": "object",
-      "required": ["span", "ending_start", "vulgarity"],
+      "required": [
+        "span",
+        "ending_start",
+        "vulgarity"
+      ],
       "additionalProperties": false,
       "properties": {
-        "span": {"$ref": "#/$defs/span"},
-        "ending_start": {"type": "integer", "minimum": 0},
-        "vulgarity": {"type": "integer", "minimum": 1, "maximum": 3}
+        "span": {
+          "$ref": "#/$defs/span"
+        },
+        "ending_start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "vulgarity": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        }
       }
     },
-    "masks": {"type": "array", "items": {"$ref": "#/$defs/mask"}},
-    "alternative": {
-      "description": "An option at the spot, the pick among them, rendered where it stands; weights share 1 among a change's alternatives.",
-      "type": "object",
-      "required": ["entry_id", "weight", "rendered", "out_span", "vulgarity", "masks"],
-      "additionalProperties": false,
-      "properties": {
-        "semantic_effects": {"type": "array", "items": {"enum": ["opinion", "quantity_approximation"]}, "uniqueItems": true},
-        "entry_id": {"type": "string"},
-        "weight": {"type": "number", "minimum": 0, "maximum": 1},
-        "rendered": {"type": "string"},
-        "out_span": {"$ref": "#/$defs/span"},
-        "vulgarity": {"$ref": "#/$defs/vulgarity"},
-        "masks": {"$ref": "#/$defs/masks"}
-      }
-    },
-    "locked": {
-      "description": "An option that only a higher vulgarity cap lets in, tagged with the lowest that does, rendered where it stands.",
-      "type": "object",
-      "required": ["entry_id", "vulgarity", "rendered", "out_span", "masks"],
-      "additionalProperties": false,
-      "properties": {
-        "semantic_effects": {"type": "array", "items": {"enum": ["opinion", "quantity_approximation"]}, "uniqueItems": true},
-        "entry_id": {"type": "string"},
-        "vulgarity": {"type": "integer", "minimum": 1, "maximum": 3},
-        "rendered": {"type": "string"},
-        "out_span": {"$ref": "#/$defs/span"},
-        "masks": {"$ref": "#/$defs/masks"}
+    "masks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/mask"
       }
     },
     "removed": {
       "description": "How a garnish's region reads without it: its words gone (and the word an opener lowered recased). Every garnish has one, but one named under withheld.",
       "type": "object",
-      "required": ["out_span", "rendered"],
+      "required": [
+        "out_span",
+        "rendered"
+      ],
       "additionalProperties": false,
-      "properties": {"out_span": {"$ref": "#/$defs/span"}, "rendered": {"type": "string"}}
+      "properties": {
+        "out_span": {
+          "$ref": "#/$defs/span"
+        },
+        "rendered": {
+          "type": "string"
+        }
+      }
     },
     "rule": {
       "description": "The phonetic or swear-infix rule that made the change: its id, its kind, the level it starts at (min_level; null for an infix, which the vulgarity and the embellishment let in at any level), and the text before and after it.",
       "type": "object",
-      "required": ["id", "kind", "min_level", "before", "after"],
+      "required": [
+        "id",
+        "kind",
+        "min_level",
+        "before",
+        "after"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": {"type": "string"},
-        "kind": {"enum": ["drawl", "spelling", "infix"]},
-        "min_level": {"type": ["integer", "null"], "minimum": 1, "maximum": 5},
-        "before": {"type": "string"},
-        "after": {"type": "string"}
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "drawl",
+            "spelling",
+            "infix"
+          ]
+        },
+        "min_level": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1,
+          "maximum": 5
+        },
+        "before": {
+          "type": "string"
+        },
+        "after": {
+          "type": "string"
+        }
       },
-      "if": {"properties": {"kind": {"const": "infix"}}},
-      "then": {"properties": {"min_level": {"type": "null"}}},
-      "else": {"properties": {"min_level": {"type": "integer"}}}
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "infix"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "min_level": {
+            "type": "null"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "min_level": {
+            "type": "integer"
+          }
+        }
+      }
     },
     "pair": {
       "type": "object",
-      "required": ["english", "before", "after"],
+      "required": [
+        "english",
+        "before",
+        "after"
+      ],
       "additionalProperties": false,
       "properties": {
-        "english": {"type": ["string", "null"]},
-        "before": {"type": "string"},
-        "after": {"type": "string"}
+        "english": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "before": {
+          "type": "string"
+        },
+        "after": {
+          "type": "string"
+        }
       }
+    },
+    "source_match": {
+      "type": "object",
+      "required": [
+        "key",
+        "root",
+        "qualifiers"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^(?:[a-z][a-z0-9-]*:)?[A-Z][A-Z0-9_]*(?:\\+(?:[a-z][a-z0-9-]*:)?[A-Z][A-Z0-9_]*)*/(?:predicate_adj|np|adj|adv|vp|clause|interjection|imperative|tag)/[0-9a-f]{64}(?:;degree=(?:mild|strong))?$"
+        },
+        "root": {
+          "type": "string",
+          "pattern": "^(?:[a-z][a-z0-9-]*:)?[A-Z][A-Z0-9_]*(?:\\+(?:[a-z][a-z0-9-]*:)?[A-Z][A-Z0-9_]*)*/(?:predicate_adj|np|adj|adv|vp|clause|interjection|imperative|tag)/[0-9a-f]{64}$"
+        },
+        "qualifiers": {
+          "type": "object",
+          "required": [],
+          "additionalProperties": false,
+          "properties": {
+            "degree": {
+              "enum": [
+                "mild",
+                "strong"
+              ]
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "key": {
+                "pattern": ";degree=strong$"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "qualifiers": {
+                "required": [
+                  "degree"
+                ],
+                "properties": {
+                  "degree": {
+                    "const": "strong"
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "if": {
+              "properties": {
+                "key": {
+                  "pattern": ";degree=mild$"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "qualifiers": {
+                  "required": [
+                    "degree"
+                  ],
+                  "properties": {
+                    "degree": {
+                      "const": "mild"
+                    }
+                  }
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "qualifiers": {
+                  "maxProperties": 0
+                }
+              }
+            }
+          }
+        }
+      ],
+      "description": "Canonical key/root/qualifiers from detection_match. Cross-field root equality and dictionary membership are semantic checks."
+    },
+    "part_occurrence": {
+      "type": "object",
+      "required": [
+        "text",
+        "out_span",
+        "evidence",
+        "coined_by",
+        "role",
+        "ingredient_id",
+        "entry_id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "out_span": {
+          "$ref": "#/$defs/span"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "coined_by": {
+          "enum": [
+            null,
+            "person",
+            "agent",
+            "constructor"
+          ]
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ingredient_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "entry_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(?:[a-z][a-z0-9-]*:)?[a-z0-9][a-z0-9-]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "description": "out_span is local to this owner's rendered (option) or output (change), like masks; never document coordinates. Join constructions[owner.construction_id].parts by the unique pair (role, ingredient_id).",
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "riff_occurrence": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "text",
+            "out_span",
+            "evidence",
+            "coined_by",
+            "kind",
+            "entry_id",
+            "riff_index"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "out_span": {
+              "$ref": "#/$defs/span"
+            },
+            "evidence": {
+              "$ref": "#/$defs/evidence"
+            },
+            "coined_by": {
+              "enum": [
+                null,
+                "person",
+                "agent",
+                "constructor"
+              ]
+            },
+            "kind": {
+              "const": "entry_riff"
+            },
+            "entry_id": {
+              "type": "string",
+              "pattern": "^(?:[a-z][a-z0-9-]*:)?[a-z0-9][a-z0-9-]*$"
+            },
+            "riff_index": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "required": [
+                  "evidence"
+                ],
+                "properties": {
+                  "evidence": {
+                    "const": "bulldust"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "coined_by"
+                ],
+                "properties": {
+                  "coined_by": {
+                    "enum": [
+                      "person",
+                      "agent",
+                      "constructor"
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "text",
+            "out_span",
+            "evidence",
+            "coined_by",
+            "kind",
+            "image_id"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "out_span": {
+              "$ref": "#/$defs/span"
+            },
+            "evidence": {
+              "$ref": "#/$defs/evidence"
+            },
+            "coined_by": {
+              "enum": [
+                null,
+                "person",
+                "agent",
+                "constructor"
+              ]
+            },
+            "kind": {
+              "const": "imagery"
+            },
+            "image_id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "required": [
+                  "evidence"
+                ],
+                "properties": {
+                  "evidence": {
+                    "const": "bulldust"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "coined_by"
+                ],
+                "properties": {
+                  "coined_by": {
+                    "enum": [
+                      "person",
+                      "agent",
+                      "constructor"
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "description": "out_span is local to the owner's rendered/output, like masks. riff_index indexes entries[entry_id].riffs within this response only; it is not a persistent selector or a replay guarantee."
+    },
+    "alternative": {
+      "type": "object",
+      "required": [
+        "entry_id",
+        "rendered",
+        "out_span",
+        "vulgarity",
+        "masks",
+        "evidence",
+        "coined_by",
+        "weight"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "entry_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(?:[a-z][a-z0-9-]*:)?[a-z0-9][a-z0-9-]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "construction_id": {
+          "type": "string",
+          "pattern": "^construction/[a-z0-9-]+/[0-9a-f]{24}$"
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/part_occurrence"
+          },
+          "minItems": 1
+        },
+        "rendered": {
+          "type": "string"
+        },
+        "out_span": {
+          "$ref": "#/$defs/span"
+        },
+        "vulgarity": {
+          "$ref": "#/$defs/vulgarity"
+        },
+        "masks": {
+          "$ref": "#/$defs/masks"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "coined_by": {
+          "enum": [
+            null,
+            "person",
+            "agent",
+            "constructor"
+          ]
+        },
+        "semantic_effects": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "opinion",
+              "quantity_approximation"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "riffs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/riff_occurrence"
+          }
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "entry_id": {
+                  "type": "string",
+                  "pattern": "^(?:[a-z][a-z0-9-]*:)?[a-z0-9][a-z0-9-]*$"
+                }
+              },
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "construction_id"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "parts"
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "required": [
+                "construction_id",
+                "parts"
+              ],
+              "properties": {
+                "entry_id": {
+                  "type": "null"
+                },
+                "evidence": {
+                  "const": "bulldust"
+                },
+                "coined_by": {
+                  "const": "constructor"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "description": "Key is entry_id ?? construction_id; it appears at most once across this change's alternatives and locked options, regardless of riffs. out_span is the document replacement region; nested part/riff spans are local to rendered."
+    },
+    "locked": {
+      "type": "object",
+      "required": [
+        "entry_id",
+        "rendered",
+        "out_span",
+        "vulgarity",
+        "masks",
+        "evidence",
+        "coined_by"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "entry_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(?:[a-z][a-z0-9-]*:)?[a-z0-9][a-z0-9-]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "construction_id": {
+          "type": "string",
+          "pattern": "^construction/[a-z0-9-]+/[0-9a-f]{24}$"
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/part_occurrence"
+          },
+          "minItems": 1
+        },
+        "rendered": {
+          "type": "string"
+        },
+        "out_span": {
+          "$ref": "#/$defs/span"
+        },
+        "vulgarity": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        "masks": {
+          "$ref": "#/$defs/masks"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "coined_by": {
+          "enum": [
+            null,
+            "person",
+            "agent",
+            "constructor"
+          ]
+        },
+        "semantic_effects": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "opinion",
+              "quantity_approximation"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "riffs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/riff_occurrence"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "entry_id": {
+                  "type": "string",
+                  "pattern": "^(?:[a-z][a-z0-9-]*:)?[a-z0-9][a-z0-9-]*$"
+                }
+              },
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "construction_id"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "parts"
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "required": [
+                "construction_id",
+                "parts"
+              ],
+              "properties": {
+                "entry_id": {
+                  "type": "null"
+                },
+                "evidence": {
+                  "const": "bulldust"
+                },
+                "coined_by": {
+                  "const": "constructor"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "description": "Key is entry_id ?? construction_id; it appears at most once across this change's alternatives and locked options, regardless of riffs. out_span is the document replacement region; nested part/riff spans are local to rendered."
     },
     "change": {
       "type": "object",
-      "required": ["id", "kind", "src_span", "out_span", "original", "output", "entry_id", "vulgarity", "masks",
-                   "alternatives", "locked", "covers"],
+      "required": [
+        "id",
+        "kind",
+        "src_span",
+        "out_span",
+        "original",
+        "output",
+        "entry_id",
+        "vulgarity",
+        "masks",
+        "alternatives",
+        "locked",
+        "covers",
+        "evidence",
+        "coined_by"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": {"type": "string"},
-        "kind": {"enum": ["substitution", "dialect", "garnish", "swear_infix", "phonetic"]},
-        "src_span": {"$ref": "#/$defs/span"},
-        "out_span": {"$ref": "#/$defs/span"},
-        "original": {"type": "string"},
-        "output": {"type": "string"},
-        "entry_id": {"type": ["string", "null"]},
-        "vulgarity": {"$ref": "#/$defs/vulgarity"},
-        "masks": {"$ref": "#/$defs/masks"},
-        "placement": {"enum": ["connective", "opener", "tag", "aside", "tail", "closer", "riff"]},
-        "image_id": {"type": "string"},
-        "removed": {"$ref": "#/$defs/removed"},
-        "rule": {"$ref": "#/$defs/rule"},
-        "pair": {"$ref": "#/$defs/pair"},
-        "alternatives": {"type": "array", "items": {"$ref": "#/$defs/alternative"}},
-        "locked": {"type": "array", "items": {"$ref": "#/$defs/locked"}},
-        "covers": {"type": "array", "items": {"type": "string"}}
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "substitution",
+            "dialect",
+            "garnish",
+            "swear_infix",
+            "phonetic"
+          ]
+        },
+        "src_span": {
+          "$ref": "#/$defs/span"
+        },
+        "out_span": {
+          "$ref": "#/$defs/span"
+        },
+        "original": {
+          "type": "string"
+        },
+        "output": {
+          "type": "string"
+        },
+        "entry_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^(?:[a-z][a-z0-9-]*:)?[a-z0-9][a-z0-9-]*$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "vulgarity": {
+          "$ref": "#/$defs/vulgarity"
+        },
+        "masks": {
+          "$ref": "#/$defs/masks"
+        },
+        "placement": {
+          "enum": [
+            "connective",
+            "opener",
+            "tag",
+            "aside",
+            "tail",
+            "closer",
+            "riff"
+          ]
+        },
+        "image_id": {
+          "type": "string"
+        },
+        "removed": {
+          "$ref": "#/$defs/removed"
+        },
+        "rule": {
+          "$ref": "#/$defs/rule"
+        },
+        "pair": {
+          "$ref": "#/$defs/pair"
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/alternative"
+          }
+        },
+        "locked": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/locked"
+          }
+        },
+        "covers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "construction_id": {
+          "type": "string",
+          "pattern": "^construction/[a-z0-9-]+/[0-9a-f]{24}$"
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/part_occurrence"
+          },
+          "minItems": 1
+        },
+        "match": {
+          "$ref": "#/$defs/source_match"
+        },
+        "evidence": {
+          "enum": [
+            null,
+            "attested",
+            "unverified",
+            "bulldust"
+          ]
+        },
+        "coined_by": {
+          "enum": [
+            null,
+            "person",
+            "agent",
+            "constructor"
+          ]
+        },
+        "riffs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/riff_occurrence"
+          }
+        }
       },
       "allOf": [
-        {"if": {"properties": {"kind": {"const": "substitution"}}},
-         "then": {"properties": {"entry_id": {"type": "string"}, "alternatives": {"minItems": 1}}}},
-        {"if": {"properties": {"kind": {"const": "garnish"}}},
-         "then": {"required": ["placement"], "properties": {"locked": {"maxItems": 0}}}},
-        {"if": {"properties": {"kind": {"enum": ["phonetic", "swear_infix"]}}},
-         "then": {"required": ["rule"], "properties": {"entry_id": {"type": "null"}, "alternatives": {"maxItems": 0},
-                                                         "locked": {"maxItems": 0}}}},
-        {"if": {"properties": {"kind": {"const": "dialect"}}},
-         "then": {"required": ["pair"], "properties": {"entry_id": {"type": "null"}, "alternatives": {"maxItems": 0},
-                                                         "locked": {"maxItems": 0}}}}
+        {
+          "if": {
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "const": "substitution"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "match"
+            ],
+            "properties": {
+              "evidence": {
+                "$ref": "#/$defs/evidence"
+              },
+              "alternatives": {
+                "minItems": 1
+              }
+            },
+            "allOf": [
+              {
+                "oneOf": [
+                  {
+                    "properties": {
+                      "entry_id": {
+                        "type": "string",
+                        "pattern": "^(?:[a-z][a-z0-9-]*:)?[a-z0-9][a-z0-9-]*$"
+                      }
+                    },
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "construction_id"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "parts"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "required": [
+                      "construction_id",
+                      "parts"
+                    ],
+                    "properties": {
+                      "entry_id": {
+                        "type": "null"
+                      },
+                      "evidence": {
+                        "const": "bulldust"
+                      },
+                      "coined_by": {
+                        "const": "constructor"
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "image_id"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "const": "garnish"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "placement"
+            ],
+            "properties": {
+              "evidence": {
+                "$ref": "#/$defs/evidence"
+              },
+              "locked": {
+                "maxItems": 0
+              }
+            },
+            "allOf": [
+              {
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "match"
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "oneOf": [
+                  {
+                    "properties": {
+                      "entry_id": {
+                        "type": "string",
+                        "pattern": "^(?:[a-z][a-z0-9-]*:)?[a-z0-9][a-z0-9-]*$"
+                      }
+                    },
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "construction_id"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "parts"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "image_id"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "required": [
+                      "construction_id",
+                      "parts"
+                    ],
+                    "properties": {
+                      "entry_id": {
+                        "type": "null"
+                      },
+                      "evidence": {
+                        "const": "bulldust"
+                      },
+                      "coined_by": {
+                        "const": "constructor"
+                      }
+                    },
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "image_id"
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "required": [
+                      "image_id"
+                    ],
+                    "properties": {
+                      "entry_id": {
+                        "type": "null"
+                      },
+                      "placement": {
+                        "const": "riff"
+                      }
+                    },
+                    "not": {
+                      "anyOf": [
+                        {
+                          "required": [
+                            "construction_id"
+                          ]
+                        },
+                        {
+                          "required": [
+                            "parts"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "const": "dialect"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "entry_id": {
+                "type": "null"
+              },
+              "evidence": {
+                "type": "null"
+              },
+              "coined_by": {
+                "type": "null"
+              },
+              "alternatives": {
+                "maxItems": 0
+              },
+              "locked": {
+                "maxItems": 0
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "match"
+                  ]
+                },
+                {
+                  "required": [
+                    "construction_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "parts"
+                  ]
+                },
+                {
+                  "required": [
+                    "image_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "riffs"
+                  ]
+                }
+              ]
+            },
+            "required": [
+              "pair"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "const": "phonetic"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "entry_id": {
+                "type": "null"
+              },
+              "evidence": {
+                "type": "null"
+              },
+              "coined_by": {
+                "type": "null"
+              },
+              "alternatives": {
+                "maxItems": 0
+              },
+              "locked": {
+                "maxItems": 0
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "match"
+                  ]
+                },
+                {
+                  "required": [
+                    "construction_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "parts"
+                  ]
+                },
+                {
+                  "required": [
+                    "image_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "riffs"
+                  ]
+                }
+              ]
+            },
+            "required": [
+              "rule"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "const": "swear_infix"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "entry_id": {
+                "type": "null"
+              },
+              "evidence": {
+                "type": "null"
+              },
+              "coined_by": {
+                "type": "null"
+              },
+              "alternatives": {
+                "maxItems": 0
+              },
+              "locked": {
+                "maxItems": 0
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "match"
+                  ]
+                },
+                {
+                  "required": [
+                    "construction_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "parts"
+                  ]
+                },
+                {
+                  "required": [
+                    "image_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "riffs"
+                  ]
+                }
+              ]
+            },
+            "required": [
+              "rule"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "evidence"
+            ],
+            "properties": {
+              "evidence": {
+                "const": "bulldust"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "coined_by"
+            ],
+            "properties": {
+              "coined_by": {
+                "enum": [
+                  "person",
+                  "agent",
+                  "constructor"
+                ]
+              }
+            }
+          }
+        }
       ]
     },
-    "card": {
-      "description": "An entry's card (aussiefy/cards.py), as lookup shows it too: riffs only where the embellishment takes them, and a gated entry's flags where the policy unlocked it.",
+    "tuning": {
       "type": "object",
-      "required": ["id", "form", "gloss", "frame", "concepts", "level", "vulgarity", "register"],
+      "required": [
+        "popularity",
+        "preferences"
+      ],
       "additionalProperties": false,
       "properties": {
-        "id": {"type": "string"},
-        "form": {"type": "string"},
-        "gloss": {"type": "string"},
-        "frame": {"type": "string"},
-        "concepts": {"type": "array", "items": {"type": "string"}},
-        "level": {"type": "integer", "minimum": 1, "maximum": 5},
-        "vulgarity": {"$ref": "#/$defs/vulgarity"},
-        "register": {"enum": ["current", "dated", "archaic"]},
-        "placement": {"type": "string"},
-        "riffs": {"type": "array", "items": {"type": "object"}},
-        "variants": {"type": "array", "items": {"type": "string"}},
-        "region": {"type": "array", "items": {"type": "string"}},
-        "notes": {"type": "string"},
-        "sources": {"type": "array", "items": {"type": "string"}},
-        "replaces": {"type": "array", "items": {"type": "string"}},
-        "gated": {"type": "array", "items": {"type": "string"}},
-        "semantic_effects": {"type": "array", "items": {"enum": ["opinion", "quantity_approximation"]}, "uniqueItems": true}
+        "popularity": {
+          "type": "boolean"
+        },
+        "preferences": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "description": "Popularity requested and the number of distinct input preferences used by actual positive-weight candidates after repeat exclusions/variety. Includes eligible neutral weights and pools whose substitution roll failed; excludes counterfactual probes. Deduplicated across document units."
+    },
+    "warning_detail": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "engine_warning",
+            "unknown_preference_match",
+            "unknown_preference_term"
+          ]
+        },
+        "message": {
+          "type": "string"
+        }
       }
     }
   }

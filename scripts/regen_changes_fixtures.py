@@ -33,6 +33,24 @@ CASES = {
         {"text": "I'm exhausted and the toilet is broken. Thanks for breakfast, my friend. You are very tired and "
                  "hungry, and your car is broken. We let a toddler win the game.",
          "level": 4, "vulgarity": 1, "seed": 0, "embellishment": 1}),
+    "v3-construction": (
+        "A real reviewed constructed opener, with canonical and rendering-local part spans and maker labels.",
+        {"text": "The river is flowing through the valley.", "level": 5, "vulgarity": 2,
+         "seed": 0, "embellishment": 2, "document_config": {"garnish": ["opener"],
+            "profile": {"garnish": {"opener": 0}, "max_garnish": {"opener": 1}, "swearing": {"exclaim": 1}}}}),
+    "v3-markdown": (
+        "Multiple real prose units, Unicode, emphasis, untouched code and local occurrence spans.",
+        {"text": "# Heading\n\n🦘 She was **very tired**. `She is hungry.`\n\nHe is hungry and his car is broken.",
+         "level": 5, "vulgarity": 2, "seed": 4, "embellishment": 2, "markdown": True}),
+    "v3-imagery": (
+        "A real contextual image has its own rich card and maker, alongside a retained source or substitution.",
+        {"text": "She is hungry.", "level": 5, "vulgarity": 0, "seed": 0, "embellishment": 2,
+         "document_config": {"garnish": ["riff"], "profile": {"garnish": {"riff": 1}}}}),
+    "v3-warnings": (
+        "Unknown preference records retain Result warnings and stable codes, even with no prose.",
+        {"text": "`She is tired.`", "level": 5, "seed": 0, "markdown": True,
+         "popularity": True, "preferences": [{"match": "not-a-match", "term": "missing-term", "weight": 2}]})
+
 }
 
 
@@ -45,11 +63,44 @@ def build(name: str, translator=None) -> dict:
             "response": translate_changes(request["text"], translator=translator, **options).to_dict()}
 
 
+
+def support(translator=None):
+    from aussiefy import Translator, translate_changes
+    from aussiefy.harness import lookup
+    from aussiefy.match_keys import detection_match
+    tr = Translator(translator.dictionary if translator else None, lookup_embedder=None)
+    lookups = {"lookup_embedder": None, "cases": [
+        {"request": {"query": query}, "response": lookup(query, translator=tr)}
+        for query in ("knackered", "quantum entanglement")]}
+    request = {"text": "She was exhausted. He is hungry.", "level": 5, "vulgarity": 2,
+               "embellishment": 2, "variety": 1, "seed": 4}
+    baseline = translate_changes(translator=tr, **request)
+    match = detection_match(next(r for r in baseline.result.records if 'TIRED' in r.det.concepts).det).key
+    tuned_request = {**request, "popularity": True,
+                     "preferences": [{"match": match, "term": "stonkered-tired", "weight": 100000}]}
+    tuned = translate_changes(translator=tr, **tuned_request)
+    pins = tuned.replay_pins()
+    untuned_request = {**request, "pins": pins}
+    replay = translate_changes(translator=tr, **untuned_request)
+    if replay.text != tuned.text:
+        raise RuntimeError('real fixture did not replay exactly without tuning')
+    return {"lookup.json": lookups,
+            "replay.json": {"tuned_request": tuned_request, "tuned_response": tuned.to_dict(),
+                            "untuned_request": untuned_request, "untuned_response": replay.to_dict(),
+                            "editor_options": tuned.replay_options()}}
+
+
 def main() -> int:
     FIXTURES.mkdir(parents=True, exist_ok=True)
     for name in CASES:
         path = FIXTURES / f"{name}.json"
         path.write_text(json.dumps(build(name), indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+        print(f"wrote {path.relative_to(ROOT)}")
+    other = ROOT / "tests/fixtures/v3"
+    other.mkdir(parents=True, exist_ok=True)
+    for name, body in support().items():
+        path = other / name
+        path.write_text(json.dumps(body, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
         print(f"wrote {path.relative_to(ROOT)}")
     return 0
 

@@ -24,37 +24,110 @@ host sets explicitly. It's part of the Python API only: the CLI, the MCP tools a
 ([DD-029](../architecture/decisions/dd-029-changes-builder.md)). `aussiefy.guide.dial_descriptions()` gives every
 dial's settings with a one-line description each, for a page that lists them.
 
-## Draft v3 for review
+## Frozen v3
 
-The [v3 review bundle](../drafts/changes-v3/README.md),
-[changes schema](../drafts/changes-v3/changes.schema.json),
-[shared card schema](../drafts/changes-v3/cards.schema.json) and
-[lookup card projection](../drafts/changes-v3/lookup-cards.schema.json) are **review drafts**,
-revision `20261112-r2`. The [six changes examples](../drafts/changes-v3/examples.json) and
-[two lookup examples](../drafts/changes-v3/lookup-examples.json) validate offline. Well, these assets live outside
-package data'n don't change the active v2 schema or emitter. Consumin' clients review this draft
-before it's frozen or becomes the active contract.
+The active changes'n rich\-card contracts are v3, using the response fields accepted in review
+`20261112-r2`. Packaged schemas are `aussiefy/data/changes.schema.json`, `cards.schema.json` and
+`lookup-cards.schema.json`. Now, the last checks the full\-card lookup projection, not every lookup outcome
+field or short\-card mode. The [historical draft](../drafts/changes-v3/README.md) and its illustrative
+examples retain their exact review bytes. Current fixtures in `tests/fixtures/changes/` come directly
+from the real emitter, including constructions, imagery, Markdown'n coded warnings.
 
-R2 makes nested part/riff spans local to their own rendered/output text, like masks. Canonical part spans
-remain local to card text; change/option replacement regions remain document coordinates. Mate, option keys
-are unique across alternatives'n locked options, chosen constructions occur among alternatives, and
-content\-derived construction identities persist for a dictionary identity. That doesn't guarantee an
-untuned replay: construction/riff sharing needs a request\-side pin input before it ships.
+`kept`, `held`, personal terms, plain alternatives'n selection results belong to the later contract.
 
-Every bulldust renderin' names a maker. Shared projections retain explicit coiners'n derive agent coinage
-only for agent\-produced bulldust without an explicit coiner, preservin' stored evidence. R2 also adds
-construction glosses, uniform theme objects, explicit card versions on changes'n lookup, and coded
-warnin' details alongside the exact Result/DocumentResult warning strings. Well, the bundle specifies joins,
-attribution'n the warnin'\-code registry. Active lookup also waits for the coordinated upgrade.
+## Option identity and replay (B1)
 
-Fair dinkum, JSON Schema checks shape; shared semantic checks cover IDs, references, option keys, warnin' parity,
-local spans'n card provenance. Illustrative projections aren't claims that the engine already emits
-v3 or that those constructions meet the source fallback rule. Public integration'n replay pinning remain
-3\+6 work; `kept`, `held` and personal terms remain slice 7 work.
+The option key is `entry_id ?? construction_id`. Within one change it appears **at most once across the
+combined alternatives and locked arrays**. Multiple riffs of the same entry are not separate options:
+choose one rendering for that entry in the response. The selected construction's own `construction_id`
+must appear in its alternatives. Keys may recur at different changes.
+
+For a fixed `dictionary_id`, a construction's ID persists across requests, seeds, candidate ordering,
+tuning and policy. Its existing algorithm is unchanged: compact UTF-8 JSON of
+`["construction-expression/v1", family.id, family.template, [[role, ingredient.id, ingredient.text], ...]]`,
+with parts in **template rendering order**, SHA-256, first 24 lower-case hex characters; prefix
+`construction/<family.id>/`. The dictionary identity qualifies the catalogue and ingredient resolutions.
+Changes to wording or template produce a different expression identity. Different dictionary identities
+do not promise an expression will still resolve. The shared `construction_identity` function owns this
+algorithm; semantic checks reconstruct and verify it rather than trusting an arbitrary well-shaped ID.
+
+**Construction and riff picks do not have a guaranteed untuned replay.** An identical complete request and
+dictionary remains deterministic, but removing personal/community tuning is a different request.
+Eligibility, variety, prior usage and bounded construction/riff sampling can change the returned pool.
+Persistent identity does not guarantee presence in that pool. `riff_index` is response-local, not a share
+identifier. A request-side pin/replay input (including a persistent riff selector) is required before
+tuned construction/riff share links ship. The explicit request-side pins described below retain selected forms, recipes and riffs.
+Identity alone, without those pins, still does not promise replay closure.
+
+## Provenance (B2)
+
+`coined_by` names who invented the wording: `person`, `agent` or `constructor`. `produced_by: agent`
+records agent production of the stored record; it is not generally a claim that the agent invented the
+wording. An explicit `coined_by` always wins. When the evidence assessment is `bulldust`, there is no
+explicit coiner, and `produced_by` is `agent`, the shared projection derives `coined_by: agent`. That assessment
+already requires the unsuccessful search and absence of independent attestation; the projection changes
+no stored facts, attestation score or evidence label. Attested agent-produced records acquire no invented
+coiner. Constructors remain `coined_by: constructor`, with no sources for the assembled expression; their
+parts retain their own provenance.
+
+Every card, rendered change, alternative, locked option, part occurrence and riff occurrence whose
+`evidence` is `bulldust` must have a **non-null** `coined_by`. The schemas enforce this condition, and shared
+projections fail if there is no attributable maker. Occurrences must agree with their referenced card's
+evidence and coiner. Imagery projections identify the assessed bulldust maker. Non-lexical changes retain
+null evidence and null coiner.
+
+## Coordinates and joins (P1, P3)
+
+Struth, all offsets are half\-open Unicode **code\-point** spans, not JavaScript UTF\-16 indices.
+
+- A change's `src_span` addresses the source and its `out_span` addresses the current document output.
+- An alternative or locked option's `out_span` identifies the document region it replaces, even when the
+  rendering has a different length.
+- A part/riff occurrence's `out_span` is **local to its owner's `rendered` (option) or `output` (change)**,
+  like masks. Read `ownerText.slice(a, b)` in code-point space. It never assumes a single hypothetical
+  document swap. Clients can apply several swaps and re-offset document regions themselves.
+- A canonical construction-card part's `out_span` remains local to `construction_card.text`.
+
+Join an occurrence to `constructions[owner.construction_id].parts` using the unique pair
+**`(role, ingredient_id)`** within that card. It resolves exactly once; `entry_id` may be null and is not
+the join key. Canonical and occurrence joins are unique; each occurrence includes exactly the construction's
+parts. A riff joins `entries[entry_id].riffs[riff_index]` or `imagery[image_id]` as its `kind` declares.
+
+## Warnings (P2)
+
+Root `warnings` is exactly `list(Result.warnings)` or `list(DocumentResult.warnings)`, preserving strings,
+order and duplicates. Clients and services do not append their own diagnostics here. `warning_details`
+has the same length and order; `warning_details[i].message == warnings[i]`.
+
+| Code | Meaning |
+|---|---|
+| `unknown_preference_match` | A preference's source match is unknown; that preference was ignored. |
+| `unknown_preference_term` | A preference's target term is unknown; that preference was ignored. |
+| `engine_warning` | An existing engine/policy warning without a more specific code. |
+
+Now, known preference diagnostics carry codes at their origin; codes aren't inferred by parsing prose. The
+two preference codes let a host keep tunin' diagnostics away from readers. Existin' Python warning
+callers still receive strings. Well, the v3 producers emit these details together.
+
+## Cards and lookup (P4–P6)
+
+Constructions have a required `gloss`: the family concept's plain-English description. Show it as the card
+explanation; it does not pre-empt the slice 7 naming work. All rich metadata, including riffs and canonical
+parts, uses `themes: [{name, tier}]` and a resolved `minimum_vulgarity`. Theme names are unique within one
+metadata object; tiers use the request's resolved theme policy. There is no string-array alternative.
+
+The changes envelope and **every lookup outcome, including short mode and empty results**, carry
+`card_version: 3` and `dictionary_id` in v3. Lookup ranking and outcome fields retain their
+existing meanings. `lookup-cards.schema.json` is explicitly a **full-card projection** schema: it checks
+the header and rich cards in results, ruled-out readings, protections and imagery. It is not a replacement
+for the complete lookup outcome contract or a schema for short-card mode. The two lookup examples include
+a populated result and an empty result so Ask a local can discriminate versions before reading cards.
 
 ## The contract
 
-`ChangeSet.to_dict()` is version 2 of the `changes` contract, `{version, text, changes, entries, withheld}`. Its JSON
+`ChangeSet.to_dict()` is version 3 of the `changes` contract. Its root contains `version`, `card_version`,
+`text`, `dictionary_id`, `tuning`, `warnings`, `warning_details`, `changes`, `entries`, `constructions`,
+`imagery` and `withheld`. Its JSON
 Schema ships in the package as `aussiefy/data/changes.schema.json` (`aussiefy.changes.SCHEMA`). Example requests
 and responses live in `tests/fixtures/changes/`. Each change has:
 
@@ -65,12 +138,13 @@ and responses live in `tests/fixtures/changes/`. Each change has:
 - `src_span` and `original`: where it came from in the source. Garnish is put in rather than swapped, so its
   source span is the point where it goes. A drawl inside a swap or a garnish takes that whole span.
 - `out_span` and `output`: where it is in the output, as `[start, end)` character offsets.
-- `entry_id` and `vulgarity`: the entry it came from, if it came from one, and the vulgarity it needs. A
+- `entry_id`, `construction_id` and `vulgarity`: the dictionary entry or constructed expression it came from,
+  if either applies, and the vulgarity it needs. A construction has null `entry_id` and a distinct construction ID. A
   rendering's vulgarity is the strongest of everything in it: its entry, a stacked second idiom, a riff and any
   swear infix in the spot. A swear infix's vulgarity is its rule's.
 - `masks`: the maskable words in the output \(below\).
 - `alternatives`: for a swap, every option the engine weighed at that spot, the pick among them, in the engine's
-  order. Each one has its `entry_id`, its `weight` (they share 1), its `rendered` text, its `out_span`, its
+  order. Each one has its entry or construction key, its `weight` (they share 1), its `rendered` text, its `out_span`, its
   `vulgarity` and its `masks`. Optional `semantic_effects` records effects of this rendering
   at this source mapping, such as `quantity_approximation`; entry-card effects remain inherent to an entry. For a garnish, it's the other garnish of that placement the engine weighed there.
 - `locked`: for a swap, the options the vulgarity cap alone holds back, each tagged with the lowest `vulgarity`
@@ -111,7 +185,7 @@ where a drawl or infix match still reads across the region's edge after it has w
 has happened over the test corpora. They're there so a renderin' that might read wrong is never offered, and a
 page can tell why a spot has no alternatives.
 
-Strewth, all offsets count Unicode code points, including source/output spans, alternative regions'n mask positions.
+Stone the crows, all offsets count Unicode code points, including source/output spans, alternative regions'n mask positions.
 Well, for example, `🦘 toilet` becomes `🦘 dunny`: the source span is `[2, 8)` and the output span is `[2, 7)`.
 JavaScript clients can slice'n splice by code point with `Array.from(text)`:
 
@@ -126,7 +200,7 @@ emoji sequence can occupy several positions.
 
 ## How a swap is rendered
 
-Jeez, every alternative is rendered as the engine would render it at that spot, with the rest of the output held
+Fair dinkum, every alternative is rendered as the engine would render it at that spot, with the rest of the output held
 fixed. It takes the engine's own path: the form'n the spellin' the text keeps, the article fitted \("a toddler"
 becomes "an ankle biter"\), the entry's own replacement span, a stacked second idiom, a riff, and capitals. The
 sentence's garnish is put back as it was decided. Then the drawl, spellin''n swear infixes run over the spot
@@ -137,7 +211,7 @@ All of a spot's options share one region, so swappin' one in replaces the same s
 where a drawl or infix match crosses its edge \("have not" becoming "haven't"\) or a neighbourin' match's
 lookaround reads it \("won't bloody well have").
 
-Stone the crows, a garnish's region widens the same way. An opener's or connective's region takes in the next word, whose capital
+Jeez Louise, a garnish's region widens the same way. An opener's or connective's region takes in the next word, whose capital
 it lowered, and a word more where a match runs on: in "Well, it is easy", a swap or removal of "Well" replaces
 "Well, it is", since the drawl's "it is" match crosses "it". A region never cuts the words another swap or
 garnish put in: it takes in the whole of one it reaches. Tell ya what, two regions can still share a word they both widened
@@ -153,6 +227,52 @@ later picks, garnish and drawl rolls shift. Two swaps in one sentence, or in nei
 rendered, unless the first used an entry the second's stacked idiom or riff would have used. Over the everyday
 corpus that happens in one pair in about fifty. The engine's
 output and its seeds are unchanged by any of this: `translate_changes(...).text` is `translate(...).text`.
+
+## Explicit replay pins
+
+Removing tunin' changes a request. Use an explicit request packet to preserve its selected forms,
+construction recipes, stacks, entry riffs, imagery'n garnish. The response schema stays unchanged:
+
+```python
+original = aussiefy.translate_changes("She was exhausted.", level=5, seed=4)
+pins = original.replay_pins()
+replayed = aussiefy.translate_changes("She was exhausted.", level=5, seed=4, pins=pins)
+assert replayed.text == original.text
+```
+
+`Result`, `DocumentResult` and `ChangeSet` have `replay_pins()`. A plan also includes `replay_pins`.
+`ChangeSet.replay_options()` returns a separate sidecar with `current` (the complete packet) and
+`changes` (change ID to `{key, pick}` options). It is absent from `ChangeSet.to_dict()`. A service can
+store or deliver it separately. `cs.replay_pins({change_id: option_key})` replaces current picks with
+offered alternatives; null selects an offered garnish removal. Unknown changes/options fail. Locked
+choices still need the caller to raise the relevant cap. A plain alternative is not added in v3.
+
+The version-1 request schema is `aussiefy/data/pins.schema.json`. A packet contains `dictionary_id`,
+`source_id` (SHA-256 of the exact source encoded as UTF-8), original `seed`, `complete` and `picks`.
+Substitution and imagery anchors use the precise detected source span and canonical `match`, rather
+than a change's widened replacement region. Garnish uses its source sentence span and placement.
+All are source Unicode code points; Markdown units are offset into the whole source.
+
+An entry target retains its ID and dictionary form. A construction retains its persistent ID,
+family and every typed ingredient slot; replay validates and resolves that one composition without
+enumerating the candidate space. An entry riff retains its canonical text, never `riff_index`. The loader requires that text to
+identify exactly one riff within the entry; duplicate canonical wording is an error.
+Stacked entries retain their own form. A bulldust entry cannot be an unlabelled secondary stack;
+it remains available as a primary, attributed choice. A null target retains source wording or removes garnish;
+a null image ID removes that image. Duplicate, unknown, malformed, mismatched or unconsumed picks
+raise `UserError`; none silently disappear.
+
+A complete packet suppresses unlisted automatic substitutions, imagery'n garnish. A partial
+packet \(`complete: false`) leaves other spots automatic. Dialect, spellin''n phonetic rules still
+run. Now, keep the original source, dictionary, seed'n behaviour settings for exact output replay.
+Removing popularity/preferences preserves the explicit choices; the resultin' tuning summary
+reports the new call. Offered pools'n their weights may differ from the original tuned response.
+
+Explicit picks bypass automatic probability, variety'n soft repeat weightin', while every hard
+meaning, frame, degree, captured argument, source protection, genre, level, vulgarity, theme and
+invention check still applies. Riffs retain configured count/spacin' limits, one use per entry/image'n their placement and behaviour permissions; garnish
+retains source\-context, placement'n density constraints. So anyway, a changed request that can't honour
+every pin fails. The package doesn't store preferences, identities, share links or server sessions.
 
 ## Masks
 

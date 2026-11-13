@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from .engine import resolve_request
+from .cards import CARD_VERSION
+
 from . import discovery_outcomes as outcomes
 from .cards import full_entry_card, shows_riffs
 from .engine import Translator, default_translator
@@ -21,7 +24,7 @@ def _context(translator, level, vulgarity, embellishment, document_type, documen
     setting = genre.setting(parse_embellishment(embellishment) if embellishment is not None else None)
     eff = tr.effective(level=level, vulgarity=vulgarity, embellishment=embellishment,
                        document_type=document_type, document_config=document_config)
-    return tr.dictionary, eff, setting, {**eff.envelope(), **genre.envelope(setting.step),
+    return tr.dictionary, eff, setting, {**eff.envelope(), "card_version": CARD_VERSION, **genre.envelope(setting.step),
                                         'dictionary_id': tr.dictionary.identity}
 
 
@@ -45,7 +48,7 @@ def _entries(dictionary, eff, concept, theme, include_gated):
 
 def _card(entry, eff, setting):
     return full_entry_card(entry, eff.vulgarity, shows_riffs(setting), permitted_themes=eff.theme_policy,
-                           registers=eff.registers)
+                           registers=eff.registers, allow_misreadable=eff.allow_misreadable)
 
 
 def _page(items, offset, limit):
@@ -65,9 +68,10 @@ def _outcome(page, items):
 def list_entries(*, concept: str | None = None, theme: str | None = None, offset: int = 0,
                  limit: int = DEFAULT_PAGE_SIZE, level: int | str = 5, vulgarity: int | str | None = None,
                  include_gated: bool = False, embellishment: int | str | None = None,
-                 document_type: str = "general", document_config: dict | None = None,
+                 document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None,
                  translator: Translator | None = None) -> dict:
     """List a stable page of entries; concept and theme filters intersect. Omitted entries never appear."""
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
     concept, theme = _filters(d, concept, theme)
     entries = _entries(d, eff, concept, theme, include_gated)
@@ -83,7 +87,7 @@ def list_wordless_meanings(*, offset: int = 0, limit: int = DEFAULT_PAGE_SIZE,
     its plain wording and reviewed example sentences. Guards and the holding concept never appear."""
     d = (translator or default_translator()).dictionary
     page, next_offset = _page(d.wordless_meanings, offset, limit)
-    return {"dictionary_id": d.identity, "offset": offset, "limit": limit, "total": len(d.wordless_meanings), "next_offset": next_offset,
+    return {"dictionary_id": d.identity, "tuning": {"popularity": False, "preferences": 0}, "offset": offset, "limit": limit, "total": len(d.wordless_meanings), "next_offset": next_offset,
             "outcome": _outcome(page, d.wordless_meanings),
             "results": [{"concept": cid, "plain": d.concepts[cid].plain, "examples": list(d.concepts[cid].examples)}
                         for cid in page]}
@@ -91,9 +95,10 @@ def list_wordless_meanings(*, offset: int = 0, limit: int = DEFAULT_PAGE_SIZE,
 
 def get_entry(entry_id: str, *, level: int | str = 5, vulgarity: int | str | None = None,
               include_gated: bool = False, embellishment: int | str | None = None,
-              document_type: str = "general", document_config: dict | None = None,
+              document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None,
               translator: Translator | None = None) -> dict:
     """Fetch one entry card under the caller's dials and discovery permissions."""
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     if not isinstance(entry_id, str) or not entry_id:
         raise UserError("entry_id must be a non-empty string")
     d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
@@ -109,8 +114,9 @@ def get_entry(entry_id: str, *, level: int | str = 5, vulgarity: int | str | Non
 def random_entry(*, seed: int = 0, concept: str | None = None, theme: str | None = None,
                  level: int | str = 5, vulgarity: int | str | None = None, include_gated: bool = False,
                  embellishment: int | str | None = None, document_type: str = "general",
-                 document_config: dict | None = None, translator: Translator | None = None) -> dict:
+                 document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None, translator: Translator | None = None) -> dict:
     """Pick uniformly from all eligible entries, using a stable seeded roll rather than a page."""
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     if type(seed) is not int:
         raise UserError("seed must be an integer")
     d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
@@ -125,4 +131,4 @@ def suggest_name(*, seed: int = 0, shape: str | None = None, translator: Transla
     """Suggest a clean Aussie handle; the caller checks uniqueness and retries with a different seed."""
     from .names import generate_name
     dictionary = (translator or default_translator()).dictionary
-    return {**generate_name(dictionary, seed=seed, shape=shape), 'dictionary_id': dictionary.identity}
+    return {**generate_name(dictionary, seed=seed, shape=shape), 'dictionary_id': dictionary.identity, 'tuning': {'popularity': False, 'preferences': 0}}

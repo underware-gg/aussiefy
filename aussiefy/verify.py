@@ -13,11 +13,13 @@ is the judge's work.
 
 from __future__ import annotations
 
+from .engine import resolve_request
+
 import re
 from dataclasses import dataclass
 from typing import Any
 
-from .engine import UNTOUCHED_MIN_WORDS, Translator, default_translator
+from .engine import UNTOUCHED_MIN_WORDS, Translator
 from .lint import lint
 from .markup import mask
 from .align import content_words, sentence_texts, counterparts
@@ -58,16 +60,18 @@ class Problem:
 def verify(text: str, *, original: str, level: int | str = 5, vulgarity: int | str | None = None,
            markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
               document_type: str = "general", document_config: dict | None = None,
-           translator: Translator | None = None) -> dict[str, Any]:
+              themes: dict[str, bool] | None = None, invention: bool | None = None,
+           unlock: list[str] | None = None, translator: Translator | None = None) -> dict[str, Any]:
     """Problems in text as a translation of original, worst first, each with a severity: critical (broke the
     document or a fact), major (breaks the brief: the policy, Australian English), minor (craft, or a hint
     worth a look), info (coverage); and metrics that put them in proportion. ok is true with no critical or
     major problem. markup (markdown, mdx, auto) reads the prose only and checks the markup came through.
     english (us, uk, auto, none) is the original's English, for its US and British words; embellishment
     (deadset, dinkum, troppo; None = the selected document type's default) how much longer than the original it may run."""
-    tr = translator or default_translator()
-    eff = tr.effective(level=level, vulgarity=vulgarity, document_config=document_config)
-    checked = lint(text, original=original, level=level, vulgarity=vulgarity, markup=markup,
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
+    tr = translator
+    eff = tr.effective(level=level, vulgarity=vulgarity, unlock=unlock, document_config=document_config)
+    checked = lint(text, original=original, unlock=unlock, level=level, vulgarity=vulgarity, markup=markup,
                    english=english, embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr, suggest=False)
     problems = [Problem(SEVERITY[i["kind"]], i["kind"], i["phrase"],
                         i.get("why") or (f"use {i['australian']}" if i.get("australian") else "fix it"))

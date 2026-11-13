@@ -374,7 +374,7 @@ def test_a_kept_gloss_isnt_a_lint_issue(translator):
 
 def test_lint_in_yarn_mode_doesnt_offer_a_declined_phrase_again(translator):
     from aussiefy.yarn import brief, dispatch_tool
-    s = brief("The kids were very tired after the long day at the shops.", level=4, seed=0, translator=translator)
+    s = brief("The toilet needs cleaning.", level=4, seed=0, translator=translator)
     offered = lambda: {o for x in dispatch_tool(s, "lint", {"text": s.text})[0]["suggestions"] for o in x["options"]}
     planned = next(p for p in s.planned if p in offered())
     dispatch_tool(s, "submit", {"text": s.text, "declined": [{"phrase": "not planned", "reason": "x"},
@@ -389,11 +389,11 @@ def test_yarn_tools_lint_takes_the_declined_file(tmp_path):
     import subprocess
     import sys
     src, draft, declined = tmp_path / "o.txt", tmp_path / "d.txt", tmp_path / "x.yaml"
-    src.write_text("The kids were very tired after the long day at the shops.")
-    draft.write_text("The kids were very tired after the long day at the shops.")
+    src.write_text("The toilet needs cleaning.")
+    draft.write_text("The toilet needs cleaning.")
     run = lambda *extra: json.loads(subprocess.run(
         [sys.executable, "-m", "aussiefy.cli", "yarn-tools", "lint", str(src), str(draft), "-l", "4", "-s", "0",
-         *extra], capture_output=True, text=True).stdout)   # -s 0: "zonked" is planned and offered
+         *extra], capture_output=True, text=True).stdout)   # -s 0: "dunny" is planned and offered
     first = run()
     options = {o for x in first["suggestions"] for o in x["options"]}
     from aussiefy.yarn import brief

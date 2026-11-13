@@ -1,0 +1,353 @@
+{
+ "about": "A real contextual image has its own rich card and maker, alongside a retained source or substitution.",
+ "request": {
+  "text": "She is hungry.",
+  "level": 5,
+  "vulgarity": 0,
+  "seed": 0,
+  "embellishment": 2,
+  "document_config": {
+   "garnish": [
+    "riff"
+   ],
+   "profile": {
+    "garnish": {
+     "riff": 1
+    }
+   }
+  }
+ },
+ "response": {
+  "version": 3,
+  "text": "She's peckish, with a belly growling like a mixer full of rocks.",
+  "card_version": 3,
+  "dictionary_id": "sha256:496709d81060f0473db8b76afe8696f2df2c592d7b612350663e4cf5732549af",
+  "tuning": {
+   "popularity": false,
+   "preferences": 0
+  },
+  "warnings": [],
+  "warning_details": [],
+  "changes": [
+   {
+    "id": "phonetic:0-6:pronoun-be",
+    "kind": "phonetic",
+    "src_span": [
+     0,
+     6
+    ],
+    "out_span": [
+     0,
+     5
+    ],
+    "original": "She is",
+    "output": "She's",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "pronoun-be",
+     "kind": "drawl",
+     "min_level": 4,
+     "before": "She is",
+     "after": "She's"
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": [],
+    "evidence": null,
+    "coined_by": null
+   },
+   {
+    "id": "substitution:7-13",
+    "kind": "substitution",
+    "src_span": [
+     7,
+     13
+    ],
+    "out_span": [
+     6,
+     13
+    ],
+    "original": "hungry",
+    "output": "peckish",
+    "entry_id": "peckish",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "peckish",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "peckish",
+      "out_span": [
+       6,
+       13
+      ],
+      "vulgarity": 0,
+      "weight": 0.43820224719101125,
+      "masks": []
+     },
+     {
+      "entry_id": "hungry-enough-horse-jockey",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "hungry enough to eat a horse'n chase the jockey",
+      "out_span": [
+       6,
+       13
+      ],
+      "vulgarity": 0,
+      "weight": 0.22471910112359547,
+      "masks": []
+     },
+     {
+      "entry_id": "starvin",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "starvin'",
+      "out_span": [
+       6,
+       13
+      ],
+      "vulgarity": 0,
+      "weight": 0.33707865168539325,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "match": {
+     "key": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+     "root": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+     "qualifiers": {}
+    },
+    "evidence": "unverified",
+    "coined_by": null
+   },
+   {
+    "id": "garnish:13-13:riff",
+    "kind": "garnish",
+    "src_span": [
+     13,
+     13
+    ],
+    "out_span": [
+     13,
+     63
+    ],
+    "original": "",
+    "output": ", with a belly growling like a mixer full of rocks",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "riff",
+    "image_id": "belly-mixer-rocks",
+    "removed": {
+     "out_span": [
+      13,
+      63
+     ],
+     "rendered": ""
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": [],
+    "evidence": "bulldust",
+    "coined_by": "agent"
+   }
+  ],
+  "entries": {
+   "hungry-enough-horse-jockey": {
+    "id": "hungry-enough-horse-jockey",
+    "form": "hungry enough to eat a horse and chase the jockey",
+    "gloss": "Ravenous.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "media",
+      "publisher": "warrenfahey.com.au",
+      "supports": [],
+      "url": "https://warrenfahey.com.au/colloquial-sayings-slangugae/",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "media",
+      "publisher": "mythicaustralia.com",
+      "supports": [],
+      "url": "https://mythicaustralia.com/wp-content/uploads/2020/01/Mythic-Australia-Book-Land-Of-Adventure.pdf",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "peckish": {
+    "id": "peckish",
+    "form": "peckish",
+    "gloss": "A bit hungry.",
+    "frame": "adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "notes": "Shared with British English.",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/peckish",
+      "note": "Reviewed 2026-10-21: selected form/sense; 222–228. Explicit slight hunger severity. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "starvin": {
+    "id": "starvin",
+    "form": "starvin'",
+    "gloss": "Very hungry.",
+    "frame": "adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [],
+      "url": "https://www.collinsdictionary.com/dictionary/english/starving",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   }
+  },
+  "constructions": {},
+  "imagery": {
+   "belly-mixer-rocks": {
+    "id": "belly-mixer-rocks",
+    "text": "with a belly growling like a mixer full of rocks",
+    "usage": "Hunger with an imagined noisy belly; comparison, not a new event.",
+    "form": "suffix",
+    "subject": "person",
+    "exaggeration": 2,
+    "level": 3,
+    "vulgarity": 0,
+    "tone": "comic",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "frames": [
+     "predicate_adj",
+     "clause",
+     "vp"
+    ],
+    "related": [],
+    "unless_after": [
+     "for",
+     "to"
+    ],
+    "sources": [],
+    "searched": {
+     "date": "2026-10-19",
+     "outcome": "nothing_found",
+     "note": "Imagery Source Search, 2026-10-19 (Brain): partial coverage; no keyed Trove full text, ANDC or Macquarie search. See migration review for sources and limitations."
+    },
+    "produced_by": "agent",
+    "origin": "unknown",
+    "register": "current",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "bulldust",
+    "coined_by": "agent",
+    "minimum_vulgarity": 0
+   }
+  },
+  "withheld": []
+ }
+}

@@ -46,25 +46,26 @@ def _opener_offer(dictionary, cap, *, used=None):
 
 @pytest.mark.parametrize("cap", [2, 3])
 def test_variant_preference_survives_composition_and_garnish_weighting(dictionary, cap):
-    family = next(f for f in dictionary.construction_catalog.families if f.id == "sideways-call-title")
-    weights = {}
-    for stem in ("bugger-sideways", "fuck-sideways"):
-        pinned = replace(family, converted_parts=(("stem", stem), ("ending", "call-me-the-pope")))
-        d = replace(dictionary, construction_catalog=replace(dictionary.construction_catalog, families=(pinned,)))
-        offer = _opener_offer(d, cap)
-        weights[stem] = next(weight for candidate, weight in zip(offer.pool, offer.weights, strict=True)
-                             if isinstance(candidate, Construction))
+    offer = _opener_offer(dictionary, cap)
+    weights = {c.parts[0].ingredient.id: weight
+               for c, weight in zip(offer.pool, offer.weights, strict=True)
+               if isinstance(c, Construction) and c.family.id == "sideways-call-title"
+               and c.parts[1].ingredient.id == "call-me-the-pope"}
     assert weights["bugger-sideways"] > weights["fuck-sideways"]
 
 
-def test_only_converted_expression_reaches_translation_before_invention(dictionary):
-    for cap in (2, 3):
-        candidates = [c for c in _opener_offer(dictionary, cap).pool if isinstance(c, Construction)]
-        assert [c.text for c in candidates] == ["bugger me sideways'n call me the pope"]
+def test_reviewed_constructed_openers_obey_invention(dictionary):
     tr = Translator(dictionary)
-    setting = resolve_document(None, config=dictionary.genres, document_type="general").setting(2)
-    # The standalone operation still exposes other reviewed constructions.
-    generated = generate(dictionary, tr.effective(vulgarity=2), setting, placement="opener")
+    context = resolve_document(None, config=dictionary.genres, document_type="general")
+    for step in (0, 1, 2):
+        setting = context.setting(step)
+        offer = garnish_offer("opener", dictionary, tr.effective(vulgarity=3), 0, (0,), {},
+                              contexts={"any"}, swear=True, setting=setting)
+        constructed = [c for c in offer.pool if isinstance(c, Construction)]
+        assert bool(constructed) == (step == 2)
+        if constructed:
+            assert {c.family.id for c in constructed} == {"sideways-call-title", "sideways-with-implement"}
+    generated = generate(dictionary, tr.effective(vulgarity=2), context.setting(2), placement="opener")
     assert {c.family.id for c in generated.candidates} == {"sideways-call-title", "sideways-with-implement"}
     assert any(c.parts[0].ingredient.entry_id == "fuck-me-sideways" for c in generated.candidates)
 
@@ -76,32 +77,30 @@ def test_stem_reuse_and_construction_identity_survive_translation_and_plans(dict
     d = replace(dictionary, entries=entries,
                 construction_catalog=replace(dictionary.construction_catalog, families=(family, alternate)))
     choices = [c for c in _opener_offer(d, 2).pool if isinstance(c, Construction)]
-    assert len(choices) == 2 and len({c.id for c in choices}) == 2
-    assert not _opener_offer(d, 2, used={"bugger-me-sideways": 1}).pool
+    assert len(choices) == 4 and len({c.id for c in choices}) == 4
+    remaining = _opener_offer(d, 2, used={"bugger-me-sideways": 1}).pool
+    assert remaining and not any("bugger-me-sideways" in c.usage_ids for c in remaining)
     tr = Translator(d)
     source = "The river is flowing through the valley. The house stands beside the road."
     config = {"garnish": ["opener"], "profile": {"garnish": {"opener": 1}, "garnish_gap": 0,
               "max_garnish": {"opener": 20}, "swearing": {"exclaim": 1}, "phonetic": 0}}
-    opts = dict(translator=tr, vulgarity=2, embellishment=2, seed=2, document_config=config)
-    result = translate(source, **opts)
-    made = [g for g in result.garnish if g.construction]
-    assert len(made) == 1
-    identity = made[0].construction.id
-    assert any(g.get("construction_id") == identity for g in result.to_dict()["explain"])
-    assert [g["construction_id"] for g in harness.plan(source, **opts)["garnish"]] == [identity]
-    first = translate("Wow! " + source, **opts)
-    assert any(r.substituted and r.chosen.entry.id == "bugger-me-sideways" for r in first.records)
-    assert not any(g.construction for g in first.garnish)
-    exercised = False
-    for seed in range(8):
-        later = translate(source + " Wow!", **{**opts, "seed": seed})
-        if not any(g.construction for g in later.garnish):
-            continue
-        exercised = True
-        assert not any(r.substituted and r.chosen.entry.id == "bugger-me-sideways" for r in later.records)
-        assert any(entry_id == "bugger-me-sideways" and "already used" in reason
-                   for r in later.records for entry_id, reason in r.rejected)
-    assert exercised
+    opts = dict(translator=tr, vulgarity=2, embellishment=2, document_config=config)
+    made = bare = 0
+    stems = {"bugger-me-sideways", "fuck-me-sideways"}
+    for text in (source, "Wow! " + source, source + " Wow!"):
+        for seed in range(8):
+            result = translate(text, seed=seed, **opts)
+            selected = [g.construction for g in result.garnish if g.construction]
+            used = [i for c in selected for i in c.usage_ids if i in stems]
+            used += [r.chosen.entry.id for r in result.records if r.substituted and r.chosen.entry.id in stems]
+            assert len(used) == len(set(used)), (text, seed, used)
+            made += len(selected)
+            bare += sum(r.substituted and r.chosen.entry.id in stems for r in result.records)
+            identities = [c.id for c in selected]
+            assert [g["construction_id"] for g in harness.plan(text, seed=seed, **opts)["garnish"]] == identities
+            explained = {g.get("construction_id") for g in result.to_dict()["explain"]}
+            assert set(identities) <= explained
+    assert made and bare
 
 
 def test_re_review_records_individual_readings_and_applied_tiers(dictionary):

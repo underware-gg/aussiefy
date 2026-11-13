@@ -5,18 +5,17 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
-- Revise the non-active v3 review draft after site feedback: local part/riff spans, unique persistent option
-  keys, explicit bulldust makers, uniform themes, construction glosses, card versions and coded warning
-  details. Add full-card lookup projections. Active changes remain v2; runtime warning strings are preserved.
+- Activate the accepted changes/cards v3 contract together: rich entry, construction and imagery cards;
+  rendering-local part/riff spans; persistent unique option keys; source matches; attributable bulldust;
+  dictionary/tuning headers; coded warnings and versioned lookup, including empty results.
+- Add reviewed construction fallback before the substitution roll and all constructed openers under
+  the invention switch (Troppo on, otherwise off). Share ordinary fit/realisation and agent scaffold.
+  Expose exact top-level themes/invention, public popularity/preferences and host-only MCP preference
+  hooks with independent capability controls and a tool allowlist.
+- Add source/dictionary/seed-scoped request pins for entries, construction recipes, stacks, riffs,
+  imagery and garnish. Keep hard eligibility/protection checks, reject unused picks, share one packet
+  across Markdown units, and expose optional editor replay helpers outside the v3 response schema.
 
-- Prepare internal document tuning once, retain immutable per-unit usage, and count a preference only once
-  across a whole Markdown document. Validate and report unknown preferences even without prose. Add
-  non-active v3 changes/card schema review assets and examples; active public output remains v2.
-
-- Implement the remaining internal selection tuning: popularity uses the wider community band, and
-  latest-first personal preferences use an exact source key before a same-root fallback. Validate
-  weights, warn about unknown records, and preserve eligibility, evidence, repeats and substitution
-  rolls. Public controls and reporting remain with the coordinated contract update.
 
 - Apply loaded community adjustments to eligible substitution weights within their normal band and exact
   source-match/dial context, before variety pruning. Keep meaning, permissions, evidence and substitution
@@ -42,7 +41,7 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
   expressions, wordless outcomes and established-meaning ranking.
 - Share rich discovery cards with structured provenance, resolved tag tiers and default placement;
   report match-kind codes and dictionary identity. Decouple hosted discovery of held-back entries
-  from translation unlocks. Changes-v2 cards remain unchanged until the coordinated contract bump.
+  from translation unlocks. Shared cards move together in the v3 producer update.
 
 - Add counterfactual evidence and an audit command for protected phrases, including overlapping
   protections, wordless readings and guarded dialect swaps. Allow checked contextual examples.

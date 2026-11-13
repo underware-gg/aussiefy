@@ -7,13 +7,15 @@ suggestions are optional spots the engine would swap.
 
 from __future__ import annotations
 
+from .engine import resolve_request
+
 import re
 from collections import Counter
 from typing import Any, Sequence
 
 from .context import sentence_contexts
 from .dialect import Found, text_english
-from .engine import Translator, default_translator
+from .engine import Translator
 from . import morph
 from .genre import Embellishment, Genre, resolve_document
 from .markup import markup_changed, mask
@@ -28,7 +30,8 @@ from .text import document_spans, HONORIFICS, Token, capital_is_positional, head
 def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
          original: str | None = None, markup: str = "text", english: str | None = None,
          embellishment: int | str | None = None,
-              document_type: str = "general", document_config: dict | None = None, translator: Translator | None = None,
+              document_type: str = "general", document_config: dict | None = None,
+              themes: dict[str, bool] | None = None, invention: bool | None = None, unlock: list[str] | None = None, translator: Translator | None = None,
          suggest: bool = True) -> dict[str, Any]:
     """Lint an Aussified draft. Issues are things to fix; suggestions are optional extra Aussie.
     Pass the original text to also check fidelity: length, and names and numbers kept or invented.
@@ -38,8 +41,9 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     the selected document type's default) sets how much longer than the original a retelling may run.
     suggest=False skips the suggestions (a whole engine translation) for a check that doesn't show them:
     verify, and yarn mode's submit."""
-    tr = translator or default_translator()
-    pol = tr.policy(english=english, embellishment=embellishment, document_type=document_type, document_config=document_config)
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
+    tr = translator
+    pol = tr.policy(unlock=unlock, english=english, embellishment=embellishment, document_type=document_type, document_config=document_config)
     dial = pol.english
     changed = markup_changed(text, original, markup) if original is not None else []
     # the US and British words are read as the engine read the original: its English, and its genre (a
@@ -51,7 +55,7 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     text = mask(text, markup).prose()
     original = source.prose() if original is not None else None
     d = tr.dictionary
-    eff = tr.effective(level=level, vulgarity=vulgarity, document_config=document_config)
+    eff = tr.effective(level=level, vulgarity=vulgarity, unlock=unlock, document_config=document_config)
     cap = eff.vulgarity
     low = " " + fold(text) + " "
     # what the original itself says isn't the translator's word ("cooked" in a recipe, a quoted swear)
@@ -84,8 +88,10 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     def outside(match, spans):
         return not any(a <= match.start() and match.end() <= b for a, b in spans)
 
+    from .evidence import metadata_rejections
     for e in d.entries.values():
-        if e.status == "active" and not e.held_back and e.vulgarity <= cap:
+        blocked = metadata_rejections(e, allow_misreadable=eff.allow_misreadable)
+        if e.status == "active" and not blocked and e.vulgarity <= cap:
             continue
         # gated as general English ("dear" for expensive, "dicey"): not wrong, just not Aussie-specific
         if e.reads_as == "general":
@@ -99,7 +105,7 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
             # "{poss} fella" stripped to "fella" would flag every fella
             if PLACEHOLDER_RE.search(form) and " " not in f:
                 continue
-            if e.held_back and " " not in f and f in d.plain_words:
+            if blocked and " " not in f and f in d.plain_words:
                 continue   # a gated "blow" (boast) would flag every "blow over"
             word_re = r"(?<![a-z])" + re.escape(f) + r"(?![a-z])"
             # the original's own uses are its own; more than it has are the translator's
@@ -107,7 +113,7 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
             source_count = sum(outside(m, mild_source) or e.vulgarity <= cap for m in re.finditer(word_re, orig_low))
             if len(f) < 4 or current <= source_count:
                 continue
-            if e.status != "active" or e.held_back:
+            if e.status != "active" or blocked:
                 issues.append({"kind": "flagged", "phrase": form, "status": e.status, "flags": list(e.flags),
                                "why": e.notes or "flagged in the dictionary"})
             elif e.vulgarity > cap:
@@ -153,7 +159,7 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     issues += composition_issues(text, original, aussie_spans, d)
     issues += degree_issues(text, original, aussie_spans, d)
 
-    suggestions = _suggestions(text, low, aussie_spans, level, vulgarity, tr, read_as, read_english, dial, pol.embellishment) if suggest else []
+    suggestions = _suggestions(text, low, aussie_spans, level, vulgarity, tr, read_as, read_english, dial, pol.embellishment, unlock=unlock) if suggest else []
     fixed = {fold(issue["phrase"]) for issue in issues if issue.get("australian")}
     suggestions = [item for item in suggestions if fold(item["text"]) not in fixed]
 
@@ -201,11 +207,11 @@ def _semantic_issues(text: str, original: str | None, spans: list[tuple[int, int
 
 
 def _suggestions(text: str, low: str, aussie_spans: list, level: int | str, vulgarity: int | str | None,
-                 tr: Translator, genre: Genre, english: str | None, dial: str, embellishment: int | None = None) -> list[dict[str, Any]]:
+                 tr: Translator, genre: Genre, english: str | None, dial: str, embellishment: int | None = None, *, unlock=None) -> list[dict[str, Any]]:
     """What the rule engine would still Aussify in a draft: optional, ranked by how sure it is. A whole engine
     translation, so the checks that don't show suggestions (verify, yarn's submit) skip it. It reads the draft in
     the original's genre: a voiced policy reads as a story, but its gift is no pressie."""
-    result = tr.translate(text, level=level, vulgarity=vulgarity, embedder="none", english=dial,
+    result = tr.translate(text, unlock=unlock, level=level, vulgarity=vulgarity, embedder="none", english=dial,
                           embellishment=embellishment, document_type=genre.name,
                           document_config=genre.overrides, _context=(genre, english))
     suggestions = []
@@ -385,7 +391,7 @@ def fidelity(text: str, original: str, *, max_length: float | None = None, check
 
     These are warnings, not issues: a yarn may trim a list or name a local thing ("Parliament House" for
     "Congress"), but each should be a choice, not drift."""
-    tr = translator or default_translator()
+    tr = translator
     out: list[dict[str, Any]] = []
     n_text, n_orig = len(text.split()), len(original.split())
     if max_length is None:

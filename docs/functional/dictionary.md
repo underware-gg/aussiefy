@@ -195,9 +195,10 @@ review. Well, historical witnesses don't establish current commonness. The resea
 decisions are in [the source-audit checkpoint](../../research/community-dictionary-2026-10-20/inherited-source-audit.md).
 These checks preserve usage/meaning holds'n don't change the provisional scorin' threshold.
 
-Anyway, changes contract version 2 still carries URL strings in entry cards. The coordinated new card'n changes
-contract lands in package slice 6; internal source objects are already structured. Riff'n imagery offers
-carry their own evidence metadata. See [DD-040](../architecture/decisions/dd-040-term-evidence-and-usage.md).
+Changes/cards v3 share structured sources, evidence, resolved theme tiers'n attributable makers across
+lookup, change cards, riffs'n imagery. Constructors keep whole\-expression evidence separate from
+their parts. The frozen [changes contract](changes.md) defines local spans, joins'n replay inputs.
+See [DD-040](../architecture/decisions/dd-040-term-evidence-and-usage.md).
 
 `riffs.yaml` maps entry IDs to optional images, each with `text` and `tone` (`comic`, `grim` or `plain`).
 Anyway, these can include original comparisons as well as familiar imagery; they aren't additional meanings or
@@ -230,7 +231,7 @@ Keep distinct meanings in distinct concepts. A `lout` isn't necessarily a `reckl
 concepts, but its direct `replaces` patterns then introduce all of those concepts: prefer the individual
 concept triggers when those meanings need different candidates.
 
-Named cultural references such as `Goon of Fortune` and `Hills Hoist` are retained with specific meanings;
+Now, named cultural references such as `Goon of Fortune` and `Hills Hoist` are retained with specific meanings;
 they don't turn every drinkin' game or rotary clothesline into the named game or brand. Appetite phrases
 such as “could do with a feed” and “wouldn't say no to some tucker” have direct mappings for corresponding
 conditional requests, plus writer\-only hunger suggestions for contexts requirin' tense or modal judgement.

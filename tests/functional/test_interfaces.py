@@ -23,6 +23,7 @@ VALUES = {"family": "hungry-enough-to", "parts": {"state": "hungry", "act": "sau
           "document_type": "custom", "document_config": {"garnish": [], "keep_quotes": True, "narrator_opinion": True, "themes": {"violence": True, "drinking": False},
               "profile": {"garnish": {"opener": 1}, "max_garnish": {"opener": 1}}},
           "embellishment": 2, "suggest": False, "markdown": False, "concept": "HUNGRY", "theme": "sex",
+          "themes": {"drinking": False}, "invention": True, "popularity": True, "preferences": [],
           "entry_id": "stoked", "offset": 2, "shape": "place"}
 SUBJECT = {"list_entries": (None, None), "list_wordless_meanings": (None, None), "random_entry": (None, None), "suggest_name": (None, None),
            "get_entry": ("entry_id", "stoked"), "variations": ("family", "hungry-enough-to"), "lookup": ("query", "very tired"), "lint": ("text", "G'day mate."), "plan": ("text", "She was tired."),
@@ -30,6 +31,7 @@ SUBJECT = {"list_entries": (None, None), "list_wordless_meanings": (None, None),
            "verify": ("text", "She was knackered.")}
 # CLI flags for each parameter (the CLI says --region for one region list, as people type it)
 FLAGS = {"family": ["--family", "hungry-enough-to"], "parts": ["--parts", '{"state":"hungry","act":"sausage-shadow"}'], "level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity", "1"],
+         "themes": ["--themes", '{"drinking":false}'], "invention": ["--invention"], "popularity": ["--popularity"], "preferences": ["--preferences", "[]"],
          "variety": ["--variety", "2"], "registers": ["--registers", "current,dated"],
          "regions": ["--region", "qld"], "unlock": ["--unlock", "misreadable"], "limit": ["--limit", "3"],
          "include_gated": ["--include-gated"], "markup": ["--markup", "markdown"],
@@ -38,7 +40,7 @@ FLAGS = {"family": ["--family", "hungry-enough-to"], "parts": ["--parts", '{"sta
 
 
 def _params(fn):
-    return {n: p.default for n, p in inspect.signature(fn).parameters.items() if n != "translator"}
+    return {n: p.default for n, p in inspect.signature(fn).parameters.items() if n != "translator" and not n.startswith("_")}
 
 
 def _spy(monkeypatch, name):
@@ -72,8 +74,10 @@ def test_mcp_tools_mirror_the_harness(server):
     assert set(tools) == set(TOOLS)
     for name, fn in TOOLS.items():
         schema = tools[name].input_schema["properties"]
-        assert set(schema) == set(_params(fn)), name
+        assert set(schema) == set(_params(fn)) - {"preferences"}, name
         for param, default in _params(fn).items():
+            if param == "preferences":
+                continue
             if default is not inspect.Parameter.empty:
                 assert schema[param].get("default") == default, (name, param)
 
@@ -83,7 +87,7 @@ def test_mcp_tools_forward_every_argument(server, monkeypatch):
         name = fn.__name__
         calls = _spy(monkeypatch, name)
         subject, value = SUBJECT[name]
-        args = {p: VALUES[p] for p in _params(fn) if p in VALUES} | ({subject: value} if subject else {})
+        args = {p: VALUES[p] for p in _params(fn) if p in VALUES and p != "preferences"} | ({subject: value} if subject else {})
         asyncio.run(server.call_tool(tool, args))
         assert calls, tool
         got = {k: v for k, v in calls[-1].items() if k in VALUES}

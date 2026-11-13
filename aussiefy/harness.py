@@ -16,17 +16,20 @@ the MCP server (`aussiefy-mcp`: aussie_lookup ...), retelling sessions and the p
 """
 from __future__ import annotations
 
+from .engine import resolve_request
+
 from typing import Any
 
 from .context import RIFF_TONES_FOR, tone_weight
 from . import translation
-from .engine import Result, Translator, default_translator
+from .engine import Result, Translator
 from .guide import guide, openings, style_guide_data
 from .lint import fidelity, lint
 from .cards import riff_cards
 from .lookup import lookup
 from .verify import verify
-from .bulldust import bulldust, variations
+from .bulldust import bulldust, variations, scaffold
+from .v3_contract import construction_card, provenance
 from .explore import get_entry, list_entries, list_wordless_meanings, random_entry, suggest_name
 
 __all__ = ["list_entries", "list_wordless_meanings", "get_entry", "random_entry", "suggest_name", "variations", "lookup", "lint", "guide", "plan", "translate", "verify", "bulldust", "fidelity", "openings"]
@@ -36,7 +39,10 @@ def translate(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int 
               variety: int = 0, registers: list[str] | None = None, regions: list[str] | None = None,
               unlock: list[str] | None = None, markdown: bool = False, markup: str = "text", english: str | None = None,
               embellishment: int | str | None = None,
-              document_type: str = "general", document_config: dict | None = None, translator: Translator | None = None) -> dict[str, Any]:
+              document_type: str = "general", document_config: dict | None = None,
+              themes: dict[str, bool] | None = None, invention: bool | None = None,
+              popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
+              _preferences_hook=None, translator: Translator | None = None) -> dict[str, Any]:
     """The deterministic rule-engine translation: the same text, level and seed give the same output. variety N
     picks among the N best-fitting terms only (1 = always the best fit; 0 weighs every eligible term). registers
     (current, dated, archaic), regions (e.g. qld) and unlock (flags whose gated entries become eligible) narrow
@@ -44,10 +50,11 @@ def translate(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int 
     links, front matter and headings exactly as they were. english (us, uk, auto, none) is the English the
     text is in, for the US and UK words swapped at every level (faucet -> tap; British pants -> undies only for uk).
     embellishment (deadset, dinkum, troppo; None = the selected document type's default) is how much garnish the telling takes."""
-    tr = translator or default_translator()
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
+    tr = translator
     r = translation.translate(text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
                          registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english,
-                         embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr)
+                         embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr, popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook)
     if markdown:
         return r.to_dict()
     return {"text": r.text, "seed": seed, "variety": variety, **r.envelope(), **_embellished(r)}
@@ -63,15 +70,24 @@ def plan(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str
          variety: int = 0, registers: list[str] | None = None, regions: list[str] | None = None,
          unlock: list[str] | None = None, markup: str = "text", english: str | None = None,
          embellishment: int | str | None = None,
-              document_type: str = "general", document_config: dict | None = None, translator: Translator | None = None) -> dict[str, Any]:
+              document_type: str = "general", document_config: dict | None = None,
+              themes: dict[str, bool] | None = None, invention: bool | None = None,
+              popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
+              _preferences_hook=None, translator: Translator | None = None) -> dict[str, Any]:
     """The engine's draft, what it planned, and which sentences it couldn't carry (best done by hand).
     markup, english, embellishment and document policy have the same defaults and meanings as translate."""
-    tr = translator or default_translator()
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
+    tr = translator
 
     r = translation.run(text, translator=tr, level=level, seed=seed, vulgarity=vulgarity,
                      variety=variety, registers=registers, regions=regions, unlock=unlock, markup=markup,
-                     english=english, embellishment=embellishment, document_type=document_type, document_config=document_config)
+                     english=english, embellishment=embellishment, document_type=document_type, document_config=document_config, popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook)
     decided = r.decisions()
+    eff = tr.effective(level=r.level, vulgarity=r.vulgarity, registers=registers, regions=regions,
+                       unlock=unlock, document_config=document_config)
+    constructions = {c.id: construction_card(c, tr.dictionary, permitted_themes=r.theme_policy)
+                     for c in [*(x.chosen.construction for x in r.records if x.chosen and x.chosen.construction),
+                               *(g.construction for g in r.garnish if g.construction)]}
     for g in decided["garnish"]:
         g["sentence_text"] = r.sentence_text(g["sentence"])
     return {
@@ -79,11 +95,22 @@ def plan(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str
         **r.envelope(),
         **_embellished(r),
         "seed": seed,
+        "replay_pins": r.replay_pins(),
         # a riff is optional colour: the planned phrase is the term, not "bush, miles from the nearest servo"
-        "planned": [{"original": r.source[slice(*x.out_span)], "span": list(x.out_span), "entry": x.chosen.entry.id,
+        "planned": [{"original": r.source[slice(*x.out_span)], "span": list(x.out_span),
+                     "entry": None if x.chosen.construction else x.chosen.entry.id,
+                     "construction_id": x.chosen.construction.id if x.chosen.construction else None,
+                     **provenance(x.chosen.construction.metadata if x.chosen.construction else x.chosen.entry),
+                     "parts": [{"role": p.role, "ingredient_id": p.ingredient.id,
+                                "entry_id": p.ingredient.entry_id, "out_span": list(span),
+                                **provenance(p.ingredient.metadata)}
+                               for p, span in zip(x.chosen.construction.parts, x.part_spans, strict=True)]
+                              if x.chosen.construction else [],
                      "aussie": x.term, "gloss": x.chosen.entry.gloss or "",
                      **({"semantic_effects": list(x.chosen.semantic_effects)}
                         if x.chosen.semantic_effects else {})} for x in r.records if x.substituted],
+        "constructions": constructions,
+        "scaffold": scaffold(tr.dictionary, eff, r.embellishment, mood=r.mood),
         "garnish": decided["garnish"],
         # plain Australian for US and British words (faucet -> tap): not slang, so not planned phrases
         "dialect": decided["dialect"],
@@ -111,7 +138,7 @@ def _riff_offers(r: Result) -> list[dict[str, Any]]:
         if not r.embellishment.entry_riffs:
             break
         for c in sorted(x.eligible, key=lambda c: (c.entry.id != (x.chosen.entry.id if x.chosen else ""), -c.weight, c.entry.id)):
-            cards = riff_cards(c.entry, r.vulgarity, r.theme_policy, registers=r.registers)
+            cards = riff_cards(c.entry, r.vulgarity, r.theme_policy, registers=r.registers, allow_misreadable=r.allow_misreadable)
             if cards and c.entry.form not in offers:
                 offers[c.entry.form] = {"term": c.entry.form, "for": x.text, "riffs": [
                     {**card, "suits_mood": card["tone"] in RIFF_TONES_FOR[r.mood]}

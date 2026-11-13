@@ -5,6 +5,8 @@ remain available for existing CLI, Python and research callers.
 """
 from __future__ import annotations
 
+from .engine import resolve_request
+
 import json
 from dataclasses import asdict, dataclass, field
 from typing import Any
@@ -37,7 +39,7 @@ class YarnResult:
     outcome: str = "fell_back"   # "applied" (a yarn was accepted, now or from the cache) or "fell_back" (the draft)
 
     def to_dict(self) -> dict[str, Any]:
-        return {"text": self.text, "outcome": self.outcome, "status": self.status, "draft": self.draft, "model": self.model,
+        return {**{k: self.plan[k] for k in ("dictionary_id", "tuning", "warnings", "warning_details")}, "text": self.text, "outcome": self.outcome, "status": self.status, "draft": self.draft, "model": self.model,
                 "tool_calls": self.tool_calls, "declined": self.declined, "plan": self.plan}
 
 
@@ -46,14 +48,17 @@ def yarn(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str
          cache_dir: str | None = None,
          max_turns: int = 12, english: str | None = None, embellishment: int | str | None = None,
               document_type: str = "general", document_config: dict | None = None,
+              themes: dict[str, bool] | None = None, invention: bool | None = None,
+              popularity: bool = False, preferences: list[dict] | None = None,
          translator: Translator | None = None) -> YarnResult:
     """Run yarn mode: brief the model, answer its tool calls, accept the first submit that validates. Only the
     Anthropic SDK and API calls are guarded (offline, no key, API errors keep the engine's draft); a bug in the
     harness or validation raises. markup (markdown, mdx, auto): the model retells the prose only, and a
     submission that changes any code or markup is sent back. english as for translate; embellishment as for
     translate: General defaults to Dinkum, named types supply presets."""
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     session = brief(text, level=level, seed=seed, vulgarity=vulgarity, markup=markup, english=english,
-                    embellishment=embellishment, document_type=document_type, document_config=document_config, translator=translator)
+                    embellishment=embellishment, document_type=document_type, document_config=document_config, translator=translator, popularity=popularity, preferences=preferences)
     result = YarnResult(session.plan["draft"], "", session.plan["draft"], session.plan, {}, model)
 
     key_payload = {"BRIEF": session.payload, "PLAN": session.plan, "VALIDATION": VALIDATION_VERSION,

@@ -8,7 +8,8 @@ from typing import TYPE_CHECKING, Any
 
 from .schema import Entry
 from .evidence import metadata_dict
-from .themes import ThemePermissions, ThemePolicy
+from .errors import SchemaError
+from .themes import ThemePolicy
 
 if TYPE_CHECKING:
     from .genre import Embellishment
@@ -19,10 +20,10 @@ def shows_riffs(setting: "Embellishment") -> bool:
     return setting.entry_riffs and setting.takes("riff")
 
 
-def riff_cards(e: Entry, cap: int, permitted_themes: ThemePermissions, *, registers) -> list[dict[str, Any]]:
+def riff_cards(e: Entry, cap: int, permitted_themes: ThemePolicy, *, registers, allow_misreadable=False) -> list[dict[str, Any]]:
     """An entry's riffs under the cap, as the toolkit shows them (best first)."""
-    return [{"text": r.text, "tone": r.tone, **metadata_dict(r, derived=True), **({"best": True} if i == 0 else {})}
-            for i, r in enumerate(e.riffs_within(cap, permitted_themes, registers=registers))]
+    return [{"text": r.text, "tone": r.tone, **metadata(r, permitted_themes), **({"best": True} if i == 0 else {})}
+            for i, r in enumerate(e.riffs_within(cap, permitted_themes, registers=registers, allow_misreadable=allow_misreadable))]
 
 
 def short_card(e: Entry) -> dict[str, Any]:
@@ -39,8 +40,7 @@ def short_card(e: Entry) -> dict[str, Any]:
     return card
 
 
-def entry_card(e: Entry, cap: int = 3, riffs: bool = True, *,
-               permitted_themes: ThemePermissions, registers) -> dict[str, Any]:
+def _entry_fields(e: Entry) -> dict[str, Any]:
     """The full card: meaning, level and vulgarity, register and region, notes, sources, the riffs under the
     vulgarity cap (riffs: whether the embellishment takes the entry's riffs at all), and a gated entry's flags
     (shown only where the policy unlocked it)."""
@@ -50,16 +50,12 @@ def entry_card(e: Entry, cap: int = 3, riffs: bool = True, *,
         card["semantic_effects"] = list(e.semantic_effects)
     if e.placement:
         card["placement"] = e.placement
-    if riffs and (cards := riff_cards(e, cap, permitted_themes, registers=registers)):
-        card["riffs"] = cards
     if e.variants:
         card["variants"] = list(e.variants)
     if e.region:
         card["region"] = list(e.region)
     if e.notes:
         card["notes"] = e.notes
-    if e.sources:
-        card["sources"] = [s.url for s in e.sources if s.url]
     if e.replaces:
         card["replaces"] = [r.split("@")[0] for r in e.replaces]
     if e.held_back:
@@ -67,15 +63,40 @@ def entry_card(e: Entry, cap: int = 3, riffs: bool = True, *,
     return card
 
 
-def full_entry_card(e: Entry, cap: int = 3, riffs: bool = True, *,
-                    permitted_themes: ThemePolicy, registers) -> dict[str, Any]:
-    """The discovery card, with structured provenance and default subject placement.
+CARD_VERSION = 3
 
-    Changes v2 retains entry_card until the coordinated changes-contract bump.
-    """
-    tiers = permitted_themes.tag_tiers(e)
-    return {**entry_card(e, cap, riffs, permitted_themes=permitted_themes, registers=registers),
-            **metadata_dict(e, derived=True), 'type': e.type, 'status': e.status,
-            'held_back': list(e.held_back),
-            'themes': [{'name': name, 'tier': tier} for name, tier in tiers.items()],
-            'minimum_vulgarity': max([e.vulgarity, *tiers.values()])}
+def provenance(term):
+    coiner = term.coined_by
+    if term.evidence == 'bulldust':
+        coiner = coiner or ('agent' if term.produced_by == 'agent' else None)
+        if coiner is None:
+            raise SchemaError('bulldust metadata has no attributable maker')
+    return {'evidence': term.evidence, 'coined_by': coiner}
+
+
+def metadata(term, permitted_themes: ThemePolicy, *, vulgarity=None):
+    """Presentation attribution does not rewrite who authored or retrieved a stored record."""
+    result = metadata_dict(term, derived=True)
+    maker = provenance(term)['coined_by']
+    if maker is not None:
+        result['coined_by'] = maker
+    tiers = permitted_themes.tag_tiers(term)
+    result['themes'] = [{'name': name, 'tier': tier} for name, tier in tiers.items()]
+    result['minimum_vulgarity'] = max([getattr(term, 'vulgarity', 0) if vulgarity is None else vulgarity,
+                                     *tiers.values()])
+    return result
+
+
+def entry_card(e, cap=3, riffs=True, *, permitted_themes: ThemePolicy, registers, allow_misreadable=False):
+    result = {**_entry_fields(e),
+              **metadata(e, permitted_themes), 'type': e.type, 'status': e.status,
+              'held_back': list(e.held_back)}
+    if riffs:
+        cards = riff_cards(e, cap, permitted_themes, registers=registers,
+                           allow_misreadable=allow_misreadable)
+        if cards:
+            result['riffs'] = cards
+    return result
+
+
+full_entry_card = entry_card

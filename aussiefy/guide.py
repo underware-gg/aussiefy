@@ -5,13 +5,15 @@ and vulgarity, and with each surface's tool names."""
 
 from __future__ import annotations
 
+from .engine import resolve_request
+
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
 from string import Formatter
 from typing import Any
 
-from .engine import Translator, default_translator
+from .engine import Translator
 from .loader import DATA_DIR, _read
 from .genre import resolve_document
 from .policy import DOCUMENT_TYPES, EMBELLISHMENTS, LEVELS, VULGARITIES, roll
@@ -155,9 +157,11 @@ def openings(text: str, seed: int = 0, mood: str = "light", n: int = 3) -> list[
 
 def guide(*, level: int | str = 5, vulgarity: int | str | None = None, embellishment: int | str | None = None,
               document_type: str = "general", document_config: dict | None = None,
+              themes: dict[str, bool] | None = None, invention: bool | None = None,
           translator: Translator | None = None) -> dict[str, Any]:
     """The voice, language limits and craft rules for a level and vulgarity, and the toolkit workflow."""
-    tr = translator or default_translator()
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
+    tr = translator
     eff = tr.effective(level=level, vulgarity=vulgarity, document_config=document_config)
     data = style_guide_data()
     pol = tr.policy(embellishment=embellishment, document_type=document_type, document_config=document_config)

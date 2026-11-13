@@ -181,11 +181,46 @@ def _policy(args) -> dict:
 def _steering(args) -> dict:
     """The engine options translate and plan share, as the toolkit's parameters."""
     return {"variety": args.variety, "registers": _csv(args.registers), "regions": _csv(args.regions),
-            "unlock": _csv(args.unlock), "english": args.english, "embellishment": args.embellishment, **_document(args)}
+            "unlock": _csv(args.unlock), "pins": args.pins, **_tuning(args), "english": args.english, "embellishment": args.embellishment, **_document(args)}
 
 
 def _document(args) -> dict:
-    return {"document_type": args.document_type, "document_config": args.document_config}
+    return {"document_type": args.document_type, "document_config": args.document_config,
+            "themes": args.themes, "invention": args.invention}
+
+
+def _tuning(args):
+    return {"popularity": args.popularity, "preferences": args.preferences}
+
+
+def _themes_json(value):
+    from .policy import DocumentOverrides
+    try:
+        raw = json.loads(value)
+        DocumentOverrides.parse({'themes': raw})
+        return raw
+    except (ValueError, UserError) as exc:
+        raise argparse.ArgumentTypeError(str(exc)) from exc
+
+
+def _pins_json(value):
+    try:
+        raw = json.loads(value)
+        if not isinstance(raw, dict):
+            raise UserError('pins must be a JSON object')
+        return raw
+    except (ValueError, UserError) as exc:
+        raise argparse.ArgumentTypeError(str(exc)) from exc
+
+
+def _preferences_json(value):
+    try:
+        raw = json.loads(value)
+        if not isinstance(raw, list):
+            raise UserError('preferences must be a latest-first JSON list')
+        return raw
+    except (ValueError, UserError) as exc:
+        raise argparse.ArgumentTypeError(str(exc)) from exc
 
 
 def _document_json(value: str) -> dict:
@@ -247,7 +282,7 @@ def cmd_yarn(args) -> int:
     from .yarn import yarn
 
     result = yarn(_text(args), seed=args.seed, model=args.model, cache=not args.no_cache, markup=args.markup, english=args.english,
-                  embellishment=args.embellishment, **_document(args), translator=_translator(args),
+                  embellishment=args.embellishment, **_document(args), **_tuning(args), translator=_translator(args),
                   **_policy(args))
     if args.json:
         _json(result.to_dict())
@@ -264,7 +299,7 @@ def cmd_yarn_tools(args) -> int:
 
     source = _read(args.source, "source", verbatim=True)
     session = brief(source, seed=args.seed, markup=args.markup, english=args.english,
-                    embellishment=args.embellishment, **_document(args), translator=_translator(args), **_policy(args))
+                    embellishment=args.embellishment, **_document(args), **_tuning(args), translator=_translator(args), **_policy(args))
     if args.declined and args.step == "lint":   # each call is a fresh session: lint learns what was declined here
         session.decline(_declined(args.declined))
     if args.step == "brief":
@@ -310,7 +345,7 @@ def cmd_lookup(args) -> int:
 
     out = harness.lookup(" ".join(args.query), limit=args.limit, include_gated=args.include_gated,
                          short=args.short, embellishment=args.embellishment, **_document(args),
-                         translator=_translator(args), **_policy(args))
+                         translator=_translator(args), unlock=_csv(args.unlock), **_policy(args))
     if args.json:
         _json(out)
         return 0 if out["outcome"] == outcomes.MATCHED else 1
@@ -446,7 +481,7 @@ def cmd_lint(args) -> int:
     original = _read(args.original, "--original") if args.original else None
     out = harness.lint(_text(args), original=original, markup=args.markup, english=args.english,
                        embellishment=args.embellishment, **_document(args), translator=_translator(args), suggest=args.suggest,
-                       **_policy(args))
+                       unlock=_csv(args.unlock), **_policy(args))
     if args.json:
         _json(out)
     else:
@@ -469,7 +504,7 @@ def cmd_verify(args) -> int:
     original = _read(args.original, "--original")
     out = harness.verify(_text(args), original=original, markup=args.markup, english=args.english,
                          embellishment=args.embellishment, **_document(args), translator=_translator(args),
-                         **_policy(args))
+                         unlock=_csv(args.unlock), **_policy(args))
     if args.json:
         _json(out)
         return 0 if out["ok"] else 1
@@ -886,7 +921,11 @@ def build_parser() -> argparse.ArgumentParser:
     filters.add_argument("--registers", help="comma list from current,dated,archaic (default: per level)")
     filters.add_argument("--region", dest="regions", help="comma list of region tags to prefer, e.g. qld")
     filters.add_argument("--unlock", help="comma list of flags whose gated entries become eligible, or 'all'")
-    steering = argparse.ArgumentParser(add_help=False, parents=[filters])
+    tuned = argparse.ArgumentParser(add_help=False)
+    tuned.add_argument('--popularity', action='store_true', help='apply the wider reviewed popularity band')
+    tuned.add_argument('--preferences', type=_preferences_json, metavar='JSON', help='latest-first preference weights')
+    steering = argparse.ArgumentParser(add_help=False, parents=[filters, tuned])
+    steering.add_argument("--pins", type=_pins_json, metavar="JSON", help="explicit source and dictionary scoped replay choices")
     steering.add_argument("--variety", type=int, default=0, metavar="N",
                           help="choose among the N best-fitting slang terms only (1 = always the best fit); "
                                "default 0 = weighted over every eligible term")
@@ -905,6 +944,9 @@ def build_parser() -> argparse.ArgumentParser:
     embellished.add_argument("--document-config", type=_document_json, metavar="JSON",
                              help="exact behaviour overrides as JSON; nested profile tunes rates, limits and spacing; "
                                   "omitted keys inherit, lists replace")
+    embellished.add_argument('--themes', type=_themes_json, metavar='JSON', help='exact per-theme permissions')
+    embellished.add_argument('--invention', action=argparse.BooleanOptionalAction, default=None,
+                             help='allow reviewed constructions (default on at Troppo)')
     toolkit = [dictionary, policy, as_json]
     sub = p.add_subparsers(dest="command", required=True, metavar="COMMAND")
 
@@ -930,7 +972,7 @@ def build_parser() -> argparse.ArgumentParser:
     bd.add_argument("--limit", type=int, default=DEFAULT_LIMIT)
     bd.set_defaults(func=cmd_bulldust)
 
-    y = sub.add_parser("yarn", parents=[*toolkit, english, embellished, seeded, marked, text],
+    y = sub.add_parser("yarn", parents=[*toolkit, english, embellished, tuned, seeded, marked, text],
                        help="Claude retells the whole text as an Aussie yarn, using the toolkit")
     y.add_argument("--model", default=DEFAULT_MODEL, help="Claude model")
     y.add_argument("--no-cache", action="store_true",
@@ -938,7 +980,7 @@ def build_parser() -> argparse.ArgumentParser:
                         "~/.aussiefy unless set)")
     y.set_defaults(func=cmd_yarn)
 
-    yt = sub.add_parser("yarn-tools", parents=[*toolkit, english, embellished, seeded, marked],
+    yt = sub.add_parser("yarn-tools", parents=[*toolkit, english, embellished, tuned, seeded, marked],
                         help="yarn mode by hand: an agent is the model (brief, then lookup, lint and submit)")
     yt.add_argument("step", choices=("brief", "lookup", "lint", "submit"))
     yt.add_argument("source", help="the original text file")
@@ -954,6 +996,7 @@ def build_parser() -> argparse.ArgumentParser:
     lk.add_argument("--limit", type=int, default=8)
     lk.add_argument("--include-gated", action="store_true", help="also show entries held back as doubtful")
     lk.add_argument("--short", action="store_true", help="each result as its form, gloss, frame, level and vulgarity")
+    lk.add_argument("--unlock", help="comma list of permitted held-back flags")
     lk.set_defaults(func=cmd_lookup)
 
     for command in ("entries", "entry", "random-entry"):
@@ -991,6 +1034,7 @@ def build_parser() -> argparse.ArgumentParser:
     ln.add_argument("--original", metavar="FILE", help="the source text: also check length, names and numbers")
     ln.add_argument("--no-suggestions", dest="suggest", action="store_false",
                     help="skip the optional more-Aussie suggestions (a whole engine translation): faster")
+    ln.add_argument("--unlock", help="comma list of permitted held-back flags")
     ln.set_defaults(func=cmd_lint)
 
     vf = sub.add_parser("verify", parents=[*toolkit, marked, english, embellished, text],
@@ -998,6 +1042,7 @@ def build_parser() -> argparse.ArgumentParser:
                              "critical or major)")
     vf.add_argument("--original", metavar="FILE", required=True, help="the source text")
     vf.add_argument("--all", action="store_true", help="also list info items (sentences left as they were)")
+    vf.add_argument("--unlock", help="comma list of permitted held-back flags")
     vf.set_defaults(func=cmd_verify)
 
     jd = sub.add_parser("judge", help="blind, rubric-scored comparison of translations of one original (LLM)")

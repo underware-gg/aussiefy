@@ -212,6 +212,12 @@ first_party:
   reason: Project glosses and wording; scraped entries additionally pass the source-policy gate.
 - glob: aussiefy/data/changes.schema.json
   reason: Project JSON Schema for the changes contract.
+- glob: aussiefy/data/cards.schema.json
+  reason: Project-authored shared rich-card schema, based on the accepted local v3 design.
+- glob: aussiefy/data/lookup-cards.schema.json
+  reason: Project-authored lookup card projection schema, based on the accepted local v3 design.
+- glob: aussiefy/data/pins.schema.json
+  reason: Project-authored request replay protocol schema.
 - glob: aussiefy/data/model/meta.json
   reason: Project training metadata.
 - glob: tests/corpus/sentences.txt

@@ -50,9 +50,13 @@ What `compare`, `gaps` and the `dev` steps do is described in [maintainer-tools.
 | `-s/--seed SEED` | translate, yarn, bulldust, yarn-tools, plan, judge brief/run | Seed for the weighted choices (default 0). `random` picks one and prints it to stderr |
 | `--json` | translate, yarn, bulldust, lookup, lint, verify, guide, plan, gaps, judge brief/run/read/unharnessed | Print the full result as JSON (`plan` always prints JSON). yarn-tools tool steps already print JSON; its brief prints the prompt |
 | `--variety N` | translate, plan | Choose among the N best-fitting terms only; 0 (the default) weighs every eligible term |
+| `--themes JSON` | document operations | Exact per-theme booleans, independent of the swear cap |
+| `--invention` / `--no-invention` | document operations | Reviewed construction permission; omitted inherits the setting |
+| `--popularity`, `--preferences JSON` | translate, plan, yarn, yarn-tools | Wider reviewed adjustment band and latest-first personal weights |
+| `--pins JSON` | translate, plan | Source/dictionary/seed-scoped explicit replay choices |
 | `--registers LIST` | translate, plan, bulldust | Comma list from `current`, `dated`, `archaic` (default: per level) |
 | `--region LIST` | translate, plan, bulldust | Comma list of region tags to prefer, such as `qld` |
-| `--unlock LIST` | translate, plan, bulldust | Comma list of flags whose gated entries become eligible, or `all` |
+| `--unlock LIST` | translate, plan, bulldust, lookup, lint, verify | Comma list of flags whose gated entries become eligible, or `all` |
 
 The dials are described in [dials.md](dials.md); the seed and `--variety` in
 [getting-started.md](../user/getting-started.md#get-the-same-result-again-or-a-different-one).

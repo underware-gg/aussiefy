@@ -13,6 +13,8 @@ the API, or written to a file for an agent to judge and read back (`aussiefy jud
 
 from __future__ import annotations
 
+from .engine import resolve_request
+
 import hashlib
 import json
 import random
@@ -265,12 +267,13 @@ def _evaluation_contract(original: str, *, level: int | str, vulgarity: int | st
 def blind(original: str, candidates: dict[str, str], *, level: int | str = 5, vulgarity: int | str | None = None,
           seed: int = 0, rubric: Rubric | None = None, translator: Translator | None = None,
           markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
-          document_type: str = "general", document_config: dict | None = None) -> Packet:
+          document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None) -> Packet:
     """Shuffle candidates under labels, with the source's effective writing contract for the judge.
 
     The contract comes from the same translation route as writing; it contains no candidate identities.
     Historical packets without a contract remain protocol 1 and retain their original instructions.
     """
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     if not 2 <= len(candidates) <= len(LABELS):
         raise UserError(f"judge 2 to {len(LABELS)} candidates, not {len(candidates)}")
     rubric = rubric or Rubric.load()
@@ -505,9 +508,10 @@ def _unharnessed() -> dict[str, Any]:
 
 def unharnessed_prompt(original: str, *, level: int | str, vulgarity: int | str | None,
                        markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
-                       document_type: str = "general", document_config: dict | None = None,
+                       document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None,
                        translator: Translator | None = None) -> str:
     """A reference retelling brief without vocabulary/tools, under the same effective settings as judging."""
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     contract = _evaluation_contract(original, level=level, vulgarity=vulgarity, markup=markup, english=english,
                                     embellishment=embellishment, document_type=document_type,
                                     document_config=document_config, translator=translator)
@@ -521,8 +525,9 @@ def unharnessed_prompt(original: str, *, level: int | str, vulgarity: int | str 
 def unharnessed(original: str, *, level: int | str = 5, vulgarity: int | str | None = None, markup: str = "text",
                 client: Any = None, model: str = DEFAULT_MODEL, translator: Translator | None = None,
                 english: str | None = None, embellishment: int | str | None = None,
-                document_type: str = "general", document_config: dict | None = None) -> str:
+                document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None) -> str:
     """A model's reference retelling, without the toolkit vocabulary. Raises claude.Error."""
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     prompt = unharnessed_prompt(original, level=level, vulgarity=vulgarity, markup=markup, english=english,
                                 embellishment=embellishment, document_type=document_type,
                                 document_config=document_config, translator=translator)

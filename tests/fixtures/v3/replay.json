@@ -1,0 +1,2481 @@
+{
+ "tuned_request": {
+  "text": "She was exhausted. He is hungry.",
+  "level": 5,
+  "vulgarity": 2,
+  "embellishment": 2,
+  "variety": 1,
+  "seed": 4,
+  "popularity": true,
+  "preferences": [
+   {
+    "match": "TIRED/predicate_adj/446f472c04e76e03e9b88fd0539a0a86d72b654eca602ba1bde2cd04d6109029",
+    "term": "stonkered-tired",
+    "weight": 100000
+   }
+  ]
+ },
+ "tuned_response": {
+  "version": 3,
+  "text": "Jeez Louise, she was stonkered. He's peckish, with a belly growlin' like a mixer full of rocks. Too easy.",
+  "card_version": 3,
+  "dictionary_id": "sha256:496709d81060f0473db8b76afe8696f2df2c592d7b612350663e4cf5732549af",
+  "tuning": {
+   "popularity": true,
+   "preferences": 1
+  },
+  "warnings": [],
+  "warning_details": [],
+  "changes": [
+   {
+    "id": "garnish:0-0:opener",
+    "kind": "garnish",
+    "src_span": [
+     0,
+     0
+    ],
+    "out_span": [
+     0,
+     13
+    ],
+    "original": "",
+    "output": "Jeez Louise, ",
+    "entry_id": "g-jeez",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "opener",
+    "removed": {
+     "out_span": [
+      0,
+      16
+     ],
+     "rendered": "She"
+    },
+    "alternatives": [
+     {
+      "entry_id": "g-bloody-hell",
+      "weight": 0.16541353383458646,
+      "rendered": "Bloody hell, she",
+      "out_span": [
+       0,
+       16
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": [
+       {
+        "span": [
+         0,
+         6
+        ],
+        "ending_start": 6,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "g-crikey",
+      "weight": 0.15037593984962405,
+      "rendered": "Crikey, she",
+      "out_span": [
+       0,
+       16
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     },
+     {
+      "entry_id": "g-fair-dinkum",
+      "weight": 0.19548872180451127,
+      "rendered": "Fair dinkum, she",
+      "out_span": [
+       0,
+       16
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     },
+     {
+      "entry_id": "g-jeez",
+      "weight": 0.09774436090225563,
+      "rendered": "Jeez Louise, she",
+      "out_span": [
+       0,
+       16
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     },
+     {
+      "entry_id": "g-stone-the-crows",
+      "weight": 0.19548872180451127,
+      "rendered": "Stone the crows, she",
+      "out_span": [
+       0,
+       16
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     },
+     {
+      "entry_id": "g-strewth",
+      "weight": 0.19548872180451127,
+      "rendered": "Struth, she",
+      "out_span": [
+       0,
+       16
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "evidence": "unverified",
+    "coined_by": null
+   },
+   {
+    "id": "substitution:8-17",
+    "kind": "substitution",
+    "src_span": [
+     8,
+     17
+    ],
+    "out_span": [
+     21,
+     30
+    ],
+    "original": "exhausted",
+    "output": "stonkered",
+    "entry_id": "stonkered-tired",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "stonkered-tired",
+      "evidence": "attested",
+      "coined_by": null,
+      "rendered": "stonkered",
+      "out_span": [
+       21,
+       30
+      ],
+      "vulgarity": 0,
+      "weight": 1.0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "match": {
+     "key": "TIRED/predicate_adj/446f472c04e76e03e9b88fd0539a0a86d72b654eca602ba1bde2cd04d6109029",
+     "root": "TIRED/predicate_adj/446f472c04e76e03e9b88fd0539a0a86d72b654eca602ba1bde2cd04d6109029",
+     "qualifiers": {}
+    },
+    "evidence": "attested",
+    "coined_by": null
+   },
+   {
+    "id": "phonetic:19-24:pronoun-be",
+    "kind": "phonetic",
+    "src_span": [
+     19,
+     24
+    ],
+    "out_span": [
+     32,
+     36
+    ],
+    "original": "He is",
+    "output": "He's",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "pronoun-be",
+     "kind": "drawl",
+     "min_level": 4,
+     "before": "He is",
+     "after": "He's"
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": [],
+    "evidence": null,
+    "coined_by": null
+   },
+   {
+    "id": "substitution:25-31",
+    "kind": "substitution",
+    "src_span": [
+     25,
+     31
+    ],
+    "out_span": [
+     37,
+     44
+    ],
+    "original": "hungry",
+    "output": "peckish",
+    "entry_id": "peckish",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "peckish",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "peckish",
+      "out_span": [
+       37,
+       44
+      ],
+      "vulgarity": 0,
+      "weight": 1.0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "match": {
+     "key": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+     "root": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+     "qualifiers": {}
+    },
+    "evidence": "unverified",
+    "coined_by": null
+   },
+   {
+    "id": "garnish:31-31:riff",
+    "kind": "garnish",
+    "src_span": [
+     31,
+     31
+    ],
+    "out_span": [
+     44,
+     94
+    ],
+    "original": "",
+    "output": ", with a belly growlin' like a mixer full of rocks",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "riff",
+    "image_id": "belly-mixer-rocks",
+    "removed": {
+     "out_span": [
+      44,
+      94
+     ],
+     "rendered": ""
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": [
+     "phonetic:31-31:ing-in"
+    ],
+    "evidence": "bulldust",
+    "coined_by": "agent"
+   },
+   {
+    "id": "phonetic:31-31:ing-in",
+    "kind": "phonetic",
+    "src_span": [
+     31,
+     31
+    ],
+    "out_span": [
+     59,
+     67
+    ],
+    "original": "",
+    "output": "growlin'",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "ing-in",
+     "kind": "drawl",
+     "min_level": 5,
+     "before": "growling",
+     "after": "growlin'"
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": [],
+    "evidence": null,
+    "coined_by": null
+   },
+   {
+    "id": "garnish:32-32:closer",
+    "kind": "garnish",
+    "src_span": [
+     32,
+     32
+    ],
+    "out_span": [
+     95,
+     105
+    ],
+    "original": "",
+    "output": " Too easy.",
+    "entry_id": "g-too-easy",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "closer",
+    "removed": {
+     "out_span": [
+      95,
+      105
+     ],
+     "rendered": ""
+    },
+    "alternatives": [
+     {
+      "entry_id": "g-stone-the-flamin-crows",
+      "weight": 0.30303030303030304,
+      "rendered": " Stone the flamin' crows.",
+      "out_span": [
+       95,
+       105
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     },
+     {
+      "entry_id": "g-strewth-closer",
+      "weight": 0.393939393939394,
+      "rendered": " Streeeewth.",
+      "out_span": [
+       95,
+       105
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     },
+     {
+      "entry_id": "g-too-easy",
+      "weight": 0.30303030303030304,
+      "rendered": " Too easy.",
+      "out_span": [
+       95,
+       105
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "evidence": "unverified",
+    "coined_by": null
+   }
+  ],
+  "entries": {
+   "g-bloody-hell": {
+    "id": "g-bloody-hell",
+    "form": "bloody hell",
+    "gloss": "Dismay.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 1,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "opener",
+    "sources": [
+     {
+      "kind": "crowd_dictionary",
+      "publisher": "Wiktionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://en.wiktionary.org/wiki/bloody_hell",
+      "note": "Reviewed 2026-10-21: selected form/sense; Wiktionary lines 123–128. Dismay/disgust/anger/surprise interjection; broad Commonwealth label, not specific Australian regional evidence from pronunciation alone. Source family: wiktionary; not a current-commonness survey."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "oxfordlearnersdictionaries.com",
+      "supports": [],
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/english/hell",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 2.0,
+     "bars": 1,
+     "counts": {
+      "crowd_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-crikey": {
+    "id": "g-crikey",
+    "form": "crikey",
+    "gloss": "Surprise or alarm.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "opener",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Cambridge Dictionary",
+      "supports": [],
+      "url": "https://dictionary.cambridge.org/us/dictionary/english/crikey?topic=expressions-of-surprise",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-fair-dinkum": {
+    "id": "g-fair-dinkum",
+    "form": "fair dinkum",
+    "gloss": "Honestly.",
+    "frame": "interjection",
+    "concepts": [
+     "REALLY_Q"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "opener",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/fair-dinkum",
+      "note": "Reviewed 2026-10-21: selected form/sense; L218-222. Question/emphasis documented; regional adjective label separate. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-jeez": {
+    "id": "g-jeez",
+    "form": "jeez",
+    "gloss": "Exasperation.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 1,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "opener",
+    "variants": [
+     "jeez Louise"
+    ],
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/jeez",
+      "note": "Reviewed 2026-10-21: selected form/sense; 240–252. Exasperation interjection. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "general",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-stone-the-crows": {
+    "id": "g-stone-the-crows",
+    "form": "stone the crows",
+    "gloss": "Astonishment.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "dated",
+    "placement": "opener",
+    "variants": [
+     "stone the flamin' crows"
+    ],
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/stone-the-crows",
+      "note": "Reviewed 2026-10-21: selected form/sense; L224-228. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-stone-the-flamin-crows": {
+    "id": "g-stone-the-flamin-crows",
+    "form": "stone the flamin' crows",
+    "gloss": "Astonishment.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "dated",
+    "placement": "closer",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [],
+      "url": "https://www.collinsdictionary.com/dictionary/english/stone-the-crows",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [],
+      "url": "https://www.collinsdictionary.com/dictionary/english/flaming",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-strewth": {
+    "id": "g-strewth",
+    "form": "strewth",
+    "gloss": "Surprise.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "opener",
+    "variants": [
+     "struth"
+    ],
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/strewth",
+      "note": "Reviewed 2026-10-21: selected form/sense; L219-231. Surprise/dismay; no explicit Australian label. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-strewth-closer": {
+    "id": "g-strewth-closer",
+    "form": "strewth",
+    "gloss": "Drawn-out surprise.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "closer",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/strewth",
+      "note": "Reviewed 2026-10-21: selected form/sense; L219-231. Surprise/dismay; no explicit Australian label. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-too-easy": {
+    "id": "g-too-easy",
+    "form": "too easy",
+    "gloss": "Cheerful sign-off.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "closer",
+    "sources": [],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "peckish": {
+    "id": "peckish",
+    "form": "peckish",
+    "gloss": "A bit hungry.",
+    "frame": "adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "notes": "Shared with British English.",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/peckish",
+      "note": "Reviewed 2026-10-21: selected form/sense; 222–228. Explicit slight hunger severity. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "stonkered-tired": {
+    "id": "stonkered-tired",
+    "form": "stonkered",
+    "gloss": "Knocked flat with exhaustion.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "TIRED"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "dated",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Macquarie Dictionary",
+      "supports": [],
+      "url": "https://macquariedictionary.com.au/?p=11172",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "merriam-webster.com",
+      "supports": [],
+      "url": "https://www.merriam-webster.com/dictionary/stonkered",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "slang_dictionary",
+      "publisher": "worldwidewords.org",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://www.worldwidewords.org/qa-sto3.html",
+      "note": "Reviewed 2026-10-21: selected form/sense; 12. Exhausted meaning explicitly discussed; not independent of quoted Macquarie lexical witness. Source family: world-wide-words; not a current-commonness survey."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Cambridge Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://dictionary.cambridge.org/dictionary/english/stonkered",
+      "note": "Reviewed 2026-10-21: selected form/sense; Collins L218-232; Cambridge L36-58. UK/exhaustion; no Australian-use conclusion. Source family: cambridge; not a current-commonness survey."
+     },
+     {
+      "kind": "media",
+      "publisher": "abc.net.au",
+      "supports": [],
+      "url": "https://www.abc.net.au/news/2009-04-26/starkers-show-stopper-tops-japanese-news/1662714",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/stonkered",
+      "note": "Reviewed 2026-10-21: selected form/sense; Collins L218-232; Cambridge L36-58. UK/exhaustion; no Australian-use conclusion. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 10.0,
+     "bars": 5,
+     "counts": {
+      "scholarly_dictionary": 2,
+      "slang_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "attested",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   }
+  },
+  "constructions": {},
+  "imagery": {
+   "belly-mixer-rocks": {
+    "id": "belly-mixer-rocks",
+    "text": "with a belly growling like a mixer full of rocks",
+    "usage": "Hunger with an imagined noisy belly; comparison, not a new event.",
+    "form": "suffix",
+    "subject": "person",
+    "exaggeration": 2,
+    "level": 3,
+    "vulgarity": 0,
+    "tone": "comic",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "frames": [
+     "predicate_adj",
+     "clause",
+     "vp"
+    ],
+    "related": [],
+    "unless_after": [
+     "for",
+     "to"
+    ],
+    "sources": [],
+    "searched": {
+     "date": "2026-10-19",
+     "outcome": "nothing_found",
+     "note": "Imagery Source Search, 2026-10-19 (Brain): partial coverage; no keyed Trove full text, ANDC or Macquarie search. See migration review for sources and limitations."
+    },
+    "produced_by": "agent",
+    "origin": "unknown",
+    "register": "current",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "bulldust",
+    "coined_by": "agent",
+    "minimum_vulgarity": 0
+   }
+  },
+  "withheld": []
+ },
+ "untuned_request": {
+  "text": "She was exhausted. He is hungry.",
+  "level": 5,
+  "vulgarity": 2,
+  "embellishment": 2,
+  "variety": 1,
+  "seed": 4,
+  "pins": {
+   "version": 1,
+   "dictionary_id": "sha256:496709d81060f0473db8b76afe8696f2df2c592d7b612350663e4cf5732549af",
+   "source_id": "sha256:7f1b8be4b941a18e22cf56c56f62f4fedf1ab7f5c997441ac1b5c2e707568c52",
+   "seed": 4,
+   "complete": true,
+   "picks": [
+    {
+     "kind": "substitution",
+     "span": [
+      8,
+      17
+     ],
+     "match": "TIRED/predicate_adj/446f472c04e76e03e9b88fd0539a0a86d72b654eca602ba1bde2cd04d6109029",
+     "target": {
+      "entry_id": "stonkered-tired",
+      "construction_id": null,
+      "family": null,
+      "parts": {},
+      "form": "stonkered"
+     },
+     "stack": null,
+     "riff": null
+    },
+    {
+     "kind": "substitution",
+     "span": [
+      25,
+      31
+     ],
+     "match": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+     "target": {
+      "entry_id": "peckish",
+      "construction_id": null,
+      "family": null,
+      "parts": {},
+      "form": "peckish"
+     },
+     "stack": null,
+     "riff": null
+    },
+    {
+     "kind": "imagery",
+     "span": [
+      25,
+      31
+     ],
+     "match": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+     "image_id": "belly-mixer-rocks"
+    },
+    {
+     "kind": "garnish",
+     "span": [
+      0,
+      18
+     ],
+     "placement": "opener",
+     "target": {
+      "entry_id": "g-jeez",
+      "construction_id": null,
+      "family": null,
+      "parts": {},
+      "form": "jeez Louise"
+     }
+    },
+    {
+     "kind": "garnish",
+     "span": [
+      19,
+      32
+     ],
+     "placement": "closer",
+     "target": {
+      "entry_id": "g-too-easy",
+      "construction_id": null,
+      "family": null,
+      "parts": {},
+      "form": "too easy"
+     }
+    }
+   ]
+  }
+ },
+ "untuned_response": {
+  "version": 3,
+  "text": "Jeez Louise, she was stonkered. He's peckish, with a belly growlin' like a mixer full of rocks. Too easy.",
+  "card_version": 3,
+  "dictionary_id": "sha256:496709d81060f0473db8b76afe8696f2df2c592d7b612350663e4cf5732549af",
+  "tuning": {
+   "popularity": false,
+   "preferences": 0
+  },
+  "warnings": [],
+  "warning_details": [],
+  "changes": [
+   {
+    "id": "garnish:0-0:opener",
+    "kind": "garnish",
+    "src_span": [
+     0,
+     0
+    ],
+    "out_span": [
+     0,
+     13
+    ],
+    "original": "",
+    "output": "Jeez Louise, ",
+    "entry_id": "g-jeez",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "opener",
+    "removed": {
+     "out_span": [
+      0,
+      16
+     ],
+     "rendered": "She"
+    },
+    "alternatives": [
+     {
+      "entry_id": "g-bloody-hell",
+      "weight": 0.16541353383458646,
+      "rendered": "Bloody hell, she",
+      "out_span": [
+       0,
+       16
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": [
+       {
+        "span": [
+         0,
+         6
+        ],
+        "ending_start": 6,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "g-crikey",
+      "weight": 0.15037593984962405,
+      "rendered": "Crikey, she",
+      "out_span": [
+       0,
+       16
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     },
+     {
+      "entry_id": "g-fair-dinkum",
+      "weight": 0.19548872180451127,
+      "rendered": "Fair dinkum, she",
+      "out_span": [
+       0,
+       16
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     },
+     {
+      "entry_id": "g-jeez",
+      "weight": 0.09774436090225563,
+      "rendered": "Jeez Louise, she",
+      "out_span": [
+       0,
+       16
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     },
+     {
+      "entry_id": "g-stone-the-crows",
+      "weight": 0.19548872180451127,
+      "rendered": "Stone the crows, she",
+      "out_span": [
+       0,
+       16
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     },
+     {
+      "entry_id": "g-strewth",
+      "weight": 0.19548872180451127,
+      "rendered": "Struth, she",
+      "out_span": [
+       0,
+       16
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "evidence": "unverified",
+    "coined_by": null
+   },
+   {
+    "id": "substitution:8-17",
+    "kind": "substitution",
+    "src_span": [
+     8,
+     17
+    ],
+    "out_span": [
+     21,
+     30
+    ],
+    "original": "exhausted",
+    "output": "stonkered",
+    "entry_id": "stonkered-tired",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "stonkered-tired",
+      "evidence": "attested",
+      "coined_by": null,
+      "rendered": "stonkered",
+      "out_span": [
+       21,
+       30
+      ],
+      "vulgarity": 0,
+      "weight": 0.19379844961240308,
+      "masks": []
+     },
+     {
+      "entry_id": "buggered",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "buggered",
+      "out_span": [
+       21,
+       30
+      ],
+      "vulgarity": 1,
+      "weight": 0.8062015503875969,
+      "masks": [
+       {
+        "span": [
+         0,
+         8
+        ],
+        "ending_start": 6,
+        "vulgarity": 1
+       }
+      ]
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "match": {
+     "key": "TIRED/predicate_adj/446f472c04e76e03e9b88fd0539a0a86d72b654eca602ba1bde2cd04d6109029",
+     "root": "TIRED/predicate_adj/446f472c04e76e03e9b88fd0539a0a86d72b654eca602ba1bde2cd04d6109029",
+     "qualifiers": {}
+    },
+    "evidence": "attested",
+    "coined_by": null
+   },
+   {
+    "id": "phonetic:19-24:pronoun-be",
+    "kind": "phonetic",
+    "src_span": [
+     19,
+     24
+    ],
+    "out_span": [
+     32,
+     36
+    ],
+    "original": "He is",
+    "output": "He's",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "pronoun-be",
+     "kind": "drawl",
+     "min_level": 4,
+     "before": "He is",
+     "after": "He's"
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": [],
+    "evidence": null,
+    "coined_by": null
+   },
+   {
+    "id": "substitution:25-31",
+    "kind": "substitution",
+    "src_span": [
+     25,
+     31
+    ],
+    "out_span": [
+     37,
+     44
+    ],
+    "original": "hungry",
+    "output": "peckish",
+    "entry_id": "peckish",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "peckish",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "peckish",
+      "out_span": [
+       37,
+       44
+      ],
+      "vulgarity": 0,
+      "weight": 1.0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "match": {
+     "key": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+     "root": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+     "qualifiers": {}
+    },
+    "evidence": "unverified",
+    "coined_by": null
+   },
+   {
+    "id": "garnish:31-31:riff",
+    "kind": "garnish",
+    "src_span": [
+     31,
+     31
+    ],
+    "out_span": [
+     44,
+     94
+    ],
+    "original": "",
+    "output": ", with a belly growlin' like a mixer full of rocks",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "riff",
+    "image_id": "belly-mixer-rocks",
+    "removed": {
+     "out_span": [
+      44,
+      94
+     ],
+     "rendered": ""
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": [
+     "phonetic:31-31:ing-in"
+    ],
+    "evidence": "bulldust",
+    "coined_by": "agent"
+   },
+   {
+    "id": "phonetic:31-31:ing-in",
+    "kind": "phonetic",
+    "src_span": [
+     31,
+     31
+    ],
+    "out_span": [
+     59,
+     67
+    ],
+    "original": "",
+    "output": "growlin'",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "ing-in",
+     "kind": "drawl",
+     "min_level": 5,
+     "before": "growling",
+     "after": "growlin'"
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": [],
+    "evidence": null,
+    "coined_by": null
+   },
+   {
+    "id": "garnish:32-32:closer",
+    "kind": "garnish",
+    "src_span": [
+     32,
+     32
+    ],
+    "out_span": [
+     95,
+     105
+    ],
+    "original": "",
+    "output": " Too easy.",
+    "entry_id": "g-too-easy",
+    "vulgarity": 0,
+    "masks": [],
+    "placement": "closer",
+    "removed": {
+     "out_span": [
+      95,
+      105
+     ],
+     "rendered": ""
+    },
+    "alternatives": [
+     {
+      "entry_id": "g-stone-the-flamin-crows",
+      "weight": 0.30303030303030304,
+      "rendered": " Stone the flamin' crows.",
+      "out_span": [
+       95,
+       105
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     },
+     {
+      "entry_id": "g-strewth-closer",
+      "weight": 0.393939393939394,
+      "rendered": " Streeeewth.",
+      "out_span": [
+       95,
+       105
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     },
+     {
+      "entry_id": "g-too-easy",
+      "weight": 0.30303030303030304,
+      "rendered": " Too easy.",
+      "out_span": [
+       95,
+       105
+      ],
+      "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "evidence": "unverified",
+    "coined_by": null
+   }
+  ],
+  "entries": {
+   "buggered": {
+    "id": "buggered",
+    "form": "buggered",
+    "gloss": "Exhausted, or broken beyond use.",
+    "frame": "adj",
+    "concepts": [
+     "TIRED",
+     "BROKEN"
+    ],
+    "level": 2,
+    "vulgarity": 1,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Oxford Learner's Dictionaries",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/english/buggered",
+      "note": "Reviewed 2026-10-21: selected form/sense; L101–112. Both very-tired and irreparably-damaged senses inspected; source labels British. Source family: oxford-university-press; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 1,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "g-bloody-hell": {
+    "id": "g-bloody-hell",
+    "form": "bloody hell",
+    "gloss": "Dismay.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 1,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "opener",
+    "sources": [
+     {
+      "kind": "crowd_dictionary",
+      "publisher": "Wiktionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://en.wiktionary.org/wiki/bloody_hell",
+      "note": "Reviewed 2026-10-21: selected form/sense; Wiktionary lines 123–128. Dismay/disgust/anger/surprise interjection; broad Commonwealth label, not specific Australian regional evidence from pronunciation alone. Source family: wiktionary; not a current-commonness survey."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "oxfordlearnersdictionaries.com",
+      "supports": [],
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/english/hell",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 2.0,
+     "bars": 1,
+     "counts": {
+      "crowd_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-crikey": {
+    "id": "g-crikey",
+    "form": "crikey",
+    "gloss": "Surprise or alarm.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "opener",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Cambridge Dictionary",
+      "supports": [],
+      "url": "https://dictionary.cambridge.org/us/dictionary/english/crikey?topic=expressions-of-surprise",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-fair-dinkum": {
+    "id": "g-fair-dinkum",
+    "form": "fair dinkum",
+    "gloss": "Honestly.",
+    "frame": "interjection",
+    "concepts": [
+     "REALLY_Q"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "opener",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/fair-dinkum",
+      "note": "Reviewed 2026-10-21: selected form/sense; L218-222. Question/emphasis documented; regional adjective label separate. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-jeez": {
+    "id": "g-jeez",
+    "form": "jeez",
+    "gloss": "Exasperation.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 1,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "opener",
+    "variants": [
+     "jeez Louise"
+    ],
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/jeez",
+      "note": "Reviewed 2026-10-21: selected form/sense; 240–252. Exasperation interjection. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "general",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-stone-the-crows": {
+    "id": "g-stone-the-crows",
+    "form": "stone the crows",
+    "gloss": "Astonishment.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "dated",
+    "placement": "opener",
+    "variants": [
+     "stone the flamin' crows"
+    ],
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/stone-the-crows",
+      "note": "Reviewed 2026-10-21: selected form/sense; L224-228. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-stone-the-flamin-crows": {
+    "id": "g-stone-the-flamin-crows",
+    "form": "stone the flamin' crows",
+    "gloss": "Astonishment.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "dated",
+    "placement": "closer",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [],
+      "url": "https://www.collinsdictionary.com/dictionary/english/stone-the-crows",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [],
+      "url": "https://www.collinsdictionary.com/dictionary/english/flaming",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-strewth": {
+    "id": "g-strewth",
+    "form": "strewth",
+    "gloss": "Surprise.",
+    "frame": "interjection",
+    "concepts": [
+     "SURPRISE"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "opener",
+    "variants": [
+     "struth"
+    ],
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/strewth",
+      "note": "Reviewed 2026-10-21: selected form/sense; L219-231. Surprise/dismay; no explicit Australian label. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-strewth-closer": {
+    "id": "g-strewth-closer",
+    "form": "strewth",
+    "gloss": "Drawn-out surprise.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "closer",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/strewth",
+      "note": "Reviewed 2026-10-21: selected form/sense; L219-231. Surprise/dismay; no explicit Australian label. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-too-easy": {
+    "id": "g-too-easy",
+    "form": "too easy",
+    "gloss": "Cheerful sign-off.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "placement": "closer",
+    "sources": [],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "peckish": {
+    "id": "peckish",
+    "form": "peckish",
+    "gloss": "A bit hungry.",
+    "frame": "adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "notes": "Shared with British English.",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/peckish",
+      "note": "Reviewed 2026-10-21: selected form/sense; 222–228. Explicit slight hunger severity. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "stonkered-tired": {
+    "id": "stonkered-tired",
+    "form": "stonkered",
+    "gloss": "Knocked flat with exhaustion.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "TIRED"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "dated",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Macquarie Dictionary",
+      "supports": [],
+      "url": "https://macquariedictionary.com.au/?p=11172",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "merriam-webster.com",
+      "supports": [],
+      "url": "https://www.merriam-webster.com/dictionary/stonkered",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "slang_dictionary",
+      "publisher": "worldwidewords.org",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://www.worldwidewords.org/qa-sto3.html",
+      "note": "Reviewed 2026-10-21: selected form/sense; 12. Exhausted meaning explicitly discussed; not independent of quoted Macquarie lexical witness. Source family: world-wide-words; not a current-commonness survey."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Cambridge Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://dictionary.cambridge.org/dictionary/english/stonkered",
+      "note": "Reviewed 2026-10-21: selected form/sense; Collins L218-232; Cambridge L36-58. UK/exhaustion; no Australian-use conclusion. Source family: cambridge; not a current-commonness survey."
+     },
+     {
+      "kind": "media",
+      "publisher": "abc.net.au",
+      "supports": [],
+      "url": "https://www.abc.net.au/news/2009-04-26/starkers-show-stopper-tops-japanese-news/1662714",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/stonkered",
+      "note": "Reviewed 2026-10-21: selected form/sense; Collins L218-232; Cambridge L36-58. UK/exhaustion; no Australian-use conclusion. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 10.0,
+     "bars": 5,
+     "counts": {
+      "scholarly_dictionary": 2,
+      "slang_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "attested",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   }
+  },
+  "constructions": {},
+  "imagery": {
+   "belly-mixer-rocks": {
+    "id": "belly-mixer-rocks",
+    "text": "with a belly growling like a mixer full of rocks",
+    "usage": "Hunger with an imagined noisy belly; comparison, not a new event.",
+    "form": "suffix",
+    "subject": "person",
+    "exaggeration": 2,
+    "level": 3,
+    "vulgarity": 0,
+    "tone": "comic",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "frames": [
+     "predicate_adj",
+     "clause",
+     "vp"
+    ],
+    "related": [],
+    "unless_after": [
+     "for",
+     "to"
+    ],
+    "sources": [],
+    "searched": {
+     "date": "2026-10-19",
+     "outcome": "nothing_found",
+     "note": "Imagery Source Search, 2026-10-19 (Brain): partial coverage; no keyed Trove full text, ANDC or Macquarie search. See migration review for sources and limitations."
+    },
+    "produced_by": "agent",
+    "origin": "unknown",
+    "register": "current",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "bulldust",
+    "coined_by": "agent",
+    "minimum_vulgarity": 0
+   }
+  },
+  "withheld": []
+ },
+ "editor_options": {
+  "current": {
+   "version": 1,
+   "dictionary_id": "sha256:496709d81060f0473db8b76afe8696f2df2c592d7b612350663e4cf5732549af",
+   "source_id": "sha256:7f1b8be4b941a18e22cf56c56f62f4fedf1ab7f5c997441ac1b5c2e707568c52",
+   "seed": 4,
+   "complete": true,
+   "picks": [
+    {
+     "kind": "substitution",
+     "span": [
+      8,
+      17
+     ],
+     "match": "TIRED/predicate_adj/446f472c04e76e03e9b88fd0539a0a86d72b654eca602ba1bde2cd04d6109029",
+     "target": {
+      "entry_id": "stonkered-tired",
+      "construction_id": null,
+      "family": null,
+      "parts": {},
+      "form": "stonkered"
+     },
+     "stack": null,
+     "riff": null
+    },
+    {
+     "kind": "substitution",
+     "span": [
+      25,
+      31
+     ],
+     "match": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+     "target": {
+      "entry_id": "peckish",
+      "construction_id": null,
+      "family": null,
+      "parts": {},
+      "form": "peckish"
+     },
+     "stack": null,
+     "riff": null
+    },
+    {
+     "kind": "imagery",
+     "span": [
+      25,
+      31
+     ],
+     "match": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+     "image_id": "belly-mixer-rocks"
+    },
+    {
+     "kind": "garnish",
+     "span": [
+      0,
+      18
+     ],
+     "placement": "opener",
+     "target": {
+      "entry_id": "g-jeez",
+      "construction_id": null,
+      "family": null,
+      "parts": {},
+      "form": "jeez Louise"
+     }
+    },
+    {
+     "kind": "garnish",
+     "span": [
+      19,
+      32
+     ],
+     "placement": "closer",
+     "target": {
+      "entry_id": "g-too-easy",
+      "construction_id": null,
+      "family": null,
+      "parts": {},
+      "form": "too easy"
+     }
+    }
+   ]
+  },
+  "changes": {
+   "garnish:0-0:opener": [
+    {
+     "key": "g-bloody-hell",
+     "pick": {
+      "kind": "garnish",
+      "span": [
+       0,
+       18
+      ],
+      "placement": "opener",
+      "target": {
+       "entry_id": "g-bloody-hell",
+       "construction_id": null,
+       "family": null,
+       "parts": {},
+       "form": "bloody hell"
+      }
+     }
+    },
+    {
+     "key": "g-crikey",
+     "pick": {
+      "kind": "garnish",
+      "span": [
+       0,
+       18
+      ],
+      "placement": "opener",
+      "target": {
+       "entry_id": "g-crikey",
+       "construction_id": null,
+       "family": null,
+       "parts": {},
+       "form": "crikey"
+      }
+     }
+    },
+    {
+     "key": "g-fair-dinkum",
+     "pick": {
+      "kind": "garnish",
+      "span": [
+       0,
+       18
+      ],
+      "placement": "opener",
+      "target": {
+       "entry_id": "g-fair-dinkum",
+       "construction_id": null,
+       "family": null,
+       "parts": {},
+       "form": "fair dinkum"
+      }
+     }
+    },
+    {
+     "key": "g-jeez",
+     "pick": {
+      "kind": "garnish",
+      "span": [
+       0,
+       18
+      ],
+      "placement": "opener",
+      "target": {
+       "entry_id": "g-jeez",
+       "construction_id": null,
+       "family": null,
+       "parts": {},
+       "form": "jeez Louise"
+      }
+     }
+    },
+    {
+     "key": "g-stone-the-crows",
+     "pick": {
+      "kind": "garnish",
+      "span": [
+       0,
+       18
+      ],
+      "placement": "opener",
+      "target": {
+       "entry_id": "g-stone-the-crows",
+       "construction_id": null,
+       "family": null,
+       "parts": {},
+       "form": "stone the crows"
+      }
+     }
+    },
+    {
+     "key": "g-strewth",
+     "pick": {
+      "kind": "garnish",
+      "span": [
+       0,
+       18
+      ],
+      "placement": "opener",
+      "target": {
+       "entry_id": "g-strewth",
+       "construction_id": null,
+       "family": null,
+       "parts": {},
+       "form": "struth"
+      }
+     }
+    },
+    {
+     "key": null,
+     "pick": {
+      "kind": "garnish",
+      "span": [
+       0,
+       18
+      ],
+      "placement": "opener",
+      "target": null
+     }
+    }
+   ],
+   "substitution:8-17": [
+    {
+     "key": "stonkered-tired",
+     "pick": {
+      "kind": "substitution",
+      "span": [
+       8,
+       17
+      ],
+      "match": "TIRED/predicate_adj/446f472c04e76e03e9b88fd0539a0a86d72b654eca602ba1bde2cd04d6109029",
+      "target": {
+       "entry_id": "stonkered-tired",
+       "construction_id": null,
+       "family": null,
+       "parts": {},
+       "form": "stonkered"
+      },
+      "stack": null,
+      "riff": null
+     }
+    }
+   ],
+   "substitution:25-31": [
+    {
+     "key": "peckish",
+     "pick": {
+      "kind": "substitution",
+      "span": [
+       25,
+       31
+      ],
+      "match": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+      "target": {
+       "entry_id": "peckish",
+       "construction_id": null,
+       "family": null,
+       "parts": {},
+       "form": "peckish"
+      },
+      "stack": null,
+      "riff": null
+     }
+    }
+   ],
+   "garnish:31-31:riff": [
+    {
+     "key": null,
+     "pick": {
+      "kind": "imagery",
+      "span": [
+       25,
+       31
+      ],
+      "match": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+      "image_id": null
+     }
+    }
+   ],
+   "garnish:32-32:closer": [
+    {
+     "key": "g-stone-the-flamin-crows",
+     "pick": {
+      "kind": "garnish",
+      "span": [
+       19,
+       32
+      ],
+      "placement": "closer",
+      "target": {
+       "entry_id": "g-stone-the-flamin-crows",
+       "construction_id": null,
+       "family": null,
+       "parts": {},
+       "form": "stone the flamin' crows"
+      }
+     }
+    },
+    {
+     "key": "g-strewth-closer",
+     "pick": {
+      "kind": "garnish",
+      "span": [
+       19,
+       32
+      ],
+      "placement": "closer",
+      "target": {
+       "entry_id": "g-strewth-closer",
+       "construction_id": null,
+       "family": null,
+       "parts": {},
+       "form": "streeeewth"
+      }
+     }
+    },
+    {
+     "key": "g-too-easy",
+     "pick": {
+      "kind": "garnish",
+      "span": [
+       19,
+       32
+      ],
+      "placement": "closer",
+      "target": {
+       "entry_id": "g-too-easy",
+       "construction_id": null,
+       "family": null,
+       "parts": {},
+       "form": "too easy"
+      }
+     }
+    },
+    {
+     "key": null,
+     "pick": {
+      "kind": "garnish",
+      "span": [
+       19,
+       32
+      ],
+      "placement": "closer",
+      "target": null
+     }
+    }
+   ]
+  }
+ }
+}

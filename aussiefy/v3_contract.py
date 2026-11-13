@@ -1,42 +1,9 @@
-"""Shared v3 card projections and semantic checks, pending coordinated activation."""
+"""Rich construction/imagery cards and semantic checks for the frozen v3 response contract."""
 
-from .cards import entry_card as base_entry_card
+from .cards import (CARD_VERSION, metadata, provenance as provenance, entry_card as entry_card)
 from .constructions import construction_identity
 from .errors import SchemaError, warning_details
-from .evidence import metadata_dict
 from .match_keys import known_match, parse_match_key
-
-CARD_VERSION = 3
-
-
-def metadata(term, permitted_themes, *, vulgarity=None):
-    """Presentation attribution does not rewrite who authored or retrieved a stored record."""
-    result = metadata_dict(term, derived=True)
-    coiner = term.coined_by
-    if term.evidence == 'bulldust':
-        coiner = coiner or ('agent' if term.produced_by == 'agent' else None)
-        if coiner is None:
-            raise SchemaError('bulldust metadata has no attributable maker')
-    if coiner is not None:
-        result['coined_by'] = coiner
-    tiers = permitted_themes.tag_tiers(term)
-    result['themes'] = [{'name': name, 'tier': tier} for name, tier in tiers.items()]
-    result['minimum_vulgarity'] = max([getattr(term, 'vulgarity', 0) if vulgarity is None else vulgarity,
-                                     *tiers.values()])
-    return result
-
-
-def entry_card(entry, cap=3, riffs=True, *, permitted_themes, registers):
-    result = {**base_entry_card(entry, cap, False, permitted_themes=permitted_themes, registers=registers),
-              **metadata(entry, permitted_themes), 'type': entry.type, 'status': entry.status,
-              'held_back': list(entry.held_back)}
-    if riffs:
-        cards = [{'text': riff.text, 'tone': riff.tone, **metadata(riff, permitted_themes),
-                  **({'best': True} if i == 0 else {})}
-                 for i, riff in enumerate(entry.riffs_within(cap, permitted_themes, registers=registers))]
-        if cards:
-            result['riffs'] = cards
-    return result
 
 
 def construction_card(construction, dictionary, *, permitted_themes):
@@ -63,8 +30,10 @@ def card_envelope(dictionary):
     return {'card_version': CARD_VERSION, 'dictionary_id': dictionary.identity}
 
 
-def response_metadata(result, dictionary):
-    return {**card_envelope(dictionary), 'tuning': result._tuning, 'warnings': list(result.warnings),
+def response_metadata(result, dictionary=None):
+    header = card_envelope(dictionary) if dictionary is not None else {
+        'card_version': CARD_VERSION, 'dictionary_id': result.dictionary_id}
+    return {**header, 'tuning': result.tuning, 'warnings': list(result.warnings),
             'warning_details': warning_details(result.warnings)}
 
 
@@ -148,8 +117,9 @@ def validate_response(body, source, dictionary, *, result_warnings):
             _require(selected in {option_key(o) for o in change['alternatives']}, 'selected key absent from alternatives')
         if change['alternatives']:
             _require(abs(sum(o['weight'] for o in change['alternatives']) - 1) <= 0.001, 'alternative weights do not sum to 1')
-        for option in options:
-            _require(option['out_span'] == change['out_span'], 'option replacement region differs from change')
+        if change['kind'] == 'substitution':
+            for option in options:
+                _require(option['out_span'] == change['out_span'], 'option replacement region differs from change')
         for owner in (change, *options):
             _maker(owner, 'rendering')
             rendered = owner.get('rendered', owner.get('output'))

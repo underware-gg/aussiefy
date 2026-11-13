@@ -7,7 +7,7 @@ from dataclasses import dataclass, fields
 from typing import Any, Sequence
 
 from .dialect import ENGLISHES
-from .errors import UserError
+from .errors import UserError, warning_details
 from .model import Dictionary, LevelProfile, SwearProfile
 from .profile import ProfileOverrides, profile_config
 from .schema import Entry, REGISTERS, UNLOCKS
@@ -89,6 +89,7 @@ class DocumentOverrides:
     quantity_approximation: bool | None = None
     profile: ProfileOverrides | None = None
     themes: tuple[tuple[str, bool], ...] | None = None
+    invention: bool | None = None
 
     @classmethod
     def parse(cls, raw):
@@ -109,7 +110,7 @@ class DocumentOverrides:
         data = dict(raw)
         booleans = {"openings", "formal_to_rework", "person_swears", "keep_quotes", "command_context",
                     "dateline_context", "draft", "perform", "check_length", "contextual_riffs", "entry_riffs",
-                    "narrator_opinion", "solemn_comic_terms", "quantity_approximation"}
+                    "narrator_opinion", "solemn_comic_terms", "quantity_approximation", "invention"}
         for key, value in data.items():
             if key == "profile":
                 data[key] = ProfileOverrides.parse(value)
@@ -145,6 +146,25 @@ class DocumentOverrides:
         if self.themes is not None:
             values["themes"] = dict(self.themes)
         return values
+
+
+def request_overrides(document_config=None, *, themes=None, invention=None, defaults=None) -> DocumentOverrides | None:
+    """Top-level permissions refine the same exact document overrides, with per-theme keys taking precedence."""
+    if document_config is None and themes is None and invention is None:
+        return DocumentOverrides.parse(defaults) if defaults is not None else None
+    base = DocumentOverrides.parse(defaults if document_config is None else document_config)
+    supplied = {}
+    if themes is not None:
+        supplied['themes'] = themes
+    if invention is not None:
+        supplied['invention'] = invention
+    if not supplied:
+        return base
+    parsed = DocumentOverrides.parse(supplied).values()
+    values = base.values()
+    if 'themes' in parsed:
+        parsed['themes'] = {**values.get('themes', {}), **parsed['themes']}
+    return DocumentOverrides.parse({**values, **parsed})
 
 
 @dataclass(frozen=True)
@@ -226,16 +246,25 @@ class Effective:
     general_pick_factor: float = 0.5
     attestation_pick_bonus: float = 0.5
     attestation_max_score: float = 10.0
+    dictionary_id: str = ""
 
     @property
     def permitted_themes(self) -> frozenset[str]:
         """The theme defaults; term-tier exceptions are evaluated by theme_policy."""
         return self.theme_policy.enabled
 
-    def envelope(self) -> dict[str, Any]:
-        return {**envelope(self.level, self.vulgarity, self.warnings),
-                "profile_config": profile_config(self.profile, self.swearing),
-                "theme_permissions": theme_permissions(self.theme_policy)}
+    def envelope(self, *, profile: bool = True) -> dict[str, Any]:
+        result = {**envelope(self.level, self.vulgarity, self.warnings),
+                  "dictionary_id": self.dictionary_id, "tuning": {"popularity": False, "preferences": 0},
+                  "warnings": list(self.warnings), "warning_details": warning_details(self.warnings),
+                  "theme_permissions": theme_permissions(self.theme_policy)}
+        if profile:
+            result['profile_config'] = profile_config(self.profile, self.swearing)
+        return result
+
+    @property
+    def allow_misreadable(self) -> bool:
+        return bool({'misreadable', 'all'} & self.unlock)
 
     def metadata_weight(self, term: TermMetadata) -> float:
         evidence = 1.0 + self.attestation_pick_bonus * term.attestation.score / self.attestation_max_score
@@ -262,7 +291,7 @@ def resolve(policy: Policy, dictionary: Dictionary) -> Effective:
                      swearing=swearing,
                      general_pick_factor=dictionary.evidence_weights.general_pick_factor,
                      attestation_pick_bonus=dictionary.evidence_weights.attestation_pick_bonus,
-                     attestation_max_score=5 * dictionary.evidence_weights.bar_width)
+                     attestation_max_score=5 * dictionary.evidence_weights.bar_width, dictionary_id=dictionary.identity)
 
 
 def _warnings(policy: Policy, dictionary: Dictionary) -> tuple[str, ...]:

@@ -4,13 +4,15 @@ CLI, MCP-capable agents and optional API clients share these rules. This module 
 """
 from __future__ import annotations
 
+from .engine import resolve_request
+
 from dataclasses import dataclass, field
 import re
 from typing import Any
 
 from . import harness
 from .align import counterparts, sentence_spans
-from .engine import Translator, default_translator
+from .engine import Translator
 from .genre import resolve_document, Embellishment
 from .guide import style_guide_data
 from .markup import detect_markup, mask
@@ -32,6 +34,11 @@ THEME_PERMISSIONS reports default subject permissions. THEME_RULES records the r
 expression whose themes are forbidden; preserve subject matter already present in the original.
 Respect check_length/max_length and keep_share as configured. No optional Custom behaviour is implied by its
 embellishment label. Preserve every other original fact and the selected markup regardless of the type.
+
+CONSTRUCTION_SCAFFOLD supplies reviewed meanings, examples, families, typed ingredients, stems and endings.
+When invention is false, do not coin new expressions. When true, use these as a scaffold, preserve the source
+meaning and grammatical slot, and follow its constraints. Newly invented wording is bulldust made by the
+agent, never an attested saying. No source or evidence may be invented.
 
 STYLE GUIDE:
 {guide}
@@ -90,7 +97,7 @@ def validate(session: "YarnSession", text: str, declined: list[dict] | None = No
     problems = []
     planned = session.planned
     keep_share = session.embellishment.keep_share if keep_share is None else keep_share
-    lint = harness.lint(text, level=session.level, vulgarity=session.vulgarity, english=session.english,
+    lint = harness.lint(text, unlock=["misreadable"], level=session.level, vulgarity=session.vulgarity, english=session.english,
                          embellishment=session.embellishment.step, document_type=session.document_type, document_config=session.document_config, original=session.text, markup=session.markup,
                          translator=session.translator, suggest=False)
     for issue in lint["issues"]:
@@ -161,13 +168,16 @@ MARKUP_RULE = ("The original is a {markup} document. Retell only its prose. Keep
 def brief(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None,
           markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
               document_type: str = "general", document_config: dict | None = None,
+              themes: dict[str, bool] | None = None, invention: bool | None = None,
+              popularity: bool = False, preferences: list[dict] | None = None,
           translator: Translator | None = None) -> YarnSession:
-    tr = translator or default_translator()
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
+    tr = translator
     document_config = DocumentOverrides.parse(document_config)
     if markup == "auto":
         markup = detect_markup(text)
-    the_plan = harness.plan(text, level=level, seed=seed, vulgarity=vulgarity, markup=markup, english=english,
-                            embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr)
+    the_plan = harness.plan(text, unlock=["misreadable"], level=level, seed=seed, vulgarity=vulgarity, markup=markup, english=english,
+                            embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr, popularity=popularity, preferences=preferences)
     context = resolve_document(None, config=tr.dictionary.genres, document_type=the_plan["genre"],
                                document_config=document_config)
     setting = context.setting(the_plan["embellishment"])
@@ -190,6 +200,7 @@ def brief(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | st
                                            document_config=document_config).theme_policy.rules(),
                "PROFILE_CONFIG": the_plan["profile_config"],
                **({"ENGINE_DRAFT": the_plan["draft"]} if setting.draft else {}),
+               "CONSTRUCTION_SCAFFOLD": the_plan["scaffold"],
                "PLANNED_PHRASES": list(phrases.values()), "RIFFS": the_plan["riffs"],
                "OPENINGS": the_plan["openings"], "DIFFICULT_SENTENCES": the_plan["difficult_sentences"]}
     if markup != "text":
@@ -257,12 +268,12 @@ def dispatch_tool(session: YarnSession, name: str, args: dict[str, Any]) -> tupl
         return {"error": f"{name}: missing argument {', '.join(missing)}"}, False
     if name == "lookup":
         # short: a writer checking a choice wants the term, its sense and how it fits, not the whole card
-        return harness.lookup(args["query"], level=s.level, vulgarity=s.vulgarity, short=True,
+        return harness.lookup(args["query"], unlock=["misreadable"], level=s.level, vulgarity=s.vulgarity, short=True,
                               embellishment=s.embellishment.step, document_type=s.document_type,
                               document_config=s.document_config,
                               translator=s.translator), False
     if name == "lint":
-        out = harness.lint(args["text"], level=s.level, vulgarity=s.vulgarity, markup=s.markup, english=s.english,
+        out = harness.lint(args["text"], unlock=["misreadable"], level=s.level, vulgarity=s.vulgarity, markup=s.markup, english=s.english,
                            embellishment=s.embellishment.step, document_type=s.document_type, document_config=s.document_config, translator=s.translator, original=s.text)
         return _without_declined(out, s.declined), False
     s.decline(args["declined"])

@@ -160,13 +160,13 @@ def garnish_offer(placement: str, dictionary: Dictionary, eff: Effective, seed: 
                                   narrator_opinion, quantity_approximation)
     choices = list(zip(pool, garnish_weights(pool, eff, swear), strict=True))
     catalog = dictionary.construction_catalog
-    if setting is not None and placement == "opener" and catalog:
+    if setting is not None and setting.invention and placement == "opener" and catalog:
         context_seed = int(roll(seed, "construction-garnish", *key) * 2 ** 53)
         for family in catalog.families:
-            if family.placement != placement or not family.converted_parts:
+            if family.placement != placement:
                 continue
             generated = generate(dictionary, eff, setting, seed=context_seed, placement=placement, mood=mood,
-                                 family=family.id, parts=dict(family.converted_parts), limit=catalog.max_results)
+                                 family=family.id, limit=catalog.max_results)
             rejected.extend(generated.rejected)
             for candidate in generated.candidates:
                 if any(identity in used or identity in exclude for identity in candidate.usage_ids):

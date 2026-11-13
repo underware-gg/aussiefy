@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 from .themes import ThemePolicy
+from .offsets import map_spans
 
 import re
 import inspect
 from collections import Counter
-from dataclasses import dataclass, field, fields
+from dataclasses import dataclass, field, fields, replace
 from functools import lru_cache, partial
 from typing import Any, Callable, Literal, Protocol, Sequence
 
@@ -27,10 +28,13 @@ from .protected import Masked, protected_runs
 from .model import Dictionary
 from .match_keys import detection_match
 from .tuning import Tuning, TuningReport
-from .policy import Effective, Policy, envelope, pick_form, resolve, roll, theme_permissions
+from .pins import Pins, capture as capture_pins, packet as pin_packet
+from .errors import UserError
+from .v3_contract import response_metadata, provenance
+from .policy import Effective, Policy, envelope, pick_form, resolve, roll, theme_permissions, request_overrides
 from .realise import ARTICLES, fit_article, number_problem, phrase_continues, realise, replacement_span
 from .select import Candidate, candidates, mapping_effects, semantic_rejection, usable_forms, weighted_pick
-from .constructions import Construction
+from .constructions import Construction, generate, rendering_entry
 from .schema import Entry, SchemaError
 from .semantic_checks import theme_issues
 from .terms import form_key
@@ -55,6 +59,12 @@ class SubstitutionRecord:
     out_span: tuple[int, int] | None = None
     stacked: Candidate | None = None
     riff: str | None = None
+    part_spans: tuple[tuple[int, int], ...] = ()
+    riff_span: tuple[int, int] | None = None
+    form: str | None = None
+    stacked_form: str | None = None
+    image_id: str | None = None
+    pin: object | None = None
     term: str | None = None         # the output without its riff: the Aussie phrase itself
     eligible: list[Candidate] = field(default_factory=list)
     rejected: list[tuple[str, str]] = field(default_factory=list)
@@ -63,7 +73,7 @@ class SubstitutionRecord:
     def substituted(self) -> bool:
         return self.output is not None
 
-    def to_dict(self) -> dict[str, Any]:
+    def to_dict(self, permitted_themes=None) -> dict[str, Any]:
         total = sum(c.weight for c in self.eligible) or 1.0
         d = self.det
         return {
@@ -86,14 +96,18 @@ class SubstitutionRecord:
             "p_substitute": round(self.p, 3),
             "roll": None if self.roll is None else round(self.roll, 4),
             "chosen": None if not self.chosen else {
-                "entry": self.chosen.entry.id, "form": self.chosen.entry.form, "why": self.chosen.why,
+                "entry": None if self.chosen.construction else self.chosen.entry.id,
+                **({"construction": self.chosen.construction.to_dict(permitted_themes)} if self.chosen.construction else {}),
+                "form": self.chosen.entry.form, "why": self.chosen.why,
                 "probability": round(self.chosen.weight / total, 3),
                 **({"semantic_effects": list(self.chosen.semantic_effects)} if self.chosen.semantic_effects else {})},
             "stacked": None if not self.stacked else {"entry": self.stacked.entry.id, "why": self.stacked.why},
             "output": self.output,
             "term": self.term,
             "replaced_span": list(self.out_span) if self.out_span else None,
-            "candidates": [{"entry": c.entry.id, "probability": round(c.weight / total, 3)} for c in self.eligible],
+            "candidates": [{"entry": None if c.construction else c.entry.id,
+                            **({"construction_id": c.construction.id} if c.construction else {}),
+                            "probability": round(c.weight / total, 3)} for c in self.eligible],
             "rejected": [{"entry": i, "reason": r} for i, r in self.rejected],
         }
 
@@ -172,10 +186,17 @@ class Result:
     profile_config: dict[str, Any] = field(default_factory=dict)
     imagery: list[dict] = field(default_factory=list)
     _tuning_report: TuningReport = field(default_factory=TuningReport)
+    dictionary_id: str = ""
+    allow_misreadable: bool = False
+    _pins_used: frozenset[int] = frozenset()
+
+    @property
+    def tuning(self) -> dict:
+        return self._tuning_report.to_dict()
 
     @property
     def _tuning(self) -> dict:
-        return self._tuning_report.to_dict()
+        return self.tuning
 
     @property
     def permitted_themes(self) -> frozenset[str]:
@@ -183,8 +204,11 @@ class Result:
         return self.theme_policy.enabled
 
     def envelope(self) -> dict[str, Any]:
-        return {**envelope(self.level, self.vulgarity, self.warnings), "profile_config": self.profile_config,
+        return {**envelope(self.level, self.vulgarity, self.warnings), **response_metadata(self), "profile_config": self.profile_config,
                 "theme_permissions": theme_permissions(self.theme_policy)}
+
+    def replay_pins(self) -> dict:
+        return pin_packet(self, capture_pins(self))
 
     def sentence_text(self, i: int) -> str:
         return self.source[slice(*self.sentences[i])]
@@ -201,12 +225,21 @@ class Result:
         return {
             "substitutions": [
                 {"span": list(r.out_span or r.span), "original": self.source[slice(*(r.out_span or r.span))],
-                 "replacement": r.output, "entry": r.chosen.entry.id,
+                 "replacement": r.output, "entry": None if r.chosen.construction else r.chosen.entry.id,
+                 **({"construction": r.chosen.construction.to_dict(self.theme_policy)} if r.chosen.construction else {}),
                  "stacked": r.stacked.entry.id if r.stacked else None, "riff": r.riff}
                 for r in self.records if r.substituted],
             "garnish": [{"placement": g.placement, "sentence": g.sentence, "entry": g.entry_id, "text": g.text,
                          **({"image_id": g.image_id} if g.image_id else {}),
-                         **({"construction_id": g.construction.id} if g.construction else {})}
+                         **({"construction_id": g.construction.id,
+                             "evidence": g.construction.metadata.evidence,
+                             "coined_by": g.construction.metadata.coined_by,
+                             "parts": [{"role": p.role, "ingredient_id": p.ingredient.id,
+                                        "entry_id": p.ingredient.entry_id, "out_span": list(p.span),
+                                        "text": g.text[slice(*p.span)],
+                                        "evidence": p.ingredient.metadata.evidence,
+                                        "coined_by": provenance(p.ingredient.metadata)['coined_by']}
+                                       for p in g.construction.parts]} if g.construction else {})}
                         for g in self.garnish if g.text],
             "phonetic": [{"rule": p.rule, "before": p.before, "after": p.after} for p in self.phonetic],
             "dialect": [{"before": d.before, "after": d.after, "english": d.english} for d in self.dialect],
@@ -225,7 +258,7 @@ class Result:
             **self.genre.envelope(self.embellishment.step),
             "embellishment": self.embellishment.step, "embellishment_name": self.embellishment.name,
             "decisions": self.decisions(),
-            "explain": [r.to_dict() for r in self.records] + [w.to_dict() for w in self.rewrites]
+            "explain": [r.to_dict(self.theme_policy) for r in self.records] + [w.to_dict() for w in self.rewrites]
                        + [g.to_dict() for g in self.garnish] + [p.to_dict() for p in self.phonetic]
                        + [d.to_dict() for d in self.dialect],
             "difficult_sentences": [d.to_dict() for d in self.difficult],
@@ -249,8 +282,15 @@ class Translator:
         if missing:   # the grammar rules name these; a dictionary without them can't be translated with
             raise SchemaError(f"concepts the grammar rules (detect.py) name are missing: {', '.join(missing)}")
 
+    def document_overrides(self, document_config=None, *, themes=None, invention=None):
+        return request_overrides(document_config, themes=themes, invention=invention,
+                                 defaults=self.dictionary.policy_defaults.get('document_config'))
+
     def policy(self, **kwargs) -> Policy:
         """A Policy over the dictionary's defaults; kwargs are Policy fields, and None means "the default"."""
+        if 'themes' in kwargs or 'invention' in kwargs:
+            kwargs['document_config'] = self.document_overrides(kwargs.get('document_config'),
+                themes=kwargs.pop('themes',None), invention=kwargs.pop('invention',None))
         return Policy.from_mapping(self.dictionary.policy_defaults, **kwargs)
 
     def effective(self, *, level: int | str = 5, vulgarity: int | str | None = None, **policy) -> Effective:
@@ -281,7 +321,9 @@ class Translator:
                   rewrite_mode: Literal["hard", "all"] = "hard",
                   embellishment: int | str | None = None,
                   document_type: str = "general", document_config: dict | None = None,
-                  _tuning: dict | None = None,
+                  themes: dict[str, bool] | None = None, invention: bool | None = None,
+                  popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
+                  _tuning: dict | None = None, _preferences_hook=None,
                   _protected: Masked | None = None, _context: tuple | None = None,
                   _composition: DocumentPart | None = None, _observer: PassObserver | None = None) -> Result:
         """Translate text: the same text, policy and seed always give the same Result.
@@ -298,12 +340,18 @@ class Translator:
         can't carry: the difficult ones (rewrite_mode="hard", thresholds in profiles.yaml `rewrite:`) or every
         one ("all"). Document adapters supply opaque protected spans and whole-text context through the
         internal composition parameters; format selection belongs to the public translation route. _observer
-        watches the pass (the changes builder) without changing it. _tuning carries the internal runtime
-        inputs until popularity/preferences and response reporting join the coordinated contract update."""
+        watches the pass (the changes builder) without changing it. _tuning carries a prepared runtime at internal composition boundaries; public callers use
+        popularity/preferences. Explicit replay pins retain choices under the same hard permissions."""
         pol = self.policy(level=level, seed=seed, vulgarity=vulgarity,
                           variety=variety, registers=registers, regions=regions, unlock=unlock, embedder=embedder,
                           english=english, embellishment=embellishment,
-                          document_type=document_type, document_config=document_config)
+                          document_type=document_type, document_config=document_config,
+                          themes=themes, invention=invention)
+        if _tuning is not None and (popularity or preferences is not None):
+            raise SchemaError('use public popularity/preferences or internal tuning, not both')
+        raw_tuning = _tuning if _tuning is not None else {'popularity': popularity, 'preferences': preferences}
+        prepared_pins = (_composition.pins if _composition is not None else
+                         Pins.prepare(pins, text, self.dictionary, pol.seed))
         masked = _protected if _protected is not None else Masked(text, text)
         source, text = text, masked.text      # the engine reads the masked text: the same length, same offsets
         tokens = tokenize(text)
@@ -312,11 +360,15 @@ class Translator:
                         document_type=pol.document_type, document_config=pol.document_config)
         mood = _composition.mood if _composition is not None and _composition.mood is not None else text_mood(text)
         effective = _composition.effective if _composition is not None else resolve(pol, self.dictionary)
+        setting = genre.setting(pol.embellishment)
+        hook_options = ({'preferences_hook':_preferences_hook,
+                         'dials':{'level':effective.level,'vulgarity':effective.vulgarity,'embellishment':setting.step}}
+                        if _preferences_hook is not None else {})
         run = _Run(text, pol, effective, mood, is_chant(sents), masked, genre,
                    _context[1] if _context is not None else text_english(pol.english, masked.prose(), self.dictionary.us_spellings),
-                   genre.setting(pol.embellishment), composition=_composition, observer=_observer,
-                   tuning=(_composition.tuning if _composition is not None and _composition.tuning is not None
-                           else Tuning.prepare(_tuning, self.dictionary)))
+                   setting, composition=_composition, observer=_observer, pins=prepared_pins,
+                   invention=setting.invention, tuning=(_composition.tuning if _composition is not None and _composition.tuning is not None
+                           else Tuning.prepare(raw_tuning, self.dictionary, **hook_options)))
         if _composition is not None:
             run.state = _composition.state
         if _observer is not None:
@@ -366,6 +418,8 @@ class Translator:
                 why = f"{run.embellishment.name} ({whose}) takes"
             warnings.append(f"{why} no swear infixes, intensifiers or sweary garnish: vulgarity "
                             f"{run.eff.vulgarity} reaches its word swaps only")
+        if prepared_pins is not None and _composition is None:
+            prepared_pins.check_used(run.pins_used)
         return Result(final, source, pol.level, pol.seed, run.records, run.garnish, phon, warnings,
                       theme_policy=run.eff.theme_policy, registers=run.eff.registers,
                       deterministic_text=final, rewrites=run.rewrites, difficult=run.difficult,
@@ -373,7 +427,8 @@ class Translator:
                       sentences=[(s[0].start, s[-1].end) for s in sents], dialect=run.dialect,
                       english=run.english, embellishment=run.embellishment, variety=pol.variety,
                       profile_config=run.eff.envelope()["profile_config"], imagery=run.imagery,
-                      _tuning_report=TuningReport(run.tuning.popularity, frozenset(run.preferences_used)))
+                      _tuning_report=TuningReport(run.tuning.popularity, frozenset(run.preferences_used)),
+                      dictionary_id=self.dictionary.identity, allow_misreadable=run.eff.allow_misreadable, _pins_used=frozenset(run.pins_used))
 
     # -- stages -------------------------------------------------------------------------
 
@@ -405,32 +460,55 @@ class Translator:
                                      run.text[toks[det.start].start: toks[det.end - 1].end], det, sent.index)
             records.append(rec)
             taken = (occupied - set(range(det.start, det.end))) | replaced
-            keep, rejected = self.eligible(det, sent, run, eff, state, taken, record_tuning=True)
+            match = detection_match(det) if run.pins is not None else None
+            pin = run.pin('substitution', rec.span, match=match.key if match else None)
+            rec.pin = pin
+            if pin is not None and pin.target is None:
+                run.pins_used.add(pin.index)
+                rec.decision = 'kept original: explicit pin'
+                continue
+            if pin is None and run.pins is not None and run.pins.complete:
+                rec.decision = 'kept original: complete replay'
+                continue
+            keep, rejected = self.eligible(det, sent, run, eff, state, taken, record_tuning=pin is None)
+            pinned = self._pinned_candidate(pin.target, det, sent, run, taken) if pin is not None else None
+            if pinned and all(c.entry.id != pinned.entry.id for c in keep):
+                keep.append(pinned)
+            if not keep and run.invention:
+                keep, constructed_rejections = self._inventions(det, sent, run, eff, state, taken)
+                rejected += constructed_rejections
             rec.eligible = keep
             rec.rejected = sorted(((e.id, r) for e, r in rejected), key=lambda x: x[0])
             if not keep:
                 rec.decision = "kept original: no eligible entry"
                 continue
-            rec.p = max(eff.profile.substitution[c.entry.substitution_class] for c in keep)
-            rec.roll = roll(pol.seed, "substitute", *sent.key, det.start, det.pattern)
+            rec.p = 1.0 if pinned else max(eff.profile.substitution[c.entry.substitution_class] for c in keep)
+            rec.roll = 0.0 if pinned else roll(pol.seed, "substitute", *sent.key, det.start, det.pattern)
             if rec.roll >= rec.p:
                 rec.decision = f"kept original: roll {rec.roll:.3f} >= p {rec.p:g}"
                 continue
-            choice = weighted_pick(keep, roll(pol.seed, "pick", *sent.key, det.start, det.pattern))
+            choice = pinned or weighted_pick(keep, roll(pol.seed, "pick", *sent.key, det.start, det.pattern))
             here = Spot(sent, rec, keep, state, replaced, said, taken, len(splices))
             if run.observer is not None:
                 choice = run.observer.choose(sent, det, keep, choice)
                 run.observer.spot(here.snapshot())
             rec.chosen = choice
-            spot = self.render_at_spot(choice, here, run)
+            spot = self.render_at_spot(choice, here, run, pin=pin)
             if spot.echo:
                 rec.chosen, rec.decision = None, f"kept original: {spot.echo}"
                 continue
+            if pin is not None:
+                run.pins_used.add(pin.index)
+            rec.form = spot.form
+            rec.stacked_form = (pin.stack.form if pin and pin.stack else self._form(
+                spot.stacked.entry, det, run, sent.key + ("stack",))) if spot.stacked else None
             rec.stacked, rec.riff = spot.stacked, spot.riff
+            rec.part_spans, rec.riff_span = spot.part_spans, spot.riff_span
             s, e = spot.start, spot.end
             rec.output, rec.term, rec.out_span = spot.text, spot.term, (toks[s].start, toks[e - 1].end)
             rec.decision = f"substituted: roll {rec.roll:.3f} < p {rec.p:g}"
-            state.entry_uses[choice.entry.id] += 1
+            for identity in choice.construction.usage_ids if choice.construction else (choice.entry.id,):
+                state.entry_uses[identity] += 1
             if spot.form in choice.entry.spelling_group:
                 state.spellings.setdefault(choice.entry.id, spot.form)
             replaced |= set(range(s, e))
@@ -443,14 +521,15 @@ class Translator:
 
     def eligible(self, det: Detection, sent: "_Sentence", run: "_Run", eff: Effective, state: TextState,
                  taken: set[int], entries: list[Entry] | None = None, *,
-                 record_tuning: bool = False) -> tuple[list[Candidate], list[tuple[Entry, str]]]:
+                 record_tuning: bool = False,
+                 constructions: dict[str, Construction] | None = None) -> tuple[list[Candidate], list[tuple[Entry, str]]]:
         """The candidates that can fill a detection under eff, and the rest with why not: the policy and grammar
         (select.candidates), the span (taken: the tokens other swaps hold), the genre, then what the text has
         already said and variety. Selection reads it at each spot; the changes builder reads it again with only
         the vulgarity cap raised, for the options a lock holds back (entries: the idioms naming the detection's
         concepts, where it has them to hand; candidates passes over the rest)."""
         eligible, rejected = candidates(det, self.dictionary.idioms if entries is None else entries, eff, state.entry_uses,
-                                        self.dictionary.person_concepts, self.dictionary.person_nouns, mood=run.mood)
+                                        self.dictionary.person_concepts, self.dictionary.person_nouns, mood=run.mood, constructions=constructions)
         grammar = grammar_evidence((c.entry.grammar for c in eligible), det, sent.tokens, sent.tags,
                                    complete=sent.complete)
         keep = []
@@ -467,7 +546,7 @@ class Translator:
             else:
                 keep.append(c)
         preference = None
-        if keep and (run.tuning.adjustments.by_context or run.tuning.exact):
+        if keep and not constructions and (run.tuning.adjustments.by_context or run.tuning.exact):
             preference = run.tuning.apply(keep, detection_match(det), level=eff.level,
                                          vulgarity=eff.vulgarity, embellishment=run.embellishment.step)
         keep = _narrow(keep, rejected, run.pol.variety, state)
@@ -476,15 +555,44 @@ class Translator:
             run.preferences_used.add(preference.position)
         return keep, rejected
 
-    def render_at_spot(self, choice: Candidate, spot: "Spot", run: "_Run") -> "SpotRendering":
+    def _inventions(self, det, sent, run, eff, state, taken):
+        catalog = self.dictionary.construction_catalog
+        if catalog is None:
+            return [], []
+        seed = int(roll(run.pol.seed, "construction-substitution", *sent.key, det.start, det.pattern) * 2 ** 53)
+        constructed = {}
+        for concept in det.concepts:
+            generated = generate(self.dictionary, eff, run.embellishment, seed=seed, concept=concept,
+                                 limit=catalog.max_results, mood=run.mood)
+            for c in generated.candidates:
+                if c.family.placement is None and c.family.frame in {"adj", "predicate_adj", "interjection"}:
+                    constructed[c.id] = c
+        entries = [rendering_entry(c, self.dictionary) for c in constructed.values()]
+        return self.eligible(det, sent, run, eff, state, taken, entries, constructions=constructed)
+
+    def _pinned_candidate(self, target, det, sent, run, taken):
+        entry, construction = target.resolve(self.dictionary, run.eff, run.embellishment,
+                                            seed=run.pol.seed, mood=run.mood)
+        if construction and (construction.family.placement is not None or
+                             construction.family.frame not in {'adj', 'predicate_adj', 'interjection'}):
+            raise UserError('construction pin cannot fill this source slot')
+        checking = replace(run, pol=replace(run.pol, variety=0), tuning=Tuning(), preferences_used=set())
+        keep, _ = self.eligible(det, sent, checking, run.eff, TextState(), taken, [entry],
+                               constructions={entry.id: construction} if construction else None)
+        if not keep or target.form not in usable_forms(entry, det, literal=construction is not None):
+            raise UserError('pinned term or form is not eligible at this source spot')
+        return keep[0]
+
+    def render_at_spot(self, choice: Candidate, spot: "Spot", run: "_Run", *, pin=None) -> "SpotRendering":
         """A candidate rendered at its spot, as the splice puts it in: a form (and the spelling the text keeps), its
         article fitted, the entry's own replacement span, a stacked second idiom, a riff, and a/an and capitals
         fixed against what comes before. It reads run.pol (the seed), run.eff, run.mood, run.embellishment and
         run.composition, and reads and spends from run.state (the stack and the riff use it); the caller applies
         the rest. translate and the changes builder (on a copy of the state at the spot) both render this way."""
         det, toks, sent = spot.rec.det, spot.sent.tokens, spot.sent
-        form = self._form(choice.entry, det, run, sent.key)
-        out = fit_article(realise(choice.entry, form, det), choice.entry, det, toks)
+        form = pin.target.form if pin else choice.construction.text if choice.construction else self._form(choice.entry, det, run, sent.key)
+        realised = form if choice.construction else realise(choice.entry, form, det)
+        out = fit_article(realised, choice.entry, det, toks)
         s, e = replacement_span(choice.entry, det, toks)
         retained_qualifier = ""
         if det.degree_qualifier:
@@ -494,33 +602,73 @@ class Translator:
         echo = _gloss_echo(toks, s, e, out, spot.said)
         if echo:
             return SpotRendering(s, e, "", "", form, echo=echo)
-        stacked, out = self._stack(out, choice, spot.keep, det, sent, run)
-        riff, riff_suffix = self._riff(choice, det, e, sent, run)
+        spans = [list(p.span) for p in choice.construction.parts] if choice.construction else []
+        part_count = len(spans)
+        if pin is None:
+            stacked, out = self._stack(out, choice, spot.keep, det, sent, run)
+        else:
+            stacked = None
+            if pin.stack:
+                following = following_context(sent.tokens, det.end, sent.complete)
+                if (choice.construction or det.frame != 'predicate_adj' or det.coordinated or det.degree_qualifier
+                        or det.result_clause or not following.known or following.word is not None
+                        or run.eff.profile.stack <= 0):
+                    raise UserError('stacked pin is not permitted at this source spot')
+                stacked = self._pinned_candidate(pin.stack, det, sent, run, spot.taken)
+                if (stacked.entry.evidence == "bulldust" or stacked.entry.id == choice.entry.id or stacked.entry.frame != choice.entry.frame
+                        or len(stacked.entry.form.split()) > STACK_MAX_WORDS
+                        or len(choice.entry.form.split()) > STACK_MAX_WORDS
+                        or abs(stacked.entry.intensity-choice.entry.intensity) > STACK_INTENSITY_SPREAD):
+                    raise UserError('stacked pin does not fit the primary term')
+                run.state.entry_uses[stacked.entry.id] += 1
+                out += ', ' + realise(stacked.entry, pin.stack.form, det)
+        riff, riff_suffix = self._riff(choice, det, e, sent, run, pin=pin)
+        if riff:
+            spans.append([len(out) + 2, len(out) + 2 + len(riff)])
         if retained_qualifier:
             # Case belongs to the predicate, not to an emphatically capitalised modifier.
-            _, out = _fix_article(out + riff_suffix, toks, det.start, spot.replaced)
+            _, out = _fix_article(out + riff_suffix, toks, det.start, spot.replaced, spans=spans)
             out = retained_qualifier + out
+            for span in spans:
+                span[:] = [x + len(retained_qualifier) for x in span]
         else:
-            s, out = _fix_article(out + riff_suffix, toks, s, spot.replaced)
-        return SpotRendering(s, e, out, out[:-len(riff_suffix)] if riff_suffix else out, form, stacked, riff)
+            s, out = _fix_article(out + riff_suffix, toks, s, spot.replaced, spans=spans)
+        riff_span = tuple(spans[-1]) if riff else None
+        term = out[:riff_span[0] - 2] if riff_span else out
+        return SpotRendering(s, e, out, term, form, stacked, riff,
+                             part_spans=tuple(tuple(p) for p in spans[:part_count]), riff_span=riff_span)
 
     def _contextual_imagery(self, records, splices, sent, run):
         if sent.quiet or sent.prefix_only:
             return
         for rec in records:
+            match = detection_match(rec.det) if run.pins is not None else None
+            pin = run.pin('imagery', rec.span, match=match.key if match else None)
+            if pin is not None and pin.image_id is None:
+                run.pins_used.add(pin.index)
+                continue
+            if pin is None and run.pins is not None and run.pins.complete:
+                continue
             offers = image_offers(self.dictionary, rec.det, sent.tokens, run.eff, run.embellishment)
             if not offers:
                 continue
-            run.imagery.append({"term": rec.text, "for": rec.text, "riffs": [o.card() for o in offers]})
+            run.imagery.append({"term": rec.text, "for": rec.text, "riffs": [o.card(run.eff.theme_policy) for o in offers]})
             automatic = [o for o in offers if o.image.form == "suffix" and o.association == "direct"
                          and o.image.id not in run.state.imagery_used]
             # A dash, slash or opening bracket can continue a phrase rather than close its clause.
             if rec.det.end < len(sent.tokens) and sent.tokens[rec.det.end].is_punct and sent.tokens[rec.det.end].text not in {".", "!", "?", ",", ";", ":"}:
                 automatic = []
-            if not automatic or not self._riff_room(rec.det.end, rec.det.frame, rec.det.start, sent, run):
+            if not automatic or not self._riff_room(rec.det.end, rec.det.frame, rec.det.start, sent, run, explicit=pin is not None):
                 continue
-            offer = pick_riff(automatic, run.mood, roll(run.pol.seed, "imagery-pick", *sent.key, rec.det.start),
-                              [run.eff.metadata_weight(o.image) for o in automatic])
+            if pin is not None:
+                offer = next((o for o in automatic if o.image.id == pin.image_id), None)
+                if offer is None:
+                    raise UserError('pinned image is not eligible at this source spot')
+                run.pins_used.add(pin.index)
+            else:
+                offer = pick_riff(automatic, run.mood, roll(run.pol.seed, "imagery-pick", *sent.key, rec.det.start),
+                                  [run.eff.metadata_weight(o.image) for o in automatic])
+            rec.image_id = offer.image.id
             run.state.imagery_used.add(offer.image.id)
             self._note_riff(sent, run)
             end = sent.tokens[rec.det.end - 1].end
@@ -565,8 +713,10 @@ class Translator:
                run: "_Run") -> tuple[Candidate | None, str]:
         """A second descriptive idiom on a predicate slot ("yer a few snags short of a barbie, mad as a cut snake"):
         the one stacked (or None) and the text with it."""
+        if choice.construction:
+            return None, out
         uses = run.state.entry_uses
-        others = [c for c in keep if c.entry.id != choice.entry.id and c.entry.frame == choice.entry.frame
+        others = [c for c in keep if not c.construction and c.entry.evidence != "bulldust" and c.entry.id != choice.entry.id and c.entry.frame == choice.entry.frame
                   and det.frame == "predicate_adj" and choice.entry.frame in ("predicate_adj", "adj")
                   and not uses.get(c.entry.id) and not det.coordinated
                   and len(c.entry.form.split()) <= STACK_MAX_WORDS and len(choice.entry.form.split()) <= STACK_MAX_WORDS
@@ -581,24 +731,35 @@ class Translator:
         return extra, out + ", " + realise(extra.entry, self._form(extra.entry, det, run, sent.key + ("stack",)), det)
 
     def _riff(self, choice: Candidate, det: Detection, end: int, sent: "_Sentence",
-              run: "_Run") -> tuple[str | None, str]:
+              run: "_Run", *, pin=None) -> tuple[str | None, str]:
         """The image the term calls up ("wheelie bins, overflowin', with the bin chickens fightin' over the
         scraps"), only where the term ends a clause (or is the first of a pair) so the riff can't split a phrase.
         Returns the riff (or None) and the text to append (or "")."""
+        if pin is not None and pin.riff is None:
+            return None, ""
         if not run.embellishment.entry_riffs or choice.entry.id in run.state.riffed:
+            if pin is not None:
+                raise UserError("entry riff is disabled or already used in this text")
             return None, ""
         toks, state, eff = sent.tokens, run.state, run.eff
-        riffs = choice.entry.riffs_within(eff.vulgarity, eff.theme_policy, registers=eff.registers)
-        if not riffs or not self._riff_room(end, choice.entry.frame, det.start, sent, run):
+        riffs = choice.entry.riffs_within(eff.vulgarity, eff.theme_policy, registers=eff.registers, allow_misreadable=eff.allow_misreadable)
+        if not riffs or not self._riff_room(end, choice.entry.frame, det.start, sent, run, explicit=pin is not None):
+            if pin is not None:
+                raise UserError('pinned riff is not permitted at this source spot')
             return None, ""
-        riff = pick_riff(riffs, run.mood, roll(run.pol.seed, "riff-pick", *sent.key, det.start),
-                         [eff.metadata_weight(r) for r in riffs]).text
+        if pin is not None:
+            if sum(r.text == pin.riff for r in riffs) != 1:
+                raise UserError('pinned riff is not eligible for this entry')
+            riff = pin.riff
+        else:
+            riff = pick_riff(riffs, run.mood, roll(run.pol.seed, "riff-pick", *sent.key, det.start),
+                             [eff.metadata_weight(r) for r in riffs]).text
         state.riffed.add(choice.entry.id)
         self._note_riff(sent, run)
         before_and = end < len(toks) and toks[end].norm == "and"
         return riff, ", " + riff + ("," if before_and else "")
 
-    def _riff_room(self, end, frame, start, sent, run):
+    def _riff_room(self, end, frame, start, sent, run, *, explicit=False):
         if sent.quiet or sent.prefix_only or not run.embellishment.takes("riff"):
             return False
         toks, state, eff = sent.tokens, run.state, run.eff
@@ -611,7 +772,7 @@ class Translator:
                 and len(state.riffed) + len(state.imagery_used) < eff.profile.limit("riff")
                 and sent.key not in state.riffed_sentences
                 and (last is None or ordinal - last > eff.profile.garnish_gap)
-                and roll(run.pol.seed, "riff", *sent.key, start) < p)
+                and (explicit or roll(run.pol.seed, "riff", *sent.key, start) < p))
 
     def _note_riff(self, sent, run):
         run.state.riffed_sentences.add(sent.key)
@@ -640,6 +801,31 @@ class Translator:
                                           reason, status, rewriter.model))
         return new or out
 
+    def _pin_garnish(self, offer, pin, swear, run):
+        if pin is None:
+            entry = offer.pick()
+            return offer, entry, entry and offer.words(entry)
+        if pin.target is None:
+            return offer, None, None
+        entry, construction = pin.target.resolve(self.dictionary, run.eff, run.embellishment,
+                                                 seed=run.pol.seed, mood=run.mood)
+        chosen = construction or entry
+        if (chosen.vulgarity > 0) != swear:
+            return offer, None, None
+        if construction:
+            if construction.family.placement != offer.placement:
+                raise UserError('construction pin has the wrong garnish placement')
+        elif entry.id not in {e.id for e in offer.pool}:
+            raise UserError('pinned garnish is not eligible at this source spot')
+        if pin.target.form != offer.words(chosen):
+            raise UserError('pinned garnish form differs from its seeded rendering')
+        existing = next((e for e in offer.pool if e.id == chosen.id), None)
+        if existing is None:
+            offer = replace(offer, pool=(*offer.pool, chosen), weights=(*offer.weights, 1.0))
+        else:
+            chosen = existing
+        return offer, chosen, pin.target.form
+
     def _closer(self, joined: str, sents: list[list[Token]], run: "_Run") -> str:
         """One closing exclamation for the whole text, answering its last sentence ("that's my two bob's worth"
         only after an opinion): a sweary one at the vulgarity's rate, or else the level's clean one."""
@@ -649,23 +835,30 @@ class Translator:
         if (not sents or run.masked.quiet_at(sents[-1][0].start) or run.is_held(sents[-1])
                 or not run.embellishment.takes("closer") or run.eff.profile.limit("closer") == 0):
             return joined     # a text that ends in a table has nowhere to say it; a notice has no punchline
+        pin = run.pin('garnish', (sents[-1][0].start, sents[-1][-1].end), placement='closer')
+        if pin is not None and pin.target is None:
+            run.pins_used.add(pin.index)
+            return joined
+        if pin is None and run.pins is not None and run.pins.complete:
+            return joined
         contexts = sentence_contexts(sents[-1])
         for swear, p, key in ((True, run.eff.swearing.closer, "swear-closer"),
                              (False, run.eff.profile.garnish.get("closer", 0), "closer")):
             if p <= 0:
                 continue
             r = roll(run.pol.seed, key, run.text.lower())
-            if r >= p:
+            if pin is None and r >= p:
                 continue
             offer = garnish_offer("closer", self.dictionary, run.eff, run.pol.seed,
-                                  (key, run.text.lower()), run.state.garnish_uses, contexts=contexts,
+                                  (key, run.text.lower()), {} if pin is not None else run.state.garnish_uses, contexts=contexts,
                                   mood=run.mood, swear=swear, insults=run.embellishment.takes("insult"),
                                   narrator_opinion=run.embellishment.narrator_opinion,
                                   quantity_approximation=run.embellishment.quantity_approximation, setting=run.embellishment)
-            entry = offer.pick()
-            form = entry and offer.words(entry)
+            offer, entry, form = self._pin_garnish(offer, pin, swear, run)
             run.garnish.append(GarnishRecord.rolled("closer", len(sents) - 1, entry, form, r, p, offer.rejected))
             if entry:
+                if pin is not None:
+                    run.pins_used.add(pin.index)
                 run.state.garnish_uses[entry.id] += 1
                 return self._place(joined, offer, entry, form, len(sents) - 1, run)
         return joined
@@ -675,6 +868,12 @@ class Translator:
         tail, or else a sweary one at the vulgarity's rate. It sits inside the sentence, so it doesn't count
         against the sentence's garnish budget."""
         if sent.prefix_only or not run.embellishment.takes("tail"):
+            return out
+        pin = run.pin('garnish', (sent.tokens[0].start, sent.tokens[-1].end), placement='tail')
+        if pin is not None and pin.target is None:
+            run.pins_used.add(pin.index)
+            return out
+        if pin is None and run.pins is not None and run.pins.complete:
             return out
         state = run.state
         ordinal = sent.index + (run.composition.first_sentence if run.composition is not None else 0)
@@ -686,16 +885,18 @@ class Translator:
             if p <= 0 or state.placed["tail"] >= run.eff.profile.limit("tail") or not ends_in_list(out):
                 continue
             r = roll(run.pol.seed, "garnish", key, *sent.key)
-            if r >= p:
+            if pin is None and r >= p:
                 continue
             offer = garnish_offer("tail", self.dictionary, run.eff, run.pol.seed,
-                                  (key,) + sent.key, state.garnish_uses, sentence_contexts(sent.tokens, sent.tags),
+                                  (key,) + sent.key, {} if pin is not None else state.garnish_uses, sentence_contexts(sent.tokens, sent.tags),
                                   swear=swear, insults=run.embellishment.takes("insult"),
                                   narrator_opinion=run.embellishment.narrator_opinion,
                                   quantity_approximation=run.embellishment.quantity_approximation, setting=run.embellishment)
-            entry = offer.pick()
-            form, rej = entry and offer.words(entry), offer.rejected
+            offer, entry, form = self._pin_garnish(offer, pin, swear, run)
+            rej = offer.rejected
             if entry:
+                if pin is not None:
+                    run.pins_used.add(pin.index)
                 out = self._place(out, offer, entry, form, sent.index, run)
                 state.garnish_uses[entry.id] += 1
                 state.placed["tail"] += 1
@@ -808,6 +1009,12 @@ class Translator:
         channel = "swear" if swear else ""
         spent = 0
         for placement in rates:
+            pin = run.pin('garnish', (sent.tokens[0].start, sent.tokens[-1].end), placement=placement)
+            if pin is not None and pin.target is None:
+                run.pins_used.add(pin.index)
+                continue
+            if pin is None and run.pins is not None and run.pins.complete:
+                continue
             p = rates[placement]
             if sent.prefix_only and placement not in ("opener", "connective"):
                 continue
@@ -843,18 +1050,18 @@ class Translator:
             if last is not None and ordinal - last <= eff.profile.garnish_gap:
                 continue
             r = roll(run.pol.seed, "garnish", key, *sent.key)
-            if r >= p:
+            if pin is None and r >= p:
                 continue
             recent = {cid for cid, at in state.connectives.items() if ordinal - at <= CONNECTIVE_REPEAT_GAP}
             offer = garnish_offer(placement, self.dictionary, eff, run.pol.seed, (key,) + sent.key,
-                                  state.garnish_uses + state.entry_uses,
+                                  {} if pin is not None else state.garnish_uses + state.entry_uses,
                                   g.tag_contexts if placement == "tag" else g.contexts,
-                                  exclude=recent, mood=run.mood, swear=swear,
+                                  exclude=frozenset() if pin is not None else recent, mood=run.mood, swear=swear,
                                   insults=run.embellishment.takes("insult"),
                                   narrator_opinion=run.embellishment.narrator_opinion,
                                   quantity_approximation=run.embellishment.quantity_approximation, setting=run.embellishment)
-            entry = offer.pick()
-            form, rej = entry and offer.words(entry), offer.rejected
+            offer, entry, form = self._pin_garnish(offer, pin, swear, run)
+            rej = offer.rejected
             if entry:
                 new = self._place(out, offer, entry, form, sent.index, run, lowerable, g.first_replaced)
                 if new is None:   # only a connective can refuse
@@ -871,6 +1078,8 @@ class Translator:
                     state.connectives[entry.id] = ordinal
                 state.placed[placement] += 1
                 state.last_placed[placement] = ordinal
+                if pin is not None:
+                    run.pins_used.add(pin.index)
                 g.placed.add(placement)
                 spent += 1
             run.garnish.append(GarnishRecord.rolled(placement, sent.index, entry, form, r, p, rej))
@@ -933,6 +1142,8 @@ class SpotRendering:
     stacked: Candidate | None = None
     riff: str | None = None
     echo: str | None = None
+    part_spans: tuple[tuple[int, int], ...] = ()
+    riff_span: tuple[int, int] | None = None
 
 
 @dataclass
@@ -1011,6 +1222,8 @@ class DocumentPart:
     written: frozenset[str] | None = None
     mood: str | None = None
     tuning: Tuning | None = None
+    pins: Pins | None = None
+    source_start: int = 0
 
 
 @dataclass
@@ -1090,6 +1303,9 @@ class _Run:
     observer: PassObserver | None = None
     tuning: Tuning = field(default_factory=Tuning)
     preferences_used: set[int] = field(default_factory=set)
+    invention: bool = False
+    pins: Pins | None = None
+    pins_used: set[int] = field(default_factory=set)
     records: list[SubstitutionRecord] = field(default_factory=list)
     garnish: list[GarnishRecord] = field(default_factory=list)
     rewrites: list[RewriteRecord] = field(default_factory=list)
@@ -1102,6 +1318,10 @@ class _Run:
     _datelines: list[tuple[int, int]] | None = None
     _commands: frozenset[str] | None = None
     _written: frozenset[str] | None = None
+
+    def pin(self, kind, span, *, placement=None, match=None):
+        offset = self.composition.source_start if self.composition else 0
+        return self.pins.at(kind, tuple(x+offset for x in span), placement=placement, match=match) if self.pins else None
 
     def held(self, tokens: list[Token]) -> set[int]:
         """The tokens no swap may touch: words mentioned rather than used ("the word 'guys'"), and in a genre
@@ -1279,14 +1499,31 @@ def _narrow(keep: list[Candidate], rejected: list, variety: int, state: TextStat
     return keep
 
 
-def _fix_article(out: str, toks: list[Token], s: int, replaced: set[int]) -> tuple[int, str]:
+def _fix_article(out: str, toks: list[Token], s: int, replaced: set[int], *,
+                 spans: list[list[int]] | None = None) -> tuple[int, str]:
     """a/an agreement with whatever now follows an article before the swap (taking the article into the span),
     and positional capitals. Returns the swap's new start and text."""
+    spans = spans if spans is not None else []
     if s > 0 and toks[s - 1].norm in ("a", "an") and (s - 1) not in replaced:
         if out.split(" ", 1)[0].lower() in ARTICLES:
-            return s - 1, Translator._case(out, toks, s - 1)
-        return s - 1, fix_articles(toks[s - 1].text + " " + out)
+            s -= 1
+        else:
+            prefix = toks[s - 1].text + " "
+            for span in spans:
+                span[:] = [x + len(prefix) for x in span]
+            edits = []
+            out = fix_articles(prefix + out, edits=edits)
+            map_spans(spans, edits)
+            return s - 1, out
+    for span in spans:
+        span[:] = [len(Translator._case(out[:x], toks, s)) for x in span]
     return s, Translator._case(out, toks, s)
+
+
+def resolve_request(translator=None, document_config=None, *, themes=None, invention=None):
+    """Resolve top-level permissions once at an operation boundary, preserving loaded policy defaults."""
+    tr = translator or default_translator()
+    return tr, tr.document_overrides(document_config, themes=themes, invention=invention)
 
 
 @lru_cache(maxsize=1)

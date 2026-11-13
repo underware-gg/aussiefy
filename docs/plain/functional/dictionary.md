@@ -191,9 +191,10 @@ review. Historical witnesses do not establish current commonness. The research l
 decisions are in [the source-audit checkpoint](../../../research/community-dictionary-2026-10-20/inherited-source-audit.md).
 These checks preserve usage/meaning holds and do not change the provisional scoring threshold.
 
-Changes contract version 2 still carries URL strings in entry cards. The coordinated new card and changes
-contract lands in package slice 6; internal source objects are already structured. Riff and imagery offers
-carry their own evidence metadata. See [DD-040](../../architecture/decisions/dd-040-term-evidence-and-usage.md).
+Changes/cards v3 share structured sources, evidence, resolved theme tiers and attributable makers across
+lookup, change cards, riffs and imagery. Constructors keep whole-expression evidence separate from
+their parts. The frozen [changes contract](changes.md) defines local spans, joins and replay inputs.
+See [DD-040](../../architecture/decisions/dd-040-term-evidence-and-usage.md).
 
 `riffs.yaml` maps entry IDs to optional images, each with `text` and `tone` (`comic`, `grim` or `plain`).
 These can include original comparisons as well as familiar imagery; they are not additional meanings or

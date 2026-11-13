@@ -50,7 +50,7 @@ def test_hunger_families_are_clean_and_readable(translator):
 def test_family_can_raise_theme_without_changing_swear_cap(translator, family, theme):
     assert not bulldust(family=family, vulgarity=1, translator=translator)["results"]
     bob = bulldust(family=family, vulgarity=2, translator=translator)["results"]
-    assert bob and all(theme in item["themes"] and all(isinstance(tag, str) for tag in item["themes"]) for item in bob)
+    assert bob and all(theme in {tag["name"] for tag in item["themes"]} and all(set(tag)=={"name", "tier"} for tag in item["themes"]) for item in bob)
     dad = bulldust(family=family, vulgarity=1, document_config={"themes": {theme: True}}, translator=translator)["results"]
     assert dad and all(item["vulgarity"] == 1 for item in dad)
     assert not bulldust(family=family, vulgarity=0, document_config={"themes": {theme: True}}, translator=translator)["results"]
@@ -172,7 +172,7 @@ def test_constructed_garnish_is_removable_and_valid_under_existing_changes_contr
     assert any(record.construction for record in cs.result.garnish)
     jsonschema.validate(cs.to_dict(), json.loads(SCHEMA.read_text()))
     item = next(change for change in cs.changes if change.get("placement") == "opener")
-    assert item["entry_id"] is None and item["alternatives"] == []
+    assert item["entry_id"] is None and item["construction_id"] in {o["construction_id"] for o in item["alternatives"]}
     assert "removed" in item and item["id"] not in {row["id"] for row in cs.withheld}
     a, b = item["removed"]["out_span"]
     removed = cs.text[:a] + item["removed"]["rendered"] + cs.text[b:]

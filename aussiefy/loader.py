@@ -374,6 +374,8 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
                 rated.append(Riff(text.strip(), max((swear_strength(swears, w) for w in words), default=0), tone, **metadata))
             except SchemaError as exc:
                 errors.append(f"riffs.yaml: {exc}")
+        if len({r.text for r in rated}) != len(rated):
+            errors.append(f"riffs.yaml: {entry_id}: duplicate riff text; canonical wording must identify one riff")
         entries[entry_id] = replace(entries[entry_id], riffs=tuple(rated))
 
     imagery = []

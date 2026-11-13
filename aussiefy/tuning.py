@@ -37,7 +37,7 @@ class Tuning:
     warnings: tuple[str, ...] = ()
 
     @classmethod
-    def prepare(cls, raw, dictionary) -> Tuning:
+    def prepare(cls, raw, dictionary, *, preferences_hook=None, dials=None) -> Tuning:
         if raw is None:
             raw = {}
         if not isinstance(raw, dict) or set(raw) - {"popularity", "preferences"}:
@@ -46,6 +46,12 @@ class Tuning:
         if type(popularity) is not bool:
             raise UserError("popularity must be true or false")
         preferences = raw.get("preferences")
+        if preferences_hook is not None:
+            if preferences is not None:
+                raise UserError('preferences come from the host for this call')
+            if dials is None:
+                raise ValueError('a preference hook needs the resolved call dials')
+            preferences = preferences_hook(**dials)
         if preferences is None:
             preferences = []
         if not isinstance(preferences, (list, tuple)):

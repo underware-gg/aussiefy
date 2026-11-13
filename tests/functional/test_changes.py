@@ -32,7 +32,8 @@ from regen_changes_fixtures import CASES, build as fixture  # noqa: E402
 KINDS = json.loads((FIXTURES / "every-kind.json").read_text(encoding="utf-8"))["request"]
 # the contract each VERSION names: its schema's sha256 and its id format. Changing either means a new VERSION.
 CONTRACTS = {1: ("4dd5a362", "{kind}:{start}-{end}[:{placement or rule}][#{n}]"),
-             2: ("70f980e0", "{kind}:{start}-{end}[:{placement or rule}][#{n}]")}
+             2: ("70f980e0", "{kind}:{start}-{end}[:{placement or rule}][#{n}]"),
+             3: ("9e5125c9", "{kind}:{start}-{end}[:{placement or rule}][#{n}]")}
 LIVELY = dict(level=5, vulgarity=2, embellishment=2, document_config={"profile": {
     "stack": 0.9, "garnish": {"riff": 1.0}, "max_garnish": {"riff": 30}, "garnish_gap": 0, "swearing": {"infix": 6.0}}})
 
@@ -324,8 +325,9 @@ def test_ids_and_renderings_are_the_same_in_every_process():
     assert len(outs) == 1
 
 
+# The core collector reads plain units; full document locks/replay are tested in test_runtime_v3.py.
 LOCKED_CASES = [(name, {k: v for k, v in request.items() if k != "text"}, request["text"])
-                for name, (_, request) in CASES.items()]
+                for name, (_, request) in CASES.items() if not request.get("markdown")]
 LOCKED_CASES += [(f"variety {n}", {"level": 5, "vulgarity": v, "variety": n, "seed": s}, text)
                  for n in (1, 2) for v in (0, 1) for s in (0, 1)
                  for text in ["He was very tired and very drunk, and the toilet is very broken. She is an idiot."]]
@@ -380,8 +382,8 @@ def test_locked_options_follow_the_gates_in_effect(translator):
 
 @pytest.mark.parametrize("options", [{"embellishment": 0}, {"embellishment": 1}, {"embellishment": 2},
                                      {"embellishment": 2, "unlock": ["all"], "text": "He's a rascal and a liar."}])
-def test_changes_v2_preserves_its_card_while_lookup_adds_provenance(translator, dictionary, options):
-    """V2 retains its shape; common data and riffs match discovery under the same policy (DD-053)."""
+def test_changes_and_lookup_share_the_same_rich_card(translator, dictionary, options):
+    """V3 cards and riffs exactly match discovery under the same resolved policy."""
     options = {**{k: v for k, v in KINDS.items() if k != "text"}, **options}
     text = options.pop("text", KINDS["text"])
     cs = aussiefy.translate_changes(text, translator=translator, **options)
@@ -392,11 +394,8 @@ def test_changes_v2_preserves_its_card_while_lookup_adds_provenance(translator, 
         found = [r for r in harness.lookup(query, limit=100, include_gated=bool(options.get("unlock")), **looked,
                                            translator=translator)["results"] if r["id"] == entry_id]
         if found:
-            assert not {'attestation', 'evidence', 'minimum_vulgarity', 'themes', 'held_back'} & card.keys()
             for key, value in card.items():
-                actual = ([source['url'] for source in found[0]['sources'] if source.get('url')]
-                          if key == 'sources' else found[0][key])
-                assert actual == value, (entry_id, key)
+                assert found[0][key] == value, (entry_id, key)
             matched += 1
     assert matched >= 0.8 * len(cs.entries), (matched, len(cs.entries))
     if not options["embellishment"]:   # deadset takes no riffs, so its cards show none
@@ -471,8 +470,8 @@ def test_a_garnish_whose_pick_doesnt_render_true_is_offered_alone_without_its_re
     and the response names it under withheld."""
     real = C._Builder._phonetic_region
 
-    def off(self, text, bounds, flags):
-        out, infix = real(self, text, bounds, flags)
+    def off(self, text, bounds, flags, annotations=None):
+        out, infix = real(self, text, bounds, flags, annotations)
         return (out + "?" if out else out), infix
 
     monkeypatch.setattr(C._Builder, "_phonetic_region", off)
@@ -500,9 +499,9 @@ def test_a_garnish_whose_region_cant_settle_is_offered_alone_and_named(translato
     the corpora), the garnish offers its pick alone and no removal, and the response names it under withheld."""
     real = C._Builder._phonetic_region
 
-    def across(self, text, bounds, flags):
+    def across(self, text, bounds, flags, annotations=None):
         flags.add("straddle-right")
-        return real(self, text, bounds, flags)
+        return real(self, text, bounds, flags, annotations)
 
     monkeypatch.setattr(C._Builder, "_phonetic_region", across)
     cs = _valid(_every_kind(translator))

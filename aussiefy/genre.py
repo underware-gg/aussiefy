@@ -29,7 +29,7 @@ POLICY_KEYS = ("garnish", "openings", "formal_to_rework", "embellishment", "pers
 EMBELLISHMENT_KEYS = ("garnish", "follows_form", "openings", "draft", "keep_share", "max_length", "perform",
                       "guidance")
 OPTIONAL_EMBELLISHMENT_KEYS = ("contextual_riffs", "entry_riffs", "riff_exaggeration", "riff_association",
-                              "narrator_opinion", "solemn_comic_terms", "quantity_approximation")
+                              "narrator_opinion", "solemn_comic_terms", "quantity_approximation", "invention")
 
 # The cue lexicons and weights stay in code, as context.py's mood lexicons do: they are the classifier, tuned
 # together against the corpus (tests/test_genre.py), not vocabulary a dictionary round grows.
@@ -83,6 +83,7 @@ class Embellishment:
     narrator_opinion: bool = False
     solemn_comic_terms: bool = False
     quantity_approximation: bool = False
+    invention: bool = False
 
     @property
     def name(self) -> str:
@@ -136,7 +137,7 @@ class Genre:
         if self.name == "custom":
             e = replace(e, garnish=frozenset(), openings=False, draft=False, keep_share=0, max_length=1,
                         perform=False, guidance="", contextual_riffs=False, riff_exaggeration=0, riff_association=0,
-                        narrator_opinion=False, solemn_comic_terms=False, quantity_approximation=False)
+                        narrator_opinion=False, solemn_comic_terms=False, quantity_approximation=False, invention=False)
         else:
             e = replace(e, openings=e.openings and self.policy.openings,
                         quantity_approximation=e.quantity_approximation and self.policy.quantity_approximation)

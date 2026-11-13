@@ -9,18 +9,17 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
-- Revise the non\-active v3 review draft after site feedback: local part/riff spans, unique persistent option
-  keys, explicit bulldust makers, uniform themes, construction glosses, card versions'n coded warnin'
-  details. Add full\-card lookup projections. Active changes remain v2; runtime warnin' strings are preserved.
+- Activate the accepted changes/cards v3 contract together: rich entry, construction'n imagery cards;
+  renderin'\-local part/riff spans; persistent unique option keys; source matches; attributable bulldust;
+  dictionary/tunin' headers; coded warnings'n versioned lookup, including empty results.
+- Add reviewed construction fallback before the substitution roll'n all constructed openers under
+  the invention switch \(Troppo on, otherwise off\). Share ordinary fit/realisation'n agent scaffold.
+  Well, expose exact top\-level themes/invention, public popularity/preferences'n host\-only MCP preference
+  hooks with independent capability controls'n a tool allowlist.
+- Add source/dictionary/seed\-scoped request pins for entries, construction recipes, stacks, riffs,
+  imagery'n garnish. Keep hard eligibility/protection checks, reject unused picks, share one packet
+  across Markdown units, and expose optional editor replay helpers outside the v3 response schema.
 
-- Prepare internal document tunin' once, retain immutable per\-unit usage, and count a preference only once
-  across a whole Markdown document. Validate'n report unknown preferences even without prose. Add
-  non\-active v3 changes/card schema review assets'n examples; active public output remains v2.
-
-- Implement the remainin' internal selection tunin': popularity uses the wider community band, and
-  latest\-first personal preferences use an exact source key before a same\-root fallback. Validate
-  weights, warn about unknown records, and preserve eligibility, evidence, repeats'n substitution
-  rolls. Public controls'n reporting remain with the coordinated contract update.
 
 - Apply loaded community adjustments to eligible substitution weights within their normal band'n exact
   source\-match/dial context, before variety pruning. Keep meanin', permissions, evidence'n substitution
@@ -46,10 +45,10 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   expressions, wordless outcomes and established-meaning ranking.
 - Share rich discovery cards with structured provenance, resolved tag tiers'n default placement;
   report match\-kind codes'n dictionary identity. Decouple hosted discovery of held\-back entries
-  from translation unlocks. Changes\-v2 cards remain unchanged until the coordinated contract bump.
+  from translation unlocks. Well, shared cards move together in the v3 producer update.
 
 - Add counterfactual evidence'n an audit command for protected phrases, including overlappin'
-  protections, wordless readings'n guarded dialect swaps. Well, allow checked contextual examples.
+  protections, wordless readings'n guarded dialect swaps. Jeez Louise, allow checked contextual examples.
   Protections without established alternative readings remain in place'n are reported for review.
 
 - Separate source\-meaning conditions from output grammar. Shared role evidence rejects adjective\-as\-noun
@@ -172,7 +171,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   automatic translation, plans'n editor alternatives.
 
 - Compose reviewed strong\-adjective modifiers'n let certified targets express a source modifier's
-  degree without duplicatin' it. Mate, share qualifier ownership across translation'n editor alternatives;
+  degree without duplicatin' it. Share qualifier ownership across translation'n editor alternatives;
   retain exact raw modifier spellin' when it remains. Preserve certified lexical grade inside relational
   predicates'n flag bounded local threshold\-grade changes during verification.
 
@@ -234,7 +233,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   reviewed servin'/container senses while preserving queries, ranking rules'n required status.
 
 - Add explicit versioned dictionary overlays through existin' `--dict` files: add concepts/entries or patch
-  existin' records in deterministic order, retaining the normal engine'n dial checks. Fair dinkum, preserve raw fields,
+  existin' records in deterministic order, retaining the normal engine'n dial checks. Preserve raw fields,
   replace named lists/maps rather than append, allow clearing inherited source references, reject malformed
   or shadowed invalid operations, and report correction origins through validate/show'n dictionary metadata.
   Keep behaviour settings separate from vocabulary corrections; tighten canonical concept'n text/boolean

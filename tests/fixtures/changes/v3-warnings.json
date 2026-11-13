@@ -1,0 +1,46 @@
+{
+ "about": "Unknown preference records retain Result warnings and stable codes, even with no prose.",
+ "request": {
+  "text": "`She is tired.`",
+  "level": 5,
+  "seed": 0,
+  "markdown": true,
+  "popularity": true,
+  "preferences": [
+   {
+    "match": "not-a-match",
+    "term": "missing-term",
+    "weight": 2
+   }
+  ]
+ },
+ "response": {
+  "version": 3,
+  "text": "`She is tired.`",
+  "card_version": 3,
+  "dictionary_id": "sha256:496709d81060f0473db8b76afe8696f2df2c592d7b612350663e4cf5732549af",
+  "tuning": {
+   "popularity": true,
+   "preferences": 0
+  },
+  "warnings": [
+   "preferences[0]: unknown source match 'not-a-match'; preference ignored",
+   "preferences[0]: unknown term 'missing-term'; preference ignored"
+  ],
+  "warning_details": [
+   {
+    "code": "unknown_preference_match",
+    "message": "preferences[0]: unknown source match 'not-a-match'; preference ignored"
+   },
+   {
+    "code": "unknown_preference_term",
+    "message": "preferences[0]: unknown term 'missing-term'; preference ignored"
+   }
+  ],
+  "changes": [],
+  "entries": {},
+  "constructions": {},
+  "imagery": {},
+  "withheld": []
+ }
+}

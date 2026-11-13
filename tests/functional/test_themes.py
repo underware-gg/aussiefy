@@ -110,7 +110,7 @@ def test_riffs_cards_and_agent_plan_reuse_the_same_permissions(themed):
     assert [r["text"] for group in plan["riffs"] for r in group["riffs"]] == ["a plain image"]
     changes = translate_changes("I am tired.", **opts)
     assert [r["text"] for r in changes.entries["zzplain"]["riffs"]] == ["a plain image"]
-    card = entry_card(entries["zzplain"], permitted_themes=result.permitted_themes, registers=result.registers)
+    card = entry_card(entries["zzplain"], permitted_themes=result.theme_policy, registers=result.registers)
     assert [r["text"] for r in card["riffs"]] == ["a plain image"]
     session = brief("I am tired.", **opts)
     assert session.payload["THEME_PERMISSIONS"] == result.envelope()["theme_permissions"]
@@ -280,7 +280,9 @@ def test_real_subject_tags_and_mixed_senses_use_normal_eligibility(translator):
 
 
 def test_real_child_riffs_carry_their_own_subjects(dictionary):
-    allowed = dictionary.theme_defaults[3] - {"drinking", "gambling", "bodily_functions"}
+    from aussiefy.themes import ThemePolicy
+    allowed = ThemePolicy(3, dictionary.theme_starts,
+                          tuple((name, False) for name in ("drinking", "gambling", "bodily_functions")))
     for eid, banned in [("esky", "tinnies"), ("bucketing-down", "pissin'")]:
         entry = dictionary.entries[eid]
         assert any(banned in riff.text for riff in entry.riffs)

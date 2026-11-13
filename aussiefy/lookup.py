@@ -7,6 +7,8 @@ level and cap; direct term discovery remains broader than contextual meaning inf
 
 from __future__ import annotations
 
+from .engine import resolve_request
+
 import re
 from dataclasses import dataclass
 from functools import lru_cache
@@ -20,17 +22,18 @@ from .context import NP_DETERMINER_TAGS, TIME_ADVERBS, positive_context
 from .detect import DETERMINERS, NOUN_PREPOSITIONS, Detection, check_frame
 from .embed import NgramEmbedder
 from .errors import UserError
-from .engine import Translator, default_translator
+from .engine import Translator
 from .model import Dictionary
 from .morph import pluralise, verb_forms
 from .select import mapping_effects, dial_rejection, semantic_rejection
 from .schema import PLACEHOLDER_RE, HOLDING_CONCEPT, Entry
+from .cards import CARD_VERSION
 from .cards import full_entry_card, short_card, shows_riffs
 from .evidence import register_rejection
 from .terms import fold, form_key, strip_markup
 from .genre import Embellishment, resolve_document
 from .imagery import lookup_images
-from .policy import Effective, envelope, parse_embellishment, theme_permissions
+from .policy import Effective, parse_embellishment
 
 
 
@@ -176,7 +179,7 @@ class _LookupCards:
     def entry(self, entry: Entry):
         return short_card(entry) if self.short else full_entry_card(entry, self.effective.vulgarity,
             shows_riffs(self.setting), permitted_themes=self.effective.theme_policy,
-            registers=self.effective.registers)
+            registers=self.effective.registers, allow_misreadable=self.effective.allow_misreadable)
 
     def ruled_out(self, evidence, original):
         out = []
@@ -254,8 +257,8 @@ def _merge_ruled_out(protections, limit):
 
 def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = None, limit: int = 8,
            include_gated: bool = False, short: bool = False, embellishment: int | str | None = None,
-           document_type: str = "general", document_config: dict | None = None,
-           translator: Translator | None = None) -> dict[str, Any]:
+           document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None,
+           unlock: list[str] | None = None, translator: Translator | None = None) -> dict[str, Any]:
     """Find Aussie options for a plain-English meaning ("very busy"), or explain a slang term ("goog").
     short: compact cards with match-kind codes for an agent checking a choice.
 
@@ -263,15 +266,16 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     they do not certify it as a replacement for the source context.
     `include_gated` also returns entries held back for doubtful origin or meaning (marked as such).
     """
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     if not isinstance(query, str) or not query.strip():
         raise UserError("query must be a non-empty string")
     if type(limit) is not int or limit < 1:
         raise UserError(f"limit must be 1 or more, not {limit}")
-    tr = translator or default_translator()
+    tr = translator
     d: Dictionary = tr.dictionary
     genre = resolve_document(query, config=d.genres, document_type=document_type, document_config=document_config)
     setting = genre.setting(parse_embellishment(embellishment) if embellishment is not None else None)
-    eff = tr.effective(level=level, vulgarity=vulgarity, unlock=["all"] if include_gated else None,
+    eff = tr.effective(level=level, vulgarity=vulgarity, unlock=["all"] if include_gated else unlock,
                        embellishment=embellishment, document_type=document_type, document_config=document_config)
     cards = _LookupCards(d, eff, setting, genre.policy.term_domains, short, limit)
     q = query.lower().strip()
@@ -308,8 +312,8 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
             if held.start <= matched.start and matched.end <= held.end:
                 blocked.update(set(matched.pattern.concepts) - set(held.concepts))
 
-    out = {"query": query, "dictionary_id": d.identity, **envelope(eff.level, eff.vulgarity, eff.warnings),
-           "theme_permissions": theme_permissions(eff.theme_policy)}
+    out = {"query": query, "card_version": CARD_VERSION,
+           **eff.envelope(profile=False)}
     waiting = sorted(set(d.wordless_meanings).intersection(established))
     if waiting:
         out.update(outcome=outcomes.NO_WORD_YET,

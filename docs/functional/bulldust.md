@@ -63,10 +63,11 @@ entry\-backed stem in a different construction doesn't evade the within\-text re
 also covers a bare stem used as an ordinary substitution, in either order.
 
 Families declare a maximum exaggeration requirement, compared with `riff_exaggeration`. Comic constructions
-in solemn text require `solemn_comic_terms`. Translation currently retains only the previously available
-“bugger me sideways'n call me the pope” opener, under the existing garnish permissions and rates. Other
-combinations remain available through the standalone operation. Additional invented translation wording
-and constructed substitution fallback require the planned invention controls.
+in solemn text require `solemn_comic_terms`. Translation uses all reviewed opener families when invention is enabled. Troppo enables it by
+default; Dinkum, Deadset and Custom leave it off unless explicitly allowed. Non-garnish constructions
+are fallback candidates only where no curated entry fits, through the ordinary render path.
+An existing result complement cannot take a second invented result clause. The standalone constructor
+is an explicit construction request, independent of automatic translation's fallback switch.
 
 ## Evidence, identities and spans
 
@@ -78,13 +79,15 @@ Translation casing and phonetic changes do not alter those canonical spans.
 
 The whole expression has `coined_by: constructor`, a derived `bulldust` label and no borrowed sources.
 Evidence for a stem stays on that stem; Rob's ending credit stays on the ending. No persistent dictionary
-entry is created. Existing changes version 2 reports constructed garnish with a null entry ID, no constructed
-alternatives and a removal when locally renderable. Full public construction cards and in-translation part
-spans are reserved for the coordinated contract update.
+entry is created. Changes v3 reports construction cards, selected membership and alternatives, plus each rendered
+part's local occurrence span. Canonical spans stay in card text; casing, drawl and Markdown escaping
+are tracked separately for occurrences. [Contract and replay](changes.md) defines keys and joins.
 
-Public metadata currently reports `themes` as plain names. Stored YAML still preserves explicit per-term
-tiers, and all eligibility checks use those tiers. Plan and explanation traces retain a `construction_id`
-for a constructed opener, independently of its null dictionary entry ID.
+All rich themes use `{name, tier}` objects with `minimum_vulgarity`. Every assessed bulldust rendering
+has an attributable maker, including derived agent coinage where the evidence assessment establishes
+it. Plans include canonical construction cards and labelled local parts. The operation also returns
+the shared agent-neutral `scaffold`, with eligible meanings/examples, family slots, ingredients and
+constraints; Yarn receives the same material without depending on a provider SDK.
 
 ## Data and bounds
 

@@ -8,8 +8,16 @@
   "embellishment": 1
  },
  "response": {
-  "version": 2,
+  "version": 3,
   "text": "I'm exhausted and the dunny is broken. Thanks for brekky, my mate. You're buggered and starvin', and your car is bung, mate. Well, we let a toddler win the game.",
+  "card_version": 3,
+  "dictionary_id": "sha256:496709d81060f0473db8b76afe8696f2df2c592d7b612350663e4cf5732549af",
+  "tuning": {
+   "popularity": false,
+   "preferences": 0
+  },
+  "warnings": [],
+  "warning_details": [],
   "changes": [
    {
     "id": "substitution:22-28",
@@ -30,18 +38,27 @@
     "alternatives": [
      {
       "entry_id": "dunny",
-      "weight": 1.0,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "dunny",
       "out_span": [
        22,
        27
       ],
       "vulgarity": 0,
+      "weight": 1.0,
       "masks": []
      }
     ],
     "locked": [],
-    "covers": []
+    "covers": [],
+    "match": {
+     "key": "TOILET/np/8e00c5393b8c3bab0bf925588021f502c5d1f1d36d14ccf25e7259529f577edd",
+     "root": "TOILET/np/8e00c5393b8c3bab0bf925588021f502c5d1f1d36d14ccf25e7259529f577edd",
+     "qualifiers": {}
+    },
+    "evidence": "unverified",
+    "coined_by": null
    },
    {
     "id": "substitution:51-60",
@@ -62,18 +79,27 @@
     "alternatives": [
      {
       "entry_id": "brekkie",
-      "weight": 1.0,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "brekky",
       "out_span": [
        50,
        56
       ],
       "vulgarity": 0,
+      "weight": 1.0,
       "masks": []
      }
     ],
     "locked": [],
-    "covers": []
+    "covers": [],
+    "match": {
+     "key": "BREAKFAST/np/eb2e147494d94eff7036136cf71988b0a0784fc95a9b3841319d41b083678e64",
+     "root": "BREAKFAST/np/eb2e147494d94eff7036136cf71988b0a0784fc95a9b3841319d41b083678e64",
+     "qualifiers": {}
+    },
+    "evidence": "unverified",
+    "coined_by": null
    },
    {
     "id": "substitution:65-71",
@@ -94,18 +120,27 @@
     "alternatives": [
      {
       "entry_id": "mate",
-      "weight": 1.0,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "mate",
       "out_span": [
        61,
        65
       ],
       "vulgarity": 0,
+      "weight": 1.0,
       "masks": []
      }
     ],
     "locked": [],
-    "covers": []
+    "covers": [],
+    "match": {
+     "key": "FRIEND/np/f48d63c173cff4174c7bfde375b7313c4a8c31b7a40bfddf83e822b26da50b80",
+     "root": "FRIEND/np/f48d63c173cff4174c7bfde375b7313c4a8c31b7a40bfddf83e822b26da50b80",
+     "qualifiers": {}
+    },
+    "evidence": "unverified",
+    "coined_by": null
    },
    {
     "id": "phonetic:73-80:pronoun-are",
@@ -132,7 +167,9 @@
     },
     "alternatives": [],
     "locked": [],
-    "covers": []
+    "covers": [],
+    "evidence": null,
+    "coined_by": null
    },
    {
     "id": "substitution:81-91",
@@ -162,13 +199,15 @@
     "alternatives": [
      {
       "entry_id": "buggered",
-      "weight": 0.1755,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "buggered",
       "out_span": [
        74,
        82
       ],
       "vulgarity": 1,
+      "weight": 0.17548967707781896,
       "masks": [
        {
         "span": [
@@ -182,69 +221,81 @@
      },
      {
       "entry_id": "knackered",
-      "weight": 0.1755,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "knackered",
       "out_span": [
        74,
        82
       ],
       "vulgarity": 0,
+      "weight": 0.17548967707781896,
       "masks": []
      },
      {
       "entry_id": "out-on-poss-feet",
-      "weight": 0.0953,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "out on your feet",
       "out_span": [
        74,
        82
       ],
       "vulgarity": 0,
+      "weight": 0.09528851244044467,
       "masks": []
      },
      {
       "entry_id": "rooted",
-      "weight": 0.09,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "rooted",
       "out_span": [
        74,
        82
       ],
       "vulgarity": 1,
+      "weight": 0.0899947061937533,
       "masks": []
      },
      {
       "entry_id": "stuffed",
-      "weight": 0.135,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "stuffed",
       "out_span": [
        74,
        82
       ],
       "vulgarity": 0,
+      "weight": 0.13499205929062996,
       "masks": []
      },
      {
       "entry_id": "zonked",
-      "weight": 0.3287,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "zonked",
       "out_span": [
        74,
        82
       ],
       "vulgarity": 0,
+      "weight": 0.3287453679195341,
       "masks": []
      }
     ],
     "locked": [
      {
       "entry_id": "fucked-broken",
-      "vulgarity": 2,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "fucked",
       "out_span": [
        74,
        82
       ],
+      "vulgarity": 2,
       "masks": [
        {
         "span": [
@@ -257,7 +308,14 @@
       ]
      }
     ],
-    "covers": []
+    "covers": [],
+    "match": {
+     "key": "TIRED/predicate_adj/2e11854d4ba97d2d8208c4fab63e5b3626896454bfe1332ec94cdc66fdfe3c3a",
+     "root": "TIRED/predicate_adj/2e11854d4ba97d2d8208c4fab63e5b3626896454bfe1332ec94cdc66fdfe3c3a",
+     "qualifiers": {}
+    },
+    "evidence": "unverified",
+    "coined_by": null
    },
    {
     "id": "substitution:96-102",
@@ -278,47 +336,55 @@
     "alternatives": [
      {
       "entry_id": "starvin",
-      "weight": 0.3327,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "starvin'",
       "out_span": [
        87,
        95
       ],
       "vulgarity": 0,
+      "weight": 0.3326810176125245,
       "masks": []
      },
      {
       "entry_id": "hungry-enough-horse-jockey",
-      "weight": 0.2348,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "hungry enough to eat a horse and chase the jockey",
       "out_span": [
        87,
        95
       ],
       "vulgarity": 0,
+      "weight": 0.23483365949119375,
       "masks": []
      },
      {
       "entry_id": "peckish",
-      "weight": 0.4325,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "peckish",
       "out_span": [
        87,
        95
       ],
       "vulgarity": 0,
+      "weight": 0.43248532289628183,
       "masks": []
      }
     ],
     "locked": [
      {
       "entry_id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
-      "vulgarity": 2,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "hungry enough to eat the arse out of a low-flyin' duck",
       "out_span": [
        87,
        95
       ],
+      "vulgarity": 2,
       "masks": [
        {
         "span": [
@@ -331,7 +397,14 @@
       ]
      }
     ],
-    "covers": []
+    "covers": [],
+    "match": {
+     "key": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+     "root": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+     "qualifiers": {}
+    },
+    "evidence": "unverified",
+    "coined_by": null
    },
    {
     "id": "substitution:120-126",
@@ -352,24 +425,28 @@
     "alternatives": [
      {
       "entry_id": "bung-broken",
-      "weight": 0.4907,
+      "evidence": "attested",
+      "coined_by": null,
       "rendered": "bung",
       "out_span": [
        113,
        117
       ],
       "vulgarity": 0,
+      "weight": 0.4907338288273669,
       "masks": []
      },
      {
       "entry_id": "buggered",
-      "weight": 0.043,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "buggered",
       "out_span": [
        113,
        117
       ],
       "vulgarity": 1,
+      "weight": 0.04303657784557463,
       "masks": [
        {
         "span": [
@@ -383,40 +460,53 @@
      },
      {
       "entry_id": "cactus",
-      "weight": 0.1904,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "cactus",
       "out_span": [
        113,
        117
       ],
       "vulgarity": 0,
+      "weight": 0.1903540943169647,
       "masks": []
      },
      {
       "entry_id": "rooted",
-      "weight": 0.1104,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "rooted",
       "out_span": [
        113,
        117
       ],
       "vulgarity": 1,
+      "weight": 0.11035019960403751,
       "masks": []
      },
      {
       "entry_id": "stuffed",
-      "weight": 0.1655,
+      "evidence": "unverified",
+      "coined_by": null,
       "rendered": "stuffed",
       "out_span": [
        113,
        117
       ],
       "vulgarity": 0,
+      "weight": 0.1655252994060563,
       "masks": []
      }
     ],
     "locked": [],
-    "covers": []
+    "covers": [],
+    "match": {
+     "key": "BROKEN/predicate_adj/9c6a05896e1f409e22c554b207f1cbd0505ba2b5a8e138c8f071511dca9f1f88",
+     "root": "BROKEN/predicate_adj/9c6a05896e1f409e22c554b207f1cbd0505ba2b5a8e138c8f071511dca9f1f88",
+     "qualifiers": {}
+    },
+    "evidence": "attested",
+    "coined_by": null
    },
    {
     "id": "garnish:126-126:tag",
@@ -452,6 +542,8 @@
        123
       ],
       "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
       "masks": []
      },
      {
@@ -463,44 +555,54 @@
        123
       ],
       "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
       "masks": []
      },
      {
       "entry_id": "g-ya-drongo",
-      "weight": 0.1333,
+      "weight": 0.13333333333333333,
       "rendered": ", ya drongo",
       "out_span": [
        117,
        123
       ],
       "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
       "masks": []
      },
      {
       "entry_id": "g-ya-galah",
-      "weight": 0.1333,
+      "weight": 0.13333333333333333,
       "rendered": ", ya galah",
       "out_span": [
        117,
        123
       ],
       "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
       "masks": []
      },
      {
       "entry_id": "g-ya-mug",
-      "weight": 0.1333,
+      "weight": 0.13333333333333333,
       "rendered": ", ya mug",
       "out_span": [
        117,
        123
       ],
       "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
       "masks": []
      }
     ],
     "locked": [],
-    "covers": []
+    "covers": [],
+    "evidence": "unverified",
+    "coined_by": null
    },
    {
     "id": "garnish:128-128:connective",
@@ -529,73 +631,87 @@
     "alternatives": [
      {
       "entry_id": "c-anyway",
-      "weight": 0.2548,
+      "weight": 0.25477707006369427,
       "rendered": "Anyway, we",
       "out_span": [
        125,
        133
       ],
       "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
       "masks": []
      },
      {
       "entry_id": "c-mate",
-      "weight": 0.1529,
+      "weight": 0.15286624203821655,
       "rendered": "Mate, we",
       "out_span": [
        125,
        133
       ],
       "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
       "masks": []
      },
      {
       "entry_id": "c-mind-you",
-      "weight": 0.0828,
+      "weight": 0.08280254777070065,
       "rendered": "Mind you, we",
       "out_span": [
        125,
        133
       ],
       "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
       "masks": []
      },
      {
       "entry_id": "c-now",
-      "weight": 0.1274,
+      "weight": 0.12738853503184713,
       "rendered": "Now, we",
       "out_span": [
        125,
        133
       ],
       "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
       "masks": []
      },
      {
       "entry_id": "c-so-anyway",
-      "weight": 0.1274,
+      "weight": 0.12738853503184713,
       "rendered": "So anyway, we",
       "out_span": [
        125,
        133
       ],
       "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
       "masks": []
      },
      {
       "entry_id": "c-well",
-      "weight": 0.2548,
+      "weight": 0.25477707006369427,
       "rendered": "Well, we",
       "out_span": [
        125,
        133
       ],
       "vulgarity": 0,
+      "evidence": "unverified",
+      "coined_by": null,
       "masks": []
      }
     ],
     "locked": [],
-    "covers": []
+    "covers": [],
+    "evidence": "unverified",
+    "coined_by": null
    }
   ],
   "entries": {
@@ -614,8 +730,34 @@
      "brekky"
     ],
     "sources": [
-     "https://promo.mcdonalds.com.au/menu/breakfast"
-    ]
+     {
+      "kind": "media",
+      "publisher": "promo.mcdonalds.com.au",
+      "supports": [],
+      "url": "https://promo.mcdonalds.com.au/menu/breakfast",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
    },
    "buggered": {
     "id": "buggered",
@@ -630,8 +772,39 @@
     "vulgarity": 1,
     "register": "current",
     "sources": [
-     "https://www.oxfordlearnersdictionaries.com/definition/english/buggered"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Oxford Learner's Dictionaries",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/english/buggered",
+      "note": "Reviewed 2026-10-21: selected form/sense; L101–112. Both very-tired and irreparably-damaged senses inspected; source labels British. Source family: oxford-university-press; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 1,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
    },
    "bung-broken": {
     "id": "bung-broken",
@@ -645,9 +818,52 @@
     "vulgarity": 0,
     "register": "current",
     "sources": [
-     "https://en.wiktionary.org/wiki/bung",
-     "https://history.cass.anu.edu.au/centres/andc/australian-words-b"
-    ]
+     {
+      "kind": "crowd_dictionary",
+      "publisher": "Wiktionary",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://en.wiktionary.org/wiki/bung",
+      "note": "Reviewed 2026-10-21: selected form/sense; L365–384. Source family: wiktionary; not a current-commonness survey."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Australian National Dictionary Centre",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://history.cass.anu.edu.au/centres/andc/australian-words-b",
+      "note": "Reviewed 2026-10-21: selected form/sense; bung, L488-492. Reported date: late 19th century (source_reported_earliest_period); not a claim of absolute first use. Source family: andc; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 8.0,
+     "bars": 4,
+     "counts": {
+      "crowd_dictionary": 1,
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "attested",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
    },
    "c-anyway": {
     "id": "c-anyway",
@@ -660,8 +876,34 @@
     "register": "current",
     "placement": "connective",
     "sources": [
-     "https://dictionary.cambridge.org/grammar/british-grammar/anyway"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Cambridge Dictionary",
+      "supports": [],
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/anyway",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "general",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
    },
    "c-mate": {
     "id": "c-mate",
@@ -674,8 +916,34 @@
     "register": "current",
     "placement": "connective",
     "sources": [
-     "https://www.oxfordlearnersdictionaries.com/definition/english/mate_1"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "oxfordlearnersdictionaries.com",
+      "supports": [],
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/english/mate_1",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
    },
    "c-mind-you": {
     "id": "c-mind-you",
@@ -689,8 +957,39 @@
     "placement": "connective",
     "notes": "Shared with British English, and very natural in an Australian yarn. Best on a sentence that qualifies the one before it, so keep the weight low.",
     "sources": [
-     "https://www.collinsdictionary.com/dictionary/english/mind-you_1"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/mind-you_1",
+      "note": "Reviewed 2026-10-21: selected form/sense; 217–227. Qualifying afterthought with actual discourse example. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "general",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
    },
    "c-now": {
     "id": "c-now",
@@ -703,8 +1002,34 @@
     "register": "current",
     "placement": "connective",
     "sources": [
-     "https://dictionary.cambridge.org/grammar/british-grammar/discourse-"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Cambridge Dictionary",
+      "supports": [],
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/discourse-",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "general",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
    },
    "c-so-anyway": {
     "id": "c-so-anyway",
@@ -717,9 +1042,41 @@
     "register": "current",
     "placement": "connective",
     "sources": [
-     "https://dictionary.cambridge.org/grammar/british-grammar/discourse-",
-     "https://dictionary.cambridge.org/grammar/british-grammar/anyway"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Cambridge Dictionary",
+      "supports": [],
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/discourse-",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Cambridge Dictionary",
+      "supports": [],
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/anyway",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "general",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
    },
    "c-well": {
     "id": "c-well",
@@ -732,8 +1089,34 @@
     "register": "current",
     "placement": "connective",
     "sources": [
-     "https://dictionary.cambridge.org/grammar/british-grammar/discourse-"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Cambridge Dictionary",
+      "supports": [],
+      "url": "https://dictionary.cambridge.org/grammar/british-grammar/discourse-",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "general",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
    },
    "cactus": {
     "id": "cactus",
@@ -746,6 +1129,42 @@
     "level": 2,
     "vulgarity": 0,
     "register": "current",
+    "notes": "Used here of broken or ruined machines and things (\"the ute's cactus\"). This mapping does not cover every other use of the word.",
+    "sources": [
+     {
+      "kind": "media",
+      "publisher": "Macquarie Dictionary",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://www.macquariedictionary.com.au/were-totally-cactus/",
+      "note": "Reviewed 2026-10-21: selected form/sense; 189–194. Broken/ruined engine, not ordinary plant. Source family: macquarie; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 3.0,
+     "bars": 1,
+     "counts": {
+      "media": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": [],
     "riffs": [
      {
       "text": "like a flat-pack in a cyclone",
@@ -769,12 +1188,9 @@
        "weights_version": "provisional-1"
       },
       "evidence": "unverified",
+      "minimum_vulgarity": 0,
       "best": true
      }
-    ],
-    "notes": "Used here of broken or ruined machines and things (\"the ute's cactus\"). This mapping does not cover every other use of the word.",
-    "sources": [
-     "https://www.macquariedictionary.com.au/were-totally-cactus/"
     ]
    },
    "dunny": {
@@ -788,6 +1204,46 @@
     "level": 2,
     "vulgarity": 0,
     "register": "current",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Oxford Learner's Dictionaries",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/english/dunny",
+      "note": "Reviewed 2026-10-21: selected form/sense; L103–109. Toilet sense confirmed; early-19th dung meaning not dated to present toilet sense. Source family: oxford-university-press; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [
+     {
+      "name": "bodily_functions",
+      "tier": 0
+     }
+    ],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": [],
     "riffs": [
      {
       "text": "out the back with a redback under the seat",
@@ -811,11 +1267,9 @@
        "weights_version": "provisional-1"
       },
       "evidence": "unverified",
+      "minimum_vulgarity": 0,
       "best": true
      }
-    ],
-    "sources": [
-     "https://www.oxfordlearnersdictionaries.com/definition/english/dunny"
     ]
    },
    "fucked-broken": {
@@ -831,8 +1285,34 @@
     "vulgarity": 2,
     "register": "current",
     "sources": [
-     "https://dictionary.cambridge.org/dictionary/english/fucked"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Cambridge Dictionary",
+      "supports": [],
+      "url": "https://dictionary.cambridge.org/dictionary/english/fucked",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 2,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
    },
    "g-ay": {
     "id": "g-ay",
@@ -845,8 +1325,34 @@
     "register": "current",
     "placement": "tag",
     "sources": [
-     "https://www.oxfordlearnersdictionaries.com/definition/english/eh"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "oxfordlearnersdictionaries.com",
+      "supports": [],
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/english/eh",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
    },
    "g-mate": {
     "id": "g-mate",
@@ -859,8 +1365,34 @@
     "register": "current",
     "placement": "tag",
     "sources": [
-     "https://www.oxfordlearnersdictionaries.com/definition/english/mate_1"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "oxfordlearnersdictionaries.com",
+      "supports": [],
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/english/mate_1",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
    },
    "g-ya-drongo": {
     "id": "g-ya-drongo",
@@ -873,8 +1405,34 @@
     "register": "current",
     "placement": "tag",
     "sources": [
-     "https://history.cass.anu.edu.au/centres/andc/australian-words-d"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Australian National Dictionary Centre",
+      "supports": [],
+      "url": "https://history.cass.anu.edu.au/centres/andc/australian-words-d",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
    },
    "g-ya-galah": {
     "id": "g-ya-galah",
@@ -887,8 +1445,34 @@
     "register": "current",
     "placement": "tag",
     "sources": [
-     "https://www.collinsdictionary.com/dictionary/english/galah"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [],
+      "url": "https://www.collinsdictionary.com/dictionary/english/galah",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
    },
    "g-ya-mug": {
     "id": "g-ya-mug",
@@ -901,8 +1485,34 @@
     "register": "current",
     "placement": "tag",
     "sources": [
-     "https://www.collinsdictionary.com/dictionary/english/mug"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [],
+      "url": "https://www.collinsdictionary.com/dictionary/english/mug",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
    },
    "hungry-enough-horse-jockey": {
     "id": "hungry-enough-horse-jockey",
@@ -916,9 +1526,41 @@
     "vulgarity": 0,
     "register": "current",
     "sources": [
-     "https://warrenfahey.com.au/colloquial-sayings-slangugae/",
-     "https://mythicaustralia.com/wp-content/uploads/2020/01/Mythic-Australia-Book-Land-Of-Adventure.pdf"
-    ]
+     {
+      "kind": "media",
+      "publisher": "warrenfahey.com.au",
+      "supports": [],
+      "url": "https://warrenfahey.com.au/colloquial-sayings-slangugae/",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "media",
+      "publisher": "mythicaustralia.com",
+      "supports": [],
+      "url": "https://mythicaustralia.com/wp-content/uploads/2020/01/Mythic-Australia-Book-Land-Of-Adventure.pdf",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
    },
    "hungry-enough-to-eat-the-arse-out-of-a-duck": {
     "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
@@ -932,8 +1574,45 @@
     "vulgarity": 2,
     "register": "current",
     "sources": [
-     "https://en.wiktionary.org/wiki/could_eat_the_crotch_out_of_a_low_flying_duck"
-    ]
+     {
+      "kind": "crowd_dictionary",
+      "publisher": "Wiktionary",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://en.wiktionary.org/wiki/could_eat_the_crotch_out_of_a_low_flying_duck",
+      "note": "Reviewed 2026-10-21: selected form/sense; L105–122. Arse lexical variant explicitly listed; hungry-enough syntax illustrated for crotch variant. This confirms idiom family and hunger meaning, not each phonetic rendering. Source family: wiktionary; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [
+     {
+      "name": "sex",
+      "tier": 1
+     }
+    ],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 2.0,
+     "bars": 1,
+     "counts": {
+      "crowd_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 2,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
    },
    "knackered": {
     "id": "knackered",
@@ -946,6 +1625,41 @@
     "level": 1,
     "vulgarity": 0,
     "register": "current",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/knackered",
+      "note": "Reviewed 2026-10-21: selected form/sense; L249-261. Australian label applies to tired and worn-out senses. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": [],
     "riffs": [
      {
       "text": "eyelids heavy as wet blankets",
@@ -969,11 +1683,9 @@
        "weights_version": "provisional-1"
       },
       "evidence": "unverified",
+      "minimum_vulgarity": 0,
       "best": true
      }
-    ],
-    "sources": [
-     "https://www.collinsdictionary.com/dictionary/english/knackered"
     ]
    },
    "mate": {
@@ -988,8 +1700,40 @@
     "vulgarity": 0,
     "register": "current",
     "sources": [
-     "https://history.cass.anu.edu.au/centres/andc/australian-words-m"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Australian National Dictionary Centre",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://history.cass.anu.edu.au/centres/andc/australian-words-m",
+      "note": "Reviewed 2026-10-21: selected form/sense; mate, L91-92. Source family: andc; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
    },
    "out-on-poss-feet": {
     "id": "out-on-poss-feet",
@@ -1004,8 +1748,35 @@
     "register": "current",
     "notes": "Shared English, familiar in Australia.",
     "sources": [
-     "https://en.wiktionary.org/wiki/out_on_one%27s_feet"
-    ]
+     {
+      "kind": "crowd_dictionary",
+      "publisher": "Wiktionary",
+      "supports": [],
+      "url": "https://en.wiktionary.org/wiki/out_on_one%27s_feet",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "produced_by": "agent",
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
    },
    "peckish": {
     "id": "peckish",
@@ -1020,8 +1791,39 @@
     "register": "current",
     "notes": "Shared with British English.",
     "sources": [
-     "https://www.collinsdictionary.com/dictionary/english/peckish"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/peckish",
+      "note": "Reviewed 2026-10-21: selected form/sense; 222–228. Explicit slight hunger severity. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
    },
    "rooted": {
     "id": "rooted",
@@ -1037,8 +1839,34 @@
     "register": "current",
     "notes": "\"Root\" is Australian slang for sex, so \"rooted\" (exhausted; broken) is cheeky but Dad-level (Rob, 2026-10-18). Never use \"root\" for US \"root for (a team)\"; Australians say \"barrack for\". \"Get rooted\" is a rude brush-off, a different sense.",
     "sources": [
-     "https://ielts.com.au/australia/prepare/article-australian-slang-words-phrases"
-    ]
+     {
+      "kind": "media",
+      "publisher": "ielts.com.au",
+      "supports": [],
+      "url": "https://ielts.com.au/australia/prepare/article-australian-slang-words-phrases",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 1,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
    },
    "starvin": {
     "id": "starvin",
@@ -1052,8 +1880,34 @@
     "vulgarity": 0,
     "register": "current",
     "sources": [
-     "https://www.collinsdictionary.com/dictionary/english/starving"
-    ]
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [],
+      "url": "https://www.collinsdictionary.com/dictionary/english/starving",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
    },
    "stuffed": {
     "id": "stuffed",
@@ -1069,8 +1923,34 @@
     "vulgarity": 0,
     "register": "current",
     "sources": [
-     "https://en.wiktionary.org/wiki/stuffed"
-    ]
+     {
+      "kind": "crowd_dictionary",
+      "publisher": "Wiktionary",
+      "supports": [],
+      "url": "https://en.wiktionary.org/wiki/stuffed",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
    },
    "zonked": {
     "id": "zonked",
@@ -1085,12 +1965,58 @@
     "register": "current",
     "notes": "General English, noted as such.",
     "sources": [
-     "https://en.wiktionary.com/wiki/zonked",
-     "https://www.deseret.com/2000/9/10/20679388/australian-slang/",
-     "https://dictionary.cambridge.org/dictionary/english/zonked"
-    ]
+     {
+      "kind": "crowd_dictionary",
+      "publisher": "Wiktionary",
+      "supports": [],
+      "url": "https://en.wiktionary.com/wiki/zonked",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "media",
+      "publisher": "deseret.com",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://www.deseret.com/2000/9/10/20679388/australian-slang/",
+      "note": "Reviewed 2026-10-21: selected form/sense; 62. Australian-slang newspaper list explicitly parents/oldies and exhausted/zonked. Reproduced list not frequency evidence. Source family: deseret-australian-slang-2000; not a current-commonness survey."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Cambridge Dictionary",
+      "supports": [],
+      "url": "https://dictionary.cambridge.org/dictionary/english/zonked",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 3.0,
+     "bars": 1,
+     "counts": {
+      "media": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
    }
   },
+  "constructions": {},
+  "imagery": {},
   "withheld": []
  }
 }

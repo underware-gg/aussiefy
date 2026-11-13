@@ -1,4 +1,4 @@
-"""Offline review artefacts; the active changes-v2 emitter remains unchanged."""
+"""Immutable accepted r2 review artefacts; active emission is tested separately."""
 
 from copy import deepcopy
 import json
@@ -38,7 +38,8 @@ def test_review_schemas_are_valid_local_and_share_the_same_card_definitions(bund
                 for child in node: yield from refs(child)
         assert all(ref.startswith('#/$defs/') for ref in refs(schema))
     assert all(changes['$defs'][key]==value for key,value in cards['$defs'].items())
-    assert VERSION==2 and json.loads(SCHEMA.read_text())['properties']['version']=={'const':2}
+    assert VERSION==3 and json.loads(SCHEMA.read_text())['properties']['version']=={'const':3}
+    assert json.loads(SCHEMA.read_text())['$defs']==changes['$defs']
 
 
 def test_all_current_non_omitted_rich_entry_cards_fit_the_draft(bundle,translator):
@@ -53,7 +54,9 @@ def test_all_current_non_omitted_rich_entry_cards_fit_the_draft(bundle,translato
 def assert_graph(case,dictionary):
     warnings=[WarningMessage(d['message'],code=d['code']) for d in case['result_warning_details']]
     assert warnings==case['result_warnings']
-    validate_response(case['response'],case['source'],dictionary,result_warnings=warnings)
+    from dataclasses import replace
+    archived = replace(dictionary, identity=case['response']['dictionary_id'])
+    validate_response(case['response'],case['source'],archived,result_warnings=warnings)
 
 
 def test_draft_examples_demonstrate_longer_alternatives_without_changing_the_replace_region(bundle):
@@ -270,7 +273,7 @@ def test_lookup_projection_carries_version_even_without_results(bundle,dictionar
     for case in bundle['lookup-examples.json']['cases']:
         body=case['response']
         validator(lookup_schema).validate(body)
-        assert body['card_version']==3 and body['dictionary_id']==dictionary.identity
+        assert body['card_version']==3 and body['dictionary_id']==bundle['examples.json']['cases'][0]['response']['dictionary_id']
         broken=deepcopy(body)
         del broken['card_version']
         with pytest.raises(ValidationError): validator(lookup_schema).validate(broken)

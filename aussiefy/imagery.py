@@ -10,7 +10,8 @@ from .select import binding_problem
 from .context import following_context, positive_context
 from .detect import person_subject
 from .terms import form_key
-from .evidence import metadata_dict, metadata_rejections, theme_rejection, register_rejection
+from .cards import metadata
+from .evidence import metadata_rejections, theme_rejection, register_rejection
 
 
 @dataclass(frozen=True)
@@ -23,13 +24,13 @@ class ImageOffer:
     def tone(self):
         return self.image.tone
 
-    def card(self):
+    def card(self, permitted_themes):
         i = self.image
         return {"id": i.id, "text": self.text, "tone": i.tone, "form": i.form, "concepts": list(i.concepts),
                 "association": self.association, "subject": i.subject, "exaggeration": i.exaggeration,
                 "frames": list(i.frames),
                 "unless_after": list(i.unless_after),
-                **metadata_dict(i, derived=True), "usage": i.usage,
+                **metadata(i, permitted_themes), "usage": i.usage,
                 "automatic": i.form == "suffix" and self.association == "direct"}
 
 
@@ -44,7 +45,7 @@ def image_association(image, concepts, setting):
 def permitted(image, eff, setting):
     return (setting.takes("riff") and setting.contextual_riffs and image.level <= eff.level
             and image.vulgarity <= eff.vulgarity and image.exaggeration <= setting.riff_exaggeration
-            and not metadata_rejections(image) and not theme_rejection(image, eff.theme_policy)
+            and not metadata_rejections(image, allow_misreadable=eff.allow_misreadable) and not theme_rejection(image, eff.theme_policy)
             and not register_rejection(image, eff.registers))
 
 
@@ -89,7 +90,7 @@ def lookup_images(dictionary, query, eff, setting, limit, *, tokens, readings) -
         recognised = True
         if not permitted(image, eff, setting):
             continue
-        card = ImageOffer(image, image.text, association or "image search").card()
+        card = ImageOffer(image, image.text, association or "image search").card(eff.theme_policy)
         card.update(template=True, automatic=False,
                     match_kind='meaning' if association else 'term' if exact else 'phrase')
         out.append(card)

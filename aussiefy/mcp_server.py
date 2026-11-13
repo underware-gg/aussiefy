@@ -12,7 +12,7 @@ capability (build_server's options; DD-028).
 
 import functools
 import inspect
-from typing import Any
+from typing import Any, Callable, Collection
 
 from .engine import Translator
 from .errors import UserError
@@ -62,7 +62,10 @@ def _describe(doc: str, hidden: set[str]) -> str:
 
 
 def build_server(*, translator: Translator | None = None, allow_unlock: bool = True, allow_include_gated: bool = True,
-                 allow_document_config: bool = True, max_chars: int | None = None,
+                 allow_document_config: bool = True, allow_tuning: bool = True,
+                 preferences_hook: Callable[..., list[dict] | None] | None = None,
+                 allow_themes: bool = True, allow_invention: bool = True,
+                 tools: Collection[str] | None = None, max_chars: int | None = None,
                  max_query_chars: int | None = None, lookup_limit: int | None = None):
     """The MCP server. The defaults serve everything, for a local install; a hosted service passes its
     capabilities. allow_unlock=False hides unlock; allow_include_gated=False hides include_gated independently;
@@ -75,7 +78,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
     from mcp.server.mcpserver import MCPServer
     from mcp.server.mcpserver.exceptions import ToolError
     from mcp.types import ToolAnnotations
-    from pydantic import Field
+    from pydantic import Field, StrictBool
 
     def _names(names: dict[str, int]) -> str:
         return ", ".join(f"{n} {name}" for name, n in names.items())
@@ -104,9 +107,21 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
     Unlock = Annotated[list[Literal[(*UNLOCKS,)]] | None,
                        Field(description="Flags whose gated (doubtful) entries become eligible, or ['all'].")]
 
+    Themes = Annotated[dict[str, StrictBool] | None, Field(description="Exact per-theme permissions; canonical theme names map to true or false, independently of profanity.")]
+    Invention = Annotated[StrictBool | None, Field(description="Allow reviewed construction fallback; omit for the setting's default (Troppo on). Grammar, source protection and all other permissions still apply.")]
+    Popularity = Annotated[StrictBool, Field(description="Apply the community adjustments with their wider popularity band; never changes eligibility or evidence.")]
+    if tools is not None and (isinstance(tools, str) or not isinstance(tools, Collection)
+                              or any(not isinstance(name, str) for name in tools)):
+        raise UserError('tools must be a collection of canonical tool names')
+    selected_tools = None if tools is None else set(tools)
+    known_tools = set()
+
     hidden = ({"unlock"} if not allow_unlock else set()) | \
         ({"include_gated"} if not allow_include_gated else set()) | \
-        ({"document_config"} if not allow_document_config else set())
+        ({"document_config"} if not allow_document_config else set()) | \
+        ({"popularity"} if not allow_tuning else set()) | \
+        ({"themes"} if not allow_themes else set()) | \
+        ({"invention"} if not allow_invention else set())
     # every tool only reads: no side effects, same answer for the same call, nothing outside the package
     read_only = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True,
                                 open_world_hint=False)
@@ -116,9 +131,20 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
     def tool(fn):
         """Register a tool whose UserErrors reach the agent as their own message (the SDK hides other errors),
         without the parameters this server doesn't offer (they keep their defaults)."""
+        known_tools.add(fn.__name__)
+        if selected_tools is not None and fn.__name__ not in selected_tools:
+            return fn
         @functools.wraps(fn)
         def run(*args, **kwargs):
             try:
+                forbidden = set(kwargs) & (hidden | {'preferences','_preferences_hook'})
+                if forbidden:
+                    raise UserError('parameters not offered by this server: '+', '.join(sorted(forbidden)))
+                config = kwargs.get('document_config')
+                if isinstance(config,dict):
+                    forbidden = ({'themes'} if not allow_themes else set()) | ({'invention'} if not allow_invention else set())
+                    if forbidden & set(config):
+                        raise UserError('document_config cannot override disabled host permissions')
                 return fn(*args, **kwargs)
             except UserError as exc:
                 raise ToolError(str(exc)) from exc
@@ -133,20 +159,21 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                         level: Level = 5, seed: Seed = 0, vulgarity: Vulgarity = None, limit: int = DEFAULT_LIMIT,
                         registers: Registers = None, regions: Regions = None, unlock: Unlock = None,
                         embellishment: int | str | None = None, document_type: DocumentType = "general",
-                        document_config: dict | None = None) -> dict[str, Any]:
+                        document_config: dict | None = None, themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
         """Construct Australian-sounding idioms from reviewed families, labelled bulldust with part evidence.
         concept is a dictionary ID such as HUNGRY. family restricts the pattern; parts pins named slots to
         ingredient IDs from a result so the remaining parts can vary. No global novelty is promised."""
         return harness.bulldust(concept, family=family, parts=parts, level=level, seed=seed, vulgarity=vulgarity,
                                 limit=limit, registers=registers, regions=regions, unlock=unlock,
                                 embellishment=embellishment, document_type=document_type,
-                                document_config=document_config, translator=translator)
+                                document_config=document_config, translator=translator, themes=themes, invention=invention)
 
     @tool
     def aussie_lookup(query: Query, level: Level = 5, vulgarity: Vulgarity = None,
                       limit: Limit = limit_default, include_gated: bool = False, short: bool = False,
                       embellishment: int | str | None = None, document_type: DocumentType = "general",
-                      document_config: dict | None = None) -> dict[str, Any]:
+                      document_config: dict | None = None,
+                      themes: Themes = None, invention: Invention = None, unlock: Unlock = None) -> dict[str, Any]:
         """Genuine Australian slang for a plain-English meaning ('very busy', 'someone'), or what an Aussie term
         means ('goog'). Filtered to the level and vulgarity, so it never offers what lint would reject.
         include_gated also returns held-back entries for discovery, marked with their reasons.
@@ -155,7 +182,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         short: compact entry cards with match-kind codes."""
         return harness.lookup(query, level=level, vulgarity=vulgarity, limit=limit,
                               include_gated=include_gated, short=short, embellishment=embellishment,
-                              document_type=document_type, document_config=document_config, translator=translator)
+                              document_type=document_type, document_config=document_config, unlock=unlock, translator=translator, themes=themes, invention=invention)
 
     PageLimit = Annotated[int, Field(ge=1, le=min(MAX_PAGE_SIZE, lookup_limit) if lookup_limit else MAX_PAGE_SIZE)]
     page_default = min(DEFAULT_PAGE_SIZE, lookup_limit) if lookup_limit else DEFAULT_PAGE_SIZE
@@ -166,12 +193,12 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                        limit: PageLimit = page_default,
                        level: Level = 5, vulgarity: Vulgarity = None, include_gated: bool = False,
                        embellishment: int | str | None = None, document_type: DocumentType = "general",
-                       document_config: dict | None = None) -> dict[str, Any]:
+                       document_config: dict | None = None, themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
         """List a stable page of entry cards by concept and/or theme. Filters intersect.
         include_gated also returns entries held back as doubtful (marked as such)."""
         return harness.list_entries(concept=concept, theme=theme, offset=offset, limit=limit, level=level,
                                     vulgarity=vulgarity, include_gated=include_gated, embellishment=embellishment,
-                                    document_type=document_type, document_config=document_config, translator=translator)
+                                    document_type=document_type, document_config=document_config, translator=translator, themes=themes, invention=invention)
 
     @tool
     def aussie_wordless_meanings(offset: Offset = 0,
@@ -183,23 +210,24 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
     @tool
     def aussie_entry(entry_id: str, level: Level = 5, vulgarity: Vulgarity = None,
                      include_gated: bool = False, embellishment: int | str | None = None,
-                     document_type: DocumentType = "general", document_config: dict | None = None) -> dict[str, Any]:
+                     document_type: DocumentType = "general", document_config: dict | None = None,
+                     themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
         """Fetch a full entry card by ID under the requested dials.
         include_gated also returns entries held back as doubtful (marked as such)."""
         return harness.get_entry(entry_id, level=level, vulgarity=vulgarity, include_gated=include_gated,
                                  embellishment=embellishment, document_type=document_type,
-                                 document_config=document_config, translator=translator)
+                                 document_config=document_config, translator=translator, themes=themes, invention=invention)
 
     @tool
     def aussie_random_entry(seed: Seed = 0, concept: str | None = None, theme: str | None = None,
                             level: Level = 5, vulgarity: Vulgarity = None, include_gated: bool = False,
                             embellishment: int | str | None = None, document_type: DocumentType = "general",
-                            document_config: dict | None = None) -> dict[str, Any]:
+                            document_config: dict | None = None, themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
         """Pick a seeded entry from the whole eligible dictionary, optionally by concept and theme.
         include_gated also returns entries held back as doubtful (marked as such)."""
         return harness.random_entry(seed=seed, concept=concept, theme=theme, level=level, vulgarity=vulgarity,
                                     include_gated=include_gated, embellishment=embellishment,
-                                    document_type=document_type, document_config=document_config, translator=translator)
+                                    document_type=document_type, document_config=document_config, translator=translator, themes=themes, invention=invention)
 
     @tool
     def aussie_suggest_name(seed: Seed = 0, shape: str | None = None) -> dict[str, Any]:
@@ -211,19 +239,20 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
     def aussie_variations(family: str, parts: dict[str, str], level: Level = 5, seed: Seed = 0,
                           vulgarity: Vulgarity = None, registers: Registers = None, regions: Regions = None,
                           unlock: Unlock = None, embellishment: int | str | None = None,
-                          document_type: DocumentType = "general", document_config: dict | None = None) -> dict[str, Any]:
+                          document_type: DocumentType = "general", document_config: dict | None = None,
+                          themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
         """Compatible part changes for a constructed expression, keeping the other parts fixed.
         Pass its family and complete role-to-ingredient mapping. Options include the whole expression and spans."""
         return harness.variations(family, parts=parts, level=level, seed=seed, vulgarity=vulgarity, registers=registers,
                                   regions=regions, unlock=unlock, embellishment=embellishment,
-                                  document_type=document_type, document_config=document_config, translator=translator)
+                                  document_type=document_type, document_config=document_config, translator=translator, themes=themes, invention=invention)
 
     @tool
     def aussie_lint(text: Text, level: Level = 5, vulgarity: Vulgarity = None,
                     original: Original | None = None, markup: str = "text", english: str | None = None,
                     embellishment: int | str | None = None,
-                    document_type: DocumentType = "general", document_config: dict | None = None,
-                    suggest: bool = True) -> dict[str, Any]:
+                    document_type: DocumentType = "general", document_config: dict | None = None, themes: Themes = None, invention: Invention = None,
+                    suggest: bool = True, unlock: Unlock = None) -> dict[str, Any]:
         """Lint an Aussified draft: flagged or non-Australian phrases, swearing over the cap or overused, US
         spelling, and US and British words (english: us, uk, auto, none, as for aussie_translate). Pass the original text to also check length and that names and numbers survive.
         Also suggests spots that could be more Aussie. markup (markdown, mdx, auto) lints the prose only and,
@@ -232,16 +261,17 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         skips the optional suggestions (a whole engine translation), for a faster check."""
         return harness.lint(text, level=level, vulgarity=vulgarity, original=original, markup=markup,
                             english=english, embellishment=embellishment, document_type=document_type,
-                            document_config=document_config, suggest=suggest, translator=translator)
+                            document_config=document_config, suggest=suggest, unlock=unlock, translator=translator, themes=themes, invention=invention)
 
     @tool
     def aussie_guide(level: Level = 5, vulgarity: Vulgarity = None,
                      embellishment: int | str | None = None,
-                     document_type: DocumentType = "general", document_config: dict | None = None) -> dict[str, Any]:
+                     document_type: DocumentType = "general", document_config: dict | None = None,
+                     themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
         """Voice, language limits and craft rules for Aussifying at a level (1-5), and how much liberty to take
         at an embellishment (deadset, dinkum, troppo; default Dinkum for General)."""
         return harness.guide(level=level, vulgarity=vulgarity, embellishment=embellishment,
-                             document_type=document_type, document_config=document_config, translator=translator)
+                             document_type=document_type, document_config=document_config, translator=translator, themes=themes, invention=invention)
 
     @tool
     def aussie_plan(text: Text, level: Level = 5, seed: Seed = 0, vulgarity: Vulgarity = None,
@@ -249,7 +279,9 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                     regions: Regions = None, unlock: Unlock = None,
                     markup: str = "text", english: str | None = None,
                     embellishment: int | str | None = None,
-                    document_type: DocumentType = "general", document_config: dict | None = None) -> dict[str, Any]:
+                    document_type: DocumentType = "general", document_config: dict | None = None,
+                    themes: Themes = None, invention: Invention = None,
+                    popularity: Popularity = False, pins: dict | None = None) -> dict[str, Any]:
         """The rule engine's draft, the slang it planned (with riffs and suggested openings), and the sentences
         it found too formal to handle, and guidance for the text's genre and embellishment. Takes
         aussie_translate's options. embellishment defaults to dinkum, a retelling's (the plan is for writing
@@ -257,7 +289,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         return harness.plan(text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
                             registers=registers, regions=regions, unlock=unlock, markup=markup, english=english,
                             embellishment=embellishment, document_type=document_type, document_config=document_config,
-                            translator=translator)
+                            translator=translator, themes=themes, invention=invention, popularity=popularity, pins=pins, _preferences_hook=preferences_hook)
 
     @tool
     def aussie_translate(text: Text, level: Level = 5, seed: Seed = 0, vulgarity: Vulgarity = None,
@@ -265,7 +297,9 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                          regions: Regions = None, unlock: Unlock = None,
                          markdown: bool = False, markup: str = "text", english: str | None = None,
                          embellishment: int | str | None = None,
-                         document_type: DocumentType = "general", document_config: dict | None = None) -> dict[str, Any]:
+                         document_type: DocumentType = "general", document_config: dict | None = None,
+                         themes: Themes = None, invention: Invention = None,
+                         popularity: Popularity = False, pins: dict | None = None) -> dict[str, Any]:
         """Deterministic rule-engine translation (same text, level and seed give the same output). Change the
         seed for a different version. variety N picks among the N best-fitting terms only (1 = always the best
         fit); 0, the default, weighs every eligible term. registers (current, dated, archaic) and regions (e.g.
@@ -279,13 +313,14 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         return harness.translate(text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
                                  registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english,
                                  embellishment=embellishment, document_type=document_type,
-                                 document_config=document_config, translator=translator)
+                                 document_config=document_config, translator=translator, themes=themes, invention=invention, popularity=popularity, pins=pins, _preferences_hook=preferences_hook)
 
     @tool
     def aussie_verify(text: Text, original: Original, level: Level = 5, vulgarity: Vulgarity = None,
                       markup: str = "text", english: str | None = None,
                       embellishment: int | str | None = None,
-                      document_type: DocumentType = "general", document_config: dict | None = None) -> dict[str, Any]:
+                      document_type: DocumentType = "general", document_config: dict | None = None,
+                      themes: Themes = None, invention: Invention = None, unlock: Unlock = None) -> dict[str, Any]:
         """Check a finished translation (anyone's: the engine's, yours, a person's) against its original: a log of
         problems, worst first, each with a severity (critical: a lost number, a piece of markup changed, or an
         empty translation; major: breaks the brief; minor: craft, a sentence nothing in the translation says
@@ -294,8 +329,10 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         Dinkum for General)."""
         return harness.verify(text, original=original, level=level, vulgarity=vulgarity, markup=markup,
                               english=english, embellishment=embellishment, document_type=document_type,
-                              document_config=document_config, translator=translator)
+                              document_config=document_config, unlock=unlock, translator=translator, themes=themes, invention=invention)
 
+    if selected_tools is not None and selected_tools-known_tools:
+        raise UserError('unknown tools: '+', '.join(sorted(selected_tools-known_tools)))
     return server
 
 

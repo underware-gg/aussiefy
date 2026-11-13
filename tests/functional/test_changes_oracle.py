@@ -117,9 +117,9 @@ def test_every_garnish_removal_and_alternative_is_the_pinned_re_render(translato
                     translator.dictionary, drop={(sentence, op.placement)})).text
                 assert got[:a + len(c["removed"]["rendered"])] == result.text[:a] + c["removed"]["rendered"]
                 words = {e.id: op.offer.words(e) for e in op.offer.pool}
-                for o in [o for o in c["alternatives"] if o["entry_id"] != op.entry.id][:2]:   # two an op bounds it
+                for o in [o for o in c["alternatives"] if (o.get("entry_id") or o.get("construction_id")) != op.entry.id][:2]:   # two an op bounds it
                     got = translator.translate(text, **options, _observer=Pinned(
-                        translator.dictionary, words={(sentence, op.placement): words[o["entry_id"]]})).text
+                        translator.dictionary, words={(sentence, op.placement): words[o.get("entry_id") or o.get("construction_id")]})).text
                     a, _ = o["out_span"]
                     assert got[:a + len(o["rendered"])] == result.text[:a] + o["rendered"], (path.name, c["placement"])
                     checked += 1

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from .engine import resolve_request
+
 from typing import Sequence
 
 from .claude import DEFAULT_MODEL
@@ -36,21 +38,25 @@ def run(text: str, *, translator: Translator, level: int | str = 5, seed: int = 
         regions: Sequence[str] | None = None, unlock: Sequence[str] | None = None, markdown: bool = False,
         markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
         document_type: str = "general", document_config: dict | None = None,
+        themes: dict[str, bool] | None = None, invention: bool | None = None,
+        popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
+        _preferences_hook=None,
         embedder: str | None = None, rewrite: str | None = None, surface: bool = False,
         model: str = DEFAULT_MODEL) -> Result | DocumentResult:
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     _check_modes(markdown, markup, rewrite, surface)
     dials = dict(level=level, seed=seed, vulgarity=vulgarity, variety=variety, registers=registers, regions=regions,
                  unlock=unlock, embedder=embedder, english=english, embellishment=embellishment,
                  document_type=document_type, document_config=document_config)
     if markdown:
-        return translate_document(text, translator, *_document_policy(translator, **dials))
+        return translate_document(text, translator, *_document_policy(translator, **dials), _tuning={'popularity': popularity, 'preferences': preferences}, _preferences_hook=_preferences_hook, pins=pins)
     rewriter = None
     if rewrite:
         from .llm import ClaudeRewriter
 
         rewriter = ClaudeRewriter(model=model, translator=translator)
     result = translator.translate(text, **dials, rewriter=rewriter, rewrite_mode=rewrite or "hard",
-                                  _protected=mask(text, markup))
+                                  _protected=mask(text, markup), popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook)
     if surface:
         from .llm import surface_rewrite
 
@@ -63,10 +69,14 @@ def translate(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int 
               unlock: Sequence[str] | None = None, markdown: bool = False,
               markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
               document_type: str = "general", document_config: dict | None = None,
+              themes: dict[str, bool] | None = None, invention: bool | None = None,
+              popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
+              _preferences_hook=None,
               translator: Translator | None = None) -> Result | DocumentResult:
     """Translate plain text, or explicitly selected Markdown prose with its markup kept intact."""
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     return run(text, translator=translator or default_translator(), level=level, seed=seed, vulgarity=vulgarity,
-               variety=variety, registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english, embellishment=embellishment, document_type=document_type, document_config=document_config)
+               variety=variety, registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english, embellishment=embellishment, document_type=document_type, document_config=document_config, popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook)
 
 
 def translate_changes(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None,
@@ -74,17 +84,21 @@ def translate_changes(text: str, *, level: int | str = 5, seed: int = 0, vulgari
                       unlock: Sequence[str] | None = None, markdown: bool = False,
                       markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
                       document_type: str = "general", document_config: dict | None = None,
+                      themes: dict[str, bool] | None = None, invention: bool | None = None,
+                      popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
+                      _preferences_hook=None,
                       embedder: str | None = None, translator: Translator | None = None) -> ChangeSet:
     """translate's translation, with every change it made (the `changes` contract, aussiefy.changes.VERSION): each
     swap, garnish, drawl, swear infix and US/UK swap placed in the output, and each swap's alternatives, and those a
     vulgarity lock holds back, rendered where they stand. Takes translate's parameters, and embedder: the
     similarity fallback ("ngram", "bundled", "local", "none"; None = profiles.yaml's), which a host sets
     explicitly. The CLI, MCP tools and yarn mode don't offer it (DD-029)."""
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     tr = translator or default_translator()
     _check_modes(markdown, markup, None, False)
     dials = dict(level=level, seed=seed, vulgarity=vulgarity, variety=variety, registers=registers, regions=regions,
                  unlock=unlock, embedder=embedder, english=english, embellishment=embellishment,
                  document_type=document_type, document_config=document_config)
     if markdown:
-        return document_changes(text, tr, *_document_policy(tr, **dials))
-    return build(tr, text, **dials, _protected=mask(text, markup))
+        return document_changes(text, tr, *_document_policy(tr, **dials), _tuning={'popularity': popularity, 'preferences': preferences}, _preferences_hook=_preferences_hook, pins=pins)
+    return build(tr, text, **dials, _protected=mask(text, markup), popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook)

@@ -199,9 +199,9 @@ class Entry(TermMetadata):
             return "phrase"
         return "lexical"
 
-    def riffs_within(self, cap: int, permitted_themes: ThemePermissions, *, registers) -> tuple["Riff", ...]:
+    def riffs_within(self, cap: int, permitted_themes: ThemePermissions, *, registers, allow_misreadable=False) -> tuple["Riff", ...]:
         """The riffs offered under a vulgarity cap, best first (riffs.yaml lists the best first)."""
-        return tuple(r for r in self.riffs if r.vulgarity <= cap and not metadata_rejections(r)
+        return tuple(r for r in self.riffs if r.vulgarity <= cap and not metadata_rejections(r, allow_misreadable=allow_misreadable)
                      and not theme_rejection(r, permitted_themes) and not register_rejection(r, registers))
 
     @property

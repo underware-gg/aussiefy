@@ -187,7 +187,7 @@ def test_all_surfaces_expose_the_document_result(translator, monkeypatch, capsys
     assert main(["translate", "--markdown", "--json", "-s", "11", source]) == 0
     assert json.loads(capsys.readouterr().out) == expected
     server = build_server()
-    monkeypatch.setattr("aussiefy.harness.default_translator", lambda: translator)
+    monkeypatch.setattr("aussiefy.engine.default_translator", lambda: translator)
     mcp = asyncio.run(server.call_tool("aussie_translate", {"text": source, "markdown": True, "seed": 11}))
     assert (mcp[1] if isinstance(mcp, tuple) else mcp.structured_content) == expected
 

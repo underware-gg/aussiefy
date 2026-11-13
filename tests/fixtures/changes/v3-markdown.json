@@ -1,0 +1,1309 @@
+{
+ "about": "Multiple real prose units, Unicode, emphasis, untouched code and local occurrence spans.",
+ "request": {
+  "text": "# Heading\n\n🦘 She was **very tired**. `She is hungry.`\n\nHe is hungry and his car is broken.",
+  "level": 5,
+  "vulgarity": 2,
+  "seed": 4,
+  "embellishment": 2,
+  "markdown": true
+ },
+ "response": {
+  "version": 3,
+  "text": "# Heading\n\n🦘 She was **flamin' tired**. `She is hungry.`\n\nHe's hungry enough to eat the arse out of a low\\-flyin' duck and his car is bung. Fuck me dead.",
+  "card_version": 3,
+  "dictionary_id": "sha256:496709d81060f0473db8b76afe8696f2df2c592d7b612350663e4cf5732549af",
+  "tuning": {
+   "popularity": false,
+   "preferences": 0
+  },
+  "warnings": [],
+  "warning_details": [],
+  "changes": [
+   {
+    "id": "substitution:23-33",
+    "kind": "substitution",
+    "src_span": [
+     23,
+     33
+    ],
+    "out_span": [
+     23,
+     36
+    ],
+    "original": "very tired",
+    "output": "flamin' tired",
+    "entry_id": "flamin",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "flamin",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "flamin' tired",
+      "out_span": [
+       23,
+       36
+      ],
+      "vulgarity": 0,
+      "weight": 0.35911602209944754,
+      "masks": []
+     },
+     {
+      "entry_id": "bloody",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "bloody tired",
+      "out_span": [
+       23,
+       36
+      ],
+      "vulgarity": 1,
+      "weight": 0.2154696132596685,
+      "masks": [
+       {
+        "span": [
+         0,
+         6
+        ],
+        "ending_start": 6,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "dead-adv",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "tired as fuck",
+      "out_span": [
+       23,
+       36
+      ],
+      "vulgarity": 2,
+      "weight": 0.35911602209944754,
+      "masks": [
+       {
+        "span": [
+         9,
+         13
+        ],
+        "ending_start": 13,
+        "vulgarity": 2
+       }
+      ]
+     },
+     {
+      "entry_id": "fuckin-very",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "tired as fuck",
+      "out_span": [
+       23,
+       36
+      ],
+      "vulgarity": 2,
+      "weight": 0.06629834254143645,
+      "masks": [
+       {
+        "span": [
+         9,
+         13
+        ],
+        "ending_start": 13,
+        "vulgarity": 2
+       }
+      ]
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "match": {
+     "key": "VERY/adv/71d0876fb89a92c8106edc5164173b9f58287b1ef64aa1abafbb5c434d536821",
+     "root": "VERY/adv/71d0876fb89a92c8106edc5164173b9f58287b1ef64aa1abafbb5c434d536821",
+     "qualifiers": {}
+    },
+    "evidence": "unverified",
+    "coined_by": null
+   },
+   {
+    "id": "phonetic:55-60:pronoun-be",
+    "kind": "phonetic",
+    "src_span": [
+     55,
+     60
+    ],
+    "out_span": [
+     58,
+     62
+    ],
+    "original": "He is",
+    "output": "He's",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "rule": {
+     "id": "pronoun-be",
+     "kind": "drawl",
+     "min_level": 4,
+     "before": "He is",
+     "after": "He's"
+    },
+    "alternatives": [],
+    "locked": [],
+    "covers": [],
+    "evidence": null,
+    "coined_by": null
+   },
+   {
+    "id": "substitution:61-79",
+    "kind": "substitution",
+    "src_span": [
+     61,
+     79
+    ],
+    "out_span": [
+     63,
+     130
+    ],
+    "original": "hungry and his car",
+    "output": "hungry enough to eat the arse out of a low\\-flyin' duck and his car",
+    "entry_id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+    "vulgarity": 2,
+    "masks": [
+     {
+      "span": [
+       25,
+       29
+      ],
+      "ending_start": 29,
+      "vulgarity": 2
+     }
+    ],
+    "alternatives": [
+     {
+      "entry_id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "hungry enough to eat the arse out of a low\\-flyin' duck and his car",
+      "out_span": [
+       63,
+       130
+      ],
+      "vulgarity": 2,
+      "weight": 0.22876949740034663,
+      "masks": [
+       {
+        "span": [
+         25,
+         29
+        ],
+        "ending_start": 29,
+        "vulgarity": 2
+       }
+      ]
+     },
+     {
+      "entry_id": "hungry-enough-horse-jockey",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "hungry enough to eat a horse and chase the jockey and his car",
+      "out_span": [
+       63,
+       130
+      ],
+      "vulgarity": 0,
+      "weight": 0.17331022530329288,
+      "masks": []
+     },
+     {
+      "entry_id": "peckish",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "peckish and his car",
+      "out_span": [
+       63,
+       130
+      ],
+      "vulgarity": 0,
+      "weight": 0.3379549393414212,
+      "masks": []
+     },
+     {
+      "entry_id": "starvin",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "starvin' and his car",
+      "out_span": [
+       63,
+       130
+      ],
+      "vulgarity": 0,
+      "weight": 0.25996533795493937,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "match": {
+     "key": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+     "root": "HUNGRY/predicate_adj/0dd71184b74914a15a0e3d3a6459a958975b3aeab37ac929b489b83c1d8dae1a",
+     "qualifiers": {}
+    },
+    "evidence": "unverified",
+    "coined_by": null
+   },
+   {
+    "id": "substitution:83-89",
+    "kind": "substitution",
+    "src_span": [
+     83,
+     89
+    ],
+    "out_span": [
+     134,
+     138
+    ],
+    "original": "broken",
+    "output": "bung",
+    "entry_id": "bung-broken",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": "bung-broken",
+      "evidence": "attested",
+      "coined_by": null,
+      "rendered": "bung",
+      "out_span": [
+       134,
+       138
+      ],
+      "vulgarity": 0,
+      "weight": 0.38303693570451436,
+      "masks": []
+     },
+     {
+      "entry_id": "buggered",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "buggered",
+      "out_span": [
+       134,
+       138
+      ],
+      "vulgarity": 1,
+      "weight": 0.21340629274965803,
+      "masks": [
+       {
+        "span": [
+         0,
+         8
+        ],
+        "ending_start": 6,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "cactus",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "cactus",
+      "out_span": [
+       134,
+       138
+      ],
+      "vulgarity": 0,
+      "weight": 0.15731874145006838,
+      "masks": []
+     },
+     {
+      "entry_id": "rooted",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "rooted",
+      "out_span": [
+       134,
+       138
+      ],
+      "vulgarity": 1,
+      "weight": 0.1094391244870041,
+      "masks": []
+     },
+     {
+      "entry_id": "stuffed",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "stuffed",
+      "out_span": [
+       134,
+       138
+      ],
+      "vulgarity": 0,
+      "weight": 0.13679890560875513,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "match": {
+     "key": "BROKEN/predicate_adj/9c6a05896e1f409e22c554b207f1cbd0505ba2b5a8e138c8f071511dca9f1f88",
+     "root": "BROKEN/predicate_adj/9c6a05896e1f409e22c554b207f1cbd0505ba2b5a8e138c8f071511dca9f1f88",
+     "qualifiers": {}
+    },
+    "evidence": "attested",
+    "coined_by": null
+   },
+   {
+    "id": "garnish:90-90:closer",
+    "kind": "garnish",
+    "src_span": [
+     90,
+     90
+    ],
+    "out_span": [
+     139,
+     153
+    ],
+    "original": "",
+    "output": " Fuck me dead.",
+    "entry_id": "g-fuck-me-dead",
+    "vulgarity": 2,
+    "masks": [
+     {
+      "span": [
+       1,
+       5
+      ],
+      "ending_start": 5,
+      "vulgarity": 2
+     }
+    ],
+    "placement": "closer",
+    "removed": {
+     "out_span": [
+      139,
+      153
+     ],
+     "rendered": ""
+    },
+    "alternatives": [
+     {
+      "entry_id": "g-bugger-me-dead",
+      "weight": 0.10407239819004525,
+      "rendered": " Bugger me dead.",
+      "out_span": [
+       139,
+       153
+      ],
+      "vulgarity": 1,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": [
+       {
+        "span": [
+         1,
+         7
+        ],
+        "ending_start": 7,
+        "vulgarity": 1
+       }
+      ]
+     },
+     {
+      "entry_id": "g-fark-me",
+      "weight": 0.3619909502262444,
+      "rendered": " Faaaaaark me.",
+      "out_span": [
+       139,
+       153
+      ],
+      "vulgarity": 2,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": []
+     },
+     {
+      "entry_id": "g-fuck-me-dead",
+      "weight": 0.416289592760181,
+      "rendered": " Fuck me dead.",
+      "out_span": [
+       139,
+       153
+      ],
+      "vulgarity": 2,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": [
+       {
+        "span": [
+         1,
+         5
+        ],
+        "ending_start": 5,
+        "vulgarity": 2
+       }
+      ]
+     },
+     {
+      "entry_id": "g-well-ill-be-buggered",
+      "weight": 0.11764705882352942,
+      "rendered": " Well, I'll be buggered.",
+      "out_span": [
+       139,
+       153
+      ],
+      "vulgarity": 1,
+      "evidence": "unverified",
+      "coined_by": null,
+      "masks": [
+       {
+        "span": [
+         15,
+         23
+        ],
+        "ending_start": 21,
+        "vulgarity": 1
+       }
+      ]
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "evidence": "unverified",
+    "coined_by": null
+   }
+  ],
+  "entries": {
+   "bloody": {
+    "id": "bloody",
+    "form": "bloody",
+    "gloss": "The great Australian adjective, used as an intensifier.",
+    "frame": "adv",
+    "concepts": [
+     "VERY"
+    ],
+    "level": 1,
+    "vulgarity": 1,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/bloody",
+      "note": "Reviewed 2026-10-21: selected form/sense; L224-228. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 1,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "buggered": {
+    "id": "buggered",
+    "form": "buggered",
+    "gloss": "Exhausted, or broken beyond use.",
+    "frame": "adj",
+    "concepts": [
+     "TIRED",
+     "BROKEN"
+    ],
+    "level": 2,
+    "vulgarity": 1,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Oxford Learner's Dictionaries",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/english/buggered",
+      "note": "Reviewed 2026-10-21: selected form/sense; L101–112. Both very-tired and irreparably-damaged senses inspected; source labels British. Source family: oxford-university-press; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 1,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "bung-broken": {
+    "id": "bung-broken",
+    "form": "bung",
+    "gloss": "Broken, not working, crook (\"the telly's gone bung\", \"a bung knee\").",
+    "frame": "predicate_adj",
+    "concepts": [
+     "BROKEN"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "crowd_dictionary",
+      "publisher": "Wiktionary",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://en.wiktionary.org/wiki/bung",
+      "note": "Reviewed 2026-10-21: selected form/sense; L365–384. Source family: wiktionary; not a current-commonness survey."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Australian National Dictionary Centre",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://history.cass.anu.edu.au/centres/andc/australian-words-b",
+      "note": "Reviewed 2026-10-21: selected form/sense; bung, L488-492. Reported date: late 19th century (source_reported_earliest_period); not a claim of absolute first use. Source family: andc; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 8.0,
+     "bars": 4,
+     "counts": {
+      "crowd_dictionary": 1,
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "attested",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "cactus": {
+    "id": "cactus",
+    "form": "cactus",
+    "gloss": "Dead, broken, finished.",
+    "frame": "adj",
+    "concepts": [
+     "BROKEN"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "notes": "Used here of broken or ruined machines and things (\"the ute's cactus\"). This mapping does not cover every other use of the word.",
+    "sources": [
+     {
+      "kind": "media",
+      "publisher": "Macquarie Dictionary",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://www.macquariedictionary.com.au/were-totally-cactus/",
+      "note": "Reviewed 2026-10-21: selected form/sense; 189–194. Broken/ruined engine, not ordinary plant. Source family: macquarie; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 3.0,
+     "bars": 1,
+     "counts": {
+      "media": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": [],
+    "riffs": [
+     {
+      "text": "like a flat-pack in a cyclone",
+      "tone": "comic",
+      "sources": [],
+      "produced_by": "agent",
+      "origin": "unknown",
+      "register": "current",
+      "australian_use": "common",
+      "reads_as": "australian",
+      "themes": [],
+      "doubtful_definition": false,
+      "misreadable": false,
+      "attestation": {
+       "score": 0.0,
+       "bars": 0,
+       "counts": {},
+       "people": 0,
+       "independent": 0,
+       "places": 0,
+       "weights_version": "provisional-1"
+      },
+      "evidence": "unverified",
+      "minimum_vulgarity": 0,
+      "best": true
+     }
+    ]
+   },
+   "dead-adv": {
+    "id": "dead-adv",
+    "form": "dead",
+    "gloss": "Very, as in \"dead easy\".",
+    "frame": "adv",
+    "concepts": [
+     "VERY"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Oxford Learner's Dictionaries",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/english/dead_3",
+      "note": "Reviewed 2026-10-21: selected form/sense; L119–122. Very/extremely sense and dead-easy example, not physical death or exactness sense. Source family: oxford-university-press; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "flamin": {
+    "id": "flamin",
+    "form": "flamin'",
+    "gloss": "A cleaner intensifier than bloody.",
+    "frame": "adv",
+    "concepts": [
+     "VERY"
+    ],
+    "level": 3,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/flaming",
+      "note": "Reviewed 2026-10-21: selected form/sense; L243-252. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "fuckin-very": {
+    "id": "fuckin-very",
+    "form": "fuckin'",
+    "gloss": "The f-word as an all-purpose intensifier (\"fuckin' freezing\").",
+    "frame": "adv",
+    "concepts": [
+     "VERY"
+    ],
+    "level": 1,
+    "vulgarity": 2,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "crowd_dictionary",
+      "publisher": "Wiktionary",
+      "supports": [],
+      "url": "https://en.wiktionary.org/wiki/fucking",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Cambridge Dictionary",
+      "supports": [],
+      "url": "https://dictionary.cambridge.org/dictionary/english/fucking",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 2,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "g-bugger-me-dead": {
+    "id": "g-bugger-me-dead",
+    "form": "bugger me dead",
+    "gloss": "Astonishment.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 3,
+    "vulgarity": 1,
+    "register": "current",
+    "placement": "closer",
+    "sources": [
+     {
+      "kind": "media",
+      "publisher": "australiansatwarfilmarchive.unsw.edu.au",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://australiansatwarfilmarchive.unsw.edu.au/archive/htmlTranscript/1640?asPdf=y",
+      "note": "Reviewed 2026-10-21: selected form/sense; PDF p10 lines499–507. Same actual surprise exclamation as lexical entry; same interview is one witness across record types. Source family: australians-at-war-1640; not a current-commonness survey."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "oxfordlearnersdictionaries.com",
+      "supports": [],
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/english/bugger_2",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 3.0,
+     "bars": 1,
+     "counts": {
+      "media": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 1,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-fark-me": {
+    "id": "g-fark-me",
+    "form": "fark me",
+    "gloss": "A minced swear of disbelief, drawn out.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 2,
+    "vulgarity": 2,
+    "register": "current",
+    "placement": "closer",
+    "sources": [],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 2,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-fuck-me-dead": {
+    "id": "g-fuck-me-dead",
+    "form": "fuck me dead",
+    "gloss": "The full-strength version of \"bugger me dead\".",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 2,
+    "vulgarity": 2,
+    "register": "current",
+    "placement": "closer",
+    "sources": [
+     {
+      "kind": "media",
+      "publisher": "researchsystem.canberra.edu.au",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://researchsystem.canberra.edu.au/ws/portalfiles/portal/33680262/file",
+      "note": "Reviewed 2026-10-21: selected form/sense; PDF p86 line2184;p168 line4112. Paul Collis Australian Aboriginal novel/thesis dialogue uses Fuck-me-dead as shocked exclamation on seeing injuries. Actual nonsexual interjection, not merely literal fuck me. Source family: paul-collis-barkindji-thesis; not a current-commonness survey."
+     },
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [],
+      "url": "https://www.collinsdictionary.com/dictionary/english/fuck",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 3.0,
+     "bars": 1,
+     "counts": {
+      "media": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 2,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "g-well-ill-be-buggered": {
+    "id": "g-well-ill-be-buggered",
+    "form": "well, I'll be buggered",
+    "gloss": "Well I never.",
+    "frame": "interjection",
+    "concepts": [],
+    "level": 2,
+    "vulgarity": 1,
+    "register": "current",
+    "placement": "closer",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Oxford Learner's Dictionaries",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.oxfordlearnersdictionaries.com/definition/english/buggered",
+      "note": "Reviewed 2026-10-21: selected form/sense; L116–118. Source family: oxford-university-press; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 1,
+    "type": "garnish",
+    "status": "active",
+    "held_back": []
+   },
+   "hungry-enough-horse-jockey": {
+    "id": "hungry-enough-horse-jockey",
+    "form": "hungry enough to eat a horse and chase the jockey",
+    "gloss": "Ravenous.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "media",
+      "publisher": "warrenfahey.com.au",
+      "supports": [],
+      "url": "https://warrenfahey.com.au/colloquial-sayings-slangugae/",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "media",
+      "publisher": "mythicaustralia.com",
+      "supports": [],
+      "url": "https://mythicaustralia.com/wp-content/uploads/2020/01/Mythic-Australia-Book-Land-Of-Adventure.pdf",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "hungry-enough-to-eat-the-arse-out-of-a-duck": {
+    "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
+    "form": "hungry enough to eat the arse out of a low-flyin' duck",
+    "gloss": "Starving.",
+    "frame": "predicate_adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 4,
+    "vulgarity": 2,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "crowd_dictionary",
+      "publisher": "Wiktionary",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://en.wiktionary.org/wiki/could_eat_the_crotch_out_of_a_low_flying_duck",
+      "note": "Reviewed 2026-10-21: selected form/sense; L105–122. Arse lexical variant explicitly listed; hungry-enough syntax illustrated for crotch variant. This confirms idiom family and hunger meaning, not each phonetic rendering. Source family: wiktionary; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [
+     {
+      "name": "sex",
+      "tier": 1
+     }
+    ],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 2.0,
+     "bars": 1,
+     "counts": {
+      "crowd_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 2,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "peckish": {
+    "id": "peckish",
+    "form": "peckish",
+    "gloss": "A bit hungry.",
+    "frame": "adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "notes": "Shared with British English.",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/peckish",
+      "note": "Reviewed 2026-10-21: selected form/sense; 222–228. Explicit slight hunger severity. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "rooted": {
+    "id": "rooted",
+    "form": "rooted",
+    "gloss": "Completely done for.",
+    "frame": "adj",
+    "concepts": [
+     "TIRED",
+     "BROKEN"
+    ],
+    "level": 3,
+    "vulgarity": 1,
+    "register": "current",
+    "notes": "\"Root\" is Australian slang for sex, so \"rooted\" (exhausted; broken) is cheeky but Dad-level (Rob, 2026-10-18). Never use \"root\" for US \"root for (a team)\"; Australians say \"barrack for\". \"Get rooted\" is a rude brush-off, a different sense.",
+    "sources": [
+     {
+      "kind": "media",
+      "publisher": "ielts.com.au",
+      "supports": [],
+      "url": "https://ielts.com.au/australia/prepare/article-australian-slang-words-phrases",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 1,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "starvin": {
+    "id": "starvin",
+    "form": "starvin'",
+    "gloss": "Very hungry.",
+    "frame": "adj",
+    "concepts": [
+     "HUNGRY"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [],
+      "url": "https://www.collinsdictionary.com/dictionary/english/starving",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "stuffed": {
+    "id": "stuffed",
+    "form": "stuffed",
+    "gloss": "Exhausted, broken, or full of food.",
+    "frame": "adj",
+    "concepts": [
+     "TIRED",
+     "BROKEN",
+     "FULL"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "crowd_dictionary",
+      "publisher": "Wiktionary",
+      "supports": [],
+      "url": "https://en.wiktionary.org/wiki/stuffed",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "provisional-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   }
+  },
+  "constructions": {},
+  "imagery": {},
+  "withheld": []
+ }
+}

@@ -35,7 +35,7 @@ def _tools(server):
 
 
 def _params(fn):
-    return {n for n in inspect.signature(fn).parameters if n != "translator"}
+    return {n for n in inspect.signature(fn).parameters if n not in {"translator", "preferences"} and not n.startswith("_")}
 
 
 def test_hosted_schemas_drop_what_the_server_does_not_offer(hosted):

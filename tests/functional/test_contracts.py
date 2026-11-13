@@ -9,7 +9,8 @@ from aussiefy import harness
 from aussiefy.terms import fold, form_key, phrase_kept, restore_g, strip_markup
 
 DIALS = {"level", "level_name", "vulgarity", "vulgarity_name", "policy_warnings"}
-ENVELOPE = DIALS | {"profile_config", "theme_permissions"}   # lookup carries themes but no numeric profile
+IDENTITY = {"dictionary_id", "tuning", "warnings", "warning_details"}
+ENVELOPE = DIALS | IDENTITY | {"profile_config", "theme_permissions"}   # lookup carries themes but no numeric profile
 DOCUMENT = {"document_type", "document_type_source", "genre", "genre_scores", "document_config", "document_overrides"}
 TEXT = ('She was very tired and hungry. "Are you crazy?" he asked. The proposition was conceived with considerable '
         "deliberation and dedicated to posterity.")
@@ -33,9 +34,9 @@ def test_plan_shape(translator):
     p = harness.plan(TEXT, translator=translator)
     assert set(p) == ENVELOPE | DOCUMENT | {"draft", "seed", "planned", "garnish", "dialect", "riffs", "openings", "mood", "genre",
                                  "embellishment", "embellishment_name", "guidance", "difficult_sentences",
-                                 "untouched_sentences", "note"}
+                                 "untouched_sentences", "note", "card_version", "constructions", "scaffold", "replay_pins"}
     assert set(p["guidance"]) == {"genre", "embellishment"}
-    assert p["planned"] and all(set(x) == {"original", "span", "entry", "aussie", "gloss"} for x in p["planned"])
+    assert p["planned"] and all(set(x) == {"original", "span", "entry", "aussie", "gloss", "construction_id", "parts", "evidence", "coined_by"} for x in p["planned"])
     assert all(set(g) == {"placement", "sentence", "entry", "text", "sentence_text"} for g in p["garnish"])
     assert all(set(d) == {"original", "draft", "reason"} for d in p["difficult_sentences"])
     assert p["difficult_sentences"][0]["original"].startswith("The proposition")
@@ -62,7 +63,7 @@ def test_lint_shape(translator):
 
 def test_lookup_shape(translator):
     out = harness.lookup("very tired", translator=translator)
-    assert set(out) == DIALS | {"theme_permissions", "query", "results", "outcome", "dictionary_id"}
+    assert set(out) == DIALS | IDENTITY | {"theme_permissions", "query", "results", "outcome", "card_version"}
     assert out["outcome"] == "matched"
     assert all({"id", "form", "gloss", "frame", "level", "vulgarity", "register", "concepts", "match", "score"}
                <= set(r) for r in out["results"])
@@ -76,7 +77,7 @@ def test_lookup_shape(translator):
 
 
 def test_lookup_cards_come_from_the_shared_card_builder(translator):
-    """Rich discovery cards are shared; changes v2 retains its legacy card until the coordinated bump."""
+    """Rich v3 cards use the same projection in lookup and changes."""
     from aussiefy.cards import entry_card, full_entry_card, short_card
 
     d = translator.dictionary
@@ -86,7 +87,7 @@ def test_lookup_cards_come_from_the_shared_card_builder(translator):
     for r in harness.lookup("very tired", short=True, translator=translator)["results"]:
         assert {k: v for k, v in r.items() if k != 'match_kind'} == short_card(d.entries[r["id"]])
     sourced = next(e for e in d.idioms if e.sources)
-    assert entry_card(sourced, permitted_themes=frozenset(), registers=("current",))["sources"] == [s.url for s in sourced.sources if s.url]
+    assert entry_card(sourced, permitted_themes=translator.effective().theme_policy, registers=("current",))["sources"] == [s.to_dict() for s in sourced.sources]
 
 
 def test_brief_is_what_yarn_sends(translator):
@@ -94,7 +95,7 @@ def test_brief_is_what_yarn_sends(translator):
 
     s = brief("She was very tired.", level=4, seed=3, embellishment="troppo", translator=translator)
     assert set(s.payload) == {"ORIGINAL", "LEVEL", "VULGARITY", "EMBELLISHMENT", "GENRE", "PLANNED_PHRASES",
-                              "RIFFS", "OPENINGS", "DIFFICULT_SENTENCES", "DOCUMENT_CONFIG", "PROFILE_CONFIG", "THEME_PERMISSIONS", "THEME_RULES"}   # troppo writes first: no draft
+                              "RIFFS", "OPENINGS", "DIFFICULT_SENTENCES", "DOCUMENT_CONFIG", "PROFILE_CONFIG", "THEME_PERMISSIONS", "THEME_RULES", "CONSTRUCTION_SCAFFOLD"}   # troppo writes first: no draft
     assert set(brief("She was very tired.", translator=translator).payload) == (   # a retelling's dinkum
         set(s.payload) | {"ENGINE_DRAFT"})
     assert s.payload["LEVEL"] == 4 and s.vulgarity == s.payload["VULGARITY"]

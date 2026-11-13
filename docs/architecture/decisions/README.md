@@ -74,6 +74,8 @@ its consequences as they stood when it was made. Anyway, records are numbered in
 | [DD-047](dd-047-source-links-and-match-identity.md) | Shared citation-link validation and contextual source-match identity; slice 5 foundations | Accepted |
 | [DD-048](dd-048-community-extension-composition.md) | Additive community manifests, aggregate testimony, bounded adjustment data and content identity | Accepted |
 
+| [DD-055](dd-055-v3-producers-and-replay.md) | Coordinated v3 producers, local provenance'n exact\-source replay choices \| Accepted for slices 3\+6 \|
+
 ## By topic
 
 - **Engine:** DD\-001, DD\-003, DD\-007, DD\-029, DD\-030, DD\-034, DD\-035, DD\-036, DD\-037, DD\-039, DD\-041, DD\-044

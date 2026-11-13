@@ -382,7 +382,7 @@ def indefinite_article(word: str) -> str:
     return "an" if low[:1] in "aeiou" and not YOU_SOUND.match(low) else "a"
 
 
-def fix_articles(text: str) -> str:
+def fix_articles(text: str, *, edits: list[tuple[int, int, int]] | None = None) -> str:
     """Repair a/an after substitutions ("an breakfast" -> "a brekkie", "an ute" -> "a ute")."""
     def repl(m: re.Match) -> str:
         art, space, word = m.group(1), m.group(2), m.group(3)
@@ -391,5 +391,7 @@ def fix_articles(text: str) -> str:
             return m.group(0)
         if art[0].isupper():
             want = want.capitalize()
+        if edits is not None:
+            edits.append((m.start(1), m.end(1), len(want)))
         return want + space + word
     return re.sub(r"\b([Aa]n?)(\s+)([A-Za-z0-9][\w'-]*)", repl, text)

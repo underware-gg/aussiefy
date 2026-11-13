@@ -22,7 +22,11 @@ from pathlib import Path
 from string import Formatter
 from typing import Any, Literal
 
-from .cards import entry_card, shows_riffs
+from .cards import shows_riffs
+from .pins import Pin, target as pin_target
+from .errors import UserError
+from .v3_contract import entry_card, construction_card, imagery_card, provenance, response_metadata
+from .match_keys import detection_match
 from .engine import (PassObserver, Result, SentenceTrace, Spot, SpotRendering, Translator,
                      first_replaced)
 from .garnish import (Edit, GarnishOffer, PhoneticPass, PhoneticTrace, in_dialogue, phonetic_admits,
@@ -33,16 +37,18 @@ from .policy import resolve
 from .schema import Entry
 from .constructions import Construction
 from .select import Candidate
-from .text import FIRST_WORD_RE
+from .text import FIRST_WORD_RE, match_case
+from .offsets import _walk, Straddle as Straddle, map_position, map_outward, unmap_position, map_spans
 
-VERSION = 2          # the changes contract; a change to its shape or to how ids are made bumps it
+VERSION = 3          # the changes contract; a change to its shape or to how ids are made bumps it
 SCHEMA = Path(__file__).resolve().parent / "data" / "changes.schema.json"   # its JSON Schema
 ID_FORMAT = "{kind}:{start}-{end}[:{placement or rule}][#{n}]"   # how a change's id is made ([...]: where it has one)
 CONTEXT = 64         # characters of whole-text context read either side of a region, for the rules' lookaround
 MARGIN = 16          # ... the outer part of which is read, never compared (a match there may be cut short)
 WIDEN = 4            # the most words a region widens by, each side, for a phonetic match across its edge
 _FIELDS = ("id", "kind", "src_span", "out_span", "original", "output", "entry_id", "vulgarity", "masks", "placement",
-           "image_id", "removed", "rule", "pair", "alternatives", "locked", "covers")   # a change's, in order
+           "image_id", "removed", "rule", "pair", "alternatives", "locked", "covers",
+           "construction_id", "parts", "riffs", "match", "evidence", "coined_by")   # a change's, in order
 KINDS = ("substitution", "dialect", "garnish", "swear_infix", "phonetic")   # also their order at one output span
 # why a swap or a garnish offers its pick alone (ChangeSet.withheld)
 PICK_DIFFERS = "pick-differs"            # the pick, rendered over its region, isn't the output there
@@ -62,14 +68,40 @@ class ChangeSet:
     entries: dict[str, dict[str, Any]]
     withheld: list[dict[str, str]] = field(default_factory=list)
     version: int = VERSION
+    constructions: dict[str, dict] = field(default_factory=dict)
+    imagery: dict[str, dict] = field(default_factory=dict)
+    _pin_choices: dict[str, dict[str | None, Pin]] = field(default_factory=dict, repr=False)
 
     @property
     def text(self) -> str:
         return self.result.text
 
+    def replay_options(self) -> dict:
+        """A separate service sidecar; it is deliberately absent from the frozen changes response."""
+        return {'current': self.result.replay_pins(), 'changes': {
+            change: [{'key': key, 'pick': pick.to_dict()} for key, pick in choices.items()]
+            for change, choices in self._pin_choices.items()}}
+
+    def replay_pins(self, selections: dict[str, str | None] | None = None) -> dict:
+        packet = self.result.replay_pins()
+        if selections is None:
+            return packet
+        if not isinstance(selections, dict):
+            raise UserError('replay selections must map change IDs to option keys (or null for a removal)')
+        for change, key in selections.items():
+            if (not isinstance(change, str) or key is not None and not isinstance(key, str)
+                    or change not in self._pin_choices or key not in self._pin_choices[change]):
+                raise UserError('replay selection is not an offered alternative or removal')
+            chosen = self._pin_choices[change][key].to_dict()
+            def lane(p):
+                return p['kind'], p['span'], p.get('placement')
+            packet['picks'] = [p for p in packet['picks'] if lane(p) != lane(chosen)] + [chosen]
+        return packet
+
     def to_dict(self) -> dict[str, Any]:
-        return {"version": self.version, "text": self.result.text, "changes": self.changes, "entries": self.entries,
-                "withheld": self.withheld}
+        return {"version": self.version, "text": self.result.text, **response_metadata(self.result),
+                "changes": self.changes, "entries": self.entries, "constructions": self.constructions,
+                "imagery": self.imagery, "withheld": self.withheld}
 
 
 @dataclass
@@ -83,6 +115,8 @@ class Draft:
     entries: list[str] = field(default_factory=list)
     rendering_entries: list[list[str]] = field(default_factory=list)   # alternatives', then locked options'
     withheld: str | None = None
+    constructions: tuple[Construction, ...] = ()
+    pin_choices: dict[str | None, Pin] = field(default_factory=dict)
 
     def renderings(self) -> Iterator[dict[str, Any]]:
         """Each rendering a page can swap in: the alternatives, the locked options and a removal."""
@@ -92,17 +126,34 @@ class Draft:
             yield self.change["removed"]
 
     def relocate(self, source: int, position: Callable[[int], int],
-                 rendering: Callable[[list[int], str], str], text: str) -> None:
-        """Move the change into a larger text (a Markdown document): source offsets shifted by source, output
-        positions mapped through position, each rendering through rendering (its span here, its text), and its
-        output read again from text."""
+                 rendering: Callable[[list[int], str], str], text: str, *, rendering_map=None) -> None:
+        """Relocate document regions and use the adapter's exact escaping map for local child spans."""
+        self.pin_choices = {key: replace(pin, span=tuple(x+source for x in pin.span))
+                            for key, pin in self.pin_choices.items()}
         c = self.change
-        c["src_span"] = [c["src_span"][0] + source, c["src_span"][1] + source]
-        for r in self.renderings():
-            r["rendered"] = rendering(r["out_span"], r["rendered"])
-            r["out_span"] = [position(r["out_span"][0]), position(r["out_span"][1])]
-        c["out_span"] = [position(c["out_span"][0]), position(c["out_span"][1])]
-        c["output"] = text[c["out_span"][0]:c["out_span"][1]]
+        c['src_span'] = [x+source for x in c['src_span']]
+        def annotations(owner):
+            return [*owner.get('parts',[]),*owner.get('riffs',[])]
+        def update(owner, rendered, at):
+            for annotation in annotations(owner):
+                a,b = annotation['out_span']
+                annotation['out_span'] = [at(a),at(b)]
+                annotation['text'] = rendered[slice(*annotation['out_span'])]
+        for option in self.renderings():
+            if rendering_map is not None:
+                rendered,at = rendering_map(option['out_span'],option['rendered'])
+                update(option,rendered,lambda x: at[x])
+            else:
+                if annotations(option):
+                    raise ValueError('annotated renderings need the document adapter position map')
+                rendered = rendering(option['out_span'],option['rendered'])
+            option['rendered'] = rendered
+            option['out_span'] = [position(x) for x in option['out_span']]
+        start,end = c['out_span']
+        new_start,new_end = position(start),position(end)
+        output = text[new_start:new_end]
+        update(c,output,lambda x: position(start+x)-new_start)
+        c['out_span'],c['output'] = [new_start,new_end],output
 
 
 def build(translator: Translator, text: str, **options) -> ChangeSet:
@@ -146,10 +197,17 @@ def finish(result: Any, drafts: list[Draft], dictionary: Dictionary) -> ChangeSe
         names.update(i for es in [d.entries, *d.rendering_entries] for i in es)
     riffs = shows_riffs(result.embellishment)
     entries = {i: entry_card(dictionary.entries[i], result.vulgarity, riffs,
-                             permitted_themes=result.theme_policy, registers=result.registers) for i in sorted(names)}
+                             permitted_themes=result.theme_policy, registers=result.registers, allow_misreadable=result.allow_misreadable) for i in sorted(names)}
     withheld = [{"id": d.change["id"], "reason": d.withheld} for d in drafts if d.withheld]
     changes = [{k: d.change[k] for k in _FIELDS if k in d.change} for d in drafts]
-    return ChangeSet(result, changes, entries, withheld)
+    constructions = {c.id: construction_card(c, dictionary, permitted_themes=result.theme_policy)
+                     for draft in drafts for c in draft.constructions}
+    image_ids = {r['image_id'] for c in changes for owner in (c, *c['alternatives'], *c['locked'])
+                 for r in (owner, *owner.get('riffs', [])) if r.get('image_id')}
+    imagery = {image.id: imagery_card(image, permitted_themes=result.theme_policy)
+               for image in dictionary.imagery if image.id in image_ids}
+    return ChangeSet(result, changes, entries, withheld, constructions=constructions, imagery=imagery,
+                     _pin_choices={d.change["id"]: d.pin_choices for d in drafts if d.pin_choices})
 
 
 _ID_PART = re.compile(r"\[([^\]]*)\]|[^\[]+")   # ID_FORMAT's parts: [an optional one], or a fixed one
@@ -180,56 +238,6 @@ def _masked(dictionary: Dictionary, text: str, entry_ids: list[str]) -> list[dic
 
 
 # -- offsets ------------------------------------------------------------------------------------------------------
-
-def _walk(edits: Sequence[Edit], pos: int, past_insertion: bool) -> tuple[int, tuple[int, int] | None]:
-    """A position through edits (start, end, new length), sorted, in the input's coordinates: where it lands, or,
-    for a position inside a replaced span, None and that edit's new start and end. past_insertion: whether a
-    position at an insertion goes after it."""
-    delta = 0
-    for a, b, n in edits:
-        if pos < a or (pos == a and (b > a or not past_insertion)):
-            break
-        if pos >= b:
-            delta += n - (b - a)
-            continue
-        return pos, (a + delta, a + delta + n)
-    return pos + delta, None
-
-
-class Straddle(Exception):
-    """A position falls inside an edit: a match across a region's edge."""
-
-
-def map_position(edits: Sequence[Edit], pos: int, bias: Bias) -> int:
-    """A position through edits. At an insertion, bias "left" stays before it and "right" goes after; a position
-    inside a replaced span raises Straddle."""
-    out, inside = _walk(edits, pos, bias == "right")
-    if inside is not None:
-        raise Straddle(pos, inside)
-    return out
-
-
-def map_outward(edits: Sequence[Edit], pos: int, side: Side) -> int:
-    """One end of a span through edits, taking in an edit it falls inside: a "start" goes to the edit's start, an
-    "end" to its end (and at an insertion, a start stays before it and an end goes after)."""
-    out, inside = _walk(edits, pos, side == "end")
-    if inside is None:
-        return out
-    return inside[0] if side == "start" else inside[1]
-
-
-def unmap_position(edits: Sequence[Edit], pos: int, side: Side) -> int:
-    """A position in edited text back in the input; inside an edit's new text, its input's "start" or end."""
-    delta = 0
-    for a, b, n in edits:
-        new_start = a + delta
-        if pos <= new_start:
-            break
-        if pos < new_start + n:
-            return a if side == "start" else b
-        delta += n - (b - a)
-    return pos - delta
-
 
 # -- what the pass reports ----------------------------------------------------------------------------------------
 
@@ -347,6 +355,7 @@ class _Option:
     locked_at: int | None = None
     text: str = ""
     infix: int = 0
+    annotations: list[dict] = field(default_factory=list)
 
     @property
     def entry(self) -> Entry:
@@ -356,7 +365,8 @@ class _Option:
     def entries(self) -> list[str]:
         """The entries its rendering came from: its own, and the one stacked after it."""
         stacked = self.rendering.stacked
-        return [self.entry.id] + ([stacked.entry.id] if stacked else [])
+        own = (_garnish_entries(self.candidate.construction) if self.candidate.construction else [self.entry.id])
+        return own + ([stacked.entry.id] if stacked else [])
 
 
 @dataclass
@@ -435,7 +445,11 @@ class _Builder:
         return {"kind": kind, "src_span": list(src), "out_span": list(out),
                 "original": self.source[src[0]:src[1]] if original is None else original,
                 "output": self.final[out[0]:out[1]], "entry_id": entry.id if isinstance(entry, Entry) else None,
-                "vulgarity": vulgarity, **extra, "alternatives": alternatives or [], "locked": locked or []}
+                "vulgarity": vulgarity,
+                **(provenance(entry.metadata if isinstance(entry, Construction) else entry) if entry else
+                   {"evidence": None, "coined_by": None}),
+                **({"construction_id": entry.id} if isinstance(entry, Construction) else {}),
+                **extra, "alternatives": alternatives or [], "locked": locked or []}
 
     # -- sentences --------------------------------------------------------------------------------------------
 
@@ -534,7 +548,8 @@ class _Builder:
             plan = self._plans[key] = [_PassView(p, a, b) for p, (a, b) in zip(self.passes, bounds)]
         return plan
 
-    def _phonetic_region(self, text: str, bounds: list[tuple[int, int]], flags: set[str]) -> tuple[str, int]:
+    def _phonetic_region(self, text: str, bounds: list[tuple[int, int]], flags: set[str],
+                         annotations: list[dict] | None = None) -> tuple[str, int]:
         """Each rule's pass over a region's text only. Its count starts from the matches before the region in the
         base text, and each match is gated as the engine gates it (garnish.phonetic_admits), reading the base text
         either side (lookaround, the text before, quotes, questions, kept and preserved spans). Flags a match
@@ -552,6 +567,7 @@ class _Builder:
             if v.straddle:
                 flags.add("straddle-left")
             pieces, last = [], off
+            edits = []
             context_left, context_right = [], []
             for m in rule.pattern.finditer(window):
                 ms, me = m.start(), m.end()
@@ -575,12 +591,15 @@ class _Builder:
                 out = phonetic_replacement(rule, m, n, seed, p.scale, in_dialogue(pos, p.quotes))
                 if out is None:
                     continue
+                edits.append((ms - off, me - off, len(out)))
                 pieces += [window[last:ms], out]
                 last = me
                 infix = max(infix, rule.vulgarity)
             if pieces:
                 pieces.append(window[last:end])
                 text = "".join(pieces)
+            if annotations:
+                map_spans([annotation['out_span'] for annotation in annotations], edits)
             if context_left != v.base_left:
                 flags.add("context-left")
             if context_right != v.base_right:
@@ -598,25 +617,117 @@ class _Builder:
         region, unsettled = self._render_spot(sentence, spot, options)
         a, b = region.final
         pick = options[0]
+        actual = self._actual_annotations(sentence, spot, (a, b))
         withheld = self._withheld(self.restore(pick.text, whole=False), region.final, unsettled)
-        if withheld:   # offer the pick alone, as the output has it, rather than a swap that may read wrong
+        if withheld:
             options = [pick]
-            pick.text = self.final[a:b]
+            pick.text, pick.annotations = self.final[a:b], actual
         toks = spot.sent.tokens
-        total = sum(o.candidate.weight for o in options if o.locked_at is None)
         offered = [o for o in options if o.locked_at is None]
         locked = [o for o in options if o.locked_at is not None]
-        change = self._change(
-            "substitution", (toks[region.start].start, toks[region.end - 1].end), (a, b), pick.entry,
-            self._vulgarity(pick),
-            alternatives=[{"entry_id": o.entry.id, "weight": round(o.candidate.weight / total, 4),
-                           "rendered": self.restore(o.text, whole=False), "out_span": [a, b],
-                           "vulgarity": self._vulgarity(o),
-                           **({"semantic_effects": list(o.candidate.semantic_effects)} if o.candidate.semantic_effects else {})} for o in offered],
-            locked=[{"entry_id": o.entry.id, "vulgarity": max(o.locked_at, self._vulgarity(o)),
-                     "rendered": self.restore(o.text, whole=False), "out_span": [a, b],
-                     **({"semantic_effects": list(o.candidate.semantic_effects)} if o.candidate.semantic_effects else {})} for o in locked])
-        return Draft(change, "", pick.entries, [o.entries for o in offered + locked], withheld)
+        total = sum(o.candidate.weight for o in offered)
+        def option(o):
+            return {**self._target(o.candidate, o.annotations),
+                    'rendered': self.restore(o.text, whole=False), 'out_span': [a,b],
+                    'vulgarity': max(o.locked_at or 0, self._vulgarity(o)),
+                    **({'semantic_effects': list(o.candidate.semantic_effects)} if o.candidate.semantic_effects else {})}
+        chosen = pick.candidate.construction or pick.entry
+        change = self._change('substitution', (toks[region.start].start,toks[region.end-1].end), (a,b),
+                              chosen, self._vulgarity(pick), match=detection_match(spot.rec.det).to_dict(),
+                              alternatives=[{**option(o),'weight':o.candidate.weight/total} for o in offered],
+                              locked=[option(o) for o in locked], **self._target(pick.candidate,actual))
+        return Draft(change, '', pick.entries, [o.entries for o in offered+locked], withheld,
+                     constructions=tuple(o.candidate.construction for o in options if o.candidate.construction),
+                     pin_choices={o.candidate.entry.id: self._option_pin(spot, o) for o in options})
+
+    def _option_pin(self, spot, option):
+        c, r = option.candidate, option.rendering
+        stack_form = None
+        if r.stacked:
+            stack_form = (spot.rec.pin.stack.form if spot.rec.pin and spot.rec.pin.stack
+                          and c.entry.id == spot.rec.chosen.entry.id else self.translator._form(
+                              r.stacked.entry, spot.rec.det, replace(self.run, state=spot.state.copy()),
+                              spot.sent.key + ('stack',)))
+        return Pin(0, 'substitution', spot.rec.span, match=detection_match(spot.rec.det).key,
+                   target=pin_target(c.entry, r.form, c.construction),
+                   stack=pin_target(r.stacked.entry, stack_form) if r.stacked else None, riff=r.riff)
+
+    @staticmethod
+    def _garnish_pins(op, sentence, alternatives, removable):
+        span = (sentence.tokens[0].start, sentence.tokens[-1].end)
+        choices = {entry.id: Pin(0, 'garnish', span, placement=op.placement,
+                   target=pin_target(entry, op.form if entry is op.entry else op.offer.words(entry),
+                                     entry if isinstance(entry, Construction) else None))
+                   for entry in op.offer.pool
+                   if entry.id in {o.get('entry_id') or o.get('construction_id') for o in alternatives}}
+        if removable:
+            choices[None] = Pin(0, 'garnish', span, placement=op.placement)
+        return choices
+
+    def _target(self, candidate: Candidate, annotations: list[dict]) -> dict:
+        construction = candidate.construction
+        result = {'entry_id': None if construction else candidate.entry.id,
+                  **provenance(construction.metadata if construction else candidate.entry)}
+        if construction:
+            result.update(construction_id=construction.id, parts=[dict(a) for a in annotations if 'role' in a])
+        riffs = [dict(a) for a in annotations if 'kind' in a]
+        if riffs:
+            result['riffs'] = riffs
+        return result
+
+    def _annotation_specs(self, candidate, spans, riff_span, riff):
+        annotations = []
+        if candidate.construction:
+            for part, span in zip(candidate.construction.parts, spans, strict=True):
+                annotations.append({'role':part.role,'ingredient_id':part.ingredient.id,
+                    'entry_id':part.ingredient.entry_id,'out_span':list(span),
+                    **provenance(part.ingredient.metadata)})
+        if riff_span is not None:
+            cards = candidate.entry.riffs_within(self.result.vulgarity, self.result.theme_policy,
+                                                 registers=self.result.registers, allow_misreadable=self.result.allow_misreadable)
+            index = next(i for i,c in enumerate(cards) if c.text==riff)
+            annotations.append({'kind':'entry_riff','entry_id':candidate.entry.id,'riff_index':index,
+                                'out_span':list(riff_span),**provenance(cards[index])})
+        return annotations
+
+    def _image_annotation(self, splice, offset):
+        image = next(i for i in self.translator.dictionary.imagery if i.id==splice.owner)
+        lead = len(splice.text)-len(splice.text.lstrip(', '))
+        end = len(splice.text)-(1 if splice.text.endswith(',') else 0)
+        return {'kind':'imagery','image_id':image.id,'out_span':[offset+lead,offset+end],**provenance(image)}
+
+    def _actual_annotations(self, sentence, spot, region):
+        record = spot.rec
+        annotations = self._annotation_specs(record.chosen, record.part_spans, record.riff_span, record.riff)
+        splice = next(s for s in sentence.splices if s.owner is spot)
+        origin = sentence.layout.forward(splice.start-sentence.offset,'right')
+        for annotation in annotations:
+            a,b = annotation['out_span']
+            x,y = self._to_final(sentence,origin+a,origin+b)
+            annotation['out_span'] = [x-region[0],y-region[0]]
+        for s in sentence.splices:
+            if s.kind=='imagery' and s.start==record.out_span[1]:
+                at = map_position(sentence.layout.splices,s.start-sentence.offset,'left')
+                origin = sentence.layout.after_garnish(at,'right',0)
+                annotation = self._image_annotation(s,origin)
+                x,y = self._to_final(sentence,*annotation['out_span'])
+                annotation['out_span'] = [x-region[0],y-region[0]]
+                if region[0] <= x < y <= region[1]:
+                    annotations.append(annotation)
+        for annotation in annotations:
+            a,b = annotation['out_span']
+            annotation['text'] = self.final[region[0]+a:region[0]+b]
+        return annotations
+
+    def _finish_annotations(self, text, annotations):
+        rendered = self.restore(text,whole=False)
+        for annotation in annotations:
+            a,b = annotation['out_span']
+            annotation['out_span'] = [len(self.restore(text[:a],whole=False)),len(self.restore(text[:b],whole=False))]
+            a,b = annotation['out_span']
+            annotation['text'] = rendered[a:b]
+        return rendered
+
 
     def _withheld(self, pick: str, region: tuple[int, int], unsettled: bool) -> str | None:
         """Why a change's renderings are withheld, if they are: its pick, rendered over its region (protected spans
@@ -626,7 +737,8 @@ class _Builder:
         return REGION_UNSETTLED if unsettled else None
 
     def _option(self, spot: Spot, candidate: Candidate, locked_at: int | None = None) -> _Option:
-        rendering = self.translator.render_at_spot(candidate, spot, replace(self.run, state=spot.state.copy()))
+        rendering = self.translator.render_at_spot(candidate, spot, replace(self.run, state=spot.state.copy()),
+            pin=spot.rec.pin if spot.rec.pin is not None and candidate.entry.id == spot.rec.chosen.entry.id else None)
         return _Option(candidate, rendering, locked_at)
 
     @staticmethod
@@ -737,7 +849,20 @@ class _Builder:
         layout = self._telling(sentence, splices, first)
         lo, hi = toks[region.start].start - sentence.offset, toks[region.end - 1].end - sentence.offset
         ga, gb = layout.forward(lo, "right"), layout.forward(hi, "left")
-        return self._phonetic_region(layout.text[ga:gb], region.bounds, flags)
+        annotations = self._annotation_specs(o.candidate,r.part_spans,r.riff_span,r.riff)
+        origin = layout.forward(a-sentence.offset,'right') - ga
+        for annotation in annotations:
+            annotation['out_span'] = [x+origin for x in annotation['out_span']]
+        if rides is not None:
+            at = map_position(layout.splices,b-sentence.offset,'left')
+            image_start = layout.after_garnish(at,'right',0) - ga
+            image = self._image_annotation(rides,image_start)
+            if 0 <= image['out_span'][0] < image['out_span'][1] <= gb-ga:
+                annotations.append(image)
+        text, infix = self._phonetic_region(layout.text[ga:gb],region.bounds,flags,annotations)
+        self._finish_annotations(text,annotations)
+        o.annotations = annotations
+        return text,infix
 
     # -- dialect and imagery --------------------------------------------------------------------------------------
 
@@ -762,9 +887,13 @@ class _Builder:
         self._phonetic_region("", bounds, flags)   # its removal, for what a neighbour's lookaround reads there
         withheld = self._withheld(pick, region, bool(flags))
         removed = {} if withheld else {"removed": {"out_span": list(out), "rendered": ""}}
-        change = self._change("garnish", (s.start, s.start), out, None, 0, original="", placement="riff",
-                              image_id=s.owner, **removed)
-        return Draft(change, "riff", withheld=withheld)
+        image = next(i for i in self.translator.dictionary.imagery if i.id==s.owner)
+        change = self._change("garnish", (s.start, s.start), out, None, image.vulgarity, original="", placement="riff",
+                              image_id=s.owner, **provenance(image), **removed)
+        rec = next(r for r in sentence.trace.records if r.image_id == s.owner
+                   and sentence.trace.sent.tokens[r.det.end-1].end == s.start)
+        choices = {None: Pin(0, 'imagery', rec.span, match=detection_match(rec.det).key)} if not withheld else {}
+        return Draft(change, "riff", withheld=withheld, pin_choices=choices)
 
     # -- garnish ------------------------------------------------------------------------------------------------
 
@@ -794,25 +923,36 @@ class _Builder:
             flags: set[str] = set()
             ra, rb = self._garnish_region(sentence.layout, k, lo, hi, True)
             bounds, region = self._bounds(self._joined(base + ra, "right"), self._joined(base + rb, "left"), flags)
-            texts = []
+            texts, all_annotations = [], []
             for swap in swaps:   # each told with the k-th garnish swapped (None: taken out), after the phonetic pass
                 layout = self._telling(sentence, sentence.splices, sentence.first_replaced,
                                        [swap if i == k else o for i, o in enumerate(sentence.ops)])
                 ga, gb = self._garnish_region(layout, k, lo, hi, swap is not None)
-                texts.append(self.restore(self._phonetic_region(layout.text[ga:gb], bounds, flags)[0], whole=False))
-            return (region, texts), flags, (lo, hi)
+                annotations = self._garnish_annotations(layout,k,swap.entry if swap else None,ga)
+                rendered, _ = self._phonetic_region(layout.text[ga:gb],bounds,flags,annotations)
+                texts.append(self._finish_annotations(rendered,annotations))
+                all_annotations.append(annotations)
+            return (region,texts,all_annotations),flags,(lo,hi)
 
         def step(pos: int, way: int) -> int:
             if way < 0:
                 return max((s for s, _ in words if s < pos), default=pos)
             return min((e for _, e in words if e > pos), default=pos)
 
-        (region, (removal, *texts)), unsettled = self._widen((p, q), render, step)
-        alternatives, withheld = self._garnish_alternatives(op, texts, region, unsettled)
+        (region,(removal,*texts),annotations),unsettled = self._widen((p,q),render,step)
+        actual_region = self._actual_garnish_annotations(sentence,k,op.entry,region)
+        alternatives,withheld = self._garnish_alternatives(op,texts,region,unsettled,
+                                                         annotations[1:],actual_region)
         change = self._change("garnish", (src, src), out, op.entry, op.entry.vulgarity, original="",
                               alternatives=alternatives, placement=op.placement,
+                              **({'parts':self._actual_garnish_annotations(sentence,k,op.entry,out)}
+                                 if isinstance(op.entry,Construction) else {}),
                               **({} if withheld else {"removed": {"out_span": list(region), "rendered": removal}}))
-        return Draft(change, op.placement, _garnish_entries(op.entry), [[o["entry_id"]] for o in alternatives], withheld)
+        choices = {entry.id:entry for entry in op.offer.pool}
+        rendering_entries = [_garnish_entries(choices[o.get('entry_id') or o['construction_id']]) for o in alternatives]
+        return Draft(change,op.placement,_garnish_entries(op.entry),rendering_entries,withheld,
+                     constructions=tuple(e for e in op.offer.pool if isinstance(e,Construction)),
+                     pin_choices=self._garnish_pins(op, sentence.trace.sent, alternatives, not withheld))
 
     @staticmethod
     def _held(sentence: _Sentence, k: int) -> list[tuple[int, int]]:
@@ -828,20 +968,46 @@ class _Builder:
                 spans.append((e[0], e[0] + e[2]))
         return spans
 
-    def _garnish_alternatives(self, op: _Op, texts: list[str], region: tuple[int, int],
-                              unsettled: bool) -> tuple[list[dict[str, Any]], str | None]:
-        """A garnish's alternatives from each pool entry's rendering over the region, and why they're withheld
-        (the pick then offered alone, as the output has it), if they are."""
-        withheld = self._withheld(texts[op.offer.pool.index(op.entry)], region, unsettled)
-        if isinstance(op.entry, Construction):
-            return [], withheld
-        alternatives = [{"entry_id": entry.id, "weight": weight, "rendered": text, "out_span": list(region),
-                         "vulgarity": entry.vulgarity}
-                        for entry, weight, text in zip(op.offer.pool, op.offer.weights, texts)
-                        if isinstance(entry, Entry) and (not withheld or entry is op.entry)]
-        if withheld:
-            alternatives[0]["rendered"] = self.final[region[0]:region[1]]
-        return _shares(alternatives), withheld
+    def _garnish_annotations(self,layout,k,entry,origin):
+        if not isinstance(entry,Construction):
+            return []
+        edit = layout.garnish[k]
+        assert edit is not None, "a rendered construction must be placed"
+        annotations = []
+        for part in entry.parts:
+            a,b = [len(match_case(entry.text[:x],'A')) for x in part.span]
+            x = layout.after_garnish(edit[0]+a,'right',k+1)-origin
+            y = layout.after_garnish(edit[0]+b,'left',k+1)-origin
+            annotations.append({'role':part.role,'ingredient_id':part.ingredient.id,
+                'entry_id':part.ingredient.entry_id,'out_span':[x,y],**provenance(part.ingredient.metadata)})
+        return annotations
+
+    def _actual_garnish_annotations(self,sentence,k,entry,region):
+        annotations = self._garnish_annotations(sentence.layout,k,entry,0)
+        for annotation in annotations:
+            a,b = self._to_final(sentence,*annotation['out_span'])
+            annotation['out_span'] = [a-region[0],b-region[0]]
+            annotation['text'] = self.final[a:b]
+        return annotations
+
+    def _garnish_alternatives(self,op,texts,region,unsettled,annotations=None,actual=None):
+        withheld = self._withheld(texts[op.offer.pool.index(op.entry)],region,unsettled)
+        annotations = annotations if annotations is not None else [[] for _ in texts]
+        alternatives = []
+        for entry,weight,text,parts in zip(op.offer.pool,op.offer.weights,texts,annotations,strict=True):
+            if withheld and entry is not op.entry:
+                continue
+            option = {'entry_id':entry.id if isinstance(entry,Entry) else None,'weight':weight,
+                      'rendered':text,'out_span':list(region),'vulgarity':entry.vulgarity,
+                      **provenance(entry.metadata if isinstance(entry,Construction) else entry)}
+            if isinstance(entry,Construction):
+                option.update(construction_id=entry.id,parts=parts)
+            if withheld:
+                option['rendered'] = self.final[region[0]:region[1]]
+                if isinstance(entry,Construction):
+                    option['parts'] = actual
+            alternatives.append(option)
+        return _shares(alternatives),withheld
 
     def _before(self, sentence: _Sentence, k: int) -> str:
         """The sentence's text just before its k-th garnish went in."""
@@ -881,7 +1047,8 @@ class _Builder:
         change = self._change("garnish", (src, src), region, op.entry, op.entry.vulgarity, original="",
                               alternatives=alternatives, placement="closer",
                               **({} if withheld else {"removed": {"out_span": list(region), "rendered": ""}}))
-        return Draft(change, "closer", _garnish_entries(op.entry), [[o["entry_id"]] for o in alternatives], withheld)
+        return Draft(change, "closer", _garnish_entries(op.entry), [[o["entry_id"]] for o in alternatives], withheld,
+                     pin_choices=self._garnish_pins(op, self.sentences[-1].trace.sent, alternatives, not withheld))
 
     # -- phonetic --------------------------------------------------------------------------------------------------
 
@@ -981,7 +1148,7 @@ def _first_word_end(text: str, at: int) -> int:
 def _shares(alternatives: list[dict[str, Any]]) -> list[dict[str, Any]]:
     total = sum(o["weight"] for o in alternatives)
     for o in alternatives:
-        o["weight"] = round(o["weight"] / total, 4)
+        o["weight"] = o["weight"] / total
     return alternatives
 
 

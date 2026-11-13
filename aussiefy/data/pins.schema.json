@@ -1,0 +1,256 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "aussiefy explicit replay pins v1",
+  "$comment": "Semantic identity, source bounds, recipes, eligibility and consumption are checked by aussiefy.pins and the engine.",
+  "type": "object",
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "dictionary_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "complete": {
+      "type": "boolean"
+    },
+    "picks": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "substitution"
+              },
+              "span": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "match": {
+                "type": "string",
+                "minLength": 1
+              },
+              "target": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/target"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "stack": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/target"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "riff": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "kind",
+              "span",
+              "match",
+              "target",
+              "stack",
+              "riff"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "garnish"
+              },
+              "span": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "placement": {
+                "enum": [
+                  "opener",
+                  "connective",
+                  "aside",
+                  "tag",
+                  "tail",
+                  "closer"
+                ]
+              },
+              "target": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/target"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "kind",
+              "span",
+              "placement",
+              "target"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "imagery"
+              },
+              "span": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "match": {
+                "type": "string",
+                "minLength": 1
+              },
+              "image_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "kind",
+              "span",
+              "match",
+              "image_id"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "version",
+    "dictionary_id",
+    "source_id",
+    "seed",
+    "complete",
+    "picks"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "target": {
+      "type": "object",
+      "properties": {
+        "entry_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "construction_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "family": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "parts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "form": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "entry_id",
+        "construction_id",
+        "family",
+        "parts",
+        "form"
+      ],
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "entry_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "construction_id": {
+              "type": "null"
+            },
+            "family": {
+              "type": "null"
+            },
+            "parts": {
+              "maxProperties": 0
+            }
+          }
+        },
+        {
+          "properties": {
+            "entry_id": {
+              "type": "null"
+            },
+            "construction_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "family": {
+              "type": "string",
+              "minLength": 1
+            },
+            "parts": {
+              "minProperties": 1
+            }
+          }
+        }
+      ]
+    }
+  }
+}

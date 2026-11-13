@@ -332,8 +332,8 @@ def test_changes_share_tuned_picks_and_preserve_current_public_contract(adjusted
     assert changed.text == result.text
     assert changed.result._tuning == result._tuning
     assert next(c for c in changed.changes if c['kind'] == 'substitution')['entry_id'] == 'zz-choice-a'
-    assert changed.to_dict()['version'] == 2
-    assert 'tuning' not in changed.to_dict() and 'tuning' not in result.to_dict()
+    assert changed.to_dict()['version'] == 3
+    assert changed.to_dict()['tuning'] == result.to_dict()['tuning'] == result.tuning
 
 
 def test_large_finite_personal_and_community_factors_do_not_overflow(adjusted_dictionary):
@@ -407,7 +407,7 @@ def test_personal_factor_does_not_restore_an_exhausted_repeat_weight(adjusted_di
     assert tuned._tuning['preferences'] == 0
 
 
-def test_markdown_units_share_the_runtime_without_public_contract_changes(adjusted_dictionary):
+def test_markdown_units_share_the_runtime_and_public_tuning_report(adjusted_dictionary):
     from aussiefy.markdown import translate_document
     from aussiefy.policy import resolve
 
@@ -420,7 +420,7 @@ def test_markdown_units_share_the_runtime_without_public_contract_changes(adjust
     assert len(result.units) == 2
     assert all(spot(unit.result).chosen.entry.id == 'zz-choice-a' for unit in result.units)
     assert all(unit.result._tuning['preferences'] == 1 for unit in result.units)
-    assert 'tuning' not in result.to_dict()
+    assert result.to_dict()['tuning'] == {'popularity': True, 'preferences': 1}
 
 
 def tuned_document(dictionary, source, tuning, *, changes=False, unit=None):
@@ -444,9 +444,9 @@ def test_document_counts_one_preference_once_across_prose_units(adjusted_diction
     assert [u.result._tuning['preferences'] for u in document.units] == [1, 1]
     assert document._tuning == {'popularity': True, 'preferences': 1}
     assert all(spot(u.result).chosen.entry.id == 'zz-choice-a' for u in document.units)
-    assert 'tuning' not in result.to_dict()
+    assert result.to_dict()['tuning'] == {'popularity': True, 'preferences': 1}
     if changes:
-        assert result.to_dict()['version'] == 2
+        assert result.to_dict()['version'] == 3
 
 
 def test_document_preserves_distinct_exact_and_root_preferences_without_double_counting(adjusted_dictionary):

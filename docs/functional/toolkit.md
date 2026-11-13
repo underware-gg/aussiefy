@@ -58,7 +58,7 @@ Custom enables only configured optional behaviours. The shared override object r
 explicit dials, including false and empty lists. See [translation controls](translation-controls.md).
 Its nested `profile` tunes engine rates, limits, spacing, frames, drawl, swearing and rewrite thresholds.
 Partial maps inherit missing keys. Every document operation's result includes the resolved `profile_config`
-(lookup reads no profile settings, so its result reports the dials alone); document operations accept that snapshot back as `document_config.profile`. Custom still needs optional document
+(lookup omits the numeric profile snapshot); document operations accept that snapshot back as `document_config.profile`. Custom still needs optional document
 behaviours enabled explicitly, even when their numeric settings are supplied.
 
 `translate` returns a `Result`, or `DocumentResult` with explicit `markdown=True`
@@ -69,8 +69,32 @@ behaviours enabled explicitly, even when their numeric settings are supplied.
 
 `Result.to_dict()` is a superset of the toolkit translate dict: `text`, `level`, `level_name`, `vulgarity`,
 `vulgarity_name`, `policy_warnings`, `profile_config`, `seed`, `variety`, `decisions` and `difficult_sentences`, plus `source`
-and `explain`. The old `difficult` and duplicate `warnings` JSON keys are gone. Policy warnings name region
+and `explain`. V3 also includes `dictionary_id`, `card_version`, `tuning`, `warnings` and `warning_details`. The old `difficult` key is gone; `policy_warnings` remains for compatibility. Policy warnings name region
 tags or unlock flags unused by the dictionary; invalid register and unlock names raise `UserError`.
+
+`themes=None` and `invention=None` are top-level document controls. Exact theme overrides merge per
+key over `document_config.themes`; an explicit top-level invention boolean wins over the document
+override. Every document type accepts the switch. Troppo enables invention by default, Dinkum and
+Deadset leave it off, and Custom requires an explicit permission. Translation tries a bounded
+reviewed construction only when no curated candidate fits, before the substitution roll; a failed
+curated roll never triggers invention. Shared slot, frame, degree, article and protection checks apply.
+Unsupported construction frames and dependent result clauses stay plain. Constructed openers also
+obey the switch; ordinary garnish, entry riffs and contextual imagery keep their own permissions.
+
+`translate` and plans take `popularity=False`, `preferences=None` and `pins=None`.
+Python preferences are a latest\-first list of `{match, term, weight}`, with finite weights at least
+1. Exact keys win over the first same\-root preference. Unknown matches/terms warn with stable
+codes; the public tunin' summary reports popularity'n the number of distinct preference records
+actually used. Now, preferences change weights before variety, retain repeats'n failed rolls, and
+never change eligibility or evidence. [Replay pins](changes.md#explicit-replay-pins) retain choices
+when tunin' is removed. Yarn accepts popularity/preferences'n uses the same plan boundary.
+
+Plans label constructed choices with null `entry`, a `construction_id`, local part provenance,
+canonical construction cards and a shared `scaffold`. The standalone constructor and Yarn expose
+the same reviewed meanings, examples, families, typed ingredients, stems, endings and constraints.
+An agent's new wording is bulldust made by the agent, never a claim of attestation. Yarn explicitly
+allows misreadable terms across its plan, lookup, lint and validation; other gates still apply.
+Standalone lookup/lint/verify accept the same optional `unlock` permission.
 
 Struth, MCP tools expose parameter descriptions'n dial choices in their schemas, and preserve `UserError`
 messages as tool errors. `lookup` requires `limit >= 1` and marks each riff's `best` fit.
@@ -83,6 +107,17 @@ non-destructive, idempotent and closed-world.
 `allow_include_gated` defaults to true even when `allow_unlock` is false, so a host can show held-back
 terms with their provenance without unlocking automatic translations. Hidden options keep their closed
 defaults even when sent anyway. Lookup's limit also caps cited word cards per ruled-out meaning.
+
+`build_server` additionally accepts `allow_tuning`, `allow_themes`, `allow_invention` (all true by
+default), `preferences_hook=None` and `tools=None`. The tool allowlist uses canonical names and
+rejects unknown names. Hiding document configuration does not hide the two independent permission
+controls. Disabling a capability removes it from schemas; the MCP adapter ignores unknown top-level
+arguments, so hidden values keep their closed defaults. Attempts to bypass disabled theme/invention
+permissions through document configuration fail. `allow_tuning` controls popularity only: hosted clients never send
+raw personal preferences. The synchronous host hook runs once per request, including whole Markdown
+documents, with resolved numeric keyword dials `level`, `vulgarity`, `embellishment`. It returns the
+latest-first records for that call, or None. Host identity stays in the host's context; the package
+never knows whose preferences they are. The hook remains usable when popularity is hidden.
 
 ## The same toolkit, three more ways
 

@@ -10,6 +10,7 @@ from .detect import Detection, person_subject
 from .policy import Effective, weighted_index
 from .policy import Gated as Gated, dial_rejection as dial_rejection, policy_rejection as policy_rejection
 from .schema import Entry
+from .constructions import Construction
 from .realise import question_form
 from .context import tone_weight
 
@@ -33,6 +34,7 @@ class Candidate:
     weight: float
     why: str
     semantic_effects: tuple[str, ...] = ()
+    construction: Construction | None = None
 
 
 def mapping_effects(entry: Entry, det: Detection, *, narrator_opinion: bool,
@@ -60,7 +62,7 @@ def semantic_rejection(entry: Entry, *, narrator_opinion: bool, quantity_approxi
 
 
 def fit_rejection(entry: Entry, det: Detection, eff: Effective, person_concepts: set[str],
-                  person_nouns: frozenset[str]) -> str | None:
+                  person_nouns: frozenset[str], *, literal: bool = False) -> str | None:
     if entry.frame not in COMPATIBLE.get(det.frame, ()):
         return f"frame {entry.frame} cannot fill a {det.frame} span"
     if entry.frame not in eff.profile.frames:
@@ -82,16 +84,16 @@ def fit_rejection(entry: Entry, det: Detection, eff: Effective, person_concepts:
         return "predicate idiom needs {subj} {be} in the matched clause"
     if entry.frame == "clause" and det.question and not any(question_form(f) for f in entry.all_forms):
         return "clause has no supported question form"
-    if not usable_forms(entry, det):
+    if not usable_forms(entry, det, literal=literal):
         from .degree import degree_plan
         return "no form fits: " + (form_problem(entry.form, det) or degree_plan(entry, det, entry.form).problem
                                   or form_problem(entry.all_forms[-1], det) or "")
     return None
 
 
-def binding_problem(form: str, det: Detection) -> str | None:
+def binding_problem(form: str, det: Detection, *, literal: bool = False) -> str | None:
     """Why this one form of an entry can't fill the span: a slot with nothing to fill it."""
-    needs = set(re.findall(r"\{(\w+)\}", form)) - {"subj", "be", "have", "do"}
+    needs = set() if literal else set(re.findall(r"\{(\w+)\}", form)) - {"subj", "be", "have", "do"}
     if "poss" in needs and not {"poss", "subj", "agent"} & det.captures.keys() and det.frame != "imperative":
         return "cannot fill {poss}: no subject or possessive in the span"
     if "obj" in needs and "obj" not in det.captures:
@@ -103,15 +105,15 @@ def binding_problem(form: str, det: Detection) -> str | None:
     return None
 
 
-def form_problem(form: str, det: Detection) -> str | None:
+def form_problem(form: str, det: Detection, *, literal: bool = False) -> str | None:
     if det.result_clause and not morph.single_word_form(form):
         return "dependent result complement requires a single-word predicate"
     if det.result_degree and det.result_degree not in form.lower().split():
         return f"would discard '{det.result_degree}', which its result complement depends on"
-    reason = binding_problem(form, det)
+    reason = binding_problem(form, det, literal=literal)
     if reason:
         return reason
-    needs = set(re.findall(r"\{(\w+)\}", form))
+    needs = set() if literal else set(re.findall(r"\{(\w+)\}", form))
     for slot in ("np", "obj", "objposs"):
         captured = det.captures.get(slot)
         represented = slot in needs or slot == "obj" and "objposs" in needs
@@ -122,24 +124,25 @@ def form_problem(form: str, det: Detection) -> str | None:
     return None
 
 
-def usable_forms(entry: Entry, det: Detection) -> list[str]:
+def usable_forms(entry: Entry, det: Detection, *, literal: bool = False) -> list[str]:
     """The entry's forms (its form and variants) whose slots this span can fill: "his wife" takes "{poss}
     missus", a bare "wife" takes "the missus"."""
     from .degree import degree_plan
-    return [f for f in entry.all_forms if form_problem(f, det) is None and degree_plan(entry, det, f).problem is None
+    return [f for f in entry.all_forms if form_problem(f, det, literal=literal) is None and degree_plan(entry, det, f).problem is None
             and (entry.frame != "clause" or not det.question or question_form(f) is not None)]
 
 
 def candidates(det: Detection, entries: list[Entry], eff: Effective, used: dict[str, int],
-               person_concepts: set[str], person_nouns: frozenset[str], *, mood: str | None = None
-               ) -> tuple[list[Candidate], list[tuple[Entry, str]]]:
+               person_concepts: set[str], person_nouns: frozenset[str], *, mood: str | None = None,
+               constructions: dict[str, Construction] | None = None) -> tuple[list[Candidate], list[tuple[Entry, str]]]:
     eligible: list[Candidate] = []
     rejected: list[tuple[Entry, str]] = []
     concepts = set(det.concepts)
+    constructions = constructions or {}
     for e in entries:
         if not concepts & set(e.concept):
             continue
-        reason = policy_rejection(e, eff) or fit_rejection(e, det, eff, person_concepts, person_nouns)
+        reason = policy_rejection(e, eff) or fit_rejection(e, det, eff, person_concepts, person_nouns, literal=e.id in constructions)
         if reason:
             rejected.append((e, reason))
             continue
@@ -162,7 +165,11 @@ def candidates(det: Detection, entries: list[Entry], eff: Effective, used: dict[
                + (f" x region {regional:g}" if regional != 1 else "") + (f" x {e.register} {dated:g}" if dated != 1 else "")
                + f" x p({e.substitution_class}) {p_class:g}"
                + (f" x tone-fit {tone_fit:g} ({e.tone}/{mood})" if mood is not None else "") + ")")
-        eligible.append(Candidate(e, w, why))
+        construction = constructions.get(e.id)
+        if construction is not None:
+            w = construction.weight * repeat
+            why = f"construction {construction.family.id}, cadence {construction.cadence:g}, repeat {repeat:g}"
+        eligible.append(Candidate(e, w, why, construction=construction))
     eligible.sort(key=lambda c: c.entry.id)
     return eligible, rejected
 

@@ -4,6 +4,12 @@
 
 # Translation context and embellishment
 
+Top\-level `themes` and `invention` permissions refine the same exact document overrides. Troppo
+enables invention by default; Dinkum, Deadset and Custom leave it off unless enabled. Preferences and
+popularity affect eligible weights, while explicit `pins` retain selected forms'n riffs. Anyway, see the
+[toolkit](toolkit.md) and [replay contract](changes.md#explicit-replay-pins).
+
+
 Struth, level controls the weight of Australian words \(1–5\); vulgarity controls language \(0–3\). Embellishment is an
 independent third dial: `deadset` (0\) changes the words, `dinkum` (1\) gives them a conversational voice, and
 `troppo` (2\) permits a performed yarn. Set it with `--embellishment` / `-e`, or `embellishment=` in Python/MCP.
@@ -267,7 +273,7 @@ probability or count is zero. Level and vulgarity constrain contextual images in
 `entry_riffs` controls the older images separately; the new exaggeration and association settings apply only
 to contextual imagery, not retroactively to the legacy riffs.
 
-Mind ya, for an isolated, deterministic example with word substitutions'n drawl disabled:
+For an isolated, deterministic example with word substitutions'n drawl disabled:
 
 ```sh
 aussiefy translate 'He was working in vain.' --document-type custom --document-config '{"garnish":["riff"],"entry_riffs":false,"contextual_riffs":true,"riff_exaggeration":1,"profile":{"frames":[],"phonetic":0,"garnish":{"riff":1},"max_garnish":{"riff":1}}}'

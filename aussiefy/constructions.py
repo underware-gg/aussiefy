@@ -6,7 +6,7 @@ import hashlib
 import json
 import re
 from collections import defaultdict
-from dataclasses import dataclass, replace
+from dataclasses import dataclass, fields, replace
 from math import gcd, prod
 from string import Formatter
 from typing import TYPE_CHECKING
@@ -96,11 +96,11 @@ class ConstructionPart:
     ingredient: Ingredient
     span: tuple[int, int]
 
-    def to_dict(self) -> dict:
+    def to_dict(self, permitted_themes=None) -> dict:
         part = self.ingredient
         return {"role": self.role, "ingredient_id": part.id, "entry_id": part.entry_id,
                 "text": part.text, "out_span": list(self.span), "level": part.level,
-                "vulgarity": part.vulgarity, **metadata_dict(part.metadata, derived=True)}
+                "vulgarity": part.vulgarity, **_presentation(part.metadata, permitted_themes, vulgarity=part.vulgarity)}
 
 
 @dataclass(frozen=True)
@@ -120,12 +120,19 @@ class Construction:
         return tuple(dict.fromkeys((self.id, *(part.ingredient.entry_id for part in self.parts
                                               if part.ingredient.entry_id))))
 
-    def to_dict(self) -> dict:
+    def to_dict(self, permitted_themes=None) -> dict:
         return {"construction_id": self.id, "entry_id": None, "family": self.family.id,
                 "text": self.text, "concepts": [self.family.concept], "frame": self.family.frame,
                 "level": self.level, "vulgarity": self.vulgarity, "cadence": self.cadence,
-                **metadata_dict(self.metadata, derived=True),
-                "parts": [part.to_dict() for part in self.parts]}
+                **_presentation(self.metadata, permitted_themes, vulgarity=self.vulgarity),
+                "parts": [part.to_dict(permitted_themes) for part in self.parts]}
+
+
+def _presentation(term, permitted_themes, *, vulgarity):
+    if permitted_themes is None:
+        return metadata_dict(term, derived=True)
+    from .cards import metadata
+    return metadata(term, permitted_themes, vulgarity=vulgarity)
 
 
 @dataclass(frozen=True)
@@ -138,7 +145,7 @@ class Generation:
 def _rejection(metadata: TermMetadata, level: int, vulgarity: int, eff: Effective) -> str | None:
     if reason := theme_rejection(metadata, eff.theme_policy):
         return reason
-    held = metadata_rejections(metadata, allow_misreadable=bool({"misreadable", "all"} & eff.unlock))
+    held = metadata_rejections(metadata, allow_misreadable=eff.allow_misreadable)
     if held:
         return "held back: " + ", ".join(held)
     if level > eff.level:
@@ -205,6 +212,49 @@ def compose(family: ConstructionFamily, chosen: dict[str, Ingredient], dictionar
                         cadence, weight)
 
 
+def rendering_entry(construction: Construction, dictionary: Dictionary) -> Entry:
+    """A transient view for shared entry fit checks, never inserted in the dictionary or sent as an entry card."""
+    from .schema import Entry
+    c = construction
+    facts = {f.name: getattr(c.metadata, f.name) for f in fields(TermMetadata)}
+    return Entry(id=c.id, form=c.text, concept=(c.family.concept,), frame=c.family.frame,
+                 incoherence=c.level, vulgarity=c.vulgarity, weight=c.weight, cls="idiom",
+                 semantic_degree=dict(c.family.semantic_degree), tone=c.family.tone,
+                 gloss=dictionary.concepts[c.family.concept].description, **facts)
+
+
+def family_rejection(pattern, eff, setting, mood="light"):
+    reason = _rejection(pattern.metadata, pattern.level, pattern.vulgarity, eff)
+    if reason is None and not pattern.weight:
+        reason = "zero construction weight"
+    if reason is None and pattern.exaggeration > setting.riff_exaggeration:
+        reason = "exceeds riff_exaggeration"
+    if reason is None and pattern.tone == "comic" and mood == "solemn" and not setting.solemn_comic_terms:
+        reason = "a comic construction in solemn text; solemn_comic_terms is false"
+    return reason
+
+
+def ingredient_pools(pattern, catalog, dictionary, eff, requested=None):
+    requested = requested or {}
+    pools, rejected = [], []
+    for name, kind in pattern.slots:
+        pool = []
+        for spec in catalog.ingredients:
+            if spec.kind != kind or name in requested and requested[name] != spec.id:
+                continue
+            part = spec.resolve(dictionary.entries)
+            reason = (policy_rejection(dictionary.entries[part.entry_id], eff) if part.entry_id else
+                      _rejection(part.metadata, part.level, part.vulgarity, eff))
+            if reason is None and not part.weight:
+                reason = "zero ingredient weight"
+            if reason:
+                rejected.append((part.id, reason))
+            else:
+                pool.append(part)
+        pools.append(sorted(pool, key=lambda part: part.id))
+    return pools, rejected
+
+
 def generate(dictionary: Dictionary, eff: Effective, setting: Embellishment, *, seed: int = 0,
              concept: str | None = None, family: str | None = None, parts: dict[str, str] | None = None,
              limit: int = DEFAULT_LIMIT, placement: str | None = None, mood: str = "light") -> Generation:
@@ -218,32 +268,12 @@ def generate(dictionary: Dictionary, eff: Effective, setting: Embellishment, *, 
                 or placement is not None and pattern.placement != placement
                 or not set(requested) <= {name for name, _ in pattern.slots}):
             continue
-        reason = _rejection(pattern.metadata, pattern.level, pattern.vulgarity, eff)
-        if reason is None and not pattern.weight:
-            reason = "zero construction weight"
-        if reason is None and pattern.exaggeration > setting.riff_exaggeration:
-            reason = "exceeds riff_exaggeration"
-        if reason is None and pattern.tone == "comic" and mood == "solemn" and not setting.solemn_comic_terms:
-            reason = "a comic construction in solemn text; solemn_comic_terms is false"
+        reason = family_rejection(pattern, eff, setting, mood)
         if reason:
             rejected.append((pattern.id, reason))
             continue
-        pools = []
-        for name, kind in pattern.slots:
-            pool = []
-            for spec in catalog.ingredients:
-                if spec.kind != kind or name in requested and requested[name] != spec.id:
-                    continue
-                part = spec.resolve(dictionary.entries)
-                reason = (policy_rejection(dictionary.entries[part.entry_id], eff) if part.entry_id else
-                          _rejection(part.metadata, part.level, part.vulgarity, eff))
-                if reason is None and not part.weight:
-                    reason = "zero ingredient weight"
-                if reason:
-                    rejected.append((part.id, reason))
-                else:
-                    pool.append(part)
-            pools.append(sorted(pool, key=lambda part: part.id))
+        pools, excluded = ingredient_pools(pattern, catalog, dictionary, eff, requested)
+        rejected.extend(excluded)
         if any(not pool for pool in pools):
             continue
         size = prod(len(pool) for pool in pools)

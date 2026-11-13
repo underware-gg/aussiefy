@@ -169,8 +169,17 @@ uses the same imagery settings as a plan. Advanced controls are `contextual_riff
 `aussiefy bulldust HUNGRY --vulgarity nan --json` constructs sayings from reviewed typed families.
 Keep the `bulldust` label: a familiar stem does not attest the assembled expression. Inspect each part's
 evidence and credit. Use `--family ID` and `--parts JSON` to keep compatible parts while varying others.
-This is an explicit generation operation; automatic substitution fallback and the shared yarn scaffold
-are separate integration work. See [the reference](https://github.com/underware-gg/aussiefy/blob/main/docs/functional/bulldust.md).
+This is an explicit generation operation. Automatic translation tries reviewed construction fallback
+only when no curated candidate fits, before the substitution roll. It and all constructed openers obey
+invention: Troppo enables it by default; use `--invention` or `--no-invention` for an exact choice.
+`--themes JSON` sets exact per-theme permissions, independently of the swear cap. Plans and Yarn supply
+the same reviewed construction scaffold; respect its typed slots, source meaning, grammar and constraints.
+Label newly invented agent wording as bulldust, `coined_by: agent`; never invent sources.
+
+Translate and plan accept `--popularity`, `--preferences JSON` and `--pins JSON`. Personal weights are
+latest-first `{match, term, weight}` records, with finite weight at least 1; they never override eligibility.
+Use the original source, dictionary, seed and behaviour with the explicit replay packet to retain picks
+after removing tuning. V3 rich cards use one theme shape and every lookup outcome reports `card_version`. See [the reference](https://github.com/underware-gg/aussiefy/blob/main/docs/functional/bulldust.md).
 
 ## Explicit dictionary exploration
 

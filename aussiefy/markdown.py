@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from .themes import ThemePolicy
 from .tuning import Tuning, TuningReport
+from .pins import Pins, capture as capture_pins, packet as pin_packet
+from .v3_contract import response_metadata
 
 from dataclasses import dataclass, field
 from bisect import bisect_left, bisect_right
@@ -61,10 +63,16 @@ class DocumentResult:
     theme_policy: ThemePolicy
     registers: tuple[str, ...]
     _tuning_report: TuningReport = field(default_factory=TuningReport)
+    dictionary_id: str = ""
+    allow_misreadable: bool = False
+
+    @property
+    def tuning(self) -> dict:
+        return self._tuning_report.to_dict()
 
     @property
     def _tuning(self) -> dict:
-        return self._tuning_report.to_dict()
+        return self.tuning
 
     @property
     def permitted_themes(self) -> frozenset[str]:
@@ -72,8 +80,12 @@ class DocumentResult:
         return self.theme_policy.enabled
 
     def envelope(self) -> dict:
-        return {**envelope(self.level, self.vulgarity, self.warnings), "profile_config": self.profile_config,
+        return {**envelope(self.level, self.vulgarity, self.warnings), **response_metadata(self), "profile_config": self.profile_config,
                 "theme_permissions": theme_permissions(self.theme_policy)}
+
+    def replay_pins(self) -> dict:
+        rows = [p for u in self.units for p in capture_pins(u.result, offset=u.source_span[0])]
+        return pin_packet(self, rows)
 
     def to_dict(self) -> dict:
         return {"format": "markdown", "text": self.text, "source": self.source, **self.envelope(),
@@ -393,7 +405,8 @@ def _escape_map(text: str) -> tuple[str, list[int]]:
 
 
 def document_changes(source: str, translator: Translator, policy: Policy, effective: Effective,
-                     _watch: Callable[[int], object] | None = None, *, _tuning: dict | None = None):
+                     _watch: Callable[[int], object] | None = None, *, _tuning: dict | None = None,
+                     _preferences_hook=None, pins=None):
     """translate_document, with every unit's changes placed in the document: each unit's source offset added, its
     output mapped through the escaping that keeps custom slang from making markup, and each rendering escaped where
     it stands. _watch: the changes builder's watch for each unit, by index (a test pins one unit's picks)."""
@@ -406,36 +419,40 @@ def document_changes(source: str, translator: Translator, policy: Policy, effect
         units.append((result, drafts))
         return result
 
-    document = translate_document(source, translator, policy, effective, unit=unit, _tuning=_tuning)
+    document = translate_document(source, translator, policy, effective, unit=unit, _tuning=_tuning, _preferences_hook=_preferences_hook, pins=pins)
     drafts = []
     for u, (result, unit_drafts) in zip(document.units, units):
         _, at = _escape_map(result.text)
         out = u.output_span[0]
         for d in unit_drafts:
             d.relocate(u.source_span[0], lambda pos: out + at[pos],
-                       lambda span, rendered: _escaped_in(result.text, span, rendered), document.text)
+                       lambda span, rendered: _escaped_in(result.text, span, rendered), document.text,
+                       rendering_map=lambda span, rendered: _escaped_in_map(result.text, span, rendered))
             drafts.append(d)
     return finish(document, drafts, translator.dictionary)
 
 
 def _escaped_in(text: str, span: list[int], rendered: str) -> str:
-    """A rendering as it reads once its unit is escaped. Within the unit it's escaped on its own; where it reaches
-    the unit's start or end (which escaping strips, and where an opening "1." is escaped), the unit is escaped with
-    it in place."""
-    a, b = span
-    # how the unit opens, as escaping reads it: newlines as spaces, and the space or tab after a "1." taken in
-    opening = re.sub(r"[\r\n]", " ", text[:a] + rendered + text[b:b + 1]).lstrip(" \t")
+    return _escaped_in_map(text,span,rendered)[0]
+
+
+def _escaped_in_map(text: str, span: list[int], rendered: str) -> tuple[str,list[int]]:
+    """A replacement and all its local boundaries through the same escaping used for the document."""
+    a,b = span
+    opening = re.sub(r"[\r\n]", " ", text[:a]+rendered+text[b:b+1]).lstrip(" \t")
     if text[:a].strip(" \t\r\n") and text[b:].strip(" \t\r\n") and not _NUMBERED.match(opening):
-        return "".join(_escape_chars(rendered)[0])
-    escaped, at = _escape_map(text[:a] + rendered + text[b:])
-    return escaped[at[a]:at[a + len(rendered)]]
+        chars,at = _escape_chars(rendered)
+        return ''.join(chars),at
+    escaped,at = _escape_map(text[:a]+rendered+text[b:])
+    start,end = at[a],at[a+len(rendered)]
+    return escaped[start:end],[at[a+i]-start for i in range(len(rendered)+1)]
 
 
 def translate_document(source: str, translator: Translator, policy: Policy, effective: Effective,
-                       unit: Callable[..., Result] | None = None, *, _tuning: dict | None = None) -> DocumentResult:
+                       unit: Callable[..., Result] | None = None, *, _tuning: dict | None = None,
+                       _preferences_hook=None, pins=None) -> DocumentResult:
     """Translate the document's prose units in turn, sharing one document's state. unit translates one unit
     (Translator.translate's arguments; the changes builder passes its own)."""
-    tuning = Tuning.prepare(_tuning, translator.dictionary)
     pieces = []
     units = []
     protected = []
@@ -448,6 +465,12 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
     genre = resolve_document(prose, source, config=translator.dictionary.genres,
                              document_type=policy.document_type, document_config=policy.document_config)
     context = (genre, text_english(policy.english, prose, translator.dictionary.us_spellings))
+    setting = genre.setting(policy.embellishment)
+    hook_options = ({'preferences_hook':_preferences_hook,
+                     'dials':{'level':effective.level,'vulgarity':effective.vulgarity,'embellishment':setting.step}}
+                    if _preferences_hook is not None else {})
+    tuning = Tuning.prepare(_tuning,translator.dictionary,**hook_options)
+    prepared_pins = Pins.prepare(pins, source, translator.dictionary, policy.seed)
     from .text import document_spans
 
     held = _merged(document_spans(source, keep_quotes=genre.policy.keep_quotes,
@@ -487,7 +510,7 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
                             last >= 0 and boundaries[last][1] <= span.end,
                             index == len(spans) - 1, effective, quiet=reading.quiet_at(span.start),
                             last_contexts=source_contexts[last] if last >= 0 else frozenset(),
-                            written=written, mood=mood, tuning=tuning)
+                            written=written, mood=mood, tuning=tuning, pins=prepared_pins, source_start=span.start)
         r = (unit or translator.translate)(source[span.start:span.end], level=policy.level, seed=policy.seed,
                                  vulgarity=policy.vulgarity, variety=policy.variety, registers=policy.registers,
                                  regions=policy.regions, unlock=policy.unlock, embedder=policy.embedder,
@@ -505,7 +528,9 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
     warnings = list(dict.fromkeys([*effective.warnings, *tuning.warnings,
                                    *(w for u in units for w in u.result.warnings)]))
     used = frozenset(i for u in units for i in u.result._tuning_report.used)
+    if prepared_pins is not None:
+        prepared_pins.check_used({i for u in units for i in u.result._pins_used})
     return DocumentResult("".join(pieces), source, effective.level, policy.seed, effective.vulgarity,
                           policy.variety, warnings, units, protected, genre, context[1], genre.setting(policy.embellishment),
                           effective.envelope()["profile_config"], effective.theme_policy, effective.registers,
-                          _tuning_report=TuningReport(tuning.popularity, used))
+                          _tuning_report=TuningReport(tuning.popularity, used), dictionary_id=translator.dictionary.identity, allow_misreadable=effective.allow_misreadable)
