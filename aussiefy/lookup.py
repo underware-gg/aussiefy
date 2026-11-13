@@ -324,7 +324,8 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     object_terms = _object_terms(form_matches, readings, tokens, tags, d) if waiting else set()
     object_concepts = {cid for eid in object_terms for cid in d.entries[eid].concept}
     if waiting and not established.difference(waiting) and not object_terms:
-        return {**out, "results": []}
+        images, _ = lookup_images(d, query, eff, setting, limit, tokens=tokens, readings=readings, named=named)
+        return {**out, "results": [], **({"imagery": images} if images else {})}
 
     qn = form_key(q)
     slotted = {m.pattern.entry_id for m in form_matches
@@ -385,6 +386,8 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         for cid, concept in d.concepts.items():
             if variants & set(re.findall(r"[a-z']+", (concept.description or "").lower())):
                 concept_score[cid] = max(concept_score.get(cid, 0.0), DESCRIPTION_NAMES_IT)
+    for cid in named:
+        concept_score[cid] = max(concept_score.get(cid, 0), 1.0)
     scored: list[tuple[float, Entry, str, str]] = []
     parsed_concepts = {cid for eid in slotted for cid in d.entries[eid].concept}
     negative_anchors = {w[:-4] if w.endswith("less") else w for w in content_words(q)}
@@ -453,7 +456,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
             card.update(effects_permitted=False, effect_rejection=reason)
     # a lookup reads no profile settings, so its envelope is the dials alone (no profile_config)
     out["results"] = results
-    images, recognised_image = lookup_images(d, query, eff, setting, limit, tokens=tokens, readings=readings)
+    images, recognised_image = lookup_images(d, query, eff, setting, limit, tokens=tokens, readings=readings, named=named)
     recognised |= recognised_image
     if not results and not images and not recognised:
         # cheapest evidence first: a held term itself, then its meaning by spelling, then by the model

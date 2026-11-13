@@ -254,6 +254,8 @@ class Concept:
     examples: tuple[str, ...] = ()  # sentences that read as this meaning; tests prove each one does
     negative_examples: tuple[str, ...] = ()  # reviewed contrasts that must not establish this meaning
     credit: str | tuple[Credit, ...] | None = None
+    search_words: tuple[str, ...] = ()  # exact lookup aliases, never source triggers
+    plain_forms: dict[str, str] = field(default_factory=dict)  # sentence wording by grammatical frame
 
 
 CONCEPT_KEYS = frozenset(f.name for f in fields(Concept)) - {"id"}
@@ -529,6 +531,23 @@ def parse_concept(cid: str, raw: dict) -> Concept:
     plain = raw.get("plain", "")
     if not isinstance(plain, str):
         raise SchemaError(f"concept {cid}: plain must be text")
+    from .terms import fold
+    search_words = raw.get('search_words', [])
+    if not isinstance(search_words, list) or any(not isinstance(word, str) or not word.strip()
+            or word != word.strip() or '\n' in word or '\r' in word for word in search_words):
+        raise SchemaError(f'concept {cid}: search_words must be a list of non-empty single-line phrases')
+    if len({fold(word) for word in search_words}) != len(search_words):
+        raise SchemaError(f'concept {cid}: duplicate search_words')
+    plain_forms = raw.get('plain_forms', {})
+    if not isinstance(plain_forms, dict) or set(plain_forms) - set(FRAMES):
+        raise SchemaError(f'concept {cid}: plain_forms must map known frames to sentence wording')
+    for frame, form in plain_forms.items():
+        if (not isinstance(form, str) or not form or form != form.strip()
+                or '\n' in form or '\r' in form or any(not (PLACEHOLDER_RE.fullmatch(word)
+                or re.fullmatch(r"[^\W\d_]+(?:[-'’][^\W\d_]+)*", word)) for word in form.split())):
+            raise SchemaError(f'concept {cid}: plain_forms.{frame} must contain words and supported slots only')
+        parse_entry({'id': 'plain-' + cid.lower().replace('_', '-'), 'form': form,
+                     'frame': frame, 'concept': [cid]})
     return Concept(
         id=cid,
         description=raw.get("description", ""),
@@ -545,6 +564,8 @@ def parse_concept(cid: str, raw: dict) -> Concept:
         takes_addressee=_bool(raw, "takes_addressee", f"concept {cid}"),
         lookup_only=_bool(raw, "lookup_only", f"concept {cid}"),
         plain=plain,
+        search_words=tuple(search_words),
+        plain_forms=dict(plain_forms),
         examples=_tuple(raw.get("examples"), "examples", f"concept {cid}"),
         negative_examples=_tuple(raw.get('negative_examples'), 'negative_examples', f'concept {cid}'),
         credit=parse_credit_value(raw["credit"], f"concept {cid}") if raw.get("credit") is not None else None,

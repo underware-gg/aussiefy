@@ -241,6 +241,19 @@ A concept names a meaning. `UNRESOLVED_SENSE` is the single abstention concept, 
 it takes no entries, images or constructions and is not listed as waiting for a word. Concepts without a
 word are ordinary meanings waiting for one. The retired `no_entries` field is
 rejected in core records, maintainer overlays and community extensions, even when set to false.
+Concept wording separates three jobs (R64). `plain` is the display name. Optional
+`plain_forms` maps grammatical frames to sentence wording, for example
+`plain_forms: {vp: believe}` alongside `plain: believe what you're told`. A missing frame uses the
+display wording when it fits. Forms accept the same supported slots and frame rules as entries, with
+words rather than markup or sentence punctuation. The slice 7 changes producer will use these forms;
+this foundation does not add plain alternatives to frozen changes v3.
+
+`search_words` is a list of reviewed exact lookup aliases. It adds no automatic source triggers and
+never includes sentence forms implicitly. Display names, explicit concept IDs and reviewed search
+words establish their meaning in lookup, including an exact name whose component words have other
+readings. Curator descriptions and fuzzy discovery remain separate. Alias collisions need a review
+sheet before bulk curation; an overlap alone cannot tell a real reading from a misreading.
+
 A concept may give `plain` wording a reader understands (`plain: think highly of`) and `examples`,
 sentences that read as that meaning; a test proves every bundled example detects its concept. A meaning
 with no word yet needs both, since [exploration](exploring.md#meanings-without-a-word-yet) lists them:
@@ -756,3 +769,10 @@ Source triggers can capture the object of a figurative predicate through `{np}`.
 Their object must survive automatic substitution. If a current target cannot bind it, translation and
 plans keep the source; lookup can still explain a relevant standalone idiom. `tired from work` and
 `sick with flu` retain their literal readings. See the [source spike](../../../research/semantic-spikes-2026-10-20/README.md).
+
+
+Negative VP forms beginning with do-support (`don't` plus a base verb) realise according to the
+source verb: finite forms inflect do, an outer modal/infinitive retains its own auxiliary, and
+perfect/progressive forms retain their participle. This keeps grammatical negation in the phrase
+without special rules for a particular dictionary word. The source reader records the local VP
+auxiliary, including inverted questions.

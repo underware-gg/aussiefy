@@ -74,12 +74,12 @@ def image_offers(dictionary, det, tokens, eff, setting):
     return tuple(out)
 
 
-def lookup_images(dictionary, query, eff, setting, limit, *, tokens, readings) -> tuple[list[dict], bool]:
+def lookup_images(dictionary, query, eff, setting, limit, *, tokens, readings, named=None) -> tuple[list[dict], bool]:
     """Eligible image cards and whether the query recognised any image before policy gates."""
     key = form_key(query)
     out, recognised = [], False
     for image in dictionary.imagery:
-        concepts = {cid for reading in readings if not excluded_complement(image, tokens, reading.end)
+        concepts = named or {cid for reading in readings if not excluded_complement(image, tokens, reading.end)
                     and positive_context(tokens, reading.start, reading.end) for cid in reading.concepts}
         association = image_association(image, concepts, setting)
         words = form_key(image.text)

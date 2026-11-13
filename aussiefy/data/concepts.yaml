@@ -17,65 +17,54 @@ DISHONEST:
     - dishonest
     - untrustworthy
 FUTILE_EFFORT:
-  plain: "work in vain"
-  examples:
-  - "They worked in vain."
+  plain: work in vain
+  examples: [They worked in vain.]
   description: Working without useful effect, despite effort.
   person: true
   triggers:
-    vp:
-    - work in vain
-    - labour in vain
-    - labor in vain
-    - toil in vain
-    clause:
-    - '{subj} {be} working in vain'
-    - '{subj} {be} labouring in vain'
-    - '{subj} {be} toiling in vain'
+    vp: [work in vain, labour in vain, labor in vain, toil in vain]
+    clause: ['{subj} {be} working in vain', '{subj} {be} labouring in vain', '{subj} {be} toiling in vain']
+  search_words: [in vain, futile, pointless, wasted effort]
 BREATHLESS:
   description: Physically short of breath.
   person: true
   triggers:
-    predicate_adj:
-    - out of breath ^person
-    - puffing and panting ^person
+    predicate_adj: [out of breath ^person, puffing and panting ^person]
+  plain: out of breath
+  search_words: [puffed]
+  examples: [I was out of breath after the stairs., She was puffing and panting at the top.]
+  negative_examples: [The rice was puffed., His face was puffed up., He was puffed up with pride.]
 RESTLESS_SLEEP:
-  plain: "toss and turn"
-  examples:
-  - "I was tossing and turning."
+  plain: toss and turn
+  examples: [I was tossing and turning.]
   description: Tossing and turning while trying to sleep.
   person: true
   triggers:
-    clause:
-    - '{subj} {be} tossing and turning ^end'
-    - '{subj} {be} turning and tossing ^end'
-    - '{subj} {be} tossing and turning in bed ^end'
-    - '{subj} {be} turning and tossing in bed ^end'
-    vp:
-    - toss and turn ^end
-    - turn|turns|turned|turning and toss|tosses|tossed|tossing ^end
-    - toss|tosses|tossed|tossing and turn|turns|turned|turning ^end
-    - turn|turns|turned|turning and toss|tosses|tossed|tossing in bed ^end
-    - toss|tosses|tossed|tossing and turn|turns|turned|turning in bed ^end
-    - toss restlessly ^end
-    - toss about in bed ^end
-    - toss around in bed ^end
+    clause: ['{subj} {be} tossing and turning ^end', '{subj} {be} turning and tossing ^end', '{subj} {be} tossing
+        and turning in bed ^end', '{subj} {be} turning and tossing in bed ^end']
+    vp: [toss and turn ^end, turn|turns|turned|turning and toss|tosses|tossed|tossing ^end, toss|tosses|tossed|tossing
+        and turn|turns|turned|turning ^end, turn|turns|turned|turning and toss|tosses|tossed|tossing in bed ^end,
+      toss|tosses|tossed|tossing and turn|turns|turned|turning in bed ^end, toss restlessly ^end, toss about in
+        bed ^end, toss around in bed ^end]
+  search_words: [restless night, can't sleep, sleepless]
 ERRATIC_THINKING:
-  plain: "thinking in circles"
-  examples:
-  - "I am thinking in circles."
+  plain: think in circles
+  examples: [I am thinking in circles.]
   description: Thinking in circles without reaching a conclusion.
   person: true
   triggers:
-    clause:
-    - '{subj} {be} thinking in circles'
+    clause: ['{subj} {be} thinking in circles']
+  search_words: []
+  plain_forms: {clause: '{subj} {be} going round in circles'}
 SELFISH:
   description: Selfishly disregarding the needs of other people.
   person: true
   triggers:
-    predicate_adj:
-    - selfish ^person
-    - callous ^person
+    predicate_adj: [selfish ^person]
+  plain: selfish
+  search_words: [self-centred, self-absorbed, only thinks of themselves]
+  examples: [He is selfish.]
+  negative_examples: [Her brother is callous.]
 PERSONAL_ENERGY:
   description: Personal energy and willingness to take action.
   triggers:
@@ -188,14 +177,17 @@ TIRED:
   person: true
   unless_after: [of]
   triggers:
-    # ^person: said of things too ("the tank was drained", "the data is wiped out", "done in any case")
-    predicate_adj: ["tired@2", "exhausted@4", "worn out ^person@4", "wiped out ^person@4", "shattered ^person@4",
-                    "drained ^person@3", "dead on {poss} feet@5", "knackered@4", "fatigued", "weary",
-                    "done in ^person", "tired out", "bone-tired@4"]
+    predicate_adj: [tired@2, exhausted@4, worn out ^person@4, wiped out ^person@4, shattered ^person@4, drained
+        ^person@3, 'dead on {poss} feet@5', knackered@4, fatigued, weary, done in ^person, tired out, bone-tired@4,
+      wrecked ^person !=by|in@4]
+  plain: exhausted
+  search_words: [tired, worn out]
 BROKEN:
   description: Not working; ruined or beyond repair.
   triggers:
-    predicate_adj: ["broken", "ruined@4", "busted", "not working@2", "beyond repair@5", "wrecked@4"]
+    predicate_adj: [broken, ruined@4, busted, not working@2, beyond repair@5, wrecked@4]
+  plain: broken
+  search_words: [not working, busted, kaput, out of order]
 USELESS:
   description: Of no use or help at all.
   person: true
@@ -215,16 +207,10 @@ HAPPY:
 GET_EXCITED:
   description: Become worked up or enthused, rather than pleased at an outcome.
   triggers:
-    vp:
-    - get excited
-    - get all excited
-    - get so excited
-    - get too excited
-    - get overexcited
-  plain: getting worked up or enthused
-  examples:
-  - They get excited about learning.
-  - He gets all excited about the game.
+    vp: [get excited, get all excited, get so excited, get too excited, get overexcited]
+  plain: get excited
+  examples: [They get excited about learning., He gets all excited about the game.]
+  search_words: [excited, worked up, thrilled]
 DISAPPOINTED:
   description: Upset or disappointed about an outcome.
   person: true
@@ -373,20 +359,20 @@ WORK:
 EXCELLENT:
   description: Very good, first-rate.
   triggers:
-    # "great" also means large or eminent ("a great war", "a great deal", "a great man"); block those senses
-    adj: ["great !big|little|huge|large|battle|battles|battle-field|task|deal|many|number|majority|extent|length|distance|sense|care|pains|importance|power|powers|nation|nations|man|men|leader|leaders|loss|danger|cause",
-          "excellent@4", "fantastic@4", "wonderful@4", "terrific@4", "awesome@4",
-          # "brilliant" of a person or a mind is clever, and of a light or a colour is bright: neither is beaut
-          "brilliant !=young|mind|minds|scientist|scientists|student|students|mathematician|mathematicians|engineer|engineers|coder|coders|programmer|programmers|thinker|thinkers|scholar|scholars|lawyer|lawyers|doctor|doctors|writer|writers|man|men|woman|women|people|person|boy|boys|girl|girls|kid|kids|child|children|light|lights|sunshine|sunlight|sun|white|blue|red|green|yellow|colour|colours|color|colors|flash|star|stars@4",
-          "superb@4", "amazing@4", "first-rate@4", "splendid@4"]
-    predicate_adj: ["great", "excellent@4", "fantastic@4", "awesome@4", "amazing@4", "brilliant@4"]
+    adj: [great !big|little|huge|large|battle|battles|battle-field|task|deal|many|number|majority|extent|length|distance|sense|care|pains|importance|power|powers|nation|nations|man|men|leader|leaders|loss|danger|cause,
+      excellent@4, fantastic@4, wonderful@4, terrific@4, awesome@4, brilliant !=young|mind|minds|scientist|scientists|student|students|mathematician|mathematicians|engineer|engineers|coder|coders|programmer|programmers|thinker|thinkers|scholar|scholars|lawyer|lawyers|doctor|doctors|writer|writers|man|men|woman|women|people|person|boy|boys|girl|girls|kid|kids|child|children|light|lights|sunshine|sunlight|sun|white|blue|red|green|yellow|colour|colours|color|colors|flash|star|stars@4,
+      superb@4, amazing@4, first-rate@4, splendid@4]
+    predicate_adj: [great, excellent@4, fantastic@4, awesome@4, amazing@4, brilliant@4]
+  plain: excellent
+  search_words: [great, first-rate, terrific, brilliant]
 FANCIFUL:
-  plain: "imagined or uncanny"
-  examples:
-  - "The night was full of fantastic terrors."
+  plain: imaginary or eerie
+  examples: [The night was full of fantastic terrors.]
   description: Fanciful, imagined or uncanny, of fears, visions and apparitions (fantastic terrors); not praise.
   triggers:
-    adj: ["fantastic ?=terror|terrors|horror|horrors|fear|fears|dread|dreads|phantom|phantoms|phantasm|phantasms|spectre|spectres|specter|specters|apparition|apparitions|ghost|ghosts|shapes|vision|visions|imaginings|fancy|fancies|delusion|delusions|nightmare|nightmares|dream|dreams|monster|monsters|beast|beasts|creature|creatures|tale|tales|legend|legends|myth|myths"]
+    adj: ['fantastic ?=terror|terrors|horror|horrors|fear|fears|dread|dreads|phantom|phantoms|phantasm|phantasms|spectre|spectres|specter|specters|apparition|apparitions|ghost|ghosts|shapes|vision|visions|imaginings|fancy|fancies|delusion|delusions|nightmare|nightmares|dream|dreams|monster|monsters|beast|beasts|creature|creatures|tale|tales|legend|legends|myth|myths']
+  search_words: [uncanny]
+  plain_forms: {adj: imaginary}
 GOOD:
   description: Pleasing, nice (of a thing, a day, the weather).
   triggers:
@@ -646,9 +632,10 @@ REALLY_Q:
 SURPRISE:
   description: Exclamation of surprise or dismay.
   triggers:
-    interjection: ["wow", "good grief", "goodness", "my goodness", "oh my god@4", "oh my gosh", "good heavens",
-                   "goodness me", "gosh", "golly", "oh dear", "blimey", "holy cow", "well I never",
-                   "I can't believe it", "unbelievable"]
+    interjection: [wow, good grief, goodness, my goodness, oh my god@4, oh my gosh, good heavens, goodness me, gosh,
+      golly, oh dear, blimey, holy cow, well I never, I can't believe it, unbelievable]
+  plain: wow
+  search_words: [surprise, good grief, goodness me]
 GREETING:
   takes_addressee: true
   description: Hello.
@@ -793,13 +780,13 @@ RASCAL:
 CHILD:
   description: A small child.
   neutral_person: true
-  # a policy's or a report's kid or child is of any age ("a friend's kid" at a private school): littlie and ankle
-  # biter are small children, and too familiar there (dinkum-check round)
   not_in: [news, official, technical]
   triggers:
-    # not the verb "kid" (don't kid yourself, just kidding around)
-    np: ["kid !=yourself|yerself|yourselves|himself|herself|themselves|myself|ourselves|around|me|you", "child",
-         "toddler", "little one", "youngster", "little kid", "little boy", "small child"]
+    np: [kid !=yourself|yerself|yourselves|himself|herself|themselves|myself|ourselves|around|me|you, child, toddler,
+      little one, youngster, little kid, little boy, small child]
+  plain: small child
+  search_words: [kid, toddler, little one, youngster]
+  plain_forms: {np: child}
 LITTLE_BOY:
   description: A small boy (a pet name for one), not any child ("your kid", "small children" in a safety step).
   triggers:
@@ -807,11 +794,10 @@ LITTLE_BOY:
 RUN_OFF:
   description: Leave in a hurry; flee.
   triggers:
-    # not the transitive "bolt" (bolt the door, bolted the shelf onto the wall, bolt down food); "the horse has
-    # bolted" (too late) is held by BOLTED_TOO_LATE
-    vp: ["run away as fast as {subj} could@4", "run away@3", "run off@3",
-         "bolt !=the|a|an|it|them|this|that|his|her|their|its|my|our|your|onto|on|to|down|together|shut|upright@4",
-         "flee@4", "take off in a hurry@4"]
+    vp: ['run away as fast as {subj} could@4', run away@3, run off@3, bolt !=the|a|an|it|them|this|that|his|her|their|its|my|our|your|onto|on|to|down|together|shut|upright@4,
+      flee@4, take off in a hurry@4]
+  plain: run off
+  search_words: [run away, flee, take off]
 FALL_ASLEEP:
   description: Drop off to sleep, usually from exhaustion.
   triggers:
@@ -823,7 +809,10 @@ EAT_IT_ALL:
 FOREST:
   description: Wooded country.
   triggers:
-    np: ["woods", "forest", "wilderness", "countryside", "the backcountry", "the backwoods"]
+    np: [woods, forest, wilderness, countryside, the backcountry, the backwoods]
+  plain: wooded country
+  search_words: [forest, woods, woodland, scrub]
+  plain_forms: {np: forest}
 MOCK:
   description: Make fun of someone.
   triggers:
@@ -875,11 +864,13 @@ WAR:
          "battle !=to|for|against|of|with", "conflict !=of|between|with|resolution"]
 FIELD:
   description: An enclosed field or pasture.
-  not_in: [technical, instructions]   # a form's field, in docs and how-tos alike
+  not_in: [technical, instructions]
   triggers:
-    # not a field of study or work, a field trip, a struct's or form's fields
-    np: ["field !of|covered|name|names|value|values|type|types|data|study|studies|research|experience|expertise|engineering|science|sciences|level|levels|is|are|in|that|which|for|with|to|(|show|shows|showed|indicate|indicates|suggest|suggests",
-         "meadow", "pasture"]
+    np: [field !of|covered|name|names|value|values|type|types|data|study|studies|research|experience|expertise|engineering|science|sciences|level|levels|is|are|in|that|which|for|with|to|(|show|shows|showed|indicate|indicates|suggest|suggests,
+      meadow, pasture]
+  plain: farm field
+  search_words: [field, pasture, meadow]
+  plain_forms: {np: field}
 PEOPLE:
   description: Ordinary people; the public.
   triggers:
@@ -895,18 +886,13 @@ STRUGGLERS:
     np: ["ordinary people", "working people", "working families", "the common man", "the working class",
          "the poor", "struggling families", "ordinary Australians"]
 FREEDOM:
-  # Curation: a fair go is fair treatment, not freedom.
   description: Freedom or liberty, rather than fair treatment or an opportunity.
-  not_in:
-  - technical
+  not_in: [technical]
   triggers:
-    np:
-    - freedom
-    - liberty
-  plain: freedom or liberty
-  examples:
-  - They fought for freedom.
-  - They demanded liberty.
+    np: [freedom, liberty]
+  plain: freedom
+  examples: [They fought for freedom., They demanded liberty.]
+  search_words: [liberty, independence]
 FAIR_OPPORTUNITY:
   description: Fair treatment or an equitable opportunity, rather than every sense of liberty.
   triggers:
@@ -951,12 +937,12 @@ COMMITTED:
     # to birds), "committed to" (prison, memory) or "determined to" ("dead set on win")
     adv: ["intent on", "hell-bent on", "hellbent on", "bent on !=one|both|all|his|her|their", "determined on"]
 DEVOTION:
-  plain: "loyal devotion"
-  examples:
-  - "Their loyalty never wavered."
+  plain: loyalty
+  examples: [Their loyalty never wavered.]
   description: Loyal devotion to a cause or to each other.
   triggers:
-    np: ["devotion", "loyalty", "solidarity", "fellowship"]
+    np: [devotion, loyalty, solidarity, fellowship]
+  search_words: [devotion]
 COMRADESHIP:
   description: Fellowship and solidarity between companions or peers.
   triggers:
@@ -977,58 +963,56 @@ HEREABOUTS:
     np: ["this continent", "this region", "these parts", "this area", "this part of the world"]
     adv: ["on|in this continent", "in this region", "in these parts", "around here", "in this part of the world"]
 FOUND:
-  plain: "set up; establish"
-  examples:
-  - "They hope to bring into being a fairer system."
+  plain: establish
+  examples: [They hope to bring into being a fairer system.]
   description: Bring into being; establish.
   triggers:
-    vp: ["bring forth", "bring into being", "put together",   # not bare "build": "build a house" isn't "kick off"
-         "throw together"]
+    vp: [bring forth, bring into being, put together, throw together]
+  search_words: [set up, found, start, bring into being]
+  plain_forms: {vp: set up}
 THINK:
   description: Hold or express an opinion or belief that something is the case; suppose.
-  # Trusting testimony, imagining and valuing need separate readings. Keep exclusions out of this
-  # description: keyword lookup indexes its words positively, rather than interpreting a negation.
   triggers:
-    vp: ["think !about|of|over|through|up|back|ahead|twice|again", "believe !in|me|you|it",
-         "suppose !to"]   # not "figure" (a noun as often) or "expect" ("thunderstorms are expected")
+    vp: [think !about|of|over|through|up|back|ahead|twice|again, believe !in|me|you|it, suppose !to]
+  plain: suppose
+  search_words: [think, guess, figure]
+  plain_forms: {vp: think}
 # Readings of think and believe that their complements establish. They hold the verb without claiming its
 # object, which keeps its own words and their swaps ("believe a liar": a bullshitter is still one).
 ACCEPT_AS_TRUE:
-  plain: "take someone, or what they say, as true"
-  examples:
-  - "I believe the story."
-  - "They believed whatever she told them."
+  plain: believe what you're told
+  examples: [I believe the story., They believed whatever she told them.]
   description: Accept a person, their word or a report as true (believe a liar, believe the story); not suppose.
   triggers:
-    vp: ["believe ?={np}"]
+    vp: ['believe ?={np}']
+  search_words: [take as true]
+  plain_forms: {vp: believe}
 # Each keeps one polarity, so an entry cannot flip or flatten the source's regard; negation stays outside.
 REGARD_HIGHLY:
-  plain: "think highly of"
-  examples:
-  - "They think highly of the coach."
-  - "She thinks a lot of her brother."
+  plain: think highly of
+  examples: [They think highly of the coach., She thinks a lot of her brother.]
   description: Think well of, value (think highly, a lot or so much of); an evaluation, not a supposition.
   triggers:
-    vp: ["think so|very|that|as? much of ?={np}", "think so|very|really? highly|well|kindly of ?={np}",
-         "think a lot of ?={np}", "think a great deal of ?={np}", "think the world of ?={np}",
-         # negated, "too" is understatement: "I don't think too highly of him" thinks poorly of him, and
-         # the negation's context outranks the bare OVERVALUE and CONCEITED readings
-         "?<=not|never think too|so|very|that? much of ?={np}", "?<=not|never think too|so|very? highly of ?={np}",
-         "?<=not|never think a lot of ?={np}", "?<=not|never think the world of ?={np}"]
+    vp: ['think so|very|that|as? much of ?={np}', 'think so|very|really? highly|well|kindly of ?={np}', 'think a
+        lot of ?={np}', 'think a great deal of ?={np}', 'think the world of ?={np}', '?<=not|never think too|so|very|that?
+        much of ?={np}', '?<=not|never think too|so|very? highly of ?={np}', '?<=not|never think a lot of ?={np}',
+      '?<=not|never think the world of ?={np}', 'rate ^person ?={np}']
+  search_words: [admire, respect, look up to, think a lot of]
 REGARD_POORLY:
-  plain: "think poorly of"
-  examples:
-  - "He thinks little of the plan."
+  plain: think poorly of
+  examples: [He thinks little of the plan.]
   description: Think poorly of, disparage (think little or ill of); an evaluation, not a supposition.
   triggers:
-    vp: ["think little|ill|poorly|badly of ?={np}"]
+    vp: ['think little|ill|poorly|badly of ?={np}', 'do not rate ^person ?={np}']
+  search_words: [think little of, look down on]
 OVERVALUE:
-  plain: "value too highly"
-  examples:
-  - "He thinks too much of the plan."
+  plain: value too highly
+  examples: [He thinks too much of the plan.]
   description: Value too highly (think too much of); of oneself, conceit. An evaluation, not a supposition.
   triggers:
-    vp: ["think too much|highly of ?={np}"]
+    vp: ['think too much|highly of ?={np}']
+  search_words: [overrate, overvalue, think too much of]
+  plain_forms: {vp: overrate}
 CONCEITED:
   description: Think too highly of oneself (he thinks too much of himself); conceit, not regard for another.
   triggers:
@@ -1037,21 +1021,22 @@ CONCEITED:
          "think a lot of himself|herself|themselves|themself|myself|yourself|yourselves|ourselves|oneself",
          "think the world of himself|herself|themselves|themself|myself|yourself|yourselves|ourselves|oneself"]
 NO_HARDSHIP:
-  plain: "think nothing of doing something"
-  examples:
-  - "She thought nothing of walking ten miles."
-  description: Treat doing something as unremarkable or no hardship (think nothing of walking ten miles); not
-    a supposition, not an amount and not low regard for a person.
+  plain: not mind doing something hard
+  examples: [She thought nothing of walking ten miles.]
+  description: Treat doing something as unremarkable or no hardship (think nothing of walking ten miles); not a
+    supposition, not an amount and not low regard for a person.
   triggers:
-    vp: ["think nothing of ?={ing}"]
+    vp: ['think nothing of ?={ing}']
+  search_words: [think nothing of, make light of]
+  plain_forms: {vp: make light of}
 IMAGINE:
-  plain: "just think; imagine"
-  examples:
-  - "Only think what a use it would be."
-  description: Imagine, picture (only think what it would be; think how lucky we are); an invitation to
-    picture something, not a supposition.
+  plain: imagine
+  examples: [Only think what a use it would be.]
+  description: Imagine, picture (only think what it would be; think how lucky we are); an invitation to picture
+    something, not a supposition.
   triggers:
-    vp: ["think ?=what|how ^start", "?<=only think ?=what|how ^start"]
+    vp: ['think ?=what|how ^start', '?<=only think ?=what|how ^start']
+  search_words: [picture, think what]
 AFFIRM:
   description: A plain yes.
   triggers:
@@ -1077,14 +1062,12 @@ CONSPICUOUS:
          "look out of place", "stick out a mile"]
     predicate_adj: ["obvious", "glaringly obvious@4", "out of place", "conspicuous"]
 DOUBT_IT:
-  plain: "doubt it can be done"
-  examples:
-  - "I doubt it could be done."
+  plain: doubt it can be done
+  examples: [I doubt it could be done.]
   description: Doubt that a proposal is feasible, without ruling it out.
   triggers:
-    vp:
-    - doubt {np} could be done@3
-    - doubt {np} would work@3
+    vp: ['doubt {np} could be done@3', 'doubt {np} would work@3']
+  search_words: []
 IMPOSSIBLE:
   description: Something can't happen or be done.
   triggers:
@@ -1168,8 +1151,9 @@ EUCALYPTUS:
 THROW:
   description: Throw something.
   triggers:
-    # not tossing in a recipe (toss to coat, toss with the dressing)
-    vp: [throw, "toss !=to|with|together|gently|well|lightly|until"]
+    vp: [throw, toss !=to|with|together|gently|well|lightly|until]
+  plain: throw
+  search_words: [toss, fling, hurl]
 CAR_TRUNK:
   description: Luggage space of a car.
   triggers:
@@ -1199,25 +1183,18 @@ GIFT_TALENT:
   source_context:
     preposition: for
     argument: nominal
-    heads: [music, number, numbers, maths, mathematics, language, languages, art, sport, singing, dancing, writing, drawing]
+    heads: [music, number, numbers, maths, mathematics, language, languages, art, sport, singing, dancing, writing,
+      drawing]
     not_heads: [birthday, christmas, wedding, anniversary, graduation]
     person: false
   triggers:
-    np:
-    - 'gift ?=for'
-    - 'a natural gift ?=for'
-    - 'a real gift ?=for'
-    - 'a rare gift ?=for'
-    - 'a special gift ?=for'
-    - 'a great gift ?=for'
-  plain: a talent
-  examples:
-  - She has a gift for music.
-  - He has a natural gift for numbers.
-  negative_examples:
-  - She has a gift for Mary.
-  - She has a gift for music lovers.
-  - She has a gift for my birthday.
+    np: ['gift ?=for', 'a natural gift ?=for', 'a real gift ?=for', 'a rare gift ?=for', 'a special gift ?=for',
+      'a great gift ?=for']
+  plain: a natural talent
+  examples: [She has a gift for music., He has a natural gift for numbers.]
+  negative_examples: [She has a gift for Mary., She has a gift for music lovers., She has a gift for my birthday.]
+  search_words: [gift, talent, aptitude, knack, flair]
+  plain_forms: {np: natural talent}
 BRAND_NEW:
   description: Completely new.
   not_in: [technical]   # a term of art in docs
@@ -1241,13 +1218,13 @@ ALIVE:
     predicate_adj: ["alive", "still alive", "still living"]
     np: ["the living !thing|things|creature|creatures|proof|legend|memory"]
 DEAD_PEOPLE:
-  plain: "the dead"
-  examples:
-  - "We remember the fallen."
+  plain: the dead
+  examples: [We remember the fallen.]
   description: The dead; the fallen.
   neutral_person: true
   triggers:
-    np: ["honored dead", "honoured dead", "the fallen", "the dead", "the departed"]
+    np: [honored dead, honoured dead, the fallen, the dead, the departed]
+  search_words: [dead people]
 CARE_ABOUT:
   description: Care about something; comparative caring-less does not establish indifference.
   triggers:
@@ -1266,12 +1243,13 @@ SINCERELY:
   triggers:
     adv: ["in all sincerity", "honestly and truly", "in all honesty"]
 WHOLEHEARTED:
-  plain: "with all your heart"
-  examples:
-  - "I agree wholeheartedly."
+  plain: with all your heart
+  examples: [I agree wholeheartedly.]
   description: Wholehearted effort, devotion or affection; not an assertion of truthfulness.
   triggers:
-    adv: ["with all {poss} heart", "wholeheartedly"]
+    adv: ['with all {poss} heart', wholeheartedly]
+  search_words: [wholeheartedly, completely, totally, one hundred per cent]
+  plain_forms: {adv: completely}
 EVERYTHING:
   description: The whole lot.
   triggers:
@@ -1443,12 +1421,12 @@ SCREAM:
   triggers:
     vp: ["scream", "shriek", "yell their heads off"]
 CRY:
-  plain: "cry"
-  examples:
-  - "She began to weep."
+  plain: cry
+  examples: [She began to weep.]
   description: Cry, weep.
   triggers:
-    vp: ["weep", "sob", "bawl", "burst into tears"]   # not "cry": usually a speech verb in stories
+    vp: [weep, sob, bawl, burst into tears]
+  search_words: [weep, sob]
 FRIGHTEN:
   description: Frighten.
   triggers:
@@ -1527,32 +1505,21 @@ HEART_ORGAN:
     np: ["?<=weak|healthy|failing|dodgy|damaged|enlarged|diseased|beating|pounding|racing|thumping heart !of|and|felt|sank|out|set",
          "?<=my|your|his|her|its|our|their|the|a|an|this|that|whose heart !of|and|felt|sank|out|set"]
 HEART_SPIRIT:
-  plain: "compassion, courage or wholehearted effort"
-  examples:
-  - "Take heart."
-  - "Have a heart."
-  description: Compassion asked for or found (have a heart, cannot find it in my heart to), effort and
-    enthusiasm (put your heart into it, her heart wasn't in it), or courage (take heart); not the organ.
+  plain: take courage
+  examples: [Take heart.]
+  description: Become encouraged or regain courage (take heart); not compassion, effort or the organ.
   triggers:
-    vp: ["have a heart ^end", "put {poss} heart into", "put {poss} heart and soul into",
-         "find it? in {poss} heart ?=to", "take heart !medication|medications|tablets|pills|drugs|rate|surgery", "have heart ^end"]
-    np: ["heart {be} not|never? really? in it", "heart's not|never? really? in it"]
+    vp: [take heart !medication|medications|tablets|pills|drugs|rate|surgery]
 HEARTBREAK:
   description: Grief or deep emotional hurt expressed as a broken heart, not the physical organ or mechanical breakage.
   triggers:
-    vp:
-    - break all? {poss} heart|hearts
-    - break a|every|any heart
-    np:
-    - heart|hearts break|breaks|broke !down
-    - heart|hearts {be} breaking|broken
-    - heart's breaking|broken
-    - heart|hearts had|has|have been broken
-    - heart|hearts will|would|could|might|can break
+    vp: ['break all? {poss} heart|hearts', break a|every|any heart]
+    np: [heart|hearts break|breaks|broke !down, 'heart|hearts {be} breaking|broken', heart's breaking|broken, heart|hearts
+        had|has|have been broken, heart|hearts will|would|could|might|can break]
   plain: heartbreak
-  examples:
-  - She broke my heart.
-  - Her heart was broken.
+  examples: [She broke my heart., Her heart was broken.]
+  search_words: [broken heart, heartbroken, devastated, crushed]
+  plain_forms: {vp: 'break {poss} heart'}
 UNRESOLVED_SENSE:
   description: Context leaves these words' sense undecided, so they stay as written. The engine assigns it
     where tags cannot settle an object (an object, or a clause's subject?); triggers name phrases whose sense
@@ -1562,12 +1529,12 @@ UNRESOLVED_SENSE:
     # believing ("think what you like") or working out ("think how to fix it"), not picturing
     vp: ["think nothing of ?={np}", "think what you like|want|please|will", "think what|how to"]
 AS_MUCH_AS_DESIRED:
-  plain: "as much as you like"
-  examples:
-  - "Eat to your heart's content."
+  plain: as much as you like
+  examples: [Eat to your heart's content.]
   description: As much as desired, to complete satisfaction; the fixed expression has no anatomical meaning.
   triggers:
-    adv: ["to {poss} heart's content", "to {poss} hearts' content", "to one's heart's content"]
+    adv: ['to {poss} heart''s content', 'to {poss} hearts'' content', to one's heart's content]
+  search_words: []
 IBIS:
   description: The Australian white ibis.
   triggers:
@@ -1613,19 +1580,14 @@ FEEL_SORRY:
     control: subject
     actions: ['take {obj}', lie, 'steal {np}', 'cheat {obj}', 'hurt {obj}']
   triggers:
-    vp:
-    - 'feel terrible ?=about|for|that'
-    - 'feel awful ?=about|for|that'
-    - 'feel bad ?=about|for|that'
-    - 'feel dreadful ?=about|for|that'
-  plain: remorse
-  examples:
-  - I feel terrible about taking it.
-  - She felt awful about lying.
-  negative_examples:
-  - I feel terrible for my neighbour.
-  - She felt awful about his illness.
-  - I feel bad about seeing her cry.
+    vp: ['feel terrible ?=about|for|that', 'feel awful ?=about|for|that', 'feel bad ?=about|for|that', 'feel dreadful
+        ?=about|for|that']
+  plain: feel bad about something you did
+  examples: [I feel terrible about taking it., She felt awful about lying.]
+  negative_examples: [I feel terrible for my neighbour., She felt awful about his illness., I feel bad about seeing
+      her cry.]
+  search_words: [feel terrible, feel awful, feel guilty, remorse, regret]
+  plain_forms: {vp: feel bad}
 BIG_STRONG:
   description: Very big and solidly built.
   triggers:
@@ -1788,20 +1750,14 @@ WELFARE:
   triggers:
     np: ["unemployment benefits", "unemployment benefit", "jobseeker payments"]
 UNEMPLOYED:
-  # Curation: dole bludger and other put-downs are not words for this meaning; neither benefits nor work avoidance is implied.
   description: Without paid work; says nothing about receiving benefits or choosing not to work.
   person: true
   triggers:
-    predicate_adj:
-    - unemployed
-    - out of work
-    - jobless
+    predicate_adj: [unemployed, out of work, jobless]
   plain: out of work
-  examples:
-  - She is unemployed.
-  - He is out of work.
-  negative_examples:
-  - She is on welfare.
+  examples: [She is unemployed., He is out of work.]
+  negative_examples: [She is on welfare.]
+  search_words: [unemployed, jobless, laid off, between jobs]
 DODGY:
   description: Of dubious honesty or quality.
   person: true
@@ -2380,12 +2336,12 @@ HOMESTEAD:
   triggers:
     np: [the ranch house, the main ranch house, the main house on the ranch]
 TRAMP_ROADS:
-  plain: "travel the country roads on foot"
-  examples:
-  - "He tramped the roads for years."
+  plain: walk the country roads
+  examples: [He tramped the roads for years.]
   description: Travel the country roads on foot; baggage and motive are not implied.
   triggers:
     vp: [tramp the roads, be on the tramp, tramp the country roads, travel the roads on foot]
+  search_words: [tramp, roam, wander the roads, itinerant]
 POLICE_OFFICER:
   description: A police officer.
   triggers:
@@ -2520,7 +2476,11 @@ EVERYWHERE:
 PRAISE:
   description: Speak highly of someone or something.
   triggers:
-    vp: ['speak highly of {obj}', 'praise {obj} to the skies', 'rave about {obj}', 'sing the praises of {obj}', "commend {obj}", "heap praise on {obj}", "speak glowingly of {obj}"]
+    vp: ['speak highly of {obj}', 'praise {obj} to the skies', 'rave about {obj}', 'sing the praises of {obj}',
+      'commend {obj}', 'heap praise on {obj}', 'speak glowingly of {obj}']
+  plain: praise
+  search_words: [speak highly of, compliment, sing the praises of]
+  plain_forms: {vp: 'praise {obj}'}
 BOAST:
   description: Brag or boast (verb).
   triggers:
@@ -2803,6 +2763,8 @@ HORSE:
   description: A horse.
   triggers:
     np: [horse !around|about|race|races|racing|riding|sense|play|power|trade|trading|box|float|shoe|shoes]
+  plain: horse
+  search_words: [horse]
 GAMBLER:
   description: Someone who bets.
   triggers:
@@ -4040,30 +4002,59 @@ GOOD_MAN:
     - a nice man
 
 PROBABLE:
-  plain: "probably"
-  examples:
-  - "It will probably rain."
+  plain: probably
+  examples: [It will probably rain.]
   description: Likely, without asserting certainty. No automatic replacement is certified.
   triggers:
     adv: [probably, likely, in all probability]
+  search_words: [likely, most likely, chances are, odds are]
 WAKE_UP:
-  plain: "wake up"
-  examples:
-  - "Wake up early tomorrow."
+  plain: wake up
+  examples: [Wake up early tomorrow.]
   description: Stop sleeping and become awake. No automatic replacement is certified.
   triggers:
     vp: [wake up, awaken]
+  search_words: [wake, awaken]
 POSSIBILITY:
-  plain: "possible"
-  examples:
-  - "It is possible."
+  plain: possible
+  examples: [It is possible.]
   description: Possible; not ruled out, without asserting feasibility or certainty.
   triggers:
     predicate_adj: [possible, not impossible, not out of the question]
+  search_words: [possibly, could be, might happen]
 DIFFICULT:
-  plain: "hard to do"
-  examples:
-  - "The job is difficult."
+  plain: hard to do
+  examples: [The job is difficult.]
   description: Hard to do; not easy. No automatic replacement is certified.
   triggers:
-    predicate_adj: [difficult, "hard ?=to"]
+    predicate_adj: [difficult, 'hard ?=to']
+  search_words: [difficult, challenging]
+
+HEART_COMPASSION:
+  plain: be kind
+  description: Show compassion or consideration (have a heart).
+  examples:
+  - Have a heart.
+  triggers:
+    vp:
+    - have a heart ^end
+    - find it? in {poss} heart ?=to
+
+HEART_EFFORT:
+  plain: try hard
+  description: Apply effort and commitment; a heart not in it lacks engagement, not
+    necessarily effort.
+  plain_forms:
+    vp: try hard at {obj}
+  examples:
+  - Put your heart into it.
+  - Her heart wasn't in it.
+  triggers:
+    vp:
+    - put {poss} heart into {obj}
+    - put {poss} heart into
+    - put {poss} heart and soul into {obj}
+    - put {poss} heart and soul into
+    np:
+    - heart {be} not|never? really? in it
+    - heart's not|never? really? in it

@@ -212,10 +212,22 @@ def realise(entry: Entry, form: str, det: Detection) -> str:
     agree_subj = subj if subj_tok is not None else ("it" if "np" in caps or form.startswith("there ") else "you")
 
     text = form
-    if entry.frame == "vp" and det.inflection in morph.VERB_FORMS:
+    negative_vp = re.fullmatch(r"don't ([a-z]+)(.*)", form) if entry.frame == "vp" else None
+    if negative_vp:
+        head, rest = negative_vp.groups()
+        if det.inflection in {"ing", "pp"}:
+            text = "not " + morph.inflect(head, det.inflection) + rest
+        elif det.vp_auxiliary:
+            inflection = "pp" if det.inflection == "past" and det.vp_auxiliary in morph.HAVE_FORMS | morph.BE_FORMS else "base"
+            text = "not " + morph.inflect(head, inflection) + rest
+        else:
+            auxiliary = morph.inflect("do", det.inflection) if det.inflection in morph.VERB_FORMS else "do"
+            text = auxiliary + "n't " + head + rest
+    elif entry.frame == "vp" and det.inflection in morph.VERB_FORMS:
         head, _, rest = text.partition(" ")
         if not head.startswith("{"):
-            text = (morph.inflect(head, det.inflection) + (" " + rest if rest else ""))
+            inflection = "pp" if det.inflection == "past" and det.vp_auxiliary in morph.HAVE_FORMS | morph.BE_FORMS else det.inflection
+            text = (morph.inflect(head, inflection) + (" " + rest if rest else ""))
     # a later verb that follows the tense: "think the sun shines|shone out of ..."
     text = re.sub(r"([\w']+)\|([\w']+)", lambda m: m.group(2) if tense == "past" else m.group(1), text)
     # a term already plural ("strides", "the olds") stays as it is; a trigger written as a plural takes the

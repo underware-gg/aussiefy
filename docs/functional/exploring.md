@@ -186,3 +186,7 @@ changes contract are separate operations. See [Bulldust](bulldust.md) for constr
 Hosted MCP uses `lookup_limit` to cap entry pages as well as lookup results, with each default reduced to
 fit its cap. Existing capability controls still apply to these tools. Name suggestions have no document or
 unlock options. See [the toolkit](toolkit.md) for server configuration.
+
+A meaning with only optional imagery is still waiting for a word. An eligible image may accompany
+`no_word_yet`; its presence never turns invented comparison wording into a dictionary word. Exact
+authored meaning names also select their own eligible images, with the same permissions.

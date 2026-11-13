@@ -227,3 +227,17 @@ def test_contextual_images_follow_set_aside_concepts_only_in_scratch(prepared):
     path.write_text(yaml.safe_dump(rows))
     with pytest.raises(SchemaError, match='known'):
         rounds.base_dictionary(config, data)
+
+
+def test_concept_fixes_preserve_and_replace_distinct_wording_fields(prepared):
+    config,data=prepared
+    config.concept_fixes={'HEART_EFFORT':{'description':'Reviewed effort reading.'}}
+    d=plan(config,data).write(data)
+    assert d.concepts['HEART_EFFORT'].plain_forms=={'vp':'try hard at {obj}'}
+    config.concept_fixes={'HEART_EFFORT':{'search_words':['effort'], 'plain_forms':{'vp':'try harder'}}}
+    d=plan(config,data).write(data)
+    assert d.concepts['HEART_EFFORT'].search_words==('effort',)
+    assert d.concepts['HEART_EFFORT'].plain_forms=={'vp':'try harder'}
+    before=(data/'concepts.yaml').read_text()
+    plan(config,data).write(data)
+    assert (data/'concepts.yaml').read_text()==before

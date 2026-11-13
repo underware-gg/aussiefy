@@ -341,6 +341,7 @@ def _prepare_concept_fixes(plan: RoundPlan, d: Dictionary) -> None:
             raw = {f.name: getattr(concept, f.name) for f in fields(Concept) if f.name != "id"}
             raw["triggers"] = {frame: list(patterns) for frame, patterns in concept.triggers.items()}
             raw["unless_after"] = list(concept.unless_after)
+            raw["search_words"] = list(concept.search_words)
             raw["examples"] = list(concept.examples)
             raw["negative_examples"] = list(concept.negative_examples)
             raw["nominal_roles"] = list(concept.nominal_roles)

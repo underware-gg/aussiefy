@@ -180,18 +180,17 @@ class Dictionary:
         """Exact meaning names and authored wording, for explicit dictionary discovery only."""
         out = {}
         for cid, concept in sorted(self.concepts.items()):
-            for name in (cid.replace("_", " "), concept.plain):
+            for name in (cid.replace("_", " "), concept.plain, *concept.search_words):
                 if key := fold(name):
                     out.setdefault(key, set()).add(cid)
         return {key: tuple(sorted(cids)) for key, cids in out.items()}
 
     @cached_property
     def wordless_meanings(self) -> tuple[str, ...]:
-        """Recognised meanings with no Aussie word yet, by ID: no entry, image or construction expresses them, and
+        """Recognised meanings with no Aussie word yet, by ID: no entry or construction expresses them, and
         the dialect table swaps none of their triggers for the Australian word ("trash can" is a bin). The named
         abstention concept is not a meaning waiting for a word."""
         expressed = {cid for entry in self.entries.values() if entry.status != "omit" for cid in entry.concept}
-        expressed.update(cid for image in self.imagery for cid in image.concepts)
         if self.construction_catalog is not None:
             expressed.update(family.concept for family in self.construction_catalog.families)
 

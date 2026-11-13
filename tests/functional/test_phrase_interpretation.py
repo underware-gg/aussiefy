@@ -248,7 +248,7 @@ def test_a_whole_phrase_entry_keeps_tense_negation_polarity_and_the_object(tmp_p
     tr = overlay(tmp_path, [{'id': 'test-rate', 'form': 'rate', 'concept': ['REGARD_HIGHLY'], 'frame': 'vp'}])
     assert set(outputs(tr, 'He thought highly of her.')) == {'He rated her.'}
     assert set(outputs(tr, "I don't think much of it.")) == {"I don't rate it."}
-    assert set(outputs(tr, 'He thought little of her.')) == {'He thought little of her.'}
+    assert set(outputs(tr, 'He thought little of her.')) == {"He didn't rate her."}
 
 
 def test_a_whole_phrase_entry_cannot_discard_a_result_degree(tmp_path):

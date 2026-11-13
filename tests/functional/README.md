@@ -10,6 +10,8 @@ python -m pytest -q tests/functional
 
 | Module | Primary responsibility |
 |---|---|
+| [test_slice7_data.py](test_slice7_data.py) | Approved heart split and testimony vocabulary, lexical admission and wrong-sense grammar controls |
+| [test_concept_wording.py](test_concept_wording.py) | Separate sentence forms and exact search aliases; real rendering and named discovery |
 | [test_ed16_meanings.py](test_ed16_meanings.py) | Approved waiting meanings, eagerness, literal context sequences and evidence boundaries |
 | [test_fences.py](test_fences.py) | Scoped phrase protection, deduplication, dialect separation and entry-overlap lint |
 | [test_adjusted_selection.py](test_adjusted_selection.py) | Contextual community weights, popularity, personal-preference precedence, validation and repeat-safe engine integration |

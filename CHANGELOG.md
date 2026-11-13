@@ -9,6 +9,16 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Add separate concept sentence forms'n exact lookup search words without expanding source triggers.
+  Crikey, let exact meaning names reach their own words even when incidental component readings differ.
+  Well, keep the frozen changes/card v3 shape unchanged at this foundation checkpoint.
+- Apply the marked sample's display names/search words and approved HEART_SPIRIT split. Add the six
+  testimony-backed vocabulary forms plus rate/don't rate together, and puffed for BREATHLESS at
+  level 1/Nan as shared English. Preserve scoring/literal controls and record actual testimony/sources.
+- Realise negative verb phrases with tense'n outer auxiliaries intact, including questions and
+  perfect/progressive forms. Keep imagery\-only meanings waitin' for a word while offering eligible
+  imagery separately. Remove callous as a source trigger for selfishness.
+
 - Advertise'n enforce the loaded constructor/host result cap in the bulldust MCP schema,
   rejecting out\-of\-range calls before they enter the toolkit.
 
@@ -30,7 +40,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 - Protect singular'n plural identity names such as `Native American` and `South Americans` in lookup.
   Well, keep a word inside a longer idiom from overriding a protected phrase: `the toss` stays as written,
-  while the complete death idiom remains discoverable. Stone the flamin' crows, add the countable buck word `buck`/`bucks`
+  while the complete death idiom remains discoverable. Struth, add the countable buck word `buck`/`bucks`
   from R75, retaining quantities'n currency labels; recognise counted noun queries such as `five dollars`.
 
 - Restore protection of the real plural `toss ups` and cover the spellin' `toss-ups`. Keep authored phrase protections inside capitalised
@@ -168,7 +178,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 - Add an offline trainin'\-label audit'n reject contradictory or self\-negative pairs before model
   construction. Generate wrong\-sense anchors through the canonical exclusion parser'n respect a
-  same\-concept longer trigger's ownership. Anyway, keep the recipe, model weights'n reference gates unchanged.
+  same\-concept longer trigger's ownership. Keep the recipe, model weights'n reference gates unchanged.
 - Recognise object\-bearing annoyance predicates separately from illness'n fatigue. Preserve the
   source when a target can't retain its object, and share the distinction across model/lexical lookup,
   automatic translation, plans'n editor alternatives.
@@ -205,7 +215,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   explicitly overridden. Keep ordinary indefinite wording available. Share mapping effects through
   selection, lookup, plans, alternatives'n bounded original\-aware verification; retain unrelated numbers.
 - Apply the remainin' clear source\-audit sense repairs: distinguish urination, categorical impossibility,
-  completion, tasting, noisy crying/sulking, explicit noun subtypes'n emphatic refusals. Struth, preserve antenna
+  completion, tasting, noisy crying/sulking, explicit noun subtypes'n emphatic refusals. Stone the crows, preserve antenna
   qualifiers/plurals'n walking destinations, require progressive objects, and retain discovery\-only
   vocabulary where source wording can't establish a safe automatic readin'. Correct eight source/usage
   records'n merge 627 reviewed source pairs from batches 7–11 without changin' existin' term gates.
@@ -216,7 +226,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   certificates, retained qualifier ownership'n compatible realised forms across translation, plans and
   automatic alternatives. Calibrate the DRUNK family without guessing unknown grades or removing terms.
 - Distinguish plural direct address from references to everyone: offer “you mob”/“youse” in simple group
-  greetings'n commands; preserve ambiguous parentheticals and coordinated recipients. Look, retain ordinary
+  greetings'n commands; preserve ambiguous parentheticals and coordinated recipients. Retain ordinary
   distributive meanings in “Everyone came” and prevent direct dictionary replacements bypassin' usage.
 
 - Enable comic dictionary terms in solemn text at Troppo; other defaults stay off, with explicit

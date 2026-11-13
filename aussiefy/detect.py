@@ -93,6 +93,8 @@ class Detection:
                                                # their own readings ("believe [my mate]")
     source_pattern: Pattern | None = None  # dictionary evidence, before candidate expansion or abstention
 
+    vp_auxiliary: str = ""  # a verb phrase governed by an outer auxiliary or infinitive
+
     @property
     def source_concepts(self) -> tuple[str, ...]:
         return self.source_pattern.concepts if self.source_pattern is not None else self.concepts
@@ -407,6 +409,17 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
         if not noun_argument(m.captures["np"], tokens, tags, unanchored_object=unanchored):
             return None
     if p.frame == "vp":
+        before = m.start - 1
+        while before >= 0 and (tokens[before].norm in {"not", "never"}
+                or tags is not None and tags[before] in {"RB", "RBR", "RBS"}):
+            before -= 1
+        # An inverted question puts its subject between the auxiliary and the head verb.
+        while (before >= 0 and tags is not None
+                and tags[before] in pos.NOUNS | pos.NAMES | {"PRP", "PRP$", "DT", "JJ", "JJR", "JJS"}
+                and tokens[before].norm not in VERB_LEADERS | morph.DO_FORMS | morph.HAVE_FORMS | morph.BE_FORMS):
+            before -= 1
+        if before >= 0 and tokens[before].norm in VERB_LEADERS | morph.DO_FORMS | morph.HAVE_FORMS | morph.BE_FORMS:
+            det.vp_auxiliary = tokens[before].norm
         subject = verb_subject(tokens, m.start, tags)
         if subject is not None:
             if subject.norm in morph.PERSON_PRONOUNS:

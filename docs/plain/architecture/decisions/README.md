@@ -72,6 +72,8 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 
 | [DD-055](../../../architecture/decisions/dd-055-v3-producers-and-replay.md) | Coordinated v3 producers, local provenance and exact-source replay choices | Accepted for slices 3+6 |
 
+| [DD-056](../../../architecture/decisions/dd-056-meaning-wording-and-negative-vps.md) | Separate meaning wording, exact discovery and grammatical negative verb phrases | Accepted for slice 7 foundation |
+
 ## By topic
 
 - **Engine:** DD-001, DD-003, DD-007, DD-029, DD-030, DD-034, DD-035, DD-036, DD-037, DD-039, DD-041, DD-044

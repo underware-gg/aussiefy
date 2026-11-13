@@ -5,6 +5,16 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Add separate concept sentence forms and exact lookup search words without expanding source triggers.
+  Let exact meaning names reach their own words even when incidental component readings differ.
+  Keep the frozen changes/card v3 shape unchanged at this foundation checkpoint.
+- Apply the marked sample's display names/search words and approved HEART_SPIRIT split. Add the six
+  testimony-backed vocabulary forms plus rate/don't rate together, and puffed for BREATHLESS at
+  level 1/Nan as shared English. Preserve scoring/literal controls and record actual testimony/sources.
+- Realise negative verb phrases with tense and outer auxiliaries intact, including questions and
+  perfect/progressive forms. Keep imagery-only meanings waiting for a word while offering eligible
+  imagery separately. Remove callous as a source trigger for selfishness.
+
 - Advertise and enforce the loaded constructor/host result cap in the bulldust MCP schema,
   rejecting out-of-range calls before they enter the toolkit.
 

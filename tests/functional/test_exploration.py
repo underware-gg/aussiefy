@@ -318,10 +318,10 @@ def test_a_word_for_a_meaning_takes_it_off_the_waiting_list(dictionary):
     assert lookup("take heart", translator=tr)["outcome"] == "matched"
 
 
-def test_an_image_or_construction_for_a_meaning_takes_it_off_the_waiting_list(dictionary):
+def test_imagery_is_not_a_word_but_a_construction_can_express_the_meaning(dictionary):
     from aussiefy.schema import Imagery
     image = Imagery("test-heart-image", "like a lion", ("HEART_SPIRIT",), "comparison")
-    assert "HEART_SPIRIT" not in replace(dictionary, imagery=(*dictionary.imagery, image)).wordless_meanings
+    assert "HEART_SPIRIT" in replace(dictionary, imagery=(*dictionary.imagery, image)).wordless_meanings
     catalog = dictionary.construction_catalog
     family = replace(catalog.families[0], concept="HEART_SPIRIT")
     with_family = replace(dictionary, construction_catalog=replace(catalog, families=(*catalog.families, family)))
@@ -376,10 +376,10 @@ def test_lookup_says_when_a_recognised_meaning_has_no_word_yet(translator):
     assert lookup("very busy", translator=translator)["outcome"] == "matched"
 
 
-def test_cli_lookup_names_the_meaning_with_no_word_yet(capsys):
+def test_cli_lookup_names_the_meaning_with_no_word_yet(capsys, dictionary):
     from aussiefy.cli import main
     assert main(["lookup", "take", "heart"]) == 1
-    assert "meaning HEART_SPIRIT: compassion, courage or wholehearted effort" in capsys.readouterr().out
+    assert f"meaning HEART_SPIRIT: {dictionary.concepts['HEART_SPIRIT'].plain}" in capsys.readouterr().out
 
 
 @pytest.mark.parametrize("backend", ["none", "bundled"])
@@ -418,7 +418,7 @@ def test_a_wordless_reading_needs_no_model_and_cannot_be_rescued_by_unrelated_di
             raise AssertionError("A settled wordless reading must not fall back to the model")
 
     tr = Translator(dictionary, lookup_embedder=UnusedModel())
-    for query in ("fantastic terrors", "loyal devotion", "It will probably rain.", "think highly of"):
+    for query in ("fantastic terrors", "loyal devotion", "It will probably rain.", "take heart"):
         result = lookup(query, translator=tr, level=1, vulgarity=0)
         assert result["outcome"] == "no_word_yet" and not result["results"]
 
