@@ -69,6 +69,11 @@ An entry is one meaning-shape:
   gloss: Not quite sane; eccentric.   # our own words, never a source's
 ```
 
+Glosses are reader-facing prose, displayed as written on entry cards. They must not contain raw slot
+syntax such as `{obj}` or `{poss}`; write “someone” or another natural phrase instead. The loader rejects
+slot tokens in glosses for core entries, additions and overlay corrections, so the release checks catch
+them too. Grammar slots remain valid in forms and curator notes.
+
 An entry's `incoherence` is its minimum level: how distinctly and colourfully Australian its wording is.
 Generic/imported words sit low; thick vernacular and opaque local idioms sit high. Rudeness is independently
 its `vulgarity`. `status: gate` is a curator's manual gate; `--unlock all` can lift it. `omit` is never offered,

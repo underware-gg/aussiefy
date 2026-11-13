@@ -13,7 +13,9 @@ the woods" and "put a sock in it" are shared with other Englishes but are everyd
 flagged instead, and kept in `aussiefy/data/entries/flagged.yaml` so re-scrapes don't reintroduce them.
 
 Every gloss is written in our own words, never a source's
-([DD-012](../../architecture/decisions/dd-012-reference-dictionaries-are-reference-only.md)).
+([DD-012](../../architecture/decisions/dd-012-reference-dictionaries-are-reference-only.md)). Glosses are
+shown to readers verbatim: use natural words such as “someone”, never raw form slots such as `{obj}`.
+Slot syntax in a gloss fails schema validation; keep grammatical instructions in curator notes.
 
 ## Interpret terms as an Australian would
 

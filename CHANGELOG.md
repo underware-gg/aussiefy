@@ -9,6 +9,11 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Reject raw slot syntax in reader\-facin' glosses across dictionary heaps'n corrections. Reword the
+  knock\-back'n bend\-ear glosses, retaining their entry IDs, headwords and grammar.
+- Share the existing article-free headword comparison helper without changing A-to-Z keys. The public
+  headword_key card field is reserved for slice 7's planned coordinated contract version.
+
 - Make published core entry IDs permanent: retain rename/merge aliases, reserve removed IDs, resolve
   old URLs across Python/CLI/MCP, and check continuity against the exact previous release'n dev baseline.
 - Omit the full Bulldust scaffold by default, with an explicit include_scaffold opt-in on Python/CLI/MCP;

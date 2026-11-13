@@ -11,7 +11,7 @@ from . import discovery_outcomes as outcomes
 from .cards import full_entry_card, shows_riffs
 from .engine import Translator, default_translator
 from .errors import UserError
-from .terms import fold
+from .terms import headword_key
 from .evidence import register_rejection
 from .genre import resolve_document
 from .policy import dial_rejection, parse_embellishment, roll
@@ -51,9 +51,7 @@ def _entries(dictionary, eff, concept, theme, include_gated):
 
 
 def _headword(entry):
-    text = fold(entry.form)
-    first, separator, rest = text.partition(" ")
-    return rest if separator and first in {"a", "an", "the"} else text
+    return headword_key(entry.form)
 
 
 def _card(entry, eff, setting):

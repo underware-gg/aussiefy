@@ -413,6 +413,8 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
     for name in ("gloss", "notes"):
         if raw.get(name) is not None and not isinstance(raw[name], str):
             raise SchemaError(f"{entry_id}: '{name}' must be text")
+    if token := PLACEHOLDER_RE.search(raw.get("gloss") or ""):
+        raise SchemaError(f"{entry_id}: gloss must not contain slot syntax {token.group()!r}; use reader-facing words")
     if raw.get("plural") is not None and (not isinstance(raw["plural"], str) or not raw["plural"].strip()):
         raise SchemaError(f"{entry_id}: 'plural' must be non-empty text")
     metadata = parse_metadata(raw, entry_id)

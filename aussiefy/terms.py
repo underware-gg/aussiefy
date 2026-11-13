@@ -33,6 +33,13 @@ def fold(text: str) -> str:
     return " ".join(t.split())
 
 
+def headword_key(text: str) -> str:
+    """The A-to-Z key: folded whitespace/case/apostrophes, without one leading a/an/the."""
+    text = fold(text)
+    first, separator, rest = text.partition(" ")
+    return rest if separator and first in {"a", "an", "the"} else text
+
+
 def _pattern_text(text: str) -> str:
     return re.sub(r"@\d|(?<!\w)(?:!\S+|\?<=[^\s]+|\?=\S+|\^\w+)", " ", fold(text))
 

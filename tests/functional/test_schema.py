@@ -1,7 +1,7 @@
 import pytest
 
 from aussiefy.loader import load_dictionary
-from aussiefy.schema import SchemaError, parse_entry
+from aussiefy.schema import SLOT_KINDS, SchemaError, parse_entry
 
 BASE = {"id": "x", "form": "x", "concept": ["BUSY"], "frame": "np"}
 
@@ -170,3 +170,36 @@ def test_entry_files_are_the_data_dirs_entries():
     from aussiefy.loader import DATA_DIR, entry_files
 
     assert entry_files() == sorted((DATA_DIR / "entries").glob("*.yaml")) and entry_files(DATA_DIR)
+
+
+@pytest.mark.parametrize('slot', [*SLOT_KINDS, 'future_slot'])
+def test_glosses_reject_slot_syntax_even_for_unknown_slot_names(slot):
+    with pytest.raises(SchemaError, match='x: gloss must not contain slot syntax'):
+        entry(gloss='A meaning; the form is "take {' + slot + '} back".')
+
+
+def test_gloss_validation_keeps_grammar_slots_in_forms_and_curator_notes():
+    gloss = 'A rejection or refusal; the verb is "knock someone back".'
+    e = entry(form='knock {obj} back', frame='vp', gloss=gloss, notes='{obj} is the person being rejected.')
+    assert e.gloss == gloss and e.form == 'knock {obj} back' and '{obj}' in e.notes
+
+
+@pytest.mark.parametrize('overlay', [False, True])
+def test_extension_additions_and_overlay_gloss_corrections_are_validated(tmp_path, overlay):
+    import yaml
+    raw = ({'format':'aussiefy-dictionary-overlay/v1', 'patch_entries':{'stoked':{'gloss':'Happy for {obj}.'}}}
+           if overlay else [{'id':'reader-gloss', 'form':'thing', 'frame':'np', 'concept':['HUNGRY'],
+                             'gloss':'A thing belonging to {poss}.'}])
+    path = tmp_path / 'gloss.yaml'
+    path.write_text(yaml.safe_dump(raw))
+    with pytest.raises(SchemaError, match='gloss must not contain slot syntax'):
+        load_dictionary([path])
+
+
+def test_corrected_glosses_are_reader_facing_without_changing_headwords(dictionary):
+    knock = dictionary.entries['knock-back']
+    assert knock.form == 'a knock-back'
+    assert knock.gloss == 'A rejection or refusal; the verb is "knock someone back".'
+    bend = dictionary.entries['bend-ear']
+    assert bend.form == 'bend {objposs} ear' and bend.gloss == 'Talk at someone at length.'
+    assert '{objposs}' in bend.notes

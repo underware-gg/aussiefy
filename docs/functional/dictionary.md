@@ -73,6 +73,11 @@ An entry is one meaning\-shape:
   gloss: Not quite sane; eccentric.   # our own words, never a source's
 ```
 
+Glosses are reader\-facin' prose, displayed as written on entry cards. They must not contain raw slot
+syntax such as `{obj}` or `{poss}`; write “someone” or another natural phrase instead. The loader rejects
+slot tokens in glosses for core entries, additions'n overlay corrections, so the release checks catch
+them too. Anyway, grammar slots remain valid in forms'n curator notes.
+
 An entry's `incoherence` is its minimum level: how distinctly'n colourfully Australian its wording is.
 Generic/imported words sit low; thick vernacular'n opaque local idioms sit high. Rudeness is independently
 its `vulgarity`. `status: gate` is a curator's manual gate; `--unlock all` can lift it. `omit` is never offered,
@@ -231,7 +236,7 @@ Keep distinct meanings in distinct concepts. A `lout` isn't necessarily a `reckl
 concepts, but its direct `replaces` patterns then introduce all of those concepts: prefer the individual
 concept triggers when those meanings need different candidates.
 
-Now, named cultural references such as `Goon of Fortune` and `Hills Hoist` are retained with specific meanings;
+Named cultural references such as `Goon of Fortune` and `Hills Hoist` are retained with specific meanings;
 they don't turn every drinkin' game or rotary clothesline into the named game or brand. Appetite phrases
 such as “could do with a feed” and “wouldn't say no to some tucker” have direct mappings for corresponding
 conditional requests, plus writer\-only hunger suggestions for contexts requirin' tense or modal judgement.
