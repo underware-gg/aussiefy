@@ -877,7 +877,7 @@ def resolve_overlaps(dets: list[Detection]) -> list[Detection]:
             available.append(d)
             continue
         blockers = [f for f in fences if f is not d and d.start < f.end and f.start < d.end
-                    and not (d.start <= f.start and f.end <= d.end)]
+                    and (f.source_pattern.fence.exclusive or not (d.start <= f.start and f.end <= d.end))]
         if blockers:
             for fence in blockers:
                 fence.supersedes = tuple(dict.fromkeys(fence.supersedes + d.concepts))

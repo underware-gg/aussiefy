@@ -3875,3 +3875,34 @@
   examples:
   - Please rate your stay.
   reason: This asks for or assigns a rating or score.
+
+# Rob, 13 November 2026: keep qualified currency names; only bare dollars become bucks.
+# The shared modifier reader handles country/region names, demonyms, abbreviations and compound names.
+- phrase: "{modifier} dollar|dollars|pound|pounds|shilling|shillings"
+  frame: np
+  kind: grammar
+  exclusive: true
+  scope:
+    meanings: true
+    dialect: [unknown, us, uk]
+    not_in: []
+  examples:
+  - It cost 50 US dollars.
+  - It cost 50 Australian dollars.
+  - It cost 50 New Zealand dollars.
+  - It cost 50 U.S. dollars.
+  - It cost fifty British pounds.
+  - They paid in Kenyan shillings.
+  reason: A qualified currency name stays as written.
+
+# Established whole expression from the retained low currency review.
+- phrase: dollars and cents
+  frame: np
+  kind: set_phrase
+  scope:
+    meanings: true
+    dialect: []
+    not_in: []
+  examples:
+  - We discussed the dollars and cents.
+  reason: Dollars and cents is a whole expression for the money details.

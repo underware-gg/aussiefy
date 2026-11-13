@@ -27,6 +27,7 @@ from .model import Dictionary
 from .morph import pluralise, verb_forms
 from .select import mapping_effects, dial_rejection, semantic_rejection
 from .schema import PLACEHOLDER_RE, HOLDING_CONCEPT, Entry
+from .nominal_modifiers import cardinal_at
 from .cards import CARD_VERSION
 from .cards import full_entry_card, short_card, shows_riffs
 from .evidence import register_rejection
@@ -106,7 +107,7 @@ def _scoped_query(tokens: list[Token], readings: list[Detection], tags: list[str
         if head.subject_noun is not None:
             captured.add(head.subject_noun.i)
         if any(t.norm not in DETERMINERS and t.i not in captured
-               and not (head.frame == 'np' and tags[i] in NP_DETERMINER_TAGS)
+               and not (head.frame == 'np' and (tags[i] in NP_DETERMINER_TAGS or cardinal_at(tokens, i)))
                and i not in covered for i, t in enumerate(tokens[:start])):
             continue
         # All coordinated heads must be known. A preposition/infinitive may introduce a head's

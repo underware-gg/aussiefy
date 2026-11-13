@@ -326,6 +326,21 @@ A fence may also supply `examples`, a list of distinct non\-empty sentences cont
 The loader checks those matches. Add an example when the surrounding words are needed to demonstrate
 what the protection prevents; examples don't change its scope or make new source triggers.
 
+`exclusive` defaults to `false`: a supported whole\-expression readin' may normally cover a fence.
+Set it to `true` when every overlappin' meanin' replacement must be withheld, includin' an exact or
+larger whole\-expression match. It requires `scope.meanings: true`. Qualified currency names use this
+so an explicit “British pounds” trigger can't bypass preservation.
+
+The source\-only `{modifier}` slot captures up to twelve contiguous nominal modifier tokens, with at
+least one lexical adjective or noun. It admits compound names, demonyms'n dotted initials; articles,
+possessives'n counts alone don't qualify. Original case distinguishes acronym “US” from pronoun
+“us”. The dictionary uses it to keep qualified currency wording as written across meanings and
+dialect conversion. Ambiguous lexical modifiers are preserved conservatively; this is a grammatical
+check, not a geographical name database. Stone the crows, bare dollar amounts still take buck/bucks. Currency heads
+live in dictionary fence data, so the engine has no hard\-coded currency words or country list. Written
+cardinal counts are recognised as nominal lookup evidence even when a short\-query POS tag is a noun,
+so “ten bucks” and “ten biscuits” both keep their recognised head meaning.
+
 `inflect_head` defaults to `true`, retaining normal noun plurals or verb tenses. Set it to `false` for a
 fixed expression whose first/last word is not a grammatical head that can take those inflections. For
 example, an NP fence for “silence was broken” must not invent “brokens”. The written words, alternatives
@@ -352,7 +367,7 @@ counts forms with neither a sentence nor a reading; the bundled dictionary's tes
 Do not loosen meaning or grammar checks just to produce an explanation.
 
 A curator can add a supported whole\-phrase concept trigger or entry replacement through the normal
-dictionary or overlay format. Stone the flamin' crows, that whole readin' can replace the protected phrase; the fence continues
+dictionary or overlay format. That whole readin' can replace the protected phrase; the fence continues
 to constrain partial'n crossing readings, including at dials that exclude the accepted entry.
 
 An intentionally retained protection may have no established alternative readin'. Such a phrase uses

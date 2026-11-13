@@ -9,12 +9,20 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Preserve qualified currency names as written, including country/region qualifiers, across translation,
+  planning, lookup'n change alternatives. Keep buck/bucks for bare dollars, retaining counts and the
+  distinction between acronym US'n recipient pronoun us. Well, add shared lexical\-modifier source grammar
+  and exclusive phrase protections for whole\-expression readings.
+- Recognise written cardinal counts in nominal lookup even when tagged as nouns, for both currency and
+  other dictionary words; keep unrelated prefix words outside that scope. Preserve the whole expression
+  dollars'n cents with standalone dollar controls.
+
 - Filter entry pages by ID initial across Python, CLI and MCP, with filtered totals'n per\-initial
   counts under the same concept, theme'n eligibility settings.
 
 - Add separate concept sentence forms'n exact lookup search words without expanding source triggers.
   Crikey, let exact meaning names reach their own words even when incidental component readings differ.
-  Well, keep the frozen changes/card v3 shape unchanged at this foundation checkpoint.
+  So anyway, keep the frozen changes/card v3 shape unchanged at this foundation checkpoint.
 - Apply the marked sample's display names/search words and approved HEART_SPIRIT split. Add the six
   testimony-backed vocabulary forms plus rate/don't rate together, and puffed for BREATHLESS at
   level 1/Nan as shared English. Preserve scoring/literal controls and record actual testimony/sources.
@@ -43,7 +51,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 - Protect singular'n plural identity names such as `Native American` and `South Americans` in lookup.
   Well, keep a word inside a longer idiom from overriding a protected phrase: `the toss` stays as written,
-  while the complete death idiom remains discoverable. Struth, add the countable buck word `buck`/`bucks`
+  while the complete death idiom remains discoverable. Struth, add the countable dollar word `buck`/`bucks`
   from R75, retaining quantities'n currency labels; recognise counted noun queries such as `five dollars`.
 
 - Restore protection of the real plural `toss ups` and cover the spellin' `toss-ups`. Keep authored phrase protections inside capitalised
@@ -177,7 +185,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   flags'n minimum wording levels; label existin' agent\-produced riffs and contextual imagery honestly.
   Keep changes contract version 2 until the coordinated community\-dictionary contract slice.
 - Recognise agreement consistently across straight'n curly dialogue quotes without treatin' a quoted
-  word as a new clause. Mind ya, require explicit social\-event wording for party/function substitutions.
+  word as a new clause. Require explicit social\-event wording for party/function substitutions.
 
 - Add an offline trainin'\-label audit'n reject contradictory or self\-negative pairs before model
   construction. Generate wrong\-sense anchors through the canonical exclusion parser'n respect a

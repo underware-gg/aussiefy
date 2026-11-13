@@ -32,6 +32,8 @@ if TYPE_CHECKING:
     from .fences import Fence
 
 from . import morph
+from .nominal_modifiers import modifier_lengths
+from .pos import tag
 from .text import COMMON_STARTERS, Token, tokenize
 
 INTENSITY_RE = re.compile(r"@([1-5])\s*$")
@@ -232,6 +234,7 @@ SLOT_MATCHERS = {
     "obj": lambda t: t.norm in morph.OBJECT_PRONOUNS or is_name(t),
     "objposs": lambda t: t.norm in morph.POSSESSIVES or t.norm.endswith(("'s", "\u2019s")),
     "np": lambda t: False,   # multi-token; handled in match_at
+    "modifier": lambda t: False,  # a lexical noun modifier, not a bare count or determiner
     "will": lambda t: t.norm in ("will", "would", "shall"),
 }
 
@@ -257,7 +260,7 @@ def _assertion_width(element: Element, tokens: list[Token], boundary: int, *, be
     return int(0 <= index < len(tokens) and tokens[index].norm in element.values)
 
 
-def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = True) -> Match | None:
+def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = True, tags: list[str] | None = None) -> Match | None:
     """Match pattern starting at tokens[pos]; tokens is one sentence."""
     captures: dict[str, Token] = {}
     inflection = ""
@@ -315,6 +318,13 @@ def match_at(pattern: Pattern, tokens: list[Token], pos: int, *, exact: bool = T
                     if end is not None:
                         return end
                     captures.pop("np", None)
+            elif el.kind == "slot" and el.slot == "modifier":
+                for n in modifier_lengths(tokens, ti, tags):
+                    captures["modifier"] = phrase_token(tokens[ti:ti + n])
+                    end = rec(ei + 1, ti + n)
+                    if end is not None:
+                        return end
+                    captures.pop("modifier", None)
             elif el.kind == "slot":
                 if SLOT_MATCHERS[el.slot](tok):
                     captures[el.slot] = tok
@@ -367,9 +377,12 @@ class PatternIndex:
         norms = {t.norm for t in tokens}
         unindexed = [p for p, needs in self.unindexed if all(v & norms for v in needs)]
         out: list[Match] = []
+        tags = None
         for pos, tok in enumerate(tokens):
             for p in [p for p, needs in self.by_first.get(tok.norm, ()) if all(v & norms for v in needs)] + unindexed:
-                m = match_at(p, tokens, pos)
+                if tags is None and 'modifier' in p.slots:
+                    tags = tag([t.text for t in tokens])
+                m = match_at(p, tokens, pos, tags=tags)
                 if m:
                     out.append(m)
         return out

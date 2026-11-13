@@ -76,7 +76,9 @@ def _variant_signature(match, tokens):
         while end > match.end and tokens[end - 1].is_punct:
             end -= 1
     slots = match.pattern.slots
-    captures = [(name, token.start, token.end) for name, token in match.captures.items() if name in slots]
+    # A lexical modifier can change the reading (British pounds versus Australian pounds).
+    captures = [(name, token.start, token.end) for name, token in match.captures.items()
+                if name in slots and name != 'modifier']
     out = []
     for token in tokens[start:end]:
         slot = next(((name, first) for name, first, last in captures if first <= token.start < last), None)
@@ -98,7 +100,7 @@ class _WithoutFences:
 # Grammar scaffolds, never source-reading claims. Every generated witness must still
 # match the protection, and the normal reader and candidate checks assess its effect.
 _SLOTS = {'subj': 'they', 'be': 'are', 'have': 'have', 'do': 'do', 'poss': 'their',
-          'obj': 'them', 'objposs': 'their', 'np': 'the task', 'ing': 'working', 'will': 'will'}
+          'obj': 'them', 'objposs': 'their', 'np': 'the task', 'modifier': 'Australian', 'ing': 'working', 'will': 'will'}
 _GENERATED_LIMIT = 128
 
 

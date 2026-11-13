@@ -5,6 +5,14 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Preserve qualified currency names as written, including country/region qualifiers, across translation,
+  planning, lookup and change alternatives. Keep buck/bucks for bare dollars, retaining counts and the
+  distinction between acronym US and recipient pronoun us. Add shared lexical-modifier source grammar
+  and exclusive phrase protections for whole-expression readings.
+- Recognise written cardinal counts in nominal lookup even when tagged as nouns, for both currency and
+  other dictionary words; keep unrelated prefix words outside that scope. Preserve the whole expression
+  dollars and cents with standalone dollar controls.
+
 - Filter entry pages by ID initial across Python, CLI and MCP, with filtered totals and per-initial
   counts under the same concept, theme and eligibility settings.
 
