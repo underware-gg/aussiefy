@@ -14,13 +14,13 @@ import functools
 import inspect
 from typing import Any, Callable, Collection
 
-from .engine import Translator
+from .engine import Translator, default_translator
 from .errors import UserError
 from .policy import DOCUMENT_TYPES, LEVELS, VULGARITIES
 from .schema import REGISTERS, UNLOCKS
 
 from . import harness
-from .constructions import DEFAULT_LIMIT
+from .constructions import DEFAULT_LIMIT, ConstructionCatalog
 from .explore import DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE
 from .guide import style_guide_data
 
@@ -154,9 +154,16 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         return server.tool(description=_describe(fn.__doc__, hidden & set(signature.parameters)),
                            annotations=read_only)(run)
 
+    catalog = (translator or default_translator()).dictionary.construction_catalog
+    bulldust_max = catalog.max_results if catalog else ConstructionCatalog().max_results
+    if lookup_limit:
+        bulldust_max = min(bulldust_max, lookup_limit)
+    BulldustLimit = Annotated[int, Field(ge=1, le=bulldust_max)]
+    bulldust_default = min(DEFAULT_LIMIT, bulldust_max)
+
     @tool
     def aussie_bulldust(concept: str | None = None, family: str | None = None, parts: dict[str, str] | None = None,
-                        level: Level = 5, seed: Seed = 0, vulgarity: Vulgarity = None, limit: int = DEFAULT_LIMIT,
+                        level: Level = 5, seed: Seed = 0, vulgarity: Vulgarity = None, limit: BulldustLimit = bulldust_default,
                         registers: Registers = None, regions: Regions = None, unlock: Unlock = None,
                         embellishment: int | str | None = None, document_type: DocumentType = "general",
                         document_config: dict | None = None, themes: Themes = None, invention: Invention = None) -> dict[str, Any]:

@@ -9,12 +9,15 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Advertise'n enforce the loaded constructor/host result cap in the bulldust MCP schema,
+  rejecting out\-of\-range calls before they enter the toolkit.
+
 - Activate the accepted changes/cards v3 contract together: rich entry, construction'n imagery cards;
   renderin'\-local part/riff spans; persistent unique option keys; source matches; attributable bulldust;
   dictionary/tunin' headers; coded warnings'n versioned lookup, including empty results.
 - Add reviewed construction fallback before the substitution roll'n all constructed openers under
   the invention switch \(Troppo on, otherwise off\). Share ordinary fit/realisation'n agent scaffold.
-  Well, expose exact top\-level themes/invention, public popularity/preferences'n host\-only MCP preference
+  So anyway, expose exact top\-level themes/invention, public popularity/preferences'n host\-only MCP preference
   hooks with independent capability controls'n a tool allowlist.
 - Add source/dictionary/seed\-scoped request pins for entries, construction recipes, stacks, riffs,
   imagery'n garnish. Keep hard eligibility/protection checks, reject unused picks, share one packet

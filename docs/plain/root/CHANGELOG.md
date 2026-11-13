@@ -5,6 +5,9 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Advertise and enforce the loaded constructor/host result cap in the bulldust MCP schema,
+  rejecting out-of-range calls before they enter the toolkit.
+
 - Activate the accepted changes/cards v3 contract together: rich entry, construction and imagery cards;
   rendering-local part/riff spans; persistent unique option keys; source matches; attributable bulldust;
   dictionary/tuning headers; coded warnings and versioned lookup, including empty results.

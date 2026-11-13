@@ -162,3 +162,26 @@ def test_two_servers_keep_their_own_caps_and_share_one_translator(monkeypatch):
     asyncio.run(wide.call_tool("aussie_translate", {"text": text}))
     asyncio.run(narrow.call_tool("aussie_translate", {"text": text[:40]}))
     assert seen == [translator, translator]
+
+
+@pytest.mark.parametrize('lookup_limit', [None, 3, 50])
+@pytest.mark.parametrize('max_results', [None, 7])
+def test_bulldust_limit_is_advertised_and_rejected_before_toolkit(translator, monkeypatch, lookup_limit, max_results):
+    from dataclasses import replace
+
+    catalog = replace(translator.dictionary.construction_catalog, max_results=max_results) if max_results else None
+    tr = Translator(replace(translator.dictionary, construction_catalog=catalog), lookup_embedder=None)
+    server = build_server(translator=tr, lookup_limit=lookup_limit)
+    maximum = min(max_results or 20, lookup_limit or 20)
+    schema = _tools(server)['aussie_bulldust'].input_schema['properties']['limit']
+    assert schema['minimum'] == 1 and schema['maximum'] == maximum
+    assert schema['default'] == min(5, maximum)
+    seen = []
+    monkeypatch.setattr(harness, 'bulldust', lambda *a, **k: seen.append(k['limit']) or {})
+    asyncio.run(server.call_tool('aussie_bulldust', {}))
+    asyncio.run(server.call_tool('aussie_bulldust', {'limit': maximum}))
+    assert seen == [schema['default'], maximum]
+    for invalid in [0, maximum + 1]:
+        with pytest.raises(ToolError):
+            asyncio.run(server.call_tool('aussie_bulldust', {'limit': invalid}))
+    assert seen == [schema['default'], maximum]

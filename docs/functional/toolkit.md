@@ -102,7 +102,8 @@ messages as tool errors. `lookup` requires `limit >= 1` and marks each riff's `b
 A hosted MCP server narrows the tools by capability ([DD-028](../architecture/decisions/dd-028-hosted-mcp-capabilities.md)).
 `build_server(translator=…, allow_unlock=False, allow_include_gated=False, allow_document_config=False, max_chars=…, max_query_chars=…,
 lookup_limit=…)` independently hides translation's `unlock` and discovery's `include_gated`, hides `document_config` and the `custom` document type,
-caps `text` and `original`, and caps lookup's `query` and `limit`, along with entry-page sizes. The defaults serve everything. Every tool is annotated read-only,
+caps `text` and `original`, and caps lookup's `query` and `limit`, along with entry-page sizes. Bulldust advertises `1 <= limit <= min(max_results, lookup_limit)`
+(or the loaded constructor maximum without a host cap), with a default that fits. Over-limit calls fail schema validation before entering the toolkit. The defaults serve everything. Every tool is annotated read-only,
 non-destructive, idempotent and closed-world.
 `allow_include_gated` defaults to true even when `allow_unlock` is false, so a host can show held-back
 terms with their provenance without unlocking automatic translations. Hidden options keep their closed
