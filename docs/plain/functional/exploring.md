@@ -24,7 +24,15 @@ loaded dictionary's content identity, so callers can associate results with the 
 
 ## Pages, cards and random entries
 
-`list_entries` takes optional `concept` and `theme` filters. Both together mean their intersection. Concept
+`list_entries` takes optional `concept`, `theme` and `initial` filters, which intersect. `initial` is
+a lowercase `a`–`z`, or `#` for other characters, using the entry ID's first character exactly.
+It does not strip articles from the displayed form or rewrite legacy IDs: `kick-in-guts` belongs under
+K even if its form starts with “a”; `the-bush` belongs under T. CLI uses `entries --initial k` (quote
+`'#'` in a shell); MCP uses `aussie_entries(initial="k")`.
+
+`total` counts entries after the initial filter. `initial_counts` always includes all 27 keys with zero
+counts where needed, under the other filters and permissions, before initial filtering or pagination.
+It stays the same across pages and selected initials so callers can grey out empty letters. Concept
 IDs ignore case; themes use their registered names. Unknown filters raise `UserError`. Entries are ordered
 by ID, independently of YAML file order. `offset` defaults to 0 and must be a non-negative integer; `limit`
 defaults to 20 and must be 1–100. Follow `next_offset` until it is null. `total` is the number of eligible

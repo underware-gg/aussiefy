@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from string import ascii_lowercase
+
 from .engine import resolve_request
 from .cards import CARD_VERSION
 
@@ -15,6 +17,7 @@ from .policy import dial_rejection, parse_embellishment, roll
 
 DEFAULT_PAGE_SIZE = 20
 MAX_PAGE_SIZE = 100
+INITIALS = tuple(ascii_lowercase + "#")
 
 
 def _context(translator, level, vulgarity, embellishment, document_type, document_config):
@@ -65,19 +68,27 @@ def _outcome(page, items):
     return outcomes.MATCHED if page else outcomes.PAGE_EXHAUSTED if items else outcomes.NOTHING_FITS
 
 
-def list_entries(*, concept: str | None = None, theme: str | None = None, offset: int = 0,
+def list_entries(*, concept: str | None = None, theme: str | None = None, initial: str | None = None, offset: int = 0,
                  limit: int = DEFAULT_PAGE_SIZE, level: int | str = 5, vulgarity: int | str | None = None,
                  include_gated: bool = False, embellishment: int | str | None = None,
                  document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None,
                  translator: Translator | None = None) -> dict:
-    """List a stable page of entries; concept and theme filters intersect. Omitted entries never appear."""
+    """List a stable page; concept, theme and ID initial filters intersect. Counts respect all other filters."""
+    if initial is not None and (not isinstance(initial, str) or initial not in INITIALS):
+        raise UserError("initial must be a lowercase letter a-z or #")
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
     concept, theme = _filters(d, concept, theme)
     entries = _entries(d, eff, concept, theme, include_gated)
+    buckets = {letter: [] for letter in INITIALS}
+    for entry in entries:
+        buckets[entry.id[0] if entry.id[0] in ascii_lowercase else "#"].append(entry)
+    initial_counts = {letter: len(items) for letter, items in buckets.items()}
+    if initial is not None:
+        entries = buckets[initial]
     page, next_offset = _page(entries, offset, limit)
-    return {**envelope, "concept": concept, "theme": theme, "offset": offset, "limit": limit,
-            "total": len(entries), "next_offset": next_offset, "outcome": _outcome(page, entries),
+    return {**envelope, "concept": concept, "theme": theme, "initial": initial, "initial_counts": initial_counts,
+            "offset": offset, "limit": limit, "total": len(entries), "next_offset": next_offset, "outcome": _outcome(page, entries),
             "results": [_card(entry, eff, setting) for entry in page]}
 
 

@@ -21,7 +21,7 @@ from .schema import REGISTERS, UNLOCKS
 
 from . import harness
 from .constructions import DEFAULT_LIMIT, ConstructionCatalog
-from .explore import DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE
+from .explore import DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE, INITIALS
 from .guide import style_guide_data
 
 _CORE = """Tools for rewriting English as genuine Australian English (levels 1-5).
@@ -194,16 +194,18 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
     PageLimit = Annotated[int, Field(ge=1, le=min(MAX_PAGE_SIZE, lookup_limit) if lookup_limit else MAX_PAGE_SIZE)]
     page_default = min(DEFAULT_PAGE_SIZE, lookup_limit) if lookup_limit else DEFAULT_PAGE_SIZE
     Offset = Annotated[int, Field(ge=0)]
+    Initial = Literal[tuple(INITIALS)] | None
 
     @tool
-    def aussie_entries(concept: str | None = None, theme: str | None = None, offset: Offset = 0,
+    def aussie_entries(concept: str | None = None, theme: str | None = None, initial: Initial = None, offset: Offset = 0,
                        limit: PageLimit = page_default,
                        level: Level = 5, vulgarity: Vulgarity = None, include_gated: bool = False,
                        embellishment: int | str | None = None, document_type: DocumentType = "general",
                        document_config: dict | None = None, themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
-        """List a stable page of entry cards by concept and/or theme. Filters intersect.
+        """List a stable page of entry cards by concept, theme and ID initial (a-z or #). Filters intersect.
+        total counts the filtered set; initial_counts counts all initials under the other filters, before pagination.
         include_gated also returns entries held back as doubtful (marked as such)."""
-        return harness.list_entries(concept=concept, theme=theme, offset=offset, limit=limit, level=level,
+        return harness.list_entries(concept=concept, theme=theme, initial=initial, offset=offset, limit=limit, level=level,
                                     vulgarity=vulgarity, include_gated=include_gated, embellishment=embellishment,
                                     document_type=document_type, document_config=document_config, translator=translator, themes=themes, invention=invention)
 

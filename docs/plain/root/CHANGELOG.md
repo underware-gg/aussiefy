@@ -5,6 +5,9 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Filter entry pages by ID initial across Python, CLI and MCP, with filtered totals and per-initial
+  counts under the same concept, theme and eligibility settings.
+
 - Add separate concept sentence forms and exact lookup search words without expanding source triggers.
   Let exact meaning names reach their own words even when incidental component readings differ.
   Keep the frozen changes/card v3 shape unchanged at this foundation checkpoint.

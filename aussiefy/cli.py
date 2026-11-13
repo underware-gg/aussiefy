@@ -43,7 +43,7 @@ from .loader import load_dictionary
 from . import claude
 from .errors import UserError
 from .dialect import ENGLISHES
-from .explore import DEFAULT_PAGE_SIZE
+from .explore import DEFAULT_PAGE_SIZE, INITIALS
 from .names import SHAPES
 from .loader import load_genres
 from .markup import MARKUPS
@@ -411,7 +411,7 @@ def cmd_explore(args) -> int:
         out = harness.random_entry(seed=args.seed, concept=args.concept, theme=args.theme, **common)
         rows = [out["entry"]] if out["entry"] else []
     else:
-        out = harness.list_entries(concept=args.concept, theme=args.theme, offset=args.offset, limit=args.limit, **common)
+        out = harness.list_entries(concept=args.concept, theme=args.theme, initial=args.initial, offset=args.offset, limit=args.limit, **common)
         rows = out["results"]
     if args.json:
         _json(out)
@@ -1009,6 +1009,7 @@ def build_parser() -> argparse.ArgumentParser:
             ex.add_argument("--concept")
             ex.add_argument("--theme")
         if command == "entries":
+            ex.add_argument("--initial", choices=INITIALS, help="entry ID initial: a-z, or # for other characters")
             ex.add_argument("--offset", type=int, default=0)
             ex.add_argument("--limit", type=int, default=DEFAULT_PAGE_SIZE)
         ex.set_defaults(func=cmd_explore)

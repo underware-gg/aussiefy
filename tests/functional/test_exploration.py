@@ -453,3 +453,43 @@ def test_cli_preserves_wordless_outcome_with_independent_object_offers(capsys, j
         assert result["outcome"] == "no_word_yet" and result["results"] and result["meanings"]
     else:
         assert "a bullshitter" in output and "meaning ACCEPT_AS_TRUE" in output
+
+
+def test_initial_pages_use_ids_and_counts_respect_the_eligible_set(dictionary):
+    entries={
+        'kick-in-guts':Entry('kick-in-guts','a kick in the guts',('HUNGRY',),'np'),
+        'kiwi':Entry('kiwi','kiwi',('HUNGRY',),'np'),
+        'the-bush':Entry('the-bush','bush',('HUNGRY',),'np'),
+        '3d-term':Entry('3d-term','numbered term',('HUNGRY',),'np'),
+        'keeper':Entry('keeper','kept back',('HUNGRY',),'np',status='gate'),
+        'k-omitted':Entry('k-omitted','omitted',('HUNGRY',),'np',status='omit'),
+        'k-other':Entry('k-other','other concept',('THIRSTY',),'np')}
+    tr=Translator(replace(dictionary,entries=entries),lookup_embedder=None)
+    page=list_entries(initial='k',concept='HUNGRY',limit=1,translator=tr)
+    assert page['initial']=='k' and page['total']==2 and page['next_offset']==1
+    assert [r['id'] for r in page['results']]==['kick-in-guts']
+    assert page['initial_counts']['k']==2 and page['initial_counts']['t']==1 and page['initial_counts']['#']==1
+    assert page['initial_counts']['z']==0 and len(page['initial_counts'])==27
+    assert sum(page['initial_counts'].values())==4
+    end=list_entries(initial='k',concept='HUNGRY',offset=2,translator=tr)
+    assert end['outcome']=='page_exhausted' and end['total']==2 and end['initial_counts']==page['initial_counts']
+    empty=list_entries(initial='z',concept='HUNGRY',translator=tr)
+    assert empty['outcome']=='nothing_fits' and empty['total']==0 and empty['initial_counts']==page['initial_counts']
+    assert [r['id'] for r in list_entries(initial='#',concept='HUNGRY',translator=tr)['results']]==['3d-term']
+    assert list_entries(initial='k',concept='HUNGRY',include_gated=True,translator=tr)['total']==3
+    assert list_entries(initial='k',translator=tr)['total']==3
+
+
+def test_initial_counts_follow_theme_permissions_and_filters(translator):
+    options={'translator':translator,'concept':'THIRSTY','theme':'sex','vulgarity':1}
+    result=list_entries(**options)
+    assert sum(result['initial_counts'].values())==result['total']
+    assert result['initial_counts']['d'] >= 1
+    disabled=list_entries(**options,themes={'sex':False})
+    assert disabled['total']==0 and sum(disabled['initial_counts'].values())==0
+
+
+@pytest.mark.parametrize('initial',['', 'K', 'ab', '1', '*', 3, True, []])
+def test_initial_filter_rejects_invalid_values(translator,initial):
+    with pytest.raises(UserError,match='initial'):
+        list_entries(initial=initial,translator=translator)

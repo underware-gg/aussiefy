@@ -24,13 +24,13 @@ VALUES = {"family": "hungry-enough-to", "parts": {"state": "hungry", "act": "sau
               "profile": {"garnish": {"opener": 1}, "max_garnish": {"opener": 1}}},
           "embellishment": 2, "suggest": False, "markdown": False, "concept": "HUNGRY", "theme": "sex",
           "themes": {"drinking": False}, "invention": True, "popularity": True, "preferences": [],
-          "entry_id": "stoked", "offset": 2, "shape": "place"}
+          "entry_id": "stoked", "initial": "k", "offset": 2, "shape": "place"}
 SUBJECT = {"list_entries": (None, None), "list_wordless_meanings": (None, None), "random_entry": (None, None), "suggest_name": (None, None),
            "get_entry": ("entry_id", "stoked"), "variations": ("family", "hungry-enough-to"), "lookup": ("query", "very tired"), "lint": ("text", "G'day mate."), "plan": ("text", "She was tired."),
            "translate": ("text", "She was tired."), "bulldust": ("concept", "HUNGRY"), "guide": (None, None),
            "verify": ("text", "She was knackered.")}
 # CLI flags for each parameter (the CLI says --region for one region list, as people type it)
-FLAGS = {"family": ["--family", "hungry-enough-to"], "parts": ["--parts", '{"state":"hungry","act":"sausage-shadow"}'], "level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity", "1"],
+FLAGS = {"initial": ["--initial", "k"], "family": ["--family", "hungry-enough-to"], "parts": ["--parts", '{"state":"hungry","act":"sausage-shadow"}'], "level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity", "1"],
          "themes": ["--themes", '{"drinking":false}'], "invention": ["--invention"], "popularity": ["--popularity"], "preferences": ["--preferences", "[]"],
          "variety": ["--variety", "2"], "registers": ["--registers", "current,dated"],
          "regions": ["--region", "qld"], "unlock": ["--unlock", "misreadable"], "limit": ["--limit", "3"],
