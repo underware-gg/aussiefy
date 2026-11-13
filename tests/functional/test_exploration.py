@@ -15,7 +15,7 @@ import yaml
 
 
 def test_pages_are_stable_complete_and_distinguish_exhaustion(dictionary):
-    entries = {f"term-{n:03}": Entry(f"term-{n:03}", f"thing {n}", ("HUNGRY",), "np") for n in range(125)}
+    entries = {f"term-{n:03}": Entry(f"term-{n:03}", f"thing {n:03}", ("HUNGRY",), "np") for n in range(125)}
     tr = Translator(replace(dictionary, entries=entries), lookup_embedder=None)
     reverse = Translator(replace(dictionary, entries=dict(reversed(list(entries.items())))), lookup_embedder=None)
     seen, offset = [], 0
@@ -455,20 +455,20 @@ def test_cli_preserves_wordless_outcome_with_independent_object_offers(capsys, j
         assert "a bullshitter" in output and "meaning ACCEPT_AS_TRUE" in output
 
 
-def test_initial_pages_use_ids_and_counts_respect_the_eligible_set(dictionary):
+def test_initial_pages_use_headwords_and_counts_respect_the_eligible_set(dictionary):
     entries={
         'kick-in-guts':Entry('kick-in-guts','a kick in the guts',('HUNGRY',),'np'),
         'kiwi':Entry('kiwi','kiwi',('HUNGRY',),'np'),
         'the-bush':Entry('the-bush','bush',('HUNGRY',),'np'),
-        '3d-term':Entry('3d-term','numbered term',('HUNGRY',),'np'),
+        '3d-term':Entry('3d-term','3D term',('HUNGRY',),'np'),
         'keeper':Entry('keeper','kept back',('HUNGRY',),'np',status='gate'),
         'k-omitted':Entry('k-omitted','omitted',('HUNGRY',),'np',status='omit'),
-        'k-other':Entry('k-other','other concept',('THIRSTY',),'np')}
+        'k-other':Entry('k-other','kooky',('THIRSTY',),'np')}
     tr=Translator(replace(dictionary,entries=entries),lookup_embedder=None)
     page=list_entries(initial='k',concept='HUNGRY',limit=1,translator=tr)
     assert page['initial']=='k' and page['total']==2 and page['next_offset']==1
     assert [r['id'] for r in page['results']]==['kick-in-guts']
-    assert page['initial_counts']['k']==2 and page['initial_counts']['t']==1 and page['initial_counts']['#']==1
+    assert page['initial_counts']['k']==2 and page['initial_counts']['b']==1 and page['initial_counts']['#']==1
     assert page['initial_counts']['z']==0 and len(page['initial_counts'])==27
     assert sum(page['initial_counts'].values())==4
     end=list_entries(initial='k',concept='HUNGRY',offset=2,translator=tr)
@@ -493,3 +493,30 @@ def test_initial_counts_follow_theme_permissions_and_filters(translator):
 def test_initial_filter_rejects_invalid_values(translator,initial):
     with pytest.raises(UserError,match='initial'):
         list_entries(initial=initial,translator=translator)
+
+
+def test_headword_collation_strips_whole_articles_and_uses_id_only_for_ties(dictionary):
+    entries = {
+        'z-counter': Entry('z-counter', 'a counter meal', ('HUNGRY',), 'np'),
+        'a-hanrahan': Entry('a-hanrahan', 'a Hanrahan', ('HUNGRY',), 'np'),
+        'z-earbashing': Entry('z-earbashing', 'AN earbashing', ('HUNGRY',), 'np'),
+        'the-bush': Entry('the-bush', 'The bush', ('HUNGRY',), 'np'),
+        'a-numeric': Entry('a-numeric', 'a 3D term', ('HUNGRY',), 'np'),
+        'z-first': Entry('z-first', 'a kangaroo', ('HUNGRY',), 'np'),
+        'a-last': Entry('a-last', 'the kiwi', ('HUNGRY',), 'np'),
+        'a-tie': Entry('a-tie', 'an apple', ('HUNGRY',), 'np'),
+        'z-tie': Entry('z-tie', 'the apple', ('HUNGRY',), 'np'),
+        'z-article-prefix': Entry('z-article-prefix', 'another thing', ('HUNGRY',), 'np'),
+    }
+    tr = Translator(replace(dictionary, entries=entries), lookup_embedder=None)
+    reverse = Translator(replace(dictionary, entries=dict(reversed(list(entries.items())))), lookup_embedder=None)
+    page = list_entries(translator=tr)
+    assert page == list_entries(translator=reverse)
+    assert [x['id'] for x in page['results']] == [
+        'a-numeric', 'z-article-prefix', 'a-tie', 'z-tie', 'the-bush', 'z-counter',
+        'z-earbashing', 'a-hanrahan', 'z-first', 'a-last']
+    assert page['initial_counts']['a'] == 3
+    assert page['initial_counts']['h'] == page['initial_counts']['c'] == page['initial_counts']['#'] == 1
+    assert [x['id'] for x in list_entries(initial='k', translator=tr)['results']] == ['z-first', 'a-last']
+    assert list_entries(initial='k', limit=1, offset=1, translator=tr)['results'][0]['id'] == 'a-last'
+    assert get_entry('a-hanrahan', translator=tr)['entry']['id'] == 'a-hanrahan'

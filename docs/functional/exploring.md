@@ -26,19 +26,31 @@ suggestions for independently understood object words. Both text and JSON output
 Lookup, entry details, pages, random entries, name suggestions and variations carry `dictionary_id`, the
 loaded dictionary's content identity, so callers can associate results with the same data revision.
 
+## Entry IDs and URLs
+
+An entry ID is an opaque dictionary key, separate from its headword: changing display wording need not
+change the ID, and collation never rewrites it. Overlay patches cannot rename IDs. The current contract
+does not guarantee permanent IDs across releases and has no compatibility alias or redirect resolver.
+If a maintainer removes or renames an ID, `get_entry(old_id)` returns `not_in_dictionary`; there is no
+rename target in that response. Compare ID inventories across pinned `dictionary_id` revisions to see
+additions and removals; a rename cannot be distinguished from a deletion plus an addition automatically.
+Hosts publishing permanent entry URLs must retain their own redirect history or arrange compatibility
+aliases before an ID migration. Headword changes alone should retain the existing ID.
+
 ## Pages, cards and random entries
 
 `list_entries` takes optional `concept`, `theme` and `initial` filters, which intersect. `initial` is
-a lowercase `a`–`z`, or `#` for other characters, using the entry ID's first character exactly.
-It does not strip articles from the displayed form or rewrite legacy IDs: `kick-in-guts` belongs under
-K even if its form starts with “a”; `the-bush` belongs under T. CLI uses `entries --initial k` (quote
+a lowercase `a`–`z`, or `#` for other characters. The key is the headword (`form`), lowercased with
+whitespace normalised and one leading whole-word “a”, “an” or “the” removed. Both the letter and order
+within a letter use that key: “a counter meal” is under C, “a Hanrahan” under H, and “the bush” under B.
+Equal keys use the entry ID as a stable tie-break. IDs and displayed forms are unchanged. CLI uses `entries --initial k` (quote
 `'#'` in a shell); MCP uses `aussie_entries(initial="k")`.
 
 `total` counts entries after the initial filter. `initial_counts` always includes all 27 keys with zero
 counts where needed, under the other filters and permissions, before initial filtering or pagination.
 It stays the same across pages and selected initials so callers can grey out empty letters. Concept
 IDs ignore case; themes use their registered names. Unknown filters raise `UserError`. Entries are ordered
-by ID, independently of YAML file order. `offset` defaults to 0 and must be a non-negative integer; `limit`
+by that article-free headword key, independently of YAML file order. `offset` defaults to 0 and must be a non-negative integer; `limit`
 defaults to 20 and must be 1–100. Follow `next_offset` until it is null. `total` is the number of eligible
 entries, not the number on the current page. Offsets are relative to the same dictionary and settings; they
 are not durable cursors across dictionary updates.

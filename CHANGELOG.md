@@ -9,9 +9,12 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Correct Explore letter buckets, counts'n page ordering to use headwords with a leadin' a/an/the
+  removed, retaining entry IDs'n random\-entry seed ordering. Document current ID/URL compatibility limits.
+
 - Preserve qualified currency names as written, including country/region qualifiers, across translation,
   planning, lookup'n change alternatives. Keep buck/bucks for bare dollars, retaining counts and the
-  distinction between acronym US'n recipient pronoun us. Well, add shared lexical\-modifier source grammar
+  distinction between acronym US'n recipient pronoun us. So anyway, add shared lexical\-modifier source grammar
   and exclusive phrase protections for whole\-expression readings.
 - Recognise written cardinal counts in nominal lookup even when tagged as nouns, for both currency and
   other dictionary words; keep unrelated prefix words outside that scope. Preserve the whole expression

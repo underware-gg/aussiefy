@@ -1009,7 +1009,7 @@ def build_parser() -> argparse.ArgumentParser:
             ex.add_argument("--concept")
             ex.add_argument("--theme")
         if command == "entries":
-            ex.add_argument("--initial", choices=INITIALS, help="entry ID initial: a-z, or # for other characters")
+            ex.add_argument("--initial", choices=INITIALS, help="headword initial ignoring leading a/an/the: a-z, or # for other characters")
             ex.add_argument("--offset", type=int, default=0)
             ex.add_argument("--limit", type=int, default=DEFAULT_PAGE_SIZE)
         ex.set_defaults(func=cmd_explore)

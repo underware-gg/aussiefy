@@ -5,6 +5,9 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Correct Explore letter buckets, counts and page ordering to use headwords with a leading a/an/the
+  removed, retaining entry IDs and random-entry seed ordering. Document current ID/URL compatibility limits.
+
 - Preserve qualified currency names as written, including country/region qualifiers, across translation,
   planning, lookup and change alternatives. Keep buck/bucks for bare dollars, retaining counts and the
   distinction between acronym US and recipient pronoun us. Add shared lexical-modifier source grammar

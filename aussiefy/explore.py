@@ -11,6 +11,7 @@ from . import discovery_outcomes as outcomes
 from .cards import full_entry_card, shows_riffs
 from .engine import Translator, default_translator
 from .errors import UserError
+from .terms import fold
 from .evidence import register_rejection
 from .genre import resolve_document
 from .policy import dial_rejection, parse_embellishment, roll
@@ -49,6 +50,12 @@ def _entries(dictionary, eff, concept, theme, include_gated):
                    and not register_rejection(entry, eff.registers)), key=lambda entry: entry.id)
 
 
+def _headword(entry):
+    text = fold(entry.form)
+    first, separator, rest = text.partition(" ")
+    return rest if separator and first in {"a", "an", "the"} else text
+
+
 def _card(entry, eff, setting):
     return full_entry_card(entry, eff.vulgarity, shows_riffs(setting), permitted_themes=eff.theme_policy,
                            registers=eff.registers, allow_misreadable=eff.allow_misreadable)
@@ -73,16 +80,18 @@ def list_entries(*, concept: str | None = None, theme: str | None = None, initia
                  include_gated: bool = False, embellishment: int | str | None = None,
                  document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None,
                  translator: Translator | None = None) -> dict:
-    """List a stable page; concept, theme and ID initial filters intersect. Counts respect all other filters."""
+    """List a stable page; concept, theme and article-free headword initial filters intersect. Counts respect all other filters."""
     if initial is not None and (not isinstance(initial, str) or initial not in INITIALS):
         raise UserError("initial must be a lowercase letter a-z or #")
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
     concept, theme = _filters(d, concept, theme)
-    entries = _entries(d, eff, concept, theme, include_gated)
+    entries = sorted(_entries(d, eff, concept, theme, include_gated),
+                     key=lambda entry: (_headword(entry), entry.id))
     buckets = {letter: [] for letter in INITIALS}
     for entry in entries:
-        buckets[entry.id[0] if entry.id[0] in ascii_lowercase else "#"].append(entry)
+        initial_letter = _headword(entry)[0]
+        buckets[initial_letter if initial_letter in ascii_lowercase else "#"].append(entry)
     initial_counts = {letter: len(items) for letter, items in buckets.items()}
     if initial is not None:
         entries = buckets[initial]

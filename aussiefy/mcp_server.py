@@ -202,7 +202,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                        level: Level = 5, vulgarity: Vulgarity = None, include_gated: bool = False,
                        embellishment: int | str | None = None, document_type: DocumentType = "general",
                        document_config: dict | None = None, themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
-        """List a stable page of entry cards by concept, theme and ID initial (a-z or #). Filters intersect.
+        """List a stable page of entry cards by concept, theme and headword initial (a-z or #), ignoring leading a/an/the. Filters intersect.
         total counts the filtered set; initial_counts counts all initials under the other filters, before pagination.
         include_gated also returns entries held back as doubtful (marked as such)."""
         return harness.list_entries(concept=concept, theme=theme, initial=initial, offset=offset, limit=limit, level=level,
