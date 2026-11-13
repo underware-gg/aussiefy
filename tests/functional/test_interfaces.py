@@ -12,7 +12,7 @@ from aussiefy import harness
 
 TOOLS = {"aussie_entries": harness.list_entries, "aussie_wordless_meanings": harness.list_wordless_meanings,
          "aussie_entry": harness.get_entry,
-         "aussie_random_entry": harness.random_entry, "aussie_suggest_name": harness.suggest_name,
+         "aussie_meaning_quiz": harness.meaning_quiz, "aussie_random_entry": harness.random_entry, "aussie_suggest_name": harness.suggest_name,
          "aussie_variations": harness.variations, "aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_guide": harness.guide,
          "aussie_bulldust": harness.bulldust, "aussie_plan": harness.plan, "aussie_translate": harness.translate, "aussie_verify": harness.verify}
 
@@ -25,7 +25,7 @@ VALUES = {"family": "hungry-enough-to", "parts": {"state": "hungry", "act": "sau
           "embellishment": 2, "suggest": False, "markdown": False, "concept": "HUNGRY", "theme": "sex",
           "themes": {"drinking": False}, "invention": True, "popularity": True, "preferences": [],
           "entry_id": "stoked", "initial": "k", "offset": 2, "shape": "place"}
-SUBJECT = {"list_entries": (None, None), "list_wordless_meanings": (None, None), "random_entry": (None, None), "suggest_name": (None, None),
+SUBJECT = {"meaning_quiz": (None, None), "list_entries": (None, None), "list_wordless_meanings": (None, None), "random_entry": (None, None), "suggest_name": (None, None),
            "get_entry": ("entry_id", "stoked"), "variations": ("family", "hungry-enough-to"), "lookup": ("query", "very tired"), "lint": ("text", "G'day mate."), "plan": ("text", "She was tired."),
            "translate": ("text", "She was tired."), "bulldust": ("concept", "HUNGRY"), "guide": (None, None),
            "verify": ("text", "She was knackered.")}
@@ -118,13 +118,13 @@ def test_cli_exposes_every_toolkit_parameter():
             assert dests[param] == default, (command, param)
 
 
-@pytest.mark.parametrize("command", ["lookup", "lint", "guide", "plan", "verify", "bulldust"])
+@pytest.mark.parametrize("command", ["lookup", "lint", "guide", "plan", "verify", "bulldust", "meaning_quiz"])
 def test_cli_forwards_every_argument(command, monkeypatch, tmp_path, capsys):
     from aussiefy.cli import main
 
     fn = getattr(harness, command)
     calls = _spy(monkeypatch, command)
-    argv = [command, "--json"] if command != "plan" else [command]
+    argv = [command.replace("_", "-"), "--json"] if command != "plan" else [command]
     for param in _params(fn):
         argv += FLAGS.get(param, [])
     if "original" in _params(fn):
@@ -193,5 +193,5 @@ def test_toolkit_options_are_keyword_only():
 
 
 def test_python_api_exports_the_toolkit():
-    for name in ("list_entries", "list_wordless_meanings", "get_entry", "random_entry", "suggest_name", "variations", "bulldust", "translate", "lookup", "lint", "guide", "plan", "verify", "yarn", "default_translator"):
+    for name in ("list_entries", "list_wordless_meanings", "get_entry", "random_entry", "meaning_quiz", "suggest_name", "variations", "bulldust", "translate", "lookup", "lint", "guide", "plan", "verify", "yarn", "default_translator"):
         assert callable(getattr(aussiefy, name)), name

@@ -5,6 +5,9 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Add seeded meaning quizzes across Python, CLI and MCP: four gloss options, bidirectional lookup
+  exclusions, ranked distractor bands, a reveal card and an explicit trigram ranking fallback.
+
 - Correct Explore letter buckets, counts and page ordering to use headwords with a leading a/an/the
   removed, retaining entry IDs and random-entry seed ordering. Document current ID/URL compatibility limits.
 
@@ -16,7 +19,7 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
   other dictionary words; keep unrelated prefix words outside that scope. Preserve the whole expression
   dollars and cents with standalone dollar controls.
 
-- Filter entry pages by ID initial across Python, CLI and MCP, with filtered totals and per-initial
+- Filter entry pages by headword initial across Python, CLI and MCP, with filtered totals and per-initial
   counts under the same concept, theme and eligibility settings.
 
 - Add separate concept sentence forms and exact lookup search words without expanding source triggers.

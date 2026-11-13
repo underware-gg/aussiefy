@@ -398,6 +398,25 @@ def cmd_bulldust(args) -> int:
     return 0 if out["results"] else 1
 
 
+def cmd_meaning_quiz(args) -> int:
+    from . import harness
+
+    out = harness.meaning_quiz(seed=args.seed, translator=_translator(args), include_gated=args.include_gated,
+                              embellishment=args.embellishment, **_document(args), **_policy(args))
+    if args.json:
+        _json(out)
+    else:
+        _warn(out['policy_warnings'])
+        if out['entry']:
+            print(out['entry']['form'])
+            for i, option in enumerate(out['options'], 1):
+                print(f"  {i}. {option['text']}")
+            print(f"Answer: {out['answer'] + 1}. {out['entry']['gloss']}")
+        else:
+            print('No meaning quiz fits these settings.')
+    return 0 if out['outcome'] == 'matched' else 1
+
+
 def cmd_explore(args) -> int:
     from . import harness
 
@@ -998,6 +1017,11 @@ def build_parser() -> argparse.ArgumentParser:
     lk.add_argument("--short", action="store_true", help="each result as its form, gloss, frame, level and vulgarity")
     lk.add_argument("--unlock", help="comma list of permitted held-back flags")
     lk.set_defaults(func=cmd_lookup)
+
+    mq = sub.add_parser("meaning-quiz", parents=[*toolkit, embellished, seeded],
+                        help="a seeded term with four meanings, its answer and entry card")
+    mq.add_argument("--include-gated", action="store_true", help="also permit held-back terms")
+    mq.set_defaults(func=cmd_meaning_quiz)
 
     for command in ("entries", "entry", "random-entry"):
         ex = sub.add_parser(command, parents=[*toolkit, embellished, *([seeded] if command == "random-entry" else [])],

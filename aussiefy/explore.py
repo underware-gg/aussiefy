@@ -152,3 +152,37 @@ def suggest_name(*, seed: int = 0, shape: str | None = None, translator: Transla
     from .names import generate_name
     dictionary = (translator or default_translator()).dictionary
     return {**generate_name(dictionary, seed=seed, shape=shape), 'dictionary_id': dictionary.identity, 'tuning': {'popularity': False, 'preferences': 0}}
+
+
+def meaning_quiz(*, seed: int = 0, level: int | str = 5, vulgarity: int | str | None = None,
+                 include_gated: bool = False, embellishment: int | str | None = None,
+                 document_type: str = "general", document_config: dict | None = None,
+                 themes: dict[str, bool] | None = None, invention: bool | None = None,
+                 translator: Translator | None = None) -> dict:
+    """A seeded entry and four gloss options; the answer and full card are ready for the caller's reveal."""
+    from .embed import NgramEmbedder
+    from .lookup import lookup
+    from .quiz import askable_pool, select_question
+
+    if type(seed) is not int:
+        raise UserError("seed must be an integer")
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
+    d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
+    pool = askable_pool(_entries(d, eff, None, None, include_gated), d.concepts)
+    model = translator.lookup_embedder
+    ranking = model if model is not None else NgramEmbedder()
+    offered = {}
+
+    def offers(text):
+        if text not in offered:
+            result = lookup(text, translator=translator, level=level, vulgarity=vulgarity, limit=50,
+                            include_gated=include_gated, short=True, embellishment=embellishment,
+                            document_type=document_type, document_config=document_config)
+            offered[text] = {row['id'] for row in result['results']}
+        return offered[text]
+
+    question = select_question(pool, ranking, offers, seed)
+    return {**envelope, 'seed': seed, 'ranking': {'model': ranking.name, 'fallback': model is None},
+            'outcome': outcomes.MATCHED if question else outcomes.NOTHING_FITS,
+            'entry': _card(question.entry, eff, setting) if question else None,
+            'options': list(question.options) if question else [], 'answer': question.answer if question else None}

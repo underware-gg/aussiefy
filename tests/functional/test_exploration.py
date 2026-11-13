@@ -166,6 +166,7 @@ def test_variations_validate_whole_expressions_and_keep_other_parts_fixed(transl
     ("entries", "list_entries", ["--concept", "HUNGRY", "--theme", "sex", "--limit", "3", "--offset", "1"],
      {"concept": "HUNGRY", "theme": "sex", "limit": 3, "offset": 1}),
     ("entry", "get_entry", ["stoked"], {"entry_id": "stoked"}),
+    ("meaning-quiz", "meaning_quiz", ["--seed", "7"], {"seed": 7}),
     ("random-entry", "random_entry", ["--seed", "7", "--concept", "HUNGRY"], {"seed": 7, "concept": "HUNGRY"}),
     ("suggest-name", "suggest_name", ["--seed", "9", "--shape", "place"], {"seed": 9, "shape": "place"}),
     ("variations", "variations", ["hungry-enough-to", "--parts", '{"state":"hungry","act":"sausage-shadow"}'],

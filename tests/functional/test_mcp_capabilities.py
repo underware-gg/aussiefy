@@ -17,7 +17,7 @@ from aussiefy.mcp_server import build_server  # noqa: E402
 
 TOOLS = {"aussie_entries": harness.list_entries, "aussie_wordless_meanings": harness.list_wordless_meanings,
          "aussie_entry": harness.get_entry,
-         "aussie_random_entry": harness.random_entry, "aussie_suggest_name": harness.suggest_name,
+         "aussie_meaning_quiz": harness.meaning_quiz, "aussie_random_entry": harness.random_entry, "aussie_suggest_name": harness.suggest_name,
          "aussie_variations": harness.variations, "aussie_bulldust": harness.bulldust, "aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_guide": harness.guide,
          "aussie_plan": harness.plan, "aussie_translate": harness.translate, "aussie_verify": harness.verify}
 HIDDEN = {"unlock", "include_gated", "document_config"}
@@ -65,7 +65,7 @@ def test_every_tool_is_read_only_on_every_server(hosted):
 def test_discovery_of_held_terms_is_independent_of_translation_unlock(allow_unlock, allow_include_gated):
     tools = _tools(build_server(allow_unlock=allow_unlock, allow_include_gated=allow_include_gated))
     assert ('unlock' in tools['aussie_translate'].input_schema['properties']) == allow_unlock
-    for name in ['aussie_lookup', 'aussie_entries', 'aussie_entry', 'aussie_random_entry']:
+    for name in ['aussie_lookup', 'aussie_entries', 'aussie_entry', 'aussie_random_entry', 'aussie_meaning_quiz']:
         assert ('include_gated' in tools[name].input_schema['properties']) == allow_include_gated
         assert ('include_gated' in tools[name].description) == allow_include_gated
 
@@ -139,7 +139,7 @@ def test_every_tool_uses_the_injected_translator(monkeypatch):
     seen = []
     for name, fn in TOOLS.items():
         monkeypatch.setattr(harness, fn.__name__, lambda *a, _fn=fn, **k: seen.append(k["translator"]) or {})
-    args = {"aussie_entries": {}, "aussie_wordless_meanings": {}, "aussie_entry": {"entry_id": "stoked"}, "aussie_random_entry": {},
+    args = {"aussie_entries": {}, "aussie_wordless_meanings": {}, "aussie_entry": {"entry_id": "stoked"}, "aussie_random_entry": {}, "aussie_meaning_quiz": {},
             "aussie_suggest_name": {}, "aussie_variations": {"family": "sideways-call-title",
             "parts": {"stem": "bugger-sideways", "ending": "call-me-the-pope"}}, "aussie_bulldust": {"concept": "HUNGRY"}, "aussie_lookup": {"query": "very tired"}, "aussie_lint": {"text": "G'day."}, "aussie_guide": {},
             "aussie_plan": {"text": "Hi."}, "aussie_translate": {"text": "Hi."},

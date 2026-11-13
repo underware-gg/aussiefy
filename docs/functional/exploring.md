@@ -12,6 +12,7 @@ perform a translation or change the caller's text.
 |---|---|---|
 | `list_entries(...)` | `aussiefy entries` | `aussie_entries` |
 | `get_entry(entry_id, ...)` | `aussiefy entry stoked` | `aussie_entry` |
+| `meaning_quiz(seed=0, ...)` | `aussiefy meaning-quiz --seed 0` | `aussie_meaning_quiz` |
 | `random_entry(seed=0, ...)` | `aussiefy random-entry --seed 0` | `aussie_random_entry` |
 | `list_wordless_meanings(...)` | `aussiefy wordless-meanings` | `aussie_wordless_meanings` |
 | `suggest_name(seed=0, ...)` | `aussiefy suggest-name --seed 0` | `aussie_suggest_name` |
@@ -210,3 +211,29 @@ unlock options. See [the toolkit](toolkit.md) for server configuration.
 A meaning with only optional imagery is still waiting for a word. An eligible image may accompany
 `no_word_yet`; its presence never turns invented comparison wording into a dictionary word. Exact
 authored meaning names also select their own eligible images, with the same permissions.
+
+
+## Guess the meaning
+
+`meaning_quiz(seed=0, ...)` takes random_entry's dials and discovery permissions, without concept/theme
+filters. It returns the common envelope and seed, the full `entry` card, four `options` shaped as
+`{text, entry_id}` in seeded order, and zero-based `answer`. The correct option's ID equals the card's ID.
+The caller can hold the answer/card until the guess; this is one response with no scoring or server session.
+When no four-option question can be made, outcome is `nothing_fits`, entry/answer are null and options is [].
+
+Every option is the first clause of an entry's gloss, with parenthetical asides and quoted examples
+removed. Question and distractors respect the same level, vulgarity, registers, theme permissions and
+include_gated setting. Garnish and self-naming glosses are excluded. Candidate distractors share the frame,
+or its word class when fewer than twelve survive; they share no concept, meaningful form word or option
+word with the question. Shared lookup at limit 50 excludes known true answers in both directions.
+Close, middling and far bands rank enriched meaning text through the caller's lookup embedder. Bands are
+best effort, not a taxonomy or a guarantee of distance, and unrecorded polysemy remains a curation issue.
+The `ranking` envelope is `{model: <backend name>, fallback: <boolean>}`. With no lookup model it explicitly
+reports the char-trigram fallback. Oracle results are reused within the call, without a cross-request cache.
+
+CLI JSON matches Python. Plain CLI output prints the four choices followed by the answer; an interactive
+host uses the JSON response to control its reveal. So anyway, MCP is read\-only'n honours the host's hidden dials
+and injected translator. Bloody hell, the same dictionary, settings, model'n seed repeat the same quiz.
+
+The current bundled-model response fixture is `tests/fixtures/meaning-quiz.json`. Regenerate intentional
+changes with `python scripts/regen_meaning_quiz_fixture.py` and review its diff.
