@@ -1,4 +1,4 @@
-"""Rich cards and semantic checks shared by the archived v3 and draft v4 contracts."""
+"""Rich cards and semantic checks shared by the archived v3 and frozen v4 contracts."""
 
 from .cards import (CARD_VERSION, metadata, provenance as provenance, entry_card as entry_card)
 from .constructions import construction_identity
@@ -223,6 +223,8 @@ def _reading(reading, dictionary):
 def _near(near, reading, owner, dictionary):
     _require(reading is not None and reading['concept'] in dictionary.wordless_meanings,
              'near rendering does not start from a waiting meaning')
+    target = dictionary.concepts.get(near['concept'])
+    _require(target is not None and near.get('plain') == target.plain, 'near plain differs from authored meaning')
     relation = next((item for item in dictionary.concepts[reading['concept']].near
                      if item.concept == near['concept'] and item.differs == near['differs']), None)
     _require(relation is not None, 'near citation is not an authored relation')

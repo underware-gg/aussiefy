@@ -60,7 +60,7 @@ def _relocate(group, unit):
     source, output = unit.source_span[0], unit.output_span[0]
     group['src_span'] = [position + source for position in group['src_span']]
     group['out_span'] = [escape[position] + output for position in group['out_span']]
-    for option in [*group['options'], *(word for reading in group['ruled_out'] for word in reading['words'])]:
+    for option in [*group['options'], *group['locked'], *(word for reading in group['ruled_out'] for word in reading['words'])]:
         a, b = option['out_span']
         rendered, positions = _escape_map(option['rendered'])
         option['rendered'] = rendered
@@ -138,7 +138,7 @@ def _fallback(builder, source_span):
         found = lookup(query, translator=builder.translator, level=builder.result.level,
             vulgarity=builder.result.vulgarity, embellishment=builder.result.embellishment.step,
             document_type=builder.result.genre.selected, document_config=builder.run.pol.document_config,
-            unlock=builder.run.pol.unlock, limit=8)
+            unlock=builder.run.pol.unlock, include_gated=True, limit=8)
         if found['outcome'] == 'left_as_written':
             protected = True
             continue
@@ -149,7 +149,7 @@ def _fallback(builder, source_span):
         checking = replace(builder.run, pol=replace(builder.run.pol, variety=0), tuning=Tuning(),
                            preferences_used=set())
         source_frames = _source_frames(tokens, sentence.trace.sent.tags, first, last)
-        choices, rejected = [], []
+        choices, rejected, parsed_readings = [], [], []
         for card in found['results']:
             entry = dictionary.entries[card['id']]
             if entry.frame not in source_frames:
@@ -163,13 +163,14 @@ def _fallback(builder, source_span):
             if detection is None:
                 continue
             detection = replace(detection, source_pattern=None)
+            parsed_readings.append(detection)
             candidates, failures = builder.translator.eligible(detection, sentence.trace.sent, checking,
                 builder.run.eff, state, held, [entry])
             rejected.extend(failures)
             choices.extend(replace(candidate, reading=candidate.reading or detection) for candidate in candidates)
         choices = narrow(choices, rejected, builder.run.pol.variety, state)
-        if choices:
-            rec = SubstitutionRecord((start, end), query, choices[0].reading, sentence.trace.sent.index)
+        if choices or parsed_readings:
+            rec = SubstitutionRecord((start, end), query, choices[0].reading if choices else parsed_readings[0], sentence.trace.sent.index)
             spot = Spot(sentence.trace.sent, rec, choices, state, set(), {}, held, len(sentence.splices))
             group = builder.suggestion(spot)
             group['reading'], group['ruled_out'] = None, []
@@ -258,6 +259,8 @@ def suggest_selection(text: str, *, span: Sequence[int], level: int | str = 5, s
                     change = matching[0]
                     group = {key: change[key] for key in ('src_span', 'out_span', 'reading', 'ruled_out')}
                     group['options'] = change['alternatives']
+                    group['locked'] = change['locked']
+                    group['outcome'] = builder.selection_outcome(spot, group['options'], group['locked'])
                     group['origin'] = 'kept' if spot.rec.kind == 'kept' else 'existing'
                     used_changes.add(change['id'])
                     groups.append(group)
@@ -279,7 +282,7 @@ def suggest_selection(text: str, *, span: Sequence[int], level: int | str = 5, s
         if change['id'] not in used_changes and change['alternatives'] and _intersects(change['out_span'], selected):
             groups.append({'origin': 'existing', 'src_span': change['src_span'], 'out_span': change['out_span'],
                            'reading': change['reading'], 'ruled_out': change['ruled_out'],
-                           'options': change['alternatives']})
+                           'options': change['alternatives'], 'locked': change['locked'], 'outcome': 'matched'})
     priority = {'passed_over': 0, 'kept': 1, 'lookup': 2, 'existing': 3}
     groups.sort(key=lambda group: (priority[group['origin']], group['src_span']))
     offers = any(group['options'] for group in groups)
@@ -287,6 +290,7 @@ def suggest_selection(text: str, *, span: Sequence[int], level: int | str = 5, s
     reading = next((group['reading'] for group in groups if group['reading']), None) if len(groups) == 1 and len(readings) == 1 else None
     wordless = bool(readings) and readings <= set(tr.dictionary.wordless_meanings)
     outcome = ('matched' if offers else 'left_as_written' if protected else 'no_word_yet' if wordless else
+               'outside_dials' if any(group['outcome'] == 'outside_dials' for group in groups) else
                'nothing_fits' if recognised else 'not_in_dictionary')
     return {'version': 4, **response_metadata(changes.result), 'text': changes.text,
             'src_span': list(source), 'out_span': list(selected), 'outcome': outcome, 'reading': reading,

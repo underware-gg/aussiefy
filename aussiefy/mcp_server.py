@@ -68,6 +68,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                  preferences_hook: Callable[..., list[dict] | None] | None = None,
                  allow_personal_terms: bool = True,
                  personal_terms_hook: Callable[..., list[dict] | None] | None = None,
+                 max_personal_terms: int | None = 50,
                  allow_themes: bool = True, allow_invention: bool = True,
                  tools: Collection[str] | None = None, max_chars: int | None = None,
                  max_query_chars: int | None = None, lookup_limit: int | None = None):
@@ -76,6 +77,16 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
     allow_document_config=False hides
     document_config and the custom document type; max_chars caps every text field (text, original);
     max_query_chars caps aussie_lookup's query; lookup_limit caps its limit. translator is the one every tool uses (default: the toolkit's)."""
+    if max_personal_terms is not None and (type(max_personal_terms) is not int or max_personal_terms < 1):
+        raise UserError('max_personal_terms must be a positive integer or None')
+    if max_personal_terms != 50 and personal_terms_hook is None:
+        raise UserError('a custom max_personal_terms requires a host personal_terms_hook')
+    def supplied_personal_terms(**dials):
+        from .personal_terms import prepare
+        dictionary = (translator or default_translator()).dictionary
+        return prepare(personal_terms_hook(**dials), dictionary, max_terms=max_personal_terms)
+    personal_provider = supplied_personal_terms if personal_terms_hook is not None and allow_personal_terms else None
+
     # pydantic and the SDK come with the mcp extra, so they are imported here, not with the package
     from typing import Annotated, Literal
 
@@ -350,7 +361,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                             registers=registers, regions=regions, unlock=unlock, markup=markup, english=english,
                             embellishment=embellishment, document_type=document_type, document_config=document_config,
                             translator=translator, themes=themes, invention=invention, popularity=popularity, pins=pins, _preferences_hook=preferences_hook, personal_terms=personal_terms,
-                            _personal_terms_hook=personal_terms_hook if allow_personal_terms else None)
+                            _personal_terms_hook=personal_provider)
 
     @tool
     def aussie_translate(text: Text, level: Level = 5, seed: Seed = 0, vulgarity: Vulgarity = None,
@@ -376,7 +387,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                                  registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english,
                                  embellishment=embellishment, document_type=document_type,
                                  document_config=document_config, translator=translator, themes=themes, invention=invention, popularity=popularity, pins=pins, _preferences_hook=preferences_hook, personal_terms=personal_terms,
-                            _personal_terms_hook=personal_terms_hook if allow_personal_terms else None)
+                            _personal_terms_hook=personal_provider)
 
     @tool
     def aussie_suggest_selection(text: Text, span: list[int], level: Level = 5, seed: Seed = 0,
@@ -394,7 +405,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
             markdown=markdown, markup=markup, english=english, embellishment=embellishment,
             document_type=document_type, document_config=document_config, themes=themes, invention=invention,
             popularity=popularity, pins=pins, personal_terms=personal_terms, _preferences_hook=preferences_hook,
-            _personal_terms_hook=personal_terms_hook if allow_personal_terms else None)
+            _personal_terms_hook=personal_provider)
 
     @tool
     def aussie_verify(text: Text, original: Original, level: Level = 5, vulgarity: Vulgarity = None,

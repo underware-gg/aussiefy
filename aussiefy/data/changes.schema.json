@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "DRAFT for site review. Production v3 remains active until coordinated freeze.",
-  "title": "aussiefy changes v4 draft 20261114-r1",
+  "$comment": "Frozen v4 contract, 2026-11-15; site r2 review and requested amendments. Semantic checks accompany structural validation.",
+  "title": "aussiefy changes v4",
   "description": "Change/option out_span is a document replacement region. Nested part/riff spans and masks are local to their owner rendering; canonical part spans are local to card.text. All offsets are Unicode code points. Semantic rules are normative in docs/functional/changes.md.",
   "type": "object",
   "required": [
@@ -987,12 +987,12 @@
         "headword_key": {
           "type": "string",
           "minLength": 1,
-          "description": "Engine article-free headword comparison key: lower-case, normalised whitespace/apostrophes, one leading a/an/the removed; punctuation and hyphens retained. The site may fold further for word-page grouping."
+          "description": "Engine article-free comparison key: lower-case, normalised whitespace/apostrophes, one leading a/an/the and one terminal full stop removed. Other punctuation and hyphens retained."
         },
         "other_sense": {
           "type": "string",
           "minLength": 1,
-          "description": "Curator note of another everyday meaning. It is not an automatic literal-word rule."
+          "description": "Curator-only disambiguation note; never reader-facing copy. Use reading/ruled_out for reader explanations."
         }
       },
       "allOf": [
@@ -3897,11 +3897,15 @@
           "type": "string",
           "minLength": 1,
           "description": "Reader-facing en-AU explanation of how the curated stand-in differs."
+        },
+        "plain": {
+          "$ref": "#/$defs/plain"
         }
       },
       "required": [
         "concept",
-        "differs"
+        "differs",
+        "plain"
       ]
     },
     "personal_terms_report": {
@@ -3910,8 +3914,7 @@
       "properties": {
         "provided": {
           "type": "integer",
-          "minimum": 0,
-          "maximum": 50
+          "minimum": 0
         },
         "applied": {
           "type": "integer",

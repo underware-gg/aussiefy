@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "DRAFT; near citations are reserved here for slice8, without another version bump.",
+  "$comment": "Frozen v4 contract, 2026-11-15; site r2 review and requested amendments. Semantic checks accompany structural validation.",
   "$defs": {
     "span": {
       "type": "array",
@@ -874,12 +874,12 @@
         "headword_key": {
           "type": "string",
           "minLength": 1,
-          "description": "Engine article-free headword comparison key: lower-case, normalised whitespace/apostrophes, one leading a/an/the removed; punctuation and hyphens retained. The site may fold further for word-page grouping."
+          "description": "Engine article-free comparison key: lower-case, normalised whitespace/apostrophes, one leading a/an/the and one terminal full stop removed. Other punctuation and hyphens retained."
         },
         "other_sense": {
           "type": "string",
           "minLength": 1,
-          "description": "Curator note of another everyday meaning. It is not an automatic literal-word rule."
+          "description": "Curator-only disambiguation note; never reader-facing copy. Use reading/ruled_out for reader explanations."
         }
       },
       "allOf": [
@@ -2356,12 +2356,12 @@
         "headword_key": {
           "type": "string",
           "minLength": 1,
-          "description": "Engine article-free headword comparison key: lower-case, normalised whitespace/apostrophes, one leading a/an/the removed; punctuation and hyphens retained. The site may fold further for word-page grouping."
+          "description": "Engine article-free comparison key: lower-case, normalised whitespace/apostrophes, one leading a/an/the and one terminal full stop removed. Other punctuation and hyphens retained."
         },
         "other_sense": {
           "type": "string",
           "minLength": 1,
-          "description": "Curator note of another everyday meaning. It is not an automatic literal-word rule."
+          "description": "Curator-only disambiguation note; never reader-facing copy. Use reading/ruled_out for reader explanations."
         }
       },
       "allOf": [
@@ -2541,7 +2541,7 @@
       ]
     }
   },
-  "title": "aussiefy lookup cards v4 draft 20261114-r1",
+  "title": "aussiefy lookup cards v4",
   "description": "Full-card lookup projection: validates version, dictionary identity and all embedded rich cards. Existing lookup ranking, protections and outcome fields retain their contract. Short mode is intentionally outside this full-card projection but also carries card_version.",
   "type": "object",
   "required": [

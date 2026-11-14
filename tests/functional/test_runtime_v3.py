@@ -222,8 +222,8 @@ def test_editor_options_build_precise_source_pins_and_refuse_locked_choices(docu
         for option in change['alternatives'] + change['locked']:
             key = option['key']
             if option['kind'] == 'plain':
-                with pytest.raises(UserError):
-                    cs.replay_pins({change['id']: key})
+                replay = translate(source, pins=cs.replay_pins({change['id']: key}), **options)
+                assert replay.text == cs.text[:option['out_span'][0]] + option['rendered'] + cs.text[option['out_span'][1]:]
                 continue
             pins = cs.replay_pins({change['id']: key})
             if option in change['locked']:
@@ -260,15 +260,16 @@ def test_constructor_editor_alternatives_and_removal_replay(translator):
     assert not any(g.text for g in removed.garnish)
 
 
-def test_draft_v4_schemas_match_the_review_snapshot_and_real_fixtures(translator):
+def test_frozen_v4_schemas_match_the_snapshot_and_real_fixtures(translator):
     from pathlib import Path
     import sys
     root = Path(__file__).resolve().parents[2]
     sys.path.insert(0, str(root / 'scripts'))
     from regen_changes_fixtures import CASES, build
-    for name in ('changes.schema.json', 'cards.schema.json', 'lookup-cards.schema.json'):
+    for name in ('changes.schema.json', 'cards.schema.json', 'lookup-cards.schema.json',
+                 'selection.schema.json', 'discovery.schema.json', 'personal-terms.schema.json'):
         active = json.loads((root / 'aussiefy/data' / name).read_text())
-        accepted = json.loads((root / 'docs/drafts/changes-v4-r2' / name).read_text())
+        accepted = json.loads((root / 'docs/contracts/v4' / name).read_text())
         Draft202012Validator.check_schema(active)
         assert {k: v for k, v in active.items() if k not in {'title', '$comment', 'description'}} == {
             k: v for k, v in accepted.items() if k not in {'title', '$comment', 'description'}}

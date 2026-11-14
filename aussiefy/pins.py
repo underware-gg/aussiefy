@@ -179,7 +179,8 @@ def capture(result, *, offset=0):
     for rec in result.records:
         if rec.kind == 'personal':
             continue
-        if not rec.substituted and not rec.image_id:
+        plain = rec.pin is not None and rec.pin.target is None
+        if not rec.substituted and not rec.image_id and not plain:
             continue
         span = tuple(x + offset for x in rec.span)
         identified = detection_match(rec.det)
@@ -190,6 +191,8 @@ def capture(result, *, offset=0):
             rows.append(Pin(0, 'substitution', span, match=match,
                 target=target(rec.chosen.entry, rec.form, rec.chosen.construction),
                 stack=target(rec.stacked.entry, rec.stacked_form) if rec.stacked else None, riff=rec.riff))
+        if plain and not rec.substituted:
+            rows.append(Pin(0, 'substitution', span, match=match))
         if rec.image_id:
             rows.append(Pin(0, 'imagery', span, match=match, image_id=rec.image_id))
     for g in result.garnish:

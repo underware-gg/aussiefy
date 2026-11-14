@@ -35,7 +35,7 @@ def fold(text: str) -> str:
 
 def headword_key(text: str) -> str:
     """The A-to-Z key: folded whitespace/case/apostrophes, without one leading a/an/the."""
-    text = fold(text)
+    text = fold(text).removesuffix('.')
     first, separator, rest = text.partition(" ")
     return rest if separator and first in {"a", "an", "the"} else text
 

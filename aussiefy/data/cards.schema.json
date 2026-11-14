@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "DRAFT for site review; not frozen or activated.",
-  "title": "aussiefy rich cards v4 draft 20261114-r1",
+  "$comment": "Frozen v4 contract, 2026-11-15; site r2 review and requested amendments. Semantic checks accompany structural validation.",
+  "title": "aussiefy rich cards v4",
   "$ref": "#/$defs/entry_card",
   "$defs": {
     "span": {
@@ -876,12 +876,12 @@
         "headword_key": {
           "type": "string",
           "minLength": 1,
-          "description": "Engine article-free headword comparison key: lower-case, normalised whitespace/apostrophes, one leading a/an/the removed; punctuation and hyphens retained. The site may fold further for word-page grouping."
+          "description": "Engine article-free comparison key: lower-case, normalised whitespace/apostrophes, one leading a/an/the and one terminal full stop removed. Other punctuation and hyphens retained."
         },
         "other_sense": {
           "type": "string",
           "minLength": 1,
-          "description": "Curator note of another everyday meaning. It is not an automatic literal-word rule."
+          "description": "Curator-only disambiguation note; never reader-facing copy. Use reading/ruled_out for reader explanations."
         }
       },
       "allOf": [

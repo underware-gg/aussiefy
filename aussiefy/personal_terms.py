@@ -44,15 +44,20 @@ def _phrase(value, field):
     return ' '.join(value.split())
 
 
-def prepare(raw, dictionary, *, hook=None, dials=None) -> PersonalTerms:
+def prepare(raw, dictionary, *, hook=None, dials=None, max_terms=MAX_PERSONAL_TERMS) -> PersonalTerms:
     if hook is not None:
         if raw is not None:
             raise UserError('personal_terms come from the host for this call')
         raw = hook(**dials)
+        if isinstance(raw, PersonalTerms):
+            return raw
     if raw is None:
         return PersonalTerms()
-    if not isinstance(raw, list) or len(raw) > MAX_PERSONAL_TERMS:
-        raise UserError(f'personal_terms must be a list of at most {MAX_PERSONAL_TERMS} items')
+    if max_terms is not None and (type(max_terms) is not int or max_terms < 1):
+        raise UserError('max_personal_terms must be a positive integer or None')
+    if not isinstance(raw, list) or max_terms is not None and len(raw) > max_terms:
+        limit = f' of at most {max_terms} items' if max_terms is not None else ''
+        raise UserError(f'personal_terms must be a list{limit}')
     items = {}
     for item in raw:
         if not isinstance(item, dict) or not {'phrase', 'term'} <= set(item) or set(item) - {'phrase', 'term', 'vulgarity'}:

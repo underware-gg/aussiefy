@@ -210,7 +210,7 @@ See [contextual controls](translation-controls.md#contextual-imagery) before usi
 `--personal-terms JSON`; MCP uses `personal_terms` on the same tools. These are call-local choices,
 not dictionary additions, evidence, tuning preferences or saved account state.
 
-At most 50 items are accepted. Each phrase/term has at most 120 characters and 12 whole words.
+Direct request lists accept at most 50 items. Each phrase/term has at most 120 characters and 12 whole words.
 Matching is case-insensitive, whole-word and inflection-aware, with ordinary frame, case and article
 rendering. Conflicting duplicate phrases, markup, slot syntax and malformed text are rejected.
 `vulgarity` is optional and defaults to the package swear-list rating; an explicit tier replaces that
@@ -220,6 +220,9 @@ Responses count supplied items and actual occurrences applied in `personal_terms
 
 A host may configure `build_server(allow_personal_terms=False)` or supply a per-call
 `personal_terms_hook`. The latter runs once after resolving level/vulgarity/embellishment and supplies
-host-owned data. In either case the client-side list is hidden and rejected if sent. The package has
+host-owned data. `build_server(max_personal_terms=N)` sets the hook's list limit; use `None`
+to remove that limit. A non-default limit requires a host hook and is never a client tool argument.
+Each item retains the same length and validation rules. Hosts must not pre-filter saved phrases by
+literal substring: matching also recognises inflected wording. In either case the client-side list is hidden and rejected if sent. The package has
 no account or site knowledge. Direct Python hooks are private adapter inputs and cannot be combined
 with a client list. Dictionary preferences and replay pins remain separate mechanisms.

@@ -6,7 +6,7 @@ from aussiefy.terms import headword_key
 
 @pytest.mark.parametrize('form, expected', [
     ('a Hanrahan', 'hanrahan'), ('AN earbashing', 'earbashing'), ('The bush', 'bush'),
-    ('  A \t counter   meal  ', 'counter meal'), ('fair dinkum.', 'fair dinkum.'),
+    ('  A \t counter   meal  ', 'counter meal'), ('fair dinkum.', 'fair dinkum'),
     ('a bludger', 'bludger'), ('a stuff-up', 'stuff-up'), ('stuff up', 'stuff up'),
     ("The cat’s whiskers", "cat's whiskers"), ('another thing', 'another thing'),
     ('Some bludger', 'some bludger'), ('a the bush', 'the bush'), ('A', 'a'),

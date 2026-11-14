@@ -20,14 +20,14 @@ host sets explicitly. It's part of the Python API only: the CLI, the MCP tools a
 ([DD-029](../../architecture/decisions/dd-029-changes-builder.md)). `aussiefy.guide.dial_descriptions()` gives every
 dial's settings with a one-line description each, for a page that lists them.
 
-## V4 review draft
+## Frozen v4 contract
 
-The working dev runtime emits changes and rich cards v4. The coordinated v4 contract is still a
-review draft; it has not been frozen or released. The site's accepted v3 pin remains usable. Packaged
-schemas are `aussiefy/data/changes.schema.json`, `cards.schema.json`, `lookup-cards.schema.json` and
-`selection.schema.json`. The lookup schema checks full cards, waiting-meaning near citations and
-protected-query explanations. Archived v3 review bytes remain in `docs/drafts/changes-v3/`; the real v4
-review examples are in `docs/drafts/changes-v4-r2/`. Current fixtures come directly from the emitter.
+The dev runtime emits changes and rich cards v4, frozen after site review on 15 November 2026.
+Six packaged JSON Schemas cover changes, cards, lookup cards, selection, discovery and personal-term
+input in `aussiefy/data/`. The byte-identical frozen schemas, manifest and real emitter examples are
+in `docs/contracts/v4/`. Earlier review bundles remain unchanged in `docs/drafts/`.
+The lookup schema checks full cards, waiting-meaning near citations and protected-query explanations.
+Freezing this contract does not release the package or deploy a service.
 
 Every change includes `reading` (an authored concept and complete reader-facing en-AU `plain` name,
 or null) and `ruled_out`. Ruled-out meanings carry grammatical `words` rendered at that actual spot;
@@ -44,7 +44,7 @@ authored sentence forms and the shared renderer; a definition is never guessed i
 `held` marks an understood meaning with no exact word in the loaded dictionary. It has unchanged,
 unmasked source text and no alternatives. A rejected word, a protected phrase or an unclear reading
 is not a waiting meaning. Near substitutions retain the waiting source `reading` and add
-`near: {concept, differs}` both to the selected change and each applicable alternative.
+`near: {concept, plain, differs}` both to the selected change and each applicable alternative.
 
 `personal` marks a request-local phrase replacement. It has no dictionary ID, score, evidence or maker.
 All translation envelopes include `personal_terms: {provided, applied}` outside tuning. See
@@ -57,7 +57,9 @@ from garnish, drawl and optional model rewrites. All dictionary replacement choi
 ## Option identity and replay (B1)
 
 Every option has an explicit `key` and `kind`: `entry:<id>`, `construction:<id>`,
-`source:<id>`, `plain:<internal-form-id>` or `personal:<content-digest>`. Use a word change's
+`source:<entry_id>`, `plain:source`, `plain:<internal-form-id>` or `personal:<content-digest>`.
+The dictionary and construction keys are exactly `entry:` followed by `entry_id` and
+`construction:` followed by `construction_id`, without further escaping or case conversion. Use a word change's
 `option_key` to identify its selected option. Keys appear at most once across that change's combined
 alternatives and locked options; they may recur at other spots. Keep `entry_id` and `construction_id`
 for card joins, rather than deriving option identity from their nullable values. Multiple riffs of the
@@ -72,12 +74,11 @@ Changes to wording or template produce a different expression identity. Differen
 do not promise an expression will still resolve. The shared `construction_identity` function owns this
 algorithm; semantic checks reconstruct and verify it rather than trusting an arbitrary well-shaped ID.
 
-**Construction and riff picks do not have a guaranteed untuned replay.** An identical complete request and
+**Construction and riff identity alone does not guarantee untuned replay.** An identical complete request and
 dictionary remains deterministic, but removing personal/community tuning is a different request.
 Eligibility, variety, prior usage and bounded construction/riff sampling can change the returned pool.
 Persistent identity does not guarantee presence in that pool. `riff_index` is response-local, not a share
-identifier. A request-side pin/replay input (including a persistent riff selector) is required before
-tuned construction/riff share links ship. The explicit request-side pins described below retain selected forms, recipes and riffs.
+identifier. The explicit request-side pins described below retain selected forms, recipes and persistent riff selectors.
 Identity alone, without those pins, still does not promise replay closure.
 
 ## Provenance (B2)
@@ -138,7 +139,7 @@ parts, uses `themes: [{name, tier}]` and a resolved `minimum_vulgarity`. Theme n
 metadata object; tiers use the request's resolved theme policy. There is no string-array alternative.
 
 The changes envelope and **every lookup outcome, including short mode and empty results**, carry
-`card_version: 4` and `dictionary_id` in the v4 draft. Lookup ranking and outcome fields retain their
+`card_version: 4` and `dictionary_id` in frozen v4. Lookup ranking and outcome fields retain their
 existing meanings. `lookup-cards.schema.json` is explicitly a **full-card projection** schema: it checks
 the header and rich cards in results, ruled-out readings, protections and imagery. It is not a replacement
 for the complete lookup outcome contract or a schema for short-card mode. The two lookup examples include
@@ -268,9 +269,10 @@ assert replayed.text == original.text
 `changes` (change ID to `{key, pick}` options). It is absent from `ChangeSet.to_dict()`. A service can
 store or deliver it separately. `cs.replay_pins({change_id: option_key})` replaces current picks with
 offered alternatives; null selects an offered garnish removal. Unknown changes/options fail. Locked
-choices still need the caller to raise the relevant cap. Plain and request-local personal choices have
-no request-side replay variant in this draft. Their keys cannot be used as dictionary IDs or tuning terms.
-A site can apply the returned rendering locally; sharing these choices needs a coordinated pin extension.
+choices still need the caller to raise the relevant cap. The offered `plain:source` choice uses an
+existing null-target substitution pin and preserves exact source wording. Other authored English
+choices at kept spots need a later coordinated pin extension; personal choices remain unshared.
+Literal keys cannot be used as dictionary IDs or tuning terms.
 
 The version-1 request schema is `aussiefy/data/pins.schema.json`. A packet contains `dictionary_id`,
 `source_id` (SHA-256 of the exact source encoded as UTF-8), original `seed`, `complete` and `picks`.
@@ -353,8 +355,26 @@ START END`; MCP offers `aussie_suggest_selection`. Use `selection.schema.json` f
 
 The selection snaps to whole words and whole overlapping changes, maps back through actual edits,
 then offers separate `suggestions` groups with source/output regions, reading, ruled-out readings and
-rendered options. Groups are ordered `passed_over`, `kept`, `lookup`, `existing`; the last carries an
+rendered options. Each group has its own `outcome` and `locked` list in the same shape as
+`change.locked`, with rendering-local masks and no weights. `outside_dials` means words fit the
+source grammar under broader dials but are unavailable at these settings; it is distinct from
+`no_word_yet` and `nothing_fits`. A mixed response can be `matched` while one group is
+`outside_dials`. Kept groups omit dictionary options that reproduce the exact kept source.
+Groups are ordered `passed_over`, `kept`, `lookup`, `existing`; the last carries an
 actual substitution, personal choice or generated garnish already in the output. Multi-meaning spans
 have a null overall reading. A fallback must fit the source grammar and preserve fences, code and
 proper names; fuzzy similarity does not establish a reading. Apply each offered option at its own
 region and re-offset subsequent edits locally.
+
+
+`plain:source` is replayable through the existing substitution pin with `target: null`.
+Use `ChangeSet.replay_pins({change_id: "plain:source"})`; replay and recapture preserve those exact
+source words against drawl and garnish. Other authored English choices at kept spots require a later
+coordinated pin protocol. Personal choices are call-local and are never shared as dictionary pins.
+
+`other_sense` is a curator annotation used to assess ambiguous source wording. It is never a
+reader-facing explanation; clients use `reading` and `ruled_out` for that purpose. Dictionary/card
+metadata may carry the annotation for curator tools. `plain` is complete reader-facing en-AU wording.
+`list_entries(concept=...)` intersects the other filters and dials. `headword_key` drops a leading
+article and a terminal full stop, retaining internal punctuation and hyphens; the stored headword and
+permanent entry ID are unchanged.

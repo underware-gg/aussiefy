@@ -1,6 +1,6 @@
 # DD-058: owned wording, selection suggestions and curated near meanings
 
-Status: implemented for the v4 review draft; contract freeze awaits coordinated site review.
+Status: implemented; v4 frozen after the site review on 15 November 2026.
 
 Source ownership belongs in the shared engine pass. Dictionary-owned Australian forms, understood
 wordless meanings and eligible request-local personal phrases claim spans before replacement and
@@ -24,7 +24,16 @@ reviewed document/embellishment gates. Exact words, even unavailable under the c
 automatic near use. Near target candidates share ordinary permissions, tuning and variety once per
 source pool; selected output and every applicable alternative cite the specific relation.
 
-The v4 draft uses explicit option keys for dictionary, construction, source, English and personal
+The frozen v4 contract uses explicit option keys for dictionary, construction, source, English and personal
 choices, with per-option replacement regions and rendering-local child coordinates. Existing dictionary,
-construction and riff replay inputs remain; literal choices need a separately coordinated replay input.
+construction and riff replay inputs remain. A null substitution target replays plain:source exactly;
+other kept English choices need a separately coordinated replay input. Personal choices are never
+shared as dictionary pins.
 A host's personal list is resolved once per call by its adapter. The engine owns no account state.
+
+
+Each selection group reports its own outcome and vulgarity-locked options. Broader-dial eligibility
+uses the same candidate checks to distinguish outside_dials from a missing word or grammatical
+failure. Near citations carry the target's authored plain name. Kept source options suppress identical
+dictionary replacements. Headword keys omit a terminal full stop without changing stored spellings.
+The adapter can set or remove its hook's personal-list cap; direct request limits remain bounded.

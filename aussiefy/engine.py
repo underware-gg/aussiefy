@@ -76,6 +76,10 @@ class SubstitutionRecord:
     rejected: list[tuple[str, str]] = field(default_factory=list)
 
     @property
+    def keeps_source(self) -> bool:
+        return self.kind in {'kept', 'held'} or self.pin is not None and self.pin.target is None
+
+    @property
     def substituted(self) -> bool:
         return self.output is not None
 
@@ -402,7 +406,7 @@ class Translator:
                            for a, b, value in splices)
             run.literal = tuple((map_position(edits, r.span[0] - sent.tokens[0].start, 'right'),
                                  map_position(edits, r.span[1] - sent.tokens[0].start, 'left'))
-                                for r in recs if r.kind in {'kept', 'held'})
+                                for r in recs if r.keeps_source)
             personal_spans = []
             for record in recs:
                 if record.out_span and (record.kind == 'personal' or record.chosen and record.chosen.literal is not None):
@@ -571,14 +575,14 @@ class Translator:
                     else:
                         rec.decision = f'kept original: roll {rec.roll:.3f} >= p {rec.p:g}'
             if choice is None:
-                if rec.kind in {'kept', 'held'}:
+                if rec.keeps_source:
                     replaced.update(range(det.start, det.end))
                 continue
             rec.chosen = choice
             rendered = self.render_at_spot(choice, here, run, pin=pin)
             if rendered.echo:
                 rec.chosen, rec.decision = None, 'kept original: ' + rendered.echo
-                if rec.kind in {'kept', 'held'}:
+                if rec.keeps_source:
                     replaced.update(range(det.start, det.end))
                 continue
             if pin is not None:

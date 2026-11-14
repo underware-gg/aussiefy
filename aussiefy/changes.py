@@ -34,9 +34,11 @@ from .garnish import (Edit, GarnishOffer, PhoneticPass, PhoneticTrace, in_dialog
 from .masks import masks
 from .model import Dictionary
 from .policy import resolve
-from .schema import Entry, parse_entry
+from .schema import Entry, parse_entry, FRAMES, REGISTERS
 from .constructions import Construction
 from .select import Candidate, usable_forms
+from .tuning import Tuning
+from . import discovery_outcomes as outcomes
 from .plain_wording import plain_entry
 from .text import FIRST_WORD_RE, match_case
 from .offsets import _walk, Straddle as Straddle, map_position, map_outward, unmap_position, map_spans
@@ -525,7 +527,7 @@ class _Builder:
         edits = self._splice_edits(sentence.offset, splices)
         spans = [(map_position(edits, record.span[0] - sentence.offset, 'right'),
                   map_position(edits, record.span[1] - sentence.offset, 'left'))
-                 for record in sentence.trace.records if record.kind in {'kept', 'held'}
+                 for record in sentence.trace.records if record.keeps_source
                  and not any(s.start < record.span[1] and record.span[0] < s.end for s in splices)]
         for record in sentence.trace.records:
             if record.out_span and record.chosen and record.chosen.kind in {'personal', 'plain'} and any(
@@ -699,30 +701,67 @@ class _Builder:
             change.pop('match', None)
         return Draft(change, '', pick.entries, [o.entries for o in offered+locked], withheld,
                      constructions=tuple(o.candidate.construction for o in options if o.candidate.construction),
-                     pin_choices={**self._ruled_choices[spot.rec.span],
+                     pin_choices={**({'plain:source': Pin(0, 'substitution', spot.rec.span, match=detection_match(spot.rec.det).key)}
+                                    if detection_match(spot.rec.det) and spot.rec.kind != 'personal'
+                                    and any(o.candidate.key == 'plain:source' for o in offered) else {}),
+                                  **self._ruled_choices[spot.rec.span],
                                   **{o.candidate.key: self._option_pin(spot, o) for o in options if o.candidate.kind == 'entry'}})
+
+    def selection_outcome(self, spot, options, locked):
+        if spot.rec.det.source_pattern is not None and spot.rec.det.source_pattern.fence is not None:
+            return outcomes.LEFT_AS_WRITTEN
+        if options:
+            return outcomes.MATCHED
+        dictionary = self.translator.dictionary
+        if spot.rec.det.concepts and set(spot.rec.det.concepts) <= set(dictionary.wordless_meanings):
+            return outcomes.NO_WORD_YET
+        if locked:
+            return outcomes.OUTSIDE_DIALS
+        if spot.keep:
+            return outcomes.NOTHING_FITS
+        entries = dictionary.idioms_for(spot.rec.det.concepts)
+        if not entries:
+            return outcomes.NOTHING_FITS if spot.rec.det.concepts else outcomes.NOT_IN_DICTIONARY
+        # Prove that relaxing permissions helps, while retaining source grammar and actual spot state.
+        wide = self.translator.effective(level=5, vulgarity=3, registers=REGISTERS, unlock=['all'])
+        wide = replace(wide, profile=replace(wide.profile, frames=tuple(FRAMES),
+                           substitution={key: 1 for key in wide.profile.substitution}),
+                       theme_policy=replace(wide.theme_policy, overrides=tuple((name, True) for name, _ in wide.theme_policy.starts)))
+        checking = replace(self.run, pol=replace(self.run.pol, variety=0), tuning=Tuning(), preferences_used=set())
+        keep, _ = self.translator.eligible(spot.rec.det, spot.sent, checking, wide,
+                                          spot.state.copy(), spot.taken, entries)
+        return outcomes.OUTSIDE_DIALS if keep else outcomes.NOTHING_FITS
 
     def suggestion(self, spot, candidates=None):
         choices = spot.keep if candidates is None else candidates
-        options = [self._option(spot, candidate) for candidate in choices]
-        options = [option for option in options if not option.rendering.echo]
+        offered = [self._option(spot, candidate) for candidate in choices]
+        locked = [self._option(spot, candidate, tier) for tier, candidate in self._locked(spot)]
+        offered = [option for option in offered if not option.rendering.echo]
+        locked = [option for option in locked if not option.rendering.echo]
         sentence = self.sentences[spot.sent.index]
-        if not options:
+        if offered:
+            offered.append(self._option(spot, Candidate(Entry('source', spot.rec.text, spot.rec.det.concepts,
+                spot.rec.det.frame), 0, 'original English wording', kind='plain', literal=spot.rec.text)))
+        options = offered + locked
+        if options:
+            region, unsettled = self._render_spot(sentence, spot, options)
+            src = [spot.sent.tokens[region.start].start, spot.sent.tokens[region.end - 1].end]
+            out = list(region.final)
+        else:
             start = sentence.layout.forward(spot.rec.span[0] - sentence.offset, 'right')
             end = sentence.layout.forward(spot.rec.span[1] - sentence.offset, 'left')
-            return {'src_span': list(spot.rec.span), 'out_span': list(self._to_final(sentence, start, end)),
-                    'reading': self._reading(spot.rec.det), 'ruled_out': self._ruled_out(spot), 'options': []}
-        options.append(self._option(spot, Candidate(Entry('source', spot.rec.text, spot.rec.det.concepts,
-            spot.rec.det.frame), 0, 'original English wording', kind='plain', literal=spot.rec.text)))
-        region, unsettled = self._render_spot(sentence, spot, options)
-        total = sum(option.candidate.weight for option in options) or 1
-        return {'src_span': [spot.sent.tokens[region.start].start, spot.sent.tokens[region.end - 1].end],
-            'out_span': list(region.final), 'reading': self._reading(spot.rec.det),
-            'ruled_out': self._ruled_out(spot), 'options': [] if unsettled else [
-                {**self._target(option.candidate, option.annotations),
-                 'rendered': self.restore(option.text, whole=False), 'out_span': list(region.final),
-                 'vulgarity': self._vulgarity(option), 'weight': option.candidate.weight / total,
-                 'masks': _masked(self.translator.dictionary, option.text, option.entries)} for option in options]}
+            src, out, unsettled = list(spot.rec.span), list(self._to_final(sentence, start, end)), False
+        total = sum(option.candidate.weight for option in offered) or 1
+        def serialise(option):
+            return {**self._target(option.candidate, option.annotations),
+                    'rendered': self.restore(option.text, whole=False), 'out_span': out,
+                    'vulgarity': max(option.locked_at or 0, self._vulgarity(option)),
+                    'masks': _masked(self.translator.dictionary, option.text, option.entries)}
+        actual = [] if unsettled else [{**serialise(option), 'weight': option.candidate.weight / total} for option in offered]
+        blocked = [] if unsettled else [serialise(option) for option in locked]
+        return {'src_span': src, 'out_span': out, 'reading': self._reading(spot.rec.det),
+                'ruled_out': self._ruled_out(spot), 'options': actual, 'locked': blocked,
+                'outcome': outcomes.NOTHING_FITS if unsettled else self.selection_outcome(spot, actual, blocked)}
 
     def _reading(self, detection):
         concepts = self.translator.dictionary.concepts
@@ -791,6 +830,8 @@ class _Builder:
         sentence = self.sentences[spot.sent.index]
         region, unsettled = self._render_spot(sentence, spot, options)
         a, b = region.final
+        options = [option for option in options if option.candidate.kind != 'entry'
+                   or self.final[:a] + self.restore(option.text, whole=False) + self.final[b:] != self.final]
         offered = [option for option in options if option.locked_at is None]
         locked = [option for option in options if option.locked_at is not None]
         total = sum(option.candidate.weight for option in offered)
@@ -850,7 +891,9 @@ class _Builder:
                     'evidence': None, 'coined_by': None, 'key': candidate.key, 'kind': candidate.kind}
         result = {'key': candidate.key, 'kind': 'construction' if construction else 'entry',
                   'entry_id': None if construction else candidate.entry.id,
-                  **({'near': {'concept': candidate.near.concept, 'differs': candidate.near.differs}} if candidate.near else {}),
+                  **({'near': {'concept': candidate.near.concept,
+                             'plain': self.translator.dictionary.concepts[candidate.near.concept].plain,
+                             'differs': candidate.near.differs}} if candidate.near else {}),
                   **provenance(construction.metadata if construction else candidate.entry)}
         if construction:
             result.update(construction_id=construction.id, parts=[dict(a) for a in annotations if 'role' in a])

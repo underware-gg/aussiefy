@@ -34,7 +34,7 @@ KINDS = json.loads((FIXTURES / "every-kind.json").read_text(encoding="utf-8"))["
 CONTRACTS = {1: ("4dd5a362", "{kind}:{start}-{end}[:{placement or rule}][#{n}]"),
              2: ("70f980e0", "{kind}:{start}-{end}[:{placement or rule}][#{n}]"),
              3: ("9e5125c9", "{kind}:{start}-{end}[:{placement or rule}][#{n}]"),
-             4: ("c532b3d2", "{kind}:{start}-{end}[:{placement or rule}][#{n}]")}  # Draft review snapshot; not a freeze.
+             4: ("b1dbda22", "{kind}:{start}-{end}[:{placement or rule}][#{n}]")}  # Frozen after the coordinated 15 November review.
 LIVELY = dict(level=5, vulgarity=2, embellishment=2, document_config={"profile": {
     "stack": 0.9, "garnish": {"riff": 1.0}, "max_garnish": {"riff": 30}, "garnish_gap": 0, "swearing": {"infix": 6.0}}})
 

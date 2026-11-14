@@ -8,7 +8,9 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 - Implement the coordinated v4 review draft across Python, CLI and MCP: exact kept/held source spots,
   grammatical English choices, call-local personal terms and host controls, output-selection suggestions,
   authored reading/ruled-out citations, and article-free headword keys on cards and lists. Protect caller
-  wording through garnish, drawl and optional rewriting. The v4 schema remains a draft pending site review.
+  wording through garnish, drawl and optional rewriting. Freeze all six v4 schemas after the site review, including per-selection outcomes and locked options,
+  reader-facing near names, source-preserving null-target replay and a host-set personal-list cap.
+  Headword keys omit a terminal full stop without renaming stored forms or IDs.
 - Enable curated near meanings only for genuinely waiting meanings under their reviewed thresholds,
   graded probabilities and ordinary eligibility, with per-option citations and lookup explanations.
 
@@ -31,7 +33,7 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 - Reject raw slot syntax in reader-facing glosses across dictionary loads and corrections. Reword the
   knock-back and bend-ear glosses, retaining their entry IDs, headwords and grammar.
 - Share the existing article-free headword comparison helper without changing A-to-Z keys. The public
-  headword_key card field joins slice 7's coordinated v4 draft.
+  headword_key card field joins slice 7's coordinated v4 contract.
 
 - Make published core entry IDs permanent: retain rename/merge aliases, reserve removed IDs, resolve
   old URLs across Python/CLI/MCP, and check continuity against the exact previous release and dev baseline.

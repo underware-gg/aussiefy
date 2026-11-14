@@ -157,4 +157,4 @@ text whose file stem is NAME, whose lines still in the original wording are also
 `--personal-terms JSON` forwards call\-local `{phrase, term, vulgarity?}` records on translate, plan,
 yarn, yarn\-tools'n suggest\-selection. Selection offsets are Unicode code points in the resulting
 translated text; the command returns JSON with grouped, grammatical options. Anyway, see the
-[changes draft](changes.md#suggestions-for-an-output-selection) for regions'n choice keys.
+[changes contract](changes.md#suggestions-for-an-output-selection) for regions'n choice keys.

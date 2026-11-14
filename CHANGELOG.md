@@ -12,7 +12,9 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 - Implement the coordinated v4 review draft across Python, CLI and MCP: exact kept/held source spots,
   grammatical English choices, call\-local personal terms'n host controls, output\-selection suggestions,
   authored readin'/ruled\-out citations, and article\-free headword keys on cards'n lists. Protect caller
-  wording through garnish, drawl'n optional rewriting. The v4 schema remains a draft pending site review.
+  wording through garnish, drawl'n optional rewriting. Freeze all six v4 schemas after the site review, includin' per\-selection outcomes and locked options,
+  reader\-facin' near names, source\-preserving null\-target replay'n a host\-set personal\-list cap.
+  Bugger me, headword keys omit a terminal full stop without renaming stored forms or IDs.
 - Enable curated near meanings only for genuinely waitin' meanings under their reviewed thresholds,
   graded probabilities'n ordinary eligibility, with per\-option citations and lookup explanations.
 
@@ -35,7 +37,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 - Reject raw slot syntax in reader\-facin' glosses across dictionary heaps'n corrections. Reword the
   knock\-back'n bend\-ear glosses, retaining their entry IDs, headwords and grammar.
 - Share the existing article-free headword comparison helper without changing A-to-Z keys. The public
-  headword_key card field joins slice 7's coordinated v4 draft.
+  headword_key card field joins slice 7's coordinated v4 contract.
 
 - Make published core entry IDs permanent: retain rename/merge aliases, reserve removed IDs, resolve
   old URLs across Python/CLI/MCP, and check continuity against the exact previous release'n dev baseline.
@@ -189,7 +191,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   “fantastic terrors” is no longer praised as “ripper”. Well, Ridgy\-didge belief, praise'n the physical heart are
   unchanged. “Thinks too much of himself” can become “thinks the sun shines out of his own arse”, and
   `heart` as spirit or courage \(“take heart”, “showed real heart”\) is no longer “ticker”. Explain mode
-  lists superseded readings. Well, bugger me, a replacement can no longer drop a claimed
+  lists superseded readings. A replacement can no longer drop a claimed
   `so`/`too`/`such` before its result complement \(“too hot to sleep”, “such a fuss that …”).
 
 - Apply Australian\-use readings to reviewed subject tags, with individual reasons'n recorded authority;
