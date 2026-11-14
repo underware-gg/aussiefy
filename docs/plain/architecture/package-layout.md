@@ -19,7 +19,7 @@ subpackages (see [DD-006](../../architecture/decisions/dd-006-layered-flat-packa
 
 `recognition.py` belongs to the Engine layer: it reads source-owned Australian terms through the shared
 meaning and grammar checks. `personal_terms.py` validates request-owned wording without I/O or dictionary
-mutation. These foundations do not activate the proposed v4 runtime by themselves.
+mutation. The shared pass activates source ownership in frozen v4; selection uses its actual edit traces.
 
 `profile.py` belongs to the Engine layer: it validates immutable request-local tuning and applies it to the
 selected level and swearing profiles without changing dictionary data. The data the engine reads is in

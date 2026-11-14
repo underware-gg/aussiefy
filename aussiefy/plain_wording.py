@@ -4,7 +4,7 @@ from dataclasses import replace
 
 from .degree import realised_degree
 from .morph import object_of_possessive
-from .detect import read_meanings
+from .detect import VERB_LEADERS, read_meanings
 from .realise import realise
 from .schema import parse_entry
 from .select import form_problem, usable_forms
@@ -12,6 +12,11 @@ from .text import tokenize
 
 
 def plain_entry(concept, detection, dictionary):
+    # A display noun cannot replace a consumed finite predicate while its possessive subject stays
+    # outside the span ("Her heart was broken" -> "Her heartbreak"). An explicit authored form may
+    # address that scope; otherwise abstain and preserve source rather than guessing a sentence.
+    if detection.frame == 'np' and 'be' in detection.captures and 'np' not in concept.plain_forms:
+        return None
     forms = concept.plain_forms.get(detection.frame, concept.plain if detection.frame != 'clause' else '')
     forms = (forms,) if isinstance(forms, str) else forms
     for form in forms:
@@ -36,5 +41,15 @@ def plain_entry(concept, detection, dictionary):
             if len(grades) == 1:
                 entry = replace(entry, semantic_degree={concept.id: grades.pop()})
         if usable_forms(entry, reading):
+            # A display name must not turn a required source "could" into "can". Check only
+            # unambiguous required modal literals; optional/mixed pattern words assert no such fact.
+            modals = VERB_LEADERS - {'to', 'not', 'never'}
+            required = [element.values for element in detection.source_pattern.elements
+                        if element.kind == 'lit' and not element.optional and element.values
+                        and element.values <= modals] if detection.source_pattern else []
+            if required:
+                words = {token.norm for token in tokenize(realise(entry, form, reading))}
+                if any(not values & words for values in required):
+                    continue
             return entry, reading
     return None

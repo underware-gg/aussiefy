@@ -20,7 +20,7 @@ from . import pos
 from . import discovery_outcomes as outcomes
 from .context import NP_DETERMINER_TAGS, TIME_ADVERBS, positive_context
 from .detect import DETERMINERS, NOUN_PREPOSITIONS, Detection, check_frame
-from .embed import NgramEmbedder
+from .embed import NgramEmbedder, NgramIndex
 from .errors import UserError
 from .engine import Translator
 from .model import Dictionary
@@ -84,6 +84,8 @@ MEANING_FLOOR = 0.62
 DESCRIPTION_NAMES_IT = 0.9    # a one-word query found in a concept's description ("cry")
 GLOSS_NAMES_IT = 0.75         # a one-word query found in the entry's gloss
 ONE_WORD_FUZZ = 0.85          # one word is where character n-grams mislead most (lonely ~ lovely, miser)
+_SPELLING_CORPORA = 4
+_TERM_FORM_SETS = 4096
 GLOSS_FUZZ = (0.7, 0.9)       # n-gram similarity to a gloss, discounted (one word, a phrase)
 
 
@@ -135,20 +137,27 @@ class _TermMatch:
     whole: bool = False
 
 
+@lru_cache(maxsize=_TERM_FORM_SETS)
+def _term_forms(all_forms: tuple[str, ...], frame: str):
+    """Query-independent form facts, shared by ordinary and batched lookup; bounded across dictionaries."""
+    forms = tuple(form_key(form) for form in all_forms)
+    raw = tuple(fold(PLACEHOLDER_RE.sub('', form)) for form in all_forms)
+    inflections = frozenset().union(*(_inflected(form.strip(), frame) for form in raw))
+    stems = set()
+    for word in (word for form in raw for word in form.split() if len(word) > 3):
+        stem = word.rstrip("'").removesuffix("g").removesuffix("in") if word.endswith(("in'", "ing")) else word
+        stems |= {stem, stem[:-1] if len(stem) > 2 and stem[-1] == stem[-2] else stem}
+    return forms, inflections, frozenset(stems)
+
+
 def _term_match(e: Entry, qn: str, slotted: set[str]) -> _TermMatch | None:
-    forms = [form_key(f) for f in e.all_forms]
+    forms, inflections, stems = _term_forms(tuple(e.all_forms), e.frame)
     exact = e.id in slotted or qn in forms
-    inflected = not exact and any(qn in _inflected(fold(PLACEHOLDER_RE.sub("", f)).strip(), e.frame)
-                                  for f in e.all_forms)
-    if exact or any(qn in f.split() for f in forms):
+    inflected = not exact and qn in inflections
+    if exact or any(qn in form.split() for form in forms):
         return _TermMatch(SCORE_TERM, 'term', "slang term", whole=exact or inflected)
     if inflected:
         return _TermMatch(SCORE_INFLECTED, 'term', "the slang term, inflected", whole=True)
-    stems = set()
-    raw = [fold(PLACEHOLDER_RE.sub("", f)) for f in e.all_forms]
-    for w in (w for f in raw for w in f.split() if len(w) > 3):
-        st = w.rstrip("'").removesuffix("g").removesuffix("in") if w.endswith(("in'", "ing")) else w
-        stems |= {st, st[:-1] if len(st) > 2 and st[-1] == st[-2] else st}   # kippin' -> kipp -> kip
     if len(qn) >= 3 and (any(f" {qn} " in f" {f} " for f in forms) or (" " not in qn and qn in stems)):
         return _TermMatch(SCORE_IN_PHRASE, 'phrase', "part of a phrase")
     if " " in qn and any(_in_order(qn.split(), f.split()) for f in forms):
@@ -274,6 +283,58 @@ def _merge_ruled_out(protections, limit):
              for cid, words in sorted(meanings.items())] + dialects)
 
 
+def _lookup_cards(tr, query, *, level, vulgarity, embellishment, document_type, document_config,
+                  include_gated, unlock=None, short=True, limit=50):
+    d = tr.dictionary
+    genre = resolve_document(query, config=d.genres, document_type=document_type, document_config=document_config)
+    setting = genre.setting(parse_embellishment(embellishment) if embellishment is not None else None)
+    eff = tr.effective(level=level, vulgarity=vulgarity, unlock=["all"] if include_gated else unlock,
+                       embellishment=embellishment, document_type=document_type, document_config=document_config)
+    return _LookupCards(d, eff, setting, genre.policy.term_domains, short, limit)
+
+
+class _LookupIndex:
+    """Fixed spelling data shared by bounded batches; scores equal scalar trigram cosine exactly."""
+    def __init__(self, patterns, glosses):
+        self.patterns = tuple((strip_markup(text), concepts) for text, concepts in patterns)
+        self.texts = tuple(sorted({text for text, _ in self.patterns} | set(glosses)))
+        self.ngrams = NgramIndex(self.texts)
+
+    def similarities(self, query):
+        return {self.texts[i]: score for i, score in self.ngrams.scores(query).items()}
+
+
+@lru_cache(maxsize=_SPELLING_CORPORA)
+def _lookup_index(patterns, glosses):
+    # Cache by actual immutable spelling content, not dictionary_id: in-memory derived dictionaries
+    # can retain an identity. Four corpora bound retained postings across extension/dictionary reloads.
+    return _LookupIndex(patterns, glosses)
+
+
+class _LookupBatch:
+    """One request-local lookup batch, evaluated lazily for adaptive quiz exclusions.
+
+    Reuses policy and fixed spelling data, invokes the ordinary scoring kernel, and projects IDs only.
+    Query results are request-local; the bounded spelling index is shared by actual content.
+    It creates no new public operation or response contract.
+    """
+    def __init__(self, translator, *, level, vulgarity, embellishment, document_type, document_config, include_gated):
+        self.translator = translator
+        self.cards = _lookup_cards(translator, None, level=level, vulgarity=vulgarity, embellishment=embellishment,
+            document_type=document_type, document_config=document_config, include_gated=include_gated)
+        dictionary = translator.dictionary
+        self.index = _lookup_index(tuple((pattern.text, pattern.concepts) for pattern in dictionary.patterns),
+                                   tuple(entry.gloss.lower() for entry in dictionary.idioms + dictionary.garnish if entry.gloss))
+        self.include_gated = include_gated
+        self.cache = {}
+
+    def entry_ids(self, query):
+        if query not in self.cache:
+            self.cache[query] = frozenset(_query(query, self.translator, self.cards, self.include_gated,
+                                                index=self.index, ids_only=True))
+        return self.cache[query]
+
+
 def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = None, limit: int = 8,
            include_gated: bool = False, short: bool = False, embellishment: int | str | None = None,
            document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None,
@@ -291,12 +352,15 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     if type(limit) is not int or limit < 1:
         raise UserError(f"limit must be 1 or more, not {limit}")
     tr = translator
-    d: Dictionary = tr.dictionary
-    genre = resolve_document(query, config=d.genres, document_type=document_type, document_config=document_config)
-    setting = genre.setting(parse_embellishment(embellishment) if embellishment is not None else None)
-    eff = tr.effective(level=level, vulgarity=vulgarity, unlock=["all"] if include_gated else unlock,
-                       embellishment=embellishment, document_type=document_type, document_config=document_config)
-    cards = _LookupCards(d, eff, setting, genre.policy.term_domains, short, limit)
+    cards = _lookup_cards(tr, query, level=level, vulgarity=vulgarity, embellishment=embellishment,
+        document_type=document_type, document_config=document_config, include_gated=include_gated,
+        unlock=unlock, short=short, limit=limit)
+    return _query(query, tr, cards, include_gated)
+
+
+def _query(query, tr, cards, include_gated, *, index=None, ids_only=False):
+    d, eff, setting = cards.dictionary, cards.effective, cards.setting
+    short, limit = cards.short, cards.limit
     q = query.lower().strip()
     # one word ("lonely") is where character n-grams mislead most (lovely, miser), so for a single word trust
     # whole-word hits and discount fuzzy ones
@@ -334,7 +398,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     out = {"query": query, "card_version": CARD_VERSION,
            **eff.envelope(profile=False)}
     waiting = sorted(set(d.wordless_meanings).intersection(established))
-    if waiting:
+    if waiting and not ids_only:
         out.update(outcome=outcomes.NO_WORD_YET,
                    meanings=[{"concept": cid, "plain": d.concepts[cid].plain, "near": cards.near(cid)} for cid in waiting],
                    note="The dictionary recognises this meaning but has no Aussie word for it yet. "
@@ -343,6 +407,8 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     object_terms = _object_terms(form_matches, readings, tokens, tags, d) if waiting else set()
     object_concepts = {cid for eid in object_terms for cid in d.entries[eid].concept}
     if waiting and not established.difference(waiting) and not object_terms:
+        if ids_only:
+            return set()
         images, _ = lookup_images(d, query, eff, setting, limit, tokens=tokens, readings=readings, named=named)
         return {**out, "results": [], **({"imagery": images} if images else {})}
 
@@ -357,11 +423,16 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         if not protections and (not established or exhaustive is None):
             protections = _dialect_protected_query(query, tokens, cards)
         if protections:
+            if ids_only:
+                return set()
             return {**out, 'outcome': outcomes.LEFT_AS_WRITTEN, 'results': [], 'protections': protections,
                     'ruled_out': _merge_ruled_out(protections, limit),
                     'note': ' '.join(dict.fromkeys(p['reason'] for p in protections if p['reason']))}
 
     sim = NgramEmbedder()
+    indexed = index.similarities(q) if index else None
+    def similarity(text):
+        return indexed.get(text, 0.0) if indexed is not None else sim.similarity(q, text)
     model = None if waiting else tr.lookup_embedder
     if waiting:
         exhaustive = named or established | object_concepts
@@ -384,10 +455,10 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
             for det in connected))))
 
     concept_score: dict[str, float] = {}
-    for p in d.patterns:
-        text = strip_markup(p.text)
-        score = 1.0 if text == q else sim.similarity(q, text) * fuzz
-        for c in p.concepts:
+    patterns = index.patterns if index else ((strip_markup(p.text), p.concepts) for p in d.patterns)
+    for text, concepts in patterns:
+        score = 1.0 if text == q else similarity(text) * fuzz
+        for c in concepts:
             concept_score[c] = max(concept_score.get(c, 0.0), score)
     for det in readings:
         if exhaustive is not None or det.frame not in {'np', 'adv'}:
@@ -430,7 +501,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         if e.gloss and paths == set(e.concept):
             gloss = e.gloss.lower()
             hit = one_word and q in re.findall(r"[a-z']+", gloss)
-            best = max(best, GLOSS_NAMES_IT if hit else sim.similarity(q, gloss) * GLOSS_FUZZ[not one_word])
+            best = max(best, GLOSS_NAMES_IT if hit else similarity(gloss) * GLOSS_FUZZ[not one_word])
         if model is not None and use_model:
             # the local model: meaning where n-grams only see spelling. Scored for every entry, not just the
             # ones n-grams missed: otherwise a weak n-gram match (knackered for "very tired", 0.65) keeps its weak
@@ -463,6 +534,8 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
         elif match := score_entry(e, term_match):
             scored.append(match)
     scored.sort(key=lambda t: (-t[0], t[1].incoherence, t[1].id))
+    if ids_only:
+        return {entry.id for _, entry, _, _ in scored[:limit]}
     results = [{**cards.entry(e), 'match_kind': kind, **({} if short else {'match': how, 'score': round(s, 2)})}
                for s, e, kind, how in scored[:limit]]
     for card in results:

@@ -268,3 +268,10 @@ to that concept, intersected with the other entry filters and dials. The wording
 existing protected-query priority behaviour: a new search alias must not overturn a fence as a side
 effect. The agreed aliases retain “American football” as a match while “American football game”,
 “a people”, “British pounds” and “hiking trail” stay left as written.
+
+
+Quiz exclusions use one request-local prepared lookup batch. Several adaptive gloss queries still run,
+with ordinary lookup's ranking, top-50 limit and permissions; ID-only projection avoids building full
+cards for exclusions. Fixed spelling data is bounded and reused by actual content, while query results
+stay local to the call. This changes no quiz input, seeded option order or answer contract. See the
+[paired measurement and acceptance evidence](../../../research/gate4-self-review-2026-11-15/README.md).

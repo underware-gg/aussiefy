@@ -185,7 +185,7 @@ def meaning_quiz(*, seed: int = 0, level: int | str = 5, vulgarity: int | str | 
                  translator: Translator | None = None) -> dict:
     """A seeded entry and four gloss options; the answer and full card are ready for the caller's reveal."""
     from .embed import NgramEmbedder
-    from .lookup import lookup
+    from .lookup import _LookupBatch
     from .quiz import askable_pool, select_question
 
     if type(seed) is not int:
@@ -195,17 +195,10 @@ def meaning_quiz(*, seed: int = 0, level: int | str = 5, vulgarity: int | str | 
     pool = askable_pool(_entries(d, eff, None, None, include_gated), d.concepts)
     model = translator.lookup_embedder
     ranking = model if model is not None else NgramEmbedder()
-    offered = {}
+    batch = _LookupBatch(translator, level=level, vulgarity=vulgarity, embellishment=embellishment,
+        document_type=document_type, document_config=document_config, include_gated=include_gated)
 
-    def offers(text):
-        if text not in offered:
-            result = lookup(text, translator=translator, level=level, vulgarity=vulgarity, limit=50,
-                            include_gated=include_gated, short=True, embellishment=embellishment,
-                            document_type=document_type, document_config=document_config)
-            offered[text] = {row['id'] for row in result['results']}
-        return offered[text]
-
-    question = select_question(pool, ranking, offers, seed)
+    question = select_question(pool, ranking, batch.entry_ids, seed)
     return {**envelope, 'seed': seed, 'ranking': {'model': ranking.name, 'fallback': model is None},
             'outcome': outcomes.MATCHED if question else outcomes.NOTHING_FITS,
             'entry': _card(question.entry, eff, setting) if question else None,

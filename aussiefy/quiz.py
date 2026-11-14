@@ -47,6 +47,7 @@ class QuizTerm:
     words: frozenset
     meaning: str
     person: bool
+    form: str
 
 
 def askable_pool(entries, concepts):
@@ -63,7 +64,7 @@ def askable_pool(entries, concepts):
         meanings = [concepts[cid] for cid in entry.concept]
         meaning = ' '.join([text, *(word for c in meanings
             for word in (c.description, c.plain, *c.search_words) if word)])
-        pool.append(QuizTerm(entry, text, forms, words, meaning, any(c.person for c in meanings)))
+        pool.append(QuizTerm(entry, text, forms, words, meaning, any(c.person for c in meanings), form_key(entry.form)))
     return tuple(pool)
 
 
@@ -71,7 +72,7 @@ def candidates(question, pool, excluded=()):
     def eligible(other):
         return (other.entry.id != question.entry.id and other.entry.id not in excluded
                 and other.text != question.text
-                and form_key(other.entry.form) != form_key(question.entry.form)
+                and other.form != question.form
                 and not set(other.entry.concept).intersection(question.entry.concept)
                 and not other.form_words & question.form_words and not other.words & question.words)
     available = [other for other in pool if eligible(other)]

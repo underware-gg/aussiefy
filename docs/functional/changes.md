@@ -373,7 +373,9 @@ region and re-offset subsequent edits locally.
 
 `plain:source` is replayable through the existing substitution pin with `target: null`.
 Use `ChangeSet.replay_pins({change_id: "plain:source"})`; replay and recapture preserve those exact
-source words against drawl and garnish. Other authored English choices at kept spots require a later
+source words against drawl and garnish. An eligible already-pinned prefix is retained even when
+the literal source starts with a capital; the automatic casing-confidence guard remains unchanged.
+Other authored English choices at kept spots require a later
 coordinated pin protocol. Personal choices are call-local and are never shared as dictionary pins.
 
 `other_sense` is a curator annotation used to assess ambiguous source wording. It is never a

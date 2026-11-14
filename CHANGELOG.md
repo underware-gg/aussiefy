@@ -9,7 +9,16 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
-- Implement the coordinated v4 review draft across Python, CLI and MCP: exact kept/held source spots,
+- Preserve eligible explicit prefix pins when a plain\-source replay restores a capitalised first word;
+  retain automatic casing policy'n strict unused\-pin validation. Check every real fixture source choice.
+
+- Batch meaning\-quiz exclusions through the ordinary lookup scorin' kernel, reusing a bounded spellin'
+  index'n returning IDs instead of full discovery cards. Anyway, preserve seeded questions and public contracts.
+- Add the Gate 4 acceptance ledger, complete current active\-grade coverage'n source\-calibration recheck.
+  Render all 45 authored meaning examples; preserve source at three unresolved sentence scopes, and add
+  a provisional restless\-sleep clause form without changin' display wording, spellings or permanent IDs.
+
+- Implement the coordinated v4 contract across Python, CLI and MCP: exact kept/held source spots,
   grammatical English choices, call\-local personal terms'n host controls, output\-selection suggestions,
   authored readin'/ruled\-out citations, and article\-free headword keys on cards'n lists. Protect caller
   wording through garnish, drawl'n optional rewriting. Freeze all six v4 schemas after the site review, includin' per\-selection outcomes and locked options,
@@ -216,7 +225,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 - Refine shared subject permissions with reviewed per\-term tiers'n tobacco from Dad; exact overrides remain independent of the swear cap. Apply evidence/general\-English weightin' to imagery and riffs, align guide examples, and strengthen metadata/source\-preservation checks.
 
 - Add nine reviewed subject themes with data\-driven vulgarity defaults'n exact boolean overrides,
-  independent of the swear cap. Well, share resolved permissions across translation, lookup, plans, suggestions,
+  independent of the swear cap. Share resolved permissions across translation, lookup, plans, suggestions,
   change alternatives'n agent/model checks; preserve source subject matter and separate mixed senses.
   Report the resolved permissions'n reject recognised forbidden additions from fresh or cached model output.
 

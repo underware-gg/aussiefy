@@ -37,3 +37,9 @@ uses the same candidate checks to distinguish outside_dials from a missing word 
 failure. Near citations carry the target's authored plain name. Kept source options suppress identical
 dictionary replacements. Headword keys omit a terminal full stop without changing stored spellings.
 The adapter can set or remove its hook's personal-list cap; direct request limits remain bounded.
+
+
+An explicitly pinned, eligible prefix remains replayable when a literal source choice restores a
+capitalised first word. Automatic casing-confidence heuristics do not discard that explicit pin;
+ordinary context/dial/budget/spacing checks and exact literal restoration remain in force. This does
+not broaden automatic prefix placement or weaken unused-pin validation.

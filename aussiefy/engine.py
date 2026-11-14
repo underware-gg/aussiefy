@@ -1177,8 +1177,9 @@ class Translator:
                 first = re.search(r"[A-Za-z][A-Za-z'’-]*", out)
                 if first is not None:
                     word = first.group()
-                    # If ordinary-word/name evidence is inconclusive, leave the sentence's case alone.
-                    if (word[0].isupper() and word.lower() not in lowerable and not g.first_replaced
+                    # Automatic prefixes need casing confidence. An explicit eligible pin replays the
+                    # requested prefix; placement and literal restoration still preserve source case.
+                    if (pin is None and word[0].isupper() and word.lower() not in lowerable and not g.first_replaced
                             and word != "I" and not word.startswith(("I'", "I’"))
                             and not any(c.isupper() for c in word[1:])):
                         continue

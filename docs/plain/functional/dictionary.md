@@ -251,9 +251,13 @@ Concept wording separates three jobs (R64). `plain` is the display name. Optiona
 `plain_forms: {vp: believe}` alongside `plain: believe what you're told`. A missing frame uses the
 display wording when it fits. Forms accept the same supported slots and frame rules as entries, with
 words rather than markup or sentence punctuation. A frame can hold one string or an ordered list of
-forms, selected by actual captures and the common renderer. The v4 draft uses these for kept English
+forms, selected by actual captures and the common renderer. Frozen v4 uses these for kept English
 choices; it checks degree and bound objects and requires an authored clause form. Concept-free garnish
-can use internal `plain_form` for the same purpose. This is sentence curation, not a public card field.
+can use internal `plain_form` for the same purpose. A display-noun fallback cannot replace an np
+reading that consumes a captured finite be predicate, and sentence wording must preserve an
+unambiguous required source modal. Without a safe form, source is retained. The Gate 4 audit records
+three unresolved sentence scopes rather than claiming all examples render. This is sentence curation,
+not a public card field.
 
 `search_words` is a list of reviewed exact lookup aliases. It adds no automatic source triggers and
 never includes sentence forms implicitly. Display names, explicit concept IDs and reviewed search
@@ -807,7 +811,7 @@ The same number check is used for selected replacements and their alternatives. 
 modifier can be excluded with the existing `grammar.nominal_roles: [head]` requirement.
 
 
-## Evidence calibration and prepared v4 data
+## Evidence calibration and v4 data
 
 The evidence weights are versioned in `attestation.yaml`. Version `20261114-source-hunt-1` follows the
 source-hunt reconciliation and a 300-term curator sanity check. It keeps the existing assessor and
@@ -817,7 +821,7 @@ records source scopes, dates, before/after scores and remaining limits. An attes
 Australian-commonness estimate or a certificate for every mapping.
 
 The data model now accepts optional `other_sense`, a non-empty single-line curator note describing an
-entry's other everyday meaning. It supports the forthcoming source-owned-term reader; the note alone
+entry's other everyday meaning. It supports the source-owned-term reader; the note alone
 does not establish a sense. Concepts may carry curated directed `near` relations, each with `concept`,
 reader-facing `differs`, and `setting` (`dinkum` or `troppo`). Unknown, self and duplicate targets fail
 validation. The v4 working runtime uses only these curated relations for automatic stand-ins at genuinely wordless
@@ -825,7 +829,7 @@ spots. Dinkum takes a 0.5 probability multiplier and Troppo 0.75; Deadset takes 
 region, register, theme, frame and vulgarity gates still apply. News, instructions, technical, official
 and custom document types disable automatic near use. Exact entries, even if blocked by the current
 dials, prevent it. Lookup may explain relations at Deadset without enabling automatic replacement;
-the coordinated [v4 draft](../../drafts/changes-v4/README.md) remains a proposal.
+the coordinated [v4 contract](../../contracts/v4/README.md) is frozen.
 
 
 An adverb entry may declare `grammar: {position: before_verb}`. Source grammar must establish the

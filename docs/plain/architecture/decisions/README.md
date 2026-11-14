@@ -78,6 +78,8 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 
 | [DD-058](../../../architecture/decisions/dd-058-owned-wording-and-selection.md) | Shared source ownership, selection mapping and directed near candidates | Implemented; v4 frozen |
 
+| [DD-059](../../../architecture/decisions/dd-059-quiz-discovery-batch.md) | Prepared quiz exclusions share ordinary lookup scoring | Implemented |
+
 ## By topic
 
 - **Engine:** DD-001, DD-003, DD-007, DD-029, DD-030, DD-034, DD-035, DD-036, DD-037, DD-039, DD-041, DD-044

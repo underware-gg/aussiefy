@@ -5,7 +5,16 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
-- Implement the coordinated v4 review draft across Python, CLI and MCP: exact kept/held source spots,
+- Preserve eligible explicit prefix pins when a plain-source replay restores a capitalised first word;
+  retain automatic casing policy and strict unused-pin validation. Check every real fixture source choice.
+
+- Batch meaning-quiz exclusions through the ordinary lookup scoring kernel, reusing a bounded spelling
+  index and returning IDs instead of full discovery cards. Preserve seeded questions and public contracts.
+- Add the Gate 4 acceptance ledger, complete current active-grade coverage and source-calibration recheck.
+  Render all 45 authored meaning examples; preserve source at three unresolved sentence scopes, and add
+  a provisional restless-sleep clause form without changing display wording, spellings or permanent IDs.
+
+- Implement the coordinated v4 contract across Python, CLI and MCP: exact kept/held source spots,
   grammatical English choices, call-local personal terms and host controls, output-selection suggestions,
   authored reading/ruled-out citations, and article-free headword keys on cards and lists. Protect caller
   wording through garnish, drawl and optional rewriting. Freeze all six v4 schemas after the site review, including per-selection outcomes and locked options,
