@@ -81,6 +81,16 @@ def number_problem(entry: Entry, det: Detection, toks: list[Token], tags: list[s
     if entry.frame != "np":
         return None
     if entry.number == 'count':
+        # A unit-bearing form ("a ...") cannot silently turn an unmeasured substance
+        # into one serving. Definite/possessive references and explicit counts fit;
+        # a bare mass phrase or an ambiguous some/no phrase does not establish a unit.
+        first = toks[det.start].norm
+        determined = (first in KEPT_DETERMINERS
+                      or opening_determiner(toks, det.start) in KEPT_DETERMINERS)
+        counted = (det.inflection in ('plural', 'written_plural')
+                   or first in COUNT_DETERMINERS or counted_noun(toks, det.start, tags))
+        if entry.form.lower().startswith(('a ', 'an ')) and not (determined or counted):
+            return 'a count unit requires a determined or counted source phrase'
         for i in range(det.start - 1, -1, -1):
             if toks[i].norm == 'much':
                 return 'a count noun in an explicitly mass phrase'
@@ -134,7 +144,8 @@ def fit_article(out: str, entry: Entry, det: Detection, toks: list[Token]) -> st
     opens_with_determiner = toks[det.start].norm in DETERMINERS   # "a shambles" keeps "a shemozzle"
     if lead is None and not opens_with_determiner and first.lower() in ("a", "an", "the") and " " in out and (
             plural and first.lower() in ("a", "an") or after_determiner(toks, det.start)
-            or _after_proper_modifier(toks, det.start)):
+            or _after_proper_modifier(toks, det.start)
+            or entry.number == 'count' and counted_noun(toks, det.start, pos.tag([t.text for t in toks]))):
         return out.split(" ", 1)[1]
     return out
 

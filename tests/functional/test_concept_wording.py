@@ -94,3 +94,21 @@ def test_imagery_does_not_hide_a_wordless_meaning_but_remains_discoverable(dicti
         assert 'country-racetrack-mind' in {image['id'] for image in result['imagery']}
     else:
         assert not result.get('imagery')
+
+
+@pytest.mark.parametrize('query,outcome', [
+    ('a people', 'left_as_written'),
+    ('American football game', 'left_as_written'),
+    ('British pounds', 'left_as_written'),
+    ('hiking trail', 'left_as_written'),
+    ('rain forest', 'left_as_written'),
+    ('American football', 'matched'),
+])
+def test_wording_aliases_preserve_the_agreed_protected_query_boundary(dictionary, query, outcome):
+    tr = Translator(dictionary, lookup_embedder=None)
+    result = lookup(query, translator=tr)
+    assert result['outcome'] == outcome
+    if outcome == 'left_as_written':
+        assert not result['results']
+    else:
+        assert 'gridiron' in {row['id'] for row in result['results']}

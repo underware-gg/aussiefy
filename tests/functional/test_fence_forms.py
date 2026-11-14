@@ -87,6 +87,8 @@ WHOLE_EXPRESSION_ENTRIES = {
     "dog's breakfast": {'dogs-breakfast', 'g-aside-dogs-breakfast'},
     "dog's breakfasts": {'dogs-breakfast', 'g-aside-dogs-breakfast'},
     'rainforest': {'the-brush'},
+    # Already an explicit BEER_CAN concept-ID lookup before the new source fence.
+    'beer can': {'tinnie'},
     'rainforests': {'the-brush'},
     'ranch hands': {'a-stockman'},
 }

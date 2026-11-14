@@ -11,7 +11,7 @@ check richer retellings; optional model\-assisted modes can run that work for ya
 
 ```
 $ aussiefy "I'm extremely busy." -l 4 -s 7
-I'm flat out like a lizard drinking.
+I'm flat-strap.
 ```
 
 ## Install

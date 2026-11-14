@@ -796,3 +796,10 @@ source verb: finite forms inflect do, an outer modal/infinitive retains its own 
 perfect/progressive forms retain their participle. This keeps grammatical negation in the phrase
 without special rules for a particular dictionary word. The source reader records the local VP
 auxiliary, including inverted questions.
+
+
+A `number: count` form that supplies its own indefinite article requires a determined or explicitly
+counted source phrase. It cannot create a serving from unmeasured mass wording. Counts such as one,
+another and several keep their determiner and suppress the target's extra article across modifiers.
+The same number check is used for selected replacements and their alternatives. A noun used as a
+modifier can be excluded with the existing `grammar.nominal_roles: [head]` requirement.

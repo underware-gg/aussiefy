@@ -26,7 +26,7 @@ From a clone, install in editable mode instead: `pip install -e '.[llm]'`.
 Give `aussiefy` the text itself, a file path, or nothing to read stdin:
 
 ```sh
-aussiefy "I'm extremely busy." -l 4 -s 7          # → I'm flat out like a lizard drinking.
+aussiefy "I'm extremely busy." -l 4 -s 7          # → I'm flat-strap.
 aussiefy story.txt -l 3
 echo "I'm exhausted." | aussiefy -l 4
 ```
@@ -35,7 +35,7 @@ At level 5 the engine goes all out:
 
 ```
 $ aussiefy "Good grief, are you crazy? You're overreacting, you're stupid and all talk, and I'm extremely busy cleaning up after you." -l 5 -s 1
-Strewth, do ya 'ave kangaroos loose in yer bloody top paddock? Oi, yer carryin' on like a pork chop, yer thick as two short planks and a big-noter, and I'm flat out cleaning up after you.
+Strewth, do ya 'ave kangaroos loose in yer bloody top paddock? Oi, yer carryin' on like a pork chop, yer thick as two short planks and a big-noter, and I'm flat out like a lizard drinking cleaning up after you.
 ```
 
 ## Choose how Aussie, how rude, and how much liberty
@@ -136,7 +136,7 @@ available. `validate` and `show` report which overlay made each correction.
 ```python
 from aussiefy import translate
 
-translate("I'm extremely busy.", level=4, seed=7).text   # "I'm flat out like a lizard drinking."
+translate("I'm extremely busy.", level=4, seed=7).text   # "I'm flat-strap."
 ```
 
 The full API is in [toolkit.md](../functional/toolkit.md).

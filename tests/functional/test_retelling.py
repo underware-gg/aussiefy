@@ -71,7 +71,7 @@ def test_stdio_entry_point_serves_the_shared_toolkit(tmp_path):
                 result = await client.call_tool("aussie_translate", {"text": "I'm extremely busy.", "level": 4, "seed": 7})
                 assert not result.is_error
                 output = result.structured_content
-                assert output["text"] == "I'm flat out like a lizard drinking."
+                assert output["text"] == "I'm flat-strap."
                 checked = await client.call_tool("aussie_verify", {
                     "text": output["text"], "original": "I'm extremely busy.", "level": 4})
                 assert not checked.is_error and checked.structured_content["ok"]

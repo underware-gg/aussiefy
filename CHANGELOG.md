@@ -9,6 +9,14 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Supply provisional plain wording'n search words for the remaining meanings, preserving Rob's
+  approved sample'n all source triggers. Struth, add paged concept discovery with eligible\-entry counts
+  through Python, the CLI and MCP, alongside the separate waitin'\-meanings listin'.
+
+- Add Rob\-approved busy'n speed senses of flat strap. Provisionally add friendly plural dickheads
+  and shared\-English legendary, and extend coldie to BEER; keep the dial, masking, address and
+  quantity distinctions. Recommendations are recorded in the Brain's Rulings for Rob report.
+
 - Reject raw slot syntax in reader\-facin' glosses across dictionary heaps'n corrections. Reword the
   knock\-back'n bend\-ear glosses, retaining their entry IDs, headwords and grammar.
 - Share the existing article-free headword comparison helper without changing A-to-Z keys. The public
@@ -67,7 +75,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 - Protect singular'n plural identity names such as `Native American` and `South Americans` in lookup.
   Well, keep a word inside a longer idiom from overriding a protected phrase: `the toss` stays as written,
-  while the complete death idiom remains discoverable. Struth, add the countable dollar word `buck`/`bucks`
+  while the complete death idiom remains discoverable. Stone the flamin' crows, add the countable dollar word `buck`/`bucks`
   from R75, retaining quantities'n currency labels; recognise counted noun queries such as `five dollars`.
 
 - Restore protection of the real plural `toss ups` and cover the spellin' `toss-ups`. Keep authored phrase protections inside capitalised
@@ -88,7 +96,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   from translation unlocks. Well, shared cards move together in the v3 producer update.
 
 - Add counterfactual evidence'n an audit command for protected phrases, including overlappin'
-  protections, wordless readings'n guarded dialect swaps. Jeez Louise, allow checked contextual examples.
+  protections, wordless readings'n guarded dialect swaps. Fair dinkum, allow checked contextual examples.
   Protections without established alternative readings remain in place'n are reported for review.
 
 - Separate source\-meaning conditions from output grammar. Shared role evidence rejects adjective\-as\-noun
@@ -242,7 +250,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   explicitly overridden. Keep ordinary indefinite wording available. Share mapping effects through
   selection, lookup, plans, alternatives'n bounded original\-aware verification; retain unrelated numbers.
 - Apply the remainin' clear source\-audit sense repairs: distinguish urination, categorical impossibility,
-  completion, tasting, noisy crying/sulking, explicit noun subtypes'n emphatic refusals. Stone the crows, preserve antenna
+  completion, tasting, noisy crying/sulking, explicit noun subtypes'n emphatic refusals. Preserve antenna
   qualifiers/plurals'n walking destinations, require progressive objects, and retain discovery\-only
   vocabulary where source wording can't establish a safe automatic readin'. Correct eight source/usage
   records'n merge 627 reviewed source pairs from batches 7–11 without changin' existin' term gates.

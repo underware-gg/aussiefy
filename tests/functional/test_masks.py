@@ -84,7 +84,7 @@ def test_every_rated_entry_yields_a_masked_word_at_its_rating_unless_nothing_in_
 def test_entries_with_nothing_profane_are_marked_in_the_data(dictionary):
     unmasked = {e.id for e in dictionary.entries.values() if not e.profane}
     assert unmasked >= {"rooted", "have-a-root", "colder-than-a-witchs-tit", "mongrel", "shut-your-gob"}
-    assert {e.id for e in dictionary.entries.values() if e.mask} == {"wanker", "a-dickhead", "bare-arsed",
+    assert {e.id for e in dictionary.entries.values() if e.mask} == {"wanker", "a-dickhead", "dickheads-address", "bare-arsed",
                                                                      "tight-arsed", "blue-arsed-fly",
                                                                      "bugger-me-sideways", "fuck-me-sideways"}
 

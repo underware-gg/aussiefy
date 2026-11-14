@@ -24,8 +24,8 @@ def test_direct_plural_address_has_no_distributive_candidates(dictionary, text):
         result = tr.translate(text, seed=seed, **OPTIONS)
         record = next(r for r in result.records if 'PLURAL_ADDRESS' in r.det.concepts)
         assert record.det.noun_use == 'address'
-        assert {c.entry.id for c in record.eligible} == {'youse', 'you-mob'}
-        assert record.substituted and record.output.lower() in {'youse', 'you mob'}
+        assert {c.entry.id for c in record.eligible} == {'youse', 'you-mob', 'dickheads-address'}
+        assert record.substituted and record.output.lower() in {'youse', 'you mob', 'dickheads'}
         assert not any(phrase in result.text.lower() for phrase in ['every bugger', 'every bastard',
                                                                   'every cunt', 'every man', 'every bloke'])
 
@@ -39,7 +39,7 @@ def test_reference_keeps_distributive_meaning(dictionary, text):
     for record in records:
         assert record.det.noun_use == 'reference'
         assert REFERENTIAL & {c.entry.id for c in record.eligible}
-        assert 'you-mob' not in {c.entry.id for c in record.eligible}
+        assert not {'you-mob', 'dickheads-address'} & {c.entry.id for c in record.eligible}
 
 
 @pytest.mark.parametrize('text', ['Everyone, including Sam, came.', 'Everyone!'])

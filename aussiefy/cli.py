@@ -459,6 +459,24 @@ def cmd_name(args) -> int:
     return 0 if out["name"] else 1
 
 
+def cmd_concepts(args) -> int:
+    from . import harness
+    out = harness.list_concepts(offset=args.offset, limit=args.limit, include_gated=args.include_gated,
+                               embellishment=args.embellishment, translator=_translator(args),
+                               **_document(args), **_policy(args))
+    if args.json:
+        _json(out)
+    else:
+        _warn(out["policy_warnings"])
+        for row in out["results"]:
+            print(f"  {row['concept']}: {row['plain']} — {row['entry_count']} entries")
+        if out["next_offset"] is not None:
+            print(f"  (next offset: {out['next_offset']})")
+        if not out["results"]:
+            print(f"  ({out['outcome']})")
+    return 0 if out["results"] else 1
+
+
 def cmd_wordless(args) -> int:
     from . import harness
     out = harness.list_wordless_meanings(offset=args.offset, limit=args.limit, translator=_translator(args))
@@ -1046,6 +1064,13 @@ def build_parser() -> argparse.ArgumentParser:
                         help="a clean Aussie handle; check uniqueness before using it")
     nm.add_argument("--shape", choices=SHAPES)
     nm.set_defaults(func=cmd_name)
+
+    co = sub.add_parser("concepts", parents=[*toolkit, embellished],
+                        help="meanings with eligible-entry counts under the requested settings")
+    co.add_argument("--include-gated", action="store_true", help="permit held-back entries in counts")
+    co.add_argument("--offset", type=int, default=0)
+    co.add_argument("--limit", type=int, default=DEFAULT_PAGE_SIZE)
+    co.set_defaults(func=cmd_concepts)
 
     wm = sub.add_parser("wordless-meanings", parents=[dictionary, as_json],
                         help="meanings the dictionary recognises but has no Aussie word for yet")

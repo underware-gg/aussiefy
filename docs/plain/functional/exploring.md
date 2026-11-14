@@ -246,3 +246,25 @@ and injected translator. The same dictionary, settings, model and seed repeat th
 
 The current bundled-model response fixture is `tests/fixtures/meaning-quiz.json`. Regenerate intentional
 changes with `python scripts/regen_meaning_quiz_fixture.py` and review its diff.
+
+
+## Browse by meaning
+
+`list_concepts` (CLI `aussiefy concepts`, MCP `aussie_concepts`) lists stored meanings by stable
+concept ID. Each row contains `concept`, `plain` and `entry_count`. The count is the total returned by
+`list_entries(concept=...)` with the same dials, themes, registers and held-entry policy. Counts are
+computed before pagination; meanings blocked by the dials remain with zero. Meanings without a stored
+entry are excluded and retain their separate `list_wordless_meanings` listing. Omitted entries never
+create browse rows. The standard envelope includes dictionary identity, dials, warnings and pagination.
+
+The Gate 4 wording pass supplies plain names and exact search words for every ordinary concept.
+Rob's approved sample wording/search lists are retained. Additional wording is marked provisional in
+the dictionary and recorded in the Brain's Rulings for Rob. Search words are discovery terms, not
+translation triggers, and this pass changes no source patterns or existing headword spellings.
+
+`plain` is complete reader-facing en-AU wording for the meaning's name; it is not an ID, a template
+or a text fragment the caller must complete. `list_entries(concept=...)` filters to entries belonging
+to that concept, intersected with the other entry filters and dials. The wording pass retains the
+existing protected-query priority behaviour: a new search alias must not overturn a fence as a side
+effect. The agreed aliases retain “American football” as a match while “American football game”,
+“a people”, “British pounds” and “hiking trail” stay left as written.

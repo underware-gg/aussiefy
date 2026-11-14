@@ -93,7 +93,8 @@ def test_beer_package_qualifiers_do_not_become_count_nouns(translator):
 def test_mass_beer_wording_preserves_count_constructions(translator, source):
     result = render(translator, source)
     assert 'amber-fluid' not in offered(result)
-    assert 'beer' in result.text
+    assert 'coldie' in result.text
+    assert 'a coldie' not in result.text
 
 
 @pytest.mark.parametrize('source', [

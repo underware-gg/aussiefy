@@ -30,9 +30,9 @@ from .lookup import lookup
 from .verify import verify
 from .bulldust import bulldust, variations, scaffold
 from .v3_contract import construction_card, provenance
-from .explore import get_entry, list_entries, list_wordless_meanings, meaning_quiz, random_entry, suggest_name
+from .explore import get_entry, list_entries, list_concepts, list_wordless_meanings, meaning_quiz, random_entry, suggest_name
 
-__all__ = ["list_entries", "list_wordless_meanings", "get_entry", "random_entry", "meaning_quiz", "suggest_name", "variations", "lookup", "lint", "guide", "plan", "translate", "verify", "bulldust", "fidelity", "openings"]
+__all__ = ["list_entries", "list_concepts", "list_wordless_meanings", "get_entry", "random_entry", "meaning_quiz", "suggest_name", "variations", "lookup", "lint", "guide", "plan", "translate", "verify", "bulldust", "fidelity", "openings"]
 
 
 def translate(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None,

@@ -5,6 +5,14 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Supply provisional plain wording and search words for the remaining meanings, preserving Rob's
+  approved sample and all source triggers. Add paged concept discovery with eligible-entry counts
+  through Python, the CLI and MCP, alongside the separate waiting-meanings listing.
+
+- Add Rob-approved busy and speed senses of flat strap. Provisionally add friendly plural dickheads
+  and shared-English legendary, and extend coldie to BEER; keep the dial, masking, address and
+  quantity distinctions. Recommendations are recorded in the Brain's Rulings for Rob report.
+
 - Reject raw slot syntax in reader-facing glosses across dictionary loads and corrections. Reword the
   knock-back and bend-ear glosses, retaining their entry IDs, headwords and grammar.
 - Share the existing article-free headword comparison helper without changing A-to-Z keys. The public

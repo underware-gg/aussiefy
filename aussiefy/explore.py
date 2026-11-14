@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections import Counter
 from string import ascii_lowercase
 
 from .engine import resolve_request
@@ -97,6 +98,28 @@ def list_entries(*, concept: str | None = None, theme: str | None = None, initia
     return {**envelope, "concept": concept, "theme": theme, "initial": initial, "initial_counts": initial_counts,
             "offset": offset, "limit": limit, "total": len(entries), "next_offset": next_offset, "outcome": _outcome(page, entries),
             "results": [_card(entry, eff, setting) for entry in page]}
+
+
+def list_concepts(*, offset: int = 0, limit: int = DEFAULT_PAGE_SIZE,
+                  level: int | str = 5, vulgarity: int | str | None = None,
+                  include_gated: bool = False, embellishment: int | str | None = None,
+                  document_type: str = "general", document_config: dict | None = None,
+                  themes: dict[str, bool] | None = None, invention: bool | None = None,
+                  translator: Translator | None = None) -> dict:
+    """List meanings with stored entries, by stable concept ID, with eligible-entry counts.
+
+    A dial-blocked meaning remains with count zero. Wordless meanings and the holding
+    concept have their separate treatment; omitted entries do not create browse rows.
+    """
+    translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
+    d, eff, _, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
+    concepts = sorted({cid for entry in d.entries.values() if entry.status != "omit" for cid in entry.concept})
+    counts = Counter(cid for entry in _entries(d, eff, None, None, include_gated) for cid in entry.concept)
+    page, next_offset = _page(concepts, offset, limit)
+    return {**envelope, "offset": offset, "limit": limit, "total": len(concepts), "next_offset": next_offset,
+            "outcome": _outcome(page, concepts),
+            "results": [{"concept": cid, "plain": d.concepts[cid].plain, "entry_count": counts[cid]}
+                        for cid in page]}
 
 
 def list_wordless_meanings(*, offset: int = 0, limit: int = DEFAULT_PAGE_SIZE,

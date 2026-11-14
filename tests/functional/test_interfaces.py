@@ -10,7 +10,7 @@ import pytest
 import aussiefy
 from aussiefy import harness
 
-TOOLS = {"aussie_entries": harness.list_entries, "aussie_wordless_meanings": harness.list_wordless_meanings,
+TOOLS = {"aussie_concepts": harness.list_concepts, "aussie_entries": harness.list_entries, "aussie_wordless_meanings": harness.list_wordless_meanings,
          "aussie_entry": harness.get_entry,
          "aussie_meaning_quiz": harness.meaning_quiz, "aussie_random_entry": harness.random_entry, "aussie_suggest_name": harness.suggest_name,
          "aussie_variations": harness.variations, "aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_guide": harness.guide,
@@ -25,7 +25,7 @@ VALUES = {"include_scaffold": True, "family": "hungry-enough-to", "parts": {"sta
           "embellishment": 2, "suggest": False, "markdown": False, "concept": "HUNGRY", "theme": "sex",
           "themes": {"drinking": False}, "invention": True, "popularity": True, "preferences": [],
           "entry_id": "stoked", "initial": "k", "offset": 2, "shape": "place"}
-SUBJECT = {"meaning_quiz": (None, None), "list_entries": (None, None), "list_wordless_meanings": (None, None), "random_entry": (None, None), "suggest_name": (None, None),
+SUBJECT = {"list_concepts": (None, None), "meaning_quiz": (None, None), "list_entries": (None, None), "list_wordless_meanings": (None, None), "random_entry": (None, None), "suggest_name": (None, None),
            "get_entry": ("entry_id", "stoked"), "variations": ("family", "hungry-enough-to"), "lookup": ("query", "very tired"), "lint": ("text", "G'day mate."), "plan": ("text", "She was tired."),
            "translate": ("text", "She was tired."), "bulldust": ("concept", "HUNGRY"), "guide": (None, None),
            "verify": ("text", "She was knackered.")}
