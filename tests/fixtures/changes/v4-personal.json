@@ -1,0 +1,99 @@
+{
+ "about": "Call-local wording, bound people and Markdown escaping, without invented dictionary IDs.",
+ "request": {
+  "text": "🦘 She **adores Jane**. A spreadsheet. `spreadsheet`",
+  "level": 1,
+  "vulgarity": 0,
+  "embellishment": 0,
+  "markdown": true,
+  "embedder": "none",
+  "personal_terms": [
+   {
+    "phrase": "adore Jane",
+    "term": "love the boss"
+   },
+   {
+    "phrase": "spreadsheet",
+    "term": "number wrangler"
+   }
+  ]
+ },
+ "response": {
+  "version": 4,
+  "text": "🦘 She **adores Jane**. A number wrangler. `spreadsheet`",
+  "card_version": 4,
+  "dictionary_id": "sha256:6c2ed3aea93d2d66b430182a56973cc23dcb03c917830d7f2629f1a9a0b0ae1e",
+  "tuning": {
+   "popularity": false,
+   "preferences": 0
+  },
+  "personal_terms": {
+   "provided": 2,
+   "applied": 1
+  },
+  "warnings": [],
+  "warning_details": [],
+  "changes": [
+   {
+    "id": "personal:23-36",
+    "kind": "personal",
+    "src_span": [
+     23,
+     36
+    ],
+    "out_span": [
+     23,
+     40
+    ],
+    "original": "A spreadsheet",
+    "output": "A number wrangler",
+    "entry_id": null,
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "personal:1130c7d8ae19a5899b448ff81874d99a47b4e9b439947fe05e54a2ee27071a16",
+      "kind": "personal",
+      "rendered": "A number wrangler",
+      "out_span": [
+       23,
+       40
+      ],
+      "vulgarity": 0,
+      "weight": 1.0,
+      "masks": []
+     },
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "plain:source",
+      "kind": "plain",
+      "rendered": "A spreadsheet",
+      "out_span": [
+       23,
+       40
+      ],
+      "vulgarity": 0,
+      "weight": 0.0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "evidence": null,
+    "coined_by": null,
+    "reading": null,
+    "ruled_out": [],
+    "option_key": "personal:1130c7d8ae19a5899b448ff81874d99a47b4e9b439947fe05e54a2ee27071a16"
+   }
+  ],
+  "entries": {},
+  "constructions": {},
+  "imagery": {},
+  "withheld": []
+ }
+}

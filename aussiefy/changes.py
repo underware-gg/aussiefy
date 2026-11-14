@@ -34,13 +34,14 @@ from .garnish import (Edit, GarnishOffer, PhoneticPass, PhoneticTrace, in_dialog
 from .masks import masks
 from .model import Dictionary
 from .policy import resolve
-from .schema import Entry
+from .schema import Entry, parse_entry
 from .constructions import Construction
-from .select import Candidate
+from .select import Candidate, usable_forms
+from .plain_wording import plain_entry
 from .text import FIRST_WORD_RE, match_case
 from .offsets import _walk, Straddle as Straddle, map_position, map_outward, unmap_position, map_spans
 
-VERSION = 3          # the changes contract; a change to its shape or to how ids are made bumps it
+VERSION = 4          # the changes contract; a change to its shape or to how ids are made bumps it
 SCHEMA = Path(__file__).resolve().parent / "data" / "changes.schema.json"   # its JSON Schema
 ID_FORMAT = "{kind}:{start}-{end}[:{placement or rule}][#{n}]"   # how a change's id is made ([...]: where it has one)
 CONTEXT = 64         # characters of whole-text context read either side of a region, for the rules' lookaround
@@ -48,8 +49,9 @@ MARGIN = 16          # ... the outer part of which is read, never compared (a ma
 WIDEN = 4            # the most words a region widens by, each side, for a phonetic match across its edge
 _FIELDS = ("id", "kind", "src_span", "out_span", "original", "output", "entry_id", "vulgarity", "masks", "placement",
            "image_id", "removed", "rule", "pair", "alternatives", "locked", "covers",
-           "construction_id", "parts", "riffs", "match", "evidence", "coined_by")   # a change's, in order
-KINDS = ("substitution", "dialect", "garnish", "swear_infix", "phonetic")   # also their order at one output span
+           "construction_id", "parts", "riffs", "match", "evidence", "coined_by",
+           "reading", "ruled_out", "option_key", "selected_reading", "near")   # a change's, in order
+KINDS = ("substitution", "kept", "held", "personal", "dialect", "garnish", "swear_infix", "phonetic")   # also their order at one output span
 # why a swap or a garnish offers its pick alone (ChangeSet.withheld)
 PICK_DIFFERS = "pick-differs"            # the pick, rendered over its region, isn't the output there
 REGION_UNSETTLED = "region-unsettled"    # a phonetic match still reads across the region's edge after widening
@@ -122,6 +124,8 @@ class Draft:
         """Each rendering a page can swap in: the alternatives, the locked options and a removal."""
         yield from self.change["alternatives"]
         yield from self.change["locked"]
+        for reading in self.change.get('ruled_out', []):
+            yield from reading['words']
         if self.change.get("removed"):
             yield self.change["removed"]
 
@@ -191,10 +195,23 @@ def finish(result: Any, drafts: list[Draft], dictionary: Dictionary) -> ChangeSe
     names: set[str] = set()
     for d in drafts:
         c = d.change
-        c["masks"] = _masked(dictionary, c["output"], d.entries)
+        c.setdefault('reading', None)
+        c.setdefault('ruled_out', [])
+        c["masks"] = [] if c['kind'] in {'kept', 'held'} else _masked(dictionary, c["output"], d.entries)
+        for option in c['alternatives'] + c['locked']:
+            option.setdefault('kind', 'construction' if option.get('construction_id') else 'entry')
+            if 'key' not in option:
+                option['key'] = option['kind'] + ':' + (option.get('construction_id') or option['entry_id'])
+        if c['kind'] in {'substitution', 'kept', 'held', 'personal'}:
+            c.setdefault('option_key', c['alternatives'][0]['key'] if c['alternatives'] else None)
         for o, entries in zip(c["alternatives"] + c["locked"], d.rendering_entries, strict=True):
-            o["masks"] = _masked(dictionary, o["rendered"], entries)
+            o["masks"] = [] if o['kind'] == 'source' else _masked(dictionary, o["rendered"], entries)
         names.update(i for es in [d.entries, *d.rendering_entries] for i in es)
+        for reading in c['ruled_out']:
+            for option in reading['words']:
+                if option.get('entry_id'):
+                    names.add(option['entry_id'])
+                names.update(riff['entry_id'] for riff in option.get('riffs', []) if riff.get('entry_id'))
     riffs = shows_riffs(result.embellishment)
     entries = {i: entry_card(dictionary.entries[i], result.vulgarity, riffs,
                              permitted_themes=result.theme_policy, registers=result.registers, allow_misreadable=result.allow_misreadable) for i in sorted(names)}
@@ -317,6 +334,7 @@ class _Layout:
     splices: list[Edit]
     garnish: list[Edit | None]
     text: str
+    literal: tuple[tuple[int, int], ...] = ()
 
     def forward(self, pos: int, bias: Bias) -> int:
         return self.after_garnish(map_position(self.splices, pos, bias), bias, 0)
@@ -364,6 +382,8 @@ class _Option:
     @property
     def entries(self) -> list[str]:
         """The entries its rendering came from: its own, and the one stacked after it."""
+        if self.candidate.kind != 'entry':
+            return []
         stacked = self.rendering.stacked
         own = (_garnish_entries(self.candidate.construction) if self.candidate.construction else [self.entry.id])
         return own + ([stacked.entry.id] if stacked else [])
@@ -423,10 +443,12 @@ class _Builder:
         self.starts = [st.start for st in watch.sentences]
         self.sentences = [self._sentence(st) for st in watch.sentences]
         self._raised: dict[int, Any] = {}
+        self._ruled_choices: dict[tuple[int, int], dict[str, Pin]] = defaultdict(dict)
         self._plans: dict[tuple, list[_PassView]] = {}
 
     def drafts(self) -> list[Draft]:
-        out = [self._substitution(spot) for spot in self.watch.spots if spot.rec.substituted]
+        out = [self._substitution(spot) if spot.rec.substituted else self._owned(spot)
+               for spot in self.watch.spots if spot.rec.substituted or spot.rec.kind in {'kept', 'held'}]
         for sentence in self.sentences:
             for s in sentence.splices:
                 if s.kind == "dialect":
@@ -478,7 +500,7 @@ class _Builder:
         return sorted((s.start - base, s.end - base, len(s.text)) for s in splices)
 
     def _telling(self, sentence: _Sentence, splices: list[_Splice], first: bool,
-                 ops: Sequence[_Op | None] | None = None) -> _Layout:
+                 ops: Sequence[_Op | None] | None = None, *, literal_span=None) -> _Layout:
         """The sentence told with these splices and this garnish (its own unless given; None leaves one out), each
         garnish put in as the engine put it. first: whether it now starts with a lower-case swap."""
         st, start = sentence.trace, sentence.offset
@@ -486,10 +508,32 @@ class _Builder:
         for s in sorted(splices, key=lambda s: (s.start, s.end), reverse=True):
             spliced = spliced[:s.start - start] + s.text + spliced[s.end - start:]
         ops = sentence.ops if ops is None else ops
+        literal_spans = self._literal_spans(sentence, splices)
+        if literal_span is not None:
+            edits = self._splice_edits(start, splices)
+            literal_spans += ((map_position(edits, literal_span[0] - start, 'left'),
+                               map_position(edits, literal_span[1] - start, 'right')),)
         text, edits = self.translator.replay_garnish(spliced, st.sent, self.run,
-                                                     [(o.placement, o.form) for o in ops if o], first)
+                    [(o.placement, o.form) for o in ops if o], first, literal_spans=literal_spans)
         placed = iter(edits)
-        return _Layout(self._splice_edits(start, splices), [next(placed) if o else None for o in ops], text)
+        layout = _Layout(self._splice_edits(start, splices), [next(placed) if o else None for o in ops], text)
+        layout.literal = tuple((layout.after_garnish(a, 'right', 0), layout.after_garnish(b, 'left', 0))
+                               for a, b in literal_spans)
+        return layout
+
+    def _literal_spans(self, sentence, splices):
+        edits = self._splice_edits(sentence.offset, splices)
+        spans = [(map_position(edits, record.span[0] - sentence.offset, 'right'),
+                  map_position(edits, record.span[1] - sentence.offset, 'left'))
+                 for record in sentence.trace.records if record.kind in {'kept', 'held'}
+                 and not any(s.start < record.span[1] and record.span[0] < s.end for s in splices)]
+        for record in sentence.trace.records:
+            if record.out_span and record.chosen and record.chosen.kind in {'personal', 'plain'} and any(
+                    s.owner is not None and getattr(s.owner, 'rec', None) is record and s.text == record.output
+                    for s in splices):
+                spans.append((map_position(edits, record.out_span[0] - sentence.offset, 'left'),
+                              map_position(edits, record.out_span[1] - sentence.offset, 'right')))
+        return tuple(spans)
 
     # -- from a sentence to the final text, and back ----------------------------------------------------------------
 
@@ -549,7 +593,7 @@ class _Builder:
         return plan
 
     def _phonetic_region(self, text: str, bounds: list[tuple[int, int]], flags: set[str],
-                         annotations: list[dict] | None = None) -> tuple[str, int]:
+                         annotations: list[dict] | None = None, *, literal_spans=None) -> tuple[str, int]:
         """Each rule's pass over a region's text only. Its count starts from the matches before the region in the
         base text, and each match is gated as the engine gates it (garnish.phonetic_admits), reading the base text
         either side (lookaround, the text before, quotes, questions, kept and preserved spans). Flags a match
@@ -584,6 +628,10 @@ class _Builder:
                 if me > end:
                     flags.add("straddle-right")
                 n += 1
+                protected = (tuple((a - v.a, b - v.a) for a, b in p.literal)
+                             if literal_spans is None else literal_spans)
+                if any(a < me - off and ms - off < b for a, b in protected):
+                    continue
                 pos = v.position(ms - off)
                 if not phonetic_admits(rule, pos, lambda: p.before[:v.a] + text[:ms - off], p.questions,
                                        lambda: trace.kept(p) + trace.preserved(p)):
@@ -598,6 +646,9 @@ class _Builder:
             if pieces:
                 pieces.append(window[last:end])
                 text = "".join(pieces)
+            if literal_spans is not None:
+                literal_spans = tuple((map_position(edits, a, 'right'), map_position(edits, b, 'left'))
+                                      for a, b in literal_spans)
             if annotations:
                 map_spans([annotation['out_span'] for annotation in annotations], edits)
             if context_left != v.base_left:
@@ -613,6 +664,8 @@ class _Builder:
         options = [self._option(spot, spot.rec.chosen)]
         options += [self._option(spot, c) for c in spot.keep if c.entry.id != spot.rec.chosen.entry.id]
         options += [self._option(spot, c, v) for v, c in self._locked(spot)]
+        options.append(self._option(spot, Candidate(Entry('source', spot.rec.text, spot.rec.det.concepts,
+                                    spot.rec.det.frame), 0, 'original English wording', kind='plain', literal=spot.rec.text)))
         options = [o for o in options if not o.rendering.echo]
         region, unsettled = self._render_spot(sentence, spot, options)
         a, b = region.final
@@ -632,13 +685,138 @@ class _Builder:
                     'vulgarity': max(o.locked_at or 0, self._vulgarity(o)),
                     **({'semantic_effects': list(o.candidate.semantic_effects)} if o.candidate.semantic_effects else {})}
         chosen = pick.candidate.construction or pick.entry
-        change = self._change('substitution', (toks[region.start].start,toks[region.end-1].end), (a,b),
-                              chosen, self._vulgarity(pick), match=detection_match(spot.rec.det).to_dict(),
+        change = self._change(spot.rec.kind, (toks[region.start].start,toks[region.end-1].end), (a,b),
+                              chosen if pick.candidate.kind == 'entry' else None, self._vulgarity(pick),
+                              match=(detection_match(spot.rec.det).to_dict() if detection_match(spot.rec.det) else None),
+                              reading=self._reading(spot.rec.det), ruled_out=self._ruled_out(spot),
+                              **({'selected_reading': self._reading(pick.candidate.reading)}
+                                 if pick.candidate.reading and not pick.candidate.near
+                                 and pick.candidate.reading.concepts != spot.rec.det.concepts else {}),
+                              option_key=pick.candidate.key,
                               alternatives=[{**option(o),'weight':o.candidate.weight/total} for o in offered],
-                              locked=[option(o) for o in locked], **self._target(pick.candidate,actual))
+                              locked=[option(o) for o in locked], **{key: value for key, value in self._target(pick.candidate, actual).items() if key not in {'kind', 'key'}})
+        if change.get('match') is None:
+            change.pop('match', None)
         return Draft(change, '', pick.entries, [o.entries for o in offered+locked], withheld,
                      constructions=tuple(o.candidate.construction for o in options if o.candidate.construction),
-                     pin_choices={o.candidate.entry.id: self._option_pin(spot, o) for o in options})
+                     pin_choices={**self._ruled_choices[spot.rec.span],
+                                  **{o.candidate.key: self._option_pin(spot, o) for o in options if o.candidate.kind == 'entry'}})
+
+    def suggestion(self, spot, candidates=None):
+        choices = spot.keep if candidates is None else candidates
+        options = [self._option(spot, candidate) for candidate in choices]
+        options = [option for option in options if not option.rendering.echo]
+        sentence = self.sentences[spot.sent.index]
+        if not options:
+            start = sentence.layout.forward(spot.rec.span[0] - sentence.offset, 'right')
+            end = sentence.layout.forward(spot.rec.span[1] - sentence.offset, 'left')
+            return {'src_span': list(spot.rec.span), 'out_span': list(self._to_final(sentence, start, end)),
+                    'reading': self._reading(spot.rec.det), 'ruled_out': self._ruled_out(spot), 'options': []}
+        options.append(self._option(spot, Candidate(Entry('source', spot.rec.text, spot.rec.det.concepts,
+            spot.rec.det.frame), 0, 'original English wording', kind='plain', literal=spot.rec.text)))
+        region, unsettled = self._render_spot(sentence, spot, options)
+        total = sum(option.candidate.weight for option in options) or 1
+        return {'src_span': [spot.sent.tokens[region.start].start, spot.sent.tokens[region.end - 1].end],
+            'out_span': list(region.final), 'reading': self._reading(spot.rec.det),
+            'ruled_out': self._ruled_out(spot), 'options': [] if unsettled else [
+                {**self._target(option.candidate, option.annotations),
+                 'rendered': self.restore(option.text, whole=False), 'out_span': list(region.final),
+                 'vulgarity': self._vulgarity(option), 'weight': option.candidate.weight / total,
+                 'masks': _masked(self.translator.dictionary, option.text, option.entries)} for option in options]}
+
+    def _reading(self, detection):
+        concepts = self.translator.dictionary.concepts
+        ids = [cid for cid in detection.concepts if cid in concepts and concepts[cid].plain]
+        return {'concept': ids[0], 'plain': concepts[ids[0]].plain} if len(ids) == 1 else None
+
+    def _ruled_out(self, spot):
+        output = []
+        dictionary = self.translator.dictionary
+        sentence = self.sentences[spot.sent.index]
+        for cid in spot.rec.det.supersedes:
+            if cid not in dictionary.concepts or not dictionary.concepts[cid].plain:
+                continue
+            detection = replace(spot.rec.det, concepts=(cid,), direct=set(), mapping_effects={})
+            keep, _ = self.translator.eligible(detection, spot.sent, self.run, self.run.eff,
+                spot.state.copy(), spot.taken, dictionary.idioms_for((cid,)))
+            words = []
+            for candidate in keep:
+                candidate = replace(candidate, reading=detection)
+                option = self._option(spot, candidate)
+                if option.rendering.echo:
+                    continue
+                region, unsettled = self._render_spot(sentence, spot, [option])
+                if unsettled:
+                    continue
+                if detection_match(spot.rec.det) is not None:
+                    self._ruled_choices[spot.rec.span][candidate.key] = self._option_pin(spot, option)
+                words.append({**self._target(candidate, option.annotations),
+                    'rendered': self.restore(option.text, whole=False), 'out_span': list(region.final),
+                    'weight': candidate.weight, 'vulgarity': self._vulgarity(option),
+                    'masks': _masked(dictionary, option.text, option.entries)})
+            total = sum(word['weight'] for word in words) or 1
+            for word in words:
+                word['weight'] /= total
+            output.append({'kind': 'meaning', 'concept': cid, 'plain': dictionary.concepts[cid].plain,
+                           'words': words})
+        return output
+
+    def _owned(self, spot):
+        record, det = spot.rec, spot.rec.det
+        owner = record.owned_entry
+        sentence = self.sentences[spot.sent.index]
+        start = sentence.layout.forward(record.span[0] - sentence.offset, 'right')
+        end = sentence.layout.forward(record.span[1] - sentence.offset, 'left')
+        owned_span = self._to_final(sentence, start, end)
+        if record.kind == 'held':
+            return Draft(self._change('held', record.span, owned_span, None, 0,
+                         reading=self._reading(det), ruled_out=self._ruled_out(spot), option_key=None),
+                         pin_choices=self._ruled_choices[record.span])
+        entry = owner or Entry('held-' + '-'.join(det.concepts).lower(), record.text, det.concepts, det.frame)
+        source = Candidate(entry, 1, 'source wording', kind='source', literal=record.text)
+        options = [self._option(spot, source)]
+        options += [self._option(spot, c) for c in spot.keep]
+        options += [self._option(spot, c, v) for v, c in self._locked(spot)]
+        if owner and not det.concepts and owner.plain_form:
+            plain = parse_entry({'id': owner.id, 'form': owner.plain_form, 'frame': det.frame,
+                                 'concept': ['PLAIN_ENGLISH']})
+            if usable_forms(plain, det):
+                options.append(self._option(spot, Candidate(plain, 0, 'plain English', kind='plain')))
+        if owner:
+            for cid in det.concepts:
+                plain = plain_entry(self.translator.dictionary.concepts[cid], det, self.translator.dictionary)
+                if plain is not None:
+                    options.append(self._option(spot, Candidate(plain[0], 0, 'plain English', kind='plain', reading=plain[1])))
+        options = [option for option in options if not option.rendering.echo]
+        sentence = self.sentences[spot.sent.index]
+        region, unsettled = self._render_spot(sentence, spot, options)
+        a, b = region.final
+        offered = [option for option in options if option.locked_at is None]
+        locked = [option for option in options if option.locked_at is not None]
+        total = sum(option.candidate.weight for option in offered)
+        def serialise(option):
+            identity = self._target(option.candidate, option.annotations)
+            if option.candidate is source and owner:
+                identity.update(provenance(owner))
+            return {**identity,
+                    'rendered': record.text if option.candidate is source else self.restore(option.text, whole=False),
+                    'out_span': list(owned_span) if option.candidate is source else [a, b],
+                    'vulgarity': self._vulgarity(option)}
+        change = self._change(record.kind, record.span, owned_span, owner,
+            owner.vulgarity if owner else 0, reading=self._reading(det), ruled_out=self._ruled_out(spot),
+            **({"match": detection_match(det).to_dict()} if self._reading(det) is not None else {}),
+            option_key=source.key,
+            alternatives=[{**serialise(option), 'weight': option.candidate.weight / total} for option in offered],
+            locked=[serialise(option) for option in locked])
+        identified = detection_match(det)
+        pins = {source.key: Pin(0, 'substitution', record.span, match=identified.key)} if identified else {}
+        if identified:
+            pins.update({option.candidate.key: self._option_pin(spot, option) for option in offered + locked
+                         if option.candidate.kind == 'entry'})
+        pins = {**self._ruled_choices[record.span], **pins}
+        return Draft(change, entries=[owner.id] if owner else [],
+            rendering_entries=[option.entries for option in offered + locked],
+            withheld=REGION_UNSETTLED if unsettled else None, pin_choices=pins)
 
     def _option_pin(self, spot, option):
         c, r = option.candidate, option.rendering
@@ -655,7 +833,8 @@ class _Builder:
     @staticmethod
     def _garnish_pins(op, sentence, alternatives, removable):
         span = (sentence.tokens[0].start, sentence.tokens[-1].end)
-        choices = {entry.id: Pin(0, 'garnish', span, placement=op.placement,
+        choices = {('construction:' if isinstance(entry, Construction) else 'entry:') + entry.id:
+                   Pin(0, 'garnish', span, placement=op.placement,
                    target=pin_target(entry, op.form if entry is op.entry else op.offer.words(entry),
                                      entry if isinstance(entry, Construction) else None))
                    for entry in op.offer.pool
@@ -666,7 +845,12 @@ class _Builder:
 
     def _target(self, candidate: Candidate, annotations: list[dict]) -> dict:
         construction = candidate.construction
-        result = {'entry_id': None if construction else candidate.entry.id,
+        if candidate.kind != 'entry':
+            return {'entry_id': candidate.entry.id if candidate.kind == 'source' and candidate.entry.id in self.translator.dictionary.entries else None,
+                    'evidence': None, 'coined_by': None, 'key': candidate.key, 'kind': candidate.kind}
+        result = {'key': candidate.key, 'kind': 'construction' if construction else 'entry',
+                  'entry_id': None if construction else candidate.entry.id,
+                  **({'near': {'concept': candidate.near.concept, 'differs': candidate.near.differs}} if candidate.near else {}),
                   **provenance(construction.metadata if construction else candidate.entry)}
         if construction:
             result.update(construction_id=construction.id, parts=[dict(a) for a in annotations if 'role' in a])
@@ -738,7 +922,8 @@ class _Builder:
 
     def _option(self, spot: Spot, candidate: Candidate, locked_at: int | None = None) -> _Option:
         rendering = self.translator.render_at_spot(candidate, spot, replace(self.run, state=spot.state.copy()),
-            pin=spot.rec.pin if spot.rec.pin is not None and candidate.entry.id == spot.rec.chosen.entry.id else None)
+            pin=spot.rec.pin if spot.rec.pin is not None and spot.rec.chosen is not None
+                and candidate.entry.id == spot.rec.chosen.entry.id else None)
         return _Option(candidate, rendering, locked_at)
 
     @staticmethod
@@ -835,7 +1020,7 @@ class _Builder:
         for s in sentence.splices:
             if s.owner is spot:
                 continue
-            if s.kind == "imagery" and s.start == spot.rec.out_span[1] and any(
+            if s.kind == "imagery" and spot.rec.out_span is not None and s.start == spot.rec.out_span[1] and any(
                     x.owner is spot and x.end == s.start for x in sentence.splices):
                 rides = s
                 continue
@@ -846,7 +1031,8 @@ class _Builder:
         if rides is not None:
             splices.append(_Splice(b, b, rides.text, "imagery", rides.owner))
         first = first_replaced(sentence.trace.records, toks, (spot.rec, a, o.entry))
-        layout = self._telling(sentence, splices, first)
+        literal = o.candidate.literal is not None or o.candidate.kind in {'personal', 'plain'}
+        layout = self._telling(sentence, splices, first, literal_span=(a, b) if literal else None)
         lo, hi = toks[region.start].start - sentence.offset, toks[region.end - 1].end - sentence.offset
         ga, gb = layout.forward(lo, "right"), layout.forward(hi, "left")
         annotations = self._annotation_specs(o.candidate,r.part_spans,r.riff_span,r.riff)
@@ -859,10 +1045,17 @@ class _Builder:
             image = self._image_annotation(rides,image_start)
             if 0 <= image['out_span'][0] < image['out_span'][1] <= gb-ga:
                 annotations.append(image)
-        text, infix = self._phonetic_region(layout.text[ga:gb],region.bounds,flags,annotations)
+        local = self._local_literals(layout, ga, gb)
+        text, infix = self._phonetic_region(layout.text[ga:gb],region.bounds,flags,annotations,
+                                           literal_spans=local)
         self._finish_annotations(text,annotations)
         o.annotations = annotations
         return text,infix
+
+    @staticmethod
+    def _local_literals(layout, start, end):
+        return tuple((max(a, start) - start, min(b, end) - start) for a, b in layout.literal
+                     if a < end and start < b)
 
     # -- dialect and imagery --------------------------------------------------------------------------------------
 
@@ -883,8 +1076,8 @@ class _Builder:
         out = self._to_final(sentence, ga, gb)
         flags: set[str] = set()
         bounds, region = self._bounds(self._joined(base + ga, "right"), self._joined(base + gb, "left"), flags)
-        pick = self.restore(self._phonetic_region(layout.text[ga:gb], bounds, flags)[0], whole=False)
-        self._phonetic_region("", bounds, flags)   # its removal, for what a neighbour's lookaround reads there
+        pick = self.restore(self._phonetic_region(layout.text[ga:gb], bounds, flags, literal_spans=())[0], whole=False)
+        self._phonetic_region("", bounds, flags, literal_spans=())   # its removal, for what a neighbour's lookaround reads there
         withheld = self._withheld(pick, region, bool(flags))
         removed = {} if withheld else {"removed": {"out_span": list(out), "rendered": ""}}
         image = next(i for i in self.translator.dictionary.imagery if i.id==s.owner)
@@ -929,7 +1122,8 @@ class _Builder:
                                        [swap if i == k else o for i, o in enumerate(sentence.ops)])
                 ga, gb = self._garnish_region(layout, k, lo, hi, swap is not None)
                 annotations = self._garnish_annotations(layout,k,swap.entry if swap else None,ga)
-                rendered, _ = self._phonetic_region(layout.text[ga:gb],bounds,flags,annotations)
+                rendered, _ = self._phonetic_region(layout.text[ga:gb],bounds,flags,annotations,
+                    literal_spans=self._local_literals(layout, ga, gb))
                 texts.append(self._finish_annotations(rendered,annotations))
                 all_annotations.append(annotations)
             return (region,texts,all_annotations),flags,(lo,hi)
@@ -954,14 +1148,14 @@ class _Builder:
                      constructions=tuple(e for e in op.offer.pool if isinstance(e,Construction)),
                      pin_choices=self._garnish_pins(op, sentence.trace.sent, alternatives, not withheld))
 
-    @staticmethod
-    def _held(sentence: _Sentence, k: int) -> list[tuple[int, int]]:
+    def _held(self, sentence: _Sentence, k: int) -> list[tuple[int, int]]:
         """The other changes' words in the text before the k-th garnish went in: each splice's text, and each
         garnish before it. A garnish's region widens over them whole."""
         layout, spans, delta = sentence.layout, [], 0
         for a, b, n in layout.splices:
             spans.append((a + delta, a + delta + n))
             delta += n - (b - a)
+        spans.extend(self._literal_spans(sentence, sentence.splices))
         for e in layout.garnish[:k]:
             if e is not None:
                 spans = [(map_position([e], s, "right"), map_position([e], t, "left")) for s, t in spans]
@@ -1013,9 +1207,15 @@ class _Builder:
         """The sentence's text just before its k-th garnish went in."""
         if sentence.before is None:
             st, texts = sentence.trace, [sentence.trace.spliced]
+            literal = self._literal_spans(sentence, sentence.splices)
             for o in sentence.ops:
-                texts.append(self.translator.replay_garnish(texts[-1], st.sent, self.run, [(o.placement, o.form)],
-                                                            sentence.first_replaced)[0])
+                rendered, edits = self.translator.replay_garnish(texts[-1], st.sent, self.run,
+                    [(o.placement, o.form)], sentence.first_replaced, literal_spans=literal)
+                texts.append(rendered)
+                for edit in edits:
+                    if edit is not None:
+                        literal = tuple((map_position([edit], a, 'right'), map_position([edit], b, 'left'))
+                                        for a, b in literal)
             sentence.before = texts
         return sentence.before[k]
 
@@ -1038,9 +1238,9 @@ class _Builder:
 
         def told(form: str) -> str:
             placed, (at, _, m) = place_garnish(body, "closer", form)
-            return self.restore(self._phonetic_region(placed[at:at + m], bounds, flags)[0], whole=False)
+            return self.restore(self._phonetic_region(placed[at:at + m], bounds, flags, literal_spans=())[0], whole=False)
 
-        self._phonetic_region("", bounds, flags)   # its removal, for what a neighbour's lookaround reads there
+        self._phonetic_region("", bounds, flags, literal_spans=())   # its removal, for what a neighbour's lookaround reads there
         texts = [told(op.form if entry is op.entry else op.offer.words(entry)) for entry in op.offer.pool]
         alternatives, withheld = self._garnish_alternatives(op, texts, region, bool(flags))
         src = self._source(x, "start")

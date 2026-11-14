@@ -166,7 +166,7 @@ def test_semantic_degree_is_shared_by_automatic_change_alternatives(translator):
     offered = [o for c in result.changes if c['kind'] == 'substitution'
                for o in c['alternatives'] + c['locked']]
     assert all(translator.dictionary.entries[o['entry_id']].semantic_degree.get('DRUNK') == 'mild'
-               for o in offered)
+               for o in offered if o['kind'] != 'plain')
 
 
 def test_degree_policy_uses_dictionary_meanings_without_named_concept_branches(tmp_path):

@@ -24,6 +24,7 @@ dictionary: Translator(load_dictionary(["my_entries.yaml"])). Results report bot
 from .engine import Result, Translator, default_translator
 from .translation import translate, translate_changes
 from .changes import ChangeSet
+from .selection import suggest_selection
 from .markdown import DocumentResult
 from .harness import guide, lint, lookup, plan, verify
 from .bulldust import bulldust, variations
@@ -36,6 +37,6 @@ from .errors import UserError
 from .schema import Entry, SchemaError
 from .yarn import yarn
 
-__all__ = ["validate_source_url", "list_entries", "list_concepts", "list_wordless_meanings", "get_entry", "random_entry", "meaning_quiz", "suggest_name", "variations", "translate", "translate_changes", "ChangeSet", "lookup", "lint", "guide", "plan", "verify", "bulldust", "yarn", "Translator", "default_translator", "Result",
+__all__ = ["suggest_selection", "validate_source_url", "list_entries", "list_concepts", "list_wordless_meanings", "get_entry", "random_entry", "meaning_quiz", "suggest_name", "variations", "translate", "translate_changes", "ChangeSet", "lookup", "lint", "guide", "plan", "verify", "bulldust", "yarn", "Translator", "default_translator", "Result",
            "DocumentResult", "Policy", "Dictionary", "load_dictionary", "Entry", "SchemaError", "UserError"]
 __version__ = "0.2.0"

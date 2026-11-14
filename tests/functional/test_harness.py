@@ -318,7 +318,7 @@ def test_lookup_normalises_spelling(translator):
 def test_lookup_finds_phrases_by_their_parts(translator):
     for query, form in [("kit and caboodle", "the whole kit 'n caboodle"), ("chuck in", "chuck it in"),
                         ("give the flick", "give {obj} the flick"), ("off his tree", "off {poss} tree"),
-                        ("crying", "bawl"), ("laughing", "crack up")]:
+                        ("laughing", "crack up")]:
         forms = [r["form"] for r in harness.lookup(query, translator=translator)["results"]]
         assert form in forms, (query, forms)
 
@@ -436,7 +436,7 @@ def test_template_macros_are_kept_in_markdown(translator):
 def test_lookup_short_keeps_what_a_writer_needs(translator):
     out = harness.lookup("very tired", short=True, translator=translator)
     assert out["results"] and all({"id", "form", "gloss", "frame", "level", "vulgarity"} <= set(r) <= {
-        "id", "form", "gloss", "frame", "level", "vulgarity", "register", "gated", "match_kind"} for r in out["results"])
+        "id", "form", "gloss", "frame", "level", "vulgarity", "register", "gated", "match_kind", "headword_key"} for r in out["results"])
 
 
 def test_yarn_tools_reports_a_bad_declined_file(tmp_path, capsys):
@@ -528,3 +528,11 @@ def test_lint_suggests_in_the_originals_genre(translator):
     assert not {"pressie", "prezzie"} & set(options)
     alone = [o for s in harness.lint(draft, level=5, translator=translator, document_type="auto")["suggestions"] for o in s["options"]]
     assert {"pressie", "prezzie"} & set(alone)
+
+
+
+def test_plain_crying_is_waiting_with_cited_near_words(translator):
+    out = harness.lookup('crying', translator=translator)
+    assert out['outcome'] == 'no_word_yet' and out['results'] == []
+    cry = next(meaning for meaning in out['meanings'] if meaning['concept'] == 'CRY')
+    assert any(word['form'] == 'bawl' for relation in cry['near'] for word in relation['words'])

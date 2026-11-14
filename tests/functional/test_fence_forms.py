@@ -26,11 +26,23 @@ FIXED_REAL_FORMS = (
 )
 
 
+SOURCE_FIXED_FORMS = {
+    'barbie doll|dolls': ('Barbie doll', 'barbie dolls'),
+    'railway|railroad|train|bus|police|radio|television|tv|fire|space station|stations':
+        ('railway station', 'railway stations', 'police stations', 'radio stations'),
+    'station wagon|wagons': ('station wagon', 'station wagons'),
+    'a|an|the|this|that|these|those|some|my|your|his|her|our|their|its flat strap':
+        ('a flat strap', 'the flat strap', 'his flat strap'),
+    'a|an|the|this|that|these|those|some|my|your|his|her|our|their|its flat-strap':
+        ('a flat-strap', 'the flat-strap'),
+}
+
+
 def test_real_forms_survive_every_fixed_head_decision(dictionary):
     reviewed = set(FIXED_REAL_FORMS) - {'toss up', 'toss ups', 'toss-up', 'toss-ups'}
-    assert {f.phrase for f in dictionary.fences if not f.inflect_head} == reviewed
+    assert {f.phrase for f in dictionary.fences if not f.inflect_head} == reviewed | SOURCE_FIXED_FORMS.keys()
     tr = Translator(dictionary, lookup_embedder=None)
-    for template in FIXED_REAL_FORMS:
+    for template in (*FIXED_REAL_FORMS, *(form for forms in SOURCE_FIXED_FORMS.values() for form in forms)):
         for poss in ('my', 'your', 'his', 'her', 'its', 'our', 'their') if '{poss}' in template else ('',):
             phrase = template.replace('{poss}', poss)
             tokens = tokenize(phrase)
@@ -38,8 +50,12 @@ def test_real_forms_survive_every_fixed_head_decision(dictionary):
             assert any(r.start == 0 and r.end == len(tokens) and r.source_pattern
                        and r.source_pattern.fence is not None for r in readings), phrase
             result = lookup(phrase, translator=tr, vulgarity=2)
-            assert result['outcome'] == 'left_as_written', (phrase, result)
-            assert all(p['reason'] or p['ruled_out'] for p in result['protections']), phrase
+            if phrase in WHOLE_EXPRESSION_ENTRIES:
+                assert result['outcome'] == 'matched'
+                assert WHOLE_EXPRESSION_ENTRIES[phrase] <= {row['id'] for row in result['results']}
+            else:
+                assert result['outcome'] == 'left_as_written', (phrase, result)
+                assert all(p['reason'] or p['ruled_out'] for p in result['protections']), phrase
 
 
 @pytest.mark.parametrize('seed', range(8))
@@ -84,6 +100,12 @@ def _simple_forms(fence):
 
 # Explicit reviewed whole-expression exceptions, never inferred from a failing lookup.
 WHOLE_EXPRESSION_ENTRIES = {
+    # Existing whole-term priority remains: these literal source controls also name the complete Aussie term.
+    'a flat strap': {'flat-strap-busy', 'flat-strap-fast'},
+    'the flat strap': {'flat-strap-busy', 'flat-strap-fast'},
+    'a flat-strap': {'flat-strap-busy', 'flat-strap-fast'},
+    'the flat-strap': {'flat-strap-busy', 'flat-strap-fast'},
+    'his flat strap': {'flat-strap-busy', 'flat-strap-fast'},
     "dog's breakfast": {'dogs-breakfast', 'g-aside-dogs-breakfast'},
     "dog's breakfasts": {'dogs-breakfast', 'g-aside-dogs-breakfast'},
     'rainforest': {'the-brush'},

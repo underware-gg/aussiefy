@@ -34,7 +34,7 @@ def test_plan_shape(translator):
     p = harness.plan(TEXT, translator=translator)
     assert set(p) == ENVELOPE | DOCUMENT | {"draft", "seed", "planned", "garnish", "dialect", "riffs", "openings", "mood", "genre",
                                  "embellishment", "embellishment_name", "guidance", "difficult_sentences",
-                                 "untouched_sentences", "note", "card_version", "constructions", "scaffold", "replay_pins"}
+                                 "untouched_sentences", "note", "card_version", "constructions", "scaffold", "replay_pins", "personal_terms"}
     assert set(p["guidance"]) == {"genre", "embellishment"}
     assert p["planned"] and all(set(x) == {"original", "span", "entry", "aussie", "gloss", "construction_id", "parts", "evidence", "coined_by"} for x in p["planned"])
     assert all(set(g) == {"placement", "sentence", "entry", "text", "sentence_text"} for g in p["garnish"])

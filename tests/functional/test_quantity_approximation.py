@@ -80,7 +80,8 @@ def test_plan_changes_lookup_share_permission_and_report_applied_mapping(transla
         swaps = [c for c in changes.changes if c["kind"] == "substitution"]
         assert bool(swaps) is enabled
         if enabled:
-            assert all(o["semantic_effects"] == ["quantity_approximation"] for c in swaps for o in c["alternatives"])
+            assert all(o["semantic_effects"] == ["quantity_approximation"] for c in swaps for o in c["alternatives"] if o["kind"] != "plain")
+            assert all(o["weight"] == 0 and not o.get("semantic_effects") for c in swaps for o in c["alternatives"] if o["kind"] == "plain")
         found = harness.lookup(
             "four score and seven years ago",
             translator=translator,

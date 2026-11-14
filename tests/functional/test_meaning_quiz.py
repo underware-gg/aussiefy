@@ -85,7 +85,7 @@ def test_seed_repeat_and_explicit_ranking_fallback(dictionary):
     assert result['ranking'] == {'model':'char-trigram', 'fallback':True}
     assert result['options'][result['answer']]['entry_id'] == result['entry']['id']
     assert len({x['text'] for x in result['options']}) == len({x['entry_id'] for x in result['options']}) == 4
-    assert result['dictionary_id'] == dictionary.identity and result['card_version'] == 3
+    assert result['dictionary_id'] == dictionary.identity and result['card_version'] == 4
     modeled = meaning_quiz(seed=17, translator=Translator(dictionary, lookup_embedder='bundled'))
     assert modeled['ranking']['model'].startswith('bundled:') and modeled['ranking']['fallback'] is False
 

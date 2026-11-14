@@ -1,0 +1,429 @@
+{
+ "about": "An explicit offered alternate reading retains both the inferred and selected meanings via existing source replay pins.",
+ "request": {
+  "text": "He believes a liar.",
+  "level": 5,
+  "vulgarity": 0,
+  "embellishment": 0,
+  "embedder": "none",
+  "pins": {
+   "version": 1,
+   "dictionary_id": "sha256:6c2ed3aea93d2d66b430182a56973cc23dcb03c917830d7f2629f1a9a0b0ae1e",
+   "source_id": "sha256:453b5102890436d306fb53d7320e0329a4dd911ca74c711e205d3ec86284e10b",
+   "seed": 0,
+   "complete": true,
+   "picks": [
+    {
+     "kind": "substitution",
+     "span": [
+      12,
+      18
+     ],
+     "match": "LIAR/np/6670113cc5e564856c965af12de5719343848be352fb2f00869b1a0fd9cfbae3",
+     "target": {
+      "entry_id": "a-bull-artist",
+      "construction_id": null,
+      "family": null,
+      "parts": {},
+      "form": "a bull artist"
+     },
+     "stack": null,
+     "riff": null
+    },
+    {
+     "kind": "substitution",
+     "span": [
+      3,
+      11
+     ],
+     "match": "ACCEPT_AS_TRUE/vp/8c6addb00e24c5e4050eb03bf8bde275e5ddff4691d9cf43dec4e898800a03d7",
+     "target": {
+      "entry_id": "reckon",
+      "construction_id": null,
+      "family": null,
+      "parts": {},
+      "form": "reckon"
+     },
+     "stack": null,
+     "riff": null
+    }
+   ]
+  }
+ },
+ "response": {
+  "version": 4,
+  "text": "He reckons a bull artist.",
+  "card_version": 4,
+  "dictionary_id": "sha256:6c2ed3aea93d2d66b430182a56973cc23dcb03c917830d7f2629f1a9a0b0ae1e",
+  "tuning": {
+   "popularity": false,
+   "preferences": 0
+  },
+  "personal_terms": {
+   "provided": 0,
+   "applied": 0
+  },
+  "warnings": [],
+  "warning_details": [],
+  "changes": [
+   {
+    "id": "substitution:3-11",
+    "kind": "substitution",
+    "src_span": [
+     3,
+     11
+    ],
+    "out_span": [
+     3,
+     10
+    ],
+    "original": "believes",
+    "output": "reckons",
+    "entry_id": "reckon",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "key": "entry:reckon",
+      "kind": "entry",
+      "entry_id": "reckon",
+      "evidence": "attested",
+      "coined_by": null,
+      "rendered": "reckons",
+      "out_span": [
+       3,
+       10
+      ],
+      "vulgarity": 0,
+      "weight": 1.0,
+      "masks": []
+     },
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "plain:source",
+      "kind": "plain",
+      "rendered": "believes",
+      "out_span": [
+       3,
+       10
+      ],
+      "vulgarity": 0,
+      "weight": 0.0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "match": {
+     "key": "ACCEPT_AS_TRUE/vp/8c6addb00e24c5e4050eb03bf8bde275e5ddff4691d9cf43dec4e898800a03d7",
+     "root": "ACCEPT_AS_TRUE/vp/8c6addb00e24c5e4050eb03bf8bde275e5ddff4691d9cf43dec4e898800a03d7",
+     "qualifiers": {}
+    },
+    "evidence": "attested",
+    "coined_by": null,
+    "reading": {
+     "concept": "ACCEPT_AS_TRUE",
+     "plain": "believe what you're told"
+    },
+    "ruled_out": [
+     {
+      "kind": "meaning",
+      "concept": "THINK",
+      "plain": "suppose",
+      "words": [
+       {
+        "key": "entry:reckon",
+        "kind": "entry",
+        "entry_id": "reckon",
+        "evidence": "attested",
+        "coined_by": null,
+        "rendered": "reckons",
+        "out_span": [
+         3,
+         10
+        ],
+        "weight": 1.0,
+        "vulgarity": 0,
+        "masks": []
+       }
+      ]
+     }
+    ],
+    "option_key": "entry:reckon",
+    "selected_reading": {
+     "concept": "THINK",
+     "plain": "suppose"
+    }
+   },
+   {
+    "id": "substitution:12-18",
+    "kind": "substitution",
+    "src_span": [
+     12,
+     18
+    ],
+    "out_span": [
+     11,
+     24
+    ],
+    "original": "a liar",
+    "output": "a bull artist",
+    "entry_id": "a-bull-artist",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "key": "entry:a-bull-artist",
+      "kind": "entry",
+      "entry_id": "a-bull-artist",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "a bull artist",
+      "out_span": [
+       11,
+       24
+      ],
+      "vulgarity": 0,
+      "weight": 1.0,
+      "masks": []
+     },
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "plain:source",
+      "kind": "plain",
+      "rendered": "a liar",
+      "out_span": [
+       11,
+       24
+      ],
+      "vulgarity": 0,
+      "weight": 0.0,
+      "masks": []
+     }
+    ],
+    "locked": [
+     {
+      "key": "entry:a-bullshitter",
+      "kind": "entry",
+      "entry_id": "a-bullshitter",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "a bullshitter",
+      "out_span": [
+       11,
+       24
+      ],
+      "vulgarity": 2,
+      "masks": [
+       {
+        "span": [
+         2,
+         13
+        ],
+        "ending_start": 13,
+        "vulgarity": 2
+       }
+      ]
+     }
+    ],
+    "covers": [],
+    "match": {
+     "key": "LIAR/np/6670113cc5e564856c965af12de5719343848be352fb2f00869b1a0fd9cfbae3",
+     "root": "LIAR/np/6670113cc5e564856c965af12de5719343848be352fb2f00869b1a0fd9cfbae3",
+     "qualifiers": {}
+    },
+    "evidence": "unverified",
+    "coined_by": null,
+    "reading": {
+     "concept": "LIAR",
+     "plain": "a habitual liar"
+    },
+    "ruled_out": [],
+    "option_key": "entry:a-bull-artist"
+   }
+  ],
+  "entries": {
+   "a-bull-artist": {
+    "id": "a-bull-artist",
+    "form": "a bull artist",
+    "headword_key": "bull artist",
+    "gloss": "A champion exaggerator or teller of tall tales.",
+    "frame": "np",
+    "concepts": [
+     "LIAR"
+    ],
+    "level": 4,
+    "vulgarity": 0,
+    "register": "dated",
+    "sources": [
+     {
+      "kind": "media",
+      "publisher": "thekeenans.id.au",
+      "supports": [],
+      "url": "https://thekeenans.id.au/aussieslang.htm",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "slang_dictionary",
+      "publisher": "greensdictofslang.com",
+      "supports": [],
+      "url": "https://greensdictofslang.com/entry/kkqg26i",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     },
+     {
+      "kind": "media",
+      "publisher": "suebutler.com.au",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://www.suebutler.com.au/the-feel-of-a-word/2022/8/21/artist",
+      "note": "Reviewed 2026-10-21: selected form/sense; 30–32. Australian lexicographer explicitly bull artist variant of bullshit artist and quotes boasting liar definition; short preceding form evidence. Source family: sue-butler-artist; not a current-commonness survey."
+     }
+    ],
+    "searched": {
+     "date": "2026-10-21",
+     "outcome": "found",
+     "note": "Historical 2026-10-21 source audit: 3 actual recorded citation-target checks; 1 selected full-form/sense witness(es). This is a limited inherited-citation search, not a fresh or exhaustive web hunt, a frequency survey, or certification of every current mapping."
+    },
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 4.0,
+     "bars": 2,
+     "counts": {
+      "media": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "20261114-source-hunt-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "a-bullshitter": {
+    "id": "a-bullshitter",
+    "form": "a bullshitter",
+    "headword_key": "bullshitter",
+    "gloss": "Someone who habitually spins lies or exaggerates.",
+    "frame": "np",
+    "concepts": [
+     "LIAR"
+    ],
+    "level": 2,
+    "vulgarity": 2,
+    "register": "current",
+    "variants": [
+     "a bit of a bullshitter"
+    ],
+    "replaces": [
+     "a liar",
+     "an exaggerator",
+     "a fibber"
+    ],
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Cambridge Dictionary",
+      "supports": [],
+      "url": "https://dictionary.cambridge.org/dictionary/english/bullshitter",
+      "note": "Migrated citation: retain the earlier sense audit; full-expression support awaits the attestation source hunt."
+     }
+    ],
+    "searched": {
+     "date": "2026-10-21",
+     "outcome": "inconclusive",
+     "note": "Historical 2026-10-21 source audit: 1 actual recorded citation-target checks; 0 selected full-form/sense witness(es). This is a limited inherited-citation search, not a fresh or exhaustive web hunt, a frequency survey, or certification of every current mapping."
+    },
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 0.0,
+     "bars": 0,
+     "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "20261114-source-hunt-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 2,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "reckon": {
+    "id": "reckon",
+    "form": "reckon",
+    "headword_key": "reckon",
+    "gloss": "Hold or express an opinion or belief; suppose (\"I reckon he's right\").",
+    "frame": "vp",
+    "concepts": [
+     "THINK"
+    ],
+    "level": 1,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/reckon",
+      "note": "Reviewed 2026-10-21: selected form/sense; L304-326. No Australian regional scope in inspected block. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "searched": {
+     "date": "2026-10-21",
+     "outcome": "found",
+     "note": "Historical 2026-10-21 source audit: 1 actual recorded citation-target checks; 1 selected full-form/sense witness(es). This is a limited inherited-citation search, not a fresh or exhaustive web hunt, a frequency survey, or certification of every current mapping."
+    },
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 8.0,
+     "bars": 4,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "20261114-source-hunt-1"
+    },
+    "evidence": "attested",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   }
+  },
+  "constructions": {},
+  "imagery": {},
+  "withheld": []
+ }
+}

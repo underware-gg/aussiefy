@@ -8,13 +8,17 @@
   "embellishment": 1
  },
  "response": {
-  "version": 3,
+  "version": 4,
   "text": "I'm exhausted and the dunny is broken. Thanks for brekky, my mate. You're buggered and starvin', and your car is bung, mate. Well, we let a toddler win the game.",
-  "card_version": 3,
-  "dictionary_id": "sha256:258476324d7a66dee75b483acdc91458926ef8981cb34b7101e8b9b4ac1c1a16",
+  "card_version": 4,
+  "dictionary_id": "sha256:6c2ed3aea93d2d66b430182a56973cc23dcb03c917830d7f2629f1a9a0b0ae1e",
   "tuning": {
    "popularity": false,
    "preferences": 0
+  },
+  "personal_terms": {
+   "provided": 0,
+   "applied": 0
   },
   "warnings": [],
   "warning_details": [],
@@ -37,6 +41,8 @@
     "masks": [],
     "alternatives": [
      {
+      "key": "entry:dunny",
+      "kind": "entry",
       "entry_id": "dunny",
       "evidence": "attested",
       "coined_by": null,
@@ -48,6 +54,21 @@
       "vulgarity": 0,
       "weight": 1.0,
       "masks": []
+     },
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "plain:source",
+      "kind": "plain",
+      "rendered": "toilet",
+      "out_span": [
+       22,
+       27
+      ],
+      "vulgarity": 0,
+      "weight": 0.0,
+      "masks": []
      }
     ],
     "locked": [],
@@ -58,7 +79,13 @@
      "qualifiers": {}
     },
     "evidence": "attested",
-    "coined_by": null
+    "coined_by": null,
+    "reading": {
+     "concept": "TOILET",
+     "plain": "a toilet"
+    },
+    "ruled_out": [],
+    "option_key": "entry:dunny"
    },
    {
     "id": "substitution:51-60",
@@ -78,6 +105,8 @@
     "masks": [],
     "alternatives": [
      {
+      "key": "entry:brekkie",
+      "kind": "entry",
       "entry_id": "brekkie",
       "evidence": "unverified",
       "coined_by": null,
@@ -89,6 +118,21 @@
       "vulgarity": 0,
       "weight": 1.0,
       "masks": []
+     },
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "plain:source",
+      "kind": "plain",
+      "rendered": "breakfast",
+      "out_span": [
+       50,
+       56
+      ],
+      "vulgarity": 0,
+      "weight": 0.0,
+      "masks": []
      }
     ],
     "locked": [],
@@ -99,7 +143,13 @@
      "qualifiers": {}
     },
     "evidence": "unverified",
-    "coined_by": null
+    "coined_by": null,
+    "reading": {
+     "concept": "BREAKFAST",
+     "plain": "breakfast"
+    },
+    "ruled_out": [],
+    "option_key": "entry:brekkie"
    },
    {
     "id": "substitution:65-71",
@@ -119,6 +169,8 @@
     "masks": [],
     "alternatives": [
      {
+      "key": "entry:mate",
+      "kind": "entry",
       "entry_id": "mate",
       "evidence": "attested",
       "coined_by": null,
@@ -130,6 +182,21 @@
       "vulgarity": 0,
       "weight": 1.0,
       "masks": []
+     },
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "plain:source",
+      "kind": "plain",
+      "rendered": "friend",
+      "out_span": [
+       61,
+       65
+      ],
+      "vulgarity": 0,
+      "weight": 0.0,
+      "masks": []
      }
     ],
     "locked": [],
@@ -140,7 +207,13 @@
      "qualifiers": {}
     },
     "evidence": "attested",
-    "coined_by": null
+    "coined_by": null,
+    "reading": {
+     "concept": "FRIEND",
+     "plain": "a friend"
+    },
+    "ruled_out": [],
+    "option_key": "entry:mate"
    },
    {
     "id": "phonetic:73-80:pronoun-are",
@@ -169,7 +242,9 @@
     "locked": [],
     "covers": [],
     "evidence": null,
-    "coined_by": null
+    "coined_by": null,
+    "reading": null,
+    "ruled_out": []
    },
    {
     "id": "substitution:81-91",
@@ -198,6 +273,8 @@
     ],
     "alternatives": [
      {
+      "key": "entry:buggered",
+      "kind": "entry",
       "entry_id": "buggered",
       "evidence": "attested",
       "coined_by": null,
@@ -220,6 +297,8 @@
       ]
      },
      {
+      "key": "entry:dead-on-poss-feet",
+      "kind": "entry",
       "entry_id": "dead-on-poss-feet",
       "evidence": "unverified",
       "coined_by": null,
@@ -233,6 +312,8 @@
       "masks": []
      },
      {
+      "key": "entry:kerry-packered",
+      "kind": "entry",
       "entry_id": "kerry-packered",
       "evidence": "unverified",
       "coined_by": null,
@@ -246,6 +327,8 @@
       "masks": []
      },
      {
+      "key": "entry:knackered",
+      "kind": "entry",
       "entry_id": "knackered",
       "evidence": "attested",
       "coined_by": null,
@@ -259,6 +342,8 @@
       "masks": []
      },
      {
+      "key": "entry:out-on-poss-feet",
+      "kind": "entry",
       "entry_id": "out-on-poss-feet",
       "evidence": "unverified",
       "coined_by": null,
@@ -272,6 +357,8 @@
       "masks": []
      },
      {
+      "key": "entry:ready-to-drop",
+      "kind": "entry",
       "entry_id": "ready-to-drop",
       "evidence": "attested",
       "coined_by": null,
@@ -285,6 +372,8 @@
       "masks": []
      },
      {
+      "key": "entry:rooted",
+      "kind": "entry",
       "entry_id": "rooted",
       "evidence": "unverified",
       "coined_by": null,
@@ -298,6 +387,8 @@
       "masks": []
      },
      {
+      "key": "entry:running-on-smell-oily-rag",
+      "kind": "entry",
       "entry_id": "running-on-smell-oily-rag",
       "evidence": "unverified",
       "coined_by": null,
@@ -311,6 +402,8 @@
       "masks": []
      },
      {
+      "key": "entry:stuffed",
+      "kind": "entry",
       "entry_id": "stuffed",
       "evidence": "unverified",
       "coined_by": null,
@@ -324,6 +417,8 @@
       "masks": []
      },
      {
+      "key": "entry:wrecked-tired",
+      "kind": "entry",
       "entry_id": "wrecked-tired",
       "evidence": "attested",
       "coined_by": null,
@@ -337,6 +432,8 @@
       "masks": []
      },
      {
+      "key": "entry:zonked",
+      "kind": "entry",
       "entry_id": "zonked",
       "evidence": "unverified",
       "coined_by": null,
@@ -348,10 +445,27 @@
       "vulgarity": 0,
       "weight": 0.15111914743406768,
       "masks": []
+     },
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "plain:source",
+      "kind": "plain",
+      "rendered": "very tired",
+      "out_span": [
+       74,
+       82
+      ],
+      "vulgarity": 0,
+      "weight": 0.0,
+      "masks": []
      }
     ],
     "locked": [
      {
+      "key": "entry:fucked-broken",
+      "kind": "entry",
       "entry_id": "fucked-broken",
       "evidence": "unverified",
       "coined_by": null,
@@ -380,7 +494,20 @@
      "qualifiers": {}
     },
     "evidence": "attested",
-    "coined_by": null
+    "coined_by": null,
+    "reading": {
+     "concept": "TIRED",
+     "plain": "exhausted"
+    },
+    "ruled_out": [
+     {
+      "kind": "meaning",
+      "concept": "VERY",
+      "plain": "very",
+      "words": []
+     }
+    ],
+    "option_key": "entry:buggered"
    },
    {
     "id": "substitution:96-102",
@@ -400,6 +527,8 @@
     "masks": [],
     "alternatives": [
      {
+      "key": "entry:starvin",
+      "kind": "entry",
       "entry_id": "starvin",
       "evidence": "unverified",
       "coined_by": null,
@@ -413,6 +542,8 @@
       "masks": []
      },
      {
+      "key": "entry:hungry-enough-horse-jockey",
+      "kind": "entry",
       "entry_id": "hungry-enough-horse-jockey",
       "evidence": "unverified",
       "coined_by": null,
@@ -426,6 +557,8 @@
       "masks": []
      },
      {
+      "key": "entry:peckish",
+      "kind": "entry",
       "entry_id": "peckish",
       "evidence": "attested",
       "coined_by": null,
@@ -437,10 +570,27 @@
       "vulgarity": 0,
       "weight": 0.4507575757575758,
       "masks": []
+     },
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "plain:source",
+      "kind": "plain",
+      "rendered": "hungry",
+      "out_span": [
+       87,
+       95
+      ],
+      "vulgarity": 0,
+      "weight": 0.0,
+      "masks": []
      }
     ],
     "locked": [
      {
+      "key": "entry:hungry-enough-to-eat-the-arse-out-of-a-duck",
+      "kind": "entry",
       "entry_id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
       "evidence": "unverified",
       "coined_by": null,
@@ -469,7 +619,13 @@
      "qualifiers": {}
     },
     "evidence": "unverified",
-    "coined_by": null
+    "coined_by": null,
+    "reading": {
+     "concept": "HUNGRY",
+     "plain": "hungry"
+    },
+    "ruled_out": [],
+    "option_key": "entry:starvin"
    },
    {
     "id": "substitution:120-126",
@@ -489,6 +645,8 @@
     "masks": [],
     "alternatives": [
      {
+      "key": "entry:bung-broken",
+      "kind": "entry",
       "entry_id": "bung-broken",
       "evidence": "attested",
       "coined_by": null,
@@ -502,6 +660,8 @@
       "masks": []
      },
      {
+      "key": "entry:buggered",
+      "kind": "entry",
       "entry_id": "buggered",
       "evidence": "attested",
       "coined_by": null,
@@ -524,6 +684,8 @@
       ]
      },
      {
+      "key": "entry:cactus",
+      "kind": "entry",
       "entry_id": "cactus",
       "evidence": "unverified",
       "coined_by": null,
@@ -537,6 +699,8 @@
       "masks": []
      },
      {
+      "key": "entry:rooted",
+      "kind": "entry",
       "entry_id": "rooted",
       "evidence": "unverified",
       "coined_by": null,
@@ -550,6 +714,8 @@
       "masks": []
      },
      {
+      "key": "entry:stuffed",
+      "kind": "entry",
       "entry_id": "stuffed",
       "evidence": "unverified",
       "coined_by": null,
@@ -561,6 +727,21 @@
       "vulgarity": 0,
       "weight": 0.15814934259488958,
       "masks": []
+     },
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "plain:source",
+      "kind": "plain",
+      "rendered": "broken",
+      "out_span": [
+       113,
+       117
+      ],
+      "vulgarity": 0,
+      "weight": 0.0,
+      "masks": []
      }
     ],
     "locked": [],
@@ -571,7 +752,13 @@
      "qualifiers": {}
     },
     "evidence": "attested",
-    "coined_by": null
+    "coined_by": null,
+    "reading": {
+     "concept": "BROKEN",
+     "plain": "broken"
+    },
+    "ruled_out": [],
+    "option_key": "entry:bung-broken"
    },
    {
     "id": "garnish:126-126:tag",
@@ -609,6 +796,8 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-ay",
       "masks": []
      },
      {
@@ -622,6 +811,8 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-mate",
       "masks": []
      },
      {
@@ -635,6 +826,8 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-ya-drongo",
       "masks": []
      },
      {
@@ -648,6 +841,8 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-ya-galah",
       "masks": []
      },
      {
@@ -661,13 +856,17 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-ya-mug",
       "masks": []
      }
     ],
     "locked": [],
     "covers": [],
     "evidence": "unverified",
-    "coined_by": null
+    "coined_by": null,
+    "reading": null,
+    "ruled_out": []
    },
    {
     "id": "garnish:128-128:connective",
@@ -705,6 +904,8 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:c-anyway",
       "masks": []
      },
      {
@@ -718,6 +919,8 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:c-mate",
       "masks": []
      },
      {
@@ -731,6 +934,8 @@
       "vulgarity": 0,
       "evidence": "attested",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:c-mind-you",
       "masks": []
      },
      {
@@ -744,6 +949,8 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:c-now",
       "masks": []
      },
      {
@@ -757,6 +964,8 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:c-so-anyway",
       "masks": []
      },
      {
@@ -770,19 +979,24 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:c-well",
       "masks": []
      }
     ],
     "locked": [],
     "covers": [],
     "evidence": "unverified",
-    "coined_by": null
+    "coined_by": null,
+    "reading": null,
+    "ruled_out": []
    }
   ],
   "entries": {
    "brekkie": {
     "id": "brekkie",
     "form": "brekkie",
+    "headword_key": "brekkie",
     "gloss": "Breakfast.",
     "frame": "np",
     "concepts": [
@@ -832,6 +1046,7 @@
    "buggered": {
     "id": "buggered",
     "form": "buggered",
+    "headword_key": "buggered",
     "gloss": "Exhausted, or broken beyond use.",
     "frame": "adj",
     "concepts": [
@@ -884,6 +1099,7 @@
    "bung-broken": {
     "id": "bung-broken",
     "form": "bung",
+    "headword_key": "bung",
     "gloss": "Broken, not working, crook (\"the telly's gone bung\", \"a bung knee\").",
     "frame": "predicate_adj",
     "concepts": [
@@ -948,6 +1164,7 @@
    "c-anyway": {
     "id": "c-anyway",
     "form": "anyway",
+    "headword_key": "anyway",
     "gloss": "Moving the story along.",
     "frame": "interjection",
     "concepts": [],
@@ -993,6 +1210,7 @@
    "c-mate": {
     "id": "c-mate",
     "form": "mate",
+    "headword_key": "mate",
     "gloss": "The storyteller nudging the listener.",
     "frame": "interjection",
     "concepts": [],
@@ -1038,6 +1256,7 @@
    "c-mind-you": {
     "id": "c-mind-you",
     "form": "mind you",
+    "headword_key": "mind you",
     "gloss": "Adds a qualifying afterthought (\"Mind you, his brother turned up\").",
     "frame": "interjection",
     "concepts": [],
@@ -1089,6 +1308,7 @@
    "c-now": {
     "id": "c-now",
     "form": "now",
+    "headword_key": "now",
     "gloss": "Turning to the next part.",
     "frame": "interjection",
     "concepts": [],
@@ -1134,6 +1354,7 @@
    "c-so-anyway": {
     "id": "c-so-anyway",
     "form": "so anyway",
+    "headword_key": "so anyway",
     "gloss": "Getting back to it.",
     "frame": "interjection",
     "concepts": [],
@@ -1186,6 +1407,7 @@
    "c-well": {
     "id": "c-well",
     "form": "well",
+    "headword_key": "well",
     "gloss": "Setting up the next bit.",
     "frame": "interjection",
     "concepts": [],
@@ -1231,6 +1453,7 @@
    "cactus": {
     "id": "cactus",
     "form": "cactus",
+    "headword_key": "cactus",
     "gloss": "Dead, broken, finished.",
     "frame": "adj",
     "concepts": [
@@ -1316,6 +1539,7 @@
    "dead-on-poss-feet": {
     "id": "dead-on-poss-feet",
     "form": "dead on {poss} feet",
+    "headword_key": "dead on {poss} feet",
     "gloss": "Extremely tired, barely able to stay upright.",
     "frame": "predicate_adj",
     "concepts": [
@@ -1387,6 +1611,7 @@
    "dunny": {
     "id": "dunny",
     "form": "dunny",
+    "headword_key": "dunny",
     "gloss": "A toilet, especially an outdoor one.",
     "frame": "np",
     "concepts": [
@@ -1476,6 +1701,7 @@
    "fucked-broken": {
     "id": "fucked-broken",
     "form": "fucked",
+    "headword_key": "fucked",
     "gloss": "Broken or not working properly; or very tired.",
     "frame": "predicate_adj",
     "concepts": [
@@ -1523,6 +1749,7 @@
    "g-ay": {
     "id": "g-ay",
     "form": "ay",
+    "headword_key": "ay",
     "gloss": "Sentence-final \"eh\", inviting agreement.",
     "frame": "tag",
     "concepts": [],
@@ -1568,6 +1795,7 @@
    "g-mate": {
     "id": "g-mate",
     "form": "mate",
+    "headword_key": "mate",
     "gloss": "Friendly (or pointedly unfriendly) address.",
     "frame": "tag",
     "concepts": [],
@@ -1613,6 +1841,7 @@
    "g-ya-drongo": {
     "id": "g-ya-drongo",
     "form": "ya drongo",
+    "headword_key": "ya drongo",
     "gloss": "You fool.",
     "frame": "tag",
     "concepts": [],
@@ -1658,6 +1887,7 @@
    "g-ya-galah": {
     "id": "g-ya-galah",
     "form": "ya galah",
+    "headword_key": "ya galah",
     "gloss": "Affectionate insult.",
     "frame": "tag",
     "concepts": [],
@@ -1703,6 +1933,7 @@
    "g-ya-mug": {
     "id": "g-ya-mug",
     "form": "ya mug",
+    "headword_key": "ya mug",
     "gloss": "You fool.",
     "frame": "tag",
     "concepts": [],
@@ -1748,6 +1979,7 @@
    "hungry-enough-horse-jockey": {
     "id": "hungry-enough-horse-jockey",
     "form": "hungry enough to eat a horse and chase the jockey",
+    "headword_key": "hungry enough to eat a horse and chase the jockey",
     "gloss": "Ravenous.",
     "frame": "predicate_adj",
     "concepts": [
@@ -1801,6 +2033,7 @@
    "hungry-enough-to-eat-the-arse-out-of-a-duck": {
     "id": "hungry-enough-to-eat-the-arse-out-of-a-duck",
     "form": "hungry enough to eat the arse out of a low-flyin' duck",
+    "headword_key": "hungry enough to eat the arse out of a low-flyin' duck",
     "gloss": "Starving.",
     "frame": "predicate_adj",
     "concepts": [
@@ -1865,6 +2098,7 @@
    "kerry-packered": {
     "id": "kerry-packered",
     "form": "Kerry-Packered",
+    "headword_key": "kerry-packered",
     "gloss": "Exhausted; rhyming slang for knackered.",
     "frame": "adj",
     "concepts": [
@@ -1935,6 +2169,7 @@
    "knackered": {
     "id": "knackered",
     "form": "knackered",
+    "headword_key": "knackered",
     "gloss": "Exhausted.",
     "frame": "adj",
     "concepts": [
@@ -2019,6 +2254,7 @@
    "mate": {
     "id": "mate",
     "form": "mate",
+    "headword_key": "mate",
     "gloss": "A friend; also a general form of address.",
     "frame": "np",
     "concepts": [
@@ -2071,6 +2307,7 @@
    "out-on-poss-feet": {
     "id": "out-on-poss-feet",
     "form": "out on {poss} feet",
+    "headword_key": "out on {poss} feet",
     "gloss": "Extremely tired, almost unable to stay upright.",
     "frame": "predicate_adj",
     "concepts": [
@@ -2119,6 +2356,7 @@
    "peckish": {
     "id": "peckish",
     "form": "peckish",
+    "headword_key": "peckish",
     "gloss": "A bit hungry.",
     "frame": "adj",
     "concepts": [
@@ -2171,6 +2409,7 @@
    "ready-to-drop": {
     "id": "ready-to-drop",
     "form": "ready to drop",
+    "headword_key": "ready to drop",
     "gloss": "So tired that resting or collapsing feels imminent.",
     "frame": "predicate_adj",
     "concepts": [
@@ -2241,6 +2480,7 @@
    "rooted": {
     "id": "rooted",
     "form": "rooted",
+    "headword_key": "rooted",
     "gloss": "Completely done for.",
     "frame": "adj",
     "concepts": [
@@ -2250,6 +2490,7 @@
     "level": 3,
     "vulgarity": 1,
     "register": "current",
+    "other_sense": "Botanical roots or something firmly established, rather than exhausted or broken.",
     "notes": "\"Root\" is Australian slang for sex, so \"rooted\" (exhausted; broken) is cheeky but Dad-level (Rob, 2026-10-18). Never use \"root\" for US \"root for (a team)\"; Australians say \"barrack for\". \"Get rooted\" is a rude brush-off, a different sense.",
     "sources": [
      {
@@ -2289,6 +2530,7 @@
    "running-on-smell-oily-rag": {
     "id": "running-on-smell-oily-rag",
     "form": "running on the smell of an oily rag",
+    "headword_key": "running on the smell of an oily rag",
     "gloss": "Continuing with very little energy.",
     "frame": "predicate_adj",
     "concepts": [
@@ -2348,6 +2590,7 @@
    "starvin": {
     "id": "starvin",
     "form": "starvin'",
+    "headword_key": "starvin'",
     "gloss": "Very hungry.",
     "frame": "adj",
     "concepts": [
@@ -2394,6 +2637,7 @@
    "stuffed": {
     "id": "stuffed",
     "form": "stuffed",
+    "headword_key": "stuffed",
     "gloss": "Exhausted, broken, or full of food.",
     "frame": "adj",
     "concepts": [
@@ -2442,6 +2686,7 @@
    "wrecked-tired": {
     "id": "wrecked-tired",
     "form": "wrecked",
+    "headword_key": "wrecked",
     "gloss": "Exhausted, said of a person; not a damaged vehicle.",
     "frame": "adj",
     "concepts": [
@@ -2512,6 +2757,7 @@
    "zonked": {
     "id": "zonked",
     "form": "zonked",
+    "headword_key": "zonked",
     "gloss": "Completely worn out.",
     "frame": "predicate_adj",
     "concepts": [

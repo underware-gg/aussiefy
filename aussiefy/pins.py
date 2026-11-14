@@ -177,6 +177,8 @@ def capture(result, *, offset=0):
     from .match_keys import detection_match
     rows = []
     for rec in result.records:
+        if rec.kind == 'personal':
+            continue
         if not rec.substituted and not rec.image_id:
             continue
         span = tuple(x + offset for x in rec.span)

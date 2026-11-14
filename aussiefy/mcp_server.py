@@ -66,6 +66,8 @@ def _describe(doc: str, hidden: set[str]) -> str:
 def build_server(*, translator: Translator | None = None, allow_unlock: bool = True, allow_include_gated: bool = True,
                  allow_document_config: bool = True, allow_tuning: bool = True,
                  preferences_hook: Callable[..., list[dict] | None] | None = None,
+                 allow_personal_terms: bool = True,
+                 personal_terms_hook: Callable[..., list[dict] | None] | None = None,
                  allow_themes: bool = True, allow_invention: bool = True,
                  tools: Collection[str] | None = None, max_chars: int | None = None,
                  max_query_chars: int | None = None, lookup_limit: int | None = None):
@@ -79,8 +81,9 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
 
     from mcp.server.mcpserver import MCPServer
     from mcp.server.mcpserver.exceptions import ToolError
+    from mcp.server.mcpserver.tools import Tool
     from mcp.types import ToolAnnotations
-    from pydantic import Field, StrictBool
+    from pydantic import Field, StrictBool, create_model, model_validator
 
     def _names(names: dict[str, int]) -> str:
         return ", ".join(f"{n} {name}" for name, n in names.items())
@@ -122,13 +125,14 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         ({"include_gated"} if not allow_include_gated else set()) | \
         ({"document_config"} if not allow_document_config else set()) | \
         ({"popularity"} if not allow_tuning else set()) | \
+        ({"personal_terms"} if not allow_personal_terms or personal_terms_hook is not None else set()) | \
         ({"themes"} if not allow_themes else set()) | \
         ({"invention"} if not allow_invention else set())
     # every tool only reads: no side effects, same answer for the same call, nothing outside the package
     read_only = ToolAnnotations(read_only_hint=True, destructive_hint=False, idempotent_hint=True,
                                 open_world_hint=False)
 
-    server = MCPServer("aussiefy", instructions=instructions(allow_document_config=allow_document_config))
+    registered_tools = []
 
     def tool(fn):
         """Register a tool whose UserErrors reach the agent as their own message (the SDK hides other errors),
@@ -139,7 +143,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         @functools.wraps(fn)
         def run(*args, **kwargs):
             try:
-                forbidden = set(kwargs) & (hidden | {'preferences','_preferences_hook'})
+                forbidden = set(kwargs) & (hidden | {'preferences', '_preferences_hook', '_personal_terms_hook'})
                 if forbidden:
                     raise UserError('parameters not offered by this server: '+', '.join(sorted(forbidden)))
                 config = kwargs.get('document_config')
@@ -153,8 +157,19 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         signature = inspect.signature(fn)
         run.__signature__ = signature.replace(
             parameters=[p for p in signature.parameters.values() if p.name not in hidden])
-        return server.tool(description=_describe(fn.__doc__, hidden & set(signature.parameters)),
-                           annotations=read_only)(run)
+        registered = Tool.from_function(run, description=_describe(fn.__doc__, hidden & set(signature.parameters)),
+                                        annotations=read_only)
+        if 'personal_terms' in hidden and 'personal_terms' in signature.parameters:
+            # Validate raw arguments before the SDK drops unknown/hidden fields.
+            def reject_client_personal_terms(cls, values):
+                if 'personal_terms' in values:
+                    raise ValueError('personal_terms are not offered by this server')
+                return values
+            registered.fn_metadata.arg_model = create_model(
+                fn.__name__ + 'HostArguments', __base__=registered.fn_metadata.arg_model,
+                __validators__={'host_personal_terms': model_validator(mode='before')(reject_client_personal_terms)})
+        registered_tools.append(registered)
+        return run
 
     catalog = (translator or default_translator()).dictionary.construction_catalog
     bulldust_max = catalog.max_results if catalog else ConstructionCatalog().max_results
@@ -325,7 +340,8 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                     embellishment: int | str | None = None,
                     document_type: DocumentType = "general", document_config: dict | None = None,
                     themes: Themes = None, invention: Invention = None,
-                    popularity: Popularity = False, pins: dict | None = None) -> dict[str, Any]:
+                    popularity: Popularity = False, pins: dict | None = None,
+                    personal_terms: list[dict] | None = None) -> dict[str, Any]:
         """The rule engine's draft, the slang it planned (with riffs and suggested openings), and the sentences
         it found too formal to handle, and guidance for the text's genre and embellishment. Takes
         aussie_translate's options. embellishment defaults to dinkum, a retelling's (the plan is for writing
@@ -333,7 +349,8 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         return harness.plan(text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
                             registers=registers, regions=regions, unlock=unlock, markup=markup, english=english,
                             embellishment=embellishment, document_type=document_type, document_config=document_config,
-                            translator=translator, themes=themes, invention=invention, popularity=popularity, pins=pins, _preferences_hook=preferences_hook)
+                            translator=translator, themes=themes, invention=invention, popularity=popularity, pins=pins, _preferences_hook=preferences_hook, personal_terms=personal_terms,
+                            _personal_terms_hook=personal_terms_hook if allow_personal_terms else None)
 
     @tool
     def aussie_translate(text: Text, level: Level = 5, seed: Seed = 0, vulgarity: Vulgarity = None,
@@ -343,7 +360,8 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                          embellishment: int | str | None = None,
                          document_type: DocumentType = "general", document_config: dict | None = None,
                          themes: Themes = None, invention: Invention = None,
-                         popularity: Popularity = False, pins: dict | None = None) -> dict[str, Any]:
+                         popularity: Popularity = False, pins: dict | None = None,
+                    personal_terms: list[dict] | None = None) -> dict[str, Any]:
         """Deterministic rule-engine translation (same text, level and seed give the same output). Change the
         seed for a different version. variety N picks among the N best-fitting terms only (1 = always the best
         fit); 0, the default, weighs every eligible term. registers (current, dated, archaic) and regions (e.g.
@@ -357,7 +375,26 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         return harness.translate(text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
                                  registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english,
                                  embellishment=embellishment, document_type=document_type,
-                                 document_config=document_config, translator=translator, themes=themes, invention=invention, popularity=popularity, pins=pins, _preferences_hook=preferences_hook)
+                                 document_config=document_config, translator=translator, themes=themes, invention=invention, popularity=popularity, pins=pins, _preferences_hook=preferences_hook, personal_terms=personal_terms,
+                            _personal_terms_hook=personal_terms_hook if allow_personal_terms else None)
+
+    @tool
+    def aussie_suggest_selection(text: Text, span: list[int], level: Level = 5, seed: Seed = 0,
+                         vulgarity: Vulgarity = None, variety: Variety = 0, registers: Registers = None,
+                         regions: Regions = None, unlock: Unlock = None,
+                         markdown: bool = False, markup: str = "text", english: str | None = None,
+                         embellishment: int | str | None = None,
+                         document_type: DocumentType = "general", document_config: dict | None = None,
+                         themes: Themes = None, invention: Invention = None,
+                         popularity: Popularity = False, pins: dict | None = None,
+                         personal_terms: list[dict] | None = None) -> dict[str, Any]:
+        """Translate once and suggest alternatives at an output span, snapped to words and whole changes."""
+        return harness.suggest_selection(text, span=span, translator=translator, level=level, seed=seed,
+            vulgarity=vulgarity, variety=variety, registers=registers, regions=regions, unlock=unlock,
+            markdown=markdown, markup=markup, english=english, embellishment=embellishment,
+            document_type=document_type, document_config=document_config, themes=themes, invention=invention,
+            popularity=popularity, pins=pins, personal_terms=personal_terms, _preferences_hook=preferences_hook,
+            _personal_terms_hook=personal_terms_hook if allow_personal_terms else None)
 
     @tool
     def aussie_verify(text: Text, original: Original, level: Level = 5, vulgarity: Vulgarity = None,
@@ -377,7 +414,8 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
 
     if selected_tools is not None and selected_tools-known_tools:
         raise UserError('unknown tools: '+', '.join(sorted(selected_tools-known_tools)))
-    return server
+    return MCPServer("aussiefy", instructions=instructions(allow_document_config=allow_document_config),
+                     tools=registered_tools)
 
 
 def main() -> None:

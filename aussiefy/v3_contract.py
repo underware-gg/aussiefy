@@ -1,4 +1,4 @@
-"""Rich construction/imagery cards and semantic checks for the frozen v3 response contract."""
+"""Rich cards and semantic checks shared by the archived v3 and draft v4 contracts."""
 
 from .cards import (CARD_VERSION, metadata, provenance as provenance, entry_card as entry_card)
 from .constructions import construction_identity
@@ -33,17 +33,19 @@ def card_envelope(dictionary):
 def response_metadata(result, dictionary=None):
     header = card_envelope(dictionary) if dictionary is not None else {
         'card_version': CARD_VERSION, 'dictionary_id': result.dictionary_id}
-    return {**header, 'tuning': result.tuning, 'warnings': list(result.warnings),
+    return {**header, 'tuning': result.tuning, 'personal_terms': result.personal_terms, 'warnings': list(result.warnings),
             'warning_details': warning_details(result.warnings)}
 
 
 def option_key(option):
-    return option.get('entry_id') or option.get('construction_id')
+    return option.get('key') or option.get('option_key') or (
+        'entry:' + option['entry_id'] if option.get('entry_id') else
+        'construction:' + option['construction_id'] if option.get('construction_id') else None)
 
 
 def _require(condition, message):
     if not condition:
-        raise SchemaError('changes v3: ' + message)
+        raise SchemaError('changes: ' + message)
 
 
 def _slice(text, span, expected, where):
@@ -64,13 +66,17 @@ def _same_provenance(occurrence, card, where):
 def validate_response(body, source, dictionary, *, result_warnings):
     """Semantic checks after structural validation; no JSON Schema dependency or I/O."""
     _require(body['dictionary_id'] == dictionary.identity, 'dictionary_id differs from the loaded dictionary')
-    _require(body['card_version'] == CARD_VERSION, 'card_version mismatch')
+    version = body['version']
+    _require(version in {3, 4} and body['card_version'] == version, 'card_version mismatch')
     _require(body['warnings'] == list(result_warnings), 'warnings differ from Result.warnings')
     _require(body['warning_details'] == warning_details(result_warnings), 'warning details differ from their messages')
     entries, constructions, imagery = (body[key] for key in ('entries', 'constructions', 'imagery'))
     _require(len({c['id'] for c in body['changes']}) == len(body['changes']), 'duplicate change id')
     for eid, card in entries.items():
         _require(card['id'] == eid and card['status'] != 'omit', 'entry map key/status mismatch')
+        if version == 4:
+            from .terms import headword_key
+            _require(card['headword_key'] == headword_key(dictionary.entries[eid].form), 'headword_key differs from engine ordering')
         _maker(card, 'entry')
         for riff in card.get('riffs', []):
             _maker(riff, 'entry riff')
@@ -109,6 +115,33 @@ def validate_response(body, source, dictionary, *, result_warnings):
             match = change['match']
             _require(parse_match_key(match['key']).to_dict() == match and known_match(match['key'], dictionary),
                      'source match is not canonical/known')
+        if version == 4:
+            _reading(change['reading'], dictionary)
+            _reading(change.get('selected_reading'), dictionary)
+            if change.get('selected_reading'):
+                selected_concept = change['selected_reading']['concept']
+                _require(change['reading'] is not None and selected_concept != change['reading']['concept']
+                         and selected_concept in {row['concept'] for row in change['ruled_out']},
+                         'selected reading is not an offered alternate interpretation')
+                _require(change.get('entry_id') in dictionary.entries
+                         and selected_concept in dictionary.entries[change['entry_id']].concept
+                         and not change.get('near'), 'selected word does not express its explicit reading')
+            ruled = change['ruled_out']
+            _require(len({row['concept'] for row in ruled}) == len(ruled), 'duplicate ruled-out reading')
+            for row in ruled:
+                _reading({'concept': row['concept'], 'plain': row['plain']}, dictionary)
+                _require(change['reading'] is None or row['concept'] != change['reading']['concept'],
+                         'inferred reading also labelled ruled out')
+            if change['kind'] in {'kept', 'held'}:
+                _require(change['output'] == change['original'] and not change['masks'], 'owned source wording changed or masked')
+            if change['kind'] == 'held':
+                _require(change['reading'] is not None and change['reading']['concept'] in dictionary.wordless_meanings,
+                         'held reading has an exact word or no meaning')
+                _require(not change['alternatives'] and not change['locked'] and change['option_key'] is None,
+                         'held source has replacement choices')
+            if change['kind'] == 'personal':
+                _require(change['entry_id'] is None and change['evidence'] is None and change['coined_by'] is None,
+                         'personal wording pretends to be a dictionary entry')
         options = change['alternatives'] + change['locked']
         keys = [option_key(option) for option in options]
         _require(all(keys) and len(set(keys)) == len(keys), 'duplicate/missing option key across alternatives and locked')
@@ -120,7 +153,28 @@ def validate_response(body, source, dictionary, *, result_warnings):
         if change['kind'] == 'substitution':
             for option in options:
                 _require(option['out_span'] == change['out_span'], 'option replacement region differs from change')
-        for owner in (change, *options):
+        words = [word for row in change.get('ruled_out', []) for word in row['words']]
+        for owner in (change, *options, *words):
+            if version == 4:
+                if owner is not change:
+                    kind = owner['kind']
+                    key = owner['key']
+                    _require(key.startswith(kind + ':'), 'option key has the wrong kind prefix')
+                    if kind in {'entry', 'source'}:
+                        _require(key == kind + ':' + owner['entry_id'], 'entry/source key differs from entry identity')
+                    elif kind == 'construction':
+                        _require(key == 'construction:' + owner['construction_id'], 'construction key differs from identity')
+                    else:
+                        _require(owner['entry_id'] is None and owner['evidence'] is None and owner['coined_by'] is None,
+                                 'literal option pretends to be a dictionary entry')
+                    if kind == 'plain':
+                        _require(owner.get('weight', 0) == 0, 'plain choice has an automatic weight')
+                    if kind == 'source':
+                        _require(not owner['masks'] and owner['rendered'] == change['original']
+                                 and owner['out_span'] == change['out_span'], 'source choice differs from owned marker')
+                if owner.get('near'):
+                    _near(owner['near'], change['reading'], owner, dictionary)
+
             _maker(owner, 'rendering')
             rendered = owner.get('rendered', owner.get('output'))
             if owner.get('entry_id'):
@@ -157,3 +211,21 @@ def validate_response(body, source, dictionary, *, result_warnings):
                     _require(riff['image_id'] in imagery, 'missing riff imagery card')
                     card = imagery[riff['image_id']]
                 _same_provenance(riff, card, 'riff occurrence')
+
+
+def _reading(reading, dictionary):
+    if reading is None:
+        return
+    concept = dictionary.concepts.get(reading['concept'])
+    _require(concept is not None and concept.plain == reading['plain'], 'reading differs from authored meaning')
+
+
+def _near(near, reading, owner, dictionary):
+    _require(reading is not None and reading['concept'] in dictionary.wordless_meanings,
+             'near rendering does not start from a waiting meaning')
+    relation = next((item for item in dictionary.concepts[reading['concept']].near
+                     if item.concept == near['concept'] and item.differs == near['differs']), None)
+    _require(relation is not None, 'near citation is not an authored relation')
+    if owner.get('entry_id'):
+        _require(near['concept'] in dictionary.entries[owner['entry_id']].concept,
+                 'near word does not express the cited target meaning')

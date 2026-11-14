@@ -40,6 +40,7 @@ def run(text: str, *, translator: Translator, level: int | str = 5, seed: int = 
         document_type: str = "general", document_config: dict | None = None,
         themes: dict[str, bool] | None = None, invention: bool | None = None,
         popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
+        personal_terms: list[dict] | None = None, _personal_terms_hook=None,
         _preferences_hook=None,
         embedder: str | None = None, rewrite: str | None = None, surface: bool = False,
         model: str = DEFAULT_MODEL) -> Result | DocumentResult:
@@ -49,14 +50,14 @@ def run(text: str, *, translator: Translator, level: int | str = 5, seed: int = 
                  unlock=unlock, embedder=embedder, english=english, embellishment=embellishment,
                  document_type=document_type, document_config=document_config)
     if markdown:
-        return translate_document(text, translator, *_document_policy(translator, **dials), _tuning={'popularity': popularity, 'preferences': preferences}, _preferences_hook=_preferences_hook, pins=pins)
+        return translate_document(text, translator, *_document_policy(translator, **dials), _tuning={'popularity': popularity, 'preferences': preferences}, _preferences_hook=_preferences_hook, pins=pins, personal_terms=personal_terms, _personal_terms_hook=_personal_terms_hook)
     rewriter = None
     if rewrite:
         from .llm import ClaudeRewriter
 
         rewriter = ClaudeRewriter(model=model, translator=translator)
     result = translator.translate(text, **dials, rewriter=rewriter, rewrite_mode=rewrite or "hard",
-                                  _protected=mask(text, markup), popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook)
+                                  _protected=mask(text, markup), popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook, personal_terms=personal_terms, _personal_terms_hook=_personal_terms_hook)
     if surface:
         from .llm import surface_rewrite
 
@@ -71,12 +72,13 @@ def translate(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int 
               document_type: str = "general", document_config: dict | None = None,
               themes: dict[str, bool] | None = None, invention: bool | None = None,
               popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
+        personal_terms: list[dict] | None = None, _personal_terms_hook=None,
               _preferences_hook=None,
               translator: Translator | None = None) -> Result | DocumentResult:
     """Translate plain text, or explicitly selected Markdown prose with its markup kept intact."""
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     return run(text, translator=translator or default_translator(), level=level, seed=seed, vulgarity=vulgarity,
-               variety=variety, registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english, embellishment=embellishment, document_type=document_type, document_config=document_config, popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook)
+               variety=variety, registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english, embellishment=embellishment, document_type=document_type, document_config=document_config, popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook, personal_terms=personal_terms, _personal_terms_hook=_personal_terms_hook)
 
 
 def translate_changes(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None,
@@ -86,8 +88,9 @@ def translate_changes(text: str, *, level: int | str = 5, seed: int = 0, vulgari
                       document_type: str = "general", document_config: dict | None = None,
                       themes: dict[str, bool] | None = None, invention: bool | None = None,
                       popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
+        personal_terms: list[dict] | None = None, _personal_terms_hook=None,
                       _preferences_hook=None,
-                      embedder: str | None = None, translator: Translator | None = None) -> ChangeSet:
+                      embedder: str | None = None, translator: Translator | None = None, _watch=None) -> ChangeSet:
     """translate's translation, with every change it made (the `changes` contract, aussiefy.changes.VERSION): each
     swap, garnish, drawl, swear infix and US/UK swap placed in the output, and each swap's alternatives, and those a
     vulgarity lock holds back, rendered where they stand. Takes translate's parameters, and embedder: the
@@ -100,5 +103,5 @@ def translate_changes(text: str, *, level: int | str = 5, seed: int = 0, vulgari
                  unlock=unlock, embedder=embedder, english=english, embellishment=embellishment,
                  document_type=document_type, document_config=document_config)
     if markdown:
-        return document_changes(text, tr, *_document_policy(tr, **dials), _tuning={'popularity': popularity, 'preferences': preferences}, _preferences_hook=_preferences_hook, pins=pins)
-    return build(tr, text, **dials, _protected=mask(text, markup), popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook)
+        return document_changes(text, tr, *_document_policy(tr, **dials), _watch=_watch, _tuning={'popularity': popularity, 'preferences': preferences}, _preferences_hook=_preferences_hook, pins=pins, personal_terms=personal_terms, _personal_terms_hook=_personal_terms_hook)
+    return build(tr, text, **dials, _observer=_watch(0) if _watch else None, _protected=mask(text, markup), popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook, personal_terms=personal_terms, _personal_terms_hook=_personal_terms_hook)

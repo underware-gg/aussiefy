@@ -16,13 +16,17 @@
   ]
  },
  "tuned_response": {
-  "version": 3,
+  "version": 4,
   "text": "Jeez Louise, she was stonkered. He's peckish, with a belly growlin' like a mixer full of rocks. Too easy.",
-  "card_version": 3,
-  "dictionary_id": "sha256:258476324d7a66dee75b483acdc91458926ef8981cb34b7101e8b9b4ac1c1a16",
+  "card_version": 4,
+  "dictionary_id": "sha256:6c2ed3aea93d2d66b430182a56973cc23dcb03c917830d7f2629f1a9a0b0ae1e",
   "tuning": {
    "popularity": true,
    "preferences": 1
+  },
+  "personal_terms": {
+   "provided": 0,
+   "applied": 0
   },
   "warnings": [],
   "warning_details": [],
@@ -63,6 +67,8 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-bloody-hell",
       "masks": [
        {
         "span": [
@@ -85,6 +91,8 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-crikey",
       "masks": []
      },
      {
@@ -98,6 +106,8 @@
       "vulgarity": 0,
       "evidence": "attested",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-fair-dinkum",
       "masks": []
      },
      {
@@ -111,6 +121,8 @@
       "vulgarity": 0,
       "evidence": "attested",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-jeez",
       "masks": []
      },
      {
@@ -124,6 +136,8 @@
       "vulgarity": 0,
       "evidence": "attested",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-stone-the-crows",
       "masks": []
      },
      {
@@ -137,13 +151,17 @@
       "vulgarity": 0,
       "evidence": "attested",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-strewth",
       "masks": []
      }
     ],
     "locked": [],
     "covers": [],
     "evidence": "attested",
-    "coined_by": null
+    "coined_by": null,
+    "reading": null,
+    "ruled_out": []
    },
    {
     "id": "substitution:8-17",
@@ -163,6 +181,8 @@
     "masks": [],
     "alternatives": [
      {
+      "key": "entry:stonkered-tired",
+      "kind": "entry",
       "entry_id": "stonkered-tired",
       "evidence": "attested",
       "coined_by": null,
@@ -174,6 +194,21 @@
       "vulgarity": 0,
       "weight": 1.0,
       "masks": []
+     },
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "plain:source",
+      "kind": "plain",
+      "rendered": "exhausted",
+      "out_span": [
+       21,
+       30
+      ],
+      "vulgarity": 0,
+      "weight": 0.0,
+      "masks": []
      }
     ],
     "locked": [],
@@ -184,7 +219,13 @@
      "qualifiers": {}
     },
     "evidence": "attested",
-    "coined_by": null
+    "coined_by": null,
+    "reading": {
+     "concept": "TIRED",
+     "plain": "exhausted"
+    },
+    "ruled_out": [],
+    "option_key": "entry:stonkered-tired"
    },
    {
     "id": "phonetic:19-24:pronoun-be",
@@ -213,7 +254,9 @@
     "locked": [],
     "covers": [],
     "evidence": null,
-    "coined_by": null
+    "coined_by": null,
+    "reading": null,
+    "ruled_out": []
    },
    {
     "id": "substitution:25-31",
@@ -233,6 +276,8 @@
     "masks": [],
     "alternatives": [
      {
+      "key": "entry:peckish",
+      "kind": "entry",
       "entry_id": "peckish",
       "evidence": "attested",
       "coined_by": null,
@@ -244,6 +289,21 @@
       "vulgarity": 0,
       "weight": 1.0,
       "masks": []
+     },
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "plain:source",
+      "kind": "plain",
+      "rendered": "hungry",
+      "out_span": [
+       37,
+       44
+      ],
+      "vulgarity": 0,
+      "weight": 0.0,
+      "masks": []
      }
     ],
     "locked": [],
@@ -254,7 +314,13 @@
      "qualifiers": {}
     },
     "evidence": "attested",
-    "coined_by": null
+    "coined_by": null,
+    "reading": {
+     "concept": "HUNGRY",
+     "plain": "hungry"
+    },
+    "ruled_out": [],
+    "option_key": "entry:peckish"
    },
    {
     "id": "garnish:31-31:riff",
@@ -287,7 +353,9 @@
      "phonetic:31-31:ing-in"
     ],
     "evidence": "bulldust",
-    "coined_by": "agent"
+    "coined_by": "agent",
+    "reading": null,
+    "ruled_out": []
    },
    {
     "id": "phonetic:31-31:ing-in",
@@ -316,7 +384,9 @@
     "locked": [],
     "covers": [],
     "evidence": null,
-    "coined_by": null
+    "coined_by": null,
+    "reading": null,
+    "ruled_out": []
    },
    {
     "id": "garnish:32-32:closer",
@@ -354,6 +424,8 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-stone-the-flamin-crows",
       "masks": []
      },
      {
@@ -367,6 +439,8 @@
       "vulgarity": 0,
       "evidence": "attested",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-strewth-closer",
       "masks": []
      },
      {
@@ -380,19 +454,24 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-too-easy",
       "masks": []
      }
     ],
     "locked": [],
     "covers": [],
     "evidence": "unverified",
-    "coined_by": null
+    "coined_by": null,
+    "reading": null,
+    "ruled_out": []
    }
   ],
   "entries": {
    "g-bloody-hell": {
     "id": "g-bloody-hell",
     "form": "bloody hell",
+    "headword_key": "bloody hell",
     "gloss": "Dismay.",
     "frame": "interjection",
     "concepts": [
@@ -464,6 +543,7 @@
    "g-crikey": {
     "id": "g-crikey",
     "form": "crikey",
+    "headword_key": "crikey",
     "gloss": "Surprise or alarm.",
     "frame": "interjection",
     "concepts": [
@@ -511,6 +591,7 @@
    "g-fair-dinkum": {
     "id": "g-fair-dinkum",
     "form": "fair dinkum",
+    "headword_key": "fair dinkum",
     "gloss": "Honestly.",
     "frame": "interjection",
     "concepts": [
@@ -563,6 +644,7 @@
    "g-jeez": {
     "id": "g-jeez",
     "form": "jeez",
+    "headword_key": "jeez",
     "gloss": "Exasperation.",
     "frame": "interjection",
     "concepts": [
@@ -618,6 +700,7 @@
    "g-stone-the-crows": {
     "id": "g-stone-the-crows",
     "form": "stone the crows",
+    "headword_key": "stone the crows",
     "gloss": "Astonishment.",
     "frame": "interjection",
     "concepts": [
@@ -674,6 +757,7 @@
    "g-stone-the-flamin-crows": {
     "id": "g-stone-the-flamin-crows",
     "form": "stone the flamin' crows",
+    "headword_key": "stone the flamin' crows",
     "gloss": "Astonishment.",
     "frame": "interjection",
     "concepts": [],
@@ -726,6 +810,7 @@
    "g-strewth": {
     "id": "g-strewth",
     "form": "strewth",
+    "headword_key": "strewth",
     "gloss": "Surprise.",
     "frame": "interjection",
     "concepts": [
@@ -781,6 +866,7 @@
    "g-strewth-closer": {
     "id": "g-strewth-closer",
     "form": "strewth",
+    "headword_key": "strewth",
     "gloss": "Drawn-out surprise.",
     "frame": "interjection",
     "concepts": [],
@@ -831,6 +917,7 @@
    "g-too-easy": {
     "id": "g-too-easy",
     "form": "too easy",
+    "headword_key": "too easy",
     "gloss": "Cheerful sign-off.",
     "frame": "interjection",
     "concepts": [],
@@ -868,6 +955,7 @@
    "peckish": {
     "id": "peckish",
     "form": "peckish",
+    "headword_key": "peckish",
     "gloss": "A bit hungry.",
     "frame": "adj",
     "concepts": [
@@ -920,6 +1008,7 @@
    "stonkered-tired": {
     "id": "stonkered-tired",
     "form": "stonkered",
+    "headword_key": "stonkered",
     "gloss": "Knocked flat with exhaustion.",
     "frame": "predicate_adj",
     "concepts": [
@@ -1076,7 +1165,7 @@
   "seed": 4,
   "pins": {
    "version": 1,
-   "dictionary_id": "sha256:258476324d7a66dee75b483acdc91458926ef8981cb34b7101e8b9b4ac1c1a16",
+   "dictionary_id": "sha256:6c2ed3aea93d2d66b430182a56973cc23dcb03c917830d7f2629f1a9a0b0ae1e",
    "source_id": "sha256:7f1b8be4b941a18e22cf56c56f62f4fedf1ab7f5c997441ac1b5c2e707568c52",
    "seed": 4,
    "complete": true,
@@ -1158,13 +1247,17 @@
   }
  },
  "untuned_response": {
-  "version": 3,
+  "version": 4,
   "text": "Jeez Louise, she was stonkered. He's peckish, with a belly growlin' like a mixer full of rocks. Too easy.",
-  "card_version": 3,
-  "dictionary_id": "sha256:258476324d7a66dee75b483acdc91458926ef8981cb34b7101e8b9b4ac1c1a16",
+  "card_version": 4,
+  "dictionary_id": "sha256:6c2ed3aea93d2d66b430182a56973cc23dcb03c917830d7f2629f1a9a0b0ae1e",
   "tuning": {
    "popularity": false,
    "preferences": 0
+  },
+  "personal_terms": {
+   "provided": 0,
+   "applied": 0
   },
   "warnings": [],
   "warning_details": [],
@@ -1205,6 +1298,8 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-bloody-hell",
       "masks": [
        {
         "span": [
@@ -1227,6 +1322,8 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-crikey",
       "masks": []
      },
      {
@@ -1240,6 +1337,8 @@
       "vulgarity": 0,
       "evidence": "attested",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-fair-dinkum",
       "masks": []
      },
      {
@@ -1253,6 +1352,8 @@
       "vulgarity": 0,
       "evidence": "attested",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-jeez",
       "masks": []
      },
      {
@@ -1266,6 +1367,8 @@
       "vulgarity": 0,
       "evidence": "attested",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-stone-the-crows",
       "masks": []
      },
      {
@@ -1279,13 +1382,17 @@
       "vulgarity": 0,
       "evidence": "attested",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-strewth",
       "masks": []
      }
     ],
     "locked": [],
     "covers": [],
     "evidence": "attested",
-    "coined_by": null
+    "coined_by": null,
+    "reading": null,
+    "ruled_out": []
    },
    {
     "id": "substitution:8-17",
@@ -1305,6 +1412,8 @@
     "masks": [],
     "alternatives": [
      {
+      "key": "entry:stonkered-tired",
+      "kind": "entry",
       "entry_id": "stonkered-tired",
       "evidence": "attested",
       "coined_by": null,
@@ -1318,6 +1427,8 @@
       "masks": []
      },
      {
+      "key": "entry:buggered",
+      "kind": "entry",
       "entry_id": "buggered",
       "evidence": "attested",
       "coined_by": null,
@@ -1338,6 +1449,21 @@
         "vulgarity": 1
        }
       ]
+     },
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "plain:source",
+      "kind": "plain",
+      "rendered": "exhausted",
+      "out_span": [
+       21,
+       30
+      ],
+      "vulgarity": 0,
+      "weight": 0.0,
+      "masks": []
      }
     ],
     "locked": [],
@@ -1348,7 +1474,13 @@
      "qualifiers": {}
     },
     "evidence": "attested",
-    "coined_by": null
+    "coined_by": null,
+    "reading": {
+     "concept": "TIRED",
+     "plain": "exhausted"
+    },
+    "ruled_out": [],
+    "option_key": "entry:stonkered-tired"
    },
    {
     "id": "phonetic:19-24:pronoun-be",
@@ -1377,7 +1509,9 @@
     "locked": [],
     "covers": [],
     "evidence": null,
-    "coined_by": null
+    "coined_by": null,
+    "reading": null,
+    "ruled_out": []
    },
    {
     "id": "substitution:25-31",
@@ -1397,6 +1531,8 @@
     "masks": [],
     "alternatives": [
      {
+      "key": "entry:peckish",
+      "kind": "entry",
       "entry_id": "peckish",
       "evidence": "attested",
       "coined_by": null,
@@ -1408,6 +1544,21 @@
       "vulgarity": 0,
       "weight": 1.0,
       "masks": []
+     },
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "plain:source",
+      "kind": "plain",
+      "rendered": "hungry",
+      "out_span": [
+       37,
+       44
+      ],
+      "vulgarity": 0,
+      "weight": 0.0,
+      "masks": []
      }
     ],
     "locked": [],
@@ -1418,7 +1569,13 @@
      "qualifiers": {}
     },
     "evidence": "attested",
-    "coined_by": null
+    "coined_by": null,
+    "reading": {
+     "concept": "HUNGRY",
+     "plain": "hungry"
+    },
+    "ruled_out": [],
+    "option_key": "entry:peckish"
    },
    {
     "id": "garnish:31-31:riff",
@@ -1451,7 +1608,9 @@
      "phonetic:31-31:ing-in"
     ],
     "evidence": "bulldust",
-    "coined_by": "agent"
+    "coined_by": "agent",
+    "reading": null,
+    "ruled_out": []
    },
    {
     "id": "phonetic:31-31:ing-in",
@@ -1480,7 +1639,9 @@
     "locked": [],
     "covers": [],
     "evidence": null,
-    "coined_by": null
+    "coined_by": null,
+    "reading": null,
+    "ruled_out": []
    },
    {
     "id": "garnish:32-32:closer",
@@ -1518,6 +1679,8 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-stone-the-flamin-crows",
       "masks": []
      },
      {
@@ -1531,6 +1694,8 @@
       "vulgarity": 0,
       "evidence": "attested",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-strewth-closer",
       "masks": []
      },
      {
@@ -1544,19 +1709,24 @@
       "vulgarity": 0,
       "evidence": "unverified",
       "coined_by": null,
+      "kind": "entry",
+      "key": "entry:g-too-easy",
       "masks": []
      }
     ],
     "locked": [],
     "covers": [],
     "evidence": "unverified",
-    "coined_by": null
+    "coined_by": null,
+    "reading": null,
+    "ruled_out": []
    }
   ],
   "entries": {
    "buggered": {
     "id": "buggered",
     "form": "buggered",
+    "headword_key": "buggered",
     "gloss": "Exhausted, or broken beyond use.",
     "frame": "adj",
     "concepts": [
@@ -1609,6 +1779,7 @@
    "g-bloody-hell": {
     "id": "g-bloody-hell",
     "form": "bloody hell",
+    "headword_key": "bloody hell",
     "gloss": "Dismay.",
     "frame": "interjection",
     "concepts": [
@@ -1680,6 +1851,7 @@
    "g-crikey": {
     "id": "g-crikey",
     "form": "crikey",
+    "headword_key": "crikey",
     "gloss": "Surprise or alarm.",
     "frame": "interjection",
     "concepts": [
@@ -1727,6 +1899,7 @@
    "g-fair-dinkum": {
     "id": "g-fair-dinkum",
     "form": "fair dinkum",
+    "headword_key": "fair dinkum",
     "gloss": "Honestly.",
     "frame": "interjection",
     "concepts": [
@@ -1779,6 +1952,7 @@
    "g-jeez": {
     "id": "g-jeez",
     "form": "jeez",
+    "headword_key": "jeez",
     "gloss": "Exasperation.",
     "frame": "interjection",
     "concepts": [
@@ -1834,6 +2008,7 @@
    "g-stone-the-crows": {
     "id": "g-stone-the-crows",
     "form": "stone the crows",
+    "headword_key": "stone the crows",
     "gloss": "Astonishment.",
     "frame": "interjection",
     "concepts": [
@@ -1890,6 +2065,7 @@
    "g-stone-the-flamin-crows": {
     "id": "g-stone-the-flamin-crows",
     "form": "stone the flamin' crows",
+    "headword_key": "stone the flamin' crows",
     "gloss": "Astonishment.",
     "frame": "interjection",
     "concepts": [],
@@ -1942,6 +2118,7 @@
    "g-strewth": {
     "id": "g-strewth",
     "form": "strewth",
+    "headword_key": "strewth",
     "gloss": "Surprise.",
     "frame": "interjection",
     "concepts": [
@@ -1997,6 +2174,7 @@
    "g-strewth-closer": {
     "id": "g-strewth-closer",
     "form": "strewth",
+    "headword_key": "strewth",
     "gloss": "Drawn-out surprise.",
     "frame": "interjection",
     "concepts": [],
@@ -2047,6 +2225,7 @@
    "g-too-easy": {
     "id": "g-too-easy",
     "form": "too easy",
+    "headword_key": "too easy",
     "gloss": "Cheerful sign-off.",
     "frame": "interjection",
     "concepts": [],
@@ -2084,6 +2263,7 @@
    "peckish": {
     "id": "peckish",
     "form": "peckish",
+    "headword_key": "peckish",
     "gloss": "A bit hungry.",
     "frame": "adj",
     "concepts": [
@@ -2136,6 +2316,7 @@
    "stonkered-tired": {
     "id": "stonkered-tired",
     "form": "stonkered",
+    "headword_key": "stonkered",
     "gloss": "Knocked flat with exhaustion.",
     "frame": "predicate_adj",
     "concepts": [
@@ -2286,7 +2467,7 @@
  "editor_options": {
   "current": {
    "version": 1,
-   "dictionary_id": "sha256:258476324d7a66dee75b483acdc91458926ef8981cb34b7101e8b9b4ac1c1a16",
+   "dictionary_id": "sha256:6c2ed3aea93d2d66b430182a56973cc23dcb03c917830d7f2629f1a9a0b0ae1e",
    "source_id": "sha256:7f1b8be4b941a18e22cf56c56f62f4fedf1ab7f5c997441ac1b5c2e707568c52",
    "seed": 4,
    "complete": true,
@@ -2369,7 +2550,7 @@
   "changes": {
    "garnish:0-0:opener": [
     {
-     "key": "g-bloody-hell",
+     "key": "entry:g-bloody-hell",
      "pick": {
       "kind": "garnish",
       "span": [
@@ -2387,7 +2568,7 @@
      }
     },
     {
-     "key": "g-crikey",
+     "key": "entry:g-crikey",
      "pick": {
       "kind": "garnish",
       "span": [
@@ -2405,7 +2586,7 @@
      }
     },
     {
-     "key": "g-fair-dinkum",
+     "key": "entry:g-fair-dinkum",
      "pick": {
       "kind": "garnish",
       "span": [
@@ -2423,7 +2604,7 @@
      }
     },
     {
-     "key": "g-jeez",
+     "key": "entry:g-jeez",
      "pick": {
       "kind": "garnish",
       "span": [
@@ -2441,7 +2622,7 @@
      }
     },
     {
-     "key": "g-stone-the-crows",
+     "key": "entry:g-stone-the-crows",
      "pick": {
       "kind": "garnish",
       "span": [
@@ -2459,7 +2640,7 @@
      }
     },
     {
-     "key": "g-strewth",
+     "key": "entry:g-strewth",
      "pick": {
       "kind": "garnish",
       "span": [
@@ -2491,7 +2672,7 @@
    ],
    "substitution:8-17": [
     {
-     "key": "stonkered-tired",
+     "key": "entry:stonkered-tired",
      "pick": {
       "kind": "substitution",
       "span": [
@@ -2513,7 +2694,7 @@
    ],
    "substitution:25-31": [
     {
-     "key": "peckish",
+     "key": "entry:peckish",
      "pick": {
       "kind": "substitution",
       "span": [
@@ -2549,7 +2730,7 @@
    ],
    "garnish:32-32:closer": [
     {
-     "key": "g-stone-the-flamin-crows",
+     "key": "entry:g-stone-the-flamin-crows",
      "pick": {
       "kind": "garnish",
       "span": [
@@ -2567,7 +2748,7 @@
      }
     },
     {
-     "key": "g-strewth-closer",
+     "key": "entry:g-strewth-closer",
      "pick": {
       "kind": "garnish",
       "span": [
@@ -2585,7 +2766,7 @@
      }
     },
     {
-     "key": "g-too-easy",
+     "key": "entry:g-too-easy",
      "pick": {
       "kind": "garnish",
       "span": [

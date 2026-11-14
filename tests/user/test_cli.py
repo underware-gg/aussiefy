@@ -201,3 +201,35 @@ def test_yarn_tools_runs_the_loop_by_hand(tmp_path, capsys):
     log, out = tmp_path / "log.jsonl", tmp_path / "yarn.txt"
     assert main(["yarn-tools", "submit", str(src), str(good), "-l", "3", "-o", str(out), "--log", str(log)]) == 0
     assert out.read_text().strip() == good.read_text().strip() and len(log.read_text().splitlines()) == 1
+
+
+
+def test_yarn_cli_forwards_personal_terms_to_the_real_offline_plan(monkeypatch, capsys, api_error):
+    import importlib
+    from conftest import FakeClaude
+    module = importlib.import_module('aussiefy.yarn')
+    real = module.yarn
+    seen = []
+    def offline(text, **kwargs):
+        seen.append(kwargs['personal_terms'])
+        return real(text, client=FakeClaude(api_error('offline')), **kwargs)
+    monkeypatch.setattr(module, 'yarn', offline)
+    terms = [{'phrase': 'spreadsheet', 'term': 'number wrangler'}]
+    assert main(['yarn', 'A spreadsheet.', '--json', '--no-cache', '-l', '1', '--vulgarity', '0',
+                 '--embellishment', '0', '--personal-terms', json.dumps(terms)]) == FELL_BACK
+    response = json.loads(capsys.readouterr().out)
+    assert seen == [terms]
+    assert response['personal_terms'] == {'provided': 1, 'applied': 1}
+    assert response['draft'] == 'A number wrangler.'
+
+
+def test_manual_yarn_cli_accepts_the_same_personal_terms(tmp_path, capsys):
+    source = tmp_path / 'source.txt'
+    source.write_text('A spreadsheet.')
+    assert main(['yarn-tools', 'brief', str(source), '-l', '1', '--vulgarity', '0', '--embellishment', '0',
+                 '--personal-terms', '[{"phrase":"spreadsheet","term":"number wrangler"}]']) == 0
+    output = capsys.readouterr().out
+    assert output.startswith('=== SYSTEM ===')
+    response = json.loads(output.split('=== USER ===\n', 1)[1])
+    assert response['ORIGINAL'] == 'A spreadsheet.'
+    assert 'number wrangler' in json.dumps(response)

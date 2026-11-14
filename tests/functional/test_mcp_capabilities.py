@@ -15,7 +15,7 @@ from mcp.server.mcpserver.exceptions import ToolError  # noqa: E402
 
 from aussiefy.mcp_server import build_server  # noqa: E402
 
-TOOLS = {"aussie_concepts": harness.list_concepts, "aussie_entries": harness.list_entries, "aussie_wordless_meanings": harness.list_wordless_meanings,
+TOOLS = {"aussie_suggest_selection": harness.suggest_selection, "aussie_concepts": harness.list_concepts, "aussie_entries": harness.list_entries, "aussie_wordless_meanings": harness.list_wordless_meanings,
          "aussie_entry": harness.get_entry,
          "aussie_meaning_quiz": harness.meaning_quiz, "aussie_random_entry": harness.random_entry, "aussie_suggest_name": harness.suggest_name,
          "aussie_variations": harness.variations, "aussie_bulldust": harness.bulldust, "aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_guide": harness.guide,
@@ -139,7 +139,7 @@ def test_every_tool_uses_the_injected_translator(monkeypatch):
     seen = []
     for name, fn in TOOLS.items():
         monkeypatch.setattr(harness, fn.__name__, lambda *a, _fn=fn, **k: seen.append(k["translator"]) or {})
-    args = {"aussie_concepts": {}, "aussie_entries": {}, "aussie_wordless_meanings": {}, "aussie_entry": {"entry_id": "stoked"}, "aussie_random_entry": {}, "aussie_meaning_quiz": {},
+    args = {"aussie_suggest_selection": {"text": "Hi.", "span": [0, 2]}, "aussie_concepts": {}, "aussie_entries": {}, "aussie_wordless_meanings": {}, "aussie_entry": {"entry_id": "stoked"}, "aussie_random_entry": {}, "aussie_meaning_quiz": {},
             "aussie_suggest_name": {}, "aussie_variations": {"family": "sideways-call-title",
             "parts": {"stem": "bugger-sideways", "ending": "call-me-the-pope"}}, "aussie_bulldust": {"concept": "HUNGRY"}, "aussie_lookup": {"query": "very tired"}, "aussie_lint": {"text": "G'day."}, "aussie_guide": {},
             "aussie_plan": {"text": "Hi."}, "aussie_translate": {"text": "Hi."},
@@ -185,3 +185,32 @@ def test_bulldust_limit_is_advertised_and_rejected_before_toolkit(translator, mo
         with pytest.raises(ToolError):
             asyncio.run(server.call_tool('aussie_bulldust', {'limit': invalid}))
     assert seen == [schema['default'], maximum]
+
+
+@pytest.mark.parametrize('tool', ['aussie_translate', 'aussie_plan', 'aussie_suggest_selection'])
+def test_host_personal_terms_are_hidden_and_resolved_once_per_request(translator, tool):
+    calls = []
+    def personal_terms_hook(**dials):
+        calls.append(dials)
+        return [{'phrase': 'spreadsheet', 'term': 'number wrangler'}]
+    server = build_server(translator=translator, personal_terms_hook=personal_terms_hook)
+    assert 'personal_terms' not in _tools(server)[tool].input_schema['properties']
+    args = {'text': 'A spreadsheet. A spreadsheet.', 'level': 1, 'vulgarity': 0, 'embellishment': 0}
+    if tool == 'aussie_suggest_selection':
+        args['span'] = [4, 8]
+    response = asyncio.run(server.call_tool(tool, args))
+    assert not response.is_error
+    assert calls == [{'level': 1, 'vulgarity': 0, 'embellishment': 0}]
+    assert response.structured_content['personal_terms'] == {'provided': 1, 'applied': 2}
+    assert 'number wrangler' in response.structured_content['draft' if tool == 'aussie_plan' else 'text']
+    with pytest.raises(ToolError, match='personal_terms'):
+        asyncio.run(server.call_tool(tool, args | {'personal_terms': []}))
+    assert len(calls) == 1
+
+
+def test_disabled_personal_terms_are_absent_and_cannot_be_supplied(translator):
+    server = build_server(translator=translator, allow_personal_terms=False)
+    for name in ['aussie_translate', 'aussie_plan', 'aussie_suggest_selection']:
+        assert 'personal_terms' not in _tools(server)[name].input_schema['properties']
+    with pytest.raises(ToolError, match='personal_terms'):
+        asyncio.run(server.call_tool('aussie_translate', {'text': 'A spreadsheet.', 'personal_terms': []}))

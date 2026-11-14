@@ -3,7 +3,11 @@
 from __future__ import annotations
 
 from .themes import ThemePolicy
-from .offsets import map_spans
+from .offsets import map_spans, map_position
+from .recognition import read_owned
+from .personal_terms import PersonalTerms, prepare as prepare_personal, find as find_personal
+from .near_meanings import eligible_near
+from .literal_spans import mask_literals, restore_literals, retain_literals
 
 import re
 import inspect
@@ -15,7 +19,7 @@ from typing import Any, Callable, Literal, Protocol, Sequence
 from . import pos
 from .context import FORMAL_RE, following_context, is_chant, sentence_contexts, text_mood
 from .detect import (CODE_CONCEPTS, DETERMINERS, Detection, after_determiner, fallback_scorer,
-                     read_meanings, owned_degree_modifiers, degree_modifier_spans)
+                     read_meanings, owned_degree_modifiers, degree_modifier_spans, bind_context_object, bind_adverb_position)
 from .embed import Embedder, make_embedder
 from .garnish import (Edit, GarnishOffer, GarnishRecord, PhoneticRecord, PhoneticTrace, apply_phonetic, ends_in_list,
                       garnish_offer, pick_riff, place_garnish, tag_in_speech)
@@ -33,7 +37,7 @@ from .errors import UserError
 from .v3_contract import response_metadata, provenance
 from .policy import Effective, Policy, envelope, pick_form, resolve, roll, theme_permissions, request_overrides
 from .realise import ARTICLES, fit_article, number_problem, phrase_continues, realise, replacement_span
-from .select import Candidate, candidates, mapping_effects, semantic_rejection, usable_forms, weighted_pick
+from .select import Candidate, candidates, mapping_effects, semantic_rejection, usable_forms, weighted_pick, narrow as _narrow
 from .constructions import Construction, generate, rendering_entry
 from .schema import Entry, SchemaError
 from .semantic_checks import theme_issues
@@ -51,6 +55,8 @@ class SubstitutionRecord:
     text: str
     det: Detection
     sentence: int = 0               # index of the sentence it's in
+    kind: str = "substitution"
+    owned_entry: Entry | None = None
     decision: str = ""
     p: float = 0.0
     roll: float | None = None
@@ -77,7 +83,7 @@ class SubstitutionRecord:
         total = sum(c.weight for c in self.eligible) or 1.0
         d = self.det
         return {
-            "kind": "substitution",
+            "kind": self.kind,
             "span": list(self.span),
             "text": self.text,
             "concepts": list(d.concepts),
@@ -96,7 +102,8 @@ class SubstitutionRecord:
             "p_substitute": round(self.p, 3),
             "roll": None if self.roll is None else round(self.roll, 4),
             "chosen": None if not self.chosen else {
-                "entry": None if self.chosen.construction else self.chosen.entry.id,
+                "entry": None if self.chosen.construction or self.kind == "personal" else self.chosen.entry.id,
+                **({"key": self.chosen.key} if self.kind == "personal" else {}),
                 **({"construction": self.chosen.construction.to_dict(permitted_themes)} if self.chosen.construction else {}),
                 "form": self.chosen.entry.form, "why": self.chosen.why,
                 "probability": round(self.chosen.weight / total, 3),
@@ -105,7 +112,8 @@ class SubstitutionRecord:
             "output": self.output,
             "term": self.term,
             "replaced_span": list(self.out_span) if self.out_span else None,
-            "candidates": [{"entry": None if c.construction else c.entry.id,
+            "candidates": [{"entry": None if c.construction or c.kind == "personal" else c.entry.id,
+                            **({"kind": "personal", "key": c.key} if c.kind == "personal" else {}),
                             **({"construction_id": c.construction.id} if c.construction else {}),
                             "probability": round(c.weight / total, 3)} for c in self.eligible],
             "rejected": [{"entry": i, "reason": r} for i, r in self.rejected],
@@ -188,7 +196,9 @@ class Result:
     _tuning_report: TuningReport = field(default_factory=TuningReport)
     dictionary_id: str = ""
     allow_misreadable: bool = False
+    personal_terms: dict = field(default_factory=lambda: {"provided": 0, "applied": 0})
     _pins_used: frozenset[int] = frozenset()
+    _owned_spans: tuple[tuple[int, int], ...] = ()
 
     @property
     def tuning(self) -> dict:
@@ -225,7 +235,8 @@ class Result:
         return {
             "substitutions": [
                 {"span": list(r.out_span or r.span), "original": self.source[slice(*(r.out_span or r.span))],
-                 "replacement": r.output, "entry": None if r.chosen.construction else r.chosen.entry.id,
+                 "replacement": r.output, "entry": r.chosen.entry.id if r.chosen.kind == "entry" and not r.chosen.construction else None,
+                 "kind": r.chosen.kind, "key": r.chosen.key,
                  **({"construction": r.chosen.construction.to_dict(self.theme_policy)} if r.chosen.construction else {}),
                  "stacked": r.stacked.entry.id if r.stacked else None, "riff": r.riff}
                 for r in self.records if r.substituted],
@@ -323,6 +334,7 @@ class Translator:
                   document_type: str = "general", document_config: dict | None = None,
                   themes: dict[str, bool] | None = None, invention: bool | None = None,
                   popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
+                  personal_terms: list[dict] | None = None, _personal_terms_hook=None,
                   _tuning: dict | None = None, _preferences_hook=None,
                   _protected: Masked | None = None, _context: tuple | None = None,
                   _composition: DocumentPart | None = None, _observer: PassObserver | None = None) -> Result:
@@ -364,9 +376,13 @@ class Translator:
         hook_options = ({'preferences_hook':_preferences_hook,
                          'dials':{'level':effective.level,'vulgarity':effective.vulgarity,'embellishment':setting.step}}
                         if _preferences_hook is not None else {})
+        personal = (_composition.personal_terms if _composition is not None else
+                    prepare_personal(personal_terms, self.dictionary, hook=_personal_terms_hook,
+                        dials={'level': effective.level, 'vulgarity': effective.vulgarity,
+                               'embellishment': setting.step}))
         run = _Run(text, pol, effective, mood, is_chant(sents), masked, genre,
                    _context[1] if _context is not None else text_english(pol.english, masked.prose(), self.dictionary.us_spellings),
-                   setting, composition=_composition, observer=_observer, pins=prepared_pins,
+                   setting, composition=_composition, observer=_observer, pins=prepared_pins, personal_terms=personal,
                    invention=setting.invention, tuning=(_composition.tuning if _composition is not None and _composition.tuning is not None
                            else Tuning.prepare(raw_tuning, self.dictionary, **hook_options)))
         if _composition is not None:
@@ -375,11 +391,26 @@ class Translator:
             _observer.begin(run)
         pieces: list[str] = [text[: tokens[0].start] if tokens else text]
         at = len(pieces[0])   # where the next sentence starts in the joined text
+        literal = []
         for i, tokens_i in enumerate(sents):
             sent = run.sentence(i, tokens_i, sents)
             recs, splices = self._substitute(sent, run)
+            state_after = run.state.copy() if _observer is not None else None
             run.records.extend(recs)
             out = _splice(sent, splices)
+            edits = sorted((a - sent.tokens[0].start, b - sent.tokens[0].start, len(value))
+                           for a, b, value in splices)
+            run.literal = tuple((map_position(edits, r.span[0] - sent.tokens[0].start, 'right'),
+                                 map_position(edits, r.span[1] - sent.tokens[0].start, 'left'))
+                                for r in recs if r.kind in {'kept', 'held'})
+            personal_spans = []
+            for record in recs:
+                if record.out_span and (record.kind == 'personal' or record.chosen and record.chosen.literal is not None):
+                    left, right = record.out_span
+                    left = map_position(edits, left - sent.tokens[0].start, 'left')
+                    right = map_position(edits, right - sent.tokens[0].start, 'right')
+                    personal_spans.append((left, right))
+            run.literal += tuple(personal_spans)
             hard = self._difficulty(sent.tokens, recs, run.eff)
             if hard:
                 run.difficult.append(DifficultSentence(i, masked.restore(sent.text, whole=False),
@@ -390,11 +421,13 @@ class Translator:
                                      else None))
             garnished = self._garnish_sentence(out, sent, recs, run)
             if _observer is not None:
-                _observer.sentence(SentenceTrace(sent, recs, splices, out, garnished, at))
-                at += len(garnished) + sent.next_start - sent.end
+                _observer.sentence(SentenceTrace(sent, recs, splices, out, garnished, at, state_after))
+            literal.extend((a + at, b + at) for a, b in run.literal)
+            at += len(garnished) + sent.next_start - sent.end
             pieces += [garnished, text[sent.end:sent.next_start]]
         # the closer answers the last sentence, so it goes there, not after a code block that follows it
         body, trail = "".join(pieces[:-1]), pieces[-1]
+        run.literal = tuple(literal)
         joined = (self._closer(body, sents, run) + trail) if any(t.is_word for t in tokens) else "".join(pieces)
         keep = partial(_no_drawl, keep_quotes=run.genre.policy.keep_quotes, protected=masked.no_phonetic)
         preserve = partial(document_spans, keep_quotes=run.genre.policy.keep_quotes,
@@ -402,12 +435,15 @@ class Translator:
         if owned_degree_modifiers(tokens, self.dictionary.degree_index.find(tokens)):
             document_preserve = preserve
             preserve = lambda current: document_preserve(current) + degree_modifier_spans(current, self.dictionary.degree_index)
-        trace = PhoneticTrace(keep, preserve) if _observer is not None else None
+        trace = PhoneticTrace(keep, preserve) if _observer is not None or run.literal else None
         final, phon = apply_phonetic(joined, self.dictionary.phonetic, run.eff, pol.seed,
                                      infixes=run.embellishment.takes("infix"), keep=keep, preserve=preserve,
-                                     trace=trace)
+                                     trace=trace, literal_spans=run.literal)
         if _observer is not None:
             _observer.phonetic(joined, trace, final)
+        owned = run.literal
+        for step in trace.passes if trace is not None else ():
+            owned = tuple((map_position(step.edits, a, 'right'), map_position(step.edits, b, 'left')) for a, b in owned)
         final = masked.restore(final)
         warnings = [*run.eff.warnings, *run.tuning.warnings]
         if pol.vulgarity is not None and run.eff.vulgarity and not run.embellishment.takes("infix"):
@@ -428,7 +464,7 @@ class Translator:
                       english=run.english, embellishment=run.embellishment, variety=pol.variety,
                       profile_config=run.eff.envelope()["profile_config"], imagery=run.imagery,
                       _tuning_report=TuningReport(run.tuning.popularity, frozenset(run.preferences_used)),
-                      dictionary_id=self.dictionary.identity, allow_misreadable=run.eff.allow_misreadable, _pins_used=frozenset(run.pins_used))
+                      dictionary_id=self.dictionary.identity, personal_terms={"provided": personal.provided, "applied": run.personal_applied}, allow_misreadable=run.eff.allow_misreadable, _pins_used=frozenset(run.pins_used), _owned_spans=owned)
 
     # -- stages -------------------------------------------------------------------------
 
@@ -448,8 +484,23 @@ class Translator:
         held = run.held(toks)
         dets = [d for d in dets if not self._term_of_art(d, run.genre.policy.term_domains)
                 and not held & set(range(d.start, d.end))]
+        personal = [item for item in find_personal(toks, replace(run.personal_terms, items=tuple(
+                        term for term in run.personal_terms.items if term.vulgarity <= eff.vulgarity)), dets, self.dictionary,
+                                                  sent.tags, complete=sent.complete)
+                    if item.term.vulgarity <= eff.vulgarity
+                    and not held & set(range(item.detection.start, item.detection.end))]
+        personal_tokens = {i for item in personal for i in range(item.detection.start, item.detection.end)}
+        personal_by_detection = {id(item.detection): item.term for item in personal}
+        owned = [item for item in read_owned(toks, self.dictionary, tags=sent.tags,
+                                            complete=sent.complete, readings=dets)
+                 if not (held | personal_tokens) & set(range(item.detection.start, item.detection.end))
+                 and not self._term_of_art(item.detection, run.genre.policy.term_domains)]
+        occupied_owned = {i for item in owned for i in range(item.detection.start, item.detection.end)}
+        dets = [det for det in dets if not (occupied_owned | personal_tokens) & set(range(det.start, det.end))]
+        owned_entries = {id(item.detection): item.entry for item in owned}
         if pol.english != "none":
             dets = self._yield_to_dialect(dets, toks, run)
+        dets = sorted([*dets, *(item.detection for item in owned), *(item.detection for item in personal)], key=lambda det: (det.start, det.end))
         occupied: set[int] = {i for d in dets for i in range(d.start, d.end)}
         records: list[SubstitutionRecord] = []
         splices: list[tuple[int, int, str]] = []
@@ -457,65 +508,106 @@ class Translator:
         said: dict[int, str] = {}   # the swaps made, by the token each ends before
         for det in dets:
             rec = SubstitutionRecord((toks[det.start].start, toks[det.end - 1].end),
-                                     run.text[toks[det.start].start: toks[det.end - 1].end], det, sent.index)
+                                     run.text[toks[det.start].start:toks[det.end - 1].end], det, sent.index)
+            rec.owned_entry = owned_entries.get(id(det))
+            if rec.owned_entry is not None:
+                rec.kind = 'kept'
+            elif det.concepts and set(det.concepts) <= set(self.dictionary.wordless_meanings):
+                rec.kind = 'held'
             records.append(rec)
             taken = (occupied - set(range(det.start, det.end))) | replaced
-            match = detection_match(det) if run.pins is not None else None
-            pin = run.pin('substitution', rec.span, match=match.key if match else None)
+            personal_term = personal_by_detection.get(id(det))
+            match = detection_match(det) if run.pins is not None and personal_term is None else None
+            pin = run.pin('substitution', rec.span, match=match.key if match else None) if personal_term is None else None
             rec.pin = pin
-            if pin is not None and pin.target is None:
-                run.pins_used.add(pin.index)
-                rec.decision = 'kept original: explicit pin'
-                continue
-            if pin is None and run.pins is not None and run.pins.complete:
-                rec.decision = 'kept original: complete replay'
-                continue
-            keep, rejected = self.eligible(det, sent, run, eff, state, taken, record_tuning=pin is None)
-            pinned = self._pinned_candidate(pin.target, det, sent, run, taken) if pin is not None else None
-            if pinned and all(c.entry.id != pinned.entry.id for c in keep):
+            near = rec.kind == 'held'
+            if personal_term is not None:
+                keep, rejected = self.eligible(det, sent, run, eff, state, taken)
+                rendering = replace(det, captures={key: value for key, value in det.captures.items()
+                                                   if key not in {'obj', 'objposs', 'np'}})
+                choice = Candidate(personal_term.rendering_entry(det.frame), 1, 'caller-owned wording',
+                                   kind='personal', identity=personal_term.key, reading=rendering)
+                rec.kind, rec.p = 'personal', 1.0
+                keep = [choice, *keep]
+            else:
+                if near:
+                    keep, rejected = eligible_near(self, det, sent, run, taken)
+                else:
+                    keep, rejected = self.eligible(det, sent, run, eff, state, taken,
+                                                  record_tuning=pin is None and rec.kind != 'kept')
+                choice = None
+            pinned = self._pinned_candidate(pin.target, det, sent, run, taken) if pin and pin.target is not None else None
+            if pinned and all(candidate.entry.id != pinned.entry.id for candidate in keep):
                 keep.append(pinned)
-            if not keep and run.invention:
+            if not keep and run.invention and not near and rec.kind != 'kept':
                 keep, constructed_rejections = self._inventions(det, sent, run, eff, state, taken)
                 rejected += constructed_rejections
             rec.eligible = keep
-            rec.rejected = sorted(((e.id, r) for e, r in rejected), key=lambda x: x[0])
-            if not keep:
-                rec.decision = "kept original: no eligible entry"
-                continue
-            rec.p = 1.0 if pinned else max(eff.profile.substitution[c.entry.substitution_class] for c in keep)
-            rec.roll = 0.0 if pinned else roll(pol.seed, "substitute", *sent.key, det.start, det.pattern)
-            if rec.roll >= rec.p:
-                rec.decision = f"kept original: roll {rec.roll:.3f} >= p {rec.p:g}"
-                continue
-            choice = pinned or weighted_pick(keep, roll(pol.seed, "pick", *sent.key, det.start, det.pattern))
+            rec.rejected = sorted((entry.id, reason) for entry, reason in rejected)
             here = Spot(sent, rec, keep, state, replaced, said, taken, len(splices))
             if run.observer is not None:
-                choice = run.observer.choose(sent, det, keep, choice)
                 run.observer.spot(here.snapshot())
+            if personal_term is None:
+                if pin is not None and pin.target is None:
+                    run.pins_used.add(pin.index)
+                    rec.decision = 'kept original: explicit pin'
+                elif rec.kind == 'kept' and pin is None:
+                    rec.decision = 'kept original: Australian source wording'
+                elif pin is None and run.pins is not None and run.pins.complete:
+                    rec.decision = 'kept original: complete replay'
+                elif not keep and pin is None:
+                    rec.decision = ('kept original: meaning has no Aussie word' if near else
+                                    'kept original: no eligible entry')
+                else:
+                    multiplier = (0.5 if run.embellishment.near_meanings == 1 else 0.75) if near else 1.0
+                    rec.p = 1.0 if pinned else max(eff.profile.substitution[c.entry.substitution_class] for c in keep) * multiplier
+                    lane = 'near-substitute' if near else 'substitute'
+                    rec.roll = 0.0 if pinned else roll(pol.seed, lane, *sent.key, det.start, det.pattern)
+                    if rec.roll < rec.p:
+                        choice = pinned or weighted_pick(keep, roll(pol.seed, 'near-pick' if near else 'pick',
+                                                                    *sent.key, det.start, det.pattern))
+                        if run.observer is not None:
+                            choice = run.observer.choose(sent, det, keep, choice)
+                    else:
+                        rec.decision = f'kept original: roll {rec.roll:.3f} >= p {rec.p:g}'
+            if choice is None:
+                if rec.kind in {'kept', 'held'}:
+                    replaced.update(range(det.start, det.end))
+                continue
             rec.chosen = choice
-            spot = self.render_at_spot(choice, here, run, pin=pin)
-            if spot.echo:
-                rec.chosen, rec.decision = None, f"kept original: {spot.echo}"
+            rendered = self.render_at_spot(choice, here, run, pin=pin)
+            if rendered.echo:
+                rec.chosen, rec.decision = None, 'kept original: ' + rendered.echo
+                if rec.kind in {'kept', 'held'}:
+                    replaced.update(range(det.start, det.end))
                 continue
             if pin is not None:
                 run.pins_used.add(pin.index)
-            rec.form = spot.form
+            rec.kind = 'personal' if personal_term is not None else 'substitution'
+            rec.form = rendered.form
+            rec.stacked, rec.riff = rendered.stacked, rendered.riff
             rec.stacked_form = (pin.stack.form if pin and pin.stack else self._form(
-                spot.stacked.entry, det, run, sent.key + ("stack",))) if spot.stacked else None
-            rec.stacked, rec.riff = spot.stacked, spot.riff
-            rec.part_spans, rec.riff_span = spot.part_spans, spot.riff_span
-            s, e = spot.start, spot.end
-            rec.output, rec.term, rec.out_span = spot.text, spot.term, (toks[s].start, toks[e - 1].end)
-            rec.decision = f"substituted: roll {rec.roll:.3f} < p {rec.p:g}"
-            for identity in choice.construction.usage_ids if choice.construction else (choice.entry.id,):
-                state.entry_uses[identity] += 1
-            if spot.form in choice.entry.spelling_group:
-                state.spellings.setdefault(choice.entry.id, spot.form)
-            replaced |= set(range(s, e))
-            said[e] = rec.term
-            splices.append((toks[s].start, toks[e - 1].end, spot.text))
+                rendered.stacked.entry, choice.reading or det, run, sent.key + ('stack',))) if rendered.stacked else None
+            rec.part_spans, rec.riff_span = rendered.part_spans, rendered.riff_span
+            start, end = rendered.start, rendered.end
+            rec.output, rec.term = rendered.text, rendered.term
+            rec.out_span = (toks[start].start, toks[end - 1].end)
+            rec.decision = ('substituted: caller-owned wording' if personal_term is not None else
+                            'substituted: curated near meaning' if choice.near else
+                            'substituted: explicit alternate reading' if choice.reading and choice.reading.concepts != det.concepts else
+                            f'substituted: roll {rec.roll:.3f} < p {rec.p:g}')
+            if personal_term is not None:
+                run.personal_applied += 1
+            else:
+                for identity in choice.construction.usage_ids if choice.construction else (choice.entry.id,):
+                    state.entry_uses[identity] += 1
+                if rendered.form in choice.entry.spelling_group:
+                    state.spellings.setdefault(choice.entry.id, rendered.form)
+            replaced.update(range(start, end))
+            said[end] = rec.term
+            splices.append((*rec.out_span, rendered.text))
         self._contextual_imagery(records, splices, sent, run)
-        if pol.english != "none":
+        if pol.english != 'none':
             splices += self._dialect(sent, run, replaced | held, said)
         return records, splices
 
@@ -529,7 +621,9 @@ class Translator:
         the vulgarity cap raised, for the options a lock holds back (entries: the idioms naming the detection's
         concepts, where it has them to hand; candidates passes over the rest)."""
         eligible, rejected = candidates(det, self.dictionary.idioms if entries is None else entries, eff, state.entry_uses,
-                                        self.dictionary.person_concepts, self.dictionary.person_nouns, mood=run.mood, constructions=constructions)
+                                        self.dictionary.person_concepts, self.dictionary.person_nouns, mood=run.mood, constructions=constructions,
+                                        reading_for=lambda entry: bind_adverb_position(
+                                            bind_context_object(det, entry, sent.tokens, sent.tags), entry, sent.tokens, sent.tags))
         grammar = grammar_evidence((c.entry.grammar for c in eligible), det, sent.tokens, sent.tags,
                                    complete=sent.complete)
         keep = []
@@ -539,7 +633,8 @@ class Translator:
                 quantity_approximation=run.embellishment.quantity_approximation)
             reason = (semantic_rejection(c.entry, narrator_opinion=run.embellishment.narrator_opinion,
                       quantity_approximation=run.embellishment.quantity_approximation, effects=c.semantic_effects)
-                      or _span_rejection(c, det, sent.tokens, sent.tags, taken, complete=sent.complete, grammar=grammar)
+                      or _span_rejection(c, c.reading or det, sent.tokens, sent.tags, taken, complete=sent.complete,
+                                         grammar=grammar if c.reading is None else None)
                       or _genre_rejection(c, run, self.dictionary.neutral_person_concepts))
             if reason:
                 rejected.append((c.entry, reason))
@@ -573,14 +668,30 @@ class Translator:
     def _pinned_candidate(self, target, det, sent, run, taken):
         entry, construction = target.resolve(self.dictionary, run.eff, run.embellishment,
                                             seed=run.pol.seed, mood=run.mood)
+        alternate = set(entry.concept).intersection(det.supersedes) - set(det.concepts)
+        if alternate and not set(entry.concept).intersection(det.concepts):
+            if (len(alternate) != 1 or det.source_pattern is not None and det.source_pattern.fence is not None):
+                raise UserError('pinned alternate reading is not unambiguous at this source spot')
+            reading = replace(det, concepts=tuple(sorted(alternate)), direct=set(), mapping_effects={})
+        else:
+            reading = det
+        if reading is det and det.concepts and set(det.concepts) <= set(self.dictionary.wordless_meanings):
+            checking = replace(run, pol=replace(run.pol, variety=0), tuning=Tuning(),
+                               preferences_used=set(), state=TextState())
+            keep, _ = eligible_near(self, det, sent, checking, taken)
+            candidate = next((c for c in keep if c.entry.id == target.entry_id), None)
+            if candidate is None or target.form not in usable_forms(candidate.entry, candidate.reading or det):
+                raise UserError('pinned near term or form is not eligible at this source spot')
+            return candidate
         if construction and (construction.family.placement is not None or
                              construction.family.frame not in {'adj', 'predicate_adj', 'interjection'}):
             raise UserError('construction pin cannot fill this source slot')
         checking = replace(run, pol=replace(run.pol, variety=0), tuning=Tuning(), preferences_used=set())
-        keep, _ = self.eligible(det, sent, checking, run.eff, TextState(), taken, [entry],
+        keep, _ = self.eligible(reading, sent, checking, run.eff, TextState(), taken, [entry],
                                constructions={entry.id: construction} if construction else None)
-        if not keep or target.form not in usable_forms(entry, det, literal=construction is not None):
+        if not keep or target.form not in usable_forms(entry, keep[0].reading or reading, literal=construction is not None):
             raise UserError('pinned term or form is not eligible at this source spot')
+        keep[0].reading = keep[0].reading or reading
         return keep[0]
 
     def render_at_spot(self, choice: Candidate, spot: "Spot", run: "_Run", *, pin=None) -> "SpotRendering":
@@ -589,10 +700,18 @@ class Translator:
         fixed against what comes before. It reads run.pol (the seed), run.eff, run.mood, run.embellishment and
         run.composition, and reads and spends from run.state (the stack and the riff use it); the caller applies
         the rest. translate and the changes builder (on a copy of the state at the spot) both render this way."""
-        det, toks, sent = spot.rec.det, spot.sent.tokens, spot.sent
+        det, toks, sent = choice.reading or spot.rec.det, spot.sent.tokens, spot.sent
+        if choice.literal is not None:
+            return SpotRendering(det.start, det.end, choice.literal, choice.literal, choice.literal)
         form = pin.target.form if pin else choice.construction.text if choice.construction else self._form(choice.entry, det, run, sent.key)
         realised = form if choice.construction else realise(choice.entry, form, det)
         out = fit_article(realised, choice.entry, det, toks)
+        if det.moved_prefix is not None:
+            first, end = det.moved_prefix
+            prefix = run.text[toks[first].start:toks[end - 1].end]
+            if capital_is_positional(toks, first):
+                prefix = prefix[:1].lower() + prefix[1:]
+            out += ' ' + prefix
         s, e = replacement_span(choice.entry, det, toks)
         retained_qualifier = ""
         if det.degree_qualifier:
@@ -604,11 +723,11 @@ class Translator:
             return SpotRendering(s, e, "", "", form, echo=echo)
         spans = [list(p.span) for p in choice.construction.parts] if choice.construction else []
         part_count = len(spans)
-        if pin is None:
+        if pin is None and choice.kind == 'entry':
             stacked, out = self._stack(out, choice, spot.keep, det, sent, run)
         else:
             stacked = None
-            if pin.stack:
+            if pin is not None and pin.stack:
                 following = following_context(sent.tokens, det.end, sent.complete)
                 if (choice.construction or det.frame != 'predicate_adj' or det.coordinated or det.degree_qualifier
                         or det.result_clause or not following.known or following.word is not None
@@ -622,7 +741,8 @@ class Translator:
                     raise UserError('stacked pin does not fit the primary term')
                 run.state.entry_uses[stacked.entry.id] += 1
                 out += ', ' + realise(stacked.entry, pin.stack.form, det)
-        riff, riff_suffix = self._riff(choice, det, e, sent, run, pin=pin)
+        riff, riff_suffix = (self._riff(choice, det, e, sent, run, pin=pin)
+                             if choice.kind == 'entry' else (None, ""))
         if riff:
             spans.append([len(out) + 2, len(out) + 2 + len(riff)])
         if retained_qualifier:
@@ -642,6 +762,8 @@ class Translator:
         if sent.quiet or sent.prefix_only:
             return
         for rec in records:
+            if rec.kind in {'kept', 'personal'}:
+                continue
             match = detection_match(rec.det) if run.pins is not None else None
             pin = run.pin('imagery', rec.span, match=match.key if match else None)
             if pin is not None and pin.image_id is None:
@@ -649,7 +771,8 @@ class Translator:
                 continue
             if pin is None and run.pins is not None and run.pins.complete:
                 continue
-            offers = image_offers(self.dictionary, rec.det, sent.tokens, run.eff, run.embellishment)
+            offers = image_offers(self.dictionary, rec.chosen.reading if rec.chosen and rec.chosen.reading else rec.det,
+                                  sent.tokens, run.eff, run.embellishment)
             if not offers:
                 continue
             run.imagery.append({"term": rec.text, "for": rec.text, "riffs": [o.card(run.eff.theme_policy) for o in offers]})
@@ -783,7 +906,7 @@ class Translator:
         """Hand the whole sentence to the rewriter, if there's a reason to; its output replaces the draft."""
         if not reason:
             return out
-        planned = [r.output for r in recs if r.substituted]
+        planned = [r.output for r in recs if r.substituted and r.chosen.kind == "entry" and r.chosen.literal is None]
         settings = {"level": run.pol.level, "vulgarity": run.eff.vulgarity, "seed": run.pol.seed}
         parameters = inspect.signature(rewriter.rewrite).parameters
         # Existing custom hooks have an explicit old signature; policy-aware hooks opt into the new input.
@@ -791,11 +914,15 @@ class Translator:
             settings["permitted_themes"] = run.eff.permitted_themes
         if "theme_policy" in parameters or any(p.kind == inspect.Parameter.VAR_KEYWORD for p in parameters.values()):
             settings["theme_policy"] = run.eff.theme_policy
-        new, status = rewriter.rewrite(sent.text, out, planned, **settings)
-        if new and protected_runs(new) != protected_runs(out):
-            new, status = None, "rejected: it changed protected markup (code, a link, a tag)"
+        literal = mask_literals(out, run.literal)
+        draft = literal.text
+        new, status = rewriter.rewrite(sent.text, draft, planned, **settings)
+        if new and protected_runs(new) != protected_runs(draft):
+            new, status = None, "rejected: it changed protected markup or owned wording"
         if new and theme_issues(new, sent.text, self.dictionary, run.eff.theme_policy):
             new, status = None, "rejected: it introduced known wording with forbidden themes"
+        if new:
+            new, run.literal = restore_literals(literal, new)
         put_back = partial(run.masked.restore, whole=False)
         run.rewrites.append(RewriteRecord(sent.index, put_back(sent.text), put_back(out), new and put_back(new),
                                           reason, status, rewriter.model))
@@ -919,9 +1046,13 @@ class Translator:
         placed = place_garnish(out, placement, form, lowerable, first_replaced)
         if placed is None:
             return None
+        retained = retain_literals(out, placed[0], placed[1], run.literal)
+        if retained is None:
+            return None
+        rendered, run.literal = retained
         if run.observer is not None:
             run.observer.garnish(sentence, entry, form, placed[1], offer)
-        return placed[0]
+        return rendered
 
     @staticmethod
     def _case(out: str, sent: list[Token], s: int) -> str:
@@ -986,7 +1117,7 @@ class Translator:
                                      max(0, eff.profile.garnish_per_sentence - len(g.placed)), swear=True)
 
     def replay_garnish(self, out: str, sent: "_Sentence", run: "_Run", ops: Sequence[tuple[str, str]],
-                       first_replaced: bool) -> tuple[str, list[Edit | None]]:
+                       first_replaced: bool, *, literal_spans=()) -> tuple[str, list[Edit | None]]:
         """A sentence's garnish put back, as decided, into another text for it (the changes builder swaps a term
         and keeps the rest): each (placement, words) in the order the engine placed them, the way it placed them,
         with where each went (None where one no longer fits, such as a tail after a swap ends the closing list).
@@ -998,7 +1129,11 @@ class Translator:
                 lowerable = run.opener_lowerable(sent, self.dictionary)
             placed = place_garnish(out, placement, form, lowerable or frozenset(), first_replaced)
             if placed is not None:
-                out = placed[0]
+                retained = retain_literals(out, placed[0], placed[1], literal_spans)
+                if retained is None:
+                    placed = None
+                else:
+                    out, literal_spans = retained
             edits.append(placed and placed[1])
         return out, edits
 
@@ -1176,6 +1311,7 @@ class SentenceTrace:
     spliced: str
     garnished: str
     start: int
+    state_after: TextState = field(default_factory=TextState)
 
 
 class PassObserver:
@@ -1224,6 +1360,7 @@ class DocumentPart:
     tuning: Tuning | None = None
     pins: Pins | None = None
     source_start: int = 0
+    personal_terms: PersonalTerms = field(default_factory=PersonalTerms)
 
 
 @dataclass
@@ -1318,6 +1455,9 @@ class _Run:
     _datelines: list[tuple[int, int]] | None = None
     _commands: frozenset[str] | None = None
     _written: frozenset[str] | None = None
+    literal: tuple[tuple[int, int], ...] = ()
+    personal_terms: PersonalTerms = field(default_factory=PersonalTerms)
+    personal_applied: int = 0
 
     def pin(self, kind, span, *, placement=None, match=None):
         offset = self.composition.source_start if self.composition else 0
@@ -1481,22 +1621,6 @@ def _span_rejection(c: Candidate, det: Detection, toks: list[Token], tags: list[
     return number_problem(c.entry, det, toks, tags) or grammar_problem(c.entry, det, toks, tags,
         complete=complete, evidence=grammar)
 
-
-def _narrow(keep: list[Candidate], rejected: list, variety: int, state: TextState) -> list[Candidate]:
-    """Drop what the text has already said, then (variety N) all but the N best fits."""
-    # a multi-word name for a thing reads as a tic the second time ("the Big Smoke ... the Big Smoke"): say it
-    # once and let the plain word stand after that. (Letting it back after a gap was tried: a long yarn then
-    # leans on "bugger all" and "some bastard" over and over.)
-    again = [c for c in keep if state.garnish_uses.get(c.entry.id)
-             or c.entry.frame == "np" and len(c.entry.form.split()) > 1 and state.entry_uses.get(c.entry.id)]
-    keep = [c for c in keep if c not in again]
-    rejected += [(c.entry, "already used in this text; the plain word can stand the second time") for c in again]
-    if variety and len(keep) > variety:
-        # variety N: pick among the N best fits only (1 = always the best); ties keep dictionary order
-        best = set(map(id, sorted(keep, key=lambda c: -c.weight)[:variety]))
-        rejected += [(c.entry, f"variety {variety}: not among the {variety} best fits") for c in keep if id(c) not in best]
-        keep = [c for c in keep if id(c) in best]
-    return keep
 
 
 def _fix_article(out: str, toks: list[Token], s: int, replaced: set[int], *,

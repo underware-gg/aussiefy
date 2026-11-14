@@ -42,6 +42,7 @@ def translate(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int 
               document_type: str = "general", document_config: dict | None = None,
               themes: dict[str, bool] | None = None, invention: bool | None = None,
               popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
+              personal_terms: list[dict] | None = None, _personal_terms_hook=None,
               _preferences_hook=None, translator: Translator | None = None) -> dict[str, Any]:
     """The deterministic rule-engine translation: the same text, level and seed give the same output. variety N
     picks among the N best-fitting terms only (1 = always the best fit; 0 weighs every eligible term). registers
@@ -54,7 +55,7 @@ def translate(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int 
     tr = translator
     r = translation.translate(text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
                          registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english,
-                         embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr, popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook)
+                         embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr, popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook, personal_terms=personal_terms, _personal_terms_hook=_personal_terms_hook)
     if markdown:
         return r.to_dict()
     return {"text": r.text, "seed": seed, "variety": variety, **r.envelope(), **_embellished(r)}
@@ -73,6 +74,7 @@ def plan(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str
               document_type: str = "general", document_config: dict | None = None,
               themes: dict[str, bool] | None = None, invention: bool | None = None,
               popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
+              personal_terms: list[dict] | None = None, _personal_terms_hook=None,
               _preferences_hook=None, translator: Translator | None = None) -> dict[str, Any]:
     """The engine's draft, what it planned, and which sentences it couldn't carry (best done by hand).
     markup, english, embellishment and document policy have the same defaults and meanings as translate."""
@@ -81,7 +83,7 @@ def plan(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str
 
     r = translation.run(text, translator=tr, level=level, seed=seed, vulgarity=vulgarity,
                      variety=variety, registers=registers, regions=regions, unlock=unlock, markup=markup,
-                     english=english, embellishment=embellishment, document_type=document_type, document_config=document_config, popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook)
+                     english=english, embellishment=embellishment, document_type=document_type, document_config=document_config, popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook, personal_terms=personal_terms, _personal_terms_hook=_personal_terms_hook)
     decided = r.decisions()
     eff = tr.effective(level=r.level, vulgarity=r.vulgarity, registers=registers, regions=regions,
                        unlock=unlock, document_config=document_config)
@@ -98,9 +100,11 @@ def plan(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str
         "replay_pins": r.replay_pins(),
         # a riff is optional colour: the planned phrase is the term, not "bush, miles from the nearest servo"
         "planned": [{"original": r.source[slice(*x.out_span)], "span": list(x.out_span),
-                     "entry": None if x.chosen.construction else x.chosen.entry.id,
+                     "entry": None if x.chosen.construction or x.kind == "personal" else x.chosen.entry.id,
+                     **({"kind": "personal", "key": x.chosen.key} if x.kind == "personal" else {}),
                      "construction_id": x.chosen.construction.id if x.chosen.construction else None,
-                     **provenance(x.chosen.construction.metadata if x.chosen.construction else x.chosen.entry),
+                     **({"evidence": None, "coined_by": None} if x.kind == "personal" else
+                        provenance(x.chosen.construction.metadata if x.chosen.construction else x.chosen.entry)),
                      "parts": [{"role": p.role, "ingredient_id": p.ingredient.id,
                                 "entry_id": p.ingredient.entry_id, "out_span": list(span),
                                 **provenance(p.ingredient.metadata)}
@@ -147,3 +151,23 @@ def _riff_offers(r: Result) -> list[dict[str, Any]]:
         {**card, "suits_mood": card["tone"] in RIFF_TONES_FOR[r.mood]}
         for card in sorted(group["riffs"], key=lambda card: -tone_weight(card['tone'], r.mood))]}
         for group in r.imagery]
+
+
+def suggest_selection(text: str, *, span: list[int], level: int | str = 5, seed: int = 0,
+                      vulgarity: int | str | None = None, variety: int = 0,
+                      registers: list[str] | None = None, regions: list[str] | None = None,
+                      unlock: list[str] | None = None, markdown: bool = False, markup: str = 'text',
+                      english: str | None = None, embellishment: int | str | None = None,
+                      document_type: str = 'general', document_config: dict | None = None,
+                      themes: dict[str, bool] | None = None, invention: bool | None = None,
+                      popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
+                      personal_terms: list[dict] | None = None, _preferences_hook=None, _personal_terms_hook=None,
+                      translator: Translator | None = None) -> dict:
+    """Suggestions at a span of translated output, through the shared source-preserving pass."""
+    from .selection import suggest_selection as select
+    return select(text, span=span, translator=translator, level=level, seed=seed, vulgarity=vulgarity,
+        variety=variety, registers=registers, regions=regions, unlock=unlock, markdown=markdown,
+        markup=markup, english=english, embellishment=embellishment, document_type=document_type,
+        document_config=document_config, themes=themes, invention=invention, popularity=popularity,
+        preferences=preferences, pins=pins, personal_terms=personal_terms,
+        _preferences_hook=_preferences_hook, _personal_terms_hook=_personal_terms_hook)

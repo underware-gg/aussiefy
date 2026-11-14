@@ -332,7 +332,7 @@ def test_changes_share_tuned_picks_and_preserve_current_public_contract(adjusted
     assert changed.text == result.text
     assert changed.result._tuning == result._tuning
     assert next(c for c in changed.changes if c['kind'] == 'substitution')['entry_id'] == 'zz-choice-a'
-    assert changed.to_dict()['version'] == 3
+    assert changed.to_dict()['version'] == 4
     assert changed.to_dict()['tuning'] == result.to_dict()['tuning'] == result.tuning
 
 
@@ -446,7 +446,7 @@ def test_document_counts_one_preference_once_across_prose_units(adjusted_diction
     assert all(spot(u.result).chosen.entry.id == 'zz-choice-a' for u in document.units)
     assert result.to_dict()['tuning'] == {'popularity': True, 'preferences': 1}
     if changes:
-        assert result.to_dict()['version'] == 3
+        assert result.to_dict()['version'] == 4
 
 
 def test_document_preserves_distinct_exact_and_root_preferences_without_double_counting(adjusted_dictionary):

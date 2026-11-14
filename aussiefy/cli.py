@@ -181,7 +181,7 @@ def _policy(args) -> dict:
 def _steering(args) -> dict:
     """The engine options translate and plan share, as the toolkit's parameters."""
     return {"variety": args.variety, "registers": _csv(args.registers), "regions": _csv(args.regions),
-            "unlock": _csv(args.unlock), "pins": args.pins, **_tuning(args), "english": args.english, "embellishment": args.embellishment, **_document(args)}
+            "unlock": _csv(args.unlock), "pins": args.pins, "personal_terms": args.personal_terms, **_tuning(args), "english": args.english, "embellishment": args.embellishment, **_document(args)}
 
 
 def _document(args) -> dict:
@@ -209,6 +209,16 @@ def _pins_json(value):
         if not isinstance(raw, dict):
             raise UserError('pins must be a JSON object')
         return raw
+    except (ValueError, UserError) as exc:
+        raise argparse.ArgumentTypeError(str(exc)) from exc
+
+
+def _personal_terms_json(value):
+    try:
+        terms = json.loads(value)
+        if not isinstance(terms, list):
+            raise UserError('personal_terms must be a JSON list')
+        return terms
     except (ValueError, UserError) as exc:
         raise argparse.ArgumentTypeError(str(exc)) from exc
 
@@ -278,11 +288,19 @@ def cmd_translate(args) -> int:
     return FELL_BACK if fell_back or surface.get("outcome") == "fell_back" else 0
 
 
+def cmd_suggest_selection(args) -> int:
+    from .harness import suggest_selection
+    result = suggest_selection(_text(args, verbatim=args.markdown or args.markup != "text"), span=args.span,
+        translator=_translator(args), seed=args.seed, markdown=args.markdown, markup=args.markup, **_policy(args), **_steering(args))
+    _json(result)
+    return 0
+
+
 def cmd_yarn(args) -> int:
     from .yarn import yarn
 
     result = yarn(_text(args), seed=args.seed, model=args.model, cache=not args.no_cache, markup=args.markup, english=args.english,
-                  embellishment=args.embellishment, **_document(args), **_tuning(args), translator=_translator(args),
+                  embellishment=args.embellishment, **_document(args), **_tuning(args), personal_terms=args.personal_terms, translator=_translator(args),
                   **_policy(args))
     if args.json:
         _json(result.to_dict())
@@ -299,7 +317,7 @@ def cmd_yarn_tools(args) -> int:
 
     source = _read(args.source, "source", verbatim=True)
     session = brief(source, seed=args.seed, markup=args.markup, english=args.english,
-                    embellishment=args.embellishment, **_document(args), **_tuning(args), translator=_translator(args), **_policy(args))
+                    embellishment=args.embellishment, **_document(args), **_tuning(args), personal_terms=args.personal_terms, translator=_translator(args), **_policy(args))
     if args.declined and args.step == "lint":   # each call is a fresh session: lint learns what was declined here
         session.decline(_declined(args.declined))
     if args.step == "brief":
@@ -964,7 +982,9 @@ def build_parser() -> argparse.ArgumentParser:
     tuned = argparse.ArgumentParser(add_help=False)
     tuned.add_argument('--popularity', action='store_true', help='apply the wider reviewed popularity band')
     tuned.add_argument('--preferences', type=_preferences_json, metavar='JSON', help='latest-first preference weights')
-    steering = argparse.ArgumentParser(add_help=False, parents=[filters, tuned])
+    personal = argparse.ArgumentParser(add_help=False)
+    personal.add_argument('--personal-terms', type=_personal_terms_json, metavar='JSON', help='request-local phrase and term choices')
+    steering = argparse.ArgumentParser(add_help=False, parents=[filters, tuned, personal])
     steering.add_argument("--pins", type=_pins_json, metavar="JSON", help="explicit source and dictionary scoped replay choices")
     steering.add_argument("--variety", type=int, default=0, metavar="N",
                           help="choose among the N best-fitting slang terms only (1 = always the best fit); "
@@ -1013,7 +1033,7 @@ def build_parser() -> argparse.ArgumentParser:
     bd.add_argument("--include-scaffold", action="store_true", help="include the full agent construction scaffold")
     bd.set_defaults(func=cmd_bulldust)
 
-    y = sub.add_parser("yarn", parents=[*toolkit, english, embellished, tuned, seeded, marked, text],
+    y = sub.add_parser("yarn", parents=[*toolkit, english, embellished, tuned, personal, seeded, marked, text],
                        help="Claude retells the whole text as an Aussie yarn, using the toolkit")
     y.add_argument("--model", default=DEFAULT_MODEL, help="Claude model")
     y.add_argument("--no-cache", action="store_true",
@@ -1021,7 +1041,7 @@ def build_parser() -> argparse.ArgumentParser:
                         "~/.aussiefy unless set)")
     y.set_defaults(func=cmd_yarn)
 
-    yt = sub.add_parser("yarn-tools", parents=[*toolkit, english, embellished, tuned, seeded, marked],
+    yt = sub.add_parser("yarn-tools", parents=[*toolkit, english, embellished, tuned, personal, seeded, marked],
                         help="yarn mode by hand: an agent is the model (brief, then lookup, lint and submit)")
     yt.add_argument("step", choices=("brief", "lookup", "lint", "submit"))
     yt.add_argument("source", help="the original text file")
@@ -1131,6 +1151,13 @@ def build_parser() -> argparse.ArgumentParser:
     pl = sub.add_parser("plan", parents=[dictionary, policy, as_json, steering, english, embellished, seeded, marked, text],
                         help="the engine's draft, planned phrases and difficult sentences (JSON)")
     pl.set_defaults(func=cmd_plan)
+
+    selection = sub.add_parser("suggest-selection", parents=[dictionary, policy, steering, english, embellished, seeded, marked, text],
+                               help="Aussie alternatives at a selection in translated output")
+    selection.add_argument('--markdown', action='store_true', help='translate Markdown prose; preserve code, links and headings')
+    selection.add_argument('--span', nargs=2, type=int, required=True, metavar=('START', 'END'),
+                           help='Unicode code-point offsets in translated output')
+    selection.set_defaults(func=cmd_suggest_selection)
 
     v = sub.add_parser("validate", parents=[dictionary], help="validate the dictionary and print stats")
     v.set_defaults(func=cmd_validate)

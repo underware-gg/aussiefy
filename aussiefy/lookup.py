@@ -182,6 +182,23 @@ class _LookupCards:
             shows_riffs(self.setting), permitted_themes=self.effective.theme_policy,
             registers=self.effective.registers, allow_misreadable=self.effective.allow_misreadable)
 
+    def near(self, concept):
+        out = []
+        for relation in self.dictionary.concepts[concept].near:
+            words = []
+            for entry in self.dictionary.idioms_for((relation.concept,)):
+                if (dial_rejection(entry, self.effective) or register_rejection(entry, self.effective.registers)
+                        or semantic_rejection(entry, narrator_opinion=self.setting.narrator_opinion,
+                                              quantity_approximation=self.setting.quantity_approximation)):
+                    continue
+                words.append(full_entry_card(entry, self.effective.vulgarity, shows_riffs(self.setting),
+                    permitted_themes=self.effective.theme_policy, registers=self.effective.registers,
+                    allow_misreadable=self.effective.allow_misreadable))
+            out.append({'kind': 'near', 'concept': relation.concept,
+                        'plain': self.dictionary.concepts[relation.concept].plain,
+                        'differs': relation.differs, 'setting': relation.setting, 'words': words[:self.limit]})
+        return out
+
     def ruled_out(self, evidence, original):
         out = []
         for reading in evidence.meanings:
@@ -195,7 +212,7 @@ class _LookupCards:
                 words.append(self.entry(entry))
                 if len(words) == self.limit:
                     break
-            out.append({'kind': 'meaning', 'concept': reading.concept, 'words': words})
+            out.append({'kind': 'meaning', 'concept': reading.concept, 'plain': self.dictionary.concepts[reading.concept].plain, 'words': words})
         if evidence.fence.applies(None, self.domains):
             source = tuple(token.norm for token in tokenize(original))
             for swap in evidence.dialect:
@@ -244,15 +261,16 @@ def _dialect_protected_query(query, tokens, cards):
 
 
 def _merge_ruled_out(protections, limit):
-    meanings, dialects = {}, []
+    meanings, dialects, names = {}, [], {}
     for protection in protections:
         for reading in protection['ruled_out']:
             if reading['kind'] == 'meaning':
+                names[reading['concept']] = reading['plain']
                 words = meanings.setdefault(reading['concept'], {})
                 words.update((word['id'], word) for word in reading['words'])
             elif reading not in dialects:
                 dialects.append(reading)
-    return ([{'kind': 'meaning', 'concept': cid, 'words': [words[eid] for eid in sorted(words)[:limit]]}
+    return ([{'kind': 'meaning', 'concept': cid, 'plain': names[cid], 'words': [words[eid] for eid in sorted(words)[:limit]]}
              for cid, words in sorted(meanings.items())] + dialects)
 
 
@@ -318,7 +336,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     waiting = sorted(set(d.wordless_meanings).intersection(established))
     if waiting:
         out.update(outcome=outcomes.NO_WORD_YET,
-                   meanings=[{"concept": cid, "plain": d.concepts[cid].plain} for cid in waiting],
+                   meanings=[{"concept": cid, "plain": d.concepts[cid].plain, "near": cards.near(cid)} for cid in waiting],
                    note="The dictionary recognises this meaning but has no Aussie word for it yet. "
                         "Consider proposing one.")
     form_matches = d.form_index.find(tokens)

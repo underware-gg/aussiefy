@@ -357,6 +357,8 @@ def _prepare_concept_fixes(plan: RoundPlan, d: Dictionary) -> None:
             raw["unless_after"] = list(concept.unless_after)
             raw["search_words"] = list(concept.search_words)
             raw["near"] = [asdict(relation) for relation in concept.near]
+            raw["plain_forms"] = {frame: list(forms) if isinstance(forms, tuple) else forms
+                                  for frame, forms in concept.plain_forms.items()}
             raw["examples"] = list(concept.examples)
             raw["negative_examples"] = list(concept.negative_examples)
             raw["nominal_roles"] = list(concept.nominal_roles)

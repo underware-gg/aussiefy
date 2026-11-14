@@ -369,7 +369,7 @@ def test_lookup_says_when_a_recognised_meaning_has_no_word_yet(translator):
     waiting = lookup("take heart", translator=translator)
     assert waiting["outcome"] == "no_word_yet" and not waiting["results"]
     assert waiting["meanings"] == [{"concept": "HEART_SPIRIT",
-                                    "plain": translator.dictionary.concepts["HEART_SPIRIT"].plain}]
+                                    "plain": translator.dictionary.concepts["HEART_SPIRIT"].plain, "near": []}]
     assert lookup("fantastic terrors", translator=translator)["outcome"] == "no_word_yet"
     # a waiting meaning's trigger negated or embedded in more than it explains is not claimed, nor is a guard
     for query in ("not the fallen", "I never bring into being", "not loyalty", "harpsichord"):
@@ -405,7 +405,7 @@ def test_exact_plain_wording_is_authored_evidence_not_a_fuzzy_guess(tmp_path):
     tr = Translator(load_dictionary([path]), lookup_embedder=None)
     result = lookup("  AN  inexplicably adequate situation  ", translator=tr)
     assert result["outcome"] == "no_word_yet"
-    assert result["meanings"] == [{"concept": "TEST_WAITING", "plain": "an inexplicably adequate situation"}]
+    assert result["meanings"] == [{"concept": "TEST_WAITING", "plain": "an inexplicably adequate situation", "near": []}]
     assert lookup("not an inexplicably adequate situation", translator=tr)["outcome"] != "no_word_yet"
 
 

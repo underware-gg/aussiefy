@@ -146,7 +146,8 @@ def test_explanation_reports_the_superseded_reading(translator):
                                   **EVERY_SWAP)
     explained = next(r for r in result.to_dict()['explain'] if r['concepts'] == ['ACCEPT_AS_TRUE'])
     assert explained['supersedes'] == ['THINK']
-    assert explained['decision'] == 'kept original: no eligible entry'
+    assert explained['kind'] == 'held'
+    assert explained['decision'] == 'kept original: meaning has no Aussie word'
     assert 'concept ACCEPT_AS_TRUE' in format_explain(result) and 'supersedes THINK' in format_explain(result)
 
 

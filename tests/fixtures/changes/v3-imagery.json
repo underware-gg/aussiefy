@@ -18,13 +18,17 @@
   }
  },
  "response": {
-  "version": 3,
+  "version": 4,
   "text": "She's peckish, with a belly growling like a mixer full of rocks.",
-  "card_version": 3,
-  "dictionary_id": "sha256:258476324d7a66dee75b483acdc91458926ef8981cb34b7101e8b9b4ac1c1a16",
+  "card_version": 4,
+  "dictionary_id": "sha256:6c2ed3aea93d2d66b430182a56973cc23dcb03c917830d7f2629f1a9a0b0ae1e",
   "tuning": {
    "popularity": false,
    "preferences": 0
+  },
+  "personal_terms": {
+   "provided": 0,
+   "applied": 0
   },
   "warnings": [],
   "warning_details": [],
@@ -56,7 +60,9 @@
     "locked": [],
     "covers": [],
     "evidence": null,
-    "coined_by": null
+    "coined_by": null,
+    "reading": null,
+    "ruled_out": []
    },
    {
     "id": "substitution:7-13",
@@ -76,6 +82,8 @@
     "masks": [],
     "alternatives": [
      {
+      "key": "entry:peckish",
+      "kind": "entry",
       "entry_id": "peckish",
       "evidence": "attested",
       "coined_by": null,
@@ -89,6 +97,8 @@
       "masks": []
      },
      {
+      "key": "entry:hungry-enough-horse-jockey",
+      "kind": "entry",
       "entry_id": "hungry-enough-horse-jockey",
       "evidence": "unverified",
       "coined_by": null,
@@ -102,6 +112,8 @@
       "masks": []
      },
      {
+      "key": "entry:starvin",
+      "kind": "entry",
       "entry_id": "starvin",
       "evidence": "unverified",
       "coined_by": null,
@@ -113,6 +125,21 @@
       "vulgarity": 0,
       "weight": 0.32608695652173914,
       "masks": []
+     },
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "plain:source",
+      "kind": "plain",
+      "rendered": "hungry",
+      "out_span": [
+       6,
+       13
+      ],
+      "vulgarity": 0,
+      "weight": 0.0,
+      "masks": []
      }
     ],
     "locked": [],
@@ -123,7 +150,13 @@
      "qualifiers": {}
     },
     "evidence": "attested",
-    "coined_by": null
+    "coined_by": null,
+    "reading": {
+     "concept": "HUNGRY",
+     "plain": "hungry"
+    },
+    "ruled_out": [],
+    "option_key": "entry:peckish"
    },
    {
     "id": "garnish:13-13:riff",
@@ -154,13 +187,16 @@
     "locked": [],
     "covers": [],
     "evidence": "bulldust",
-    "coined_by": "agent"
+    "coined_by": "agent",
+    "reading": null,
+    "ruled_out": []
    }
   ],
   "entries": {
    "hungry-enough-horse-jockey": {
     "id": "hungry-enough-horse-jockey",
     "form": "hungry enough to eat a horse and chase the jockey",
+    "headword_key": "hungry enough to eat a horse and chase the jockey",
     "gloss": "Ravenous.",
     "frame": "predicate_adj",
     "concepts": [
@@ -214,6 +250,7 @@
    "peckish": {
     "id": "peckish",
     "form": "peckish",
+    "headword_key": "peckish",
     "gloss": "A bit hungry.",
     "frame": "adj",
     "concepts": [
@@ -266,6 +303,7 @@
    "starvin": {
     "id": "starvin",
     "form": "starvin'",
+    "headword_key": "starvin'",
     "gloss": "Very hungry.",
     "frame": "adj",
     "concepts": [

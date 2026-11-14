@@ -114,6 +114,8 @@ IRREGULAR = {
     "swim": ("swims", "swam", "swum", "swimming"),
     "begin": ("begins", "began", "begun", "beginning"),
     "bend": ("bends", "bent", "bent", "bending"),
+    "lend": ("lends", "lent", "lent", "lending"),
+    "steal": ("steals", "stole", "stolen", "stealing"),
     "spin": ("spins", "spun", "spun", "spinning"),
     "sting": ("stings", "stung", "stung", "stinging"),
     "dig": ("digs", "dug", "dug", "digging"),
@@ -310,3 +312,16 @@ def pluralise(noun: str) -> str:
     if last.endswith("y") and last[-2:-1] not in "aeiou":
         return head + last[:-1] + "ies"
     return head + last + "s"
+
+
+def object_of_possessive(text: str) -> str | None:
+    """Recover an object from the possessive captured by an idiom."""
+    pronouns = {'my': 'me', 'your': 'you', 'his': 'him', 'her': 'her', 'its': 'it',
+                'our': 'us', 'their': 'them', 'whose': 'who'}
+    if text.casefold() in pronouns:
+        return pronouns[text.casefold()]
+    if text.endswith(("'s", '’s')):
+        return text[:-2]
+    if text.endswith(("'", '’')):
+        return text[:-1]
+    return None

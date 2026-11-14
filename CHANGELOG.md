@@ -9,15 +9,23 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Implement the coordinated v4 review draft across Python, CLI and MCP: exact kept/held source spots,
+  grammatical English choices, call\-local personal terms'n host controls, output\-selection suggestions,
+  authored readin'/ruled\-out citations, and article\-free headword keys on cards'n lists. Protect caller
+  wording through garnish, drawl'n optional rewriting. The v4 schema remains a draft pending site review.
+- Enable curated near meanings only for genuinely waitin' meanings under their reviewed thresholds,
+  graded probabilities'n ordinary eligibility, with per\-option citations and lookup explanations.
+
+
 - Reconcile scoped EW4 searches for every stored term'n the completed 125\-entry crowd\-only follow\-through,
   retain their actual dates'n source limits, and calibrate versioned evidence weights from the source hunt.
   Preserve testimony separately; refine provisional drover/nature\-strip/sloshed glosses'n declare the
   personal judgement in some mongrel'n an old coot through the existin' opinion mechanism.
 - Prepare directed near\-meaning data, source\-owned\-term ambiguity notes'n internal personal\-term
-  validation, with a non\-active v4 schema proposal. Struth, production responses remain v3 pendin' activation.
+  validation at the earlier foundations checkpoint, whose production responses remained v3.
 
 - Supply provisional plain wording'n search words for the remaining meanings, preserving Rob's
-  approved sample'n all source triggers. Add paged concept discovery with eligible\-entry counts
+  approved sample'n all source triggers. Struth, add paged concept discovery with eligible\-entry counts
   through Python, the CLI and MCP, alongside the separate waitin'\-meanings listin'.
 
 - Add Rob\-approved busy'n speed senses of flat strap. Provisionally add friendly plural dickheads
@@ -27,7 +35,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 - Reject raw slot syntax in reader\-facin' glosses across dictionary heaps'n corrections. Reword the
   knock\-back'n bend\-ear glosses, retaining their entry IDs, headwords and grammar.
 - Share the existing article-free headword comparison helper without changing A-to-Z keys. The public
-  headword_key card field is reserved for slice 7's planned coordinated contract version.
+  headword_key card field joins slice 7's coordinated v4 draft.
 
 - Make published core entry IDs permanent: retain rename/merge aliases, reserve removed IDs, resolve
   old URLs across Python/CLI/MCP, and check continuity against the exact previous release'n dev baseline.
@@ -159,7 +167,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 - Make a readin' said only of people \(`^person`) only of a person or an unknown subject. “The money
   was wasted”, “the wine was drunk” and “the glass was smashed” are no longer read as drunk, in
   translation, explanations or lookup. `drunk`, `wasted`, `hammered`, `plastered` and `smashed` now carry
-  `^person`, and the person nouns include mate, cove, boss'n other everyday people. Plural nouns are
+  `^person`, and the person nouns include mate, bloke, boss'n other everyday people. Plural nouns are
   no longer guessed to be people from their suffix \(fees, trees, letters\), and a sentence\-opening common
   word is no longer taken for a name \(“Time was wasted”).
 - Lookup no longer offers senses a reading ruled out: “fantastic terrors” offers no praise and “take
@@ -516,7 +524,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   someone from a bar of soap, spitting \(light rain\), a swag of; pull the pin takes retirin', all over the shop
   `"all over the map"`; 29 skipped as general English or for a wrong sense \(knock up, get it up\). Wrong senses
   fixed in data: heaps for counted heaps, every bloke'n his dog and old fella outta the formal genres, littlie
-  for a policy's kid, the whole box'n dice for `"everything from"`; rain only for the weather's `"it"` (not fans
+  for a policy's kid, the whole box and dice for `"everything from"`; rain only for the weather's `"it"` (not fans
   pouring onto a street, tears pouring down, or tea poured\).
 - **A clause trigger's own opening pronoun is its subject** (`"it {be} freezing"`): `"It's freezing"` is `"it's brass
   monkeys"`, no longer `"yer brass monkeys"`.

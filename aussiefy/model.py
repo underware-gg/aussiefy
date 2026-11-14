@@ -218,13 +218,11 @@ class Dictionary:
 
     @cached_property
     def owned_index(self) -> PatternIndex:
-        forms = list(self.form_index.patterns)
-        present = {p.entry_id for p in forms}
-        for entry in self.entries.values():
-            if entry.id not in present and entry.status != 'omit':
-                forms.extend(replace(compile_pattern(form.replace('{np}', '{obj}'), entry.frame,
-                                                    entry.concept, entry.intensity, entry_id=entry.id),
-                                     semantic_degree=entry.semantic_degree) for form in entry.all_forms)
+        # Derived dictionaries may replace/remove entries without rebuilding their source index.
+        forms = [replace(compile_pattern(form.replace('{np}', '{obj}'), entry.frame,
+                                         entry.concept, entry.intensity, entry_id=entry.id),
+                         semantic_degree=entry.semantic_degree)
+                 for entry in self.entries.values() if entry.status != 'omit' for form in entry.all_forms]
         return PatternIndex(forms)
 
     @cached_property

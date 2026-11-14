@@ -93,6 +93,7 @@ class Detection:
                                                # their own readings ("believe [my mate]")
     source_pattern: Pattern | None = None  # dictionary evidence, before candidate expansion or abstention
 
+    moved_prefix: tuple[int, int] | None = None
     vp_auxiliary: str = ""  # a verb phrase governed by an outer auxiliary or infinitive
 
     @property
@@ -111,7 +112,7 @@ class Detection:
 
 
 
-SPEECH_SENSE = {"SCREAM", "CRY"}
+SPEECH_SENSE = {"SCREAM", "CRY", "NOISY_CRY"}
 UNRESOLVED = HOLDING_CONCEPT   # context leaves the sense open: the words stay as written
 # concept ids the grammar rules here name; the loader checks they exist
 CODE_CONCEPTS = SPEECH_SENSE | {"VERY", UNRESOLVED}
@@ -120,9 +121,13 @@ CODE_CONCEPTS = SPEECH_SENSE | {"VERY", UNRESOLVED}
 def _speech_tag(tokens: list[Token], start: int, end: int) -> bool:
     before = tokens[max(0, start - 3):start]
     after = tokens[end] if end < len(tokens) else None
-    quote_before = any(t.text in QUOTES for t in before)
+    quote_before = any(t.text in DIALOGUE_QUOTES for t in before)
+    next_word = end
+    while next_word < len(tokens) and tokens[next_word].text in {',', ':'}:
+        next_word += 1
+    quote_after = next_word < len(tokens) and tokens[next_word].text in DIALOGUE_QUOTES
     name_after = after is not None and after.text[:1].isupper() and after.is_word
-    return quote_before or name_after
+    return quote_before or quote_after or name_after
 
 
 # a linking verb's subject stops at one of these: "everyone at university is lazy", "everyone near home is"
@@ -957,3 +962,35 @@ def opening_determiner(sent: list[Token], start: int, reach: int = 4) -> str | N
 def after_determiner(sent: list[Token], start: int, reach: int = 4) -> bool:
     """A determiner opens the phrase this span ends: "the two old [statesmen]", "a [bloke]", "Walker's [wife]"."""
     return opening_determiner(sent, start, reach) is not None
+
+
+def bind_context_object(det, entry, tokens, tags):
+    """Bind an explicitly read object; usable_forms then excludes forms that would drop it."""
+    if det.object_start is None or 'obj' in det.captures or 'objposs' in det.captures:
+        return det
+    if not any('{obj}' in form or '{objposs}' in form for form in entry.all_forms):
+        return det
+    from .matcher import phrase_token
+    kind = det.source_pattern.object_kind if det.source_pattern is not None else 'np'
+    reading = context_object(tokens, det.object_start, tags, kind=kind)
+    if reading is None or not reading.settled:
+        return det
+    return replace(det, end=reading.end,
+                   captures={**det.captures, 'obj': phrase_token(tokens[det.object_start:reading.end])})
+
+
+def bind_adverb_position(det, entry, tokens, tags):
+    if entry.grammar.position != 'before_verb' or det.frame != 'adv':
+        return det
+    # A pre-verbal source adverb already has the requested position.
+    after = det.end
+    while after < len(tokens) and tags[after].startswith('RB'):
+        after += 1
+    if after < len(tokens) and tags[after] in pos.VERBS:
+        return det
+    for index in range(det.start - 1, -1, -1):
+        if tokens[index].text in CLAUSE_BREAK | SENTENCE_END:
+            break
+        if tags[index] in pos.VERBS and tokens[index].norm not in morph.BE_FORMS | morph.HAVE_FORMS | morph.DO_FORMS:
+            return replace(det, start=index, moved_prefix=(index, det.start))
+    return det

@@ -7,6 +7,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 from .schema import Entry
+from .terms import headword_key
 from .evidence import metadata_dict
 from .errors import SchemaError
 from .themes import ThemePolicy
@@ -29,7 +30,7 @@ def riff_cards(e: Entry, cap: int, permitted_themes: ThemePolicy, *, registers, 
 def short_card(e: Entry) -> dict[str, Any]:
     """Only what an agent checking a choice needs: form, gloss, frame, level and vulgarity (and gating, a dated
     register)."""
-    card = {"id": e.id, "form": e.form, "gloss": e.gloss, "frame": e.frame, "level": e.incoherence,
+    card = {"id": e.id, "form": e.form, "headword_key": headword_key(e.form), "gloss": e.gloss, "frame": e.frame, "level": e.incoherence,
             "vulgarity": e.vulgarity}
     if e.semantic_effects:
         card["semantic_effects"] = list(e.semantic_effects)
@@ -44,10 +45,12 @@ def _entry_fields(e: Entry) -> dict[str, Any]:
     """The full card: meaning, level and vulgarity, register and region, notes, sources, the riffs under the
     vulgarity cap (riffs: whether the embellishment takes the entry's riffs at all), and a gated entry's flags
     (shown only where the policy unlocked it)."""
-    card = {"id": e.id, "form": e.form, "gloss": e.gloss, "frame": e.frame, "concepts": list(e.concept),
+    card = {"id": e.id, "form": e.form, "headword_key": headword_key(e.form), "gloss": e.gloss, "frame": e.frame, "concepts": list(e.concept),
             "level": e.incoherence, "vulgarity": e.vulgarity, "register": e.register}
     if e.semantic_effects:
         card["semantic_effects"] = list(e.semantic_effects)
+    if e.other_sense:
+        card['other_sense'] = e.other_sense
     if e.placement:
         card["placement"] = e.placement
     if e.variants:
@@ -63,7 +66,7 @@ def _entry_fields(e: Entry) -> dict[str, Any]:
     return card
 
 
-CARD_VERSION = 3
+CARD_VERSION = 4
 
 def provenance(term):
     coiner = term.coined_by

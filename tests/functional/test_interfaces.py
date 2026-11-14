@@ -10,14 +10,14 @@ import pytest
 import aussiefy
 from aussiefy import harness
 
-TOOLS = {"aussie_concepts": harness.list_concepts, "aussie_entries": harness.list_entries, "aussie_wordless_meanings": harness.list_wordless_meanings,
+TOOLS = {"aussie_suggest_selection": harness.suggest_selection, "aussie_concepts": harness.list_concepts, "aussie_entries": harness.list_entries, "aussie_wordless_meanings": harness.list_wordless_meanings,
          "aussie_entry": harness.get_entry,
          "aussie_meaning_quiz": harness.meaning_quiz, "aussie_random_entry": harness.random_entry, "aussie_suggest_name": harness.suggest_name,
          "aussie_variations": harness.variations, "aussie_lookup": harness.lookup, "aussie_lint": harness.lint, "aussie_guide": harness.guide,
          "aussie_bulldust": harness.bulldust, "aussie_plan": harness.plan, "aussie_translate": harness.translate, "aussie_verify": harness.verify}
 
 # a non-default value for every toolkit parameter, so a surface that drops or renames one is caught
-VALUES = {"include_scaffold": True, "family": "hungry-enough-to", "parts": {"state": "hungry", "act": "sausage-shadow"}, "level": 4, "seed": 7, "vulgarity": 1, "variety": 2,
+VALUES = {"span": [4, 6], "personal_terms": [{"phrase": "tired", "term": "zonked"}], "include_scaffold": True, "family": "hungry-enough-to", "parts": {"state": "hungry", "act": "sausage-shadow"}, "level": 4, "seed": 7, "vulgarity": 1, "variety": 2,
           "registers": ["current", "dated"], "regions": ["qld"], "unlock": ["misreadable"], "limit": 3,
           "include_gated": True, "original": "She was tired.", "markup": "markdown", "english": "uk", "short": True,
           "document_type": "custom", "document_config": {"garnish": [], "keep_quotes": True, "narrator_opinion": True, "themes": {"violence": True, "drinking": False},
@@ -25,12 +25,12 @@ VALUES = {"include_scaffold": True, "family": "hungry-enough-to", "parts": {"sta
           "embellishment": 2, "suggest": False, "markdown": False, "concept": "HUNGRY", "theme": "sex",
           "themes": {"drinking": False}, "invention": True, "popularity": True, "preferences": [],
           "entry_id": "stoked", "initial": "k", "offset": 2, "shape": "place"}
-SUBJECT = {"list_concepts": (None, None), "meaning_quiz": (None, None), "list_entries": (None, None), "list_wordless_meanings": (None, None), "random_entry": (None, None), "suggest_name": (None, None),
+SUBJECT = {"suggest_selection": ("text", "She was tired."), "list_concepts": (None, None), "meaning_quiz": (None, None), "list_entries": (None, None), "list_wordless_meanings": (None, None), "random_entry": (None, None), "suggest_name": (None, None),
            "get_entry": ("entry_id", "stoked"), "variations": ("family", "hungry-enough-to"), "lookup": ("query", "very tired"), "lint": ("text", "G'day mate."), "plan": ("text", "She was tired."),
            "translate": ("text", "She was tired."), "bulldust": ("concept", "HUNGRY"), "guide": (None, None),
            "verify": ("text", "She was knackered.")}
 # CLI flags for each parameter (the CLI says --region for one region list, as people type it)
-FLAGS = {"include_scaffold": ["--include-scaffold"], "initial": ["--initial", "k"], "family": ["--family", "hungry-enough-to"], "parts": ["--parts", '{"state":"hungry","act":"sausage-shadow"}'], "level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity", "1"],
+FLAGS = {"span": ["--span", "4", "6"], "personal_terms": ["--personal-terms", '[{"phrase":"tired","term":"zonked"}]'], "include_scaffold": ["--include-scaffold"], "initial": ["--initial", "k"], "family": ["--family", "hungry-enough-to"], "parts": ["--parts", '{"state":"hungry","act":"sausage-shadow"}'], "level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity", "1"],
          "themes": ["--themes", '{"drinking":false}'], "invention": ["--invention"], "popularity": ["--popularity"], "preferences": ["--preferences", "[]"],
          "variety": ["--variety", "2"], "registers": ["--registers", "current,dated"],
          "regions": ["--region", "qld"], "unlock": ["--unlock", "misreadable"], "limit": ["--limit", "3"],
@@ -109,22 +109,25 @@ def test_cli_exposes_every_toolkit_parameter():
     parser = build_parser()
     sub = next(a for a in parser._actions if a.__class__.__name__ == "_SubParsersAction").choices
     for command, fn in {"lookup": harness.lookup, "lint": harness.lint, "guide": harness.guide,
-                        "bulldust": harness.bulldust, "plan": harness.plan, "translate": harness.translate, "verify": harness.verify}.items():
+                        "suggest-selection": harness.suggest_selection, "bulldust": harness.bulldust, "plan": harness.plan, "translate": harness.translate, "verify": harness.verify}.items():
         dests = {a.dest: a.default for a in sub[command]._actions}
         for param, default in _params(fn).items():
-            if param in (SUBJECT[command][0], "original", "query", "text"):
+            if param in (SUBJECT[command.replace("-", "_")][0], "original", "query", "text"):
                 continue          # the subject is positional; lint's original is a file path
             assert param in dests, (command, param)
-            assert dests[param] == default, (command, param)
+            if default is inspect.Parameter.empty:
+                assert next(a for a in sub[command]._actions if a.dest == param).required
+            else:
+                assert dests[param] == default, (command, param)
 
 
-@pytest.mark.parametrize("command", ["lookup", "lint", "guide", "plan", "verify", "bulldust", "meaning_quiz"])
+@pytest.mark.parametrize("command", ["lookup", "lint", "guide", "plan", "verify", "bulldust", "meaning_quiz", "suggest_selection"])
 def test_cli_forwards_every_argument(command, monkeypatch, tmp_path, capsys):
     from aussiefy.cli import main
 
     fn = getattr(harness, command)
     calls = _spy(monkeypatch, command)
-    argv = [command.replace("_", "-"), "--json"] if command != "plan" else [command]
+    argv = [command.replace("_", "-"), "--json"] if command not in {"plan", "suggest_selection"} else [command.replace("_", "-")]
     for param in _params(fn):
         argv += FLAGS.get(param, [])
     if "original" in _params(fn):

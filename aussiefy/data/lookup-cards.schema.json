@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "Frozen v3, accepted 20261112-r2 response fields; activated with the coordinated engine producers.",
+  "$comment": "DRAFT; near citations are reserved here for slice8, without another version bump.",
   "$defs": {
     "span": {
       "type": "array",
@@ -74,7 +74,7 @@
         },
         "cited_date": {
           "type": "string",
-          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[\u2013-]\\d{4})?$"
         },
         "note": {
           "type": "string"
@@ -455,11 +455,11 @@
         },
         "dated_by_curator": {
           "type": "string",
-          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[\u2013-]\\d{4})?$"
         },
         "first_attested": {
           "type": "string",
-          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[\u2013-]\\d{4})?$"
         },
         "text": {
           "type": "string",
@@ -553,7 +553,8 @@
         "vulgarity",
         "type",
         "status",
-        "held_back"
+        "held_back",
+        "headword_key"
       ],
       "additionalProperties": false,
       "properties": {
@@ -752,11 +753,11 @@
         },
         "dated_by_curator": {
           "type": "string",
-          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[\u2013-]\\d{4})?$"
         },
         "first_attested": {
           "type": "string",
-          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[\u2013-]\\d{4})?$"
         },
         "minimum_vulgarity": {
           "$ref": "#/$defs/vulgarity"
@@ -869,6 +870,16 @@
             ]
           },
           "uniqueItems": true
+        },
+        "headword_key": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Engine article-free headword comparison key: lower-case, normalised whitespace/apostrophes, one leading a/an/the removed; punctuation and hyphens retained. The site may fold further for word-page grouping."
+        },
+        "other_sense": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Curator note of another everyday meaning. It is not an automatic literal-word rule."
         }
       },
       "allOf": [
@@ -1160,11 +1171,11 @@
         },
         "dated_by_curator": {
           "type": "string",
-          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[\u2013-]\\d{4})?$"
         },
         "first_attested": {
           "type": "string",
-          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[\u2013-]\\d{4})?$"
         },
         "role": {
           "type": "string",
@@ -1479,11 +1490,11 @@
         },
         "dated_by_curator": {
           "type": "string",
-          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[\u2013-]\\d{4})?$"
         },
         "first_attested": {
           "type": "string",
-          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[\u2013-]\\d{4})?$"
         },
         "minimum_vulgarity": {
           "$ref": "#/$defs/vulgarity"
@@ -1843,11 +1854,11 @@
         },
         "dated_by_curator": {
           "type": "string",
-          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[\u2013-]\\d{4})?$"
         },
         "first_attested": {
           "type": "string",
-          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[\u2013-]\\d{4})?$"
         },
         "minimum_vulgarity": {
           "$ref": "#/$defs/vulgarity"
@@ -2009,7 +2020,8 @@
         "vulgarity",
         "type",
         "status",
-        "held_back"
+        "held_back",
+        "headword_key"
       ],
       "additionalProperties": false,
       "properties": {
@@ -2208,11 +2220,11 @@
         },
         "dated_by_curator": {
           "type": "string",
-          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[\u2013-]\\d{4})?$"
         },
         "first_attested": {
           "type": "string",
-          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[–-]\\d{4})?$"
+          "pattern": "^\\d{4}(?:-\\d{2}-\\d{2}|s|[\u2013-]\\d{4})?$"
         },
         "minimum_vulgarity": {
           "$ref": "#/$defs/vulgarity"
@@ -2340,6 +2352,16 @@
         },
         "effect_rejection": {
           "type": "string"
+        },
+        "headword_key": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Engine article-free headword comparison key: lower-case, normalised whitespace/apostrophes, one leading a/an/the removed; punctuation and hyphens retained. The site may fold further for word-page grouping."
+        },
+        "other_sense": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Curator note of another everyday meaning. It is not an automatic literal-word rule."
         }
       },
       "allOf": [
@@ -2413,22 +2435,113 @@
       ]
     },
     "ruled_out": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": true,
-        "properties": {
-          "words": {
-            "type": "array",
-            "items": {
-              "$ref": "#/$defs/lookup_entry"
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "meaning"
+            },
+            "concept": {
+              "type": "string",
+              "minLength": 1
+            },
+            "plain": {
+              "$ref": "#/$defs/plain"
+            },
+            "words": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/entry_card"
+              }
             }
+          },
+          "required": [
+            "kind",
+            "concept",
+            "plain",
+            "words"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "dialect"
+            },
+            "english": {
+              "enum": [
+                "us",
+                "uk",
+                "both"
+              ]
+            },
+            "original": {
+              "type": "string"
+            },
+            "output": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "english",
+            "original",
+            "output"
+          ]
+        }
+      ]
+    },
+    "plain": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "description": "Complete final reader-facing en-AU meaning name, not an internal ID or sentence template. Curatorial provisional status does not require client-side text completion."
+    },
+    "near_citation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "near"
+        },
+        "concept": {
+          "type": "string",
+          "minLength": 1
+        },
+        "plain": {
+          "$ref": "#/$defs/plain"
+        },
+        "differs": {
+          "type": "string",
+          "minLength": 1
+        },
+        "setting": {
+          "enum": [
+            "dinkum",
+            "troppo"
+          ]
+        },
+        "words": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entry_card"
           }
         }
-      }
+      },
+      "required": [
+        "kind",
+        "concept",
+        "plain",
+        "differs",
+        "setting",
+        "words"
+      ]
     }
   },
-  "title": "aussiefy lookup rich-card projection v3",
+  "title": "aussiefy lookup cards v4 draft 20261114-r1",
   "description": "Full-card lookup projection: validates version, dictionary identity and all embedded rich cards. Existing lookup ranking, protections and outcome fields retain their contract. Short mode is intentionally outside this full-card projection but also carries card_version.",
   "type": "object",
   "required": [
@@ -2439,7 +2552,7 @@
   "additionalProperties": true,
   "properties": {
     "card_version": {
-      "const": 3
+      "const": 4
     },
     "dictionary_id": {
       "type": "string",
@@ -2458,7 +2571,10 @@
       }
     },
     "ruled_out": {
-      "$ref": "#/$defs/ruled_out"
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ruled_out"
+      }
     },
     "protections": {
       "type": "array",
@@ -2467,9 +2583,38 @@
         "additionalProperties": true,
         "properties": {
           "ruled_out": {
-            "$ref": "#/$defs/ruled_out"
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/ruled_out"
+            }
           }
         }
+      }
+    },
+    "meanings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "concept": {
+            "type": "string",
+            "minLength": 1
+          },
+          "plain": {
+            "$ref": "#/$defs/plain"
+          },
+          "near": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/near_citation"
+            }
+          }
+        },
+        "required": [
+          "concept",
+          "plain"
+        ]
       }
     }
   }

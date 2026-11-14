@@ -29,7 +29,7 @@ POLICY_KEYS = ("garnish", "openings", "formal_to_rework", "embellishment", "pers
 EMBELLISHMENT_KEYS = ("garnish", "follows_form", "openings", "draft", "keep_share", "max_length", "perform",
                       "guidance")
 OPTIONAL_EMBELLISHMENT_KEYS = ("contextual_riffs", "entry_riffs", "riff_exaggeration", "riff_association",
-                              "narrator_opinion", "solemn_comic_terms", "quantity_approximation", "invention")
+                              "narrator_opinion", "solemn_comic_terms", "quantity_approximation", "invention", "near_meanings")
 
 # The cue lexicons and weights stay in code, as context.py's mood lexicons do: they are the classifier, tuned
 # together against the corpus (tests/test_genre.py), not vocabulary a dictionary round grows.
@@ -84,6 +84,7 @@ class Embellishment:
     solemn_comic_terms: bool = False
     quantity_approximation: bool = False
     invention: bool = False
+    near_meanings: int = 0
 
     @property
     def name(self) -> str:
@@ -107,6 +108,7 @@ class GenrePolicy:
     dateline_context: bool = False
     check_length: bool = True
     quantity_approximation: bool = False
+    near_meanings: bool = False
 
 
 @dataclass(frozen=True)
@@ -121,7 +123,7 @@ class Genre:
     @cached_property
     def policy(self) -> GenrePolicy:
         base = self.config.policies[self.name]
-        keys = set(GenrePolicy.__dataclass_fields__) - {"garnish", "openings"}
+        keys = set(GenrePolicy.__dataclass_fields__) - {"garnish", "openings", "near_meanings"}
         values = {k: v for k, v in self.overrides.values().items() if k in keys}
         if self.overrides.max_length is not None and self.overrides.check_length is None:
             values["check_length"] = True
@@ -153,7 +155,8 @@ class Genre:
             values["guidance"] = overrides["embellishment_guidance"]
         else:
             values.pop("guidance", None)
-        return replace(e, **values)
+        e = replace(e, **values)
+        return replace(e, near_meanings=e.near_meanings if self.policy.near_meanings else 0)
 
     def envelope(self, step: int | None = None) -> dict:
         e = self.setting(step)
@@ -259,7 +262,7 @@ def parse_genre_policies(data: dict) -> dict[str, GenrePolicy]:
         _typed_fields(name, g, ("openings", "formal_to_rework", "person_swears", "keep_quotes"))
         if not isinstance(g["embellishment"], str) or g["embellishment"] not in EMBELLISHMENTS:
             raise SchemaError(f"genres.yaml: {name}: embellishment must be one of {', '.join(EMBELLISHMENTS)}")
-        for key in ("command_context", "dateline_context", "check_length", "quantity_approximation"):
+        for key in ("command_context", "dateline_context", "check_length", "quantity_approximation", "near_meanings"):
             if type(g.get(key, key == "check_length")) is not bool:
                 raise SchemaError(f"genres.yaml: {name}.{key} must be a boolean")
         domains = g.get("term_domains", [])
@@ -268,7 +271,7 @@ def parse_genre_policies(data: dict) -> dict[str, GenrePolicy]:
         out[name] = GenrePolicy(_garnish(name, g["garnish"]), g["openings"], g["formal_to_rework"],
                                 EMBELLISHMENTS[g["embellishment"]],
                                 g["person_swears"], g["keep_quotes"], " ".join(g["guidance"].split()),
-                                tuple(g.get("term_domains", ())), g.get("command_context", False), g.get("dateline_context", False), g.get("check_length", True), g.get("quantity_approximation", False))
+                                tuple(g.get("term_domains", ())), g.get("command_context", False), g.get("dateline_context", False), g.get("check_length", True), g.get("quantity_approximation", False), g.get("near_meanings", False))
     return out
 
 

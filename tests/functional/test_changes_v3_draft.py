@@ -38,8 +38,8 @@ def test_review_schemas_are_valid_local_and_share_the_same_card_definitions(bund
                 for child in node: yield from refs(child)
         assert all(ref.startswith('#/$defs/') for ref in refs(schema))
     assert all(changes['$defs'][key]==value for key,value in cards['$defs'].items())
-    assert VERSION==3 and json.loads(SCHEMA.read_text())['properties']['version']=={'const':3}
-    assert json.loads(SCHEMA.read_text())['$defs']==changes['$defs']
+    assert changes['properties']['version'] == {'const': 3}
+    assert VERSION == 4 and json.loads(SCHEMA.read_text())['properties']['version'] == {'const': 4}
 
 
 def test_all_current_non_omitted_rich_entry_cards_fit_the_draft(bundle,translator):
@@ -48,6 +48,8 @@ def test_all_current_non_omitted_rich_entry_cards_fit_the_draft(bundle,translato
     for entry in translator.dictionary.entries.values():
         if entry.status=='omit': continue
         card=entry_card(entry,3,True,permitted_themes=eff.theme_policy,registers=eff.registers)
+        card.pop('headword_key', None)
+        card.pop('other_sense', None)
         v.validate(card)
 
 

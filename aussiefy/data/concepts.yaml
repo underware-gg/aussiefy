@@ -164,6 +164,8 @@ CRAZY:
   triggers:
     predicate_adj: ["crazy", "mad", "nuts", "insane@4", "out of {poss} mind@4", "bonkers", "loopy",
                     "deranged@4", "unhinged@4", "irrational@2", "losing it", "off {poss} rocker"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} crazy"}
 STUPID:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: stupid
@@ -174,6 +176,8 @@ STUPID:
     # "thick" of a person only: thick air, thick with vapour, a thick mixture are dense
     predicate_adj: ["stupid", "dumb", "thick !=with|and ^person", "dim@2", "brainless@4", "clueless@2", "an idiot@3", "a moron@4",
                     "a fool@2", "not very bright@2"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} very stupid"}
 IDIOT:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a fool
@@ -206,6 +210,8 @@ ANGRY:
   triggers:
     predicate_adj: ["angry", "furious@4", "livid@5", "annoyed@2", "cross@2", "mad at {obj}", "fuming@4",
                     "irritated@2", "pissed off@4", "grumpy@2", "in a bad mood@2", "irate@4", "enraged@5", "incensed@4", "seething@5"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} angry with {obj}", "predicate_adj": ["angry with {obj}", "angry", "very angry", "slightly angry"]}
 LOSE_TEMPER:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: lose your temper
@@ -214,6 +220,8 @@ LOSE_TEMPER:
   triggers:
     vp: ["lose {poss} temper", "throw a tantrum@4", "have a tantrum@4", "fly off the handle@4", "blow up@4",
          "get angry", "have a meltdown@4", "lose {poss} cool"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": ["lose {poss} temper at {obj}", "lose {poss} temper"]}
 OVERREACT:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: overreact
@@ -246,12 +254,16 @@ TIRED:
       wrecked ^person !=by|in@4]
   plain: exhausted
   search_words: [tired, worn out]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"predicate_adj": ["tired", "exhausted", "very tired", "slightly tired"], "adj": ["tired", "exhausted", "very tired", "slightly tired"]}
 BROKEN:
   description: Not working; ruined or beyond repair.
   triggers:
     predicate_adj: [broken, ruined@4, busted, not working@2, beyond repair@5, wrecked@4]
   plain: broken
   search_words: [not working, busted, kaput, out of order]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {have} stopped working"}
 USELESS:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: useless
@@ -268,6 +280,8 @@ UGLY:
   person: true
   triggers:
     predicate_adj: ["ugly", "hideous@4", "unattractive@2", "not much to look at@2"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} ugly"}
 HAPPY:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: happy
@@ -326,6 +340,8 @@ DRUNK:
     # ^person: said of things too ("the time was wasted", "the wine was drunk", "the wall was plastered")
     predicate_adj: ["drunk ^person", "wasted ^person@4", "hammered ^person@4", "plastered ^person@4",
                     "smashed ^person@4", "tipsy@2", "intoxicated@3", "legless@5", "inebriated@4", "tiddly@2"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"predicate_adj": ["drunk", "very drunk", "slightly drunk"], "adj": ["drunk", "very drunk", "slightly drunk"]}
 FULL:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: full after eating
@@ -353,6 +369,8 @@ HUNGRY:
       peckish@2: mild
     vp:
       "feel pretty? hungry ^end": unmarked
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"predicate_adj": ["hungry", "very hungry", "slightly hungry"], "adj": ["hungry", "very hungry", "slightly hungry"]}
 THIRSTY:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: thirsty
@@ -369,6 +387,8 @@ STINGY:
   person: true
   triggers:
     predicate_adj: ["stingy", "mean with money", "tight-fisted@4", "miserly@4"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} stingy"}
 LAZY:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: lazy
@@ -472,6 +492,8 @@ BOTCH_IT:
   description: Get something badly wrong, with what was spoiled between the verb and its particle ("screwed it up").
   triggers:
     vp: ["screw {obj} up", "foul {obj} up", "make a mess of {obj}"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "botch {obj}"}
 NONSENSE:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: nonsense
@@ -1034,6 +1056,8 @@ TEASE:
   triggers:
     clause: ["{subj} {be} kidding", "{subj} {be} joking", "{subj} {be} teasing {obj}", "{subj} {be} pulling {poss} leg",
              "{subj} {be} winding {obj} up", "{subj} {be} having {obj} on"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": ["{subj} {be} teasing {obj}", "{subj} {be} teasing"]}
 TOILET_BREAK:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: take a toilet break
@@ -1065,6 +1089,8 @@ SCOLD:
   description: Scold or reprimand someone; anger and volume alone do not establish a reprimand.
   triggers:
     vp: ['tell {obj} off', 'scold {obj}', 'reprimand {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "scold {obj}"}
 CHAT:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: have a long chat
@@ -1104,8 +1130,10 @@ RAINING_HARD:
   triggers:
     # the weather's "it" only: fans pouring onto the street, tea poured, tears pouring down aren't rain
     clause: ["it {be} pouring !down|onto|into|across|through|over|from|out|off|floor|drain|sink",
-             "it {be} pouring down !onto|into|across|through|over|from|out|off|floor|drain|sink", "it {be} pouring with rain", "it {be} raining heavily",
+             "it {be} pouring down !onto|into|across|through|over|from|out|off|floor|drain|sink", "it {be} pouring with rain", "{subj} {be} raining heavily",
              "it {be} bucketing down", "it {be} raining hard", "it {be} raining cats and dogs"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} raining heavily"}
 FAKE_SICK:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: pretend to be sick
@@ -1225,6 +1253,8 @@ MOCK:
     vp: ["ridicule", "make fun of", "mock", "poke fun at", "laugh at", "tease"]
 
 # --- added for the Gettysburg reference text (kept general) ---------------------
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": ["make fun of {obj}", "joke"]}
 LONG_AGO:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a long time ago
@@ -1372,6 +1402,8 @@ SANCTIFY:
   triggers:
     vp: ["consecrate {obj}@4", "hallow {obj}@4", "sanctify {obj}@4", "consecrate@4", "hallow@4", "sanctify@4",
          "dedicate", "make sacred", "bless"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": ["make {obj} sacred", "make sacred"]}
 FIRST_USE:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: use for the first time
@@ -1572,6 +1604,8 @@ IMPOSSIBLE:
              "it|that|this {be} not possible@3", "it|that|this {be} out of the question@4",
              "it|that|this {be} never going to happen@4", "it|that|this {be} not going to happen@3",
              "{be} it|that|this simply|really|actually|just? impossible@4"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "there {be} no way"}
 GO_ALONG:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: agree to a proposal
@@ -1622,6 +1656,8 @@ TRICK:
   triggers:
     np: [a fast one, a sneaky trick, a con, a swindle]
     clause: ["{subj} {be} trying to trick {obj}", "{subj} {be} trying to con {obj}", "{subj} {be} conning {obj}"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} tricking someone"}
 TANTRUM:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a fit of temper
@@ -1768,6 +1804,8 @@ EQUALITY:
   triggers:
     clause: ["all men are created equal", "all people are created equal", "all men are equal", "everyone is equal",
              "we are all equal", "all people are equal", "everybody is equal"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "everyone is equal"}
 IN_THE_MIDDLE:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: right in the middle
@@ -1808,6 +1846,8 @@ TALK_ON:
   triggers:
     vp: [ramble, go on and on, talk at length !=to, babble, prattle, drone on, 'talk {objposs} ear off', 'talk at
         length to {obj}', natter on]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": ["talk at length to {obj}", "talk at length"]}
 TACKLE:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: start with energy
@@ -1982,6 +2022,8 @@ SMASH:
   description: Break something to pieces.
   triggers:
     vp: ["break {obj} into pieces", "break {obj} into bits", "smash {obj}", "wreck {obj}"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "smash {obj}"}
 FALL_OVER:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: fall over
@@ -2109,7 +2151,7 @@ CRY:
   examples: [She began to weep.]
   description: Cry, weep.
   triggers:
-    vp: [weep, sob, bawl, burst into tears]
+    vp: [weep, 'cry ^person ^end', burst into tears]
   search_words: [weep, sob]
 FRIGHTEN:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
@@ -2118,6 +2160,8 @@ FRIGHTEN:
   description: Frighten.
   triggers:
     vp: ["frighten", "scare", "terrify"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "frighten {obj}"}
 WORK_HARD:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: work extremely hard
@@ -2440,6 +2484,8 @@ FED_UP:
     # Capture the object so a replacement cannot silently discard what the speaker is fed up with.
     predicate_adj: ["sick of {np}", "tired of {np}", "sick and tired of {np}", "sick to death of {np}"]
     clause: ["{subj} {be} fed up", "{subj} {be} sick of it", "{subj} {have} had enough", "{subj} {be} sick and tired of it"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} fed up"}
 GLAD_ALIVE:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: glad to be alive
@@ -2447,6 +2493,8 @@ GLAD_ALIVE:
   description: Very glad to be alive.
   triggers:
     clause: ["{subj} {be} glad to be alive", "{subj} {be} happy to be alive", "{subj} {be} thrilled to be alive"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} glad to be alive"}
 TERRIFY:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: terrify someone
@@ -2454,6 +2502,8 @@ TERRIFY:
   description: Terrify someone.
   triggers:
     vp: ["terrify {obj}", "frighten {obj} badly", "scare {obj} badly", "scare {obj} to death"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "terrify {obj}"}
 CONSTRUCT:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: build something
@@ -2540,6 +2590,8 @@ INFORM_ON:
   description: Report someone's wrongdoing to an authority.
   triggers:
     vp: ["inform on {obj}", "tell on {obj}", "snitch on {obj}", "rat on {obj}", "report {obj} to the police"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "inform on {obj}"}
 DUMP:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a rubbish dump
@@ -2685,6 +2737,8 @@ DISMISS:
   description: Get rid of someone or something; end a relationship.
   triggers:
     vp: ["dump {obj}", "get rid of {obj}", "break up with {obj}", "abandon {obj}", "reject {obj}", "ditch {obj}"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "dismiss {obj}"}
 HANDS:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: hands
@@ -2712,6 +2766,8 @@ SAD:
   person: true
   triggers:
     predicate_adj: ["sad", "unhappy", "miserable@4", "depressed@4", "glum", "gloomy", "feeling down", "feeling low", "despondent@4", "dejected", "downcast@3", "down in the mouth"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} sad"}
 FRUGAL_LIVING:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: get by on very little
@@ -2977,6 +3033,8 @@ ANNOY:
     vp: ['annoy {obj}', 'irritate {obj}', 'get on {poss} nerves', 'drive {obj} up the wall', 'bug {obj}']
     clause: ['{np} drives {obj} mad', '{np} gets on {poss} nerves', '{np} really annoys {obj}', '{np} irritates
         {obj}', '{np} bugs {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "annoy {obj}"}
 GOSSIP:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: gossip
@@ -3007,6 +3065,8 @@ BRAZEN:
   person: true
   triggers:
     predicate_adj: ["brazen ^person", "shamelessly audacious ^person"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} brazen"}
 ARROGANT:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: arrogant
@@ -3028,6 +3088,8 @@ WINDY:
   description: Very windy weather.
   triggers:
     predicate_adj: [windy, very windy, gusty, blowing a gale]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} very windy"}
 BOMB_DIVE:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a cannonball dive
@@ -3105,6 +3167,8 @@ OGLE:
   description: Ogle or leer at someone.
   triggers:
     vp: ['ogle {obj}', 'leer at {obj}', 'eye {obj} up']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "ogle {obj}"}
 UNCOUTH:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: uncouth
@@ -3120,6 +3184,8 @@ SHOUT:
   triggers:
     clause: ['{subj} {be} {poss} round', '{subj} {be} {poss} treat']
     vp: [buy a round, 'treat {obj} to {np}', 'pay for {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} {poss} turn to pay"}
 STIR:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: stir up trouble
@@ -3134,6 +3200,8 @@ CHECK_OUT:
   description: Investigate, size up, figure out.
   triggers:
     vp: ['figure {obj} out', 'check {obj} out', 'size {obj} up', 'look into {np}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "check out {obj}"}
 CLUMSY:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: clumsy
@@ -3191,6 +3259,8 @@ THRASH:
   triggers:
     vp: ['thrash {obj}', 'beat {obj} up', 'give {obj} a beating', 'trounce {obj}', 'beat {obj} soundly', 'wallop
         {obj}', 'clobber {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "beat {obj} decisively"}
 ARGUE:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: have an argument
@@ -3304,6 +3374,8 @@ JINX:
   description: Bring bad luck on someone or something.
   triggers:
     vp: ['jinx {obj}', 'put a jinx on {obj}', 'put a curse on {obj}', 'bring {obj} bad luck']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "jinx {obj}"}
 EMBARRASSED_SHY:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: embarrassed at being singled out
@@ -3325,6 +3397,8 @@ SKOL:
   description: Drink a whole drink in one go.
   triggers:
     vp: ['drink {obj} in one go', 'chug {obj}', 'down {obj} in one', 'gulp {obj} down', 'knock back {obj} in one']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "drink {obj} in one go"}
 SHARP:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: quick-witted
@@ -3333,6 +3407,8 @@ SHARP:
   triggers:
     clause: ['{obj} {be} sharp', '{obj} {be} shrewd', '{obj} {be} quick-witted', '{obj} {be} nobody''s fool', '{obj}
         {be} on the ball']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "there {be} no fooling {obj}"}
 DONT_KNOW:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: I don't know
@@ -3344,6 +3420,8 @@ DONT_KNOW:
     - I don't know
     - I have no idea
     - who knows ^end
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {do} not know"}
 FAIR_POINT:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a fair point
@@ -3455,6 +3533,8 @@ CRITICISE:
   triggers:
     vp: ['criticise {obj}', 'criticize {obj}', 'bad-mouth {obj}', 'badmouth {obj}', 'slag {obj} off', 'slag off
         {obj}', 'pan {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "criticise {obj}"}
 SUPPORT_TEAM:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: cheer for a team
@@ -3462,6 +3542,8 @@ SUPPORT_TEAM:
   description: Support or cheer for a team or player.
   triggers:
     vp: ['root for {obj}', 'cheer for {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "support {obj}"}
 RAINFOREST:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: rainforest
@@ -3526,6 +3608,8 @@ GRUDGE:
   description: Hold a grudge against someone.
   triggers:
     vp: ['hold a grudge against {obj}', 'bear a grudge against {obj}', 'have it in for {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "hold a grudge against {obj}"}
 INSIDE_WORD:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: inside information
@@ -3628,6 +3712,8 @@ ACCOST:
   description: Go up to someone to speak to them.
   triggers:
     vp: ['sidle up to {obj}', 'accost {obj}', 'walk up to {obj}', 'march up to {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "accost {obj}"}
 ROUND_UP_STOCK:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: round up livestock
@@ -3636,6 +3722,8 @@ ROUND_UP_STOCK:
   triggers:
     vp: [round up the cattle, round up the sheep, round up the livestock, round up the herd, round up the stock]
     np: [a roundup, the roundup, a round-up, the round-up]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "round up {obj}"}
 KILLJOY:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a spoilsport
@@ -3714,6 +3802,8 @@ CALL_OUT:
   description: Call out to someone, give a yell.
   triggers:
     vp: [holler, give a holler, 'give {obj} a holler', 'give {obj} a shout', yell out]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": ["call out to {obj}", "call out"]}
 CASE_OF_BEER:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: twenty-four units of beer
@@ -3729,6 +3819,8 @@ SET_DOG_ON:
   description: Set a dog on someone.
   triggers:
     vp: ['set the dog on {obj}', 'set the dogs on {obj}', 'sic the dog on {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "set the dog on {obj}"}
 CONFRONT:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: confront someone aggressively
@@ -3736,6 +3828,8 @@ CONFRONT:
   description: Accost or confront someone aggressively.
   triggers:
     vp: ['accost {obj}', 'get in {poss} face']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "confront {obj}"}
 STOCKWHIP:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a long cattle whip
@@ -3806,6 +3900,8 @@ LUG:
   description: Carry something heavy, with effort.
   triggers:
     vp: ['lug {obj}', 'lug {obj} around', 'carry {obj} on {poss} back']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "carry {obj}"}
 SLAB_HUT:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a timber-slab hut
@@ -3870,6 +3966,8 @@ PAY_TRIBUTE:
   description: Pay tribute to someone; show respect.
   triggers:
     vp: ['take {poss} hat off to {obj}', 'tip {poss} hat to {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "pay tribute to {obj}"}
 PROMENADE:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: stroll to be seen
@@ -3898,6 +3996,8 @@ CONCEDE_DEFEAT:
   description: Admit defeat to someone or something.
   triggers:
     vp: [admit defeat, concede defeat]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "concede defeat to {obj}"}
 PRETENCE:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a pretence
@@ -3919,6 +4019,8 @@ HAVE_CONTACT:
   description: An explicitly stated contact chain through another intermediary.
   triggers:
     clause: [I know a guy who knows a guy]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {do} know someone who can help"}
 EVER_IN_LIFE:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: ever in your life
@@ -3933,6 +4035,8 @@ PUNCH:
   description: Punch someone.
   triggers:
     vp: ['punch {obj} in the face', 'punch {obj} in the nose', 'sock {obj}', 'punch {obj}', 'thump {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "punch {obj}"}
 RACKET:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a scheme or cushy perk
@@ -3983,6 +4087,8 @@ RINGBARK:
   description: Girdle the bark of trees, rather than any kind of encircling.
   triggers:
     vp: [girdle the trees, ringbark the trees]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": ["strip a ring of bark from {obj}", "strip a ring of bark from trees"]}
 ARREST:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: arrest someone
@@ -3990,6 +4096,8 @@ ARREST:
   description: Arrest someone.
   triggers:
     vp: ['take {obj} into custody', 'haul {obj} off to jail']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "arrest {obj}"}
 SAY_HELLO:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: say hello
@@ -4011,6 +4119,8 @@ INFATUATED:
   description: Infatuated with someone.
   triggers:
     predicate_adj: ['sweet on {obj}', 'infatuated with {obj}', 'smitten with {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"predicate_adj": "infatuated with {obj}"}
 CANT_STAND:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: can't stand something
@@ -4018,6 +4128,8 @@ CANT_STAND:
   description: Can't stand someone or something.
   triggers:
     vp: ['can''t abide {obj}', 'can''t stomach {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "dislike {obj} intensely"}
 KITCHEN_HAND:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a camp kitchen helper
@@ -4032,6 +4144,8 @@ PROMOTE:
   description: Promote or tout something loudly.
   triggers:
     vp: ['talk up {obj}', 'tout {obj}', 'hype {obj} up', 'hype up {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "promote {obj}"}
 STATION:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a large pastoral property
@@ -4060,6 +4174,8 @@ REAL_STORY:
   description: Asking for the truth of a matter.
   triggers:
     clause: [what's the real story, what's the truth of it]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "what is really happening"}
 IN_TROUBLE:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: in trouble
@@ -4074,6 +4190,8 @@ SOMETHING_AFOOT:
   description: Something is afoot.
   triggers:
     clause: [something is afoot, something's afoot, something was afoot]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "something was happening"}
 APPROVAL:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: approval
@@ -4088,6 +4206,8 @@ COURT:
   description: Court or go steady with someone.
   triggers:
     vp: ['go steady with {obj}', 'walk out with {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "court {obj}"}
 DOOMED:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: headed for ruin
@@ -4095,6 +4215,8 @@ DOOMED:
   description: Predicting ruin.
   triggers:
     clause: [we're doomed, we're all doomed, we're all going to be ruined]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} will all be ruined"}
 REGRET:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: uselessly reproach yourself
@@ -4208,6 +4330,8 @@ CANT_BE_BOTHERED:
   description: Unwilling to make the effort.
   triggers:
     clause: ['{subj} couldn''t be bothered']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} not inclined to make the effort"}
 KEEP_MUM:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: give nothing away
@@ -4215,6 +4339,8 @@ KEEP_MUM:
   description: 'Give nothing away: not reveal a secret or show feeling.'
   triggers:
     clause: ['{subj} never let on', '{subj} didn''t let on']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} said nothing"}
 SHILLING:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a shilling coin
@@ -4229,6 +4355,8 @@ BLOWN_CHANCE:
   description: Have used up or lost one's chance; be finished.
   triggers:
     clause: ['{subj} {have} blown {poss} chance', '{subj} {have} blown it', '{subj} {have} missed {poss} chance']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {have} used up {poss} chance"}
 DRAY:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a heavy animal-drawn cart
@@ -4292,6 +4420,8 @@ GUESS_RIGHT:
   description: Guess or foresee something.
   triggers:
     clause: ['{subj} would never have guessed', '{subj} never would have guessed']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} would not have guessed it"}
 POP_OVER:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: go somewhere briefly
@@ -4306,6 +4436,8 @@ TIP_OFF:
   description: Give someone a warning, hint or signal.
   triggers:
     vp: ['tip {obj} off', 'give {obj} a tip-off']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "tip off {obj}"}
 PLAY_UP:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: misbehave or malfunction
@@ -4392,6 +4524,8 @@ DISCARD:
   description: Throw something away; get rid of it as rubbish.
   triggers:
     vp: ['throw away {obj}', 'throw {obj} away', 'discard {obj}']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "discard {obj}"}
 SOUTH_WIND:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a wind from the south
@@ -4420,6 +4554,8 @@ PUT_IN_CASUAL:
   description: Casually put something in (pop it in, stick it in).
   triggers:
     vp: ['pop {obj} in', 'pop {obj} into', 'stick {obj} in', 'toss {obj} in']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "put {obj} in"}
 CHOCOLATE_BLOCK:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a large chocolate block
@@ -4535,6 +4671,8 @@ PUT_IN_OVEN:
   triggers:
     vp: ['put {obj} in the oven', 'place {obj} in the oven', 'pop {obj} in the oven', 'transfer {obj} to the oven',
       'place {obj} into the oven', 'put {obj} into the oven']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "put {obj} in the oven"}
 CLOGGED:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: physically blocked
@@ -5051,6 +5189,8 @@ COLD_WEATHER:
   triggers:
     clause: ['it {be} freezing', 'it {be} freezing cold', 'it {be} bitterly cold', 'it {be} absolutely freezing',
       'it {be} perishing']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} very cold"}
 FREEZING_WEATHER:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: bitterly cold weather
@@ -5088,6 +5228,8 @@ INCOMPETENT:
     clause: ['{subj} {be} completely incompetent', '{subj} {be} totally incompetent', '{subj} {be} utterly incompetent',
       '{subj} {be} hopelessly disorganised', '{subj} {be} hopelessly disorganized', '{subj} {be} completely disorganised',
       '{subj} couldn''t organise a piss-up in a brewery', '{subj} couldn''t organize a piss-up in a brewery']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} incompetent"}
 UTTER:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: out-and-out
@@ -5103,6 +5245,8 @@ NOT_NAIVE:
   triggers:
     clause: ['{subj} wasn''t born yesterday', '{subj} weren''t born yesterday', '{subj} {be} not naive', '{subj}
         {be} no fool']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} not naive"}
 WIN_FROM_NOWHERE:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: win against the odds
@@ -5224,6 +5368,8 @@ MAKE_OUT:
   description: Kiss someone passionately.
   triggers:
     vp: ['make out with {obj}', 'snog {obj}', 'kiss {obj} passionately']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "kiss {obj} passionately"}
 BACK_OUT:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: withdraw from a commitment
@@ -5544,6 +5690,8 @@ STAGGER_SOMEONE:
   description: Shake someone badly, throw them off balance (of news or a blow).
   triggers:
     vp: ['throw {obj} for a loop', 'knock {obj} sideways']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "astonish {obj}"}
 FRIDGE:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a refrigerator
@@ -5653,6 +5801,8 @@ CALL_OFF:
   description: Cancel a planned thing (a trip, a search, a deal), with the thing named after the verb.
   triggers:
     vp: ['call off {np}', 'call {obj} off']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "cancel {obj}"}
 DRAG_FEET:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: lag behind
@@ -5869,6 +6019,8 @@ FINISH_LINE:
   description: Get something finished or through (a deal, a bill, a project).
   triggers:
     vp: ['get {obj} across the finish line', 'get {obj} over the finish line', 'get {obj} across the line']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "get {obj} to the finish"}
 LATER_ON:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: sometime in the future
@@ -5906,6 +6058,8 @@ ONCE_OVER:
   description: Look over carefully, to check or judge.
   triggers:
     vp: ['give {np} the once-over', 'cast an eye over {np}', 'look {obj} over']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "inspect {obj}"}
 GET_OUT_OF_THE_WAY:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: move out of the way
@@ -5976,6 +6130,8 @@ NOT_KNOW_AT_ALL:
   triggers:
     clause: ['{subj} {do}n''t know {obj} from Adam', '{subj} {do} not know {obj} from Adam', '{subj} wouldn''t know
         {obj} from Adam', '{subj} would not know {obj} from Adam']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} would not recognise {obj}"}
 LIGHT_RAIN:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: raining lightly
@@ -5983,7 +6139,9 @@ LIGHT_RAIN:
   description: Raining lightly, in a few drops (of the weather).
   triggers:
     # the weather's "it" only: she drizzled honey, and "she was drizzling" isn't rain
-    clause: ['it {be} drizzling', 'it {be} raining lightly', 'it {be} only just raining']
+    clause: ['it {be} drizzling', '{subj} {be} raining lightly', 'it {be} only just raining']
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"clause": "{subj} {be} raining lightly"}
 A_RAFT_OF:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a large number of things
@@ -6001,6 +6159,8 @@ REIMBURSE_PERSON:
   description: Pay money back to someone who is owed it.
   triggers:
     vp: ["reimburse {obj}"]
+  # Provisional sentence forms, 2026-11-14; source arguments and degree are checked.
+  plain_forms: {"vp": "reimburse {obj}"}
 NAUSEOUS:
   # Provisional wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: sick in the stomach
@@ -6288,6 +6448,8 @@ NOISY_CRY:
   description: Cry noisily or loudly.
   triggers:
     vp:
+    - 'bawl ^person ^end'
+    - 'sob ^person ^end'
     - cry loudly
     - weep loudly
     - sob loudly

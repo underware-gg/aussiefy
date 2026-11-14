@@ -65,7 +65,7 @@ behaviours enabled explicitly, even when their numeric settings are supplied.
 
 `Result.to_dict()` is a superset of the toolkit translate dict: `text`, `level`, `level_name`, `vulgarity`,
 `vulgarity_name`, `policy_warnings`, `profile_config`, `seed`, `variety`, `decisions` and `difficult_sentences`, plus `source`
-and `explain`. V3 also includes `dictionary_id`, `card_version`, `tuning`, `warnings` and `warning_details`. The old `difficult` key is gone; `policy_warnings` remains for compatibility. Policy warnings name region
+and `explain`. The shared envelope also includes `dictionary_id`, `card_version`, `tuning`, `warnings` and `warning_details`. The old `difficult` key is gone; `policy_warnings` remains for compatibility. Policy warnings name region
 tags or unlock flags unused by the dictionary; invalid register and unlock names raise `UserError`.
 
 `themes=None` and `invention=None` are top-level document controls. Exact theme overrides merge per
@@ -197,3 +197,25 @@ and IDs are searchable too. Bare lookup is not a grammatical fit check: its card
 `automatic: false`, and slots may remain unbound. `short=True` keeps this imagery and its usage conditions.
 Session lookup inherits the session's settings. `entry_riffs: false` removes legacy riff cards separately.
 See [contextual controls](translation-controls.md#contextual-imagery) before using a suggestion.
+
+
+## Request-local wording
+
+`translate`, `translate_changes`, `plan`, Yarn and selection suggestions accept
+`personal_terms=[{"phrase": "spreadsheet", "term": "number wrangler"}]`. CLI uses
+`--personal-terms JSON`; MCP uses `personal_terms` on the same tools. These are call-local choices,
+not dictionary additions, evidence, tuning preferences or saved account state.
+
+At most 50 items are accepted. Each phrase/term has at most 120 characters and 12 whole words.
+Matching is case-insensitive, whole-word and inflection-aware, with ordinary frame, case and article
+rendering. Conflicting duplicate phrases, markup, slot syntax and malformed text are rejected.
+`vulgarity` is optional and defaults to the package swear-list rating; an explicit tier replaces that
+rating for eligibility. An eligible personal phrase applies at every level without a roll; an over-cap
+phrase does not hide a shorter eligible phrase. Code and protected source spans remain unchanged.
+Responses count supplied items and actual occurrences applied in `personal_terms`, separately from tuning.
+
+A host may configure `build_server(allow_personal_terms=False)` or supply a per-call
+`personal_terms_hook`. The latter runs once after resolving level/vulgarity/embellishment and supplies
+host-owned data. In either case the client-side list is hidden and rejected if sent. The package has
+no account or site knowledge. Direct Python hooks are private adapter inputs and cannot be combined
+with a client list. Dictionary preferences and replay pins remain separate mechanisms.

@@ -169,7 +169,7 @@ def brief(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | st
           markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
               document_type: str = "general", document_config: dict | None = None,
               themes: dict[str, bool] | None = None, invention: bool | None = None,
-              popularity: bool = False, preferences: list[dict] | None = None,
+              popularity: bool = False, preferences: list[dict] | None = None, personal_terms: list[dict] | None = None,
           translator: Translator | None = None) -> YarnSession:
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     tr = translator
@@ -177,7 +177,7 @@ def brief(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | st
     if markup == "auto":
         markup = detect_markup(text)
     the_plan = harness.plan(text, unlock=["misreadable"], level=level, seed=seed, vulgarity=vulgarity, markup=markup, english=english,
-                            embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr, popularity=popularity, preferences=preferences)
+                            embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr, popularity=popularity, preferences=preferences, personal_terms=personal_terms)
     context = resolve_document(None, config=tr.dictionary.genres, document_type=the_plan["genre"],
                                document_config=document_config)
     setting = context.setting(the_plan["embellishment"])

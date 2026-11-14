@@ -1,4 +1,4 @@
-"""Real v3 emission, request replay and host-only tuning, across document boundaries."""
+"""Current emission, request replay and host-only tuning, across document boundaries."""
 
 import asyncio
 from copy import deepcopy
@@ -220,7 +220,11 @@ def test_editor_options_build_precise_source_pins_and_refuse_locked_choices(docu
         if change['kind'] != 'substitution':
             continue
         for option in change['alternatives'] + change['locked']:
-            key = option.get('entry_id') or option.get('construction_id')
+            key = option['key']
+            if option['kind'] == 'plain':
+                with pytest.raises(UserError):
+                    cs.replay_pins({change['id']: key})
+                continue
             pins = cs.replay_pins({change['id']: key})
             if option in change['locked']:
                 with pytest.raises(UserError):
@@ -230,7 +234,7 @@ def test_editor_options_build_precise_source_pins_and_refuse_locked_choices(docu
                 replay = translate_changes(source, pins=pins, **options)
                 actual = next(c for c in replay.changes if c['kind'] == 'substitution'
                               and c['match']['key'] == change['match']['key'])
-                assert (actual.get('entry_id') or actual.get('construction_id')) == key
+                assert actual['option_key'] == key
                 checked += 1
     assert checked > 3 and refused > 0
     with pytest.raises(UserError):
@@ -248,15 +252,15 @@ def test_constructor_editor_alternatives_and_removal_replay(translator):
     cs = translate_changes(source, **options)
     change = next(c for c in cs.changes if c.get('construction_id'))
     for option in change['alternatives']:
-        key = option.get('entry_id') or option.get('construction_id')
+        key = option['key']
         replay = translate_changes(source, pins=cs.replay_pins({change['id']: key}), **options)
         selected = next(c for c in replay.changes if c.get('placement') == 'opener')
-        assert (selected.get('entry_id') or selected.get('construction_id')) == key
+        assert 'construction:' + selected['construction_id'] == key if selected.get('construction_id') else 'entry:' + selected['entry_id'] == key
     removed = translate(source, pins=cs.replay_pins({change['id']: None}), **options)
     assert not any(g.text for g in removed.garnish)
 
 
-def test_frozen_schemas_keep_the_accepted_r2_validation_fields_and_real_fixtures(translator):
+def test_draft_v4_schemas_match_the_review_snapshot_and_real_fixtures(translator):
     from pathlib import Path
     import sys
     root = Path(__file__).resolve().parents[2]
@@ -264,7 +268,7 @@ def test_frozen_schemas_keep_the_accepted_r2_validation_fields_and_real_fixtures
     from regen_changes_fixtures import CASES, build
     for name in ('changes.schema.json', 'cards.schema.json', 'lookup-cards.schema.json'):
         active = json.loads((root / 'aussiefy/data' / name).read_text())
-        accepted = json.loads((root / 'docs/drafts/changes-v3' / name).read_text())
+        accepted = json.loads((root / 'docs/drafts/changes-v4-r2' / name).read_text())
         Draft202012Validator.check_schema(active)
         assert {k: v for k, v in active.items() if k not in {'title', '$comment', 'description'}} == {
             k: v for k, v in accepted.items() if k not in {'title', '$comment', 'description'}}
@@ -352,7 +356,7 @@ def test_lookup_and_tuned_replay_fixtures_are_real_current_emission(translator):
 def test_every_lookup_outcome_reports_neutral_tuning_and_policy_warnings(query, short, translator):
     from aussiefy.errors import warning_details
     result = harness.lookup(query, short=short, translator=translator, unlock=['slur'])
-    assert result['dictionary_id'] == translator.dictionary.identity and result['card_version'] == 3
+    assert result['dictionary_id'] == translator.dictionary.identity and result['card_version'] == 4
     assert result['tuning'] == {'popularity': False, 'preferences': 0}
     assert result['warnings'] == result['policy_warnings']
     assert result['warning_details'] == warning_details(result['warnings'])
@@ -419,8 +423,8 @@ def test_pinned_constructor_keeps_its_own_option_when_renderings_are_withheld(tr
           'max_garnish': {'opener': 1}, 'swearing': {'exclaim': 1}}})
     original = translate_changes(source, **options)
     real = C._Builder._phonetic_region
-    def differs(self, text, bounds, flags, annotations=None):
-        output, infix = real(self, text, bounds, flags, annotations)
+    def differs(self, text, bounds, flags, annotations=None, **kwargs):
+        output, infix = real(self, text, bounds, flags, annotations, **kwargs)
         return (output + '?' if output else output), infix
     monkeypatch.setattr(C._Builder, '_phonetic_region', differs)
     replay = translate_changes(source, pins=original.replay_pins(), **options)

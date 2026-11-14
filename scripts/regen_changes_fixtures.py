@@ -18,6 +18,25 @@ STRESS = {"stack": 0.9, "garnish": {"riff": 1.0, "opener": 0.8, "tag": 0.8, "tai
           "swearing": {"infix": 6.0, "exclaim": 0.5}}
 # name -> (what it shows, translate_changes' arguments)
 CASES = {
+    "v4-owned": (
+        "Source-owned swearing above the cap and ambiguous Australian meanings retain exact words and explicit English choices.",
+        {"text": "Bugger me sideways! He is stonkered. Oi!", "level": 1, "vulgarity": 0, "embellishment": 0, "embedder": "none"}),
+    "v4-held": (
+        "A genuinely waiting meaning is held without masks or replacement rolls.",
+        {"text": "She wept.", "level": 1, "vulgarity": 0, "embellishment": 0, "embedder": "none"}),
+    "v4-personal": (
+        "Call-local wording, bound people and Markdown escaping, without invented dictionary IDs.",
+        {"text": "🦘 She **adores Jane**. A spreadsheet. `spreadsheet`", "level": 1, "vulgarity": 0,
+         "embellishment": 0, "markdown": True, "embedder": "none", "personal_terms": [
+             {"phrase": "adore Jane", "term": "love the boss"}, {"phrase": "spreadsheet", "term": "number wrangler"}]}),
+    "v4-near": (
+        "Curated stand-ins retain waiting source readings and cite each near option.",
+        {"text": "They wept. She loved him wholeheartedly.", "level": 5, "vulgarity": 0,
+         "embellishment": 2, "seed": 0, "embedder": "none", "document_config": {"garnish": [], "profile": {
+             "phonetic": 0, "stack": 0, "substitution": {"lexical": 1, "phrase": 1, "idiom": 1}}}}),
+    "v4-selected-reading": (
+        "An explicit offered alternate reading retains both the inferred and selected meanings via existing source replay pins.",
+        {"text": "He believes a liar.", "level": 5, "vulgarity": 0, "embellishment": 0, "embedder": "none"}),
     "every-kind": (
         "Every kind of change: swaps with alternatives, locked options and their masks, a stacked idiom and a riff; "
         "garnish of each placement, with removals; drawl and a swear infix inside a swap's region (covers); a US "
@@ -58,6 +77,12 @@ def build(name: str, translator=None) -> dict:
     from aussiefy import translate_changes
 
     about, request = CASES[name]
+    request = dict(request)
+    if name == 'v4-selected-reading':
+        first = translate_changes(translator=translator, **request)
+        held = next(c for c in first.changes if c['kind'] == 'held')
+        word = next(word for reading in held['ruled_out'] for word in reading['words'] if word['entry_id'] == 'reckon')
+        request['pins'] = first.replay_pins({held['id']: word['key']})
     options = {k: v for k, v in request.items() if k != "text"}
     return {"about": about, "request": request,
             "response": translate_changes(request["text"], translator=translator, **options).to_dict()}

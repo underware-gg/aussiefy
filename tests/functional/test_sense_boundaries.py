@@ -149,7 +149,10 @@ def test_idiom_unit_is_shared_by_translation_tools(translator):
     assert translate(source, **options).text == source
     changes = translate_changes(source, **options)
     assert changes.text == source
-    assert not changes.changes
+    held = [change for change in changes.changes if change['kind'] == 'held']
+    assert len(held) == 1 and held[0]['reading']['concept'] == 'AS_MUCH_AS_DESIRED'
+    assert held[0]['output'] == held[0]['original'] and not held[0]['masks']
+    assert not any(change['kind'] == 'substitution' for change in changes.changes)
     assert harness.plan(source, **options)['draft'] == source
     assert 'ticker' not in {e['id'] for e in harness.lookup(source, **options)['results']}
     markdown = "Use it *to your heart's content*."

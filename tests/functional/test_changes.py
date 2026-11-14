@@ -33,7 +33,8 @@ KINDS = json.loads((FIXTURES / "every-kind.json").read_text(encoding="utf-8"))["
 # the contract each VERSION names: its schema's sha256 and its id format. Changing either means a new VERSION.
 CONTRACTS = {1: ("4dd5a362", "{kind}:{start}-{end}[:{placement or rule}][#{n}]"),
              2: ("70f980e0", "{kind}:{start}-{end}[:{placement or rule}][#{n}]"),
-             3: ("9e5125c9", "{kind}:{start}-{end}[:{placement or rule}][#{n}]")}
+             3: ("9e5125c9", "{kind}:{start}-{end}[:{placement or rule}][#{n}]"),
+             4: ("c532b3d2", "{kind}:{start}-{end}[:{placement or rule}][#{n}]")}  # Draft review snapshot; not a freeze.
 LIVELY = dict(level=5, vulgarity=2, embellishment=2, document_config={"profile": {
     "stack": 0.9, "garnish": {"riff": 1.0}, "max_garnish": {"riff": 30}, "garnish_gap": 0, "swearing": {"infix": 6.0}}})
 
@@ -82,7 +83,7 @@ def _id_pattern(format_: str) -> re.Pattern:
 
 def test_the_python_api_takes_translates_parameters_and_an_embedder():
     def params(fn):
-        return {n: p.default for n, p in inspect.signature(fn).parameters.items()}
+        return {n: p.default for n, p in inspect.signature(fn).parameters.items() if n != "_watch"}
 
     assert params(aussiefy.translate_changes) == {**params(aussiefy.translate), "embedder": None}
     assert all(p.kind is inspect.Parameter.KEYWORD_ONLY
@@ -194,7 +195,7 @@ def test_stacked_idioms_riffs_and_infixes_count_in_a_renderings_vulgarity(transl
     assert any(", " in o["rendered"] for c in subs for o in c["alternatives"])   # a stack or a riff
     for c in subs:
         for o in c["alternatives"]:
-            assert o["vulgarity"] >= dictionary.entries[o["entry_id"]].vulgarity
+            assert o["vulgarity"] >= dictionary.entries[o["entry_id"]].vulgarity if o["entry_id"] else o["kind"] == "plain" and o["weight"] == 0
             infixes = [d for d in cs.changes if d["kind"] == "swear_infix" and d["id"] in c["covers"]]
             if o["entry_id"] == c["entry_id"]:
                 assert c["vulgarity"] == o["vulgarity"] >= max([d["vulgarity"] for d in infixes], default=0)
@@ -217,6 +218,9 @@ def test_each_rendering_says_its_entry_or_a_rule_rewrote_it(translator, dictiona
             cs = aussiefy.translate_changes(text, translator=translator, **{**LIVELY, "seed": seed})
             for c in (c for c in cs.changes if c["kind"] == "substitution"):
                 for o in c["alternatives"] + c["locked"]:
+                    if o["kind"] == "plain":
+                        assert o["weight"] == 0
+                        continue
                     entry = dictionary.entries[o["entry_id"]]
                     stems = {w[:max(3, len(w) - 2)] for f in entry.all_forms for w in _words(PLACEHOLDER_RE.sub(" ", f))}
                     checked += 1
@@ -470,8 +474,8 @@ def test_a_garnish_whose_pick_doesnt_render_true_is_offered_alone_without_its_re
     and the response names it under withheld."""
     real = C._Builder._phonetic_region
 
-    def off(self, text, bounds, flags, annotations=None):
-        out, infix = real(self, text, bounds, flags, annotations)
+    def off(self, text, bounds, flags, annotations=None, **kwargs):
+        out, infix = real(self, text, bounds, flags, annotations, **kwargs)
         return (out + "?" if out else out), infix
 
     monkeypatch.setattr(C._Builder, "_phonetic_region", off)
@@ -499,9 +503,9 @@ def test_a_garnish_whose_region_cant_settle_is_offered_alone_and_named(translato
     the corpora), the garnish offers its pick alone and no removal, and the response names it under withheld."""
     real = C._Builder._phonetic_region
 
-    def across(self, text, bounds, flags, annotations=None):
+    def across(self, text, bounds, flags, annotations=None, **kwargs):
         flags.add("straddle-right")
-        return real(self, text, bounds, flags, annotations)
+        return real(self, text, bounds, flags, annotations, **kwargs)
 
     monkeypatch.setattr(C._Builder, "_phonetic_region", across)
     cs = _valid(_every_kind(translator))

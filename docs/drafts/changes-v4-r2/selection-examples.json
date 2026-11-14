@@ -1,0 +1,721 @@
+{
+  "examples": [
+    {
+      "request": {
+        "text": "She is exhausted.",
+        "span": [
+          8,
+          12
+        ],
+        "level": 1,
+        "vulgarity": 0,
+        "embellishment": 0,
+        "embedder": "none"
+      },
+      "response": {
+        "version": 4,
+        "card_version": 4,
+        "dictionary_id": "sha256:eacf1817115d3d3a2d962c507c5b58fd841e744bec03bc7197c43fd532264c51",
+        "tuning": {
+          "popularity": false,
+          "preferences": 0
+        },
+        "personal_terms": {
+          "provided": 0,
+          "applied": 0
+        },
+        "warnings": [],
+        "warning_details": [],
+        "text": "She is exhausted.",
+        "src_span": [
+          7,
+          16
+        ],
+        "out_span": [
+          7,
+          16
+        ],
+        "outcome": "matched",
+        "reading": {
+          "concept": "TIRED",
+          "plain": "exhausted"
+        },
+        "ruled_out": [],
+        "suggestions": [
+          {
+            "src_span": [
+              7,
+              16
+            ],
+            "out_span": [
+              7,
+              16
+            ],
+            "reading": {
+              "concept": "TIRED",
+              "plain": "exhausted"
+            },
+            "ruled_out": [],
+            "options": [
+              {
+                "key": "entry:knackered",
+                "kind": "entry",
+                "entry_id": "knackered",
+                "evidence": "attested",
+                "coined_by": null,
+                "rendered": "knackered",
+                "out_span": [
+                  7,
+                  16
+                ],
+                "vulgarity": 0,
+                "weight": 1.0,
+                "masks": []
+              },
+              {
+                "entry_id": null,
+                "evidence": null,
+                "coined_by": null,
+                "key": "plain:source",
+                "kind": "plain",
+                "rendered": "exhausted",
+                "out_span": [
+                  7,
+                  16
+                ],
+                "vulgarity": 0,
+                "weight": 0.0,
+                "masks": []
+              }
+            ],
+            "origin": "passed_over"
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "text": "He is a bludger.",
+        "span": [
+          9,
+          12
+        ],
+        "level": 5,
+        "vulgarity": 0,
+        "embellishment": 0,
+        "embedder": "none"
+      },
+      "response": {
+        "version": 4,
+        "card_version": 4,
+        "dictionary_id": "sha256:eacf1817115d3d3a2d962c507c5b58fd841e744bec03bc7197c43fd532264c51",
+        "tuning": {
+          "popularity": false,
+          "preferences": 0
+        },
+        "personal_terms": {
+          "provided": 0,
+          "applied": 0
+        },
+        "warnings": [],
+        "warning_details": [],
+        "text": "He's a bludger.",
+        "src_span": [
+          6,
+          15
+        ],
+        "out_span": [
+          5,
+          14
+        ],
+        "outcome": "matched",
+        "reading": {
+          "concept": "LAZY",
+          "plain": "lazy"
+        },
+        "ruled_out": [
+          {
+            "kind": "meaning",
+            "concept": "SLACKER",
+            "plain": "someone who avoids work",
+            "words": []
+          }
+        ],
+        "suggestions": [
+          {
+            "src_span": [
+              6,
+              15
+            ],
+            "out_span": [
+              5,
+              14
+            ],
+            "reading": {
+              "concept": "LAZY",
+              "plain": "lazy"
+            },
+            "ruled_out": [
+              {
+                "kind": "meaning",
+                "concept": "SLACKER",
+                "plain": "someone who avoids work",
+                "words": []
+              }
+            ],
+            "options": [
+              {
+                "entry_id": "a-bludger-pred",
+                "evidence": "attested",
+                "coined_by": null,
+                "key": "source:a-bludger-pred",
+                "kind": "source",
+                "rendered": "a bludger",
+                "out_span": [
+                  5,
+                  14
+                ],
+                "vulgarity": 0,
+                "weight": 0.2631578947368421,
+                "masks": []
+              },
+              {
+                "key": "entry:a-bludger-pred",
+                "kind": "entry",
+                "entry_id": "a-bludger-pred",
+                "evidence": "attested",
+                "coined_by": null,
+                "rendered": "a bludger",
+                "out_span": [
+                  5,
+                  14
+                ],
+                "vulgarity": 0,
+                "weight": 0.7368421052631579,
+                "masks": []
+              },
+              {
+                "entry_id": null,
+                "evidence": null,
+                "coined_by": null,
+                "key": "plain:lazy",
+                "kind": "plain",
+                "rendered": "lazy",
+                "out_span": [
+                  5,
+                  14
+                ],
+                "vulgarity": 0,
+                "weight": 0.0,
+                "masks": []
+              }
+            ],
+            "origin": "kept"
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "text": "A spreadsheet.",
+        "span": [
+          4,
+          8
+        ],
+        "level": 5,
+        "vulgarity": 0,
+        "embellishment": 0,
+        "embedder": "none",
+        "personal_terms": [
+          {
+            "phrase": "spreadsheet",
+            "term": "number wrangler"
+          }
+        ]
+      },
+      "response": {
+        "version": 4,
+        "card_version": 4,
+        "dictionary_id": "sha256:eacf1817115d3d3a2d962c507c5b58fd841e744bec03bc7197c43fd532264c51",
+        "tuning": {
+          "popularity": false,
+          "preferences": 0
+        },
+        "personal_terms": {
+          "provided": 1,
+          "applied": 1
+        },
+        "warnings": [],
+        "warning_details": [],
+        "text": "A number wrangler.",
+        "src_span": [
+          0,
+          13
+        ],
+        "out_span": [
+          0,
+          17
+        ],
+        "outcome": "matched",
+        "reading": null,
+        "ruled_out": [],
+        "suggestions": [
+          {
+            "src_span": [
+              0,
+              13
+            ],
+            "out_span": [
+              0,
+              17
+            ],
+            "reading": null,
+            "ruled_out": [],
+            "options": [
+              {
+                "entry_id": null,
+                "evidence": null,
+                "coined_by": null,
+                "key": "personal:1130c7d8ae19a5899b448ff81874d99a47b4e9b439947fe05e54a2ee27071a16",
+                "kind": "personal",
+                "rendered": "A number wrangler",
+                "out_span": [
+                  0,
+                  17
+                ],
+                "vulgarity": 0,
+                "weight": 1.0,
+                "masks": []
+              },
+              {
+                "entry_id": null,
+                "evidence": null,
+                "coined_by": null,
+                "key": "plain:source",
+                "kind": "plain",
+                "rendered": "A spreadsheet",
+                "out_span": [
+                  0,
+                  17
+                ],
+                "vulgarity": 0,
+                "weight": 0.0,
+                "masks": []
+              }
+            ],
+            "origin": "existing"
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "text": "She wept.",
+        "span": [
+          5,
+          7
+        ],
+        "level": 5,
+        "vulgarity": 0,
+        "embellishment": 0,
+        "embedder": "none"
+      },
+      "response": {
+        "version": 4,
+        "card_version": 4,
+        "dictionary_id": "sha256:eacf1817115d3d3a2d962c507c5b58fd841e744bec03bc7197c43fd532264c51",
+        "tuning": {
+          "popularity": false,
+          "preferences": 0
+        },
+        "personal_terms": {
+          "provided": 0,
+          "applied": 0
+        },
+        "warnings": [],
+        "warning_details": [],
+        "text": "She wept.",
+        "src_span": [
+          4,
+          8
+        ],
+        "out_span": [
+          4,
+          8
+        ],
+        "outcome": "no_word_yet",
+        "reading": {
+          "concept": "CRY",
+          "plain": "cry"
+        },
+        "ruled_out": [],
+        "suggestions": [
+          {
+            "src_span": [
+              4,
+              8
+            ],
+            "out_span": [
+              4,
+              8
+            ],
+            "reading": {
+              "concept": "CRY",
+              "plain": "cry"
+            },
+            "ruled_out": [],
+            "options": [],
+            "origin": "lookup"
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "text": "American football game",
+        "span": [
+          0,
+          8
+        ],
+        "level": 5,
+        "vulgarity": 0,
+        "embellishment": 0,
+        "embedder": "none"
+      },
+      "response": {
+        "version": 4,
+        "card_version": 4,
+        "dictionary_id": "sha256:eacf1817115d3d3a2d962c507c5b58fd841e744bec03bc7197c43fd532264c51",
+        "tuning": {
+          "popularity": false,
+          "preferences": 0
+        },
+        "personal_terms": {
+          "provided": 0,
+          "applied": 0
+        },
+        "warnings": [],
+        "warning_details": [],
+        "text": "American football game",
+        "src_span": [
+          0,
+          8
+        ],
+        "out_span": [
+          0,
+          8
+        ],
+        "outcome": "left_as_written",
+        "reading": null,
+        "ruled_out": [
+          {
+            "kind": "meaning",
+            "concept": "GRIDIRON",
+            "plain": "American football",
+            "words": [
+              {
+                "key": "entry:gridiron",
+                "kind": "entry",
+                "entry_id": "gridiron",
+                "evidence": "attested",
+                "coined_by": null,
+                "rendered": "Gridiron",
+                "out_span": [
+                  0,
+                  22
+                ],
+                "weight": 1.0,
+                "vulgarity": 0,
+                "masks": []
+              }
+            ]
+          },
+          {
+            "kind": "meaning",
+            "concept": "FOOTBALL",
+            "plain": "football",
+            "words": [
+              {
+                "key": "entry:footy",
+                "kind": "entry",
+                "entry_id": "footy",
+                "evidence": "unverified",
+                "coined_by": null,
+                "rendered": "Footy",
+                "out_span": [
+                  0,
+                  22
+                ],
+                "weight": 1.0,
+                "vulgarity": 0,
+                "masks": []
+              }
+            ]
+          }
+        ],
+        "suggestions": [
+          {
+            "src_span": [
+              0,
+              22
+            ],
+            "out_span": [
+              0,
+              22
+            ],
+            "reading": null,
+            "ruled_out": [
+              {
+                "kind": "meaning",
+                "concept": "GRIDIRON",
+                "plain": "American football",
+                "words": [
+                  {
+                    "key": "entry:gridiron",
+                    "kind": "entry",
+                    "entry_id": "gridiron",
+                    "evidence": "attested",
+                    "coined_by": null,
+                    "rendered": "Gridiron",
+                    "out_span": [
+                      0,
+                      22
+                    ],
+                    "weight": 1.0,
+                    "vulgarity": 0,
+                    "masks": []
+                  }
+                ]
+              },
+              {
+                "kind": "meaning",
+                "concept": "FOOTBALL",
+                "plain": "football",
+                "words": [
+                  {
+                    "key": "entry:footy",
+                    "kind": "entry",
+                    "entry_id": "footy",
+                    "evidence": "unverified",
+                    "coined_by": null,
+                    "rendered": "Footy",
+                    "out_span": [
+                      0,
+                      22
+                    ],
+                    "weight": 1.0,
+                    "vulgarity": 0,
+                    "masks": []
+                  }
+                ]
+              }
+            ],
+            "options": [],
+            "origin": "lookup"
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "text": "🦘 A **spreadsheet**. `spreadsheet`",
+        "span": [
+          9,
+          13
+        ],
+        "level": 5,
+        "vulgarity": 0,
+        "embellishment": 0,
+        "embedder": "none",
+        "markdown": true,
+        "personal_terms": [
+          {
+            "phrase": "spreadsheet",
+            "term": "number wrangler"
+          }
+        ]
+      },
+      "response": {
+        "version": 4,
+        "card_version": 4,
+        "dictionary_id": "sha256:eacf1817115d3d3a2d962c507c5b58fd841e744bec03bc7197c43fd532264c51",
+        "tuning": {
+          "popularity": false,
+          "preferences": 0
+        },
+        "personal_terms": {
+          "provided": 1,
+          "applied": 1
+        },
+        "warnings": [],
+        "warning_details": [],
+        "text": "🦘 A **number wrangler**. `spreadsheet`",
+        "src_span": [
+          6,
+          17
+        ],
+        "out_span": [
+          6,
+          21
+        ],
+        "outcome": "matched",
+        "reading": null,
+        "ruled_out": [],
+        "suggestions": [
+          {
+            "src_span": [
+              6,
+              17
+            ],
+            "out_span": [
+              6,
+              21
+            ],
+            "reading": null,
+            "ruled_out": [],
+            "options": [
+              {
+                "entry_id": null,
+                "evidence": null,
+                "coined_by": null,
+                "key": "personal:1130c7d8ae19a5899b448ff81874d99a47b4e9b439947fe05e54a2ee27071a16",
+                "kind": "personal",
+                "rendered": "number wrangler",
+                "out_span": [
+                  6,
+                  21
+                ],
+                "vulgarity": 0,
+                "weight": 1.0,
+                "masks": []
+              },
+              {
+                "entry_id": null,
+                "evidence": null,
+                "coined_by": null,
+                "key": "plain:source",
+                "kind": "plain",
+                "rendered": "spreadsheet",
+                "out_span": [
+                  6,
+                  21
+                ],
+                "vulgarity": 0,
+                "weight": 0.0,
+                "masks": []
+              }
+            ],
+            "origin": "existing"
+          }
+        ]
+      }
+    },
+    {
+      "request": {
+        "text": "She is exhausted and he is hungry.",
+        "span": [
+          0,
+          31
+        ],
+        "level": 1,
+        "vulgarity": 0,
+        "embellishment": 0,
+        "embedder": "none"
+      },
+      "response": {
+        "version": 4,
+        "card_version": 4,
+        "dictionary_id": "sha256:eacf1817115d3d3a2d962c507c5b58fd841e744bec03bc7197c43fd532264c51",
+        "tuning": {
+          "popularity": false,
+          "preferences": 0
+        },
+        "personal_terms": {
+          "provided": 0,
+          "applied": 0
+        },
+        "warnings": [],
+        "warning_details": [],
+        "text": "She is exhausted and he is hungry.",
+        "src_span": [
+          0,
+          33
+        ],
+        "out_span": [
+          0,
+          33
+        ],
+        "outcome": "matched",
+        "reading": null,
+        "ruled_out": [],
+        "suggestions": [
+          {
+            "src_span": [
+              7,
+              16
+            ],
+            "out_span": [
+              7,
+              16
+            ],
+            "reading": {
+              "concept": "TIRED",
+              "plain": "exhausted"
+            },
+            "ruled_out": [],
+            "options": [
+              {
+                "key": "entry:knackered",
+                "kind": "entry",
+                "entry_id": "knackered",
+                "evidence": "attested",
+                "coined_by": null,
+                "rendered": "knackered",
+                "out_span": [
+                  7,
+                  16
+                ],
+                "vulgarity": 0,
+                "weight": 1.0,
+                "masks": []
+              },
+              {
+                "entry_id": null,
+                "evidence": null,
+                "coined_by": null,
+                "key": "plain:source",
+                "kind": "plain",
+                "rendered": "exhausted",
+                "out_span": [
+                  7,
+                  16
+                ],
+                "vulgarity": 0,
+                "weight": 0.0,
+                "masks": []
+              }
+            ],
+            "origin": "passed_over"
+          },
+          {
+            "src_span": [
+              27,
+              33
+            ],
+            "out_span": [
+              27,
+              33
+            ],
+            "reading": {
+              "concept": "HUNGRY",
+              "plain": "hungry"
+            },
+            "ruled_out": [],
+            "options": [],
+            "origin": "lookup"
+          }
+        ]
+      }
+    }
+  ]
+}

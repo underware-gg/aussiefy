@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from .themes import ThemePolicy
 from .tuning import Tuning, TuningReport
+from .personal_terms import prepare as prepare_personal
 from .pins import Pins, capture as capture_pins, packet as pin_packet
 from .v3_contract import response_metadata
 
@@ -65,6 +66,7 @@ class DocumentResult:
     _tuning_report: TuningReport = field(default_factory=TuningReport)
     dictionary_id: str = ""
     allow_misreadable: bool = False
+    personal_terms: dict = field(default_factory=lambda: {"provided": 0, "applied": 0})
 
     @property
     def tuning(self) -> dict:
@@ -406,7 +408,7 @@ def _escape_map(text: str) -> tuple[str, list[int]]:
 
 def document_changes(source: str, translator: Translator, policy: Policy, effective: Effective,
                      _watch: Callable[[int], object] | None = None, *, _tuning: dict | None = None,
-                     _preferences_hook=None, pins=None):
+                     _preferences_hook=None, pins=None, personal_terms=None, _personal_terms_hook=None):
     """translate_document, with every unit's changes placed in the document: each unit's source offset added, its
     output mapped through the escaping that keeps custom slang from making markup, and each rendering escaped where
     it stands. _watch: the changes builder's watch for each unit, by index (a test pins one unit's picks)."""
@@ -419,7 +421,7 @@ def document_changes(source: str, translator: Translator, policy: Policy, effect
         units.append((result, drafts))
         return result
 
-    document = translate_document(source, translator, policy, effective, unit=unit, _tuning=_tuning, _preferences_hook=_preferences_hook, pins=pins)
+    document = translate_document(source, translator, policy, effective, unit=unit, _tuning=_tuning, _preferences_hook=_preferences_hook, pins=pins, personal_terms=personal_terms, _personal_terms_hook=_personal_terms_hook)
     drafts = []
     for u, (result, unit_drafts) in zip(document.units, units):
         _, at = _escape_map(result.text)
@@ -450,7 +452,7 @@ def _escaped_in_map(text: str, span: list[int], rendered: str) -> tuple[str,list
 
 def translate_document(source: str, translator: Translator, policy: Policy, effective: Effective,
                        unit: Callable[..., Result] | None = None, *, _tuning: dict | None = None,
-                       _preferences_hook=None, pins=None) -> DocumentResult:
+                       _preferences_hook=None, pins=None, personal_terms=None, _personal_terms_hook=None) -> DocumentResult:
     """Translate the document's prose units in turn, sharing one document's state. unit translates one unit
     (Translator.translate's arguments; the changes builder passes its own)."""
     pieces = []
@@ -470,6 +472,8 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
                      'dials':{'level':effective.level,'vulgarity':effective.vulgarity,'embellishment':setting.step}}
                     if _preferences_hook is not None else {})
     tuning = Tuning.prepare(_tuning,translator.dictionary,**hook_options)
+    personal = prepare_personal(personal_terms, translator.dictionary, hook=_personal_terms_hook,
+        dials={'level': effective.level, 'vulgarity': effective.vulgarity, 'embellishment': setting.step})
     prepared_pins = Pins.prepare(pins, source, translator.dictionary, policy.seed)
     from .text import document_spans
 
@@ -510,7 +514,7 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
                             last >= 0 and boundaries[last][1] <= span.end,
                             index == len(spans) - 1, effective, quiet=reading.quiet_at(span.start),
                             last_contexts=source_contexts[last] if last >= 0 else frozenset(),
-                            written=written, mood=mood, tuning=tuning, pins=prepared_pins, source_start=span.start)
+                            written=written, mood=mood, tuning=tuning, pins=prepared_pins, source_start=span.start, personal_terms=personal)
         r = (unit or translator.translate)(source[span.start:span.end], level=policy.level, seed=policy.seed,
                                  vulgarity=policy.vulgarity, variety=policy.variety, registers=policy.registers,
                                  regions=policy.regions, unlock=policy.unlock, embedder=policy.embedder,
@@ -533,4 +537,4 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
     return DocumentResult("".join(pieces), source, effective.level, policy.seed, effective.vulgarity,
                           policy.variety, warnings, units, protected, genre, context[1], genre.setting(policy.embellishment),
                           effective.envelope()["profile_config"], effective.theme_policy, effective.registers,
-                          _tuning_report=TuningReport(tuning.popularity, used), dictionary_id=translator.dictionary.identity, allow_misreadable=effective.allow_misreadable)
+                          _tuning_report=TuningReport(tuning.popularity, used), personal_terms={"provided": personal.provided, "applied": sum(unit.result.personal_terms["applied"] for unit in units)}, dictionary_id=translator.dictionary.identity, allow_misreadable=effective.allow_misreadable)

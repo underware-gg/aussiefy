@@ -24,23 +24,48 @@ host sets explicitly. It's part of the Python API only: the CLI, the MCP tools a
 ([DD-029](../architecture/decisions/dd-029-changes-builder.md)). `aussiefy.guide.dial_descriptions()` gives every
 dial's settings with a one-line description each, for a page that lists them.
 
-## Frozen v3
+## V4 review draft
 
-The active changes'n rich\-card contracts are v3, using the response fields accepted in review
-`20261112-r2`. Packaged schemas are `aussiefy/data/changes.schema.json`, `cards.schema.json` and
-`lookup-cards.schema.json`. Now, the last checks the full\-card lookup projection, not every lookup outcome
-field or short\-card mode. The [historical draft](../drafts/changes-v3/README.md) and its illustrative
-examples retain their exact review bytes. Current fixtures in `tests/fixtures/changes/` come directly
-from the real emitter, including constructions, imagery, Markdown'n coded warnings.
+The workin' dev runtime emits changes'n rich cards v4. The coordinated v4 contract is still a
+review draft; it hasn't been frozen or released. Now, the site's accepted v3 pin remains usable. Packaged
+schemas are `aussiefy/data/changes.schema.json`, `cards.schema.json`, `lookup-cards.schema.json` and
+`selection.schema.json`. The lookup schema checks full cards, waitin'\-meanin' near citations and
+protected\-query explanations. Archived v3 review bytes remain in `docs/drafts/changes-v3/`; the real v4
+review examples are in `docs/drafts/changes-v4-r2/`. Current fixtures come directly from the emitter.
 
-`kept`, `held`, personal terms, plain alternatives'n selection results belong to the later contract.
+Every change includes `reading` (an authored concept and complete reader-facing en-AU `plain` name,
+or null) and `ruled_out`. Ruled-out meanings carry grammatical `words` rendered at that actual spot;
+an empty list is valid. They are distinct from curated near meanings. `selected_reading` names an explicit different interpretation chosen through an offered ruled-out
+word and its replay pin. The inferred reading remains intact; a client-side text edit alone does not
+create a selected-reading record. Fences and all ordinary replacement permissions remain enforced.
+
+`kept` marks caller\-owned Australian dictionary wording, including words above the current cap. Its
+output is exact, with empty masks; it takes no substitution roll or usage slot'n prevents inner edits.
+An ambiguous form retains all supported senses'n has `reading: null`; concept\-free garnish likewise
+has no invented match identity. The source option always remains available. Safe English choices use
+authored sentence forms'n the shared renderer; a definition is never guessed into a clause.
+
+`held` marks an understood meaning with no exact word in the loaded dictionary. It has unchanged,
+unmasked source text'n no alternatives. Fair dinkum, a rejected word, a protected phrase or an unclear readin'
+isn't a waitin' meanin'. Near substitutions retain the waitin' source `reading` and add
+`near: {concept, differs}` both to the selected change'n each applicable alternative.
+
+`personal` marks a request-local phrase replacement. It has no dictionary ID, score, evidence or maker.
+All translation envelopes include `personal_terms: {provided, applied}` outside tuning. See
+[request-local wording](toolkit.md#request-local-wording) for input validation and hosted controls.
+
+Every substitution offers the original English wording last as an explicit `plain` option of weight
+zero. Anyway, kept spots offer available grammatical English forms last. Literal/source choices are protected
+from garnish, drawl'n optional model rewrites. All dictionary replacement choices still obey the dials.
 
 ## Option identity and replay (B1)
 
-The option key is `entry_id ?? construction_id`. Within one change it appears **at most once across the
-combined alternatives and locked arrays**. Multiple riffs of the same entry are not separate options:
-choose one rendering for that entry in the response. The selected construction's own `construction_id`
-must appear in its alternatives. Keys may recur at different changes.
+Every option has an explicit `key` and `kind`: `entry:<id>`, `construction:<id>`,
+`source:<id>`, `plain:<internal-form-id>` or `personal:<content-digest>`. Use a word change's
+`option_key` to identify its selected option. Keys appear at most once across that change's combined
+alternatives and locked options; they may recur at other spots. Keep `entry_id` and `construction_id`
+for card joins, rather than deriving option identity from their nullable values. Multiple riffs of the
+same entry remain one option. A construction's selected ID must occur among its alternatives.
 
 For a fixed `dictionary_id`, a construction's ID persists across requests, seeds, candidate ordering,
 tuning and policy. Its existing algorithm is unchanged: compact UTF-8 JSON of
@@ -117,7 +142,7 @@ parts, uses `themes: [{name, tier}]` and a resolved `minimum_vulgarity`. Theme n
 metadata object; tiers use the request's resolved theme policy. There is no string-array alternative.
 
 The changes envelope and **every lookup outcome, including short mode and empty results**, carry
-`card_version: 3` and `dictionary_id` in v3. Lookup ranking and outcome fields retain their
+`card_version: 4` and `dictionary_id` in the v4 draft. Lookup ranking and outcome fields retain their
 existing meanings. `lookup-cards.schema.json` is explicitly a **full-card projection** schema: it checks
 the header and rich cards in results, ruled-out readings, protections and imagery. It is not a replacement
 for the complete lookup outcome contract or a schema for short-card mode. The two lookup examples include
@@ -200,21 +225,23 @@ emoji sequence can occupy several positions.
 
 ## How a swap is rendered
 
-Fair dinkum, every alternative is rendered as the engine would render it at that spot, with the rest of the output held
+Crikey, every alternative is rendered as the engine would render it at that spot, with the rest of the output held
 fixed. It takes the engine's own path: the form'n the spellin' the text keeps, the article fitted \("a toddler"
 becomes "an ankle biter"\), the entry's own replacement span, a stacked second idiom, a riff, and capitals. The
 sentence's garnish is put back as it was decided. Then the drawl, spellin''n swear infixes run over the spot
 alone, with the rolls the engine would give it there: each rule's count starts from the matches in the
 unchanged text before it, and reads the whole text's context \(quotes, questions, the words either side\).
 
-All of a spot's options share one region, so swappin' one in replaces the same span. The region widens a word
-where a drawl or infix match crosses its edge \("have not" becoming "haven't"\) or a neighbourin' match's
-lookaround reads it \("won't bloody well have").
+Substitution options share a replacement region. A kept marker and its source option cover exactly
+the caller-owned words; its other options may consume a surrounding article or object and therefore
+have wider regions. Always apply each option at its own `out_span`. The region widens a word
+where a drawl or infix match crosses its edge ("have not" becoming "haven't") or a neighbouring match's
+lookaround reads it ("won't bloody well have").
 
 Jeez Louise, a garnish's region widens the same way. An opener's or connective's region takes in the next word, whose capital
 it lowered, and a word more where a match runs on: in "Well, it is easy", a swap or removal of "Well" replaces
 "Well, it is", since the drawl's "it is" match crosses "it". A region never cuts the words another swap or
-garnish put in: it takes in the whole of one it reaches. Tell ya what, two regions can still share a word they both widened
+garnish put in: it takes in the whole of one it reaches. Two regions can still share a word they both widened
 over for one drawl match, as a connective's'n the swap after it share "he's". Then each covers the other.
 
 So anyway, each drawl, spellin' or infix match in the spot is let in or kept out exactly as the engine's own pass does it
@@ -245,7 +272,9 @@ assert replayed.text == original.text
 `changes` (change ID to `{key, pick}` options). It is absent from `ChangeSet.to_dict()`. A service can
 store or deliver it separately. `cs.replay_pins({change_id: option_key})` replaces current picks with
 offered alternatives; null selects an offered garnish removal. Unknown changes/options fail. Locked
-choices still need the caller to raise the relevant cap. A plain alternative is not added in v3.
+choices still need the caller to raise the relevant cap. Plain and request-local personal choices have
+no request-side replay variant in this draft. Their keys cannot be used as dictionary IDs or tuning terms.
+A site can apply the returned rendering locally; sharing these choices needs a coordinated pin extension.
 
 The version-1 request schema is `aussiefy/data/pins.schema.json`. A packet contains `dictionary_id`,
 `source_id` (SHA-256 of the exact source encoded as UTF-8), original `seed`, `complete` and `picks`.
@@ -298,7 +327,7 @@ word is both listed and authored, it has one mask, at the higher vulgarity.
 
 With `markup`, protected spans \(code, links, tags\) are masked through the pass'n restored after, keeping their
 length, so offsets'n renderings hold. With `markdown=True`, each prose unit's changes are placed in the
-document. Source offsets are document positions. Mate, each renderin' is escaped as its unit is, so custom slang can't
+document. Source offsets are document positions. Each renderin' is escaped as its unit is, so custom slang can't
 make markup. A whole re\-render with a swap pinned inside its unit reads the same.
 
 ## Cost
@@ -318,3 +347,18 @@ Tests: [the contract](../../tests/functional/test_changes.py),
 Version 2 adds optional applied `semantic_effects` to substitution alternatives and locked options, and
 recognises `quantity_approximation` alongside `opinion`. Existing spans, IDs and rendering rules are unchanged.
 Consumers validating against the strict v1 schema must use the v2 schema for this package version.
+
+
+## Suggestions for an output selection
+
+`suggest_selection(text, span=[start, end], ...translation options)` translates once, then interprets
+half-open code-point offsets in that translated output. The CLI is `aussiefy suggest-selection --span
+START END`; MCP offers `aussie_suggest_selection`. Use `selection.schema.json` for the response.
+
+The selection snaps to whole words and whole overlapping changes, maps back through actual edits,
+then offers separate `suggestions` groups with source/output regions, reading, ruled-out readings and
+rendered options. Groups are ordered `passed_over`, `kept`, `lookup`, `existing`; the last carries an
+actual substitution, personal choice or generated garnish already in the output. Multi-meaning spans
+have a null overall reading. A fallback must fit the source grammar and preserve fences, code and
+proper names; fuzzy similarity does not establish a reading. Apply each offered option at its own
+region and re-offset subsequent edits locally.

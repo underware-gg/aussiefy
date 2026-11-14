@@ -20,6 +20,8 @@ class Pins(PassObserver):
         pinned = self.picks.get((sent.index, det.start, det.pattern))
         if pinned is None:
             return choice
+        if isinstance(pinned, Candidate):
+            return pinned
         return next((c for c in keep if c.entry.id == pinned), None) or Candidate(
             self.dictionary.entries[pinned], 1.0, "pinned")
 

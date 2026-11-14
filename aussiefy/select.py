@@ -9,7 +9,7 @@ from . import morph
 from .detect import Detection, person_subject
 from .policy import Effective, weighted_index
 from .policy import Gated as Gated, dial_rejection as dial_rejection, policy_rejection as policy_rejection
-from .schema import Entry
+from .schema import Entry, NearMeaning
 from .constructions import Construction
 from .realise import question_form
 from .context import tone_weight
@@ -35,6 +35,19 @@ class Candidate:
     why: str
     semantic_effects: tuple[str, ...] = ()
     construction: Construction | None = None
+    kind: str = "entry"
+    literal: str | None = None
+    identity: str | None = None
+    near: NearMeaning | None = None
+    reading: Detection | None = None
+
+    @property
+    def key(self):
+        if self.identity is not None:
+            return self.identity
+        if self.kind == "entry":
+            return ('construction:' + self.construction.id) if self.construction else 'entry:' + self.entry.id
+        return self.kind + ':' + self.entry.id
 
 
 def mapping_effects(entry: Entry, det: Detection, *, narrator_opinion: bool,
@@ -134,7 +147,7 @@ def usable_forms(entry: Entry, det: Detection, *, literal: bool = False) -> list
 
 def candidates(det: Detection, entries: list[Entry], eff: Effective, used: dict[str, int],
                person_concepts: set[str], person_nouns: frozenset[str], *, mood: str | None = None,
-               constructions: dict[str, Construction] | None = None) -> tuple[list[Candidate], list[tuple[Entry, str]]]:
+               constructions: dict[str, Construction] | None = None, reading_for=None) -> tuple[list[Candidate], list[tuple[Entry, str]]]:
     eligible: list[Candidate] = []
     rejected: list[tuple[Entry, str]] = []
     concepts = set(det.concepts)
@@ -142,7 +155,8 @@ def candidates(det: Detection, entries: list[Entry], eff: Effective, used: dict[
     for e in entries:
         if not concepts & set(e.concept):
             continue
-        reason = policy_rejection(e, eff) or fit_rejection(e, det, eff, person_concepts, person_nouns, literal=e.id in constructions)
+        reading = reading_for(e) if reading_for is not None else det
+        reason = policy_rejection(e, eff) or fit_rejection(e, reading, eff, person_concepts, person_nouns, literal=e.id in constructions)
         if reason:
             rejected.append((e, reason))
             continue
@@ -169,10 +183,27 @@ def candidates(det: Detection, entries: list[Entry], eff: Effective, used: dict[
         if construction is not None:
             w = construction.weight * repeat
             why = f"construction {construction.family.id}, cadence {construction.cadence:g}, repeat {repeat:g}"
-        eligible.append(Candidate(e, w, why, construction=construction))
+        eligible.append(Candidate(e, w, why, construction=construction, reading=reading if reading is not det else None))
     eligible.sort(key=lambda c: c.entry.id)
     return eligible, rejected
 
 
 def weighted_pick(cands: list[Candidate], r: float) -> Candidate:
     return cands[weighted_index([c.weight for c in cands], r)]
+
+
+def narrow(keep: list[Candidate], rejected: list, variety: int, state) -> list[Candidate]:
+    """Drop what the text has already said, then (variety N) all but the N best fits."""
+    # a multi-word name for a thing reads as a tic the second time ("the Big Smoke ... the Big Smoke"): say it
+    # once and let the plain word stand after that. (Letting it back after a gap was tried: a long yarn then
+    # leans on "bugger all" and "some bastard" over and over.)
+    again = [c for c in keep if state.garnish_uses.get(c.entry.id)
+             or c.entry.frame == "np" and len(c.entry.form.split()) > 1 and state.entry_uses.get(c.entry.id)]
+    keep = [c for c in keep if c not in again]
+    rejected += [(c.entry, "already used in this text; the plain word can stand the second time") for c in again]
+    if variety and len(keep) > variety:
+        # variety N: pick among the N best fits only (1 = always the best); ties keep dictionary order
+        best = set(map(id, sorted(keep, key=lambda c: -c.weight)[:variety]))
+        rejected += [(c.entry, f"variety {variety}: not among the {variety} best fits") for c in keep if id(c) not in best]
+        keep = [c for c in keep if id(c) in best]
+    return keep

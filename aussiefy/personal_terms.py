@@ -44,7 +44,11 @@ def _phrase(value, field):
     return ' '.join(value.split())
 
 
-def prepare(raw, dictionary) -> PersonalTerms:
+def prepare(raw, dictionary, *, hook=None, dials=None) -> PersonalTerms:
+    if hook is not None:
+        if raw is not None:
+            raise UserError('personal_terms come from the host for this call')
+        raw = hook(**dials)
     if raw is None:
         return PersonalTerms()
     if not isinstance(raw, list) or len(raw) > MAX_PERSONAL_TERMS:
@@ -68,3 +72,62 @@ def prepare(raw, dictionary) -> PersonalTerms:
             raise UserError('personal_terms has conflicting terms for the same source phrase')
         items.setdefault(key, parsed)
     return PersonalTerms(len(raw), tuple(items.values()))
+
+
+@dataclass(frozen=True)
+class PersonalMatch:
+    term: PersonalTerm
+    detection: object
+
+
+def find(tokens, prepared, readings, dictionary, tags, *, complete=True):
+    from . import pos
+    from .detect import Detection, check_frame
+    from .matcher import compile_pattern, match_at
+    from .text import tokenize
+    from dataclasses import replace
+
+    matches = []
+    for term in prepared.items:
+        phrase_tokens = tokenize(term.phrase)
+        plain = tuple(token.norm for token in phrase_tokens)
+        for start, token in enumerate(tokens):
+            if not token.is_word:
+                continue
+            exact_end = start + len(plain)
+            exact = tuple(t.norm for t in tokens[start:exact_end]) == plain
+            tag = tags[start]
+            frames = (('np',) if tag in pos.NAMES | pos.NOUNS | {'DT', 'PRP$', 'PRP'} else
+                      ('vp',) if tag in pos.VERBS else
+                      ('predicate_adj', 'adj') if tag.startswith('JJ') else
+                      ('adv',) if tag.startswith('RB') else ('np', 'vp', 'adj', 'adv', 'interjection'))
+            detection = None
+            for frame in frames:
+                pattern = compile_pattern(term.phrase, frame, (), 3)
+                matched = match_at(pattern, tokens, start, tags=tags)
+                if matched is None:
+                    continue
+                detection = check_frame(matched, tokens, dictionary.adjective_nouns, tags, complete=complete)
+                if detection is not None:
+                    break
+            if detection is None and exact:
+                detection = Detection(start, exact_end, (), frames[0], 3, 'personal', term.phrase)
+            if detection is None:
+                continue
+            inferred = [reading for reading in readings
+                        if reading.start == detection.start and reading.end == detection.end
+                        and (reading.source_pattern is None or reading.source_pattern.fence is None)]
+            if len(inferred) == 1:
+                detection = replace(inferred[0])
+            else:
+                detection = replace(detection, concepts=(), source_pattern=None, direct=set())
+            matches.append(PersonalMatch(term, detection))
+    # Longer explicit phrases own their whole span; request order breaks identical-length ties.
+    occupied = set()
+    selected = []
+    for matched in sorted(matches, key=lambda m: (-(m.detection.end - m.detection.start), m.detection.start)):
+        span = set(range(matched.detection.start, matched.detection.end))
+        if not span & occupied:
+            selected.append(matched)
+            occupied.update(span)
+    return sorted(selected, key=lambda m: m.detection.start)

@@ -175,6 +175,7 @@ class Entry(TermMetadata):
     number: str = "any"             # np only: count, mass, plural-only referents, or unrestricted (any)
     grammar: GrammarRequirements = field(default_factory=GrammarRequirements)
     weight: float = 1.0
+    plain_form: str = ""          # English sentence wording for a source form without a concept
     other_sense: str = ""          # curator note: own-form recognition needs independent sense evidence
     plain_sense: bool = False       # the form has an ordinary English sense too ("shame", "a bit rough"): lint
                                     # doesn't flag it when gated, since it can't tell the senses apart
@@ -267,7 +268,7 @@ class Concept:
     negative_examples: tuple[str, ...] = ()  # reviewed contrasts that must not establish this meaning
     credit: str | tuple[Credit, ...] | None = None
     search_words: tuple[str, ...] = ()  # exact lookup aliases, never source triggers
-    plain_forms: dict[str, str] = field(default_factory=dict)  # sentence wording by grammatical frame
+    plain_forms: dict[str, str | tuple[str, ...]] = field(default_factory=dict)  # sentence wording by grammatical frame
     near: tuple[NearMeaning, ...] = ()  # reviewed, directed stand-ins; never synonyms inferred at runtime
 
 
@@ -279,7 +280,7 @@ ENTRY_KEYS = tuple(dict.fromkeys((
     "id", "form", "variants", "spellings", "insult", "concept", "frame", "class", "plural", "number", "grammar", "slots", "intensity", "vulgarity",
     "mask", "profane", "incoherence", "register", "region", "replaces", "status", "flags", "plain_sense", "other_sense", "type", "placement", "when",
     "stretch",
-    "tone", "weight", "semantic_effects", "semantic_degree", "gloss", "notes", "key_sha256", "promoted_from", *METADATA_KEYS,
+    "tone", "weight", "semantic_effects", "semantic_degree", "gloss", "plain_form", "notes", "key_sha256", "promoted_from", *METADATA_KEYS,
 )))
 
 
@@ -391,6 +392,17 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
     if frame != "clause" and "subj" in slots:
         raise SchemaError(f"{entry_id}: only clause frames may use {{subj}}")
 
+    grammar = parse_requirements(raw.get('grammar'), entry_id)
+    if grammar.position != 'source' and frame != 'adv':
+        raise SchemaError(f'{entry_id}: grammar.position before_verb requires an adv frame')
+
+    plain_form = raw.get('plain_form', '')
+    if 'plain_form' in raw:
+        if not isinstance(plain_form, str) or not plain_form or plain_form != plain_form.strip() or '\n' in plain_form or '\r' in plain_form:
+            raise SchemaError(f'{entry_id}: plain_form must be non-empty single-line sentence wording')
+        parse_entry({'id': 'plain-' + entry_id.replace(':', '-'), 'form': plain_form,
+                     'frame': frame, 'concept': ['PLAIN_ENGLISH']})
+
     concept = _tuple(raw.get("concept"), "concept", entry_id)
     semantic_degree = parse_degrees(raw.get('semantic_degree', {}), entry_id)
     if set(semantic_degree) - set(concept):
@@ -464,7 +476,7 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
         type=etype,
         plural=raw.get("plural"),
         number=_number(raw, entry_id),
-        grammar=parse_requirements(raw.get('grammar'), entry_id),
+        grammar=grammar, plain_form=plain_form,
         weight=float(weight),
         cls=cls,
         placement=placement,
@@ -581,13 +593,21 @@ def parse_concept(cid: str, raw: dict) -> Concept:
     plain_forms = raw.get('plain_forms', {})
     if not isinstance(plain_forms, dict) or set(plain_forms) - set(FRAMES):
         raise SchemaError(f'concept {cid}: plain_forms must map known frames to sentence wording')
-    for frame, form in plain_forms.items():
-        if (not isinstance(form, str) or not form or form != form.strip()
-                or '\n' in form or '\r' in form or any(not (PLACEHOLDER_RE.fullmatch(word)
-                or re.fullmatch(r"[^\W\d_]+(?:[-'’][^\W\d_]+)*", word)) for word in form.split())):
-            raise SchemaError(f'concept {cid}: plain_forms.{frame} must contain words and supported slots only')
-        parse_entry({'id': 'plain-' + cid.lower().replace('_', '-'), 'form': form,
-                     'frame': frame, 'concept': [cid]})
+    parsed_plain_forms = {}
+    for frame, value in plain_forms.items():
+        forms = value if isinstance(value, list) else [value]
+        if not forms:
+            raise SchemaError(f'concept {cid}: plain_forms.{frame} needs at least one sentence form')
+        for form in forms:
+            if (not isinstance(form, str) or not form or form != form.strip()
+                    or '\n' in form or '\r' in form or any(not (PLACEHOLDER_RE.fullmatch(word)
+                    or re.fullmatch(r"[^\W\d_]+(?:[-'’][^\W\d_]+)*", word)) for word in form.split())):
+                raise SchemaError(f'concept {cid}: plain_forms.{frame} must contain words and supported slots only')
+            parse_entry({'id': 'plain-' + cid.lower().replace('_', '-'), 'form': form,
+                         'frame': frame, 'concept': [cid]})
+        if len(set(forms)) != len(forms):
+            raise SchemaError(f'concept {cid}: plain_forms.{frame} has duplicate sentence forms')
+        parsed_plain_forms[frame] = tuple(forms) if isinstance(value, list) else value
     return Concept(
         id=cid,
         description=raw.get("description", ""),
@@ -605,7 +625,7 @@ def parse_concept(cid: str, raw: dict) -> Concept:
         lookup_only=_bool(raw, "lookup_only", f"concept {cid}"),
         plain=plain,
         search_words=tuple(search_words),
-        plain_forms=dict(plain_forms),
+        plain_forms=parsed_plain_forms,
         near=parse_near(cid, raw.get("near", [])),
         examples=_tuple(raw.get("examples"), "examples", f"concept {cid}"),
         negative_examples=_tuple(raw.get('negative_examples'), 'negative_examples', f'concept {cid}'),

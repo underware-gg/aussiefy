@@ -40,6 +40,7 @@
 #
 embellishments:
   deadset:
+    near_meanings: 0
     invention: false
     quantity_approximation: false
     garnish: []
@@ -54,6 +55,7 @@ embellishments:
       an everyday Australian one taking it, at the level's weight. Add nothing: no openers, tag-ons, asides,
       reactions or closing lines.
   dinkum:
+    near_meanings: 1
     invention: false
     quantity_approximation: true
     contextual_riffs: true
@@ -76,6 +78,7 @@ embellishments:
       obligation, a decision, a finding or a stated aim keeps its verb's weight ("we consider you responsible"
       isn't "we reckon"; "reaffirmed" isn't "doubled down"; a goal isn't "while they're at it").
   troppo:
+    near_meanings: 2
     invention: true
     quantity_approximation: true
     solemn_comic_terms: true
@@ -100,6 +103,7 @@ embellishments:
 
 genres:
   general:
+    near_meanings: true
     quantity_approximation: true
     formal_to_rework: true
     garnish: all
@@ -109,6 +113,7 @@ genres:
     keep_quotes: false
     guidance: Keep the original meaning and structure; give its prose the selected voice.
   custom:
+    near_meanings: false
     quantity_approximation: false
     check_length: false
     formal_to_rework: false
@@ -119,6 +124,7 @@ genres:
     keep_quotes: false
     guidance: Enable only the explicitly configured optional behaviours.
   story:
+    near_meanings: true
     quantity_approximation: true
     term_domains: [story]
     formal_to_rework: true
@@ -131,6 +137,7 @@ genres:
       A story: keep every event and line of dialogue's meaning. A play keeps its script layout (speaker labels,
       stage directions).
   personal:
+    near_meanings: true
     quantity_approximation: true
     term_domains: [personal]
     formal_to_rework: true
@@ -144,6 +151,7 @@ genres:
       their point, and Aussify it the way they would talk. Keep a letter's greeting and sign-off in place, a
       speech's jokes and puns intact.
   news:
+    near_meanings: false
     quantity_approximation: false
     term_domains: [news]
     dateline_context: true
@@ -157,6 +165,7 @@ genres:
       News or a notice: a local reporter's Aussie. Keep every fact, name, number, date and quote; quoted speech
       and official statements stay as said. An obituary is respectful.
   instructions:
+    near_meanings: false
     quantity_approximation: false
     term_domains: [instructions]
     command_context: true
@@ -171,6 +180,7 @@ genres:
       numbered and bulleted lists as lists. Aussify the words (servo, esky, bin, chemist) and the connecting
       prose; no insults aimed at the reader. Safety comes before colour: never make light of a hazard.
   technical:
+    near_meanings: false
     quantity_approximation: false
     term_domains: [technical]
     formal_to_rework: false
@@ -184,6 +194,7 @@ genres:
       number exactly; leave code and markup alone. Aussify the plain prose around them; no slang for a
       technical term.
   official:
+    near_meanings: false
     quantity_approximation: false
     term_domains: [official]
     formal_to_rework: false

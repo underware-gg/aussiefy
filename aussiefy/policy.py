@@ -84,6 +84,7 @@ class DocumentOverrides:
     entry_riffs: bool | None = None
     riff_exaggeration: int | None = None
     riff_association: int | None = None
+    near_meanings: int | None = None
     narrator_opinion: bool | None = None
     solemn_comic_terms: bool | None = None
     quantity_approximation: bool | None = None
@@ -121,8 +122,8 @@ class DocumentOverrides:
                 data[key] = tuple((name, value[name]) for name in sorted(value))
             if key in booleans and type(value) is not bool:
                 raise UserError(f"document_config.{key} must be true or false")
-            if key in ("riff_exaggeration", "riff_association"):
-                high = 2 if key == "riff_exaggeration" else 1
+            if key in ("riff_exaggeration", "riff_association", "near_meanings"):
+                high = 1 if key == "riff_association" else 2
                 if type(value) is not int or not 0 <= value <= high:
                     raise UserError(f"document_config.{key} must be an integer 0–{high}")
             if key in ("guidance", "embellishment_guidance") and not isinstance(value, str):

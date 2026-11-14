@@ -15,6 +15,8 @@ from pathlib import Path
 from typing import Any
 
 from . import claude
+from .literal_spans import mask_literals, restore_literals
+from .protected import protected_runs
 from .claude import DEFAULT_MODEL
 from .engine import Result, Translator, default_translator
 from .errors import UserError
@@ -38,6 +40,7 @@ of PLANNED phrases the engine chose. Rewrite the DRAFT so the joins sound natura
 grammar around the inserted phrases, punctuation, capitalisation and rhythm.
 
 Rules:
+- Copy every opaque private-use character run exactly, without splitting or duplicating it.
 - Keep every PLANNED phrase. You may adjust its inflection, phonetic spelling or capitalisation,
   but keep its words.
 - Do not add slang, idioms, openers, tag-ons or swears that are not in the plan.
@@ -58,7 +61,8 @@ def surface_rewrite(result: Result, client: Any = None, model: str = DEFAULT_MOD
     dictionary = (translator or default_translator()).dictionary
     phonetic = dictionary.phonetic
     plan = result.decisions()
-    planned = [s["replacement"] for s in plan["substitutions"]] + [g["text"] for g in plan["garnish"]]
+    planned = [s["replacement"] for s in plan["substitutions"] if s["kind"] == "entry"] + [g["text"] for g in plan["garnish"]]
+    literal = mask_literals(result.text, result._owned_spans)
     surface: dict[str, Any] = {"model": model, "planned": planned}
     result.deterministic_text = result.text
     result.surface = surface
@@ -68,12 +72,17 @@ def surface_rewrite(result: Result, client: Any = None, model: str = DEFAULT_MOD
     try:
         text = claude.call_json(client or claude.client(), model=model, system=SYSTEM, max_tokens=8000,
                                 schema=SURFACE_SCHEMA, prompt=json.dumps(
-                                    {"ORIGINAL": result.source, "DRAFT": result.text, "PLANNED": planned,
+                                    {"ORIGINAL": result.source, "DRAFT": literal.text, "PLANNED": planned,
                                      "THEME_PERMISSIONS": theme_permissions(result.theme_policy), "THEME_RULES": result.theme_policy.rules()},
                                     ensure_ascii=False))["text"].strip()
     except claude.Error as exc:  # offline, no key, declined, a bad reply: the deterministic output stands
         surface.update(outcome="fell_back", status=f"kept deterministic: {type(exc).__name__}: {exc}")
         return result
+    if protected_runs(text) != protected_runs(literal.text):
+        surface.update(outcome="fell_back", rejected_text=text,
+                       status="kept deterministic: rewrite changed owned wording")
+        return result
+    text, owned = restore_literals(literal, text)
     missing = [p for p in planned if not phrase_kept(text, p, phonetic)]
     if missing:
         surface.update(outcome="fell_back", rejected_text=text,
@@ -85,6 +94,7 @@ def surface_rewrite(result: Result, client: Any = None, model: str = DEFAULT_MOD
         return result
     surface.update(outcome="applied", status="applied")
     result.text = text
+    result._owned_spans = owned
     return result
 
 
@@ -110,7 +120,8 @@ around them. At higher levels, an Aussie speaker leans on swear infixes within t
 Use Australian spelling (honoured, colour, organise).
 
 You are also given a DRAFT in which a rule-based engine has already inserted some PLANNED phrases. Keep
-every planned phrase (inflection may change). Don't add openers, tag-ons or swears at the start or
+every planned phrase (inflection may change). Copy opaque private-use character runs exactly, without
+splitting or duplicating them; they stand for wording the caller owns. Don't add openers, tag-ons or swears at the start or
 end of the sentence (no "Strewth," no ", mate"), because the engine adds those separately.
 Respect THEME_RULES (allowed_through is the maximum tag tier; -1 forbids all, 3 allows all), with THEME_PERMISSIONS showing only defaults. Reviewed tag tiers can differ from those defaults; retain the original's own subject matter. Return one
 sentence only."""

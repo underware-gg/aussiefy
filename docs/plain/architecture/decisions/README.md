@@ -76,6 +76,8 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 
 | [DD-057](../../../architecture/decisions/dd-057-permanent-public-entry-ids.md) | Permanent public entry keys, aliases, tombstones and release continuity | Accepted |
 
+| [DD-058](../../../architecture/decisions/dd-058-owned-wording-and-selection.md) | Shared source ownership, selection mapping and directed near candidates | Implemented; v4 draft under review |
+
 ## By topic
 
 - **Engine:** DD-001, DD-003, DD-007, DD-029, DD-030, DD-034, DD-035, DD-036, DD-037, DD-039, DD-041, DD-044

@@ -17,6 +17,7 @@ class GrammarRequirements:
     nominal_roles: tuple[str, ...] = ()
     aspect: str = 'unknown'
     voice: str = 'unknown'
+    position: str = 'source'
 
     def to_dict(self):
         out = {}
@@ -30,6 +31,8 @@ class GrammarRequirements:
             out['aspect'] = self.aspect
         if self.voice != 'unknown':
             out['voice'] = self.voice
+        if self.position != 'source':
+            out['position'] = self.position
         return out
 
 
@@ -55,7 +58,7 @@ def grammar_evidence(requirements, det, tokens, tags, *, complete: bool = True) 
 def parse_requirements(raw, owner: str) -> GrammarRequirements:
     if raw is None:
         return GrammarRequirements()
-    if not isinstance(raw, dict) or set(raw) - {'following', 'not_following', 'nominal_roles', 'aspect', 'voice'}:
+    if not isinstance(raw, dict) or set(raw) - {'following', 'not_following', 'nominal_roles', 'aspect', 'voice', 'position'}:
         raise SchemaError(f'{owner}: grammar has invalid fields')
     following = raw.get('following')
     shapes = {'none', 'adverb', 'np', 'content', 'infinitive', 'verb_base'}
@@ -75,7 +78,10 @@ def parse_requirements(raw, owner: str) -> GrammarRequirements:
         raise SchemaError(f'{owner}: grammar.aspect must be unknown, state, event or either')
     if not isinstance(voice, str) or voice not in {'unknown', 'active', 'passive', 'either'}:
         raise SchemaError(f'{owner}: grammar.voice must be unknown, active, passive or either')
-    return GrammarRequirements(following=tuple(dict.fromkeys(following)) if following is not None else None,
+    position = raw.get('position', 'source')
+    if not isinstance(position, str) or position not in {'source', 'before_verb'}:
+        raise SchemaError(f'{owner}: grammar.position must be source or before_verb')
+    return GrammarRequirements(position=position, following=tuple(dict.fromkeys(following)) if following is not None else None,
         not_following=tuple(dict.fromkeys(forbidden)), nominal_roles=tuple(dict.fromkeys(roles)), aspect=aspect, voice=voice)
 
 
@@ -121,6 +127,13 @@ def source_verb_shape(det, tokens, tags) -> tuple[str | None, str | None]:
 def grammar_problem(entry, det, tokens, tags, *, complete: bool = True,
                     evidence: GrammarEvidence | None = None) -> str | None:
     requirement = entry.grammar
+    if requirement.position == 'before_verb' and det.moved_prefix is None:
+        index = det.end
+        while index < len(tokens) and tags[index].startswith('RB'):
+            index += 1
+        from .pos import VERBS
+        if index >= len(tokens) or tags[index] not in VERBS:
+            return 'cannot establish a before-verb adverb position'
     if evidence is None:
         evidence = grammar_evidence((requirement,), det, tokens, tags, complete=complete)
     if requirement.nominal_roles and evidence.nominal_role not in requirement.nominal_roles:

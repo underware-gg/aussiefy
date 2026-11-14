@@ -41,9 +41,9 @@ def test_plans_and_editor_choices_cannot_downgrade_appetite(translator):
     changes = translate_changes(source, translator=translator, **OPTIONS)
     offered = [o for c in changes.changes if c['kind'] == 'substitution'
                for o in c['alternatives'] + c['locked']]
-    assert offered
+    assert offered and any(o['kind'] == 'plain' and o['weight'] == 0 for o in offered)
     assert all(translator.dictionary.entries[o['entry_id']].semantic_degree.get('HUNGRY') == 'strong'
-               for o in offered)
+               for o in offered if o['kind'] != 'plain')
     assert translate_changes('She is very hungry.', translator=translator, **OPTIONS).text != 'She is very hungry.'
 
 

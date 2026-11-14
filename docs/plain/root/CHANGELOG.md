@@ -5,12 +5,20 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Implement the coordinated v4 review draft across Python, CLI and MCP: exact kept/held source spots,
+  grammatical English choices, call-local personal terms and host controls, output-selection suggestions,
+  authored reading/ruled-out citations, and article-free headword keys on cards and lists. Protect caller
+  wording through garnish, drawl and optional rewriting. The v4 schema remains a draft pending site review.
+- Enable curated near meanings only for genuinely waiting meanings under their reviewed thresholds,
+  graded probabilities and ordinary eligibility, with per-option citations and lookup explanations.
+
+
 - Reconcile scoped EW4 searches for every stored term and the completed 125-entry crowd-only follow-through,
   retain their actual dates and source limits, and calibrate versioned evidence weights from the source hunt.
   Preserve testimony separately; refine provisional drover/nature-strip/sloshed glosses and declare the
   personal judgement in some mongrel and an old coot through the existing opinion mechanism.
 - Prepare directed near-meaning data, source-owned-term ambiguity notes and internal personal-term
-  validation, with a non-active v4 schema proposal. Production responses remain v3 pending activation.
+  validation at the earlier foundations checkpoint, whose production responses remained v3.
 
 - Supply provisional plain wording and search words for the remaining meanings, preserving Rob's
   approved sample and all source triggers. Add paged concept discovery with eligible-entry counts
@@ -23,7 +31,7 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 - Reject raw slot syntax in reader-facing glosses across dictionary loads and corrections. Reword the
   knock-back and bend-ear glosses, retaining their entry IDs, headwords and grammar.
 - Share the existing article-free headword comparison helper without changing A-to-Z keys. The public
-  headword_key card field is reserved for slice 7's planned coordinated contract version.
+  headword_key card field joins slice 7's coordinated v4 draft.
 
 - Make published core entry IDs permanent: retain rename/merge aliases, reserve removed IDs, resolve
   old URLs across Python/CLI/MCP, and check continuity against the exact previous release and dev baseline.

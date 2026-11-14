@@ -11,6 +11,8 @@ from aussiefy import changes as C
 from aussiefy.markdown import document_changes
 from aussiefy.markup import mask
 from aussiefy.policy import resolve
+from aussiefy.schema import Entry
+from aussiefy.select import Candidate
 
 ROOT = Path(__file__).resolve().parents[2]
 EVERYDAY = sorted((ROOT / "tests" / "corpus" / "everyday").glob("*/*.txt"))
@@ -57,6 +59,13 @@ def _spots(watch, result, builder, translator):
         yield c, spot, start, end, cs.withheld
 
 
+def _pick(option, spot):
+    if option['kind'] == 'plain':
+        return Candidate(Entry('source', spot.rec.text, spot.rec.det.concepts, spot.rec.det.frame),
+                         0, 'explicit plain English', kind='plain', literal=spot.rec.text)
+    return option['entry_id']
+
+
 def _region(translator, text, options, pins, sentence, start, end):
     """The text over a region's tokens in a pinned re-render, mapped through its own passes."""
     watch, result, builder = _build(translator, text, options, Pinned(translator.dictionary, **pins))
@@ -80,14 +89,14 @@ def test_every_alternative_and_locked_option_is_the_pinned_re_render(translator,
             assert pick["rendered"] == c["output"], (path.name, c["id"])
             key = (spot.sent.index, spot.rec.det.start, spot.rec.det.pattern)
             for o in c["alternatives"] + c["locked"]:
-                entry = d.entries[o["entry_id"]]
-                riffed = any(r.text in o["rendered"] for r in entry.riffs)
+                entry = d.entries[o['entry_id']] if o['entry_id'] else None
+                riffed = bool(entry) and any(r.text in o["rendered"] for r in entry.riffs)
                 shown["riff"] += riffed
-                shown["infix"] += o["vulgarity"] > entry.vulgarity
+                shown["infix"] += o["vulgarity"] > (entry.vulgarity if entry else 0)
                 shown["stack"] += o["rendered"].count(", ") > riffed
                 if o["entry_id"] == c["entry_id"]:
                     continue
-                got = _region(translator, text, options, {"picks": {key: o["entry_id"]}}, spot.sent.index, start, end)
+                got = _region(translator, text, options, {"picks": {key: _pick(o, spot)}}, spot.sent.index, start, end)
                 assert o["rendered"] == got, (path.name, c["id"], o["entry_id"])
                 checked += 1
     assert checked > 50
@@ -151,7 +160,7 @@ def test_adjacent_swaps_agree_with_a_pinned_re_render(translator, setting):
             assert one[0]["out_span"][1] <= two[0]["out_span"][0]
             chosen = [(c, spot, start, end, next(o for o in c["alternatives"] if o["entry_id"] != c["entry_id"]))
                       for c, spot, start, end, _ in (one, two)]
-            picks = {(spot.sent.index, spot.rec.det.start, spot.rec.det.pattern): o["entry_id"]
+            picks = {(spot.sent.index, spot.rec.det.start, spot.rec.det.pattern): _pick(o, spot)
                      for c, spot, start, end, o in chosen}
             pinned_watch, pinned, pinned_builder = _build(translator, text, options,
                                                           Pinned(translator.dictionary, picks))
@@ -229,7 +238,7 @@ def test_alternatives_in_masked_markup_are_the_pinned_re_render(translator):
         key = (spot.sent.index, spot.rec.det.start, spot.rec.det.pattern)
         for o in c["alternatives"] + c["locked"]:
             if o["entry_id"] != c["entry_id"]:
-                assert o["rendered"] == _region(translator, text, options, {"picks": {key: o["entry_id"]}},
+                assert o["rendered"] == _region(translator, text, options, {"picks": {key: _pick(o, spot)}},
                                                 spot.sent.index, start, end)
                 checked += 1
     assert checked > 5 and "`make fix`" in result.text
@@ -268,7 +277,7 @@ def test_the_document_route_is_the_pinned_re_render(translator, seed):
                      and c["src_span"][0] <= offset + spot.rec.span[0] < c["src_span"][1])
             for o in c["alternatives"] + c["locked"]:
                 if o["entry_id"] != c["entry_id"]:
-                    again = {d["id"]: d for d in pinned(i, picks={key: o["entry_id"]}).changes}
+                    again = {d["id"]: d for d in pinned(i, picks={key: _pick(o, spot)}).changes}
                     assert again[c["id"]]["output"] == o["rendered"], (c["id"], o["entry_id"])
                     checked["substitution"] += 1
         garnish = [c for c in base.changes if c["kind"] == "garnish" and c.get("placement") != "riff"

@@ -21,6 +21,7 @@ Without a command, arguments go to `translate`: `aussiefy "some text" -l 4` is s
 | `lookup` | Aussie options for a meaning, or what a term means |
 | `lint` | Lint an Aussified draft (exit 1 if there are issues) |
 | `guide` | The voice, language limits and craft rules for a level and vulgarity |
+| `suggest-selection --span START END` | Render choices for a selection in the translated output |
 | `plan` | The engine's draft, planned phrases and difficult sentences, as JSON |
 | `verify` | Deterministic severity-based checks against `--original` ([verification](verification.md)) |
 | `judge` | Blind comparison: `brief`, `read`, `tally`, optional paid `run`/`unharnessed` ([judging](../contributor/judging.md)) |
@@ -147,3 +148,9 @@ text whose file stem is NAME, whose lines still in the original wording are also
 | 2 | A bad dictionary, setting or argument: a missing or unreadable file, a corrupt config or reply cache, an unknown dial or policy name, a failed `embedder install`, or no Claude SDK or credentials for `dev tag` |
 | 3 | `dev scrape` refused a reference-only source (see `aussiefy/data/source_policy.yaml`) |
 | 4 | An LLM mode fell back to the engine's draft: `yarn`, `--surface` or `--rewrite` could not reach Claude, or its result was not accepted. Having nothing to polish is not a fallback |
+
+
+`--personal-terms JSON` forwards call-local `{phrase, term, vulgarity?}` records on translate, plan,
+yarn, yarn-tools and suggest-selection. Selection offsets are Unicode code points in the resulting
+translated text; the command returns JSON with grouped, grammatical options. See the
+[changes draft](changes.md#suggestions-for-an-output-selection) for regions and choice keys.

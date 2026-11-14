@@ -1,0 +1,18 @@
+# Aussiefy v4 draft 20261114-r2
+
+For site review, not a freeze. The pushed dev checkpoint baf31e01da362681f6ae6d0d92641916613832fc still emits v3. This bundle comes from the uncommitted working runtime after that checkpoint. Its examples are real emitted responses, not hand-edited proposals. The full repository gate and final review are still in progress.
+
+Six self-contained JSON Schema 2020-12 schemas, fifteen real changes examples, seven selection examples, two discovery pages and five lookups validate. Changes also pass the package semantic checker, including source/output bounds, key uniqueness, construction identity/parts, B2 makers, Result warnings, authored readings and near relations.
+
+## Contract clarifications since r1
+
+- Use explicit option key/kind and change.option_key. Null entry_id is valid for plain/personal/construction choices. Source keys retain a real card ID. Keys persist within dictionary_id and are unique across alternatives and locked options.
+- A kept marker covers exactly its unchanged owned source words. Its source option has that same out_span, output and empty masks, even above the cap. Other options may have wider out_span when the renderer must consume a surrounding article or bound object. Apply each option at its own out_span. These are coordinates in the actual current output; masks, parts and riffs are local to each rendered option.
+- An ambiguous kept form, or concept-free dictionary garnish, has reading:null and no invented match. English choices use authored internal sentence forms and the common renderer. Some English forms remain provisional curation; three Tradie proposals are held for Rob. A source choice always remains available even where no safe English form exists.
+- Selection groups are ordered passed_over, kept, lookup, existing. existing carries choices for an actual substitution, personal change or generated garnish already in the output. Multiple meanings stay separate; overall reading is null. Candidate fallback preserves fences, editable boundaries and grammatical context; it does not assign a meaning from fuzzy similarity alone.
+- Near appears on both a selected change and each near alternative, citing the waiting source's authored directed relation. Automatic use is disabled at Deadset, inside fences, where an exact word exists, or for excluded genres. Lookup may explain a relation at Deadset without enabling automatic substitution.
+- Existing dictionary/construction/riff replay pins remain supported. Explicit plain choices and request-local personal phrases have no new replay-pin variant in this draft. A site can apply their rendered replacements locally; sharing them needs a later coordinated request contract. Do not treat these keys as dictionary IDs or tuning terms.
+- list_entries(concept=...) intersects the other filters/dials. list_concepts.entry_count equals that eligible total. plain is complete final reader-facing en-AU meaning wording; the site need not rewrite provisional curation. headword_key is the engine's existing article-free key, retaining punctuation/hyphens, with no spelling/ID renames.
+- Personal request lists are call-local, never dictionary evidence or tuning. Host hooks run once per request after resolving dials; disabled/host-owned lists are hidden from client tool schemas and rejected if supplied. Source/personal wording is protected from garnish, drawl and optional model rewrites.
+
+Review explicit keys/kinds, per-option regions, grouped selection choices, null reading cases, and near citations. Independent work continues while the site reviews. No staging/main/tag/release/deploy is authorised.
