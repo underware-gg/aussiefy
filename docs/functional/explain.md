@@ -34,8 +34,8 @@ substitutions:
   [8:13] "crazy" -> "Do you have a kangaroo loose in your top paddock"
       concept CRAZY, frame predicate_adj, intensity 3, via trigger "crazy"; captures subj=you, be=Are
       substituted: roll 0.585 < p 0.9
-      chosen roos-top-paddock (p=0.10): w=0.450 (base 1 x intensity-fit 0.50 [4 vs 3] x direct 1 x metadata 1.00 [score 0; australian] x repeat 1.00 x p(idiom) 0.9 x tone-fit 1 (plain/light))
-      other candidates: mad-as-a-cut-snake 0.13, mad-as-a-meat-axe 0.13, off-rocker 0.10, off-tree 0.11, snags-short-of-a-barbie 0.20, troppo 0.24
+      chosen roos-top-paddock (p=0.09): w=0.450 (base 1 x intensity-fit 0.50 [4 vs 3] x direct 1 x metadata 1.00 [score 0; australian] x repeat 1.00 x p(idiom) 0.9 x tone-fit 1 (plain/light))
+      other candidates: mad-as-a-cut-snake 0.13, mad-as-a-meat-axe 0.13, off-rocker 0.09, off-tree 0.12, snags-short-of-a-barbie 0.19, troppo 0.25
       rejected:
         - mad-as-a-gumtree: needs level 5
 

@@ -278,6 +278,9 @@ HAPPY:
     predicate_adj: ["happy@2", "delighted@4", "thrilled@4", "over the moon@4", "very pleased@3", "ecstatic@5",
                     "pleased@2", "excited@3", "chuffed@3", "elated@4", "jubilant@4", "overjoyed@4", "euphoric@5"]
 GET_EXCITED:
+  # ED15 R75/R77: curated direction and setting; differs is provisional curator wording.
+  near:
+  - {"concept": "HYPER", "differs": "Describes energetic excitement rather than becoming excited.", "setting": "troppo"}
   description: Become worked up or enthused, rather than pleased at an outcome.
   triggers:
     vp: [get excited, get all excited, get so excited, get too excited, get overexcited]
@@ -1388,6 +1391,9 @@ COMMITTED:
     # to birds), "committed to" (prison, memory) or "determined to" ("dead set on win")
     adv: ["intent on", "hell-bent on", "hellbent on", "bent on !=one|both|all|his|her|their", "determined on"]
 DEVOTION:
+  # ED15 R75/R77: curated direction and setting; differs is provisional curator wording.
+  near:
+  - {"concept": "LOYAL", "differs": "Describes someone as loyal rather than naming loyalty itself.", "setting": "dinkum"}
   plain: loyalty
   examples: [Their loyalty never wavered.]
   description: Loyal devotion to a cause or to each other.
@@ -1452,6 +1458,9 @@ ACCEPT_AS_TRUE:
   plain_forms: {vp: believe}
 # Each keeps one polarity, so an entry cannot flip or flatten the source's regard; negation stays outside.
 REGARD_HIGHLY:
+  # ED15 R75/R77: curated direction and setting; differs is provisional curator wording.
+  near:
+  - {"concept": "ADORE", "differs": "Strengthens high regard to adoration.", "setting": "troppo"}
   plain: think highly of
   examples: [They think highly of the coach., She thinks a lot of her brother.]
   description: Think well of, value (think highly, a lot or so much of); an evaluation, not a supposition.
@@ -1487,6 +1496,9 @@ CONCEITED:
          "think a lot of himself|herself|themselves|themself|myself|yourself|yourselves|ourselves|oneself",
          "think the world of himself|herself|themselves|themself|myself|yourself|yourselves|ourselves|oneself"]
 NO_HARDSHIP:
+  # ED15 R75/R77: curated direction and setting; differs is provisional curator wording.
+  near:
+  - {"concept": "DEAD_EASY", "differs": "Calls the task easy rather than saying the person did not mind doing it.", "setting": "dinkum"}
   plain: not mind doing something hard
   examples: [She thought nothing of walking ten miles.]
   description: Treat doing something as unremarkable or no hardship (think nothing of walking ten miles); not a
@@ -1811,6 +1823,9 @@ SINCERELY:
   triggers:
     adv: ["in all sincerity", "honestly and truly", "in all honesty"]
 WHOLEHEARTED:
+  # ED15 R75/R77: curated direction and setting; differs is provisional curator wording.
+  near:
+  - {"concept": "DEFINITELY", "differs": "Makes the statement definite rather than describing wholehearted feeling.", "setting": "troppo"}
   plain: with all your heart
   examples: [I agree wholeheartedly.]
   description: Wholehearted effort, devotion or affection; not an assertion of truthfulness.
@@ -2085,6 +2100,11 @@ SCREAM:
   triggers:
     vp: ["scream", "shriek", "yell their heads off"]
 CRY:
+  # ED15 R75/R77: curated direction and setting; differs is provisional curator wording.
+  near:
+  - {"concept": "NOISY_CRY", "differs": "Makes the crying louder.", "setting": "dinkum"}
+  - {"concept": "INTENSE_NOISY_CRY", "differs": "Makes the crying louder and harder to control.", "setting": "troppo"}
+  - {"concept": "SULK", "differs": "Adds a lightly teasing suggestion of sulking.", "setting": "troppo"}
   plain: cry
   examples: [She began to weep.]
   description: Cry, weep.
@@ -2225,6 +2245,9 @@ HEART_SPIRIT:
   triggers:
     vp: [take heart !medication|medications|tablets|pills|drugs|rate|surgery]
 HEARTBREAK:
+  # ED15 R75/R77: curated direction and setting; differs is provisional curator wording.
+  near:
+  - {"concept": "DISAPPOINTED", "differs": "Softens grief to disappointment.", "setting": "dinkum"}
   description: Grief or deep emotional hurt expressed as a broken heart, not the physical organ or mechanical breakage.
   triggers:
     vp: ['break all? {poss} heart|hearts', break a|every|any heart]
@@ -2311,6 +2334,9 @@ AWFUL:
   triggers:
     predicate_adj: ["terrible", "awful", "dreadful", "appalling", "horrendous"]
 FEEL_SORRY:
+  # ED15 R75/R77: curated direction and setting; differs is provisional curator wording.
+  near:
+  - {"concept": "REGRET", "differs": "Makes remorse explicit as regret.", "setting": "troppo"}
   description: Remorse or regret about something one has done, not illness or poor quality.
   source_context:
     preposition: about
@@ -3557,6 +3583,10 @@ HOMESTEAD:
   triggers:
     np: [the ranch house, the main ranch house, the main house on the ranch]
 TRAMP_ROADS:
+  # ED15 R75/R77: curated direction and setting; differs is provisional curator wording.
+  near:
+  - {"concept": "TRAVEL_WITH_SWAG", "differs": "Adds the period detail of travelling with a swag.", "setting": "troppo"}
+  - {"concept": "CARRY_SWAG", "differs": "Adds the period detail of carrying a swag.", "setting": "troppo"}
   plain: walk the country roads
   examples: [He tramped the roads for years.]
   description: Travel the country roads on foot; baggage and motive are not implied.
@@ -6342,6 +6372,9 @@ POSSIBILITY:
     predicate_adj: [possible, not impossible, not out of the question]
   search_words: [possibly, could be, might happen]
 DIFFICULT:
+  # ED15 R75/R77: curated direction and setting; differs is provisional curator wording.
+  near:
+  - {"concept": "TRICKY_QUESTION", "differs": "Describes a tricky question rather than something hard to do.", "setting": "dinkum"}
   plain: hard to do
   examples: [The job is difficult.]
   description: Hard to do; not easy. No automatic replacement is certified.

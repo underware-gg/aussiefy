@@ -21,6 +21,10 @@ subpackages (see [DD-006](decisions/dd-006-layered-flat-package.md)).
 | Maintainers | `gaps.py`, `explain.py`, `rounds.py` (research rounds), `judge.py` (blind packets, report validation and optional Claude boundary), `scrape/` (scrape, fragments, harvest, tag, review) |
 | Shared | `errors.py` (`UserError`, the error a user can fix) |
 
+`recognition.py` belongs to the Engine layer: it reads source-owned Australian terms through the shared
+meaning and grammar checks. `personal_terms.py` validates request-owned wording without I/O or dictionary
+mutation. These foundations do not activate the proposed v4 runtime by themselves.
+
 `profile.py` belongs to the Engine layer: it validates immutable request\-local tunin''n applies it to the
 selected level'n swearin' profiles without changing dictionary data. The data the engine reads is in
 `aussiefy/data/` (see [the dictionary](../functional/dictionary.md)).

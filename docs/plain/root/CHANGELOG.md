@@ -5,6 +5,13 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Reconcile scoped EW4 searches for every stored term and the completed 125-entry crowd-only follow-through,
+  retain their actual dates and source limits, and calibrate versioned evidence weights from the source hunt.
+  Preserve testimony separately; refine provisional drover/nature-strip/sloshed glosses and declare the
+  personal judgement in some mongrel and an old coot through the existing opinion mechanism.
+- Prepare directed near-meaning data, source-owned-term ambiguity notes and internal personal-term
+  validation, with a non-active v4 schema proposal. Production responses remain v3 pending activation.
+
 - Supply provisional plain wording and search words for the remaining meanings, preserving Rob's
   approved sample and all source triggers. Add paged concept discovery with eligible-entry counts
   through Python, the CLI and MCP, alongside the separate waiting-meanings listing.

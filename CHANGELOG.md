@@ -9,8 +9,15 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Reconcile scoped EW4 searches for every stored term'n the completed 125\-entry crowd\-only follow\-through,
+  retain their actual dates'n source limits, and calibrate versioned evidence weights from the source hunt.
+  Preserve testimony separately; refine provisional drover/nature\-strip/sloshed glosses'n declare the
+  personal judgement in some mongrel'n an old coot through the existin' opinion mechanism.
+- Prepare directed near\-meaning data, source\-owned\-term ambiguity notes'n internal personal\-term
+  validation, with a non\-active v4 schema proposal. Struth, production responses remain v3 pendin' activation.
+
 - Supply provisional plain wording'n search words for the remaining meanings, preserving Rob's
-  approved sample'n all source triggers. Struth, add paged concept discovery with eligible\-entry counts
+  approved sample'n all source triggers. Add paged concept discovery with eligible\-entry counts
   through Python, the CLI and MCP, alongside the separate waitin'\-meanings listin'.
 
 - Add Rob\-approved busy'n speed senses of flat strap. Provisionally add friendly plural dickheads

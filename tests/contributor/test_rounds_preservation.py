@@ -260,3 +260,32 @@ def test_pre_round_snapshot_sets_aside_public_history_but_final_write_preserves_
     with pytest.raises(SchemaError, match='missing target'):
         from aussiefy import load_dictionary
         load_dictionary(data_dir=data)
+
+
+def test_concept_fix_retains_curated_near_relations_and_explicit_clear(prepared):
+    config, data = prepared
+    config.concept_fixes = {"CRY": {"description": "Reviewed crying."}}
+    d = plan(config, data).write(data)
+    assert [(relation.concept, relation.setting) for relation in d.concepts["CRY"].near] == [
+        ("NOISY_CRY", "dinkum"), ("INTENSE_NOISY_CRY", "troppo"), ("SULK", "troppo")]
+    after = (data / "concepts.yaml").read_text()
+    assert plan(config, data).write(data).concepts["CRY"].near == d.concepts["CRY"].near
+    assert (data / "concepts.yaml").read_text() == after
+    config.concept_fixes = {"CRY": {"near": []}}
+    assert not plan(config, data).write(data).concepts["CRY"].near
+
+
+def test_pre_round_snapshot_drops_only_relations_to_removed_concepts(prepared):
+    config, data = prepared
+    plan(config, data).write(data)
+    path = data / "concepts.yaml"
+    text = path.read_text()
+    text = text.replace("TIRED:\n", "TIRED:\n  near:\n"
+        "  - {concept: ZZ_META, differs: Test-only later meaning., setting: troppo}\n"
+        "  - {concept: HUNGRY, differs: Test-only retained meaning., setting: dinkum}\n", 1)
+    path.write_text(text)
+    before = path.read_bytes()
+    baseline = rounds.base_dictionary(config, data)
+    assert "ZZ_META" not in baseline.concepts
+    assert [relation.concept for relation in baseline.concepts["TIRED"].near] == ["HUNGRY"]
+    assert path.read_bytes() == before

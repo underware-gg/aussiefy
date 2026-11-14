@@ -26,8 +26,8 @@ def test_hand_checked_score_goldens(dictionary):
     b = source(publisher="Dictionary B")
     crowd = source("crowd_dictionary", "Wiktionary")
     for sources, score, bars, label in [
-        ((), 0, 0, "unverified"), ((a,), 6, 3, "unverified"),
-        ((a, b), 9, 4, "attested"), ((a, crowd), 8, 4, "attested"),
+        ((), 0, 0, "unverified"), ((a,), 8, 4, "attested"),
+        ((a, b), 10, 5, "attested"), ((a, crowd), 10, 5, "attested"),
         ((crowd,), 2, 1, "unverified"),
     ]:
         got = assess(TermMetadata(sources=sources), w)
@@ -45,7 +45,7 @@ def test_copies_and_publisher_aliases_do_not_multiply_evidence(dictionary):
 def test_each_further_source_of_one_kind_adds_less(dictionary):
     values = [assess(TermMetadata(sources=tuple(source("crowd_dictionary", str(i)) for i in range(n))),
                      dictionary.evidence_weights).attestation.score for n in range(4)]
-    assert [round(values[i + 1] - values[i], 4) for i in range(3)] == [2, 1, .5]
+    assert [round(values[i + 1] - values[i], 4) for i in range(3)] == [2, 1.3, .845]
 
 
 def test_component_citations_do_not_attest_the_whole_expression(dictionary):
@@ -208,7 +208,7 @@ def test_shared_metadata_gates_riffs_and_imagery_without_gating_bulldust(diction
 def test_real_reviewed_anchor_scores(dictionary):
     for eid, first in [("gday", "1880s"), ("arvo", "1920s"), ("bulldust", "1920s")]:
         entry = dictionary.entries[eid]
-        assert (entry.attestation.score, entry.attestation.bars, entry.evidence) == (8, 4, "attested")
+        assert (entry.attestation.score, entry.attestation.bars, entry.evidence) == (10, 5, "attested")
         assert entry.first_attested == first
 
 

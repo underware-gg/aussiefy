@@ -73,12 +73,12 @@ def test_gift_of_the_gab_is_a_fence_not_a_talent_or_present(dictionary):
 
 
 def test_hanging_out_terms_keep_their_grammar_and_publisher_weight(dictionary):
-    for eid, score in [('hang-out-for', 7), ('hang-out-to', 3)]:
+    for eid, score, evidence in [('hang-out-for', 10, 'attested'), ('hang-out-to', 4, 'unverified')]:
         entry = dictionary.entries[eid]
         assert entry.concept == ('EAGER',) and entry.frame == 'predicate_adj'
         assert entry.form == 'hanging out' and entry.status == 'active'
         assert entry.grammar.following == (('prep:for',) if eid.endswith('for') else ('infinitive',))
-        assert entry.evidence == 'unverified' and entry.attestation.score == score
+        assert entry.evidence == evidence and entry.attestation.score == score
     tr = Translator(dictionary, lookup_embedder=None)
     result = tr.translate('He is eager.', **EVERY_SWAP)
     assert result.text == 'He is keen.'

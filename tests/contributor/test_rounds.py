@@ -78,7 +78,7 @@ def test_archived_round_metadata_is_adapted_after_fixes_without_mutating_inputs(
     assert "coined_by" not in raw and "produced_by" not in raw
     assert rounds._current_entry_metadata(raw) == raw
     entry = plan.write(data).entries["zzarchive"]
-    assert entry.evidence == "unverified" and entry.attestation.score == 4
+    assert entry.evidence == "unverified" and entry.attestation.score == 6
     assert config == before
     assert (config.directory / "verify" / "verdicts-a.yaml").read_bytes() == archive_bytes
 

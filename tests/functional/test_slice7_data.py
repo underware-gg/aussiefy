@@ -102,13 +102,20 @@ def test_wrecked_person_and_vehicle_do_not_share_the_tired_reading(dictionary):
     assert 'BROKEN' in concepts(dictionary,'The car was wrecked in the crash.')
 
 
-def test_testimony_is_not_invented_documentary_attestation(dictionary):
+def test_testimony_is_preserved_alongside_reviewed_documentary_followthrough(dictionary):
     ids={'wrecked-tired','kerry-packered','dead-on-poss-feet','ready-to-drop',
          'running-on-smell-oily-rag','run-on-smell-oily-rag','fall-off-perch','rate-highly','dont-rate'}
     for eid in ids:
         e=dictionary.entries[eid]
         assert e.testimony.people == e.testimony.independent == 1
-        assert all(s.kind == 'testimony' and not s.url for s in e.sources)
+        testimony = [s for s in e.sources if s.kind == 'testimony']
+        assert len(testimony) == 1 and testimony[0].url is None
+        documentary = [s for s in e.sources if s.kind != 'testimony']
+        if eid == 'running-on-smell-oily-rag':
+            assert not documentary  # resource-economy witnesses do not establish physical fatigue
+            assert e.searched.outcome == 'inconclusive'
+        else:
+            assert documentary and all(s.url and {'term', 'meaning'} <= set(s.supports) for s in documentary)
     assert not any('prize pig' in e.form for e in dictionary.entries.values())
 
 

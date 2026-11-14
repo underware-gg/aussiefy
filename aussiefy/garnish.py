@@ -7,6 +7,7 @@ from bisect import bisect_right
 from collections.abc import Callable
 from dataclasses import dataclass, field
 
+from .offsets import map_position
 from .context import CLOSING_TONES_FOR, tone_weight
 from .model import Dictionary, PhoneticRule
 from .constructions import Construction, generate
@@ -311,6 +312,7 @@ class PhoneticPass:
     questions: list[tuple[int, int]] = field(default_factory=list)
     kept: list[tuple[int, int]] | None = None        # the keep spans of `before`, where the pass read them
     preserved: list[tuple[int, int]] | None = None
+    literal: tuple[tuple[int, int], ...] = ()
 
 
 @dataclass
@@ -385,12 +387,15 @@ def phonetic_replacement(rule: PhoneticRule, m: re.Match, n: int, seed: int, sca
 def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: int, infixes: bool = True,
                    keep: Callable[[str], list[tuple[int, int]]] | None = None,
                    preserve: Callable[[str], list[tuple[int, int]]] | None = None,
-                   trace: PhoneticTrace | None = None) -> tuple[str, list[PhoneticRecord]]:
+                   trace: PhoneticTrace | None = None,
+                   literal_spans: tuple[tuple[int, int], ...] = ()) -> tuple[str, list[PhoneticRecord]]:
     """Apply each rule in order; every occurrence rolls independently. infixes: whether the swear infixes may
     go in (the embellishment's call: not in a manual or a policy). keep: the spans of a text the drawl and
     infixes stay out of (a heading, a link's text); Australian spelling still applies there. preserve protects
-    literal wording from every rule. trace, when given, collects each rule's pass (PhoneticPass)."""
+    literal wording from every rule. trace, when given, collects each rule's pass (PhoneticPass).
+    literal_spans tracks source-owned wording through earlier length changes and blocks any intersecting match."""
     records: list[PhoneticRecord] = []
+    literal = literal_spans
     preserved_for: list = [None, []]
     kept_for: list = [None, []]   # (text, its kept spans): the same until a rule changes the text
     for rule in rules:
@@ -398,11 +403,12 @@ def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: i
         if scale <= 0:
             continue
         counter = {"n": 0}
+        literal_edits = []
         quotes = [q.span() for q in QUOTE_RE.finditer(text)] if rule.dialogue_prob is not None else []
         before = text   # the text this rule matches in, for the kept spans (read once, when a rule first matches)
         questions = [(s[0].start, s[-1].end) for s in sentences(tokenize(before))
                      if any(t.text == "?" for t in s)] if rule.unless_question else []
-        traced = None if trace is None else PhoneticPass(rule, scale, before, quotes=quotes, questions=questions)
+        traced = None if trace is None else PhoneticPass(rule, scale, before, quotes=quotes, questions=questions, literal=literal)
 
         def kept() -> list[tuple[int, int]]:
             if keep is None or rule.kind == "spelling":
@@ -421,17 +427,25 @@ def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: i
             if traced is not None:
                 traced.starts.append(m.start())
                 traced.ends.append(m.end())
+            if any((a < m.end() and m.start() < b) or (m.start() == m.end() and a < m.start() < b)
+                   for a, b in literal):
+                return m.group(0)
             if not phonetic_admits(rule, m.start(), lambda: before[:m.start()], questions, spans):
                 return m.group(0)
             out = phonetic_replacement(rule, m, counter["n"], seed, scale, in_dialogue(m.start(), quotes))
             if out is None:
                 return m.group(0)
             records.append(PhoneticRecord(rule.id, m.group(0), out, m.start()))
+            if literal:
+                literal_edits.append((m.start(), m.end(), len(out)))
             if traced is not None:
                 traced.edits.append((m.start(), m.end(), len(out)))
             return out
 
         text = rule.pattern.sub(sub, text)
+        if literal_edits:
+            literal = tuple((map_position(literal_edits, a, 'right'), map_position(literal_edits, b, 'left'))
+                            for a, b in literal)
         if traced is not None:   # keep the context spans the pass read, so a replay needn't work them out again
             if rule.kind == "spelling" or keep is None:
                 traced.kept = []

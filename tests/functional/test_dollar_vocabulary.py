@@ -38,13 +38,15 @@ def test_responsibility_and_verb_senses_are_not_dollars(dictionary, source):
     assert not any(c.entry.id == 'buck' for r in result.records for c in r.eligible)
 
 
-def test_dollar_word_retains_the_actual_testimony_without_invented_attestation(dictionary):
+def test_dollar_word_retains_actual_testimony_alongside_documented_dollar_sense(dictionary):
     card = get_entry('buck', translator=Translator(dictionary, lookup_embedder=None))['entry']
     assert dictionary.entries['buck'].plural == 'bucks' and card['concepts'] == ['DOLLAR']
-    assert card['evidence'] == 'unverified'
+    assert card['evidence'] == 'attested'
+    assert any(s['publisher'] == 'American Heritage Dictionary' and 'meaning' in s['supports']
+               for s in card['sources'])
     assert card['attestation']['people'] == 1
-    assert card['sources'][0]['kind'] == 'testimony'
-    assert card['sources'][0]['publisher'] == 'Rob (project owner)'
+    assert any(s['kind'] == 'testimony' and s['publisher'] == 'Rob (project owner)'
+               for s in card['sources'])
 
 
 @pytest.mark.parametrize('query,concept', [('two biscuits', 'BISCUIT'), ('5 dollars', 'DOLLAR'),

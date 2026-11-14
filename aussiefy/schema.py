@@ -175,6 +175,7 @@ class Entry(TermMetadata):
     number: str = "any"             # np only: count, mass, plural-only referents, or unrestricted (any)
     grammar: GrammarRequirements = field(default_factory=GrammarRequirements)
     weight: float = 1.0
+    other_sense: str = ""          # curator note: own-form recognition needs independent sense evidence
     plain_sense: bool = False       # the form has an ordinary English sense too ("shame", "a bit rough"): lint
                                     # doesn't flag it when gated, since it can't tell the senses apart
     cls: str | None = None          # lexical | phrase | idiom; derived when absent
@@ -233,6 +234,17 @@ class Entry(TermMetadata):
 
 
 @dataclass(frozen=True)
+class NearMeaning:
+    concept: str
+    differs: str
+    setting: str
+
+    @property
+    def minimum(self) -> int:
+        return 1 if self.setting == 'dinkum' else 2
+
+
+@dataclass(frozen=True)
 class Concept:
     id: str
     description: str
@@ -256,6 +268,7 @@ class Concept:
     credit: str | tuple[Credit, ...] | None = None
     search_words: tuple[str, ...] = ()  # exact lookup aliases, never source triggers
     plain_forms: dict[str, str] = field(default_factory=dict)  # sentence wording by grammatical frame
+    near: tuple[NearMeaning, ...] = ()  # reviewed, directed stand-ins; never synonyms inferred at runtime
 
 
 CONCEPT_KEYS = frozenset(f.name for f in fields(Concept)) - {"id"}
@@ -264,7 +277,7 @@ CONCEPT_KEYS = frozenset(f.name for f in fields(Concept)) - {"id"}
 # Every key an entry may carry, in the order a written entry lists them.
 ENTRY_KEYS = tuple(dict.fromkeys((
     "id", "form", "variants", "spellings", "insult", "concept", "frame", "class", "plural", "number", "grammar", "slots", "intensity", "vulgarity",
-    "mask", "profane", "incoherence", "register", "region", "replaces", "status", "flags", "plain_sense", "type", "placement", "when",
+    "mask", "profane", "incoherence", "register", "region", "replaces", "status", "flags", "plain_sense", "other_sense", "type", "placement", "when",
     "stretch",
     "tone", "weight", "semantic_effects", "semantic_degree", "gloss", "notes", "key_sha256", "promoted_from", *METADATA_KEYS,
 )))
@@ -413,6 +426,9 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
     for name in ("gloss", "notes"):
         if raw.get(name) is not None and not isinstance(raw[name], str):
             raise SchemaError(f"{entry_id}: '{name}' must be text")
+    if 'other_sense' in raw and (not isinstance(raw['other_sense'], str) or not raw['other_sense'].strip()
+            or raw['other_sense'] != raw['other_sense'].strip() or '\n' in raw['other_sense'] or '\r' in raw['other_sense']):
+        raise SchemaError(f"{entry_id}: other_sense must be a non-empty single-line curator note")
     if token := PLACEHOLDER_RE.search(raw.get("gloss") or ""):
         raise SchemaError(f"{entry_id}: gloss must not contain slot syntax {token.group()!r}; use reader-facing words")
     if raw.get("plural") is not None and (not isinstance(raw["plural"], str) or not raw["plural"].strip()):
@@ -455,6 +471,7 @@ def parse_entry(raw: dict, origin: str = "") -> Entry:
         when=when,
         stretch=_bool(raw, "stretch", entry_id),
         plain_sense=_bool(raw, "plain_sense", entry_id),
+        other_sense=raw.get("other_sense", ""),
         mask=mask,
         profane=profane,
         tone=tone,
@@ -479,6 +496,27 @@ def parse_degrees(raw, owner: str) -> dict[str, str]:
                                        or v not in {'mild', 'unmarked', 'strong'} for k, v in raw.items()):
         raise SchemaError(f'{owner}: degree must be a mapping to mild, unmarked or strong')
     return dict(raw)
+
+
+def parse_near(cid: str, raw) -> tuple[NearMeaning, ...]:
+    from .identifiers import CONCEPT_ID
+    if not isinstance(raw, list):
+        raise SchemaError(f'concept {cid}: near must be a list of curated relations')
+    out = []
+    for item in raw:
+        if not isinstance(item, dict) or set(item) != {'concept', 'differs', 'setting'}:
+            raise SchemaError(f'concept {cid}: near needs concept, differs and setting')
+        target, differs, setting = item['concept'], item['differs'], item['setting']
+        if not isinstance(target, str) or not CONCEPT_ID.fullmatch(target) or target == cid:
+            raise SchemaError(f'concept {cid}: near target must be a different concept ID')
+        if not isinstance(differs, str) or not differs.strip() or differs != differs.strip() or '\n' in differs or '\r' in differs:
+            raise SchemaError(f'concept {cid}: near differs must be non-empty single-line wording')
+        if not isinstance(setting, str) or setting not in {'dinkum', 'troppo'}:
+            raise SchemaError(f'concept {cid}: near setting must be dinkum or troppo')
+        if target in {relation.concept for relation in out}:
+            raise SchemaError(f'concept {cid}: duplicate near target {target}')
+        out.append(NearMeaning(target, differs, setting))
+    return tuple(out)
 
 
 def parse_concept(cid: str, raw: dict) -> Concept:
@@ -568,6 +606,7 @@ def parse_concept(cid: str, raw: dict) -> Concept:
         plain=plain,
         search_words=tuple(search_words),
         plain_forms=dict(plain_forms),
+        near=parse_near(cid, raw.get("near", [])),
         examples=_tuple(raw.get("examples"), "examples", f"concept {cid}"),
         negative_examples=_tuple(raw.get('negative_examples'), 'negative_examples', f'concept {cid}'),
         credit=parse_credit_value(raw["credit"], f"concept {cid}") if raw.get("credit") is not None else None,

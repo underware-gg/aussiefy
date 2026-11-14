@@ -221,6 +221,11 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
     if include_builtin and HOLDING_CONCEPT not in concepts:
         errors.append(f'concept {HOLDING_CONCEPT}: the single abstention concept is required')
 
+    for concept in concepts.values():
+        for relation in concept.near:
+            if relation.concept not in concepts or relation.concept == HOLDING_CONCEPT:
+                errors.append(f'concept {concept.id}: unknown or abstention near target {relation.concept!r}')
+
     prof_raw = _read(data / "profiles.yaml", errors, {})
     base = prof_raw.get("base", {})
     profiles = {}

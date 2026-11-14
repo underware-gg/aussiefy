@@ -28,7 +28,7 @@ import re
 import shutil
 import tempfile
 from copy import deepcopy
-from dataclasses import dataclass, field, fields
+from dataclasses import asdict, dataclass, field, fields
 from pathlib import Path
 from typing import Any
 
@@ -242,6 +242,18 @@ def base_dictionary(config: RoundConfig, data_dir: Path = DATA_DIR) -> Dictionar
         concepts = scratch / "concepts.yaml"
         kept, section = _split_section(concepts.read_text(encoding="utf-8"), config.marker)
         ours = set(_yaml(section) or {})
+        # Later cross-concept relations cannot point into the section removed for this scratch baseline.
+        if ours:
+            raw_concepts = _yaml(kept) or {}
+            changed = False
+            for raw in raw_concepts.values():
+                relations = raw.get("near", [])
+                surviving = [relation for relation in relations if relation["concept"] not in ours]
+                if surviving != relations:
+                    raw["near"] = surviving
+                    changed = True
+            if changed:
+                kept = yaml.safe_dump(raw_concepts, sort_keys=False, allow_unicode=True)
         concepts.write_text(kept, encoding="utf-8")
         for path in (scratch / "entries").glob("*.yaml"):
             entries = _yaml(path.read_text(encoding="utf-8")) or []
@@ -344,6 +356,7 @@ def _prepare_concept_fixes(plan: RoundPlan, d: Dictionary) -> None:
             raw["triggers"] = {frame: list(patterns) for frame, patterns in concept.triggers.items()}
             raw["unless_after"] = list(concept.unless_after)
             raw["search_words"] = list(concept.search_words)
+            raw["near"] = [asdict(relation) for relation in concept.near]
             raw["examples"] = list(concept.examples)
             raw["negative_examples"] = list(concept.negative_examples)
             raw["nominal_roles"] = list(concept.nominal_roles)

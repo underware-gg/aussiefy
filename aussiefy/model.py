@@ -217,6 +217,17 @@ class Dictionary:
         return words
 
     @cached_property
+    def owned_index(self) -> PatternIndex:
+        forms = list(self.form_index.patterns)
+        present = {p.entry_id for p in forms}
+        for entry in self.entries.values():
+            if entry.id not in present and entry.status != 'omit':
+                forms.extend(replace(compile_pattern(form.replace('{np}', '{obj}'), entry.frame,
+                                                    entry.concept, entry.intensity, entry_id=entry.id),
+                                     semantic_degree=entry.semantic_degree) for form in entry.all_forms)
+        return PatternIndex(forms)
+
+    @cached_property
     def source_match_patterns(self):
         from .match_keys import pattern_fingerprint
         out = {}

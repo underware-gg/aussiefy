@@ -28,7 +28,7 @@ aussiefy/data/
   pos/                 licensed English POS weights and provenance metadata
   source_policy.yaml   sites the scraper must not bulk-extract (reference-only)
   sources.yaml         structured supplemental citations per entry (also written by `dev review --apply`)
-  attestation.yaml     versioned provisional evidence weights and selection factors
+  attestation.yaml     versioned evidence weights and selection factors
   themes.yaml          complete subject permissions for each vulgarity tier
   model/               the bundled static embedding model
   entries/
@@ -803,3 +803,20 @@ counted source phrase. It cannot create a serving from unmeasured mass wording. 
 another and several keep their determiner and suppress the target's extra article across modifiers.
 The same number check is used for selected replacements and their alternatives. A noun used as a
 modifier can be excluded with the existing `grammar.nominal_roles: [head]` requirement.
+
+
+## Evidence calibration and prepared v4 data
+
+The evidence weights are versioned in `attestation.yaml`. Version `20261114-source-hunt-1` follows the
+source-hunt reconciliation and a 300-term curator sanity check. It keeps the existing assessor and
+testimony ceiling; an edited scholarly dictionary reaches four bars, while crowd-only evidence stays
+below that threshold. The [calibration ledger](../../../research/gate4-evidence-2026-11-14/README.md)
+records source scopes, dates, before/after scores and remaining limits. An attestation score is not an
+Australian-commonness estimate or a certificate for every mapping.
+
+The data model now accepts optional `other_sense`, a non-empty single-line curator note describing an
+entry's other everyday meaning. It supports the forthcoming source-owned-term reader; the note alone
+does not establish a sense. Concepts may carry curated directed `near` relations, each with `concept`,
+reader-facing `differs`, and `setting` (`dinkum` or `troppo`). Unknown, self and duplicate targets fail
+validation. These foundations do not yet enable automatic stand-ins or change production v3 responses;
+the coordinated [v4 draft](../../drafts/changes-v4/README.md) remains a proposal.

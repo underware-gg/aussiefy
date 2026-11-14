@@ -8,7 +8,7 @@ def test_same_dennis_work_on_two_hosts_is_one_witness(dictionary):
     supported = [source for source in entry.sources if "meaning" in source.supports]
     assert len({source.url for source in supported}) >= 2
     assert len({source.publisher for source in supported}) == 1
-    assert (entry.attestation.score, dict(entry.attestation.counts)) == (4, {"literature": 1})
+    assert (entry.attestation.score, dict(entry.attestation.counts)) == (5, {"literature": 1})
 
 
 def test_lexicographic_article_and_dictionary_have_separate_source_kinds(dictionary):
@@ -18,7 +18,7 @@ def test_lexicographic_article_and_dictionary_have_separate_source_kinds(diction
     collins = next(source for source in entry.sources if source.publisher == "Collins Dictionary")
     assert macquarie.kind == "media" and collins.kind == "scholarly_dictionary"
     assert "meaning" in macquarie.supports and "meaning" in collins.supports
-    assert entry.attestation.score == 9
+    assert entry.attestation.score == 10
 
 
 def test_partial_constructions_remain_references_without_score(dictionary):
