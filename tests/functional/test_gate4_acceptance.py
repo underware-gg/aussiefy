@@ -132,5 +132,5 @@ def test_sentence_wording_preserves_a_required_modal_or_declines(dictionary, sou
     from aussiefy.text import tokenize
     detection = next(d for d in read_meanings(tokenize(source), dictionary).detections if 'DOUBT_IT' in d.concepts)
     concept = replace(dictionary.concepts['DOUBT_IT'], plain_forms={'vp': form})
-    result = plain_entry(concept, detection, dictionary)
+    result = plain_entry(concept, detection, dictionary, tokens=tokenize(source))
     assert (realise(result[0], form, result[1]) if result else None) == expected

@@ -33,7 +33,7 @@ def audit(translator=None):
                 raise AssertionError(f'example has no source reading: {cid}: {example}')
             for spot in spots:
                 row = {'concept': cid, 'example': example, 'source_span': list(spot.rec.span)}
-                plain = plain_entry(concept, spot.rec.det, tr.dictionary)
+                plain = plain_entry(concept, spot.rec.det, tr.dictionary, tokens=spot.sent.tokens, tags=spot.sent.tags)
                 if plain is None:
                     row.update(status='needs_sentence_form', source_preserved=True,
                                reason='No safe authored sentence wording for this grammatical scope.')

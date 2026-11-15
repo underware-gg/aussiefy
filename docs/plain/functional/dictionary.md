@@ -253,11 +253,12 @@ display wording when it fits. Forms accept the same supported slots and frame ru
 words rather than markup or sentence punctuation. A frame can hold one string or an ordered list of
 forms, selected by actual captures and the common renderer. Frozen v4 uses these for kept English
 choices; it checks degree and bound objects and requires an authored clause form. Concept-free garnish
-can use internal `plain_form` for the same purpose. A display-noun fallback cannot replace an np
-reading that consumes a captured finite be predicate, and sentence wording must preserve an
-unambiguous required source modal. Without a safe form, source is retained. The Gate 4 audit records
-three unresolved sentence scopes rather than claiming all examples render. This is sentence curation,
-not a public card field.
+can use internal `plain_form` for the same purpose. Sentence wording is checked against actual source tokens, including external owners, consumed finite
+predicates, bound arguments, negation and modal verbs. Clear possessive slots can widen their own
+replacement region; uncertain ownership stays outside or declines. Scoped auxiliary slots preserve
+source tense, number and adjacent negation. Unsupported scope keeps the source wording. These are
+grammatical checks over curated forms, not a claim that all paraphrases are semantically equivalent.
+The three recorded R64 defaults still preserve source. This is sentence curation, not a public card field.
 
 `search_words` is a list of reviewed exact lookup aliases. It adds no automatic source triggers and
 never includes sentence forms implicitly. Display names, explicit concept IDs and reviewed search

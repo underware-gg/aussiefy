@@ -274,8 +274,8 @@ assert replayed.text == original.text
 store or deliver it separately. `cs.replay_pins({change_id: option_key})` replaces current picks with
 offered alternatives; null selects an offered garnish removal. Unknown changes/options fail. Locked
 choices still need the caller to raise the relevant cap. The offered `plain:source` choice uses an
-existing null-target substitution pin and preserves exact source wording. Other authored English
-choices at kept spots need a later coordinated pin extension; personal choices remain unshared.
+existing null-target substitution pin and preserves exact source wording. Authored English choices at kept spots and personal choices remain unshared;
+no additional request-side pin contract is planned.
 Literal keys cannot be used as dictionary IDs or tuning terms.
 
 The version-1 request schema is `aussiefy/data/pins.schema.json`. A packet contains `dictionary_id`,
@@ -375,8 +375,7 @@ region and re-offset subsequent edits locally.
 Use `ChangeSet.replay_pins({change_id: "plain:source"})`; replay and recapture preserve those exact
 source words against drawl and garnish. An eligible already-pinned prefix is retained even when
 the literal source starts with a capital; the automatic casing-confidence guard remains unchanged.
-Other authored English choices at kept spots require a later
-coordinated pin protocol. Personal choices are call-local and are never shared as dictionary pins.
+Authored English choices at kept spots remain unshared. Personal choices are call-local and are never shared as dictionary pins.
 
 `other_sense` is a curator annotation used to assess ambiguous source wording. It is never a
 reader-facing explanation; clients use `reading` and `ruled_out` for that purpose. Dictionary/card

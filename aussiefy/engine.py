@@ -708,7 +708,7 @@ class Translator:
         if choice.literal is not None:
             return SpotRendering(det.start, det.end, choice.literal, choice.literal, choice.literal)
         form = pin.target.form if pin else choice.construction.text if choice.construction else self._form(choice.entry, det, run, sent.key)
-        realised = form if choice.construction else realise(choice.entry, form, det)
+        realised = form if choice.construction else realise(choice.entry, form, det, source_auxiliaries=choice.kind == 'plain' and choice.reading is not None)
         out = fit_article(realised, choice.entry, det, toks)
         if det.moved_prefix is not None:
             first, end = det.moved_prefix

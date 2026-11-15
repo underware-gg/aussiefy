@@ -823,7 +823,8 @@ class _Builder:
                 options.append(self._option(spot, Candidate(plain, 0, 'plain English', kind='plain')))
         if owner:
             for cid in det.concepts:
-                plain = plain_entry(self.translator.dictionary.concepts[cid], det, self.translator.dictionary)
+                plain = plain_entry(self.translator.dictionary.concepts[cid], det, self.translator.dictionary,
+                                    tokens=spot.sent.tokens, tags=spot.sent.tags)
                 if plain is not None:
                     options.append(self._option(spot, Candidate(plain[0], 0, 'plain English', kind='plain', reading=plain[1])))
         options = [option for option in options if not option.rendering.echo]

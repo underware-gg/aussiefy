@@ -9,6 +9,10 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Use actual sentence scope for English choices: preserve external possessors, grammatical negation,
+  auxiliary agreement'n modal distinctions; keep source where authored wording can't fit faithfully.
+  Frozen v4 schemas'n ordinary dictionary renderin' are unchanged.
+
 - Preserve eligible explicit prefix pins when a plain\-source replay restores a capitalised first word;
   retain automatic casing policy'n strict unused\-pin validation. Check every real fixture source choice.
 

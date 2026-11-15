@@ -208,7 +208,7 @@ def noun_slots(det: Detection) -> dict[str, str]:
     }
 
 
-def realise(entry: Entry, form: str, det: Detection) -> str:
+def realise(entry: Entry, form: str, det: Detection, *, source_auxiliaries: bool = False) -> str:
     caps = det.captures
     subj_tok = caps.get("subj")
     subj = subj_tok.norm if subj_tok is not None else "you"
@@ -264,6 +264,12 @@ def realise(entry: Entry, form: str, det: Detection) -> str:
         "do": morph.agree("do", agree_subj, tense),
         "will": "would" if tense == "past" else "will",
     }
+    if source_auxiliaries:
+        if 'poss' in caps:
+            values['poss'] = caps['poss'].text
+        for key in ('be', 'have', 'do'):
+            if key in caps:
+                values[key] = caps[key].text
     out = re.sub(r"\{(\w+)\}", lambda m: values[m.group(1)], text).strip()
     out = REFLEXIVE_RE.sub(lambda m: morph.REFLEXIVES[m.group(1).lower()], out)   # "{poss}self" for they: themselves
     if entry.frame == "clause" and not det.question and subj_tok is not None and verb is not None:

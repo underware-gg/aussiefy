@@ -27,7 +27,7 @@ source pool; selected output and every applicable alternative cite the specific 
 The frozen v4 contract uses explicit option keys for dictionary, construction, source, English and personal
 choices, with per-option replacement regions and rendering-local child coordinates. Existing dictionary,
 construction and riff replay inputs remain. A null substitution target replays plain:source exactly;
-other kept English choices need a separately coordinated replay input. Personal choices are never
+authored kept English choices remain unshared. Personal choices are never
 shared as dictionary pins.
 A host's personal list is resolved once per call by its adapter. The engine owns no account state.
 
