@@ -9,6 +9,10 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-17
+
+Stone the flamin' crows, release candidate prepared on dev; no tag or published release.
+
 - Apply Rob’s Gate 4 rulings: separate seven physical/figurative senses with stable new IDs'n scoped
   sources; add the approved Tradie plural address'n three English forms, keeping masking and permissions.
 - Approve the bulk meaning names/search words, alias substitutions, source controls, glosses, sentence
@@ -82,7 +86,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
   counts under the same concept, theme'n eligibility settings.
 
 - Add separate concept sentence forms'n exact lookup search words without expanding source triggers.
-  Crikey, let exact meaning names reach their own words even when incidental component readings differ.
+  Bloody hell, let exact meaning names reach their own words even when incidental component readings differ.
   So anyway, keep the frozen changes/card v3 shape unchanged at this foundation checkpoint.
 - Apply the marked sample's display names/search words and approved HEART_SPIRIT split. Add the six
   testimony-backed vocabulary forms plus rate/don't rate together, and puffed for BREATHLESS at
@@ -112,7 +116,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 - Protect singular'n plural identity names such as `Native American` and `South Americans` in lookup.
   Well, keep a word inside a longer idiom from overriding a protected phrase: `the toss` stays as written,
-  while the complete death idiom remains discoverable. Stone the flamin' crows, add the countable dollar word `buck`/`bucks`
+  while the complete death idiom remains discoverable. Jeez Louise, add the countable dollar word `buck`/`bucks`
   from R75, retaining quantities'n currency labels; recognise counted noun queries such as `five dollars`.
 
 - Restore protection of the real plural `toss ups` and cover the spellin' `toss-ups`. Keep authored phrase protections inside capitalised
@@ -158,7 +162,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 - Consolidate phrase protections into one scoped fence list shared by meaning detection'n dialect
   conversion, with plain reasons'n duplicate validation. Recognise the single abstention concept by
-  name. Bloody hell, the reorganisation preserved translation'n discovery fixtures.
+  name. The reorganisation preserved translation'n discovery fixtures.
 
 - Load additive community extension manifests with qualified entry/concept ids, evidence on existin'
   entries, term/definition credit, aggregate testimony snapshots'n explicit promotion checks. Validate

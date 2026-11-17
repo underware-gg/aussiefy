@@ -39,4 +39,4 @@ from .yarn import yarn
 
 __all__ = ["suggest_selection", "validate_source_url", "list_entries", "list_concepts", "list_wordless_meanings", "get_entry", "random_entry", "meaning_quiz", "suggest_name", "variations", "translate", "translate_changes", "ChangeSet", "lookup", "lint", "guide", "plan", "verify", "bulldust", "yarn", "Translator", "default_translator", "Result",
            "DocumentResult", "Policy", "Dictionary", "load_dictionary", "Entry", "SchemaError", "UserError"]
-__version__ = "0.2.0"
+__version__ = "0.3.0"

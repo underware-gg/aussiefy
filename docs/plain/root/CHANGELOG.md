@@ -5,6 +5,10 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-17
+
+Release candidate prepared on dev; no tag or published release.
+
 - Apply Rob’s Gate 4 rulings: separate seven physical/figurative senses with stable new IDs and scoped
   sources; add the approved Tradie plural address and three English forms, keeping masking and permissions.
 - Approve the bulk meaning names/search words, alias substitutions, source controls, glosses, sentence
