@@ -265,8 +265,9 @@ def test_lint_exempts_the_sources_own_language(translator):
 
 def test_lookup_single_words_avoid_lookalikes(translator):
     cry = harness.lookup("cry", translator=translator)
-    # Generic crying is not necessarily noisy crying or complaining; CRY is deliberately wordless.
-    assert cry["outcome"] == "no_word_yet" and not cry["results"]
+    # Exact neutral crying is distinct from noisy crying or complaining.
+    assert cry["outcome"] == "matched"
+    assert {r["id"] for r in cry["results"]} == {"have-a-cry"}
     lonely = [r["form"] for r in harness.lookup("lonely", translator=translator)["results"]]
     assert "beaut" not in lonely and "as lonely as a shag on a rock" in lonely
     alone = [r["form"] for r in harness.lookup("alone", translator=translator)["results"]]
@@ -531,8 +532,8 @@ def test_lint_suggests_in_the_originals_genre(translator):
 
 
 
-def test_plain_crying_is_waiting_with_cited_near_words(translator):
+def test_plain_crying_uses_its_new_exact_word_instead_of_near_words(translator):
     out = harness.lookup('crying', translator=translator)
-    assert out['outcome'] == 'no_word_yet' and out['results'] == []
-    cry = next(meaning for meaning in out['meanings'] if meaning['concept'] == 'CRY')
-    assert any(word['form'] == 'bawl' for relation in cry['near'] for word in relation['words'])
+    assert out['outcome'] == 'matched'
+    assert {word['id'] for word in out['results']} == {'have-a-cry'}
+    assert 'CRY' not in translator.dictionary.wordless_meanings

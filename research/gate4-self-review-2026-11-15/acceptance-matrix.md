@@ -66,3 +66,13 @@ Reviewed design revisions:
 Current approval/evidence receipts are in research/gate4-rulings-2026-11-17/. Historical self-review receipts remain labelled with their actual checkpoint. No new review round was opened. Full-gate and remote receipts are recorded in the readiness report after delivery.
 
 H13 still verifies repeatability, identity changes and relevant-change witnesses rather than every unrelated edit changing every output. H21's package validator is covered; site wiring remains site-owned. Staging, main, tags, releases and deployments require separate authority.
+
+
+## Briefed next-curation application, 17 November 2026
+
+The four shared-English additions have scoped sources and permanent IDs; buck/bucks keeps its existing
+ID and qualified-currency controls. CRY now has an exact neutral weeping expression, so current held
+fixtures use DEVOTION and near-feature tests construct the genuinely wordless condition explicitly.
+`tests/functional/test_next_curation.py` checks rendering, number, auxiliaries, polarity, wrong senses,
+ambiguous complements, cold-object anaphora, theme permissions and exact-word precedence.
+There is no new Rob hold or review round. Prize pig remains unadmitted.

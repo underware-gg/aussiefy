@@ -50,7 +50,7 @@ def test_fantastic_dreams_is_held_and_cites_the_excluded_praise_reading(translat
 
 
 @pytest.mark.parametrize('seed', range(12))
-@pytest.mark.parametrize('source', ['She wept. He was exhausted.', 'He believes a liar. She is hungry.',
+@pytest.mark.parametrize('source', ['She values loyalty. He was exhausted.', 'He believes a liar. She is hungry.',
                                    'She had fantastic dreams. His car is broken.'])
 def test_observing_held_markers_preserves_unrelated_translation_choices(translator, source, seed):
     plain = translator.translate(source, level=5, seed=seed, **BASE)

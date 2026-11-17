@@ -37,8 +37,8 @@ def test_source_swears_are_kept_exact_and_unmasked_at_nan(translator, level):
 
 
 def test_only_wordless_readings_are_held(translator):
-    result = checked(translator, 'She wept. She was exhausted.')
-    assert [(c['original'], c['reading']['concept']) for c in result.changes if c['kind'] == 'held'] == [('wept', 'CRY')]
+    result = checked(translator, 'She values loyalty. She was exhausted.')
+    assert [(c['original'], c['reading']['concept']) for c in result.changes if c['kind'] == 'held'] == [('loyalty', 'DEVOTION')]
     held = next(c for c in result.changes if c['kind'] == 'held')
     assert held['output'] == held['original'] and held['option_key'] is None
     assert not held['alternatives'] and not held['locked'] and not held['masks']
@@ -99,7 +99,7 @@ def test_selection_distinguishes_passed_over_kept_and_wordless(translator):
     for source, span, origin, concept, outcome in [
         ('She is exhausted.', [8, 12], 'passed_over', 'TIRED', 'matched'),
         ('He is a bludger.', [9, 12], 'kept', 'LAZY', 'matched'),
-        ('She wept.', [5, 7], 'lookup', 'CRY', 'no_word_yet'),
+        ('Loyalty.', [1, 5], 'lookup', 'DEVOTION', 'no_word_yet'),
     ]:
         response = suggest_selection(source, span=span, translator=translator, **BASE)
         assert response['outcome'] == outcome

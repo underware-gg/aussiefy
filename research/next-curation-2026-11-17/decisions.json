@@ -1,0 +1,347 @@
+{
+  "date": "2026-11-17",
+  "authority": "Rob’s explicit delegated next-curation brief; applied recommendations, no new review round.",
+  "new_entry_ids": [
+    "have-a-go",
+    "booze",
+    "a-cold-one",
+    "have-a-cry"
+  ],
+  "changed_records": [
+    {
+      "path": "aussiefy/data/concepts.yaml",
+      "id": "TRY",
+      "before": {
+        "plain": "an attempt",
+        "search_words": [
+          "a try",
+          "have a go"
+        ],
+        "description": "An attempt.",
+        "triggers": {
+          "np": [
+            "a try",
+            "a go",
+            "an attempt",
+            "a real try@4",
+            "a serious attempt@4",
+            "a good try@4"
+          ]
+        }
+      },
+      "after": {
+        "plain": "an attempt",
+        "search_words": [
+          "a try",
+          "have a go"
+        ],
+        "description": "An attempt.",
+        "triggers": {
+          "np": [
+            "a try",
+            "a go",
+            "an attempt",
+            "a real try@4",
+            "a serious attempt@4",
+            "a good try@4"
+          ],
+          "vp": [
+            "try ^end",
+            "make an attempt ^end"
+          ]
+        },
+        "plain_forms": {
+          "np": "an attempt",
+          "vp": "try"
+        }
+      }
+    },
+    {
+      "path": "aussiefy/data/concepts.yaml",
+      "id": "COLD_BEER_SERVING",
+      "before": {
+        "plain": "a cold beer",
+        "search_words": [
+          "cold beer serving",
+          "a cold one"
+        ],
+        "description": "An explicitly stated cold serving of beer.",
+        "triggers": {
+          "np": [
+            "a cold beer",
+            "a cold one"
+          ]
+        }
+      },
+      "after": {
+        "plain": "a cold beer",
+        "search_words": [
+          "cold beer serving",
+          "a cold one"
+        ],
+        "description": "An explicitly stated cold serving of beer.",
+        "triggers": {
+          "np": [
+            "a cold beer",
+            "cold beer",
+            "a cold one ?=at+the+pub"
+          ]
+        }
+      }
+    },
+    {
+      "path": "aussiefy/data/concepts.yaml",
+      "id": "UNRESOLVED_SENSE",
+      "before": {
+        "description": "Context leaves these words' sense undecided, so they stay as written. The engine assigns it where tags cannot settle an object (an object, or a clause's subject?); triggers name phrases whose sense their object leaves open.",
+        "triggers": {
+          "vp": [
+            "think nothing of ?={np}",
+            "think what you like|want|please|will",
+            "think what|how to",
+            "thrash {obj}",
+            "wallop {obj}",
+            "clobber {obj}",
+            "beat {obj} soundly",
+            "kick {obj} when {obj} {be} down",
+            "kick a man when he is down",
+            "kick a man when he's down"
+          ],
+          "np": [
+            "a fight"
+          ]
+        }
+      },
+      "after": {
+        "description": "Context leaves these words' sense undecided, so they stay as written. The engine assigns it where tags cannot settle an object (an object, or a clause's subject?); triggers name phrases whose sense their object leaves open.",
+        "triggers": {
+          "vp": [
+            "think nothing of ?={np}",
+            "think what you like|want|please|will",
+            "think what|how to",
+            "thrash {obj}",
+            "wallop {obj}",
+            "clobber {obj}",
+            "beat {obj} soundly",
+            "kick {obj} when {obj} {be} down",
+            "kick a man when he is down",
+            "kick a man when he's down",
+            "have a go at ?={np}"
+          ],
+          "np": [
+            "a fight",
+            "a cold one"
+          ]
+        }
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "item": "bucks",
+      "decision": "Retain permanent buck ID and plural bucks. Existing grade 1 and qualified-country/region currency protection are verified; no duplicate entry, spelling change or borrowed testimony."
+    },
+    {
+      "item": "have a go",
+      "decision": "Admit only intransitive attempt, shared English level 1. Ambiguous have-a-go-at complements stay source; no criticism or generic transitive-try rewrite."
+    },
+    {
+      "item": "booze",
+      "decision": "Admit mass alcoholic-drink noun, shared English level 1, vulgarity 0; existing drinking theme gate stays separate. No drinking verb or technical alcohol sense."
+    },
+    {
+      "item": "a cold one",
+      "decision": "Admit count cold-beer serving only, shared English level 1, vulgarity 0 and existing drinking theme. Bare anaphoric source has an unresolved guard; explicit cold beer supplies meaning. Warm/generic beer and containers are not equivalent."
+    },
+    {
+      "item": "have a cry",
+      "decision": "Admit build-plan next-round item as neutral weeping, shared English level 1, no loudness/taunt. CRY now has an exact word and stops using near replacements, even when exact words are outside the dials."
+    }
+  ],
+  "entries": [
+    {
+      "id": "have-a-go",
+      "form": "have a go",
+      "concept": [
+        "TRY"
+      ],
+      "frame": "vp",
+      "gloss": "Try or make an attempt.",
+      "sources": [
+        {
+          "url": "https://www.abc.net.au/education/learn-english/learn-english-what-does-have-a-go-mean/8026440",
+          "publisher": "ABC Education",
+          "kind": "media",
+          "supports": [
+            "term",
+            "meaning"
+          ],
+          "note": "Body, 15 November 2016, updated 18 December 2017, lines 63–74: explicitly explains Australian attempt use. No criticism sense or opportunity sense is imported. Checked 17 November 2026."
+        }
+      ],
+      "other_sense": "Have a go at someone can mean criticise them; an unclear complement is kept as written.",
+      "incoherence": 1,
+      "vulgarity": 0,
+      "intensity": 3,
+      "reads_as": "general",
+      "register": "current",
+      "notes": "Applied under Rob’s delegated next-curation brief, 17 November 2026. Curation is not testimony, frequency evidence or an origin claim.",
+      "searched": {
+        "date": "2026-11-17",
+        "outcome": "found",
+        "note": "Scoped sources below distinguish inspected bodies from indexed text. No general prevalence or Australian origin is claimed."
+      }
+    },
+    {
+      "id": "booze",
+      "form": "booze",
+      "concept": [
+        "ALCOHOL"
+      ],
+      "frame": "np",
+      "number": "mass",
+      "themes": [
+        "drinking"
+      ],
+      "gloss": "Alcoholic drink.",
+      "sources": [
+        {
+          "url": "https://dictionary.cambridge.org/dictionary/english/booze",
+          "publisher": "Cambridge Dictionary",
+          "kind": "scholarly_dictionary",
+          "supports": [
+            "term",
+            "meaning"
+          ],
+          "note": "Indexed noun definition distinguishes uncountable alcoholic drink from the separate drinking verb; direct body returned 403. No source text copied. Checked 17 November 2026."
+        },
+        {
+          "url": "https://www.abc.net.au/news/2008-06-13/on-the-piss/8953174",
+          "publisher": "ABC Four Corners",
+          "kind": "media",
+          "supports": [
+            "term",
+            "meaning"
+          ],
+          "note": "Inspected transcript, 13 June 2008, line 205: Australian partygoer refers to alcoholic drink using the noun. This is not a verb attestation. Checked 17 November 2026."
+        }
+      ],
+      "incoherence": 1,
+      "vulgarity": 0,
+      "intensity": 3,
+      "reads_as": "general",
+      "register": "current",
+      "notes": "Applied under Rob’s delegated next-curation brief, 17 November 2026. Curation is not testimony, frequency evidence or an origin claim.",
+      "searched": {
+        "date": "2026-11-17",
+        "outcome": "found",
+        "note": "Scoped sources below distinguish inspected bodies from indexed text. No general prevalence or Australian origin is claimed."
+      },
+      "class": "lexical"
+    },
+    {
+      "id": "a-cold-one",
+      "form": "a cold one",
+      "plural": "cold ones",
+      "concept": [
+        "COLD_BEER_SERVING"
+      ],
+      "frame": "np",
+      "number": "count",
+      "themes": [
+        "drinking"
+      ],
+      "grammar": {
+        "nominal_roles": [
+          "head"
+        ]
+      },
+      "gloss": "A serving of cold beer.",
+      "sources": [
+        {
+          "url": "https://www.collinsdictionary.com/us/dictionary/english/cold-one",
+          "publisher": "Collins Dictionary",
+          "kind": "scholarly_dictionary",
+          "supports": [
+            "term",
+            "meaning"
+          ],
+          "note": "Inspected edited American English noun definition, lines 195–207, supports a cold-beer serving and shared English; automatically selected examples not used. Checked 17 November 2026."
+        },
+        {
+          "url": "https://www.abc.net.au/news/2019-08-02/top-end-brewing-history-colourful-tales/11365346",
+          "publisher": "ABC Darwin — Gabrielle Lyons",
+          "kind": "media",
+          "supports": [
+            "term",
+            "meaning"
+          ],
+          "note": "Inspected body, 2 August 2019, line 147: pub use is explicitly introduced by beer context. An anaphoric cold object alone is insufficient. Checked 17 November 2026."
+        }
+      ],
+      "other_sense": "A cold one can refer back to another cold object; that source wording alone does not establish beer.",
+      "incoherence": 1,
+      "vulgarity": 0,
+      "intensity": 3,
+      "reads_as": "general",
+      "register": "current",
+      "notes": "Applied under Rob’s delegated next-curation brief, 17 November 2026. Curation is not testimony, frequency evidence or an origin claim.",
+      "searched": {
+        "date": "2026-11-17",
+        "outcome": "found",
+        "note": "Scoped sources below distinguish inspected bodies from indexed text. No general prevalence or Australian origin is claimed."
+      },
+      "class": "lexical"
+    },
+    {
+      "id": "have-a-cry",
+      "form": "have a cry",
+      "concept": [
+        "CRY"
+      ],
+      "frame": "vp",
+      "gloss": "Cry or weep, without specifying loudness.",
+      "sources": [
+        {
+          "url": "https://www.abc.net.au/triplejunearthed/artist/mothers-club",
+          "publisher": "The Mothers Club — artist biography on ABC triple j Unearthed",
+          "kind": "media",
+          "supports": [
+            "term",
+            "meaning"
+          ],
+          "note": "Indexed artist-authored About text contrasts crying and dancing in response to the Sydney band’s music. Exact bare phrase; direct fetch cache miss. No publication date inferred from reviews. Checked 17 November 2026."
+        },
+        {
+          "url": "https://www.abc.net.au/triplejunearthed/artist/matthew-miller",
+          "publisher": "Matthew Miller — artist biography on ABC triple j Unearthed",
+          "kind": "media",
+          "supports": [
+            "term",
+            "meaning"
+          ],
+          "note": "Indexed artist-authored biography lists singing, dancing and crying as musical emotional responses. Exact bare phrase; no loudness claim or independent editorial endorsement. Checked 17 November 2026."
+        }
+      ],
+      "other_sense": "Some uses taunt the listener; the admitted sense expresses crying, without adding criticism or sulking.",
+      "incoherence": 1,
+      "vulgarity": 0,
+      "intensity": 3,
+      "reads_as": "general",
+      "register": "current",
+      "notes": "Applied under Rob’s delegated next-curation brief, 17 November 2026. Curation is not testimony, frequency evidence or an origin claim.",
+      "searched": {
+        "date": "2026-11-17",
+        "outcome": "found",
+        "note": "Scoped sources below distinguish inspected bodies from indexed text. No general prevalence or Australian origin is claimed."
+      }
+    }
+  ],
+  "pending_rulings": [],
+  "prize_pig": "unadmitted",
+  "limits": "Original paraphrases and URLs only. Artist biographies are self-authored indexed primary uses, not edited dictionary definitions; evidence scorer decides the label. No testimony, frequency, origin or accuracy claim is invented.",
+  "regression_follow_through": [
+    "The appetite test retains its hunger-degree assertion while allowing the independent exact crying clause.",
+    "The established a-cold-one-at-the-pub meaning path is retained with explicit context; discovery now offers both coldie and a-cold-one. Bare anaphora stays unresolved."
+  ]
+}

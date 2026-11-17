@@ -529,12 +529,25 @@ LOOK:
   triggers:
     np: ["a look !of|on", "a quick look", "a peek@2", "a quick glance@2"]   # not "at a glance", "a look of horror on her face"
 TRY:
-  # Rob-approved wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: an attempt
-  search_words: [a try, have a go]
+  search_words:
+  - a try
+  - have a go
   description: An attempt.
   triggers:
-    np: ["a try", "a go", "an attempt", "a real try@4", "a serious attempt@4", "a good try@4"]
+    np:
+    - a try
+    - a go
+    - an attempt
+    - a real try@4
+    - a serious attempt@4
+    - a good try@4
+    vp:
+    - try ^end
+    - make an attempt ^end
+  plain_forms:
+    np: an attempt
+    vp: try
 WORK:
   # Rob-approved wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: work
@@ -2376,8 +2389,10 @@ UNRESOLVED_SENSE:
     - kick {obj} when {obj} {be} down
     - kick a man when he is down
     - kick a man when he's down
+    - have a go at ?={np}
     np:
     - a fight
+    - a cold one
 AS_MUCH_AS_DESIRED:
   # Rob-approved search words, Gate 4, 2026-11-14; approved display wording retained.
   search_words: [as much as you want, without a limit]
@@ -6364,15 +6379,16 @@ GOSSIP_SESSION:
     - a gossip session
 
 COLD_BEER_SERVING:
-  # Rob-approved wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: a cold beer
-  search_words: [cold beer serving, a cold one]
+  search_words:
+  - cold beer serving
+  - a cold one
   description: An explicitly stated cold serving of beer.
   triggers:
     np:
     - a cold beer
-    - a cold one
-
+    - cold beer
+    - a cold one ?=at+the+pub
 TRAVEL_WITH_SWAG:
   # Rob-approved wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: travel on foot carrying a bedroll

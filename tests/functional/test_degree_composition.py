@@ -25,11 +25,14 @@ def test_reviewed_compositions_offer_flavour_without_changing_grade(translator, 
             result.text, original=source, translator=translator, suggest=False)['issues'])
 
 
-@pytest.mark.parametrize('source', ['She is hungry enough to eat anything.',
-                                   'She is so hungry that she could cry.'])
-def test_relational_appetite_keeps_its_unmarked_predicate(translator, source):
+@pytest.mark.parametrize('source,expected', [
+    ('She is hungry enough to eat anything.', 'She is hungry enough to eat anything.'),
+    ('She is so hungry that she could cry.', 'She is so hungry that she could have a cry.'),
+])
+def test_relational_appetite_keeps_its_unmarked_predicate(translator, source, expected):
     result = translator.translate(source, **OPTIONS)
-    assert result.text == source
+    # Preserve appetite degree while allowing the independent, exact crying expression.
+    assert result.text == expected
     assert not next(r for r in result.records if 'HUNGRY' in r.det.concepts).eligible
 
 

@@ -34,10 +34,10 @@ def test_hard_work_does_not_retrieve_agitation_or_other_work_senses(translator):
     assert not any(r['id'] == 'het-up' for r in found)
 
 
-@pytest.mark.parametrize('query,entry', [('a can of beer', 'tinnie'),
-    ('a small bottle of beer', 'stubby'), ('a cold one at the pub', 'coldie')])
-def test_container_and_drink_senses_remain_distinct(translator, query, entry):
-    assert {r['id'] for r in results(translator, query)} == {entry}
+@pytest.mark.parametrize('query,entries', [('a can of beer', {'tinnie'}),
+    ('a small bottle of beer', {'stubby'}), ('a cold one at the pub', {'coldie', 'a-cold-one'})])
+def test_container_and_drink_senses_remain_distinct(translator, query, entries):
+    assert {r['id'] for r in results(translator, query)} == entries
 
 
 @pytest.mark.parametrize('query,band', [('very hungry', 'strong'), ('slightly hungry', 'mild'),

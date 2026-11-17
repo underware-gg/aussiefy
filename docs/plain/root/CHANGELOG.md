@@ -5,6 +5,13 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+### Added
+
+- Shared-English `have a go` (attempt), `booze` (alcoholic drink), `a cold one` (cold-beer serving) and
+  `have a cry` (neutral weeping), with scoped sources and permanent IDs. Ambiguous complements and
+  anaphoric cold objects stay as written. Exact crying words take precedence over near meanings.
+- Verified bucks through its existing buck ID; qualified currency names remain as written.
+
 ## [0.3.0] - 2026-11-17
 
 Release candidate prepared on dev; no tag or published release.

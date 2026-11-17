@@ -4,7 +4,7 @@ from dataclasses import replace
 
 import pytest
 
-from aussiefy import lookup, translate_changes
+from aussiefy import Translator, lookup, translate_changes
 from aussiefy.changes import Watch
 from aussiefy.detect import read_meanings
 from aussiefy.text import tokenize
@@ -12,6 +12,13 @@ from aussiefy.text import tokenize
 OPTIONS = {'level': 5, 'vulgarity': 0, 'embedder': 'none',
            'document_config': {'garnish': [], 'profile': {'phonetic': 0, 'stack': 0,
                'substitution': {'lexical': 1, 'phrase': 1, 'idiom': 1}}}}
+
+
+@pytest.fixture
+def wordless_translator(dictionary):
+    """Exercise ED15's genuinely wordless condition after admitting an exact CRY word."""
+    return Translator(replace(dictionary, entries={k: e for k, e in dictionary.entries.items()
+                                                  if 'CRY' not in e.concept}), lookup_embedder=None)
 
 
 @pytest.mark.parametrize('source,concept', [('She cried.', 'CRY'), ('She wept.', 'CRY'),
@@ -31,10 +38,10 @@ def test_other_cries_and_reported_speech_do_not_create_crying(dictionary, source
 
 
 @pytest.mark.parametrize('setting,probability', [(1, 0.5), (2, 0.75)])
-def test_near_has_a_separate_probability_and_can_leave_a_held_spot(translator, setting, probability):
+def test_near_has_a_separate_probability_and_can_leave_a_held_spot(wordless_translator, setting, probability):
     applied = 0
     for seed in range(20):
-        result = translator.translate('She wept.', **OPTIONS, seed=seed, embellishment=setting)
+        result = wordless_translator.translate('She wept.', **OPTIONS, seed=seed, embellishment=setting)
         rec = next(record for record in result.records if 'CRY' in record.det.concepts)
         assert rec.p == probability
         assert rec.roll is not None
@@ -48,17 +55,17 @@ def test_near_has_a_separate_probability_and_can_leave_a_held_spot(translator, s
 
 
 @pytest.mark.parametrize('genre', ['news', 'instructions', 'technical', 'official', 'custom'])
-def test_excluded_genres_do_not_use_near_even_at_troppo(translator, genre):
+def test_excluded_genres_do_not_use_near_even_at_troppo(wordless_translator, genre):
     for seed in range(3):
-        result = translator.translate('She wept.', **OPTIONS, seed=seed, embellishment=2, document_type=genre)
+        result = wordless_translator.translate('She wept.', **OPTIONS, seed=seed, embellishment=2, document_type=genre)
         assert not any(record.chosen and record.chosen.near for record in result.records)
         assert any(record.kind == 'held' for record in result.records)
 
 
 @pytest.mark.parametrize('source', ['She wept.', 'She wholeheartedly loved him.'])
-def test_deadset_takes_no_near_word(translator, source):
+def test_deadset_takes_no_near_word(wordless_translator, source):
     for seed in range(3):
-        result = translator.translate(source, **OPTIONS, embellishment=0, seed=seed)
+        result = wordless_translator.translate(source, **OPTIONS, embellishment=0, seed=seed)
         assert result.text == source
         assert not any(record.chosen and record.chosen.near for record in result.records)
 
@@ -101,8 +108,8 @@ def test_adoration_context_object_is_bound_and_not_replaced_by_self_regard(trans
         assert rendered.end == len(spot.sent.tokens) - 1
 
 
-def test_waiting_lookup_shows_every_citation_at_deadset(translator):
-    result = lookup('cry', translator=translator, level=5, vulgarity=0, embellishment=0)
+def test_waiting_lookup_shows_every_citation_at_deadset(wordless_translator):
+    result = lookup('cry', translator=wordless_translator, level=5, vulgarity=0, embellishment=0)
     assert result['outcome'] == 'no_word_yet'
     crying = next(meaning for meaning in result['meanings'] if meaning['concept'] == 'CRY')
     assert {near['concept'] for near in crying['near']} == {'NOISY_CRY', 'INTENSE_NOISY_CRY', 'SULK'}

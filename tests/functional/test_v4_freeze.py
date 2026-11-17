@@ -24,7 +24,7 @@ def test_mixed_selection_explains_each_group_at_its_own_dials(translator):
     assert groups['HUNGRY']['outcome'] == 'outside_dials'
     assert groups['HUNGRY']['options'] == []
     assert all('locked' in group and 'outcome' in group for group in body['suggestions'])
-    waiting = suggest_selection('She wept.', span=[4, 8], translator=translator, **BASE)
+    waiting = suggest_selection('Loyalty.', span=[0, 7], translator=translator, **BASE)
     assert waiting['suggestions'][0]['outcome'] == 'no_word_yet'
 
 

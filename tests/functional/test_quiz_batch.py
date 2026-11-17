@@ -69,4 +69,4 @@ def test_id_only_waiting_lookup_does_not_build_near_cards(dictionary, monkeypatc
     monkeypatch.setattr(_LookupCards, 'near', rich_near)
     batch = _LookupBatch(Translator(dictionary, lookup_embedder=None), level=5, vulgarity=0,
                         embellishment=0, document_type='general', document_config=None, include_gated=False)
-    assert batch.entry_ids('weep') == set()
+    assert batch.entry_ids('wholeheartedly') == set()

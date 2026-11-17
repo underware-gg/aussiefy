@@ -23,14 +23,14 @@ CASES = {
         {"text": "Bugger me sideways! He is stonkered. Oi!", "level": 1, "vulgarity": 0, "embellishment": 0, "embedder": "none"}),
     "v4-held": (
         "A genuinely waiting meaning is held without masks or replacement rolls.",
-        {"text": "She wept.", "level": 1, "vulgarity": 0, "embellishment": 0, "embedder": "none"}),
+        {"text": "Their loyalty never wavered.", "level": 1, "vulgarity": 0, "embellishment": 0, "embedder": "none"}),
     "v4-personal": (
         "Call-local wording, bound people and Markdown escaping, without invented dictionary IDs.",
         {"text": "🦘 She **adores Jane**. A spreadsheet. `spreadsheet`", "level": 1, "vulgarity": 0,
          "embellishment": 0, "markdown": True, "embedder": "none", "personal_terms": [
              {"phrase": "adore Jane", "term": "love the boss"}, {"phrase": "spreadsheet", "term": "number wrangler"}]}),
     "v4-near": (
-        "Curated stand-ins retain waiting source readings and cite each near option.",
+        "An exact crying word stays separate from curated stand-ins, which cite each near option.",
         {"text": "They wept. She loved him wholeheartedly.", "level": 5, "vulgarity": 0,
          "embellishment": 2, "seed": 0, "embedder": "none", "document_config": {"garnish": [], "profile": {
              "phonetic": 0, "stack": 0, "substitution": {"lexical": 1, "phrase": 1, "idiom": 1}}}}),

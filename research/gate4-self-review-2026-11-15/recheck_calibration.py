@@ -18,6 +18,8 @@ def recheck():
     approved=json.loads((ROOT/'research/gate4-rulings-2026-11-17/applied-rulings.json').read_text())
     allowed={f'entry/{r["id"]}' for r in approved['changed_records']}
     allowed|={f'entry/{eid}' for eid in approved['new_entry_ids']}
+    curation=json.loads((ROOT/'research/next-curation-2026-11-17/decisions.json').read_text())
+    allowed|={f'entry/{eid}' for eid in curation['new_entry_ids']}
     before={r['key']:r for r in archived['after']}
     now={r['key']:r for r in fresh['after']}
     missing=sorted(set(before)-set(now))
@@ -38,7 +40,7 @@ def recheck():
             'unexplained_changed_rows':unexpected,'labels':dict(Counter(r['evidence'] for r in now.values())),
             'archive_labels':archived['labels'],'archive_weight_only_label_changes':len(archived['label_changes']),
             'archive_sha256':hashlib.sha256((folder/'calibration.json').read_bytes()).hexdigest(),
-            'acceptance':'Rob R80 approved recommendations; current scoped source facts are distinguished from the immutable calibration archive. No independent measured accuracy claim.'}
+            'acceptance':'Rob R80 approved recommendations and delegated the next curation; current scoped source facts are distinguished from the immutable calibration archive. No independent measured accuracy claim.'}
 
 
 if __name__=='__main__':
