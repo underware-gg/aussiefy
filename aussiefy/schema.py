@@ -604,7 +604,7 @@ def parse_concept(cid: str, raw: dict) -> Concept:
                     or re.fullmatch(r"[^\W\d_]+(?:[-'’][^\W\d_]+)*", word)) for word in form.split())):
                 raise SchemaError(f'concept {cid}: plain_forms.{frame} must contain words and supported slots only')
             parse_entry({'id': 'plain-' + cid.lower().replace('_', '-'), 'form': form,
-                         'frame': frame, 'concept': [cid]})
+                         'frame': 'clause' if frame == 'np' and form.startswith('{subj} ') else frame, 'concept': [cid]})
         if len(set(forms)) != len(forms):
             raise SchemaError(f'concept {cid}: plain_forms.{frame} has duplicate sentence forms')
         parsed_plain_forms[frame] = tuple(forms) if isinstance(value, list) else value

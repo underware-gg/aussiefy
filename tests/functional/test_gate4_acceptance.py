@@ -62,17 +62,16 @@ def test_observing_held_markers_preserves_unrelated_translation_choices(translat
     assert changes.text == plain.text and choices(changes.result) == choices(plain)
 
 
-def test_every_concept_example_has_an_explicit_rendering_audit_and_known_gaps_are_not_called_complete(dictionary):
+def test_every_concept_example_has_faithful_sentence_wording_after_rob_accepted_source_preservation(dictionary):
     from pathlib import Path
     import runpy
     root = Path(__file__).resolve().parents[2]
     audit = runpy.run_path(str(root / 'research/gate4-self-review-2026-11-15/audit_plain_forms.py'))['audit']
     report = audit(Translator(dictionary, lookup_embedder=None))
     assert report['examples'] == sum(len(concept.examples) for concept in dictionary.concepts.values())
-    assert report['all_examples_meet_R64'] is False  # Acceptance remains open, even though gap detection passes.
-    assert {(row['concept'], row['example']) for row in report['unresolved']} == {
-        ('HEARTBREAK', 'Her heart was broken.'), ('HEART_EFFORT', "Her heart wasn't in it."),
-        ('DOUBT_IT', 'I doubt it could be done.')}
+    assert report['all_examples_meet_R64'] is True
+    assert report['rendered'] == report['examples'] == 45
+    assert report['unresolved'] == []
     assert all(not row.get('issues') for row in report['rows'] if row['status'] == 'rendered')
     restless = next(row for row in report['rows'] if row['concept'] == 'RESTLESS_SLEEP')
     assert restless['whole'] == 'I was tossing and turning.' and restless['status'] == 'rendered'
@@ -91,7 +90,7 @@ def test_ew9_current_active_levels_have_individual_review_coverage(dictionary):
     from pathlib import Path
     import yaml
     root = Path(__file__).resolve().parents[2]
-    receipt = json.loads((root / 'research/gate4-self-review-2026-11-15/level-reconciliation.json').read_text())
+    receipt = json.loads((root / 'research/gate4-rulings-2026-11-17/level-reconciliation.json').read_text())
     baseline_path = root / receipt['baseline']['path']
     assert hashlib.sha256(baseline_path.read_bytes()).hexdigest() == receipt['baseline']['sha256']
     reviewed = {row['id']: row['new'] for row in yaml.safe_load(baseline_path.read_text())}
@@ -114,9 +113,10 @@ def test_current_calibration_and_ew4_records_reproduce_the_source_hunt_receipt()
     import runpy
     root = Path(__file__).resolve().parents[2] / 'research/gate4-self-review-2026-11-15'
     fresh = runpy.run_path(str(root / 'recheck_calibration.py'))['recheck']()
-    assert fresh == json.loads((root / 'calibration-recheck.json').read_text())
-    assert fresh['terms'] == 1409 and fresh['all_terms_have_searched']
-    assert fresh['all_score_rows_equal_archive'] and fresh['weight_only_label_changes'] == 333
+    assert fresh == json.loads((root.parent / 'gate4-rulings-2026-11-17/calibration-recheck.json').read_text())
+    assert fresh['terms'] >= 1417 and fresh['all_terms_have_searched']
+    assert fresh['unchanged_archive_rows_verified'] and fresh['archive_weight_only_label_changes'] == 333
+    assert fresh['weights_unchanged'] and not fresh['unexplained_changed_rows']
 
 
 @pytest.mark.parametrize('source,form,expected', [

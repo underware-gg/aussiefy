@@ -1,3 +1,11 @@
+# Historical self-review and current ruling follow-through
+
+The 15 November evidence below records its actual checkpoint. Rob resolved every pending decision under
+R78–R80 on 16–17 November. Current approval, 45/45 wording, grade and source-reconciliation receipts are
+in ../gate4-rulings-2026-11-17; acceptance-matrix.md is updated. No item below remains awaiting Rob.
+
+---
+
 # Gate 4 self-review and quiz batching — 15 November 2026
 
 V4 was frozen and pushed at b2466bb596bf0271d4217f52405851d4f8e1c966. This follow-through optimises quiz

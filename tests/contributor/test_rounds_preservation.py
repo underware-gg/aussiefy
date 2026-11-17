@@ -233,7 +233,7 @@ def test_concept_fixes_preserve_and_replace_distinct_wording_fields(prepared):
     config,data=prepared
     config.concept_fixes={'HEART_EFFORT':{'description':'Reviewed effort reading.'}}
     d=plan(config,data).write(data)
-    assert d.concepts['HEART_EFFORT'].plain_forms=={'vp':'try hard at {obj}'}
+    assert d.concepts['HEART_EFFORT'].plain_forms=={'vp':'try hard at {obj}','np':'{subj} {be} engaged in it'}
     config.concept_fixes={'HEART_EFFORT':{'search_words':['effort'], 'plain_forms':{'vp':'try harder'}}}
     d=plan(config,data).write(data)
     assert d.concepts['HEART_EFFORT'].search_words==('effort',)

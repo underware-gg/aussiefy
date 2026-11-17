@@ -5,6 +5,13 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+- Apply Rob’s Gate 4 rulings: separate seven physical/figurative senses with stable new IDs and scoped
+  sources; add the approved Tradie plural address and three English forms, keeping masking and permissions.
+- Approve the bulk meaning names/search words, alias substitutions, source controls, glosses, sentence
+  forms and numeric-grade retentions; keep prize pig unadmitted. Retain DD-003 under narrowed H25.
+- Render faithful HEARTBREAK, HEART_EFFORT and DOUBT_IT sentence forms through shared owner binding,
+  polarity, aspect and actual-modal checks; leave frozen v4 schemas unchanged.
+
 - Use actual sentence scope for English choices: preserve external possessors, grammatical negation,
   auxiliary agreement and modal distinctions; keep source where authored wording cannot fit faithfully.
   Frozen v4 schemas and ordinary dictionary rendering are unchanged.
@@ -15,8 +22,8 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 - Batch meaning-quiz exclusions through the ordinary lookup scoring kernel, reusing a bounded spelling
   index and returning IDs instead of full discovery cards. Preserve seeded questions and public contracts.
 - Add the Gate 4 acceptance ledger, complete current active-grade coverage and source-calibration recheck.
-  Render all 45 authored meaning examples; preserve source at three unresolved sentence scopes, and add
-  a provisional restless-sleep clause form without changing display wording, spellings or permanent IDs.
+  Render all 45 authored meaning examples, including faithful forms for the three resolved sentence scopes, and add
+  an approved restless-sleep clause form without changing display wording, spellings or permanent IDs.
 
 - Implement the coordinated v4 contract across Python, CLI and MCP: exact kept/held source spots,
   grammatical English choices, call-local personal terms and host controls, output-selection suggestions,
@@ -30,18 +37,18 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 - Reconcile scoped EW4 searches for every stored term and the completed 125-entry crowd-only follow-through,
   retain their actual dates and source limits, and calibrate versioned evidence weights from the source hunt.
-  Preserve testimony separately; refine provisional drover/nature-strip/sloshed glosses and declare the
+  Preserve testimony separately; refine approved drover/nature-strip/sloshed glosses and declare the
   personal judgement in some mongrel and an old coot through the existing opinion mechanism.
 - Prepare directed near-meaning data, source-owned-term ambiguity notes and internal personal-term
   validation at the earlier foundations checkpoint, whose production responses remained v3.
 
-- Supply provisional plain wording and search words for the remaining meanings, preserving Rob's
+- Supply approved plain wording and search words for the remaining meanings, preserving Rob's
   approved sample and all source triggers. Add paged concept discovery with eligible-entry counts
   through Python, the CLI and MCP, alongside the separate waiting-meanings listing.
 
-- Add Rob-approved busy and speed senses of flat strap. Provisionally add friendly plural dickheads
+- Add Rob-approved busy and speed senses of flat strap. Add approved friendly plural dickheads
   and shared-English legendary, and extend coldie to BEER; keep the dial, masking, address and
-  quantity distinctions. Recommendations are recorded in the Brain's Rulings for Rob report.
+  quantity distinctions. Approvals are recorded in the Brain’s Rulings for Rob report.
 
 - Reject raw slot syntax in reader-facing glosses across dictionary loads and corrections. Reword the
   knock-back and bend-ear glosses, retaining their entry IDs, headwords and grammar.

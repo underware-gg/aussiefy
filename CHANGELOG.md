@@ -9,6 +9,13 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+- Apply Rob’s Gate 4 rulings: separate seven physical/figurative senses with stable new IDs'n scoped
+  sources; add the approved Tradie plural address'n three English forms, keeping masking and permissions.
+- Approve the bulk meaning names/search words, alias substitutions, source controls, glosses, sentence
+  forms'n numeric\-grade retentions; keep prize pig unadmitted. Retain DD\-003 under narrowed H25.
+- Render faithful HEARTBREAK, HEART_EFFORT and DOUBT_IT sentence forms through shared owner binding,
+  polarity, aspect and actual-modal checks; leave frozen v4 schemas unchanged.
+
 - Use actual sentence scope for English choices: preserve external possessors, grammatical negation,
   auxiliary agreement'n modal distinctions; keep source where authored wording can't fit faithfully.
   Frozen v4 schemas'n ordinary dictionary renderin' are unchanged.
@@ -19,8 +26,8 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 - Batch meaning\-quiz exclusions through the ordinary lookup scorin' kernel, reusing a bounded spellin'
   index'n returning IDs instead of full discovery cards. Anyway, preserve seeded questions and public contracts.
 - Add the Gate 4 acceptance ledger, complete current active\-grade coverage'n source\-calibration recheck.
-  Render all 45 authored meaning examples; preserve source at three unresolved sentence scopes, and add
-  a provisional restless\-sleep clause form without changin' display wording, spellings or permanent IDs.
+  Render all 45 authored meaning examples, including faithful forms for the three resolved sentence scopes, and add
+  an approved restless\-sleep clause form without changin' display wording, spellings or permanent IDs.
 
 - Implement the coordinated v4 contract across Python, CLI and MCP: exact kept/held source spots,
   grammatical English choices, call\-local personal terms'n host controls, output\-selection suggestions,
@@ -34,18 +41,18 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 - Reconcile scoped EW4 searches for every stored term'n the completed 125\-entry crowd\-only follow\-through,
   retain their actual dates'n source limits, and calibrate versioned evidence weights from the source hunt.
-  Preserve testimony separately; refine provisional drover/nature\-strip/sloshed glosses'n declare the
+  Mind ya, preserve testimony separately; refine approved drover/nature\-strip/sloshed glosses'n declare the
   personal judgement in some mongrel'n an old coot through the existin' opinion mechanism.
 - Prepare directed near\-meaning data, source\-owned\-term ambiguity notes'n internal personal\-term
   validation at the earlier foundations checkpoint, whose production responses remained v3.
 
-- Supply provisional plain wording'n search words for the remaining meanings, preserving Rob's
+- Supply approved plain wording'n search words for the remaining meanings, preserving Rob's
   approved sample'n all source triggers. Struth, add paged concept discovery with eligible\-entry counts
   through Python, the CLI and MCP, alongside the separate waitin'\-meanings listin'.
 
-- Add Rob\-approved busy'n speed senses of flat strap. Provisionally add friendly plural dickheads
+- Add Rob\-approved busy'n speed senses of flat strap. Add approved friendly plural dickheads
   and shared\-English legendary, and extend coldie to BEER; keep the dial, masking, address and
-  quantity distinctions. Recommendations are recorded in the Brain's Rulings for Rob report.
+  quantity distinctions. Approvals are recorded in the Brain’s Rulings for Rob report.
 
 - Reject raw slot syntax in reader\-facin' glosses across dictionary heaps'n corrections. Reword the
   knock\-back'n bend\-ear glosses, retaining their entry IDs, headwords and grammar.
@@ -215,7 +222,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 - Enforce reviewed composite themes in lint'n model\-output checks, rate the constructor’s actual
   wording \(including compounds'n joined words\), and respect register filters for imagery and riffs
-  across selection'n cards. Well, keep community evidence counts tied to source kind and record scoped
+  across selection'n cards. Keep community evidence counts tied to source kind and record scoped
   Australian\-use testimony for the bare surprise stem.
 
 - Add the agent\-neutral Bulldust constructor through Python, CLI and MCP: reviewed typed families,

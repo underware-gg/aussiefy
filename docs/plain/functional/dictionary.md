@@ -180,21 +180,23 @@ until a supported `caught_on` record exists; unfound agent output with no indepe
 bulldust. Otherwise the score decides attested versus unverified. Supported citation dates take precedence
 over `dated_by_curator`; absent evidence means unknown, rather than the date of the latest web page.
 
-`attestation.yaml` is explicitly provisional pending expression-level source research. Substitution and
+`attestation.yaml` uses the source-calibrated 20261114-source-hunt-1 weights, approved by Rob under R80.
+Calibration is a curator source-based sanity check, not independently measured classification accuracy. Substitution and
 garnish entry selection read its continuous score and general-wording factor, replacing raw URL-count
 weighting. Riffs and contextual imagery multiply the same continuous evidence/general-English factor into their
 shared tone/signature weighting, with the first curated option weighted double. The usage/meaning gates
 and evidence labels apply to them too; general English remains eligible.
 Existing citation links are retained with empty support
 lists where their whole-expression scope has not been checked; an old sense audit is not an origin or
-frequency survey. This work does not declare the source hunt complete.
+frequency survey. All stored terms have scoped searched records; inconclusive/blocked checks remain inconclusive rather than attested.
 
 The inherited-citation disposition pass is complete: `2,141` distinct term/URL pairs have inspection or
 access-failure records. A conservative complete-sense cohort now contributes to the existing score;
 partial constructions, narrower senses, stored variants and blocked references remain available for
 review. Historical witnesses do not establish current commonness. The research ledger and integration
 decisions are in [the source-audit checkpoint](../../../research/community-dictionary-2026-10-20/inherited-source-audit.md).
-These checks preserve usage/meaning holds and do not change the provisional scoring threshold.
+These checks preserve usage/meaning holds and the calibrated scoring threshold. Later approved source/sense changes
+are reconciled separately from the immutable calibration archive.
 
 Changes/cards v3 share structured sources, evidence, resolved theme tiers and attributable makers across
 lookup, change cards, riffs and imagery. Constructors keep whole-expression evidence separate from

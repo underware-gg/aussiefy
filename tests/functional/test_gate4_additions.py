@@ -79,15 +79,15 @@ def test_friendly_plural_mask_keeps_the_plural_ending(dictionary):
         {'span': [0, 9], 'ending_start': 8, 'vulgarity': 2}]
 
 
-def test_provisional_recommendations_do_not_fabricate_testimony_or_change_spellings(dictionary):
+def test_approved_recommendations_do_not_fabricate_testimony_or_change_spellings(dictionary):
     for eid in ('coldie', 'dickheads-address', 'legendary-excellent'):
         entry = dictionary.entries[eid]
-        assert 'PROVISIONAL' in entry.notes
+        assert 'Approved by Rob under R80' in entry.notes and 'PROVISIONAL' not in entry.notes
         assert entry.testimony is None
         assert not any(s.kind == 'testimony' for s in entry.sources)
     assert dictionary.entries['coldie'].form == 'a coldie'
     assert dictionary.entries['legendary-excellent'].reads_as == 'general'
-    assert not any(e.id == 'cunts-address' for e in dictionary.entries.values())
+    assert dictionary.entries['cunts-address'].vulgarity == 3
 
 
 @pytest.mark.parametrize('source', ['I drank beer.', 'I drank some beer.', 'I drank much beer.',

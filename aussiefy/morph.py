@@ -325,3 +325,11 @@ def object_of_possessive(text: str) -> str | None:
     if text.endswith(("'", '’')):
         return text[:-1]
     return None
+
+
+def subject_of_possessive(text: str) -> str | None:
+    """Recover an explicitly authored subject from a clear possessive owner."""
+    for subject, (_, _, _, possessive) in PRONOUNS.items():
+        if text.casefold() == possessive:
+            return 'I' if subject == 'i' else subject
+    return object_of_possessive(text)

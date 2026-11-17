@@ -81,19 +81,50 @@ def test_negation_cannot_move_over_a_bound_argument(dictionary):
     assert plain_entry(concept, detection, dictionary, tokens=tokens) is None
 
 
-@pytest.mark.parametrize('cid,source', [
-    ('HEARTBREAK', 'Her heart was broken.'),
-    ('HEART_EFFORT', "Her heart wasn't in it."),
-    ('HEART_EFFORT', "Her heart's in it."),
-    ('DOUBT_IT', 'I doubt it could be done.'),
-    ('DOUBT_IT', 'I doubt it would work.'),
+@pytest.mark.parametrize('cid,source,expected', [
+    ('HEARTBREAK', 'Her heart was broken.', 'she was heartbroken'),
+    ('HEART_EFFORT', "Her heart wasn't in it.", 'she was not engaged in it'),
+    ('DOUBT_IT', 'I doubt it could be done.', 'doubt it could be done'),
+    ('DOUBT_IT', 'I doubt it would work.', 'doubt it would work'),
 ])
-def test_named_cases_preserve_source_without_faithful_authored_wording(dictionary, cid, source):
+def test_approved_sentence_forms_retain_owner_polarity_and_actual_modal(dictionary, cid, source, expected):
+    from aussiefy.realise import realise
     tokens = tokenize(source)
     detection = next(d for d in read_meanings(tokens, dictionary).detections if cid in d.concepts)
-    assert plain_entry(dictionary.concepts[cid], detection, dictionary, tokens=tokens) is None
-    result = Translator(dictionary, lookup_embedder=None).translate(source, level=1, vulgarity=0, embellishment=0)
-    assert source in result.text
+    entry, reading = plain_entry(dictionary.concepts[cid], detection, dictionary, tokens=tokens)
+    assert realise(entry, entry.form, reading, source_auxiliaries=True).lower() == expected
+
+
+@pytest.mark.parametrize('source,expected', [
+    ('Her confidence was firm.', 'She was confident.'),
+    ('His confidence was firm.', 'He was confident.'),
+    ('They said my confidence was firm.', 'They said I was confident.'),
+    ('Their hopes were high.', 'They were hopeful.'),
+    ('Their hope was high.', 'They were hopeful.'),
+    ('My confidence is firm.', 'I am confident.'),
+    ('Your confidence was firm.', 'You were confident.'),
+    ('Our confidence was firm.', 'We were confident.'),
+    ('Their confidence was never firm.', 'They were never confident.'),
+    ("Rob's confidence was firm.", 'Rob was confident.'),
+])
+def test_an_authored_clause_can_bind_a_clear_external_owner_as_its_subject(dictionary, source, expected):
+    tokens = tokenize(source)
+    start = next(i for i, t in enumerate(tokens) if t.norm in {'confidence','hope','hopes'})
+    form = '{subj} {be} ' + ('hopeful' if 'hope' in source else 'confident')
+    assert rendered(dictionary, source, form, start=start)[0] == expected
+
+
+@pytest.mark.parametrize('source', ["The old boss's confidence was firm.", "Jo and Sam's confidence was firm."])
+def test_an_ambiguous_compound_owner_cannot_be_promoted_to_a_subject(dictionary, source):
+    start = next(i for i,t in enumerate(tokenize(source)) if t.norm == 'confidence')
+    assert rendered(dictionary, source, '{subj} {be} confident', start=start) is None
+
+
+def test_progressive_nominal_predicate_is_not_changed_to_an_accomplished_state(dictionary):
+    source = 'Her heart was breaking.'
+    tokens = tokenize(source)
+    d = next(d for d in read_meanings(tokens, dictionary).detections if 'HEARTBREAK' in d.concepts)
+    assert plain_entry(dictionary.concepts['HEARTBREAK'], d, dictionary, tokens=tokens) is None
 
 
 @pytest.mark.parametrize('source,supported', [('Were they content?', True), ("Weren't they content?", False)])
@@ -112,3 +143,10 @@ def test_auxiliary_outside_replacement_is_not_duplicated(dictionary):
     detection = Detection(2, 3, ('TEST',), 'predicate_adj', 3, 'test', '', captures={'be': tokens[1]})
     concept = parse_concept('TEST', {'plain': 'exhausted', 'plain_forms': {'predicate_adj': '{be} exhausted'}})
     assert plain_entry(concept, detection, dictionary, tokens=tokens) is None
+
+
+def test_unresolved_contracted_nominal_copula_never_invents_a_you_subject(dictionary):
+    source = "Her heart's in it."
+    tokens = tokenize(source)
+    d = next(d for d in read_meanings(tokens, dictionary).detections if 'HEART_EFFORT' in d.concepts)
+    assert plain_entry(dictionary.concepts['HEART_EFFORT'],d,dictionary,tokens=tokens) is None

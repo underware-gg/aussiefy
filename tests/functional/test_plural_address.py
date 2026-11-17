@@ -24,8 +24,8 @@ def test_direct_plural_address_has_no_distributive_candidates(dictionary, text):
         result = tr.translate(text, seed=seed, **OPTIONS)
         record = next(r for r in result.records if 'PLURAL_ADDRESS' in r.det.concepts)
         assert record.det.noun_use == 'address'
-        assert {c.entry.id for c in record.eligible} == {'youse', 'you-mob', 'dickheads-address'}
-        assert record.substituted and record.output.lower() in {'youse', 'you mob', 'dickheads'}
+        assert {c.entry.id for c in record.eligible} == {'youse', 'you-mob', 'dickheads-address', 'cunts-address'}
+        assert record.substituted and record.output.lower() in {'youse', 'you mob', 'dickheads', 'cunts'}
         assert not any(phrase in result.text.lower() for phrase in ['every bugger', 'every bastard',
                                                                   'every cunt', 'every man', 'every bloke'])
 
@@ -39,7 +39,7 @@ def test_reference_keeps_distributive_meaning(dictionary, text):
     for record in records:
         assert record.det.noun_use == 'reference'
         assert REFERENTIAL & {c.entry.id for c in record.eligible}
-        assert not {'you-mob', 'dickheads-address'} & {c.entry.id for c in record.eligible}
+        assert not {'you-mob', 'dickheads-address', 'cunts-address'} & {c.entry.id for c in record.eligible}
 
 
 @pytest.mark.parametrize('text', ['Everyone, including Sam, came.', 'Everyone!'])
@@ -60,7 +60,7 @@ def test_plain_and_automatic_alternatives_share_address_reading(dictionary):
     source = 'Hi everyone, the meeting is cancelled.'
     result = translate_changes(source, translator=tr, **OPTIONS)
     changes = [c for c in result.changes if c['kind'] == 'substitution'
-               and c.get('entry_id') in {'you-mob', 'youse'}]
+               and c.get('entry_id') in {'you-mob', 'youse', 'dickheads-address', 'cunts-address'}]
     assert len(changes) == 1
     offered = {changes[0]['entry_id']} | {c['entry_id'] for c in changes[0]['alternatives'] + changes[0]['locked']}
     assert not offered & REFERENTIAL

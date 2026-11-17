@@ -1,13 +1,13 @@
-# Gate 4 acceptance evidence — 15 November 2026
+# Gate 4 acceptance evidence — rulings applied 17 November 2026
 
-This is a self-review against the current Brain engine/community designs and build plan, not Rob's
-acceptance. H1–H35 follow the engine design's 35 “How we'll know it works” bullets in order. Test paths
+Rob approved all remaining recommendations under R78–R80, recorded in Rulings for Rob, Rob's rulings,
+15 November. This matrix combines that acceptance disposition with executable evidence. H1–H35 follow the engine design's 35 “How we'll know it works” bullets in order. Test paths
 below are under tests/functional unless stated. The checkpoint report in the Brain holds final full-suite
 and push receipts. Passing a gap detector does not mean the underlying acceptance gap is closed.
 
 Reviewed design revisions:
 
-- Engine: d58696015186a34332193afc1f0a218cdb287f3ab72ef6ea8ea5b6bed5c25312.
+- Engine: a2244f087adbb785786640a417fad3384d7754665e3186d484ef15900d502466.
 - Community: 06b0b189e5ab3ee873a00c7fa6aa4765807df4e33b9f81f33c83012abe06f394.
 - Build: 97fe9702431d5b31b4f144acd8d96c849bcb282e130e67d84a3562d2f2794354.
 - Package brief: 0b415af9e3ee2686b0c4a12bfcbeb91bd95d7cdacaf896c5a990366d4e009473.
@@ -38,8 +38,8 @@ Reviewed design revisions:
 | H22 / 6 | `test_runtime_v3.py::test_host_preferences_hook_uses_resolved_dials_once_and_is_never_a_client_argument`; `test_runtime_v3.py::test_hosted_clients_cannot_supply_preferences_or_hidden_popularity` | Hosted capability and host-only preferences. |
 | H23 / 4 | `test_exploration.py::test_names_are_seeded_clean_and_cover_the_three_reviewed_shapes`; `test_exploration.py::test_names_never_use_known_garnish_insults_or_themed_literal_parts` | Seeded clean names. |
 | H24 / 7 | `test_gate4_acceptance.py::test_arvo_and_esky_are_kept_at_every_level_without_a_substitution_roll`; `test_gate4_acceptance.py::test_general_omitted_and_literal_root_are_not_source_markers`; `test_v4_runtime.py::test_source_swears_are_kept_exact_and_unmasked_at_nan`; `test_owned_readings.py::test_dial_eligibility_does_not_erase_a_source_owned_term` | Direct all-level and negative controls added; source cap/rate/status behaviour. |
-| H25 / 7 | `test_v4_runtime.py::test_source_marking_does_not_spend_usage_or_shift_another_roll` | **OPEN clarification.** Test covers recognition/reporting on identical source; literal insertion invariance conflicts with DD-003. Do not call that narrower witness full satisfaction. |
-| H26 / 7 | `test_v4_runtime.py::test_plain_choices_preserve_bound_people_tense_and_degree`; `test_v4_runtime.py::test_ambiguous_australian_forms_keep_all_supported_senses`; `test_v4_freeze.py::test_null_target_replays_and_recaptures_the_exact_plain_source`; `test_plain_source_replay.py::test_all_real_fixture_plain_source_choices_replay_exactly_with_existing_garnish`; `test_gate4_acceptance.py::test_every_concept_example_has_an_explicit_rendering_audit_and_known_gaps_are_not_called_complete` | **OPEN** for three held Tradie English forms and the R64 scopes below. Ordinary safe choices and literal replay covered. |
+| H25 / 7 | `test_v4_runtime.py::test_source_marking_does_not_spend_usage_or_shift_another_roll` | **CLOSED, R78.** Recognising/reporting a word on identical source spends no draw or usage slot and cannot change another pick. Editing a sentence may reshuffle its picks; DD-003 is unchanged. |
+| H26 / 7 | `test_v4_runtime.py::test_plain_choices_preserve_bound_people_tense_and_degree`; `test_v4_runtime.py::test_ambiguous_australian_forms_keep_all_supported_senses`; `test_v4_freeze.py::test_null_target_replays_and_recaptures_the_exact_plain_source`; `test_plain_source_replay.py::test_all_real_fixture_plain_source_choices_replay_exactly_with_existing_garnish`; `test_gate4_acceptance.py::test_every_concept_example_has_faithful_sentence_wording_after_rob_accepted_source_preservation` | **CLOSED, R79/R80.** All three Tradie forms are applied and tested; all 45 authored examples now render safely. Literal replay remains covered. |
 | H27 / 7 | `test_v4_runtime.py::test_selection_distinguishes_passed_over_kept_and_wordless`; `test_gate4_acceptance.py::test_unknown_unchanged_selection_has_the_no_dictionary_code`; `test_v4_freeze.py::test_mixed_selection_explains_each_group_at_its_own_dials` | Passed-over, unknown, mixed and locked selection states. |
 | H28 / 7 | `test_personal_terms.py::test_free_text_rating_and_explicit_tier_are_distinct`; `test_personal_terms.py::test_preparing_personal_terms_cannot_change_dictionary_identity_or_entries`; `test_v4_runtime.py::test_personal_terms_are_literal_request_choices_not_dictionary_entries`; `test_mcp_capabilities.py::test_host_personal_terms_are_hidden_and_resolved_once_per_request`; `test_v4_freeze.py::test_host_can_raise_or_remove_its_own_personal_hook_cap` | Rating, inflection, validation, identity and host controls. |
 | H29 / 7 | `test_v4_runtime.py::test_ruled_out_words_are_real_at_spot_options`; `test_gate4_acceptance.py::test_fantastic_dreams_is_held_and_cites_the_excluded_praise_reading`; `test_gate4_acceptance.py::test_observing_held_markers_preserves_unrelated_translation_choices`; `test_exploration.py::test_a_wordless_verb_preserves_its_objects_independent_meaning` | Named fanciful case and 36 seeded observer/non-observer witnesses added; independent object swap retained. |
@@ -49,32 +49,20 @@ Reviewed design revisions:
 | H33 / 7 ED14 | `test_concept_listing.py::test_all_concept_counts_equal_the_public_entry_listing`; `test_concept_listing.py::test_blocked_meanings_stay_at_zero_and_omissions_never_create_rows`; `test_concept_listing.py::test_every_ordinary_meaning_has_a_distinct_reader_name_and_search_words` | Plain names, exclusions and filtered counts. |
 | H34 / 6 | `test_lookup_contract.py::test_rich_lookup_cards_match_entry_detail_and_report_default_placement`; `test_lookup_contract.py::test_match_codes_do_not_depend_on_display_text` | Shared rich cards and machine match codes. |
 | H35 / 5 | `test_dictionary_extensions.py::test_namespaced_entries_and_entryless_context_meanings_load`; `test_ed16_meanings.py::test_malformed_literal_sequences_are_rejected` | Entryless contextual extension meanings and unknown syntax rejection. |
-| R64 / 7 | `test_gate4_acceptance.py::test_every_concept_example_has_an_explicit_rendering_audit_and_known_gaps_are_not_called_complete`; `test_gate4_acceptance.py::test_sentence_wording_preserves_a_required_modal_or_declines` | **OPEN:** 42/45 render safely; three scopes abstain and preserve source. This is exhaustive gap detection, not 45 successful renderings. |
+| R64 / 7 | `test_gate4_acceptance.py::test_every_concept_example_has_faithful_sentence_wording_after_rob_accepted_source_preservation`; `test_gate4_acceptance.py::test_sentence_wording_preserves_a_required_modal_or_declines` | **CLOSED, R79/R80.** Rob accepted the three preserved cases for Gate 4; subsequent faithful forms now render all 45/45, with owner, polarity, tense and actual-modal regressions. |
 | ED15 / 8 | `test_near_runtime.py`; `test_near_meaning_data.py`; `test_v4_freeze.py::test_near_names_are_authored_on_the_change_and_each_option` | Directed relations, exact-word precedence, genres, graded rolls, Deadset, hard gates, replay and authored near names. |
-| EW4/calibration | `test_gate4_acceptance.py::test_current_calibration_and_ew4_records_reproduce_the_source_hunt_receipt`; `test_calibrated_attestation.py` | 1,409 searched terms and exact source-hunt score reproduction; not independently measured accuracy. |
-| EW9 | `test_gate4_acceptance.py::test_ew9_current_active_levels_have_individual_review_coverage` | 1,264 active baseline grades unchanged; 22 later grades individually reviewed and retained, 19 provisionally. No grade/theme/tier changed. |
+| EW4/calibration | `test_gate4_acceptance.py::test_current_calibration_and_ew4_records_reproduce_the_source_hunt_receipt`; `test_calibrated_attestation.py` | Every current stored term has a searched record; unchanged archive score rows reproduce, while approved source/sense changes are separately reconciled. Weights are unchanged; not independently measured accuracy. |
+| EW9 | `test_gate4_acceptance.py::test_ew9_current_active_levels_have_individual_review_coverage` | 1,264 active baseline grades unchanged; later retentions and eight added/split entries are approved under R80 and individually reconciled. Numeric grades remain independent of themes and profanity. |
 | Quiz | `test_quiz_batch.py`; `test_meaning_quiz.py::test_every_askable_entry_has_safe_distractors_at_each_vulgarity` | One prepared adaptive batch, scalar top-50 equivalence, seeded replies and exhaustive safe distractors. |
 
-## Coordination and acceptance gaps
+## Ruling disposition — nothing awaiting Rob
 
-1. **H25 versus DD-003.** At seed0, level5/Nan/Deadset with no garnish/phonetics/stacking,
-   “She is exhausted.” chooses Kerry-Packered (roll0.430288); “She is exhausted, mate.” chooses the oily-rag
-   exhaustion form (roll0.063482), with mate kept. Recommendation: retain DD-003 and clarify the same-source
-   ownership non-interference requirement. No seeded-key policy change is applied.
-2. **H26 Tradie forms.** g-ya-mad-cunt, g-ya-cunt and g-ya-beautiful-cunt still have source-only choices.
-   Their three proposed English forms remain held for Rob, as instructed; no fake plain option closes this.
-3. **R64 scopes.** HEARTBREAK “Her heart was broken.”, HEART_EFFORT “Her heart wasn't in it.” and DOUBT_IT
-   “I doubt it could be done.” need faithful sentence wording with appropriate scope/polarity/modality.
-   Frame-only defaults cannot express these safely. Unsafe noun fallbacks and explicit modal changes are
-   declined; source is preserved. The missing RESTLESS_SLEEP clause form is repaired provisionally with
-   existing subject/be captures. Propose a shared scope-aware sentence-form design, not phrase-specific code.
-4. **Separate legacy semantic deferrals.** The tag ledger retains a-blue, cark-it, carked-it, give-a-hiding,
-   kick-arse, perv-on and put-the-boot-in for sense separation. Their conservative mixed-sense treatment is
-   explicit; do not call those splits completed merely because tags match the ledger.
-5. **Rob's curation acceptance.** Existing provisional names/search words, sentence forms and additions,
-   plus nineteen later grade retentions, remain recommendations. Plural cunts, the three Tradie forms and
-   the source-only prize-pig FULL candidate are unapplied. No spelling or permanent ID changed.
+1. **H25 / DD-003:** R78 narrows H25 to identical-source recognition/reporting non-interference. The Brain engine design and matrix match; no context-key or seeded policy change.
+2. **R64 / H26:** R79 accepts safe source preservation for Gate 4. R80 authorises the best faithful sentence forms and the three Tradie English forms. All are applied; 45/45 examples render, with tests preserving external owners, negation and could/would. Unsupported contracted or progressive scopes still preserve source.
+3. **Seven sense splits:** all seven are applied as proposed, with permanent added IDs, separate source scopes and theme dispositions. New word vulgarities remain 2 for kick-arse-defeat and 1 for perv-on-admire. Mixed bare fight/thrash readings are unresolved rather than random candidates.
+4. **Curation:** all provisional names/search lists, alias substitutions, sentence forms, near wording, source controls, gloss recommendations, RESTLESS_SLEEP and nineteen later grade retentions are approved by R80. Existing coldie/dickheads/legendary data is verified, not duplicated. Plural cunts and the three Tradie English forms are applied with existing permissions and masking.
+5. **Prize pig:** deliberately unadmitted, as ruled; no further source work is a Gate 4 condition. Have a go, booze and a cold one remain candidates until the separately briefed next curation pass.
 
-H13 is tested for repeatability, changed identity and relevant-change witnesses; the wording does not
-mean an unrelated data edit must alter every output. H21's package validator is verified here; site wiring
-needs the site's own checks. Neither qualification changes the engine design silently.
+Current approval/evidence receipts are in research/gate4-rulings-2026-11-17/. Historical self-review receipts remain labelled with their actual checkpoint. No new review round was opened. Full-gate and remote receipts are recorded in the readiness report after delivery.
+
+H13 still verifies repeatability, identity changes and relevant-change witnesses rather than every unrelated edit changing every output. H21's package validator is covered; site wiring remains site-owned. Staging, main, tags, releases and deployments require separate authority.

@@ -625,7 +625,7 @@
 
 # --- garnish ------------------------------------------------------------------------------------------------
 - id: g-oh-shit
-  # Provisional English sentence form, 2026-11-14; not evidence.
+  # Rob-approved English sentence form, 2026-11-14; not evidence.
   plain_form: "oh no"
   searched:
     date: "2026-10-21"
@@ -639,7 +639,7 @@
   incoherence: 1
   gloss: Dismay at what's coming.
 - id: g-ya-old-bastard
-  # Provisional English sentence form, 2026-11-14; not evidence.
+  # Rob-approved English sentence form, 2026-11-14; not evidence.
   plain_form: "you old fellow"
   searched:
     date: "2026-10-21"
@@ -656,24 +656,25 @@
   gloss: Fond address for a mate.
 - id: g-ya-cunt
   searched:
-    date: "2026-10-21"
+    date: '2026-10-21'
     outcome: inconclusive
-    note: "Historical 2026-10-21 source audit: 1 actual recorded citation-target checks; 0 selected full-form/sense witness(es). This is a limited inherited-citation search, not a fresh or exhaustive web hunt, a frequency survey, or certification of every current mapping."
+    note: 'Historical 2026-10-21 source audit: 1 actual recorded citation-target checks; 0 selected full-form/sense witness(es).
+      This is a limited inherited-citation search, not a fresh or exhaustive web hunt, a frequency survey, or certification
+      of every current mapping.'
   form: ya cunt
   insult: true
   type: garnish
   placement: tag
-  when: [second_person, question]
+  when:
+  - second_person
+  - question
   frame: tag
   vulgarity: 3
   incoherence: 3
-  notes: Affectionate between mates in Australia. Strongly offensive to American ears.
+  notes: Affectionate between mates in Australia. Strongly offensive to American ears. Approved by Rob under R80, 17
+    November 2026; Rulings for Rob, Rob's rulings, 15 November. Approval is not attestation or testimony.
   gloss: Fond address for a mate.
-
-# --- best cunts to worst cunts --------------------------------------------------------------------------------
-# The c-word as a description of a person runs from the highest praise to the lowest contempt, by its adjective:
-# sick, funny, good, mad, loose, cooked, weird, suss, dumb, fucked, dodgy, shit, dog. ("A good cunt" and "a mad
-# cunt" live in phrases.yaml.) All are vulgar rather than slurs, and strongly offensive to American ears.
+  plain_form: my friend
 - id: a-sick-cunt
   searched:
     date: "2026-10-21"
@@ -847,21 +848,25 @@
   gloss: A sly, sneaky person.
 - id: g-ya-beautiful-cunt
   searched:
-    date: "2026-10-21"
+    date: '2026-10-21'
     outcome: inconclusive
-    note: "Historical 2026-10-21 source audit: 1 actual recorded citation-target checks; 0 selected full-form/sense witness(es). This is a limited inherited-citation search, not a fresh or exhaustive web hunt, a frequency survey, or certification of every current mapping."
+    note: 'Historical 2026-10-21 source audit: 1 actual recorded citation-target checks; 0 selected full-form/sense witness(es).
+      This is a limited inherited-citation search, not a fresh or exhaustive web hunt, a frequency survey, or certification
+      of every current mapping.'
   form: ya beautiful cunt
   insult: true
   type: garnish
   placement: tag
-  when: [second_person, question]
+  when:
+  - second_person
+  - question
   frame: tag
   vulgarity: 3
   incoherence: 3
-  notes: Warm thanks or praise to a mate. Strongly offensive to American ears.
+  notes: Warm thanks or praise to a mate. Strongly offensive to American ears. Approved by Rob under R80, 17 November
+    2026; Rulings for Rob, Rob's rulings, 15 November. Approval is not attestation or testimony.
   gloss: Fond address, in thanks or delight.
-
-# --- milder people ------------------------------------------------------------------------------------------
+  plain_form: you wonderful person
 - id: a-funny-bugger
   searched:
     date: "2026-10-21"
@@ -1032,17 +1037,31 @@
   gloss: Leave, clear off.
 - id: kick-arse
   searched:
-    date: "2026-10-21"
-    outcome: inconclusive
-    note: "Historical 2026-10-21 source audit: 1 actual recorded citation-target checks; 0 selected full-form/sense witness(es). This is a limited inherited-citation search, not a fresh or exhaustive web hunt, a frequency survey, or certification of every current mapping."
-  themes: [violence]
+    date: '2026-11-15'
+    outcome: found
+    note: Reported physical-threat use, distinguished from competitive defeat. Scoped inspected/indexed evidence as distinguished
+      in Rulings for Rob; no frequency or origin claim.
+  themes:
+  - violence
   form: kick {objposs} arse
-  concept: [THRASH]
+  concept:
+  - BEAT_UP
   frame: vp
   intensity: 4
   vulgarity: 2
   incoherence: 2
-  gloss: Beat someone soundly.
+  gloss: Give someone a physical thrashing.
+  notes: Approved by Rob under R80, 17 November 2026; Rulings for Rob, Rob's rulings, 15 November. Approval is not attestation
+    or testimony.
+  other_sense: Also decisive defeat; unclear threats, reprimands and victories are not interchangeable.
+  sources:
+  - url: https://www.abc.net.au/news/2016-01-23/code-our-shameful-response-to-the-mt-druitt-handcuffing-video/7107522
+    publisher: ABC — Bill Code, 23 January 2016
+    kind: media
+    supports:
+    - term
+    - meaning
+    note: Reports a physical kick-your-arse threat; not evidence a beating occurred. Checked 15 November 2026.
 - id: piss-about
   searched:
     date: "2026-10-21"

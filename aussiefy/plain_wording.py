@@ -69,6 +69,16 @@ class WordingScope:
         if ('{poss}' in form and 'poss' not in captures and self.possessor is None
                 and self.start and self.tags[self.start-1] == 'POS'):
             return None
+        if '{subj}' in form and 'subj' not in captures:
+            if self.predicate is None or self.possessor is None:
+                return None
+            a, b = self.possessor
+            owner = phrase_token(list(self.tokens[a:b]))
+            subject = morph.subject_of_possessive(owner.text)
+            if subject is None:
+                return None
+            captures['subj'] = replace(owner, text=subject, norm=subject.casefold())
+            start = a
         if '{poss}' in form and 'poss' not in captures and self.possessor:
             a, b = self.possessor
             captures['poss'] = phrase_token(list(self.tokens[a:b]))
@@ -94,7 +104,10 @@ class WordingScope:
                     end += 1
             if detection.question and end > at + 1:
                 return None  # Inverted negative clauses need a separately supported scope.
-            surface = ' '.join(t.norm for t in self.tokens[at:end])
+            words = [t.norm for t in self.tokens[at:end]]
+            if start < detection.start and 'subj' in captures and 'subj' not in detection.captures:
+                words[0] = morph.agree(key, captures['subj'].norm, morph.tense_of(token.norm))
+            surface = ' '.join(words)
             captures[key] = replace(token, text=surface, end=self.tokens[end-1].end)
         return replace(detection, start=start, captures=captures,
                        inflection='' if self.predicate is not None else detection.inflection)
@@ -109,6 +122,11 @@ class WordingScope:
                                   if tag in {'VBD', 'VBP', 'VBZ', 'MD'} or t.norm in morph.BE_FORMS), None)
             if target_finite is None:
                 return False
+            def progressive(words, tags):
+                return any(word.norm in morph.BE_FORMS and any(tag == 'VBG' for tag in tags[i+1:])
+                           for i, word in enumerate(words))
+            if progressive(source, source_tags) != progressive(target, target_tags):
+                return False
             source_verb = self.tokens[self.predicate]
             if source_verb.norm not in _MODALS and _past(source_verb, self.tags[self.predicate]) != _past(
                     target[target_finite], target_tags[target_finite]):
@@ -118,9 +136,16 @@ class WordingScope:
             return False  # The external owner remains; an extra determiner would duplicate its role.
         arguments = {key: (tuple(t.norm for t in self.tokens if value.start <= t.start and t.end <= value.end),
                            tuple(t.norm for t in tokenize(value.text))) for key, value in reading.captures.items()
-                     if (key in {'np', 'obj', 'objposs'} or key == 'poss' and reading.start < self.start) and value.start >= self.tokens[reading.start].start
+                     if (key in {'np', 'obj', 'objposs'} or key in {'poss', 'subj'} and reading.start < self.start) and value.start >= self.tokens[reading.start].start
                      and value.end <= self.tokens[self.end-1].end}
         has_auxiliary = any(_auxiliary(source, source_tags, i) for i in range(len(source)))
+        rebound = reading.start < self.start and 'subj' in reading.captures
+        def operator(word):
+            if rebound:
+                for lemma, forms in (('be', morph.BE_FORMS), ('have', morph.HAVE_FORMS), ('do', morph.DO_FORMS)):
+                    if word in forms and word not in {'be', 'been', 'being'}:
+                        return lemma, morph.tense_of(word)
+            return word
         def signature(words, tags, side):
             norms = tuple(t.norm for t in words)
             spans = {}
@@ -143,9 +168,9 @@ class WordingScope:
                 norm = norms[i]
                 if norm in _NEGATORS:
                     carrier = norms[i-1] if i else ''
-                    out.append((norm, carrier))
+                    out.append((norm, operator(carrier)))
                 elif norm in _MODALS or has_auxiliary and _auxiliary(words, tags, i):
-                    out.append((norm, 'operator'))
+                    out.append((operator(norm), 'operator'))
                 i += 1
             return tuple(out)
         before, after = signature(source, source_tags, 0), signature(target, target_tags, 1)
@@ -170,7 +195,7 @@ def plain_entry(concept, detection, dictionary, *, tokens, tags=None):
         if not form or form_problem(form, reading):
             continue
         entry = parse_entry({'id': concept.id.lower().replace('_', '-'), 'form': form,
-                             'frame': detection.frame, 'concept': [concept.id]})
+                             'frame': 'clause' if form.startswith('{subj} ') else detection.frame, 'concept': [concept.id]})
         english = realise(entry, form, reading, source_auxiliaries=True)
         if not scope.compatible(english, reading):
             continue
