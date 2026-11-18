@@ -1,0 +1,20 @@
+# Aim-mode preferences. The cap profiles and their seeded choices stay in profiles.yaml.
+# Tier distance dampens milder swears while clean alternatives retain positive weight.
+tier_decay: 0.3
+swearing:
+  0: {exclaim: 0, closer: 0, infix: 0, lean: 1}
+  1: {exclaim: 0.10, closer: 0.16, infix: 0.65, lean: 1.4}
+  2: {exclaim: 0.24, closer: 0.42, infix: 2.1, lean: 4.5}
+  3: {exclaim: 0.38, closer: 0.65, infix: 2.5, lean: 10}
+embellishment:
+  0: {}
+  1:
+    garnish: {connective: 0.18, opener: 0.28, tag: 0.22, aside: 0, tail: 0.18, riff: 0.22, closer: 0}
+    max_garnish: {connective: 4, opener: 2, tag: 3, aside: 0, tail: 1, riff: 2, closer: 0}
+    garnish_gap: 2
+    garnish_per_sentence: 1
+  2:
+    garnish: {connective: 0.35, opener: 0.52, tag: 0.45, aside: 0.30, tail: 0.48, riff: 0.55, closer: 0.65}
+    max_garnish: {connective: 6, opener: 3, tag: 3, aside: 3, tail: 2, riff: 3, closer: 1}
+    garnish_gap: 1
+    garnish_per_sentence: 1

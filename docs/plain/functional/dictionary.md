@@ -838,3 +838,17 @@ the coordinated [v4 contract](../../contracts/v4/README.md) is frozen.
 An adverb entry may declare `grammar: {position: before_verb}`. Source grammar must establish the
 actual lexical verb; the renderer moves the adverb before that verb and retains its bound text.
 Without that evidence the candidate is unavailable. The default `source` position is unchanged.
+
+
+## Aiming at the dials
+
+`dial_mode` is one request choice for rudeness and embellishment together: `aim` or `cap` (default).
+`--dial-mode aim` is the CLI spelling; MCP uses the same `dial_mode` parameter and default.
+Aim favours permitted words near the requested vulgarity and gives Dinkum/Troppo their own garnish rates,
+limits and spacing. Clean choices remain possible; semantic, grammatical, theme and document restrictions
+are unchanged. Explicit document/profile overrides win, including zero. The level dial is unchanged.
+Cap retains the historical permission-only profiles and seeded translation choices. Aim deliberately
+changes seeded choices, so a host should persist its mode beside the other dials for replay/share calls.
+The frozen v4 response and pin schemas are unchanged. Dictionary identity changes with the aim data.
+
+The tuning is in `data/dial-goals.yaml`; original profile data remains in `data/profiles.yaml`.

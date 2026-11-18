@@ -23,6 +23,7 @@ from .terms import fold, strip_markup, name_slug
 if TYPE_CHECKING:
     from .constructions import ConstructionCatalog
     from .names import NameCatalog
+    from .dial_goals import DialGoals
 
 
 # the endings a masked word keeps after a stem that is itself a listed swear or a mask word (O23's fixed set)
@@ -128,6 +129,7 @@ class Dictionary:
     theme_defaults: dict[int, frozenset[str]]     # subject permissions by vulgarity tier (themes.yaml)
     warnings: list[str] = field(default_factory=list)
     fences: tuple[Fence, ...] = ()
+    dial_goals: DialGoals | None = None
     swearing: dict[int, SwearProfile] = field(default_factory=dict)   # vulgarity -> how often swearing comes
 
     genres: Any = None

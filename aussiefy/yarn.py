@@ -46,7 +46,7 @@ class YarnResult:
 def yarn(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None,
          markup: str = "text", client: Any = None, model: str = DEFAULT_MODEL, cache: bool = True,
          cache_dir: str | None = None,
-         max_turns: int = 12, english: str | None = None, embellishment: int | str | None = None,
+         max_turns: int = 12, english: str | None = None, embellishment: int | str | None = None, dial_mode: str = "cap",
               document_type: str = "general", document_config: dict | None = None,
               themes: dict[str, bool] | None = None, invention: bool | None = None,
               popularity: bool = False, preferences: list[dict] | None = None, personal_terms: list[dict] | None = None,
@@ -57,7 +57,7 @@ def yarn(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str
     submission that changes any code or markup is sent back. english as for translate; embellishment as for
     translate: General defaults to Dinkum, named types supply presets."""
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
-    session = brief(text, level=level, seed=seed, vulgarity=vulgarity, markup=markup, english=english,
+    session = brief(text, dial_mode=dial_mode, level=level, seed=seed, vulgarity=vulgarity, markup=markup, english=english,
                     embellishment=embellishment, document_type=document_type, document_config=document_config, translator=translator, popularity=popularity, preferences=preferences, personal_terms=personal_terms)
     result = YarnResult(session.plan["draft"], "", session.plan["draft"], session.plan, {}, model)
 

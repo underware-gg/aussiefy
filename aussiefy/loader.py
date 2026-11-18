@@ -478,7 +478,9 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         swearing[int(v)] = SwearProfile(**{k: float(x) for k, x in (raw or {}).items()})
     if errors:
         raise SchemaError("dictionary failed validation:\n  " + "\n  ".join(errors))
-    dictionary = Dictionary(entries=entries, concepts=concepts, profiles=profiles, phonetic=phonetic,
+    from .dial_goals import parse_goals
+    goals = parse_goals(_read_optional(data / 'dial-goals.yaml', errors, {}))
+    dictionary = Dictionary(dial_goals=goals, entries=entries, concepts=concepts, profiles=profiles, phonetic=phonetic,
                       policy_defaults=prof_raw.get("policy", {}), patterns=patterns, index=PatternIndex(patterns),
                       form_index=PatternIndex(forms), swears=swears, dialect=dialect, theme_defaults=theme_defaults,
                       warnings=warnings, fences=fences, swearing=swearing, genres=genres, pos_words=pos.lower_words(),

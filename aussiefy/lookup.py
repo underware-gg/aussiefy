@@ -45,6 +45,15 @@ _NEGATED = re.compile(r"\b(?:no|not|never|nothing|none|nobody|nowhere|without|ca
 
 
 @lru_cache(maxsize=None)
+@lru_cache(maxsize=8192)
+def _meaning_evidence(text):
+    """Auxiliary fragments are not subject matter: don't/don’t must agree with do not."""
+    normal = ' '.join(t.norm for t in tokenize(text))
+    roots = {w[:-4] if w.endswith('less') else w for w in content_words(normal)}
+    anchors = frozenset(form for word in roots for form in verb_forms(word))
+    return bool(_NEGATED.search(normal)), anchors
+
+
 def _inflected(form: str, frame: str) -> frozenset[str]:
     """A form with one word inflected, as a query may give it: "coves" for cove, "playing up" for play up, "chucked
     a sickie" for chuck a sickie (morph's plurals and verb forms)."""
@@ -283,12 +292,12 @@ def _merge_ruled_out(protections, limit):
              for cid, words in sorted(meanings.items())] + dialects)
 
 
-def _lookup_cards(tr, query, *, level, vulgarity, embellishment, document_type, document_config,
+def _lookup_cards(tr, query, *, level, vulgarity, embellishment, document_type, document_config, dial_mode="cap",
                   include_gated, unlock=None, short=True, limit=50):
     d = tr.dictionary
-    genre = resolve_document(query, config=d.genres, document_type=document_type, document_config=document_config)
+    genre = resolve_document(query, dial_mode=dial_mode, config=d.genres, document_type=document_type, document_config=document_config)
     setting = genre.setting(parse_embellishment(embellishment) if embellishment is not None else None)
-    eff = tr.effective(level=level, vulgarity=vulgarity, unlock=["all"] if include_gated else unlock,
+    eff = tr.effective(dial_mode=dial_mode, level=level, vulgarity=vulgarity, unlock=["all"] if include_gated else unlock,
                        embellishment=embellishment, document_type=document_type, document_config=document_config)
     return _LookupCards(d, eff, setting, genre.policy.term_domains, short, limit)
 
@@ -318,9 +327,9 @@ class _LookupBatch:
     Query results are request-local; the bounded spelling index is shared by actual content.
     It creates no new public operation or response contract.
     """
-    def __init__(self, translator, *, level, vulgarity, embellishment, document_type, document_config, include_gated):
+    def __init__(self, translator, *, level, vulgarity, embellishment, document_type, document_config, include_gated, dial_mode="cap"):
         self.translator = translator
-        self.cards = _lookup_cards(translator, None, level=level, vulgarity=vulgarity, embellishment=embellishment,
+        self.cards = _lookup_cards(translator, None, dial_mode=dial_mode, level=level, vulgarity=vulgarity, embellishment=embellishment,
             document_type=document_type, document_config=document_config, include_gated=include_gated)
         dictionary = translator.dictionary
         self.index = _lookup_index(tuple((pattern.text, pattern.concepts) for pattern in dictionary.patterns),
@@ -336,7 +345,7 @@ class _LookupBatch:
 
 
 def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = None, limit: int = 8,
-           include_gated: bool = False, short: bool = False, embellishment: int | str | None = None,
+           include_gated: bool = False, short: bool = False, embellishment: int | str | None = None, dial_mode: str = "cap",
            document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None,
            unlock: list[str] | None = None, translator: Translator | None = None) -> dict[str, Any]:
     """Find Aussie options for a plain-English meaning ("very busy"), or explain a slang term ("goog").
@@ -352,7 +361,7 @@ def lookup(query: str, *, level: int | str = 5, vulgarity: int | str | None = No
     if type(limit) is not int or limit < 1:
         raise UserError(f"limit must be 1 or more, not {limit}")
     tr = translator
-    cards = _lookup_cards(tr, query, level=level, vulgarity=vulgarity, embellishment=embellishment,
+    cards = _lookup_cards(tr, query, dial_mode=dial_mode, level=level, vulgarity=vulgarity, embellishment=embellishment,
         document_type=document_type, document_config=document_config, include_gated=include_gated,
         unlock=unlock, short=short, limit=limit)
     return _query(query, tr, cards, include_gated)
@@ -365,7 +374,7 @@ def _query(query, tr, cards, include_gated, *, index=None, ids_only=False):
     # one word ("lonely") is where character n-grams mislead most (lovely, miser), so for a single word trust
     # whole-word hits and discount fuzzy ones
     one_word = " " not in q
-    negated = bool(_NEGATED.search(q))   # a model match must agree with the query on negation
+    negated, negative_anchors = _meaning_evidence(q)   # a model match must agree with the query on negation
     fuzz = ONE_WORD_FUZZ if one_word else 1.0
     tokens = tokenize(query.strip())
     while tokens and tokens[0].is_punct:
@@ -480,7 +489,6 @@ def _query(query, tr, cards, include_gated, *, index=None, ids_only=False):
         concept_score[cid] = max(concept_score.get(cid, 0), 1.0)
     scored: list[tuple[float, Entry, str, str]] = []
     parsed_concepts = {cid for eid in slotted for cid in d.entries[eid].concept}
-    negative_anchors = {w[:-4] if w.endswith("less") else w for w in content_words(q)}
     def score_entry(e, term_match, use_model=True):
         if waiting and not set(e.concept).intersection(exhaustive):
             return None
@@ -507,9 +515,8 @@ def _query(query, tr, cards, include_gated, *, index=None, ids_only=False):
             # ones n-grams missed: otherwise a weak n-gram match (knackered for "very tired", 0.65) keeps its weak
             # score while a model-only one (maggoted, from "Very drunk.") gets the model's, and outranks it
             texts = meaning_texts(e, d, concepts=paths)
-            m = max((model.similarity(q, t) for t in texts if t and bool(_NEGATED.search(t.lower())) == negated
-                     and (not negated or negative_anchors & {
-                         w[:-4] if w.endswith("less") else w for w in content_words(t)})),
+            m = max((model.similarity(q, t) for t in texts if t and _meaning_evidence(t)[0] == negated
+                     and (not negated or negative_anchors & _meaning_evidence(t)[1])),
                     default=0.0)
             if m >= model.lookup_threshold and MEANING_FLOOR + (m - model.lookup_threshold) > best:
                 return (round(MEANING_FLOOR + (m - model.lookup_threshold), 3), e,

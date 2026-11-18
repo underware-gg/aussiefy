@@ -29,7 +29,7 @@ from .text import document_spans, HONORIFICS, Token, capital_is_positional, head
 
 def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
          original: str | None = None, markup: str = "text", english: str | None = None,
-         embellishment: int | str | None = None,
+         embellishment: int | str | None = None, dial_mode: str = "cap",
               document_type: str = "general", document_config: dict | None = None,
               themes: dict[str, bool] | None = None, invention: bool | None = None, unlock: list[str] | None = None, translator: Translator | None = None,
          suggest: bool = True) -> dict[str, Any]:
@@ -43,19 +43,19 @@ def lint(text: str, *, level: int | str = 5, vulgarity: int | str | None = None,
     verify, and yarn mode's submit."""
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     tr = translator
-    pol = tr.policy(unlock=unlock, english=english, embellishment=embellishment, document_type=document_type, document_config=document_config)
+    pol = tr.policy(dial_mode=dial_mode, unlock=unlock, english=english, embellishment=embellishment, document_type=document_type, document_config=document_config)
     dial = pol.english
     changed = markup_changed(text, original, markup) if original is not None else []
     # the US and British words are read as the engine read the original: its English, and its genre (a
     # browser's cookies stay in a technical text)
     source = mask(original if original is not None else text, markup)
-    read_as = resolve_document(source.prose(), source.source, config=tr.dictionary.genres,
+    read_as = resolve_document(source.prose(), source.source, dial_mode=dial_mode, config=tr.dictionary.genres,
                                document_type=pol.document_type, document_config=pol.document_config)
     genre = read_as.policy.term_domains
     text = mask(text, markup).prose()
     original = source.prose() if original is not None else None
     d = tr.dictionary
-    eff = tr.effective(level=level, vulgarity=vulgarity, unlock=unlock, document_config=document_config)
+    eff = tr.effective(dial_mode=dial_mode, level=level, vulgarity=vulgarity, unlock=unlock, document_config=document_config)
     cap = eff.vulgarity
     low = " " + fold(text) + " "
     # what the original itself says isn't the translator's word ("cooked" in a recipe, a quoted swear)

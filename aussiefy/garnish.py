@@ -125,6 +125,10 @@ def garnish_pool(placement: str, entries: list[Entry], eff: Effective, used: dic
             reason = "clean garnish comes with the level" if not e.vulgarity else "swearing comes with the vulgarity"
         if reason is None and not insults and e.insult:
             reason = "no name-calling in this text's form"
+        if reason is None and eff.dial_mode == 'aim' and e.vulgarity:
+            rate = eff.swearing.closer if placement == 'closer' else eff.swearing.exclaim
+            if rate <= 0 or eff.vulgarity_weight(e.vulgarity) <= 0:
+                reason = 'swear garnish disabled'
         when = set(e.when or DEFAULT_WHEN[placement])
         if reason is None and placement == "tag" and "fragment" in contexts:
             reason = "no tag-ons on a verbless fragment"
@@ -147,6 +151,8 @@ def garnish_pool(placement: str, entries: list[Entry], eff: Effective, used: dic
 def garnish_weights(pool: list[Entry], eff: Effective, swear: bool | None) -> list[float]:
     """Each entry's weight; swearing sounds like its tier, so a closer at tradie leans to "fuck me dead" over "well,
     I'll be buggered"."""
+    if eff.dial_mode == "aim":
+        return [e.weight * eff.metadata_weight(e) * eff.vulgarity_weight(e.vulgarity) for e in pool]
     return [e.weight * eff.metadata_weight(e) * (tier_match(e.vulgarity, eff.vulgarity) if swear else 1.0)
             for e in pool]
 
@@ -174,10 +180,14 @@ def garnish_offer(placement: str, dictionary: Dictionary, eff: Effective, seed: 
                     rejected.append((candidate.id, "already used in this text"))
                 elif swear is not None and (candidate.vulgarity > 0) != swear:
                     continue
+                elif eff.dial_mode == 'aim' and candidate.vulgarity and (
+                        eff.vulgarity_weight(candidate.vulgarity) <= 0 or eff.swearing.exclaim <= 0):
+                    continue
                 else:
-                    choices.append((candidate, candidate.weight))
+                    choices.append((candidate, candidate.weight * (eff.vulgarity_weight(candidate.vulgarity) if eff.dial_mode == "aim" else 1.0)))
     choices.sort(key=lambda item: item[0].id)
-    return GarnishOffer(placement, tuple(choice for choice, _ in choices), tuple(weight for _, weight in choices),
+    weights = eff.balance_weights([c.vulgarity for c, _ in choices], [w for _, w in choices])
+    return GarnishOffer(placement, tuple(choice for choice, _ in choices), tuple(weights),
                         key, seed, eff, rejected)
 
 

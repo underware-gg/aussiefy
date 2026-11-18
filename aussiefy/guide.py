@@ -155,17 +155,17 @@ def openings(text: str, seed: int = 0, mood: str = "light", n: int = 3) -> list[
     return sorted(pool, key=lambda o: roll(seed, "opening", text[:300], o))[:n]
 
 
-def guide(*, level: int | str = 5, vulgarity: int | str | None = None, embellishment: int | str | None = None,
+def guide(*, level: int | str = 5, vulgarity: int | str | None = None, embellishment: int | str | None = None, dial_mode: str = "cap",
               document_type: str = "general", document_config: dict | None = None,
               themes: dict[str, bool] | None = None, invention: bool | None = None,
           translator: Translator | None = None) -> dict[str, Any]:
     """The voice, language limits and craft rules for a level and vulgarity, and the toolkit workflow."""
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     tr = translator
-    eff = tr.effective(level=level, vulgarity=vulgarity, document_config=document_config)
+    eff = tr.effective(dial_mode=dial_mode, level=level, vulgarity=vulgarity, embellishment=embellishment, document_type=document_type, document_config=document_config)
     data = style_guide_data()
-    pol = tr.policy(embellishment=embellishment, document_type=document_type, document_config=document_config)
-    context = resolve_document(None, config=tr.dictionary.genres, document_type=pol.document_type,
+    pol = tr.policy(dial_mode=dial_mode, embellishment=embellishment, document_type=document_type, document_config=document_config)
+    context = resolve_document(None, dial_mode=dial_mode, config=tr.dictionary.genres, document_type=pol.document_type,
                                document_config=pol.document_config)
     e = context.setting(pol.embellishment)
     return {**eff.envelope(), **context.envelope(pol.embellishment),

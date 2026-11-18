@@ -119,6 +119,7 @@ class Genre:
 
     selected: str = "auto"
     overrides: DocumentOverrides = field(default_factory=DocumentOverrides)
+    dial_mode: str = "cap"
 
     @cached_property
     def policy(self) -> GenrePolicy:
@@ -129,12 +130,13 @@ class Genre:
             values["check_length"] = True
         return replace(base, **values)
 
-    def setting(self, step: int | None = None) -> Embellishment:
+    def setting(self, step: int | None = None, *, dial_mode: str | None = None) -> Embellishment:
         """The embellishment a text of this genre takes: the caller's step (parsed), or the genre's own, narrowed
         to the genre's form unless the setting is free of it (troppo): a dinkum safety notice takes no opener.
         Two things the form rules out go at every setting, troppo's too: name-calling (nobody calls a safety
         notice's reader a galah) and a storyteller's openings (an obituary doesn't start "Fair dinkum, this
         happened.": the fourth pass's commonest troppo fault)."""
+        dial_mode = self.dial_mode if dial_mode is None else dial_mode
         e = self.config.embellishments[self.policy.default_embellishment if step is None else step]
         if self.name == "custom":
             e = replace(e, garnish=frozenset(), openings=False, draft=False, keep_share=0, max_length=1,
@@ -145,7 +147,7 @@ class Genre:
                         quantity_approximation=e.quantity_approximation and self.policy.quantity_approximation)
             if "insult" not in self.policy.garnish:
                 e = replace(e, garnish=e.garnish - {"insult"})
-            if e.follows_form:
+            if e.follows_form or dial_mode == "aim":
                 e = replace(e, garnish=e.garnish & self.policy.garnish)
         overrides = self.overrides.values()
         values = {k: v for k, v in overrides.items() if k in Embellishment.__dataclass_fields__}
@@ -174,15 +176,15 @@ class Genre:
 
 
 def resolve_document(text: str | None, layout: str | None = None, *, config: "GenreConfig",
-                     document_type: str = "general", document_config=None) -> Genre:
+                     document_type: str = "general", document_config=None, dial_mode="cap") -> Genre:
     overrides = DocumentOverrides.parse(document_config)
     if document_type == "auto":
         if text is None:
             raise UserError("document_type auto requires source text; choose a named type for guide")
-        return replace(text_genre(text, layout, config=config), overrides=overrides)
+        return replace(text_genre(text, layout, config=config), overrides=overrides, dial_mode=dial_mode)
     if document_type not in config.policies:
         raise UserError(f"unknown document_type {document_type!r}")
-    return Genre(document_type, {}, config, document_type, overrides)
+    return Genre(document_type, {}, config, document_type, overrides, dial_mode=dial_mode)
 
 
 def form_removes(genre: "Genre", placement: str, step: int) -> bool:

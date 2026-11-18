@@ -51,3 +51,19 @@ def test_slot_only_custom_form_is_rejected_at_dictionary_boundary(tmp_path):
     path.write_text('- {id: zz-slot-only, form: "{obj}", concept: [TIRED], frame: vp}\n')
     with pytest.raises(SchemaError, match='needs at least one required literal word'):
         load_dictionary([path])
+
+
+@pytest.mark.parametrize('query', ["Don't be a cunt", "Don’t be a cunt", 'Do not be a cunt', "Don't be a jerk",
+                                  "Don't be cruel", "Don't be late"])
+def test_a_negated_auxiliary_is_not_evidence_for_reassurance(query, dictionary):
+    from aussiefy import Translator
+    for backend in ('bundled', None):
+        result = lookup(query, translator=Translator(dictionary, lookup_embedder=backend), vulgarity=3)
+        assert not any('NO_PROBLEM' in e['concepts'] for e in result['results'])
+
+
+@pytest.mark.parametrize('query', ["Don't worry", "Don’t worry", 'Do not worry'])
+def test_real_reassurance_keeps_its_meaning(query, dictionary):
+    from aussiefy import Translator
+    result = lookup(query, translator=Translator(dictionary, lookup_embedder='bundled'))
+    assert any('NO_PROBLEM' in e['concepts'] for e in result['results'])

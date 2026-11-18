@@ -185,7 +185,7 @@ def _steering(args) -> dict:
 
 
 def _document(args) -> dict:
-    return {"document_type": args.document_type, "document_config": args.document_config,
+    return {"dial_mode": args.dial_mode, "document_type": args.document_type, "document_config": args.document_config,
             "themes": args.themes, "invention": args.invention}
 
 
@@ -995,6 +995,8 @@ def build_parser() -> argparse.ArgumentParser:
                                "(faucet -> tap at every level; British pants -> undies only with uk). Default auto: "
                                "American spelling marks a text as American; none turns the swaps off")
     embellished = argparse.ArgumentParser(add_help=False)
+    embellished.add_argument("--dial-mode", choices=("aim", "cap"), default="cap",
+                             help="aim favours the selected rudeness and embellishment; cap preserves permission-only choices")
     embellished.add_argument("-e", "--embellishment", type=_dial(parse_embellishment), metavar="EMBELLISHMENT",
                              help="how much liberty the telling takes: 0-2 or deadset (straight), dinkum (a genuine "
                                   "voice), troppo (a performed yarn). Default Dinkum for General; named types "

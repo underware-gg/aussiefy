@@ -464,10 +464,12 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
 
     spans = prose_spans(source)
     prose = "\n".join(source[span.start:span.end] for span in spans)
-    genre = resolve_document(prose, source, config=translator.dictionary.genres,
+    genre = resolve_document(prose, source, dial_mode=policy.dial_mode, config=translator.dictionary.genres,
                              document_type=policy.document_type, document_config=policy.document_config)
     context = (genre, text_english(policy.english, prose, translator.dictionary.us_spellings))
     setting = genre.setting(policy.embellishment)
+    from .dial_goals import resolve_goals
+    effective = resolve_goals(effective, policy, translator.dictionary, setting)
     hook_options = ({'preferences_hook':_preferences_hook,
                      'dials':{'level':effective.level,'vulgarity':effective.vulgarity,'embellishment':setting.step}}
                     if _preferences_hook is not None else {})
@@ -518,7 +520,7 @@ def translate_document(source: str, translator: Translator, policy: Policy, effe
         r = (unit or translator.translate)(source[span.start:span.end], level=policy.level, seed=policy.seed,
                                  vulgarity=policy.vulgarity, variety=policy.variety, registers=policy.registers,
                                  regions=policy.regions, unlock=policy.unlock, embedder=policy.embedder,
-                                 english=policy.english, embellishment=policy.embellishment, document_type=policy.document_type,
+                                 english=policy.english, embellishment=policy.embellishment, dial_mode=policy.dial_mode, document_type=policy.document_type,
                                  document_config=policy.document_config, _context=context, _composition=part)
         rendered = _escape(r.text)
         pieces.append(rendered)

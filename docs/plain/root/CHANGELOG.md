@@ -5,6 +5,18 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ## [Unreleased]
 
+### Changed
+
+- Recognise gratitude with an authored `for` complement, so `Thanks for understanding` offers `Cheers`
+  without dropping its complement. Noun thanks and causal thanks-to remain protected.
+
+- Add `dial_mode="aim"` to favour the requested rudeness and embellishment, including mixed clean/sweary
+  garnish and Dinkum/Troppo rates independent of level. Level, meaning and document permissions still win.
+  API, CLI and MCP keep `cap` as their default to preserve seeded translations; callers opt in explicitly.
+  Aim changes seeded choices. Replay/share requests must repeat their original mode and other dials.
+- Fix short negated lookup queries borrowing a contraction fragment as meaning evidence: a rebuke no
+  longer retrieves reassurance merely because both start with `don't`. The model threshold is unchanged.
+
 ### Added
 
 - Shared-English `have a go` (attempt), `booze` (alcoholic drink), `a cold one` (cold-beer serving) and

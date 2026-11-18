@@ -490,7 +490,11 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
     elif p.frame in ("interjection",):
         recipient = interjection_recipient(tokens, m.end)
         end = recipient[1] if recipient is not None else m.end
-        if not (at_clause_start(tokens, m.start) and at_clause_end(tokens, end)):
+        # An authored following preposition can introduce a complement without belonging to the swap.
+        complement = (m.context is not None and m.context[1] > m.end
+                      and m.end + 1 < len(tokens) and tokens[m.end].norm in NOUN_PREPOSITIONS
+                      and tokens[m.end + 1].is_word)
+        if not (at_clause_start(tokens, m.start) and (at_clause_end(tokens, end) or complement)):
             return None
     elif p.frame == "imperative":
         if not (at_clause_start(tokens, m.start) and at_clause_end(tokens, m.end, conjunctions=True)):

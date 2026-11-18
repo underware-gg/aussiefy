@@ -9,9 +9,9 @@
  },
  "response": {
   "version": 4,
-  "text": "I'm exhausted and the dunny is broken. Thanks for brekky, my mate. You're buggered and starvin', and your car is bung, mate. Well, we let a toddler win the game.",
+  "text": "I'm exhausted and the dunny is broken. Ta for brekky, my mate. You're buggered and starvin', and your car is bung, mate. Well, we let a toddler win the game.",
   "card_version": 4,
-  "dictionary_id": "sha256:36b99e9823fd4f2715aac064062a4a864719657e3c0c4fcb9ec8a72281da0fc0",
+  "dictionary_id": "sha256:bc6223eb9978aa938ac0700dfed6affe0cc9caa50be9e9bf4cac2c2ffba59318",
   "tuning": {
    "popularity": false,
    "preferences": 0
@@ -88,6 +88,100 @@
     "option_key": "entry:dunny"
    },
    {
+    "id": "substitution:40-46",
+    "kind": "substitution",
+    "src_span": [
+     40,
+     46
+    ],
+    "out_span": [
+     39,
+     41
+    ],
+    "original": "Thanks",
+    "output": "Ta",
+    "entry_id": "ta",
+    "vulgarity": 0,
+    "masks": [],
+    "alternatives": [
+     {
+      "key": "entry:ta",
+      "kind": "entry",
+      "entry_id": "ta",
+      "evidence": "attested",
+      "coined_by": null,
+      "rendered": "Ta",
+      "out_span": [
+       39,
+       41
+      ],
+      "vulgarity": 0,
+      "weight": 0.40579710144927533,
+      "masks": []
+     },
+     {
+      "key": "entry:cheers",
+      "kind": "entry",
+      "entry_id": "cheers",
+      "evidence": "attested",
+      "coined_by": null,
+      "rendered": "Cheers",
+      "out_span": [
+       39,
+       41
+      ],
+      "vulgarity": 0,
+      "weight": 0.40579710144927533,
+      "masks": []
+     },
+     {
+      "key": "entry:ta-muchly",
+      "kind": "entry",
+      "entry_id": "ta-muchly",
+      "evidence": "unverified",
+      "coined_by": null,
+      "rendered": "Ta muchly",
+      "out_span": [
+       39,
+       41
+      ],
+      "vulgarity": 0,
+      "weight": 0.18840579710144925,
+      "masks": []
+     },
+     {
+      "entry_id": null,
+      "evidence": null,
+      "coined_by": null,
+      "key": "plain:source",
+      "kind": "plain",
+      "rendered": "Thanks",
+      "out_span": [
+       39,
+       41
+      ],
+      "vulgarity": 0,
+      "weight": 0.0,
+      "masks": []
+     }
+    ],
+    "locked": [],
+    "covers": [],
+    "match": {
+     "key": "THANKS/interjection/8e9e20c526596a05c2a1624151f83f5dfd11a14bf0ec3adb3d6aa5f69fbb3fd0",
+     "root": "THANKS/interjection/8e9e20c526596a05c2a1624151f83f5dfd11a14bf0ec3adb3d6aa5f69fbb3fd0",
+     "qualifiers": {}
+    },
+    "evidence": "attested",
+    "coined_by": null,
+    "reading": {
+     "concept": "THANKS",
+     "plain": "thanks"
+    },
+    "ruled_out": [],
+    "option_key": "entry:ta"
+   },
+   {
     "id": "substitution:51-60",
     "kind": "substitution",
     "src_span": [
@@ -95,8 +189,8 @@
      60
     ],
     "out_span": [
-     50,
-     56
+     46,
+     52
     ],
     "original": "breakfast",
     "output": "brekky",
@@ -112,8 +206,8 @@
       "coined_by": null,
       "rendered": "brekky",
       "out_span": [
-       50,
-       56
+       46,
+       52
       ],
       "vulgarity": 0,
       "weight": 1.0,
@@ -127,8 +221,8 @@
       "kind": "plain",
       "rendered": "breakfast",
       "out_span": [
-       50,
-       56
+       46,
+       52
       ],
       "vulgarity": 0,
       "weight": 0.0,
@@ -159,8 +253,8 @@
      71
     ],
     "out_span": [
-     61,
-     65
+     57,
+     61
     ],
     "original": "friend",
     "output": "mate",
@@ -176,8 +270,8 @@
       "coined_by": null,
       "rendered": "mate",
       "out_span": [
-       61,
-       65
+       57,
+       61
       ],
       "vulgarity": 0,
       "weight": 1.0,
@@ -191,8 +285,8 @@
       "kind": "plain",
       "rendered": "friend",
       "out_span": [
-       61,
-       65
+       57,
+       61
       ],
       "vulgarity": 0,
       "weight": 0.0,
@@ -223,8 +317,8 @@
      80
     ],
     "out_span": [
-     67,
-     73
+     63,
+     69
     ],
     "original": "You are",
     "output": "You're",
@@ -254,8 +348,8 @@
      91
     ],
     "out_span": [
-     74,
-     82
+     70,
+     78
     ],
     "original": "very tired",
     "output": "buggered",
@@ -280,8 +374,8 @@
       "coined_by": null,
       "rendered": "buggered",
       "out_span": [
-       74,
-       82
+       70,
+       78
       ],
       "vulgarity": 1,
       "weight": 0.08325545622525024,
@@ -304,8 +398,8 @@
       "coined_by": null,
       "rendered": "dead on your feet",
       "out_span": [
-       74,
-       82
+       70,
+       78
       ],
       "vulgarity": 0,
       "weight": 0.07757337803079352,
@@ -319,8 +413,8 @@
       "coined_by": null,
       "rendered": "Kerry-Packered",
       "out_span": [
-       74,
-       82
+       70,
+       78
       ],
       "vulgarity": 0,
       "weight": 0.15842112843955047,
@@ -334,8 +428,8 @@
       "coined_by": null,
       "rendered": "knackered",
       "out_span": [
-       74,
-       82
+       70,
+       78
       ],
       "vulgarity": 0,
       "weight": 0.08325545622525024,
@@ -349,8 +443,8 @@
       "coined_by": null,
       "rendered": "out on your feet",
       "out_span": [
-       74,
-       82
+       70,
+       78
       ],
       "vulgarity": 0,
       "weight": 0.04197754095390769,
@@ -364,8 +458,8 @@
       "coined_by": null,
       "rendered": "ready to drop",
       "out_span": [
-       74,
-       82
+       70,
+       78
       ],
       "vulgarity": 0,
       "weight": 0.09016664031696582,
@@ -379,8 +473,8 @@
       "coined_by": null,
       "rendered": "rooted",
       "out_span": [
-       74,
-       82
+       70,
+       78
       ],
       "vulgarity": 1,
       "weight": 0.03964545534535726,
@@ -394,8 +488,8 @@
       "coined_by": null,
       "rendered": "running on the smell of an oily rag",
       "out_span": [
-       74,
-       82
+       70,
+       78
       ],
       "vulgarity": 0,
       "weight": 0.1299602314892424,
@@ -409,8 +503,8 @@
       "coined_by": null,
       "rendered": "stuffed",
       "out_span": [
-       74,
-       82
+       70,
+       78
       ],
       "vulgarity": 0,
       "weight": 0.059468183018035886,
@@ -424,8 +518,8 @@
       "coined_by": null,
       "rendered": "wrecked",
       "out_span": [
-       74,
-       82
+       70,
+       78
       ],
       "vulgarity": 0,
       "weight": 0.08515738252157881,
@@ -439,8 +533,8 @@
       "coined_by": null,
       "rendered": "zonked",
       "out_span": [
-       74,
-       82
+       70,
+       78
       ],
       "vulgarity": 0,
       "weight": 0.15111914743406768,
@@ -454,8 +548,8 @@
       "kind": "plain",
       "rendered": "very tired",
       "out_span": [
-       74,
-       82
+       70,
+       78
       ],
       "vulgarity": 0,
       "weight": 0.0,
@@ -471,8 +565,8 @@
       "coined_by": null,
       "rendered": "fucked",
       "out_span": [
-       74,
-       82
+       70,
+       78
       ],
       "vulgarity": 2,
       "masks": [
@@ -517,8 +611,8 @@
      102
     ],
     "out_span": [
-     87,
-     95
+     83,
+     91
     ],
     "original": "hungry",
     "output": "starvin'",
@@ -534,8 +628,8 @@
       "coined_by": null,
       "rendered": "starvin'",
       "out_span": [
-       87,
-       95
+       83,
+       91
       ],
       "vulgarity": 0,
       "weight": 0.321969696969697,
@@ -549,8 +643,8 @@
       "coined_by": null,
       "rendered": "hungry enough to eat a horse and chase the jockey",
       "out_span": [
-       87,
-       95
+       83,
+       91
       ],
       "vulgarity": 0,
       "weight": 0.2272727272727273,
@@ -564,8 +658,8 @@
       "coined_by": null,
       "rendered": "peckish",
       "out_span": [
-       87,
-       95
+       83,
+       91
       ],
       "vulgarity": 0,
       "weight": 0.4507575757575758,
@@ -579,8 +673,8 @@
       "kind": "plain",
       "rendered": "hungry",
       "out_span": [
-       87,
-       95
+       83,
+       91
       ],
       "vulgarity": 0,
       "weight": 0.0,
@@ -596,8 +690,8 @@
       "coined_by": null,
       "rendered": "hungry enough to eat the arse out of a low-flyin' duck",
       "out_span": [
-       87,
-       95
+       83,
+       91
       ],
       "vulgarity": 2,
       "masks": [
@@ -635,8 +729,8 @@
      126
     ],
     "out_span": [
-     113,
-     117
+     109,
+     113
     ],
     "original": "broken",
     "output": "bung",
@@ -652,8 +746,8 @@
       "coined_by": null,
       "rendered": "bung",
       "out_span": [
-       113,
-       117
+       109,
+       113
       ],
       "vulgarity": 0,
       "weight": 0.502356735301414,
@@ -667,8 +761,8 @@
       "coined_by": null,
       "rendered": "buggered",
       "out_span": [
-       113,
-       117
+       109,
+       113
       ],
       "vulgarity": 1,
       "weight": 0.04428181592656908,
@@ -691,8 +785,8 @@
       "coined_by": null,
       "rendered": "cactus",
       "out_span": [
-       113,
-       117
+       109,
+       113
       ],
       "vulgarity": 0,
       "weight": 0.1897792111138675,
@@ -706,8 +800,8 @@
       "coined_by": null,
       "rendered": "rooted",
       "out_span": [
-       113,
-       117
+       109,
+       113
       ],
       "vulgarity": 1,
       "weight": 0.10543289506325973,
@@ -721,8 +815,8 @@
       "coined_by": null,
       "rendered": "stuffed",
       "out_span": [
-       113,
-       117
+       109,
+       113
       ],
       "vulgarity": 0,
       "weight": 0.15814934259488958,
@@ -736,8 +830,8 @@
       "kind": "plain",
       "rendered": "broken",
       "out_span": [
-       113,
-       117
+       109,
+       113
       ],
       "vulgarity": 0,
       "weight": 0.0,
@@ -768,8 +862,8 @@
      126
     ],
     "out_span": [
-     117,
-     123
+     113,
+     119
     ],
     "original": "",
     "output": ", mate",
@@ -779,8 +873,8 @@
     "placement": "tag",
     "removed": {
      "out_span": [
-      117,
-      123
+      113,
+      119
      ],
      "rendered": ""
     },
@@ -790,8 +884,8 @@
       "weight": 0.2,
       "rendered": ", ay",
       "out_span": [
-       117,
-       123
+       113,
+       119
       ],
       "vulgarity": 0,
       "evidence": "unverified",
@@ -805,8 +899,8 @@
       "weight": 0.4,
       "rendered": ", mate",
       "out_span": [
-       117,
-       123
+       113,
+       119
       ],
       "vulgarity": 0,
       "evidence": "unverified",
@@ -820,8 +914,8 @@
       "weight": 0.13333333333333333,
       "rendered": ", ya drongo",
       "out_span": [
-       117,
-       123
+       113,
+       119
       ],
       "vulgarity": 0,
       "evidence": "unverified",
@@ -835,8 +929,8 @@
       "weight": 0.13333333333333333,
       "rendered": ", ya galah",
       "out_span": [
-       117,
-       123
+       113,
+       119
       ],
       "vulgarity": 0,
       "evidence": "unverified",
@@ -850,8 +944,8 @@
       "weight": 0.13333333333333333,
       "rendered": ", ya mug",
       "out_span": [
-       117,
-       123
+       113,
+       119
       ],
       "vulgarity": 0,
       "evidence": "unverified",
@@ -876,8 +970,8 @@
      128
     ],
     "out_span": [
-     125,
-     131
+     121,
+     127
     ],
     "original": "",
     "output": "Well, ",
@@ -887,8 +981,8 @@
     "placement": "connective",
     "removed": {
      "out_span": [
-      125,
-      133
+      121,
+      129
      ],
      "rendered": "We"
     },
@@ -898,8 +992,8 @@
       "weight": 0.2531645569620253,
       "rendered": "Anyway, we",
       "out_span": [
-       125,
-       133
+       121,
+       129
       ],
       "vulgarity": 0,
       "evidence": "unverified",
@@ -913,8 +1007,8 @@
       "weight": 0.15189873417721517,
       "rendered": "Mate, we",
       "out_span": [
-       125,
-       133
+       121,
+       129
       ],
       "vulgarity": 0,
       "evidence": "unverified",
@@ -928,8 +1022,8 @@
       "weight": 0.08860759493670885,
       "rendered": "Mind you, we",
       "out_span": [
-       125,
-       133
+       121,
+       129
       ],
       "vulgarity": 0,
       "evidence": "attested",
@@ -943,8 +1037,8 @@
       "weight": 0.12658227848101264,
       "rendered": "Now, we",
       "out_span": [
-       125,
-       133
+       121,
+       129
       ],
       "vulgarity": 0,
       "evidence": "unverified",
@@ -958,8 +1052,8 @@
       "weight": 0.12658227848101264,
       "rendered": "So anyway, we",
       "out_span": [
-       125,
-       133
+       121,
+       129
       ],
       "vulgarity": 0,
       "evidence": "unverified",
@@ -973,8 +1067,8 @@
       "weight": 0.2531645569620253,
       "rendered": "Well, we",
       "out_span": [
-       125,
-       133
+       121,
+       129
       ],
       "vulgarity": 0,
       "evidence": "unverified",
@@ -1535,6 +1629,58 @@
       "best": true
      }
     ]
+   },
+   "cheers": {
+    "id": "cheers",
+    "form": "cheers",
+    "headword_key": "cheers",
+    "gloss": "Thanks.",
+    "frame": "interjection",
+    "concepts": [
+     "THANKS"
+    ],
+    "level": 1,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/cheers",
+      "note": "Reviewed 2026-10-21: selected form/sense; 216–234. Thanks sense separate from toast/farewell. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "searched": {
+     "date": "2026-10-21",
+     "outcome": "found",
+     "note": "Historical 2026-10-21 source audit: 1 actual recorded citation-target checks; 1 selected full-form/sense witness(es). This is a limited inherited-citation search, not a fresh or exhaustive web hunt, a frequency survey, or certification of every current mapping."
+    },
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 8.0,
+     "bars": 4,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "20261114-source-hunt-1"
+    },
+    "evidence": "attested",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
    },
    "dead-on-poss-feet": {
     "id": "dead-on-poss-feet",
@@ -2672,6 +2818,123 @@
      "score": 0.0,
      "bars": 0,
      "counts": {},
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "20261114-source-hunt-1"
+    },
+    "evidence": "unverified",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "ta": {
+    "id": "ta",
+    "form": "ta",
+    "headword_key": "ta",
+    "gloss": "Thanks.",
+    "frame": "interjection",
+    "concepts": [
+     "THANKS"
+    ],
+    "level": 1,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "scholarly_dictionary",
+      "publisher": "Collins Dictionary",
+      "supports": [
+       "term",
+       "meaning",
+       "australian_use"
+      ],
+      "url": "https://www.collinsdictionary.com/dictionary/english/ta",
+      "note": "Reviewed 2026-10-21: selected form/sense; 240–246. Australian thanks interjection. Source family: collins; not a current-commonness survey."
+     }
+    ],
+    "searched": {
+     "date": "2026-10-21",
+     "outcome": "found",
+     "note": "Historical 2026-10-21 source audit: 1 actual recorded citation-target checks; 1 selected full-form/sense witness(es). This is a limited inherited-citation search, not a fresh or exhaustive web hunt, a frequency survey, or certification of every current mapping."
+    },
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 8.0,
+     "bars": 4,
+     "counts": {
+      "scholarly_dictionary": 1
+     },
+     "people": 0,
+     "independent": 0,
+     "places": 0,
+     "weights_version": "20261114-source-hunt-1"
+    },
+    "evidence": "attested",
+    "minimum_vulgarity": 0,
+    "type": "idiom",
+    "status": "active",
+    "held_back": []
+   },
+   "ta-muchly": {
+    "id": "ta-muchly",
+    "form": "ta muchly",
+    "headword_key": "ta muchly",
+    "gloss": "Thanks very much, jokingly.",
+    "frame": "interjection",
+    "concepts": [
+     "THANKS"
+    ],
+    "level": 2,
+    "vulgarity": 0,
+    "register": "current",
+    "sources": [
+     {
+      "kind": "community",
+      "publisher": "Variable Cosplay / hosted fundraiser",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://support.alannahandmadeline.org.au/register/raise-it-purple",
+      "note": "Archived EW4 follow-through inspected 2026-10-23; reconciled 2026-11-14. line138. Selected scope: gratitude. Public appeal uses ta-muchly-for-your-generosity after asking for donations. Limits: Individual-authored charity-hosted page, not editorial institution or verified Australian author. No commonness upgrade. No first-use date or frequency claim.",
+      "basis": "media"
+     },
+     {
+      "kind": "crowd_dictionary",
+      "publisher": "Wiktionary",
+      "supports": [
+       "term",
+       "meaning"
+      ],
+      "url": "https://en.wiktionary.org/wiki/ta_muchly",
+      "note": "Reviewed 2026-10-21: selected form/sense; 101. UK colloquial thank you very much, humour not explicit. Source family: wiktionary; not a current-commonness survey."
+     }
+    ],
+    "searched": {
+     "date": "2026-10-23",
+     "outcome": "found",
+     "note": "Scoped EW4 follow-through, archived inspection 2026-10-23, reconciled 2026-11-14. 1 inspected source body/bodies; full-form/meaning support, partial constructions and unresolved readings are distinguished in research/gate4-evidence-2026-11-14/followthrough-integration.json. This is not a fresh or exhaustive search or a commonness survey."
+    },
+    "origin": "unknown",
+    "australian_use": "common",
+    "reads_as": "australian",
+    "themes": [],
+    "doubtful_definition": false,
+    "misreadable": false,
+    "attestation": {
+     "score": 6.0,
+     "bars": 3,
+     "counts": {
+      "crowd_dictionary": 1,
+      "media": 1
+     },
      "people": 0,
      "independent": 0,
      "places": 0,

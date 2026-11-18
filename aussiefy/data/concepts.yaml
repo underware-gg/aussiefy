@@ -1022,14 +1022,27 @@ GOODBYE:
     interjection: ["goodbye", "bye", "see you later", "see you", "farewell", "bye for now", "catch you later",
                    "see you soon", "take care"]
 THANKS:
-  # Rob-approved wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: thanks
-  search_words: [thank you, gratitude]
+  search_words:
+  - thank you
+  - gratitude
   takes_addressee: true
   description: Thanks.
   triggers:
-    interjection: ["thanks", "thank you", "thank you very much", "thanks a lot", "thank you so much", "many thanks",
-                   "much appreciated"]
+    interjection:
+    - thanks
+    - thank you
+    - thank you very much
+    - thanks a lot
+    - thank you so much
+    - many thanks
+    - much appreciated
+    - thanks ?=for
+    - thank you ?=for
+    - thank you very much ?=for
+    - thanks a lot ?=for
+    - thank you so much ?=for
+    - many thanks ?=for
 BE_FAIR:
   # Rob-approved wording/search recommendation, Gate 4, 2026-11-14; see Rulings for Rob.
   plain: be reasonable

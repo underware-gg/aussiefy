@@ -37,7 +37,7 @@ translation against its original. Two independent dials, by number
 or name: level 1-5 (tourist, blow-in, local, larrikin, swaggie) and vulgarity 0-3 (nan, dad, uncle-bob, tradie);
 vulgarity defaults to the level's own (nan at 1-2, dad at 3-4, uncle-bob at 5), and tradie is never a default.
 A third, embellishment 0-2 (deadset, dinkum, troppo), controls liberty in the telling. General is the default
-explicit document type, with Dinkum embellishment. Auto opts into detection; named types supply presets."""
+explicit document type, with Dinkum embellishment. dial_mode aim favours both selected stops; cap (default) preserves permission-only seeded choices. Auto opts into detection; named types supply presets."""
 
 # what only a server with document_config describes (allow_document_config=False drops it with the Custom type)
 _DOCUMENT_CONFIG = """
@@ -193,14 +193,14 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
     def aussie_bulldust(concept: str | None = None, family: str | None = None, parts: dict[str, str] | None = None,
                         level: Level = 5, seed: Seed = 0, vulgarity: Vulgarity = None, limit: BulldustLimit = bulldust_default,
                         registers: Registers = None, regions: Regions = None, unlock: Unlock = None,
-                        embellishment: int | str | None = None, document_type: DocumentType = "general",
+                        embellishment: int | str | None = None, dial_mode: Literal["aim", "cap"] = "cap", document_type: DocumentType = "general",
                         document_config: dict | None = None, themes: Themes = None, invention: Invention = None,
                         include_scaffold: bool = False) -> dict[str, Any]:
         """Construct Australian-sounding idioms from reviewed families, labelled bulldust with part evidence.
         concept is a dictionary ID such as HUNGRY. family restricts the pattern; parts pins named slots to
         ingredient IDs from a result so the remaining parts can vary. No global novelty is promised.
         include_scaffold adds the full agent scaffold; the default returns only construction results."""
-        return harness.bulldust(concept, family=family, parts=parts, level=level, seed=seed, vulgarity=vulgarity,
+        return harness.bulldust(concept, dial_mode=dial_mode, family=family, parts=parts, level=level, seed=seed, vulgarity=vulgarity,
                                 limit=limit, include_scaffold=include_scaffold, registers=registers, regions=regions, unlock=unlock,
                                 embellishment=embellishment, document_type=document_type,
                                 document_config=document_config, translator=translator, themes=themes, invention=invention)
@@ -208,7 +208,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
     @tool
     def aussie_lookup(query: Query, level: Level = 5, vulgarity: Vulgarity = None,
                       limit: Limit = limit_default, include_gated: bool = False, short: bool = False,
-                      embellishment: int | str | None = None, document_type: DocumentType = "general",
+                      embellishment: int | str | None = None, dial_mode: Literal["aim", "cap"] = "cap", document_type: DocumentType = "general",
                       document_config: dict | None = None,
                       themes: Themes = None, invention: Invention = None, unlock: Unlock = None) -> dict[str, Any]:
         """Genuine Australian slang for a plain-English meaning ('very busy', 'someone'), or what an Aussie term
@@ -217,7 +217,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         Results name their match kind and dictionary identity; protected phrases return left_as_written
         with their current reasons and derived ruled-out readings, possibly empty.
         short: compact entry cards with match-kind codes."""
-        return harness.lookup(query, level=level, vulgarity=vulgarity, limit=limit,
+        return harness.lookup(query, dial_mode=dial_mode, level=level, vulgarity=vulgarity, limit=limit,
                               include_gated=include_gated, short=short, embellishment=embellishment,
                               document_type=document_type, document_config=document_config, unlock=unlock, translator=translator, themes=themes, invention=invention)
 
@@ -230,26 +230,26 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
     def aussie_entries(concept: str | None = None, theme: str | None = None, initial: Initial = None, offset: Offset = 0,
                        limit: PageLimit = page_default,
                        level: Level = 5, vulgarity: Vulgarity = None, include_gated: bool = False,
-                       embellishment: int | str | None = None, document_type: DocumentType = "general",
+                       embellishment: int | str | None = None, dial_mode: Literal["aim", "cap"] = "cap", document_type: DocumentType = "general",
                        document_config: dict | None = None, themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
         """List a stable page of entry cards by concept, theme and headword initial (a-z or #), ignoring leading a/an/the. Filters intersect.
         total counts the filtered set; initial_counts counts all initials under the other filters, before pagination.
         include_gated also returns entries held back as doubtful (marked as such)."""
-        return harness.list_entries(concept=concept, theme=theme, initial=initial, offset=offset, limit=limit, level=level,
+        return harness.list_entries(dial_mode=dial_mode, concept=concept, theme=theme, initial=initial, offset=offset, limit=limit, level=level,
                                     vulgarity=vulgarity, include_gated=include_gated, embellishment=embellishment,
                                     document_type=document_type, document_config=document_config, translator=translator, themes=themes, invention=invention)
 
     @tool
     def aussie_concepts(offset: Offset = 0, limit: PageLimit = page_default,
                        level: Level = 5, vulgarity: Vulgarity = None, include_gated: bool = False,
-                       embellishment: int | str | None = None, document_type: DocumentType = "general",
+                       embellishment: int | str | None = None, dial_mode: Literal["aim", "cap"] = "cap", document_type: DocumentType = "general",
                        document_config: dict | None = None, themes: Themes = None,
                        invention: Invention = None) -> dict[str, Any]:
         """List meanings with dictionary entries, ordered by stable concept ID.
         Each result has concept, plain wording and entry_count under the same dials as aussie_entries.
         Zero counts are retained. Meanings waiting for a word have their own listing.
         include_gated permits held-back entries to contribute to the counts."""
-        return harness.list_concepts(offset=offset, limit=limit, level=level, vulgarity=vulgarity,
+        return harness.list_concepts(dial_mode=dial_mode, offset=offset, limit=limit, level=level, vulgarity=vulgarity,
                                      include_gated=include_gated, embellishment=embellishment,
                                      document_type=document_type, document_config=document_config,
                                      themes=themes, invention=invention, translator=translator)
@@ -263,30 +263,30 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
 
     @tool
     def aussie_entry(entry_id: str, level: Level = 5, vulgarity: Vulgarity = None,
-                     include_gated: bool = False, embellishment: int | str | None = None,
+                     include_gated: bool = False, embellishment: int | str | None = None, dial_mode: Literal["aim", "cap"] = "cap",
                      document_type: DocumentType = "general", document_config: dict | None = None,
                      themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
         """Resolve a permanent ID to its current card under the requested dials.
         entry_id retains the requested key; entry.id is canonical for redirects. Removed IDs report removed.
         include_gated also returns entries held back as doubtful (marked as such)."""
-        return harness.get_entry(entry_id, level=level, vulgarity=vulgarity, include_gated=include_gated,
+        return harness.get_entry(entry_id, dial_mode=dial_mode, level=level, vulgarity=vulgarity, include_gated=include_gated,
                                  embellishment=embellishment, document_type=document_type,
                                  document_config=document_config, translator=translator, themes=themes, invention=invention)
 
     @tool
     def aussie_random_entry(seed: Seed = 0, concept: str | None = None, theme: str | None = None,
                             level: Level = 5, vulgarity: Vulgarity = None, include_gated: bool = False,
-                            embellishment: int | str | None = None, document_type: DocumentType = "general",
+                            embellishment: int | str | None = None, dial_mode: Literal["aim", "cap"] = "cap", document_type: DocumentType = "general",
                             document_config: dict | None = None, themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
         """Pick a seeded entry from the whole eligible dictionary, optionally by concept and theme.
         include_gated also returns entries held back as doubtful (marked as such)."""
-        return harness.random_entry(seed=seed, concept=concept, theme=theme, level=level, vulgarity=vulgarity,
+        return harness.random_entry(dial_mode=dial_mode, seed=seed, concept=concept, theme=theme, level=level, vulgarity=vulgarity,
                                     include_gated=include_gated, embellishment=embellishment,
                                     document_type=document_type, document_config=document_config, translator=translator, themes=themes, invention=invention)
 
     @tool
     def aussie_meaning_quiz(seed: Seed = 0, level: Level = 5, vulgarity: Vulgarity = None,
-                           include_gated: bool = False, embellishment: int | str | None = None,
+                           include_gated: bool = False, embellishment: int | str | None = None, dial_mode: Literal["aim", "cap"] = "cap",
                            document_type: DocumentType = "general", document_config: dict | None = None,
                            themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
         """A seeded term, four gloss options, zero-based answer and full card for a meaning quiz.
@@ -294,7 +294,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         include_gated also returns entries held back as doubtful (marked as such).
         Known true readings are excluded through shared lookup; similarity bands are best effort.
         ranking reports the model and explicit trigram fallback when no meaning model is available."""
-        return harness.meaning_quiz(seed=seed, level=level, vulgarity=vulgarity, include_gated=include_gated,
+        return harness.meaning_quiz(dial_mode=dial_mode, seed=seed, level=level, vulgarity=vulgarity, include_gated=include_gated,
                                    embellishment=embellishment, document_type=document_type,
                                    document_config=document_config, themes=themes, invention=invention,
                                    translator=translator)
@@ -308,19 +308,19 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
     @tool
     def aussie_variations(family: str, parts: dict[str, str], level: Level = 5, seed: Seed = 0,
                           vulgarity: Vulgarity = None, registers: Registers = None, regions: Regions = None,
-                          unlock: Unlock = None, embellishment: int | str | None = None,
+                          unlock: Unlock = None, embellishment: int | str | None = None, dial_mode: Literal["aim", "cap"] = "cap",
                           document_type: DocumentType = "general", document_config: dict | None = None,
                           themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
         """Compatible part changes for a constructed expression, keeping the other parts fixed.
         Pass its family and complete role-to-ingredient mapping. Options include the whole expression and spans."""
-        return harness.variations(family, parts=parts, level=level, seed=seed, vulgarity=vulgarity, registers=registers,
+        return harness.variations(family, dial_mode=dial_mode, parts=parts, level=level, seed=seed, vulgarity=vulgarity, registers=registers,
                                   regions=regions, unlock=unlock, embellishment=embellishment,
                                   document_type=document_type, document_config=document_config, translator=translator, themes=themes, invention=invention)
 
     @tool
     def aussie_lint(text: Text, level: Level = 5, vulgarity: Vulgarity = None,
                     original: Original | None = None, markup: str = "text", english: str | None = None,
-                    embellishment: int | str | None = None,
+                    embellishment: int | str | None = None, dial_mode: Literal["aim", "cap"] = "cap",
                     document_type: DocumentType = "general", document_config: dict | None = None, themes: Themes = None, invention: Invention = None,
                     suggest: bool = True, unlock: Unlock = None) -> dict[str, Any]:
         """Lint an Aussified draft: flagged or non-Australian phrases, swearing over the cap or overused, US
@@ -329,18 +329,18 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         with the original, checks its code and markup came through unchanged. embellishment (deadset, dinkum,
         troppo; default Dinkum for General): how much longer than the original it may run. suggest=False
         skips the optional suggestions (a whole engine translation), for a faster check."""
-        return harness.lint(text, level=level, vulgarity=vulgarity, original=original, markup=markup,
+        return harness.lint(text, dial_mode=dial_mode, level=level, vulgarity=vulgarity, original=original, markup=markup,
                             english=english, embellishment=embellishment, document_type=document_type,
                             document_config=document_config, suggest=suggest, unlock=unlock, translator=translator, themes=themes, invention=invention)
 
     @tool
     def aussie_guide(level: Level = 5, vulgarity: Vulgarity = None,
-                     embellishment: int | str | None = None,
+                     embellishment: int | str | None = None, dial_mode: Literal["aim", "cap"] = "cap",
                      document_type: DocumentType = "general", document_config: dict | None = None,
                      themes: Themes = None, invention: Invention = None) -> dict[str, Any]:
         """Voice, language limits and craft rules for Aussifying at a level (1-5), and how much liberty to take
         at an embellishment (deadset, dinkum, troppo; default Dinkum for General)."""
-        return harness.guide(level=level, vulgarity=vulgarity, embellishment=embellishment,
+        return harness.guide(dial_mode=dial_mode, level=level, vulgarity=vulgarity, embellishment=embellishment,
                              document_type=document_type, document_config=document_config, translator=translator, themes=themes, invention=invention)
 
     @tool
@@ -348,7 +348,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                     variety: Variety = 0, registers: Registers = None,
                     regions: Regions = None, unlock: Unlock = None,
                     markup: str = "text", english: str | None = None,
-                    embellishment: int | str | None = None,
+                    embellishment: int | str | None = None, dial_mode: Literal["aim", "cap"] = "cap",
                     document_type: DocumentType = "general", document_config: dict | None = None,
                     themes: Themes = None, invention: Invention = None,
                     popularity: Popularity = False, pins: dict | None = None,
@@ -357,7 +357,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         it found too formal to handle, and guidance for the text's genre and embellishment. Takes
         aussie_translate's options. embellishment defaults to dinkum, a retelling's (the plan is for writing
         your own version); pass the genre's own setting for a plan that matches aussie_translate's output."""
-        return harness.plan(text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
+        return harness.plan(text, dial_mode=dial_mode, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
                             registers=registers, regions=regions, unlock=unlock, markup=markup, english=english,
                             embellishment=embellishment, document_type=document_type, document_config=document_config,
                             translator=translator, themes=themes, invention=invention, popularity=popularity, pins=pins, _preferences_hook=preferences_hook, personal_terms=personal_terms,
@@ -368,7 +368,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                          variety: Variety = 0, registers: Registers = None,
                          regions: Regions = None, unlock: Unlock = None,
                          markdown: bool = False, markup: str = "text", english: str | None = None,
-                         embellishment: int | str | None = None,
+                         embellishment: int | str | None = None, dial_mode: Literal["aim", "cap"] = "cap",
                          document_type: DocumentType = "general", document_config: dict | None = None,
                          themes: Themes = None, invention: Invention = None,
                          popularity: Popularity = False, pins: dict | None = None,
@@ -383,7 +383,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         UK words Australians say differently (faucet -> tap; British pants -> undies only for uk). embellishment
         (0-2 or deadset, dinkum, troppo): how much liberty the telling takes, from none (the words swap, nothing
         added) to a performed yarn; default Dinkum for General; named types supply presets."""
-        return harness.translate(text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
+        return harness.translate(text, dial_mode=dial_mode, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
                                  registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english,
                                  embellishment=embellishment, document_type=document_type,
                                  document_config=document_config, translator=translator, themes=themes, invention=invention, popularity=popularity, pins=pins, _preferences_hook=preferences_hook, personal_terms=personal_terms,
@@ -394,13 +394,13 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
                          vulgarity: Vulgarity = None, variety: Variety = 0, registers: Registers = None,
                          regions: Regions = None, unlock: Unlock = None,
                          markdown: bool = False, markup: str = "text", english: str | None = None,
-                         embellishment: int | str | None = None,
+                         embellishment: int | str | None = None, dial_mode: Literal["aim", "cap"] = "cap",
                          document_type: DocumentType = "general", document_config: dict | None = None,
                          themes: Themes = None, invention: Invention = None,
                          popularity: Popularity = False, pins: dict | None = None,
                          personal_terms: list[dict] | None = None) -> dict[str, Any]:
         """Translate once and suggest alternatives at an output span, snapped to words and whole changes."""
-        return harness.suggest_selection(text, span=span, translator=translator, level=level, seed=seed,
+        return harness.suggest_selection(text, dial_mode=dial_mode, span=span, translator=translator, level=level, seed=seed,
             vulgarity=vulgarity, variety=variety, registers=registers, regions=regions, unlock=unlock,
             markdown=markdown, markup=markup, english=english, embellishment=embellishment,
             document_type=document_type, document_config=document_config, themes=themes, invention=invention,
@@ -410,7 +410,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
     @tool
     def aussie_verify(text: Text, original: Original, level: Level = 5, vulgarity: Vulgarity = None,
                       markup: str = "text", english: str | None = None,
-                      embellishment: int | str | None = None,
+                      embellishment: int | str | None = None, dial_mode: Literal["aim", "cap"] = "cap",
                       document_type: DocumentType = "general", document_config: dict | None = None,
                       themes: Themes = None, invention: Invention = None, unlock: Unlock = None) -> dict[str, Any]:
         """Check a finished translation (anyone's: the engine's, yours, a person's) against its original: a log of
@@ -419,7 +419,7 @@ def build_server(*, translator: Translator | None = None, allow_unlock: bool = T
         again, or a hint worth a look; info: coverage), and metrics. Deterministic; it
         doesn't judge tone or flow. english as for aussie_translate; embellishment sets the length limit (default
         Dinkum for General)."""
-        return harness.verify(text, original=original, level=level, vulgarity=vulgarity, markup=markup,
+        return harness.verify(text, dial_mode=dial_mode, original=original, level=level, vulgarity=vulgarity, markup=markup,
                               english=english, embellishment=embellishment, document_type=document_type,
                               document_config=document_config, unlock=unlock, translator=translator, themes=themes, invention=invention)
 

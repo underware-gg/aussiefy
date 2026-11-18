@@ -168,7 +168,7 @@ def candidates(det: Detection, entries: list[Entry], eff: Effective, used: dict[
         regional = 1.5 if eff.regions and set(e.region) & set(eff.regions) else 1.0
         # where a level allows dated words they're colour, not the default: "bloke" over "cove"
         dated = 0.25 if e.register in ("dated", "archaic") else 1.0
-        lean = eff.swearing.lean if e.vulgarity else 1.0   # how a vulgarity leans towards the swearing option
+        lean = eff.vulgarity_weight(e.vulgarity)   # how a vulgarity leans towards the swearing option
         if lean == 0:
             rejected.append((e, "swear weighting disabled"))
             continue
@@ -181,7 +181,7 @@ def candidates(det: Detection, entries: list[Entry], eff: Effective, used: dict[
                + (f" x tone-fit {tone_fit:g} ({e.tone}/{mood})" if mood is not None else "") + ")")
         construction = constructions.get(e.id)
         if construction is not None:
-            w = construction.weight * repeat
+            w = construction.weight * repeat * (eff.vulgarity_weight(e.vulgarity) if eff.dial_mode == "aim" else 1.0)
             why = f"construction {construction.family.id}, cadence {construction.cadence:g}, repeat {repeat:g}"
         eligible.append(Candidate(e, w, why, construction=construction, reading=reading if reading is not det else None))
     eligible.sort(key=lambda c: c.entry.id)

@@ -245,14 +245,14 @@ def _check_contract(contract, where: str) -> None:
 
 
 def _evaluation_contract(original: str, *, level: int | str, vulgarity: int | str | None,
-                         markup: str, english: str | None, embellishment: int | str | None,
+                         markup: str, english: str | None, embellishment: int | str | None, dial_mode: str = "cap",
                          document_type: str, document_config: dict | None,
                          translator: Translator | None) -> dict[str, Any]:
     if markup == "auto":
         markup = detect_markup(original)
     result = translation.run(original, translator=translator or default_translator(), level=level,
                              vulgarity=vulgarity, markup=markup, english=english,
-                             embellishment=embellishment, document_type=document_type, document_config=document_config)
+                             embellishment=embellishment, dial_mode=dial_mode, document_type=document_type, document_config=document_config)
     return {"level": result.level, "vulgarity": result.vulgarity, "document_type": result.genre.selected,
                 "genre": {"name": result.genre.name, "guidance": result.genre.policy.guidance},
                 "document_config": result.genre.envelope(result.embellishment.step)["document_config"],
@@ -266,7 +266,7 @@ def _evaluation_contract(original: str, *, level: int | str, vulgarity: int | st
 
 def blind(original: str, candidates: dict[str, str], *, level: int | str = 5, vulgarity: int | str | None = None,
           seed: int = 0, rubric: Rubric | None = None, translator: Translator | None = None,
-          markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
+          markup: str = "text", english: str | None = None, embellishment: int | str | None = None, dial_mode: str = "cap",
           document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None) -> Packet:
     """Shuffle candidates under labels, with the source's effective writing contract for the judge.
 
@@ -278,7 +278,7 @@ def blind(original: str, candidates: dict[str, str], *, level: int | str = 5, vu
         raise UserError(f"judge 2 to {len(LABELS)} candidates, not {len(candidates)}")
     rubric = rubric or Rubric.load()
     contract = _evaluation_contract(original, level=level, vulgarity=vulgarity, markup=markup, english=english,
-                                    embellishment=embellishment, document_type=document_type,
+                                    embellishment=embellishment, dial_mode=dial_mode, document_type=document_type,
                                     document_config=document_config, translator=translator)
     names = sorted(candidates)
     key = hashlib.sha256(json.dumps([seed, original, names]).encode()).hexdigest()
@@ -507,13 +507,13 @@ def _unharnessed() -> dict[str, Any]:
 
 
 def unharnessed_prompt(original: str, *, level: int | str, vulgarity: int | str | None,
-                       markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
+                       markup: str = "text", english: str | None = None, embellishment: int | str | None = None, dial_mode: str = "cap",
                        document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None,
                        translator: Translator | None = None) -> str:
     """A reference retelling brief without vocabulary/tools, under the same effective settings as judging."""
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     contract = _evaluation_contract(original, level=level, vulgarity=vulgarity, markup=markup, english=english,
-                                    embellishment=embellishment, document_type=document_type,
+                                    embellishment=embellishment, dial_mode=dial_mode, document_type=document_type,
                                     document_config=document_config, translator=translator)
     voice = _unharnessed()
     return (f"Retell this in Australian English vernacular: {voice['levels'][contract['level']]}, "
@@ -524,12 +524,12 @@ def unharnessed_prompt(original: str, *, level: int | str, vulgarity: int | str 
 
 def unharnessed(original: str, *, level: int | str = 5, vulgarity: int | str | None = None, markup: str = "text",
                 client: Any = None, model: str = DEFAULT_MODEL, translator: Translator | None = None,
-                english: str | None = None, embellishment: int | str | None = None,
+                english: str | None = None, embellishment: int | str | None = None, dial_mode: str = "cap",
                 document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None) -> str:
     """A model's reference retelling, without the toolkit vocabulary. Raises claude.Error."""
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     prompt = unharnessed_prompt(original, level=level, vulgarity=vulgarity, markup=markup, english=english,
-                                embellishment=embellishment, document_type=document_type,
+                                embellishment=embellishment, dial_mode=dial_mode, document_type=document_type,
                                 document_config=document_config, translator=translator)
     response = claude.create(client or claude.client(), model=model, system=_unharnessed()["system"], max_tokens=16000,
                              messages=[{"role": "user", "content": prompt}], effort="medium")

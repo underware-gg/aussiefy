@@ -334,7 +334,7 @@ class Translator:
                   regions: Sequence[str] | None = None, unlock: Sequence[str] | None = None,
                   embedder: str | None = None, rewriter: Rewriter | None = None,
                   rewrite_mode: Literal["hard", "all"] = "hard",
-                  embellishment: int | str | None = None,
+                  embellishment: int | str | None = None, dial_mode: str = "cap",
                   document_type: str = "general", document_config: dict | None = None,
                   themes: dict[str, bool] | None = None, invention: bool | None = None,
                   popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
@@ -358,7 +358,7 @@ class Translator:
         internal composition parameters; format selection belongs to the public translation route. _observer
         watches the pass (the changes builder) without changing it. _tuning carries a prepared runtime at internal composition boundaries; public callers use
         popularity/preferences. Explicit replay pins retain choices under the same hard permissions."""
-        pol = self.policy(level=level, seed=seed, vulgarity=vulgarity,
+        pol = self.policy(dial_mode=dial_mode, level=level, seed=seed, vulgarity=vulgarity,
                           variety=variety, registers=registers, regions=regions, unlock=unlock, embedder=embedder,
                           english=english, embellishment=embellishment,
                           document_type=document_type, document_config=document_config,
@@ -372,11 +372,13 @@ class Translator:
         source, text = text, masked.text      # the engine reads the masked text: the same length, same offsets
         tokens = tokenize(text)
         sents = sentences(tokens)
-        genre = _context[0] if _context is not None else resolve_document(masked.prose(), masked.source, config=self.dictionary.genres,
+        genre = _context[0] if _context is not None else resolve_document(masked.prose(), masked.source, dial_mode=dial_mode, config=self.dictionary.genres,
                         document_type=pol.document_type, document_config=pol.document_config)
         mood = _composition.mood if _composition is not None and _composition.mood is not None else text_mood(text)
         effective = _composition.effective if _composition is not None else resolve(pol, self.dictionary)
-        setting = genre.setting(pol.embellishment)
+        setting = genre.setting(pol.embellishment, dial_mode=pol.dial_mode)
+        from .dial_goals import resolve_goals
+        effective = resolve_goals(effective, pol, self.dictionary, setting)
         hook_options = ({'preferences_hook':_preferences_hook,
                          'dials':{'level':effective.level,'vulgarity':effective.vulgarity,'embellishment':setting.step}}
                         if _preferences_hook is not None else {})
@@ -644,6 +646,11 @@ class Translator:
                 rejected.append((c.entry, reason))
             else:
                 keep.append(c)
+        if eff.dial_mode == 'aim':
+            weights = eff.balance_weights([c.entry.vulgarity for c in keep], [c.weight for c in keep])
+            for c, weight in zip(keep, weights, strict=True):
+                c.why += f'; aim tier balance {c.weight:g} -> {weight:g}'
+                c.weight = weight
         preference = None
         if keep and not constructions and (run.tuning.adjustments.by_context or run.tuning.exact):
             preference = run.tuning.apply(keep, detection_match(det), level=eff.level,
@@ -880,7 +887,7 @@ class Translator:
             riff = pin.riff
         else:
             riff = pick_riff(riffs, run.mood, roll(run.pol.seed, "riff-pick", *sent.key, det.start),
-                             [eff.metadata_weight(r) for r in riffs]).text
+                             [eff.metadata_weight(r) * (eff.vulgarity_weight(r.vulgarity) if eff.dial_mode == "aim" else 1.0) for r in riffs]).text
         state.riffed.add(choice.entry.id)
         self._note_riff(sent, run)
         before_and = end < len(toks) and toks[end].norm == "and"
@@ -941,7 +948,7 @@ class Translator:
         entry, construction = pin.target.resolve(self.dictionary, run.eff, run.embellishment,
                                                  seed=run.pol.seed, mood=run.mood)
         chosen = construction or entry
-        if (chosen.vulgarity > 0) != swear:
+        if swear is not None and (chosen.vulgarity > 0) != swear:
             return offer, None, None
         if construction:
             if construction.family.placement != offer.placement:
@@ -973,8 +980,12 @@ class Translator:
         if pin is None and run.pins is not None and run.pins.complete:
             return joined
         contexts = sentence_contexts(sents[-1])
-        for swear, p, key in ((True, run.eff.swearing.closer, "swear-closer"),
-                             (False, run.eff.profile.garnish.get("closer", 0), "closer")):
+        channels = ((True, run.eff.swearing.closer, "swear-closer"),
+                    (False, run.eff.profile.garnish.get("closer", 0), "closer"))
+        if run.eff.dial_mode == "aim":
+            p = run.eff.profile.garnish.get("closer", 0)
+            channels = ((None, p, "aim-closer"),)
+        for swear, p, key in channels:
             if p <= 0:
                 continue
             r = roll(run.pol.seed, key, run.text.lower())
@@ -1011,8 +1022,12 @@ class Translator:
         last = state.last_placed.get("tail")
         if last is not None and ordinal - last <= run.eff.profile.garnish_gap:
             return out
-        for swear, p in ((False, run.eff.profile.garnish.get("tail", 0)), (True, run.eff.swearing.exclaim)):
-            key = ("swear" if swear else "") + "tail"
+        channels = ((False, run.eff.profile.garnish.get("tail", 0)), (True, run.eff.swearing.exclaim))
+        if run.eff.dial_mode == "aim":
+            p = run.eff.profile.garnish.get("tail", 0)
+            channels = ((None, p),)
+        for swear, p in channels:
+            key = ("aim" if swear is None else "swear" if swear else "") + "tail"
             if p <= 0 or state.placed["tail"] >= run.eff.profile.limit("tail") or not ends_in_list(out):
                 continue
             r = roll(run.pol.seed, "garnish", key, *sent.key)
@@ -1115,6 +1130,9 @@ class Translator:
             g.tag_contexts = sentence_contexts(toks[quotes[-1] + 1:]) | ({"paragraph_end"} if sent.para_end else set())
         eff = run.eff
         level_rates = {p: eff.profile.garnish.get(p, 0) for p in ("connective", "aside", "opener", "tag")}
+        if eff.dial_mode == "aim":
+            rates = level_rates
+            return self._garnish_channel(out, sent, run, g, rates, eff.profile.garnish_per_sentence, swear=None)
         out = self._garnish_channel(out, sent, run, g, level_rates, eff.profile.garnish_per_sentence, swear=False)
         swear_rates = {p: eff.swearing.exclaim for p in ("aside", "opener", "tag")}
         return self._garnish_channel(out, sent, run, g, swear_rates,
@@ -1142,10 +1160,10 @@ class Translator:
         return out, edits
 
     def _garnish_channel(self, out: str, sent: "_Sentence", run: "_Run", g: "_GarnishSpot",
-                         rates: dict[str, float], budget: int, swear: bool) -> str:
+                         rates: dict[str, float], budget: int, swear: bool | None) -> str:
         state, eff = run.state, run.eff
         ordinal = sent.index + (run.composition.first_sentence if run.composition is not None else 0)
-        channel = "swear" if swear else ""
+        channel = "aim" if swear is None else "swear" if swear else ""
         spent = 0
         for placement in rates:
             pin = run.pin('garnish', (sent.tokens[0].start, sent.tokens[-1].end), placement=placement)
@@ -1664,10 +1682,10 @@ def default_translator() -> Translator:
 def translate(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None,
               variety: int = 0, registers: Sequence[str] | None = None, regions: Sequence[str] | None = None,
               unlock: Sequence[str] | None = None, english: str | None = None,
-              embellishment: int | str | None = None, translator: Translator | None = None) -> Result:
+              embellishment: int | str | None = None, dial_mode: str = "cap", translator: Translator | None = None) -> Result:
     """The rule engine's translation, as a Result (text, plan, explain records). The toolkit's parameters;
     see Translator.translate for what each does and for the engine-only options (embedder, rewriter)."""
     return (translator or default_translator()).translate(
-        text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
+        text, dial_mode=dial_mode, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
         registers=registers, regions=regions, unlock=unlock, english=english,
         embellishment=embellishment)

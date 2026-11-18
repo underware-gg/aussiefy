@@ -58,7 +58,7 @@ class Problem:
 
 
 def verify(text: str, *, original: str, level: int | str = 5, vulgarity: int | str | None = None,
-           markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
+           markup: str = "text", english: str | None = None, embellishment: int | str | None = None, dial_mode: str = "cap",
               document_type: str = "general", document_config: dict | None = None,
               themes: dict[str, bool] | None = None, invention: bool | None = None,
            unlock: list[str] | None = None, translator: Translator | None = None) -> dict[str, Any]:
@@ -70,8 +70,8 @@ def verify(text: str, *, original: str, level: int | str = 5, vulgarity: int | s
     (deadset, dinkum, troppo; None = the selected document type's default) how much longer than the original it may run."""
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     tr = translator
-    eff = tr.effective(level=level, vulgarity=vulgarity, unlock=unlock, document_config=document_config)
-    checked = lint(text, original=original, unlock=unlock, level=level, vulgarity=vulgarity, markup=markup,
+    eff = tr.effective(dial_mode=dial_mode, level=level, vulgarity=vulgarity, unlock=unlock, document_config=document_config)
+    checked = lint(text, dial_mode=dial_mode, original=original, unlock=unlock, level=level, vulgarity=vulgarity, markup=markup,
                    english=english, embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr, suggest=False)
     problems = [Problem(SEVERITY[i["kind"]], i["kind"], i["phrase"],
                         i.get("why") or (f"use {i['australian']}" if i.get("australian") else "fix it"))

@@ -36,7 +36,7 @@ def _document_policy(translator: Translator, **dials) -> tuple[Policy, Effective
 def run(text: str, *, translator: Translator, level: int | str = 5, seed: int = 0,
         vulgarity: int | str | None = None, variety: int = 0, registers: Sequence[str] | None = None,
         regions: Sequence[str] | None = None, unlock: Sequence[str] | None = None, markdown: bool = False,
-        markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
+        markup: str = "text", english: str | None = None, embellishment: int | str | None = None, dial_mode: str = "cap",
         document_type: str = "general", document_config: dict | None = None,
         themes: dict[str, bool] | None = None, invention: bool | None = None,
         popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
@@ -47,7 +47,7 @@ def run(text: str, *, translator: Translator, level: int | str = 5, seed: int = 
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     _check_modes(markdown, markup, rewrite, surface)
     dials = dict(level=level, seed=seed, vulgarity=vulgarity, variety=variety, registers=registers, regions=regions,
-                 unlock=unlock, embedder=embedder, english=english, embellishment=embellishment,
+                 unlock=unlock, embedder=embedder, english=english, embellishment=embellishment, dial_mode=dial_mode,
                  document_type=document_type, document_config=document_config)
     if markdown:
         return translate_document(text, translator, *_document_policy(translator, **dials), _tuning={'popularity': popularity, 'preferences': preferences}, _preferences_hook=_preferences_hook, pins=pins, personal_terms=personal_terms, _personal_terms_hook=_personal_terms_hook)
@@ -68,7 +68,7 @@ def run(text: str, *, translator: Translator, level: int | str = 5, seed: int = 
 def translate(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None,
               variety: int = 0, registers: Sequence[str] | None = None, regions: Sequence[str] | None = None,
               unlock: Sequence[str] | None = None, markdown: bool = False,
-              markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
+              markup: str = "text", english: str | None = None, embellishment: int | str | None = None, dial_mode: str = "cap",
               document_type: str = "general", document_config: dict | None = None,
               themes: dict[str, bool] | None = None, invention: bool | None = None,
               popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
@@ -77,14 +77,14 @@ def translate(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int 
               translator: Translator | None = None) -> Result | DocumentResult:
     """Translate plain text, or explicitly selected Markdown prose with its markup kept intact."""
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
-    return run(text, translator=translator or default_translator(), level=level, seed=seed, vulgarity=vulgarity,
+    return run(text, dial_mode=dial_mode, translator=translator or default_translator(), level=level, seed=seed, vulgarity=vulgarity,
                variety=variety, registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english, embellishment=embellishment, document_type=document_type, document_config=document_config, popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook, personal_terms=personal_terms, _personal_terms_hook=_personal_terms_hook)
 
 
 def translate_changes(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None,
                       variety: int = 0, registers: Sequence[str] | None = None, regions: Sequence[str] | None = None,
                       unlock: Sequence[str] | None = None, markdown: bool = False,
-                      markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
+                      markup: str = "text", english: str | None = None, embellishment: int | str | None = None, dial_mode: str = "cap",
                       document_type: str = "general", document_config: dict | None = None,
                       themes: dict[str, bool] | None = None, invention: bool | None = None,
                       popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
@@ -100,7 +100,7 @@ def translate_changes(text: str, *, level: int | str = 5, seed: int = 0, vulgari
     tr = translator or default_translator()
     _check_modes(markdown, markup, None, False)
     dials = dict(level=level, seed=seed, vulgarity=vulgarity, variety=variety, registers=registers, regions=regions,
-                 unlock=unlock, embedder=embedder, english=english, embellishment=embellishment,
+                 unlock=unlock, embedder=embedder, english=english, embellishment=embellishment, dial_mode=dial_mode,
                  document_type=document_type, document_config=document_config)
     if markdown:
         return document_changes(text, tr, *_document_policy(tr, **dials), _watch=_watch, _tuning={'popularity': popularity, 'preferences': preferences}, _preferences_hook=_preferences_hook, pins=pins, personal_terms=personal_terms, _personal_terms_hook=_personal_terms_hook)

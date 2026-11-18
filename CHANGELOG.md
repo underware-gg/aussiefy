@@ -9,10 +9,22 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ## [Unreleased]
 
+### Changed
+
+- Recognise gratitude with an authored `for` complement, so `Thanks for understanding` offers `Cheers`
+  without droppin' its complement. Noun thanks'n causal thanks\-to remain protected.
+
+- Add `dial_mode="aim"` to favour the requested rudeness and embellishment, including mixed clean/sweary
+  garnish and Dinkum/Troppo rates independent of level. Level, meaning and document permissions still win.
+  API, CLI and MCP keep `cap` as their default to preserve seeded translations; callers opt in explicitly.
+  Aim changes seeded choices. Replay/share requests must repeat their original mode and other dials.
+- Fix short negated lookup queries borrowing a contraction fragment as meanin' evidence: a rebuke no
+  longer retrieves reassurance merely 'cause both start with `don't`. Bloody hell, the model threshold is unchanged.
+
 ### Added
 
 - Shared\-English `have a go` (attempt\), `booze` (alcoholic drink\), `a cold one` (cold\-beer servin'\) and
-  `have a cry` (neutral weeping\), with scoped sources'n permanent IDs. Ambiguous complements and
+  `have a cry` (neutral weeping\), with scoped sources'n permanent IDs. Mate, ambiguous complements and
   anaphoric cold objects stay as written. Jeez, exact cryin' words take precedence over near meanings.
 - Verified bucks through its existin' buck ID; qualified currency names remain as written.
 
@@ -93,7 +105,7 @@ Well, release candidate prepared on dev; no tag or published release.
   counts under the same concept, theme'n eligibility settings.
 
 - Add separate concept sentence forms'n exact lookup search words without expanding source triggers.
-  Crikey, let exact meaning names reach their own words even when incidental component readings differ.
+  Fair dinkum, let exact meaning names reach their own words even when incidental component readings differ.
   So anyway, keep the frozen changes/card v3 shape unchanged at this foundation checkpoint.
 - Apply the marked sample's display names/search words and approved HEART_SPIRIT split. Add the six
   testimony-backed vocabulary forms plus rate/don't rate together, and puffed for BREATHLESS at
@@ -141,10 +153,10 @@ Well, release candidate prepared on dev; no tag or published release.
   expressions, wordless outcomes and established-meaning ranking.
 - Share rich discovery cards with structured provenance, resolved tag tiers'n default placement;
   report match\-kind codes'n dictionary identity. Decouple hosted discovery of held\-back entries
-  from translation unlocks. Well, shared cards move together in the v3 producer update.
+  from translation unlocks. Shared cards move together in the v3 producer update.
 
 - Add counterfactual evidence'n an audit command for protected phrases, including overlappin'
-  protections, wordless readings'n guarded dialect swaps. Fair dinkum, allow checked contextual examples.
+  protections, wordless readings'n guarded dialect swaps. Allow checked contextual examples.
   Protections without established alternative readings remain in place'n are reported for review.
 
 - Separate source\-meaning conditions from output grammar. Shared role evidence rejects adjective\-as\-noun

@@ -22,12 +22,12 @@ MAX_PAGE_SIZE = 100
 INITIALS = tuple(ascii_lowercase + "#")
 
 
-def _context(translator, level, vulgarity, embellishment, document_type, document_config):
+def _context(translator, level, vulgarity, embellishment, document_type, document_config, dial_mode="cap"):
     tr = translator or default_translator()
-    genre = resolve_document(None, config=tr.dictionary.genres, document_type=document_type,
+    genre = resolve_document(None, dial_mode=dial_mode, config=tr.dictionary.genres, document_type=document_type,
                              document_config=document_config)
     setting = genre.setting(parse_embellishment(embellishment) if embellishment is not None else None)
-    eff = tr.effective(level=level, vulgarity=vulgarity, embellishment=embellishment,
+    eff = tr.effective(dial_mode=dial_mode, level=level, vulgarity=vulgarity, embellishment=embellishment,
                        document_type=document_type, document_config=document_config)
     return tr.dictionary, eff, setting, {**eff.envelope(), "card_version": CARD_VERSION, **genre.envelope(setting.step),
                                         'dictionary_id': tr.dictionary.identity}
@@ -76,14 +76,14 @@ def _outcome(page, items):
 
 def list_entries(*, concept: str | None = None, theme: str | None = None, initial: str | None = None, offset: int = 0,
                  limit: int = DEFAULT_PAGE_SIZE, level: int | str = 5, vulgarity: int | str | None = None,
-                 include_gated: bool = False, embellishment: int | str | None = None,
+                 include_gated: bool = False, embellishment: int | str | None = None, dial_mode: str = "cap",
                  document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None,
                  translator: Translator | None = None) -> dict:
     """List a stable page; concept, theme and article-free headword initial filters intersect. Counts respect all other filters."""
     if initial is not None and (not isinstance(initial, str) or initial not in INITIALS):
         raise UserError("initial must be a lowercase letter a-z or #")
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
-    d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
+    d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config, dial_mode)
     concept, theme = _filters(d, concept, theme)
     entries = sorted(_entries(d, eff, concept, theme, include_gated),
                      key=lambda entry: (_headword(entry), entry.id))
@@ -102,7 +102,7 @@ def list_entries(*, concept: str | None = None, theme: str | None = None, initia
 
 def list_concepts(*, offset: int = 0, limit: int = DEFAULT_PAGE_SIZE,
                   level: int | str = 5, vulgarity: int | str | None = None,
-                  include_gated: bool = False, embellishment: int | str | None = None,
+                  include_gated: bool = False, embellishment: int | str | None = None, dial_mode: str = "cap",
                   document_type: str = "general", document_config: dict | None = None,
                   themes: dict[str, bool] | None = None, invention: bool | None = None,
                   translator: Translator | None = None) -> dict:
@@ -112,7 +112,7 @@ def list_concepts(*, offset: int = 0, limit: int = DEFAULT_PAGE_SIZE,
     concept have their separate treatment; omitted entries do not create browse rows.
     """
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
-    d, eff, _, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
+    d, eff, _, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config, dial_mode)
     concepts = sorted({cid for entry in d.entries.values() if entry.status != "omit" for cid in entry.concept})
     counts = Counter(cid for entry in _entries(d, eff, None, None, include_gated) for cid in entry.concept)
     page, next_offset = _page(concepts, offset, limit)
@@ -135,14 +135,14 @@ def list_wordless_meanings(*, offset: int = 0, limit: int = DEFAULT_PAGE_SIZE,
 
 
 def get_entry(entry_id: str, *, level: int | str = 5, vulgarity: int | str | None = None,
-              include_gated: bool = False, embellishment: int | str | None = None,
+              include_gated: bool = False, embellishment: int | str | None = None, dial_mode: str = "cap",
               document_type: str = "general", document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None,
               translator: Translator | None = None) -> dict:
     """Resolve a permanent ID to its current card; entry_id retains the requested key, including aliases."""
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     if not isinstance(entry_id, str) or not entry_id:
         raise UserError("entry_id must be a non-empty string")
-    d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
+    d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config, dial_mode)
     current_id = d.entry_ids.get(entry_id, entry_id)
     if current_id is None:
         return {**envelope, "entry_id": entry_id, "entry": None, "outcome": outcomes.REMOVED}
@@ -157,13 +157,13 @@ def get_entry(entry_id: str, *, level: int | str = 5, vulgarity: int | str | Non
 
 def random_entry(*, seed: int = 0, concept: str | None = None, theme: str | None = None,
                  level: int | str = 5, vulgarity: int | str | None = None, include_gated: bool = False,
-                 embellishment: int | str | None = None, document_type: str = "general",
+                 embellishment: int | str | None = None, dial_mode: str = "cap", document_type: str = "general",
                  document_config: dict | None = None, themes: dict[str, bool] | None = None, invention: bool | None = None, translator: Translator | None = None) -> dict:
     """Pick uniformly from all eligible entries, using a stable seeded roll rather than a page."""
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     if type(seed) is not int:
         raise UserError("seed must be an integer")
-    d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
+    d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config, dial_mode)
     concept, theme = _filters(d, concept, theme)
     entries = _entries(d, eff, concept, theme, include_gated)
     chosen = entries[int(roll(seed, "dictionary-random", concept or "", theme or "") * len(entries))] if entries else None
@@ -179,7 +179,7 @@ def suggest_name(*, seed: int = 0, shape: str | None = None, translator: Transla
 
 
 def meaning_quiz(*, seed: int = 0, level: int | str = 5, vulgarity: int | str | None = None,
-                 include_gated: bool = False, embellishment: int | str | None = None,
+                 include_gated: bool = False, embellishment: int | str | None = None, dial_mode: str = "cap",
                  document_type: str = "general", document_config: dict | None = None,
                  themes: dict[str, bool] | None = None, invention: bool | None = None,
                  translator: Translator | None = None) -> dict:
@@ -191,11 +191,11 @@ def meaning_quiz(*, seed: int = 0, level: int | str = 5, vulgarity: int | str | 
     if type(seed) is not int:
         raise UserError("seed must be an integer")
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
-    d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config)
+    d, eff, setting, envelope = _context(translator, level, vulgarity, embellishment, document_type, document_config, dial_mode)
     pool = askable_pool(_entries(d, eff, None, None, include_gated), d.concepts)
     model = translator.lookup_embedder
     ranking = model if model is not None else NgramEmbedder()
-    batch = _LookupBatch(translator, level=level, vulgarity=vulgarity, embellishment=embellishment,
+    batch = _LookupBatch(translator, dial_mode=dial_mode, level=level, vulgarity=vulgarity, embellishment=embellishment,
         document_type=document_type, document_config=document_config, include_gated=include_gated)
 
     question = select_question(pool, ranking, batch.entry_ids, seed)

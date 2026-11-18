@@ -135,7 +135,7 @@ def _fallback(builder, source_span):
             protected = True
             continue
         query = builder.source[start:end]
-        found = lookup(query, translator=builder.translator, level=builder.result.level,
+        found = lookup(query, dial_mode=builder.run.pol.dial_mode, translator=builder.translator, level=builder.result.level,
             vulgarity=builder.result.vulgarity, embellishment=builder.result.embellishment.step,
             document_type=builder.result.genre.selected, document_config=builder.run.pol.document_config,
             unlock=builder.run.pol.unlock, include_gated=True, limit=8)
@@ -193,7 +193,7 @@ def suggest_selection(text: str, *, span: Sequence[int], level: int | str = 5, s
                       vulgarity: int | str | None = None, variety: int = 0,
                       registers: Sequence[str] | None = None, regions: Sequence[str] | None = None,
                       unlock: Sequence[str] | None = None, markdown: bool = False, markup: str = 'text',
-                      english: str | None = None, embellishment: int | str | None = None,
+                      english: str | None = None, embellishment: int | str | None = None, dial_mode: str = "cap",
                       document_type: str = 'general', document_config: dict | None = None,
                       themes: dict[str, bool] | None = None, invention: bool | None = None,
                       popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
@@ -210,7 +210,7 @@ def suggest_selection(text: str, *, span: Sequence[int], level: int | str = 5, s
         observer = Watch()
         watches.append(observer)
         return observer
-    changes = translate_changes(text, translator=tr, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
+    changes = translate_changes(text, dial_mode=dial_mode, translator=tr, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
         registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english,
         embellishment=embellishment, document_type=document_type, document_config=document_config,
         popularity=popularity, preferences=preferences, pins=pins, personal_terms=personal_terms,

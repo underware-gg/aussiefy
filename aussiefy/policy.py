@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+from collections import Counter
 from dataclasses import dataclass, fields
 from typing import Any, Sequence
 
@@ -182,10 +183,13 @@ class Policy:
     english: str = "auto"                 # the source's English (dialect.ENGLISHES): us, uk, auto, none
     embellishment: int | str | None = None   # None: the text's genre's own (genres.yaml); set, it wins
 
+    dial_mode: str = "cap"
     document_type: str = "general"
     document_config: DocumentOverrides | dict | None = None
 
     def __post_init__(self):
+        if self.dial_mode not in ("aim", "cap"):
+            raise UserError("dial_mode must be aim or cap")
         if self.document_type not in DOCUMENT_TYPES:
             raise UserError(f"document_type must be one of {', '.join(DOCUMENT_TYPES)}")
         object.__setattr__(self, "document_config", DocumentOverrides.parse(self.document_config))
@@ -248,6 +252,22 @@ class Effective:
     attestation_pick_bonus: float = 0.5
     attestation_max_score: float = 10.0
     dictionary_id: str = ""
+    dial_mode: str = "cap"
+    tier_decay: float = 0.3
+
+    def vulgarity_weight(self, tier: int) -> float:
+        if not tier:
+            return 1.0
+        if self.dial_mode == "cap":
+            return self.swearing.lean
+        return self.swearing.lean * self.tier_decay ** max(0, self.vulgarity - tier)
+
+    def balance_weights(self, tiers: Sequence[int], weights: Sequence[float]) -> list[float]:
+        """A larger catalogue of clean synonyms must not outvote a dial goal by headcount."""
+        if self.dial_mode == 'cap':
+            return list(weights)
+        counts = Counter(t for t, w in zip(tiers, weights, strict=True) if w > 0)
+        return [w / counts[t] if w > 0 else w for t, w in zip(tiers, weights, strict=True)]
 
     @property
     def permitted_themes(self) -> frozenset[str]:
@@ -279,7 +299,8 @@ def resolve(policy: Policy, dictionary: Dictionary) -> Effective:
     profile = dictionary.profiles[policy.level]
     vulgarity = profile.vulgarity if policy.vulgarity is None else policy.vulgarity
     registers = policy.registers if policy.registers is not None else profile.registers
-    swearing = dictionary.swearing.get(vulgarity, SwearProfile())
+    swearing = (dictionary.dial_goals.swearing[vulgarity] if policy.dial_mode == "aim" and dictionary.dial_goals
+                else dictionary.swearing.get(vulgarity, SwearProfile()))
     if policy.document_config.profile is not None:
         profile, swearing = policy.document_config.profile.apply(profile, swearing)
     overrides = policy.document_config.themes or ()
@@ -287,12 +308,21 @@ def resolve(policy: Policy, dictionary: Dictionary) -> Effective:
     if unknown:
         raise UserError(f"document_config.themes has unknown themes: {', '.join(sorted(unknown))}")
     permitted = ThemePolicy(vulgarity, dictionary.theme_starts, overrides)
-    return Effective(policy.level, profile, vulgarity, tuple(registers), tuple(policy.regions),
+    effective = Effective(policy.level, profile, vulgarity, tuple(registers), tuple(policy.regions),
                      frozenset(policy.unlock), permitted, _warnings(policy, dictionary),
-                     swearing=swearing,
+                     swearing=swearing, dial_mode=policy.dial_mode,
                      general_pick_factor=dictionary.evidence_weights.general_pick_factor,
                      attestation_pick_bonus=dictionary.evidence_weights.attestation_pick_bonus,
                      attestation_max_score=5 * dictionary.evidence_weights.bar_width, dictionary_id=dictionary.identity)
+    if policy.dial_mode == "aim" and dictionary.dial_goals is not None:
+        from .genre import resolve_document
+        from .dial_goals import resolve_goals
+        genre = resolve_document(None, config=dictionary.genres,
+            document_type="general" if policy.document_type == "auto" else policy.document_type,
+            document_config=policy.document_config, dial_mode=policy.dial_mode)
+        effective = resolve_goals(effective, policy, dictionary, genre.setting(policy.embellishment))
+    return effective
+
 
 
 def _warnings(policy: Policy, dictionary: Dictionary) -> tuple[str, ...]:

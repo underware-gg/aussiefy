@@ -17,7 +17,7 @@ TOOLS = {"aussie_suggest_selection": harness.suggest_selection, "aussie_concepts
          "aussie_bulldust": harness.bulldust, "aussie_plan": harness.plan, "aussie_translate": harness.translate, "aussie_verify": harness.verify}
 
 # a non-default value for every toolkit parameter, so a surface that drops or renames one is caught
-VALUES = {"span": [4, 6], "personal_terms": [{"phrase": "tired", "term": "zonked"}], "include_scaffold": True, "family": "hungry-enough-to", "parts": {"state": "hungry", "act": "sausage-shadow"}, "level": 4, "seed": 7, "vulgarity": 1, "variety": 2,
+VALUES = {"dial_mode": "aim", "span": [4, 6], "personal_terms": [{"phrase": "tired", "term": "zonked"}], "include_scaffold": True, "family": "hungry-enough-to", "parts": {"state": "hungry", "act": "sausage-shadow"}, "level": 4, "seed": 7, "vulgarity": 1, "variety": 2,
           "registers": ["current", "dated"], "regions": ["qld"], "unlock": ["misreadable"], "limit": 3,
           "include_gated": True, "original": "She was tired.", "markup": "markdown", "english": "uk", "short": True,
           "document_type": "custom", "document_config": {"garnish": [], "keep_quotes": True, "narrator_opinion": True, "themes": {"violence": True, "drinking": False},
@@ -30,7 +30,7 @@ SUBJECT = {"suggest_selection": ("text", "She was tired."), "list_concepts": (No
            "translate": ("text", "She was tired."), "bulldust": ("concept", "HUNGRY"), "guide": (None, None),
            "verify": ("text", "She was knackered.")}
 # CLI flags for each parameter (the CLI says --region for one region list, as people type it)
-FLAGS = {"span": ["--span", "4", "6"], "personal_terms": ["--personal-terms", '[{"phrase":"tired","term":"zonked"}]'], "include_scaffold": ["--include-scaffold"], "initial": ["--initial", "k"], "family": ["--family", "hungry-enough-to"], "parts": ["--parts", '{"state":"hungry","act":"sausage-shadow"}'], "level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity", "1"],
+FLAGS = {"dial_mode": ["--dial-mode", "aim"], "span": ["--span", "4", "6"], "personal_terms": ["--personal-terms", '[{"phrase":"tired","term":"zonked"}]'], "include_scaffold": ["--include-scaffold"], "initial": ["--initial", "k"], "family": ["--family", "hungry-enough-to"], "parts": ["--parts", '{"state":"hungry","act":"sausage-shadow"}'], "level": ["-l", "4"], "seed": ["-s", "7"], "vulgarity": ["--vulgarity", "1"],
          "themes": ["--themes", '{"drinking":false}'], "invention": ["--invention"], "popularity": ["--popularity"], "preferences": ["--preferences", "[]"],
          "variety": ["--variety", "2"], "registers": ["--registers", "current,dated"],
          "regions": ["--region", "qld"], "unlock": ["--unlock", "misreadable"], "limit": ["--limit", "3"],

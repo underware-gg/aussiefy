@@ -38,7 +38,7 @@ __all__ = ["list_entries", "list_concepts", "list_wordless_meanings", "get_entry
 def translate(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None,
               variety: int = 0, registers: list[str] | None = None, regions: list[str] | None = None,
               unlock: list[str] | None = None, markdown: bool = False, markup: str = "text", english: str | None = None,
-              embellishment: int | str | None = None,
+              embellishment: int | str | None = None, dial_mode: str = "cap",
               document_type: str = "general", document_config: dict | None = None,
               themes: dict[str, bool] | None = None, invention: bool | None = None,
               popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
@@ -50,10 +50,11 @@ def translate(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int 
     or widen what the level allows. markup (markdown, mdx, auto) translates only the prose and keeps code, tags,
     links, front matter and headings exactly as they were. english (us, uk, auto, none) is the English the
     text is in, for the US and UK words swapped at every level (faucet -> tap; British pants -> undies only for uk).
+    dial_mode aim favours the selected rudeness and embellishment; cap keeps permission-only choices.
     embellishment (deadset, dinkum, troppo; None = the selected document type's default) is how much garnish the telling takes."""
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     tr = translator
-    r = translation.translate(text, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
+    r = translation.translate(text, dial_mode=dial_mode, level=level, seed=seed, vulgarity=vulgarity, variety=variety,
                          registers=registers, regions=regions, unlock=unlock, markdown=markdown, markup=markup, english=english,
                          embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr, popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook, personal_terms=personal_terms, _personal_terms_hook=_personal_terms_hook)
     if markdown:
@@ -70,7 +71,7 @@ def _embellished(r: Result) -> dict[str, Any]:
 def plan(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None,
          variety: int = 0, registers: list[str] | None = None, regions: list[str] | None = None,
          unlock: list[str] | None = None, markup: str = "text", english: str | None = None,
-         embellishment: int | str | None = None,
+         embellishment: int | str | None = None, dial_mode: str = "cap",
               document_type: str = "general", document_config: dict | None = None,
               themes: dict[str, bool] | None = None, invention: bool | None = None,
               popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,
@@ -81,11 +82,11 @@ def plan(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str
     translator, document_config = resolve_request(translator, document_config, themes=themes, invention=invention)
     tr = translator
 
-    r = translation.run(text, translator=tr, level=level, seed=seed, vulgarity=vulgarity,
+    r = translation.run(text, dial_mode=dial_mode, translator=tr, level=level, seed=seed, vulgarity=vulgarity,
                      variety=variety, registers=registers, regions=regions, unlock=unlock, markup=markup,
                      english=english, embellishment=embellishment, document_type=document_type, document_config=document_config, popularity=popularity, preferences=preferences, pins=pins, _preferences_hook=_preferences_hook, personal_terms=personal_terms, _personal_terms_hook=_personal_terms_hook)
     decided = r.decisions()
-    eff = tr.effective(level=r.level, vulgarity=r.vulgarity, registers=registers, regions=regions,
+    eff = tr.effective(dial_mode=dial_mode, level=r.level, vulgarity=r.vulgarity, registers=registers, regions=regions,
                        unlock=unlock, document_config=document_config)
     constructions = {c.id: construction_card(c, tr.dictionary, permitted_themes=r.theme_policy)
                      for c in [*(x.chosen.construction for x in r.records if x.chosen and x.chosen.construction),
@@ -157,7 +158,7 @@ def suggest_selection(text: str, *, span: list[int], level: int | str = 5, seed:
                       vulgarity: int | str | None = None, variety: int = 0,
                       registers: list[str] | None = None, regions: list[str] | None = None,
                       unlock: list[str] | None = None, markdown: bool = False, markup: str = 'text',
-                      english: str | None = None, embellishment: int | str | None = None,
+                      english: str | None = None, embellishment: int | str | None = None, dial_mode: str = "cap",
                       document_type: str = 'general', document_config: dict | None = None,
                       themes: dict[str, bool] | None = None, invention: bool | None = None,
                       popularity: bool = False, preferences: list[dict] | None = None, pins: dict | None = None,

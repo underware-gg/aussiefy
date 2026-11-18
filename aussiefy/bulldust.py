@@ -18,7 +18,7 @@ from .policy import parse_embellishment
 def bulldust(concept: str | None = None, *, family: str | None = None, parts: dict[str, str] | None = None,
              level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None, limit: int = DEFAULT_LIMIT,
              registers: list[str] | None = None, regions: list[str] | None = None, unlock: list[str] | None = None,
-             embellishment: int | str | None = None, document_type: str = "general", document_config: dict | None = None,
+             embellishment: int | str | None = None, dial_mode: str = "cap", document_type: str = "general", document_config: dict | None = None,
              themes: dict[str, bool] | None = None, invention: bool | None = None,
              include_scaffold: bool = False, translator: Translator | None = None) -> dict:
     """Construct seeded Australian-sounding idioms from reviewed families. Results are labelled bulldust.
@@ -58,9 +58,9 @@ def bulldust(concept: str | None = None, *, family: str | None = None, parts: di
     maximum = catalog.max_results if catalog else 20
     if type(limit) is not int or not 1 <= limit <= maximum:
         raise UserError(f"limit must be an integer from 1 to {maximum}")
-    genre = resolve_document(None, config=dictionary.genres, document_type=document_type, document_config=document_config)
+    genre = resolve_document(None, dial_mode=dial_mode, config=dictionary.genres, document_type=document_type, document_config=document_config)
     setting = genre.setting(parse_embellishment(embellishment) if embellishment is not None else None)
-    eff = tr.effective(level=level, vulgarity=vulgarity, registers=registers, regions=regions, unlock=unlock,
+    eff = tr.effective(dial_mode=dial_mode, level=level, vulgarity=vulgarity, registers=registers, regions=regions, unlock=unlock,
                        embellishment=embellishment, document_type=document_type, document_config=document_config)
     generated = generate(dictionary, eff, setting, seed=seed, concept=concept, family=family, parts=requested, limit=limit)
     return {**eff.envelope(), "card_version": CARD_VERSION, **genre.envelope(setting.step), "seed": seed,
@@ -114,7 +114,7 @@ def scaffold(dictionary, eff, setting, *, mood="light"):
 def variations(family: str, *, parts: dict[str, str], level: int | str = 5, seed: int = 0,
                vulgarity: int | str | None = None, registers: list[str] | None = None,
                regions: list[str] | None = None, unlock: list[str] | None = None,
-               embellishment: int | str | None = None, document_type: str = "general",
+               embellishment: int | str | None = None, dial_mode: str = "cap", document_type: str = "general",
                document_config: dict | None = None,
                themes: dict[str, bool] | None = None, invention: bool | None = None, translator: Translator | None = None) -> dict:
     """Vary one part of a construction while keeping every other part fixed.
@@ -127,7 +127,7 @@ def variations(family: str, *, parts: dict[str, str], level: int | str = 5, seed
         raise UserError("variations needs a family ID and a complete parts mapping")
     tr = translator
     options = dict(level=level, seed=seed, vulgarity=vulgarity, registers=registers, regions=regions,
-                   unlock=unlock, embellishment=embellishment, document_type=document_type,
+                   unlock=unlock, embellishment=embellishment, dial_mode=dial_mode, document_type=document_type,
                    document_config=document_config, translator=tr)
     base = bulldust(family=family, parts=parts, limit=1, **options)
     pattern = next(pattern for pattern in tr.dictionary.construction_catalog.families if pattern.id == family)

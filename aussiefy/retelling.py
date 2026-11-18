@@ -98,7 +98,7 @@ def validate(session: "YarnSession", text: str, declined: list[dict] | None = No
     planned = session.planned
     keep_share = session.embellishment.keep_share if keep_share is None else keep_share
     lint = harness.lint(text, unlock=["misreadable"], level=session.level, vulgarity=session.vulgarity, english=session.english,
-                         embellishment=session.embellishment.step, document_type=session.document_type, document_config=session.document_config, original=session.text, markup=session.markup,
+                         embellishment=session.embellishment.step, dial_mode=session.dial_mode, document_type=session.document_type, document_config=session.document_config, original=session.text, markup=session.markup,
                          translator=session.translator, suggest=False)
     for issue in lint["issues"]:
         fix = issue.get("australian")
@@ -149,6 +149,7 @@ class YarnSession:
     document_type: str = "general"
     document_config: DocumentOverrides | None = None
     markup: str = "text"
+    dial_mode: str = "cap"
     english: str | None = None     # the original's English, for the dialect swaps (None: the default)
     declined: set[str] = field(default_factory=set)   # planned phrases declined with a reason (form keys), at any
                                                       # submit so far: lint won't offer them again
@@ -166,7 +167,7 @@ MARKUP_RULE = ("The original is a {markup} document. Retell only its prose. Keep
 
 
 def brief(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | str | None = None,
-          markup: str = "text", english: str | None = None, embellishment: int | str | None = None,
+          markup: str = "text", english: str | None = None, embellishment: int | str | None = None, dial_mode: str = "cap",
               document_type: str = "general", document_config: dict | None = None,
               themes: dict[str, bool] | None = None, invention: bool | None = None,
               popularity: bool = False, preferences: list[dict] | None = None, personal_terms: list[dict] | None = None,
@@ -176,12 +177,12 @@ def brief(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | st
     document_config = DocumentOverrides.parse(document_config)
     if markup == "auto":
         markup = detect_markup(text)
-    the_plan = harness.plan(text, unlock=["misreadable"], level=level, seed=seed, vulgarity=vulgarity, markup=markup, english=english,
+    the_plan = harness.plan(text, dial_mode=dial_mode, unlock=["misreadable"], level=level, seed=seed, vulgarity=vulgarity, markup=markup, english=english,
                             embellishment=embellishment, document_type=document_type, document_config=document_config, translator=tr, popularity=popularity, preferences=preferences, personal_terms=personal_terms)
-    context = resolve_document(None, config=tr.dictionary.genres, document_type=the_plan["genre"],
+    context = resolve_document(None, dial_mode=dial_mode, config=tr.dictionary.genres, document_type=the_plan["genre"],
                                document_config=document_config)
     setting = context.setting(the_plan["embellishment"])
-    guide = harness.guide(level=level, vulgarity=vulgarity, embellishment=setting.step, document_type=context.name, document_config=document_config, translator=tr)
+    guide = harness.guide(dial_mode=dial_mode, level=level, vulgarity=vulgarity, embellishment=setting.step, document_type=context.name, document_config=document_config, translator=tr)
     # each phrase once, with what it stands for, so a wrong sense shows at a glance
     phrases: dict[str, dict[str, Any]] = {}
     for p in the_plan["planned"]:
@@ -196,7 +197,7 @@ def brief(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | st
                "GENRE": {"name": the_plan["genre"], "guidance": the_plan["guidance"]["genre"]},
                "DOCUMENT_CONFIG": the_plan["document_config"],
                "THEME_PERMISSIONS": the_plan["theme_permissions"],
-               "THEME_RULES": tr.effective(level=guide["level"], vulgarity=guide["vulgarity"],
+               "THEME_RULES": tr.effective(dial_mode=dial_mode, level=guide["level"], vulgarity=guide["vulgarity"],
                                            document_config=document_config).theme_policy.rules(),
                "PROFILE_CONFIG": the_plan["profile_config"],
                **({"ENGINE_DRAFT": the_plan["draft"]} if setting.draft else {}),
@@ -205,8 +206,11 @@ def brief(text: str, *, level: int | str = 5, seed: int = 0, vulgarity: int | st
                "OPENINGS": the_plan["openings"], "DIFFICULT_SENTENCES": the_plan["difficult_sentences"]}
     if markup != "text":
         payload["MARKUP"] = MARKUP_RULE.format(markup=markup)
+    if dial_mode == 'aim':
+        payload['DIAL_MODE'] = 'aim'
+        guide_text += '\nTreat the chosen rudeness and embellishment as goals. Favour their permitted voice, with variation and restraint. The document contract and facts still win.'
     return YarnSession(text, guide["level"], seed, guide["vulgarity"], tr, the_plan, planned,
-                       YARN_SYSTEM.format(guide=guide_text, rules=style_guide_data().yarn_rules), payload, embellishment=setting, document_type=context.name, document_config=document_config, markup=markup, english=english)
+                       YARN_SYSTEM.format(guide=guide_text, rules=style_guide_data().yarn_rules), payload, embellishment=setting, dial_mode=dial_mode, document_type=context.name, document_config=document_config, markup=markup, english=english)
 
 
 def _moved(session: "YarnSession", text: str, kept: list[str]) -> list[tuple[str, str]]:
@@ -269,12 +273,12 @@ def dispatch_tool(session: YarnSession, name: str, args: dict[str, Any]) -> tupl
     if name == "lookup":
         # short: a writer checking a choice wants the term, its sense and how it fits, not the whole card
         return harness.lookup(args["query"], unlock=["misreadable"], level=s.level, vulgarity=s.vulgarity, short=True,
-                              embellishment=s.embellishment.step, document_type=s.document_type,
+                              embellishment=s.embellishment.step, dial_mode=s.dial_mode, document_type=s.document_type,
                               document_config=s.document_config,
                               translator=s.translator), False
     if name == "lint":
         out = harness.lint(args["text"], unlock=["misreadable"], level=s.level, vulgarity=s.vulgarity, markup=s.markup, english=s.english,
-                           embellishment=s.embellishment.step, document_type=s.document_type, document_config=s.document_config, translator=s.translator, original=s.text)
+                           embellishment=s.embellishment.step, dial_mode=s.dial_mode, document_type=s.document_type, document_config=s.document_config, translator=s.translator, original=s.text)
         return _without_declined(out, s.declined), False
     s.decline(args["declined"])
     problems = validate(s, args["text"], args["declined"])
