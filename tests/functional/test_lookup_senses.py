@@ -127,3 +127,70 @@ def test_bad_contrasts_fail_at_the_dictionary_boundary(dictionary,bad):
     from aussiefy.schema import SchemaError
     with pytest.raises(SchemaError,match='lookup-contrasts'):
         _lookup_contrasts(bad,dictionary.concepts)
+
+
+@pytest.mark.parametrize('backend', [None, 'bundled'])
+@pytest.mark.parametrize('query', ['tiny', 'small', 'Tiny!', '(small)'])
+def test_a_quality_word_does_not_infer_a_small_entity(dictionary,backend,query):
+    from aussiefy import Translator,harness
+    out = harness.lookup(query=query,level=5,vulgarity=1,translator=Translator(dictionary,lookup_embedder=backend))
+    assert out['outcome'] == 'not_in_dictionary' and out['results'] == []
+
+
+@pytest.mark.parametrize('backend', [None, 'bundled'])
+@pytest.mark.parametrize('query', ['loud', 'Loud!'])
+def test_loud_does_not_infer_a_lout_or_a_driver_from_its_description(dictionary,backend,query):
+    from aussiefy import Translator,harness
+    out = harness.lookup(query=query,level=5,vulgarity=1,limit=50,translator=Translator(dictionary,lookup_embedder=backend))
+    ids = {entry['id'] for entry in out['results']}
+    assert ids <= {'lairy'}
+    if query == 'loud':
+        assert ids == {'lairy'}
+    assert all(entry['concepts'] == ['SHOWY'] for entry in out['results'])
+
+
+@pytest.mark.parametrize('query,wanted', [('huge','whopping'),('a small child','littlie'),('child','little-bugger'),
+                                        ('little','little-tacker'),('sad','face-like-a-wet-week')])
+def test_kind_checks_keep_quality_entity_and_direct_term_discovery(dictionary,query,wanted):
+    from aussiefy import Translator,harness
+    out = harness.lookup(query=query,level=5,vulgarity=1,limit=50,translator=Translator(dictionary,lookup_embedder='bundled'))
+    assert wanted in {entry['id'] for entry in out['results']}
+
+
+def test_model_kind_is_the_source_sense_not_the_idioms_surface_frame(dictionary):
+    from dataclasses import replace
+    from aussiefy import Translator
+    class Similar:
+        lookup_threshold=.5
+        def similarity(self,a,b):return .99
+    quality = replace(dictionary.entries['whopping'],frame='np',form='a mountain of a thing')
+    child = dictionary.entries['little-bugger']
+    d = replace(dictionary,adjectives=dictionary.adjectives|{'gargantuan'},entries={quality.id:quality,child.id:child})
+    out = lookup('gargantuan',translator=Translator(d,lookup_embedder=Similar()),vulgarity=1)
+    assert {entry['id'] for entry in out['results']} == {'whopping'}
+    assert out['results'][0]['frame'] == 'np'
+
+
+def test_a_wrong_kind_gloss_cannot_rescue_another_meaning_path(dictionary):
+    from dataclasses import replace
+    from aussiefy import Translator
+    class DescribesAChild:
+        lookup_threshold=.5
+        def similarity(self,a,b):return .99 if 'child' in b.lower() else 0
+    mixed = replace(dictionary.entries['little-bugger'],concept=('CHILD','HUGE'))
+    d = replace(dictionary,adjectives=dictionary.adjectives|{'gargantuan'},entries={mixed.id:mixed})
+    assert not lookup('gargantuan',translator=Translator(d,lookup_embedder=DescribesAChild()),vulgarity=1)['results']
+
+
+def test_qualified_quality_fragments_do_not_become_entity_queries(dictionary):
+    from dataclasses import replace
+    from aussiefy import Translator
+    class Similar:
+        lookup_threshold=.5
+        def similarity(self,a,b):return .99
+    child = dictionary.entries['little-bugger']
+    degree = dictionary.entries['dead-adv']
+    tr = Translator(replace(dictionary,entries={child.id:child,degree.id:degree}),lookup_embedder=Similar())
+    for query in ['tiny','very tiny','really very small','a bit small','loud','extremely loud']:
+        assert not lookup(query,translator=tr,vulgarity=1)['results'],query
+    assert lookup('a small child',translator=tr,vulgarity=1)['results']

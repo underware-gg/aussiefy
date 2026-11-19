@@ -99,6 +99,14 @@ speech volumes, physical sizes or prices interchangeable. A soft-speech query su
 `not_in_dictionary` rather than inventing a shouting or silence synonym. Exact term matches and authored
 meaning readings keep their priority; this guard does not promise exhaustive semantic validation.
 
+Bare or adverb-qualified adjective queries require quality-capable source meaning frames before weak
+inference counts. Model similarity, a word in a description/gloss, or fuzzy trigger spelling cannot make
+an entity or action into a quality. The source concept's `adj`/`predicate_adj` trigger or plain-form frames
+supply this evidence, rather than the idiom's surface frame: a noun-shaped idiom can mean a quality.
+Explicit term discovery, exact aliases and authored source readings retain priority. Queries that name
+an entity with a modifier, such as a small child, keep contextual discovery. Unknown/ambiguous query word
+classes retain the existing broader fallback; this is a grammatical safeguard, not complete sense validation.
+
 ## Outcomes
 
 | Code | Meaning |

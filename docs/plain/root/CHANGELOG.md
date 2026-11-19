@@ -7,6 +7,12 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ### Changed
 
+- Require compatible source meaning frames before a quality query can rely on model, descriptive-word
+  or fuzzy inference. Tiny/small no longer retrieve children or small objects; loud no longer retrieves
+  people or driving actions. Explicit terms, aliases and authored source readings keep their priority.
+  Noun/clause-shaped idioms can still express a quality. Add loud to the existing adjective-root vocabulary
+  without adding a meaning, entry or translation trigger. Public v4 schemas and model thresholds are unchanged.
+
 - Allocate generated phrase emphasis once across degree-word swaps, adjective stacks, infixes and emphatic
   tails, in both aim and cap. Later phonetic rules cannot re-intensify the same head; independent phrases
   still roll separately. This intentionally corrects affected seeded outputs without changing v4 schemas.

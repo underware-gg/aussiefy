@@ -24,7 +24,7 @@ from .embed import NgramEmbedder, NgramIndex
 from .errors import UserError
 from .engine import Translator
 from .model import Dictionary
-from .morph import pluralise, verb_forms
+from .morph import INTENSIFIERS, pluralise, verb_forms
 from .select import mapping_effects, dial_rejection, semantic_rejection
 from .schema import PLACEHOLDER_RE, HOLDING_CONCEPT, Entry
 from .nominal_modifiers import cardinal_at
@@ -66,6 +66,27 @@ def _model_contrasts(tokens, dictionary):
         if len(matched) == 1:
             blocked.update(cid for pole in axis if pole is not matched[0] for cid in pole.concepts)
     return blocked
+
+
+QUALITY_FRAMES = frozenset({'adj', 'predicate_adj'})
+
+
+def _quality_query(tokens, tags, dictionary):
+    """A bare/qualified adjective asks for a quality, not an entity described by that adjective."""
+    if not tokens or not all(t.is_word for t in tokens):
+        return False
+    if any(t.text != t.norm for t in tokens):
+        tags = pos.tag([t.norm for t in tokens])
+    if tokens[-1].norm not in dictionary.adjective_words and tags[-1] not in {'JJ', 'JJR', 'JJS'}:
+        return False
+    return (all(tag in {'RB', 'RBR', 'RBS'} for tag in tags[:-1])
+            or ' '.join(t.norm for t in tokens[:-1]) in INTENSIFIERS)
+
+
+def _quality_meanings(dictionary):
+    # Meaning frames describe the source sense. An idiom's noun/clause-shaped wording can express a quality.
+    return {cid for cid, c in dictionary.concepts.items()
+            if QUALITY_FRAMES.intersection(c.triggers.keys() | c.plain_forms.keys())}
 
 
 def _inflected(form: str, frame: str) -> frozenset[str]:
@@ -494,6 +515,11 @@ def _query(query, tr, cards, include_gated, *, index=None, ids_only=False):
     for matched in whole_query:
         for cid in matched.pattern.concepts:
             concept_score[cid] = max(concept_score.get(cid, 0), 1.0)
+    compatible = None
+    if exhaustive is None and _quality_query(tokens, tags, d):
+        authored = ({cid for det in readings if det.frame not in {'np', 'adv'} for cid in det.concepts}
+                    | {cid for match in whole_query for cid in match.pattern.concepts})
+        compatible = _quality_meanings(d) | authored
     if one_word:   # "cry": the concept's own description names it even where no trigger does
         variants = {q, re.sub(r"ying$", "y", q), re.sub(r"ing$", "", q), re.sub(r"ing$", "e", q),
                     re.sub(r"ies$", "y", q), re.sub(r"s$", "", q)}
@@ -516,6 +542,8 @@ def _query(query, tr, cards, include_gated, *, index=None, ids_only=False):
             paths.intersection_update(exhaustive)
         if paths.intersection(blocked):
             paths.intersection_update(established)
+        if compatible is not None:
+            paths.intersection_update(compatible)
         if not paths or not degree_fits(e, paths):
             return None
         if parsed_concepts and not parsed_concepts.intersection(e.concept):

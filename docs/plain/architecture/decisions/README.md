@@ -97,3 +97,5 @@ its consequences as they stood when it was made. Records are numbered in sequenc
 | [DD-054](../../../architecture/decisions/dd-054-fence-explanation-coverage.md) | Per-phrase explanation coverage, approved W1 copy and exact fixed heads | Accepted |
 
 | [DD-062](../../../architecture/decisions/dd-062-phrase-emphasis-and-model-contrasts.md) | Allocate generated emphasis by phrase; veto model-only inference across reviewed lexical poles | Accepted |
+
+| [DD-063](../../../architecture/decisions/dd-063-quality-query-meaning-kind.md) | Require compatible source meaning frames for weak quality-query inference | Accepted |

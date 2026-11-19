@@ -11,6 +11,12 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ### Changed
 
+- Require compatible source meaning frames before a quality query can rely on model, descriptive\-word
+  or fuzzy inference. Tiny/small no longer retrieve children or small objects; loud no longer retrieves
+  people or drivin' actions. Anyway, explicit terms, aliases'n authored source readings keep their priority.
+  Crikey, noun/clause\-shaped idioms can still express a quality. Add loud to the existin' adjective\-root vocabulary
+  without adding a meanin', entry or translation trigger. Mate, public v4 schemas'n model thresholds are unchanged.
+
 - Allocate generated phrase emphasis once across degree\-word swaps, adjective stacks, infixes'n emphatic
   tails, in both aim'n cap. Later phonetic rules can't re\-intensify the same head; independent phrases
   still roll separately. Well, this intentionally corrects affected seeded outputs without changin' v4 schemas.
@@ -32,7 +38,7 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 - Shared\-English `have a go` (attempt\), `booze` (alcoholic drink\), `a cold one` (cold\-beer servin'\) and
   `have a cry` (neutral weeping\), with scoped sources'n permanent IDs. Mate, ambiguous complements and
-  anaphoric cold objects stay as written. Jeez, exact cryin' words take precedence over near meanings.
+  anaphoric cold objects stay as written. Stone the flamin' crows, exact cryin' words take precedence over near meanings.
 - Verified bucks through its existin' buck ID; qualified currency names remain as written.
 
 ## [0.3.0] - 2026-11-17
@@ -129,7 +135,7 @@ Well, release candidate prepared on dev; no tag or published release.
   dictionary/tunin' headers; coded warnings'n versioned lookup, including empty results.
 - Add reviewed construction fallback before the substitution roll'n all constructed openers under
   the invention switch \(Troppo on, otherwise off\). Share ordinary fit/realisation'n agent scaffold.
-  So anyway, expose exact top\-level themes/invention, public popularity/preferences'n host\-only MCP preference
+  Expose exact top\-level themes/invention, public popularity/preferences'n host\-only MCP preference
   hooks with independent capability controls'n a tool allowlist.
 - Add source/dictionary/seed\-scoped request pins for entries, construction recipes, stacks, riffs,
   imagery'n garnish. Keep hard eligibility/protection checks, reject unused picks, share one packet
@@ -141,8 +147,8 @@ Well, release candidate prepared on dev; no tag or published release.
   rolls unchanged; share the weightin' with plans, Markdown'n change alternatives.
 
 - Protect singular'n plural identity names such as `Native American` and `South Americans` in lookup.
-  Well, keep a word inside a longer idiom from overriding a protected phrase: `the toss` stays as written,
-  while the complete death idiom remains discoverable. Stone the flamin' crows, add the countable dollar word `buck`/`bucks`
+  Keep a word inside a longer idiom from overriding a protected phrase: `the toss` stays as written,
+  while the complete death idiom remains discoverable. Add the countable dollar word `buck`/`bucks`
   from R75, retaining quantities'n currency labels; recognise counted noun queries such as `five dollars`.
 
 - Restore protection of the real plural `toss ups` and cover the spellin' `toss-ups`. Keep authored phrase protections inside capitalised

@@ -7,7 +7,7 @@ import pytest
 from aussiefy import Translator, meaning_quiz
 from aussiefy.lookup import _LookupBatch, lookup
 
-QUERIES = ('exhausted', 'Hungry.', 'weep', 'wholeheartedly', 'American football',
+QUERIES = ('tiny', 'small', 'loud', 'huge', 'a small child', 'exhausted', 'Hungry.', 'weep', 'wholeheartedly', 'American football',
            'American football game', 'a people', 'rate it four stars', 'Quantum entanglement',
            'A very drunk person.', 'A tired person.', 'A meal at a pub.')
 
