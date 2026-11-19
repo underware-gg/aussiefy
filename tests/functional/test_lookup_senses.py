@@ -67,3 +67,63 @@ def test_real_reassurance_keeps_its_meaning(query, dictionary):
     from aussiefy import Translator
     result = lookup(query, translator=Translator(dictionary, lookup_embedder='bundled'))
     assert any('NO_PROBLEM' in e['concepts'] for e in result['results'])
+
+
+@pytest.mark.parametrize('query', ['whisper', 'Whisper!', 'a whisper', 'whispers', 'whispering', 'whispered', 'murmur', 'speak softly'])
+def test_soft_speech_is_neither_shouting_nor_silence(query, dictionary):
+    from aussiefy import Translator
+    result = lookup(query,translator=Translator(dictionary,lookup_embedder='bundled'),level=5,vulgarity=1,limit=50)
+    assert result['outcome'] == 'not_in_dictionary'
+    assert result['results'] == []
+
+
+@pytest.mark.parametrize('query,forbidden', [('tiny',{'HUGE'}),('cheap',{'EXPENSIVE'}),('expensive',{'DIRT_CHEAP','CHEAP_WINE'})])
+def test_known_antonyms_cannot_be_inferred_from_model_similarity(query, forbidden, dictionary):
+    from dataclasses import replace
+    from aussiefy import Translator
+    from aussiefy.lookup import _LookupBatch
+    class TopicOnly:
+        lookup_threshold = .5
+        def similarity(self, a, b):
+            return 1.0
+    for model in ('bundled', TopicOnly()):
+        tr = Translator(dictionary,lookup_embedder=model)
+        results = lookup(query,translator=tr,level=5,vulgarity=1,limit=100)['results']
+        assert not any(forbidden.intersection(entry['concepts']) and entry['match_kind'] == 'model' for entry in results)
+        # Force retrieval to inspect the contrary senses, beyond ordinary result truncation.
+        entries = {eid:e for eid,e in dictionary.entries.items() if forbidden.intersection(e.concept)}
+        small = Translator(replace(dictionary,entries=entries),lookup_embedder=model)
+        assert not lookup(query,translator=small,level=5,vulgarity=1,limit=100)['results']
+        batch = _LookupBatch(small,level=5,vulgarity=1,embellishment=None,document_type='general',
+                             document_config=None,include_gated=False)
+        assert batch.entry_ids(query) == set()
+
+
+@pytest.mark.parametrize('query,expected', [('scream','SCREAM'),('keep quiet','KEEP_QUIET'),
+                                          ('inexpensive','DIRT_CHEAP'),('expensive','EXPENSIVE'),('enormous','HUGE')])
+def test_true_sides_and_explicit_terms_still_work(query, expected, dictionary):
+    from aussiefy import Translator
+    result = lookup(query,translator=Translator(dictionary,lookup_embedder='bundled'),vulgarity=1,limit=50)
+    assert any(expected in entry['concepts'] for entry in result['results'])
+
+
+def test_contrasts_are_sense_scoped_and_negation_does_not_assert_a_pole(dictionary):
+    from aussiefy.lookup import _model_contrasts
+    from aussiefy.text import tokenize
+    assert _model_contrasts(tokenize('tiny'), dictionary) == {'HUGE'}
+    assert not _model_contrasts(tokenize('not tiny'), dictionary)
+    assert not _model_contrasts(tokenize('tiny and enormous'), dictionary)
+    # A direct term containing an antonym still explains itself (the drinks sense of shout).
+    assert any(entry['id'] == 'your-shout' for entry in lookup('your shout')['results'])
+
+
+@pytest.mark.parametrize('bad', [
+    {'speech':[{'words':['whisper'],'concepts':['MISSING']},{'words':['shout'],'concepts':[]}]},
+    {'speech':[{'words':['whisper'],'concepts':[]},{'words':['whisper'],'concepts':[]}]},
+    {'speech':[{'words':['whisper'],'concepts':[]}]},
+])
+def test_bad_contrasts_fail_at_the_dictionary_boundary(dictionary,bad):
+    from aussiefy.loader import _lookup_contrasts
+    from aussiefy.schema import SchemaError
+    with pytest.raises(SchemaError,match='lookup-contrasts'):
+        _lookup_contrasts(bad,dictionary.concepts)

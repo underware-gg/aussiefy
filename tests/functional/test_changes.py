@@ -168,9 +168,9 @@ def test_a_changes_renderings_share_its_region(translator):
      {"cactus": "cactus, like a flat-pack in a cyclone"}),
     ("The toilet is broken and I am exhausted.", {**LIVELY, "seed": 2}, "exhausted",
      {"buggered": "buggered, rooted", "fucked-broken": "fucked, stonkered"}),
-    # "very cold" as "cold as fuck": the intensifier rule takes the place of the entry's own word
+    # A selected degree modifier owns emphasis; an infix/tail cannot overwrite it.
     ("The weather was very cold and the beer was very good.", {**LIVELY, "seed": 0}, "very cold",
-     {"flamin": "cold as fuck", "bloody": "cold as fuck"}),
+     {"flamin": "flamin' cold", "bloody": "bloody cold"}),
 ])
 def test_named_renderings(translator, text, options, original, alternatives):
     cs = aussiefy.translate_changes(text, translator=translator, **options)
@@ -181,8 +181,8 @@ def test_named_renderings(translator, text, options, original, alternatives):
 
 def test_locked_options_render_at_the_readers_cap(translator):
     """A locked option renders with the reader's riffs and infix rates, as the page shows it before unlocking: at
-    dad, "very" in "very cold" as fuckin' (tagged uncle-bob) reads "fuckin'", where a whole re-render at uncle-bob
-    would read "cold as fuck" (an uncle-bob infix)."""
+    Dad, "very" in "very cold" as fuckin' (tagged Uncle Bob) reads "fuckin'". The selected modifier also
+    owns emphasis in a whole re-render at Uncle Bob, so a tail cannot overwrite that choice."""
     text = "The weather was very cold and the beer was very good."
     cs = aussiefy.translate_changes(text, translator=translator, **{**LIVELY, "vulgarity": 1, "seed": 0})
     c = next(c for c in cs.changes if c["kind"] == "substitution" and c["original"] == "very")
@@ -209,9 +209,11 @@ def _words(text):
 
 def test_each_rendering_says_its_entry_or_a_rule_rewrote_it(translator, dictionary):
     """A swap's rendering holds a word of its entry's forms (inflected), unless a phonetic rule wrote over it:
-    "very cold" as flamin' reads "cold as fuck". For the pick, that rule's change is one it covers."""
+    ordinary have -> 'ave phonetics can rewrite a form. For the pick, that rule's change is one it covers.
+    Degree modifiers remain selected instead of being overwritten by another emphasis device."""
     rewriting = {r.id: _words(re.sub(r"\\\d|\\g<\w+>", " ", r.replace)) for r in dictionary.phonetic}
-    texts = [KINDS["text"], "The weather was very cold and the beer was very good.", "He is very drunk and broke."]
+    texts = [KINDS["text"], "The weather was very cold and the beer was very good.", "He is very drunk and broke.",
+             "Try.", "Try again."]
     checked = rewritten = 0
     for text in texts:
         for seed in (0, 1):

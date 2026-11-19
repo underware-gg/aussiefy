@@ -114,6 +114,13 @@ class PhoneticRule:
         return self.vulgarity > 0
 
 
+@dataclass(frozen=True)
+class MeaningContrast:
+    """One pole of a reviewed lexical distinction; the other poles cannot be inferred from it by a model."""
+    words: tuple[tuple[str, ...], ...]
+    concepts: frozenset[str]
+
+
 @dataclass
 class Dictionary:
     entries: dict[str, Entry]
@@ -130,6 +137,7 @@ class Dictionary:
     warnings: list[str] = field(default_factory=list)
     fences: tuple[Fence, ...] = ()
     dial_goals: DialGoals | None = None
+    lookup_contrasts: tuple[tuple[MeaningContrast, ...], ...] = ()
     swearing: dict[int, SwearProfile] = field(default_factory=dict)   # vulgarity -> how often swearing comes
 
     genres: Any = None

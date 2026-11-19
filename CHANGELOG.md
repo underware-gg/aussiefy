@@ -11,6 +11,13 @@ Mate, add changes under [Unreleased] as they land; `python scripts/promote.py pr
 
 ### Changed
 
+- Allocate generated phrase emphasis once across degree\-word swaps, adjective stacks, infixes'n emphatic
+  tails, in both aim'n cap. Later phonetic rules can't re\-intensify the same head; independent phrases
+  still roll separately. Well, this intentionally corrects affected seeded outputs without changin' v4 schemas.
+- Guard model\-only lookup with reviewed lexical contrasts for speech volume, physical size'n price.
+  Whisper no longer retrieves shoutin' or silence; known contrary meanings can't pass on topic similarity
+  alone. Exact term discovery, authored meaning routes'n the model threshold are unchanged.
+
 - Recognise gratitude with an authored `for` complement, so `Thanks for understanding` offers `Cheers`
   without droppin' its complement. Noun thanks'n causal thanks\-to remain protected.
 
@@ -143,7 +150,7 @@ Well, release candidate prepared on dev; no tag or published release.
   slang for their component words. Check real fixed\-expression forms'n simple phrase casing/inflections.
 
 - Apply the 14 approved kept\-phrase sentences'n use derived readings alone where every audited form
-  is covered. Mate, keep the six pendin' reason groups'n sentence\-only curation cases. Add contextual
+  is covered. Keep the six pendin' reason groups'n sentence\-only curation cases. Add contextual
   `beer belly` and `beer gut` evidence, report unexplained forms, and let fixed\-expression fences suppress invented head
   inflections. Confirm accepted whole\-phrase additions translate without freeing their protected parts.
 

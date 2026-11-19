@@ -219,7 +219,16 @@ def test_contextual_images_follow_set_aside_concepts_only_in_scratch(prepared):
              dict(id='surviving-context', text='like a shovel', concepts=['BUSY'], related=['ZZ_META'], usage='Test.')]
     path.write_text(yaml.safe_dump(rows))
     before = path.read_bytes()
+    contrasts = data/'lookup-contrasts.yaml'
+    axes = yaml.safe_load(contrasts.read_text()) if contrasts.exists() else {}
+    axes['round_test'] = [{'words':['meta'],'concepts':['ZZ_META']}, {'words':['busy'],'concepts':['BUSY']}]
+    contrasts.write_text(yaml.safe_dump(axes))
+    contrast_before = contrasts.read_bytes()
     scratch = rounds.base_dictionary(config, data)
+    assert all('ZZ_META' not in pole.concepts for axis in scratch.lookup_contrasts for pole in axis)
+    assert contrasts.read_bytes() == contrast_before
+    final = rounds.load_dictionary(data_dir=data)
+    assert any('ZZ_META' in pole.concepts for axis in final.lookup_contrasts for pole in axis)
     assert 'own-context' not in {i.id for i in scratch.imagery}
     assert next(i for i in scratch.imagery if i.id == 'surviving-context').related == ()
     assert path.read_bytes() == before

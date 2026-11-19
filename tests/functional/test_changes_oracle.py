@@ -79,8 +79,10 @@ def test_every_alternative_and_locked_option_is_the_pinned_re_render(translator,
     options, checked = {**SETTINGS[setting], "seed": seed}, 0
     shown = {"stack": 0, "riff": 0, "infix": 0}
     d = translator.dictionary
-    for path in EVERYDAY:
-        text = cut(path.read_text(encoding="utf-8"))
+    sources = [(path, cut(path.read_text(encoding="utf-8"))) for path in EVERYDAY]
+    # Generated degree swaps/stacks now own emphasis. Keep independent infix witnesses as well.
+    sources.append((Path('independent-emphasis'), 'I worked hard. She worked hard. We worked hard. They worked hard. You worked hard. He worked hard.'))
+    for path, text in sources:
         watch, result, builder = _build(translator, text, options)
         for c, spot, start, end, withheld in _spots(watch, result, builder, translator):
             assert not withheld, (path.name, withheld)

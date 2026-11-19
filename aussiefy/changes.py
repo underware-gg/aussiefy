@@ -22,6 +22,7 @@ from pathlib import Path
 from string import Formatter
 from typing import Any, Literal
 
+from .degree import is_degree_modifier
 from .cards import shows_riffs
 from .pins import Pin, target as pin_target
 from .errors import UserError
@@ -30,7 +31,7 @@ from .match_keys import detection_match
 from .engine import (PassObserver, Result, SentenceTrace, Spot, SpotRendering, Translator,
                      first_replaced)
 from .garnish import (Edit, GarnishOffer, PhoneticPass, PhoneticTrace, in_dialogue, phonetic_admits,
-                      phonetic_replacement, place_garnish)
+                      phonetic_replacement, place_garnish, emphasis_span, emphasis_overlaps, move_emphasis)
 from .masks import masks
 from .model import Dictionary
 from .policy import resolve
@@ -595,13 +596,18 @@ class _Builder:
         return plan
 
     def _phonetic_region(self, text: str, bounds: list[tuple[int, int]], flags: set[str],
-                         annotations: list[dict] | None = None, *, literal_spans=None) -> tuple[str, int]:
+                         annotations: list[dict] | None = None, *, literal_spans=None, emphasis_spans=None) -> tuple[str, int]:
         """Each rule's pass over a region's text only. Its count starts from the matches before the region in the
         base text, and each match is gated as the engine gates it (garnish.phonetic_admits), reading the base text
         either side (lookaround, the text before, quotes, questions, kept and preserved spans). Flags a match
         across the region's edge, or a neighbour's match its lookaround makes depend on the region. Returns the
         text and the strongest swear infix it put in."""
         seed, infix, trace = self.result.seed, 0, self.watch.trace
+        if emphasis_spans is None:
+            a,b = bounds[0] if bounds else (0,0)
+            emphasis_spans = tuple((max(left,a)-a,min(right,b)-a) for left,right in self.passes[0].emphasis
+                                   if left < b and a < right) if self.passes else ()
+        emphasis = emphasis_spans
         for v in self._plan(bounds):
             p, rule = v.pass_, v.pass_.rule
             window = v.left + text + v.right
@@ -614,6 +620,10 @@ class _Builder:
                 flags.add("straddle-left")
             pieces, last = [], off
             edits = []
+            claimed = list(emphasis)
+            # Outside context is fixed; ownership inside the alternative is recomputed from its own edits.
+            outside = [(a-v.a, min(b-v.a,len(text))) for a,b in p.emphasis if a < v.a]
+            outside += [(a-v.b+len(text), b-v.b+len(text)) for a,b in p.emphasis if a >= v.b]
             context_left, context_right = [], []
             for m in rule.pattern.finditer(window):
                 ms, me = m.start(), m.end()
@@ -638,9 +648,18 @@ class _Builder:
                 if not phonetic_admits(rule, pos, lambda: p.before[:v.a] + text[:ms - off], p.questions,
                                        lambda: trace.kept(p) + trace.preserved(p)):
                     continue
+                if rule.is_infix:
+                    if emphasis_overlaps((ms-off, me-off), claimed + outside):
+                        continue
+                    owned = emphasis_span(window, ms, me)
+                    owned = (owned[0]-off, owned[1]-off)
+                    if emphasis_overlaps(owned, claimed + outside):
+                        continue
                 out = phonetic_replacement(rule, m, n, seed, p.scale, in_dialogue(pos, p.quotes))
                 if out is None:
                     continue
+                if rule.is_infix:
+                    claimed.append(owned)
                 edits.append((ms - off, me - off, len(out)))
                 pieces += [window[last:ms], out]
                 last = me
@@ -648,6 +667,7 @@ class _Builder:
             if pieces:
                 pieces.append(window[last:end])
                 text = "".join(pieces)
+            emphasis = move_emphasis(claimed, edits)
             if literal_spans is not None:
                 literal_spans = tuple((map_position(edits, a, 'right'), map_position(edits, b, 'left'))
                                       for a, b in literal_spans)
@@ -1090,8 +1110,23 @@ class _Builder:
             if 0 <= image['out_span'][0] < image['out_span'][1] <= gb-ga:
                 annotations.append(image)
         local = self._local_literals(layout, ga, gb)
+        emphasis = []
+        for splice in splices:
+            if splice.kind != 'substitution' or splice.owner is None:
+                continue
+            stacked = r.stacked if splice.owner is spot else splice.owner.rec.stacked
+            entry = o.entry if splice.owner is spot else splice.owner.rec.chosen.entry
+            modifier = is_degree_modifier(entry.frame, entry.concept)
+            if stacked or modifier:
+                left = layout.forward(splice.start-sentence.offset, 'left') - ga
+                right = layout.forward(splice.end-sentence.offset, 'right') - ga
+                if modifier:
+                    _, right = emphasis_span(layout.text, left+ga, right+ga, following=True)
+                    right -= ga
+                if left < gb-ga and right > 0:
+                    emphasis.append((max(0,left),min(gb-ga,right)))
         text, infix = self._phonetic_region(layout.text[ga:gb],region.bounds,flags,annotations,
-                                           literal_spans=local)
+                                           literal_spans=local, emphasis_spans=tuple(emphasis))
         self._finish_annotations(text,annotations)
         o.annotations = annotations
         return text,infix

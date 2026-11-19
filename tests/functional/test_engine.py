@@ -507,7 +507,9 @@ def test_swearing_follows_the_vulgarity_not_the_level(translator):
 
 
 def test_each_vulgarity_sounds_like_its_tier(translator):
-    dad, tradie = _swears(translator, level=5, vulgarity="dad"), _swears(translator, level=5, vulgarity="tradie")
+    # Tier preference is the aim contract. Cap permits a tier without targeting it; duplicate emphasis
+    # previously inflated its raw word count. Keep the strength threshold, with the mode explicit.
+    dad, tradie = (_swears(translator, level=5, vulgarity=tier, dial_mode='aim') for tier in ('dad','tradie'))
     assert max(dad) == 1 and 3 in tradie
     assert sum(s >= 2 for s in tradie) / len(tradie) > 0.4    # tradie leans to its own tiers, not "bugger"
 

@@ -150,3 +150,46 @@ def test_low_level_troppo_has_more_colour_than_dinkum(translator):
 def test_gratitude_complement_does_not_make_nouns_or_causation_interjections(translator, source):
     result = translator.translate(source, embellishment=0)
     assert not any('THANKS' in r.det.concepts for r in result.records)
+
+
+@pytest.mark.parametrize('mode', ['aim', 'cap'])
+def test_one_generated_emphasis_per_phrase_on_the_aim_corpus(translator, mode):
+    import re
+    data = json.loads((Path(__file__).parents[2]/'research/dial-goals-2026-11-19/voice-calibration.json').read_text())
+    sources = [data['source'], "Thanks for coming, it was a very good afternoon.",
+               'It was very good and very hot. The whole thing was too good.',
+               'We saw my very good car. He liked your exceptionally good afternoon.']
+    # Inspect rendered words, including clean degree swaps and adjective stacking, rather than just rule IDs.
+    prefix = r"(?:bloody|fuckin'|flamin'|dead|properly|real)"
+    doubled = re.compile(rf"\b{prefix}\s+{prefix}\s+\w+\b|\b{prefix}\s+\w+\s+as fuck\b", re.I)
+    for source in sources:
+        for level in (1,3,5):
+            for seed in range(32):
+                result = translator.translate(source, level=level, vulgarity=3, embellishment=2,
+                                              dial_mode=mode, seed=seed)
+                assert not doubled.search(result.text), (source,level,seed,result.text)
+    assert translator.translate(sources[1],level=5,vulgarity=3,dial_mode=mode,seed=0).text.endswith('a very bloody good arvo.')
+    for seed in range(4):
+        result = translator.translate(sources[-1],level=5,vulgarity=3,dial_mode=mode,seed=seed,
+                                     document_config={'profile':{'swearing':{'infix':50}}})
+        assert not re.search(r"(?:bloody|fuckin')\s+(?:very|really|exceptionally)\s+(?:bloody|fuckin')",result.text), result.text
+
+
+def test_aim_emphasis_fix_replays_real_v4_alternatives(translator):
+    from aussiefy.v3_contract import validate_response
+    texts = ["Thanks for coming, it was a very good afternoon. It was very hot.",
+             "We saw my very good afternoon and his really good car.",
+             "We saw my exceptionally good afternoon, then bought bread."]
+    options = dict(level=5, vulgarity=3, dial_mode='aim', translator=translator,
+                   document_config={'profile':{'swearing':{'infix':50}}})
+    for text in texts:
+        for seed in range(4):
+            cs = translate_changes(text, seed=seed, **options)
+            validate_response(cs.to_dict(),text,translator.dictionary,result_warnings=cs.result.warnings)
+            assert translate_changes(text,pins=cs.replay_pins(),seed=seed,**options).text == cs.text
+            for change in cs.changes:
+                if change['kind'] != 'substitution':
+                    continue
+                for option in change['alternatives']:
+                    if option.get('entry_id') == change.get('entry_id'):
+                        assert option['rendered'] == change['output']

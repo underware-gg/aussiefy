@@ -17,6 +17,7 @@ aussiefy/data/
   concepts.yaml        controlled concept vocabulary + plain-English trigger patterns per frame
   grammar.yaml         editable person nouns, adjective/noun sense limits and reviewed name-comparison aliases for the frame checker
   profiles.yaml        level profiles 1-5, the swearing rates per vulgarity, and policy defaults
+  lookup-contrasts.yaml  reviewed lexical poles and incompatible concepts for model-only lookup
   phonetic.yaml        drawl: contractions (level 4+), respellings (level 5), swear infixes (by vulgarity),
                        and Australian spelling (kind: spelling)
                        optional unless_before regex excludes grammatical contexts before a rule match
@@ -856,3 +857,27 @@ changes seeded choices, so a host should persist its mode beside the other dials
 The frozen v4 response and pin schemas are unchanged. Dictionary identity changes with the aim data.
 
 The tunin' is in `data/dial-goals.yaml`; original profile data remains in `data/profiles.yaml`.
+
+
+## Phrase emphasis and model-only contrasts
+
+The final phonetic pass gives an emphasis edit ownership of its matched phrase'n following head for
+prefix insertions. Ownership follows every length\-changin' pass. A later infix or emphatic tail can't
+claim the same head. Engine\-generated degree\-modifier swaps'n adjective stacks already allocate emphasis;
+ordinary drawl/spellin' still apply. Independent phrases remain independent. Source degree wording such
+as flamin' can take one generated infix; caller\-owned literal wording remains exact. Changes\-card alternatives
+recompute their own allocation through the same rule. This applies in both aim'n cap, and can correct
+seeded outputs that previously contained competing emphasis devices.
+
+`lookup-contrasts.yaml` holds reviewed, mutually exclusive lexical poles within a named distinction.
+Each pole has `words` (lower\-case English phrases'n explicit inflections\) and `concepts` (known IDs,
+possibly empty when that pole has no dedicated meaning\). If the query positively asserts one pole,
+model\-only inference can't use concepts from another pole. Negated words don't assert that pole;
+a query namin' several poles is ambiguous'n supplies no such veto. Explicit term discovery and
+established non\-model evidence keep their priority. These words are neither source triggers nor new
+search aliases, and add no meanings or entries. Both scalar'n batched lookup use this gate.
+
+The initial distinctions cover soft/loud/no speech, small/large physical size, and low/high price.
+This is a bounded, authored safeguard, not a claim that cosine similarity proves synonymy or that all
+possible antonyms have been enumerated. Negation/anchor checks remain separate'n the model threshold
+is unchanged. Invalid concepts, duplicate words or conflicting pole memberships fail dictionary loading.

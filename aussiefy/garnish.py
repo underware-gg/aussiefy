@@ -7,8 +7,9 @@ from bisect import bisect_right
 from collections.abc import Callable
 from dataclasses import dataclass, field
 
-from .offsets import map_position
-from .context import CLOSING_TONES_FOR, tone_weight
+from .offsets import map_position, map_outward
+from . import pos
+from .context import CLOSING_TONES_FOR, tone_weight, noun_phrase_end, NP_DETERMINER_TAGS
 from .model import Dictionary, PhoneticRule
 from .constructions import Construction, generate
 from .genre import Embellishment
@@ -323,6 +324,7 @@ class PhoneticPass:
     kept: list[tuple[int, int]] | None = None        # the keep spans of `before`, where the pass read them
     preserved: list[tuple[int, int]] | None = None
     literal: tuple[tuple[int, int], ...] = ()
+    emphasis: tuple[tuple[int, int], ...] = ()
 
 
 @dataclass
@@ -394,11 +396,38 @@ def phonetic_replacement(rule: PhoneticRule, m: re.Match, n: int, seed: int, sca
     return match_case(out, m.group(0)) if out and out[0].isalpha() and m.group(0) else out
 
 
+def emphasis_span(text: str, start: int, end: int, *, following: bool = False) -> tuple[int, int]:
+    """An emphasis prefix owns its following head too, including a zero-width insertion before it."""
+    if following or start == end or text[start:end][-1:].isspace():
+        phrase = re.split(r'[.!?;,:\n]', text[end:], maxsplit=1)[0]
+        tokens = tokenize(phrase)
+        if tokens and tokens[0].is_word:
+            tags = pos.tag([token.text for token in tokens])
+            lead = 0
+            while lead + 1 < len(tokens) and tags[lead] in NP_DETERMINER_TAGS:
+                lead += 1
+            while lead + 1 < len(tokens) and tags[lead] in {'RB', 'RBR', 'RBS'}:
+                lead += 1
+            head_end = max(lead + 1, noun_phrase_end(tokens, lead, tags))
+            end += tokens[head_end - 1].end
+    return start, end
+
+
+def emphasis_overlaps(span: tuple[int, int], claimed) -> bool:
+    a, b = span
+    return any((a == b and left <= a < right) or (a < right and left < b) for left, right in claimed)
+
+
+def move_emphasis(claimed, edits) -> tuple[tuple[int, int], ...]:
+    return tuple((map_outward(edits, a, 'start'), map_outward(edits, b, 'end')) for a, b in claimed)
+
+
 def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: int, infixes: bool = True,
                    keep: Callable[[str], list[tuple[int, int]]] | None = None,
                    preserve: Callable[[str], list[tuple[int, int]]] | None = None,
                    trace: PhoneticTrace | None = None,
-                   literal_spans: tuple[tuple[int, int], ...] = ()) -> tuple[str, list[PhoneticRecord]]:
+                   literal_spans: tuple[tuple[int, int], ...] = (),
+                   emphasis_spans: tuple[tuple[int, int], ...] = ()) -> tuple[str, list[PhoneticRecord]]:
     """Apply each rule in order; every occurrence rolls independently. infixes: whether the swear infixes may
     go in (the embellishment's call: not in a manual or a policy). keep: the spans of a text the drawl and
     infixes stay out of (a heading, a link's text); Australian spelling still applies there. preserve protects
@@ -406,6 +435,7 @@ def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: i
     literal_spans tracks source-owned wording through earlier length changes and blocks any intersecting match."""
     records: list[PhoneticRecord] = []
     literal = literal_spans
+    emphasis = emphasis_spans
     preserved_for: list = [None, []]
     kept_for: list = [None, []]   # (text, its kept spans): the same until a rule changes the text
     for rule in rules:
@@ -414,11 +444,12 @@ def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: i
             continue
         counter = {"n": 0}
         literal_edits = []
+        edits, claimed = [], list(emphasis)
         quotes = [q.span() for q in QUOTE_RE.finditer(text)] if rule.dialogue_prob is not None else []
         before = text   # the text this rule matches in, for the kept spans (read once, when a rule first matches)
         questions = [(s[0].start, s[-1].end) for s in sentences(tokenize(before))
                      if any(t.text == "?" for t in s)] if rule.unless_question else []
-        traced = None if trace is None else PhoneticPass(rule, scale, before, quotes=quotes, questions=questions, literal=literal)
+        traced = None if trace is None else PhoneticPass(rule, scale, before, quotes=quotes, questions=questions, literal=literal, emphasis=emphasis)
 
         def kept() -> list[tuple[int, int]]:
             if keep is None or rule.kind == "spelling":
@@ -442,9 +473,18 @@ def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: i
                 return m.group(0)
             if not phonetic_admits(rule, m.start(), lambda: before[:m.start()], questions, spans):
                 return m.group(0)
+            if rule.is_infix:
+                if emphasis_overlaps(m.span(), claimed):
+                    return m.group(0)
+                owned = emphasis_span(before, m.start(), m.end())
+                if emphasis_overlaps(owned, claimed):
+                    return m.group(0)
             out = phonetic_replacement(rule, m, counter["n"], seed, scale, in_dialogue(m.start(), quotes))
             if out is None:
                 return m.group(0)
+            if rule.is_infix:
+                claimed.append(owned)
+            edits.append((m.start(), m.end(), len(out)))
             records.append(PhoneticRecord(rule.id, m.group(0), out, m.start()))
             if literal:
                 literal_edits.append((m.start(), m.end(), len(out)))
@@ -453,6 +493,7 @@ def apply_phonetic(text: str, rules: list[PhoneticRule], eff: Effective, seed: i
             return out
 
         text = rule.pattern.sub(sub, text)
+        emphasis = move_emphasis(claimed, edits)
         if literal_edits:
             literal = tuple((map_position(literal_edits, a, 'right'), map_position(literal_edits, b, 'left'))
                             for a, b in literal)

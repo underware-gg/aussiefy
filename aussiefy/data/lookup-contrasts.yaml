@@ -1,0 +1,21 @@
+# First-party reviewed lexical distinctions for model-only lookup admission.
+# Each axis is mutually exclusive in the stated sense; lexical similarity is not entailment.
+# Empty concepts mean a pole has no dedicated meaning here, not that its words are synonyms of another pole.
+# These words do not become source triggers/search aliases, and do not create new meanings or entries.
+speech_volume:
+  - words: [whisper, whispers, whispered, whispering, murmur, murmurs, murmured, murmuring, speak softly, speak quietly, talk softly, talk quietly]
+    concepts: []
+  - words: [scream, screams, screamed, screaming, yell, yells, yelled, yelling, holler, hollers, hollered, hollering, shout, shouts, shouted, shouting]
+    concepts: [SCREAM, CALL_OUT]
+  - words: [silence, silent, say nothing, stop talking, keep quiet, shut up]
+    concepts: [KEEP_QUIET, SHUT_UP]
+physical_size:
+  - words: [tiny, small, smaller, smallest, little, miniature, minuscule]
+    concepts: []
+  - words: [huge, enormous, gigantic, massive, colossal, immense, very large]
+    concepts: [HUGE]
+price:
+  - words: [cheap, cheaper, cheapest, inexpensive, low cost, low price]
+    concepts: [DIRT_CHEAP, CHEAP_WINE]
+  - words: [expensive, costly, pricey, overpriced, high price]
+    concepts: [EXPENSIVE]

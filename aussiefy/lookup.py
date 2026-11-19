@@ -44,7 +44,6 @@ _NEGATED = re.compile(r"\b(?:no|not|never|nothing|none|nobody|nowhere|without|ca
                       r"|pointless|worthless|helpless|clueless|careless|thoughtless|aimless|powerless)\b|n't\b")
 
 
-@lru_cache(maxsize=None)
 @lru_cache(maxsize=8192)
 def _meaning_evidence(text):
     """Auxiliary fragments are not subject matter: don't/don’t must agree with do not."""
@@ -52,6 +51,21 @@ def _meaning_evidence(text):
     roots = {w[:-4] if w.endswith('less') else w for w in content_words(normal)}
     anchors = frozenset(form for word in roots for form in verb_forms(word))
     return bool(_NEGATED.search(normal)), anchors
+
+
+def _model_contrasts(tokens, dictionary):
+    """Reviewed lexical poles veto inference, never exact term discovery or an authored meaning reading.
+
+    Ambiguous/mixed poles do not establish one side; grammatical negation cannot assert its operand.
+    """
+    words = tuple(t.norm for t in tokens)
+    blocked = set()
+    for axis in dictionary.lookup_contrasts:
+        matched = [pole for pole in axis if any(words[i:i+len(phrase)] == phrase
+                   and positive_context(tokens, i, i) for phrase in pole.words for i in range(len(words)))]
+        if len(matched) == 1:
+            blocked.update(cid for pole in axis if pole is not matched[0] for cid in pole.concepts)
+    return blocked
 
 
 def _inflected(form: str, frame: str) -> frozenset[str]:
@@ -443,6 +457,7 @@ def _query(query, tr, cards, include_gated, *, index=None, ids_only=False):
     def similarity(text):
         return indexed.get(text, 0.0) if indexed is not None else sim.similarity(q, text)
     model = None if waiting else tr.lookup_embedder
+    model_blocked = _model_contrasts(tokens, d) if model is not None else set()
     if waiting:
         exhaustive = named or established | object_concepts
 
@@ -514,7 +529,7 @@ def _query(query, tr, cards, include_gated, *, index=None, ids_only=False):
             # the local model: meaning where n-grams only see spelling. Scored for every entry, not just the
             # ones n-grams missed: otherwise a weak n-gram match (knackered for "very tired", 0.65) keeps its weak
             # score while a model-only one (maggoted, from "Very drunk.") gets the model's, and outranks it
-            texts = meaning_texts(e, d, concepts=paths)
+            texts = meaning_texts(e, d, concepts=paths - model_blocked)
             m = max((model.similarity(q, t) for t in texts if t and _meaning_evidence(t)[0] == negated
                      and (not negated or negative_anchors & _meaning_evidence(t)[1])),
                     default=0.0)

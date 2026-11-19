@@ -21,7 +21,7 @@ from .dialect import parse_dialect
 from .fences import parse_fences, pattern_key
 from .genre import GenreConfig
 from .matcher import Pattern, PatternIndex, compile_pattern
-from .model import Dictionary, LevelProfile, PhoneticRule, RewriteThresholds, SwearProfile, swear_strength
+from .model import Dictionary, LevelProfile, PhoneticRule, RewriteThresholds, SwearProfile, MeaningContrast, swear_strength
 from .schema import (HOLDING_CONCEPT, CLASSES, FRAMES, GARNISH_KEYS, RIFF_TONES, Concept, Entry, Riff, SchemaError, parse_concept,
                      parse_entry, parse_imagery)
 from .vocabulary import Vocabulary
@@ -199,6 +199,31 @@ def _profile(level: int, raw: dict, base: dict) -> LevelProfile:
     )
 
 
+def _lookup_contrasts(raw, concepts):
+    axes = []
+    for name, poles in raw.items():
+        if not isinstance(name, str) or not isinstance(poles, list) or len(poles) < 2:
+            raise SchemaError('lookup-contrasts.yaml: each named distinction needs at least two poles')
+        parsed, used_words, used_concepts = [], set(), set()
+        for pole in poles:
+            if not isinstance(pole, dict) or set(pole) != {'words', 'concepts'}:
+                raise SchemaError(f'lookup-contrasts.yaml {name}: a pole needs words and concepts')
+            words, ids = pole['words'], pole['concepts']
+            if (not isinstance(words, list) or not words or any(not isinstance(w, str) or not w.strip()
+                    or w != fold(w) or not all(t.is_word for t in tokenize(w)) for w in words)):
+                raise SchemaError(f'lookup-contrasts.yaml {name}: words must be non-empty lower-case phrases')
+            if not isinstance(ids, list) or any(not isinstance(cid, str) or cid not in concepts for cid in ids):
+                raise SchemaError(f'lookup-contrasts.yaml {name}: unknown concept')
+            terms = tuple(tuple(t.norm for t in tokenize(w)) for w in words)
+            if len(set(terms)) != len(terms) or len(set(ids)) != len(ids) or used_words.intersection(terms) or used_concepts.intersection(ids):
+                raise SchemaError(f'lookup-contrasts.yaml {name}: duplicate or conflicting pole membership')
+            used_words.update(terms)
+            used_concepts.update(ids)
+            parsed.append(MeaningContrast(terms, frozenset(ids)))
+        axes.append(tuple(parsed))
+    return tuple(axes)
+
+
 def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | None = None,
                     include_builtin: bool = True) -> Dictionary:
     data = Path(data_dir) if data_dir else DATA_DIR
@@ -225,6 +250,12 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         for relation in concept.near:
             if relation.concept not in concepts or relation.concept == HOLDING_CONCEPT:
                 errors.append(f'concept {concept.id}: unknown or abstention near target {relation.concept!r}')
+
+    contrasts = ()
+    try:
+        contrasts = _lookup_contrasts(_read_optional(data / 'lookup-contrasts.yaml', errors, {}), concepts)
+    except SchemaError as exc:
+        errors.append(str(exc))
 
     prof_raw = _read(data / "profiles.yaml", errors, {})
     base = prof_raw.get("base", {})
@@ -480,7 +511,7 @@ def load_dictionary(extra: Iterable[str | Path] = (), data_dir: str | Path | Non
         raise SchemaError("dictionary failed validation:\n  " + "\n  ".join(errors))
     from .dial_goals import parse_goals
     goals = parse_goals(_read_optional(data / 'dial-goals.yaml', errors, {}))
-    dictionary = Dictionary(dial_goals=goals, entries=entries, concepts=concepts, profiles=profiles, phonetic=phonetic,
+    dictionary = Dictionary(dial_goals=goals, lookup_contrasts=contrasts, entries=entries, concepts=concepts, profiles=profiles, phonetic=phonetic,
                       policy_defaults=prof_raw.get("policy", {}), patterns=patterns, index=PatternIndex(patterns),
                       form_index=PatternIndex(forms), swears=swears, dialect=dialect, theme_defaults=theme_defaults,
                       warnings=warnings, fences=fences, swearing=swearing, genres=genres, pos_words=pos.lower_words(),

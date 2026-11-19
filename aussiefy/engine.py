@@ -20,9 +20,10 @@ from . import pos
 from .context import FORMAL_RE, following_context, is_chant, sentence_contexts, text_mood
 from .detect import (CODE_CONCEPTS, DETERMINERS, Detection, after_determiner, fallback_scorer,
                      read_meanings, owned_degree_modifiers, degree_modifier_spans, bind_context_object, bind_adverb_position)
+from .degree import is_degree_modifier
 from .embed import Embedder, make_embedder
 from .garnish import (Edit, GarnishOffer, GarnishRecord, PhoneticRecord, PhoneticTrace, apply_phonetic, ends_in_list,
-                      garnish_offer, pick_riff, place_garnish, tag_in_speech)
+                      garnish_offer, pick_riff, place_garnish, tag_in_speech, move_emphasis, emphasis_span)
 from .loader import load_dictionary
 from .imagery import image_offers
 from .dialect import text_english
@@ -397,7 +398,7 @@ class Translator:
             _observer.begin(run)
         pieces: list[str] = [text[: tokens[0].start] if tokens else text]
         at = len(pieces[0])   # where the next sentence starts in the joined text
-        literal = []
+        literal, emphasis = [], []
         for i, tokens_i in enumerate(sents):
             sent = run.sentence(i, tokens_i, sents)
             recs, splices = self._substitute(sent, run)
@@ -417,23 +418,35 @@ class Translator:
                     right = map_position(edits, right - sent.tokens[0].start, 'right')
                     personal_spans.append((left, right))
             run.literal += tuple(personal_spans)
+            run.emphasis = tuple(emphasis_span(out,
+                map_position(edits, r.out_span[0] - sent.tokens[0].start, 'left'),
+                map_position(edits, r.out_span[1] - sent.tokens[0].start, 'right'),
+                following=is_degree_modifier(r.chosen.entry.frame, r.chosen.entry.concept))
+                for r in recs if r.out_span and r.chosen and r.substituted
+                and (r.stacked or is_degree_modifier(r.chosen.entry.frame, r.chosen.entry.concept)))
             hard = self._difficulty(sent.tokens, recs, run.eff)
             if hard:
                 run.difficult.append(DifficultSentence(i, masked.restore(sent.text, whole=False),
                                                        masked.restore(out, whole=False), hard))
             if rewriter is not None:
+                before_rewrite = out
                 out = self._rewrite(sent, out, recs, run, rewriter, hard if rewrite_mode == "hard" else
                                     ("rewrite mode: all" if run.eff.level >= run.eff.profile.rewrite.min_level
                                      else None))
+                # A model rewrite owns its new phrasing; source allocation no longer describes it.
+                if out != before_rewrite:
+                    run.emphasis = ()
             garnished = self._garnish_sentence(out, sent, recs, run)
             if _observer is not None:
                 _observer.sentence(SentenceTrace(sent, recs, splices, out, garnished, at, state_after))
             literal.extend((a + at, b + at) for a, b in run.literal)
+            emphasis.extend((a + at, b + at) for a, b in run.emphasis)
             at += len(garnished) + sent.next_start - sent.end
             pieces += [garnished, text[sent.end:sent.next_start]]
         # the closer answers the last sentence, so it goes there, not after a code block that follows it
         body, trail = "".join(pieces[:-1]), pieces[-1]
         run.literal = tuple(literal)
+        run.emphasis = tuple(emphasis)
         joined = (self._closer(body, sents, run) + trail) if any(t.is_word for t in tokens) else "".join(pieces)
         keep = partial(_no_drawl, keep_quotes=run.genre.policy.keep_quotes, protected=masked.no_phonetic)
         preserve = partial(document_spans, keep_quotes=run.genre.policy.keep_quotes,
@@ -444,7 +457,7 @@ class Translator:
         trace = PhoneticTrace(keep, preserve) if _observer is not None or run.literal else None
         final, phon = apply_phonetic(joined, self.dictionary.phonetic, run.eff, pol.seed,
                                      infixes=run.embellishment.takes("infix"), keep=keep, preserve=preserve,
-                                     trace=trace, literal_spans=run.literal)
+                                     trace=trace, literal_spans=run.literal, emphasis_spans=run.emphasis)
         if _observer is not None:
             _observer.phonetic(joined, trace, final)
         owned = run.literal
@@ -1069,6 +1082,7 @@ class Translator:
         if retained is None:
             return None
         rendered, run.literal = retained
+        run.emphasis = move_emphasis(run.emphasis, [placed[1]])
         if run.observer is not None:
             run.observer.garnish(sentence, entry, form, placed[1], offer)
         return rendered
@@ -1479,6 +1493,7 @@ class _Run:
     _commands: frozenset[str] | None = None
     _written: frozenset[str] | None = None
     literal: tuple[tuple[int, int], ...] = ()
+    emphasis: tuple[tuple[int, int], ...] = ()
     personal_terms: PersonalTerms = field(default_factory=PersonalTerms)
     personal_applied: int = 0
 

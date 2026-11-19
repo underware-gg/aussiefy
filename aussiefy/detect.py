@@ -24,7 +24,7 @@ from .context import (COMPARATIVE_MODIFIERS, RESULT_DEGREE, TIME_ADVERBS, argume
 from .embed import Embedder, NgramEmbedder, similarity_scorer
 from .matcher import match_at, SLOT_MATCHERS, Match, Pattern, PatternIndex, is_name
 from .schema import HOLDING_CONCEPT, Concept
-from .degree import QUALIFIER_WORDS
+from .degree import QUALIFIER_WORDS, is_degree_modifier
 from .meaning_context import meaning_context
 from .text import CLAUSE_BREAK, QUOTES, SENTENCE_END, Token
 
@@ -518,7 +518,7 @@ def check_frame(m: Match, tokens: list[Token], adjective_nouns: dict[str, frozen
         elif "be" in m.captures:
             det.question = m.captures["be"].i == tokens[m.start].i  # "is it impossible?"
         det.clause_start = m.start
-    elif p.frame == "adv" and "VERY" in p.concepts:
+    elif is_degree_modifier(p.frame, p.concepts):
         nxt = tokens[m.end] if m.end < len(tokens) else None
         if nxt is None or nxt.is_punct or nxt.norm in DETERMINERS:
             return None  # "absolutely a great game": intensifies a noun phrase, so "dead a ..." won't do

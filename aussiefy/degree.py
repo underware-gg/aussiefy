@@ -22,6 +22,10 @@ RELATIONAL = {('so',), ('too',)}
 QUALIFIER_WORDS = frozenset({'mildly', 'barely', 'lightly', 'somewhat', 'almost', 'nearly', 'only'})
 
 
+def is_degree_modifier(frame: str, concepts) -> bool:
+    return frame == 'adv' and 'VERY' in concepts
+
+
 @dataclass(frozen=True)
 class DegreePlan:
     """An eligible form either retains the owned qualifier or expresses its degree itself."""

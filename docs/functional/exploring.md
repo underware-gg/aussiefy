@@ -94,6 +94,11 @@ meaning match remains `meaning`. The existing `match` sentence and `score` remai
 compact results retain `match_kind`. Image results use the same applicable codes and retain their
 separate `association`. Use codes for branching rather than interpreting display prose.
 
+Model-only inference also respects reviewed lexical contrasts: sharing a topic does not make opposing
+speech volumes, physical sizes or prices interchangeable. A soft-speech query such as whisper may return
+`not_in_dictionary` rather than inventing a shouting or silence synonym. Exact term matches and authored
+meaning readings keep their priority; this guard does not promise exhaustive semantic validation.
+
 ## Outcomes
 
 | Code | Meaning |

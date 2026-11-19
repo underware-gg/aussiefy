@@ -255,6 +255,13 @@ def base_dictionary(config: RoundConfig, data_dir: Path = DATA_DIR) -> Dictionar
             if changed:
                 kept = yaml.safe_dump(raw_concepts, sort_keys=False, allow_unicode=True)
         concepts.write_text(kept, encoding="utf-8")
+        contrasts = scratch / 'lookup-contrasts.yaml'
+        if contrasts.exists() and ours:
+            axes = _yaml(contrasts.read_text(encoding='utf-8')) or {}
+            for poles in axes.values():
+                for pole in poles:
+                    pole['concepts'] = [cid for cid in pole['concepts'] if cid not in ours]
+            contrasts.write_text(yaml.safe_dump(axes, sort_keys=False, allow_unicode=True), encoding='utf-8')
         for path in (scratch / "entries").glob("*.yaml"):
             entries = _yaml(path.read_text(encoding="utf-8")) or []
             later = [e for e in entries if not set(e.get("concept") or ()) & ours]

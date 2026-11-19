@@ -7,6 +7,13 @@ Add changes under [Unreleased] as they land; `python scripts/promote.py prepare 
 
 ### Changed
 
+- Allocate generated phrase emphasis once across degree-word swaps, adjective stacks, infixes and emphatic
+  tails, in both aim and cap. Later phonetic rules cannot re-intensify the same head; independent phrases
+  still roll separately. This intentionally corrects affected seeded outputs without changing v4 schemas.
+- Guard model-only lookup with reviewed lexical contrasts for speech volume, physical size and price.
+  Whisper no longer retrieves shouting or silence; known contrary meanings cannot pass on topic similarity
+  alone. Exact term discovery, authored meaning routes and the model threshold are unchanged.
+
 - Recognise gratitude with an authored `for` complement, so `Thanks for understanding` offers `Cheers`
   without dropping its complement. Noun thanks and causal thanks-to remain protected.
 
